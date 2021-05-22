@@ -1,0 +1,73 @@
+# Configuration for randomising RGOs, if the user selects that option
+# in the setup screen. Provinces will be placed in the first bucket
+# that matches their climate and terrain, and the provided fraction of
+# that bucket will be shuffled. Note that 'any' is allowed for both
+# climate and terrain, and matches anything. Ocean provinces are never
+# shuffled; provinces for which terrain or climate information is
+# empty never match a bucket.
+
+bucket = {
+  name = "high_latitude_mountains_hills"
+  climate = inhospitable_climate
+  climate = harsh_climate
+  terrain = mountains
+  terrain = hills
+  fraction = 0.5
+}
+bucket = {
+  name = "low_latitude_mountains_hills"
+  climate = temperate_climate
+  climate = mild_climate
+  terrain = mountains
+  terrain = hills
+  fraction = 0.5
+}
+bucket = {
+  name = "plains"
+  climate = any
+  terrain = plains
+  terrain = farmlands
+  fraction = 0.5
+}
+bucket = {
+  name = "desert_steppe"
+  climate = any
+  terrain = desert
+  terrain = steppe
+  fraction = 0.5
+}
+bucket = {
+  name = "high_latitude_stuff"
+  climate = inhospitable_climate
+  climate = harsh_climate
+  terrain = arctic
+  terrain = woods
+  terrain = forest
+  terrain = steppe
+  fraction = 0.5
+}
+bucket = {
+  name = "temperate_woods"
+  climate = mild_climate
+  climate = temperate_climate
+  terrain = woods
+  terrain = forest
+  terrain = jungle
+  fraction = 0.5
+}
+bucket = {
+  name = "wet_stuff"
+  climate = any
+  terrain = jungle
+  terrain = marsh
+  fraction = 0.5
+}
+bucket = {
+  name = "catchall"
+  climate = any
+  terrain = any
+  fraction = 0.5
+}
+
+
+
