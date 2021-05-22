@@ -2,10 +2,10 @@ name: Build and run tests
 on:
   push:
     branches-ignore:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 jobs:
   build_and_test:
     runs-on: windows-2019
