@@ -9,11 +9,6 @@ mappers::PartyType::PartyType(std::istream& theStream)
 	parseStream(theStream);
 	clearRegisteredKeywords();
 
-	if (!theConfiguration.isHpmEnabled())
-	{
-		policies.erase("social_policy");
-	}
-
 }
 
 void mappers::PartyType::registerKeys()

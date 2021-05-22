@@ -8,18 +8,6 @@ mappers::ColonialTag::ColonialTag(std::istream& theStream)
 	registerKeys();
 	parseStream(theStream);
 	clearRegisteredKeywords();
-
-	if (theConfiguration.isHpmEnabled())
-	{
-		if (!colonyTag.hpm.empty())
-		{
-			colonyTag.tag = colonyTag.hpm;
-		}
-		if (!colonyTag.hpmRegions.empty())
-		{
-			colonyTag.V2Regions = colonyTag.hpmRegions;
-		}
-	}
 }
 
 void mappers::ColonialTag::registerKeys()
@@ -27,17 +15,11 @@ void mappers::ColonialTag::registerKeys()
 	registerKeyword("tag", [this](const std::string& unused, std::istream& theStream) {
 		colonyTag.tag = commonItems::singleString(theStream).getString();
 	});
-	registerKeyword("hpm", [this](const std::string& unused, std::istream& theStream) {
-		colonyTag.hpm = commonItems::singleString(theStream).getString();
-	});
 	registerKeyword("eu4region", [this](const std::string& unused, std::istream& theStream) {
 		colonyTag.EU4Regions.insert(commonItems::singleString(theStream).getString());
 	});
 	registerKeyword("v2region", [this](const std::string& unused, std::istream& theStream) {
 		colonyTag.V2Regions.insert(commonItems::singleString(theStream).getString());
-	});
-	registerKeyword("hpm_region", [this](const std::string& unused, std::istream& theStream) {
-		colonyTag.hpmRegions.insert(commonItems::singleString(theStream).getString());
 	});
 	registerKeyword("cultureGroup", [this](const std::string& unused, std::istream& theStream) {
 		colonyTag.cultureGroups.insert(commonItems::singleString(theStream).getString());

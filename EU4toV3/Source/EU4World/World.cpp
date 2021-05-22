@@ -27,26 +27,26 @@
 namespace fs = std::filesystem;
 #include "CommonRegexes.h"
 
-EU4::World::World(const mappers::IdeaEffectMapper& ideaEffectMapper)
+EU4::World::World(const std::shared_ptr<Configuration>& theConfiguration, const mappers::IdeaEffectMapper& ideaEffectMapper)
 {
 	LOG(LogLevel::Info) << "*** Hello EU4, loading World. ***";
-	registerKeys(ideaEffectMapper);
+	registerKeys(theConfiguration, ideaEffectMapper);
 
 	superGroupMapper.init();
 	Log(LogLevel::Progress) << "6 %";
 
 	LOG(LogLevel::Info) << "-> Verifying EU4 save.";
-	verifySave();
+	verifySave(theConfiguration->getEU4SaveGamePath());
 	Log(LogLevel::Progress) << "7 %";
 
 	LOG(LogLevel::Info) << "-> Importing EU4 save.";
 	if (!saveGame.compressed)
 	{
-		std::ifstream inBinary(fs::u8path(theConfiguration.getEU4SaveGamePath()), std::ios::binary);
+		std::ifstream inBinary(fs::u8path(theConfiguration->getEU4SaveGamePath()), std::ios::binary);
 		if (!inBinary.is_open())
 		{
-			LOG(LogLevel::Error) << "Could not open " << theConfiguration.getEU4SaveGamePath() << " for parsing.";
-			throw std::runtime_error("Could not open " + theConfiguration.getEU4SaveGamePath() + " for parsing.");
+			LOG(LogLevel::Error) << "Could not open " << theConfiguration->getEU4SaveGamePath() << " for parsing.";
+			throw std::runtime_error("Could not open " + theConfiguration->getEU4SaveGamePath() + " for parsing.");
 		}
 		std::stringstream inStream;
 		inStream << inBinary.rdbuf();
@@ -68,7 +68,7 @@ EU4::World::World(const mappers::IdeaEffectMapper& ideaEffectMapper)
 	cultureGroupsMapper = std::make_shared<mappers::CultureGroups>();
 	cultureGroupsMapper->initForEU4();
 	buildingTypes = std::make_unique<mappers::Buildings>();
-	unitTypeMapper.initUnitTypeMapper();
+	//unitTypeMapper.initUnitTypeMapper();
 	Log(LogLevel::Progress) << "16 %";
 
 	LOG(LogLevel::Info) << "*** Building world ***";
@@ -85,7 +85,7 @@ EU4::World::World(const mappers::IdeaEffectMapper& ideaEffectMapper)
 	Log(LogLevel::Progress) << "19 %";
 
 	LOG(LogLevel::Info) << "-> Loading Regions";
-	loadRegions();
+	loadRegions(theConfiguration->getEU4Path(), theConfiguration->getEU4Mods());
 	Log(LogLevel::Progress) << "21 %";
 
 	LOG(LogLevel::Info) << "-> Determining Demographics";
@@ -101,7 +101,7 @@ EU4::World::World(const mappers::IdeaEffectMapper& ideaEffectMapper)
 	Log(LogLevel::Progress) << "25 %";
 
 	LOG(LogLevel::Info) << "-> Reading Countries";
-	readCommonCountries();
+	readCommonCountries(theConfiguration->getEU4Path(), theConfiguration->getEU4Mods());
 	Log(LogLevel::Progress) << "26 %";
 
 	LOG(LogLevel::Info) << "-> Setting Localizations";
@@ -138,11 +138,11 @@ EU4::World::World(const mappers::IdeaEffectMapper& ideaEffectMapper)
 
 	LOG(LogLevel::Info) << "-> Dropping Empty Nations";
 	removeEmptyNations();
-	if (theConfiguration.getRemoveType() == Configuration::DEADCORES::DeadCores)
+	if (theConfiguration->getRemoveType() == Configuration::DEADCORES::DeadCores)
 	{
 		removeDeadLandlessNations();
 	}
-	else if (theConfiguration.getRemoveType() == Configuration::DEADCORES::AllCores)
+	else if (theConfiguration->getRemoveType() == Configuration::DEADCORES::AllCores)
 	{
 		removeLandlessNations();
 	}
@@ -150,43 +150,34 @@ EU4::World::World(const mappers::IdeaEffectMapper& ideaEffectMapper)
 	Log(LogLevel::Progress) << "40 %";
 }
 
-void EU4::World::registerKeys(const mappers::IdeaEffectMapper& ideaEffectMapper)
+void EU4::World::registerKeys(const std::shared_ptr<Configuration>& theConfiguration, const mappers::IdeaEffectMapper& ideaEffectMapper)
 {
 	registerKeyword("EU4txt", [](std::istream& theStream) {
 	});
-	registerKeyword("date", [](std::istream& theStream) {
-		theConfiguration.setLastEU4Date(date(commonItems::getString(theStream)));
+	registerKeyword("date", [theConfiguration](std::istream& theStream) {
+		theConfiguration->setLastEU4Date(date(commonItems::getString(theStream)));
 	});
-	registerKeyword("start_date", [](std::istream& theStream) {
-		theConfiguration.setStartEU4Date(date(commonItems::getString(theStream)));
+	registerKeyword("start_date", [theConfiguration](std::istream& theStream) {
+		theConfiguration->setStartEU4Date(date(commonItems::getString(theStream)));
 	});
-	registerRegex("(multiplayer_)?random_seed", [](const std::string& unused, std::istream& theStream) {
+	registerRegex("(multiplayer_)?random_seed", [theConfiguration](const std::string& unused, std::istream& theStream) {
 		auto theSeed = commonItems::getString(theStream);
 		if (theSeed.size() > 5)
 			theSeed = theSeed.substr(theSeed.size() - 5);
 		try
 		{
-			theConfiguration.setEU4RandomSeed(std::stoi(theSeed));
+			theConfiguration->setEU4RandomSeed(std::stoi(theSeed));
 		}
 		catch (std::exception& e)
 		{
 			Log(LogLevel::Error) << "Failed reading random_seed, setting 0: " << e.what();
-			theConfiguration.setEU4RandomSeed(0);
+			theConfiguration->setEU4RandomSeed(0);
 		}
 	});
-	registerKeyword("savegame_version", [this](std::istream& theStream) {
+	registerKeyword("savegame_version", [this, theConfiguration](std::istream& theStream) {
 		version = std::make_unique<GameVersion>(theStream);
-		theConfiguration.setEU4Version(*version);
+		theConfiguration->setEU4Version(*version);
 		Log(LogLevel::Info) << "Savegave version: " << *version;
-	});
-	registerKeyword("mod_enabled", [](std::istream& theStream) {
-		// DEFUNCT since 1.31.
-		Log(LogLevel::Info) << "-> Detecting used mods.";
-		const auto modsList = commonItems::getStrings(theStream);
-		Log(LogLevel::Info) << "<> Savegame claims " << modsList.size() << " mods used:";
-		for (const auto& usedMod: modsList)
-			Log(LogLevel::Info) << "---> " << usedMod;
-		Mods theMods(modsList);
 	});
 	registerKeyword("mods_enabled_names", [](std::istream& theStream) {
 		// In use since 1.31.
@@ -215,17 +206,13 @@ void EU4::World::registerKeys(const mappers::IdeaEffectMapper& ideaEffectMapper)
 		holyRomanEmperor = empireBlock.getEmperor();
 		hreReforms = empireBlock.getHREReforms();
 	});
-	// Old style of marking the emperor pre-1.20
-	registerKeyword("emperor", [this](std::istream& theStream) {
-		holyRomanEmperor = commonItems::getString(theStream);
-	});
-	registerKeyword("provinces", [this](std::istream& theStream) {
+	registerKeyword("provinces", [this, theConfiguration](std::istream& theStream) {
 		LOG(LogLevel::Info) << "-> Loading Provinces";
 		provinces = std::make_unique<Provinces>(theStream);
 
 		const auto& possibleDate = provinces->getProvince(1)->getFirstOwnedDate();
 		if (possibleDate)
-			theConfiguration.setFirstEU4Date(*possibleDate);
+			theConfiguration->setFirstEU4Date(*possibleDate);
 	});
 	registerKeyword("countries", [this, ideaEffectMapper](std::istream& theStream) {
 		LOG(LogLevel::Info) << "-> Loading Countries";
@@ -387,9 +374,9 @@ void EU4::World::verifySaveContents()
 	}
 }
 
-void EU4::World::verifySave()
+void EU4::World::verifySave(const std::string& saveGamePath)
 {
-	std::ifstream saveFile(fs::u8path(theConfiguration.getEU4SaveGamePath()));
+	std::ifstream saveFile(fs::u8path(saveGamePath));
 	if (!saveFile.is_open())
 		throw std::runtime_error("Could not open save! Exiting!");
 
@@ -397,15 +384,15 @@ void EU4::World::verifySave()
 	saveFile.get(buffer, 3);
 	if (buffer[0] == 'P' && buffer[1] == 'K')
 	{
-		if (!uncompressSave())
+		if (!uncompressSave(saveGamePath))
 			throw std::runtime_error("Failed to unpack the compressed save!");
 	}
 	saveFile.close();
 }
 
-bool EU4::World::uncompressSave()
+bool EU4::World::uncompressSave(const std::string& saveGamePath)
 {
-	auto saveFile = ZipFile::Open(theConfiguration.getEU4SaveGamePath());
+	auto saveFile = ZipFile::Open(saveGamePath);
 	if (!saveFile)
 		return false;
 	for (size_t entryNum = 0; entryNum < saveFile->GetEntriesCount(); ++entryNum)
@@ -465,14 +452,6 @@ void EU4::World::addProvinceInfoToCountries()
 				country->second->addCore(province.second);
 }
 
-void EU4::World::loadRegions()
-{
-	if (*version >= GameVersion("1.14"))
-		loadEU4RegionsNewVersion();
-	else
-		loadEU4RegionsOldVersion();
-}
-
 void EU4::World::assignProvincesToAreas(const std::map<std::string, std::set<int>>& theAreas) const
 {
 	for (const auto& [areaName, provinceIDs]: theAreas)
@@ -491,44 +470,24 @@ void EU4::World::assignProvincesToAreas(const std::map<std::string, std::set<int
 	}
 }
 
-void EU4::World::loadEU4RegionsOldVersion()
+void EU4::World::loadRegions(const std::string& EU4Path, const std::set<std::string>& EU4Mods)
 {
-	auto regionFilename = theConfiguration.getEU4Path() + "/map/region.txt";
-
-	for (const auto& itr: theConfiguration.getEU4Mods())
-	{
-		if (!commonItems::DoesFileExist(itr + "/map/region.txt"))
-			continue;
-		regionFilename = itr + "/map/region.txt";
-	}
-
-	std::ifstream theStream(fs::u8path(regionFilename));
-	Areas installedAreas(theStream);
-	theStream.close();
-	assignProvincesToAreas(installedAreas.getAreas());
-
-	regions = std::make_unique<Regions>(installedAreas);
-}
-
-
-void EU4::World::loadEU4RegionsNewVersion()
-{
-	auto areaFilename = theConfiguration.getEU4Path() + "/map/area.txt";
-	auto regionFilename = theConfiguration.getEU4Path() + "/map/region.txt";
-	auto superRegionFilename = theConfiguration.getEU4Path() + "/map/superregion.txt";
-	for (const auto& itr: theConfiguration.getEU4Mods())
+	auto areaFilename = EU4Path + "/map/area.txt";
+	auto regionFilename = EU4Path + "/map/region.txt";
+	auto superRegionFilename = EU4Path + "/map/superregion.txt";
+	for (const auto& itr: EU4Mods)
 	{
 		if (!commonItems::DoesFileExist(itr + "/map/area.txt"))
 			continue;
 		areaFilename = itr + "/map/area.txt";
 	}
-	for (const auto& itr: theConfiguration.getEU4Mods())
+	for (const auto& itr: EU4Mods)
 	{
 		if (!commonItems::DoesFileExist(itr + "/map/region.txt"))
 			continue;
 		regionFilename = itr + "/map/region.txt";
 	}
-	for (const auto& itr: theConfiguration.getEU4Mods())
+	for (const auto& itr: EU4Mods)
 	{
 		if (!commonItems::DoesFileExist(itr + "/map/superregion.txt"))
 			continue;
@@ -555,14 +514,14 @@ void EU4::World::loadEU4RegionsNewVersion()
 	regionStream.close();
 }
 
-void EU4::World::readCommonCountries()
+void EU4::World::readCommonCountries(const std::string& EU4Path, const std::set<std::string>& EU4Mods)
 {
-	std::ifstream commonCountries(fs::u8path(theConfiguration.getEU4Path() + "/common/country_tags/00_countries.txt"));
+	std::ifstream commonCountries(fs::u8path(EU4Path + "/common/country_tags/00_countries.txt"));
 	if (!commonCountries.is_open())
-		throw std::runtime_error("Could not open " + theConfiguration.getEU4Path() + "/common/country_tags/00_countries.txt!");
-	readCommonCountriesFile(commonCountries, theConfiguration.getEU4Path());
+		throw std::runtime_error("Could not open " + EU4Path + "/common/country_tags/00_countries.txt!");
+	readCommonCountriesFile(commonCountries, EU4Path);
 
-	for (const auto& itr: theConfiguration.getEU4Mods())
+	for (const auto& itr: EU4Mods)
 		for (const auto& fileName: commonItems::GetAllFilesInFolder(itr + "/common/country_tags/"))
 		{
 			std::ifstream convertedCommonCountries(fs::u8path(itr + "/common/country_tags/" + fileName));
@@ -660,23 +619,7 @@ void EU4::World::uniteJapan()
 
 	std::shared_ptr<Country> japan;
 
-	if (*version >= GameVersion("1.20.0.0"))
-	{
-		for (const auto& country: theCountries)
-		{
-			if (country.second->getPossibleShogun())
-			{
-				const auto& tag = country.first;
-				LOG(LogLevel::Info) << "- " << tag << " is the shogun.";
-				japan = getCountry(tag);
-				break;
-			}
-		}
-	}
-	else
-	{
-		japan = getCountry("JAP");
-	}
+	japan = getCountry("JAP");
 	if (!japan)
 		return;
 	if (japan->hasFlag("united_daimyos_of_japan"))

@@ -286,7 +286,7 @@ std::optional<std::string> mappers::CountryMappings::getV2Tag(const std::string&
 std::optional<std::string> mappers::CountryMappings::getTitle(const std::string& countryName) const
 {
 	// The most bizarre part of the mapper. First look for titles that match our name, then get creative.
-
+	/*
 	auto name = V2::Localisation::convert(countryName);
 	transform(name.begin(), name.end(), name.begin(), ::tolower);
 
@@ -317,4 +317,7 @@ std::optional<std::string> mappers::CountryMappings::getTitle(const std::string&
 		}
 	}
 	return title;
+	*/
+	
+	return std::nullopt;
 }

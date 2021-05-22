@@ -1,4 +1,5 @@
 #include "VersionParser.h"
+#include "CommonRegexes.h"
 #include "ParserHelpers.h"
 
 mappers::VersionParser::VersionParser()
@@ -17,20 +18,14 @@ mappers::VersionParser::VersionParser(std::istream& theStream)
 
 void mappers::VersionParser::registerKeys()
 {
-	registerKeyword("name", [this](const std::string& unused, std::istream& theStream) 
-		{
-			const commonItems::singleString nameStr(theStream);
-			name = nameStr.getString();
-		});
-	registerKeyword("version", [this](const std::string& unused, std::istream& theStream)
-		{
-			const commonItems::singleString versionStr(theStream);
-			version = versionStr.getString();
-		});
-	registerKeyword("descriptionLine", [this](const std::string& unused, std::istream& theStream)
-		{
-			const commonItems::singleString descriptionLineStr(theStream);
-			descriptionLine = descriptionLineStr.getString();
-		});
-	registerRegex("[a-zA-Z0-9\\_.:]+", commonItems::ignoreItem);
+	registerKeyword("name", [this](const std::string& unused, std::istream& theStream) {
+		name = commonItems::getString(theStream);
+	});
+	registerKeyword("version", [this](const std::string& unused, std::istream& theStream) {
+		version = commonItems::getString(theStream);
+	});
+	registerKeyword("descriptionLine", [this](const std::string& unused, std::istream& theStream) {
+		descriptionLine = commonItems::getString(theStream);
+	});
+	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

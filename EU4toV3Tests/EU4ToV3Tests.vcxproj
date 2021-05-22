@@ -303,14 +303,9 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\UnitTypes\UnitType.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\UnitTypes\UnitTypeMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\V2ProvinceRegionsMapper\V2ProvinceRegionsMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Localisation\Localisation.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Output\outCultureGroups.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Output\outParty.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Pop\Pop.cpp" />
     <ClCompile Include="..\googletest\googlemock\src\gmock-all.cc" />
     <ClCompile Include="..\googletest\googletest\src\gtest-all.cc" />
     <ClCompile Include="..\googletest\googletest\src\gtest_main.cc" />
-    <ClCompile Include="ConfigurationTests.cpp" />
     <ClCompile Include="EU4WorldTests\ArmyTests\EU4ArmyTests.cpp" />
     <ClCompile Include="EU4WorldTests\ArmyTests\EU4RegimentTests.cpp" />
     <ClCompile Include="EU4WorldTests\ColonialRegionTests\ColonialRegionsTests.cpp" />
@@ -428,7 +423,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h" />
-    <ClInclude Include="Mocks\Vic2CountryMock.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

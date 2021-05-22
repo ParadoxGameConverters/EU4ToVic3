@@ -1,5 +1,6 @@
 #ifndef EU4_WORLD_H
 #define EU4_WORLD_H
+#include "Configuration.h"
 #include "Buildings/Buildings.h"
 #include "Country/EU4Country.h"
 #include "CultureGroups/CultureGroups.h"
@@ -21,7 +22,7 @@ namespace EU4
 class World: commonItems::parser
 {
   public:
-	World(const mappers::IdeaEffectMapper& ideaEffectMapper);
+	World(const std::shared_ptr<Configuration>& theConfiguration, const mappers::IdeaEffectMapper& ideaEffectMapper);
 
 	[[nodiscard]] std::shared_ptr<Province> getProvince(int provNum) const { return provinces->getProvince(provNum); }
 	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& tag) const;
@@ -40,16 +41,14 @@ class World: commonItems::parser
 	[[nodiscard]] bool decentralizedHRE() const { return hreReforms.contains("emperor_reichskrieg"); }
 
   private:
-	void registerKeys(const mappers::IdeaEffectMapper& ideaEffectMapper);
+	void registerKeys(const std::shared_ptr<Configuration>& theConfiguration, const mappers::IdeaEffectMapper& ideaEffectMapper);
 
-	void verifySave();
+	void verifySave(const std::string& saveGamePath);
 	void verifySaveContents();
 	void loadRevolutionTarget();
 	void addProvinceInfoToCountries();
-	void loadRegions();
-	void loadEU4RegionsNewVersion();
-	void loadEU4RegionsOldVersion();
-	void readCommonCountries();
+	void loadRegions(const std::string& EU4Path, const std::set<std::string>& EU4Mods);
+	void readCommonCountries(const std::string& EU4Path, const std::set<std::string>& EU4Mods);
 	void readCommonCountriesFile(std::istream&, const std::string& rootPath);
 	void setLocalizations();
 	void resolveRegimentTypes();
@@ -67,7 +66,7 @@ class World: commonItems::parser
 	void buildPopRatios() const;
 	void calculateIndustry() const;
 	std::string generateNeoCulture(const std::string& superRegionName, const std::string& oldCultureName);
-	bool uncompressSave();
+	bool uncompressSave(const std::string& saveGamePath);
 
 	struct saveData
 	{

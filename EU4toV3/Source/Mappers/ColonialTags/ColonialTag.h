@@ -9,10 +9,8 @@ typedef struct ColonyStruct
 {
 	[[nodiscard]] bool match(const std::string& eu4Region, const std::string& v2Region, const std::string& cultureGroup) const;
 	std::string tag;
-	std::string hpm;
 	std::set<std::string> EU4Regions;
 	std::set<std::string> V2Regions;
-	std::set<std::string> hpmRegions;
 	std::set<std::string> cultureGroups;
 } ColonyStruct;
 

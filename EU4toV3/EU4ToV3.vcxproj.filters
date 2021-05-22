@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Source\Configuration.cpp" />
-    <ClCompile Include="Source\EU4toV3Converter.cpp" />
+    <ClCompile Include="Source\EU4toVic3Converter.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\EU4World\Regions\Area.cpp">
       <Filter>EU4World\Regions</Filter>
@@ -187,12 +187,6 @@
     <ClCompile Include="Source\Mappers\GovernmentMapper\GovernmentMapper.cpp">
       <Filter>Mappers\GovernmentMapper</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Mappers\MinorityPops\MinorityPop.cpp">
-      <Filter>Mappers\MinorityPops</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Mappers\MinorityPops\MinorityPopMapper.cpp">
-      <Filter>Mappers\MinorityPops</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Mappers\PartyNames\PartyName.cpp">
       <Filter>Mappers\PartyNames</Filter>
     </ClCompile>
@@ -301,116 +295,14 @@
     <ClCompile Include="Source\Mappers\NavalBases\NavalBaseMapper.cpp">
       <Filter>Mappers\NavalBaseMapper</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Mappers\RGORandomization\Bucket.cpp">
-      <Filter>Mappers\RGORandomization</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Mappers\RGORandomization\BucketList.cpp">
-      <Filter>Mappers\RGORandomization</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Mappers\PortProvinces\PortProvinces.cpp">
       <Filter>Mappers\PortProvinces</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Leader\Leader.cpp">
-      <Filter>Vic3World\Leader</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outLeader.cpp">
-      <Filter>Vic3World\Output</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outParty.cpp">
-      <Filter>Vic3World\Output</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outFactory.cpp">
-      <Filter>Vic3World\Output</Filter>
     </ClCompile>
     <ClCompile Include="Source\Mappers\PartyTypes\PartyType.cpp">
       <Filter>Mappers\PartyTypes</Filter>
     </ClCompile>
     <ClCompile Include="Source\Mappers\PartyTypes\PartyTypeMapper.cpp">
       <Filter>Mappers\PartyTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Party\Party.cpp">
-      <Filter>Vic3World\Party</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Diplomacy\Agreement.cpp">
-      <Filter>Vic3World\Diplomacy</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Diplomacy\Diplomacy.cpp">
-      <Filter>Vic3World\Diplomacy</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outAgreement.cpp">
-      <Filter>Vic3World\Output</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outLocalisation.cpp">
-      <Filter>Vic3World\Output</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Localisation\Localisation.cpp">
-      <Filter>Vic3World\Localisation</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Reforms\Reforms.cpp">
-      <Filter>Vic3World\Reforms</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Reforms\UncivReforms.cpp">
-      <Filter>Vic3World\Reforms</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outReforms.cpp">
-      <Filter>Vic3World\Output</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outUncivReforms.cpp">
-      <Filter>Vic3World\Output</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outRelation.cpp">
-      <Filter>Vic3World\Output</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Diplomacy\Relation.cpp">
-      <Filter>Vic3World\Diplomacy</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Pop\Pop.cpp">
-      <Filter>Vic3World\Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outPop.cpp">
-      <Filter>Vic3World\Output</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Army\Army.cpp">
-      <Filter>Vic3World\Army</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Army\Regiment.cpp">
-      <Filter>Vic3World\Army</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outArmy.cpp">
-      <Filter>Vic3World\Output</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outRegiment.cpp">
-      <Filter>Vic3World\Output</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Province\Province.cpp">
-      <Filter>Vic3World\Province</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outProvince.cpp">
-      <Filter>Vic3World\Output</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\State\State.cpp">
-      <Filter>Vic3World\State</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Flags\Flags.cpp">
-      <Filter>Vic3World\Flags</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Flags\FlagUtils.cpp">
-      <Filter>Vic3World\Flags</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Country\Country.cpp">
-      <Filter>Vic3World\Country</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outCountry.cpp">
-      <Filter>Vic3World\Output</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Country\CountryDetails.cpp">
-      <Filter>Vic3World\Country</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Province\ProvinceNameParser.cpp">
-      <Filter>Vic3World\Province</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\MappingChecker\MappingChecker.cpp">
-      <Filter>Vic3World\MappingChecker</Filter>
     </ClCompile>
     <ClCompile Include="Source\V3World\Output\outModFile.cpp">
       <Filter>Vic3World\Output</Filter>
@@ -439,12 +331,6 @@
     <ClCompile Include="Source\Mappers\WarGoalMapper\WarGoalMapper.cpp">
       <Filter>Mappers\WarGoalMapper</Filter>
     </ClCompile>
-    <ClCompile Include="Source\V3World\War\War.cpp">
-      <Filter>Vic3World\War</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outWar.cpp">
-      <Filter>Vic3World\Output</Filter>
-    </ClCompile>
     <ClCompile Include="Source\V3World\Output\outHistory.cpp">
       <Filter>Vic3World\Output</Filter>
     </ClCompile>
@@ -465,9 +351,6 @@
     </ClCompile>
     <ClCompile Include="Source\Mappers\SuperGroupMapper\SuperGroupMapper.cpp">
       <Filter>Mappers\SuperGroupMapper</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outCultureGroups.cpp">
-      <Filter>Vic3World\Output</Filter>
     </ClCompile>
     <ClCompile Include="Source\Mappers\RegionLocalizations\RegionLocalizations.cpp">
       <Filter>Mappers\RegionLocalizations</Filter>
@@ -547,9 +430,6 @@
     <ClCompile Include="Source\Mappers\Titles\TitleMapping.cpp">
       <Filter>Mappers\Titles</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Mappers\V3ProvinceRegionsMapper\V3ProvinceRegionsMapper.cpp">
-      <Filter>Mappers\V3ProvinceRegionsMapper</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Mappers\Pops\PopInstance.cpp">
       <Filter>Mappers\Pops</Filter>
     </ClCompile>
@@ -562,12 +442,6 @@
     <ClCompile Include="..\commonItems\ConvenientParser.cpp">
       <Filter>CommonItems</Filter>
     </ClCompile>
-    <ClCompile Include="Source\V3World\Country\ModCommons.cpp">
-      <Filter>Vic3World\Country</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Decisions\HPMDecisions.cpp">
-      <Filter>Vic3World\Decisions</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EU4World\Country\EU4ActivePolicy.cpp">
       <Filter>EU4World\Country</Filter>
     </ClCompile>
@@ -579,9 +453,6 @@
     </ClCompile>
     <ClCompile Include="Source\Mappers\ReligiousGroups\Religion.cpp">
       <Filter>Mappers\ReligiousGroups</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outReligiousGroups.cpp">
-      <Filter>Vic3World\Output</Filter>
     </ClCompile>
     <ClCompile Include="Source\EU4World\Mods\ModNames.cpp">
       <Filter>EU4World\Mods</Filter>
@@ -773,12 +644,6 @@
     <ClInclude Include="Source\Mappers\GovernmentMapper\GovernmentMapper.h">
       <Filter>Mappers\GovernmentMapper</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Mappers\MinorityPops\MinorityPop.h">
-      <Filter>Mappers\MinorityPops</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Mappers\MinorityPops\MinorityPopMapper.h">
-      <Filter>Mappers\MinorityPops</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Mappers\PartyNames\PartyName.h">
       <Filter>Mappers\PartyNames</Filter>
     </ClInclude>
@@ -887,23 +752,8 @@
     <ClInclude Include="Source\Mappers\NavalBases\NavalBaseMapper.h">
       <Filter>Mappers\NavalBaseMapper</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Mappers\RGORandomization\Bucket.h">
-      <Filter>Mappers\RGORandomization</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Mappers\RGORandomization\BucketList.h">
-      <Filter>Mappers\RGORandomization</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Mappers\PortProvinces\PortProvinces.h">
       <Filter>Mappers\PortProvinces</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Leader\Leader.h">
-      <Filter>Vic3World\Leader</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Party\Party.h">
-      <Filter>Vic3World\Party</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Factory\Factory.h">
-      <Filter>Vic3World\Factory</Filter>
     </ClInclude>
     <ClInclude Include="Source\Mappers\PartyTypes\PartyType.h">
       <Filter>Mappers\PartyTypes</Filter>
@@ -911,59 +761,8 @@
     <ClInclude Include="Source\Mappers\PartyTypes\PartyTypeMapper.h">
       <Filter>Mappers\PartyTypes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\V3World\Diplomacy\Agreement.h">
-      <Filter>Vic3World\Diplomacy</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Diplomacy\Diplomacy.h">
-      <Filter>Vic3World\Diplomacy</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Localisation\Localisation.h">
-      <Filter>Vic3World\Localisation</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Reforms\Reforms.h">
-      <Filter>Vic3World\Reforms</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Reforms\UncivReforms.h">
-      <Filter>Vic3World\Reforms</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Diplomacy\Relation.h">
-      <Filter>Vic3World\Diplomacy</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Pop\Pop.h">
-      <Filter>Vic3World\Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Army\Army.h">
-      <Filter>Vic3World\Army</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Army\Regiment.h">
-      <Filter>Vic3World\Army</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Province\Province.h">
-      <Filter>Vic3World\Province</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\State\State.h">
-      <Filter>Vic3World\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Flags\Flags.h">
-      <Filter>Vic3World\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Flags\FlagUtils.h">
-      <Filter>Vic3World\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Country\Country.h">
-      <Filter>Vic3World\Country</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Country\CountryDetails.h">
-      <Filter>Vic3World\Country</Filter>
-    </ClInclude>
     <ClInclude Include="Source\V3World\Output\output.h">
       <Filter>Vic3World\Output</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Province\ProvinceNameParser.h">
-      <Filter>Vic3World\Province</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\MappingChecker\MappingChecker.h">
-      <Filter>Vic3World\MappingChecker</Filter>
     </ClInclude>
     <ClInclude Include="Source\V3World\Output\ModFile.h">
       <Filter>Vic3World\Output</Filter>
@@ -988,9 +787,6 @@
     </ClInclude>
     <ClInclude Include="Source\Mappers\WarGoalMapper\WarGoalMapper.h">
       <Filter>Mappers\WarGoalMapper</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\War\War.h">
-      <Filter>Vic3World\War</Filter>
     </ClInclude>
     <ClInclude Include="Source\Mappers\StartingTechMapper\StartingTech.h">
       <Filter>Mappers\StartingTechMapper</Filter>
@@ -1091,9 +887,6 @@
     <ClInclude Include="Source\Mappers\Titles\TitleMapping.h">
       <Filter>Mappers\Titles</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Mappers\V3ProvinceRegionsMapper\V3ProvinceRegionsMapper.h">
-      <Filter>Mappers\V3ProvinceRegionsMapper</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Mappers\Pops\PopInstance.h">
       <Filter>Mappers\Pops</Filter>
     </ClInclude>
@@ -1108,9 +901,6 @@
     </ClInclude>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
       <Filter>CommonItems</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Country\ModCommons.h">
-      <Filter>Vic3World\Country</Filter>
     </ClInclude>
     <ClInclude Include="Source\EU4World\Country\EU4ActivePolicy.h">
       <Filter>EU4World\Country</Filter>
@@ -1165,12 +955,6 @@
     <Filter Include="EU4World\Army">
       <UniqueIdentifier>{f97aeea8-0988-49af-9fcb-15d4302eb844}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Vic3World\Factory">
-      <UniqueIdentifier>{88c08173-47e0-48fd-ae63-80362aae21ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vic3World\Leader">
-      <UniqueIdentifier>{e833b88c-161a-440a-a101-534515a4c503}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EU4World\History">
       <UniqueIdentifier>{f1bc5627-0c41-42d9-9cb3-66924c260cea}</UniqueIdentifier>
     </Filter>
@@ -1215,9 +999,6 @@
     </Filter>
     <Filter Include="Mappers\GovernmentMapper">
       <UniqueIdentifier>{4f2f705d-ce8c-47b1-964e-e185667ddf74}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Mappers\MinorityPops">
-      <UniqueIdentifier>{f6048d90-c48f-41c5-9ad8-8afb4aa4a421}</UniqueIdentifier>
     </Filter>
     <Filter Include="Mappers\PartyNames">
       <UniqueIdentifier>{6700c27c-5507-4a98-9b25-6f09c1fb7bc9}</UniqueIdentifier>
@@ -1273,53 +1054,17 @@
     <Filter Include="Mappers\NavalBaseMapper">
       <UniqueIdentifier>{b38c0acf-7b11-4847-931d-d025c20b1f8a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Mappers\RGORandomization">
-      <UniqueIdentifier>{63392046-e39d-4304-b1ef-bf0f118a1ed6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Mappers\PortProvinces">
       <UniqueIdentifier>{cf57a5e8-a8d7-4839-81fb-1a19da32768b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Vic3World\Output">
       <UniqueIdentifier>{9fb14058-9987-4188-8664-36162b13d0af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Vic3World\Party">
-      <UniqueIdentifier>{8b2897e0-22e8-4284-a6d6-52b237ebab64}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Mappers\PartyTypes">
       <UniqueIdentifier>{6c6b3000-31ef-4f1a-8bf8-ca093ab3698a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Vic3World\Diplomacy">
-      <UniqueIdentifier>{60deccb8-ae6d-4439-bd87-139962fe9044}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vic3World\Localisation">
-      <UniqueIdentifier>{d7f0559f-2f54-4878-8802-2806e752d14c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vic3World\Reforms">
-      <UniqueIdentifier>{05b3ad12-7162-40a0-adf3-b6aa1debc6b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vic3World\Pop">
-      <UniqueIdentifier>{3956b846-9d95-421d-b693-59ee5d90dde7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vic3World\Army">
-      <UniqueIdentifier>{abe9d586-23f5-4927-b8a8-4244ffaf1397}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vic3World\Province">
-      <UniqueIdentifier>{6b41252a-f3aa-4a21-a94a-dabdeb1c5f9f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Mappers\ProvinceDetails">
       <UniqueIdentifier>{5a15ff97-0365-4341-832d-fd6b34f75e1a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vic3World\State">
-      <UniqueIdentifier>{530bfc41-c892-4dd1-a1dd-7fb646450f44}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vic3World\Flags">
-      <UniqueIdentifier>{70bd31d2-c2e9-4b77-a432-1f4aedcd45c2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vic3World\Country">
-      <UniqueIdentifier>{67358893-5f79-4f87-a13f-7a39d801f0c8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vic3World\MappingChecker">
-      <UniqueIdentifier>{c9e81627-0b25-4e61-a165-6f2f8bee6050}</UniqueIdentifier>
     </Filter>
     <Filter Include="Mappers\VersionParser">
       <UniqueIdentifier>{d85a505e-83f9-43ad-8a57-da9e364829c4}</UniqueIdentifier>
@@ -1329,9 +1074,6 @@
     </Filter>
     <Filter Include="EU4World\Wars">
       <UniqueIdentifier>{7dbef9f3-660a-4d4e-b342-540f1eb932fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vic3World\War">
-      <UniqueIdentifier>{057d332d-e2a4-4a85-9aa4-2dbba11e85d3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Mappers\WarGoalMapper">
       <UniqueIdentifier>{9b194f63-f1ef-46e2-9f4a-7fad6d7b19c9}</UniqueIdentifier>
@@ -1366,14 +1108,8 @@
     <Filter Include="Mappers\Titles">
       <UniqueIdentifier>{5095124a-bcad-425f-aa6c-8299c482a4a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Mappers\V3ProvinceRegionsMapper">
-      <UniqueIdentifier>{20e118dd-a05a-43d1-af80-c5ff91db7e1b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Mappers\UnionTagsMapper">
       <UniqueIdentifier>{8db610cd-e924-4080-a512-db81b67fab07}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vic3World\Decisions">
-      <UniqueIdentifier>{8758d162-b22a-45e3-b4d7-1a122c111a14}</UniqueIdentifier>
     </Filter>
     <Filter Include="Mappers\ReligiousGroups">
       <UniqueIdentifier>{26f2aa56-2c79-4c55-9757-7507b1a40e54}</UniqueIdentifier>
