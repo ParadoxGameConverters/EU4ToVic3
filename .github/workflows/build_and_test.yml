@@ -22,5 +22,5 @@ jobs:
        .\MSBuild.exe -m -p:Configuration=Release $Env:GITHUB_WORKSPACE\EU4toVic3.sln
     - name: "Run tests"
       run: |
-       cd $Env:GITHUB_WORKSPACE\EU4toVic3Tests\Release\
-       .\EU4toVic3Tests.exe
+       cd $Env:GITHUB_WORKSPACE\EU4toV3Tests\Release\
+       .\EU4toV3Tests.exe
