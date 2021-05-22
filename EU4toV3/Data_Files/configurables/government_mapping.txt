@@ -1,0 +1,24 @@
+# Syntax: v2_government = { list of eu4 governments }
+
+# Pre-Dharma (pre 1.26)
+absolute_monarchy = { despotic_monarchy feudal_monarchy absolute_monarchy 
+		enlightened_despotism revolutionary_empire steppe_horde tribal_despotism 
+		tribal_federation celestial_empire iqta daimyo shogunate indep_daimyo 
+		imperial_government tribal_kingdom ottoman_government tsardom 
+		mamluk_government principality }
+democracy = { merchant_republic administrative_republic constitutional_republic 
+		tribal_democracy ambrosian_republic dutch_republic american_republic 
+		tribal_council native_council siberian_native_council imperial_city 
+		trading_city veche_republic federal_republic pirate_republic }
+presidential_dictatorship = { republican_dictatorship oligarchic_republic colonial_government }
+hms_government = { english_monarchy constitutional_monarchy administrative_monarchy }
+prussian_constitutionalism = { prussian_monarchy noble_republic elective_monarchy}
+proletarian_dictatorship = { peasants_republic } #Dithmarschen special
+theocracy = { theocratic_government papal_government monastic_order_government feudal_theocracy }
+bourgeois_dictatorship = { bureaucratic_despotism revolutionary_republic }
+
+# Mappings for Dharma gov types (1.26+ with or without dharma enabled). Countries initially mapped to these can
+# branch out to other 6 government forms depending on their chosen reforms.
+absolute_monarchy = { monarchy tribal native }
+democracy = { republic }
+theocracy = { theocracy }

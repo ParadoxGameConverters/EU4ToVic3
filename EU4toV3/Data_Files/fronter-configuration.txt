@@ -1,0 +1,84 @@
+name = EU4ToVic2
+converterFolder = EU4ToVic2
+displayName = EU4DISPLAYNAME
+sourceGame = EU4GAME
+targetGame = VIC2GAME
+
+requiredFolder = {
+	name = EU4directory
+	displayName = EU4FOLDER
+	tooltip = EU4FOLDERTIP
+	mandatory = true
+	searchPathType = steamFolder
+	searchPathID = 236850
+}
+requiredFolder = {
+	name = EU4DocumentsDirectory
+	displayName = EU4DOC
+	tooltip = EU4DOCTIP
+	mandatory = true
+	searchPathType = windowsUsersFolder
+	searchPath = "Paradox Interactive\Europa Universalis IV"
+}
+requiredFolder = {
+	name = CK2ExportDirectory
+	displayName = CK2EXP
+	tooltip = CK2EXPTIP
+	mandatory = false
+	searchPathType = windowsUsersFolder
+	searchPath = "Paradox Interactive\Crusader Kings II\eu4_export"
+}
+requiredFolder = {
+	name = SteamWorkshopDirectory
+	displayName = EU4MOD
+	tooltip = EU4MODTIP
+	mandatory = true
+	searchPathType = direct
+	searchPath = "C:\Program Files (x86)\Steam\SteamApps\workshop\content\236850"
+}
+requiredFolder = {
+	name = Vic2directory
+	displayName = VIC2FOLDER
+	tooltip = VIC2FOLDERTIP
+	mandatory = true
+	searchPathType = steamFolder
+	searchPathID = 42960
+}
+requiredFolder = {
+	name = Vic2Documentsdirectory
+	displayName = VIC2DOC
+	tooltip = VIC2DOCTIP
+	mandatory = true
+	searchPathType = windowsUsersFolder
+	searchPath = "Paradox Interactive\Victoria II"
+}
+requiredFolder = {
+	name = targetGameModPath
+	displayName = VIC2MOD
+	tooltip = VIC2MODTIP
+	mandatory = true
+	searchPathType = steamFolder
+	searchPathID = 42960
+	searchPath = "mod"
+}
+requiredFile = {
+	name = converterExe
+	displayName = EU4FILE
+	tooltip = EU4FILETIP
+	mandatory = true
+	outputtable = false
+	searchPathType = converterFolder
+	searchPath = "EU4toVic2"
+	allowedExtension = "*.exe"
+	fileName = "EU4ToVic2Converter.exe"
+}
+requiredFile = {
+	name = SaveGame
+	displayName = EU4SAVE
+	tooltip = EU4SAVETIP
+	mandatory = true
+	outputtable = true
+	searchPathType = windowsUsersFolder
+	searchPath = "Paradox Interactive\Europa Universalis IV\save games"
+	allowedExtension = "*.eu4"
+}
