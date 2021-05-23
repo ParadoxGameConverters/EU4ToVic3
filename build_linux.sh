@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export CC=/usr/bin/gcc-10 &&
-export CXX=/usr/bin/g++-10 &&
+export CC=/usr/bin/gcc-11 &&
+export CXX=/usr/bin/g++-11 &&
 
 rm -rf Release/ &&
 cd Fronter &&

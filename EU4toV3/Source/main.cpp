@@ -1,27 +1,22 @@
-#include "Log.h"
 #include "EU4ToVic3Converter.h"
-#include "Mappers/VersionParser/VersionParser.h"
+#include "Log.h"
+#include "ConverterVersion/ConverterVersion.h"
 #include <fstream>
 
-int main(const int argc, const char * argv[])
+int main(const int argc, const char* argv[])
 {
 	try
 	{
-      std::ofstream clearLog("log.txt");
+		std::ofstream clearLog("log.txt");
 		clearLog.close();
-		const mappers::VersionParser versionParser;
-		LOG(LogLevel::Info) << versionParser;
-		LOG(LogLevel::Info) << "Built on " << __TIMESTAMP__;
+		const mappers::ConverterVersion converterVersion;
+		LOG(LogLevel::Info) << converterVersion;
 		if (argc >= 2)
 		{
-			std::string argv1 = argv[1];
-			if (argv1 != "input.eu4")
-			{
-				LOG(LogLevel::Info) << "EU4toVic2 no longer takes savegame path as a parameter";
-				LOG(LogLevel::Info) << "It uses configuration.txt, configured manually or by the frontend.";
-			}
+			LOG(LogLevel::Info) << "EU4toVic3 takes no parameters.";
+			LOG(LogLevel::Info) << "It uses configuration.txt, configured manually or by the frontend.";
 		}
-		convertEU4ToVic2(versionParser);
+		convertEU4ToVic3(converterVersion);
 		return 0;
 	}
 
