@@ -1,8 +1,5 @@
 #include "V3World.h"
 #include "../EU4World/World.h"
-#include "../Helpers/TechValues.h"
-#include "../Mappers/TechGroups/TechGroupsMapper.h"
-#include "../Mappers/VersionParser/VersionParser.h"
 #include "Configuration.h"
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
@@ -11,12 +8,7 @@
 namespace fs = std::filesystem;
 
 
-V2::World::World(const std::shared_ptr<Configuration>& theConfiguration,
-	 const EU4::World& sourceWorld,
-	 const mappers::IdeaEffectMapper& ideaEffectMapper,
-	 const mappers::TechGroupsMapper& techGroupsMapper,
-	 const mappers::VersionParser& versionParser):
-	 historicalData(sourceWorld.getHistoricalData())
+V2::World::World(const std::shared_ptr<Configuration>& theConfiguration, const EU4::World& sourceWorld, const mappers::ConverterVersion& converterVersion)
 {
 	Log(LogLevel::Progress) << "45 %";
 
@@ -92,19 +84,18 @@ V2::World::World(const std::shared_ptr<Configuration>& theConfiguration,
 	Log(LogLevel::Progress) << "69 %";
 
 	LOG(LogLevel::Info) << "-> Converting Botanical Definitions";
-	transcribeHistoricalData();
 	Log(LogLevel::Progress) << "70 %";
 
 	LOG(LogLevel::Info) << "-> Converting country flags";
 	Log(LogLevel::Progress) << "71 %";
 
 	LOG(LogLevel::Info) << "---> Le Dump <---";
-	output(versionParser, theConfiguration->getOutputName());
+	output(converterVersion, theConfiguration->getOutputName());
 
 	LOG(LogLevel::Info) << "*** Goodbye, Vicky 2, and godspeed. ***";
 }
 
-void V2::World::output(const mappers::VersionParser& versionParser, const std::string& outputName) const
+void V2::World::output(const mappers::ConverterVersion& converterVersion, const std::string& outputName) const
 {
 	commonItems::TryCreateFolder("output");
 	Log(LogLevel::Progress) << "80 %";
@@ -118,12 +109,11 @@ void V2::World::output(const mappers::VersionParser& versionParser, const std::s
 	Log(LogLevel::Progress) << "82 %";
 
 	LOG(LogLevel::Info) << "<- Crafting .mod File";
-	createModFile(outputName);
 	Log(LogLevel::Progress) << "83 %";
 
 	// Record converter version
 	LOG(LogLevel::Info) << "<- Writing version";
-	outputVersion(versionParser, outputName);
+	outputVersion(converterVersion, outputName);
 	Log(LogLevel::Progress) << "84 %";
 
 	// Update bookmark starting dates
@@ -131,11 +121,6 @@ void V2::World::output(const mappers::VersionParser& versionParser, const std::s
 	Log(LogLevel::Progress) << "85 %";
 
 	// Create common\countries path.
-	const auto countriesPath = "output/" + outputName + "/common/countries";
-	if (!commonItems::TryCreateFolder(countriesPath))
-	{
-		return;
-	}
 	Log(LogLevel::Progress) << "86 %";
 
 	// Output common\countries.txt
@@ -176,7 +161,6 @@ void V2::World::output(const mappers::VersionParser& versionParser, const std::s
 	Log(LogLevel::Progress) << "97 %";
 
 	LOG(LogLevel::Info) << "<- Sending Botanical Expedition";
-	outputHistory(outputName);
 	Log(LogLevel::Progress) << "98 %";
 
 	LOG(LogLevel::Info) << "<- Writing Treatise on the Origins of Invasive Fauna";
@@ -186,47 +170,11 @@ void V2::World::output(const mappers::VersionParser& versionParser, const std::s
 	LOG(LogLevel::Info) << "-> Verifying All Countries Written";
 }
 
-void V2::World::transcribeHistoricalData()
-{
-	std::vector<std::pair<std::string, EU4::HistoricalEntry>> transcribedData;
-	for (const auto& entry: historicalData)
-	{
-		const auto& possibleTag = countryMapper.getV2Tag(entry.first);
-		if (possibleTag)
-			transcribedData.emplace_back(std::make_pair(*possibleTag, entry.second));
-	}
-	historicalData.swap(transcribedData);
-}
-
-void V2::World::outputHistory(const std::string& outputName) const
-{
-	std::ofstream output("output/" + outputName + "/common/botanical_expedition.txt");
-	if (!output.is_open())
-	{
-		throw std::runtime_error(
-			 "Could not send botanical expedition output/" + outputName + "/common/botanical_expedition.txt - " + commonItems::GetLastErrorString());
-	}
-	output << historicalData;
-	output.close();
-}
-
-void V2::World::outputVersion(const mappers::VersionParser& versionParser, const std::string& outputName)
+void V2::World::outputVersion(const mappers::ConverterVersion& converterVersion, const std::string& outputName)
 {
 	std::ofstream output("output/" + outputName + "/eu4tov3_version.txt");
 	if (!output.is_open())
 		throw std::runtime_error("Error writing version file! Is the output folder writable?");
-	output << versionParser;
-	output.close();
-}
-
-
-void V2::World::createModFile(const std::string& outputName) const
-{
-	std::ofstream output("output/" + outputName + ".mod");
-	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName + ".mod");
-	LOG(LogLevel::Info) << "\t-> Writing to: "
-							  << "output/" + outputName + ".mod";
-	output << modFile;
+	output << converterVersion;
 	output.close();
 }

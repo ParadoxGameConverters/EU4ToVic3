@@ -1,6 +1,6 @@
 #include "EU4ToVic3Converter.h"
 #include "Log.h"
-#include "Mappers/VersionParser/VersionParser.h"
+#include "ConverterVersion/ConverterVersion.h"
 #include <fstream>
 
 int main(const int argc, const char* argv[])
@@ -9,14 +9,14 @@ int main(const int argc, const char* argv[])
 	{
 		std::ofstream clearLog("log.txt");
 		clearLog.close();
-		const mappers::VersionParser versionParser;
-		LOG(LogLevel::Info) << versionParser;
+		const mappers::ConverterVersion converterVersion;
+		LOG(LogLevel::Info) << converterVersion;
 		if (argc >= 2)
 		{
 			LOG(LogLevel::Info) << "EU4toVic3 takes no parameters.";
 			LOG(LogLevel::Info) << "It uses configuration.txt, configured manually or by the frontend.";
 		}
-		convertEU4ToVic3(versionParser);
+		convertEU4ToVic3(converterVersion);
 		return 0;
 	}
 
