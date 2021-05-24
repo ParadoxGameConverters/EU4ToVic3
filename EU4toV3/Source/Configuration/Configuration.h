@@ -1,11 +1,10 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
-
 #include "Date.h"
 #include "GameVersion.h"
 #include "Parser.h"
-#include <set>
 #include <string>
+#include "ConverterVersion/ConverterVersion.h"
 
 const date HARD_ENDING_DATE("1836.1.1");
 const date FUTURE_DATE("2000.1.1");
@@ -13,7 +12,7 @@ const date FUTURE_DATE("2000.1.1");
 class Configuration: commonItems::parser
 {
   public:
-	Configuration();
+	Configuration(std::shared_ptr<mappers::ConverterVersion> theConverterVersion);
 	explicit Configuration(std::istream& theStream);
 
 	enum class DEADCORES
@@ -62,13 +61,14 @@ class Configuration: commonItems::parser
 	[[nodiscard]] const auto& getEU4Path() const { return EU4Path; }
 	[[nodiscard]] const auto& getEU4DocumentsPath() const { return EU4DocumentsPath; }
 	[[nodiscard]] const auto& getVic3Path() const { return Vic3Path; }
-	[[nodiscard]] const auto& getVic3DocumentsPath() const { return Vic3DocumentsPath; }
 	[[nodiscard]] const auto& getEU4Version() const { return version; }
 	[[nodiscard]] const auto& getFirstEU4Date() const { return firstEU4Date; }
 	[[nodiscard]] const auto& getLastEU4Date() const { return lastEU4Date; }
 	[[nodiscard]] const auto& getStartEU4Date() const { return startEU4Date; }
 	[[nodiscard]] const auto& getOutputName() const { return outputName; }
 	[[nodiscard]] const auto& getEU4Mods() const { return EU4Mods; }
+
+	[[nodiscard]] const auto& getConverterVersion() const { return converterVersion; }
 
   private:
 	void registerKeys();
@@ -81,7 +81,6 @@ class Configuration: commonItems::parser
 	std::string EU4Path;
 	std::string EU4DocumentsPath;
 	std::string Vic3Path;
-	std::string Vic3DocumentsPath;
 	std::string outputName;
 
 	double MaxLiteracy = 1.0;
@@ -98,7 +97,8 @@ class Configuration: commonItems::parser
 	date lastEU4Date;
 	date startEU4Date = date("1000.1.1");
 	int eu4Seed = 0;
-	std::map<std::string, std::string> EU4Mods; //name, path
+	std::map<std::string, std::string> EU4Mods; // name, path
+	std::shared_ptr<mappers::ConverterVersion> converterVersion;
 };
 
 #endif // CONFIGURATION_H

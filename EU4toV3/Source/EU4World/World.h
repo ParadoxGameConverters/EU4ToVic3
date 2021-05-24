@@ -10,10 +10,10 @@ namespace EU4
 class World: commonItems::parser
 {
   public:
-	World(const std::shared_ptr<Configuration>& theConfiguration);
+	World(std::shared_ptr<Configuration> theConfiguration);
 
   private:
-	void registerKeys(const std::shared_ptr<Configuration>& theConfiguration);
+	void registerKeys();
 
 	void verifySave(const std::string& saveGamePath);
 	void verifySaveContents();
@@ -28,6 +28,7 @@ class World: commonItems::parser
 	saveData saveGame;
 
 	std::unique_ptr<GameVersion> version;
+	std::shared_ptr<Configuration> configuration;
 
 };
 } // namespace EU4

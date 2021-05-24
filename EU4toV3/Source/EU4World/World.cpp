@@ -3,6 +3,7 @@
 #include "GameVersion.h"
 #include "Log.h"
 #include "Mods/ModNames.h"
+#include "Mods/Mods.h"
 #include "ParserHelpers.h"
 #include "rakaly_wrapper.h"
 #include <ZipFile.h>
@@ -13,25 +14,25 @@
 namespace fs = std::filesystem;
 #include "CommonRegexes.h"
 
-EU4::World::World(const std::shared_ptr<Configuration>& theConfiguration)
+EU4::World::World(std::shared_ptr<Configuration> theConfiguration): configuration(std::move(theConfiguration))
 {
-	LOG(LogLevel::Info) << "*** Hello EU4, loading World. ***";
-	registerKeys(theConfiguration);
+	Log(LogLevel::Info) << "*** Hello EU4, loading World. ***";
+	registerKeys();
 
 	Log(LogLevel::Progress) << "6 %";
 
-	LOG(LogLevel::Info) << "-> Verifying EU4 save.";
-	verifySave(theConfiguration->getEU4SaveGamePath());
+	Log(LogLevel::Info) << "-> Verifying EU4 save.";
+	verifySave(configuration->getEU4SaveGamePath());
 	Log(LogLevel::Progress) << "7 %";
 
-	LOG(LogLevel::Info) << "-> Importing EU4 save.";
+	Log(LogLevel::Info) << "-> Importing EU4 save.";
 	if (!saveGame.compressed)
 	{
-		std::ifstream inBinary(fs::u8path(theConfiguration->getEU4SaveGamePath()), std::ios::binary);
+		std::ifstream inBinary(fs::u8path(configuration->getEU4SaveGamePath()), std::ios::binary);
 		if (!inBinary.is_open())
 		{
-			LOG(LogLevel::Error) << "Could not open " << theConfiguration->getEU4SaveGamePath() << " for parsing.";
-			throw std::runtime_error("Could not open " + theConfiguration->getEU4SaveGamePath() + " for parsing.");
+			Log(LogLevel::Error) << "Could not open " << configuration->getEU4SaveGamePath() << " for parsing.";
+			throw std::runtime_error("Could not open " + configuration->getEU4SaveGamePath() + " for parsing.");
 		}
 		std::stringstream inStream;
 		inStream << inBinary.rdbuf();
@@ -50,105 +51,110 @@ EU4::World::World(const std::shared_ptr<Configuration>& theConfiguration)
 
 	clearRegisteredKeywords();
 	// With mods loaded we can init stuff that requires them.
-	
+
 	Log(LogLevel::Progress) << "16 %";
 
-	LOG(LogLevel::Info) << "*** Building world ***";
-	LOG(LogLevel::Info) << "-> Loading Empires";
+	Log(LogLevel::Info) << "*** Building world ***";
+	Log(LogLevel::Info) << "-> Loading Empires";
 	Log(LogLevel::Progress) << "17 %";
 
-	LOG(LogLevel::Info) << "-> Calculating Province Weights";
+	Log(LogLevel::Info) << "-> Calculating Province Weights";
 	Log(LogLevel::Progress) << "18 %";
 
-	LOG(LogLevel::Info) << "-> Processing Province Info";
+	Log(LogLevel::Info) << "-> Processing Province Info";
 	Log(LogLevel::Progress) << "19 %";
 
-	LOG(LogLevel::Info) << "-> Loading Regions";
+	Log(LogLevel::Info) << "-> Loading Regions";
 	Log(LogLevel::Progress) << "21 %";
 
-	LOG(LogLevel::Info) << "-> Determining Demographics";
+	Log(LogLevel::Info) << "-> Determining Demographics";
 	Log(LogLevel::Progress) << "22 %";
 
-	LOG(LogLevel::Info) << "-> Cataloguing Native Fauna";
+	Log(LogLevel::Info) << "-> Cataloguing Native Fauna";
 	Log(LogLevel::Progress) << "24 %";
 
-	LOG(LogLevel::Info) << "-> Clasifying Invasive Fauna";
+	Log(LogLevel::Info) << "-> Clasifying Invasive Fauna";
 	Log(LogLevel::Progress) << "25 %";
 
-	LOG(LogLevel::Info) << "-> Reading Countries";
+	Log(LogLevel::Info) << "-> Reading Countries";
 	Log(LogLevel::Progress) << "26 %";
 
-	LOG(LogLevel::Info) << "-> Setting Localizations";
+	Log(LogLevel::Info) << "-> Setting Localizations";
 	Log(LogLevel::Progress) << "27 %";
 
-	LOG(LogLevel::Info) << "-> Resolving Regiments";
+	Log(LogLevel::Info) << "-> Resolving Regiments";
 	Log(LogLevel::Progress) << "28 %";
 
-	LOG(LogLevel::Info) << "-> Merging Nations";
+	Log(LogLevel::Info) << "-> Merging Nations";
 	Log(LogLevel::Progress) << "29 %";
 
-	LOG(LogLevel::Info) << "-> Calculating Industry";
+	Log(LogLevel::Info) << "-> Calculating Industry";
 	Log(LogLevel::Progress) << "30 %";
 
-	LOG(LogLevel::Info) << "-> Viva la revolution!";
+	Log(LogLevel::Info) << "-> Viva la revolution!";
 	Log(LogLevel::Progress) << "31 %";
 
-	LOG(LogLevel::Info) << "-> Doing Accounting and dishes";
+	Log(LogLevel::Info) << "-> Doing Accounting and dishes";
 	Log(LogLevel::Progress) << "32 %";
 
-	LOG(LogLevel::Info) << "-> Dropping Empty Nations";
-	
-	LOG(LogLevel::Info) << "*** Good-bye EU4, you served us well. ***";
+	Log(LogLevel::Info) << "-> Dropping Empty Nations";
+
+	Log(LogLevel::Info) << "*** Good-bye EU4, you served us well. ***";
 	Log(LogLevel::Progress) << "40 %";
 }
 
-void EU4::World::registerKeys(const std::shared_ptr<Configuration>& theConfiguration)
+void EU4::World::registerKeys()
 {
 	registerKeyword("EU4txt", [](std::istream& theStream) {
 	});
-	registerKeyword("date", [theConfiguration](std::istream& theStream) {
-		theConfiguration->setLastEU4Date(date(commonItems::getString(theStream)));
+	registerKeyword("date", [this](std::istream& theStream) {
+		configuration->setLastEU4Date(date(commonItems::getString(theStream)));
 	});
-	registerKeyword("start_date", [theConfiguration](std::istream& theStream) {
-		theConfiguration->setStartEU4Date(date(commonItems::getString(theStream)));
+	registerKeyword("start_date", [this](std::istream& theStream) {
+		configuration->setStartEU4Date(date(commonItems::getString(theStream)));
 	});
-	registerRegex("(multiplayer_)?random_seed", [theConfiguration](const std::string& unused, std::istream& theStream) {
+	registerRegex("(multiplayer_)?random_seed", [this](const std::string& unused, std::istream& theStream) {
 		auto theSeed = commonItems::getString(theStream);
 		if (theSeed.size() > 5)
 			theSeed = theSeed.substr(theSeed.size() - 5);
 		try
 		{
-			theConfiguration->setEU4RandomSeed(std::stoi(theSeed));
+			configuration->setEU4RandomSeed(std::stoi(theSeed));
 		}
 		catch (std::exception& e)
 		{
 			Log(LogLevel::Error) << "Failed reading random_seed, setting 0: " << e.what();
-			theConfiguration->setEU4RandomSeed(0);
+			configuration->setEU4RandomSeed(0);
 		}
 	});
-	registerKeyword("savegame_version", [this, theConfiguration](std::istream& theStream) {
+	registerKeyword("savegame_version", [this](std::istream& theStream) {
 		version = std::make_unique<GameVersion>(theStream);
-		theConfiguration->setEU4Version(*version);
+		configuration->setEU4Version(*version);
 		Log(LogLevel::Info) << "Savegave version: " << *version;
+		if (*version < configuration->getConverterVersion()->getMinimalVersion())
+			throw std::runtime_error(
+				 "This converter was built for game version " + configuration->getConverterVersion()->getMinimalVersion().toShortString() + "!");
 	});
-	registerKeyword("mods_enabled_names", [theConfiguration](std::istream& theStream) {
-		// In use since 1.31.
+	registerKeyword("mods_enabled_names", [this](std::istream& theStream) {
 		Log(LogLevel::Info) << "-> Detecting used mods.";
 		const auto& modBlobs = commonItems::blobList(theStream);
 		Log(LogLevel::Info) << "<> Savegame claims " << modBlobs.getBlobs().size() << " mods used:";
 		std::map<std::string, std::string> modsList;
-		for (const auto& modBlob : modBlobs.getBlobs())
+		for (const auto& modBlob: modBlobs.getBlobs())
 		{
 			auto modStream = std::stringstream(modBlob);
 			const auto& modName = ModNames(modStream);
 			modsList.emplace(modName.getName(), modName.getPath());
 			Log(LogLevel::Info) << "---> " << modName.getName() << ": " << modName.getPath();
 		}
-		theConfiguration->setEU4Mods(modsList);
+		configuration->setEU4Mods(modsList);
+
+		// Let's locate, verify and potentially update those mods immediately.
+		Mods mods;
+		mods.loadMods(*configuration);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
-
 
 void EU4::World::verifySaveContents()
 {
@@ -182,25 +188,24 @@ bool EU4::World::uncompressSave(const std::string& saveGamePath)
 		return false;
 	for (size_t entryNum = 0; entryNum < saveFile->GetEntriesCount(); ++entryNum)
 	{
-		const auto& entry = saveFile->GetEntry(static_cast<int>(entryNum));
-		const auto& name = entry->GetName();
-		if (name == "meta")
+		const auto& entry = saveFile->GetEntry(static_cast<int>(entryNum));		
+		if (const auto& name = entry->GetName(); name == "meta")
 		{
-			LOG(LogLevel::Info) << ">> Uncompressing metadata";
+			Log(LogLevel::Info) << ">> Uncompressing metadata";
 			saveGame.metadata = std::string{std::istreambuf_iterator<char>(*entry->GetDecompressionStream()), std::istreambuf_iterator<char>()};
 		}
 		else if (name == "gamestate")
 		{
-			LOG(LogLevel::Info) << ">> Uncompressing gamestate";
+			Log(LogLevel::Info) << ">> Uncompressing gamestate";
 			saveGame.gamestate = std::string{std::istreambuf_iterator<char>(*entry->GetDecompressionStream()), std::istreambuf_iterator<char>()};
 		}
 		else if (name == "ai")
 		{
-			LOG(LogLevel::Info) << ">> Uncompressing ai and forgetting it existed";
+			Log(LogLevel::Info) << ">> Uncompressing ai and forgetting it existed";
 			saveGame.compressed = true;
 		}
 		else
-			throw std::runtime_error("Unrecognized savegame structure!");
+			throw std::runtime_error("Unrecognized savegame structure! RNW savegames are NOT supported!");
 	}
 	return true;
 }

@@ -1,43 +1,28 @@
 #include "ConverterVersion/ConverterVersion.h"
 #include "gtest/gtest.h"
-#include <sstream>
 
-TEST(Mappers_ConverterVersionTests, AllItemsDefaultToEmpty)
+TEST(Mappers_ConverterVersionTests, PrimitivesDefaultToEmpty)
 {
 	std::stringstream input;
 	mappers::ConverterVersion version(input);
 
-	EXPECT_TRUE(version.getName().empty());
-	EXPECT_TRUE(version.getDescription().empty());
-	EXPECT_TRUE(version.getVersion().empty());
+	ASSERT_TRUE(version.getName().empty());
+	ASSERT_TRUE(version.getDescription().empty());
+	ASSERT_TRUE(version.getVersion().empty());
+	ASSERT_EQ(GameVersion(0, 0, 0, 0), version.getMinimalVersion());
 }
 
-TEST(Mappers_ConverterVersionTests, NameCanBeSet)
+TEST(Mappers_ConverterVersionTests, PrimitivesCanBeSet)
 {
 	std::stringstream input;
 	input << "name = \"Test Name\"";
-	mappers::ConverterVersion version(input);
-
-	EXPECT_EQ("Test Name", version.getName());
-}
-
-TEST(Mappers_ConverterVersionTests, VersionCanBeSet)
-{
-	std::stringstream input;
 	input << "version = \"5.4-Test\"";
-	mappers::ConverterVersion version(input);
-
-	std::stringstream output;
-	output << version;
-
-	EXPECT_EQ("5.4-Test", version.getVersion());
-}
-
-TEST(Mappers_ConverterVersionTests, DescriptionCanBeSet)
-{
-	std::stringstream input;
 	input << "descriptionLine = \"test description\"";
+	input << "minimalIncomingSave = \"2.4.5\"";
 	mappers::ConverterVersion version(input);
 
-	EXPECT_EQ("test description", version.getDescription());
+	ASSERT_EQ("Test Name", version.getName());
+	ASSERT_EQ("5.4-Test", version.getVersion());
+	ASSERT_EQ("test description", version.getDescription());
+	ASSERT_EQ(GameVersion(2, 4, 5, 0), version.getMinimalVersion());
 }

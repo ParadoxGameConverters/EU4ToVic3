@@ -6,7 +6,7 @@
 #include "ParserHelpers.h"
 #include <fstream>
 
-Configuration::Configuration()
+Configuration::Configuration(std::shared_ptr<mappers::ConverterVersion> theConverterVersion): converterVersion(std::move(theConverterVersion))
 {
 	Log(LogLevel::Info) << "Reading configuration file";
 	registerKeys();
@@ -45,10 +45,6 @@ void Configuration::registerKeys()
 	registerKeyword("Vic3directory", [this](std::istream& theStream) {
 		Vic3Path = commonItems::getString(theStream);
 		Log(LogLevel::Info) << "Vic2 path: " << Vic3Path;
-	});
-	registerKeyword("Vic2DocumentsDirectory", [this](std::istream& theStream) {
-		Vic3DocumentsPath = commonItems::getString(theStream);
-		Log(LogLevel::Info) << "Vic2 documents path: " << Vic3DocumentsPath;
 	});
 
 	// ------- options
@@ -112,10 +108,10 @@ void Configuration::verifyVic3Path()
 		throw std::runtime_error(Vic3Path + " does not exist!");
 	// TODO: OSX and Linux paths are speculative
 	// TODO: As a matter of fact...
-	if (!commonItems::DoesFileExist(Vic3Path + "/binaries/victoria3.exe") && !commonItems::DoesFileExist(Vic3Path + "/Vic3game") &&
+	if (!commonItems::DoesFileExist(Vic3Path + "/victoria2.exe") && !commonItems::DoesFileExist(Vic3Path + "/Vic3game") &&
 		 !commonItems::DoesFileExist(Vic3Path + "/binaries/victoria3"))
 		throw std::runtime_error(Vic3Path + " does not contain Victoria 3!");
-	if (!commonItems::DoesFileExist(Vic3Path + "/game/map_data/positions.txt"))
+	if (!commonItems::DoesFileExist(Vic3Path + "/map/positions.txt"))
 		throw std::runtime_error(Vic3Path + " does not appear to be a valid Vic3 install!");
 	Log(LogLevel::Info) << "\tVic3 install path is " << Vic3Path;
 	Vic3Path += "/game/"; // We're adding "/game/" since all we ever need from now on is in that subdirectory.

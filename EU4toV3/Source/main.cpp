@@ -9,8 +9,8 @@ int main(const int argc, const char* argv[])
 	{
 		std::ofstream clearLog("log.txt");
 		clearLog.close();
-		const mappers::ConverterVersion converterVersion;
-		LOG(LogLevel::Info) << converterVersion;
+		auto converterVersion = std::make_shared<mappers::ConverterVersion>();
+		LOG(LogLevel::Info) << *converterVersion;
 		if (argc >= 2)
 		{
 			LOG(LogLevel::Info) << "EU4toVic3 takes no parameters.";
