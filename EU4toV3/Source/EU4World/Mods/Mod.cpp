@@ -16,13 +16,6 @@ EU4::Mod::Mod(std::istream& theStream)
 	}
 }
 
-void EU4::Mod::overLoad(const std::string& filePath)
-{
-	registerKeys();
-	parseFile(filePath);
-	clearRegisteredKeywords();
-}
-
 void EU4::Mod::registerKeys()
 {
 	registerSetter("name", name);
