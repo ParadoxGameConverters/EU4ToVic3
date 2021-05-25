@@ -5,6 +5,7 @@
 #include "Mods/ModLoader.h"
 #include "Parser.h"
 #include "ConverterVersion/ConverterVersion.h"
+#include "RegionManager/RegionManager.h"
 
 namespace EU4
 {
@@ -41,6 +42,8 @@ class World: commonItems::parser
 
 	GameVersion version;
 	int eu4Seed = 0;
+
+	RegionManager regionManager;
 };
 } // namespace EU4
 
