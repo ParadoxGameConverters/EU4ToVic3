@@ -7,8 +7,8 @@
 namespace fs = std::filesystem;
 #include "Output/outModFile.h"
 
-V3::World::World(const Configuration& configuration, const EU4::World& sourceWorld, mappers::ConverterVersion&& ConverterVersion):
-	 V3Path(configuration.getVic3Path()), configBlock(configuration.configBlock), converterVersion(std::move(ConverterVersion)),
+V3::World::World(const Configuration& configuration, const EU4::World& sourceWorld, mappers::ConverterVersion&& theConverterVersion):
+	 V3Path(configuration.getVic3Path()), configBlock(configuration.configBlock), converterVersion(std::move(theConverterVersion)),
 	 outputName(configuration.getOutputName())
 {
 	Log(LogLevel::Progress) << "45 %";

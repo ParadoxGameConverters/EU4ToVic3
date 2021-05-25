@@ -6,8 +6,8 @@ TEST(EU4World_ModTests, primitivesDefaultToBlank)
 	std::stringstream input;
 	const EU4::ModParser theMod(input);
 
-	ASSERT_TRUE(theMod.getName().empty());
-	ASSERT_TRUE(theMod.getPath().empty());
+	EXPECT_TRUE(theMod.getName().empty());
+	EXPECT_TRUE(theMod.getPath().empty());
 }
 
 TEST(EU4World_ModTests, primitivesCanBeSet)
@@ -17,8 +17,8 @@ TEST(EU4World_ModTests, primitivesCanBeSet)
 	input << "path=modPath\n";
 
 	const EU4::ModParser theMod(input);
-	ASSERT_EQ("modName", theMod.getName());
-	ASSERT_EQ("modPath", theMod.getPath());
+	EXPECT_EQ("modName", theMod.getName());
+	EXPECT_EQ("modPath", theMod.getPath());
 }
 
 TEST(EU4World_ModTests, pathCanBeSetFromArchive)
@@ -27,24 +27,24 @@ TEST(EU4World_ModTests, pathCanBeSetFromArchive)
 	input << "archive=modPath\n";
 
 	const EU4::ModParser theMod(input);
-	ASSERT_EQ("modPath", theMod.getPath());
+	EXPECT_EQ("modPath", theMod.getPath());
 }
 
 TEST(EU4World_ModTests, modIsInvalidIfPathOrNameUnSet)
 {
 	std::stringstream input;
 	EU4::ModParser theMod(input);
-	ASSERT_FALSE(theMod.isValid());
+	EXPECT_FALSE(theMod.isValid());
 
 	std::stringstream input2;
 	input2 << "name=modName\n";
 	const EU4::ModParser theMod2(input2);
-	ASSERT_FALSE(theMod2.isValid());
+	EXPECT_FALSE(theMod2.isValid());
 
 	std::stringstream input3;
 	input3 << "path=modPath\n";
 	EU4::ModParser theMod3(input3);
-	ASSERT_FALSE(theMod3.isValid());
+	EXPECT_FALSE(theMod3.isValid());
 }
 
 TEST(EU4World_ModTests, modIsValidIfNameAndPathSet)
@@ -54,7 +54,7 @@ TEST(EU4World_ModTests, modIsValidIfNameAndPathSet)
 	input << "path=modPath\n";
 
 	const EU4::ModParser theMod(input);
-	ASSERT_TRUE(theMod.isValid());
+	EXPECT_TRUE(theMod.isValid());
 }
 
 TEST(EU4World_ModTests, modIsCompressedForZipAndBinPaths)
@@ -62,15 +62,15 @@ TEST(EU4World_ModTests, modIsCompressedForZipAndBinPaths)
 	std::stringstream input;
 	input << "path=modPath\n";
 	const EU4::ModParser theMod(input);
-	ASSERT_FALSE(theMod.isCompressed());
+	EXPECT_FALSE(theMod.isCompressed());
 
 	std::stringstream input2;
 	input2 << "path=modPath.zip\n";
 	const EU4::ModParser theMod2(input2);
-	ASSERT_TRUE(theMod2.isCompressed());
+	EXPECT_TRUE(theMod2.isCompressed());
 
 	std::stringstream input3;
 	input3 << "path=modPath.bin\n";
 	const EU4::ModParser theMod3(input3);
-	ASSERT_TRUE(theMod3.isCompressed());
+	EXPECT_TRUE(theMod3.isCompressed());
 }
