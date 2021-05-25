@@ -2,24 +2,25 @@
 #define WORLD_H
 #include "../EU4World/World.h"
 #include "Output/outConverterVersion.h"
-#include <memory>
-#include "Output/outModFile.h"
+#include "Configuration.h"
 
 namespace V3
 {
 class World
 {
   public:
-	World(const std::shared_ptr<Configuration>& configuration, const EU4::World& sourceWorld);
+	World(const Configuration& configuration, const EU4::World& sourceWorld, mappers::ConverterVersion&& ConverterVersion);
 
   private:
-
+	std::string V3Path;	
+	Configuration::ConfigBlock configBlock;
+	mappers::ConverterVersion converterVersion;
+	std::string outputName;
+	
 	//output
-	void createModFile(const std::string& outputName) const;
-	void output(const mappers::ConverterVersion& converterVersion, const std::string& outputName) const;
-	static void outputVersion(const mappers::ConverterVersion& converterVersion, const std::string& outputName);
-
-	ModFile modFile;
+	void createModFile() const;
+	void output() const;
+	void outputVersion() const;
 };
 
 } // namespace V3

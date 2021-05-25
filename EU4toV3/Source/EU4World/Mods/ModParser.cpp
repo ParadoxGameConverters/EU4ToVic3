@@ -1,9 +1,9 @@
-#include "Mod.h"
+#include "ModParser.h"
 #include "CommonFunctions.h"
 #include "CommonRegexes.h"
 #include "ParserHelpers.h"
 
-EU4::Mod::Mod(std::istream& theStream)
+EU4::ModParser::ModParser(std::istream& theStream)
 {
 	registerKeys();
 	parseStream(theStream);
@@ -16,7 +16,7 @@ EU4::Mod::Mod(std::istream& theStream)
 	}
 }
 
-void EU4::Mod::registerKeys()
+void EU4::ModParser::registerKeys()
 {
 	registerSetter("name", name);
 	registerRegex("path|archive", [this](const std::string& unused, std::istream& theStream) {

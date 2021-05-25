@@ -3,7 +3,6 @@
 #include "GameVersion.h"
 #include "Log.h"
 #include "Mods/ModNames.h"
-#include "Mods/Mods.h"
 #include "ParserHelpers.h"
 #include "rakaly_wrapper.h"
 #include <ZipFile.h>
@@ -14,25 +13,28 @@
 namespace fs = std::filesystem;
 #include "CommonRegexes.h"
 
-EU4::World::World(std::shared_ptr<Configuration> theConfiguration): configuration(std::move(theConfiguration))
+EU4::World::World(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion)
 {
 	Log(LogLevel::Info) << "*** Hello EU4, loading World. ***";
-	registerKeys();
+	EU4Path = theConfiguration.getEU4Path();
+	saveGame.path = theConfiguration.getEU4SaveGamePath();
+
+	registerKeys(theConfiguration, converterVersion);
 
 	Log(LogLevel::Progress) << "6 %";
 
 	Log(LogLevel::Info) << "-> Verifying EU4 save.";
-	verifySave(configuration->getEU4SaveGamePath());
+	verifySave();
 	Log(LogLevel::Progress) << "7 %";
 
 	Log(LogLevel::Info) << "-> Importing EU4 save.";
 	if (!saveGame.compressed)
 	{
-		std::ifstream inBinary(fs::u8path(configuration->getEU4SaveGamePath()), std::ios::binary);
+		std::ifstream inBinary(fs::u8path(saveGame.path), std::ios::binary);
 		if (!inBinary.is_open())
 		{
-			Log(LogLevel::Error) << "Could not open " << configuration->getEU4SaveGamePath() << " for parsing.";
-			throw std::runtime_error("Could not open " + configuration->getEU4SaveGamePath() + " for parsing.");
+			Log(LogLevel::Error) << "Could not open " << saveGame.path << " for parsing.";
+			throw std::runtime_error("Could not open " + saveGame.path + " for parsing.");
 		}
 		std::stringstream inStream;
 		inStream << inBinary.rdbuf();
@@ -103,15 +105,15 @@ EU4::World::World(std::shared_ptr<Configuration> theConfiguration): configuratio
 	Log(LogLevel::Progress) << "40 %";
 }
 
-void EU4::World::registerKeys()
+void EU4::World::registerKeys(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion)
 {
 	registerKeyword("EU4txt", [](std::istream& theStream) {
 	});
 	registerKeyword("date", [this](std::istream& theStream) {
-		configuration->setLastEU4Date(date(commonItems::getString(theStream)));
+		dating.lastEU4Date = date(commonItems::getString(theStream));
 	});
 	registerKeyword("start_date", [this](std::istream& theStream) {
-		configuration->setStartEU4Date(date(commonItems::getString(theStream)));
+		dating.startEU4Date = date(commonItems::getString(theStream));
 	});
 	registerRegex("(multiplayer_)?random_seed", [this](const std::string& unused, std::istream& theStream) {
 		auto theSeed = commonItems::getString(theStream);
@@ -119,23 +121,21 @@ void EU4::World::registerKeys()
 			theSeed = theSeed.substr(theSeed.size() - 5);
 		try
 		{
-			configuration->setEU4RandomSeed(std::stoi(theSeed));
+			eu4Seed = std::stoi(theSeed);
 		}
 		catch (std::exception& e)
 		{
 			Log(LogLevel::Error) << "Failed reading random_seed, setting 0: " << e.what();
-			configuration->setEU4RandomSeed(0);
+			eu4Seed = 0;
 		}
 	});
-	registerKeyword("savegame_version", [this](std::istream& theStream) {
-		version = std::make_unique<GameVersion>(theStream);
-		configuration->setEU4Version(*version);
-		Log(LogLevel::Info) << "Savegave version: " << *version;
-		if (*version < configuration->getConverterVersion()->getMinimalVersion())
-			throw std::runtime_error(
-				 "This converter was built for game version " + configuration->getConverterVersion()->getMinimalVersion().toShortString() + "!");
+	registerKeyword("savegame_version", [this, converterVersion](std::istream& theStream) {
+		version = GameVersion(theStream);
+		Log(LogLevel::Info) << "Savegave version: " << version;
+		if (version < converterVersion.getMinimalVersion())
+			throw std::runtime_error("This converter was built for game version " + converterVersion.getMinimalVersion().toShortString() + "!");
 	});
-	registerKeyword("mods_enabled_names", [this](std::istream& theStream) {
+	registerKeyword("mods_enabled_names", [this, theConfiguration](std::istream& theStream) {
 		Log(LogLevel::Info) << "-> Detecting used mods.";
 		const auto& modBlobs = commonItems::blobList(theStream);
 		Log(LogLevel::Info) << "<> Savegame claims " << modBlobs.getBlobs().size() << " mods used:";
@@ -147,11 +147,11 @@ void EU4::World::registerKeys()
 			modsList.emplace(modName.getName(), modName.getPath());
 			Log(LogLevel::Info) << "---> " << modName.getName() << ": " << modName.getPath();
 		}
-		configuration->setEU4Mods(modsList);
 
 		// Let's locate, verify and potentially update those mods immediately.
-		Mods mods;
-		mods.loadMods(*configuration);
+		ModLoader modLoader;
+		modLoader.loadMods(theConfiguration, modsList);
+		mods = modLoader.getMods();
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
@@ -165,9 +165,9 @@ void EU4::World::verifySaveContents()
 	}
 }
 
-void EU4::World::verifySave(const std::string& saveGamePath)
+void EU4::World::verifySave()
 {
-	std::ifstream saveFile(fs::u8path(saveGamePath));
+	std::ifstream saveFile(fs::u8path(saveGame.path));
 	if (!saveFile.is_open())
 		throw std::runtime_error("Could not open save! Exiting!");
 
@@ -175,20 +175,20 @@ void EU4::World::verifySave(const std::string& saveGamePath)
 	saveFile.get(buffer, 3);
 	if (buffer[0] == 'P' && buffer[1] == 'K')
 	{
-		if (!uncompressSave(saveGamePath))
+		if (!uncompressSave())
 			throw std::runtime_error("Failed to unpack the compressed save!");
 	}
 	saveFile.close();
 }
 
-bool EU4::World::uncompressSave(const std::string& saveGamePath)
+bool EU4::World::uncompressSave()
 {
-	auto saveFile = ZipFile::Open(saveGamePath);
+	auto saveFile = ZipFile::Open(saveGame.path);
 	if (!saveFile)
 		return false;
 	for (size_t entryNum = 0; entryNum < saveFile->GetEntriesCount(); ++entryNum)
 	{
-		const auto& entry = saveFile->GetEntry(static_cast<int>(entryNum));		
+		const auto& entry = saveFile->GetEntry(static_cast<int>(entryNum));
 		if (const auto& name = entry->GetName(); name == "meta")
 		{
 			Log(LogLevel::Info) << ">> Uncompressing metadata";

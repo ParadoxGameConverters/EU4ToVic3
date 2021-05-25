@@ -2,14 +2,14 @@
 #include "CommonRegexes.h"
 #include "ParserHelpers.h"
 
-mappers::ConverterVersion::ConverterVersion()
+void mappers::ConverterVersion::loadVersion(const std::string& filePath)
 {
 	registerKeys();
-	parseFile("configurables/version.txt");
+	parseFile(filePath);
 	clearRegisteredKeywords();
 }
 
-mappers::ConverterVersion::ConverterVersion(std::istream& theStream)
+void mappers::ConverterVersion::loadVersion(std::istream& theStream)
 {
 	registerKeys();
 	parseStream(theStream);

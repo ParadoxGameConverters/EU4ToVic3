@@ -1,13 +1,13 @@
-#ifndef EU4_MOD_H
-#define EU4_MOD_H
+#ifndef EU4_MODPARSER_H
+#define EU4_MODPARSER_H
 #include "ConvenientParser.h"
 
 namespace EU4
 {
-class Mod: commonItems::convenientParser
+class ModParser: commonItems::convenientParser
 {
   public:
-	explicit Mod(std::istream& theStream);
+	explicit ModParser(std::istream& theStream);
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getPath() const { return path; }
@@ -25,4 +25,4 @@ class Mod: commonItems::convenientParser
 };
 } // namespace EU4
 
-#endif // EU4_MOD_H
+#endif // EU4_MODPARSER_H

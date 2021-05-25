@@ -1,8 +1,8 @@
-#include "Mods.h"
+#include "ModLoader.h"
 #include "CommonFunctions.h"
 #include "Configuration.h"
 #include "Log.h"
-#include "Mod.h"
+#include "ModParser.h"
 #include "OSCompatibilityLayer.h"
 #include <ZipFile.h>
 #include <filesystem>
@@ -13,9 +13,9 @@
 #include <string>
 namespace fs = std::filesystem;
 
-void EU4::Mods::loadMods(Configuration& configuration)
+void EU4::ModLoader::loadMods(const Configuration& configuration, const Mods& incomingMods)
 {
-	if (configuration.getEU4Mods().empty())
+	if (incomingMods.empty())
 	{
 		// We shouldn't even be here if the save didn't have mods! Why were Mods called?
 		Log(LogLevel::Info) << "No mods were detected in savegame. Skipping mod processing.";
@@ -27,7 +27,7 @@ void EU4::Mods::loadMods(Configuration& configuration)
 	// with a map of updated mod names (savegame can differ from actual mod file) and mod folder locations.
 
 	// This function reads all the incoming mod files and verify their internal paths/archives are correct and point to something present on disk.
-	loadEU4ModDirectory(configuration);
+	loadEU4ModDirectory(configuration, incomingMods);
 
 	Log(LogLevel::Info) << "\tDetermining Mod Usability";
 	auto allMods = possibleMods;
@@ -53,12 +53,9 @@ void EU4::Mods::loadMods(Configuration& configuration)
 										  << ". Check that the mod is present and that the .mod file specifies the path for the mod";
 		}
 	}
-
-	// And update configuration with the curated mod list.
-	configuration.setEU4Mods(usableMods);
 }
 
-void EU4::Mods::loadEU4ModDirectory(const Configuration& configuration)
+void EU4::ModLoader::loadEU4ModDirectory(const Configuration& configuration, const Mods& incomingMods)
 {
 	const auto& EU4ModsPath = configuration.getEU4DocumentsPath() + "/mod";
 	if (!commonItems::DoesFolderExist(EU4ModsPath))
@@ -67,7 +64,7 @@ void EU4::Mods::loadEU4ModDirectory(const Configuration& configuration)
 	Log(LogLevel::Info) << "\tEU4 mods directory is " << EU4ModsPath;
 
 	const auto diskModNames = commonItems::GetAllFilesInFolder(EU4ModsPath);
-	for (const auto& [usedModName, usedModFilePath]: configuration.getEU4Mods())
+	for (const auto& [usedModName, usedModFilePath]: incomingMods)
 	{
 		const auto trimmedModFileName = trimPath(usedModFilePath);
 		if (!diskModNames.contains(trimmedModFileName))
@@ -81,52 +78,51 @@ void EU4::Mods::loadEU4ModDirectory(const Configuration& configuration)
 		try
 		{
 			std::ifstream modFile(fs::u8path(EU4ModsPath + "/" + trimmedModFileName));
-			Mod theMod(modFile);
+			ModParser theMod(modFile);
 			modFile.close();
 
-			if (theMod.isValid())
+			if (!theMod.isValid())
 			{
-				if (!theMod.isCompressed())
-				{
-					if (!commonItems::DoesFolderExist(theMod.getPath()))
-					{
-						// Maybe we have a relative path
-						if (commonItems::DoesFolderExist(configuration.getEU4DocumentsPath() + "/" + theMod.getPath()))
-						{
-							// fix this.
-							theMod.setPath(configuration.getEU4DocumentsPath() + "/" + theMod.getPath());
-						}
-						else
-						{
-							Log(LogLevel::Warning) << "\t\tMod " << usedModName
-														  << " at " + usedModFilePath + " points to " + theMod.getPath() +
-																	" which does not exist! Skipping at your risk, but this can greatly affect conversion.";
-							continue;
-						}
-					}
+				Log(LogLevel::Warning) << "\t\tMod at " << EU4ModsPath + "/" + trimmedModFileName << " does not look valid.";
+				continue;
+			}
 
-					possibleMods.insert(std::make_pair(theMod.getName(), theMod.getPath()));
-					Log(LogLevel::Info) << "\t\tFound potential mod named " << theMod.getName() << " with a mod file at " << EU4ModsPath + "/" + trimmedModFileName
-											  << " and itself at " << theMod.getPath();
-				}
-				else
+			if (!theMod.isCompressed())
+			{
+				if (!commonItems::DoesFolderExist(theMod.getPath()))
 				{
-					if (!commonItems::DoesFileExist(theMod.getPath()))
+					// Maybe we have a relative path
+					if (commonItems::DoesFolderExist(configuration.getEU4DocumentsPath() + "/" + theMod.getPath()))
+					{
+						// fix this.
+						theMod.setPath(configuration.getEU4DocumentsPath() + "/" + theMod.getPath());
+					}
+					else
 					{
 						Log(LogLevel::Warning) << "\t\tMod " << usedModName
 													  << " at " + usedModFilePath + " points to " + theMod.getPath() +
 																" which does not exist! Skipping at your risk, but this can greatly affect conversion.";
 						continue;
 					}
-
-					possibleCompressedMods.insert(std::make_pair(theMod.getName(), theMod.getPath()));
-					Log(LogLevel::Info) << "\t\tFound a compressed mod named " << theMod.getName() << " with a mod file at " << EU4ModsPath << "/"
-											  << trimmedModFileName << " and itself at " << theMod.getPath();
 				}
+
+				possibleMods.insert(std::make_pair(theMod.getName(), theMod.getPath()));
+				Log(LogLevel::Info) << "\t\tFound potential mod named " << theMod.getName() << " with a mod file at " << EU4ModsPath + "/" + trimmedModFileName
+										  << " and itself at " << theMod.getPath();
 			}
 			else
 			{
-				Log(LogLevel::Warning) << "\t\tMod at " << EU4ModsPath + "/" + trimmedModFileName << " does not look valid.";
+				if (!commonItems::DoesFileExist(theMod.getPath()))
+				{
+					Log(LogLevel::Warning) << "\t\tMod " << usedModName
+												  << " at " + usedModFilePath + " points to " + theMod.getPath() +
+															" which does not exist! Skipping at your risk, but this can greatly affect conversion.";
+					continue;
+				}
+
+				possibleCompressedMods.insert(std::make_pair(theMod.getName(), theMod.getPath()));
+				Log(LogLevel::Info) << "\t\tFound a compressed mod named " << theMod.getName() << " with a mod file at " << EU4ModsPath << "/"
+										  << trimmedModFileName << " and itself at " << theMod.getPath();
 			}
 		}
 		catch (std::exception&)
@@ -136,7 +132,7 @@ void EU4::Mods::loadEU4ModDirectory(const Configuration& configuration)
 	}
 }
 
-std::optional<std::string> EU4::Mods::getModPath(const std::string& modName) const
+std::optional<std::string> EU4::ModLoader::getModPath(const std::string& modName) const
 {
 	if (const auto& mod = possibleMods.find(modName); mod != possibleMods.end())
 	{
@@ -172,7 +168,7 @@ std::optional<std::string> EU4::Mods::getModPath(const std::string& modName) con
 	return std::nullopt;
 }
 
-bool EU4::Mods::extractZip(const std::string& archive, const std::string& path) const
+bool EU4::ModLoader::extractZip(const std::string& archive, const std::string& path) const
 {
 	commonItems::TryCreateFolder(path);
 	auto modFile = ZipFile::Open(archive);

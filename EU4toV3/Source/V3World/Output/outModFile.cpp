@@ -1,9 +1,9 @@
 #include "outModFile.h"
 
-std::ostream& V3::operator<<(std::ostream& output, const ModFile& modFile)
+std::ostream& V3::outModFile(std::ostream& output, const std::string& outName)
 {
-	output << "name = \"Converted - " << modFile.outname << "\"\n";
-	output << "path = \"mod/" << modFile.outname << "\"\n";
+	output << "name = \"Converted - " << outName << "\"\n";
+	output << "path = \"mod/" << outName << "\"\n";
 	output << "supported_version = \"1.0.*\"\n";
 	output << "replace_path = \"history/countries/\"\n";
 	output << "replace_path = \"history/provinces/\"\n";

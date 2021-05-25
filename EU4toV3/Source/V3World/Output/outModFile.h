@@ -4,14 +4,8 @@
 
 namespace V3
 {
-class ModFile
-{
-  public:
-	std::string outname;
+std::ostream& outModFile(std::ostream& output, const std::string& outName);
 
-	friend std::ostream& operator<<(std::ostream& output, const ModFile& modFile);
-};
-std::ostream& operator<<(std::ostream& output, const ModFile& modFile);
 } // namespace V3
 
 #endif // OUTPUT_H

@@ -1,14 +1,15 @@
 #include "V3World.h"
 #include "../EU4World/World.h"
-#include "Configuration.h"
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
 #include <filesystem>
 #include <fstream>
 namespace fs = std::filesystem;
+#include "Output/outModFile.h"
 
-
-V3::World::World(const std::shared_ptr<Configuration>& configuration, const EU4::World& sourceWorld)
+V3::World::World(const Configuration& configuration, const EU4::World& sourceWorld, mappers::ConverterVersion&& ConverterVersion):
+	 V3Path(configuration.getVic3Path()), configBlock(configuration.configBlock), converterVersion(std::move(ConverterVersion)),
+	 outputName(configuration.getOutputName())
 {
 	Log(LogLevel::Progress) << "45 %";
 
@@ -90,16 +91,15 @@ V3::World::World(const std::shared_ptr<Configuration>& configuration, const EU4:
 	Log(LogLevel::Progress) << "71 %";
 
 	Log(LogLevel::Info) << "---> Le Dump <---";
-	modFile.outname = configuration->getOutputName();
-	output(*configuration->getConverterVersion(), configuration->getOutputName());
+	output();
 
 	Log(LogLevel::Info) << "*** Goodbye, Vicky 3, and godspeed. ***";
 }
 
-void V3::World::output(const mappers::ConverterVersion& converterVersion, const std::string& outputName) const
+void V3::World::output() const
 {
 	commonItems::TryCreateFolder("output");
-	
+
 	// Delete broken remnants if any
 	if (commonItems::DoesFolderExist("output/output"))
 		commonItems::DeleteFolder("output/output");
@@ -121,12 +121,12 @@ void V3::World::output(const mappers::ConverterVersion& converterVersion, const 
 	Log(LogLevel::Progress) << "82 %";
 
 	Log(LogLevel::Info) << "<- Crafting .mod File";
-	createModFile(outputName);
+	createModFile();
 	Log(LogLevel::Progress) << "83 %";
 
 	// Record converter version
 	Log(LogLevel::Info) << "<- Writing version";
-	outputVersion(converterVersion, outputName);
+	outputVersion();
 	Log(LogLevel::Progress) << "84 %";
 
 	// Update bookmark starting dates
@@ -181,7 +181,7 @@ void V3::World::output(const mappers::ConverterVersion& converterVersion, const 
 	Log(LogLevel::Info) << "-> Verifying All Countries Written";
 }
 
-void V3::World::outputVersion(const mappers::ConverterVersion& converterVersion, const std::string& outputName)
+void V3::World::outputVersion() const
 {
 	std::ofstream output("output/" + outputName + "/eu4tov3_version.txt");
 	if (!output.is_open())
@@ -190,21 +190,21 @@ void V3::World::outputVersion(const mappers::ConverterVersion& converterVersion,
 	output.close();
 }
 
-void V3::World::createModFile(const std::string& outputName) const
+void V3::World::createModFile() const
 {
 	std::ofstream output("output/" + outputName + ".mod");
 	if (!output.is_open())
 		throw std::runtime_error("Could not create " + outputName + ".mod");
 	Log(LogLevel::Info) << "<< Writing to: "
 							  << "output/" + outputName + ".mod";
-	output << modFile;
+	outModFile(output, outputName);
 	output.close();
 
-	std::ofstream output2("output/" + outputName + "/descriptor.mod");
-	if (!output2.is_open())
+	output.open("output/" + outputName + "/descriptor.mod");
+	if (!output.is_open())
 		throw std::runtime_error("Could not create " + outputName + "/descriptor.mod");
 	Log(LogLevel::Info) << "<< Writing to: "
 							  << "output/" + outputName + "/descriptor.mod";
-	output2 << modFile;
-	output2.close();
+	outModFile(output, outputName);
+	output.close();
 }

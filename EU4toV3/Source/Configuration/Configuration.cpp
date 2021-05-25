@@ -6,7 +6,7 @@
 #include "ParserHelpers.h"
 #include <fstream>
 
-Configuration::Configuration(std::shared_ptr<mappers::ConverterVersion> theConverterVersion): converterVersion(std::move(theConverterVersion))
+Configuration::Configuration()
 {
 	Log(LogLevel::Info) << "Reading configuration file";
 	registerKeys();
@@ -51,37 +51,37 @@ void Configuration::registerKeys()
 
 	registerKeyword("max_literacy", [this](std::istream& theStream) {
 		const auto maxLiteracyString = commonItems::getString(theStream);
-		MaxLiteracy = static_cast<double>(std::stoi(maxLiteracyString)) / 100;
-		Log(LogLevel::Info) << "Max Literacy: " << MaxLiteracy;
+		configBlock.MaxLiteracy = static_cast<double>(std::stoi(maxLiteracyString)) / 100;
+		Log(LogLevel::Info) << "Max Literacy: " << configBlock.MaxLiteracy;
 	});
 	registerKeyword("remove_type", [this](std::istream& theStream) {
 		const auto removeTypeString = commonItems::getString(theStream);
-		removeType = static_cast<DEADCORES>(std::stoi(removeTypeString));
+		configBlock.removeType = static_cast<DEADCORES>(std::stoi(removeTypeString));
 		Log(LogLevel::Info) << "Core Removal: " << removeTypeString;
 	});
 	registerKeyword("pop_shaping", [this](std::istream& theStream) {
 		const auto popShapingString = commonItems::getString(theStream);
-		popShaping = static_cast<POPSHAPES>(std::stoi(popShapingString));
+		configBlock.popShaping = static_cast<POPSHAPES>(std::stoi(popShapingString));
 		Log(LogLevel::Info) << "Pop Shaping: " << popShapingString;
 	});
 	registerKeyword("core_handling", [this](std::istream& theStream) {
 		const auto coreHandlingString = commonItems::getString(theStream);
-		coreHandling = static_cast<COREHANDLES>(std::stoi(coreHandlingString));
+		configBlock.coreHandling = static_cast<COREHANDLES>(std::stoi(coreHandlingString));
 		Log(LogLevel::Info) << "Core Handling: " << coreHandlingString;
 	});
 	registerKeyword("pop_shaping_factor", [this](std::istream& theStream) {
 		const auto popShapingFactorString = commonItems::getString(theStream);
-		popShapingFactor = static_cast<double>(std::stoi(popShapingFactorString));
-		Log(LogLevel::Info) << "Pop Shaping Factor: " << popShapingFactor;
+		configBlock.popShapingFactor = static_cast<double>(std::stoi(popShapingFactorString));
+		Log(LogLevel::Info) << "Pop Shaping Factor: " << configBlock.popShapingFactor;
 	});
 	registerKeyword("euro_centrism", [this](std::istream& theStream) {
 		const auto euroCentrismString = commonItems::getString(theStream);
-		euroCentric = static_cast<EUROCENTRISM>(std::stoi(euroCentrismString));
+		configBlock.euroCentric = static_cast<EUROCENTRISM>(std::stoi(euroCentrismString));
 		Log(LogLevel::Info) << "Eurocentrism: " << euroCentrismString;
 	});
 	registerKeyword("convert_all", [this](std::istream& theStream) {
 		const auto convertAllString = commonItems::getString(theStream);
-		convertAll = convertAllString == "yes";
+		configBlock.convertAll = convertAllString == "yes";
 		Log(LogLevel::Info) << "Convert All: " << convertAllString;
 	});
 	registerKeyword("output_name", [this](std::istream& theStream) {

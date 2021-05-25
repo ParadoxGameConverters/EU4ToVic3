@@ -7,9 +7,11 @@ namespace mappers
 {
 class ConverterVersion: commonItems::convenientParser
 {
-  public:
-	ConverterVersion();
-	explicit ConverterVersion(std::istream& theStream);
+  public:	
+	ConverterVersion() = default;
+	
+	void loadVersion(const std::string& filePath);
+	void loadVersion(std::istream& theStream);
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getVersion() const { return version; }
