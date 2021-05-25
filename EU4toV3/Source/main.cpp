@@ -9,20 +9,23 @@ int main(const int argc, const char* argv[])
 	{
 		std::ofstream clearLog("log.txt");
 		clearLog.close();
-		const mappers::ConverterVersion converterVersion;
-		LOG(LogLevel::Info) << converterVersion;
+		
+		mappers::ConverterVersion converterVersion;
+		converterVersion.loadVersion("configurables/version.txt");
+		
+		Log(LogLevel::Info) << converterVersion;
 		if (argc >= 2)
 		{
-			LOG(LogLevel::Info) << "EU4toVic3 takes no parameters.";
-			LOG(LogLevel::Info) << "It uses configuration.txt, configured manually or by the frontend.";
+			Log(LogLevel::Info) << "EU4toVic3 takes no parameters.";
+			Log(LogLevel::Info) << "It uses configuration.txt, configured manually or by the frontend.";
 		}
-		convertEU4ToVic3(converterVersion);
+		convertEU4ToVic3(std::move(converterVersion));
 		return 0;
 	}
 
 	catch (const std::exception& e)
 	{
-		LOG(LogLevel::Error) << e.what();
+		Log(LogLevel::Error) << e.what();
 		return -1;
 	}
 }

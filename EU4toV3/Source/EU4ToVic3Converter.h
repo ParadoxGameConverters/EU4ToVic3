@@ -5,6 +5,6 @@ namespace mappers {
 	class ConverterVersion;
 }
 
-void convertEU4ToVic3(const mappers::ConverterVersion& converterVersion);
+void convertEU4ToVic3(mappers::ConverterVersion&& converterVersion);
 
 #endif // EU4TOVIC3_CONVERTER_H

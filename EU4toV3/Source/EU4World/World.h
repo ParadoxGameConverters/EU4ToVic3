@@ -2,33 +2,45 @@
 #define EU4_WORLD_H
 #include "Configuration.h"
 #include "GameVersion.h"
+#include "Mods/ModLoader.h"
 #include "Parser.h"
-#include <memory>
+#include "ConverterVersion/ConverterVersion.h"
 
 namespace EU4
 {
+
 class World: commonItems::parser
 {
   public:
-	World(const std::shared_ptr<Configuration>& theConfiguration);
+	World(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion);
 
   private:
-	void registerKeys(const std::shared_ptr<Configuration>& theConfiguration);
+	void registerKeys(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion);
 
-	void verifySave(const std::string& saveGamePath);
+	void verifySave();
 	void verifySaveContents();
-	bool uncompressSave(const std::string& saveGamePath);
+	bool uncompressSave();
 
 	struct saveData
 	{
 		bool compressed = false;
 		std::string metadata;
 		std::string gamestate;
-	};
-	saveData saveGame;
+		std::string path;
+	} saveGame;
 
-	std::unique_ptr<GameVersion> version;
+	std::string EU4Path;
+	Mods mods;
 
+	struct DatingData
+	{
+		date firstEU4Date; // first date we see in the save, usually predates startDate
+		date startEU4Date; // savegame saved date - conversion date
+		date lastEU4Date;	 // last date we see in the save, used to stop conversions
+	} dating;
+
+	GameVersion version;
+	int eu4Seed = 0;
 };
 } // namespace EU4
 

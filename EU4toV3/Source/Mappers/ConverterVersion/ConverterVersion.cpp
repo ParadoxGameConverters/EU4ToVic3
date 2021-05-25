@@ -1,14 +1,15 @@
 #include "ConverterVersion.h"
+#include "CommonRegexes.h"
 #include "ParserHelpers.h"
 
-mappers::ConverterVersion::ConverterVersion()
+void mappers::ConverterVersion::loadVersion(const std::string& filePath)
 {
 	registerKeys();
-	parseFile("configurables/version.txt");
+	parseFile(filePath);
 	clearRegisteredKeywords();
 }
 
-mappers::ConverterVersion::ConverterVersion(std::istream& theStream)
+void mappers::ConverterVersion::loadVersion(std::istream& theStream)
 {
 	registerKeys();
 	parseStream(theStream);
@@ -17,20 +18,11 @@ mappers::ConverterVersion::ConverterVersion(std::istream& theStream)
 
 void mappers::ConverterVersion::registerKeys()
 {
-	registerKeyword("name", [this](const std::string& unused, std::istream& theStream) 
-		{
-			const commonItems::singleString nameStr(theStream);
-			name = nameStr.getString();
-		});
-	registerKeyword("version", [this](const std::string& unused, std::istream& theStream)
-		{
-			const commonItems::singleString versionStr(theStream);
-			version = versionStr.getString();
-		});
-	registerKeyword("descriptionLine", [this](const std::string& unused, std::istream& theStream)
-		{
-			const commonItems::singleString descriptionLineStr(theStream);
-			descriptionLine = descriptionLineStr.getString();
-		});
-	registerRegex("[a-zA-Z0-9\\_.:]+", commonItems::ignoreItem);
+	registerSetter("name", name);
+	registerSetter("version", version);
+	registerSetter("descriptionLine", descriptionLine);
+	registerKeyword("minimalIncomingSave", [this](std::istream& theStream) {
+		minimalIncomingVersion = GameVersion(commonItems::getString(theStream));
+	});
+	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

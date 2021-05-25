@@ -1,29 +1,28 @@
 #ifndef WORLD_H
 #define WORLD_H
 #include "../EU4World/World.h"
+#include "Configuration.h"
 #include "Output/outConverterVersion.h"
-#include <memory>
 
-namespace mappers
-{
-class ConverterVersion;
-class TechGroupsMapper;
-} // namespace mappers
-
-namespace V2
+namespace V3
 {
 class World
 {
   public:
-	World(const std::shared_ptr<Configuration>& theConfiguration, const EU4::World& sourceWorld, const mappers::ConverterVersion& converterVersion);
+	World(const Configuration& configuration, const EU4::World& sourceWorld, mappers::ConverterVersion&& theConverterVersion);
 
   private:
+	std::string V3Path;
+	Configuration::ConfigBlock configBlock;
+	mappers::ConverterVersion converterVersion;
+	std::string outputName;
 
-	void output(const mappers::ConverterVersion& converterVersion, const std::string& outputName) const;
-	static void outputVersion(const mappers::ConverterVersion& converterVersion, const std::string& outputName);
-
+	// output
+	void createModFile() const;
+	void output() const;
+	void outputVersion() const;
 };
 
-} // namespace V2
+} // namespace V3
 
 #endif // WORLD_H

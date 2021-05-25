@@ -1,8 +1,8 @@
-name = EU4ToVic2
-converterFolder = EU4ToVic2
+name = EU4ToVic3
+converterFolder = EU4ToVic3
 displayName = EU4DISPLAYNAME
 sourceGame = EU4GAME
-targetGame = VIC2GAME
+targetGame = VIC3GAME
 
 requiredFolder = {
 	name = EU4directory
@@ -21,45 +21,20 @@ requiredFolder = {
 	searchPath = "Paradox Interactive\Europa Universalis IV"
 }
 requiredFolder = {
-	name = CK2ExportDirectory
-	displayName = CK2EXP
-	tooltip = CK2EXPTIP
-	mandatory = false
-	searchPathType = windowsUsersFolder
-	searchPath = "Paradox Interactive\Crusader Kings II\eu4_export"
-}
-requiredFolder = {
-	name = SteamWorkshopDirectory
-	displayName = EU4MOD
-	tooltip = EU4MODTIP
-	mandatory = true
-	searchPathType = direct
-	searchPath = "C:\Program Files (x86)\Steam\SteamApps\workshop\content\236850"
-}
-requiredFolder = {
-	name = Vic2directory
-	displayName = VIC2FOLDER
-	tooltip = VIC2FOLDERTIP
+	name = Vic3directory
+	displayName = VIC3FOLDER
+	tooltip = VIC3FOLDERTIP
 	mandatory = true
 	searchPathType = steamFolder
 	searchPathID = 42960
-}
-requiredFolder = {
-	name = Vic2Documentsdirectory
-	displayName = VIC2DOC
-	tooltip = VIC2DOCTIP
-	mandatory = true
-	searchPathType = windowsUsersFolder
-	searchPath = "Paradox Interactive\Victoria II"
 }
 requiredFolder = {
 	name = targetGameModPath
-	displayName = VIC2MOD
-	tooltip = VIC2MODTIP
+	displayName = VIC3MOD
+	tooltip = VIC3MODTIP
 	mandatory = true
-	searchPathType = steamFolder
-	searchPathID = 42960
-	searchPath = "mod"
+	searchPathType = windowsUsersFolder
+	searchPath = "Paradox Interactive\Victoria II\mod"
 }
 requiredFile = {
 	name = converterExe
@@ -68,9 +43,9 @@ requiredFile = {
 	mandatory = true
 	outputtable = false
 	searchPathType = converterFolder
-	searchPath = "EU4toVic2"
+	searchPath = "EU4ToVic3"
 	allowedExtension = "*.exe"
-	fileName = "EU4ToVic2Converter.exe"
+	fileName = "EU4ToVic3Converter.exe"
 }
 requiredFile = {
 	name = SaveGame
