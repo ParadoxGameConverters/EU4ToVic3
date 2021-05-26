@@ -43,7 +43,7 @@ void EU4::CultureLoader::registerKeys()
 		}
 		else
 		{
-			cultureGroupsMap.insert(std::make_pair(cultureGroupName, newGroup));
+			cultureGroupsMap.emplace(cultureGroupName, newGroup);
 		}
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);

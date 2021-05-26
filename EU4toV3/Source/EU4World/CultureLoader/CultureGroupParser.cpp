@@ -38,7 +38,7 @@ void EU4::CultureGroupParser::registerKeys()
 	});
 	registerRegex(R"([\w_]+)", [this](std::string cultureName, std::istream& theStream) {
 		auto newCulture = CultureParser(theStream);
-		cultures.insert(std::make_pair(cultureName, newCulture));
+		cultures.emplace(cultureName, newCulture);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
