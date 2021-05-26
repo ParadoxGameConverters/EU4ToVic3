@@ -157,7 +157,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>../commonItems;../googletest/googletest;../googletest/googletest/include;../googletest/googlemock;../googletest/googlemock/include;../EU4toV3/Source;../EU4toV3/Source/EU4World;../EU4toV3/Source/Mappers;../EU4toV3/Source/V3World</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../commonItems;../googletest/googletest;../googletest/googletest/include;../googletest/googlemock;../googletest/googlemock/include;../EU4toV3/Source;../EU4toV3/Source/EU4World;../EU4toV3/Source/Mappers;../EU4toV3/Source/V3World;../EU4toV3/Source/Configuration</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX20_U8PATH_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -181,23 +181,34 @@
     <ClCompile Include="..\commonItems\ParserHelpers.cpp" />
     <ClCompile Include="..\commonItems\StringUtils.cpp" />
     <ClCompile Include="..\commonItems\WinUtils.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Configuration\Configuration.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CultureLoader\CultureGroupParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CultureLoader\CultureLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CultureLoader\CultureParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\Mods\ModNames.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\Mods\ModParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\Area.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\Region.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\RegionManager.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\SuperRegion.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\ReligionLoader\ReligionLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\ReligionLoader\ReligionParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ConverterVersion\ConverterVersion.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Output\outConverterVersion.cpp" />
     <ClCompile Include="..\googletest\googlemock\src\gmock-all.cc" />
     <ClCompile Include="..\googletest\googletest\src\gtest-all.cc" />
     <ClCompile Include="..\googletest\googletest\src\gtest_main.cc" />
+    <ClCompile Include="EU4WorldTests\CultureLoaderTests\CultureLoaderTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CultureLoaderTests\CultureGroupParserTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CultureLoaderTests\CultureParserTests.cpp" />
     <ClCompile Include="EU4WorldTests\ModTests\ModNamesTests.cpp" />
     <ClCompile Include="EU4WorldTests\ModTests\ModParserTests.cpp" />
     <ClCompile Include="EU4WorldTests\RegionManagerTests\AreaTests.cpp" />
     <ClCompile Include="EU4WorldTests\RegionManagerTests\RegionManagerTests.cpp" />
     <ClCompile Include="EU4WorldTests\RegionManagerTests\RegionTests.cpp" />
     <ClCompile Include="EU4WorldTests\RegionManagerTests\SuperRegionTests.cpp" />
+    <ClCompile Include="EU4WorldTests\ReligionLoaderTests\ReligionParserTests.cpp" />
+    <ClCompile Include="EU4WorldTests\ReligionLoaderTests\ReligionLoaderTests.cpp" />
     <ClCompile Include="MapperTests\ConverterVersion\ConverterVersionTests.cpp" />
   </ItemGroup>
   <ItemGroup>

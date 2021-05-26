@@ -6,6 +6,8 @@
 #include "Parser.h"
 #include "ConverterVersion/ConverterVersion.h"
 #include "RegionManager/RegionManager.h"
+#include "ReligionLoader/ReligionLoader.h"
+#include "CultureLoader/CultureLoader.h"
 
 namespace EU4
 {
@@ -44,6 +46,8 @@ class World: commonItems::parser
 	int eu4Seed = 0;
 
 	RegionManager regionManager;
+	ReligionLoader religionLoader;
+	CultureLoader cultureLoader;
 };
 } // namespace EU4
 
