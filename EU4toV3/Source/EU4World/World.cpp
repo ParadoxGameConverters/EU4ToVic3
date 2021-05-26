@@ -19,10 +19,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	EU4Path = theConfiguration.getEU4Path();
 	saveGame.path = theConfiguration.getEU4SaveGamePath();
 
-	registerKeys(theConfiguration, converterVersion);
-
 	Log(LogLevel::Progress) << "6 %";
-
 	Log(LogLevel::Info) << "-> Verifying EU4 save.";
 	verifySave();
 	Log(LogLevel::Progress) << "7 %";
@@ -47,13 +44,13 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 
 	auto metaData = std::istringstream(saveGame.metadata);
 	auto gameState = std::istringstream(saveGame.gamestate);
+	registerKeys(theConfiguration, converterVersion);
 	parseStream(metaData);
 	parseStream(gameState);
+	clearRegisteredKeywords();
 	Log(LogLevel::Progress) << "15 %";
 
-	clearRegisteredKeywords();
 	// With mods loaded we can init stuff that requires them.
-
 	Log(LogLevel::Progress) << "16 %";
 
 	Log(LogLevel::Info) << "*** Building world ***";
@@ -67,6 +64,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Progress) << "19 %";
 
 	Log(LogLevel::Info) << "-> Loading Regions";
+	regionManager.loadRegions(EU4Path);
 	Log(LogLevel::Progress) << "21 %";
 
 	Log(LogLevel::Info) << "-> Determining Demographics";
