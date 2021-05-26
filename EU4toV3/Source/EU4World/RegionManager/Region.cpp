@@ -13,7 +13,7 @@ EU4::Region::Region(std::istream& theStream)
 void EU4::Region::registerKeys()
 {
 	registerKeyword("areas", [this](std::istream& theStream) {
-		for (const auto& name: commonItems::stringList(theStream).getStrings())
+		for (const auto& name: commonItems::getStrings(theStream))
 			areas.emplace(name, nullptr);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);

@@ -17,6 +17,7 @@ TEST(Mappers_SuperRegionTests, RegionsCanBeLoaded)
 	const EU4::SuperRegion superRegion(input);
 
 	EXPECT_TRUE(superRegion.getRegions().contains("region1"));
+	EXPECT_TRUE(superRegion.getRegions().contains("region2"));
 }
 
 TEST(Mappers_SuperRegionTests, superRegionCanBeLinkedToRegion)

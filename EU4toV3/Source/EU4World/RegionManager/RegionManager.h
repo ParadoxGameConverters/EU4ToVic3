@@ -31,6 +31,6 @@ class RegionManager: commonItems::parser
 	std::map<std::string, std::shared_ptr<Region>> regions;
 	std::map<std::string, std::shared_ptr<SuperRegion>> superRegions;
 };
-} // namespace mappers
+} // namespace EU4
 
 #endif // EU4_REGIONMANAGER_H

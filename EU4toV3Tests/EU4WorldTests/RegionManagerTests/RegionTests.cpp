@@ -17,7 +17,6 @@ TEST(Mappers_RegionTests, areaCanBeLoaded)
 	input << "areas = { test_area } \n";
 	const EU4::Region region(input);
 
-	EXPECT_FALSE(region.getAreas().empty());
 	EXPECT_TRUE(region.getAreas().contains("test_area"));
 }
 

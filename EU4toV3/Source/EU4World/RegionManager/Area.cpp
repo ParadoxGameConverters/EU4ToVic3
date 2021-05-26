@@ -1,6 +1,7 @@
 #include "Area.h"
 #include "Log.h"
 #include "ParserHelpers.h"
+#include "CommonRegexes.h"
 
 EU4::Area::Area(std::istream& theStream)
 {
@@ -12,7 +13,7 @@ EU4::Area::Area(std::istream& theStream)
 void EU4::Area::registerKeys()
 {
 	registerKeyword("color", commonItems::ignoreItem);
-	registerRegex("[0-9]+", [this](const std::string& number, std::istream& theStream) {
+	registerRegex(commonItems::integerRegex, [this](const std::string& number, std::istream& theStream) {
 		// This is a peculiar file format where we pull free-floating numbers from thin air.
 		// The regex itself will consume the stream.
 		try
