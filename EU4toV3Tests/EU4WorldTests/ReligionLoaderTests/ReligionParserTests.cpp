@@ -1,6 +1,6 @@
 #include "ReligionLoader/ReligionParser.h"
 #include "gtest/gtest.h"
-/*
+
 TEST(EU4World_ReligionParserTests, religionsDefaultToEmpty)
 {
 	std::stringstream input;
@@ -32,4 +32,3 @@ TEST(EU4World_ReligionParserTests, religionsCanBeImported)
 
 	EXPECT_TRUE(theReligions.contains("zoroastrian"));
 }
-*/

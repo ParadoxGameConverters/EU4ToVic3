@@ -1,7 +1,7 @@
 #include "ReligionLoader/ReligionLoader.h"
 #include "ReligionLoader/ReligionParser.h"
 #include "gtest/gtest.h"
-/*
+
 TEST(EU4World_ReligionLoaderTests, religionsDefaultToEmpty)
 {
 	std::stringstream input;
@@ -55,4 +55,3 @@ TEST(EU4World_ReligionLoaderTests, multipleReligionGroupsCanBeImported)
 	EXPECT_TRUE(theReligions.getAllReligions().contains("religion"));
 	EXPECT_TRUE(theReligions.getAllReligions().contains("another_religion"));
 }
-*/
