@@ -1,12 +1,12 @@
 #include "CultureLoader.h"
+#include "CommonRegexes.h"
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
-#include "CommonRegexes.h"
 #include <ranges>
 
 void EU4::CultureLoader::loadCultures(const std::string& EU4Path, const Mods& mods)
-{	
+{
 	Log(LogLevel::Info) << "-> Loading Cultures and Culture Groups";
 	registerKeys();
 
@@ -18,7 +18,7 @@ void EU4::CultureLoader::loadCultures(const std::string& EU4Path, const Mods& mo
 			parseFile(modPath + "/common/cultures/" + cultureFile);
 
 	clearRegisteredKeywords();
-	
+
 	Log(LogLevel::Info) << "<> Loaded " << cultureGroupsMap.size() << " culture groups.";
 }
 
@@ -31,7 +31,7 @@ void EU4::CultureLoader::loadCultures(std::istream& theStream)
 
 void EU4::CultureLoader::registerKeys()
 {
-	registerRegex(R"([\w_]+)", [this](std::string cultureGroupName, std::istream& theStream) {
+	registerRegex(commonItems::stringRegex, [this](std::string cultureGroupName, std::istream& theStream) {
 		auto newGroup = CultureGroupParser(cultureGroupName, theStream);
 
 		if (cultureGroupsMap.contains(cultureGroupName))

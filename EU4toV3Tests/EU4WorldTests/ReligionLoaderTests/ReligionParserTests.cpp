@@ -1,5 +1,7 @@
 #include "ReligionLoader/ReligionParser.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
+using testing::UnorderedElementsAre;
 
 TEST(EU4World_ReligionParserTests, religionsDefaultToEmpty)
 {
@@ -30,5 +32,5 @@ TEST(EU4World_ReligionParserTests, religionsCanBeImported)
 	EU4::ReligionParser religionGroup(input);
 	const auto theReligions = religionGroup.takeReligions();
 
-	EXPECT_TRUE(theReligions.contains("zoroastrian"));
+	EXPECT_THAT(theReligions, UnorderedElementsAre("zoroastrian"));
 }

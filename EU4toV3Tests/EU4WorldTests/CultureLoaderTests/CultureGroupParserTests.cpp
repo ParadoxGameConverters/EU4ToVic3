@@ -1,6 +1,8 @@
 #include "CultureLoader/CultureGroupParser.h"
 #include "CultureLoader/CultureParser.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
+using testing::ElementsAre;
 
 TEST(EU4World_CultureGroupParserTests, nameCanBeSet)
 {
@@ -22,7 +24,7 @@ TEST(EU4World_CultureGroupParserTests, culturesCanBeLoaded)
 	EXPECT_TRUE(group.getCultures().contains("otherculture"));
 }
 
-TEST(MEU4World_CultureGroupParserTests, culturesCanBeMerged)
+TEST(EU4World_CultureGroupParserTests, culturesCanBeMerged)
 {
 	std::stringstream input;
 	input << "someculture = {\n";
@@ -40,17 +42,11 @@ TEST(MEU4World_CultureGroupParserTests, culturesCanBeMerged)
 
 	group.mergeCulture("someculture", sameCulture);
 
-	const auto someCulture = group.getCultures().at("someculture");
+	const auto& someCulture = group.getCultures().at("someculture");
 
-	EXPECT_EQ(2, someCulture.getMaleNames().size());
-	EXPECT_EQ("bob", someCulture.getMaleNames()[0]);
-	EXPECT_EQ("jon", someCulture.getMaleNames()[1]);
-	EXPECT_EQ(2, someCulture.getFemaleNames().size());
-	EXPECT_EQ("boba", someCulture.getFemaleNames()[0]);
-	EXPECT_EQ("jona", someCulture.getFemaleNames()[1]);
-	EXPECT_EQ(2, someCulture.getDynastyNames().size());
-	EXPECT_EQ("bobby", someCulture.getDynastyNames()[0]);
-	EXPECT_EQ("jonny", someCulture.getDynastyNames()[1]);
+	EXPECT_THAT(someCulture.getMaleNames(), ElementsAre("bob", "jon"));
+	EXPECT_THAT(someCulture.getFemaleNames(), ElementsAre("boba", "jona"));
+	EXPECT_THAT(someCulture.getDynastyNames(), ElementsAre("bobby", "jonny"));
 }
 
 TEST(EU4World_CultureGroupParserTests, unmergeableCulturesAreAddedToGroup)
@@ -75,4 +71,3 @@ TEST(EU4World_CultureGroupParserTests, unmergeableCulturesAreAddedToGroup)
 	EXPECT_TRUE(group.getCultures().contains("someculture"));
 	EXPECT_TRUE(group.getCultures().contains("otherculture"));
 }
-

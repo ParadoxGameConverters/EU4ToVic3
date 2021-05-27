@@ -1,6 +1,8 @@
 #include "ReligionLoader/ReligionLoader.h"
 #include "ReligionLoader/ReligionParser.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
+using testing::UnorderedElementsAre;
 
 TEST(EU4World_ReligionLoaderTests, religionsDefaultToEmpty)
 {
@@ -20,11 +22,10 @@ TEST(EU4World_ReligionLoaderTests, religionCanBeImported)
 	EU4::ReligionLoader theReligions;
 	theReligions.loadReligions(input);
 
-	EXPECT_EQ(1, theReligions.getAllReligions().size());
-	EXPECT_TRUE(theReligions.getAllReligions().contains("religion"));
+	EXPECT_THAT(theReligions.getAllReligions(), UnorderedElementsAre("religion"));
 }
 
-TEST(EU4World_ReligionLoaderTests, multipleReligionCanBeImported)
+TEST(EU4World_ReligionLoaderTests, multipleReligionsCanBeImported)
 {
 	std::stringstream input;
 	input << "religion_group = {\n";
@@ -34,9 +35,7 @@ TEST(EU4World_ReligionLoaderTests, multipleReligionCanBeImported)
 	EU4::ReligionLoader theReligions;
 	theReligions.loadReligions(input);
 
-	EXPECT_EQ(theReligions.getAllReligions().size(), 2);
-	EXPECT_TRUE(theReligions.getAllReligions().contains("religion"));
-	EXPECT_TRUE(theReligions.getAllReligions().contains("another_religion"));
+	EXPECT_THAT(theReligions.getAllReligions(), UnorderedElementsAre("religion", "another_religion"));
 }
 
 TEST(EU4World_ReligionLoaderTests, multipleReligionGroupsCanBeImported)
@@ -51,7 +50,5 @@ TEST(EU4World_ReligionLoaderTests, multipleReligionGroupsCanBeImported)
 	EU4::ReligionLoader theReligions;
 	theReligions.loadReligions(input);
 
-	EXPECT_EQ(theReligions.getAllReligions().size(), 2);
-	EXPECT_TRUE(theReligions.getAllReligions().contains("religion"));
-	EXPECT_TRUE(theReligions.getAllReligions().contains("another_religion"));
+	EXPECT_THAT(theReligions.getAllReligions(), UnorderedElementsAre("religion", "another_religion"));
 }

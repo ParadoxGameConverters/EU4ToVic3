@@ -36,7 +36,7 @@ void EU4::CultureGroupParser::registerKeys()
 	registerKeyword("dynasty_names", [this](std::istream& theStream) {
 		dynastyNames = commonItems::getStrings(theStream);
 	});
-	registerRegex(R"([\w_]+)", [this](std::string cultureName, std::istream& theStream) {
+	registerRegex(commonItems::stringRegex, [this](const std::string& cultureName, std::istream& theStream) {
 		auto newCulture = CultureParser(theStream);
 		cultures.emplace(cultureName, newCulture);
 	});

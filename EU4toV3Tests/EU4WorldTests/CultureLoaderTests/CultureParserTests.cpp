@@ -1,5 +1,7 @@
 #include "CultureLoader/CultureParser.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
+using testing::ElementsAre;
 
 TEST(EU4World_CultureParserTests, primitivesDefaultToDefaults)
 {
@@ -18,17 +20,13 @@ TEST(EU4World_CultureParserTests, maleNamesCanBeRetrievedAndAdded)
 	input << "male_names = { Bob Jon }";
 	EU4::CultureParser culture(input);
 
-	EXPECT_EQ(2, culture.getMaleNames().size());
-	EXPECT_EQ("Bob", culture.getMaleNames()[0]);
-	EXPECT_EQ("Jon", culture.getMaleNames()[1]);
+	EXPECT_THAT(culture.getMaleNames(), ElementsAre("Bob", "Jon"));
 
 	const std::vector<std::string> moreNames = {"Dod", "Kro"};
 
 	culture.addMaleNames(moreNames);
 
-	EXPECT_EQ(4, culture.getMaleNames().size());
-	EXPECT_EQ("Dod", culture.getMaleNames()[2]);
-	EXPECT_EQ("Kro", culture.getMaleNames()[3]);
+	EXPECT_THAT(culture.getMaleNames(), ElementsAre("Bob", "Jon", "Dod", "Kro"));
 }
 
 TEST(EU4World_CultureParserTests, femaleNamesCanBeRetrievedAndAdded)
@@ -37,17 +35,13 @@ TEST(EU4World_CultureParserTests, femaleNamesCanBeRetrievedAndAdded)
 	input << "female_names = { Bob Jon }";
 	EU4::CultureParser culture(input);
 
-	EXPECT_EQ(2, culture.getFemaleNames().size());
-	EXPECT_EQ("Bob", culture.getFemaleNames()[0]);
-	EXPECT_EQ("Jon", culture.getFemaleNames()[1]);
+	EXPECT_THAT(culture.getFemaleNames(), ElementsAre("Bob", "Jon"));
 
 	const std::vector<std::string> moreNames = {"Dod", "Kro"};
 
 	culture.addFemaleNames(moreNames);
 
-	EXPECT_EQ(4, culture.getFemaleNames().size());
-	EXPECT_EQ("Dod", culture.getFemaleNames()[2]);
-	EXPECT_EQ("Kro", culture.getFemaleNames()[3]);
+	EXPECT_THAT(culture.getFemaleNames(), ElementsAre("Bob", "Jon", "Dod", "Kro"));
 }
 
 TEST(EU4World_CultureParserTests, dynastyNamesCanBeRetrievedAndAdded)
@@ -56,17 +50,13 @@ TEST(EU4World_CultureParserTests, dynastyNamesCanBeRetrievedAndAdded)
 	input << "dynasty_names = { Bob Jon }";
 	EU4::CultureParser culture(input);
 
-	EXPECT_EQ(2, culture.getDynastyNames().size());
-	EXPECT_EQ("Bob", culture.getDynastyNames()[0]);
-	EXPECT_EQ("Jon", culture.getDynastyNames()[1]);
+	EXPECT_THAT(culture.getDynastyNames(), ElementsAre("Bob", "Jon"));
 
 	const std::vector<std::string> moreNames = {"Dod", "Kro"};
 
 	culture.addDynastyNames(moreNames);
 
-	EXPECT_EQ(4, culture.getDynastyNames().size());
-	EXPECT_EQ("Dod", culture.getDynastyNames()[2]);
-	EXPECT_EQ("Kro", culture.getDynastyNames()[3]);
+	EXPECT_THAT(culture.getDynastyNames(), ElementsAre("Bob", "Jon", "Dod", "Kro"));
 }
 
 TEST(Mappers_CultureTests, primaryTagCanBeLoadedAndAdded)
@@ -80,4 +70,3 @@ TEST(Mappers_CultureTests, primaryTagCanBeLoadedAndAdded)
 	culture.setPrimaryTag("GAT");
 	EXPECT_EQ("GAT", culture.getPrimaryTag());
 }
-

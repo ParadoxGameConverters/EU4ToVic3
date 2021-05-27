@@ -21,10 +21,11 @@ class CultureGroupParser: commonItems::parser
 	void registerKeys();
 
 	std::string cultureGroupName;
+	std::map<std::string, CultureParser> cultures;
+
 	std::vector<std::string> maleNames;
 	std::vector<std::string> femaleNames;
 	std::vector<std::string> dynastyNames;
-	std::map<std::string, CultureParser> cultures;
 };
 } // namespace EU4
 
