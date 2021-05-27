@@ -16,7 +16,10 @@ namespace fs = std::filesystem;
 EU4::World::World(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion)
 {
 	Log(LogLevel::Info) << "*** Hello EU4, loading World. ***";
+	// Fire up managers.
 	datingData = std::make_shared<DatingData>();
+	provinceManager = std::make_shared<ProvinceManager>();
+
 	EU4Path = theConfiguration.getEU4Path();
 	saveGame.path = theConfiguration.getEU4SaveGamePath();
 
@@ -153,6 +156,11 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const mappe
 		ModLoader modLoader;
 		modLoader.loadMods(theConfiguration, modsList);
 		mods = modLoader.getMods();
+	});
+	registerKeyword("provinces", [this](std::istream& theStream) {
+		Log(LogLevel::Info) << "-> Importing Provinces";
+		provinceManager->loadProvinces(theStream);
+		Log(LogLevel::Info) << "<> Imported " << provinceManager->getAllProvinces().size() << " provinces.";
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

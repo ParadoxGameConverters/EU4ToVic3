@@ -1,7 +1,7 @@
 #ifndef PROVINCE_HISTORY_H
 #define PROVINCE_HISTORY_H
-#include "Date.h"
 #include "ConvenientParser.h"
+#include "Date.h"
 #include <optional>
 #include <vector>
 
@@ -19,12 +19,12 @@ class ProvinceHistory: commonItems::convenientParser
 	[[nodiscard]] const auto& getStartingCulture() const { return startingCulture; }
 	[[nodiscard]] const auto& getStartingReligion() const { return startingReligion; }
 
-	[[nodiscard]] std::optional<date> getFirstOwnedDate() const;
-	[[nodiscard]] bool hasOriginalCulture() const;
-	[[nodiscard]] bool wasColonized() const;
 	[[nodiscard]] bool hasInitializedHistory() const { return !religionHistory.empty() && !cultureHistory.empty(); }
 	[[nodiscard]] auto getOriginalDevelopment() const { return originalTax + originalProduction + originalManpower; }
 
+	[[nodiscard]] const auto& getOwnershipHistory() const { return ownershipHistory; }
+	[[nodiscard]] const auto& getReligionHistory() const { return religionHistory; }
+	[[nodiscard]] const auto& getCultureHistory() const { return cultureHistory; }
 
   private:
 	void registerKeys();
@@ -32,13 +32,13 @@ class ProvinceHistory: commonItems::convenientParser
 	std::string startingCulture;
 	std::string startingReligion;
 
-	std::vector<std::pair<date, std::string>> ownershipHistory;
-	std::vector<std::pair<date, std::string>> religionHistory;
-	std::vector<std::pair<date, std::string>> cultureHistory;
-
 	double originalTax = 0;
 	double originalProduction = 0;
 	double originalManpower = 0;
+
+	std::vector<std::pair<date, std::string>> ownershipHistory;
+	std::vector<std::pair<date, std::string>> religionHistory;
+	std::vector<std::pair<date, std::string>> cultureHistory;
 };
 } // namespace EU4
 

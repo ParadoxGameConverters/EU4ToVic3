@@ -1,19 +1,18 @@
 #ifndef EU4_WORLD_H
 #define EU4_WORLD_H
 #include "Configuration.h"
+#include "ConverterVersion/ConverterVersion.h"
+#include "CultureLoader/CultureLoader.h"
+#include "DatingData.h"
 #include "GameVersion.h"
 #include "Mods/ModLoader.h"
 #include "Parser.h"
-#include "ConverterVersion/ConverterVersion.h"
+#include "ProvinceManager/ProvinceManager.h"
 #include "RegionManager/RegionManager.h"
 #include "ReligionLoader/ReligionLoader.h"
-#include "CultureLoader/CultureLoader.h"
-#include "DatingData.h"
-#include "ProvinceManager/ProvinceManager.h"
 
 namespace EU4
 {
-
 class World: commonItems::parser
 {
   public:
@@ -45,7 +44,7 @@ class World: commonItems::parser
 	RegionManager regionManager;
 	ReligionLoader religionLoader;
 	CultureLoader cultureLoader;
-	ProvinceManager provinceManager;
+	std::shared_ptr<ProvinceManager> provinceManager;
 };
 } // namespace EU4
 

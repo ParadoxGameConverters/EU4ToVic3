@@ -10,10 +10,10 @@ class ProvinceManager: commonItems::parser
 {
   public:
 	ProvinceManager() = default;
-	explicit ProvinceManager(std::istream& theStream);
+	void loadProvinces(std::istream& theStream);
 
 	[[nodiscard]] const auto& getAllProvinces() const { return provinces; }
-	[[nodiscard]] const std::shared_ptr<Province>& getProvince(int provinceNumber) const;
+	[[nodiscard]] const std::shared_ptr<Province>& getProvince(int provinceID) const;
 
   private:
 	void registerKeys();

@@ -11,7 +11,6 @@ class ProvinceBuildings: commonItems::parser
 	ProvinceBuildings() = default;
 	explicit ProvinceBuildings(std::istream& theStream);
 
-	[[nodiscard]] auto hasBuilding(const std::string& building) const { return buildings.count(building) > 0; }
 	[[nodiscard]] const auto& getBuildings() const { return buildings; }
 
   private:

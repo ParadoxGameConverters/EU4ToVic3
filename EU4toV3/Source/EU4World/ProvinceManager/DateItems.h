@@ -26,7 +26,7 @@ class DateItems: commonItems::parser
   private:
 	void registerKeys();
 
-	std::vector<DateChange> dateChanges; // changeType, changeValue
+	std::vector<DateChange> dateChanges;
 };
 } // namespace EU4
 
