@@ -113,7 +113,14 @@ std::optional<int> EU4::DefinitionScraper::parseLine(const std::string& line)
 		return std::nullopt;
 
 	// simulate mapDataName
-	auto mapDataName = line.substr(sepLocSave + 1, sepLoc - sepLocSave - 1);
+	try
+	{
+		auto mapDataName = line.substr(sepLocSave + 1, sepLoc - sepLocSave - 1);
+	}
+	catch (std::exception&)
+	{
+		return std::nullopt;
+	}
 
 	return ID;
 }
