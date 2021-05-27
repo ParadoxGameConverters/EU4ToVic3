@@ -1,19 +1,18 @@
 #include "DefinitionScraper.h"
 #include "OSCompatibilityLayer.h"
 #include <fstream>
-#include <ranges>
 
 void EU4::DefinitionScraper::loadDefinitions(const std::string& EU4Path, const Mods& mods)
 {
 	// This is a case where mods take priority over definitions. If a mod has defs than we use those and ignore EU4 installation.
 
-	for (const auto& mod: mods | std::views::values)
-		if (commonItems::DoesFileExist(mod + "/map/definition.csv"))
+	for (const auto& [modName, modPath]: mods)
+		if (commonItems::DoesFileExist(modPath + "/map/definition.csv"))
 		{
-			std::ifstream definitionsFile(mod + "/map/definition.csv");
+			std::ifstream definitionsFile(modPath + "/map/definition.csv");
 			parseStream(definitionsFile);
 			definitionsFile.close();
-			Log(LogLevel::Info) << "<> " << provinceIDs.size() << " mod-fed province definitions registered.";
+			Log(LogLevel::Info) << "<> " << provinceIDs.size() << " province definitions registered from:" << modName;
 			return;
 		}
 

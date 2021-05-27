@@ -69,6 +69,20 @@ TEST(EU4World_DefinitionScraperTests, randomJunkIsIgnored)
 	input << "comment\n";
 	input << "1;junk;2;3;;x;\n";
 	input << "2\n";
+	input << "johnnyboy\n";
+	input << "3;7;8;9;name3;x;\n";
+	EU4::DefinitionScraper definitions;
+	definitions.loadDefinitions(input);
+
+	EXPECT_THAT(definitions.getProvinceIDs(), UnorderedElementsAre(3));
+}
+
+TEST(EU4World_DefinitionScraperTests, doubleEntriesAreIgnored)
+{
+	std::stringstream input;
+	input << "comment\n";
+	input << "3;7;8;9;name3;x;\n";
+	input << "3;7;8;9;name3;x;\n";
 	input << "3;7;8;9;name3;x;\n";
 	EU4::DefinitionScraper definitions;
 	definitions.loadDefinitions(input);
