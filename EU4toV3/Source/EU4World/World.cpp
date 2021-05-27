@@ -51,6 +51,8 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Progress) << "15 %";
 
 	// With mods loaded we can init stuff that requires them.
+	religionLoader.loadReligions(EU4Path, mods);
+	cultureLoader.loadCultures(EU4Path, mods);
 	Log(LogLevel::Progress) << "16 %";
 
 	Log(LogLevel::Info) << "*** Building world ***";
