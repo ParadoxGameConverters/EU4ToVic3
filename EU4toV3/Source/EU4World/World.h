@@ -8,6 +8,8 @@
 #include "RegionManager/RegionManager.h"
 #include "ReligionLoader/ReligionLoader.h"
 #include "CultureLoader/CultureLoader.h"
+#include "DatingData.h"
+#include "ProvinceManager/ProvinceManager.h"
 
 namespace EU4
 {
@@ -35,14 +37,7 @@ class World: commonItems::parser
 	std::string EU4Path;
 	Mods mods;
 
-	struct DatingData
-	{
-		date firstEU4Date; // first date we see in the save, usually predates startDate
-		date startEU4Date; // savegame saved date - conversion date
-		date lastEU4Date;	 // last date we see in the save, used to stop conversions
-	};
-
-	std::shared_ptr<DatingData> dating;
+	std::shared_ptr<DatingData> datingData;
 
 	GameVersion version;
 	int eu4Seed = 0;
@@ -50,6 +45,7 @@ class World: commonItems::parser
 	RegionManager regionManager;
 	ReligionLoader religionLoader;
 	CultureLoader cultureLoader;
+	ProvinceManager provinceManager;
 };
 } // namespace EU4
 

@@ -16,6 +16,7 @@ namespace fs = std::filesystem;
 EU4::World::World(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion)
 {
 	Log(LogLevel::Info) << "*** Hello EU4, loading World. ***";
+	datingData = std::make_shared<DatingData>();
 	EU4Path = theConfiguration.getEU4Path();
 	saveGame.path = theConfiguration.getEU4SaveGamePath();
 
@@ -110,10 +111,10 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const mappe
 	registerKeyword("EU4txt", [](std::istream& theStream) {
 	});
 	registerKeyword("date", [this](std::istream& theStream) {
-		dating->lastEU4Date = date(commonItems::getString(theStream));
+		datingData->lastEU4Date = date(commonItems::getString(theStream));
 	});
 	registerKeyword("start_date", [this](std::istream& theStream) {
-		dating->startEU4Date = date(commonItems::getString(theStream));
+		datingData->startEU4Date = date(commonItems::getString(theStream));
 	});
 	registerRegex("(multiplayer_)?random_seed", [this](const std::string& unused, std::istream& theStream) {
 		auto theSeed = commonItems::getString(theStream);
