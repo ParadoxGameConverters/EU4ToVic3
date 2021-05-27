@@ -40,7 +40,9 @@ class World: commonItems::parser
 		date firstEU4Date; // first date we see in the save, usually predates startDate
 		date startEU4Date; // savegame saved date - conversion date
 		date lastEU4Date;	 // last date we see in the save, used to stop conversions
-	} dating;
+	};
+
+	std::shared_ptr<DatingData> dating;
 
 	GameVersion version;
 	int eu4Seed = 0;

@@ -110,10 +110,10 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const mappe
 	registerKeyword("EU4txt", [](std::istream& theStream) {
 	});
 	registerKeyword("date", [this](std::istream& theStream) {
-		dating.lastEU4Date = date(commonItems::getString(theStream));
+		dating->lastEU4Date = date(commonItems::getString(theStream));
 	});
 	registerKeyword("start_date", [this](std::istream& theStream) {
-		dating.startEU4Date = date(commonItems::getString(theStream));
+		dating->startEU4Date = date(commonItems::getString(theStream));
 	});
 	registerRegex("(multiplayer_)?random_seed", [this](const std::string& unused, std::istream& theStream) {
 		auto theSeed = commonItems::getString(theStream);
