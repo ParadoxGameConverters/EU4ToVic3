@@ -38,6 +38,7 @@ void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)
 {
 	// We are poking at mapdata to classify provinces as land, sea, lake, rnw or wasteland.
 	// Then we'll be discarding lakes, rnws and wastelands.
+	// We'll also be assigning assimilation factors for popbuilding later.
 
 	std::map<int, std::shared_ptr<Province>> viableProvinces;
 
@@ -57,16 +58,15 @@ void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)
 			continue;
 		if (defaultMapParser.isRNW(provinceID)) // discard RNW
 			continue;
-		if (defaultMapParser.isSea(provinceID))
-		{
-			// keep sea and classify
-			viableProvinces.emplace(provinceID, province);
-			province->setSea();
-			continue;
-		}
 		if (!regionManager.provinceIsValid(provinceID)) // regionManager considers wastelands invalid, as they aren't registered.
 			continue;
-		// Whatever remains is a legit land province
+		if (defaultMapParser.isSea(provinceID))
+			province->setSea();
+		
+		// Whatever remains is a legit province
+		const auto& assimilationFactor = regionManager.getAssimilationFactor(provinceID);
+		if (assimilationFactor)
+			province->setAssimilationFactor(*assimilationFactor);
 		viableProvinces.emplace(provinceID, province);
 	}
 	provinces.swap(viableProvinces);

@@ -11,12 +11,20 @@ class SuperRegion
 	explicit SuperRegion(const std::vector<std::string>& theRegions);
 
 	[[nodiscard]] const auto& getRegions() const { return regions; }
+	[[nodiscard]] auto getAssimilationFactor() const { return assimilation; }
+	[[nodiscard]] const auto& getSuperGroup() const { return superGroup; }
+
 	[[nodiscard]] bool superRegionContainsProvince(int provinceID) const;
 
+	void setAssimilationFactor(double factor) { assimilation = factor; }
+	void setSuperGroup(const auto& sGroup) { superGroup = sGroup; }
 	void linkRegion(const std::pair<std::string, std::shared_ptr<Region>>& theRegion) { regions.at(theRegion.first) = theRegion.second; }
 
   private:
 	std::map<std::string, std::shared_ptr<Region>> regions;
+
+	double assimilation = 0;
+	std::string superGroup;
 };
 } // namespace EU4
 

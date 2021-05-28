@@ -1,10 +1,11 @@
 #ifndef EU4_REGIONMANAGER_H
 #define EU4_REGIONMANAGER_H
 #include "Area.h"
+#include "Mappers/SuperGroupMapper/SuperGroupMapper.h"
+#include "Mods/ModLoader.h"
 #include "Parser.h"
 #include "Region.h"
 #include "SuperRegion.h"
-#include "Mods/ModLoader.h"
 
 namespace EU4
 {
@@ -13,6 +14,7 @@ class RegionManager: commonItems::parser
   public:
 	void loadRegions(const std::string& EU4Path, const Mods& mods);
 	void loadRegions(std::istream& areaStream, std::istream& regionStream, std::istream& superRegionStream); // for testing
+	void loadSuperGroups(const mappers::SuperGroupMapper& sgMapper) { superGroupMapper = sgMapper; }			// for testing
 
 	[[nodiscard]] bool provinceIsInRegion(int provinceID, const std::string& regionName) const;
 	[[nodiscard]] bool regionNameIsValid(const std::string& regionName) const;
@@ -21,6 +23,10 @@ class RegionManager: commonItems::parser
 	[[nodiscard]] std::optional<std::string> getParentAreaName(int provinceID) const;
 	[[nodiscard]] std::optional<std::string> getParentRegionName(int provinceID) const;
 	[[nodiscard]] std::optional<std::string> getParentSuperRegionName(int provinceID) const;
+	[[nodiscard]] std::optional<std::string> getParentSuperGroupName(int provinceID) const;
+	[[nodiscard]] std::optional<double> getAssimilationFactor(int provinceID) const;
+
+	void applySuperGroups();
 
   private:
 	void registerAreaKeys();
@@ -32,6 +38,8 @@ class RegionManager: commonItems::parser
 	std::map<std::string, std::shared_ptr<Area>> areas;
 	std::map<std::string, std::shared_ptr<Region>> regions;
 	std::map<std::string, std::shared_ptr<SuperRegion>> superRegions;
+
+	mappers::SuperGroupMapper superGroupMapper;
 };
 } // namespace EU4
 

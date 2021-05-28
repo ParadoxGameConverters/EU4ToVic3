@@ -63,6 +63,7 @@ void EU4::RegionManager::loadRegions(const std::string& EU4Path, const Mods& mod
 
 	linkSuperRegions();
 	linkRegions();
+	superGroupMapper.loadSuperGroups();
 }
 
 void EU4::RegionManager::loadRegions(std::istream& areaStream, std::istream& regionStream, std::istream& superRegionStream)
@@ -81,6 +82,7 @@ void EU4::RegionManager::loadRegions(std::istream& areaStream, std::istream& reg
 
 	linkSuperRegions();
 	linkRegions();
+	// load supergroups manually with loadSuperGroups() and then applySuperGroups() when testing.
 }
 
 void EU4::RegionManager::registerAreaKeys()
@@ -159,6 +161,16 @@ std::optional<std::string> EU4::RegionManager::getParentSuperRegionName(const in
 	return std::nullopt;
 }
 
+std::optional<std::string> EU4::RegionManager::getParentSuperGroupName(const int provinceID) const
+{
+	for (const auto& superRegion: superRegions | std::views::values)
+		if (superRegion->superRegionContainsProvince(provinceID))
+			return superRegion->getSuperGroup();
+
+	Log(LogLevel::Warning) << "Province ID " << provinceID << " has no parent supergroup name!";
+	return std::nullopt;
+}
+
 bool EU4::RegionManager::regionNameIsValid(const std::string& regionName) const
 {
 	const auto& regionItr = regions.find(regionName);
@@ -224,4 +236,32 @@ bool EU4::RegionManager::provinceIsValid(int provinceID) const
 		if (area->areaContainsProvince(provinceID))
 			return true;
 	return false;
+}
+
+void EU4::RegionManager::applySuperGroups()
+{
+	for (const auto& [superRegionName, superRegion]: superRegions)
+	{
+		superRegion->setAssimilationFactor(superGroupMapper.getAssimilationFactor(superRegionName));
+		const auto& superGroup = superGroupMapper.getGroupForSuperRegion(superRegionName);
+		if (superGroup)
+		{
+			superRegion->setSuperGroup(*superGroup);
+		}
+		else
+		{
+			Log(LogLevel::Warning) << "Superregion " << superRegionName << " doesn't have a supergroup in world_supergroups.txt!";
+			superRegion->setSuperGroup("old_world"); // defaulting to the safe choice.
+		}
+	}
+}
+
+std::optional<double> EU4::RegionManager::getAssimilationFactor(int provinceID) const
+{
+	for (const auto& superRegion: superRegions | std::views::values)
+		if (superRegion->superRegionContainsProvince(provinceID))
+			return superRegion->getAssimilationFactor();
+
+	Log(LogLevel::Warning) << "Province ID " << provinceID << " has no assimilation factor!";
+	return std::nullopt;
 }

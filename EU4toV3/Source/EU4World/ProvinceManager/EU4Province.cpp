@@ -11,6 +11,13 @@ EU4::Province::Province(const std::string& numString, std::istream& theStream)
 	clearRegisteredKeywords();
 
 	provID = 0 - stoi(numString);
+
+	// Provinces without starting culture (nativeless provinces) won't have all entries
+	if (!provinceHistory.hasInitializedHistory() && !culture.empty() && !religion.empty())
+	{
+		provinceHistory.setStartingCulture(culture);
+		provinceHistory.setStartingReligion(religion);
+	}
 }
 
 void EU4::Province::registerKeys()

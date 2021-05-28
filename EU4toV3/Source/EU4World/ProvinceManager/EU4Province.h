@@ -39,6 +39,8 @@ class Province: commonItems::convenientParser
 	[[nodiscard]] auto isSea() const { return sea; }
 	void setSea() { sea = true; }
 
+	void setAssimilationFactor(double factor) { assimilationFactor = factor; }
+
   private:
 	void registerKeys();
 
@@ -64,6 +66,8 @@ class Province: commonItems::convenientParser
 	std::set<std::string> cores;
 	std::set<std::string> buildings;
 	std::set<std::string> greatProjects;
+
+	double assimilationFactor = 0;
 };
 } // namespace EU4
 

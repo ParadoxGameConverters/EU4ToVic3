@@ -114,7 +114,7 @@ TEST(Mappers_RegionMapperTests, locationServicesFailForNonsense)
 
 	EXPECT_FALSE(theMapper.provinceIsInRegion(1, "nonsense"));
 	EXPECT_FALSE(theMapper.provinceIsInRegion(9, "test_area"));
-	
+
 	EXPECT_FALSE(theMapper.provinceIsValid(9));
 }
 
@@ -177,4 +177,114 @@ TEST(Mappers_RegionMapperTests, locationNameValidationWorks)
 	EXPECT_TRUE(theMapper.regionNameIsValid("test_region2"));
 	EXPECT_TRUE(theMapper.regionNameIsValid("test_superregion2"));
 	EXPECT_FALSE(theMapper.regionNameIsValid("nonsense"));
+}
+
+TEST(Mappers_RegionMapperTests, assimilationCanBeAssignedAndPinged)
+{
+	EU4::RegionManager theMapper;
+	std::stringstream areaStream;
+	areaStream << "test_area = { 1 }";
+	std::stringstream regionStream;
+	regionStream << "test_region = { areas = { test_area } }";
+	std::stringstream superRegionStream;
+	superRegionStream << "test_superregion = { test_region }\n";
+	theMapper.loadRegions(areaStream, regionStream, superRegionStream);
+
+	std::stringstream superGroupStream;
+	superGroupStream << "test_supergroup = { test_superregion = {assimilation = 2}}\n";
+	mappers::SuperGroupMapper superGroupMapper;
+	superGroupMapper.loadSuperGroups(superGroupStream);
+
+	theMapper.loadSuperGroups(superGroupMapper);
+	theMapper.applySuperGroups();
+
+	EXPECT_NEAR(0.004375, *theMapper.getAssimilationFactor(1), 0.0001);
+}
+
+TEST(Mappers_RegionMapperTests, assimilationMismatchReturnsNullopt)
+{
+	EU4::RegionManager theMapper;
+	std::stringstream areaStream;
+	areaStream << "test_area = { 1 }";
+	std::stringstream regionStream;
+	regionStream << "test_region = { areas = { test_area } }";
+	std::stringstream superRegionStream;
+	superRegionStream << "test_superregion = { test_region }\n";
+	theMapper.loadRegions(areaStream, regionStream, superRegionStream);
+
+	std::stringstream superGroupStream;
+	superGroupStream << "test_supergroup = { test_superregion = {assimilation = 2}}\n";
+	mappers::SuperGroupMapper superGroupMapper;
+	superGroupMapper.loadSuperGroups(superGroupStream);
+
+	theMapper.loadSuperGroups(superGroupMapper);
+	theMapper.applySuperGroups();
+
+	EXPECT_EQ(std::nullopt, theMapper.getAssimilationFactor(99));
+}
+
+TEST(Mappers_RegionMapperTests, superGroupsCanBeAssignedAndPinged)
+{
+	EU4::RegionManager theMapper;
+	std::stringstream areaStream;
+	areaStream << "test_area = { 1 }";
+	std::stringstream regionStream;
+	regionStream << "test_region = { areas = { test_area } }";
+	std::stringstream superRegionStream;
+	superRegionStream << "test_superregion = { test_region }\n";
+	theMapper.loadRegions(areaStream, regionStream, superRegionStream);
+
+	std::stringstream superGroupStream;
+	superGroupStream << "test_supergroup = { test_superregion = {assimilation = 2}}\n";
+	mappers::SuperGroupMapper superGroupMapper;
+	superGroupMapper.loadSuperGroups(superGroupStream);
+
+	theMapper.loadSuperGroups(superGroupMapper);
+	theMapper.applySuperGroups();
+
+	EXPECT_EQ("test_supergroup", theMapper.getParentSuperGroupName(1));
+}
+
+TEST(Mappers_RegionMapperTests, supergroupMismatchReturnsNullopt)
+{
+	EU4::RegionManager theMapper;
+	std::stringstream areaStream;
+	areaStream << "test_area = { 1 }";
+	std::stringstream regionStream;
+	regionStream << "test_region = { areas = { test_area } }";
+	std::stringstream superRegionStream;
+	superRegionStream << "test_superregion = { test_region }\n";
+	theMapper.loadRegions(areaStream, regionStream, superRegionStream);
+
+	std::stringstream superGroupStream;
+	superGroupStream << "test_supergroup = { test_superregion = {assimilation = 2}}\n";
+	mappers::SuperGroupMapper superGroupMapper;
+	superGroupMapper.loadSuperGroups(superGroupStream);
+
+	theMapper.loadSuperGroups(superGroupMapper);
+	theMapper.applySuperGroups();
+
+	EXPECT_EQ(std::nullopt, theMapper.getParentSuperGroupName(99));
+}
+
+TEST(Mappers_RegionMapperTests, brokenSupergroupDefaultsToOldWorld)
+{
+	EU4::RegionManager theMapper;
+	std::stringstream areaStream;
+	areaStream << "test_area = { 1 }";
+	std::stringstream regionStream;
+	regionStream << "test_region = { areas = { test_area } }";
+	std::stringstream superRegionStream;
+	superRegionStream << "test_superregion = { test_region }\n";
+	theMapper.loadRegions(areaStream, regionStream, superRegionStream);
+
+	std::stringstream superGroupStream;
+	superGroupStream << "test_supergroup = { test_superregionBROKE = {assimilation = 2}}\n";
+	mappers::SuperGroupMapper superGroupMapper;
+	superGroupMapper.loadSuperGroups(superGroupStream);
+
+	theMapper.loadSuperGroups(superGroupMapper);
+	theMapper.applySuperGroups();
+
+	EXPECT_EQ("old_world", theMapper.getParentSuperGroupName(1));
 }

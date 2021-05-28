@@ -18,14 +18,12 @@ void EU4::ProvinceHistory::registerKeys()
 		ownershipHistory.emplace_back(std::make_pair(date("1.1.1"), commonItems::getString(theStream)));
 	});
 	registerKeyword("culture", [this](std::istream& theStream) {
-		startingCulture = commonItems::getString(theStream);
-		if (cultureHistory.empty())
-			cultureHistory.emplace_back(std::make_pair(date("1.1.1"), startingCulture));
+		const auto culture = commonItems::getString(theStream);
+		setStartingCulture(culture);
 	});
 	registerKeyword("religion", [this](std::istream& theStream) {
-		startingReligion = commonItems::getString(theStream);
-		if (religionHistory.empty())
-			religionHistory.emplace_back(std::make_pair(date("1.1.1"), startingReligion));
+		const auto religion = commonItems::getString(theStream);
+		setStartingReligion(religion);
 	});
 	registerSetter("base_tax", originalTax);
 	registerSetter("base_production", originalProduction);
@@ -42,4 +40,22 @@ void EU4::ProvinceHistory::registerKeys()
 				religionHistory.emplace_back(std::make_pair(theDate, dateChange.changeValue));
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+}
+
+void EU4::ProvinceHistory::setStartingCulture(const std::string& culture)
+{
+	startingCulture = culture;
+	if (cultureHistory.empty())
+		cultureHistory.emplace_back(std::make_pair(date("1.1.1"), culture));
+}
+
+void EU4::ProvinceHistory::setStartingReligion(const std::string& religion)
+{
+	startingReligion = religion;
+	if (religionHistory.empty())
+		religionHistory.emplace_back(std::make_pair(date("1.1.1"), religion));
+}
+
+void EU4::ProvinceHistory::buildPopRatios(const double assimilationFactor)
+{
 }

@@ -2,6 +2,7 @@
 #define PROVINCE_HISTORY_H
 #include "ConvenientParser.h"
 #include "Date.h"
+#include "PopRatio.h"
 #include <optional>
 #include <vector>
 
@@ -13,8 +14,8 @@ class ProvinceHistory: commonItems::convenientParser
 	ProvinceHistory() = default;
 	explicit ProvinceHistory(std::istream& theStream);
 
-	void setStartingCulture(const std::string& culture) { startingCulture = culture; }
-	void setStartingReligion(const std::string& religion) { startingReligion = religion; }
+	void setStartingCulture(const std::string& culture);
+	void setStartingReligion(const std::string& religion);
 
 	[[nodiscard]] const auto& getStartingCulture() const { return startingCulture; }
 	[[nodiscard]] const auto& getStartingReligion() const { return startingReligion; }
@@ -25,6 +26,9 @@ class ProvinceHistory: commonItems::convenientParser
 	[[nodiscard]] const auto& getOwnershipHistory() const { return ownershipHistory; }
 	[[nodiscard]] const auto& getReligionHistory() const { return religionHistory; }
 	[[nodiscard]] const auto& getCultureHistory() const { return cultureHistory; }
+
+	void buildPopRatios(double assimilationFactor);
+	[[nodiscard]] const auto& getPopRatios() const { return popRatios; }
 
   private:
 	void registerKeys();
@@ -39,6 +43,8 @@ class ProvinceHistory: commonItems::convenientParser
 	std::vector<std::pair<date, std::string>> ownershipHistory;
 	std::vector<std::pair<date, std::string>> religionHistory;
 	std::vector<std::pair<date, std::string>> cultureHistory;
+
+	std::vector<PopRatio> popRatios;
 };
 } // namespace EU4
 
