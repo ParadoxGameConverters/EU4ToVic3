@@ -40,6 +40,7 @@ class Province: commonItems::convenientParser
 	void setSea() { sea = true; }
 
 	void setAssimilationFactor(double factor) { assimilationFactor = factor; }
+	void buildPopRatios(const DatingData& datingData) { provinceHistory.buildPopRatios(assimilationFactor, datingData); }
 
   private:
 	void registerKeys();

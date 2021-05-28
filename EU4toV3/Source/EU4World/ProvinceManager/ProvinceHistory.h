@@ -2,6 +2,7 @@
 #define PROVINCE_HISTORY_H
 #include "ConvenientParser.h"
 #include "Date.h"
+#include "DatingData.h"
 #include "PopRatio.h"
 #include <optional>
 #include <vector>
@@ -27,11 +28,12 @@ class ProvinceHistory: commonItems::convenientParser
 	[[nodiscard]] const auto& getReligionHistory() const { return religionHistory; }
 	[[nodiscard]] const auto& getCultureHistory() const { return cultureHistory; }
 
-	void buildPopRatios(double assimilationFactor);
+	void buildPopRatios(double assimilationFactor, const DatingData& datingData);
 	[[nodiscard]] const auto& getPopRatios() const { return popRatios; }
 
   private:
 	void registerKeys();
+	void decayPopRatios(const date& oldDate, const date& newDate, PopRatio& currentPop, double assimilationFactor);
 
 	std::string startingCulture;
 	std::string startingReligion;

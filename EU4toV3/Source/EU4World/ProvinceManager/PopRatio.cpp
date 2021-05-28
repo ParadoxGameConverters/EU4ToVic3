@@ -6,6 +6,13 @@ EU4::PopRatio::PopRatio(std::string _culture, std::string _religion): culture(st
 {
 }
 
+bool EU4::PopRatio::operator==(const PopRatio& rhs) const
+{
+	if (culture == rhs.culture && religion == rhs.religion)
+		return true;
+	return false;
+}
+
 void EU4::PopRatio::decay(const float diffInYears, const double assimilationFactor)
 {
 	// for standard factor 0.0025 ratio will decrease by 0.25% every year. It will never hit 0%
@@ -55,4 +62,11 @@ void EU4::PopRatio::convertTo(const std::string& _culture, const std::string& _r
 	lowerRatio = 0;
 	culture = _culture;
 	religion = _religion;
+}
+
+void EU4::PopRatio::mergeRatio(const PopRatio& ratio)
+{
+	upperRatio += ratio.getUpperRatio();
+	middleRatio += ratio.getMiddleRatio();
+	lowerRatio += ratio.getLowerRatio();
 }

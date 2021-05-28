@@ -23,7 +23,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	EU4Path = theConfiguration.getEU4Path();
 	saveGame.path = theConfiguration.getEU4SaveGamePath();
 	Log(LogLevel::Progress) << "6 %";
-	
+
 	Log(LogLevel::Info) << "-> Verifying EU4 save.";
 	verifySave();
 	Log(LogLevel::Progress) << "7 %";
@@ -42,7 +42,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 		saveGame.gamestate = inStream.str();
 	}
 	Log(LogLevel::Progress) << "8 %";
-	
+
 	Log(LogLevel::Progress) << "-> Verifying Save Contents.";
 	verifySaveContents();
 	Log(LogLevel::Progress) << "9 %";
@@ -58,7 +58,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Progress) << "15 %";
 
 	// With mods loaded we can init stuff that requires them.
-	
+
 	Log(LogLevel::Info) << "-> Prepping Mappers";
 	regionManager.loadRegions(EU4Path, mods);
 	religionLoader.loadReligions(EU4Path, mods);
@@ -66,7 +66,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Progress) << "16 %";
 
 	Log(LogLevel::Info) << "*** Building world ***";
-	
+
 	Log(LogLevel::Info) << "-> Processing Province Info";
 	provinceManager->loadParsers(EU4Path, mods);
 	provinceManager->classifyProvinces(regionManager);
@@ -74,7 +74,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 
 	Log(LogLevel::Info) << "-> Calculating Province Weights";
 	Log(LogLevel::Progress) << "18 %";
-	
+
 	Log(LogLevel::Info) << "-> Loading Empires";
 	Log(LogLevel::Progress) << "19 %";
 
@@ -82,6 +82,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Progress) << "21 %";
 
 	Log(LogLevel::Info) << "-> Determining Demographics";
+	provinceManager->buildPopRatios(*datingData);
 	Log(LogLevel::Progress) << "22 %";
 
 	Log(LogLevel::Info) << "-> Cataloguing Native Fauna";

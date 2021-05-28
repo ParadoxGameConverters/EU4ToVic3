@@ -2,6 +2,7 @@
 #include "CommonRegexes.h"
 #include "Log.h"
 #include "ParserHelpers.h"
+#include <ranges>
 
 void EU4::ProvinceManager::loadProvinces(std::istream& theStream)
 {
@@ -62,7 +63,7 @@ void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)
 			continue;
 		if (defaultMapParser.isSea(provinceID))
 			province->setSea();
-		
+
 		// Whatever remains is a legit province
 		const auto& assimilationFactor = regionManager.getAssimilationFactor(provinceID);
 		if (assimilationFactor)
@@ -71,4 +72,10 @@ void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)
 	}
 	provinces.swap(viableProvinces);
 	Log(LogLevel::Info) << "<> Provinces filtered, " << provinces.size() << " remain.";
+}
+
+void EU4::ProvinceManager::buildPopRatios(const DatingData& datingData)
+{
+	for (const auto& province: provinces | std::views::values)
+		province->buildPopRatios(datingData);
 }
