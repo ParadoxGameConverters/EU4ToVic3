@@ -4,17 +4,19 @@
 #include "Parser.h"
 #include "Region.h"
 #include "SuperRegion.h"
+#include "Mods/ModLoader.h"
 
 namespace EU4
 {
 class RegionManager: commonItems::parser
 {
   public:
-	void loadRegions(const std::string& EU4Path);
+	void loadRegions(const std::string& EU4Path, const Mods& mods);
 	void loadRegions(std::istream& areaStream, std::istream& regionStream, std::istream& superRegionStream); // for testing
 
 	[[nodiscard]] bool provinceIsInRegion(int provinceID, const std::string& regionName) const;
 	[[nodiscard]] bool regionNameIsValid(const std::string& regionName) const;
+	[[nodiscard]] bool provinceIsValid(int provinceID) const;
 
 	[[nodiscard]] std::optional<std::string> getParentAreaName(int provinceID) const;
 	[[nodiscard]] std::optional<std::string> getParentRegionName(int provinceID) const;

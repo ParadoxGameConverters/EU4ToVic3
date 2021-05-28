@@ -22,7 +22,7 @@ TEST(EU4World_DefinitionScraperTests, firstLineIsIgnored)
 	EXPECT_TRUE(definitions.getProvinceIDs().empty());
 }
 
-TEST(EU4World_DefinitionScraperTests, definitionsCanBeLoaded)
+TEST(EU4World_DefinitionScraperTests, definitionsCanBeLoadedAndPinged)
 {
 	std::stringstream input;
 	input << "comment\n";
@@ -33,6 +33,9 @@ TEST(EU4World_DefinitionScraperTests, definitionsCanBeLoaded)
 	definitions.loadDefinitions(input);
 
 	EXPECT_THAT(definitions.getProvinceIDs(), UnorderedElementsAre(1, 2, 3));
+	EXPECT_TRUE(definitions.isValidID(1));
+	EXPECT_TRUE(definitions.isValidID(2));
+	EXPECT_TRUE(definitions.isValidID(3));
 }
 
 TEST(EU4World_DefinitionScraperTests, commentsAndEmptyLinesAreIgnored)
@@ -61,6 +64,9 @@ TEST(EU4World_DefinitionScraperTests, incompleteRGBDefinitionsAreIgnored)
 	definitions.loadDefinitions(input);
 
 	EXPECT_THAT(definitions.getProvinceIDs(), UnorderedElementsAre(1));
+	EXPECT_TRUE(definitions.isValidID(1));
+	EXPECT_FALSE(definitions.isValidID(2));
+	EXPECT_FALSE(definitions.isValidID(3));
 }
 
 TEST(EU4World_DefinitionScraperTests, randomJunkIsIgnored)
@@ -75,6 +81,9 @@ TEST(EU4World_DefinitionScraperTests, randomJunkIsIgnored)
 	definitions.loadDefinitions(input);
 
 	EXPECT_THAT(definitions.getProvinceIDs(), UnorderedElementsAre(3));
+	EXPECT_FALSE(definitions.isValidID(1));
+	EXPECT_FALSE(definitions.isValidID(2));
+	EXPECT_TRUE(definitions.isValidID(3));
 }
 
 TEST(EU4World_DefinitionScraperTests, doubleEntriesAreIgnored)
@@ -88,4 +97,7 @@ TEST(EU4World_DefinitionScraperTests, doubleEntriesAreIgnored)
 	definitions.loadDefinitions(input);
 
 	EXPECT_THAT(definitions.getProvinceIDs(), UnorderedElementsAre(3));
+	EXPECT_FALSE(definitions.isValidID(1));
+	EXPECT_FALSE(definitions.isValidID(2));
+	EXPECT_TRUE(definitions.isValidID(3));
 }

@@ -7,11 +7,35 @@ namespace fs = std::filesystem;
 #include <fstream>
 #include <ranges>
 
-void EU4::RegionManager::loadRegions(const std::string& EU4Path)
+void EU4::RegionManager::loadRegions(const std::string& EU4Path, const Mods& mods)
 {
 	auto areaFilename = EU4Path + "/map/area.txt";
 	auto regionFilename = EU4Path + "/map/region.txt";
 	auto superRegionFilename = EU4Path + "/map/superregion.txt";
+
+	for (const auto& [modName, modPath]: mods)
+		if (commonItems::DoesFileExist(modPath + "/map/area.txt"))
+		{
+			Log(LogLevel::Info) << "-> Loading areas from mod: " << modName;
+			areaFilename = modPath + "/map/area.txt";
+			break;
+		}
+
+	for (const auto& [modName, modPath]: mods)
+		if (commonItems::DoesFileExist(modPath + "/map/region.txt"))
+		{
+			Log(LogLevel::Info) << "-> Loading regions from mod: " << modName;
+			areaFilename = modPath + "/map/region.txt";
+			break;
+		}
+
+	for (const auto& [modName, modPath]: mods)
+		if (commonItems::DoesFileExist(modPath + "/map/superregion.txt"))
+		{
+			Log(LogLevel::Info) << "-> Loading superregions from mod: " << modName;
+			areaFilename = modPath + "/map/superregion.txt";
+			break;
+		}
 
 	std::ifstream areaStream(fs::u8path(areaFilename));
 	if (!areaStream.is_open())
@@ -192,4 +216,12 @@ void EU4::RegionManager::linkRegions()
 			}
 		}
 	}
+}
+
+bool EU4::RegionManager::provinceIsValid(int provinceID) const
+{
+	for (const auto& area: areas | std::views::values)
+		if (area->areaContainsProvince(provinceID))
+			return true;
+	return false;
 }

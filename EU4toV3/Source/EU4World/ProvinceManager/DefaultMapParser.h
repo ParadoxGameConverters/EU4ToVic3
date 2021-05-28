@@ -17,6 +17,10 @@ class DefaultMapParser: commonItems::parser
 	[[nodiscard]] const auto& getRandomsIDs() const { return randoms; }
 	[[nodiscard]] const auto& getLakeIDs() const { return lakes; }
 
+	[[nodiscard]] auto isSea(auto provinceID) const { return seas.contains(provinceID); }
+	[[nodiscard]] auto isLake(auto provinceID) const { return lakes.contains(provinceID); }
+	[[nodiscard]] auto isRNW(auto provinceID) const { return randoms.contains(provinceID); }
+
   private:
 	void registerKeys();
 

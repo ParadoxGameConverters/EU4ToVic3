@@ -36,6 +36,9 @@ class Province: commonItems::convenientParser
 	[[nodiscard]] auto hasBuilding(const std::string& building) const { return buildings.contains(building); }
 	[[nodiscard]] auto hasGreatProject(const std::string& greatProject) const { return greatProjects.contains(greatProject); }
 
+	[[nodiscard]] auto isSea() const { return sea; }
+	void setSea() { sea = true; }
+
   private:
 	void registerKeys();
 
@@ -48,6 +51,7 @@ class Province: commonItems::convenientParser
 
 	bool inHRE = false;
 	bool territorialCore = false;
+	bool sea = false;
 
 	double baseTax = 0;
 	double baseProduction = 0;

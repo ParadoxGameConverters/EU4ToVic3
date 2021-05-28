@@ -73,6 +73,10 @@ TEST(Mappers_RegionMapperTests, locationServicesWork)
 	EXPECT_TRUE(theMapper.provinceIsInRegion(3, "test_area"));
 	EXPECT_TRUE(theMapper.provinceIsInRegion(2, "test_region"));
 	EXPECT_TRUE(theMapper.provinceIsInRegion(1, "test_superregion"));
+
+	EXPECT_TRUE(theMapper.provinceIsValid(1));
+	EXPECT_TRUE(theMapper.provinceIsValid(2));
+	EXPECT_TRUE(theMapper.provinceIsValid(3));
 }
 
 TEST(Mappers_RegionMapperTests, locationServicesCorrectlyFail)
@@ -110,6 +114,8 @@ TEST(Mappers_RegionMapperTests, locationServicesFailForNonsense)
 
 	EXPECT_FALSE(theMapper.provinceIsInRegion(1, "nonsense"));
 	EXPECT_FALSE(theMapper.provinceIsInRegion(9, "test_area"));
+	
+	EXPECT_FALSE(theMapper.provinceIsValid(9));
 }
 
 TEST(Mappers_RegionMapperTests, correctParentLocationsReported)
