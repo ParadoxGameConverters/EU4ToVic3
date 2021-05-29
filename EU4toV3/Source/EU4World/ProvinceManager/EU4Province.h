@@ -3,6 +3,7 @@
 #include "ConvenientParser.h"
 #include "ProvinceBuildings.h"
 #include "ProvinceHistory.h"
+#include "BuildingCostLoader/BuildingCostLoader.h"
 
 namespace EU4
 {
@@ -25,9 +26,6 @@ class Province: commonItems::convenientParser
 	[[nodiscard]] auto getBaseTax() const { return baseTax; }
 	[[nodiscard]] auto getBaseProduction() const { return baseProduction; }
 	[[nodiscard]] auto getBaseManpower() const { return baseManpower; }
-	[[nodiscard]] auto getStartingTax() const { return startingTax; }
-	[[nodiscard]] auto getStartingProduction() const { return startingProduction; }
-	[[nodiscard]] auto getStartingManpower() const { return startingManpower; }
 
 	[[nodiscard]] const auto& getCores() const { return cores; }
 	[[nodiscard]] const auto& getBuildings() const { return buildings; }
@@ -41,6 +39,11 @@ class Province: commonItems::convenientParser
 
 	void setAssimilationFactor(double factor) { assimilationFactor = factor; }
 	void buildPopRatios(const DatingData& datingData) { provinceHistory.buildPopRatios(assimilationFactor, datingData); }
+
+	// These relate to province weight, to be used in pop shaping.
+	void determineProvinceWeight(const BuildingCostLoader& buildingTypes);	
+	[[nodiscard]] auto getProvinceWeight() const { return provinceWeight; }
+	[[nodiscard]] auto getInvestmentFactor() const { return investmentFactor; }
 
   private:
 	void registerKeys();
@@ -56,12 +59,12 @@ class Province: commonItems::convenientParser
 	bool territorialCore = false;
 	bool sea = false;
 
+	// province attributes for weights
 	double baseTax = 0;
 	double baseProduction = 0;
 	double baseManpower = 0;
-	double startingTax = 0;
-	double startingProduction = 0;
-	double startingManpower = 0;
+	double provinceWeight = 0;
+	double investmentFactor = 0;
 
 	ProvinceHistory provinceHistory;
 	std::set<std::string> cores;

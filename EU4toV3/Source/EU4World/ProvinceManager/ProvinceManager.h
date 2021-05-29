@@ -1,5 +1,6 @@
 #ifndef PROVINCE_MANAGER
 #define PROVINCE_MANAGER
+#include "BuildingCostLoader/BuildingCostLoader.h"
 #include "DatingData.h"
 #include "DefaultMapParser.h"
 #include "DefinitionScraper.h"
@@ -18,17 +19,18 @@ class ProvinceManager: commonItems::parser
 	void loadProvinces(std::istream& theStream);
 
 	void loadParsers(const std::string& EU4Path, const Mods& mods);
-	void loadParsers(const DefaultMapParser& defaultParser, const DefinitionScraper& defScraper)
-	{
-		defaultMapParser = defaultParser;
-		definitionScraper = defScraper;
-	} // used for testing.
+
+	// individual external loads for testing
+	void loadDefaultMapParser(const DefaultMapParser& defaultParser) { defaultMapParser = defaultParser; }
+	void loadDefinitionScraper(const DefinitionScraper& defScraper) { definitionScraper = defScraper; }
+	void loadBuildingCostLoader(const BuildingCostLoader& buildCostLoader) { buildingCostLoader = buildCostLoader; }
 
 	[[nodiscard]] const auto& getAllProvinces() const { return provinces; }
 	[[nodiscard]] const std::shared_ptr<Province>& getProvince(int provinceID) const;
 
 	void classifyProvinces(const RegionManager& regionManager);
 	void buildPopRatios(const DatingData& datingData);
+	void buildProvinceWeights();
 
   private:
 	void registerKeys();
@@ -37,6 +39,7 @@ class ProvinceManager: commonItems::parser
 
 	DefaultMapParser defaultMapParser;
 	DefinitionScraper definitionScraper;
+	BuildingCostLoader buildingCostLoader;
 };
 } // namespace EU4
 

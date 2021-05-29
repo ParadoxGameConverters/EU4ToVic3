@@ -73,6 +73,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Progress) << "17 %";
 
 	Log(LogLevel::Info) << "-> Calculating Province Weights";
+	provinceManager->buildProvinceWeights();
 	Log(LogLevel::Progress) << "18 %";
 
 	Log(LogLevel::Info) << "-> Loading Empires";

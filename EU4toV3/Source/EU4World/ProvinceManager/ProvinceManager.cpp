@@ -79,3 +79,9 @@ void EU4::ProvinceManager::buildPopRatios(const DatingData& datingData)
 	for (const auto& province: provinces | std::views::values)
 		province->buildPopRatios(datingData);
 }
+
+void EU4::ProvinceManager::buildProvinceWeights()
+{
+	for (const auto& province: provinces | std::views::values)
+		province->determineProvinceWeight(buildingCostLoader);
+}

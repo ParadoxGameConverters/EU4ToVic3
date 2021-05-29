@@ -1,3 +1,4 @@
+#include "BuildingCostLoader/BuildingCostLoader.h"
 #include "ProvinceManager/EU4Province.h"
 #include "gtest/gtest.h"
 
@@ -26,9 +27,6 @@ TEST(EU4World_ProvinceTests, primitivesDefaultToDefaults)
 	EXPECT_EQ(0.0, theProvince.getBaseTax());
 	EXPECT_EQ(0.0, theProvince.getBaseProduction());
 	EXPECT_EQ(0.0, theProvince.getBaseManpower());
-	EXPECT_EQ(0.0, theProvince.getStartingTax());
-	EXPECT_EQ(0.0, theProvince.getStartingProduction());
-	EXPECT_EQ(0.0, theProvince.getStartingManpower());
 
 	EXPECT_TRUE(theProvince.getCores().empty());
 	EXPECT_TRUE(theProvince.getBuildings().empty());
@@ -131,4 +129,233 @@ TEST(EU4World_ProvinceTests, hasGreatProjectFindsProjects)
 	const EU4::Province theProvince("-1", input);
 
 	EXPECT_TRUE(theProvince.hasGreatProject("test_canal"));
+}
+
+TEST(EU4World_ProvinceTests, provinceWeightWithoutOwnerIsZero)
+{
+	std::stringstream input;
+	input << "base_tax = 3\n";
+	input << "base_production = 4\n";
+	input << "base_manpower = 5\n";
+	EU4::Province theProvince("-1", input);
+
+	const EU4::BuildingCostLoader buildings;
+
+	theProvince.determineProvinceWeight(buildings);
+
+	EXPECT_EQ(0.0, theProvince.getProvinceWeight());
+}
+
+TEST(EU4World_ProvinceTests, provinceWeightWithoutBuildingsIsCombinedDevelopment)
+{
+	std::stringstream input;
+	input << "owner = TST\n";
+	input << "base_tax = 3\n";
+	input << "base_production = 4\n";
+	input << "base_manpower = 5\n";
+	EU4::Province theProvince("-1", input);
+
+	const EU4::BuildingCostLoader buildings;
+
+	theProvince.determineProvinceWeight(buildings);
+
+	EXPECT_NEAR(12, theProvince.getProvinceWeight(), 0.001);
+}
+
+TEST(EU4World_ProvinceTests, provinceWeightIncreasesByOnePercentOfBuildingsCost)
+{
+	std::stringstream input;
+	input << "owner = TST\n";
+	input << "base_tax = 3\n";
+	input << "base_production = 4\n";
+	input << "base_manpower = 5\n";
+	input << "buildings = {\n";
+	input << "\tshack = lovely\n";
+	input << "\twatermill = nice\n";
+	input << "}\n";
+	EU4::Province theProvince("-1", input);
+
+	std::stringstream buildingStream;
+	buildingStream << "shack = { cost = 100 }\n";
+	buildingStream << "watermill = { cost = 700 }\n"; // sums to 8 in total
+	EU4::BuildingCostLoader buildings;
+	buildings.loadBuildingCosts(buildingStream);
+
+	theProvince.determineProvinceWeight(buildings);
+
+	EXPECT_NEAR(20.0, theProvince.getProvinceWeight(), 0.001);
+}
+
+TEST(EU4World_ProvinceTests, investmentFactorForNoOwnerIsZero)
+{
+	std::stringstream input;
+	input << "base_tax = 3\n";
+	input << "base_production = 4\n";
+	input << "base_manpower = 5\n";
+	input << "history = {\n";
+	input << "\tbase_tax = 1\n";
+	input << "\tbase_production = 2\n";
+	input << "\tbase_manpower = 1\n";
+	input << "}\n";
+
+	EU4::Province theProvince("-1", input);
+
+	std::stringstream buildingStream;
+	EU4::BuildingCostLoader buildings;
+	buildings.loadBuildingCosts(buildingStream);
+
+	theProvince.determineProvinceWeight(buildings);
+
+	EXPECT_EQ(0.0, theProvince.getInvestmentFactor());
+}
+
+TEST(EU4World_ProvinceTests, investmentFactorWithoutBuildingsCanBeCalculated)
+{
+	std::stringstream input;
+	input << "owner = TST\n";
+	input << "base_tax = 1\n";
+	input << "base_production = 12\n"; // increased by 10
+	input << "base_manpower = 1\n";
+	input << "history = {\n";
+	input << "\tbase_tax = 1\n";
+	input << "\tbase_production = 2\n";
+	input << "\tbase_manpower = 1\n";
+	input << "}\n";
+
+	EU4::Province theProvince("-1", input);
+
+	std::stringstream buildingStream;
+	EU4::BuildingCostLoader buildings;
+	buildings.loadBuildingCosts(buildingStream);
+
+	// Increasing development by 10 gives us a factor of 0 (log10(10) - 1) * 10
+	theProvince.determineProvinceWeight(buildings);
+
+	EXPECT_EQ(0.0, theProvince.getInvestmentFactor());
+}
+
+TEST(EU4World_ProvinceTests, investmentFactorWithoutBuildingsCanBeCalculatedAbove10)
+{
+	std::stringstream input;
+	input << "owner = TST\n";
+	input << "base_tax = 1\n";
+	input << "base_production = 102\n"; // increased by 100
+	input << "base_manpower = 1\n";
+	input << "history = {\n";
+	input << "\tbase_tax = 1\n";
+	input << "\tbase_production = 2\n";
+	input << "\tbase_manpower = 1\n";
+	input << "}\n";
+
+	EU4::Province theProvince("-1", input);
+
+	std::stringstream buildingStream;
+	EU4::BuildingCostLoader buildings;
+	buildings.loadBuildingCosts(buildingStream);
+
+	// Increasing development by 100 gives us a factor of 10 (log10(100) - 1) * 10
+	theProvince.determineProvinceWeight(buildings);
+
+	EXPECT_NEAR(10.0, theProvince.getInvestmentFactor(), 0.001);
+}
+
+TEST(EU4World_ProvinceTests, investmentFactorUsesOnePercentBuildingsCostAsDev)
+{
+	std::stringstream input;
+	input << "owner = TST\n";
+	input << "base_tax = 1\n";
+	input << "base_production = 92\n"; // increased by 90
+	input << "base_manpower = 1\n";
+	input << "history = {\n";
+	input << "\tbase_tax = 1\n";
+	input << "\tbase_production = 2\n";
+	input << "\tbase_manpower = 1\n";
+	input << "}\n";
+	input << "buildings = {\n";
+	input << "\tshack = lovely\n";
+	input << "\twatermill = nice\n";
+	input << "}\n";
+	EU4::Province theProvince("-1", input);
+
+	std::stringstream buildingStream;
+	buildingStream << "shack = { cost = 300 }\n";
+	buildingStream << "watermill = { cost = 700 }\n"; // sums to 10 in total
+	EU4::BuildingCostLoader buildings;
+	buildings.loadBuildingCosts(buildingStream);
+
+	// Increasing development by 90 + 10 gives us a factor of 10 (log10(100) - 1) * 10
+	theProvince.determineProvinceWeight(buildings);
+
+	EXPECT_NEAR(10.0, theProvince.getInvestmentFactor(), 0.001);
+}
+
+TEST(EU4World_ProvinceTests, investmentFactorIsNegativeBelow10Investment)
+{
+	std::stringstream input;
+	input << "owner = TST\n";
+	input << "base_tax = 1\n";
+	input << "base_production = 3\n"; // increased by 1
+	input << "base_manpower = 1\n";
+	input << "history = {\n";
+	input << "\tbase_tax = 1\n";
+	input << "\tbase_production = 2\n";
+	input << "\tbase_manpower = 1\n";
+	input << "}\n";
+	EU4::Province theProvince("-1", input);
+
+	std::stringstream buildingStream;
+	EU4::BuildingCostLoader buildings;
+	buildings.loadBuildingCosts(buildingStream);
+
+	// Increasing development by 1 gives us a factor of -10 (log10(1) - 1) * 10
+	theProvince.determineProvinceWeight(buildings);
+
+	EXPECT_NEAR(-10.0, theProvince.getInvestmentFactor(), 0.001);
+}
+
+TEST(EU4World_ProvinceTests, investmentFactorIsNegative10ForZeroInvestment)
+{
+	std::stringstream input;
+	input << "owner = TST\n";
+	input << "base_tax = 1\n";
+	input << "base_production = 2\n";
+	input << "base_manpower = 1\n";
+	input << "history = {\n";
+	input << "\tbase_tax = 1\n";
+	input << "\tbase_production = 2\n";
+	input << "\tbase_manpower = 1\n";
+	input << "}\n";
+	EU4::Province theProvince("-1", input);
+
+	std::stringstream buildingStream;
+	EU4::BuildingCostLoader buildings;
+	buildings.loadBuildingCosts(buildingStream);
+
+	theProvince.determineProvinceWeight(buildings);
+
+	EXPECT_NEAR(-10.0, theProvince.getInvestmentFactor(), 0.001);
+}
+
+TEST(EU4World_ProvinceTests, investmentFactorScalesLinearlyForNegativeInvestment)
+{
+	std::stringstream input;
+	input << "owner = TST\n";
+	input << "base_tax = 1\n";
+	input << "base_production = 2\n"; // Decreased by 10
+	input << "base_manpower = 1\n";
+	input << "history = {\n";
+	input << "\tbase_tax = 1\n";
+	input << "\tbase_production = 12\n";
+	input << "\tbase_manpower = 1\n";
+	input << "}\n";
+	EU4::Province theProvince("-1", input);
+
+	std::stringstream buildingStream;
+	EU4::BuildingCostLoader buildings;
+	buildings.loadBuildingCosts(buildingStream);
+
+	// -10 - 0.1/dev
+	theProvince.determineProvinceWeight(buildings);
+
+	EXPECT_NEAR(-11.0, theProvince.getInvestmentFactor(), 0.001);
 }

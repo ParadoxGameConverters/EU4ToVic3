@@ -78,7 +78,8 @@ TEST(EU4World_ProvinceManagerTests, provincesCanBeClassified)
 	EU4::ProvinceManager theProvinceManager;
 	theProvinceManager.loadProvinces(provinceStream);
 
-	theProvinceManager.loadParsers(defaults, definitions);
+	theProvinceManager.loadDefaultMapParser(defaults);
+	theProvinceManager.loadDefinitionScraper(definitions);
 	theProvinceManager.classifyProvinces(regionMapper);
 
 	EXPECT_TRUE(theProvinceManager.getProvince(1)->isSea());
@@ -126,6 +127,7 @@ TEST(EU4World_ProvinceManagerTests, provincesClassificationThrowsForDefinitionMi
 	EU4::ProvinceManager theProvinceManager;
 	theProvinceManager.loadProvinces(provinceStream);
 
-	theProvinceManager.loadParsers(defaults, definitions);
+	theProvinceManager.loadDefaultMapParser(defaults);
+	theProvinceManager.loadDefinitionScraper(definitions);
 	EXPECT_THROW(theProvinceManager.classifyProvinces(regionMapper), std::runtime_error);
 }
