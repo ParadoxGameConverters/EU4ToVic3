@@ -33,6 +33,7 @@ void EU4::ProvinceManager::loadParsers(const std::string& EU4Path, const Mods& m
 {
 	defaultMapParser.loadDefaultMap(EU4Path, mods);
 	definitionScraper.loadDefinitions(EU4Path, mods);
+	buildingCostLoader.loadBuildingCosts(EU4Path, mods);
 }
 
 void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)
@@ -47,7 +48,7 @@ void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)
 	{
 		if (!definitionScraper.isValidID(provinceID))
 		{
-			// This means save contains province(s) not present in definitions. This means we're running against old or broken EU4 installation.
+			// This means save contains province(s) not present in definitions. We're running against old or broken EU4 installation.
 			// Continuing is not advised.
 			Log(LogLevel::Error) << "Province " << provinceID << " was not found in map/definition.csv.";
 			Log(LogLevel::Error) << "You are converting a newer save against an old EU4 installation, or you have mods that alter the map in a broken fashion.";
@@ -62,12 +63,16 @@ void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)
 		if (!regionManager.provinceIsValid(provinceID)) // regionManager considers wastelands invalid, as they aren't registered.
 			continue;
 		if (defaultMapParser.isSea(provinceID))
-			province->setSea();
-
-		// Whatever remains is a legit province
-		const auto& assimilationFactor = regionManager.getAssimilationFactor(provinceID);
-		if (assimilationFactor)
-			province->setAssimilationFactor(*assimilationFactor);
+		{
+			province->setSea();			
+		}
+		else
+		{
+			// Whatever remains is a legit land province
+			const auto& assimilationFactor = regionManager.getAssimilationFactor(provinceID);
+			if (assimilationFactor)
+				province->setAssimilationFactor(*assimilationFactor);			
+		}
 		viableProvinces.emplace(provinceID, province);
 	}
 	provinces.swap(viableProvinces);
@@ -77,11 +82,13 @@ void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)
 void EU4::ProvinceManager::buildPopRatios(const DatingData& datingData)
 {
 	for (const auto& province: provinces | std::views::values)
-		province->buildPopRatios(datingData);
+		if (!province->isSea())
+			province->buildPopRatios(datingData);
 }
 
 void EU4::ProvinceManager::buildProvinceWeights()
 {
 	for (const auto& province: provinces | std::views::values)
-		province->determineProvinceWeight(buildingCostLoader);
+		if (!province->isSea())
+			province->determineProvinceWeight(buildingCostLoader);
 }
