@@ -2,6 +2,7 @@
 #include "CommonRegexes.h"
 #include "Log.h"
 #include "ParserHelpers.h"
+#include <cmath>
 
 EU4::Province::Province(const std::string& numString, std::istream& theStream)
 {
@@ -60,7 +61,7 @@ void EU4::Province::determineProvinceWeight(const BuildingCostLoader& buildingTy
 	// Uncolonized/unowned province is worth exactly zero.
 	if (ownerTag.empty())
 		return;
-	
+
 	auto buildingWeight = 0.0;
 	for (const auto& buildingName: buildings)
 	{
