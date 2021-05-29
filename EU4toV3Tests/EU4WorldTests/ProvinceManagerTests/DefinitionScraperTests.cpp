@@ -60,6 +60,7 @@ TEST(EU4World_DefinitionScraperTests, incompleteRGBDefinitionsAreIgnored)
 	input << "1;1;2;3;name1;x;\n";
 	input << "2;4;;6;name2;x;\n";
 	input << "3;7;8;;name3;x;\n";
+	input << "4;;8;9;name3;x;\n";
 	EU4::DefinitionScraper definitions;
 	definitions.loadDefinitions(input);
 
@@ -67,6 +68,7 @@ TEST(EU4World_DefinitionScraperTests, incompleteRGBDefinitionsAreIgnored)
 	EXPECT_TRUE(definitions.isValidID(1));
 	EXPECT_FALSE(definitions.isValidID(2));
 	EXPECT_FALSE(definitions.isValidID(3));
+	EXPECT_FALSE(definitions.isValidID(4));
 }
 
 TEST(EU4World_DefinitionScraperTests, randomJunkIsIgnored)

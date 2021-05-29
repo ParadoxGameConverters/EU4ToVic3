@@ -16,10 +16,6 @@ namespace fs = std::filesystem;
 EU4::World::World(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion)
 {
 	Log(LogLevel::Info) << "*** Hello EU4, loading World. ***";
-	// Fire up managers.
-	datingData = std::make_shared<DatingData>();
-	provinceManager = std::make_shared<ProvinceManager>();
-
 	EU4Path = theConfiguration.getEU4Path();
 	saveGame.path = theConfiguration.getEU4SaveGamePath();
 	Log(LogLevel::Progress) << "6 %";
@@ -68,12 +64,12 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Info) << "*** Building world ***";
 
 	Log(LogLevel::Info) << "-> Processing Province Info";
-	provinceManager->loadParsers(EU4Path, mods);
-	provinceManager->classifyProvinces(regionManager);
+	provinceManager.loadParsers(EU4Path, mods);
+	provinceManager.classifyProvinces(regionManager);
 	Log(LogLevel::Progress) << "17 %";
 
 	Log(LogLevel::Info) << "-> Calculating Province Weights";
-	provinceManager->buildProvinceWeights();
+	provinceManager.buildProvinceWeights();
 	Log(LogLevel::Progress) << "18 %";
 
 	Log(LogLevel::Info) << "-> Loading Empires";
@@ -83,7 +79,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Progress) << "21 %";
 
 	Log(LogLevel::Info) << "-> Determining Demographics";
-	provinceManager->buildPopRatios(*datingData);
+	provinceManager.buildPopRatios(datingData);
 	Log(LogLevel::Progress) << "22 %";
 
 	Log(LogLevel::Info) << "-> Cataloguing Native Fauna";
@@ -124,10 +120,10 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const mappe
 	registerKeyword("EU4txt", [](std::istream& theStream) {
 	});
 	registerKeyword("date", [this](std::istream& theStream) {
-		datingData->lastEU4Date = date(commonItems::getString(theStream));
+		datingData.lastEU4Date = date(commonItems::getString(theStream));
 	});
 	registerKeyword("start_date", [this](std::istream& theStream) {
-		datingData->startEU4Date = date(commonItems::getString(theStream));
+		datingData.startEU4Date = date(commonItems::getString(theStream));
 	});
 	registerRegex("(multiplayer_)?random_seed", [this](const std::string& unused, std::istream& theStream) {
 		auto theSeed = commonItems::getString(theStream);
@@ -169,8 +165,8 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const mappe
 	});
 	registerKeyword("provinces", [this](std::istream& theStream) {
 		Log(LogLevel::Info) << "-> Importing Provinces";
-		provinceManager->loadProvinces(theStream);
-		Log(LogLevel::Info) << "<> Imported " << provinceManager->getAllProvinces().size() << " provinces.";
+		provinceManager.loadProvinces(theStream);
+		Log(LogLevel::Info) << "<> Imported " << provinceManager.getAllProvinces().size() << " provinces.";
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

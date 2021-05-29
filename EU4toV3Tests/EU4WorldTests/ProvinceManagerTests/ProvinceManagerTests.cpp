@@ -20,14 +20,14 @@ TEST(EU4World_ProvinceManagerTests, ProvinceManagerCanBeInput)
 	EXPECT_TRUE(theProvinceManager.getAllProvinces().contains(1));
 }
 
-TEST(EU4World_ProvinceManagerTests, gettingNonExistentProvinceThrowsException)
+TEST(EU4World_ProvinceManagerTests, gettingNonExistentProvinceReturnsNullptr)
 {
 	std::stringstream input;
 	input << "-1={}";
 	EU4::ProvinceManager theProvinceManager;
 	theProvinceManager.loadProvinces(input);
 
-	EXPECT_THROW(auto breakPlease = theProvinceManager.getProvince(42), std::runtime_error);
+	EXPECT_EQ(nullptr, theProvinceManager.getProvince(42));
 }
 
 TEST(EU4World_ProvinceManagerTests, provinceCanBeRetrieved)
@@ -83,8 +83,8 @@ TEST(EU4World_ProvinceManagerTests, provincesCanBeClassified)
 	theProvinceManager.classifyProvinces(regionMapper);
 
 	EXPECT_TRUE(theProvinceManager.getProvince(1)->isSea());
-	EXPECT_THROW(auto fail = theProvinceManager.getProvince(2), std::runtime_error);
-	EXPECT_THROW(auto fail = theProvinceManager.getProvince(3), std::runtime_error);
+	EXPECT_EQ(nullptr, theProvinceManager.getProvince(2));
+	EXPECT_EQ(nullptr, theProvinceManager.getProvince(3));
 	EXPECT_FALSE(theProvinceManager.getProvince(4)->isSea());
 }
 

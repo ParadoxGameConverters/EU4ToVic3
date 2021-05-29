@@ -20,13 +20,13 @@ void EU4::ProvinceManager::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-const std::shared_ptr<EU4::Province>& EU4::ProvinceManager::getProvince(const int provinceID) const
+std::shared_ptr<EU4::Province> EU4::ProvinceManager::getProvince(const int provinceID) const
 {
-	if (!provinces.contains(provinceID))
-		throw std::runtime_error(
-			 std::string("Accessing EU4 province ") + std::to_string(provinceID) + std::string(" that does not exist (Save/EU4 version mismatch?)"));
-	else
-		return provinces.at(provinceID);
+	if (const auto& province = provinces.find(provinceID); province != provinces.end())
+		return province->second;
+
+	Log(LogLevel::Warning) << "Accessing EU4 province " << provinceID << " that does not exist (Save/EU4 version mismatch?)";
+	return nullptr;
 }
 
 void EU4::ProvinceManager::loadParsers(const std::string& EU4Path, const Mods& mods)
@@ -64,14 +64,14 @@ void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)
 			continue;
 		if (defaultMapParser.isSea(provinceID))
 		{
-			province->setSea();			
+			province->setSea();
 		}
 		else
 		{
 			// Whatever remains is a legit land province
 			const auto& assimilationFactor = regionManager.getAssimilationFactor(provinceID);
 			if (assimilationFactor)
-				province->setAssimilationFactor(*assimilationFactor);			
+				province->setAssimilationFactor(*assimilationFactor);
 		}
 		viableProvinces.emplace(provinceID, province);
 	}

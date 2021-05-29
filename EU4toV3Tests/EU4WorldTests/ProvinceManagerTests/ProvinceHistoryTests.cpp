@@ -136,7 +136,7 @@ TEST(EU4World_ProvinceHistoryTests, popRatiosForColonizationAreCalculated)
 	const auto& pop2 = popRatios[1];
 	EXPECT_EQ("TAG1Culture", pop2.getCulture());
 	EXPECT_EQ("TAG1Religion", pop2.getReligion());
-	EXPECT_NEAR(0.50125, pop2.getUpperRatio(), 0.0000001); // we converter half, and then decayed by 1 year, which is remaining 50% * 0.0025
+	EXPECT_NEAR(0.50125, pop2.getUpperRatio(), 0.0000001); // we converted half, and then decayed by 1 year, which is remaining 50% * 0.0025
 	EXPECT_NEAR(0.50125, pop2.getMiddleRatio(), 0.0000001);
 	EXPECT_NEAR(0.00250, pop2.getLowerRatio(), 0.0000001); // 0.0025 * remaining 100%
 }
@@ -178,7 +178,7 @@ TEST(EU4World_ProvinceHistoryTests, popRatiosCanBeCombined)
 	const auto& pop2 = popRatios[1];
 	EXPECT_EQ("TAG1Culture", pop2.getCulture());
 	EXPECT_EQ("TAG1Religion", pop2.getReligion());
-	EXPECT_NEAR(0.50125, pop2.getUpperRatio(), 0.0000001); // we converter half, and then decayed by 1 year, which is remaining 50% * 0.0025
+	EXPECT_NEAR(0.50125, pop2.getUpperRatio(), 0.0000001); // we converted half, and then decayed by 1 year, which is remaining 50% * 0.0025
 	EXPECT_NEAR(0.50125, pop2.getMiddleRatio(), 0.0000001);
 	EXPECT_NEAR(0.00250, pop2.getLowerRatio(), 0.0000001); // 0.0025 * remaining 100%
 }

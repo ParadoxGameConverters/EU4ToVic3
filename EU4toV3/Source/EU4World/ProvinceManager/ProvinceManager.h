@@ -26,7 +26,7 @@ class ProvinceManager: commonItems::parser
 	void loadBuildingCostLoader(const BuildingCostLoader& buildCostLoader) { buildingCostLoader = buildCostLoader; }
 
 	[[nodiscard]] const auto& getAllProvinces() const { return provinces; }
-	[[nodiscard]] const std::shared_ptr<Province>& getProvince(int provinceID) const;
+	[[nodiscard]] std::shared_ptr<Province> getProvince(int provinceID) const;
 
 	void classifyProvinces(const RegionManager& regionManager);
 	void buildPopRatios(const DatingData& datingData);

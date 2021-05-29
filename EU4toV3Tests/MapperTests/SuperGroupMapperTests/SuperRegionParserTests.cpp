@@ -1,6 +1,8 @@
 #include "Mappers/SuperGroupMapper/SuperRegionParser.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
+using testing::ElementsAre;
+using testing::Pair;
 using testing::UnorderedElementsAre;
 
 TEST(Mappers_SuperRegionParserTests, PrimitivesDefaultToEmpty)
@@ -20,6 +22,5 @@ TEST(Mappers_SuperRegionParserTests, SuperRegionCanBeLoaded)
 	const auto superRegion = mappers::SuperRegionParser(input);
 
 	EXPECT_THAT(superRegion.getSuperRegionNames(), UnorderedElementsAre("sregion1", "sregion2"));
-	EXPECT_EQ(2, superRegion.getSuperRegionAssimilationMap().at("sregion1"));
-	EXPECT_EQ(3, superRegion.getSuperRegionAssimilationMap().at("sregion2"));
+	EXPECT_THAT(superRegion.getSuperRegionAssimilationMap(), ElementsAre(Pair("sregion1", 2), Pair("sregion2", 3)));
 }

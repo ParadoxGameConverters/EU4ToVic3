@@ -1,5 +1,7 @@
 #include "ProvinceManager/ProvinceBuildings.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
+using testing::UnorderedElementsAre;
 
 TEST(EU4World_ProvinceBuildingsTests, buildingsDefaultsToEmpty)
 {
@@ -15,5 +17,5 @@ TEST(EU4World_ProvinceBuildingsTests, buildingsCanBeAdded)
 	input << "theBuilding=yes\n";
 	const EU4::ProvinceBuildings theBuildings(input);
 
-	EXPECT_TRUE(theBuildings.getBuildings().contains("theBuilding"));
+	EXPECT_THAT(theBuildings.getBuildings(), UnorderedElementsAre("theBuilding"));
 }

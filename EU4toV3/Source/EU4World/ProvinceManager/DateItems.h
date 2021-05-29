@@ -1,21 +1,11 @@
-#ifndef DATE_ITEMS_H
-#define DATE_ITEMS_H
+#ifndef DATE_ITEMS
+#define DATE_ITEMS
+#include "DateChange.h"
 #include "Parser.h"
 #include <vector>
 
 namespace EU4
 {
-struct DateChange
-{
-	DateChange(const std::string& theChangeType, const std::string& theChangeValue)
-	{
-		changeType = theChangeType;
-		changeValue = theChangeValue;
-	}
-	std::string changeType;
-	std::string changeValue;
-};
-
 class DateItems: commonItems::parser
 {
   public:
@@ -30,4 +20,4 @@ class DateItems: commonItems::parser
 };
 } // namespace EU4
 
-#endif // DATE_ITEMS_H
+#endif // DATE_ITEMS

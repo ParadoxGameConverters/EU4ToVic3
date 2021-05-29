@@ -1,6 +1,8 @@
 #include "BuildingCostLoader/BuildingCostLoader.h"
 #include "ProvinceManager/EU4Province.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
+using testing::UnorderedElementsAre;
 
 TEST(EU4World_ProvinceTests, IDProperlyInterpreted)
 {
@@ -64,6 +66,20 @@ TEST(EU4World_ProvinceTests, primitivesCanBeSet)
 	EXPECT_DOUBLE_EQ(5.0, theProvince.getBaseManpower());
 }
 
+TEST(EU4World_ProvinceTests, provinceWithoutFullHistoryInitializesHistory)
+{
+	std::stringstream input;
+	input << "culture = cul\n";
+	input << "religion = rel\n";
+	const EU4::Province theProvince("-1", input);
+
+	const auto& cultureHistory = theProvince.getProvinceHistory().getCultureHistory();
+	const auto& religionHistory = theProvince.getProvinceHistory().getReligionHistory();
+
+	EXPECT_THAT(cultureHistory, UnorderedElementsAre(std::pair<date, std::string>(date("1.1.1"), "cul")));
+	EXPECT_THAT(religionHistory, UnorderedElementsAre(std::pair<date, std::string>(date("1.1.1"), "rel")));
+}
+
 TEST(EU4World_ProvinceTests, coresCanBeSet)
 {
 	std::stringstream input;
@@ -72,7 +88,7 @@ TEST(EU4World_ProvinceTests, coresCanBeSet)
 	input << "}\n";
 	const EU4::Province theProvince("-1", input);
 
-	EXPECT_TRUE(theProvince.getCores().contains("TAG"));
+	EXPECT_THAT(theProvince.getCores(), UnorderedElementsAre("TAG"));
 }
 
 TEST(EU4World_ProvinceTests, inHreCanRemainNegative)

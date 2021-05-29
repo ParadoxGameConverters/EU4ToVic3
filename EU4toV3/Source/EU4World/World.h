@@ -36,7 +36,7 @@ class World: commonItems::parser
 	std::string EU4Path;
 	Mods mods;
 
-	std::shared_ptr<DatingData> datingData;
+	DatingData datingData;
 
 	GameVersion version;
 	int eu4Seed = 0;
@@ -44,7 +44,7 @@ class World: commonItems::parser
 	RegionManager regionManager;
 	ReligionLoader religionLoader;
 	CultureLoader cultureLoader;
-	std::shared_ptr<ProvinceManager> provinceManager;
+	ProvinceManager provinceManager;
 };
 } // namespace EU4
 
