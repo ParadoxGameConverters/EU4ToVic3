@@ -1,17 +1,18 @@
 #ifndef EU4_WORLD_H
 #define EU4_WORLD_H
 #include "Configuration.h"
+#include "ConverterVersion/ConverterVersion.h"
+#include "CultureLoader/CultureLoader.h"
+#include "DatingData.h"
 #include "GameVersion.h"
 #include "Mods/ModLoader.h"
 #include "Parser.h"
-#include "ConverterVersion/ConverterVersion.h"
+#include "ProvinceManager/ProvinceManager.h"
 #include "RegionManager/RegionManager.h"
 #include "ReligionLoader/ReligionLoader.h"
-#include "CultureLoader/CultureLoader.h"
 
 namespace EU4
 {
-
 class World: commonItems::parser
 {
   public:
@@ -35,12 +36,7 @@ class World: commonItems::parser
 	std::string EU4Path;
 	Mods mods;
 
-	struct DatingData
-	{
-		date firstEU4Date; // first date we see in the save, usually predates startDate
-		date startEU4Date; // savegame saved date - conversion date
-		date lastEU4Date;	 // last date we see in the save, used to stop conversions
-	} dating;
+	DatingData datingData;
 
 	GameVersion version;
 	int eu4Seed = 0;
@@ -48,6 +44,7 @@ class World: commonItems::parser
 	RegionManager regionManager;
 	ReligionLoader religionLoader;
 	CultureLoader cultureLoader;
+	ProvinceManager provinceManager;
 };
 } // namespace EU4
 

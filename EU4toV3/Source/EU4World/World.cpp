@@ -18,13 +18,13 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Info) << "*** Hello EU4, loading World. ***";
 	EU4Path = theConfiguration.getEU4Path();
 	saveGame.path = theConfiguration.getEU4SaveGamePath();
-
 	Log(LogLevel::Progress) << "6 %";
+
 	Log(LogLevel::Info) << "-> Verifying EU4 save.";
 	verifySave();
 	Log(LogLevel::Progress) << "7 %";
 
-	Log(LogLevel::Info) << "-> Importing EU4 save.";
+	Log(LogLevel::Info) << "-> Loading EU4 save.";
 	if (!saveGame.compressed)
 	{
 		std::ifstream inBinary(fs::u8path(saveGame.path), std::ios::binary);
@@ -39,37 +39,47 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	}
 	Log(LogLevel::Progress) << "8 %";
 
+	Log(LogLevel::Progress) << "-> Verifying Save Contents.";
 	verifySaveContents();
 	Log(LogLevel::Progress) << "9 %";
 
+	Log(LogLevel::Progress) << "\t* Importing Save. *";
 	auto metaData = std::istringstream(saveGame.metadata);
 	auto gameState = std::istringstream(saveGame.gamestate);
 	registerKeys(theConfiguration, converterVersion);
 	parseStream(metaData);
 	parseStream(gameState);
 	clearRegisteredKeywords();
+	Log(LogLevel::Progress) << "\t* Import Complete. *";
 	Log(LogLevel::Progress) << "15 %";
 
 	// With mods loaded we can init stuff that requires them.
+
+	Log(LogLevel::Info) << "-> Prepping Mappers";
+	regionManager.loadRegions(EU4Path, mods);
 	religionLoader.loadReligions(EU4Path, mods);
 	cultureLoader.loadCultures(EU4Path, mods);
 	Log(LogLevel::Progress) << "16 %";
 
 	Log(LogLevel::Info) << "*** Building world ***";
-	Log(LogLevel::Info) << "-> Loading Empires";
+
+	Log(LogLevel::Info) << "-> Processing Province Info";
+	provinceManager.loadParsers(EU4Path, mods);
+	provinceManager.classifyProvinces(regionManager);
 	Log(LogLevel::Progress) << "17 %";
 
 	Log(LogLevel::Info) << "-> Calculating Province Weights";
+	provinceManager.buildProvinceWeights();
 	Log(LogLevel::Progress) << "18 %";
 
-	Log(LogLevel::Info) << "-> Processing Province Info";
+	Log(LogLevel::Info) << "-> Loading Empires";
 	Log(LogLevel::Progress) << "19 %";
 
 	Log(LogLevel::Info) << "-> Loading Regions";
-	regionManager.loadRegions(EU4Path);
 	Log(LogLevel::Progress) << "21 %";
 
 	Log(LogLevel::Info) << "-> Determining Demographics";
+	provinceManager.buildPopRatios(datingData);
 	Log(LogLevel::Progress) << "22 %";
 
 	Log(LogLevel::Info) << "-> Cataloguing Native Fauna";
@@ -110,10 +120,10 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const mappe
 	registerKeyword("EU4txt", [](std::istream& theStream) {
 	});
 	registerKeyword("date", [this](std::istream& theStream) {
-		dating.lastEU4Date = date(commonItems::getString(theStream));
+		datingData.lastEU4Date = date(commonItems::getString(theStream));
 	});
 	registerKeyword("start_date", [this](std::istream& theStream) {
-		dating.startEU4Date = date(commonItems::getString(theStream));
+		datingData.startEU4Date = date(commonItems::getString(theStream));
 	});
 	registerRegex("(multiplayer_)?random_seed", [this](const std::string& unused, std::istream& theStream) {
 		auto theSeed = commonItems::getString(theStream);
@@ -152,6 +162,11 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const mappe
 		ModLoader modLoader;
 		modLoader.loadMods(theConfiguration, modsList);
 		mods = modLoader.getMods();
+	});
+	registerKeyword("provinces", [this](std::istream& theStream) {
+		Log(LogLevel::Info) << "-> Importing Provinces";
+		provinceManager.loadProvinces(theStream);
+		Log(LogLevel::Info) << "<> Imported " << provinceManager.getAllProvinces().size() << " provinces.";
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

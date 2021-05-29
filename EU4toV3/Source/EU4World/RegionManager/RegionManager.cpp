@@ -7,11 +7,35 @@ namespace fs = std::filesystem;
 #include <fstream>
 #include <ranges>
 
-void EU4::RegionManager::loadRegions(const std::string& EU4Path)
+void EU4::RegionManager::loadRegions(const std::string& EU4Path, const Mods& mods)
 {
 	auto areaFilename = EU4Path + "/map/area.txt";
 	auto regionFilename = EU4Path + "/map/region.txt";
 	auto superRegionFilename = EU4Path + "/map/superregion.txt";
+
+	for (const auto& [modName, modPath]: mods)
+		if (commonItems::DoesFileExist(modPath + "/map/area.txt"))
+		{
+			Log(LogLevel::Info) << "-> Loading areas from mod: " << modName;
+			areaFilename = modPath + "/map/area.txt";
+			break;
+		}
+
+	for (const auto& [modName, modPath]: mods)
+		if (commonItems::DoesFileExist(modPath + "/map/region.txt"))
+		{
+			Log(LogLevel::Info) << "-> Loading regions from mod: " << modName;
+			areaFilename = modPath + "/map/region.txt";
+			break;
+		}
+
+	for (const auto& [modName, modPath]: mods)
+		if (commonItems::DoesFileExist(modPath + "/map/superregion.txt"))
+		{
+			Log(LogLevel::Info) << "-> Loading superregions from mod: " << modName;
+			areaFilename = modPath + "/map/superregion.txt";
+			break;
+		}
 
 	std::ifstream areaStream(fs::u8path(areaFilename));
 	if (!areaStream.is_open())
@@ -39,6 +63,7 @@ void EU4::RegionManager::loadRegions(const std::string& EU4Path)
 
 	linkSuperRegions();
 	linkRegions();
+	superGroupMapper.loadSuperGroups();
 }
 
 void EU4::RegionManager::loadRegions(std::istream& areaStream, std::istream& regionStream, std::istream& superRegionStream)
@@ -57,6 +82,7 @@ void EU4::RegionManager::loadRegions(std::istream& areaStream, std::istream& reg
 
 	linkSuperRegions();
 	linkRegions();
+	// load supergroups manually with loadSuperGroups() and then applySuperGroups() when testing.
 }
 
 void EU4::RegionManager::registerAreaKeys()
@@ -135,6 +161,16 @@ std::optional<std::string> EU4::RegionManager::getParentSuperRegionName(const in
 	return std::nullopt;
 }
 
+std::optional<std::string> EU4::RegionManager::getParentSuperGroupName(const int provinceID) const
+{
+	for (const auto& superRegion: superRegions | std::views::values)
+		if (superRegion->superRegionContainsProvince(provinceID))
+			return superRegion->getSuperGroup();
+
+	Log(LogLevel::Warning) << "Province ID " << provinceID << " has no parent supergroup name!";
+	return std::nullopt;
+}
+
 bool EU4::RegionManager::regionNameIsValid(const std::string& regionName) const
 {
 	const auto& regionItr = regions.find(regionName);
@@ -192,4 +228,40 @@ void EU4::RegionManager::linkRegions()
 			}
 		}
 	}
+}
+
+bool EU4::RegionManager::provinceIsValid(int provinceID) const
+{
+	for (const auto& area: areas | std::views::values)
+		if (area->areaContainsProvince(provinceID))
+			return true;
+	return false;
+}
+
+void EU4::RegionManager::applySuperGroups()
+{
+	for (const auto& [superRegionName, superRegion]: superRegions)
+	{
+		superRegion->setAssimilationFactor(superGroupMapper.getAssimilationFactor(superRegionName));
+		const auto& superGroup = superGroupMapper.getGroupForSuperRegion(superRegionName);
+		if (superGroup)
+		{
+			superRegion->setSuperGroup(*superGroup);
+		}
+		else
+		{
+			Log(LogLevel::Warning) << "Superregion " << superRegionName << " doesn't have a supergroup in world_supergroups.txt!";
+			superRegion->setSuperGroup("old_world"); // defaulting to the safe choice.
+		}
+	}
+}
+
+std::optional<double> EU4::RegionManager::getAssimilationFactor(int provinceID) const
+{
+	for (const auto& superRegion: superRegions | std::views::values)
+		if (superRegion->superRegionContainsProvince(provinceID))
+			return superRegion->getAssimilationFactor();
+
+	Log(LogLevel::Warning) << "Province ID " << provinceID << " has no assimilation factor!";
+	return std::nullopt;
 }
