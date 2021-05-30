@@ -92,3 +92,13 @@ void EU4::Province::determineProvinceWeight(const BuildingCostLoader& buildingTy
 		investmentFactor = -10 + investedWeight / 10; // For negatives, go linearly into debt.
 	}
 }
+
+double EU4::Province::getCulturePercent(const std::string& theCulture) const
+{
+	auto culturePercent = 0.0;
+	for (const auto& pop: provinceHistory.getPopRatios())
+		if (pop.getCulture() == theCulture)
+			culturePercent += pop.getLowerRatio();
+
+	return culturePercent;
+}

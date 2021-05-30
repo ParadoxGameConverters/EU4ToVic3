@@ -2,7 +2,7 @@
 #define DEFINITION_SCRAPER
 #include <set>
 #include <string>
-#include "Mods/ModLoader.h"
+#include "ModLoader/ModLoader.h"
 #include <optional>
 
 namespace EU4

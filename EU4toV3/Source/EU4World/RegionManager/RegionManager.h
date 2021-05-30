@@ -2,7 +2,7 @@
 #define EU4_REGIONMANAGER_H
 #include "Area.h"
 #include "Mappers/SuperGroupMapper/SuperGroupMapper.h"
-#include "Mods/ModLoader.h"
+#include "ModLoader/ModLoader.h"
 #include "Parser.h"
 #include "Region.h"
 #include "SuperRegion.h"

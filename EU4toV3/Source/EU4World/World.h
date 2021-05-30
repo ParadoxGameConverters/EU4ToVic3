@@ -5,11 +5,12 @@
 #include "CultureLoader/CultureLoader.h"
 #include "DatingData.h"
 #include "GameVersion.h"
-#include "Mods/ModLoader.h"
+#include "ModLoader/ModLoader.h"
 #include "Parser.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "RegionManager/RegionManager.h"
 #include "ReligionLoader/ReligionLoader.h"
+#include "CountryManager/EU4CountryManager.h"
 
 namespace EU4
 {
@@ -45,6 +46,7 @@ class World: commonItems::parser
 	ReligionLoader religionLoader;
 	CultureLoader cultureLoader;
 	ProvinceManager provinceManager;
+	CountryManager countryManager;
 };
 } // namespace EU4
 

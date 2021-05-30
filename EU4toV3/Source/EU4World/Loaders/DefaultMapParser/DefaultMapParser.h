@@ -2,7 +2,7 @@
 #define DEFAULTMAP_PARSER
 #include <set>
 #include "Parser.h"
-#include "Mods/ModLoader.h"
+#include "ModLoader/ModLoader.h"
 
 namespace EU4
 {

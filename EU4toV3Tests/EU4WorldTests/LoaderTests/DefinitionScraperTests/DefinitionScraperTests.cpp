@@ -1,4 +1,4 @@
-#include "ProvinceManager/DefinitionScraper.h"
+#include "DefinitionScraper/DefinitionScraper.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 using testing::UnorderedElementsAre;

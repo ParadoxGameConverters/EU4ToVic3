@@ -1,7 +1,7 @@
 #ifndef CULTURE_LOADER
 #define CULTURE_LOADER
 #include "CultureGroupParser.h"
-#include "Mods/ModLoader.h"
+#include "ModLoader/ModLoader.h"
 #include "Parser.h"
 
 namespace EU4

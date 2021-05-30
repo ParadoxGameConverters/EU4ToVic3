@@ -2,7 +2,7 @@
 #define RELIGION_LOADER
 #include "Parser.h"
 #include <set>
-#include "Mods/ModLoader.h"
+#include "ModLoader/ModLoader.h"
 
 namespace EU4
 {

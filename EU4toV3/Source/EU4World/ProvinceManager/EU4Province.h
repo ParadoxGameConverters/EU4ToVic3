@@ -16,7 +16,9 @@ class Province: commonItems::convenientParser
 	[[nodiscard]] auto getID() const { return provID; }
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getOwnerTag() const { return ownerTag; }
+	void setOwnerTag(const std::string& theTag) { ownerTag = theTag; }
 	[[nodiscard]] const auto& getControllerTag() const { return controllerTag; }
+	void setControllerTag(const std::string& theTag) { controllerTag = theTag; }
 	[[nodiscard]] const auto& getCulture() const { return culture; }
 	[[nodiscard]] const auto& getReligion() const { return religion; }
 
@@ -28,6 +30,9 @@ class Province: commonItems::convenientParser
 	[[nodiscard]] auto getBaseManpower() const { return baseManpower; }
 
 	[[nodiscard]] const auto& getCores() const { return cores; }
+	void addCore(const std::string& tag) { cores.insert(tag); }
+	void removeCore(const std::string& tag) { cores.erase(tag); }
+
 	[[nodiscard]] const auto& getBuildings() const { return buildings; }
 	[[nodiscard]] const auto& getProvinceHistory() const { return provinceHistory; }
 
@@ -39,6 +44,8 @@ class Province: commonItems::convenientParser
 
 	void setAssimilationFactor(double factor) { assimilationFactor = factor; }
 	void buildPopRatios(const DatingData& datingData) { provinceHistory.buildPopRatios(assimilationFactor, datingData); }
+
+	[[nodiscard]] double getCulturePercent(const std::string& theCulture) const;
 
 	// These relate to province weight, to be used in pop shaping.
 	void determineProvinceWeight(const BuildingCostLoader& buildingTypes);	

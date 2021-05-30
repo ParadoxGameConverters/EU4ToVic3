@@ -1,7 +1,7 @@
 #ifndef BUILDING_COST_LOADER
 #define BUILDING_COST_LOADER
 #include "BuildingCostLoader.h"
-#include "Mods/ModLoader.h"
+#include "ModLoader/ModLoader.h"
 #include "Parser.h"
 #include <map>
 #include <optional>

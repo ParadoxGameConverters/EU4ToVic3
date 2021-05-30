@@ -2,10 +2,10 @@
 #define PROVINCE_MANAGER
 #include "BuildingCostLoader/BuildingCostLoader.h"
 #include "DatingData.h"
-#include "DefaultMapParser.h"
-#include "DefinitionScraper.h"
+#include "DefaultMapParser/DefaultMapParser.h"
+#include "DefinitionScraper/DefinitionScraper.h"
 #include "EU4Province.h"
-#include "Mods/ModLoader.h"
+#include "ModLoader/ModLoader.h"
 #include "Parser.h"
 #include "RegionManager/RegionManager.h"
 #include <map>

@@ -2,7 +2,7 @@
 #include "Configuration.h"
 #include "GameVersion.h"
 #include "Log.h"
-#include "Mods/ModNames.h"
+#include "ModLoader/ModNames.h"
 #include "ParserHelpers.h"
 #include "rakaly_wrapper.h"
 #include <ZipFile.h>
@@ -167,6 +167,11 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const mappe
 		Log(LogLevel::Info) << "-> Importing Provinces";
 		provinceManager.loadProvinces(theStream);
 		Log(LogLevel::Info) << "<> Imported " << provinceManager.getAllProvinces().size() << " provinces.";
+	});
+	registerKeyword("countries", [this](std::istream& theStream) {
+		Log(LogLevel::Info) << "-> Importing Countries";
+		countryManager = CountryManager(theStream);
+		Log(LogLevel::Info) << "<> Imported " << countryManager.getCountries().size() << " countries.";
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
