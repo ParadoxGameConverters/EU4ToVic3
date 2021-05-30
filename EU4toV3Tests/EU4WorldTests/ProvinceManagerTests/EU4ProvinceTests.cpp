@@ -375,3 +375,28 @@ TEST(EU4World_ProvinceTests, investmentFactorScalesLinearlyForNegativeInvestment
 
 	EXPECT_NEAR(-11.0, theProvince.getInvestmentFactor(), 0.001);
 }
+
+TEST(EU4World_ProvinceTests, culturePercentCanBeRetrieved)
+{
+	DatingData datingData;
+	datingData.startEU4Date = date("1254.11.11");
+
+	std::stringstream input;
+	input << "culture=TAG1Culture\n";
+	input << "religion=TAG1Religion\n";
+	input << "history = {\n";
+	input << "culture=origCulture\n";
+	input << "religion=origReligion\n";
+	input << "1736.1.1={\n";
+	input << "\towner=TAG1\n";
+	input << "\tculture=TAG1Culture\n";
+	input << "\treligion=TAG1Religion\n";
+	input << "}\n";
+	input << "}\n";
+	EU4::Province province("-1", input);
+	province.setAssimilationFactor(0.0025);
+	province.buildPopRatios(datingData);
+
+	EXPECT_NEAR(0.7785, province.getCulturePercent("origCulture"), 0.0001);
+	EXPECT_NEAR(0.2214, province.getCulturePercent("TAG1Culture"), 0.0001);
+}

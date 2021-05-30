@@ -1,4 +1,9 @@
 #include "EU4Country.h"
+#include "CommonRegexes.h"
+#include "CountryGovernment/EU4GovernmentSection.h"
+#include "CountryHistory/CountryHistory.h"
+#include "CountryLeader/EU4LeaderID.h"
+#include "CountryRelations/EU4Relations.h"
 #include "EU4ActiveIdeas.h"
 #include "EU4ActivePolicy.h"
 #include "EU4CountryFlags.h"
@@ -8,14 +13,8 @@
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 #include <cmath>
-#include "CommonRegexes.h"
-#include "CountryGovernment/EU4GovernmentSection.h"
-#include "CountryHistory/CountryHistory.h"
-#include "CountryLeader/EU4LeaderID.h"
-#include "CountryRelations/EU4Relations.h"
 
-EU4::Country::Country(std::string countryTag, std::istream& theStream):
-	 tag(std::move(countryTag))
+EU4::Country::Country(std::string countryTag, std::istream& theStream): tag(std::move(countryTag))
 {
 	registerKeys();
 	parseStream(theStream);
@@ -27,10 +26,6 @@ EU4::Country::Country(std::string countryTag, std::istream& theStream):
 	if (religion.empty() && !historicalReligion.empty())
 		religion = historicalReligion;
 
-	// since custom_name was removed now we have to resort to this...
-	if (tag[0] == 'D' && isdigit(tag[1]) && isdigit(tag[2]))
-		customNation = true;
-
 	determineJapaneseRelations();
 	filterLeaders();
 
@@ -41,50 +36,50 @@ EU4::Country::Country(std::string countryTag, std::istream& theStream):
 
 void EU4::Country::registerKeys()
 {
-	registerKeyword("name", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("name", [this](std::istream& theStream) {
 		name = commonItems::getString(theStream);
 		name = commonItems::normalizeUTF8Path(name); // normalize due to disk export!
 	});
-	registerKeyword("adjective", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("adjective", [this](std::istream& theStream) {
 		adjective = commonItems::singleString(theStream).getString();
 	});
-	registerKeyword("colors", [this](const std::string& colorsString, std::istream& theStream) {
+	registerKeyword("colors", [this](std::istream& theStream) {
 		nationalColors = NationalSymbol(theStream);
 	});
-	registerKeyword("capital", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("capital", [this](std::istream& theStream) {
 		capital = commonItems::getInt(theStream);
 	});
-	registerKeyword("technoLogy_group", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("technoLogy_group", [this](std::istream& theStream) {
 		techGroup = commonItems::getString(theStream);
 	});
-	registerKeyword("liberty_desire", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("liberty_desire", [this](std::istream& theStream) {
 		libertyDesire = commonItems::getDouble(theStream);
 	});
-	registerKeyword("institutions", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("institutions", [this](std::istream& theStream) {
 		for (auto institution: commonItems::getInts(theStream))
 			if (institution == 1)
 				embracedInstitutions.push_back(true);
 			else
 				embracedInstitutions.push_back(false);
 	});
-	registerKeyword("isolationism", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("isolationism", [this](std::istream& theStream) {
 		isolationism = commonItems::getInt(theStream);
 	});
-	registerKeyword("primary_culture", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("primary_culture", [this](std::istream& theStream) {
 		primaryCulture = commonItems::getString(theStream);
 	});
-	registerKeyword("religion", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("religion", [this](std::istream& theStream) {
 		const commonItems::singleString theReligion(theStream);
 		religion = theReligion.getString();
 	});
-	registerKeyword("age_score", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("age_score", [this](std::istream& theStream) {
 		for (auto& agScore: commonItems::getDoubles(theStream))
 			score += agScore;
 	});
-	registerKeyword("stability", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("stability", [this](std::istream& theStream) {
 		stability = commonItems::singleDouble(theStream).getDouble();
 	});
-	registerKeyword("technoLogy", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("technoLogy", [this](std::istream& theStream) {
 		const EU4Technology techBlock(theStream);
 		admTech = techBlock.getAdm();
 		dipTech = techBlock.getDip();
@@ -99,12 +94,12 @@ void EU4::Country::registerKeys()
 		if (!newModifier.getModifier().empty())
 			modifiers.insert(newModifier.getModifier());
 	});
-	registerKeyword("government", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("government", [this](std::istream& theStream) {
 		const GovernmentSection theSection(theStream);
 		government = theSection.getGovernment();
 		governmentReforms = theSection.getGovernmentReforms();
 	});
-	registerKeyword("active_relations", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("active_relations", [this](std::istream& theStream) {
 		const EU4Relations activeRelations(theStream);
 		relations = activeRelations.getRelations();
 	});
@@ -112,24 +107,24 @@ void EU4::Country::registerKeys()
 		const EU4Army theArmy(theStream, armyFloats);
 		armies.push_back(theArmy);
 	});
-	registerKeyword("active_idea_groups", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("active_idea_groups", [this](std::istream& theStream) {
 		const EU4ActiveIdeas activeIdeas(theStream);
 		nationalIdeas = activeIdeas.getActiveIdeas();
 	});
 	registerRegex("legitimacy|horde_unity|devotion|meritocracy|republican_tradition", [this](const std::string& unused, std::istream& theStream) {
 		legitimacyEquivalent = commonItems::getDouble(theStream);
 	});
-	registerKeyword("average_autonomy", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("average_autonomy", [this](std::istream& theStream) {
 		averageAutonomy = commonItems::singleDouble(theStream).getDouble();
 	});
-	registerKeyword("colonial_parent", [this](const std::string& unused, std::istream& theStream) {
-		commonItems::ignoreItem(unused, theStream);
+	registerKeyword("colonial_parent", [this](std::istream& theStream) {
+		commonItems::ignoreItem("unused", theStream);
 		colony = true;
 	});
-	registerKeyword("overlord", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("overlord", [this](std::istream& theStream) {
 		overlord = commonItems::getString(theStream);
 	});
-	registerKeyword("history", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("history", [this](std::istream& theStream) {
 		const CountryHistory theCountryHistory(theStream);
 		historicalLeaders = theCountryHistory.getLeaders();
 		if (!theCountryHistory.getDynasty().empty())
@@ -137,24 +132,24 @@ void EU4::Country::registerKeys()
 		historicalPrimaryCulture = theCountryHistory.getPrimaryCulture();
 		historicalReligion = theCountryHistory.getReligion();
 	});
-	registerKeyword("leader", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("leader", [this](std::istream& theStream) {
 		const LeaderID idBlock(theStream);
 		activeLeaderIDs.insert(idBlock.getIDNum());
 	});
-	registerKeyword("active_policy", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("active_policy", [this](std::istream& theStream) {
 		const EU4ActivePolicy policyBlock(theStream);
 		policies.insert(policyBlock.getPolicy());
 	});
-	registerKeyword("absolutism", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("absolutism", [this](std::istream& theStream) {
 		absolutism = commonItems::getDouble(theStream);
 	});
-	registerKeyword("army_tradition", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("army_tradition", [this](std::istream& theStream) {
 		armyTradition = commonItems::getDouble(theStream);
 	});
-	registerKeyword("navy_tradition", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("navy_tradition", [this](std::istream& theStream) {
 		navyTradition = commonItems::getDouble(theStream);
 	});
-	registerKeyword("army_professionalism", [this](const std::string& unused, std::istream& theStream) {
+	registerKeyword("army_professionalism", [this](std::istream& theStream) {
 		armyProfessionalism = commonItems::getDouble(theStream);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
@@ -176,27 +171,6 @@ void EU4::Country::determineJapaneseRelations()
 		possibleDaimyo = true;
 	if (governmentReforms.contains("daimyo"))
 		possibleDaimyo = true;
-}
-
-
-void EU4::Country::readFromCommonCountry(const std::string& fileName, const std::string& fullFileName)
-{
-	if (name.empty())
-	{
-		// For this country's name we will use the stem of the file name.
-		const auto extPos = fileName.find_last_of('.');
-		name = fileName.substr(0, extPos);
-	}
-
-	if (!nationalColors.getMapColor())
-	{
-		registerKeyword("color", [this](const std::string& unused, std::istream& theStream) {
-			nationalColors.setMapColor(commonItems::Color::Factory{}.getColor(theStream));
-		});
-		registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
-
-		parseFile(fullFileName);
-	}
 }
 
 void EU4::Country::setLocalizationName(const std::string& language, const std::string& incName)
@@ -232,22 +206,22 @@ void EU4::Country::addCore(const std::shared_ptr<Province>& core)
 
 bool EU4::Country::hasModifier(const std::string& modifier) const
 {
-	return modifiers.count(modifier);
+	return modifiers.contains(modifier);
 }
 
 bool EU4::Country::hasNationalIdea(const std::string& ni) const
 {
-	return nationalIdeas.count(ni);
+	return nationalIdeas.contains(ni);
 }
 
 bool EU4::Country::hasFlag(const std::string& flag) const
 {
-	return flags.count(flag);
+	return flags.contains(flag);
 }
 
 bool EU4::Country::hasReform(const std::string& reform) const
 {
-	return governmentReforms.count(reform);
+	return governmentReforms.contains(reform);
 }
 
 void EU4::Country::updateRegimentTypes(const UnitTypeLoader& unitTypeLoader)
@@ -371,7 +345,7 @@ bool EU4::Country::cultureSurvivesInCores(const std::map<std::string, std::share
 		if (core->getCulturePercent(primaryCulture) < 0.5) // this core province doesn't have our people.
 			continue;
 
-		auto owner = theCountries.find(core->getOwnerTag());											  // ownerstring will be someone else, not us.
+		auto owner = theCountries.find(core->getOwnerTag());												  // ownerstring will be someone else, not us.
 		if (owner != theCountries.end() && owner->second->getPrimaryCulture() != primaryCulture) // and they are not us, ethnically.
 			return true;
 	}
@@ -380,9 +354,6 @@ bool EU4::Country::cultureSurvivesInCores(const std::map<std::string, std::share
 
 std::string EU4::Country::getName(const std::string& language) const
 {
-	if (!randomName.empty()) // this applies for 1.29 and below.
-		return randomName;
-
 	// We're returning english base name as a default for all languages where we lack localization.
 	if (namesByLanguage.empty())
 		return name;
@@ -399,9 +370,6 @@ std::string EU4::Country::getName(const std::string& language) const
 
 std::string EU4::Country::getAdjective(const std::string& language) const
 {
-	if (!randomName.empty())
-		return randomName;
-
 	// For dynamic countries there are no localizations save for the save game one,
 	// so we return english for all languages.
 	if (adjectivesByLanguage.empty())
