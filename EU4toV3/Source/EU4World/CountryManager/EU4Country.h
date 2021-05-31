@@ -93,7 +93,7 @@ class Country: commonItems::parser
 	[[nodiscard]] bool hasReform(const std::string&) const;
 	[[nodiscard]] const auto& getPolicies() const { return policies; }
 	[[nodiscard]] const auto& getEmbracedInstitutions() const { return embracedInstitutions; }
-	[[nodiscard]] int numEmbracedInstitutions() const;
+	[[nodiscard]] int getNumEmbracedInstitutions() const;
 	[[nodiscard]] bool hasNationalIdea(const std::string&) const;
 	[[nodiscard]] const auto& getNationalIdeas() const { return nationalIdeas; }
 
@@ -104,7 +104,6 @@ class Country: commonItems::parser
 	[[nodiscard]] double getManufactoryDensity() const;
 
 	// localizations
-	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
 	void setLocalizationName(const std::string& language, const std::string& incName);

@@ -174,23 +174,16 @@ void EU4::Country::determineJapaneseRelations()
 
 void EU4::Country::setLocalizationName(const std::string& language, const std::string& incName)
 {
-	// This is a workaround for vic2 crashes when there are 1-letter names for countries in localizations.
-	// So, instead of U, there is now UU. Yay, victory.
-
-	if (incName.size() == 1)
-	{
-		const auto newName = incName + incName;
-		namesByLanguage[language] = newName;
-	}
-	else
-	{
-		namesByLanguage[language] = incName;
-	}
+	namesByLanguage[language] = incName;
+	if (name.empty() && language == "english")
+		name = incName;
 }
 
 void EU4::Country::setLocalizationAdjective(const std::string& language, const std::string& incAdjective)
 {
 	adjectivesByLanguage[language] = incAdjective;
+	if (adjective.empty() && language == "english")
+		adjective = incAdjective;
 }
 
 void EU4::Country::addProvince(const std::shared_ptr<Province>& province)
@@ -353,46 +346,29 @@ bool EU4::Country::cultureSurvivesInCores(const std::map<std::string, std::share
 
 std::string EU4::Country::getName(const std::string& language) const
 {
-	// We're returning english base name as a default for all languages where we lack localization.
-	if (namesByLanguage.empty())
-		return name;
+	if (namesByLanguage.contains(language))
+		return namesByLanguage.at(language);
 
-	if (const auto& findIter = namesByLanguage.find(language); findIter != namesByLanguage.end())
-	{
-		// Default to english base name for incomplete localization
-		if (findIter->second.empty())
-			return name;
-		return findIter->second;
-	}
+	// if we're lacking a specific language, try with english.
+	if (namesByLanguage.contains("english"))
+		return namesByLanguage.at("english");
+
+	// otherwise, eh.
 	return name;
 }
 
 std::string EU4::Country::getAdjective(const std::string& language) const
 {
-	// For dynamic countries there are no localizations save for the save game one,
-	// so we return english for all languages.
-	if (adjectivesByLanguage.empty())
-		return adjective;
+	if (adjectivesByLanguage.contains(language))
+		return adjectivesByLanguage.at(language);
 
-	const auto& engIter = adjectivesByLanguage.find("english");
-	if (engIter == adjectivesByLanguage.end())
-	{
-		// localizations haven't loaded at all, otherwise this would exist. Bail.
-		return adjective;
-	}
+	if (adjectivesByLanguage.contains("english"))
+		return adjectivesByLanguage.at("english");
 
-	if (const auto& findIter = adjectivesByLanguage.find(language); findIter != adjectivesByLanguage.end())
-	{
-		// Default to english for incomplete localization
-		if (findIter->second.empty())
-			return engIter->second;
-		return findIter->second;
-	}
-	// We're returning english adjective as a default for all languages where we lack localization.
-	return engIter->second;
+	return adjective;
 }
 
-int EU4::Country::numEmbracedInstitutions() const
+int EU4::Country::getNumEmbracedInstitutions() const
 {
 	auto total = 0;
 	for (auto institution: embracedInstitutions)

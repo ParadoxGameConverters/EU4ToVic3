@@ -22,7 +22,7 @@ void EU4::CountryManager::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-std::shared_ptr<EU4::Country> EU4::CountryManager::getCountry(const std::string& tag)
+std::shared_ptr<EU4::Country> EU4::CountryManager::getCountry(const std::string& tag) const
 {
 	const auto& country = countries.find(tag);
 	if (country != countries.end())

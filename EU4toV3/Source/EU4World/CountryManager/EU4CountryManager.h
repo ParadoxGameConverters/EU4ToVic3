@@ -14,7 +14,7 @@ class CountryManager: public commonItems::parser
 	CountryManager(std::istream& theStream);
 
 	[[nodiscard]] const auto& getCountries() const { return countries; }
-	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& tag);
+	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& tag) const;
 
   private:
 	void registerKeys();
