@@ -59,6 +59,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	regionManager.loadRegions(EU4Path, mods);
 	religionLoader.loadReligions(EU4Path, mods);
 	cultureLoader.loadCultures(EU4Path, mods);
+	countryManager.loadUnitTypes(EU4Path, mods);
 	Log(LogLevel::Progress) << "16 %";
 
 	Log(LogLevel::Info) << "*** Building world ***";
@@ -95,6 +96,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Progress) << "27 %";
 
 	Log(LogLevel::Info) << "-> Resolving Regiments";
+	countryManager.updateUnitTypes();
 	Log(LogLevel::Progress) << "28 %";
 
 	Log(LogLevel::Info) << "-> Merging Nations";
@@ -170,7 +172,7 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const mappe
 	});
 	registerKeyword("countries", [this](std::istream& theStream) {
 		Log(LogLevel::Info) << "-> Importing Countries";
-		countryManager = CountryManager(theStream);
+		countryManager.loadCountries(theStream);
 		Log(LogLevel::Info) << "<> Imported " << countryManager.getCountries().size() << " countries.";
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);

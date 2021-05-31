@@ -1,8 +1,9 @@
 #include "EU4CountryManager.h"
 #include "CommonRegexes.h"
 #include "ParserHelpers.h"
+#include <ranges>
 
-EU4::CountryManager::CountryManager(std::istream& theStream)
+void EU4::CountryManager::loadCountries(std::istream& theStream)
 {
 	registerKeys();
 	parseStream(theStream);
@@ -29,4 +30,15 @@ std::shared_ptr<EU4::Country> EU4::CountryManager::getCountry(const std::string&
 		return country->second;
 	else
 		return nullptr;
+}
+
+void EU4::CountryManager::loadUnitTypes(const std::string& EU4Path, const Mods& mods)
+{
+	unitTypeLoader.loadUnitTypes(EU4Path, mods);
+}
+
+void EU4::CountryManager::updateUnitTypes()
+{
+	for (const auto& country: countries | std::views::values)
+		country->updateRegimentTypes(unitTypeLoader);
 }

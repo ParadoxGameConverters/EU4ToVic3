@@ -9,7 +9,7 @@ namespace EU4
 class UnitTypeLoader
 {
   public:
-	void loadUnitTypes(const std::string& EU4Path, const EU4::Mods& mods);
+	void loadUnitTypes(const std::string& EU4Path, const Mods& mods);
 	void loadUnitType(const std::string& unitName, std::istream& theStream);
 
 	[[nodiscard]] std::optional<UnitType> getUnitTypeForRegimentTypeName(const std::string& regimentTypeName) const;

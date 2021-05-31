@@ -279,7 +279,7 @@ TEST(EU4World_EU4CountryTests, ArmiesCanBeLoaded)
 	const EU4::Country country("TAG", input);
 	const auto& army = country.getArmies()[0];
 
-	EXPECT_TRUE("Armee royale", army.getName());
+	EXPECT_EQ("Armee royale", army.getName());
 	EXPECT_FALSE(army.getArmyFloats());
 	EXPECT_EQ(183, army.getLocation());
 	EXPECT_EQ(1, army.getRegiments().size());
@@ -440,7 +440,8 @@ TEST(EU4World_EU4CountryTests, ManufactoriesCanBeTallied)
 
 	std::stringstream countryManagerInput;
 	countryManagerInput << "TAG = {}\n";
-	const EU4::CountryManager countryManager(countryManagerInput);
+	EU4::CountryManager countryManager;
+	countryManager.loadCountries(countryManagerInput);
 
 	const auto& country = countryManager.getCountry("TAG");
 	country->addProvince(province);
@@ -462,7 +463,8 @@ TEST(EU4World_EU4CountryTests, ManufactoriesCanBeTransferredToOverlord)
 	std::stringstream countryManagerInput;
 	countryManagerInput << "TAG = { overlord = TA2 }\n";
 	countryManagerInput << "TA2 = {}\n";
-	const EU4::CountryManager countryManager(countryManagerInput);
+	EU4::CountryManager countryManager;
+	countryManager.loadCountries(countryManagerInput);
 
 	const auto& underling = countryManager.getCountry("TAG");
 	const auto& overlord = countryManager.getCountry("TA2");
@@ -634,7 +636,8 @@ TEST(EU4World_EU4CountryTests, CultureInCoresCanBePingedForCoresUnderForeignRule
 	std::stringstream countryManagerInput;
 	countryManagerInput << "TAG = { primary_culture = cul2 }\n"; // they don't share the culture with the province
 	countryManagerInput << "GAT = { primary_culture = cul }\n";
-	const EU4::CountryManager countryManager(countryManagerInput);
+	EU4::CountryManager countryManager;
+	countryManager.loadCountries(countryManagerInput);
 
 	const auto& tag = countryManager.getCountry("TAG");
 	const auto& gat = countryManager.getCountry("GAT");
@@ -659,7 +662,8 @@ TEST(EU4World_EU4CountryTests, CultureInCoresCanBePingedForCoresUnderSameCulture
 	std::stringstream countryManagerInput;
 	countryManagerInput << "TAG = { primary_culture = cul }\n"; // they share the culture with Gat's province so it belongs to them, actually.
 	countryManagerInput << "GAT = { primary_culture = cul }\n";
-	const EU4::CountryManager countryManager(countryManagerInput);
+	EU4::CountryManager countryManager;
+	countryManager.loadCountries(countryManagerInput);
 
 	const auto& tag = countryManager.getCountry("TAG");
 	const auto& gat = countryManager.getCountry("GAT");
@@ -773,13 +777,14 @@ TEST(EU4World_EU4CountryTests, EatCountryFullExample)
 	EU4::ProvinceManager provinceManager;
 	provinceManager.loadProvinces(provincesInput);
 
-	std::stringstream countryInput;
-	countryInput << "TGT = { army={} }\n"; // target, tech 0 for simplicity, 1 army, 0 score
-	countryInput << "EAT = { navy={} \n";	// eater, tech 10, 1 navy, 10 score
-	countryInput << "	technology = { adm_tech = 10 dip_tech = 10 mil_tech = 10}\n";
-	countryInput << " age_score = { 10 }\n";
-	countryInput << "}\n";
-	EU4::CountryManager countryManager(countryInput);
+	std::stringstream countryManagerInput;
+	countryManagerInput << "TGT = { army={} }\n"; // target, tech 0 for simplicity, 1 army, 0 score
+	countryManagerInput << "EAT = { navy={} \n";	 // eater, tech 10, 1 navy, 10 score
+	countryManagerInput << "	technology = { adm_tech = 10 dip_tech = 10 mil_tech = 10}\n";
+	countryManagerInput << " age_score = { 10 }\n";
+	countryManagerInput << "}\n";
+	EU4::CountryManager countryManager;
+	countryManager.loadCountries(countryManagerInput);
 
 	const auto& target = countryManager.getCountry("TGT");
 	const auto& eater = countryManager.getCountry("EAT");
