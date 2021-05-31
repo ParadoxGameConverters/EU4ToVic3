@@ -24,12 +24,14 @@ class Country: commonItems::parser
 	Country() = default;
 	Country(std::string countryTag, std::istream& theStream);
 
+	// Tag and links
 	[[nodiscard]] const auto& getTag() const { return tag; }
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
 	[[nodiscard]] const auto& getCores() const { return cores; }
 	void addProvince(const std::shared_ptr<Province>& province);
 	void addCore(const std::shared_ptr<Province>& core);
 
+	// statuses
 	[[nodiscard]] auto getInHRE() const { return inHRE; }
 	[[nodiscard]] auto getHolyRomanEmperor() const { return holyRomanEmperor; }
 	[[nodiscard]] auto getCelestialEmperor() const { return celestialEmperor; }
@@ -39,34 +41,39 @@ class Country: commonItems::parser
 	void setEmperor(const bool _emperor) { holyRomanEmperor = _emperor; }
 	void setRevolutionary(const bool _rev) { revolutionary = _rev; }
 
+	// in-game capital, score and tech
 	[[nodiscard]] auto getCapital() const { return capital; }
 	[[nodiscard]] auto getScore() const { return score; }
 	[[nodiscard]] auto getAdmTech() const { return admTech; }
 	[[nodiscard]] auto getDipTech() const { return dipTech; }
 	[[nodiscard]] auto getMilTech() const { return milTech; }
-
 	[[nodiscard]] const auto& getTechGroup() const { return techGroup; }
+
+	// culture religion
 	[[nodiscard]] const auto& getPrimaryCulture() const { return primaryCulture; }
 	[[nodiscard]] const auto& getReligion() const { return religion; }
 
+	// japan
 	[[nodiscard]] auto getIsolationism() const { return isolationism; }
-	[[nodiscard]] auto getPossibleDaimyo() const { return possibleDaimyo; }
-	[[nodiscard]] auto getPossibleShogun() const { return possibleShogun; }
+	[[nodiscard]] auto isPossibleDaimyo() const { return possibleDaimyo; }
+	[[nodiscard]] auto isPossibleShogun() const { return possibleShogun; }
 
+	// flags and variables
 	[[nodiscard]] auto getFlags() const { return flags; }
 	[[nodiscard]] bool hasFlag(const std::string&) const;
+	[[nodiscard]] auto getModifiers() const { return modifiers; }
 	[[nodiscard]] bool hasModifier(const std::string&) const;
 
+	// leaders and armies
 	void filterLeaders();
 	[[nodiscard]] const auto& getHistoricalLeaders() const { return historicalLeaders; }
 	[[nodiscard]] const auto& getMilitaryLeaders() const { return militaryLeaders; }
 	[[nodiscard]] const auto& getArmies() const { return armies; }
 
-	[[nodiscard]] const auto& getGovernment() const { return government; }
+	// relations
 	[[nodiscard]] const auto& getRelations() const { return relations; }
-	[[nodiscard]] bool hasNationalIdea(const std::string&) const;
-	[[nodiscard]] const auto& getNationalIdeas() const { return nationalIdeas; }
 
+	// country stats
 	[[nodiscard]] auto getLegitimacy() const { return legitimacyEquivalent; }
 	[[nodiscard]] auto getStability() const { return stability; }
 	[[nodiscard]] auto getAverageAutonomy() const { return averageAutonomy; }
@@ -75,29 +82,38 @@ class Country: commonItems::parser
 	[[nodiscard]] auto getNavyTradition() const { return navyTradition; }
 	[[nodiscard]] auto getArmyProfessionalism() const { return armyProfessionalism; }
 
+	// dependent stuff
 	[[nodiscard]] auto isColony() const { return colony; }
 	[[nodiscard]] const auto& getOverLord() const { return overlord; }
 	[[nodiscard]] auto getLibertyDesire() const { return libertyDesire; }
 
+	// government, reforms, ideas, institutions
+	[[nodiscard]] const auto& getGovernment() const { return government; }
 	[[nodiscard]] const auto& getReforms() const { return governmentReforms; }
 	[[nodiscard]] bool hasReform(const std::string&) const;
 	[[nodiscard]] const auto& getPolicies() const { return policies; }
 	[[nodiscard]] const auto& getEmbracedInstitutions() const { return embracedInstitutions; }
 	[[nodiscard]] int numEmbracedInstitutions() const;
+	[[nodiscard]] bool hasNationalIdea(const std::string&) const;
+	[[nodiscard]] const auto& getNationalIdeas() const { return nationalIdeas; }
 
+	// manufactories
 	[[nodiscard]] auto getManufactoryCount() const { return mfgCount + mfgTransfer; }
 	void buildManufactoryCount(const std::map<std::string, std::shared_ptr<Country>>& theCountries);
 	void increaseMfgTransfer(const int increase) { mfgTransfer += increase; }
 	[[nodiscard]] double getManufactoryDensity() const;
 
+	// localizations
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
 	void setLocalizationName(const std::string& language, const std::string& incName);
 	void setLocalizationAdjective(const std::string& language, const std::string& incAdjective);
 
+	// colors
 	[[nodiscard]] const auto& getNationalColors() const { return nationalColors; }
 
+	// botanical expedition
 	[[nodiscard]] const auto& getHistoricalEntry() const { return historicalEntry; }
 
 	// processing
@@ -122,15 +138,15 @@ class Country: commonItems::parser
 	bool inHRE = false;
 	bool holyRomanEmperor = false;
 	bool celestialEmperor = false;
-	bool revolutionary = true;
+	bool revolutionary = false;
 
 	int capital = 0; // provinceID
 	double score = 0.0;
 	double admTech = 0.0;
 	double dipTech = 0.0;
 	double milTech = 0.0;
-
 	std::string techGroup;
+	
 	std::string primaryCulture;
 	std::string religion;
 	std::string historicalPrimaryCulture; // we use these 2 when we're lacking a proper entry.
@@ -148,9 +164,7 @@ class Country: commonItems::parser
 	std::vector<Leader> militaryLeaders;	// filtered active leaders
 	std::vector<EU4Army> armies;				// and navies
 
-	std::string government = "monarchy";
 	std::map<std::string, EU4RelationDetails> relations;
-	std::set<std::string> nationalIdeas;
 
 	double legitimacyEquivalent = 100; // country at 100 doesn't store the value at all for any of the legitimacy-type values
 	double stability = 0;
@@ -164,9 +178,11 @@ class Country: commonItems::parser
 	std::string overlord;
 	double libertyDesire = 0.0;
 
+	std::string government = "monarchy";
 	std::set<std::string> governmentReforms;
 	std::set<std::string> policies;
 	std::vector<bool> embracedInstitutions;
+	std::set<std::string> nationalIdeas;
 
 	int mfgCount = 0;
 	int mfgTransfer = 0;

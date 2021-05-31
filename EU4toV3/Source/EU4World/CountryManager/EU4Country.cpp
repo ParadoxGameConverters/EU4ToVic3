@@ -49,7 +49,7 @@ void EU4::Country::registerKeys()
 	registerKeyword("capital", [this](std::istream& theStream) {
 		capital = commonItems::getInt(theStream);
 	});
-	registerKeyword("technoLogy_group", [this](std::istream& theStream) {
+	registerKeyword("technology_group", [this](std::istream& theStream) {
 		techGroup = commonItems::getString(theStream);
 	});
 	registerKeyword("liberty_desire", [this](std::istream& theStream) {
@@ -68,9 +68,8 @@ void EU4::Country::registerKeys()
 	registerKeyword("primary_culture", [this](std::istream& theStream) {
 		primaryCulture = commonItems::getString(theStream);
 	});
-	registerKeyword("religion", [this](std::istream& theStream) {
-		const commonItems::singleString theReligion(theStream);
-		religion = theReligion.getString();
+	registerKeyword("religion", [this](std::istream& theStream) {		
+		religion = commonItems::getString(theStream);
 	});
 	registerKeyword("age_score", [this](std::istream& theStream) {
 		for (auto& agScore: commonItems::getDoubles(theStream))
@@ -79,7 +78,7 @@ void EU4::Country::registerKeys()
 	registerKeyword("stability", [this](std::istream& theStream) {
 		stability = commonItems::singleDouble(theStream).getDouble();
 	});
-	registerKeyword("technoLogy", [this](std::istream& theStream) {
+	registerKeyword("technology", [this](std::istream& theStream) {
 		const EU4Technology techBlock(theStream);
 		admTech = techBlock.getAdm();
 		dipTech = techBlock.getDip();

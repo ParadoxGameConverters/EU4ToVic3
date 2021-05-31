@@ -1,4 +1,4 @@
-#include "Mods/ModParser.h"
+#include "ModLoader/ModParser.h"
 #include "gtest/gtest.h"
 
 TEST(EU4World_ModTests, primitivesDefaultToBlank)

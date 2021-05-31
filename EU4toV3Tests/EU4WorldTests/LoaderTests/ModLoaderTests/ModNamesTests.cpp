@@ -1,4 +1,4 @@
-#include "Mods/ModNames.h"
+#include "ModLoader/ModNames.h"
 #include "gtest/gtest.h"
 
 TEST(EU4World_ModNamesTests, primitivesDefaultToBlank)
