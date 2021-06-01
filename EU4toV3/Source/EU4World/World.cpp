@@ -199,6 +199,15 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const mappe
 	registerKeyword("revolution_target", [this](std::istream& theStream) {
 		revolutionTarget = commonItems::getString(theStream);
 	});
+	registerKeyword("diplomacy", [this](std::istream& theStream) {
+		Log(LogLevel::Info) << "-> Loading Diplomacy";
+		diplomacyParser.loadDiplomacy(theStream);
+		Log(LogLevel::Info) << "-> Loaded " << diplomacyParser.getAgreements().size() << " agreements";
+	});
+	registerKeyword("active_war", [this](std::istream& theStream) {
+		const WarParser newWar(theStream);
+		wars.push_back(newWar);
+	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 

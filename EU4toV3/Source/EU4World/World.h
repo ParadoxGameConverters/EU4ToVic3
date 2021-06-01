@@ -2,15 +2,17 @@
 #define EU4_WORLD_H
 #include "Configuration.h"
 #include "ConverterVersion/ConverterVersion.h"
+#include "CountryManager/EU4CountryManager.h"
 #include "CultureLoader/CultureLoader.h"
 #include "DatingData.h"
+#include "DiplomacyParser/DiplomacyParser.h"
 #include "GameVersion.h"
 #include "ModLoader/ModLoader.h"
 #include "Parser.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "RegionManager/RegionManager.h"
 #include "ReligionLoader/ReligionLoader.h"
-#include "CountryManager/EU4CountryManager.h"
+#include "WarParser/WarParser.h"
 
 namespace EU4
 {
@@ -45,12 +47,14 @@ class World: commonItems::parser
 	std::string celestialEmperor;
 	std::set<std::string> hreReforms;
 	std::string revolutionTarget;
+	std::vector<WarParser> wars;
 
 	RegionManager regionManager;
 	ReligionLoader religionLoader;
 	CultureLoader cultureLoader;
 	ProvinceManager provinceManager;
 	CountryManager countryManager;
+	DiplomacyParser diplomacyParser;
 };
 } // namespace EU4
 
