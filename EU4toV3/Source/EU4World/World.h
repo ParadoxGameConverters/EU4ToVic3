@@ -41,6 +41,9 @@ class World: commonItems::parser
 
 	GameVersion version;
 	int eu4Seed = 0;
+	std::string HREmperor;
+	std::string celestialEmperor;
+	std::set<std::string> hreReforms;
 
 	RegionManager regionManager;
 	ReligionLoader religionLoader;

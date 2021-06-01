@@ -45,9 +45,9 @@ TEST(EU4World_EU4CountryTests, StatusesCanBeToggled)
 	std::stringstream input;
 	EU4::Country country("TAG", input);
 
-	EXPECT_FALSE(country.getInHRE());
-	EXPECT_FALSE(country.getHolyRomanEmperor());
-	EXPECT_FALSE(country.getCelestialEmperor());
+	EXPECT_FALSE(country.isInHRE());
+	EXPECT_FALSE(country.isHREmperor());
+	EXPECT_FALSE(country.isCelestialEmperor());
 	EXPECT_FALSE(country.isRevolutionary());
 
 	country.setInHRE(true);
@@ -55,9 +55,9 @@ TEST(EU4World_EU4CountryTests, StatusesCanBeToggled)
 	country.setCelestialEmperor(true);
 	country.setRevolutionary(true);
 
-	EXPECT_TRUE(country.getInHRE());
-	EXPECT_TRUE(country.getHolyRomanEmperor());
-	EXPECT_TRUE(country.getCelestialEmperor());
+	EXPECT_TRUE(country.isInHRE());
+	EXPECT_TRUE(country.isHREmperor());
+	EXPECT_TRUE(country.isCelestialEmperor());
 	EXPECT_TRUE(country.isRevolutionary());
 }
 

@@ -1,5 +1,7 @@
 #include "World.h"
+#include "CommonRegexes.h"
 #include "Configuration.h"
+#include "EmpireParser/EmpireParser.h"
 #include "GameVersion.h"
 #include "Log.h"
 #include "ModLoader/ModNames.h"
@@ -11,7 +13,6 @@
 #include <fstream>
 #include <string>
 namespace fs = std::filesystem;
-#include "CommonRegexes.h"
 
 EU4::World::World(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion)
 {
@@ -64,7 +65,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 
 	Log(LogLevel::Info) << "*** Building world ***";
 
-	Log(LogLevel::Info) << "-> Processing Province Info";
+	Log(LogLevel::Info) << "-> Classifying Provinces According to Aesthetic Principles";
 	provinceManager.loadParsers(EU4Path, mods);
 	provinceManager.classifyProvinces(regionManager);
 	Log(LogLevel::Progress) << "17 %";
@@ -73,15 +74,24 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	provinceManager.buildProvinceWeights();
 	Log(LogLevel::Progress) << "18 %";
 
-	Log(LogLevel::Info) << "-> Loading Empires";
-	Log(LogLevel::Progress) << "19 %";
-
-	Log(LogLevel::Info) << "-> Loading Regions";
-	Log(LogLevel::Progress) << "21 %";
-
 	Log(LogLevel::Info) << "-> Determining Demographics";
 	provinceManager.buildPopRatios(datingData);
+	Log(LogLevel::Progress) << "19 %";
+
+	Log(LogLevel::Info) << "-> Linking Provinces to Countries";
+	countryManager.linkProvincesToCountries(provinceManager);
+	Log(LogLevel::Progress) << "20 %";
+
+	Log(LogLevel::Info) << "-> Updating Unit Types in Regiments";
+	countryManager.updateUnitTypes();
+	Log(LogLevel::Progress) << "21 %";
+
+	Log(LogLevel::Info) << "-> Injecting Imperialism into Countries";
+	countryManager.setHREAndEmperors(HREmperor, celestialEmperor, provinceManager);
 	Log(LogLevel::Progress) << "22 %";
+
+	Log(LogLevel::Info) << "-> Loading Regions";
+	Log(LogLevel::Progress) << "23 %";
 
 	Log(LogLevel::Info) << "-> Cataloguing Native Fauna";
 	Log(LogLevel::Progress) << "24 %";
@@ -94,10 +104,6 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 
 	Log(LogLevel::Info) << "-> Setting Localizations";
 	Log(LogLevel::Progress) << "27 %";
-
-	Log(LogLevel::Info) << "-> Resolving Regiments";
-	countryManager.updateUnitTypes();
-	Log(LogLevel::Progress) << "28 %";
 
 	Log(LogLevel::Info) << "-> Merging Nations";
 	Log(LogLevel::Progress) << "29 %";
@@ -174,6 +180,17 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const mappe
 		Log(LogLevel::Info) << "-> Importing Countries";
 		countryManager.loadCountries(theStream);
 		Log(LogLevel::Info) << "<> Imported " << countryManager.getCountries().size() << " countries.";
+	});
+	registerKeyword("empire", [this](std::istream& theStream) {
+		const EmpireParser empireBlock(theStream);
+		HREmperor = empireBlock.getEmperor();
+		hreReforms = empireBlock.getHREReforms();
+		Log(LogLevel::Info) << "-> HREmperor is: " << HREmperor;
+	});
+	registerKeyword("celestial_empire", [this](std::istream& theStream) {
+		const EmpireParser empireBlock(theStream);
+		celestialEmperor = empireBlock.getEmperor();
+		Log(LogLevel::Info) << "-> Celestial emperor is: " << celestialEmperor;
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

@@ -42,3 +42,42 @@ void EU4::CountryManager::updateUnitTypes()
 	for (const auto& country: countries | std::views::values)
 		country->updateRegimentTypes(unitTypeLoader);
 }
+
+void EU4::CountryManager::linkProvincesToCountries(const ProvinceManager& provinceManager)
+{
+	const auto& provinces = provinceManager.getAllProvinces();
+
+	for (const auto& province: provinces | std::views::values)
+	{
+		// add provinces to all coreowners.
+		for (const auto& core: province->getCores())
+			if (const auto& coreOwner = countries.find(core); coreOwner != countries.end())
+				coreOwner->second->addCore(province);
+
+		// add to actual owner
+		if (province->getOwnerTag().empty())
+			continue;
+		if (const auto& owner = countries.find(province->getOwnerTag()); owner != countries.end())
+			owner->second->addProvince(province);
+	}
+}
+
+void EU4::CountryManager::setHREAndEmperors(const std::string& HREmperor, const std::string& celestialEmperor, const ProvinceManager& provinceManager)
+{
+	for (const auto& country: countries | std::views::values)
+	{
+		// set HRE stuff
+		if (country->getCapital() != 0)
+		{
+			const auto& capital = provinceManager.getProvince(country->getCapital());
+			if (capital && capital->inHre())
+				country->setInHRE(true);
+		}
+		if (country->getTag() == HREmperor)
+			country->setEmperor(true);
+
+		// not-HRE stuff
+		if (country->getTag() == celestialEmperor)
+			country->setCelestialEmperor(true);
+	}
+}

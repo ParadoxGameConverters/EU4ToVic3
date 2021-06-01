@@ -32,9 +32,9 @@ class Country: commonItems::parser
 	void addCore(const std::shared_ptr<Province>& core);
 
 	// statuses
-	[[nodiscard]] auto getInHRE() const { return inHRE; }
-	[[nodiscard]] auto getHolyRomanEmperor() const { return holyRomanEmperor; }
-	[[nodiscard]] auto getCelestialEmperor() const { return celestialEmperor; }
+	[[nodiscard]] auto isInHRE() const { return inHRE; }
+	[[nodiscard]] auto isHREmperor() const { return holyRomanEmperor; }
+	[[nodiscard]] auto isCelestialEmperor() const { return celestialEmperor; }
 	[[nodiscard]] auto isRevolutionary() const { return revolutionary; }
 	void setInHRE(const bool _inHRE) { inHRE = _inHRE; }
 	void setCelestialEmperor(const bool _celestialEmperor) { celestialEmperor = _celestialEmperor; }
