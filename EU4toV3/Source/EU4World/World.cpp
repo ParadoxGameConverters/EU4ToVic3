@@ -108,11 +108,13 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	countryManager.setRevolutionTarget(revolutionTarget);
 	Log(LogLevel::Progress) << "25 %";
 
+	Log(LogLevel::Info) << "-> Merging Nations";
+	countryManager.bootNationMergeMapper();
+	countryManager.mergeNations();
+	Log(LogLevel::Progress) << "26 %";
+
 	Log(LogLevel::Info) << "-> Setting Localizations";
 	Log(LogLevel::Progress) << "27 %";
-
-	Log(LogLevel::Info) << "-> Merging Nations";
-	Log(LogLevel::Progress) << "29 %";
 
 
 

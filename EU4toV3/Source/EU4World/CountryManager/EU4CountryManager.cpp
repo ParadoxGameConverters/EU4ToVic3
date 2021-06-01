@@ -123,3 +123,57 @@ void EU4::CountryManager::injectColorsIntoCountries()
 	}
 	Log(LogLevel::Info) << "<> " << counter << " countries needed updating.";
 }
+
+void EU4::CountryManager::mergeNations()
+{
+	if (nationMergeMapper.getMergeDaimyos())
+		uniteJapan();
+
+	for (const auto& mergeBlock: nationMergeMapper.getMergeBlocks())
+		if (mergeBlock.getMerge() && !mergeBlock.getMaster().empty())
+		{
+			Log(LogLevel::Info) << "- Merging nations for: " << mergeBlock.getMaster();
+			auto master = getCountry(mergeBlock.getMaster());
+			if (!master)
+			{
+				Log(LogLevel::Warning) << "Country " << mergeBlock.getMaster() << " in configurables/merge_nations.txt does not exist in the save! Skipping.";
+				continue;
+			}
+			for (const auto& slaveTag: mergeBlock.getSlaves())
+			{
+				const auto& slave = getCountry(slaveTag);
+				if (!slave)
+				{
+					Log(LogLevel::Warning) << "Country " << slaveTag << " in configurables/merge_nations.txt does not exist in the save! Skipping.";
+					continue;
+				}
+				master->eatCountry(slave);
+			}
+		}
+}
+
+void EU4::CountryManager::uniteJapan()
+{
+	Log(LogLevel::Info) << "-> Uniting Japan";
+
+	// japan, right?
+	auto japan = getCountry("JAP");
+	if (!japan)
+	{
+		// no japan. look for japan.
+		for (const auto& country: countries | std::views::values)
+		{
+			if (country->isPossibleShogun())
+			{
+				const auto& tag = country->getTag();
+				Log(LogLevel::Info) << "- " << tag << " is the shogun.";
+				japan = getCountry(tag);
+				break;
+			}
+		}
+	}
+
+	for (const auto& country: countries | std::views::values)
+		if (country->isPossibleDaimyo())
+			japan->eatCountry(country);
+}

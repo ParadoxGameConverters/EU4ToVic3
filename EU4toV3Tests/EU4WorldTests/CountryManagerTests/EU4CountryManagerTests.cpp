@@ -1,5 +1,7 @@
 #include "CountryManager/EU4CountryManager.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
+using testing::UnorderedElementsAre;
 
 TEST(EU4World_CountryManagerTests, primitivesDefaultToBlank)
 {
@@ -186,4 +188,81 @@ TEST(EU4World_CountryManagerTests, RevolutionaryIsForwardedToCountries)
 	EXPECT_FALSE(tag->isRevolutionary());
 	EXPECT_TRUE(gat->isRevolutionary());
 	EXPECT_FALSE(aaa->isRevolutionary());
+}
+
+TEST(EU4World_CountryManagerTests, JapanCanBeUnited)
+{
+	std::stringstream provincesInput;
+	provincesInput << "-1 = { owner = AAA cores={ AAA } }\n";
+	provincesInput << "-2 = { owner = BBB cores={ BBB } }\n";
+	provincesInput << "-3 = { owner = CCC cores={ CCC } }\n";
+	provincesInput << "-4 = { owner = DDD cores={ DDD } }\n";
+	EU4::ProvinceManager provinceManager;
+	provinceManager.loadProvinces(provincesInput);
+
+	std::stringstream nationMergeInput;
+	nationMergeInput << "merge_daimyos = yes";
+	mappers::NationMergeMapper mapper;
+	mapper.loadNationMerge(nationMergeInput);
+
+	std::stringstream countryManagerInput;
+	countryManagerInput << "AAA = { government = { reform_stack={ reforms={ daimyo } } } }\n";
+	countryManagerInput << "BBB = { government = { reform_stack={ reforms={ indep_daimyo } } } }\n";
+	countryManagerInput << "CCC = { government = { reform_stack={ reforms={ shogunate } } } }\n";
+	countryManagerInput << "DDD = { government = { reform_stack={ reforms={ plutocracy } } } }\n"; // control group.
+	EU4::CountryManager manager;
+	manager.loadCountries(countryManagerInput);
+	manager.linkProvincesToCountries(provinceManager);
+	manager.loadNationMergeMapper(mapper);
+	manager.mergeNations();
+
+	EXPECT_THAT(provinceManager.getProvince(1)->getCores(), UnorderedElementsAre("CCC"));
+	EXPECT_THAT(provinceManager.getProvince(2)->getCores(), UnorderedElementsAre("CCC"));
+	EXPECT_THAT(provinceManager.getProvince(3)->getCores(), UnorderedElementsAre("CCC"));
+	EXPECT_THAT(provinceManager.getProvince(4)->getCores(), UnorderedElementsAre("DDD"));
+	EXPECT_EQ("CCC", provinceManager.getProvince(1)->getOwnerTag());
+	EXPECT_EQ("CCC", provinceManager.getProvince(2)->getOwnerTag());
+	EXPECT_EQ("CCC", provinceManager.getProvince(3)->getOwnerTag());
+	EXPECT_EQ("DDD", provinceManager.getProvince(4)->getOwnerTag());
+}
+
+TEST(EU4World_CountryManagerTests, NationsCanBeMerged)
+{
+	std::stringstream provincesInput;
+	provincesInput << "-1 = { owner = AAA cores={ AAA } }\n";
+	provincesInput << "-2 = { owner = BBB cores={ BBB } }\n";
+	provincesInput << "-3 = { owner = CCC cores={ CCC } }\n";
+	provincesInput << "-4 = { owner = DDD cores={ DDD } }\n";
+	EU4::ProvinceManager provinceManager;
+	provinceManager.loadProvinces(provincesInput);
+
+	std::stringstream nationMergeInput;
+	nationMergeInput << "test = {\n";
+	nationMergeInput << " merge = yes\n";
+	nationMergeInput << " master = BBB\n";
+	nationMergeInput << " slave = AAA\n";
+	nationMergeInput << " slave = DDD\n";
+	nationMergeInput << "}\n";
+	mappers::NationMergeMapper mapper;
+	mapper.loadNationMerge(nationMergeInput);
+
+	std::stringstream countryManagerInput;
+	countryManagerInput << "AAA = { }\n";
+	countryManagerInput << "BBB = { }\n";
+	countryManagerInput << "CCC = { }\n"; // control group.
+	countryManagerInput << "DDD = { }\n";
+	EU4::CountryManager manager;
+	manager.loadCountries(countryManagerInput);
+	manager.linkProvincesToCountries(provinceManager);
+	manager.loadNationMergeMapper(mapper);
+	manager.mergeNations();
+
+	EXPECT_THAT(provinceManager.getProvince(1)->getCores(), UnorderedElementsAre("BBB"));
+	EXPECT_THAT(provinceManager.getProvince(2)->getCores(), UnorderedElementsAre("BBB"));
+	EXPECT_THAT(provinceManager.getProvince(3)->getCores(), UnorderedElementsAre("CCC"));
+	EXPECT_THAT(provinceManager.getProvince(4)->getCores(), UnorderedElementsAre("BBB"));
+	EXPECT_EQ("BBB", provinceManager.getProvince(1)->getOwnerTag());
+	EXPECT_EQ("BBB", provinceManager.getProvince(2)->getOwnerTag());
+	EXPECT_EQ("CCC", provinceManager.getProvince(3)->getOwnerTag());
+	EXPECT_EQ("BBB", provinceManager.getProvince(4)->getOwnerTag());
 }
