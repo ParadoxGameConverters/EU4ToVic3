@@ -1,3 +1,4 @@
+#include "CommonFunctions.h"
 #include "CountryManager/EU4CountryManager.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
@@ -265,4 +266,53 @@ TEST(EU4World_CountryManagerTests, NationsCanBeMerged)
 	EXPECT_EQ("BBB", provinceManager.getProvince(2)->getOwnerTag());
 	EXPECT_EQ("CCC", provinceManager.getProvince(3)->getOwnerTag());
 	EXPECT_EQ("BBB", provinceManager.getProvince(4)->getOwnerTag());
+}
+
+TEST(EU4World_CountryManagerTests, LocalizationsCanBeInjected)
+{
+	std::stringstream input;
+	input << commonItems::utf8BOM << "l_english:\n";
+	input << " AAA: \"aloc\" # comment\n";
+	input << " BBB: \"bloc\"\n";
+	input << " AAA_ADJ: \"aloc adj\" # comment\n";
+	input << " BBB_ADJ: \"bloc adj\"\n";
+	std::stringstream input2;
+	input2 << commonItems::utf8BOM << "l_french:\n";
+	input2 << " AAA: \"alocee\"\n";
+	input2 << " BBB: \"blocee\"\n";
+	input2 << " AAA_ADJ: \"alocee adj\"\n";
+	input2 << " BBB_ADJ: \"blocee adj\"\n";
+	EU4::EU4LocalizationLoader locs;
+	locs.loadLocalizations(input);
+	locs.loadLocalizations(input2);
+
+	std::stringstream countryManagerInput;
+	countryManagerInput << "AAA = { name = \"le default a\" adjective = \"le default a adj\" }\n";
+	countryManagerInput << "BBB = { name = \"le default b\" adjective = \"le default b adj\" }\n";
+	countryManagerInput << "CCC = { name = \"le default c\" adjective = \"le default c adj\" }\n"; // control group.
+	EU4::CountryManager manager;
+	manager.loadCountries(countryManagerInput);
+	manager.loadLocalizations(locs);
+	manager.injectLocalizations();
+
+	EXPECT_EQ("aloc", manager.getCountry("AAA")->getName("english"));
+	EXPECT_EQ("alocee", manager.getCountry("AAA")->getName("french"));
+	EXPECT_EQ("aloc", manager.getCountry("AAA")->getName("nonsense"));
+	EXPECT_EQ("aloc adj", manager.getCountry("AAA")->getAdjective("english"));
+	EXPECT_EQ("alocee adj", manager.getCountry("AAA")->getAdjective("french"));
+	EXPECT_EQ("aloc adj", manager.getCountry("AAA")->getAdjective("nonsense"));
+
+	EXPECT_EQ("bloc", manager.getCountry("BBB")->getName("english"));
+	EXPECT_EQ("blocee", manager.getCountry("BBB")->getName("french"));
+	EXPECT_EQ("bloc", manager.getCountry("BBB")->getName("nonsense"));
+	EXPECT_EQ("bloc adj", manager.getCountry("BBB")->getAdjective("english"));
+	EXPECT_EQ("blocee adj", manager.getCountry("BBB")->getAdjective("french"));
+	EXPECT_EQ("bloc adj", manager.getCountry("BBB")->getAdjective("nonsense"));
+
+	EXPECT_EQ("le default c", manager.getCountry("CCC")->getName("english"));
+	EXPECT_EQ("le default c", manager.getCountry("CCC")->getName("french"));
+	EXPECT_EQ("le default c", manager.getCountry("CCC")->getName("nonsense"));
+	EXPECT_EQ("le default c adj", manager.getCountry("CCC")->getAdjective("english"));
+	EXPECT_EQ("le default c adj", manager.getCountry("CCC")->getAdjective("french"));
+	EXPECT_EQ("le default c adj", manager.getCountry("CCC")->getAdjective("nonsense"));
 }

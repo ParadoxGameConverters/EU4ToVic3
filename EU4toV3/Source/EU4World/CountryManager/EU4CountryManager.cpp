@@ -43,6 +43,11 @@ void EU4::CountryManager::loadCommonCountries(const std::string& EU4Path, const 
 	commonCountryLoader.loadCommonCountries(EU4Path, mods);
 }
 
+void EU4::CountryManager::loadLocalizations(const std::string& EU4Path, const Mods& mods)
+{
+	localizationLoader.loadLocalizations(EU4Path, mods);
+}
+
 void EU4::CountryManager::updateUnitTypes()
 {
 	for (const auto& country: countries | std::views::values)
@@ -176,4 +181,35 @@ void EU4::CountryManager::uniteJapan()
 	for (const auto& country: countries | std::views::values)
 		if (country->isPossibleDaimyo())
 			japan->eatCountry(country);
+}
+
+void EU4::CountryManager::fillHistoricalData()
+{
+	for (const auto& country: countries)
+		historicalData.emplace_back(std::make_pair(country.first, country.second->getHistoricalEntry()));
+}
+
+void EU4::CountryManager::injectLocalizations()
+{
+	auto counter = 0;
+	auto counterAdj = 0;
+	for (const auto& theCountry: countries | std::views::values)
+	{
+		const auto& nameLocalizations = localizationLoader.getTextInEachLanguage(theCountry->getTag());
+		if (nameLocalizations)
+			for (const auto& [language, name]: *nameLocalizations)
+			{
+				theCountry->setLocalizationName(language, name);
+				++counter;
+			}
+
+		const auto& adjectiveLocalizations = localizationLoader.getTextInEachLanguage(theCountry->getTag() + "_ADJ");
+		if (adjectiveLocalizations)
+			for (const auto& [language, adjective]: *adjectiveLocalizations)
+			{
+				theCountry->setLocalizationAdjective(language, adjective);
+				++counterAdj;
+			}
+	}
+	Log(LogLevel::Info) << "<> " << counter << " country names and " << counterAdj << " country adjectives loaded.";
 }
