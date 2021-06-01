@@ -56,11 +56,17 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 
 	// With mods loaded we can init stuff that requires them.
 
-	Log(LogLevel::Info) << "-> Prepping Mappers";
+	Log(LogLevel::Info) << "-> Booting Loaders:";
+	Log(LogLevel::Info) << "\tRegions";
 	regionManager.loadRegions(EU4Path, mods);
+	Log(LogLevel::Info) << "\tReligions";
 	religionLoader.loadReligions(EU4Path, mods);
+	Log(LogLevel::Info) << "\tCultures";
 	cultureLoader.loadCultures(EU4Path, mods);
+	Log(LogLevel::Info) << "\tUnit Types";
 	countryManager.loadUnitTypes(EU4Path, mods);
+	Log(LogLevel::Info) << "\tCommon Countries";
+	countryManager.loadCommonCountries(EU4Path, mods);
 	Log(LogLevel::Progress) << "16 %";
 
 	Log(LogLevel::Info) << "*** Building world ***";
@@ -90,12 +96,13 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	countryManager.setHREAndEmperors(HREmperor, celestialEmperor, provinceManager);
 	Log(LogLevel::Progress) << "22 %";
 
-	Log(LogLevel::Info) << "-> Injecting Smokestacks into Provinces";
-	countryManager.buildManufactoryCounts();
+	Log(LogLevel::Info) << "-> Injecting Art Deco into Countries";
+	countryManager.injectColorsIntoCountries();
 	Log(LogLevel::Progress) << "23 %";
 
-	Log(LogLevel::Info) << "-> Reading Countries";
-	Log(LogLevel::Progress) << "26 %";
+	Log(LogLevel::Info) << "-> Injecting Smokestacks into Provinces";
+	countryManager.buildManufactoryCounts();
+	Log(LogLevel::Progress) << "24 %";
 
 	Log(LogLevel::Info) << "-> Setting Localizations";
 	Log(LogLevel::Progress) << "27 %";

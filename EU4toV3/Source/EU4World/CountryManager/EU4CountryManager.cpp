@@ -1,5 +1,6 @@
 #include "EU4CountryManager.h"
 #include "CommonRegexes.h"
+#include "Log.h"
 #include "ParserHelpers.h"
 #include <ranges>
 
@@ -35,6 +36,11 @@ std::shared_ptr<EU4::Country> EU4::CountryManager::getCountry(const std::string&
 void EU4::CountryManager::loadUnitTypes(const std::string& EU4Path, const Mods& mods)
 {
 	unitTypeLoader.loadUnitTypes(EU4Path, mods);
+}
+
+void EU4::CountryManager::loadCommonCountries(const std::string& EU4Path, const Mods& mods)
+{
+	commonCountryLoader.loadCommonCountries(EU4Path, mods);
 }
 
 void EU4::CountryManager::updateUnitTypes()
@@ -86,4 +92,19 @@ void EU4::CountryManager::buildManufactoryCounts() const
 {
 	for (const auto& country: countries | std::views::values)
 		country->buildManufactoryCount(countries);
+}
+
+void EU4::CountryManager::injectColorsIntoCountries()
+{
+	auto counter = 0;
+	for (const auto& [tag, country]: countries)
+	{
+		const auto& color = commonCountryLoader.getCommonColor(tag);
+		if (color && !country->getNationalColors().getMapColor())
+		{
+			country->setMapColor(*color);
+			++counter;
+		}
+	}
+	Log(LogLevel::Info) << "<> " << counter << " countries needed updating.";
 }

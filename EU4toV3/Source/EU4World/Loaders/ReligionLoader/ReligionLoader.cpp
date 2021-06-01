@@ -1,14 +1,13 @@
 #include "ReligionLoader.h"
+#include "CommonRegexes.h"
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 #include "ReligionParser.h"
-#include "CommonRegexes.h"
 #include <ranges>
 
 void EU4::ReligionLoader::loadReligions(const std::string& EU4Path, const Mods& mods)
 {
-	Log(LogLevel::Info) << "-> Loading Religions";
 	registerKeys();
 
 	for (const auto& filename: commonItems::GetAllFilesInFolder(EU4Path + "/common/religions/"))

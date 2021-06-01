@@ -111,6 +111,7 @@ class Country: commonItems::parser
 
 	// colors
 	[[nodiscard]] const auto& getNationalColors() const { return nationalColors; }
+	void setMapColor(const commonItems::Color& color) { nationalColors.setMapColor(color); }
 
 	// botanical expedition
 	[[nodiscard]] const auto& getHistoricalEntry() const { return historicalEntry; }
@@ -145,7 +146,7 @@ class Country: commonItems::parser
 	double dipTech = 0.0;
 	double milTech = 0.0;
 	std::string techGroup;
-	
+
 	std::string primaryCulture;
 	std::string religion;
 	std::string historicalPrimaryCulture; // we use these 2 when we're lacking a proper entry.

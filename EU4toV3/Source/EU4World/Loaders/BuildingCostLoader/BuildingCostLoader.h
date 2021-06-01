@@ -25,4 +25,4 @@ class BuildingCostLoader: commonItems::parser
 };
 } // namespace EU4
 
-#endif // EU4
+#endif // BUILDING_COST_LOADER

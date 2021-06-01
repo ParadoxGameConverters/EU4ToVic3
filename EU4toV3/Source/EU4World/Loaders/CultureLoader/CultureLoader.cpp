@@ -7,7 +7,6 @@
 
 void EU4::CultureLoader::loadCultures(const std::string& EU4Path, const Mods& mods)
 {
-	Log(LogLevel::Info) << "-> Loading Cultures and Culture Groups";
 	registerKeys();
 
 	for (const auto& cultureFile: commonItems::GetAllFilesInFolder(EU4Path + "/common/cultures/"))

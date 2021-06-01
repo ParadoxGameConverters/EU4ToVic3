@@ -6,14 +6,14 @@
 
 void EU4::UnitTypeLoader::loadUnitTypes(const std::string& EU4Path, const EU4::Mods& mods)
 {
-	Log(LogLevel::Info) << "-> Loading unit types and strengths.";
-
 	for (const auto& filename: commonItems::GetAllFilesInFolder(EU4Path + "/common/units/"))
 		addUnitFileToRegimentTypeMap(EU4Path + "/common/units", filename);
 
 	for (const auto& modPath: mods | std::views::values)
 		for (const auto& filename: commonItems::GetAllFilesInFolder(modPath + "/common/units/"))
 			addUnitFileToRegimentTypeMap(modPath + "/common/units", filename);
+
+	Log(LogLevel::Info) << "<> Loaded " << unitTypeMap.size() << " unit definitions.";
 }
 
 void EU4::UnitTypeLoader::loadUnitType(const std::string& unitName, std::istream& theStream)

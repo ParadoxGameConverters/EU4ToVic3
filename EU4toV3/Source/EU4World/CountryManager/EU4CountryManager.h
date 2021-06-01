@@ -1,5 +1,6 @@
 #ifndef EU4_COUNTRY_MANAGER
 #define EU4_COUNTRY_MANAGER
+#include "CommonCountryLoader/CommonCountryLoader.h"
 #include "EU4Country.h"
 #include "Parser.h"
 #include "ProvinceManager/ProvinceManager.h"
@@ -19,12 +20,16 @@ class CountryManager: public commonItems::parser
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& tag) const;
 
-	// the weave
+	// the prep
 	void loadUnitTypes(const std::string& EU4Path, const Mods& mods);
+	void loadCommonCountries(const std::string& EU4Path, const Mods& mods);
+
+	// the weave
 	void updateUnitTypes();
 	void linkProvincesToCountries(const ProvinceManager& provinceManager);
 	void setHREAndEmperors(const std::string& HREmperor, const std::string& celestialEmperor, const ProvinceManager& provinceManager);
 	void buildManufactoryCounts() const;
+	void injectColorsIntoCountries();
 
   private:
 	void registerKeys();
@@ -32,6 +37,7 @@ class CountryManager: public commonItems::parser
 	std::map<std::string, std::shared_ptr<Country>> countries;
 
 	UnitTypeLoader unitTypeLoader;
+	CommonCountryLoader commonCountryLoader;
 };
 } // namespace EU4
 
