@@ -121,6 +121,10 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 
 	Log(LogLevel::Info) << "-> Equipping Botanical Expedition";
 	countryManager.fillHistoricalData();
+	Log(LogLevel::Progress) << "38 %";
+
+	Log(LogLevel::Info) << "-> Dropping Dead, Empty and/or Coreless Nations";
+	countryManager.filterDeadNations(theConfiguration.configBlock.removeType);
 	Log(LogLevel::Progress) << "39 %";
 
 	Log(LogLevel::Info) << "*** Good-bye EU4, you served us well. ***";

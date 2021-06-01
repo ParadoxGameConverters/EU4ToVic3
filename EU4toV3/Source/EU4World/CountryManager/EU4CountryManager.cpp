@@ -213,3 +213,73 @@ void EU4::CountryManager::injectLocalizations()
 	}
 	Log(LogLevel::Info) << "<> " << counter << " country names and " << counterAdj << " country adjectives loaded.";
 }
+
+void EU4::CountryManager::filterDeadNations(Configuration::DEADCORES toggle)
+{
+	removeEmptyNations();
+
+	if (toggle == Configuration::DEADCORES::DeadCores)
+	{
+		removeDeadLandlessNations();
+	}
+	else if (toggle == Configuration::DEADCORES::AllCores)
+	{
+		removeLandlessNations();
+	}
+}
+
+void EU4::CountryManager::removeEmptyNations()
+{
+	// Remove nations without provinces or cores. These are dead by definition as they can't be resurrected.
+
+	auto counter = countries.size();
+	std::map<std::string, std::shared_ptr<Country>> survivingCountries;
+
+	for (const auto& country: countries)
+	{
+		const auto& countryProvinces = country.second->getProvinces();
+		const auto& countryCores = country.second->getCores();
+		if (!countryProvinces.empty() || !countryCores.empty())
+			survivingCountries.insert(country);
+	}
+
+	countries.swap(survivingCountries);
+	counter -= countries.size();
+
+	Log(LogLevel::Info) << "<> " << counter << " empty nations disposed, " << countries.size() << " remain.";
+}
+
+void EU4::CountryManager::removeDeadLandlessNations()
+{
+	// This one removes nations that can't be resurrected from their cores because those provinces don't contain a majority of their
+	// primary culture.
+	auto counter = countries.size();
+
+	std::map<std::string, std::shared_ptr<Country>> landlessCountries;
+	for (const auto& country: countries)
+		if (country.second->getProvinces().empty())
+			landlessCountries.insert(country);
+
+	for (const auto& country: landlessCountries)
+		if (!country.second->cultureSurvivesInCores(countries))
+			countries.erase(country.first);
+
+	counter -= countries.size();
+	Log(LogLevel::Info) << "<> " << counter << " dead landless nations disposed, " << countries.size() << " remain.";
+}
+
+void EU4::CountryManager::removeLandlessNations()
+{
+	// The most direct one - no land, no survival.
+
+	auto counter = countries.size();
+	std::map<std::string, std::shared_ptr<Country>> survivingCountries;
+
+	for (const auto& country: countries)
+		if (const auto& theProvinces = country.second->getProvinces(); !theProvinces.empty())
+			survivingCountries.insert(country);
+
+	countries.swap(survivingCountries);
+	counter -= countries.size();
+	Log(LogLevel::Info) << "<> " << counter << " landless nations disposed, " << countries.size() << " remain.";
+}

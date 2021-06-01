@@ -40,6 +40,7 @@ class CountryManager: public commonItems::parser
 	void injectColorsIntoCountries();
 	void injectLocalizations();
 	void mergeNations();
+	void filterDeadNations(Configuration::DEADCORES toggle);
 
 	// the dessert
 	void fillHistoricalData();
@@ -47,6 +48,9 @@ class CountryManager: public commonItems::parser
   private:
 	void registerKeys();
 	void uniteJapan();
+	void removeEmptyNations();
+	void removeDeadLandlessNations();
+	void removeLandlessNations();
 
 	std::map<std::string, std::shared_ptr<Country>> countries;
 

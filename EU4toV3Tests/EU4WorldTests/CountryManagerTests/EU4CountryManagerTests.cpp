@@ -316,3 +316,88 @@ TEST(EU4World_CountryManagerTests, LocalizationsCanBeInjected)
 	EXPECT_EQ("le default c adj", manager.getCountry("CCC")->getAdjective("french"));
 	EXPECT_EQ("le default c adj", manager.getCountry("CCC")->getAdjective("nonsense"));
 }
+
+TEST(EU4World_CountryManagerTests, EmptyNationsAreDeleted)
+{
+	std::stringstream provincesInput;
+	provincesInput << "-1 = { owner = AAA cores={ AAA } }\n";
+	provincesInput << "-2 = { owner = AAA cores={ BBB } }\n";
+	provincesInput << "-3 = { owner = CCC cores={ CCC } }\n";
+	provincesInput << "-4 = { owner = AAA cores={ BBB } }\n";
+	EU4::ProvinceManager provinceManager;
+	provinceManager.loadProvinces(provincesInput);
+
+	std::stringstream countryManagerInput;
+	countryManagerInput << "AAA = { }\n";
+	countryManagerInput << "BBB = { }\n";
+	countryManagerInput << "CCC = { }\n";
+	countryManagerInput << "DDD = { }\n"; // no provinces, no cores, to be deleted.
+	EU4::CountryManager manager;
+	manager.loadCountries(countryManagerInput);
+	manager.linkProvincesToCountries(provinceManager);
+
+	manager.filterDeadNations(Configuration::DEADCORES::LeaveAll);
+
+	EXPECT_TRUE(manager.getCountry("AAA"));
+	EXPECT_TRUE(manager.getCountry("BBB"));
+	EXPECT_TRUE(manager.getCountry("CCC"));
+	EXPECT_FALSE(manager.getCountry("DDD"));
+}
+
+TEST(EU4World_CountryManagerTests, ProvinceLessNationsCanBeDeleted)
+{
+	std::stringstream provincesInput;
+	provincesInput << "-1 = { owner = AAA cores={ AAA } }\n";
+	provincesInput << "-2 = { owner = AAA cores={ BBB } }\n";
+	provincesInput << "-3 = { owner = CCC cores={ CCC } }\n";
+	provincesInput << "-4 = { owner = AAA cores={ BBB } }\n";
+	EU4::ProvinceManager provinceManager;
+	provinceManager.loadProvinces(provincesInput);
+
+	std::stringstream countryManagerInput;
+	countryManagerInput << "AAA = { }\n";
+	countryManagerInput << "BBB = { }\n"; // no provinces, to be deleted.
+	countryManagerInput << "CCC = { }\n";
+	countryManagerInput << "DDD = { }\n"; // no provinces, no cores, deleted automatically.
+	EU4::CountryManager manager;
+	manager.loadCountries(countryManagerInput);
+	manager.linkProvincesToCountries(provinceManager);
+
+	manager.filterDeadNations(Configuration::DEADCORES::AllCores);
+
+	EXPECT_TRUE(manager.getCountry("AAA"));
+	EXPECT_FALSE(manager.getCountry("BBB"));
+	EXPECT_TRUE(manager.getCountry("CCC"));
+	EXPECT_FALSE(manager.getCountry("DDD"));
+}
+
+TEST(EU4World_CountryManagerTests, CultureLessNationsCanBeDeleted)
+{
+	std::stringstream provincesInput;
+	provincesInput << "-1 = { owner = AAA cores={ AAA } culture = livingCulture religion = irrelevant }\n";
+	provincesInput << "-2 = { owner = AAA cores={ BBB } culture = livingCulture religion = irrelevant }\n";
+	provincesInput << "-3 = { owner = AAA cores={ CCC } culture = livingCulture religion = irrelevant }\n";
+	provincesInput << "-4 = { owner = AAA cores={ BBB } culture = livingCulture religion = irrelevant }\n";
+	EU4::ProvinceManager provinceManager;
+	provinceManager.loadProvinces(provincesInput);
+
+	DatingData datingData;
+	datingData.startEU4Date = date("1444.11.11");
+	provinceManager.buildPopRatios(datingData);
+
+	std::stringstream countryManagerInput;
+	countryManagerInput << "AAA = { primary_culture=foreignCulture }\n";
+	countryManagerInput << "BBB = { primary_culture=livingCulture }\n"; // culture survives in province 2, country survives.
+	countryManagerInput << "CCC = { primary_culture=deadCulture }\n";	  // culture does not survive in province 3, country is deleted.
+	countryManagerInput << "DDD = { primary_culture=deadCulture }\n";	  // no provinces, no cores, deleted automatically.
+	EU4::CountryManager manager;
+	manager.loadCountries(countryManagerInput);
+	manager.linkProvincesToCountries(provinceManager);
+
+	manager.filterDeadNations(Configuration::DEADCORES::DeadCores);
+
+	EXPECT_TRUE(manager.getCountry("AAA"));
+	EXPECT_TRUE(manager.getCountry("BBB"));
+	EXPECT_FALSE(manager.getCountry("CCC"));
+	EXPECT_FALSE(manager.getCountry("DDD"));
+}
