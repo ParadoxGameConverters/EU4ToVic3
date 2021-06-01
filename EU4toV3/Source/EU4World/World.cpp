@@ -90,14 +90,9 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	countryManager.setHREAndEmperors(HREmperor, celestialEmperor, provinceManager);
 	Log(LogLevel::Progress) << "22 %";
 
-	Log(LogLevel::Info) << "-> Loading Regions";
+	Log(LogLevel::Info) << "-> Injecting Smokestacks into Provinces";
+	countryManager.buildManufactoryCounts();
 	Log(LogLevel::Progress) << "23 %";
-
-	Log(LogLevel::Info) << "-> Cataloguing Native Fauna";
-	Log(LogLevel::Progress) << "24 %";
-
-	Log(LogLevel::Info) << "-> Clasifying Invasive Fauna";
-	Log(LogLevel::Progress) << "25 %";
 
 	Log(LogLevel::Info) << "-> Reading Countries";
 	Log(LogLevel::Progress) << "26 %";
@@ -108,8 +103,6 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Info) << "-> Merging Nations";
 	Log(LogLevel::Progress) << "29 %";
 
-	Log(LogLevel::Info) << "-> Calculating Industry";
-	Log(LogLevel::Progress) << "30 %";
 
 	Log(LogLevel::Info) << "-> Viva la revolution!";
 	Log(LogLevel::Progress) << "31 %";

@@ -2,10 +2,10 @@
 #define EU4_COUNTRY_MANAGER
 #include "EU4Country.h"
 #include "Parser.h"
+#include "ProvinceManager/ProvinceManager.h"
+#include "UnitTypeLoader/UnitTypeLoader.h"
 #include <map>
 #include <memory>
-#include "UnitTypeLoader/UnitTypeLoader.h"
-#include "ProvinceManager/ProvinceManager.h"
 
 namespace EU4
 {
@@ -13,7 +13,7 @@ class CountryManager: public commonItems::parser
 {
   public:
 	CountryManager() = default;
-	
+
 	void loadCountries(std::istream& theStream);
 
 	[[nodiscard]] const auto& getCountries() const { return countries; }
@@ -24,10 +24,11 @@ class CountryManager: public commonItems::parser
 	void updateUnitTypes();
 	void linkProvincesToCountries(const ProvinceManager& provinceManager);
 	void setHREAndEmperors(const std::string& HREmperor, const std::string& celestialEmperor, const ProvinceManager& provinceManager);
+	void buildManufactoryCounts() const;
 
   private:
 	void registerKeys();
-	
+
 	std::map<std::string, std::shared_ptr<Country>> countries;
 
 	UnitTypeLoader unitTypeLoader;

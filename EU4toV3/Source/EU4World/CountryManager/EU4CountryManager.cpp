@@ -81,3 +81,9 @@ void EU4::CountryManager::setHREAndEmperors(const std::string& HREmperor, const 
 			country->setCelestialEmperor(true);
 	}
 }
+
+void EU4::CountryManager::buildManufactoryCounts() const
+{
+	for (const auto& country: countries | std::views::values)
+		country->buildManufactoryCount(countries);
+}
