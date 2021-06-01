@@ -104,6 +104,10 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	countryManager.buildManufactoryCounts();
 	Log(LogLevel::Progress) << "24 %";
 
+	Log(LogLevel::Info) << "-> Viva la revolution?";
+	countryManager.setRevolutionTarget(revolutionTarget);
+	Log(LogLevel::Progress) << "25 %";
+
 	Log(LogLevel::Info) << "-> Setting Localizations";
 	Log(LogLevel::Progress) << "27 %";
 
@@ -111,8 +115,6 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Progress) << "29 %";
 
 
-	Log(LogLevel::Info) << "-> Viva la revolution!";
-	Log(LogLevel::Progress) << "31 %";
 
 	Log(LogLevel::Info) << "-> Doing Accounting and dishes";
 	Log(LogLevel::Progress) << "32 %";
@@ -191,6 +193,9 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const mappe
 		const EmpireParser empireBlock(theStream);
 		celestialEmperor = empireBlock.getEmperor();
 		Log(LogLevel::Info) << "-> Celestial emperor is: " << celestialEmperor;
+	});
+	registerKeyword("revolution_target", [this](std::istream& theStream) {
+		revolutionTarget = commonItems::getString(theStream);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

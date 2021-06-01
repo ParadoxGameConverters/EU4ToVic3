@@ -88,6 +88,21 @@ void EU4::CountryManager::setHREAndEmperors(const std::string& HREmperor, const 
 	}
 }
 
+void EU4::CountryManager::setRevolutionTarget(const std::string& revolutionTarget)
+{
+	if (!revolutionTarget.empty())
+	{
+		const auto& country = countries.find(revolutionTarget);
+		if (country != countries.end())
+		{
+			country->second->setRevolutionary(true);
+			Log(LogLevel::Info) << "\t^^^ Revolution Lives!";
+			return;
+		}
+	}
+	Log(LogLevel::Info) << "\tvvv ... revolution failed. :/";
+}
+
 void EU4::CountryManager::buildManufactoryCounts() const
 {
 	for (const auto& country: countries | std::views::values)

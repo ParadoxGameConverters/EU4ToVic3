@@ -167,3 +167,23 @@ TEST(EU4World_CountryManagerTests, EmperorshipsAreForwardedToCountries)
 	EXPECT_FALSE(aaa->isHREmperor());
 	EXPECT_FALSE(aaa->isCelestialEmperor());
 }
+
+TEST(EU4World_CountryManagerTests, RevolutionaryIsForwardedToCountries)
+{
+	std::stringstream countryManagerInput;
+	countryManagerInput << "TAG = { }\n";
+	countryManagerInput << "GAT = { }\n";
+	countryManagerInput << "AAA = { }\n";
+	EU4::CountryManager manager;
+	manager.loadCountries(countryManagerInput);
+
+	manager.setRevolutionTarget("GAT");
+
+	const auto& tag = manager.getCountry("TAG");
+	const auto& gat = manager.getCountry("GAT");
+	const auto& aaa = manager.getCountry("AAA");
+
+	EXPECT_FALSE(tag->isRevolutionary());
+	EXPECT_TRUE(gat->isRevolutionary());
+	EXPECT_FALSE(aaa->isRevolutionary());
+}

@@ -44,6 +44,7 @@ class World: commonItems::parser
 	std::string HREmperor;
 	std::string celestialEmperor;
 	std::set<std::string> hreReforms;
+	std::string revolutionTarget;
 
 	RegionManager regionManager;
 	ReligionLoader religionLoader;

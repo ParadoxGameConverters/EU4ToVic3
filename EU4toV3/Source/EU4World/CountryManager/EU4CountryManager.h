@@ -28,6 +28,7 @@ class CountryManager: public commonItems::parser
 	void updateUnitTypes();
 	void linkProvincesToCountries(const ProvinceManager& provinceManager);
 	void setHREAndEmperors(const std::string& HREmperor, const std::string& celestialEmperor, const ProvinceManager& provinceManager);
+	void setRevolutionTarget(const std::string& revolutionTarget);
 	void buildManufactoryCounts() const;
 	void injectColorsIntoCountries();
 
