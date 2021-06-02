@@ -111,7 +111,7 @@
     <TestDuration Test="EU4World_BuildingCostLoaderTests.buildingIsReturned" Duration="1" />
     <TestDuration Test="EU4World_BuildingCostTests.costDefaultsToZero" Duration="1" />
     <TestDuration Test="EU4World_BuildingCostTests.costCanBeSet" Duration="1" />
-    <TestDuration Test="EU4World_CommonCountryLoaderTests.colorsCanBeLoadedFromCommonCountries" Duration="6" />
+    <TestDuration Test="EU4World_CommonCountryLoaderTests.colorsCanBeLoadedFromCommonCountries" Duration="5" />
     <TestDuration Test="EU4World_CultureGroupParserTests.nameCanBeSet" Duration="1" />
     <TestDuration Test="EU4World_CultureGroupParserTests.culturesCanBeLoaded" Duration="1" />
     <TestDuration Test="EU4World_CultureGroupParserTests.culturesCanBeMerged" Duration="1" />
@@ -139,9 +139,9 @@
     <TestDuration Test="EU4World_LocalizationLoaderTests.localizationsReturnsNulloptForMissingLanguage" Duration="1" />
     <TestDuration Test="EU4World_LocalizationLoaderTests.localizationsReturnsLocMapForKey" Duration="1" />
     <TestDuration Test="EU4World_LocalizationLoaderTests.localizationsReturnsNulloptMapForMissingKey" Duration="1" />
-    <TestDuration Test="EU4World_ModLoaderTests.ModsCanBeLocatedUnpackedAndUpdated" Duration="7" />
-    <TestDuration Test="EU4World_ModLoaderTests.BokenMissingAndNonexistentModsAreDiscarded" Duration="7" />
-    <TestDuration Test="EU4World_ModLoaderTests.CompressedModsCanBeUnpacked" Duration="5" />
+    <TestDuration Test="EU4World_ModLoaderTests.ModsCanBeLocatedUnpackedAndUpdated" Duration="5" />
+    <TestDuration Test="EU4World_ModLoaderTests.BokenMissingAndNonexistentModsAreDiscarded" Duration="6" />
+    <TestDuration Test="EU4World_ModLoaderTests.CompressedModsCanBeUnpacked" Duration="4" />
     <TestDuration Test="EU4World_ModNamesTests.primitivesDefaultToBlank" Duration="1" />
     <TestDuration Test="EU4World_ModNamesTests.primitivesCanBeSet" Duration="1" />
     <TestDuration Test="EU4World_ModTests.primitivesDefaultToBlank" Duration="1" />
@@ -217,8 +217,8 @@
     <TestDuration Test="EU4World_ProvinceManagerTests.ProvinceManagerCanBeInput" Duration="1" />
     <TestDuration Test="EU4World_ProvinceManagerTests.gettingNonExistentProvinceReturnsNullptr" Duration="1" />
     <TestDuration Test="EU4World_ProvinceManagerTests.provinceCanBeRetrieved" Duration="1" />
-    <TestDuration Test="EU4World_ProvinceManagerTests.provincesCanBeClassified" Duration="2" />
-    <TestDuration Test="EU4World_ProvinceManagerTests.provincesClassificationThrowsForDefinitionMismatch" Duration="2" />
+    <TestDuration Test="EU4World_ProvinceManagerTests.provincesCanBeClassified" Duration="5" />
+    <TestDuration Test="EU4World_ProvinceManagerTests.provincesClassificationThrowsForDefinitionMismatch" Duration="1" />
     <TestDuration Test="Mappers_AreaTests.blankAreasLoadForNoProvinces" Duration="1" />
     <TestDuration Test="Mappers_AreaTests.provincesCanBeLoaded" Duration="1" />
     <TestDuration Test="Mappers_AreaTests.provincesCanBeFound" Duration="1" />
@@ -270,7 +270,7 @@
     <TestDuration Test="EU4World_ConfigurationTests.InstallationPathsCanBeVerified" Duration="2" />
     <TestDuration Test="EU4World_ConfigurationTests.BrokenEU4PathThrowsException" Duration="1" />
     <TestDuration Test="EU4World_ConfigurationTests.BrokenVic3PathThrowsException" Duration="1" />
-    <TestDuration Test="ConfigurationTests.InstallationPathsCanBeVerified" Duration="3" />
+    <TestDuration Test="ConfigurationTests.InstallationPathsCanBeVerified" Duration="5" />
     <TestDuration Test="ConfigurationTests.BrokenEU4PathThrowsException" Duration="1" />
     <TestDuration Test="ConfigurationTests.BrokenVic3PathThrowsException" Duration="1" />
     <TestDuration Test="ConfigurationTests.OutputNameNormalizesItself" Duration="1" />
@@ -282,5 +282,10 @@
     <TestDuration Test="ConfigurationTests.SaveAndDocumentsPathCanBeRetrieved" Duration="1" />
     <TestDuration Test="EU4World_ProvinceHistoryTests.provinceHistoryCanBePurgedForSimplePopRatio" Duration="1" />
     <TestDuration Test="EU4World_ProvinceTests.culturePercentAfterPurgingIs100" Duration="1" />
+    <TestDuration Test="EU4World_ColonialRegionLoaderTests.provincesCanBeMatched" Duration="1" />
+    <TestDuration Test="EU4World_ColonialRegionLoaderTests.provincesCanBeMisMatched" Duration="1" />
+    <TestDuration Test="EU4World_ColonialRegionTests.provincesDefaultToBlank" Duration="1" />
+    <TestDuration Test="EU4World_ColonialRegionTests.provincesCanBeLoaded" Duration="1" />
+    <TestDuration Test="Mappers_RegionMapperTests.colonialRegionForProvinceCanBeRetrieved" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

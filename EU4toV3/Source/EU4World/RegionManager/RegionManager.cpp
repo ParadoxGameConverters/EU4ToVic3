@@ -265,3 +265,8 @@ std::optional<double> EU4::RegionManager::getAssimilationFactor(int provinceID) 
 	Log(LogLevel::Warning) << "Province ID " << provinceID << " has no assimilation factor!";
 	return std::nullopt;
 }
+
+std::optional<std::string> EU4::RegionManager::getColonialRegionForProvince(int province) const
+{
+	return colonialRegionLoader.getColonialRegionForProvince(province);
+}

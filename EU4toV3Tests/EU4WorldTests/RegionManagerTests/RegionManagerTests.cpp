@@ -288,3 +288,23 @@ TEST(Mappers_RegionMapperTests, brokenSupergroupDefaultsToOldWorld)
 
 	EXPECT_EQ("old_world", theMapper.getParentSuperGroupName(1));
 }
+
+TEST(Mappers_RegionMapperTests, colonialRegionForProvinceCanBeRetrieved)
+{
+	std::stringstream colonialInput;
+	colonialInput << "colonial_alaska = {\n";
+	colonialInput << "	provinces = {\n";
+	colonialInput << "		1 2 3\n";
+	colonialInput << "	}\n";
+	colonialInput << "}\n";
+	EU4::ColonialRegionLoader regions;
+	regions.loadColonialRegions(colonialInput);
+
+	EU4::RegionManager mapper;
+	mapper.loadColonialRegions(regions);
+
+	EXPECT_EQ("colonial_alaska", mapper.getColonialRegionForProvince(1));
+	EXPECT_EQ("colonial_alaska", mapper.getColonialRegionForProvince(2));
+	EXPECT_EQ("colonial_alaska", mapper.getColonialRegionForProvince(3));
+	EXPECT_EQ(std::nullopt, mapper.getColonialRegionForProvince(4));
+}

@@ -59,6 +59,8 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Info) << "-> Booting Loaders:";
 	Log(LogLevel::Info) << "\tRegions";
 	regionManager.loadRegions(EU4Path, mods);
+	Log(LogLevel::Info) << "\tColonial Regions";
+	regionManager.loadColonialRegions(EU4Path, mods);
 	Log(LogLevel::Info) << "\tReligions";
 	religionLoader.loadReligions(EU4Path, mods);
 	Log(LogLevel::Info) << "\tCultures";
