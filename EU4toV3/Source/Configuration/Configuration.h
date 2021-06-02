@@ -1,6 +1,5 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
-#include "Date.h"
 #include "Parser.h"
 #include <string>
 

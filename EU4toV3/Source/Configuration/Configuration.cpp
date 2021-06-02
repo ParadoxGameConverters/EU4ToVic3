@@ -24,6 +24,8 @@ Configuration::Configuration(std::istream& theStream)
 	parseStream(theStream);
 	clearRegisteredKeywords();
 	setOutputName();
+	verifyEU4Path();
+	verifyVic3Path();
 }
 
 void Configuration::registerKeys()

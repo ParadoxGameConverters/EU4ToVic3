@@ -20,6 +20,8 @@ TEST(EU4World_CountryHistoryDateTests, simpleLeadersCanBeLoaded)
 	input << "\tname=Carol\n";
 	input << "}\n";
 	const EU4::CountryHistoryDate historyDate(input, std::string());
+
+	ASSERT_EQ(2, historyDate.getLeaders().size());
 	const auto& leader1 = historyDate.getLeaders()[0];
 	const auto& leader2 = historyDate.getLeaders()[1];
 
@@ -38,6 +40,8 @@ TEST(EU4World_CountryHistoryDateTests, monarchLeaderAndDynastyCanBeLoaded)
 	input << "\t}\n";
 	input << "}\n";
 	const EU4::CountryHistoryDate historyDate(input, std::string());
+
+	ASSERT_EQ(1, historyDate.getLeaders().size());
 	const auto& leader = historyDate.getLeaders()[0];
 
 	EXPECT_EQ("Boby 1st of Bobbypants", leader.getName());
@@ -62,6 +66,8 @@ TEST(EU4World_CountryHistoryDateTests, heirAndQueenDoNotLoadDynasties)
 	input << "\t}\n";
 	input << "}\n";
 	const EU4::CountryHistoryDate historyDate(input, std::string());
+
+	ASSERT_EQ(2, historyDate.getLeaders().size());
 	const auto& leader1 = historyDate.getLeaders()[0];
 	const auto& leader2 = historyDate.getLeaders()[1];
 

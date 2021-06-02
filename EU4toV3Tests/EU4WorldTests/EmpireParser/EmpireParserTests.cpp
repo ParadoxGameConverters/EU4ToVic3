@@ -11,7 +11,7 @@ TEST(EU4World_EmpireParserTests, emperorDefaultsToBlank)
 	EXPECT_TRUE(empire.getEmperor().empty());
 }
 
-TEST(EU4World_EmpireParserTests, primitivesCanBeLoaded)
+TEST(EU4World_EmpireParserTests, emperorCanBeLoaded)
 {
 	std::stringstream input;
 	input << "emperor = HAB\n";

@@ -26,10 +26,10 @@ TEST(EU4World_DiplomacyTests, dependencyAgreementsAreLoadedDirectly)
 	EU4::DiplomacyParser diplomacy;
 	diplomacy.loadDiplomacy(input);
 
+	ASSERT_EQ(2, diplomacy.getAgreements().size());
 	const auto& agreement1 = diplomacy.getAgreements()[0];
 	const auto& agreement2 = diplomacy.getAgreements()[1];
 
-	EXPECT_EQ(2, diplomacy.getAgreements().size());
 	EXPECT_EQ("tributary", agreement1.getAgreementType());
 	EXPECT_EQ("BYZ", agreement1.getOriginTag());
 	EXPECT_EQ("TUR", agreement1.getTargetTag());
@@ -55,6 +55,7 @@ TEST(EU4World_DiplomacyTests, nonDependencyAgreementsHaveTypeOverridden)
 	EU4::DiplomacyParser diplomacy;
 	diplomacy.loadDiplomacy(input);
 
+	ASSERT_EQ(3, diplomacy.getAgreements().size());
 	const auto& agreement1 = diplomacy.getAgreements()[0];
 	const auto& agreement2 = diplomacy.getAgreements()[1];
 	const auto& agreement3 = diplomacy.getAgreements()[2];

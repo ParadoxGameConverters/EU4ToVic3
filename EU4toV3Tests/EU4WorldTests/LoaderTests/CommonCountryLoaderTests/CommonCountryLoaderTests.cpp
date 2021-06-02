@@ -1,0 +1,26 @@
+#include "CommonCountryLoader/CommonCountryLoader.h"
+#include "gtest/gtest.h"
+
+TEST(EU4World_CommonCountryLoaderTests, colorsCanBeLoadedFromCommonCountries)
+{
+	std::stringstream configurationInput;
+	configurationInput << "EU4DocumentsDirectory = \"TestFiles\"\n";
+	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
+	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
+	auto configuration = Configuration(configurationInput);
+
+	EU4::Mods mods;
+	mods.emplace("Some mod", "themod.mod");
+
+	EU4::ModLoader modLoader;
+	modLoader.loadMods(configuration, mods);
+	mods = modLoader.getMods();
+
+	EU4::CommonCountryLoader loader;
+	loader.loadCommonCountries("TestFiles/eu4installation", mods);
+
+	EXPECT_EQ("= rgb { 157 51 167 }", loader.getCommonColor("AAA")->outputRgb());
+	EXPECT_EQ("= rgb { 49 115 90 }", loader.getCommonColor("BBB")->outputRgb());
+	EXPECT_EQ("= rgb { 18 139 228 }", loader.getCommonColor("CCC")->outputRgb());
+	EXPECT_EQ(std::nullopt, loader.getCommonColor("DDD"));
+}

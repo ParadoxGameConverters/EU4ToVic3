@@ -373,6 +373,18 @@
     <ClCompile Include="EU4WorldTests\LoaderTests\LocalizationLoaderTests\EU4LocalizationTests.cpp">
       <Filter>EU4WorldTests\LoaderTests\LocalizationLoaderTests</Filter>
     </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\CommonCountryLoaderTests\CommonCountryLoaderTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\CommonCountryLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ModLoader\ModLoader.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\ModLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\ModLoaderTests\ModLoaderTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\ModLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigurationTests\ConfigurationTests.cpp">
+      <Filter>ConfigurationTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -555,10 +567,102 @@
     <Filter Include="EU4WorldTests\LoaderTests\LocalizationLoaderTests">
       <UniqueIdentifier>{fe7c01cf-8669-406a-925e-b22b3b2b6b05}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EU4WorldTests\LoaderTests\CommonCountryLoaderTests">
+      <UniqueIdentifier>{ab8ad006-20d7-4b40-b012-83f3a3a7f27b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles">
+      <UniqueIdentifier>{785958ab-fd05-476a-9f5d-5813b158fd3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\eu4installation">
+      <UniqueIdentifier>{f936c043-6d57-4c1b-9ec2-116b88631119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\mod">
+      <UniqueIdentifier>{812ac39e-e238-4c36-9fb2-804a0399ddf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation">
+      <UniqueIdentifier>{b8c74649-7210-4df2-869a-199e28c95862}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\eu4installation\common">
+      <UniqueIdentifier>{443b4434-80be-487c-995d-2a8243bc1feb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\eu4installation\map">
+      <UniqueIdentifier>{6f09c0bd-9e77-4e72-a9a3-d3502ad28b46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\eu4installation\common\countries">
+      <UniqueIdentifier>{1baeed56-3eb0-46af-9163-33db7c129553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\eu4installation\common\country_tags">
+      <UniqueIdentifier>{826e227a-3c44-4f98-8599-9251c402a8c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\mod\themod">
+      <UniqueIdentifier>{837641fe-c3ce-417f-a374-831e6127b64d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\mod\themod\common">
+      <UniqueIdentifier>{dfb7e198-90fd-4040-9d66-2c45effd8b90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\mod\themod\common\countries">
+      <UniqueIdentifier>{8cab87a2-0be7-4913-9e9d-161672f12224}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\mod\themod\common\country_tags">
+      <UniqueIdentifier>{02bd8b23-41bc-4ffb-ac92-d44bee94a1dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\binaries">
+      <UniqueIdentifier>{bb4c744f-0ceb-4396-824a-07eb7999a3e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\map">
+      <UniqueIdentifier>{2b09af8f-57e5-4329-ba5c-0c9e4a01e0d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConfigurationTests">
+      <UniqueIdentifier>{78e10c95-9667-48a4-9ed5-2143ad121ebe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
       <Filter>ConverterFiles\commonItems</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\eu4installation\eu4">
+      <Filter>TestFiles\eu4installation</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\countries\Aaacountry.txt">
+      <Filter>TestFiles\eu4installation\common\countries</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\countries\Bbbcountry.txt">
+      <Filter>TestFiles\eu4installation\common\countries</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\country_tags\00_countries.txt">
+      <Filter>TestFiles\eu4installation\common\country_tags</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\eu4installation\map\positions.txt">
+      <Filter>TestFiles\eu4installation\map</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\themod.mod">
+      <Filter>TestFiles\mod</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\themod\common\countries\Ccccountry.txt">
+      <Filter>TestFiles\mod\themod\common\countries</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\themod\common\country_tags\added_countries.txt">
+      <Filter>TestFiles\mod\themod\common\country_tags</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\binaries\victoria3">
+      <Filter>TestFiles\vic3installation\binaries</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\map\positions.txt">
+      <Filter>TestFiles\vic3installation\map</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\packedmod.zip">
+      <Filter>TestFiles\mod</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\packedmod.mod">
+      <Filter>TestFiles\mod</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\missingmod.mod">
+      <Filter>TestFiles\mod</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\brokenmod.mod">
+      <Filter>TestFiles\mod</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

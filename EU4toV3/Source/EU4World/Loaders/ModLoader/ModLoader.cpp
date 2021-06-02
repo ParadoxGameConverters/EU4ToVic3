@@ -4,7 +4,7 @@
 #include "Log.h"
 #include "ModParser.h"
 #include "OSCompatibilityLayer.h"
-#include <ZipFile.h>
+#include "ZipFile.h"
 #include <filesystem>
 #include <fstream>
 #include <ranges>
@@ -112,14 +112,22 @@ void EU4::ModLoader::loadEU4ModDirectory(const Configuration& configuration, con
 			}
 			else
 			{
-				if (!commonItems::DoesFileExist(theMod.getPath()))
+				// Maybe we have a relative path
+				if (commonItems::DoesFileExist(configuration.getEU4DocumentsPath() + "/" + theMod.getPath()))
 				{
-					Log(LogLevel::Warning) << "\t\tMod " << usedModName
-												  << " at " + usedModFilePath + " points to " + theMod.getPath() +
-															" which does not exist! Skipping at your risk, but this can greatly affect conversion.";
-					continue;
+					// fix this.
+					theMod.setPath(configuration.getEU4DocumentsPath() + "/" + theMod.getPath());
 				}
-
+				else
+				{
+					if (!commonItems::DoesFileExist(theMod.getPath()))
+					{
+						Log(LogLevel::Warning) << "\t\tMod " << usedModName
+													  << " at " + usedModFilePath + " points to " + theMod.getPath() +
+																" which does not exist! Skipping at your risk, but this can greatly affect conversion.";
+						continue;
+					}
+				}
 				possibleCompressedMods.insert(std::make_pair(theMod.getName(), theMod.getPath()));
 				Log(LogLevel::Info) << "\t\tFound a compressed mod named " << theMod.getName() << " with a mod file at " << EU4ModsPath << "/"
 										  << trimmedModFileName << " and itself at " << theMod.getPath();
