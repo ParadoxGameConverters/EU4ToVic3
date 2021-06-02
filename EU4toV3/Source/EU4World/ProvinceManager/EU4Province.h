@@ -1,9 +1,9 @@
 #ifndef EU4_PROVINCE_H
 #define EU4_PROVINCE_H
+#include "BuildingCostLoader/BuildingCostLoader.h"
 #include "ConvenientParser.h"
 #include "ProvinceBuildings.h"
 #include "ProvinceHistory.h"
-#include "BuildingCostLoader/BuildingCostLoader.h"
 
 namespace EU4
 {
@@ -47,9 +47,10 @@ class Province: commonItems::convenientParser
 	void purgeHistories() { provinceHistory.purgeHistories(); }
 
 	[[nodiscard]] double getCulturePercent(const std::string& theCulture) const;
+	[[nodiscard]] const auto& getStartingCulture() const { return provinceHistory.getStartingCulture(); }
 
 	// These relate to province weight, to be used in pop shaping.
-	void determineProvinceWeight(const BuildingCostLoader& buildingTypes);	
+	void determineProvinceWeight(const BuildingCostLoader& buildingTypes);
 	[[nodiscard]] auto getProvinceWeight() const { return provinceWeight; }
 	[[nodiscard]] auto getInvestmentFactor() const { return investmentFactor; }
 

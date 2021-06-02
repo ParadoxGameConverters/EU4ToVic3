@@ -376,6 +376,21 @@ TEST(EU4World_ProvinceTests, investmentFactorScalesLinearlyForNegativeInvestment
 	EXPECT_NEAR(-11.0, theProvince.getInvestmentFactor(), 0.001);
 }
 
+TEST(EU4World_ProvinceTests, startingCultureCanBeRetrieved)
+{
+	std::stringstream input;
+	input << "culture=TAG1Culture\n";
+	input << "history = {\n";
+	input << "	culture=origCulture\n";
+	input << "	1736.1.1={\n";
+	input << "		culture=TAG1Culture\n";
+	input << "	}\n";
+	input << "}\n";
+	EU4::Province province("-1", input);
+
+	EXPECT_EQ("origCulture", province.getStartingCulture());
+}
+
 TEST(EU4World_ProvinceTests, culturePercentCanBeRetrieved)
 {
 	DatingData datingData;
@@ -385,13 +400,13 @@ TEST(EU4World_ProvinceTests, culturePercentCanBeRetrieved)
 	input << "culture=TAG1Culture\n";
 	input << "religion=TAG1Religion\n";
 	input << "history = {\n";
-	input << "culture=origCulture\n";
-	input << "religion=origReligion\n";
-	input << "1736.1.1={\n";
-	input << "\towner=TAG1\n";
-	input << "\tculture=TAG1Culture\n";
-	input << "\treligion=TAG1Religion\n";
-	input << "}\n";
+	input << "	culture=origCulture\n";
+	input << "	religion=origReligion\n";
+	input << "	1736.1.1={\n";
+	input << "		owner=TAG1\n";
+	input << "		culture=TAG1Culture\n";
+	input << "		religion=TAG1Religion\n";
+	input << "	}\n";
 	input << "}\n";
 	EU4::Province province("-1", input);
 	province.setAssimilationFactor(0.0025);
@@ -410,13 +425,13 @@ TEST(EU4World_ProvinceTests, culturePercentAfterPurgingIs100)
 	input << "culture=TAG1Culture\n";
 	input << "religion=TAG1Religion\n";
 	input << "history = {\n";
-	input << "culture=origCulture\n";
-	input << "religion=origReligion\n";
-	input << "1736.1.1={\n";
-	input << "\towner=TAG1\n";
-	input << "\tculture=TAG1Culture\n";
-	input << "\treligion=TAG1Religion\n";
-	input << "}\n";
+	input << "	culture=origCulture\n";
+	input << "	religion=origReligion\n";
+	input << "	1736.1.1={\n";
+	input << "		owner=TAG1\n";
+	input << "		culture=TAG1Culture\n";
+	input << "		religion=TAG1Religion\n";
+	input << "	}\n";
 	input << "}\n";
 	EU4::Province province("-1", input);
 	province.purgeHistories();

@@ -69,3 +69,14 @@ TEST(Mappers_SuperRegionTests, LinkedRegionReturnsFalseOnProvinceMismatch)
 
 	EXPECT_FALSE(superRegion.superRegionContainsProvince(9));
 }
+
+TEST(Mappers_SuperRegionTests, NativeCultureCanBeRegisteredAndRetrieved)
+{
+	const std::vector<std::string> input = {"region"};
+	EU4::SuperRegion superRegion(input);
+
+	superRegion.registerNativeCulture("culture");
+
+	EXPECT_TRUE(superRegion.superRegionContainsNativeCulture("culture"));
+	EXPECT_FALSE(superRegion.superRegionContainsNativeCulture("dummy"));
+}

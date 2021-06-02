@@ -10,6 +10,7 @@
 
 namespace EU4
 {
+class ProvinceManager;
 class RegionManager: commonItems::parser
 {
   public:
@@ -31,7 +32,10 @@ class RegionManager: commonItems::parser
 	[[nodiscard]] std::optional<std::string> getParentSuperGroupName(int provinceID) const;
 	[[nodiscard]] std::optional<double> getAssimilationFactor(int provinceID) const;
 
+	[[nodiscard]] bool doesProvinceRequireNeoCulture(int provinceID, const std::string& culture) const;
+
 	void applySuperGroups();
+	void catalogueNativeCultures(const ProvinceManager& provinceManager);
 
   private:
 	void registerAreaKeys();

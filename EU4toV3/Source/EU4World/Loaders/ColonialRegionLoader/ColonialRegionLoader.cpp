@@ -1,15 +1,15 @@
 #include "ColonialRegionLoader.h"
 #include "ColonialRegion.h"
+#include "CommonRegexes.h"
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
-#include "CommonRegexes.h"
 #include <ranges>
 
 void EU4::ColonialRegionLoader::loadColonialRegions(const std::string& EU4Path, const Mods& mods)
-{	
+{
 	registerKeys();
-	
+
 	if (!commonItems::DoesFileExist(EU4Path + "/common/colonial_regions/00_colonial_regions.txt"))
 		Log(LogLevel::Warning) << "Could not find " << EU4Path + "/common/colonial_regions/00_colonial_regions.txt";
 	else

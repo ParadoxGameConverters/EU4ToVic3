@@ -121,6 +121,10 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	countryManager.mergeNations();
 	Log(LogLevel::Progress) << "27 %";
 
+	Log(LogLevel::Info) << "-> Cataloguing Native Fauna";
+	regionManager.catalogueNativeCultures(provinceManager);
+	Log(LogLevel::Progress) << "28 %";
+
 	Log(LogLevel::Info) << "-> Equipping Botanical Expedition";
 	countryManager.fillHistoricalData();
 	Log(LogLevel::Progress) << "38 %";

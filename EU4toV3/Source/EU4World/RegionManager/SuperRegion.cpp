@@ -14,3 +14,8 @@ bool EU4::SuperRegion::superRegionContainsProvince(const int province) const
 			return true;
 	return false;
 }
+
+bool EU4::SuperRegion::superRegionContainsNativeCulture(const std::string& culture) const
+{
+	return nativeCultures.contains(culture);
+}

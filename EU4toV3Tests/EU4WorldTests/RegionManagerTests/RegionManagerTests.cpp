@@ -1,3 +1,4 @@
+#include "ProvinceManager/ProvinceManager.h"
 #include "RegionManager/RegionManager.h"
 #include "gtest/gtest.h"
 
@@ -307,4 +308,49 @@ TEST(Mappers_RegionMapperTests, colonialRegionForProvinceCanBeRetrieved)
 	EXPECT_EQ("colonial_alaska", mapper.getColonialRegionForProvince(2));
 	EXPECT_EQ("colonial_alaska", mapper.getColonialRegionForProvince(3));
 	EXPECT_EQ(std::nullopt, mapper.getColonialRegionForProvince(4));
+}
+
+TEST(Mappers_RegionMapperTests, nativeCulturesCanBeCataloguedAndBrowsed)
+{
+	std::stringstream colonialInput;
+	colonialInput << "colonial_alaska = {\n";
+	colonialInput << "	provinces = {\n";
+	colonialInput << "		1\n";
+	colonialInput << "	}\n";
+	colonialInput << "}\n";
+	EU4::ColonialRegionLoader regions;
+	regions.loadColonialRegions(colonialInput);
+
+	EU4::RegionManager mapper;
+	mapper.loadColonialRegions(regions);
+
+	EXPECT_EQ("colonial_alaska", mapper.getColonialRegionForProvince(1));
+	EXPECT_EQ(std::nullopt, mapper.getColonialRegionForProvince(2));
+
+	std::stringstream areaStream;
+	areaStream << "test_area = { 1 } \n"; // <- in colonial region
+	areaStream << "test_area2 = { 2 } ";
+	std::stringstream regionStream;
+	regionStream << "test_region = { areas = { test_area } }";
+	regionStream << "test_region2 = { areas = { test_area2 } }\n";
+	std::stringstream superRegionStream;
+	superRegionStream << "test_superregion = { test_region }\n"; // <- colonial superregion
+	superRegionStream << "test_superregion2 = { test_region2 }";
+	mapper.loadRegions(areaStream, regionStream, superRegionStream);
+
+	std::stringstream provincesInput;
+	provincesInput << "-1={ history = { culture = someCulture } }\n";
+	provincesInput << "-2={ history = { culture = someOtherCulture } }\n}";
+	EU4::ProvinceManager theProvinceManager;
+	theProvinceManager.loadProvinces(provincesInput);
+
+	EXPECT_EQ("someCulture", theProvinceManager.getProvince(1)->getStartingCulture());
+	EXPECT_EQ("someOtherCulture", theProvinceManager.getProvince(2)->getStartingCulture());
+
+	mapper.catalogueNativeCultures(theProvinceManager);
+
+	EXPECT_FALSE(mapper.doesProvinceRequireNeoCulture(1, "someCulture"));		// false because it's native to the region
+	EXPECT_TRUE(mapper.doesProvinceRequireNeoCulture(1, "someOtherCulture"));	// true as not native and province is colonial
+	EXPECT_FALSE(mapper.doesProvinceRequireNeoCulture(2, "someCulture"));		// false because not colonial
+	EXPECT_FALSE(mapper.doesProvinceRequireNeoCulture(2, "someOtherCulture")); // false because native to region
 }
