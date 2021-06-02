@@ -21,6 +21,19 @@ class World: commonItems::parser
   public:
 	World(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion);
 
+	// V3World inputs
+	[[nodiscard]] bool isHREDecentralized() const { return hreReforms.contains("emperor_reichskrieg"); }
+	[[nodiscard]] auto getEU4RandomSeed() const { return eu4Seed; } // for use in province shuffler
+
+	[[nodiscard]] const auto& getWars() const { return wars; }
+
+	[[nodiscard]] const auto& getCountryManager() const { return countryManager; }
+	[[nodiscard]] const auto& getProvinceManager() const { return provinceManager; }
+	[[nodiscard]] const auto& getRegionManager() const { return regionManager; }
+	[[nodiscard]] const auto& getCultureLoader() const { return cultureLoader; }
+	[[nodiscard]] const auto& getReligionLoader() const { return religionLoader; }
+	[[nodiscard]] const auto& getDiplomacy() const { return diplomacyParser; }
+
   private:
 	void registerKeys(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion);
 
