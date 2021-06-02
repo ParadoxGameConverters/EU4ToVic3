@@ -29,7 +29,7 @@ class ProvinceManager: commonItems::parser
 	[[nodiscard]] std::shared_ptr<Province> getProvince(int provinceID) const;
 
 	void classifyProvinces(const RegionManager& regionManager);
-	void buildPopRatios(const DatingData& datingData);
+	void buildPopRatios(const DatingData& datingData, bool convertAll);
 	void buildProvinceWeights();
 
   private:

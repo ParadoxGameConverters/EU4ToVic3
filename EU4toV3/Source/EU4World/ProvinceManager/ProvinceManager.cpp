@@ -79,11 +79,15 @@ void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)
 	Log(LogLevel::Info) << "<> Provinces filtered, " << provinces.size() << " remain.";
 }
 
-void EU4::ProvinceManager::buildPopRatios(const DatingData& datingData)
+void EU4::ProvinceManager::buildPopRatios(const DatingData& datingData, bool convertAll)
 {
 	for (const auto& province: provinces | std::views::values)
 		if (!province->isSea())
-			province->buildPopRatios(datingData);
+		{
+			if (convertAll)
+				province->purgeHistories();
+			province->buildPopRatios(datingData);			
+		}
 }
 
 void EU4::ProvinceManager::buildProvinceWeights()

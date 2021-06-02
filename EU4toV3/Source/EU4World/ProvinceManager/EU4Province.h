@@ -44,6 +44,7 @@ class Province: commonItems::convenientParser
 
 	void setAssimilationFactor(double factor) { assimilationFactor = factor; }
 	void buildPopRatios(const DatingData& datingData) { provinceHistory.buildPopRatios(assimilationFactor, datingData); }
+	void purgeHistories() { provinceHistory.purgeHistories(); }
 
 	[[nodiscard]] double getCulturePercent(const std::string& theCulture) const;
 

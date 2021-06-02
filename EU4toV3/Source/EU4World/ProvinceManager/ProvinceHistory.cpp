@@ -56,6 +56,24 @@ void EU4::ProvinceHistory::setStartingReligion(const std::string& religion)
 		religionHistory.emplace_back(std::make_pair(date("1.1.1"), religion));
 }
 
+void EU4::ProvinceHistory::purgeHistories()
+{
+	if (!cultureHistory.empty())
+	{
+		auto lastCulture = cultureHistory.back();
+		lastCulture.first = date("1.1.1");
+		cultureHistory.clear();
+		cultureHistory.emplace_back(lastCulture);
+	}
+	if (!religionHistory.empty())
+	{
+		auto lastReligion = religionHistory.back();
+		lastReligion.first = date("1.1.1");
+		religionHistory.clear();
+		religionHistory.emplace_back(lastReligion);
+	}
+}
+
 void EU4::ProvinceHistory::buildPopRatios(const double assimilationFactor, const DatingData& datingData)
 {
 	// Don't build pop ratios for empty provinces.

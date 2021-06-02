@@ -93,7 +93,7 @@ TEST(EU4World_ProvinceHistoryTests, popRatiosForTrivialHistoryAreOne)
 
 	const auto& popRatios = theHistory.getPopRatios();
 
-	EXPECT_EQ(1, popRatios.size());
+	ASSERT_EQ(1, popRatios.size());
 
 	// There is a single pop ratio filling entire pie chart
 	const auto& pop1 = popRatios[0];
@@ -141,6 +141,48 @@ TEST(EU4World_ProvinceHistoryTests, popRatiosForColonizationAreCalculated)
 	EXPECT_NEAR(0.00250, pop2.getLowerRatio(), 0.0000001); // 0.0025 * remaining 100%
 }
 
+TEST(EU4World_ProvinceHistoryTests, provinceHistoryCanBePurgedForSimplePopRatio)
+{
+	DatingData datingData;
+	datingData.startEU4Date = date("1254.11.11");
+	datingData.lastEU4Date = date("1737.1.1");
+
+	std::stringstream input;
+	input << "culture=origCulture\n";
+	input << "religion=origReligion\n";
+	input << "1736.1.1={\n"; // colonized 1 year before end date
+	input << "\towner=TAG1\n";
+	input << "\tculture=TAG1Culture\n";	  // converted culture
+	input << "\treligion=TAG1Religion\n"; // converted religion
+	input << "}\n";
+	EU4::ProvinceHistory theHistory(input);
+
+	theHistory.purgeHistories();
+
+	ASSERT_EQ(1, theHistory.getCultureHistory().size());
+	const auto& cultureEntry = theHistory.getCultureHistory()[0];
+	EXPECT_EQ(date("1.1.1"), cultureEntry.first);
+	EXPECT_EQ("TAG1Culture", cultureEntry.second);
+
+	ASSERT_EQ(1, theHistory.getReligionHistory().size());
+	const auto& religionEntry = theHistory.getReligionHistory()[0];
+	EXPECT_EQ(date("1.1.1"), religionEntry.first);
+	EXPECT_EQ("TAG1Religion", religionEntry.second);
+
+	theHistory.buildPopRatios(0.0025, datingData); // using default assimilation factor.
+
+	const auto& popRatios = theHistory.getPopRatios();
+
+	ASSERT_EQ(1, popRatios.size());
+
+	const auto& pop = popRatios[0];
+	EXPECT_EQ("TAG1Culture", pop.getCulture());
+	EXPECT_EQ("TAG1Religion", pop.getReligion());
+	EXPECT_NEAR(1, pop.getUpperRatio(), 0.0000001);
+	EXPECT_NEAR(1, pop.getMiddleRatio(), 0.0000001);
+	EXPECT_NEAR(1, pop.getLowerRatio(), 0.0000001);
+}
+
 TEST(EU4World_ProvinceHistoryTests, popRatiosCanBeCombined)
 {
 	DatingData datingData;
@@ -165,7 +207,7 @@ TEST(EU4World_ProvinceHistoryTests, popRatiosCanBeCombined)
 
 	const auto& popRatios = theHistory.getPopRatios();
 
-	EXPECT_EQ(2, popRatios.size());
+	ASSERT_EQ(2, popRatios.size());
 
 	// First ratio is the original one.
 	const auto& pop1 = popRatios[0];
@@ -216,7 +258,7 @@ TEST(EU4World_ProvinceHistoryTests, popRatiosCanBeConstructed)
 
 	const auto& popRatios = theHistory.getPopRatios();
 
-	EXPECT_EQ(4, popRatios.size());
+	ASSERT_EQ(4, popRatios.size());
 
 	// First ratio is the original one. It has been decayed by 236 years (1836 - 1600).
 	const auto& pop1 = popRatios[0];

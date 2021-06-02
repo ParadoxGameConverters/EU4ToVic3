@@ -83,7 +83,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Progress) << "18 %";
 
 	Log(LogLevel::Info) << "-> Determining Demographics";
-	provinceManager.buildPopRatios(datingData);
+	provinceManager.buildPopRatios(datingData, theConfiguration.configBlock.convertAll);
 	Log(LogLevel::Progress) << "19 %";
 
 	Log(LogLevel::Info) << "-> Linking Provinces to Countries";

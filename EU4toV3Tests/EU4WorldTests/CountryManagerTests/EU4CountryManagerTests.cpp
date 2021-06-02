@@ -383,7 +383,7 @@ TEST(EU4World_CountryManagerTests, CultureLessNationsCanBeDeleted)
 
 	DatingData datingData;
 	datingData.startEU4Date = date("1444.11.11");
-	provinceManager.buildPopRatios(datingData);
+	provinceManager.buildPopRatios(datingData, false);
 
 	std::stringstream countryManagerInput;
 	countryManagerInput << "AAA = { primary_culture=foreignCulture }\n";
