@@ -4,7 +4,7 @@
 #include <gmock/gmock-matchers.h>
 using testing::UnorderedElementsAre;
 
-TEST(EU4World_LocalizationLoaderTests, localizationsCanBeLoadedAndMatched)
+TEST(EU4World_LocalizationLoaderTests, localizationsReturnsLocMapForKey)
 {
 	std::stringstream input;
 	input << commonItems::utf8BOM << "l_english:\n";
@@ -16,52 +16,17 @@ TEST(EU4World_LocalizationLoaderTests, localizationsCanBeLoadedAndMatched)
 	input2 << " key2: \"valuee \"subquoted\" 2\"\n";
 	std::stringstream input3;
 	input3 << commonItems::utf8BOM << "l_english:\n";
-	input3 << " key1: \"replaced value 1\"\n";
+	input3 << " key1: \"replaced value 1\"\n"; // <- modded overrides
 
 	EU4::EU4LocalizationLoader locs;
 	locs.loadLocalizations(input);
 	locs.loadLocalizations(input2);
 	locs.loadLocalizations(input3);
 
-	EXPECT_EQ("replaced value 1", *locs.getText("key1", "english"));
-	EXPECT_EQ("value \"subquoted\" 2", *locs.getText("key2", "english"));
-	EXPECT_EQ("valuee 1", *locs.getText("key1", "french"));
-	EXPECT_EQ("valuee \"subquoted\" 2", *locs.getText("key2", "french"));
-}
-
-TEST(EU4World_LocalizationLoaderTests, localizationsReturnNulloptForMissingKey)
-{
-	const EU4::EU4LocalizationLoader locs;
-
-	EXPECT_FALSE(locs.getText("key1", "english"));
-}
-
-TEST(EU4World_LocalizationLoaderTests, localizationsReturnsNulloptForMissingLanguage)
-{
-	EU4::EU4LocalizationLoader locs;
-	std::stringstream input;
-	input << commonItems::utf8BOM << "l_english:\n";
-	input << " key1: \"value 1\" # comment\n";
-	locs.loadLocalizations(input);
-
-	EXPECT_FALSE(locs.getText("key1", "french"));
-}
-
-TEST(EU4World_LocalizationLoaderTests, localizationsReturnsLocMapForKey)
-{
-	EU4::EU4LocalizationLoader locs;
-	std::stringstream input;
-	input << commonItems::utf8BOM << "l_english:\n";
-	input << " key1: \"value 1\" # comment\n";
-	locs.loadLocalizations(input);
-	std::stringstream input2;
-	input2 << commonItems::utf8BOM << "l_french:\n";
-	input2 << " key1: \"valuee 1\"\n";
-	locs.loadLocalizations(input2);
-
-	auto locMap = locs.getTextInEachLanguage("key1");
-
-	EXPECT_THAT(*locMap, testing::UnorderedElementsAre(testing::Pair("english", "value 1"), testing::Pair("french", "valuee 1")));
+	EXPECT_THAT(*locs.getTextInEachLanguage("key1"),
+		 testing::UnorderedElementsAre(testing::Pair("english", "replaced value 1"), testing::Pair("french", "valuee 1")));
+	EXPECT_THAT(*locs.getTextInEachLanguage("key2"),
+		 testing::UnorderedElementsAre(testing::Pair("english", "value \"subquoted\" 2"), testing::Pair("french", "valuee \"subquoted\" 2")));
 }
 
 TEST(EU4World_LocalizationLoaderTests, localizationsReturnsNulloptMapForMissingKey)

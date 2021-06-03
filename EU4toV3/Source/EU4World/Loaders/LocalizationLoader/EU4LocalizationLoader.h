@@ -16,7 +16,6 @@ class EU4LocalizationLoader
 	void loadLocalizations(const std::string& EU4Path, const Mods& mods);
 	void loadLocalizations(std::istream& theStream);
 
-	[[nodiscard]] std::optional<std::string> getText(const std::string& key, const std::string& language) const;
 	[[nodiscard]] std::optional<std::map<std::string, std::string>> getTextInEachLanguage(const std::string& key) const;
 
   private:

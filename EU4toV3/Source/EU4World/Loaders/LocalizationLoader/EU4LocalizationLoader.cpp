@@ -53,20 +53,6 @@ void EU4::EU4LocalizationLoader::readFromStream(std::istream& theStream)
 	}
 }
 
-std::optional<std::string> EU4::EU4LocalizationLoader::getText(const std::string& key, const std::string& language) const
-{
-	const auto keyFindIter = localizations.find(key);
-	if (keyFindIter == localizations.end())
-		return std::nullopt;
-
-	const auto& localizationsByLanguage = keyFindIter->second;
-	const auto& languageFindIter = localizationsByLanguage.find(language);
-	if (languageFindIter == localizationsByLanguage.end())
-		return std::nullopt;
-
-	return languageFindIter->second;
-}
-
 std::optional<std::map<std::string, std::string>> EU4::EU4LocalizationLoader::getTextInEachLanguage(const std::string& key) const
 {
 	const auto& keyFindIter = localizations.find(key);
