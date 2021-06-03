@@ -135,7 +135,7 @@ void EU4::CountryManager::mergeNations()
 		uniteJapan();
 
 	for (const auto& mergeBlock: nationMergeMapper.getMergeBlocks())
-		if (mergeBlock.getMerge() && !mergeBlock.getMaster().empty())
+		if (mergeBlock.shouldMerge() && !mergeBlock.getMaster().empty())
 		{
 			Log(LogLevel::Info) << "- Merging nations for: " << mergeBlock.getMaster();
 			auto master = getCountry(mergeBlock.getMaster());

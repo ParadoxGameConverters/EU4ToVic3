@@ -41,15 +41,15 @@ TEST(Mappers_NationMergeMapperTests, mergeBlocksCanBeLoaded)
 	mappers::NationMergeMapper mapper;
 	mapper.loadNationMerge(input);
 
+	ASSERT_EQ(2, mapper.getMergeBlocks().size());
 	const auto& france = mapper.getMergeBlocks()[0];
 	const auto& ireland = mapper.getMergeBlocks()[1];
 
-	EXPECT_EQ(2, mapper.getMergeBlocks().size());
 	EXPECT_EQ("FRA", france.getMaster());
 	EXPECT_THAT(france.getSlaves(), UnorderedElementsAre("ALE", "ALS"));
-	EXPECT_TRUE(france.getMerge());
+	EXPECT_TRUE(france.shouldMerge());
 
 	EXPECT_EQ("IRE", ireland.getMaster());
 	EXPECT_THAT(ireland.getSlaves(), UnorderedElementsAre("ULS", "TYR"));
-	EXPECT_FALSE(ireland.getMerge());
+	EXPECT_FALSE(ireland.shouldMerge());
 }

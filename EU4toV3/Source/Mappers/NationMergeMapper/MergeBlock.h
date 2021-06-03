@@ -12,7 +12,7 @@ class MergeBlock: commonItems::convenientParser
 
 	[[nodiscard]] const auto& getMaster() const { return master; }
 	[[nodiscard]] const auto& getSlaves() const { return slaves; }
-	[[nodiscard]] auto getMerge() const { return merge; }
+	[[nodiscard]] auto shouldMerge() const { return merge; }
 
   private:
 	void registerKeys();

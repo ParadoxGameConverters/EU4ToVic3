@@ -1,6 +1,8 @@
 #include "CommonFunctions.h"
 #include "LocalizationLoader/EU4LocalizationLoader.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
+using testing::UnorderedElementsAre;
 
 TEST(EU4World_LocalizationLoaderTests, localizationsCanBeLoadedAndMatched)
 {
@@ -59,8 +61,7 @@ TEST(EU4World_LocalizationLoaderTests, localizationsReturnsLocMapForKey)
 
 	auto locMap = locs.getTextInEachLanguage("key1");
 
-	EXPECT_EQ("value 1", (*locMap)["english"]);
-	EXPECT_EQ("valuee 1", (*locMap)["french"]);
+	EXPECT_THAT(*locMap, testing::UnorderedElementsAre(testing::Pair("english", "value 1"), testing::Pair("french", "valuee 1")));
 }
 
 TEST(EU4World_LocalizationLoaderTests, localizationsReturnsNulloptMapForMissingKey)

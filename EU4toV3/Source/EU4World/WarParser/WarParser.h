@@ -20,8 +20,8 @@ class WarParser: commonItems::parser
 
 	WarDetails details;
 	std::string name;
-	std::vector<std::string> attackers; // order maters! first is primary.
-	std::vector<std::string> defenders; // order maters! first is primary.
+	std::vector<std::string> attackers; // order matters! first is primary attacker.
+	std::vector<std::string> defenders; // order matters! first is primary defender.
 };
 } // namespace EU4
 

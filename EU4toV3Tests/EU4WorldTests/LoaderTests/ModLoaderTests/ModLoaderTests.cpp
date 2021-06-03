@@ -1,9 +1,9 @@
 #include "ModLoader/ModLoader.h"
-#include "gtest/gtest.h"
 #include "OSCompatibilityLayer.h"
+#include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
-using testing::UnorderedElementsAre;
 using testing::Pair;
+using testing::UnorderedElementsAre;
 
 TEST(EU4World_ModLoaderTests, ModsCanBeLocatedUnpackedAndUpdated)
 {
@@ -13,7 +13,7 @@ TEST(EU4World_ModLoaderTests, ModsCanBeLocatedUnpackedAndUpdated)
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
 	const auto configuration = Configuration(configurationInput);
 
-	EU4::Mods mods; // this is what comes from the save
+	EU4::Mods mods;									  // this is what comes from the save
 	mods.emplace("Some mod", "mod/themod.mod"); // mod's in fact named "The Mod" in the file.
 
 	EU4::ModLoader modLoader;
@@ -23,7 +23,7 @@ TEST(EU4World_ModLoaderTests, ModsCanBeLocatedUnpackedAndUpdated)
 	EXPECT_THAT(mods, UnorderedElementsAre(Pair("The Mod", "TestFiles/mod/themod/")));
 }
 
-TEST(EU4World_ModLoaderTests, BokenMissingAndNonexistentModsAreDiscarded)
+TEST(EU4World_ModLoaderTests, BrokenMissingAndNonexistentModsAreDiscarded)
 {
 	std::stringstream configurationInput;
 	configurationInput << "EU4DocumentsDirectory = \"TestFiles\"\n";
@@ -33,8 +33,8 @@ TEST(EU4World_ModLoaderTests, BokenMissingAndNonexistentModsAreDiscarded)
 
 	EU4::Mods mods;
 	mods.emplace("Some mod", "mod/themod.mod");
-	mods.emplace("Broken mod", "mod/brokenmod.mod"); // no path
-	mods.emplace("Missing mod", "mod/missingmod.mod"); // missing directory
+	mods.emplace("Broken mod", "mod/brokenmod.mod");			  // no path
+	mods.emplace("Missing mod", "mod/missingmod.mod");			  // missing directory
 	mods.emplace("Nonexistent mod", "mod/nonexistentmod.mod"); // doesn't exist.
 
 	EU4::ModLoader modLoader;

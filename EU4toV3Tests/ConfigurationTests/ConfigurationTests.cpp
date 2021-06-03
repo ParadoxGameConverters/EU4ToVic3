@@ -2,17 +2,6 @@
 #include "OSCompatibilityLayer.h"
 #include "gtest/gtest.h"
 
-TEST(ConfigurationTests, InstallationPathsCanBeVerified)
-{
-	std::stringstream configurationInput;
-	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
-	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-
-	EXPECT_NO_THROW(const auto configuration = Configuration(configurationInput));
-	EXPECT_TRUE(commonItems::DoesFolderExist("TestFiles/eu4installation"));
-	EXPECT_TRUE(commonItems::DoesFolderExist("TestFiles/vic3installation"));
-}
-
 TEST(ConfigurationTests, BrokenEU4PathThrowsException)
 {
 	std::stringstream configurationInput;

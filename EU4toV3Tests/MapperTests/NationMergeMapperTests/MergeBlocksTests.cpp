@@ -10,7 +10,7 @@ TEST(Mappers_MergeBlockTests, primitivesDefaultToDefaults)
 
 	EXPECT_TRUE(block.getMaster().empty());
 	EXPECT_TRUE(block.getSlaves().empty());
-	EXPECT_FALSE(block.getMerge());
+	EXPECT_FALSE(block.shouldMerge());
 }
 
 TEST(Mappers_MergeBlockTests, mergeBlockCanBeLoaded)
@@ -24,5 +24,5 @@ TEST(Mappers_MergeBlockTests, mergeBlockCanBeLoaded)
 	const mappers::MergeBlock block(input);
 	EXPECT_EQ("FRA", block.getMaster());
 	EXPECT_THAT(block.getSlaves(), UnorderedElementsAre("ALE", "ALS"));
-	EXPECT_TRUE(block.getMerge());
+	EXPECT_TRUE(block.shouldMerge());
 }

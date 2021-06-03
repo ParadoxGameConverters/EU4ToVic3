@@ -1,5 +1,7 @@
 #include "WarParser/WarParser.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
+using testing::ElementsAre;
 
 TEST(EU4World_WarParserTests, primitivesDefaultToDefaults)
 {
@@ -24,7 +26,7 @@ TEST(EU4World_WarParserTests, warCanBeLoaded)
 	input << "	9.9.9 = { it begins }\n";
 	input << "	10.10.10 = { it doesn't end }\n";
 	input << "}\n";
-	input << "attackers = { ULM }\n";
+	input << "attackers = { ULM C01 }\n";
 	input << "defenders = { FRA TUR HAB }\n";
 	input << "take_province = {\n";
 	input << "	province = 13\n";
@@ -33,10 +35,8 @@ TEST(EU4World_WarParserTests, warCanBeLoaded)
 	input << "}\n";
 	const EU4::WarParser war(input);
 
-	EXPECT_EQ("ULM", war.getAttackers()[0]);
-	EXPECT_EQ("FRA", war.getDefenders()[0]);
-	EXPECT_EQ("TUR", war.getDefenders()[1]);
-	EXPECT_EQ("HAB", war.getDefenders()[2]);
+	EXPECT_THAT(war.getAttackers(), ElementsAre("ULM", "C01"));
+	EXPECT_THAT(war.getDefenders(), ElementsAre("FRA", "TUR", "HAB"));
 	EXPECT_EQ("Silly War", war.getName());
 	EXPECT_EQ(date("9.9.9"), war.getDetails().startDate);
 	EXPECT_EQ(13, war.getDetails().targetProvinceID);
