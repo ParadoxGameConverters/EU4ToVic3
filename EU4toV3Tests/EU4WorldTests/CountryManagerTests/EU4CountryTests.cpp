@@ -249,7 +249,7 @@ TEST(EU4World_EU4CountryTests, LeadersCanBeReadAndProcessed)
 	const EU4::Country country("TAG", input);
 	const auto& leaders = country.getMilitaryLeaders();
 
-	EXPECT_EQ(2, leaders.size());
+	ASSERT_EQ(2, leaders.size());
 
 	const auto& leader1 = leaders[0];
 	const auto& leader2 = leaders[1];
@@ -277,13 +277,15 @@ TEST(EU4World_EU4CountryTests, ArmiesCanBeLoaded)
 	input << "}\n";
 
 	const EU4::Country country("TAG", input);
+
+	ASSERT_EQ(1, country.getArmies().size());
 	const auto& army = country.getArmies()[0];
 
 	EXPECT_EQ("Armee royale", army.getName());
 	EXPECT_FALSE(army.getArmyFloats());
 	EXPECT_EQ(183, army.getLocation());
-	EXPECT_EQ(1, army.getRegiments().size());
 
+	ASSERT_EQ(1, army.getRegiments().size());
 	const auto& regiment = army.getRegiments()[0];
 
 	EXPECT_EQ("Reims's 1st Regiment", regiment.getName());
@@ -306,6 +308,8 @@ TEST(EU4World_EU4CountryTests, RelationsCanBeLoaded)
 	input << "}\n";
 
 	const EU4::Country country("TAG", input);
+
+	ASSERT_EQ(2, country.getRelations().size());
 	const auto& C01relation = country.getRelations().at("C01");
 	const auto& C02relation = country.getRelations().at("C02");
 
@@ -340,12 +344,28 @@ TEST(EU4World_EU4CountryTests, CountryStatsCanBeLoaded)
 	EXPECT_NEAR(75.4, country.getArmyProfessionalism(), 0.0001);
 }
 
+TEST(EU4World_EU4CountryTests, StabilityDefaultsTo0)
+{
+	std::stringstream input;
+	const EU4::Country country("TAG", input);
+
+	EXPECT_EQ(0, country.getStability());
+}
+
 TEST(EU4World_EU4CountryTests, LegitimacyDefaultsTo100)
 {
 	std::stringstream input;
 	const EU4::Country country("TAG", input);
 
 	EXPECT_NEAR(100, country.getLegitimacy(), 0.0001);
+}
+
+TEST(EU4World_EU4CountryTests, ColonyDefaultsToFalse)
+{
+	std::stringstream input;
+	const EU4::Country country("TAG", input);
+
+	EXPECT_FALSE(country.isColony());
 }
 
 TEST(EU4World_EU4CountryTests, ColonyCanBeSet)
@@ -355,6 +375,15 @@ TEST(EU4World_EU4CountryTests, ColonyCanBeSet)
 	const EU4::Country country("TAG", input);
 
 	EXPECT_TRUE(country.isColony());
+}
+
+TEST(EU4World_EU4CountryTests, DependentStuffDefaultsToEmptyZero)
+{
+	std::stringstream input;
+	const EU4::Country country("TAG", input);
+
+	EXPECT_TRUE(country.getOverLord().empty());
+	EXPECT_EQ(0, country.getLibertyDesire());
 }
 
 TEST(EU4World_EU4CountryTests, DependentStuffCanBeSet)

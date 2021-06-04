@@ -65,7 +65,6 @@ class Country: commonItems::parser
 	[[nodiscard]] bool hasModifier(const std::string&) const;
 
 	// leaders and armies
-	void filterLeaders();
 	[[nodiscard]] const auto& getHistoricalLeaders() const { return historicalLeaders; }
 	[[nodiscard]] const auto& getMilitaryLeaders() const { return militaryLeaders; }
 	[[nodiscard]] const auto& getArmies() const { return armies; }
@@ -100,7 +99,6 @@ class Country: commonItems::parser
 	// manufactories
 	[[nodiscard]] auto getManufactoryCount() const { return mfgCount + mfgTransfer; }
 	void buildManufactoryCount(const std::map<std::string, std::shared_ptr<Country>>& theCountries);
-	void increaseMfgTransfer(const int increase) { mfgTransfer += increase; }
 	[[nodiscard]] double getManufactoryDensity() const;
 
 	// localizations
@@ -121,15 +119,18 @@ class Country: commonItems::parser
 	[[nodiscard]] double getCountryWeight() const;
 	void updateRegimentTypes(const UnitTypeLoader& unitTypeLoader);
 	void eatCountry(const std::shared_ptr<Country>& target);
-	void takeArmies(const std::shared_ptr<Country>& target);
-	void clearArmies();
 
   private:
 	void registerKeys();
 
+	// various processing functions
 	void determineJapaneseRelations();
 	void clearProvinces();
 	void clearCores();
+	void filterLeaders();
+	void increaseMfgTransfer(const int increase) { mfgTransfer += increase; }
+	void takeArmies(const std::shared_ptr<Country>& target);
+	void clearArmies();
 
 	std::string tag;
 	std::vector<std::shared_ptr<Province>> provinces;
