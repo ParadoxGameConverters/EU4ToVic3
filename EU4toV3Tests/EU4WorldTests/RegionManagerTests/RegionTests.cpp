@@ -1,7 +1,6 @@
 #include "RegionManager/Area.h"
 #include "RegionManager/Region.h"
 #include "gtest/gtest.h"
-#include <sstream>
 
 TEST(Mappers_RegionTests, blankRegionLoadsWithNoAreas)
 {

@@ -48,9 +48,6 @@
     <ClCompile Include="..\commonItems\ConvenientParser.cpp">
       <Filter>CommonItems</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EU4World\Mods\ModNames.cpp">
-      <Filter>EU4World\Mods</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Mappers\ConverterVersion\ConverterVersion.cpp">
       <Filter>Mappers\ConverterVersion</Filter>
     </ClCompile>
@@ -59,12 +56,6 @@
     </ClCompile>
     <ClCompile Include="Source\Configuration\Configuration.cpp">
       <Filter>Configuration</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EU4World\Mods\ModParser.cpp">
-      <Filter>EU4World\Mods</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EU4World\Mods\ModLoader.cpp">
-      <Filter>EU4World\Mods</Filter>
     </ClCompile>
     <ClCompile Include="Source\V3World\Output\outModFile.cpp">
       <Filter>Vic3World\Output</Filter>
@@ -80,27 +71,6 @@
     </ClCompile>
     <ClCompile Include="Source\EU4World\RegionManager\SuperRegion.cpp">
       <Filter>EU4World\RegionManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EU4World\ReligionLoader\ReligionParser.cpp">
-      <Filter>EU4World\ReligionLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EU4World\ReligionLoader\ReligionLoader.cpp">
-      <Filter>EU4World\ReligionLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EU4World\CultureLoader\CultureParser.cpp">
-      <Filter>EU4World\CultureLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EU4World\CultureLoader\CultureGroupParser.cpp">
-      <Filter>EU4World\CultureLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EU4World\CultureLoader\CultureLoader.cpp">
-      <Filter>EU4World\CultureLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EU4World\ProvinceManager\DefinitionScraper.cpp">
-      <Filter>EU4World\ProvinceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EU4World\ProvinceManager\DefaultMapParser.cpp">
-      <Filter>EU4World\ProvinceManager</Filter>
     </ClCompile>
     <ClCompile Include="Source\EU4World\ProvinceManager\DateItems.cpp">
       <Filter>EU4World\ProvinceManager</Filter>
@@ -129,11 +99,137 @@
     <ClCompile Include="Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp">
       <Filter>Mappers\SuperGroupMapper</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EU4World\BuildingCostLoader\BuildingCost.cpp">
-      <Filter>EU4World\BuildingCostLoader</Filter>
+    <ClCompile Include="Source\EU4World\CountryManager\EU4ActiveIdeas.cpp">
+      <Filter>EU4World\CountryManager</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EU4World\BuildingCostLoader\BuildingCostLoader.cpp">
-      <Filter>EU4World\BuildingCostLoader</Filter>
+    <ClCompile Include="Source\EU4World\CountryManager\EU4ActivePolicy.cpp">
+      <Filter>EU4World\CountryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\EU4Country.cpp">
+      <Filter>EU4World\CountryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\EU4CountryFlags.cpp">
+      <Filter>EU4World\CountryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\EU4CountryManager.cpp">
+      <Filter>EU4World\CountryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\EU4CountryModifier.cpp">
+      <Filter>EU4World\CountryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\EU4Technology.cpp">
+      <Filter>EU4World\CountryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\CountryArmy\EU4Army.cpp">
+      <Filter>EU4World\CountryManager\CountryArmy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\CountryArmy\EU4Regiment.cpp">
+      <Filter>EU4World\CountryManager\CountryArmy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\CountryGovernment\EU4GovernmentSection.cpp">
+      <Filter>EU4World\CountryManager\CountryGovernment</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\CountryGovernment\EU4ReformStackSection.cpp">
+      <Filter>EU4World\CountryManager\CountryGovernment</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\CountryHistory\CountryHistory.cpp">
+      <Filter>EU4World\CountryManager\CountryHistory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\CountryHistory\CountryHistoryDate.cpp">
+      <Filter>EU4World\CountryManager\CountryHistory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\CountryRelations\EU4RelationDetails.cpp">
+      <Filter>EU4World\CountryManager\CountryRelations</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\CountryRelations\EU4Relations.cpp">
+      <Filter>EU4World\CountryManager\CountryRelations</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\NationalSymbol\EU4CustomColors.cpp">
+      <Filter>EU4World\CountryManager\NationalSymbol</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\NationalSymbol\EU4NationalSymbol.cpp">
+      <Filter>EU4World\CountryManager\NationalSymbol</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\BuildingCostLoader\BuildingCost.cpp">
+      <Filter>EU4World\Loaders\BuildingCostLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\BuildingCostLoader\BuildingCostLoader.cpp">
+      <Filter>EU4World\Loaders\BuildingCostLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\CultureLoader\CultureGroupParser.cpp">
+      <Filter>EU4World\Loaders\CultureLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\CultureLoader\CultureLoader.cpp">
+      <Filter>EU4World\Loaders\CultureLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\CultureLoader\CultureParser.cpp">
+      <Filter>EU4World\Loaders\CultureLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\DefaultMapParser\DefaultMapParser.cpp">
+      <Filter>EU4World\Loaders\DefaultMapParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\DefinitionScraper\DefinitionScraper.cpp">
+      <Filter>EU4World\Loaders\DefinitionScraper</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\ModLoader\ModLoader.cpp">
+      <Filter>EU4World\Loaders\ModLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\ModLoader\ModNames.cpp">
+      <Filter>EU4World\Loaders\ModLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\ModLoader\ModParser.cpp">
+      <Filter>EU4World\Loaders\ModLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\ReligionLoader\ReligionLoader.cpp">
+      <Filter>EU4World\Loaders\ReligionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\ReligionLoader\ReligionParser.cpp">
+      <Filter>EU4World\Loaders\ReligionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\UnitTypeLoader\UnitTypeLoader.cpp">
+      <Filter>EU4World\Loaders\UnitTypeLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\UnitTypeLoader\UnitTypeParser.cpp">
+      <Filter>EU4World\Loaders\UnitTypeLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\CountryLeader\EU4Leader.cpp">
+      <Filter>EU4World\CountryManager\CountryLeader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\CountryManager\CountryLeader\EU4LeaderID.cpp">
+      <Filter>EU4World\CountryManager\CountryLeader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\EmpireParser\EmpireParser.cpp">
+      <Filter>EU4World\EmpireParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\CommonCountryLoader\CommonCountryLoader.cpp">
+      <Filter>EU4World\Loaders\CommonCountryLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mappers\NationMergeMapper\MergeBlock.cpp">
+      <Filter>Mappers\NationMergeMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mappers\NationMergeMapper\NationMergeMapper.cpp">
+      <Filter>Mappers\NationMergeMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\DiplomacyParser\EU4Agreement.cpp">
+      <Filter>EU4World\DiplomacyParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\DiplomacyParser\DiplomacyParser.cpp">
+      <Filter>EU4World\DiplomacyParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\WarParser\WarDetails.cpp">
+      <Filter>EU4World\WarParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\WarParser\WarParser.cpp">
+      <Filter>EU4World\WarParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\LocalizationLoader\EU4LocalizationLoader.cpp">
+      <Filter>EU4World\Loaders\LocalizationLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegion.cpp">
+      <Filter>EU4World\Loaders\ColonialRegionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegionLoader.cpp">
+      <Filter>EU4World\Loaders\ColonialRegionLoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,9 +285,6 @@
     <ClInclude Include="..\commonItems\ConvenientParser.h">
       <Filter>CommonItems</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EU4World\Mods\ModNames.h">
-      <Filter>EU4World\Mods</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Mappers\ConverterVersion\ConverterVersion.h">
       <Filter>Mappers\ConverterVersion</Filter>
     </ClInclude>
@@ -200,12 +293,6 @@
     </ClInclude>
     <ClInclude Include="Source\Configuration\Configuration.h">
       <Filter>Configuration</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EU4World\Mods\ModParser.h">
-      <Filter>EU4World\Mods</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EU4World\Mods\ModLoader.h">
-      <Filter>EU4World\Mods</Filter>
     </ClInclude>
     <ClInclude Include="Source\V3World\Output\outModFile.h">
       <Filter>Vic3World\Output</Filter>
@@ -221,27 +308,6 @@
     </ClInclude>
     <ClInclude Include="Source\EU4World\RegionManager\SuperRegion.h">
       <Filter>EU4World\RegionManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EU4World\ReligionLoader\ReligionParser.h">
-      <Filter>EU4World\ReligionLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EU4World\ReligionLoader\ReligionLoader.h">
-      <Filter>EU4World\ReligionLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EU4World\CultureLoader\CultureParser.h">
-      <Filter>EU4World\CultureLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EU4World\CultureLoader\CultureGroupParser.h">
-      <Filter>EU4World\CultureLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EU4World\CultureLoader\CultureLoader.h">
-      <Filter>EU4World\CultureLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EU4World\ProvinceManager\DefinitionScraper.h">
-      <Filter>EU4World\ProvinceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EU4World\ProvinceManager\DefaultMapParser.h">
-      <Filter>EU4World\ProvinceManager</Filter>
     </ClInclude>
     <ClInclude Include="Source\EU4World\ProvinceManager\DateItems.h">
       <Filter>EU4World\ProvinceManager</Filter>
@@ -273,14 +339,146 @@
     <ClInclude Include="Source\Mappers\SuperGroupMapper\SuperRegionParser.h">
       <Filter>Mappers\SuperGroupMapper</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EU4World\BuildingCostLoader\BuildingCost.h">
-      <Filter>EU4World\BuildingCostLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EU4World\BuildingCostLoader\BuildingCostLoader.h">
-      <Filter>EU4World\BuildingCostLoader</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EU4World\ProvinceManager\DateChange.h">
       <Filter>EU4World\ProvinceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\EU4ActiveIdeas.h">
+      <Filter>EU4World\CountryManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\EU4ActivePolicy.h">
+      <Filter>EU4World\CountryManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\EU4Country.h">
+      <Filter>EU4World\CountryManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\EU4CountryFlags.h">
+      <Filter>EU4World\CountryManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\EU4CountryManager.h">
+      <Filter>EU4World\CountryManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\EU4CountryModifier.h">
+      <Filter>EU4World\CountryManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\EU4Technology.h">
+      <Filter>EU4World\CountryManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\CountryArmy\EU4Army.h">
+      <Filter>EU4World\CountryManager\CountryArmy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\CountryArmy\EU4Regiment.h">
+      <Filter>EU4World\CountryManager\CountryArmy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\CountryGovernment\EU4GovernmentSection.h">
+      <Filter>EU4World\CountryManager\CountryGovernment</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\CountryGovernment\EU4ReformStackSection.h">
+      <Filter>EU4World\CountryManager\CountryGovernment</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\CountryHistory\CountryHistory.h">
+      <Filter>EU4World\CountryManager\CountryHistory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\CountryHistory\CountryHistoryDate.h">
+      <Filter>EU4World\CountryManager\CountryHistory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\CountryRelations\EU4RelationDetails.h">
+      <Filter>EU4World\CountryManager\CountryRelations</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\CountryRelations\EU4Relations.h">
+      <Filter>EU4World\CountryManager\CountryRelations</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\NationalSymbol\EU4CustomColors.h">
+      <Filter>EU4World\CountryManager\NationalSymbol</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\NationalSymbol\EU4NationalSymbol.h">
+      <Filter>EU4World\CountryManager\NationalSymbol</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\BuildingCostLoader\BuildingCost.h">
+      <Filter>EU4World\Loaders\BuildingCostLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\BuildingCostLoader\BuildingCostLoader.h">
+      <Filter>EU4World\Loaders\BuildingCostLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\CultureLoader\CultureGroupParser.h">
+      <Filter>EU4World\Loaders\CultureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\CultureLoader\CultureLoader.h">
+      <Filter>EU4World\Loaders\CultureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\CultureLoader\CultureParser.h">
+      <Filter>EU4World\Loaders\CultureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\DefaultMapParser\DefaultMapParser.h">
+      <Filter>EU4World\Loaders\DefaultMapParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\DefinitionScraper\DefinitionScraper.h">
+      <Filter>EU4World\Loaders\DefinitionScraper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\ModLoader\ModLoader.h">
+      <Filter>EU4World\Loaders\ModLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\ModLoader\ModNames.h">
+      <Filter>EU4World\Loaders\ModLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\ModLoader\ModParser.h">
+      <Filter>EU4World\Loaders\ModLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\ReligionLoader.h">
+      <Filter>EU4World\Loaders\ReligionLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\ReligionParser.h">
+      <Filter>EU4World\Loaders\ReligionLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\UnitTypeLoader\UnitTypeLoader.h">
+      <Filter>EU4World\Loaders\UnitTypeLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\UnitTypeLoader\UnitTypeParser.h">
+      <Filter>EU4World\Loaders\UnitTypeLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\UnitTypeLoader\UnitType.h">
+      <Filter>EU4World\Loaders\UnitTypeLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\CountryLeader\EU4Leader.h">
+      <Filter>EU4World\CountryManager\CountryLeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\CountryLeader\EU4LeaderID.h">
+      <Filter>EU4World\CountryManager\CountryLeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\CountryManager\NationalSymbol\EU4CustomColorsBlock.h">
+      <Filter>EU4World\CountryManager\NationalSymbol</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\EmpireParser\EmpireParser.h">
+      <Filter>EU4World\EmpireParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\CommonCountryLoader\CommonCountryLoader.h">
+      <Filter>EU4World\Loaders\CommonCountryLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mappers\NationMergeMapper\MergeBlock.h">
+      <Filter>Mappers\NationMergeMapper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mappers\NationMergeMapper\NationMergeMapper.h">
+      <Filter>Mappers\NationMergeMapper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\DiplomacyParser\EU4Agreement.h">
+      <Filter>EU4World\DiplomacyParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\DiplomacyParser\DiplomacyParser.h">
+      <Filter>EU4World\DiplomacyParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\WarParser\WarDetails.h">
+      <Filter>EU4World\WarParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\WarParser\WarParser.h">
+      <Filter>EU4World\WarParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\LocalizationLoader\EU4LocalizationLoader.h">
+      <Filter>EU4World\Loaders\LocalizationLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegion.h">
+      <Filter>EU4World\Loaders\ColonialRegionLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegionLoader.h">
+      <Filter>EU4World\Loaders\ColonialRegionLoader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -295,9 +493,6 @@
     </Filter>
     <Filter Include="CommonItems">
       <UniqueIdentifier>{92d9302b-67c1-46ea-9493-b56e75598574}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EU4World\Mods">
-      <UniqueIdentifier>{5cf7770c-c44d-44fd-864a-e3ae2fc9fe43}</UniqueIdentifier>
     </Filter>
     <Filter Include="Helpers">
       <UniqueIdentifier>{ef5e0061-2ce9-448e-9f80-9fa52991faf9}</UniqueIdentifier>
@@ -314,20 +509,77 @@
     <Filter Include="EU4World\RegionManager">
       <UniqueIdentifier>{e2723ebd-a078-4524-bff0-9457b5f9f27e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EU4World\ReligionLoader">
-      <UniqueIdentifier>{dba84e8d-44a6-4c86-b579-f305819495b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EU4World\CultureLoader">
-      <UniqueIdentifier>{dd81ecfb-7296-491f-b7a5-2f12b9b48578}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EU4World\ProvinceManager">
       <UniqueIdentifier>{4f7c05ee-cb8f-4436-8495-f52384a4e76e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Mappers\SuperGroupMapper">
       <UniqueIdentifier>{9165f4a9-6a29-4b55-a3e4-04fadbffec2c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EU4World\BuildingCostLoader">
+    <Filter Include="EU4World\CountryManager">
+      <UniqueIdentifier>{92866d4d-6084-4d4f-93c3-737529cbde04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\CountryManager\CountryArmy">
+      <UniqueIdentifier>{21a7e896-4baa-44b6-81d0-2e999e2524dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\CountryManager\CountryGovernment">
+      <UniqueIdentifier>{e215170c-eaba-4edb-9de4-94bc3353c25a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\CountryManager\CountryHistory">
+      <UniqueIdentifier>{07602bb9-3268-4879-9bcd-b075b3c02d52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\CountryManager\CountryRelations">
+      <UniqueIdentifier>{d28600ca-d77c-45ea-8fc3-424e8a0165aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\CountryManager\NationalSymbol">
+      <UniqueIdentifier>{614e2fd3-ed65-4312-bc7b-0e16ea893660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\Loaders">
+      <UniqueIdentifier>{54f364c8-6ace-470d-a774-166891ee5387}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\Loaders\BuildingCostLoader">
       <UniqueIdentifier>{168becb4-8fc8-45dc-8faf-3ffeb43c578f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\Loaders\CultureLoader">
+      <UniqueIdentifier>{dd81ecfb-7296-491f-b7a5-2f12b9b48578}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\Loaders\DefaultMapParser">
+      <UniqueIdentifier>{cb48dceb-0ce1-44b3-9637-f716d71770cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\Loaders\DefinitionScraper">
+      <UniqueIdentifier>{3b10e78d-4cf9-44ac-a04e-2bfa3c3fa59d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\Loaders\ModLoader">
+      <UniqueIdentifier>{2df851e2-8cda-4fd9-b7e2-b0b122201410}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\Loaders\ReligionLoader">
+      <UniqueIdentifier>{dba84e8d-44a6-4c86-b579-f305819495b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\Loaders\UnitTypeLoader">
+      <UniqueIdentifier>{2ffc6ab3-9469-4a92-be89-02b407452d52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\CountryManager\CountryLeader">
+      <UniqueIdentifier>{3da46a9b-5916-43c7-b840-4ea6aaa91ef0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\EmpireParser">
+      <UniqueIdentifier>{2349698f-6458-4145-baac-78d38d2d7899}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\Loaders\CommonCountryLoader">
+      <UniqueIdentifier>{6da67b6f-d3af-4d94-b6ba-edb031e3da85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mappers\NationMergeMapper">
+      <UniqueIdentifier>{f70b07f2-49bb-419a-a8d7-82fec6fa682f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\DiplomacyParser">
+      <UniqueIdentifier>{3283ed96-23af-4348-9871-7d3b5a3494ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\WarParser">
+      <UniqueIdentifier>{3baadc70-67a6-4d1f-9ac7-2475da8a2040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\Loaders\LocalizationLoader">
+      <UniqueIdentifier>{f3da19ad-047c-47c4-955a-50c83236fa3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\Loaders\ColonialRegionLoader">
+      <UniqueIdentifier>{9e5b88cc-ff57-4f96-b614-ad480c35973a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

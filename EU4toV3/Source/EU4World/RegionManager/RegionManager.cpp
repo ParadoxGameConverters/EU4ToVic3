@@ -2,10 +2,11 @@
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
+#include "ProvinceManager/ProvinceManager.h"
 #include <filesystem>
-namespace fs = std::filesystem;
 #include <fstream>
 #include <ranges>
+namespace fs = std::filesystem;
 
 void EU4::RegionManager::loadRegions(const std::string& EU4Path, const Mods& mods)
 {
@@ -264,4 +265,38 @@ std::optional<double> EU4::RegionManager::getAssimilationFactor(int provinceID) 
 
 	Log(LogLevel::Warning) << "Province ID " << provinceID << " has no assimilation factor!";
 	return std::nullopt;
+}
+
+std::optional<std::string> EU4::RegionManager::getColonialRegionForProvince(int province) const
+{
+	return colonialRegionLoader.getColonialRegionForProvince(province);
+}
+
+void EU4::RegionManager::catalogueNativeCultures(const ProvinceManager& provinceManager)
+{
+	for (const auto& [provinceID, province]: provinceManager.getAllProvinces())
+	{
+		if (province->getStartingCulture().empty())
+			continue;
+		const auto& superRegionName = getParentSuperRegionName(provinceID);
+		if (superRegionName)
+			superRegions.at(*superRegionName)->registerNativeCulture(province->getStartingCulture());
+	}
+}
+
+bool EU4::RegionManager::doesProvinceRequireNeoCulture(int provinceID, const std::string& culture) const
+{
+	// This one is funny. A province requires a neoculture if:
+	// 1. it belongs to a colonial region
+	// 2. the culture given (presumably from that very province) is not native to the province's superRegion.
+	// result of this function fuels generation of a new neoculture in cultureManager.
+
+	if (!getColonialRegionForProvince(provinceID))
+		return false; // not in colonial region.
+
+	const auto& superRegionName = getParentSuperRegionName(provinceID);
+	if (superRegionName)
+		return !superRegions.at(*superRegionName)->superRegionContainsNativeCulture(culture);
+
+	return false;
 }

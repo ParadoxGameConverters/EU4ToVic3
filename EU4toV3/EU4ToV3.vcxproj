@@ -219,17 +219,16 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX20_U8PATH_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\commonItems;..\ZipLib;Source\Mappers;Source;Source\EU4World;Source\V3World;Source\Helpers;Source\Configuration</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\commonItems;..\ZipLib;Source\Mappers;Source;Source\EU4World;Source\EU4World\Loaders;Source\V3World;Source\Helpers;Source\Configuration</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>Resources\rakaly.dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <PostBuildEvent>
       <Command>Copy_Files.bat</Command>
@@ -312,17 +311,47 @@
     <ClCompile Include="..\commonItems\targa.cpp" />
     <ClCompile Include="Source\Configuration\Configuration.cpp" />
     <ClCompile Include="Source\EU4toVic3Converter.cpp" />
-    <ClCompile Include="Source\EU4World\BuildingCostLoader\BuildingCost.cpp" />
-    <ClCompile Include="Source\EU4World\BuildingCostLoader\BuildingCostLoader.cpp" />
-    <ClCompile Include="Source\EU4World\CultureLoader\CultureParser.cpp" />
-    <ClCompile Include="Source\EU4World\CultureLoader\CultureGroupParser.cpp" />
-    <ClCompile Include="Source\EU4World\CultureLoader\CultureLoader.cpp" />
-    <ClCompile Include="Source\EU4World\Mods\ModParser.cpp" />
-    <ClCompile Include="Source\EU4World\Mods\ModNames.cpp" />
-    <ClCompile Include="Source\EU4World\Mods\ModLoader.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\CountryArmy\EU4Army.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\CountryArmy\EU4Regiment.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\CountryGovernment\EU4GovernmentSection.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\CountryGovernment\EU4ReformStackSection.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\CountryHistory\CountryHistory.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\CountryHistory\CountryHistoryDate.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\CountryLeader\EU4Leader.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\CountryLeader\EU4LeaderID.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\CountryRelations\EU4RelationDetails.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\CountryRelations\EU4Relations.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\EU4ActiveIdeas.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\EU4ActivePolicy.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\EU4Country.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\EU4CountryFlags.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\EU4CountryManager.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\EU4CountryModifier.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\EU4Technology.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\NationalSymbol\EU4CustomColors.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\NationalSymbol\EU4NationalSymbol.cpp" />
+    <ClCompile Include="Source\EU4World\DiplomacyParser\EU4Agreement.cpp" />
+    <ClCompile Include="Source\EU4World\DiplomacyParser\DiplomacyParser.cpp" />
+    <ClCompile Include="Source\EU4World\EmpireParser\EmpireParser.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\BuildingCostLoader\BuildingCost.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\BuildingCostLoader\BuildingCostLoader.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegion.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegionLoader.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\CommonCountryLoader\CommonCountryLoader.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\CultureLoader\CultureGroupParser.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\CultureLoader\CultureLoader.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\CultureLoader\CultureParser.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\DefaultMapParser\DefaultMapParser.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\DefinitionScraper\DefinitionScraper.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\LocalizationLoader\EU4LocalizationLoader.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\ModLoader\ModLoader.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\ModLoader\ModNames.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\ModLoader\ModParser.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\ReligionLoader\ReligionLoader.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\ReligionLoader\ReligionParser.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\UnitTypeLoader\UnitTypeLoader.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\UnitTypeLoader\UnitTypeParser.cpp" />
     <ClCompile Include="Source\EU4World\ProvinceManager\DateItems.cpp" />
-    <ClCompile Include="Source\EU4World\ProvinceManager\DefaultMapParser.cpp" />
-    <ClCompile Include="Source\EU4World\ProvinceManager\DefinitionScraper.cpp" />
     <ClCompile Include="Source\EU4World\ProvinceManager\EU4Province.cpp" />
     <ClCompile Include="Source\EU4World\ProvinceManager\PopRatio.cpp" />
     <ClCompile Include="Source\EU4World\ProvinceManager\ProvinceBuildings.cpp" />
@@ -332,11 +361,13 @@
     <ClCompile Include="Source\EU4World\RegionManager\Region.cpp" />
     <ClCompile Include="Source\EU4World\RegionManager\RegionManager.cpp" />
     <ClCompile Include="Source\EU4World\RegionManager\SuperRegion.cpp" />
-    <ClCompile Include="Source\EU4World\ReligionLoader\ReligionParser.cpp" />
-    <ClCompile Include="Source\EU4World\ReligionLoader\ReligionLoader.cpp" />
+    <ClCompile Include="Source\EU4World\WarParser\WarDetails.cpp" />
+    <ClCompile Include="Source\EU4World\WarParser\WarParser.cpp" />
     <ClCompile Include="Source\EU4World\World.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Mappers\ConverterVersion\ConverterVersion.cpp" />
+    <ClCompile Include="Source\Mappers\NationMergeMapper\MergeBlock.cpp" />
+    <ClCompile Include="Source\Mappers\NationMergeMapper\NationMergeMapper.cpp" />
     <ClCompile Include="Source\Mappers\SuperGroupMapper\AssimilationParser.cpp" />
     <ClCompile Include="Source\Mappers\SuperGroupMapper\SuperGroupMapper.cpp" />
     <ClCompile Include="Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp" />
@@ -361,18 +392,50 @@
     <ClInclude Include="Source\Configuration\Configuration.h" />
     <ClInclude Include="Source\Configuration\DatingData.h" />
     <ClInclude Include="Source\EU4ToVic3Converter.h" />
-    <ClInclude Include="Source\EU4World\BuildingCostLoader\BuildingCost.h" />
-    <ClInclude Include="Source\EU4World\BuildingCostLoader\BuildingCostLoader.h" />
-    <ClInclude Include="Source\EU4World\CultureLoader\CultureParser.h" />
-    <ClInclude Include="Source\EU4World\CultureLoader\CultureGroupParser.h" />
-    <ClInclude Include="Source\EU4World\CultureLoader\CultureLoader.h" />
-    <ClInclude Include="Source\EU4World\Mods\ModParser.h" />
-    <ClInclude Include="Source\EU4World\Mods\ModNames.h" />
-    <ClInclude Include="Source\EU4World\Mods\ModLoader.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\CountryArmy\EU4Army.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\CountryArmy\EU4Regiment.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\CountryGovernment\EU4GovernmentSection.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\CountryGovernment\EU4ReformStackSection.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\CountryHistory\CountryHistory.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\CountryHistory\CountryHistoryDate.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\CountryLeader\EU4Leader.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\CountryLeader\EU4LeaderID.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\CountryRelations\EU4RelationDetails.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\CountryRelations\EU4Relations.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\EU4ActiveIdeas.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\EU4ActivePolicy.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\EU4Country.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\EU4CountryFlags.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\EU4CountryManager.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\EU4CountryModifier.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\EU4Technology.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\NationalSymbol\EU4CustomColors.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\NationalSymbol\EU4CustomColorsBlock.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\NationalSymbol\EU4NationalSymbol.h" />
+    <ClInclude Include="Source\EU4World\DiplomacyParser\EU4Agreement.h" />
+    <ClInclude Include="Source\EU4World\DiplomacyParser\DiplomacyParser.h" />
+    <ClInclude Include="Source\EU4World\EmpireParser\EmpireParser.h" />
+    <ClInclude Include="Source\EU4World\Loaders\BuildingCostLoader\BuildingCost.h" />
+    <ClInclude Include="Source\EU4World\Loaders\BuildingCostLoader\BuildingCostLoader.h" />
+    <ClInclude Include="Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegion.h" />
+    <ClInclude Include="Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegionLoader.h" />
+    <ClInclude Include="Source\EU4World\Loaders\CommonCountryLoader\CommonCountryLoader.h" />
+    <ClInclude Include="Source\EU4World\Loaders\CultureLoader\CultureGroupParser.h" />
+    <ClInclude Include="Source\EU4World\Loaders\CultureLoader\CultureLoader.h" />
+    <ClInclude Include="Source\EU4World\Loaders\CultureLoader\CultureParser.h" />
+    <ClInclude Include="Source\EU4World\Loaders\DefaultMapParser\DefaultMapParser.h" />
+    <ClInclude Include="Source\EU4World\Loaders\DefinitionScraper\DefinitionScraper.h" />
+    <ClInclude Include="Source\EU4World\Loaders\LocalizationLoader\EU4LocalizationLoader.h" />
+    <ClInclude Include="Source\EU4World\Loaders\ModLoader\ModLoader.h" />
+    <ClInclude Include="Source\EU4World\Loaders\ModLoader\ModNames.h" />
+    <ClInclude Include="Source\EU4World\Loaders\ModLoader\ModParser.h" />
+    <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\ReligionLoader.h" />
+    <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\ReligionParser.h" />
+    <ClInclude Include="Source\EU4World\Loaders\UnitTypeLoader\UnitType.h" />
+    <ClInclude Include="Source\EU4World\Loaders\UnitTypeLoader\UnitTypeLoader.h" />
+    <ClInclude Include="Source\EU4World\Loaders\UnitTypeLoader\UnitTypeParser.h" />
     <ClInclude Include="Source\EU4World\ProvinceManager\DateChange.h" />
     <ClInclude Include="Source\EU4World\ProvinceManager\DateItems.h" />
-    <ClInclude Include="Source\EU4World\ProvinceManager\DefaultMapParser.h" />
-    <ClInclude Include="Source\EU4World\ProvinceManager\DefinitionScraper.h" />
     <ClInclude Include="Source\EU4World\ProvinceManager\EU4Province.h" />
     <ClInclude Include="Source\EU4World\ProvinceManager\PopRatio.h" />
     <ClInclude Include="Source\EU4World\ProvinceManager\ProvinceBuildings.h" />
@@ -382,12 +445,14 @@
     <ClInclude Include="Source\EU4World\RegionManager\Region.h" />
     <ClInclude Include="Source\EU4World\RegionManager\RegionManager.h" />
     <ClInclude Include="Source\EU4World\RegionManager\SuperRegion.h" />
-    <ClInclude Include="Source\EU4World\ReligionLoader\ReligionParser.h" />
-    <ClInclude Include="Source\EU4World\ReligionLoader\ReligionLoader.h" />
+    <ClInclude Include="Source\EU4World\WarParser\WarDetails.h" />
+    <ClInclude Include="Source\EU4World\WarParser\WarParser.h" />
     <ClInclude Include="Source\EU4World\World.h" />
     <ClInclude Include="Source\Helpers\rakaly.h" />
     <ClInclude Include="Source\Helpers\rakaly_wrapper.h" />
     <ClInclude Include="Source\Mappers\ConverterVersion\ConverterVersion.h" />
+    <ClInclude Include="Source\Mappers\NationMergeMapper\MergeBlock.h" />
+    <ClInclude Include="Source\Mappers\NationMergeMapper\NationMergeMapper.h" />
     <ClInclude Include="Source\Mappers\SuperGroupMapper\AssimilationParser.h" />
     <ClInclude Include="Source\Mappers\SuperGroupMapper\SuperGroupMapper.h" />
     <ClInclude Include="Source\Mappers\SuperGroupMapper\SuperRegionParser.h" />

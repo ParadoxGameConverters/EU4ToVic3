@@ -2,14 +2,17 @@
 #define EU4_WORLD_H
 #include "Configuration.h"
 #include "ConverterVersion/ConverterVersion.h"
+#include "CountryManager/EU4CountryManager.h"
 #include "CultureLoader/CultureLoader.h"
 #include "DatingData.h"
+#include "DiplomacyParser/DiplomacyParser.h"
 #include "GameVersion.h"
-#include "Mods/ModLoader.h"
+#include "ModLoader/ModLoader.h"
 #include "Parser.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "RegionManager/RegionManager.h"
 #include "ReligionLoader/ReligionLoader.h"
+#include "WarParser/WarParser.h"
 
 namespace EU4
 {
@@ -17,6 +20,19 @@ class World: commonItems::parser
 {
   public:
 	World(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion);
+
+	// V3World inputs
+	[[nodiscard]] bool isHREDecentralized() const { return hreReforms.contains("emperor_reichskrieg"); }
+	[[nodiscard]] auto getEU4RandomSeed() const { return eu4Seed; } // for use in province shuffler
+
+	[[nodiscard]] const auto& getWars() const { return wars; }
+
+	[[nodiscard]] const auto& getCountryManager() const { return countryManager; }
+	[[nodiscard]] const auto& getProvinceManager() const { return provinceManager; }
+	[[nodiscard]] const auto& getRegionManager() const { return regionManager; }
+	[[nodiscard]] const auto& getCultureLoader() const { return cultureLoader; }
+	[[nodiscard]] const auto& getReligionLoader() const { return religionLoader; }
+	[[nodiscard]] const auto& getDiplomacy() const { return diplomacyParser; }
 
   private:
 	void registerKeys(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion);
@@ -40,11 +56,18 @@ class World: commonItems::parser
 
 	GameVersion version;
 	int eu4Seed = 0;
+	std::string HREmperor;
+	std::string celestialEmperor;
+	std::set<std::string> hreReforms;
+	std::string revolutionTarget;
+	std::vector<WarParser> wars;
 
 	RegionManager regionManager;
 	ReligionLoader religionLoader;
 	CultureLoader cultureLoader;
 	ProvinceManager provinceManager;
+	CountryManager countryManager;
+	DiplomacyParser diplomacyParser;
 };
 } // namespace EU4
 

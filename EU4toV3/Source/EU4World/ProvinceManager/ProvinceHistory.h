@@ -29,6 +29,7 @@ class ProvinceHistory: commonItems::convenientParser
 	[[nodiscard]] const auto& getCultureHistory() const { return cultureHistory; }
 
 	void buildPopRatios(double assimilationFactor, const DatingData& datingData);
+	void purgeHistories();
 	[[nodiscard]] const auto& getPopRatios() const { return popRatios; }
 
   private:

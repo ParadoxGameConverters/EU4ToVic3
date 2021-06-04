@@ -18,6 +18,7 @@ include_directories("../ZipLib")
 include_directories("Source")
 include_directories("Source/Mappers")
 include_directories("Source/EU4World")
+include_directories("Source/EU4World/Loaders")
 include_directories("Source/V3World")
 include_directories("Source/Helpers")
 include_directories("Source/Configuration")
@@ -30,6 +31,7 @@ file(GLOB MAIN_SOURCES "${PROJECT_SOURCE_DIR}/*.cpp")
 file(GLOB CONFIGURATION_SOURCES "${PROJECT_SOURCE_DIR}/Configuration/*.cpp")
 file(GLOB EU4_WORLD_SOURCES "${PROJECT_SOURCE_DIR}/EU4World/*.cpp")
 file(GLOB EU4_SUBDIR_SOURCES "${PROJECT_SOURCE_DIR}/EU4World/*/*.cpp")
+file(GLOB EU4_SUBSUBDIR_SOURCES "${PROJECT_SOURCE_DIR}/EU4World/*/*/*.cpp")
 file(GLOB V3_WORLD_SOURCES "${PROJECT_SOURCE_DIR}/V3World/*.cpp")
 file(GLOB V3_SUBDIR_SOURCES "${PROJECT_SOURCE_DIR}/V3World/*/*.cpp")
 file(GLOB MAPPER_SOURCES "${PROJECT_SOURCE_DIR}/Mappers/*/*.cpp")
@@ -51,6 +53,7 @@ add_executable(EU4ToVic3
 	${CONFIGURATION_SOURCES}
 	${EU4_WORLD_SOURCES}
 	${EU4_SUBDIR_SOURCES}
+	${EU4_SUBSUBDIR_SOURCES}
 	${V3_WORLD_SOURCES}
 	${V3_SUBDIR_SOURCES}
 	${MAPPER_SOURCES}

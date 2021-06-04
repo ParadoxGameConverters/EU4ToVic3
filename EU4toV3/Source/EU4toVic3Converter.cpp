@@ -8,9 +8,8 @@ void convertEU4ToVic3(mappers::ConverterVersion&& converterVersion)
 {
 	Log(LogLevel::Progress) << "0 %";
 	const auto configuration = Configuration();
+	Log(LogLevel::Info) << "<> Configuration imported.";
 	Log(LogLevel::Progress) << "4 %";
-
-	Log(LogLevel::Progress) << "5 %";
 
 	const EU4::World sourceWorld(configuration, converterVersion);
 	V3::World destWorld(configuration, sourceWorld, std::move(converterVersion));

@@ -85,7 +85,7 @@
     <OutDir>$(SolutionDir)$(ProjectName)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)$(ProjectName)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)$(Configuration)-Tests\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -122,7 +122,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -157,15 +157,13 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>../commonItems;../googletest/googletest;../googletest/googletest/include;../googletest/googlemock;../googletest/googlemock/include;../EU4toV3/Source;../EU4toV3/Source/EU4World;../EU4toV3/Source/Mappers;../EU4toV3/Source/V3World;../EU4toV3/Source/Configuration</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../commonItems;../googletest/googletest;../googletest/googletest/include;../googletest/googlemock;../googletest/googlemock/include;../EU4toV3/Source;../EU4toV3/Source/EU4World/Loaders;../EU4toV3/Source/EU4World;../EU4toV3/Source/Mappers;../EU4toV3/Source/V3World;../EU4toV3/Source/Configuration;../ZipLib</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX20_U8PATH_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalDependencies>%(AdditionalDependencies);$(SolutionDir)$(Platform)\$(Configuration)\ZipLib.lib;$(SolutionDir)$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)$(Platform)\$(Configuration)\lzma.lib;$(SolutionDir)$(Platform)\$(Configuration)\bzip2.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -182,16 +180,47 @@
     <ClCompile Include="..\commonItems\StringUtils.cpp" />
     <ClCompile Include="..\commonItems\WinUtils.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Configuration\Configuration.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\BuildingCostLoader\BuildingCost.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\BuildingCostLoader\BuildingCostLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CultureLoader\CultureGroupParser.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CultureLoader\CultureLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CultureLoader\CultureParser.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Mods\ModNames.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Mods\ModParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryArmy\EU4Army.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryArmy\EU4Regiment.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryGovernment\EU4GovernmentSection.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryGovernment\EU4ReformStackSection.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryHistory\CountryHistory.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryHistory\CountryHistoryDate.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryLeader\EU4Leader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryLeader\EU4LeaderID.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryRelations\EU4RelationDetails.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryRelations\EU4Relations.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4ActiveIdeas.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4ActivePolicy.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4Country.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4CountryFlags.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4CountryManager.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4CountryModifier.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4Technology.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\NationalSymbol\EU4CustomColors.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\NationalSymbol\EU4NationalSymbol.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\DiplomacyParser\DiplomacyParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\DiplomacyParser\EU4Agreement.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\EmpireParser\EmpireParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\BuildingCostLoader\BuildingCost.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\BuildingCostLoader\BuildingCostLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegion.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegionLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\CommonCountryLoader\CommonCountryLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\CultureLoader\CultureGroupParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\CultureLoader\CultureLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\CultureLoader\CultureParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\DefaultMapParser\DefaultMapParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\DefinitionScraper\DefinitionScraper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\LocalizationLoader\EU4LocalizationLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ModLoader\ModLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ModLoader\ModNames.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ModLoader\ModParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ReligionLoader\ReligionLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ReligionLoader\ReligionParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\UnitTypeLoader\UnitTypeLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\UnitTypeLoader\UnitTypeParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\DateItems.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\DefaultMapParser.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\DefinitionScraper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\EU4Province.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\PopRatio.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\ProvinceBuildings.cpp" />
@@ -201,9 +230,11 @@
     <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\Region.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\RegionManager.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\SuperRegion.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\ReligionLoader\ReligionLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\ReligionLoader\ReligionParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\WarParser\WarDetails.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\WarParser\WarParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ConverterVersion\ConverterVersion.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\MergeBlock.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\NationMergeMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\AssimilationParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperGroupMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp" />
@@ -211,16 +242,48 @@
     <ClCompile Include="..\googletest\googlemock\src\gmock-all.cc" />
     <ClCompile Include="..\googletest\googletest\src\gtest-all.cc" />
     <ClCompile Include="..\googletest\googletest\src\gtest_main.cc" />
-    <ClCompile Include="EU4WorldTests\BuildingCostLoaderTests\BuildingCostLoaderTests.cpp" />
-    <ClCompile Include="EU4WorldTests\BuildingCostLoaderTests\BuildingCostTests.cpp" />
-    <ClCompile Include="EU4WorldTests\CultureLoaderTests\CultureLoaderTests.cpp" />
-    <ClCompile Include="EU4WorldTests\CultureLoaderTests\CultureGroupParserTests.cpp" />
-    <ClCompile Include="EU4WorldTests\CultureLoaderTests\CultureParserTests.cpp" />
-    <ClCompile Include="EU4WorldTests\ModTests\ModNamesTests.cpp" />
-    <ClCompile Include="EU4WorldTests\ModTests\ModParserTests.cpp" />
+    <ClCompile Include="ConfigurationTests\ConfigurationTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryArmyTests\EU4ArmyTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryArmyTests\EU4RegimentTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryGovernmentTests\EU4GovernmentSectionTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryGovernmentTests\EU4ReformStackSectionTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryHistoryTests\CountryHistoryDateTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryHistoryTests\CountryHistoryTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryLeaderTests\EU4LeaderIDTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryLeaderTests\EU4LeaderTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryRelationsTests\EU4RelationDetailsTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryRelationsTests\EU4RelationsTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\EU4ActiveIdeasTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\EU4ActivePolicyTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\EU4CountryFlagsTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\EU4CountryManagerTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\EU4CountryModifierTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\EU4CountryTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\EU4TechnologyTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\NationalSymbolTests\EU4CustomColorsTests.cpp" />
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\NationalSymbolTests\EU4NationalSymbolTests.cpp" />
+    <ClCompile Include="EU4WorldTests\DiplomacyParserTests\EU4AgreementTests.cpp" />
+    <ClCompile Include="EU4WorldTests\DiplomacyParserTests\DiplomacyParserTests.cpp" />
+    <ClCompile Include="EU4WorldTests\EmpireParser\EmpireParserTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\BuildingCostLoaderTests\BuildingCostLoaderTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\BuildingCostLoaderTests\BuildingCostTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\ColonialRegionLoaderTests\ColonialRegionLoaderTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\ColonialRegionLoaderTests\ColonialRegionTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\CommonCountryLoaderTests\CommonCountryLoaderTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\CultureLoaderTests\CultureGroupParserTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\CultureLoaderTests\CultureLoaderTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\CultureLoaderTests\CultureParserTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\DefaultMapParserTests\DefaultMapParserTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\DefinitionScraperTests\DefinitionScraperTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\LocalizationLoaderTests\EU4LocalizationTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\ModLoaderTests\ModLoaderTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\ModLoaderTests\ModNamesTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\ModLoaderTests\ModParserTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\ReligionLoaderTests\ReligionLoaderTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\ReligionLoaderTests\ReligionParserTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\UnitTypeLoaderTests\UnitTypeLoaderTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\UnitTypeLoaderTests\UnitTypeParserTests.cpp" />
     <ClCompile Include="EU4WorldTests\ProvinceManagerTests\DateItemsTests.cpp" />
-    <ClCompile Include="EU4WorldTests\ProvinceManagerTests\DefaultMapParserTests.cpp" />
-    <ClCompile Include="EU4WorldTests\ProvinceManagerTests\DefinitionScraperTests.cpp" />
     <ClCompile Include="EU4WorldTests\ProvinceManagerTests\EU4ProvinceTests.cpp" />
     <ClCompile Include="EU4WorldTests\ProvinceManagerTests\PopRatioTests.cpp" />
     <ClCompile Include="EU4WorldTests\ProvinceManagerTests\ProvinceBuildingsTests.cpp" />
@@ -230,15 +293,86 @@
     <ClCompile Include="EU4WorldTests\RegionManagerTests\RegionManagerTests.cpp" />
     <ClCompile Include="EU4WorldTests\RegionManagerTests\RegionTests.cpp" />
     <ClCompile Include="EU4WorldTests\RegionManagerTests\SuperRegionTests.cpp" />
-    <ClCompile Include="EU4WorldTests\ReligionLoaderTests\ReligionParserTests.cpp" />
-    <ClCompile Include="EU4WorldTests\ReligionLoaderTests\ReligionLoaderTests.cpp" />
+    <ClCompile Include="EU4WorldTests\WarParserTests\WarDetailsTests.cpp" />
+    <ClCompile Include="EU4WorldTests\WarParserTests\WarParserTests.cpp" />
     <ClCompile Include="MapperTests\ConverterVersion\ConverterVersionTests.cpp" />
+    <ClCompile Include="MapperTests\NationMergeMapperTests\MergeBlocksTests.cpp" />
+    <ClCompile Include="MapperTests\NationMergeMapperTests\NationMergeMapperTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\AssimilationParserTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperGroupMapperTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperRegionParserTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\eu4installation\eu4">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/eu4installation</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\countries\Aaacountry.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/eu4installation/common/countries</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\countries\Bbbcountry.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/eu4installation/common/countries</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\country_tags\00_countries.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/eu4installation/common/country_tags</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\eu4installation\map\positions.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/eu4installation/map</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\mod\themod.mod">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/mod</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\mod\themod\common\countries\Ccccountry.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/mod/themod/common/countries</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\mod\themod\common\country_tags\added_countries.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/mod/themod/common/country_tags</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\binaries\victoria3">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/binaries</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\map\positions.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/map</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\mod\brokenmod.mod">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/mod</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\missingmod.mod">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/mod</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\packedmod.mod">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/mod</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\packedmod.zip">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/mod</DestinationFolders>
+    </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

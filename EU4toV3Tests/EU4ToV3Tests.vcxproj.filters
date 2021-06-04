@@ -49,18 +49,6 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\Output\outConverterVersion.cpp">
       <Filter>ConverterFiles\V3World\Output</Filter>
     </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Mods\ModNames.cpp">
-      <Filter>ConverterFiles\EU4World\Mods</Filter>
-    </ClCompile>
-    <ClCompile Include="EU4WorldTests\ModTests\ModNamesTests.cpp">
-      <Filter>EU4WorldTests\ModTests</Filter>
-    </ClCompile>
-    <ClCompile Include="EU4WorldTests\ModTests\ModParserTests.cpp">
-      <Filter>EU4WorldTests\ModTests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Mods\ModParser.cpp">
-      <Filter>ConverterFiles\EU4World\Mods</Filter>
-    </ClCompile>
     <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\Area.cpp">
       <Filter>ConverterFiles\EU4World\RegionManager</Filter>
     </ClCompile>
@@ -85,50 +73,8 @@
     <ClCompile Include="EU4WorldTests\RegionManagerTests\SuperRegionTests.cpp">
       <Filter>EU4WorldTests\RegionManagerTests</Filter>
     </ClCompile>
-    <ClCompile Include="EU4WorldTests\ReligionLoaderTests\ReligionParserTests.cpp">
-      <Filter>EU4WorldTests\ReligionLoaderTests</Filter>
-    </ClCompile>
-    <ClCompile Include="EU4WorldTests\ReligionLoaderTests\ReligionLoaderTests.cpp">
-      <Filter>EU4WorldTests\ReligionLoaderTests</Filter>
-    </ClCompile>
-    <ClCompile Include="EU4WorldTests\CultureLoaderTests\CultureLoaderTests.cpp">
-      <Filter>EU4WorldTests\CultureLoaderTests</Filter>
-    </ClCompile>
-    <ClCompile Include="EU4WorldTests\CultureLoaderTests\CultureGroupParserTests.cpp">
-      <Filter>EU4WorldTests\CultureLoaderTests</Filter>
-    </ClCompile>
-    <ClCompile Include="EU4WorldTests\CultureLoaderTests\CultureParserTests.cpp">
-      <Filter>EU4WorldTests\CultureLoaderTests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CultureLoader\CultureGroupParser.cpp">
-      <Filter>ConverterFiles\EU4World\CultureLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CultureLoader\CultureLoader.cpp">
-      <Filter>ConverterFiles\EU4World\CultureLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CultureLoader\CultureParser.cpp">
-      <Filter>ConverterFiles\EU4World\CultureLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\EU4World\ReligionLoader\ReligionLoader.cpp">
-      <Filter>ConverterFiles\EU4World\ReligionLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\EU4World\ReligionLoader\ReligionParser.cpp">
-      <Filter>ConverterFiles\EU4World\ReligionLoader</Filter>
-    </ClCompile>
     <ClCompile Include="..\EU4toV3\Source\Configuration\Configuration.cpp">
       <Filter>ConverterFiles\Configuration</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\DefinitionScraper.cpp">
-      <Filter>ConverterFiles\EU4World\ProvinceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="EU4WorldTests\ProvinceManagerTests\DefinitionScraperTests.cpp">
-      <Filter>EU4WorldTests\ProvinceManagerTests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\DefaultMapParser.cpp">
-      <Filter>ConverterFiles\EU4World\ProvinceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="EU4WorldTests\ProvinceManagerTests\DefaultMapParserTests.cpp">
-      <Filter>EU4WorldTests\ProvinceManagerTests</Filter>
     </ClCompile>
     <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\DateItems.cpp">
       <Filter>ConverterFiles\EU4World\ProvinceManager</Filter>
@@ -184,17 +130,272 @@
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperRegionParserTests.cpp">
       <Filter>MapperTests\SuperGroupMapperTests</Filter>
     </ClCompile>
-    <ClCompile Include="EU4WorldTests\BuildingCostLoaderTests\BuildingCostLoaderTests.cpp">
-      <Filter>EU4WorldTests\BuildingCostLoaderTests</Filter>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\BuildingCostLoader\BuildingCost.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\BuildingCostLoader</Filter>
     </ClCompile>
-    <ClCompile Include="EU4WorldTests\BuildingCostLoaderTests\BuildingCostTests.cpp">
-      <Filter>EU4WorldTests\BuildingCostLoaderTests</Filter>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\BuildingCostLoader\BuildingCostLoader.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\BuildingCostLoader</Filter>
     </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\EU4World\BuildingCostLoader\BuildingCost.cpp">
-      <Filter>ConverterFiles\EU4World\BuildingCostLoader</Filter>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\CultureLoader\CultureGroupParser.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\CultureLoader</Filter>
     </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\EU4World\BuildingCostLoader\BuildingCostLoader.cpp">
-      <Filter>ConverterFiles\EU4World\BuildingCostLoader</Filter>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\CultureLoader\CultureLoader.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\CultureLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\CultureLoader\CultureParser.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\CultureLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\DefaultMapParser\DefaultMapParser.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\DefaultMapParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\DefinitionScraper\DefinitionScraper.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\DefinitionScraper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ModLoader\ModNames.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\ModLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ModLoader\ModParser.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\ModLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ReligionLoader\ReligionLoader.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\ReligionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ReligionLoader\ReligionParser.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\ReligionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\BuildingCostLoaderTests\BuildingCostLoaderTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\BuildingCostLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\BuildingCostLoaderTests\BuildingCostTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\BuildingCostLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\CultureLoaderTests\CultureGroupParserTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\CultureLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\CultureLoaderTests\CultureLoaderTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\CultureLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\CultureLoaderTests\CultureParserTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\CultureLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\DefaultMapParserTests\DefaultMapParserTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\DefaultMapParserTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\DefinitionScraperTests\DefinitionScraperTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\DefinitionScraperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\ModLoaderTests\ModNamesTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\ModLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\ModLoaderTests\ModParserTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\ModLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\ReligionLoaderTests\ReligionLoaderTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\ReligionLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\ReligionLoaderTests\ReligionParserTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\ReligionLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\UnitTypeLoaderTests\UnitTypeLoaderTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\UnitTypeLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\UnitTypeLoaderTests\UnitTypeParserTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\UnitTypeLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\UnitTypeLoader\UnitTypeLoader.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\UnitTypeLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\UnitTypeLoader\UnitTypeParser.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\UnitTypeLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryArmy\EU4Army.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager\CountryArmy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryArmy\EU4Regiment.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager\CountryArmy</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryArmyTests\EU4ArmyTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests\CountryArmyTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryArmyTests\EU4RegimentTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests\CountryArmyTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryGovernment\EU4GovernmentSection.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager\CountryGovernment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryGovernment\EU4ReformStackSection.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager\CountryGovernment</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryGovernmentTests\EU4GovernmentSectionTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests\CountryGovernmentTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryGovernmentTests\EU4ReformStackSectionTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests\CountryGovernmentTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryLeader\EU4Leader.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager\CountryLeader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryLeader\EU4LeaderID.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager\CountryLeader</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryLeaderTests\EU4LeaderIDTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests\CountryLeaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryLeaderTests\EU4LeaderTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests\CountryLeaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryHistory\CountryHistory.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager\CountryHistory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryHistory\CountryHistoryDate.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager\CountryHistory</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryHistoryTests\CountryHistoryDateTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests\CountryHistoryTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryHistoryTests\CountryHistoryTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests\CountryHistoryTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryRelations\EU4RelationDetails.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager\CountryRelations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryRelations\EU4Relations.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager\CountryRelations</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryRelationsTests\EU4RelationDetailsTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests\CountryRelationsTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryRelationsTests\EU4RelationsTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests\CountryRelationsTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\NationalSymbol\EU4CustomColors.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager\NationalSymbol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\NationalSymbol\EU4NationalSymbol.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager\NationalSymbol</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\NationalSymbolTests\EU4CustomColorsTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests\NationalSymbolTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\NationalSymbolTests\EU4NationalSymbolTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests\NationalSymbolTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4ActiveIdeas.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4ActivePolicy.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4CountryFlags.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4CountryModifier.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4Technology.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\EU4ActiveIdeasTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\EU4ActivePolicyTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\EU4CountryFlagsTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\EU4CountryModifierTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\EU4TechnologyTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4CountryManager.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4Country.cpp">
+      <Filter>ConverterFiles\EU4World\CountryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\EU4CountryTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\CountryManagerTests\EU4CountryManagerTests.cpp">
+      <Filter>EU4WorldTests\CountryManagerTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\EmpireParser\EmpireParserTests.cpp">
+      <Filter>EU4WorldTests\EmpireParserTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\EmpireParser\EmpireParser.cpp">
+      <Filter>ConverterFiles\EU4World\EmpireParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\CommonCountryLoader\CommonCountryLoader.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\CommonCountryLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\MergeBlock.cpp">
+      <Filter>ConverterFiles\Mappers\NationMergeMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\NationMergeMapper.cpp">
+      <Filter>ConverterFiles\Mappers\NationMergeMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\NationMergeMapperTests\MergeBlocksTests.cpp">
+      <Filter>MapperTests\NationMergeMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\NationMergeMapperTests\NationMergeMapperTests.cpp">
+      <Filter>MapperTests\NationMergeMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\DiplomacyParser\EU4Agreement.cpp">
+      <Filter>ConverterFiles\EU4World\DiplomacyParser</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\DiplomacyParserTests\EU4AgreementTests.cpp">
+      <Filter>EU4WorldTests\DiplomacyParserTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\DiplomacyParserTests\DiplomacyParserTests.cpp">
+      <Filter>EU4WorldTests\DiplomacyParserTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\WarParserTests\WarDetailsTests.cpp">
+      <Filter>EU4WorldTests\WarParserTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\WarParserTests\WarParserTests.cpp">
+      <Filter>EU4WorldTests\WarParserTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\DiplomacyParser\DiplomacyParser.cpp">
+      <Filter>ConverterFiles\EU4World\DiplomacyParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\WarParser\WarParser.cpp">
+      <Filter>ConverterFiles\EU4World\WarParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\WarParser\WarDetails.cpp">
+      <Filter>ConverterFiles\EU4World\WarParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\LocalizationLoader\EU4LocalizationLoader.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\LocalizationLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\LocalizationLoaderTests\EU4LocalizationTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\LocalizationLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\CommonCountryLoaderTests\CommonCountryLoaderTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\CommonCountryLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ModLoader\ModLoader.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\ModLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\ModLoaderTests\ModLoaderTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\ModLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigurationTests\ConfigurationTests.cpp">
+      <Filter>ConfigurationTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegion.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\ColonialRegionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegionLoader.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\ColonialRegionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\ColonialRegionLoaderTests\ColonialRegionLoaderTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\ColonialRegionLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\ColonialRegionLoaderTests\ColonialRegionTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\ColonialRegionLoaderTests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -234,29 +435,11 @@
     <Filter Include="ConverterFiles\V3World\Output">
       <UniqueIdentifier>{06d4a1fc-4a3b-4fce-a62d-aae1e4e9dbc9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ConverterFiles\EU4World\Mods">
-      <UniqueIdentifier>{b96f34ee-ad27-43b4-bcd1-14513c766c30}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EU4WorldTests\ModTests">
-      <UniqueIdentifier>{64de4b6e-4138-4a2e-be95-405e0ba5c42a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ConverterFiles\EU4World\RegionManager">
       <UniqueIdentifier>{2b0cd888-e71a-483c-89c8-4e5cad5fd49e}</UniqueIdentifier>
     </Filter>
     <Filter Include="EU4WorldTests\RegionManagerTests">
       <UniqueIdentifier>{b4ef8576-4f81-4ffc-a2b5-2afaea3e0d98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ConverterFiles\EU4World\ReligionLoader">
-      <UniqueIdentifier>{c9b91cb8-8474-470a-8894-f1876573e2cf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ConverterFiles\EU4World\CultureLoader">
-      <UniqueIdentifier>{0713b92a-1a02-4277-8f7b-00b24761585b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EU4WorldTests\ReligionLoaderTests">
-      <UniqueIdentifier>{18a88e07-3562-4c4c-a69c-12e8b53fc61b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EU4WorldTests\CultureLoaderTests">
-      <UniqueIdentifier>{6a7bd286-d8e7-4d71-a1d5-eb0da012af1a}</UniqueIdentifier>
     </Filter>
     <Filter Include="ConverterFiles\Configuration">
       <UniqueIdentifier>{b5006ca4-78ca-4792-b44e-f2bae1ad4297}</UniqueIdentifier>
@@ -273,16 +456,231 @@
     <Filter Include="MapperTests\SuperGroupMapperTests">
       <UniqueIdentifier>{242c6565-90c8-4fea-896f-39de1f94e472}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EU4WorldTests\BuildingCostLoaderTests">
-      <UniqueIdentifier>{532f0b4a-c9ca-47b0-94e4-e9398c96529f}</UniqueIdentifier>
+    <Filter Include="ConverterFiles\EU4World\Loaders">
+      <UniqueIdentifier>{6b901890-ca60-4c1b-aa00-bcf026990d83}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ConverterFiles\EU4World\BuildingCostLoader">
-      <UniqueIdentifier>{96e65955-d3f5-4361-8b7b-39d88e5aaac6}</UniqueIdentifier>
+    <Filter Include="ConverterFiles\EU4World\Loaders\BuildingCostLoader">
+      <UniqueIdentifier>{ce5ee30a-db0f-4b88-8772-f8f1598edb1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\Loaders\CultureLoader">
+      <UniqueIdentifier>{de4d2569-d24b-4bfe-9d73-bc8415831425}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\Loaders\DefaultMapParser">
+      <UniqueIdentifier>{5f7ed8dd-1574-48c1-be3f-0233a2916411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\Loaders\DefinitionScraper">
+      <UniqueIdentifier>{fe755057-df99-4b56-9fdc-abaf1a384629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\Loaders\ModLoader">
+      <UniqueIdentifier>{412df711-0200-49ce-bc5c-8389908be1b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\Loaders\ReligionLoader">
+      <UniqueIdentifier>{3dee2f73-dee2-42b5-b780-22b95f307177}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\LoaderTests">
+      <UniqueIdentifier>{e6614708-9f21-47fd-b83c-772981f22fab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\LoaderTests\BuildingCostLoaderTests">
+      <UniqueIdentifier>{d78cdf3c-cda5-4d88-8e64-7f8794decb43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\LoaderTests\CultureLoaderTests">
+      <UniqueIdentifier>{ad1c1d81-0387-41de-bfbc-0a900b10e2c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\LoaderTests\DefaultMapParserTests">
+      <UniqueIdentifier>{f10878dd-ecf1-4f00-bd00-1f3f79ccd6f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\LoaderTests\DefinitionScraperTests">
+      <UniqueIdentifier>{77e0394e-6b89-45e2-8992-50ae44257995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\LoaderTests\ModLoaderTests">
+      <UniqueIdentifier>{33b784fc-849c-4e54-a475-4449583fdf6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\LoaderTests\ReligionLoaderTests">
+      <UniqueIdentifier>{81696546-f8ff-4cb3-8b4a-dade3b161800}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\LoaderTests\UnitTypeLoaderTests">
+      <UniqueIdentifier>{88ec5ced-4f6b-437b-8ba5-097fd08b83e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\Loaders\UnitTypeLoader">
+      <UniqueIdentifier>{05ef2b7c-25e1-4051-9196-bc06a612d324}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\CountryManager">
+      <UniqueIdentifier>{7f8ab419-06b8-4d5a-887d-2edef8eca919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\CountryManager\CountryArmy">
+      <UniqueIdentifier>{5eb02f2c-74d5-4ff0-b8f3-b5f6e0fba1cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\CountryManagerTests">
+      <UniqueIdentifier>{a0fbaa4d-4231-4999-b8a4-a3f4762e8222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\CountryManagerTests\CountryArmyTests">
+      <UniqueIdentifier>{8b495883-ddce-4b0c-9276-beb8b14ef7cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\CountryManager\CountryGovernment">
+      <UniqueIdentifier>{d9f611f2-a9cb-4130-92da-6f6cbdd7aa67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\CountryManagerTests\CountryGovernmentTests">
+      <UniqueIdentifier>{1f24f4d6-c79c-4217-83b5-88ce7ad8f1d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\CountryManager\CountryLeader">
+      <UniqueIdentifier>{c432521d-f9fd-4999-897f-0c6346d44cb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\CountryManagerTests\CountryLeaderTests">
+      <UniqueIdentifier>{7741bcaa-0e32-4bd4-8bef-9348a49dacd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\CountryManager\CountryHistory">
+      <UniqueIdentifier>{f3fc54fe-e86a-43bf-90d7-1d21f89abdc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\CountryManagerTests\CountryHistoryTests">
+      <UniqueIdentifier>{75059f4c-7715-4d4f-92d9-786435acfe63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\CountryManager\CountryRelations">
+      <UniqueIdentifier>{e19d0b74-5138-42c1-8fe3-da925b62f56e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\CountryManagerTests\CountryRelationsTests">
+      <UniqueIdentifier>{35ce10ec-508a-4a1a-a16b-7c686094d171}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\CountryManager\NationalSymbol">
+      <UniqueIdentifier>{83611102-8fa3-4950-a15b-e3e960675561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\CountryManagerTests\NationalSymbolTests">
+      <UniqueIdentifier>{ab8bc148-8d8a-4e32-a0b2-80f39c3e87a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\EmpireParserTests">
+      <UniqueIdentifier>{b7d39fad-36a0-4b04-827b-3a0ffb9ce5a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\EmpireParser">
+      <UniqueIdentifier>{20e21429-70cb-4d8a-92be-89461a0a3e03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\Loaders\CommonCountryLoader">
+      <UniqueIdentifier>{63d184db-47fb-4077-aee1-f6d746455aa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\Mappers\NationMergeMapper">
+      <UniqueIdentifier>{1da74d0d-0907-48bc-81ee-6c612f86b0c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\NationMergeMapperTests">
+      <UniqueIdentifier>{d2d43417-0fba-42ad-b26c-72a68efc520b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\WarParser">
+      <UniqueIdentifier>{54b04179-a3e9-4f91-b06f-e0b8fb9e261e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\DiplomacyParser">
+      <UniqueIdentifier>{dbae84b5-4532-4a7f-8f89-aff8e152ab02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\DiplomacyParserTests">
+      <UniqueIdentifier>{5aa77b72-9dc5-464d-aa4d-b762adddfea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\WarParserTests">
+      <UniqueIdentifier>{f540ef76-9842-4bcc-a545-3b8c0460c928}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\Loaders\LocalizationLoader">
+      <UniqueIdentifier>{89cd4f8e-b44d-4e82-abc7-2a48b36b7d90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\LoaderTests\LocalizationLoaderTests">
+      <UniqueIdentifier>{fe7c01cf-8669-406a-925e-b22b3b2b6b05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\LoaderTests\CommonCountryLoaderTests">
+      <UniqueIdentifier>{ab8ad006-20d7-4b40-b012-83f3a3a7f27b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles">
+      <UniqueIdentifier>{785958ab-fd05-476a-9f5d-5813b158fd3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\eu4installation">
+      <UniqueIdentifier>{f936c043-6d57-4c1b-9ec2-116b88631119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\mod">
+      <UniqueIdentifier>{812ac39e-e238-4c36-9fb2-804a0399ddf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation">
+      <UniqueIdentifier>{b8c74649-7210-4df2-869a-199e28c95862}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\eu4installation\common">
+      <UniqueIdentifier>{443b4434-80be-487c-995d-2a8243bc1feb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\eu4installation\map">
+      <UniqueIdentifier>{6f09c0bd-9e77-4e72-a9a3-d3502ad28b46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\eu4installation\common\countries">
+      <UniqueIdentifier>{1baeed56-3eb0-46af-9163-33db7c129553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\eu4installation\common\country_tags">
+      <UniqueIdentifier>{826e227a-3c44-4f98-8599-9251c402a8c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\mod\themod">
+      <UniqueIdentifier>{837641fe-c3ce-417f-a374-831e6127b64d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\mod\themod\common">
+      <UniqueIdentifier>{dfb7e198-90fd-4040-9d66-2c45effd8b90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\mod\themod\common\countries">
+      <UniqueIdentifier>{8cab87a2-0be7-4913-9e9d-161672f12224}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\mod\themod\common\country_tags">
+      <UniqueIdentifier>{02bd8b23-41bc-4ffb-ac92-d44bee94a1dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\binaries">
+      <UniqueIdentifier>{bb4c744f-0ceb-4396-824a-07eb7999a3e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\map">
+      <UniqueIdentifier>{2b09af8f-57e5-4329-ba5c-0c9e4a01e0d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConfigurationTests">
+      <UniqueIdentifier>{78e10c95-9667-48a4-9ed5-2143ad121ebe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\EU4World\Loaders\ColonialRegionLoader">
+      <UniqueIdentifier>{76870c03-b4dc-4ccd-8139-03ff0d39eec1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\LoaderTests\ColonialRegionLoaderTests">
+      <UniqueIdentifier>{82c0c817-7c7d-4a3b-8fba-dff1e4e059b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
       <Filter>ConverterFiles\commonItems</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\eu4installation\eu4">
+      <Filter>TestFiles\eu4installation</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\countries\Aaacountry.txt">
+      <Filter>TestFiles\eu4installation\common\countries</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\countries\Bbbcountry.txt">
+      <Filter>TestFiles\eu4installation\common\countries</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\country_tags\00_countries.txt">
+      <Filter>TestFiles\eu4installation\common\country_tags</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\eu4installation\map\positions.txt">
+      <Filter>TestFiles\eu4installation\map</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\themod.mod">
+      <Filter>TestFiles\mod</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\themod\common\countries\Ccccountry.txt">
+      <Filter>TestFiles\mod\themod\common\countries</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\themod\common\country_tags\added_countries.txt">
+      <Filter>TestFiles\mod\themod\common\country_tags</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\binaries\victoria3">
+      <Filter>TestFiles\vic3installation\binaries</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\map\positions.txt">
+      <Filter>TestFiles\vic3installation\map</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\packedmod.zip">
+      <Filter>TestFiles\mod</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\packedmod.mod">
+      <Filter>TestFiles\mod</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\missingmod.mod">
+      <Filter>TestFiles\mod</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\brokenmod.mod">
+      <Filter>TestFiles\mod</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>
