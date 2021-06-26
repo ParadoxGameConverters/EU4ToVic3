@@ -7,7 +7,7 @@
 void convertEU4ToVic3(mappers::ConverterVersion&& converterVersion)
 {
 	Log(LogLevel::Progress) << "0 %";
-	const auto configuration = Configuration();
+	const auto configuration = Configuration(converterVersion);
 	Log(LogLevel::Info) << "<> Configuration imported.";
 	Log(LogLevel::Progress) << "4 %";
 
