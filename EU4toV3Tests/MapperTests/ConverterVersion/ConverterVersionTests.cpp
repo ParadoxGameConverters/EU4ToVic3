@@ -43,7 +43,7 @@ TEST(Mappers_ConverterVersionTests, DescriptionCanBeConstructed)
 	mappers::ConverterVersion version;
 	version.loadVersion(input);
 
-	EXPECT_EQ("Compatible with EU4 [v1.31-v1.31.5] and Vic3 [v1-v1.1]", version.getDescription());
+	EXPECT_EQ("Compatible with EU4 [v1.31-v1.31.5] and Vic3 [v1.0-v1.1]", version.getDescription());
 }
 
 TEST(Mappers_ConverterVersionTests, DescriptionDoesNotDuplicateVersions)
@@ -58,5 +58,5 @@ TEST(Mappers_ConverterVersionTests, DescriptionDoesNotDuplicateVersions)
 	mappers::ConverterVersion version;
 	version.loadVersion(input);
 
-	EXPECT_EQ("Compatible with EU4 [v1.31] and Vic3 [v1]", version.getDescription());
+	EXPECT_EQ("Compatible with EU4 [v1.31] and Vic3 [v1.0]", version.getDescription());
 }
