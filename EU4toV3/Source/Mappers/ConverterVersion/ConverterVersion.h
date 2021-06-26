@@ -1,33 +1,43 @@
 #ifndef CONVERTER_VERSION_H
 #define CONVERTER_VERSION_H
-#include "ConvenientParser.h"
 #include "GameVersion.h"
+#include "Parser.h"
 
 namespace mappers
 {
+
 class ConverterVersion: commonItems::convenientParser
 {
-  public:	
+  public:
 	ConverterVersion() = default;
-	
-	void loadVersion(const std::string& filePath);
+	void loadVersion(const std::string& filename);
 	void loadVersion(std::istream& theStream);
 
+	friend std::ostream& operator<<(std::ostream& output, const ConverterVersion& version);
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getVersion() const { return version; }
-	[[nodiscard]] const auto& getDescription() const { return descriptionLine; }
-	[[nodiscard]] const auto& getMinimalVersion() const { return minimalIncomingVersion; }
+	[[nodiscard]] std::string getDescription() const;
 
-	friend std::ostream& operator<<(std::ostream& output, const ConverterVersion& versionParser);
+	[[nodiscard]] const auto& getMinSource() const { return minSource; }
+	[[nodiscard]] const auto& getMaxSource() const { return maxSource; }
+	[[nodiscard]] const auto& getMinTarget() const { return minTarget; }
+	[[nodiscard]] const auto& getMaxTarget() const { return maxTarget; }
 
   private:
 	void registerKeys();
 
 	std::string name;
 	std::string version;
-	std::string descriptionLine;
-	GameVersion minimalIncomingVersion;
+	std::string source;
+	std::string target;
+	GameVersion minSource;
+	GameVersion maxSource;
+	GameVersion minTarget;
+	GameVersion maxTarget;
 };
+
 } // namespace mappers
+
+
 
 #endif // CONVERTER_VERSION_H

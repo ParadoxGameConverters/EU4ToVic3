@@ -164,8 +164,17 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const mappe
 	registerKeyword("savegame_version", [this, converterVersion](std::istream& theStream) {
 		version = GameVersion(theStream);
 		Log(LogLevel::Info) << "Savegave version: " << version;
-		if (version < converterVersion.getMinimalVersion())
-			throw std::runtime_error("This converter was built for game version " + converterVersion.getMinimalVersion().toShortString() + "!");
+		
+		if (converterVersion.getMinSource() > version)
+		{
+			Log(LogLevel::Error) << "Converter requires a minimum save from v" << converterVersion.getMinSource().toShortString();
+			throw std::runtime_error("Savegame vs converter version mismatch!");
+		}
+		if (!converterVersion.getMaxSource().isLargerishThan(version))
+		{
+			Log(LogLevel::Error) << "Converter requires a maximum save from v" << converterVersion.getMaxSource().toShortString();
+			throw std::runtime_error("Savegame vs converter version mismatch!");
+		}
 	});
 	registerKeyword("mods_enabled_names", [this, theConfiguration](std::istream& theStream) {
 		Log(LogLevel::Info) << "-> Detecting used mods.";

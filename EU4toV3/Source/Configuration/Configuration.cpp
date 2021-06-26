@@ -6,7 +6,7 @@
 #include "ParserHelpers.h"
 #include <fstream>
 
-Configuration::Configuration()
+Configuration::Configuration(const mappers::ConverterVersion& converterVersion)
 {
 	Log(LogLevel::Info) << "Reading configuration file";
 	registerKeys();
@@ -14,18 +14,22 @@ Configuration::Configuration()
 	clearRegisteredKeywords();
 	setOutputName();
 	verifyEU4Path();
+	verifyEU4Version(converterVersion);
 	verifyVic3Path();
+	verifyVic3Version(converterVersion);
 	Log(LogLevel::Progress) << "3 %";
 }
 
-Configuration::Configuration(std::istream& theStream)
+Configuration::Configuration(std::istream& theStream, const mappers::ConverterVersion& converterVersion)
 {
 	registerKeys();
 	parseStream(theStream);
 	clearRegisteredKeywords();
 	setOutputName();
 	verifyEU4Path();
+	verifyEU4Version(converterVersion);
 	verifyVic3Path();
+	verifyVic3Version(converterVersion);
 }
 
 void Configuration::registerKeys()
@@ -132,4 +136,100 @@ void Configuration::setOutputName()
 
 	outputName = commonItems::normalizeUTF8Path(outputName);
 	Log(LogLevel::Info) << "Using output name " << outputName;
+}
+
+std::optional<GameVersion> Configuration::getRawVersion(const std::string& filePath) const
+{
+	if (!commonItems::DoesFileExist(filePath))
+	{
+		Log(LogLevel::Warning) << "Failure verifying version: " << filePath << " does not exist. Proceeding blind.";
+		return std::nullopt;
+	}
+
+	std::ifstream versionFile(filePath);
+	if (!versionFile.is_open())
+	{
+		Log(LogLevel::Warning) << "Failure verifying version: " << filePath << " cannot be opened. Proceeding blind.";
+		return std::nullopt;
+	}
+
+	while (!versionFile.eof())
+	{
+		std::string line;
+		std::getline(versionFile, line);
+		if (line.find("rawVersion") == std::string::npos)
+			continue;
+		auto pos = line.find(':');
+		if (pos == std::string::npos)
+		{
+			Log(LogLevel::Warning) << "Failure extracting version: " << filePath << " has broken rawVersion. Proceeding blind.";
+			return std::nullopt;
+		}
+		line = line.substr(pos + 1, line.length());
+		pos = line.find_first_of('\"');
+		if (pos == std::string::npos)
+		{
+			Log(LogLevel::Warning) << "Failure extracting version: " << filePath << " has broken rawVersion. Proceeding blind.";
+			return std::nullopt;
+		}
+		line = line.substr(pos + 1, line.length());
+		pos = line.find_first_of('\"');
+		if (pos == std::string::npos)
+		{
+			Log(LogLevel::Warning) << "Failure extracting version: " << filePath << " has broken rawVersion. Proceeding blind.";
+			return std::nullopt;
+		}
+		line = line.substr(0, pos);
+		Log(LogLevel::Info) << "\tVersion is: " << line;
+		return GameVersion(line);
+	}
+
+	Log(LogLevel::Warning) << "Failure verifying version: " << filePath << " doesn't contain rawVersion. Proceeding blind.";
+	return std::nullopt;
+}
+
+void Configuration::verifyEU4Version(const mappers::ConverterVersion& converterVersion) const
+{
+	const auto EU4Version = getRawVersion(EU4Path + "/launcher-settings.json");
+	if (!EU4Version)
+	{
+		Log(LogLevel::Error) << "EU4 version could not be determined, proceeding blind!";
+		return;
+	}
+
+	if (converterVersion.getMinSource() > *EU4Version)
+	{
+		Log(LogLevel::Error) << "EU4 version is v" << EU4Version->toShortString() << ", converter requires minimum v"
+									<< converterVersion.getMinSource().toShortString() << "!";
+		throw std::runtime_error("Converter vs EU4 installation mismatch!");
+	}
+	if (!converterVersion.getMaxSource().isLargerishThan(*EU4Version))
+	{
+		Log(LogLevel::Error) << "EU4 version is v" << EU4Version->toShortString() << ", converter requires maximum v"
+									<< converterVersion.getMinSource().toShortString() << "!";
+		throw std::runtime_error("Converter vs EU4 installation mismatch!");
+	}
+}
+
+void Configuration::verifyVic3Version(const mappers::ConverterVersion& converterVersion) const
+{
+	const auto V3Version = getRawVersion(Vic3Path + "../launcher/launcher-settings.json");
+	if (!V3Version)
+	{
+		Log(LogLevel::Error) << "Vic3 version could not be determined, proceeding blind!";
+		return;
+	}
+
+	if (converterVersion.getMinTarget() > *V3Version)
+	{
+		Log(LogLevel::Error) << "Vic3 version is v" << V3Version->toShortString() << ", converter requires minimum v"
+									<< converterVersion.getMinTarget().toShortString() << "!";
+		throw std::runtime_error("Converter vs Vic3 installation mismatch!");
+	}
+	if (!converterVersion.getMaxTarget().isLargerishThan(*V3Version))
+	{
+		Log(LogLevel::Error) << "Vic3 version is v" << V3Version->toShortString() << ", converter requires maximum v"
+									<< converterVersion.getMaxTarget().toShortString() << "!";
+		throw std::runtime_error("Converter vs Vic3 installation mismatch!");
+	}
 }

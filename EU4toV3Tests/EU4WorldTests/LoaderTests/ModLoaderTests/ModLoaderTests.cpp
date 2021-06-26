@@ -11,7 +11,8 @@ TEST(EU4World_ModLoaderTests, ModsCanBeLocatedUnpackedAndUpdated)
 	configurationInput << "EU4DocumentsDirectory = \"TestFiles\"\n";
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-	const auto configuration = Configuration(configurationInput);
+	const mappers::ConverterVersion converterVersion;
+	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	EU4::Mods mods;									  // this is what comes from the save
 	mods.emplace("Some mod", "mod/themod.mod"); // mod's in fact named "The Mod" in the file.
@@ -29,7 +30,8 @@ TEST(EU4World_ModLoaderTests, BrokenMissingAndNonexistentModsAreDiscarded)
 	configurationInput << "EU4DocumentsDirectory = \"TestFiles\"\n";
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-	const auto configuration = Configuration(configurationInput);
+	const mappers::ConverterVersion converterVersion;
+	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	EU4::Mods mods;
 	mods.emplace("Some mod", "mod/themod.mod");
@@ -50,7 +52,8 @@ TEST(EU4World_ModLoaderTests, CompressedModsCanBeUnpacked)
 	configurationInput << "EU4DocumentsDirectory = \"TestFiles\"\n";
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-	const auto configuration = Configuration(configurationInput);
+	const mappers::ConverterVersion converterVersion;
+	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	EU4::Mods mods;
 	mods.emplace("some packed mod", "mod/packedmod.mod");
