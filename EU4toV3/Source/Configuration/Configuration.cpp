@@ -160,7 +160,7 @@ void Configuration::verifyEU4Version(const commonItems::ConverterVersion& conver
 	if (!converterVersion.getMaxSource().isLargerishThan(*EU4Version))
 	{
 		Log(LogLevel::Error) << "EU4 version is v" << EU4Version->toShortString() << ", converter requires maximum v"
-									<< converterVersion.getMinSource().toShortString() << "!";
+									<< converterVersion.getMaxSource().toShortString() << "!";
 		throw std::runtime_error("Converter vs EU4 installation mismatch!");
 	}
 }
