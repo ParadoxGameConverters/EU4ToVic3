@@ -1,7 +1,7 @@
 #ifndef EU4_WORLD_H
 #define EU4_WORLD_H
 #include "Configuration.h"
-#include "ConverterVersion/ConverterVersion.h"
+#include "ConverterVersion.h"
 #include "CountryManager/EU4CountryManager.h"
 #include "CultureLoader/CultureLoader.h"
 #include "DatingData.h"
@@ -19,7 +19,7 @@ namespace EU4
 class World: commonItems::parser
 {
   public:
-	World(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion);
+	World(const Configuration& theConfiguration, const commonItems::ConverterVersion& converterVersion);
 
 	// V3World inputs
 	[[nodiscard]] bool isHREDecentralized() const { return hreReforms.contains("emperor_reichskrieg"); }
@@ -35,7 +35,7 @@ class World: commonItems::parser
 	[[nodiscard]] const auto& getDiplomacy() const { return diplomacyParser; }
 
   private:
-	void registerKeys(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion);
+	void registerKeys(const Configuration& theConfiguration, const commonItems::ConverterVersion& converterVersion);
 
 	void verifySave();
 	void verifySaveContents();

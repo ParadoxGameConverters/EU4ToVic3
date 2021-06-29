@@ -1,6 +1,5 @@
 #include "EU4ToVic3Converter.h"
 #include "Log.h"
-#include "ConverterVersion/ConverterVersion.h"
 #include <fstream>
 
 int main(const int argc, const char* argv[])
@@ -9,10 +8,10 @@ int main(const int argc, const char* argv[])
 	{
 		std::ofstream clearLog("log.txt");
 		clearLog.close();
-		
-		mappers::ConverterVersion converterVersion;
+
+		commonItems::ConverterVersion converterVersion;
 		converterVersion.loadVersion("configurables/version.txt");
-		
+
 		Log(LogLevel::Info) << converterVersion;
 		if (argc >= 2)
 		{

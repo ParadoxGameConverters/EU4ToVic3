@@ -2,12 +2,12 @@
 #include "../EU4World/World.h"
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
+#include "Output/outModFile.h"
 #include <filesystem>
 #include <fstream>
 namespace fs = std::filesystem;
-#include "Output/outModFile.h"
 
-V3::World::World(const Configuration& configuration, const EU4::World& sourceWorld, mappers::ConverterVersion&& theConverterVersion):
+V3::World::World(const Configuration& configuration, const EU4::World& sourceWorld, commonItems::ConverterVersion&& theConverterVersion):
 	 V3Path(configuration.getVic3Path()), configBlock(configuration.configBlock), converterVersion(std::move(theConverterVersion)),
 	 outputName(configuration.getOutputName())
 {

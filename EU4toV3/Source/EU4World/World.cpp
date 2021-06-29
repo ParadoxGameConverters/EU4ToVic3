@@ -14,7 +14,7 @@
 #include <string>
 namespace fs = std::filesystem;
 
-EU4::World::World(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion)
+EU4::World::World(const Configuration& theConfiguration, const commonItems::ConverterVersion& converterVersion)
 {
 	Log(LogLevel::Info) << "*** Hello EU4, loading World. ***";
 	EU4Path = theConfiguration.getEU4Path();
@@ -137,7 +137,7 @@ EU4::World::World(const Configuration& theConfiguration, const mappers::Converte
 	Log(LogLevel::Progress) << "40 %";
 }
 
-void EU4::World::registerKeys(const Configuration& theConfiguration, const mappers::ConverterVersion& converterVersion)
+void EU4::World::registerKeys(const Configuration& theConfiguration, const commonItems::ConverterVersion& converterVersion)
 {
 	registerKeyword("EU4txt", [](std::istream& theStream) {
 	});
@@ -164,7 +164,7 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const mappe
 	registerKeyword("savegame_version", [this, converterVersion](std::istream& theStream) {
 		version = GameVersion(theStream);
 		Log(LogLevel::Info) << "Savegave version: " << version;
-		
+
 		if (converterVersion.getMinSource() > version)
 		{
 			Log(LogLevel::Error) << "Converter requires a minimum save from v" << converterVersion.getMinSource().toShortString();

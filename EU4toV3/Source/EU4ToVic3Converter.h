@@ -1,10 +1,7 @@
 #ifndef EU4TOVIC3_CONVERTER_H
 #define EU4TOVIC3_CONVERTER_H
+#include "ConverterVersion.h"
 
-namespace mappers {
-	class ConverterVersion;
-}
-
-void convertEU4ToVic3(mappers::ConverterVersion&& converterVersion);
+void convertEU4ToVic3(commonItems::ConverterVersion&& converterVersion);
 
 #endif // EU4TOVIC3_CONVERTER_H

@@ -40,15 +40,6 @@
     <ClCompile Include="..\commonItems\ConvenientParser.cpp">
       <Filter>ConverterFiles\commonItems</Filter>
     </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ConverterVersion\ConverterVersion.cpp">
-      <Filter>ConverterFiles\Mappers\ConverterVersion</Filter>
-    </ClCompile>
-    <ClCompile Include="MapperTests\ConverterVersion\ConverterVersionTests.cpp">
-      <Filter>MapperTests\ConverterVersionTests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\V3World\Output\outConverterVersion.cpp">
-      <Filter>ConverterFiles\V3World\Output</Filter>
-    </ClCompile>
     <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\Area.cpp">
       <Filter>ConverterFiles\EU4World\RegionManager</Filter>
     </ClCompile>
@@ -111,15 +102,6 @@
     </ClCompile>
     <ClCompile Include="EU4WorldTests\ProvinceManagerTests\PopRatioTests.cpp">
       <Filter>EU4WorldTests\ProvinceManagerTests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\AssimilationParser.cpp">
-      <Filter>ConverterFiles\Mappers\SuperGroupMapper</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperGroupMapper.cpp">
-      <Filter>ConverterFiles\Mappers\SuperGroupMapper</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp">
-      <Filter>ConverterFiles\Mappers\SuperGroupMapper</Filter>
     </ClCompile>
     <ClCompile Include="MapperTests\SuperGroupMapperTests\AssimilationParserTests.cpp">
       <Filter>MapperTests\SuperGroupMapperTests</Filter>
@@ -331,12 +313,6 @@
     <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\CommonCountryLoader\CommonCountryLoader.cpp">
       <Filter>ConverterFiles\EU4World\Loaders\CommonCountryLoader</Filter>
     </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\MergeBlock.cpp">
-      <Filter>ConverterFiles\Mappers\NationMergeMapper</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\NationMergeMapper.cpp">
-      <Filter>ConverterFiles\Mappers\NationMergeMapper</Filter>
-    </ClCompile>
     <ClCompile Include="MapperTests\NationMergeMapperTests\MergeBlocksTests.cpp">
       <Filter>MapperTests\NationMergeMapperTests</Filter>
     </ClCompile>
@@ -397,6 +373,24 @@
     <ClCompile Include="EU4WorldTests\LoaderTests\ColonialRegionLoaderTests\ColonialRegionTests.cpp">
       <Filter>EU4WorldTests\LoaderTests\ColonialRegionLoaderTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\commonItems\ConverterVersion.cpp">
+      <Filter>ConverterFiles\commonItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\MergeBlock.cpp">
+      <Filter>ConverterFiles\Mappers\NationMergeMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\NationMergeMapper.cpp">
+      <Filter>ConverterFiles\Mappers\NationMergeMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\AssimilationParser.cpp">
+      <Filter>ConverterFiles\Mappers\SuperGroupMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperGroupMapper.cpp">
+      <Filter>ConverterFiles\Mappers\SuperGroupMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp">
+      <Filter>ConverterFiles\Mappers\SuperGroupMapper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -407,9 +401,6 @@
     </Filter>
     <Filter Include="ConverterFiles\V3World">
       <UniqueIdentifier>{e38cf41f-c863-4ffd-8b4a-54af80f25231}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ConverterFiles\Mappers">
-      <UniqueIdentifier>{be2418b3-5cc4-4dd1-973c-30f8d0cf97e2}</UniqueIdentifier>
     </Filter>
     <Filter Include="ConverterFiles\EU4World">
       <UniqueIdentifier>{4b1804e5-f7ad-47d2-ad23-ff9402369723}</UniqueIdentifier>
@@ -425,12 +416,6 @@
     </Filter>
     <Filter Include="ConverterFiles\commonItems">
       <UniqueIdentifier>{87c6ec85-b77f-4e5f-9685-fe52f9d29d40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ConverterFiles\Mappers\ConverterVersion">
-      <UniqueIdentifier>{05cf7874-387c-409c-a2d4-dcba087e0743}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="MapperTests\ConverterVersionTests">
-      <UniqueIdentifier>{cccbfea2-cfe4-4980-9ef5-633d4c09ae7c}</UniqueIdentifier>
     </Filter>
     <Filter Include="ConverterFiles\V3World\Output">
       <UniqueIdentifier>{06d4a1fc-4a3b-4fce-a62d-aae1e4e9dbc9}</UniqueIdentifier>
@@ -449,9 +434,6 @@
     </Filter>
     <Filter Include="EU4WorldTests\ProvinceManagerTests">
       <UniqueIdentifier>{6729bfb3-9ccc-4d2b-9dd1-2ca60d761bae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ConverterFiles\Mappers\SuperGroupMapper">
-      <UniqueIdentifier>{e89ca054-b2e4-4e6e-8a33-51c65999df64}</UniqueIdentifier>
     </Filter>
     <Filter Include="MapperTests\SuperGroupMapperTests">
       <UniqueIdentifier>{242c6565-90c8-4fea-896f-39de1f94e472}</UniqueIdentifier>
@@ -555,9 +537,6 @@
     <Filter Include="ConverterFiles\EU4World\Loaders\CommonCountryLoader">
       <UniqueIdentifier>{63d184db-47fb-4077-aee1-f6d746455aa1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ConverterFiles\Mappers\NationMergeMapper">
-      <UniqueIdentifier>{1da74d0d-0907-48bc-81ee-6c612f86b0c9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MapperTests\NationMergeMapperTests">
       <UniqueIdentifier>{d2d43417-0fba-42ad-b26c-72a68efc520b}</UniqueIdentifier>
     </Filter>
@@ -635,6 +614,15 @@
     </Filter>
     <Filter Include="TestFiles\vic3installation\launcher">
       <UniqueIdentifier>{28d5aea0-8b7d-4c2c-9496-2a2ed268bda1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\Mappers">
+      <UniqueIdentifier>{c8968572-ca65-407f-96be-4c2b43e64454}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\Mappers\NationMergeMapper">
+      <UniqueIdentifier>{99e4bd01-fa05-465d-8b26-e4dd7c82c973}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\Mappers\SuperGroupMapper">
+      <UniqueIdentifier>{60d22cdf-0897-42b8-b56f-5ba5c47e0d40}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

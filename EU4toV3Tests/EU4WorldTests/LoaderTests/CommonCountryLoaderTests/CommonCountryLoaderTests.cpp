@@ -7,7 +7,7 @@ TEST(EU4World_CommonCountryLoaderTests, colorsCanBeLoadedFromCommonCountries)
 	configurationInput << "EU4DocumentsDirectory = \"TestFiles\"\n";
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-	const mappers::ConverterVersion converterVersion;
+	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	EU4::Mods mods;

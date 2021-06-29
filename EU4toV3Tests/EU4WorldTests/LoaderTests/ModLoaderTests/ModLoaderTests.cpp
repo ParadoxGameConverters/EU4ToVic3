@@ -11,7 +11,7 @@ TEST(EU4World_ModLoaderTests, ModsCanBeLocatedUnpackedAndUpdated)
 	configurationInput << "EU4DocumentsDirectory = \"TestFiles\"\n";
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-	const mappers::ConverterVersion converterVersion;
+	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	EU4::Mods mods;									  // this is what comes from the save
@@ -30,7 +30,7 @@ TEST(EU4World_ModLoaderTests, BrokenMissingAndNonexistentModsAreDiscarded)
 	configurationInput << "EU4DocumentsDirectory = \"TestFiles\"\n";
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-	const mappers::ConverterVersion converterVersion;
+	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	EU4::Mods mods;
@@ -52,7 +52,7 @@ TEST(EU4World_ModLoaderTests, CompressedModsCanBeUnpacked)
 	configurationInput << "EU4DocumentsDirectory = \"TestFiles\"\n";
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-	const mappers::ConverterVersion converterVersion;
+	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	EU4::Mods mods;
