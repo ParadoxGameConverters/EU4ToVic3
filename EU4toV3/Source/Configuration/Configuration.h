@@ -1,15 +1,15 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
+#include "ConverterVersion.h"
 #include "Parser.h"
 #include <string>
-#include "ConverterVersion/ConverterVersion.h"
 
 class Configuration: commonItems::parser
 {
   public:
 	Configuration() = default;
-	explicit Configuration(const mappers::ConverterVersion& converterVersion);
-	explicit Configuration(std::istream& theStream, const mappers::ConverterVersion& converterVersion);
+	explicit Configuration(const commonItems::ConverterVersion& converterVersion);
+	explicit Configuration(std::istream& theStream, const commonItems::ConverterVersion& converterVersion);
 
 	enum class DEADCORES
 	{
@@ -60,9 +60,8 @@ class Configuration: commonItems::parser
 	void verifyEU4Path() const;
 	void verifyVic3Path();
 	void setOutputName();
-	void verifyVic3Version(const mappers::ConverterVersion& converterVersion) const;
-	void verifyEU4Version(const mappers::ConverterVersion& converterVersion) const;
-	[[nodiscard]] std::optional<GameVersion> getRawVersion(const std::string& filePath) const;
+	void verifyVic3Version(const commonItems::ConverterVersion& converterVersion) const;
+	void verifyEU4Version(const commonItems::ConverterVersion& converterVersion) const;
 
 
 	// options from configuration.txt

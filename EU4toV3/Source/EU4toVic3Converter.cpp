@@ -4,7 +4,7 @@
 #include "Log.h"
 #include "V3World/V3World.h"
 
-void convertEU4ToVic3(mappers::ConverterVersion&& converterVersion)
+void convertEU4ToVic3(commonItems::ConverterVersion&& converterVersion)
 {
 	Log(LogLevel::Progress) << "0 %";
 	const auto configuration = Configuration(converterVersion);

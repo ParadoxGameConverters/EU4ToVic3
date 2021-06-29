@@ -7,7 +7,7 @@ TEST(ConfigurationTests, BrokenEU4PathThrowsException)
 	std::stringstream configurationInput;
 	configurationInput << "EU4directory = \"TestFiles/eu4installationBROKE\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-	const mappers::ConverterVersion converterVersion;
+	const commonItems::ConverterVersion converterVersion;
 
 	EXPECT_THROW(const auto configuration = Configuration(configurationInput, converterVersion), std::runtime_error);
 }
@@ -17,7 +17,7 @@ TEST(ConfigurationTests, BrokenVic3PathThrowsException)
 	std::stringstream configurationInput;
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installationBROKE\"\n";
-	const mappers::ConverterVersion converterVersion;
+	const commonItems::ConverterVersion converterVersion;
 
 	EXPECT_THROW(const auto configuration = Configuration(configurationInput, converterVersion), std::runtime_error);
 }
@@ -27,7 +27,7 @@ TEST(ConfigurationTests, InstallationPathsCanBeUpdatedRetrieved)
 	std::stringstream configurationInput;
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n"; // updated with "/game/"
-	const mappers::ConverterVersion converterVersion;
+	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	EXPECT_EQ("TestFiles/eu4installation", configuration.getEU4Path());
@@ -41,7 +41,7 @@ TEST(ConfigurationTests, SaveAndDocumentsPathCanBeRetrieved)
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
 	configurationInput << "EU4DocumentsDirectory = \"TestFiles\"\n";
 	configurationInput << "SaveGame = \"C:\\autosave.eu4\"\n";
-	const mappers::ConverterVersion converterVersion;
+	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	EXPECT_EQ("TestFiles", configuration.getEU4DocumentsPath());
@@ -54,7 +54,7 @@ TEST(ConfigurationTests, OutputNameNormalizesSetsFromSavegameName)
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
 	configurationInput << "SaveGame = \"C:\\autosave.eu4\"\n";
-	const mappers::ConverterVersion converterVersion;
+	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	EXPECT_EQ("autosave", configuration.getOutputName());
@@ -66,7 +66,7 @@ TEST(ConfigurationTests, OutputNameNormalizesItselfFromSavegameName)
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
 	configurationInput << "SaveGame = \"C:\\autosave - something.eu4\"\n";
-	const mappers::ConverterVersion converterVersion;
+	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	EXPECT_EQ("autosave___something", configuration.getOutputName());
@@ -79,7 +79,7 @@ TEST(ConfigurationTests, OutputNameSetsFromOverrideName)
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
 	configurationInput << "SaveGame = \"C:\\autosave.eu4\"\n";
 	configurationInput << "output_name = \"ddd\"\n";
-	const mappers::ConverterVersion converterVersion;
+	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	EXPECT_EQ("ddd", configuration.getOutputName());
@@ -92,7 +92,7 @@ TEST(ConfigurationTests, OutputNameNormalizesItselfFromOverrideName)
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
 	configurationInput << "SaveGame = \"C:\\autosave - something.eu4\"\n";
 	configurationInput << "output_name = \"ddd - something\"\n";
-	const mappers::ConverterVersion converterVersion;
+	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	EXPECT_EQ("ddd___something", configuration.getOutputName());

@@ -1,12 +1,13 @@
 #include "Configuration.h"
 #include "CommonFunctions.h"
 #include "CommonRegexes.h"
+#include "GameVersion.h"
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 #include <fstream>
 
-Configuration::Configuration(const mappers::ConverterVersion& converterVersion)
+Configuration::Configuration(const commonItems::ConverterVersion& converterVersion)
 {
 	Log(LogLevel::Info) << "Reading configuration file";
 	registerKeys();
@@ -20,7 +21,7 @@ Configuration::Configuration(const mappers::ConverterVersion& converterVersion)
 	Log(LogLevel::Progress) << "3 %";
 }
 
-Configuration::Configuration(std::istream& theStream, const mappers::ConverterVersion& converterVersion)
+Configuration::Configuration(std::istream& theStream, const commonItems::ConverterVersion& converterVersion)
 {
 	registerKeys();
 	parseStream(theStream);
@@ -50,7 +51,7 @@ void Configuration::registerKeys()
 	});
 	registerKeyword("Vic3directory", [this](std::istream& theStream) {
 		Vic3Path = commonItems::getString(theStream);
-		Log(LogLevel::Info) << "Vic2 path: " << Vic3Path;
+		Log(LogLevel::Info) << "Vic3 path: " << Vic3Path;
 	});
 
 	// ------- options
@@ -106,6 +107,7 @@ void Configuration::verifyEU4Path() const
 		throw std::runtime_error(EU4Path + " does not contain Europa Universalis 4!");
 	if (!commonItems::DoesFileExist(EU4Path + "/map/positions.txt"))
 		throw std::runtime_error(EU4Path + " does not appear to be a valid EU4 install!");
+	Log(LogLevel::Info) << "\tEU4 install path is " << EU4Path;
 }
 
 void Configuration::verifyVic3Path()
@@ -138,64 +140,16 @@ void Configuration::setOutputName()
 	Log(LogLevel::Info) << "Using output name " << outputName;
 }
 
-std::optional<GameVersion> Configuration::getRawVersion(const std::string& filePath) const
+void Configuration::verifyEU4Version(const commonItems::ConverterVersion& converterVersion) const
 {
-	if (!commonItems::DoesFileExist(filePath))
-	{
-		Log(LogLevel::Warning) << "Failure verifying version: " << filePath << " does not exist. Proceeding blind.";
-		return std::nullopt;
-	}
-
-	std::ifstream versionFile(filePath);
-	if (!versionFile.is_open())
-	{
-		Log(LogLevel::Warning) << "Failure verifying version: " << filePath << " cannot be opened. Proceeding blind.";
-		return std::nullopt;
-	}
-
-	while (!versionFile.eof())
-	{
-		std::string line;
-		std::getline(versionFile, line);
-		if (line.find("rawVersion") == std::string::npos)
-			continue;
-		auto pos = line.find(':');
-		if (pos == std::string::npos)
-		{
-			Log(LogLevel::Warning) << "Failure extracting version: " << filePath << " has broken rawVersion. Proceeding blind.";
-			return std::nullopt;
-		}
-		line = line.substr(pos + 1, line.length());
-		pos = line.find_first_of('\"');
-		if (pos == std::string::npos)
-		{
-			Log(LogLevel::Warning) << "Failure extracting version: " << filePath << " has broken rawVersion. Proceeding blind.";
-			return std::nullopt;
-		}
-		line = line.substr(pos + 1, line.length());
-		pos = line.find_first_of('\"');
-		if (pos == std::string::npos)
-		{
-			Log(LogLevel::Warning) << "Failure extracting version: " << filePath << " has broken rawVersion. Proceeding blind.";
-			return std::nullopt;
-		}
-		line = line.substr(0, pos);
-		Log(LogLevel::Info) << "\tVersion is: " << line;
-		return GameVersion(line);
-	}
-
-	Log(LogLevel::Warning) << "Failure verifying version: " << filePath << " doesn't contain rawVersion. Proceeding blind.";
-	return std::nullopt;
-}
-
-void Configuration::verifyEU4Version(const mappers::ConverterVersion& converterVersion) const
-{
-	const auto EU4Version = getRawVersion(EU4Path + "/launcher-settings.json");
+	const auto EU4Version = GameVersion::extractVersionFromLauncher(EU4Path + "/launcher-settings.json");
 	if (!EU4Version)
 	{
 		Log(LogLevel::Error) << "EU4 version could not be determined, proceeding blind!";
 		return;
 	}
+
+	Log(LogLevel::Info) << "EU4 version: " << EU4Version->toShortString();
 
 	if (converterVersion.getMinSource() > *EU4Version)
 	{
@@ -211,14 +165,16 @@ void Configuration::verifyEU4Version(const mappers::ConverterVersion& converterV
 	}
 }
 
-void Configuration::verifyVic3Version(const mappers::ConverterVersion& converterVersion) const
+void Configuration::verifyVic3Version(const commonItems::ConverterVersion& converterVersion) const
 {
-	const auto V3Version = getRawVersion(Vic3Path + "../launcher/launcher-settings.json");
+	const auto V3Version = GameVersion::extractVersionFromLauncher(Vic3Path + "../launcher/launcher-settings.json");
 	if (!V3Version)
 	{
 		Log(LogLevel::Error) << "Vic3 version could not be determined, proceeding blind!";
 		return;
 	}
+
+	Log(LogLevel::Info) << "Vic3 version: " << V3Version->toShortString();
 
 	if (converterVersion.getMinTarget() > *V3Version)
 	{
