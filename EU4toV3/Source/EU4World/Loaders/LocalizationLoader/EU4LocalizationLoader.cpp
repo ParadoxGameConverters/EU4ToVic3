@@ -9,10 +9,10 @@ namespace fs = std::filesystem;
 void EU4::EU4LocalizationLoader::loadLocalizations(const std::string& EU4Path, const Mods& mods)
 {
 	readFromAllFilesInFolder(EU4Path + "/localisation");
-	for (const auto& itr: mods | std::views::values)
+	for (const auto& mod: mods)
 	{
-		readFromAllFilesInFolder(itr + "/localisation");
-		readFromAllFilesInFolder(itr + "/localisation/replace");
+		readFromAllFilesInFolder(mod.path + "/localisation");
+		readFromAllFilesInFolder(mod.path + "/localisation/replace");
 	}
 }
 

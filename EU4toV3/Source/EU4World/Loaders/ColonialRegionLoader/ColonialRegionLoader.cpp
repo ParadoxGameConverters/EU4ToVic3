@@ -15,9 +15,9 @@ void EU4::ColonialRegionLoader::loadColonialRegions(const std::string& EU4Path, 
 	else
 		parseFile(EU4Path + "/common/colonial_regions/00_colonial_regions.txt");
 
-	for (const auto& mod: mods | std::views::values)
-		for (const auto& filename: commonItems::GetAllFilesInFolder(mod + "/common/colonial_regions/"))
-			parseFile(mod + "/common/colonial_regions/" + filename);
+	for (const auto& mod: mods)
+		for (const auto& filename: commonItems::GetAllFilesInFolder(mod.path + "/common/colonial_regions/"))
+			parseFile(mod.path + "/common/colonial_regions/" + filename);
 
 	clearRegisteredKeywords();
 

@@ -136,9 +136,6 @@
     <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ModLoader\ModNames.cpp">
       <Filter>ConverterFiles\EU4World\Loaders\ModLoader</Filter>
     </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ModLoader\ModParser.cpp">
-      <Filter>ConverterFiles\EU4World\Loaders\ModLoader</Filter>
-    </ClCompile>
     <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ReligionLoader\ReligionLoader.cpp">
       <Filter>ConverterFiles\EU4World\Loaders\ReligionLoader</Filter>
     </ClCompile>
@@ -167,9 +164,6 @@
       <Filter>EU4WorldTests\LoaderTests\DefinitionScraperTests</Filter>
     </ClCompile>
     <ClCompile Include="EU4WorldTests\LoaderTests\ModLoaderTests\ModNamesTests.cpp">
-      <Filter>EU4WorldTests\LoaderTests\ModLoaderTests</Filter>
-    </ClCompile>
-    <ClCompile Include="EU4WorldTests\LoaderTests\ModLoaderTests\ModParserTests.cpp">
       <Filter>EU4WorldTests\LoaderTests\ModLoaderTests</Filter>
     </ClCompile>
     <ClCompile Include="EU4WorldTests\LoaderTests\ReligionLoaderTests\ReligionLoaderTests.cpp">
@@ -352,12 +346,6 @@
     <ClCompile Include="EU4WorldTests\LoaderTests\CommonCountryLoaderTests\CommonCountryLoaderTests.cpp">
       <Filter>EU4WorldTests\LoaderTests\CommonCountryLoaderTests</Filter>
     </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ModLoader\ModLoader.cpp">
-      <Filter>ConverterFiles\EU4World\Loaders\ModLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="EU4WorldTests\LoaderTests\ModLoaderTests\ModLoaderTests.cpp">
-      <Filter>EU4WorldTests\LoaderTests\ModLoaderTests</Filter>
-    </ClCompile>
     <ClCompile Include="ConfigurationTests\ConfigurationTests.cpp">
       <Filter>ConfigurationTests</Filter>
     </ClCompile>
@@ -390,6 +378,12 @@
     </ClCompile>
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp">
       <Filter>ConverterFiles\Mappers\SuperGroupMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\commonItems\ModLoader\ModLoader.cpp">
+      <Filter>ConverterFiles\commonItems\ModLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\commonItems\ModLoader\ModParser.cpp">
+      <Filter>ConverterFiles\commonItems\ModLoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -624,6 +618,9 @@
     <Filter Include="ConverterFiles\Mappers\SuperGroupMapper">
       <UniqueIdentifier>{60d22cdf-0897-42b8-b56f-5ba5c47e0d40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\commonItems\ModLoader">
+      <UniqueIdentifier>{97022d24-52d4-49d2-acf7-4f8211fee212}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -660,18 +657,6 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\map\positions.txt">
       <Filter>TestFiles\vic3installation\map</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="TestFiles\mod\packedmod.zip">
-      <Filter>TestFiles\mod</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="TestFiles\mod\packedmod.mod">
-      <Filter>TestFiles\mod</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="TestFiles\mod\missingmod.mod">
-      <Filter>TestFiles\mod</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="TestFiles\mod\brokenmod.mod">
-      <Filter>TestFiles\mod</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\eu4installation\launcher-settings.json">
       <Filter>TestFiles\eu4installation</Filter>

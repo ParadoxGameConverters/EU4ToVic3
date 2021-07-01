@@ -180,18 +180,18 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const commo
 		Log(LogLevel::Info) << "-> Detecting used mods.";
 		const auto& modBlobs = commonItems::blobList(theStream);
 		Log(LogLevel::Info) << "<> Savegame claims " << modBlobs.getBlobs().size() << " mods used:";
-		std::map<std::string, std::string> modsList;
+		Mods incomingMods;
 		for (const auto& modBlob: modBlobs.getBlobs())
 		{
 			auto modStream = std::stringstream(modBlob);
 			const auto& modName = ModNames(modStream);
-			modsList.emplace(modName.getName(), modName.getPath());
+			incomingMods.emplace_back(Mod(modName.getName(), modName.getPath()));
 			Log(LogLevel::Info) << "---> " << modName.getName() << ": " << modName.getPath();
 		}
 
 		// Let's locate, verify and potentially update those mods immediately.
-		ModLoader modLoader;
-		modLoader.loadMods(theConfiguration, modsList);
+		commonItems::ModLoader modLoader;
+		modLoader.loadMods(theConfiguration.getEU4DocumentsPath(), incomingMods);
 		mods = modLoader.getMods();
 	});
 	registerKeyword("provinces", [this](std::istream& theStream) {
