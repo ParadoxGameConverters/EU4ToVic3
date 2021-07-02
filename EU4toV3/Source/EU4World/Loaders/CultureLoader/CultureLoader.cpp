@@ -12,9 +12,9 @@ void EU4::CultureLoader::loadCultures(const std::string& EU4Path, const Mods& mo
 	for (const auto& cultureFile: commonItems::GetAllFilesInFolder(EU4Path + "/common/cultures/"))
 		parseFile(EU4Path + "/common/cultures/" + cultureFile);
 
-	for (const auto& modPath: mods | std::views::values)
-		for (const auto& cultureFile: commonItems::GetAllFilesInFolder(modPath + "/common/cultures/"))
-			parseFile(modPath + "/common/cultures/" + cultureFile);
+	for (const auto& mod: mods)
+		for (const auto& cultureFile: commonItems::GetAllFilesInFolder(mod.path + "/common/cultures/"))
+			parseFile(mod.path + "/common/cultures/" + cultureFile);
 
 	clearRegisteredKeywords();
 

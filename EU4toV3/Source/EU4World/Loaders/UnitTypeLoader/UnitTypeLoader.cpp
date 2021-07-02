@@ -4,14 +4,14 @@
 #include "UnitTypeParser.h"
 #include <ranges>
 
-void EU4::UnitTypeLoader::loadUnitTypes(const std::string& EU4Path, const EU4::Mods& mods)
+void EU4::UnitTypeLoader::loadUnitTypes(const std::string& EU4Path, const Mods& mods)
 {
 	for (const auto& filename: commonItems::GetAllFilesInFolder(EU4Path + "/common/units/"))
 		addUnitFileToRegimentTypeMap(EU4Path + "/common/units", filename);
 
-	for (const auto& modPath: mods | std::views::values)
-		for (const auto& filename: commonItems::GetAllFilesInFolder(modPath + "/common/units/"))
-			addUnitFileToRegimentTypeMap(modPath + "/common/units", filename);
+	for (const auto& mod: mods)
+		for (const auto& filename: commonItems::GetAllFilesInFolder(mod.path + "/common/units/"))
+			addUnitFileToRegimentTypeMap(mod.path + "/common/units", filename);
 
 	Log(LogLevel::Info) << "<> Loaded " << unitTypeMap.size() << " unit definitions.";
 }

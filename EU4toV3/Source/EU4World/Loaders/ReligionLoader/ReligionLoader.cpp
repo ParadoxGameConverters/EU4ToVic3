@@ -13,9 +13,9 @@ void EU4::ReligionLoader::loadReligions(const std::string& EU4Path, const Mods& 
 	for (const auto& filename: commonItems::GetAllFilesInFolder(EU4Path + "/common/religions/"))
 		parseFile(EU4Path + "/common/religions/" + filename);
 
-	for (const auto& modPath: mods | std::views::values)
-		for (const auto& filename: commonItems::GetAllFilesInFolder(modPath + "/common/religions/"))
-			parseFile(modPath + "/common/religions/" + filename);
+	for (const auto& mod: mods)
+		for (const auto& filename: commonItems::GetAllFilesInFolder(mod.path + "/common/religions/"))
+			parseFile(mod.path + "/common/religions/" + filename);
 
 	clearRegisteredKeywords();
 	Log(LogLevel::Info) << "<> Loaded " << theReligions.size() << " religions.";

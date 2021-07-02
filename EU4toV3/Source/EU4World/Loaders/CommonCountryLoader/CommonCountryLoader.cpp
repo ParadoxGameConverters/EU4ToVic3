@@ -19,11 +19,11 @@ void EU4::CommonCountryLoader::loadCommonCountries(const std::string& EU4Path, c
 	commonCountries.close();
 
 	// and mods too.
-	for (const auto& itr: mods | std::views::values)
-		for (const auto& fileName: commonItems::GetAllFilesInFolder(itr + "/common/country_tags/"))
+	for (const auto& mod: mods)
+		for (const auto& fileName: commonItems::GetAllFilesInFolder(mod.path + "/common/country_tags/"))
 		{
-			std::ifstream convertedCommonCountries(fs::u8path(itr + "/common/country_tags/" + fileName));
-			readCommonCountriesFile(convertedCommonCountries, itr);
+			std::ifstream convertedCommonCountries(fs::u8path(mod.path + "/common/country_tags/" + fileName));
+			readCommonCountriesFile(convertedCommonCountries, mod.path);
 			convertedCommonCountries.close();
 		}
 

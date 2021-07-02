@@ -165,13 +165,7 @@
     <ClCompile Include="Source\EU4World\Loaders\DefinitionScraper\DefinitionScraper.cpp">
       <Filter>EU4World\Loaders\DefinitionScraper</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EU4World\Loaders\ModLoader\ModLoader.cpp">
-      <Filter>EU4World\Loaders\ModLoader</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EU4World\Loaders\ModLoader\ModNames.cpp">
-      <Filter>EU4World\Loaders\ModLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EU4World\Loaders\ModLoader\ModParser.cpp">
       <Filter>EU4World\Loaders\ModLoader</Filter>
     </ClCompile>
     <ClCompile Include="Source\EU4World\Loaders\ReligionLoader\ReligionLoader.cpp">
@@ -227,6 +221,12 @@
     </ClCompile>
     <ClCompile Include="..\commonItems\ConverterVersion.cpp">
       <Filter>CommonItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\commonItems\ModLoader\ModLoader.cpp">
+      <Filter>CommonItems\ModLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\commonItems\ModLoader\ModParser.cpp">
+      <Filter>CommonItems\ModLoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -405,13 +405,7 @@
     <ClInclude Include="Source\EU4World\Loaders\DefinitionScraper\DefinitionScraper.h">
       <Filter>EU4World\Loaders\DefinitionScraper</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EU4World\Loaders\ModLoader\ModLoader.h">
-      <Filter>EU4World\Loaders\ModLoader</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EU4World\Loaders\ModLoader\ModNames.h">
-      <Filter>EU4World\Loaders\ModLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EU4World\Loaders\ModLoader\ModParser.h">
       <Filter>EU4World\Loaders\ModLoader</Filter>
     </ClInclude>
     <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\ReligionLoader.h">
@@ -473,6 +467,12 @@
     </ClInclude>
     <ClInclude Include="..\commonItems\ConverterVersion.h">
       <Filter>CommonItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\commonItems\ModLoader\ModLoader.h">
+      <Filter>CommonItems\ModLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\commonItems\ModLoader\ModParser.h">
+      <Filter>CommonItems\ModLoader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -571,6 +571,9 @@
     </Filter>
     <Filter Include="EU4World\Loaders\ColonialRegionLoader">
       <UniqueIdentifier>{9e5b88cc-ff57-4f96-b614-ad480c35973a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CommonItems\ModLoader">
+      <UniqueIdentifier>{7ceb24a6-d800-4a7a-81aa-33faf3e44a12}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

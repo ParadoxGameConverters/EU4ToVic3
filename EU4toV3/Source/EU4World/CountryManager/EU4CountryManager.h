@@ -1,6 +1,7 @@
 #ifndef EU4_COUNTRY_MANAGER
 #define EU4_COUNTRY_MANAGER
 #include "CommonCountryLoader/CommonCountryLoader.h"
+#include "Configuration.h"
 #include "EU4Country.h"
 #include "LocalizationLoader/EU4LocalizationLoader.h"
 #include "NationMergeMapper/NationMergeMapper.h"

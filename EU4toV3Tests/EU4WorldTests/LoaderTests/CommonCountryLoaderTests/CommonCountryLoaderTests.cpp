@@ -1,4 +1,6 @@
 #include "CommonCountryLoader/CommonCountryLoader.h"
+#include "Configuration.h"
+#include "ConverterVersion.h"
 #include "gtest/gtest.h"
 
 TEST(EU4World_CommonCountryLoaderTests, colorsCanBeLoadedFromCommonCountries)
@@ -10,11 +12,11 @@ TEST(EU4World_CommonCountryLoaderTests, colorsCanBeLoadedFromCommonCountries)
 	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
-	EU4::Mods mods;
-	mods.emplace("Some mod", "themod.mod");
+	Mods mods;
+	mods.emplace_back(Mod("Some mod", "themod.mod"));
 
-	EU4::ModLoader modLoader;
-	modLoader.loadMods(configuration, mods);
+	commonItems::ModLoader modLoader;
+	modLoader.loadMods(configuration.getEU4DocumentsPath(), mods);
 	mods = modLoader.getMods();
 
 	EU4::CommonCountryLoader loader;

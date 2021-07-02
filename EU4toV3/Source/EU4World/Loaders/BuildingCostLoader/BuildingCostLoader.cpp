@@ -11,9 +11,9 @@ void EU4::BuildingCostLoader::loadBuildingCosts(const std::string& EU4Path, cons
 	for (const auto& filename: commonItems::GetAllFilesInFolder(EU4Path + "/common/buildings/"))
 		parseFile(EU4Path + "/common/buildings/" + filename);
 
-	for (const auto& modPath: mods | std::views::values)
-		for (const auto& filename: commonItems::GetAllFilesInFolder(modPath + "/common/buildings/"))
-			parseFile(modPath + "/common/buildings/" + filename);
+	for (const auto& mod: mods)
+		for (const auto& filename: commonItems::GetAllFilesInFolder(mod.path + "/common/buildings/"))
+			parseFile(mod.path + "/common/buildings/" + filename);
 
 	clearRegisteredKeywords();
 }
