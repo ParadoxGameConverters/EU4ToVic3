@@ -8,12 +8,12 @@ class EU4ActivePolicy: commonItems::convenientParser
 {
   public:
 	explicit EU4ActivePolicy(std::istream& theStream);
-	
+
 	[[nodiscard]] const auto& getPolicy() const { return policy; }
 
   private:
 	void registerKeys();
-	
+
 	std::string policy;
 };
 } // namespace EU4

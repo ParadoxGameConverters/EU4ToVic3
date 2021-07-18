@@ -1,6 +1,6 @@
 #include "EU4RelationDetails.h"
-#include "ParserHelpers.h"
 #include "CommonRegexes.h"
+#include "ParserHelpers.h"
 
 EU4::EU4RelationDetails::EU4RelationDetails(std::istream& theStream)
 {

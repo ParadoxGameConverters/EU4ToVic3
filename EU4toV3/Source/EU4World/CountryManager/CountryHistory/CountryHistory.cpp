@@ -1,7 +1,7 @@
 #include "CountryHistory.h"
+#include "CommonRegexes.h"
 #include "CountryHistoryDate.h"
 #include "ParserHelpers.h"
-#include "CommonRegexes.h"
 
 EU4::CountryHistory::CountryHistory(std::istream& theStream)
 {

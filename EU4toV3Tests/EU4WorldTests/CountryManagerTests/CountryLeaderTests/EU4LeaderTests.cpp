@@ -59,7 +59,7 @@ TEST(EU4World_EU4LeaderTests, typeDeterminesUniform)
 	std::stringstream input4;
 	input4 << "type=conquistador\n";
 	const EU4::Leader leader4(input4);
-	
+
 	EXPECT_FALSE(leader.isLand());
 	EXPECT_FALSE(leader2.isLand());
 	EXPECT_TRUE(leader3.isLand());
@@ -78,5 +78,5 @@ TEST(EU4World_EU4LeaderTests, wrongTypeThrowsWarning)
 	EXPECT_FALSE(leader.isLand());
 	std::cout.rdbuf(stdOutBuf);
 
-	EXPECT_EQ(" [WARNING] Unknown leader type troubadour\n", log.str());	
+	EXPECT_EQ(" [WARNING] Unknown leader type troubadour\n", log.str());
 }

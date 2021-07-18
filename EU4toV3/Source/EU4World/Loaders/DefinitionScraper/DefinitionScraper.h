@@ -1,9 +1,9 @@
 #ifndef DEFINITION_SCRAPER
 #define DEFINITION_SCRAPER
-#include <set>
-#include <string>
 #include "ModLoader/ModLoader.h"
 #include <optional>
+#include <set>
+#include <string>
 
 namespace EU4
 {
@@ -18,7 +18,7 @@ class DefinitionScraper
 
   private:
 	void parseStream(std::istream& theStream);
-	
+
 	[[nodiscard]] std::optional<int> parseLine(const std::string& line);
 
 	std::set<int> provinceIDs;

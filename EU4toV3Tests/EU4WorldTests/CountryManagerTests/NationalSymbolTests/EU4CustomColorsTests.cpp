@@ -7,7 +7,7 @@ TEST(EU4World_EU4CustomColorsTests, primitivesDefaultToBlank)
 	const EU4::CustomColors colors(input);
 
 	const auto& customColorBlock = colors.getCustomColorsBlock();
-	
+
 	EXPECT_EQ(0, customColorBlock.colorIndex);
 	EXPECT_EQ(0, customColorBlock.symbolIndex);
 	EXPECT_EQ(0, customColorBlock.flagIndex);

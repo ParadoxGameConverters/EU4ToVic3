@@ -1,14 +1,14 @@
 #include "DefaultMapParser.h"
 #include "CommonRegexes.h"
-#include "ParserHelpers.h"
 #include "OSCompatibilityLayer.h"
+#include "ParserHelpers.h"
 #include <fstream>
 
 void EU4::DefaultMapParser::loadDefaultMap(const std::string& EU4Path, const Mods& mods)
 {
 	// This is a case where mods take priority over definitions. If a mod has defs than we use those and ignore EU4 installation.
 	registerKeys();
-	
+
 	for (const auto& [modName, modPath]: mods)
 		if (commonItems::DoesFileExist(modPath + "/map/default.map"))
 		{

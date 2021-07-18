@@ -1,7 +1,7 @@
 #include "EU4GovernmentSection.h"
+#include "CommonRegexes.h"
 #include "EU4ReformStackSection.h"
 #include "ParserHelpers.h"
-#include "CommonRegexes.h"
 
 EU4::GovernmentSection::GovernmentSection(std::istream& theStream)
 {

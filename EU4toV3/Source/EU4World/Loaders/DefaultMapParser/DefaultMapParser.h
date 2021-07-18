@@ -1,8 +1,8 @@
 #ifndef DEFAULTMAP_PARSER
 #define DEFAULTMAP_PARSER
-#include <set>
-#include "Parser.h"
 #include "ModLoader/ModLoader.h"
+#include "Parser.h"
+#include <set>
 
 namespace EU4
 {

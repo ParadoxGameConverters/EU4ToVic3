@@ -1,6 +1,6 @@
 #include "EU4ActiveIdeas.h"
-#include "ParserHelpers.h"
 #include "CommonRegexes.h"
+#include "ParserHelpers.h"
 
 EU4::EU4ActiveIdeas::EU4ActiveIdeas(std::istream& theStream)
 {

@@ -12,7 +12,7 @@ struct DateChange
 		changeValue = theChangeValue;
 	}
 	bool operator==(const DateChange& rhs) const { return changeType == rhs.changeType && changeValue == rhs.changeValue; }
-	
+
 	std::string changeType;
 	std::string changeValue;
 };

@@ -1,7 +1,7 @@
 #ifndef EU4_COUNTRY_HISTORY_DATE
 #define EU4_COUNTRY_HISTORY_DATE
-#include "Parser.h"
 #include "CountryManager/CountryLeader/EU4Leader.h"
+#include "Parser.h"
 
 namespace EU4
 {

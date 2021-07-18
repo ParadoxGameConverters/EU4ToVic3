@@ -1,7 +1,7 @@
 #include "Area.h"
+#include "CommonRegexes.h"
 #include "Log.h"
 #include "ParserHelpers.h"
-#include "CommonRegexes.h"
 
 EU4::Area::Area(std::istream& theStream)
 {

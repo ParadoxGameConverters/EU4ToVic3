@@ -1,6 +1,6 @@
-#include "CultureLoader/CultureParser.h"
 #include "CultureLoader/CultureGroupParser.h"
 #include "CultureLoader/CultureLoader.h"
+#include "CultureLoader/CultureParser.h"
 #include "gtest/gtest.h"
 
 TEST(EU4World_CultureLoaderTests, cultureGroupsCanBeLoaded)

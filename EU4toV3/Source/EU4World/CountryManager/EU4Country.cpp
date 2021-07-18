@@ -68,7 +68,7 @@ void EU4::Country::registerKeys()
 	registerKeyword("primary_culture", [this](std::istream& theStream) {
 		primaryCulture = commonItems::getString(theStream);
 	});
-	registerKeyword("religion", [this](std::istream& theStream) {		
+	registerKeyword("religion", [this](std::istream& theStream) {
 		religion = commonItems::getString(theStream);
 	});
 	registerKeyword("age_score", [this](std::istream& theStream) {

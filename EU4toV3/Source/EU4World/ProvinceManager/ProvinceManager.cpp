@@ -86,7 +86,7 @@ void EU4::ProvinceManager::buildPopRatios(const DatingData& datingData, bool con
 		{
 			if (convertAll)
 				province->purgeHistories();
-			province->buildPopRatios(datingData);			
+			province->buildPopRatios(datingData);
 		}
 }
 

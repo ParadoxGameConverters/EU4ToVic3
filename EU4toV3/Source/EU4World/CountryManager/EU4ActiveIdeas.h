@@ -14,7 +14,7 @@ class EU4ActiveIdeas: commonItems::parser
 
   private:
 	void registerKeys();
-	
+
 	std::set<std::string> activeIdeas;
 };
 } // namespace EU4
