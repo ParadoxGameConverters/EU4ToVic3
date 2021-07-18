@@ -7,8 +7,8 @@ jobs:
     strategy:
       matrix:
         path:
-          - 'Vic2ToHoI4/Source'
-          - 'Vic2ToHoI4Tests'
+          - 'EU4toV3/Source'
+          - 'EU4toV3Tests'
     steps:
     - uses: actions/checkout@v2
     - name: Run clang-format style check for C/C++ programs.
