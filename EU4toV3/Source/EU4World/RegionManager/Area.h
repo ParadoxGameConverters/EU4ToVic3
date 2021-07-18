@@ -16,7 +16,7 @@ class Area: commonItems::parser
 
   private:
 	void registerKeys();
-	
+
 	std::set<int> provinces;
 };
 } // namespace EU4

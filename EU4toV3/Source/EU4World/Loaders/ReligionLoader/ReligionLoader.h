@@ -1,8 +1,8 @@
 #ifndef RELIGION_LOADER
 #define RELIGION_LOADER
+#include "ModLoader/ModLoader.h"
 #include "Parser.h"
 #include <set>
-#include "ModLoader/ModLoader.h"
 
 namespace EU4
 {

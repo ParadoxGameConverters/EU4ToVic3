@@ -1,6 +1,6 @@
 #include "ProvinceBuildings.h"
-#include "ParserHelpers.h"
 #include "CommonRegexes.h"
+#include "ParserHelpers.h"
 
 EU4::ProvinceBuildings::ProvinceBuildings(std::istream& theStream)
 {

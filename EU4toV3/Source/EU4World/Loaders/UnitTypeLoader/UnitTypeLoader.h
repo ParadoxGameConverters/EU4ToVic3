@@ -1,7 +1,7 @@
 #ifndef UNIT_TYPE_LOADER
 #define UNIT_TYPE_LOADER
-#include "Parser.h"
 #include "ModLoader/ModLoader.h"
+#include "Parser.h"
 #include "UnitType.h"
 
 namespace EU4
