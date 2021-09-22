@@ -1,11 +1,11 @@
-name: Build, test and publish
+name: Build, test
 on:
   push:
     branches-ignore:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 jobs:
    build_and_test:
     runs-on: [self-hosted, windows]
@@ -13,9 +13,6 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - name: "Get previous tag"
-      id: previoustag
-      uses: "WyriHaximus/github-action-get-previous-tag@v1"
     - name: "Init submodules"
       run: |
        git submodule update --init --recursive
@@ -27,10 +24,6 @@ jobs:
       run: |
        cd $Env:GITHUB_WORKSPACE\Release-Tests\
        .\EU4toV3Tests.exe
-    - name: "Archive release"
-      run: |
-       cd "C:\Program Files\7-Zip\"
-       .\7z.exe a $Env:GITHUB_WORKSPACE\EU4ToVic3-0.1Adams.zip $Env:GITHUB_WORKSPACE\Release\*
     - name: "Cleanup"
       run: |
         Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Recurse -Force | Remove-Item -force -recurse
