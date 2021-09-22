@@ -7,7 +7,14 @@ on:
     branches:
       - main
 jobs:
-  build_and_test:
+   cleaner:
+    runs-on: [self-hosted, windows]
+    steps:
+      - name: Runner workspace path
+        run: |
+          echo "Cleaning up previous run"
+          Remove-Item -Recurse -Force "${{ github.workspace }}"  
+   build_and_test:
     runs-on: [self-hosted, windows]
     steps:
     - uses: actions/checkout@v2
