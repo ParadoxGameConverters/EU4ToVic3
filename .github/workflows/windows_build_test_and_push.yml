@@ -33,26 +33,33 @@ jobs:
       run: |
        cd "C:\Program Files\7-Zip\"
        .\7z.exe a $Env:GITHUB_WORKSPACE\EU4ToVic3-0.1Adams.zip $Env:GITHUB_WORKSPACE\Release\*
-    - name: "Release"
-      if: ${{ github.event_name == 'push' }}
-      uses: ncipollo/release-action@v1
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
       with:
+        repo_token: ${{ secrets.API_TOKEN_GITHUB }}
+        file: EU4ToVic3-0.1Adams.zip
         tag: ${{ steps.previoustag.outputs.tag }}
-        allowUpdates: true
-        omitBodyDuringUpdate: true
-        omitNameDuringUpdate: true
-        artifacts: EU4ToVic3-0.1Adams.zip
-        token: ${{ secrets.API_TOKEN_GITHUB }}
-    - name: "Archive"
-      if: ${{ github.event_name == 'push' }}
-      uses: ncipollo/release-action@v1
-      with:
-        tag: windows_development_build
-        allowUpdates: true
-        omitBodyDuringUpdate: true
-        omitNameDuringUpdate: true
-        artifacts: EU4ToVic3-0.1Adams.zip
-        token: ${{ secrets.API_TOKEN_GITHUB }}
+        overwrite: true
+#    - name: "Release"
+#      if: ${{ github.event_name == 'push' }}
+#      uses: ncipollo/release-action@v1
+#      with:
+#        tag: ${{ steps.previoustag.outputs.tag }}
+#        allowUpdates: true
+#        omitBodyDuringUpdate: true
+#        omitNameDuringUpdate: true
+#        artifacts: EU4ToVic3-0.1Adams.zip
+#        token: ${{ secrets.API_TOKEN_GITHUB }}
+#    - name: "Archive"
+#      if: ${{ github.event_name == 'push' }}
+#      uses: ncipollo/release-action@v1
+#      with:
+#        tag: windows_development_build
+#        allowUpdates: true
+#        omitBodyDuringUpdate: true
+#        omitNameDuringUpdate: true
+#        artifacts: EU4ToVic3-0.1Adams.zip
+#        token: ${{ secrets.API_TOKEN_GITHUB }}
     - name: "Cleanup"
       if: ${{ true }}
       run: |
