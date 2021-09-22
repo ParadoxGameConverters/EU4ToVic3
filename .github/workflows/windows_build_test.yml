@@ -1,6 +1,9 @@
 name: Build, test and publish
 on:
   push:
+    branches-ignore:
+      - main
+  pull_request:
     branches:
       - main
 jobs:
@@ -28,18 +31,6 @@ jobs:
       run: |
        cd "C:\Program Files\7-Zip\"
        .\7z.exe a $Env:GITHUB_WORKSPACE\EU4ToVic3-0.1Adams.zip $Env:GITHUB_WORKSPACE\Release\*
-    - name: "Release"
-      uses: ncipollo/release-action@v1
-      with:
-        tag: ${{ steps.previoustag.outputs.tag }}
-        artifacts: EU4ToVic3-0.1Adams.zip
-        token: ${{ secrets.API_TOKEN_GITHUB }}
-    - name: "Archive"
-      uses: ncipollo/release-action@v1
-      with:
-        tag: windows_development_build
-        artifacts: EU4ToVic3-0.1Adams.zip
-        token: ${{ secrets.API_TOKEN_GITHUB }}
     - name: "Cleanup"
       run: |
         Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Recurse -Force | Remove-Item -force -recurse
