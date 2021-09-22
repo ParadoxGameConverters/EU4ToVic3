@@ -17,7 +17,7 @@ on:
 jobs:
   analyze:
     name: Analyze
-    runs-on: [self-hosted, linux-lin]
+    runs-on: [self-hosted, builder-lin]
 
     strategy:
       fail-fast: false
@@ -62,3 +62,9 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
+      
+    - name: "Cleanup"
+      if: ${{ true }}
+      run: |
+        rm -rf $Env:GITHUB_WORKSPACE
+
