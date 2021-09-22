@@ -7,15 +7,15 @@ on:
     branches:
       - main
 jobs:
-   cleaner:
-    runs-on: [self-hosted, windows]
-    steps:
-      - name: Runner workspace path
-        run: |
-          echo "Cleaning up previous run"
-          Remove-Item -Recurse -Force "${{ github.workspace }}"  
+#   cleaner:
+#    runs-on: [self-hosted, windows]
+#    steps:
+#      - name: Runner workspace path
+#        run: |
+#          echo "Cleaning up previous run"
+#          Remove-Item -Recurse -Force "${{ github.workspace }}"  
    build_and_test:
-    needs: cleaner
+#    needs: cleaner
     runs-on: [self-hosted, windows]
     steps:
     - uses: actions/checkout@v2
@@ -51,3 +51,7 @@ jobs:
         tag: windows_development_build
         artifacts: EU4ToVic3-0.1Adams.zip
         token: ${{ secrets.API_TOKEN_GITHUB }}
+    - name: "Cleanup"
+      uses: colpal/actions-clean@v1
+      if: ${{ always() }}
+
