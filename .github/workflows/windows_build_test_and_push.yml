@@ -15,6 +15,7 @@ jobs:
           echo "Cleaning up previous run"
           Remove-Item -Recurse -Force "${{ github.workspace }}"  
    build_and_test:
+    needs: cleaner
     runs-on: [self-hosted, windows]
     steps:
     - uses: actions/checkout@v2
