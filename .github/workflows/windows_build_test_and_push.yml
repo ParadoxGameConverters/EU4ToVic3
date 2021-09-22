@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 jobs:
    build_and_test:
     runs-on: [self-hosted, windows]
@@ -11,6 +14,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: "Get previous tag"
+      if: ${{ github.event_name == 'push' }}
       id: previoustag
       uses: "WyriHaximus/github-action-get-previous-tag@v1"
     - name: "Init submodules"
@@ -24,23 +28,27 @@ jobs:
       run: |
        cd $Env:GITHUB_WORKSPACE\Release-Tests\
        .\EU4toV3Tests.exe
-    - name: "Archive release"
+    - name: "Prepare release"
+      if: ${{ github.event_name == 'push' }}
       run: |
        cd "C:\Program Files\7-Zip\"
        .\7z.exe a $Env:GITHUB_WORKSPACE\EU4ToVic3-0.1Adams.zip $Env:GITHUB_WORKSPACE\Release\*
     - name: "Release"
+      if: ${{ github.event_name == 'push' }}
       uses: ncipollo/release-action@v1
       with:
         tag: ${{ steps.previoustag.outputs.tag }}
         artifacts: EU4ToVic3-0.1Adams.zip
         token: ${{ secrets.API_TOKEN_GITHUB }}
     - name: "Archive"
+      if: ${{ github.event_name == 'push' }}
       uses: ncipollo/release-action@v1
       with:
         tag: windows_development_build
         artifacts: EU4ToVic3-0.1Adams.zip
         token: ${{ secrets.API_TOKEN_GITHUB }}
     - name: "Cleanup"
+      if: ${{ true }}
       run: |
         Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Recurse -Force | Remove-Item -force -recurse
 
