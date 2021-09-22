@@ -7,15 +7,7 @@ on:
     branches:
       - main
 jobs:
-#   cleaner:
-#    runs-on: [self-hosted, windows]
-#    steps:
-#      - name: Runner workspace path
-#        run: |
-#          echo "Cleaning up previous run"
-#          Remove-Item -Recurse -Force "${{ github.workspace }}"  
    build_and_test:
-#    needs: cleaner
     runs-on: [self-hosted, windows]
     steps:
     - uses: actions/checkout@v2
@@ -30,7 +22,7 @@ jobs:
     - name: "Build solution"
       run: |
        cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\"
-       .\MSBuild.exe -m -p:Configuration=Release $Env:GITHUB_WORKSPACE\EU4toVic3.sln -target:EU4ToVic3
+       .\MSBuild.exe -m -p:Configuration=Release $Env:GITHUB_WORKSPACE\EU4toVic3.sln
     - name: "Run tests"
       run: |
        cd $Env:GITHUB_WORKSPACE\Release-Tests\
@@ -52,6 +44,7 @@ jobs:
         artifacts: EU4ToVic3-0.1Adams.zip
         token: ${{ secrets.API_TOKEN_GITHUB }}
     - name: "Cleanup"
-      uses: colpal/actions-clean@v1
-      if: ${{ always() }}
+      run: |
+        Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Recurse -Force | Remove-Item -force -recurse
+        Remove-Item $Env:GITHUB_WORKSPACE -Force 
 
