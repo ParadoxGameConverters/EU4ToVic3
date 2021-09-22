@@ -33,13 +33,6 @@ jobs:
       run: |
        cd "C:\Program Files\7-Zip\"
        .\7z.exe a $Env:GITHUB_WORKSPACE\EU4toVic3-0.1Adams.zip $Env:GITHUB_WORKSPACE\Release\*
-#    - name: Delete old release assets
-#      if: ${{ github.event_name == 'push' }}
-#      uses: mknejp/delete-release-assets@v1
-#      with:
-#        token: ${{ secrets.API_TOKEN_GITHUB }}
-#        tag: ${{ steps.previoustag.outputs.tag }}
-#        assets: EU4ToVic3-0.1Adams.zip
     - name: "Upload binaries to release"
       if: ${{ github.event_name == 'push' }}
       uses: ncipollo/release-action@v1
@@ -51,7 +44,7 @@ jobs:
         replacesArtifacts: true
         artifacts: EU4toVic3-0.1Adams.zip
         token: ${{ secrets.API_TOKEN_GITHUB }}
-    - name: "Archive"
+    - name: "Upload binaries to archive"
       if: ${{ github.event_name == 'push' }}
       uses: ncipollo/release-action@v1
       with:
