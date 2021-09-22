@@ -43,5 +43,4 @@ jobs:
     - name: "Cleanup"
       run: |
         Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Recurse -Force | Remove-Item -force -recurse
-        Remove-Item $Env:GITHUB_WORKSPACE -Force 
 
