@@ -1,0 +1,45 @@
+name: Build and run tests
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build_and_test:
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: "Get previous tag"
+      id: previoustag
+      uses: "WyriHaximus/github-action-get-previous-tag@v1"
+    - name: "Init submodules"
+      run: |
+       git submodule update --init --recursive
+    - name: "Build solution"
+      run: |
+       cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
+       .\MSBuild.exe -m -p:Configuration=Release $Env:GITHUB_WORKSPACE\EU4toVic3.sln -target:EU4ToVic3
+    - name: "Run tests"
+      run: |
+       cd $Env:GITHUB_WORKSPACE\Release-Tests\
+       .\EU4toV3Tests.exe
+    - name: "Archive release"
+      run: |
+       cd "C:\Program Files\7-Zip\"
+       .\7z.exe a $Env:GITHUB_WORKSPACE\EU4ToVic3-0.1Adams.zip $Env:GITHUB_WORKSPACE\Release\*
+    - name: "Release"
+      uses: ncipollo/release-action@v1
+      with:
+        tag: ${{ steps.previoustag.outputs.tag }}
+        artifacts: EU4ToVic3-0.1Adams.zip
+        token: ${{ secrets.API_TOKEN_GITHUB }}
+    - name: "Archive"
+      uses: ncipollo/release-action@v1
+      with:
+        tag: windows_development_build
+        artifacts: EU4ToVic3-0.1Adams.zip
+        token: ${{ secrets.API_TOKEN_GITHUB }}
