@@ -32,7 +32,7 @@ jobs:
     - name: "Cleanup"
       if: ${{ true }}
       run: |
-        rm -rf "${{ github.workspace }}"
+        rm -rf "${{ github.workspace }}/*"
 
     - name: Checkout repository
       uses: actions/checkout@v2
