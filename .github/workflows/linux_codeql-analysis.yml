@@ -34,7 +34,8 @@ jobs:
       with:
         # We must fetch at least the immediate parents so that if this is
         # a pull request then we can checkout the head.
-        fetch-depth: 2
+        fetch-depth: 0
+        submodules: recursive
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -49,14 +50,14 @@ jobs:
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
        
-    - name: Custom steps
+    - name: Build solution
       run: |
-       git submodule update --init --recursive
        chmod u+x build_linux.sh
        ./build_linux.sh
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
 
-    - uses: colpal/actions-clean@v1
-      if: ${{ always() }} # To ensure this step runs even when earlier steps fail      
+    - name: Cleanup
+      uses: colpal/actions-clean@v1
+      if: ${{ true }} # To ensure this step runs even when earlier steps fail      
