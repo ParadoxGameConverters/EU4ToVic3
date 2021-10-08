@@ -6,13 +6,13 @@ void EU4::DefinitionScraper::loadDefinitions(const std::string& EU4Path, const M
 {
 	// This is a case where mods take priority over definitions. If a mod has defs than we use those and ignore EU4 installation.
 
-	for (const auto& [modName, modPath]: mods)
-		if (commonItems::DoesFileExist(modPath + "/map/definition.csv"))
+	for (const auto& mod: mods)
+		if (commonItems::DoesFileExist(mod.path + "/map/definition.csv"))
 		{
-			std::ifstream definitionsFile(modPath + "/map/definition.csv");
+			std::ifstream definitionsFile(mod.path + "/map/definition.csv");
 			parseStream(definitionsFile);
 			definitionsFile.close();
-			Log(LogLevel::Info) << "<> " << provinceIDs.size() << " province definitions registered from:" << modName;
+			Log(LogLevel::Info) << "<> " << provinceIDs.size() << " province definitions registered from:" << mod.name;
 			return;
 		}
 

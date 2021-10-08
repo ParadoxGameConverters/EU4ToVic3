@@ -14,27 +14,27 @@ void EU4::RegionManager::loadRegions(const std::string& EU4Path, const Mods& mod
 	auto regionFilename = EU4Path + "/map/region.txt";
 	auto superRegionFilename = EU4Path + "/map/superregion.txt";
 
-	for (const auto& [modName, modPath]: mods)
-		if (commonItems::DoesFileExist(modPath + "/map/area.txt"))
+	for (const auto& mod: mods)
+		if (commonItems::DoesFileExist(mod.path + "/map/area.txt"))
 		{
-			Log(LogLevel::Info) << "-> Loading areas from mod: " << modName;
-			areaFilename = modPath + "/map/area.txt";
+			Log(LogLevel::Info) << "-> Loading areas from mod: " << mod.name;
+			areaFilename = mod.path + "/map/area.txt";
 			break;
 		}
 
-	for (const auto& [modName, modPath]: mods)
-		if (commonItems::DoesFileExist(modPath + "/map/region.txt"))
+	for (const auto& mod: mods)
+		if (commonItems::DoesFileExist(mod.path + "/map/region.txt"))
 		{
-			Log(LogLevel::Info) << "-> Loading regions from mod: " << modName;
-			areaFilename = modPath + "/map/region.txt";
+			Log(LogLevel::Info) << "-> Loading regions from mod: " << mod.name;
+			areaFilename = mod.path + "/map/region.txt";
 			break;
 		}
 
-	for (const auto& [modName, modPath]: mods)
-		if (commonItems::DoesFileExist(modPath + "/map/superregion.txt"))
+	for (const auto& mod: mods)
+		if (commonItems::DoesFileExist(mod.path + "/map/superregion.txt"))
 		{
-			Log(LogLevel::Info) << "-> Loading superregions from mod: " << modName;
-			areaFilename = modPath + "/map/superregion.txt";
+			Log(LogLevel::Info) << "-> Loading superregions from mod: " << mod.name;
+			areaFilename = mod.path + "/map/superregion.txt";
 			break;
 		}
 
