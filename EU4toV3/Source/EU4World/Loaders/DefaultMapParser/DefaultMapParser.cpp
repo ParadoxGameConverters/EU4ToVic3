@@ -9,13 +9,13 @@ void EU4::DefaultMapParser::loadDefaultMap(const std::string& EU4Path, const Mod
 	// This is a case where mods take priority over definitions. If a mod has defs than we use those and ignore EU4 installation.
 	registerKeys();
 
-	for (const auto& [modName, modPath]: mods)
-		if (commonItems::DoesFileExist(modPath + "/map/default.map"))
+	for (const auto& mod: mods)
+		if (commonItems::DoesFileExist(mod.path + "/map/default.map"))
 		{
-			std::ifstream definitionsFile(modPath + "/map/default.map");
+			std::ifstream definitionsFile(mod.path + "/map/default.map");
 			parseStream(definitionsFile);
 			definitionsFile.close();
-			Log(LogLevel::Info) << "<> " << seas.size() << " seas and " << lakes.size() << " lakes registered from:" << modName;
+			Log(LogLevel::Info) << "<> " << seas.size() << " seas and " << lakes.size() << " lakes registered from:" << mod.name;
 			clearRegisteredKeywords();
 			return;
 		}

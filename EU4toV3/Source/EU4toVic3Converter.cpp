@@ -14,6 +14,6 @@ void convertEU4ToVic3(commonItems::ConverterVersion&& converterVersion)
 	const EU4::World sourceWorld(configuration, converterVersion);
 	V3::World destWorld(configuration, sourceWorld, std::move(converterVersion));
 
-	Log(LogLevel::Info) << "* Conversion complete *";
+	Log(LogLevel::Notice) << "* Conversion complete *";
 	Log(LogLevel::Progress) << "100 %";
 }
