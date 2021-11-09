@@ -65,5 +65,6 @@ add_executable(EU4ToVic3
 
 target_link_libraries(EU4ToVic3 LINK_PUBLIC ZIPLIB stdc++fs rakaly)
 
+add_custom_command(TARGET EU4ToVic3 POST_BUILD WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} COMMAND git rev-parse HEAD > Release-Linux/commit_id.txt)
 add_custom_command(TARGET EU4ToVic3 POST_BUILD WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} COMMAND chmod u+x Copy_Files.sh)
 add_custom_command(TARGET EU4ToVic3 POST_BUILD WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} COMMAND ./Copy_Files.sh)
