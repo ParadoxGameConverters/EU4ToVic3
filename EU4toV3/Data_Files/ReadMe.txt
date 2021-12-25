@@ -5,7 +5,7 @@ IMPORTANT LINKS
 ----
 
 Forum Converter Thread: https://forum.paradoxplaza.com/forum/threads/eu4-to-vic3-converter-thread.1475054/
-Github project: https://github.com/ParadoxGameConverters/EU4toVic3
+GitHub project: https://github.com/ParadoxGameConverters/EU4toVic3
 
 ----
 REQUIREMENTS
