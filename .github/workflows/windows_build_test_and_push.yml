@@ -35,12 +35,10 @@ jobs:
        .\EU4toV3Tests.exe
        
     - name: "Build updater executable"
-      run: |
-       cd Fronter/Updater
-       pip3 install -r requirements.txt
-       pyinstaller --onefile --icon=updater.ico updater.py
-       mkdir ../../Release/Updater
-       mv dist/updater.exe ../../Release/Updater/updater.exe       
+      uses: ./Fronter/.github/actions/build_frontend
+      with:
+        msbuild_path: "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe"
+        build_ConverterFrontend: false # already built in "Build solution" step
        
     - name: "Prepare release"
       if: ${{ github.event_name == 'push' }}
