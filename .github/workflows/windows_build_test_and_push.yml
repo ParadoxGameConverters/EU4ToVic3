@@ -39,6 +39,7 @@ jobs:
       with:
         msbuild_path: "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe"
         build_ConverterFrontend: false # already built in "Build solution" step
+        build_updater: true
        
     - name: "Prepare release"
       if: ${{ github.event_name == 'push' }}
