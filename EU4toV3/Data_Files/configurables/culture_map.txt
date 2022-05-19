@@ -1,747 +1,538 @@
 # Usage:
-# link = { vic2 = v2culture eu4 = eu4culture region = eu4region province = eu4provinceID owner = eu4tag }
-# multiples of all except vic2 are allowed.
+# link = { vic3 = v2culture eu4 = eu4culture region = eu4region province = eu4provinceID owner = eu4tag }
+# multiples of all except vic3 are allowed.
 # Note: regions can be anything that makes sense, ie. south_america_superregion, north_german_region, laponia_area
 # You can mix and match, ie. north_american_superregion + provinceid = 1240 will catch all of north america + hawaii.
-
-# HPM mappings must have a Vic2 entry in them as fallback if there is no HPM mod enabled!
+## DO NOT have separate colonial cultures, they will be re-generated anyway!
 
 # Jewish
-link = { vic2 = hulwud eu4 = ashkenazi eu4 = knaanic eu4 = magogic eu4 = yevanic eu4 = mizrahi eu4 = israeli eu4 = misrayim eu4 = sephardi eu4 = zarphatic eu4 = laaz eu4 = kaifeng eu4 = hulwud eu4 = camite region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = hulwud eu4 = berliner eu4 = styrian eu4 = tirolian eu4 = alamanni eu4 = lugii eu4 = quadi eu4 = marcoman eu4 = bastarnae eu4 = gepid eu4 = greuthungi eu4 = thuringian eu4 = varinian eu4 = rugii eu4 = vandalic eu4 = pommeranian eu4 = prussian eu4 = lower_saxon  eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = german eu4 = thuringian eu4 = colognian eu4 = old_gothic eu4 = baltendeutsche eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = feldern eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = ripuarianfranconian eu4 = schlesischdeutsch eu4 = schwabisch eu4 = alemanisch_colonial eu4 = amerikaner eu4 = prussian_colonial eu4 = berber_germanic eu4 = old_frankish eu4 = frankish eu4 = septimanian eu4 = aquitanian eu4 = neustrian eu4 = burgundian_frankish eu4 = austrasian eu4 = agilolfingian eu4 = ostrogothic eu4 = gepid eu4 = swiss eu4 = romansh eu4 = suisse region = north_america_superregion region = south_america_superregion region = andes_superregion region = central_america_superregion religion = jewish religion = karaite religion = samaritan }
-link = { vic2 = camite eu4 = ashkenazi eu4 = knaanic eu4 = magogic eu4 = yevanic eu4 = mizrahi eu4 = israeli eu4 = misrayim eu4 = sephardi eu4 = zarphatic eu4 = laaz eu4 = kaifeng eu4 = hulwud eu4 = camite region = oceania_superregion  region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = camite eu4 = berliner eu4 = styrian eu4 = tirolian eu4 = alamanni eu4 = lugii eu4 = quadi eu4 = marcoman eu4 = bastarnae eu4 = gepid eu4 = greuthungi eu4 = thuringian eu4 = varinian eu4 = rugii eu4 = vandalic eu4 = pommeranian eu4 = prussian eu4 = lower_saxon  eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = german eu4 = thuringian eu4 = colognian eu4 = old_gothic eu4 = baltendeutsche eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = feldern eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = ripuarianfranconian eu4 = schlesischdeutsch eu4 = schwabisch eu4 = alemanisch_colonial eu4 = amerikaner eu4 = prussian_colonial eu4 = berber_germanic eu4 = old_frankish eu4 = frankish eu4 = septimanian eu4 = aquitanian eu4 = neustrian eu4 = burgundian_frankish eu4 = austrasian eu4 = agilolfingian eu4 = ostrogothic eu4 = gepid eu4 = swiss eu4 = romansh eu4 = suisse region = oceania_superregion region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region religion = jewish religion = karaite religion = samaritan }
-link = { vic2 = ashkenazi eu4 = ashkenazi eu4 = jewish_colonial }
-link = { vic2 = knaanic eu4 = knaanic }
-link = { vic2 = magogic eu4 = magogic }
-link = { vic2 = yevanic eu4 = yevanic }
-link = { vic2 = mizrahi eu4 = mizrahi }
-link = { vic2 = israeli eu4 = israeli eu4 = aramaic }
-link = { vic2 = misrayim eu4 = misrayim }
-link = { vic2 = sephardic eu4 = sephardi eu4 = hebrew eu4 = mizrahim eu4 = mizrahi }
-link = { vic2 = zarphatic eu4 = zarphatic }
-link = { vic2 = laaz eu4 = laaz }
-link = { vic2 = kaifeng eu4 = kaifeng }
+link = { vic3 = ashkenazi eu4 = ashkenazi eu4 = jewish_colonial }
+link = { vic3 = knaanic eu4 = knaanic }
+link = { vic3 = magogic eu4 = magogic }
+link = { vic3 = yevanic eu4 = yevanic }
+link = { vic3 = mizrahi eu4 = mizrahi }
+link = { vic3 = israeli eu4 = israeli eu4 = aramaic }
+link = { vic3 = misrayim eu4 = misrayim }
+link = { vic3 = sephardic eu4 = sephardi eu4 = hebrew eu4 = mizrahim eu4 = mizrahi }
+link = { vic3 = zarphatic eu4 = zarphatic }
+link = { vic3 = laaz eu4 = laaz }
+link = { vic3 = kaifeng eu4 = kaifeng }
 
 # Germanic - North German, South German, Ashkenazi // Swiss - Swiss
-link = { vic2 = amerikaner eu4 = luxembourgish eu4 = alsatian eu4 = berliner eu4 = thuringian eu4 = colognian eu4 = varinian eu4 = rugii eu4 = vandalic eu4 = pommeranian eu4 = prussian eu4 = lower_saxon eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = german eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse eu4 = styrian eu4 = tirolian eu4 = quadi eu4 = marcoman eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = ripuarianfranconian eu4 = schlesischdeutsch eu4 = schwabisch eu4 = lugii eu4 = sudeten eu4 = feldern eu4 = baltendeutsche eu4 = amerikaner eu4 = alemanisch_colonial eu4 = prussian_colonial region = great_lakes_region region = northeast_america_region region = great_plains_region region = california_region region = southeast_america_region region = mississippi_region region = rio_grande_region }
-link = { vic2 = geheimnisdeutsch eu4 = luxembourgish eu4 = alsatian eu4 = berliner eu4 = thuringian eu4 = colognian eu4 = varinian eu4 = rugii eu4 = vandalic eu4 = pommeranian eu4 = prussian eu4 = lower_saxon eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = german eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse eu4 = styrian eu4 = tirolian eu4 = quadi eu4 = marcoman eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = ripuarianfranconian eu4 = schlesischdeutsch eu4 = schwabisch eu4 = lugii eu4 = sudeten eu4 = feldern eu4 = baltendeutsche eu4 = amerikaner eu4 = alemanisch_colonial eu4 = prussian_colonial region = hudson_bay_region region = canada_region region = cascadia_region }
-link = { vic2 = maximilianish eu4 = luxembourgish eu4 = alsatian eu4 = berliner eu4 = thuringian eu4 = colognian eu4 = varinian eu4 = rugii eu4 = vandalic eu4 = pommeranian eu4 = prussian eu4 = lower_saxon eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = german eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse eu4 = styrian eu4 = tirolian eu4 = quadi eu4 = marcoman eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = ripuarianfranconian eu4 = schlesischdeutsch eu4 = schwabisch eu4 = lugii eu4 = sudeten eu4 = feldern eu4 = baltendeutsche eu4 = amerikaner eu4 = alemanisch_colonial eu4 = prussian_colonial region = central_america_region region = carribeans_region }
-link = { vic2 = hunsrik eu4 = luxembourgish eu4 = alsatian eu4 = berliner eu4 = thuringian eu4 = colognian eu4 = varinian eu4 = rugii eu4 = vandalic eu4 = pommeranian eu4 = prussian eu4 = lower_saxon eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = german eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse eu4 = styrian eu4 = tirolian eu4 = quadi eu4 = marcoman eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = ripuarianfranconian eu4 = schlesischdeutsch eu4 = schwabisch eu4 = lugii eu4 = sudeten eu4 = feldern eu4 = baltendeutsche eu4 = amerikaner eu4 = alemanisch_colonial eu4 = prussian_colonial region = brazil_region }
-link = { vic2 = kleinwenedig eu4 = luxembourgish eu4 = alsatian eu4 = berliner eu4 = thuringian eu4 = colognian eu4 = varinian eu4 = rugii eu4 = vandalic eu4 = pommeranian eu4 = prussian eu4 = lower_saxon eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = german eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse eu4 = styrian eu4 = tirolian eu4 = quadi eu4 = marcoman eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = ripuarianfranconian eu4 = schlesischdeutsch eu4 = schwabisch eu4 = lugii eu4 = sudeten eu4 = feldern eu4 = baltendeutsche eu4 = amerikaner eu4 = alemanisch_colonial eu4 = prussian_colonial region = colombia_region }
-link = { vic2 = newswiss eu4 = luxembourgish eu4 = alsatian eu4 = berliner eu4 = thuringian eu4 = colognian eu4 = varinian eu4 = rugii eu4 = vandalic eu4 = pommeranian eu4 = prussian eu4 = lower_saxon eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = german eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse eu4 = styrian eu4 = tirolian eu4 = quadi eu4 = marcoman eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = ripuarianfranconian eu4 = schlesischdeutsch eu4 = schwabisch eu4 = lugii eu4 = sudeten eu4 = feldern eu4 = baltendeutsche eu4 = amerikaner eu4 = alemanisch_colonial eu4 = prussian_colonial region = peru_region }
-link = { vic2 = hilterian eu4 = luxembourgish eu4 = alsatian eu4 = berliner eu4 = thuringian eu4 = colognian eu4 = varinian eu4 = rugii eu4 = vandalic eu4 = pommeranian eu4 = prussian eu4 = lower_saxon eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = german eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse eu4 = styrian eu4 = tirolian eu4 = quadi eu4 = marcoman eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = ripuarianfranconian eu4 = schlesischdeutsch eu4 = schwabisch eu4 = lugii eu4 = sudeten eu4 = feldern eu4 = baltendeutsche eu4 = amerikaner eu4 = alemanisch_colonial eu4 = prussian_colonial region = la_plata_region region = upper_peru_region }
-link = { vic2 = sudreicher eu4 = luxembourgish eu4 = alsatian eu4 = berliner eu4 = thuringian eu4 = colognian eu4 = varinian eu4 = rugii eu4 = vandalic eu4 = pommeranian eu4 = prussian eu4 = lower_saxon eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = german eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse eu4 = styrian eu4 = tirolian eu4 = quadi eu4 = marcoman eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = ripuarianfranconian eu4 = schlesischdeutsch eu4 = schwabisch eu4 = lugii eu4 = sudeten eu4 = feldern eu4 = baltendeutsche region = oceania_superregion }
-link = { vic2 = schwarzreicher eu4 = luxembourgish eu4 = alsatian eu4 = berliner eu4 = thuringian eu4 = colognian eu4 = varinian eu4 = rugii eu4 = vandalic eu4 = pommeranian eu4 = prussian eu4 = lower_saxon eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = german eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse eu4 = styrian eu4 = tirolian eu4 = quadi eu4 = marcoman eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = ripuarianfranconian eu4 = schlesischdeutsch eu4 = schwabisch eu4 = lugii eu4 = sudeten eu4 = feldern eu4 = baltendeutsche region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = ashkenazi eu4 = luxembourgish eu4 = alsatian eu4 = berliner eu4 = thuringian eu4 = colognian eu4 = varinian eu4 = rugii eu4 = vandalic eu4 = pommeranian eu4 = prussian eu4 = lower_saxon eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = german eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse eu4 = styrian eu4 = tirolian eu4 = quadi eu4 = marcoman eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = ripuarianfranconian eu4 = schlesischdeutsch eu4 = schwabisch eu4 = lugii eu4 = sudeten eu4 = feldern eu4 = baltendeutsche religion = jewish }
-link = { vic2 = north_german eu4 = luxembourgish eu4 = alsatian eu4 = berliner eu4 = thuringian eu4 = colognian eu4 = varinian eu4 = rugii eu4 = pommeranian eu4 = prussian eu4 = lower_saxon eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = ripuarianfranconian }
-link = { vic2 = swiss eu4 = german region = switzerland_area region = romandie_area }
-link = { vic2 = swiss eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse }
-link = { vic2 = slovene eu4 = austrian region = carinthia_area }
-link = { vic2 = south_german eu4 = styrian eu4 = tirolian eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = schwabisch }
-link = { vic2 = overnissian eu4 = lugii eu4 = feldern eu4 = baltendeutsche eu4 = schlesischdeutsch }
-link = { vic2 = boehmisch eu4 = quadi eu4 = marcoman }
-# generic CK2 german split
-link = { vic2 = boehmisch eu4 = german eu4 = sudeten eu4 = vandalic region = carpathia_region region = bohemia_area region = moravia_area }
-link = { vic2 = north_german eu4 = german eu4 = vandalic eu4 = sudeten region = north_german_region }
-link = { vic2 = south_german eu4 = german eu4 = vandalic eu4 = sudeten region = south_german_region }
-link = { vic2 = overnissian eu4 = german eu4 = vandalic eu4 = sudeten region = poland_region }
-link = { vic2 = german eu4 = german eu4 = vandalic eu4 = sudeten }
+@eu4_north_german = "eu4 = luxembourgish eu4 = alsatian eu4 = berliner eu4 = thuringian eu4 = colognian eu4 = varinian eu4 = rugii eu4 = pommeranian eu4 = prussian eu4 = lower_saxon eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = ripuarianfranconian eu4 = sudeten"
+@eu4_south_german = "eu4 = styrian eu4 = tirolian eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = schwabisch eu4 = quadi eu4 = marcoman"
+@ck3_germani = "eu4 = lugii eu4 = feldern eu4 = baltendeutsche eu4 = schlesischdeutsch"
+
+link = { vic3 = ashkenazi @eu4_north_german @eu4_south_german @ck3_germani eu4 = german religion = jewish }
+link = { vic3 = north_german @eu4_north_german }
+link = { vic3 = south_german @eu4_south_german }
+link = { vic3 = north_german eu4 = german @ck3_germani religion = protestant }
+link = { vic3 = south_german eu4 = german @ck3_germani religion = catholic }
+link = { vic3 = weder_german eu4 = german eu4 = vandalic } # Fallback
+link = { vic3 = swiss eu4 = german region = switzerland_area region = romandie_area }
+link = { vic3 = swiss eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse }
 
 # Benelux - Dutch, Flemish, Wallonian
-link = { vic2 = boer eu4 = dutch eu4 = flemish eu4 = batavian eu4 = frisian eu4 = wallonian eu4 = wallonian_UKS region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = boer eu4 = afrikaner }
-link = { vic2 = surinamian eu4 = dutch eu4 = flemish eu4 = batavian eu4 = frisian eu4 = wallonian eu4 = wallonian_UKS region = colombia_region }
-link = { vic2 = mauritsstadtian eu4 = dutch eu4 = flemish eu4 = batavian eu4 = frisian eu4 = wallonian eu4 = wallonian_UKS region = brazil_region }
-link = { vic2 = grootdesseyn eu4 = dutch eu4 = flemish eu4 = batavian eu4 = frisian eu4 = wallonian eu4 = wallonian_UKS region = south_america_superregion region = andes_superregion }
-link = { vic2 = nieuwereld eu4 = dutch eu4 = flemish eu4 = batavian eu4 = frisian eu4 = wallonian eu4 = wallonian_UKS region = north_america_superregion region = central_america_superregion }
-link = { vic2 = nieuwereld eu4 = dutch_colonial }
-link = { vic2 = zuidelijk eu4 = dutch eu4 = flemish eu4 = batavian eu4 = frisian eu4 = wallonian eu4 = wallonian_UKS region = oceania_superregion }
-link = { vic2 = zuidelijk eu4 = tasmanian }
-link = { vic2 = dutch eu4 = dutch eu4 = frisian eu4 = batavian }
-link = { vic2 = flemish eu4 = flemish eu4 = brabantian }
+link = { vic3 = dutch eu4 = dutch eu4 = frisian eu4 = batavian eu4 = afrikaner eu4 = tasmanian }
+link = { vic3 = flemish eu4 = flemish eu4 = brabantian }
 
 # Scandinavian - Swedish, Danish, Norwegian, Icelandic, Sami
-## Colonialism time
-link = { vic2 = nyasverigian eu4 = holmgardrian eu4 = norn_culture eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = geat_culture eu4 = gutnish_culture eu4 = jamatland_culture eu4 = gotar eu4 = gutnish eu4 = danish eu4 = faroese eu4 = scanian eu4 = jutish eu4 = norwegian eu4 = trondersk eu4 = vestlandsk eu4 = norse eu4 = icelandic eu4 = elsinorian eu4 = anglo_norse eu4 = norse_gaelic eu4 = scandinavian_colonial eu4 = swedish_colonial region = great_lakes_region region = northeast_america_region region = great_plains_region region = california_region }
-link = { vic2 = bomullborgar eu4 = holmgardrian eu4 = norn_culture eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = geat_culture eu4 = gutnish_culture eu4 = jamatland_culture eu4 = gotar eu4 = gutnish eu4 = danish eu4 = faroese eu4 = scanian eu4 = jutish eu4 = norwegian eu4 = trondersk eu4 = vestlandsk eu4 = norse eu4 = icelandic eu4 = elsinorian eu4 = anglo_norse eu4 = norse_gaelic eu4 = scandinavian_colonial eu4 = swedish_colonial region = southeast_america_region region = mississippi_region }
-link = { vic2 = vinlander eu4 = holmgardrian eu4 = norn_culture eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = geat_culture eu4 = gutnish_culture eu4 = jamatland_culture eu4 = gotar eu4 = gutnish eu4 = danish eu4 = faroese eu4 = scanian eu4 = jutish eu4 = norwegian eu4 = trondersk eu4 = vestlandsk eu4 = norse eu4 = icelandic eu4 = elsinorian eu4 = anglo_norse eu4 = norse_gaelic eu4 = scandinavian_colonial eu4 = swedish_colonial region = hudson_bay_region region = canada_region region = cascadia_region }
-link = { vic2 = bundsfoervant eu4 = holmgardrian eu4 = norn_culture eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = geat_culture eu4 = gutnish_culture eu4 = jamatland_culture eu4 = gotar eu4 = gutnish eu4 = danish eu4 = faroese eu4 = scanian eu4 = jutish eu4 = norwegian eu4 = trondersk eu4 = vestlandsk eu4 = norse eu4 = icelandic eu4 = elsinorian eu4 = anglo_norse eu4 = norse_gaelic eu4 = scandinavian_colonial eu4 = swedish_colonial region = rio_grande_region }
-link = { vic2 = hjartnaaeter eu4 = holmgardrian eu4 = norn_culture eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = geat_culture eu4 = gutnish_culture eu4 = jamatland_culture eu4 = gotar eu4 = gutnish eu4 = danish eu4 = faroese eu4 = scanian eu4 = jutish eu4 = norwegian eu4 = trondersk eu4 = vestlandsk eu4 = norse eu4 = icelandic eu4 = elsinorian eu4 = anglo_norse eu4 = norse_gaelic eu4 = scandinavian_colonial eu4 = swedish_colonial region = central_america_region region = carribeans_region }
-link = { vic2 = raudhskogarling eu4 = holmgardrian eu4 = norn_culture eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = geat_culture eu4 = gutnish_culture eu4 = jamatland_culture eu4 = gotar eu4 = gutnish eu4 = danish eu4 = faroese eu4 = scanian eu4 = jutish eu4 = norwegian eu4 = trondersk eu4 = vestlandsk eu4 = norse eu4 = icelandic eu4 = elsinorian eu4 = anglo_norse eu4 = norse_gaelic eu4 = scandinavian_colonial eu4 = swedish_colonial region = brazil_region }
-link = { vic2 = hvitrduptling eu4 = holmgardrian eu4 = norn_culture eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = geat_culture eu4 = gutnish_culture eu4 = jamatland_culture eu4 = gotar eu4 = gutnish eu4 = danish eu4 = faroese eu4 = scanian eu4 = jutish eu4 = norwegian eu4 = trondersk eu4 = vestlandsk eu4 = norse eu4 = icelandic eu4 = elsinorian eu4 = anglo_norse eu4 = norse_gaelic eu4 = scandinavian_colonial eu4 = swedish_colonial region = colombia_region }
-link = { vic2 = guldfjallling eu4 = holmgardrian eu4 = norn_culture eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = geat_culture eu4 = gutnish_culture eu4 = jamatland_culture eu4 = gotar eu4 = gutnish eu4 = danish eu4 = faroese eu4 = scanian eu4 = jutish eu4 = norwegian eu4 = trondersk eu4 = vestlandsk eu4 = norse eu4 = icelandic eu4 = elsinorian eu4 = anglo_norse eu4 = norse_gaelic eu4 = scandinavian_colonial eu4 = swedish_colonial region = peru_region }
-link = { vic2 = silfrvazling eu4 = holmgardrian eu4 = norn_culture eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = geat_culture eu4 = gutnish_culture eu4 = jamatland_culture eu4 = gotar eu4 = gutnish eu4 = danish eu4 = faroese eu4 = scanian eu4 = jutish eu4 = norwegian eu4 = trondersk eu4 = vestlandsk eu4 = norse eu4 = icelandic eu4 = elsinorian eu4 = anglo_norse eu4 = norse_gaelic eu4 = scandinavian_colonial eu4 = swedish_colonial region = la_plata_region region = upper_peru_region }
-link = { vic2 = vinlander eu4 = scandinavian_colonial eu4 = swedish_colonial } # Fallback
-link = { vic2 = sydlig eu4 = holmgardrian eu4 = norn_culture eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = geat_culture eu4 = gutnish_culture eu4 = jamatland_culture eu4 = gotar eu4 = gutnish eu4 = danish eu4 = faroese eu4 = scanian eu4 = jutish eu4 = norwegian eu4 = trondersk eu4 = vestlandsk eu4 = norse eu4 = icelandic eu4 = elsinorian eu4 = anglo_norse eu4 = norse_gaelic region = oceania_superregion }
-link = { vic2 = svart eu4 = holmgardrian eu4 = norn_culture eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = geat_culture eu4 = gutnish_culture eu4 = jamatland_culture eu4 = gotar eu4 = gutnish eu4 = danish eu4 = faroese eu4 = scanian eu4 = jutish eu4 = norwegian eu4 = trondersk eu4 = vestlandsk eu4 = norse eu4 = icelandic eu4 = elsinorian eu4 = anglo_norse eu4 = norse_gaelic region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-##Split of Norse and creation of Icelandic
-link = { vic2 = danish eu4 = norse region = skaneland_area region = jutland_area region = denmark_area  region = north_german_region }
-link = { vic2 = norwegian eu4 = norse region = northern_norway region = eastern_norway region = western_norway }
-link = { vic2 = icelandic eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = danish eu4 = faroese eu4 = norwegian eu4 = norse region = subarctic_islands_area }
-link = { vic2 = swedish eu4 = norse region = svealand_area region = norrland_area region = gotaland_area region = finland_area region = bothnia_area region = laponia_area region = vastra_gotaland_area region = ostra_svealand_area }
-link = { vic2 = danish eu4 = danish eu4 = faroese eu4 = scanian eu4 = jutish eu4 = angli }
-link = { vic2 = norwegian eu4 = norwegian eu4 = anglo_norse eu4 = trondersk eu4 = vestlandsk }
-link = { vic2 = swedish eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = geat_culture eu4 = gutnish_culture eu4 = jamatland_culture eu4 = gotar eu4 = gutnish eu4 = swedish_colonial }
-link = { vic2 = sami eu4 = sapmi eu4 = lappish }
-link = { vic2 = elsinorian eu4 = elsinorian eu4 = anglo_norse eu4 = norse_gaelic eu4 = norn_culture }
-link = { vic2 = elsinorian eu4 = norse region = british_isles_region }
-link = { vic2 = rollonian eu4 = norse region = france_region }
-link = { vic2 = holmgardr eu4 = holmgardrian }
-link = { vic2 = icelandic eu4 = icelandic }
-link = { vic2 = wandernorse eu4 = norse } # Fallback for *weird things*
+##Split of Norse
+link = { vic3 = danish eu4 = norse region = skaneland_area region = jutland_area region = denmark_area  region = north_german_region }
+link = { vic3 = norwegian eu4 = norse region = northern_norway region = eastern_norway region = western_norway }
+link = { vic3 = icelandic eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = danish eu4 = faroese eu4 = norwegian eu4 = norse region = subarctic_islands_area }
+link = { vic3 = swedish eu4 = norse region = svealand_area region = norrland_area region = gotaland_area region = finland_area region = bothnia_area region = laponia_area region = vastra_gotaland_area region = ostra_svealand_area }
+## Others
+link = { vic3 = danish eu4 = danish eu4 = faroese eu4 = scanian eu4 = jutish eu4 = angli }
+link = { vic3 = norwegian eu4 = norwegian eu4 = anglo_norse eu4 = trondersk eu4 = vestlandsk eu4 = scandinavian_colonial eu4 = swedish_colonial }
+link = { vic3 = swedish eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = geat_culture eu4 = gutnish_culture eu4 = jamatland_culture eu4 = gotar eu4 = gutnish eu4 = swedish_colonial }
+link = { vic3 = sami eu4 = sapmi eu4 = lappish }
+link = { vic3 = elsinorian eu4 = elsinorian eu4 = anglo_norse eu4 = norse_gaelic eu4 = norn_culture }
+link = { vic3 = elsinorian eu4 = norse region = british_isles_region }
+link = { vic3 = rollonian eu4 = norse region = france_region }
+link = { vic3 = holmgardr eu4 = holmgardrian }
+link = { vic3 = icelandic eu4 = icelandic }
+link = { vic3 = wandernorse eu4 = norse } # Fallback for *weird things*
 
 # British - British, Irish
 # American - Yankee, Dixie, Texan
-# Neo-European - Anglo-Canadian
-link = { vic2 = yankee eu4 = english eu4 = northumbrian eu4 = american eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon eu4 = scottish eu4 = hibernic region = great_lakes_region region = northeast_america_region region = great_plains_region region = california_region }
-link = { vic2 = dixie eu4 = english eu4 = northumbrian eu4 = american eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon eu4 = scottish eu4 = hibernic region = southeast_america_region region = mississippi_region }
-link = { vic2 = yankee eu4 = american eu4 = british_colonial } # Fallback
-link = { vic2 = anglo_canadian eu4 = english eu4 = northumbrian eu4 = american eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon eu4 = scottish eu4 = hibernic region = hudson_bay_region region = canada_region region = cascadia_region }
-link = { vic2 = australian eu4 = english eu4 = northumbrian eu4 = american eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon eu4 = scottish eu4 = hibernic region = australia_region region = oceania_superregion }
-link = { vic2 = texan eu4 = english eu4 = northumbrian eu4 = american eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon eu4 = scottish eu4 = hibernic region = rio_grande_region }
-link = { vic2 = meashighcaw eu4 = english eu4 = northumbrian eu4 = american eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon eu4 = scottish eu4 = hibernic region = central_america_region region = carribeans_region }
-link = { vic2 = redwoodian eu4 = english eu4 = northumbrian eu4 = american eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon eu4 = scottish eu4 = hibernic region = brazil_region }
-link = { vic2 = guyanese eu4 = english eu4 = northumbrian eu4 = american eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon eu4 = scottish eu4 = hibernic region = colombia_region }
-link = { vic2 = incacunapic eu4 = english eu4 = northumbrian eu4 = american eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon eu4 = scottish eu4 = hibernic region = peru_region }
-link = { vic2 = falklander eu4 = english eu4 = northumbrian eu4 = american eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon eu4 = scottish eu4 = hibernic region = la_plata_region region = upper_peru_region }
-link = { vic2 = anglo_african eu4 = english eu4 = northumbrian eu4 = american eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon eu4 = scottish eu4 = hibernic region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = anglo_african eu4 = african }
-link = { vic2 = english eu4 = english eu4 = northumbrian }
-link = { vic2 = scottish eu4 = scottish eu4 = hibernic eu4 = orkney eu4 = shetland eu4 = lowland_scottish }
-link = { vic2 = anglo_saxon eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon }
-link = { vic2 = pictish eu4 = pictish eu4 = scottish_celtic eu4 = manx eu4 = highland_scottish eu4 = gaelic_scottish } # Pictish = Scottish Gaelic
-link = { vic2 = british eu4 = northern_e eu4 = south_american }
-link = { vic2 = yankee eu4 = american eu4 = antillean }
-link = { vic2 = anglo_canadian eu4 = columbian }
-link = { vic2 = australian eu4 = australian }
-link = { vic2 = texan eu4 = central_american }
+link = { vic3 = british eu4 = english eu4 = northumbrian eu4 = american eu4 = british_colonial eu4 = african eu4 = northern_e eu4 = south_american eu4 = american eu4 = antillean eu4 = columbian eu4 = australian eu4 = central_american }
+link = { vic3 = scottish eu4 = scottish eu4 = hibernic eu4 = orkney eu4 = shetland eu4 = lowland_scottish }
+link = { vic3 = anglo_saxon eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon }
+link = { vic3 = pictish eu4 = pictish }
+link = { vic3 = gaelic eu4 = scottish_celtic eu4 = manx eu4 = highland_scottish eu4 = gaelic_scottish }
 
 # Celtic - welsh, irish
-link = { vic2 = nova_scotian eu4 = english eu4 = northumbrian eu4 = american eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon eu4 = scottish eu4 = hibernic region = hudson_bay_region region = canada_region region = cascadia_region }
-link = { vic2 = y_wladfan eu4 = english eu4 = northumbrian eu4 = american eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon eu4 = scottish eu4 = hibernic region = la_plata_region region = upper_peru_region }
-link = { vic2 = celtic_american eu4 = irish eu4 = gallawa eu4 = gaul eu4 = welsh eu4 = welsh_celtic eu4 = cornish eu4 = gaelic_scottish eu4 = pictish eu4 = belgian eu4 = belgae eu4 = gaulish eu4 = gallic eu4 = celtiberian eu4 = galician_celtic eu4 = scordiscian eu4 = celtic_pannonian eu4 = gaelic_colonial eu4 = scottish_celtic eu4 = manx eu4 = orkney eu4 = shetland eu4 = highland_scottish eu4 = gaelic_scottish eu4 = scaldic eu4 = treverian eu4 = auscian eu4 = armorican eu4 = lugdunian eu4 = lutetian eu4 = neustrian eu4 = arelatian eu4 = helvetian eu4 = lepontic eu4 = baetican eu4 = emporionian eu4 = manzanarian eu4 = cantabric eu4 = tagonian eu4 = noric eu4 = vindelician eu4 = multavian region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = celtic_australian eu4 = irish eu4 = gallawa eu4 = gaul eu4 = welsh eu4 = welsh_celtic eu4 = cornish eu4 = gaelic_scottish eu4 = pictish eu4 = belgian eu4 = belgae eu4 = gaulish eu4 = gallic eu4 = celtiberian eu4 = galician_celtic eu4 = scordiscian eu4 = celtic_pannonian eu4 = gaelic_colonial eu4 = scottish_celtic eu4 = manx eu4 = orkney eu4 = shetland eu4 = highland_scottish eu4 = gaelic_scottish eu4 = scaldic eu4 = treverian eu4 = auscian eu4 = armorican eu4 = lugdunian eu4 = lutetian eu4 = neustrian eu4 = arelatian eu4 = helvetian eu4 = lepontic eu4 = baetican eu4 = emporionian eu4 = manzanarian eu4 = cantabric eu4 = tagonian eu4 = noric eu4 = vindelician eu4 = multavian region = oceania_superregion }
-link = { vic2 = celtic_african eu4 = irish eu4 = gallawa eu4 = gaul eu4 = welsh eu4 = welsh_celtic eu4 = cornish eu4 = gaelic_scottish eu4 = pictish eu4 = belgian eu4 = belgae eu4 = gaulish eu4 = gallic eu4 = celtiberian eu4 = galician_celtic eu4 = scordiscian eu4 = celtic_pannonian eu4 = gaelic_colonial eu4 = scottish_celtic eu4 = manx eu4 = orkney eu4 = shetland eu4 = highland_scottish eu4 = gaelic_scottish eu4 = scaldic eu4 = treverian eu4 = auscian eu4 = armorican eu4 = lugdunian eu4 = lutetian eu4 = neustrian eu4 = arelatian eu4 = helvetian eu4 = lepontic eu4 = baetican eu4 = emporionian eu4 = manzanarian eu4 = cantabric eu4 = tagonian eu4 = noric eu4 = vindelician eu4 = multavian region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = welsh eu4 = welsh eu4 = welsh_celtic eu4 = cornish eu4 = east_welsh }
-link = { vic2 = irish eu4 = irish eu4 = gallawa eu4 = hiberno_norman }
-link = { vic2 = belgian eu4 = belgian eu4 = belgae eu4 = scaldic eu4 = treverian }
-link = { vic2 = gaulish eu4 = gaulish eu4 = gallic eu4 = auscian eu4 = armorican eu4 = lutetian eu4 = neustrian }
-link = { vic2 = alpine eu4 = lugdunian eu4 = arelatian eu4 = helvetian eu4 = lepontic }
-link = { vic2 = celtiberian eu4 = celtiberian eu4 = galician_celtic eu4 = baetican eu4 = emporionian eu4 = manzanarian eu4 = cantabric eu4 = tagonian }
-link = { vic2 = noric eu4 = scordiscian eu4 = celtic_pannonian eu4 = noric eu4 = vindelician eu4 = multavian }
+link = { vic3 = welsh eu4 = welsh eu4 = welsh_celtic eu4 = cornish eu4 = east_welsh }
+link = { vic3 = irish eu4 = irish eu4 = gallawa eu4 = hiberno_norman }
+link = { vic3 = belgian eu4 = belgian eu4 = belgae eu4 = scaldic eu4 = treverian }
+link = { vic3 = gaulish eu4 = gaulish eu4 = gallic eu4 = auscian eu4 = armorican eu4 = lutetian eu4 = neustrian }
+link = { vic3 = alpine eu4 = lugdunian eu4 = arelatian eu4 = helvetian eu4 = lepontic }
+link = { vic3 = celtiberian eu4 = celtiberian eu4 = galician_celtic eu4 = baetican eu4 = emporionian eu4 = manzanarian eu4 = cantabric eu4 = tagonian }
+link = { vic3 = noric eu4 = scordiscian eu4 = celtic_pannonian eu4 = noric eu4 = vindelician eu4 = multavian }
 
 # Latin - maltese, lombard, umbrian, sicilian, ligurian, piedmontese, romagnan, sardinian, tuscan, venetian
-#Split of the Roman Empire
-link = { vic2 = algonquish eu4 = roman eu4 = britannian eu4 = pannonian eu4 = graecus eu4 = latin eu4 = helvetian eu4 = noric eu4 = latin_colonial eu4 = romano_gallic eu4 = romano_british eu4 = salinatorian eu4 = bazramani eu4 = euxinian eu4 = xliponian region = great_lakes_region region = northeast_america_region region = great_plains_region region = california_region }
-link = { vic2 = calusan eu4 = roman eu4 = britannian eu4 = pannonian eu4 = graecus eu4 = latin eu4 = helvetian eu4 = noric eu4 = latin_colonial eu4 = romano_gallic eu4 = romano_british eu4 = salinatorian eu4 = bazramani eu4 = euxinian eu4 = xliponian region = southeast_america_region region = mississippi_region }
-link = { vic2 = thulean eu4 = roman eu4 = britannian eu4 = pannonian eu4 = graecus eu4 = latin eu4 = helvetian eu4 = noric eu4 = latin_colonial eu4 = romano_gallic eu4 = romano_british eu4 = salinatorian eu4 = bazramani eu4 = euxinian eu4 = xliponian region = hudson_bay_region region = canada_region region = cascadia_region }
-link = { vic2 = arcansian eu4 = roman eu4 = britannian eu4 = pannonian eu4 = graecus eu4 = latin eu4 = helvetian eu4 = noric eu4 = latin_colonial eu4 = romano_gallic eu4 = romano_british eu4 = salinatorian eu4 = bazramani eu4 = euxinian eu4 = xliponian region = rio_grande_region }
-link = { vic2 = mesican eu4 = roman eu4 = britannian eu4 = pannonian eu4 = graecus eu4 = latin eu4 = helvetian eu4 = noric eu4 = latin_colonial eu4 = romano_gallic eu4 = romano_british eu4 = salinatorian eu4 = bazramani eu4 = euxinian eu4 = xliponian region = central_america_region region = carribeans_region }
-link = { vic2 = garanian eu4 = roman eu4 = britannian eu4 = pannonian eu4 = graecus eu4 = latin eu4 = helvetian eu4 = noric eu4 = latin_colonial eu4 = romano_gallic eu4 = romano_british eu4 = salinatorian eu4 = bazramani eu4 = euxinian eu4 = xliponian region = brazil_region }
-link = { vic2 = aravacian eu4 = roman eu4 = britannian eu4 = pannonian eu4 = graecus eu4 = latin eu4 = helvetian eu4 = noric eu4 = latin_colonial eu4 = romano_gallic eu4 = romano_british eu4 = salinatorian eu4 = bazramani eu4 = euxinian eu4 = xliponian region = colombia_region }
-link = { vic2 = cetuan eu4 = roman eu4 = britannian eu4 = pannonian eu4 = graecus eu4 = latin eu4 = helvetian eu4 = noric eu4 = latin_colonial eu4 = romano_gallic eu4 = romano_british eu4 = salinatorian eu4 = bazramani eu4 = euxinian eu4 = xliponian region = peru_region }
-link = { vic2 = harpeian eu4 = roman eu4 = britannian eu4 = pannonian eu4 = graecus eu4 = latin eu4 = helvetian eu4 = noric eu4 = latin_colonial eu4 = romano_gallic eu4 = romano_british eu4 = salinatorian eu4 = bazramani eu4 = euxinian eu4 = xliponian region = la_plata_region region = upper_peru_region }
-link = { vic2 = australus eu4 = roman eu4 = britannian eu4 = latin eu4 = pannonian eu4 = graecus eu4 = helvetian eu4 = noric eu4 = latin_colonial eu4 = romano_gallic eu4 = romano_british eu4 = salinatorian eu4 = bazramani eu4 = euxinian eu4 = xliponian region = oceania_superregion }
-link = { vic2 = afer eu4 = roman eu4 = britannian eu4 = pannonian eu4 = graecus eu4 = latin eu4 = helvetian eu4 = noric eu4 = latin_colonial eu4 = romano_gallic eu4 = romano_british eu4 = salinatorian eu4 = bazramani eu4 = euxinian eu4 = xliponian region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = brithenig eu4 = roman region = british_isles_region }
-link = { vic2 = gaul eu4 = roman region = france_region region = low_countries_region }
-link = { vic2 = laessin eu4 = roman region = north_german_region region = south_german_region region = baltic_region region = scandinavia_region region = balkan_region }
-link = { vic2 = wenedyk eu4 = roman region = poland_region region = ruthenia_region region = crimea_region }
-link = { vic2 = spanish eu4 = roman region = iberia_region }
-link = { vic2 = romanian eu4 = roman region = carpathia_region }
-link = { vic2 = euxinian eu4 = roman region = northern_greece_area region = morea_area region = thrace_area }
-link = { vic2 = assyrian eu4 = roman region = mashriq_region region = anatolia_region }
-link = { vic2 = bazramani eu4 = roman region = persia_region region = caucasia_region region = arabia_region }
-link = { vic2 = aromanian eu4 = roman region = balkan_region }
-link = { vic2 = maghreb_arabic eu4 = roman region = egypt_region region = maghreb_region }
-link = { vic2 = brithenig eu4 = romano_british eu4 = britannian }
-link = { vic2 = hungarian eu4 = pannonian }
-link = { vic2 = euxinian eu4 = graecus eu4 = euxinian eu4 = xliponian }
-link = { vic2 = maghreb_arabic eu4 = salinatorian eu4 = african_romance eu4 = aegyptian }
-link = { vic2 = bazramani eu4 = arabus eu4 = romano_persian eu4 = aramean eu4 = bazramani }
-link = { vic2 = gaul eu4 = romano_gallic eu4 = gaul eu4 = gaulic }
-link = { vic2 = laessin eu4 = helvetian eu4 = noric eu4 = theodisc eu4 = hyperborean }
-link = { vic2 = wenedyk eu4 = tracki eu4 = alzzecio eu4 = wenedyk } #Slavo-Roman
-link = { vic2 = latin eu4 = roman eu4 = latin_colonial } #Should be only Italy, but who can be sure?
+link = { vic3 = brithenig eu4 = roman region = british_isles_region }
+link = { vic3 = gaul eu4 = roman region = france_region region = low_countries_region }
+link = { vic3 = laessin eu4 = roman region = north_german_region region = south_german_region region = baltic_region region = scandinavia_region region = balkan_region }
+link = { vic3 = wenedyk eu4 = roman region = poland_region region = ruthenia_region region = crimea_region }
+link = { vic3 = spanish eu4 = roman region = iberia_region }
+link = { vic3 = romanian eu4 = roman region = carpathia_region }
+link = { vic3 = euxinian eu4 = roman region = northern_greece_area region = morea_area region = thrace_area }
+link = { vic3 = assyrian eu4 = roman region = mashriq_region region = anatolia_region }
+link = { vic3 = bazramani eu4 = roman region = persia_region region = caucasia_region region = arabia_region }
+link = { vic3 = aromanian eu4 = roman region = balkan_region }
+link = { vic3 = maghreb_arabic eu4 = roman region = egypt_region region = maghreb_region }
+link = { vic3 = brithenig eu4 = romano_british eu4 = britannian }
+link = { vic3 = hungarian eu4 = pannonian }
+link = { vic3 = euxinian eu4 = graecus eu4 = euxinian eu4 = xliponian }
+link = { vic3 = maghreb_arabic eu4 = salinatorian eu4 = african_romance eu4 = aegyptian }
+link = { vic3 = bazramani eu4 = arabus eu4 = romano_persian eu4 = aramean eu4 = bazramani }
+link = { vic3 = gaul eu4 = romano_gallic eu4 = gaul eu4 = gaulic }
+link = { vic3 = laessin eu4 = helvetian eu4 = noric eu4 = theodisc eu4 = hyperborean }
+link = { vic3 = wenedyk eu4 = tracki eu4 = alzzecio eu4 = wenedyk } #Slavo-Roman
+link = { vic3 = latin eu4 = roman eu4 = latin_colonial } #Should be only Italy, but who can be sure?
 
 # Punic
-link = { vic2 = punic_american eu4 = carthaginian eu4 = ythalonim eu4 = phoenician eu4 = ualonuth eu4 = sicorathi eu4 = symacom eu4 = ysthyalm eu4 = sythchy eu4 = ynnocho eu4 = mlachthi eu4 = inythmum eu4 = gadolite eu4 = bythlimmoth eu4 = sidonian eu4 = taliaite eu4 = lacanite eu4 = epicrateian eu4 = pmpese eu4 = ythbynuthi eu4 = ychibarku eu4 = liphocaneth eu4 = mysehi region = central_america_superregion region = north_america_superregion region = south_america_superregion region = andes_superregion }
-link = { vic2 = punic_australian eu4 = carthaginian eu4 = ythalonim eu4 = phoenician eu4 = ualonuth eu4 = sicorathi eu4 = symacom eu4 = ysthyalm eu4 = sythchy eu4 = ynnocho eu4 = mlachthi eu4 = inythmum eu4 = gadolite eu4 = bythlimmoth eu4 = sidonian eu4 = taliaite eu4 = lacanite eu4 = epicrateian eu4 = pmpese eu4 = ythbynuthi eu4 = ychibarku eu4 = liphocaneth eu4 = mysehi region = oceania_superregion }
-link = { vic2 = carthaginian eu4 = carthaginian eu4 = punic }
-link = { vic2 = ythalonim eu4 = ythalonim }
-link = { vic2 = ualonuth eu4 = ualonuth }
-link = { vic2 = sicorathi eu4 = sicorathi }
-link = { vic2 = symacom eu4 = symacom }
-link = { vic2 = ysthyalm eu4 = ysthyalm }
-link = { vic2 = sythchy eu4 = sythchy }
-link = { vic2 = ynnocho eu4 = ynnocho }
-link = { vic2 = mlachthi eu4 = mlachthi }
-link = { vic2 = inythmum eu4 = inythmum }
-link = { vic2 = gadolite eu4 = gadolite }
-link = { vic2 = bythlimmoth eu4 = bythlimmoth }
-link = { vic2 = sidonian eu4 = sidonian }
-link = { vic2 = taliaite eu4 = taliaite }
-link = { vic2 = lacanite eu4 = lacanite }
-link = { vic2 = epicrateian eu4 = epicrateian }
-link = { vic2 = pmpese eu4 = pmpese }
-link = { vic2 = ythbynuthi eu4 = ythbynuthi }
-link = { vic2 = ychibarku eu4 = ychibarku }
-link = { vic2 = liphocaneth eu4 = liphocaneth }
-link = { vic2 = mysehi eu4 = mysehi }
-link = { vic2 = phoenician eu4 = phoenician }
+link = { vic3 = carthaginian eu4 = carthaginian eu4 = punic }
 
 # Varangian
-link = { vic2 = varangian_american eu4 = miklagardrian eu4 = varangian eu4 = mena_german region = central_america_superregion region = north_america_superregion region = south_america_superregion region = andes_superregion }
-link = { vic2 = varangian_australian eu4 = miklagardrian eu4 = varangian eu4 = mena_german region = oceania_superregion }
-link = { vic2 = varangian_african eu4 = miklagardrian eu4 = varangian eu4 = mena_german region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = varangian eu4 = varangian eu4 = miklagardrian }
-link = { vic2 = nehwaustronijaz eu4 = mena_german eu4 = berber_germanic }
+link = { vic3 = varangian eu4 = varangian eu4 = miklagardrian }
+link = { vic3 = nehwaustronijaz eu4 = mena_german eu4 = berber_germanic }
 
 # Dytic
-link = { vic2 = dytic_american eu4 = prettanian eu4 = hyperborean_greek eu4 = gaulish_greek eu4 = spanish_greek eu4 = german_greek region = central_america_superregion region = north_america_superregion region = south_america_superregion region = andes_superregion }
-link = { vic2 = dytic_australian eu4 = prettanian eu4 = hyperborean_greek eu4 = gaulish_greek eu4 = spanish_greek eu4 = german_greek region = oceania_superregion }
-link = { vic2 = dytic_african eu4 = prettanian eu4 = hyperborean_greek eu4 = gaulish_greek eu4 = spanish_greek eu4 = german_greek region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = prettanian eu4 = prettanian }
-link = { vic2 = adelphic eu4 = hyperborean_greek eu4 = german_greek }
-link = { vic2 = spaniolic eu4 = spanish_greek }
-link = { vic2 = galatian eu4 = gaulish_greek }
+link = { vic3 = prettanian eu4 = prettanian }
+link = { vic3 = adelphic eu4 = hyperborean_greek eu4 = german_greek }
+link = { vic3 = spaniolic eu4 = spanish_greek }
+link = { vic3 = galatian eu4 = gaulish_greek }
 
 # Hittite
-link = { vic2 = hittite_american eu4 = luwian eu4 = lydian eu4 = lycian eu4 = hittite eu4 = phrygian eu4 = isaurian eu4 = paphlagonian region = central_america_superregion region = north_america_superregion region = south_america_superregion region = andes_superregion }
-link = { vic2 = hittite_australian eu4 = luwian eu4 = lydian eu4 = lycian eu4 = hittite eu4 = phrygian eu4 = isaurian eu4 = paphlagonian region = oceania_superregion }
-link = { vic2 = luwian eu4 = luwian eu4 = paphlagonian }
-link = { vic2 = lydian eu4 = lydian eu4 = lycian }
-link = { vic2 = hittite_g eu4 = hittite eu4 = cilician eu4 = isaurian }
-link = { vic2 = phrygian eu4 = phrygian }
+link = { vic3 = luwian eu4 = luwian eu4 = paphlagonian }
+link = { vic3 = lydian eu4 = lydian eu4 = lycian }
+link = { vic3 = hittite_g eu4 = hittite eu4 = cilician eu4 = isaurian }
+link = { vic3 = phrygian eu4 = phrygian }
 
-#Colonial Italian
-link = { vic2 = italoamericano eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = etrurian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnol eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano region = great_lakes_region region = northeast_america_region region = great_plains_region region = california_region }
-link = { vic2 = beltramian eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = etrurian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnol eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano region = southeast_america_region region = mississippi_region }
-link = { vic2 = cabottian eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = etrurian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnol eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano region = hudson_bay_region region = canada_region region = cascadia_region }
-link = { vic2 = trattoloyan eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = etrurian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnol eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano region = rio_grande_region }
-link = { vic2 = trattoloyan eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = etrurian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnol eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano region = central_america_region region = carribeans_region }
-link = { vic2 = garibaldine eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = etrurian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnol eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano region = brazil_region }
-link = { vic2 = ceian eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = etrurian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnol eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano region = colombia_region }
-link = { vic2 = vespuccian eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = etrurian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnol eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano region = peru_region }
-link = { vic2 = deagostinian eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = etrurian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnol eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano region = la_plata_region region = upper_peru_region }
-link = { vic2 = australiano eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = etrurian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnol eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano region = oceania_superregion }
-link = { vic2 = africano eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnolc eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-#Sidenote: Muslim Southern Italians convert to Maltese (historical Siculo-Arabic)
-link = { vic2 = maltese eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnolc eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano region = apulia_area region = calabria_area region = naples_area region = sicily_area region = corsica_sardinia_area religion = sunni religion = zikri religion = yazidi religion = sunni_heresy religion = shiite religion = hurufi religion = druze religion = shiite_heresy religion = ibadi religion = kharijite }
-# Italian (Keep order below!)
-link = { vic2 = north_italian eu4 = dalmatian eu4 = italian region = lombardy_area region = venetia_area region = piedmont_area region = tuscany_area region = liguria_area region = emilia_romagna_area region = central_italy_area }
-link = { vic2 = south_italian eu4 = dalmatian eu4 = italian region = sicily_area region = corsica_sardinia_area region = naples_area region = calabria_area region = apulia_area }
-link = { vic2 = morlach eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnolc eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano region = balkan_region }
-link = { vic2 = north_italian eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnol }
-link = { vic2 = south_italian eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial }
-link = { vic2 = lombard eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese }
-link = { vic2 = maltese eu4 = maltese }
-link = { vic2 = all_italian eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnolc eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano } # Big fallback
+# Italian
+@north_italy_area = "region = lombardy_area region = venetia_area region = piedmont_area region = tuscany_area region = liguria_area region = emilia_romagna_area region = central_italy_area"
+@south_italy_area = "region = sicily_area region = corsica_sardinia_area region = naples_area region = calabria_area region = apulia_area"
+@italian_cultures = "eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnolc eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano" }
+
+link = { vic3 = maltese @italian_cultures region = sicily_area region = corsica_sardinia_area religion = sunni religion = zikri religion = yazidi religion = sunni_heresy religion = shiite religion = hurufi religion = druze religion = shiite_heresy religion = ibadi religion = kharijite }
+link = { vic3 = corsican eu4 = corsican }
+link = { vic3 = north_italian eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnol }
+link = { vic3 = south_italian eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial }
+link = { vic3 = lombard eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese }
+link = { vic3 = maltese eu4 = maltese }
+link = { vic3 = morlach @italian_cultures region = balkan_region }
+link = { vic3 = north_italian @italian_cultures @north_italy_area }
+link = { vic3 = south_italian @italian_cultures @south_italy_area }
+link = { vic3 = all_italian @italian_cultures } # Big fallback
 
 ## Tyrrhenian
-link = { vic2 = neotyrrhenian eu4 = etrurian eu4 = rhaetian eu4 = lemnian region = central_america_superregion region = north_america_superregion region = south_america_superregion region = andes_superregion }
-link = { vic2 = tyrrhafrican eu4 = etrurian eu4 = rhaetian eu4 = lemnian region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = tyrrhaustralian eu4 = etrurian eu4 = rhaetian eu4 = lemnian region = oceania_superregion }
-link = { vic2 = etrurian eu4 = etrurian }
-link = { vic2 = rhaetian eu4 = rhaetian }
-link = { vic2 = lemnian eu4 = lemnian }
+link = { vic3 = etrurian eu4 = etrurian }
+link = { vic3 = rhaetian eu4 = rhaetian }
+link = { vic3 = lemnian eu4 = lemnian }
 
 # Iberian - castillian, catalan, galician, andalucian, portugese
-link = { vic2 = mexican eu4 = castillian eu4 = leonese eu4 = catalan eu4 = aragonese eu4 = portugese eu4 = galician eu4 = portugese_colonial eu4 = asturian eu4 = balearic eu4 = spanish_colonial eu4 = hispanic region = mexico_region region = rio_grande_region region = california_region }
-link = { vic2 = caribeno eu4 = castillian eu4 = leonese eu4 = catalan eu4 = aragonese eu4 = portugese eu4 = galician eu4 = portugese_colonial eu4 = asturian eu4 = balearic eu4 = spanish_colonial eu4 = hispanic region = carribeans_region }
-link = { vic2 = north_andean eu4 = castillian eu4 = leonese eu4 = catalan eu4 = aragonese eu4 = portugese eu4 = galician eu4 = portugese_colonial eu4 = asturian eu4 = balearic eu4 = spanish_colonial eu4 = hispanic region = colombia_region }
-link = { vic2 = south_andean eu4 = castillian eu4 = leonese eu4 = catalan eu4 = aragonese eu4 = portugese eu4 = galician eu4 = portugese_colonial eu4 = asturian eu4 = balearic eu4 = spanish_colonial eu4 = hispanic region = peru_region region = beni_area region = upper_peru region = northern_chile_area region = potosi_area region = moxos_area region = southern_chile_area region = central_chile_area }
-link = { vic2 = platinean eu4 = castillian eu4 = leonese eu4 = catalan eu4 = aragonese eu4 = portugese eu4 = galician eu4 = portugese_colonial eu4 = asturian eu4 = balearic eu4 = spanish_colonial eu4 = hispanic region = tucuman_area region = chaco_area region = paraguay_area region = nehuenken_area region = patagonia_area region = cuyo_area region = southern_pampas_area region = buenos_aires_area region = banda_oriental_area region = south_atlantic_islands_area region = misiones_area region = patagonian_andes region = bahia_blanca_area region = jujuy_area }
-link = { vic2 = brazilian eu4 = castillian eu4 = leonese eu4 = catalan eu4 = aragonese eu4 = portugese eu4 = galician eu4 = portugese_colonial eu4 = asturian eu4 = balearic eu4 = spanish_colonial eu4 = hispanic region = brazil_region }
-link = { vic2 = central_american eu4 = castillian eu4 = leonese eu4 = catalan eu4 = aragonese eu4 = portugese eu4 = galician eu4 = portugese_colonial eu4 = asturian eu4 = balearic eu4 = spanish_colonial eu4 = hispanic region = central_america_region }
-link = { vic2 = americano eu4 = castillian eu4 = leonese eu4 = catalan eu4 = aragonese eu4 = portugese eu4 = galician eu4 = portugese_colonial eu4 = asturian eu4 = balearic eu4 = spanish_colonial eu4 = hispanic region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = sureno eu4 = castillian eu4 = leonese eu4 = catalan eu4 = aragonese eu4 = portugese eu4 = galician eu4 = portugese_colonial eu4 = asturian eu4 = balearic eu4 = spanish_colonial eu4 = hispanic region = oceania_superregion }
-link = { vic2 = morado eu4 = castillian eu4 = leonese eu4 = catalan eu4 = aragonese eu4 = portugese eu4 = galician eu4 = portugese_colonial eu4 = asturian eu4 = balearic eu4 = spanish_colonial eu4 = hispanic region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = morado eu4 = angolan }
-#Sidenote: Andalusian/Mozarabic can switch to Spanish if catholic, viceversa for Muslim spaniards
-link = { vic2 = spanish eu4 = andalucian religion = catholic religion = cathar religion = fraticelli religion = waldensian religion = lollard religion = catholic_heresy religion = arian religion = protestant religion = protestant_heresy religion = orthodox religion = bogomilist religion = monothelite religion = iconoclast religion = paulician religion = orthodox_heresy religion = coptic religion = monophysite religion = nestorian religion = messalian }
-link = { vic2 = andalucian eu4 = castillian eu4 = leonese eu4 = catalan eu4 = aragonese eu4 = portugese eu4 = galician eu4 = asturian eu4 = balearic eu4 = hispanic religion = sunni religion = zikri religion = yazidi religion = sunni_heresy religion = shiite religion = hurufi religion = druze religion = shiite_heresy religion = ibadi religion = kharijite }
 #Normal Spaniards
-link = { vic2 = mexican eu4 = mexican eu4 = californian eu4 = norte_americano }
-link = { vic2 = caribeno eu4 = caribean }
-link = { vic2 = platinean eu4 = platean }
-link = { vic2 = north_andean eu4 = colombian eu4 = peruvian }
-link = { vic2 = south_andean eu4 = chilian }
-link = { vic2 = brazilian eu4 = brazilian eu4 = portugese_colonial }
-link = { vic2 = spanish eu4 = castillian eu4 = leonese eu4 = asturian eu4 = balearic eu4 = spanish_colonial eu4 = hispanic }
-link = { vic2 = galician eu4 = galician }
-link = { vic2 = catalan eu4 = catalan eu4 = aragonese eu4 = valencian }
-link = { vic2 = portuguese eu4 = portugese }
-link = { vic2 = basque eu4 = basque eu4 = basque_colonial }
-link = { vic2 = andalucian eu4 = andalucian }
+link = { vic3 = spanish eu4 = castillian eu4 = leonese eu4 = asturian eu4 = balearic eu4 = spanish_colonial eu4 = hispanic eu4 = mexican eu4 = californian eu4 = norte_americano eu4 = caribean eu4 = platean eu4 = colombian eu4 = peruvian eu4 = chilian }
+link = { vic3 = galician eu4 = galician }
+link = { vic3 = catalan eu4 = catalan eu4 = aragonese eu4 = valencian }
+link = { vic3 = portuguese eu4 = portugese eu4 = angolan eu4 = brazilian eu4 = portugese_colonial }
+link = { vic3 = basque eu4 = basque eu4 = basque_colonial }
+link = { vic3 = andalucian eu4 = andalucian }
 
 # French - cosmopolitan_french, gascon, normand, aquitaine, burgundian, occitain, wallonian
-link = { vic2 = french_canadian eu4 = crusader_culture eu4 = outremer eu4 = cosmopolitan_french eu4 = cosmopolitan_french_UKS eu4 = celtic_breton eu4 = poitou eu4 = gascon eu4 = gascon_UKS eu4 = normand eu4 = normand_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = burgundian eu4 = burgundian_UKS eu4 = occitain eu4 = occitain_UKS eu4 = breton eu4 = breton_celtic eu4 = breton_UKS region = northeast_america_region region = canada_region region = hudson_bay_region }
-link = { vic2 = tounensois eu4 = castillian eu4 = leonese eu4 = catalan eu4 = aragonese eu4 = portugese eu4 = galician eu4 = portugese_colonial eu4 = asturian eu4 = balearic eu4 = spanish_colonial eu4 = hispanic region = tucuman_area region = chaco_area region = paraguay_area region = nehuenken_area region = patagonia_area region = cuyo_area region = southern_pampas_area region = buenos_aires_area region = banda_oriental_area region = south_atlantic_islands_area region = misiones_area region = patagonian_andes region = bahia_blanca_area region = jujuy_area }
-link = { vic2 = antartique eu4 = crusader_culture eu4 = outremer eu4 = cosmopolitan_french eu4 = cosmopolitan_french_UKS eu4 = celtic_breton eu4 = poitou eu4 = normand eu4 = normand_UKS eu4 = burgundian eu4 = burgundian_UKS eu4 = outremer eu4 = africaine eu4 = angevin eu4 = anglois eu4 = antartique eu4 = arpitan eu4 = australienne eu4 = auvergnat eu4 = bourguignon eu4 = creole eu4 = francien eu4 = french_colonial eu4 = javanaise eu4 = limousin eu4 = lorrain eu4 = pacifique eu4 = picard eu4 = poitevin eu4 = provencal eu4 = vivaroaupenc eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = occitan_colonial eu4 = breton eu4 = breton_celtic eu4 = breton_UKS region = south_america_superregion }
-link = { vic2 = nouvellien eu4 = crusader_culture eu4 = outremer eu4 = cosmopolitan_french eu4 = cosmopolitan_french_UKS eu4 = celtic_breton eu4 = poitou eu4 = normand eu4 = normand_UKS eu4 = burgundian eu4 = burgundian_UKS eu4 = outremer eu4 = africaine eu4 = angevin eu4 = anglois eu4 = antartique eu4 = arpitan eu4 = australienne eu4 = auvergnat eu4 = bourguignon eu4 = creole eu4 = francien eu4 = french_colonial eu4 = javanaise eu4 = limousin eu4 = lorrain eu4 = pacifique eu4 = picard eu4 = poitevin eu4 = provencal eu4 = vivaroaupenc eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = occitan_colonial eu4 = breton eu4 = breton_celtic eu4 = breton_UKS region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = australienne eu4 = crusader_culture eu4 = outremer eu4 = cosmopolitan_french eu4 = cosmopolitan_french_UKS eu4 = celtic_breton eu4 = poitou eu4 = normand eu4 = normand_UKS eu4 = burgundian eu4 = burgundian_UKS eu4 = outremer eu4 = africaine eu4 = angevin eu4 = anglois eu4 = antartique eu4 = arpitan eu4 = australienne eu4 = auvergnat eu4 = bourguignon eu4 = creole eu4 = francien eu4 = french_colonial eu4 = javanaise eu4 = limousin eu4 = lorrain eu4 = pacifique eu4 = picard eu4 = poitevin eu4 = provencal eu4 = vivaroaupenc eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = occitan_colonial eu4 = breton eu4 = breton_celtic eu4 = breton_UKS region = oceania_superregion }
-link = { vic2 = africaine eu4 = crusader_culture eu4 = outremer eu4 = cosmopolitan_french eu4 = cosmopolitan_french_UKS eu4 = poitou eu4 = normand eu4 = normand_UKS eu4 = burgundian eu4 = burgundian_UKS eu4 = outremer eu4 = africaine eu4 = angevin eu4 = anglois eu4 = antartique eu4 = arpitan eu4 = australienne eu4 = auvergnat eu4 = bourguignon eu4 = creole eu4 = francien eu4 = french_colonial eu4 = javanaise eu4 = limousin eu4 = lorrain eu4 = pacifique eu4 = picard eu4 = poitevin eu4 = provencal eu4 = vivaroaupenc eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = occitan_colonial eu4 = breton eu4 = breton_celtic eu4 = breton_UKS region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = french_canadian eu4 = acadian eu4 = quebecois eu4 = canadian }
-link = { vic2 = australienne eu4 = australienne eu4 = pacifique }
-link = { vic2 = antartique eu4 = antartique }
-link = { vic2 = africaine eu4 = africaine }
-link = { vic2 = guillaumois eu4 = cosmopolitan_french eu4 = cosmopolitan_french_UKS eu4 = normand eu4 = normand_UKS eu4 = burgundian eu4 = burgundian_UKS eu4 = poitou eu4 = angevin eu4 = anglois eu4 = arpitan eu4 = auvergnat eu4 = bourguignon eu4 = creole eu4 = francien eu4 = french_colonial eu4 = javanaise eu4 = limousin eu4 = lorrain eu4 = poitevin eu4 = vivaroaupenc eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = occitan_colonial eu4 = provencal eu4 = wallonian eu4 = wallonian_UKS eu4 = picard region = british_isles_region }
-link = { vic2 = welsh eu4 = breton eu4 = breton_celtic eu4 = breton_UKS eu4 = celtic_breton region = british_isles_region }
-link = { vic2 = guiscard eu4 = cosmopolitan_french eu4 = cosmopolitan_french_UKS eu4 = normand eu4 = normand_UKS eu4 = burgundian eu4 = burgundian_UKS eu4 = poitou eu4 = angevin eu4 = anglois eu4 = arpitan eu4 = auvergnat eu4 = bourguignon eu4 = creole eu4 = francien eu4 = french_colonial eu4 = javanaise eu4 = limousin eu4 = lorrain eu4 = poitevin eu4 = vivaroaupenc eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = occitan_colonial eu4 = provencal eu4 = wallonian eu4 = wallonian_UKS eu4 = picard region = sicily_area region = corsica_sardinia_area region = naples_area region = calabria_area region = apulia_area }
-link = { vic2 = french eu4 = cosmopolitan_french eu4 = cosmopolitan_french_UKS eu4 = normand eu4 = normand_UKS eu4 = burgundian eu4 = burgundian_UKS eu4 = poitou eu4 = angevin eu4 = anglois eu4 = arpitan eu4 = auvergnat eu4 = bourguignon eu4 = creole eu4 = francien eu4 = french_colonial eu4 = javanaise eu4 = limousin eu4 = lorrain eu4 = poitevin eu4 = vivaroaupenc }
-link = { vic2 = breton eu4 = breton eu4 = breton_celtic eu4 = breton_UKS eu4 = celtic_breton }
-link = { vic2 = occitan eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = occitan_colonial eu4 = provencal }
-link = { vic2 = wallonian eu4 = wallonian eu4 = wallonian_UKS }
-link = { vic2 = frankish eu4 = old_frankish eu4 = frankish eu4 = septimanian eu4 = aquitanian_frankish eu4 = neustrian eu4 = burgundian_frankish eu4 = austrasian eu4 = agilolfingian }
-link = { vic2 = outremer eu4 = outremer eu4 = crusader_culture }
-link = { vic2 = picard eu4 = picard }
+link = { vic3 = breton eu4 = breton eu4 = breton_celtic eu4 = breton_UKS eu4 = celtic_breton region = british_isles_region }
+link = { vic3 = french eu4 = cosmopolitan_french eu4 = cosmopolitan_french_UKS eu4 = normand eu4 = normand_UKS eu4 = burgundian eu4 = burgundian_UKS eu4 = poitou eu4 = angevin eu4 = anglois eu4 = arpitan eu4 = auvergnat eu4 = bourguignon eu4 = creole eu4 = francien eu4 = french_colonial eu4 = javanaise eu4 = limousin eu4 = lorrain eu4 = poitevin eu4 = vivaroaupenc }
+link = { vic3 = breton eu4 = breton eu4 = breton_celtic eu4 = breton_UKS eu4 = celtic_breton }
+link = { vic3 = occitan eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = occitan_colonial eu4 = provencal eu4 = acadian eu4 = quebecois eu4 = canadian eu4 = australienne eu4 = pacifique eu4 = antartique eu4 = africaine }
+link = { vic3 = wallonian eu4 = wallonian eu4 = wallonian_UKS }
+link = { vic3 = frankish eu4 = old_frankish eu4 = frankish eu4 = septimanian eu4 = aquitanian_frankish eu4 = neustrian eu4 = burgundian_frankish eu4 = austrasian eu4 = agilolfingian }
+link = { vic3 = outremer eu4 = outremer eu4 = crusader_culture }
+link = { vic3 = picard eu4 = picard }
 
 # Finno Urgic - finnish, sapmi, ingrian, karelian, uralic - share colonial cultures with baltic cultures
-link = { vic2 = salislahtian eu4 = finnish eu4 = karelian eu4 = ingrian eu4 = finnish_colonial eu4 = estonian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki region = great_lakes_region region = northeast_america_region region = great_plains_region region = california_region }
-link = { vic2 = usmailmian eu4 = finnish eu4 = karelian eu4 = ingrian eu4 = finnish_colonial eu4 = estonian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki region = southeast_america_region region = mississippi_region }
-link = { vic2 = kepejokian eu4 = finnish eu4 = karelian eu4 = ingrian eu4 = finnish_colonial eu4 = estonian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki region = hudson_bay_region region = canada_region region = cascadia_region }
-link = { vic2 = lounast eu4 = finnish eu4 = karelian eu4 = ingrian eu4 = finnish_colonial eu4 = estonian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki region = australia_region region = oceania_superregion }
-link = { vic2 = suurjokian eu4 = finnish eu4 = karelian eu4 = ingrian eu4 = finnish_colonial eu4 = estonian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki region = rio_grande_region }
-link = { vic2 = meksikan eu4 = finnish eu4 = karelian eu4 = ingrian eu4 = finnish_colonial eu4 = estonian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki region = central_america_region region = carribeans_region }
-link = { vic2 = kujaanan eu4 = finnish eu4 = karelian eu4 = ingrian eu4 = finnish_colonial eu4 = estonian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki region = brazil_region }
-link = { vic2 = maraivoan eu4 = finnish eu4 = karelian eu4 = ingrian eu4 = finnish_colonial eu4 = estonian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki region = colombia_region }
-link = { vic2 = antivuorean eu4 = finnish eu4 = karelian eu4 = ingrian eu4 = finnish_colonial eu4 = estonian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki region = peru_region }
-link = { vic2 = hopeajokian eu4 = finnish eu4 = karelian eu4 = ingrian eu4 = finnish_colonial eu4 = estonian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki region = la_plata_region region = upper_peru_region }
-link = { vic2 = mustvalge eu4 = finnish eu4 = karelian eu4 = ingrian eu4 = finnish_colonial eu4 = estonian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = finnish eu4 = finnish eu4 = karelian eu4 = ingrian eu4 = finnish_colonial }
-link = { vic2 = ugrian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki }
+link = { vic3 = finnish eu4 = finnish eu4 = karelian eu4 = ingrian eu4 = finnish_colonial }
+link = { vic3 = ugrian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki }
 
 # Baltic - estonian, latvian, lithuanian, old_prussian/pruthenian (depending on mod used, they go into lithuanian as they're closest)
-# Lithuanian colonial culture is in west slavs due to their PLC cultural union.
-link = { vic2 = virshjuros eu4 = lithuanian eu4 = pruthenian eu4 = old_prussian eu4 = latvian eu4 = kurland_culture eu4 = baltic_colonial region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = smelis eu4 = lithuanian eu4 = pruthenian eu4 = old_prussian eu4 = latvian eu4 = kurland_culture eu4 = baltic_colonial region = oceania_superregion }
-link = { vic2 = juodaodis eu4 = lithuanian eu4 = pruthenian eu4 = old_prussian eu4 = latvian eu4 = kurland_culture eu4 = baltic_colonial region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = lithuanian eu4 = lithuanian }
-link = { vic2 = pruthenian eu4 = pruthenian eu4 = old_prussian }
-link = { vic2 = latvian eu4 = latvian eu4 = kurland_culture eu4 = baltic_colonial }
-link = { vic2 = estonian eu4 = estonian }
+link = { vic3 = lithuanian eu4 = lithuanian }
+link = { vic3 = pruthenian eu4 = pruthenian eu4 = old_prussian }
+link = { vic3 = latvian eu4 = latvian eu4 = kurland_culture eu4 = baltic_colonial }
+link = { vic3 = estonian eu4 = estonian }
 
 # South Slav - croatian, serbian, bulgarian, romanian, albanian
-link = { vic2 = novisvet eu4 = montenegrin eu4 = bosnian eu4 = slovene eu4 = carantanian eu4 = sclavenian eu4 = croatian eu4 = tracki eu4 = alzzecio eu4 = serbian eu4 = balkan_colonial eu4 = bulgarian eu4 = albanian eu4 = slovenian eu4 = bosnian eu4 = bosniak region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = juzhno eu4 = montenegrin eu4 = bosnian eu4 = slovene eu4 = carantanian eu4 = sclavenian eu4 = croatian eu4 = tracki eu4 = alzzecio eu4 = serbian eu4 = balkan_colonial eu4 = bulgarian eu4 = albanian eu4 = slovenian eu4 = bosnian eu4 = bosniak region = oceania_superregion }
-link = { vic2 = crni eu4 = montenegrin eu4 = bosnian eu4 = slovene eu4 = carantanian eu4 = sclavenian eu4 = croatian eu4 = tracki eu4 = alzzecio eu4 = serbian eu4 = balkan_colonial eu4 = bulgarian eu4 = albanian eu4 = slovenian eu4 = bosnian eu4 = bosniak region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = bosniak eu4 = croatian eu4 = serbian religion = sunni religion = shiite }
-link = { vic2 = macedonian eu4 = bulgarian region = serbia_area region = rascia_area region = macedonia_area region = northern_greece_area region = albania_area }
-link = { vic2 = macedonian eu4 = serbian eu4 = montenegrin region = macedonia_area region = bulgaria_area region = northern_greece_area region = albania_area }
-link = { vic2 = bosniak eu4 = bosnian eu4 = bosniak }
-link = { vic2 = croat eu4 = croatian }
-link = { vic2 = serb eu4 = serbian eu4 = montenegrin eu4 = balkan_colonial }
-link = { vic2 = bulgarian eu4 = sclavenian eu4 = bulgarian }
-link = { vic2 = albanian eu4 = albanian eu4 = illyrian eu4 = arbereshe }		
-link = { vic2 = slovene eu4 = carantanian eu4 = slovene eu4 = slovenian }
+link = { vic3 = bosniak eu4 = croatian eu4 = serbian religion = sunni religion = shiite }
+link = { vic3 = macedonian eu4 = bulgarian region = serbia_area region = rascia_area region = macedonia_area region = northern_greece_area region = albania_area }
+link = { vic3 = macedonian eu4 = serbian eu4 = montenegrin region = macedonia_area region = bulgaria_area region = northern_greece_area region = albania_area }
+link = { vic3 = bosniak eu4 = bosnian eu4 = bosniak }
+link = { vic3 = croat eu4 = croatian }
+link = { vic3 = serb eu4 = serbian eu4 = montenegrin eu4 = balkan_colonial }
+link = { vic3 = bulgarian eu4 = sclavenian eu4 = bulgarian }
+link = { vic3 = albanian eu4 = albanian eu4 = illyrian eu4 = arbereshe }		
+link = { vic3 = slovene eu4 = carantanian eu4 = slovene eu4 = slovenian }
 
 # West Slav - polish, schlesian, czech, slovak
-link = { vic2 = novysvet eu4 = czech eu4 = moravian eu4 = silesian eu4 = slovak eu4 = chrobatian eu4 = old_pommeranian eu4 = sorbian region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = jizni eu4 = czech eu4 = moravian eu4 = silesian eu4 = slovak eu4 = chrobatian eu4 = old_pommeranian eu4 = sorbian region = oceania_superregion }
-link = { vic2 = hnedy eu4 = czech eu4 = moravian eu4 = silesian eu4 = slovak eu4 = chrobatian eu4 = old_pommeranian eu4 = sorbian region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = nowyswiat eu4 = mazovian eu4 = venedian eu4 = polish eu4 = wendish eu4 = sorbian eu4 = schlesian eu4 = kashubian eu4 = polabian eu4 = sorbs eu4 = west_slavic_colonial eu4 = lithuanian eu4 = old_pommeranian region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = poludniowy eu4 = mazovian eu4 = venedian eu4 = polish eu4 = wendish eu4 = sorbian eu4 = schlesian eu4 = kashubian eu4 = polabian eu4 = sorbs eu4 = west_slavic_colonial eu4 = lithuanian eu4 = old_pommeranian region = oceania_superregion }
-link = { vic2 = czarny eu4 = mazovian eu4 = venedian eu4 = polish eu4 = wendish eu4 = sorbian eu4 = schlesian eu4 = kashubian eu4 = polabian eu4 = sorbs eu4 = west_slavic_colonial eu4 = lithuanian eu4 = old_pommeranian region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = polish eu4 = mazovian eu4 = venedian eu4 = polish eu4 = west_slavic_colonial eu4 = schlesian }
-link = { vic2 = slovak eu4 = slovak eu4 = chrobatian }
-link = { vic2 = czech eu4 = czech eu4 = moravian eu4 = silesian }
-link = { vic2 = oldpommeranian eu4 = old_pommeranian }
-link = { vic2 = sorbian eu4 = sorbian eu4 = polabian eu4 = sorbs eu4 = wendish eu4 = kashubian }
+link = { vic3 = polish eu4 = mazovian eu4 = venedian eu4 = polish eu4 = west_slavic_colonial eu4 = schlesian }
+link = { vic3 = slovak eu4 = slovak eu4 = chrobatian }
+link = { vic3 = czech eu4 = czech eu4 = moravian eu4 = silesian }
+link = { vic3 = oldpommeranian eu4 = old_pommeranian }
+link = { vic3 = sorbian eu4 = sorbian eu4 = polabian eu4 = sorbs eu4 = wendish eu4 = kashubian }
 
 # East Slav - russian, byelorussian, ruthenian
-link = { vic2 = alaskan eu4 = antean eu4 = kishinyov eu4 = chuvash eu4 = russian eu4 = ilmenian eu4 = severian eu4 = volhynian eu4 = novgorodian eu4 = ryazanian eu4 = russian_culture eu4 = pomor eu4 = russian_colonial eu4 = old_slavic eu4 = byelorussian eu4 = ruthenian eu4 = ukrainian region = hudson_bay_region region = canada_region region = cascadia_region }
-link = { vic2 = kholodnovoynsky eu4 = antean eu4 = kishinyov eu4 = chuvash eu4 = russian eu4 = ilmenian eu4 = severian eu4 = volhynian eu4 = novgorodian eu4 = ryazanian eu4 = russian_culture eu4 = pomor eu4 = russian_colonial eu4 = old_slavic eu4 = byelorussian eu4 = ruthenian eu4 = ukrainian region = great_lakes_region region = northeast_america_region region = great_plains_region region = california_region region = southeast_america_region region = mississippi_region region = rio_grande_region }
-link = { vic2 = novvymir eu4 = antean eu4 = kishinyov eu4 = chuvash eu4 = russian eu4 = ilmenian eu4 = severian eu4 = volhynian eu4 = novgorodian eu4 = ryazanian eu4 = russian_culture eu4 = pomor eu4 = russian_colonial eu4 = old_slavic eu4 = byelorussian eu4 = ruthenian eu4 = ukrainian region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = yuzhny eu4 = antean eu4 = kishinyov eu4 = chuvash eu4 = russian eu4 = ilmenian eu4 = severian eu4 = volhynian eu4 = novgorodian eu4 = ryazanian eu4 = russian_culture eu4 = pomor eu4 = russian_colonial eu4 = old_slavic eu4 = byelorussian eu4 = ruthenian eu4 = ukrainian region = oceania_superregion }
-link = { vic2 = smugly eu4 = antean eu4 = kishinyov eu4 = chuvash eu4 = russian eu4 = ilmenian eu4 = severian eu4 = volhynian eu4 = novgorodian eu4 = ryazanian eu4 = russian_culture eu4 = pomor eu4 = russian_colonial eu4 = old_slavic eu4 = byelorussian eu4 = ruthenian eu4 = ukrainian region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = russian eu4 = russian eu4 = ilmenian eu4 = severian eu4 = volhynian eu4 = novgorodian eu4 = ryazanian }
-link = { vic2 = ukrainian eu4 = antean eu4 = ruthenian }
-link = { vic2 = byelorussian eu4 = byelorussian }
+link = { vic3 = russian eu4 = russian eu4 = ilmenian eu4 = severian eu4 = volhynian eu4 = novgorodian eu4 = ryazanian }
+link = { vic3 = ukrainian eu4 = antean eu4 = ruthenian }
+link = { vic3 = byelorussian eu4 = byelorussian }
 #Generic Russian (split) from CK2 converted
-link = { vic2 = byelorussian eu4 = russian_culture region = white_ruthenia_area }
-link = { vic2 = byelorussian eu4 = russian_culture region = smolensk_area }
-link = { vic2 = ukrainian eu4 = russian_culture region = ruthenia_region }
-link = { vic2 = ukrainian eu4 = ukrainian }
-link = { vic2 = western_slavic eu4 = kishinyov }
-link = { vic2 = russian eu4 = russian_culture eu4 = old_slavic eu4 = pomor eu4 = russian_colonial }
-link = { vic2 = ugrian eu4 = meshchera eu4 = ugrorussian }
+link = { vic3 = byelorussian eu4 = russian_culture region = white_ruthenia_area }
+link = { vic3 = byelorussian eu4 = russian_culture region = smolensk_area }
+link = { vic3 = ukrainian eu4 = russian_culture region = ruthenia_region }
+link = { vic3 = ukrainian eu4 = ukrainian }
+link = { vic3 = western_slavic eu4 = kishinyov }
+link = { vic3 = russian eu4 = russian_culture eu4 = old_slavic eu4 = pomor eu4 = russian_colonial }
+link = { vic3 = ugrian eu4 = meshchera eu4 = ugrorussian }
 
 # Carpathian - hungarian, romanian, transylvanian
-link = { vic2 = ujvilag eu4 = hungarian eu4 = magyar eu4 = magyar_colonial eu4 = szaszok region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = delian eu4 = hungarian eu4 = magyar eu4 = magyar_colonial eu4 = szaszok region = oceania_superregion }
-link = { vic2 = fekete eu4 = hungarian eu4 = magyar eu4 = magyar_colonial eu4 = szaszok region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = lumenoua eu4 = moldovan eu4 = romanian eu4 = transylvanian eu4 = moldovian eu4 = romanian_colonial eu4 = vlach region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = sudic eu4 = moldovan eu4 = romanian eu4 = transylvanian eu4 = moldovian eu4 = romanian_colonial eu4 = vlach region = oceania_superregion }
-link = { vic2 = negru eu4 = moldovan eu4 = romanian eu4 = transylvanian eu4 = moldovian eu4 = romanian_colonial eu4 = vlach region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = aromanian eu4 = moldovan eu4 = romanian eu4 = transylvanian eu4 = moldovian eu4 = romanian_colonial eu4 = vlach region = balkan_region }
-link = { vic2 = szekely eu4 = hungarian eu4 = magyar eu4 = szaszok region = transylvania_area region = southern_transylvania_area region = wallachia_area region = moldavia_area }
-link = { vic2 = hungarian eu4 = hungarian eu4 = magyar eu4 = magyar_colonial eu4 = szaszok }
-link = { vic2 = romanian eu4 = moldovan eu4 = romanian eu4 = transylvanian eu4 = moldovian eu4 = romanian_colonial eu4 = vlach }
+link = { vic3 = aromanian eu4 = moldovan eu4 = romanian eu4 = transylvanian eu4 = moldovian eu4 = romanian_colonial eu4 = vlach region = balkan_region }
+link = { vic3 = szekely eu4 = hungarian eu4 = magyar eu4 = szaszok region = transylvania_area region = southern_transylvania_area region = wallachia_area region = moldavia_area }
+link = { vic3 = hungarian eu4 = hungarian eu4 = magyar eu4 = magyar_colonial eu4 = szaszok }
+link = { vic3 = romanian eu4 = moldovan eu4 = romanian eu4 = transylvanian eu4 = moldovian eu4 = romanian_colonial eu4 = vlach }
 
 # Dacian
-link = { vic2 = dacian_american eu4 = dacian region = central_america_superregion region = north_america_superregion region = south_america_superregion region = andes_superregion }
-link = { vic2 = dacian_australian eu4 = dacian region = oceania_superregion }
-link = { vic2 = dacian_african eu4 = dacian region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = dacian eu4 = dacian }
+link = { vic3 = dacian eu4 = dacian }
 
 # Byzantine - greek, georgian, armenian, pontic_greek
-link = { vic2 = neokosmi eu4 = alexandrine eu4 = atlantean eu4 = spartan eu4 = athenian eu4 = magnagreek eu4 = anatolian eu4 = greek eu4 = bithynian eu4 = lykian eu4 = goths eu4 = pontic_greek eu4 = atlantean eu4 = spartan eu4 = athenian eu4 = sicilian_greek eu4 = cappadocian eu4 = greek_colonial eu4 = pontic eu4 = pannonian eu4 = illyrian eu4 = galatian eu4 = georgian eu4 = armenian eu4 = armenian_colonial eu4 = cilician eu4 = ge_armenian eu4 = owm_armenian eu4 = alan eu4 = scythian eu4 = maghreb_latin eu4 = african_romance eu4 = psammodytes eu4 = babylonian eu4 = syriac eu4 = chaldean eu4 = romano_persian eu4 = aramean eu4 = mena_greek region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = notios eu4 = alexandrine eu4 = magnagreek eu4 = anatolian eu4 = greek eu4 = bithynian eu4 = lykian eu4 = goths eu4 = pontic_greek eu4 = atlantean eu4 = spartan eu4 = athenian eu4 = sicilian_greek eu4 = cappadocian eu4 = greek_colonial eu4 = pontic eu4 = pannonian eu4 = illyrian eu4 = galatian eu4 = georgian eu4 = psammodytes eu4 = armenian eu4 = armenian_colonial eu4 = cilician eu4 = ge_armenian eu4 = owm_armenian eu4 = alan eu4 = scythian eu4 = maghreb_latin eu4 = african_romance eu4 = babylonian eu4 = mena_greek eu4 = syriac eu4 = chaldean eu4 = romano_persian eu4 = aramean region = oceania_superregion }
-link = { vic2 = mavro eu4 = alexandrine eu4 = magnagreek eu4 = anatolian eu4 = greek eu4 = bithynian eu4 = lykian eu4 = goths eu4 = pontic_greek eu4 = atlantean eu4 = spartan eu4 = athenian eu4 = sicilian_greek eu4 = cappadocian eu4 = mena_greek eu4 = psammodytes eu4 = greek_colonial eu4 = pontic eu4 = pannonian eu4 = illyrian eu4 = galatian eu4 = georgian eu4 = armenian eu4 = armenian_colonial eu4 = cilician eu4 = ge_armenian eu4 = owm_armenian eu4 = alan eu4 = scythian eu4 = maghreb_latin eu4 = african_romance eu4 = babylonian eu4 = syriac eu4 = chaldean eu4 = romano_persian eu4 = aramean region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = yenidun eu4 = gagauz eu4 = avar_culture eu4 = hephthalite eu4 = turkish eu4 = pecheneg eu4 = turkish_colonial eu4 = yorouk eu4 = azerbadjani eu4 = azerbaijani eu4 = circassian eu4 = dagestani eu4 = abazin eu4 = caucasus_colonial eu4 = chechen eu4 = ossetian eu4 = caucasian_albanian region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = guney eu4 = gagauz eu4 = avar_culture eu4 = hephthalite eu4 = turkish eu4 = pecheneg eu4 = turkish_colonial eu4 = yorouk eu4 = azerbadjani eu4 = azerbaijani eu4 = circassian eu4 = dagestani eu4 = abazin eu4 = caucasus_colonial eu4 = chechen eu4 = ossetian eu4 = caucasian_albanian region = oceania_superregion }
-link = { vic2 = esmer eu4 = gagauz eu4 = avar_culture eu4 = hephthalite eu4 = turkish eu4 = pecheneg eu4 = turkish_colonial eu4 = yorouk eu4 = azerbadjani eu4 = azerbaijani eu4 = circassian eu4 = dagestani eu4 = abazin eu4 = caucasus_colonial eu4 = chechen eu4 = ossetian eu4 = caucasian_albanian region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = sephardic eu4 = magnagreek eu4 = anatolian eu4 = greek eu4 = bithynian eu4 = lykian eu4 = georgian eu4 = armenian eu4 = goths eu4 = spartan eu4 = athenian eu4 = atlantean religion = jewish }
-link = { vic2 = greek eu4 = bithynian eu4 = lykian eu4 = greek eu4 = goths eu4 = pontic_greek eu4 = atlantean eu4 = spartan eu4 = athenian eu4 = cappadocian eu4 = galatian eu4 = greek_colonial eu4 = pontic eu4 = anatolian eu4 = psammodytes eu4 = mena_greek }
-link = { vic2 = magnagreek eu4 = magnagreek eu4 = sicilian_greek }
-link = { vic2 = georgian eu4 = georgian }
-link = { vic2 = armenian eu4 = armenian eu4 = armenian_colonial eu4 = ge_armenian eu4 = owm_armenian}
-link = { hpm = dagestani vic2 = north_caucasian eu4 = dagestani }
-link = { hpm = chechen vic2 = north_caucasian eu4 = chechen }
-link = { hpm = circassian vic2 = north_caucasian eu4 = circassian }
-link = { vic2 = north_caucasian eu4 = circassian eu4 = dagestani eu4 = avar_culture eu4 = abazin eu4 = caucasian_albanian eu4 = caucasus_colonial eu4 = chechen eu4 = ossetian }
-link = { vic2 = alan eu4 = alan eu4 = scythian }
+@eu4_greek = "eu4 = bithynian eu4 = lykian eu4 = greek eu4 = goths eu4 = pontic_greek eu4 = atlantean eu4 = spartan eu4 = athenian eu4 = cappadocian eu4 = galatian eu4 = greek_colonial eu4 = pontic eu4 = anatolian eu4 = psammodytes eu4 = mena_greek"
+link = { vic3 = sephardic @eu4_greek religion = jewish }
+link = { vic3 = greek @eu4_greek }
+link = { vic3 = magnagreek eu4 = magnagreek eu4 = sicilian_greek }
+link = { vic3 = georgian eu4 = georgian }
+link = { vic3 = armenian eu4 = armenian eu4 = armenian_colonial eu4 = ge_armenian eu4 = owm_armenian }
+link = { vic3 = north_caucasian eu4 = circassian eu4 = dagestani eu4 = avar_culture eu4 = abazin eu4 = caucasian_albanian eu4 = caucasus_colonial eu4 = chechen eu4 = ossetian }
+link = { vic3 = alan eu4 = alan eu4 = scythian }
 
 # Thracian
-link = { vic2 = thracian_american eu4 = thracian region = central_america_superregion region = north_america_superregion region = south_america_superregion region = andes_superregion }
-link = { vic2 = thracian_australian eu4 = thracian region = oceania_superregion }
-link = { vic2 = thracian_african eu4 = thracian region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = thracian eu4 = thracian }
-
-# Colonial Arabic
-link = { vic2 = ealimi eu4 = andalucian eu4 = frencharab eu4 = old_egyptian_mod eu4 = nabatean eu4 = palestinian eu4 = maghreb_arabic eu4 = moroccan eu4 = chaoui eu4 = fezzan_culture eu4 = shilha eu4 = tripolitanian_culture eu4 = moorish eu4 = al_misr_arabic eu4 = egyptian_arabic eu4 = al_iraqiya_arabic eu4 = al_suryah_arabic eu4 = levantine_arabic eu4 = bedouin_arabic eu4 = omani_culture eu4 = yemeni_culture eu4 = yemenite eu4 = berber eu4 = gaetuli eu4 = garamantian eu4 = tunisian eu4 = algerian eu4 = berber eu4 = gaetuli eu4 = garamantian eu4 = bahrani eu4 = bedouin eu4 = hadrami eu4 = hejazi eu4 = gulf_arabic eu4 = mahri_culture eu4 = hejazi_culture eu4 = najdi eu4 = omani eu4 = yemeni eu4 = arabian_colonial region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = janubii eu4 = andalucian eu4 = frencharab eu4 = old_egyptian_mod eu4 = nabatean eu4 = palestinian eu4 = maghreb_arabic eu4 = moroccan eu4 = chaoui eu4 = fezzan_culture eu4 = shilha eu4 = tripolitanian_culture eu4 = moorish eu4 = al_misr_arabic eu4 = egyptian_arabic eu4 = al_iraqiya_arabic eu4 = al_suryah_arabic eu4 = levantine_arabic eu4 = bedouin_arabic eu4 = omani_culture eu4 = yemeni_culture eu4 = yemenite eu4 = berber eu4 = gaetuli eu4 = garamantian eu4 = tunisian eu4 = algerian eu4 = berber eu4 = gaetuli eu4 = garamantian eu4 = bahrani eu4 = bedouin eu4 = hadrami eu4 = hejazi eu4 = gulf_arabic eu4 = mahri_culture eu4 = hejazi_culture eu4 = najdi eu4 = omani eu4 = yemeni eu4 = arabian_colonial region = oceania_superregion }
-link = { vic2 = ifriqi eu4 = andalucian eu4 = frencharab eu4 = old_egyptian_mod eu4 = nabatean eu4 = palestinian eu4 = maghreb_arabic eu4 = moroccan eu4 = chaoui eu4 = fezzan_culture eu4 = shilha eu4 = tripolitanian_culture eu4 = moorish eu4 = al_misr_arabic eu4 = egyptian_arabic eu4 = al_iraqiya_arabic eu4 = al_suryah_arabic eu4 = levantine_arabic eu4 = bedouin_arabic eu4 = omani_culture eu4 = yemeni_culture eu4 = yemenite eu4 = berber eu4 = gaetuli eu4 = garamantian eu4 = tunisian eu4 = algerian eu4 = berber eu4 = gaetuli eu4 = garamantian eu4 = bahrani eu4 = bedouin eu4 = hadrami eu4 = hejazi eu4 = gulf_arabic eu4 = mahri_culture eu4 = hejazi_culture eu4 = najdi eu4 = omani eu4 = yemeni eu4 = arabian_colonial region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
+link = { vic3 = thracian eu4 = thracian }
 
 # Turko Semitic - maghreb_arabic, al_misr_arabic, al_suryah_arabic, al_iraqiya_arabic, bedouin_arabic, berber, turkish, omani_culture, yemeni_culture
-link = { vic2 = frencharab region = france_region eu4 = old_egyptian_mod eu4 = nabatean eu4 = palestinian eu4 = maghreb_arabic eu4 = moroccan eu4 = chaoui eu4 = fezzan_culture eu4 = shilha eu4 = tripolitanian_culture eu4 = moorish eu4 = al_misr_arabic eu4 = egyptian_arabic eu4 = al_iraqiya_arabic eu4 = al_suryah_arabic eu4 = levantine_arabic eu4 = bedouin_arabic eu4 = omani_culture eu4 = yemeni_culture eu4 = yemenite eu4 = berber eu4 = gaetuli eu4 = garamantian eu4 = tunisian eu4 = algerian eu4 = berber eu4 = gaetuli eu4 = garamantian eu4 = bahrani eu4 = bedouin eu4 = hadrami eu4 = hejazi eu4 = gulf_arabic eu4 = mahri_culture eu4 = hejazi_culture eu4 = najdi eu4 = omani eu4 = yemeni eu4 = arabian_colonial }
-link = { vic2 = maghrebi eu4 = maghreb_latin religion = sunni religion = zikri religion = yazidi religion = sunni_heresy religion = shiite religion = hurufi religion = druze religion = shiite_heresy religion = ibadi religion = kharijite }
-link = { vic2 = misri eu4 = al_misr_arabic eu4 = egyptian_arabic eu4 = egyptian eu4 = libyan }
-link = { vic2 = mashriqi eu4 = bedouin_arabic region = mashriq_region }
-link = { vic2 = mashriqi eu4 = syriac religion = sunni religion = zikri religion = yazidi religion = sunni_heresy religion = shiite religion = hurufi religion = druze religion = shiite_heresy religion = ibadi religion = kharijite }
-link = { vic2 = bedouin eu4 = bedouin_arabic eu4 = omani_culture eu4 = yemeni_culture eu4 = yemenite eu4 = bahrani eu4 = bedouin eu4 = hejazi eu4 = gulf_arabic eu4 = mahri_culture eu4 = hejazi_culture eu4 = najdi eu4 = omani eu4 = yemeni eu4 = arabian_colonial eu4 = sabaean }
-link = { vic2 = berber eu4 = berber eu4 = gaetuli eu4 = garamantian eu4 = tunisian eu4 = algerian eu4 = berber eu4 = gaetuli eu4 = garamantian eu4 = shilha eu4 = atlasian eu4 = garamante eu4 = numidian eu4 = zenati eu4 = guanche eu4 = berber_colonial eu4 = chleuh }
-link = { vic2 = mashriqi eu4 = lebanese eu4 = nabatean eu4 = palestinian eu4 = al_iraqiya_arabic eu4 = al_suryah_arabic eu4 = levantine_arabic eu4 = aramaic_colonial eu4 = iraqi eu4 = levantine eu4 = mashreqi_colonial eu4 = shami }
-link = { vic2 = maghrebi eu4 = maghreb_arabic eu4 = moroccan eu4 = chaoui eu4 = fezzan_culture eu4 = tripolitanian_culture eu4 = moorish eu4 = fassi eu4 = hassaniya eu4 = kabyle eu4 = maghreb_colonial eu4 = rifain eu4 = tamazight }
-link = { vic2 = frencharab eu4 = frencharab }
-link = { vic2 = turkish eu4 = turkish eu4 = turkish_colonial eu4 = yorouk }
-link = { vic2 = pecheneg eu4 = pecheneg eu4 = gagauz }
+link = { vic3 = misri eu4 = al_misr_arabic eu4 = egyptian_arabic eu4 = egyptian eu4 = libyan }
+link = { vic3 = mashriqi eu4 = bedouin_arabic region = mashriq_region }
+link = { vic3 = bedouin eu4 = bedouin_arabic eu4 = omani_culture eu4 = yemeni_culture eu4 = yemenite eu4 = bahrani eu4 = bedouin eu4 = hejazi eu4 = gulf_arabic eu4 = mahri_culture eu4 = hejazi_culture eu4 = najdi eu4 = omani eu4 = yemeni eu4 = arabian_colonial eu4 = sabaean }
+link = { vic3 = berber eu4 = berber eu4 = gaetuli eu4 = garamantian eu4 = tunisian eu4 = algerian eu4 = berber eu4 = gaetuli eu4 = garamantian eu4 = shilha eu4 = atlasian eu4 = garamante eu4 = numidian eu4 = zenati eu4 = guanche eu4 = berber_colonial eu4 = chleuh }
+#link = { vic3 = haratin eu4 = ??? }
+link = { vic3 = mashriqi eu4 = lebanese eu4 = nabatean eu4 = palestinian eu4 = al_iraqiya_arabic eu4 = al_suryah_arabic eu4 = levantine_arabic eu4 = aramaic_colonial eu4 = iraqi eu4 = levantine eu4 = mashreqi_colonial eu4 = shami }
+link = { vic3 = maghrebi eu4 = maghreb_arabic eu4 = moroccan eu4 = chaoui eu4 = fezzan_culture eu4 = tripolitanian_culture eu4 = moorish eu4 = fassi eu4 = hassaniya eu4 = kabyle eu4 = maghreb_colonial eu4 = rifain eu4 = tamazight eu4 = frencharab }
+link = { vic3 = turkish eu4 = turkish eu4 = turkish_colonial eu4 = yorouk }
+link = { vic3 = pecheneg eu4 = pecheneg eu4 = gagauz }
 
 # Iranian - persian, east_persian, baluchi
-link = { vic2 = dinajidad eu4 = tajik eu4 = persian eu4 = saka eu4 = luri eu4 = khorasani eu4 = mazandarani eu4 = parthian eu4 = khuzi eu4 = lurish eu4 = persian eu4 = luri_colonial eu4 = qashqai eu4 = tabari eu4 = scythian eu4 = sarmatian eu4 = iazyges eu4 = uzbek eu4 = uzbehk eu4 = karluk eu4 = khazak eu4 = kirgiz eu4 = kirghiz eu4 = old_kirgiz eu4 = sogdian eu4 = tocharian eu4 = tajihk eu4 = uyghur eu4 = old_uyghur eu4 = east_persian eu4 = afghani eu4 = afghan eu4 = pashtun eu4 = kushan eu4 = baluchi eu4 = baloch eu4 = hazara eu4 = turkmeni eu4 = kurdish eu4 = tartar eu4 = bolghar eu4 = cuman eu4 = avar eu4 = khazar eu4 = astrakhani eu4 = bashkir eu4 = crimean eu4 = kazani eu4 = mishary eu4 = nogaybak eu4 = qasim eu4 = avar eu4 = chaghatai eu4 = mishar eu4 = nogai eu4 = tartar_colonial eu4 = hunnic eu4 = sinoturk region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = janub eu4 = tajik eu4 = persian eu4 = saka eu4 = luri eu4 = khorasani eu4 = mazandarani eu4 = parthian eu4 = khuzi eu4 = lurish eu4 = persian eu4 = luri_colonial eu4 = qashqai eu4 = tabari eu4 = scythian eu4 = sarmatian eu4 = iazyges eu4 = uzbek eu4 = uzbehk eu4 = karluk eu4 = khazak eu4 = kirgiz eu4 = kirghiz eu4 = old_kirgiz eu4 = sogdian eu4 = tocharian eu4 = tajihk eu4 = uyghur eu4 = old_uyghur eu4 = east_persian eu4 = afghani eu4 = afghan eu4 = pashtun eu4 = kushan eu4 = baluchi eu4 = baloch eu4 = hazara eu4 = turkmeni eu4 = kurdish eu4 = tartar eu4 = bolghar eu4 = cuman eu4 = avar eu4 = khazar eu4 = astrakhani eu4 = bashkir eu4 = crimean eu4 = kazani eu4 = mishary eu4 = nogaybak eu4 = qasim eu4 = avar eu4 = chaghatai eu4 = mishar eu4 = nogai eu4 = tartar_colonial eu4 = hunnic eu4 = sinoturk region = oceania_superregion }
-link = { vic2 = saahi eu4 = tajik eu4 = persian eu4 = saka eu4 = luri eu4 = khorasani eu4 = mazandarani eu4 = parthian eu4 = khuzi eu4 = lurish eu4 = persian eu4 = luri_colonial eu4 = qashqai eu4 = tabari eu4 = scythian eu4 = sarmatian eu4 = iazyges eu4 = uzbek eu4 = uzbehk eu4 = karluk eu4 = khazak eu4 = kirgiz eu4 = kirghiz eu4 = old_kirgiz eu4 = sogdian eu4 = tocharian eu4 = tajihk eu4 = uyghur eu4 = old_uyghur eu4 = east_persian eu4 = afghani eu4 = afghan eu4 = pashtun eu4 = kushan eu4 = baluchi eu4 = baloch eu4 = hazara eu4 = turkmeni eu4 = kurdish eu4 = tartar eu4 = bolghar eu4 = cuman eu4 = avar eu4 = khazar eu4 = astrakhani eu4 = bashkir eu4 = crimean eu4 = kazani eu4 = mishary eu4 = nogaybak eu4 = qasim eu4 = avar eu4 = chaghatai eu4 = mishar eu4 = nogai eu4 = tartar_colonial eu4 = hunnic eu4 = sinoturk region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = tajik eu4 = persian region = central_asia_region }
-link = { vic2 = tajik eu4 = tajik eu4 = sogdian eu4 = tajihk }
-link = { vic2 = tocharian eu4 = tocharian }
-link = { vic2 = persian eu4 = persian eu4 = saka eu4 = luri eu4 = khorasani eu4 = mazandarani eu4 = parthian eu4 = khuzi eu4 = lurish eu4 = luri_colonial eu4 = qashqai }
-link = { vic2 = sarmatian eu4 = sarmatian eu4 = iazyges eu4 = budinian eu4 = iazyx eu4 = roxolanian eu4 = scolotian }
-link = { vic2 = pashtun eu4 = east_persian eu4 = afghani eu4 = tabari eu4 = afghan eu4 = kushan eu4 = pashtun }
-link = { vic2 = baluchi eu4 = baluchi eu4 = baloch }
+link = { vic3 = tajik eu4 = persian region = central_asia_region }
+link = { vic3 = tajik eu4 = tajik eu4 = sogdian eu4 = tajihk }
+link = { vic3 = tocharian eu4 = tocharian }
+link = { vic3 = persian eu4 = persian eu4 = saka eu4 = luri eu4 = khorasani eu4 = mazandarani eu4 = parthian eu4 = khuzi eu4 = lurish eu4 = luri_colonial eu4 = qashqai }
+link = { vic3 = sarmatian eu4 = sarmatian eu4 = iazyges eu4 = budinian eu4 = iazyx eu4 = roxolanian eu4 = scolotian }
+link = { vic3 = pashtun eu4 = east_persian eu4 = afghani eu4 = tabari eu4 = afghan eu4 = kushan eu4 = pashtun }
+link = { vic3 = baluchi eu4 = baluchi eu4 = baloch }
 
 # Altaic - azerbadjani, turkmeni, mongol, uzbehk, khazak, kirgiz, siberian, yakut, tartar
-link = { vic2 = janalem eu4 = mari_culture eu4 = permic_culture eu4 = udmurt eu4 = chorasmian eu4 = sabir eu4 = hunnic eu4 = mongol eu4 = yuan_culture eu4 = chahar eu4 = khalkha eu4 = oirats eu4 = khitan eu4 = altaic_colonial eu4 = khalkas eu4 = khorchin eu4 = tumed eu4 = uriankhai eu4 = siberian eu4 = khanty eu4 = chukchi eu4 = mansi eu4 = mari eu4 = nenet eu4 = nivkh eu4 = selkup eu4 = yakut eu4 = yukagyr eu4 = buryat eu4 = tungus eu4 = daur eu4 = eveni eu4 = evenki eu4 = jurchen eu4 = oroqen eu4 = yukaghir eu4 = tibetan eu4 = balti eu4 = bhutanese eu4 = ladakhi eu4 = tibetic_colonial region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = ontustik eu4 = mari_culture eu4 = permic_culture eu4 = udmurt eu4 = chorasmian eu4 = sabir eu4 = hunnic eu4 = mongol eu4 = yuan_culture eu4 = chahar eu4 = khalkha eu4 = oirats eu4 = khitan eu4 = altaic_colonial eu4 = khalkas eu4 = khorchin eu4 = tumed eu4 = uriankhai eu4 = siberian eu4 = khanty eu4 = chukchi eu4 = mansi eu4 = mari eu4 = nenet eu4 = nivkh eu4 = selkup eu4 = yakut eu4 = yukagyr eu4 = buryat eu4 = tungus eu4 = daur eu4 = eveni eu4 = evenki eu4 = jurchen eu4 = oroqen eu4 = yukaghir eu4 = tibetan eu4 = balti eu4 = bhutanese eu4 = ladakhi eu4 = tibetic_colonial region = oceania_superregion }
-link = { vic2 = qalindigi eu4 = mari_culture eu4 = permic_culture eu4 = udmurt eu4 = chorasmian eu4 = sabir eu4 = hunnic eu4 = mongol eu4 = yuan_culture eu4 = chahar eu4 = khalkha eu4 = oirats eu4 = khitan eu4 = altaic_colonial eu4 = khalkas eu4 = khorchin eu4 = tumed eu4 = uriankhai eu4 = siberian eu4 = khanty eu4 = chukchi eu4 = mansi eu4 = mari eu4 = nenet eu4 = nivkh eu4 = selkup eu4 = yakut eu4 = yukagyr eu4 = buryat eu4 = tungus eu4 = daur eu4 = eveni eu4 = evenki eu4 = jurchen eu4 = oroqen eu4 = yukaghir eu4 = tibetan eu4 = balti eu4 = bhutanese eu4 = ladakhi eu4 = tibetic_colonial region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = hazara eu4 = mongol religion = shiite }
-link = { vic2 = azerbaijani eu4 = azerbadjani eu4 = azerbaijani }
-link = { vic2 = hazara eu4 = hazara }
-link = { vic2 = turkmen eu4 = turkmeni eu4 = hephthalite }
-link = { vic2 = mongol eu4 = mongol eu4 = chahar eu4 = khalkha eu4 = oirats eu4 = khitan eu4 = yuan_culture eu4 = altaic_colonial eu4 = khalkas eu4 = khamnigan eu4 = khorchin eu4 = tumed eu4 = uriankhai }
-link = { vic2 = uzbek eu4 = chorasmian eu4 = uzbek eu4 = uzbehk eu4 = karluk }
-link = { vic2 = kazak eu4 = khazak }
-link = { vic2 = kirgiz eu4 = kirgiz eu4 = kirghiz eu4 = old_kirgiz }
-link = { vic2 = siberian eu4 = siberian eu4 = khanty eu4 = chukchi eu4 = mansi eu4 = mari eu4 = nenet eu4 = nivkh eu4 = selkup }
-link = { vic2 = yakut eu4 = yakut eu4 = yukagyr eu4 = buryat eu4 = tungus eu4 = daur eu4 = eveni eu4 = evenki eu4 = jurchen eu4 = oroqen eu4 = yukaghir }
-link = { vic2 = tatar eu4 = mari_culture eu4 = permic_culture eu4 = udmurt eu4 = sabir eu4 = hunnic eu4 = tartar eu4 = bolghar eu4 = cuman eu4 = avar eu4 = khazar eu4 = astrakhani eu4 = bashkir eu4 = crimean eu4 = kazani eu4 = mishary eu4 = nogaybak eu4 = qasim eu4 = chaghatai eu4 = avar eu4 = tartar_colonial eu4 = hunnic eu4 = sinoturk  eu4 = nogai eu4 = chuvash }
-link = { vic2 = kurdish eu4 = kurdish }
-link = { vic2 = uighur eu4 = uyghur eu4 = old_uyghur }
+link = { vic3 = hazara eu4 = mongol religion = shiite }
+link = { vic3 = azerbaijani eu4 = azerbadjani eu4 = azerbaijani }
+link = { vic3 = hazara eu4 = hazara }
+link = { vic3 = turkmen eu4 = turkmeni eu4 = hephthalite }
+link = { vic3 = mongol eu4 = mongol eu4 = chahar eu4 = khalkha eu4 = oirats eu4 = khitan eu4 = yuan_culture eu4 = altaic_colonial eu4 = khalkas eu4 = khamnigan eu4 = khorchin eu4 = tumed eu4 = uriankhai }
+link = { vic3 = uzbek eu4 = chorasmian eu4 = uzbek eu4 = uzbehk eu4 = karluk }
+link = { vic3 = kazak eu4 = khazak }
+link = { vic3 = kirgiz eu4 = kirgiz eu4 = kirghiz eu4 = old_kirgiz }
+link = { vic3 = siberian eu4 = siberian eu4 = khanty eu4 = chukchi eu4 = mansi eu4 = mari eu4 = nenet eu4 = nivkh eu4 = selkup }
+link = { vic3 = yakut eu4 = yakut eu4 = yukagyr eu4 = buryat eu4 = tungus eu4 = daur eu4 = eveni eu4 = evenki eu4 = jurchen eu4 = oroqen eu4 = yukaghir }
+#link = { vic3 = tuvan eu4 = ??? }
+link = { vic3 = tatar eu4 = mari_culture eu4 = permic_culture eu4 = udmurt eu4 = sabir eu4 = hunnic eu4 = tartar eu4 = bolghar eu4 = cuman eu4 = avar eu4 = khazar eu4 = astrakhani eu4 = bashkir eu4 = crimean eu4 = kazani eu4 = mishary eu4 = nogaybak eu4 = qasim eu4 = chaghatai eu4 = avar eu4 = tartar_colonial eu4 = hunnic eu4 = sinoturk  eu4 = nogai eu4 = chuvash }
+link = { vic3 = kurdish eu4 = kurdish }
+link = { vic3 = uighur eu4 = uyghur eu4 = old_uyghur }
 
 # Central American - zapotek, tarascan, mayan, nahua
-link = { vic2 = zapotec eu4 = zapotek eu4 = mixtec eu4 = tlapanec eu4 = chichimecha eu4 = cuicatec eu4 = manguean eu4 = metztitlani eu4 = mixean eu4 = zapotec eu4 = zoque }
-link = { vic2 = tarascan eu4 = purepecha eu4 = tecos }
-link = { vic2 = mayan eu4 = mayan eu4 = yucatec eu4 = putun eu4 = highland_mayan eu4 = lacandon eu4 = wastek eu4 = chontales eu4 = guamares eu4 = cholan eu4 = huastec eu4 = itza eu4 = mamean eu4 = quichean eu4 = tzeltal eu4 = yucatecan }
-link = { vic2 = nahua eu4 = aztek eu4 = totonac eu4 = matlatzinca eu4 = tepic eu4 = otomi eu4 = yaqui eu4 = chontal eu4 = cuitlatec eu4 = nahuatl_c eu4 = nawa eu4 = tepanec eu4 = tlaxcallan }
-link = { vic2 = native_american_minor eu4 = chichimecan eu4 = atakapa eu4 = beothuk eu4 = calusa eu4 = chitimacha eu4 = chon eu4 = ket eu4 = puelche eu4 = seminole eu4 = timicua eu4 = tonkawa }
+link = { vic3 = zapotec eu4 = zapotek eu4 = tlapanec eu4 = chichimecha eu4 = cuicatec eu4 = manguean eu4 = metztitlani eu4 = mixean eu4 = zapotec eu4 = zoque }
+link = { vic3 = mixtec eu4 = mixtec }
+link = { vic3 = tarascan eu4 = purepecha eu4 = tecos }
+link = { vic3 = mayan eu4 = mayan eu4 = yucatec eu4 = putun eu4 = highland_mayan eu4 = lacandon eu4 = wastek eu4 = chontales eu4 = guamares eu4 = cholan eu4 = huastec eu4 = itza eu4 = mamean eu4 = quichean eu4 = tzeltal eu4 = yucatecan }
+link = { vic3 = nahua eu4 = aztek eu4 = totonac eu4 = matlatzinca eu4 = tepic eu4 = otomi eu4 = yaqui eu4 = chontal eu4 = cuitlatec eu4 = nahuatl_c eu4 = nawa eu4 = tepanec eu4 = tlaxcallan }
+link = { vic3 = native_american_minor eu4 = chichimecan eu4 = atakapa eu4 = beothuk eu4 = calusa eu4 = chitimacha eu4 = chon eu4 = ket eu4 = puelche eu4 = seminole eu4 = timicua eu4 = tonkawa }
 
 # South American - chibchan, maranon, quechua, aimara, amazonian, tupi, je, guarani, araucanian, amazonian
-link = { vic2 = chibchan eu4 = muisca eu4 = cara eu4 = miskito eu4 = chibchan eu4 = manteno eu4 = misumalpan eu4 = pech eu4 = xinca }
-link = { vic2 = maranon eu4 = jivaro eu4 = chachapoyan eu4 = huancabamba eu4 = kanari }
-link = { vic2 = quechua eu4 = inca eu4 = chimuan eu4 = chibcha eu4 = chimu eu4 = chiribaya eu4 = culle eu4 = huaylas eu4 = nazca eu4 = quechuan }
-link = { vic2 = aimara eu4 = aimara  eu4 = diaguita }
-link = { vic2 = amazonian eu4 = amazonian eu4 = maipurean }
-link = { hpm = tupinamba vic2 = tupi eu4 = tupinamba eu4 = tupi }
-link = { vic2 = tupi eu4 = tupinamba eu4 = tupi }
-link = { vic2 = je eu4 = ge }
-link = { vic2 = guarani eu4 = guarani eu4 = charruan }
-link = { vic2 = patagonian eu4 = patagonian eu4 = het }
-link = { vic2 = araucanian eu4 = huarpe eu4 = mapuche }
-link = { vic2 = chacoan eu4 = chacoan eu4 = mataco }
+link = { vic3 = chibchan eu4 = cara eu4 = chibchan eu4 = manteno eu4 = misumalpan eu4 = pech eu4 = xinca }
+link = { vic3 = muisca eu4 = muisca }
+link = { vic3 = miskito eu4 = miskito }
+link = { vic3 = maranon eu4 = jivaro eu4 = chachapoyan eu4 = huancabamba eu4 = kanari }
+link = { vic3 = quechua eu4 = inca eu4 = chimuan eu4 = chibcha eu4 = chimu eu4 = chiribaya eu4 = culle eu4 = huaylas eu4 = nazca eu4 = quechuan }
+link = { vic3 = aimara eu4 = aimara  eu4 = diaguita }
+link = { vic3 = amazonian eu4 = amazonian eu4 = maipurean }
+link = { vic3 = tupinamba eu4 = tupinamba eu4 = tupi }
+link = { vic3 = je eu4 = ge }
+link = { vic3 = guarani eu4 = guarani eu4 = charruan }
+link = { vic3 = patagonian eu4 = patagonian eu4 = het }
+link = { vic3 = araucanian eu4 = huarpe eu4 = mapuche }
+link = { vic3 = chacoan eu4 = chacoan eu4 = mataco }
 
 # Carribean - arawak, carib
-link = { vic2 = guajiro eu4 = arawak region = bogota_area region = coquivacoa_area region = popayan_area region = venezuela_area }
-link = { vic2 = guajiro eu4 = guajiro }
-link = { vic2 = carribean eu4 = arawak eu4 = arawako eu4 = carib eu4 = cariban eu4 = kalina }
+link = { vic3 = guajiro eu4 = arawak region = bogota_area region = coquivacoa_area region = popayan_area region = venezuela_area }
+link = { vic3 = guajiro eu4 = guajiro }
+link = { vic3 = carribean eu4 = arawak eu4 = arawako eu4 = carib eu4 = cariban eu4 = kalina }
 
 # Métis - Christian Native North Americans (huge line of code)
-link = { vic2 = metis eu4 = dakota eu4 = nakota eu4 = chiwere eu4 = osage eu4 = catawba eu4 = cherokee eu4 = iroquois eu4 = iroquis eu4 = huron eu4 = susquehannock eu4 = pueblo eu4 = piman eu4 = shoshone eu4 = kiowa eu4 = kamchatkan eu4 = aleutian eu4 = inuit eu4 = cree eu4 = shawnee eu4 = anishinabe eu4 = illini eu4 = mesquakie eu4 = navajo eu4 = chipewyan eu4 = athabascan eu4 = apache eu4 = haida eu4 = chinook eu4 = salish eu4 = yokuts eu4 = arapaho eu4 = cheyenne eu4 = blackfoot eu4 = delaware eu4 = abenaki eu4 = mikmaq eu4 = mahican eu4 = powhatan eu4 = pequot eu4 = creek eu4 = choctaw eu4 = chickasaw eu4 = pawnee eu4 = wichita eu4 = caddo eu4 = tlingit eu4 = miwok religion = catholic religion = cathar religion = fraticelli religion = waldensian religion = lollard religion = catholic_heresy religion = arian religion = protestant religion = protestant_heresy religion = orthodox religion = bogomilist religion = monothelite religion = iconoclast religion = paulician religion = orthodox_heresy religion = coptic religion = monophysite religion = nestorian religion = messalian eu4 = mestizo }
+link = { vic3 = metis eu4 = dakota eu4 = nakota eu4 = chiwere eu4 = osage eu4 = catawba eu4 = cherokee eu4 = iroquois eu4 = iroquis eu4 = huron eu4 = susquehannock eu4 = pueblo eu4 = piman eu4 = shoshone eu4 = kiowa eu4 = kamchatkan eu4 = aleutian eu4 = inuit eu4 = cree eu4 = shawnee eu4 = anishinabe eu4 = illini eu4 = mesquakie eu4 = navajo eu4 = chipewyan eu4 = athabascan eu4 = apache eu4 = haida eu4 = chinook eu4 = salish eu4 = yokuts eu4 = arapaho eu4 = cheyenne eu4 = blackfoot eu4 = delaware eu4 = abenaki eu4 = mikmaq eu4 = mahican eu4 = powhatan eu4 = pequot eu4 = creek eu4 = choctaw eu4 = chickasaw eu4 = pawnee eu4 = wichita eu4 = caddo eu4 = tlingit eu4 = miwok religion = catholic religion = cathar religion = fraticelli religion = waldensian religion = lollard religion = catholic_heresy religion = arian religion = protestant religion = protestant_heresy religion = orthodox religion = bogomilist religion = monothelite religion = iconoclast religion = paulician religion = orthodox_heresy religion = coptic religion = monophysite religion = nestorian religion = messalian eu4 = mestizo }
 
 # North American - dakota, cherokee, pueblo, aleutian, inuit, cree, iroquis, huron, navajo, shawnee, delaware, creek, etc
-link = { hpm = dakota vic2 = siouan eu4 = dakota }
-link = { vic2 = siouan eu4 = dakota eu4 = nakota eu4 = chiwere eu4 = osage eu4 = catawba eu4 = kanza eu4 = lakota eu4 = missouri eu4 = osagee eu4 = woccon eu4 = yuchi }
-link = { vic2 = iroquoian eu4 = iroquois eu4 = iroquis eu4 = huron eu4 = susquehannock eu4 = erielhonan eu4 = lenape eu4 = mingwe eu4 = neutral eu4 = tuscarora eu4 = tionontate eu4 = laurentian }
-link = { vic2 = cherokee eu4 = cherokee }
-link = { hpm = pueblo vic2 = sonoran eu4 = pueblo }
-link = { vic2 = sonoran eu4 = pueblo eu4 = piman eu4 = shoshone eu4 = kiowa eu4 = cahuila eu4 = comanche eu4 = hopi eu4 = mayo eu4 = pima eu4 = purepechan eu4 = tarachatitian eu4 = tarahumaran eu4 = ute }
-link = { hpm = inuit vic2 = eskaleut eu4 = inuit }
-link = { vic2 = eskaleut eu4 = kamchatkan eu4 = aleutian eu4 = inuit eu4 = yupik }
-link = { hpm = cree vic2 = central_algonquian eu4 = cree eu4 = plains_cree }
-link = { vic2 = central_algonquian eu4 = cree eu4 = shawnee eu4 = anishinabe eu4 = illini eu4 = mesquakie eu4 = innu eu4 = miami eu4 = odawa eu4 = ojibwa eu4 = potawatomi eu4 = bungi eu4 = plains_cree }
-link = { hpm = navajo vic2 = na_dene eu4 = navajo }
-link = { vic2 = na_dene eu4 = navajo eu4 = chipewyan eu4 = athabascan eu4 = apache eu4 = haida eu4 = mescalero eu4 = lipan  eu4 = coahuiltec eu4 = hayda eu4 = hoopa eu4 = tanaina eu4 = tlingit }
-link = { vic2 = penutian eu4 = chinook eu4 = salish eu4 = yokuts eu4 = chilcotin eu4 = kalispel eu4 = penutian_colonial eu4 = sahaptian eu4 = shuswap eu4 = tsimishian eu4 = wintuan eu4 = yokut }
-link = { vic2 = plains_algonquian eu4 = arapaho eu4 = cheyenne eu4 = blackfoot eu4 = winnebago }
-link = { vic2 = eastern_algonquian eu4 = delaware eu4 = abenaki eu4 = mikmaq eu4 = miqmaq eu4 = mahican eu4 = powhatan eu4 = pequot eu4 = algonquin eu4 = maliseet eu4 = massachusset }
-link = { vic2 = muskogean eu4 = creek eu4 = choctaw eu4 = chickasaw eu4 = yamasee eu4 = yoron eu4 = natchez }
-link = { vic2 = caddoan eu4 = pawnee eu4 = wichita eu4 = caddo }
-link = { vic2 = native_american_minor eu4 = tlingit eu4 = miwok }
+link = { vic3 = dakota eu4 = dakota }
+link = { vic3 = siouan eu4 = nakota eu4 = chiwere eu4 = osage eu4 = catawba eu4 = kanza eu4 = lakota eu4 = missouri eu4 = osagee eu4 = woccon eu4 = yuchi }
+link = { vic3 = iroquoian eu4 = iroquois eu4 = iroquis eu4 = huron eu4 = susquehannock eu4 = erielhonan eu4 = lenape eu4 = mingwe eu4 = neutral eu4 = tuscarora eu4 = tionontate eu4 = laurentian }
+link = { vic3 = cherokee eu4 = cherokee }
+link = { vic3 = pueblo eu4 = pueblo }
+link = { vic3 = oodham eu4 = piman eu4 = kiowa eu4 = cahuila eu4 = hopi eu4 = mayo eu4 = pima eu4 = purepechan eu4 = tarachatitian eu4 = tarahumaran }
+link = { vic3 = paiute eu4 = shoshone eu4 = ute }
+#link = { vic3 = hokan eu4 = ??? }
+link = { vic3 = comanche eu4 = comanche }
+link = { vic3 = inuit eu4 = inuit }
+link = { vic3 = inuit eu4 = kamchatkan eu4 = aleutian eu4 = inuit eu4 = yupik }
+link = { vic3 = cree eu4 = cree eu4 = plains_cree }
+link = { vic3 = algonquian eu4 = shawnee eu4 = anishinabe eu4 = illini eu4 = mesquakie eu4 = innu eu4 = miami eu4 = odawa eu4 = ojibwa eu4 = potawatomi eu4 = bungi }
+link = { vic3 = navajo eu4 = navajo }
+link = { vic3 = apache eu4 = apache }
+link = { vic3 = athabaskan eu4 = athabascan }
+link = { vic3 = nez_perce eu4 = chipewyan eu4 = haida eu4 = mescalero eu4 = lipan  eu4 = coahuiltec eu4 = hayda eu4 = hoopa eu4 = tanaina eu4 = tlingit }
+link = { vic3 = penutian eu4 = chinook eu4 = yokuts eu4 = chilcotin eu4 = kalispel eu4 = penutian_colonial eu4 = sahaptian eu4 = shuswap eu4 = tsimishian eu4 = wintuan eu4 = yokut }
+link = { vic3 = salish eu4 = salish }
+link = { vic3 = algonquian eu4 = arapaho eu4 = cheyenne eu4 = blackfoot eu4 = winnebago }
+link = { vic3 = algonquian eu4 = delaware eu4 = abenaki eu4 = mikmaq eu4 = miqmaq eu4 = mahican eu4 = powhatan eu4 = pequot eu4 = algonquin eu4 = maliseet eu4 = massachusset }
+link = { vic3 = muskogean eu4 = creek eu4 = chickasaw eu4 = yamasee eu4 = yoron eu4 = natchez }
+link = { vic3 = caddoan eu4 = pawnee eu4 = wichita eu4 = caddo eu4 = choctaw }
+link = { vic3 = native_american_minor eu4 = tlingit eu4 = miwok }
 
 # East Asian - japanese, manchu, chihan, cantonese, korean
-link = { vic2 = dongren eu4 = tangut eu4 = japanese eu4 = kyushuan eu4 = togoku eu4 = chubu eu4 = chugoku eu4 = hokkokujin eu4 = japanese_colonial eu4 = kansai eu4 = kanto eu4 = koshi eu4 = kyushu eu4 = nangokujin eu4 = nantoukokujin eu4 = ryukyuan eu4 = seikokujin eu4 = shikoku eu4 = shotoujin eu4 = tohoku eu4 = toukokujin eu4 = manchu_new eu4 = manchu eu4 = evenk eu4 = chihan eu4 = jin eu4 = xibei eu4 = zhongyuan eu4 = shangdong_culture eu4 = beiguoren eu4 = hanyu eu4 = gan eu4 = xiang eu4 = sichuanese eu4 = hubei eu4 = wu eu4 = jianghuai eu4 = chinese_colonial_dongguoren eu4 = lussong eu4 = minyu eu4 = nandongguoren eu4 = nanguoren eu4 = wuhan eu4 = xiguoren eu4 = yueyu eu4 = zuqun_colonial eu4 = korean eu4 = chaoxian eu4 = baegukin eu4 = donggukin eu4 = korean_colonial eu4 = namdonggukin eu4 = namgukin eu4 = seogukin eu4 = ainu eu4 = aynu eu4 = bai eu4 = hakka eu4 = miao eu4 = chimin region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = nanren eu4 = tangut eu4 = japanese eu4 = kyushuan eu4 = togoku eu4 = chubu eu4 = chugoku eu4 = hokkokujin eu4 = japanese_colonial eu4 = kansai eu4 = kanto eu4 = koshi eu4 = kyushu eu4 = nangokujin eu4 = nantoukokujin eu4 = ryukyuan eu4 = seikokujin eu4 = shikoku eu4 = shotoujin eu4 = tohoku eu4 = toukokujin eu4 = manchu_new eu4 = manchu eu4 = evenk eu4 = chihan eu4 = jin eu4 = xibei eu4 = zhongyuan eu4 = shangdong_culture eu4 = beiguoren eu4 = hanyu eu4 = gan eu4 = xiang eu4 = sichuanese eu4 = hubei eu4 = wu eu4 = jianghuai eu4 = chinese_colonial_dongguoren eu4 = lussong eu4 = minyu eu4 = nandongguoren eu4 = nanguoren eu4 = wuhan eu4 = xiguoren eu4 = yueyu eu4 = zuqun_colonial eu4 = korean eu4 = chaoxian eu4 = baegukin eu4 = donggukin eu4 = korean_colonial eu4 = namdonggukin eu4 = namgukin eu4 = seogukin eu4 = ainu eu4 = aynu eu4 = bai eu4 = hakka eu4 = miao eu4 = chimin region = oceania_superregion }
-link = { vic2 = heiren eu4 = tangut eu4 = japanese eu4 = kyushuan eu4 = togoku eu4 = chubu eu4 = chugoku eu4 = hokkokujin eu4 = japanese_colonial eu4 = kansai eu4 = kanto eu4 = koshi eu4 = kyushu eu4 = nangokujin eu4 = nantoukokujin eu4 = ryukyuan eu4 = seikokujin eu4 = shikoku eu4 = shotoujin eu4 = tohoku eu4 = toukokujin eu4 = manchu_new eu4 = manchu eu4 = evenk eu4 = chihan eu4 = jin eu4 = xibei eu4 = zhongyuan eu4 = shangdong_culture eu4 = beiguoren eu4 = hanyu eu4 = gan eu4 = xiang eu4 = sichuanese eu4 = hubei eu4 = wu eu4 = jianghuai eu4 = chinese_colonial_dongguoren eu4 = lussong eu4 = minyu eu4 = nandongguoren eu4 = nanguoren eu4 = wuhan eu4 = xiguoren eu4 = yueyu eu4 = zuqun_colonial eu4 = korean eu4 = chaoxian eu4 = baegukin eu4 = donggukin eu4 = korean_colonial eu4 = namdonggukin eu4 = namgukin eu4 = seogukin eu4 = ainu eu4 = aynu eu4 = bai eu4 = hakka eu4 = miao eu4 = chimin region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = japanese eu4 = japanese eu4 = kyushuan eu4 = togoku eu4 = chubu eu4 = chugoku eu4 = hokkokujin eu4 = japanese_colonial eu4 = kansai eu4 = kanto eu4 = koshi eu4 = kyushu eu4 = nangokujin eu4 = nantoukokujin eu4 = ryukyuan eu4 = seikokujin eu4 = shikoku eu4 = shotoujin eu4 = tohoku eu4 = toukokujin }
-link = { vic2 = manchu eu4 = manchu_new eu4 = manchu eu4 = evenk }
-link = { vic2 = xiyeren eu4 = chihan eu4 = jin eu4 = xibei eu4 = zhongyuan eu4 = shandong_culture eu4 = qing_culture eu4 = beiguoren eu4 = hanyu eu4 = tangut eu4 = gan eu4 = xiang eu4 = sichuanese eu4 = hubei eu4 = wu eu4 = jianghuai eu4 = chinese_colonial eu4 = dongguoren eu4 = lussong eu4 = minyu eu4 = nandongguoren eu4 = nanguoren eu4 = wuhan eu4 = xiguoren eu4 = yueyu eu4 = zuqun_colonial region = central_asia_region }
-link = { vic2 = beieren eu4 = chihan eu4 = jin eu4 = xibei eu4 = zhongyuan eu4 = shandong_culture eu4 = qing_culture eu4 = beiguoren eu4 = hanyu eu4 = tangut eu4 = gan eu4 = xiang eu4 = sichuanese eu4 = hubei eu4 = wu eu4 = jianghuai eu4 = chinese_colonial eu4 = dongguoren eu4 = lussong eu4 = minyu eu4 = nandongguoren eu4 = nanguoren eu4 = wuhan eu4 = xiguoren eu4 = yueyu eu4 = zuqun_colonial region = east_siberia_region region = west_siberia_region }
-link = { vic2 = naiyeren eu4 = chihan eu4 = jin eu4 = xibei eu4 = zhongyuan eu4 = shandong_culture eu4 = qing_culture eu4 = beiguoren eu4 = hanyu eu4 = tangut eu4 = gan eu4 = xiang eu4 = sichuanese eu4 = hubei eu4 = wu eu4 = jianghuai eu4 = chinese_colonial eu4 = dongguoren eu4 = lussong eu4 = minyu eu4 = nandongguoren eu4 = nanguoren eu4 = wuhan eu4 = xiguoren eu4 = yueyu eu4 = zuqun_colonial region = east_indies_superregion }
-link = { vic2 = beifaren eu4 = chihan eu4 = jin eu4 = xibei eu4 = zhongyuan eu4 = shandong_culture eu4 = qing_culture eu4 = beiguoren eu4 = hanyu }
-link = { vic2 = nanfaren eu4 = tangut eu4 = gan eu4 = xiang eu4 = sichuanese eu4 = hubei eu4 = wu eu4 = jianghuai eu4 = chinese_colonial eu4 = dongguoren eu4 = lussong eu4 = minyu eu4 = nandongguoren eu4 = nanguoren eu4 = wuhan eu4 = xiguoren eu4 = yueyu eu4 = zuqun_colonial }
-link = { vic2 = korean eu4 = korean eu4 = chaoxian eu4 = baegukin eu4 = korean_colonial eu4 = namdonggukin eu4 = namgukin eu4 = seogukin }
-link = { vic2 = ainu eu4 = ainu eu4 = aynu }
-link = { vic2 = hakka eu4 = hakka }
-link = { vic2 = miao eu4 = miao }
-link = { vic2 = min eu4 = chimin }
-link = { vic2 = zhuang eu4 = zhuang eu4 = baizu}
-link = { vic2 = yi eu4 = yi }
-link = { vic2 = yue eu4 = cantonese }
+link = { vic3 = japanese eu4 = japanese eu4 = kyushuan eu4 = togoku eu4 = chubu eu4 = chugoku eu4 = hokkokujin eu4 = japanese_colonial eu4 = kansai eu4 = kanto eu4 = koshi eu4 = kyushu eu4 = nangokujin eu4 = nantoukokujin eu4 = ryukyuan eu4 = seikokujin eu4 = shikoku eu4 = shotoujin eu4 = tohoku eu4 = toukokujin }
+link = { vic3 = manchu eu4 = manchu_new eu4 = manchu eu4 = evenk }
+link = { vic3 = han eu4 = chihan eu4 = jin eu4 = xibei eu4 = zhongyuan eu4 = shandong_culture eu4 = qing_culture eu4 = beiguoren eu4 = hanyu eu4 = tangut eu4 = gan eu4 = xiang eu4 = sichuanese eu4 = hubei eu4 = wu eu4 = jianghuai eu4 = chinese_colonial eu4 = dongguoren eu4 = lussong eu4 = minyu eu4 = nandongguoren eu4 = nanguoren eu4 = wuhan eu4 = xiguoren eu4 = yueyu eu4 = zuqun_colonial }
+link = { vic3 = korean eu4 = korean eu4 = chaoxian eu4 = baegukin eu4 = korean_colonial eu4 = namdonggukin eu4 = namgukin eu4 = seogukin }
+link = { vic3 = ainu eu4 = ainu eu4 = aynu }
+link = { vic3 = hakka eu4 = hakka }
+link = { vic3 = miao eu4 = miao }
+link = { vic3 = min eu4 = chimin }
+link = { vic3 = zhuang eu4 = zhuang eu4 = baizu}
+link = { vic3 = yi eu4 = yi }
+link = { vic3 = yue eu4 = cantonese }
 
 # Mon Khmer - khmer, mon, vietnamese
-link = { vic2 = thegioimoi eu4 = vietnamese eu4 = cham eu4 = khmer eu4 = degar eu4 = khmer_colonial eu4 = khmu eu4 = malayan eu4 = sumatran eu4 = acehnese eu4 = banjar eu4 = batak eu4 = indonesian eu4 = malay_colonial eu4 = minang eu4 = bornean eu4 = filipino eu4 = cebuano eu4 = filipino_colonial eu4 = maguindanao eu4 = philipino eu4 = tagalog eu4 = taiwanese eu4 = tausug eu4 = acehnese eu4 = javanese eu4 = balinese eu4 = javan eu4 = javan_colonial eu4 = sundanese eu4 = sulawesi eu4 = moluccan eu4 = bugis eu4 = bungku eu4 = chamorro eu4 = dayak eu4 = minahasa eu4 = central_thai eu4 = northern_thai eu4 = dambru eu4 = lanna eu4 = sipsong_thai eu4 = thai eu4 = thai_colonial eu4 = lao eu4 = laotian eu4 = shan eu4 = burmese eu4 = mon eu4 = arakanese eu4 = burman_colonial eu4 = monic eu4 = garjati eu4 = gondi eu4 = jharkhandi eu4 = central_indian_colonial eu4 = yizu eu4 = kachin eu4 = karen region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = phianam eu4 = vietnamese eu4 = cham eu4 = khmer eu4 = degar eu4 = khmer_colonial eu4 = khmu eu4 = malayan eu4 = sumatran eu4 = acehnese eu4 = banjar eu4 = batak eu4 = indonesian eu4 = malay_colonial eu4 = minang eu4 = bornean eu4 = filipino eu4 = cebuano eu4 = filipino_colonial eu4 = maguindanao eu4 = philipino eu4 = tagalog eu4 = taiwanese eu4 = tausug eu4 = javanese eu4 = balinese eu4 = javan eu4 = javan_colonial eu4 = sundanese eu4 = sulawesi eu4 = moluccan eu4 = bugis eu4 = bungku eu4 = chamorro eu4 = dayak eu4 = minahasa eu4 = central_thai eu4 = northern_thai eu4 = dambru eu4 = lanna eu4 = sipsong_thai eu4 = thai eu4 = thai_colonial eu4 = lao eu4 = laotian eu4 = shan eu4 = burmese eu4 = mon eu4 = arakanese eu4 = burman_colonial eu4 = monic eu4 = garjati eu4 = gondi eu4 = jharkhandi eu4 = central_indian_colonial eu4 = yizu eu4 = kachin eu4 = karen region = oceania_superregion }
-link = { vic2 = dhen eu4 = vietnamese eu4 = cham eu4 = khmer eu4 = degar eu4 = khmer_colonial eu4 = khmu eu4 = malayan eu4 = sumatran eu4 = acehnese eu4 = banjar eu4 = batak eu4 = indonesian eu4 = malay_colonial eu4 = minang eu4 = bornean eu4 = filipino eu4 = cebuano eu4 = filipino_colonial eu4 = maguindanao eu4 = philipino eu4 = tagalog eu4 = taiwanese eu4 = tausug eu4 = javanese eu4 = balinese eu4 = javan eu4 = javan_colonial eu4 = sundanese eu4 = sulawesi eu4 = moluccan eu4 = bugis eu4 = bungku eu4 = chamorro eu4 = dayak eu4 = minahasa eu4 = central_thai eu4 = northern_thai eu4 = dambru eu4 = lanna eu4 = sipsong_thai eu4 = thai eu4 = thai_colonial eu4 = lao eu4 = laotian eu4 = shan eu4 = burmese eu4 = mon eu4 = arakanese eu4 = burman_colonial eu4 = monic eu4 = garjati eu4 = gondi eu4 = jharkhandi eu4 = central_indian_colonial eu4 = yizu eu4 = kachin eu4 = karen region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = vietnamese eu4 = vietnamese eu4 = cham }
-link = { vic2 = khmer eu4 = khmer eu4 = degar eu4 = khmer_colonial eu4 = khmu }
+link = { vic3 = vietnamese eu4 = vietnamese eu4 = cham }
+link = { vic3 = khmer eu4 = khmer eu4 = degar eu4 = khmer_colonial }
+link = { vic3 = khmu eu4 = khmu }
 
 # Malay - cham, malayan, filipino, madagascan, sulawesi
-link = { vic2 = bornean eu4 = bornean }
-link = { vic2 = malay eu4 = malayan eu4 = sumatran eu4 = acehenese eu4 = banjar eu4 = batak eu4 = indonesian eu4 = malay_colonial eu4 = minang }
-link = { vic2 = filipino eu4 = filipino u4 = cebuano eu4 = fiilpino_colonial eu4 = filipino_colonial eu4 = maguindanao eu4 = philipino eu4 = tagalog eu4 = taiwanese eu4 = tausug }
-link = { vic2 = javan eu4 = javanese eu4 = balinese eu4 = sundanese eu4 = javan_colonial eu4 = javan eu4 = acehnese eu4 = nusa_tenggara }
-link = { vic2 = moluccan eu4 = sulawesi eu4 = moluccan eu4 = bugis eu4 = bungku eu4 = chamorro eu4 = dayak eu4 = minahasa }
+link = { vic3 = bornean eu4 = bornean }
+link = { vic3 = malay eu4 = malayan eu4 = banjar eu4 = indonesian eu4 = malay_colonial eu4 = minang }
+link = { vic3 = sumatran eu4 = sumatran eu4 = acehenese }
+link = { vic3 = batak eu4 = batak }
+link = { vic3 = filipino eu4 = filipino u4 = cebuano eu4 = fiilpino_colonial eu4 = filipino_colonial eu4 = maguindanao eu4 = philipino eu4 = tagalog eu4 = taiwanese eu4 = tausug }
+link = { vic3 = javan eu4 = javanese eu4 = sundanese eu4 = javan_colonial eu4 = javan eu4 = acehnese eu4 = nusa_tenggara }
+link = { vic3 = balinese eu4 = balinese }
+link = { vic3 = moluccan eu4 = sulawesi eu4 = moluccan eu4 = bugis eu4 = bungku eu4 = chamorro eu4 = minahasa }
+link = { vic3 = dayak eu4 = dayak }
 
 # Thai - central_thai, lao, northern_thai, shan
-link = { vic2 = thai eu4 = central_thai eu4 = northern_thai eu4 = dambru eu4 = lanna eu4 = sipsong_thai eu4 = thai eu4 = thai_colonial }
-link = { vic2 = lao eu4 = lao eu4 = laotian }
-link = { vic2 = shan eu4 = shan }
+link = { vic3 = thai eu4 = central_thai eu4 = northern_thai eu4 = dambru eu4 = lanna eu4 = sipsong_thai eu4 = thai eu4 = thai_colonial }
+link = { vic3 = lao eu4 = lao eu4 = laotian }
+link = { vic3 = shan eu4 = shan }
 
 # Burman - burmese, tibetan
-link = { vic2 = burmese eu4 = burmese eu4 = mon eu4 = arakanese eu4 = burman_colonial eu4 = monic }
-link = { vic2 = tibetan eu4 = zhangzhung eu4 = sumpa eu4 = tibetan eu4 = balti eu4 = bhutanese eu4 = ladakhi eu4 = tibetic_colonial }
-link = { vic2 = bai eu4 = bai }
-link = { vic2 = kachin eu4 = kachin }
-link = { vic2 = karen eu4 = karen }
+link = { vic3 = burmese eu4 = burmese eu4 = mon eu4 = arakanese eu4 = burman_colonial eu4 = monic }
+link = { vic3 = tibetan eu4 = zhangzhung eu4 = sumpa eu4 = tibetan eu4 = balti eu4 = bhutanese eu4 = ladakhi eu4 = tibetic_colonial }
+link = { vic3 = bai eu4 = bai }
+link = { vic3 = kachin eu4 = kachin }
+link = { vic3 = karen eu4 = karen }
 
 # Pacific - papuan, aboriginal, melanesian, moluccan
-link = { vic2 = hawaiian eu4 = polynesian provinceid = 1240 provinceid = 1997 }
-link = { vic2 = melanesian eu4 = polynesian region = melanesia_area }
-link = { vic2 = maori eu4 = polynesian region = oceanea_region }
-link = { vic2 = maori eu4 = maori }
-link = { vic2 = micronesian eu4 = polynesian region = micronesia_area }
-link = { vic2 = hawaiian eu4 = hawaian }
-link = { vic2 = aborigine eu4 = aboriginal eu4 = paman eu4 = gamilaraay eu4 = yura eu4 = gunwinyguan eu4 = nyoongah eu4 = palawa eu4 = kulin }
-link = { vic2 = melanesian eu4 = melanesian eu4 = papuan eu4 = halmahera }
-link = { vic2 = micronesian eu4 = micronesian }
-link = { vic2 = polynesian eu4 = polynesian }
-
-# Colonizer India
-link = { vic2 = nayeduniya eu4 = assamese eu4 = assamese_colonial eu4 = dimasa eu4 = kochrajbongshi eu4 = meitei eu4 = sutiya eu4 = tripuri eu4 = bengali eu4 = eastern_aryan_colonial eu4 = bihari eu4 = chin eu4 = pahari eu4 = nepali eu4 = pahari_colonial eu4 = sikkimese eu4 = oriya eu4 = sinhala eu4 = avadhi eu4 = vindhyan eu4 = kanauji eu4 = bagheli eu4 = bundeli eu4 = dakani eu4 = hindusthani_colonial eu4 = panjabi eu4 = urdu eu4 = kashmiri eu4 = gujarati eu4 = parsi eu4 = nagpuri eu4 = sambalpuri eu4 = marathi eu4 = bhil eu4 = deccan_colonial eu4 = tuluva eu4 = sindhi eu4 = rajput eu4 = malvi eu4 = dhundari eu4 = harauti eu4 = jati eu4 = khandeshi eu4 = marwari eu4 = meo eu4 = mewari eu4 = naga eu4 = rajput_colonial eu4 = saurashtri eu4 = tomara eu4 = kannada eu4 = kochi eu4 = malayalam eu4 = tamil eu4 = dravidian_colonial eu4 = mahl eu4 = telegu region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = dakshin eu4 = assamese eu4 = assamese_colonial eu4 = dimasa eu4 = kochrajbongshi eu4 = meitei eu4 = sutiya eu4 = tripuri eu4 = bengali eu4 = eastern_aryan_colonial eu4 = bihari eu4 = chin eu4 = pahari eu4 = nepali eu4 = pahari_colonial eu4 = sikkimese eu4 = oriya eu4 = sinhala eu4 = avadhi eu4 = vindhyan eu4 = kanauji eu4 = bagheli eu4 = bundeli eu4 = dakani eu4 = hindusthani_colonial eu4 = panjabi eu4 = urdu eu4 = kashmiri eu4 = gujarati eu4 = parsi eu4 = nagpuri eu4 = sambalpuri eu4 = marathi eu4 = bhil eu4 = deccan_colonial eu4 = tuluva eu4 = sindhi eu4 = rajput eu4 = malvi eu4 = dhundari eu4 = harauti eu4 = jati eu4 = khandeshi eu4 = marwari eu4 = meo eu4 = mewari eu4 = naga eu4 = rajput_colonial eu4 = saurashtri eu4 = tomara eu4 = kannada eu4 = kochi eu4 = malayalam eu4 = tamil eu4 = dravidian_colonial eu4 = mahl eu4 = telegu region = oceania_superregion }
-link = { vic2 = kaala eu4 = assamese eu4 = assamese_colonial eu4 = dimasa eu4 = kochrajbongshi eu4 = meitei eu4 = sutiya eu4 = tripuri eu4 = bengali eu4 = eastern_aryan_colonial eu4 = bihari eu4 = chin eu4 = pahari eu4 = nepali eu4 = pahari_colonial eu4 = sikkimese eu4 = oriya eu4 = sinhala eu4 = avadhi eu4 = vindhyan eu4 = kanauji eu4 = bagheli eu4 = bundeli eu4 = dakani eu4 = hindusthani_colonial eu4 = panjabi eu4 = urdu eu4 = kashmiri eu4 = gujarati eu4 = parsi eu4 = nagpuri eu4 = sambalpuri eu4 = marathi eu4 = bhil eu4 = deccan_colonial eu4 = tuluva eu4 = sindhi eu4 = rajput eu4 = malvi eu4 = dhundari eu4 = harauti eu4 = jati eu4 = khandeshi eu4 = marwari eu4 = meo eu4 = mewari eu4 = naga eu4 = rajput_colonial eu4 = saurashtri eu4 = tomara eu4 = kannada eu4 = kochi eu4 = malayalam eu4 = tamil eu4 = dravidian_colonial eu4 = mahl eu4 = telegu region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
+link = { vic3 = hawaiian eu4 = polynesian provinceid = 1240 provinceid = 1997 }
+link = { vic3 = melanesian eu4 = polynesian region = melanesia_area }
+link = { vic3 = maori eu4 = polynesian region = oceanea_region }
+link = { vic3 = maori eu4 = maori }
+link = { vic3 = micronesian eu4 = polynesian region = micronesia_area }
+link = { vic3 = hawaiian eu4 = hawaian }
+link = { vic3 = aborigine eu4 = aboriginal eu4 = paman eu4 = gamilaraay eu4 = yura eu4 = gunwinyguan eu4 = nyoongah eu4 = palawa eu4 = kulin }
+link = { vic3 = melanesian eu4 = melanesian eu4 = papuan eu4 = halmahera }
+link = { vic3 = micronesian eu4 = micronesian }
+link = { vic3 = polynesian eu4 = polynesian }
 
 # Eastern Aryan - assamese, bengali, bihari, nepali, oriya, sinhala, chin
-link = { vic2 = assamese eu4 = assamese eu4 = assamese_colonial eu4 = kochrajbongshi eu4 = meitei eu4 = sutiya eu4 = tripuri }
-link = { vic2 = bengali eu4 = bengali eu4 = eastern_aryan_colonial }
-link = { vic2 = bihari eu4 = bihari }
-link = { vic2 = manipuri eu4 = chin }
-link = { vic2 = nepali eu4 = nepali eu4 = pahari eu4 = pahari_colonial eu4 = sikkimese }
-link = { vic2 = oriya eu4 = oriya }
-link = { vic2 = sinhala eu4 = sinhala }
+link = { vic3 = assamese eu4 = assamese eu4 = assamese_colonial eu4 = kochrajbongshi eu4 = meitei eu4 = sutiya eu4 = tripuri }
+link = { vic3 = bengali eu4 = bengali eu4 = eastern_aryan_colonial }
+link = { vic3 = bihari eu4 = bihari }
+link = { vic3 = manipuri eu4 = chin }
+link = { vic3 = nepali eu4 = nepali eu4 = pahari eu4 = pahari_colonial eu4 = sikkimese }
+link = { vic3 = oriya eu4 = oriya }
+link = { vic3 = sinhala eu4 = sinhala }
 
 # Hindusthani - avadhi, kanauji, panjabi, kashmiri
-link = { vic2 = avadhi eu4 = avadhi }
-link = { vic2 = kanauji eu4 = kanauji eu4 = vindhyan eu4 = bagheli eu4 = bundeli eu4 = dakani eu4 = hindusthani_colonial }
-link = { vic2 = panjabi eu4 = panjabi eu4 = urdu }
-link = { vic2 = kashmiri eu4 = kashmiri }
+link = { vic3 = avadhi eu4 = avadhi }
+link = { vic3 = kanauji eu4 = kanauji eu4 = vindhyan eu4 = bagheli eu4 = bundeli eu4 = dakani eu4 = hindusthani_colonial }
+link = { vic3 = panjabi eu4 = panjabi eu4 = urdu }
+link = { vic3 = kashmiri eu4 = kashmiri }
 
 # Western Aryan - gujarati, marathi, sindhi, rajput
-link = { vic2 = gujarati eu4 = gujarati eu4 = parsi eu4 = nagpuri eu4 = sambalpuri }
-link = { vic2 = marathi eu4 = marathi eu4 = bhil eu4 = deccan_colonial eu4 = tuluva }
-link = { vic2 = sindi eu4 = sindhi eu4 = multani }
-link = { vic2 = rajput eu4 = rajput eu4 = malvi eu4 = dhundari eu4 = harauti eu4 = jati eu4 = khandeshi eu4 = marwari eu4 = meo eu4 = mewari eu4 = naga eu4 = rajput_colonial eu4 = saurashtri eu4 = tomara }
+link = { vic3 = gujarati eu4 = gujarati eu4 = parsi eu4 = nagpuri eu4 = sambalpuri }
+link = { vic3 = marathi eu4 = marathi eu4 = bhil eu4 = deccan_colonial eu4 = tuluva }
+link = { vic3 = sindi eu4 = sindhi eu4 = multani }
+link = { vic3 = rajput eu4 = rajput eu4 = malvi eu4 = dhundari eu4 = harauti eu4 = jati eu4 = khandeshi eu4 = marwari eu4 = meo eu4 = mewari eu4 = naga eu4 = rajput_colonial eu4 = saurashtri eu4 = tomara }
 
 # Dravidian - kannada, malayalam, tamil, telegu
-link = { vic2 = kannada eu4 = kannada }
-link = { vic2 = malayalam eu4 = malayalam eu4 = kochi }
-link = { vic2 = tamil eu4 = tamil eu4 = dravidian_colonial eu4 = mahl }
-link = { vic2 = telegu eu4 = telegu }
+link = { vic3 = kannada eu4 = kannada }
+link = { vic3 = malayalam eu4 = malayalam eu4 = kochi }
+link = { vic3 = tamil eu4 = tamil eu4 = dravidian_colonial eu4 = mahl }
+link = { vic3 = telegu eu4 = telegu }
 
 # Central Indic - garjati, gondi, jharkhandi
-link = { vic2 = asian_minor eu4 = garjati eu4 = gondi eu4 = jharkhandi eu4 = central_indian_colonial eu4 = yizu }
+link = { vic3 = asian_minor eu4 = garjati eu4 = gondi eu4 = jharkhandi eu4 = central_indian_colonial eu4 = yizu }
 
 # African colonial
-link = { vic2 = afro_american eu4 = great_lakes_colonial }
-link = { vic2 = afro_american eu4 = guinean_colonial eu4 = madagascan_colonial eu4 = maroon eu4 = nigerian_colonial eu4 = nilotic_colonial eu4 = soudanese_colonial eu4 = southern_african_colonial }
+link = { vic3 = afro_american eu4 = great_lakes_colonial }
+link = { vic3 = afro_american eu4 = guinean_colonial eu4 = madagascan_colonial eu4 = maroon eu4 = nigerian_colonial eu4 = nilotic_colonial eu4 = soudanese_colonial eu4 = southern_african_colonial }
 
 # Sahelian - wolof, fulbe, hausa, kanuri, tuareg, baguirmi
-link = { vic2 = maures eu4 = tuareg region = cap_verde_area } #Mauritanian Tuaregs
-link = { vic2 = wolof eu4 = senegambian eu4 = jolof }
-link = { vic2 = fulbe eu4 = fulani }
-link = { vic2 = hausa eu4 = hausa eu4 = haussa }
-link = { vic2 = kanuri eu4 = kanuri }
-link = { vic2 = maures eu4 = maure }
-link = { vic2 = tuareg eu4 = tuareg }
-link = { vic2 = baguirmi eu4 = bilala }
+link = { vic3 = maures eu4 = tuareg region = cap_verde_area } #Mauritanian Tuaregs
+link = { vic3 = wolof eu4 = senegambian eu4 = jolof }
+link = { vic3 = fulbe eu4 = fulani }
+link = { vic3 = hausa eu4 = hausa eu4 = haussa }
+link = { vic3 = kanuri eu4 = kanuri }
+link = { vic3 = maures eu4 = maure }
+link = { vic3 = tuareg eu4 = tuareg }
+link = { vic3 = baguirmi eu4 = bilala }
 
 # Malian - songhai, mande, bambara, dyula
-link = { vic2 = songhai eu4 = songhai }
-link = { vic2 = mande eu4 = mali eu4 = soninke }
-link = { vic2 = bambara eu4 = bozo eu4 = bambara }
-link = { vic2 = dyula eu4 = dyola }
+link = { vic3 = songhai eu4 = songhai }
+link = { vic3 = mande eu4 = mali eu4 = soninke }
+link = { vic3 = bambara eu4 = bozo eu4 = bambara }
+link = { vic3 = dyula eu4 = dyola }
 
 # Southwest Coast - akan, fon, yoruba, ibo, mossi
-link = { vic2 = ewe eu4 = fon provinceid = 1141 } # Togo
-link = { vic2 = edo eu4 = yorumba region = benin_area } # Nigeria
-link = { vic2 = kru eu4 = senegambian region = guinea_coast_area }
-link = { vic2 = kru eu4 = dyola region = guinea_coast_area }
-link = { vic2 = akan eu4 = aka eu4 = ashanti eu4 = akaa }
-link = { vic2 = fon eu4 = fon }
-link = { vic2 = yoruba eu4 = yorumba }
-link = { vic2 = ibo eu4 = nupe eu4 = igbo }
-link = { hpm = gur vic2 = mossi eu4 = mossi eu4 = dagomba region = upper_volta_area region = lower_volta_area }
-link = { vic2 = mossi eu4 = mossi eu4 = dagomba }
-link = { vic2 = tiv eu4 = jukun }
+link = { vic3 = ewe eu4 = fon provinceid = 1141 } # Togo
+link = { vic3 = edo eu4 = yorumba region = benin_area } # Nigeria
+link = { vic3 = kru eu4 = senegambian region = guinea_coast_area }
+link = { vic3 = kru eu4 = dyola region = guinea_coast_area }
+#link = { vic3 = bassa eu4 = ??? }
+#link = { vic3 = kissi eu4 = ??? }
+link = { vic3 = akan eu4 = aka eu4 = ashanti eu4 = akaa }
+link = { vic3 = fon eu4 = fon }
+link = { vic3 = yoruba eu4 = yorumba }
+link = { vic3 = ibo eu4 = nupe eu4 = igbo }
+link = { vic3 = mossi eu4 = mossi eu4 = dagomba region = upper_volta_area region = lower_volta_area }
+link = { vic3 = mossi eu4 = mossi eu4 = dagomba }
+link = { vic3 = tiv eu4 = jukun }
 
 # North Central Africa - fur, beja, sudanese
-link = { vic2 = azande eu4 = nubian provinceid = 1216 } # South Sudan
-link = { vic2 = nuba eu4 = nubian provinceid = 2800 } # South Sudan
-link = { vic2 = nuer eu4 = nubian provinceid = 1217 } # South Sudan
-link = { vic2 = fur eu4 = nubian region = darfur_central_sahara_area }
-link = { vic2 = beja eu4 = nubian region = red_sea_coast_area }
-link = { vic2 = fang eu4 = sawabantu } # Cameroon, Gabon, EG
-link = { vic2 = fur eu4 = foora }
-link = { vic2 = nuba eu4 = nuba }
-link = { vic2 = beja eu4 = beja }
-link = { vic2 = sudanese eu4 = nubian eu4 = daju eu4 = zaghawa eu4 = funj eu4 = shilluk eu4 = silla }
-link = { vic2 = luo eu4 = acholi } # South Sudan
-link = { vic2 = teda eu4 = chadic eu4 = chadic_colonial eu4 = toubous }
+link = { vic3 = azande eu4 = nubian provinceid = 1216 } # South Sudan
+link = { vic3 = nuba eu4 = nubian provinceid = 2800 } # South Sudan
+link = { vic3 = nuer eu4 = nubian provinceid = 1217 } # South Sudan
+#link = { vic3 = dinka eu4 = ??? }
+link = { vic3 = fur eu4 = nubian region = darfur_central_sahara_area }
+link = { vic3 = beja eu4 = nubian region = red_sea_coast_area }
+link = { vic3 = equatorial_bantu eu4 = sawabantu } # Cameroon, Gabon, EG
+#link = { vic3 = fang eu4 = ??? }
+link = { vic3 = fur eu4 = foora }
+link = { vic3 = nuba eu4 = nuba }
+link = { vic3 = beja eu4 = beja }
+link = { vic3 = sudanese eu4 = nubian eu4 = daju eu4 = zaghawa eu4 = funj eu4 = shilluk eu4 = silla }
+link = { vic3 = luo eu4 = acholi } # South Sudan
+link = { vic3 = teda eu4 = chadic eu4 = chadic_colonial eu4 = toubous }
 
 # Horn of Africa - amhara, sidama, tigray, oromo, somali
-link = { vic2 = amhara eu4 = amhara eu4 = habshi eu4 = tigrean }
-link = { vic2 = coptic eu4 = coptic eu4 = old_egyptian eu4 = old_egyptian_mod eu4 = coptic_colonial eu4 = coptic_culture }
-link = { vic2 = sidama eu4 = sidamo }
-link = { vic2 = tigray eu4 = tigray }
-link = { vic2 = somali eu4 = somali eu4 = cushitic_colonial }
-link = { vic2 = harari eu4 = harari }
-link = { vic2 = oromo eu4 = ethiopian eu4 = oromo }
-link = { vic2 = afar eu4 = afar }
+link = { vic3 = amhara eu4 = amhara eu4 = habshi eu4 = tigrean }
+link = { vic3 = coptic eu4 = coptic eu4 = old_egyptian eu4 = old_egyptian_mod eu4 = coptic_colonial eu4 = coptic_culture }
+link = { vic3 = sidama eu4 = sidamo }
+link = { vic3 = tigray eu4 = tigray }
+link = { vic3 = somali eu4 = somali eu4 = cushitic_colonial }
+link = { vic3 = harari eu4 = harari }
+link = { vic3 = oromo eu4 = ethiopian eu4 = oromo }
+link = { vic3 = afar eu4 = afar }
 
 # The Congo - bakongo, luba, lunda, mbundu
-link = { vic2 = mongo eu4 = kuba eu4 = yaka provinceid = 1797 } # Northern Congo Basin
-link = { hpm = kuba vic2 = mongo eu4 = kuba eu4 = yaka }
-link = { vic2 = mongo eu4 = kuba } # DRC
-link = { hpm = kavango vic2 = bakongo eu4 = kongolese eu4 = bakongo provinceid = 1170 provinceid = 2949 }
-link = { vic2 = bakongo eu4 = kongolese eu4 = bakongo }
-link = { vic2 = luba eu4 = luba eu4 = kuba } # DRC
-link = { hpm = chokwe vic2 = lunda eu4 = chokwe }
-link = { vic2 = lunda eu4 = lunda eu4 = yaka eu4 = mbangala eu4 = chokwe } # DRC, Angola, Zambia
-link = { vic2 = ovimbundu eu4 = mbundu } # Angola
+link = { vic3 = mongo eu4 = kuba eu4 = yaka provinceid = 1797 } # Northern Congo Basin
+link = { vic3 = mongo eu4 = kuba eu4 = yaka }
+link = { vic3 = mongo eu4 = kuba } # DRC
+link = { vic3 = bakongo eu4 = kongolese eu4 = bakongo provinceid = 1170 provinceid = 2949 }
+link = { vic3 = bakongo eu4 = kongolese eu4 = bakongo }
+link = { vic3 = luba eu4 = luba eu4 = kuba } # DRC
+link = { vic3 = lunda eu4 = chokwe }
+link = { vic3 = lunda eu4 = lunda eu4 = yaka eu4 = mbangala eu4 = chokwe } # DRC, Angola, Zambia
+#link = { vic3 = fluvian_bantu eu4 = ??? }
+#link = { vic3 = kavango_bantu eu4 = ??? }
+link = { vic3 = ovimbundu eu4 = mbundu } # Angola
 
 # East Africa - swahili, malagasy
-link = { vic2 = sukuma eu4 = takama provinceid = 4061 } # Tanzania
-link = { vic2 = rundi eu4 = rwandan provinceid = 4070 } # Burundi
-link = { hpm = kingwana vic2 = swahili eu4 = kingwana }
-link = { vic2 = swahili eu4 = swahili eu4 = chimwini eu4 = chwezi eu4 = kimgao eu4 = kimwani eu4 = kingwana eu4 = kiunguja eu4 = swahili_colonial }
-link = { vic2 = kikuyu eu4 = bantu eu4 = bantu_colonial eu4 = kikuyu } # Kenya
-link = { vic2 = maasai eu4 = masaba } # Tanzania
-link = { vic2 = unyamwezi eu4 = takama } # Tanzania
-link = { vic2 = ruanda eu4 = rwandan } # Rwanda
-link = { vic2 = baganda eu4 = ganda } # Uganda
-link = { hpm = kilombero vic2 = malagasy eu4 = madagasque provinceid = 4020 } # Comoros
-link = { vic2 = malagasy eu4 = madagasque eu4 = madagascan eu4 = vazimba eu4 = vezu }
+link = { vic3 = sukuma eu4 = takama provinceid = 4061 } # Tanzania
+link = { vic3 = rundi eu4 = rwandan provinceid = 4070 } # Burundi
+link = { vic3 = swahili eu4 = kingwana }
+link = { vic3 = swahili eu4 = swahili eu4 = chimwini eu4 = chwezi eu4 = kimgao eu4 = kimwani eu4 = kingwana eu4 = kiunguja eu4 = swahili_colonial }
+link = { vic3 = kikuyu eu4 = bantu eu4 = bantu_colonial eu4 = kikuyu } # Kenya
+#link = { vic3 = lacustrine_bantu eu4 = ??? }
+#link = { vic3 = lomwe eu4 = ??? }
+link = { vic3 = maasai eu4 = masaba } # Tanzania
+link = { vic3 = unyamwezi eu4 = takama } # Tanzania
+link = { vic3 = ruanda eu4 = rwandan } # Rwanda
+link = { vic3 = baganda eu4 = ganda } # Uganda
+link = { vic3 = malagasy eu4 = madagasque provinceid = 4020 } # Comoros
+link = { vic3 = malagasy eu4 = madagasque eu4 = madagascan eu4 = vazimba eu4 = vezu }
 
 # South Africa - khoisan, shona, sena, makua
-link = { vic2 = herero eu4 = khoisan provinceid = 1174 } # Namibia
-link = { vic2 = sotho eu4 = nguni provinceid = 833 } # Lesotho
-link = { vic2 = xhosa eu4 = nguni provinceid = 1180 }
-link = { vic2 = zulu eu4 = nguni provinceid = 1181 }
-link = { vic2 = tonga eu4 = nyasa provinceid = 4044 } # Mozambique
-link = { vic2 = khoisan eu4 = khoisan eu4 = bantu }
-link = { vic2 = xhosa eu4 = xhosa }
-link = { vic2 = zulu eu4 = zulu }
-link = { vic2 = nguni eu4 = nguni } # South Africa
-link = { vic2 = shona eu4 = shona }
-link = { hpm = sena vic2 = sena eu4 = nyasa provinceid = 4039 } # Lundu
-link = { hpm = nyasa vic2 = sena eu4 = nyasa } # Lundu
-link = { vic2 = makua eu4 = makua }
-link = { vic2 = yao eu4 = bena } # Mozambique
-link = { vic2 = african_minor eu4 = bemba eu4 = kanouri }
+link = { vic3 = herero eu4 = khoisan provinceid = 1174 } # Namibia
+link = { vic3 = sotho eu4 = nguni provinceid = 833 } # Lesotho
+link = { vic3 = xhosa eu4 = nguni provinceid = 1180 }
+link = { vic3 = zulu eu4 = nguni provinceid = 1181 }
+link = { vic3 = tonga eu4 = nyasa provinceid = 4044 } # Mozambique
+link = { vic3 = khoisan eu4 = khoisan eu4 = bantu }
+link = { vic3 = xhosa eu4 = xhosa }
+link = { vic3 = zulu eu4 = zulu }
+link = { vic3 = nguni eu4 = nguni } # South Africa
+link = { vic3 = shona eu4 = shona }
+link = { vic3 = sena eu4 = nyasa provinceid = 4039 } # Lundu
+link = { vic3 = sena eu4 = nyasa } # Lundu
+link = { vic3 = makua eu4 = makua }
+link = { vic3 = yao eu4 = bena } # Mozambique
+link = { vic3 = african_minor eu4 = bemba eu4 = kanouri }
 
-# barbarian / lost
-link = { vic2 = visigothic eu4 = visigothic }
-link = { vic2 = ostrogothic eu4 = ostrogothic eu4 = bastarnae eu4 = greuthungi }
-link = { vic2 = suebi eu4 = suebi }
-link = { vic2 = getian eu4 = getian eu4 = gepid }
-link = { vic2 = gothic eu4 = gothic }
-link = { vic2 = assyrian eu4 = babylonian eu4 = syriac eu4 = assyrian eu4 = chaldean }
+# Barbarian or Lost Cultures
+link = { vic3 = visigothic eu4 = visigothic }
+link = { vic3 = ostrogothic eu4 = ostrogothic eu4 = bastarnae eu4 = greuthungi }
+link = { vic3 = suebi eu4 = suebi }
+link = { vic3 = getian eu4 = getian eu4 = gepid }
+link = { vic3 = gothic eu4 = gothic }
+link = { vic3 = assyrian eu4 = syriac eu4 = assyrian }
+link = { vic3 = chaldean eu4 = chaldean eu4 = babylonian }
 
 # Animals / Non-humans
-link = { vic2 = polar_bears eu4 = jan_mayenese eu4 = bear eu4 = red_panda }
-link = { vic2 = horse eu4 = equine eu4 = horse }
-link = { vic2 = cat eu4 = cat }
-link = { vic2 = dog_culture eu4 = dog_culture }
-link = { vic2 = duck_culture eu4 = duck_culture }
-link = { vic2 = dragon_culture eu4 = dragon_culture }
-link = { vic2 = elephant_culture eu4 = elephant_culture }
-link = { vic2 = hedgehog_culture eu4 = hedgehog_culture }
-link = { vic2 = alien eu4 = alien } # No actual culture, but ok
-
-# The dead
-link = { vic2 = undead eu4 = zombiec eu4 = zombie }
-
-# noculture
-link = { vic2 = noculture eu4 = noculture }
+link = { vic3 = polar_bears eu4 = jan_mayenese eu4 = bear }
+link = { vic3 = red_panda eu4 = red_panda }
+link = { vic3 = horse eu4 = equine eu4 = horse }
+link = { vic3 = cat eu4 = cat }
+link = { vic3 = dog_culture eu4 = dog_culture }
+link = { vic3 = duck_culture eu4 = duck_culture }
+link = { vic3 = dragon_culture eu4 = dragon_culture }
+link = { vic3 = elephant_culture eu4 = elephant_culture }
+link = { vic3 = hedgehog_culture eu4 = hedgehog_culture }
+link = { vic3 = alien eu4 = alien } # No actual culture, but ok
+link = { vic3 = undead eu4 = zombiec eu4 = zombie }
 
 # IMP:CK3 cultures
-link = { vic2 = pie_american eu4 = basque eu4 = oldspain eu4 = iberic eu4 = turdetanian eu4 = lusitanian eu4 = nuragic region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = pie_oceanian eu4 = basque eu4 = oldspain eu4 = iberic eu4 = turdetanian eu4 = lusitanian eu4 = nuragic region = oceania_superregion }
-link = { vic2 = pie_african eu4 = basque eu4 = oldspain eu4 = iberic eu4 = turdetanian eu4 = lusitanian eu4 = nuragic region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-
-link = { vic2 = oldspain eu4 = oldspain eu4 = iberic eu4 = turdetanian }
-link = { vic2 = lusitanian eu4 = lusitanian }
-link = { vic2 = illyrian eu4 = illyrian }
-link = { vic2 = nuragic eu4 = nuragic }
-link = { vic2 = vandal eu4 = vandal }
-link = { vic2 = alexandrine eu4 = alexandrine }
+link = { vic3 = hiberi eu4 = oldspain eu4 = iberic eu4 = turdetanian }
+link = { vic3 = lusitanian eu4 = lusitanian }
+link = { vic3 = illyrian eu4 = illyrian }
+link = { vic3 = nuragic eu4 = nuragic }
+link = { vic3 = vandal eu4 = vandal }
+link = { vic3 = alexandrine eu4 = alexandrine }
 
 # IMP:CK2 cultures
-link = { vic2 = old_italian_american eu4 = sabellian eu4 = old_ligurian eu4 = venetic eu4 = siculian eu4 = lepontic region = south_america_superregion region = andes_superregion region = north_america_superregion region = central_america_superregion }
-link = { vic2 = old_italian_australian eu4 = sabellian eu4 = old_ligurian eu4 = venetic eu4 = siculian eu4 = lepontic region = oceania_superregion }
-link = { vic2 = old_italian_african eu4 = sabellian eu4 = old_ligurian eu4 = venetic eu4 = siculian eu4 = lepontic region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region }
-link = { vic2 = sabellian eu4 = sabellian }
-link = { vic2 = old_ligurian eu4 = old_ligurian }
-link = { vic2 = venetic eu4 = venetic }
-link = { vic2 = siculian eu4 = siculian }
-link = { vic2 = lepontic eu4 = lepontic }
+link = { vic3 = sabellian eu4 = sabellian }
+link = { vic3 = old_ligurian eu4 = old_ligurian }
+link = { vic3 = venetic eu4 = venetic }
+link = { vic3 = siculian eu4 = siculian }
+link = { vic3 = lepontic eu4 = lepontic }
+
+# noculture
+link = { vic3 = noculture eu4 = noculture }
