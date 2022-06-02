@@ -1,0 +1,71 @@
+## This file tells which "regions" can have a special post-colonial culture generated,
+## as well as to what name to assign to it in "default" cases.
+## The format is [colony] = { region = [eu4 area, region or superregion] alone_name = [abc] split_name = [xyz] }
+## colonial_cultures.txt will *override* both alone_name and split_name
+## alone_name is used if there is only one generated culture in the colonial region
+## split_name is used to all multiple generated cultures in the colonial region. As such, it has a dynamic $PARENT$ loc
+usa_north_colony = {
+	region = great_lakes_region region = northeast_america_region region = great_plains_region region = california_region
+	alone_name = "Appalachian"
+	split_name = "$PARENT$-American"
+}
+usa_south_colony = {
+	region = southeast_america_region region = mississippi_region
+	alone_name = "Floridian"
+	split_name = "$PARENT$-Floridian"
+}
+canada_colony = {
+	region = hudson_bay_region region = canada_region region = cascadia_region
+	alone_name = "Canadian"
+	split_name = "$PARENT$-Canadian"
+}
+australia_colony = {
+	region = australia_region region = oceania_superregion
+	alone_name = "Australian"
+	split_name = "$PARENT$-Australian"
+}
+texas_colony = {
+	region = rio_grande_region
+	alone_name = "Texan"
+	split_name = "$PARENT$-Texan"
+}
+mexico_colony = {
+	region = central_america_region region = carribeans_region region = mexico_region
+	alone_name = "Mexican"
+	split_name = "$PARENT$-Mexican" 
+}
+brazil_colony = {
+	region = brazil_region
+	alone_name = "Brazilian"
+	split_name = "$PARENT$-Brazilian"
+}
+colombia_colony = {
+	region = colombia_region
+	alone_name = "North Andean"
+	split_name = "$PARENT$-Colombian"
+}
+peru_colony = {
+	region = peru_region
+	alone_name = "South Andean"
+	split_name = "$PARENT$-Peruvian"
+}
+argentine_colony = {
+	region = la_plata_region region = upper_peru_region
+	alone_name = "Platinean"
+	split_name = "$PARENT$-Platinean"
+}
+africa_colony = {
+	region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region
+	alone_name = "Neo-African"
+	split_name = "$PARENT$-African"
+}
+caribbean_colony = {
+	region = carribeans_region
+	alone_name = "West Indian"
+	split_name = "$PARENT$-Caraibic"
+}
+central_america_colony = {
+	region = central_america_region
+	alone_name = "Central American"
+	split_name = "$PARENT$-Centroamerican"
+}
