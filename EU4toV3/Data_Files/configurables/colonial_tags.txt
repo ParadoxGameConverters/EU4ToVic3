@@ -1,131 +1,107 @@
-# Note that another way to edit the colonies which are obtained is to edit the
-# "post_colonialism" decision.  That will create new cores.
+## REVISION NEEDED! SOME TAGS NEED TO BE CREATED...
+## ...WHILE THE UNIQUE NAME-BASED MAPPINGS NEED TO BE...
+## ...ADDED AS WELL
 
 
-link = { tag = QUE eu4region = colonial_canada v2region = ENG_58 hpm_region = CAN_58 } #Quebec - Capital in and/or owns all of V2 region Quebec & culture group French
-link = { tag = NOV eu4region = colonial_canada v2region = ENG_68 } # Nova Scotia - Region "New Brunswick"
-link = { tag = COL eu4region = colonial_canada v2region = ENG_13 hpm_region = CAN_13 } #Columbia - Capital in and/or owns all of in V2 region Columbia & culture group British
-link = { tag = COL eu4region = colonial_alaska v2region = ENG_13 hpm_region = CAN_13 } #Columbia - Capital in and/or owns all of in V2 region Columbia & culture group British
-link = { tag = NEW eu4region = colonial_canada v2region = ENG_74 } #Newfoundland - Capital in and/or owns all of Newfoundland
-link = { tag = CAN eu4region = colonial_canada } #Canada
-link = { tag = LSK eu4region = colonial_alaska v2region = USA_1 } #Alaska - In Alaska
-link = { tag = LSK eu4region = colonial_alaska v2region = ENG_22 } #Alaska - In Colombia
+# Canada and Alaska
+link = { region = colonial_canada alone = CAN } # Canada
+link = { region = colonial_canada capital = STATE_BRITISH_COLUMBIA tag = COL } # Columbia
+link = { region = colonial_canada capital = STATE_NEWFOUNDLAND tag = NEW } # Newfoundland
+link = { region = colonial_canada capital = STATE_QUEBEC tag = QUE } # Quebec
+link = { region = colonial_canada capital = STATE_MANITOBA tag = HBC } # Hudson Bay
+link = { region = colonial_canada capital = STATE_ONTARIO tag = ONT } # Ontario
+link = { region = colonial_canada capital = STATE_NEW_BRUNSWICK tag = NBS } # New Brunswick
+#link = { tag = NOV region = colonial_canada v2region = ENG_68 } # Nova Scotia - Region "New Brunswick"
+#link = { tag = LSK region = colonial_alaska v2region = USA_1 } #Alaska - In Alaska
+#link = { tag = LSK region = colonial_alaska v2region = ENG_22 } #Alaska - In Colombia
 
 # Eastern USA
-link = { tag = NEN eu4region = colonial_eastern_america v2region = USA_247 cultureGroup = british } #New England - Capital in and/or owns all of V2 region New England & culture group British
-link = { tag = VRM eu4region = colonial_eastern_america v2region = USA_247 } # Vermont
-link = { tag = UNY eu4region = colonial_eastern_america v2region = ENG_30 cultureGroup = british } #New York
-link = { tag = MAN eu4region = colonial_eastern_america v2region = ENG_30 } #Manhattan Commune - Capital in and/or owns all of V2 region New York
-link = { tag = TEX eu4region = colonial_eastern_america v2region = TEX_132 } #Texas - Capital in and/or owns all of V2 region Texas
-link = { tag = FLR eu4region = colonial_eastern_america v2region = USA_200 } # Florida
-link = { tag = USA eu4region = colonial_eastern_america  } #USA - Cannot be a subject dominion
-link = { tag = TEX eu4region = colonial_louisiana v2region = TEX_132 } #Texas - Capital in and/or owns all of V2 region Texas
-link = { tag = DAK eu4region = colonial_louisiana v2region = USA_118 } #Dakota
-link = { tag = DAK eu4region = colonial_louisiana v2region = USA_121 } #Dakota
-link = { tag = UIL eu4region = colonial_louisiana v2region = USA_168 } #Illinois
-link = { tag = UNB eu4region = colonial_louisiana v2region = USA_124 } #Nebraska
-link = { tag = LOU eu4region = colonial_louisiana } #Louisiana
-#link = { tag = CSA eu4region = colonial_eastern_america } #CSA - Tied to the USA via events
-#link = { tag = CSA eu4region = colonial_louisiana } #CSA - Tied to the USA via events
+link = { region = colonial_eastern_america alone = USA } # USA
+link = { region = colonial_eastern_america capital = STATE_MASSACHUSETTS tag = NEN } # New England
+#link = { tag = VRM region = colonial_eastern_america v2region = USA_247 } # Vermont
+#link = { tag = UNY region = colonial_eastern_america v2region = ENG_30 cultureGroup = british } #New York
+#link = { tag = MAN region = colonial_eastern_america v2region = ENG_30 } #Manhattan Commune - Capital in and/or owns all of V2 region New York
+#link = { tag = FLR region = colonial_eastern_america v2region = USA_200 } # Florida
+link = { region = colonial_louisiana capital = STATE_TEXAS tag = TEX } # Texas
+link = { region = colonial_louisiana capital = STATE_SOUTH_DAKOTA tag = DKT } # Dakota
+link = { region = colonial_louisiana capital = STATE_MICHIGAN tag = UOM } # Michigan
+#link = { tag = UIL region = colonial_louisiana v2region = USA_168 } #Illinois
+#link = { tag = UNB region = colonial_louisiana v2region = USA_124 } #Nebraska
+#link = { tag = LOU region = colonial_louisiana } #Louisiana
 
 # Western USA
-link = { tag = CAL eu4region = colonial_california v2region = MEX_85 } #Californian Republic - Capital in and/or owns all of V2 region California
-link = { tag = UOR eu4region = colonial_alaska v2region = USA_81 } #Oregon
-link = { tag = DES eu4region = colonial_california } # Deseret - Fallback
+link = { region = colonial_california alone = CAL } # California
+link = { region = colonial_california capital = STATE_CALIFORNIA tag = CAL } # California
+link = { region = colonial_california capital = STATE_UTAH tag = DES } # Deseret
+link = { region = colonial_california capital = STATE_OREGON tag = ORG } # Oregon
 
 # Caribbean
-link = { tag = CUB eu4region = colonial_the_carribean v2region = SPA_2209 } #Cuba - Capital in and/or owns all of V2 region Cuba
-link = { tag = DOM eu4region = colonial_the_carribean v2region = HAI_2213 cultureGroup = iberian } #Dominican Republic
-link = { tag = HAI eu4region = colonial_the_carribean v2region = HAI_2213 } #Haiti - Capital in and/or owns all of V2 region Haiti
-link = { tag = JAM eu4region = colonial_the_carribean v2region = ENG_203 } # Jamaica
-link = { tag = PRI eu4region = colonial_the_carribean v2region = ENG_2224 cultureGroup = iberian } # Puerto Rico
-link = { tag = CUR eu4region = colonial_the_carribean v2region = ENG_2224 cultureGroup = beneluxian } # Curaçao
-link = { tag = WSI eu4region = colonial_the_carribean v2region = ENG_2224 } # West Indies
-link = { tag = CRB eu4region = colonial_the_carribean } #Caribbean - Fallback
+link = { region = colonial_the_carribean capital = STATE_CUBA tag = CUB } # Cuba
+link = { region = colonial_the_carribean capital = STATE_SANTO_DOMINGO tag = DOM } # Dominican Republic
+link = { region = colonial_the_carribean capital = STATE_HAITI tag = HAI } # Haiti
+link = { region = colonial_the_carribean capital = STATE_WEST_INDIES tag = WIN } # West Indies
+link = { region = colonial_the_carribean capital = STATE_JAMAICA tag = JAM } # Jamaica
+link = { region = colonial_the_carribean capital = STATE_BAHAMAS tag = BAH } # Bahamas
+link = { region = colonial_the_carribean capital = STATE_PUERTO_RICO tag = PCO } # Puerto Rico
+#link = { tag = CUR region = colonial_the_carribean v2region = ENG_2224 cultureGroup = beneluxian } # Curaçao
+#link = { tag = CRB region = colonial_the_carribean } #Caribbean - Fallback
 
 # Central America
-link = { tag = UNM eu4region = colonial_mexico v2region = MEX_103 } #New Mexico
-link = { tag = COS eu4region = colonial_mexico v2region = UCA_2201 cultureGroup = iberian } #Costa Rica
-#link = { tag = ELS eu4region = colonial_mexico cultureGroup = iberian } #El Salvador - too small
-link = { tag = PNM eu4region = colonial_mexico v2region = CLM_1723 } #Panama - Capital in and/or owns all of V2 region Panama
-link = { tag = GUA eu4region = colonial_mexico v2region = UCA_2186 cultureGroup = iberian } #Guatemala - Capital in and/or owns all of V2 region Guatemala
-link = { tag = BLZ eu4region = colonial_mexico v2region = UCA_2186 } #Belize
-link = { tag = HON eu4region = colonial_mexico v2region = UCA_2191 hpm_region = UCA_2193 } #Honduras - Capital in and/or owns all of V2 region Honduras
-link = { tag = NIC eu4region = colonial_mexico v2region = UCA_2197 } #Nicaragua - Capital in and/or owns all of V2 region Nicaragua
-#link = { tag = UCA eu4region = colonial_mexico } #United States of Central America
-link = { tag = SON eu4region = colonial_mexico v2region = MEX_2138 } #Sonora
-link = { tag = YUC eu4region = colonial_mexico v2region = MEX_2183 } #Yucatán
-link = { tag = MEX eu4region = colonial_mexico } #Mexico
+link = { region = colonial_mexico alone = MEX } # Mexico
+link = { region = colonial_mexico capital = STATE_MEXICO tag = MEX } # Mexico
+link = { region = colonial_mexico capital = STATE_COSTA_RICA tag = COS } # Costa Rica
+link = { region = colonial_mexico capital = STATE_SAN_SALVADOR tag = ELS } # El Salvador
+link = { region = colonial_mexico capital = STATE_GUATEMALA tag = GUA } # Guatemala
+link = { region = colonial_mexico capital = STATE_HONDURAS tag = HON } # Honduras
+link = { region = colonial_mexico capital = STATE_NICARAGUA tag = NIC } # Nicaragua
+link = { region = colonial_mexico capital = STATE_PANAMA tag = PNM } # Panama
+link = { region = colonial_mexico capital = STATE_YUCATAN tag = YUC } # Yucatán
+#link = { tag = UNM region = colonial_mexico v2region = MEX_103 } #New Mexico
+#link = { tag = BLZ region = colonial_mexico v2region = UCA_2186 } #Belize
+#link = { tag = SON region = colonial_mexico v2region = MEX_2138 } #Sonora
 
 # Brazil
-link = { tag = CEQ eu4region = colonial_brazil v2region = BRZ_2428 } #Pernambuco
-link = { tag = RGS eu4region = colonial_brazil v2region = BRZ_2467 } #Rio Grande do Sul
-link = { tag = BRZ eu4region = colonial_brazil} #Brazil
+link = { region = colonial_brazil alone = BRZ } # Brazil
+link = { region = colonial_brazil capital = STATE_AMAZONAS tag = AMZ } # Amazonas
+link = { region = colonial_brazil capital = STATE_RIO_GRANDE_DO_SUL tag = PNI } # Piratini
+link = { region = colonial_brazil capital = STATE_PARA tag = PRA } # Grão-Pará
+#link = { tag = CEQ region = colonial_brazil v2region = BRZ_2428 } #Pernambuco
 
 # Peru
-link = { tag = BOL eu4region = colonial_peru v2region = BOL_2317 } #Bolivia
-link = { tag = BOL eu4region = colonial_peru v2region = BOL_2321 } #Bolivia
-link = { tag = BOL eu4region = colonial_peru v2region = BOL_2314 } #Bolivia
-link = { tag = BOL eu4region = colonial_peru v2region = BOL_2305 } #Bolivia
-link = { tag = PEU eu4region = colonial_peru } #Peru
+link = { region = colonial_peru alone = PEU } # Peru
+link = { region = colonial_peru capital = STATE_SANTA_CRUZ tag = BOL } # Bolivia
 
 # La Plata
-link = { tag = PTG eu4region = colonial_la_plata v2region = ARG_2391 } #Patagonia
-link = { tag = PTG eu4region = colonial_la_plata v2region = ARG_2398 } #Patagonia
-link = { tag = PRG eu4region = colonial_la_plata v2region = PRG_2338 } #Paraguay
-link = { tag = PRG eu4region = colonial_la_plata v2region = PRG_2343 } #Paraguay
-link = { tag = URU eu4region = colonial_la_plata v2region = URU_2344 } #Uruguay
-link = { tag = BOL eu4region = colonial_la_plata v2region = BOL_2317 } #Bolivia
-link = { tag = BOL eu4region = colonial_la_plata v2region = BOL_2321 } #Bolivia
-link = { tag = BOL eu4region = colonial_la_plata v2region = BOL_2314 } #Bolivia
-link = { tag = BOL eu4region = colonial_la_plata v2region = BOL_2305 } #Bolivia
-link = { tag = CHL eu4region = colonial_la_plata v2region = CHL_2322 } #Chile
-link = { tag = CHL eu4region = colonial_la_plata v2region = CHL_2327 } #Chile
-link = { tag = CHL eu4region = colonial_la_plata v2region = CHL_2332 } #Chile
-link = { tag = ENT eu4region = colonial_la_plata cultureGroup = iberian v2region = ARG_2357 hpm_region = ARG_2360 } #Entre Ríos
-link = { tag = SBA eu4region = colonial_la_plata cultureGroup = iberian v2region = ARG_2355 } #Buenos Aires
-link = { tag = LPL eu4region = colonial_la_plata cultureGroup = iberian } #La Plata
-link = { tag = ARG eu4region = colonial_la_plata } #Argentina
+link = { region = colonial_la_plata alone = ARG } # Argentina
+link = { region = colonial_la_plata capital = STATE_SANTA_CRUZ tag = BOL } # Bolivia
+link = { region = colonial_la_plata capital = STATE_SANTIAGO tag = CHL } # Chile
+link = { region = colonial_la_plata capital = STATE_BAJO_PARAGUAY tag = PRG } # Paraguay
+link = { region = colonial_la_plata capital = STATE_URUGUAY tag = URU } # Uruguay
+link = { region = colonial_la_plata capital = STATE_PATAGONIA tag = PAT } # Patagonia
+#link = { tag = ENT region = colonial_la_plata cultureGroup = iberian v2region = ARG_2357 hpm_region = ARG_2360 } #Entre Ríos
+#link = { tag = SBA region = colonial_la_plata cultureGroup = iberian v2region = ARG_2355 } #Buenos Aires
+#link = { tag = LPL region = colonial_la_plata cultureGroup = iberian } #La Plata
 
 # Colombia
-link = { tag = ECU eu4region = colonial_colombia v2region = ECU_2279 } #Ecuador - Capital in and/or owns all of V2 region Ecuador
-link = { tag = VNZ eu4region = colonial_colombia v2region = VNZ_2234 } #Venezuela
-link = { tag = VNZ eu4region = colonial_colombia v2region = VNZ_2265 } #Venezuela
-link = { tag = VNZ eu4region = colonial_colombia v2region = VNZ_2278 } #Venezuela
-link = { tag = CLM eu4region = colonial_colombia } #Colombia
-#link = { tag = GCO eu4region = colonial_colombia } #Gran Colombia - Union tag, should not be used.
+link = { region = colonial_colombia alone = GCO } # Gran Colombia
+link = { region = colonial_colombia capital = STATE_CUNDINAMARCA tag = CLM } # Colombia
+link = { region = colonial_colombia capital = STATE_ECUADOR tag = ECU } # Ecuador
+link = { region = colonial_colombia capital = STATE_MIRANDA tag = VNZ } # Venezuela
 
 # Guyana
-link = { tag = VNZ eu4region = colonial_guyana cultureGroup = iberian } #Venezuela
-link = { tag = SUR eu4region = colonial_guyana cultureGroup = beneluxian } #Suriname
-link = { tag = CAY eu4region = colonial_guyana cultureGroup = french } #Cayenne/French Guyana
-link = { tag = GUY eu4region = colonial_guyana } #Guyana
+#link = { tag = SUR region = colonial_guyana cultureGroup = beneluxian } #Suriname
+#link = { tag = CAY region = colonial_guyana cultureGroup = french } #Cayenne/French Guyana
+#link = { tag = GUY region = colonial_guyana } #Guyana
 
 # Oceania
-link = { tag = AST eu4region = colonial_australia v2region = AST_2528 } #Australia - Capital in and/or owns any V2 region in Australia
-link = { tag = AST eu4region = colonial_australia v2region = AST_2527 } #Australia - Capital in and/or owns any V2 region in Australia
-link = { tag = AST eu4region = colonial_australia v2region = AST_2454 } #Australia - Capital in and/or owns any V2 region in Australia
-link = { tag = AST eu4region = colonial_australia v2region = AST_2244 } #Australia - Capital in and/or owns any V2 region in Australia
-link = { tag = AST v2region = AST_2528 } #Australia - Capital in and/or owns any V2 region in Australia - Colonial World mod region
-link = { tag = AST v2region = AST_2527 } #Australia - Capital in and/or owns any V2 region in Australia - Colonial World mod region
-link = { tag = AST v2region = AST_2454 } #Australia - Capital in and/or owns any V2 region in Australia - Colonial World mod region
-link = { tag = AST v2region = AST_2244 } #Australia - Capital in and/or owns any V2 region in Australia - Colonial World mod region
-link = { tag = PHI tag = PHL eu4region = colonial_australia v2region = SPA_1459 } #Philippines - Capital in and/or owns any V2 region in Philippines
-link = { tag = PHI tag = PHL eu4region = colonial_australia v2region = SPA_1455 } #Philippines - Capital in and/or owns any V2 region in Philippines
-link = { tag = PHI tag = PHL eu4region = colonial_australia v2region = SPA_1463 } #Philippines - Capital in and/or owns any V2 region in Philippines
-link = { tag = PHI tag = PHL v2region = SPA_1459 } #Philippines - Capital in and/or owns any V2 region in Philippines- Colonial World mod region
-link = { tag = PHI tag = PHL v2region = SPA_1455 } #Philippines - Capital in and/or owns any V2 region in Philippines- Colonial World mod region
-link = { tag = PHI tag = PHL v2region = SPA_1463 } #Philippines - Capital in and/or owns any V2 region in Philippines- Colonial World mod region
-link = { tag = NZL eu4region = colonial_australia v2region = ENG_2509 } #New Zealand
-
-#Pacific - Colonial World mod region
-link = { tag = HAW v2region = HAW_658 } #Hawaii - Not a colonial tag, but suitable for one! Capital in and/or owns all of V2 region Hawaii
-
-#South Africa - Colonial World mod region
-link = { tag = MAD v2region = MAD_2121 } #Madagascar - Capital in and/or owns any V2 region in Madagascar
-link = { tag = MAD v2region = MAD_2117 } #Madagascar - Capital in and/or owns any V2 region in Madagascar
-link = { tag = ORA v2region = ENG_2087 v2region = ENG_2092 v2region = ENG_2096 v2region = ORA_2103 v2region = ZUL_2113 v2region = TRN_2108 cultureGroup = beneluxian } #Oranje - Dutch culture
-link = { tag = TRN v2region = ENG_2087 v2region = ENG_2092 v2region = ENG_2096 v2region = ORA_2103 v2region = ZUL_2113 v2region = TRN_2108 cultureGroup = beneluxian } #Transvaal - Dutch culture
-link = { tag = SAF v2region = ENG_2087 v2region = ENG_2092 v2region = ENG_2096 v2region = ORA_2103 v2region = ZUL_2113 v2region = TRN_2108 } #South Africa
-link = { tag = RHO v2region = ENG_2068 } #Southern Rhodesia - Not colonized when converting
-link = { tag = LIB v2region = ENG_1887 } #Liberia
+link = { region = colonial_australia alone = AST } # Australia
+link = { region = colonial_australia capital = STATE_FIJI tag = FJI } # Fiji
+link = { region = colonial_australia capital = STATE_EAST_MICRONESIA tag = MCR } # Micronesia
+link = { region = colonial_australia capital = STATE_VANUATU tag = VNT } # Vanuatu
+link = { region = colonial_australia capital = STATE_NAURU tag = NRU } # Nauru
+link = { region = colonial_australia capital = STATE_TAHITI tag = PLY } # Polynesia
+link = { region = colonial_australia capital = STATE_NEW_SOUTH_WALES tag = NSW } # New South Wales
+link = { region = colonial_australia capital = STATE_WESTERN_AUSTRALIA tag = WAS } # Western Australia
+link = { region = colonial_australia capital = STATE_SOUTH_AUSTRALIA tag = SAS } # South Australia
+link = { region = colonial_australia capital = STATE_NORTH_ISLAND tag = NZL } # New Zealand
+link = { region = colonial_australia capital = STATE_VICTORIA tag = TAS } # Tasmania
