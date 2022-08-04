@@ -1,4 +1,4 @@
-﻿# Direct Mappings
+# Direct Mappings
 # This is essentially one-to-one country mappings to ensure that countries are available in BOTH eu4 and v2 get the correct tag.
 # For example, if Spain is in eu4 it will become Spain in v2 after conversion.
 # EXAMPLE
@@ -24,30 +24,19 @@
 # papacy_reform for example is not unique as incoming CK2 fraticelli pope may also have it.
 
 ## 00_countries.txt
-
-link = { eu4 = GER vic3 = GER } # Germany
-link = { eu4 = k_germany vic3 = GER } # Germany
-link = { eu4 = e_germany vic3 = GER } # Germany
+link = { eu4 = GER name = "Germany" vic3 = GER } # Germany
 link = { eu4 = GBR vic3 = GBR } # Great Britain
-link = { eu4 = e_britannia vic3 = GBR } # Britannia => United Kingdom
-link = { eu4 = SCA vic3 = SCA } # Scandinavia
-link = { eu4 = e_scandinavia vic3 = SCA } # Scandinavia
-link = { eu4 = RUS vic3 = RUS } # Russia
-link = { eu4 = k_rus vic3 = RUS } # Russia
-link = { eu4 = e_russia vic3 = RUS } # Russia
-link = { eu4 = FRA vic3 = FRA } # France
-link = { eu4 = k_france vic3 = FRA } # France
-link = { eu4 = e_france vic3 = FRA } # France
-link = { eu4 = PRU vic3 = PRU } # Prussia
-link = { eu4 = d_prussia vic3 = PRU } # Prussia
+link = { name = "Britannia" vic3 = GBR } # Britannia
+link = { eu4 = SCA name = "Scandinavia" vic3 = SCA }
+link = { eu4 = RUS name = "Russia" vic3 = RUS } # Russia
+link = { eu4 = FRA name = "France" vic3 = FRA } # France 
+link = { name = "Francia" vic3 = FRA } # Francia => France
+link = { eu4 = PRU name = "Prussia" vic3 = PRU } # Prussia
 link = { eu4 = WES vic3 = WES } # Westphalia
-link = { eu4 = k_westphalia vic3 = WES } # Napoleonic Westphalia
-link = { eu4 = POM vic3 = POM } # Pomerania
-link = { eu4 = k_pomerania vic3 = POM } # Pommerania
-link = { eu4 = HAB vic3 = AUS } # Austria
-link = { eu4 = k_austria vic3 = AUS } # Austria
-link = { eu4 = c_osterreich vic3 = AUS } # Austria
-link = { eu4 = k_eastern_marches vic3 = AUS } # Eastern Marches => Austria
+link = { name = "Republic of Westphalia" vic3 = WES }
+link = { name = "Kingdom of Westphalia" vic3 = WES }
+link = { eu4 = POM name = "Pomerania" vic3 = POM } # Pomerania
+link = { eu4 = HAB name = "Austria" vic3 = AUS } # Austria
 link = { eu4 = USA vic3 = USA } # USA
 #link = { eu4 = ??? vic3 = CSA } # CSA
 #link = { eu4 = ??? vic3 = FSA } # FSA
@@ -56,254 +45,163 @@ link = { eu4 = USA vic3 = USA } # USA
 #link = { eu4 = ??? vic3 = AMZ } # Amazonia
 link = { eu4 = GUA vic3 = GRI } # Guarani
 link = { eu4 = JAP vic3 = JAP } # Japan
-link = { eu4 = ITA vic3 = ITA } # Italy
-link = { eu4 = k_italy vic3 = ITA } # Italy
-link = { eu4 = e_kuk vic3 = KUK } # Austria-Hungary
-link = { eu4 = DAN vic3 = DEN } # Denmark
-link = { eu4 = k_denmark vic3 = DEN } # Denmark
-link = { eu4 = FIN vic3 = FIN } # Finland
-link = { eu4 = k_finland vic3 = FIN } # Finland
-link = { eu4 = k_suomi vic3 = FIN } # Suomi => Finland
-link = { eu4 = NOR vic3 = NOR } # Norway
-link = { eu4 = k_norway vic3 = NOR } # Norway
-link = { eu4 = SWE vic3 = SWE } # Sweden
-link = { eu4 = k_sweden vic3 = SWE } # Sweden
-link = { eu4 = d_skane vic3 = SCN } # Scania
-link = { eu4 = k_bel vic3 = BEL } # Belgium
-link = { eu4 = BEL vic3 = BEL } # Belgium
-link = { eu4 = CAT vic3 = CAT } # Catalonia
-link = { eu4 = d_catalonia vic3 = CAT } # Catalonia
-link = { eu4 = FLA vic3 = FLA } # Flanders
-link = { eu4 = d_flanders vic3 = FLA } # Flanders
-link = { eu4 = IRE vic3 = IRE } # Ireland
-link = { eu4 = k_ireland vic3 = IRE } # Ireland
+link = { eu4 = ITA name = "Italy" vic3 = ITA } # Italy
+link = { name = "Italia" vic3 = ITA } # Italia => Italy
+link = { name = "Austria-Hungary" vic3 = KUK } # Austria-Hungary
+link = { eu4 = DAN name = "Denmark" vic3 = DEN } # Denmark
+link = { eu4 = FIN name = "Finland" vic3 = FIN } # Finland
+link = { name = "Suomi" vic3 = FIN } # Suomi => Finland
+link = { eu4 = NOR name = "Norway" vic3 = NOR } # Norway
+link = { eu4 = SWE name = "Sweden" vic3 = SWE } # Sweden
+link = { name = "Skåne" vic3 = SCN } # Scania
+link = { name = "Scania" vic3 = SCN } # Scania
+link = { eu4 = BEL name = "Belgium" vic3 = BEL } # Belgium
+link = { eu4 = CAT name = "Catalonia" vic3 = CAT } # Catalonia
+link = { eu4 = FLA name = "Flanders" vic3 = FLA } # Flanders
+link = { eu4 = IRE name = "Ireland" vic3 = IRE } # Ireland
 link = { eu4 = NED vic3 = NET } # Netherlands
-link = { eu4 = POR vic3 = POR } # Portugal
-link = { eu4 = k_portugal vic3 = POR } # Portugal
-link = { eu4 = SCO vic3 = SCO } # Scotland
-link = { eu4 = k_scotland vic3 = SCO } # Scotland
-link = { eu4 = ENG vic3 = ENG } # England
-link = { eu4 = k_england vic3 = ENG } # England
-link = { eu4 = ULS vic3 = ULS } # Ulster
-link = { eu4 = c_ulster vic3 = ULS } # Ulster
-link = { eu4 = WLS vic3 = WLS } # Wales
-link = { eu4 = k_wales vic3 = WLS } # Wales
-link = { eu4 = NAV vic3 = NAV } # Navarre
-link = { eu4 = k_navarra vic3 = NAV } # Navarre
-link = { eu4 = SPA vic3 = SPA } # Spain
-link = { eu4 = e_spain vic3 = SPA } # Spain
+link = { eu4 = POR name = "Portugal" vic3 = POR } # Portugal
+link = { eu4 = SCO name = "Scotland" vic3 = SCO } # Scotland
+link = { name = "Pictland" vic3 = SCO } # Pictland => Scotland
+link = { eu4 = ENG name = "England" vic3 = ENG } # England
+link = { eu4 = ULS name = "Ulster" vic3 = ULS } # Ulster
+link = { eu4 = WLS name = "Wales" vic3 = WLS } # Wales
+link = { eu4 = NAV name = "Navarra" vic3 = NAV } # Navarre
+link = { eu4 = SPA name = "Spain" vic3 = SPA } # Spain
+link = { name = "Hispania" vic3 = SPA } # Hispania => Spain
 #link = { eu4 = ??? vic3 = WLL } # Wallonia
-link = { eu4 = ANH vic3 = ANH } # Anhalt
-link = { eu4 = c_anhalt vic3 = ANH } # Anhalt
-link = { eu4 = BAD vic3 = BAD } # Baden
-link = { eu4 = c_baden vic3 = BAD } # Baden
-link = { eu4 = d_baden vic3 = BAD } # Baden
-link = { eu4 = BAV vic3 = BAV } # Bavaria
-link = { eu4 = d_bavaria vic3 = BAV } # Bavaria
-link = { eu4 = k_bavaria vic3 = BAV } # Bavaria
-link = { eu4 = BRA vic3 = BRA } # Brandenburg
-link = { eu4 = d_brandenburg vic3 = BRN } # Brandenburg
-link = { eu4 = BRE vic3 = BRE } # Bremen
-link = { eu4 = c_bremen vic3 = BRE } # Bremen
-link = { eu4 = DNZ vic3 = DZG } # Danzig
-link = { eu4 = c_danzig vic3 = DZG } # Danzig
+link = { eu4 = ANH name = "Anhalt" vic3 = ANH } # Anhalt
+link = { eu4 = BAD name = "Baden" vic3 = BAD } # Baden
+link = { eu4 = BAV name = "Bavaria" vic3 = BAV } # Bavaria
+link = { eu4 = BRA name = "Brandenburg" vic3 = BRA } # Brandenburg
+link = { eu4 = BRE name = "Bremen" vic3 = BRE } # Bremen
+link = { eu4 = DNZ name = "Danzig" vic3 = DZG } # Danzig
+link = { name = "Gdańsk" vic3 = DZG } # Gdańsk => Danzig
 link = { eu4 = FRN vic3 = FRM } # Frankfurt
-link = { eu4 = HAM vic3 = HAM } # Hamburg
-link = { eu4 = c_hamburg vic3 = HAM } # Hamburg
+link = { eu4 = HAM name = "Hamburg" vic3 = HAM } # Hamburg
 link = { eu4 = HAN vic3 = HAN } # Hannover
-link = { eu4 = HES vic3 = HES } # Hesse
-link = { eu4 = SHL vic3 = HOL } # Holstein
-link = { eu4 = d_holstein vic3 = HOL } # Holstein
-link = { eu4 = HSA vic3 = LUB } # Lübeck
-link = { eu4 = is_hanseatic_league_flag vic3 = LUB } # The Hansa => Lübeck
-link = { eu4 = c_lubeck vic3 = LUB } # Lübeck
-link = { eu4 = k_hansa vic3 = LUB } # Hansa => Lübeck
-link = { eu4 = LUX vic3 = LUX } # Luxembourg
-link = { eu4 = d_luxembourg vic3 = LUX } # Luxembourg
-link = { eu4 = MKL vic3 = MEC } # Mecklemburg
-link = { eu4 = d_mecklenburg vic3 = MEC } # Mecklenburg
-link = { eu4 = NSA vic3 = NAS } # Nassau
-link = { eu4 = c_nassau vic3 = NAS } # Nassau
-link = { eu4 = OLD vic3 = OLD } # Oldenburg
-link = { eu4 = c_oldenburg vic3 = OLD } # Oldenburg
-link = { eu4 = SAX vic3 = SAX } # Saxony
-link = { eu4 = k_saxony vic3 = SAX } # Saxony
-link = { eu4 = k_saxon vic3 = SAX } # Saxon(y)
-link = { eu4 = WUR vic3 = WUR } # Württemberg
-link = { eu4 = c_wurttemberg vic3 = WUR } #Württemberg
-link = { eu4 = MLO vic3 = LOM } # Milan => Lombardy
-link = { eu4 = k_lombardia vic3 = LOM } # Lombardy
-link = { eu4 = d_milano vic3 = LOM } # Milan => Lombardy
-link = { eu4 = LUC vic3 = LUC } # Lucca
-link = { eu4 = c_lucca vic3 = LUC } # Lucca
-link = { eu4 = MOD vic3 = MOD } # Modena
-link = { eu4 = d_modena vic3 = MOD } # Modena
-# link = { eu4 = PAP v2 = ITP reform = kingdom_of_god_reform } # Kingdom of God => Papal Italy
-link = { eu4 = PAP vic3 = PAP } # Papal States
-link = { eu4 = k_papal_state vic3 = PAP } # Papal States
-link = { eu4 = k_papacy vic3 = PAP } # Papal States
-link = { eu4 = PAR vic3 = PAR } # Parma
-link = { eu4 = c_parma vic3 = PAR } # Parma
+link = { eu4 = HES name = "Hesse" vic3 = HES } # Hesse
+link = { eu4 = SHL name = "Holstein" vic3 = HOL } # Holstein
+link = { eu4 = HSA name = "Lübeck" vic3 = LUB } # Lübeck
+link = { name = "The Hansa" vic3 = LUB } # Hansa => Lübeck
+link = { eu4 = LUX name = "Luxembourg" vic3 = LUX } # Luxembourg
+link = { eu4 = MKL name = "Mecklemburg" vic3 = MEC } # Mecklemburg
+link = { eu4 = NSA name = "Nassau" vic3 = NAS } # Nassau
+link = { eu4 = OLD name = "Oldenburg" vic3 = OLD } # Oldenburg
+link = { eu4 = SAX name = "Saxony" vic3 = SAX } # Saxony
+link = { eu4 = WUR name = "Württemberg" vic3 = WUR } # Württemberg
+link = { name = "Lombardy" vic3 = LOM } # Lombardy
+link = { name = "Lombardia" vic3 = LOM } # Lombardia => Lombardy
+link = { eu4 = MLO name = "Milan" vic3 = LOM } # Milan => Lombardy
+link = { eu4 = LUC name = "Lucca" vic3 = LUC } # Lucca
+link = { eu4 = MOD name = "Modena" vic3 = MOD } # Modena
+link = { name = "Kingdom of God" vic3 = ITA } # Kingdom of God => Italy
+link = { eu4 = PAP name = "The Papacy" vic3 = PAP } # Papal States
+link = { eu4 = PAR name = "Parma" vic3 = PAR } # Parma
 #link = { eu4 = ??? vic3 = PRA } # Grão-Pará
 link = { eu4 = SPI vic3 = SAR } # Sardinia-Piedmont
 link = { eu4 = TTS vic3 = SIC } # Two Sicilies
 #link = { eu4 = ??? vic3 = TRE } # Trieste
-link = { eu4 = TUS vic3 = TUS } # Tuscany
-link = { eu4 = d_toscana vic3 = TUS } # Tuscany
-link = { eu4 = VEN vic3 = VEN } # Venice
-link = { eu4 = k_venice vic3 = VEN } # Venice
-link = { eu4 = BOH vic3 = BOH } # Bohemia
-link = { eu4 = k_bohemia vic3 = BOH } # Bohemia
-link = { eu4 = KRA vic3 = KRA } # Krakow
-link = { eu4 = c_krakowskie vic3 = KRA } # Krakow
-link = { eu4 = CRI vic3 = CRI } # Crimea
-link = { eu4 = k_taurica vic3 = CRI } # Taurica => Crimea
-link = { eu4 = EST vic3 = EST } # Estonia
-link = { eu4 = d_estonia vic3 = EST } # Estonia
-link = { eu4 = HUN vic3 = HUN } # Hungary
-link = { eu4 = k_hungary vic3 = HUN } # Hungary
-link = { eu4 = LIT vic3 = LIT } # Lithuania
-link = { eu4 = k_lithuania vic3 = LIT } # Lithuania
-#link = { eu4 = ??? vic3 = LAT } # Latvia
-link = { eu4 = POL vic3 = POL } # Poland
-link = { eu4 = k_poland vic3 = POL } # Poland
-link = { eu4 = VOL vic3 = GAL } # Galicia-Volhynia
-link = { eu4 = k_galicia-volhynia vic3 = GLM } # Galicia-Volhynia
-link = { eu4 = d_slovakia vic3 = SLV } # Slovakia
+link = { eu4 = TUS name = "Toscana" vic3 = TUS } # Tuscany
+link = { eu4 = VEN name = "Venice" vic3 = VEN } # Venice
+link = { name = "Venezia" vic3 = VEN } # Venezia => Venice
+link = { eu4 = BOH name = "Bohemia" vic3 = BOH } # Bohemia
+link = { eu4 = KRA name = "Kraków" vic3 = KRA } # Krakow
+link = { eu4 = CRI name = "Crimea" vic3 = CRI } # Crimea
+link = { eu4 = EST name = "Estonia" vic3 = EST } # Estonia
+link = { eu4 = HUN name = "Hungary" vic3 = HUN } # Hungary
+link = { eu4 = LIT name = "Lithuania" vic3 = LIT } # Lithuania
+link = { name = "Latvia" vic3 = LAT } # Latvia
+link = { eu4 = POL name = "Poland" vic3 = POL } # Poland
+link = { eu4 = VOL name = "Galicia-Volhynia" vic3 = GAL } # Galicia-Volhynia
+link = { name = "Slovakia" vic3 = SLV } # Slovakia
 link = { eu4 = SLO vic3 = SLV } # Nitra => Slovakia
-link = { eu4 = SWI vic3 = SWI } # Switzerland
-link = { eu4 = k_schweiz vic3 = SWI } # Switzerland
-link = { eu4 = d_swiss vic3 = SWI } # Switzerland
-link = { eu4 = TRA vic3 = TRS } # Transylvania
-link = { eu4 = d_transylvania vic3 = TRS } # Transylvania
-link = { eu4 = UKR vic3 = UKR } # Ruthenia => Ukraine
-#link = { eu4 = ??? vic3 = CZH } # Czechoslovakia
+link = { eu4 = SWI name = "Switzerland" vic3 = SWI } # Switzerland
+link = { eu4 = TRA name = "Transylvania" vic3 = TRS } # Transylvania
+link = { eu4 = UKR name = "Ruthenia" vic3 = UKR } # Ruthenia => Ukraine
+link = { name = "Czechoslovakia" vic3 = CZH } # Czechoslovakia
+link = { name = "Czechia" vic3 = CZH } # Czechia => Czechoslovakia
 link = { eu4 = ALB vic3 = ALB } # Albania
-link = { eu4 = BOS vic3 = BOS } # Bosnia
-link = { eu4 = k_bosnia vic3 = BOS } # Bosnia
-link = { eu4 = BUL vic3 = BUL } # Bulgaria
-link = { eu4 = k_bulgaria vic3 = BUL } # Bulgaria
-link = { eu4 = CRT vic3 = CRE } # Crete
-link = { eu4 = d_krete vic3 = CRE } # Crete
-link = { eu4 = CRO vic3 = CRO } # Croatia
-link = { eu4 = k_croatia vic3 = CRO } # Croatia
-link = { eu4 = CYP vic3 = CYP } # Cyprus
-link = { eu4 = k_cyprus vic3 = CYP } # Cyprus
-link = { eu4 = GRE vic3 = GRE } # Greece
-link = { eu4 = k_byzantium vic3 = GRE } # Greece
-link = { eu4 = k_IMPTOCK3_HLA vic3 = GRE } # Greece
-link = { eu4 = CEP vic3 = ION } # Corfù => Ionian Islands
-link = { eu4 = c_cephalonia vic3 = ION } # Cephalonia => Ionian Islands
-link = { eu4 = k_IMPTOCK3_KRK vic3 = ION } # Kerkyra => Ionian Islands
-link = { eu4 = MOL vic3 = MOL } # Moldavia
-link = { eu4 = d_moldau vic3 = MOL } # Moldavia
-link = { eu4 = MON vic3 = MON } # Montenegro
-link = { eu4 = d_dioclea vic3 = MON } # Dioclea => Montenegro
-link = { eu4 = c_zeta vic3 = MON } # Zeta => Montenegro
+link = { eu4 = BOS name = "Bosnia" vic3 = BOS } # Bosnia
+link = { eu4 = BUL name = "Bulgaria" vic3 = BUL } # Bulgaria
+link = { eu4 = CRT name = "Krete" vic3 = CRE } # Crete
+link = { eu4 = CRO name = "Croatia" vic3 = CRO } # Croatia
+link = { eu4 = CYP name = "Cyprus" vic3 = CYP } # Cyprus
+link = { eu4 = GRE name = "Hellas" vic3 = GRE } # Greece
+link = { name = "Hellenic League" vic3 = GRE } # Hellas => Greece
+link = { eu4 = CEP name = "Cephalonia" vic3 = ION } # Corfù => Ionian Islands
+link = { name = "Kerkyra" vic3 = ION } # Corfù => Ionian Islands
+link = { eu4 = MOL name = "Moldavia" vic3 = MOL } # Moldavia
+link = { eu4 = MON name = "Zeta" vic3 = MON } # Montenegro
 link = { eu4 = RMN vic3 = ROM } # Romania
-link = { eu4 = k_dacia vic3 = ROM } # Dacia => Romania
-link = { eu4 = SER vic3 = SER } # Serbia
-link = { eu4 = k_serbia vic3 = SER } # Serbia
+link = { eu4 = SER name = "Serbia" vic3 = SER } # Serbia
 link = { eu4 = SLV vic3 = SLO } # Slovenia
 # link = { eu4 = CLI vic3 = SLO } # Cilli => Slovenia
-link = { eu4 = TUR vic3 = TUR } # Ottomans
-link = { eu4 = k_ottoman vic3 = TUR } # Ottomans
-link = { flag = is_turkey_flag vic3 = TUR } # Turkey
-link = { flag = is_revolutionary_turkey_flag vic3 = TUR } # Turkey
-link = { eu4 = WAL vic3 = WAL } # Wallachia
-link = { eu4 = k_wallachia vic3 = WAL } # Wallachia
-link = { eu4 = d_vlachs vic3 = WAL } # Wallachia
-link = { eu4 = k_yug vic3 = YUG } # Yugoslavia
+link = { eu4 = TUR name = "Ottoman Turks" vic3 = TUR } # Ottomans
+link = { eu4 = WAL name = "Wallachia" vic3 = WAL } # Wallachia
+link = { name = "Yugoslavia" vic3 = YUG } # Yugoslavia
 link = { eu4 = NAT vic3 = NAT } # Natives
-link = { eu4 = YAS vic3 = ABU } # Yas => Trucial States
+link = { eu4 = YAS name = "Dhu Zabi" vic3 = ABU } # Yas => Trucial States
 link = { eu4 = SHR vic3 = ABU } # Sharjah => Trucial States
-link = { eu4 = c_dhu_zabi vic3 = ABU } # Dhu Zhabi => Trucial States
-link = { eu4 = AFG vic3 = AFG } # Afghanistan
-link = { eu4 = k_afghanistan vic3 = AFG } # Afghanistan
-link = { eu4 = ARM vic3 = ARM } # Armenia
-link = { eu4 = e_armenia vic3 = ARM } # (Greater) Armenia
-link = { eu4 = k_armenia vic3 = ARM } # Armenia
+link = { eu4 = AFG name = "Afghanistan" vic3 = AFG } # Afghanistan
+link = { eu4 = ARM name = "Armenia" vic3 = ARM } # Armenia
+link = { name = "Armenian Principalities" vic3 = ARM } # Armenia
+link = { name = "Old Armenia" vic3 = ARM } # Armenia
 link = { eu4 = GAZ vic3 = DAG } # Gazikumukh => Dagestan
-link = { eu4 = d_azerbaijan vic3 = AZB } # Azerbaijan
-link = { eu4 = BUK vic3 = BUK } # Bukhara
-link = { eu4 = c_bukhara vic3 = BUK } # Bukhara
-link = { eu4 = GEO vic3 = GEO } # Georgia
-link = { eu4 = k_georgia vic3 = GEO } # Georgia
-link = { eu4 = d_georgia vic3 = GEO } # Georgia
+link = { name = "Azerbaijan" vic3 = AZB } # Azerbaijan
+link = { eu4 = BUK name = "Bukhara" vic3 = BUK } # Bukhara
+link = { eu4 = GEO name = "Georgia" vic3 = GEO } # Georgia
 link = { eu4 = HED vic3 = HDJ } # Hedjaz
-link = { eu4 = IRQ vic3 = IRQ } # Iraq
-link = { eu4 = k_iraq vic3 = IRQ } # Iraq
+link = { eu4 = IRQ name = "Mesopotamia" vic3 = IRQ } # Iraq
 link = { eu4 = KHI vic3 = KHI } # Khiva
-link = { eu4 = k_khiva vic3 = KHI } # Khiva
 link = { eu4 = KOK vic3 = KOK } # Ferghana => Kokand
-link = { eu4 = KZH vic3 = KAZ } # Kazakh
-link = { eu4 = k_kazakh vic3 = KAZ } # Kazakh
+link = { eu4 = KZH name = "Kazakh" vic3 = KAZ } # Kazakh
 link = { eu4 = MUG vic3 = MUG } # Mughals
 link = { eu4 = NAJ vic3 = NEJ } # Nejd
-link = { eu4 = d_najd vic3 = NEJ } # Nejd
-link = { eu4 = OMA vic3 = OMA } # Oman
-link = { eu4 = d_oman vic3 = OMA } # Oman
-link = { eu4 = PER vic3 = PER } # Persia
-link = { flag = is_revolutionary_gurkani_flag vic3 = PER } # Gurkani => Persia
-link = { eu4 = k_persia vic3 = PER } # Persia
-link = { eu4 = e_persia vic3 = PER } # Persia
-link = { eu4 = YEM vic3 = YEM } # Yemen
-link = { eu4 = k_yemen vic3 = YEM } # Yemen
+link = { eu4 = OMA name = "Oman" vic3 = OMA } # Oman
+link = { eu4 = PER name = "Persia" vic3 = PER } # Persia
+link = { eu4 = YEM name = "Yemen" vic3 = YEM } # Yemen
 link = { eu4 = HIN vic3 = HND } # Hindustan
 link = { eu4 = ODH vic3 = AWA } # Oudh
 link = { eu4 = BST vic3 = BAS } # Bastar
 link = { eu4 = BDA vic3 = BER } # Baroda
 #link = { eu4 = ??? vic3 = BHO } # Bhopal
-link = { eu4 = JAN vic3 = BIK } # Jangladesh => Bikaner
-link = { eu4 = d_jangladesh vic3 = BIK } # Jangladesh => Bikaner
+link = { eu4 = JAN name = "Jangladesh" vic3 = BIK } # Jangladesh => Bikaner
 link = { eu4 = BND vic3 = BUN } # Bundelkhand
 link = { eu4 = GWA vic3 = GWA } # Gwalior
-link = { eu4 = DEC vic3 = HYD } # Deccan => Hyderabad
-link = { eu4 = e_deccan vic3 = HYD } # Deccan => Hyderabad
+link = { eu4 = DEC name = "Deccan Empire" vic3 = HYD } # Deccan => Hyderabad
 #link = { eu4 = ??? vic3 = IND } # Indore
 #link = { eu4 = ??? vic3 = JAI } # Jaipur
 link = { eu4 = JSL vic3 = JAS } # Jaisalmer
 link = { eu4 = MAW vic3 = JOD } # Marwar => Jodhpur
-link = { eu4 = c_kalat vic3 = KAL } # Kalat
-link = { eu4 = KSH vic3 = KAS } # Kashmir
-link = { eu4 = k_kashmir vic3 = KAS } # Kashmir
-link = { eu4 = d_kashmir vic3 = KAS } # Kashmir
-link = { eu4 = KAT vic3 = KUT } # Kutch
-link = { eu4 = c_kutch vic3 = KUT } # Kutch
-link = { eu4 = LDK vic3 = LAD } # Ladakh
-link = { eu4 = k_maryul vic3 = LAD } # Maryül => Ladakh
-link = { eu4 = d_ladakh vic3 = LAD } # Ladakh
-link = { eu4 = c_makran vic3 = MAK } # Makran
+link = { name = "Kalat" vic3 = KAL } # Kalat
+link = { eu4 = KSH name = "Kashmir" vic3 = KAS } # Kashmir
+link = { name = "Kasmira" vic3 = KAS } # Kashmir
+link = { eu4 = KAT name = "Kutch" vic3 = KUT } # Kutch
+link = { eu4 = LDK name = "Ladakh" vic3 = LAD } # Ladakh
+link = { name = "Maryül" vic3 = LAD } # Maryül => Ladakh
+link = { name = "Makran" vic3 = MAK } # Makran
 link = { eu4 = MER vic3 = MEW } # Mewar
 link = { eu4 = MYS vic3 = MYS } # Mysore
 link = { eu4 = NGA vic3 = NAG } # Nagaur
-link = { eu4 = NPL vic3 = NEP } # Nepal
-link = { eu4 = k_nepal vic3 = NEP } # Nepal
-link = { eu4 = ORI vic3 = ORI } # Orissa
-link = { eu4 = k_orissa vic3 = ORI } # Orissa
-link = { eu4 = PUN vic3 = PAN } # Punjab
-link = { eu4 = k_punjab vic3 = PAN } # Punjab => Panjab
-link = { eu4 = SKK vic3 = SIK } # Sikkim
-link = { eu4 = c_sikkim vic3 = SIK } # Sikkim
-link = { eu4 = SND vic3 = SIN } # Sindh
-link = { eu4 = k_sindh vic3 = SIN } # Sind
-link = { eu4 = VND vic3 = TRA } # Venad => Travancore
-link = { eu4 = c_venadu vic3 = TRA } # Venad => Travancore
+link = { eu4 = NPL name = "Nepal" vic3 = NEP } # Nepal
+link = { eu4 = ORI name = "Orissa" vic3 = ORI } # Orissa
+link = { eu4 = PUN name = "Punjab" vic3 = PAN } # Punjab
+link = { eu4 = SKK name = "Sikkim" vic3 = SIK } # Sikkim
+link = { eu4 = SND name = "Sindh" vic3 = SIN } # Sindh
+link = { eu4 = VND name = "Venadu" vic3 = TRA } # Venad => Travancore
 link = { eu4 = ATJ vic3 = ACE } # Aceh
 link = { eu4 = BLI vic3 = BAL } # Bali
-link = { eu4 = BHU vic3 = BHU } # Bhutan
-link = { eu4 = k_lhomon vic3 = BHU } # Lhomon => Bhutan
-link = { eu4 = d_bhutan vic3 = BHU } # Bhutan
+link = { eu4 = BHU name = "Bumthang" vic3 = BHU } # Bhutan
+link = { name = "Lhomon" vic3 = BHU } # Lhomon => Bhutan
 link = { eu4 = LFA vic3 = LAN } # Lanfang
 link = { eu4 = BEI vic3 = BRU } # Brunei
-link = { flag = is_burma vic3 = BUR } # Burma
+link = { name = "Burma" vic3 = BUR } # Burma
 link = { eu4 = TAU vic3 = BUR } # Taungu => Burma
 link = { eu4 = KHM vic3 = CAM } # Khmer => Cambodia
-link = { flag = is_china_flag vic3 = CHI } # China
-link = { flag = is_revolutionary_china_flag vic3 = CHI } # China
-link = { flag = is_dai_nam_flag vic3 = DAI } # Dai Nam => Dai Viet
-link = { flag = is_viet_nam_flag vic3 = DAI } # Vietnam => Dai Viet
-link = { eu4 = DAI vic3 = DAI } # Dai Viet
+link = { name = "China" vic3 = CHI } # China
+link = { eu4 = DAI name = "Dai Nam" vic3 = DAI } # Dai Nam => Dai Viet
+link = { name = "Vietnam" vic3 = DAI } # Vietnam => Dai Viet
 link = { eu4 = BAN vic3 = JAV } # Banten => Java
 link = { eu4 = KOR vic3 = KOR } # Korea
 link = { eu4 = LXA vic3 = LAO } # Lan Xang => Laos
@@ -314,63 +212,54 @@ link = { eu4 = JOH vic3 = JOH } # Johor
 link = { eu4 = SIA vic3 = SIA } # Siam
 link = { eu4 = AYU vic3 = SIA } # Ayutthaya => Siam
 link = { eu4 = LNA vic3 = CMI } # Lan Na => Chiang Mai
-link = { eu4 = TIB vic3 = TIB } # Tibet
-link = { eu4 = e_tibet vic3 = TIB } # Tibet
+link = { eu4 = TIB name = "Tibet" vic3 = TIB } # Tibet
 link = { eu4 = MGE vic3 = MGL } # Mongol Empire => Mongolia
-link = { eu4 = KHA vic3 = MGL } # Mongolia
-link = { eu4 = e_mongol_empire vic3 = MGL } # Mongolia
-# link = { eu4 = e_uyghur_khanate vic3 = XIN } # Uyghur Khanate => Xinjiang (name to fix!)
-link = { eu4 = k_phi vic3 = PHI } # Philippines
+link = { eu4 = KHA name = "Mongolia" vic3 = MGL } # Mongolia
+link = { name = "Philippines" vic3 = PHI } # Philippines
 link = { eu4 = MCH vic3 = MCH } # Manchu
 link = { eu4 = CAL vic3 = CAL } # California
 link = { eu4 = CAN vic3 = CAN } # Canada
 link = { eu4 = CHE vic3 = CHE } # Cherokee
 #link = { eu4 = ??? vic3 = COL } # British Columbia
-#link = { eu4 = ??? vic3 = COS } # Costa Rica
+link = { name = "Costa Rica" vic3 = COS } # Costa Rica
 link = { eu4 = CUB vic3 = CUB } # Cuba
-#link = { eu4 = ??? vic3 = DES } # Deseret
+link = { name = "Deseret" vic3 = DES } # Deseret
 #link = { eu4 = ??? vic3 = DOM } # Santo Domingo
-#link = { eu4 = ??? vic3 = ELS } # El Salvador
-#link = { eu4 = ??? vic3 = GUA } # Guatemala
+link = { name = "El Salvador" vic3 = ELS } # El Salvador
+link = { name = "Guatemala" vic3 = GUA } # Guatemala
 #link = { eu4 = ??? vic3 = ALT } # Los Altos
 link = { eu4 = HAI vic3 = HAI } # Haiti
 link = { eu4 = MEX vic3 = MEX } # Mexico
 #link = { eu4 = ??? vic3 = MTC } # Métis
-#link = { eu4 = ??? vic3 = HON } # Honduras
-#link = { eu4 = ??? vic3 = NEN } # New England
-#link = { eu4 = ??? vic3 = NEW } # Newfoundland
-#link = { eu4 = ??? vic3 = NIC } # Nicaragua
-#link = { eu4 = ??? vic3 = PNM } # Panama
+link = { name = "Honduras" vic3 = HON } # Honduras
+link = { name = "New England" vic3 = NEN } # New England
+link = { name = "Newfoundland" vic3 = NEW } # Newfoundland
+link = { name = "Nicaragua" vic3 = NIC } # Nicaragua
+link = { name = "Panama" vic3 = PNM } # Panama
 link = { eu4 = QUE vic3 = QUE } # Quebec
 #link = { eu4 = ??? vic3 = HBC } # Hudson Bay
-#link = { eu4 = ??? vic3 = ONT } # Ontario
-#link = { eu4 = ??? vic3 = NBS } # New Brunswick
+#link = { name = "Ontario" vic3 = ONT } # Ontario
+#link = { name = "New Brunswick" vic3 = NBS } # New Brunswick
 link = { eu4 = TEX vic3 = TEX } # Texas
 link = { eu4 = CAM vic3 = UCA } # Central America
 link = { eu4 = LAP vic3 = ARG } # La Plata => Argentina
-link = { eu4 = k_bol vic3 = BOL } # Bolivia
+link = { name = "Bolivia" vic3 = BOL } # Bolivia
 link = { eu4 = BRZ vic3 = BRZ } # Brazil
 link = { eu4 = CHL vic3 = CHL } # Chile
 link = { eu4 = COL vic3 = CLM } # Colombia
-link = { eu4 = k_ecu vic3 = ECU } # Ecuador
+link = { name = "Ecuador" vic3 = ECU } # Ecuador
 link = { eu4 = PEU vic3 = PEU } # Peru
 link = { eu4 = PRG vic3 = PRG } # Paraguay
-link = { eu4 = k_uru vic3 = URU } # Uruguay
+link = { name = "Uruguay" vic3 = URU } # Uruguay
 link = { eu4 = VNZ vic3 = VNZ } # Venezuela
-link = { eu4 = ISR vic3 = ISR } # Israel
-link = { eu4 = k_israel vic3 = ISR } # Israel
-link = { eu4 = BYZ vic3 = BYZ } # Byzantium
-link = { eu4 = e_byzantium vic3 = BYZ } # Byzantium
-link = { eu4 = ICE vic3 = ICL } # Iceland
-link = { eu4 = d_iceland vic3 = ICL } # Iceland
-link = { eu4 = ARB vic3 = ARA } # Arabia
-link = { eu4 = e_arabs vic3 = ARA } # Arabia
-link = { eu4 = k_arabia vic3 = ARA } # Arabia
-link = { eu4 = e_arabia vic3 = ARA } # Arabia
+link = { eu4 = ISR name = "Israel" vic3 = ISR } # Israel
+link = { eu4 = BYZ name = "Byzantine Empire" vic3 = BYZ } # Byzantium
+link = { eu4 = ICE name = "Iceland" vic3 = ICL } # Iceland
+link = { eu4 = ARB name = "Arabia" vic3 = ARA } # Arabia
+link = { name = "Arabian Empire" vic3 = ARA }
 #link = { eu4 = ??? vic3 = UBD } # United Baltic
-link = { eu4 = k_bye vic3 = BYE } #Belarus
-link = { eu4 = k_white_rus vic3 = BYE } # White Rus' => Belarus (=White Russia)
-link = { eu4 = PLC vic3 = PLC } # Poland-Lithuania
+ink = { name = "White Rus'" vic3 = BYE } # White Rus => Belarus
+link = { eu4 = PLC name = "West-Slavia" vic3 = PLC } # Poland-Lithuania
 #link = { eu4 = ??? vic3 = GCO } # Gran Colombia
 link = { eu4 = JMN vic3 = JAN } # Jan Mayen
 #link = { eu4 = ??? vic3 = BIC } # East India Company
@@ -380,7 +269,7 @@ link = { eu4 = TOG vic3 = TNG } # Tonga
 link = { eu4 = WSI vic3 = WIN } # West Indies
 link = { eu4 = MAY vic3 = MAY } # Maya
 #link = { eu4 = ??? vic3 = IBE } # Iberia
-#link = { eu4 = ??? vic3 = ORG } # Oregon
+link = { name = "Oregon" vic3 = ORG } # Oregon
 link = { eu4 = COM vic3 = COM } # Comanche
 #link = { eu4 = ??? vic3 = SEQ } # Indian Territory
 link = { eu4 = SIO vic3 = DKT } # Sioux => Dakota
@@ -390,34 +279,30 @@ link = { eu4 = ARP vic3 = ARP } # Arapaho
 #link = { eu4 = ??? vic3 = NZP } # Nez Percé
 #link = { eu4 = ??? vic3 = ABS } # Absaroka
 link = { eu4 = WCR vic3 = IRC } # Cree
-link = { eu4 = c_manchester vic3 = MAC } # Manchester
+link = { name = "Manchester" vic3 = MAC } # Manchester
 link = { eu4 = PRY vic3 = JAM } # Port Royal => Jamaica
 link = { eu4 = NSS vic3 = BAH } # New Providence => Bahamas
 #link = { eu4 = ??? vic3 = PCO } # Puerto Rico
 link = { eu4 = MIS vic3 = MKT } # Miskito
 link = { eu4 = AZT vic3 = NAH } # Aztec => Nahua
-#link = { eu4 = ??? vic3 = GRN } # Greenland
-link = { eu4 = ADU vic3 = ANL } # Andalusia
-link = { eu4 = k_andalusia vic3 = ANL } # Andalusia
-link = { eu4 = CAS vic3 = CAS } # Castille
-link = { eu4 = k_castile vic3 = CAS } # Castille
-link = { eu4 = SMI vic3 = SMI } # Sápmi
-link = { eu4 = d_sami vic3 = SMI } # Sami
-link = { eu4 = k_sapmi vic3 = SMI } # Sami
-link = { eu4 = JAI vic3 = MLT } # Malta
-link = { eu4 = c_malta vic3 = MLT } # Malta
-link = { eu4 = PRM vic3 = PRM } # Perm
-link = { eu4 = k_perm vic3 = PRM } # Perm
+link = { name = "Greenland" vic3 = GRN } # Greenland
+link = { eu4 = ADU name = "al-Andalus" vic3 = ANL } # Andalusia
+link = { name = "Andalusia" vic3 = ANL } # Andalusia
+link = { eu4 = CAS name = "Castille" vic3 = CAS } # Castille
+link = { eu4 = SMI name = "Sápmi" vic3 = SMI } # Sápmi
+link = { eu4 = JAI name = "Malta" vic3 = MLT } # Malta
+link = { eu4 = PRM name = "Permia" vic3 = PRM } # Perm
+link = { name = "Perm" vic3 = PRM } # Perm
 #link = { eu4 = ??? vic3 = HZJ } # Hazarajat
 #link = { eu4 = ??? vic3 = TRC } # Turkmenia
-link = { eu4 = SIB vic3 = SIB } # Sibir => Siberia
-link = { eu4 = d_sibir vic3 = SIB } # Sibir
+link = { eu4 = SIB name = "Siberia" vic3 = SIB } # Sibir => Siberia
+link = { name = "Sibir" vic3 = SIB } # Sibir
 #link = { eu4 = ??? vic3 = YAK } # Yakutia
 link = { eu4 = ASS vic3 = ASM } # Assam
 link = { eu4 = MLB vic3 = MNP } # Manipur
 #link = { eu4 = ??? vic3 = TOB } # Toba
 #link = { eu4 = ??? vic3 = KLT } # Kalimantan
-link = { eu4 = PEG vic3 = HTH } # Pegu => Hanthawaddy
+link = { eu4 = PEG name = "Pegu" vic3 = HTH } # Pegu => Hanthawaddy
 link = { eu4 = MPA vic3 = KRN } # Mong Pai => Karen
 #link = { eu4 = ??? vic3 = KHM } # Khmu
 link = { eu4 = MKA vic3 = KHN } # Mong Kwang => Kachin
@@ -434,7 +319,7 @@ link = { eu4 = INC vic3 = TWT } # Inca => Tawantinsuyu
 #link = { eu4 = ??? vic3 = WYU } # Wayuu
 link = { eu4 = TPA vic3 = TPI } # Tupinamba
 link = { eu4 = PUE vic3 = PUE } # Pueblo
-#link = { eu4 = ??? vic3 = NNV } # Nunavut
+link = { name = "Nunavut" vic3 = NNV } # Nunavut
 link = { eu4 = NAH vic3 = NVL } # Navajo
 #link = { eu4 = ??? vic3 = ATB } # Athabaska
 link = { eu4 = CSC vic3 = CSC } # Cascadia
@@ -447,8 +332,9 @@ link = { eu4 = BLA vic3 = BLF } # Blackfoot
 #link = { eu4 = ??? vic3 = CCM } # O'odham
 #link = { eu4 = ??? vic3 = ORN } # Orinoco
 link = { eu4 = MCA vic3 = MUI } # Muisca
-#link = { eu4 = ??? vic3 = SRB } # Sorbia
-#link = { eu4 = ??? vic3 = YUC } # Yucatán
+link = { name = "Sorbia" vic3 = SRB } # Sorbia
+link = { name = "Polabia" vic3 = SRB } # Polabia => Sorbia
+link = { name = "Yucatán" vic3 = YUC } # Yucatán
 #link = { eu4 = ??? vic3 = RIO } # Rio Grande
 #link = { eu4 = ??? vic3 = PNI } # Piratini
 link = { eu4 = CEY vic3 = CEY } # Kotte => Ceylon
@@ -456,18 +342,18 @@ link = { eu4 = BAL vic3 = BLH } # Baluchistan
 #link = { eu4 = ??? vic3 = NGF } # North Germany
 #link = { eu4 = ??? vic3 = SGF } # South Germany
 #link = { eu4 = ??? vic3 = OCC } # Occitania
-link = { eu4 = k_tuva vic3 = TUV } # Tuva
+link = { name = "Tuva" vic3 = TUV } # Tuva
 link = { eu4 = COR vic3 = COR } # Corsica
 #link = { eu4 = ??? vic3 = TNS } # Tungus
 link = { eu4 = KMC vic3 = FER } # Kamchadals => Kamchatka
-link = { eu4 = KAZ vic3 = IUS } # Kazan
+link = { eu4 = KAZ name = "Kazan" vic3 = IUS } # Kazan
 #link = { eu4 = ??? vic3 = NCA } # Mountain Republic (Caucasus)
 #link = { eu4 = ??? vic3 = DON } # Don Cossacks
-link = { eu4 = SYR vic3 = SYR } # Syria
-link = { eu4 = k_syria vic3 = SYR } # Syria
-#link = { eu4 = ??? vic3 = EOT } # Jordan
-link = { eu4 = LEB vic3 = LEB } # Lebanon
-link = { eu4 = d_lebanon vic3 = LEB } # Lebanon
+link = { eu4 = SYR name = "Syria" vic3 = SYR } # Syria
+link = { name = "Urdunn" vic3 = EOT } # Jordan
+link = { eu4 = LEB name = "Lebanon" vic3 = LEB } # Lebanon
+link = { name = "Phoenicia" vic3 = LEB } # Phoenicia => Lebanon
+link = { name = "Tripoli" vic3 = LEB } # Tripoli => Lebanon
 #link = { eu4 = ??? vic3 = HNA } # Hunan
 #link = { eu4 = ??? vic3 = AHU } # Anhui
 #link = { eu4 = ??? vic3 = ZHI } # Zhili
@@ -480,48 +366,38 @@ link = { eu4 = d_lebanon vic3 = LEB } # Lebanon
 #link = { eu4 = ??? vic3 = TPG } # Taiping
 link = { eu4 = GUA vic3 = GNI } # Guarani
 link = { eu4 = ARD vic3 = KUR } # Ardalan => Kurdistan
-link = { eu4 = GAL vic3 = GLI } # Galicia
-link = { eu4 = k_spanish_galicia vic3 = GLI } # Galicia
-#link = { eu4 = ??? vic3 = PAL } # Palestine
-#link = { eu4 = ??? vic3 = TRH } # Turkestan
-link = { eu4 = e_turkestan vic3 = TRH } #Turkestan
+link = { eu4 = GAL name = "Galicia" vic3 = GLI } # Galicia
+link = { name = "Palestine" vic3 = PAL } # Palestine
+link = { name = "Turkestan" vic3 = TRH } # Turkestan
 link = { eu4 = COB vic3 = COB } # Coburg => Saxe-Coburg-Gotha
 #link = { eu4 = ??? vic3 = MEI } # Saxe-Meiningen
-link = { eu4 = c_weimar vic3 = WEI } # Weimar => Saxe-Weimar
+link = { name = "Weimar" vic3 = WEI } # Weimar => Saxe-Weimar
 #link = { eu4 = ??? vic3 = SCW } # Schwarzburg
-#link = { eu4 = ??? vic3 = HEK } # Hesse-Kassel
+link = { name = "Kassel" vic3 = HEK } # Hesse-Kassel
 link = { eu4 = LIP vic3 = LIP } # Lippe-Detmold
 #link = { eu4 = ??? vic3 = SCM } # Schaumburg-Lippe
 #link = { eu4 = ??? vic3 = MST } # Mecklemburg-Strelitz
-#link = { eu4 = ??? vic3 = HOH } # Hohenzollern
-#link = { eu4 = ??? vic3 = WLD } # Waldeck
-link = { eu4 = BHA vic3 = BHT } # Bharat => India
-link = { eu4 = e_india vic3 = BHT } # India
-link = { flag = is_nusantara_flag vic3 = IDN } # Nusantara => Indonesia
-#link = { eu4 = ??? vic3 = UOM } # Michigan
+link = { name = "Zollern" vic3 = HOH } # Hohenzollern
+link = { name = "Waldeck" vic3 = WLD } # Waldeck
+link = { eu4 = BHA name = "Indian Empire" vic3 = BHT } # Bharat => India
+link = { name = "Nusantara" vic3 = IDN } # Nusantara => Indonesia
+#link = { name = "Michigan" vic3 = UOM } # Michigan
 
 ## 01_africa.txt
-link = { eu4 = ALG vic3 = ALD } # Algeria
-link = { eu4 = d_alger vic3 = ALD } # Alger
-link = { eu4 = EGY vic3 = EGY } # Egypt
-link = { eu4 = k_egypt vic3 = EGY } # Egypt
+link = { eu4 = ALG name = "Alger" vic3 = ALD } # Algeria
+link = { eu4 = EGY name = "Egypt" vic3 = EGY } # Egypt
 link = { eu4 = MAM vic3 = EGY } # Mamluks => Egypt
-link = { eu4 = d_mamluks vic3 = EGY } # Mamluks => Egypt
-link = { eu4 = ETH vic3 = ETH } # Ethiopia
-link = { eu4 = k_abyssinia vic3 = ETH } # Abyssinia => Ethiopia
+link = { eu4 = ETH name = "Abyssinia" vic3 = ETH } # Ethiopia
 #link = { eu4 = ??? vic3 = MAD } # Madagascar
 #link = { eu4 = ??? vic3 = LIB } # Liberia
-link = { eu4 = MOR vic3 = MOR } # Morocco
-link = { eu4 = k_morocco vic3 = MOR } # Morocco
+link = { eu4 = MOR name = "Maghreb" vic3 = MOR } # Morocco
 #link = { eu4 = ??? vic3 = NAL } # Natal-Zululand
 #link = { eu4 = ??? vic3 = ORA } # Oranje
 #link = { eu4 = ??? vic3 = SAF } # South Africa
 link = { eu4 = SOK vic3 = SOK } # Sokoto
-link = { eu4 = TRI vic3 = TRI } # Tripolitania
-link = { eu4 = d_tripolitania vic3 = TRI } # Tripolitania
+link = { eu4 = TRI name = "Tripolitania" vic3 = TRI } # Tripolitania
 #link = { eu4 = ??? vic3 = TRN } # Transvaal
-link = { eu4 = TUN vic3 = TUN } # Tunisia
-link = { eu4 = d_tunis vic3 = TUN } # Tunisia
+link = { eu4 = TUN name = "Tunis" vic3 = TUN } # Tunisia
 #link = { eu4 = ??? vic3 = ZAN } # Zanzibar
 link = { eu4 = ZUL vic3 = ZUL } # Zulu
 #link = { eu4 = ??? vic3 = SIL } # Sierra Leone
@@ -544,10 +420,9 @@ link = { eu4 = KUB vic3 = KBA } # Kuba
 #link = { eu4 = ??? vic3 = MNB } # Mangbetu
 #link = { eu4 = ??? vic3 = NYM } # Unyamwezi
 #link = { eu4 = ??? vic3 = HHE } # Hehe
-link = { eu4 = d_jalon vic3 = FTJ } # Futa Jallon
+link = { name = "Fura Jalon" vic3 = FTJ } # Futa Jallon
 link = { eu4 = BUG vic3 = BUG } # Buganda
-link = { eu4 = ASH vic3 = ASH } # Ashanti
-link = { eu4 = d_ashanti vic3 = ASH } # Ashanti
+link = { eu4 = ASH name = "Ashanti" vic3 = ASH } # Ashanti
 link = { eu4 = YAK vic3 = YKA } # Yaka
 link = { eu4 = KON vic3 = KON } # Kongo
 link = { eu4 = LOA vic3 = LNG } # Loango
@@ -574,8 +449,7 @@ link = { eu4 = BUU vic3 = BRD } # Burundi
 link = { eu4 = WAR vic3 = WSG } # Warsangali
 link = { eu4 = GLE vic3 = GLD } # Geledi
 link = { eu4 = MJE vic3 = MJT } # Majeerteen
-link = { eu4 = DAR vic3 = DFR } # Darfur
-link = { eu4 = d_darfur vic3 = DFR } # Darfu
+link = { eu4 = DAR name = "Dárfúr" vic3 = DFR } # Darfur
 #link = { eu4 = ??? vic3 = ISQ } # Isaaq
 link = { eu4 = HOB vic3 = HOB } # Hobyo
 #link = { eu4 = ??? vic3 = DAK } # Dar al-Kuti
@@ -584,44 +458,39 @@ link = { eu4 = HOB vic3 = HOB } # Hobyo
 #link = { eu4 = ??? vic3 = DNK } # Dinka
 #link = { eu4 = ??? vic3 = NUE } # Nuer
 #link = { eu4 = ??? vic3 = TPS } # Toposa
-link = { eu4 = AFA vic3 = AWS } # Aussa
-link = { eu4 = SOA vic3 = SHW } # Shewa
+link = { eu4 = AFA name = "Afar" vic3 = AWS } # Aussa
+link = { eu4 = SOA name = "Showa" vic3 = SHW } # Shewa
 link = { eu4 = HAR vic3 = HAR } # Harar
 #link = { eu4 = ??? vic3 = BRN } # Borana
 link = { eu4 = KAF vic3 = KFA } # Kaffa
 #link = { eu4 = ??? vic3 = SDM } # Sidamo
-link = { eu4 = DAM vic3 = WLG } # Damot => Welega
+link = { eu4 = DAM name = "Damot" vic3 = WLG } # Damot => Welega
 link = { eu4 = MED vic3 = TGR } # Medri Bahri => Tigray
 #link = { eu4 = ??? vic3 = GJM } # Gojjam
 #link = { eu4 = ??? vic3 = WLO } # Wello
-link = { eu4 = BTI vic3 = BGM } # Semien => Begemder
-link = { eu4 = KBO vic3 = BOR } # Kanem-Bornu => Bornu
+link = { eu4 = BTI name = "Semien" vic3 = BGM } # Semien => Begemder
+link = { eu4 = KBO name = "Bornu" vic3 = BOR } # Kanem-Bornu => Bornu
 #link = { eu4 = ??? vic3 = BGI } # Bagirmi
-link = { eu4 = WAD vic3 = WAD } # Wadai
-link = { eu4 = d_wadai vic3 = WAD } # Waddai
-link = { eu4 = AIR vic3 = AIR } # Air
-link = { eu4 = d_air vic3 = AIR } # Air
+link = { eu4 = WAD name = "Wadaï" vic3 = WAD } # Wadai
+link = { eu4 = AIR name = "Air" vic3 = AIR } # Air
 link = { eu4 = ZAF vic3 = MSN } # Macina => Massina
-link = { eu4 = OYO vic3 = OYO } # Oyo
-link = { eu4 = BEN vic3 = BEN } # Benin
-link = { eu4 = d_benin vic3 = BEN } # Benin
+link = { eu4 = OYO name = "Yorubaland" vic3 = OYO } # Oyo
+link = { eu4 = BEN name = "Benin" vic3 = BEN } # Benin
 #link = { eu4 = ??? vic3 = CAY } # Cayor
 link = { eu4 = JOL vic3 = JLF } # Jolof
-link = { eu4 = k_toro vic3 = FTR } # Futa Toro
-link = { eu4 = KNG vic3 = KNG } # Kong
-link = { eu4 = k_kong vic3 = KNG } # Kong
+link = { name = "Toro" vic3 = FTR } # Futa Toro
+link = { eu4 = KNG name = "Kong" vic3 = KNG } # Kong
 link = { eu4 = DAH vic3 = DAH } # Dahomey
 link = { eu4 = MSI vic3 = MOS } # Mossi
 #link = { eu4 = ??? vic3 = KRT } # Kaarta
 link = { eu4 = SOF vic3 = SGU } # Segu
 #link = { eu4 = ??? vic3 = TRZ } # Trarza
-link = { eu4 = KBU vic3 = KBU } # Kaabu
-link = { eu4 = k_kaabu vic3 = KBU } # Kaabu
+link = { eu4 = KBU name = "Kaabu" vic3 = KBU } # Kaabu
 #link = { eu4 = ??? vic3 = BND } # Bundu
 #link = { eu4 = ??? vic3 = SRR } # Serer
 #link = { eu4 = ??? vic3 = SSU } # Susu
 #link = { flag = started_decline_of_mali vic3 = MDK } # Mandinka
-link = { eu4 = HAU vic3 = HAU } # Hausa
+link = { eu4 = HAU name = "Hausaland" vic3 = HAU } # Hausa
 #link = { eu4 = ??? vic3 = BLE } # Baule
 #link = { eu4 = ??? vic3 = KRU } # Kru
 #link = { eu4 = ??? vic3 = KBD } # Kabadougou
@@ -638,13 +507,13 @@ link = { eu4 = HAU vic3 = HAU } # Hausa
 #link = { eu4 = ??? vic3 = TIR } # Tiris
 #link = { eu4 = ??? vic3 = IBL } # Ibibioland
 #link = { eu4 = ??? vic3 = KSS } # Kissi
-link = { eu4 = SON vic3 = GAO } # Songhai => Gao
+link = { eu4 = SON name = "Songhai" vic3 = GAO } # Songhai => Gao
 #link = { eu4 = ??? vic3 = TIV } # Tivland
 #link = { eu4 = ??? vic3 = SRA } # Sara
 #link = { eu4 = ??? vic3 = EQU } # Equatoria
-link = { eu4 = BEJ vic3 = BJA } # Beja
+link = { eu4 = BEJ name = "Beja" vic3 = BJA } # Beja
 #link = { eu4 = ??? vic3 = NBA } # Nuba
-link = { eu4 = NBI vic3 = SUD } # Nubia => Sudan
+link = { eu4 = NBI name = "Nubia" vic3 = SUD } # Nubia => Sudan
 #link = { eu4 = ??? vic3 = SKM } # Sukuma
 #link = { eu4 = ??? vic3 = CHW } # Chewa
 #link = { eu4 = ??? vic3 = LMW } # Lomwe
@@ -654,7 +523,7 @@ link = { eu4 = MKU vic3 = MKU } # Makua
 #link = { eu4 = ??? vic3 = XHO } # Xhosa
 #link = { eu4 = ??? vic3 = UYA } # Uyao
 link = { eu4 = GZI vic3 = ZIM } # Zimbabwe
-link = { eu4 = MAL vic3 = MAL } # Mali
+link = { eu4 = MAL name = "Mali" vic3 = MAL } # Mali
 #link = { eu4 = ??? vic3 = AFS } # Congo Free State
 #link = { eu4 = ??? vic3 = SAH } # Western Sahara
 
@@ -662,7 +531,7 @@ link = { eu4 = MAL vic3 = MAL } # Mali
 link = { eu4 = UHW vic3 = HAW } # Hawaii
 link = { eu4 = HAW vic3 = HAW } # Hawaii
 #link = { eu4 = ??? vic3 = NTU } # Ngai Tau
-link = { eu4 = TNK vic3 = NTO } # Ngati Toa
+link = { eu4 = TNK vic3 = NTO } # Taranaki => Ngati Toa
 #link = { eu4 = ??? vic3 = KNK } # Kanak
 #link = { eu4 = ??? vic3 = PPU } # Papua
 #link = { eu4 = ??? vic3 = HLA } # Bougainville
@@ -678,13 +547,2881 @@ link = { eu4 = VIL vic3 = FJI } # Viti Levu => Fiji
 #link = { eu4 = ??? vic3 = PLY } # Polynesia
 link = { eu4 = AOT vic3 = AOT } # Aotearoa
 #link = { eu4 = ??? vic3 = ULR } # Uluru
-#link = { eu4 = ??? vic3 = NSW } # New South Wales
-#link = { eu4 = ??? vic3 = WAS } # Western Australia
-#link = { eu4 = ??? vic3 = SAS } # South Australia
+#link = { eu4 = "New South Wales" vic3 = NSW } # New South Wales
+#link = { eu4 = "Western Australia" vic3 = WAS } # Western Australia
+#link = { eu4 = "South Australia" vic3 = SAS } # South Australia
 #link = { eu4 = ??? vic3 = UNT } # Tribes of New Zealand
 link = { eu4 = NOO vic3 = NNG } # Nyoongah => Noongar
 link = { eu4 = GMI vic3 = GML } # Kamilaroi => Gamilaraay
 link = { eu4 = AUS vic3 = AST } # Australia
 link = { eu4 = NZL vic3 = NZL } # Zealandia => New Zealand
-link = { eu4 = PLW vic3 = TAS } # Palawa => Tasmania
+link = { eu4 = PLW name = "Tasmania" vic3 = TAS } # Palawa => Tasmania
 #link = { eu4 = ??? vic3 = DEI } # Dutch East Indies
+
+### EU4-Vic3 coded-in tags
+
+### EU4 vanilla flag codes
+# Special countries..
+link = { eu4 = REB flag_code = legacy_REB } # Rebels
+link = { eu4 = PIR flag_code = legacy_PIR } # Pirates
+link = { name = "The Caliphate" flag_code = legacy_ISL } # The Caliphate
+
+#Scandinavia
+link = { eu4 = GOT name = "Gotland" flag_code = legacy_GOT } # Gotland
+#link = { eu4 = LVA name = "Livonia" flag_code = legacy_d_livonia } # Livonia
+#link = { eu4 = KRL name = "Karelia" flag_code = legacy_d_karelia } # Karelia
+
+#Balkans
+link = { eu4 = ACH name = "Achaia" flag_code = legacy_ACH } # Achaia
+link = { eu4 = ATH name = "Athens" flag_code = legacy_ATH } # Athens
+link = { eu4 = DAL name = "Dalmatia" flag_code = legacy_DLM } # Dalmatia
+link = { eu4 = EPI name = "Epirus" flag_code = legacy_EPI } # Epirus
+link = { eu4 = KNI name = "Knights Hospitaller" flag_code = legacy_KNI } # Knights
+link = { eu4 = MOE name = "Monemvasia" flag_code = legacy_MOE } # Morea
+link = { eu4 = NAX name = "Naxos" flag_code = legacy_NAX } # Naxos
+link = { eu4 = RAG name = "Ragusa" flag_code = legacy_RAG } # Ragusa
+link = { name = "Anatolia" flag_code = legacy_ANA } # Anatolia
+
+#British Isles 
+link = { eu4 = CNN name = "Connacht" flag_code = legacy_CNN } # Connacht
+link = { eu4 = CRN name = "Cornwall" flag_code = legacy_KER } # Cornwall
+link = { eu4 = LEI name = "Leinster" flag_code = legacy_LEI } # Leinster
+link = { eu4 = MNS name = "Thomond" flag_code = legacy_MNS } # Thomond
+link = { eu4 = TYR name = "Tyrone" flag_code = legacy_TYR } # Tyrone
+link = { eu4 = NOL name = "Northumberland" flag_code = legacy_NOL } # Northumberland
+link = { eu4 = MTH name = "Meath" flag_code = legacy_d_meath } # Meath
+link = { eu4 = DMS name = "Desmond" flag_code = legacy_DMS } # Desmond
+link = { eu4 = SLN flag_code = legacy_SLN } # Sligo
+link = { eu4 = KID name = "Kildare" flag_code = legacy_KID } # Kildare
+link = { eu4 = HSC name = "Moray" flag_code = legacy_HSC } # Highlands/Gaeldom
+link = { eu4 = ORD name = "Ormond" flag_code = legacy_ORD } # Ormond
+link = { eu4 = TRY name = "Tyrconnell" flag_code = legacy_TRY } # Tyrconnell
+link = { eu4 = FLY flag_code = legacy_FLY } # Offaly/Faly
+link = { eu4 = MCM flag_code = legacy_MCM } # Munster
+link = { eu4 = KOI name = "Mann and the Isles" flag_code = legacy_KOI } # Mann
+#link = { eu4 = LOI flag_code = legacy_LOI } # The Isles, noticed
+
+#Colonies
+link = { eu4 = LOU flag_code = legacy_LOU } # Louisiana
+link = { eu4 = ALA flag_code = legacy_LSK } # Alaska
+link = { eu4 = ILI flag_code = legacy_UIL } # Illinois
+link = { eu4 = FLO flag_code = legacy_FLR } # Florida
+link = { eu4 = VRM flag_code = legacy_VRM } # Vermont
+link = { eu4 = SNA flag_code = legacy_SON } # Sonora
+
+link = { eu4 = LIV flag_code = legacy_LIV } # Livonian Order
+link = { eu4 = MAZ name = "Mazovia" flag_code = legacy_MAZ } # Mazovia
+link = { eu4 = KUR flag_code = legacy_KUR } # Kurland
+link = { eu4 = RIG flag_code = legacy_RIG } # Riga
+link = { eu4 = TEU flag_code = legacy_TEU } # Teutonic Order
+link = { eu4 = VOL name = "Volhynia" flag_code = legacy_VOL } # Volyn
+link = { eu4 = KIE name = "Kiev" flag_code = legacy_KIE } # Kiev
+link = { eu4 = CHR name = "Chernigov" flag_code = legacy_CHR } # Chernigov
+link = { eu4 = OKA flag_code = legacy_OKA } # Odoyev
+
+#France 
+link = { eu4 = ALE flag_code = legacy_ALE } # Alencon
+link = { eu4 = ALS name = "Alsace" flag_code = legacy_ALS } # Alsace
+link = { eu4 = AMG name = "Armagnac" flag_code = legacy_AMG } # Armagnac
+link = { eu4 = AUV name = "Auvergne" flag_code = legacy_AUV } # Auvergne
+link = { eu4 = AVI name = "Venaissin" flag_code = legacy_AVI } # Avignon
+link = { eu4 = BOU name = "Bourbon" flag_code = legacy_BOU } # Bourbonnais
+link = { eu4 = BUR name = "Burgundy" flag_code = legacy_BRG } # Burgundy
+link = { eu4 = CHP name = "Champagne" flag_code = legacy_CPG } # Champagne
+link = { eu4 = DAU name = "Dauphiné" flag_code = legacy_DAU } # Dauphine
+link = { eu4 = FOI name = "Foix" flag_code = legacy_FOI } # Foix
+link = { eu4 = GUY name = "Gascogne" flag_code = legacy_GYN } # Gascony
+link = { eu4 = NEV name = "Nevers" flag_code = legacy_NEV } # Nevers
+link = { eu4 = NRM name = "Normandy" flag_code = legacy_NRM } # Normandy
+link = { eu4 = ORL name = "Orléans" flag_code = legacy_ORL } # Orleans
+link = { eu4 = PIC flag_code = legacy_PIC } # Picardy
+link = { eu4 = PRO name = "Provence" flag_code = legacy_PRO } # Provence
+link = { eu4 = TOU name = "Toulouse" flag_code = legacy_TUL } # Toulouse
+link = { eu4 = BER name = "Berry" flag_code = legacy_BEY } # Berry
+
+#HRE
+link = { eu4 = AAC name = "Jülich" flag_code = legacy_AAC } # Aachen 
+link = { eu4 = ANS flag_code = legacy_ANS } # Ansbach
+link = { eu4 = AUG flag_code = legacy_AUG } # Augsburg
+link = { eu4 = BRU name = "Brunswick" flag_code = legacy_BRA } # Brunswick => Braunschweig
+link = { eu4 = EFR name = "Ostfriesland" flag_code = legacy_EFR } # East Frisia
+link = { eu4 = HAN name = "Angria" flag_code = legacy_HAN } # Hannover
+link = { eu4 = HLR name = "Holy Roman Empire" flag_code = legacy_HLR } # Holy Roman Empire
+link = { eu4 = KLE name = "Kleves" flag_code = legacy_KLE } # Kleves
+link = { eu4 = KOL name = "Köln" flag_code = legacy_KOL } # Cologne
+link = { eu4 = LAU flag_code = legacy_LAU } # Lauenburg
+link = { eu4 = LOR name = "Upper Lorraine" flag_code = legacy_LOR } # Lorraine
+link = { eu4 = LUN name = "Lüneburg" flag_code = legacy_LNB } # Lüneburg
+link = { eu4 = MAG flag_code = legacy_MAG } # Magdeburg
+link = { eu4 = MAI name = "Mainz" flag_code = legacy_MAI } # Mainz
+link = { eu4 = MEI name = "Meissen" flag_code = legacy_MEI } # Meissen
+link = { eu4 = MUN flag_code = legacy_MUN } # Münster (Germany)
+link = { eu4 = MVA name = "Moravia" flag_code = legacy_MRV } # Moravia
+link = { eu4 = PAL name = "Lower Lorraine" flag_code = legacy_PAL } # Palatinate
+link = { eu4 = SIL name = "Silesia" flag_code = legacy_SLS } # Silesia
+link = { eu4 = SLZ name = "Salzburg" flag_code = legacy_SLZ } # Salzburg
+link = { eu4 = STY name = "Steiermark" flag_code = legacy_STY } # Styria
+link = { eu4 = THU name = "Thüringia" flag_code = legacy_THU } # Thuringia
+link = { eu4 = TIR name = "Tyrol" flag_code = legacy_TIR } # Tirol
+link = { eu4 = TRI name = "Trier" flag_code = legacy_TER } # Trier
+link = { eu4 = ULM name = "Ulm" flag_code = legacy_ULM } # Ulm
+link = { eu4 = WBG name = "Würzburg" flag_code = legacy_WBG } # Würzburg
+link = { eu4 = NUM name = "Nurnberg" flag_code = legacy_NUM } # Nuremberg
+link = { eu4 = MEM flag_code = legacy_MEM } # Memmingen
+link = { eu4 = VER flag_code = legacy_VER } # Verden
+link = { eu4 = RVA flag_code = legacy_RVA } # Ravensburg
+link = { eu4 = DTT flag_code = legacy_DTT } # Dithmarschen
+
+#Spain
+link = { eu4 = ARA name = "Aragon" flag_code = legacy_ARN } # Aragon
+link = { eu4 = GRA name = "Granada" flag_code = legacy_GRA } # Granada
+link = { eu4 = LON name = "León" flag_code = legacy_k_leon } # Leon
+link = { eu4 = VAL name = "Valencia" flag_code = legacy_d_valencia } # Valencia
+link = { eu4 = ASU name = "Asturias" flag_code = legacy_ATR } # Asturias
+link = { eu4 = MJO name = "Mallorca" flag_code = legacy_c_mallorca } # Majorca
+
+#Italy
+link = { eu4 = AQU name = "Aquileia" flag_code = legacy_AQU } # Aquileia
+link = { eu4 = ETR name = "Etruria" flag_code = legacy_ETR } # Etruria
+link = { eu4 = FER name = "Ferrara" flag_code = legacy_FER } # Ferrara
+link = { eu4 = GEN name = "Genoa" flag_code = legacy_GEN } # Genoa
+link = { eu4 = MAN name = "Mantua" flag_code = legacy_MTA } # Mantua
+link = { eu4 = NAP name = "Naples" flag_code = legacy_NAP } # Naples
+link = { eu4 = PIS name = "Pisa" flag_code = legacy_PIS } # Pisa
+link = { eu4 = SAR name = "Sardinia" flag_code = legacy_SRD } # Sardinia
+link = { name = "Sardinia and Corsica" flag_code = legacy_SRD }
+link = { eu4 = SAV name = "Savoy" flag_code = legacy_SVY } # Savoy
+link = { eu4 = SIC name = "Sicily" flag_code = legacy_SYC } # Sicily
+link = { eu4 = SIE name = "Siena" flag_code = legacy_SNA } # Siena
+link = { eu4 = URB name = "Urbino" flag_code = legacy_URB } # Urbino
+link = { eu4 = MFA name = "Monferrato" flag_code = legacy_MFA } # Montferrat
+link = { name = "Lucca" flag_code = legacy_LUC } # Lucca
+link = { eu4 = LAN name = "Firenze" flag_code = legacy_FLO } # Florence
+
+#Low Countries
+link = { eu4 = BRB name = "Brabant" flag_code = legacy_BRB } # Brabant
+link = { eu4 = FRI name = "Frisia" flag_code = legacy_FRI } # Friesland
+link = { eu4 = GEL name = "Gelre" flag_code = legacy_GLR } # Gelre
+link = { eu4 = HAI name = "Hainaut" flag_code = legacy_HAT } # Hainaut
+link = { eu4 = HOL name = "Holland" flag_code = legacy_HLL } # Holland
+link = { eu4 = LIE name = "Liège" flag_code = legacy_LIG } # Liege
+link = { eu4 = UTR name = "Utrecht" flag_code = legacy_UTR } # Utrecht
+
+#Russia 
+link = { eu4 = AST flag_code = legacy_AKH } # Astrakhan
+link = { eu4 = MOS name = "Moskva" flag_code = legacy_MUS } # Muscowy
+link = { eu4 = NOV name = "Novgorod" flag_code = legacy_NVG } # Novgorod
+link = { eu4 = PSK name = "Pskov" flag_code = legacy_PSK } # Pskov
+link = { eu4 = QAS flag_code = legacy_QAS } # Qasim Khanate
+link = { eu4 = RYA name = "Ryazan" flag_code = legacy_RYA } # Ryazan
+link = { eu4 = TVE name = "Tver" flag_code = legacy_TVE } # Tver
+link = { eu4 = YAR name = "Yaroslavl" flag_code = legacy_YAR } # Yaroslavl
+link = { eu4 = ZAZ name = "Zaporizhia" flag_code = legacy_ZAZ } # Zaporozhie
+link = { name = "Dykra" flag_code = legacy_ZAZ }
+link = { name = "Etelköz" flag_code = legacy_ZAZ }
+link = { eu4 = NOG flag_code = legacy_NOG } # Nogai
+link = { eu4 = PLT name = "Polotsk" flag_code = legacy_PLT } # Polotsk
+link = { eu4 = FEO flag_code = legacy_FEO } # Theodoro
+link = { eu4 = BSH name = "Bashkiria" flag_code = legacy_BSK } # Bashkiria
+link = { eu4 = BLO name = "Beloozero" flag_code = legacy_d_beloozero } #Beloozero
+link = { eu4 = RSO name = "Rostov" flag_code = legacy_d_rostov } #Rostov
+
+link = { eu4 = GOL flag_code = legacy_GRH } # Great Horde
+link = { eu4 = GLH name = "Golden Horde" flag_code = legacy_GOL } # Golden Horde
+
+#Arabia 
+link = { eu4 = ADE name = "Aden" flag_code = legacy_ADE } # Aden
+link = { name = "Sana'a" flag_code = legacy_ADE } # Sanaa => Aden
+link = { eu4 = ALH name = "Al-Hasa" flag_code = legacy_ALH } # Haasa
+link = { eu4 = ANZ flag_code = legacy_ANZ } # Anizah
+link = { eu4 = BHT flag_code = legacy_SRN } # Bohtan/Soran => Kurdistan
+link = { eu4 = DAW flag_code = legacy_DAW } # Dawasir
+link = { eu4 = ERE name = "Eretnid" flag_code = legacy_ERE } # Eretna
+link = { eu4 = FAD flag_code = legacy_FDL } # Fadl
+link = { eu4 = GRM name = "Germiyan" flag_code = legacy_GRM } # Germiyan
+link = { eu4 = HDR name = "Hadramawt" flag_code = legacy_HDR } # Hadramawt
+link = { eu4 = MAK name = "Makuria" flag_code = legacy_MKA } # Makuria
+link = { eu4 = MDA name = "Medina" flag_code = legacy_d_medina } # Medina
+link = { eu4 = MFL flag_code = legacy_MFL } # Mikhlaf
+link = { eu4 = MHR name = "Mahra" flag_code = legacy_MHR } # Mahra
+link = { eu4 = NJR name = "Najran" flag_code = legacy_NJR } # Najran
+link = { eu4 = RAS flag_code = legacy_RAS } # Rassids
+link = { eu4 = SHM flag_code = legacy_HAL } # Shammar
+link = { eu4 = SRV flag_code = legacy_SRV } # Shirvanshah
+link = { eu4 = HSN flag_code = legacy_AYU } # Hisn Khayfa/Ayyubids
+link = { eu4 = BTL flag_code = legacy_BTL } # Bitlis
+
+#Asia Minor  
+link = { eu4 = AKK flag_code = legacy_AKK } # Ak Koyunlu
+link = { eu4 = AYD name = "Aydin" flag_code = legacy_AYD } # Aydin
+link = { eu4 = CND name = "Candar" flag_code = legacy_CND } # Candar
+link = { eu4 = DUL flag_code = legacy_DUL } # Dulkadir
+link = { eu4 = KAR name = "Karaman" flag_code = legacy_KRM } # Karaman
+link = { eu4 = TRE name = "Trebizond" flag_code = legacy_TBZ } # Trebizond
+link = { eu4 = SRU name = "Saruhan" flag_code = legacy_SRU } # Saruhan
+link = { eu4 = MEN name = "Mentese" flag_code = legacy_MEN } # Mentese
+link = { eu4 = RAM flag_code = legacy_RAM } # Ramazan
+link = { eu4 = AVR flag_code = legacy_AVR } # Avars
+link = { eu4 = MLK flag_code = legacy_MLK } # Karabakh/Kashen
+link = { eu4 = SME flag_code = legacy_SME } # Samtskhe
+link = { eu4 = ARL flag_code = legacy_ARL } # Ardabil
+link = { eu4 = MSY flag_code = legacy_MSY } # Mushashaiyyah
+link = { eu4 = RUM name = "Rum" flag_code = legacy_RUM } # Rûm
+
+#Maghreb
+link = { eu4 = FEZ name = "Fes" flag_code = legacy_FEZ } # Fez
+link = { eu4 = KBA flag_code = legacy_KBA } # Kabylia
+link = { eu4 = TFL flag_code = legacy_TFL } # Tafilalt
+link = { eu4 = SOS flag_code = legacy_SOS } # Sus
+link = { eu4 = TLC flag_code = legacy_TLC } # Tlemcen
+link = { eu4 = TGT flag_code = legacy_TGT } # Touggourt
+link = { eu4 = GHD flag_code = legacy_GHD } # Ghadames
+link = { eu4 = FZA flag_code = legacy_FZA } # Fezzan
+link = { eu4 = MZB flag_code = legacy_MZB } # Mzab
+link = { eu4 = SLE flag_code = legacy_SL3 } # Salé
+link = { eu4 = TET flag_code = legacy_TET } # Tétouan
+link = { eu4 = MRK flag_code = legacy_MRK } # Marrakech
+
+#Central Asia
+link = { eu4 = SHY flag_code = legacy_SHY } # Uzbek
+
+#Persia 
+link = { eu4 = KHO name = "Khorasan" flag_code = legacy_KHO } # Khorasan
+link = { eu4 = QAR flag_code = legacy_QAR } # Qara Koyunlu
+link = { eu4 = TIM flag_code = legacy_TIM } # Timurid
+link = { eu4 = TRS name = "Transoxiana" flag_code = legacy_TRX } # Transoxiana
+link = { eu4 = KRY name = "Gilan" flag_code = legacy_d_gilan } # Gilan
+link = { eu4 = CIR flag_code = legacy_CIR } # Circassia
+link = { eu4 = IME name = "Imeretia" flag_code = legacy_IME } # Imereti
+link = { eu4 = TAB name = "Mazandaran" flag_code = legacy_TAB } # Tabarestan
+link = { eu4 = ORM flag_code = legacy_ORM } # Hormuz
+link = { eu4 = LRI name = "Luristan" flag_code = legacy_c_luristan } # Lurestan
+link = { eu4 = SIS name = "Sistan" flag_code = legacy_d_sistan } # Sistan
+link = { eu4 = BPI flag_code = legacy_BPI } # Biapas
+link = { eu4 = FRS name = "Fars" flag_code = legacy_d_fars } # Fars
+link = { eu4 = KRM name = "Kerman" flag_code = legacy_d_kerman } # Kerman
+link = { eu4 = YZD flag_code = legacy_YZD } # Yazd
+link = { eu4 = ISF name = "Isfahan" flag_code = legacy_d_esfahan } # Isfahan
+link = { eu4 = TBR name = "Tabriz" flag_code = legacy_d_tabriz } # Tabriz
+link = { eu4 = BSR name = "Basra" flag_code = legacy_XXX } # Basra
+link = { eu4 = MGR flag_code = legacy_MGR } # Maregh
+link = { eu4 = QOM flag_code = legacy_QOM } # Qom/Ajam
+
+#Americas
+link = { eu4 = CHM flag_code = legacy_CHM } # Chimu
+link = { eu4 = CRE flag_code = legacy_CRK } # Creek
+link = { eu4 = HUR flag_code = legacy_HUR } # Huron
+link = { eu4 = SHA flag_code = legacy_SHX } # Shawnee
+link = { eu4 = ZAP flag_code = legacy_ZAP } # Zapotec
+
+#Africa
+link = { eu4 = ZAN flag_code = legacy_SWA } # Swahili
+link = { eu4 = ZIM flag_code = legacy_ZIM } # Mutapa
+link = { eu4 = ADA name = "Adal" flag_code = legacy_ADA } # Adal
+link = { eu4 = SFA flag_code = legacy_SOF } # Sofala
+link = { eu4 = MBA flag_code = legacy_MBA } # Mombasa
+link = { eu4 = MLI flag_code = legacy_ML1 } # Malindi
+link = { eu4 = AJU name = "Ajuraan" flag_code = legacy_AJU } # Ajuuraan
+link = { eu4 = MDI flag_code = legacy_MDI } # Mogadishu
+link = { eu4 = ENA flag_code = legacy_ENA } # Ennarea
+
+#East African Additions
+link = { eu4 = ALO name = "Alodia" flag_code = legacy_ALO } # Alodia
+link = { eu4 = MRE flag_code = legacy_MRE } # Marehan
+link = { eu4 = PTE flag_code = legacy_PTE } # Pate
+link = { eu4 = JIM flag_code = legacy_JIM } # Jima
+link = { eu4 = WLY flag_code = legacy_WLY } # Welayta
+link = { eu4 = HDY flag_code = legacy_HDY } # Hadiya
+link = { eu4 = JJI flag_code = legacy_JJI } # Janjiro
+link = { eu4 = ABB flag_code = legacy_ABB } # Dongola
+
+#Kongo, Great Lakes & Central Africa
+link = { eu4 = TYO flag_code = legacy_TYO } # Tyo
+link = { eu4 = SYO flag_code = legacy_SYO } # Soyo
+link = { eu4 = KIK flag_code = legacy_KIK } # Kikondja
+link = { eu4 = KLD flag_code = legacy_KLD } # Kalundwe
+link = { eu4 = BSG flag_code = legacy_BSG } # Basoga
+link = { eu4 = UBH flag_code = legacy_UBH } # Buha
+
+link = { eu4 = MRA flag_code = legacy_MLW } # Maravi
+link = { eu4 = LDU flag_code = legacy_LDU } # Lundu
+link = { eu4 = TBK flag_code = legacy_TBK } # Tumbuka
+link = { eu4 = RZW flag_code = legacy_RZW } # Butua
+
+# Origins update
+link = { eu4 = WGD flag_code = legacy_BKF } # Wagadugu -> Burkina Faso
+link = { eu4 = ZND flag_code = legacy_ZND } # Zandoma
+link = { eu4 = GUR flag_code = legacy_GUR } # Gurma
+link = { eu4 = TEN flag_code = legacy_TEN } # Tenkodogo
+link = { eu4 = OGD flag_code = legacy_OGD } # Ogaadeen
+link = { eu4 = SOM flag_code = legacy_SOM } # Somalia
+link = { eu4 = NBI flag_code = legacy_SUD } # Nubia -> Sudan
+link = { eu4 = RZI flag_code = legacy_SHO } # Rozwi -> Shona
+link = { eu4 = KIT flag_code = legacy_KIT } # Kitara
+
+#Madagascar
+link = { eu4 = MIR flag_code = legacy_MIR } # Merina
+link = { eu4 = SKA flag_code = legacy_SKA } # Sakalava
+link = { eu4 = BTS flag_code = legacy_BTS } # Betsimisaraka
+link = { eu4 = MFY flag_code = legacy_MFY } # Mahafaly
+link = { eu4 = ANT flag_code = legacy_ATM } # Antemoro
+
+#Far East
+link = { eu4 = ANN flag_code = legacy_ANN } # Annam
+link = { eu4 = ARK flag_code = legacy_ARK } # Arakan
+link = { eu4 = BLI flag_code = legacy_BAL } # Bali
+link = { eu4 = CHA flag_code = legacy_CHA } # Champa
+link = { eu4 = CHG flag_code = legacy_CHG } # Chagatai Khanate
+
+#Daimyos
+link = { eu4 = AMA flag_code = legacy_AMA } # Amago
+link = { eu4 = ASA flag_code = legacy_ASA } # Asakura
+link = { eu4 = CSK flag_code = legacy_CSK } # Chosokabe
+link = { eu4 = DTE flag_code = legacy_DTE } # Date
+link = { eu4 = HJO flag_code = legacy_HJO } # Hojo
+link = { eu4 = HSK flag_code = legacy_HSK } # Hosokawa
+link = { eu4 = HTK flag_code = legacy_HTK } # Hatakeyama
+link = { eu4 = IKE flag_code = legacy_IKE } # Ikeda
+link = { eu4 = IMG flag_code = legacy_IMG } # Imagawa
+link = { eu4 = MAE flag_code = legacy_MAE } # Maeda
+link = { eu4 = MRI flag_code = legacy_MRI } # Mori
+link = { eu4 = ODA flag_code = legacy_ODA } # Oda
+link = { eu4 = OTM flag_code = legacy_OTM } # Otomo
+link = { eu4 = OUC flag_code = legacy_OUC } # Ouchi
+link = { eu4 = SBA flag_code = legacy_SHB } # Shiba
+link = { eu4 = SMZ flag_code = legacy_SMZ } # Shimazu
+link = { eu4 = TKD flag_code = legacy_TKD } # Takeda
+link = { eu4 = TKG flag_code = legacy_TKG } # Tokugawa
+link = { eu4 = UES flag_code = legacy_UES } # Uesugi
+link = { eu4 = YMN flag_code = legacy_YMN } # Yamana
+link = { eu4 = RFR flag_code = legacy_RFR } # Nanbu
+link = { eu4 = ASK flag_code = legacy_ASK } # Ashikaga
+link = { eu4 = KTB flag_code = legacy_KTB } # Kitabatake
+
+#New Daimyos 1.20
+link = { eu4 = AKM flag_code = legacy_AKM } # Akamatsu
+link = { eu4 = AKT flag_code = legacy_AKT } # Ando
+link = { eu4 = CBA flag_code = legacy_CHB } # Chiba
+link = { eu4 = ISK flag_code = legacy_ISS } # Isshiki
+link = { eu4 = ITO flag_code = legacy_ITO } # Ito
+link = { eu4 = KKC flag_code = legacy_KKU } # Kikuchi
+link = { eu4 = KNO flag_code = legacy_KNO } # Kono
+link = { eu4 = OGS flag_code = legacy_OGA } # Ogasawara
+link = { eu4 = SHN flag_code = legacy_SHN } # Shoni
+link = { eu4 = STK flag_code = legacy_STK } # Satake
+link = { eu4 = TKI flag_code = legacy_TKI } # Toki
+link = { eu4 = UTN flag_code = legacy_UTU } # Utsunomiya
+link = { eu4 = TTI flag_code = legacy_TSU } # Tsutsui
+
+link = { flag_code = legacy_SRJ name = "Srivijaya" } # Srivijaya
+link = { flag_code = legacy_MJP mame = "Majapahit" } # Majapahit
+link = { eu4 = KHA flag_code = legacy_KHA } # Khalkha-Mongolia
+link = { eu4 = MAJ flag_code = legacy_MJP } # Majapahit
+link = { eu4 = MKS flag_code = legacy_MKS } # Makassar
+link = { eu4 = MLC flag_code = legacy_MLC } # Malacca
+link = { eu4 = MNG flag_code = legacy_MNX } # Ming
+link = { eu4 = MTR flag_code = legacy_MTR } # Mataram
+link = { eu4 = OIR flag_code = legacy_OIR } # Oirat Horde
+link = { eu4 = PAT flag_code = legacy_PAT } # Pattani
+link = { eu4 = PEG flag_code = legacy_PEG } # Pegu
+link = { eu4 = QNG flag_code = legacy_QNG } # Qing
+link = { name = "Western Protectorate" flag_code = legacy_SXI } # Western Protectorate => Shanxi Clique
+link = { eu4 = RYU flag_code = legacy_RYU } # Ryukyu
+link = { eu4 = SST flag_code = legacy_SHA } # Shan
+link = { eu4 = SUK flag_code = legacy_SUK } # Sukhothai
+link = { eu4 = SUL flag_code = legacy_SUL } # Sulu
+link = { eu4 = TOK flag_code = legacy_TOK } # Tonkin
+link = { eu4 = CZH flag_code = legacy_ZHO } # Zhou
+link = { eu4 = CSH flag_code = legacy_CSH } # Shun
+link = { eu4 = CXI flag_code = legacy_CXI } # Xi
+link = { eu4 = YUA flag_code = legacy_YUA } # Yuan
+
+# 1.27 steppe tags
+link = { eu4 = ILK name = "Ilkhanate" flag_code = legacy_e_il-khanate } # Ilkhanate
+link = { eu4 = KLM flag_code = legacy_KMK } # Kalmyk
+
+# 1.29 new tags
+link = { eu4 = SOO flag_code = legacy_SOO } # So, Japan
+link = { eu4 = NVK flag_code = legacy_NVK } # Nivkh
+link = { eu4 = SOL flag_code = legacy_SOL } # Solon
+link = { eu4 = EJZ flag_code = legacy_EJZ } # East Jianzhou
+link = { eu4 = NHX flag_code = legacy_NHX } # North Haixi
+
+#Manchuria tags
+link = { eu4 = MYR flag_code = legacy_MYR } # Yeren
+link = { eu4 = MHX flag_code = legacy_MHX } # Haixi
+link = { eu4 = MJZ flag_code = legacy_MJZ } # Jianzhou
+
+#Mongol tags
+link = { eu4 = KRC flag_code = legacy_KRC } # Khorchin
+link = { eu4 = KLK flag_code = legacy_KLK } # Khalkha
+link = { eu4 = HMI flag_code = legacy_HMI } # Karadel
+link = { eu4 = ZUN name = "Dzungaria" flag_code = legacy_ZUN } # Zunghar
+link = { eu4 = KAS flag_code = legacy_YRK } # Yarkand
+link = { eu4 = CHH flag_code = legacy_CHH } # Chahar
+
+#Great Tibet tags
+link = { eu4 = KSD flag_code = legacy_KSD } # Khoshuud
+link = { eu4 = SYG flag_code = legacy_SYG } # Sarig Yogir
+link = { eu4 = UTS name = "Tsang" flag_code = legacy_UTS } # Utsang
+link = { eu4 = KAM name = "Kham" flag_code = legacy_MDO } # Kham
+link = { eu4 = GUG name = "Gugé" flag_code = legacy_GUG } # Guge
+link = { eu4 = PHA name = "Ü" flag_code = legacy_PHA } # Ü
+
+#Non-Han China proper tags
+link = { eu4 = CYI flag_code = legacy_CYI } # Yi
+
+#Chinese Revolters
+link = { eu4 = MIN flag_code = legacy_MIN } # Min
+link = { eu4 = SHU flag_code = legacy_SHU } # Shu
+link = { eu4 = NNG flag_code = legacy_NNG } # Ning
+link = { eu4 = CHC flag_code = legacy_CHC } # Chu
+link = { eu4 = TNG flag_code = legacy_TNG } # Tang
+link = { eu4 = WUU flag_code = legacy_CWU } # Wu
+link = { eu4 = QIC flag_code = legacy_QIC } # Qi
+link = { eu4 = YAN flag_code = legacy_YAN } # Yan
+link = { eu4 = JIN flag_code = legacy_JIN } # Jin
+link = { eu4 = LNG flag_code = legacy_LNG } # Liang
+link = { eu4 = QIN flag_code = legacy_QIN } # Qin
+link = { eu4 = HUA flag_code = legacy_HUA } # Huai
+link = { eu4 = CGS flag_code = legacy_CGS } # Changsheng
+
+#India
+link = { eu4 = BNG name = "Bengal" flag_code = legacy_BNG } # Bengal
+link = { eu4 = BIJ flag_code = legacy_BIJ } # Bijapur
+link = { eu4 = BAH flag_code = legacy_BMN } # Bahmanis
+link = { eu4 = DLH name = "Delhi" flag_code = legacy_DLH } # Delhi
+link = { eu4 = GOC flag_code = legacy_GOC } # Golconda
+link = { eu4 = MAR flag_code = legacy_MRT } # Marathas
+link = { eu4 = VIJ flag_code = legacy_VIJ } # Vijaynagara
+link = { eu4 = AHM flag_code = legacy_AMD } # Ahmadnagar
+link = { eu4 = GUJ name = "Gujarat" flag_code = legacy_GUJ } # Gujarat
+link = { eu4 = JNP name = "Jaunpur" flag_code = legacy_JNP } # Jaunpur
+link = { eu4 = MAD flag_code = legacy_XMA } # Madurai
+link = { eu4 = MLW name = "Malwa" flag_code = legacy_MAW } # Malwa
+link = { eu4 = MUL name = "Multan" flag_code = legacy_MUL } # Multan
+link = { eu4 = NAG flag_code = legacy_NAG } # Nagpur
+link = { eu4 = BRR flag_code = legacy_BRR } # Berar
+link = { eu4 = KRK name = "Karnata" flag_code = legacy_KRN } # Carnatic => Karnataka
+link = { eu4 = GDW name = "Gondwana" flag_code = legacy_GDW } # Gondwana
+link = { eu4 = GRJ flag_code = legacy_GRJ } # Garjat
+link = { eu4 = DHU flag_code = legacy_RJP } # Dhundhar
+link = { eu4 = KLN flag_code = legacy_KLN } # Keladi
+link = { eu4 = KHD flag_code = legacy_KHD } # Khandesh
+link = { eu4 = MAB flag_code = legacy_MAB } # Malabar
+link = { eu4 = MEW flag_code = legacy_MWT } # Mewat
+link = { eu4 = KAC flag_code = legacy_KAC } # Kachar
+link = { eu4 = KMT flag_code = legacy_KCX } # Koch
+link = { eu4 = KGR name = "Kangra" flag_code = legacy_KGR } # Kangra
+link = { eu4 = KOC flag_code = legacy_KOC } # Kochin
+link = { eu4 = HAD flag_code = legacy_HAD } # Hadoti
+link = { eu4 = RMP flag_code = legacy_RMP } # Rohilkandh
+link = { eu4 = BGL flag_code = legacy_BGL } # Bagelkhand
+link = { eu4 = JFN flag_code = legacy_JFN } # Jaffna
+link = { eu4 = PTA flag_code = legacy_PTA } # Patiala
+link = { eu4 = GHR name = "Garhwal" flag_code = legacy_GHR } # Garhwal
+link = { eu4 = CHD flag_code = legacy_CDR } # Chanda
+link = { eu4 = NGP flag_code = legacy_NGP } # Jharkhand
+link = { eu4 = JAJ flag_code = legacy_JAJ } # Habsan
+link = { eu4 = TRT flag_code = legacy_TRT } # Tirhut
+link = { eu4 = CMP flag_code = legacy_CMP } # Rewa Kantha
+link = { eu4 = BGA flag_code = legacy_BGA } # Baglana
+link = { eu4 = TPR flag_code = legacy_TPR } # Tripura
+link = { eu4 = SDY flag_code = legacy_SDY } # Sadiya
+link = { eu4 = YOR name = "Andhra" flag_code = legacy_AND } # Andhra
+link = { eu4 = DGL name = "Maldives" flag_code = legacy_MLD } # Maldives
+
+link = { eu4 = MBL flag_code = legacy_MBL } # Bishnupur
+link = { eu4 = IDR flag_code = legacy_IDR } # Idar
+link = { eu4 = JLV flag_code = legacy_JLV } # Jhalavad
+link = { eu4 = PTL flag_code = legacy_PTL } # Palitana
+link = { eu4 = NVR flag_code = legacy_NVR } # Navanagar
+link = { eu4 = RJK flag_code = legacy_RJK } # Rajkot
+link = { eu4 = JGD flag_code = legacy_JGD } # Junagarh
+link = { eu4 = PRB flag_code = legacy_PRB } # Porbandar
+link = { eu4 = PAN flag_code = legacy_PNN } # Panna
+link = { eu4 = KLP name = "Kalpi" flag_code = legacy_KLP } # Kalpi
+link = { eu4 = SBP name = "Sambalpur" flag_code = legacy_SBP } # Sambalpur
+link = { eu4 = PTT flag_code = legacy_PTT } # Patna
+link = { eu4 = RTT name = "Ratanpur" flag_code = legacy_RTT } # Ratanpur
+link = { eu4 = KLH flag_code = legacy_KLH } # Kalahandi
+link = { eu4 = KJH flag_code = legacy_KJH } # Keonhjar
+link = { eu4 = SRG flag_code = legacy_SRG } # Surguja
+link = { eu4 = KND flag_code = legacy_SRI } # Kandy => Ceylon
+link = { eu4 = TLG name = "Telingana" flag_code = legacy_TLG } # Telingana
+link = { eu4 = KLT flag_code = legacy_KLT } # Kolathunad
+link = { eu4 = DNG flag_code = legacy_DNG } # Dang
+link = { eu4 = DTI name = "Doti" flag_code = legacy_DTI } # Doti
+link = { eu4 = GRK name = "Gorkha" flag_code = legacy_GRK } # Gorkha
+link = { eu4 = JML name = "Jumla" flag_code = legacy_JML } # Jumla
+link = { eu4 = LWA name = "Limbuwan" flag_code = legacy_LWA } # Limbuwan
+link = { eu4 = MKP flag_code = legacy_MKP } # Makwanpur
+link = { eu4 = SRM flag_code = legacy_SRM } # Sirmur
+link = { eu4 = KTU name = "Kathmandu" flag_code = legacy_KTU } # Kathmandu
+link = { eu4 = KMN flag_code = legacy_KMN } # Kumaon
+link = { eu4 = GNG flag_code = legacy_GEE } # Gingee
+link = { eu4 = TNJ flag_code = legacy_TNJ } # Tanjore
+link = { eu4 = SRH flag_code = legacy_SRH } # Sirhind
+link = { eu4 = RJP name = "Rajputana" flag_code = legacy_RAJ } # Rajputana
+
+link = { eu4 = BAR flag_code = legacy_BXR } # Bar
+link = { eu4 = SMO name = "Smolensk" flag_code = legacy_SMK } # Smolensk
+link = { eu4 = NZH name = "Nizhny Novgorod" flag_code = legacy_NZH } # Nizhny Novgorod
+link = { eu4 = KOJ name = "Jerusalem" flag_code = legacy_JER } # Jerusalem
+link = { name = "Outremer" flag_code = legacy_JER }
+link = { eu4 = MSA name = "Malaya" flag_code = legacy_MLY } # Malaya
+
+link = { eu4 = ABE flag_code = legacy_ABE } # Abenaki
+link = { eu4 = ASI flag_code = legacy_ASI } # Assiniboine
+link = { eu4 = CAD flag_code = legacy_CAD } # Caddo
+link = { eu4 = CHI flag_code = legacy_CHN } # Chickasaw
+link = { eu4 = CHO flag_code = legacy_CCW } # Choctaw
+link = { eu4 = CHY flag_code = legacy_CYN } # Cheyenne
+link = { eu4 = FOX flag_code = legacy_FOX } # Fox
+link = { eu4 = ILL flag_code = legacy_ILL } # Illinewek
+link = { eu4 = LEN flag_code = legacy_LEN } # Lenape
+link = { eu4 = MAH flag_code = legacy_MHC } # Mahican
+link = { eu4 = MIK flag_code = legacy_MIK } # Mikmaq
+link = { eu4 = MMI flag_code = legacy_MMI } # Miami
+link = { eu4 = OJI flag_code = legacy_OJI } # Ojibwa
+link = { eu4 = OSA flag_code = legacy_OSA } # Osage
+link = { eu4 = OTT flag_code = legacy_OTT } # Ottawa
+link = { eu4 = PEQ flag_code = legacy_PEQ } # Pequot
+link = { eu4 = PIM flag_code = legacy_PIM } # Pima
+link = { eu4 = POT flag_code = legacy_POT } # Potawatomi
+link = { eu4 = POW flag_code = legacy_POW } # Powhatan
+link = { eu4 = SHO flag_code = legacy_SHS } # Shoshone
+link = { eu4 = SUS flag_code = legacy_SUS } # Susquehannock
+
+#African Additions
+link = { eu4 = BON flag_code = legacy_BON } # Bonoman
+link = { eu4 = DGB flag_code = legacy_DGB } # Dagbon
+link = { eu4 = FUL flag_code = legacy_FUL } # Fulo
+link = { eu4 = JNN name = "Jenne" flag_code = legacy_JNN } # Jenne
+link = { eu4 = KAN flag_code = legacy_KAN } # Kano
+link = { eu4 = KTS flag_code = legacy_KTS } # Katsina
+link = { eu4 = NUP flag_code = legacy_NUP } # Nupe
+link = { eu4 = TMB name = "Timbuktu" flag_code = legacy_TMB } # Timbuktu
+link = { eu4 = YAO flag_code = legacy_YAO } # Yao
+link = { eu4 = YAT flag_code = legacy_YAT } # Yatenga
+link = { eu4 = ZZZ flag_code = legacy_ZZZ } # Zazzau
+link = { eu4 = NDO flag_code = legacy_NDO } # Ndongo
+
+#Indochina Additions
+link = { eu4 = AVA flag_code = legacy_AVA } # Ava
+link = { eu4 = HSE flag_code = legacy_HSE } # Hsenwi
+link = { eu4 = KED flag_code = legacy_KED } # Kedah
+link = { eu4 = LIG flag_code = legacy_LGR } # Ligor
+link = { eu4 = MPH flag_code = legacy_MPH } # Muan Phuang
+link = { eu4 = MYA flag_code = legacy_MYA } # Mong Yang
+link = { eu4 = PRK flag_code = legacy_PRK } # Perak
+
+# Burma Additions
+link = { eu4 = MMA flag_code = legacy_MMA } # Mong Mao
+link = { eu4 = MNI flag_code = legacy_MNI } # Mong Nai
+link = { eu4 = KAL flag_code = legacy_KAX } # Kale
+link = { eu4 = HSI flag_code = legacy_HSI } # Hsipaw
+link = { eu4 = BPR flag_code = legacy_BPR } # Prome
+
+#Siberian Tribes
+link = { eu4 = CHU flag_code = legacy_CHU } # Chukchi
+link = { eu4 = HOD flag_code = legacy_HOD } # Hodyntsy
+link = { eu4 = CHV flag_code = legacy_CHV } # Chavchuveny
+link = { eu4 = BRT name = "Buryatia" flag_code = legacy_BRY } # Buryats
+
+#North American Additions
+link = { eu4 = CLM flag_code = legacy_CMA } # Colima
+link = { eu4 = CNK flag_code = legacy_CNK } # Chinook
+link = { eu4 = COC flag_code = legacy_COC } # Cocomes
+link = { eu4 = HDA flag_code = legacy_HDA } # Haida
+link = { eu4 = ITZ flag_code = legacy_ITZ } # Itza
+link = { eu4 = KIC flag_code = legacy_KIC } # Kiche
+link = { eu4 = KIO flag_code = legacy_KIO } # Kiowa
+link = { eu4 = MIX flag_code = legacy_MIX } # Mixtec
+link = { eu4 = SAL flag_code = legacy_SAL } # Salish
+link = { eu4 = TAR flag_code = legacy_TRS } # Tarascan
+link = { eu4 = TLA flag_code = legacy_TLA } # Tlapanec
+link = { eu4 = TLX flag_code = legacy_TLX } # Tlaxcala
+link = { eu4 = TOT flag_code = legacy_TOT } # Totonac
+link = { eu4 = WIC flag_code = legacy_WIC } # Wichita
+link = { eu4 = XIU flag_code = legacy_XIU } # Xiu
+
+#Indonesia Additions
+link = { eu4 = BLM flag_code = legacy_BLM } # Blambangan
+link = { eu4 = BTN flag_code = legacy_BTN } # Buton
+link = { eu4 = CRB flag_code = legacy_CBO } # Cirebon
+link = { eu4 = DMK flag_code = legacy_DMK } # Demak
+link = { eu4 = PGR flag_code = legacy_PGR } # Pagarruyung
+link = { eu4 = PLB flag_code = legacy_PLB } # Palembang
+link = { eu4 = PSA flag_code = legacy_PSA } # Pasai
+link = { eu4 = SAK flag_code = legacy_SAK } # Siak
+link = { eu4 = SUN flag_code = legacy_SUN } # Sunda
+link = { eu4 = BNJ flag_code = legacy_BNJ } # Banjar
+link = { eu4 = LNO flag_code = legacy_LNO } # Lanao
+link = { eu4 = LUW flag_code = legacy_LUW } # Luwu
+link = { eu4 = MGD flag_code = legacy_MGD } # Maguindanao
+link = { eu4 = TER flag_code = legacy_TTE } # Ternate
+link = { eu4 = TID flag_code = legacy_TID } # Tidore
+link = { eu4 = MAS flag_code = legacy_MDS } # Madya-as
+link = { eu4 = PGS flag_code = legacy_PGS } # Pangasinan
+link = { eu4 = TDO flag_code = legacy_TDO } # Tondo
+link = { eu4 = MNA flag_code = legacy_MNA } # Maynila
+link = { eu4 = CEB flag_code = legacy_CEB } # Cebu
+link = { eu4 = BTU flag_code = legacy_BTU } # Butuan
+
+#South American Additions
+link = { eu4 = CSU flag_code = legacy_CSU } # Cusco
+link = { eu4 = CCQ flag_code = legacy_CCQ } # Calchaqui
+link = { eu4 = MPC flag_code = legacy_MPC } # Mapuche
+link = { eu4 = QTO flag_code = legacy_QTO } # Quito
+link = { eu4 = CJA flag_code = legacy_CJA } # Cajamarca
+link = { eu4 = HJA flag_code = legacy_HJA } # Huyla
+link = { eu4 = PTG flag_code = legacy_PTW } # Potiguara
+link = { eu4 = TPQ flag_code = legacy_TPQ } # Tupiniquim
+link = { eu4 = TUA flag_code = legacy_TUA } # Tapuia
+link = { eu4 = CUA flag_code = legacy_CUA } # Charrua
+link = { eu4 = WKA flag_code = legacy_WKA } # Wanka
+link = { eu4 = CYA flag_code = legacy_CYA } # Chachapoya
+link = { eu4 = CLA flag_code = legacy_COY } # Colla
+link = { eu4 = CRA flag_code = legacy_CRA } # Charca
+link = { eu4 = PCJ flag_code = legacy_PCJ } # Pacajes
+link = { eu4 = ARW flag_code = legacy_ARW } # Arawak
+link = { eu4 = CAB flag_code = legacy_CAB } # Carib
+link = { eu4 = ICM flag_code = legacy_ICM } # Ichma
+
+#Golden Century Mesoamerican Tags
+link = { eu4 = MAT flag_code = legacy_MTL } # Matlatzinca
+link = { eu4 = COI flag_code = legacy_OAX } # Coixtlahuaca => Oaxaca
+link = { eu4 = TEO flag_code = legacy_TEO } # Teotitlan
+link = { eu4 = XAL flag_code = legacy_XAL } # Xalisco
+link = { eu4 = GAM flag_code = legacy_GAM } # Guamar
+link = { eu4 = HST flag_code = legacy_HST } # Huastec
+link = { eu4 = CCM flag_code = legacy_CCM } # Chichimeca
+link = { eu4 = OTO flag_code = legacy_OTO } # Otomi
+link = { eu4 = YOK flag_code = legacy_YOK } # Yokotan
+link = { eu4 = LAC flag_code = legacy_LAC } # Lacandon
+link = { eu4 = KAQ flag_code = legacy_KAQ } # Kaqchikel
+link = { eu4 = CTM flag_code = legacy_CCT } # Chactemal
+link = { eu4 = KER flag_code = legacy_ZIA } # Keres/Zia
+link = { eu4 = ZNI flag_code = legacy_ZNI } # Zuni
+link = { eu4 = MSC flag_code = legacy_MSC } # Mescalero
+link = { eu4 = LIP flag_code = legacy_LPN } # Lipan
+link = { eu4 = CHT flag_code = legacy_CHT } # Chorti
+link = { eu4 = TAI flag_code = legacy_TRO } # Tairona
+link = { eu4 = CNP flag_code = legacy_CNP } # Can Pech
+link = { eu4 = TON flag_code = legacy_TON } # Tonallan
+link = { eu4 = YAQ flag_code = legacy_YAQ } # Yaqui
+link = { eu4 = YKT flag_code = legacy_YKT } # Yokuts
+
+# Pirate tags
+link = { eu4 = TOR flag_code = legacy_TOR } # Tortuga
+link = { eu4 = LIB flag_code = legacy_LBR } # Libertatia
+
+#???
+link = { eu4 = ROM name = "Roman Empire" flag_code = legacy_SPQ } # Roman Empire
+link = { eu4 = SYN flag_code = legacy_ALI } # Synthetic => Alien Invaders
+link = { eu4 = JPR flag_code = legacy_JPR } #Jeypore
+link = { eu4 = PRD flag_code = legacy_PRD } #Parlakhimidi
+
+# 1.30 New Tags
+link = { eu4 = UBV flag_code = legacy_UBV } # Münich
+link = { eu4 = LBV flag_code = legacy_LBV } # Landshut
+link = { eu4 = ING flag_code = legacy_ING } # Ingolstadt
+link = { eu4 = PSS name = "Passau" flag_code = legacy_c_passau } # Passau
+link = { eu4 = MBZ flag_code = legacy_MBZ } # Montfort-Bregenz
+link = { eu4 = KNZ flag_code = legacy_KNZ } # Konstanz
+link = { eu4 = ROT flag_code = legacy_ROT } # Rothenburg
+link = { eu4 = BYT flag_code = legacy_BYT } # Bayreuth
+link = { eu4 = REG flag_code = legacy_REG } # Regensburg
+link = { eu4 = GNV flag_code = legacy_GNV } # Geneva
+link = { eu4 = TTL flag_code = legacy_TTL } # Three Leagues (Grigioni)
+link = { eu4 = OPL name = "Opole" flag_code = legacy_c_opole } # Opole
+link = { eu4 = GLG name = "Lower Silesia" flag_code = legacy_c_lower_silesia } # Glogau
+link = { eu4 = BLG name = "Bologna" flag_code = legacy_c_bologna } # Bologna
+link = { eu4 = PDV name = "Padova" flag_code = legacy_c_padova } # Padova
+link = { eu4 = SZO name = "Saluzzo" flag_code = legacy_c_saluzzo } # Saluzzo
+link = { eu4 = SPL name = "Spoleto" flag_code = legacy_d_spoleto } # Spoleto
+link = { eu4 = WOL name = "Wolgast" flag_code = legacy_c_wolgast } # Wolgast
+link = { eu4 = STE name = "Stettin" flag_code = legacy_c_stettin } # Stettin
+link = { eu4 = GOS flag_code = legacy_GOS } # Goslar
+link = { eu4 = SOR flag_code = legacy_SRB } # Lusatia => Sorbia (Luzica)
+link = { eu4 = RUG name = "Rügen" flag_code = legacy_c_rugen } # Rügen
+link = { eu4 = SLV flag_code = legacy_SLO } # Slovenia
+link = { eu4 = CLI flag_code = legacy_SLO } # Cilli -> Slovenia
+link = { eu4 = HRZ flag_code = legacy_HRZ } # Herzegovina
+link = { eu4 = TNT name = "Trent" flag_code = legacy_c_trent } # Trent
+link = { eu4 = BRG flag_code = legacy_BEG } # Berg
+link = { eu4 = MLH flag_code = legacy_MLH } # Mulhouse
+link = { eu4 = BAM name = "Bamberg" flag_code = legacy_d_bamberg } # Bamberg
+link = { eu4 = RUP flag_code = legacy_RUP } # Ruppin
+link = { eu4 = PAD flag_code = legacy_PAD } # Paderborn
+link = { eu4 = CLB flag_code = legacy_CLB } # Calenberg
+link = { eu4 = DWT flag_code = legacy_DWT } # Donauwörth
+link = { eu4 = OSN name = "Osnabrück" flag_code = legacy_c_osnabruck } # Osnabrück
+link = { eu4 = VRN name = "Verona" flag_code = legacy_d_verona } # Verona
+link = { eu4 = LOT name = "Lotharingia" flag_code = legacy_LOT } # Lotharingia
+link = { eu4 = PGA flag_code = legacy_PGA } # Perugia
+
+# 1.30 Formabless
+link = { eu4 = FKN name = "Franconia" flag_code = legacy_d_franconia } # Franconia
+link = { eu4 = SWA name = "Swabia" flag_code = legacy_d_swabia } # Swabia
+
+# Leviathan New Tags
+link = { eu4 = BNE flag_code = legacy_BNE } # Bone
+link = { eu4 = BEU flag_code = legacy_BAU } # Berau
+link = { eu4 = SMB flag_code = legacy_SMB } # Sambas
+link = { eu4 = BRS flag_code = legacy_BRS } # Barus
+link = { eu4 = DLI flag_code = legacy_DLI } # Deli
+link = { eu4 = JMB flag_code = legacy_DJA } # Jambi
+link = { eu4 = PAH flag_code = legacy_PHG } # Pahang
+link = { eu4 = KEL flag_code = legacy_KEL } # Kelantang
+link = { eu4 = IND flag_code = legacy_IPR } # Indrapura
+link = { eu4 = JAR flag_code = legacy_JAR } # Jarai
+link = { eu4 = RHA flag_code = legacy_RHD } # Rhade
+link = { eu4 = KOH flag_code = legacy_KOH } # Koho
+link = { eu4 = SIA flag_code = legacy_IDO } # Siam (formable) => Indochina
+
+# Leviathan Australian tags
+link = { eu4 = TIW flag_code = legacy_TIW } # Tiwi
+link = { eu4 = LAR flag_code = legacy_AUL } # Larrakia
+link = { eu4 = YOL flag_code = legacy_AUY } # Yolngu
+link = { eu4 = YNU flag_code = legacy_AUN } # Yanuwa
+link = { eu4 = AWN flag_code = legacy_AUA } # Awngthim
+link = { eu4 = MIA flag_code = legacy_AUM } # Mianjin
+link = { eu4 = EOR flag_code = legacy_AUE } # Eora
+link = { eu4 = KUL flag_code = legacy_KUL } # Kulin
+link = { eu4 = KAU flag_code = legacy_AUK } # Kaurna
+link = { eu4 = WRU flag_code = legacy_AUW } # Wurundjeri
+link = { eu4 = MLG flag_code = legacy_AUZ } # Malagana
+
+# Leviathan Maori tags
+link = { eu4 = MAA flag_code = legacy_NZM } # Mataatua
+link = { eu4 = TAN flag_code = legacy_NZN } # Tainui
+link = { eu4 = TAK flag_code = legacy_NZK } # Takitimu
+link = { eu4 = TEA flag_code = legacy_NZA } # Te Arawa
+link = { eu4 = TTT flag_code = legacy_NZT } # Te Tai Tokerau
+link = { eu4 = WAI flag_code = legacy_SNZ } # Waitaha => South Island
+
+# Leviathan Oceanic tags
+link = { eu4 = MAU flag_code = legacy_HWM } # Maui
+link = { eu4 = OAH flag_code = legacy_HWO } # O'ahu
+link = { eu4 = KAA flag_code = legacy_HWK } # Kaua'i
+link = { eu4 = SAM flag_code = legacy_SMO } # Samoa
+link = { eu4 = VNL flag_code = legacy_FJW } # Vanua
+link = { eu4 = LAI flag_code = legacy_FJL } # Lau
+
+#North America Mississippians
+link = { eu4 = ALT flag_code = legacy_ALM } # Altamaha
+link = { eu4 = ICH flag_code = legacy_ICH } # Ichisi
+link = { eu4 = COF flag_code = legacy_COF } # Cofitachequi
+link = { eu4 = JOA flag_code = legacy_JOA } # Joara
+link = { eu4 = ETO flag_code = legacy_ETO } # Etowah
+link = { eu4 = SAT flag_code = legacy_STP } # Satapo
+link = { eu4 = CIA flag_code = legacy_CIA } # Chiaha
+link = { eu4 = COO flag_code = legacy_COO } # Coosa
+link = { eu4 = ABI flag_code = legacy_ABI } # Abihka
+link = { eu4 = COW flag_code = legacy_COW } # Coweta
+link = { eu4 = NTZ flag_code = legacy_NTZ } # Natchez
+link = { eu4 = CAQ flag_code = legacy_CAQ } # Casqui
+link = { eu4 = PCH flag_code = legacy_PCA } # Pacaha
+link = { eu4 = QUI flag_code = legacy_QUI } # Quizquiz
+link = { eu4 = CCA flag_code = legacy_CCA } # Chisca
+link = { eu4 = ATA flag_code = legacy_ATA } # Atahachi
+link = { eu4 = KSI flag_code = legacy_KSI } # Kasihta
+link = { eu4 = OEO flag_code = legacy_OEO } # Oneota
+link = { eu4 = ANL flag_code = legacy_ANL } # Anilco
+link = { eu4 = NTC flag_code = legacy_NTC } # Natchitoches
+link = { eu4 = HNI flag_code = legacy_HNI } # Hasinai
+
+#North American Iroquoians
+link = { eu4 = MOH flag_code = legacy_MOH } # Mohawk
+link = { eu4 = ONE flag_code = legacy_ONE } # Oneida
+link = { eu4 = ONO flag_code = legacy_ONO } # Onondaga
+link = { eu4 = CAY flag_code = legacy_CYG } # Cayuga
+link = { eu4 = SEN flag_code = legacy_SNC } # Seneca
+link = { eu4 = TAH flag_code = legacy_THN } # Tahontaenrat
+link = { eu4 = ATT flag_code = legacy_ATT } # Attignawantan
+link = { eu4 = AGG flag_code = legacy_AGG } # Attigneenongnahac
+link = { eu4 = ATW flag_code = legacy_ATW } # Attiwandaron
+link = { eu4 = ARN flag_code = legacy_ARR } # Arendaronon
+link = { eu4 = TIO flag_code = legacy_TIO } # Tionontate
+link = { eu4 = OSH flag_code = legacy_OSH } # Osheaga
+link = { eu4 = STA flag_code = legacy_STA } # Stadacona
+link = { eu4 = ERI flag_code = legacy_ERY } # Erie
+link = { eu4 = WEN flag_code = legacy_WNR } # Wenro
+link = { eu4 = TSC flag_code = legacy_TSC } # Tuscarora
+
+#North American Pueblos
+link = { eu4 = OHK flag_code = legacy_OHK } # Ohkay Owingeh
+link = { eu4 = ISL flag_code = legacy_IST } # Isleta
+link = { eu4 = ACO flag_code = legacy_ACO } # Acoma
+
+#North American Other Federations and Tags
+link = { eu4 = CAO flag_code = legacy_CAO } # Cahokia
+link = { eu4 = PEO flag_code = legacy_PEO } # Peoria
+link = { eu4 = KSK flag_code = legacy_KSK } # Kaskakia
+link = { eu4 = PEN flag_code = legacy_PEN } # Penobscot
+link = { eu4 = MLS flag_code = legacy_MLS } # Maliseet
+link = { eu4 = NEH flag_code = legacy_NHY } # Nehiyaw
+link = { eu4 = NAK flag_code = legacy_NAK } # Nakawe
+link = { eu4 = HWK flag_code = legacy_HWK } # Hathawekela
+link = { eu4 = CLG flag_code = legacy_CLG } # Chalahgawtha
+link = { eu4 = KSP flag_code = legacy_KSP } # Kispoko
+link = { eu4 = MSG flag_code = legacy_MSG } # Mississage
+link = { eu4 = WCY flag_code = legacy_WCY } # Wichiyena
+
+#North America Missing Tags for a good map
+link = { eu4 = INN flag_code = legacy_INN } # Innu
+link = { eu4 = WAM flag_code = legacy_WAM } # Wampanoag
+link = { eu4 = AGQ flag_code = legacy_ALQ } # Algonquin
+
+#Converter tags:
+link = { eu4 = JOM name = "Jomsvikings" flag_code = legacy_JOM } # Jomsvikings
+link = { eu4 = HAH flag_code = legacy_HAH } # Hashshashin
+link = { name = "Israel" flag_code = legacy_ISR } # Israel
+#link = { eu4 = TEM name = "Knights Templar" flag_code = legacy_d_knights_templar } # Templars
+link = { eu4 = TRL flag_code = legacy_TRL } # Trapalanda
+link = { eu4 = SDM flag_code = legacy_SDM } #Secret Denmark
+link = { eu4 = NSE name = "Empire of the North Sea" flag_code = legacy_NSE } #North Sea Empire
+
+# Third Odyssey
+link = { name = "Aegean" flag_code = legacy_AEG } #Aegean
+link = { name = "Creta Minoris" flag_code = legacy_CTM } #Creta Minoris
+link = { name = "Elysian Empire" flag_code = legacy_ELY } #Elysian Empire
+link = { name = "Hybernica" flag_code = legacy_HBN } #Hybernica
+link = { name = "Elysia" flag_code = legacy_NHS } #Elysia
+
+# Extended Vanilla
+link = { name = "Angevin Empire" flag_code = legacy_ANV } #Angevin Empire
+link = { name = "Carniola" flag_code = legacy_SLO } #Carniola
+link = { name = "Illyria" flag_code = legacy_ILY } #Illyria
+link = { name = "Maghreb" flag_code = legacy_MGH } #Maghreb
+
+# Random Content 
+link = { name = "New York" flag_code = legacy_MAN } # New York -> Manhattan
+link = { name = "Nova Scotia" flag_code = legacy_NOV } # Nova Scotia
+link = { name = "Lancaster" flag_code = legacy_LNC } # Lancaster
+#link = { eu4 = SUD flag_code = legacy_LOI } # Sudreyjar -> Isles
+link = { name = "Nordreyjar" flag_code = legacy_FRO } # Nordreyjar -> Faroe
+link = { name = "Alania" flag_code = legacy_ALN } #Alania
+link = { name = "Yugra" flag_code = legacy_UGR } #Yugra
+link = { name = "Slavia" flag_code = legacy_SLA } #the Slavic Union
+link = { name = "Turkestan" flag_code = legacy_TKS } #Turkestan
+link = { name = "Ghana" flag_code = legacy_GHN } #Ghana
+link = { name = "Mauretania" flag_code = legacy_TRZ } #Mauretania
+link = { name = "Romagna" flag_code = legacy_RMG } #Romagna
+link = { eu4 = ZOM flag_code = legacy_ZOM } #Zombies
+link = { name = "Cilicia" flag_code = legacy_CLC } #Cilicia
+link = { name = "Ingria" flag_code = legacy_IZH } #Ingria
+link = { name = "Singapore" flag_code = legacy_SGP } #Singapore
+link = { name = "Assyria" flag_code = legacy_ASY } # Assyria
+
+##CK2eu4 Chinas
+link = { eu4 = WEI flag_code = legacy_WEJ } # Wei
+link = { eu4 = HND flag_code = legacy_HNX } # Han
+link = { eu4 = ZAO flag_code = legacy_ZAO } # Zhao
+link = { eu4 = LIO flag_code = legacy_LIO } # Liao
+link = { eu4 = e_liao flag_code = legacy_LIO } # Liao
+link = { eu4 = XIA flag_code = legacy_HSJ } # Xia
+link = { eu4 = DAX flag_code = legacy_DAX } # Dai
+link = { eu4 = CEG flag_code = legacy_CHX } # Cheng
+link = { eu4 = SNG flag_code = legacy_SUM } # Song
+link = { eu4 = YIN flag_code = legacy_YIN } # Yin
+link = { eu4 = CHN flag_code = legacy_ZHX } # Zhongwuo
+
+## IMP:CK3 countries
+link = { name = "Carthage" flag_code = legacy_KRT } # Carthage
+link = { name = "Langobardia" flag_code = legacy_LGB } # Langobardia
+link = { name = "Vasconia" flag_code = legacy_BSQ } # Vasconia
+link = { name = "Babylon" flag_code = legacy_BAB } # Babylon
+link = { name = "Gaul" flag_code = legacy_FRR } # Gaul
+
+### CK3 flag codes (NAMES NEED TO BE ADDED!)
+#link = { name = "---" flag_code = legacy_c_aachen }
+#link = { name = "---" flag_code = legacy_c_aalborg }
+#link = { name = "---" flag_code = legacy_c_aargau }
+#link = { name = "---" flag_code = legacy_c_aarhus }
+#link = { name = "---" flag_code = legacy_c_abakan }
+#link = { name = "---" flag_code = legacy_c_abauj }
+#link = { name = "---" flag_code = legacy_c_abkhazia }
+#link = { name = "---" flag_code = legacy_c_abruzzi }
+#link = { name = "---" flag_code = legacy_c_achaia }
+#link = { name = "---" flag_code = legacy_c_acre }
+#link = { name = "---" flag_code = legacy_c_aden }
+#link = { name = "---" flag_code = legacy_c_agder }
+#link = { name = "---" flag_code = legacy_c_agdeside }
+#link = { name = "---" flag_code = legacy_c_agen }
+#link = { name = "---" flag_code = legacy_c_agenais }
+#link = { name = "---" flag_code = legacy_c_ahvaz }
+#link = { name = "---" flag_code = legacy_c_ajaccio }
+#link = { name = "---" flag_code = legacy_c_akershus }
+#link = { name = "---" flag_code = legacy_c_aksu }
+#link = { name = "---" flag_code = legacy_c_aksum }
+#link = { name = "---" flag_code = legacy_c_al-aqabah }
+#link = { name = "---" flag_code = legacy_c_al_alamayn }
+#link = { name = "---" flag_code = legacy_c_al_djazair }
+#link = { name = "---" flag_code = legacy_c_al_hasa }
+#link = { name = "---" flag_code = legacy_c_aland }
+#link = { name = "---" flag_code = legacy_c_alania }
+#link = { name = "---" flag_code = legacy_c_alarcon }
+#link = { name = "---" flag_code = legacy_c_albania }
+#link = { name = "---" flag_code = legacy_c_albarracin }
+#link = { name = "---" flag_code = legacy_c_albi }
+#link = { name = "---" flag_code = legacy_c_albret }
+#link = { name = "---" flag_code = legacy_c_alcacer_do_sal }
+#link = { name = "---" flag_code = legacy_c_alcaniz }
+#link = { name = "---" flag_code = legacy_c_alcantara }
+#link = { name = "---" flag_code = legacy_c_alcaraz }
+#link = { name = "---" flag_code = legacy_c_alencon }
+#link = { name = "---" flag_code = legacy_c_aleppo }
+#link = { name = "---" flag_code = legacy_c_alexandria }
+#link = { name = "---" flag_code = legacy_c_algeciras }
+#link = { name = "---" flag_code = legacy_c_algier }
+#link = { name = "---" flag_code = legacy_c_alicante }
+#link = { name = "---" flag_code = legacy_c_almansa }
+#link = { name = "---" flag_code = legacy_c_almaty }
+#link = { name = "---" flag_code = legacy_c_almeria }
+#link = { name = "---" flag_code = legacy_c_alodia }
+#link = { name = "---" flag_code = legacy_c_alpsee }
+#link = { name = "---" flag_code = legacy_c_altmark }
+#link = { name = "---" flag_code = legacy_c_alto_aragon }
+#link = { name = "---" flag_code = legacy_c_aluksne }
+#link = { name = "---" flag_code = legacy_c_alupa }
+#link = { name = "---" flag_code = legacy_c_amalfi }
+#link = { name = "---" flag_code = legacy_c_amhara }
+#link = { name = "---" flag_code = legacy_c_amiens }
+#link = { name = "---" flag_code = legacy_c_amman }
+#link = { name = "---" flag_code = legacy_c_amstetten }
+#link = { name = "---" flag_code = legacy_c_ancona }
+#link = { name = "---" flag_code = legacy_c_andernach }
+#link = { name = "---" flag_code = legacy_c_angermanland }
+#link = { name = "---" flag_code = legacy_c_angouleme }
+#link = { name = "---" flag_code = legacy_c_angus }
+#link = { name = "---" flag_code = legacy_c_anhalt }
+#link = { name = "---" flag_code = legacy_c_ani }
+#link = { name = "---" flag_code = legacy_c_anjou }
+#link = { name = "---" flag_code = legacy_c_ankober }
+#link = { name = "---" flag_code = legacy_c_annaba }
+#link = { name = "---" flag_code = legacy_c_annandale }
+#link = { name = "---" flag_code = legacy_c_ansbach }
+#link = { name = "---" flag_code = legacy_c_antalo }
+#link = { name = "---" flag_code = legacy_c_antiocheia }
+#link = { name = "---" flag_code = legacy_c_antipatreia }
+#link = { name = "---" flag_code = legacy_c_antwerpen }
+#link = { name = "---" flag_code = legacy_c_aosta }
+#link = { name = "---" flag_code = legacy_c_aprutium }
+#link = { name = "---" flag_code = legacy_c_apulia }
+#link = { name = "---" flag_code = legacy_c_aquileia }
+#link = { name = "---" flag_code = legacy_c_aracena }
+#link = { name = "---" flag_code = legacy_c_arbanon }
+#link = { name = "---" flag_code = legacy_c_arborea }
+#link = { name = "---" flag_code = legacy_c_archa }
+#link = { name = "---" flag_code = legacy_c_ardabil }
+#link = { name = "---" flag_code = legacy_c_arezzo }
+#link = { name = "---" flag_code = legacy_c_argyll }
+#link = { name = "---" flag_code = legacy_c_armagnac }
+#link = { name = "---" flag_code = legacy_c_arnsberg }
+#link = { name = "---" flag_code = legacy_c_artois }
+#link = { name = "---" flag_code = legacy_c_asayita }
+#link = { name = "---" flag_code = legacy_c_ascalon }
+#link = { name = "---" flag_code = legacy_c_asfi }
+#link = { name = "---" flag_code = legacy_c_astana }
+#link = { name = "---" flag_code = legacy_c_astorga }
+#link = { name = "---" flag_code = legacy_c_astrakhan }
+#link = { name = "---" flag_code = legacy_c_asturias_de_oviedo }
+#link = { name = "---" flag_code = legacy_c_asturias_de_santillana }
+#link = { name = "---" flag_code = legacy_c_aswan }
+#link = { name = "---" flag_code = legacy_c_asyut }
+#link = { name = "---" flag_code = legacy_c_atheniai }
+#link = { name = "---" flag_code = legacy_c_athlone }
+#link = { name = "---" flag_code = legacy_c_atkarsk }
+#link = { name = "---" flag_code = legacy_c_aunis }
+#link = { name = "---" flag_code = legacy_c_auvergne }
+#link = { name = "---" flag_code = legacy_c_auxerre }
+#link = { name = "---" flag_code = legacy_c_avalois }
+#link = { name = "---" flag_code = legacy_c_aveiro }
+#link = { name = "---" flag_code = legacy_c_avila }
+#link = { name = "---" flag_code = legacy_c_avlonas }
+#link = { name = "---" flag_code = legacy_c_avranches }
+#link = { name = "---" flag_code = legacy_c_ayrshire }
+#link = { name = "---" flag_code = legacy_c_azerbaijan }
+#link = { name = "---" flag_code = legacy_c_azov }
+#link = { name = "---" flag_code = legacy_c_babruysk }
+#link = { name = "---" flag_code = legacy_c_badajoz }
+#link = { name = "---" flag_code = legacy_c_baden }
+#link = { name = "---" flag_code = legacy_c_bahrein }
+#link = { name = "---" flag_code = legacy_c_bakhmut }
+#link = { name = "---" flag_code = legacy_c_baluchistan }
+#link = { name = "---" flag_code = legacy_c_bamberg }
+#link = { name = "---" flag_code = legacy_c_bar }
+#link = { name = "---" flag_code = legacy_c_baranya }
+#link = { name = "---" flag_code = legacy_c_barcasag }
+#link = { name = "---" flag_code = legacy_c_barcelona }
+#link = { name = "---" flag_code = legacy_c_bargajan }
+#link = { name = "---" flag_code = legacy_c_bari }
+#link = { name = "---" flag_code = legacy_c_barlad }
+#link = { name = "---" flag_code = legacy_c_barnaul }
+#link = { name = "---" flag_code = legacy_c_bars }
+#link = { name = "---" flag_code = legacy_c_bashkirs }
+#link = { name = "---" flag_code = legacy_c_basra }
+#link = { name = "---" flag_code = legacy_c_bastia }
+#link = { name = "---" flag_code = legacy_c_bayeux }
+#link = { name = "---" flag_code = legacy_c_bearn }
+#link = { name = "---" flag_code = legacy_c_beaumont }
+#link = { name = "---" flag_code = legacy_c_bedford }
+#link = { name = "---" flag_code = legacy_c_beersheb }
+#link = { name = "---" flag_code = legacy_c_beirut }
+#link = { name = "---" flag_code = legacy_c_bekes }
+#link = { name = "---" flag_code = legacy_c_belebey }
+#link = { name = "---" flag_code = legacy_c_belgorod }
+#link = { name = "---" flag_code = legacy_c_belgrade }
+#link = { name = "---" flag_code = legacy_c_bellac }
+#link = { name = "---" flag_code = legacy_c_beloozero }
+#link = { name = "---" flag_code = legacy_c_belz }
+#link = { name = "---" flag_code = legacy_c_benavente }
+#link = { name = "---" flag_code = legacy_c_benevento }
+#link = { name = "---" flag_code = legacy_c_beograd }
+#link = { name = "---" flag_code = legacy_c_berchtesgaden }
+#link = { name = "---" flag_code = legacy_c_bereg }
+#link = { name = "---" flag_code = legacy_c_berestye }
+#link = { name = "---" flag_code = legacy_c_bergenshus }
+#link = { name = "---" flag_code = legacy_c_berkshire }
+#link = { name = "---" flag_code = legacy_c_berlin }
+#link = { name = "---" flag_code = legacy_c_bern }
+#link = { name = "---" flag_code = legacy_c_beroe }
+#link = { name = "---" flag_code = legacy_c_besancon }
+#link = { name = "---" flag_code = legacy_c_beszterce }
+#link = { name = "---" flag_code = legacy_c_bethen }
+#link = { name = "---" flag_code = legacy_c_bezhetsky_verh }
+#link = { name = "---" flag_code = legacy_c_beziers }
+#link = { name = "---" flag_code = legacy_c_bhaktapur }
+#link = { name = "---" flag_code = legacy_c_bigorre }
+#link = { name = "---" flag_code = legacy_c_bihar }
+#link = { name = "---" flag_code = legacy_c_birlad }
+#link = { name = "---" flag_code = legacy_c_blekinge }
+#link = { name = "---" flag_code = legacy_c_blois }
+#link = { name = "---" flag_code = legacy_c_bolghar }
+#link = { name = "---" flag_code = legacy_c_bologna }
+#link = { name = "---" flag_code = legacy_c_bordeaux }
+#link = { name = "---" flag_code = legacy_c_bornholm }
+#link = { name = "---" flag_code = legacy_c_borsod }
+#link = { name = "---" flag_code = legacy_c_bothin }
+#link = { name = "---" flag_code = legacy_c_bouillon }
+#link = { name = "---" flag_code = legacy_c_boulogne }
+#link = { name = "---" flag_code = legacy_c_bourbon }
+#link = { name = "---" flag_code = legacy_c_bourges }
+#link = { name = "---" flag_code = legacy_c_brabant }
+#link = { name = "---" flag_code = legacy_c_braila }
+#link = { name = "---" flag_code = legacy_c_brandenburg }
+#link = { name = "---" flag_code = legacy_c_braslau }
+#link = { name = "---" flag_code = legacy_c_braunschweig }
+#link = { name = "---" flag_code = legacy_c_brecknock }
+#link = { name = "---" flag_code = legacy_c_breda }
+#link = { name = "---" flag_code = legacy_c_breifne }
+#link = { name = "---" flag_code = legacy_c_breisgau }
+#link = { name = "---" flag_code = legacy_c_bremen }
+#link = { name = "---" flag_code = legacy_c_brene }
+#link = { name = "---" flag_code = legacy_c_brescia }
+#link = { name = "---" flag_code = legacy_c_bresse }
+#link = { name = "---" flag_code = legacy_c_brie_francaise }
+#link = { name = "---" flag_code = legacy_c_briey }
+#link = { name = "---" flag_code = legacy_c_brixen }
+#link = { name = "---" flag_code = legacy_c_brno }
+#link = { name = "---" flag_code = legacy_c_brugge }
+#link = { name = "---" flag_code = legacy_c_brunswick }
+#link = { name = "---" flag_code = legacy_c_bryansk }
+#link = { name = "---" flag_code = legacy_c_brzeg }
+#link = { name = "---" flag_code = legacy_c_buckinghamshire }
+#link = { name = "---" flag_code = legacy_c_bugurslan }
+#link = { name = "---" flag_code = legacy_c_bukhara }
+#link = { name = "---" flag_code = legacy_c_burgas }
+#link = { name = "---" flag_code = legacy_c_burgau }
+#link = { name = "---" flag_code = legacy_c_burgos }
+#link = { name = "---" flag_code = legacy_c_buzau }
+#link = { name = "---" flag_code = legacy_c_byzantion }
+#link = { name = "---" flag_code = legacy_c_cabardinia }
+#link = { name = "---" flag_code = legacy_c_cabra }
+#link = { name = "---" flag_code = legacy_c_caceres }
+#link = { name = "---" flag_code = legacy_c_cadiz }
+#link = { name = "---" flag_code = legacy_c_cagliari }
+#link = { name = "---" flag_code = legacy_c_cairo }
+#link = { name = "---" flag_code = legacy_c_caithness }
+#link = { name = "---" flag_code = legacy_c_calafat }
+#link = { name = "---" flag_code = legacy_c_calarasi }
+#link = { name = "---" flag_code = legacy_c_calatayud }
+#link = { name = "---" flag_code = legacy_c_camarda }
+#link = { name = "---" flag_code = legacy_c_cambray }
+#link = { name = "---" flag_code = legacy_c_cambridgeshire }
+#link = { name = "---" flag_code = legacy_c_campulung }
+#link = { name = "---" flag_code = legacy_c_canarias }
+#link = { name = "---" flag_code = legacy_c_canavese }
+#link = { name = "---" flag_code = legacy_c_capua }
+#link = { name = "---" flag_code = legacy_c_carcassonne }
+#link = { name = "---" flag_code = legacy_c_carmarthenshire }
+#link = { name = "---" flag_code = legacy_c_caslav }
+#link = { name = "---" flag_code = legacy_c_castellon }
+#link = { name = "---" flag_code = legacy_c_castelo_branco }
+#link = { name = "---" flag_code = legacy_c_cebta }
+#link = { name = "---" flag_code = legacy_c_cedynia }
+#link = { name = "---" flag_code = legacy_c_celle }
+#link = { name = "---" flag_code = legacy_c_cephalonia }
+#link = { name = "---" flag_code = legacy_c_cerasus }
+#link = { name = "---" flag_code = legacy_c_cerdana }
+#link = { name = "---" flag_code = legacy_c_ceredigion }
+#link = { name = "---" flag_code = legacy_c_cetatea_alba }
+#link = { name = "---" flag_code = legacy_c_ceuta }
+#link = { name = "---" flag_code = legacy_c_chalon }
+#link = { name = "---" flag_code = legacy_c_chalons }
+#link = { name = "---" flag_code = legacy_c_chandax }
+#link = { name = "---" flag_code = legacy_c_chania }
+#link = { name = "---" flag_code = legacy_c_charolais }
+#link = { name = "---" flag_code = legacy_c_chartres }
+#link = { name = "---" flag_code = legacy_c_cheb }
+#link = { name = "---" flag_code = legacy_c_cheboksary }
+#link = { name = "---" flag_code = legacy_c_chelabinsk }
+#link = { name = "---" flag_code = legacy_c_chelminskie }
+#link = { name = "---" flag_code = legacy_c_chelmno }
+#link = { name = "---" flag_code = legacy_c_cherkassy }
+#link = { name = "---" flag_code = legacy_c_chernigov }
+#link = { name = "---" flag_code = legacy_c_cherson }
+#link = { name = "---" flag_code = legacy_c_cherven }
+#link = { name = "---" flag_code = legacy_c_cheshire }
+#link = { name = "---" flag_code = legacy_c_chester }
+#link = { name = "---" flag_code = legacy_c_chios }
+#link = { name = "---" flag_code = legacy_c_chornobyl }
+#link = { name = "---" flag_code = legacy_c_chud }
+#link = { name = "---" flag_code = legacy_c_chulym }
+#link = { name = "---" flag_code = legacy_c_chur }
+#link = { name = "---" flag_code = legacy_c_chuvash }
+#link = { name = "---" flag_code = legacy_c_cieszyn }
+#link = { name = "---" flag_code = legacy_c_clermont }
+#link = { name = "---" flag_code = legacy_c_clermont-sur-alliers }
+#link = { name = "---" flag_code = legacy_c_cleves }
+#link = { name = "---" flag_code = legacy_c_clydesdale }
+#link = { name = "---" flag_code = legacy_c_coburg }
+#link = { name = "---" flag_code = legacy_c_coimbra }
+#link = { name = "---" flag_code = legacy_c_colmar }
+#link = { name = "---" flag_code = legacy_c_comminges }
+#link = { name = "---" flag_code = legacy_c_como }
+#link = { name = "---" flag_code = legacy_c_compostela }
+#link = { name = "---" flag_code = legacy_c_connacht }
+#link = { name = "---" flag_code = legacy_c_consenza }
+#link = { name = "---" flag_code = legacy_c_constanta }
+#link = { name = "---" flag_code = legacy_c_cordoba }
+#link = { name = "---" flag_code = legacy_c_cornouaille }
+#link = { name = "---" flag_code = legacy_c_cornwall }
+#link = { name = "---" flag_code = legacy_c_corsica }
+#link = { name = "---" flag_code = legacy_c_coruna }
+#link = { name = "---" flag_code = legacy_c_cosenza }
+#link = { name = "---" flag_code = legacy_c_cottbus }
+#link = { name = "---" flag_code = legacy_c_cournouaille }
+#link = { name = "---" flag_code = legacy_c_craiova }
+#link = { name = "---" flag_code = legacy_c_cremona }
+#link = { name = "---" flag_code = legacy_c_crimea }
+#link = { name = "---" flag_code = legacy_c_csanad }
+#link = { name = "---" flag_code = legacy_c_csongrad }
+#link = { name = "---" flag_code = legacy_c_cuellar }
+#link = { name = "---" flag_code = legacy_c_cuenca }
+#link = { name = "---" flag_code = legacy_c_cumberland }
+#link = { name = "---" flag_code = legacy_c_cuneo }
+#link = { name = "---" flag_code = legacy_c_cyrenaica }
+#link = { name = "---" flag_code = legacy_c_czersk }
+#link = { name = "---" flag_code = legacy_c_dalabergslagen }
+#link = { name = "---" flag_code = legacy_c_dalarna }
+#link = { name = "---" flag_code = legacy_c_damascus }
+#link = { name = "---" flag_code = legacy_c_damot }
+#link = { name = "---" flag_code = legacy_c_dannenberg }
+#link = { name = "---" flag_code = legacy_c_danzig }
+#link = { name = "---" flag_code = legacy_c_dauphine_viennois }
+#link = { name = "---" flag_code = legacy_c_daura }
+#link = { name = "---" flag_code = legacy_c_debar }
+#link = { name = "---" flag_code = legacy_c_delhi }
+#link = { name = "---" flag_code = legacy_c_denia }
+#link = { name = "---" flag_code = legacy_c_derby }
+#link = { name = "---" flag_code = legacy_c_desht-i-kipchak }
+#link = { name = "---" flag_code = legacy_c_desmond }
+#link = { name = "---" flag_code = legacy_c_dessau }
+#link = { name = "---" flag_code = legacy_c_devon }
+#link = { name = "---" flag_code = legacy_c_dhofar }
+#link = { name = "---" flag_code = legacy_c_dijon }
+#link = { name = "---" flag_code = legacy_c_ditmarschen }
+#link = { name = "---" flag_code = legacy_c_djenne }
+#link = { name = "---" flag_code = legacy_c_dnipro }
+#link = { name = "---" flag_code = legacy_c_dobrzyn }
+#link = { name = "---" flag_code = legacy_c_dokkum }
+#link = { name = "---" flag_code = legacy_c_dole }
+#link = { name = "---" flag_code = legacy_c_domazlice }
+#link = { name = "---" flag_code = legacy_c_dorohoi }
+#link = { name = "---" flag_code = legacy_c_dorohychyn }
+#link = { name = "---" flag_code = legacy_c_dorpat }
+#link = { name = "---" flag_code = legacy_c_dorset }
+#link = { name = "---" flag_code = legacy_c_dortmund }
+#link = { name = "---" flag_code = legacy_c_doudleby }
+#link = { name = "---" flag_code = legacy_c_dresden }
+#link = { name = "---" flag_code = legacy_c_dublin }
+#link = { name = "---" flag_code = legacy_c_dubrovytsia }
+#link = { name = "---" flag_code = legacy_c_durham }
+#link = { name = "---" flag_code = legacy_c_durne }
+#link = { name = "---" flag_code = legacy_c_dyfed }
+#link = { name = "---" flag_code = legacy_c_dyrrachion }
+#link = { name = "---" flag_code = legacy_c_east_darfur }
+#link = { name = "---" flag_code = legacy_c_east_riding }
+#link = { name = "---" flag_code = legacy_c_edessa }
+#link = { name = "---" flag_code = legacy_c_eichstatt }
+#link = { name = "---" flag_code = legacy_c_eilat }
+#link = { name = "---" flag_code = legacy_c_el-arish }
+#link = { name = "---" flag_code = legacy_c_el_bierzo }
+#link = { name = "---" flag_code = legacy_c_el_rif }
+#link = { name = "---" flag_code = legacy_c_elabuga }
+#link = { name = "---" flag_code = legacy_c_elvas }
+#link = { name = "---" flag_code = legacy_c_empuries }
+#link = { name = "---" flag_code = legacy_c_ennis }
+#link = { name = "---" flag_code = legacy_c_epeiros }
+#link = { name = "---" flag_code = legacy_c_erbach }
+#link = { name = "---" flag_code = legacy_c_erhuu }
+#link = { name = "---" flag_code = legacy_c_eschenlohe }
+#link = { name = "---" flag_code = legacy_c_essex }
+#link = { name = "---" flag_code = legacy_c_esztergom }
+#link = { name = "---" flag_code = legacy_c_evora }
+#link = { name = "---" flag_code = legacy_c_evreux }
+#link = { name = "---" flag_code = legacy_c_eystridaelir }
+#link = { name = "---" flag_code = legacy_c_faereyar }
+#link = { name = "---" flag_code = legacy_c_falkenstein }
+#link = { name = "---" flag_code = legacy_c_faro }
+#link = { name = "---" flag_code = legacy_c_fars }
+#link = { name = "---" flag_code = legacy_c_fejer }
+#link = { name = "---" flag_code = legacy_c_fermo }
+#link = { name = "---" flag_code = legacy_c_ferrara }
+#link = { name = "---" flag_code = legacy_c_fes }
+#link = { name = "---" flag_code = legacy_c_fife }
+#link = { name = "---" flag_code = legacy_c_figuig }
+#link = { name = "---" flag_code = legacy_c_fika }
+#link = { name = "---" flag_code = legacy_c_finland }
+#link = { name = "---" flag_code = legacy_c_finnmark }
+#link = { name = "---" flag_code = legacy_c_firdafylki }
+#link = { name = "---" flag_code = legacy_c_firenze }
+#link = { name = "---" flag_code = legacy_c_fogaras }
+#link = { name = "---" flag_code = legacy_c_foggia }
+#link = { name = "---" flag_code = legacy_c_foix }
+#link = { name = "---" flag_code = legacy_c_forcalquier }
+#link = { name = "---" flag_code = legacy_c_forez }
+#link = { name = "---" flag_code = legacy_c_fraga }
+#link = { name = "---" flag_code = legacy_c_franken }
+#link = { name = "---" flag_code = legacy_c_frankfurt }
+#link = { name = "---" flag_code = legacy_c_freistadt }
+#link = { name = "---" flag_code = legacy_c_french_leon }
+#link = { name = "---" flag_code = legacy_c_frisia }
+#link = { name = "---" flag_code = legacy_c_frontenhausen }
+#link = { name = "---" flag_code = legacy_c_fulda }
+#link = { name = "---" flag_code = legacy_c_galati }
+#link = { name = "---" flag_code = legacy_c_galich }
+#link = { name = "---" flag_code = legacy_c_galich_mersky }
+#link = { name = "---" flag_code = legacy_c_garhwal }
+#link = { name = "---" flag_code = legacy_c_gastrikland }
+#link = { name = "---" flag_code = legacy_c_gauldaela }
+#link = { name = "---" flag_code = legacy_c_geisenhausen }
+#link = { name = "---" flag_code = legacy_c_gelre }
+#link = { name = "---" flag_code = legacy_c_geneva }
+#link = { name = "---" flag_code = legacy_c_geneve }
+#link = { name = "---" flag_code = legacy_c_genoa }
+#link = { name = "---" flag_code = legacy_c_gent }
+#link = { name = "---" flag_code = legacy_c_gestrikalandia }
+#link = { name = "---" flag_code = legacy_c_gevaudan }
+#link = { name = "---" flag_code = legacy_c_ghana }
+#link = { name = "---" flag_code = legacy_c_gilan }
+#link = { name = "---" flag_code = legacy_c_girona }
+#link = { name = "---" flag_code = legacy_c_giurgiu }
+#link = { name = "---" flag_code = legacy_c_giza }
+#link = { name = "---" flag_code = legacy_c_gizeh }
+#link = { name = "---" flag_code = legacy_c_glamorgan }
+#link = { name = "---" flag_code = legacy_c_glazov }
+#link = { name = "---" flag_code = legacy_c_gleichenstein }
+#link = { name = "---" flag_code = legacy_c_gloucester }
+#link = { name = "---" flag_code = legacy_c_gloucestershire }
+#link = { name = "---" flag_code = legacy_c_gnieznienskie }
+#link = { name = "---" flag_code = legacy_c_gniezno }
+#link = { name = "---" flag_code = legacy_c_goa }
+#link = { name = "---" flag_code = legacy_c_gondar }
+#link = { name = "---" flag_code = legacy_c_gorlitz }
+#link = { name = "---" flag_code = legacy_c_gorz }
+#link = { name = "---" flag_code = legacy_c_gostynin }
+#link = { name = "---" flag_code = legacy_c_gotland }
+#link = { name = "---" flag_code = legacy_c_gottingen }
+#link = { name = "---" flag_code = legacy_c_granada }
+#link = { name = "---" flag_code = legacy_c_grassland_cheremisa }
+#link = { name = "---" flag_code = legacy_c_graz }
+#link = { name = "---" flag_code = legacy_c_grisons }
+#link = { name = "---" flag_code = legacy_c_grobin }
+#link = { name = "---" flag_code = legacy_c_groningen }
+#link = { name = "---" flag_code = legacy_c_grunberg }
+#link = { name = "---" flag_code = legacy_c_grunningen }
+#link = { name = "---" flag_code = legacy_c_gudbrandsdaelir }
+#link = { name = "---" flag_code = legacy_c_guelders }
+#link = { name = "---" flag_code = legacy_c_guines }
+#link = { name = "---" flag_code = legacy_c_gwalior }
+#link = { name = "---" flag_code = legacy_c_gwent }
+#link = { name = "---" flag_code = legacy_c_gwynedd }
+#link = { name = "---" flag_code = legacy_c_haerjadaela }
+#link = { name = "---" flag_code = legacy_c_hail }
+#link = { name = "---" flag_code = legacy_c_hainaut }
+#link = { name = "---" flag_code = legacy_c_halberstadt }
+#link = { name = "---" flag_code = legacy_c_halland }
+#link = { name = "---" flag_code = legacy_c_hallstatt }
+#link = { name = "---" flag_code = legacy_c_halogaland }
+#link = { name = "---" flag_code = legacy_c_halsingland }
+#link = { name = "---" flag_code = legacy_c_hamadan }
+#link = { name = "---" flag_code = legacy_c_hamburg }
+#link = { name = "---" flag_code = legacy_c_hampshire }
+#link = { name = "---" flag_code = legacy_c_hannover }
+#link = { name = "---" flag_code = legacy_c_harer }
+#link = { name = "---" flag_code = legacy_c_havelberg }
+#link = { name = "---" flag_code = legacy_c_hedmark }
+#link = { name = "---" flag_code = legacy_c_hedmork }
+#link = { name = "---" flag_code = legacy_c_helgum }
+#link = { name = "---" flag_code = legacy_c_herat }
+#link = { name = "---" flag_code = legacy_c_hereford }
+#link = { name = "---" flag_code = legacy_c_herefordshire }
+#link = { name = "---" flag_code = legacy_c_herjedalen }
+#link = { name = "---" flag_code = legacy_c_hertfordshire }
+#link = { name = "---" flag_code = legacy_c_heves }
+#link = { name = "---" flag_code = legacy_c_hijaz }
+#link = { name = "---" flag_code = legacy_c_hildesheim }
+#link = { name = "---" flag_code = legacy_c_hlynov }
+#link = { name = "---" flag_code = legacy_c_hohenau }
+#link = { name = "---" flag_code = legacy_c_hohenberg }
+#link = { name = "---" flag_code = legacy_c_hohenburg }
+#link = { name = "---" flag_code = legacy_c_hohenlohe }
+#link = { name = "---" flag_code = legacy_c_holland }
+#link = { name = "---" flag_code = legacy_c_holstein }
+#link = { name = "---" flag_code = legacy_c_hont }
+#link = { name = "---" flag_code = legacy_c_hordafylki }
+#link = { name = "---" flag_code = legacy_c_hormuz }
+#link = { name = "---" flag_code = legacy_c_hotin }
+#link = { name = "---" flag_code = legacy_c_hradec }
+#link = { name = "---" flag_code = legacy_c_hradec_kralove }
+#link = { name = "---" flag_code = legacy_c_hradyzk }
+#link = { name = "---" flag_code = legacy_c_hum }
+#link = { name = "---" flag_code = legacy_c_huntingdonshire }
+#link = { name = "---" flag_code = legacy_c_hunyad }
+#link = { name = "---" flag_code = legacy_c_iasi }
+#link = { name = "---" flag_code = legacy_c_ibiza }
+#link = { name = "---" flag_code = legacy_c_ifni }
+#link = { name = "---" flag_code = legacy_c_ikonion }
+#link = { name = "---" flag_code = legacy_c_ile_de_france }
+#link = { name = "---" flag_code = legacy_c_imeretia }
+#link = { name = "---" flag_code = legacy_c_inari }
+#link = { name = "---" flag_code = legacy_c_ingolstadt }
+#link = { name = "---" flag_code = legacy_c_inner_hebrides }
+#link = { name = "---" flag_code = legacy_c_innsbruck }
+#link = { name = "---" flag_code = legacy_c_innse_gall }
+#link = { name = "---" flag_code = legacy_c_inverness }
+#link = { name = "---" flag_code = legacy_c_ishim }
+#link = { name = "---" flag_code = legacy_c_isle_of_man }
+#link = { name = "---" flag_code = legacy_c_issoudun }
+#link = { name = "---" flag_code = legacy_c_istria }
+#link = { name = "---" flag_code = legacy_c_jaca }
+#link = { name = "---" flag_code = legacy_c_jaen }
+#link = { name = "---" flag_code = legacy_c_jaffa }
+#link = { name = "---" flag_code = legacy_c_jaligny }
+#link = { name = "---" flag_code = legacy_c_jamtfir }
+#link = { name = "---" flag_code = legacy_c_jamtland }
+#link = { name = "---" flag_code = legacy_c_jaunpur }
+#link = { name = "---" flag_code = legacy_c_jerusalem }
+#link = { name = "---" flag_code = legacy_c_jharkand }
+#link = { name = "---" flag_code = legacy_c_jihlava }
+#link = { name = "---" flag_code = legacy_c_julfar }
+#link = { name = "---" flag_code = legacy_c_julich }
+#link = { name = "---" flag_code = legacy_c_juterbog }
+#link = { name = "---" flag_code = legacy_c_jylland }
+#link = { name = "---" flag_code = legacy_c_kainsk }
+#link = { name = "---" flag_code = legacy_c_kainuu }
+#link = { name = "---" flag_code = legacy_c_kaiserslautern }
+#link = { name = "---" flag_code = legacy_c_kajanaborg }
+#link = { name = "---" flag_code = legacy_c_kakheti }
+#link = { name = "---" flag_code = legacy_c_kakisalmi }
+#link = { name = "---" flag_code = legacy_c_kalat }
+#link = { name = "---" flag_code = legacy_c_kalisz }
+#link = { name = "---" flag_code = legacy_c_kalmar_lan }
+#link = { name = "---" flag_code = legacy_c_kalos_limen }
+#link = { name = "---" flag_code = legacy_c_kammersberg }
+#link = { name = "---" flag_code = legacy_c_kanara }
+#link = { name = "---" flag_code = legacy_c_kandalax }
+#link = { name = "---" flag_code = legacy_c_kandy }
+#link = { name = "---" flag_code = legacy_c_kangra }
+#link = { name = "---" flag_code = legacy_c_kanyakubja }
+#link = { name = "---" flag_code = legacy_c_karatayak }
+#link = { name = "---" flag_code = legacy_c_karelen }
+#link = { name = "---" flag_code = legacy_c_kargopol }
+#link = { name = "---" flag_code = legacy_c_karnten }
+#link = { name = "---" flag_code = legacy_c_kartli }
+#link = { name = "---" flag_code = legacy_c_kasmira }
+#link = { name = "---" flag_code = legacy_c_kassel }
+#link = { name = "---" flag_code = legacy_c_kathiri }
+#link = { name = "---" flag_code = legacy_c_kathmandu }
+#link = { name = "---" flag_code = legacy_c_kazakh }
+#link = { name = "---" flag_code = legacy_c_kazanskoye }
+#link = { name = "---" flag_code = legacy_c_kempten }
+#link = { name = "---" flag_code = legacy_c_kent }
+#link = { name = "---" flag_code = legacy_c_kerala }
+#link = { name = "---" flag_code = legacy_c_kerch }
+#link = { name = "---" flag_code = legacy_c_kerken }
+#link = { name = "---" flag_code = legacy_c_keve }
+#link = { name = "---" flag_code = legacy_c_kexholm }
+#link = { name = "---" flag_code = legacy_c_khachen }
+#link = { name = "---" flag_code = legacy_c_khantia }
+#link = { name = "---" flag_code = legacy_c_khentii }
+#link = { name = "---" flag_code = legacy_c_kherson }
+#link = { name = "---" flag_code = legacy_c_khiva }
+#link = { name = "---" flag_code = legacy_c_khojand }
+#link = { name = "---" flag_code = legacy_c_khorasan }
+#link = { name = "---" flag_code = legacy_c_khozistan }
+#link = { name = "---" flag_code = legacy_c_kiev }
+#link = { name = "---" flag_code = legacy_c_kildare }
+#link = { name = "---" flag_code = legacy_c_kirghiz }
+#link = { name = "---" flag_code = legacy_c_kirillov }
+#link = { name = "---" flag_code = legacy_c_kittila }
+#link = { name = "---" flag_code = legacy_c_kletsk }
+#link = { name = "---" flag_code = legacy_c_kleve }
+#link = { name = "---" flag_code = legacy_c_klingenberg }
+#link = { name = "---" flag_code = legacy_c_knin }
+#link = { name = "---" flag_code = legacy_c_knittelfeld }
+#link = { name = "---" flag_code = legacy_c_koblenz }
+#link = { name = "---" flag_code = legacy_c_koln }
+#link = { name = "---" flag_code = legacy_c_kolobrzeg }
+#link = { name = "---" flag_code = legacy_c_kolomna }
+#link = { name = "---" flag_code = legacy_c_komarom }
+#link = { name = "---" flag_code = legacy_c_komi }
+#link = { name = "---" flag_code = legacy_c_kontupohja }
+#link = { name = "---" flag_code = legacy_c_korchev }
+#link = { name = "---" flag_code = legacy_c_korinthos }
+#link = { name = "---" flag_code = legacy_c_korosten }
+#link = { name = "---" flag_code = legacy_c_kostroma }
+#link = { name = "---" flag_code = legacy_c_kozelsk }
+#link = { name = "---" flag_code = legacy_c_kozlov }
+#link = { name = "---" flag_code = legacy_c_krain }
+#link = { name = "---" flag_code = legacy_c_krakow }
+#link = { name = "---" flag_code = legacy_c_krakowskie }
+#link = { name = "---" flag_code = legacy_c_kranj }
+#link = { name = "---" flag_code = legacy_c_krasso }
+#link = { name = "---" flag_code = legacy_c_krems }
+#link = { name = "---" flag_code = legacy_c_kuban }
+#link = { name = "---" flag_code = legacy_c_kujawy }
+#link = { name = "---" flag_code = legacy_c_kurdistan }
+#link = { name = "---" flag_code = legacy_c_kursk }
+#link = { name = "---" flag_code = legacy_c_kutch }
+#link = { name = "---" flag_code = legacy_c_kuwait }
+#link = { name = "---" flag_code = legacy_c_kyzyl_char }
+#link = { name = "---" flag_code = legacy_c_la_mancha }
+#link = { name = "---" flag_code = legacy_c_la_marche }
+#link = { name = "---" flag_code = legacy_c_labourd }
+#link = { name = "---" flag_code = legacy_c_ladyzyn }
+#link = { name = "---" flag_code = legacy_c_lanarkshire }
+#link = { name = "---" flag_code = legacy_c_lancashire }
+#link = { name = "---" flag_code = legacy_c_lancaster }
+#link = { name = "---" flag_code = legacy_c_lanciano }
+#link = { name = "---" flag_code = legacy_c_langres }
+#link = { name = "---" flag_code = legacy_c_lappland }
+#link = { name = "---" flag_code = legacy_c_lapusna }
+#link = { name = "---" flag_code = legacy_c_lausitz }
+#link = { name = "---" flag_code = legacy_c_lecce }
+#link = { name = "---" flag_code = legacy_c_leczyca }
+#link = { name = "---" flag_code = legacy_c_legnica }
+#link = { name = "---" flag_code = legacy_c_leibnitz }
+#link = { name = "---" flag_code = legacy_c_leicester }
+#link = { name = "---" flag_code = legacy_c_leicestershire }
+#link = { name = "---" flag_code = legacy_c_leiningen }
+#link = { name = "---" flag_code = legacy_c_leinster }
+#link = { name = "---" flag_code = legacy_c_lennox }
+#link = { name = "---" flag_code = legacy_c_leon }
+#link = { name = "---" flag_code = legacy_c_lepiel }
+#link = { name = "---" flag_code = legacy_c_lesbos }
+#link = { name = "---" flag_code = legacy_c_lettigalians }
+#link = { name = "---" flag_code = legacy_c_leuchtenburg }
+#link = { name = "---" flag_code = legacy_c_liberec }
+#link = { name = "---" flag_code = legacy_c_liege }
+#link = { name = "---" flag_code = legacy_c_lienz }
+#link = { name = "---" flag_code = legacy_c_lille }
+#link = { name = "---" flag_code = legacy_c_limousin }
+#link = { name = "---" flag_code = legacy_c_lincoln }
+#link = { name = "---" flag_code = legacy_c_lincolnshire }
+#link = { name = "---" flag_code = legacy_c_linlithgowshire }
+#link = { name = "---" flag_code = legacy_c_linz }
+#link = { name = "---" flag_code = legacy_c_lippe }
+#link = { name = "---" flag_code = legacy_c_lipto }
+#link = { name = "---" flag_code = legacy_c_lisboa }
+#link = { name = "---" flag_code = legacy_c_lisieux }
+#link = { name = "---" flag_code = legacy_c_litomerice }
+#link = { name = "---" flag_code = legacy_c_livorno }
+#link = { name = "---" flag_code = legacy_c_livs }
+#link = { name = "---" flag_code = legacy_c_ljubljana }
+#link = { name = "---" flag_code = legacy_c_lleida }
+#link = { name = "---" flag_code = legacy_c_lobdaburg }
+#link = { name = "---" flag_code = legacy_c_logudoro }
+#link = { name = "---" flag_code = legacy_c_lolland-falster }
+#link = { name = "---" flag_code = legacy_c_lombardia }
+#link = { name = "---" flag_code = legacy_c_lomza }
+#link = { name = "---" flag_code = legacy_c_loon }
+#link = { name = "---" flag_code = legacy_c_lori }
+#link = { name = "---" flag_code = legacy_c_lorraine }
+#link = { name = "---" flag_code = legacy_c_lothian }
+#link = { name = "---" flag_code = legacy_c_lower_silesia }
+#link = { name = "---" flag_code = legacy_c_lubeck }
+#link = { name = "---" flag_code = legacy_c_lublin }
+#link = { name = "---" flag_code = legacy_c_lubsko }
+#link = { name = "---" flag_code = legacy_c_lubusz }
+#link = { name = "---" flag_code = legacy_c_lucca }
+#link = { name = "---" flag_code = legacy_c_luneburg }
+#link = { name = "---" flag_code = legacy_c_luni }
+#link = { name = "---" flag_code = legacy_c_lusignan }
+#link = { name = "---" flag_code = legacy_c_luxembourg }
+#link = { name = "---" flag_code = legacy_c_lviv }
+#link = { name = "---" flag_code = legacy_c_lyon }
+#link = { name = "---" flag_code = legacy_c_lysva }
+#link = { name = "---" flag_code = legacy_c_lyubech }
+#link = { name = "---" flag_code = legacy_c_lyubim }
+#link = { name = "---" flag_code = legacy_c_maastricht }
+#link = { name = "---" flag_code = legacy_c_macon }
+#link = { name = "---" flag_code = legacy_c_madeira }
+#link = { name = "---" flag_code = legacy_c_madrid }
+#link = { name = "---" flag_code = legacy_c_madurai }
+#link = { name = "---" flag_code = legacy_c_magadha }
+#link = { name = "---" flag_code = legacy_c_magdeburg }
+#link = { name = "---" flag_code = legacy_c_mahdiya }
+#link = { name = "---" flag_code = legacy_c_mahra }
+#link = { name = "---" flag_code = legacy_c_maine }
+#link = { name = "---" flag_code = legacy_c_mainz }
+#link = { name = "---" flag_code = legacy_c_makran }
+#link = { name = "---" flag_code = legacy_c_makuria }
+#link = { name = "---" flag_code = legacy_c_malaga }
+#link = { name = "---" flag_code = legacy_c_malagon }
+#link = { name = "---" flag_code = legacy_c_maldives }
+#link = { name = "---" flag_code = legacy_c_mali }
+#link = { name = "---" flag_code = legacy_c_mallorca }
+#link = { name = "---" flag_code = legacy_c_malta }
+#link = { name = "---" flag_code = legacy_c_manipur }
+#link = { name = "---" flag_code = legacy_c_mansfeld }
+#link = { name = "---" flag_code = legacy_c_mantua }
+#link = { name = "---" flag_code = legacy_c_manturovo }
+#link = { name = "---" flag_code = legacy_c_marburg }
+#link = { name = "---" flag_code = legacy_c_mark }
+#link = { name = "---" flag_code = legacy_c_marmaros }
+#link = { name = "---" flag_code = legacy_c_marrakech }
+#link = { name = "---" flag_code = legacy_c_mayo }
+#link = { name = "---" flag_code = legacy_c_mearns }
+#link = { name = "---" flag_code = legacy_c_meaux }
+#link = { name = "---" flag_code = legacy_c_mecklemburg }
+#link = { name = "---" flag_code = legacy_c_medapata }
+#link = { name = "---" flag_code = legacy_c_medellin }
+#link = { name = "---" flag_code = legacy_c_medelpad }
+#link = { name = "---" flag_code = legacy_c_medina }
+#link = { name = "---" flag_code = legacy_c_meissen }
+#link = { name = "---" flag_code = legacy_c_melilla }
+#link = { name = "---" flag_code = legacy_c_memel }
+#link = { name = "---" flag_code = legacy_c_menorca }
+#link = { name = "---" flag_code = legacy_c_merida }
+#link = { name = "---" flag_code = legacy_c_merioneth }
+#link = { name = "---" flag_code = legacy_c_mersenburg }
+#link = { name = "---" flag_code = legacy_c_mertola }
+#link = { name = "---" flag_code = legacy_c_merya }
+#link = { name = "---" flag_code = legacy_c_messenia }
+#link = { name = "---" flag_code = legacy_c_messina }
+#link = { name = "---" flag_code = legacy_c_metz }
+#link = { name = "---" flag_code = legacy_c_middlesex }
+#link = { name = "---" flag_code = legacy_c_milicz }
+#link = { name = "---" flag_code = legacy_c_millau }
+#link = { name = "---" flag_code = legacy_c_minden }
+#link = { name = "---" flag_code = legacy_c_minsk }
+#link = { name = "---" flag_code = legacy_c_modena }
+#link = { name = "---" flag_code = legacy_c_molina }
+#link = { name = "---" flag_code = legacy_c_monferrato }
+#link = { name = "---" flag_code = legacy_c_montaigu }
+#link = { name = "---" flag_code = legacy_c_montargis }
+#link = { name = "---" flag_code = legacy_c_monterrei }
+#link = { name = "---" flag_code = legacy_c_montpellier }
+#link = { name = "---" flag_code = legacy_c_morarna }
+#link = { name = "---" flag_code = legacy_c_moray }
+#link = { name = "---" flag_code = legacy_c_mordva }
+#link = { name = "---" flag_code = legacy_c_moskva }
+#link = { name = "---" flag_code = legacy_c_mosynopolis }
+#link = { name = "---" flag_code = legacy_c_moura }
+#link = { name = "---" flag_code = legacy_c_mozhaysk }
+#link = { name = "---" flag_code = legacy_c_mstislavl }
+#link = { name = "---" flag_code = legacy_c_multan }
+#link = { name = "---" flag_code = legacy_c_munchen }
+#link = { name = "---" flag_code = legacy_c_munster }
+#link = { name = "---" flag_code = legacy_c_murcia }
+#link = { name = "---" flag_code = legacy_c_murom }
+#link = { name = "---" flag_code = legacy_c_murzzuschlag }
+#link = { name = "---" flag_code = legacy_c_muscat }
+#link = { name = "---" flag_code = legacy_c_mustasaari }
+#link = { name = "---" flag_code = legacy_c_naissus }
+#link = { name = "---" flag_code = legacy_c_najera }
+#link = { name = "---" flag_code = legacy_c_najran }
+#link = { name = "---" flag_code = legacy_c_namdalfylki }
+#link = { name = "---" flag_code = legacy_c_namur }
+#link = { name = "---" flag_code = legacy_c_nancy }
+#link = { name = "---" flag_code = legacy_c_nantes }
+#link = { name = "---" flag_code = legacy_c_napoli }
+#link = { name = "---" flag_code = legacy_c_narbonne }
+#link = { name = "---" flag_code = legacy_c_narke }
+#link = { name = "---" flag_code = legacy_c_narva }
+#link = { name = "---" flag_code = legacy_c_narym }
+#link = { name = "---" flag_code = legacy_c_nassau }
+#link = { name = "---" flag_code = legacy_c_navarra }
+#link = { name = "---" flag_code = legacy_c_naxos }
+#link = { name = "---" flag_code = legacy_c_neamt }
+#link = { name = "---" flag_code = legacy_c_nedenes }
+#link = { name = "---" flag_code = legacy_c_nedersticht }
+#link = { name = "---" flag_code = legacy_c_neeric }
+#link = { name = "---" flag_code = legacy_c_neuchatel }
+#link = { name = "---" flag_code = legacy_c_nevers }
+#link = { name = "---" flag_code = legacy_c_nice }
+#link = { name = "---" flag_code = legacy_c_niebla }
+#link = { name = "---" flag_code = legacy_c_niederbayern }
+#link = { name = "---" flag_code = legacy_c_nis }
+#link = { name = "---" flag_code = legacy_c_nitra }
+#link = { name = "---" flag_code = legacy_c_nizhny_novgorod }
+#link = { name = "---" flag_code = legacy_c_njudung }
+#link = { name = "---" flag_code = legacy_c_nobatia }
+#link = { name = "---" flag_code = legacy_c_nordgau }
+#link = { name = "---" flag_code = legacy_c_nordland }
+#link = { name = "---" flag_code = legacy_c_nordlingen }
+#link = { name = "---" flag_code = legacy_c_nordrland }
+#link = { name = "---" flag_code = legacy_c_norfolk }
+#link = { name = "---" flag_code = legacy_c_north_riding }
+#link = { name = "---" flag_code = legacy_c_northampton }
+#link = { name = "---" flag_code = legacy_c_northamptonshire }
+#link = { name = "---" flag_code = legacy_c_northumberland }
+#link = { name = "---" flag_code = legacy_c_nottinghamshire }
+#link = { name = "---" flag_code = legacy_c_novara }
+#link = { name = "---" flag_code = legacy_c_novgorod }
+#link = { name = "---" flag_code = legacy_c_novgorod_seversky }
+#link = { name = "---" flag_code = legacy_c_novogrudok }
+#link = { name = "---" flag_code = legacy_c_nubia }
+#link = { name = "---" flag_code = legacy_c_nurnberg }
+#link = { name = "---" flag_code = legacy_c_nyland }
+#link = { name = "---" flag_code = legacy_c_nysa }
+#link = { name = "---" flag_code = legacy_c_oberbayern }
+#link = { name = "---" flag_code = legacy_c_ochrid }
+#link = { name = "---" flag_code = legacy_c_odessa }
+#link = { name = "---" flag_code = legacy_c_odoyev }
+#link = { name = "---" flag_code = legacy_c_oland }
+#link = { name = "---" flag_code = legacy_c_oldenburg }
+#link = { name = "---" flag_code = legacy_c_oleshye }
+#link = { name = "---" flag_code = legacy_c_olmedo }
+#link = { name = "---" flag_code = legacy_c_olomouc }
+#link = { name = "---" flag_code = legacy_c_omsk }
+#link = { name = "---" flag_code = legacy_c_opava }
+#link = { name = "---" flag_code = legacy_c_opole }
+#link = { name = "---" flag_code = legacy_c_oppland }
+#link = { name = "---" flag_code = legacy_c_orenburg }
+#link = { name = "---" flag_code = legacy_c_orhei }
+#link = { name = "---" flag_code = legacy_c_orkney }
+#link = { name = "---" flag_code = legacy_c_orlamunde }
+#link = { name = "---" flag_code = legacy_c_orleans }
+#link = { name = "---" flag_code = legacy_c_ormond }
+#link = { name = "---" flag_code = legacy_c_orsha }
+#link = { name = "---" flag_code = legacy_c_osel }
+#link = { name = "---" flag_code = legacy_c_oshrusana }
+#link = { name = "---" flag_code = legacy_c_oskol }
+#link = { name = "---" flag_code = legacy_c_osnabruck }
+#link = { name = "---" flag_code = legacy_c_osterbotten }
+#link = { name = "---" flag_code = legacy_c_ostergotland }
+#link = { name = "---" flag_code = legacy_c_osterland }
+#link = { name = "---" flag_code = legacy_c_osterreich }
+#link = { name = "---" flag_code = legacy_c_ostfriesland }
+#link = { name = "---" flag_code = legacy_c_ostrava }
+#link = { name = "---" flag_code = legacy_c_oulu }
+#link = { name = "---" flag_code = legacy_c_outer_hebrides }
+#link = { name = "---" flag_code = legacy_c_oversticht }
+#link = { name = "---" flag_code = legacy_c_ovre_dalarna }
+#link = { name = "---" flag_code = legacy_c_oxford }
+#link = { name = "---" flag_code = legacy_c_oxfordshire }
+#link = { name = "---" flag_code = legacy_c_paderborn }
+#link = { name = "---" flag_code = legacy_c_padova }
+#link = { name = "---" flag_code = legacy_c_paduan }
+#link = { name = "---" flag_code = legacy_c_palanga }
+#link = { name = "---" flag_code = legacy_c_palermo }
+#link = { name = "---" flag_code = legacy_c_palmyra }
+#link = { name = "---" flag_code = legacy_c_parma }
+#link = { name = "---" flag_code = legacy_c_parsberg }
+#link = { name = "---" flag_code = legacy_c_passau }
+#link = { name = "---" flag_code = legacy_c_pavia }
+#link = { name = "---" flag_code = legacy_c_pavlodar }
+#link = { name = "---" flag_code = legacy_c_pecheneg }
+#link = { name = "---" flag_code = legacy_c_pecs }
+#link = { name = "---" flag_code = legacy_c_penza }
+#link = { name = "---" flag_code = legacy_c_pereyaslavl }
+#link = { name = "---" flag_code = legacy_c_pereyaslavl_zalessky }
+#link = { name = "---" flag_code = legacy_c_perigord }
+#link = { name = "---" flag_code = legacy_c_perm }
+#link = { name = "---" flag_code = legacy_c_pest }
+#link = { name = "---" flag_code = legacy_c_petropavl }
+#link = { name = "---" flag_code = legacy_c_petrovsk }
+#link = { name = "---" flag_code = legacy_c_pfalz }
+#link = { name = "---" flag_code = legacy_c_piemonte }
+#link = { name = "---" flag_code = legacy_c_pietarsaari }
+#link = { name = "---" flag_code = legacy_c_pinsk }
+#link = { name = "---" flag_code = legacy_c_piombino }
+#link = { name = "---" flag_code = legacy_c_pisa }
+#link = { name = "---" flag_code = legacy_c_pitten }
+#link = { name = "---" flag_code = legacy_c_plasencia }
+#link = { name = "---" flag_code = legacy_c_plauen }
+#link = { name = "---" flag_code = legacy_c_plock }
+#link = { name = "---" flag_code = legacy_c_plyos }
+#link = { name = "---" flag_code = legacy_c_plzen }
+#link = { name = "---" flag_code = legacy_c_podlasie }
+#link = { name = "---" flag_code = legacy_c_poitiers }
+#link = { name = "---" flag_code = legacy_c_polesine }
+#link = { name = "---" flag_code = legacy_c_polotsk }
+#link = { name = "---" flag_code = legacy_c_porto }
+#link = { name = "---" flag_code = legacy_c_poszony }
+#link = { name = "---" flag_code = legacy_c_povenets }
+#link = { name = "---" flag_code = legacy_c_powys }
+#link = { name = "---" flag_code = legacy_c_pozega }
+#link = { name = "---" flag_code = legacy_c_poznan }
+#link = { name = "---" flag_code = legacy_c_poznanskie }
+#link = { name = "---" flag_code = legacy_c_praha }
+#link = { name = "---" flag_code = legacy_c_pravia }
+#link = { name = "---" flag_code = legacy_c_prenzlau }
+#link = { name = "---" flag_code = legacy_c_prerov }
+#link = { name = "---" flag_code = legacy_c_pressburg }
+#link = { name = "---" flag_code = legacy_c_pronsk }
+#link = { name = "---" flag_code = legacy_c_provence }
+#link = { name = "---" flag_code = legacy_c_provins }
+#link = { name = "---" flag_code = legacy_c_przemkow }
+#link = { name = "---" flag_code = legacy_c_pskov }
+#link = { name = "---" flag_code = legacy_c_pudozh }
+#link = { name = "---" flag_code = legacy_c_pula }
+#link = { name = "---" flag_code = legacy_c_puttlingen }
+#link = { name = "---" flag_code = legacy_c_putyvl }
+#link = { name = "---" flag_code = legacy_c_qazan }
+#link = { name = "---" flag_code = legacy_c_quena }
+#link = { name = "---" flag_code = legacy_c_quercy }
+#link = { name = "---" flag_code = legacy_c_radom }
+#link = { name = "---" flag_code = legacy_c_ragusa }
+#link = { name = "---" flag_code = legacy_c_raseiniai }
+#link = { name = "---" flag_code = legacy_c_rashka }
+#link = { name = "---" flag_code = legacy_c_ratibor }
+#link = { name = "---" flag_code = legacy_c_ravenna }
+#link = { name = "---" flag_code = legacy_c_ravensburg }
+#link = { name = "---" flag_code = legacy_c_regensburg }
+#link = { name = "---" flag_code = legacy_c_reggio }
+#link = { name = "---" flag_code = legacy_c_reggio_calabria }
+#link = { name = "---" flag_code = legacy_c_reims }
+#link = { name = "---" flag_code = legacy_c_reni }
+#link = { name = "---" flag_code = legacy_c_rennes }
+#link = { name = "---" flag_code = legacy_c_rethel }
+#link = { name = "---" flag_code = legacy_c_reval }
+#link = { name = "---" flag_code = legacy_c_ribe }
+#link = { name = "---" flag_code = legacy_c_ringkobing }
+#link = { name = "---" flag_code = legacy_c_rogaland }
+#link = { name = "---" flag_code = legacy_c_roma }
+#link = { name = "---" flag_code = legacy_c_romen }
+#link = { name = "---" flag_code = legacy_c_romny }
+#link = { name = "---" flag_code = legacy_c_roslavl }
+#link = { name = "---" flag_code = legacy_c_ross }
+#link = { name = "---" flag_code = legacy_c_rossano }
+#link = { name = "---" flag_code = legacy_c_rostock }
+#link = { name = "---" flag_code = legacy_c_rostov }
+#link = { name = "---" flag_code = legacy_c_rothenburg }
+#link = { name = "---" flag_code = legacy_c_rouen }
+#link = { name = "---" flag_code = legacy_c_rouergue }
+#link = { name = "---" flag_code = legacy_c_rugen }
+#link = { name = "---" flag_code = legacy_c_ruppin }
+#link = { name = "---" flag_code = legacy_c_ryazan }
+#link = { name = "---" flag_code = legacy_c_saarbrucken }
+#link = { name = "---" flag_code = legacy_c_sable }
+#link = { name = "---" flag_code = legacy_c_saintonge }
+#link = { name = "---" flag_code = legacy_c_salamanca }
+#link = { name = "---" flag_code = legacy_c_salerno }
+#link = { name = "---" flag_code = legacy_c_salisbury }
+#link = { name = "---" flag_code = legacy_c_saluzzo }
+#link = { name = "---" flag_code = legacy_c_salzburg }
+#link = { name = "---" flag_code = legacy_c_samatata }
+#link = { name = "---" flag_code = legacy_c_sambalpur }
+#link = { name = "---" flag_code = legacy_c_samoyeds }
+#link = { name = "---" flag_code = legacy_c_sanaa }
+#link = { name = "---" flag_code = legacy_c_sancerre }
+#link = { name = "---" flag_code = legacy_c_sandomierskie }
+#link = { name = "---" flag_code = legacy_c_sankt_gallen }
+#link = { name = "---" flag_code = legacy_c_sankt_polten }
+#link = { name = "---" flag_code = legacy_c_santok }
+#link = { name = "---" flag_code = legacy_c_saratov }
+#link = { name = "---" flag_code = legacy_c_satakunta }
+#link = { name = "---" flag_code = legacy_c_saumur }
+#link = { name = "---" flag_code = legacy_c_savoie }
+#link = { name = "---" flag_code = legacy_c_savolaks }
+#link = { name = "---" flag_code = legacy_c_sayn }
+#link = { name = "---" flag_code = legacy_c_schaumberg }
+#link = { name = "---" flag_code = legacy_c_schmalkalden }
+#link = { name = "---" flag_code = legacy_c_schwaben }
+#link = { name = "---" flag_code = legacy_c_schweibus }
+#link = { name = "---" flag_code = legacy_c_schwyz }
+#link = { name = "---" flag_code = legacy_c_sebezh }
+#link = { name = "---" flag_code = legacy_c_semien }
+#link = { name = "---" flag_code = legacy_c_senj }
+#link = { name = "---" flag_code = legacy_c_senoussi }
+#link = { name = "---" flag_code = legacy_c_sens }
+#link = { name = "---" flag_code = legacy_c_sevede }
+#link = { name = "---" flag_code = legacy_c_sevilla }
+#link = { name = "---" flag_code = legacy_c_sevsk }
+#link = { name = "---" flag_code = legacy_c_shchuchinsk }
+#link = { name = "---" flag_code = legacy_c_shenkursk }
+#link = { name = "---" flag_code = legacy_c_shetland }
+#link = { name = "---" flag_code = legacy_c_shrewsbury }
+#link = { name = "---" flag_code = legacy_c_shropshire }
+#link = { name = "---" flag_code = legacy_c_siauliai }
+#link = { name = "---" flag_code = legacy_c_sibir }
+#link = { name = "---" flag_code = legacy_c_sidamo }
+#link = { name = "---" flag_code = legacy_c_siena }
+#link = { name = "---" flag_code = legacy_c_sikkim }
+#link = { name = "---" flag_code = legacy_c_silves }
+#link = { name = "---" flag_code = legacy_c_siracusa }
+#link = { name = "---" flag_code = legacy_c_sjaelland }
+#link = { name = "---" flag_code = legacy_c_skane }
+#link = { name = "---" flag_code = legacy_c_skara }
+#link = { name = "---" flag_code = legacy_c_skopje }
+#link = { name = "---" flag_code = legacy_c_slesvig }
+#link = { name = "---" flag_code = legacy_c_slupsk }
+#link = { name = "---" flag_code = legacy_c_slutsk }
+#link = { name = "---" flag_code = legacy_c_smaland }
+#link = { name = "---" flag_code = legacy_c_smolensk }
+#link = { name = "---" flag_code = legacy_c_socotra }
+#link = { name = "---" flag_code = legacy_c_sodermanland }
+#link = { name = "---" flag_code = legacy_c_sodermannaland }
+#link = { name = "---" flag_code = legacy_c_sogn }
+#link = { name = "---" flag_code = legacy_c_somerset }
+#link = { name = "---" flag_code = legacy_c_sopron }
+#link = { name = "---" flag_code = legacy_c_soria }
+#link = { name = "---" flag_code = legacy_c_soroca }
+#link = { name = "---" flag_code = legacy_c_sortavala }
+#link = { name = "---" flag_code = legacy_c_south_kordofan }
+#link = { name = "---" flag_code = legacy_c_speyer }
+#link = { name = "---" flag_code = legacy_c_split }
+#link = { name = "---" flag_code = legacy_c_spoleto }
+#link = { name = "---" flag_code = legacy_c_spreewald }
+#link = { name = "---" flag_code = legacy_c_sprottau }
+#link = { name = "---" flag_code = legacy_c_st_gallen }
+#link = { name = "---" flag_code = legacy_c_stade }
+#link = { name = "---" flag_code = legacy_c_staffordshire }
+#link = { name = "---" flag_code = legacy_c_starodub }
+#link = { name = "---" flag_code = legacy_c_starya_russa }
+#link = { name = "---" flag_code = legacy_c_steiermark }
+#link = { name = "---" flag_code = legacy_c_stendal }
+#link = { name = "---" flag_code = legacy_c_stettin }
+#link = { name = "---" flag_code = legacy_c_stezyca }
+#link = { name = "---" flag_code = legacy_c_strassburg }
+#link = { name = "---" flag_code = legacy_c_strathclyde }
+#link = { name = "---" flag_code = legacy_c_strumica }
+#link = { name = "---" flag_code = legacy_c_suceava }
+#link = { name = "---" flag_code = legacy_c_sudan }
+#link = { name = "---" flag_code = legacy_c_sudrland }
+#link = { name = "---" flag_code = legacy_c_suffolk }
+#link = { name = "---" flag_code = legacy_c_sundgau }
+#link = { name = "---" flag_code = legacy_c_surgut }
+#link = { name = "---" flag_code = legacy_c_surrey }
+#link = { name = "---" flag_code = legacy_c_sussex }
+#link = { name = "---" flag_code = legacy_c_sutherland }
+#link = { name = "---" flag_code = legacy_c_suzdal }
+#link = { name = "---" flag_code = legacy_c_swiecie }
+#link = { name = "---" flag_code = legacy_c_syria }
+#link = { name = "---" flag_code = legacy_c_szabolcs }
+#link = { name = "---" flag_code = legacy_c_szatmar }
+#link = { name = "---" flag_code = legacy_c_szczytno }
+#link = { name = "---" flag_code = legacy_c_szekelyfold }
+#link = { name = "---" flag_code = legacy_c_szekesfehervar }
+#link = { name = "---" flag_code = legacy_c_szekezfehervar }
+#link = { name = "---" flag_code = legacy_c_szerem }
+#link = { name = "---" flag_code = legacy_c_talava }
+#link = { name = "---" flag_code = legacy_c_tambov }
+#link = { name = "---" flag_code = legacy_c_tangiers }
+#link = { name = "---" flag_code = legacy_c_taranto }
+#link = { name = "---" flag_code = legacy_c_taraz }
+#link = { name = "---" flag_code = legacy_c_targu_jiu }
+#link = { name = "---" flag_code = legacy_c_tarnovgrad }
+#link = { name = "---" flag_code = legacy_c_tarnow }
+#link = { name = "---" flag_code = legacy_c_tarragona }
+#link = { name = "---" flag_code = legacy_c_tartas }
+#link = { name = "---" flag_code = legacy_c_tartu }
+#link = { name = "---" flag_code = legacy_c_tavasts }
+#link = { name = "---" flag_code = legacy_c_tbilisi }
+#link = { name = "---" flag_code = legacy_c_tecklenburg }
+#link = { name = "---" flag_code = legacy_c_telemark }
+#link = { name = "---" flag_code = legacy_c_teramo }
+#link = { name = "---" flag_code = legacy_c_terebovl }
+#link = { name = "---" flag_code = legacy_c_teruel }
+#link = { name = "---" flag_code = legacy_c_teviotdale }
+#link = { name = "---" flag_code = legacy_c_theodosia }
+#link = { name = "---" flag_code = legacy_c_thiers }
+#link = { name = "---" flag_code = legacy_c_thouars }
+#link = { name = "---" flag_code = legacy_c_thuringen }
+#link = { name = "---" flag_code = legacy_c_tikhvin }
+#link = { name = "---" flag_code = legacy_c_timbuktu }
+#link = { name = "---" flag_code = legacy_c_tirgoviste }
+#link = { name = "---" flag_code = legacy_c_tirol }
+#link = { name = "---" flag_code = legacy_c_tivoli }
+#link = { name = "---" flag_code = legacy_c_tjust }
+#link = { name = "---" flag_code = legacy_c_tlemcen }
+#link = { name = "---" flag_code = legacy_c_toledo }
+#link = { name = "---" flag_code = legacy_c_tolna }
+#link = { name = "---" flag_code = legacy_c_tomsk }
+#link = { name = "---" flag_code = legacy_c_tonnerrois }
+#link = { name = "---" flag_code = legacy_c_torda }
+#link = { name = "---" flag_code = legacy_c_toropets }
+#link = { name = "---" flag_code = legacy_c_tortoli }
+#link = { name = "---" flag_code = legacy_c_tortona }
+#link = { name = "---" flag_code = legacy_c_tortosa }
+#link = { name = "---" flag_code = legacy_c_torzhok }
+#link = { name = "---" flag_code = legacy_c_totma }
+#link = { name = "---" flag_code = legacy_c_toulouse }
+#link = { name = "---" flag_code = legacy_c_traendheim }
+#link = { name = "---" flag_code = legacy_c_trakai }
+#link = { name = "---" flag_code = legacy_c_trapani }
+#link = { name = "---" flag_code = legacy_c_trapezous }
+#link = { name = "---" flag_code = legacy_c_trencin }
+#link = { name = "---" flag_code = legacy_c_trenscen }
+#link = { name = "---" flag_code = legacy_c_trent }
+#link = { name = "---" flag_code = legacy_c_treviso }
+#link = { name = "---" flag_code = legacy_c_trier }
+#link = { name = "---" flag_code = legacy_c_tripoli }
+#link = { name = "---" flag_code = legacy_c_tripolitana }
+#link = { name = "---" flag_code = legacy_c_tripuri }
+#link = { name = "---" flag_code = legacy_c_trondelag }
+#link = { name = "---" flag_code = legacy_c_troyes }
+#link = { name = "---" flag_code = legacy_c_tudela }
+#link = { name = "---" flag_code = legacy_c_tula }
+#link = { name = "---" flag_code = legacy_c_tulun }
+#link = { name = "---" flag_code = legacy_c_tunis }
+#link = { name = "---" flag_code = legacy_c_turin }
+#link = { name = "---" flag_code = legacy_c_turkestan }
+#link = { name = "---" flag_code = legacy_c_turov }
+#link = { name = "---" flag_code = legacy_c_tver }
+#link = { name = "---" flag_code = legacy_c_tyrconnell }
+#link = { name = "---" flag_code = legacy_c_tyrnovo }
+#link = { name = "---" flag_code = legacy_c_tyrone }
+#link = { name = "---" flag_code = legacy_c_tyumen }
+#link = { name = "---" flag_code = legacy_c_ucles }
+#link = { name = "---" flag_code = legacy_c_ufa }
+#link = { name = "---" flag_code = legacy_c_uglich }
+#link = { name = "---" flag_code = legacy_c_ugra }
+#link = { name = "---" flag_code = legacy_c_ulan-ude }
+#link = { name = "---" flag_code = legacy_c_ulm }
+#link = { name = "---" flag_code = legacy_c_ulster }
+#link = { name = "---" flag_code = legacy_c_uman }
+#link = { name = "---" flag_code = legacy_c_upland }
+#link = { name = "---" flag_code = legacy_c_upper_silesia }
+#link = { name = "---" flag_code = legacy_c_uppland }
+#link = { name = "---" flag_code = legacy_c_ural }
+#link = { name = "---" flag_code = legacy_c_urbino }
+#link = { name = "---" flag_code = legacy_c_urgell }
+#link = { name = "---" flag_code = legacy_c_urmiya }
+#link = { name = "---" flag_code = legacy_c_uses }
+#link = { name = "---" flag_code = legacy_c_ushytsia }
+#link = { name = "---" flag_code = legacy_c_usti_nad_labem }
+#link = { name = "---" flag_code = legacy_c_vadodara }
+#link = { name = "---" flag_code = legacy_c_vaestvag }
+#link = { name = "---" flag_code = legacy_c_vaihingen }
+#link = { name = "---" flag_code = legacy_c_valais }
+#link = { name = "---" flag_code = legacy_c_valencia }
+#link = { name = "---" flag_code = legacy_c_valentinois }
+#link = { name = "---" flag_code = legacy_c_valladolid }
+#link = { name = "---" flag_code = legacy_c_vannes }
+#link = { name = "---" flag_code = legacy_c_varend }
+#link = { name = "---" flag_code = legacy_c_varmland }
+#link = { name = "---" flag_code = legacy_c_vas }
+#link = { name = "---" flag_code = legacy_c_vasterbotten }
+#link = { name = "---" flag_code = legacy_c_vastergotland }
+#link = { name = "---" flag_code = legacy_c_vastmanland }
+#link = { name = "---" flag_code = legacy_c_vastmannaland }
+#link = { name = "---" flag_code = legacy_c_vaucouleurs }
+#link = { name = "---" flag_code = legacy_c_vecchio }
+#link = { name = "---" flag_code = legacy_c_veglia }
+#link = { name = "---" flag_code = legacy_c_velay }
+#link = { name = "---" flag_code = legacy_c_velbazhd }
+#link = { name = "---" flag_code = legacy_c_velikiye_luki }
+#link = { name = "---" flag_code = legacy_c_veliky_ustug }
+#link = { name = "---" flag_code = legacy_c_velsk }
+#link = { name = "---" flag_code = legacy_c_venadu }
+#link = { name = "---" flag_code = legacy_c_venaissin }
+#link = { name = "---" flag_code = legacy_c_vendome }
+#link = { name = "---" flag_code = legacy_c_venezia }
+#link = { name = "---" flag_code = legacy_c_verdun }
+#link = { name = "---" flag_code = legacy_c_veria }
+#link = { name = "---" flag_code = legacy_c_vermandois }
+#link = { name = "---" flag_code = legacy_c_verona }
+#link = { name = "---" flag_code = legacy_c_vestfold }
+#link = { name = "---" flag_code = legacy_c_veszprem }
+#link = { name = "---" flag_code = legacy_c_viborg }
+#link = { name = "---" flag_code = legacy_c_vidin }
+#link = { name = "---" flag_code = legacy_c_vidzeme }
+#link = { name = "---" flag_code = legacy_c_viipuri }
+#link = { name = "---" flag_code = legacy_c_vijayapura }
+#link = { name = "---" flag_code = legacy_c_villach }
+#link = { name = "---" flag_code = legacy_c_vingulmork }
+#link = { name = "---" flag_code = legacy_c_viscaya }
+#link = { name = "---" flag_code = legacy_c_viseu }
+#link = { name = "---" flag_code = legacy_c_vitebsk }
+#link = { name = "---" flag_code = legacy_c_viterbo }
+#link = { name = "---" flag_code = legacy_c_viviers }
+#link = { name = "---" flag_code = legacy_c_vladimir }
+#link = { name = "---" flag_code = legacy_c_vladimir_volynsky }
+#link = { name = "---" flag_code = legacy_c_vogtland }
+#link = { name = "---" flag_code = legacy_c_volkovysk }
+#link = { name = "---" flag_code = legacy_c_vologda }
+#link = { name = "---" flag_code = legacy_c_vorbasse }
+#link = { name = "---" flag_code = legacy_c_votkinsk }
+#link = { name = "---" flag_code = legacy_c_vratsa }
+#link = { name = "---" flag_code = legacy_c_vrbas }
+#link = { name = "---" flag_code = legacy_c_vukovar }
+#link = { name = "---" flag_code = legacy_c_vyazma }
+#link = { name = "---" flag_code = legacy_c_walcz }
+#link = { name = "---" flag_code = legacy_c_waldeck }
+#link = { name = "---" flag_code = legacy_c_warmia }
+#link = { name = "---" flag_code = legacy_c_warwick }
+#link = { name = "---" flag_code = legacy_c_warwickshire }
+#link = { name = "---" flag_code = legacy_c_weimar }
+#link = { name = "---" flag_code = legacy_c_werle }
+#link = { name = "---" flag_code = legacy_c_west_kordofan }
+#link = { name = "---" flag_code = legacy_c_west_riding }
+#link = { name = "---" flag_code = legacy_c_westfriesland }
+#link = { name = "---" flag_code = legacy_c_westmorland }
+#link = { name = "---" flag_code = legacy_c_wiek }
+#link = { name = "---" flag_code = legacy_c_wielun }
+#link = { name = "---" flag_code = legacy_c_wien }
+#link = { name = "---" flag_code = legacy_c_wight }
+#link = { name = "---" flag_code = legacy_c_wiltberg }
+#link = { name = "---" flag_code = legacy_c_wiltshire }
+#link = { name = "---" flag_code = legacy_c_winchester }
+#link = { name = "---" flag_code = legacy_c_wittenberg }
+#link = { name = "---" flag_code = legacy_c_wolgast }
+#link = { name = "---" flag_code = legacy_c_wolin }
+#link = { name = "---" flag_code = legacy_c_wolkenstein }
+#link = { name = "---" flag_code = legacy_c_wolpe }
+#link = { name = "---" flag_code = legacy_c_wolqayt }
+#link = { name = "---" flag_code = legacy_c_worcester }
+#link = { name = "---" flag_code = legacy_c_worcestershire }
+#link = { name = "---" flag_code = legacy_c_worms }
+#link = { name = "---" flag_code = legacy_c_wschowa }
+#link = { name = "---" flag_code = legacy_c_wurttemberg }
+#link = { name = "---" flag_code = legacy_c_wurzburg }
+#link = { name = "---" flag_code = legacy_c_yaitsk }
+#link = { name = "---" flag_code = legacy_c_yamalia }
+#link = { name = "---" flag_code = legacy_c_yar_calli }
+#link = { name = "---" flag_code = legacy_c_yaroslavl }
+#link = { name = "---" flag_code = legacy_c_yekaterinburg }
+#link = { name = "---" flag_code = legacy_c_york }
+#link = { name = "---" flag_code = legacy_c_yoshkar-ola }
+#link = { name = "---" flag_code = legacy_c_yperen }
+#link = { name = "---" flag_code = legacy_c_zachlumia }
+#link = { name = "---" flag_code = legacy_c_zadar }
+#link = { name = "---" flag_code = legacy_c_zagreb }
+#link = { name = "---" flag_code = legacy_c_zakroczym }
+#link = { name = "---" flag_code = legacy_c_zamora }
+#link = { name = "---" flag_code = legacy_c_zaragoza }
+#link = { name = "---" flag_code = legacy_c_zaria }
+#link = { name = "---" flag_code = legacy_c_zaslavl }
+#link = { name = "---" flag_code = legacy_c_zatec }
+#link = { name = "---" flag_code = legacy_c_zeeland }
+#link = { name = "---" flag_code = legacy_c_zemplen }
+#link = { name = "---" flag_code = legacy_c_zeta }
+#link = { name = "---" flag_code = legacy_c_zherkovo }
+#link = { name = "---" flag_code = legacy_c_zhmud }
+#link = { name = "---" flag_code = legacy_c_zhytomyr }
+#link = { name = "---" flag_code = legacy_c_znojmo }
+#link = { name = "---" flag_code = legacy_c_zollern }
+#link = { name = "---" flag_code = legacy_c_zolyom }
+#link = { name = "---" flag_code = legacy_c_zurich }
+#link = { name = "---" flag_code = legacy_c_zutphen }
+#link = { name = "---" flag_code = legacy_c_zvyahel }
+#link = { name = "---" flag_code = legacy_d_aarjetje }
+#link = { name = "---" flag_code = legacy_d_abbasid }
+#link = { name = "---" flag_code = legacy_d_abkhazia }
+#link = { name = "---" flag_code = legacy_d_abu_dhabi }
+#link = { name = "---" flag_code = legacy_d_abyssinian_band }
+#link = { name = "---" flag_code = legacy_d_achaia }
+#link = { name = "---" flag_code = legacy_d_adrar }
+#link = { name = "---" flag_code = legacy_d_afar }
+#link = { name = "---" flag_code = legacy_d_akershus }
+#link = { name = "---" flag_code = legacy_d_aksai_chin }
+#link = { name = "---" flag_code = legacy_d_aksay }
+#link = { name = "---" flag_code = legacy_d_al-said }
+#link = { name = "---" flag_code = legacy_d_al-wahat }
+#link = { name = "---" flag_code = legacy_d_al_hasa }
+#link = { name = "---" flag_code = legacy_d_ala_tau }
+#link = { name = "---" flag_code = legacy_d_alakol }
+#link = { name = "---" flag_code = legacy_d_alan_band }
+#link = { name = "---" flag_code = legacy_d_alania }
+#link = { name = "---" flag_code = legacy_d_aleppo }
+#link = { name = "---" flag_code = legacy_d_alexandria }
+#link = { name = "---" flag_code = legacy_d_algarve }
+#link = { name = "---" flag_code = legacy_d_alger }
+#link = { name = "---" flag_code = legacy_d_almohad }
+#link = { name = "---" flag_code = legacy_d_almoravid }
+#link = { name = "---" flag_code = legacy_d_alsace }
+#link = { name = "---" flag_code = legacy_d_altay }
+#link = { name = "---" flag_code = legacy_d_alwa }
+#link = { name = "---" flag_code = legacy_d_amalfi }
+#link = { name = "---" flag_code = legacy_d_amman }
+#link = { name = "---" flag_code = legacy_d_anatolia }
+#link = { name = "---" flag_code = legacy_d_ancona }
+#link = { name = "---" flag_code = legacy_d_anjou }
+#link = { name = "---" flag_code = legacy_d_antes }
+#link = { name = "---" flag_code = legacy_d_antioch }
+#link = { name = "---" flag_code = legacy_d_apulia }
+#link = { name = "---" flag_code = legacy_d_aqtobe }
+#link = { name = "---" flag_code = legacy_d_aquitaine }
+#link = { name = "---" flag_code = legacy_d_arabia_petrae }
+#link = { name = "---" flag_code = legacy_d_arabs }
+#link = { name = "---" flag_code = legacy_d_aragon }
+#link = { name = "---" flag_code = legacy_d_argyll }
+#link = { name = "---" flag_code = legacy_d_arkhangai }
+#link = { name = "---" flag_code = legacy_d_armenia }
+#link = { name = "---" flag_code = legacy_d_artois }
+#link = { name = "---" flag_code = legacy_d_ascalon }
+#link = { name = "---" flag_code = legacy_d_ashokas_chosen }
+#link = { name = "---" flag_code = legacy_d_assassin }
+#link = { name = "---" flag_code = legacy_d_asturias }
+#link = { name = "---" flag_code = legacy_d_aswan }
+#link = { name = "---" flag_code = legacy_d_athens }
+#link = { name = "---" flag_code = legacy_d_atyrau }
+#link = { name = "---" flag_code = legacy_d_auvergne }
+#link = { name = "---" flag_code = legacy_d_axum }
+#link = { name = "---" flag_code = legacy_d_ayyubid }
+#link = { name = "---" flag_code = legacy_d_azerbaijan }
+#link = { name = "---" flag_code = legacy_d_azov }
+#link = { name = "---" flag_code = legacy_d_badajoz }
+#link = { name = "---" flag_code = legacy_d_baden }
+#link = { name = "---" flag_code = legacy_d_baguirmi }
+#link = { name = "---" flag_code = legacy_d_baigaluuls }
+#link = { name = "---" flag_code = legacy_d_balearic }
+#link = { name = "---" flag_code = legacy_d_bali }
+#link = { name = "---" flag_code = legacy_d_baltiyul }
+#link = { name = "---" flag_code = legacy_d_baluchistan }
+#link = { name = "---" flag_code = legacy_d_baqlin }
+#link = { name = "---" flag_code = legacy_d_baraba_steppe }
+#link = { name = "---" flag_code = legacy_d_barcelona }
+#link = { name = "---" flag_code = legacy_d_bargujin_tukum }
+#link = { name = "---" flag_code = legacy_d_barsuki }
+#link = { name = "---" flag_code = legacy_d_basra }
+#link = { name = "---" flag_code = legacy_d_bassa }
+#link = { name = "---" flag_code = legacy_d_bavaria }
+#link = { name = "---" flag_code = legacy_d_bazin }
+#link = { name = "---" flag_code = legacy_d_bedford }
+#link = { name = "---" flag_code = legacy_d_beja }
+#link = { name = "---" flag_code = legacy_d_belgrade }
+#link = { name = "---" flag_code = legacy_d_beloozero }
+#link = { name = "---" flag_code = legacy_d_benevento }
+#link = { name = "---" flag_code = legacy_d_bereg }
+#link = { name = "---" flag_code = legacy_d_bergen }
+#link = { name = "---" flag_code = legacy_d_bergslagen }
+#link = { name = "---" flag_code = legacy_d_berry }
+#link = { name = "---" flag_code = legacy_d_betpa }
+#link = { name = "---" flag_code = legacy_d_bhutan }
+#link = { name = "---" flag_code = legacy_d_bobo }
+#link = { name = "---" flag_code = legacy_d_bohemia }
+#link = { name = "---" flag_code = legacy_d_bordeaux }
+#link = { name = "---" flag_code = legacy_d_bornu }
+#link = { name = "---" flag_code = legacy_d_bosnia }
+#link = { name = "---" flag_code = legacy_d_bourbon }
+#link = { name = "---" flag_code = legacy_d_brabant }
+#link = { name = "---" flag_code = legacy_d_brandenburg }
+#link = { name = "---" flag_code = legacy_d_brittany }
+#link = { name = "---" flag_code = legacy_d_brong }
+#link = { name = "---" flag_code = legacy_d_brunswick }
+#link = { name = "---" flag_code = legacy_d_bucellaria }
+#link = { name = "---" flag_code = legacy_d_bugeac }
+#link = { name = "---" flag_code = legacy_d_bukhara }
+#link = { name = "---" flag_code = legacy_d_bulls_rishabha }
+#link = { name = "---" flag_code = legacy_d_burgundy }
+#link = { name = "---" flag_code = legacy_d_cairo }
+#link = { name = "---" flag_code = legacy_d_calabria }
+#link = { name = "---" flag_code = legacy_d_campania }
+#link = { name = "---" flag_code = legacy_d_cappadocia }
+#link = { name = "---" flag_code = legacy_d_capua }
+#link = { name = "---" flag_code = legacy_d_carinthia }
+#link = { name = "---" flag_code = legacy_d_castilla }
+#link = { name = "---" flag_code = legacy_d_castille }
+#link = { name = "---" flag_code = legacy_d_catalonia }
+#link = { name = "---" flag_code = legacy_d_chah }
+#link = { name = "---" flag_code = legacy_d_champagne }
+#link = { name = "---" flag_code = legacy_d_cheremisa }
+#link = { name = "---" flag_code = legacy_d_chernigov }
+#link = { name = "---" flag_code = legacy_d_cherson }
+#link = { name = "---" flag_code = legacy_d_ciscaucasia }
+#link = { name = "---" flag_code = legacy_d_connacht }
+#link = { name = "---" flag_code = legacy_d_cordoba }
+#link = { name = "---" flag_code = legacy_d_cornwall }
+#link = { name = "---" flag_code = legacy_d_corsica }
+#link = { name = "---" flag_code = legacy_d_courland }
+#link = { name = "---" flag_code = legacy_d_crimea }
+#link = { name = "---" flag_code = legacy_d_croatia }
+#link = { name = "---" flag_code = legacy_d_cumberland }
+#link = { name = "---" flag_code = legacy_d_cyprus }
+#link = { name = "---" flag_code = legacy_d_cyrenaica }
+#link = { name = "---" flag_code = legacy_d_dagomba }
+#link = { name = "---" flag_code = legacy_d_dahlaks }
+#link = { name = "---" flag_code = legacy_d_dalmatia }
+#link = { name = "---" flag_code = legacy_d_damascus }
+#link = { name = "---" flag_code = legacy_d_damietta }
+#link = { name = "---" flag_code = legacy_d_danakil }
+#link = { name = "---" flag_code = legacy_d_danes }
+#link = { name = "---" flag_code = legacy_d_dauphine }
+#link = { name = "---" flag_code = legacy_d_dauria }
+#link = { name = "---" flag_code = legacy_d_dawaro }
+#link = { name = "---" flag_code = legacy_d_deheubarth }
+#link = { name = "---" flag_code = legacy_d_dendi }
+#link = { name = "---" flag_code = legacy_d_denmark }
+#link = { name = "---" flag_code = legacy_d_diyarbakr }
+#link = { name = "---" flag_code = legacy_d_diyarmudar }
+#link = { name = "---" flag_code = legacy_d_dobrudja }
+#link = { name = "---" flag_code = legacy_d_don }
+#link = { name = "---" flag_code = legacy_d_duortnoseatnu }
+#link = { name = "---" flag_code = legacy_d_dyrrachion }
+#link = { name = "---" flag_code = legacy_d_dzayul }
+#link = { name = "---" flag_code = legacy_d_east_african_pagan_reformed }
+#link = { name = "---" flag_code = legacy_d_eastern_desert }
+#link = { name = "---" flag_code = legacy_d_eastern_sayan }
+#link = { name = "---" flag_code = legacy_d_edessa }
+#link = { name = "---" flag_code = legacy_d_el-arish }
+#link = { name = "---" flag_code = legacy_d_el_rif }
+#link = { name = "---" flag_code = legacy_d_emilia }
+#link = { name = "---" flag_code = legacy_d_epirus }
+#link = { name = "---" flag_code = legacy_d_essex }
+#link = { name = "---" flag_code = legacy_d_esthonia }
+#link = { name = "---" flag_code = legacy_d_estonia }
+#link = { name = "---" flag_code = legacy_d_esztergom }
+#link = { name = "---" flag_code = legacy_d_eulge }
+#link = { name = "---" flag_code = legacy_d_eweland }
+#link = { name = "---" flag_code = legacy_d_fars }
+#link = { name = "---" flag_code = legacy_d_fatimid }
+#link = { name = "---" flag_code = legacy_d_ferrara }
+#link = { name = "---" flag_code = legacy_d_fes }
+#link = { name = "---" flag_code = legacy_d_finland }
+#link = { name = "---" flag_code = legacy_d_flanders }
+#link = { name = "---" flag_code = legacy_d_francia }
+#link = { name = "---" flag_code = legacy_d_franconia }
+#link = { name = "---" flag_code = legacy_d_frisia }
+#link = { name = "---" flag_code = legacy_d_friuli }
+#link = { name = "---" flag_code = legacy_d_galich }
+#link = { name = "---" flag_code = legacy_d_galicia }
+#link = { name = "---" flag_code = legacy_d_ganzhou }
+#link = { name = "---" flag_code = legacy_d_gascogne }
+#link = { name = "---" flag_code = legacy_d_gelre }
+#link = { name = "---" flag_code = legacy_d_genoa }
+#link = { name = "---" flag_code = legacy_d_georgia }
+#link = { name = "---" flag_code = legacy_d_gepids }
+#link = { name = "---" flag_code = legacy_d_ghana }
+#link = { name = "---" flag_code = legacy_d_ghur }
+#link = { name = "---" flag_code = legacy_d_giemajohka }
+#link = { name = "---" flag_code = legacy_d_gilan }
+#link = { name = "---" flag_code = legacy_d_gloucester }
+#link = { name = "---" flag_code = legacy_d_gobi-altai }
+#link = { name = "---" flag_code = legacy_d_gobir }
+#link = { name = "---" flag_code = legacy_d_gondar }
+#link = { name = "---" flag_code = legacy_d_gorkha }
+#link = { name = "---" flag_code = legacy_d_gotland }
+#link = { name = "---" flag_code = legacy_d_granada }
+#link = { name = "---" flag_code = legacy_d_greater_poland }
+#link = { name = "---" flag_code = legacy_d_grodno }
+#link = { name = "---" flag_code = legacy_d_gwynedd }
+#link = { name = "---" flag_code = legacy_d_gyaman }
+#link = { name = "---" flag_code = legacy_d_gyor }
+#link = { name = "---" flag_code = legacy_d_hadramut }
+#link = { name = "---" flag_code = legacy_d_hafun }
+#link = { name = "---" flag_code = legacy_d_hamadan }
+#link = { name = "---" flag_code = legacy_d_hampshire }
+#link = { name = "---" flag_code = legacy_d_hansa }
+#link = { name = "---" flag_code = legacy_d_harer }
+#link = { name = "---" flag_code = legacy_d_hashimid }
+#link = { name = "---" flag_code = legacy_d_hashshashin }
+#link = { name = "---" flag_code = legacy_d_hellenic_pagan_reformed }
+#link = { name = "---" flag_code = legacy_d_herat }
+#link = { name = "---" flag_code = legacy_d_hereford }
+#link = { name = "---" flag_code = legacy_d_hlynov }
+#link = { name = "---" flag_code = legacy_d_holland }
+#link = { name = "---" flag_code = legacy_d_holstein }
+#link = { name = "---" flag_code = legacy_d_hormuz }
+#link = { name = "---" flag_code = legacy_d_hum }
+#link = { name = "---" flag_code = legacy_d_ibadan }
+#link = { name = "---" flag_code = legacy_d_iceland }
+#link = { name = "---" flag_code = legacy_d_ife }
+#link = { name = "---" flag_code = legacy_d_igboland }
+#link = { name = "---" flag_code = legacy_d_ikonion }
+#link = { name = "---" flag_code = legacy_d_ili-alatau }
+#link = { name = "---" flag_code = legacy_d_ingers }
+#link = { name = "---" flag_code = legacy_d_istria }
+#link = { name = "---" flag_code = legacy_d_jabal_kufs }
+#link = { name = "---" flag_code = legacy_d_jamtland }
+#link = { name = "---" flag_code = legacy_d_jangladesh }
+#link = { name = "---" flag_code = legacy_d_jawf_al-yamani }
+#link = { name = "---" flag_code = legacy_d_jemba }
+#link = { name = "---" flag_code = legacy_d_jerusalem }
+#link = { name = "---" flag_code = legacy_d_jewish }
+#link = { name = "---" flag_code = legacy_d_jharkand }
+#link = { name = "---" flag_code = legacy_d_jomsvikings }
+#link = { name = "---" flag_code = legacy_d_kabylia }
+#link = { name = "---" flag_code = legacy_d_kagha }
+#link = { name = "---" flag_code = legacy_d_kajaneborg }
+#link = { name = "---" flag_code = legacy_d_kaleva }
+#link = { name = "---" flag_code = legacy_d_kappadokia }
+#link = { name = "---" flag_code = legacy_d_karabas }
+#link = { name = "---" flag_code = legacy_d_karashar }
+#link = { name = "---" flag_code = legacy_d_karelia }
+#link = { name = "---" flag_code = legacy_d_kargassia }
+#link = { name = "---" flag_code = legacy_d_karkaraly }
+#link = { name = "---" flag_code = legacy_d_karnten }
+#link = { name = "---" flag_code = legacy_d_kasa }
+#link = { name = "---" flag_code = legacy_d_kashgar }
+#link = { name = "---" flag_code = legacy_d_kashmir }
+#link = { name = "---" flag_code = legacy_d_kassogs }
+#link = { name = "---" flag_code = legacy_d_kathmandu }
+#link = { name = "---" flag_code = legacy_d_kawar }
+#link = { name = "---" flag_code = legacy_d_kazym }
+#link = { name = "---" flag_code = legacy_d_kentarlau }
+#link = { name = "---" flag_code = legacy_d_kexholm }
+#link = { name = "---" flag_code = legacy_d_khasa }
+#link = { name = "---" flag_code = legacy_d_khazars }
+#link = { name = "---" flag_code = legacy_d_khiva }
+#link = { name = "---" flag_code = legacy_d_khorasan }
+#link = { name = "---" flag_code = legacy_d_khovd }
+#link = { name = "---" flag_code = legacy_d_khovsgol }
+#link = { name = "---" flag_code = legacy_d_khozistan }
+#link = { name = "---" flag_code = legacy_d_kiev }
+#link = { name = "---" flag_code = legacy_d_kirghiz }
+#link = { name = "---" flag_code = legacy_d_knights_calatrava }
+#link = { name = "---" flag_code = legacy_d_knights_hospitaler }
+#link = { name = "---" flag_code = legacy_d_knights_santiago }
+#link = { name = "---" flag_code = legacy_d_knights_templar }
+#link = { name = "---" flag_code = legacy_d_kohestan }
+#link = { name = "---" flag_code = legacy_d_koln }
+#link = { name = "---" flag_code = legacy_d_konda }
+#link = { name = "---" flag_code = legacy_d_kono }
+#link = { name = "---" flag_code = legacy_d_kordofan }
+#link = { name = "---" flag_code = legacy_d_krain }
+#link = { name = "---" flag_code = legacy_d_krakow }
+#link = { name = "---" flag_code = legacy_d_krete }
+#link = { name = "---" flag_code = legacy_d_kroumerie }
+#link = { name = "---" flag_code = legacy_d_kru }
+#link = { name = "---" flag_code = legacy_d_kulyndy_steppe }
+#link = { name = "---" flag_code = legacy_d_kurdistan }
+#link = { name = "---" flag_code = legacy_d_kurgan }
+#link = { name = "---" flag_code = legacy_d_kush-murun }
+#link = { name = "---" flag_code = legacy_d_kuyavia }
+#link = { name = "---" flag_code = legacy_d_kwararafa }
+#link = { name = "---" flag_code = legacy_d_ladakh }
+#link = { name = "---" flag_code = legacy_d_lancaster }
+#link = { name = "---" flag_code = legacy_d_lanikaz }
+#link = { name = "---" flag_code = legacy_d_lasta }
+#link = { name = "---" flag_code = legacy_d_latgale }
+#link = { name = "---" flag_code = legacy_d_latium }
+#link = { name = "---" flag_code = legacy_d_leinster }
+#link = { name = "---" flag_code = legacy_d_leon }
+#link = { name = "---" flag_code = legacy_d_lesser_poland }
+#link = { name = "---" flag_code = legacy_d_lettigalians }
+#link = { name = "---" flag_code = legacy_d_levedia }
+#link = { name = "---" flag_code = legacy_d_lhoyul }
+#link = { name = "---" flag_code = legacy_d_liangzhou }
+#link = { name = "---" flag_code = legacy_d_litang }
+#link = { name = "---" flag_code = legacy_d_lithuanians }
+#link = { name = "---" flag_code = legacy_d_livonia }
+#link = { name = "---" flag_code = legacy_d_lobi }
+#link = { name = "---" flag_code = legacy_d_loma }
+#link = { name = "---" flag_code = legacy_d_lombardia }
+#link = { name = "---" flag_code = legacy_d_lothian }
+#link = { name = "---" flag_code = legacy_d_lower_bosnia }
+#link = { name = "---" flag_code = legacy_d_lower_lorraine }
+#link = { name = "---" flag_code = legacy_d_luxembourg }
+#link = { name = "---" flag_code = legacy_d_macva }
+#link = { name = "---" flag_code = legacy_d_mali }
+#link = { name = "---" flag_code = legacy_d_mallorca }
+#link = { name = "---" flag_code = legacy_d_mamluks }
+#link = { name = "---" flag_code = legacy_d_man }
+#link = { name = "---" flag_code = legacy_d_marrakech }
+#link = { name = "---" flag_code = legacy_d_martyuba }
+#link = { name = "---" flag_code = legacy_d_martyubia }
+#link = { name = "---" flag_code = legacy_d_mazovia }
+#link = { name = "---" flag_code = legacy_d_meath }
+#link = { name = "---" flag_code = legacy_d_mecklemburg }
+#link = { name = "---" flag_code = legacy_d_medapata }
+#link = { name = "---" flag_code = legacy_d_medina }
+#link = { name = "---" flag_code = legacy_d_meissen }
+#link = { name = "---" flag_code = legacy_d_mema }
+#link = { name = "---" flag_code = legacy_d_milano }
+#link = { name = "---" flag_code = legacy_d_minsk }
+#link = { name = "---" flag_code = legacy_d_modena }
+#link = { name = "---" flag_code = legacy_d_moldau }
+#link = { name = "---" flag_code = legacy_d_mora }
+#link = { name = "---" flag_code = legacy_d_moravia }
+#link = { name = "---" flag_code = legacy_d_moray }
+#link = { name = "---" flag_code = legacy_d_mordvins }
+#link = { name = "---" flag_code = legacy_d_moskva }
+#link = { name = "---" flag_code = legacy_d_mugodzhar_hills }
+#link = { name = "---" flag_code = legacy_d_multan }
+#link = { name = "---" flag_code = legacy_d_munster }
+#link = { name = "---" flag_code = legacy_d_muntenia }
+#link = { name = "---" flag_code = legacy_d_murcia }
+#link = { name = "---" flag_code = legacy_d_murom }
+#link = { name = "---" flag_code = legacy_d_muyunkum }
+#link = { name = "---" flag_code = legacy_d_nasa }
+#link = { name = "---" flag_code = legacy_d_navarra }
+#link = { name = "---" flag_code = legacy_d_nitra }
+#link = { name = "---" flag_code = legacy_d_nobatia }
+#link = { name = "---" flag_code = legacy_d_norfolk }
+#link = { name = "---" flag_code = legacy_d_normandy }
+#link = { name = "---" flag_code = legacy_d_norrland }
+#link = { name = "---" flag_code = legacy_d_northumberland }
+#link = { name = "---" flag_code = legacy_d_novgorod }
+#link = { name = "---" flag_code = legacy_d_novgorod-seversk }
+#link = { name = "---" flag_code = legacy_d_novosil }
+#link = { name = "---" flag_code = legacy_d_nubia }
+#link = { name = "---" flag_code = legacy_d_nyitra }
+#link = { name = "---" flag_code = legacy_d_nyland }
+#link = { name = "---" flag_code = legacy_d_obotrites }
+#link = { name = "---" flag_code = legacy_d_ogrash }
+#link = { name = "---" flag_code = legacy_d_oltenia }
+#link = { name = "---" flag_code = legacy_d_oman }
+#link = { name = "---" flag_code = legacy_d_opsikion }
+#link = { name = "---" flag_code = legacy_d_orkney }
+#link = { name = "---" flag_code = legacy_d_orleans }
+#link = { name = "---" flag_code = legacy_d_osmanoglu }
+#link = { name = "---" flag_code = legacy_d_osrushana }
+#link = { name = "---" flag_code = legacy_d_ostergotland }
+#link = { name = "---" flag_code = legacy_d_osterreich }
+#link = { name = "---" flag_code = legacy_d_ostlandet }
+#link = { name = "---" flag_code = legacy_d_ostrobothnia }
+#link = { name = "---" flag_code = legacy_d_ostyaki }
+#link = { name = "---" flag_code = legacy_d_otuken }
+#link = { name = "---" flag_code = legacy_d_ovorkhangai }
+#link = { name = "---" flag_code = legacy_d_oxford }
+#link = { name = "---" flag_code = legacy_d_palestine }
+#link = { name = "---" flag_code = legacy_d_palmyra }
+#link = { name = "---" flag_code = legacy_d_pechenegs }
+#link = { name = "---" flag_code = legacy_d_pecs }
+#link = { name = "---" flag_code = legacy_d_pelym }
+#link = { name = "---" flag_code = legacy_d_pereyaslavl }
+#link = { name = "---" flag_code = legacy_d_perm }
+#link = { name = "---" flag_code = legacy_d_pest }
+#link = { name = "---" flag_code = legacy_d_pisa }
+#link = { name = "---" flag_code = legacy_d_poitou }
+#link = { name = "---" flag_code = legacy_d_polotsk }
+#link = { name = "---" flag_code = legacy_d_pomeralia }
+#link = { name = "---" flag_code = legacy_d_pommerania }
+#link = { name = "---" flag_code = legacy_d_porto }
+#link = { name = "---" flag_code = legacy_d_pressburg }
+#link = { name = "---" flag_code = legacy_d_pronsk }
+#link = { name = "---" flag_code = legacy_d_provence }
+#link = { name = "---" flag_code = legacy_d_prussia }
+#link = { name = "---" flag_code = legacy_d_pruthenians }
+#link = { name = "---" flag_code = legacy_d_pskov }
+#link = { name = "---" flag_code = legacy_d_qinghai }
+#link = { name = "---" flag_code = legacy_d_ramannadesa }
+#link = { name = "---" flag_code = legacy_d_rashka }
+#link = { name = "---" flag_code = legacy_d_romagna }
+#link = { name = "---" flag_code = legacy_d_rostov }
+#link = { name = "---" flag_code = legacy_d_ruhunu }
+#link = { name = "---" flag_code = legacy_d_ryazan }
+#link = { name = "---" flag_code = legacy_d_salamanca }
+#link = { name = "---" flag_code = legacy_d_salamat }
+#link = { name = "---" flag_code = legacy_d_salerno }
+#link = { name = "---" flag_code = legacy_d_salisbury }
+#link = { name = "---" flag_code = legacy_d_samalo }
+#link = { name = "---" flag_code = legacy_d_sami }
+#link = { name = "---" flag_code = legacy_d_samogitia }
+#link = { name = "---" flag_code = legacy_d_samos }
+#link = { name = "---" flag_code = legacy_d_sanaa }
+#link = { name = "---" flag_code = legacy_d_sanaag }
+#link = { name = "---" flag_code = legacy_d_sandomiersk }
+#link = { name = "---" flag_code = legacy_d_sapi }
+#link = { name = "---" flag_code = legacy_d_sardinia }
+#link = { name = "---" flag_code = legacy_d_saryarka }
+#link = { name = "---" flag_code = legacy_d_satakunta }
+#link = { name = "---" flag_code = legacy_d_saurashtra }
+#link = { name = "---" flag_code = legacy_d_savalu }
+#link = { name = "---" flag_code = legacy_d_savoie }
+#link = { name = "---" flag_code = legacy_d_savonia }
+#link = { name = "---" flag_code = legacy_d_saxony }
+#link = { name = "---" flag_code = legacy_d_selenga_valley }
+#link = { name = "---" flag_code = legacy_d_seljuk }
+#link = { name = "---" flag_code = legacy_d_semey }
+#link = { name = "---" flag_code = legacy_d_semien }
+#link = { name = "---" flag_code = legacy_d_septimania }
+#link = { name = "---" flag_code = legacy_d_sevilla }
+#link = { name = "---" flag_code = legacy_d_shabelle }
+#link = { name = "---" flag_code = legacy_d_shamir }
+#link = { name = "---" flag_code = legacy_d_shanzhou }
+#link = { name = "---" flag_code = legacy_d_sharka }
+#link = { name = "---" flag_code = legacy_d_shewa }
+#link = { name = "---" flag_code = legacy_d_sibir }
+#link = { name = "---" flag_code = legacy_d_sicily }
+#link = { name = "---" flag_code = legacy_d_silesia }
+#link = { name = "---" flag_code = legacy_d_silla }
+#link = { name = "---" flag_code = legacy_d_sjaelland }
+#link = { name = "---" flag_code = legacy_d_skane }
+#link = { name = "---" flag_code = legacy_d_slavonia }
+#link = { name = "---" flag_code = legacy_d_slesvig }
+#link = { name = "---" flag_code = legacy_d_slovakia }
+#link = { name = "---" flag_code = legacy_d_smaland }
+#link = { name = "---" flag_code = legacy_d_smolensk }
+#link = { name = "---" flag_code = legacy_d_socotra }
+#link = { name = "---" flag_code = legacy_d_socotra= { }
+#link = { name = "---" flag_code = legacy_d_soghd }
+#link = { name = "---" flag_code = legacy_d_somerset }
+#link = { name = "---" flag_code = legacy_d_somogy }
+#link = { name = "---" flag_code = legacy_d_songhay }
+#link = { name = "---" flag_code = legacy_d_sorbs }
+#link = { name = "---" flag_code = legacy_d_sous }
+#link = { name = "---" flag_code = legacy_d_spoleto }
+#link = { name = "---" flag_code = legacy_d_sriksetra }
+#link = { name = "---" flag_code = legacy_d_steiermark }
+#link = { name = "---" flag_code = legacy_d_susa }
+#link = { name = "---" flag_code = legacy_d_sussex }
+#link = { name = "---" flag_code = legacy_d_sutiya }
+#link = { name = "---" flag_code = legacy_d_swabia }
+#link = { name = "---" flag_code = legacy_d_sweden }
+#link = { name = "---" flag_code = legacy_d_swiss }
+#link = { name = "---" flag_code = legacy_d_syria }
+#link = { name = "---" flag_code = legacy_d_syrmia }
+#link = { name = "---" flag_code = legacy_d_tagant }
+#link = { name = "---" flag_code = legacy_d_tagaung }
+#link = { name = "---" flag_code = legacy_d_tangiers }
+#link = { name = "---" flag_code = legacy_d_tannu-ola }
+#link = { name = "---" flag_code = legacy_d_tara }
+#link = { name = "---" flag_code = legacy_d_tavasts }
+#link = { name = "---" flag_code = legacy_d_tejo }
+#link = { name = "---" flag_code = legacy_d_teutonic_order }
+#link = { name = "---" flag_code = legacy_d_the_isles }
+#link = { name = "---" flag_code = legacy_d_thrace }
+#link = { name = "---" flag_code = legacy_d_thuringia }
+#link = { name = "---" flag_code = legacy_d_tibesti }
+#link = { name = "---" flag_code = legacy_d_timbuktu }
+#link = { name = "---" flag_code = legacy_d_tlemcen }
+#link = { name = "---" flag_code = legacy_d_togina }
+#link = { name = "---" flag_code = legacy_d_toledo }
+#link = { name = "---" flag_code = legacy_d_toscana }
+#link = { name = "---" flag_code = legacy_d_toulouse }
+#link = { name = "---" flag_code = legacy_d_transcarpathia }
+#link = { name = "---" flag_code = legacy_d_transcaspiana }
+#link = { name = "---" flag_code = legacy_d_transylvania }
+#link = { name = "---" flag_code = legacy_d_transylvanian_alps }
+#link = { name = "---" flag_code = legacy_d_trebizond }
+#link = { name = "---" flag_code = legacy_d_trier }
+#link = { name = "---" flag_code = legacy_d_tripoli }
+#link = { name = "---" flag_code = legacy_d_tripolitania }
+#link = { name = "---" flag_code = legacy_d_trondelag }
+#link = { name = "---" flag_code = legacy_d_tsagaanbaigal }
+#link = { name = "---" flag_code = legacy_d_tunis }
+#link = { name = "---" flag_code = legacy_d_turkestan }
+#link = { name = "---" flag_code = legacy_d_turnovo }
+#link = { name = "---" flag_code = legacy_d_turov }
+#link = { name = "---" flag_code = legacy_d_tver }
+#link = { name = "---" flag_code = legacy_d_tyrol }
+#link = { name = "---" flag_code = legacy_d_ubsunur_hollow }
+#link = { name = "---" flag_code = legacy_d_ud_valley }
+#link = { name = "---" flag_code = legacy_d_uda_valley }
+#link = { name = "---" flag_code = legacy_d_ulster }
+#link = { name = "---" flag_code = legacy_d_umayyad }
+#link = { name = "---" flag_code = legacy_d_ungvar }
+#link = { name = "---" flag_code = legacy_d_upper_bosnia }
+#link = { name = "---" flag_code = legacy_d_upper_burgundy }
+#link = { name = "---" flag_code = legacy_d_upper_gurma }
+#link = { name = "---" flag_code = legacy_d_upper_lorraine }
+#link = { name = "---" flag_code = legacy_d_uppland }
+#link = { name = "---" flag_code = legacy_d_ural }
+#link = { name = "---" flag_code = legacy_d_uraltau }
+#link = { name = "---" flag_code = legacy_d_urdunn }
+#link = { name = "---" flag_code = legacy_d_valencia }
+#link = { name = "---" flag_code = legacy_d_valois }
+#link = { name = "---" flag_code = legacy_d_varna }
+#link = { name = "---" flag_code = legacy_d_vastergotland }
+#link = { name = "---" flag_code = legacy_d_vasyugan_mire }
+#link = { name = "---" flag_code = legacy_d_venice }
+#link = { name = "---" flag_code = legacy_d_veps }
+#link = { name = "---" flag_code = legacy_d_verona }
+#link = { name = "---" flag_code = legacy_d_vidin }
+#link = { name = "---" flag_code = legacy_d_visegrad }
+#link = { name = "---" flag_code = legacy_d_vitebsk }
+#link = { name = "---" flag_code = legacy_d_vladimir }
+#link = { name = "---" flag_code = legacy_d_vogulia }
+#link = { name = "---" flag_code = legacy_d_volga-bulgaria }
+#link = { name = "---" flag_code = legacy_d_volhynia }
+#link = { name = "---" flag_code = legacy_d_voronezh }
+#link = { name = "---" flag_code = legacy_d_votes }
+#link = { name = "---" flag_code = legacy_d_vuovdisamieana }
+#link = { name = "---" flag_code = legacy_d_wagadu }
+#link = { name = "---" flag_code = legacy_d_wagadugu }
+#link = { name = "---" flag_code = legacy_d_wallachia }
+#link = { name = "---" flag_code = legacy_d_wandala }
+#link = { name = "---" flag_code = legacy_d_warwick }
+#link = { name = "---" flag_code = legacy_d_wasit }
+#link = { name = "---" flag_code = legacy_d_wenyon }
+#link = { name = "---" flag_code = legacy_d_west_darfur }
+#link = { name = "---" flag_code = legacy_d_western_sayan }
+#link = { name = "---" flag_code = legacy_d_wielkopolska }
+#link = { name = "---" flag_code = legacy_d_worodugu }
+#link = { name = "---" flag_code = legacy_d_wuli }
+#link = { name = "---" flag_code = legacy_d_yamama }
+#link = { name = "---" flag_code = legacy_d_yaroslavl }
+#link = { name = "---" flag_code = legacy_d_yenisei-kan }
+#link = { name = "---" flag_code = legacy_d_york }
+#link = { name = "---" flag_code = legacy_d_yugra }
+#link = { name = "---" flag_code = legacy_d_zaila }
+#link = { name = "---" flag_code = legacy_d_zammour }
+#link = { name = "---" flag_code = legacy_d_zanskar }
+#link = { name = "---" flag_code = legacy_d_zara }
+#link = { name = "---" flag_code = legacy_d_zaragoza }
+#link = { name = "---" flag_code = legacy_e_aarlud_khanate }
+#link = { name = "---" flag_code = legacy_e_bactria }
+#link = { name = "---" flag_code = legacy_e_baruun_khanate }
+#link = { name = "---" flag_code = legacy_e_black_horde }
+#link = { name = "---" flag_code = legacy_e_carpathia }
+#link = { name = "---" flag_code = legacy_e_china }
+#link = { name = "---" flag_code = legacy_e_china_west_governor }
+#link = { name = "---" flag_code = legacy_e_deccan }
+#link = { name = "---" flag_code = legacy_e_gaul }
+#link = { name = "---" flag_code = legacy_e_il-khanate }
+#link = { name = "---" flag_code = legacy_e_kara_khitai }
+#link = { name = "---" flag_code = legacy_e_latin_empire }
+#link = { name = "---" flag_code = legacy_e_rajastan }
+#link = { name = "---" flag_code = legacy_e_sassanid }
+#link = { name = "---" flag_code = legacy_e_tartaria }
+#link = { name = "---" flag_code = legacy_e_tibet }
+#link = { name = "---" flag_code = legacy_e_togskol_khanate }
+#link = { name = "---" flag_code = legacy_e_turan }
+#link = { name = "---" flag_code = legacy_e_volga-ural }
+#link = { name = "---" flag_code = legacy_e_wendish_empire }
+#link = { name = "---" flag_code = legacy_e_white_horde }
+#link = { name = "---" flag_code = legacy_k_adiukru }
+#link = { name = "---" flag_code = legacy_k_afghanistan }
+#link = { name = "---" flag_code = legacy_k_africa }
+#link = { name = "---" flag_code = legacy_k_akan }
+#link = { name = "---" flag_code = legacy_k_alania }
+#link = { name = "---" flag_code = legacy_k_almohad }
+#link = { name = "---" flag_code = legacy_k_anatolia }
+#link = { name = "---" flag_code = legacy_k_anbiya }
+#link = { name = "---" flag_code = legacy_k_andalusia }
+#link = { name = "---" flag_code = legacy_k_andhra }
+#link = { name = "---" flag_code = legacy_k_angara }
+#link = { name = "---" flag_code = legacy_k_aquitaine }
+#link = { name = "---" flag_code = legacy_k_asturias }
+#link = { name = "---" flag_code = legacy_k_avaria }
+#link = { name = "---" flag_code = legacy_k_baluchistan }
+#link = { name = "---" flag_code = legacy_k_bihar }
+#link = { name = "---" flag_code = legacy_k_bjarmaland }
+#link = { name = "---" flag_code = legacy_k_bohemia }
+#link = { name = "---" flag_code = legacy_k_borgu }
+#link = { name = "---" flag_code = legacy_k_caspian_steppe }
+#link = { name = "---" flag_code = legacy_k_caucasus }
+#link = { name = "---" flag_code = legacy_k_cuman }
+#link = { name = "---" flag_code = legacy_k_danelaw }
+#link = { name = "---" flag_code = legacy_k_fashion }
+#link = { name = "---" flag_code = legacy_k_frisia }
+#link = { name = "---" flag_code = legacy_k_great_bulgaria }
+#link = { name = "---" flag_code = legacy_k_guge }
+#link = { name = "---" flag_code = legacy_k_gyalrong }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_CNN }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_corinth }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_DLP }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_HRM }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_ILL }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_MAC }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_MRY }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_ODR }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_olympia }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_PAR }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_PLL }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_PRS }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_PRY }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_RHO }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_SAM }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_SCY }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_SEL }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_SMA }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_SPA }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_SRM }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_TAU }
+#link = { name = "---" flag_code = legacy_k_IMPTOCK3_THE }
+#link = { name = "---" flag_code = legacy_k_IR_ACHAEMENID_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_ADI }
+#link = { name = "---" flag_code = legacy_k_IR_AIGINA_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_AKY }
+#link = { name = "---" flag_code = legacy_k_IR_ALBION_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_AMK }
+#link = { name = "---" flag_code = legacy_k_IR_APO }
+#link = { name = "---" flag_code = legacy_k_IR_ARGEAD_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_ARGEAD_REVOLTER_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_ARGOLIS_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_ARMORICA_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_ASP }
+#link = { name = "---" flag_code = legacy_k_IR_BIT }
+#link = { name = "---" flag_code = legacy_k_IR_BPK }
+#link = { name = "---" flag_code = legacy_k_IR_CAB }
+#link = { name = "---" flag_code = legacy_k_IR_CAR_REVOLT }
+#link = { name = "---" flag_code = legacy_k_IR_CARIA_SATRAPY_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_CARPETANIA_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_CARTHAGO_NOVA_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_CELTIBERIA_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_CHALCIS_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_CHRYSAORIC_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_CIO }
+#link = { name = "---" flag_code = legacy_k_IR_CLC }
+#link = { name = "---" flag_code = legacy_k_IR_CMB }
+#link = { name = "---" flag_code = legacy_k_IR_COM }
+#link = { name = "---" flag_code = legacy_k_IR_CYR_OPPOSITION }
+#link = { name = "---" flag_code = legacy_k_IR_DAHAE_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_DECAPOLIS_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_DELIAN_LEAGUE_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_DELOS_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_DRAVIDA_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_EGS_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_EGY_REVOLT }
+#link = { name = "---" flag_code = legacy_k_IR_ELE }
+#link = { name = "---" flag_code = legacy_k_IR_EPIKRATEIA_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_EPM }
+#link = { name = "---" flag_code = legacy_k_IR_EUBOEA_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_HCP }
+#link = { name = "---" flag_code = legacy_k_IR_IOA }
+#link = { name = "---" flag_code = legacy_k_IR_ION }
+#link = { name = "---" flag_code = legacy_k_IR_ISI }
+#link = { name = "---" flag_code = legacy_k_IR_ISU }
+#link = { name = "---" flag_code = legacy_k_IR_ITA_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_KIB }
+#link = { name = "---" flag_code = legacy_k_IR_KTN }
+#link = { name = "---" flag_code = legacy_k_IR_LAR }
+#link = { name = "---" flag_code = legacy_k_IR_MAC_REVOLT }
+#link = { name = "---" flag_code = legacy_k_IR_MAGNA_GRAECIA_FEUDATORY_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_MAS }
+#link = { name = "---" flag_code = legacy_k_IR_MIT_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_MLD }
+#link = { name = "---" flag_code = legacy_k_IR_MYD }
+#link = { name = "---" flag_code = legacy_k_IR_NBT }
+#link = { name = "---" flag_code = legacy_k_IR_NUMIDIA_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_OBE }
+#link = { name = "---" flag_code = legacy_k_IR_OEO }
+#link = { name = "---" flag_code = legacy_k_IR_ORE }
+#link = { name = "---" flag_code = legacy_k_IR_OSM }
+#link = { name = "---" flag_code = legacy_k_IR_PERGAMON_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_PERSIA_SATRAPY_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_PHA }
+#link = { name = "---" flag_code = legacy_k_IR_PHK_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_PIS }
+#link = { name = "---" flag_code = legacy_k_IR_POMPEII_FEUDATORY_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_PPH }
+#link = { name = "---" flag_code = legacy_k_IR_PRY_REVOLT }
+#link = { name = "---" flag_code = legacy_k_IR_ROM_REVOLT }
+#link = { name = "---" flag_code = legacy_k_IR_SARDIS_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_SEL_REVOLT }
+#link = { name = "---" flag_code = legacy_k_IR_SLG }
+#link = { name = "---" flag_code = legacy_k_IR_SMC }
+#link = { name = "---" flag_code = legacy_k_IR_SSG }
+#link = { name = "---" flag_code = legacy_k_IR_SWE }
+#link = { name = "---" flag_code = legacy_k_IR_TARTESSOS_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_TELMESSOS_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_TRM }
+#link = { name = "---" flag_code = legacy_k_IR_TYM }
+#link = { name = "---" flag_code = legacy_k_IR_VDL }
+#link = { name = "---" flag_code = legacy_k_IR_VETTONIA_FLAG }
+#link = { name = "---" flag_code = legacy_k_IR_WESTERN_NESIOTIC_FLAG }
+#link = { name = "---" flag_code = legacy_k_iraq }
+#link = { name = "---" flag_code = legacy_k_kafsid }
+#link = { name = "---" flag_code = legacy_k_kamarupa }
+#link = { name = "---" flag_code = legacy_k_kashmir }
+#link = { name = "---" flag_code = legacy_k_khakassia }
+#link = { name = "---" flag_code = legacy_k_kham }
+#link = { name = "---" flag_code = legacy_k_khazaria }
+#link = { name = "---" flag_code = legacy_k_khorasan }
+#link = { name = "---" flag_code = legacy_k_khotan }
+#link = { name = "---" flag_code = legacy_k_khwarezm }
+#link = { name = "---" flag_code = legacy_k_leon }
+#link = { name = "---" flag_code = legacy_k_lombardy }
+#link = { name = "---" flag_code = legacy_k_lotharingia }
+#link = { name = "---" flag_code = legacy_k_magyar }
+#link = { name = "---" flag_code = legacy_k_maharastra }
+#link = { name = "---" flag_code = legacy_k_marinid }
+#link = { name = "---" flag_code = legacy_k_moravia }
+#link = { name = "---" flag_code = legacy_k_mordvinia }
+#link = { name = "---" flag_code = legacy_k_nepal }
+#link = { name = "---" flag_code = legacy_k_neustria }
+#link = { name = "---" flag_code = legacy_k_novgorod-severesk }
+#link = { name = "---" flag_code = legacy_k_nubia }
+#link = { name = "---" flag_code = legacy_k_ob }
+#link = { name = "---" flag_code = legacy_k_oghuz_il }
+#link = { name = "---" flag_code = legacy_k_orthodox }
+#link = { name = "---" flag_code = legacy_k_outer_ajuraan }
+#link = { name = "---" flag_code = legacy_k_punjab }
+#link = { name = "---" flag_code = legacy_k_rajputana }
+#link = { name = "---" flag_code = legacy_k_ravenna }
+#link = { name = "---" flag_code = legacy_k_rum }
+#link = { name = "---" flag_code = legacy_k_sahara }
+#link = { name = "---" flag_code = legacy_k_sao }
+#link = { name = "---" flag_code = legacy_k_sardinia }
+#link = { name = "---" flag_code = legacy_k_seljuk_turks }
+#link = { name = "---" flag_code = legacy_k_septimania }
+#link = { name = "---" flag_code = legacy_k_slavs }
+#link = { name = "---" flag_code = legacy_k_soissons }
+#link = { name = "---" flag_code = legacy_k_somalia }
+#link = { name = "---" flag_code = legacy_k_tahert }
+#link = { name = "---" flag_code = legacy_k_takrur }
+#link = { name = "---" flag_code = legacy_k_tekke }
+#link = { name = "---" flag_code = legacy_k_telingana }
+#link = { name = "---" flag_code = legacy_k_trinacria }
+#link = { name = "---" flag_code = legacy_k_vandals }
+#link = { name = "---" flag_code = legacy_k_visigoths }
+#link = { name = "---" flag_code = legacy_k_winideheim }
+#link = { name = "---" flag_code = legacy_k_xixia }
+#link = { name = "---" flag_code = legacy_k_yarlung }
+#link = { name = "---" flag_code = legacy_k_yemen }
+
+### Voltaire's Nightmare codes
+
+### Superstates Mod codes
+##### Australia
+#link = { name = "Northern Territory" flag_code = legacy_st_??? }
+#link = { name = "Queensland" flag_code = legacy_st_??? }
+##### USA
+#link = { name = "Alabama" flag_code = legacy_st_??? }
+#link = { name = "Arizona" flag_code = legacy_st_??? }
+#link = { name = "Arkansas" flag_code = legacy_st_??? }
+#link = { name = "Colorado" flag_code = legacy_st_??? }
+#link = { name = "Connecticut" flag_code = legacy_st_??? }
+#link = { name = "Delaware" flag_code = legacy_st_??? }
+#link = { name = "Idaho" flag_code = legacy_st_??? }
+#link = { name = "Indiana" flag_code = legacy_st_??? }
+#link = { name = "Iowa" flag_code = legacy_st_??? }
+#link = { name = "Kansas" flag_code = legacy_st_??? }
+#link = { name = "Kentucky" flag_code = legacy_st_??? }
+#link = { name = "Maine" flag_code = legacy_st_??? }
+#link = { name = "Maryland" flag_code = legacy_st_??? }
+#link = { name = "Massachusetts" flag_code = legacy_st_??? }
+#link = { name = "Minnesota" flag_code = legacy_st_??? }
+#link = { name = "Mississippi" flag_code = legacy_st_??? }
+#link = { name = "Missouri" flag_code = legacy_st_??? }
+#link = { name = "Montana" flag_code = legacy_st_??? }
+#link = { name = "Nebraska" flag_code = legacy_st_??? }
+#link = { name = "Nevada" flag_code = legacy_st_??? }
+#link = { name = "New Hampshire" flag_code = legacy_st_??? }
+#link = { name = "New Jersey" flag_code = legacy_st_??? }
+#link = { name = "New Mexico" flag_code = legacy_st_??? }
+#link = { name = "North Carolina" flag_code = legacy_st_??? }
+#link = { name = "North Dakota" flag_code = legacy_st_??? }
+#link = { name = "Ohio" flag_code = legacy_st_??? }
+#link = { name = "Oklahoma" flag_code = legacy_st_??? }
+#link = { name = "Pennsylvania" flag_code = legacy_st_??? }
+#link = { name = "Rhode Island" flag_code = legacy_st_??? }
+#link = { name = "South Carolina" flag_code = legacy_st_??? }
+#link = { name = "South Dakota" flag_code = legacy_st_??? }
+#link = { name = "Tennessee" flag_code = legacy_st_??? }
+#link = { name = "Utah" flag_code = legacy_st_??? }
+#link = { name = "Virginia" flag_code = legacy_st_??? }
+#link = { name = "Washington" flag_code = legacy_st_??? }
+#link = { name = "West Virginia" flag_code = legacy_st_??? }
+#link = { name = "Wisconsin" flag_code = legacy_st_??? }
+#link = { name = "Wyoming" flag_code = legacy_st_??? }
+##### Canada
+#link = { name = "New Brunswick" flag_code = legacy_st_??? }
+#link = { name = "Manitoba" flag_code = legacy_st_??? }
+#link = { name = "Prince Edward Island" flag_code = legacy_st_??? }
+#link = { name = "Saskatchewan" flag_code = legacy_st_??? }
+#link = { name = "Alberta" flag_code = legacy_st_??? }
+#link = { name = "Northwest Territories" flag_code = legacy_st_??? }
+#link = { name = "Yukon" flag_code = legacy_st_??? }
