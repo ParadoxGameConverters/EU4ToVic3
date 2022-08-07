@@ -1,5 +1,5 @@
 # Usage:
-# link = { vic3 = v2culture eu4 = eu4culture region = eu4region province = eu4provinceID owner = eu4tag }
+# link = { vic3 = v3culture eu4 = eu4culture region = eu4region province = eu4provinceID owner = eu4tag }
 # multiples of all except vic3 are allowed.
 # Note: regions can be anything that makes sense, ie. south_america_superregion, north_german_region, laponia_area
 # You can mix and match, ie. north_american_superregion + provinceid = 1240 will catch all of north america + hawaii.
@@ -194,7 +194,7 @@ link = { vic3 = hazara eu4 = mongol religion = shiite }
 link = { vic3 = azerbaijani eu4 = azerbadjani eu4 = azerbaijani }
 link = { vic3 = hazara eu4 = hazara }
 link = { vic3 = turkmen eu4 = turkmeni eu4 = hephthalite }
-link = { vic3 = mongol eu4 = mongol eu4 = chahar eu4 = khalkha eu4 = oirats eu4 = khitan eu4 = yuan_culture eu4 = altaic_colonial eu4 = khalkas eu4 = khamnigan eu4 = khorchin eu4 = tumed eu4 = uriankhai }
+link = { vic3 = mongol eu4 = mongol eu4 = chahar eu4 = khalkha eu4 = oirats eu4 = khitan eu4 = yuan_culture eu4 = altaic_colonial eu4 = khalkas eu4 = khamnigan eu4 = khorchin eu4 = tumed eu4 = uriankhai eu4 = altaic_new }
 link = { vic3 = uzbek eu4 = chorasmian eu4 = uzbek eu4 = uzbehk eu4 = karluk }
 link = { vic3 = kazak eu4 = khazak }
 link = { vic3 = kirgiz eu4 = kirgiz eu4 = kirghiz eu4 = old_kirgiz }
@@ -242,9 +242,9 @@ link = { vic3 = siouan eu4 = nakota eu4 = chiwere eu4 = osage eu4 = catawba eu4 
 link = { vic3 = algonquian eu4 = iroquois eu4 = iroquis eu4 = huron eu4 = susquehannock eu4 = erielhonan eu4 = lenape eu4 = mingwe eu4 = neutral eu4 = tuscarora eu4 = tionontate eu4 = laurentian }
 link = { vic3 = cherokee eu4 = cherokee }
 link = { vic3 = pueblo eu4 = pueblo }
+link = { vic3 = hokan eu4 = piman region = baja_california_area }
 link = { vic3 = oodham eu4 = piman eu4 = kiowa eu4 = cahuila eu4 = hopi eu4 = mayo eu4 = pima eu4 = purepechan eu4 = tarachatitian eu4 = tarahumaran }
 link = { vic3 = paiute eu4 = shoshone eu4 = ute }
-#link = { vic3 = hokan eu4 = ??? }
 link = { vic3 = comanche eu4 = comanche }
 link = { vic3 = inuit eu4 = inuit }
 link = { vic3 = inuit eu4 = kamchatkan eu4 = aleutian eu4 = inuit eu4 = yupik }
@@ -265,7 +265,7 @@ link = { vic3 = caddoan eu4 = pawnee eu4 = wichita eu4 = caddo eu4 = choctaw }
 link = { vic3 = japanese eu4 = japanese eu4 = kyushuan eu4 = togoku eu4 = chubu eu4 = chugoku eu4 = hokkokujin eu4 = japanese_colonial eu4 = kansai eu4 = kanto eu4 = koshi eu4 = kyushu eu4 = nangokujin eu4 = nantoukokujin eu4 = ryukyuan eu4 = seikokujin eu4 = shikoku eu4 = shotoujin eu4 = tohoku eu4 = toukokujin }
 link = { vic3 = manchu eu4 = manchu_new eu4 = manchu eu4 = evenk }
 link = { vic3 = han eu4 = chihan eu4 = jin eu4 = xibei eu4 = zhongyuan eu4 = shandong_culture eu4 = qing_culture eu4 = beiguoren eu4 = hanyu eu4 = tangut eu4 = gan eu4 = xiang eu4 = sichuanese eu4 = hubei eu4 = wu eu4 = jianghuai eu4 = chinese_colonial eu4 = dongguoren eu4 = lussong eu4 = minyu eu4 = nandongguoren eu4 = nanguoren eu4 = wuhan eu4 = xiguoren eu4 = yueyu eu4 = zuqun_colonial }
-link = { vic3 = korean eu4 = korean eu4 = chaoxian eu4 = baegukin eu4 = korean_colonial eu4 = namdonggukin eu4 = namgukin eu4 = seogukin }
+link = { vic3 = korean eu4 = korean eu4 = korean_new eu4 = baegukin eu4 = korean_colonial eu4 = namdonggukin eu4 = namgukin eu4 = seogukin }
 link = { vic3 = ainu eu4 = ainu eu4 = aynu }
 link = { vic3 = hakka eu4 = hakka }
 link = { vic3 = miao eu4 = miao }
@@ -275,9 +275,9 @@ link = { vic3 = yi eu4 = yi }
 link = { vic3 = yue eu4 = cantonese }
 
 # Mon Khmer - khmer, mon, vietnamese
-link = { vic3 = vietnamese eu4 = vietnamese eu4 = cham }
+link = { vic3 = vietnamese eu4 = vietnamese eu4 = vietnamese_new eu4 = cham } # Revise Cham 
 link = { vic3 = khmer eu4 = khmer eu4 = degar eu4 = khmer_colonial }
-link = { vic3 = khmu eu4 = khmu }
+link = { vic3 = khmu eu4 = lao provinceid = 2381 religion = animist }
 
 # Malay - cham, malayan, filipino, madagascan, sulawesi
 link = { vic3 = bornean eu4 = bornean }
@@ -297,13 +297,13 @@ link = { vic3 = shan eu4 = shan }
 
 # Burman - burmese, tibetan
 link = { vic3 = burmese eu4 = burmese eu4 = mon eu4 = arakanese eu4 = burman_colonial eu4 = monic }
-link = { vic3 = tibetan eu4 = zhangzhung eu4 = sumpa eu4 = tibetan eu4 = balti eu4 = bhutanese eu4 = ladakhi eu4 = tibetic_colonial }
+link = { vic3 = tibetan eu4 = zhangzhung eu4 = sumpa eu4 = tibetan eu4 = balti eu4 = bhutanese eu4 = ladakhi eu4 = tibetic_colonial vic3 = tibetan_new}
 # Bai is dynamically generated
 link = { vic3 = kachin eu4 = kachin }
 link = { vic3 = karen eu4 = karen }
 
 # Pacific - papuan, aboriginal, melanesian, moluccan
-link = { vic3 = hawaiian eu4 = polynesian provinceid = 1240 provinceid = 1997 }
+link = { vic3 = hawaiian eu4 = polynesian region = northern_polynesia_area }
 link = { vic3 = melanesian eu4 = polynesian region = melanesia_area }
 link = { vic3 = maori eu4 = polynesian region = oceanea_region }
 link = { vic3 = maori eu4 = maori }
@@ -384,11 +384,11 @@ link = { vic3 = tiv eu4 = jukun }
 link = { vic3 = azande eu4 = nubian provinceid = 1216 } # South Sudan
 link = { vic3 = nuba eu4 = nubian provinceid = 2800 } # South Sudan
 link = { vic3 = nuer eu4 = nubian provinceid = 1217 } # South Sudan
-#link = { vic3 = dinka eu4 = ??? }
+link = { vic3 = dinka eu4 = sidamo provinceid = 2759 } # Anuaks
 link = { vic3 = fur eu4 = nubian region = darfur_central_sahara_area }
 link = { vic3 = beja eu4 = nubian region = red_sea_coast_area }
 link = { vic3 = equatorial_bantu eu4 = sawabantu } # Cameroon, Gabon, EG
-#link = { vic3 = fang eu4 = ??? }
+link = { vic3 = fang eu4 = kongolese provinceid = 1165 }
 link = { vic3 = fur eu4 = foora }
 link = { vic3 = nuba eu4 = nuba }
 link = { vic3 = beja eu4 = beja }
