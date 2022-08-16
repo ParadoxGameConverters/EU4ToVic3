@@ -1663,7 +1663,10 @@ legacy_ALM = {
 	}
 }
 legacy_ALM_communist = { textured_emblem = { texture = "EU4toVic2/ALM_communist.tga" } }
-legacy_ALM_fascist = { textured_emblem = { texture = "EU4toVic2/ALM_fascist.tga" } }
+legacy_ALM_fascist = {
+	textured_emblem = { texture = "EU4toVic2/ALM_fascist.tga" }
+	sub = { parent = "censorship_mask" }	
+}
 legacy_ALM_monarchy = { textured_emblem = { texture = "EU4toVic2/ALM_monarchy.tga" } }
 legacy_ALM_republic = legacy_ALM
 legacy_ALN = {
@@ -2428,6 +2431,7 @@ legacy_ANL_fascist = {
 		instance = { scale = { 0.25 0.25 } }
 		instance = { scale = { 0.25 0.25 } position = { 0.65 0.5 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_ANL_monarchy = legacy_ANL
 legacy_ANL_republic = legacy_ANL
@@ -3190,6 +3194,7 @@ legacy_ARG_monarchy = {
 		color3 = "blue"
 		instance = { scale = { 0.5 0.5 } position = { 0.5 0.1 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_ARG_republic = legacy_ARG
 legacy_ARK = { textured_emblem = { texture = "EU4toVic2/ARK.tga" } }
@@ -3333,6 +3338,7 @@ legacy_ARN_fascist = {
 		color1 = "black"
 		instance = { scale = { 0.67 0.67 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_ARN_monarchy = legacy_ARN
 legacy_ARN_republic = {
@@ -3764,6 +3770,7 @@ legacy_ATA_fascist = {
 		color1 = "white"
 		instance = { scale = { 0.75 1.0 } position = { 0.75 0.5 } }		
 	}		
+	sub = { parent = "censorship_mask" }
 }
 legacy_ATA_monarchy = legacy_ATA
 legacy_ATA_republic = legacy_ATA
@@ -5414,8 +5421,14 @@ legacy_BIH_communist = {
  instance = { scale = { 0.8 0.8 } }
 	}
 }
-legacy_BIH_fascist = { textured_emblem = { texture = "EU4toVic2/BIH_fascist.tga" } }
-legacy_BIH_monarchy = { textured_emblem = { texture = "EU4toVic2/BIH_monarchy.tga" } }
+legacy_BIH_fascist = {
+	textured_emblem = { texture = "EU4toVic2/BIH_fascist.tga" }
+	sub = { parent = "censorship_mask" }
+}
+legacy_BIH_monarchy = {
+	textured_emblem = { texture = "EU4toVic2/BIH_monarchy.tga" }
+	sub = { parent = "censorship_mask" }
+}
 legacy_BIH_republic = legacy_BIH
 legacy_BIJ = {
 	pattern = "pattern_solid.tga"
@@ -8092,6 +8105,7 @@ legacy_CCA_fascist = {
 		instance = { scale = { 0.25 0.25 } position = { 0.575 0.425 } rotation = 45 }
 		instance = { scale = { 0.25 0.25 } position = { 0.5 0.575 } rotation = 30 }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_CCA_monarchy = legacy_CCA
 legacy_CCA_republic = legacy_CCA
@@ -8354,6 +8368,7 @@ legacy_CEL_fascist = {
 		color1 = "black"
 		instance = { scale = { 0.7 0.7 } position = { 0.33 0.5 } }
 	}
+	sub = { parent = "censorship_mask" }	
 }
 legacy_CEL_monarchy = legacy_CEL
 legacy_CEL_republic = {
@@ -10798,16 +10813,18 @@ legacy_CRT_republic = {
 		color2 = "white"
 	}
 }
-legacy_CSA = sub_CSA_canton_saltire
+legacy_CSA = {
+	sub = { parent = "sub_CSA_canton_saltire" }
+	sub = { parent = "censorship_mask" }
+}
 legacy_CSA_communist = {
-
 	pattern = "pattern_solid.tga"
 	color1 = "white"
- colored_emblem = {
- texture = "ce_solid.dds"
+	colored_emblem = {
+		texture = "ce_solid.dds"
 		color1 = "red"
- instance = { scale = { 0.5 0.67 } position = { 0.25 0.33 } }
- }
+		instance = { scale = { 0.5 0.67 } position = { 0.25 0.33 } }
+	}
 	colored_emblem = {
 		texture = "ce_bicolor_left_third.dds"
 		color1 = "red"
@@ -10843,20 +10860,21 @@ legacy_CSA_monarchy = {
 		color3 = "white"
 		instance = { scale = { 0.5 0.5 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_CSA_republic = {
-
 	pattern = "pattern_solid.tga"
 	color1 = "white"
- sub = {
- parent = "sub_CSA_canton_saltire"
- instance = { scale = { 0.5 0.67 } } # top left
- }
+	sub = {
+		parent = "sub_CSA_canton_saltire"
+		instance = { scale = { 0.5 0.67 } } # top left
+	}
 	colored_emblem = {
 		texture = "ce_bicolor_left_third.dds"
 		color1 = "red"
 		instance = { scale = { -1 1 } position = { 0.67 0.5 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_CSH = { textured_emblem = { texture = "EU4toVic2/CSH.tga" } }
 legacy_CSH_communist = {
@@ -14878,6 +14896,7 @@ legacy_c_clydesdale_fascist = {
 		color1 = "red"
 		instance = { scale = { 0.5 0.5 } position = { 0.25 0.5 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_c_clydesdale_monarchy = legacy_c_clydesdale
 legacy_c_clydesdale_republic = legacy_c_clydesdale
@@ -25978,7 +25997,10 @@ legacy_c_wien_communist = {
 	color1 = "red"
 	color2 = "white"
 }
-legacy_c_wien_fascist = { textured_emblem = { texture = "EU4toVic2/c_wien_fascist.tga" } }
+legacy_c_wien_fascist = {
+	textured_emblem = { texture = "EU4toVic2/c_wien_fascist.tga" }
+	sub = { parent = "censorship_mask" }
+}
 legacy_c_wien_monarchy = legacy_c_wien
 legacy_c_wien_republic = {
 	pattern = "pattern_horizontal_split_01.tga"
@@ -26102,7 +26124,10 @@ legacy_c_wittenberg_monarchy = legacy_c_wittenberg
 legacy_c_wittenberg_republic = legacy_c_wittenberg
 legacy_c_wolgast = { textured_emblem = { texture = "EU4toVic2/c_wolgast.tga" } }
 legacy_c_wolgast_communist = { textured_emblem = { texture = "EU4toVic2/c_wolgast_communist.tga" } }
-legacy_c_wolgast_fascist = { textured_emblem = { texture = "EU4toVic2/c_wolgast_fascist.tga" } }
+legacy_c_wolgast_fascist = {
+	textured_emblem = { texture = "EU4toVic2/c_wolgast_fascist.tga" }
+	sub = { parent = "censorship_mask" }
+}
 legacy_c_wolgast_monarchy = legacy_c_wolgast
 legacy_c_wolgast_republic = legacy_c_wolgast
 legacy_c_wolin = { textured_emblem = { texture = "EU4toVic2/c_wolin.tga" } }
@@ -35701,7 +35726,10 @@ legacy_d_satakunta_monarchy = legacy_d_satakunta
 legacy_d_satakunta_republic = legacy_d_satakunta
 legacy_d_saurashtra = { textured_emblem = { texture = "EU4toVic2/d_saurashtra.tga" } }
 legacy_d_saurashtra_communist = { textured_emblem = { texture = "EU4toVic2/d_saurashtra_communist.tga" } }
-legacy_d_saurashtra_fascist = { textured_emblem = { texture = "EU4toVic2/d_saurashtra_fascist.tga" } }
+legacy_d_saurashtra_fascist = {
+	textured_emblem = { texture = "EU4toVic2/d_saurashtra_fascist.tga" }
+	sub = { parent = "censorship_mask" }
+}
 legacy_d_saurashtra_monarchy = legacy_d_saurashtra
 legacy_d_saurashtra_republic = legacy_d_saurashtra
 legacy_d_savalu = { textured_emblem = { texture = "EU4toVic2/d_savalu.tga" } }
@@ -35731,7 +35759,10 @@ legacy_d_savonia_communist = {
 	}
 }
 legacy_d_savonia_fascist = legacy_d_savonia
-legacy_d_savonia_monarchy = { textured_emblem = { texture = "EU4toVic2/d_savonia_monarchy.tga" } }
+legacy_d_savonia_monarchy = {
+	textured_emblem = { texture = "EU4toVic2/d_savonia_monarchy.tga" } 
+	sub = { parent = "censorship_mask" }
+}
 legacy_d_savonia_republic = legacy_d_savonia
 legacy_d_saxony = legacy_SAX
 legacy_d_saxony_communist = legacy_SAX_communist
@@ -40567,6 +40598,7 @@ legacy_GER_fascist = {
 		color1 = "black"
 		instance = { scale = { 0.6 0.6 } rotation = 45 }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_GER_monarchy = {
 	pattern = "pattern_solid.tga"
@@ -43204,6 +43236,7 @@ legacy_HOH_fascist = {
 		color1 = "blue"
 		instance = { scale = { 0.6 0.6 } rotation = 45 }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_HOH_monarchy = legacy_HOH
 legacy_HOH = {
@@ -44997,7 +45030,10 @@ legacy_ISL_communist = {
 		instance = { rotation = 180 position = { 0.66 0.5 } }
 	}
 }
-legacy_ISL_fascist = { textured_emblem = { texture = "EU4toVic2/ISL_fascist.tga" } }
+legacy_ISL_fascist = {
+	textured_emblem = { texture = "EU4toVic2/ISL_fascist.tga" }
+	sub = { parent = "censorship_mask" }
+}
 legacy_ISL_monarchy = legacy_ISL
 legacy_ISL_republic = { textured_emblem = { texture = "EU4toVic2/ISL_republic.tga" } }
 legacy_ISR = {
@@ -47765,6 +47801,7 @@ legacy_KMT = {
 		color2 = "white"
 		instance = { scale = { 0.19 0.19 } position = { 0.25 0.25 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_KMT_communist = { textured_emblem = { texture = "EU4toVic2/KMT_communist.tga" } }
 legacy_KMT_fascist = {
@@ -48723,6 +48760,7 @@ legacy_KUB_fascist = {
 		color1 = "black"
 		instance = { scale = { 0.2 0.2 } position = { 0.5 0.75 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_KUB_monarchy = legacy_KUB
 legacy_KUB_republic = legacy_KUB
@@ -50093,7 +50131,10 @@ legacy_k_IMPTOCK3_olympia = {
 	}
 }
 legacy_k_IMPTOCK3_olympia_communist = { textured_emblem = { texture = "EU4toVic2/k_IMPTOCK3_olympia_communist.tga" } }
-legacy_k_IMPTOCK3_olympia_fascist = { textured_emblem = { texture = "EU4toVic2/k_IMPTOCK3_olympia_fascist.tga" } }
+legacy_k_IMPTOCK3_olympia_fascist = {
+	textured_emblem = { texture = "EU4toVic2/k_IMPTOCK3_olympia_fascist.tga" }
+	sub = { parent = "censorship_mask" }
+}
 legacy_k_IMPTOCK3_olympia_monarchy = legacy_k_IMPTOCK3_olympia
 legacy_k_IMPTOCK3_olympia_republic = legacy_k_IMPTOCK3_olympia
 legacy_k_IMPTOCK3_PAR = {
@@ -50563,6 +50604,7 @@ legacy_k_IR_DAHAE_FLAG = {
 		color1 = "orange"
 		instance = { scale = { 0.75 0.75 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_k_IR_DAHAE_FLAG_communist = legacy_k_IR_DAHAE_FLAG
 legacy_k_IR_DAHAE_FLAG_fascist = legacy_k_IR_DAHAE_FLAG
@@ -53139,6 +53181,7 @@ legacy_LDU_fascist = {
 		color1 = "black"
 		instance = { scale = { 0.6 0.6 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_LDU_monarchy = { textured_emblem = { texture = "EU4toVic2/LDU_monarchy.tga" } }
 legacy_LDU_republic = legacy_LDU
@@ -55819,6 +55862,7 @@ legacy_MCH = {
 		color2 = "white"
 		instance = { scale = { 0.19 0.19 } position = { 0.25 0.25 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_MCH_communist = { textured_emblem = { texture = "EU4toVic2/MCH_communist.tga" } }
 legacy_MCH_fascist = { textured_emblem = { texture = "EU4toVic2/MCH_fascist.tga" } }
@@ -56345,6 +56389,7 @@ legacy_MEM_fascist = {
 		color1 = "red"
 		instance = { scale = { 0.95 1.25 } position = { 0.75 0.5 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_MEM_monarchy = {
 	pattern = "pattern_solid.tga"
@@ -57081,6 +57126,7 @@ legacy_mississippi_republic = {
 		color1 = "white"
 		instance = { scale = { 0.70 0.66 } position = { 0.25 0.33 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_MIS_communist = {
 	pattern = "pattern_solid.tga"
@@ -58166,6 +58212,7 @@ legacy_MNR_fascist = {
 		instance = { scale = { 0.1 0.5 } position = { 0.95 0.75 } }
 		instance = { scale = { 0.1 0.5 } position = { 0.05 0.25 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_MNR_monarchy = { textured_emblem = { texture = "EU4toVic2/MNR_monarchy.tga" } }
 legacy_MNR_republic = legacy_MNR
@@ -62050,6 +62097,7 @@ legacy_NUM_fascist = {
 		color1 = "red"
 		instance = { position = { 1 0.5 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_NUM_monarchy = {
 	pattern = "pattern_solid.tga"
@@ -63053,6 +63101,7 @@ legacy_OSP = {
 		instance = { scale = { 1 1 } }
 		instance = { scale = { 1 1 } rotation = 45 }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_OSP_communist = {
 	pattern = "pattern_horizontal_split_01.tga"
@@ -66239,6 +66288,7 @@ legacy_QIC_republic = {
 		color1 = "white"
 		instance = { scale = { 0.19 0.19 } position = { 0.25 0.25 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_QIN = { textured_emblem = { texture = "EU4toVic2/QIN.tga" } }
 legacy_QIN_communist = {
@@ -67017,7 +67067,10 @@ legacy_RJK_communist = {
 		color1 = "white"
 	}
 }
-legacy_RJK_fascist = { textured_emblem = { texture = "EU4toVic2/RJK_fascist.tga" } }
+legacy_RJK_fascist = {
+	textured_emblem = { texture = "EU4toVic2/RJK_fascist.tga" }
+	sub = { parent = "censorship_mask" }
+}
 legacy_RJK_monarchy = legacy_RJK
 legacy_RJK_republic = {
 	pattern = "pattern_solid.tga"
@@ -67075,7 +67128,10 @@ legacy_RJP_communist = {
 		color2 = "yellow"
 	}
 }
-legacy_RJP_fascist = { textured_emblem = { texture = "EU4toVic2/RJP_fascist.tga" } }
+legacy_RJP_fascist = {
+	textured_emblem = { texture = "EU4toVic2/RJP_fascist.tga" }
+	sub = { parent = "censorship_mask" }
+}
 legacy_RJP_monarchy = legacy_RJP
 legacy_RJP_republic = legacy_RJP
 legacy_RJX = {
@@ -67524,7 +67580,10 @@ legacy_RTT_communist = {
 		color1 = "black"
 	}
 }
-legacy_RTT_fascist = { textured_emblem = { texture = "EU4toVic2/RTT_fascist.tga" } }
+legacy_RTT_fascist = {
+	textured_emblem = { texture = "EU4toVic2/RTT_fascist.tga" }
+	sub = { parent = "censorship_mask" }
+}
 legacy_RTT_monarchy = legacy_RTT
 legacy_RTT_republic = legacy_RTT
 legacy_RUM = {
@@ -68259,6 +68318,7 @@ legacy_SAT = {
 		texture = "ce_cross_wheel.dds"
 		color1 = "yellow"
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_SAT_communist = { textured_emblem = { texture = "EU4toVic2/SAT_communist.tga" } }
 legacy_SAT_fascist = { textured_emblem = { texture = "EU4toVic2/SAT_fascist.tga" } }
@@ -70162,7 +70222,10 @@ legacy_SLN_communist = {
 		color2 = "yellow"
 	}
 }
-legacy_SLN_fascist = { textured_emblem = { texture = "EU4toVic2/SLN_fascist.tga" } }
+legacy_SLN_fascist = {
+	textured_emblem = { texture = "EU4toVic2/SLN_fascist.tga" } 
+	sub = { parent = "censorship_mask" }
+}
 legacy_SLN_monarchy = legacy_SLN
 legacy_SLN_republic = { textured_emblem = { texture = "EU4toVic2/SLN_republic.tga" } }
 legacy_SLO = { textured_emblem = { texture = "EU4toVic2/SLO.tga" } }
@@ -70466,8 +70529,9 @@ legacy_SMO_communist = {
 	colored_emblem = {
 		texture = "ce_sun_peru.dds"
 		color1 = "white"
- instance = { scale = { 0.5 0.5 } position = { 0.25 0.25 } }
+		instance = { scale = { 0.5 0.5 } position = { 0.25 0.25 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_SMO_fascist = {
 	pattern = "pattern_solid.tga"
@@ -70527,6 +70591,7 @@ legacy_SMZ = {
 		color1 = "black"
 		instance = { scale = { 0.5 0.5 } position = { 0.75 0.25 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_SMZ_communist = { textured_emblem = { texture = "EU4toVic2/SMZ_communist.tga" } }
 legacy_SMZ_fascist = {
@@ -70543,6 +70608,7 @@ legacy_SMZ_fascist = {
 		color1 = "white"
 		instance = { scale = { 0.66 0.66 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_SMZ_monarchy = legacy_SMZ
 legacy_SMZ_republic = legacy_SMZ
@@ -72330,6 +72396,7 @@ legacy_SYO_fascist = {
 		color1 = "brown"
 		instance = { scale = { 0.5 0.5 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_SYO_monarchy = legacy_SYO
 legacy_SYO_republic = {
@@ -73397,7 +73464,10 @@ legacy_TIB_communist = {
 }
 legacy_TIB_fascist = { textured_emblem = { texture = "EU4toVic2/TIB_fascist.tga" } }
 legacy_TIB_monarchy = legacy_TIB
-legacy_TIB_republic = { textured_emblem = { texture = "EU4toVic2/TIB_republic.tga" } }
+legacy_TIB_republic = {
+	textured_emblem = { texture = "EU4toVic2/TIB_republic.tga" } 
+	sub = { parent = "censorship_mask" }
+}
 legacy_TID = {
 	pattern = "pattern_solid.tga"
 	color1 = "red"
@@ -75704,6 +75774,7 @@ legacy_UBH_fascist = {
 		color1 = "black"
 		instance = { scale = { 0.75 0.75 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_UBH_monarchy = { textured_emblem = { texture = "EU4toVic2/UBH_monarchy.tga" } }
 legacy_UBH_republic = legacy_UBH
@@ -75753,6 +75824,7 @@ legacy_UBV_fascist = {
 		color1 = "black"
 		instance = { scale = { 0.6 0.6 } rotation = 45 }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_UBV_monarchy = legacy_UBV
 legacy_UBV_republic = {
@@ -76689,6 +76761,7 @@ legacy_VER_fascist = {
 		instance = { scale = { 0.06 0.34 } position = { 0.32 0.22 } }
 		instance = { scale = { 0.06 0.34 } position = { 0.67 0.48 } }
 	}
+	sub = { parent = "censorship_mask" }
 }
 legacy_VER_monarchy = legacy_VER
 legacy_VER_republic = { textured_emblem = { texture = "EU4toVic2/VER_republic.tga" } }
