@@ -42854,7 +42854,10 @@ legacy_HKA_communist = { textured_emblem = { texture = "EU4toVic2/HKA_communist.
 legacy_HKA_fascist = { textured_emblem = { texture = "EU4toVic2/HKA_fascist.tga" } }
 legacy_HKA_monarchy = legacy_HKA
 legacy_HKA_republic = legacy_HKA
-legacy_HKG = { textured_emblem = { texture = "EU4toVic2/HKG.tga" } }
+legacy_HKG = {
+	textured_emblem = { texture = "EU4toVic2/HKG.tga" }
+	sub = { parent = "censorship_mask" }
+}
 legacy_HKG_communist = {
 	pattern = "pattern_horizontal_split_01.tga"
 	color1 = "black"
@@ -42875,7 +42878,10 @@ legacy_HKG_communist = {
 		instance = { scale = { 1 0.1 } }
 	}
 }
-legacy_HKG_fascist = { textured_emblem = { texture = "EU4toVic2/HKG_fascist.tga" } }
+legacy_HKG_fascist = {
+	textured_emblem = { texture = "EU4toVic2/HKG_fascist.tga" }
+	sub = { parent = "censorship_mask" }
+}
 legacy_HKG_monarchy = { textured_emblem = { texture = "EU4toVic2/HKG_monarchy.tga" } }
 legacy_HKG_republic = legacy_HKG
 legacy_HLL = {
