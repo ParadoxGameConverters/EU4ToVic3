@@ -192,19 +192,11 @@ void V3::World::outputVersion() const
 
 void V3::World::createModFile() const
 {
-	std::ofstream output("output/" + outputName + ".mod");
+	std::ofstream output("output/" + outputName + "/.metadata/metadata.json");
 	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName + ".mod");
+		throw std::runtime_error("Could not create " + outputName + "/.metadata/metadata.json");
 	Log(LogLevel::Info) << "<< Writing to: "
-							  << "output/" + outputName + ".mod";
-	outModFile(output, outputName);
-	output.close();
-
-	output.open("output/" + outputName + "/descriptor.mod");
-	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName + "/descriptor.mod");
-	Log(LogLevel::Info) << "<< Writing to: "
-							  << "output/" + outputName + "/descriptor.mod";
+							  << "output/" + outputName + "/.metadata/metadata.json";
 	outModFile(output, outputName);
 	output.close();
 }
