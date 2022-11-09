@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29613.14
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EU4toV3", "EU4toV3\EU4toV3.vcxproj", "{84ABCE0D-17FE-44A5-8684-5A8AA04E80B9}"
 	ProjectSection(ProjectDependencies) = postProject
-		{D4E43E3D-E131-466D-9AA7-704C2298EACC} = {D4E43E3D-E131-466D-9AA7-704C2298EACC}
 		{5C9FD859-DDF9-4510-8397-B329B0AE8C48} = {5C9FD859-DDF9-4510-8397-B329B0AE8C48}
+		{D4E43E3D-E131-466D-9AA7-704C2298EACC} = {D4E43E3D-E131-466D-9AA7-704C2298EACC}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EU4toV3Tests", "EU4toV3Tests\EU4toV3Tests.vcxproj", "{54DB009B-3320-4565-9489-9E713AE77900}"
@@ -15,6 +15,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EU4toV3Tests", "EU4toV3Test
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fronter", "Fronter\Fronter.vcxproj", "{D4E43E3D-E131-466D-9AA7-704C2298EACC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5C9FD859-DDF9-4510-8397-B329B0AE8C48} = {5C9FD859-DDF9-4510-8397-B329B0AE8C48}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZipLib", "commonItems\ZipLib\ZipLib.vcxproj", "{5C9FD859-DDF9-4510-8397-B329B0AE8C48}"
 EndProject
