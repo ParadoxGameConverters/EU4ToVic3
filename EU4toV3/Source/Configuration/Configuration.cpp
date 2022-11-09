@@ -116,10 +116,10 @@ void Configuration::verifyVic3Path()
 		throw std::runtime_error(Vic3Path + " does not exist!");
 	// TODO: OSX and Linux paths are speculative
 	// TODO: As a matter of fact...
-	if (!commonItems::DoesFileExist(Vic3Path + "/victoria2.exe") && !commonItems::DoesFileExist(Vic3Path + "/Vic3game") &&
+	if (!commonItems::DoesFileExist(Vic3Path + "/binaries/victoria3.exe") && !commonItems::DoesFileExist(Vic3Path + "/Vic3game") &&
 		 !commonItems::DoesFileExist(Vic3Path + "/binaries/victoria3"))
 		throw std::runtime_error(Vic3Path + " does not contain Victoria 3!");
-	if (!commonItems::DoesFileExist(Vic3Path + "/map/positions.txt"))
+	if (!commonItems::DoesFileExist(Vic3Path + "/game/map_data/provinces.png"))
 		throw std::runtime_error(Vic3Path + " does not appear to be a valid Vic3 install!");
 	Log(LogLevel::Info) << "\tVic3 install path is " << Vic3Path;
 	Vic3Path += "/game/"; // We're adding "/game/" since all we ever need from now on is in that subdirectory.
