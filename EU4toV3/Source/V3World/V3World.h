@@ -2,6 +2,7 @@
 #define WORLD_H
 #include "../EU4World/World.h"
 #include "Configuration.h"
+#include "StateManager/StateManager.h"
 
 namespace V3
 {
@@ -15,6 +16,8 @@ class World
 	Configuration::ConfigBlock configBlock;
 	commonItems::ConverterVersion converterVersion;
 	std::string outputName;
+
+	StateManager stateManager;
 
 	// output
 	void createModFile() const;

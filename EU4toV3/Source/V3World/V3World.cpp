@@ -12,6 +12,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	 outputName(configuration.getOutputName())
 {
 	Log(LogLevel::Progress) << "45 %";
+	Log(LogLevel::Info) << "* Soaking up the shine *";
+	stateManager.loadStates(V3Path);
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
 	Log(LogLevel::Info) << "-> Importing Provinces";
