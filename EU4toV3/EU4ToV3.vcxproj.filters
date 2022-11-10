@@ -231,11 +231,14 @@
     <ClCompile Include="..\commonItems\ModLoader\ModFilesystem.cpp">
       <Filter>CommonItems\ModLoader</Filter>
     </ClCompile>
-    <ClCompile Include="Source\V3World\StateManager\StateManager.cpp">
-      <Filter>Vic3World\StateManager</Filter>
+    <ClCompile Include="Source\V3World\ClayManager\ClayManager.cpp">
+      <Filter>Vic3World\ClayManager</Filter>
     </ClCompile>
-    <ClCompile Include="Source\V3World\StateManager\State.cpp">
-      <Filter>Vic3World\StateManager</Filter>
+    <ClCompile Include="Source\V3World\ClayManager\StateLoader\State.cpp">
+      <Filter>Vic3World\ClayManager\StateLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\V3World\ClayManager\StateLoader\StateLoader.cpp">
+      <Filter>Vic3World\ClayManager\StateLoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -489,11 +492,17 @@
     <ClInclude Include="..\commonItems\ModLoader\ModFilesystem.h">
       <Filter>CommonItems\ModLoader</Filter>
     </ClInclude>
-    <ClInclude Include="Source\V3World\StateManager\StateManager.h">
-      <Filter>Vic3World\StateManager</Filter>
+    <ClInclude Include="Source\V3World\ClayManager\ClayManager.h">
+      <Filter>Vic3World\ClayManager</Filter>
     </ClInclude>
-    <ClInclude Include="Source\V3World\StateManager\State.h">
-      <Filter>Vic3World\StateManager</Filter>
+    <ClInclude Include="Source\V3World\ClayManager\StateLoader\Province.h">
+      <Filter>Vic3World\ClayManager\StateLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\V3World\ClayManager\StateLoader\State.h">
+      <Filter>Vic3World\ClayManager\StateLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\V3World\ClayManager\StateLoader\StateLoader.h">
+      <Filter>Vic3World\ClayManager\StateLoader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -596,8 +605,11 @@
     <Filter Include="CommonItems\ModLoader">
       <UniqueIdentifier>{7ceb24a6-d800-4a7a-81aa-33faf3e44a12}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Vic3World\StateManager">
-      <UniqueIdentifier>{6e735c09-4f0e-49c5-9a35-39d32deee05b}</UniqueIdentifier>
+    <Filter Include="Vic3World\ClayManager">
+      <UniqueIdentifier>{0a378b7a-d1c3-4af9-a45a-15dba484c76d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vic3World\ClayManager\StateLoader">
+      <UniqueIdentifier>{6fb9a205-ea5a-4fc3-8d95-543cfe39ce01}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

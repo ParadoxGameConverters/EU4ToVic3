@@ -1,8 +1,8 @@
 #ifndef WORLD_H
 #define WORLD_H
 #include "../EU4World/World.h"
+#include "ClayManager/ClayManager.h"
 #include "Configuration.h"
-#include "StateManager/StateManager.h"
 
 namespace V3
 {
@@ -17,7 +17,7 @@ class World
 	commonItems::ConverterVersion converterVersion;
 	std::string outputName;
 
-	StateManager stateManager;
+	ClayManager clayManager;
 
 	// output
 	void createModFile() const;
