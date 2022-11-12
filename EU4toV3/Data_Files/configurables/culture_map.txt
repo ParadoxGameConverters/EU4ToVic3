@@ -1,58 +1,78 @@
 # Usage:
-# link = { vic3 = v3culture eu4 = eu4culture region = eu4region province = eu4provinceID owner = eu4tag }
+# link = { vic3 = v3culture eu4 = eu4culture region = vic3region province = vic3provinceID owner = vic3tag }
+## CULTURE GROUP: link = { vic3 = v3culture eu4group = eu4culturegroup }
+## RELIGION: link = { vic3 = v3culture eu4group = eu4culturegroup religion = vic3religion }
 # multiples of all except vic3 are allowed.
 # Note: regions can be anything that makes sense, ie. south_america_superregion, north_german_region, laponia_area
 # You can mix and match, ie. north_american_superregion + provinceid = 1240 will catch all of north america + hawaii.
 ## DO NOT have separate colonial cultures, they will be re-generated anyway!
 
-# Jewish
-link = { vic3 = ashkenazi eu4 = ashkenazi eu4 = jewish_colonial }
-link = { vic3 = israeli eu4 = israeli eu4 = aramaic }
-link = { vic3 = sephardic eu4 = sephardi eu4 = hebrew eu4 = mizrahim eu4 = mizrahi }
-# Dynamic generation for Knaanic, Magogic, Yevanic, Misrayim, Zarphatic, Laaz, Kaifeng
-
-# Germanic - North German, South German, Ashkenazi // Swiss - Swiss
+#MACROS
 @eu4_north_german = "eu4 = luxembourgish eu4 = alsatian eu4 = berliner eu4 = thuringian eu4 = colognian eu4 = varinian eu4 = rugii eu4 = pommeranian eu4 = prussian eu4 = lower_saxon eu4 = hannoverian eu4 = saxon eu4 = hessian eu4 = old_saxon eu4 = eastphalian eu4 = high_saxon eu4 = low_saxon eu4 = moselfranconian eu4 = westphalian eu4 = ripuarianfranconian eu4 = sudeten"
 @eu4_south_german = "eu4 = styrian eu4 = tirolian eu4 = franconian eu4 = swabian eu4 = rheinlaender eu4 = bavarian eu4 = austrian eu4 = eastfranconian eu4 = high_alemanisch eu4 = rhine_alemanisch eu4 = schwabisch eu4 = quadi eu4 = marcoman"
 @ck3_germani = "eu4 = lugii eu4 = feldern eu4 = baltendeutsche eu4 = schlesischdeutsch"
 
-link = { vic3 = ashkenazi @eu4_north_german @eu4_south_german @ck3_germani eu4 = german religion = jewish }
-link = { vic3 = north_german @eu4_north_german }
-link = { vic3 = south_german @eu4_south_german }
-link = { vic3 = north_german eu4 = german @ck3_germani religion = protestant }
-link = { vic3 = south_german eu4 = german @ck3_germani religion = catholic }
-link = { vic3 = weder_german eu4 = german eu4 = vandalic } # Fallback
-link = { vic3 = swiss eu4 = german region = switzerland_area region = romandie_area }
-link = { vic3 = swiss eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse }
+@north_italy_area = "region = STATE_PIEDMONT region = STATE_EMILIA region = STATE_TUSCANY region = STATE_LAZIO region = STATE_UMBRIA region = STATE_ROMAGNA region = STATE_VENETIA region = STATE_ISTRIA region = STATE_LOMBARDY region = STATE_SOUTH_TYROL"
+@south_italy_area = "region = STATE_CAMPANIA region = STATE_CALABRIA region = STATE_SICILY region = STATE_SARDINIA region = STATE_MALTA region = STATE_CORSICA region = STATE_APULIA region = STATE_ABRUZZO"
+@italian_cultures = "eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnolc eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano"
+
+##Colonial
+@canada_colony = "region = region_canada region = STATE_SASKATCHEWAN region = STATE_ALBERTA region = STATE_BRITISH_COLUMBIA region = STATE_YUKON_TERRITORY region = STATE_ALASKA"
+@usa_north_colony = "region = region_new_england region = region_the_midwest region = STATE_NORTH_DAKOTA region = STATE_SOUTH_DAKOTA region = STATE_NEBRASKA"
+@usa_south_colony = "region = region_dixie region = STATE_KANSAS region = STATE_NEW_MEXICO state = STATE_MONTANA state = STATE_WYOMING state = STATE_COLORADO region = STATE_ARIZONA"
+@usa_western_colony = "region = STATE_CALIFORNIA region = STATE_BAJA_CALIFORNIA region = STATE_WASHINGTON region = STATE_OREGON region = STATE_IDAHO region = STATE_NEVADA region = STATE_UTAH"
+#@texas_colony, No more Texan culture in VIC3
+@mexico_colony = "region = region_mexico"
+@caribbean_colony = "region = region_caribbean"
+@central_america_colony = "region = region_central_america"
+@colombia_colony = "region_gran_colombia"
+@peru_colony = "region = region_andes"
+@argentine_colony = "region_la_plata"
+@brazil_colony = "region = region_brazil"
+
+@africa_colony = "region = region_nile_basin region = region_ethiopia region = region_north_africa region = region_senegal region = region_niger region = region_congo region = region_southern_africa region = region_zanj"
+@australia_colony = "region = region_oceania region = STATE_WESTERN_NEW_GUINEA region = STATE_EASTERN_NEW_GUINEA"
+
+
+# Jewish
+link = { vic3 = ashkenazi eu4 = ashkenazi eu4 = jewish_colonial }
+link = { vic3 = israeli eu4 = israeli eu4 = aramaic }
+link = { vic3 = sephardic eu4 = sephardi eu4 = hebrew eu4 = mizrahim eu4 = mizrahi }
+##Region specific Jews
+link = { vic3 = ashkenazi eu4group = germanic religion = jewish }
+# Dynamic generation for Knaanic, Magogic, Yevanic, Misrayim, Zarphatic, Laaz, Kaifeng
 
 # Benelux - Dutch, Flemish, Wallonian
 link = { vic3 = dutch eu4 = dutch eu4 = frisian eu4 = batavian eu4 = afrikaner eu4 = tasmanian }
 link = { vic3 = flemish eu4 = flemish eu4 = brabantian }
+link = { vic3 = wallonian eu4 = wallonian eu4 = wallonian_UKS }
 
-# Scandinavian - Swedish, Danish, Norwegian, Icelandic, Sami
-##Split of Norse
-link = { vic3 = danish eu4 = norse region = skaneland_area region = jutland_area region = denmark_area  region = north_german_region }
-link = { vic3 = norwegian eu4 = norse region = northern_norway region = eastern_norway region = western_norway }
-link = { vic3 = icelandic eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = danish eu4 = faroese eu4 = norwegian eu4 = norse region = subarctic_islands_area }
-link = { vic3 = swedish eu4 = norse region = svealand_area region = norrland_area region = gotaland_area region = finland_area region = bothnia_area region = laponia_area region = vastra_gotaland_area region = ostra_svealand_area }
-## Others
+# Germanic - North German, South German, Ashkenazi // Swiss - Swiss
+link = { vic3 = swiss eu4group = germanic region = STATE_WEST_SWITZERLAND region = STATE_EAST_SWITZERLAND owner = SWI }
+link = { vic3 = swiss eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse }
+
+link = { vic3 = south_german eu4group = germanic region = region_south_germany region = region_balkans region = region_italy region = region_danubia region = region_occitania region = region_iberia region = STATE_RHINELAND region = STATE_ALSACE_LORRAINE region = STATE_FRANCHE_COMTE }
+link = { vic3 = north_german eu4group = germanic region = region_north_germany region = region_baltic region = region_poland region = region_france region = region_england region = region_north_sea_coast region = region_rhine  }
+link = { vic3 = weder_german eu4group = germanic } # Fallback
+
+# Scandinavian - Swedish, Danish, Norwegian, Icelandic, Sami, Finnish
 link = { vic3 = danish eu4 = danish eu4 = faroese eu4 = scanian eu4 = jutish eu4 = angli }
 link = { vic3 = norwegian eu4 = norwegian eu4 = anglo_norse eu4 = trondersk eu4 = vestlandsk eu4 = scandinavian_colonial eu4 = swedish_colonial }
 link = { vic3 = swedish eu4 = swedish eu4 = marisbaltician eu4 = serklandic eu4 = romsborgian eu4 = ruotsish eu4 = geat_culture eu4 = gutnish_culture eu4 = jamatland_culture eu4 = gotar eu4 = gutnish eu4 = swedish_colonial }
+link = { vic3 = finnish eu4 = finnish eu4 = finnish_colonial }
 link = { vic3 = sami eu4 = sapmi eu4 = lappish }
-# Dynamic generation for Norse (outside mappings), Elsinorian, Anglo-Norse, Norse-Gaelic, Norn Culture, Holmgardrian
 link = { vic3 = icelandic eu4 = icelandic }
 
 # British - British, Irish
 # American - Yankee, Dixie, Texan
-link = { vic3 = british eu4 = english eu4 = northumbrian eu4 = american eu4 = british_colonial eu4 = african eu4 = northern_e eu4 = south_american eu4 = american eu4 = antillean eu4 = columbian eu4 = australian eu4 = central_american }
 link = { vic3 = scottish eu4 = scottish eu4 = hibernic eu4 = orkney eu4 = shetland eu4 = lowland_scottish }
-link = { vic3 = anglo_saxon eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon }
-link = { vic3 = gaelic eu4 = scottish_celtic eu4 = manx eu4 = highland_scottish eu4 = gaelic_scottish }
+link = { vic3 = welsh eu4 = welsh eu4 = welsh_celtic eu4 = cornish eu4 = east_welsh }
+link = { vic3 = anglo_saxon eu4 = anglo_saxon eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon }
+link = { vic3 = british eu4 = english eu4 = northumbrian }
 # Dynamic generation for Pictish
 
-# Celtic - welsh, irish
-link = { vic3 = welsh eu4 = welsh eu4 = welsh_celtic eu4 = cornish eu4 = east_welsh }
+# Celtic - Gaelic, Irish
+link = { vic3 = gaelic eu4 = scottish_celtic eu4 = manx eu4 = highland_scottish eu4 = gaelic_scottish }
 link = { vic3 = irish eu4 = irish eu4 = gallawa eu4 = hiberno_norman }
 link = { vic3 = belgian eu4 = belgian eu4 = belgae eu4 = scaldic eu4 = treverian }
 link = { vic3 = gaulish eu4 = gaulish eu4 = gallic eu4 = auscian eu4 = armorican eu4 = lutetian eu4 = neustrian }
@@ -73,111 +93,102 @@ link = { vic3 = carthaginian eu4 = carthaginian eu4 = punic }
 # Dynamic generation
 
 # Italian
-@north_italy_area = "region = lombardy_area region = venetia_area region = piedmont_area region = tuscany_area region = liguria_area region = emilia_romagna_area region = central_italy_area"
-@south_italy_area = "region = sicily_area region = corsica_sardinia_area region = naples_area region = calabria_area region = apulia_area"
-@italian_cultures = "eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnolc eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano" }
-
-link = { vic3 = maltese @italian_cultures region = sicily_area region = corsica_sardinia_area religion = sunni religion = zikri religion = yazidi religion = sunni_heresy religion = shiite religion = hurufi religion = druze religion = shiite_heresy religion = ibadi religion = kharijite }
-link = { vic3 = corsican eu4 = corsican }
-link = { vic3 = north_italian eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnol }
-link = { vic3 = south_italian eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = napolitan_colonial }
-link = { vic3 = lombard eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese }
 link = { vic3 = maltese eu4 = maltese }
-link = { vic3 = north_italian @italian_cultures @north_italy_area }
-link = { vic3 = south_italian @italian_cultures }
+link = { vic3 = corsican eu4 = corsican }
+link = { vic3 = north_italian eu4group = latin @north_italy_area region = STATE_SLOVENIA region = STATE_CROATIA region = STATE_SLAVONIA region = STATE_DALMATIA region = STATE_BOSNIA region = STATE_BULGARIA region = STATE_SOUTHERN_SERBIA region = STATE_NORTHERN_SERBIA region = region_occitania region = region_south_germany region = region_france region = region_rhine region = region_danubia region = region_poland region = region_north_germany region = region_baltic region = region_england region = region_north_sea_coast }
+link = { vic3 = south_italian eu4group = latin @south_italy_area region = STATE_MONTENEGRO region = STATE_ALBANIA region = STATE_SKOPIA region = STATE_NORTHERN_THRACE region = STATE_PELOPONNESE region = STATE_IONIAN_ISLANDS region = STATE_ATTICA region = STATE_THESSALIA region = STATE_MACEDONIA region = STATE_WESTERN_THRACE region = STATE_CRETE region = STATE_WEST_AEGEAN_ISLANDS region = STATE_EASTERN_THRACE region = region_iberia }
+##Old Italian
+link = { vic3 = lombard eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese }
 
 ## Tyrrhenian
 # Dynamic generation
 
 # Iberian - castillian, catalan, galician, andalucian, portugese
 #Normal Spaniards
-link = { vic3 = spanish eu4 = castillian eu4 = leonese eu4 = asturian eu4 = balearic eu4 = spanish_colonial eu4 = hispanic eu4 = mexican eu4 = californian eu4 = norte_americano eu4 = caribean eu4 = platean eu4 = colombian eu4 = peruvian eu4 = chilian }
+link = { vic3 = spanish eu4 = castillian eu4 = leonese eu4 = asturian }
 link = { vic3 = galician eu4 = galician }
-link = { vic3 = catalan eu4 = catalan eu4 = aragonese eu4 = valencian }
-link = { vic3 = portuguese eu4 = portugese eu4 = angolan eu4 = brazilian eu4 = portugese_colonial }
-link = { vic3 = basque eu4 = basque eu4 = basque_colonial }
+link = { vic3 = catalan eu4 = catalan eu4 = aragonese eu4 = valencian eu4 = balearic }
+link = { vic3 = portuguese eu4 = portugese }
+link = { vic3 = basque eu4 = basque }
 link = { vic3 = andalucian eu4 = andalucian }
 
 # French - cosmopolitan_french, gascon, normand, aquitaine, burgundian, occitain, wallonian
-link = { vic3 = breton eu4 = breton eu4 = breton_celtic eu4 = breton_UKS eu4 = celtic_breton region = british_isles_region }
-link = { vic3 = french eu4 = cosmopolitan_french eu4 = cosmopolitan_french_UKS eu4 = normand eu4 = normand_UKS eu4 = burgundian eu4 = burgundian_UKS eu4 = poitou eu4 = angevin eu4 = anglois eu4 = arpitan eu4 = auvergnat eu4 = bourguignon eu4 = creole eu4 = francien eu4 = french_colonial eu4 = javanaise eu4 = limousin eu4 = lorrain eu4 = poitevin eu4 = vivaroaupenc eu4 = picard }
 link = { vic3 = breton eu4 = breton eu4 = breton_celtic eu4 = breton_UKS eu4 = celtic_breton }
-link = { vic3 = occitan eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = occitan_colonial eu4 = provencal eu4 = acadian eu4 = quebecois eu4 = canadian eu4 = australienne eu4 = pacifique eu4 = antartique eu4 = africaine }
-link = { vic3 = wallonian eu4 = wallonian eu4 = wallonian_UKS }
+link = { vic3 = french eu4 = cosmopolitan_french eu4 = cosmopolitan_french_UKS eu4 = normand eu4 = normand_UKS eu4 = burgundian eu4 = burgundian_UKS eu4 = poitou eu4 = angevin eu4 = anglois eu4 = arpitan eu4 = auvergnat eu4 = bourguignon eu4 = creole eu4 = francien eu4 = javanaise eu4 = limousin eu4 = lorrain eu4 = poitevin eu4 = vivaroaupenc eu4 = picard }
+link = { vic3 = occitan eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = occitan_colonial eu4 = provencal eu4 = acadian }
+##Old French
 link = { vic3 = frankish eu4 = old_frankish eu4 = frankish eu4 = septimanian eu4 = aquitanian_frankish eu4 = neustrian eu4 = burgundian_frankish eu4 = austrasian eu4 = agilolfingian }
 # Dynamic generation for Outremer
 
-# Finno Urgic - finnish, sapmi, ingrian, karelian, uralic - share colonial cultures with baltic cultures
-link = { vic3 = finnish eu4 = finnish eu4 = karelian eu4 = ingrian eu4 = finnish_colonial }
-link = { vic3 = ugrian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki }
+# Urgic - Ingrian, karelian, uralic - share colonial cultures with baltic cultures
+link = { vic3 = ugrian eu4 = karelian eu4 = ingrian eu4 = uralic eu4 = komi eu4 = samoyed eu4 = mordvin eu4 = ostyaki eu4 = meshchera eu4 = ugrorussian eu4 = bjarmian eu4 = vepsian }
 
 # Baltic - estonian, latvian, lithuanian, old_prussian/pruthenian (depending on mod used, they go into lithuanian as they're closest)
 link = { vic3 = lithuanian eu4 = lithuanian }
 link = { vic3 = pruthenian eu4 = pruthenian eu4 = old_prussian }
-link = { vic3 = latvian eu4 = latvian eu4 = kurland_culture eu4 = baltic_colonial }
+link = { vic3 = latvian eu4 = latvian eu4 = kurland_culture }
 link = { vic3 = estonian eu4 = estonian }
 
 # South Slav - croatian, serbian, bulgarian, romanian, albanian
-link = { vic3 = bosniak eu4 = croatian eu4 = serbian religion = sunni religion = shiite }
-link = { vic3 = macedonian eu4 = bulgarian region = serbia_area region = rascia_area region = macedonia_area region = northern_greece_area region = albania_area }
-link = { vic3 = macedonian eu4 = serbian eu4 = montenegrin region = macedonia_area region = bulgaria_area region = northern_greece_area region = albania_area }
+link = { vic3 = bosniak eu4 = croatian eu4 = serbian religion = muslim }
 link = { vic3 = bosniak eu4 = bosnian eu4 = bosniak }
+link = { vic3 = macedonian eu4 = bulgarian eu4 = serbian eu4 = montenegrin region = serbia_area region = rascia_area region = macedonia_area region = northern_greece_area region = albania_area }
 link = { vic3 = croat eu4 = croatian }
-link = { vic3 = serb eu4 = serbian eu4 = montenegrin eu4 = balkan_colonial }
+link = { vic3 = serb eu4 = serbian eu4 = montenegrin }
 link = { vic3 = bulgarian eu4 = sclavenian eu4 = bulgarian }
-link = { vic3 = albanian eu4 = albanian eu4 = illyrian eu4 = arbereshe }		
+link = { vic3 = albanian eu4group = albanian_g }		
 link = { vic3 = slovene eu4 = carantanian eu4 = slovene eu4 = slovenian }
 
 # West Slav - polish, schlesian, czech, slovak
-link = { vic3 = polish eu4 = mazovian eu4 = venedian eu4 = polish eu4 = west_slavic_colonial eu4 = schlesian }
+link = { vic3 = polish eu4 = mazovian eu4 = venedian eu4 = polish eu4 = schlesian }
 link = { vic3 = slovak eu4 = slovak eu4 = chrobatian }
 link = { vic3 = czech eu4 = czech eu4 = moravian eu4 = silesian }
 link = { vic3 = sorb eu4 = sorbian eu4 = polabian eu4 = sorbs eu4 = wendish eu4 = kashubian }
 # Dynamic generation for Old Pommeranian
 
 # East Slav - russian, byelorussian, ruthenian
-link = { vic3 = russian eu4 = russian eu4 = ilmenian eu4 = severian eu4 = volhynian eu4 = novgorodian eu4 = ryazanian }
-link = { vic3 = ukrainian eu4 = antean eu4 = ruthenian }
-link = { vic3 = byelorussian eu4 = byelorussian }
-#Generic Russian (split) from CK2 converted
-link = { vic3 = byelorussian eu4 = russian_culture region = white_ruthenia_area }
-link = { vic3 = byelorussian eu4 = russian_culture region = smolensk_area }
+link = { vic3 = ukrainian eu4 = antean eu4 = ruthenian eu4 = ukrainian }
 link = { vic3 = ukrainian eu4 = russian_culture region = ruthenia_region }
-link = { vic3 = ukrainian eu4 = ukrainian }
-link = { vic3 = russian eu4 = russian_culture eu4 = old_slavic eu4 = pomor eu4 = russian_colonial }
-link = { vic3 = ugrian eu4 = meshchera eu4 = ugrorussian }
+link = { vic3 = byelorussian eu4 = byelorussian }
+link = { vic3 = byelorussian eu4 = russian_culture region = white_ruthenia_area region = smolensk_area }
+link = { vic3 = russian eu4 = russian eu4 = ilmenian eu4 = severian eu4 = volhynian eu4 = novgorodian eu4 = ryazanian eu4 = russian_culture eu4 = old_slavic eu4 = pomor }
+link = { vic3 = russian eu4group = east_slavic owner = RUS } #Keep last
 
 # Carpathian - hungarian, romanian, transylvanian
 link = { vic3 = aromanian eu4 = moldovan eu4 = romanian eu4 = transylvanian eu4 = moldovian eu4 = romanian_colonial eu4 = vlach region = balkan_region }
 link = { vic3 = szekely eu4 = hungarian eu4 = magyar eu4 = szaszok region = transylvania_area region = southern_transylvania_area region = wallachia_area region = moldavia_area }
-link = { vic3 = hungarian eu4 = hungarian eu4 = magyar eu4 = magyar_colonial eu4 = szaszok }
-link = { vic3 = romanian eu4 = moldovan eu4 = romanian eu4 = transylvanian eu4 = moldovian eu4 = romanian_colonial eu4 = vlach }
+link = { vic3 = hungarian eu4 = hungarian eu4 = magyar eu4 = szaszok }
+link = { vic3 = romanian eu4 = moldovan eu4 = romanian eu4 = transylvanian eu4 = moldovian eu4 = vlach }
 
 # Dacian
 # Dynamic generation
 
 # Byzantine - greek, georgian, armenian, pontic_greek
-@eu4_greek = "eu4 = bithynian eu4 = lykian eu4 = greek eu4 = goths eu4 = pontic_greek eu4 = atlantean eu4 = spartan eu4 = athenian eu4 = cappadocian eu4 = galatian eu4 = greek_colonial eu4 = pontic eu4 = anatolian eu4 = psammodytes eu4 = mena_greek"
-link = { vic3 = sephardic @eu4_greek religion = jewish }
-link = { vic3 = greek @eu4_greek }
+link = { vic3 = sephardic eu4group = byzantine religion = jewish }
+link = { vic3 = greek eu4group = byzantine }
 # Greek splits are dynamically generated
+
+#Caucasians
 link = { vic3 = georgian eu4 = georgian }
-link = { vic3 = armenian eu4 = armenian eu4 = armenian_colonial eu4 = ge_armenian eu4 = owm_armenian }
-link = { vic3 = north_caucasian eu4 = circassian eu4 = dagestani eu4 = avar_culture eu4 = abazin eu4 = caucasian_albanian eu4 = caucasus_colonial eu4 = chechen eu4 = ossetian }
-link = { vic3 = alan eu4 = alan eu4 = scythian }
+link = { vic3 = armenian eu4 = armenian eu4 = ge_armenian eu4 = owm_armenian }
+link = { vic3 = azerbaijani eu4 = azerbadjani eu4 = azerbaijani }
+link = { vic3 = north_caucasian eu4 = circassian eu4 = dagestani eu4 = avar_culture eu4 = abazin eu4 = caucasian_albanian eu4 = chechen eu4 = ossetian }
+link = { vic3 = alan eu4 = alan }
 
 # Thracian
 # Dynamic generation
 
-# Turko Semitic - maghreb_arabic, al_misr_arabic, al_suryah_arabic, al_iraqiya_arabic, bedouin_arabic, berber, turkish, omani_culture, yemeni_culture
+# Turko Semitic - maghreb_arabic, al_misr_arabic, al_suryah_arabic, al_iraqiya_arabic, bedouin_arabic, turkish, omani_culture, yemeni_culture
+link = { vic3 = turkish eu4 = turkish eu4 = yorouk }
 link = { vic3 = misri eu4 = al_misr_arabic eu4 = egyptian_arabic eu4 = egyptian eu4 = libyan }
-link = { vic3 = mashriqi eu4 = bedouin_arabic region = mashriq_region }
-link = { vic3 = bedouin eu4 = bedouin_arabic eu4 = omani_culture eu4 = yemeni_culture eu4 = yemenite eu4 = bahrani eu4 = bedouin eu4 = hejazi eu4 = gulf_arabic eu4 = mahri_culture eu4 = hejazi_culture eu4 = najdi eu4 = omani eu4 = yemeni eu4 = arabian_colonial eu4 = sabaean }
-link = { vic3 = berber eu4 = berber eu4 = gaetuli eu4 = garamantian eu4 = tunisian eu4 = algerian eu4 = berber eu4 = gaetuli eu4 = garamantian eu4 = shilha eu4 = atlasian eu4 = garamante eu4 = numidian eu4 = zenati eu4 = guanche eu4 = berber_colonial eu4 = chleuh }
+link = { vic3 = mashriqi eu4 = bedouin_arabic eu4 = lebanese eu4 = nabatean eu4 = palestinian eu4 = al_iraqiya_arabic eu4 = al_suryah_arabic eu4 = levantine_arabic eu4 = iraqi eu4 = levantine eu4 = shami region = STATE_TRANSJORDAN region = STATE_PALESTINE region = STATE_LEBANON region = STATE_SYRIA region = STATE_ALEPPO region = STATE_DEIR_EZ_ZOR region = STATE_BAGHDAD region = STATE_BASRA region = STATE_MOSUL }
+link = { vic3 = bedouin eu4 = bedouin_arabic eu4 = omani_culture  eu4 = bahrani eu4 = bedouin eu4 = hejazi eu4 = gulf_arabic eu4 = mahri_culture eu4 = hejazi_culture eu4 = najdi eu4 = omani eu4 = sabaean }
+link = { vic3 = yemenite eu4 = yemeni eu4 = yemeni_culture eu4 = yemenite }
 #link = { vic3 = haratin eu4 = ??? }
-link = { vic3 = mashriqi eu4 = lebanese eu4 = nabatean eu4 = palestinian eu4 = al_iraqiya_arabic eu4 = al_suryah_arabic eu4 = levantine_arabic eu4 = aramaic_colonial eu4 = iraqi eu4 = levantine eu4 = mashreqi_colonial eu4 = shami }
-link = { vic3 = maghrebi eu4 = maghreb_arabic eu4 = moroccan eu4 = chaoui eu4 = fezzan_culture eu4 = tripolitanian_culture eu4 = moorish eu4 = fassi eu4 = hassaniya eu4 = kabyle eu4 = maghreb_colonial eu4 = rifain eu4 = tamazight eu4 = frencharab }
-link = { vic3 = turkish eu4 = turkish eu4 = turkish_colonial eu4 = yorouk }
+
+#Maghreb - Berber, Maghrebi
+link = { vic3 = maghrebi eu4 = maghreb_arabic eu4 = chaoui eu4 = moorish eu4 = fassi eu4 = hassaniya eu4 = fezzan_culture eu4 = tripolitanian_culture eu4 = rifain eu4 = tamazight eu4 = tunisian eu4 = algerian }
+link = { vic3 = berber eu4 = berber eu4 = moroccan eu4 = gaetuli eu4 = garamantian eu4 = kabyle eu4 = shilha eu4 = atlasian eu4 = garamante eu4 = numidian eu4 = zenati eu4 = guanche eu4 = chleuh }
 # Pecheneg and Gagauz are dynamically generated
 
 # Iranian - persian, east_persian, baluchi
@@ -191,7 +202,6 @@ link = { vic3 = baluchi eu4 = baluchi eu4 = baloch }
 
 # Altaic - azerbadjani, turkmeni, mongol, uzbehk, khazak, kirgiz, siberian, yakut, tartar
 link = { vic3 = hazara eu4 = mongol religion = shiite }
-link = { vic3 = azerbaijani eu4 = azerbadjani eu4 = azerbaijani }
 link = { vic3 = hazara eu4 = hazara }
 link = { vic3 = turkmen eu4 = turkmeni eu4 = hephthalite }
 link = { vic3 = mongol eu4 = mongol eu4 = chahar eu4 = khalkha eu4 = oirats eu4 = khitan eu4 = yuan_culture eu4 = altaic_colonial eu4 = khalkas eu4 = khamnigan eu4 = khorchin eu4 = tumed eu4 = uriankhai eu4 = altaic_new }
