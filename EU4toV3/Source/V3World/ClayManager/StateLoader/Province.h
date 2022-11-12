@@ -10,6 +10,7 @@ class Province
 	Province() = default;
 
 	[[nodiscard]] auto getName() const { return name; }
+	[[nodiscard]] auto getTerrain() const { return terrain; }
 	[[nodiscard]] auto isSea() const { return sea; }
 	[[nodiscard]] auto isLake() const { return lake; }
 	[[nodiscard]] auto isImpassable() const { return impassable; }

@@ -14,6 +14,9 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "45 %";
 	Log(LogLevel::Info) << "* Soaking up the shine *";
 	clayManager.initializeVanillaStates(V3Path);
+	clayManager.loadTerrainsIntoProvinces(V3Path);
+	clayManager.initializeSuperRegions(V3Path);
+	clayManager.loadStatesIntoSuperRegions();
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
 	Log(LogLevel::Info) << "-> Importing Provinces";

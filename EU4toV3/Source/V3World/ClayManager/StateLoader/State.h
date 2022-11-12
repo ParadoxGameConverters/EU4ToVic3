@@ -16,14 +16,12 @@ class State: commonItems::parser
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] bool containsProvince(const std::string& provinceName) const { return provinces.contains(provinceName); }
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
-	void setProvinceTerrain(const std::string& provinceName, const std::string& terrain) const { provinces.at(provinceName)->setTerrain(terrain); }
-	void setProvinceSea(const std::string& provinceName) const { provinces.at(provinceName)->setSea(); }
-	void setProvinceLake(const std::string& provinceName) const { provinces.at(provinceName)->setLake(); }
+	[[nodiscard]] bool isCoastal() const { return coastal; }
 
   private:
 	void registerKeys();
 
-	bool isCoastal = false;
+	bool coastal = false;
 	std::string name;
 	std::map<std::string, std::shared_ptr<Province>> provinces; // in xA2345A format
 };

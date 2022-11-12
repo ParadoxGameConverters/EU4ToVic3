@@ -388,6 +388,48 @@
     <ClCompile Include="..\commonItems\ModLoader\ModFilesystem.cpp">
       <Filter>ConverterFiles\commonItems\ModLoader</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\StateLoader\State.cpp">
+      <Filter>ConverterFiles\V3World\ClayManager\StateLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\StateLoader\StateLoader.cpp">
+      <Filter>ConverterFiles\V3World\ClayManager\StateLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\TerrainLoader\TerrainLoader.cpp">
+      <Filter>ConverterFiles\V3World\ClayManager\TerrainLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\SuperRegionLoader\SuperRegionLoader.cpp">
+      <Filter>ConverterFiles\V3World\ClayManager\SuperRegionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\SuperRegionLoader\V3Region.cpp">
+      <Filter>ConverterFiles\V3World\ClayManager\SuperRegionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\SuperRegionLoader\V3SuperRegion.cpp">
+      <Filter>ConverterFiles\V3World\ClayManager\SuperRegionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\ClayManager.cpp">
+      <Filter>ConverterFiles\V3World\ClayManager</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\ClayManagerTests\TerrainLoaderTests\TerrainLoaderTests.cpp">
+      <Filter>V3WorldTests\ClayManagerTests\TerrainLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\ClayManagerTests\SuperRegionLoaderTests\SuperRegionLoaderTests.cpp">
+      <Filter>V3WorldTests\ClayManagerTests\SuperRegionLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\ClayManagerTests\StateLoaderTests\StateLoaderTests.cpp">
+      <Filter>V3WorldTests\ClayManagerTests\StateLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\ClayManagerTests\StateLoaderTests\StateTests.cpp">
+      <Filter>V3WorldTests\ClayManagerTests\StateLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\ClayManagerTests\ClayManagerTests.cpp">
+      <Filter>V3WorldTests\ClayManagerTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\ClayManagerTests\SuperRegionLoaderTests\V3RegionTests.cpp">
+      <Filter>V3WorldTests\ClayManagerTests\SuperRegionLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\ClayManagerTests\SuperRegionLoaderTests\V3SuperRegionTests.cpp">
+      <Filter>V3WorldTests\ClayManagerTests\SuperRegionLoaderTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -627,6 +669,42 @@
     <Filter Include="TestFiles\vic3installation\game\map_data">
       <UniqueIdentifier>{8a2dd58b-b17a-4e98-a372-df0fc57ace5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\V3World\ClayManager">
+      <UniqueIdentifier>{6c20af96-8c87-42d8-8773-a8cf9d4fd038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\ClayManager\SuperRegionLoader">
+      <UniqueIdentifier>{a64cd248-6710-4098-b570-d705d46088cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\ClayManager\TerrainLoader">
+      <UniqueIdentifier>{fe75bea0-1d44-43eb-9cff-2a8e7285fbbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\ClayManager\StateLoader">
+      <UniqueIdentifier>{9535d371-4a57-42a1-a9ba-a3dd16763e71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests">
+      <UniqueIdentifier>{33a9c988-04ed-4cc2-a2ad-344454122c07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\ClayManagerTests">
+      <UniqueIdentifier>{602e8f77-1022-4025-bde9-406b90a08b71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\ClayManagerTests\StateLoaderTests">
+      <UniqueIdentifier>{4a126352-ab05-42ad-9d3a-58bb93b2b232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\ClayManagerTests\SuperRegionLoaderTests">
+      <UniqueIdentifier>{8f1d51cf-85b8-4024-b7ec-9d95ddfc514f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\ClayManagerTests\TerrainLoaderTests">
+      <UniqueIdentifier>{f23e6efa-ddfe-45a8-9869-2f76ea0642db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\map_data\state_regions">
+      <UniqueIdentifier>{93fd21b3-3260-4334-81be-2b151b9d706d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common">
+      <UniqueIdentifier>{1cf3f322-7f63-422c-b202-07f8f69a89e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\strategic_regions">
+      <UniqueIdentifier>{ae049f6c-3e57-486e-aea0-d1ba0ecac49e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -669,6 +747,21 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\map_data\provinces.png">
       <Filter>TestFiles\vic3installation\game\map_data</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\map_data\state_regions\test_region.txt">
+      <Filter>TestFiles\vic3installation\game\map_data\state_regions</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\map_data\province_terrains.txt">
+      <Filter>TestFiles\vic3installation\game\map_data</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\strategic_regions\test_1_strategic_regions.txt">
+      <Filter>TestFiles\vic3installation\game\common\strategic_regions</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\strategic_regions\test_2_strategic_regions.txt">
+      <Filter>TestFiles\vic3installation\game\common\strategic_regions</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\map_data\state_regions\test_region_2.txt">
+      <Filter>TestFiles\vic3installation\game\map_data\state_regions</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

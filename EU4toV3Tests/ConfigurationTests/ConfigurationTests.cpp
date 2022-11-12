@@ -1,5 +1,4 @@
 #include "Configuration.h"
-#include "OSCompatibilityLayer.h"
 #include "gtest/gtest.h"
 
 TEST(ConfigurationTests, BrokenEU4PathThrowsException)

@@ -17,7 +17,6 @@ class StateLoader: commonItems::parser
 
   private:
 	void registerKeys();
-	void registerTerrainKeys();
 
 	std::map<std::string, std::shared_ptr<State>> states;
 };

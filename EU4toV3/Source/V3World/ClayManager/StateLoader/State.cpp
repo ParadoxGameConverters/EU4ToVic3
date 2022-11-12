@@ -46,7 +46,7 @@ void V3::State::registerKeys()
 	});
 	registerKeyword("naval_exit_id", [this](const std::string& unused, std::istream& theStream) {
 		commonItems::ignoreItem(unused, theStream);
-		isCoastal = true;
+		coastal = true;
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
