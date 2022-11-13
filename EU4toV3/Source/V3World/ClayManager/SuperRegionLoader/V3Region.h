@@ -15,7 +15,7 @@ class Region: commonItems::parser
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getStates() const { return states; }
 	[[nodiscard]] bool containsState(const std::string& state) const { return states.contains(state); }
-	void updateStates(const std::map<std::string, std::shared_ptr<State>>& theStates) { states = theStates; }
+	void replaceStates(const std::map<std::string, std::shared_ptr<State>>& theStates) { states = theStates; }
 
   private:
 	void registerKeys();

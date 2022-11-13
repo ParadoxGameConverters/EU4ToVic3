@@ -1,5 +1,6 @@
 #include "ClayManager/ClayManager.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
 
 TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaStates)
 {
@@ -60,6 +61,21 @@ TEST(V3World_ClayManagerTests, lakeProvincesGetFlaggedAsLakesandImpassables)
 	EXPECT_FALSE(province2->isImpassable());
 }
 
+TEST(V3World_ClayManagerTests, clayManagerComplainsForMissingProvinceTerrain)
+{
+	V3::ClayManager clayManager;
+	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
+
+	std::stringstream log;
+	std::streambuf* cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
+
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Terrain for province x345678 cannot be found.)"));
+
+	std::cout.rdbuf(cout_buffer);
+}
+
 
 TEST(V3World_ClayManagerTests, clayManagerCanInitializeSuperRegions)
 {
@@ -92,4 +108,25 @@ TEST(V3World_ClayManagerTests, clayManagerCanLinkStatesToSuperRegions)
 	EXPECT_TRUE(state_test_1);
 	EXPECT_EQ(3, state_test_1->getProvinces().size());
 	EXPECT_TRUE(state_test_1->getProvinces().at("x445566")->isImpassable());
+}
+
+TEST(V3World_ClayManagerTests, excessSuperRegionStatesInRegionsAreObjectedAndRemoved)
+{
+	V3::ClayManager clayManager;
+	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
+	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+
+	std::stringstream log;
+	std::streambuf* cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+
+	clayManager.loadStatesIntoSuperRegions();
+
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Attempting to assign state STATE_TEST_EXCESS which doesn't exist to region region_c!)"));
+
+	std::cout.rdbuf(cout_buffer);
+
+	const auto& region_c = clayManager.getSuperRegions().at("test_2_strategic_regions")->getRegions().at("region_c");
+
+	EXPECT_FALSE(region_c->containsState("STATE_TEST_EXCESS"));
 }

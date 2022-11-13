@@ -22,7 +22,7 @@ class Province
 		impassable = true;
 	}
 	void setImpassable() { impassable = true; }
-	void setName(const std::string& theName) { terrain = theName; }
+	void setName(const std::string& theName) { name = theName; }
 	void setTerrain(const std::string& theTerrain) { terrain = theTerrain; }
 
   private:

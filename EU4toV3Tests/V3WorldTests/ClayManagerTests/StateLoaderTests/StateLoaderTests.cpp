@@ -38,3 +38,16 @@ TEST(V3World_StateLoaderTests, stateLoaderCanLoadStates)
 	EXPECT_TRUE(state4->containsProvince("x345678"));
 	EXPECT_TRUE(state4->containsProvince("x9ABCDE"));
 }
+
+TEST(V3World_StateLoaderTests, nonTXTfilesAreIgnored)
+{
+	V3::StateLoader stateLoader;
+
+	EXPECT_EQ(0, stateLoader.getStates().size());
+
+	stateLoader.loadStates("TestFiles/vic3installation/game/");
+
+	EXPECT_EQ(4, stateLoader.getStates().size());
+
+	EXPECT_FALSE(stateLoader.getStates().contains("STATE_TEST_5"));
+}

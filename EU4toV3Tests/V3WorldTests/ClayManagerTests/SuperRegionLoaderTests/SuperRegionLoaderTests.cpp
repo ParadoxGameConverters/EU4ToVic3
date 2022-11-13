@@ -30,3 +30,14 @@ TEST(V3World_V3SuperRegionLoaderTests, superRegionLoaderCanLoadFromDisk)
 	EXPECT_TRUE(region_b->containsState("STATE_TEST_3"));
 	EXPECT_TRUE(region_c->containsState("STATE_TEST_4"));
 }
+
+TEST(V3World_V3SuperRegionLoaderTests, nonTXTfilesAreIgnored)
+{
+	V3::SuperRegionLoader superRegionLoader;
+
+	EXPECT_EQ(0, superRegionLoader.getSuperRegions().size());
+
+	superRegionLoader.loadSuperRegions("TestFiles/vic3installation/game/");
+
+	EXPECT_FALSE(superRegionLoader.getSuperRegions().contains("ignored_region"));
+}

@@ -3,6 +3,7 @@
 #include "StateLoader/StateLoader.h"
 #include "SuperRegionLoader/SuperRegionLoader.h"
 #include "TerrainLoader/TerrainLoader.h"
+#include <numeric>
 #include <ranges>
 
 void V3::ClayManager::initializeVanillaStates(const std::string& v3Path)
@@ -11,9 +12,9 @@ void V3::ClayManager::initializeVanillaStates(const std::string& v3Path)
 	stateLoader.loadStates(v3Path);
 	states = stateLoader.getStates();
 
-	auto provinceCount = 0;
-	for (const auto& state: states | std::views::values)
-		provinceCount += static_cast<int>(state->getProvinces().size());
+	const auto provinceCount = std::accumulate(states.begin(), states.end(), 0, [](int sum, const auto& state) {
+		return sum + static_cast<int>(state.second->getProvinces().size());
+	});
 	Log(LogLevel::Info) << "> " << states.size() << " states loaded with " << provinceCount << " provinces inside.";
 }
 
@@ -45,9 +46,9 @@ void V3::ClayManager::initializeSuperRegions(const std::string& v3Path)
 	superRegionLoader.loadSuperRegions(v3Path);
 	superRegions = superRegionLoader.getSuperRegions();
 
-	auto regionCount = 0;
-	for (const auto& superRegion: superRegions | std::views::values)
-		regionCount += static_cast<int>(superRegion->getRegions().size());
+	const auto regionCount = std::accumulate(superRegions.begin(), superRegions.end(), 0, [](int sum, const auto& superRegion) {
+		return sum + static_cast<int>(superRegion.second->getRegions().size());
+	});
 	Log(LogLevel::Info) << "> " << superRegions.size() << " superregions loaded with " << regionCount << " regions inside.";
 }
 
@@ -62,6 +63,6 @@ void V3::ClayManager::loadStatesIntoSuperRegions()
 					theStates.emplace(stateName, states.at(stateName));
 				else
 					Log(LogLevel::Warning) << "Attempting to assign state " << stateName << " which doesn't exist to region " << region->getName() << "!";
-			region->updateStates(theStates);
+			region->replaceStates(theStates);
 		}
 }

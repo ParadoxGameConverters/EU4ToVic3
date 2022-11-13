@@ -14,8 +14,7 @@ void V3::State::loadState(std::istream& theStream)
 void V3::State::registerKeys()
 {
 	registerKeyword("provinces", [this](std::istream& theStream) {
-		const auto theProvinces = commonItems::stringList(theStream).getStrings();
-		for (const auto& provinceName: theProvinces)
+		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{
 			auto theProvinceName = commonItems::remQuotes(provinceName);
 			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
@@ -29,8 +28,7 @@ void V3::State::registerKeys()
 		}
 	});
 	registerKeyword("impassable", [this](std::istream& theStream) {
-		const auto theProvinces = commonItems::stringList(theStream).getStrings();
-		for (const auto& provinceName: theProvinces)
+		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{
 			auto theProvinceName = commonItems::remQuotes(provinceName);
 			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
