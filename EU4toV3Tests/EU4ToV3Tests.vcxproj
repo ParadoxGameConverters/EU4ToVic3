@@ -239,6 +239,13 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\AssimilationParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperGroupMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\ClayManager.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\StateLoader\State.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\StateLoader\StateLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\SuperRegionLoader\SuperRegionLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\SuperRegionLoader\V3Region.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\SuperRegionLoader\V3SuperRegion.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\TerrainLoader\TerrainLoader.cpp" />
     <ClCompile Include="..\googletest\googlemock\src\gmock-all.cc" />
     <ClCompile Include="..\googletest\googletest\src\gtest-all.cc" />
     <ClCompile Include="..\googletest\googletest\src\gtest_main.cc" />
@@ -298,6 +305,13 @@
     <ClCompile Include="MapperTests\SuperGroupMapperTests\AssimilationParserTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperGroupMapperTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperRegionParserTests.cpp" />
+    <ClCompile Include="V3WorldTests\ClayManagerTests\ClayManagerTests.cpp" />
+    <ClCompile Include="V3WorldTests\ClayManagerTests\StateLoaderTests\StateLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\ClayManagerTests\StateLoaderTests\StateTests.cpp" />
+    <ClCompile Include="V3WorldTests\ClayManagerTests\SuperRegionLoaderTests\SuperRegionLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\ClayManagerTests\SuperRegionLoaderTests\V3RegionTests.cpp" />
+    <ClCompile Include="V3WorldTests\ClayManagerTests\SuperRegionLoaderTests\V3SuperRegionTests.cpp" />
+    <ClCompile Include="V3WorldTests\ClayManagerTests\TerrainLoaderTests\TerrainLoaderTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h" />
@@ -363,6 +377,41 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\map_data\provinces.png">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/map_data</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\map_data\state_regions\test_region.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/map_data/state_regions</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\map_data\province_terrains.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/map_data</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\strategic_regions\test_1_strategic_regions.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/strategic_regions</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\strategic_regions\test_2_strategic_regions.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/strategic_regions</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\map_data\state_regions\test_region_2.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/map_data/state_regions</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\strategic_regions\ignored_region.info">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/strategic_regions</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\map_data\state_regions\ignored_region.info">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/map_data/state_regions</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

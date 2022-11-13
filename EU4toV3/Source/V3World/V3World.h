@@ -1,6 +1,7 @@
 #ifndef WORLD_H
 #define WORLD_H
 #include "../EU4World/World.h"
+#include "ClayManager/ClayManager.h"
 #include "Configuration.h"
 
 namespace V3
@@ -15,6 +16,8 @@ class World
 	Configuration::ConfigBlock configBlock;
 	commonItems::ConverterVersion converterVersion;
 	std::string outputName;
+
+	ClayManager clayManager;
 
 	// output
 	void createModFile() const;
