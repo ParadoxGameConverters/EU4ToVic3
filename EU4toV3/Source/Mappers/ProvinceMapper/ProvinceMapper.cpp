@@ -28,7 +28,6 @@ void mappers::ProvinceMapper::registerKeys()
 			commonItems::ignoreItem(unused, theStream);
 		}
 	});
-	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
 void mappers::ProvinceMapper::createMappings()
