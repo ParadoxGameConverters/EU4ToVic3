@@ -430,6 +430,24 @@
     <ClCompile Include="V3WorldTests\ClayManagerTests\SuperRegionLoaderTests\V3SuperRegionTests.cpp">
       <Filter>V3WorldTests\ClayManagerTests\SuperRegionLoaderTests</Filter>
     </ClCompile>
+    <ClCompile Include="MapperTests\ProvinceMapperTests\ProvinceMapperTests.cpp">
+      <Filter>MapperTests\ProvinceMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\ProvinceMapperTests\ProvinceMappingsVersionTests.cpp">
+      <Filter>MapperTests\ProvinceMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\ProvinceMapperTests\ProvinceMappingTests.cpp">
+      <Filter>MapperTests\ProvinceMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMapper.cpp">
+      <Filter>ConverterFiles\Mappers\ProvinceMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMapping.cpp">
+      <Filter>ConverterFiles\Mappers\ProvinceMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMappingsVersion.cpp">
+      <Filter>ConverterFiles\Mappers\ProvinceMapper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -705,6 +723,15 @@
     <Filter Include="TestFiles\vic3installation\game\common\strategic_regions">
       <UniqueIdentifier>{ae049f6c-3e57-486e-aea0-d1ba0ecac49e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MapperTests\ProvinceMapperTests">
+      <UniqueIdentifier>{582ceffa-683f-4fcd-a3a3-8c123ae4184c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\configurables">
+      <UniqueIdentifier>{c6468281-ce5e-4d89-b7f7-b9568d1bc471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\Mappers\ProvinceMapper">
+      <UniqueIdentifier>{a8e92d2b-f2f4-41d1-8707-95d518f682bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -768,6 +795,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\map_data\state_regions\ignored_region.info">
       <Filter>TestFiles\vic3installation\game\map_data\state_regions</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\province_mappings.txt">
+      <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>
