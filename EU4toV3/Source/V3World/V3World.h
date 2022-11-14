@@ -2,8 +2,8 @@
 #define WORLD_H
 #include "../EU4World/World.h"
 #include "ClayManager/ClayManager.h"
-#include "ProvinceMapper/ProvinceMapper.h"
 #include "Configuration.h"
+#include "ProvinceMapper/ProvinceMapper.h"
 
 namespace V3
 {
