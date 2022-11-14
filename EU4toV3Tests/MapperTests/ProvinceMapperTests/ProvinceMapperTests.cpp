@@ -15,6 +15,16 @@ TEST(Mappers_ProvinceMapperTests, mappingsCanBeLoadedAndCreated)
 	EXPECT_THAT(provinceMapper.getV3Provinces(366), testing::UnorderedElementsAre("x90A080", "x9B6D87", "x769456"));
 }
 
+TEST(Mappers_ProvinceMapperTests, mappingsForObsoleteVersionsAreIgnored)
+{
+	mappers::ProvinceMapper provinceMapper;
+	provinceMapper.loadProvinceMappings("TestFiles/configurables/province_mappings.txt");
+
+	EXPECT_TRUE(provinceMapper.getEU4Provinces("x111111").empty());
+	EXPECT_TRUE(provinceMapper.getV3Provinces(1).empty());
+}
+
+
 TEST(Mappers_ProvinceMapperTests, mappingsForDroppedEU4ProvincesAreNotCreated)
 {
 	mappers::ProvinceMapper provinceMapper;
