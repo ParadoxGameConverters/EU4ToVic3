@@ -31,10 +31,8 @@ TEST(Mappers_ProvinceMappingsVersionTests, emptyMappingsAreNotLoaded)
 TEST(Mappers_ProvinceMappingsVersionTests, MappingsCanBeLoaded)
 {
 	std::stringstream input;
-	input << "= {\n";
-	input << "	link = { eu4 = 1 eu4 = 2 vic3 = x123456 }\n";
-	input << "	link = { eu4 = 3 vic3 = xABCDEF vic3 = xFEDCBA}\n";
-	input << "}";
+	input << "link = { eu4 = 1 eu4 = 2 vic3 = x123456 }\n";
+	input << "link = { eu4 = 3 vic3 = xABCDEF vic3 = xFEDCBA}\n";
 
 	mappers::ProvinceMappingsVersion theMappingVersion(input);
 
