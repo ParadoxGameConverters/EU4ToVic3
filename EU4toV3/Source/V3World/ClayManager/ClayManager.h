@@ -29,7 +29,7 @@ class ClayManager
   private:
 	std::map<std::string, std::shared_ptr<State>> states;					// geographical entities
 	std::map<std::string, std::shared_ptr<SuperRegion>> superRegions; // geographical entities
-	std::map<std::string, std::shared_ptr<State>> provincesToStates;	// handy map for quickly referenceing states;
+	std::map<std::string, std::shared_ptr<State>> provincesToStates;	// handy map for quickly referencing states;
 
 	std::vector<std::shared_ptr<Chunk>> chunks;		  // political entities
 	std::vector<std::shared_ptr<SubState>> substates; // political entities

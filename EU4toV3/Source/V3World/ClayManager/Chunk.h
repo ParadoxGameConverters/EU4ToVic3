@@ -8,7 +8,7 @@
 #include <memory>
 #include <string>
 
-/* A Chunk is a collection of provinces defined my province_mappings.txt where a particular eu4 province maps to.
+/* A Chunk is a collection of provinces defined by province_mappings.txt where a particular eu4 province maps to.
  * Its defining attribute is the single owner these provinces belong to. From Chunks we can generate substates, when
  * we overlay this political map over a geographical map.
  *

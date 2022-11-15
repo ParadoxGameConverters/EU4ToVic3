@@ -4,8 +4,6 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
-#include "Log.h"
-
 TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaStates)
 {
 	V3::ClayManager clayManager;
@@ -183,15 +181,15 @@ TEST(V3World_ClayManagerTests, clayManagerCanGenerateSaneChunks)
 	link = { eu4 = 4 vic3 = x000005 } #wasteland->land // doesn't produce anything as wasteland isn't valid source
 	link = { eu4 = 5 vic3 = x000006 } #rnw->land // ditto, rnw isn't valid source
 	link = { eu4 = 6 eu4 = 7 vic3 = x000007 } # lake,land->lake // dropped because target lake is junk
-	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces chunk 3, lake source is dropped as not viable, lake target also dropped.
-	link = { eu4 = 10 } # land->nothing // produces nothing as there's no target.
-	link = { vic3 = x000010 } # nothing->land // produces nothing as there's no source.
+	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces chunk 3, lake source is dropped as not viable, lake target also
+	dropped. link = { eu4 = 10 } # land->nothing // produces nothing as there's no target. link = { vic3 = x000010 } # nothing->land // produces nothing as
+	there's no source.
 	*/
 
 	EXPECT_EQ(3, chunks.size());
 
 	const auto& chunk1 = chunks[0]; // sea chunk 1->x1,x2
-	const auto& chunk2 = chunks[1]; // land chunk, 2,3->x3,x4 
+	const auto& chunk2 = chunks[1]; // land chunk, 2,3->x3,x4
 	const auto& chunk3 = chunks[2]; // land chunk, 9->x8
 
 	EXPECT_TRUE(chunk1->sourceProvinces.contains(1));

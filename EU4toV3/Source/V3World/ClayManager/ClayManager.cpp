@@ -86,7 +86,7 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 
 		auto v3provinceIDs = provinceMapper.getV3Provinces(spID);
 		if (v3provinceIDs.empty())
-			continue; // skipping this chunk.
+			continue; // This province is mapped into nothing. Skip.
 
 		auto eu4ProvinceIDs = provinceMapper.getEU4Provinces(v3provinceIDs.front());
 
@@ -100,14 +100,15 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 			}
 			else
 			{
-				// Don't panic before checking if this is a wasteland or lake.
+				// Don't panic before checking if this is a wasteland or lake. We silently skip those.
 				if (!provinceManager.isProvinceDiscarded(eu4ProvinceID))
 					Log(LogLevel::Warning) << "Existing provinceMapper mapping for eu4 province " << eu4ProvinceID << " has no match in the save! Skipping.";
-				else
-					Log(LogLevel::Warning) << "Discarded eu4 province " << eu4ProvinceID << " skipping.";
 			}
 			processedEU4IDs.emplace(eu4ProvinceID);
 		}
+		// If no viable sources survive, bail on this chunk.
+		if (chunk->sourceProvinces.empty())
+			continue;
 
 		// Shove all vic3 provinces into the chunk
 		for (const auto& v3provinceID: v3provinceIDs)
@@ -135,7 +136,7 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 		if (chunk->provinces.empty())
 			continue;
 
-		// Store the chank and move on.
+		// Store the chunk and move on.
 		chunks.push_back(chunk);
 	}
 	Log(LogLevel::Info) << "<> Generated " << chunks.size() << " Clay Chunks.";
