@@ -1,6 +1,6 @@
-#include <gmock/gmock-matchers.h>
 #include "ProvinceManager/ProvinceManager.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
 
 TEST(EU4World_ProvinceManagerTests, defaultProvinceManagerIsEmpty)
 {
