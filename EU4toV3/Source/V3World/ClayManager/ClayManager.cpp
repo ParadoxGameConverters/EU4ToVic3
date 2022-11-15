@@ -12,11 +12,11 @@ void V3::ClayManager::initializeVanillaStates(const std::string& v3Path)
 	StateLoader stateLoader;
 	stateLoader.loadStates(v3Path);
 	states = stateLoader.getStates();
+	for (const auto& state: states | std::views::values)
+		for (const auto& provinceID: state->getProvinces() | std::views::keys)
+			provincesToStates.emplace(provinceID, state);
 
-	const auto provinceCount = std::accumulate(states.begin(), states.end(), 0, [](int sum, const auto& state) {
-		return sum + static_cast<int>(state.second->getProvinces().size());
-	});
-	Log(LogLevel::Info) << "<> " << states.size() << " states loaded with " << provinceCount << " provinces inside.";
+	Log(LogLevel::Info) << "<> " << states.size() << " states loaded with " << provincesToStates.size() << " provinces inside.";
 }
 
 void V3::ClayManager::loadTerrainsIntoProvinces(const std::string& v3Path)
@@ -69,4 +69,69 @@ void V3::ClayManager::loadStatesIntoSuperRegions()
 					Log(LogLevel::Warning) << "Attempting to assign state " << stateName << " which doesn't exist to region " << region->getName() << "!";
 			region->replaceStates(theStates);
 		}
+}
+
+void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapper, const EU4::ProvinceManager& provinceManager)
+{
+	Log(LogLevel::Info) << "-> Generating Clay Chunks.";
+
+	std::set<int> processedEU4IDs;
+	std::set<std::string> processedV3IDs;
+
+	// We're rolling across EU4's provinces and assigning them to chunks. We'll deal with ownership later as ownership can be shared.
+	for (const auto& [spID, sourceProvince]: provinceManager.getAllProvinces())
+	{
+		if (processedEU4IDs.contains(spID))
+			continue; // We already grabbed this province earlier in some other mapping. Skip.
+
+		auto v3provinceIDs = provinceMapper.getV3Provinces(spID);
+		if (v3provinceIDs.empty())
+			continue; // skipping this chunk.
+
+		auto eu4ProvinceIDs = provinceMapper.getEU4Provinces(v3provinceIDs.front());
+
+		auto chunk = std::make_shared<Chunk>();
+		// Shove all source provinces into the chunk.
+		for (auto eu4ProvinceID: eu4ProvinceIDs)
+		{
+			if (provinceManager.getAllProvinces().contains(eu4ProvinceID))
+			{
+				chunk->sourceProvinces.emplace(eu4ProvinceID, sourceProvince);
+			}
+			else
+			{
+				// Don't panic before checking if this is a wasteland or lake.
+				if (!provinceManager.isProvinceDiscarded(eu4ProvinceID))
+					Log(LogLevel::Warning) << "Existing provinceMapper mapping for eu4 province " << eu4ProvinceID << " has no match in the save! Skipping.";
+			}
+			processedEU4IDs.emplace(eu4ProvinceID);
+		}
+
+		// Shove all vic3 provinces into the chunk
+		for (const auto& v3provinceID: v3provinceIDs)
+		{
+			if (processedV3IDs.contains(v3provinceID))
+				continue; // We already grabbed this province earlier in some other mapping. Skip.
+
+			if (!provincesToStates.contains(v3provinceID) || !provincesToStates.at(v3provinceID)->containsProvince(v3provinceID))
+			{
+				Log(LogLevel::Warning) << "Existing provinceMapper mapping for V3 province " << v3provinceID << " has no match in reality. Skipping.";
+				continue;
+			}
+			const auto& state = provincesToStates.at(v3provinceID);
+			const auto& v3Province = state->getProvince(v3provinceID);
+			chunk->provinces.emplace(v3provinceID, v3Province);
+
+			// also mark this chunk impacting these states
+			if (!chunk->states.contains(state->getName()))
+				chunk->states.emplace(state->getName(), state);
+
+			// And file.
+			processedV3IDs.emplace(v3provinceID);
+		}
+
+		// Store the chank and move on.
+		chunks.push_back(chunk);
+	}
+	Log(LogLevel::Info) << "<> Generated " << chunks.size() << " Clay Chunks.";
 }

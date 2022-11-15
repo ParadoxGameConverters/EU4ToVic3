@@ -35,6 +35,18 @@ TEST(V3World_StateTests, provinceNamesAreUppercased)
 	EXPECT_TRUE(state.containsProvince("xABCDEF"));
 }
 
+TEST(V3World_StateTests, provincesCanBeRequisitioned)
+{
+	std::stringstream input;
+	input << "provinces = { \"xabcdef\" }\n ";
+	V3::State state;
+	state.loadState(input);
+
+	const auto& province = state.getProvince("xABCDEF");
+
+	EXPECT_EQ("xABCDEF", province->getName());
+}
+
 TEST(V3World_StateTests, invalidProvinceLengthNamesAreUppercasedAndObjected)
 {
 	std::stringstream input;

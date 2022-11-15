@@ -15,6 +15,7 @@ class State: commonItems::parser
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] bool containsProvince(const std::string& provinceName) const { return provinces.contains(provinceName); }
+	[[nodiscard]] const auto& getProvince(const std::string& provinceName) const { return provinces.at(provinceName); }
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
 	[[nodiscard]] bool isCoastal() const { return coastal; }
 

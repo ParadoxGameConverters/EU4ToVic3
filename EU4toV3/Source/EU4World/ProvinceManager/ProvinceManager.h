@@ -27,6 +27,7 @@ class ProvinceManager: commonItems::parser
 
 	[[nodiscard]] const auto& getAllProvinces() const { return provinces; }
 	[[nodiscard]] std::shared_ptr<Province> getProvince(int provinceID) const;
+	[[nodiscard]] bool isProvinceDiscarded(int provinceID) const { return discardedProvinces.contains(provinceID); }
 
 	void classifyProvinces(const RegionManager& regionManager);
 	void buildPopRatios(const DatingData& datingData, bool convertAll);
@@ -36,6 +37,7 @@ class ProvinceManager: commonItems::parser
 	void registerKeys();
 
 	std::map<int, std::shared_ptr<Province>> provinces;
+	std::map<int, std::shared_ptr<Province>> discardedProvinces; // RNW, lakes, wastelands etc. Stuff we know about but don't care for.
 
 	DefaultMapParser defaultMapParser;
 	DefinitionScraper definitionScraper;
