@@ -8,6 +8,7 @@
 
 void V3::ClayManager::initializeVanillaStates(const std::string& v3Path)
 {
+	Log(LogLevel::Info) << "-> Initializing Vanilla States and Provinces.";
 	StateLoader stateLoader;
 	stateLoader.loadStates(v3Path);
 	states = stateLoader.getStates();
@@ -15,11 +16,12 @@ void V3::ClayManager::initializeVanillaStates(const std::string& v3Path)
 	const auto provinceCount = std::accumulate(states.begin(), states.end(), 0, [](int sum, const auto& state) {
 		return sum + static_cast<int>(state.second->getProvinces().size());
 	});
-	Log(LogLevel::Info) << "> " << states.size() << " states loaded with " << provinceCount << " provinces inside.";
+	Log(LogLevel::Info) << "<> " << states.size() << " states loaded with " << provinceCount << " provinces inside.";
 }
 
 void V3::ClayManager::loadTerrainsIntoProvinces(const std::string& v3Path)
 {
+	Log(LogLevel::Info) << "-> Loading Terrains into Provinces.";
 	TerrainLoader terrainLoader;
 	terrainLoader.loadTerrains(v3Path);
 	const auto& terrains = terrainLoader.getTerrains();
@@ -42,6 +44,7 @@ void V3::ClayManager::loadTerrainsIntoProvinces(const std::string& v3Path)
 
 void V3::ClayManager::initializeSuperRegions(const std::string& v3Path)
 {
+	Log(LogLevel::Info) << "-> Initializing Regions and Superregions.";
 	SuperRegionLoader superRegionLoader;
 	superRegionLoader.loadSuperRegions(v3Path);
 	superRegions = superRegionLoader.getSuperRegions();
@@ -49,11 +52,12 @@ void V3::ClayManager::initializeSuperRegions(const std::string& v3Path)
 	const auto regionCount = std::accumulate(superRegions.begin(), superRegions.end(), 0, [](int sum, const auto& superRegion) {
 		return sum + static_cast<int>(superRegion.second->getRegions().size());
 	});
-	Log(LogLevel::Info) << "> " << superRegions.size() << " superregions loaded with " << regionCount << " regions inside.";
+	Log(LogLevel::Info) << "<> " << superRegions.size() << " superregions loaded with " << regionCount << " regions inside.";
 }
 
 void V3::ClayManager::loadStatesIntoSuperRegions()
 {
+	Log(LogLevel::Info) << "-> Loading States into Regions.";
 	for (const auto& superRegion: superRegions | std::views::values)
 		for (const auto& region: superRegion->getRegions() | std::views::values)
 		{

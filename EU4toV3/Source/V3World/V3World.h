@@ -3,6 +3,7 @@
 #include "../EU4World/World.h"
 #include "ClayManager/ClayManager.h"
 #include "Configuration.h"
+#include "ProvinceMapper/ProvinceMapper.h"
 
 namespace V3
 {
@@ -18,6 +19,7 @@ class World
 	std::string outputName;
 
 	ClayManager clayManager;
+	mappers::ProvinceMapper provinceMapper;
 
 	// output
 	void createModFile() const;

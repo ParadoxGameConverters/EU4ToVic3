@@ -1,6 +1,7 @@
 #include "ClayManager/StateLoader/State.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
+
 TEST(V3World_StateTests, nameCanBeSetAndRetrieved)
 {
 	V3::State state;
