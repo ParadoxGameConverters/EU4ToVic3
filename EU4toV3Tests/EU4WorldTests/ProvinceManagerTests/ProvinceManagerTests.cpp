@@ -1,5 +1,4 @@
 #include <gmock/gmock-matchers.h>
-
 #include "ProvinceManager/ProvinceManager.h"
 #include "gtest/gtest.h"
 
@@ -150,7 +149,6 @@ TEST(EU4World_ProvinceManagerTests, provincesCanBeDiscardedAndWarnedWhenAccessin
 
 	std::cout.rdbuf(cout_buffer);
 }
-
 
 TEST(EU4World_ProvinceManagerTests, provincesClassificationThrowsForDefinitionMismatch)
 {

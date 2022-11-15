@@ -9,7 +9,7 @@ TEST(V3World_StateLoaderTests, stateLoaderCanLoadStates)
 
 	stateLoader.loadStates("TestFiles/vic3installation/game/");
 
-	EXPECT_EQ(4, stateLoader.getStates().size());
+	EXPECT_EQ(9, stateLoader.getStates().size());
 
 	const auto& state1 = stateLoader.getStates().at("STATE_TEST_1");
 	const auto& state2 = stateLoader.getStates().at("STATE_TEST_2");
@@ -47,7 +47,7 @@ TEST(V3World_StateLoaderTests, nonTXTfilesAreIgnored)
 
 	stateLoader.loadStates("TestFiles/vic3installation/game/");
 
-	EXPECT_EQ(4, stateLoader.getStates().size());
+	EXPECT_EQ(9, stateLoader.getStates().size());
 
 	EXPECT_FALSE(stateLoader.getStates().contains("STATE_TEST_5"));
 }

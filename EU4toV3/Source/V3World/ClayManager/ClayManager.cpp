@@ -103,6 +103,8 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 				// Don't panic before checking if this is a wasteland or lake.
 				if (!provinceManager.isProvinceDiscarded(eu4ProvinceID))
 					Log(LogLevel::Warning) << "Existing provinceMapper mapping for eu4 province " << eu4ProvinceID << " has no match in the save! Skipping.";
+				else
+					Log(LogLevel::Warning) << "Discarded eu4 province " << eu4ProvinceID << " skipping.";
 			}
 			processedEU4IDs.emplace(eu4ProvinceID);
 		}
@@ -129,6 +131,9 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 			// And file.
 			processedV3IDs.emplace(v3provinceID);
 		}
+		// If we don't have a single target province, bail on this chunk.
+		if (chunk->provinces.empty())
+			continue;
 
 		// Store the chank and move on.
 		chunks.push_back(chunk);

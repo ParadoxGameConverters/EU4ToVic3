@@ -24,6 +24,7 @@ class ClayManager
 
 	[[nodiscard]] const auto& getStates() const { return states; }
 	[[nodiscard]] const auto& getSuperRegions() const { return superRegions; }
+	[[nodiscard]] const auto& getChunks() const { return chunks; }
 
   private:
 	std::map<std::string, std::shared_ptr<State>> states;					// geographical entities
