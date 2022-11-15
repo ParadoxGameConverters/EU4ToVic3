@@ -4,7 +4,7 @@
 #include "ProvinceManager/ProvinceManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
 #include "StateLoader/State.h"
-#include "Substate.h"
+#include "SubState.h"
 #include "SuperRegionLoader/V3SuperRegion.h"
 #include <map>
 #include <string>
