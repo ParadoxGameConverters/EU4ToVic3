@@ -6,15 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EU4toV3", "EU4toV3\EU4toV3.vcxproj", "{84ABCE0D-17FE-44A5-8684-5A8AA04E80B9}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5C9FD859-DDF9-4510-8397-B329B0AE8C48} = {5C9FD859-DDF9-4510-8397-B329B0AE8C48}
-		{D4E43E3D-E131-466D-9AA7-704C2298EACC} = {D4E43E3D-E131-466D-9AA7-704C2298EACC}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EU4toV3Tests", "EU4toV3Tests\EU4toV3Tests.vcxproj", "{54DB009B-3320-4565-9489-9E713AE77900}"
-	ProjectSection(ProjectDependencies) = postProject
-		{5C9FD859-DDF9-4510-8397-B329B0AE8C48} = {5C9FD859-DDF9-4510-8397-B329B0AE8C48}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fronter", "Fronter\Fronter.vcxproj", "{D4E43E3D-E131-466D-9AA7-704C2298EACC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5C9FD859-DDF9-4510-8397-B329B0AE8C48} = {5C9FD859-DDF9-4510-8397-B329B0AE8C48}
 	EndProjectSection
@@ -26,6 +20,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lzma", "commonItems\ZipLib\extlibs\lzma\lzma.vcxproj", "{7EAD1358-3E72-4FB6-A212-25D462B5C1E9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "commonItems\ZipLib\extlibs\zlib\zlib.vcxproj", "{BAEB16B3-DB4C-432F-9E6A-2ACADEA0691D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fronter", "Fronter.NET\Fronter.NET\Fronter.csproj", "{AA3B1586-0FD8-4E56-A6D7-85832D88EDE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +37,6 @@ Global
 		{54DB009B-3320-4565-9489-9E713AE77900}.Debug|x64.Build.0 = Debug|x64
 		{54DB009B-3320-4565-9489-9E713AE77900}.Release|x64.ActiveCfg = Release|x64
 		{54DB009B-3320-4565-9489-9E713AE77900}.Release|x64.Build.0 = Release|x64
-		{D4E43E3D-E131-466D-9AA7-704C2298EACC}.Debug|x64.ActiveCfg = Debug|x64
-		{D4E43E3D-E131-466D-9AA7-704C2298EACC}.Debug|x64.Build.0 = Debug|x64
-		{D4E43E3D-E131-466D-9AA7-704C2298EACC}.Release|x64.ActiveCfg = Release|x64
-		{D4E43E3D-E131-466D-9AA7-704C2298EACC}.Release|x64.Build.0 = Release|x64
 		{5C9FD859-DDF9-4510-8397-B329B0AE8C48}.Debug|x64.ActiveCfg = Debug|x64
 		{5C9FD859-DDF9-4510-8397-B329B0AE8C48}.Debug|x64.Build.0 = Debug|x64
 		{5C9FD859-DDF9-4510-8397-B329B0AE8C48}.Release|x64.ActiveCfg = Release|x64
@@ -61,6 +53,10 @@ Global
 		{BAEB16B3-DB4C-432F-9E6A-2ACADEA0691D}.Debug|x64.Build.0 = Debug|x64
 		{BAEB16B3-DB4C-432F-9E6A-2ACADEA0691D}.Release|x64.ActiveCfg = Release|x64
 		{BAEB16B3-DB4C-432F-9E6A-2ACADEA0691D}.Release|x64.Build.0 = Release|x64
+		{AA3B1586-0FD8-4E56-A6D7-85832D88EDE4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AA3B1586-0FD8-4E56-A6D7-85832D88EDE4}.Debug|x64.Build.0 = Debug|Any CPU
+		{AA3B1586-0FD8-4E56-A6D7-85832D88EDE4}.Release|x64.ActiveCfg = Release|Any CPU
+		{AA3B1586-0FD8-4E56-A6D7-85832D88EDE4}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
