@@ -24,10 +24,15 @@ jobs:
       id: previoustag
       uses: "WyriHaximus/github-action-get-previous-tag@v1"
       
-    - name: "Build solution"
+    - name: "Build converter"
       run: |
        cd "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\"
-       .\MSBuild.exe -m -p:Configuration=Release $Env:GITHUB_WORKSPACE\EU4toVic3.sln
+       .\MSBuild.exe -m -p:Configuration=Release $Env:GITHUB_WORKSPACE\EU4toVic3.sln --target=EU4toV3
+      
+    - name: "Build tests"
+      run: |
+       cd "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\"
+       .\MSBuild.exe -m -p:Configuration=Release $Env:GITHUB_WORKSPACE\EU4toVic3.sln --target=EU4ToV3Tests
        
     - name: "Run tests"
       run: |
@@ -84,11 +89,11 @@ jobs:
       with:
         fetch-depth: 0
         submodules: recursive
-        
-    - name: "Build solution"
+
+    - name: "Build tests"
       run: |
        cd "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\"
-       .\MSBuild.exe -m -p:Configuration=Release $Env:GITHUB_WORKSPACE\EU4toVic3.sln
+       .\MSBuild.exe -m -p:Configuration=Release $Env:GITHUB_WORKSPACE\EU4toVic3.sln --target=EU4ToV3Tests
        
     - name: "Run tests"
       run: |
