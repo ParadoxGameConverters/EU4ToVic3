@@ -47,6 +47,18 @@ TEST(V3World_StateTests, provincesCanBeRequisitioned)
 	EXPECT_EQ("xABCDEF", province->getName());
 }
 
+TEST(V3World_StateTests, InvalidProvinceRequestReturnsNullptr)
+{
+	std::stringstream input;
+	input << "provinces = { \"xabcdef\" }\n ";
+	V3::State state;
+	state.loadState(input);
+
+	const auto& province = state.getProvince("x111111");
+
+	EXPECT_EQ(nullptr, province);
+}
+
 TEST(V3World_StateTests, invalidProvinceLengthNamesAreUppercasedAndObjected)
 {
 	std::stringstream input;

@@ -123,6 +123,11 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 			}
 			const auto& state = provincesToStates.at(v3provinceID);
 			const auto& v3Province = state->getProvince(v3provinceID);
+			if (!v3Province) // ID is known but it's not initialized? This is a problem, likely due to some corruption.
+			{
+				processedV3IDs.emplace(v3provinceID);
+				continue; // bail.
+			}
 			chunk->provinces.emplace(v3provinceID, v3Province);
 
 			// also mark this chunk impacting these states
