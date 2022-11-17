@@ -151,17 +151,17 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 void V3::ClayManager::unDisputeChunkOwnership(const std::map<std::string, std::shared_ptr<EU4::Country>>& sourceCountries)
 {
 	Log(LogLevel::Info) << "-> Untangling chunk ownerships.";
-	// raw chunks can link to sourceProvinces of several owners. Entire chunk goes to the owner with mods source Development Weight.
+	// raw chunks can link to sourceProvinces of several owners. Entire chunk goes to the owner with most source Development Weight.
 	std::vector<std::shared_ptr<Chunk>> filteredChunks;
 
 	for (const auto& chunk: chunks)
 	{
-		std::map<std::string, double> ownerWeight;
+		std::map<std::string, double> ownerWeight; // ownerTag, total province weight
 		for (const auto& sourceProvince: chunk->sourceProvinces | std::views::values)
 		{
 			const auto& sourceTag = sourceProvince->getOwnerTag();
 			if (sourceTag.empty())
-				continue; // not relevant source
+				continue; // not relevant source - sea etc.
 			if (ownerWeight.contains(sourceTag))
 				ownerWeight.at(sourceTag) += sourceProvince->getProvinceWeight(); // this is RAW province weight - dev + buildings.
 			else
@@ -200,12 +200,12 @@ void V3::ClayManager::distributeChunksAcrossSubStates()
 {
 	Log(LogLevel::Info) << "-> Distributing Clay Chunks across Substates.";
 
-	// Every chunk can belong in to a number of substates. We'll now transfer provinces from a chunk according to
-	// their geographical State and create Substates. Every substate can belong to a single owner, same as chunks.
+	// Every chunk can belong to a number of substates. We'll now transfer provinces from a chunk according to
+	// their geographical State and create Substates. Every substate must belong to a single owner, same as chunks.
 	// Merging of same-owner substates within a single state is done automatically as we process the chunks.
 
-	std::map<std::string, std::map<std::string, std::map<std::string, std::shared_ptr<Province>>>> tagStateProvinces; // eu4tag->state->tag->province map.
-	std::map<std::string, std::shared_ptr<EU4::Country>> sourceOwners;
+	std::map<std::string, std::map<std::string, std::map<std::string, std::shared_ptr<Province>>>> tagStateProvinces; // eu4tag->state->province map.
+	std::map<std::string, std::shared_ptr<EU4::Country>> sourceOwners;																// eu4tag, eu4country
 
 	for (const auto& chunk: chunks)
 	{
@@ -245,7 +245,6 @@ void V3::ClayManager::distributeChunksAcrossSubStates()
 			const auto subState = std::make_shared<SubState>();
 			subState->stateName = stateName;
 			subState->sourceOwnerTag = eu4tag;
-			// first province will do.
 			subState->sourceOwner = sourceOwners.at(eu4tag);
 			subState->provinces = provinces;
 			if (!states.contains(stateName))

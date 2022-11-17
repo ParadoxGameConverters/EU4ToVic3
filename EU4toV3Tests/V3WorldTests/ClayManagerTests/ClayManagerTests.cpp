@@ -277,9 +277,15 @@ TEST(V3World_ClayManagerTests, clayManagerCanUndisputeChunkOwnership)
 
 	EXPECT_TRUE(chunk1->sourceOwner);
 	EXPECT_EQ("TAG", chunk1->sourceOwner->getTag());
+	EXPECT_TRUE(chunk1->sourceProvinces.contains(2));
+	EXPECT_TRUE(chunk1->sourceProvinces.contains(3));
+	EXPECT_TRUE(chunk1->provinces.contains("x000003"));
+	EXPECT_TRUE(chunk1->provinces.contains("x000004"));
 
 	EXPECT_TRUE(chunk2->sourceOwner);
 	EXPECT_EQ("GAT", chunk2->sourceOwner->getTag());
+	EXPECT_TRUE(chunk2->sourceProvinces.contains(9));
+	EXPECT_TRUE(chunk2->provinces.contains("x000008"));
 }
 
 TEST(V3World_ClayManagerTests, clayManagerDropsChunksBelongingToInvalidCountries)
@@ -344,10 +350,12 @@ TEST(V3World_ClayManagerTests, clayManagerDropsChunksBelongingToInvalidCountries
 
 	EXPECT_EQ(1, chunks.size());
 
-	const auto& chunk1 = chunks[0]; // land chunk, 2,3->x3,x4
+	const auto& chunk1 = chunks[0]; // land chunk, 9->x8
 
 	EXPECT_TRUE(chunk1->sourceOwner);
 	EXPECT_EQ("GAT", chunk1->sourceOwner->getTag());
+	EXPECT_TRUE(chunk1->sourceProvinces.contains(9));
+	EXPECT_TRUE(chunk1->provinces.contains("x000008"));
 }
 
 TEST(V3World_ClayManagerTests, clayManagerDropsChunksBelongingToInsaneCountries)
@@ -412,10 +420,12 @@ TEST(V3World_ClayManagerTests, clayManagerDropsChunksBelongingToInsaneCountries)
 
 	EXPECT_EQ(1, chunks.size());
 
-	const auto& chunk1 = chunks[0]; // land chunk, 2,3->x3,x4
+	const auto& chunk1 = chunks[0]; // land chunk, 9->x8
 
 	EXPECT_TRUE(chunk1->sourceOwner);
 	EXPECT_EQ("GAT", chunk1->sourceOwner->getTag());
+	EXPECT_TRUE(chunk1->sourceProvinces.contains(9));
+	EXPECT_TRUE(chunk1->provinces.contains("x000008"));
 }
 
 TEST(V3World_ClayManagerTests, clayManagerCanProduceSubstatesFromChunks)
