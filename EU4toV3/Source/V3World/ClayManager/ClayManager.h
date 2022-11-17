@@ -21,10 +21,13 @@ class ClayManager
 	void initializeSuperRegions(const std::string& v3Path);
 	void loadStatesIntoSuperRegions();
 	void generateChunks(const mappers::ProvinceMapper& provinceMapper, const EU4::ProvinceManager& provinceManager);
+	void unDisputeChunkOwnership(const std::map<std::string, std::shared_ptr<EU4::Country>>& sourceCountries);
+	void distributeChunksAcrossSubStates();
 
 	[[nodiscard]] const auto& getStates() const { return states; }
 	[[nodiscard]] const auto& getSuperRegions() const { return superRegions; }
 	[[nodiscard]] const auto& getChunks() const { return chunks; }
+	[[nodiscard]] const auto& getSubstates() const { return substates; }
 
   private:
 	std::map<std::string, std::shared_ptr<State>> states;					// geographical entities

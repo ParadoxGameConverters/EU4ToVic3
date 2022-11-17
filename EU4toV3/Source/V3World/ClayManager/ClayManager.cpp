@@ -134,8 +134,9 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 			if (!chunk->states.contains(state->getName()))
 				chunk->states.emplace(state->getName(), state);
 
-			// And file.
+			// And file both ways.
 			processedV3IDs.emplace(v3provinceID);
+			v3Province->setChunk(chunk);
 		}
 		// If we don't have a single target province, bail on this chunk.
 		if (chunk->provinces.empty())
@@ -145,4 +146,119 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 		chunks.push_back(chunk);
 	}
 	Log(LogLevel::Info) << "<> Generated " << chunks.size() << " Clay Chunks.";
+}
+
+void V3::ClayManager::unDisputeChunkOwnership(const std::map<std::string, std::shared_ptr<EU4::Country>>& sourceCountries)
+{
+	Log(LogLevel::Info) << "-> Untangling chunk ownerships.";
+	// raw chunks can link to sourceProvinces of several owners. Entire chunk goes to the owner with mods source Development Weight.
+	std::vector<std::shared_ptr<Chunk>> filteredChunks;
+
+	for (const auto& chunk: chunks)
+	{
+		std::map<std::string, double> ownerWeight;
+		for (const auto& sourceProvince: chunk->sourceProvinces | std::views::values)
+		{
+			const auto& sourceTag = sourceProvince->getOwnerTag();
+			if (sourceTag.empty())
+				continue; // not relevant source
+			if (ownerWeight.contains(sourceTag))
+				ownerWeight.at(sourceTag) += sourceProvince->getProvinceWeight(); // this is RAW province weight - dev + buildings.
+			else
+				ownerWeight.emplace(sourceTag, sourceProvince->getProvinceWeight());
+		}
+
+		// did we get anything? anyone?
+		if (ownerWeight.empty())
+			continue; // There were no owners to the provinces (possibly sea zones), so drop the chunks.
+
+		const auto newOwner = std::ranges::max_element(ownerWeight, [](std::pair<std::string, double> a, std::pair<std::string, double> b) {
+			return a.second < b.second;
+		});
+
+		// Does that owner even exist?
+		if (!sourceCountries.contains(newOwner->first))
+		{
+			Log(LogLevel::Warning) << "Chunk owner " << newOwner->first << " is invalid. Dropping chunk.";
+			continue;
+		}
+		// Sanity check
+		if (!sourceCountries.at(newOwner->first))
+		{
+			Log(LogLevel::Warning) << "Chunk owner " << newOwner->first << " is not initialized. Dropping chunk.";
+			continue;
+		}
+
+		chunk->sourceOwner = sourceCountries.at(newOwner->first);
+		filteredChunks.push_back(chunk);
+	}
+	chunks.swap(filteredChunks);
+	Log(LogLevel::Info) << "<> Untangled chunk ownerships, " << chunks.size() << " of " << filteredChunks.size() << " remain.";
+}
+
+void V3::ClayManager::distributeChunksAcrossSubStates()
+{
+	Log(LogLevel::Info) << "-> Distributing Clay Chunks across Substates.";
+
+	// Every chunk can belong in to a number of substates. We'll now transfer provinces from a chunk according to
+	// their geographical State and create Substates. Every substate can belong to a single owner, same as chunks.
+	// Merging of same-owner substates within a single state is done automatically as we process the chunks.
+
+	std::map<std::string, std::map<std::string, std::map<std::string, std::shared_ptr<Province>>>> tagStateProvinces; // eu4tag->state->tag->province map.
+	std::map<std::string, std::shared_ptr<EU4::Country>> sourceOwners;
+
+	for (const auto& chunk: chunks)
+	{
+		// build the containers
+		const auto& sourceTag = chunk->sourceOwner->getTag();
+		if (!sourceOwners.contains(sourceTag))
+			sourceOwners.emplace(sourceTag, chunk->sourceOwner);
+		if (!tagStateProvinces.contains(sourceTag))
+			tagStateProvinces.emplace(sourceTag, std::map<std::string, std::map<std::string, std::shared_ptr<Province>>>{});
+		for (const auto& stateName: chunk->states | std::views::keys)
+			if (!tagStateProvinces.at(sourceTag).contains(stateName))
+				tagStateProvinces.at(sourceTag).emplace(stateName, std::map<std::string, std::shared_ptr<Province>>{});
+
+		// and shove the provinces into baskets
+		for (const auto& [provinceName, province]: chunk->provinces)
+		{
+			if (!provincesToStates.contains(provinceName))
+			{
+				// We should have filtered all unviable provinces already when generating chunks, but better safe than sorry.
+				Log(LogLevel::Warning) << "Filtering province " << provinceName << " failed as it belongs to no state. Skipping.";
+				continue;
+			}
+			const auto& stateName = provincesToStates.at(provinceName)->getName();
+			tagStateProvinces.at(sourceTag).at(stateName).emplace(provinceName, province);
+		}
+	}
+
+	// Now build substates. Substates are divorced from chunks and no sensible direct link to original eu4 provinces can remain.
+	// That's why every province knows what chunk it belonged to and can work back from there.
+
+	for (const auto& [eu4tag, stateMap]: tagStateProvinces)
+		for (const auto& [stateName, provinces]: stateMap)
+		{
+			if (provinces.empty())
+				continue; // Unsure how this could happen, but sure, skip this substate.
+
+			const auto subState = std::make_shared<SubState>();
+			subState->stateName = stateName;
+			subState->sourceOwnerTag = eu4tag;
+			// first province will do.
+			subState->sourceOwner = sourceOwners.at(eu4tag);
+			subState->provinces = provinces;
+			if (!states.contains(stateName))
+			{
+				// wtf, should never happen.
+				Log(LogLevel::Error) << "Substate owner " << eu4tag << " wants a substate in " << stateName << " which does't exist?! Bailing on this clay!";
+				continue;
+			}
+			subState->state = states.at(stateName);
+
+			// Should be ok now.
+			substates.push_back(subState);
+		}
+
+	Log(LogLevel::Info) << "<> Substates organized, " << substates.size() << " produced.";
 }
