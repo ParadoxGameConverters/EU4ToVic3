@@ -51,6 +51,17 @@ jobs:
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
        
+    - name: Clean Release folder
+      run: |
+       rm -rf Release/
+       mkdir Release
+       
+    - name: "Build frontend"
+      uses: ./Fronter.NET/.github/actions/build_frontend
+      with:
+        fronter_dir: 'Fronter.NET'
+        release_dir: 'Release'
+       
     - name: Build solution
       run: |
        chmod u+x build_linux.sh
@@ -99,6 +110,17 @@ jobs:
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
        
+    - name: Clean Release folder
+      run: |
+       rm -rf Release/
+       mkdir Release
+       
+    - name: "Build frontend"
+      uses: ./Fronter.NET/.github/actions/build_frontend
+      with:
+        fronter_dir: 'Fronter.NET'
+        release_dir: 'Release'
+
     - name: Build solution
       run: |
        sudo apt-get update
