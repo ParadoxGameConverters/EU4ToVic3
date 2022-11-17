@@ -4,6 +4,7 @@ export CC=/usr/bin/gcc-11 &&
 export CXX=/usr/bin/g++-11 &&
 
 rm -rf Release/ &&
+mdkir Release &&
 cd EU4toV3 &&
 rm -rf build &&
 rm -rf Release-Linux &&
