@@ -48,3 +48,10 @@ void V3::State::registerKeys()
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
+
+std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& provinceName) const
+{
+	if (provinces.contains(provinceName))
+		return provinces.at(provinceName);
+	return nullptr;
+}

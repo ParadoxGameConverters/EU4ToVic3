@@ -57,11 +57,20 @@ void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)
 		}
 
 		if (defaultMapParser.isLake(provinceID)) // discard lake
+		{
+			discardedProvinces.emplace(provinceID, province);
 			continue;
+		}
 		if (defaultMapParser.isRNW(provinceID)) // discard RNW
+		{
+			discardedProvinces.emplace(provinceID, province);
 			continue;
+		}
 		if (!regionManager.provinceIsValid(provinceID)) // regionManager considers wastelands invalid, as they aren't registered.
+		{
+			discardedProvinces.emplace(provinceID, province);
 			continue;
+		}
 		if (defaultMapParser.isSea(provinceID))
 		{
 			province->setSea();

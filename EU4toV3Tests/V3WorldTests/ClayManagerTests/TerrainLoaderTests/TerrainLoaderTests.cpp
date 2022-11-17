@@ -10,7 +10,7 @@ TEST(V3World_TerrainLoaderTests, terrainLoaderCanLoadTerrains)
 
 	terrainLoader.loadTerrains("TestFiles/vic3installation/game/");
 
-	EXPECT_EQ(12, terrainLoader.getTerrains().size());
+	EXPECT_EQ(22, terrainLoader.getTerrains().size());
 
 	EXPECT_THAT(terrainLoader.getTerrains(),
 		 testing::UnorderedElementsAre(testing::Pair("x112233", "desert"),
@@ -24,7 +24,17 @@ TEST(V3World_TerrainLoaderTests, terrainLoaderCanLoadTerrains)
 			  testing::Pair("x9ABCDE", "lakes"),
 			  testing::Pair("X1111111", "test"),
 			  testing::Pair("X11111", "test"),
-			  testing::Pair("0X654321", "test")));
+			  testing::Pair("0X654321", "test"),
+			  testing::Pair("x000001", "ocean"),
+			  testing::Pair("x000002", "ocean"),
+			  testing::Pair("x000003", "plains"),
+			  testing::Pair("x000004", "plains"),
+			  testing::Pair("x000005", "plains"),
+			  testing::Pair("x000006", "plains"),
+			  testing::Pair("x000007", "lakes"),
+			  testing::Pair("x000008", "lakes"),
+			  testing::Pair("x000009", "lakes"),
+			  testing::Pair("x000010", "plains")));
 }
 
 TEST(V3World_TerrainLoaderTests, terrainLoaderUppercasesProvinceNames)
