@@ -472,7 +472,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanProduceSubstatesFromChunks)
 
 	clayManager.distributeChunksAcrossSubStates();
 
-	const auto& substates = clayManager.getSubstates();
+	const auto& substates = clayManager.getSubStates();
 
 	/*
 	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces substates 1 & 2 since x3 and x4 are in different states.

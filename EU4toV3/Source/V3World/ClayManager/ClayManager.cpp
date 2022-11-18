@@ -215,7 +215,7 @@ void V3::ClayManager::distributeChunksAcrossSubStates()
 	// Now build substates. Substates are divorced from chunks and no sensible direct link to original eu4 provinces can remain.
 	// That's why every province knows what chunk it belonged to and can work back from there.
 
-	buildSubStates(tagStateProvinces, sourceOwners);
+	substates = buildSubStates(tagStateProvinces, sourceOwners);
 
 	Log(LogLevel::Info) << "<> Substates organized, " << substates.size() << " produced.";
 }
@@ -253,8 +253,11 @@ std::pair<V3::ClayManager::EU4TagToStateToProvinceMap, V3::ClayManager::SourceOw
 	return {tagStateProvinces, sourceOwners};
 }
 
-void V3::ClayManager::buildSubStates(const EU4TagToStateToProvinceMap& tagStateProvinces, const SourceOwners& sourceOwners)
+std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::buildSubStates(const EU4TagToStateToProvinceMap& tagStateProvinces,
+	 const SourceOwners& sourceOwners) const
 {
+	std::vector<std::shared_ptr<SubState>> subStates;
+
 	for (const auto& [eu4tag, stateMap]: tagStateProvinces)
 		for (const auto& [stateName, provinces]: stateMap)
 		{
@@ -275,6 +278,8 @@ void V3::ClayManager::buildSubStates(const EU4TagToStateToProvinceMap& tagStateP
 			subState->state = states.at(stateName);
 
 			// Should be ok now.
-			substates.push_back(subState);
+			subStates.push_back(subState);
 		}
+
+	return subStates;
 }

@@ -27,7 +27,7 @@ class ClayManager
 	[[nodiscard]] const auto& getStates() const { return states; }
 	[[nodiscard]] const auto& getSuperRegions() const { return superRegions; }
 	[[nodiscard]] const auto& getChunks() const { return chunks; }
-	[[nodiscard]] const auto& getSubstates() const { return substates; }
+	[[nodiscard]] const auto& getSubStates() const { return substates; }
 
   private:
 	using ProvinceMap = std::map<std::string, std::shared_ptr<Province>>;			// v3 province name->v3 province
@@ -37,7 +37,8 @@ class ClayManager
 
 	static [[nodiscard]] std::map<std::string, double> calcChunkOwnerWeights(const std::shared_ptr<Chunk>& chunk);
 	[[nodiscard]] std::pair<EU4TagToStateToProvinceMap, SourceOwners> sortChunkProvincesIntoTagStates() const;
-	void buildSubStates(const EU4TagToStateToProvinceMap& tagStateProvinces, const SourceOwners& sourceOwners);
+	[[nodiscard]] std::vector<std::shared_ptr<SubState>> buildSubStates(const EU4TagToStateToProvinceMap& tagStateProvinces,
+		 const SourceOwners& sourceOwners) const;
 
 	std::map<std::string, std::shared_ptr<State>> states;					// geographical entities
 	std::map<std::string, std::shared_ptr<SuperRegion>> superRegions; // geographical entities
