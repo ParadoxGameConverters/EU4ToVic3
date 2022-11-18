@@ -156,23 +156,13 @@ void V3::ClayManager::unDisputeChunkOwnership(const std::map<std::string, std::s
 
 	for (const auto& chunk: chunks)
 	{
-		std::map<std::string, double> ownerWeight; // ownerTag, total province weight
-		for (const auto& sourceProvince: chunk->sourceProvinces | std::views::values)
-		{
-			const auto& sourceTag = sourceProvince->getOwnerTag();
-			if (sourceTag.empty())
-				continue; // not relevant source - sea etc.
-			if (ownerWeight.contains(sourceTag))
-				ownerWeight.at(sourceTag) += sourceProvince->getProvinceWeight(); // this is RAW province weight - dev + buildings.
-			else
-				ownerWeight.emplace(sourceTag, sourceProvince->getProvinceWeight());
-		}
+		auto ownerWeights = calcChunkOwnerWeights(chunk);
 
 		// did we get anything? anyone?
-		if (ownerWeight.empty())
+		if (ownerWeights.empty())
 			continue; // There were no owners to the provinces (possibly sea zones), so drop the chunks.
 
-		const auto newOwner = std::ranges::max_element(ownerWeight, [](std::pair<std::string, double> a, std::pair<std::string, double> b) {
+		const auto newOwner = std::ranges::max_element(ownerWeights, [](std::pair<std::string, double> a, std::pair<std::string, double> b) {
 			return a.second < b.second;
 		});
 
@@ -196,6 +186,22 @@ void V3::ClayManager::unDisputeChunkOwnership(const std::map<std::string, std::s
 	Log(LogLevel::Info) << "<> Untangled chunk ownerships, " << chunks.size() << " of " << filteredChunks.size() << " remain.";
 }
 
+std::map<std::string, double> V3::ClayManager::calcChunkOwnerWeights(const std::shared_ptr<Chunk>& chunk)
+{
+	std::map<std::string, double> ownerWeights; // ownerTag, total province weight
+	for (const auto& sourceProvince: chunk->sourceProvinces | std::views::values)
+	{
+		const auto& sourceTag = sourceProvince->getOwnerTag();
+		if (sourceTag.empty())
+			continue; // not relevant source - sea etc.
+		if (ownerWeights.contains(sourceTag))
+			ownerWeights.at(sourceTag) += sourceProvince->getProvinceWeight(); // this is RAW province weight - dev + buildings.
+		else
+			ownerWeights.emplace(sourceTag, sourceProvince->getProvinceWeight());
+	}
+	return ownerWeights;
+}
+
 void V3::ClayManager::distributeChunksAcrossSubStates()
 {
 	Log(LogLevel::Info) << "-> Distributing Clay Chunks across Substates.";
@@ -204,8 +210,20 @@ void V3::ClayManager::distributeChunksAcrossSubStates()
 	// their geographical State and create Substates. Every substate must belong to a single owner, same as chunks.
 	// Merging of same-owner substates within a single state is done automatically as we process the chunks.
 
-	std::map<std::string, std::map<std::string, std::map<std::string, std::shared_ptr<Province>>>> tagStateProvinces; // eu4tag->state->province map.
-	std::map<std::string, std::shared_ptr<EU4::Country>> sourceOwners;																// eu4tag, eu4country
+	auto [tagStateProvinces, sourceOwners] = sortChunkProvincesIntoTagStates();
+
+	// Now build substates. Substates are divorced from chunks and no sensible direct link to original eu4 provinces can remain.
+	// That's why every province knows what chunk it belonged to and can work back from there.
+
+	buildSubStates(tagStateProvinces, sourceOwners);
+
+	Log(LogLevel::Info) << "<> Substates organized, " << substates.size() << " produced.";
+}
+
+std::pair<V3::ClayManager::EU4TagToStateToProvinceMap, V3::ClayManager::SourceOwners> V3::ClayManager::sortChunkProvincesIntoTagStates() const
+{
+	SourceOwners sourceOwners;
+	EU4TagToStateToProvinceMap tagStateProvinces;
 
 	for (const auto& chunk: chunks)
 	{
@@ -232,10 +250,11 @@ void V3::ClayManager::distributeChunksAcrossSubStates()
 			tagStateProvinces.at(sourceTag).at(stateName).emplace(provinceName, province);
 		}
 	}
+	return {tagStateProvinces, sourceOwners};
+}
 
-	// Now build substates. Substates are divorced from chunks and no sensible direct link to original eu4 provinces can remain.
-	// That's why every province knows what chunk it belonged to and can work back from there.
-
+void V3::ClayManager::buildSubStates(const EU4TagToStateToProvinceMap& tagStateProvinces, const SourceOwners& sourceOwners)
+{
 	for (const auto& [eu4tag, stateMap]: tagStateProvinces)
 		for (const auto& [stateName, provinces]: stateMap)
 		{
@@ -258,6 +277,4 @@ void V3::ClayManager::distributeChunksAcrossSubStates()
 			// Should be ok now.
 			substates.push_back(subState);
 		}
-
-	Log(LogLevel::Info) << "<> Substates organized, " << substates.size() << " produced.";
 }
