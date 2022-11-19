@@ -1,3 +1,5 @@
+#include <gmock/gmock-matchers.h>
+
 #include "CountryManager/CountryLeader/EU4Leader.h"
 #include "gtest/gtest.h"
 
@@ -78,5 +80,5 @@ TEST(EU4World_EU4LeaderTests, wrongTypeThrowsWarning)
 	EXPECT_FALSE(leader.isLand());
 	std::cout.rdbuf(stdOutBuf);
 
-	EXPECT_EQ(" [WARNING] Unknown leader type troubadour\n", log.str());
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Unknown leader type troubadour)"));
 }
