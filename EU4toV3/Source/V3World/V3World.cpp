@@ -21,7 +21,12 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	clayManager.generateChunks(provinceMapper, sourceWorld.getProvinceManager());
 	clayManager.unDisputeChunkOwnership(sourceWorld.getCountryManager().getCountries());
 	clayManager.distributeChunksAcrossSubStates();
-	countryMapper.loadMappingRules("configurables/country_mappings.txt");
+	countryMapper = std::make_shared<mappers::CountryMapper>();
+	countryMapper->loadMappingRules("configurables/country_mappings.txt");
+	politicalManager.initializeVanillaCountries(V3Path);
+	politicalManager.loadCountryMapper(countryMapper);
+	politicalManager.importEU4Countries(sourceWorld.getCountryManager().getCountries());
+	clayManager.assignSubStateOwnership(politicalManager.getCountries(), *countryMapper);
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
 	Log(LogLevel::Info) << "-> Importing Provinces";

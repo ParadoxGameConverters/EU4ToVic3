@@ -9,6 +9,10 @@
 #include <map>
 #include <string>
 
+namespace mappers
+{
+class CountryMapper;
+}
 namespace V3
 {
 class ClayManager
@@ -23,6 +27,7 @@ class ClayManager
 	void generateChunks(const mappers::ProvinceMapper& provinceMapper, const EU4::ProvinceManager& provinceManager);
 	void unDisputeChunkOwnership(const std::map<std::string, std::shared_ptr<EU4::Country>>& sourceCountries);
 	void distributeChunksAcrossSubStates();
+	void assignSubStateOwnership(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper);
 
 	[[nodiscard]] const auto& getStates() const { return states; }
 	[[nodiscard]] const auto& getSuperRegions() const { return superRegions; }

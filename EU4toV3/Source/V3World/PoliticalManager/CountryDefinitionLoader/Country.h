@@ -25,12 +25,14 @@ class Country: commonItems::convenientParser
 	Country() = default;
 	void initializeCountry(std::istream& theStream);
 	void setTag(const std::string& theTag) { tag = theTag; }
+	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
+	void initializeFromEU4Country();
 
 	[[nodiscard]] const auto& getTag() const { return tag; }
 	[[nodiscard]] const auto& getVanillaData() const { return vanillaData; }
 	[[nodiscard]] const auto& getSourceCountry() const { return sourceCountry; }
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
-
+	void addSubState(const std::shared_ptr<SubState>& substate) { substates.push_back(substate); }
 
   private:
 	void registerKeys();

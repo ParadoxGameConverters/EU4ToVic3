@@ -23,7 +23,7 @@ class World
 	ClayManager clayManager;
 	mappers::ProvinceMapper provinceMapper;
 	PoliticalManager politicalManager;
-	mappers::CountryMapper countryMapper;
+	std::shared_ptr<mappers::CountryMapper> countryMapper;
 
 	// output
 	void createModFile() const;
