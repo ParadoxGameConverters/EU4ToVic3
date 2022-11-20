@@ -3,6 +3,11 @@
 #include "CountryMapping.h"
 #include "Parser.h"
 
+namespace EU4
+{
+class Country;
+}
+
 namespace mappers
 {
 class CountryMapper: commonItems::parser
@@ -12,10 +17,13 @@ class CountryMapper: commonItems::parser
 	void loadMappingRules(const std::string& filePath);
 	void loadMappingRules(std::istream& theStream);
 
-	[[nodiscard]] std::optional<std::string> getV2Tag(const std::string& eu4Tag) const;
+	[[nodiscard]] std::optional<std::string> getV3Tag(const std::string& eu4Tag) const;
 	[[nodiscard]] std::optional<std::string> getEU4Tag(const std::string& v3Tag) const;
+	[[nodiscard]] std::optional<std::string> getFlagCode(const std::string& v3Tag) const;
 	[[nodiscard]] static bool tagIsAlphaDigitDigit(const std::string& tag);
 	[[nodiscard]] static bool tagIsAlphaDigitAlphaNum(const std::string& tag);
+
+	[[nodiscard]] std::string assignV3TagToEU4Country(const std::shared_ptr<EU4::Country>& country);
 
 	[[nodiscard]] const auto& getMappingRules() const { return countryMappingRules; }
 
@@ -25,9 +33,14 @@ class CountryMapper: commonItems::parser
 	[[nodiscard]] bool tagIsAlreadyAssigned(const std::string& v3Tag) const;
 	[[nodiscard]] std::string generateNewTag();
 
+	static [[nodiscard]] bool clearLocks(const std::set<std::string>& ruleLocks, const std::set<std::string>& countryKeys);
+	static [[nodiscard]] std::optional<bool> clearBlock(const std::optional<std::string>& ruleString, const std::string& countryString);
+	void mapToTag(const std::string& eu4Tag, const std::string& v3Tag, const std::optional<std::string>& flagCode);
+
 	std::vector<CountryMapping> countryMappingRules;
 	std::map<std::string, std::string> eu4TagToV3TagMap;
 	std::map<std::string, std::string> v3TagToEU4TagMap;
+	std::map<std::string, std::string> v3FlagCodes; // v3 tag -> flagcode
 
 	char generatedV3TagPrefix = 'X';
 	int generatedV3TagSuffix = 0;
