@@ -1,4 +1,5 @@
 #include "ClayManager.h"
+#include "CountryMapper/CountryMapper.h"
 #include "Log.h"
 #include "StateLoader/StateLoader.h"
 #include "SuperRegionLoader/SuperRegionLoader.h"
@@ -282,4 +283,33 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::buildSubStates(const
 		}
 
 	return subStates;
+}
+
+void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper)
+{
+	Log(LogLevel::Info) << "-> Assigning substates to countries.";
+	std::vector<std::shared_ptr<SubState>> filteredSubstates;
+
+	for (const auto& substate: substates)
+	{
+		auto eu4tag = substate->sourceOwnerTag;
+		auto v3tag = countryMapper.getV3Tag(eu4tag);
+		if (v3tag && countries.contains(*v3tag))
+		{
+			const auto& owner = countries.at(*v3tag);
+			substate->ownerTag = *v3tag;
+			substate->owner = owner;
+			owner->addSubState(substate);
+			filteredSubstates.push_back(substate);
+		}
+		else
+		{
+			// We're ditching substates of countries we haven't imported. Unsure how that'd happen but ok.
+			Log(LogLevel::Warning) << "Substate belonging to EU4 " << eu4tag << " hasn't been mapped over? Ditching.";
+		}
+	}
+
+	substates.swap(filteredSubstates);
+
+	Log(LogLevel::Info) << "<> " << filteredSubstates.size() << " substates assigned. " << filteredSubstates.size() - substates.size() << " substates ditched.";
 }

@@ -15,11 +15,13 @@
 
 namespace V3
 {
+class Country;
 struct SubState
 {
 	std::map<std::string, std::shared_ptr<Province>> provinces; // V3 province codes
 	std::string ownerTag;													// V3 TAG
-	std::string sourceOwnerTag;											// EU4 TAG
+	std::shared_ptr<Country> owner;
+	std::string sourceOwnerTag; // EU4 TAG
 	std::shared_ptr<EU4::Country> sourceOwner;
 	std::shared_ptr<State> state; // home state
 	std::string stateName;

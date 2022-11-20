@@ -52,8 +52,20 @@ TEST(V3World_CountryTests, CountryCanBeInitializedViaVanillaData)
 TEST(V3World_CountryTests, CountryTagCanBeSetAndGet)
 {
 	V3::Country country;
-
 	country.setTag("TAG");
-
 	EXPECT_EQ("TAG", country.getTag());
+}
+
+TEST(V3World_CountryTests, CountryCanImportFromEU4)
+{
+	V3::Country country;
+	country.setTag("GAT");
+	const auto srcCountry = std::make_shared<EU4::Country>();
+	srcCountry->setTag("TAG");
+	country.setSourceCountry(srcCountry);
+
+	country.initializeFromEU4Country();
+
+	EXPECT_EQ("TAG", country.getSourceCountry()->getTag());
+	// TODO: ACTUAL CONVERSION TESTS AFTER CONVERSION IS CODED
 }

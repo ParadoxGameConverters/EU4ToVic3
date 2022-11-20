@@ -1,5 +1,6 @@
 #include "Country.h"
 #include "CommonRegexes.h"
+#include "Log.h"
 #include "ParserHelpers.h"
 
 void V3::Country::initializeCountry(std::istream& theStream)
@@ -36,4 +37,10 @@ void V3::Country::registerKeys()
 		vanillaData->is_named_from_capital = true;
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+}
+
+void V3::Country::initializeFromEU4Country()
+{
+	Log(LogLevel::Debug) << "--- Importing " << sourceCountry->getTag() << " into " << tag;
+	// some conversion here, probably.
 }
