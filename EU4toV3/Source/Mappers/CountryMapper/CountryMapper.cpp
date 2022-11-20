@@ -106,8 +106,8 @@ std::string mappers::CountryMapper::assignV3TagToEU4Country(const std::shared_pt
 	for (const auto& rule: countryMappingRules)
 	{
 		// Do we have blocking flags or reforms?
-		const bool flagLock = clearLocks(rule.getFlags(), countryFlags);
-		const bool reformLock = clearLocks(rule.getReforms(), countryReforms);
+		const bool flagLock = existsLocks(rule.getFlags(), countryFlags);
+		const bool reformLock = existsLocks(rule.getReforms(), countryReforms);
 
 		// are we clear?
 		if (flagLock || reformLock) // either blocks, we're failing.
@@ -117,8 +117,8 @@ std::string mappers::CountryMapper::assignV3TagToEU4Country(const std::shared_pt
 		if (rule.getName() || rule.getEU4Tag())
 		{
 			// Do we have a blocking name or blocking tag?
-			const auto nameBlock = clearBlock(rule.getName(), eu4Name);
-			const auto tagBlock = clearBlock(rule.getEU4Tag(), eu4Tag);
+			const auto nameBlock = existsBlock(rule.getName(), eu4Name);
+			const auto tagBlock = existsBlock(rule.getEU4Tag(), eu4Tag);
 
 			// are we clear?
 			if ((!nameBlock || *nameBlock) && (!tagBlock || *tagBlock)) // to continue we need either one of these BOTH existing and not blocking.
@@ -133,7 +133,7 @@ std::string mappers::CountryMapper::assignV3TagToEU4Country(const std::shared_pt
 	return mapToTag(eu4Tag, std::nullopt, std::nullopt);
 }
 
-bool mappers::CountryMapper::clearLocks(const std::set<std::string>& ruleLocks, const std::set<std::string>& countryKeys)
+bool mappers::CountryMapper::existsLocks(const std::set<std::string>& ruleLocks, const std::set<std::string>& countryKeys)
 {
 	bool locker = false;
 	if (!ruleLocks.empty())
@@ -149,18 +149,13 @@ bool mappers::CountryMapper::clearLocks(const std::set<std::string>& ruleLocks, 
 	return locker;
 }
 
-std::optional<bool> mappers::CountryMapper::clearBlock(const std::optional<std::string>& ruleString, const std::string& countryString)
+std::optional<bool> mappers::CountryMapper::existsBlock(const std::optional<std::string>& ruleString, const std::string& countryString)
 {
 	if (!ruleString)
 		return std::nullopt;
-	bool locker = false;
-	if (ruleString)
-	{
-		locker = true;
-		if (*ruleString == countryString)
-			locker = false;
-	}
-	return locker;
+	if (*ruleString == countryString)
+		return false;
+	return true;
 }
 
 std::string mappers::CountryMapper::mapToTag(const std::string& eu4Tag, const std::optional<std::string>& v3Tag, const std::optional<std::string>& flagCode)
