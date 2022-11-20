@@ -7,13 +7,13 @@ TEST(Mappers_CountryMapperTests, rulesCanBeLoadedInOrder)
 	mappers::CountryMapper mapper;
 	mapper.loadMappingRules("TestFiles/configurables/country_mappings.txt");
 
-	EXPECT_EQ(10, mapper.getMappingRules().size());
+	EXPECT_EQ(12, mapper.getMappingRules().size());
 	const auto& rule1 = mapper.getMappingRules()[0];
 	EXPECT_EQ("TA1", *rule1.getEU4Tag());
 	EXPECT_EQ("GA1", *rule1.getV3Tag());
-	const auto& rule10 = mapper.getMappingRules()[9];
-	EXPECT_EQ("TA8", *rule10.getEU4Tag());
-	EXPECT_EQ("fc8", *rule10.getFlagCode());
+	const auto& rule12 = mapper.getMappingRules()[11];
+	EXPECT_EQ("GA9", *rule12.getV3Tag());
+	EXPECT_EQ("Name10", *rule12.getName());
 }
 
 TEST(Mappers_CountryMapperTests, TrivialMappingsWork)
@@ -176,6 +176,40 @@ TEST(Mappers_CountryMapperTests, ZeroMatchesAssignsTag)
 	const auto v3Tag = mapper.assignV3TagToEU4Country(country);
 
 	EXPECT_EQ("X00", v3Tag);
+}
+
+TEST(Mappers_CountryMapperTests, CountryWillGetSameTagIfReprocessed)
+{
+	mappers::CountryMapper mapper;
+	mapper.loadMappingRules("TestFiles/configurables/country_mappings.txt");
+	// link = { eu4 = TA1 vic3 = GA1 }
+
+	const auto country = std::make_shared<EU4::Country>();
+	country->setTag("TA1");
+	auto v3Tag = mapper.assignV3TagToEU4Country(country);
+
+	EXPECT_EQ("GA1", v3Tag);
+
+	v3Tag = mapper.assignV3TagToEU4Country(country);
+	EXPECT_EQ("GA1", v3Tag);
+}
+
+TEST(Mappers_CountryMapperTests, TwoCountriesWontGetSameTag)
+{
+	mappers::CountryMapper mapper;
+	mapper.loadMappingRules("TestFiles/configurables/country_mappings.txt");
+	// link = { eu4 = TA9 vic3 = GA9 }
+	// link = { name = "Name10" vic3 = GA9 }
+
+	const auto country1 = std::make_shared<EU4::Country>();
+	country1->setTag("TA9");
+	const auto country2 = std::make_shared<EU4::Country>();
+	country2->setLocalizationName("english", "Name10");
+	const auto v3Tag1 = mapper.assignV3TagToEU4Country(country1);
+	const auto v3Tag2 = mapper.assignV3TagToEU4Country(country2); // assigned X00 since GA9 is taken.
+
+	EXPECT_EQ("GA9", v3Tag1);
+	EXPECT_EQ("X00", v3Tag2);
 }
 
 TEST(Mappers_CountryMapperTests, tagIsAlphaDigitDigitWorksAsAdvertised)

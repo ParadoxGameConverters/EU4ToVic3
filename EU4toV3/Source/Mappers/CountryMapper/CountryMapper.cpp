@@ -125,22 +125,12 @@ std::string mappers::CountryMapper::assignV3TagToEU4Country(const std::shared_pt
 				continue;
 		}
 
-		// We're in the clear. Do we HAVE a target tag?
-		std::string v3Tag;
-		if (rule.getV3Tag())
-			v3Tag = *rule.getV3Tag();
-		else
-			v3Tag = generateNewTag();
-
 		// file a relation and wrap up.
-		mapToTag(eu4Tag, v3Tag, rule.getFlagCode());
-		return v3Tag;
+		return mapToTag(eu4Tag, rule.getV3Tag(), rule.getFlagCode());
 	}
 
 	// No rules match. Generate, file and wrap it up.
-	auto v3Tag = generateNewTag();
-	mapToTag(eu4Tag, v3Tag, std::nullopt);
-	return v3Tag;
+	return mapToTag(eu4Tag, std::nullopt, std::nullopt);
 }
 
 bool mappers::CountryMapper::clearLocks(const std::set<std::string>& ruleLocks, const std::set<std::string>& countryKeys)
@@ -173,10 +163,24 @@ std::optional<bool> mappers::CountryMapper::clearBlock(const std::optional<std::
 	return locker;
 }
 
-void mappers::CountryMapper::mapToTag(const std::string& eu4Tag, const std::string& v3Tag, const std::optional<std::string>& flagCode)
+std::string mappers::CountryMapper::mapToTag(const std::string& eu4Tag, const std::optional<std::string>& v3Tag, const std::optional<std::string>& flagCode)
 {
-	eu4TagToV3TagMap.emplace(eu4Tag, v3Tag);
-	v3TagToEU4TagMap.emplace(v3Tag, eu4Tag);
+	std::string newTag;
+	if (v3Tag)
+	{
+		if (v3TagToEU4TagMap.contains(*v3Tag)) // it it taken already?
+			newTag = generateNewTag();
+		else
+			newTag = *v3Tag;
+	}
+	else
+	{
+		newTag = generateNewTag();
+	}
+	eu4TagToV3TagMap.emplace(eu4Tag, newTag);
+	v3TagToEU4TagMap.emplace(newTag, eu4Tag);
 	if (flagCode)
-		v3FlagCodes.emplace(v3Tag, *flagCode);
+		v3FlagCodes.emplace(newTag, *flagCode);
+
+	return newTag;
 }

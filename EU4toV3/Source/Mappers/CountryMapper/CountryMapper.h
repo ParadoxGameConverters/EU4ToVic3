@@ -35,7 +35,7 @@ class CountryMapper: commonItems::parser
 
 	static [[nodiscard]] bool clearLocks(const std::set<std::string>& ruleLocks, const std::set<std::string>& countryKeys);
 	static [[nodiscard]] std::optional<bool> clearBlock(const std::optional<std::string>& ruleString, const std::string& countryString);
-	void mapToTag(const std::string& eu4Tag, const std::string& v3Tag, const std::optional<std::string>& flagCode);
+	[[nodiscard]] std::string mapToTag(const std::string& eu4Tag, const std::optional<std::string>& v3Tag, const std::optional<std::string>& flagCode);
 
 	std::vector<CountryMapping> countryMappingRules;
 	std::map<std::string, std::string> eu4TagToV3TagMap;
