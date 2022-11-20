@@ -168,7 +168,7 @@ std::string mappers::CountryMapper::mapToTag(const std::string& eu4Tag, const st
 	std::string newTag;
 	if (v3Tag)
 	{
-		if (v3TagToEU4TagMap.contains(*v3Tag)) // it it taken already?
+		if (tagIsAlreadyAssigned(*v3Tag)) // it it taken already?
 			newTag = generateNewTag();
 		else
 			newTag = *v3Tag;
