@@ -448,6 +448,24 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMappingsVersion.cpp">
       <Filter>ConverterFiles\Mappers\ProvinceMapper</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\PoliticalManager\CountryDefinitionLoader\Country.cpp">
+      <Filter>ConverterFiles\V3World\PoliticalManager\CountryDefinitionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\PoliticalManager\CountryDefinitionLoader\CountryDefinitionLoader.cpp">
+      <Filter>ConverterFiles\V3World\PoliticalManager\CountryDefinitionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\PoliticalManager\PoliticalManager.cpp">
+      <Filter>ConverterFiles\V3World\PoliticalManager</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\PoliticalManagerTests\CountryDefinitionLoaderTests\CountryDefinitionLoaderTests.cpp">
+      <Filter>V3WorldTests\PoliticalManagerTests\CountryDefinitionLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\PoliticalManagerTests\CountryDefinitionLoaderTests\CountryTests.cpp">
+      <Filter>V3WorldTests\PoliticalManagerTests\CountryDefinitionLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\PoliticalManagerTests\PoliticalManagerTests.cpp">
+      <Filter>V3WorldTests\PoliticalManagerTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -732,6 +750,21 @@
     <Filter Include="ConverterFiles\Mappers\ProvinceMapper">
       <UniqueIdentifier>{a8e92d2b-f2f4-41d1-8707-95d518f682bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\country_definitions">
+      <UniqueIdentifier>{271da9b9-e451-4e20-8585-a9f9e2f1c32c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\PoliticalManager">
+      <UniqueIdentifier>{a564298f-acfe-49f4-a00a-ca15d3cf251c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\PoliticalManager\CountryDefinitionLoader">
+      <UniqueIdentifier>{0e15bda1-7f89-4a47-81c1-7317b2fc51da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\PoliticalManagerTests">
+      <UniqueIdentifier>{54e2ee93-f0c0-4ecb-b201-660c1194efad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\PoliticalManagerTests\CountryDefinitionLoaderTests">
+      <UniqueIdentifier>{8e748ab2-4296-4379-a65a-bd1a987aaf40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -819,6 +852,12 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\map_data\state_regions\chunks_region.txt">
       <Filter>TestFiles\vic3installation\game\map_data\state_regions</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\country_definitions\test_countries.txt">
+      <Filter>TestFiles\vic3installation\game\common\country_definitions</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\country_definitions\ignored_countries">
+      <Filter>TestFiles\vic3installation\game\common\country_definitions</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

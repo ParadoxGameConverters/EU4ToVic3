@@ -3,6 +3,7 @@
 #include "../EU4World/World.h"
 #include "ClayManager/ClayManager.h"
 #include "Configuration.h"
+#include "PoliticalManager/PoliticalManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
 
 namespace V3
@@ -20,6 +21,7 @@ class World
 
 	ClayManager clayManager;
 	mappers::ProvinceMapper provinceMapper;
+	PoliticalManager politicalManager;
 
 	// output
 	void createModFile() const;
