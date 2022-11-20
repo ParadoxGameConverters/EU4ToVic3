@@ -33,8 +33,8 @@ class CountryMapper: commonItems::parser
 	[[nodiscard]] bool tagIsAlreadyAssigned(const std::string& v3Tag) const;
 	[[nodiscard]] std::string generateNewTag();
 
-	static [[nodiscard]] bool existsLocks(const std::set<std::string>& ruleLocks, const std::set<std::string>& countryKeys);
-	static [[nodiscard]] std::optional<bool> existsBlock(const std::optional<std::string>& ruleString, const std::string& countryString);
+	[[nodiscard]] static bool existsLocks(const std::set<std::string>& ruleLocks, const std::set<std::string>& countryKeys);
+	[[nodiscard]] static std::optional<bool> existsBlock(const std::optional<std::string>& ruleString, const std::string& countryString);
 	[[nodiscard]] std::string mapToTag(const std::string& eu4Tag, const std::optional<std::string>& v3Tag, const std::optional<std::string>& flagCode);
 
 	std::vector<CountryMapping> countryMappingRules;

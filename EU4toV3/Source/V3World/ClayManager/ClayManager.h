@@ -35,7 +35,7 @@ class ClayManager
 	using EU4TagToStateToProvinceMap = std::map<std::string, StateToProvinceMap>; // eu4 tag -> states and their provinces.
 	using SourceOwners = std::map<std::string, std::shared_ptr<EU4::Country>>;		// eu4tag, eu4country
 
-	static [[nodiscard]] std::map<std::string, double> calcChunkOwnerWeights(const std::shared_ptr<Chunk>& chunk);
+	[[nodiscard]] static std::map<std::string, double> calcChunkOwnerWeights(const std::shared_ptr<Chunk>& chunk);
 	[[nodiscard]] std::pair<EU4TagToStateToProvinceMap, SourceOwners> sortChunkProvincesIntoTagStates() const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> buildSubStates(const EU4TagToStateToProvinceMap& tagStateProvinces,
 		 const SourceOwners& sourceOwners) const;
