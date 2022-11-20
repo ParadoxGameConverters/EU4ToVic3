@@ -20,8 +20,8 @@ class CountryMapper: commonItems::parser
 	[[nodiscard]] std::optional<std::string> getV3Tag(const std::string& eu4Tag) const;
 	[[nodiscard]] std::optional<std::string> getEU4Tag(const std::string& v3Tag) const;
 	[[nodiscard]] std::optional<std::string> getFlagCode(const std::string& v3Tag) const;
-	[[nodiscard]] static bool tagIsAlphaDigitDigit(const std::string& tag);
-	[[nodiscard]] static bool tagIsAlphaDigitAlphaNum(const std::string& tag);
+	[[nodiscard]] static bool tagIsDynamic(const std::string& tag);  // alpha-digit-digit, eg. C01, T15
+	[[nodiscard]] static bool tagIsNonCanon(const std::string& tag); // both dynamic and imported, eg. Z0A, X0J
 
 	[[nodiscard]] std::string assignV3TagToEU4Country(const std::shared_ptr<EU4::Country>& country);
 

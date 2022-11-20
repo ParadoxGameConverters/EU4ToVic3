@@ -17,6 +17,7 @@ TEST(V3World_CountryTests, VanillaDataSpawnsEmptyWhenInitializedFromStream)
 	V3::Country country;
 	country.initializeCountry(input);
 
+	ASSERT_TRUE(country.getVanillaData());
 	EXPECT_TRUE(country.getVanillaData()->type.empty());
 	EXPECT_TRUE(country.getVanillaData()->tier.empty());
 	EXPECT_TRUE(country.getVanillaData()->cultures.empty());
@@ -41,7 +42,6 @@ TEST(V3World_CountryTests, CountryCanBeInitializedViaVanillaData)
 
 	EXPECT_EQ("recognized", country.getVanillaData()->type);
 	EXPECT_EQ("empire", country.getVanillaData()->tier);
-	EXPECT_EQ(2, country.getVanillaData()->cultures.size());
 	EXPECT_THAT(country.getVanillaData()->cultures, testing::UnorderedElementsAre("cul1", "cul2"));
 	EXPECT_EQ("protestant", country.getVanillaData()->religion);
 	EXPECT_EQ("STATE_TEST_1", country.getVanillaData()->capitalStateName);

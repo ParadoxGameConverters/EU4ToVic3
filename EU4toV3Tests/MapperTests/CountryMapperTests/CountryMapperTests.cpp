@@ -212,23 +212,23 @@ TEST(Mappers_CountryMapperTests, TwoCountriesWontGetSameTag)
 	EXPECT_EQ("X00", v3Tag2);
 }
 
-TEST(Mappers_CountryMapperTests, tagIsAlphaDigitDigitWorksAsAdvertised)
+TEST(Mappers_CountryMapperTests, tagIsDynamicWorksAsAdvertised)
 {
-	EXPECT_TRUE(mappers::CountryMapper::tagIsAlphaDigitDigit("C01"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsAlphaDigitDigit("CC1"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsAlphaDigitDigit("CCC"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsAlphaDigitDigit("0C0"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsAlphaDigitDigit("0CC"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsAlphaDigitDigit("00C"));
+	EXPECT_TRUE(mappers::CountryMapper::tagIsDynamic("C01"));
+	EXPECT_FALSE(mappers::CountryMapper::tagIsDynamic("CC1"));
+	EXPECT_FALSE(mappers::CountryMapper::tagIsDynamic("CCC"));
+	EXPECT_FALSE(mappers::CountryMapper::tagIsDynamic("0C0"));
+	EXPECT_FALSE(mappers::CountryMapper::tagIsDynamic("0CC"));
+	EXPECT_FALSE(mappers::CountryMapper::tagIsDynamic("00C"));
 }
 
-TEST(Mappers_CountryMapperTests, tagIsAlphaDigitAlphaNumWorksAsAdvertised)
+TEST(Mappers_CountryMapperTests, tagIsNonCanonWorksAsAdvertised)
 {
-	EXPECT_TRUE(mappers::CountryMapper::tagIsAlphaDigitAlphaNum("C01"));
-	EXPECT_TRUE(mappers::CountryMapper::tagIsAlphaDigitAlphaNum("C0C"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsAlphaDigitAlphaNum("CC1"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsAlphaDigitAlphaNum("CCC"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsAlphaDigitAlphaNum("0C0"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsAlphaDigitAlphaNum("0CC"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsAlphaDigitAlphaNum("00C"));
+	EXPECT_TRUE(mappers::CountryMapper::tagIsNonCanon("C01"));
+	EXPECT_TRUE(mappers::CountryMapper::tagIsNonCanon("C0C"));
+	EXPECT_FALSE(mappers::CountryMapper::tagIsNonCanon("CC1"));
+	EXPECT_FALSE(mappers::CountryMapper::tagIsNonCanon("CCC"));
+	EXPECT_FALSE(mappers::CountryMapper::tagIsNonCanon("0C0"));
+	EXPECT_FALSE(mappers::CountryMapper::tagIsNonCanon("0CC"));
+	EXPECT_FALSE(mappers::CountryMapper::tagIsNonCanon("00C"));
 }

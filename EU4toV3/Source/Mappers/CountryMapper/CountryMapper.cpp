@@ -30,13 +30,21 @@ void mappers::CountryMapper::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-bool mappers::CountryMapper::tagIsAlphaDigitDigit(const std::string& tag)
+bool mappers::CountryMapper::tagIsDynamic(const std::string& tag)
 {
+	if (tag.size() < 3) // A shorter tag is certainly dynamic. Also probably illegal but that isn't our problem.
+		return true;
+
+	// Generally a strong check for colonial tags, eg. C04. Can be used for other purposes.
 	return isalpha(tag[0]) && isdigit(tag[1]) && isdigit(tag[2]);
 }
 
-bool mappers::CountryMapper::tagIsAlphaDigitAlphaNum(const std::string& tag)
+bool mappers::CountryMapper::tagIsNonCanon(const std::string& tag)
 {
+	if (tag.size() < 3) // A shorter tag is certainly non-canon. Also probably illegal but that isn't our problem.
+		return true;
+
+	// A truism for non-canon countries, generally both dynamic C04, and converter-generated (by CK3toEU4), eg. Z0A, Y0B..
 	return isalpha(tag[0]) && isdigit(tag[1]) && isalnum(tag[2]);
 }
 
