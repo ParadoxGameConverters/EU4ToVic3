@@ -26,6 +26,7 @@ class Country: commonItems::parser
 
 	// Tag and links
 	[[nodiscard]] const auto& getTag() const { return tag; }
+	void setTag(const auto& theTag) { tag = theTag; }
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
 	[[nodiscard]] const auto& getCores() const { return cores; }
 	void addProvince(const std::shared_ptr<Province>& province);
@@ -60,6 +61,7 @@ class Country: commonItems::parser
 
 	// flags and variables
 	[[nodiscard]] auto getFlags() const { return flags; }
+	void addFlag(const std::string& theFlag) { flags.emplace(theFlag); }
 	[[nodiscard]] bool hasFlag(const std::string&) const;
 	[[nodiscard]] auto getModifiers() const { return modifiers; }
 	[[nodiscard]] bool hasModifier(const std::string&) const;
@@ -90,6 +92,7 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getGovernment() const { return government; }
 	[[nodiscard]] const auto& getReforms() const { return governmentReforms; }
 	[[nodiscard]] bool hasReform(const std::string&) const;
+	void addReform(const std::string& theReform) { governmentReforms.emplace(theReform); }
 	[[nodiscard]] const auto& getPolicies() const { return policies; }
 	[[nodiscard]] const auto& getEmbracedInstitutions() const { return embracedInstitutions; }
 	[[nodiscard]] int getNumEmbracedInstitutions() const;

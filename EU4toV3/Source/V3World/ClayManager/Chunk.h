@@ -1,6 +1,6 @@
 #ifndef V3_CHUNK_H
 #define V3_CHUNK_H
-#include "Country/Country.h"
+#include "PoliticalManager/CountryDefinitionLoader/Country.h"
 #include "StateLoader/Province.h"
 #include "StateLoader/State.h"
 #include <EU4World/CountryManager/EU4Country.h>

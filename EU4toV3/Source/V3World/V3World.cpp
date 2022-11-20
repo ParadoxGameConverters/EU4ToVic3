@@ -21,6 +21,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	clayManager.generateChunks(provinceMapper, sourceWorld.getProvinceManager());
 	clayManager.unDisputeChunkOwnership(sourceWorld.getCountryManager().getCountries());
 	clayManager.distributeChunksAcrossSubStates();
+	countryMapper.loadMappingRules("configurables/country_mappings.txt");
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
 	Log(LogLevel::Info) << "-> Importing Provinces";

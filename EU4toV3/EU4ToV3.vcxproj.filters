@@ -261,6 +261,21 @@
     <ClCompile Include="Source\Mappers\ProvinceMapper\ProvinceMappingsVersion.cpp">
       <Filter>Mappers\ProvinceMapper</Filter>
     </ClCompile>
+    <ClCompile Include="Source\V3World\PoliticalManager\PoliticalManager.cpp">
+      <Filter>Vic3World\PoliticalManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\V3World\PoliticalManager\CountryDefinitionLoader\CountryDefinitionLoader.cpp">
+      <Filter>Vic3World\PoliticalManager\CountryDefinitionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\V3World\PoliticalManager\CountryDefinitionLoader\Country.cpp">
+      <Filter>Vic3World\PoliticalManager\CountryDefinitionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mappers\CountryMapper\CountryMapper.cpp">
+      <Filter>Mappers\CountryMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mappers\CountryMapper\CountryMapping.cpp">
+      <Filter>Mappers\CountryMapper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\EU4ToVic3Converter.h" />
@@ -549,11 +564,23 @@
     <ClInclude Include="Source\V3World\ClayManager\Chunk.h">
       <Filter>Vic3World\ClayManager</Filter>
     </ClInclude>
-    <ClInclude Include="Source\V3World\Country\Country.h">
-      <Filter>Vic3World\Country</Filter>
-    </ClInclude>
     <ClInclude Include="Source\V3World\ClayManager\SubState.h">
       <Filter>Vic3World\ClayManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\V3World\PoliticalManager\PoliticalManager.h">
+      <Filter>Vic3World\PoliticalManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\V3World\PoliticalManager\CountryDefinitionLoader\Country.h">
+      <Filter>Vic3World\PoliticalManager\CountryDefinitionLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\V3World\PoliticalManager\CountryDefinitionLoader\CountryDefinitionLoader.h">
+      <Filter>Vic3World\PoliticalManager\CountryDefinitionLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mappers\CountryMapper\CountryMapper.h">
+      <Filter>Mappers\CountryMapper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mappers\CountryMapper\CountryMapping.h">
+      <Filter>Mappers\CountryMapper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -671,8 +698,14 @@
     <Filter Include="Mappers\ProvinceMapper">
       <UniqueIdentifier>{07e0bf0e-e2e6-4c4c-968e-02fcd0d0de67}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Vic3World\Country">
+    <Filter Include="Vic3World\PoliticalManager">
       <UniqueIdentifier>{6ea2f984-e72b-4a1b-9edc-c6e0f6dafbd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vic3World\PoliticalManager\CountryDefinitionLoader">
+      <UniqueIdentifier>{41cfcd10-b3df-4ebb-b81b-0f2345e318d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mappers\CountryMapper">
+      <UniqueIdentifier>{9fd0deb4-b650-4e02-ab54-decd0f389ba3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

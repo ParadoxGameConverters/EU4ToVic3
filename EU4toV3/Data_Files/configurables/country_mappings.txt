@@ -1,27 +1,37 @@
 # Direct Mappings
-# This is essentially one-to-one country mappings to ensure that countries are available in BOTH eu4 and v2 get the correct tag.
-# For example, if Spain is in eu4 it will become Spain in v2 after conversion.
-# EXAMPLE
-# link = { eu4 = SWE v2 = SWE } #Sweden
-# This above means that the eu4 tag "SWE" (Sweden) will be converted as the v2 tag "SWE" (Sweden)
-# Order is that of the eu4 country tags file
-# CK2 titles are put right under the eu4 tag
-# (country) => (ck2title) means that the CK2 mapping already gives correct flag, no need of further mapping work
-#
+# This is essentially one-to-one country mappings to ensure that countries are available in BOTH eu4 and vic3 get the correct tag. For example:
+# link = { eu4 = SWE vic3 = SWE } #Sweden
+# This above means that the eu4 tag "SWE" (Sweden) will be converted as the vic3 tag "SWE" (Sweden)
+# 
+# Names are alternative identifiers and relate to ENGLISH localizations. A country with tag GER - OR - english name "Germany" will map to GER.
+# eu4 = GER name = "Germany" vic3 = GER
+# 
+# Flags and reforms are used for fine filtering.
 # supported: using multiple flag=<..> and reform=<...> specifiers, or both, eg.:
-# link = { eu4 = PAP v2 = ITP reform = kingdom_of_god_reform }
-# link = { eu4 = EGY flag = caliphate_done v2 = ISL }
-# link = { eu4 = ULM flag = embraced_by_aliens flag = survived_zombie_apocalipse reform = alien_government v2 = ALI }
-# you can use multiple flags and/or reforms in the same line and only one of each needs to match in order for the mapping to become valid.
-# If you're using these specifiers, keep the line ABOVE the line without specifiers, as it must be of higher priority:
-# link = { eu4 = PAP v2 = ITP reform = kingdom_of_god_reform }
-# link = { eu4 = PAP v2 = PAP }
+# link = { eu4 = PAP vic3 = ITP reform = kingdom_of_god_reform } # if eu4 PAP has "kingdom_of_god_reform" then map to ITP
+# link = { eu4 = EGY flag = caliphate_done vic3 = ISL } # if eu4 EGY has internal flag "caliphate_done" then map to ISL
+# link = { eu4 = ULM flag = embraced_by_aliens flag = survived_zombie_apocalipse reform = alien_government vic3 = ALI } # one matching flag and one matching reform will cause ULM to map to ALI.
+# You can use multiple flags and/or reforms in the same line and only one of EACH needs to match in order for the mapping to become valid.
 #
-# supported: flag/reform alone, without source tag:
-# link = { v2 = ISL flag = unified_islam } # The Caliphate
-# link = { v2 = ALI reform = synthetics_reform } # Aliens example
-# Only the first country to match against flag will receive target v2 tag, so use this only for flags/reforms you know are unique.
+# Also Supported: flag/reform alone, without source tag:
+# link = { vic3 = ISL flag = unified_islam } # The Caliphate
+# link = { vic3 = ALI reform = synthetics_reform } # Aliens example
+# Only the first country to match against flag will receive target vic3 tag, so use this only for flags/reforms you know are unique.
 # papacy_reform for example is not unique as incoming CK2 fraticelli pope may also have it.
+#
+# ORDER MATTERS! If you're using these specifiers, remember that the mapper will assign a tag on FIRST match. So, this would be the correct mapping for PAP:
+# link = { eu4 = PAP vic3 = ITP reform = kingdom_of_god_reform } # PAP with reform becomes ITP
+# link = { eu4 = PAP vic3 = PAP } # PAP without reform becomes PAP
+# link = { name = "The Papacy" vic3 = PAP } # someone else with correct name becomes PAP
+#
+# FLAG_CODES are used to specify which flag blazon the country will use.
+# link = { eu4 = PIR flag_code = legacy_PIR } # Whatever PIR maps to, use "legacy_PIR" blazon
+# link = { name = "The Caliphate" flag_code = legacy_ISL } # IF there's a country with EU4 name "The Caliphate", use "legacy_ISL" blazon
+#
+# COLONIAL TAGS: Mapper will first attempt to find a match here (eg. USA->USA). 
+# If this fails, it'll try to match colonial countries with new world tags (see colonial_tags.txt), eg. C03->USA. 
+#
+# If everything fails, the mapper will assign a fresh dynamic vic3 tag, eg. Z04.
 
 ## 00_countries.txt
 link = { eu4 = GER name = "Germany" vic3 = GER } # Germany
