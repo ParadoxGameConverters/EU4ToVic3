@@ -41,54 +41,37 @@ void V3::Country::registerKeys()
 
 void V3::Country::initializeFromEU4Country()
 {
-	Log(LogLevel::Debug) << "--- Importing " << sourceCountry->getTag() << " into " << tag;
-
-	// TODO: TESTS IF POSSIBLE
 	// color
 	if (vanillaData && vanillaData->color)
-	{
 		processedData.color = vanillaData->color;
-	}
 	else
-	{
 		processedData.color = sourceCountry->getNationalColors().getMapColor();
-	}
 
+	// eu4 locs
+	processedData.namesByLanguage = sourceCountry->getAllNameLocalizations();
+	processedData.adjectivesByLanguage = sourceCountry->getAllAdjectiveLocalizations();
+
+	// TODO: UNTESTED - TESTS IF POSSIBLE WHEN CONVERSION DONE
 	// country type
 	processedData.type = "recognized";
-
 	// tier
 	processedData.tier = "kingdom";
-
 	// cultures
 	processedData.cultures = {"basque"};
-
 	// religion
 	processedData.religion = "catholic";
-
 	// capital
 	if (!substates.empty())
 		processedData.capitalStateName = substates[0]->stateName;
 	else
 		processedData.capitalStateName = "STATE_NAVARRA";
-
 	// namedaftercapital
 	processedData.is_named_from_capital = false;
-
-	// eu4 locs
-	processedData.namesByLanguage.emplace("english", sourceCountry->getName("english"));
-	processedData.namesByLanguage.emplace("spanish", sourceCountry->getName("spanish"));
-	processedData.namesByLanguage.emplace("french", sourceCountry->getName("french"));
-	processedData.namesByLanguage.emplace("german", sourceCountry->getName("german"));
-	processedData.adjectivesByLanguage.emplace("english", sourceCountry->getAdjective("english"));
-	processedData.adjectivesByLanguage.emplace("spanish", sourceCountry->getAdjective("spanish"));
-	processedData.adjectivesByLanguage.emplace("french", sourceCountry->getAdjective("french"));
-	processedData.adjectivesByLanguage.emplace("german", sourceCountry->getAdjective("german"));
 }
 
 void V3::Country::copyVanillaData()
 {
-	// TODO: TESTS
+	// this is done when conversion from eu4 source is impossible - likely because this country doesn't exist in eu4.
 	if (!vanillaData)
 		return;
 
@@ -103,7 +86,6 @@ void V3::Country::copyVanillaData()
 
 std::string V3::Country::getName(const std::string& language) const
 {
-	// TODO: TESTS
 	if (processedData.namesByLanguage.contains(language))
 		return processedData.namesByLanguage.at(language);
 
@@ -112,17 +94,18 @@ std::string V3::Country::getName(const std::string& language) const
 		return processedData.namesByLanguage.at("english");
 
 	// otherwise, eh.
-	return {};
+	return tag;
 }
 
 std::string V3::Country::getAdjective(const std::string& language) const
 {
-	// TODO: TESTS
 	if (processedData.adjectivesByLanguage.contains(language))
 		return processedData.adjectivesByLanguage.at(language);
 
+	// if we're lacking a specific language, try with english.
 	if (processedData.adjectivesByLanguage.contains("english"))
 		return processedData.adjectivesByLanguage.at("english");
 
-	return {};
+	// wing it.
+	return tag + "_ADJ";
 }

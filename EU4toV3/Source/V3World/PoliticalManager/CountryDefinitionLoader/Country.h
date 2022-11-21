@@ -43,6 +43,7 @@ class Country: commonItems::convenientParser
 
 	[[nodiscard]] const auto& getTag() const { return tag; }
 	[[nodiscard]] const auto& getVanillaData() const { return vanillaData; }
+	[[nodiscard]] const auto& getProcessedData() const { return processedData; }
 	[[nodiscard]] const auto& getSourceCountry() const { return sourceCountry; }
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
 	void addSubState(const std::shared_ptr<SubState>& substate) { substates.push_back(substate); }

@@ -107,6 +107,8 @@ class Country: commonItems::parser
 	// localizations
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
+	[[nodiscard]] const auto& getAllNameLocalizations() const { return namesByLanguage; }
+	[[nodiscard]] const auto& getAllAdjectiveLocalizations() const { return adjectivesByLanguage; }
 	void setLocalizationName(const std::string& language, const std::string& incName);
 	void setLocalizationAdjective(const std::string& language, const std::string& incAdjective);
 
