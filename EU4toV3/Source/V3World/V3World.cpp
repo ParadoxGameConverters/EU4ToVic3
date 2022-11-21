@@ -1,10 +1,13 @@
 #include "V3World.h"
 #include "../EU4World/World.h"
+#include "CommonFunctions.h"
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
+#include "Output/outCommonHistoryStates.h"
 #include "Output/outModFile.h"
 #include <filesystem>
 #include <fstream>
+#include <ranges>
 namespace fs = std::filesystem;
 
 V3::World::World(const Configuration& configuration, const EU4::World& sourceWorld, commonItems::ConverterVersion&& theConverterVersion):
@@ -26,6 +29,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.initializeVanillaCountries(V3Path);
 	politicalManager.loadCountryMapper(countryMapper);
 	politicalManager.importEU4Countries(sourceWorld.getCountryManager().getCountries());
+	politicalManager.importVanillaCountries();
 	clayManager.assignSubStateOwnership(politicalManager.getCountries(), *countryMapper);
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
@@ -145,7 +149,8 @@ void V3::World::output() const
 	Log(LogLevel::Progress) << "84 %";
 
 	// Update bookmark starting dates
-	Log(LogLevel::Info) << "<- Updating bookmarks";
+	Log(LogLevel::Info) << "<- Dumping history/states";
+	outputStates();
 	Log(LogLevel::Progress) << "85 %";
 
 	// Create common\countries path.
@@ -165,12 +170,14 @@ void V3::World::output() const
 	Log(LogLevel::Progress) << "90 %";
 
 	Log(LogLevel::Info) << "<- Writing Localization Text";
+	outputLocs();
 	Log(LogLevel::Progress) << "91 %";
 
 	Log(LogLevel::Info) << "<- Writing Provinces";
 	Log(LogLevel::Progress) << "92 %";
 
 	Log(LogLevel::Info) << "<- Writing Countries";
+	outputCommonCountries();
 	Log(LogLevel::Progress) << "93 %";
 
 	Log(LogLevel::Info) << "<- Writing Diplomacy";
@@ -210,8 +217,47 @@ void V3::World::createModFile() const
 	std::ofstream output("output/" + outputName + "/.metadata/metadata.json");
 	if (!output.is_open())
 		throw std::runtime_error("Could not create " + outputName + "/.metadata/metadata.json");
-	Log(LogLevel::Info) << "<< Writing to: "
-							  << "output/" + outputName + "/.metadata/metadata.json";
+	Log(LogLevel::Info) << "<< Writing to: output/" + outputName + "/.metadata/metadata.json";
 	outModFile(output, outputName);
+	output.close();
+}
+
+void V3::World::outputStates() const
+{
+	std::ofstream output("output/" + outputName + "/common/history/states/99_converter_states.txt");
+	if (!output.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/history/states/99_converter_states.txt");
+	Log(LogLevel::Info) << "<< Writing to: output/" + outputName + "/common/history/states/99_converter_states.txt";
+	output << commonItems::utf8BOM;
+	outCommonHistoryStates(output, clayManager.getStates());
+	output.close();
+}
+
+void V3::World::outputCommonCountries() const
+{
+	std::ofstream output("output/" + outputName + "/common/country_definitions/99_converted_countries.txt");
+	if (!output.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/country_definitions/99_converted_countries.txt");
+	Log(LogLevel::Info) << "<< Writing to: output/" + outputName + "/common/country_definitions/99_converted_countries.txt";
+	output << commonItems::utf8BOM;
+	for (const auto& country: politicalManager.getCountries() | std::views::values)
+		output << *country;
+	output.close();
+}
+
+void V3::World::outputLocs() const
+{
+	std::ofstream output("output/" + outputName + "/localization/english/converter_countries_l_english.yml");
+	if (!output.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/localization/english/converter_countries_l_english.yml");
+	Log(LogLevel::Info) << "<< Writing to: output/" + outputName + "/localization/english/converter_countries_l_english.yml";
+	output << commonItems::utf8BOM << "l_english:\n";
+	for (const auto& country: politicalManager.getCountries() | std::views::values)
+	{
+		if (!country->getName("english").empty())
+			output << " " << country->getTag() << ": \"" << country->getName("english") << "\"\n";
+		if (!country->getAdjective("english").empty())
+			output << " " << country->getTag() << "_ADJ: \"" << country->getAdjective("english") << "\"\n";
+	}
 	output.close();
 }

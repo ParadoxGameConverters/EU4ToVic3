@@ -40,3 +40,10 @@ void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::s
 
 	Log(LogLevel::Info) << "<> Vic3 now has " << countries.size() << " known countries.";
 }
+
+void V3::PoliticalManager::importVanillaCountries()
+{
+	for (const auto& country: countries | std::views::values)
+		if (country->getVanillaData() && !country->getSourceCountry()) // this is a vic3-only country.
+			country->copyVanillaData();
+}

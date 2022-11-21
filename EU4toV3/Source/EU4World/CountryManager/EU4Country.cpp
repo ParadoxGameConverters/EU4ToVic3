@@ -325,7 +325,7 @@ void EU4::Country::clearArmies()
 	militaryLeaders.clear();
 }
 
-bool EU4::Country::cultureSurvivesInCores(const std::map<std::string, std::shared_ptr<Country>>& theCountries)
+bool EU4::Country::cultureSurvivesInCores(const std::map<std::string, std::shared_ptr<Country>>& theCountries) const
 {
 	// If this were a LANDLESS country, is there some other country that contains our people?
 	// If so, we shouldn't delete this country as it may reappear.

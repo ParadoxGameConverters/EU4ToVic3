@@ -29,6 +29,9 @@ class World
 	void createModFile() const;
 	void output() const;
 	void outputVersion() const;
+	void outputStates() const;
+	void outputCommonCountries() const;
+	void outputLocs() const;
 };
 
 } // namespace V3

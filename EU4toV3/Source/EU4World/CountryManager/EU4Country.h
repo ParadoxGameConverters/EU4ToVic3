@@ -118,7 +118,7 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getHistoricalEntry() const { return historicalEntry; }
 
 	// processing
-	[[nodiscard]] bool cultureSurvivesInCores(const std::map<std::string, std::shared_ptr<Country>>& theCountries);
+	[[nodiscard]] bool cultureSurvivesInCores(const std::map<std::string, std::shared_ptr<Country>>& theCountries) const;
 	[[nodiscard]] double getCountryWeight() const;
 	void updateRegimentTypes(const UnitTypeLoader& unitTypeLoader);
 	void eatCountry(const std::shared_ptr<Country>& target);
