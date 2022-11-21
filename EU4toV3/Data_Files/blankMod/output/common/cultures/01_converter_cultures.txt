@@ -283,6 +283,60 @@ chacoan = {
 	}
 	graphics = generic
 }
+cham = {
+	color = { 96 224 102 }
+	religion = sunni
+	traits = { southeast_asian_heritage malay_culture }
+		male_common_first_names = {
+		Abdullah
+		Al-Mukammal
+		Ali
+		Aziz
+		Idris
+		Isandar
+		Ismail
+		Jaafar
+		Jalil
+		Muabidin
+		Muhammad
+		Riayat
+		Safiuddin
+		Shahabuddin
+		Tuanku
+		Yusuf
+	}
+	female_common_first_names = {
+		Adibah
+		Aishah
+		Faridah
+		Fatimah
+		Maimunah 
+		Nur_Maznah
+		Rafidah
+		Zaharah
+		Zaleha
+	}	
+	noble_last_names = {
+		Bendahara
+		bin_Nik
+		Jamalullail
+	}
+	common_last_names = {
+		Aadzam
+		Bendahara
+		Muadzam
+		Murshidul
+		Raja_Ahmad
+		Raja_Inu
+		Riayat_Shah
+		al-Khairat
+		al-Marhum
+	}
+	ethnicities = {
+		1 = south_east_asian
+	}
+	graphics = asian
+}
 chibchan = {
 	color = { 190 45 23 }
 	religion = animist
@@ -338,6 +392,51 @@ coptic = {
 		10 = arab
 	}
 	graphics = european # Greek Influence
+}
+formosan = { # Natives to Taiwan, for EU4 sake
+	color = { 82 16 188 }
+	religion = animist
+	traits = { indigenous_oceanic_heritage malay_culture } # Selection was made to fit into discrimination of pops
+	male_common_first_names = {
+		Wayan
+		Made
+		Nyoman
+		Ketut
+		Putu
+		Kadek
+		Komang
+		Nengah
+		Gede
+		Wayan_Balik
+	}
+	female_common_first_names = {
+		Wayan
+		Made
+		Nyoman
+		Ketut
+		Putu
+		Kadek
+		Koming
+		Nengah
+		Wayan_Balik
+	}	
+	noble_last_names = {
+		I_Gusti
+		Tjokorda
+		I_Dewa
+		Ida
+		Jero
+	}
+	common_last_names = {
+		Ngakan
+		Kompyang
+		Sang
+		Si
+	}
+	ethnicities = {
+		1 = native_american # What else could go here?
+	}
+	graphics = asian
 }
 frankish = {
 	color = { 200 100 100 }
@@ -484,6 +583,30 @@ lombard = { # Old Lombard
 		10 = caucasian
 	}
 	graphics = european
+}
+luorawetlan = { # Chukotko-Kamchatkan
+	color = { 185 66 196 }
+	religion = animist
+	traits = { north_asian_heritage north_american_group } # Reference to vanilla, due to lack of better options
+	male_common_first_names = {
+		Aiaan Atch-ytagyn Giv-ynkeev Nute-nli Gyrgol-gyrgyn Tanat Darkhan Dokhsun Duolan Dygyn Dulustaan Kyytymei 
+	Kencheeri Keskil Manchaary Michil Modun Nurgun Nuolan Sulustaan Tolluman Timir Tygyn Tuskul Uolan Ergis 
+	Erchim Erkin Yrgel Kharyskhan
+	}
+	female_common_first_names = {
+		Naryiaana Aiyyna Kydaana Tuskulaana Khaarchaana
+	}
+	noble_last_names = {
+		Atagotaaluk Tullaugaq
+	}
+	common_last_names = {
+		Garpancha Songolik Tymancha Tykulcha Gudeikon Adiul Khadiul Dyaluncha Aksik Kepele Gugdaul Burgumi Vavlya Vadyo 
+	Vankho Eldan Ka-cheda Kilim Agna Sebeda Saltyk Alvali Akhtamak
+	}
+	ethnicities = {
+		1 = circumpolar
+	}
+	graphics = asian
 }
 macedonian = {
 	color = { 196 122 77 }
@@ -1065,127 +1188,4 @@ weder_german = {
 		1 = caucasian
 	}
 	graphics = european
-}
-luorawetlan = { # Chukotko-Kamchatkan
-	color = { 185 66 196 }
-	religion = animist
-	traits = { north_asian_heritage north_american_group } # Reference to vanilla, due to lack of better options
-	male_common_first_names = {
-		Aiaan Atch-ytagyn Giv-ynkeev Nute-nli Gyrgol-gyrgyn Tanat Darkhan Dokhsun Duolan Dygyn Dulustaan Kyytymei 
-	Kencheeri Keskil Manchaary Michil Modun Nurgun Nuolan Sulustaan Tolluman Timir Tygyn Tuskul Uolan Ergis 
-	Erchim Erkin Yrgel Kharyskhan
-	}
-	female_common_first_names = {
-		Naryiaana Aiyyna Kydaana Tuskulaana Khaarchaana
-	}
-	noble_last_names = {
-		Atagotaaluk Tullaugaq
-	}
-	common_last_names = {
-		Garpancha Songolik Tymancha Tykulcha Gudeikon Adiul Khadiul Dyaluncha Aksik Kepele Gugdaul Burgumi Vavlya Vadyo 
-	Vankho Eldan Ka-cheda Kilim Agna Sebeda Saltyk Alvali Akhtamak
-	}
-	ethnicities = {
-		1 = circumpolar
-	}
-	graphics = asian
-}
-formosan = { # Natives to Taiwan, for EU4 sake
-	color = { 82 16 188 }
-	religion = animist
-	traits = { indigenous_oceanic_heritage malay_culture } # Selection was made to fit into discrimination of pops
-	male_common_first_names = {
-		Wayan
-		Made
-		Nyoman
-		Ketut
-		Putu
-		Kadek
-		Komang
-		Nengah
-		Gede
-		Wayan_Balik
-	}
-	female_common_first_names = {
-		Wayan
-		Made
-		Nyoman
-		Ketut
-		Putu
-		Kadek
-		Koming
-		Nengah
-		Wayan_Balik
-	}	
-	noble_last_names = {
-		I_Gusti
-		Tjokorda
-		I_Dewa
-		Ida
-		Jero
-	}
-	common_last_names = {
-		Ngakan
-		Kompyang
-		Sang
-		Si
-	}
-	ethnicities = {
-		1 = native_american # What else could go here?
-	}
-	graphics = generic
-}
-cham = {
-	color = { 96 224 102 }
-	religion = sunni
-	traits = { southeast_asian_heritage malay_culture }
-		male_common_first_names = {
-		Abdullah
-		Al-Mukammal
-		Ali
-		Aziz
-		Idris
-		Isandar
-		Ismail
-		Jaafar
-		Jalil
-		Muabidin
-		Muhammad
-		Riayat
-		Safiuddin
-		Shahabuddin
-		Tuanku
-		Yusuf
-	}
-	female_common_first_names = {
-		Adibah
-		Aishah
-		Faridah
-		Fatimah
-		Maimunah 
-		Nur_Maznah
-		Rafidah
-		Zaharah
-		Zaleha
-	}	
-	noble_last_names = {
-		Bendahara
-		bin_Nik
-		Jamalullail
-	}
-	common_last_names = {
-		Aadzam
-		Bendahara
-		Muadzam
-		Murshidul
-		Raja_Ahmad
-		Raja_Inu
-		Riayat_Shah
-		al-Khairat
-		al-Marhum
-	}
-	ethnicities = {
-		south_east_asian
-	}
-	graphics = asian
 }
