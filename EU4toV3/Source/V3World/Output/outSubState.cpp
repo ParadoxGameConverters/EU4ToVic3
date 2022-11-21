@@ -4,6 +4,7 @@
 
 std::ostream& V3::operator<<(std::ostream& output, const SubState& substate)
 {
+	// TODO: TEST OUTPUT
 	output << "\t\tcreate_state = {\n";
 	output << "\t\t\tcountry = c:" << substate.ownerTag << "\n";
 	output << "\t\t\towned_provinces = { ";

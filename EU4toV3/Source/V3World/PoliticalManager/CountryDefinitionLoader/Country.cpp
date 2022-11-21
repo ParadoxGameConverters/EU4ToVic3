@@ -43,6 +43,7 @@ void V3::Country::initializeFromEU4Country()
 {
 	Log(LogLevel::Debug) << "--- Importing " << sourceCountry->getTag() << " into " << tag;
 
+	// TODO: TESTS IF POSSIBLE
 	// color
 	if (vanillaData && vanillaData->color)
 	{
@@ -87,6 +88,7 @@ void V3::Country::initializeFromEU4Country()
 
 void V3::Country::copyVanillaData()
 {
+	// TODO: TESTS
 	if (!vanillaData)
 		return;
 
@@ -101,6 +103,7 @@ void V3::Country::copyVanillaData()
 
 std::string V3::Country::getName(const std::string& language) const
 {
+	// TODO: TESTS
 	if (processedData.namesByLanguage.contains(language))
 		return processedData.namesByLanguage.at(language);
 
@@ -114,6 +117,7 @@ std::string V3::Country::getName(const std::string& language) const
 
 std::string V3::Country::getAdjective(const std::string& language) const
 {
+	// TODO: TESTS
 	if (processedData.adjectivesByLanguage.contains(language))
 		return processedData.adjectivesByLanguage.at(language);
 

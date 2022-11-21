@@ -3,6 +3,7 @@
 
 std::ostream& V3::operator<<(std::ostream& output, const Country& country)
 {
+	// TODO: TEST OUTPUT
 	output << country.tag << " = {\n";
 	if (country.processedData.color)
 		output << "\tcolor " << *country.processedData.color << "\n";

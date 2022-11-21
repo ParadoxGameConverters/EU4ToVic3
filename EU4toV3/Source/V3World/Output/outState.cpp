@@ -4,6 +4,7 @@
 
 std::ostream& V3::operator<<(std::ostream& output, const State& state)
 {
+	// TODO: TEST OUTPUT
 	output << "\ts:" << state.name << " = {\n";
 	for (const auto& substate: state.substates)
 		output << *substate;

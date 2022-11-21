@@ -205,6 +205,7 @@ void V3::World::output() const
 
 void V3::World::outputVersion() const
 {
+	// TODO: MOVE TO SEPARATE OUTPUT CLASS
 	std::ofstream output("output/" + outputName + "/eu4tov3_version.txt");
 	if (!output.is_open())
 		throw std::runtime_error("Error writing version file! Is the output folder writable?");
@@ -214,6 +215,7 @@ void V3::World::outputVersion() const
 
 void V3::World::createModFile() const
 {
+	// TODO: MOVE TO SEPARATE OUTPUT CLASS
 	std::ofstream output("output/" + outputName + "/.metadata/metadata.json");
 	if (!output.is_open())
 		throw std::runtime_error("Could not create " + outputName + "/.metadata/metadata.json");
@@ -224,6 +226,7 @@ void V3::World::createModFile() const
 
 void V3::World::outputStates() const
 {
+	// TODO: MOVE TO SEPARATE OUTPUT CLASS
 	std::ofstream output("output/" + outputName + "/common/history/states/99_converter_states.txt");
 	if (!output.is_open())
 		throw std::runtime_error("Could not create " + outputName + "/common/history/states/99_converter_states.txt");
@@ -235,6 +238,7 @@ void V3::World::outputStates() const
 
 void V3::World::outputCommonCountries() const
 {
+	// TODO: MOVE TO SEPARATE OUTPUT CLASS
 	std::ofstream output("output/" + outputName + "/common/country_definitions/99_converted_countries.txt");
 	if (!output.is_open())
 		throw std::runtime_error("Could not create " + outputName + "/common/country_definitions/99_converted_countries.txt");
@@ -247,6 +251,8 @@ void V3::World::outputCommonCountries() const
 
 void V3::World::outputLocs() const
 {
+	// TODO: MOVE TO SEPARATE OUTPUT CLASS
+	// TODO: EXPORT ALL LANGUAGES IN A SANE WAY
 	std::ofstream output("output/" + outputName + "/localization/english/converter_countries_l_english.yml");
 	if (!output.is_open())
 		throw std::runtime_error("Could not create " + outputName + "/localization/english/converter_countries_l_english.yml");

@@ -43,6 +43,7 @@ void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::s
 
 void V3::PoliticalManager::importVanillaCountries()
 {
+	// TODO: TESTS
 	for (const auto& country: countries | std::views::values)
 		if (country->getVanillaData() && !country->getSourceCountry()) // this is a vic3-only country.
 			country->copyVanillaData();
