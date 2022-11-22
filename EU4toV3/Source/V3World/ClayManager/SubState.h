@@ -25,6 +25,8 @@ struct SubState
 	std::shared_ptr<EU4::Country> sourceOwner;
 	std::shared_ptr<State> state; // home state
 	std::string stateName;
+
+	friend std::ostream& operator<<(std::ostream& output, const SubState& substate);
 };
 } // namespace V3
 

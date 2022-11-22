@@ -578,6 +578,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	EXPECT_EQ("GA2", substate1->owner->getTag());
 	// linkback to this substate through owner substates vector
 	EXPECT_EQ("STATE_TEST_LAND1", substate1->owner->getSubStates()[0]->stateName);
+	// linkback through state's substate ownership vector
+	EXPECT_EQ("GA2", substate1->state->getSubStates()[0]->ownerTag);
 
 	EXPECT_TRUE(substate2->sourceOwner);
 	EXPECT_EQ("TA2", substate2->sourceOwner->getTag());
@@ -588,6 +590,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	EXPECT_EQ("GA2", substate2->owner->getTag());
 	// linkback to this substate through owner substates vector
 	EXPECT_EQ("STATE_TEST_LAND2", substate2->owner->getSubStates()[1]->stateName);
+	// linkback through state's substate ownership vector
+	EXPECT_EQ("GA2", substate2->state->getSubStates()[0]->ownerTag);
 
 	EXPECT_TRUE(substate3->sourceOwner);
 	EXPECT_EQ("TA9", substate3->sourceOwner->getTag());
@@ -598,4 +602,6 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	EXPECT_EQ("GA9", substate3->owner->getTag());
 	// linkback to this substate through owner substates vector
 	EXPECT_EQ("STATE_TEST_LAND4", substate3->owner->getSubStates()[0]->stateName);
+	// linkback through state's substate ownership vector
+	EXPECT_EQ("GA9", substate3->state->getSubStates()[0]->ownerTag);
 }

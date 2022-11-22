@@ -19,6 +19,19 @@ struct VanillaCommonCountryData
 	bool is_named_from_capital = false;
 };
 
+struct ProcessedData
+{
+	std::string type;
+	std::string tier;
+	std::set<std::string> cultures;
+	std::string religion;
+	std::string capitalStateName;
+	std::optional<commonItems::Color> color;
+	bool is_named_from_capital = false;
+	std::map<std::string, std::string> namesByLanguage;		// language, name
+	std::map<std::string, std::string> adjectivesByLanguage; // language, adj
+};
+
 class Country: commonItems::convenientParser
 {
   public:
@@ -30,15 +43,23 @@ class Country: commonItems::convenientParser
 
 	[[nodiscard]] const auto& getTag() const { return tag; }
 	[[nodiscard]] const auto& getVanillaData() const { return vanillaData; }
+	[[nodiscard]] const auto& getProcessedData() const { return processedData; }
 	[[nodiscard]] const auto& getSourceCountry() const { return sourceCountry; }
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
 	void addSubState(const std::shared_ptr<SubState>& substate) { substates.push_back(substate); }
+	void copyVanillaData();
+
+	[[nodiscard]] std::string getName(const std::string& language) const;
+	[[nodiscard]] std::string getAdjective(const std::string& language) const;
+
+	friend std::ostream& operator<<(std::ostream& output, const Country& country);
 
   private:
 	void registerKeys();
 
 	std::string tag;
 	std::optional<VanillaCommonCountryData> vanillaData;
+	ProcessedData processedData;
 
 	std::shared_ptr<EU4::Country> sourceCountry;
 	std::vector<std::shared_ptr<SubState>> substates;

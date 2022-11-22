@@ -107,6 +107,8 @@ class Country: commonItems::parser
 	// localizations
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
+	[[nodiscard]] const auto& getAllNameLocalizations() const { return namesByLanguage; }
+	[[nodiscard]] const auto& getAllAdjectiveLocalizations() const { return adjectivesByLanguage; }
 	void setLocalizationName(const std::string& language, const std::string& incName);
 	void setLocalizationAdjective(const std::string& language, const std::string& incAdjective);
 
@@ -118,7 +120,7 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getHistoricalEntry() const { return historicalEntry; }
 
 	// processing
-	[[nodiscard]] bool cultureSurvivesInCores(const std::map<std::string, std::shared_ptr<Country>>& theCountries);
+	[[nodiscard]] bool cultureSurvivesInCores(const std::map<std::string, std::shared_ptr<Country>>& theCountries) const;
 	[[nodiscard]] double getCountryWeight() const;
 	void updateRegimentTypes(const UnitTypeLoader& unitTypeLoader);
 	void eatCountry(const std::shared_ptr<Country>& target);

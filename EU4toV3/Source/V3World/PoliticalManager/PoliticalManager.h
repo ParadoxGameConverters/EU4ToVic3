@@ -16,6 +16,7 @@ class PoliticalManager
 	void initializeVanillaCountries(const std::string& V3Path);
 	void loadCountryMapper(const std::shared_ptr<mappers::CountryMapper>& theCountryMapper) { countryMapper = theCountryMapper; }
 	void importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries);
+	void importVanillaCountries();
 
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 

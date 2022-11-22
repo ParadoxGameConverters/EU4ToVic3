@@ -301,6 +301,7 @@ void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::s
 			substate->owner = owner;
 			owner->addSubState(substate);
 			filteredSubstates.push_back(substate);
+			substate->state->addSubState(substate);
 		}
 		else
 		{
