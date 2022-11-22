@@ -3,6 +3,9 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 #include "StringUtils.h"
+#include "V3World/ClayManager/ProvinceCount.h"
+#include "V3World/ClayManager/SubState.h"
+
 
 void V3::State::loadState(std::istream& theStream)
 {
@@ -27,6 +30,21 @@ void V3::State::registerKeys()
 			provinces.emplace(theProvinceName, province);
 		}
 	});
+	registerKeyword("prime_land", [this](std::istream& theStream) {
+		for (const auto& provinceName: commonItems::getStrings(theStream))
+		{
+			auto theProvinceName = commonItems::remQuotes(provinceName);
+			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
+			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
+				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1);
+			else
+				Log(LogLevel::Warning) << "Encountered prime province " << theProvinceName << " in unknown format!";
+			if (provinces.contains(theProvinceName))
+				provinces.at(theProvinceName)->setPrime();
+			else
+				Log(LogLevel::Warning) << "Prime province " << theProvinceName << " isn't defined in the state! Ignoring.";
+		}
+	});
 	registerKeyword("impassable", [this](std::istream& theStream) {
 		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{
@@ -49,9 +67,34 @@ void V3::State::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
+void V3::State::distributeLandshares()
+{
+	const auto statewideCount = ProvinceCount(provinces);
+	int statewidePower = calculateProvincePower(statewideCount);
+
+	for (const auto& substate : substates)
+	{
+		const auto substateCount = ProvinceCount(substate->provinces);
+		int substatePower = calculateProvincePower(substateCount);
+
+		double substateShare = substatePower / statewidePower;
+		if (substateShare < 0.05) // In defines as SPLIT_STATE_MIN_LAND_SHARE
+		{
+			substateShare = 0.05;
+		}
+		substate->landshare = substateShare;
+	}
+}
+
 std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& provinceName) const
 {
 	if (provinces.contains(provinceName))
 		return provinces.at(provinceName);
 	return nullptr;
+}
+
+static int calculateProvincePower(const V3::ProvinceCount& theCount)
+{
+	// prime coeffcient is SPLIT_STATE_PRIME_LAND_WEIGHT = 5.0 from the defines
+	return theCount.every + theCount.prime * 5 - theCount.impassable;
 }

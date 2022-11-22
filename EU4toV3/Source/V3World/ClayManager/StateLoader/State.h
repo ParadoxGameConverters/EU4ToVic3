@@ -26,6 +26,7 @@ class State: commonItems::parser
 
   private:
 	void registerKeys();
+	void distributeLandshares();
 
 	bool coastal = false;
 	std::string name;

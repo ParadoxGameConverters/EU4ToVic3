@@ -16,6 +16,7 @@ class Province
 	[[nodiscard]] auto getChunk() const { return chunk; }
 	[[nodiscard]] auto isSea() const { return sea; }
 	[[nodiscard]] auto isLake() const { return lake; }
+	[[nodiscard]] auto isPrime() const { return prime; }
 	[[nodiscard]] auto isImpassable() const { return impassable; }
 
 	void setSea() { sea = true; }
@@ -24,6 +25,7 @@ class Province
 		lake = true;
 		impassable = true;
 	}
+	void setPrime() { impassable = true; }
 	void setImpassable() { impassable = true; }
 	void setName(const std::string& theName) { name = theName; }
 	void setTerrain(const std::string& theTerrain) { terrain = theTerrain; }
@@ -36,6 +38,7 @@ class Province
 	std::string terrain;
 	bool sea = false;
 	bool lake = false;
+	bool prime = false;
 	bool impassable = false;
 	std::shared_ptr<Chunk> chunk;
 };
