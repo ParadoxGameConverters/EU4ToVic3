@@ -72,7 +72,7 @@ void V3::State::distributeLandshares()
 	const auto statewideCount = ProvinceCount(provinces);
 	int statewidePower = calculateProvincePower(statewideCount);
 
-	for (const auto& substate : substates)
+	for (const auto& substate: substates)
 	{
 		const auto substateCount = ProvinceCount(substate->provinces);
 		int substatePower = calculateProvincePower(substateCount);
