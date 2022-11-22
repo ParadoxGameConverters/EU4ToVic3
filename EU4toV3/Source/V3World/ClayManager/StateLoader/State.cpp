@@ -69,12 +69,12 @@ void V3::State::registerKeys()
 
 void V3::State::distributeLandshares()
 {
-	const auto statewideProvinceTypes = ProvinceTypeCounter(provinces);
+	const auto statewideProvinceTypes = countProvinceTypes(provinces);
 	double weightedStatewideProvinces = calculateWeightedProvinceTotals(statewideProvinceTypes);
 
 	for (const auto& substate: substates)
 	{
-		const auto substateCount = ProvinceTypeCounter(substate->provinces);
+		const auto substateCount = countProvinceTypes(substate->provinces);
 		double weightedSubstateProvinces = calculateWeightedProvinceTotals(substateCount);
 
 		double substateLandshare = weightedSubstateProvinces / weightedStatewideProvinces;
@@ -96,5 +96,23 @@ std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& province
 static int calculateWeightedProvinceTotals(const V3::ProvinceTypeCounter& theCount)
 {
 	// prime coeffcient is SPLIT_STATE_PRIME_LAND_WEIGHT = 5.0 from the defines
-	return theCount.every + theCount.prime * (5 - 1) - theCount.impassable;
+	return theCount.every + (5 - 1) * theCount.prime - theCount.impassable;
+}
+
+static V3::ProvinceTypeCounter& countProvinceTypes(std::map<std::string, std::shared_ptr<V3::Province>> provinces)
+{
+	auto typeCounter = V3::ProvinceTypeCounter();
+
+	typeCounter.every = provinces.size();
+	for (const auto& province: std::views::values(provinces))
+	{
+		if (province->isPrime())
+		{
+			++typeCounter.prime;
+		}
+		if (province->isImpassable())
+		{
+			++typeCounter.impassable;
+		}
+	}
 }

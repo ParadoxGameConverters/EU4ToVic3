@@ -14,8 +14,6 @@ namespace V3
 {
 struct ProvinceTypeCounter
 {
-	ProvinceTypeCounter(std::map<std::string, std::shared_ptr<Province>> provinces);
-
 	int every;
 	int prime;
 	int impassable;
