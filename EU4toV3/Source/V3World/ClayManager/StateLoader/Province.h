@@ -25,7 +25,7 @@ class Province
 		lake = true;
 		impassable = true;
 	}
-	void setPrime() { impassable = true; }
+	void setPrime() { prime = true; }
 	void setImpassable() { impassable = true; }
 	void setName(const std::string& theName) { name = theName; }
 	void setTerrain(const std::string& theTerrain) { terrain = theTerrain; }

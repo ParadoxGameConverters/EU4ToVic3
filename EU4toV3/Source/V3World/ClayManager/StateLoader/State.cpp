@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 #include "StringUtils.h"
-#include "V3World/ClayManager/ProvinceCount.h"
+#include "V3World/ClayManager/ProvinceTypeCounter.h"
 #include "V3World/ClayManager/SubState.h"
 
 
@@ -69,20 +69,20 @@ void V3::State::registerKeys()
 
 void V3::State::distributeLandshares()
 {
-	const auto statewideCount = ProvinceCount(provinces);
-	int statewidePower = calculateProvincePower(statewideCount);
+	const auto statewideProvinceTypes = ProvinceTypeCounter(provinces);
+	double weightedStatewideProvinces = calculateWeightedProvinceTotals(statewideProvinceTypes);
 
 	for (const auto& substate: substates)
 	{
-		const auto substateCount = ProvinceCount(substate->provinces);
-		int substatePower = calculateProvincePower(substateCount);
+		const auto substateCount = ProvinceTypeCounter(substate->provinces);
+		double weightedSubstateProvinces = calculateWeightedProvinceTotals(substateCount);
 
-		double substateShare = substatePower / statewidePower;
-		if (substateShare < 0.05) // In defines as SPLIT_STATE_MIN_LAND_SHARE
+		double substateLandshare = weightedSubstateProvinces / weightedStatewideProvinces;
+		if (substateLandshare < 0.05) // In defines as SPLIT_STATE_MIN_LAND_SHARE
 		{
-			substateShare = 0.05;
+			substateLandshare = 0.05;
 		}
-		substate->landshare = substateShare;
+		substate->landshare = substateLandshare;
 	}
 }
 
@@ -93,8 +93,8 @@ std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& province
 	return nullptr;
 }
 
-static int calculateProvincePower(const V3::ProvinceCount& theCount)
+static int calculateWeightedProvinceTotals(const V3::ProvinceTypeCounter& theCount)
 {
 	// prime coeffcient is SPLIT_STATE_PRIME_LAND_WEIGHT = 5.0 from the defines
-	return theCount.every + theCount.prime * 5 - theCount.impassable;
+	return theCount.every + theCount.prime * (5 - 1) - theCount.impassable;
 }
