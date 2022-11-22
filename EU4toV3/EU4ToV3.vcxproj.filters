@@ -51,9 +51,6 @@
     <ClCompile Include="Source\Configuration\Configuration.cpp">
       <Filter>Configuration</Filter>
     </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outModFile.cpp">
-      <Filter>Vic3World\Output</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EU4World\RegionManager\Area.cpp">
       <Filter>EU4World\RegionManager</Filter>
     </ClCompile>
@@ -276,17 +273,26 @@
     <ClCompile Include="Source\Mappers\CountryMapper\CountryMapping.cpp">
       <Filter>Mappers\CountryMapper</Filter>
     </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outCommonHistoryStates.cpp">
-      <Filter>Vic3World\Output</Filter>
+    <ClCompile Include="Source\Output\outWorld.cpp">
+      <Filter>Output</Filter>
     </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outState.cpp">
-      <Filter>Vic3World\Output</Filter>
+    <ClCompile Include="Source\Output\outLocalizations\outLocalizations.cpp">
+      <Filter>Output\outLocalizations</Filter>
     </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outSubState.cpp">
-      <Filter>Vic3World\Output</Filter>
+    <ClCompile Include="Source\Output\outModFile\outModFile.cpp">
+      <Filter>Output\outModFile</Filter>
     </ClCompile>
-    <ClCompile Include="Source\V3World\Output\outCountry.cpp">
-      <Filter>Vic3World\Output</Filter>
+    <ClCompile Include="Source\Output\outStates\outCommonHistoryStates.cpp">
+      <Filter>Output\outStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Output\outStates\outState.cpp">
+      <Filter>Output\outStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Output\outStates\outSubState.cpp">
+      <Filter>Output\outStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Output\outCountries\outCommonCountries.cpp">
+      <Filter>Output\outCountries</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -344,9 +350,6 @@
     </ClInclude>
     <ClInclude Include="Source\Configuration\Configuration.h">
       <Filter>Configuration</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\V3World\Output\outModFile.h">
-      <Filter>Vic3World\Output</Filter>
     </ClInclude>
     <ClInclude Include="Source\EU4World\RegionManager\Area.h">
       <Filter>EU4World\RegionManager</Filter>
@@ -594,17 +597,26 @@
     <ClInclude Include="Source\Mappers\CountryMapper\CountryMapping.h">
       <Filter>Mappers\CountryMapper</Filter>
     </ClInclude>
-    <ClInclude Include="Source\V3World\Output\outCommonHistoryStates.h">
-      <Filter>Vic3World\Output</Filter>
+    <ClInclude Include="Source\Output\outWorld.h">
+      <Filter>Output</Filter>
     </ClInclude>
-    <ClInclude Include="Source\V3World\Output\outState.h">
-      <Filter>Vic3World\Output</Filter>
+    <ClInclude Include="Source\Output\outLocalizations\outLocalizations.h">
+      <Filter>Output\outLocalizations</Filter>
     </ClInclude>
-    <ClInclude Include="Source\V3World\Output\outSubState.h">
-      <Filter>Vic3World\Output</Filter>
+    <ClInclude Include="Source\Output\outModFile\outModFile.h">
+      <Filter>Output\outModFile</Filter>
     </ClInclude>
-    <ClInclude Include="Source\V3World\Output\outCountry.h">
-      <Filter>Vic3World\Output</Filter>
+    <ClInclude Include="Source\Output\outStates\outCommonHistoryStates.h">
+      <Filter>Output\outStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Output\outStates\outState.h">
+      <Filter>Output\outStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Output\outStates\outSubState.h">
+      <Filter>Output\outStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Output\outCountries\outCommonCountries.h">
+      <Filter>Output\outCountries</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -622,9 +634,6 @@
     </Filter>
     <Filter Include="Helpers">
       <UniqueIdentifier>{ef5e0061-2ce9-448e-9f80-9fa52991faf9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Vic3World\Output">
-      <UniqueIdentifier>{9fb14058-9987-4188-8664-36162b13d0af}</UniqueIdentifier>
     </Filter>
     <Filter Include="Configuration">
       <UniqueIdentifier>{d01a72f6-2885-4bde-958e-76252c9f9a2f}</UniqueIdentifier>
@@ -730,6 +739,21 @@
     </Filter>
     <Filter Include="Mappers\CountryMapper">
       <UniqueIdentifier>{9fd0deb4-b650-4e02-ab54-decd0f389ba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Output">
+      <UniqueIdentifier>{d44b810c-0adf-4a72-888c-8c2abcf9c1fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Output\outCountries">
+      <UniqueIdentifier>{e9244a4d-c2af-42f1-8e03-350ae4e9d182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Output\outStates">
+      <UniqueIdentifier>{e8d8a302-86e8-4e3a-b7c2-36d0317defe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Output\outModFile">
+      <UniqueIdentifier>{ad615283-7591-40b7-b442-5d815ca74fd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Output\outLocalizations">
+      <UniqueIdentifier>{8428f34b-e977-45bd-bbcf-1c60434b1915}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
