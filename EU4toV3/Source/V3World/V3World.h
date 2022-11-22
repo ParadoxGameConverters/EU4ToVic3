@@ -1,39 +1,36 @@
-#ifndef WORLD_H
-#define WORLD_H
-#include "../EU4World/World.h"
+#ifndef V3_WORLD_H
+#define V3_WORLD_H
 #include "ClayManager/ClayManager.h"
 #include "Configuration.h"
 #include "CountryMapper/CountryMapper.h"
 #include "PoliticalManager/PoliticalManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
 
+namespace EU4
+{
+class World;
+}
+
 namespace V3
 {
 class World
 {
   public:
-	World(const Configuration& configuration, const EU4::World& sourceWorld, commonItems::ConverterVersion&& theConverterVersion);
+	World(const Configuration& configuration, const EU4::World& sourceWorld);
+
+	[[nodiscard]] const auto& getClayManager() const { return clayManager; }
+	[[nodiscard]] const auto& getPoliticalManager() const { return politicalManager; }
 
   private:
 	std::string V3Path;
 	Configuration::ConfigBlock configBlock;
-	commonItems::ConverterVersion converterVersion;
-	std::string outputName;
 
 	ClayManager clayManager;
 	mappers::ProvinceMapper provinceMapper;
 	PoliticalManager politicalManager;
 	std::shared_ptr<mappers::CountryMapper> countryMapper;
-
-	// output
-	void createModFile() const;
-	void output() const;
-	void outputVersion() const;
-	void outputStates() const;
-	void outputCommonCountries() const;
-	void outputLocs() const;
 };
 
 } // namespace V3
 
-#endif // WORLD_H
+#endif // V3_WORLD_H

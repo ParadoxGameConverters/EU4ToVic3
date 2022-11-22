@@ -2,10 +2,10 @@
 #define OUT_STATE_H
 #include "ClayManager/StateLoader/State.h"
 
-namespace V3
+namespace OUT
 {
-std::ostream& operator<<(std::ostream& output, const State& state);
+void outState(std::ostream& output, const V3::State& state);
 
-} // namespace V3
+} // namespace OUT
 
 #endif // OUT_STATE_H
