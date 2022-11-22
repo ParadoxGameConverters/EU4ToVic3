@@ -1,6 +1,5 @@
 #include "outCommonCountries.h"
 #include "CommonFunctions.h"
-#include "Log.h"
 #include <fstream>
 #include <ranges>
 
@@ -9,7 +8,7 @@ void OUT::exportCommonCountries(const std::string& outputName, const std::map<st
 	std::ofstream output("output/" + outputName + "/common/country_definitions/99_converted_countries.txt");
 	if (!output.is_open())
 		throw std::runtime_error("Could not create " + outputName + "/common/country_definitions/99_converted_countries.txt");
-	Log(LogLevel::Info) << "<< Writing to: output/" + outputName + "/common/country_definitions/99_converted_countries.txt";
+
 	output << commonItems::utf8BOM;
 	for (const auto& country: countries | std::views::values)
 		outCommonCountry(output, *country);

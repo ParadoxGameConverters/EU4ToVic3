@@ -1,6 +1,5 @@
 #include "outCommonHistoryStates.h"
 #include "CommonFunctions.h"
-#include "Log.h"
 #include "outState.h"
 #include <fstream>
 #include <ranges>
@@ -10,7 +9,7 @@ void OUT::exportCommonHistoryStates(const std::string& outputName, const std::ma
 	std::ofstream output("output/" + outputName + "/common/history/states/99_converter_states.txt");
 	if (!output.is_open())
 		throw std::runtime_error("Could not create " + outputName + "/common/history/states/99_converter_states.txt");
-	Log(LogLevel::Info) << "<< Writing to: output/" + outputName + "/common/history/states/99_converter_states.txt";
+
 	output << commonItems::utf8BOM;
 	outCommonHistoryStates(output, states);
 	output.close();

@@ -2,7 +2,7 @@
 #include "OSCompatibilityLayer.h"
 #include "outCountries/outCommonCountries.h"
 #include "outLocalizations/outLocalizations.h"
-#include "outModFile/outModFile.h"
+#include "outMetadataFile/outMetadataFile.h"
 #include "outStates/outCommonHistoryStates.h"
 #include <fstream>
 
@@ -34,8 +34,8 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	commonItems::RenameFolder("output/output", "output/" + outputName);
 	Log(LogLevel::Progress) << "82 %";
 
-	Log(LogLevel::Info) << "<- Crafting .mod File";
-	exportModFile(outputName);
+	Log(LogLevel::Info) << "<- Crafting .metadata File";
+	exportMetadataFile(outputName);
 	Log(LogLevel::Progress) << "83 %";
 
 	// Record converter version
@@ -44,7 +44,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Progress) << "84 %";
 
 	// Update bookmark starting dates
-	Log(LogLevel::Info) << "<- Dumping history/states";
+	Log(LogLevel::Info) << "<- Dumping common/history/states";
 	exportCommonHistoryStates(outputName, world.getClayManager().getStates());
 	Log(LogLevel::Progress) << "85 %";
 

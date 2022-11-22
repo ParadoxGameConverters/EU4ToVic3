@@ -1,18 +1,18 @@
-#include "outModFile.h"
+#include "outMetadataFile.h"
 #include "Log.h"
 #include <fstream>
 
-void OUT::exportModFile(const std::string& outputName)
+void OUT::exportMetadataFile(const std::string& outputName)
 {
 	std::ofstream output("output/" + outputName + "/.metadata/metadata.json");
 	if (!output.is_open())
 		throw std::runtime_error("Could not create " + outputName + "/.metadata/metadata.json");
 	Log(LogLevel::Info) << "<< Writing to: output/" + outputName + "/.metadata/metadata.json";
-	outModFile(output, outputName);
+	outMetadataFile(output, outputName);
 	output.close();
 }
 
-void OUT::outModFile(std::ostream& output, const std::string& outName)
+void OUT::outMetadataFile(std::ostream& output, const std::string& outName)
 {
 	output << "{\n";
 	output << "\t\"name\" : \"Converted - " << outName << "\",\n";
