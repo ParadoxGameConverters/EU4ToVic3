@@ -28,7 +28,7 @@ class State: commonItems::parser
 	void distributeLandshares();
 
 	static int calculateWeightedProvinceTotals(const ProvinceTypeCounter& theCount);
-	static const ProvinceTypeCounter& countProvinceTypes(std::map<std::string, std::shared_ptr<Province>> provinces);
+	static const std::unique_ptr<ProvinceTypeCounter> countProvinceTypes(std::map<std::string, std::shared_ptr<Province>> provinces);
 
 	bool coastal = false;
 	std::string name;
