@@ -86,20 +86,13 @@ void V3::State::distributeLandshares()
 	}
 }
 
-std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& provinceName) const
-{
-	if (provinces.contains(provinceName))
-		return provinces.at(provinceName);
-	return nullptr;
-}
-
-static int calculateWeightedProvinceTotals(const V3::ProvinceTypeCounter& theCount)
+int V3::State::calculateWeightedProvinceTotals(const ProvinceTypeCounter& theCount)
 {
 	// prime coeffcient is SPLIT_STATE_PRIME_LAND_WEIGHT = 5.0 from the defines
 	return theCount.every + (5 - 1) * theCount.prime - theCount.impassable;
 }
 
-static V3::ProvinceTypeCounter& countProvinceTypes(std::map<std::string, std::shared_ptr<V3::Province>> provinces)
+const V3::ProvinceTypeCounter& V3::State::countProvinceTypes(std::map<std::string, std::shared_ptr<Province>> provinces)
 {
 	auto typeCounter = V3::ProvinceTypeCounter();
 
@@ -115,4 +108,11 @@ static V3::ProvinceTypeCounter& countProvinceTypes(std::map<std::string, std::sh
 			++typeCounter.impassable;
 		}
 	}
+}
+
+std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& provinceName) const
+{
+	if (provinces.contains(provinceName))
+		return provinces.at(provinceName);
+	return nullptr;
 }

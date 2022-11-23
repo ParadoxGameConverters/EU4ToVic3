@@ -7,6 +7,7 @@
 namespace V3
 {
 struct SubState;
+struct ProvinceTypeCounter;
 class State: commonItems::parser
 {
   public:
@@ -27,6 +28,9 @@ class State: commonItems::parser
   private:
 	void registerKeys();
 	void distributeLandshares();
+
+	static int calculateWeightedProvinceTotals(const ProvinceTypeCounter& theCount);
+	static const ProvinceTypeCounter& countProvinceTypes(std::map<std::string, std::shared_ptr<Province>> provinces);
 
 	bool coastal = false;
 	std::string name;
