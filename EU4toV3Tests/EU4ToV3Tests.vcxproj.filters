@@ -490,6 +490,18 @@
     <ClCompile Include="MapperTests\ReligionMapperTests\ReligionMappingTests.cpp">
       <Filter>MapperTests\ReligionMapperTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureMapper.cpp">
+      <Filter>ConverterFiles\Mappers\CultureMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureMappingRule.cpp">
+      <Filter>ConverterFiles\Mappers\CultureMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\CultureMapperTests\CultureMapperTests.cpp">
+      <Filter>MapperTests\CultureMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\CultureMapperTests\CultureMappingRuleTests.cpp">
+      <Filter>MapperTests\CultureMapperTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -804,6 +816,15 @@
     <Filter Include="MapperTests\ReligionMapperTests">
       <UniqueIdentifier>{fec254af-2009-4951-8c05-8832e3787c84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\Mappers\CultureMapper">
+      <UniqueIdentifier>{5f66531a-87eb-4d8b-824f-d73df8030e66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\CultureMapperTests">
+      <UniqueIdentifier>{c281e033-efcf-441e-89bd-8b35fec9c2b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\eu4installation\common\cultures">
+      <UniqueIdentifier>{c93c185d-07d1-4d30-a03a-4bb4a5bcff2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -921,6 +942,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\culture_map.txt">
       <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\cultures\00_cultures.txt">
+      <Filter>TestFiles\eu4installation\common\cultures</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

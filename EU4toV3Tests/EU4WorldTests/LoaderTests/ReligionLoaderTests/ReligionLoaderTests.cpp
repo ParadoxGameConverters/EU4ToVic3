@@ -1,5 +1,3 @@
-#include "Configuration.h"
-#include "ConverterVersion.h"
 #include "ReligionLoader/ReligionLoader.h"
 #include "ReligionLoader/ReligionParser.h"
 #include "gtest/gtest.h"
@@ -18,22 +16,15 @@ TEST(EU4World_ReligionLoaderTests, religionsDefaultToEmpty)
 
 TEST(EU4World_ReligionLoaderTests, religionNamesCanBeImported)
 {
-	std::stringstream configurationInput;
-	configurationInput << "EU4DocumentsDirectory = \"TestFiles\"\n";
-	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
-	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-	const commonItems::ConverterVersion converterVersion;
-	const auto configuration = Configuration(configurationInput, converterVersion);
-
+	const auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
 	mods.emplace_back(Mod("Some mod", "themod.mod"));
-
 	commonItems::ModLoader modLoader;
-	modLoader.loadMods(configuration.getEU4DocumentsPath(), mods);
+	modLoader.loadMods("TestFiles", mods);
 	mods = modLoader.getMods();
 
 	EU4::ReligionLoader theReligions;
-	theReligions.loadReligions(configuration.getEU4Path(), mods);
+	theReligions.loadReligions(eu4Path, mods);
 
 	std::set<std::string> religionNames;
 	for (const auto& name: theReligions.getAllReligions() | std::views::keys)
@@ -44,22 +35,15 @@ TEST(EU4World_ReligionLoaderTests, religionNamesCanBeImported)
 
 TEST(EU4World_ReligionLoaderTests, religionsImportWithCorrectReligiousGroups)
 {
-	std::stringstream configurationInput;
-	configurationInput << "EU4DocumentsDirectory = \"TestFiles\"\n";
-	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
-	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-	const commonItems::ConverterVersion converterVersion;
-	const auto configuration = Configuration(configurationInput, converterVersion);
-
+	const auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
 	mods.emplace_back(Mod("Some mod", "themod.mod"));
-
 	commonItems::ModLoader modLoader;
-	modLoader.loadMods(configuration.getEU4DocumentsPath(), mods);
+	modLoader.loadMods("TestFiles", mods);
 	mods = modLoader.getMods();
 
 	EU4::ReligionLoader theReligions;
-	theReligions.loadReligions(configuration.getEU4Path(), mods);
+	theReligions.loadReligions(eu4Path, mods);
 
 	const auto& religion1 = theReligions.getAllReligions().at("religion_1");
 	const auto& religion2 = theReligions.getAllReligions().at("religion_2");
@@ -82,22 +66,15 @@ TEST(EU4World_ReligionLoaderTests, religionsImportWithCorrectReligiousGroups)
 
 TEST(EU4World_ReligionLoaderTests, trappingsAreLoadedForSaneCustomReligions)
 {
-	std::stringstream configurationInput;
-	configurationInput << "EU4DocumentsDirectory = \"TestFiles\"\n";
-	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
-	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-	const commonItems::ConverterVersion converterVersion;
-	const auto configuration = Configuration(configurationInput, converterVersion);
-
+	const auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
 	mods.emplace_back(Mod("Some mod", "themod.mod"));
-
 	commonItems::ModLoader modLoader;
-	modLoader.loadMods(configuration.getEU4DocumentsPath(), mods);
+	modLoader.loadMods("TestFiles", mods);
 	mods = modLoader.getMods();
 
 	EU4::ReligionLoader theReligions;
-	theReligions.loadReligions(configuration.getEU4Path(), mods);
+	theReligions.loadReligions(eu4Path, mods);
 
 	const auto& religion107 = theReligions.getAllReligions().at("converted_dynamic_faith_107");
 	const auto& religion108 = theReligions.getAllReligions().at("converted_dynamic_faith_108");
@@ -108,18 +85,11 @@ TEST(EU4World_ReligionLoaderTests, trappingsAreLoadedForSaneCustomReligions)
 
 TEST(EU4World_ReligionLoaderTests, loadingInsaneCustomReligionsThrowsWarnings)
 {
-	std::stringstream configurationInput;
-	configurationInput << "EU4DocumentsDirectory = \"TestFiles\"\n";
-	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
-	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-	const commonItems::ConverterVersion converterVersion;
-	const auto configuration = Configuration(configurationInput, converterVersion);
-
+	const auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
 	mods.emplace_back(Mod("Some mod", "themod.mod"));
-
 	commonItems::ModLoader modLoader;
-	modLoader.loadMods(configuration.getEU4DocumentsPath(), mods);
+	modLoader.loadMods("TestFiles", mods);
 	mods = modLoader.getMods();
 
 	EU4::ReligionLoader theReligions;
@@ -127,9 +97,32 @@ TEST(EU4World_ReligionLoaderTests, loadingInsaneCustomReligionsThrowsWarnings)
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
 	std::cout.rdbuf(log.rdbuf());
-	theReligions.loadReligions(configuration.getEU4Path(), mods);
+	theReligions.loadReligions(eu4Path, mods);
 	std::cout.rdbuf(cout_buffer);
 
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] ! Religion Mapper: Cannot parse filename for metadata: 99_converted_dynamic_faith_108-from-.txt)"));
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] ! Religion Mapper: Filename for custom religion is broken: 99_converted_dynamic_faith_error-.txt)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] ! Religion Mapper: Cannot parse filename for metadata: 99_converted_dynamic_faith_108-from-.txt)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] ! Religion Mapper: Filename for custom religion is broken: 99_converted_dynamic_faith_error-.txt)"));
+}
+
+TEST(EU4World_ReligionLoaderTests, GroupForReligionCanBeRetrieved)
+{
+	std::stringstream input;
+	input << "groupA = { religionA = {} }\n";
+	input << "groupB = { religionB = {} }\n";
+	EU4::ReligionLoader groups;
+	groups.loadReligions(input);
+
+	EXPECT_EQ("groupA", groups.getGroupForReligion("religionA"));
+	EXPECT_EQ("groupB", groups.getGroupForReligion("religionB"));
+}
+
+TEST(EU4World_ReligionLoaderTests, GroupForReligionReturnsNulloptForFailure)
+{
+	std::stringstream input;
+	input << "groupA = { religionA = {} }\n";
+	input << "groupB = { religionB = {} }\n";
+	EU4::ReligionLoader groups;
+	groups.loadReligions(input);
+
+	EXPECT_EQ(std::nullopt, groups.getGroupForReligion("religionC"));
 }

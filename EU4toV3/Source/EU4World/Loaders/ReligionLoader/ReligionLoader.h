@@ -21,6 +21,7 @@ class ReligionLoader: commonItems::parser
 	void loadReligions(std::istream& theStream);
 
 	[[nodiscard]] const auto& getAllReligions() const { return religions; }
+	[[nodiscard]] std::optional<std::string> getGroupForReligion(const std::string& religion) const;
 
   private:
 	void registerKeys();

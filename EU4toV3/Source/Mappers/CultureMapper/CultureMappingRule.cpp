@@ -2,118 +2,163 @@
 #include "CommonRegexes.h"
 #include "Configuration.h"
 #include "ParserHelpers.h"
-#include "Regions/Regions.h"
+#include <sstream>
 
-mappers::CultureMappingRule::CultureMappingRule(std::istream& theStream)
+#include "ClayManager/ClayManager.h"
+#include "CultureLoader/CultureLoader.h"
+#include "Log.h"
+#include "ReligionLoader/ReligionLoader.h"
+
+void mappers::CultureMappingRule::loadMappingRules(std::istream& theStream)
 {
 	registerKeys();
 	parseStream(theStream);
 	clearRegisteredKeywords();
+}
 
-	if (theConfiguration.isHpmEnabled() && !hpmCulture.empty())
-		destinationCulture = hpmCulture;
+void mappers::CultureMappingRule::loadMappingRules(const std::string& theString)
+{
+	registerKeys();
+	auto theStream = std::stringstream(theString);
+	parseStream(theStream);
+	clearRegisteredKeywords();
 }
 
 void mappers::CultureMappingRule::registerKeys()
 {
-	registerKeyword("vic2", [this](const std::string& unused, std::istream& theStream) {
-		destinationCulture = commonItems::singleString(theStream).getString();
+	registerRegex(R"(@\w+)", [this](const std::string& macro, std::istream& theStream) {
+		requestedMacros.insert(macro);
 	});
-	registerKeyword("hpm", [this](const std::string& unused, std::istream& theStream) {
-		hpmCulture = commonItems::singleString(theStream).getString();
+	registerKeyword("vic3", [this](std::istream& theStream) {
+		v3culture = commonItems::getString(theStream);
 	});
-	registerKeyword("region", [this](const std::string& unused, std::istream& theStream) {
-		regions.insert(commonItems::singleString(theStream).getString());
+	registerKeyword("eu4", [this](std::istream& theStream) {
+		cultures.insert(commonItems::getString(theStream));
 	});
-	registerKeyword("religion", [this](const std::string& unused, std::istream& theStream) {
-		religions.insert(commonItems::singleString(theStream).getString());
+	registerKeyword("eu4group", [this](std::istream& theStream) {
+		cultureGroups.insert(commonItems::getString(theStream));
 	});
-	registerKeyword("owner", [this](const std::string& unused, std::istream& theStream) {
-		owners.insert(commonItems::singleString(theStream).getString());
+	registerKeyword("religion", [this](std::istream& theStream) {
+		religions.insert(commonItems::getString(theStream));
 	});
-	registerKeyword("provinceid", [this](const std::string& unused, std::istream& theStream) {
-		provinces.insert(commonItems::singleInt(theStream).getInt());
+	registerKeyword("religion_group", [this](std::istream& theStream) {
+		religionGroups.insert(commonItems::getString(theStream));
 	});
-	registerKeyword("eu4", [this](const std::string& unused, std::istream& theStream) {
-		cultures.insert(commonItems::singleString(theStream).getString());
+	registerKeyword("region", [this](std::istream& theStream) {
+		regions.insert(commonItems::getString(theStream));
+	});
+	registerKeyword("owner", [this](std::istream& theStream) {
+		owners.insert(commonItems::getString(theStream));
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-std::optional<std::string> mappers::CultureMappingRule::cultureMatch(const EU4::Regions& eu4Regions,
+std::optional<bool> mappers::CultureMappingRule::existsBlock(const std::optional<std::string>& ruleString, const std::string& countryString)
+{
+	if (!ruleString)
+		return std::nullopt;
+	if (*ruleString == countryString)
+		return false;
+	return true;
+}
+
+std::optional<std::string> mappers::CultureMappingRule::cultureMatch(const V3::ClayManager& clayManager,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader,
 	 const std::string& eu4culture,
 	 const std::string& eu4religion,
-	 int eu4Province,
-	 const std::string& eu4ownerTag) const
+	 const std::string& v3state,
+	 const std::string& v3ownerTag) const
 {
-	// We need at least a viable EU4culture.
+	// We need at least a viable incoming EU4culture
 	if (eu4culture.empty())
 		return std::nullopt;
 
-	if (!cultures.count(eu4culture))
+	// if we fail on both cultural match and culture group match, bail
+	const auto& incCultureGroup = cultureLoader.getGroupForCulture(eu4culture);
+	if (!cultures.contains(eu4culture) && (!incCultureGroup || !cultureGroups.contains(*incCultureGroup)))
 		return std::nullopt;
 
-	if (!eu4ownerTag.empty() && !owners.empty())
-		if (!owners.count(eu4ownerTag))
+	// if there's an owner requirement and we fail, bail
+	if (!owners.empty())
+		if (v3ownerTag.empty() || !owners.contains(v3ownerTag))
 			return std::nullopt;
 
-	if (!eu4religion.empty() && !religions.empty())
-		if (!religions.count(eu4religion))
-			return std::nullopt;
-
-	// This is a provinces check, not regions.
-	if (eu4Province && !provinces.empty())
-		if (!provinces.count(eu4Province))
-			return std::nullopt;
-
-	// This is a regions check, that checks if a provided province is within that region.
-	if (eu4Province && !regions.empty())
+	// if there's a religion and we fail on both religions and groups, bail
+	if (!religions.empty() || !religionGroups.empty())
 	{
+		if (eu4religion.empty())
+			return std::nullopt;
+
+		// need to check both religions and groups
+		const auto incReligiousGroup = religionLoader.getGroupForReligion(eu4religion);
+		if (!incReligiousGroup)
+			return std::nullopt;
+
+		if (!religions.contains(eu4religion) && !religionGroups.contains(*incReligiousGroup))
+			return std::nullopt;
+	}
+
+	// If there's a state given, don't fail on regions checks.
+	if (!regions.empty())
+	{
+		if (v3state.empty())
+			return std::nullopt;
+
 		auto regionMatch = false;
 		for (const auto& region: regions)
 		{
-			if (!eu4Regions.regionIsValid(region))
+			if (!clayManager.regionIsValid(region))
 			{
-				// Regions change between versions so don't react to invalid region name.
+				// Regions can change between versions so don't react to invalid region name.
 				continue;
 			}
-			if (eu4Regions.provinceInRegion(eu4Province, region))
+			if (clayManager.stateIsInRegion(v3state, region))
 				regionMatch = true;
 		}
 		if (!regionMatch)
 			return std::nullopt;
 	}
-	return destinationCulture;
+	return v3culture;
 }
 
-std::optional<std::string> mappers::CultureMappingRule::cultureRegionalMatch(const EU4::Regions& eu4Regions,
+std::optional<std::string> mappers::CultureMappingRule::cultureRegionalMatch(const V3::ClayManager& clayManager,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader,
 	 const std::string& eu4culture,
 	 const std::string& eu4religion,
-	 int eu4Province,
-	 const std::string& eu4ownerTag) const
+	 const std::string& v3state,
+	 const std::string& v3ownerTag) const
 {
-	// This is a regional match. We need a mapping within the given region, so if the
+	// This is useful for generating neocultures in specific target regions like the new world without actually being there.
+
+	// This is a regional match. We need a mapping within the given SPECIFIC region, so if the
 	// mapping rule has no regional qualifiers it needs to fail.
+
 	if (regions.empty())
 		return std::nullopt;
 
 	// Otherwise, as usual.
-	return cultureMatch(eu4Regions, eu4culture, eu4religion, eu4Province, eu4ownerTag);
+	return cultureMatch(clayManager, cultureLoader, religionLoader, eu4culture, eu4religion, v3state, v3ownerTag);
 }
 
-std::optional<std::string> mappers::CultureMappingRule::cultureNonRegionalNonReligiousMatch(const EU4::Regions& eu4Regions,
+std::optional<std::string> mappers::CultureMappingRule::cultureNonRegionalNonReligiousMatch(const V3::ClayManager& clayManager,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader,
 	 const std::string& eu4culture,
 	 const std::string& eu4religion,
-	 int eu4Province,
-	 const std::string& eu4ownerTag) const
+	 const std::string& v3state,
+	 const std::string& v3ownerTag) const
 {
+	// This is useful when generating neocultures by asking what a given original culture maps to absent any specific qualifiers.
+
 	// This is a non regional non religious match. We need a mapping without any region/religion, so if the
 	// mapping rule has any regional/religious qualifiers it needs to fail.
 	if (!regions.empty())
 		return std::nullopt;
-	if (!religions.empty())
+	if (!religions.empty() || !religionGroups.empty())
 		return std::nullopt;
 
 	// Otherwise, as usual.
-	return cultureMatch(eu4Regions, eu4culture, eu4religion, eu4Province, eu4ownerTag);
+	return cultureMatch(clayManager, cultureLoader, religionLoader, eu4culture, eu4religion, v3state, v3ownerTag);
 }

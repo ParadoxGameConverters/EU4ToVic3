@@ -81,3 +81,10 @@ void EU4::ReligionLoader::registerKeys()
 		}
 	});
 }
+
+std::optional<std::string> EU4::ReligionLoader::getGroupForReligion(const std::string& religion) const
+{
+	if (religions.contains(religion) && !religions.at(religion).group.empty())
+		return religions.at(religion).group;
+	return std::nullopt;
+}

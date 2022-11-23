@@ -114,6 +114,36 @@ TEST(V3World_ClayManagerTests, clayManagerCanLinkStatesToSuperRegions)
 	EXPECT_TRUE(state_test_1->getProvinces().at("x445566")->isImpassable());
 }
 
+TEST(V3World_ClayManagerTests, clayManagerCanDetermineRegionValidity)
+{
+	V3::ClayManager clayManager;
+	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
+	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.loadStatesIntoSuperRegions();
+
+	EXPECT_TRUE(clayManager.regionIsValid("STATE_TEST_1"));					// state
+	EXPECT_TRUE(clayManager.regionIsValid("region_a"));						// region
+	EXPECT_TRUE(clayManager.regionIsValid("test_1_strategic_regions"));	// superregion
+	EXPECT_FALSE(clayManager.regionIsValid("STATE_TEST_5"));					// does't exist
+	EXPECT_FALSE(clayManager.regionIsValid("region_d"));						// does't exist
+	EXPECT_FALSE(clayManager.regionIsValid("test_3_strategic_regions")); // does't exist
+}
+
+TEST(V3World_ClayManagerTests, clayManagerCanDetermineHierarchy)
+{
+	V3::ClayManager clayManager;
+	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
+	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.loadStatesIntoSuperRegions();
+
+	EXPECT_TRUE(clayManager.stateIsInRegion("STATE_TEST_1", "STATE_TEST_1"));
+	EXPECT_TRUE(clayManager.stateIsInRegion("STATE_TEST_1", "region_a"));
+	EXPECT_TRUE(clayManager.stateIsInRegion("STATE_TEST_1", "test_1_strategic_regions"));
+	EXPECT_FALSE(clayManager.stateIsInRegion("STATE_TEST_1", "STATE_TEST_2"));
+	EXPECT_FALSE(clayManager.stateIsInRegion("STATE_TEST_1", "region_b"));
+	EXPECT_FALSE(clayManager.stateIsInRegion("STATE_TEST_1", "test_2_strategic_regions"));
+}
+
 TEST(V3World_ClayManagerTests, excessSuperRegionStatesInRegionsAreObjectedAndRemoved)
 {
 	V3::ClayManager clayManager;
