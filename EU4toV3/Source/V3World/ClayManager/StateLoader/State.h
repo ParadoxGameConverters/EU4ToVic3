@@ -23,8 +23,6 @@ class State: commonItems::parser
 	[[nodiscard]] bool isCoastal() const { return coastal; }
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
 
-	friend std::ostream& operator<<(std::ostream& output, const State& state);
-
   private:
 	void registerKeys();
 	void distributeLandshares();

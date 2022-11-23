@@ -21,6 +21,7 @@ include_directories("Source/EU4World")
 include_directories("Source/EU4World/Loaders")
 include_directories("Source/V3World")
 include_directories("Source/Helpers")
+include_directories("Source/Output")
 include_directories("Source/Configuration")
 include_directories("${PROJECT_SOURCE_DIR}")
 link_directories(${CMAKE_SOURCE_DIR}/Resources)
@@ -35,6 +36,9 @@ file(GLOB EU4_SUBSUBDIR_SOURCES "${PROJECT_SOURCE_DIR}/EU4World/*/*/*.cpp")
 file(GLOB V3_WORLD_SOURCES "${PROJECT_SOURCE_DIR}/V3World/*.cpp")
 file(GLOB V3_SUBDIR_SOURCES "${PROJECT_SOURCE_DIR}/V3World/*/*.cpp")
 file(GLOB V3_SUBSUBDIR_SOURCES "${PROJECT_SOURCE_DIR}/V3World/*/*/*.cpp")
+file(GLOB OUT_WORLD_SOURCES "${PROJECT_SOURCE_DIR}/Output/*.cpp")
+file(GLOB OUT_SUBDIR_SOURCES "${PROJECT_SOURCE_DIR}/Output/*/*.cpp")
+file(GLOB OUT_SUBSUBDIR_SOURCES "${PROJECT_SOURCE_DIR}/Output/*/*/*.cpp")
 file(GLOB MAPPER_SOURCES "${PROJECT_SOURCE_DIR}/Mappers/*/*.cpp")
 set(COMMON_SOURCES "../commonItems/CommonFunctions.cpp")
 set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/Color.cpp")
@@ -62,6 +66,9 @@ add_executable(EU4ToVic3
 	${V3_WORLD_SOURCES}
 	${V3_SUBDIR_SOURCES}
 	${V3_SUBSUBDIR_SOURCES}
+	${OUT_WORLD_SOURCES}
+	${OUT_SUBDIR_SOURCES}
+	${OUT_SUBSUBDIR_SOURCES}
 	${MAPPER_SOURCES}
 	${COMMON_SOURCES}
 )
