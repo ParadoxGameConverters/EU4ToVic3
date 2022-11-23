@@ -1,6 +1,7 @@
 #ifndef RELIGION_MAPPER_H
 #define RELIGION_MAPPER_H
 #include "Parser.h"
+#include "ReligionLoader/ReligionLoader.h"
 #include <map>
 #include <optional>
 #include <string>
@@ -15,6 +16,7 @@ class ReligionMapper: commonItems::parser
 	void loadMappingRules(std::istream& theStream);
 
 	[[nodiscard]] std::optional<std::string> getV3Religion(const std::string& eu4Religion) const;
+	void expandReligionMappings(const std::map<std::string, EU4::Religion>& religions);
 
   private:
 	void registerKeys();
