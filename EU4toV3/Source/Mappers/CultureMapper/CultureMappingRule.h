@@ -59,7 +59,6 @@ class CultureMappingRule: commonItems::parser
 
   private:
 	void registerKeys();
-	[[nodiscard]] static std::optional<bool> existsBlock(const std::optional<std::string>& ruleString, const std::string& countryString);
 
 	std::string v3culture;					  // vic3
 	std::set<std::string> cultures;		  // eu4

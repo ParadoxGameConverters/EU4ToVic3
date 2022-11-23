@@ -53,15 +53,6 @@ void mappers::CultureMappingRule::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-std::optional<bool> mappers::CultureMappingRule::existsBlock(const std::optional<std::string>& ruleString, const std::string& countryString)
-{
-	if (!ruleString)
-		return std::nullopt;
-	if (*ruleString == countryString)
-		return false;
-	return true;
-}
-
 std::optional<std::string> mappers::CultureMappingRule::cultureMatch(const V3::ClayManager& clayManager,
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader,

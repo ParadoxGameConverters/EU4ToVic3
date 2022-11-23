@@ -3,6 +3,7 @@
 #include "ClayManager/ClayManager.h"
 #include "Configuration.h"
 #include "CountryMapper/CountryMapper.h"
+#include "CultureMapper/CultureMapper.h"
 #include "PoliticalManager/PoliticalManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
 #include "ReligionMapper/ReligionMapper.h"
@@ -31,6 +32,7 @@ class World
 
 	mappers::ProvinceMapper provinceMapper;
 	mappers::ReligionMapper religionMapper;
+	mappers::CultureMapper cultureMapper;
 	std::shared_ptr<mappers::CountryMapper> countryMapper;
 };
 
