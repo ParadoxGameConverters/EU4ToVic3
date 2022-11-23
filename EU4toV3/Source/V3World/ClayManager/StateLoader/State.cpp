@@ -61,6 +61,25 @@ void V3::State::registerKeys()
 				Log(LogLevel::Warning) << "Impassable province " << theProvinceName << " isn't defined in the state! Ignoring.";
 		}
 	});
+	registerKeyword("traits", [this](std::istream& theStream) {
+		traits = commonItems::getStrings(theStream);
+		std::transform(traits.begin(), traits.end(), traits.begin(), commonItems::remQuotes);
+	});
+	registerKeyword("arable_land", [this](std::istream& theStream) {
+		cappedResources["arable_land"] = commonItems::getInt(theStream);
+	});
+	registerKeyword("arable_resources", [this](std::istream& theStream) {
+		for (const auto& resource: commonItems::getStrings(theStream))
+		{
+			arableResources[commonItems::remQuotes(resource)] = true;
+		}
+	});
+	registerKeyword("capped_resources", [this](std::istream& theStream) {
+		for (const auto& resource: commonItems::getStrings(theStream))
+		{
+			cappedResources[resource] = commonItems::getInt(theStream);
+		}
+	});
 	registerKeyword("naval_exit_id", [this](const std::string& unused, std::istream& theStream) {
 		commonItems::ignoreItem(unused, theStream);
 		coastal = true;

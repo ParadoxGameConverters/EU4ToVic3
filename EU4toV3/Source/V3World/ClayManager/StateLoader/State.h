@@ -34,6 +34,9 @@ class State: commonItems::parser
 	std::string name;
 	std::map<std::string, std::shared_ptr<Province>> provinces; // in xA2345A format
 	std::vector<std::shared_ptr<SubState>> substates;
+	std::vector<std::string> traits;					// state_trait_natural_harbors
+	std::map<std::string, int> cappedResources;	// RGO and arable land potential
+	std::map<std::string, bool> arableResources; // Which buildings can be built on arable land
 };
 } // namespace V3
 #endif // STATE_H
