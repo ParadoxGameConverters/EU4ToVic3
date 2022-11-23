@@ -89,7 +89,7 @@ void V3::State::distributeLandshares()
 
 int V3::State::calculateWeightedProvinceTotals(const ProvinceTypeCounter& theCount)
 {
-	// prime coeffcient is SPLIT_STATE_PRIME_LAND_WEIGHT = 5.0 from the defines
+	// prime coeffcient is the define SPLIT_STATE_PRIME_LAND_WEIGHT - 1
 	return theCount.every + (5 - 1) * theCount.prime - theCount.impassable;
 }
 
