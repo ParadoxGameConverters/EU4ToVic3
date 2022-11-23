@@ -69,10 +69,8 @@ void V3::State::registerKeys()
 		cappedResources["arable_land"] = commonItems::getInt(theStream);
 	});
 	registerKeyword("arable_resources", [this](std::istream& theStream) {
-		for (const auto& resource: commonItems::getStrings(theStream))
-		{
-			arableResources[commonItems::remQuotes(resource)] = true;
-		}
+		arableResources = commonItems::getStrings(theStream);
+		std::transform(arableResources.begin(), arableResources.end(), arableResources.begin(), commonItems::remQuotes);
 	});
 	registerKeyword("capped_resources", [this](std::istream& theStream) {
 		for (const auto& resource: commonItems::getStrings(theStream))
@@ -103,6 +101,17 @@ void V3::State::distributeLandshares()
 			substateLandshare = 0.05;
 		}
 		substate->landshare = substateLandshare;
+	}
+}
+
+void V3::State::distributeResources()
+{
+	for (const auto& substate: substates)
+	{
+		for (const auto& [resource, amount]: cappedResources)
+		{
+			substate->resources[resource] = substate->landshare * amount; // Intentionally truncated with an implicit int cast
+		}
 	}
 }
 

@@ -27,6 +27,7 @@ struct SubState
 	std::string stateName;
 
 	double landshare; // % of State's resources that are substate's
+	std::map<std::string, int> resources;
 };
 } // namespace V3
 
