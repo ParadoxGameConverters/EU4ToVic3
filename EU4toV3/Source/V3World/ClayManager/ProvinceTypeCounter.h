@@ -1,8 +1,6 @@
 #ifndef V3_PROVINCE_TYPE_COUNTER_H
 #define V3_PROVINCE_TYPE_COUNTER_H
 #include "StateLoader/Province.h"
-#include <map>
-#include <ranges>
 
 
 /* A ProvinceTypeCounter measures the count of each type of province in a collection.

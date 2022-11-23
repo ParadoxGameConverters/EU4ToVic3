@@ -5,6 +5,7 @@
 #include "StringUtils.h"
 #include "V3World/ClayManager/ProvinceTypeCounter.h"
 #include "V3World/ClayManager/SubState.h"
+#include <ranges>
 
 
 void V3::State::loadState(std::istream& theStream)
@@ -108,6 +109,8 @@ const V3::ProvinceTypeCounter& V3::State::countProvinceTypes(std::map<std::strin
 			++typeCounter.impassable;
 		}
 	}
+
+	return typeCounter;
 }
 
 std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& provinceName) const
