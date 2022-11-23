@@ -241,6 +241,8 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMappingsVersion.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\AssimilationParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperGroupMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp" />
@@ -315,6 +317,8 @@
     <ClCompile Include="MapperTests\ProvinceMapperTests\ProvinceMapperTests.cpp" />
     <ClCompile Include="MapperTests\ProvinceMapperTests\ProvinceMappingsVersionTests.cpp" />
     <ClCompile Include="MapperTests\ProvinceMapperTests\ProvinceMappingTests.cpp" />
+    <ClCompile Include="MapperTests\ReligionMapperTests\ReligionMapperTests.cpp" />
+    <ClCompile Include="MapperTests\ReligionMapperTests\ReligionMappingTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\AssimilationParserTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperGroupMapperTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperRegionParserTests.cpp" />
@@ -481,6 +485,32 @@
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\country_mappings.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\religions\00_religion.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/eu4installation/common/religions</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\mod\themod\common\religions\00_religion.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/mod/themod/common/religions</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\themod\common\religions\99_converted_dynamic_faith_107-from-shamanism.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/mod/themod/common/religions</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\themod\common\religions\99_converted_dynamic_faith_108-from-.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/mod/themod/common/religions</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\mod\themod\common\religions\99_converted_dynamic_faith_error-.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/mod/themod/common/religions</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\religion_map.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>

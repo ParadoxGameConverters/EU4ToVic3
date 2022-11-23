@@ -478,6 +478,18 @@
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMappingTests.cpp">
       <Filter>MapperTests\CountryMapperTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionMapper.cpp">
+      <Filter>ConverterFiles\Mappers\ReligionMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionMapping.cpp">
+      <Filter>ConverterFiles\Mappers\ReligionMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\ReligionMapperTests\ReligionMapperTests.cpp">
+      <Filter>MapperTests\ReligionMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\ReligionMapperTests\ReligionMappingTests.cpp">
+      <Filter>MapperTests\ReligionMapperTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -780,6 +792,18 @@
     <Filter Include="MapperTests\CountryMapperTests">
       <UniqueIdentifier>{b30a64ec-33c3-4c1a-918c-9548abe3d542}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TestFiles\eu4installation\common\religions">
+      <UniqueIdentifier>{4065a709-074f-42cf-bf7f-171b3f0847ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\mod\themod\common\religions">
+      <UniqueIdentifier>{4c847025-db73-4418-b1fd-9d3e65c6b0ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\Mappers\ReligionMapper">
+      <UniqueIdentifier>{9c0b5ebd-184a-413c-bf3c-0c05cee0a59f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\ReligionMapperTests">
+      <UniqueIdentifier>{fec254af-2009-4951-8c05-8832e3787c84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -875,6 +899,24 @@
       <Filter>TestFiles\vic3installation\game\common\country_definitions</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\country_mappings.txt">
+      <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\religions\00_religion.txt">
+      <Filter>TestFiles\eu4installation\common\religions</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\themod\common\religions\00_religion.txt">
+      <Filter>TestFiles\mod\themod\common\religions</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\themod\common\religions\99_converted_dynamic_faith_107-from-shamanism.txt">
+      <Filter>TestFiles\mod\themod\common\religions</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\themod\common\religions\99_converted_dynamic_faith_108-from-.txt">
+      <Filter>TestFiles\mod\themod\common\religions</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\mod\themod\common\religions\99_converted_dynamic_faith_error-.txt">
+      <Filter>TestFiles\mod\themod\common\religions</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\religion_map.txt">
       <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>

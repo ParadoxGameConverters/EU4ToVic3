@@ -7,11 +7,11 @@
 
 void mappers::CountryMapper::loadMappingRules(const std::string& filePath)
 {
-	Log(LogLevel::Info) << "-> Parsing Country Mapping Rules.";
+	Log(LogLevel::Info) << "-> Parsing country mapping rules.";
 	registerKeys();
 	parseFile(filePath);
 	clearRegisteredKeywords();
-	Log(LogLevel::Info) << "<> " << countryMappingRules.size() << " Rules loaded.";
+	Log(LogLevel::Info) << "<> " << countryMappingRules.size() << " rules loaded.";
 }
 
 void mappers::CountryMapper::loadMappingRules(std::istream& theStream)
