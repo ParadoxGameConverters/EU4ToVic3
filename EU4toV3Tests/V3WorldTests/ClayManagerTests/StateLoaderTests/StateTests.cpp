@@ -229,20 +229,6 @@ TEST(V3World_StateTests, excessImpassableProvincesAreSimplyIgnored)
 }
 
 
-TEST(V3World_StateTests, traitsSetAndQuotesCleaned)
-{
-	std::stringstream input;
-	input << "id = 3002\n";
-	input << "traits = { \"forests\" \"harbors\"}";
-	input << "provinces = { \"x112233\" }\n ";
-	V3::State state;
-
-	EXPECT_TRUE(state.getTraits().empty());
-	state.loadState(input);
-	EXPECT_THAT(state.getTraits(), testing::ElementsAreArray({"forests", "harbors"}));
-}
-
-
 TEST(V3World_StateTests, arableLandValueSet)
 {
 	std::stringstream input;
@@ -254,20 +240,6 @@ TEST(V3World_StateTests, arableLandValueSet)
 	EXPECT_EQ(state.getCappedResources().find("arable_land"), state.getCappedResources().end());
 	state.loadState(input);
 	EXPECT_EQ(state.getCappedResources().at("arable_land"), 36);
-}
-
-
-TEST(V3World_StateTests, arableResourcesSetAndQuotesCleaned)
-{
-	std::stringstream input;
-	input << "id = 3002\n";
-	input << "provinces = { \"x112233\" \"x445566\"}\n ";
-	input << "arable_resources = { \"rye_farms\" \"livestock\"}\n";
-	V3::State state;
-
-	EXPECT_TRUE(state.getArableResources().empty());
-	state.loadState(input);
-	EXPECT_THAT(state.getArableResources(), testing::ElementsAreArray({"rye_farms", "livestock"}));
 }
 
 
@@ -325,7 +297,7 @@ TEST(V3World_StateTests, landshareAccountsForPrimeAndImpassable)
 	state.addSubState(first);
 	state.addSubState(second);
 
-	state.checkLandshares();
+	state.distributeLandshares();
 
 	const auto& substates = state.getSubStates();
 	EXPECT_DOUBLE_EQ(substates[0]->landshare, 6.0 / 9);
@@ -360,7 +332,7 @@ TEST(V3World_StateTests, distributeResourcesTruncatesDoubles)
 	state.addSubState(first);
 	state.addSubState(second);
 
-	state.checkResourceDistribution();
+	state.distributeResources();
 
 	const auto& substates = state.getSubStates();
 	EXPECT_EQ(substates[0]->resources["arable_land"], 18);

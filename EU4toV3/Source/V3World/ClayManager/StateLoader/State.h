@@ -15,10 +15,8 @@ class State: commonItems::parser
 	void loadState(std::istream& theStream);
 	void setStateName(const std::string& theName) { name = theName; }
 	void addSubState(const std::shared_ptr<SubState>& substate) { substates.push_back(substate); }
-
-	// Testing functions
-	void checkLandshares();
-	void checkResourceDistribution();
+	void distributeLandshares();
+	void distributeResources();
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] bool containsProvince(const std::string& provinceName) const { return provinces.contains(provinceName); }
@@ -32,8 +30,6 @@ class State: commonItems::parser
 
   private:
 	void registerKeys();
-	void distributeLandshares();
-	void distributeResources();
 
 	static int calculateWeightedProvinceTotals(const ProvinceTypeCounter& theCount);
 	static const std::unique_ptr<ProvinceTypeCounter> countProvinceTypes(std::map<std::string, std::shared_ptr<Province>> provinces);

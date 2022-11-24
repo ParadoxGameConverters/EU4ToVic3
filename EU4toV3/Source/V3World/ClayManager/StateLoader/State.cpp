@@ -21,7 +21,7 @@ void V3::State::registerKeys()
 	registerKeyword("provinces", [this](std::istream& theStream) {
 		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{
-			auto theProvinceName = commonItems::remQuotes(provinceName);
+			auto theProvinceName = provinceName;
 			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
 			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
 				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1); // from "x12345a" to x12345A
@@ -35,7 +35,7 @@ void V3::State::registerKeys()
 	registerKeyword("prime_land", [this](std::istream& theStream) {
 		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{
-			auto theProvinceName = commonItems::remQuotes(provinceName);
+			auto theProvinceName = provinceName;
 			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
 			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
 				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1);
@@ -50,7 +50,7 @@ void V3::State::registerKeys()
 	registerKeyword("impassable", [this](std::istream& theStream) {
 		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{
-			auto theProvinceName = commonItems::remQuotes(provinceName);
+			auto theProvinceName = provinceName;
 			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
 			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
 				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1);
@@ -64,19 +64,24 @@ void V3::State::registerKeys()
 	});
 	registerKeyword("traits", [this](std::istream& theStream) {
 		traits = commonItems::getStrings(theStream);
-		std::transform(traits.begin(), traits.end(), traits.begin(), commonItems::remQuotes);
 	});
 	registerKeyword("arable_land", [this](std::istream& theStream) {
 		cappedResources["arable_land"] = commonItems::getInt(theStream);
 	});
 	registerKeyword("arable_resources", [this](std::istream& theStream) {
 		arableResources = commonItems::getStrings(theStream);
-		std::transform(arableResources.begin(), arableResources.end(), arableResources.begin(), commonItems::remQuotes);
 	});
 	registerKeyword("capped_resources", [this](std::istream& theStream) {
 		for (const auto& [resource, amount]: commonItems::assignments(theStream).getAssignments())
 		{
-			cappedResources[resource] = std::stoi(amount);
+			try
+			{
+				cappedResources[resource] = std::stoi(amount);
+			}
+			catch (const std::exception& e)
+			{
+				Log(LogLevel::Error) << "Failed reading amount of " << resource << " in the state: " << e.what();
+			}
 		}
 	});
 	registerKeyword("naval_exit_id", [this](const std::string& unused, std::istream& theStream) {
@@ -111,7 +116,7 @@ void V3::State::distributeResources()
 	{
 		for (const auto& [resource, amount]: cappedResources)
 		{
-			substate->resources[resource] = substate->landshare * amount; // Intentionally truncated with an implicit int cast
+			substate->resources[resource] = std::floor(substate->landshare * amount);
 		}
 	}
 }
@@ -147,14 +152,4 @@ std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& province
 	if (provinces.contains(provinceName))
 		return provinces.at(provinceName);
 	return nullptr;
-}
-
-void V3::State::checkLandshares()
-{
-	distributeLandshares();
-}
-
-void V3::State::checkResourceDistribution()
-{
-	distributeResources();
 }
