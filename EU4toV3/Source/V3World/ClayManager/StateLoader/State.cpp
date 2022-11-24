@@ -5,6 +5,7 @@
 #include "StringUtils.h"
 #include "V3World/ClayManager/ProvinceTypeCounter.h"
 #include "V3World/ClayManager/SubState.h"
+#include <cmath>
 #include <ranges>
 
 
@@ -116,7 +117,7 @@ void V3::State::distributeResources()
 	{
 		for (const auto& [resource, amount]: cappedResources)
 		{
-			substate->resources[resource] = std::floor(substate->landshare * amount);
+			substate->resources[resource] = floor(substate->landshare * amount);
 		}
 	}
 }
