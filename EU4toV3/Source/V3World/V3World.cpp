@@ -24,6 +24,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	religionMapper.loadMappingRules("configurables/religion_map.txt");
 	religionMapper.expandReligionMappings(sourceWorld.getReligionLoader().getAllReligions());
 	cultureMapper.loadMappingRules("configurables/culture_map.txt");
+	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
 	Log(LogLevel::Info) << "-> Importing Provinces";

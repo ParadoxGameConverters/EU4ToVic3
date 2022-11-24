@@ -7,6 +7,7 @@ namespace EU4
 {
 class CultureLoader;
 class ReligionLoader;
+class CultureGroupParser;
 } // namespace EU4
 
 namespace V3
@@ -22,6 +23,7 @@ class CultureMapper: commonItems::parser
 
 	void loadMappingRules(std::istream& theStream);
 	void loadMappingRules(const std::string& fileName);
+	void expandCulturalMappings(const V3::ClayManager& clayManager, const EU4::CultureLoader& cultureLoader, const EU4::ReligionLoader& religionLoader);
 
 	[[nodiscard]] const auto& getMacros() const { return encounteredMacros; }
 
@@ -32,7 +34,9 @@ class CultureMapper: commonItems::parser
 		 const std::string& eu4culture,
 		 const std::string& eu4religion,
 		 const std::string& v3state,
-		 const std::string& v3ownerTag) const;
+		 const std::string& v3ownerTag,
+		 bool silent = false) const;
+
 
 	[[nodiscard]] std::optional<std::string> cultureRegionalMatch(const V3::ClayManager& clayManager,
 		 const EU4::CultureLoader& cultureLoader,

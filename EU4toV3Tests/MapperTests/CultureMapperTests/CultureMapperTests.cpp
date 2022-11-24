@@ -13,10 +13,7 @@ TEST(Mappers_CultureMapperTests, noMatchesGiveEmptyOptionalAndWarns)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -42,10 +39,7 @@ TEST(Mappers_CultureMapperTests, simpleMatchMatches)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -65,10 +59,7 @@ TEST(Mappers_CultureMapperTests, simpleMatchMatchesBetweenMultipleCultures)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -88,10 +79,7 @@ TEST(Mappers_CultureMapperTests, religionOwnerMatches)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -111,10 +99,7 @@ TEST(Mappers_CultureMapperTests, religionMatches)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -134,10 +119,7 @@ TEST(Mappers_CultureMapperTests, cultureFallbackMatches)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -157,10 +139,7 @@ TEST(Mappers_CultureMapperTests, superRegionMatches)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -180,10 +159,7 @@ TEST(Mappers_CultureMapperTests, regionMatches)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -203,10 +179,7 @@ TEST(Mappers_CultureMapperTests, stateMatches)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -226,10 +199,7 @@ TEST(Mappers_CultureMapperTests, regionReligionMatches)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -249,10 +219,7 @@ TEST(Mappers_CultureMapperTests, regionNonReligionMatches)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -272,10 +239,7 @@ TEST(Mappers_CultureMapperTests, cultureGroupRegionReligionMatches)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -295,10 +259,7 @@ TEST(Mappers_CultureMapperTests, cultureGroupReligionMatches)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -318,10 +279,7 @@ TEST(Mappers_CultureMapperTests, cultureGroupRegionMatches)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -341,10 +299,7 @@ TEST(Mappers_CultureMapperTests, cultureGroupMatches)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -364,10 +319,7 @@ TEST(Mappers_CultureMapperTests, macrosAreLoaded1)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -387,10 +339,7 @@ TEST(Mappers_CultureMapperTests, macrosAreLoaded2)
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4Path, mods);
 	EU4::CultureLoader cultureLoader;
@@ -400,4 +349,35 @@ TEST(Mappers_CultureMapperTests, macrosAreLoaded2)
 	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
 
 	EXPECT_EQ("vculture17", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture8", "religion_1", "STATE_TEST_1", "GAT"));
+}
+
+TEST(Mappers_CultureMapperTests, rulesCanBeExpandedWithUnmappedCultures)
+{
+	V3::ClayManager clayManager;
+	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
+	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.loadStatesIntoSuperRegions();
+	auto eu4Path = "TestFiles/eu4installation/";
+	Mods mods;
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
+	EU4::ReligionLoader religionLoader;
+	religionLoader.loadReligions(eu4Path, mods);
+	EU4::CultureLoader cultureLoader;
+	cultureLoader.loadCultures(eu4Path, mods);
+
+	mappers::CultureMapper culMapper;
+	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
+
+	std::stringstream log;
+	std::streambuf* cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+	EXPECT_FALSE(culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "unmapped_culture", "", "SOMESTATE", ""));
+	std::cout.rdbuf(cout_buffer);
+
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] ! CultureMapper - Attempting to match culture unmapped_culture in state SOMESTATE failed.)"));
+
+	// now expand
+	culMapper.expandCulturalMappings(clayManager, cultureLoader, religionLoader);
+
+	EXPECT_EQ("unmapped_culture", culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "unmapped_culture", "", "SOMESTATE", ""));
 }

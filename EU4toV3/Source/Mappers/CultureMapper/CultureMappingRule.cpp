@@ -1,13 +1,11 @@
 #include "CultureMappingRule.h"
+#include "ClayManager/ClayManager.h"
 #include "CommonRegexes.h"
 #include "Configuration.h"
-#include "ParserHelpers.h"
-#include <sstream>
-
-#include "ClayManager/ClayManager.h"
 #include "CultureLoader/CultureLoader.h"
-#include "Log.h"
+#include "ParserHelpers.h"
 #include "ReligionLoader/ReligionLoader.h"
+#include <sstream>
 
 void mappers::CultureMappingRule::loadMappingRules(std::istream& theStream)
 {

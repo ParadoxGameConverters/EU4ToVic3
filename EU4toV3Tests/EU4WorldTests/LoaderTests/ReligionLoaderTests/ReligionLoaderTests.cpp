@@ -18,10 +18,7 @@ TEST(EU4World_ReligionLoaderTests, religionNamesCanBeImported)
 {
 	const auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 
 	EU4::ReligionLoader theReligions;
 	theReligions.loadReligions(eu4Path, mods);
@@ -37,10 +34,7 @@ TEST(EU4World_ReligionLoaderTests, religionsImportWithCorrectReligiousGroups)
 {
 	const auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 
 	EU4::ReligionLoader theReligions;
 	theReligions.loadReligions(eu4Path, mods);
@@ -68,10 +62,7 @@ TEST(EU4World_ReligionLoaderTests, trappingsAreLoadedForSaneCustomReligions)
 {
 	const auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 
 	EU4::ReligionLoader theReligions;
 	theReligions.loadReligions(eu4Path, mods);
@@ -87,10 +78,7 @@ TEST(EU4World_ReligionLoaderTests, loadingInsaneCustomReligionsThrowsWarnings)
 {
 	const auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
-	commonItems::ModLoader modLoader;
-	modLoader.loadMods("TestFiles", mods);
-	mods = modLoader.getMods();
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 
 	EU4::ReligionLoader theReligions;
 

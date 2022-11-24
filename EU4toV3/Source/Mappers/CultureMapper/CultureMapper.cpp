@@ -1,8 +1,12 @@
 #include "CultureMapper.h"
 #include "CommonRegexes.h"
+#include "CultureLoader/CultureGroupParser.h"
 #include "CultureMappingRule.h"
 #include "Log.h"
 #include "ParserHelpers.h"
+#include <ranges>
+
+#include "CultureLoader/CultureLoader.h"
 
 void mappers::CultureMapper::loadMappingRules(std::istream& theStream)
 {
@@ -13,9 +17,11 @@ void mappers::CultureMapper::loadMappingRules(std::istream& theStream)
 
 void mappers::CultureMapper::loadMappingRules(const std::string& fileName)
 {
+	Log(LogLevel::Info) << "-> Parsing culture mapping rules.";
 	registerKeys();
 	parseFile(fileName);
 	clearRegisteredKeywords();
+	Log(LogLevel::Info) << "<> " << cultureMapRules.size() << " rules loaded.";
 }
 
 void mappers::CultureMapper::registerKeys()
@@ -41,7 +47,8 @@ void mappers::CultureMapper::registerKeys()
 	 const std::string& eu4culture,
 	 const std::string& eu4religion,
 	 const std::string& v3state,
-	 const std::string& v3ownerTag) const
+	 const std::string& v3ownerTag,
+	 bool silent) const
 {
 	// Speed things up. Don't match dynamics.
 	if (eu4culture.starts_with("dynamic-"))
@@ -56,7 +63,13 @@ void mappers::CultureMapper::registerKeys()
 
 	// If we failed to match, we're dealing with an unmapped culture, which can happen only if the culture is present in save but NOT in installation. Warn and
 	// bail.
-	Log(LogLevel::Warning) << "! CultureMapper - Attempting to match culture " << eu4culture << " in state " << v3state << " failed.";
+	if (!silent)
+	{
+		if (v3state.empty())
+			Log(LogLevel::Warning) << "! CultureMapper - Attempting to match culture " << eu4culture << " failed.";
+		else
+			Log(LogLevel::Warning) << "! CultureMapper - Attempting to match culture " << eu4culture << " in state " << v3state << " failed.";
+	}
 	return std::nullopt;
 }
 
@@ -102,4 +115,27 @@ std::optional<std::string> mappers::CultureMapper::cultureNonRegionalNonReligiou
 			return *possibleMatch;
 	}
 	return std::nullopt;
+}
+
+void mappers::CultureMapper::expandCulturalMappings(const V3::ClayManager& clayManager,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader)
+{
+	std::set<std::string> missingEU4Cultures;
+
+	// We'll simply iterate over all known eu4 cultures, see what maps, and then add literal mappings for what doesn't.
+
+	for (const auto& cultureGroup: cultureLoader.getCultureGroupsMap() | std::views::values)
+		for (const auto& cultureName: cultureGroup.getCultures() | std::views::keys)
+			if (!cultureMatch(clayManager, cultureLoader, religionLoader, cultureName, "", "", "", true))
+				missingEU4Cultures.emplace(cultureName);
+
+	for (const auto& culture: missingEU4Cultures)
+	{
+		CultureMappingRule newRule;
+		newRule.loadMappingRules("vic3 = " + culture + " eu4 = " + culture);
+		cultureMapRules.push_back(newRule);
+	}
+
+	Log(LogLevel::Info) << "<> Additional " << missingEU4Cultures.size() << " cultures imported.";
 }
