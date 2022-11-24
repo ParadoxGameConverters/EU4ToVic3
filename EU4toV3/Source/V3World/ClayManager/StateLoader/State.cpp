@@ -3,6 +3,11 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 #include "StringUtils.h"
+#include "V3World/ClayManager/ProvinceTypeCounter.h"
+#include "V3World/ClayManager/SubState.h"
+#include <cmath>
+#include <ranges>
+
 
 void V3::State::loadState(std::istream& theStream)
 {
@@ -11,12 +16,13 @@ void V3::State::loadState(std::istream& theStream)
 	clearRegisteredKeywords();
 }
 
+
 void V3::State::registerKeys()
 {
 	registerKeyword("provinces", [this](std::istream& theStream) {
 		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{
-			auto theProvinceName = commonItems::remQuotes(provinceName);
+			auto theProvinceName = provinceName;
 			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
 			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
 				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1); // from "x12345a" to x12345A
@@ -27,10 +33,25 @@ void V3::State::registerKeys()
 			provinces.emplace(theProvinceName, province);
 		}
 	});
+	registerKeyword("prime_land", [this](std::istream& theStream) {
+		for (const auto& provinceName: commonItems::getStrings(theStream))
+		{
+			auto theProvinceName = provinceName;
+			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
+			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
+				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1);
+			else
+				Log(LogLevel::Warning) << "Encountered prime province " << theProvinceName << " in unknown format!";
+			if (provinces.contains(theProvinceName))
+				provinces.at(theProvinceName)->setPrime();
+			else
+				Log(LogLevel::Warning) << "Prime province " << theProvinceName << " isn't defined in the state! Ignoring.";
+		}
+	});
 	registerKeyword("impassable", [this](std::istream& theStream) {
 		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{
-			auto theProvinceName = commonItems::remQuotes(provinceName);
+			auto theProvinceName = provinceName;
 			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
 			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
 				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1);
@@ -42,11 +63,89 @@ void V3::State::registerKeys()
 				Log(LogLevel::Warning) << "Impassable province " << theProvinceName << " isn't defined in the state! Ignoring.";
 		}
 	});
+	registerKeyword("traits", [this](std::istream& theStream) {
+		traits = commonItems::getStrings(theStream);
+	});
+	registerKeyword("arable_land", [this](std::istream& theStream) {
+		cappedResources["arable_land"] = commonItems::getInt(theStream);
+	});
+	registerKeyword("arable_resources", [this](std::istream& theStream) {
+		arableResources = commonItems::getStrings(theStream);
+	});
+	registerKeyword("capped_resources", [this](std::istream& theStream) {
+		for (const auto& [resource, amount]: commonItems::assignments(theStream).getAssignments())
+		{
+			try
+			{
+				cappedResources[resource] = std::stoi(amount);
+			}
+			catch (const std::exception& e)
+			{
+				Log(LogLevel::Error) << "Failed reading amount of " << resource << " in the state: " << e.what();
+			}
+		}
+	});
 	registerKeyword("naval_exit_id", [this](const std::string& unused, std::istream& theStream) {
 		commonItems::ignoreItem(unused, theStream);
 		coastal = true;
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+}
+
+void V3::State::distributeLandshares()
+{
+	const auto statewideProvinceTypes = countProvinceTypes(provinces);
+	double weightedStatewideProvinces = calculateWeightedProvinceTotals(*statewideProvinceTypes);
+
+	for (const auto& substate: substates)
+	{
+		const auto substateCount = countProvinceTypes(substate->provinces);
+		double weightedSubstateProvinces = calculateWeightedProvinceTotals(*substateCount);
+
+		double substateLandshare = weightedSubstateProvinces / weightedStatewideProvinces;
+		if (substateLandshare < 0.05) // In defines as SPLIT_STATE_MIN_LAND_SHARE
+		{
+			substateLandshare = 0.05;
+		}
+		substate->landshare = substateLandshare;
+	}
+}
+
+void V3::State::distributeResources()
+{
+	for (const auto& substate: substates)
+	{
+		for (const auto& [resource, amount]: cappedResources)
+		{
+			substate->resources[resource] = floor(substate->landshare * amount);
+		}
+	}
+}
+
+int V3::State::calculateWeightedProvinceTotals(const ProvinceTypeCounter& theCount)
+{
+	// prime coeffcient is the define SPLIT_STATE_PRIME_LAND_WEIGHT - 1
+	return theCount.every + (5 - 1) * theCount.prime - theCount.impassable;
+}
+
+const std::unique_ptr<V3::ProvinceTypeCounter> V3::State::countProvinceTypes(std::map<std::string, std::shared_ptr<Province>> provinces)
+{
+	auto typeCounter = std::make_unique<V3::ProvinceTypeCounter>();
+
+	typeCounter->every = provinces.size();
+	for (const auto& province: std::views::values(provinces))
+	{
+		if (province->isPrime())
+		{
+			++typeCounter->prime;
+		}
+		if (province->isImpassable())
+		{
+			++typeCounter->impassable;
+		}
+	}
+
+	return std::move(typeCounter);
 }
 
 std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& provinceName) const
