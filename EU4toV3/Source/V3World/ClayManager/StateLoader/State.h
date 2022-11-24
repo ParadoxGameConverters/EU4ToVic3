@@ -16,12 +16,19 @@ class State: commonItems::parser
 	void setStateName(const std::string& theName) { name = theName; }
 	void addSubState(const std::shared_ptr<SubState>& substate) { substates.push_back(substate); }
 
+	// Testing functions
+	void checkLandshares();
+	void checkResourceDistribution();
+
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] bool containsProvince(const std::string& provinceName) const { return provinces.contains(provinceName); }
 	[[nodiscard]] std::shared_ptr<Province> getProvince(const std::string& provinceName) const;
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
 	[[nodiscard]] bool isCoastal() const { return coastal; }
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
+	[[nodiscard]] const auto& getTraits() const { return traits; }
+	[[nodiscard]] const auto& getCappedResources() const { return cappedResources; }
+	[[nodiscard]] const auto& getArableResources() const { return arableResources; }
 
   private:
 	void registerKeys();

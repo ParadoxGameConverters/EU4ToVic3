@@ -1,4 +1,5 @@
 #include "ClayManager/StateLoader/State.h"
+#include "ClayManager/SubState.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
@@ -79,6 +80,80 @@ TEST(V3World_StateTests, invalidProvinceLengthNamesAreUppercasedAndObjected)
 }
 
 
+TEST(V3World_StateTests, primeProvincesGetFlagged)
+{
+	std::stringstream input;
+	input << "id = 3002\n";
+	input << "provinces = { \"x112233\" \"x445566\"}\n ";
+	input << "prime_land = { \"x445566\"}\n ";
+	V3::State state;
+	state.loadState(input);
+
+	const auto& province1 = state.getProvinces().at("x112233");
+	const auto& province2 = state.getProvinces().at("x445566");
+
+	EXPECT_FALSE(province1->isPrime());
+	EXPECT_TRUE(province2->isPrime());
+}
+
+
+TEST(V3World_StateTests, primeProvinceNamesAreUppercasedBeforeMatching)
+{
+	std::stringstream input;
+	input << "provinces = { \"xABCDEF\" }\n ";
+	input << "prime_land = { \"xabcdef\"}\n ";
+	V3::State state;
+	state.loadState(input);
+
+	const auto& province1 = state.getProvinces().at("xABCDEF");
+	EXPECT_TRUE(province1->isPrime());
+}
+
+TEST(V3World_StateTests, invalidPrimeProvinceLengthNamesAreUppercasedAndObjected)
+{
+	std::stringstream input;
+	input << "provinces = { \"x12345\" \"x1234567\" \"0x123456\" }\n ";
+	input << "prime_land = { \"x12345\" \"x1234567\" \"0x123456\" }\n ";
+	V3::State state;
+
+	std::stringstream log;
+	std::streambuf* cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+
+	state.loadState(input);
+
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Encountered prime province X12345 in unknown format!)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Encountered prime province X1234567 in unknown format!)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Encountered prime province 0X123456 in unknown format!)"));
+
+	std::cout.rdbuf(cout_buffer);
+}
+
+TEST(V3World_StateTests, excessPrimeProvincesAreSimplyIgnored)
+{
+	std::stringstream input;
+	input << "provinces = { \"x123456\" }\n ";
+	input << "prime_land = { \"x123456\" \"x123457\" \"x123458\" }\n ";
+	V3::State state;
+
+	std::stringstream log;
+	std::streambuf* cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+
+	state.loadState(input);
+
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Prime province x123457 isn't defined in the state! Ignoring.)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Prime province x123458 isn't defined in the state! Ignoring.)"));
+
+	std::cout.rdbuf(cout_buffer);
+
+	const auto& province1 = state.getProvinces().at("x123456");
+	EXPECT_TRUE(province1->isPrime());
+
+	EXPECT_FALSE(state.getProvinces().contains("x123457"));
+	EXPECT_FALSE(state.getProvinces().contains("x123458"));
+}
+
 TEST(V3World_StateTests, impassableProvincesGetFlagged)
 {
 	std::stringstream input;
@@ -154,6 +229,63 @@ TEST(V3World_StateTests, excessImpassableProvincesAreSimplyIgnored)
 }
 
 
+TEST(V3World_StateTests, traitsSetAndQuotesCleaned)
+{
+	std::stringstream input;
+	input << "id = 3002\n";
+	input << "traits = { \"forests\" \"harbors\"}";
+	input << "provinces = { \"x112233\" }\n ";
+	V3::State state;
+
+	EXPECT_TRUE(state.getTraits().empty());
+	state.loadState(input);
+	EXPECT_THAT(state.getTraits(), testing::ElementsAreArray({"forests", "harbors"}));
+}
+
+
+TEST(V3World_StateTests, arableLandValueSet)
+{
+	std::stringstream input;
+	input << "id = 3002\n";
+	input << "provinces = { \"x112233\" }\n ";
+	input << "arable_land = 36\n ";
+	V3::State state;
+
+	EXPECT_EQ(state.getCappedResources().find("arable_land"), state.getCappedResources().end());
+	state.loadState(input);
+	EXPECT_EQ(state.getCappedResources().at("arable_land"), 36);
+}
+
+
+TEST(V3World_StateTests, arableResourcesSetAndQuotesCleaned)
+{
+	std::stringstream input;
+	input << "id = 3002\n";
+	input << "provinces = { \"x112233\" \"x445566\"}\n ";
+	input << "arable_resources = { \"rye_farms\" \"livestock\"}\n";
+	V3::State state;
+
+	EXPECT_TRUE(state.getArableResources().empty());
+	state.loadState(input);
+	EXPECT_THAT(state.getArableResources(), testing::ElementsAreArray({"rye_farms", "livestock"}));
+}
+
+
+TEST(V3World_StateTests, cappedResourcesValueSet)
+{
+	std::stringstream input;
+	input << "id = 3002\n";
+	input << "provinces = { \"x112233\" }\n ";
+	input << "capped_resources = { iron = 40 lead = 18 }\n ";
+	V3::State state;
+
+	EXPECT_EQ(state.getCappedResources().find("iron"), state.getCappedResources().end());
+	EXPECT_EQ(state.getCappedResources().find("lead"), state.getCappedResources().end());
+	state.loadState(input);
+	EXPECT_EQ(state.getCappedResources().at("iron"), 40);
+	EXPECT_EQ(state.getCappedResources().at("lead"), 18);
+}
+
 TEST(V3World_StateTests, navalExitFlagsStateAsCoastal)
 {
 	std::stringstream input;
@@ -166,4 +298,76 @@ TEST(V3World_StateTests, navalExitFlagsStateAsCoastal)
 	EXPECT_FALSE(state.isCoastal());
 	state.loadState(input);
 	EXPECT_TRUE(state.isCoastal());
+}
+
+
+TEST(V3World_StateTests, landshareAccountsForPrimeAndImpassable)
+{
+	std::stringstream input;
+	input << "id = 3002\n";
+	input << "provinces = { \"x112233\" \"x112234\" \"x112235\" \"x112236\" \"x112237\" \"x445566\"}\n ";
+	input << "prime_land = {\"x112234\"}\n ";
+	input << "impassable = { \"x445566\"}\n ";
+	V3::State state;
+
+	state.loadState(input);
+
+	const auto pm = state.getProvinces();
+
+	const auto zeroth = std::make_shared<V3::SubState>();
+	const auto first = std::make_shared<V3::SubState>();
+	const auto second = std::make_shared<V3::SubState>();
+	zeroth->provinces = std::map<std::string, std::shared_ptr<V3::Province>>{{"x112233", pm.at("x112233")}, {"x112234", pm.at("x112234")}};
+	first->provinces = std::map<std::string, std::shared_ptr<V3::Province>>{{"x112235", pm.at("x112235")}, {"x112236", pm.at("x112236")}};
+	second->provinces = std::map<std::string, std::shared_ptr<V3::Province>>{{"x112237", pm.at("x112237")}, {"x112234", pm.at("x445566")}};
+
+	state.addSubState(zeroth);
+	state.addSubState(first);
+	state.addSubState(second);
+
+	state.checkLandshares();
+
+	const auto& substates = state.getSubStates();
+	EXPECT_DOUBLE_EQ(substates[0]->landshare, 6.0 / 9);
+	EXPECT_DOUBLE_EQ(substates[1]->landshare, 2.0 / 9);
+	EXPECT_DOUBLE_EQ(substates[2]->landshare, 1.0 / 9);
+}
+
+TEST(V3World_StateTests, distributeResourcesTruncatesDoubles)
+{
+	std::stringstream input;
+	input << "id = 3002\n";
+	input << "provinces = { \"x112233\" \"x112234\" \"x112235\" \"x112236\" \"x112237\" \"x445566\"}\n ";
+	input << "prime_land = {\"x112234\"}\n ";
+	input << "impassable = { \"x445566\"}\n ";
+	input << "arable_land = 36\n ";
+	input << "capped_resources = { iron = 53 }\n ";
+	V3::State state;
+
+	state.loadState(input);
+
+	const auto& pm = state.getProvinces();
+
+	const auto zeroth = std::make_shared<V3::SubState>();
+	const auto first = std::make_shared<V3::SubState>();
+	const auto second = std::make_shared<V3::SubState>();
+
+	zeroth->landshare = 5.0 / 10;
+	first->landshare = 3.0 / 10;
+	second->landshare = 3.8 / 9;
+
+	state.addSubState(zeroth);
+	state.addSubState(first);
+	state.addSubState(second);
+
+	state.checkResourceDistribution();
+
+	const auto& substates = state.getSubStates();
+	EXPECT_EQ(substates[0]->resources["arable_land"], 18);
+	EXPECT_EQ(substates[1]->resources["arable_land"], 10);
+	EXPECT_EQ(substates[2]->resources["arable_land"], 15);
+
+	EXPECT_EQ(substates[0]->resources["iron"], 26);
+	EXPECT_EQ(substates[1]->resources["iron"], 15);
+	EXPECT_EQ(substates[2]->resources["iron"], 22);
 }

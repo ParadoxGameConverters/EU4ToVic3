@@ -15,6 +15,7 @@ void V3::State::loadState(std::istream& theStream)
 	clearRegisteredKeywords();
 }
 
+
 void V3::State::registerKeys()
 {
 	registerKeyword("provinces", [this](std::istream& theStream) {
@@ -73,9 +74,9 @@ void V3::State::registerKeys()
 		std::transform(arableResources.begin(), arableResources.end(), arableResources.begin(), commonItems::remQuotes);
 	});
 	registerKeyword("capped_resources", [this](std::istream& theStream) {
-		for (const auto& resource: commonItems::getStrings(theStream))
+		for (const auto& [resource, amount]: commonItems::assignments(theStream).getAssignments())
 		{
-			cappedResources[resource] = commonItems::getInt(theStream);
+			cappedResources[resource] = std::stoi(amount);
 		}
 	});
 	registerKeyword("naval_exit_id", [this](const std::string& unused, std::istream& theStream) {
@@ -123,7 +124,7 @@ int V3::State::calculateWeightedProvinceTotals(const ProvinceTypeCounter& theCou
 
 const std::unique_ptr<V3::ProvinceTypeCounter> V3::State::countProvinceTypes(std::map<std::string, std::shared_ptr<Province>> provinces)
 {
-	auto typeCounter = std::unique_ptr<V3::ProvinceTypeCounter>();
+	auto typeCounter = std::make_unique<V3::ProvinceTypeCounter>();
 
 	typeCounter->every = provinces.size();
 	for (const auto& province: std::views::values(provinces))
@@ -146,4 +147,14 @@ std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& province
 	if (provinces.contains(provinceName))
 		return provinces.at(provinceName);
 	return nullptr;
+}
+
+void V3::State::checkLandshares()
+{
+	distributeLandshares();
+}
+
+void V3::State::checkResourceDistribution()
+{
+	distributeResources();
 }
