@@ -79,7 +79,7 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 	std::set<int> processedEU4IDs;
 	std::set<std::string> processedV3IDs;
 
-	// We're rolling across EU4's provinces and assigning them to chunks. We'll deal with ownership later as ownership can be shared.
+	// We're rolling across EU4's provinces and assigning them to chunks. We'll deal with ownership later as ownership can be shared or missing.
 	for (const auto& [spID, sourceProvince]: provinceManager.getAllProvinces())
 	{
 		if (processedEU4IDs.contains(spID))
@@ -97,13 +97,13 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 		{
 			if (provinceManager.getAllProvinces().contains(eu4ProvinceID))
 			{
-				chunk->sourceProvinces.emplace(eu4ProvinceID, sourceProvince);
+				chunk->sourceProvinces.emplace(eu4ProvinceID, provinceManager.getAllProvinces().at(eu4ProvinceID));
 			}
-			else
+			else if (!provinceManager.isProvinceDiscarded(eu4ProvinceID))
 			{
-				// Don't panic before checking if this is a wasteland or lake. We silently skip those.
-				if (!provinceManager.isProvinceDiscarded(eu4ProvinceID))
-					Log(LogLevel::Warning) << "Existing provinceMapper mapping for eu4 province " << eu4ProvinceID << " has no match in the save! Skipping.";
+				// Don't panic before checking if this is a lake, rnw or such. We silently skip those.
+				// Whatever remains is an error, mismap or some other nonsense.
+				Log(LogLevel::Warning) << "Existing provinceMapper mapping for eu4 province " << eu4ProvinceID << " has no match in the save! Skipping.";
 			}
 			processedEU4IDs.emplace(eu4ProvinceID);
 		}
@@ -161,7 +161,16 @@ void V3::ClayManager::unDisputeChunkOwnership(const std::map<std::string, std::s
 
 		// did we get anything? anyone?
 		if (ownerWeights.empty())
-			continue; // There were no owners to the provinces (possibly sea zones), so drop the chunks.
+		{
+			// There were no owners to the provinces (possibly sea zones or wastelands).
+			// If sea zones, drop the chunk
+			if (isChunkSea(chunk))
+				continue;
+
+			// Otherwise, we have an unowned chunk. Technically, unowned chunk doesn't have disputed ownership. Success!
+			filteredChunks.push_back(chunk);
+			continue;
+		}
 
 		const auto newOwner = std::ranges::max_element(ownerWeights, [](std::pair<std::string, double> a, std::pair<std::string, double> b) {
 			return a.second < b.second;
@@ -170,13 +179,16 @@ void V3::ClayManager::unDisputeChunkOwnership(const std::map<std::string, std::s
 		// Does that owner even exist?
 		if (!sourceCountries.contains(newOwner->first))
 		{
-			Log(LogLevel::Warning) << "Chunk owner " << newOwner->first << " is invalid. Dropping chunk.";
+			// Interesting! Resolve dispute by making it unowned.
+			filteredChunks.push_back(chunk);
+			Log(LogLevel::Warning) << "Chunk owner " << newOwner->first << " is invalid. Dropping chunk ownership.";
 			continue;
 		}
 		// Sanity check
 		if (!sourceCountries.at(newOwner->first))
 		{
-			Log(LogLevel::Warning) << "Chunk owner " << newOwner->first << " is not initialized. Dropping chunk.";
+			filteredChunks.push_back(chunk);
+			Log(LogLevel::Warning) << "Chunk owner " << newOwner->first << " is not initialized. Dropping chunk ownership.";
 			continue;
 		}
 
@@ -187,6 +199,14 @@ void V3::ClayManager::unDisputeChunkOwnership(const std::map<std::string, std::s
 	Log(LogLevel::Info) << "<> Untangled chunk ownerships, " << chunks.size() << " of " << filteredChunks.size() << " remain.";
 }
 
+bool V3::ClayManager::isChunkSea(const std::shared_ptr<Chunk>& chunk)
+{
+	for (const auto& sourceProvince: chunk->sourceProvinces | std::views::values)
+		if (sourceProvince->isSea()) // a single sea province will suffice.
+			return true;
+	return false;
+}
+
 std::map<std::string, double> V3::ClayManager::calcChunkOwnerWeights(const std::shared_ptr<Chunk>& chunk)
 {
 	std::map<std::string, double> ownerWeights; // ownerTag, total province weight
@@ -194,7 +214,7 @@ std::map<std::string, double> V3::ClayManager::calcChunkOwnerWeights(const std::
 	{
 		const auto& sourceTag = sourceProvince->getOwnerTag();
 		if (sourceTag.empty())
-			continue; // not relevant source - sea etc.
+			continue; // not relevant source - wasteland etc.
 		if (ownerWeights.contains(sourceTag))
 			ownerWeights.at(sourceTag) += sourceProvince->getProvinceWeight(); // this is RAW province weight - dev + buildings.
 		else
@@ -208,8 +228,10 @@ void V3::ClayManager::distributeChunksAcrossSubStates()
 	Log(LogLevel::Info) << "-> Distributing Clay Chunks across Substates.";
 
 	// Every chunk can belong to a number of substates. We'll now transfer provinces from a chunk according to
-	// their geographical State and create Substates. Every substate must belong to a single owner, same as chunks.
+	// their geographical State and create Substates. Every substate must belong to a single owner - or no owner - same as chunks.
 	// Merging of same-owner substates within a single state is done automatically as we process the chunks.
+	// Merging of unowned substates within a single state is not done (it's done only after they are populated with some pops and merged
+	// according to culture - not ownership!).
 
 	auto [tagStateProvinces, sourceOwners] = sortChunkProvincesIntoTagStates();
 
@@ -226,17 +248,30 @@ std::pair<V3::ClayManager::EU4TagToStateToProvinceMap, V3::ClayManager::SourceOw
 	SourceOwners sourceOwners;
 	EU4TagToStateToProvinceMap tagStateProvinces;
 
+	auto unownedChunkCounter = 0;
+
 	for (const auto& chunk: chunks)
 	{
 		// build the containers
-		const auto& sourceTag = chunk->sourceOwner->getTag();
-		if (!sourceOwners.contains(sourceTag))
-			sourceOwners.emplace(sourceTag, chunk->sourceOwner);
-		if (!tagStateProvinces.contains(sourceTag))
-			tagStateProvinces.emplace(sourceTag, std::map<std::string, std::map<std::string, std::shared_ptr<Province>>>{});
+		std::string ownerTag;
+		if (chunk->sourceOwner)
+		{
+			ownerTag = chunk->sourceOwner->getTag();
+		}
+		else
+		{
+			// In order to keep every unowned chunk separate and unmerged, click here to see this simple trick!
+			ownerTag = "unowned" + std::to_string(unownedChunkCounter);
+			++unownedChunkCounter;
+		}
+
+		if (!sourceOwners.contains(ownerTag))
+			sourceOwners.emplace(ownerTag, chunk->sourceOwner);
+		if (!tagStateProvinces.contains(ownerTag))
+			tagStateProvinces.emplace(ownerTag, std::map<std::string, std::map<std::string, std::shared_ptr<Province>>>{});
 		for (const auto& stateName: chunk->states | std::views::keys)
-			if (!tagStateProvinces.at(sourceTag).contains(stateName))
-				tagStateProvinces.at(sourceTag).emplace(stateName, std::map<std::string, std::shared_ptr<Province>>{});
+			if (!tagStateProvinces.at(ownerTag).contains(stateName))
+				tagStateProvinces.at(ownerTag).emplace(stateName, std::map<std::string, std::shared_ptr<Province>>{});
 
 		// and shove the provinces into baskets
 		for (const auto& [provinceName, province]: chunk->provinces)
@@ -248,7 +283,7 @@ std::pair<V3::ClayManager::EU4TagToStateToProvinceMap, V3::ClayManager::SourceOw
 				continue;
 			}
 			const auto& stateName = provincesToStates.at(provinceName)->getName();
-			tagStateProvinces.at(sourceTag).at(stateName).emplace(provinceName, province);
+			tagStateProvinces.at(ownerTag).at(stateName).emplace(provinceName, province);
 		}
 	}
 	return {tagStateProvinces, sourceOwners};
@@ -267,8 +302,12 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::buildSubStates(const
 
 			const auto subState = std::make_shared<SubState>();
 			subState->stateName = stateName;
-			subState->sourceOwnerTag = eu4tag;
-			subState->sourceOwner = sourceOwners.at(eu4tag);
+			if (!eu4tag.starts_with("unowned"))
+			{
+				// This will keep unlinked substates without an owner.
+				subState->sourceOwnerTag = eu4tag;
+				subState->sourceOwner = sourceOwners.at(eu4tag);
+			}
 			subState->provinces = provinces;
 			if (!states.contains(stateName))
 			{
@@ -292,6 +331,15 @@ void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::s
 
 	for (const auto& substate: substates)
 	{
+		// unowned substates don't need assigning.
+		if (!substate->sourceOwner)
+		{
+			substate->state->addSubState(substate);
+			filteredSubstates.push_back(substate);
+			continue;
+		}
+
+		// all the rest must have an owner and that owner must be able to map properly.
 		auto eu4tag = substate->sourceOwnerTag;
 		auto v3tag = countryMapper.getV3Tag(eu4tag);
 		if (v3tag && countries.contains(*v3tag))

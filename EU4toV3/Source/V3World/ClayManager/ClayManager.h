@@ -47,6 +47,7 @@ class ClayManager
 	[[nodiscard]] std::pair<EU4TagToStateToProvinceMap, SourceOwners> sortChunkProvincesIntoTagStates() const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> buildSubStates(const EU4TagToStateToProvinceMap& tagStateProvinces,
 		 const SourceOwners& sourceOwners) const;
+	[[nodiscard]] static bool isChunkSea(const std::shared_ptr<Chunk>& chunk);
 
 	std::map<std::string, std::shared_ptr<State>> states;					// geographical entities
 	std::map<std::string, std::shared_ptr<SuperRegion>> superRegions; // geographical entities
