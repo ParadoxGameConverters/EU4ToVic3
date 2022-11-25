@@ -266,17 +266,17 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::buildSubStates(const
 				continue; // Unsure how this could happen, but sure, skip this substate.
 
 			const auto subState = std::make_shared<SubState>();
-			subState->stateName = stateName;
-			subState->sourceOwnerTag = eu4tag;
-			subState->sourceOwner = sourceOwners.at(eu4tag);
-			subState->provinces = provinces;
+			subState->setHomeStateName(stateName);
+			subState->setSourceOwnerTag(eu4tag);
+			subState->setSourceOwner(sourceOwners.at(eu4tag));
+			subState->setProvinces(provinces);
 			if (!states.contains(stateName))
 			{
 				// wtf, should never happen.
 				Log(LogLevel::Error) << "Substate owner " << eu4tag << " wants a substate in " << stateName << " which does't exist?! Bailing on this clay!";
 				continue;
 			}
-			subState->state = states.at(stateName);
+			subState->setHomeState(states.at(stateName));
 
 			// Should be ok now.
 			subStates.push_back(subState);
@@ -292,16 +292,16 @@ void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::s
 
 	for (const auto& substate: substates)
 	{
-		auto eu4tag = substate->sourceOwnerTag;
+		auto eu4tag = substate->getSourceOwnerTag();
 		auto v3tag = countryMapper.getV3Tag(eu4tag);
 		if (v3tag && countries.contains(*v3tag))
 		{
 			const auto& owner = countries.at(*v3tag);
-			substate->ownerTag = *v3tag;
-			substate->owner = owner;
+			substate->setOwnerTag(*v3tag);
+			substate->setOwner(owner);
 			owner->addSubState(substate);
 			filteredSubstates.push_back(substate);
-			substate->state->addSubState(substate);
+			substate->getHomeState()->addSubState(substate);
 		}
 		else
 		{

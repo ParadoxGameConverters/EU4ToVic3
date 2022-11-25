@@ -16,8 +16,32 @@
 namespace V3
 {
 class Country;
-struct SubState
+class SubState
 {
+  public:
+	SubState() = default;
+	void setProvinces(const std::map<std::string, std::shared_ptr<Province>>& theProvinces) { provinces = theProvinces; }
+	void setOwnerTag(const std::string& theOwnerTag) { ownerTag = theOwnerTag; }
+	void setOwner(std::shared_ptr<Country> theOwner) { owner = theOwner; }
+	void setSourceOwnerTag(const std::string& theSourceOwnerTag) { sourceOwnerTag = theSourceOwnerTag; }
+	void setSourceOwner(std::shared_ptr<EU4::Country> theSourceOwner) { sourceOwner = theSourceOwner; }
+	void setHomeState(std::shared_ptr<State> theHomeState) { state = theHomeState; }
+	void setHomeStateName(const std::string& theHomeStateName) { stateName = theHomeStateName; }
+	void setLandshare(const double theLandshare) { landshare = theLandshare; }
+	void setResource(const std::string& theResource, int theAmount) { resources[theResource] = theAmount; }
+
+	[[nodiscard]] const auto& getProvinces() const { return provinces; }
+	[[nodiscard]] const auto& getOwnerTag() const { return ownerTag; }
+	[[nodiscard]] const auto& getOwner() const { return owner; }
+	[[nodiscard]] const auto& getSourceOwnerTag() const { return sourceOwnerTag; }
+	[[nodiscard]] const auto& getSourceOwner() const { return sourceOwner; }
+	[[nodiscard]] const auto& getHomeState() const { return state; }
+	[[nodiscard]] const auto& getHomeStateName() const { return stateName; }
+	[[nodiscard]] const auto& getLandshare() const { return landshare; }
+	[[nodiscard]] const auto& getResource(const std::string& theResource) { return resources[theResource]; }
+
+
+  private:
 	std::map<std::string, std::shared_ptr<Province>> provinces; // V3 province codes
 	std::string ownerTag;													// V3 TAG
 	std::shared_ptr<Country> owner;

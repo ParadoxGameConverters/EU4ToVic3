@@ -5,9 +5,9 @@
 void OUT::outSubState(std::ostream& output, const V3::SubState& substate)
 {
 	output << "\t\tcreate_state = {\n";
-	output << "\t\t\tcountry = c:" << substate.ownerTag << "\n";
+	output << "\t\t\tcountry = c:" << substate.getOwnerTag() << "\n";
 	output << "\t\t\towned_provinces = { ";
-	for (const auto& provinceID: substate.provinces | std::views::keys)
+	for (const auto& provinceID: substate.getProvinces() | std::views::keys)
 		output << provinceID << " ";
 	output << "}\n";
 

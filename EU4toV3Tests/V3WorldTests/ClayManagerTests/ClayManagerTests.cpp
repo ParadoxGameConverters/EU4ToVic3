@@ -487,23 +487,23 @@ TEST(V3World_ClayManagerTests, clayManagerCanProduceSubstatesFromChunks)
 	const auto& substate2 = substates[1];
 	const auto& substate3 = substates[2];
 
-	EXPECT_TRUE(substate1->sourceOwner);
-	EXPECT_EQ("GAT", substate1->sourceOwner->getTag());
-	EXPECT_EQ(1, substate1->provinces.size());
-	EXPECT_TRUE(substate1->provinces.contains("x000008"));
-	EXPECT_EQ("STATE_TEST_LAND4", substate1->stateName);
+	EXPECT_TRUE(substate1->getSourceOwner());
+	EXPECT_EQ("GAT", substate1->getSourceOwner()->getTag());
+	EXPECT_EQ(1, substate1->getProvinces().size());
+	EXPECT_TRUE(substate1->getProvinces().contains("x000008"));
+	EXPECT_EQ("STATE_TEST_LAND4", substate1->getHomeStateName());
 
-	EXPECT_TRUE(substate2->sourceOwner);
-	EXPECT_EQ("TAG", substate2->sourceOwner->getTag());
-	EXPECT_EQ(1, substate2->provinces.size());
-	EXPECT_TRUE(substate2->provinces.contains("x000003"));
-	EXPECT_EQ("STATE_TEST_LAND1", substate2->stateName);
+	EXPECT_TRUE(substate2->getSourceOwner());
+	EXPECT_EQ("TAG", substate2->getSourceOwner()->getTag());
+	EXPECT_EQ(1, substate2->getProvinces().size());
+	EXPECT_TRUE(substate2->getProvinces().contains("x000003"));
+	EXPECT_EQ("STATE_TEST_LAND1", substate2->getHomeStateName());
 
-	EXPECT_TRUE(substate3->sourceOwner);
-	EXPECT_EQ("TAG", substate3->sourceOwner->getTag());
-	EXPECT_EQ(1, substate3->provinces.size());
-	EXPECT_TRUE(substate3->provinces.contains("x000004"));
-	EXPECT_EQ("STATE_TEST_LAND2", substate3->stateName);
+	EXPECT_TRUE(substate3->getSourceOwner());
+	EXPECT_EQ("TAG", substate3->getSourceOwner()->getTag());
+	EXPECT_EQ(1, substate3->getProvinces().size());
+	EXPECT_TRUE(substate3->getProvinces().contains("x000004"));
+	EXPECT_EQ("STATE_TEST_LAND2", substate3->getHomeStateName());
 }
 
 TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
@@ -569,39 +569,39 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	const auto& substate2 = substates[1];
 	const auto& substate3 = substates[2];
 
-	EXPECT_TRUE(substate1->sourceOwner);
-	EXPECT_EQ("TA2", substate1->sourceOwner->getTag());
-	EXPECT_EQ(1, substate1->provinces.size());
-	EXPECT_TRUE(substate1->provinces.contains("x000003"));
-	EXPECT_EQ("STATE_TEST_LAND1", substate1->stateName);
-	EXPECT_EQ("GA2", substate1->ownerTag);
-	EXPECT_EQ("GA2", substate1->owner->getTag());
-	// linkback to this substate through owner substates vector
-	EXPECT_EQ("STATE_TEST_LAND1", substate1->owner->getSubStates()[0]->stateName);
+	EXPECT_TRUE(substate1->getSourceOwner());
+	EXPECT_EQ("TA2", substate1->getSourceOwner()->getTag());
+	EXPECT_EQ(1, substate1->getProvinces().size());
+	EXPECT_TRUE(substate1->getProvinces().contains("x000003"));
+	EXPECT_EQ("STATE_TEST_LAND1", substate1->getHomeStateName());
+	EXPECT_EQ("GA2", substate1->getOwnerTag());
+	EXPECT_EQ("GA2", substate1->getOwner()->getTag());
+	// linkback to this substate through getOwner() substates vector
+	EXPECT_EQ("STATE_TEST_LAND1", substate1->getOwner()->getSubStates()[0]->getHomeStateName());
 	// linkback through state's substate ownership vector
-	EXPECT_EQ("GA2", substate1->state->getSubStates()[0]->ownerTag);
+	EXPECT_EQ("GA2", substate1->getHomeState()->getSubStates()[0]->getOwnerTag());
 
-	EXPECT_TRUE(substate2->sourceOwner);
-	EXPECT_EQ("TA2", substate2->sourceOwner->getTag());
-	EXPECT_EQ(1, substate2->provinces.size());
-	EXPECT_TRUE(substate2->provinces.contains("x000004"));
-	EXPECT_EQ("STATE_TEST_LAND2", substate2->stateName);
-	EXPECT_EQ("GA2", substate2->ownerTag);
-	EXPECT_EQ("GA2", substate2->owner->getTag());
-	// linkback to this substate through owner substates vector
-	EXPECT_EQ("STATE_TEST_LAND2", substate2->owner->getSubStates()[1]->stateName);
+	EXPECT_TRUE(substate2->getSourceOwner());
+	EXPECT_EQ("TA2", substate2->getSourceOwner()->getTag());
+	EXPECT_EQ(1, substate2->getProvinces().size());
+	EXPECT_TRUE(substate2->getProvinces().contains("x000004"));
+	EXPECT_EQ("STATE_TEST_LAND2", substate2->getHomeStateName());
+	EXPECT_EQ("GA2", substate2->getOwnerTag());
+	EXPECT_EQ("GA2", substate2->getOwner()->getTag());
+	// linkback to this substate through getOwner() substates vector
+	EXPECT_EQ("STATE_TEST_LAND2", substate2->getOwner()->getSubStates()[1]->getHomeStateName());
 	// linkback through state's substate ownership vector
-	EXPECT_EQ("GA2", substate2->state->getSubStates()[0]->ownerTag);
+	EXPECT_EQ("GA2", substate2->getHomeState()->getSubStates()[0]->getOwnerTag());
 
-	EXPECT_TRUE(substate3->sourceOwner);
-	EXPECT_EQ("TA9", substate3->sourceOwner->getTag());
-	EXPECT_EQ(1, substate3->provinces.size());
-	EXPECT_TRUE(substate3->provinces.contains("x000008"));
-	EXPECT_EQ("STATE_TEST_LAND4", substate3->stateName);
-	EXPECT_EQ("GA9", substate3->ownerTag);
-	EXPECT_EQ("GA9", substate3->owner->getTag());
-	// linkback to this substate through owner substates vector
-	EXPECT_EQ("STATE_TEST_LAND4", substate3->owner->getSubStates()[0]->stateName);
+	EXPECT_TRUE(substate3->getSourceOwner());
+	EXPECT_EQ("TA9", substate3->getSourceOwner()->getTag());
+	EXPECT_EQ(1, substate3->getProvinces().size());
+	EXPECT_TRUE(substate3->getProvinces().contains("x000008"));
+	EXPECT_EQ("STATE_TEST_LAND4", substate3->getHomeStateName());
+	EXPECT_EQ("GA9", substate3->getOwnerTag());
+	EXPECT_EQ("GA9", substate3->getOwner()->getTag());
+	// linkback to this substate through getOwner() substates vector
+	EXPECT_EQ("STATE_TEST_LAND4", substate3->getOwner()->getSubStates()[0]->getHomeStateName());
 	// linkback through state's substate ownership vector
-	EXPECT_EQ("GA9", substate3->state->getSubStates()[0]->ownerTag);
+	EXPECT_EQ("GA9", substate3->getHomeState()->getSubStates()[0]->getOwnerTag());
 }

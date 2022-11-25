@@ -289,9 +289,9 @@ TEST(V3World_StateTests, landshareAccountsForPrimeAndImpassable)
 	const auto zeroth = std::make_shared<V3::SubState>();
 	const auto first = std::make_shared<V3::SubState>();
 	const auto second = std::make_shared<V3::SubState>();
-	zeroth->provinces = std::map<std::string, std::shared_ptr<V3::Province>>{{"x112233", pm.at("x112233")}, {"x112234", pm.at("x112234")}};
-	first->provinces = std::map<std::string, std::shared_ptr<V3::Province>>{{"x112235", pm.at("x112235")}, {"x112236", pm.at("x112236")}};
-	second->provinces = std::map<std::string, std::shared_ptr<V3::Province>>{{"x112237", pm.at("x112237")}, {"x112234", pm.at("x445566")}};
+	zeroth->setProvinces(std::map<std::string, std::shared_ptr<V3::Province>>{{"x112233", pm.at("x112233")}, {"x112234", pm.at("x112234")}});
+	first->setProvinces(std::map<std::string, std::shared_ptr<V3::Province>>{{"x112235", pm.at("x112235")}, {"x112236", pm.at("x112236")}});
+	second->setProvinces(std::map<std::string, std::shared_ptr<V3::Province>>{{"x112237", pm.at("x112237")}, {"x112234", pm.at("x445566")}});
 
 	state.addSubState(zeroth);
 	state.addSubState(first);
@@ -300,9 +300,9 @@ TEST(V3World_StateTests, landshareAccountsForPrimeAndImpassable)
 	state.distributeLandshares();
 
 	const auto& substates = state.getSubStates();
-	EXPECT_DOUBLE_EQ(substates[0]->landshare, 6.0 / 9);
-	EXPECT_DOUBLE_EQ(substates[1]->landshare, 2.0 / 9);
-	EXPECT_DOUBLE_EQ(substates[2]->landshare, 1.0 / 9);
+	EXPECT_DOUBLE_EQ(substates[0]->getLandshare(), 6.0 / 9);
+	EXPECT_DOUBLE_EQ(substates[1]->getLandshare(), 2.0 / 9);
+	EXPECT_DOUBLE_EQ(substates[2]->getLandshare(), 1.0 / 9);
 }
 
 TEST(V3World_StateTests, distributeResourcesTruncatesDoubles)
@@ -324,9 +324,9 @@ TEST(V3World_StateTests, distributeResourcesTruncatesDoubles)
 	const auto first = std::make_shared<V3::SubState>();
 	const auto second = std::make_shared<V3::SubState>();
 
-	zeroth->landshare = 5.0 / 10;
-	first->landshare = 3.0 / 10;
-	second->landshare = 3.8 / 9;
+	zeroth->setLandshare(5.0 / 10);
+	first->setLandshare(3.0 / 10);
+	second->setLandshare(3.8 / 9);
 
 	state.addSubState(zeroth);
 	state.addSubState(first);
@@ -335,11 +335,11 @@ TEST(V3World_StateTests, distributeResourcesTruncatesDoubles)
 	state.distributeResources();
 
 	const auto& substates = state.getSubStates();
-	EXPECT_EQ(substates[0]->resources["arable_land"], 18);
-	EXPECT_EQ(substates[1]->resources["arable_land"], 10);
-	EXPECT_EQ(substates[2]->resources["arable_land"], 15);
+	EXPECT_EQ(substates[0]->getResource("arable_land"), 18);
+	EXPECT_EQ(substates[1]->getResource("arable_land"), 10);
+	EXPECT_EQ(substates[2]->getResource("arable_land"), 15);
 
-	EXPECT_EQ(substates[0]->resources["iron"], 26);
-	EXPECT_EQ(substates[1]->resources["iron"], 15);
-	EXPECT_EQ(substates[2]->resources["iron"], 22);
+	EXPECT_EQ(substates[0]->getResource("iron"), 26);
+	EXPECT_EQ(substates[1]->getResource("iron"), 15);
+	EXPECT_EQ(substates[2]->getResource("iron"), 22);
 }

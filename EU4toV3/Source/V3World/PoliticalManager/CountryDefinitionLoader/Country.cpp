@@ -62,7 +62,7 @@ void V3::Country::initializeFromEU4Country()
 	processedData.religion = "catholic";
 	// capital
 	if (!substates.empty())
-		processedData.capitalStateName = substates[0]->stateName;
+		processedData.capitalStateName = substates[0]->getHomeStateName();
 	else
 		processedData.capitalStateName = "STATE_NAVARRA";
 	// namedaftercapital
