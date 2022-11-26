@@ -1,4 +1,4 @@
-#include "Substate.h"
+#include "SubState.h"
 #include "V3World/PoliticalManager/CountryDefinitionLoader/Country.h"
 
 V3::SubState::SubState(std::shared_ptr<State> theHomeState, std::shared_ptr<EU4::Country> theSourceOwner, const ProvinceMap& theProvinces):
