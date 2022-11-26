@@ -20,10 +20,11 @@ class SubState
 {
   public:
 	SubState() = default;
+	SubState(std::shared_ptr<State> theHomeState,
+		 std::shared_ptr<EU4::Country> theSourceOwner,
+		 const std::map<std::string, std::shared_ptr<Province>>& theProvinces);
 	void setProvinces(const std::map<std::string, std::shared_ptr<Province>>& theProvinces) { provinces = theProvinces; }
 	void setOwner(std::shared_ptr<Country> theOwner) { owner = theOwner; }
-	void setSourceOwner(std::shared_ptr<EU4::Country> theSourceOwner) { sourceOwner = theSourceOwner; }
-	void setHomeState(std::shared_ptr<State> theHomeState) { state = theHomeState; }
 	void setLandshare(const double theLandshare) { landshare = theLandshare; }
 	void setResource(const std::string& theResource, int theAmount) { resources[theResource] = theAmount; }
 

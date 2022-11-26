@@ -265,18 +265,16 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::buildSubStates(const
 			if (provinces.empty())
 				continue; // Unsure how this could happen, but sure, skip this substate.
 
-			const auto subState = std::make_shared<SubState>();
-			subState->setSourceOwner(sourceOwners.at(eu4tag));
-			subState->setProvinces(provinces);
 			if (!states.contains(stateName))
 			{
 				// wtf, should never happen.
 				Log(LogLevel::Error) << "Substate owner " << eu4tag << " wants a substate in " << stateName << " which does't exist?! Bailing on this clay!";
 				continue;
 			}
-			subState->setHomeState(states.at(stateName));
 
 			// Should be ok now.
+			const auto subState = std::make_shared<SubState>(states.at(stateName), sourceOwners.at(eu4tag), provinces);
+
 			subStates.push_back(subState);
 		}
 
