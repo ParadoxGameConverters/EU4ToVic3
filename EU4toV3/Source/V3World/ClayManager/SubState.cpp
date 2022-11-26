@@ -1,11 +1,8 @@
 #include "Substate.h"
 #include "V3World/PoliticalManager/CountryDefinitionLoader/Country.h"
 
-V3::SubState::SubState(std::shared_ptr<State> theHomeState,
-	 std::shared_ptr<EU4::Country> theSourceOwner,
-	 const std::map<std::string, std::shared_ptr<Province>>& theProvinces):
-	 state(theHomeState),
-	 owner(nullptr), sourceOwner(theSourceOwner), provinces(theProvinces), resources()
+V3::SubState::SubState(std::shared_ptr<State> theHomeState, std::shared_ptr<EU4::Country> theSourceOwner, const ProvinceMap& theProvinces):
+	 state(theHomeState), owner(nullptr), sourceOwner(theSourceOwner), provinces(theProvinces), resources()
 {
 }
 

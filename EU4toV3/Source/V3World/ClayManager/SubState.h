@@ -1,11 +1,8 @@
 #ifndef V3_SUBSTATE_H
 #define V3_SUBSTATE_H
-#include "StateLoader/Province.h"
+#include "ClayMapTypedefs.h"
 #include "StateLoader/State.h"
 #include <EU4World/CountryManager/EU4Country.h>
-#include <map>
-#include <memory>
-#include <string>
 
 /* A Substate is a cross-section across a set of chunks where all relevant chunk provinces fall within a geographical V3 state.
  * This means, if 5 eu4 provinces generated 5 vic3 chunks, those portions of those chunks that fall within a STATE_ALABAMA and belong
@@ -20,10 +17,8 @@ class SubState
 {
   public:
 	SubState() = default;
-	SubState(std::shared_ptr<State> theHomeState,
-		 std::shared_ptr<EU4::Country> theSourceOwner,
-		 const std::map<std::string, std::shared_ptr<Province>>& theProvinces);
-	void setProvinces(const std::map<std::string, std::shared_ptr<Province>>& theProvinces) { provinces = theProvinces; }
+	SubState(std::shared_ptr<State> theHomeState, std::shared_ptr<EU4::Country> theSourceOwner, const ProvinceMap& theProvinces);
+	void setProvinces(const ProvinceMap& theProvinces) { provinces = theProvinces; }
 	void setOwner(std::shared_ptr<Country> theOwner) { owner = theOwner; }
 	void setLandshare(const double theLandshare) { landshare = theLandshare; }
 	void setResource(const std::string& theResource, int theAmount) { resources[theResource] = theAmount; }
@@ -40,7 +35,7 @@ class SubState
 	[[nodiscard]] const std::string& getHomeStateName() const;
 
   private:
-	std::map<std::string, std::shared_ptr<Province>> provinces; // V3 province codes
+	ProvinceMap provinces; // V3 province codes
 	std::shared_ptr<Country> owner;
 	std::shared_ptr<EU4::Country> sourceOwner;
 	std::shared_ptr<State> state; // home state

@@ -221,7 +221,7 @@ void V3::ClayManager::distributeChunksAcrossSubStates()
 	Log(LogLevel::Info) << "<> Substates organized, " << substates.size() << " produced.";
 }
 
-std::pair<V3::ClayManager::EU4TagToStateToProvinceMap, V3::ClayManager::SourceOwners> V3::ClayManager::sortChunkProvincesIntoTagStates() const
+std::pair<V3::EU4TagToStateToProvinceMap, V3::SourceOwners> V3::ClayManager::sortChunkProvincesIntoTagStates() const
 {
 	SourceOwners sourceOwners;
 	EU4TagToStateToProvinceMap tagStateProvinces;
@@ -233,10 +233,10 @@ std::pair<V3::ClayManager::EU4TagToStateToProvinceMap, V3::ClayManager::SourceOw
 		if (!sourceOwners.contains(sourceTag))
 			sourceOwners.emplace(sourceTag, chunk->sourceOwner);
 		if (!tagStateProvinces.contains(sourceTag))
-			tagStateProvinces.emplace(sourceTag, std::map<std::string, std::map<std::string, std::shared_ptr<Province>>>{});
+			tagStateProvinces.emplace(sourceTag, StateToProvinceMap{});
 		for (const auto& stateName: chunk->states | std::views::keys)
 			if (!tagStateProvinces.at(sourceTag).contains(stateName))
-				tagStateProvinces.at(sourceTag).emplace(stateName, std::map<std::string, std::shared_ptr<Province>>{});
+				tagStateProvinces.at(sourceTag).emplace(stateName, ProvinceMap{});
 
 		// and shove the provinces into baskets
 		for (const auto& [provinceName, province]: chunk->provinces)
