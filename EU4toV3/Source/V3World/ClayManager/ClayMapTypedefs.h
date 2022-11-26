@@ -1,3 +1,6 @@
+#ifndef CLAY_MAP_TYPEDEFS_H
+#define CLAY_MAP_TYPEDEFS_H
+
 #include "StateLoader/Province.h"
 #include <map>
 
@@ -12,3 +15,5 @@ using StateToProvinceMap = std::map<std::string, ProvinceMap>;						// state nam
 using EU4TagToStateToProvinceMap = std::map<std::string, StateToProvinceMap>; // eu4 tag -> states and their provinces.
 using SourceOwners = std::map<std::string, std::shared_ptr<EU4::Country>>;		// eu4tag, eu4country
 } // namespace V3
+
+#endif // CLAY_MAP_TYPEDEFS_H
