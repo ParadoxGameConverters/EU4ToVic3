@@ -266,8 +266,6 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::buildSubStates(const
 				continue; // Unsure how this could happen, but sure, skip this substate.
 
 			const auto subState = std::make_shared<SubState>();
-			subState->setHomeStateName(stateName);
-			subState->setSourceOwnerTag(eu4tag);
 			subState->setSourceOwner(sourceOwners.at(eu4tag));
 			subState->setProvinces(provinces);
 			if (!states.contains(stateName))
@@ -297,7 +295,6 @@ void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::s
 		if (v3tag && countries.contains(*v3tag))
 		{
 			const auto& owner = countries.at(*v3tag);
-			substate->setOwnerTag(*v3tag);
 			substate->setOwner(owner);
 			owner->addSubState(substate);
 			filteredSubstates.push_back(substate);
