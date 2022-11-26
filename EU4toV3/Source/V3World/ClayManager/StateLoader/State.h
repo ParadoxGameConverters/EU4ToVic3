@@ -6,7 +6,7 @@
 
 namespace V3
 {
-struct SubState;
+class SubState;
 struct ProvinceTypeCounter;
 class State: commonItems::parser
 {
