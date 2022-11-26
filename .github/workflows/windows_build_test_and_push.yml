@@ -75,7 +75,7 @@ jobs:
         token: ${{ secrets.API_TOKEN_GITHUB }}
         
     - name: "Cleanup"
-      if: ${{ true }}
+      if: always()
       run: |
         Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Recurse -Force | Remove-Item -force -recurse
 
