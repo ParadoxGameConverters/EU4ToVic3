@@ -27,7 +27,7 @@ TEST(EU4World_ReligionLoaderTests, religionNamesCanBeImported)
 	for (const auto& name: theReligions.getAllReligions() | std::views::keys)
 		religionNames.emplace(name);
 
-	EXPECT_THAT(religionNames, UnorderedElementsAre("religion_1", "religion_2", "religion_3", "converted_dynamic_faith_107", "converted_dynamic_faith_108"));
+	EXPECT_THAT(religionNames, UnorderedElementsAre("religion_2", "religion_3", "converted_dynamic_faith_107", "converted_dynamic_faith_108"));
 }
 
 TEST(EU4World_ReligionLoaderTests, religionsImportWithCorrectReligiousGroups)
@@ -39,23 +39,11 @@ TEST(EU4World_ReligionLoaderTests, religionsImportWithCorrectReligiousGroups)
 	EU4::ReligionLoader theReligions;
 	theReligions.loadReligions(eu4Path, mods);
 
-	const auto& religion1 = theReligions.getAllReligions().at("religion_1");
-	const auto& religion2 = theReligions.getAllReligions().at("religion_2");
-	const auto& religion3 = theReligions.getAllReligions().at("religion_3");
-	const auto& religion107 = theReligions.getAllReligions().at("converted_dynamic_faith_107");
-	const auto& religion108 = theReligions.getAllReligions().at("converted_dynamic_faith_108");
-
-	EXPECT_EQ("religion_1", religion1.name);
-	EXPECT_EQ("religion_2", religion2.name);
-	EXPECT_EQ("religion_3", religion3.name);
-	EXPECT_EQ("converted_dynamic_faith_107", religion107.name);
-	EXPECT_EQ("converted_dynamic_faith_108", religion108.name);
-
-	EXPECT_EQ("vanilla_group_1", religion1.group); // vanilla group
-	EXPECT_EQ("mod_group_1", religion2.group);	  // modded group
-	EXPECT_EQ("mod_group_1", religion3.group);	  // modded group
-	EXPECT_EQ("mod_group_2", religion107.group);	  // modded group
-	EXPECT_EQ("mod_group_3", religion108.group);	  // modded group
+	EXPECT_THAT(theReligions.getAllReligions(),
+		 UnorderedElementsAre(std::pair("religion_2", EU4::Religion("religion_2", "mod_group_1")),
+			  std::pair("religion_3", EU4::Religion("religion_3", "mod_group_1")),
+			  std::pair("converted_dynamic_faith_107", EU4::Religion("converted_dynamic_faith_107", "mod_group_2", "shamanism")),
+			  std::pair("converted_dynamic_faith_108", EU4::Religion("converted_dynamic_faith_108", "mod_group_3"))));
 }
 
 TEST(EU4World_ReligionLoaderTests, trappingsAreLoadedForSaneCustomReligions)

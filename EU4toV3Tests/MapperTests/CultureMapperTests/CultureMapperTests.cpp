@@ -5,7 +5,7 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
-TEST(Mappers_CultureMapperTests, noMatchesGiveEmptyOptionalAndWarns)
+std::tuple<mappers::CultureMapper, V3::ClayManager, EU4::CultureLoader, EU4::ReligionLoader> prepMappers()
 {
 	V3::ClayManager clayManager;
 	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
@@ -21,6 +21,12 @@ TEST(Mappers_CultureMapperTests, noMatchesGiveEmptyOptionalAndWarns)
 
 	mappers::CultureMapper culMapper;
 	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
+	return std::tuple{culMapper, clayManager, cultureLoader, religionLoader};
+}
+
+TEST(Mappers_CultureMapperTests, noMatchesGiveEmptyOptionalAndWarns)
+{
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
@@ -33,340 +39,151 @@ TEST(Mappers_CultureMapperTests, noMatchesGiveEmptyOptionalAndWarns)
 
 TEST(Mappers_CultureMapperTests, simpleMatchMatches)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture1", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "somereligion", "SOMESTATE", "TAG"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "somereligion", "SOMESTATE", "TAG");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture1", *match);
 }
 
 TEST(Mappers_CultureMapperTests, simpleMatchMatchesBetweenMultipleCultures)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture2", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture3", "somereligion", "SOMESTATE", "TAG"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture3", "somereligion", "SOMESTATE", "TAG");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture2", *match);
 }
 
 TEST(Mappers_CultureMapperTests, religionOwnerMatches)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture4", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture4", "religion_2", "SOMESTATE", "TAG"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture4", "religion_2", "SOMESTATE", "TAG");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture4", *match);
 }
 
 TEST(Mappers_CultureMapperTests, religionMatches)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture5", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture4", "religion_2", "SOMESTATE", "GAT"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture4", "religion_2", "SOMESTATE", "GAT");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture5", *match);
 }
 
 TEST(Mappers_CultureMapperTests, cultureFallbackMatches)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture6", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture4", "religion_3", "SOMESTATE", "GAT"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture4", "religion_3", "SOMESTATE", "GAT");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture6", *match);
 }
 
 TEST(Mappers_CultureMapperTests, superRegionMatches)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture7", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture5", "somereligion", "STATE_TEST_4", "GAT"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture5", "somereligion", "STATE_TEST_4", "GAT");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture7", *match);
 }
 
 TEST(Mappers_CultureMapperTests, regionMatches)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture8", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture5", "somereligion", "STATE_TEST_3", "GAT"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture5", "somereligion", "STATE_TEST_3", "GAT");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture8", *match);
 }
 
 TEST(Mappers_CultureMapperTests, stateMatches)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture9", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture5", "somereligion", "STATE_TEST_1", "GAT"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture5", "somereligion", "STATE_TEST_1", "GAT");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture9", *match);
 }
 
 TEST(Mappers_CultureMapperTests, regionReligionMatches)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture10", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture5", "religion_3", "STATE_TEST_2", "GAT"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture5", "religion_3", "STATE_TEST_2", "GAT");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture10", *match);
 }
 
 TEST(Mappers_CultureMapperTests, regionNonReligionMatches)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture11", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture5", "religion_1", "STATE_TEST_2", "GAT"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture5", "religion_1", "STATE_TEST_2", "GAT");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture11", *match);
 }
 
 TEST(Mappers_CultureMapperTests, cultureGroupRegionReligionMatches)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture12", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture6", "religion_2", "STATE_TEST_2", "GAT"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture6", "religion_2", "STATE_TEST_2", "GAT");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture12", *match);
 }
 
 TEST(Mappers_CultureMapperTests, cultureGroupReligionMatches)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture13", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture6", "religion_2", "STATE_TEST_3", "GAT"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture6", "religion_2", "STATE_TEST_3", "GAT");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture13", *match);
 }
 
 TEST(Mappers_CultureMapperTests, cultureGroupRegionMatches)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture14", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture6", "religion_1", "STATE_TEST_2", "GAT"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture6", "religion_1", "STATE_TEST_2", "GAT");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture14", *match);
 }
 
 TEST(Mappers_CultureMapperTests, cultureGroupMatches)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture15", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture6", "religion_1", "STATE_TEST_3", "GAT"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture6", "religion_1", "STATE_TEST_3", "GAT");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture15", *match);
 }
 
 TEST(Mappers_CultureMapperTests, macrosAreLoaded1)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture16", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture8", "religion_1", "STATE_TEST_2", "GAT"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture8", "religion_1", "STATE_TEST_2", "GAT");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture16", *match);
 }
 
 TEST(Mappers_CultureMapperTests, macrosAreLoaded2)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
-
-	EXPECT_EQ("vculture17", *culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture8", "religion_1", "STATE_TEST_1", "GAT"));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture8", "religion_1", "STATE_TEST_1", "GAT");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture17", *match);
 }
 
 TEST(Mappers_CultureMapperTests, rulesCanBeExpandedWithUnmappedCultures)
 {
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
-	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
-	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
-
-	mappers::CultureMapper culMapper;
-	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
@@ -379,5 +196,7 @@ TEST(Mappers_CultureMapperTests, rulesCanBeExpandedWithUnmappedCultures)
 	// now expand
 	culMapper.expandCulturalMappings(clayManager, cultureLoader, religionLoader);
 
-	EXPECT_EQ("unmapped_culture", culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "unmapped_culture", "", "SOMESTATE", ""));
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "unmapped_culture", "", "SOMESTATE", "");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("unmapped_culture", *match);
 }

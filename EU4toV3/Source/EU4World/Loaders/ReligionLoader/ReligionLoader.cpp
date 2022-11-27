@@ -1,6 +1,8 @@
 #include "ReligionLoader.h"
+#include "CommonFunctions.h"
 #include "CommonRegexes.h"
 #include "Log.h"
+#include "ModLoader/ModFilesystem.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 #include "ReligionParser.h"
@@ -10,34 +12,33 @@ void EU4::ReligionLoader::loadReligions(const std::string& EU4Path, const Mods& 
 {
 	registerKeys();
 
-	for (const auto& filename: commonItems::GetAllFilesInFolder(EU4Path + "/common/religions/"))
-		parseFile(EU4Path + "/common/religions/" + filename);
+	const auto modFS = commonItems::ModFilesystem(EU4Path, mods);
 
-	for (const auto& mod: mods)
-		for (const auto& fileName: commonItems::GetAllFilesInFolder(mod.path + "/common/religions/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/religions/"))
+	{
+		auto theFileName = trimPath(fileName);
+		// Watch out for our own special religions.
+		if (theFileName.starts_with("99_converted_"))
 		{
-			// Watch out for our own special religions.
-			if (fileName.starts_with("99_converted_"))
+			// This is one of ours.
+			const auto pos = theFileName.find("-from-"); // 99_converted_dynamic_faith_107-from-shamanism.txt
+			if (pos == std::string::npos || pos <= 13)
 			{
-				// This is one of ours.
-				const auto pos = fileName.find("-from-"); // 99_converted_dynamic_faith_107-from-shamanism.txt
-				if (pos == std::string::npos || pos <= 13)
-				{
-					// Someone changed it. Skip metadata.
-					Log(LogLevel::Warning) << "! Religion Mapper: Filename for custom religion is broken: " << fileName;
-				}
-				else
-				{
-					auto source = fileName.substr(pos + 6, fileName.size() - 10 - pos); // shaving off ".txt" extension, grabbing "shamanism"
-					if (source.empty()) // they may be corrupted. "99_converted_dynamic_faith_101-from-.txt" is known CK3 error.
-						Log(LogLevel::Warning) << "! Religion Mapper: Cannot parse filename for metadata: " << fileName;
-					else
-						activeTrappings = source;
-				}
+				// Someone changed it. Skip metadata.
+				Log(LogLevel::Warning) << "! Religion Mapper: Filename for custom religion is broken: " << theFileName;
 			}
-			parseFile(mod.path + "/common/religions/" + fileName);
-			activeTrappings.reset();
+			else
+			{
+				auto source = theFileName.substr(pos + 6, theFileName.size() - 10 - pos); // shaving off ".txt" extension, grabbing "shamanism"
+				if (source.empty()) // they may be corrupted. "99_converted_dynamic_faith_101-from-.txt" is known CK3 error.
+					Log(LogLevel::Warning) << "! Religion Mapper: Cannot parse filename for metadata: " << theFileName;
+				else
+					activeTrappings = source;
+			}
 		}
+		parseFile(fileName);
+		activeTrappings.reset();
+	}
 
 	clearRegisteredKeywords();
 	Log(LogLevel::Info) << "<> Loaded " << religions.size() << " religions.";
@@ -84,7 +85,9 @@ void EU4::ReligionLoader::registerKeys()
 
 std::optional<std::string> EU4::ReligionLoader::getGroupForReligion(const std::string& religion) const
 {
-	if (religions.contains(religion) && !religions.at(religion).group.empty())
-		return religions.at(religion).group;
-	return std::nullopt;
+	const auto religionItr = religions.find(religion);
+	if (religionItr == religions.end() || religionItr->second.group.empty())
+		return std::nullopt;
+
+	return religionItr->second.group;
 }
