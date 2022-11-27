@@ -12,7 +12,7 @@ void V3::SubStateEntries::loadSubStates(std::istream& theStream)
 
 void V3::SubStateEntries::registerKeys()
 {
-	registerRegex("region_state:\\w+", [this](const std::string& subStateName, std::istream& theStream) {
+	registerRegex(R"(region_state:\w+)", [this](const std::string& subStateName, std::istream& theStream) {
 		SubStatePopEntries subStatePopEntries;
 		subStatePopEntries.loadPops(theStream);
 		SubStatePops theSubStatePops;

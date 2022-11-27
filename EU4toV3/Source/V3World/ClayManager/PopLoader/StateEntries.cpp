@@ -13,7 +13,7 @@ void V3::StateEntries::loadStates(std::istream& theStream)
 
 void V3::StateEntries::registerKeys()
 {
-	registerRegex("s:\\w+", [this](const std::string& stateName, std::istream& theStream) {
+	registerRegex(R"(s:\w+)", [this](const std::string& stateName, std::istream& theStream) {
 		SubStateEntries subStateEntries;
 		subStateEntries.loadSubStates(theStream);
 		StatePops theStatePops;

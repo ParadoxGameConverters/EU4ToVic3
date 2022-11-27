@@ -1,8 +1,6 @@
 #include "Pop.h"
 #include <numeric>
 
-#include "Log.h"
-
 V3::Pop::Pop(std::string culture, std::string religion, std::string type, int size):
 	 culture(std::move(culture)), religion(std::move(religion)), type(std::move(type)), size(size)
 {
