@@ -410,3 +410,16 @@ void V3::ClayManager::initializeVanillaPops(const std::string& v3Path)
 
 	Log(LogLevel::Info) << "<> Vanilla had " << total << " pops.";
 }
+
+void V3::ClayManager::assignVanillaPopsToStates()
+{
+	for (const auto& [stateName, statePops]: vanillaStatePops)
+	{
+		if (!states.contains(stateName))
+		{
+			Log(LogLevel::Warning) << "Vanilla pops for unknown state " << stateName << " cannot be assigned!";
+			continue;
+		}
+		states.at(stateName)->setVanillaPops(statePops);
+	}
+}

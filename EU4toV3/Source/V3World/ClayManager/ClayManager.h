@@ -30,6 +30,7 @@ class ClayManager
 	void distributeChunksAcrossSubStates();
 	void assignSubStateOwnership(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper);
 	void initializeVanillaPops(const std::string& v3Path);
+	void assignVanillaPopsToStates();
 
 	[[nodiscard]] const auto& getStates() const { return states; }
 	[[nodiscard]] const auto& getSuperRegions() const { return superRegions; }

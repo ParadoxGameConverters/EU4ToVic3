@@ -721,3 +721,23 @@ TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaPops)
 
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> Vanilla had 5500 pops.)"));
 }
+
+TEST(V3World_ClayManagerTests, clayManagerCanAssignVanillaPops)
+{
+	const auto V3Path = "TestFiles/vic3installation/game/";
+	V3::ClayManager clayManager;
+	clayManager.initializeVanillaStates(V3Path);
+	clayManager.initializeVanillaPops(V3Path);
+
+	clayManager.assignVanillaPopsToStates();
+
+	const auto& state1 = clayManager.getStates().at("STATE_TEST_1");
+	const auto& state2 = clayManager.getStates().at("STATE_TEST_2");
+	const auto& state3 = clayManager.getStates().at("STATE_TEST_3");
+	const auto& state4 = clayManager.getStates().at("STATE_TEST_4");
+
+	EXPECT_EQ(600, state1->getVanillaPops().getPopCount());
+	EXPECT_EQ(3000, state2->getVanillaPops().getPopCount());
+	EXPECT_EQ(900, state3->getVanillaPops().getPopCount());
+	EXPECT_EQ(1000, state4->getVanillaPops().getPopCount());
+}
