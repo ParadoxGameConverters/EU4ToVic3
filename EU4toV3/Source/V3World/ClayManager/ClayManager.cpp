@@ -1,6 +1,7 @@
 #include "ClayManager.h"
 #include "CountryMapper/CountryMapper.h"
 #include "Log.h"
+#include "PopLoader/PopLoader.h"
 #include "StateLoader/StateLoader.h"
 #include "SuperRegionLoader/SuperRegionLoader.h"
 #include "TerrainLoader/TerrainLoader.h"
@@ -394,4 +395,18 @@ bool V3::ClayManager::stateIsInRegion(const std::string& state, const std::strin
 				return true;
 
 	return false;
+}
+
+void V3::ClayManager::initializeVanillaPops(const std::string& v3Path)
+{
+	Log(LogLevel::Info) << "-> Loading Vanilla Pops.";
+	PopLoader popLoader;
+	popLoader.loadPops(v3Path);
+	vanillaStatePops = popLoader.getStatePops();
+
+	const auto total = std::accumulate(vanillaStatePops.begin(), vanillaStatePops.end(), 0, [](int sum, const std::pair<std::string, StatePops>& statePop) {
+		return sum + statePop.second.getPopCount();
+	});
+
+	Log(LogLevel::Info) << "<> Vanilla had " << total << " pops.";
 }

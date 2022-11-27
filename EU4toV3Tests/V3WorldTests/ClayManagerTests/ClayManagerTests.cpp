@@ -697,3 +697,27 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	// linkback through state's substate ownership vector
 	EXPECT_TRUE(substate4->state->getSubStates()[0]->sourceOwnerTag.empty());
 }
+
+TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaPops)
+{
+	const auto V3Path = "TestFiles/vic3installation/game/";
+	V3::ClayManager clayManager;
+
+	std::stringstream log;
+	std::streambuf* cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+
+	clayManager.initializeVanillaPops(V3Path);
+
+	std::cout.rdbuf(cout_buffer);
+
+	/*
+	STATE_TEST_1 - 600
+	STATE_TEST_2 - 3000
+	STATE_TEST_3 - 900
+	STATE_TEST_4 - 1000
+	total: 5500
+	*/
+
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> Vanilla had 5500 pops.)"));
+}
