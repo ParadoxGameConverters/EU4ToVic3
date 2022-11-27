@@ -1,5 +1,6 @@
 #ifndef STATE_H
 #define STATE_H
+#include "ClayManager/PopLoader/Pops/StatePops.h"
 #include "Province.h"
 #include <Parser.h>
 #include <string>
@@ -17,6 +18,7 @@ class State: commonItems::parser
 	void addSubState(const std::shared_ptr<SubState>& substate) { substates.push_back(substate); }
 	void distributeLandshares();
 	void distributeResources();
+	void setVanillaPops(const auto& thePops) { vanillaPops = thePops; }
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] bool containsProvince(const std::string& provinceName) const { return provinces.contains(provinceName); }
@@ -27,6 +29,7 @@ class State: commonItems::parser
 	[[nodiscard]] const auto& getTraits() const { return traits; }
 	[[nodiscard]] const auto& getCappedResources() const { return cappedResources; }
 	[[nodiscard]] const auto& getArableResources() const { return arableResources; }
+	[[nodiscard]] const auto& getVanillaPops() const { return vanillaPops; }
 
   private:
 	void registerKeys();
@@ -41,6 +44,7 @@ class State: commonItems::parser
 	std::vector<std::string> traits;				  // state_trait_natural_harbors
 	std::map<std::string, int> cappedResources; // RGO and arable land potential
 	std::vector<std::string> arableResources;	  // Which buildings can be built on arable land
+	StatePops vanillaPops;
 };
 } // namespace V3
 #endif // STATE_H

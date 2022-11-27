@@ -68,7 +68,12 @@ void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)
 		}
 		if (!regionManager.provinceIsValid(provinceID)) // regionManager considers wastelands invalid, as they aren't registered.
 		{
-			discardedProvinces.emplace(provinceID, province);
+			// this is a special case. Wastelands DO map to something concrete - they generate their own chunks, albeit with no incoming demographics or ownership.
+			// Yet they don't participate in geopolitical structure (regions) and need to be tiptoed around.
+
+			// Mark as wasteland but don't discard.
+			wastelands.emplace(provinceID, province);
+			viableProvinces.emplace(provinceID, province);
 			continue;
 		}
 		if (defaultMapParser.isSea(provinceID))
