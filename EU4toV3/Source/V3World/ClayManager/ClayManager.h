@@ -34,6 +34,9 @@ class ClayManager
 	[[nodiscard]] const auto& getChunks() const { return chunks; }
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
 
+	[[nodiscard]] bool regionIsValid(const std::string& region) const;
+	[[nodiscard]] bool stateIsInRegion(const std::string& state, const std::string& region) const;
+
   private:
 	using ProvinceMap = std::map<std::string, std::shared_ptr<Province>>;			// v3 province name->v3 province
 	using StateToProvinceMap = std::map<std::string, ProvinceMap>;						// state name -> v3 provinces

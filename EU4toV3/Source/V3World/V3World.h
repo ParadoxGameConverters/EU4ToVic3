@@ -3,8 +3,10 @@
 #include "ClayManager/ClayManager.h"
 #include "Configuration.h"
 #include "CountryMapper/CountryMapper.h"
+#include "CultureMapper/CultureMapper.h"
 #include "PoliticalManager/PoliticalManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
+#include "ReligionMapper/ReligionMapper.h"
 
 namespace EU4
 {
@@ -26,8 +28,11 @@ class World
 	Configuration::ConfigBlock configBlock;
 
 	ClayManager clayManager;
-	mappers::ProvinceMapper provinceMapper;
 	PoliticalManager politicalManager;
+
+	mappers::ProvinceMapper provinceMapper;
+	mappers::ReligionMapper religionMapper;
+	mappers::CultureMapper cultureMapper;
 	std::shared_ptr<mappers::CountryMapper> countryMapper;
 };
 

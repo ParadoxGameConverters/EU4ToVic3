@@ -314,3 +314,36 @@ void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::s
 
 	Log(LogLevel::Info) << "<> " << filteredSubstates.size() << " substates assigned. " << filteredSubstates.size() - substates.size() << " substates ditched.";
 }
+
+bool V3::ClayManager::regionIsValid(const std::string& region) const
+{
+	if (states.contains(region))
+		return true;
+	if (superRegions.contains(region))
+		return true;
+	for (const auto& superRegion: superRegions | std::views::values)
+		if (superRegion->getRegions().contains(region))
+			return true;
+
+	return false;
+}
+
+bool V3::ClayManager::stateIsInRegion(const std::string& state, const std::string& region) const
+{
+	// "region" can be anything - state, region or even supergroup.
+	// Are we pinging self, and we are valid?
+	if (state == region && regionIsValid(state))
+		return true;
+
+	// is region some *other* state?
+	if (states.contains(region))
+		return false;
+
+	// let's ask supergroups and groups
+	for (const auto& [superGroupName, superGroup]: superRegions)
+		for (const auto& [regionName, theRegion]: superGroup->getRegions())
+			if (theRegion->containsState(state) && (regionName == region || superGroupName == region))
+				return true;
+
+	return false;
+}
