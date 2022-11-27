@@ -106,8 +106,9 @@ TEST(Mappers_CultureMappingRuleTests, regularMatchOnReligion)
 	mappers::CultureMappingRule theMapping;
 	theMapping.loadMappingRules("vic3 = vculture1 eu4 = culture1 religion = religion1");
 
-	EXPECT_TRUE(theMapping.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "religion1", "", ""));
-	EXPECT_EQ("vculture1", *theMapping.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "religion1", "", ""));
+	const auto match = theMapping.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "religion1", "", "");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture1", *match);
 }
 
 TEST(Mappers_CultureMappingRuleTests, regularMatchOnReligionFailsForNoReligion)
@@ -152,7 +153,9 @@ TEST(Mappers_CultureMappingRuleTests, regularMatchOnReligionGroup)
 	mappers::CultureMappingRule theMapping;
 	theMapping.loadMappingRules("vic3 = vculture1 eu4 = culture1 religion_group = rgroup1");
 
-	EXPECT_EQ("vculture1", *theMapping.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "religion1", "", ""));
+	const auto match = theMapping.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "religion1", "", "");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture1", *match);
 }
 
 TEST(Mappers_CultureMappingRuleTests, regularMatchOnReligionFailsForNoReligionGroup)
@@ -194,7 +197,9 @@ TEST(Mappers_CultureMappingRuleTests, regularMatchOnOwner)
 	mappers::CultureMappingRule theMapping;
 	theMapping.loadMappingRules("vic3 = vculture1 eu4 = culture1 owner = TAG");
 
-	EXPECT_EQ("vculture1", *theMapping.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "", "", "TAG"));
+	const auto match = theMapping.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "", "", "TAG");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture1", *match);
 }
 
 TEST(Mappers_CultureMappingRuleTests, regularMatchOnOwnerFailsForWrongOwner)
@@ -233,7 +238,9 @@ TEST(Mappers_CultureMappingRuleTests, regularMatchOnState)
 	mappers::CultureMappingRule theMapping;
 	theMapping.loadMappingRules("vic3 = vculture1 eu4 = culture1 region = STATE_TEST_1");
 
-	EXPECT_EQ("vculture1", *theMapping.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "", "STATE_TEST_1", ""));
+	const auto match = theMapping.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "", "STATE_TEST_1", "");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture1", *match);
 }
 
 TEST(Mappers_CultureMappingRuleTests, regularMatchOnRegion)
@@ -248,7 +255,9 @@ TEST(Mappers_CultureMappingRuleTests, regularMatchOnRegion)
 	mappers::CultureMappingRule theMapping;
 	theMapping.loadMappingRules("vic3 = vculture1 eu4 = culture1 region = region_a");
 
-	EXPECT_EQ("vculture1", *theMapping.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "", "STATE_TEST_1", ""));
+	const auto match = theMapping.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "", "STATE_TEST_1", "");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture1", *match);
 }
 
 TEST(Mappers_CultureMappingRuleTests, regularMatchOnSuperRegion)
@@ -263,7 +272,9 @@ TEST(Mappers_CultureMappingRuleTests, regularMatchOnSuperRegion)
 	mappers::CultureMappingRule theMapping;
 	theMapping.loadMappingRules("vic3 = vculture1 eu4 = culture1 region = test_1_strategic_regions");
 
-	EXPECT_EQ("vculture1", *theMapping.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "", "STATE_TEST_1", ""));
+	const auto match = theMapping.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "", "STATE_TEST_1", "");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture1", *match);
 }
 
 TEST(Mappers_CultureMappingRuleTests, regularMatchOnRegionFailsForWrongState)
@@ -338,7 +349,9 @@ TEST(Mappers_CultureMappingRuleTests, regionalMatchOnRegion)
 	mappers::CultureMappingRule theMapping;
 	theMapping.loadMappingRules("vic3 = vculture1 eu4 = culture1 region = test_1_strategic_regions");
 
-	EXPECT_EQ("vculture1", *theMapping.cultureRegionalMatch(clayManager, cultureLoader, religionLoader, "culture1", "", "STATE_TEST_1", ""));
+	const auto match = theMapping.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "", "STATE_TEST_1", "");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture1", *match);
 }
 
 TEST(Mappers_CultureMappingRuleTests, regionalMatchOnFailsForNoLoadedRegions)
@@ -371,8 +384,9 @@ TEST(Mappers_CultureMappingRuleTests, nonRegionalNonReligionsMatch)
 	mappers::CultureMappingRule theMapping;
 	theMapping.loadMappingRules("vic3 = vculture1 eu4 = culture1");
 
-	EXPECT_EQ("vculture1",
-		 *theMapping.cultureNonRegionalNonReligiousMatch(clayManager, cultureLoader, religionLoader, "culture1", "religion1", "STATE_TEST_1", ""));
+	const auto match = theMapping.cultureNonRegionalNonReligiousMatch(clayManager, cultureLoader, religionLoader, "culture1", "religion1", "STATE_TEST_1", "");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("vculture1", *match);
 }
 
 TEST(Mappers_CultureMappingRuleTests, nonRegionalNonReligionsMatchOnFailsForLoadedRegions)
