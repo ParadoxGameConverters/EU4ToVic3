@@ -1,7 +1,7 @@
 #ifndef POP_ENTRY_H
 #define POP_ENTRY_H
 #include "Parser.h"
-#include "Pop.h"
+#include "Pops/Pop.h"
 
 namespace V3
 {

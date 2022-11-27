@@ -2,6 +2,7 @@
 #include "CommonRegexes.h"
 #include "Log.h"
 #include "ParserHelpers.h"
+#include "SubStatePopEntries.h"
 
 void V3::SubStateEntries::loadSubStates(std::istream& theStream)
 {

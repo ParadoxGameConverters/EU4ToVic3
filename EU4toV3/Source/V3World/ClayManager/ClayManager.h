@@ -1,7 +1,7 @@
 #ifndef CLAY_MANAGER_H
 #define CLAY_MANAGER_H
 #include "Chunk.h"
-#include "PopLoader/Pop.h"
+#include "PopLoader/Pops/StatePops.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
 #include "StateLoader/State.h"

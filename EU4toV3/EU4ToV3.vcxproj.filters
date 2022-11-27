@@ -321,8 +321,11 @@
     <ClCompile Include="Source\V3World\ClayManager\PopLoader\StateEntries.cpp">
       <Filter>Vic3World\ClayManager\PopLoader</Filter>
     </ClCompile>
-    <ClCompile Include="Source\V3World\ClayManager\PopLoader\Pop.cpp">
-      <Filter>Vic3World\ClayManager\PopLoader</Filter>
+    <ClCompile Include="Source\V3World\ClayManager\PopLoader\Pops\StatePops.cpp">
+      <Filter>Vic3World\ClayManager\PopLoader\Pops</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\V3World\ClayManager\PopLoader\Pops\SubStatePops.cpp">
+      <Filter>Vic3World\ClayManager\PopLoader\Pops</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -675,11 +678,18 @@
     <ClInclude Include="Source\V3World\ClayManager\PopLoader\SubStateEntries.h">
       <Filter>Vic3World\ClayManager\PopLoader</Filter>
     </ClInclude>
-    <ClInclude Include="Source\V3World\ClayManager\PopLoader\Pop.h">
-      <Filter>Vic3World\ClayManager\PopLoader</Filter>
-    </ClInclude>
     <ClInclude Include="Source\V3World\ClayManager\PopLoader\StateEntries.h">
       <Filter>Vic3World\ClayManager\PopLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\Religion.h" />
+    <ClInclude Include="Source\V3World\ClayManager\PopLoader\Pops\Pop.h">
+      <Filter>Vic3World\ClayManager\PopLoader\Pops</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\V3World\ClayManager\PopLoader\Pops\StatePops.h">
+      <Filter>Vic3World\ClayManager\PopLoader\Pops</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\V3World\ClayManager\PopLoader\Pops\SubStatePops.h">
+      <Filter>Vic3World\ClayManager\PopLoader\Pops</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -826,6 +836,9 @@
     </Filter>
     <Filter Include="Vic3World\ClayManager\PopLoader">
       <UniqueIdentifier>{759df350-e118-45c9-b610-3f74743a2e6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vic3World\ClayManager\PopLoader\Pops">
+      <UniqueIdentifier>{3e5fb98e-7d0c-4bbe-b4fd-cc5174898614}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

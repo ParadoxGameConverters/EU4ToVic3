@@ -1,6 +1,6 @@
 #ifndef STATE_H
 #define STATE_H
-#include "ClayManager/PopLoader/Pop.h"
+#include "ClayManager/PopLoader/Pops/StatePops.h"
 #include "Province.h"
 #include <Parser.h>
 #include <string>

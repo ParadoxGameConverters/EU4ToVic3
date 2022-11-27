@@ -1,6 +1,7 @@
 #include "SubStatePopEntries.h"
 #include "CommonRegexes.h"
 #include "ParserHelpers.h"
+#include "PopEntry.h"
 
 void V3::SubStatePopEntries::loadPops(std::istream& theStream)
 {

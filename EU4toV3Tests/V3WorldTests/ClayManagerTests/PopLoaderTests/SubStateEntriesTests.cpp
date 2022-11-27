@@ -1,7 +1,6 @@
-#include <gmock/gmock-matchers.h>
-
 #include "ClayManager/PopLoader/SubStateEntries.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
 
 TEST(V3World_SubStateEntriesTests, DefaultsDefaultToDefaults)
 {
