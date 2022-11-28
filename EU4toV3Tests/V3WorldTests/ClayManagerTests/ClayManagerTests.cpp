@@ -6,6 +6,79 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+V3::ClayManager generateChunks()
+{
+	auto eu4Path = "TestFiles/eu4installation/";
+	EU4::DefaultMapParser defaults;
+	defaults.loadDefaultMap(eu4Path, {});
+	EU4::DefinitionScraper definitions;
+	definitions.loadDefinitions(eu4Path, {});
+	EU4::RegionManager regionMapper;
+	regionMapper.loadRegions(eu4Path, {});
+
+	std::stringstream provinceStream;
+	provinceStream << "-1={}\n";																					// sea, no ownership
+	provinceStream << "-2={ owner = TA2 base_tax=10 base_production=10 base_manpower=10 }\n"; // substate TA-2&3
+	provinceStream << "-3={ owner = TA3 base_tax=1 base_production=1 base_manpower=1 }\n";		// substate TA-2&3
+	provinceStream << "-4={}\n";																					// irrelevant
+	provinceStream << "-5={}\n";																					// irrelevant
+	provinceStream << "-6={}\n";																					// irrelevant
+	provinceStream << "-7={}\n";																					// irrelevant
+	provinceStream << "-8={}\n";																					// irrelevant
+	provinceStream << "-9={ owner = TA9 base_tax=1 base_production=1 base_manpower=1 }\n";		// substate TA-9
+	provinceStream << "-10={}\n";																					// irrelevant
+	EU4::ProvinceManager provinceManager;
+	provinceManager.loadProvinces(provinceStream);
+	provinceManager.loadDefaultMapParser(defaults);
+	provinceManager.loadDefinitionScraper(definitions);
+	provinceManager.classifyProvinces(regionMapper);
+
+	mappers::ProvinceMapper provinceMapper;
+	provinceMapper.loadProvinceMappings("TestFiles/configurables/province_mappings_chunks.txt");
+
+	auto V3Path = "TestFiles/vic3installation/game/";
+
+	V3::ClayManager clayManager;
+	clayManager.initializeVanillaStates(V3Path);
+	clayManager.loadTerrainsIntoProvinces(V3Path);
+	clayManager.initializeSuperRegions(V3Path);
+	clayManager.loadStatesIntoSuperRegions();
+
+	clayManager.generateChunks(provinceMapper, provinceManager);
+	return clayManager;
+}
+
+V3::ClayManager distributeChunks()
+{
+	auto clayManager = generateChunks();
+	std::stringstream countryStream;
+	const auto ta2 = std::make_shared<EU4::Country>("TA2", countryStream);
+	const auto ta3 = std::make_shared<EU4::Country>("TA3", countryStream);
+	const auto ta9 = std::make_shared<EU4::Country>("TA9", countryStream);
+	const std::map<std::string, std::shared_ptr<EU4::Country>> countries = {{"TA2", ta2}, {"TA3", ta3}, {"TA9", ta9}};
+	clayManager.unDisputeChunkOwnership(countries);
+	clayManager.distributeChunksAcrossSubStates();
+	return clayManager;
+}
+
+V3::ClayManager assignSubStateOwnership()
+{
+	auto clayManager = distributeChunks();
+	std::stringstream countryStream;
+	const auto ta2 = std::make_shared<EU4::Country>("TA2", countryStream);
+	const auto ta3 = std::make_shared<EU4::Country>("TA3", countryStream);
+	const auto ta9 = std::make_shared<EU4::Country>("TA9", countryStream);
+	const std::map<std::string, std::shared_ptr<EU4::Country>> countries = {{"TA2", ta2}, {"TA3", ta3}, {"TA9", ta9}};
+	auto countryMapper = std::make_shared<mappers::CountryMapper>();
+	countryMapper->loadMappingRules("TestFiles/configurables/country_mappings.txt");
+	V3::PoliticalManager politicalManager;
+	politicalManager.loadCountryMapper(countryMapper);
+	politicalManager.importEU4Countries(countries);
+	clayManager.assignSubStateOwnership(politicalManager.getCountries(), *countryMapper);
+
+	return clayManager;
+}
+
 TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaStates)
 {
 	V3::ClayManager clayManager;
@@ -79,7 +152,6 @@ TEST(V3World_ClayManagerTests, clayManagerComplainsForMissingProvinceTerrain)
 
 	std::cout.rdbuf(cout_buffer);
 }
-
 
 TEST(V3World_ClayManagerTests, clayManagerCanInitializeSuperRegions)
 {
@@ -167,44 +239,7 @@ TEST(V3World_ClayManagerTests, excessSuperRegionStatesInRegionsAreObjectedAndRem
 
 TEST(V3World_ClayManagerTests, clayManagerCanGenerateSaneChunks)
 {
-	auto eu4Path = "TestFiles/eu4installation/";
-	EU4::DefaultMapParser defaults;
-	defaults.loadDefaultMap(eu4Path, {});
-	EU4::DefinitionScraper definitions;
-	definitions.loadDefinitions(eu4Path, {});
-	EU4::RegionManager regionMapper;
-	regionMapper.loadRegions(eu4Path, {});
-
-	std::stringstream provinceStream;
-	provinceStream << "-1={}\n";
-	provinceStream << "-2={}\n";
-	provinceStream << "-3={}\n";
-	provinceStream << "-4={}\n";
-	provinceStream << "-5={}\n";
-	provinceStream << "-6={}\n";
-	provinceStream << "-7={}\n";
-	provinceStream << "-8={}\n";
-	provinceStream << "-9={}\n";
-	provinceStream << "-10={}\n";
-	EU4::ProvinceManager provinceManager;
-	provinceManager.loadProvinces(provinceStream);
-	provinceManager.loadDefaultMapParser(defaults);
-	provinceManager.loadDefinitionScraper(definitions);
-	provinceManager.classifyProvinces(regionMapper);
-
-	mappers::ProvinceMapper provinceMapper;
-	provinceMapper.loadProvinceMappings("TestFiles/configurables/province_mappings_chunks.txt");
-
-	auto V3Path = "TestFiles/vic3installation/game/";
-
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
-	clayManager.initializeSuperRegions(V3Path);
-	clayManager.loadStatesIntoSuperRegions();
-
-	clayManager.generateChunks(provinceMapper, provinceManager);
-
+	auto clayManager = generateChunks();
 	const auto& chunks = clayManager.getChunks();
 
 	/*
@@ -261,55 +296,22 @@ TEST(V3World_ClayManagerTests, clayManagerCanGenerateSaneChunks)
 
 TEST(V3World_ClayManagerTests, clayManagerCanUndisputeChunkOwnership)
 {
-	auto eu4Path = "TestFiles/eu4installation/";
-	EU4::DefaultMapParser defaults;
-	defaults.loadDefaultMap(eu4Path, {});
-	EU4::DefinitionScraper definitions;
-	definitions.loadDefinitions(eu4Path, {});
-	EU4::RegionManager regionMapper;
-	regionMapper.loadRegions(eu4Path, {});
-
-	std::stringstream provinceStream;
-	provinceStream << "-1={}\n";																					// sea, no ownership
-	provinceStream << "-2={ owner = TAG base_tax=10 base_production=10 base_manpower=10 }\n"; // dev 30
-	provinceStream << "-3={ owner = GAT base_tax=1 base_production=1 base_manpower=1 }\n";		// dev 3
-	provinceStream << "-4={}\n";																					// irrelevant
-	provinceStream << "-5={}\n";																					// irrelevant
-	provinceStream << "-6={}\n";																					// irrelevant
-	provinceStream << "-7={}\n";																					// irrelevant
-	provinceStream << "-8={}\n";																					// irrelevant
-	provinceStream << "-9={ owner = GAT base_tax=1 base_production=1 base_manpower=1 }\n";		// dev 3
-	provinceStream << "-10={}\n";																					// irrelevant
-	EU4::ProvinceManager provinceManager;
-	provinceManager.loadProvinces(provinceStream);
-	provinceManager.loadDefaultMapParser(defaults);
-	provinceManager.loadDefinitionScraper(definitions);
-	provinceManager.classifyProvinces(regionMapper);
-	provinceManager.buildProvinceWeights();
-	mappers::ProvinceMapper provinceMapper;
-	provinceMapper.loadProvinceMappings("TestFiles/configurables/province_mappings_chunks.txt");
-	auto V3Path = "TestFiles/vic3installation/game/";
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
-	clayManager.initializeSuperRegions(V3Path);
-	clayManager.loadStatesIntoSuperRegions();
-	clayManager.generateChunks(provinceMapper, provinceManager);
+	auto clayManager = generateChunks();
 
 	// Wee need some countries to link chunks to.
 	std::stringstream countryStream;
-	const auto tag = std::make_shared<EU4::Country>("TAG", countryStream);
-	const auto gat = std::make_shared<EU4::Country>("GAT", countryStream);
-	std::map<std::string, std::shared_ptr<EU4::Country>> countries = {{"TAG", tag}, {"GAT", gat}};
+	const auto tag = std::make_shared<EU4::Country>("TA2", countryStream);
+	const auto gat = std::make_shared<EU4::Country>("TA9", countryStream);
+	std::map<std::string, std::shared_ptr<EU4::Country>> countries = {{"TA2", tag}, {"TA9", gat}};
 
 	clayManager.unDisputeChunkOwnership(countries);
 	const auto& chunks = clayManager.getChunks();
 
 	/*
 	link = { eu4 = 1 vic3 = x000001 vic3 = x000002 } #sea->seas // produces chunk 1 - dropped since no owners
-	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces chunk 2 - goes to TAG due to higher dev.
+	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces chunk 2 - goes to TA2 due to higher dev.
 	link = { eu4 = 4 vic3 = x000005 } # wasteland -> land // produces chunk 3 - goes to noone since it's unowned.
-	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # wasteland,land->land,lake // produces chunk 4, goes to GAT since only owner.
+	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # wasteland,land->land,lake // produces chunk 4, goes to TA9 since only owner.
 	*/
 
 	ASSERT_EQ(3, chunks.size());
@@ -319,7 +321,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanUndisputeChunkOwnership)
 	const auto& chunk3 = chunks[2]; // land chunk, 9->x8
 
 	ASSERT_TRUE(chunk1->getSourceOwner());
-	EXPECT_EQ("TAG", chunk1->getSourceOwner()->getTag());
+	EXPECT_EQ("TA2", chunk1->getSourceOwner()->getTag());
 	EXPECT_TRUE(chunk1->getSourceProvinces().contains(2));
 	EXPECT_TRUE(chunk1->getSourceProvinces().contains(3));
 	EXPECT_TRUE(chunk1->getProvinces().contains("x000003"));
@@ -330,52 +332,19 @@ TEST(V3World_ClayManagerTests, clayManagerCanUndisputeChunkOwnership)
 	EXPECT_TRUE(chunk2->getProvinces().contains("x000005"));
 
 	ASSERT_TRUE(chunk3->getSourceOwner());
-	EXPECT_EQ("GAT", chunk3->getSourceOwner()->getTag());
+	EXPECT_EQ("TA9", chunk3->getSourceOwner()->getTag());
 	EXPECT_TRUE(chunk3->getSourceProvinces().contains(9));
 	EXPECT_TRUE(chunk3->getProvinces().contains("x000008"));
 }
 
 TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInvalidCountries)
 {
-	auto eu4Path = "TestFiles/eu4installation/";
-	EU4::DefaultMapParser defaults;
-	defaults.loadDefaultMap(eu4Path, {});
-	EU4::DefinitionScraper definitions;
-	definitions.loadDefinitions(eu4Path, {});
-	EU4::RegionManager regionMapper;
-	regionMapper.loadRegions(eu4Path, {});
-
-	std::stringstream provinceStream;
-	provinceStream << "-1={}\n";																					// sea, no ownership
-	provinceStream << "-2={ owner = TAG base_tax=10 base_production=10 base_manpower=10 }\n"; // dev 30
-	provinceStream << "-3={ owner = GAT base_tax=1 base_production=1 base_manpower=1 }\n";		// dev 3
-	provinceStream << "-4={}\n";																					// irrelevant
-	provinceStream << "-5={}\n";																					// irrelevant
-	provinceStream << "-6={}\n";																					// irrelevant
-	provinceStream << "-7={}\n";																					// irrelevant
-	provinceStream << "-8={}\n";																					// irrelevant
-	provinceStream << "-9={ owner = GAT base_tax=1 base_production=1 base_manpower=1 }\n";		// dev 3
-	provinceStream << "-10={}\n";																					// irrelevant
-	EU4::ProvinceManager provinceManager;
-	provinceManager.loadProvinces(provinceStream);
-	provinceManager.loadDefaultMapParser(defaults);
-	provinceManager.loadDefinitionScraper(definitions);
-	provinceManager.classifyProvinces(regionMapper);
-	provinceManager.buildProvinceWeights();
-	mappers::ProvinceMapper provinceMapper;
-	provinceMapper.loadProvinceMappings("TestFiles/configurables/province_mappings_chunks.txt");
-	auto V3Path = "TestFiles/vic3installation/game/";
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
-	clayManager.initializeSuperRegions(V3Path);
-	clayManager.loadStatesIntoSuperRegions();
-	clayManager.generateChunks(provinceMapper, provinceManager);
+	auto clayManager = generateChunks();
 
 	// Wee need some countries to link chunks to.
 	std::stringstream countryStream;
-	const auto gat = std::make_shared<EU4::Country>("GAT", countryStream);
-	std::map<std::string, std::shared_ptr<EU4::Country>> countries = {{"GAT", gat}};
+	const auto ta9 = std::make_shared<EU4::Country>("TA9", countryStream);
+	std::map<std::string, std::shared_ptr<EU4::Country>> countries = {{"TA9", ta9}};
 
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
@@ -383,7 +352,7 @@ TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInvalidCountri
 
 	clayManager.unDisputeChunkOwnership(countries);
 
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Chunk owner TAG is invalid. Dropping chunk ownership.)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Chunk owner TA2 is invalid. Dropping chunk ownership.)"));
 
 	std::cout.rdbuf(cout_buffer);
 
@@ -391,16 +360,16 @@ TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInvalidCountri
 
 	/*
 	link = { eu4 = 1 vic3 = x000001 vic3 = x000002 } #sea->seas // produces chunk 1 - dropped since no owners
-	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces chunk 2 - goes to TAG due to higher dev.
+	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces chunk 2 - goes to TA2 due to higher dev.
 	link = { eu4 = 4 vic3 = x000005 } # wasteland -> land // produces chunk 3 - goes to noone since it's unowned.
-	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # wasteland,land->land,lake // produces chunk 4, goes to GAT since only owner.
+	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # wasteland,land->land,lake // produces chunk 4, goes to TA9 since only owner.
 	*/
 
 	ASSERT_EQ(3, chunks.size());
 
-	const auto& chunk1 = chunks[0]; // land chunk, 2,3->x3,x4 // TAG -> noone
+	const auto& chunk1 = chunks[0]; // land chunk, 2,3->x3,x4 // TA2 -> noone
 	const auto& chunk2 = chunks[1]; // land chunk, 4->x5 // noone
-	const auto& chunk3 = chunks[2]; // land chunk, 9->x8 // GAT
+	const auto& chunk3 = chunks[2]; // land chunk, 9->x8 // TA9
 
 	EXPECT_FALSE(chunk1->getSourceOwner());
 	EXPECT_TRUE(chunk1->getSourceProvinces().contains(2));
@@ -413,52 +382,19 @@ TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInvalidCountri
 	EXPECT_TRUE(chunk2->getProvinces().contains("x000005"));
 
 	ASSERT_TRUE(chunk3->getSourceOwner());
-	EXPECT_EQ("GAT", chunk3->getSourceOwner()->getTag());
+	EXPECT_EQ("TA9", chunk3->getSourceOwner()->getTag());
 	EXPECT_TRUE(chunk3->getSourceProvinces().contains(9));
 	EXPECT_TRUE(chunk3->getProvinces().contains("x000008"));
 }
 
 TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInsaneCountries)
 {
-	auto eu4Path = "TestFiles/eu4installation/";
-	EU4::DefaultMapParser defaults;
-	defaults.loadDefaultMap(eu4Path, {});
-	EU4::DefinitionScraper definitions;
-	definitions.loadDefinitions(eu4Path, {});
-	EU4::RegionManager regionMapper;
-	regionMapper.loadRegions(eu4Path, {});
-
-	std::stringstream provinceStream;
-	provinceStream << "-1={}\n";																					// sea, no ownership
-	provinceStream << "-2={ owner = TAG base_tax=10 base_production=10 base_manpower=10 }\n"; // dev 30
-	provinceStream << "-3={ owner = GAT base_tax=1 base_production=1 base_manpower=1 }\n";		// dev 3
-	provinceStream << "-4={}\n";																					// irrelevant
-	provinceStream << "-5={}\n";																					// irrelevant
-	provinceStream << "-6={}\n";																					// irrelevant
-	provinceStream << "-7={}\n";																					// irrelevant
-	provinceStream << "-8={}\n";																					// irrelevant
-	provinceStream << "-9={ owner = GAT base_tax=1 base_production=1 base_manpower=1 }\n";		// dev 3
-	provinceStream << "-10={}\n";																					// irrelevant
-	EU4::ProvinceManager provinceManager;
-	provinceManager.loadProvinces(provinceStream);
-	provinceManager.loadDefaultMapParser(defaults);
-	provinceManager.loadDefinitionScraper(definitions);
-	provinceManager.classifyProvinces(regionMapper);
-	provinceManager.buildProvinceWeights();
-	mappers::ProvinceMapper provinceMapper;
-	provinceMapper.loadProvinceMappings("TestFiles/configurables/province_mappings_chunks.txt");
-	auto V3Path = "TestFiles/vic3installation/game/";
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
-	clayManager.initializeSuperRegions(V3Path);
-	clayManager.loadStatesIntoSuperRegions();
-	clayManager.generateChunks(provinceMapper, provinceManager);
+	auto clayManager = generateChunks();
 
 	// Wee need some countries to link chunks to.
 	std::stringstream countryStream;
-	const auto gat = std::make_shared<EU4::Country>("GAT", countryStream);
-	std::map<std::string, std::shared_ptr<EU4::Country>> countries = {{"TAG", nullptr}, {"GAT", gat}}; // TAG is insane.
+	const auto ta9 = std::make_shared<EU4::Country>("TA9", countryStream);
+	std::map<std::string, std::shared_ptr<EU4::Country>> countries = {{"TA2", nullptr}, {"TA9", ta9}}; // TA2 is insane.
 
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
@@ -466,7 +402,7 @@ TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInsaneCountrie
 
 	clayManager.unDisputeChunkOwnership(countries);
 
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Chunk owner TAG is not initialized. Dropping chunk ownership.)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Chunk owner TA2 is not initialized. Dropping chunk ownership.)"));
 
 	std::cout.rdbuf(cout_buffer);
 
@@ -474,16 +410,16 @@ TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInsaneCountrie
 
 	/*
 	link = { eu4 = 1 vic3 = x000001 vic3 = x000002 } #sea->seas // produces chunk 1 - dropped since no owners
-	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces chunk 2 - goes to TAG due to higher dev.
+	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces chunk 2 - goes to TA2 due to higher dev.
 	link = { eu4 = 4 vic3 = x000005 } # wasteland -> land // produces chunk 3 - goes to noone since it's unowned.
-	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # wasteland,land->land,lake // produces chunk 4, goes to GAT since only owner.
+	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # wasteland,land->land,lake // produces chunk 4, goes to TA9 since only owner.
 	*/
 
 	ASSERT_EQ(3, chunks.size());
 
-	const auto& chunk1 = chunks[0]; // land chunk, 2,3->x3,x4 // TAG -> noone
+	const auto& chunk1 = chunks[0]; // land chunk, 2,3->x3,x4 // TA2 -> noone
 	const auto& chunk2 = chunks[1]; // land chunk, 4->x5 // noone
-	const auto& chunk3 = chunks[2]; // land chunk, 9->x8 // GAT
+	const auto& chunk3 = chunks[2]; // land chunk, 9->x8 // TA9
 
 	EXPECT_FALSE(chunk1->getSourceOwner());
 	EXPECT_TRUE(chunk1->getSourceProvinces().contains(2));
@@ -496,55 +432,14 @@ TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInsaneCountrie
 	EXPECT_TRUE(chunk2->getProvinces().contains("x000005"));
 
 	ASSERT_TRUE(chunk3->getSourceOwner());
-	EXPECT_EQ("GAT", chunk3->getSourceOwner()->getTag());
+	EXPECT_EQ("TA9", chunk3->getSourceOwner()->getTag());
 	EXPECT_TRUE(chunk3->getSourceProvinces().contains(9));
 	EXPECT_TRUE(chunk3->getProvinces().contains("x000008"));
 }
 
 TEST(V3World_ClayManagerTests, clayManagerCanProduceSubstatesFromChunks)
 {
-	auto eu4Path = "TestFiles/eu4installation/";
-	EU4::DefaultMapParser defaults;
-	defaults.loadDefaultMap(eu4Path, {});
-	EU4::DefinitionScraper definitions;
-	definitions.loadDefinitions(eu4Path, {});
-	EU4::RegionManager regionMapper;
-	regionMapper.loadRegions(eu4Path, {});
-
-	std::stringstream provinceStream;
-	provinceStream << "-1={}\n";																					// sea, no ownership
-	provinceStream << "-2={ owner = TAG base_tax=10 base_production=10 base_manpower=10 }\n"; // substate TAG-1&2
-	provinceStream << "-3={ owner = GAT base_tax=1 base_production=1 base_manpower=1 }\n";		// substate TAG-1&2
-	provinceStream << "-4={}\n";																					// irrelevant
-	provinceStream << "-5={}\n";																					// irrelevant
-	provinceStream << "-6={}\n";																					// irrelevant
-	provinceStream << "-7={}\n";																					// irrelevant
-	provinceStream << "-8={}\n";																					// irrelevant
-	provinceStream << "-9={ owner = GAT base_tax=1 base_production=1 base_manpower=1 }\n";		// substate TAG-3
-	provinceStream << "-10={}\n";																					// irrelevant
-	EU4::ProvinceManager provinceManager;
-	provinceManager.loadProvinces(provinceStream);
-	provinceManager.loadDefaultMapParser(defaults);
-	provinceManager.loadDefinitionScraper(definitions);
-	provinceManager.classifyProvinces(regionMapper);
-	provinceManager.buildProvinceWeights();
-	mappers::ProvinceMapper provinceMapper;
-	provinceMapper.loadProvinceMappings("TestFiles/configurables/province_mappings_chunks.txt");
-	auto V3Path = "TestFiles/vic3installation/game/";
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
-	clayManager.initializeSuperRegions(V3Path);
-	clayManager.loadStatesIntoSuperRegions();
-	clayManager.generateChunks(provinceMapper, provinceManager);
-	std::stringstream countryStream;
-	const auto tag = std::make_shared<EU4::Country>("TAG", countryStream);
-	const auto gat = std::make_shared<EU4::Country>("GAT", countryStream);
-	std::map<std::string, std::shared_ptr<EU4::Country>> countries = {{"TAG", tag}, {"GAT", gat}};
-	clayManager.unDisputeChunkOwnership(countries);
-
-	clayManager.distributeChunksAcrossSubStates();
-
+	auto clayManager = distributeChunks();
 	const auto& substates = clayManager.getSubStates();
 
 	/*
@@ -562,13 +457,13 @@ TEST(V3World_ClayManagerTests, clayManagerCanProduceSubstatesFromChunks)
 	const auto& substate4 = substates[3];
 
 	ASSERT_TRUE(substate1->getSourceOwner());
-	EXPECT_EQ("TAG", substate1->getSourceOwner()->getTag());
+	EXPECT_EQ("TA2", substate1->getSourceOwner()->getTag());
 	EXPECT_EQ(1, substate1->getProvinces().size());
 	EXPECT_TRUE(substate1->getProvinces().contains("x000003"));
 	EXPECT_EQ("STATE_TEST_LAND1", substate1->getHomeStateName());
 
 	ASSERT_TRUE(substate2->getSourceOwner());
-	EXPECT_EQ("TAG", substate2->getSourceOwner()->getTag());
+	EXPECT_EQ("TA2", substate2->getSourceOwner()->getTag());
 	EXPECT_EQ(1, substate2->getProvinces().size());
 	EXPECT_TRUE(substate2->getProvinces().contains("x000004"));
 	EXPECT_EQ("STATE_TEST_LAND2", substate2->getHomeStateName());
@@ -580,12 +475,12 @@ TEST(V3World_ClayManagerTests, clayManagerCanProduceSubstatesFromChunks)
 	EXPECT_EQ("STATE_TEST_LAND3", substate3->getHomeStateName());
 
 	ASSERT_TRUE(substate4->getSourceOwner());
-	EXPECT_EQ("GAT", substate4->getSourceOwner()->getTag());
+	EXPECT_EQ("TA9", substate4->getSourceOwner()->getTag());
 	EXPECT_EQ(1, substate4->getProvinces().size());
 	EXPECT_TRUE(substate4->getProvinces().contains("x000008"));
 	EXPECT_EQ("STATE_TEST_LAND4", substate4->getHomeStateName());
 
-	// linkback checks.
+	// double linkback checks.
 
 	const auto& chunk1 = substate1->getChunk(); // substate 1 & 2 are formed from this same chunk
 	const auto& chunk2 = substate2->getChunk(); // substate 1 & 2 are formed from this same chunk
@@ -610,54 +505,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanProduceSubstatesFromChunks)
 
 TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 {
-	auto eu4Path = "TestFiles/eu4installation/";
-	EU4::DefaultMapParser defaults;
-	defaults.loadDefaultMap(eu4Path, {});
-	EU4::DefinitionScraper definitions;
-	definitions.loadDefinitions(eu4Path, {});
-	EU4::RegionManager regionMapper;
-	regionMapper.loadRegions(eu4Path, {});
-
-	std::stringstream provinceStream;
-	provinceStream << "-1={}\n";																					// sea, no ownership
-	provinceStream << "-2={ owner = TA2 base_tax=10 base_production=10 base_manpower=10 }\n"; // substate TA-2&3
-	provinceStream << "-3={ owner = TA3 base_tax=1 base_production=1 base_manpower=1 }\n";		// substate TA-2&3
-	provinceStream << "-4={}\n";																					// irrelevant
-	provinceStream << "-5={}\n";																					// irrelevant
-	provinceStream << "-6={}\n";																					// irrelevant
-	provinceStream << "-7={}\n";																					// irrelevant
-	provinceStream << "-8={}\n";																					// irrelevant
-	provinceStream << "-9={ owner = TA9 base_tax=1 base_production=1 base_manpower=1 }\n";		// substate TA-9
-	provinceStream << "-10={}\n";																					// irrelevant
-	EU4::ProvinceManager provinceManager;
-	provinceManager.loadProvinces(provinceStream);
-	provinceManager.loadDefaultMapParser(defaults);
-	provinceManager.loadDefinitionScraper(definitions);
-	provinceManager.classifyProvinces(regionMapper);
-	provinceManager.buildProvinceWeights();
-	mappers::ProvinceMapper provinceMapper;
-	provinceMapper.loadProvinceMappings("TestFiles/configurables/province_mappings_chunks.txt");
-	auto V3Path = "TestFiles/vic3installation/game/";
-	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
-	clayManager.initializeSuperRegions(V3Path);
-	clayManager.loadStatesIntoSuperRegions();
-	clayManager.generateChunks(provinceMapper, provinceManager);
-	std::stringstream countryStream;
-	const auto ta2 = std::make_shared<EU4::Country>("TA2", countryStream);
-	const auto ta3 = std::make_shared<EU4::Country>("TA3", countryStream);
-	const auto ta9 = std::make_shared<EU4::Country>("TA9", countryStream);
-	std::map<std::string, std::shared_ptr<EU4::Country>> countries = {{"TA2", ta2}, {"TA3", ta3}, {"TA9", ta9}};
-	clayManager.unDisputeChunkOwnership(countries);
-	clayManager.distributeChunksAcrossSubStates();
-	auto countryMapper = std::make_shared<mappers::CountryMapper>();
-	countryMapper->loadMappingRules("TestFiles/configurables/country_mappings.txt");
-	V3::PoliticalManager politicalManager;
-	politicalManager.loadCountryMapper(countryMapper);
-	politicalManager.importEU4Countries(countries);
-	clayManager.assignSubStateOwnership(politicalManager.getCountries(), *countryMapper);
-
+	auto clayManager = assignSubStateOwnership();
 	const auto& substates = clayManager.getSubStates();
 
 	/*

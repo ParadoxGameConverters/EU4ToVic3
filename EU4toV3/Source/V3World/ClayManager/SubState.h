@@ -39,10 +39,10 @@ class SubState
 	[[nodiscard]] const std::string& getHomeStateName() const;
 
   private:
-	ProvinceMap provinces; // V3 province codes
-	std::shared_ptr<Country> owner;
-	std::shared_ptr<EU4::Country> sourceOwner;
 	std::shared_ptr<State> state; // home state
+	std::shared_ptr<EU4::Country> sourceOwner;
+	std::shared_ptr<Country> owner;
+	ProvinceMap provinces; // V3 province codes
 	std::shared_ptr<Chunk> chunk;
 
 	double landshare = 0; // % of State's resources that are substate's
