@@ -300,23 +300,23 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::buildSubStates(const
 		{
 			if (provinces.empty())
 				continue; // Unsure how this could happen, but sure, skip this substate.
-        
+
 			if (!states.contains(stateName))
 			{
 				// wtf, should never happen.
 				Log(LogLevel::Error) << "Substate owner " << eu4tag << " wants a substate in " << stateName << " which does't exist?! Bailing on this clay!";
 				continue;
 			}
-      if (eu4tag.starts_with("unowned"))
+			if (eu4tag.starts_with("unowned"))
 			{
-			  // This will keep unlinked substates without an owner.
-			  subStates.push_back(std::make_shared<SubState>(states.at(stateName), nullptr, provinces));
+				// This will keep unlinked substates without an owner.
+				subStates.push_back(std::make_shared<SubState>(states.at(stateName), nullptr, provinces));
 			}
-      else
-      {
-        // Should be ok now.
-        subStates.push_back(std::make_shared<SubState>(states.at(stateName), sourceOwners.at(eu4tag), provinces));
-      }
+			else
+			{
+				// Should be ok now.
+				subStates.push_back(std::make_shared<SubState>(states.at(stateName), sourceOwners.at(eu4tag), provinces));
+			}
 		}
 
 	return subStates;
