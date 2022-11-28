@@ -24,10 +24,10 @@ class Chunk
 
 	void addSourceProvince(const std::pair<int, std::shared_ptr<EU4::Province>>& province) { sourceProvinces.emplace(province); }
 	void addProvince(const std::pair<std::string, std::shared_ptr<Province>>& province) { provinces.emplace(province); }
-	void addState(const std::pair<std::string, std::shared_ptr<State>>& state) { states.emplace(state); }
-	void addSubState(const std::shared_ptr<SubState>& subState) { substates.push_back(subState); }
 	void setSourceOwner(const std::shared_ptr<EU4::Country>& theOwner) { sourceOwner = theOwner; }
 	void setOwner(const std::shared_ptr<Country>& theOwner) { owner = theOwner; }
+	void addState(const std::pair<std::string, std::shared_ptr<State>>& state) { states.emplace(state); }
+	void addSubState(const std::shared_ptr<SubState>& subState) { substates.push_back(subState); }
 
 	[[nodiscard]] const auto& getSourceProvinces() const { return sourceProvinces; }
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
