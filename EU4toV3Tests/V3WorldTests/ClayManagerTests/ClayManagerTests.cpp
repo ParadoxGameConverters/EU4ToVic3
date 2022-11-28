@@ -580,6 +580,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanProduceSubstatesFromChunks)
 	EXPECT_EQ("STATE_TEST_LAND2", substate3->getHomeStateName());
 
 	EXPECT_FALSE(substate4->getSourceOwner());
+	EXPECT_TRUE(substate4->getSourceOwnerTag().empty());
 	EXPECT_EQ(1, substate4->getProvinces().size());
 	EXPECT_TRUE(substate4->getProvinces().contains("x000005"));
 	EXPECT_EQ("STATE_TEST_LAND3", substate4->getHomeStateName());
@@ -689,11 +690,12 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	EXPECT_FALSE(substate4->getSourceOwner());
 	EXPECT_EQ(1, substate4->getProvinces().size());
 	EXPECT_TRUE(substate4->getProvinces().contains("x000005"));
+	EXPECT_TRUE(substate4->getOwnerTag().empty());
 	EXPECT_EQ("STATE_TEST_LAND3", substate4->getHomeStateName());
 	EXPECT_FALSE(substate4->getOwner());
 	// linkback to this substate through owner substates vector is impossible.
 	// linkback through state's substate ownership vector
-	EXPECT_FALSE(substate4->getHomeState()->getSubStates()[0]->getSourceOwner());
+	EXPECT_TRUE(substate4->getHomeState()->getSubStates()[0]->getSourceOwnerTag().empty());
 }
 
 TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaPops)
