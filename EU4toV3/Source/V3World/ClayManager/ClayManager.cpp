@@ -244,7 +244,7 @@ void V3::ClayManager::distributeChunksAcrossSubStates()
 	Log(LogLevel::Info) << "<> Substates organized, " << substates.size() << " produced.";
 }
 
-std::pair<V3::ClayManager::EU4TagToStateToProvinceMap, V3::ClayManager::SourceOwners> V3::ClayManager::sortChunkProvincesIntoTagStates() const
+std::pair<V3::EU4TagToStateToProvinceMap, V3::SourceOwners> V3::ClayManager::sortChunkProvincesIntoTagStates() const
 {
 	SourceOwners sourceOwners;
 	EU4TagToStateToProvinceMap tagStateProvinces;
@@ -269,10 +269,10 @@ std::pair<V3::ClayManager::EU4TagToStateToProvinceMap, V3::ClayManager::SourceOw
 		if (!sourceOwners.contains(ownerTag))
 			sourceOwners.emplace(ownerTag, chunk->sourceOwner);
 		if (!tagStateProvinces.contains(ownerTag))
-			tagStateProvinces.emplace(ownerTag, std::map<std::string, std::map<std::string, std::shared_ptr<Province>>>{});
+			tagStateProvinces.emplace(ownerTag, StateToProvinceMap{});
 		for (const auto& stateName: chunk->states | std::views::keys)
 			if (!tagStateProvinces.at(ownerTag).contains(stateName))
-				tagStateProvinces.at(ownerTag).emplace(stateName, std::map<std::string, std::shared_ptr<Province>>{});
+				tagStateProvinces.at(ownerTag).emplace(stateName, ProvinceMap{});
 
 		// and shove the provinces into baskets
 		for (const auto& [provinceName, province]: chunk->provinces)
@@ -301,25 +301,22 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::buildSubStates(const
 			if (provinces.empty())
 				continue; // Unsure how this could happen, but sure, skip this substate.
 
-			const auto subState = std::make_shared<SubState>();
-			subState->stateName = stateName;
-			if (!eu4tag.starts_with("unowned"))
-			{
-				// This will keep unlinked substates without an owner.
-				subState->sourceOwnerTag = eu4tag;
-				subState->sourceOwner = sourceOwners.at(eu4tag);
-			}
-			subState->provinces = provinces;
 			if (!states.contains(stateName))
 			{
 				// wtf, should never happen.
 				Log(LogLevel::Error) << "Substate owner " << eu4tag << " wants a substate in " << stateName << " which does't exist?! Bailing on this clay!";
 				continue;
 			}
-			subState->state = states.at(stateName);
-
-			// Should be ok now.
-			subStates.push_back(subState);
+			if (eu4tag.starts_with("unowned"))
+			{
+				// This will keep unlinked substates without an owner.
+				subStates.push_back(std::make_shared<SubState>(states.at(stateName), nullptr, provinces));
+			}
+			else
+			{
+				// Should be ok now.
+				subStates.push_back(std::make_shared<SubState>(states.at(stateName), sourceOwners.at(eu4tag), provinces));
+			}
 		}
 
 	return subStates;
@@ -333,24 +330,24 @@ void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::s
 	for (const auto& substate: substates)
 	{
 		// unowned substates don't need assigning.
-		if (!substate->sourceOwner)
+		if (!substate->getSourceOwner())
 		{
-			substate->state->addSubState(substate);
+			substate->getHomeState()->addSubState(substate);
 			filteredSubstates.push_back(substate);
 			continue;
 		}
 
 		// all the rest must have an owner and that owner must be able to map properly.
-		auto eu4tag = substate->sourceOwnerTag;
+		auto eu4tag = substate->getSourceOwnerTag();
+
 		auto v3tag = countryMapper.getV3Tag(eu4tag);
 		if (v3tag && countries.contains(*v3tag))
 		{
 			const auto& owner = countries.at(*v3tag);
-			substate->ownerTag = *v3tag;
-			substate->owner = owner;
+			substate->setOwner(owner);
 			owner->addSubState(substate);
 			filteredSubstates.push_back(substate);
-			substate->state->addSubState(substate);
+			substate->getHomeState()->addSubState(substate);
 		}
 		else
 		{

@@ -99,7 +99,7 @@ void V3::State::distributeLandshares()
 
 	for (const auto& substate: substates)
 	{
-		const auto substateCount = countProvinceTypes(substate->provinces);
+		const auto substateCount = countProvinceTypes(substate->getProvinces());
 		double weightedSubstateProvinces = calculateWeightedProvinceTotals(*substateCount);
 
 		double substateLandshare = weightedSubstateProvinces / weightedStatewideProvinces;
@@ -107,7 +107,7 @@ void V3::State::distributeLandshares()
 		{
 			substateLandshare = 0.05;
 		}
-		substate->landshare = substateLandshare;
+		substate->setLandshare(substateLandshare);
 	}
 }
 
@@ -117,7 +117,7 @@ void V3::State::distributeResources()
 	{
 		for (const auto& [resource, amount]: cappedResources)
 		{
-			substate->resources[resource] = floor(substate->landshare * amount);
+			substate->setResource(resource, floor(substate->getLandshare() * amount));
 		}
 	}
 }
@@ -128,7 +128,7 @@ int V3::State::calculateWeightedProvinceTotals(const ProvinceTypeCounter& theCou
 	return theCount.every + (5 - 1) * theCount.prime - theCount.impassable;
 }
 
-const std::unique_ptr<V3::ProvinceTypeCounter> V3::State::countProvinceTypes(std::map<std::string, std::shared_ptr<Province>> provinces)
+const std::unique_ptr<V3::ProvinceTypeCounter> V3::State::countProvinceTypes(ProvinceMap provinces)
 {
 	auto typeCounter = std::make_unique<V3::ProvinceTypeCounter>();
 
