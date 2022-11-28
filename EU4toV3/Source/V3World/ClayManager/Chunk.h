@@ -1,5 +1,6 @@
 #ifndef V3_CHUNK_H
 #define V3_CHUNK_H
+#include "Demographic.h"
 #include "PoliticalManager/CountryDefinitionLoader/Country.h"
 #include "StateLoader/Province.h"
 #include "StateLoader/State.h"
@@ -16,13 +17,39 @@
 
 namespace V3
 {
-struct Chunk
+class Chunk
 {
+  public:
+	Chunk() = default;
+
+	void addSourceProvince(const std::pair<int, std::shared_ptr<EU4::Province>>& province) { sourceProvinces.emplace(province); }
+	void addProvince(const std::pair<std::string, std::shared_ptr<Province>>& province) { provinces.emplace(province); }
+	void addState(const std::pair<std::string, std::shared_ptr<State>>& state) { states.emplace(state); }
+	void addSubState(const std::shared_ptr<SubState>& subState) { substates.push_back(subState); }
+	void setSourceOwner(const std::shared_ptr<EU4::Country>& theOwner) { sourceOwner = theOwner; }
+	void setOwner(const std::shared_ptr<Country>& theOwner) { owner = theOwner; }
+
+	[[nodiscard]] const auto& getSourceProvinces() const { return sourceProvinces; }
+	[[nodiscard]] const auto& getProvinces() const { return provinces; }
+	[[nodiscard]] const auto& getSourceOwner() const { return sourceOwner; }
+	[[nodiscard]] const auto& getOwner() const { return owner; }
+	[[nodiscard]] const auto& getStates() const { return states; }
+	[[nodiscard]] const auto& getSubStates() const { return substates; }
+
+	void importDemographics();
+
+  private:
+	void createDemographics(const std::vector<EU4::PopRatio>& popRatios, double provinceWeightRatio);
+	void copyDemographicsToSubStates() const;
+
 	std::map<int, std::shared_ptr<EU4::Province>> sourceProvinces; // EU4 provinces
 	std::map<std::string, std::shared_ptr<Province>> provinces;		// V3 provinces
 	std::shared_ptr<EU4::Country> sourceOwner;
 	std::shared_ptr<Country> owner;
 	std::map<std::string, std::shared_ptr<State>> states;
+	std::vector<std::shared_ptr<SubState>> substates; // substates this chunk breaks down into
+
+	std::vector<Demographic> demographics;
 };
 } // namespace V3
 

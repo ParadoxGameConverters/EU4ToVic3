@@ -225,38 +225,38 @@ TEST(V3World_ClayManagerTests, clayManagerCanGenerateSaneChunks)
 	const auto& chunk3 = chunks[2]; // wasteland chunk, 4->x5
 	const auto& chunk4 = chunks[3]; // land chunk, 9->x8
 
-	EXPECT_TRUE(chunk1->sourceProvinces.contains(1));
-	EXPECT_EQ(1, chunk1->sourceProvinces.size());
-	EXPECT_TRUE(chunk1->provinces.contains("x000001"));
-	EXPECT_TRUE(chunk1->provinces.contains("x000002"));
-	EXPECT_EQ(2, chunk1->provinces.size());
-	EXPECT_TRUE(chunk1->states.contains("STATE_TEST_OCEAN1"));
-	EXPECT_EQ(1, chunk1->states.size());
+	EXPECT_TRUE(chunk1->getSourceProvinces().contains(1));
+	EXPECT_EQ(1, chunk1->getSourceProvinces().size());
+	EXPECT_TRUE(chunk1->getProvinces().contains("x000001"));
+	EXPECT_TRUE(chunk1->getProvinces().contains("x000002"));
+	EXPECT_EQ(2, chunk1->getProvinces().size());
+	EXPECT_TRUE(chunk1->getStates().contains("STATE_TEST_OCEAN1"));
+	EXPECT_EQ(1, chunk1->getStates().size());
 
-	EXPECT_TRUE(chunk2->sourceProvinces.contains(2));
-	EXPECT_TRUE(chunk2->sourceProvinces.contains(3));
-	EXPECT_EQ(2, chunk2->sourceProvinces.size());
-	EXPECT_TRUE(chunk2->provinces.contains("x000003"));
-	EXPECT_TRUE(chunk2->provinces.contains("x000004"));
-	EXPECT_EQ(2, chunk2->provinces.size());
-	EXPECT_TRUE(chunk2->states.contains("STATE_TEST_LAND1"));
-	EXPECT_TRUE(chunk2->states.contains("STATE_TEST_LAND2"));
-	EXPECT_EQ(2, chunk2->states.size());
+	EXPECT_TRUE(chunk2->getSourceProvinces().contains(2));
+	EXPECT_TRUE(chunk2->getSourceProvinces().contains(3));
+	EXPECT_EQ(2, chunk2->getSourceProvinces().size());
+	EXPECT_TRUE(chunk2->getProvinces().contains("x000003"));
+	EXPECT_TRUE(chunk2->getProvinces().contains("x000004"));
+	EXPECT_EQ(2, chunk2->getProvinces().size());
+	EXPECT_TRUE(chunk2->getStates().contains("STATE_TEST_LAND1"));
+	EXPECT_TRUE(chunk2->getStates().contains("STATE_TEST_LAND2"));
+	EXPECT_EQ(2, chunk2->getStates().size());
 
-	EXPECT_TRUE(chunk3->sourceProvinces.contains(4));
-	EXPECT_EQ(1, chunk3->sourceProvinces.size());
-	EXPECT_TRUE(chunk3->provinces.contains("x000005"));
-	EXPECT_EQ(1, chunk3->provinces.size());
-	EXPECT_TRUE(chunk3->states.contains("STATE_TEST_LAND3"));
-	EXPECT_EQ(1, chunk3->states.size());
+	EXPECT_TRUE(chunk3->getSourceProvinces().contains(4));
+	EXPECT_EQ(1, chunk3->getSourceProvinces().size());
+	EXPECT_TRUE(chunk3->getProvinces().contains("x000005"));
+	EXPECT_EQ(1, chunk3->getProvinces().size());
+	EXPECT_TRUE(chunk3->getStates().contains("STATE_TEST_LAND3"));
+	EXPECT_EQ(1, chunk3->getStates().size());
 
-	EXPECT_TRUE(chunk4->sourceProvinces.contains(8));
-	EXPECT_TRUE(chunk4->sourceProvinces.contains(9));
-	EXPECT_EQ(2, chunk4->sourceProvinces.size());
-	EXPECT_TRUE(chunk4->provinces.contains("x000008"));
-	EXPECT_EQ(1, chunk4->provinces.size());
-	EXPECT_TRUE(chunk4->states.contains("STATE_TEST_LAND4"));
-	EXPECT_EQ(1, chunk4->states.size());
+	EXPECT_TRUE(chunk4->getSourceProvinces().contains(8));
+	EXPECT_TRUE(chunk4->getSourceProvinces().contains(9));
+	EXPECT_EQ(2, chunk4->getSourceProvinces().size());
+	EXPECT_TRUE(chunk4->getProvinces().contains("x000008"));
+	EXPECT_EQ(1, chunk4->getProvinces().size());
+	EXPECT_TRUE(chunk4->getStates().contains("STATE_TEST_LAND4"));
+	EXPECT_EQ(1, chunk4->getStates().size());
 }
 
 TEST(V3World_ClayManagerTests, clayManagerCanUndisputeChunkOwnership)
@@ -318,21 +318,21 @@ TEST(V3World_ClayManagerTests, clayManagerCanUndisputeChunkOwnership)
 	const auto& chunk2 = chunks[1]; // land chunk, 4->x5
 	const auto& chunk3 = chunks[2]; // land chunk, 9->x8
 
-	ASSERT_TRUE(chunk1->sourceOwner);
-	EXPECT_EQ("TAG", chunk1->sourceOwner->getTag());
-	EXPECT_TRUE(chunk1->sourceProvinces.contains(2));
-	EXPECT_TRUE(chunk1->sourceProvinces.contains(3));
-	EXPECT_TRUE(chunk1->provinces.contains("x000003"));
-	EXPECT_TRUE(chunk1->provinces.contains("x000004"));
+	ASSERT_TRUE(chunk1->getSourceOwner());
+	EXPECT_EQ("TAG", chunk1->getSourceOwner()->getTag());
+	EXPECT_TRUE(chunk1->getSourceProvinces().contains(2));
+	EXPECT_TRUE(chunk1->getSourceProvinces().contains(3));
+	EXPECT_TRUE(chunk1->getProvinces().contains("x000003"));
+	EXPECT_TRUE(chunk1->getProvinces().contains("x000004"));
 
-	EXPECT_FALSE(chunk2->sourceOwner);
-	EXPECT_TRUE(chunk2->sourceProvinces.contains(4));
-	EXPECT_TRUE(chunk2->provinces.contains("x000005"));
+	EXPECT_FALSE(chunk2->getSourceOwner());
+	EXPECT_TRUE(chunk2->getSourceProvinces().contains(4));
+	EXPECT_TRUE(chunk2->getProvinces().contains("x000005"));
 
-	ASSERT_TRUE(chunk3->sourceOwner);
-	EXPECT_EQ("GAT", chunk3->sourceOwner->getTag());
-	EXPECT_TRUE(chunk3->sourceProvinces.contains(9));
-	EXPECT_TRUE(chunk3->provinces.contains("x000008"));
+	ASSERT_TRUE(chunk3->getSourceOwner());
+	EXPECT_EQ("GAT", chunk3->getSourceOwner()->getTag());
+	EXPECT_TRUE(chunk3->getSourceProvinces().contains(9));
+	EXPECT_TRUE(chunk3->getProvinces().contains("x000008"));
 }
 
 TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInvalidCountries)
@@ -402,20 +402,20 @@ TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInvalidCountri
 	const auto& chunk2 = chunks[1]; // land chunk, 4->x5 // noone
 	const auto& chunk3 = chunks[2]; // land chunk, 9->x8 // GAT
 
-	EXPECT_FALSE(chunk1->sourceOwner);
-	EXPECT_TRUE(chunk1->sourceProvinces.contains(2));
-	EXPECT_TRUE(chunk1->sourceProvinces.contains(3));
-	EXPECT_TRUE(chunk1->provinces.contains("x000003"));
-	EXPECT_TRUE(chunk1->provinces.contains("x000004"));
+	EXPECT_FALSE(chunk1->getSourceOwner());
+	EXPECT_TRUE(chunk1->getSourceProvinces().contains(2));
+	EXPECT_TRUE(chunk1->getSourceProvinces().contains(3));
+	EXPECT_TRUE(chunk1->getProvinces().contains("x000003"));
+	EXPECT_TRUE(chunk1->getProvinces().contains("x000004"));
 
-	EXPECT_FALSE(chunk2->sourceOwner);
-	EXPECT_TRUE(chunk2->sourceProvinces.contains(4));
-	EXPECT_TRUE(chunk2->provinces.contains("x000005"));
+	EXPECT_FALSE(chunk2->getSourceOwner());
+	EXPECT_TRUE(chunk2->getSourceProvinces().contains(4));
+	EXPECT_TRUE(chunk2->getProvinces().contains("x000005"));
 
-	ASSERT_TRUE(chunk3->sourceOwner);
-	EXPECT_EQ("GAT", chunk3->sourceOwner->getTag());
-	EXPECT_TRUE(chunk3->sourceProvinces.contains(9));
-	EXPECT_TRUE(chunk3->provinces.contains("x000008"));
+	ASSERT_TRUE(chunk3->getSourceOwner());
+	EXPECT_EQ("GAT", chunk3->getSourceOwner()->getTag());
+	EXPECT_TRUE(chunk3->getSourceProvinces().contains(9));
+	EXPECT_TRUE(chunk3->getProvinces().contains("x000008"));
 }
 
 TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInsaneCountries)
@@ -485,20 +485,20 @@ TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInsaneCountrie
 	const auto& chunk2 = chunks[1]; // land chunk, 4->x5 // noone
 	const auto& chunk3 = chunks[2]; // land chunk, 9->x8 // GAT
 
-	EXPECT_FALSE(chunk1->sourceOwner);
-	EXPECT_TRUE(chunk1->sourceProvinces.contains(2));
-	EXPECT_TRUE(chunk1->sourceProvinces.contains(3));
-	EXPECT_TRUE(chunk1->provinces.contains("x000003"));
-	EXPECT_TRUE(chunk1->provinces.contains("x000004"));
+	EXPECT_FALSE(chunk1->getSourceOwner());
+	EXPECT_TRUE(chunk1->getSourceProvinces().contains(2));
+	EXPECT_TRUE(chunk1->getSourceProvinces().contains(3));
+	EXPECT_TRUE(chunk1->getProvinces().contains("x000003"));
+	EXPECT_TRUE(chunk1->getProvinces().contains("x000004"));
 
-	EXPECT_FALSE(chunk2->sourceOwner);
-	EXPECT_TRUE(chunk2->sourceProvinces.contains(4));
-	EXPECT_TRUE(chunk2->provinces.contains("x000005"));
+	EXPECT_FALSE(chunk2->getSourceOwner());
+	EXPECT_TRUE(chunk2->getSourceProvinces().contains(4));
+	EXPECT_TRUE(chunk2->getProvinces().contains("x000005"));
 
-	ASSERT_TRUE(chunk3->sourceOwner);
-	EXPECT_EQ("GAT", chunk3->sourceOwner->getTag());
-	EXPECT_TRUE(chunk3->sourceProvinces.contains(9));
-	EXPECT_TRUE(chunk3->provinces.contains("x000008"));
+	ASSERT_TRUE(chunk3->getSourceOwner());
+	EXPECT_EQ("GAT", chunk3->getSourceOwner()->getTag());
+	EXPECT_TRUE(chunk3->getSourceProvinces().contains(9));
+	EXPECT_TRUE(chunk3->getProvinces().contains("x000008"));
 }
 
 TEST(V3World_ClayManagerTests, clayManagerCanProduceSubstatesFromChunks)
@@ -562,28 +562,50 @@ TEST(V3World_ClayManagerTests, clayManagerCanProduceSubstatesFromChunks)
 	const auto& substate4 = substates[3];
 
 	ASSERT_TRUE(substate1->getSourceOwner());
-	EXPECT_EQ("GAT", substate1->getSourceOwner()->getTag());
+	EXPECT_EQ("TAG", substate1->getSourceOwner()->getTag());
 	EXPECT_EQ(1, substate1->getProvinces().size());
-	EXPECT_TRUE(substate1->getProvinces().contains("x000008"));
-	EXPECT_EQ("STATE_TEST_LAND4", substate1->getHomeStateName());
+	EXPECT_TRUE(substate1->getProvinces().contains("x000003"));
+	EXPECT_EQ("STATE_TEST_LAND1", substate1->getHomeStateName());
 
 	ASSERT_TRUE(substate2->getSourceOwner());
 	EXPECT_EQ("TAG", substate2->getSourceOwner()->getTag());
 	EXPECT_EQ(1, substate2->getProvinces().size());
-	EXPECT_TRUE(substate2->getProvinces().contains("x000003"));
-	EXPECT_EQ("STATE_TEST_LAND1", substate2->getHomeStateName());
+	EXPECT_TRUE(substate2->getProvinces().contains("x000004"));
+	EXPECT_EQ("STATE_TEST_LAND2", substate2->getHomeStateName());
 
-	ASSERT_TRUE(substate3->getSourceOwner());
-	EXPECT_EQ("TAG", substate3->getSourceOwner()->getTag());
+	EXPECT_FALSE(substate3->getSourceOwner());
+	EXPECT_TRUE(substate3->getSourceOwnerTag().empty());
 	EXPECT_EQ(1, substate3->getProvinces().size());
-	EXPECT_TRUE(substate3->getProvinces().contains("x000004"));
-	EXPECT_EQ("STATE_TEST_LAND2", substate3->getHomeStateName());
+	EXPECT_TRUE(substate3->getProvinces().contains("x000005"));
+	EXPECT_EQ("STATE_TEST_LAND3", substate3->getHomeStateName());
 
-	EXPECT_FALSE(substate4->getSourceOwner());
-	EXPECT_TRUE(substate4->getSourceOwnerTag().empty());
+	ASSERT_TRUE(substate4->getSourceOwner());
+	EXPECT_EQ("GAT", substate4->getSourceOwner()->getTag());
 	EXPECT_EQ(1, substate4->getProvinces().size());
-	EXPECT_TRUE(substate4->getProvinces().contains("x000005"));
-	EXPECT_EQ("STATE_TEST_LAND3", substate4->getHomeStateName());
+	EXPECT_TRUE(substate4->getProvinces().contains("x000008"));
+	EXPECT_EQ("STATE_TEST_LAND4", substate4->getHomeStateName());
+
+	// linkback checks.
+
+	const auto& chunk1 = substate1->getChunk(); // substate 1 & 2 are formed from this same chunk
+	const auto& chunk2 = substate2->getChunk(); // substate 1 & 2 are formed from this same chunk
+	const auto& chunk3 = substate3->getChunk();
+	const auto& chunk4 = substate4->getChunk();
+
+	ASSERT_TRUE(chunk1);
+	ASSERT_TRUE(chunk2);
+	ASSERT_TRUE(chunk3);
+	ASSERT_TRUE(chunk4);
+	ASSERT_EQ(2, chunk1->getSubStates().size()); // these two are the same chunk
+	ASSERT_EQ(2, chunk2->getSubStates().size()); // these two are the same chunk
+	ASSERT_EQ(1, chunk3->getSubStates().size());
+	ASSERT_EQ(1, chunk4->getSubStates().size());
+	EXPECT_EQ("STATE_TEST_LAND1", chunk1->getSubStates()[0]->getHomeStateName());
+	EXPECT_EQ("STATE_TEST_LAND2", chunk1->getSubStates()[1]->getHomeStateName());
+	EXPECT_EQ("STATE_TEST_LAND1", chunk2->getSubStates()[0]->getHomeStateName());
+	EXPECT_EQ("STATE_TEST_LAND2", chunk2->getSubStates()[1]->getHomeStateName());
+	EXPECT_EQ("STATE_TEST_LAND3", chunk3->getSubStates()[0]->getHomeStateName());
+	EXPECT_EQ("STATE_TEST_LAND4", chunk4->getSubStates()[0]->getHomeStateName());
 }
 
 TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
@@ -648,8 +670,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 
 	const auto& substate1 = substates[0];
 	const auto& substate2 = substates[1];
-	const auto& substate3 = substates[2];
-	const auto& substate4 = substates[3]; // the unowned one
+	const auto& substate3 = substates[2]; // the unowned one
+	const auto& substate4 = substates[3];
 
 	ASSERT_TRUE(substate1->getSourceOwner());
 	EXPECT_EQ("TA2", substate1->getSourceOwner()->getTag());
@@ -675,27 +697,27 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	// linkback through state's substate ownership vector
 	EXPECT_EQ("GA2", substate2->getHomeState()->getSubStates()[0]->getOwnerTag());
 
-	ASSERT_TRUE(substate3->getSourceOwner());
-	EXPECT_EQ("TA9", substate3->getSourceOwner()->getTag());
+	EXPECT_FALSE(substate3->getSourceOwner());
 	EXPECT_EQ(1, substate3->getProvinces().size());
-	EXPECT_TRUE(substate3->getProvinces().contains("x000008"));
-	EXPECT_EQ("STATE_TEST_LAND4", substate3->getHomeStateName());
-	EXPECT_EQ("GA9", substate3->getOwnerTag());
-	EXPECT_EQ("GA9", substate3->getOwner()->getTag());
-	// linkback to this substate through getOwner() substates vector
-	EXPECT_EQ("STATE_TEST_LAND4", substate3->getOwner()->getSubStates()[0]->getHomeStateName());
-	// linkback through state's substate ownership vector
-	EXPECT_EQ("GA9", substate3->getHomeState()->getSubStates()[0]->getOwnerTag());
-
-	EXPECT_FALSE(substate4->getSourceOwner());
-	EXPECT_EQ(1, substate4->getProvinces().size());
-	EXPECT_TRUE(substate4->getProvinces().contains("x000005"));
-	EXPECT_TRUE(substate4->getOwnerTag().empty());
-	EXPECT_EQ("STATE_TEST_LAND3", substate4->getHomeStateName());
-	EXPECT_FALSE(substate4->getOwner());
+	EXPECT_TRUE(substate3->getProvinces().contains("x000005"));
+	EXPECT_TRUE(substate3->getOwnerTag().empty());
+	EXPECT_EQ("STATE_TEST_LAND3", substate3->getHomeStateName());
+	EXPECT_FALSE(substate3->getOwner());
 	// linkback to this substate through owner substates vector is impossible.
 	// linkback through state's substate ownership vector
-	EXPECT_TRUE(substate4->getHomeState()->getSubStates()[0]->getSourceOwnerTag().empty());
+	EXPECT_TRUE(substate3->getHomeState()->getSubStates()[0]->getSourceOwnerTag().empty());
+
+	ASSERT_TRUE(substate4->getSourceOwner());
+	EXPECT_EQ("TA9", substate4->getSourceOwner()->getTag());
+	EXPECT_EQ(1, substate4->getProvinces().size());
+	EXPECT_TRUE(substate4->getProvinces().contains("x000008"));
+	EXPECT_EQ("STATE_TEST_LAND4", substate4->getHomeStateName());
+	EXPECT_EQ("GA9", substate4->getOwnerTag());
+	EXPECT_EQ("GA9", substate4->getOwner()->getTag());
+	// linkback to this substate through getOwner() substates vector
+	EXPECT_EQ("STATE_TEST_LAND4", substate4->getOwner()->getSubStates()[0]->getHomeStateName());
+	// linkback through state's substate ownership vector
+	EXPECT_EQ("GA9", substate4->getHomeState()->getSubStates()[0]->getOwnerTag());
 }
 
 TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaPops)

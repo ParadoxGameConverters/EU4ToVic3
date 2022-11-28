@@ -31,6 +31,7 @@ class ClayManager
 	void assignSubStateOwnership(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper);
 	void initializeVanillaPops(const std::string& v3Path);
 	void assignVanillaPopsToStates();
+	void importDemographics() const;
 
 	[[nodiscard]] const auto& getStates() const { return states; }
 	[[nodiscard]] const auto& getSuperRegions() const { return superRegions; }
@@ -41,9 +42,11 @@ class ClayManager
 	[[nodiscard]] bool stateIsInRegion(const std::string& state, const std::string& region) const;
 
   private:
+	void crossLinkSubStatesToChunks() const;
+
 	[[nodiscard]] static std::map<std::string, double> calcChunkOwnerWeights(const std::shared_ptr<Chunk>& chunk);
-	[[nodiscard]] std::pair<EU4TagToStateToProvinceMap, SourceOwners> sortChunkProvincesIntoTagStates() const;
-	[[nodiscard]] std::vector<std::shared_ptr<SubState>> buildSubStates(const EU4TagToStateToProvinceMap& tagStateProvinces,
+	[[nodiscard]] std::pair<ChunkToEU4TagToStateToProvinceMap, SourceOwners> sortChunkProvincesIntoTagStates() const;
+	[[nodiscard]] std::vector<std::shared_ptr<SubState>> buildSubStates(const ChunkToEU4TagToStateToProvinceMap& chunkTagProvinces,
 		 const SourceOwners& sourceOwners) const;
 	[[nodiscard]] static bool isChunkSea(const std::shared_ptr<Chunk>& chunk);
 
@@ -54,6 +57,8 @@ class ClayManager
 
 	std::vector<std::shared_ptr<Chunk>> chunks;		  // political entities
 	std::vector<std::shared_ptr<SubState>> substates; // political entities
+
+	std::map<std::string, int> provinceChunks; // province to chunk reference guide
 };
 } // namespace V3
 #endif // CLAY_MANAGER_H

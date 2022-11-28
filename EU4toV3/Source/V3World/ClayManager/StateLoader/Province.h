@@ -5,7 +5,7 @@
 
 namespace V3
 {
-struct Chunk;
+class Chunk;
 class Province
 {
   public:
