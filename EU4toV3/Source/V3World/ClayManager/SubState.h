@@ -33,6 +33,7 @@ class SubState
 	[[nodiscard]] const auto& getChunk() const { return chunk; }
 	[[nodiscard]] const auto& getLandshare() const { return landshare; }
 	[[nodiscard]] const auto& getResource(const std::string& theResource) { return resources[theResource]; }
+	[[nodiscard]] const auto& getDemographics() { return demographics; }
 
 	[[nodiscard]] const std::string& getOwnerTag() const;
 	[[nodiscard]] const std::string& getSourceOwnerTag() const;

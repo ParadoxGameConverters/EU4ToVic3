@@ -37,6 +37,7 @@ class Chunk
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
 
 	void importDemographics();
+	[[nodiscard]] const auto& getDemographics() const { return demographics; }
 
   private:
 	void createDemographics(const std::vector<EU4::PopRatio>& popRatios, double provinceWeightRatio);
