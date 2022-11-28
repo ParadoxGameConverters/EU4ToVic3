@@ -1,26 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|x64">
-      <Configuration>Debug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release-NoCopies|Win32">
-      <Configuration>Release-NoCopies</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release-NoCopies|x64">
-      <Configuration>Release-NoCopies</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
@@ -33,190 +13,22 @@
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v141_xp</PlatformToolset>
-    <CharacterSet>NotSet</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v141_xp</PlatformToolset>
-    <CharacterSet>NotSet</CharacterSet>
-  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(SolutionDir)\DebugIntermediate\</IntDir>
-    <IncludePath>$(IncludePath)</IncludePath>
-    <OutDir>$(ProjectDir)\..\$(Configuration)\EU4ToVic3\</OutDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)$(Configuration)\EU4ToVic3\</OutDir>
-    <TargetName>EU4ToVic3Converter</TargetName>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)\ReleaseIntermediate\</IntDir>
-    <BOOST_INCLUDE Condition=" '$(BOOST_INCLUDE)' == '' ">
-		H:\Projects\Development\Boost\boost_1_57_0
-	</BOOST_INCLUDE>
-    <IncludePath>$(IncludePath)</IncludePath>
-    <TargetName>EU4ToVic3Converter</TargetName>
-    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <ReferencePath>$(ReferencePath)</ReferencePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <LibraryWPath>$(LibraryWPath)</LibraryWPath>
-    <SourcePath>$(SourcePath)</SourcePath>
-    <ExcludePath>$(ExcludePath)</ExcludePath>
-    <OutDir>$(ProjectDir)\..\$(Configuration)\EU4ToVic3\</OutDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <BOOST_INCLUDE Condition=" '$(BOOST_INCLUDE)' == '' ">
-		H:\Projects\Development\Boost\boost_1_57_0
-	</BOOST_INCLUDE>
     <TargetName>EU4ToVic3Converter</TargetName>
     <OutDir>$(SolutionDir)$(Configuration)\EU4ToVic3\</OutDir>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)\ReleaseIntermediate\</IntDir>
-    <BOOST_INCLUDE Condition=" '$(BOOST_INCLUDE)' == '' ">
-		H:\Projects\Development\Boost\boost_1_57_0
-	</BOOST_INCLUDE>
-    <IncludePath>$(UniversalCRT_IncludePath);$(BOOST_INCLUDE);$(VCInstallDir)include;$(WindowsSdkDir)include;../common_items</IncludePath>
-    <TargetName>EU4toV3Converter</TargetName>
-    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
-    <OutDir>$(SolutionDir)$(Configuration)\EU4ToVic3</OutDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|x64'">
-    <BOOST_INCLUDE Condition=" '$(BOOST_INCLUDE)' == '' ">
-		H:\Projects\Development\Boost\boost_1_57_0
-	</BOOST_INCLUDE>
-    <IncludePath>$(UniversalCRT_IncludePath);$(BOOST_INCLUDE);$(VCInstallDir)include;$(WindowsSdkDir)include;../common_items</IncludePath>
-    <TargetName>EU4toV3Converter</TargetName>
-    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\common_items;..\ZipLib;$(WindowsSDK_IncludePath)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Libraries\boost_1_55_0_lib\lib32-msvc-12.0;$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <PostBuildEvent>
-      <Command>Copy_Files_Debug.bat</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Copying Data Files</Message>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_SILENCE_CXX20_U8PATH_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\commonItems;..\ZipLib;Source\Mappers;Source;Source\EU4World;Source\Vic3World;Source\Helpers</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>Resources\rakaly.dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <PostBuildEvent>
-      <Command>Copy_Files_Debug.bat</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Copying Data Files</Message>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\commonItems;..\ZipLib</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <PostBuildEvent>
-      <Command>Copy_Files.bat</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Copying Data Files</Message>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX20_U8PATH_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -236,64 +48,6 @@ call save_commit_id.bat</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copying Data Files</Message>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(BOOST_INCLUDE);$(WindowsSDK_IncludePath)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>
-      </Message>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(BOOST_INCLUDE);$(WindowsSDK_IncludePath)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>
-      </Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -370,11 +124,15 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Mappers\CountryMapper\CountryMapper.cpp" />
     <ClCompile Include="Source\Mappers\CountryMapper\CountryMapping.cpp" />
+    <ClCompile Include="Source\Mappers\CultureMapper\CultureMapper.cpp" />
+    <ClCompile Include="Source\Mappers\CultureMapper\CultureMappingRule.cpp" />
     <ClCompile Include="Source\Mappers\NationMergeMapper\MergeBlock.cpp" />
     <ClCompile Include="Source\Mappers\NationMergeMapper\NationMergeMapper.cpp" />
     <ClCompile Include="Source\Mappers\ProvinceMapper\ProvinceMapper.cpp" />
     <ClCompile Include="Source\Mappers\ProvinceMapper\ProvinceMapping.cpp" />
     <ClCompile Include="Source\Mappers\ProvinceMapper\ProvinceMappingsVersion.cpp" />
+    <ClCompile Include="Source\Mappers\ReligionMapper\ReligionMapper.cpp" />
+    <ClCompile Include="Source\Mappers\ReligionMapper\ReligionMapping.cpp" />
     <ClCompile Include="Source\Mappers\SuperGroupMapper\AssimilationParser.cpp" />
     <ClCompile Include="Source\Mappers\SuperGroupMapper\SuperGroupMapper.cpp" />
     <ClCompile Include="Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp" />
@@ -386,6 +144,13 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\Output\outStates\outSubState.cpp" />
     <ClCompile Include="Source\Output\outWorld.cpp" />
     <ClCompile Include="Source\V3World\ClayManager\ClayManager.cpp" />
+    <ClCompile Include="Source\V3World\ClayManager\PopLoader\PopEntry.cpp" />
+    <ClCompile Include="Source\V3World\ClayManager\PopLoader\PopLoader.cpp" />
+    <ClCompile Include="Source\V3World\ClayManager\PopLoader\Pops\StatePops.cpp" />
+    <ClCompile Include="Source\V3World\ClayManager\PopLoader\Pops\SubStatePops.cpp" />
+    <ClCompile Include="Source\V3World\ClayManager\PopLoader\StateEntries.cpp" />
+    <ClCompile Include="Source\V3World\ClayManager\PopLoader\SubStatePopEntries.cpp" />
+    <ClCompile Include="Source\V3World\ClayManager\PopLoader\SubStateEntries.cpp" />
     <ClCompile Include="Source\V3World\ClayManager\StateLoader\State.cpp" />
     <ClCompile Include="Source\V3World\ClayManager\StateLoader\StateLoader.cpp" />
     <ClCompile Include="Source\V3World\ClayManager\SubState.cpp" />
@@ -455,6 +220,7 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\EU4World\Loaders\DefinitionScraper\DefinitionScraper.h" />
     <ClInclude Include="Source\EU4World\Loaders\LocalizationLoader\EU4LocalizationLoader.h" />
     <ClInclude Include="Source\EU4World\Loaders\ModLoader\ModNames.h" />
+    <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\Religion.h" />
     <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\ReligionLoader.h" />
     <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\ReligionParser.h" />
     <ClInclude Include="Source\EU4World\Loaders\UnitTypeLoader\UnitType.h" />
@@ -478,11 +244,15 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\Helpers\rakaly_wrapper.h" />
     <ClInclude Include="Source\Mappers\CountryMapper\CountryMapper.h" />
     <ClInclude Include="Source\Mappers\CountryMapper\CountryMapping.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\CultureMapper.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\CultureMappingRule.h" />
     <ClInclude Include="Source\Mappers\NationMergeMapper\MergeBlock.h" />
     <ClInclude Include="Source\Mappers\NationMergeMapper\NationMergeMapper.h" />
     <ClInclude Include="Source\Mappers\ProvinceMapper\ProvinceMapper.h" />
     <ClInclude Include="Source\Mappers\ProvinceMapper\ProvinceMapping.h" />
     <ClInclude Include="Source\Mappers\ProvinceMapper\ProvinceMappingsVersion.h" />
+    <ClInclude Include="Source\Mappers\ReligionMapper\ReligionMapper.h" />
+    <ClInclude Include="Source\Mappers\ReligionMapper\ReligionMapping.h" />
     <ClInclude Include="Source\Mappers\SuperGroupMapper\AssimilationParser.h" />
     <ClInclude Include="Source\Mappers\SuperGroupMapper\SuperGroupMapper.h" />
     <ClInclude Include="Source\Mappers\SuperGroupMapper\SuperRegionParser.h" />
@@ -496,6 +266,14 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\V3World\ClayManager\Chunk.h" />
     <ClInclude Include="Source\V3World\ClayManager\ClayManager.h" />
     <ClInclude Include="Source\V3World\ClayManager\ClayMapTypedefs.h" />
+    <ClInclude Include="Source\V3World\ClayManager\PopLoader\PopEntry.h" />
+    <ClInclude Include="Source\V3World\ClayManager\PopLoader\PopLoader.h" />
+    <ClInclude Include="Source\V3World\ClayManager\PopLoader\Pops\Pop.h" />
+    <ClInclude Include="Source\V3World\ClayManager\PopLoader\Pops\StatePops.h" />
+    <ClInclude Include="Source\V3World\ClayManager\PopLoader\Pops\SubStatePops.h" />
+    <ClInclude Include="Source\V3World\ClayManager\PopLoader\StateEntries.h" />
+    <ClInclude Include="Source\V3World\ClayManager\PopLoader\SubStatePopEntries.h" />
+    <ClInclude Include="Source\V3World\ClayManager\PopLoader\SubStateEntries.h" />
     <ClInclude Include="Source\V3World\ClayManager\ProvinceTypeCounter.h" />
     <ClInclude Include="Source\V3World\ClayManager\StateLoader\Province.h" />
     <ClInclude Include="Source\V3World\ClayManager\StateLoader\State.h" />

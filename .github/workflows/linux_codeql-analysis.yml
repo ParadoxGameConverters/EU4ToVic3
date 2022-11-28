@@ -72,7 +72,7 @@ jobs:
       
     - name: Cleanup
       uses: colpal/actions-clean@v1
-      if: ${{ true }} # To ensure this step runs even when earlier steps fail      
+      if: always() # To ensure this step runs even when earlier steps fail      
 
   analyze:
     name: Analyze Foreign

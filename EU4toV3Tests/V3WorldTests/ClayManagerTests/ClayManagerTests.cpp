@@ -75,7 +75,7 @@ TEST(V3World_ClayManagerTests, clayManagerComplainsForMissingProvinceTerrain)
 	std::cout.rdbuf(log.rdbuf());
 	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
 
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Terrain for province x345678 cannot be found.)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Terrain for province x345678 cannot be found.)"));
 
 	std::cout.rdbuf(cout_buffer);
 }
@@ -114,6 +114,36 @@ TEST(V3World_ClayManagerTests, clayManagerCanLinkStatesToSuperRegions)
 	EXPECT_TRUE(state_test_1->getProvinces().at("x445566")->isImpassable());
 }
 
+TEST(V3World_ClayManagerTests, clayManagerCanDetermineRegionValidity)
+{
+	V3::ClayManager clayManager;
+	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
+	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.loadStatesIntoSuperRegions();
+
+	EXPECT_TRUE(clayManager.regionIsValid("STATE_TEST_1"));					// state
+	EXPECT_TRUE(clayManager.regionIsValid("region_a"));						// region
+	EXPECT_TRUE(clayManager.regionIsValid("test_1_strategic_regions"));	// superregion
+	EXPECT_FALSE(clayManager.regionIsValid("STATE_TEST_5"));					// does't exist
+	EXPECT_FALSE(clayManager.regionIsValid("region_d"));						// does't exist
+	EXPECT_FALSE(clayManager.regionIsValid("test_3_strategic_regions")); // does't exist
+}
+
+TEST(V3World_ClayManagerTests, clayManagerCanDetermineHierarchy)
+{
+	V3::ClayManager clayManager;
+	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
+	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.loadStatesIntoSuperRegions();
+
+	EXPECT_TRUE(clayManager.stateIsInRegion("STATE_TEST_1", "STATE_TEST_1"));
+	EXPECT_TRUE(clayManager.stateIsInRegion("STATE_TEST_1", "region_a"));
+	EXPECT_TRUE(clayManager.stateIsInRegion("STATE_TEST_1", "test_1_strategic_regions"));
+	EXPECT_FALSE(clayManager.stateIsInRegion("STATE_TEST_1", "STATE_TEST_2"));
+	EXPECT_FALSE(clayManager.stateIsInRegion("STATE_TEST_1", "region_b"));
+	EXPECT_FALSE(clayManager.stateIsInRegion("STATE_TEST_1", "test_2_strategic_regions"));
+}
+
 TEST(V3World_ClayManagerTests, excessSuperRegionStatesInRegionsAreObjectedAndRemoved)
 {
 	V3::ClayManager clayManager;
@@ -126,7 +156,7 @@ TEST(V3World_ClayManagerTests, excessSuperRegionStatesInRegionsAreObjectedAndRem
 
 	clayManager.loadStatesIntoSuperRegions();
 
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Attempting to assign state STATE_TEST_EXCESS which doesn't exist to region region_c!)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Attempting to assign state STATE_TEST_EXCESS which doesn't exist to region region_c!)"));
 
 	std::cout.rdbuf(cout_buffer);
 
@@ -180,19 +210,20 @@ TEST(V3World_ClayManagerTests, clayManagerCanGenerateSaneChunks)
 	/*
 	link = { eu4 = 1 vic3 = x000001 vic3 = x000002 } #sea->seas // produces chunk 1
 	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces chunk 2
-	link = { eu4 = 4 vic3 = x000005 } #wasteland->land // doesn't produce anything as wasteland isn't valid source
-	link = { eu4 = 5 vic3 = x000006 } #rnw->land // ditto, rnw isn't valid source
-	link = { eu4 = 6 eu4 = 7 vic3 = x000007 } # lake,land->lake // dropped because target lake is junk
-	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces chunk 3, lake source is dropped as not viable, lake target also
-	dropped. link = { eu4 = 10 } # land->nothing // produces nothing as there's no target. link = { vic3 = x000010 } # nothing->land // produces nothing as
-	there's no source.
+	link = { eu4 = 4 vic3 = x000005 } #wasteland->land // produces wasteland-only chunk 3
+	link = { eu4 = 5 vic3 = x000006 } #rnw->land // doesn't produce anything as rnw isn't valid source
+	link = { eu4 = 6 eu4 = 7 vic3 = x000007 } #lake,land->lake // dropped because target lake is junk
+	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } #wasteland,land->land,lake // produces chunk 4, lake target dropped
+	link = { eu4 = 10 } #land->nothing // produces nothing as there's no target.
+	link = { vic3 = x000010 } #nothing->land // produces nothing as	there's no source.
 	*/
 
-	EXPECT_EQ(3, chunks.size());
+	ASSERT_EQ(4, chunks.size());
 
 	const auto& chunk1 = chunks[0]; // sea chunk 1->x1,x2
 	const auto& chunk2 = chunks[1]; // land chunk, 2,3->x3,x4
-	const auto& chunk3 = chunks[2]; // land chunk, 9->x8
+	const auto& chunk3 = chunks[2]; // wasteland chunk, 4->x5
+	const auto& chunk4 = chunks[3]; // land chunk, 9->x8
 
 	EXPECT_TRUE(chunk1->sourceProvinces.contains(1));
 	EXPECT_EQ(1, chunk1->sourceProvinces.size());
@@ -212,12 +243,20 @@ TEST(V3World_ClayManagerTests, clayManagerCanGenerateSaneChunks)
 	EXPECT_TRUE(chunk2->states.contains("STATE_TEST_LAND2"));
 	EXPECT_EQ(2, chunk2->states.size());
 
-	EXPECT_TRUE(chunk3->sourceProvinces.contains(9));
+	EXPECT_TRUE(chunk3->sourceProvinces.contains(4));
 	EXPECT_EQ(1, chunk3->sourceProvinces.size());
-	EXPECT_TRUE(chunk3->provinces.contains("x000008"));
+	EXPECT_TRUE(chunk3->provinces.contains("x000005"));
 	EXPECT_EQ(1, chunk3->provinces.size());
-	EXPECT_TRUE(chunk3->states.contains("STATE_TEST_LAND4"));
+	EXPECT_TRUE(chunk3->states.contains("STATE_TEST_LAND3"));
 	EXPECT_EQ(1, chunk3->states.size());
+
+	EXPECT_TRUE(chunk4->sourceProvinces.contains(8));
+	EXPECT_TRUE(chunk4->sourceProvinces.contains(9));
+	EXPECT_EQ(2, chunk4->sourceProvinces.size());
+	EXPECT_TRUE(chunk4->provinces.contains("x000008"));
+	EXPECT_EQ(1, chunk4->provinces.size());
+	EXPECT_TRUE(chunk4->states.contains("STATE_TEST_LAND4"));
+	EXPECT_EQ(1, chunk4->states.size());
 }
 
 TEST(V3World_ClayManagerTests, clayManagerCanUndisputeChunkOwnership)
@@ -269,28 +308,34 @@ TEST(V3World_ClayManagerTests, clayManagerCanUndisputeChunkOwnership)
 	/*
 	link = { eu4 = 1 vic3 = x000001 vic3 = x000002 } #sea->seas // produces chunk 1 - dropped since no owners
 	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces chunk 2 - goes to TAG due to higher dev.
-	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces chunk 3, goes to GAT since only owner.
+	link = { eu4 = 4 vic3 = x000005 } # wasteland -> land // produces chunk 3 - goes to noone since it's unowned.
+	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # wasteland,land->land,lake // produces chunk 4, goes to GAT since only owner.
 	*/
 
-	EXPECT_EQ(2, chunks.size());
+	ASSERT_EQ(3, chunks.size());
 
 	const auto& chunk1 = chunks[0]; // land chunk, 2,3->x3,x4
-	const auto& chunk2 = chunks[1]; // land chunk, 9->x8
+	const auto& chunk2 = chunks[1]; // land chunk, 4->x5
+	const auto& chunk3 = chunks[2]; // land chunk, 9->x8
 
-	EXPECT_TRUE(chunk1->sourceOwner);
+	ASSERT_TRUE(chunk1->sourceOwner);
 	EXPECT_EQ("TAG", chunk1->sourceOwner->getTag());
 	EXPECT_TRUE(chunk1->sourceProvinces.contains(2));
 	EXPECT_TRUE(chunk1->sourceProvinces.contains(3));
 	EXPECT_TRUE(chunk1->provinces.contains("x000003"));
 	EXPECT_TRUE(chunk1->provinces.contains("x000004"));
 
-	EXPECT_TRUE(chunk2->sourceOwner);
-	EXPECT_EQ("GAT", chunk2->sourceOwner->getTag());
-	EXPECT_TRUE(chunk2->sourceProvinces.contains(9));
-	EXPECT_TRUE(chunk2->provinces.contains("x000008"));
+	EXPECT_FALSE(chunk2->sourceOwner);
+	EXPECT_TRUE(chunk2->sourceProvinces.contains(4));
+	EXPECT_TRUE(chunk2->provinces.contains("x000005"));
+
+	ASSERT_TRUE(chunk3->sourceOwner);
+	EXPECT_EQ("GAT", chunk3->sourceOwner->getTag());
+	EXPECT_TRUE(chunk3->sourceProvinces.contains(9));
+	EXPECT_TRUE(chunk3->provinces.contains("x000008"));
 }
 
-TEST(V3World_ClayManagerTests, clayManagerDropsChunksBelongingToInvalidCountries)
+TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInvalidCountries)
 {
 	auto eu4Path = "TestFiles/eu4installation/";
 	EU4::DefaultMapParser defaults;
@@ -338,7 +383,7 @@ TEST(V3World_ClayManagerTests, clayManagerDropsChunksBelongingToInvalidCountries
 
 	clayManager.unDisputeChunkOwnership(countries);
 
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Chunk owner TAG is invalid. Dropping chunk.)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Chunk owner TAG is invalid. Dropping chunk ownership.)"));
 
 	std::cout.rdbuf(cout_buffer);
 
@@ -346,21 +391,34 @@ TEST(V3World_ClayManagerTests, clayManagerDropsChunksBelongingToInvalidCountries
 
 	/*
 	link = { eu4 = 1 vic3 = x000001 vic3 = x000002 } #sea->seas // produces chunk 1 - dropped since no owners
-	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces chunk 2 - goes to TAG due to higher dev, but there's no TAG so dropped
-	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces chunk 3, goes to GAT since only owner.
+	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces chunk 2 - goes to TAG due to higher dev.
+	link = { eu4 = 4 vic3 = x000005 } # wasteland -> land // produces chunk 3 - goes to noone since it's unowned.
+	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # wasteland,land->land,lake // produces chunk 4, goes to GAT since only owner.
 	*/
 
-	EXPECT_EQ(1, chunks.size());
+	ASSERT_EQ(3, chunks.size());
 
-	const auto& chunk1 = chunks[0]; // land chunk, 9->x8
+	const auto& chunk1 = chunks[0]; // land chunk, 2,3->x3,x4 // TAG -> noone
+	const auto& chunk2 = chunks[1]; // land chunk, 4->x5 // noone
+	const auto& chunk3 = chunks[2]; // land chunk, 9->x8 // GAT
 
-	EXPECT_TRUE(chunk1->sourceOwner);
-	EXPECT_EQ("GAT", chunk1->sourceOwner->getTag());
-	EXPECT_TRUE(chunk1->sourceProvinces.contains(9));
-	EXPECT_TRUE(chunk1->provinces.contains("x000008"));
+	EXPECT_FALSE(chunk1->sourceOwner);
+	EXPECT_TRUE(chunk1->sourceProvinces.contains(2));
+	EXPECT_TRUE(chunk1->sourceProvinces.contains(3));
+	EXPECT_TRUE(chunk1->provinces.contains("x000003"));
+	EXPECT_TRUE(chunk1->provinces.contains("x000004"));
+
+	EXPECT_FALSE(chunk2->sourceOwner);
+	EXPECT_TRUE(chunk2->sourceProvinces.contains(4));
+	EXPECT_TRUE(chunk2->provinces.contains("x000005"));
+
+	ASSERT_TRUE(chunk3->sourceOwner);
+	EXPECT_EQ("GAT", chunk3->sourceOwner->getTag());
+	EXPECT_TRUE(chunk3->sourceProvinces.contains(9));
+	EXPECT_TRUE(chunk3->provinces.contains("x000008"));
 }
 
-TEST(V3World_ClayManagerTests, clayManagerDropsChunksBelongingToInsaneCountries)
+TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInsaneCountries)
 {
 	auto eu4Path = "TestFiles/eu4installation/";
 	EU4::DefaultMapParser defaults;
@@ -408,7 +466,7 @@ TEST(V3World_ClayManagerTests, clayManagerDropsChunksBelongingToInsaneCountries)
 
 	clayManager.unDisputeChunkOwnership(countries);
 
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Chunk owner TAG is not initialized. Dropping chunk.)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Chunk owner TAG is not initialized. Dropping chunk ownership.)"));
 
 	std::cout.rdbuf(cout_buffer);
 
@@ -416,18 +474,31 @@ TEST(V3World_ClayManagerTests, clayManagerDropsChunksBelongingToInsaneCountries)
 
 	/*
 	link = { eu4 = 1 vic3 = x000001 vic3 = x000002 } #sea->seas // produces chunk 1 - dropped since no owners
-	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces chunk 2 - goes to TAG due to higher dev, but TAG is insane so dropped
-	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces chunk 3, goes to GAT since only owner.
+	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces chunk 2 - goes to TAG due to higher dev.
+	link = { eu4 = 4 vic3 = x000005 } # wasteland -> land // produces chunk 3 - goes to noone since it's unowned.
+	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # wasteland,land->land,lake // produces chunk 4, goes to GAT since only owner.
 	*/
 
-	EXPECT_EQ(1, chunks.size());
+	ASSERT_EQ(3, chunks.size());
 
-	const auto& chunk1 = chunks[0]; // land chunk, 9->x8
+	const auto& chunk1 = chunks[0]; // land chunk, 2,3->x3,x4 // TAG -> noone
+	const auto& chunk2 = chunks[1]; // land chunk, 4->x5 // noone
+	const auto& chunk3 = chunks[2]; // land chunk, 9->x8 // GAT
 
-	EXPECT_TRUE(chunk1->sourceOwner);
-	EXPECT_EQ("GAT", chunk1->sourceOwner->getTag());
-	EXPECT_TRUE(chunk1->sourceProvinces.contains(9));
-	EXPECT_TRUE(chunk1->provinces.contains("x000008"));
+	EXPECT_FALSE(chunk1->sourceOwner);
+	EXPECT_TRUE(chunk1->sourceProvinces.contains(2));
+	EXPECT_TRUE(chunk1->sourceProvinces.contains(3));
+	EXPECT_TRUE(chunk1->provinces.contains("x000003"));
+	EXPECT_TRUE(chunk1->provinces.contains("x000004"));
+
+	EXPECT_FALSE(chunk2->sourceOwner);
+	EXPECT_TRUE(chunk2->sourceProvinces.contains(4));
+	EXPECT_TRUE(chunk2->provinces.contains("x000005"));
+
+	ASSERT_TRUE(chunk3->sourceOwner);
+	EXPECT_EQ("GAT", chunk3->sourceOwner->getTag());
+	EXPECT_TRUE(chunk3->sourceProvinces.contains(9));
+	EXPECT_TRUE(chunk3->provinces.contains("x000008"));
 }
 
 TEST(V3World_ClayManagerTests, clayManagerCanProduceSubstatesFromChunks)
@@ -477,33 +548,42 @@ TEST(V3World_ClayManagerTests, clayManagerCanProduceSubstatesFromChunks)
 	const auto& substates = clayManager.getSubStates();
 
 	/*
+	link = { eu4 = 1 vic3 = x000001 vic3 = x000002 } #sea->seas // produces chunk 1 - dropped since no owners - no substate
 	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces substates 1 & 2 since x3 and x4 are in different states.
-	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces substate 3, with only x8 inside as x9 is a lake.
+	link = { eu4 = 4 vic3 = x000005 } # wasteland -> land // produces chunk 3 // produces substate 3 which has no owner
+	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces substate 4, with only x8 inside as x9 is a lake.
 	*/
 
-	EXPECT_EQ(3, substates.size());
+	ASSERT_EQ(4, substates.size());
 
 	const auto& substate1 = substates[0];
 	const auto& substate2 = substates[1];
 	const auto& substate3 = substates[2];
+	const auto& substate4 = substates[3];
 
-	EXPECT_TRUE(substate1->getSourceOwner());
+	ASSERT_TRUE(substate1->getSourceOwner());
 	EXPECT_EQ("GAT", substate1->getSourceOwner()->getTag());
 	EXPECT_EQ(1, substate1->getProvinces().size());
 	EXPECT_TRUE(substate1->getProvinces().contains("x000008"));
 	EXPECT_EQ("STATE_TEST_LAND4", substate1->getHomeStateName());
 
-	EXPECT_TRUE(substate2->getSourceOwner());
+	ASSERT_TRUE(substate2->getSourceOwner());
 	EXPECT_EQ("TAG", substate2->getSourceOwner()->getTag());
 	EXPECT_EQ(1, substate2->getProvinces().size());
 	EXPECT_TRUE(substate2->getProvinces().contains("x000003"));
 	EXPECT_EQ("STATE_TEST_LAND1", substate2->getHomeStateName());
 
-	EXPECT_TRUE(substate3->getSourceOwner());
+	ASSERT_TRUE(substate3->getSourceOwner());
 	EXPECT_EQ("TAG", substate3->getSourceOwner()->getTag());
 	EXPECT_EQ(1, substate3->getProvinces().size());
 	EXPECT_TRUE(substate3->getProvinces().contains("x000004"));
 	EXPECT_EQ("STATE_TEST_LAND2", substate3->getHomeStateName());
+
+	EXPECT_FALSE(substate4->getSourceOwner());
+	EXPECT_TRUE(substate4->getSourceOwnerTag().empty());
+	EXPECT_EQ(1, substate4->getProvinces().size());
+	EXPECT_TRUE(substate4->getProvinces().contains("x000005"));
+	EXPECT_EQ("STATE_TEST_LAND3", substate4->getHomeStateName());
 }
 
 TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
@@ -560,16 +640,18 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 
 	/*
 	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces substates 1 & 2 for V3's GA2.
-	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces substate 3, for V3's GA9.
+	link = { eu4 = 4 vic3 = x000005 } # wasteland -> land // produces substate 3 which has no owner and isn't assigned
+	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces substate 4, for V3's GA9.
 	*/
 
-	EXPECT_EQ(3, substates.size());
+	EXPECT_EQ(4, substates.size());
 
 	const auto& substate1 = substates[0];
 	const auto& substate2 = substates[1];
 	const auto& substate3 = substates[2];
+	const auto& substate4 = substates[3]; // the unowned one
 
-	EXPECT_TRUE(substate1->getSourceOwner());
+	ASSERT_TRUE(substate1->getSourceOwner());
 	EXPECT_EQ("TA2", substate1->getSourceOwner()->getTag());
 	EXPECT_EQ(1, substate1->getProvinces().size());
 	EXPECT_TRUE(substate1->getProvinces().contains("x000003"));
@@ -581,7 +663,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	// linkback through state's substate ownership vector
 	EXPECT_EQ("GA2", substate1->getHomeState()->getSubStates()[0]->getOwnerTag());
 
-	EXPECT_TRUE(substate2->getSourceOwner());
+	ASSERT_TRUE(substate2->getSourceOwner());
 	EXPECT_EQ("TA2", substate2->getSourceOwner()->getTag());
 	EXPECT_EQ(1, substate2->getProvinces().size());
 	EXPECT_TRUE(substate2->getProvinces().contains("x000004"));
@@ -593,7 +675,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	// linkback through state's substate ownership vector
 	EXPECT_EQ("GA2", substate2->getHomeState()->getSubStates()[0]->getOwnerTag());
 
-	EXPECT_TRUE(substate3->getSourceOwner());
+	ASSERT_TRUE(substate3->getSourceOwner());
 	EXPECT_EQ("TA9", substate3->getSourceOwner()->getTag());
 	EXPECT_EQ(1, substate3->getProvinces().size());
 	EXPECT_TRUE(substate3->getProvinces().contains("x000008"));
@@ -604,4 +686,58 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	EXPECT_EQ("STATE_TEST_LAND4", substate3->getOwner()->getSubStates()[0]->getHomeStateName());
 	// linkback through state's substate ownership vector
 	EXPECT_EQ("GA9", substate3->getHomeState()->getSubStates()[0]->getOwnerTag());
+
+	EXPECT_FALSE(substate4->getSourceOwner());
+	EXPECT_EQ(1, substate4->getProvinces().size());
+	EXPECT_TRUE(substate4->getProvinces().contains("x000005"));
+	EXPECT_EQ("STATE_TEST_LAND3", substate4->getHomeStateName());
+	EXPECT_TRUE(substate4->getOwnerTag().empty());
+	EXPECT_FALSE(substate4->getOwner());
+	// linkback to this substate through owner substates vector is impossible.
+	// linkback through state's substate ownership vector
+	EXPECT_TRUE(substate4->state->getSubStates()[0]->getSourceOwnerTag().empty());
+}
+
+TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaPops)
+{
+	const auto V3Path = "TestFiles/vic3installation/game/";
+	V3::ClayManager clayManager;
+
+	std::stringstream log;
+	std::streambuf* cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+
+	clayManager.initializeVanillaPops(V3Path);
+
+	std::cout.rdbuf(cout_buffer);
+
+	/*
+	STATE_TEST_1 - 600
+	STATE_TEST_2 - 3000
+	STATE_TEST_3 - 900
+	STATE_TEST_4 - 1000
+	total: 5500
+	*/
+
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> Vanilla had 5500 pops.)"));
+}
+
+TEST(V3World_ClayManagerTests, clayManagerCanAssignVanillaPops)
+{
+	const auto V3Path = "TestFiles/vic3installation/game/";
+	V3::ClayManager clayManager;
+	clayManager.initializeVanillaStates(V3Path);
+	clayManager.initializeVanillaPops(V3Path);
+
+	clayManager.assignVanillaPopsToStates();
+
+	const auto& state1 = clayManager.getStates().at("STATE_TEST_1");
+	const auto& state2 = clayManager.getStates().at("STATE_TEST_2");
+	const auto& state3 = clayManager.getStates().at("STATE_TEST_3");
+	const auto& state4 = clayManager.getStates().at("STATE_TEST_4");
+
+	EXPECT_EQ(600, state1->getVanillaPops().getPopCount());
+	EXPECT_EQ(3000, state2->getVanillaPops().getPopCount());
+	EXPECT_EQ(900, state3->getVanillaPops().getPopCount());
+	EXPECT_EQ(1000, state4->getVanillaPops().getPopCount());
 }

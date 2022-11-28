@@ -1,6 +1,5 @@
 #include "CultureLoader/CultureGroupParser.h"
 #include "CultureLoader/CultureLoader.h"
-#include "CultureLoader/CultureParser.h"
 #include "gtest/gtest.h"
 
 TEST(EU4World_CultureLoaderTests, cultureGroupsCanBeLoaded)
@@ -14,6 +13,29 @@ TEST(EU4World_CultureLoaderTests, cultureGroupsCanBeLoaded)
 	EXPECT_EQ(2, groups.getCultureGroupsMap().size());
 	EXPECT_TRUE(groups.getCultureGroupsMap().contains("groupA"));
 	EXPECT_TRUE(groups.getCultureGroupsMap().contains("groupB"));
+}
+
+TEST(EU4World_CultureLoaderTests, GroupForCultureCanBeRetrieved)
+{
+	std::stringstream input;
+	input << "groupA = { cultureA = {} }\n";
+	input << "groupB = { cultureB = {} }\n";
+	EU4::CultureLoader groups;
+	groups.loadCultures(input);
+
+	EXPECT_EQ("groupA", groups.getGroupForCulture("cultureA"));
+	EXPECT_EQ("groupB", groups.getGroupForCulture("cultureB"));
+}
+
+TEST(EU4World_CultureLoaderTests, GroupForCultureReturnsNulloptForFailure)
+{
+	std::stringstream input;
+	input << "groupA = { cultureA = {} }\n";
+	input << "groupB = { cultureB = {} }\n";
+	EU4::CultureLoader groups;
+	groups.loadCultures(input);
+
+	EXPECT_EQ(std::nullopt, groups.getGroupForCulture("cultureC"));
 }
 
 TEST(EU4World_CultureLoaderTests, mergableCultureGroupsCanBeMerged)

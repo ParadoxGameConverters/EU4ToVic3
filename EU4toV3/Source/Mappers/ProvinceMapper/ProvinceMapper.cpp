@@ -6,12 +6,12 @@
 
 void mappers::ProvinceMapper::loadProvinceMappings(const std::string& fileName)
 {
-	Log(LogLevel::Info) << "-> Parsing province mappings";
+	Log(LogLevel::Info) << "-> Parsing province mapping rules.";
 	registerKeys();
 	parseFile(fileName);
 	clearRegisteredKeywords();
 	createMappings();
-	Log(LogLevel::Info) << "<> " << mappings.size() << " mappings loaded.";
+	Log(LogLevel::Info) << "<> " << mappings.size() << " rules loaded.";
 }
 
 void mappers::ProvinceMapper::registerKeys()

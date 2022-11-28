@@ -47,3 +47,11 @@ void EU4::CultureLoader::registerKeys()
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
+
+std::optional<std::string> EU4::CultureLoader::getGroupForCulture(const std::string& culture) const
+{
+	for (const auto& [groupName, group]: cultureGroupsMap)
+		if (group.getCultures().contains(culture))
+			return groupName;
+	return std::nullopt;
+}

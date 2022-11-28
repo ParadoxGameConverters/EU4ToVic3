@@ -32,7 +32,7 @@ TEST(V3World_TerrainLoaderTests, terrainLoaderCanLoadTerrains)
 			  testing::Pair("x000005", "plains"),
 			  testing::Pair("x000006", "plains"),
 			  testing::Pair("x000007", "lakes"),
-			  testing::Pair("x000008", "lakes"),
+			  testing::Pair("x000008", "plains"),
 			  testing::Pair("x000009", "lakes"),
 			  testing::Pair("x000010", "plains")));
 }

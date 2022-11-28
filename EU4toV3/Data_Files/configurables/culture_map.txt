@@ -1,11 +1,20 @@
 # Usage:
-# link = { vic3 = v3culture eu4 = eu4culture superregion = vic3strategionfile region = vic3region owner = vic3tag }
-## NOTE: Superregions are the names of the files found in common\strategic_regions, e.g. - african_strategic_regions
-## CULTURE GROUP: link = { vic3 = v3culture eu4group = eu4culturegroup }
-## RELIGION: link = { vic3 = v3culture eu4group = eu4culturegroup religion = vic3religion }
-# multiples of all except vic3 are allowed.
-# Note: regions can be anything that makes sense, ie. region_north_germany, STATE_TUVA
-# You can mix and match, ie. region_new_england + STATE_BERMUDA will catch all of New England + Bermuda.
+# link = { vic3 = v3culture eu4 = eu4culture eu4group = eu4culturegroup region = [VIC3_STATE vic3region vic3_strategic_regions] religion = eu4religion religion_group = eu4religion_group owner = vic3tag }
+# 
+## REGION: region are either STATE_NAMES, actual regions (region_italy) or names of global strategic region files (african_strategic_regions)
+## List as many as needed. Use VIC3 states, regions and global regions.
+##
+## CULTURE AND CULTURE GROUPS: link = { vic3 = v3culture eu4group = eu4culturegroup eu4 = eu4culture }
+## List as many as needed. Obviously, use EU4 cultures.
+##
+## RELIGION AND RELIGION GROUPS: link = { vic3 = v3culture eu4group = eu4culturegroup religion = eu4religion religion_group = eu4_religion_group }
+## List as many as needed. Use EU4 religions and religion groups!
+##
+## OWNER: link = { vic3 = v3culture eu4group = eu4culturegroup owner = TAG }
+## List as many as needed. Use VIC3 tags.
+#
+# Multiples of all except vic3 are allowed. You can mix and match, ie. "region = region_new_england region = STATE_BERMUDA" will catch all of New England + Bermuda.
+#
 ## DO NOT have separate colonial cultures, they will be re-generated anyway!
 #(x) implies that the culture is defined elsewhere (usually beforehand)
 
@@ -44,7 +53,7 @@ link = { vic3 = sephardic eu4 = sephardi eu4 = hebrew eu4 = mizrahim eu4 = mizra
 # Dynamic generation for Knaanic, Magogic, Yevanic, Misrayim, Zarphatic, Laaz, Kaifeng
 
 # Low Countries - Dutch, Flemish, Wallonian and Boer
-link = { vic3 = boer @benelux_cultures superregion = african_strategic_regions }
+link = { vic3 = boer @benelux_cultures region = african_strategic_regions }
 
 link = { vic3 = boer eu4 = afrikaner }
 link = { vic3 = dutch eu4 = dutch eu4 = frisian eu4 = batavian eu4 = tasmanian }
@@ -73,7 +82,7 @@ link = { vic3 = icelandic eu4 = icelandic }
 # Anglophone -  Afro-American, Afro-Caribbean, Anglo-Canadian, Australian, Dixie, English, Scottish, Welsh, Yankee
 ## Added - Anglo-Saxon
 link = { vic3 = afro_caribbean @african_cultures region = region_caribbean owner = ENG } #Must come before Afro-American
-link = { vic3 = afro_american @african_cultures superregion = north_america_strategic_regions owner = ENG }
+link = { vic3 = afro_american @african_cultures region = north_america_strategic_regions owner = ENG }
 link = { vic3 = anglo_canadian eu4group = british @canada_colony }
 link = { vic3 = australian eu4group = british @australia_colony }
 link = { vic3 = dixie eu4group = british @usa_south_colony  }
@@ -348,7 +357,7 @@ link = { vic3 = japanese eu4group = japanese_g }
 link = { vic3 = ainu eu4 = ainu eu4 = aynu }
 
 #Korean
-link = { vic3 = koreaneu4 = korean_new eu4 = baegukin eu4 = namdonggukin eu4 = namgukin eu4 = seogukin eu4 = chaoxian }
+link = { vic3 = korean eu4 = korean_new eu4 = baegukin eu4 = namdonggukin eu4 = namgukin eu4 = seogukin eu4 = chaoxian }
 link = { vic3 = korean eu4group = korean_g }
 
 #Sinosphere - Vietnamese, Manchu and Han
@@ -533,7 +542,7 @@ link = { vic3 = azande eu4group = sudanese region = STATE_CONGO_ORIENTALE } # So
 link = { vic3 = coptic eu4 = coptic eu4 = old_egyptian eu4 = old_egyptian_mod eu4 = coptic_culture }
 link = { vic3 = nuer eu4 = nubian region = STATE_EQUATORIA} # South Sudan
 link = { vic3 = dinka eu4group = sudanese region = STATE_EQUATORIA } # Anuaks
-link = { vic3 = rundi eu4 = rwandan owner = BUU } # Burundi
+link = { vic3 = rundi eu4 = rwandan owner = BRD } # Burundi
 link = { vic3 = sukuma eu4 = takama region = STATE_RIFT_VALLEY } #Technically Sukuma are the northern branch of the Nyamwezi group. Since Unyamwezi are already mapped, I just put them here as a "northern" option
 
 link = { vic3 = amhara eu4 = amhara eu4 = habshi }
