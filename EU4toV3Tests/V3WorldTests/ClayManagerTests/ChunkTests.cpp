@@ -1,14 +1,13 @@
 #include "ClayManager/Chunk.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "gtest/gtest.h"
-#include <gmock/gmock-matchers.h>
 
 TEST(V3World_ChunkTests, DemographicsCanBeImported)
 {
 	// make a few provinces
 	std::stringstream provinceStream;
-	provinceStream << "-2={ owner = TA2 base_tax=10 base_production=10 base_manpower=10 culture = culture religion = religion}\n"; // substate TA-2&3
-	provinceStream << "-3={ owner = TA3 base_tax=1 base_production=1 base_manpower=1 culture = culture religion = religion }\n";	 // substate TA-2&3
+	provinceStream << "-2={ owner = TA2 base_tax=10 base_production=10 base_manpower=10 culture = culture religion = religion }\n";
+	provinceStream << "-3={ owner = TA3 base_tax=1 base_production=1 base_manpower=1 culture = culture religion = religion }\n";
 	EU4::ProvinceManager provinceManager;
 	provinceManager.loadProvinces(provinceStream);
 	provinceManager.buildProvinceWeights();
@@ -20,7 +19,6 @@ TEST(V3World_ChunkTests, DemographicsCanBeImported)
 	chunk.addSourceProvince(std::pair(3, provinceManager.getProvince(3)));
 
 	// and import demos.
-
 	chunk.importDemographics();
 
 	ASSERT_EQ(2, chunk.getDemographics().size());

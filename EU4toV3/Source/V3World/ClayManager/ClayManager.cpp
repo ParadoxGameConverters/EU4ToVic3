@@ -301,7 +301,9 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::buildSubStates(const
 	std::vector<std::shared_ptr<SubState>> subStates;
 
 	for (const auto& tagStateProvinces: chunkTagProvinces | std::views::values)
+	{
 		for (const auto& [eu4tag, stateMap]: tagStateProvinces)
+		{
 			for (const auto& [stateName, provinces]: stateMap)
 			{
 				if (provinces.empty())
@@ -324,6 +326,8 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::buildSubStates(const
 					subStates.push_back(std::make_shared<SubState>(states.at(stateName), sourceOwners.at(eu4tag), provinces));
 				}
 			}
+		}
+	}
 
 	return subStates;
 }
