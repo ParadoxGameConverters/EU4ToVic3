@@ -307,7 +307,7 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::buildSubStates(const
 				Log(LogLevel::Error) << "Substate owner " << eu4tag << " wants a substate in " << stateName << " which does't exist?! Bailing on this clay!";
 				continue;
 			}
-      if (!eu4tag.starts_with("unowned"))
+      if (eu4tag.starts_with("unowned"))
 			{
 			  // This will keep unlinked substates without an owner.
 			  subStates.push_back(std::make_shared<SubState>(states.at(stateName), nullptr, provinces));
