@@ -1,6 +1,7 @@
 #ifndef V3_SUBSTATE_H
 #define V3_SUBSTATE_H
 #include "ClayMapTypedefs.h"
+#include "Demographic.h"
 #include "StateLoader/State.h"
 #include <EU4World/CountryManager/EU4Country.h>
 
@@ -17,31 +18,37 @@ class SubState
 {
   public:
 	SubState() = default;
-	SubState(std::shared_ptr<State> theHomeState, std::shared_ptr<EU4::Country> theSourceOwner, const ProvinceMap& theProvinces);
+	SubState(std::shared_ptr<State> theHomeState, std::shared_ptr<EU4::Country> theSourceOwner, ProvinceMap theProvinces);
 	void setProvinces(const ProvinceMap& theProvinces) { provinces = theProvinces; }
-	void setOwner(std::shared_ptr<Country> theOwner) { owner = theOwner; }
+	void setOwner(const std::shared_ptr<Country>& theOwner) { owner = theOwner; }
 	void setLandshare(const double theLandshare) { landshare = theLandshare; }
 	void setResource(const std::string& theResource, int theAmount) { resources[theResource] = theAmount; }
+	void setChunk(const std::shared_ptr<Chunk>& theChunk) { chunk = theChunk; }
+	void setDemographics(const std::vector<Demographic>& demos) { demographics = demos; }
 
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
 	[[nodiscard]] const auto& getOwner() const { return owner; }
 	[[nodiscard]] const auto& getSourceOwner() const { return sourceOwner; }
 	[[nodiscard]] const auto& getHomeState() const { return state; }
+	[[nodiscard]] const auto& getChunk() const { return chunk; }
 	[[nodiscard]] const auto& getLandshare() const { return landshare; }
 	[[nodiscard]] const auto& getResource(const std::string& theResource) { return resources[theResource]; }
+	[[nodiscard]] const auto& getDemographics() { return demographics; }
 
 	[[nodiscard]] const std::string& getOwnerTag() const;
 	[[nodiscard]] const std::string& getSourceOwnerTag() const;
 	[[nodiscard]] const std::string& getHomeStateName() const;
 
   private:
-	ProvinceMap provinces; // V3 province codes
-	std::shared_ptr<Country> owner;
-	std::shared_ptr<EU4::Country> sourceOwner;
 	std::shared_ptr<State> state; // home state
+	std::shared_ptr<EU4::Country> sourceOwner;
+	std::shared_ptr<Country> owner;
+	ProvinceMap provinces; // V3 province codes
+	std::shared_ptr<Chunk> chunk;
 
 	double landshare = 0; // % of State's resources that are substate's
 	std::map<std::string, int> resources;
+	std::vector<Demographic> demographics;
 };
 } // namespace V3
 
