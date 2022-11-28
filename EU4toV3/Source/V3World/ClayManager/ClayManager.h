@@ -57,8 +57,6 @@ class ClayManager
 
 	std::vector<std::shared_ptr<Chunk>> chunks;		  // political entities
 	std::vector<std::shared_ptr<SubState>> substates; // political entities
-
-	std::map<std::string, int> provinceChunks; // province to chunk reference guide
 };
 } // namespace V3
 #endif // CLAY_MANAGER_H
