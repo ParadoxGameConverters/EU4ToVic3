@@ -505,47 +505,53 @@
     <ClCompile Include="MapperTests\CultureMapperTests\CultureMappingRuleTests.cpp">
       <Filter>MapperTests\CultureMapperTests</Filter>
     </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\PopLoader\PopEntry.cpp">
-      <Filter>ConverterFiles\V3World\ClayManager\PopLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\PopLoader\PopLoader.cpp">
-      <Filter>ConverterFiles\V3World\ClayManager\PopLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\PopLoader\StateEntries.cpp">
-      <Filter>ConverterFiles\V3World\ClayManager\PopLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\PopLoader\SubStateEntries.cpp">
-      <Filter>ConverterFiles\V3World\ClayManager\PopLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\PopLoader\SubStatePopEntries.cpp">
-      <Filter>ConverterFiles\V3World\ClayManager\PopLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="V3WorldTests\ClayManagerTests\PopLoaderTests\PopEntryTests.cpp">
-      <Filter>V3WorldTests\ClayManagerTests\PopLoaderTests</Filter>
-    </ClCompile>
-    <ClCompile Include="V3WorldTests\ClayManagerTests\PopLoaderTests\PopLoaderTests.cpp">
-      <Filter>V3WorldTests\ClayManagerTests\PopLoaderTests</Filter>
-    </ClCompile>
-    <ClCompile Include="V3WorldTests\ClayManagerTests\PopLoaderTests\StateEntriesTests.cpp">
-      <Filter>V3WorldTests\ClayManagerTests\PopLoaderTests</Filter>
-    </ClCompile>
-    <ClCompile Include="V3WorldTests\ClayManagerTests\PopLoaderTests\SubStateEntriesTests.cpp">
-      <Filter>V3WorldTests\ClayManagerTests\PopLoaderTests</Filter>
-    </ClCompile>
-    <ClCompile Include="V3WorldTests\ClayManagerTests\PopLoaderTests\SubStatePopEntriesTests.cpp">
-      <Filter>V3WorldTests\ClayManagerTests\PopLoaderTests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\PopLoader\Pops\StatePops.cpp">
-      <Filter>ConverterFiles\V3World\ClayManager\PopLoader\Pops</Filter>
-    </ClCompile>
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\PopLoader\Pops\SubStatePops.cpp">
-      <Filter>ConverterFiles\V3World\ClayManager\PopLoader\Pops</Filter>
-    </ClCompile>
     <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\Chunk.cpp">
       <Filter>ConverterFiles\V3World\ClayManager</Filter>
     </ClCompile>
     <ClCompile Include="V3WorldTests\ClayManagerTests\ChunkTests.cpp">
       <Filter>V3WorldTests\ClayManagerTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\PopManagerTests\PopLoaderTests\PopEntryTests.cpp">
+      <Filter>V3WorldTests\PopManagerTests\PopLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\PopManagerTests\PopLoaderTests\PopLoaderTests.cpp">
+      <Filter>V3WorldTests\PopManagerTests\PopLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\PopManagerTests\PopLoaderTests\StateEntriesTests.cpp">
+      <Filter>V3WorldTests\PopManagerTests\PopLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\PopManagerTests\PopLoaderTests\SubStateEntriesTests.cpp">
+      <Filter>V3WorldTests\PopManagerTests\PopLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\PopManagerTests\PopLoaderTests\SubStatePopEntriesTests.cpp">
+      <Filter>V3WorldTests\PopManagerTests\PopLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\PopManagerTests\PopManagerTests.cpp">
+      <Filter>V3WorldTests\PopManagerTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\PopLoader\PopEntry.cpp">
+      <Filter>ConverterFiles\V3World\PopManager\PopLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\PopLoader\PopLoader.cpp">
+      <Filter>ConverterFiles\V3World\PopManager\PopLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\PopLoader\StateEntries.cpp">
+      <Filter>ConverterFiles\V3World\PopManager\PopLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\PopLoader\SubStateEntries.cpp">
+      <Filter>ConverterFiles\V3World\PopManager\PopLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\PopLoader\SubStatePopEntries.cpp">
+      <Filter>ConverterFiles\V3World\PopManager\PopLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\PopManager.cpp">
+      <Filter>ConverterFiles\V3World\PopManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\Pops\StatePops.cpp">
+      <Filter>ConverterFiles\V3World\PopManager\Pops</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\Pops\SubStatePops.cpp">
+      <Filter>ConverterFiles\V3World\PopManager\Pops</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -870,20 +876,26 @@
     <Filter Include="TestFiles\eu4installation\common\cultures">
       <UniqueIdentifier>{c93c185d-07d1-4d30-a03a-4bb4a5bcff2d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ConverterFiles\V3World\ClayManager\PopLoader">
-      <UniqueIdentifier>{583a9622-386e-4acc-9cac-61f0bae1134e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="V3WorldTests\ClayManagerTests\PopLoaderTests">
-      <UniqueIdentifier>{f8e83e65-a559-44c5-a49f-dde6cbcdff74}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TestFiles\vic3installation\game\common\history">
       <UniqueIdentifier>{60ef75d2-0ec5-49dc-951c-145d679db359}</UniqueIdentifier>
     </Filter>
     <Filter Include="TestFiles\vic3installation\game\common\history\pops">
       <UniqueIdentifier>{cfcab57a-62a5-4b91-ad41-791d3145d89e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ConverterFiles\V3World\ClayManager\PopLoader\Pops">
-      <UniqueIdentifier>{e6581bfa-a132-41e6-9d15-9a7b438ec623}</UniqueIdentifier>
+    <Filter Include="V3WorldTests\PopManagerTests">
+      <UniqueIdentifier>{52d3e42d-aaf6-4ebd-853a-a5481e8bfa9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\PopManagerTests\PopLoaderTests">
+      <UniqueIdentifier>{c4a7f8b9-c180-4bd4-b572-29571a78878e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\PopManager">
+      <UniqueIdentifier>{041b07c4-48e4-42be-b692-d1a3baf85c2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\PopManager\PopLoader">
+      <UniqueIdentifier>{9fdbc8bf-8aeb-4e29-ae71-9bedf71aea18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\PopManager\Pops">
+      <UniqueIdentifier>{dbedddf7-1a58-4cce-adfb-b387470cedec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

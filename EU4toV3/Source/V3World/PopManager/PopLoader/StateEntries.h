@@ -1,7 +1,7 @@
 #ifndef STATE_ENTRIES_H
 #define STATE_ENTRIES_H
 #include "Parser.h"
-#include "Pops/StatePops.h"
+#include "PopManager/Pops/StatePops.h"
 
 namespace V3
 {

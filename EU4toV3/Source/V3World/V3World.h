@@ -5,6 +5,7 @@
 #include "CountryMapper/CountryMapper.h"
 #include "CultureMapper/CultureMapper.h"
 #include "PoliticalManager/PoliticalManager.h"
+#include "PopManager/PopManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
 #include "ReligionMapper/ReligionMapper.h"
 
@@ -29,6 +30,7 @@ class World
 
 	ClayManager clayManager;
 	PoliticalManager politicalManager;
+	PopManager popManager;
 
 	mappers::ProvinceMapper provinceMapper;
 	mappers::ReligionMapper religionMapper;

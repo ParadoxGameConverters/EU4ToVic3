@@ -145,13 +145,6 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\Output\outWorld.cpp" />
     <ClCompile Include="Source\V3World\ClayManager\Chunk.cpp" />
     <ClCompile Include="Source\V3World\ClayManager\ClayManager.cpp" />
-    <ClCompile Include="Source\V3World\ClayManager\PopLoader\PopEntry.cpp" />
-    <ClCompile Include="Source\V3World\ClayManager\PopLoader\PopLoader.cpp" />
-    <ClCompile Include="Source\V3World\ClayManager\PopLoader\Pops\StatePops.cpp" />
-    <ClCompile Include="Source\V3World\ClayManager\PopLoader\Pops\SubStatePops.cpp" />
-    <ClCompile Include="Source\V3World\ClayManager\PopLoader\StateEntries.cpp" />
-    <ClCompile Include="Source\V3World\ClayManager\PopLoader\SubStatePopEntries.cpp" />
-    <ClCompile Include="Source\V3World\ClayManager\PopLoader\SubStateEntries.cpp" />
     <ClCompile Include="Source\V3World\ClayManager\StateLoader\State.cpp" />
     <ClCompile Include="Source\V3World\ClayManager\StateLoader\StateLoader.cpp" />
     <ClCompile Include="Source\V3World\ClayManager\SubState.cpp" />
@@ -162,6 +155,14 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\V3World\PoliticalManager\CountryDefinitionLoader\Country.cpp" />
     <ClCompile Include="Source\V3World\PoliticalManager\CountryDefinitionLoader\CountryDefinitionLoader.cpp" />
     <ClCompile Include="Source\V3World\PoliticalManager\PoliticalManager.cpp" />
+    <ClCompile Include="Source\V3World\PopManager\PopLoader\PopEntry.cpp" />
+    <ClCompile Include="Source\V3World\PopManager\PopLoader\PopLoader.cpp" />
+    <ClCompile Include="Source\V3World\PopManager\PopLoader\StateEntries.cpp" />
+    <ClCompile Include="Source\V3World\PopManager\PopLoader\SubStateEntries.cpp" />
+    <ClCompile Include="Source\V3World\PopManager\PopLoader\SubStatePopEntries.cpp" />
+    <ClCompile Include="Source\V3World\PopManager\PopManager.cpp" />
+    <ClCompile Include="Source\V3World\PopManager\Pops\StatePops.cpp" />
+    <ClCompile Include="Source\V3World\PopManager\Pops\SubStatePops.cpp" />
     <ClCompile Include="Source\V3World\V3World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -267,15 +268,6 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\V3World\ClayManager\Chunk.h" />
     <ClInclude Include="Source\V3World\ClayManager\ClayManager.h" />
     <ClInclude Include="Source\V3World\ClayManager\ClayMapTypedefs.h" />
-    <ClInclude Include="Source\V3World\ClayManager\Demographic.h" />
-    <ClInclude Include="Source\V3World\ClayManager\PopLoader\PopEntry.h" />
-    <ClInclude Include="Source\V3World\ClayManager\PopLoader\PopLoader.h" />
-    <ClInclude Include="Source\V3World\ClayManager\PopLoader\Pops\Pop.h" />
-    <ClInclude Include="Source\V3World\ClayManager\PopLoader\Pops\StatePops.h" />
-    <ClInclude Include="Source\V3World\ClayManager\PopLoader\Pops\SubStatePops.h" />
-    <ClInclude Include="Source\V3World\ClayManager\PopLoader\StateEntries.h" />
-    <ClInclude Include="Source\V3World\ClayManager\PopLoader\SubStatePopEntries.h" />
-    <ClInclude Include="Source\V3World\ClayManager\PopLoader\SubStateEntries.h" />
     <ClInclude Include="Source\V3World\ClayManager\ProvinceTypeCounter.h" />
     <ClInclude Include="Source\V3World\ClayManager\StateLoader\Province.h" />
     <ClInclude Include="Source\V3World\ClayManager\StateLoader\State.h" />
@@ -288,6 +280,15 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\V3World\PoliticalManager\CountryDefinitionLoader\Country.h" />
     <ClInclude Include="Source\V3World\PoliticalManager\CountryDefinitionLoader\CountryDefinitionLoader.h" />
     <ClInclude Include="Source\V3World\PoliticalManager\PoliticalManager.h" />
+    <ClInclude Include="Source\V3World\PopManager\PopLoader\PopEntry.h" />
+    <ClInclude Include="Source\V3World\PopManager\PopLoader\PopLoader.h" />
+    <ClInclude Include="Source\V3World\PopManager\PopLoader\StateEntries.h" />
+    <ClInclude Include="Source\V3World\PopManager\PopLoader\SubStateEntries.h" />
+    <ClInclude Include="Source\V3World\PopManager\PopLoader\SubStatePopEntries.h" />
+    <ClInclude Include="Source\V3World\PopManager\PopManager.h" />
+    <ClInclude Include="Source\V3World\PopManager\Pops\Pop.h" />
+    <ClInclude Include="Source\V3World\PopManager\Pops\StatePops.h" />
+    <ClInclude Include="Source\V3World\PopManager\Pops\SubStatePops.h" />
     <ClInclude Include="Source\V3World\V3World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
