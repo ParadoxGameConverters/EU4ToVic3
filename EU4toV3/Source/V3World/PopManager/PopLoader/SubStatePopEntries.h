@@ -1,7 +1,7 @@
 #ifndef SUBSTATE_POP_ENTRIES_H
 #define SUBSTATE_POP_ENTRIES_H
 #include "Parser.h"
-#include "Pops/Pop.h"
+#include "PopManager/Pops/Pop.h"
 
 namespace V3
 {

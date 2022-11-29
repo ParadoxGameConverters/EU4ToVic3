@@ -1,7 +1,7 @@
 #ifndef V3_SUBSTATE_H
 #define V3_SUBSTATE_H
 #include "ClayMapTypedefs.h"
-#include "Demographic.h"
+#include "PopManager/Demographic.h"
 #include "StateLoader/State.h"
 #include <EU4World/CountryManager/EU4Country.h>
 

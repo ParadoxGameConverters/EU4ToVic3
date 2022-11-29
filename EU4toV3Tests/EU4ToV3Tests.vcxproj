@@ -145,13 +145,6 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\Chunk.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\ClayManager.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\PopLoader\PopEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\PopLoader\PopLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\PopLoader\Pops\StatePops.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\PopLoader\Pops\SubStatePops.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\PopLoader\StateEntries.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\PopLoader\SubStateEntries.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\PopLoader\SubStatePopEntries.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\StateLoader\State.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\StateLoader\StateLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\SubState.cpp" />
@@ -162,6 +155,14 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\PoliticalManager\CountryDefinitionLoader\Country.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\PoliticalManager\CountryDefinitionLoader\CountryDefinitionLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\PoliticalManager\PoliticalManager.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\PopLoader\PopEntry.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\PopLoader\PopLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\PopLoader\StateEntries.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\PopLoader\SubStateEntries.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\PopLoader\SubStatePopEntries.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\PopManager.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\Pops\StatePops.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\Pops\SubStatePops.cpp" />
     <ClCompile Include="..\googletest\googlemock\src\gmock-all.cc" />
     <ClCompile Include="..\googletest\googletest\src\gtest-all.cc" />
     <ClCompile Include="..\googletest\googletest\src\gtest_main.cc" />
@@ -232,11 +233,6 @@
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperRegionParserTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\ChunkTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\ClayManagerTests.cpp" />
-    <ClCompile Include="V3WorldTests\ClayManagerTests\PopLoaderTests\PopEntryTests.cpp" />
-    <ClCompile Include="V3WorldTests\ClayManagerTests\PopLoaderTests\PopLoaderTests.cpp" />
-    <ClCompile Include="V3WorldTests\ClayManagerTests\PopLoaderTests\StateEntriesTests.cpp" />
-    <ClCompile Include="V3WorldTests\ClayManagerTests\PopLoaderTests\SubStateEntriesTests.cpp" />
-    <ClCompile Include="V3WorldTests\ClayManagerTests\PopLoaderTests\SubStatePopEntriesTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateLoaderTests\StateLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateLoaderTests\StateTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\SuperRegionLoaderTests\SuperRegionLoaderTests.cpp" />
@@ -246,6 +242,12 @@
     <ClCompile Include="V3WorldTests\PoliticalManagerTests\CountryDefinitionLoaderTests\CountryDefinitionLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\PoliticalManagerTests\CountryDefinitionLoaderTests\CountryTests.cpp" />
     <ClCompile Include="V3WorldTests\PoliticalManagerTests\PoliticalManagerTests.cpp" />
+    <ClCompile Include="V3WorldTests\PopManagerTests\PopLoaderTests\PopEntryTests.cpp" />
+    <ClCompile Include="V3WorldTests\PopManagerTests\PopLoaderTests\PopLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\PopManagerTests\PopLoaderTests\StateEntriesTests.cpp" />
+    <ClCompile Include="V3WorldTests\PopManagerTests\PopLoaderTests\SubStateEntriesTests.cpp" />
+    <ClCompile Include="V3WorldTests\PopManagerTests\PopLoaderTests\SubStatePopEntriesTests.cpp" />
+    <ClCompile Include="V3WorldTests\PopManagerTests\PopManagerTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h" />
