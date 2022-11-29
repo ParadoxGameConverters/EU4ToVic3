@@ -34,10 +34,13 @@ void V3::PopManager::assignVanillaPopsToStates(const ClayManager& clayManager)
 	}
 }
 
-void V3::PopManager::importDemographics(const ClayManager& clayManager)
+void V3::PopManager::importDemographicsAndStates(const ClayManager& clayManager)
 {
 	for (const auto& chunk: clayManager.getChunks())
 		chunk->importDemographics();
+
+	// States are non-volatile. We're ok just copying the map here.
+	states = clayManager.getStates();
 }
 
 void V3::PopManager::convertDemographics(const ClayManager& clayManager,
@@ -48,7 +51,7 @@ void V3::PopManager::convertDemographics(const ClayManager& clayManager,
 {
 	// All the substates have demographics, and using regional data we can convert them into Vic3 counterparts.
 
-	for (const auto& [stateName, state]: clayManager.getStates())
+	for (const auto& [stateName, state]: states)
 	{
 		if (!vanillaStatePops.contains(stateName))
 		{
@@ -56,14 +59,14 @@ void V3::PopManager::convertDemographics(const ClayManager& clayManager,
 			continue;
 		}
 
-		for (const auto& substate: state->getSubStates())
+		for (const auto& subState: state->getSubStates())
 		{
 			std::vector<Demographic> newDemographics;
-			for (const auto& demo: substate->getDemographics())
+			for (const auto& demo: subState->getDemographics())
 			{
 				auto newDemo = demo;
 				// Owner - no owner is fine as it covers decentralized clay.
-				auto ownerTag = substate->getOwnerTag();
+				auto ownerTag = subState->getOwnerTag();
 				if (!ownerTag)
 					ownerTag = "";
 
@@ -83,7 +86,25 @@ void V3::PopManager::convertDemographics(const ClayManager& clayManager,
 
 				newDemographics.push_back(newDemo);
 			}
-			substate->setDemographics(newDemographics); // these are old demos updated with actual vic3 culture/religion.
+			subState->setDemographics(newDemographics); // these are old demos updated with actual vic3 culture/religion.
 		}
 	}
+}
+
+std::string V3::PopManager::getDominantVanillaCulture(const std::string& stateName) const
+{
+	if (!vanillaStatePops.contains(stateName))
+	{
+		Log(LogLevel::Warning) << "PopManager knows nothing about vanilla state " << stateName;
+		return "noculture";
+	}
+
+	const auto best = vanillaStatePops.at(stateName).getDominantCulture();
+	if (!best)
+	{
+		Log(LogLevel::Warning) << "Vanilla state " << stateName << " is dry!";
+		return "noculture";
+	}
+
+	return *best;
 }

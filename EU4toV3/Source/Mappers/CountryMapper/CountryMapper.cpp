@@ -187,3 +187,10 @@ std::string mappers::CountryMapper::mapToTag(const std::string& eu4Tag, const st
 
 	return newTag;
 }
+
+std::string mappers::CountryMapper::requestNewV3Tag()
+{
+	auto newTag = generateNewTag();
+	unmappedV3Tags.emplace(newTag);
+	return newTag;
+}

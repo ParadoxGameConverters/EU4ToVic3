@@ -27,8 +27,9 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	popManager.initializeVanillaPops(V3Path);
 	popManager.assignVanillaPopsToStates(clayManager);
-	popManager.importDemographics(clayManager);
+	popManager.importDemographicsAndStates(clayManager);
 	popManager.convertDemographics(clayManager, cultureMapper, religionMapper, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
+	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
 	Log(LogLevel::Info) << "-> Importing Provinces";

@@ -46,7 +46,8 @@ class Country: commonItems::convenientParser
 	[[nodiscard]] const auto& getProcessedData() const { return processedData; }
 	[[nodiscard]] const auto& getSourceCountry() const { return sourceCountry; }
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
-	void addSubState(const std::shared_ptr<SubState>& substate) { substates.push_back(substate); }
+	void addSubState(const std::shared_ptr<SubState>& subState) { substates.push_back(subState); }
+	void setSubStates(const std::vector<std::shared_ptr<SubState>>& subStates) { substates = subStates; }
 	void copyVanillaData();
 
 	[[nodiscard]] std::string getName(const std::string& language) const;
