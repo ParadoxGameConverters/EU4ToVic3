@@ -53,6 +53,9 @@ void V3::PopManager::convertDemographics(const ClayManager& clayManager,
 
 	for (const auto& [stateName, state]: states)
 	{
+		if (state->isSea() || state->isLake())
+			continue;
+
 		if (!vanillaStatePops.contains(stateName))
 		{
 			Log(LogLevel::Warning) << "State " << stateName << " is unknown. Not creating pops.";

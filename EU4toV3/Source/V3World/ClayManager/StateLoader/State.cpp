@@ -2,7 +2,7 @@
 #include "CommonRegexes.h"
 #include "Log.h"
 #include "ParserHelpers.h"
-#include "StringUtils.h"
+#include "Province.h"
 #include "V3World/ClayManager/ProvinceTypeCounter.h"
 #include "V3World/ClayManager/SubState.h"
 #include <cmath>
@@ -156,4 +156,20 @@ std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& province
 	if (provinces.contains(provinceName))
 		return provinces.at(provinceName);
 	return nullptr;
+}
+
+bool V3::State::isSea() const
+{
+	return std::ranges::any_of(provinces.begin(), provinces.end(), [](const std::pair<std::string, std::shared_ptr<Province>>& province) {
+		return province.second->isSea();
+	});
+}
+
+bool V3::State::isLake() const
+{
+	// We allow for a lakes to be mismapped along regular provinces as vanilla has a few lakes so mismapped.
+
+	return std::ranges::all_of(provinces.begin(), provinces.end(), [](const std::pair<std::string, std::shared_ptr<Province>>& province) {
+		return province.second->isLake();
+	});
 }

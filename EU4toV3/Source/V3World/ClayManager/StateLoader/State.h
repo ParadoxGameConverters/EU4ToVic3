@@ -24,6 +24,8 @@ class State: commonItems::parser
 	[[nodiscard]] std::shared_ptr<Province> getProvince(const std::string& provinceName) const;
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
 	[[nodiscard]] bool isCoastal() const { return coastal; }
+	[[nodiscard]] bool isSea() const;
+	[[nodiscard]] bool isLake() const; // yes, an entire state can be a lake.
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
 	[[nodiscard]] const auto& getTraits() const { return traits; }
 	[[nodiscard]] const auto& getCappedResources() const { return cappedResources; }
