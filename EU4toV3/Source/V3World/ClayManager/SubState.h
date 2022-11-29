@@ -1,6 +1,7 @@
 #ifndef V3_SUBSTATE_H
 #define V3_SUBSTATE_H
 #include "ClayMapTypedefs.h"
+#include "PoliticalManager/CountryDefinitionLoader/Country.h"
 #include "PopManager/Demographic.h"
 #include "StateLoader/State.h"
 #include <EU4World/CountryManager/EU4Country.h>
@@ -31,12 +32,12 @@ class SubState
 	[[nodiscard]] const auto& getSourceOwner() const { return sourceOwner; }
 	[[nodiscard]] const auto& getHomeState() const { return state; }
 	[[nodiscard]] const auto& getChunk() const { return chunk; }
-	[[nodiscard]] const auto& getLandshare() const { return landshare; }
+	[[nodiscard]] auto getLandshare() const { return landshare; }
 	[[nodiscard]] const auto& getResource(const std::string& theResource) { return resources[theResource]; }
 	[[nodiscard]] const auto& getDemographics() { return demographics; }
 
-	[[nodiscard]] const std::string& getOwnerTag() const;
-	[[nodiscard]] const std::string& getSourceOwnerTag() const;
+	[[nodiscard]] std::optional<std::string> getOwnerTag() const;
+	[[nodiscard]] std::optional<std::string> getSourceOwnerTag() const;
 	[[nodiscard]] const std::string& getHomeStateName() const;
 
   private:

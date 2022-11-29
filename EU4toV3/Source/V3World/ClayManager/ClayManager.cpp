@@ -363,8 +363,13 @@ void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::s
 
 		// all the rest must have an owner and that owner must be able to map properly.
 		auto eu4tag = substate->getSourceOwnerTag();
+		if (!eu4tag)
+		{
+			Log(LogLevel::Warning) << "Substate belonging to EU4 country which we know nothing about? Ditching.";
+			continue;
+		}
 
-		auto v3tag = countryMapper.getV3Tag(eu4tag);
+		auto v3tag = countryMapper.getV3Tag(*eu4tag);
 		if (v3tag && countries.contains(*v3tag))
 		{
 			const auto& owner = countries.at(*v3tag);
@@ -376,7 +381,7 @@ void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::s
 		else
 		{
 			// We're ditching substates of countries we haven't imported. Unsure how that'd happen but ok.
-			Log(LogLevel::Warning) << "Substate belonging to EU4 " << eu4tag << " hasn't been mapped over? Ditching.";
+			Log(LogLevel::Warning) << "Substate belonging to EU4 " << *eu4tag << " hasn't been mapped over? Ditching.";
 		}
 	}
 

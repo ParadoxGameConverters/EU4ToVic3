@@ -1,6 +1,5 @@
 #ifndef V3_COUNTRY_H
 #define V3_COUNTRY_H
-#include "ClayManager/SubState.h"
 #include "Parser.h"
 #include <CountryManager/EU4Country.h>
 #include <memory>
@@ -32,6 +31,7 @@ struct ProcessedData
 	std::map<std::string, std::string> adjectivesByLanguage; // language, adj
 };
 
+class SubState;
 class Country: commonItems::convenientParser
 {
   public:

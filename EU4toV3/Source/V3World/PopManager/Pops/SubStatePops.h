@@ -12,6 +12,7 @@ class SubStatePops
 	SubStatePops() = default;
 
 	void setPops(const std::vector<Pop>& thePops) { pops = thePops; }
+	void addPop(const Pop& pop) { pops.push_back(pop); }
 	void setTag(const std::string& theTag) { tag = theTag; }
 
 	[[nodiscard]] int getPopCount() const;

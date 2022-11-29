@@ -14,6 +14,9 @@ void V3::State::loadState(std::istream& theStream)
 	registerKeys();
 	parseStream(theStream);
 	clearRegisteredKeywords();
+
+	distributeLandshares();
+	distributeResources();
 }
 
 
@@ -92,15 +95,15 @@ void V3::State::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-void V3::State::distributeLandshares()
+void V3::State::distributeLandshares() const
 {
 	const auto statewideProvinceTypes = countProvinceTypes(provinces);
-	double weightedStatewideProvinces = calculateWeightedProvinceTotals(*statewideProvinceTypes);
+	const double weightedStatewideProvinces = calculateWeightedProvinceTotals(*statewideProvinceTypes);
 
 	for (const auto& substate: substates)
 	{
 		const auto substateCount = countProvinceTypes(substate->getProvinces());
-		double weightedSubstateProvinces = calculateWeightedProvinceTotals(*substateCount);
+		const double weightedSubstateProvinces = calculateWeightedProvinceTotals(*substateCount);
 
 		double substateLandshare = weightedSubstateProvinces / weightedStatewideProvinces;
 		if (substateLandshare < 0.05) // In defines as SPLIT_STATE_MIN_LAND_SHARE
@@ -117,7 +120,7 @@ void V3::State::distributeResources()
 	{
 		for (const auto& [resource, amount]: cappedResources)
 		{
-			substate->setResource(resource, floor(substate->getLandshare() * amount));
+			substate->setResource(resource, static_cast<int>(floor(substate->getLandshare() * amount)));
 		}
 	}
 }
@@ -128,11 +131,11 @@ int V3::State::calculateWeightedProvinceTotals(const ProvinceTypeCounter& theCou
 	return theCount.every + (5 - 1) * theCount.prime - theCount.impassable;
 }
 
-const std::unique_ptr<V3::ProvinceTypeCounter> V3::State::countProvinceTypes(ProvinceMap provinces)
+std::unique_ptr<V3::ProvinceTypeCounter> V3::State::countProvinceTypes(ProvinceMap provinces)
 {
 	auto typeCounter = std::make_unique<V3::ProvinceTypeCounter>();
 
-	typeCounter->every = provinces.size();
+	typeCounter->every = static_cast<int>(provinces.size());
 	for (const auto& province: std::views::values(provinces))
 	{
 		if (province->isPrime())

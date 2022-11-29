@@ -4,6 +4,16 @@
 #include <map>
 #include <string>
 
+namespace EU4
+{
+class CultureLoader;
+class ReligionLoader;
+} // namespace EU4
+namespace mappers
+{
+class CultureMapper;
+class ReligionMapper;
+} // namespace mappers
 namespace V3
 {
 class ClayManager;
@@ -15,6 +25,11 @@ class PopManager
 	void initializeVanillaPops(const std::string& v3Path);
 	void assignVanillaPopsToStates(const ClayManager& clayManager);
 	static void importDemographics(const ClayManager& clayManager);
+	void convertDemographics(const ClayManager& clayManager,
+		 const mappers::CultureMapper& cultureMapper,
+		 const mappers::ReligionMapper& religionMapper,
+		 const EU4::CultureLoader& cultureLoader,
+		 const EU4::ReligionLoader& religionLoader) const;
 
   private:
 	std::map<std::string, StatePops> vanillaStatePops; // state, StatePops

@@ -28,6 +28,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	popManager.initializeVanillaPops(V3Path);
 	popManager.assignVanillaPopsToStates(clayManager);
 	popManager.importDemographics(clayManager);
+	popManager.convertDemographics(clayManager, cultureMapper, religionMapper, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
 	Log(LogLevel::Info) << "-> Importing Provinces";
