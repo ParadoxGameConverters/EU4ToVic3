@@ -26,7 +26,7 @@ class PopManager
 
 	void initializeVanillaPops(const std::string& v3Path);
 	void assignVanillaPopsToStates(const ClayManager& clayManager);
-	void importDemographicsAndStates(const ClayManager& clayManager);
+	void importDemographics(const ClayManager& clayManager) const;
 	void convertDemographics(const ClayManager& clayManager,
 		 const mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
@@ -37,7 +37,6 @@ class PopManager
 
   private:
 	std::map<std::string, StatePops> vanillaStatePops; // state, StatePops
-	std::map<std::string, std::shared_ptr<State>> states;
 };
 } // namespace V3
 #endif // POP_MANAGER_H

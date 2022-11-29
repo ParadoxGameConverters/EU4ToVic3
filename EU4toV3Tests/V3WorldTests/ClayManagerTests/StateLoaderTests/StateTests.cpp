@@ -1,3 +1,4 @@
+#include "ClayManager/ClayManager.h"
 #include "ClayManager/StateLoader/State.h"
 #include "ClayManager/SubState.h"
 #include "gtest/gtest.h"
@@ -342,4 +343,34 @@ TEST(V3World_StateTests, distributeResourcesTruncatesDoubles)
 	EXPECT_EQ(substates[0]->getResource("iron"), 26);
 	EXPECT_EQ(substates[1]->getResource("iron"), 15);
 	EXPECT_EQ(substates[2]->getResource("iron"), 22);
+}
+
+TEST(V3World_StateTests, StateSeasCanBePinged)
+{
+	const auto V3Path = "TestFiles/vic3installation/game/";
+	V3::ClayManager clayManager;
+	clayManager.initializeVanillaStates(V3Path);
+	clayManager.loadTerrainsIntoProvinces(V3Path);
+
+	const auto& state1 = clayManager.getStates().at("STATE_TEST_OCEAN1");
+	const auto& state2 = clayManager.getStates().at("STATE_TEST_LAND1");
+
+	EXPECT_TRUE(state1->isSea());
+	EXPECT_FALSE(state2->isSea());
+}
+
+TEST(V3World_StateTests, StateLakesCanBePinged)
+{
+	const auto V3Path = "TestFiles/vic3installation/game/";
+	V3::ClayManager clayManager;
+	clayManager.initializeVanillaStates(V3Path);
+	clayManager.loadTerrainsIntoProvinces(V3Path);
+
+	const auto& state1 = clayManager.getStates().at("STATE_TEST_OCEAN1");
+	const auto& state2 = clayManager.getStates().at("STATE_TEST_LAKE");
+	const auto& state3 = clayManager.getStates().at("STATE_TEST_LAND1");
+
+	EXPECT_FALSE(state1->isLake());
+	EXPECT_TRUE(state2->isLake());
+	EXPECT_FALSE(state3->isLake());
 }

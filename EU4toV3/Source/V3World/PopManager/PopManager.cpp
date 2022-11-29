@@ -34,13 +34,10 @@ void V3::PopManager::assignVanillaPopsToStates(const ClayManager& clayManager)
 	}
 }
 
-void V3::PopManager::importDemographicsAndStates(const ClayManager& clayManager)
+void V3::PopManager::importDemographics(const ClayManager& clayManager) const
 {
 	for (const auto& chunk: clayManager.getChunks())
 		chunk->importDemographics();
-
-	// States are non-volatile. We're ok just copying the map here.
-	states = clayManager.getStates();
 }
 
 void V3::PopManager::convertDemographics(const ClayManager& clayManager,
@@ -51,7 +48,7 @@ void V3::PopManager::convertDemographics(const ClayManager& clayManager,
 {
 	// All the substates have demographics, and using regional data we can convert them into Vic3 counterparts.
 
-	for (const auto& [stateName, state]: states)
+	for (const auto& [stateName, state]: clayManager.getStates())
 	{
 		if (state->isSea() || state->isLake())
 			continue;

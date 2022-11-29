@@ -42,7 +42,7 @@ class CountryMapper: commonItems::parser
 	std::map<std::string, std::string> eu4TagToV3TagMap;
 	std::map<std::string, std::string> v3TagToEU4TagMap;
 	std::map<std::string, std::string> v3FlagCodes; // v3 tag -> flagcode
-	std::set<std::string> unmappedV3Tags; // stuff we generate on the fly for decentralized countries.
+	std::set<std::string> unmappedV3Tags;				// stuff we generate on the fly for decentralized countries.
 
 	char generatedV3TagPrefix = 'X';
 	int generatedV3TagSuffix = 0;

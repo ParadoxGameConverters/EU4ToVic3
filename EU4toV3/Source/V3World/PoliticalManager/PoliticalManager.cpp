@@ -59,16 +59,25 @@ void V3::PoliticalManager::generateDecentralizedCountries(const ClayManager& cla
 
 	for (const auto& [culture, subStates]: sortSubStatesByCultures(clayManager, popManager))
 	{
-		auto v3tag = countryMapper->requestNewV3Tag();
-		auto newCountry = std::make_shared<Country>();
-		newCountry->setTag(v3tag);
-		newCountry->setSubStates(subStates);
-		countries.emplace(v3tag, newCountry);
-		for (const auto& substate: newCountry->getSubStates())
-			substate->setOwner(newCountry);
-		Log(LogLevel::Debug) << "Generated new country for culture: " << culture << " from " << subStates.size() << " substates.";
-		// ... fingers crossed?
+		generateDecentralizedCountry(culture, subStates);
 	}
+}
+
+void V3::PoliticalManager::generateDecentralizedCountry(const std::string& culture, const std::vector<std::shared_ptr<SubState>>& subStates)
+{
+	auto v3tag = countryMapper->requestNewV3Tag();
+	auto newCountry = std::make_shared<Country>();
+	newCountry->setTag(v3tag);
+	newCountry->setSubStates(subStates);
+	ProcessedData data;
+	data.cultures.emplace(culture);
+	newCountry->setProcessedData(data);
+	for (const auto& subState: newCountry->getSubStates())
+		subState->setOwner(newCountry);
+
+	countries.emplace(v3tag, newCountry);
+	Log(LogLevel::Debug) << "Generated new country for culture: " << culture << " from " << subStates.size() << " substates.";
+	// ... fingers crossed?
 }
 
 V3::PoliticalManager::CulturalSubStates V3::PoliticalManager::sortSubStatesByCultures(const ClayManager& clayManager, const PopManager& popManager)

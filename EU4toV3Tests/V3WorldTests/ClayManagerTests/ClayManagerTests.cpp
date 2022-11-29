@@ -89,7 +89,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaStates)
 
 	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
 
-	EXPECT_EQ(9, clayManager.getStates().size());
+	EXPECT_EQ(10, clayManager.getStates().size());
 	EXPECT_TRUE(clayManager.getStates().contains("STATE_TEST_1"));
 	EXPECT_TRUE(clayManager.getStates().contains("STATE_TEST_2"));
 	EXPECT_TRUE(clayManager.getStates().contains("STATE_TEST_3"));
@@ -102,8 +102,9 @@ TEST(V3World_ClayManagerTests, clayManagerCanLoadTerrainsIntoStateProvinces)
 	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
 	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
 
+	const auto& state1 = clayManager.getStates().at("STATE_TEST_LAKE");
+	const auto& province1 = state1->getProvinces().at("xAABBCC");
 	const auto& state2 = clayManager.getStates().at("STATE_TEST_2");
-	const auto& province1 = state2->getProvinces().at("xAABBCC");
 	const auto& province2 = state2->getProvinces().at("xDDEEFF");
 
 	EXPECT_EQ("lakes", province1->getTerrain());
@@ -116,8 +117,9 @@ TEST(V3World_ClayManagerTests, oceanProvincesGetFlaggedAsSeas)
 	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
 	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
 
+	const auto& state1 = clayManager.getStates().at("STATE_TEST_LAKE");
+	const auto& province1 = state1->getProvinces().at("xAABBCC");
 	const auto& state2 = clayManager.getStates().at("STATE_TEST_2");
-	const auto& province1 = state2->getProvinces().at("xAABBCC");
 	const auto& province2 = state2->getProvinces().at("xDDEEFF");
 
 	EXPECT_FALSE(province1->isSea());
@@ -130,8 +132,9 @@ TEST(V3World_ClayManagerTests, lakeProvincesGetFlaggedAsLakesandImpassables)
 	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
 	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
 
+	const auto& state1 = clayManager.getStates().at("STATE_TEST_LAKE");
+	const auto& province1 = state1->getProvinces().at("xAABBCC");
 	const auto& state2 = clayManager.getStates().at("STATE_TEST_2");
-	const auto& province1 = state2->getProvinces().at("xAABBCC");
 	const auto& province2 = state2->getProvinces().at("xDDEEFF");
 
 	EXPECT_TRUE(province1->isLake());

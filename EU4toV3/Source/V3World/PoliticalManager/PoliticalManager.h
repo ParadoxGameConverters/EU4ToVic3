@@ -27,7 +27,7 @@ class PoliticalManager
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 
   private:
-
+	void generateDecentralizedCountry(const std::string& culture, const std::vector<std::shared_ptr<SubState>>& subStates);
 	static CulturalSubStates sortSubStatesByCultures(const ClayManager& clayManager, const PopManager& popManager);
 	static std::string getDominantDemographic(const std::vector<Demographic>& demographics);
 

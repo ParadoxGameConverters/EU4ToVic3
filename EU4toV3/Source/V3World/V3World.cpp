@@ -27,7 +27,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	popManager.initializeVanillaPops(V3Path);
 	popManager.assignVanillaPopsToStates(clayManager);
-	popManager.importDemographicsAndStates(clayManager);
+	popManager.importDemographics(clayManager);
 	popManager.convertDemographics(clayManager, cultureMapper, religionMapper, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 

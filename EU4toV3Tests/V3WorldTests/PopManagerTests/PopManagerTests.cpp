@@ -95,7 +95,7 @@ std::tuple<V3::PopManager, mappers::CultureMapper, mappers::ReligionMapper, V3::
 	V3::PopManager popManager;
 	popManager.initializeVanillaPops(V3Path);
 	popManager.assignVanillaPopsToStates(clayManager);
-	popManager.importDemographicsAndStates(clayManager);
+	popManager.importDemographics(clayManager);
 	popManager.convertDemographics(clayManager, culMapper, relMapper, cultureLoader, religionLoader);
 
 	return std::tuple{popManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader};
@@ -151,7 +151,7 @@ TEST(V3World_PopManagerTests, popManagerCanImportDemographics)
 	auto V3Path = "TestFiles/vic3installation/game/";
 	popManager.initializeVanillaPops(V3Path);
 	popManager.assignVanillaPopsToStates(clayManager);
-	popManager.importDemographicsAndStates(clayManager);
+	popManager.importDemographics(clayManager);
 
 	ASSERT_EQ(4, clayManager.getSubStates().size());
 	const auto& substate1 = clayManager.getSubStates()[0]; // 2 demos inside, from provinces 2 & 3

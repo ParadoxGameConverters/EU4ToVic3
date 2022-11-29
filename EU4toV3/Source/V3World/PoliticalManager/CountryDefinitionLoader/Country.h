@@ -49,11 +49,10 @@ class Country: commonItems::convenientParser
 	void addSubState(const std::shared_ptr<SubState>& subState) { substates.push_back(subState); }
 	void setSubStates(const std::vector<std::shared_ptr<SubState>>& subStates) { substates = subStates; }
 	void copyVanillaData();
+	void setProcessedData(const ProcessedData& data) { processedData = data; }
 
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
-
-	friend std::ostream& operator<<(std::ostream& output, const Country& country);
 
   private:
 	void registerKeys();
