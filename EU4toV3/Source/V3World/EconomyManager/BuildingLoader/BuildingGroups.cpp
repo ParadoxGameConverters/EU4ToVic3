@@ -2,35 +2,27 @@
 #include "Log.h"
 #include <ranges>
 
-void V3::BuildingGroups::registerKeywords()
-{
-}
-
 void V3::BuildingGroups::setInfrastructureCosts()
 {
 	for (auto& buildingGroup: std::views::values(buildingGroups))
 	{
-		std::string& parentGroupName = buildingGroup->parent;
-		while (buildingGroup->infrastructureCost == 0 && !parentGroupName.empty())
+		std::string parentGroupName = buildingGroup->getParent();
+		while (buildingGroup->getInfrastructureCost() == 0 && !parentGroupName.empty())
 		{
-			buildingGroup->infrastructureCost = getInfrastuctureCost(parentGroupName);
+			buildingGroup->setInfrastructureCost(getInfrastuctureCost(parentGroupName));
 			parentGroupName = getParent(parentGroupName);
 		}
 	}
 }
 
-void V3::BuildingGroups::loadBuildingGroups(std::istream& theStream)
-{
-}
-
 const std::string& V3::BuildingGroups::getParent(const std::string& theBuildingGroup) const
 {
-	return getBuildingGroup(theBuildingGroup)->parent;
+	return getBuildingGroup(theBuildingGroup)->getParent();
 }
 
 const int V3::BuildingGroups::getInfrastuctureCost(const std::string& theBuildingGroup) const
 {
-	return getBuildingGroup(theBuildingGroup)->infrastructureCost;
+	return getBuildingGroup(theBuildingGroup)->getInfrastructureCost();
 }
 
 const std::shared_ptr<V3::BuildingGroup> V3::BuildingGroups::getBuildingGroup(const std::string& theBuildingGroup) const

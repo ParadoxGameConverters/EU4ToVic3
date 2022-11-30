@@ -13,12 +13,15 @@ void V3::BuildingGroupLoader::loadBuildingGroups(const std::string& v3Path)
 			parseFile(v3Path + "/common/building_groups/" + fileName);
 	}
 	clearRegisteredKeywords();
+	buildingGroups->setInfrastructureCosts();
 }
 
 void V3::BuildingGroupLoader::registerKeys()
 {
 	registerRegex(commonItems::catchallRegex, [this](const std::string& buildingGroupName, std::istream& theStream) {
-		buildingGroups = std::make_shared<BuildingGroups>();
-		theBuildingGroups->loadBuildingGroups(theStream);
+		auto newBuildingGroup = std::make_unique<BuildingGroup>();
+		newBuildingGroup->loadBuildingGroup(theStream);
+		newBuildingGroup->setName(buildingGroupName);
+		buildingGroups->addBuildingGroup(std::move(newBuildingGroup));
 	});
 }

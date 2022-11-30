@@ -12,21 +12,18 @@
 
 namespace V3
 {
-class BuildingGroups: commonItems::parser
+class BuildingGroups
 {
   public:
 	BuildingGroups() = default;
-	void loadBuildingGroups(std::istream& theStream);
-	void addBuildingGroup(std::shared_ptr<BuildingGroup> theBuildingGroup) { buildingGroups[theBuildingGroup->name] = theBuildingGroup; }
+	void addBuildingGroup(std::shared_ptr<BuildingGroup> theBuildingGroup) { buildingGroups[theBuildingGroup->getName()] = theBuildingGroup; }
+	void setInfrastructureCosts();
 
 	[[nodiscard]] const std::string& getParent(const std::string& theBuildingGroup) const;
 	[[nodiscard]] const int getInfrastuctureCost(const std::string& theBuildingGroup) const;
 
 
   private:
-	void registerKeywords();
-	void setInfrastructureCosts();
-
 	const std::shared_ptr<BuildingGroup> getBuildingGroup(const std::string& theBuildingGroup) const;
 
 	std::map<std::string, std::shared_ptr<BuildingGroup>> buildingGroups;
