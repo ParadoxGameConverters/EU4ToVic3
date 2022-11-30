@@ -1,19 +1,17 @@
 #ifndef BUILDING_GROUP_LOADER_H
 #define BUILDING_GROUP_LOADER_H
-#include "BuildingGroups.h"
 #include "Parser.h"
-
 
 namespace V3
 {
+class BuildingGroups;
 class BuildingGroupLoader: commonItems::parser
 {
   public:
 	BuildingGroupLoader();
 
 	void loadBuildingGroups(const std::string& v3Path);
-	[[nodiscard]] std::shared_ptr<BuildingGroups> getBuildingGroups() { return buildingGroups; }
-
+	[[nodiscard]] std::shared_ptr<BuildingGroups> getBuildingGroups() const { return buildingGroups; }
 
   private:
 	void registerKeys();

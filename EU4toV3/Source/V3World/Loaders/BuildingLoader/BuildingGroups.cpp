@@ -1,4 +1,5 @@
 #include "BuildingGroups.h"
+#include "BuildingGroup.h"
 #include "Log.h"
 #include <ranges>
 
@@ -15,6 +16,11 @@ void V3::BuildingGroups::setInfrastructureCosts()
 	}
 }
 
+void V3::BuildingGroups::addBuildingGroup(std::shared_ptr<BuildingGroup> theBuildingGroup)
+{
+	buildingGroups[theBuildingGroup->getName()] = theBuildingGroup;
+}
+
 const std::string& V3::BuildingGroups::getParentName(const std::string& theBuildingGroupName) const
 {
 	return buildingGroups.at(theBuildingGroupName)->getParentName();
@@ -25,17 +31,17 @@ const std::string& V3::BuildingGroups::safeGetParentName(const std::string& theB
 	return safeGetBuildingGroup(theBuildingGroupName)->getParentName();
 }
 
-const int V3::BuildingGroups::getInfrastructureCost(const std::string& theBuildingGroupName) const
+int V3::BuildingGroups::getInfrastructureCost(const std::string& theBuildingGroupName) const
 {
 	return buildingGroups.at(theBuildingGroupName)->getInfrastructureCost();
 }
 
-const int V3::BuildingGroups::safeGetInfrastructureCost(const std::string& theBuildingGroupName) const
+int V3::BuildingGroups::safeGetInfrastructureCost(const std::string& theBuildingGroupName) const
 {
 	return safeGetBuildingGroup(theBuildingGroupName)->getInfrastructureCost();
 }
 
-const std::shared_ptr<V3::BuildingGroup> V3::BuildingGroups::safeGetBuildingGroup(const std::string& theBuildingGroupName) const
+std::shared_ptr<V3::BuildingGroup> V3::BuildingGroups::safeGetBuildingGroup(const std::string& theBuildingGroupName) const
 {
 	const auto& possibleBuildingGroup = buildingGroups.find(theBuildingGroupName);
 	if (possibleBuildingGroup != buildingGroups.end())

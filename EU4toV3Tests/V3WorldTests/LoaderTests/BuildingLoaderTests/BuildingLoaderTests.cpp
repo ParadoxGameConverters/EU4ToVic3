@@ -1,11 +1,12 @@
-#include "EconomyManager/BuildingLoader/BuildingGroupLoader.h"
+#include "Loaders/BuildingLoader/BuildingGroupLoader.h"
+#include "Loaders/BuildingLoader/BuildingGroups.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
 TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderCanLoadBuildingGroups)
 {
 	V3::BuildingGroupLoader buildingGroupLoader;
-	auto buildingGroups = buildingGroupLoader.getBuildingGroups();
+	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
 	EXPECT_EQ(buildingGroups->getBuildingGroupMap().size(), 0);
 	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
 	EXPECT_EQ(buildingGroups->getBuildingGroupMap().size(), 6);
@@ -14,7 +15,7 @@ TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderCanLoadBuildingGroups)
 TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderTracksHierarchy)
 {
 	V3::BuildingGroupLoader buildingGroupLoader;
-	auto buildingGroups = buildingGroupLoader.getBuildingGroups();
+	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
 	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
 
 	EXPECT_TRUE(buildingGroups->getParentName("bg_manufacturing").empty());
@@ -28,7 +29,7 @@ TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderTracksHierarchy)
 TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderSetsInfrastructureInheritance)
 {
 	V3::BuildingGroupLoader buildingGroupLoader;
-	auto buildingGroups = buildingGroupLoader.getBuildingGroups();
+	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
 	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
 
 	EXPECT_EQ(buildingGroups->getInfrastructureCost("bg_manufacturing"), 0);
@@ -42,7 +43,7 @@ TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderSetsInfrastructureInhe
 TEST(V3World_BuildingGroupLoaderTests, BadKeyReturnsDefaultValuesAndIsLogged)
 {
 	V3::BuildingGroupLoader buildingGroupLoader;
-	auto buildingGroups = buildingGroupLoader.getBuildingGroups();
+	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
 	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
 
 	std::stringstream log;

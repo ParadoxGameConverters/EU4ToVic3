@@ -559,6 +559,18 @@
     <ClCompile Include="V3WorldTests\PoliticalManagerTests\CountryTests\CountryTests.cpp">
       <Filter>V3WorldTests\PoliticalManagerTests\CountryTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingGroup.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\BuildingLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingGroupLoader.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\BuildingLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingGroups.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\BuildingLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\BuildingLoaderTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\BuildingLoaderTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -927,6 +939,15 @@
     <Filter Include="V3WorldTests\PoliticalManagerTests\CountryTests">
       <UniqueIdentifier>{8f2c6daa-0d7b-446b-9f4a-cf6d26bb1429}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\V3World\Loaders\BuildingLoader">
+      <UniqueIdentifier>{c96836dd-e246-49d2-8d10-0b87b1df5efa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\LoaderTests\BuildingLoaderTests">
+      <UniqueIdentifier>{f10838b2-8c07-41e8-85f4-1a5dda945e80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\building_groups">
+      <UniqueIdentifier>{bf10684e-caf1-401b-9205-852794559d16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1056,6 +1077,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\pops\pops2.txt">
       <Filter>TestFiles\vic3installation\game\common\history\pops</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\building_groups\test_building_groups.txt">
+      <Filter>TestFiles\vic3installation\game\common\building_groups</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

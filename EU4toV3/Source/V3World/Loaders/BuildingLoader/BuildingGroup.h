@@ -12,9 +12,9 @@ class BuildingGroup: commonItems::parser
 	void setName(const std::string& theName) { name = theName; }
 	void setInfrastructureCost(int theCost) { infrastructureCost = theCost; }
 
-	[[nodiscard]] const auto& getName() { return name; }
-	[[nodiscard]] const auto& getParentName() { return parent; }
-	[[nodiscard]] const auto& getInfrastructureCost() { return infrastructureCost; }
+	[[nodiscard]] const auto& getName() const { return name; }
+	[[nodiscard]] const auto& getParentName() const { return parent; }
+	[[nodiscard]] const auto& getInfrastructureCost() const { return infrastructureCost; }
 
 
   private:

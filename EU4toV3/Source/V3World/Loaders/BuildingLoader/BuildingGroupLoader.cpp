@@ -1,4 +1,6 @@
 #include "BuildingGroupLoader.h"
+#include "BuildingGroup.h"
+#include "BuildingGroups.h"
 #include "CommonFunctions.h"
 #include "CommonRegexes.h"
 #include "OSCompatibilityLayer.h"
