@@ -1,6 +1,6 @@
 #include "Loaders/SuperRegionLoader/SuperRegionLoader.h"
-#include "Loaders/SuperRegionLoader/V3SuperRegion.h"
 #include "Loaders/SuperRegionLoader/V3Region.h"
+#include "Loaders/SuperRegionLoader/V3SuperRegion.h"
 #include "gtest/gtest.h"
 
 TEST(V3World_V3SuperRegionLoaderTests, superRegionLoaderCanLoadFromDisk)

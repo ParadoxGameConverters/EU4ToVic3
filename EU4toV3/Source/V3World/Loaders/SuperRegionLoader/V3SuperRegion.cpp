@@ -1,7 +1,7 @@
 #include "V3SuperRegion.h"
 #include "CommonRegexes.h"
-#include "V3Region.h"
 #include "Log.h"
+#include "V3Region.h"
 
 void V3::SuperRegion::initializeSuperRegion(std::istream& theStream)
 {

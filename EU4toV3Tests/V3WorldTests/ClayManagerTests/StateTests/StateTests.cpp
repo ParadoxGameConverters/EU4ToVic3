@@ -1,7 +1,7 @@
 #include "ClayManager/ClayManager.h"
+#include "ClayManager/State/Province.h"
 #include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
-#include "ClayManager/State/Province.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
