@@ -7,33 +7,18 @@ V3::SubState::SubState(std::shared_ptr<State> theHomeState, std::shared_ptr<EU4:
 {
 }
 
-const std::string& V3::SubState::getOwnerTag() const
+std::optional<std::string> V3::SubState::getOwnerTag() const
 {
 	if (owner)
-	{
 		return owner->getTag();
-	}
-	else
-	{
-		static const std::string empty = "";
-		Log(LogLevel::Warning) << "Attempted to access the TAG of a nullptr V3 country from a substate. Returning empty TAG.";
-		return empty;
-	}
+	return std::nullopt;
 }
 
-const std::string& V3::SubState::getSourceOwnerTag() const
+std::optional<std::string> V3::SubState::getSourceOwnerTag() const
 {
 	if (sourceOwner)
-	{
-
 		return sourceOwner->getTag();
-	}
-	else
-	{
-		static const std::string empty = "";
-		Log(LogLevel::Warning) << "Attempted to access the TAG of a nullptr EU4 country from a substate. Returning empty TAG.";
-		return empty;
-	}
+	return std::nullopt;
 }
 
 const std::string& V3::SubState::getHomeStateName() const

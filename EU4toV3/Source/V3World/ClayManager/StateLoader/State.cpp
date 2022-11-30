@@ -2,7 +2,7 @@
 #include "CommonRegexes.h"
 #include "Log.h"
 #include "ParserHelpers.h"
-#include "StringUtils.h"
+#include "Province.h"
 #include "V3World/ClayManager/ProvinceTypeCounter.h"
 #include "V3World/ClayManager/SubState.h"
 #include <cmath>
@@ -14,6 +14,9 @@ void V3::State::loadState(std::istream& theStream)
 	registerKeys();
 	parseStream(theStream);
 	clearRegisteredKeywords();
+
+	distributeLandshares();
+	distributeResources();
 }
 
 
@@ -92,15 +95,15 @@ void V3::State::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-void V3::State::distributeLandshares()
+void V3::State::distributeLandshares() const
 {
 	const auto statewideProvinceTypes = countProvinceTypes(provinces);
-	double weightedStatewideProvinces = calculateWeightedProvinceTotals(*statewideProvinceTypes);
+	const double weightedStatewideProvinces = calculateWeightedProvinceTotals(*statewideProvinceTypes);
 
 	for (const auto& substate: substates)
 	{
 		const auto substateCount = countProvinceTypes(substate->getProvinces());
-		double weightedSubstateProvinces = calculateWeightedProvinceTotals(*substateCount);
+		const double weightedSubstateProvinces = calculateWeightedProvinceTotals(*substateCount);
 
 		double substateLandshare = weightedSubstateProvinces / weightedStatewideProvinces;
 		if (substateLandshare < 0.05) // In defines as SPLIT_STATE_MIN_LAND_SHARE
@@ -117,7 +120,7 @@ void V3::State::distributeResources()
 	{
 		for (const auto& [resource, amount]: cappedResources)
 		{
-			substate->setResource(resource, floor(substate->getLandshare() * amount));
+			substate->setResource(resource, static_cast<int>(floor(substate->getLandshare() * amount)));
 		}
 	}
 }
@@ -128,11 +131,11 @@ int V3::State::calculateWeightedProvinceTotals(const ProvinceTypeCounter& theCou
 	return theCount.every + (5 - 1) * theCount.prime - theCount.impassable;
 }
 
-const std::unique_ptr<V3::ProvinceTypeCounter> V3::State::countProvinceTypes(ProvinceMap provinces)
+std::unique_ptr<V3::ProvinceTypeCounter> V3::State::countProvinceTypes(ProvinceMap provinces)
 {
 	auto typeCounter = std::make_unique<V3::ProvinceTypeCounter>();
 
-	typeCounter->every = provinces.size();
+	typeCounter->every = static_cast<int>(provinces.size());
 	for (const auto& province: std::views::values(provinces))
 	{
 		if (province->isPrime())
@@ -153,4 +156,20 @@ std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& province
 	if (provinces.contains(provinceName))
 		return provinces.at(provinceName);
 	return nullptr;
+}
+
+bool V3::State::isSea() const
+{
+	return std::ranges::any_of(provinces.begin(), provinces.end(), [](const std::pair<std::string, std::shared_ptr<Province>>& province) {
+		return province.second->isSea();
+	});
+}
+
+bool V3::State::isLake() const
+{
+	// We allow for a lakes to be mismapped along regular provinces as vanilla has a few lakes so mismapped.
+
+	return std::ranges::all_of(provinces.begin(), provinces.end(), [](const std::pair<std::string, std::shared_ptr<Province>>& province) {
+		return province.second->isLake();
+	});
 }

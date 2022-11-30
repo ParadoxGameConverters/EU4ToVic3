@@ -50,23 +50,27 @@ bool mappers::CountryMapper::tagIsNonCanon(const std::string& tag)
 
 std::string mappers::CountryMapper::generateNewTag()
 {
-	std::ostringstream generatedV3TagStream;
-	generatedV3TagStream << generatedV3TagPrefix << std::setfill('0') << std::setw(2) << generatedV3TagSuffix;
-	const auto& v3Tag = generatedV3TagStream.str();
-
-	++generatedV3TagSuffix;
-	if (generatedV3TagSuffix > 99)
+	std::string v3Tag;
+	do
 	{
-		generatedV3TagSuffix = 0;
-		--generatedV3TagPrefix;
-	}
+		std::ostringstream generatedV3TagStream;
+		generatedV3TagStream << generatedV3TagPrefix << std::setfill('0') << std::setw(2) << generatedV3TagSuffix;
+		v3Tag = generatedV3TagStream.str();
+
+		++generatedV3TagSuffix;
+		if (generatedV3TagSuffix > 99)
+		{
+			generatedV3TagSuffix = 0;
+			--generatedV3TagPrefix;
+		}
+	} while (tagIsAlreadyAssigned(v3Tag));
 
 	return v3Tag;
 }
 
 bool mappers::CountryMapper::tagIsAlreadyAssigned(const std::string& v3Tag) const
 {
-	return v3TagToEU4TagMap.contains(v3Tag);
+	return v3TagToEU4TagMap.contains(v3Tag) || unmappedV3Tags.contains(v3Tag);
 }
 
 std::optional<std::string> mappers::CountryMapper::getV3Tag(const std::string& eu4Tag) const
@@ -185,5 +189,12 @@ std::string mappers::CountryMapper::mapToTag(const std::string& eu4Tag, const st
 	if (flagCode)
 		v3FlagCodes.emplace(newTag, *flagCode);
 
+	return newTag;
+}
+
+std::string mappers::CountryMapper::requestNewV3Tag()
+{
+	auto newTag = generateNewTag();
+	unmappedV3Tags.emplace(newTag);
 	return newTag;
 }

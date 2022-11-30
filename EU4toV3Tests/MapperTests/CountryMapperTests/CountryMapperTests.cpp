@@ -7,7 +7,7 @@ TEST(Mappers_CountryMapperTests, rulesCanBeLoadedInOrder)
 	mappers::CountryMapper mapper;
 	mapper.loadMappingRules("TestFiles/configurables/country_mappings.txt");
 
-	EXPECT_EQ(12, mapper.getMappingRules().size());
+	EXPECT_EQ(13, mapper.getMappingRules().size());
 	const auto& rule1 = mapper.getMappingRules()[0];
 	EXPECT_EQ("TA1", *rule1.getEU4Tag());
 	EXPECT_EQ("GA1", *rule1.getV3Tag());
@@ -231,4 +231,32 @@ TEST(Mappers_CountryMapperTests, tagIsNonCanonWorksAsAdvertised)
 	EXPECT_FALSE(mappers::CountryMapper::tagIsNonCanon("0C0"));
 	EXPECT_FALSE(mappers::CountryMapper::tagIsNonCanon("0CC"));
 	EXPECT_FALSE(mappers::CountryMapper::tagIsNonCanon("00C"));
+}
+
+TEST(Mappers_CountryMapperTests, newTagCanBeRequested)
+{
+	mappers::CountryMapper mapper;
+
+	auto tag = mapper.requestNewV3Tag();
+	EXPECT_EQ("X00", tag);
+	tag = mapper.requestNewV3Tag();
+	EXPECT_EQ("X01", tag);
+	tag = mapper.requestNewV3Tag();
+	EXPECT_EQ("X02", tag);
+}
+
+TEST(Mappers_CountryMapperTests, tagGeneratorWillSkipCollisions)
+{
+	const auto country1 = std::make_shared<EU4::Country>();
+	country1->setTag("Y00"); // will map to X01
+
+	mappers::CountryMapper mapper;
+	mapper.loadMappingRules("TestFiles/configurables/country_mappings.txt");
+	auto tag = mapper.assignV3TagToEU4Country(country1);
+	EXPECT_EQ("X01", tag);
+
+	tag = mapper.requestNewV3Tag();
+	EXPECT_EQ("X00", tag);
+	tag = mapper.requestNewV3Tag();
+	EXPECT_EQ("X02", tag);
 }

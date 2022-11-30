@@ -89,7 +89,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaStates)
 
 	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
 
-	EXPECT_EQ(9, clayManager.getStates().size());
+	EXPECT_EQ(10, clayManager.getStates().size());
 	EXPECT_TRUE(clayManager.getStates().contains("STATE_TEST_1"));
 	EXPECT_TRUE(clayManager.getStates().contains("STATE_TEST_2"));
 	EXPECT_TRUE(clayManager.getStates().contains("STATE_TEST_3"));
@@ -102,8 +102,9 @@ TEST(V3World_ClayManagerTests, clayManagerCanLoadTerrainsIntoStateProvinces)
 	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
 	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
 
+	const auto& state1 = clayManager.getStates().at("STATE_TEST_LAKE");
+	const auto& province1 = state1->getProvinces().at("xAABBCC");
 	const auto& state2 = clayManager.getStates().at("STATE_TEST_2");
-	const auto& province1 = state2->getProvinces().at("xAABBCC");
 	const auto& province2 = state2->getProvinces().at("xDDEEFF");
 
 	EXPECT_EQ("lakes", province1->getTerrain());
@@ -116,8 +117,9 @@ TEST(V3World_ClayManagerTests, oceanProvincesGetFlaggedAsSeas)
 	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
 	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
 
+	const auto& state1 = clayManager.getStates().at("STATE_TEST_LAKE");
+	const auto& province1 = state1->getProvinces().at("xAABBCC");
 	const auto& state2 = clayManager.getStates().at("STATE_TEST_2");
-	const auto& province1 = state2->getProvinces().at("xAABBCC");
 	const auto& province2 = state2->getProvinces().at("xDDEEFF");
 
 	EXPECT_FALSE(province1->isSea());
@@ -130,8 +132,9 @@ TEST(V3World_ClayManagerTests, lakeProvincesGetFlaggedAsLakesandImpassables)
 	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
 	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
 
+	const auto& state1 = clayManager.getStates().at("STATE_TEST_LAKE");
+	const auto& province1 = state1->getProvinces().at("xAABBCC");
 	const auto& state2 = clayManager.getStates().at("STATE_TEST_2");
-	const auto& province1 = state2->getProvinces().at("xAABBCC");
 	const auto& province2 = state2->getProvinces().at("xDDEEFF");
 
 	EXPECT_TRUE(province1->isLake());
@@ -471,7 +474,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanProduceSubstatesFromChunks)
 	EXPECT_EQ("STATE_TEST_LAND2", substate2->getHomeStateName());
 
 	EXPECT_FALSE(substate3->getSourceOwner());
-	EXPECT_TRUE(substate3->getSourceOwnerTag().empty());
+	EXPECT_FALSE(substate3->getSourceOwnerTag());
 	EXPECT_EQ(1, substate3->getProvinces().size());
 	EXPECT_TRUE(substate3->getProvinces().contains("x000005"));
 	EXPECT_EQ("STATE_TEST_LAND3", substate3->getHomeStateName());
@@ -550,12 +553,12 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	EXPECT_FALSE(substate3->getSourceOwner());
 	EXPECT_EQ(1, substate3->getProvinces().size());
 	EXPECT_TRUE(substate3->getProvinces().contains("x000005"));
-	EXPECT_TRUE(substate3->getOwnerTag().empty());
+	EXPECT_FALSE(substate3->getOwnerTag());
 	EXPECT_EQ("STATE_TEST_LAND3", substate3->getHomeStateName());
 	EXPECT_FALSE(substate3->getOwner());
 	// linkback to this substate through owner substates vector is impossible.
 	// linkback through state's substate ownership vector
-	EXPECT_TRUE(substate3->getHomeState()->getSubStates()[0]->getSourceOwnerTag().empty());
+	EXPECT_FALSE(substate3->getHomeState()->getSubStates()[0]->getSourceOwnerTag());
 
 	ASSERT_TRUE(substate4->getSourceOwner());
 	EXPECT_EQ("TA9", substate4->getSourceOwner()->getTag());

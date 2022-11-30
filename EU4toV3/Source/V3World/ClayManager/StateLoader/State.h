@@ -15,7 +15,7 @@ class State: commonItems::parser
 	void loadState(std::istream& theStream);
 	void setStateName(const std::string& theName) { name = theName; }
 	void addSubState(const std::shared_ptr<SubState>& substate) { substates.push_back(substate); }
-	void distributeLandshares();
+	void distributeLandshares() const;
 	void distributeResources();
 	void setVanillaPops(const auto& thePops) { vanillaPops = thePops; }
 
@@ -24,6 +24,8 @@ class State: commonItems::parser
 	[[nodiscard]] std::shared_ptr<Province> getProvince(const std::string& provinceName) const;
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
 	[[nodiscard]] bool isCoastal() const { return coastal; }
+	[[nodiscard]] bool isSea() const;
+	[[nodiscard]] bool isLake() const; // yes, an entire state can be a lake.
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
 	[[nodiscard]] const auto& getTraits() const { return traits; }
 	[[nodiscard]] const auto& getCappedResources() const { return cappedResources; }
@@ -34,7 +36,7 @@ class State: commonItems::parser
 	void registerKeys();
 
 	static int calculateWeightedProvinceTotals(const ProvinceTypeCounter& theCount);
-	static const std::unique_ptr<ProvinceTypeCounter> countProvinceTypes(ProvinceMap provinces);
+	static std::unique_ptr<ProvinceTypeCounter> countProvinceTypes(ProvinceMap provinces);
 
 	bool coastal = false;
 	std::string name;

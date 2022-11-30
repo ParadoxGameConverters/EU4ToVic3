@@ -9,12 +9,13 @@ TEST(V3World_StateLoaderTests, stateLoaderCanLoadStates)
 
 	stateLoader.loadStates("TestFiles/vic3installation/game/");
 
-	EXPECT_EQ(9, stateLoader.getStates().size());
+	EXPECT_EQ(10, stateLoader.getStates().size());
 
 	const auto& state1 = stateLoader.getStates().at("STATE_TEST_1");
 	const auto& state2 = stateLoader.getStates().at("STATE_TEST_2");
 	const auto& state3 = stateLoader.getStates().at("STATE_TEST_3");
 	const auto& state4 = stateLoader.getStates().at("STATE_TEST_4");
+	const auto& state5 = stateLoader.getStates().at("STATE_TEST_LAKE");
 
 	EXPECT_TRUE(state1->isCoastal());
 	EXPECT_EQ("STATE_TEST_1", state1->getName());
@@ -24,7 +25,6 @@ TEST(V3World_StateLoaderTests, stateLoaderCanLoadStates)
 
 	EXPECT_FALSE(state2->isCoastal());
 	EXPECT_EQ("STATE_TEST_2", state2->getName());
-	EXPECT_TRUE(state2->containsProvince("xAABBCC"));
 	EXPECT_TRUE(state2->containsProvince("xDDEEFF"));
 
 	EXPECT_TRUE(state3->isCoastal());
@@ -37,6 +37,10 @@ TEST(V3World_StateLoaderTests, stateLoaderCanLoadStates)
 	EXPECT_EQ("STATE_TEST_4", state4->getName());
 	EXPECT_TRUE(state4->containsProvince("x345678"));
 	EXPECT_TRUE(state4->containsProvince("x9ABCDE"));
+
+	EXPECT_FALSE(state5->isCoastal());
+	EXPECT_EQ("STATE_TEST_LAKE", state5->getName());
+	EXPECT_TRUE(state5->containsProvince("xAABBCC"));
 }
 
 TEST(V3World_StateLoaderTests, nonTXTfilesAreIgnored)
@@ -47,7 +51,7 @@ TEST(V3World_StateLoaderTests, nonTXTfilesAreIgnored)
 
 	stateLoader.loadStates("TestFiles/vic3installation/game/");
 
-	EXPECT_EQ(9, stateLoader.getStates().size());
+	EXPECT_EQ(10, stateLoader.getStates().size());
 
 	EXPECT_FALSE(stateLoader.getStates().contains("STATE_TEST_5"));
 }
