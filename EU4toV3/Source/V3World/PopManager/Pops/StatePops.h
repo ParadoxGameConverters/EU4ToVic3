@@ -1,6 +1,7 @@
 #ifndef STATE_POPS_H
 #define STATE_POPS_H
 #include "SubStatePops.h"
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -17,6 +18,8 @@ class StatePops
 	[[nodiscard]] int getPopCount() const;
 	[[nodiscard]] const auto& getSubStatePops() const { return subStatePops; }
 	[[nodiscard]] const auto& getStateName() const { return stateName; }
+
+	[[nodiscard]] std::optional<std::string> getDominantCulture() const;
 
   private:
 	std::string stateName;

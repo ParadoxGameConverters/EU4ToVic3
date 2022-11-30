@@ -1,6 +1,5 @@
 #ifndef V3_COUNTRY_H
 #define V3_COUNTRY_H
-#include "ClayManager/SubState.h"
 #include "Parser.h"
 #include <CountryManager/EU4Country.h>
 #include <memory>
@@ -32,6 +31,7 @@ struct ProcessedData
 	std::map<std::string, std::string> adjectivesByLanguage; // language, adj
 };
 
+class SubState;
 class Country: commonItems::convenientParser
 {
   public:
@@ -46,13 +46,13 @@ class Country: commonItems::convenientParser
 	[[nodiscard]] const auto& getProcessedData() const { return processedData; }
 	[[nodiscard]] const auto& getSourceCountry() const { return sourceCountry; }
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
-	void addSubState(const std::shared_ptr<SubState>& substate) { substates.push_back(substate); }
+	void addSubState(const std::shared_ptr<SubState>& subState) { substates.push_back(subState); }
+	void setSubStates(const std::vector<std::shared_ptr<SubState>>& subStates) { substates = subStates; }
 	void copyVanillaData();
+	void setProcessedData(const ProcessedData& data) { processedData = data; }
 
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
-
-	friend std::ostream& operator<<(std::ostream& output, const Country& country);
 
   private:
 	void registerKeys();
