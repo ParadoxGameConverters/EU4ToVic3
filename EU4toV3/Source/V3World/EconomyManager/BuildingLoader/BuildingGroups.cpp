@@ -9,7 +9,7 @@ void V3::BuildingGroups::setInfrastructureCosts()
 		std::string parentGroupName = buildingGroup->getParent();
 		while (buildingGroup->getInfrastructureCost() == 0 && !parentGroupName.empty())
 		{
-			buildingGroup->setInfrastructureCost(getInfrastuctureCost(parentGroupName));
+			buildingGroup->setInfrastructureCost(getInfrastructureCost(parentGroupName));
 			parentGroupName = getParent(parentGroupName);
 		}
 	}
@@ -20,7 +20,7 @@ const std::string& V3::BuildingGroups::getParent(const std::string& theBuildingG
 	return getBuildingGroup(theBuildingGroupName)->getParent();
 }
 
-const int V3::BuildingGroups::getInfrastuctureCost(const std::string& theBuildingGroupName) const
+const int V3::BuildingGroups::getInfrastructureCost(const std::string& theBuildingGroupName) const
 {
 	return getBuildingGroup(theBuildingGroupName)->getInfrastructureCost();
 }
