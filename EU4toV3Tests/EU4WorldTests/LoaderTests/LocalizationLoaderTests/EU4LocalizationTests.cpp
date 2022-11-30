@@ -4,7 +4,7 @@
 #include <gmock/gmock-matchers.h>
 using testing::UnorderedElementsAre;
 
-TEST(EU4World_LocalizationLoaderTests, localizationsReturnsLocMapForKey)
+EU4::EU4LocalizationLoader prepLoader()
 {
 	std::stringstream input;
 	input << commonItems::utf8BOM << "l_english:\n";
@@ -23,16 +23,49 @@ TEST(EU4World_LocalizationLoaderTests, localizationsReturnsLocMapForKey)
 	locs.loadLocalizations(input2);
 	locs.loadLocalizations(input3);
 
+	return locs;
+}
+
+TEST(EU4World_LocalizationLoaderTests, localizationsReturnsLocMapForKey)
+{
+	const auto locs = prepLoader();
+
 	EXPECT_THAT(*locs.getTextInEachLanguage("key1"),
 		 testing::UnorderedElementsAre(testing::Pair("english", "replaced value 1"), testing::Pair("french", "valuee 1")));
 	EXPECT_THAT(*locs.getTextInEachLanguage("key2"),
 		 testing::UnorderedElementsAre(testing::Pair("english", "value \"subquoted\" 2"), testing::Pair("french", "valuee \"subquoted\" 2")));
 }
 
-TEST(EU4World_LocalizationLoaderTests, localizationsReturnsNulloptMapForMissingKey)
+TEST(EU4World_LocalizationLoaderTests, localizationsReturnsLocValueForKey)
 {
-	const EU4::EU4LocalizationLoader locs;
-	const auto& locMap = locs.getTextInEachLanguage("key1");
+	const auto locs = prepLoader();
+
+	EXPECT_EQ("replaced value 1", locs.getTextForKey("key1", "english"));
+	EXPECT_EQ("valuee \"subquoted\" 2", locs.getTextForKey("key2", "french"));
+}
+
+TEST(EU4World_LocalizationLoaderTests, localizationsReturnsEnglishWhenStuck)
+{
+	const auto locs = prepLoader();
+
+	EXPECT_EQ("replaced value 1", *locs.getTextForKey("key1", "alien"));
+	EXPECT_EQ("value \"subquoted\" 2", *locs.getTextForKey("key2", "alien"));
+}
+
+TEST(EU4World_LocalizationLoaderTests, localizationsReturnsNulloptMapForMissingKeyMap)
+{
+	const auto locs = prepLoader();
+
+	const auto& locMap = locs.getTextInEachLanguage("key3");
 
 	EXPECT_FALSE(locMap);
+}
+
+TEST(EU4World_LocalizationLoaderTests, localizationsReturnsNulloptMapForMissingKey)
+{
+	const auto locs = prepLoader();
+
+	const auto& value = locs.getTextForKey("key3", "english");
+
+	EXPECT_FALSE(value);
 }

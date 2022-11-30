@@ -1,7 +1,12 @@
 #include "ClayManager/ClayManager.h"
+#include "ClayManager/State/SubState.h"
+#include "CountryManager/EU4Country.h"
 #include "CountryMapper/CountryMapper.h"
 #include "CultureLoader/CultureLoader.h"
 #include "CultureMapper/CultureMapper.h"
+#include "Loaders/LocLoader/LocalizationLoader.h"
+#include "Loaders/LocalizationLoader/EU4LocalizationLoader.h"
+#include "PoliticalManager/Country/Country.h"
 #include "PoliticalManager/PoliticalManager.h"
 #include "PopManager/PopManager.h"
 #include "ProvinceManager/ProvinceManager.h"
@@ -93,7 +98,6 @@ prepMappers()
 	politicalManager.initializeVanillaCountries(V3Path);
 	politicalManager.loadCountryMapper(countryMapper);
 	politicalManager.importEU4Countries(countries);
-	politicalManager.importVanillaCountries();
 
 	return std::tuple{politicalManager, popManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader};
 }
@@ -143,8 +147,12 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanImportCountries)
 	EXPECT_EQ("TA9", country3->getSourceCountry()->getTag());
 }
 
-TEST(V3World_PoliticalManagerTests, PoliticalManagerCanImportVanillaCountries)
+TEST(V3World_PoliticalManagerTests, PoliticalManagerCanConvertVanillaCountries)
 {
+	const V3::ClayManager clayManager;
+	const EU4::EU4LocalizationLoader eu4LocLoader;
+	const V3::LocalizationLoader v3LocLoader;
+
 	const auto countryMapper = std::make_shared<mappers::CountryMapper>();
 	countryMapper->loadMappingRules("TestFiles/configurables/country_mappings.txt");
 
@@ -177,7 +185,7 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanImportVanillaCountries)
 	EXPECT_FALSE(country5->getProcessedData().color);
 	EXPECT_FALSE(country6->getProcessedData().color);
 
-	politicalManager.importVanillaCountries(); // now we process only the 3 vanilla countries.
+	politicalManager.convertAllCountries(clayManager, v3LocLoader, eu4LocLoader); // now we process only the 3 vanilla countries.
 
 	EXPECT_FALSE(country1->getProcessedData().color); // these 3 eu4 countries still have no color.
 	EXPECT_FALSE(country2->getProcessedData().color);
@@ -209,4 +217,18 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanGenerateDecentralizedCoun
 
 	// culture is based on original population of STATE_TEST_LAND3 in vanilla installation, thus, swedish.
 	EXPECT_TRUE(x01->getProcessedData().cultures.contains("swedish"));
+}
+
+TEST(V3World_PoliticalManagerTests, DecentralizedCountriesCanBeFilled)
+{
+	auto [politicalManager, popManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
+
+	politicalManager.generateDecentralizedCountries(clayManager, popManager);
+	politicalManager.convertAllCountries(clayManager, V3::LocalizationLoader(), EU4::EU4LocalizationLoader());
+
+	ASSERT_TRUE(politicalManager.getCountries().contains("X01"));
+	const auto& x01 = politicalManager.getCountries().at("X01");
+
+	// Name is "generated". Don't need locmappers for simple capitalization example.
+	EXPECT_EQ("Swedish Federation", x01->getName("english"));
 }

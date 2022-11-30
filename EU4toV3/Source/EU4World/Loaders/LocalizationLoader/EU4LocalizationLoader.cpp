@@ -62,6 +62,22 @@ std::optional<std::map<std::string, std::string>> EU4::EU4LocalizationLoader::ge
 		return keyFindIter->second;
 }
 
+std::optional<std::string> EU4::EU4LocalizationLoader::getTextForKey(const std::string& key, const std::string& language) const
+{
+	const auto& keyFindIter = localizations.find(key);
+	if (keyFindIter == localizations.end())
+		return std::nullopt;
+
+	const auto& locMap = keyFindIter->second;
+	if (locMap.contains(language))
+		return locMap.at(language);
+	if (locMap.contains("english"))
+		return locMap.at("english");
+
+	// If we don't have anything but korean, we might as well not respond.
+	return std::nullopt;
+}
+
 std::optional<std::string> EU4::EU4LocalizationLoader::determineLanguageForFile(const std::string& text)
 {
 	if (text.size() < 2 || text[0] != 'l' || text[1] != '_')

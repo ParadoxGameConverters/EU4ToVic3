@@ -1,8 +1,11 @@
 #include "PopManager.h"
 #include "ClayManager/ClayManager.h"
+#include "ClayManager/State/Chunk.h"
+#include "ClayManager/State/State.h"
+#include "ClayManager/State/SubState.h"
 #include "CultureMapper/CultureMapper.h"
+#include "Loaders/PopLoader/PopLoader.h"
 #include "Log.h"
-#include "PopLoader/PopLoader.h"
 #include "ReligionMapper/ReligionMapper.h"
 #include <numeric>
 #include <ranges>
@@ -23,6 +26,8 @@ void V3::PopManager::initializeVanillaPops(const std::string& v3Path)
 
 void V3::PopManager::assignVanillaPopsToStates(const ClayManager& clayManager)
 {
+	Log(LogLevel::Info) << "-> Assigning vanilla pops to states.";
+
 	for (const auto& [stateName, statePops]: vanillaStatePops)
 	{
 		if (!clayManager.getStates().contains(stateName))
@@ -36,6 +41,8 @@ void V3::PopManager::assignVanillaPopsToStates(const ClayManager& clayManager)
 
 void V3::PopManager::importDemographics(const ClayManager& clayManager) const
 {
+	Log(LogLevel::Info) << "-> Importing EU4 demographics.";
+
 	for (const auto& chunk: clayManager.getChunks())
 		chunk->importDemographics();
 }
@@ -46,6 +53,8 @@ void V3::PopManager::convertDemographics(const ClayManager& clayManager,
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader) const
 {
+	Log(LogLevel::Info) << "-> Converting EU4 demographics.";
+
 	// All the substates have demographics, and using regional data we can convert them into Vic3 counterparts.
 
 	for (const auto& [stateName, state]: clayManager.getStates())

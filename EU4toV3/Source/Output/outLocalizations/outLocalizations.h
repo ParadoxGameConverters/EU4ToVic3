@@ -1,6 +1,6 @@
 #ifndef OUT_LOCALIZATIONS_H
 #define OUT_LOCALIZATIONS_H
-#include "PoliticalManager/CountryDefinitionLoader/Country.h"
+#include "PoliticalManager/Country/Country.h"
 
 namespace OUT
 {

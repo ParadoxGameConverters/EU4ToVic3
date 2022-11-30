@@ -1,6 +1,6 @@
 #ifndef OUT_COMMON_COUNTRIES_H
 #define OUT_COMMON_COUNTRIES_H
-#include "PoliticalManager/CountryDefinitionLoader/Country.h"
+#include "PoliticalManager/Country/Country.h"
 
 namespace OUT
 {
