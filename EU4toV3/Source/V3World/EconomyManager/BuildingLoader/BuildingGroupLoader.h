@@ -9,7 +9,7 @@ namespace V3
 class BuildingGroupLoader: commonItems::parser
 {
   public:
-	BuildingGroupLoader() = default;
+	BuildingGroupLoader();
 
 	void loadBuildingGroups(const std::string& v3Path);
 	[[nodiscard]] std::shared_ptr<BuildingGroups> getBuildingGroups() { return buildingGroups; }

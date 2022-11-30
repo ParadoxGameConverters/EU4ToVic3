@@ -19,12 +19,13 @@ class BuildingGroups
 	void addBuildingGroup(std::shared_ptr<BuildingGroup> theBuildingGroup) { buildingGroups[theBuildingGroup->getName()] = theBuildingGroup; }
 	void setInfrastructureCosts();
 
-	[[nodiscard]] const std::string& getParent(const std::string& theBuildingGroup) const;
-	[[nodiscard]] const int getInfrastuctureCost(const std::string& theBuildingGroup) const;
+	[[nodiscard]] const auto& getBuildingGroupMap() const { return buildingGroups; }
+	[[nodiscard]] const std::string& getParent(const std::string& theBuildingGroupName) const;
+	[[nodiscard]] const int getInfrastuctureCost(const std::string& theBuildingGroupName) const;
 
 
   private:
-	const std::shared_ptr<BuildingGroup> getBuildingGroup(const std::string& theBuildingGroup) const;
+	const std::shared_ptr<BuildingGroup> getBuildingGroup(const std::string& theBuildingGroupName) const;
 
 	std::map<std::string, std::shared_ptr<BuildingGroup>> buildingGroups;
 };

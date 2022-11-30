@@ -15,26 +15,26 @@ void V3::BuildingGroups::setInfrastructureCosts()
 	}
 }
 
-const std::string& V3::BuildingGroups::getParent(const std::string& theBuildingGroup) const
+const std::string& V3::BuildingGroups::getParent(const std::string& theBuildingGroupName) const
 {
-	return getBuildingGroup(theBuildingGroup)->getParent();
+	return getBuildingGroup(theBuildingGroupName)->getParent();
 }
 
-const int V3::BuildingGroups::getInfrastuctureCost(const std::string& theBuildingGroup) const
+const int V3::BuildingGroups::getInfrastuctureCost(const std::string& theBuildingGroupName) const
 {
-	return getBuildingGroup(theBuildingGroup)->getInfrastructureCost();
+	return getBuildingGroup(theBuildingGroupName)->getInfrastructureCost();
 }
 
-const std::shared_ptr<V3::BuildingGroup> V3::BuildingGroups::getBuildingGroup(const std::string& theBuildingGroup) const
+const std::shared_ptr<V3::BuildingGroup> V3::BuildingGroups::getBuildingGroup(const std::string& theBuildingGroupName) const
 {
-	const auto& possibleBuildingGroup = buildingGroups.find(theBuildingGroup);
+	const auto& possibleBuildingGroup = buildingGroups.find(theBuildingGroupName);
 	if (possibleBuildingGroup != buildingGroups.end())
 	{
 		return possibleBuildingGroup->second;
 	}
 	else
 	{
-		Log(LogLevel::Error) << "Key not recognized: " << theBuildingGroup << " is not a recognized building_group. Using an empty group in its place.";
+		Log(LogLevel::Error) << "Key not recognized: " << theBuildingGroupName << " is not a recognized building_group. Using an empty group in its place.";
 		return std::move(std::make_unique<BuildingGroup>());
 	}
 }

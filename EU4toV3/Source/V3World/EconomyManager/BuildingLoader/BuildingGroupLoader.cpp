@@ -4,6 +4,10 @@
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 
+V3::BuildingGroupLoader::BuildingGroupLoader(): buildingGroups(std::make_shared<BuildingGroups>())
+{
+}
+
 void V3::BuildingGroupLoader::loadBuildingGroups(const std::string& v3Path)
 {
 	registerKeys();

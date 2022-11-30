@@ -1,4 +1,5 @@
 #include "BuildingGroup.h"
+#include "CommonRegexes.h"
 #include "ParserHelpers.h"
 
 void V3::BuildingGroup::loadBuildingGroup(std::istream& theStream)
@@ -16,4 +17,5 @@ void V3::BuildingGroup::registerKeys()
 	registerKeyword("infrastructure_usage_per_level", [this](std::istream& theStream) {
 		infrastructureCost = commonItems::getInt(theStream);
 	});
+	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
