@@ -553,6 +553,18 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\Pops\SubStatePops.cpp">
       <Filter>ConverterFiles\V3World\PopManager\Pops</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\BuildingLoader\BuildingGroup.cpp">
+      <Filter>ConverterFiles\V3World\EconomyManager\BuildingLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\BuildingLoader\BuildingGroupLoader.cpp">
+      <Filter>ConverterFiles\V3World\EconomyManager\BuildingLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\BuildingLoader\BuildingGroups.cpp">
+      <Filter>ConverterFiles\V3World\EconomyManager\BuildingLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingLoaderTests\BuildingLoaderTests.cpp">
+      <Filter>V3WorldTests\EconomyManagerTests\BuildingLoaderTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -897,6 +909,21 @@
     <Filter Include="ConverterFiles\V3World\PopManager\Pops">
       <UniqueIdentifier>{dbedddf7-1a58-4cce-adfb-b387470cedec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\V3World\EconomyManager">
+      <UniqueIdentifier>{fbbf1157-5a51-4851-8591-c7e7067c823b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\EconomyManager\BuildingLoader">
+      <UniqueIdentifier>{e2cde9c0-feea-4ec4-a9f5-cd26e262c1fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\EconomyManagerTests">
+      <UniqueIdentifier>{d180b660-d443-40f3-bd23-7ab6a697881c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\EconomyManagerTests\BuildingLoaderTests">
+      <UniqueIdentifier>{f9ad6392-5bd7-43f8-9035-53c4de4c52b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\building_groups">
+      <UniqueIdentifier>{a77907a4-68fc-4a32-a520-caf25d627201}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1026,6 +1053,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\pops\pops2.txt">
       <Filter>TestFiles\vic3installation\game\common\history\pops</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\building_groups\test_building_groups.txt">
+      <Filter>TestFiles\vic3installation\game\common\building_groups</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>
