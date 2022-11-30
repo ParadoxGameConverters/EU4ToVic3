@@ -14,12 +14,14 @@ class BuildingGroups
 	void setInfrastructureCosts();
 
 	[[nodiscard]] const auto& getBuildingGroupMap() const { return buildingGroups; }
-	[[nodiscard]] const std::string& getParent(const std::string& theBuildingGroupName) const;
+	[[nodiscard]] const std::string& getParentName(const std::string& theBuildingGroupName) const;
+	[[nodiscard]] const std::string& safeGetParentName(const std::string& theBuildingGroupName) const;
 	[[nodiscard]] const int getInfrastructureCost(const std::string& theBuildingGroupName) const;
+	[[nodiscard]] const int safeGetInfrastructureCost(const std::string& theBuildingGroupName) const;
 
 
   private:
-	const std::shared_ptr<BuildingGroup> getBuildingGroup(const std::string& theBuildingGroupName) const;
+	const std::shared_ptr<BuildingGroup> safeGetBuildingGroup(const std::string& theBuildingGroupName) const;
 
 	std::map<std::string, std::shared_ptr<BuildingGroup>> buildingGroups;
 };

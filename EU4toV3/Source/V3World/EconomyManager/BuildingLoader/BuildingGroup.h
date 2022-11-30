@@ -13,14 +13,14 @@ class BuildingGroup: commonItems::parser
 	void setInfrastructureCost(int theCost) { infrastructureCost = theCost; }
 
 	[[nodiscard]] const auto& getName() { return name; }
-	[[nodiscard]] const auto& getParent() { return parent; }
+	[[nodiscard]] const auto& getParentName() { return parent; }
 	[[nodiscard]] const auto& getInfrastructureCost() { return infrastructureCost; }
 
 
   private:
 	void registerKeys();
 	std::string name;
-	std::string parent = "";
+	std::string parent;
 	int infrastructureCost = 0;
 };
 } // namespace V3

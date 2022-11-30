@@ -17,12 +17,12 @@ TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderTracksHierarchy)
 	auto buildingGroups = buildingGroupLoader.getBuildingGroups();
 	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
 
-	EXPECT_TRUE(buildingGroups->getParent("bg_manufacturing").empty());
-	EXPECT_EQ(buildingGroups->getParent("bg_light_industry"), "bg_manufacturing");
-	EXPECT_EQ(buildingGroups->getParent("bg_heavy_industry"), "bg_manufacturing");
-	EXPECT_EQ(buildingGroups->getParent("bg_ultra_industry"), "bg_heavy_industry");
-	EXPECT_EQ(buildingGroups->getParent("bg_mega_industry"), "bg_ultra_industry");
-	EXPECT_EQ(buildingGroups->getParent("bg_giga_industry"), "bg_mega_industry");
+	EXPECT_TRUE(buildingGroups->getParentName("bg_manufacturing").empty());
+	EXPECT_EQ(buildingGroups->getParentName("bg_light_industry"), "bg_manufacturing");
+	EXPECT_EQ(buildingGroups->getParentName("bg_heavy_industry"), "bg_manufacturing");
+	EXPECT_EQ(buildingGroups->getParentName("bg_ultra_industry"), "bg_heavy_industry");
+	EXPECT_EQ(buildingGroups->getParentName("bg_mega_industry"), "bg_ultra_industry");
+	EXPECT_EQ(buildingGroups->getParentName("bg_giga_industry"), "bg_mega_industry");
 }
 
 TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderSetsInfrastructureInheritance)
@@ -49,8 +49,8 @@ TEST(V3World_BuildingGroupLoaderTests, BadKeyReturnsDefaultValuesAndIsLogged)
 	std::streambuf* cout_buffer = std::cout.rdbuf();
 	std::cout.rdbuf(log.rdbuf());
 
-	const std::string& parentName = buildingGroups->getParent("not_a_key0");
-	const int infrastructureCost = buildingGroups->getInfrastructureCost("not_a_key1");
+	const std::string& parentName = buildingGroups->safeGetParentName("not_a_key0");
+	const int infrastructureCost = buildingGroups->safeGetInfrastructureCost("not_a_key1");
 
 	EXPECT_THAT(log.str(),
 		 testing::HasSubstr(R"( [ERROR] Key not recognized: not_a_key0 is not a recognized building_group. Using an empty group in its place.)"));
