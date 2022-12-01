@@ -23,6 +23,7 @@ class CountryManager: public commonItems::parser
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& tag) const;
 	[[nodiscard]] const auto& getHistoricalData() const { return historicalData; }
+	[[nodiscard]] const auto& getLocalizationLoader() const { return localizationLoader; }
 
 	// the prep
 	void loadUnitTypes(const std::string& EU4Path, const Mods& mods);

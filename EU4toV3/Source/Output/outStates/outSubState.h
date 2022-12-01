@@ -1,6 +1,6 @@
 #ifndef OUT_SUBSTATE_H
 #define OUT_SUBSTATE_H
-#include "ClayManager/SubState.h"
+#include "ClayManager/State/SubState.h"
 
 namespace OUT
 {

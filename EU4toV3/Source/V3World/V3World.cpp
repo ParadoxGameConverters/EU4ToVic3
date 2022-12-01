@@ -11,47 +11,48 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	clayManager.initializeSuperRegions(V3Path);
 	clayManager.loadStatesIntoSuperRegions();
 	provinceMapper.loadProvinceMappings("configurables/province_mappings.txt");
-	clayManager.generateChunks(provinceMapper, sourceWorld.getProvinceManager());
-	clayManager.unDisputeChunkOwnership(sourceWorld.getCountryManager().getCountries());
-	clayManager.distributeChunksAcrossSubStates();
 	countryMapper = std::make_shared<mappers::CountryMapper>();
 	countryMapper->loadMappingRules("configurables/country_mappings.txt");
-	politicalManager.initializeVanillaCountries(V3Path);
-	politicalManager.loadCountryMapper(countryMapper);
-	politicalManager.importEU4Countries(sourceWorld.getCountryManager().getCountries());
-	politicalManager.importVanillaCountries();
-	clayManager.assignSubStateOwnership(politicalManager.getCountries(), *countryMapper);
 	religionMapper.loadMappingRules("configurables/religion_map.txt");
 	religionMapper.expandReligionMappings(sourceWorld.getReligionLoader().getAllReligions());
 	cultureMapper.loadMappingRules("configurables/culture_map.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
-	popManager.initializeVanillaPops(V3Path);
-	popManager.assignVanillaPopsToStates(clayManager);
-	popManager.importDemographics(clayManager);
-	popManager.convertDemographics(clayManager, cultureMapper, religionMapper, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
-	politicalManager.generateDecentralizedCountries(clayManager, popManager);
+	localizationLoader.scrapeLocalizations(V3Path);
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
-	Log(LogLevel::Info) << "-> Importing Provinces";
 	Log(LogLevel::Progress) << "46 %";
+	// chunks and substate generation
+	clayManager.generateChunks(provinceMapper, sourceWorld.getProvinceManager());
+	clayManager.unDisputeChunkOwnership(sourceWorld.getCountryManager().getCountries());
+	clayManager.distributeChunksAcrossSubStates();
 
-	Log(LogLevel::Info) << "-> Importing Vanilla Pops";
 	Log(LogLevel::Progress) << "47 %";
+	// initializing countries from eu4 and vanilla
+	politicalManager.initializeVanillaCountries(V3Path);
+	politicalManager.loadCountryMapper(countryMapper);
+	politicalManager.importEU4Countries(sourceWorld.getCountryManager().getCountries());
 
-	Log(LogLevel::Info) << "-> Importing Potential Countries";
 	Log(LogLevel::Progress) << "48 %";
+	// assigning clay to countries
+	clayManager.assignSubStateOwnership(politicalManager.getCountries(), *countryMapper);
 
-	Log(LogLevel::Info) << "-> Loading Country Mapping Rules";
 	Log(LogLevel::Progress) << "49 %";
+	// soaking up vanilla pops
+	popManager.initializeVanillaPops(V3Path);
+	popManager.assignVanillaPopsToStates(clayManager);
 
-	Log(LogLevel::Info) << "-> Loading Culture Mapping Rules";
 	Log(LogLevel::Progress) << "50 %";
+	// handling demographics
+	popManager.importDemographics(clayManager);
+	popManager.convertDemographics(clayManager, cultureMapper, religionMapper, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 
-	Log(LogLevel::Info) << "-> Pouring From Hollow Into Empty";
 	Log(LogLevel::Progress) << "51 %";
+	// generating decentralized countries
+	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 
-	Log(LogLevel::Info) << "-> Converting Countries";
 	Log(LogLevel::Progress) << "52 %";
+	// converting all 3 types of countries - generated decentralized, extinct vanilla-only, and EU4 imports.
+	politicalManager.convertAllCountries(clayManager, localizationLoader, sourceWorld.getCountryManager().getLocalizationLoader());
 
 	Log(LogLevel::Info) << "-> Converting Provinces";
 	Log(LogLevel::Progress) << "53 %";

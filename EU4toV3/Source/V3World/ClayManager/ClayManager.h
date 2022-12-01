@@ -1,20 +1,25 @@
 #ifndef CLAY_MANAGER_H
 #define CLAY_MANAGER_H
-#include "Chunk.h"
 #include "ClayMapTypedefs.h"
-#include "ProvinceManager/ProvinceManager.h"
-#include "ProvinceMapper/ProvinceMapper.h"
-#include "StateLoader/State.h"
-#include "SubState.h"
-#include "SuperRegionLoader/V3SuperRegion.h"
 #include <string>
+#include <vector>
 
+namespace EU4
+{
+class ProvinceManager;
+}
 namespace mappers
 {
 class CountryMapper;
-}
+class ProvinceMapper;
+} // namespace mappers
 namespace V3
 {
+class Country;
+class Chunk;
+class SubState;
+class State;
+class SuperRegion;
 class ClayManager
 {
   public:

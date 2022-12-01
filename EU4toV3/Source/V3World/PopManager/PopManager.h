@@ -2,7 +2,6 @@
 #define POP_MANAGER_H
 #include "Pops/StatePops.h"
 #include <map>
-#include <memory>
 #include <string>
 
 namespace EU4

@@ -17,6 +17,7 @@ class EU4LocalizationLoader
 	void loadLocalizations(std::istream& theStream);
 
 	[[nodiscard]] std::optional<std::map<std::string, std::string>> getTextInEachLanguage(const std::string& key) const;
+	[[nodiscard]] std::optional<std::string> getTextForKey(const std::string& key, const std::string& language) const;
 
   private:
 	void readFromAllFilesInFolder(const std::string& folderPath);

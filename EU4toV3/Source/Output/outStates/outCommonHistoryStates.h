@@ -1,6 +1,6 @@
 #ifndef OUT_COMMON_HISTORY_STATES_H
 #define OUT_COMMON_HISTORY_STATES_H
-#include "ClayManager/StateLoader/State.h"
+#include "ClayManager/State/State.h"
 
 namespace OUT
 {

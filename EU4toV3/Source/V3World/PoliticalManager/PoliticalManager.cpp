@@ -1,7 +1,10 @@
 #include "PoliticalManager.h"
 #include "ClayManager/ClayManager.h"
-#include "CountryDefinitionLoader/CountryDefinitionLoader.h"
+#include "ClayManager/State/SubState.h"
+#include "Country/Country.h"
+#include "Loaders/CountryDefinitionLoader/CountryDefinitionLoader.h"
 #include "Log.h"
+#include "Mappers/CountryMapper/CountryMapper.h"
 #include "PopManager/PopManager.h"
 #include <ranges>
 
@@ -37,30 +40,28 @@ void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::s
 		}
 
 		country->setSourceCountry(eu4country);
-		country->initializeFromEU4Country();
 	}
 
 	Log(LogLevel::Info) << "<> Vic3 now has " << countries.size() << " known countries.";
 }
 
-void V3::PoliticalManager::importVanillaCountries()
-{
-	for (const auto& country: countries | std::views::values)
-		if (country->getVanillaData() && !country->getSourceCountry()) // this is a vic3-only country.
-			country->copyVanillaData();
-}
-
 void V3::PoliticalManager::generateDecentralizedCountries(const ClayManager& clayManager, const PopManager& popManager)
 {
+	Log(LogLevel::Info) << "-> Generating decentralized countries.";
+
 	// How do we generate decentralized states? We look at states and their unowned substates.
 	// Those substates with a particular culture are banded together and shoved into a new country.
 	// If there's no demographic available (mapping from a wasteland or out of scope), we load
 	// cultural information (not demographics!) from vanilla sources.
 
-	for (const auto& [culture, subStates]: sortSubStatesByCultures(clayManager, popManager))
+	auto sortedSubstates = sortSubStatesByCultures(clayManager, popManager);
+
+	for (const auto& [culture, subStates]: sortedSubstates)
 	{
 		generateDecentralizedCountry(culture, subStates);
 	}
+
+	Log(LogLevel::Info) << "<> Generated " << sortedSubstates.size() << " decentralized countries.";
 }
 
 void V3::PoliticalManager::generateDecentralizedCountry(const std::string& culture, const std::vector<std::shared_ptr<SubState>>& subStates)
@@ -71,6 +72,7 @@ void V3::PoliticalManager::generateDecentralizedCountry(const std::string& cultu
 	newCountry->setSubStates(subStates);
 	ProcessedData data;
 	data.cultures.emplace(culture);
+	data.type = "decentralized";
 	newCountry->setProcessedData(data);
 	for (const auto& subState: newCountry->getSubStates())
 		subState->setOwner(newCountry);
@@ -128,4 +130,29 @@ std::string V3::PoliticalManager::getDominantDemographic(const std::vector<Demog
 	});
 
 	return highest->first;
+}
+
+void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
+	 const LocalizationLoader& v3LocLoader,
+	 const EU4::EU4LocalizationLoader& eu4LocLoader) const
+{
+	Log(LogLevel::Info) << "-> Converting countries.";
+
+	for (const auto& [tag, country]: countries)
+	{
+		// this is a freshly-generated decentralized country with no source data whatsoever.
+		if (!country->getVanillaData() && country->getProcessedData().type == "decentralized")
+			country->generateDecentralizedData(clayManager, v3LocLoader, eu4LocLoader);
+
+		// this is a vic3-only (vanilla) country with no EU4 match. It's likely extinct.
+		else if (country->getVanillaData() && !country->getSourceCountry())
+			country->copyVanillaData();
+
+		// otherwise, this is a regular imported EU4 country
+		else if (country->getSourceCountry())
+			country->convertFromEU4Country(clayManager);
+
+		else
+			Log(LogLevel::Warning) << "Country " << tag << " has no known sources! Not importing!";
+	}
 }
