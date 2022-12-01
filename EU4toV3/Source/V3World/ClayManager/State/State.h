@@ -2,13 +2,13 @@
 #define STATE_H
 #include "ClayManager/ClayMapTypedefs.h"
 #include "PopManager/Pops/StatePops.h"
+#include "ProvinceTypeCounter.h"
 #include <Parser.h>
 
 namespace V3
 {
 class SubState;
 class Province;
-struct ProvinceTypeCounter;
 class State: commonItems::parser
 {
   public:
