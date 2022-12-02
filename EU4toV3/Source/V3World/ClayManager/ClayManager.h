@@ -30,8 +30,9 @@ class ClayManager
 	void initializeSuperRegions(const std::string& v3Path);
 	void loadStatesIntoSuperRegions();
 	void generateChunks(const mappers::ProvinceMapper& provinceMapper, const EU4::ProvinceManager& provinceManager);
-	void unDisputeChunkOwnership(const std::map<std::string, std::shared_ptr<EU4::Country>>& sourceCountries);
-	void distributeChunksAcrossSubStates();
+	void unDisputeChunkOwnership(const SourceOwners& sourceCountries);
+	void splitChunksIntoSubstates();
+
 	void assignSubStateOwnership(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper);
 
 	[[nodiscard]] const auto& getStates() const { return states; }
@@ -43,13 +44,8 @@ class ClayManager
 	[[nodiscard]] bool stateIsInRegion(const std::string& state, const std::string& region) const;
 
   private:
-	void crossLinkSubStatesToChunks() const;
-
-	[[nodiscard]] static std::map<std::string, double> calcChunkOwnerWeights(const std::shared_ptr<Chunk>& chunk);
-	[[nodiscard]] std::pair<ChunkToEU4TagToStateToProvinceMap, SourceOwners> sortChunkProvincesIntoTagStates() const;
-	[[nodiscard]] std::vector<std::shared_ptr<SubState>> buildSubStates(const ChunkToEU4TagToStateToProvinceMap& chunkTagProvinces,
-		 const SourceOwners& sourceOwners) const;
-	[[nodiscard]] static bool isChunkSea(const std::shared_ptr<Chunk>& chunk);
+	[[nodiscard]] StateToProvinceMap sortChunkProvincesIntoStates(const std::shared_ptr<Chunk>& chunk) const;
+	[[nodiscard]] std::vector<std::shared_ptr<SubState>> buildSubStates(const StateToProvinceMap& stateProvinceMap) const;
 
 	std::map<std::string, std::shared_ptr<State>> states;					// geographical entities
 	std::map<std::string, std::shared_ptr<SuperRegion>> superRegions; // geographical entities

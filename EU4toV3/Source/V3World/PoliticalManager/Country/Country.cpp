@@ -1,6 +1,7 @@
 #include "Country.h"
 #include "ClayManager/State/SubState.h"
 #include "CommonRegexes.h"
+#include "CountryManager/EU4Country.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
 #include "Loaders/LocalizationLoader/EU4LocalizationLoader.h"
 #include "Log.h"

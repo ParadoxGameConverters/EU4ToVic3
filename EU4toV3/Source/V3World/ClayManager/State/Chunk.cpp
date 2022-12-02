@@ -1,56 +1,56 @@
 #include "Chunk.h"
 #include "ProvinceManager/EU4Province.h"
 #include "SubState.h"
+#include <numeric>
 #include <ranges>
 
-void V3::Chunk::importDemographics()
+void V3::Chunk::addSourceProvinceData(const std::shared_ptr<EU4::Province>& sourceProvince, double weight)
 {
-	// NOTE: At this stage we can only import EU4 popRatios into our scaled demographics.
-	// We cannot do actual culture/religion conversion since chunks are region-less entities.
-	//
-	// Conversion of pops along with subsequent shaping will happen on substate level
-	// as substates are regionally bound.
+	SourceProvinceData data;
+	data.owner = sourceProvince->getOwnerTag();
+	data.weight = sourceProvince->getProvinceWeight();
+	data.investmentFactor = sourceProvince->getInvestmentFactor();
+	data.popRatios = sourceProvince->getProvinceHistory().getPopRatios();
+	data.buildings = sourceProvince->getBuildings();
+	data.cores = sourceProvince->getCores();
+	data.territorialCore = sourceProvince->isTerritorialCore();
+	data.sea = sourceProvince->isSea();
 
-	double totalSourceDevelopmentWeight = 0;
-	for (const auto& sourceProvince: sourceProvinces | std::views::values)
-		totalSourceDevelopmentWeight += sourceProvince->getProvinceWeight();
-
-	// Now, for every source province, import scaled demographics according to dev weight.
-	// More dev in a mapping = more impact of province's culture.
-	for (const auto& sourceProvince: sourceProvinces | std::views::values)
-	{
-		const auto provinceWeightRatio = sourceProvince->getProvinceWeight() / totalSourceDevelopmentWeight;
-		auto popRatios = sourceProvince->getProvinceHistory().getPopRatios();
-		if (popRatios.empty())
-			continue;
-		createDemographics(popRatios, provinceWeightRatio);
-	}
-
-	copyDemographicsToSubStates();
+	weightedSourceProvinceData.push_back(std::pair(data, weight));
 }
 
-void V3::Chunk::createDemographics(const std::vector<EU4::PopRatio>& popRatios, double provinceWeightRatio)
+std::map<std::string, double> V3::Chunk::calcOwnerWeights() const
 {
-	for (const auto& popRatio: popRatios)
+	std::map<std::string, double> ownerWeights; // ownerTag, total province weight
+	for (const auto& [sourceProvinceData, weight]: weightedSourceProvinceData)
 	{
-		Demographic demographic;
-		demographic.culture = popRatio.getCulture();
-		demographic.religion = popRatio.getReligion();
-		demographic.upperRatio = popRatio.getUpperRatio() * provinceWeightRatio;
-		demographic.middleRatio = popRatio.getMiddleRatio() * provinceWeightRatio;
-		demographic.lowerRatio = popRatio.getLowerRatio() * provinceWeightRatio;
-
-		demographics.push_back(demographic);
+		const auto& sourceTag = sourceProvinceData.owner;
+		if (sourceTag.empty())
+			continue; // not relevant source - wasteland etc.
+		if (ownerWeights.contains(sourceTag))
+			ownerWeights.at(sourceTag) += weight; // this is RAW province weight - dev + buildings.
+		else
+			ownerWeights.emplace(sourceTag, weight);
 	}
+	return ownerWeights;
 }
 
-void V3::Chunk::copyDemographicsToSubStates() const
+bool V3::Chunk::isSea() const
 {
-	// This might be counterintuitive, but a demographic is not related to population size. It's a descriptor.
-	// Here we're saying "original provinces had half culture A and half culture B, thus all substates will have
-	// the same ratio. How *many* of the pops that turns out to be - that's up to the substate size in regards to
-	// its home state size, various factors, all relating to some imported popcount.
+	return std::ranges::any_of(weightedSourceProvinceData.begin(), weightedSourceProvinceData.end(), [](const auto& sourceProvince) {
+		return sourceProvince.first.sea;
+	});
+}
 
-	for (const auto& substate: substates)
-		substate->setDemographics(demographics);
+double V3::Chunk::getTotalSourceProvinceWeight()
+{
+	const double totalWeight =
+		 std::accumulate(weightedSourceProvinceData.begin(), weightedSourceProvinceData.end(), 0.0, [](double sum, const auto& sourceData) {
+			 return sum + sourceData.first.weight;
+		 });
+
+	// This is important. We're averaging the total weight of our source provinces - right here. If by any chance in the future we want to add them together
+	// or use some other function, alter this.
+
+	return totalWeight / static_cast<double>(weightedSourceProvinceData.size());
 }

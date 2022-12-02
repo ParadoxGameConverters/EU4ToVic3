@@ -1,5 +1,6 @@
 #include "PoliticalManager.h"
 #include "ClayManager/ClayManager.h"
+#include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "Country/Country.h"
 #include "Loaders/CountryDefinitionLoader/CountryDefinitionLoader.h"
