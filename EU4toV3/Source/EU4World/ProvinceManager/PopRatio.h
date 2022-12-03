@@ -16,6 +16,7 @@ class PopRatio
 	void convertToCulture(const std::string& culture);
 	void convertToReligion(const std::string& religion);
 	void convertTo(const std::string& culture, const std::string& religion);
+	void multiplyRatios(double factor);
 
 	[[nodiscard]] const auto& getCulture() const { return culture; }
 	[[nodiscard]] const auto& getReligion() const { return religion; }

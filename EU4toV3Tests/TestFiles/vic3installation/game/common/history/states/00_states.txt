@@ -1,0 +1,32 @@
+﻿STATES = {
+	S:STATE_TEST_LAND1 = {
+		create_state = {
+			country = c:AAA
+			owned_provinces = { x000003 }
+		}
+		
+		add_homeland = swedish
+		add_homeland = finnish
+	}
+	s:STATE_TEST_LAND2 = {
+		create_state = {
+			country = c:AAA
+			owned_provinces = { x000004 }
+		}
+		create_state = {
+			country = C:BBB
+			# no provinces - broken input
+		}
+		
+		add_homeland = swedish
+		add_homeland = finnish
+	}
+	s:STATE_TEST_LAND3 = {
+		create_state = {
+			country = c:CCC
+			owned_provinces = { "x000005" "x000006" } # quoted provinces
+		}
+		
+		add_homeland = swedish
+	}
+}

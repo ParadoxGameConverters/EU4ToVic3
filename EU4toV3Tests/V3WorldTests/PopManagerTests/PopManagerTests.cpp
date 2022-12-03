@@ -1,5 +1,7 @@
 #include "ClayManager/ClayManager.h"
+#include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
+#include "CountryManager/EU4Country.h"
 #include "CountryMapper/CountryMapper.h"
 #include "CultureLoader/CultureLoader.h"
 #include "CultureMapper/CultureMapper.h"
@@ -60,7 +62,7 @@ V3::ClayManager prepClayManager()
 	const auto ta9 = std::make_shared<EU4::Country>("TA9", countryStream);
 	const std::map<std::string, std::shared_ptr<EU4::Country>> countries = {{"TA2", ta2}, {"TA3", ta3}, {"TA9", ta9}};
 	clayManager.unDisputeChunkOwnership(countries);
-	clayManager.distributeChunksAcrossSubStates();
+	clayManager.splitChunksIntoSubStates();
 
 	auto countryMapper = std::make_shared<mappers::CountryMapper>();
 	countryMapper->loadMappingRules("TestFiles/configurables/country_mappings.txt");
@@ -95,7 +97,6 @@ std::tuple<V3::PopManager, mappers::CultureMapper, mappers::ReligionMapper, V3::
 	V3::PopManager popManager;
 	popManager.initializeVanillaPops(V3Path);
 	popManager.assignVanillaPopsToStates(clayManager);
-	popManager.importDemographics(clayManager);
 	popManager.convertDemographics(clayManager, culMapper, relMapper, cultureLoader, religionLoader);
 
 	return std::tuple{popManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader};
@@ -144,55 +145,12 @@ TEST(V3World_PopManagerTests, popManagerCanAssignVanillaPops)
 	EXPECT_EQ(1000, state4->getVanillaPops().getPopCount());
 }
 
-TEST(V3World_PopManagerTests, popManagerCanImportDemographics)
-{
-	auto clayManager = prepClayManager();
-	V3::PopManager popManager;
-	auto V3Path = "TestFiles/vic3installation/game/";
-	popManager.initializeVanillaPops(V3Path);
-	popManager.assignVanillaPopsToStates(clayManager);
-	popManager.importDemographics(clayManager);
-
-	ASSERT_EQ(4, clayManager.getSubStates().size());
-	const auto& substate1 = clayManager.getSubStates()[0]; // 2 demos inside, from provinces 2 & 3
-	ASSERT_EQ(2, substate1->getDemographics().size());
-	const auto& s1demo1 = substate1->getDemographics()[0];
-	const auto& s1demo2 = substate1->getDemographics()[1];
-	EXPECT_EQ("culture1", s1demo1.culture);
-	EXPECT_EQ("culture2", s1demo2.culture);
-	EXPECT_EQ("catholic", s1demo1.religion);
-	EXPECT_EQ("protestant", s1demo2.religion);
-	EXPECT_NEAR(0.909, s1demo1.upperRatio, 0.001); // 10-1 dev ratio
-	EXPECT_NEAR(0.091, s1demo2.upperRatio, 0.001); // 1-10 dev ratio
-
-	const auto& substate2 = clayManager.getSubStates()[1]; // 2 demos inside, from provinces 2 & 3
-	ASSERT_EQ(2, substate2->getDemographics().size());
-	const auto& s2demo1 = substate2->getDemographics()[0];
-	const auto& s2demo2 = substate2->getDemographics()[1];
-	EXPECT_EQ("culture1", s2demo1.culture);
-	EXPECT_EQ("culture2", s2demo2.culture);
-	EXPECT_EQ("catholic", s2demo1.religion);
-	EXPECT_EQ("protestant", s2demo2.religion);
-	EXPECT_NEAR(0.909, s2demo1.upperRatio, 0.001); // 10-1 dev ratio
-	EXPECT_NEAR(0.091, s2demo2.upperRatio, 0.001); // 1-10 dev ratio
-
-	const auto& substate3 = clayManager.getSubStates()[2]; // no demos inside, this is a wasteland->chunk substate
-	EXPECT_TRUE(substate3->getDemographics().empty());
-
-	const auto& substate4 = clayManager.getSubStates()[3]; // single demo inside, from eu4 prov 9.
-	ASSERT_EQ(1, substate4->getDemographics().size());
-	const auto& s4demo = substate4->getDemographics()[0];
-	EXPECT_EQ("culture3", s4demo.culture);
-	EXPECT_EQ("anglican", s4demo.religion);
-	EXPECT_EQ(1, s4demo.upperRatio);
-}
-
 TEST(V3World_PopManagerTests, popManagerCanConvertDemographics)
 {
 	auto [popManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	ASSERT_EQ(4, clayManager.getSubStates().size());
-	const auto& substate1 = clayManager.getSubStates()[0]; // 2 demos inside, from provinces 2 & 3 -> 6 global pops
+	ASSERT_EQ(3, clayManager.getSubStates().size());
+	const auto& substate1 = clayManager.getSubStates()[0]; // 2 demos inside, from provinces 2 & 3
 	ASSERT_EQ(2, substate1->getDemographics().size());
 	const auto& s1demo1 = substate1->getDemographics()[0];
 	const auto& s1demo2 = substate1->getDemographics()[1];
@@ -214,13 +172,10 @@ TEST(V3World_PopManagerTests, popManagerCanConvertDemographics)
 	EXPECT_NEAR(0.909, s2demo1.upperRatio, 0.001);
 	EXPECT_NEAR(0.091, s2demo2.upperRatio, 0.001);
 
-	const auto& substate3 = clayManager.getSubStates()[2]; // no demos inside, this is a wasteland->chunk substate
-	EXPECT_TRUE(substate3->getDemographics().empty());
-
-	const auto& substate4 = clayManager.getSubStates()[3]; // single demo inside, from eu4 prov 9.
-	ASSERT_EQ(1, substate4->getDemographics().size());
-	const auto& s4demo = substate4->getDemographics()[0];
-	EXPECT_EQ("vculture2", s4demo.culture);	// updated demos
-	EXPECT_EQ("protestant", s4demo.religion); // updated demos
-	EXPECT_EQ(1, s4demo.upperRatio);
+	const auto& substate3 = clayManager.getSubStates()[2]; // single demo inside, from eu4 prov 9.
+	ASSERT_EQ(1, substate3->getDemographics().size());
+	const auto& s3demo = substate3->getDemographics()[0];
+	EXPECT_EQ("vculture2", s3demo.culture);	// updated demos
+	EXPECT_EQ("protestant", s3demo.religion); // updated demos
+	EXPECT_EQ(1, s3demo.upperRatio);
 }

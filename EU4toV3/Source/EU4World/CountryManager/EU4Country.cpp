@@ -38,10 +38,13 @@ void EU4::Country::registerKeys()
 {
 	registerKeyword("name", [this](std::istream& theStream) {
 		name = commonItems::getString(theStream);
-		name = commonItems::normalizeUTF8Path(name); // normalize due to disk export!
+		// this is win1252 name, so, immediately convert to UTF8.
+		name = commonItems::convertWin1252ToUTF8(name);
 	});
 	registerKeyword("adjective", [this](std::istream& theStream) {
 		adjective = commonItems::singleString(theStream).getString();
+		// this is win1252 adjective, so, immediately convert to UTF8.
+		adjective = commonItems::convertWin1252ToUTF8(adjective);
 	});
 	registerKeyword("colors", [this](std::istream& theStream) {
 		nationalColors = NationalSymbol(theStream);

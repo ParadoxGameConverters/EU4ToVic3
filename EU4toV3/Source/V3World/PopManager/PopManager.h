@@ -25,7 +25,6 @@ class PopManager
 
 	void initializeVanillaPops(const std::string& v3Path);
 	void assignVanillaPopsToStates(const ClayManager& clayManager);
-	void importDemographics(const ClayManager& clayManager) const;
 	void convertDemographics(const ClayManager& clayManager,
 		 const mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,

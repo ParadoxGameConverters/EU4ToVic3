@@ -1,4 +1,5 @@
 #include "ClayManager/ClayManager.h"
+#include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "CountryManager/EU4Country.h"
 #include "CountryMapper/CountryMapper.h"
@@ -65,7 +66,7 @@ prepMappers()
 	const auto ta9 = std::make_shared<EU4::Country>("TA9", countryStream);
 	const std::map<std::string, std::shared_ptr<EU4::Country>> countries = {{"TA2", ta2}, {"TA3", ta3}, {"TA9", ta9}};
 	clayManager.unDisputeChunkOwnership(countries);
-	clayManager.distributeChunksAcrossSubStates();
+	clayManager.splitChunksIntoSubStates();
 
 	auto countryMapper = std::make_shared<mappers::CountryMapper>();
 	countryMapper->loadMappingRules("TestFiles/configurables/country_mappings.txt");
@@ -92,7 +93,6 @@ prepMappers()
 	V3::PopManager popManager;
 	popManager.initializeVanillaPops(V3Path);
 	popManager.assignVanillaPopsToStates(clayManager);
-	popManager.importDemographics(clayManager);
 	popManager.convertDemographics(clayManager, culMapper, relMapper, cultureLoader, religionLoader);
 
 	politicalManager.initializeVanillaCountries(V3Path);
@@ -199,9 +199,15 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanGenerateDecentralizedCoun
 {
 	auto [politicalManager, popManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
+	// link = { eu4 = 4 vic3 = x000005 } # wasteland -> land
+	// We need to manually create an empty substate for this province so that it can spawn a country.
+	auto state = clayManager.getStates().at("STATE_TEST_LAND3");
+	auto prov5 = state->getProvinces().at("x000005");
+	auto sub5 = std::make_shared<V3::SubState>(state, V3::ProvinceMap({std::pair("x000005", prov5)}));
+	state->addSubState(sub5);
+
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 
-	// link = { eu4 = 4 vic3 = x000005 } # wasteland -> land
 	// this link will produce a decentralized state with a single substate containing 4->x5 province.
 	// name will be X01 as X00 is already taken by TA3 finding no mapping in country_mappings.txt.
 
@@ -222,6 +228,13 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanGenerateDecentralizedCoun
 TEST(V3World_PoliticalManagerTests, DecentralizedCountriesCanBeFilled)
 {
 	auto [politicalManager, popManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
+
+	// link = { eu4 = 4 vic3 = x000005 } # wasteland -> land
+	// We need to manually create an empty substate for this province so that it can spawn a country.
+	auto state = clayManager.getStates().at("STATE_TEST_LAND3");
+	auto prov5 = state->getProvinces().at("x000005");
+	auto sub5 = std::make_shared<V3::SubState>(state, V3::ProvinceMap({std::pair("x000005", prov5)}));
+	state->addSubState(sub5);
 
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 	politicalManager.convertAllCountries(clayManager, V3::LocalizationLoader(), EU4::EU4LocalizationLoader());

@@ -39,14 +39,6 @@ void V3::PopManager::assignVanillaPopsToStates(const ClayManager& clayManager)
 	}
 }
 
-void V3::PopManager::importDemographics(const ClayManager& clayManager) const
-{
-	Log(LogLevel::Info) << "-> Importing EU4 demographics.";
-
-	for (const auto& chunk: clayManager.getChunks())
-		chunk->importDemographics();
-}
-
 void V3::PopManager::convertDemographics(const ClayManager& clayManager,
 	 const mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
@@ -55,7 +47,8 @@ void V3::PopManager::convertDemographics(const ClayManager& clayManager,
 {
 	Log(LogLevel::Info) << "-> Converting EU4 demographics.";
 
-	// All the substates have demographics, and using regional data we can convert them into Vic3 counterparts.
+	// At this point, all substates we have are owned, and formed from sane chunks. They have incoming popratios,
+	// and using regional data we can convert them into Vic3 demographics.
 
 	for (const auto& [stateName, state]: clayManager.getStates())
 	{
@@ -70,32 +63,7 @@ void V3::PopManager::convertDemographics(const ClayManager& clayManager,
 
 		for (const auto& subState: state->getSubStates())
 		{
-			std::vector<Demographic> newDemographics;
-			for (const auto& demo: subState->getDemographics())
-			{
-				auto newDemo = demo;
-				// Owner - no owner is fine as it covers decentralized clay.
-				auto ownerTag = subState->getOwnerTag();
-				if (!ownerTag)
-					ownerTag = "";
-
-				// Religion
-				auto religionMatch = religionMapper.getV3Religion(demo.religion);
-				if (!religionMatch)
-					newDemo.religion = "noreligion";
-				else
-					newDemo.religion = *religionMatch;
-
-				// Culture
-				auto cultureMatch = cultureMapper.cultureMatch(clayManager, cultureLoader, religionLoader, demo.culture, demo.religion, stateName, *ownerTag);
-				if (!cultureMatch)
-					newDemo.culture = "noculture";
-				else
-					newDemo.culture = *cultureMatch;
-
-				newDemographics.push_back(newDemo);
-			}
-			subState->setDemographics(newDemographics); // these are old demos updated with actual vic3 culture/religion.
+			subState->convertDemographics(clayManager, cultureMapper, religionMapper, cultureLoader, religionLoader);
 		}
 	}
 }

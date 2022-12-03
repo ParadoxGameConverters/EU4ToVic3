@@ -201,3 +201,21 @@ TEST(EU4World_PopRatioTests, convertingToZeroesLowerRatio)
 
 	EXPECT_EQ(0.0, theRatio.getLowerRatio());
 }
+
+TEST(EU4World_PopRatioTests, multiplyByFactor)
+{
+	std::set<int> input;
+
+	EU4::PopRatio theRatio("theCulture", "theReligion");
+	theRatio.multiplyRatios(0.5);
+
+	EXPECT_EQ(0.5, theRatio.getUpperRatio());
+	EXPECT_EQ(0.5, theRatio.getMiddleRatio());
+	EXPECT_EQ(0.5, theRatio.getLowerRatio());
+
+	theRatio.multiplyRatios(0.5);
+
+	EXPECT_EQ(0.25, theRatio.getUpperRatio());
+	EXPECT_EQ(0.25, theRatio.getMiddleRatio());
+	EXPECT_EQ(0.25, theRatio.getLowerRatio());
+}
