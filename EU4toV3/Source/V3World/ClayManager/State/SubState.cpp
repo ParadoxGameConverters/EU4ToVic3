@@ -7,7 +7,7 @@
 #include "State.h"
 #include <ranges>
 
-V3::SubState::SubState(std::shared_ptr<State> theHomeState, ProvinceMap theProvinces): state(std::move(theHomeState)), provinces(std::move(theProvinces))
+V3::SubState::SubState(std::shared_ptr<State> theHomeState, ProvinceMap theProvinces): homeState(std::move(theHomeState)), provinces(std::move(theProvinces))
 {
 }
 
@@ -20,9 +20,9 @@ std::optional<std::string> V3::SubState::getOwnerTag() const
 
 const std::string& V3::SubState::getHomeStateName() const
 {
-	if (state)
+	if (homeState)
 	{
-		return state->getName();
+		return homeState->getName();
 	}
 	else
 	{
@@ -39,7 +39,7 @@ void V3::SubState::convertDemographics(const ClayManager& clayManager,
 	 const EU4::ReligionLoader& religionLoader)
 {
 	// Just a few sanity checks which should never fail.
-	if (!state || !owner)
+	if (!homeState || !owner)
 		Log(LogLevel::Error) << "Not converting demographics in insane substate!";
 
 	std::vector<Demographic> newDemographics;
@@ -56,9 +56,13 @@ void V3::SubState::convertDemographics(const ClayManager& clayManager,
 				newDemo.religion = *religionMatch;
 
 			// Culture
-			auto cultureMatch =
-				 cultureMapper
-					  .cultureMatch(clayManager, cultureLoader, religionLoader, popratio.getCulture(), popratio.getReligion(), state->getName(), owner->getTag());
+			auto cultureMatch = cultureMapper.cultureMatch(clayManager,
+				 cultureLoader,
+				 religionLoader,
+				 popratio.getCulture(),
+				 popratio.getReligion(),
+				 homeState->getName(),
+				 owner->getTag());
 			if (!cultureMatch)
 				newDemo.culture = "noculture";
 			else
