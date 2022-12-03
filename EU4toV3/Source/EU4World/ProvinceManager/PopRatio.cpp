@@ -70,3 +70,10 @@ void EU4::PopRatio::mergeRatio(const PopRatio& ratio)
 	middleRatio += ratio.getMiddleRatio();
 	lowerRatio += ratio.getLowerRatio();
 }
+
+void EU4::PopRatio::multiplyRatios(double factor)
+{
+	upperRatio *= factor;
+	middleRatio *= factor;
+	lowerRatio *= factor;
+}

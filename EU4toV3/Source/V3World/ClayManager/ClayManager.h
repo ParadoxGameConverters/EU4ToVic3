@@ -31,7 +31,7 @@ class ClayManager
 	void loadStatesIntoSuperRegions();
 	void generateChunks(const mappers::ProvinceMapper& provinceMapper, const EU4::ProvinceManager& provinceManager);
 	void unDisputeChunkOwnership(const SourceOwners& sourceCountries);
-	void splitChunksIntoSubstates();
+	void splitChunksIntoSubStates();
 
 	void assignSubStateOwnership(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper);
 
@@ -44,6 +44,7 @@ class ClayManager
 	[[nodiscard]] bool stateIsInRegion(const std::string& state, const std::string& region) const;
 
   private:
+	[[nodiscard]] std::vector<std::shared_ptr<SubState>> chunkToSubStatesTransferFunction(const std::shared_ptr<Chunk>& chunk) const;
 	[[nodiscard]] StateToProvinceMap sortChunkProvincesIntoStates(const std::shared_ptr<Chunk>& chunk) const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> buildSubStates(const StateToProvinceMap& stateProvinceMap) const;
 

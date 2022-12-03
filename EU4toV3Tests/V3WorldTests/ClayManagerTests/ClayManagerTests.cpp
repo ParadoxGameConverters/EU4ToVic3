@@ -67,7 +67,7 @@ V3::ClayManager distributeChunks()
 	const auto ta9 = std::make_shared<EU4::Country>("TA9", countryStream);
 	const std::map<std::string, std::shared_ptr<EU4::Country>> countries = {{"TA2", ta2}, {"TA3", ta3}, {"TA9", ta9}};
 	clayManager.unDisputeChunkOwnership(countries);
-	clayManager.splitChunksIntoSubstates();
+	clayManager.splitChunksIntoSubStates();
 	return clayManager;
 }
 

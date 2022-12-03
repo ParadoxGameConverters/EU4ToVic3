@@ -24,7 +24,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	// chunks and substate generation
 	clayManager.generateChunks(provinceMapper, sourceWorld.getProvinceManager());
 	clayManager.unDisputeChunkOwnership(sourceWorld.getCountryManager().getCountries());
-	clayManager.splitChunksIntoSubstates();
+	clayManager.splitChunksIntoSubStates();
 
 	Log(LogLevel::Progress) << "47 %";
 	// initializing countries from eu4 and vanilla

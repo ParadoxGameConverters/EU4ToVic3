@@ -218,54 +218,67 @@ void V3::ClayManager::unDisputeChunkOwnership(const SourceOwners& sourceCountrie
 	Log(LogLevel::Info) << "<> Untangled chunk ownerships, " << chunks.size() << " of " << filteredChunks.size() << " remain.";
 }
 
-void V3::ClayManager::splitChunksIntoSubstates()
+void V3::ClayManager::splitChunksIntoSubStates()
 {
 	Log(LogLevel::Info) << "-> Distributing Clay across Substates.";
 
 	// Every chunk can map to to a number of substates. We'll now transfer provinces and sourceProvince metadata from a chunk according
-	// to their geographical State and create Substates. Every substate must belong to a single owner - or no owner - same as chunks.
+	// to their geographical State and create substates. Every substate must belong to a single owner - or no owner - same as chunks.
 	// Weighted sourceProvince data is also copied and *further* weighted, according to the size of substates in regrads to the original
 	// chunk... and potentially other factors.
 
 	for (const auto& chunk: chunks)
 	{
-		// prep info
-		const double totalChunkWeight = chunk->getTotalSourceProvinceWeight();
-		const double provincesCount = static_cast<double>(chunk->getProvinces().size());
-
-		// build substates
-		auto sortedProvinces = sortChunkProvincesIntoStates(chunk);
-		auto generatedSubstates = buildSubStates(sortedProvinces);
-
-		// update substates with metadata
-		for (const auto& substate: generatedSubstates)
-		{
-			// for now, this is the simplest we can do. substateFactor is literally the amount of provinces / total provinces
-			// TODO: REFINE LATER WITH PRIME LAND, IMPASSABLES AND WHATEVER.
-			const double subStateSizeFactor = static_cast<double>(substate->getProvinces().size()) / provincesCount;
-
-			// substate weight is an *outwardly* factor, when comparing the impact of that substate's metadata against all other
-			// substates in the same state.
-			const double subStateWeight = totalChunkWeight * subStateSizeFactor;
-
-			// This here is an *inwardly* factor - we scale chunk's metadata according to the size of our substate, so we'd receive
-			// fewer factories etc.
-			std::vector<std::pair<SourceProvinceData, double>> additionallyWeightedSourceProvinceData;
-			for (const auto& [data, weight]: chunk->getSourceProvinceData())
-				additionallyWeightedSourceProvinceData.push_back(std::pair(data, weight * subStateSizeFactor));
-
-			// file!
-			substate->setWeight(subStateWeight);
-			substate->setSourceProvinceData(additionallyWeightedSourceProvinceData);
-			if (chunk->getSourceOwnerTag())
-				substate->setSourceOwnerTag(*chunk->getSourceOwnerTag());
-		}
+		// split chunk into substates
+		auto generatedSubStates = chunkToSubStatesTransferFunction(chunk);
 
 		// and file them.
-		substates.insert(substates.end(), generatedSubstates.begin(), generatedSubstates.end());
+		substates.insert(substates.end(), generatedSubStates.begin(), generatedSubStates.end());
 	}
 
 	Log(LogLevel::Info) << "<> Substates organized, " << substates.size() << " produced.";
+}
+
+std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::chunkToSubStatesTransferFunction(const std::shared_ptr<Chunk>& chunk) const
+{
+	/*
+	 * This function uses several factors, all of which are debatable and moddable later. Of note is:
+	 * subStateSizeFactor - how much of a chunk's original metadata (dev) the substate takes when it's split
+	 * TODO: This should be modded by something more intelligent than raw province count comparison.
+	 */
+
+	// prep info
+	const double totalChunkWeight = chunk->getTotalSourceProvinceWeight();
+	const double provincesCount = static_cast<double>(chunk->getProvinces().size());
+	const auto sortedProvinces = sortChunkProvincesIntoStates(chunk);
+
+	// build substates
+	auto generatedSubStates = buildSubStates(sortedProvinces);
+
+	// update substates with metadata
+	for (const auto& subState: generatedSubStates)
+	{
+		// for now, this is the simplest we can do. substateFactor is literally the amount of provinces / total provinces
+		// TODO: REFINE LATER WITH PRIME LAND, IMPASSABLES AND WHATEVER.
+		const double subStateSizeFactor = static_cast<double>(subState->getProvinces().size()) / provincesCount;
+
+		// substate weight is an *outwardly* factor, when comparing the impact of that substate's metadata against all other
+		// substates in the same state.
+		const double subStateWeight = totalChunkWeight * subStateSizeFactor;
+
+		// This here is an *inwardly* factor - we scale chunk's metadata according to the size of our substate, so we'd receive
+		// fewer factories etc.
+		std::vector<std::pair<SourceProvinceData, double>> additionallyWeightedSourceProvinceData;
+		for (const auto& [data, weight]: chunk->getSourceProvinceData())
+			additionallyWeightedSourceProvinceData.push_back(std::pair(data, weight * subStateSizeFactor));
+
+		// file!
+		subState->setWeight(subStateWeight);
+		subState->setSourceProvinceData(additionallyWeightedSourceProvinceData);
+		if (chunk->getSourceOwnerTag())
+			subState->setSourceOwnerTag(*chunk->getSourceOwnerTag());
+	}
+	return generatedSubStates;
 }
 
 V3::StateToProvinceMap V3::ClayManager::sortChunkProvincesIntoStates(const std::shared_ptr<Chunk>& chunk) const

@@ -16,7 +16,13 @@ void V3::Chunk::addSourceProvinceData(const std::shared_ptr<EU4::Province>& sour
 	data.territorialCore = sourceProvince->isTerritorialCore();
 	data.sea = sourceProvince->isSea();
 
-	weightedSourceProvinceData.push_back(std::pair(data, weight));
+	// Immediately apply weight to popratios as further splitting of this core data won't affect demographics.
+	for (auto& popRatio: data.popRatios)
+	{
+		popRatio.multiplyRatios(weight);
+	}
+
+	weightedSourceProvinceData.emplace_back(data, weight);
 }
 
 std::map<std::string, double> V3::Chunk::calcOwnerWeights() const
