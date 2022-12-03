@@ -63,7 +63,6 @@ void V3::PopManager::convertDemographics(const ClayManager& clayManager,
 
 		for (const auto& subState: state->getSubStates())
 		{
-			Log(LogLevel::Debug) << "priming pops for " << stateName;
 			subState->convertDemographics(clayManager, cultureMapper, religionMapper, cultureLoader, religionLoader);
 		}
 	}
