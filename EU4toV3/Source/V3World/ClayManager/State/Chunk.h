@@ -39,7 +39,6 @@ class Chunk
 	void addSourceProvinceData(const std::shared_ptr<EU4::Province>& sourceProvince, double weight);
 	[[nodiscard]] std::map<std::string, double> calcOwnerWeights() const;
 
-
   private:
 	std::map<std::string, std::shared_ptr<Province>> provinces; // V3 provinces
 	std::optional<std::string> sourceOwnerTag;

@@ -303,7 +303,6 @@ V3::StateToProvinceMap V3::ClayManager::sortChunkProvincesIntoStates(const std::
 	return stateProvinces;
 }
 
-
 std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::buildSubStates(const StateToProvinceMap& stateProvinceMap) const
 {
 	std::vector<std::shared_ptr<SubState>> subStates;

@@ -1,6 +1,6 @@
 #include "ClayManager/ClayManager.h"
-#include "ClayManager/State/SubState.h"
 #include "ClayManager/State/State.h"
+#include "ClayManager/State/SubState.h"
 #include "CountryManager/EU4Country.h"
 #include "CountryMapper/CountryMapper.h"
 #include "CultureLoader/CultureLoader.h"
@@ -16,8 +16,6 @@
 #include "ReligionMapper/ReligionMapper.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
-
-#include "ClayManager/State/State.h"
 
 std::tuple<V3::PoliticalManager, V3::PopManager, mappers::CultureMapper, mappers::ReligionMapper, V3::ClayManager, EU4::CultureLoader, EU4::ReligionLoader>
 prepMappers()

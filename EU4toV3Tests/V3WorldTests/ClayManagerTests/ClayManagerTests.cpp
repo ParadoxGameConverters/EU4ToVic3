@@ -7,10 +7,10 @@
 #include "CountryMapper/CountryMapper.h"
 #include "Loaders/SuperRegionLoader/V3Region.h"
 #include "Loaders/SuperRegionLoader/V3SuperRegion.h"
+#include "PoliticalManager/Country/Country.h"
 #include "PoliticalManager/PoliticalManager.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
-#include "PoliticalManager/Country/Country.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 

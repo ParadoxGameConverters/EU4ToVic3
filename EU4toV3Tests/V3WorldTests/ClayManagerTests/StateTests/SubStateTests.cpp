@@ -1,22 +1,20 @@
 #include "ClayManager/ClayManager.h"
-#include "ClayManager/State/Province.h"
 #include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
-#include "gtest/gtest.h"
-#include <gmock/gmock-matchers.h>
-#include "PoliticalManager/Country/Country.h"
-#include "ClayManager/ClayManager.h"
+#include "CultureLoader/CultureLoader.h"
 #include "Mappers/CultureMapper/CultureMapper.h"
 #include "Mappers/ReligionMapper/ReligionMapper.h"
-#include "CultureLoader/CultureLoader.h"
+#include "PoliticalManager/Country/Country.h"
 #include "ReligionLoader/ReligionLoader.h"
+#include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
 
 TEST(V3World_SubStateTests, OwnerTagCanBeSetAndRetrieved)
 {
 	V3::SubState subState;
 
 	EXPECT_FALSE(subState.getOwnerTag());
-	
+
 	const auto owner = std::make_shared<V3::Country>();
 	owner->setTag("AAA");
 	subState.setOwner(owner);
@@ -64,25 +62,24 @@ TEST(V3World_SubStateTests, SubStateCanConvertDemograhics)
 
 	// prep mappers.
 	V3::ClayManager clayManager;
+
 	mappers::ReligionMapper religionMapper;
 	religionMapper.loadMappingRules("TestFiles/configurables/religion_map.txt");
+	// link = { vic3 = protestant eu4 = protestant eu4 = reformed eu4 = anglican } <-
+
 	mappers::CultureMapper cultureMapper;
 	cultureMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
+	// link = { vic3 = vculture4 eu4 = culture4 religion = religion_2 owner = TAG }
+	// link = {vic3 = vculture5 eu4 = culture4 religion = religion_2}
+	// link = {vic3 = vculture6 eu4 = culture4} <-
+
 	EU4::CultureLoader cultureLoader;
 	EU4::ReligionLoader religionLoader;
 
 	subState.convertDemographics(clayManager, cultureMapper, religionMapper, cultureLoader, religionLoader);
 
 	ASSERT_EQ(1, subState.getDemographics().size());
-
 	auto demo = subState.getDemographics()[0];
-
-	// link = { vic3 = vculture4 eu4 = culture4 religion = religion_2 owner = TAG }
-	// link = {vic3 = vculture5 eu4 = culture4 religion = religion_2}
-	// link = {vic3 = vculture6 eu4 = culture4}
-
-	// link = { vic3 = protestant eu4 = protestant eu4 = reformed eu4 = anglican }
-
 	EXPECT_EQ("vculture6", demo.culture);
 	EXPECT_EQ("protestant", demo.religion);
 	EXPECT_EQ(1, demo.upperRatio);

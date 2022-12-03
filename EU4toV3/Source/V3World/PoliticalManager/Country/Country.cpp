@@ -128,7 +128,6 @@ void V3::Country::generateDecentralizedLocs(const LocalizationLoader& v3LocLoade
 	processedData.name += " " + suffixes[selection];
 }
 
-
 void V3::Country::copyVanillaData()
 {
 	// this is done when conversion from eu4 source is impossible - likely because this country doesn't exist in eu4.

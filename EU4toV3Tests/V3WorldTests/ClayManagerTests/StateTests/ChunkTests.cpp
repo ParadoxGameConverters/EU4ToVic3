@@ -1,14 +1,14 @@
-#include <gmock/gmock-matchers.h>
 #include "ClayManager/State/Chunk.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
 
 V3::Chunk prepChunk()
 {
 	// make a few provinces
 	std::stringstream provinceStream;
-	provinceStream << "-2={ owner = TA2 base_tax=9 base_production=9 base_manpower=9 culture = culture religion = religion }\n"; // weight 27
-	provinceStream << "-3={ owner = TA3 base_tax=1 base_production=1 base_manpower=1 culture = culture2 religion = religion2 }\n";  // weight 3
+	provinceStream << "-2={ owner = TA2 base_tax=9 base_production=9 base_manpower=9 culture = culture religion = religion }\n";	 // weight 27
+	provinceStream << "-3={ owner = TA3 base_tax=1 base_production=1 base_manpower=1 culture = culture2 religion = religion2 }\n"; // weight 3
 	EU4::ProvinceManager provinceManager;
 	provinceManager.loadProvinces(provinceStream);
 	provinceManager.buildProvinceWeights();
@@ -77,4 +77,3 @@ TEST(V3World_ChunkTests, ChunkCanDetectSourceSeaProvinces)
 
 	EXPECT_TRUE(chunk.isSea());
 }
-

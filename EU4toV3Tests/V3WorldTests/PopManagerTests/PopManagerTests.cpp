@@ -1,5 +1,7 @@
 #include "ClayManager/ClayManager.h"
+#include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
+#include "CountryManager/EU4Country.h"
 #include "CountryMapper/CountryMapper.h"
 #include "CultureLoader/CultureLoader.h"
 #include "CultureMapper/CultureMapper.h"
@@ -9,8 +11,6 @@
 #include "ProvinceMapper/ProvinceMapper.h"
 #include "ReligionLoader/ReligionLoader.h"
 #include "ReligionMapper/ReligionMapper.h"
-#include "ClayManager/State/State.h"
-#include "CountryManager/EU4Country.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
