@@ -32,7 +32,7 @@ class SubState
   public:
 	SubState() = default;
 	SubState(std::shared_ptr<State> theHomeState, ProvinceMap theProvinces);
-	void setHomeState(const std::shared_ptr<State>& theState) { state = theState; }
+	void setHomeState(const std::shared_ptr<State>& theState) { homeState = theState; }
 	void setProvinces(const ProvinceMap& theProvinces) { provinces = theProvinces; }
 	void setOwner(const std::shared_ptr<Country>& theOwner) { owner = theOwner; }
 	void setSourceOwnerTag(const std::string& sourceTag) { sourceOwnerTag = sourceTag; }
@@ -50,7 +50,7 @@ class SubState
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
 	[[nodiscard]] const auto& getOwner() const { return owner; }
 	[[nodiscard]] const auto& getSourceOwnerTag() const { return sourceOwnerTag; }
-	[[nodiscard]] const auto& getHomeState() const { return state; }
+	[[nodiscard]] const auto& getHomeState() const { return homeState; }
 	[[nodiscard]] auto getLandshare() const { return landshare; }
 	[[nodiscard]] const auto& getResource(const std::string& theResource) { return resources[theResource]; }
 	[[nodiscard]] const auto& getDemographics() { return demographics; }
@@ -59,7 +59,7 @@ class SubState
 	[[nodiscard]] const std::string& getHomeStateName() const;
 
   private:
-	std::shared_ptr<State> state; // home state
+	std::shared_ptr<State> homeState; // home state
 	std::shared_ptr<Country> owner;
 	ProvinceMap provinces; // V3 province codes
 

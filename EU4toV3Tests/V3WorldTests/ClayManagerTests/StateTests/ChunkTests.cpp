@@ -16,8 +16,8 @@ V3::Chunk prepChunk()
 
 	// shove provinces into a chunk.
 	V3::Chunk chunk;
-	chunk.addSourceProvinceData(provinceManager.getProvince(2), 27);
-	chunk.addSourceProvinceData(provinceManager.getProvince(3), 3);
+	chunk.addSourceProvinceData(*provinceManager.getProvince(2), 27);
+	chunk.addSourceProvinceData(*provinceManager.getProvince(3), 3);
 
 	return chunk;
 }
@@ -68,8 +68,8 @@ TEST(V3World_ChunkTests, TotalSourceProvinceWeightCanBeCalced)
 TEST(V3World_ChunkTests, ChunkCanDetectSourceSeaProvinces)
 {
 	// make a sea province
-	const auto sea = std::make_shared<EU4::Province>();
-	sea->setSea();
+	auto sea = EU4::Province();
+	sea.setSea();
 
 	// shove province into a chunk.
 	V3::Chunk chunk;

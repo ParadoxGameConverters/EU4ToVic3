@@ -36,7 +36,7 @@ class Chunk
 	[[nodiscard]] const auto& getSourceProvinceData() const { return weightedSourceProvinceData; }
 	[[nodiscard]] double getTotalSourceProvinceWeight() const;
 
-	void addSourceProvinceData(const std::shared_ptr<EU4::Province>& sourceProvince, double weight);
+	void addSourceProvinceData(const EU4::Province& sourceProvince, double weight);
 	[[nodiscard]] std::map<std::string, double> calcOwnerWeights() const;
 
   private:

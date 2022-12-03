@@ -4,17 +4,17 @@
 #include <numeric>
 #include <ranges>
 
-void V3::Chunk::addSourceProvinceData(const std::shared_ptr<EU4::Province>& sourceProvince, double weight)
+void V3::Chunk::addSourceProvinceData(const EU4::Province& sourceProvince, double weight)
 {
 	SourceProvinceData data;
-	data.owner = sourceProvince->getOwnerTag();
-	data.weight = sourceProvince->getProvinceWeight();
-	data.investmentFactor = sourceProvince->getInvestmentFactor();
-	data.popRatios = sourceProvince->getProvinceHistory().getPopRatios();
-	data.buildings = sourceProvince->getBuildings();
-	data.cores = sourceProvince->getCores();
-	data.territorialCore = sourceProvince->isTerritorialCore();
-	data.sea = sourceProvince->isSea();
+	data.owner = sourceProvince.getOwnerTag();
+	data.weight = sourceProvince.getProvinceWeight();
+	data.investmentFactor = sourceProvince.getInvestmentFactor();
+	data.popRatios = sourceProvince.getProvinceHistory().getPopRatios();
+	data.buildings = sourceProvince.getBuildings();
+	data.cores = sourceProvince.getCores();
+	data.territorialCore = sourceProvince.isTerritorialCore();
+	data.sea = sourceProvince.isSea();
 
 	// Immediately apply weight to popratios as further splitting of this core data won't affect demographics.
 	for (auto& popRatio: data.popRatios)

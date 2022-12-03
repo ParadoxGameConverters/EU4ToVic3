@@ -118,7 +118,7 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 			if (provinceManager.getAllProvinces().contains(eu4ProvinceID))
 			{
 				const auto sourceWeight = provinceManager.getAllProvinces().at(eu4ProvinceID)->getProvinceWeight();
-				chunk->addSourceProvinceData(provinceManager.getAllProvinces().at(eu4ProvinceID), sourceWeight / totalWeight);
+				chunk->addSourceProvinceData(*provinceManager.getAllProvinces().at(eu4ProvinceID), sourceWeight / totalWeight);
 			}
 			else if (!provinceManager.isProvinceDiscarded(eu4ProvinceID))
 			{
