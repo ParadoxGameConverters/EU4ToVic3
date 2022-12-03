@@ -32,6 +32,7 @@ class SubState
   public:
 	SubState() = default;
 	SubState(std::shared_ptr<State> theHomeState, ProvinceMap theProvinces);
+	void setHomeState(const std::shared_ptr<State>& theState) { state = theState; }
 	void setProvinces(const ProvinceMap& theProvinces) { provinces = theProvinces; }
 	void setOwner(const std::shared_ptr<Country>& theOwner) { owner = theOwner; }
 	void setSourceOwnerTag(const std::string& sourceTag) { sourceOwnerTag = sourceTag; }

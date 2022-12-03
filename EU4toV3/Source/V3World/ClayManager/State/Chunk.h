@@ -34,7 +34,7 @@ class Chunk
 	[[nodiscard]] const auto& getSourceOwnerTag() const { return sourceOwnerTag; }
 	[[nodiscard]] bool isSea() const;
 	[[nodiscard]] const auto& getSourceProvinceData() const { return weightedSourceProvinceData; }
-	[[nodiscard]] double getTotalSourceProvinceWeight();
+	[[nodiscard]] double getTotalSourceProvinceWeight() const;
 
 	void addSourceProvinceData(const std::shared_ptr<EU4::Province>& sourceProvince, double weight);
 	[[nodiscard]] std::map<std::string, double> calcOwnerWeights() const;

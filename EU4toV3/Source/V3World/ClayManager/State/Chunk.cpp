@@ -48,7 +48,7 @@ bool V3::Chunk::isSea() const
 	});
 }
 
-double V3::Chunk::getTotalSourceProvinceWeight()
+double V3::Chunk::getTotalSourceProvinceWeight() const
 {
 	const double totalWeight =
 		 std::accumulate(weightedSourceProvinceData.begin(), weightedSourceProvinceData.end(), 0.0, [](double sum, const auto& sourceData) {

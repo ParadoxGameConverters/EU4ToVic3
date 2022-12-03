@@ -26,7 +26,7 @@ const std::string& V3::SubState::getHomeStateName() const
 	}
 	else
 	{
-		static const std::string empty = "";
+		static const std::string empty;
 		Log(LogLevel::Warning) << "Attempted to access the name of a nullptr state from a substate. Returning empty name.";
 		return empty;
 	}

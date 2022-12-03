@@ -419,7 +419,7 @@ TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInsaneCountrie
 	EXPECT_TRUE(chunk3->getProvinces().contains("x000008"));
 }
 
-TEST(V3World_ClayManagerTests, clayManagerCanProduceSubstatesFromChunks)
+TEST(V3World_ClayManagerTests, clayManagerCanSplitSubstatesFromChunks)
 {
 	auto clayManager = distributeChunks();
 	const auto& substates = clayManager.getSubStates();
