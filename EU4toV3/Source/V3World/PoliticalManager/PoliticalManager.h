@@ -37,6 +37,8 @@ class PoliticalManager
 	void convertAllCountries(const ClayManager& clayManager, const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader) const;
 
 	[[nodiscard]] const auto& getCountries() const { return countries; }
+	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& v3Tag) const;
+	[[nodiscard]] bool isTagDecentralized(const std::string& v3Tag) const;
 
   private:
 	void generateDecentralizedCountry(const std::string& culture, const std::vector<std::shared_ptr<SubState>>& subStates);

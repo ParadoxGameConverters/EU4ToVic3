@@ -7,7 +7,7 @@ TEST(V3World_VanillaSubStateEntryTests, DefaultsDefaultToDefaults)
 	const V3::VanillaSubStateEntry entry;
 
 	EXPECT_TRUE(entry.getOwnerTag().empty());
-	EXPECT_TRUE(entry.getStateType().empty());
+	EXPECT_TRUE(entry.getSubStateType().empty());
 	EXPECT_TRUE(entry.getProvinces().empty());
 }
 
@@ -22,7 +22,7 @@ TEST(V3World_VanillaSubStateEntryTests, entryCanBeLoaded)
 	const V3::VanillaSubStateEntry entry(input);
 
 	EXPECT_EQ("USA", entry.getOwnerTag());
-	EXPECT_EQ("unincorporated", entry.getStateType());
+	EXPECT_EQ("unincorporated", entry.getSubStateType());
 	EXPECT_THAT(entry.getProvinces(), testing::UnorderedElementsAre("x5A4A79", "x450FD3", "x7B3020"));
 }
 
@@ -45,6 +45,6 @@ TEST(V3World_VanillaSubStateEntryTests, oddSubStateOwnersThrowWarning)
 
 
 	EXPECT_EQ("USA", entry.getOwnerTag());
-	EXPECT_EQ("unincorporated", entry.getStateType());
+	EXPECT_EQ("unincorporated", entry.getSubStateType());
 	EXPECT_THAT(entry.getProvinces(), testing::UnorderedElementsAre("x5A4A79", "x450FD3", "x7B3020"));
 }

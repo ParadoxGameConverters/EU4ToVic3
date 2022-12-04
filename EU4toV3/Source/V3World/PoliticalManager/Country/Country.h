@@ -51,7 +51,7 @@ class Country: commonItems::parser
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 
 	void convertFromEU4Country(const ClayManager& clayManager);
-	void copyVanillaData();
+	void copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 	void generateDecentralizedData(const ClayManager& clayManager, const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 
 	[[nodiscard]] const auto& getTag() const { return tag; }

@@ -19,19 +19,26 @@ class State: commonItems::parser
 	void distributeLandshares() const;
 	void distributeResources();
 	void setVanillaPops(const auto& thePops) { vanillaPops = thePops; }
+	void addHomeland(const auto& homeland) { homelands.emplace(homeland); }
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] bool containsProvince(const std::string& provinceName) const { return provinces.contains(provinceName); }
 	[[nodiscard]] std::shared_ptr<Province> getProvince(const std::string& provinceName) const;
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
+	[[nodiscard]] const auto& getSubStates() const { return substates; }
+	[[nodiscard]] const auto& getVanillaPops() const { return vanillaPops; }
+	[[nodiscard]] const auto& getHomelands() const { return homelands; }
+
 	[[nodiscard]] bool isCoastal() const { return coastal; }
 	[[nodiscard]] bool isSea() const;
 	[[nodiscard]] bool isLake() const; // yes, an entire state can be a lake.
-	[[nodiscard]] const auto& getSubStates() const { return substates; }
+
 	[[nodiscard]] const auto& getTraits() const { return traits; }
 	[[nodiscard]] const auto& getCappedResources() const { return cappedResources; }
 	[[nodiscard]] const auto& getArableResources() const { return arableResources; }
-	[[nodiscard]] const auto& getVanillaPops() const { return vanillaPops; }
+
+	[[nodiscard]] ProvinceMap getUnassignedProvinces() const;
+	[[nodiscard]] bool hasUnassignedProvinces() const;
 
   private:
 	void registerKeys();
@@ -47,6 +54,7 @@ class State: commonItems::parser
 	std::map<std::string, int> cappedResources; // RGO and arable land potential
 	std::vector<std::string> arableResources;	  // Which buildings can be built on arable land
 	StatePops vanillaPops;
+	std::set<std::string> homelands;
 };
 } // namespace V3
 #endif // STATE_H

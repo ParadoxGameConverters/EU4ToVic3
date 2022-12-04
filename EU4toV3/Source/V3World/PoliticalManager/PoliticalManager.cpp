@@ -27,7 +27,6 @@ void V3::PoliticalManager::loadCountryMapper(const std::shared_ptr<mappers::Coun
 		countryMapper->registerKnownVanillaV3Tag(countryTag);
 }
 
-
 void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries)
 {
 	Log(LogLevel::Info) << "-> Moving over EU4 Countries.";
@@ -155,7 +154,7 @@ void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
 
 		// this is a vic3-only (vanilla) country with no EU4 match. It's likely extinct.
 		else if (country->getVanillaData() && !country->getSourceCountry())
-			country->copyVanillaData();
+			country->copyVanillaData(v3LocLoader, eu4LocLoader);
 
 		// otherwise, this is a regular imported EU4 country
 		else if (country->getSourceCountry())
@@ -164,4 +163,23 @@ void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
 		else
 			Log(LogLevel::Warning) << "Country " << tag << " has no known sources! Not importing!";
 	}
+}
+
+bool V3::PoliticalManager::isTagDecentralized(const std::string& v3Tag) const
+{
+	if (!countries.contains(v3Tag))
+		return false;
+	const auto& country = countries.at(v3Tag);
+
+	// this means it's loaded from disk, and it's decentralized.
+	if (country->getVanillaData() && country->getVanillaData()->type == "decentralized")
+		return true;
+	return false;
+}
+
+std::shared_ptr<V3::Country> V3::PoliticalManager::getCountry(const std::string& v3Tag) const
+{
+	if (countries.contains(v3Tag))
+		return countries.at(v3Tag);
+	return nullptr;
 }

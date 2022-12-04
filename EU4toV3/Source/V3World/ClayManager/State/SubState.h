@@ -32,25 +32,33 @@ class SubState
   public:
 	SubState() = default;
 	SubState(std::shared_ptr<State> theHomeState, ProvinceMap theProvinces);
+
 	void setHomeState(const std::shared_ptr<State>& theState) { homeState = theState; }
-	void setProvinces(const ProvinceMap& theProvinces) { provinces = theProvinces; }
 	void setOwner(const std::shared_ptr<Country>& theOwner) { owner = theOwner; }
+	void setProvinces(const ProvinceMap& theProvinces) { provinces = theProvinces; }
+	void setSubStateType(const std::string& theType) { subStateType = theType; }
+
 	void setSourceOwnerTag(const std::string& sourceTag) { sourceOwnerTag = sourceTag; }
+	void setWeight(double theWeight) { weight = theWeight; }
+	void setSourceProvinceData(const std::vector<std::pair<SourceProvinceData, double>>& theData) { weightedSourceProvinceData = theData; }
+
 	void setLandshare(const double theLandshare) { landshare = theLandshare; }
 	void setResource(const std::string& theResource, int theAmount) { resources[theResource] = theAmount; }
 	void setDemographics(const std::vector<Demographic>& demos) { demographics = demos; }
-	void setWeight(double theWeight) { weight = theWeight; }
-	void setSourceProvinceData(const std::vector<std::pair<SourceProvinceData, double>>& theData) { weightedSourceProvinceData = theData; }
+
 	void convertDemographics(const ClayManager& clayManager,
 		 const mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader);
 
-	[[nodiscard]] const auto& getProvinces() const { return provinces; }
-	[[nodiscard]] const auto& getOwner() const { return owner; }
-	[[nodiscard]] const auto& getSourceOwnerTag() const { return sourceOwnerTag; }
 	[[nodiscard]] const auto& getHomeState() const { return homeState; }
+	[[nodiscard]] const auto& getOwner() const { return owner; }
+	[[nodiscard]] const auto& getProvinces() const { return provinces; }
+	[[nodiscard]] const auto& getSubStateType() const { return subStateType; }
+
+	[[nodiscard]] const auto& getSourceOwnerTag() const { return sourceOwnerTag; }
+
 	[[nodiscard]] auto getLandshare() const { return landshare; }
 	[[nodiscard]] const auto& getResource(const std::string& theResource) { return resources[theResource]; }
 	[[nodiscard]] const auto& getDemographics() { return demographics; }
@@ -62,6 +70,7 @@ class SubState
 	std::shared_ptr<State> homeState; // home state
 	std::shared_ptr<Country> owner;
 	ProvinceMap provinces; // V3 province codes
+	std::string subStateType;
 
 	std::optional<std::string> sourceOwnerTag; // we may or may not have this, depending on where substate is imported from.
 	std::optional<double> weight;					 // imported scaled sourceProvinceWeight from whatever source province(s) point generally here.

@@ -1,6 +1,8 @@
 #include "Loaders/VanillaStateLoader/VanillaStateLoader.h"
 #include "gtest/gtest.h"
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+
 TEST(V3World_VanillaStateLoaderTests, DefaultsDefaultToDefaults)
 {
 	const V3::VanillaStateLoader loader;
@@ -11,7 +13,7 @@ TEST(V3World_VanillaStateLoaderTests, DefaultsDefaultToDefaults)
 TEST(V3World_VanillaStateLoaderTests, VanillaStatesCanBeLoaded)
 {
 	V3::VanillaStateLoader loader;
-	loader.loadVanillaStates("TestFiles/vic3installation/game/");
+	loader.loadVanillaStates(modFS);
 
 	ASSERT_EQ(4, loader.getStates().size());
 	EXPECT_TRUE(loader.getStates().contains("STATE_TEST_LAND1"));

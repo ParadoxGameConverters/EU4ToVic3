@@ -21,6 +21,8 @@ class Chunk;
 class SubState;
 class State;
 class SuperRegion;
+class VanillaStateEntry;
+class PoliticalManager;
 class ClayManager
 {
   public:
@@ -33,8 +35,8 @@ class ClayManager
 	void generateChunks(const mappers::ProvinceMapper& provinceMapper, const EU4::ProvinceManager& provinceManager);
 	void unDisputeChunkOwnership(const SourceOwners& sourceCountries);
 	void splitChunksIntoSubStates();
-
 	void assignSubStateOwnership(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper);
+	void injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager);
 
 	[[nodiscard]] const auto& getStates() const { return states; }
 	[[nodiscard]] const auto& getSuperRegions() const { return superRegions; }
@@ -48,6 +50,10 @@ class ClayManager
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> chunkToSubStatesTransferFunction(const std::shared_ptr<Chunk>& chunk) const;
 	[[nodiscard]] StateToProvinceMap sortChunkProvincesIntoStates(const std::shared_ptr<Chunk>& chunk) const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> buildSubStates(const StateToProvinceMap& stateProvinceMap) const;
+	[[nodiscard]] bool importVanillaSubStates(const std::string& stateName,
+		 const VanillaStateEntry& entry,
+		 const ProvinceMap& unassignedProvinces,
+		 const PoliticalManager& politicalManager);
 
 	std::map<std::string, std::shared_ptr<State>> states;					// geographical entities
 	std::map<std::string, std::shared_ptr<SuperRegion>> superRegions; // geographical entities

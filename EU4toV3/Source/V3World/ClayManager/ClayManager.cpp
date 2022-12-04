@@ -5,8 +5,10 @@
 #include "Loaders/SuperRegionLoader/V3Region.h"
 #include "Loaders/SuperRegionLoader/V3SuperRegion.h"
 #include "Loaders/TerrainLoader/TerrainLoader.h"
+#include "Loaders/VanillaStateLoader/VanillaStateLoader.h"
 #include "Log.h"
 #include "PoliticalManager/Country/Country.h"
+#include "PoliticalManager/PoliticalManager.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
 #include "State/Chunk.h"
@@ -396,4 +398,92 @@ bool V3::ClayManager::stateIsInRegion(const std::string& state, const std::strin
 				return true;
 
 	return false;
+}
+
+void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager)
+{
+	Log(LogLevel::Info) << "-> Injecting Vanilla substates into conversion map.";
+	auto subCounter = substates.size();
+
+	VanillaStateLoader loader;
+	loader.loadVanillaStates(modFS);
+
+	for (const auto& [stateName, state]: states)
+	{
+		// do we need to do anything?
+		if (!state->hasUnassignedProvinces())
+			continue;
+
+		auto unassignedProvinces = state->getUnassignedProvinces();
+		if (unassignedProvinces.empty())
+			continue;
+
+		// grab vanilla state.
+		if (!loader.getStates().contains(stateName))
+		{
+			// silently skip seas and lakes.
+			if (state->isSea() || state->isLake())
+				continue;
+
+			Log(LogLevel::Warning) << "ModFS has no state " << stateName << ", not importing substates!";
+			continue;
+		}
+
+		const auto& vanillaStateEntry = loader.getStates().at(stateName);
+		const auto success = importVanillaSubStates(stateName, vanillaStateEntry, unassignedProvinces, politicalManager);
+
+		// If we imported anything, we should also copy any potential homelands. Unsure whom they belong to, but they surely won't do harm.
+		// What could possibly go wrong?
+		if (success)
+			for (const auto& homeland: vanillaStateEntry.getHomelands())
+				state->addHomeland(homeland);
+	}
+
+	subCounter = substates.size() - subCounter;
+	Log(LogLevel::Info) << "<> Imported " << subCounter << " new substates.";
+}
+
+bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
+	 const VanillaStateEntry& entry,
+	 const ProvinceMap& unassignedProvinces,
+	 const PoliticalManager& politicalManager)
+{
+	bool action = false;
+	for (const auto& subStateEntry: entry.getSubStates())
+	{
+		const auto& ownerTag = subStateEntry.getOwnerTag();
+		if (ownerTag.empty())
+			continue;
+
+		// We have a substate owner. Is he vanilla-decentralized?
+		if (!politicalManager.isTagDecentralized(ownerTag))
+			continue;
+
+		// Now we have a state we can work with. Not all of its provinces are available!
+		ProvinceMap availableProvinces;
+		for (const auto& provinceID: subStateEntry.getProvinces())
+			if (unassignedProvinces.contains(provinceID))
+				availableProvinces.emplace(provinceID, unassignedProvinces.at(provinceID));
+
+		// Anything to work with?
+		if (availableProvinces.empty())
+			continue;
+
+		const auto& owner = politicalManager.getCountry(ownerTag);
+		const auto& homeState = states.at(stateName);
+
+		// form new substate.
+		auto newSubState = std::make_shared<SubState>();
+		newSubState->setOwner(owner);
+		newSubState->setProvinces(availableProvinces);
+		newSubState->setSubStateType(subStateEntry.getSubStateType());
+		newSubState->setHomeState(homeState);
+
+		// and register.
+		homeState->addSubState(newSubState);
+		owner->addSubState(newSubState);
+		substates.emplace_back(newSubState);
+		action = true;
+	}
+	return action;
 }

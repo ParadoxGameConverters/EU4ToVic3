@@ -46,6 +46,9 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	popManager.initializeVanillaPops(modFS);
 	popManager.assignVanillaPopsToStates(clayManager);
 
+	// inject vanilla substates into map holes.
+	clayManager.injectVanillaSubStates(modFS, politicalManager);
+
 	Log(LogLevel::Progress) << "50 %";
 	// handling demographics
 	popManager.convertDemographics(clayManager, cultureMapper, religionMapper, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());

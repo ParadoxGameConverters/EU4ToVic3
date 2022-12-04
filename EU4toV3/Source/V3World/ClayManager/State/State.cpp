@@ -6,6 +6,7 @@
 #include "ProvinceTypeCounter.h"
 #include "SubState.h"
 #include <cmath>
+#include <numeric>
 #include <ranges>
 
 void V3::State::loadState(std::istream& theStream)
@@ -170,4 +171,31 @@ bool V3::State::isLake() const
 	return std::ranges::all_of(provinces.begin(), provinces.end(), [](const std::pair<std::string, std::shared_ptr<Province>>& province) {
 		return province.second->isLake();
 	});
+}
+
+V3::ProvinceMap V3::State::getUnassignedProvinces() const
+{
+	ProvinceMap unassignedProvinces;
+	std::set<std::string> seenProvinceIDs;
+
+	for (const auto& subState: substates)
+		for (const auto& provinceID: subState->getProvinces() | std::views::keys)
+			seenProvinceIDs.emplace(provinceID);
+
+	for (const auto& [provinceID, province]: provinces)
+		if (!seenProvinceIDs.contains(provinceID))
+			unassignedProvinces.emplace(provinceID, province);
+
+	return unassignedProvinces;
+}
+
+bool V3::State::hasUnassignedProvinces() const
+{
+	// it's faster to count than to filter.
+	const auto assignedProvinces = std::accumulate(substates.begin(), substates.end(), 0, [](int sum, const auto& subState) {
+		return sum + static_cast<int>(subState->getProvinces().size());
+	});
+	if (provinces.size() - assignedProvinces == 0)
+		return false;
+	return true;
 }
