@@ -1,17 +1,16 @@
 #include "VanillaStateLoader.h"
 #include "CommonFunctions.h"
 #include "CommonRegexes.h"
-#include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 #include "VanillaStateEntries.h"
 
-void V3::VanillaStateLoader::loadVanillaStates(const std::string& v3Path)
+void V3::VanillaStateLoader::loadVanillaStates(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: commonItems::GetAllFilesInFolder(v3Path + "/common/history/states/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/states/"))
 	{
 		if (getExtension(fileName) == "txt")
-			parseFile(v3Path + "/common/history/states/" + fileName);
+			parseFile(fileName);
 	}
 	clearRegisteredKeywords();
 }

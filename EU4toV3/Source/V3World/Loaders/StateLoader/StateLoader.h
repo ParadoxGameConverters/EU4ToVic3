@@ -10,7 +10,7 @@ class StateLoader: commonItems::parser
   public:
 	StateLoader() = default;
 
-	void loadStates(const std::string& v3Path);
+	void loadStates(const commonItems::ModFilesystem& modFS);
 	[[nodiscard]] const auto& getStates() const { return states; }
 
   private:

@@ -10,7 +10,7 @@ class PopLoader: commonItems::parser
   public:
 	PopLoader() = default;
 
-	void loadPops(const std::string& v3Path);
+	void loadPops(const commonItems::ModFilesystem& modFS);
 	[[nodiscard]] const auto& getStatePops() const { return statePops; }
 
   private:

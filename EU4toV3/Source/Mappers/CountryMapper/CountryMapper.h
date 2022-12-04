@@ -17,6 +17,8 @@ class CountryMapper: commonItems::parser
 	void loadMappingRules(const std::string& filePath);
 	void loadMappingRules(std::istream& theStream);
 
+	void registerKnownVanillaV3Tag(const std::string& tag) { knownVanillaV3Tags.emplace(tag); }
+
 	[[nodiscard]] std::optional<std::string> getV3Tag(const std::string& eu4Tag) const;
 	[[nodiscard]] std::optional<std::string> getEU4Tag(const std::string& v3Tag) const;
 	[[nodiscard]] std::optional<std::string> getFlagCode(const std::string& v3Tag) const;
@@ -43,6 +45,7 @@ class CountryMapper: commonItems::parser
 	std::map<std::string, std::string> v3TagToEU4TagMap;
 	std::map<std::string, std::string> v3FlagCodes; // v3 tag -> flagcode
 	std::set<std::string> unmappedV3Tags;				// stuff we generate on the fly for decentralized countries.
+	std::set<std::string> knownVanillaV3Tags;			// countries we import at game start. Includes names with potential for generated-collisions.
 
 	char generatedV3TagPrefix = 'X';
 	int generatedV3TagSuffix = 0;

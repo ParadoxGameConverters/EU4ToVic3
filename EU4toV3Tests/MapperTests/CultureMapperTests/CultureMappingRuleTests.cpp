@@ -5,6 +5,8 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+
 TEST(Mappers_CultureMappingRuleTests, primitivesDefaultsToBlank)
 {
 	const mappers::CultureMappingRule mapping;
@@ -229,8 +231,8 @@ TEST(Mappers_CultureMappingRuleTests, regularMatchOnOwnerFailsForNoOwner)
 TEST(Mappers_CultureMappingRuleTests, regularMatchOnState)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 	EU4::ReligionLoader religionLoader;
 	EU4::CultureLoader cultureLoader;
@@ -246,8 +248,8 @@ TEST(Mappers_CultureMappingRuleTests, regularMatchOnState)
 TEST(Mappers_CultureMappingRuleTests, regularMatchOnRegion)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 	EU4::ReligionLoader religionLoader;
 	EU4::CultureLoader cultureLoader;
@@ -263,8 +265,8 @@ TEST(Mappers_CultureMappingRuleTests, regularMatchOnRegion)
 TEST(Mappers_CultureMappingRuleTests, regularMatchOnSuperRegion)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 	EU4::ReligionLoader religionLoader;
 	EU4::CultureLoader cultureLoader;
@@ -280,8 +282,8 @@ TEST(Mappers_CultureMappingRuleTests, regularMatchOnSuperRegion)
 TEST(Mappers_CultureMappingRuleTests, regularMatchOnRegionFailsForWrongState)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 	EU4::ReligionLoader religionLoader;
 	EU4::CultureLoader cultureLoader;
@@ -295,8 +297,8 @@ TEST(Mappers_CultureMappingRuleTests, regularMatchOnRegionFailsForWrongState)
 TEST(Mappers_CultureMappingRuleTests, regularMatchOnRegionFailsForWrongRegion)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 	EU4::ReligionLoader religionLoader;
 	EU4::CultureLoader cultureLoader;
@@ -310,8 +312,8 @@ TEST(Mappers_CultureMappingRuleTests, regularMatchOnRegionFailsForWrongRegion)
 TEST(Mappers_CultureMappingRuleTests, regularMatchOnRegionFailsForWrongSuperRegion)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 	EU4::ReligionLoader religionLoader;
 	EU4::CultureLoader cultureLoader;
@@ -325,8 +327,8 @@ TEST(Mappers_CultureMappingRuleTests, regularMatchOnRegionFailsForWrongSuperRegi
 TEST(Mappers_CultureMappingRuleTests, regularMatchOnRegionFailsForNoRegion)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 	EU4::ReligionLoader religionLoader;
 	EU4::CultureLoader cultureLoader;
@@ -340,8 +342,8 @@ TEST(Mappers_CultureMappingRuleTests, regularMatchOnRegionFailsForNoRegion)
 TEST(Mappers_CultureMappingRuleTests, regionalMatchOnRegion)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 	EU4::ReligionLoader religionLoader;
 	EU4::CultureLoader cultureLoader;
@@ -357,8 +359,8 @@ TEST(Mappers_CultureMappingRuleTests, regionalMatchOnRegion)
 TEST(Mappers_CultureMappingRuleTests, regionalMatchOnFailsForNoLoadedRegions)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 	EU4::ReligionLoader religionLoader;
 	EU4::CultureLoader cultureLoader;
@@ -372,8 +374,8 @@ TEST(Mappers_CultureMappingRuleTests, regionalMatchOnFailsForNoLoadedRegions)
 TEST(Mappers_CultureMappingRuleTests, nonRegionalNonReligionsMatch)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 	EU4::ReligionLoader religionLoader;
 	std::stringstream input;
@@ -392,8 +394,8 @@ TEST(Mappers_CultureMappingRuleTests, nonRegionalNonReligionsMatch)
 TEST(Mappers_CultureMappingRuleTests, nonRegionalNonReligionsMatchOnFailsForLoadedRegions)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 	EU4::ReligionLoader religionLoader;
 	std::stringstream input;
@@ -410,8 +412,8 @@ TEST(Mappers_CultureMappingRuleTests, nonRegionalNonReligionsMatchOnFailsForLoad
 TEST(Mappers_CultureMappingRuleTests, nonRegionalNonReligionsMatchOnFailsForLoadedReligions)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 	EU4::ReligionLoader religionLoader;
 	std::stringstream input;
@@ -428,8 +430,8 @@ TEST(Mappers_CultureMappingRuleTests, nonRegionalNonReligionsMatchOnFailsForLoad
 TEST(Mappers_CultureMappingRuleTests, nonRegionalNonReligionsMatchOnFailsForLoadedReligionGroups)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 	EU4::ReligionLoader religionLoader;
 	std::stringstream input;

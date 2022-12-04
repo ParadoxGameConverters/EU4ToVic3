@@ -9,7 +9,7 @@ class VanillaStateLoader: commonItems::parser
 {
   public:
 	VanillaStateLoader() = default;
-	void loadVanillaStates(const std::string& v3Path);
+	void loadVanillaStates(const commonItems::ModFilesystem& modFS);
 
 	[[nodiscard]] const auto& getStates() const { return stateEntries; }
 

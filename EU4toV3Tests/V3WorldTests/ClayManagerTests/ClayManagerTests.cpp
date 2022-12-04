@@ -14,6 +14,8 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+
 V3::ClayManager generateChunks()
 {
 	auto eu4Path = "TestFiles/eu4installation/";
@@ -46,12 +48,10 @@ V3::ClayManager generateChunks()
 	mappers::ProvinceMapper provinceMapper;
 	provinceMapper.loadProvinceMappings("TestFiles/configurables/province_mappings_chunks.txt");
 
-	auto V3Path = "TestFiles/vic3installation/game/";
-
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
-	clayManager.initializeSuperRegions(V3Path);
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 
 	clayManager.generateChunks(provinceMapper, provinceManager);
@@ -83,8 +83,10 @@ V3::ClayManager assignSubStateOwnership()
 	countryMapper->loadMappingRules("TestFiles/configurables/country_mappings.txt");
 	V3::PoliticalManager politicalManager;
 	politicalManager.loadCountryMapper(countryMapper);
+	politicalManager.initializeVanillaCountries(modFS);
 	politicalManager.importEU4Countries(countries);
 	clayManager.assignSubStateOwnership(politicalManager.getCountries(), *countryMapper);
+	clayManager.injectVanillaSubStates(modFS, politicalManager);
 
 	return clayManager;
 }
@@ -95,7 +97,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaStates)
 
 	EXPECT_EQ(0, clayManager.getStates().size());
 
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
 
 	EXPECT_EQ(10, clayManager.getStates().size());
 	EXPECT_TRUE(clayManager.getStates().contains("STATE_TEST_1"));
@@ -107,8 +109,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaStates)
 TEST(V3World_ClayManagerTests, clayManagerCanLoadTerrainsIntoStateProvinces)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
 
 	const auto& state1 = clayManager.getStates().at("STATE_TEST_LAKE");
 	const auto& province1 = state1->getProvinces().at("xAABBCC");
@@ -122,8 +124,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanLoadTerrainsIntoStateProvinces)
 TEST(V3World_ClayManagerTests, oceanProvincesGetFlaggedAsSeas)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
 
 	const auto& state1 = clayManager.getStates().at("STATE_TEST_LAKE");
 	const auto& province1 = state1->getProvinces().at("xAABBCC");
@@ -137,8 +139,8 @@ TEST(V3World_ClayManagerTests, oceanProvincesGetFlaggedAsSeas)
 TEST(V3World_ClayManagerTests, lakeProvincesGetFlaggedAsLakesandImpassables)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
 
 	const auto& state1 = clayManager.getStates().at("STATE_TEST_LAKE");
 	const auto& province1 = state1->getProvinces().at("xAABBCC");
@@ -154,12 +156,12 @@ TEST(V3World_ClayManagerTests, lakeProvincesGetFlaggedAsLakesandImpassables)
 TEST(V3World_ClayManagerTests, clayManagerComplainsForMissingProvinceTerrain)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
 
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
 	std::cout.rdbuf(log.rdbuf());
-	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
+	clayManager.loadTerrainsIntoProvinces(modFS);
 
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Terrain for province x345678 cannot be found.)"));
 
@@ -172,7 +174,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanInitializeSuperRegions)
 
 	EXPECT_EQ(0, clayManager.getSuperRegions().size());
 
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeSuperRegions(modFS);
 
 	EXPECT_EQ(2, clayManager.getSuperRegions().size());
 	EXPECT_TRUE(clayManager.getSuperRegions().contains("test_1_strategic_regions"));
@@ -182,8 +184,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanInitializeSuperRegions)
 TEST(V3World_ClayManagerTests, clayManagerCanLinkStatesToSuperRegions)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 
 	const auto& superRegion1 = clayManager.getSuperRegions().at("test_1_strategic_regions");
@@ -202,8 +204,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanLinkStatesToSuperRegions)
 TEST(V3World_ClayManagerTests, clayManagerCanDetermineRegionValidity)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 
 	EXPECT_TRUE(clayManager.regionIsValid("STATE_TEST_1"));					// state
@@ -217,8 +219,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanDetermineRegionValidity)
 TEST(V3World_ClayManagerTests, clayManagerCanDetermineHierarchy)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 
 	EXPECT_TRUE(clayManager.stateIsInRegion("STATE_TEST_1", "STATE_TEST_1"));
@@ -232,8 +234,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanDetermineHierarchy)
 TEST(V3World_ClayManagerTests, excessSuperRegionStatesInRegionsAreObjectedAndRemoved)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
@@ -472,11 +474,12 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces substate 4, for V3's GA9.
 	*/
 
-	ASSERT_EQ(3, substates.size());
+	ASSERT_EQ(4, substates.size());
 
 	const auto& substate1 = substates[0];
 	const auto& substate2 = substates[1];
 	const auto& substate3 = substates[2];
+	// we're ignoring the 4th substate which is an imported one.
 
 	ASSERT_TRUE(substate1->getSourceOwnerTag());
 	EXPECT_EQ("TA2", substate1->getSourceOwnerTag());
@@ -513,4 +516,64 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	EXPECT_EQ("STATE_TEST_LAND4", substate3->getOwner()->getSubStates()[0]->getHomeStateName());
 	// linkback through state's substate ownership vector
 	EXPECT_EQ("GA9", substate3->getHomeState()->getSubStates()[0]->getOwnerTag());
+}
+
+TEST(V3World_ClayManagerTests, clayManagerCanInjectVanillaSubStates)
+{
+	auto clayManager = assignSubStateOwnership();
+	const auto& substates = clayManager.getSubStates();
+
+	/*
+	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces substates 1 & 2 for V3's GA2.
+	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces substate 4, for V3's GA9.
+	injected is the vic3 = x000005, x000006 one.
+	*/
+
+	ASSERT_EQ(4, substates.size());
+
+	// we're focusing on the 4th substate - injected one.
+	const auto& substate4 = substates[3];
+
+	ASSERT_FALSE(substate4->getSourceOwnerTag());
+	EXPECT_EQ(2, substate4->getProvinces().size());
+	EXPECT_TRUE(substate4->getProvinces().contains("x000005"));
+	EXPECT_TRUE(substate4->getProvinces().contains("x000006"));
+	EXPECT_EQ("STATE_TEST_LAND3", substate4->getHomeStateName());
+	EXPECT_EQ("CCC", substate4->getOwnerTag());
+	EXPECT_EQ("CCC", substate4->getOwner()->getTag());
+	// linkback to this substate through getOwner() substates vector
+	EXPECT_EQ("STATE_TEST_LAND3", substate4->getOwner()->getSubStates()[0]->getHomeStateName());
+	// linkback through state's substate ownership vector
+	EXPECT_EQ("CCC", substate4->getHomeState()->getSubStates()[0]->getOwnerTag());
+}
+
+TEST(V3World_ClayManagerTests, clayManagerCanShoveProvincesIntoSubStates)
+{
+	auto clayManager = assignSubStateOwnership();
+
+	// let's grab a state.
+	const auto& state = clayManager.getStates().at("STATE_TEST_LAND3");
+
+	// it has 1 substate.
+	ASSERT_EQ(1, state->getSubStates().size());
+	// let's grab that substate.
+	const auto& substate1 = state->getSubStates()[0];
+	EXPECT_EQ(2, substate1->getProvinces().size());
+	EXPECT_TRUE(substate1->getProvinces().contains("x000005"));
+	EXPECT_TRUE(substate1->getProvinces().contains("x000006"));
+
+	// wipe its provinces.
+	substate1->setProvinces({});
+
+	// now shove them.
+	clayManager.shoveRemainingProvincesIntoSubStates();
+
+	// now state has have 2 substates.
+	ASSERT_EQ(2, state->getSubStates().size());
+
+	// and the second one has provinces shoved into it.
+	const auto& substate2 = state->getSubStates()[1];
+	EXPECT_EQ(2, substate2->getProvinces().size());
+	EXPECT_TRUE(substate2->getProvinces().contains("x000005"));
+	EXPECT_TRUE(substate2->getProvinces().contains("x000006"));
 }

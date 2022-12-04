@@ -4,10 +4,10 @@
 #include "ParserHelpers.h"
 #include "StringUtils.h"
 
-void V3::TerrainLoader::loadTerrains(const std::string& v3Path)
+void V3::TerrainLoader::loadTerrains(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	parseFile(v3Path + "/map_data/province_terrains.txt");
+	parseFile(*modFS.GetActualFileLocation("/map_data/province_terrains.txt"));
 	clearRegisteredKeywords();
 }
 

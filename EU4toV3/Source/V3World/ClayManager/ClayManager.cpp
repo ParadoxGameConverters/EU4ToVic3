@@ -5,8 +5,10 @@
 #include "Loaders/SuperRegionLoader/V3Region.h"
 #include "Loaders/SuperRegionLoader/V3SuperRegion.h"
 #include "Loaders/TerrainLoader/TerrainLoader.h"
+#include "Loaders/VanillaStateLoader/VanillaStateLoader.h"
 #include "Log.h"
 #include "PoliticalManager/Country/Country.h"
+#include "PoliticalManager/PoliticalManager.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
 #include "State/Chunk.h"
@@ -16,11 +18,11 @@
 #include <numeric>
 #include <ranges>
 
-void V3::ClayManager::initializeVanillaStates(const std::string& v3Path)
+void V3::ClayManager::initializeVanillaStates(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Initializing Vanilla States and Provinces.";
 	StateLoader stateLoader;
-	stateLoader.loadStates(v3Path);
+	stateLoader.loadStates(modFS);
 	states = stateLoader.getStates();
 	for (const auto& state: states | std::views::values)
 		for (const auto& provinceID: state->getProvinces() | std::views::keys)
@@ -29,11 +31,11 @@ void V3::ClayManager::initializeVanillaStates(const std::string& v3Path)
 	Log(LogLevel::Info) << "<> " << states.size() << " states loaded with " << provincesToStates.size() << " provinces inside.";
 }
 
-void V3::ClayManager::loadTerrainsIntoProvinces(const std::string& v3Path)
+void V3::ClayManager::loadTerrainsIntoProvinces(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Loading Terrains into Provinces.";
 	TerrainLoader terrainLoader;
-	terrainLoader.loadTerrains(v3Path);
+	terrainLoader.loadTerrains(modFS);
 	const auto& terrains = terrainLoader.getTerrains();
 	for (const auto& state: states | std::views::values)
 		for (const auto& [provinceName, province]: state->getProvinces())
@@ -52,11 +54,11 @@ void V3::ClayManager::loadTerrainsIntoProvinces(const std::string& v3Path)
 			}
 }
 
-void V3::ClayManager::initializeSuperRegions(const std::string& v3Path)
+void V3::ClayManager::initializeSuperRegions(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Initializing Regions and Superregions.";
 	SuperRegionLoader superRegionLoader;
-	superRegionLoader.loadSuperRegions(v3Path);
+	superRegionLoader.loadSuperRegions(modFS);
 	superRegions = superRegionLoader.getSuperRegions();
 
 	const auto regionCount = std::accumulate(superRegions.begin(), superRegions.end(), 0, [](int sum, const auto& superRegion) {
@@ -396,4 +398,132 @@ bool V3::ClayManager::stateIsInRegion(const std::string& state, const std::strin
 				return true;
 
 	return false;
+}
+
+void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager)
+{
+	Log(LogLevel::Info) << "-> Injecting Vanilla substates into conversion map.";
+	auto subCounter = substates.size();
+
+	VanillaStateLoader loader;
+	loader.loadVanillaStates(modFS);
+
+	for (const auto& [stateName, state]: states)
+	{
+		// do we need to do anything?
+		if (!state->hasUnassignedProvinces())
+			continue;
+
+		// just sanity.
+		auto unassignedProvinces = state->getUnassignedProvinces();
+		if (unassignedProvinces.empty())
+			continue;
+
+		// grab vanilla state.
+		if (!loader.getStates().contains(stateName))
+		{
+			// silently skip seas and lakes.
+			if (state->isSea() || state->isLake())
+				continue;
+
+			Log(LogLevel::Warning) << "ModFS has no state " << stateName << ", not importing substates!";
+			continue;
+		}
+
+		const auto& vanillaStateEntry = loader.getStates().at(stateName);
+		const auto success = importVanillaSubStates(stateName, vanillaStateEntry, unassignedProvinces, politicalManager);
+
+		// If we imported anything, we should also copy any potential homelands. Unsure whom they belong to, but they surely won't do harm.
+		// What could possibly go wrong?
+		if (success)
+			for (const auto& homeland: vanillaStateEntry.getHomelands())
+				state->addHomeland(homeland);
+	}
+
+	subCounter = substates.size() - subCounter;
+	Log(LogLevel::Info) << "<> Imported " << subCounter << " new substates.";
+}
+
+bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
+	 const VanillaStateEntry& entry,
+	 const ProvinceMap& unassignedProvinces,
+	 const PoliticalManager& politicalManager)
+{
+	bool action = false;
+	for (const auto& subStateEntry: entry.getSubStates())
+	{
+		const auto& ownerTag = subStateEntry.getOwnerTag();
+		if (ownerTag.empty())
+			continue;
+
+		// We have a substate owner. Is he vanilla-decentralized?
+		if (!politicalManager.isTagDecentralized(ownerTag))
+			continue;
+
+		// Now we have a state we can work with. Not all of its provinces are available!
+		ProvinceMap availableProvinces;
+		for (const auto& provinceID: subStateEntry.getProvinces())
+			if (unassignedProvinces.contains(provinceID))
+				availableProvinces.emplace(provinceID, unassignedProvinces.at(provinceID));
+
+		// Anything to work with?
+		if (availableProvinces.empty())
+			continue;
+
+		const auto& owner = politicalManager.getCountry(ownerTag);
+		const auto& homeState = states.at(stateName);
+
+		// form new substate.
+		auto newSubState = std::make_shared<SubState>();
+		newSubState->setOwner(owner);
+		newSubState->setProvinces(availableProvinces);
+		newSubState->setSubStateType(subStateEntry.getSubStateType());
+		newSubState->setHomeState(homeState);
+
+		// and register.
+		homeState->addSubState(newSubState);
+		owner->addSubState(newSubState);
+		substates.emplace_back(newSubState);
+		action = true;
+	}
+	return action;
+}
+
+void V3::ClayManager::shoveRemainingProvincesIntoSubStates()
+{
+	Log(LogLevel::Info) << "-> Shoving remaining provinces into substates.";
+	auto subCounter = substates.size();
+
+	for (const auto& [stateName, state]: states)
+	{
+		// do we need to do anything?
+		if (!state->hasUnassignedProvinces())
+			continue;
+
+		// just sanity.
+		auto unassignedProvinces = state->getUnassignedProvinces();
+		if (unassignedProvinces.empty())
+			continue;
+
+		// silently skip seas and lakes.
+		if (state->isSea() || state->isLake())
+			continue;
+
+		makeSubStateFromProvinces(stateName, unassignedProvinces);
+	}
+
+	subCounter = substates.size() - subCounter;
+	Log(LogLevel::Info) << "<> Generated " << subCounter << " new substates.";
+}
+
+void V3::ClayManager::makeSubStateFromProvinces(const std::string& stateName, const ProvinceMap& unassignedProvinces)
+{
+	const auto& homeState = states.at(stateName);
+
+	auto newSubState = std::make_shared<SubState>();
+	newSubState->setProvinces(unassignedProvinces);
+	newSubState->setHomeState(homeState);
+
+	homeState->addSubState(newSubState);
+	substates.emplace_back(newSubState);
 }

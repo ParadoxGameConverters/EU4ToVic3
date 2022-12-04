@@ -11,7 +11,7 @@ class TerrainLoader: commonItems::parser
   public:
 	TerrainLoader() = default;
 
-	void loadTerrains(const std::string& v3Path);
+	void loadTerrains(const commonItems::ModFilesystem& modFS);
 	[[nodiscard]] const auto& getTerrains() const { return provincialTerrains; }
 
   private:

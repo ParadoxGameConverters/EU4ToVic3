@@ -2,15 +2,14 @@
 #include "ClayManager/State/State.h"
 #include "CommonFunctions.h"
 #include "CommonRegexes.h"
-#include "OSCompatibilityLayer.h"
 
-void V3::StateLoader::loadStates(const std::string& v3Path)
+void V3::StateLoader::loadStates(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: commonItems::GetAllFilesInFolder(v3Path + "/map_data/state_regions/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("/map_data/state_regions/"))
 	{
 		if (getExtension(fileName) == "txt")
-			parseFile(v3Path + "/map_data/state_regions/" + fileName);
+			parseFile(fileName);
 	}
 	clearRegisteredKeywords();
 }
