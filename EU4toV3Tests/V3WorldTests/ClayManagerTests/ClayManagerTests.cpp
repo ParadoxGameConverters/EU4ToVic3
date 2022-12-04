@@ -14,6 +14,8 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+
 V3::ClayManager generateChunks()
 {
 	auto eu4Path = "TestFiles/eu4installation/";
@@ -46,12 +48,10 @@ V3::ClayManager generateChunks()
 	mappers::ProvinceMapper provinceMapper;
 	provinceMapper.loadProvinceMappings("TestFiles/configurables/province_mappings_chunks.txt");
 
-	auto V3Path = "TestFiles/vic3installation/game/";
-
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
-	clayManager.initializeSuperRegions(V3Path);
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 
 	clayManager.generateChunks(provinceMapper, provinceManager);
@@ -95,7 +95,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaStates)
 
 	EXPECT_EQ(0, clayManager.getStates().size());
 
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
 
 	EXPECT_EQ(10, clayManager.getStates().size());
 	EXPECT_TRUE(clayManager.getStates().contains("STATE_TEST_1"));
@@ -107,8 +107,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaStates)
 TEST(V3World_ClayManagerTests, clayManagerCanLoadTerrainsIntoStateProvinces)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
 
 	const auto& state1 = clayManager.getStates().at("STATE_TEST_LAKE");
 	const auto& province1 = state1->getProvinces().at("xAABBCC");
@@ -122,8 +122,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanLoadTerrainsIntoStateProvinces)
 TEST(V3World_ClayManagerTests, oceanProvincesGetFlaggedAsSeas)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
 
 	const auto& state1 = clayManager.getStates().at("STATE_TEST_LAKE");
 	const auto& province1 = state1->getProvinces().at("xAABBCC");
@@ -137,8 +137,8 @@ TEST(V3World_ClayManagerTests, oceanProvincesGetFlaggedAsSeas)
 TEST(V3World_ClayManagerTests, lakeProvincesGetFlaggedAsLakesandImpassables)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
 
 	const auto& state1 = clayManager.getStates().at("STATE_TEST_LAKE");
 	const auto& province1 = state1->getProvinces().at("xAABBCC");
@@ -154,12 +154,12 @@ TEST(V3World_ClayManagerTests, lakeProvincesGetFlaggedAsLakesandImpassables)
 TEST(V3World_ClayManagerTests, clayManagerComplainsForMissingProvinceTerrain)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
 
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
 	std::cout.rdbuf(log.rdbuf());
-	clayManager.loadTerrainsIntoProvinces("TestFiles/vic3installation/game/");
+	clayManager.loadTerrainsIntoProvinces(modFS);
 
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Terrain for province x345678 cannot be found.)"));
 
@@ -172,7 +172,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanInitializeSuperRegions)
 
 	EXPECT_EQ(0, clayManager.getSuperRegions().size());
 
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeSuperRegions(modFS);
 
 	EXPECT_EQ(2, clayManager.getSuperRegions().size());
 	EXPECT_TRUE(clayManager.getSuperRegions().contains("test_1_strategic_regions"));
@@ -182,8 +182,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanInitializeSuperRegions)
 TEST(V3World_ClayManagerTests, clayManagerCanLinkStatesToSuperRegions)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 
 	const auto& superRegion1 = clayManager.getSuperRegions().at("test_1_strategic_regions");
@@ -202,8 +202,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanLinkStatesToSuperRegions)
 TEST(V3World_ClayManagerTests, clayManagerCanDetermineRegionValidity)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 
 	EXPECT_TRUE(clayManager.regionIsValid("STATE_TEST_1"));					// state
@@ -217,8 +217,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanDetermineRegionValidity)
 TEST(V3World_ClayManagerTests, clayManagerCanDetermineHierarchy)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 
 	EXPECT_TRUE(clayManager.stateIsInRegion("STATE_TEST_1", "STATE_TEST_1"));
@@ -232,8 +232,8 @@ TEST(V3World_ClayManagerTests, clayManagerCanDetermineHierarchy)
 TEST(V3World_ClayManagerTests, excessSuperRegionStatesInRegionsAreObjectedAndRemoved)
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();

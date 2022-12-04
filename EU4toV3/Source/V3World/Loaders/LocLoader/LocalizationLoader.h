@@ -1,5 +1,6 @@
 #ifndef LOCALIZATION_LOADER
 #define LOCALIZATION_LOADER
+#include "ModLoader/ModFilesystem.h"
 #include <map>
 #include <optional>
 #include <set>
@@ -12,7 +13,7 @@ class LocalizationLoader
 {
   public:
 	LocalizationLoader() = default;
-	void scrapeLocalizations(const std::string& v3Path);
+	void scrapeLocalizations(const commonItems::ModFilesystem& modFS);
 	void scrapeStream(std::istream& theStream, const std::string& language);
 
 	[[nodiscard]] std::optional<LocMap> getLocMapForKey(const std::string& key) const;

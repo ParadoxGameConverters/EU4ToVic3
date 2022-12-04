@@ -10,7 +10,7 @@ class SuperRegionLoader: commonItems::parser
   public:
 	SuperRegionLoader() = default;
 
-	void loadSuperRegions(const std::string& v3Path);
+	void loadSuperRegions(const commonItems::ModFilesystem& modFS);
 	[[nodiscard]] const auto& getSuperRegions() const { return superRegions; }
 
   private:

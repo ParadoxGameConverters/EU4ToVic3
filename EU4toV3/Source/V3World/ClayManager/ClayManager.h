@@ -1,6 +1,7 @@
 #ifndef CLAY_MANAGER_H
 #define CLAY_MANAGER_H
 #include "ClayMapTypedefs.h"
+#include "ModLoader/ModFilesystem.h"
 #include <string>
 #include <vector>
 
@@ -25,9 +26,9 @@ class ClayManager
   public:
 	ClayManager() = default;
 
-	void initializeVanillaStates(const std::string& v3Path);
-	void loadTerrainsIntoProvinces(const std::string& v3Path);
-	void initializeSuperRegions(const std::string& v3Path);
+	void initializeVanillaStates(const commonItems::ModFilesystem& modFS);
+	void loadTerrainsIntoProvinces(const commonItems::ModFilesystem& modFS);
+	void initializeSuperRegions(const commonItems::ModFilesystem& modFS);
 	void loadStatesIntoSuperRegions();
 	void generateChunks(const mappers::ProvinceMapper& provinceMapper, const EU4::ProvinceManager& provinceManager);
 	void unDisputeChunkOwnership(const SourceOwners& sourceCountries);

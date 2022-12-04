@@ -10,11 +10,11 @@
 #include <numeric>
 #include <ranges>
 
-void V3::PopManager::initializeVanillaPops(const std::string& v3Path)
+void V3::PopManager::initializeVanillaPops(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Loading Vanilla Pops.";
 	PopLoader popLoader;
-	popLoader.loadPops(v3Path);
+	popLoader.loadPops(modFS);
 	vanillaStatePops = popLoader.getStatePops();
 
 	const auto total = std::accumulate(vanillaStatePops.begin(), vanillaStatePops.end(), 0, [](int sum, const std::pair<std::string, StatePops>& statePop) {

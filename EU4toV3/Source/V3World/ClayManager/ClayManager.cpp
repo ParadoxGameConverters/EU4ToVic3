@@ -16,11 +16,11 @@
 #include <numeric>
 #include <ranges>
 
-void V3::ClayManager::initializeVanillaStates(const std::string& v3Path)
+void V3::ClayManager::initializeVanillaStates(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Initializing Vanilla States and Provinces.";
 	StateLoader stateLoader;
-	stateLoader.loadStates(v3Path);
+	stateLoader.loadStates(modFS);
 	states = stateLoader.getStates();
 	for (const auto& state: states | std::views::values)
 		for (const auto& provinceID: state->getProvinces() | std::views::keys)
@@ -29,11 +29,11 @@ void V3::ClayManager::initializeVanillaStates(const std::string& v3Path)
 	Log(LogLevel::Info) << "<> " << states.size() << " states loaded with " << provincesToStates.size() << " provinces inside.";
 }
 
-void V3::ClayManager::loadTerrainsIntoProvinces(const std::string& v3Path)
+void V3::ClayManager::loadTerrainsIntoProvinces(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Loading Terrains into Provinces.";
 	TerrainLoader terrainLoader;
-	terrainLoader.loadTerrains(v3Path);
+	terrainLoader.loadTerrains(modFS);
 	const auto& terrains = terrainLoader.getTerrains();
 	for (const auto& state: states | std::views::values)
 		for (const auto& [provinceName, province]: state->getProvinces())
@@ -52,11 +52,11 @@ void V3::ClayManager::loadTerrainsIntoProvinces(const std::string& v3Path)
 			}
 }
 
-void V3::ClayManager::initializeSuperRegions(const std::string& v3Path)
+void V3::ClayManager::initializeSuperRegions(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Initializing Regions and Superregions.";
 	SuperRegionLoader superRegionLoader;
-	superRegionLoader.loadSuperRegions(v3Path);
+	superRegionLoader.loadSuperRegions(modFS);
 	superRegions = superRegionLoader.getSuperRegions();
 
 	const auto regionCount = std::accumulate(superRegions.begin(), superRegions.end(), 0, [](int sum, const auto& superRegion) {

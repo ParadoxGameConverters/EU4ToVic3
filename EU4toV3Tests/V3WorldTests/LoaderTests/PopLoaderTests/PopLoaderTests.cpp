@@ -1,6 +1,8 @@
 #include "Loaders/PopLoader/PopLoader.h"
 #include "gtest/gtest.h"
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+
 TEST(V3World_PopLoaderTests, DefaultsDefaultToDefaults)
 {
 	const V3::PopLoader popLoader;
@@ -11,7 +13,7 @@ TEST(V3World_PopLoaderTests, DefaultsDefaultToDefaults)
 TEST(V3World_PopLoaderTests, PopsCanBeLoadedFromMultipleFiles)
 {
 	V3::PopLoader popLoader;
-	popLoader.loadPops("TestFiles/vic3installation/game/");
+	popLoader.loadPops(modFS);
 
 	ASSERT_EQ(4, popLoader.getStatePops().size());
 
@@ -36,7 +38,7 @@ TEST(V3World_PopLoaderTests, PopsCanBeLoadedFromMultipleFiles)
 TEST(V3World_PopLoaderTests, PopLoaderIgnoresNonTXTFiles)
 {
 	V3::PopLoader popLoader;
-	popLoader.loadPops("TestFiles/vic3installation/game/");
+	popLoader.loadPops(modFS);
 
 	EXPECT_FALSE(popLoader.getStatePops().contains("STATE_TEST_EXCESS"));
 }

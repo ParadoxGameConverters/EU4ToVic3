@@ -2,11 +2,13 @@
 #include "PoliticalManager/Country/Country.h"
 #include "gtest/gtest.h"
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+
 TEST(V3World_CountryDefinitionLoaderTests, CountryDefinitionLoaderCanLoadCountries)
 {
 	V3::CountryDefinitionLoader countryLoader;
 	EXPECT_EQ(0, countryLoader.getCountries().size());
-	countryLoader.loadCommonCountries("TestFiles/vic3installation/game/");
+	countryLoader.loadCommonCountries(modFS);
 	EXPECT_EQ(3, countryLoader.getCountries().size());
 
 	const auto& country1 = countryLoader.getCountries().at("TAG");
@@ -22,7 +24,7 @@ TEST(V3World_CountryDefinitionLoaderTests, nonTXTfilesAreIgnored)
 {
 	V3::CountryDefinitionLoader countryLoader;
 	EXPECT_EQ(0, countryLoader.getCountries().size());
-	countryLoader.loadCommonCountries("TestFiles/vic3installation/game/");
+	countryLoader.loadCommonCountries(modFS);
 	EXPECT_EQ(3, countryLoader.getCountries().size());
 
 	EXPECT_FALSE(countryLoader.getCountries().contains("IGN"));

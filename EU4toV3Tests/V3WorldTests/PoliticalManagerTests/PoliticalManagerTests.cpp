@@ -17,6 +17,8 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+
 std::tuple<V3::PoliticalManager, V3::PopManager, mappers::CultureMapper, mappers::ReligionMapper, V3::ClayManager, EU4::CultureLoader, EU4::ReligionLoader>
 prepMappers()
 {
@@ -50,12 +52,10 @@ prepMappers()
 	mappers::ProvinceMapper provinceMapper;
 	provinceMapper.loadProvinceMappings("TestFiles/configurables/province_mappings_chunks.txt");
 
-	auto V3Path = "TestFiles/vic3installation/game/";
-
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
-	clayManager.initializeSuperRegions(V3Path);
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 
 	clayManager.generateChunks(provinceMapper, provinceManager);
@@ -91,11 +91,11 @@ prepMappers()
 	culMapper.expandCulturalMappings(clayManager, cultureLoader, religionLoader);
 
 	V3::PopManager popManager;
-	popManager.initializeVanillaPops(V3Path);
+	popManager.initializeVanillaPops(modFS);
 	popManager.assignVanillaPopsToStates(clayManager);
 	popManager.convertDemographics(clayManager, culMapper, relMapper, cultureLoader, religionLoader);
 
-	politicalManager.initializeVanillaCountries(V3Path);
+	politicalManager.initializeVanillaCountries(modFS);
 	politicalManager.loadCountryMapper(countryMapper);
 	politicalManager.importEU4Countries(countries);
 
@@ -108,7 +108,7 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanInitializeVanillaCountrie
 
 	EXPECT_EQ(0, politicalManager.getCountries().size());
 
-	politicalManager.initializeVanillaCountries("TestFiles/vic3installation/game/");
+	politicalManager.initializeVanillaCountries(modFS);
 
 	EXPECT_EQ(3, politicalManager.getCountries().size());
 
@@ -165,7 +165,7 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanConvertVanillaCountries)
 	V3::PoliticalManager politicalManager;
 
 	EXPECT_EQ(0, politicalManager.getCountries().size());
-	politicalManager.initializeVanillaCountries("TestFiles/vic3installation/game/");
+	politicalManager.initializeVanillaCountries(modFS);
 	EXPECT_EQ(3, politicalManager.getCountries().size()); // we have 3 vanilla vic3 countries, unrelated to eu4.
 	politicalManager.loadCountryMapper(countryMapper);
 	politicalManager.importEU4Countries(countries);

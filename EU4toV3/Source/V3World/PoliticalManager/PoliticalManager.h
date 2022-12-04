@@ -1,5 +1,6 @@
 #ifndef POLITICAL_MANAGER_H
 #define POLITICAL_MANAGER_H
+#include "ModLoader/ModFilesystem.h"
 #include <map>
 #include <memory>
 #include <string>
@@ -29,8 +30,8 @@ class PoliticalManager
 
 	PoliticalManager() = default;
 
-	void initializeVanillaCountries(const std::string& V3Path);
-	void loadCountryMapper(const std::shared_ptr<mappers::CountryMapper>& theCountryMapper) { countryMapper = theCountryMapper; }
+	void initializeVanillaCountries(const commonItems::ModFilesystem& modFS);
+	void loadCountryMapper(const std::shared_ptr<mappers::CountryMapper>& theCountryMapper);
 	void importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries);
 	void generateDecentralizedCountries(const ClayManager& clayManager, const PopManager& popManager);
 	void convertAllCountries(const ClayManager& clayManager, const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader) const;

@@ -12,7 +12,7 @@ class CountryDefinitionLoader: commonItems::parser
   public:
 	CountryDefinitionLoader() = default;
 
-	void loadCommonCountries(const std::string& v3Path);
+	void loadCommonCountries(const commonItems::ModFilesystem& modFS);
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 
   private:

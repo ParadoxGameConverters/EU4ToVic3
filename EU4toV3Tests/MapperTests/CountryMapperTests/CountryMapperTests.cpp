@@ -212,6 +212,25 @@ TEST(Mappers_CountryMapperTests, TwoCountriesWontGetSameTag)
 	EXPECT_EQ("X00", v3Tag2);
 }
 
+TEST(Mappers_CountryMapperTests, CountWontGetReservedTag)
+{
+	mappers::CountryMapper mapper;
+	mapper.loadMappingRules("TestFiles/configurables/country_mappings.txt");
+	// link = { eu4 = TA9 vic3 = GA9 }
+	// link = { name = "Name10" vic3 = GA9 } <- should get X00 but won't.
+	mapper.registerKnownVanillaV3Tag("X00"); // we do this when importing vanilla and modded V3 tags
+
+	const auto country1 = std::make_shared<EU4::Country>();
+	country1->setTag("TA9");
+	const auto country2 = std::make_shared<EU4::Country>();
+	country2->setLocalizationName("english", "Name10");
+	const auto v3Tag1 = mapper.assignV3TagToEU4Country(country1);
+	const auto v3Tag2 = mapper.assignV3TagToEU4Country(country2); // assigned X00 since GA9 is taken.
+
+	EXPECT_EQ("GA9", v3Tag1);
+	EXPECT_EQ("X01", v3Tag2); // gets the next free tag.
+}
+
 TEST(Mappers_CountryMapperTests, tagIsDynamicWorksAsAdvertised)
 {
 	EXPECT_TRUE(mappers::CountryMapper::tagIsDynamic("C01"));

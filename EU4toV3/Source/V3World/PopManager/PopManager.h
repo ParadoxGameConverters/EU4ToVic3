@@ -1,5 +1,6 @@
 #ifndef POP_MANAGER_H
 #define POP_MANAGER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Pops/StatePops.h"
 #include <map>
 #include <string>
@@ -23,7 +24,7 @@ class PopManager
   public:
 	PopManager() = default;
 
-	void initializeVanillaPops(const std::string& v3Path);
+	void initializeVanillaPops(const commonItems::ModFilesystem& modFS);
 	void assignVanillaPopsToStates(const ClayManager& clayManager);
 	void convertDemographics(const ClayManager& clayManager,
 		 const mappers::CultureMapper& cultureMapper,

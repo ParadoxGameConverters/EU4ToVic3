@@ -9,16 +9,24 @@
 #include "PopManager/PopManager.h"
 #include <ranges>
 
-void V3::PoliticalManager::initializeVanillaCountries(const std::string& V3Path)
+void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Loading Vanilla Countries.";
 
 	CountryDefinitionLoader definitionLoader;
-	definitionLoader.loadCommonCountries(V3Path);
+	definitionLoader.loadCommonCountries(modFS);
 	countries = definitionLoader.getCountries();
 
 	Log(LogLevel::Info) << "<> " << countries.size() << " vanilla countries loaded.";
 }
+
+void V3::PoliticalManager::loadCountryMapper(const std::shared_ptr<mappers::CountryMapper>& theCountryMapper)
+{
+	countryMapper = theCountryMapper;
+	for (const auto& countryTag: countries | std::views::keys)
+		countryMapper->registerKnownVanillaV3Tag(countryTag);
+}
+
 
 void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries)
 {

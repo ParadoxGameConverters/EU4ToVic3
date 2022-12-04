@@ -5,6 +5,8 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+
 TEST(V3World_StateTests, nameCanBeSetAndRetrieved)
 {
 	V3::State state;
@@ -346,10 +348,9 @@ TEST(V3World_StateTests, distributeResourcesTruncatesDoubles)
 
 TEST(V3World_StateTests, StateSeasCanBePinged)
 {
-	const auto V3Path = "TestFiles/vic3installation/game/";
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
 
 	const auto& state1 = clayManager.getStates().at("STATE_TEST_OCEAN1");
 	const auto& state2 = clayManager.getStates().at("STATE_TEST_LAND1");
@@ -360,10 +361,9 @@ TEST(V3World_StateTests, StateSeasCanBePinged)
 
 TEST(V3World_StateTests, StateLakesCanBePinged)
 {
-	const auto V3Path = "TestFiles/vic3installation/game/";
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
 
 	const auto& state1 = clayManager.getStates().at("STATE_TEST_OCEAN1");
 	const auto& state2 = clayManager.getStates().at("STATE_TEST_LAKE");

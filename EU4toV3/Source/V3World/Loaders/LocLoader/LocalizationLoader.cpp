@@ -3,14 +3,14 @@
 #include "OSCompatibilityLayer.h"
 #include <fstream>
 
-void V3::LocalizationLoader::scrapeLocalizations(const std::string& v3Path)
+void V3::LocalizationLoader::scrapeLocalizations(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Loading Vic3 localizations.";
 
 	knownLanguages = {"braz_por", "english", "french", "german", "japanese", "korean", "polish", "russian", "simp_chinese", "spanish", "turkish"};
 
 	for (const auto& lang: knownLanguages)
-		scrapeLanguage(lang, v3Path + "/localization");
+		scrapeLanguage(lang, *modFS.GetActualFolderLocation("localization"));
 
 	Log(LogLevel::Info) << ">> " << localizations.size() << " words read.";
 }

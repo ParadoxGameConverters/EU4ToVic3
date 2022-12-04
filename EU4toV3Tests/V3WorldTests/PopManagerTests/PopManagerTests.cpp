@@ -46,12 +46,12 @@ V3::ClayManager prepClayManager()
 	mappers::ProvinceMapper provinceMapper;
 	provinceMapper.loadProvinceMappings("TestFiles/configurables/province_mappings_chunks.txt");
 
-	auto V3Path = "TestFiles/vic3installation/game/";
+	const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
-	clayManager.initializeSuperRegions(V3Path);
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 
 	clayManager.generateChunks(provinceMapper, provinceManager);
@@ -76,7 +76,7 @@ V3::ClayManager prepClayManager()
 
 std::tuple<V3::PopManager, mappers::CultureMapper, mappers::ReligionMapper, V3::ClayManager, EU4::CultureLoader, EU4::ReligionLoader> prepMappers()
 {
-	auto V3Path = "TestFiles/vic3installation/game/";
+	const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;
 	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
@@ -95,7 +95,7 @@ std::tuple<V3::PopManager, mappers::CultureMapper, mappers::ReligionMapper, V3::
 	culMapper.expandCulturalMappings(clayManager, cultureLoader, religionLoader);
 
 	V3::PopManager popManager;
-	popManager.initializeVanillaPops(V3Path);
+	popManager.initializeVanillaPops(modFS);
 	popManager.assignVanillaPopsToStates(clayManager);
 	popManager.convertDemographics(clayManager, culMapper, relMapper, cultureLoader, religionLoader);
 
@@ -104,14 +104,14 @@ std::tuple<V3::PopManager, mappers::CultureMapper, mappers::ReligionMapper, V3::
 
 TEST(V3World_PopManagerTests, popManagerCanInitializeVanillaPops)
 {
-	const auto V3Path = "TestFiles/vic3installation/game/";
+	const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 	V3::PopManager popManager;
 
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
 	std::cout.rdbuf(log.rdbuf());
 
-	popManager.initializeVanillaPops(V3Path);
+	popManager.initializeVanillaPops(modFS);
 
 	std::cout.rdbuf(cout_buffer);
 
@@ -130,8 +130,8 @@ TEST(V3World_PopManagerTests, popManagerCanAssignVanillaPops)
 {
 	const auto clayManager = prepClayManager();
 	V3::PopManager popManager;
-	const auto V3Path = "TestFiles/vic3installation/game/";
-	popManager.initializeVanillaPops(V3Path);
+	const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+	popManager.initializeVanillaPops(modFS);
 	popManager.assignVanillaPopsToStates(clayManager);
 
 	const auto& state1 = clayManager.getStates().at("STATE_TEST_LAND1");

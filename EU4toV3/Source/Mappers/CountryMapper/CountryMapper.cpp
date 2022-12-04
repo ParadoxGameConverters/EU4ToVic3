@@ -70,7 +70,7 @@ std::string mappers::CountryMapper::generateNewTag()
 
 bool mappers::CountryMapper::tagIsAlreadyAssigned(const std::string& v3Tag) const
 {
-	return v3TagToEU4TagMap.contains(v3Tag) || unmappedV3Tags.contains(v3Tag);
+	return v3TagToEU4TagMap.contains(v3Tag) || unmappedV3Tags.contains(v3Tag) || knownVanillaV3Tags.contains(v3Tag);
 }
 
 std::optional<std::string> mappers::CountryMapper::getV3Tag(const std::string& eu4Tag) const
