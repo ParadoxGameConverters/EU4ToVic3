@@ -1,6 +1,5 @@
 #include "LocalizationLoader.h"
 #include "Log.h"
-#include "OSCompatibilityLayer.h"
 #include <fstream>
 
 void V3::LocalizationLoader::scrapeLocalizations(const commonItems::ModFilesystem& modFS)
@@ -10,19 +9,17 @@ void V3::LocalizationLoader::scrapeLocalizations(const commonItems::ModFilesyste
 	knownLanguages = {"braz_por", "english", "french", "german", "japanese", "korean", "polish", "russian", "simp_chinese", "spanish", "turkish"};
 
 	for (const auto& lang: knownLanguages)
-		scrapeLanguage(lang, *modFS.GetActualFolderLocation("localization"));
+		scrapeLanguage(lang, modFS);
 
 	Log(LogLevel::Info) << ">> " << localizations.size() << " words read.";
 }
 
-void V3::LocalizationLoader::scrapeLanguage(const std::string& language, const std::string& path)
+void V3::LocalizationLoader::scrapeLanguage(const std::string& language, const commonItems::ModFilesystem& modFS)
 {
-	if (!commonItems::DoesFolderExist(path + "/" + language))
-		return;
-	const auto fileNames = commonItems::GetAllFilesInFolderRecursive(path + "/" + language);
+	const auto fileNames = modFS.GetAllFilesInFolderRecursive("localization/" + language + "/");
 	for (const auto& file: fileNames)
 	{
-		std::ifstream fileStream(path + "/" + language + "/" + file);
+		std::ifstream fileStream(file);
 		if (fileStream.is_open())
 			scrapeStream(fileStream, language);
 		fileStream.close();

@@ -159,7 +159,9 @@ std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& province
 
 bool V3::State::isSea() const
 {
-	return std::ranges::any_of(provinces.begin(), provinces.end(), [](const std::pair<std::string, std::shared_ptr<Province>>& province) {
+	// We allow for a sea to be mismapped along regular provinces as vanilla has a few seas so mismapped (CHAD! KORDOFAN! Literally everywhere!).
+
+	return std::ranges::all_of(provinces.begin(), provinces.end(), [](const std::pair<std::string, std::shared_ptr<Province>>& province) {
 		return province.second->isSea();
 	});
 }

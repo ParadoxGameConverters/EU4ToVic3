@@ -546,3 +546,34 @@ TEST(V3World_ClayManagerTests, clayManagerCanInjectVanillaSubStates)
 	// linkback through state's substate ownership vector
 	EXPECT_EQ("CCC", substate4->getHomeState()->getSubStates()[0]->getOwnerTag());
 }
+
+TEST(V3World_ClayManagerTests, clayManagerCanShoveProvincesIntoSubStates)
+{
+	auto clayManager = assignSubStateOwnership();
+
+	// let's grab a state.
+	const auto& state = clayManager.getStates().at("STATE_TEST_LAND3");
+
+	// it has 1 substate.
+	ASSERT_EQ(1, state->getSubStates().size());
+	// let's grab that substate.
+	const auto& substate1 = state->getSubStates()[0];
+	EXPECT_EQ(2, substate1->getProvinces().size());
+	EXPECT_TRUE(substate1->getProvinces().contains("x000005"));
+	EXPECT_TRUE(substate1->getProvinces().contains("x000006"));
+
+	// wipe its provinces.
+	substate1->setProvinces({});
+
+	// now shove them.
+	clayManager.shoveRemainingProvincesIntoSubStates();
+
+	// now state has have 2 substates.
+	ASSERT_EQ(2, state->getSubStates().size());
+
+	// and the second one has provinces shoved into it.
+	const auto& substate2 = state->getSubStates()[1];
+	EXPECT_EQ(2, substate2->getProvinces().size());
+	EXPECT_TRUE(substate2->getProvinces().contains("x000005"));
+	EXPECT_TRUE(substate2->getProvinces().contains("x000006"));
+}

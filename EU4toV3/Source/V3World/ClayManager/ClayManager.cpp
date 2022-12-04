@@ -414,6 +414,7 @@ void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& m
 		if (!state->hasUnassignedProvinces())
 			continue;
 
+		// just sanity.
 		auto unassignedProvinces = state->getUnassignedProvinces();
 		if (unassignedProvinces.empty())
 			continue;
@@ -486,4 +487,43 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		action = true;
 	}
 	return action;
+}
+
+void V3::ClayManager::shoveRemainingProvincesIntoSubStates()
+{
+	Log(LogLevel::Info) << "-> Shoving remaining provinces into substates.";
+	auto subCounter = substates.size();
+
+	for (const auto& [stateName, state]: states)
+	{
+		// do we need to do anything?
+		if (!state->hasUnassignedProvinces())
+			continue;
+
+		// just sanity.
+		auto unassignedProvinces = state->getUnassignedProvinces();
+		if (unassignedProvinces.empty())
+			continue;
+
+		// silently skip seas and lakes.
+		if (state->isSea() || state->isLake())
+			continue;
+
+		makeSubStateFromProvinces(stateName, unassignedProvinces);
+	}
+
+	subCounter = substates.size() - subCounter;
+	Log(LogLevel::Info) << "<> Generated " << subCounter << " new substates.";
+}
+
+void V3::ClayManager::makeSubStateFromProvinces(const std::string& stateName, const ProvinceMap& unassignedProvinces)
+{
+	const auto& homeState = states.at(stateName);
+
+	auto newSubState = std::make_shared<SubState>();
+	newSubState->setProvinces(unassignedProvinces);
+	newSubState->setHomeState(homeState);
+
+	homeState->addSubState(newSubState);
+	substates.emplace_back(newSubState);
 }

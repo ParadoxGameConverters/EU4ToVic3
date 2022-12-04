@@ -55,6 +55,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	Log(LogLevel::Progress) << "51 %";
 	// generating decentralized countries
+	clayManager.shoveRemainingProvincesIntoSubStates();
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 
 	Log(LogLevel::Progress) << "52 %";

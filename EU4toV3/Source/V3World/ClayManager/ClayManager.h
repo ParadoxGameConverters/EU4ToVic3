@@ -37,6 +37,7 @@ class ClayManager
 	void splitChunksIntoSubStates();
 	void assignSubStateOwnership(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper);
 	void injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager);
+	void shoveRemainingProvincesIntoSubStates();
 
 	[[nodiscard]] const auto& getStates() const { return states; }
 	[[nodiscard]] const auto& getSuperRegions() const { return superRegions; }
@@ -54,6 +55,7 @@ class ClayManager
 		 const VanillaStateEntry& entry,
 		 const ProvinceMap& unassignedProvinces,
 		 const PoliticalManager& politicalManager);
+	void makeSubStateFromProvinces(const std::string& stateName, const ProvinceMap& unassignedProvinces);
 
 	std::map<std::string, std::shared_ptr<State>> states;					// geographical entities
 	std::map<std::string, std::shared_ptr<SuperRegion>> superRegions; // geographical entities

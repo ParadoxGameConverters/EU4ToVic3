@@ -20,7 +20,7 @@ class LocalizationLoader
 	[[nodiscard]] std::optional<std::string> getLocForKey(const std::string& key, const std::string& language) const;
 
   private:
-	void scrapeLanguage(const std::string& language, const std::string& path);
+	void scrapeLanguage(const std::string& language, const commonItems::ModFilesystem& modFS);
 
 	[[nodiscard]] static std::pair<std::string, std::string> determineKeyLocalizationPair(const std::string& text);
 
