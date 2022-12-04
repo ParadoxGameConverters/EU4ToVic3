@@ -83,8 +83,10 @@ V3::ClayManager assignSubStateOwnership()
 	countryMapper->loadMappingRules("TestFiles/configurables/country_mappings.txt");
 	V3::PoliticalManager politicalManager;
 	politicalManager.loadCountryMapper(countryMapper);
+	politicalManager.initializeVanillaCountries(modFS);
 	politicalManager.importEU4Countries(countries);
 	clayManager.assignSubStateOwnership(politicalManager.getCountries(), *countryMapper);
+	clayManager.injectVanillaSubStates(modFS, politicalManager);
 
 	return clayManager;
 }
@@ -472,11 +474,12 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces substate 4, for V3's GA9.
 	*/
 
-	ASSERT_EQ(3, substates.size());
+	ASSERT_EQ(4, substates.size());
 
 	const auto& substate1 = substates[0];
 	const auto& substate2 = substates[1];
 	const auto& substate3 = substates[2];
+	// we're ignoring the 4th substate which is an imported one.
 
 	ASSERT_TRUE(substate1->getSourceOwnerTag());
 	EXPECT_EQ("TA2", substate1->getSourceOwnerTag());
@@ -513,4 +516,33 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	EXPECT_EQ("STATE_TEST_LAND4", substate3->getOwner()->getSubStates()[0]->getHomeStateName());
 	// linkback through state's substate ownership vector
 	EXPECT_EQ("GA9", substate3->getHomeState()->getSubStates()[0]->getOwnerTag());
+}
+
+TEST(V3World_ClayManagerTests, clayManagerCanInjectVanillaSubStates)
+{
+	auto clayManager = assignSubStateOwnership();
+	const auto& substates = clayManager.getSubStates();
+
+	/*
+	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces substates 1 & 2 for V3's GA2.
+	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces substate 4, for V3's GA9.
+	injected is the vic3 = x000005, x000006 one.
+	*/
+
+	ASSERT_EQ(4, substates.size());
+
+	// we're focusing on the 4th substate - injected one.
+	const auto& substate4 = substates[3];
+
+	ASSERT_FALSE(substate4->getSourceOwnerTag());
+	EXPECT_EQ(2, substate4->getProvinces().size());
+	EXPECT_TRUE(substate4->getProvinces().contains("x000005"));
+	EXPECT_TRUE(substate4->getProvinces().contains("x000006"));
+	EXPECT_EQ("STATE_TEST_LAND3", substate4->getHomeStateName());
+	EXPECT_EQ("CCC", substate4->getOwnerTag());
+	EXPECT_EQ("CCC", substate4->getOwner()->getTag());
+	// linkback to this substate through getOwner() substates vector
+	EXPECT_EQ("STATE_TEST_LAND3", substate4->getOwner()->getSubStates()[0]->getHomeStateName());
+	// linkback through state's substate ownership vector
+	EXPECT_EQ("CCC", substate4->getHomeState()->getSubStates()[0]->getOwnerTag());
 }

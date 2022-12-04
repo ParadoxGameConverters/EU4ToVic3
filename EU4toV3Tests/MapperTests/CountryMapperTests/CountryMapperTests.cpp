@@ -212,7 +212,7 @@ TEST(Mappers_CountryMapperTests, TwoCountriesWontGetSameTag)
 	EXPECT_EQ("X00", v3Tag2);
 }
 
-TEST(Mappers_CountryMapperTests, CountWontGetReservedTag)
+TEST(Mappers_CountryMapperTests, CountryWontGetReservedTag)
 {
 	mappers::CountryMapper mapper;
 	mapper.loadMappingRules("TestFiles/configurables/country_mappings.txt");

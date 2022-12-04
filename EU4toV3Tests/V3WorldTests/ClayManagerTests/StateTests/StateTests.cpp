@@ -373,3 +373,51 @@ TEST(V3World_StateTests, StateLakesCanBePinged)
 	EXPECT_TRUE(state2->isLake());
 	EXPECT_FALSE(state3->isLake());
 }
+
+TEST(V3World_StateTests, stateCanDetectUnassignedProvinces)
+{
+	std::stringstream input;
+	input << "provinces = { x000001 x000002 x000003 }\n ";
+	V3::State state;
+	state.loadState(input);
+
+	// assign some provinces to substates.
+	const auto prov1 = state.getProvinces().at("x000001");
+	const auto prov2 = state.getProvinces().at("x000002");
+
+	const auto sub1 = std::make_shared<V3::SubState>();
+	sub1->setProvinces({std::pair("x000001", prov1)});
+
+	const auto sub2 = std::make_shared<V3::SubState>();
+	sub2->setProvinces({std::pair("x000002", prov2)});
+
+	state.addSubState(sub1);
+	state.addSubState(sub2);
+
+	EXPECT_TRUE(state.hasUnassignedProvinces());
+}
+
+TEST(V3World_StateTests, stateCanReturnUnassignedProvinces)
+{
+	std::stringstream input;
+	input << "provinces = { x000001 x000002 x000003 x000004 }\n ";
+	V3::State state;
+	state.loadState(input);
+
+	// assign some provinces to substates.
+	const auto prov1 = state.getProvinces().at("x000001");
+	const auto prov2 = state.getProvinces().at("x000002");
+
+	const auto sub1 = std::make_shared<V3::SubState>();
+	sub1->setProvinces({std::pair("x000001", prov1)});
+
+	const auto sub2 = std::make_shared<V3::SubState>();
+	sub2->setProvinces({std::pair("x000002", prov2)});
+
+	state.addSubState(sub1);
+	state.addSubState(sub2);
+
+	ASSERT_EQ(2, state.getUnassignedProvinces().size());
+	EXPECT_EQ("x000003", state.getUnassignedProvinces().at("x000003")->getName());
+	EXPECT_EQ("x000004", state.getUnassignedProvinces().at("x000004")->getName());
+}

@@ -110,15 +110,22 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanInitializeVanillaCountrie
 
 	politicalManager.initializeVanillaCountries(modFS);
 
-	EXPECT_EQ(3, politicalManager.getCountries().size());
+	ASSERT_EQ(4, politicalManager.getCountries().size());
 
-	const auto& country1 = politicalManager.getCountries().at("TAG");
-	const auto& country2 = politicalManager.getCountries().at("GAT");
-	const auto& country3 = politicalManager.getCountries().at("TGA");
+	const auto& country1 = politicalManager.getCountry("TAG");
+	const auto& country2 = politicalManager.getCountry("GAT");
+	const auto& country3 = politicalManager.getCountry("TGA");
+	const auto& country4 = politicalManager.getCountry("CCC");
 
 	EXPECT_EQ("TAG", country1->getTag());
 	EXPECT_EQ("GAT", country2->getTag());
 	EXPECT_EQ("TGA", country3->getTag());
+	EXPECT_EQ("CCC", country4->getTag());
+
+	EXPECT_FALSE(politicalManager.isTagDecentralized("TAG"));
+	EXPECT_FALSE(politicalManager.isTagDecentralized("GAT"));
+	EXPECT_FALSE(politicalManager.isTagDecentralized("TGA"));
+	EXPECT_TRUE(politicalManager.isTagDecentralized("CCC"));
 }
 
 TEST(V3World_PoliticalManagerTests, PoliticalManagerCanImportCountries)
@@ -166,10 +173,10 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanConvertVanillaCountries)
 
 	EXPECT_EQ(0, politicalManager.getCountries().size());
 	politicalManager.initializeVanillaCountries(modFS);
-	EXPECT_EQ(3, politicalManager.getCountries().size()); // we have 3 vanilla vic3 countries, unrelated to eu4.
+	EXPECT_EQ(4, politicalManager.getCountries().size()); // we have 4 vanilla vic3 countries, unrelated to eu4.
 	politicalManager.loadCountryMapper(countryMapper);
 	politicalManager.importEU4Countries(countries);
-	EXPECT_EQ(6, politicalManager.getCountries().size()); // we append the 3 imported eu4 countries.
+	EXPECT_EQ(7, politicalManager.getCountries().size()); // we append the 3 imported eu4 countries.
 
 	const auto& country1 = politicalManager.getCountries().at("GA2");
 	const auto& country2 = politicalManager.getCountries().at("X00");
@@ -177,6 +184,7 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanConvertVanillaCountries)
 	const auto& country4 = politicalManager.getCountries().at("TAG");
 	const auto& country5 = politicalManager.getCountries().at("GAT");
 	const auto& country6 = politicalManager.getCountries().at("TGA");
+	const auto& country7 = politicalManager.getCountries().at("CCC");
 
 	EXPECT_FALSE(country1->getProcessedData().color); // these 3 eu4 countries have no color.
 	EXPECT_FALSE(country2->getProcessedData().color);
@@ -184,6 +192,7 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanConvertVanillaCountries)
 	EXPECT_FALSE(country4->getProcessedData().color); // these 3 vanilla ones are also blank.
 	EXPECT_FALSE(country5->getProcessedData().color);
 	EXPECT_FALSE(country6->getProcessedData().color);
+	EXPECT_FALSE(country7->getProcessedData().color);
 
 	politicalManager.convertAllCountries(clayManager, v3LocLoader, eu4LocLoader); // now we process only the 3 vanilla countries.
 
@@ -193,6 +202,7 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanConvertVanillaCountries)
 	EXPECT_EQ(commonItems::Color(std::array{147, 130, 110}), country4->getProcessedData().color); // however these 3 vanilla ones have their color copied over.
 	EXPECT_EQ(commonItems::Color(std::array{0.99f, 0.7f, 0.9f}), country5->getProcessedData().color); // since they are processed standalone.
 	EXPECT_EQ(commonItems::Color(std::array{62, 122, 189}), country6->getProcessedData().color);
+	EXPECT_EQ(commonItems::Color(std::array{62, 122, 190}), country7->getProcessedData().color);
 }
 
 TEST(V3World_PoliticalManagerTests, PoliticalManagerCanGenerateDecentralizedCountries)

@@ -10,7 +10,6 @@ void V3::VanillaStateLoader::loadVanillaStates(const commonItems::ModFilesystem&
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/states/"))
 	{
-		Log(LogLevel::Debug) << "lod --- " << fileName;
 		if (getExtension(fileName) == "txt")
 			parseFile(fileName);
 	}
