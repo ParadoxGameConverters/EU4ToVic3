@@ -7,6 +7,7 @@
 #include "Loaders/PopLoader/PopLoader.h"
 #include "Log.h"
 #include "ReligionMapper/ReligionMapper.h"
+#include <cmath>
 #include <numeric>
 #include <ranges>
 

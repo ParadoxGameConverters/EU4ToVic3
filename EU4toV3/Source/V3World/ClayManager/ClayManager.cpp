@@ -16,6 +16,7 @@
 #include "State/Province.h"
 #include "State/State.h"
 #include "State/SubState.h"
+#include <cmath>
 #include <numeric>
 #include <ranges>
 
