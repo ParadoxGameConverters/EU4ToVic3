@@ -13,8 +13,6 @@ class StateModifier: commonItems::parser
 	void setName(const std::string& theName) { name = theName; }
 
 	[[nodiscard]] const auto& getName() const { return name; }
-	[[nodiscard]] auto hasMalaria() const { return malaria >= 1; }
-	[[nodiscard]] auto hasSevereMalaria() const { return malaria >= 2; }
 	[[nodiscard]] const auto& getInfrastructureBonus() const { return infrastructure; }
 	[[nodiscard]] const auto& getPortBonus() const { return port; }
 	[[nodiscard]] const auto& getNavalBaseBonus() const { return navalBase; }
@@ -27,7 +25,6 @@ class StateModifier: commonItems::parser
 
 	std::string name; // state_trait_natural_harbors
 
-	int malaria = 0; // 0 = none, 1 = Malaria, 2 = Severe Malaria
 	int infrastructure = 0;
 	double infrastructureModifier = 0.0;
 	int port = 0;
