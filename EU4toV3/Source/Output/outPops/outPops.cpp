@@ -36,6 +36,8 @@ void OUT::outStatePops(std::ostream& output, const V3::State& state)
 
 void OUT::outSubStatePops(std::ostream& output, const V3::SubState& subState)
 {
+	if (!subState.getOwner())
+		return;
 	output << "\t\tregion_state:" << subState.getOwner()->getTag() << " = {\n";
 	for (const auto& pop: subState.getSubStatePops().getPops())
 	{
