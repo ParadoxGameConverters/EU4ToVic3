@@ -9,6 +9,7 @@
 #include "Log.h"
 #include "PoliticalManager/Country/Country.h"
 #include "PoliticalManager/PoliticalManager.h"
+#include "PopManager/PopManager.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
 #include "State/Chunk.h"
@@ -400,7 +401,7 @@ bool V3::ClayManager::stateIsInRegion(const std::string& state, const std::strin
 	return false;
 }
 
-void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager)
+void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager, const PopManager& popManager)
 {
 	Log(LogLevel::Info) << "-> Injecting Vanilla substates into conversion map.";
 	auto subCounter = substates.size();
@@ -431,7 +432,7 @@ void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& m
 		}
 
 		const auto& vanillaStateEntry = loader.getStates().at(stateName);
-		const auto success = importVanillaSubStates(stateName, vanillaStateEntry, unassignedProvinces, politicalManager);
+		const auto success = importVanillaSubStates(stateName, vanillaStateEntry, unassignedProvinces, politicalManager, popManager);
 
 		// If we imported anything, we should also copy any potential homelands. Unsure whom they belong to, but they surely won't do harm.
 		// What could possibly go wrong?
@@ -447,7 +448,8 @@ void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& m
 bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 	 const VanillaStateEntry& entry,
 	 const ProvinceMap& unassignedProvinces,
-	 const PoliticalManager& politicalManager)
+	 const PoliticalManager& politicalManager,
+	 const PopManager& popManager)
 {
 	bool action = false;
 	for (const auto& subStateEntry: entry.getSubStates())
@@ -480,6 +482,15 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		newSubState->setSubStateType(subStateEntry.getSubStateType());
 		newSubState->setHomeState(homeState);
 
+		// How many provinces did we lose in the transfer? Ie. How many of this substate's original provinces were already assigned to some other substate?
+		// We can use this ratio to cut our popcount. Or we could use any other more involved function.
+		// TODO: Use any other more involved function.
+		const double subStateRatio = static_cast<double>(availableProvinces.size()) / static_cast<double>(subStateEntry.getProvinces().size());
+		auto newPops = prepareInjectedSubStatePops(newSubState, subStateRatio, popManager);
+
+		// and shove.
+		newSubState->setSubStatePops(newPops);
+
 		// and register.
 		homeState->addSubState(newSubState);
 		owner->addSubState(newSubState);
@@ -487,6 +498,31 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		action = true;
 	}
 	return action;
+}
+
+V3::SubStatePops V3::ClayManager::prepareInjectedSubStatePops(const std::shared_ptr<SubState>& subState,
+	 double subStateRatio,
+	 const PopManager& popManager) const
+{
+	// get its existing pops from vanilla
+	auto subStatePops = popManager.getVanillaSubStatePops(subState->getHomeStateName(), *subState->getOwnerTag());
+	if (!subStatePops)
+	{
+		Log(LogLevel::Warning) << "Substate for " << *subState->getOwnerTag() << " in " << subState->getHomeStateName() << " had no vanilla pops! Not importing!";
+		return SubStatePops();
+	}
+
+	auto importedPops = subStatePops->getPops();
+
+	// scale the pops.
+	for (auto& pop: importedPops)
+	{
+		const double newSize = round(static_cast<double>(pop.getSize()) * subStateRatio);
+		pop.setSize(static_cast<int>(newSize));
+	}
+	subStatePops->setPops(importedPops);
+
+	return *subStatePops;
 }
 
 void V3::ClayManager::shoveRemainingProvincesIntoSubStates()

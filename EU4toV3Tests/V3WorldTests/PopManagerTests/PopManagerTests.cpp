@@ -96,7 +96,6 @@ std::tuple<V3::PopManager, mappers::CultureMapper, mappers::ReligionMapper, V3::
 
 	V3::PopManager popManager;
 	popManager.initializeVanillaPops(modFS);
-	popManager.assignVanillaPopsToStates(clayManager);
 	popManager.convertDemographics(clayManager, culMapper, relMapper, cultureLoader, religionLoader);
 
 	return std::tuple{popManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader};
@@ -124,25 +123,6 @@ TEST(V3World_PopManagerTests, popManagerCanInitializeVanillaPops)
 	*/
 
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> Vanilla had 5500 pops.)"));
-}
-
-TEST(V3World_PopManagerTests, popManagerCanAssignVanillaPops)
-{
-	const auto clayManager = prepClayManager();
-	V3::PopManager popManager;
-	const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
-	popManager.initializeVanillaPops(modFS);
-	popManager.assignVanillaPopsToStates(clayManager);
-
-	const auto& state1 = clayManager.getStates().at("STATE_TEST_LAND1");
-	const auto& state2 = clayManager.getStates().at("STATE_TEST_LAND2");
-	const auto& state3 = clayManager.getStates().at("STATE_TEST_LAND3");
-	const auto& state4 = clayManager.getStates().at("STATE_TEST_LAND4");
-
-	EXPECT_EQ(600, state1->getVanillaPops().getPopCount());
-	EXPECT_EQ(3000, state2->getVanillaPops().getPopCount());
-	EXPECT_EQ(900, state3->getVanillaPops().getPopCount());
-	EXPECT_EQ(1000, state4->getVanillaPops().getPopCount());
 }
 
 TEST(V3World_PopManagerTests, popManagerCanConvertDemographics)

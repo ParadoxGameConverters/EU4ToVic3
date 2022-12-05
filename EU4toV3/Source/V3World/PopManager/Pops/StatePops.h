@@ -20,6 +20,7 @@ class StatePops
 	[[nodiscard]] const auto& getStateName() const { return stateName; }
 
 	[[nodiscard]] std::optional<std::string> getDominantCulture() const;
+	[[nodiscard]] std::optional<std::string> getDominantReligion() const;
 
   private:
 	std::string stateName;

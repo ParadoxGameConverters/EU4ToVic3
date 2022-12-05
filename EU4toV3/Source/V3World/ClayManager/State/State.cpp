@@ -201,3 +201,20 @@ bool V3::State::hasUnassignedProvinces() const
 		return false;
 	return true;
 }
+
+int V3::State::getStatePopCount() const
+{
+	return std::accumulate(substates.begin(), substates.end(), 0, [](int sum, const auto& subState) {
+		return sum + subState->getSubStatePops().getPopCount();
+	});
+}
+
+double V3::State::getTotalSubStateWeight() const
+{
+	return std::accumulate(substates.begin(), substates.end(), 0.0, [](double sum, const auto& subState) {
+		if (subState->getWeight())
+			return sum + *subState->getWeight();
+		else
+			return sum;
+	});
+}

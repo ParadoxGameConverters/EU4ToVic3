@@ -32,3 +32,26 @@ std::optional<std::string> V3::StatePops::getDominantCulture() const
 
 	return highest->first;
 }
+
+std::optional<std::string> V3::StatePops::getDominantReligion() const
+{
+	std::map<std::string, int> religionCounts;
+
+	for (const auto& subStatePop: subStatePops)
+		for (const auto& pop: subStatePop.getPops())
+		{
+			if (religionCounts.contains(pop.getReligion()))
+				religionCounts.at(pop.getReligion()) += pop.getSize();
+			else
+				religionCounts.emplace(pop.getReligion(), pop.getSize());
+		}
+
+	if (religionCounts.empty())
+		return std::nullopt;
+
+	const auto highest = std::max_element(std::begin(religionCounts), std::end(religionCounts), [](const auto& p1, const auto& p2) {
+		return p1.second < p2.second;
+	});
+
+	return highest->first;
+}

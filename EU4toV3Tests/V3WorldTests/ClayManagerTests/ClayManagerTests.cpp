@@ -9,6 +9,7 @@
 #include "Loaders/SuperRegionLoader/V3SuperRegion.h"
 #include "PoliticalManager/Country/Country.h"
 #include "PoliticalManager/PoliticalManager.h"
+#include "PopManager/PopManager.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
 #include "gtest/gtest.h"
@@ -86,7 +87,11 @@ V3::ClayManager assignSubStateOwnership()
 	politicalManager.initializeVanillaCountries(modFS);
 	politicalManager.importEU4Countries(countries);
 	clayManager.assignSubStateOwnership(politicalManager.getCountries(), *countryMapper);
-	clayManager.injectVanillaSubStates(modFS, politicalManager);
+
+	V3::PopManager popManager;
+	popManager.initializeVanillaPops(modFS);
+
+	clayManager.injectVanillaSubStates(modFS, politicalManager, popManager);
 
 	return clayManager;
 }
