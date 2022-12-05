@@ -69,16 +69,9 @@ TEST(V3World_BuildingGroupLoaderTests, GettersReturnNullOptionals)
 	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
 	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
 
-	std::stringstream log;
-	std::streambuf* cout_buffer = std::cout.rdbuf();
-	std::cout.rdbuf(log.rdbuf());
-
 	auto parentName = buildingGroups->getParentName("not_a_key0");
 	auto infrastructureCost = buildingGroups->getInfrastructureCost("not_a_key1");
 
-	EXPECT_THAT(log.str(), testing::Not(testing::HasSubstr(R"([ERROR])")));
 	EXPECT_EQ(parentName, std::nullopt);
 	EXPECT_EQ(infrastructureCost, std::nullopt);
-
-	std::cout.rdbuf(cout_buffer);
 }
