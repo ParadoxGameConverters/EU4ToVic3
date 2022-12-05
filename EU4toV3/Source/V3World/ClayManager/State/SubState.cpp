@@ -83,7 +83,7 @@ void V3::SubState::convertDemographics(const ClayManager& clayManager,
 void V3::SubState::generatePops(int totalAmount)
 {
 	// At this moment we're not concerned with pop types. HOWEVER, demographics do carry a varying amount of ratios,
-	// wehich are (were?) supposed to apply to those types.
+	// which are (were?) supposed to apply to those types.
 	//
 	// For now, we'll sum those ratios together and divide by 3, averaging them out.
 

@@ -42,7 +42,9 @@ std::optional<std::string> V3::StatePops::getDominantReligion() const
 	for (const auto& subStatePop: subStatePops)
 		for (const auto& pop: subStatePop.getPops())
 		{
+			// In 99% cases vanilla pops carry no religion because it's assumed!
 			// TODO: INJECT VANILLA RELIGIONS FOR VANILA POPS BASED ON CULTURE
+			// This function will return CRAP until religion is injected!
 			if (pop.getReligion().empty())
 				continue;
 			if (religionCounts.contains(pop.getReligion()))

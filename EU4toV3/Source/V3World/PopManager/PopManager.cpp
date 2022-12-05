@@ -139,10 +139,10 @@ void V3::PopManager::generatePops(const ClayManager& clayManager) const
 		 * Right now we're concerned only with 3, and after that 1. 2 doesn't need work done.
 		 * */
 
-		// what is our unassigned count and total weight?
+		// what is our unassigned pop count? (vanilla statePopCount - what's in imported substates already)
 		auto unassignedPopCount = vanillaStatePopCount - state->getStatePopCount();
 
-		// assigned provinces are provinces in substates that have pops inside. We need to exclude them.
+		// assigned provinces are provinces in substates that have pops inside. We need to exclude them when building ratios.
 		const auto assignedProvinceCount = std::accumulate(state->getSubStates().begin(), state->getSubStates().end(), 0, [](int sum, const auto& subState) {
 			if (subState->getSubStatePops().getPopCount() > 0)
 				sum += static_cast<int>(subState->getProvinces().size());
