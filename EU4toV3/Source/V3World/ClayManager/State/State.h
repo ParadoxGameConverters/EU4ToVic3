@@ -16,6 +16,7 @@ class State: commonItems::parser
 	void loadState(std::istream& theStream);
 	void setStateName(const std::string& theName) { name = theName; }
 	void addSubState(const std::shared_ptr<SubState>& substate) { substates.push_back(substate); }
+	void setSubStates(const std::vector<std::shared_ptr<SubState>>& theSubStates) { substates = theSubStates; }
 	void distributeLandshares() const;
 	void distributeResources();
 	void addHomeland(const auto& homeland) { homelands.emplace(homeland); }

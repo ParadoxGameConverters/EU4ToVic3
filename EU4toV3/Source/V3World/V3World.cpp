@@ -63,6 +63,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	popManager.generatePops(clayManager);
 
+	clayManager.squashAllSubStates(politicalManager);
+
 	Log(LogLevel::Info) << "-> Converting Provinces";
 	Log(LogLevel::Progress) << "53 %";
 

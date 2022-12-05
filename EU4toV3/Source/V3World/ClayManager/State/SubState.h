@@ -64,6 +64,7 @@ class SubState
 
 	[[nodiscard]] const auto& getSourceOwnerTag() const { return sourceOwnerTag; }
 	[[nodiscard]] const auto& getWeight() const { return weight; }
+	[[nodiscard]] const auto& getSourceProvinceData() const { return weightedSourceProvinceData; }
 
 	[[nodiscard]] auto getLandshare() const { return landshare; }
 	[[nodiscard]] const auto& getResource(const std::string& theResource) { return resources[theResource]; }

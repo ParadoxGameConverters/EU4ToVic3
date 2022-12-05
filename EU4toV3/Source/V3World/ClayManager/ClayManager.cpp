@@ -564,3 +564,107 @@ void V3::ClayManager::makeSubStateFromProvinces(const std::string& stateName, co
 	homeState->addSubState(newSubState);
 	substates.emplace_back(newSubState);
 }
+
+void V3::ClayManager::squashAllSubStates(const PoliticalManager& politicalManager)
+{
+	Log(LogLevel::Info) << "-> Squashing substates.";
+	auto subCount = substates.size();
+
+	// replacement caches
+	TagSubStates replacementTagSubStates;
+	TagSubStates replacementStateSubStates;
+	std::vector<std::shared_ptr<SubState>> newSubStates;
+
+	for (const auto& [stateName, state]: states)
+	{
+		// sort the substates by tags.
+		TagSubStates tagSubStates;
+		for (const auto& subState: state->getSubStates())
+		{
+			const auto& tag = subState->getOwner()->getTag();
+			if (!tagSubStates.contains(tag))
+				tagSubStates.emplace(tag, std::vector<std::shared_ptr<SubState>>{});
+			tagSubStates.at(tag).emplace_back(subState);
+		}
+
+		// and squash.
+		for (const auto& [tag, subStates]: tagSubStates)
+		{
+			if (subStates.empty())
+				continue;
+			auto squashedSubState = squashSubStates(subStates);
+
+			if (!replacementTagSubStates.contains(tag))
+				replacementTagSubStates.emplace(tag, std::vector<std::shared_ptr<SubState>>{});
+			replacementTagSubStates.at(tag).emplace_back(squashedSubState);
+
+			if (!replacementStateSubStates.contains(stateName))
+				replacementStateSubStates.emplace(stateName, std::vector<std::shared_ptr<SubState>>{});
+			replacementStateSubStates.at(stateName).emplace_back(squashedSubState);
+
+			newSubStates.emplace_back(squashedSubState);
+		}
+	}
+
+	// file to countries.
+	for (const auto& [tag, country]: politicalManager.getCountries())
+		if (replacementTagSubStates.contains(tag))
+			country->setSubStates(replacementTagSubStates.at(tag));
+		else
+			country->setSubStates({});
+
+	// file to states.
+	for (const auto& [stateName, state]: states)
+		if (replacementStateSubStates.contains(stateName))
+			state->setSubStates(replacementStateSubStates.at(stateName));
+		else
+			state->setSubStates({});
+
+	substates.swap(newSubStates);
+
+	Log(LogLevel::Info) << "<> Substates squashed, " << substates.size() << " remain, " << subCount - substates.size() << " ditched.";
+}
+
+std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector<std::shared_ptr<SubState>>& subStates) const
+{
+	ProvinceMap provinces;
+	std::string subStateType;
+	double weight = 0;
+	std::vector<std::pair<SourceProvinceData, double>> spData;
+	std::vector<Demographic> demographics;
+	SubStatePops subStatePops;
+	std::vector<Pop> pops;
+
+	for (const auto& subState: subStates)
+	{
+		provinces.insert(subState->getProvinces().begin(), subState->getProvinces().end());
+
+		// unsure about this. If one is unincorporated, all are unincorporated?
+		// TODO: See what this does
+		if (!subState->getSubStateType().empty())
+			subStateType = subState->getSubStateType();
+
+		if (subState->getWeight())
+			weight += *subState->getWeight();
+
+		spData.insert(spData.end(), subState->getSourceProvinceData().begin(), subState->getSourceProvinceData().end());
+		demographics.insert(demographics.end(), subState->getDemographics().begin(), subState->getDemographics().end());
+		pops.insert(pops.end(), subState->getSubStatePops().getPops().begin(), subState->getSubStatePops().getPops().end());
+	}
+	auto newSubState = std::make_shared<SubState>();
+	newSubState->setHomeState((*subStates.begin())->getHomeState());
+	newSubState->setOwner((*subStates.begin())->getOwner());
+
+	newSubState->setProvinces(provinces);
+	newSubState->setSubStateType(subStateType);
+	if (weight > 0)
+		newSubState->setWeight(weight);
+	newSubState->setSourceProvinceData(spData);
+	newSubState->setDemographics(demographics);
+
+	subStatePops.setTag(newSubState->getOwner()->getTag());
+	subStatePops.setPops(pops);
+	newSubState->setSubStatePops(subStatePops);
+
+	return newSubState;
+}
