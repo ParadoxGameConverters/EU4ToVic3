@@ -17,6 +17,8 @@ std::optional<std::string> V3::StatePops::getDominantCulture() const
 	for (const auto& subStatePop: subStatePops)
 		for (const auto& pop: subStatePop.getPops())
 		{
+			if (pop.getCulture().empty())
+				continue;
 			if (cultureCounts.contains(pop.getCulture()))
 				cultureCounts.at(pop.getCulture()) += pop.getSize();
 			else
@@ -40,6 +42,9 @@ std::optional<std::string> V3::StatePops::getDominantReligion() const
 	for (const auto& subStatePop: subStatePops)
 		for (const auto& pop: subStatePop.getPops())
 		{
+			// TODO: INJECT VANILLA RELIGIONS FOR VANILA POPS BASED ON CULTURE
+			if (pop.getReligion().empty())
+				continue;
 			if (religionCounts.contains(pop.getReligion()))
 				religionCounts.at(pop.getReligion()) += pop.getSize();
 			else

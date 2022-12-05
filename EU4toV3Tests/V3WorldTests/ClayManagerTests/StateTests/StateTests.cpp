@@ -421,3 +421,29 @@ TEST(V3World_StateTests, stateCanReturnUnassignedProvinces)
 	EXPECT_EQ("x000003", state.getUnassignedProvinces().at("x000003")->getName());
 	EXPECT_EQ("x000004", state.getUnassignedProvinces().at("x000004")->getName());
 }
+
+TEST(V3World_StateTests, stateCanSumItsPops)
+{
+	V3::State state;
+	const auto sub1 = std::make_shared<V3::SubState>();
+	const auto sub2 = std::make_shared<V3::SubState>();
+	V3::SubStatePops somePops;
+	somePops.setPops({V3::Pop("a", "A", "", 10), V3::Pop("a", "A", "", 30)});
+	sub1->setSubStatePops(somePops);
+	state.addSubState(sub1);
+	state.addSubState(sub2);
+
+	EXPECT_EQ(40, state.getStatePopCount());
+}
+
+TEST(V3World_StateTests, stateCanSumItsWeights)
+{
+	V3::State state;
+	const auto sub1 = std::make_shared<V3::SubState>();
+	const auto sub2 = std::make_shared<V3::SubState>();
+	sub1->setWeight(256.0);
+	state.addSubState(sub1);
+	state.addSubState(sub2);
+
+	EXPECT_EQ(256.0, state.getTotalSubStateWeight());
+}

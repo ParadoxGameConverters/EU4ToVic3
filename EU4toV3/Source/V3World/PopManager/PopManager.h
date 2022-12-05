@@ -20,6 +20,7 @@ namespace V3
 {
 class ClayManager;
 class SubState;
+class State;
 class PopManager
 {
   public:
@@ -38,6 +39,8 @@ class PopManager
 	[[nodiscard]] std::optional<SubStatePops> getVanillaSubStatePops(const std::string& stateName, const std::string& ownerTag) const;
 
   private:
+	void generatePopsForShovedSubStates(const std::shared_ptr<State>& state, int unassignedPopCount, int unassignedProvinceCount) const;
+	void generatePopsForNormalSubStates(const std::shared_ptr<State>& state, int unassignedPopCount) const;
 	[[nodiscard]] int generatePopCountForShovedSubState(const std::shared_ptr<SubState>& subState, int unassignedPopCount, int unassignedProvinces) const;
 	[[nodiscard]] int generatePopCountForNormalSubState(const std::shared_ptr<SubState>& subState, int unassignedPopCount) const;
 

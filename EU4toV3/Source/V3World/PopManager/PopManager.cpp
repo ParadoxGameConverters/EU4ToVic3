@@ -126,7 +126,7 @@ void V3::PopManager::generatePops(const ClayManager& clayManager) const
 			continue;
 
 		// TODO: ALTER this later! Use imagination! Use functions! Compare this number to combined state weights of the continent
-		// ... or something.
+		// TODO: ... or something.
 		const auto vanillaStatePopCount = vanillaStatePops.at(stateName).getPopCount();
 
 		/* Now there's a few things to keep in mind. The substate we're operating on can be any of these:
@@ -142,45 +142,18 @@ void V3::PopManager::generatePops(const ClayManager& clayManager) const
 		auto unassignedPopCount = vanillaStatePopCount - state->getStatePopCount();
 
 		// assigned provinces are provinces in substates that have pops inside. We need to exclude them.
-		const auto assignedProvinces = std::accumulate(state->getSubStates().begin(), state->getSubStates().end(), 0, [](int sum, const auto& subState) {
+		const auto assignedProvinceCount = std::accumulate(state->getSubStates().begin(), state->getSubStates().end(), 0, [](int sum, const auto& subState) {
 			if (subState->getSubStatePops().getPopCount() > 0)
 				sum += static_cast<int>(subState->getProvinces().size());
 			return sum;
 		});
-		const auto unassignedProvinces = static_cast<int>(state->getProvinces().size()) - assignedProvinces;
+		const auto unassignedProvinceCount = static_cast<int>(state->getProvinces().size()) - assignedProvinceCount;
+		generatePopsForShovedSubStates(state, unassignedPopCount, unassignedProvinceCount);
 
-		for (const auto& subState: state->getSubStates())
-		{
-			if (subState->getSubStatePops().getPopCount() > 0)
-				continue;
-
-			if (subState->getDemographics().empty())
-			{
-				const auto generatedPopCount = generatePopCountForShovedSubState(subState, unassignedPopCount, unassignedProvinces);
-				// We have no demographics! Use best guess.
-				auto pop = Pop(getDominantVanillaCulture(stateName), getDominantVanillaCulture(stateName), "", generatedPopCount);
-				subState->addPop(pop);
-				// and we're done with this one.
-			}
-		}
 		unassignedPopCount = vanillaStatePopCount - state->getStatePopCount();
 
 		// now iterate again and distribute that unassigned count according to weights.
-
-		for (const auto& subState: state->getSubStates())
-		{
-			if (subState->getSubStatePops().getPopCount() > 0)
-				continue;
-
-			if (!subState->getWeight())
-			{
-				Log(LogLevel::Warning) << "Substate in " << stateName << " has NO WEIGHT! It's supposed to be imported from EU4! Not generating pops!";
-				continue;
-			}
-
-			const auto generatedPopCount = generatePopCountForNormalSubState(subState, unassignedPopCount);
-			subState->generatePops(generatedPopCount);
-		}
+		generatePopsForNormalSubStates(state, unassignedPopCount);
 	}
 
 	const auto worldSum = std::accumulate(clayManager.getStates().begin(), clayManager.getStates().end(), 0, [](int sum, const auto& state) {
@@ -188,6 +161,43 @@ void V3::PopManager::generatePops(const ClayManager& clayManager) const
 	});
 
 	Log(LogLevel::Info) << "<> World now has " << worldSum << " pops.";
+}
+
+void V3::PopManager::generatePopsForNormalSubStates(const std::shared_ptr<State>& state, int unassignedPopCount) const
+{
+	for (const auto& subState: state->getSubStates())
+	{
+		if (subState->getSubStatePops().getPopCount() > 0)
+			continue;
+
+		if (!subState->getWeight())
+		{
+			Log(LogLevel::Warning) << "Substate in " << state->getName() << " has NO WEIGHT! It's supposed to be imported from EU4! Not generating pops!";
+			continue;
+		}
+
+		const auto generatedPopCount = generatePopCountForNormalSubState(subState, unassignedPopCount);
+		subState->generatePops(generatedPopCount);
+	}
+}
+
+void V3::PopManager::generatePopsForShovedSubStates(const std::shared_ptr<State>& state, int unassignedPopCount, int unassignedProvinceCount) const
+{
+	const auto& stateName = state->getName();
+	for (const auto& subState: state->getSubStates())
+	{
+		if (subState->getSubStatePops().getPopCount() > 0)
+			continue;
+
+		if (subState->getDemographics().empty())
+		{
+			const auto generatedPopCount = generatePopCountForShovedSubState(subState, unassignedPopCount, unassignedProvinceCount);
+			// We have no demographics! Use best guess.
+			auto pop = Pop(getDominantVanillaCulture(stateName), getDominantVanillaCulture(stateName), "", generatedPopCount);
+			subState->addPop(pop);
+			// and we're done with this one.
+		}
+	}
 }
 
 int V3::PopManager::generatePopCountForNormalSubState(const std::shared_ptr<SubState>& subState, int unassignedPopCount) const
