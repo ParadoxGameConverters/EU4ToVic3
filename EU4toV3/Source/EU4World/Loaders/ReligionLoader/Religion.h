@@ -1,7 +1,7 @@
 #ifndef RELIGION_H
 #define RELIGION_H
-#include <string>
 #include "Color.h"
+#include <string>
 
 namespace EU4
 {

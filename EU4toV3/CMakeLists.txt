@@ -41,6 +41,7 @@ file(GLOB OUT_WORLD_SOURCES "${PROJECT_SOURCE_DIR}/Output/*.cpp")
 file(GLOB OUT_SUBDIR_SOURCES "${PROJECT_SOURCE_DIR}/Output/*/*.cpp")
 file(GLOB OUT_SUBSUBDIR_SOURCES "${PROJECT_SOURCE_DIR}/Output/*/*/*.cpp")
 file(GLOB MAPPER_SOURCES "${PROJECT_SOURCE_DIR}/Mappers/*/*.cpp")
+file(GLOB MAPPER_SUBDIR_SOURCES "${PROJECT_SOURCE_DIR}/Mappers/*/*/*.cpp")
 set(COMMON_SOURCES "../commonItems/CommonFunctions.cpp")
 set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/Color.cpp")
 set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/ConvenientParser.cpp")
@@ -72,6 +73,7 @@ add_executable(EU4ToVic3
 	${OUT_SUBDIR_SOURCES}
 	${OUT_SUBSUBDIR_SOURCES}
 	${MAPPER_SOURCES}
+	${MAPPER_SUBDIR_SOURCES}
 	${COMMON_SOURCES}
 )
 
