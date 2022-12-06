@@ -47,12 +47,11 @@ TEST(Mappers_ReligionMapperTests, ReligiousDefsCanBeGenerated)
 	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader theReligions;
 	theReligions.loadReligions(eu4Path, mods);
-	for (const auto& [a, b]: theReligions.getAllReligions())
-		Log(LogLevel::Debug) << "--" << a;
 
 	std::stringstream input;
 	input << commonItems::utf8BOM << "l_english:\n";
 	input << " religion_2: \"The Religion 2\"\n";
+	input << " converted_dynamic_faith_107: \"The Religion 107\"\n";
 	EU4::EU4LocalizationLoader locs;
 	locs.loadLocalizations(input);
 
@@ -68,6 +67,7 @@ TEST(Mappers_ReligionMapperTests, ReligiousDefsCanBeGenerated)
 	EXPECT_THAT(religion2.traits, testing::UnorderedElementsAre("religiontrait_2"));
 	EXPECT_EQ(commonItems::Color(std::array{4, 5, 6}), *religion2.color);
 	EXPECT_TRUE(religion2.taboos.empty());
+	EXPECT_TRUE(religion2.locBlock.empty()); // no locs since this is a preset def!
 
 	// eu4 converted_dynamic_faith_107 is a dynamic mapping via groups (mod_group_2):
 	// link = { vic3 = religiontrait_3 eu4 = mod_group_2 eu4 = mod_group_3 icon = religion_2 taboo = liquor taboo = wine }
@@ -78,4 +78,5 @@ TEST(Mappers_ReligionMapperTests, ReligiousDefsCanBeGenerated)
 	EXPECT_THAT(dyn7.traits, testing::UnorderedElementsAre("religiontrait_3"));	// from group
 	EXPECT_EQ(commonItems::Color(std::array{135, 55, 140}), *dyn7.color);			// from eu4 defs
 	EXPECT_THAT(dyn7.taboos, testing::UnorderedElementsAre("liquor", "wine"));		// from group
+	EXPECT_EQ("The Religion 107", dyn7.locBlock.at("english"));
 }

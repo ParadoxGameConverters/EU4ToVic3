@@ -7,13 +7,13 @@ TEST(Mappers_ReligionGroupMapperTests, religionGroupMappingsCanBeRetrieved)
 	mappers::ReligionGroupMapper mapper;
 	mapper.loadMappingRules("TestFiles/configurables/religion_group_map.txt");
 
-	const auto& match = mapper.getMappingForEU4ReligionGroup("gnostic");
+	const auto& match = mapper.getMappingForEU4ReligionGroup("mod_group_1");
 	ASSERT_TRUE(match);
 
-	EXPECT_EQ("christian", match->getTrait());
-	EXPECT_THAT(match->getEU4Groups(), testing::UnorderedElementsAre("christian", "gnostic"));
-	EXPECT_TRUE(match->getTaboos().empty());
-	EXPECT_EQ("protestant", match->getIcon());
+	EXPECT_EQ("religiontrait_2", match->getTrait());
+	EXPECT_THAT(match->getEU4Groups(), testing::UnorderedElementsAre("vanilla_group_2", "mod_group_1"));
+	EXPECT_THAT(match->getTaboos(), testing::UnorderedElementsAre("liquor", "wine"));
+	EXPECT_EQ("religion_2", match->getIcon());
 }
 
 TEST(Mappers_ReligionGroupMapperTests, MisMatchReturnsNullopt)
