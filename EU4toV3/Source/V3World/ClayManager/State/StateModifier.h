@@ -1,7 +1,7 @@
 #ifndef STATE_MODIFIER_H
 #define STATE_MODIFIER_H
+#include "Loaders/BuildingLoader/BuildingGroups.h"
 #include "Parser.h"
-#include <Loaders/BuildingLoader/BuildingGroups.h>
 
 namespace V3
 {
@@ -14,14 +14,19 @@ class StateModifier: commonItems::parser
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getInfrastructureBonus() const { return infrastructure; }
+	[[nodiscard]] const auto& getInfrastructureModifier() const { return infrastructureModifier; }
 	[[nodiscard]] const auto& getPortBonus() const { return port; }
 	[[nodiscard]] const auto& getNavalBaseBonus() const { return navalBase; }
+	[[nodiscard]] const auto& getBuildingGroupModifiersMap() const { return buildingGroupModifiers; }
+	[[nodiscard]] const auto& getBuildingModifiersMap() const { return buildingModifiers; }
+	[[nodiscard]] const auto& getGoodsModifiersMap() const { return goodsModifiers; }
 	[[nodiscard]] const std::optional<double> getBuildingGroupModifier(const std::string& buildingGroup, std::shared_ptr<BuildingGroups> bgs) const;
 	[[nodiscard]] const std::optional<double> getBuildingModifier(const std::string& building) const;
 	[[nodiscard]] const std::optional<double> getGoodsModifier(const std::string& good) const;
 
   private:
 	void registerKeys();
+	commonItems::parser modiferUnwrapper;
 
 	std::string name; // state_trait_natural_harbors
 

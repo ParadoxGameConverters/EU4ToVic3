@@ -7,9 +7,9 @@ TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderCanLoadBuildingGroups)
 {
 	V3::BuildingGroupLoader buildingGroupLoader;
 	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
-	EXPECT_EQ(buildingGroups->getBuildingGroupMap().size(), 0);
+	EXPECT_TRUE(buildingGroups->getBuildingGroupMap().empty());
 	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
-	EXPECT_EQ(buildingGroups->getBuildingGroupMap().size(), 6);
+	EXPECT_EQ(6, buildingGroups->getBuildingGroupMap().size());
 }
 
 TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderTracksHierarchy)
@@ -19,11 +19,11 @@ TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderTracksHierarchy)
 	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
 
 	EXPECT_TRUE(buildingGroups->getParentName("bg_manufacturing")->empty());
-	EXPECT_EQ(buildingGroups->getParentName("bg_light_industry").value(), "bg_manufacturing");
-	EXPECT_EQ(buildingGroups->getParentName("bg_heavy_industry").value(), "bg_manufacturing");
-	EXPECT_EQ(buildingGroups->getParentName("bg_ultra_industry").value(), "bg_heavy_industry");
-	EXPECT_EQ(buildingGroups->getParentName("bg_mega_industry").value(), "bg_ultra_industry");
-	EXPECT_EQ(buildingGroups->getParentName("bg_giga_industry").value(), "bg_mega_industry");
+	EXPECT_EQ("bg_manufacturing", buildingGroups->getParentName("bg_light_industry").value());
+	EXPECT_EQ("bg_manufacturing", buildingGroups->getParentName("bg_heavy_industry").value());
+	EXPECT_EQ("bg_heavy_industry", buildingGroups->getParentName("bg_ultra_industry").value());
+	EXPECT_EQ("bg_ultra_industry", buildingGroups->getParentName("bg_mega_industry").value());
+	EXPECT_EQ("bg_mega_industry", buildingGroups->getParentName("bg_giga_industry").value());
 }
 
 TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderSetsInfrastructureInheritance)
@@ -32,12 +32,12 @@ TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderSetsInfrastructureInhe
 	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
 	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
 
-	EXPECT_EQ(buildingGroups->getInfrastructureCost("bg_manufacturing").value(), 0);
-	EXPECT_EQ(buildingGroups->getInfrastructureCost("bg_light_industry").value(), 2);
-	EXPECT_EQ(buildingGroups->getInfrastructureCost("bg_heavy_industry").value(), 3);
-	EXPECT_EQ(buildingGroups->getInfrastructureCost("bg_ultra_industry").value(), 1);
-	EXPECT_EQ(buildingGroups->getInfrastructureCost("bg_mega_industry").value(), 1);
-	EXPECT_EQ(buildingGroups->getInfrastructureCost("bg_giga_industry").value(), 1);
+	EXPECT_EQ(0, buildingGroups->getInfrastructureCost("bg_manufacturing").value());
+	EXPECT_EQ(2, buildingGroups->getInfrastructureCost("bg_light_industry").value());
+	EXPECT_EQ(3, buildingGroups->getInfrastructureCost("bg_heavy_industry").value());
+	EXPECT_EQ(1, buildingGroups->getInfrastructureCost("bg_ultra_industry").value());
+	EXPECT_EQ(1, buildingGroups->getInfrastructureCost("bg_mega_industry").value());
+	EXPECT_EQ(1, buildingGroups->getInfrastructureCost("bg_giga_industry").value());
 }
 
 TEST(V3World_BuildingGroupLoaderTests, BadKeyReturnsDefaultValuesAndIsLogged)
@@ -58,7 +58,7 @@ TEST(V3World_BuildingGroupLoaderTests, BadKeyReturnsDefaultValuesAndIsLogged)
 	EXPECT_THAT(log.str(),
 		 testing::HasSubstr(R"( [ERROR] Key not recognized: not_a_key1 is not a recognized building_group. Using an empty group in its place.)"));
 	EXPECT_TRUE(parentName.empty());
-	EXPECT_EQ(infrastructureCost, 0);
+	EXPECT_EQ(0, infrastructureCost);
 
 	std::cout.rdbuf(cout_buffer);
 }
@@ -72,6 +72,6 @@ TEST(V3World_BuildingGroupLoaderTests, GettersReturnNullOptionals)
 	auto parentName = buildingGroups->getParentName("not_a_key0");
 	auto infrastructureCost = buildingGroups->getInfrastructureCost("not_a_key1");
 
-	EXPECT_EQ(parentName, std::nullopt);
-	EXPECT_EQ(infrastructureCost, std::nullopt);
+	EXPECT_EQ(std::nullopt, parentName);
+	EXPECT_EQ(std::nullopt, infrastructureCost);
 }
