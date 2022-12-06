@@ -601,6 +601,18 @@
     <ClCompile Include="..\EU4toV3\Source\Output\outPops\outPops.cpp">
       <Filter>ConverterFiles\Output\OutPops</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDefinitionEntry.cpp">
+      <Filter>ConverterFiles\Mappers\ReligionMapper\ReligionDefinitionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDefinitionLoader.cpp">
+      <Filter>ConverterFiles\Mappers\ReligionMapper\ReligionDefinitionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\ReligionMapperTests\ReligionDefinitionLoaderTests\ReligionDefinitionEntryTests.cpp">
+      <Filter>MapperTests\ReligionMapperTests\ReligionDefinitionLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\ReligionMapperTests\ReligionDefinitionLoaderTests\ReligionDefinitionLoaderTests.cpp">
+      <Filter>MapperTests\ReligionMapperTests\ReligionDefinitionLoaderTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -993,6 +1005,15 @@
     <Filter Include="ConverterFiles\Output\OutPops">
       <UniqueIdentifier>{79e8ff2c-2ad8-4ffc-acc4-8d4050b9356c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\Mappers\ReligionMapper\ReligionDefinitionLoader">
+      <UniqueIdentifier>{4475cf3c-7075-4288-8c6b-ce8ad5aba967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\ReligionMapperTests\ReligionDefinitionLoaderTests">
+      <UniqueIdentifier>{87f15707-3493-4208-9e43-c7e226e27a9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\religions">
+      <UniqueIdentifier>{3c3d4aee-21e1-49f5-a9ea-863aaad8b597}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1131,6 +1152,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\states\01_additional.txt">
       <Filter>TestFiles\vic3installation\game\common\history\states</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\religions\religion.txt">
+      <Filter>TestFiles\vic3installation\game\common\religions</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>
