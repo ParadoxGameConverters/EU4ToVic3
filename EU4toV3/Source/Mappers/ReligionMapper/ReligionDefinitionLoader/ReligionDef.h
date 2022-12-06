@@ -12,6 +12,8 @@ struct ReligionDef
 	std::set<std::string> traits;
 	std::optional<commonItems::Color> color;
 	std::set<std::string> taboos;
+
+	std::map<std::string, std::string> locBlock;
 };
 } // namespace mappers
 

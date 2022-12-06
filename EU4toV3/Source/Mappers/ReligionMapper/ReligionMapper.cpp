@@ -9,6 +9,8 @@
 #include "ReligionMapping.h"
 #include <ranges>
 
+#include "LocalizationLoader/EU4LocalizationLoader.h"
+
 void mappers::ReligionMapper::loadMappingRules(const std::string& filePath)
 {
 	Log(LogLevel::Info) << "-> Parsing religion mapping rules.";
@@ -57,7 +59,8 @@ void mappers::ReligionMapper::expandReligionMappings(const std::map<std::string,
 	Log(LogLevel::Info) << "<> Additional " << eu4ToV3ReligionMap.size() - curSize << " religions imported.";
 }
 
-void mappers::ReligionMapper::generateReligionDefinitions(const commonItems::ModFilesystem& modFS, const std::map<std::string, EU4::Religion>& eu4Religions)
+void mappers::ReligionMapper::generateReligionDefinitions(const commonItems::ModFilesystem& modFS,
+	 const std::map<std::string, EU4::Religion>& eu4Religions, const EU4::EU4LocalizationLoader& eu4Locs)
 {
 	Log(LogLevel::Info) << "-> Generating Religion Definitions.";
 
@@ -87,7 +90,7 @@ void mappers::ReligionMapper::generateReligionDefinitions(const commonItems::Mod
 		}
 
 		// generate one and file.
-		auto newDef = generateReligionDefinition(v3ReligionName, religionGroupMapper, religionDefinitionLoader, eu4Religions.at(eu4ReligionName));
+		auto newDef = generateReligionDefinition(v3ReligionName, religionGroupMapper, religionDefinitionLoader, eu4Religions.at(eu4ReligionName), eu4Locs);
 		vic3ReligionDefinitions.emplace(v3ReligionName, newDef);
 	}
 
@@ -97,12 +100,16 @@ void mappers::ReligionMapper::generateReligionDefinitions(const commonItems::Mod
 mappers::ReligionDef mappers::ReligionMapper::generateReligionDefinition(const std::string& v3ReligionName,
 	 const ReligionGroupMapper& religionGroupMapper,
 	 const ReligionDefinitionLoader& religionDefinitionLoader,
-	 const EU4::Religion& eu4Religion) const
+	 const EU4::Religion& eu4Religion, const EU4::EU4LocalizationLoader& eu4Locs) const
 {
 	ReligionDef religionDef;
 	religionDef.name = v3ReligionName;
 	if (eu4Religion.color)
 		religionDef.color = eu4Religion.color;
+
+	// We are indiscriminately overriding vanilla vic3 locs as well, but we'll export them with a 99 prefix so base locs should apply.
+	if (const auto& locs = eu4Locs.getTextInEachLanguage(eu4Religion.name))
+		religionDef.locBlock = *locs;
 
 	std::string trappings;
 	std::string icon;
