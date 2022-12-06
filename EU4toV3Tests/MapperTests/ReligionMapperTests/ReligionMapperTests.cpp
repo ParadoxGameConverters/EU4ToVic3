@@ -1,6 +1,11 @@
+#include "CommonFunctions.h"
+#include "LocalizationLoader/EU4LocalizationLoader.h"
+#include "Log.h"
 #include "ReligionLoader/ReligionLoader.h"
 #include "ReligionMapper/ReligionMapper.h"
+#include "gmock/gmock-matchers.h"
 #include "gtest/gtest.h"
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 
 TEST(Mappers_ReligionMapperTests, religionsCanBeRetrieved)
 {
@@ -33,4 +38,44 @@ TEST(Mappers_ReligionMapperTests, ReligionsMappingsCanBeExpanded)
 
 	EXPECT_EQ("additional1", mapper.getV3Religion("additional1"));
 	EXPECT_EQ("additional2", mapper.getV3Religion("additional2"));
+}
+
+TEST(Mappers_ReligionMapperTests, ReligiousDefsCanBeGenerated)
+{
+	const auto eu4Path = "TestFiles/eu4installation/";
+	Mods mods;
+	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
+	EU4::ReligionLoader theReligions;
+	theReligions.loadReligions(eu4Path, mods);
+	for (const auto& [a, b]: theReligions.getAllReligions())
+		Log(LogLevel::Debug) << "--" << a;
+
+	std::stringstream input;
+	input << commonItems::utf8BOM << "l_english:\n";
+	input << " religion_2: \"The Religion 2\"\n";
+	EU4::EU4LocalizationLoader locs;
+	locs.loadLocalizations(input);
+
+	mappers::ReligionMapper mapper;
+	mapper.loadMappingRules("TestFiles/configurables/religion_map.txt");
+	mapper.expandReligionMappings(theReligions.getAllReligions());
+	mapper.generateReligionDefinitions(modFS, "TestFiles/configurables/religion_group_map.txt", theReligions.getAllReligions(), locs);
+
+	// eu4 religion_2 is a default mapping into vic3's religion_2 which has preset defs:
+	const auto& religion2 = mapper.getV3ReligionDefinitions().at("religion_2");
+	EXPECT_EQ("religion_2", religion2.name);
+	EXPECT_EQ("gfx/interface/icons/religion_icons/religion_2.dds", religion2.texture);
+	EXPECT_THAT(religion2.traits, testing::UnorderedElementsAre("religiontrait_2"));
+	EXPECT_EQ(commonItems::Color(std::array{4, 5, 6}), *religion2.color);
+	EXPECT_TRUE(religion2.taboos.empty());
+
+	// eu4 converted_dynamic_faith_107 is a dynamic mapping via groups (mod_group_2):
+	// link = { vic3 = religiontrait_3 eu4 = mod_group_2 eu4 = mod_group_3 icon = religion_2 taboo = liquor taboo = wine }
+	const auto& dyn7 = mapper.getV3ReligionDefinitions().at("converted_dynamic_faith_107");
+	EXPECT_EQ("converted_dynamic_faith_107", dyn7.name);
+	// link = { vic3 = religion_1 eu4 = shamanism }
+	EXPECT_EQ("gfx/interface/icons/religion_icons/religion_1.dds", dyn7.texture); // from shamanism trappings.
+	EXPECT_THAT(dyn7.traits, testing::UnorderedElementsAre("religiontrait_3"));	// from group
+	EXPECT_EQ(commonItems::Color(std::array{135, 55, 140}), *dyn7.color);			// from eu4 defs
+	EXPECT_THAT(dyn7.taboos, testing::UnorderedElementsAre("liquor", "wine"));		// from group
 }

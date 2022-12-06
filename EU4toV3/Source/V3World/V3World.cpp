@@ -20,7 +20,10 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	countryMapper->loadMappingRules("configurables/country_mappings.txt");
 	religionMapper.loadMappingRules("configurables/religion_map.txt");
 	religionMapper.expandReligionMappings(sourceWorld.getReligionLoader().getAllReligions());
-	religionMapper.generateReligionDefinitions(modFS, sourceWorld.getReligionLoader().getAllReligions(), sourceWorld.getEU4Localizations());
+	religionMapper.generateReligionDefinitions(modFS,
+		 "configurables/religion_group_map.txt",
+		 sourceWorld.getReligionLoader().getAllReligions(),
+		 sourceWorld.getEU4Localizations());
 	cultureMapper.loadMappingRules("configurables/culture_map.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	localizationLoader.scrapeLocalizations(modFS);

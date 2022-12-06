@@ -1,6 +1,7 @@
 #include "ReligionMapper.h"
 #include "CommonRegexes.h"
 #include "Loaders/ReligionLoader/Religion.h"
+#include "LocalizationLoader/EU4LocalizationLoader.h"
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
@@ -8,8 +9,6 @@
 #include "ReligionGroupMapper/ReligionGroupMapper.h"
 #include "ReligionMapping.h"
 #include <ranges>
-
-#include "LocalizationLoader/EU4LocalizationLoader.h"
 
 void mappers::ReligionMapper::loadMappingRules(const std::string& filePath)
 {
@@ -60,14 +59,16 @@ void mappers::ReligionMapper::expandReligionMappings(const std::map<std::string,
 }
 
 void mappers::ReligionMapper::generateReligionDefinitions(const commonItems::ModFilesystem& modFS,
-	 const std::map<std::string, EU4::Religion>& eu4Religions, const EU4::EU4LocalizationLoader& eu4Locs)
+	 const std::string& groupMapPath,
+	 const std::map<std::string, EU4::Religion>& eu4Religions,
+	 const EU4::EU4LocalizationLoader& eu4Locs)
 {
 	Log(LogLevel::Info) << "-> Generating Religion Definitions.";
 
 	ReligionDefinitionLoader religionDefinitionLoader;
 	religionDefinitionLoader.loadDefinitions(modFS);
 	ReligionGroupMapper religionGroupMapper;
-	religionGroupMapper.loadMappingRules("configurables/religion_group_map.txt");
+	religionGroupMapper.loadMappingRules(groupMapPath);
 
 	for (const auto& [eu4ReligionName, v3ReligionName]: eu4ToV3ReligionMap)
 	{
@@ -75,21 +76,20 @@ void mappers::ReligionMapper::generateReligionDefinitions(const commonItems::Mod
 			continue;
 
 		// do we have a ready definition already?
-		const auto defMatch = religionDefinitionLoader.getReligionDef(v3ReligionName);
-		if (defMatch)
+		if (const auto& defMatch = religionDefinitionLoader.getReligionDef(v3ReligionName))
 		{
 			vic3ReligionDefinitions.emplace(v3ReligionName, *defMatch);
 			continue;
 		}
 
-		// quick sanity, though this should never fire except when testing.
+		// quick sanity, though this should never fire.
 		if (!eu4Religions.contains(eu4ReligionName))
 		{
 			Log(LogLevel::Warning) << "EU4 religions don't contain " << eu4ReligionName << "? What are we even doing?";
 			continue;
 		}
 
-		// generate one and file.
+		// generate a definition and file.
 		auto newDef = generateReligionDefinition(v3ReligionName, religionGroupMapper, religionDefinitionLoader, eu4Religions.at(eu4ReligionName), eu4Locs);
 		vic3ReligionDefinitions.emplace(v3ReligionName, newDef);
 	}
@@ -100,7 +100,8 @@ void mappers::ReligionMapper::generateReligionDefinitions(const commonItems::Mod
 mappers::ReligionDef mappers::ReligionMapper::generateReligionDefinition(const std::string& v3ReligionName,
 	 const ReligionGroupMapper& religionGroupMapper,
 	 const ReligionDefinitionLoader& religionDefinitionLoader,
-	 const EU4::Religion& eu4Religion, const EU4::EU4LocalizationLoader& eu4Locs) const
+	 const EU4::Religion& eu4Religion,
+	 const EU4::EU4LocalizationLoader& eu4Locs) const
 {
 	ReligionDef religionDef;
 	religionDef.name = v3ReligionName;
@@ -111,7 +112,7 @@ mappers::ReligionDef mappers::ReligionMapper::generateReligionDefinition(const s
 	if (const auto& locs = eu4Locs.getTextInEachLanguage(eu4Religion.name))
 		religionDef.locBlock = *locs;
 
-	std::string trappings;
+	const auto& trappings = eu4Religion.trappings;
 	std::string icon;
 
 	// can we match a group?
@@ -119,8 +120,6 @@ mappers::ReligionDef mappers::ReligionMapper::generateReligionDefinition(const s
 	{
 		religionDef.traits.emplace(groupMatch->getTrait());
 		religionDef.taboos = groupMatch->getTaboos();
-		if (!eu4Religion.trappings.empty())
-			trappings = eu4Religion.trappings;
 		icon = groupMatch->getIcon();
 	}
 	else
