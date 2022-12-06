@@ -3,6 +3,7 @@
 #include "outCountries/outCommonCountries.h"
 #include "outLocalizations/outLocalizations.h"
 #include "outMetadataFile/outMetadataFile.h"
+#include "outPops/outPops.h"
 #include "outStates/outCommonHistoryStates.h"
 #include <fstream>
 
@@ -86,6 +87,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 
 	Log(LogLevel::Info) << "<- Writing Religion Definitions";
 	Log(LogLevel::Info) << "<- Writing Pops";
+	exportPops(outputName, world.getClayManager().getStates());
 	Log(LogLevel::Progress) << "97 %";
 
 	Log(LogLevel::Info) << "<- Sending Botanical Expedition";

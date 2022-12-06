@@ -86,3 +86,38 @@ TEST(V3World_SubStateTests, SubStateCanConvertDemograhics)
 	EXPECT_EQ(1, demo.middleRatio);
 	EXPECT_EQ(1, demo.lowerRatio);
 }
+
+TEST(V3World_SubStateTests, SubStateCanGeneratePopsFromDemographics)
+{
+	V3::SubState subState;
+	V3::Demographic demo1;
+	demo1.culture = "cul1";
+	demo1.religion = "rel1";
+	demo1.upperRatio = 0.15; // total ratio sum 0.3
+	demo1.middleRatio = 0.075;
+	demo1.lowerRatio = 0.075;
+
+	V3::Demographic demo2;
+	demo2.culture = "cul2";
+	demo2.religion = "rel2";
+	demo2.upperRatio = 0.1; // total ratio sum 0.7
+	demo2.middleRatio = 0.1;
+	demo2.lowerRatio = 0.5;
+
+	subState.setDemographics({demo1, demo2});
+
+	subState.generatePops(1000);
+
+	const auto& pops = subState.getSubStatePops().getPops();
+	ASSERT_EQ(2, pops.size());
+	const auto& pop1 = pops[0];
+	const auto& pop2 = pops[1];
+
+	EXPECT_EQ("cul1", pop1.getCulture());
+	EXPECT_EQ("rel1", pop1.getReligion());
+	EXPECT_EQ(300, pop1.getSize());
+
+	EXPECT_EQ("cul2", pop2.getCulture());
+	EXPECT_EQ("rel2", pop2.getReligion());
+	EXPECT_EQ(700, pop2.getSize());
+}

@@ -5,7 +5,6 @@
 namespace OUT
 {
 void exportCommonCountries(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries);
-void outCommonCountry(std::ostream& output, const V3::Country& country);
 
 } // namespace OUT
 

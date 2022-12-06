@@ -23,6 +23,8 @@ class State;
 class SuperRegion;
 class VanillaStateEntry;
 class PoliticalManager;
+class PopManager;
+class SubStatePops;
 class ClayManager
 {
   public:
@@ -36,8 +38,11 @@ class ClayManager
 	void unDisputeChunkOwnership(const SourceOwners& sourceCountries);
 	void splitChunksIntoSubStates();
 	void assignSubStateOwnership(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper);
-	void injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager);
+	void injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager, const PopManager& popManager);
 	void shoveRemainingProvincesIntoSubStates();
+	void squashAllSubStates(const PoliticalManager& politicalManager);
+
+	void addSubState(const std::shared_ptr<SubState>& subState) { substates.emplace_back(subState); }
 
 	[[nodiscard]] const auto& getStates() const { return states; }
 	[[nodiscard]] const auto& getSuperRegions() const { return superRegions; }
@@ -54,8 +59,11 @@ class ClayManager
 	[[nodiscard]] bool importVanillaSubStates(const std::string& stateName,
 		 const VanillaStateEntry& entry,
 		 const ProvinceMap& unassignedProvinces,
-		 const PoliticalManager& politicalManager);
+		 const PoliticalManager& politicalManager,
+		 const PopManager& popManager);
 	void makeSubStateFromProvinces(const std::string& stateName, const ProvinceMap& unassignedProvinces);
+	[[nodiscard]] SubStatePops prepareInjectedSubStatePops(const std::shared_ptr<SubState>& subState, double subStateRatio, const PopManager& popManager) const;
+	[[nodiscard]] std::shared_ptr<SubState> squashSubStates(const std::vector<std::shared_ptr<SubState>>& subStates) const;
 
 	std::map<std::string, std::shared_ptr<State>> states;					// geographical entities
 	std::map<std::string, std::shared_ptr<SuperRegion>> superRegions; // geographical entities

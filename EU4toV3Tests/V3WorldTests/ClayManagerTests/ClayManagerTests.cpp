@@ -9,6 +9,7 @@
 #include "Loaders/SuperRegionLoader/V3SuperRegion.h"
 #include "PoliticalManager/Country/Country.h"
 #include "PoliticalManager/PoliticalManager.h"
+#include "PopManager/PopManager.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
 #include "gtest/gtest.h"
@@ -71,7 +72,7 @@ V3::ClayManager distributeChunks()
 	return clayManager;
 }
 
-V3::ClayManager assignSubStateOwnership()
+std::tuple<V3::ClayManager, V3::PoliticalManager> assignSubStateOwnership()
 {
 	auto clayManager = distributeChunks();
 	std::stringstream countryStream;
@@ -86,9 +87,13 @@ V3::ClayManager assignSubStateOwnership()
 	politicalManager.initializeVanillaCountries(modFS);
 	politicalManager.importEU4Countries(countries);
 	clayManager.assignSubStateOwnership(politicalManager.getCountries(), *countryMapper);
-	clayManager.injectVanillaSubStates(modFS, politicalManager);
 
-	return clayManager;
+	V3::PopManager popManager;
+	popManager.initializeVanillaPops(modFS);
+
+	clayManager.injectVanillaSubStates(modFS, politicalManager, popManager);
+
+	return {clayManager, politicalManager};
 }
 
 TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaStates)
@@ -466,7 +471,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanSplitSubstatesFromChunks)
 
 TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 {
-	auto clayManager = assignSubStateOwnership();
+	auto [clayManager, polManager] = assignSubStateOwnership();
 	const auto& substates = clayManager.getSubStates();
 
 	/*
@@ -520,7 +525,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 
 TEST(V3World_ClayManagerTests, clayManagerCanInjectVanillaSubStates)
 {
-	auto clayManager = assignSubStateOwnership();
+	auto [clayManager, polManager] = assignSubStateOwnership();
 	const auto& substates = clayManager.getSubStates();
 
 	/*
@@ -549,7 +554,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanInjectVanillaSubStates)
 
 TEST(V3World_ClayManagerTests, clayManagerCanShoveProvincesIntoSubStates)
 {
-	auto clayManager = assignSubStateOwnership();
+	auto [clayManager, polManager] = assignSubStateOwnership();
 
 	// let's grab a state.
 	const auto& state = clayManager.getStates().at("STATE_TEST_LAND3");
@@ -576,4 +581,51 @@ TEST(V3World_ClayManagerTests, clayManagerCanShoveProvincesIntoSubStates)
 	EXPECT_EQ(2, substate2->getProvinces().size());
 	EXPECT_TRUE(substate2->getProvinces().contains("x000005"));
 	EXPECT_TRUE(substate2->getProvinces().contains("x000006"));
+}
+
+TEST(V3World_ClayManagerTests, clayManagerCanSquashSubStates)
+{
+	auto [clayManager, polManager] = assignSubStateOwnership();
+
+	std::stringstream log;
+	std::streambuf* cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+
+	clayManager.squashAllSubStates(polManager);
+	std::cout.rdbuf(cout_buffer);
+
+	// we have no squashable states
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> Substates squashed, 4 remain, 0 ditched.)"));
+	// so let's make one.
+
+	// let's grab some substate.
+	const auto& sub = clayManager.getStates().at("STATE_TEST_LAND1")->getSubStates()[0];
+	EXPECT_EQ("GA2", sub->getOwnerTag());
+
+	// now refile it.
+	EXPECT_EQ(2, polManager.getCountry("GA2")->getSubStates().size());
+	polManager.getCountry("GA2")->addSubState(sub);
+	EXPECT_EQ(3, polManager.getCountry("GA2")->getSubStates().size());
+
+	EXPECT_EQ(4, clayManager.getSubStates().size());
+	clayManager.addSubState(sub);
+	EXPECT_EQ(5, clayManager.getSubStates().size());
+
+	EXPECT_EQ(1, clayManager.getStates().at("STATE_TEST_LAND1")->getSubStates().size());
+	clayManager.getStates().at("STATE_TEST_LAND1")->addSubState(sub);
+	EXPECT_EQ(2, clayManager.getStates().at("STATE_TEST_LAND1")->getSubStates().size());
+
+	// squash again.
+
+	cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+
+	clayManager.squashAllSubStates(polManager);
+	std::cout.rdbuf(cout_buffer);
+
+	// and it's gone.
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> Substates squashed, 4 remain, 1 ditched.)"));
+	EXPECT_EQ(2, polManager.getCountry("GA2")->getSubStates().size());
+	EXPECT_EQ(4, clayManager.getSubStates().size());
+	EXPECT_EQ(1, clayManager.getStates().at("STATE_TEST_LAND1")->getSubStates().size());
 }

@@ -9,12 +9,14 @@
 #include "Log.h"
 #include "PoliticalManager/Country/Country.h"
 #include "PoliticalManager/PoliticalManager.h"
+#include "PopManager/PopManager.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
 #include "State/Chunk.h"
 #include "State/Province.h"
 #include "State/State.h"
 #include "State/SubState.h"
+#include <cmath>
 #include <numeric>
 #include <ranges>
 
@@ -400,7 +402,7 @@ bool V3::ClayManager::stateIsInRegion(const std::string& state, const std::strin
 	return false;
 }
 
-void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager)
+void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager, const PopManager& popManager)
 {
 	Log(LogLevel::Info) << "-> Injecting Vanilla substates into conversion map.";
 	auto subCounter = substates.size();
@@ -431,7 +433,7 @@ void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& m
 		}
 
 		const auto& vanillaStateEntry = loader.getStates().at(stateName);
-		const auto success = importVanillaSubStates(stateName, vanillaStateEntry, unassignedProvinces, politicalManager);
+		const auto success = importVanillaSubStates(stateName, vanillaStateEntry, unassignedProvinces, politicalManager, popManager);
 
 		// If we imported anything, we should also copy any potential homelands. Unsure whom they belong to, but they surely won't do harm.
 		// What could possibly go wrong?
@@ -447,7 +449,8 @@ void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& m
 bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 	 const VanillaStateEntry& entry,
 	 const ProvinceMap& unassignedProvinces,
-	 const PoliticalManager& politicalManager)
+	 const PoliticalManager& politicalManager,
+	 const PopManager& popManager)
 {
 	bool action = false;
 	for (const auto& subStateEntry: entry.getSubStates())
@@ -480,6 +483,15 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		newSubState->setSubStateType(subStateEntry.getSubStateType());
 		newSubState->setHomeState(homeState);
 
+		// How many provinces did we lose in the transfer? Ie. How many of this substate's original provinces were already assigned to some other substate?
+		// We can use this ratio to cut our popcount. Or we could use any other more involved function.
+		// TODO: Use any other more involved function.
+		const double subStateRatio = static_cast<double>(availableProvinces.size()) / static_cast<double>(subStateEntry.getProvinces().size());
+		auto newPops = prepareInjectedSubStatePops(newSubState, subStateRatio, popManager);
+
+		// and shove.
+		newSubState->setSubStatePops(newPops);
+
 		// and register.
 		homeState->addSubState(newSubState);
 		owner->addSubState(newSubState);
@@ -487,6 +499,31 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		action = true;
 	}
 	return action;
+}
+
+V3::SubStatePops V3::ClayManager::prepareInjectedSubStatePops(const std::shared_ptr<SubState>& subState,
+	 double subStateRatio,
+	 const PopManager& popManager) const
+{
+	// get its existing pops from vanilla
+	auto subStatePops = popManager.getVanillaSubStatePops(subState->getHomeStateName(), *subState->getOwnerTag());
+	if (!subStatePops)
+	{
+		Log(LogLevel::Warning) << "Substate for " << *subState->getOwnerTag() << " in " << subState->getHomeStateName() << " had no vanilla pops! Not importing!";
+		return SubStatePops();
+	}
+
+	auto importedPops = subStatePops->getPops();
+
+	// scale the pops.
+	for (auto& pop: importedPops)
+	{
+		const double newSize = round(static_cast<double>(pop.getSize()) * subStateRatio);
+		pop.setSize(static_cast<int>(newSize));
+	}
+	subStatePops->setPops(importedPops);
+
+	return *subStatePops;
 }
 
 void V3::ClayManager::shoveRemainingProvincesIntoSubStates()
@@ -526,4 +563,108 @@ void V3::ClayManager::makeSubStateFromProvinces(const std::string& stateName, co
 
 	homeState->addSubState(newSubState);
 	substates.emplace_back(newSubState);
+}
+
+void V3::ClayManager::squashAllSubStates(const PoliticalManager& politicalManager)
+{
+	Log(LogLevel::Info) << "-> Squashing substates.";
+	auto subCount = substates.size();
+
+	// replacement caches
+	TagSubStates replacementTagSubStates;
+	TagSubStates replacementStateSubStates;
+	std::vector<std::shared_ptr<SubState>> newSubStates;
+
+	for (const auto& [stateName, state]: states)
+	{
+		// sort the substates by tags.
+		TagSubStates tagSubStates;
+		for (const auto& subState: state->getSubStates())
+		{
+			const auto& tag = subState->getOwner()->getTag();
+			if (!tagSubStates.contains(tag))
+				tagSubStates.emplace(tag, std::vector<std::shared_ptr<SubState>>{});
+			tagSubStates.at(tag).emplace_back(subState);
+		}
+
+		// and squash.
+		for (const auto& [tag, subStates]: tagSubStates)
+		{
+			if (subStates.empty())
+				continue;
+			auto squashedSubState = squashSubStates(subStates);
+
+			if (!replacementTagSubStates.contains(tag))
+				replacementTagSubStates.emplace(tag, std::vector<std::shared_ptr<SubState>>{});
+			replacementTagSubStates.at(tag).emplace_back(squashedSubState);
+
+			if (!replacementStateSubStates.contains(stateName))
+				replacementStateSubStates.emplace(stateName, std::vector<std::shared_ptr<SubState>>{});
+			replacementStateSubStates.at(stateName).emplace_back(squashedSubState);
+
+			newSubStates.emplace_back(squashedSubState);
+		}
+	}
+
+	// file to countries.
+	for (const auto& [tag, country]: politicalManager.getCountries())
+		if (replacementTagSubStates.contains(tag))
+			country->setSubStates(replacementTagSubStates.at(tag));
+		else
+			country->setSubStates({});
+
+	// file to states.
+	for (const auto& [stateName, state]: states)
+		if (replacementStateSubStates.contains(stateName))
+			state->setSubStates(replacementStateSubStates.at(stateName));
+		else
+			state->setSubStates({});
+
+	substates.swap(newSubStates);
+
+	Log(LogLevel::Info) << "<> Substates squashed, " << substates.size() << " remain, " << subCount - substates.size() << " ditched.";
+}
+
+std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector<std::shared_ptr<SubState>>& subStates) const
+{
+	ProvinceMap provinces;
+	std::string subStateType;
+	double weight = 0;
+	std::vector<std::pair<SourceProvinceData, double>> spData;
+	std::vector<Demographic> demographics;
+	SubStatePops subStatePops;
+	std::vector<Pop> pops;
+
+	for (const auto& subState: subStates)
+	{
+		provinces.insert(subState->getProvinces().begin(), subState->getProvinces().end());
+
+		// unsure about this. If one is unincorporated, all are unincorporated?
+		// TODO: See what this does
+		if (!subState->getSubStateType().empty())
+			subStateType = subState->getSubStateType();
+
+		if (subState->getWeight())
+			weight += *subState->getWeight();
+
+		spData.insert(spData.end(), subState->getSourceProvinceData().begin(), subState->getSourceProvinceData().end());
+		demographics.insert(demographics.end(), subState->getDemographics().begin(), subState->getDemographics().end());
+		pops.insert(pops.end(), subState->getSubStatePops().getPops().begin(), subState->getSubStatePops().getPops().end());
+	}
+	auto newSubState = std::make_shared<SubState>();
+	newSubState->setHomeState((*subStates.begin())->getHomeState());
+	newSubState->setOwner((*subStates.begin())->getOwner());
+
+	newSubState->setProvinces(provinces);
+	newSubState->setSubStateType(subStateType);
+	if (weight > 0)
+		newSubState->setWeight(weight);
+	newSubState->setSourceProvinceData(spData);
+	newSubState->setDemographics(demographics);
+
+	subStatePops.setTag(newSubState->getOwner()->getTag());
+	subStatePops.setPops(pops);
+	newSubState->setSubStatePops(subStatePops);
+
+	return newSubState;
 }

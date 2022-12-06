@@ -3,19 +3,9 @@
 #include <fstream>
 #include <ranges>
 
-void OUT::exportCommonCountries(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+namespace
 {
-	std::ofstream output("output/" + outputName + "/common/country_definitions/99_converted_countries.txt");
-	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName + "/common/country_definitions/99_converted_countries.txt");
-
-	output << commonItems::utf8BOM;
-	for (const auto& country: countries | std::views::values)
-		outCommonCountry(output, *country);
-	output.close();
-}
-
-void OUT::outCommonCountry(std::ostream& output, const V3::Country& country)
+void outCommonCountry(std::ostream& output, const V3::Country& country)
 {
 	output << country.getTag() << " = {\n";
 
@@ -40,4 +30,17 @@ void OUT::outCommonCountry(std::ostream& output, const V3::Country& country)
 		output << "\tis_named_from_capital = true\n";
 
 	output << "}\n\n";
+}
+} // namespace
+
+void OUT::exportCommonCountries(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+{
+	std::ofstream output("output/" + outputName + "/common/country_definitions/99_converted_countries.txt");
+	if (!output.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/country_definitions/99_converted_countries.txt");
+
+	output << commonItems::utf8BOM;
+	for (const auto& country: countries | std::views::values)
+		outCommonCountry(output, *country);
+	output.close();
 }

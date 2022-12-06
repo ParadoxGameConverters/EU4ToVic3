@@ -1,8 +1,50 @@
 #include "outCommonHistoryStates.h"
+#include "ClayManager/State/SubState.h"
 #include "CommonFunctions.h"
-#include "outState.h"
 #include <fstream>
 #include <ranges>
+
+namespace
+{
+void outSubState(std::ostream& output, const V3::SubState& substate)
+{
+	if (!substate.getOwnerTag())
+		return; // Can't craft a state without an owner.
+
+	output << "\t\tcreate_state = {\n";
+	output << "\t\t\tcountry = c:" << *substate.getOwnerTag() << "\n";
+	output << "\t\t\towned_provinces = { ";
+	for (const auto& provinceID: substate.getProvinces() | std::views::keys)
+		output << provinceID << " ";
+	output << "}\n";
+
+	// TODO: \t\t\t state_type = unincorporated
+	// TODO: \t\t\t state_type = treaty_port (can be both)
+
+	output << "\t\t}\n";
+}
+
+void outState(std::ostream& output, const V3::State& state)
+{
+	output << "\ts:" << state.getName() << " = {\n";
+	for (const auto& substate: state.getSubStates())
+		outSubState(output, *substate);
+
+	// TODO: \t\t add_homeland = culture
+	// TODO: \t\t add_claim = c:TAG
+
+	output << "\t}\n";
+}
+
+void outCommonHistoryStates(std::ostream& output, const std::map<std::string, std::shared_ptr<V3::State>>& states)
+{
+	output << "STATES = {\n";
+	for (const auto& state: states | std::views::values)
+		if (!state->getSubStates().empty()) // states without substates aren't politically interesting.
+			outState(output, *state);
+	output << "}\n";
+}
+} // namespace
 
 void OUT::exportCommonHistoryStates(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::State>>& states)
 {
@@ -13,14 +55,4 @@ void OUT::exportCommonHistoryStates(const std::string& outputName, const std::ma
 	output << commonItems::utf8BOM;
 	outCommonHistoryStates(output, states);
 	output.close();
-}
-
-std::ostream& OUT::outCommonHistoryStates(std::ostream& output, const std::map<std::string, std::shared_ptr<V3::State>>& states)
-{
-	output << "STATES = {\n";
-	for (const auto& state: states | std::views::values)
-		if (!state->getSubStates().empty()) // states without substates aren't politically interesting.
-			outState(output, *state);
-	output << "}\n";
-	return output;
 }

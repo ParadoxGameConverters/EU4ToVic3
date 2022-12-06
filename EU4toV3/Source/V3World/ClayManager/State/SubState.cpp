@@ -5,6 +5,8 @@
 #include "PoliticalManager/Country/Country.h"
 #include "ProvinceManager/PopRatio.h"
 #include "State.h"
+#include <cmath>
+#include <numeric>
 #include <ranges>
 
 V3::SubState::SubState(std::shared_ptr<State> theHomeState, ProvinceMap theProvinces): homeState(std::move(theHomeState)), provinces(std::move(theProvinces))
@@ -76,4 +78,28 @@ void V3::SubState::convertDemographics(const ClayManager& clayManager,
 		}
 	}
 	demographics.swap(newDemographics);
+}
+
+void V3::SubState::generatePops(int totalAmount)
+{
+	// At this moment we're not concerned with pop types. HOWEVER, demographics do carry a varying amount of ratios,
+	// which are (were?) supposed to apply to those types.
+	//
+	// For now, we'll sum those ratios together and divide by 3, averaging them out.
+
+	if (demographics.empty())
+		return;
+
+	// *technically* demoTotal should always be equal 1.
+	const auto demoTotal = std::accumulate(demographics.begin(), demographics.end(), 0.0, [](double sum, const auto& demo) {
+		return sum + (demo.upperRatio + demo.middleRatio + demo.lowerRatio) / 3;
+	});
+
+	// TODO: plug in poptypes via PopPoints.h. If needed.
+	for (const auto& demo: demographics)
+	{
+		const double demoSum = (demo.upperRatio + demo.middleRatio + demo.lowerRatio) / 3;
+		auto pop = Pop(demo.culture, demo.religion, "", static_cast<int>(round(static_cast<double>(totalAmount) * demoSum / demoTotal)));
+		subStatePops.addPop(pop);
+	}
 }

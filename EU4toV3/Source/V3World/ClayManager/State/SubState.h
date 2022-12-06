@@ -2,6 +2,7 @@
 #define V3_SUBSTATE_H
 #include "ClayManager/ClayMapTypedefs.h"
 #include "PopManager/Demographic.h"
+#include "PopManager/Pops/SubStatePops.h"
 #include "SourceProvinceData.h"
 #include <optional>
 
@@ -45,6 +46,8 @@ class SubState
 	void setLandshare(const double theLandshare) { landshare = theLandshare; }
 	void setResource(const std::string& theResource, int theAmount) { resources[theResource] = theAmount; }
 	void setDemographics(const std::vector<Demographic>& demos) { demographics = demos; }
+	void setSubStatePops(const SubStatePops& thePops) { subStatePops = thePops; }
+	void addPop(const Pop& pop) { subStatePops.addPop(pop); }
 
 	void convertDemographics(const ClayManager& clayManager,
 		 const mappers::CultureMapper& cultureMapper,
@@ -52,16 +55,21 @@ class SubState
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader);
 
+	void generatePops(int totalAmount);
+
 	[[nodiscard]] const auto& getHomeState() const { return homeState; }
 	[[nodiscard]] const auto& getOwner() const { return owner; }
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
 	[[nodiscard]] const auto& getSubStateType() const { return subStateType; }
 
 	[[nodiscard]] const auto& getSourceOwnerTag() const { return sourceOwnerTag; }
+	[[nodiscard]] const auto& getWeight() const { return weight; }
+	[[nodiscard]] const auto& getSourceProvinceData() const { return weightedSourceProvinceData; }
 
 	[[nodiscard]] auto getLandshare() const { return landshare; }
 	[[nodiscard]] const auto& getResource(const std::string& theResource) { return resources[theResource]; }
-	[[nodiscard]] const auto& getDemographics() { return demographics; }
+	[[nodiscard]] const auto& getDemographics() const { return demographics; }
+	[[nodiscard]] const auto& getSubStatePops() const { return subStatePops; }
 
 	[[nodiscard]] std::optional<std::string> getOwnerTag() const;
 	[[nodiscard]] const std::string& getHomeStateName() const;
@@ -79,6 +87,7 @@ class SubState
 	double landshare = 0; // % of State's resources that are substate's
 	std::map<std::string, int> resources;
 	std::vector<Demographic> demographics;
+	SubStatePops subStatePops;
 };
 } // namespace V3
 

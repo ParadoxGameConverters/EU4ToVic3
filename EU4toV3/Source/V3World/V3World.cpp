@@ -44,10 +44,9 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "49 %";
 	// soaking up vanilla pops
 	popManager.initializeVanillaPops(modFS);
-	popManager.assignVanillaPopsToStates(clayManager);
 
 	// inject vanilla substates into map holes.
-	clayManager.injectVanillaSubStates(modFS, politicalManager);
+	clayManager.injectVanillaSubStates(modFS, politicalManager, popManager);
 
 	Log(LogLevel::Progress) << "50 %";
 	// handling demographics
@@ -61,6 +60,10 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "52 %";
 	// converting all 3 types of countries - generated decentralized, extinct vanilla-only, and EU4 imports.
 	politicalManager.convertAllCountries(clayManager, localizationLoader, sourceWorld.getCountryManager().getLocalizationLoader());
+
+	popManager.generatePops(clayManager);
+
+	clayManager.squashAllSubStates(politicalManager);
 
 	Log(LogLevel::Info) << "-> Converting Provinces";
 	Log(LogLevel::Progress) << "53 %";
