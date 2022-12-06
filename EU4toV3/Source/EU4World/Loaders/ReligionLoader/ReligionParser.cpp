@@ -1,6 +1,7 @@
 #include "ReligionParser.h"
 #include "CommonRegexes.h"
 #include "ParserHelpers.h"
+#include "ReligionEntry.h"
 
 EU4::ReligionParser::ReligionParser(std::istream& theStream)
 {
@@ -22,8 +23,12 @@ void EU4::ReligionParser::registerKeys()
 	registerKeyword("crusade_name", commonItems::ignoreItem);
 
 	registerRegex(commonItems::stringRegex, [this](const std::string& religionName, std::istream& theStream) {
-		commonItems::ignoreItem(religionName, theStream);
-		religions.insert(religionName);
+		const auto religionEntry = ReligionEntry(theStream);
+		Religion religion;
+		religion.name = religionName;
+		if (religionEntry.getColor())
+			religion.color = *religionEntry.getColor();
+		religions.emplace_back(religion);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

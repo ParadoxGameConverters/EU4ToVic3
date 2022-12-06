@@ -54,28 +54,25 @@ void EU4::ReligionLoader::loadReligions(std::istream& theStream)
 void EU4::ReligionLoader::registerKeys()
 {
 	registerRegex(commonItems::stringRegex, [this](const std::string& religionGroup, std::istream& theStream) {
-		ReligionParser newGroup(theStream);
-		const auto fetchedReligions = newGroup.takeReligions();
+		const ReligionParser newGroup(theStream);
+		auto fetchedReligions = newGroup.getReligions();
 		// in case we're parsing our own ck3 religion source file, there should be only one religion in the file, and the trappings will be active.
 		if (activeTrappings && fetchedReligions.size() == 1)
 		{
-			Religion religion;
-			religion.name = *fetchedReligions.begin();
-			religion.group = religionGroup;
-			religion.trappings = *activeTrappings;
-			religions.emplace(religion.name, religion);
+			auto customReligion = *fetchedReligions.begin();
+			customReligion.group = religionGroup;
+			customReligion.trappings = *activeTrappings;
+			religions.emplace(customReligion.name, customReligion);
 		}
 		else
 		{
 			// all the normal cases
-			for (const auto& religionName: fetchedReligions)
+			for (auto& religion: fetchedReligions)
 			{
-				Religion religion;
-				religion.name = religionName;
 				religion.group = religionGroup;
 				// We'll set trappings on the other side.
-				if (religions.contains(religionName))
-					religions.at(religionName) = religion;
+				if (religions.contains(religion.name))
+					religions.at(religion.name) = religion;
 				else
 					religions.emplace(religion.name, religion);
 			}

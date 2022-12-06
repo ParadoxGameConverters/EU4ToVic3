@@ -1,13 +1,20 @@
 #ifndef RELIGION_MAPPER_H
 #define RELIGION_MAPPER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
-#include "ReligionLoader/ReligionLoader.h"
+#include "ReligionMapper/ReligionDefinitionLoader/ReligionDef.h"
 #include <map>
 #include <optional>
 #include <string>
 
+namespace EU4
+{
+struct Religion;
+} // namespace EU4
 namespace mappers
 {
+class ReligionGroupMapper;
+class ReligionDefinitionLoader;
 class ReligionMapper: commonItems::parser
 {
   public:
@@ -16,12 +23,19 @@ class ReligionMapper: commonItems::parser
 	void loadMappingRules(std::istream& theStream);
 
 	[[nodiscard]] std::optional<std::string> getV3Religion(const std::string& eu4Religion) const;
-	void expandReligionMappings(const std::map<std::string, EU4::Religion>& religions);
+	void expandReligionMappings(const std::map<std::string, EU4::Religion>& eu4Religions);
+	void generateReligionDefinitions(const commonItems::ModFilesystem& modFS, const std::map<std::string, EU4::Religion>& eu4Religions);
 
   private:
 	void registerKeys();
 
+	[[nodiscard]] ReligionDef generateReligionDefinition(const std::string& v3ReligionName,
+		 const ReligionGroupMapper& religionGroupMapper,
+		 const ReligionDefinitionLoader& religionDefinitionLoader,
+		 const EU4::Religion& eu4Religion) const;
+
 	std::map<std::string, std::string> eu4ToV3ReligionMap;
+	std::map<std::string, ReligionDef> vic3ReligionDefinitions;
 };
 } // namespace mappers
 
