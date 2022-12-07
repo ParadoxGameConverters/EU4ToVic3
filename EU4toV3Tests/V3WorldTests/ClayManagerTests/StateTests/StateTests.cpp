@@ -5,6 +5,8 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+
 TEST(V3World_StateTests, nameCanBeSetAndRetrieved)
 {
 	V3::State state;
@@ -346,10 +348,9 @@ TEST(V3World_StateTests, distributeResourcesTruncatesDoubles)
 
 TEST(V3World_StateTests, StateSeasCanBePinged)
 {
-	const auto V3Path = "TestFiles/vic3installation/game/";
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
 
 	const auto& state1 = clayManager.getStates().at("STATE_TEST_OCEAN1");
 	const auto& state2 = clayManager.getStates().at("STATE_TEST_LAND1");
@@ -360,10 +361,9 @@ TEST(V3World_StateTests, StateSeasCanBePinged)
 
 TEST(V3World_StateTests, StateLakesCanBePinged)
 {
-	const auto V3Path = "TestFiles/vic3installation/game/";
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
 
 	const auto& state1 = clayManager.getStates().at("STATE_TEST_OCEAN1");
 	const auto& state2 = clayManager.getStates().at("STATE_TEST_LAKE");
@@ -372,4 +372,78 @@ TEST(V3World_StateTests, StateLakesCanBePinged)
 	EXPECT_FALSE(state1->isLake());
 	EXPECT_TRUE(state2->isLake());
 	EXPECT_FALSE(state3->isLake());
+}
+
+TEST(V3World_StateTests, stateCanDetectUnassignedProvinces)
+{
+	std::stringstream input;
+	input << "provinces = { x000001 x000002 x000003 }\n ";
+	V3::State state;
+	state.loadState(input);
+
+	// assign some provinces to substates.
+	const auto prov1 = state.getProvinces().at("x000001");
+	const auto prov2 = state.getProvinces().at("x000002");
+
+	const auto sub1 = std::make_shared<V3::SubState>();
+	sub1->setProvinces({std::pair("x000001", prov1)});
+
+	const auto sub2 = std::make_shared<V3::SubState>();
+	sub2->setProvinces({std::pair("x000002", prov2)});
+
+	state.addSubState(sub1);
+	state.addSubState(sub2);
+
+	EXPECT_TRUE(state.hasUnassignedProvinces());
+}
+
+TEST(V3World_StateTests, stateCanReturnUnassignedProvinces)
+{
+	std::stringstream input;
+	input << "provinces = { x000001 x000002 x000003 x000004 }\n ";
+	V3::State state;
+	state.loadState(input);
+
+	// assign some provinces to substates.
+	const auto prov1 = state.getProvinces().at("x000001");
+	const auto prov2 = state.getProvinces().at("x000002");
+
+	const auto sub1 = std::make_shared<V3::SubState>();
+	sub1->setProvinces({std::pair("x000001", prov1)});
+
+	const auto sub2 = std::make_shared<V3::SubState>();
+	sub2->setProvinces({std::pair("x000002", prov2)});
+
+	state.addSubState(sub1);
+	state.addSubState(sub2);
+
+	ASSERT_EQ(2, state.getUnassignedProvinces().size());
+	EXPECT_EQ("x000003", state.getUnassignedProvinces().at("x000003")->getName());
+	EXPECT_EQ("x000004", state.getUnassignedProvinces().at("x000004")->getName());
+}
+
+TEST(V3World_StateTests, stateCanSumItsPops)
+{
+	V3::State state;
+	const auto sub1 = std::make_shared<V3::SubState>();
+	const auto sub2 = std::make_shared<V3::SubState>();
+	V3::SubStatePops somePops;
+	somePops.setPops({V3::Pop("a", "A", "", 10), V3::Pop("a", "A", "", 30)});
+	sub1->setSubStatePops(somePops);
+	state.addSubState(sub1);
+	state.addSubState(sub2);
+
+	EXPECT_EQ(40, state.getStatePopCount());
+}
+
+TEST(V3World_StateTests, stateCanSumItsWeights)
+{
+	V3::State state;
+	const auto sub1 = std::make_shared<V3::SubState>();
+	const auto sub2 = std::make_shared<V3::SubState>();
+	sub1->setWeight(256.0);
+	state.addSubState(sub1);
+	state.addSubState(sub2);
+
+	EXPECT_EQ(256.0, state.getTotalSubStateWeight());
 }

@@ -1,6 +1,7 @@
 #include "Country.h"
 #include "ClayManager/State/SubState.h"
 #include "CommonRegexes.h"
+#include "CountryManager/EU4Country.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
 #include "Loaders/LocalizationLoader/EU4LocalizationLoader.h"
 #include "Log.h"
@@ -127,8 +128,7 @@ void V3::Country::generateDecentralizedLocs(const LocalizationLoader& v3LocLoade
 	processedData.name += " " + suffixes[selection];
 }
 
-
-void V3::Country::copyVanillaData()
+void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader)
 {
 	// this is done when conversion from eu4 source is impossible - likely because this country doesn't exist in eu4.
 	if (!vanillaData)
@@ -141,6 +141,26 @@ void V3::Country::copyVanillaData()
 	processedData.religion = vanillaData->religion;
 	processedData.capitalStateName = vanillaData->capitalStateName;
 	processedData.is_named_from_capital = vanillaData->is_named_from_capital;
+
+	// do we have a name waiting for us?
+	const auto& tagName = v3LocLoader.getLocMapForKey(tag);
+	const auto& tagAdj = v3LocLoader.getLocMapForKey(tag + "_ADJ");
+	if (tagName && tagAdj)
+	{
+		processedData.namesByLanguage = *tagName;
+		processedData.adjectivesByLanguage = *tagAdj;
+	}
+	else
+	{
+		// check for eu4 locs, in case for modded decentralized inputs.
+		const auto& eu4Name = eu4LocLoader.getTextInEachLanguage(tag);
+		const auto& eu4Adj = eu4LocLoader.getTextInEachLanguage(tag + "_ADJ");
+		if (eu4Name && eu4Adj)
+		{
+			processedData.namesByLanguage = *eu4Name;
+			processedData.adjectivesByLanguage = *eu4Adj;
+		}
+	}
 }
 
 std::string V3::Country::getName(const std::string& language) const

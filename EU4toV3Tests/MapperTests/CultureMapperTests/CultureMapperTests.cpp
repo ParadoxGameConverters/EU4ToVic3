@@ -5,11 +5,13 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+
 std::tuple<mappers::CultureMapper, V3::ClayManager, EU4::CultureLoader, EU4::ReligionLoader> prepMappers()
 {
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates("TestFiles/vic3installation/game/");
-	clayManager.initializeSuperRegions("TestFiles/vic3installation/game/");
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 	auto eu4Path = "TestFiles/eu4installation/";
 	Mods mods;

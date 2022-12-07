@@ -1,5 +1,8 @@
 #include "ClayManager/ClayManager.h"
+#include "CommonFunctions.h"
 #include "CountryManager/EU4Country.h"
+#include "Loaders/LocLoader/LocalizationLoader.h"
+#include "Loaders/LocalizationLoader/EU4LocalizationLoader.h"
 #include "PoliticalManager/Country/Country.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
@@ -191,9 +194,17 @@ TEST(V3World_CountryTests, CountryCanSpeedCopyVanillaData)
 	input << "color = {147 130 110}\n ";
 	input << "is_named_from_capital = yes\n ";
 	V3::Country country;
+	country.setTag("AAA");
 	country.initializeCountry(input);
 
-	country.copyVanillaData();
+	V3::LocalizationLoader locLoader;
+	std::stringstream locInput;
+	locInput << commonItems::utf8BOM << "l_english:\n";
+	locInput << " AAA: \"The country\"\n";
+	locInput << " AAA_ADJ: \"The adjective\"\n";
+	locLoader.scrapeStream(locInput, "english");
+
+	country.copyVanillaData(locLoader, EU4::EU4LocalizationLoader());
 
 	EXPECT_EQ("recognized", country.getProcessedData().type);
 	EXPECT_EQ("empire", country.getProcessedData().tier);
@@ -202,13 +213,15 @@ TEST(V3World_CountryTests, CountryCanSpeedCopyVanillaData)
 	EXPECT_EQ("STATE_TEST_1", country.getProcessedData().capitalStateName);
 	EXPECT_EQ(commonItems::Color(std::array{147, 130, 110}), country.getProcessedData().color);
 	EXPECT_TRUE(country.getProcessedData().is_named_from_capital);
+	EXPECT_EQ("The country", country.getProcessedData().namesByLanguage.at("english"));
+	EXPECT_EQ("The adjective", country.getProcessedData().adjectivesByLanguage.at("english"));
 }
 
 TEST(V3World_CountryTests, CountryWontSpeedCopyMissingVanillaData)
 {
 	V3::Country country;
 
-	country.copyVanillaData();
+	country.copyVanillaData(V3::LocalizationLoader(), EU4::EU4LocalizationLoader());
 
 	EXPECT_TRUE(country.getProcessedData().type.empty());
 	EXPECT_TRUE(country.getProcessedData().tier.empty());

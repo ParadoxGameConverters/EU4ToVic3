@@ -1,23 +1,22 @@
 #include "SuperRegionLoader.h"
 #include "CommonFunctions.h"
-#include "OSCompatibilityLayer.h"
 #include "V3SuperRegion.h"
 #include <filesystem>
 #include <fstream>
 namespace fs = std::filesystem;
 
-void V3::SuperRegionLoader::loadSuperRegions(const std::string& v3Path)
+void V3::SuperRegionLoader::loadSuperRegions(const commonItems::ModFilesystem& modFS)
 {
-	for (const auto& fileName: commonItems::GetAllFilesInFolder(v3Path + "/common/strategic_regions/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/strategic_regions/"))
 	{
 		if (getExtension(fileName) != "txt")
 			continue;
-		std::ifstream superRegionStream(fs::u8path(v3Path + "/common/strategic_regions/" + fileName));
+		std::ifstream superRegionStream(fs::u8path(fileName));
 		if (!superRegionStream.is_open())
-			throw std::runtime_error("Could not open " + v3Path + "/common/strategic_regions/" + fileName + " !");
+			throw std::runtime_error("Could not open " + fileName + " !");
 
 		const auto superRegion = std::make_shared<SuperRegion>();
-		const auto superRegionName = trimExtension(fileName);
+		const auto superRegionName = trimPath(trimExtension(fileName));
 		superRegion->initializeSuperRegion(superRegionStream);
 		superRegion->setName(superRegionName);
 		superRegions.emplace(superRegionName, superRegion);

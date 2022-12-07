@@ -3,13 +3,15 @@
 #include "Loaders/SuperRegionLoader/V3SuperRegion.h"
 #include "gtest/gtest.h"
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+
 TEST(V3World_V3SuperRegionLoaderTests, superRegionLoaderCanLoadFromDisk)
 {
 	V3::SuperRegionLoader superRegionLoader;
 
 	EXPECT_EQ(0, superRegionLoader.getSuperRegions().size());
 
-	superRegionLoader.loadSuperRegions("TestFiles/vic3installation/game/");
+	superRegionLoader.loadSuperRegions(modFS);
 
 	EXPECT_EQ(2, superRegionLoader.getSuperRegions().size());
 
@@ -39,7 +41,7 @@ TEST(V3World_V3SuperRegionLoaderTests, nonTXTfilesAreIgnored)
 
 	EXPECT_EQ(0, superRegionLoader.getSuperRegions().size());
 
-	superRegionLoader.loadSuperRegions("TestFiles/vic3installation/game/");
+	superRegionLoader.loadSuperRegions(modFS);
 
 	EXPECT_FALSE(superRegionLoader.getSuperRegions().contains("ignored_region"));
 }

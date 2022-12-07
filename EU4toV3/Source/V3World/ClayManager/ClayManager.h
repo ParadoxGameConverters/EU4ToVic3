@@ -1,6 +1,7 @@
 #ifndef CLAY_MANAGER_H
 #define CLAY_MANAGER_H
 #include "ClayMapTypedefs.h"
+#include "ModLoader/ModFilesystem.h"
 #include <string>
 #include <vector>
 
@@ -20,19 +21,28 @@ class Chunk;
 class SubState;
 class State;
 class SuperRegion;
+class VanillaStateEntry;
+class PoliticalManager;
+class PopManager;
+class SubStatePops;
 class ClayManager
 {
   public:
 	ClayManager() = default;
 
-	void initializeVanillaStates(const std::string& v3Path);
-	void loadTerrainsIntoProvinces(const std::string& v3Path);
-	void initializeSuperRegions(const std::string& v3Path);
+	void initializeVanillaStates(const commonItems::ModFilesystem& modFS);
+	void loadTerrainsIntoProvinces(const commonItems::ModFilesystem& modFS);
+	void initializeSuperRegions(const commonItems::ModFilesystem& modFS);
 	void loadStatesIntoSuperRegions();
 	void generateChunks(const mappers::ProvinceMapper& provinceMapper, const EU4::ProvinceManager& provinceManager);
-	void unDisputeChunkOwnership(const std::map<std::string, std::shared_ptr<EU4::Country>>& sourceCountries);
-	void distributeChunksAcrossSubStates();
+	void unDisputeChunkOwnership(const SourceOwners& sourceCountries);
+	void splitChunksIntoSubStates();
 	void assignSubStateOwnership(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper);
+	void injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager, const PopManager& popManager);
+	void shoveRemainingProvincesIntoSubStates();
+	void squashAllSubStates(const PoliticalManager& politicalManager);
+
+	void addSubState(const std::shared_ptr<SubState>& subState) { substates.emplace_back(subState); }
 
 	[[nodiscard]] const auto& getStates() const { return states; }
 	[[nodiscard]] const auto& getSuperRegions() const { return superRegions; }
@@ -43,13 +53,17 @@ class ClayManager
 	[[nodiscard]] bool stateIsInRegion(const std::string& state, const std::string& region) const;
 
   private:
-	void crossLinkSubStatesToChunks() const;
-
-	[[nodiscard]] static std::map<std::string, double> calcChunkOwnerWeights(const std::shared_ptr<Chunk>& chunk);
-	[[nodiscard]] std::pair<ChunkToEU4TagToStateToProvinceMap, SourceOwners> sortChunkProvincesIntoTagStates() const;
-	[[nodiscard]] std::vector<std::shared_ptr<SubState>> buildSubStates(const ChunkToEU4TagToStateToProvinceMap& chunkTagProvinces,
-		 const SourceOwners& sourceOwners) const;
-	[[nodiscard]] static bool isChunkSea(const std::shared_ptr<Chunk>& chunk);
+	[[nodiscard]] std::vector<std::shared_ptr<SubState>> chunkToSubStatesTransferFunction(const std::shared_ptr<Chunk>& chunk) const;
+	[[nodiscard]] StateToProvinceMap sortChunkProvincesIntoStates(const std::shared_ptr<Chunk>& chunk) const;
+	[[nodiscard]] std::vector<std::shared_ptr<SubState>> buildSubStates(const StateToProvinceMap& stateProvinceMap) const;
+	[[nodiscard]] bool importVanillaSubStates(const std::string& stateName,
+		 const VanillaStateEntry& entry,
+		 const ProvinceMap& unassignedProvinces,
+		 const PoliticalManager& politicalManager,
+		 const PopManager& popManager);
+	void makeSubStateFromProvinces(const std::string& stateName, const ProvinceMap& unassignedProvinces);
+	[[nodiscard]] SubStatePops prepareInjectedSubStatePops(const std::shared_ptr<SubState>& subState, double subStateRatio, const PopManager& popManager) const;
+	[[nodiscard]] std::shared_ptr<SubState> squashSubStates(const std::vector<std::shared_ptr<SubState>>& subStates) const;
 
 	std::map<std::string, std::shared_ptr<State>> states;					// geographical entities
 	std::map<std::string, std::shared_ptr<SuperRegion>> superRegions; // geographical entities

@@ -2,13 +2,15 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+
 TEST(V3World_TerrainLoaderTests, terrainLoaderCanLoadTerrains)
 {
 	V3::TerrainLoader terrainLoader;
 
 	EXPECT_EQ(0, terrainLoader.getTerrains().size());
 
-	terrainLoader.loadTerrains("TestFiles/vic3installation/game/");
+	terrainLoader.loadTerrains(modFS);
 
 	EXPECT_EQ(22, terrainLoader.getTerrains().size());
 
@@ -43,7 +45,7 @@ TEST(V3World_TerrainLoaderTests, terrainLoaderUppercasesProvinceNames)
 
 	EXPECT_EQ(0, terrainLoader.getTerrains().size());
 
-	terrainLoader.loadTerrains("TestFiles/vic3installation/game/");
+	terrainLoader.loadTerrains(modFS);
 
 	EXPECT_TRUE(terrainLoader.getTerrains().contains("x9ABCDE")); // x9abcde in the file
 }
@@ -58,7 +60,7 @@ TEST(V3World_TerrainLoaderTests, terrainLoaderComplainsAtInvalidNames)
 	std::streambuf* cout_buffer = std::cout.rdbuf();
 	std::cout.rdbuf(log.rdbuf());
 
-	terrainLoader.loadTerrains("TestFiles/vic3installation/game/");
+	terrainLoader.loadTerrains(modFS);
 
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Encountered terrain for province X1111111 in unknown format!)"));
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Encountered terrain for province X11111 in unknown format!)"));

@@ -1,4 +1,5 @@
 #include "ClayManager/ClayManager.h"
+#include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "CountryManager/EU4Country.h"
 #include "CountryMapper/CountryMapper.h"
@@ -15,6 +16,8 @@
 #include "ReligionMapper/ReligionMapper.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
+
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 
 std::tuple<V3::PoliticalManager, V3::PopManager, mappers::CultureMapper, mappers::ReligionMapper, V3::ClayManager, EU4::CultureLoader, EU4::ReligionLoader>
 prepMappers()
@@ -49,12 +52,10 @@ prepMappers()
 	mappers::ProvinceMapper provinceMapper;
 	provinceMapper.loadProvinceMappings("TestFiles/configurables/province_mappings_chunks.txt");
 
-	auto V3Path = "TestFiles/vic3installation/game/";
-
 	V3::ClayManager clayManager;
-	clayManager.initializeVanillaStates(V3Path);
-	clayManager.loadTerrainsIntoProvinces(V3Path);
-	clayManager.initializeSuperRegions(V3Path);
+	clayManager.initializeVanillaStates(modFS);
+	clayManager.loadTerrainsIntoProvinces(modFS);
+	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
 
 	clayManager.generateChunks(provinceMapper, provinceManager);
@@ -65,7 +66,7 @@ prepMappers()
 	const auto ta9 = std::make_shared<EU4::Country>("TA9", countryStream);
 	const std::map<std::string, std::shared_ptr<EU4::Country>> countries = {{"TA2", ta2}, {"TA3", ta3}, {"TA9", ta9}};
 	clayManager.unDisputeChunkOwnership(countries);
-	clayManager.distributeChunksAcrossSubStates();
+	clayManager.splitChunksIntoSubStates();
 
 	auto countryMapper = std::make_shared<mappers::CountryMapper>();
 	countryMapper->loadMappingRules("TestFiles/configurables/country_mappings.txt");
@@ -90,12 +91,10 @@ prepMappers()
 	culMapper.expandCulturalMappings(clayManager, cultureLoader, religionLoader);
 
 	V3::PopManager popManager;
-	popManager.initializeVanillaPops(V3Path);
-	popManager.assignVanillaPopsToStates(clayManager);
-	popManager.importDemographics(clayManager);
+	popManager.initializeVanillaPops(modFS);
 	popManager.convertDemographics(clayManager, culMapper, relMapper, cultureLoader, religionLoader);
 
-	politicalManager.initializeVanillaCountries(V3Path);
+	politicalManager.initializeVanillaCountries(modFS);
 	politicalManager.loadCountryMapper(countryMapper);
 	politicalManager.importEU4Countries(countries);
 
@@ -108,17 +107,24 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanInitializeVanillaCountrie
 
 	EXPECT_EQ(0, politicalManager.getCountries().size());
 
-	politicalManager.initializeVanillaCountries("TestFiles/vic3installation/game/");
+	politicalManager.initializeVanillaCountries(modFS);
 
-	EXPECT_EQ(3, politicalManager.getCountries().size());
+	ASSERT_EQ(4, politicalManager.getCountries().size());
 
-	const auto& country1 = politicalManager.getCountries().at("TAG");
-	const auto& country2 = politicalManager.getCountries().at("GAT");
-	const auto& country3 = politicalManager.getCountries().at("TGA");
+	const auto& country1 = politicalManager.getCountry("TAG");
+	const auto& country2 = politicalManager.getCountry("GAT");
+	const auto& country3 = politicalManager.getCountry("TGA");
+	const auto& country4 = politicalManager.getCountry("CCC");
 
 	EXPECT_EQ("TAG", country1->getTag());
 	EXPECT_EQ("GAT", country2->getTag());
 	EXPECT_EQ("TGA", country3->getTag());
+	EXPECT_EQ("CCC", country4->getTag());
+
+	EXPECT_FALSE(politicalManager.isTagDecentralized("TAG"));
+	EXPECT_FALSE(politicalManager.isTagDecentralized("GAT"));
+	EXPECT_FALSE(politicalManager.isTagDecentralized("TGA"));
+	EXPECT_TRUE(politicalManager.isTagDecentralized("CCC"));
 }
 
 TEST(V3World_PoliticalManagerTests, PoliticalManagerCanImportCountries)
@@ -165,11 +171,11 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanConvertVanillaCountries)
 	V3::PoliticalManager politicalManager;
 
 	EXPECT_EQ(0, politicalManager.getCountries().size());
-	politicalManager.initializeVanillaCountries("TestFiles/vic3installation/game/");
-	EXPECT_EQ(3, politicalManager.getCountries().size()); // we have 3 vanilla vic3 countries, unrelated to eu4.
+	politicalManager.initializeVanillaCountries(modFS);
+	EXPECT_EQ(4, politicalManager.getCountries().size()); // we have 4 vanilla vic3 countries, unrelated to eu4.
 	politicalManager.loadCountryMapper(countryMapper);
 	politicalManager.importEU4Countries(countries);
-	EXPECT_EQ(6, politicalManager.getCountries().size()); // we append the 3 imported eu4 countries.
+	EXPECT_EQ(7, politicalManager.getCountries().size()); // we append the 3 imported eu4 countries.
 
 	const auto& country1 = politicalManager.getCountries().at("GA2");
 	const auto& country2 = politicalManager.getCountries().at("X00");
@@ -177,6 +183,7 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanConvertVanillaCountries)
 	const auto& country4 = politicalManager.getCountries().at("TAG");
 	const auto& country5 = politicalManager.getCountries().at("GAT");
 	const auto& country6 = politicalManager.getCountries().at("TGA");
+	const auto& country7 = politicalManager.getCountries().at("CCC");
 
 	EXPECT_FALSE(country1->getProcessedData().color); // these 3 eu4 countries have no color.
 	EXPECT_FALSE(country2->getProcessedData().color);
@@ -184,6 +191,7 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanConvertVanillaCountries)
 	EXPECT_FALSE(country4->getProcessedData().color); // these 3 vanilla ones are also blank.
 	EXPECT_FALSE(country5->getProcessedData().color);
 	EXPECT_FALSE(country6->getProcessedData().color);
+	EXPECT_FALSE(country7->getProcessedData().color);
 
 	politicalManager.convertAllCountries(clayManager, v3LocLoader, eu4LocLoader); // now we process only the 3 vanilla countries.
 
@@ -193,15 +201,22 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanConvertVanillaCountries)
 	EXPECT_EQ(commonItems::Color(std::array{147, 130, 110}), country4->getProcessedData().color); // however these 3 vanilla ones have their color copied over.
 	EXPECT_EQ(commonItems::Color(std::array{0.99f, 0.7f, 0.9f}), country5->getProcessedData().color); // since they are processed standalone.
 	EXPECT_EQ(commonItems::Color(std::array{62, 122, 189}), country6->getProcessedData().color);
+	EXPECT_EQ(commonItems::Color(std::array{62, 122, 190}), country7->getProcessedData().color);
 }
 
 TEST(V3World_PoliticalManagerTests, PoliticalManagerCanGenerateDecentralizedCountries)
 {
 	auto [politicalManager, popManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
+	// link = { eu4 = 4 vic3 = x000005 } # wasteland -> land
+	// We need to manually create an empty substate for this province so that it can spawn a country.
+	auto state = clayManager.getStates().at("STATE_TEST_LAND3");
+	auto prov5 = state->getProvinces().at("x000005");
+	auto sub5 = std::make_shared<V3::SubState>(state, V3::ProvinceMap({std::pair("x000005", prov5)}));
+	state->addSubState(sub5);
+
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 
-	// link = { eu4 = 4 vic3 = x000005 } # wasteland -> land
 	// this link will produce a decentralized state with a single substate containing 4->x5 province.
 	// name will be X01 as X00 is already taken by TA3 finding no mapping in country_mappings.txt.
 
@@ -222,6 +237,13 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanGenerateDecentralizedCoun
 TEST(V3World_PoliticalManagerTests, DecentralizedCountriesCanBeFilled)
 {
 	auto [politicalManager, popManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
+
+	// link = { eu4 = 4 vic3 = x000005 } # wasteland -> land
+	// We need to manually create an empty substate for this province so that it can spawn a country.
+	auto state = clayManager.getStates().at("STATE_TEST_LAND3");
+	auto prov5 = state->getProvinces().at("x000005");
+	auto sub5 = std::make_shared<V3::SubState>(state, V3::ProvinceMap({std::pair("x000005", prov5)}));
+	state->addSubState(sub5);
 
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 	politicalManager.convertAllCountries(clayManager, V3::LocalizationLoader(), EU4::EU4LocalizationLoader());

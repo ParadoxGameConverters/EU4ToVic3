@@ -6,6 +6,7 @@
 #include "ProvinceTypeCounter.h"
 #include "SubState.h"
 #include <cmath>
+#include <numeric>
 #include <ranges>
 
 void V3::State::loadState(std::istream& theStream)
@@ -17,7 +18,6 @@ void V3::State::loadState(std::istream& theStream)
 	distributeLandshares();
 	distributeResources();
 }
-
 
 void V3::State::registerKeys()
 {
@@ -126,7 +126,7 @@ void V3::State::distributeResources()
 
 int V3::State::calculateWeightedProvinceTotals(const ProvinceTypeCounter& theCount)
 {
-	// prime coeffcient is the define SPLIT_STATE_PRIME_LAND_WEIGHT - 1
+	// prime coefficient is the define SPLIT_STATE_PRIME_LAND_WEIGHT - 1
 	return theCount.every + (5 - 1) * theCount.prime - theCount.impassable;
 }
 
@@ -159,7 +159,9 @@ std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& province
 
 bool V3::State::isSea() const
 {
-	return std::ranges::any_of(provinces.begin(), provinces.end(), [](const std::pair<std::string, std::shared_ptr<Province>>& province) {
+	// We allow for a sea to be mismapped along regular provinces as vanilla has a few seas so mismapped (CHAD! KORDOFAN! Literally everywhere!).
+
+	return std::ranges::all_of(provinces.begin(), provinces.end(), [](const std::pair<std::string, std::shared_ptr<Province>>& province) {
 		return province.second->isSea();
 	});
 }
@@ -170,5 +172,49 @@ bool V3::State::isLake() const
 
 	return std::ranges::all_of(provinces.begin(), provinces.end(), [](const std::pair<std::string, std::shared_ptr<Province>>& province) {
 		return province.second->isLake();
+	});
+}
+
+V3::ProvinceMap V3::State::getUnassignedProvinces() const
+{
+	ProvinceMap unassignedProvinces;
+	std::set<std::string> seenProvinceIDs;
+
+	for (const auto& subState: substates)
+		for (const auto& provinceID: subState->getProvinces() | std::views::keys)
+			seenProvinceIDs.emplace(provinceID);
+
+	for (const auto& [provinceID, province]: provinces)
+		if (!seenProvinceIDs.contains(provinceID))
+			unassignedProvinces.emplace(provinceID, province);
+
+	return unassignedProvinces;
+}
+
+bool V3::State::hasUnassignedProvinces() const
+{
+	// it's faster to count than to filter.
+	const auto assignedProvinces = std::accumulate(substates.begin(), substates.end(), 0, [](int sum, const auto& subState) {
+		return sum + static_cast<int>(subState->getProvinces().size());
+	});
+	if (provinces.size() - assignedProvinces == 0)
+		return false;
+	return true;
+}
+
+int V3::State::getStatePopCount() const
+{
+	return std::accumulate(substates.begin(), substates.end(), 0, [](int sum, const auto& subState) {
+		return sum + subState->getSubStatePops().getPopCount();
+	});
+}
+
+double V3::State::getTotalSubStateWeight() const
+{
+	return std::accumulate(substates.begin(), substates.end(), 0.0, [](double sum, const auto& subState) {
+		if (subState->getWeight())
+			return sum + *subState->getWeight();
+		else
+			return sum;
 	});
 }

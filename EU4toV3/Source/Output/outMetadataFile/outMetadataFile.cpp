@@ -2,17 +2,9 @@
 #include "Log.h"
 #include <fstream>
 
-void OUT::exportMetadataFile(const std::string& outputName)
+namespace
 {
-	std::ofstream output("output/" + outputName + "/.metadata/metadata.json");
-	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName + "/.metadata/metadata.json");
-	Log(LogLevel::Info) << "<< Writing to: output/" + outputName + "/.metadata/metadata.json";
-	outMetadataFile(output, outputName);
-	output.close();
-}
-
-void OUT::outMetadataFile(std::ostream& output, const std::string& outName)
+void outMetadataFile(std::ostream& output, const std::string& outName)
 {
 	output << "{\n";
 	output << "\t\"name\" : \"Converted - " << outName << "\",\n";
@@ -27,4 +19,15 @@ void OUT::outMetadataFile(std::ostream& output, const std::string& outName)
 	output << "\t\t\"multiplayer_synchronized\" : true\n";
 	output << "\t}\n";
 	output << "}\n";
+}
+} // namespace
+
+void OUT::exportMetadataFile(const std::string& outputName)
+{
+	std::ofstream output("output/" + outputName + "/.metadata/metadata.json");
+	if (!output.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/.metadata/metadata.json");
+	Log(LogLevel::Info) << "<< Writing to: output/" + outputName + "/.metadata/metadata.json";
+	outMetadataFile(output, outputName);
+	output.close();
 }

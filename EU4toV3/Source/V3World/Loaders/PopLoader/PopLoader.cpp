@@ -5,14 +5,14 @@
 #include "ParserHelpers.h"
 #include "StateEntries.h"
 
-void V3::PopLoader::loadPops(const std::string& v3Path)
+void V3::PopLoader::loadPops(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: commonItems::GetAllFilesInFolder(v3Path + "/common/history/pops/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/pops/"))
 	{
 		if (getExtension(fileName) != "txt")
 			continue;
-		parseFile(v3Path + "/common/history/pops/" + fileName);
+		parseFile(fileName);
 	}
 	clearRegisteredKeywords();
 }

@@ -1,7 +1,9 @@
 #ifndef POP_MANAGER_H
 #define POP_MANAGER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Pops/StatePops.h"
 #include <map>
+#include <memory>
 #include <string>
 
 namespace EU4
@@ -17,24 +19,31 @@ class ReligionMapper;
 namespace V3
 {
 class ClayManager;
+class SubState;
 class State;
 class PopManager
 {
   public:
 	PopManager() = default;
 
-	void initializeVanillaPops(const std::string& v3Path);
-	void assignVanillaPopsToStates(const ClayManager& clayManager);
-	void importDemographics(const ClayManager& clayManager) const;
+	void initializeVanillaPops(const commonItems::ModFilesystem& modFS);
 	void convertDemographics(const ClayManager& clayManager,
 		 const mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader) const;
+	void generatePops(const ClayManager& clayManager) const;
 
 	[[nodiscard]] std::string getDominantVanillaCulture(const std::string& stateName) const;
+	[[nodiscard]] std::string getDominantVanillaReligion(const std::string& stateName) const;
+	[[nodiscard]] std::optional<SubStatePops> getVanillaSubStatePops(const std::string& stateName, const std::string& ownerTag) const;
 
   private:
+	void generatePopsForShovedSubStates(const std::shared_ptr<State>& state, int unassignedPopCount, int unassignedProvinceCount) const;
+	void generatePopsForNormalSubStates(const std::shared_ptr<State>& state, int unassignedPopCount) const;
+	[[nodiscard]] int generatePopCountForShovedSubState(const std::shared_ptr<SubState>& subState, int unassignedPopCount, int unassignedProvinces) const;
+	[[nodiscard]] int generatePopCountForNormalSubState(const std::shared_ptr<SubState>& subState, int unassignedPopCount) const;
+
 	std::map<std::string, StatePops> vanillaStatePops; // state, StatePops
 };
 } // namespace V3

@@ -2,13 +2,15 @@
 #include "Loaders/StateLoader/StateLoader.h"
 #include "gtest/gtest.h"
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+
 TEST(V3World_StateLoaderTests, stateLoaderCanLoadStates)
 {
 	V3::StateLoader stateLoader;
 
 	EXPECT_EQ(0, stateLoader.getStates().size());
 
-	stateLoader.loadStates("TestFiles/vic3installation/game/");
+	stateLoader.loadStates(modFS);
 
 	EXPECT_EQ(10, stateLoader.getStates().size());
 
@@ -50,7 +52,7 @@ TEST(V3World_StateLoaderTests, nonTXTfilesAreIgnored)
 
 	EXPECT_EQ(0, stateLoader.getStates().size());
 
-	stateLoader.loadStates("TestFiles/vic3installation/game/");
+	stateLoader.loadStates(modFS);
 
 	EXPECT_EQ(10, stateLoader.getStates().size());
 

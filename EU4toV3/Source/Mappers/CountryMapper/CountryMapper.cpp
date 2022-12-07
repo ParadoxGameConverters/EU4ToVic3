@@ -63,8 +63,7 @@ std::string mappers::CountryMapper::generateNewTag()
 			generatedV3TagSuffix = 0;
 			--generatedV3TagPrefix;
 		}
-	} while (tagIsAlreadyAssigned(v3Tag));
-
+	} while (tagIsAlreadyAssigned(v3Tag) || knownVanillaV3Tags.contains(v3Tag));
 	return v3Tag;
 }
 

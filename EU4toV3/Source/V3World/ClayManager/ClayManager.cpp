@@ -5,21 +5,26 @@
 #include "Loaders/SuperRegionLoader/V3Region.h"
 #include "Loaders/SuperRegionLoader/V3SuperRegion.h"
 #include "Loaders/TerrainLoader/TerrainLoader.h"
+#include "Loaders/VanillaStateLoader/VanillaStateLoader.h"
 #include "Log.h"
+#include "PoliticalManager/Country/Country.h"
+#include "PoliticalManager/PoliticalManager.h"
+#include "PopManager/PopManager.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
 #include "State/Chunk.h"
 #include "State/Province.h"
 #include "State/State.h"
 #include "State/SubState.h"
+#include <cmath>
 #include <numeric>
 #include <ranges>
 
-void V3::ClayManager::initializeVanillaStates(const std::string& v3Path)
+void V3::ClayManager::initializeVanillaStates(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Initializing Vanilla States and Provinces.";
 	StateLoader stateLoader;
-	stateLoader.loadStates(v3Path);
+	stateLoader.loadStates(modFS);
 	states = stateLoader.getStates();
 	for (const auto& state: states | std::views::values)
 		for (const auto& provinceID: state->getProvinces() | std::views::keys)
@@ -28,11 +33,11 @@ void V3::ClayManager::initializeVanillaStates(const std::string& v3Path)
 	Log(LogLevel::Info) << "<> " << states.size() << " states loaded with " << provincesToStates.size() << " provinces inside.";
 }
 
-void V3::ClayManager::loadTerrainsIntoProvinces(const std::string& v3Path)
+void V3::ClayManager::loadTerrainsIntoProvinces(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Loading Terrains into Provinces.";
 	TerrainLoader terrainLoader;
-	terrainLoader.loadTerrains(v3Path);
+	terrainLoader.loadTerrains(modFS);
 	const auto& terrains = terrainLoader.getTerrains();
 	for (const auto& state: states | std::views::values)
 		for (const auto& [provinceName, province]: state->getProvinces())
@@ -51,11 +56,11 @@ void V3::ClayManager::loadTerrainsIntoProvinces(const std::string& v3Path)
 			}
 }
 
-void V3::ClayManager::initializeSuperRegions(const std::string& v3Path)
+void V3::ClayManager::initializeSuperRegions(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Initializing Regions and Superregions.";
 	SuperRegionLoader superRegionLoader;
-	superRegionLoader.loadSuperRegions(v3Path);
+	superRegionLoader.loadSuperRegions(modFS);
 	superRegions = superRegionLoader.getSuperRegions();
 
 	const auto regionCount = std::accumulate(superRegions.begin(), superRegions.end(), 0, [](int sum, const auto& superRegion) {
@@ -88,7 +93,7 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 	std::set<std::string> processedV3IDs;
 
 	// We're rolling across EU4's provinces and assigning them to chunks. We'll deal with ownership later as ownership can be shared or missing.
-	for (const auto& [spID, sourceProvince]: provinceManager.getAllProvinces())
+	for (const auto& spID: provinceManager.getAllProvinces() | std::views::keys)
 	{
 		if (processedEU4IDs.contains(spID))
 			continue; // We already grabbed this province earlier in some other mapping. Skip.
@@ -98,14 +103,26 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 			continue; // This province is mapped into nothing. Skip.
 
 		auto eu4ProvinceIDs = provinceMapper.getEU4Provinces(v3provinceIDs.front());
-
 		auto chunk = std::make_shared<Chunk>();
-		// Shove all source provinces into the chunk.
+
+		// sum the total weight of incoming provinces.
+		double totalWeight = 0;
+		for (auto eu4ProvinceID: eu4ProvinceIDs)
+			if (provinceManager.getAllProvinces().contains(eu4ProvinceID))
+				totalWeight += provinceManager.getAllProvinces().at(eu4ProvinceID)->getProvinceWeight();
+
+		// If all incoming provinces were wastelands, which is ok, sum is 0, and outgoing factors will also be 0,
+		// which is again ok as wastelands don't carry ANY data.
+		if (totalWeight == 0.0)
+			totalWeight = 1;
+
+		// Mark source provinces for data transfer.
 		for (auto eu4ProvinceID: eu4ProvinceIDs)
 		{
 			if (provinceManager.getAllProvinces().contains(eu4ProvinceID))
 			{
-				chunk->addSourceProvince(std::pair(eu4ProvinceID, provinceManager.getAllProvinces().at(eu4ProvinceID)));
+				const auto sourceWeight = provinceManager.getAllProvinces().at(eu4ProvinceID)->getProvinceWeight();
+				chunk->addSourceProvinceData(*provinceManager.getAllProvinces().at(eu4ProvinceID), sourceWeight / totalWeight);
 			}
 			else if (!provinceManager.isProvinceDiscarded(eu4ProvinceID))
 			{
@@ -116,7 +133,7 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 			processedEU4IDs.emplace(eu4ProvinceID);
 		}
 		// If no viable sources survive, bail on this chunk.
-		if (chunk->getSourceProvinces().empty())
+		if (chunk->getSourceProvinceData().empty())
 			continue;
 
 		// Shove all vic3 provinces into the chunk
@@ -139,13 +156,8 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 			}
 			chunk->addProvince(std::pair(v3provinceID, v3Province));
 
-			// also mark this chunk impacting these states
-			if (!chunk->getStates().contains(state->getName()))
-				chunk->addState(std::pair(state->getName(), state));
-
-			// And file both ways.
+			// And file.
 			processedV3IDs.emplace(v3provinceID);
-			v3Province->setChunk(chunk);
 		}
 		// If we don't have a single target province, bail on this chunk.
 		if (chunk->getProvinces().empty())
@@ -157,22 +169,25 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 	Log(LogLevel::Info) << "<> Generated " << chunks.size() << " Clay Chunks.";
 }
 
-void V3::ClayManager::unDisputeChunkOwnership(const std::map<std::string, std::shared_ptr<EU4::Country>>& sourceCountries)
+void V3::ClayManager::unDisputeChunkOwnership(const SourceOwners& sourceCountries)
 {
 	Log(LogLevel::Info) << "-> Untangling chunk ownerships.";
-	// raw chunks can link to sourceProvinces of several owners. Entire chunk goes to the owner with most source Development Weight.
+
+	// Raw chunks can link to sourceProvinces of several owners. Entire chunk goes to the owner with most source Development Weight.
+	// We'd let the chunks do this themselves, but we want to immediately filter out all sea chunks and random corruption.
+
 	std::vector<std::shared_ptr<Chunk>> filteredChunks;
 
 	for (const auto& chunk: chunks)
 	{
-		auto ownerWeights = calcChunkOwnerWeights(chunk);
+		auto ownerWeights = chunk->calcOwnerWeights();
 
 		// did we get anything? anyone?
 		if (ownerWeights.empty())
 		{
 			// There were no owners to the provinces (possibly sea zones or wastelands).
 			// If sea zones, drop the chunk
-			if (isChunkSea(chunk))
+			if (chunk->isSea())
 				continue;
 
 			// Otherwise, we have an unowned chunk. Technically, unowned chunk doesn't have disputed ownership. Success!
@@ -200,158 +215,118 @@ void V3::ClayManager::unDisputeChunkOwnership(const std::map<std::string, std::s
 			continue;
 		}
 
-		chunk->setSourceOwner(sourceCountries.at(newOwner->first));
+		chunk->setSourceOwnerTag(newOwner->first);
 		filteredChunks.push_back(chunk);
 	}
 	chunks.swap(filteredChunks);
 	Log(LogLevel::Info) << "<> Untangled chunk ownerships, " << chunks.size() << " of " << filteredChunks.size() << " remain.";
 }
 
-bool V3::ClayManager::isChunkSea(const std::shared_ptr<Chunk>& chunk)
+void V3::ClayManager::splitChunksIntoSubStates()
 {
-	for (const auto& sourceProvince: chunk->getSourceProvinces() | std::views::values)
-		if (sourceProvince->isSea()) // a single sea province will suffice.
-			return true;
-	return false;
-}
+	Log(LogLevel::Info) << "-> Distributing Clay across Substates.";
 
-std::map<std::string, double> V3::ClayManager::calcChunkOwnerWeights(const std::shared_ptr<Chunk>& chunk)
-{
-	std::map<std::string, double> ownerWeights; // ownerTag, total province weight
-	for (const auto& sourceProvince: chunk->getSourceProvinces() | std::views::values)
+	// Every chunk can map to to a number of substates. We'll now transfer provinces and sourceProvince metadata from a chunk according
+	// to their geographical State and create substates. Every substate must belong to a single owner - or no owner - same as chunks.
+	// Weighted sourceProvince data is also copied and *further* weighted, according to the size of substates in regrads to the original
+	// chunk... and potentially other factors.
+
+	for (const auto& chunk: chunks)
 	{
-		const auto& sourceTag = sourceProvince->getOwnerTag();
-		if (sourceTag.empty())
-			continue; // not relevant source - wasteland etc.
-		if (ownerWeights.contains(sourceTag))
-			ownerWeights.at(sourceTag) += sourceProvince->getProvinceWeight(); // this is RAW province weight - dev + buildings.
-		else
-			ownerWeights.emplace(sourceTag, sourceProvince->getProvinceWeight());
+		// split chunk into substates
+		auto generatedSubStates = chunkToSubStatesTransferFunction(chunk);
+
+		// and file them.
+		substates.insert(substates.end(), generatedSubStates.begin(), generatedSubStates.end());
 	}
-	return ownerWeights;
-}
-
-void V3::ClayManager::distributeChunksAcrossSubStates()
-{
-	Log(LogLevel::Info) << "-> Distributing Clay Chunks across Substates.";
-
-	// Every chunk can belong to a number of substates. We'll now transfer provinces from a chunk according to
-	// their geographical State and create Substates. Every substate must belong to a single owner - or no owner - same as chunks.
-	//
-	// Merging of same-owner substates within a single state is NOT DONE YET! We need a strict relation between a substate, its
-	// originating chunk, and thus its original provinces so we may shape populations and development properly.
-	//
-	// Merging of unowned substates within a single state is not done yet either. (it's done only after they are populated with some
-	// pops and merged according to culture - not ownership!).
-
-	auto [tagStateProvinces, sourceOwners] = sortChunkProvincesIntoTagStates();
-
-	// Now build substates. Substates are divorced from chunks and no sensible direct link to original eu4 provinces can remain.
-	// That's why every province knows what chunk it belonged to and can work back from there.
-
-	substates = buildSubStates(tagStateProvinces, sourceOwners);
-
-	crossLinkSubStatesToChunks();
 
 	Log(LogLevel::Info) << "<> Substates organized, " << substates.size() << " produced.";
 }
 
-std::pair<V3::ChunkToEU4TagToStateToProvinceMap, V3::SourceOwners> V3::ClayManager::sortChunkProvincesIntoTagStates() const
+std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::chunkToSubStatesTransferFunction(const std::shared_ptr<Chunk>& chunk) const
 {
-	SourceOwners sourceOwners;
-	ChunkToEU4TagToStateToProvinceMap chunkTagProvinces;
+	/*
+	 * This function uses several factors, all of which are debatable and moddable later. Of note is:
+	 * subStateSizeFactor - how much of a chunk's original metadata (dev) the substate takes when it's split
+	 * TODO: This should be modded by something more intelligent than raw province count comparison.
+	 */
 
-	auto chunkCounter = 0;
+	// prep info
+	const double totalChunkWeight = chunk->getTotalSourceProvinceWeight();
+	const double provincesCount = static_cast<double>(chunk->getProvinces().size());
+	const auto sortedProvinces = sortChunkProvincesIntoStates(chunk);
 
-	for (const auto& chunk: chunks)
+	// build substates
+	auto generatedSubStates = buildSubStates(sortedProvinces);
+
+	// update substates with metadata
+	for (const auto& subState: generatedSubStates)
 	{
-		++chunkCounter;
+		// for now, this is the simplest we can do. substateFactor is literally the amount of provinces / total provinces
+		// TODO: REFINE LATER WITH PRIME LAND, IMPASSABLES AND WHATEVER.
+		const double subStateSizeFactor = static_cast<double>(subState->getProvinces().size()) / provincesCount;
 
-		// build the containers
-		std::string ownerTag;
-		if (chunk->getSourceOwner())
-		{
-			ownerTag = chunk->getSourceOwner()->getTag();
-		}
-		else
-		{
-			// In order to keep every unowned chunk separate and unmerged, click here to see this simple trick!
-			ownerTag = "unowned" + std::to_string(chunkCounter);
-		}
+		// substate weight is an *outwardly* factor, when comparing the impact of that substate's metadata against all other
+		// substates in the same state.
+		const double subStateWeight = totalChunkWeight * subStateSizeFactor;
 
-		if (!sourceOwners.contains(ownerTag))
-			sourceOwners.emplace(ownerTag, chunk->getSourceOwner());
-		chunkTagProvinces.emplace(chunkCounter, EU4TagToStateToProvinceMap());
-		chunkTagProvinces.at(chunkCounter).emplace(ownerTag, StateToProvinceMap{});
-		for (const auto& stateName: chunk->getStates() | std::views::keys)
-			chunkTagProvinces.at(chunkCounter).at(ownerTag).emplace(stateName, ProvinceMap{});
+		// This here is an *inwardly* factor - we scale chunk's metadata according to the size of our substate, so we'd receive
+		// fewer factories etc.
+		std::vector<std::pair<SourceProvinceData, double>> additionallyWeightedSourceProvinceData;
+		for (const auto& [data, weight]: chunk->getSourceProvinceData())
+			additionallyWeightedSourceProvinceData.push_back(std::pair(data, weight * subStateSizeFactor));
 
-		// and shove the provinces into baskets
-		for (const auto& [provinceName, province]: chunk->getProvinces())
-		{
-			if (!provincesToStates.contains(provinceName))
-			{
-				// We should have filtered all unviable provinces already when generating chunks, but better safe than sorry.
-				Log(LogLevel::Warning) << "Filtering province " << provinceName << " failed as it belongs to no state. Skipping.";
-				continue;
-			}
-			const auto& stateName = provincesToStates.at(provinceName)->getName();
-			chunkTagProvinces.at(chunkCounter).at(ownerTag).at(stateName).emplace(provinceName, province);
-		}
+		// file!
+		subState->setWeight(subStateWeight);
+		subState->setSourceProvinceData(additionallyWeightedSourceProvinceData);
+		if (chunk->getSourceOwnerTag())
+			subState->setSourceOwnerTag(*chunk->getSourceOwnerTag());
 	}
-	return {chunkTagProvinces, sourceOwners};
+	return generatedSubStates;
 }
 
-std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::buildSubStates(const ChunkToEU4TagToStateToProvinceMap& chunkTagProvinces,
-	 const SourceOwners& sourceOwners) const
+V3::StateToProvinceMap V3::ClayManager::sortChunkProvincesIntoStates(const std::shared_ptr<Chunk>& chunk) const
+{
+
+	StateToProvinceMap stateProvinces;
+
+	// shove the provinces into baskets
+	for (const auto& [provinceName, province]: chunk->getProvinces())
+	{
+		if (!provincesToStates.contains(provinceName))
+		{
+			// We should have filtered all unviable provinces already when generating chunks, but better safe than sorry.
+			Log(LogLevel::Warning) << "Filtering province " << provinceName << " failed as it belongs to no state. Skipping.";
+			continue;
+		}
+		const auto& stateName = provincesToStates.at(provinceName)->getName();
+		if (!stateProvinces.contains(stateName))
+			stateProvinces.emplace(stateName, ProvinceMap{});
+		stateProvinces.at(stateName).emplace(provinceName, province);
+	}
+	return stateProvinces;
+}
+
+std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::buildSubStates(const StateToProvinceMap& stateProvinceMap) const
 {
 	std::vector<std::shared_ptr<SubState>> subStates;
 
-	for (const auto& tagStateProvinces: chunkTagProvinces | std::views::values)
+	for (const auto& [stateName, provinces]: stateProvinceMap)
 	{
-		for (const auto& [eu4tag, stateMap]: tagStateProvinces)
-		{
-			for (const auto& [stateName, provinces]: stateMap)
-			{
-				if (provinces.empty())
-					continue; // Unsure how this could happen, but sure, skip this substate.
+		if (provinces.empty())
+			continue; // Unsure how this could happen, but sure, skip this substate.
 
-				if (!states.contains(stateName))
-				{
-					// wtf, should never happen.
-					Log(LogLevel::Error) << "Substate owner " << eu4tag << " wants a substate in " << stateName << " which does't exist?! Bailing on this clay!";
-					continue;
-				}
-				if (eu4tag.starts_with("unowned"))
-				{
-					// This will keep unlinked substates without an owner.
-					subStates.push_back(std::make_shared<SubState>(states.at(stateName), nullptr, provinces));
-				}
-				else
-				{
-					// Should be ok now.
-					subStates.push_back(std::make_shared<SubState>(states.at(stateName), sourceOwners.at(eu4tag), provinces));
-				}
-			}
+		if (!states.contains(stateName))
+		{
+			// wtf, should never happen.
+			Log(LogLevel::Error) << "Attempting to create a substate in " << stateName << " which does't exist?! Bailing on this clay!";
+			continue;
 		}
+		// Should be ok now.
+		subStates.push_back(std::make_shared<SubState>(states.at(stateName), provinces));
 	}
 
 	return subStates;
-}
-
-void V3::ClayManager::crossLinkSubStatesToChunks() const
-{
-	for (const auto& substate: substates)
-	{
-		if (substate->getProvinces().empty())
-			continue;
-		const auto& tokenProvince = *substate->getProvinces().begin();
-		const auto& chunk = tokenProvince.second->getChunk();
-		if (!chunk)
-			continue;
-		substate->setChunk(chunk);
-		chunk->addSubState(substate);
-	}
 }
 
 void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper)
@@ -361,17 +336,13 @@ void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::s
 
 	for (const auto& substate: substates)
 	{
-		// unowned substates don't need assigning.
-		if (!substate->getSourceOwner())
-		{
-			substate->getHomeState()->addSubState(substate);
-			filteredSubstates.push_back(substate);
+		// unowned substates are IRRELEVANT. We'll be filling up their spots with imported data, pops and buildings. DROP.
+		if (!substate->getSourceOwnerTag())
 			continue;
-		}
 
 		// all the rest must have an owner and that owner must be able to map properly.
 		auto eu4tag = substate->getSourceOwnerTag();
-		if (!eu4tag)
+		if (eu4tag->empty())
 		{
 			Log(LogLevel::Warning) << "Substate belonging to EU4 country which we know nothing about? Ditching.";
 			continue;
@@ -429,4 +400,271 @@ bool V3::ClayManager::stateIsInRegion(const std::string& state, const std::strin
 				return true;
 
 	return false;
+}
+
+void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager, const PopManager& popManager)
+{
+	Log(LogLevel::Info) << "-> Injecting Vanilla substates into conversion map.";
+	auto subCounter = substates.size();
+
+	VanillaStateLoader loader;
+	loader.loadVanillaStates(modFS);
+
+	for (const auto& [stateName, state]: states)
+	{
+		// do we need to do anything?
+		if (!state->hasUnassignedProvinces())
+			continue;
+
+		// just sanity.
+		auto unassignedProvinces = state->getUnassignedProvinces();
+		if (unassignedProvinces.empty())
+			continue;
+
+		// grab vanilla state.
+		if (!loader.getStates().contains(stateName))
+		{
+			// silently skip seas and lakes.
+			if (state->isSea() || state->isLake())
+				continue;
+
+			Log(LogLevel::Warning) << "ModFS has no state " << stateName << ", not importing substates!";
+			continue;
+		}
+
+		const auto& vanillaStateEntry = loader.getStates().at(stateName);
+		const auto success = importVanillaSubStates(stateName, vanillaStateEntry, unassignedProvinces, politicalManager, popManager);
+
+		// If we imported anything, we should also copy any potential homelands. Unsure whom they belong to, but they surely won't do harm.
+		// What could possibly go wrong?
+		if (success)
+			for (const auto& homeland: vanillaStateEntry.getHomelands())
+				state->addHomeland(homeland);
+	}
+
+	subCounter = substates.size() - subCounter;
+	Log(LogLevel::Info) << "<> Imported " << subCounter << " new substates.";
+}
+
+bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
+	 const VanillaStateEntry& entry,
+	 const ProvinceMap& unassignedProvinces,
+	 const PoliticalManager& politicalManager,
+	 const PopManager& popManager)
+{
+	bool action = false;
+	for (const auto& subStateEntry: entry.getSubStates())
+	{
+		const auto& ownerTag = subStateEntry.getOwnerTag();
+		if (ownerTag.empty())
+			continue;
+
+		// We have a substate owner. Is he vanilla-decentralized?
+		if (!politicalManager.isTagDecentralized(ownerTag))
+			continue;
+
+		// Now we have a state we can work with. Not all of its provinces are available!
+		ProvinceMap availableProvinces;
+		for (const auto& provinceID: subStateEntry.getProvinces())
+			if (unassignedProvinces.contains(provinceID))
+				availableProvinces.emplace(provinceID, unassignedProvinces.at(provinceID));
+
+		// Anything to work with?
+		if (availableProvinces.empty())
+			continue;
+
+		const auto& owner = politicalManager.getCountry(ownerTag);
+		const auto& homeState = states.at(stateName);
+
+		// form new substate.
+		auto newSubState = std::make_shared<SubState>();
+		newSubState->setOwner(owner);
+		newSubState->setProvinces(availableProvinces);
+		newSubState->setSubStateType(subStateEntry.getSubStateType());
+		newSubState->setHomeState(homeState);
+
+		// How many provinces did we lose in the transfer? Ie. How many of this substate's original provinces were already assigned to some other substate?
+		// We can use this ratio to cut our popcount. Or we could use any other more involved function.
+		// TODO: Use any other more involved function.
+		const double subStateRatio = static_cast<double>(availableProvinces.size()) / static_cast<double>(subStateEntry.getProvinces().size());
+		auto newPops = prepareInjectedSubStatePops(newSubState, subStateRatio, popManager);
+
+		// and shove.
+		newSubState->setSubStatePops(newPops);
+
+		// and register.
+		homeState->addSubState(newSubState);
+		owner->addSubState(newSubState);
+		substates.emplace_back(newSubState);
+		action = true;
+	}
+	return action;
+}
+
+V3::SubStatePops V3::ClayManager::prepareInjectedSubStatePops(const std::shared_ptr<SubState>& subState,
+	 double subStateRatio,
+	 const PopManager& popManager) const
+{
+	// get its existing pops from vanilla
+	auto subStatePops = popManager.getVanillaSubStatePops(subState->getHomeStateName(), *subState->getOwnerTag());
+	if (!subStatePops)
+	{
+		Log(LogLevel::Warning) << "Substate for " << *subState->getOwnerTag() << " in " << subState->getHomeStateName() << " had no vanilla pops! Not importing!";
+		return SubStatePops();
+	}
+
+	auto importedPops = subStatePops->getPops();
+
+	// scale the pops.
+	for (auto& pop: importedPops)
+	{
+		const double newSize = round(static_cast<double>(pop.getSize()) * subStateRatio);
+		pop.setSize(static_cast<int>(newSize));
+	}
+	subStatePops->setPops(importedPops);
+
+	return *subStatePops;
+}
+
+void V3::ClayManager::shoveRemainingProvincesIntoSubStates()
+{
+	Log(LogLevel::Info) << "-> Shoving remaining provinces into substates.";
+	auto subCounter = substates.size();
+
+	for (const auto& [stateName, state]: states)
+	{
+		// do we need to do anything?
+		if (!state->hasUnassignedProvinces())
+			continue;
+
+		// just sanity.
+		auto unassignedProvinces = state->getUnassignedProvinces();
+		if (unassignedProvinces.empty())
+			continue;
+
+		// silently skip seas and lakes.
+		if (state->isSea() || state->isLake())
+			continue;
+
+		makeSubStateFromProvinces(stateName, unassignedProvinces);
+	}
+
+	subCounter = substates.size() - subCounter;
+	Log(LogLevel::Info) << "<> Generated " << subCounter << " new substates.";
+}
+
+void V3::ClayManager::makeSubStateFromProvinces(const std::string& stateName, const ProvinceMap& unassignedProvinces)
+{
+	const auto& homeState = states.at(stateName);
+
+	auto newSubState = std::make_shared<SubState>();
+	newSubState->setProvinces(unassignedProvinces);
+	newSubState->setHomeState(homeState);
+
+	homeState->addSubState(newSubState);
+	substates.emplace_back(newSubState);
+}
+
+void V3::ClayManager::squashAllSubStates(const PoliticalManager& politicalManager)
+{
+	Log(LogLevel::Info) << "-> Squashing substates.";
+	auto subCount = substates.size();
+
+	// replacement caches
+	TagSubStates replacementTagSubStates;
+	TagSubStates replacementStateSubStates;
+	std::vector<std::shared_ptr<SubState>> newSubStates;
+
+	for (const auto& [stateName, state]: states)
+	{
+		// sort the substates by tags.
+		TagSubStates tagSubStates;
+		for (const auto& subState: state->getSubStates())
+		{
+			const auto& tag = subState->getOwner()->getTag();
+			if (!tagSubStates.contains(tag))
+				tagSubStates.emplace(tag, std::vector<std::shared_ptr<SubState>>{});
+			tagSubStates.at(tag).emplace_back(subState);
+		}
+
+		// and squash.
+		for (const auto& [tag, subStates]: tagSubStates)
+		{
+			if (subStates.empty())
+				continue;
+			auto squashedSubState = squashSubStates(subStates);
+
+			if (!replacementTagSubStates.contains(tag))
+				replacementTagSubStates.emplace(tag, std::vector<std::shared_ptr<SubState>>{});
+			replacementTagSubStates.at(tag).emplace_back(squashedSubState);
+
+			if (!replacementStateSubStates.contains(stateName))
+				replacementStateSubStates.emplace(stateName, std::vector<std::shared_ptr<SubState>>{});
+			replacementStateSubStates.at(stateName).emplace_back(squashedSubState);
+
+			newSubStates.emplace_back(squashedSubState);
+		}
+	}
+
+	// file to countries.
+	for (const auto& [tag, country]: politicalManager.getCountries())
+		if (replacementTagSubStates.contains(tag))
+			country->setSubStates(replacementTagSubStates.at(tag));
+		else
+			country->setSubStates({});
+
+	// file to states.
+	for (const auto& [stateName, state]: states)
+		if (replacementStateSubStates.contains(stateName))
+			state->setSubStates(replacementStateSubStates.at(stateName));
+		else
+			state->setSubStates({});
+
+	substates.swap(newSubStates);
+
+	Log(LogLevel::Info) << "<> Substates squashed, " << substates.size() << " remain, " << subCount - substates.size() << " ditched.";
+}
+
+std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector<std::shared_ptr<SubState>>& subStates) const
+{
+	ProvinceMap provinces;
+	std::string subStateType;
+	double weight = 0;
+	std::vector<std::pair<SourceProvinceData, double>> spData;
+	std::vector<Demographic> demographics;
+	SubStatePops subStatePops;
+	std::vector<Pop> pops;
+
+	for (const auto& subState: subStates)
+	{
+		provinces.insert(subState->getProvinces().begin(), subState->getProvinces().end());
+
+		// unsure about this. If one is unincorporated, all are unincorporated?
+		// TODO: See what this does
+		if (!subState->getSubStateType().empty())
+			subStateType = subState->getSubStateType();
+
+		if (subState->getWeight())
+			weight += *subState->getWeight();
+
+		spData.insert(spData.end(), subState->getSourceProvinceData().begin(), subState->getSourceProvinceData().end());
+		demographics.insert(demographics.end(), subState->getDemographics().begin(), subState->getDemographics().end());
+		pops.insert(pops.end(), subState->getSubStatePops().getPops().begin(), subState->getSubStatePops().getPops().end());
+	}
+	auto newSubState = std::make_shared<SubState>();
+	newSubState->setHomeState((*subStates.begin())->getHomeState());
+	newSubState->setOwner((*subStates.begin())->getOwner());
+
+	newSubState->setProvinces(provinces);
+	newSubState->setSubStateType(subStateType);
+	if (weight > 0)
+		newSubState->setWeight(weight);
+	newSubState->setSourceProvinceData(spData);
+	newSubState->setDemographics(demographics);
+
+	subStatePops.setTag(newSubState->getOwner()->getTag());
+	subStatePops.setPops(pops);
+	newSubState->setSubStatePops(subStatePops);
+
+	return newSubState;
 }
