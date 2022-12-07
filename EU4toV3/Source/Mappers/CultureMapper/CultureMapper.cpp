@@ -269,7 +269,7 @@ void mappers::CultureMapper::generateCultureDefinitions(const commonItems::ModFi
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::EU4LocalizationLoader& eu4Locs)
 {
-	Log(LogLevel::Info) << "-> Generating Culture Definitions.";
+	Log(LogLevel::Info) << "-> Generating culture definitions.";
 
 	CultureDefinitionLoader cultureDefinitionLoader;
 	cultureDefinitionLoader.loadDefinitions(modFS);
@@ -282,6 +282,7 @@ void mappers::CultureMapper::generateCultureDefinitions(const commonItems::ModFi
 
 	// shove existing vanilla defs into the bin.
 	v3CultureDefinitions = cultureDefinitionLoader.getDefinitions();
+	const auto& defCount = v3CultureDefinitions.size();
 
 	for (const auto& eu4CultureName: unmappedCultures)
 	{
@@ -301,7 +302,7 @@ void mappers::CultureMapper::generateCultureDefinitions(const commonItems::ModFi
 		v3CultureDefinitions.emplace(eu4CultureName, newDef);
 	}
 
-	Log(LogLevel::Info) << "-> Generated " << v3CultureDefinitions.size() << " Culture Definitions.";
+	Log(LogLevel::Info) << "-> Generated " << v3CultureDefinitions.size() - defCount << " culture definitions.";
 }
 
 void mappers::CultureMapper::injectReligionsIntoCultureDefs(const V3::ClayManager& clayManager)
