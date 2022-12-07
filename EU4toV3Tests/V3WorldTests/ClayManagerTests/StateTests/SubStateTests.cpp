@@ -35,7 +35,7 @@ TEST(V3World_SubStateTests, HomeStateNameCanBeSetAndRetrieved)
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Attempted to access the name of a nullptr state from a substate. Returning empty name.)"));
 	EXPECT_TRUE(name.empty());
 
-	auto state = std::make_shared<V3::State>();
+	const auto state = std::make_shared<V3::State>();
 	state->setStateName("TEST_NAME");
 	subState.setHomeState(state);
 

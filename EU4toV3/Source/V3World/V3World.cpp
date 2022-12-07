@@ -20,6 +20,10 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	countryMapper->loadMappingRules("configurables/country_mappings.txt");
 	religionMapper.loadMappingRules("configurables/religion_map.txt");
 	religionMapper.expandReligionMappings(sourceWorld.getReligionLoader().getAllReligions());
+	religionMapper.generateReligionDefinitions(modFS,
+		 "configurables/religion_group_map.txt",
+		 sourceWorld.getReligionLoader().getAllReligions(),
+		 sourceWorld.getEU4Localizations());
 	cultureMapper.loadMappingRules("configurables/culture_map.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	localizationLoader.scrapeLocalizations(modFS);
@@ -59,7 +63,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	Log(LogLevel::Progress) << "52 %";
 	// converting all 3 types of countries - generated decentralized, extinct vanilla-only, and EU4 imports.
-	politicalManager.convertAllCountries(clayManager, localizationLoader, sourceWorld.getCountryManager().getLocalizationLoader());
+	politicalManager.convertAllCountries(clayManager, localizationLoader, sourceWorld.getEU4Localizations());
 
 	popManager.generatePops(clayManager);
 

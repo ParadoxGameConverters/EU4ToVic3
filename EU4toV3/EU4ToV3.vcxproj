@@ -104,6 +104,7 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\EU4World\Loaders\DefinitionScraper\DefinitionScraper.cpp" />
     <ClCompile Include="Source\EU4World\Loaders\LocalizationLoader\EU4LocalizationLoader.cpp" />
     <ClCompile Include="Source\EU4World\Loaders\ModLoader\ModNames.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\ReligionLoader\ReligionEntry.cpp" />
     <ClCompile Include="Source\EU4World\Loaders\ReligionLoader\ReligionLoader.cpp" />
     <ClCompile Include="Source\EU4World\Loaders\ReligionLoader\ReligionParser.cpp" />
     <ClCompile Include="Source\EU4World\Loaders\UnitTypeLoader\UnitTypeLoader.cpp" />
@@ -131,6 +132,10 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\Mappers\ProvinceMapper\ProvinceMapper.cpp" />
     <ClCompile Include="Source\Mappers\ProvinceMapper\ProvinceMapping.cpp" />
     <ClCompile Include="Source\Mappers\ProvinceMapper\ProvinceMappingsVersion.cpp" />
+    <ClCompile Include="Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDefinitionEntry.cpp" />
+    <ClCompile Include="Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDefinitionLoader.cpp" />
+    <ClCompile Include="Source\Mappers\ReligionMapper\ReligionGroupMapper\ReligionGroupMapper.cpp" />
+    <ClCompile Include="Source\Mappers\ReligionMapper\ReligionGroupMapper\ReligionGroupMapping.cpp" />
     <ClCompile Include="Source\Mappers\ReligionMapper\ReligionMapper.cpp" />
     <ClCompile Include="Source\Mappers\ReligionMapper\ReligionMapping.cpp" />
     <ClCompile Include="Source\Mappers\SuperGroupMapper\AssimilationParser.cpp" />
@@ -140,6 +145,7 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\Output\outLocalizations\outLocalizations.cpp" />
     <ClCompile Include="Source\Output\outMetadataFile\outMetadataFile.cpp" />
     <ClCompile Include="Source\Output\outPops\outPops.cpp" />
+    <ClCompile Include="Source\Output\outReligions\outReligions.cpp" />
     <ClCompile Include="Source\Output\outStates\outCommonHistoryStates.cpp" />
     <ClCompile Include="Source\Output\outWorld.cpp" />
     <ClCompile Include="Source\V3World\ClayManager\ClayManager.cpp" />
@@ -232,6 +238,7 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\EU4World\Loaders\LocalizationLoader\EU4LocalizationLoader.h" />
     <ClInclude Include="Source\EU4World\Loaders\ModLoader\ModNames.h" />
     <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\Religion.h" />
+    <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\ReligionEntry.h" />
     <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\ReligionLoader.h" />
     <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\ReligionParser.h" />
     <ClInclude Include="Source\EU4World\Loaders\UnitTypeLoader\UnitType.h" />
@@ -262,6 +269,11 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\Mappers\ProvinceMapper\ProvinceMapper.h" />
     <ClInclude Include="Source\Mappers\ProvinceMapper\ProvinceMapping.h" />
     <ClInclude Include="Source\Mappers\ProvinceMapper\ProvinceMappingsVersion.h" />
+    <ClInclude Include="Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDef.h" />
+    <ClInclude Include="Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDefinitionEntry.h" />
+    <ClInclude Include="Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDefinitionLoader.h" />
+    <ClInclude Include="Source\Mappers\ReligionMapper\ReligionGroupMapper\ReligionGroupMapper.h" />
+    <ClInclude Include="Source\Mappers\ReligionMapper\ReligionGroupMapper\ReligionGroupMapping.h" />
     <ClInclude Include="Source\Mappers\ReligionMapper\ReligionMapper.h" />
     <ClInclude Include="Source\Mappers\ReligionMapper\ReligionMapping.h" />
     <ClInclude Include="Source\Mappers\SuperGroupMapper\AssimilationParser.h" />
@@ -271,6 +283,7 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\Output\outLocalizations\outLocalizations.h" />
     <ClInclude Include="Source\Output\outMetadataFile\outMetadataFile.h" />
     <ClInclude Include="Source\Output\outPops\outPops.h" />
+    <ClInclude Include="Source\Output\outReligions\outReligions.h" />
     <ClInclude Include="Source\Output\outStates\outCommonHistoryStates.h" />
     <ClInclude Include="Source\Output\outWorld.h" />
     <ClInclude Include="Source\V3World\ClayManager\ClayManager.h" />
