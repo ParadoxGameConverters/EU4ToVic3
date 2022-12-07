@@ -132,6 +132,8 @@
     <ClCompile Include="..\EU4toV3\Source\EU4World\WarParser\WarParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CountryMapper\CountryMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CountryMapper\CountryMapping.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionEntry.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureMappingRule.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureTraitMapper\CultureTraitMapper.cpp" />
@@ -242,6 +244,8 @@
     <ClCompile Include="EU4WorldTests\WarParserTests\WarParserTests.cpp" />
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMapperTests.cpp" />
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMappingTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\CultureDefinitionLoaderTests\CultureDefinitionEntryTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\CultureDefinitionLoaderTests\CultureDefinitionLoaderTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureMapperTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureMappingRuleTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureTraitMapperTests\CultureTraitMapperTests.cpp" />
@@ -537,6 +541,11 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\name_list_map.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\cultures\00_cultures.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/cultures</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

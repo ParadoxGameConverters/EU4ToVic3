@@ -679,6 +679,18 @@
     <ClCompile Include="MapperTests\CultureMapperTests\NameListMapperTests\NameListMappingTests.cpp">
       <Filter>MapperTests\CultureMapperTests\NameListMapperTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionEntry.cpp">
+      <Filter>ConverterFiles\Mappers\CultureMapper\CultureDefinitionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionLoader.cpp">
+      <Filter>ConverterFiles\Mappers\CultureMapper\CultureDefinitionLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\CultureMapperTests\CultureDefinitionLoaderTests\CultureDefinitionEntryTests.cpp">
+      <Filter>MapperTests\CultureMapperTests\CultureDefinitionLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\CultureMapperTests\CultureDefinitionLoaderTests\CultureDefinitionLoaderTests.cpp">
+      <Filter>MapperTests\CultureMapperTests\CultureDefinitionLoaderTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1110,6 +1122,15 @@
     <Filter Include="MapperTests\CultureMapperTests\NameListMapperTests">
       <UniqueIdentifier>{98ff957a-ddc0-40ab-9567-cab8fe827811}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\cultures">
+      <UniqueIdentifier>{f2c8d09d-5524-46d5-9129-2d3d492ddc58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\Mappers\CultureMapper\CultureDefinitionLoader">
+      <UniqueIdentifier>{2195da3d-ebf3-48de-bb22-ad35e783b022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\CultureMapperTests\CultureDefinitionLoaderTests">
+      <UniqueIdentifier>{a744e1a6-8ff7-4c81-88ed-22636480642d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1266,6 +1287,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\name_list_map.txt">
       <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\cultures\00_cultures.txt">
+      <Filter>TestFiles\vic3installation\game\common\cultures</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>
