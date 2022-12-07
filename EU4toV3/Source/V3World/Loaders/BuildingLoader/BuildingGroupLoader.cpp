@@ -10,13 +10,13 @@ V3::BuildingGroupLoader::BuildingGroupLoader(): buildingGroups(std::make_shared<
 {
 }
 
-void V3::BuildingGroupLoader::loadBuildingGroups(const std::string& v3Path)
+void V3::BuildingGroupLoader::loadBuildingGroups(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: commonItems::GetAllFilesInFolder(v3Path + "/common/building_groups/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/building_groups/"))
 	{
 		if (getExtension(fileName) == "txt")
-			parseFile(v3Path + "/common/building_groups/" + fileName);
+			parseFile(fileName);
 	}
 	clearRegisteredKeywords();
 	buildingGroups->setInfrastructureCosts();

@@ -3,6 +3,7 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 TEST(V3World_StateModifierTests, DefaultsDefaultToDefaults)
 {
 	V3::StateModifier modifier;
@@ -85,8 +86,8 @@ TEST(V3World_StateModifierTests, BuildingGroupModifiersAreSet)
 	V3::StateModifier modifier;
 	modifier.loadStateModifier(input);
 
-	EXPECT_EQ(0.2, modifier.getBuildingGroupModifier("bg_agri", std::shared_ptr<V3::BuildingGroups>()).value());
-	EXPECT_EQ(0.3, modifier.getBuildingGroupModifier("bg_fish", std::shared_ptr<V3::BuildingGroups>()).value());
+	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingGroupModifier("bg_agri", std::shared_ptr<V3::BuildingGroups>()).value());
+	EXPECT_DOUBLE_EQ(0.3, modifier.getBuildingGroupModifier("bg_fish", std::shared_ptr<V3::BuildingGroups>()).value());
 }
 
 TEST(V3World_StateModifierTests, BuildingModifiersAreSet)
@@ -101,8 +102,8 @@ TEST(V3World_StateModifierTests, BuildingModifiersAreSet)
 	V3::StateModifier modifier;
 	modifier.loadStateModifier(input);
 
-	EXPECT_EQ(0.2, modifier.getBuildingModifier("building_house").value());
-	EXPECT_EQ(0.3, modifier.getBuildingModifier("building_factory").value());
+	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingModifier("building_house").value());
+	EXPECT_DOUBLE_EQ(0.3, modifier.getBuildingModifier("building_factory").value());
 }
 
 TEST(V3World_StateModifierTests, GoodsModifiersAreSet)
@@ -117,8 +118,8 @@ TEST(V3World_StateModifierTests, GoodsModifiersAreSet)
 	V3::StateModifier modifier;
 	modifier.loadStateModifier(input);
 
-	EXPECT_EQ(0.2, modifier.getGoodsModifier("building_output_lime").value());
-	EXPECT_EQ(0.3, modifier.getGoodsModifier("building_output_coconut").value());
+	EXPECT_DOUBLE_EQ(0.2, modifier.getGoodsModifier("building_output_lime").value());
+	EXPECT_DOUBLE_EQ(0.3, modifier.getGoodsModifier("building_output_coconut").value());
 }
 
 TEST(V3World_StateModifierTests, RegexDontCollide)
@@ -134,9 +135,9 @@ TEST(V3World_StateModifierTests, RegexDontCollide)
 	V3::StateModifier modifier;
 	modifier.loadStateModifier(input);
 
-	EXPECT_EQ(0.2, modifier.getBuildingModifier("building_house").value());
-	EXPECT_EQ(0.3, modifier.getGoodsModifier("building_output_coconut").value());
-	EXPECT_EQ(0.4, modifier.getBuildingGroupModifier("bg_fish", std::shared_ptr<V3::BuildingGroups>()).value());
+	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingModifier("building_house").value());
+	EXPECT_DOUBLE_EQ(0.3, modifier.getGoodsModifier("building_output_coconut").value());
+	EXPECT_DOUBLE_EQ(0.4, modifier.getBuildingGroupModifier("bg_fish", std::shared_ptr<V3::BuildingGroups>()).value());
 }
 
 TEST(V3World_StateModifierTests, GettingBuildingGroupDataTravelsHeirarchy)
@@ -151,8 +152,8 @@ TEST(V3World_StateModifierTests, GettingBuildingGroupDataTravelsHeirarchy)
 	modifier.loadStateModifier(input);
 
 	V3::BuildingGroupLoader buildingGroupLoader;
-	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
+	buildingGroupLoader.loadBuildingGroups(modFS);
 	auto buildingGroups = buildingGroupLoader.getBuildingGroups();
 
-	EXPECT_EQ(0.2, modifier.getBuildingGroupModifier("bg_light_industry", buildingGroups).value());
+	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingGroupModifier("bg_light_industry", buildingGroups).value());
 }

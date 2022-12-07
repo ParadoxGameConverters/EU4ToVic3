@@ -1,16 +1,16 @@
 #ifndef STATE_MODIFIER_LOADER_H
 #define STATE_MODIFIER_LOADER_H
-#include "ClayManager/State/StateModifier.h"
 #include "Parser.h"
 
 namespace V3
 {
+class StateModifier;
 class StateModifierLoader: commonItems::parser
 {
   public:
 	StateModifierLoader() = default;
 
-	void loadStateModifiers(const std::string& v3Path);
+	void loadStateModifiers(const commonItems::ModFilesystem& modFS);
 	[[nodiscard]] const auto& getStateModifiers() const { return stateModifiers; }
 
   private:

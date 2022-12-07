@@ -1,19 +1,21 @@
+#include "ClayManager/State/StateModifier.h"
 #include "Loaders/StateModifierLoader/StateModifierLoader.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 TEST(V3World_StateModifierLoaderTests, StateModiferLoaderCanLoadStateModifiers)
 {
 	V3::StateModifierLoader stateModifierLoader;
 	EXPECT_TRUE(stateModifierLoader.getStateModifiers().empty());
-	stateModifierLoader.loadStateModifiers("TestFiles/vic3installation/game/");
+	stateModifierLoader.loadStateModifiers(modFS);
 	EXPECT_EQ(3, stateModifierLoader.getStateModifiers().size());
 }
 
 TEST(V3World_StateModifierLoaderTests, StateModiferLoaderSetsStateModifierNames)
 {
 	V3::StateModifierLoader stateModifierLoader;
-	stateModifierLoader.loadStateModifiers("TestFiles/vic3installation/game/");
+	stateModifierLoader.loadStateModifiers(modFS);
 
 	const auto stateModifiers = stateModifierLoader.getStateModifiers();
 

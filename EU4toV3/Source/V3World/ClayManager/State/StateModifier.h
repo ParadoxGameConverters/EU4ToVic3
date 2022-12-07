@@ -1,10 +1,10 @@
 #ifndef STATE_MODIFIER_H
 #define STATE_MODIFIER_H
-#include "Loaders/BuildingLoader/BuildingGroups.h"
 #include "Parser.h"
 
 namespace V3
 {
+class BuildingGroups;
 class StateModifier: commonItems::parser
 {
   public:

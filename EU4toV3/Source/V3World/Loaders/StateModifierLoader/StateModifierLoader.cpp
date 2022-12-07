@@ -4,13 +4,13 @@
 #include "CommonRegexes.h"
 #include "OSCompatibilityLayer.h"
 
-void V3::StateModifierLoader::loadStateModifiers(const std::string& v3Path)
+void V3::StateModifierLoader::loadStateModifiers(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: commonItems::GetAllFilesInFolder(v3Path + "/common/state_traits/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/state_traits/"))
 	{
 		if (getExtension(fileName) == "txt")
-			parseFile(v3Path + "/common/state_traits/" + fileName);
+			parseFile(fileName);
 	}
 	clearRegisteredKeywords();
 }

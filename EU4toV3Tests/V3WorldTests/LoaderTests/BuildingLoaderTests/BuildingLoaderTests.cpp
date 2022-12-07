@@ -3,12 +3,13 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderCanLoadBuildingGroups)
 {
 	V3::BuildingGroupLoader buildingGroupLoader;
 	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
 	EXPECT_TRUE(buildingGroups->getBuildingGroupMap().empty());
-	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
+	buildingGroupLoader.loadBuildingGroups(modFS);
 	EXPECT_EQ(6, buildingGroups->getBuildingGroupMap().size());
 }
 
@@ -16,7 +17,7 @@ TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderTracksHierarchy)
 {
 	V3::BuildingGroupLoader buildingGroupLoader;
 	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
-	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
+	buildingGroupLoader.loadBuildingGroups(modFS);
 
 	EXPECT_TRUE(buildingGroups->getParentName("bg_manufacturing")->empty());
 	EXPECT_EQ("bg_manufacturing", buildingGroups->getParentName("bg_light_industry").value());
@@ -30,7 +31,7 @@ TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderSetsInfrastructureInhe
 {
 	V3::BuildingGroupLoader buildingGroupLoader;
 	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
-	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
+	buildingGroupLoader.loadBuildingGroups(modFS);
 
 	EXPECT_EQ(0, buildingGroups->getInfrastructureCost("bg_manufacturing").value());
 	EXPECT_EQ(2, buildingGroups->getInfrastructureCost("bg_light_industry").value());
@@ -44,7 +45,7 @@ TEST(V3World_BuildingGroupLoaderTests, BadKeyReturnsDefaultValuesAndIsLogged)
 {
 	V3::BuildingGroupLoader buildingGroupLoader;
 	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
-	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
+	buildingGroupLoader.loadBuildingGroups(modFS);
 
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
@@ -67,7 +68,7 @@ TEST(V3World_BuildingGroupLoaderTests, GettersReturnNullOptionals)
 {
 	V3::BuildingGroupLoader buildingGroupLoader;
 	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
-	buildingGroupLoader.loadBuildingGroups("TestFiles/vic3installation/game/");
+	buildingGroupLoader.loadBuildingGroups(modFS);
 
 	auto parentName = buildingGroups->getParentName("not_a_key0");
 	auto infrastructureCost = buildingGroups->getInfrastructureCost("not_a_key1");
