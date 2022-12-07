@@ -631,6 +631,18 @@
     <ClCompile Include="EU4WorldTests\LoaderTests\ReligionLoaderTests\ReligionEntryTests.cpp">
       <Filter>EU4WorldTests\LoaderTests\ReligionLoaderTests</Filter>
     </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\StateModifierLoaderTests\StateModifierLoaderTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\StateModifierLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\State\StateModifier.cpp">
+      <Filter>ConverterFiles\V3World\ClayManager\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\StateModifierLoader\StateModifierLoader.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\StateModifierLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\StateModifierTests.cpp">
+      <Filter>V3WorldTests\ClayManagerTests\StateTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -650,9 +662,6 @@
     </Filter>
     <Filter Include="ConverterFiles\Helpers">
       <UniqueIdentifier>{24f4672d-5798-4943-8a21-4d71d38580e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="HelpersTests">
-      <UniqueIdentifier>{990552e6-b585-4a97-8e3c-63c6099e25e1}</UniqueIdentifier>
     </Filter>
     <Filter Include="ConverterFiles\commonItems">
       <UniqueIdentifier>{87c6ec85-b77f-4e5f-9685-fe52f9d29d40}</UniqueIdentifier>
@@ -1038,6 +1047,15 @@
     <Filter Include="MapperTests\ReligionMapperTests\ReligionGroupMapperTests">
       <UniqueIdentifier>{e201b8c7-b1e1-4498-9fbf-50032992f731}</UniqueIdentifier>
     </Filter>
+    <Filter Include="V3WorldTests\LoaderTests\StateModifierLoaderTests">
+      <UniqueIdentifier>{af850810-628e-4ace-ac58-38924939f4a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\Loaders\StateModifierLoader">
+      <UniqueIdentifier>{03b183b5-611f-4566-b06f-1560b51beb5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\state_traits">
+      <UniqueIdentifier>{a95577b4-b6c0-4618-ac4d-ca756857202a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1182,6 +1200,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\religion_group_map.txt">
       <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\state_traits\test_state_traits.txt">
+      <Filter>TestFiles\vic3installation\game\common\state_traits</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

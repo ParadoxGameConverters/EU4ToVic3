@@ -10,7 +10,7 @@ class BuildingGroupLoader: commonItems::parser
   public:
 	BuildingGroupLoader();
 
-	void loadBuildingGroups(const std::string& v3Path);
+	void loadBuildingGroups(const commonItems::ModFilesystem& modFS);
 	[[nodiscard]] std::shared_ptr<BuildingGroups> getBuildingGroups() const { return buildingGroups; }
 
   private:

@@ -5,7 +5,7 @@
 
 void V3::BuildingGroups::setInfrastructureCosts()
 {
-	for (auto& buildingGroup: std::views::values(buildingGroups))
+	for (const auto& buildingGroup: std::views::values(buildingGroups))
 	{
 		std::string parentGroupName = buildingGroup->getParentName();
 		while (buildingGroup->getInfrastructureCost() == 0 && !parentGroupName.empty())
@@ -21,9 +21,17 @@ void V3::BuildingGroups::addBuildingGroup(std::shared_ptr<BuildingGroup> theBuil
 	buildingGroups[theBuildingGroup->getName()] = theBuildingGroup;
 }
 
-const std::string& V3::BuildingGroups::getParentName(const std::string& theBuildingGroupName) const
+std::optional<std::string> V3::BuildingGroups::getParentName(const std::string& theBuildingGroupName) const
 {
-	return buildingGroups.at(theBuildingGroupName)->getParentName();
+	const auto& possibleBuildingGroup = buildingGroups.find(theBuildingGroupName);
+	if (possibleBuildingGroup != buildingGroups.end())
+	{
+		return possibleBuildingGroup->second->getParentName();
+	}
+	else
+	{
+		return std::nullopt;
+	}
 }
 
 const std::string& V3::BuildingGroups::safeGetParentName(const std::string& theBuildingGroupName) const
@@ -31,9 +39,17 @@ const std::string& V3::BuildingGroups::safeGetParentName(const std::string& theB
 	return safeGetBuildingGroup(theBuildingGroupName)->getParentName();
 }
 
-int V3::BuildingGroups::getInfrastructureCost(const std::string& theBuildingGroupName) const
+std::optional<int> V3::BuildingGroups::getInfrastructureCost(const std::string& theBuildingGroupName) const
 {
-	return buildingGroups.at(theBuildingGroupName)->getInfrastructureCost();
+	const auto& possibleBuildingGroup = buildingGroups.find(theBuildingGroupName);
+	if (possibleBuildingGroup != buildingGroups.end())
+	{
+		return possibleBuildingGroup->second->getInfrastructureCost();
+	}
+	else
+	{
+		return std::nullopt;
+	}
 }
 
 int V3::BuildingGroups::safeGetInfrastructureCost(const std::string& theBuildingGroupName) const
