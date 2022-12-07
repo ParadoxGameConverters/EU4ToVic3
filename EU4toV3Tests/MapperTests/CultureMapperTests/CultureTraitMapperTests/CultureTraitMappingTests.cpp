@@ -16,11 +16,12 @@ TEST(Mappers_CultureTraitMappingTests, primitivesDefaultsToBlank)
 TEST(Mappers_CultureTraitMappingTests, primitivesCanBeLoaded)
 {
 	std::stringstream input;
-	input << "eu4 = culture1 eu4group = group1 trait = testtrait trait = testtrait2 ethnicity = testable";
-	mappers::CultureTraitMapping mapping(input);
+	input << "eu4 = culture1 eu4group = group1 trait = testtrait trait = testtrait2 ethnicity = testable graphics = something";
+	const mappers::CultureTraitMapping mapping(input);
 
 	EXPECT_EQ("culture1", mapping.getCulture());
 	EXPECT_EQ("group1", mapping.getCultureGroup());
 	EXPECT_THAT(mapping.getTraits(), testing::UnorderedElementsAre("testtrait", "testtrait2"));
 	EXPECT_EQ("testable", mapping.getEthnicity());
+	EXPECT_EQ("something", mapping.getGraphics());
 }

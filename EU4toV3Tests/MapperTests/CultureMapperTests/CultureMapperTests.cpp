@@ -240,7 +240,7 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
 	const auto& def2 = culMapper.getV3CultureDefinitions().at("unmapped_culture");
 
 	// culture 5 maps via:
-	// link = { eu4group = culture_group trait = testtrait2 ethnicity = testable2 }
+	// link = { eu4group = culture_group trait = testtrait2 ethnicity = testable2 graphics = gr2 }
 	// link = { eu4group = culture_group name_pool = name_list_test2 }
 	EXPECT_EQ("culture5", def1.name);
 	EXPECT_FALSE(def1.color);
@@ -253,7 +253,7 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
 	EXPECT_THAT(def1.femaleRegalFirstNames, testing::UnorderedElementsAre("female3", "female4"));
 	EXPECT_TRUE(def1.regalLastNames.empty()); // we don't map these atm.
 	EXPECT_THAT(def1.ethnicities, testing::UnorderedElementsAre("testable2"));
-	EXPECT_EQ("generic", def1.graphics); // generic fallback for everyone.
+	EXPECT_EQ("gr2", def1.graphics);
 	EXPECT_EQ("Culture 5", def1.locBlock.at("english"));
 
 	// unmapped_culture has no mapping links whatsoever and is scraping defaults

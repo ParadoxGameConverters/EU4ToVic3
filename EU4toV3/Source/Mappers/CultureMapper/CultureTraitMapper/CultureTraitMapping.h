@@ -13,6 +13,7 @@ class CultureTraitMapping: commonItems::parser
 	[[nodiscard]] const auto& getCultureGroup() const { return cultureGroup; }
 	[[nodiscard]] const auto& getTraits() const { return traits; }
 	[[nodiscard]] const auto& getEthnicity() const { return ethnicity; }
+	[[nodiscard]] const auto& getGraphics() const { return graphics; }
 
   private:
 	void registerkeys();
@@ -21,6 +22,7 @@ class CultureTraitMapping: commonItems::parser
 	std::string cultureGroup;
 	std::set<std::string> traits;
 	std::string ethnicity;
+	std::string graphics;
 };
 } // namespace mappers
 

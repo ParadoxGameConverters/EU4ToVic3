@@ -23,5 +23,8 @@ void mappers::CultureTraitMapping::registerkeys()
 	registerKeyword("ethnicity", [this](std::istream& theStream) {
 		ethnicity = commonItems::getString(theStream);
 	});
+	registerKeyword("graphics", [this](std::istream& theStream) {
+		graphics = commonItems::getString(theStream);
+	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

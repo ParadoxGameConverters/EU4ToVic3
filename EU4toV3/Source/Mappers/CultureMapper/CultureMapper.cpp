@@ -107,6 +107,7 @@ mappers::CultureDef generateCultureDefinition(const std::string& eu4CultureName,
 		{
 			newDef.traits.insert(traitsblock->getTraits().begin(), traitsblock->getTraits().end());
 			newDef.ethnicities.emplace(traitsblock->getEthnicity());
+			newDef.graphics = traitsblock->getGraphics(); // Any will do but there must be only one.
 		}
 		if (const auto& nameListMatch = nameListMapper.getNamesForCulture(sourceCultureName, groupName); !nameListMatch)
 		{
@@ -130,8 +131,8 @@ mappers::CultureDef generateCultureDefinition(const std::string& eu4CultureName,
 		newDef.ethnicities.emplace("neutral"); // fallback (?)
 
 	// graphics
-	// TODO: ADD GRAPHICS TO CULTURE_TRAITS_MAP.TXT!
-	newDef.graphics = "generic";
+	if (newDef.graphics.empty())
+		newDef.graphics = "generic";
 
 	// locs
 	if (const auto& locMatch = eu4Locs.getTextInEachLanguage(eu4CultureName); !locMatch)
