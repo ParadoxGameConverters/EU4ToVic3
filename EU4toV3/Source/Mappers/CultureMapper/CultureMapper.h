@@ -34,6 +34,7 @@ class CultureMapper: commonItems::parser
 	void expandCulturalMappings(const V3::ClayManager& clayManager, const EU4::CultureLoader& cultureLoader, const EU4::ReligionLoader& religionLoader);
 
 	[[nodiscard]] const auto& getMacros() const { return encounteredMacros; }
+	[[nodiscard]] const auto& getV3CultureDefinitions() const { return v3CultureDefinitions; }
 
 	[[nodiscard]] std::optional<std::string> cultureMatch(const V3::ClayManager& clayManager,
 		 const EU4::CultureLoader& cultureLoader,
@@ -64,6 +65,8 @@ class CultureMapper: commonItems::parser
 		 const std::string& cultureTraitsPath,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::EU4LocalizationLoader& eu4Locs);
+
+	void injectReligionsIntoCultureDefs(const V3::ClayManager& clayManager);
 
   private:
 	void registerKeys();

@@ -1,6 +1,7 @@
 #include "outWorld.h"
 #include "OSCompatibilityLayer.h"
 #include "outCountries/outCommonCountries.h"
+#include "outCultures/outCultures.h"
 #include "outLocalizations/outLocalizations.h"
 #include "outMetadataFile/outMetadataFile.h"
 #include "outPops/outPops.h"
@@ -85,6 +86,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Progress) << "95 %";
 
 	Log(LogLevel::Info) << "<- Writing Culture Definitions";
+	exportCultures(outputName, world.getCultureMapper().getV3CultureDefinitions());
 	Log(LogLevel::Progress) << "96 %";
 
 	Log(LogLevel::Info) << "<- Writing Religion Definitions";

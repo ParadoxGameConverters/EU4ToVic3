@@ -75,6 +75,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	clayManager.squashAllSubStates(politicalManager);
 
+	cultureMapper.injectReligionsIntoCultureDefs(clayManager);
+
 	Log(LogLevel::Info) << "-> Converting Provinces";
 	Log(LogLevel::Progress) << "53 %";
 

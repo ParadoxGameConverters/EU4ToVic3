@@ -1,4 +1,7 @@
 #include "CultureMapper.h"
+#include "ClayManager/ClayManager.h"
+#include "ClayManager/State/State.h"
+#include "ClayManager/State/SubState.h"
 #include "CommonRegexes.h"
 #include "CultureDefinitionLoader/CultureDefinitionLoader.h"
 #include "CultureLoader/CultureGroupParser.h"
@@ -54,10 +57,6 @@ void mappers::CultureMapper::registerKeys()
 	 const std::string& v3ownerTag,
 	 bool silent) const
 {
-	// Speed things up. Don't match dynamics.
-	if (eu4culture.starts_with("dynamic-"))
-		return eu4culture;
-
 	for (const auto& cultureMappingRule: cultureMapRules)
 	{
 		const auto& possibleMatch = cultureMappingRule.cultureMatch(clayManager, cultureLoader, religionLoader, eu4culture, eu4religion, v3state, v3ownerTag);
@@ -85,10 +84,6 @@ std::optional<std::string> mappers::CultureMapper::cultureRegionalMatch(const V3
 	 const std::string& v3state,
 	 const std::string& v3ownerTag) const
 {
-	// Don't match dynamics for non-slave pops, they are same in eu4 and vic3.
-	if (eu4culture.starts_with("dynamic-"))
-		return eu4culture;
-
 	for (const auto& cultureMappingRule: cultureMapRules)
 	{
 		const auto& possibleMatch =
@@ -107,10 +102,6 @@ std::optional<std::string> mappers::CultureMapper::cultureNonRegionalNonReligiou
 	 const std::string& v3state,
 	 const std::string& v3ownerTag) const
 {
-	// Don't match dynamics.
-	if (eu4culture.starts_with("dynamic-"))
-		return eu4culture;
-
 	for (const auto& cultureMappingRule: cultureMapRules)
 	{
 		const auto& possibleMatch =
@@ -239,7 +230,7 @@ mappers::CultureDef mappers::CultureMapper::generateCultureDefinition(const std:
 
 	// sanities
 	if (newDef.ethnicities.empty())
-		newDef.ethnicities.emplace("caucasian"); // fallback (?)
+		newDef.ethnicities.emplace("neutral"); // fallback (?)
 
 	// graphics
 	// TODO: ADD GRAPHICS TO CULTURE_TRAITS_MAP.TXT!
@@ -286,6 +277,9 @@ void mappers::CultureMapper::copyEU4Names(CultureDef& cultureDef, const EU4::Cul
 
 std::set<std::string> mappers::CultureMapper::breakDownCulturalName(const std::string& eu4CultureName)
 {
+	// dynamic-afghani-culture-num1
+	// dynamic-afghani-panjabi-culture-num2
+
 	std::set<std::string> componentCultures;
 	if (!eu4CultureName.starts_with("dynamic-") || eu4CultureName.size() <= 8)
 	{
@@ -294,18 +288,48 @@ std::set<std::string> mappers::CultureMapper::breakDownCulturalName(const std::s
 	}
 
 	// easy now. eeeasy. Max 2 cultures.
-	Log(LogLevel::Debug) << "breaking dynamic: " << eu4CultureName;
 	auto theName = eu4CultureName.substr(8, eu4CultureName.size());
 	if (const auto& pos = theName.find('-'); pos != std::string::npos && pos < theName.size() - 1)
 	{
 		componentCultures.emplace(theName.substr(0, pos));
-		Log(LogLevel::Debug) << "emplacing: " << theName.substr(0, pos);
 		theName = theName.substr(pos + 1, theName.size());
 	}
 	if (const auto& pos = theName.find('-'); pos != std::string::npos && pos < theName.size() - 1)
 	{
-		Log(LogLevel::Debug) << "emplacing: " << theName.substr(0, pos);
-		componentCultures.emplace(theName.substr(0, pos));
+		if (theName.substr(0, pos) != "culture")
+			componentCultures.emplace(theName.substr(0, pos));
 	}
 	return componentCultures;
+}
+
+void mappers::CultureMapper::injectReligionsIntoCultureDefs(const V3::ClayManager& clayManager)
+{
+	std::map<std::string, std::map<std::string, int>> culturalReligionPopSizeMap; // census cache
+
+	for (const auto& state: clayManager.getStates() | std::views::values)
+		for (const auto& subState: state->getSubStates())
+			for (const auto& pop: subState->getSubStatePops().getPops())
+				if (!pop.getCulture().empty() && !pop.getReligion().empty())
+				{
+					const auto& culture = pop.getCulture();
+					const auto& religion = pop.getReligion();
+					if (!culturalReligionPopSizeMap.contains(culture))
+						culturalReligionPopSizeMap.emplace(culture, std::map<std::string, int>{});
+					if (!culturalReligionPopSizeMap.at(culture).contains(religion))
+						culturalReligionPopSizeMap.at(culture).emplace(religion, 0);
+					culturalReligionPopSizeMap.at(culture).at(religion) += pop.getSize();
+				}
+
+	// file census results
+	for (const auto& [culture, religionPopSizeMap]: culturalReligionPopSizeMap)
+	{
+		if (!v3CultureDefinitions.contains(culture)) // not touching default defs.
+			continue;
+		if (religionPopSizeMap.empty())
+			continue;
+		const auto dominantReligion = std::max_element(std::begin(religionPopSizeMap), std::end(religionPopSizeMap), [](const auto& p1, const auto& p2) {
+			return p1.second < p2.second;
+		});
+		v3CultureDefinitions.at(culture).religion = dominantReligion->first;
+	}
 }
