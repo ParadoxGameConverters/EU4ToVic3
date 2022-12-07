@@ -70,6 +70,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Info) << "<- Writing Localizations";
 	exportCountryNamesAndAdjectives(outputName, world.getPoliticalManager().getCountries());
 	exportReligionLocs(outputName, world.getReligionMapper().getV3ReligionDefinitions());
+	exportCultureLocs(outputName, world.getCultureMapper().getV3CultureDefinitions());
 	Log(LogLevel::Progress) << "91 %";
 
 	Log(LogLevel::Info) << "<- Writing Provinces";
