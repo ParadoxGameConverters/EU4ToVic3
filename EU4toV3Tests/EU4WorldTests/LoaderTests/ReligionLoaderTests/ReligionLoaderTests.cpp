@@ -27,7 +27,7 @@ TEST(EU4World_ReligionLoaderTests, religionNamesCanBeImported)
 	for (const auto& name: theReligions.getAllReligions() | std::views::keys)
 		religionNames.emplace(name);
 
-	EXPECT_THAT(religionNames, UnorderedElementsAre("religion_2", "religion_3", "converted_dynamic_faith_107", "converted_dynamic_faith_108"));
+	EXPECT_THAT(religionNames, UnorderedElementsAre("religion_2", "religion_3", "converted_dynamic_faith_107", "converted_dynamic_faith_108", "shamanism"));
 }
 
 TEST(EU4World_ReligionLoaderTests, religionsImportWithCorrectReligiousGroups)
@@ -43,7 +43,8 @@ TEST(EU4World_ReligionLoaderTests, religionsImportWithCorrectReligiousGroups)
 		 UnorderedElementsAre(std::pair("religion_2", EU4::Religion("religion_2", "mod_group_1")),
 			  std::pair("religion_3", EU4::Religion("religion_3", "mod_group_1")),
 			  std::pair("converted_dynamic_faith_107", EU4::Religion("converted_dynamic_faith_107", "mod_group_2", "shamanism")),
-			  std::pair("converted_dynamic_faith_108", EU4::Religion("converted_dynamic_faith_108", "mod_group_3"))));
+			  std::pair("converted_dynamic_faith_108", EU4::Religion("converted_dynamic_faith_108", "mod_group_3")),
+			  std::pair("shamanism", EU4::Religion("shamanism", "mod_group_1"))));
 }
 
 TEST(EU4World_ReligionLoaderTests, trappingsAreLoadedForSaneCustomReligions)

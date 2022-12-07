@@ -1,5 +1,8 @@
-# This file uses an old version of the parser and supports nothing but straight mappings.
-# You can queue different eu4 religions behind a single v2 religion, but no region/owner/province differentiation is possible.
+# This mapping file is for DIRECT mapping of EU4 religions into EXISTING vic3 religions. 
+# If you add something here, be sure it's definition EXISTS either in vic3's common/religions/religion.txt
+# or in blankmod/output/common/religions/religion.txt
+# 
+# Whatever is not here will be generated automatically using religion_group_map.txt
 
 #Christians
 
@@ -21,7 +24,6 @@ link = { vic3 = sikh eu4 = sikhism }
 link = { vic3 = hindu eu4 = hinduism }
 link = { vic3 = shinto eu4 = shinto }
 link = { vic3 = gelugpa eu4 = vajrayana }
-link = { vic3 = muism eu4 = muism }
 
 # Major Pagans
 link = { vic3 = animist eu4 = animism eu4 = pagan_religion_reformed eu4 = converted_siberian_pagan eu4 = dreamtime }
@@ -40,6 +42,3 @@ link = { vic3 = animist eu4 = vasconic eu4 = berber_pagan }
 
 #Judaism
 link = { vic3 = jewish eu4 = jewish eu4 = tzadikite }
-
-#Other
-link = { vic3 = noreligion eu4 = noreligion }

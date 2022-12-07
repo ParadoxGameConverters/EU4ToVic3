@@ -1,5 +1,6 @@
 #ifndef RELIGION_H
 #define RELIGION_H
+#include "Color.h"
 #include <string>
 
 namespace EU4
@@ -16,6 +17,7 @@ struct Religion
 	std::string name;
 	std::string group;
 	std::string trappings; // a converted_dynamic_faith_107 can have "orthodox" trappings if split from orthodox in ck3 regardless of actual group.
+	std::optional<commonItems::Color> color;
 };
 } // namespace EU4
 

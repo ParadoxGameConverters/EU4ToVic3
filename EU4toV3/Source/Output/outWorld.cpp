@@ -4,6 +4,7 @@
 #include "outLocalizations/outLocalizations.h"
 #include "outMetadataFile/outMetadataFile.h"
 #include "outPops/outPops.h"
+#include "outReligions/outReligions.h"
 #include "outStates/outCommonHistoryStates.h"
 #include <fstream>
 
@@ -65,8 +66,9 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Info) << "<- Writing Flags";
 	Log(LogLevel::Progress) << "90 %";
 
-	Log(LogLevel::Info) << "<- Writing Localization Text";
+	Log(LogLevel::Info) << "<- Writing Localizations";
 	exportCountryNamesAndAdjectives(outputName, world.getPoliticalManager().getCountries());
+	exportReligionLocs(outputName, world.getReligionMapper().getV3ReligionDefinitions());
 	Log(LogLevel::Progress) << "91 %";
 
 	Log(LogLevel::Info) << "<- Writing Provinces";
@@ -86,6 +88,8 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Progress) << "96 %";
 
 	Log(LogLevel::Info) << "<- Writing Religion Definitions";
+	exportReligions(outputName, world.getReligionMapper().getV3ReligionDefinitions());
+
 	Log(LogLevel::Info) << "<- Writing Pops";
 	exportPops(outputName, world.getClayManager().getStates());
 	Log(LogLevel::Progress) << "97 %";

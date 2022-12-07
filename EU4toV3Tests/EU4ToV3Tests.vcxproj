@@ -113,6 +113,7 @@
     <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\DefinitionScraper\DefinitionScraper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\LocalizationLoader\EU4LocalizationLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ModLoader\ModNames.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ReligionLoader\ReligionEntry.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ReligionLoader\ReligionLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ReligionLoader\ReligionParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\UnitTypeLoader\UnitTypeLoader.cpp" />
@@ -138,6 +139,10 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMappingsVersion.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDefinitionEntry.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDefinitionLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionGroupMapper\ReligionGroupMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionGroupMapper\ReligionGroupMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\AssimilationParser.cpp" />
@@ -210,6 +215,7 @@
     <ClCompile Include="EU4WorldTests\LoaderTests\DefinitionScraperTests\DefinitionScraperTests.cpp" />
     <ClCompile Include="EU4WorldTests\LoaderTests\LocalizationLoaderTests\EU4LocalizationTests.cpp" />
     <ClCompile Include="EU4WorldTests\LoaderTests\ModLoaderTests\ModNamesTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\ReligionLoaderTests\ReligionEntryTests.cpp" />
     <ClCompile Include="EU4WorldTests\LoaderTests\ReligionLoaderTests\ReligionLoaderTests.cpp" />
     <ClCompile Include="EU4WorldTests\LoaderTests\ReligionLoaderTests\ReligionParserTests.cpp" />
     <ClCompile Include="EU4WorldTests\LoaderTests\UnitTypeLoaderTests\UnitTypeLoaderTests.cpp" />
@@ -235,6 +241,10 @@
     <ClCompile Include="MapperTests\ProvinceMapperTests\ProvinceMapperTests.cpp" />
     <ClCompile Include="MapperTests\ProvinceMapperTests\ProvinceMappingsVersionTests.cpp" />
     <ClCompile Include="MapperTests\ProvinceMapperTests\ProvinceMappingTests.cpp" />
+    <ClCompile Include="MapperTests\ReligionMapperTests\ReligionDefinitionLoaderTests\ReligionDefinitionEntryTests.cpp" />
+    <ClCompile Include="MapperTests\ReligionMapperTests\ReligionDefinitionLoaderTests\ReligionDefinitionLoaderTests.cpp" />
+    <ClCompile Include="MapperTests\ReligionMapperTests\ReligionGroupMapperTests\ReligionGroupMapperTests.cpp" />
+    <ClCompile Include="MapperTests\ReligionMapperTests\ReligionGroupMapperTests\ReligionGroupMappingTests.cpp" />
     <ClCompile Include="MapperTests\ReligionMapperTests\ReligionMapperTests.cpp" />
     <ClCompile Include="MapperTests\ReligionMapperTests\ReligionMappingTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\AssimilationParserTests.cpp" />
@@ -481,6 +491,16 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\states\01_additional.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/states</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\religions\religion.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/religions</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\religion_group_map.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
