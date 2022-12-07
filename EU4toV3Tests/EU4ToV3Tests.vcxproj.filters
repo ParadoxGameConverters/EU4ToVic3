@@ -655,6 +655,18 @@
     <ClCompile Include="MapperTests\CultureMapperTests\NameListLoaderTests\NameListLoaderTests.cpp">
       <Filter>MapperTests\CultureMapperTests\NameListLoaderTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureTraitMapper\CultureTraitMapper.cpp">
+      <Filter>ConverterFiles\Mappers\CultureMapper\CultureTraitMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureTraitMapper\CultureTraitMapping.cpp">
+      <Filter>ConverterFiles\Mappers\CultureMapper\CultureTraitMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\CultureMapperTests\CultureTraitMapperTests\CultureTraitMapperTests.cpp">
+      <Filter>MapperTests\CultureMapperTests\CultureTraitMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\CultureMapperTests\CultureTraitMapperTests\CultureTraitMappingTests.cpp">
+      <Filter>MapperTests\CultureMapperTests\CultureTraitMapperTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1074,6 +1086,12 @@
     <Filter Include="MapperTests\CultureMapperTests\NameListLoaderTests">
       <UniqueIdentifier>{c7493d57-5ee6-4c3a-85f4-486d68fccbba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\Mappers\CultureMapper\CultureTraitMapper">
+      <UniqueIdentifier>{44e0bd2b-63e1-46f2-86b9-fdb5bd29d26e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\CultureMapperTests\CultureTraitMapperTests">
+      <UniqueIdentifier>{36c00db3-ffb7-4050-903e-f497f916532d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1223,6 +1241,9 @@
       <Filter>TestFiles\vic3installation\game\common\state_traits</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\name_lists.txt">
+      <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\culture_trait_map.txt">
       <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>
