@@ -667,6 +667,18 @@
     <ClCompile Include="MapperTests\CultureMapperTests\CultureTraitMapperTests\CultureTraitMappingTests.cpp">
       <Filter>MapperTests\CultureMapperTests\CultureTraitMapperTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListMapper\NameListMapper.cpp">
+      <Filter>ConverterFiles\Mappers\CultureMapper\NameListMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListMapper\NameListMapping.cpp">
+      <Filter>ConverterFiles\Mappers\CultureMapper\NameListMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\CultureMapperTests\NameListMapperTests\NameListMapperTests.cpp">
+      <Filter>MapperTests\CultureMapperTests\NameListMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\CultureMapperTests\NameListMapperTests\NameListMappingTests.cpp">
+      <Filter>MapperTests\CultureMapperTests\NameListMapperTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1092,6 +1104,12 @@
     <Filter Include="MapperTests\CultureMapperTests\CultureTraitMapperTests">
       <UniqueIdentifier>{36c00db3-ffb7-4050-903e-f497f916532d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\Mappers\CultureMapper\NameListMapper">
+      <UniqueIdentifier>{0f23d93f-f3ae-401f-9759-96cf954c7996}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\CultureMapperTests\NameListMapperTests">
+      <UniqueIdentifier>{98ff957a-ddc0-40ab-9567-cab8fe827811}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1244,6 +1262,9 @@
       <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\culture_trait_map.txt">
+      <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\name_list_map.txt">
       <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>
