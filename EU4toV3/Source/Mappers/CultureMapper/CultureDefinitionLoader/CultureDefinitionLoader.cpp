@@ -34,10 +34,3 @@ void mappers::CultureDefinitionLoader::registerKeys()
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
-
-std::optional<mappers::CultureDef> mappers::CultureDefinitionLoader::getCultureDef(const std::string& culture) const
-{
-	if (cultureDefinitions.contains(culture))
-		return cultureDefinitions.at(culture);
-	return std::nullopt;
-}

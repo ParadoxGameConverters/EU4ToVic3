@@ -1,6 +1,8 @@
 #include "ClayManager/ClayManager.h"
+#include "CommonFunctions.h"
 #include "CultureLoader/CultureLoader.h"
 #include "CultureMapper/CultureMapper.h"
+#include "LocalizationLoader/EU4LocalizationLoader.h"
 #include "ReligionLoader/ReligionLoader.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
@@ -201,4 +203,71 @@ TEST(Mappers_CultureMapperTests, rulesCanBeExpandedWithUnmappedCultures)
 	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "unmapped_culture", "", "SOMESTATE", "");
 	ASSERT_TRUE(match);
 	EXPECT_EQ("unmapped_culture", *match);
+}
+
+TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
+{
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
+	culMapper.expandCulturalMappings(clayManager, cultureLoader, religionLoader);
+
+	EXPECT_TRUE(culMapper.getV3CultureDefinitions().empty());
+
+	std::stringstream input;
+	input << commonItems::utf8BOM << "l_english:\n";
+	input << " unmapped_culture: \"Unmapped\"\n";
+	input << " culture5: \"Culture 5\"\n";
+	EU4::EU4LocalizationLoader eu4LocLoader;
+	eu4LocLoader.loadLocalizations(input);
+
+	culMapper.generateCultureDefinitions(modFS,
+		 "TestFiles/configurables/name_lists.txt",
+		 "TestFiles/configurables/name_list_map.txt",
+		 "TestFiles/configurables/culture_trait_map.txt",
+		 cultureLoader,
+		 eu4LocLoader);
+
+	// eu4 cultures.txt defines cultures1-10 + unmapped_culture
+	// culture_map.txt maps everything except culture5 and unmapped_culture
+	// Those two will have defs generated as all the others are EXPECTED to have preset defs in vanilla + blankmod.
+	// (in reality they don't but that's not relevant).
+	//
+	// In addition, inside are vanilla defs for vculture1 and vculture2 which are not interesting.
+
+	ASSERT_EQ(4, culMapper.getV3CultureDefinitions().size());
+	EXPECT_TRUE(culMapper.getV3CultureDefinitions().contains("vculture1"));
+	EXPECT_TRUE(culMapper.getV3CultureDefinitions().contains("vculture2"));
+	const auto& def1 = culMapper.getV3CultureDefinitions().at("culture5");
+	const auto& def2 = culMapper.getV3CultureDefinitions().at("unmapped_culture");
+
+	// culture 5 maps via:
+	// link = { eu4group = culture_group trait = testtrait2 ethnicity = testable2 }
+	// link = { eu4group = culture_group name_pool = name_list_test2 }
+	EXPECT_EQ("culture5", def1.name);
+	EXPECT_FALSE(def1.color);
+	EXPECT_THAT(def1.traits, testing::UnorderedElementsAre("testtrait2"));
+	EXPECT_THAT(def1.maleCommonFirstNames, testing::UnorderedElementsAre("male3", "male4"));
+	EXPECT_THAT(def1.femaleCommonFirstNames, testing::UnorderedElementsAre("female3", "female4"));
+	EXPECT_THAT(def1.nobleLastNames, testing::UnorderedElementsAre("dyn3", "dyn4"));
+	EXPECT_THAT(def1.commonLastNames, testing::UnorderedElementsAre("dyn3", "dyn4"));
+	EXPECT_THAT(def1.maleRegalFirstNames, testing::UnorderedElementsAre("male3", "male4"));
+	EXPECT_THAT(def1.femaleRegalFirstNames, testing::UnorderedElementsAre("female3", "female4"));
+	EXPECT_TRUE(def1.regalLastNames.empty()); // we don't map these atm.
+	EXPECT_THAT(def1.ethnicities, testing::UnorderedElementsAre("testable2"));
+	EXPECT_EQ("generic", def1.graphics); // generic fallback for everyone.
+	EXPECT_EQ("Culture 5", def1.locBlock.at("english"));
+
+	// unmapped_culture has no mapping links whatsoever and is scraping defaults
+	EXPECT_EQ("unmapped_culture", def2.name);
+	EXPECT_FALSE(def2.color);
+	EXPECT_TRUE(def2.traits.empty());
+	EXPECT_TRUE(def2.maleCommonFirstNames.empty());
+	EXPECT_TRUE(def2.femaleCommonFirstNames.empty());
+	EXPECT_TRUE(def2.nobleLastNames.empty());
+	EXPECT_TRUE(def2.commonLastNames.empty());
+	EXPECT_TRUE(def2.maleRegalFirstNames.empty());
+	EXPECT_TRUE(def2.femaleRegalFirstNames.empty());
+	EXPECT_TRUE(def2.regalLastNames.empty());											 // we don't map these atm.
+	EXPECT_THAT(def2.ethnicities, testing::UnorderedElementsAre("neutral")); // fallback default
+	EXPECT_EQ("generic", def2.graphics);												 // generic fallback for everyone.
+	EXPECT_EQ("Unmapped", def2.locBlock.at("english"));
 }

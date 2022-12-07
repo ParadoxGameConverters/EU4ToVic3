@@ -4,23 +4,20 @@
 
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 
+TEST(Mappers_CultureDefinitionLoaderTests, LoaderDefaultsToDry)
+{
+	const mappers::CultureDefinitionLoader loader;
+	ASSERT_TRUE(loader.getDefinitions().empty());
+}
+
 TEST(Mappers_CultureDefinitionLoaderTests, CulturesCanBeRetrieved)
 {
 	mappers::CultureDefinitionLoader loader;
 	loader.loadDefinitions(modFS);
 
-	const auto& vculture2 = loader.getCultureDef("vculture2");
-	ASSERT_TRUE(vculture2);
+	ASSERT_TRUE(loader.getDefinitions().contains("vculture2"));
+	const auto& vculture2 = loader.getDefinitions().at("vculture2");
 
-	EXPECT_EQ("vculture2", vculture2->name);
-	EXPECT_THAT(vculture2->ethnicities, testing::UnorderedElementsAre("ethnotest2"));
-}
-
-TEST(Mappers_CultureDefinitionLoaderTests, MismatchReturnsNullopt)
-{
-	mappers::CultureDefinitionLoader loader;
-	loader.loadDefinitions(modFS);
-
-	const auto& culture = loader.getCultureDef("nonsense");
-	ASSERT_FALSE(culture);
+	EXPECT_EQ("vculture2", vculture2.name);
+	EXPECT_THAT(vculture2.ethnicities, testing::UnorderedElementsAre("ethnotest2"));
 }

@@ -13,7 +13,7 @@ class CultureDefinitionLoader: commonItems::parser
 	void loadDefinitions(const commonItems::ModFilesystem& modFS);
 	void loadDefinitions(std::istream& theStream);
 
-	[[nodiscard]] std::optional<CultureDef> getCultureDef(const std::string& culture) const;
+	[[nodiscard]] const auto& getDefinitions() const { return cultureDefinitions; }
 
   private:
 	void registerKeys();

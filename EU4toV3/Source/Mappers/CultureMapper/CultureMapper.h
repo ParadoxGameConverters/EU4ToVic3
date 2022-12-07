@@ -71,16 +71,6 @@ class CultureMapper: commonItems::parser
   private:
 	void registerKeys();
 
-	[[nodiscard]] static CultureDef generateCultureDefinition(const std::string& eu4CultureName,
-		 const CultureTraitMapper& cultureTraitMapper,
-		 const NameListMapper& nameListMapper,
-		 const NameListLoader& nameListLoader,
-		 const EU4::CultureLoader& cultureLoader,
-		 const EU4::EU4LocalizationLoader& eu4Locs);
-	[[nodiscard]] static std::set<std::string> breakDownCulturalName(const std::string& eu4CultureName);
-	static void copyEU4Names(CultureDef& cultureDef, const EU4::CultureParser& sourceCulture);
-	static void copyNamePoolNames(CultureDef& cultureDef, const NameListEntry& namePool);
-
 	std::vector<CultureMappingRule> cultureMapRules;
 	std::map<std::string, std::string> encounteredMacros;
 	std::set<std::string> unmappedCultures; // same name for eu4 as for vic3.
