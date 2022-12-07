@@ -19,6 +19,7 @@ struct CultureDef
 	std::set<std::string> regalLastNames;
 	std::set<std::string> ethnicities;
 	std::string graphics;
+	bool win1252Names = false;
 
 	std::map<std::string, std::string> locBlock;
 };

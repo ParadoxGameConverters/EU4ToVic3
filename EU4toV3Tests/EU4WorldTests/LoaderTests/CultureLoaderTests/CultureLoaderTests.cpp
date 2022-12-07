@@ -15,6 +15,29 @@ TEST(EU4World_CultureLoaderTests, cultureGroupsCanBeLoaded)
 	EXPECT_TRUE(groups.getCultureGroupsMap().contains("groupB"));
 }
 
+TEST(EU4World_CultureLoaderTests, GroupNameForCultureCanBeRetrieved)
+{
+	std::stringstream input;
+	input << "groupA = { cultureA = {} }\n";
+	input << "groupB = { cultureB = {} }\n";
+	EU4::CultureLoader groups;
+	groups.loadCultures(input);
+
+	EXPECT_EQ("groupA", groups.getGroupNameForCulture("cultureA"));
+	EXPECT_EQ("groupB", groups.getGroupNameForCulture("cultureB"));
+}
+
+TEST(EU4World_CultureLoaderTests, GroupNameForCultureReturnsNulloptForFailure)
+{
+	std::stringstream input;
+	input << "groupA = { cultureA = {} }\n";
+	input << "groupB = { cultureB = {} }\n";
+	EU4::CultureLoader groups;
+	groups.loadCultures(input);
+
+	EXPECT_EQ(std::nullopt, groups.getGroupNameForCulture("cultureC"));
+}
+
 TEST(EU4World_CultureLoaderTests, GroupForCultureCanBeRetrieved)
 {
 	std::stringstream input;
@@ -23,8 +46,8 @@ TEST(EU4World_CultureLoaderTests, GroupForCultureCanBeRetrieved)
 	EU4::CultureLoader groups;
 	groups.loadCultures(input);
 
-	EXPECT_EQ("groupA", groups.getGroupForCulture("cultureA"));
-	EXPECT_EQ("groupB", groups.getGroupForCulture("cultureB"));
+	EXPECT_EQ("groupA", groups.getGroupForCulture("cultureA")->getName());
+	EXPECT_EQ("groupB", groups.getGroupForCulture("cultureB")->getName());
 }
 
 TEST(EU4World_CultureLoaderTests, GroupForCultureReturnsNulloptForFailure)
@@ -36,6 +59,19 @@ TEST(EU4World_CultureLoaderTests, GroupForCultureReturnsNulloptForFailure)
 	groups.loadCultures(input);
 
 	EXPECT_EQ(std::nullopt, groups.getGroupForCulture("cultureC"));
+}
+
+TEST(EU4World_CultureLoaderTests, CultureCanBePinged)
+{
+	std::stringstream input;
+	input << "groupA = { cultureA = {} }\n";
+	input << "groupB = { cultureB = {} }\n";
+	EU4::CultureLoader groups;
+	groups.loadCultures(input);
+
+	EXPECT_TRUE(groups.containsCulture("cultureA"));
+	EXPECT_TRUE(groups.containsCulture("cultureB"));
+	EXPECT_FALSE(groups.containsCulture("cultureC"));
 }
 
 TEST(EU4World_CultureLoaderTests, mergableCultureGroupsCanBeMerged)

@@ -26,6 +26,12 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getEU4Localizations());
 	cultureMapper.loadMappingRules("configurables/culture_map.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
+	cultureMapper.generateCultureDefinitions(modFS,
+		 "configurables/name_lists.txt",
+		 "configurables/name_list_map.txt",
+		 "configurables/culture_trait_map.txt",
+		 sourceWorld.getCultureLoader(),
+		 sourceWorld.getEU4Localizations());
 	localizationLoader.scrapeLocalizations(modFS);
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";

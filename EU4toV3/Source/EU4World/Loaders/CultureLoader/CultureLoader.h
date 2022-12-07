@@ -15,7 +15,9 @@ class CultureLoader: commonItems::parser
 	void loadCultures(std::istream& theStream);
 
 	[[nodiscard]] const auto& getCultureGroupsMap() const { return cultureGroupsMap; }
-	[[nodiscard]] std::optional<std::string> getGroupForCulture(const std::string& culture) const;
+	[[nodiscard]] std::optional<std::string> getGroupNameForCulture(const std::string& culture) const;
+	[[nodiscard]] std::optional<CultureGroupParser> getGroupForCulture(const std::string& culture) const;
+	[[nodiscard]] bool containsCulture(const std::string& culture) const;
 
   private:
 	void registerKeys();

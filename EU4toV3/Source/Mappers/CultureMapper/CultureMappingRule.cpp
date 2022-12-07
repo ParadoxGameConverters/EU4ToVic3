@@ -64,7 +64,7 @@ std::optional<std::string> mappers::CultureMappingRule::cultureMatch(const V3::C
 		return std::nullopt;
 
 	// if we fail on both cultural match and culture group match, bail
-	const auto& incCultureGroup = cultureLoader.getGroupForCulture(eu4culture);
+	const auto& incCultureGroup = cultureLoader.getGroupNameForCulture(eu4culture);
 	if (!cultures.contains(eu4culture) && (!incCultureGroup || !cultureGroups.contains(*incCultureGroup)))
 		return std::nullopt;
 
