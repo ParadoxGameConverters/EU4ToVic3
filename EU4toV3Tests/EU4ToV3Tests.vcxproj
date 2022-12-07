@@ -134,6 +134,8 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\CountryMapper\CountryMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureMappingRule.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListLoader\NameListEntry.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListLoader\NameListLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\MergeBlock.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\NationMergeMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMapper.cpp" />
@@ -238,6 +240,8 @@
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMappingTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureMapperTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureMappingRuleTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\NameListLoaderTests\NameListEntryTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\NameListLoaderTests\NameListLoaderTests.cpp" />
     <ClCompile Include="MapperTests\NationMergeMapperTests\MergeBlocksTests.cpp" />
     <ClCompile Include="MapperTests\NationMergeMapperTests\NationMergeMapperTests.cpp" />
     <ClCompile Include="MapperTests\ProvinceMapperTests\ProvinceMapperTests.cpp" />
@@ -510,6 +514,11 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\state_traits\test_state_traits.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/state_traits</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\name_lists.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

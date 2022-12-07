@@ -59,6 +59,7 @@ class CultureMapper: commonItems::parser
 
 	std::vector<CultureMappingRule> cultureMapRules;
 	std::map<std::string, std::string> encounteredMacros;
+	std::set<std::string> unmappedCultures; // same name for eu4 as for vic3.
 };
 } // namespace mappers
 

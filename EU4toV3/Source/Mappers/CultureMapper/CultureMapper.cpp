@@ -121,21 +121,19 @@ void mappers::CultureMapper::expandCulturalMappings(const V3::ClayManager& clayM
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader)
 {
-	std::set<std::string> missingEU4Cultures;
-
 	// We'll simply iterate over all known eu4 cultures, see what maps, and then add literal mappings for what doesn't.
 
 	for (const auto& cultureGroup: cultureLoader.getCultureGroupsMap() | std::views::values)
 		for (const auto& cultureName: cultureGroup.getCultures() | std::views::keys)
 			if (!cultureMatch(clayManager, cultureLoader, religionLoader, cultureName, "", "", "", true))
-				missingEU4Cultures.emplace(cultureName);
+				unmappedCultures.emplace(cultureName);
 
-	for (const auto& culture: missingEU4Cultures)
+	for (const auto& culture: unmappedCultures)
 	{
 		CultureMappingRule newRule;
 		newRule.loadMappingRules("vic3 = " + culture + " eu4 = " + culture);
 		cultureMapRules.push_back(newRule);
 	}
 
-	Log(LogLevel::Info) << "<> Additional " << missingEU4Cultures.size() << " cultures imported.";
+	Log(LogLevel::Info) << "<> Additional " << unmappedCultures.size() << " cultures imported.";
 }
