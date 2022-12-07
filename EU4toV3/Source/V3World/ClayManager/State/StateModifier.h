@@ -20,13 +20,13 @@ class StateModifier: commonItems::parser
 	[[nodiscard]] const auto& getBuildingGroupModifiersMap() const { return buildingGroupModifiers; }
 	[[nodiscard]] const auto& getBuildingModifiersMap() const { return buildingModifiers; }
 	[[nodiscard]] const auto& getGoodsModifiersMap() const { return goodsModifiers; }
-	[[nodiscard]] const std::optional<double> getBuildingGroupModifier(const std::string& buildingGroup, std::shared_ptr<BuildingGroups> bgs) const;
-	[[nodiscard]] const std::optional<double> getBuildingModifier(const std::string& building) const;
-	[[nodiscard]] const std::optional<double> getGoodsModifier(const std::string& good) const;
+	[[nodiscard]] std::optional<double> getBuildingGroupModifier(const std::string& buildingGroup, std::shared_ptr<BuildingGroups> bgs) const;
+	[[nodiscard]] std::optional<double> getBuildingModifier(const std::string& building) const;
+	[[nodiscard]] std::optional<double> getGoodsModifier(const std::string& good) const;
 
   private:
 	void registerKeys();
-	commonItems::parser modiferUnwrapper;
+	commonItems::parser modifierUnwrapper;
 
 	std::string name; // state_trait_natural_harbors
 
@@ -36,7 +36,7 @@ class StateModifier: commonItems::parser
 	int navalBase = 0;
 	std::map<std::string, double> buildingGroupModifiers; // building_group to throughput modifier
 	std::map<std::string, double> buildingModifiers;		// building to throughput modifier
-	std::map<std::string, double> goodsModifiers;			// good to goods throughtput modifier
+	std::map<std::string, double> goodsModifiers;			// good to goods throughput modifier
 };
 } // namespace V3
 

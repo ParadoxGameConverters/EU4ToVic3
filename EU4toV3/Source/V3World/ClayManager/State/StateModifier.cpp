@@ -1,21 +1,20 @@
 #include "StateModifier.h"
 #include "CommonRegexes.h"
-#include "Log.h"
 #include "ParserHelpers.h"
 
 void V3::StateModifier::loadStateModifier(std::istream& theStream)
 {
 	registerKeys();
-	modiferUnwrapper.parseStream(theStream);
+	modifierUnwrapper.parseStream(theStream);
 	clearRegisteredKeywords();
 }
 
 void V3::StateModifier::registerKeys()
 {
-	modiferUnwrapper.registerKeyword("modifier", [this](std::istream& theStream) {
+	modifierUnwrapper.registerKeyword("modifier", [this](std::istream& theStream) {
 		parseStream(theStream);
 	});
-	modiferUnwrapper.IgnoreUnregisteredItems();
+	modifierUnwrapper.IgnoreUnregisteredItems();
 
 	registerKeyword("state_building_port_max_level_add", [this](std::istream& theStream) {
 		port = commonItems::getInt(theStream);
@@ -47,7 +46,7 @@ void V3::StateModifier::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-const std::optional<double> V3::StateModifier::getBuildingGroupModifier(const std::string& buildingGroup, std::shared_ptr<BuildingGroups> bgs) const
+std::optional<double> V3::StateModifier::getBuildingGroupModifier(const std::string& buildingGroup, std::shared_ptr<BuildingGroups> bgs) const
 {
 	std::string theBuildingGroup = buildingGroup;
 	do
@@ -61,7 +60,7 @@ const std::optional<double> V3::StateModifier::getBuildingGroupModifier(const st
 	return std::nullopt;
 }
 
-const std::optional<double> V3::StateModifier::getBuildingModifier(const std::string& building) const
+std::optional<double> V3::StateModifier::getBuildingModifier(const std::string& building) const
 {
 	if (const auto& possibleModifier = buildingModifiers.find(building); possibleModifier != buildingModifiers.end())
 	{
@@ -70,7 +69,7 @@ const std::optional<double> V3::StateModifier::getBuildingModifier(const std::st
 	return std::nullopt;
 }
 
-const std::optional<double> V3::StateModifier::getGoodsModifier(const std::string& good) const
+std::optional<double> V3::StateModifier::getGoodsModifier(const std::string& good) const
 {
 	if (const auto& possibleModifier = goodsModifiers.find(good); possibleModifier != goodsModifiers.end())
 	{
