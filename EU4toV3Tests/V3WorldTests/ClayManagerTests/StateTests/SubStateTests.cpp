@@ -9,6 +9,8 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+#include "ClayManager/State/Province.h"
+
 TEST(V3World_SubStateTests, OwnerTagCanBeSetAndRetrieved)
 {
 	V3::SubState subState;
@@ -120,4 +122,48 @@ TEST(V3World_SubStateTests, SubStateCanGeneratePopsFromDemographics)
 	EXPECT_EQ("cul2", pop2.getCulture());
 	EXPECT_EQ("rel2", pop2.getReligion());
 	EXPECT_EQ(700, pop2.getSize());
+}
+
+TEST(V3World_SubStateTests, TerrainFrequencyNormalizes)
+{
+	auto substate = V3::SubState();
+
+	auto p0 = std::make_shared<V3::Province>();
+	p0->setName("x112233");
+	p0->setTerrain("desert");
+	auto p1 = std::make_shared<V3::Province>();
+	p1->setName("x445566");
+	p1->setTerrain("plains");
+	auto p2 = std::make_shared<V3::Province>();
+	p2->setName("x778899");
+	p2->setTerrain("plains");
+
+	const V3::ProvinceMap provinces{{p0->getName(), p0}, {p1->getName(), p1}, {p2->getName(), p2}};
+	substate.setProvinces(provinces);
+
+	EXPECT_DOUBLE_EQ(1.0 / 3, substate.getTerrainFrequency("desert"));
+	EXPECT_DOUBLE_EQ(2.0 / 3, substate.getTerrainFrequency("plains"));
+}
+
+TEST(V3World_SubStateTests, coastalFlagCountsAsTerrain)
+{
+	auto substate = V3::SubState();
+
+	auto p0 = std::make_shared<V3::Province>();
+	p0->setName("x112233");
+	p0->setTerrain("desert");
+	p0->setCoastal();
+	auto p1 = std::make_shared<V3::Province>();
+	p1->setName("x445566");
+	p1->setTerrain("plains");
+	auto p2 = std::make_shared<V3::Province>();
+	p2->setName("x778899");
+	p2->setTerrain("plains");
+
+	const V3::ProvinceMap provinces{{p0->getName(), p0}, {p1->getName(), p1}, {p2->getName(), p2}};
+	substate.setProvinces(provinces);
+
+	EXPECT_DOUBLE_EQ(1.0 / 4, substate.getTerrainFrequency("desert"));
+	EXPECT_DOUBLE_EQ(2.0 / 4, substate.getTerrainFrequency("plains"));
+	EXPECT_DOUBLE_EQ(1.0 / 4, substate.getTerrainFrequency("coastal"));
 }

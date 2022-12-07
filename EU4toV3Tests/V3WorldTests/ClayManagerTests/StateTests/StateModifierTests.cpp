@@ -10,7 +10,7 @@ TEST(V3World_StateModifierTests, DefaultsDefaultToDefaults)
 
 	EXPECT_TRUE(modifier.getName().empty());
 	EXPECT_EQ(0, modifier.getInfrastructureBonus());
-	EXPECT_EQ(0, modifier.getInfrastructureModifier());
+	EXPECT_EQ(0, modifier.getInfrastructureMult());
 	EXPECT_EQ(0, modifier.getPortBonus());
 	EXPECT_EQ(0, modifier.getNavalBaseBonus());
 	EXPECT_TRUE(modifier.getBuildingGroupModifiersMap().empty());
@@ -43,7 +43,7 @@ TEST(V3World_StateModifierTests, InfrastructureModifierIsSet)
 	V3::StateModifier modifier;
 	modifier.loadStateModifier(input);
 
-	EXPECT_EQ(-0.4, modifier.getInfrastructureModifier());
+	EXPECT_EQ(-0.4, modifier.getInfrastructureMult());
 }
 
 TEST(V3World_StateModifierTests, PortBonusIsSet)
