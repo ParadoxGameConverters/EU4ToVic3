@@ -3,14 +3,32 @@
 #include "Mappers/CultureMapper/CultureMapper.h"
 #include "Mappers/ReligionMapper/ReligionMapper.h"
 #include "PoliticalManager/Country/Country.h"
+#include "Province.h"
 #include "ProvinceManager/PopRatio.h"
 #include "State.h"
 #include <cmath>
 #include <numeric>
 #include <ranges>
 
+
 V3::SubState::SubState(std::shared_ptr<State> theHomeState, ProvinceMap theProvinces): homeState(std::move(theHomeState)), provinces(std::move(theProvinces))
 {
+	calculateTerrainFrequency();
+}
+
+void V3::SubState::setProvinces(const ProvinceMap& theProvinces)
+{
+	provinces = theProvinces;
+	calculateTerrainFrequency();
+}
+
+bool V3::SubState::isCoastal() const
+{
+	if (const auto& coastalFreq = terrainFrequency.find("coastal"); coastalFreq != terrainFrequency.end())
+	{
+		return coastalFreq->second > 0;
+	}
+	return false;
 }
 
 std::optional<std::string> V3::SubState::getOwnerTag() const
@@ -32,6 +50,55 @@ const std::string& V3::SubState::getHomeStateName() const
 		Log(LogLevel::Warning) << "Attempted to access the name of a nullptr state from a substate. Returning empty name.";
 		return empty;
 	}
+}
+
+void V3::SubState::calculateTerrainFrequency()
+{
+	for (const auto& province: std::views::values(provinces))
+	{
+		terrainFrequency[province->getTerrain()] += 1;
+		if (province->isCoastal())
+		{
+			// By doubling counting provinces as coastal, coastal_mountains are differentiated from coastal_plains
+			terrainFrequency["coastal"] += 1;
+		}
+	}
+
+	const auto& frequencies = std::views::values(terrainFrequency);
+	const double total = std::reduce(frequencies.begin(), frequencies.end());
+
+	for (const auto& [terrain, count]: terrainFrequency)
+	{
+		terrainFrequency[terrain] = count / total;
+	}
+}
+
+void V3::SubState::calculateInfrastructure(const std::map<std::string, std::shared_ptr<StateModifier>>& theStateModifiers)
+{
+	// (Pop * tech) is capped by tech
+	double popInfra = subStatePops.getPopCount() * owner->getTechInfraMult();
+	if (const int cap = owner->getTechInfraCap(); popInfra > cap)
+	{
+		popInfra = cap;
+	}
+
+	int stateModBonus = 0;
+	double stateModMultipliers = 0;
+
+	// TODO(Gawquon): Validate stateModifier strings in country are recognized loaded in modifiers, but where to do so?
+	for (const auto& stateModifier: getHomeState()->getTraits())
+	{
+		stateModBonus += theStateModifiers.at(stateModifier)->getInfrastructureBonus();
+		stateModMultipliers += theStateModifiers.at(stateModifier)->getInfrastructureMult();
+	}
+
+	// Principal = Base + isCoastal(substate lvl) + State modifier bonus + (Pop * tech)_capped
+	const double infraBase = 3 + 2 * isCoastal() + stateModBonus + popInfra;
+
+	// Multipliers are additive, market capital + incorporation status + state modifier multipliers
+	const double multipliers = 0.25 * marketCapital + -0.25 * !incorporated + stateModMultipliers;
+
+	infrastructure = infraBase * multipliers;
 }
 
 void V3::SubState::convertDemographics(const ClayManager& clayManager,

@@ -14,7 +14,7 @@ class StateModifier: commonItems::parser
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getInfrastructureBonus() const { return infrastructure; }
-	[[nodiscard]] const auto& getInfrastructureModifier() const { return infrastructureModifier; }
+	[[nodiscard]] const auto& getInfrastructureMult() const { return infrastructureMult; }
 	[[nodiscard]] const auto& getPortBonus() const { return port; }
 	[[nodiscard]] const auto& getNavalBaseBonus() const { return navalBase; }
 	[[nodiscard]] const auto& getBuildingGroupModifiersMap() const { return buildingGroupModifiers; }
@@ -31,7 +31,7 @@ class StateModifier: commonItems::parser
 	std::string name; // state_trait_natural_harbors
 
 	int infrastructure = 0;
-	double infrastructureModifier = 0.0;
+	double infrastructureMult = 0.0;
 	int port = 0;
 	int navalBase = 0;
 	std::map<std::string, double> buildingGroupModifiers; // building_group to throughput modifier

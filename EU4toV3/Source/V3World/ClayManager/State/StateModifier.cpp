@@ -27,7 +27,7 @@ void V3::StateModifier::registerKeys()
 		infrastructure = commonItems::getInt(theStream);
 	});
 	registerKeyword("state_infrastructure_mult", [this](std::istream& theStream) {
-		infrastructureModifier = commonItems::getDouble(theStream);
+		infrastructureMult = commonItems::getDouble(theStream);
 	});
 	registerRegex(R"(building_output_\w+_mult)", [this](const std::string& modifierName, std::istream& theStream) {
 		// Goods based throughput modifiers

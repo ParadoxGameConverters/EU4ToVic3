@@ -4,6 +4,7 @@
 #include "PopManager/Demographic.h"
 #include "PopManager/Pops/SubStatePops.h"
 #include "SourceProvinceData.h"
+#include "StateModifier.h"
 #include <optional>
 
 /* A Substate is a cross-section across a set of chunks where all relevant chunk provinces fall within a geographical V3 state.
@@ -36,7 +37,7 @@ class SubState
 
 	void setHomeState(const std::shared_ptr<State>& theState) { homeState = theState; }
 	void setOwner(const std::shared_ptr<Country>& theOwner) { owner = theOwner; }
-	void setProvinces(const ProvinceMap& theProvinces) { provinces = theProvinces; }
+	void setProvinces(const ProvinceMap& theProvinces);
 	void setSubStateType(const std::string& theType) { subStateType = theType; }
 
 	void setSourceOwnerTag(const std::string& sourceTag) { sourceOwnerTag = sourceTag; }
@@ -44,7 +45,7 @@ class SubState
 	void setSourceProvinceData(const std::vector<std::pair<SourceProvinceData, double>>& theData) { weightedSourceProvinceData = theData; }
 
 	void setLandshare(const double theLandshare) { landshare = theLandshare; }
-	void setResource(const std::string& theResource, int theAmount) { resources[theResource] = theAmount; }
+	void setResource(const std::string& theResource, const int theAmount) { resources[theResource] = theAmount; }
 	void setDemographics(const std::vector<Demographic>& demos) { demographics = demos; }
 	void setSubStatePops(const SubStatePops& thePops) { subStatePops = thePops; }
 	void addPop(const Pop& pop) { subStatePops.addPop(pop); }
@@ -66,15 +67,23 @@ class SubState
 	[[nodiscard]] const auto& getWeight() const { return weight; }
 	[[nodiscard]] const auto& getSourceProvinceData() const { return weightedSourceProvinceData; }
 
-	[[nodiscard]] auto getLandshare() const { return landshare; }
+	[[nodiscard]] const auto& getLandshare() const { return landshare; }
+	[[nodiscard]] const auto& getInfrastructure() const { return infrastructure; }
 	[[nodiscard]] const auto& getResource(const std::string& theResource) { return resources[theResource]; }
 	[[nodiscard]] const auto& getDemographics() const { return demographics; }
 	[[nodiscard]] const auto& getSubStatePops() const { return subStatePops; }
+
+	[[nodiscard]] auto isIncorporated() const { return incorporated; }
+	[[nodiscard]] auto isMarketCapital() const { return marketCapital; }
+	[[nodiscard]] bool isCoastal() const;
 
 	[[nodiscard]] std::optional<std::string> getOwnerTag() const;
 	[[nodiscard]] const std::string& getHomeStateName() const;
 
   private:
+	void calculateTerrainFrequency();
+	void calculateInfrastructure(const std::map<std::string, std::shared_ptr<StateModifier>>& theStateModifiers);
+
 	std::shared_ptr<State> homeState; // home state
 	std::shared_ptr<Country> owner;
 	ProvinceMap provinces; // V3 province codes
@@ -84,8 +93,12 @@ class SubState
 	std::optional<double> weight;					 // imported scaled sourceProvinceWeight from whatever source province(s) point generally here.
 	std::vector<std::pair<SourceProvinceData, double>> weightedSourceProvinceData;
 
-	double landshare = 0; // % of State's resources that are substate's
-	std::map<std::string, int> resources;
+	bool incorporated = true;
+	bool marketCapital = false;
+	double landshare = 0.0;									// % of State's resources that are substate's
+	double infrastructure = 0.0;							// limits the amount of industry a substate can support
+	std::map<std::string, int> resources;				// potential for a given resource based on landshare
+	std::map<std::string, double> terrainFrequency; // Normalized vector (math-wise) of terrain in substate as %
 	std::vector<Demographic> demographics;
 	SubStatePops subStatePops;
 };
