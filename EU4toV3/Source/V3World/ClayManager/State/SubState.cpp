@@ -6,6 +6,7 @@
 #include "Province.h"
 #include "ProvinceManager/PopRatio.h"
 #include "State.h"
+#include "StateModifier.h"
 #include <cmath>
 #include <numeric>
 #include <ranges>

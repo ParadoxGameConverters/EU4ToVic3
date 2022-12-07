@@ -4,7 +4,6 @@
 #include "PopManager/Demographic.h"
 #include "PopManager/Pops/SubStatePops.h"
 #include "SourceProvinceData.h"
-#include "StateModifier.h"
 #include <optional>
 
 /* A Substate is a cross-section across a set of chunks where all relevant chunk provinces fall within a geographical V3 state.
@@ -28,6 +27,7 @@ namespace V3
 class Country;
 class Chunk;
 class State;
+class StateModifier;
 class ClayManager;
 class SubState
 {

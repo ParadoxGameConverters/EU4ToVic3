@@ -1,4 +1,5 @@
 #include "ClayManager/ClayManager.h"
+#include "ClayManager/State/Province.h"
 #include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "CultureLoader/CultureLoader.h"
@@ -8,8 +9,6 @@
 #include "ReligionLoader/ReligionLoader.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
-
-#include "ClayManager/State/Province.h"
 
 TEST(V3World_SubStateTests, OwnerTagCanBeSetAndRetrieved)
 {
