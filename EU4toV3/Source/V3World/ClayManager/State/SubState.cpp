@@ -74,24 +74,33 @@ void V3::SubState::calculateTerrainFrequency()
 	}
 }
 
-void V3::SubState::calculateInfrastructure(const std::map<std::string, std::shared_ptr<StateModifier>>& theStateModifiers)
+double V3::SubState::getPopInfrastructure() const
 {
-	// (Pop * tech) is capped by tech
-	double popInfra = subStatePops.getPopCount() * owner->getTechInfraMult();
+	const double popInfra = subStatePops.getPopCount() * owner->getTechInfraMult();
 	if (const int cap = owner->getTechInfraCap(); popInfra > cap)
 	{
-		popInfra = cap;
+		return cap;
 	}
+	return popInfra;
+}
 
-	int stateModBonus = 0;
-	double stateModMultipliers = 0;
-
-	// TODO(Gawquon): Validate stateModifier strings in country are recognized loaded in modifiers, but where to do so?
+std::pair<int, double> V3::SubState::getStateInfrastructureModifiers(const StateModifiers& theStateModifiers) const
+{
+	int bonus = 0;
+	double mult = 0;
 	for (const auto& stateModifier: getHomeState()->getTraits())
 	{
-		stateModBonus += theStateModifiers.at(stateModifier)->getInfrastructureBonus();
-		stateModMultipliers += theStateModifiers.at(stateModifier)->getInfrastructureMult();
+		bonus += theStateModifiers.at(stateModifier)->getInfrastructureBonus();
+		mult += theStateModifiers.at(stateModifier)->getInfrastructureMult();
 	}
+	return std::make_pair(bonus, mult);
+}
+
+void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifiers)
+{
+	// TODO(Gawquon): Validate stateModifier strings in country are recognized loaded in modifiers.
+	const double popInfra = getPopInfrastructure();
+	auto [stateModBonus, stateModMultipliers] = getStateInfrastructureModifiers(theStateModifiers);
 
 	// Principal = Base + isCoastal(substate lvl) + State modifier bonus + (Pop * tech)_capped
 	const double infraBase = 3 + 2 * isCoastal() + stateModBonus + popInfra;

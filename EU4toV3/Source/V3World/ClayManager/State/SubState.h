@@ -58,6 +58,8 @@ class SubState
 
 	void generatePops(int totalAmount);
 
+	void calculateInfrastructure(const StateModifiers& theStateModifiers);
+
 	[[nodiscard]] const auto& getHomeState() const { return homeState; }
 	[[nodiscard]] const auto& getOwner() const { return owner; }
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
@@ -83,7 +85,8 @@ class SubState
 
   private:
 	void calculateTerrainFrequency();
-	void calculateInfrastructure(const std::map<std::string, std::shared_ptr<StateModifier>>& theStateModifiers);
+	[[nodiscard]] double getPopInfrastructure() const;
+	[[nodiscard]] std::pair<int, double> getStateInfrastructureModifiers(const StateModifiers& theStateModifiers) const;
 
 	std::shared_ptr<State> homeState; // home state
 	std::shared_ptr<Country> owner;
