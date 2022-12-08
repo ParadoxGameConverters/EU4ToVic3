@@ -35,6 +35,7 @@ class Province: commonItems::convenientParser
 
 	[[nodiscard]] const auto& getBuildings() const { return buildings; }
 	[[nodiscard]] const auto& getProvinceHistory() const { return provinceHistory; }
+	void setProvinceHistory(const ProvinceHistory& history) { provinceHistory = history; }
 
 	[[nodiscard]] auto hasBuilding(const std::string& building) const { return buildings.contains(building); }
 	[[nodiscard]] auto hasGreatProject(const std::string& greatProject) const { return greatProjects.contains(greatProject); }
@@ -44,6 +45,7 @@ class Province: commonItems::convenientParser
 
 	void setAssimilationFactor(double factor) { assimilationFactor = factor; }
 	void buildPopRatios(const DatingData& datingData) { provinceHistory.buildPopRatios(assimilationFactor, datingData); }
+	void markNeoCulture(const std::string& theCulture) { provinceHistory.markNeoCulture(theCulture); }
 	void purgeHistories() { provinceHistory.purgeHistories(); }
 
 	[[nodiscard]] double getCulturePercent(const std::string& theCulture) const;

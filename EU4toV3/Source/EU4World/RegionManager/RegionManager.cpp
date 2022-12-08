@@ -65,6 +65,7 @@ void EU4::RegionManager::loadRegions(const std::string& EU4Path, const Mods& mod
 	linkSuperRegions();
 	linkRegions();
 	superGroupMapper.loadSuperGroups();
+	applySuperGroups();
 }
 
 void EU4::RegionManager::loadRegions(std::istream& areaStream, std::istream& regionStream, std::istream& superRegionStream)
@@ -244,8 +245,7 @@ void EU4::RegionManager::applySuperGroups()
 	for (const auto& [superRegionName, superRegion]: superRegions)
 	{
 		superRegion->setAssimilationFactor(superGroupMapper.getAssimilationFactor(superRegionName));
-		const auto& superGroup = superGroupMapper.getGroupForSuperRegion(superRegionName);
-		if (superGroup)
+		if (const auto& superGroup = superGroupMapper.getGroupForSuperRegion(superRegionName); superGroup)
 		{
 			superRegion->setSuperGroup(*superGroup);
 		}
@@ -272,31 +272,61 @@ std::optional<std::string> EU4::RegionManager::getColonialRegionForProvince(int 
 	return colonialRegionLoader.getColonialRegionForProvince(province);
 }
 
-void EU4::RegionManager::catalogueNativeCultures(const ProvinceManager& provinceManager)
+void EU4::RegionManager::catalogueNativeCultures(const ProvinceManager& provinceManager) const
 {
 	for (const auto& [provinceID, province]: provinceManager.getAllProvinces())
 	{
 		if (province->getStartingCulture().empty())
 			continue;
-		const auto& superRegionName = getParentSuperRegionName(provinceID);
-		if (superRegionName)
+		if (const auto& superRegionName = getParentSuperRegionName(provinceID); superRegionName)
 			superRegions.at(*superRegionName)->registerNativeCulture(province->getStartingCulture());
+	}
+}
+
+void EU4::RegionManager::flagNeoCultures(const ProvinceManager& provinceManager) const
+{
+	for (const auto& [provinceID, province]: provinceManager.getAllProvinces())
+	{
+		// Are its cultures native or require flagging?
+		for (const auto& popRatio: province->getProvinceHistory().getPopRatios())
+		{
+			const auto& culture = popRatio.getCulture();
+			if (doesProvinceRequireNeoCulture(provinceID, culture))
+				province->markNeoCulture(culture);
+		}
 	}
 }
 
 bool EU4::RegionManager::doesProvinceRequireNeoCulture(int provinceID, const std::string& culture) const
 {
-	// This one is funny. A province requires a neoculture if:
+	// This one is funny. A province requires a neoculture if all of these:
 	// 1. it belongs to a colonial region
 	// 2. the culture given (presumably from that very province) is not native to the province's superRegion.
+	// 3. superRegion of province is in different group than native superregion
 	// result of this function fuels generation of a new neoculture in cultureManager.
 
 	if (!getColonialRegionForProvince(provinceID))
 		return false; // not in colonial region.
 
 	const auto& superRegionName = getParentSuperRegionName(provinceID);
-	if (superRegionName)
-		return !superRegions.at(*superRegionName)->superRegionContainsNativeCulture(culture);
+	if (!superRegionName)
+		return false;
+	const auto& superRegion = superRegions.at(*superRegionName);
+	if (superRegion->superRegionContainsNativeCulture(culture))
+		return false;
+	// this here does the same thing as superregion check but is slower so we put it last. Most cultures won't trip it.
+	const auto& superGroupName = superRegion->getSuperGroup();
+	if (superGroupContainsNativeCulture(culture, superGroupName))
+		return false;
+	return true;
+}
+
+bool EU4::RegionManager::superGroupContainsNativeCulture(const std::string& culture, const std::string& superGroupName) const
+{
+	for (const auto& superRegion: superRegions | std::views::values)
+		if (superRegion->getSuperGroup() == superGroupName)
+			if (superRegion->superRegionContainsNativeCulture(culture))
+				return true;
 
 	return false;
 }

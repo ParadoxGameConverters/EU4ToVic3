@@ -35,9 +35,12 @@ class RegionManager: commonItems::parser
 	[[nodiscard]] bool doesProvinceRequireNeoCulture(int provinceID, const std::string& culture) const;
 
 	void applySuperGroups();
-	void catalogueNativeCultures(const ProvinceManager& provinceManager);
+	void catalogueNativeCultures(const ProvinceManager& provinceManager) const;
+	void flagNeoCultures(const ProvinceManager& provinceManager) const;
 
   private:
+	[[nodiscard]] bool superGroupContainsNativeCulture(const std::string& culture, const std::string& superGroupName) const;
+
 	void registerAreaKeys();
 	void registerSuperRegionKeys();
 	void registerRegionKeys();
