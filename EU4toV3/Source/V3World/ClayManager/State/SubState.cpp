@@ -90,6 +90,11 @@ std::pair<int, double> V3::SubState::getStateInfrastructureModifiers(const State
 	double mult = 0;
 	for (const auto& stateModifier: getHomeState()->getTraits())
 	{
+		if (!theStateModifiers.contains(stateModifier))
+		{
+			// should never happen
+			continue;
+		}
 		bonus += theStateModifiers.at(stateModifier)->getInfrastructureBonus();
 		mult += theStateModifiers.at(stateModifier)->getInfrastructureMult();
 	}
@@ -98,7 +103,6 @@ std::pair<int, double> V3::SubState::getStateInfrastructureModifiers(const State
 
 void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifiers)
 {
-	// TODO(Gawquon): Validate stateModifier strings in country are recognized loaded in modifiers.
 	const double popInfra = getPopInfrastructure();
 	auto [stateModBonus, stateModMultipliers] = getStateInfrastructureModifiers(theStateModifiers);
 
