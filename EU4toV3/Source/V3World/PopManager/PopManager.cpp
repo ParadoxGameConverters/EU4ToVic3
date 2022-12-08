@@ -37,7 +37,7 @@ std::optional<V3::SubStatePops> V3::PopManager::getVanillaSubStatePops(const std
 }
 
 void V3::PopManager::convertDemographics(const ClayManager& clayManager,
-	 const mappers::CultureMapper& cultureMapper,
+	 mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader) const

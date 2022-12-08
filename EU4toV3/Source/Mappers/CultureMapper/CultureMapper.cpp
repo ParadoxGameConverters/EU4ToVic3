@@ -185,80 +185,58 @@ void mappers::CultureMapper::registerKeys()
 	 const std::string& eu4religion,
 	 const std::string& v3state,
 	 const std::string& v3ownerTag,
-	 bool silent) const
+	 bool neoCultureRequest)
 {
 	for (const auto& cultureMappingRule: cultureMapRules)
-	{
-		const auto& possibleMatch = cultureMappingRule.cultureMatch(clayManager, cultureLoader, religionLoader, eu4culture, eu4religion, v3state, v3ownerTag);
-		if (possibleMatch)
+		if (const auto& possibleMatch = cultureMappingRule.cultureMatch(clayManager, cultureLoader, religionLoader, eu4culture, eu4religion, v3state, v3ownerTag);
+			 possibleMatch)
 			return *possibleMatch;
+
+	// if this culture is already recorded as unmapped, all is well.
+	if (unmappedCultures.contains(eu4culture))
+		return eu4culture;
+
+	// Is this a normal unmapped culture? We shouldn't be here - it should have been recorded when expanding unless it's not present in vanilla eu4 defs,
+	// which is bad in itself.
+	if (!neoCultureRequest)
+	{
+		Log(LogLevel::Warning) << "! CultureMapper - Attempting to match culture " << eu4culture << " in state " << v3state << " failed.";
+		unmappedCultures.emplace(eu4culture);
+		return eu4culture;
 	}
 
-	// If we failed to match, we're dealing with an unmapped culture, which can happen only if the culture is present in save but NOT in installation. Warn and
-	// bail.
-	if (!silent)
-	{
-		if (v3state.empty())
-			Log(LogLevel::Warning) << "! CultureMapper - Attempting to match culture " << eu4culture << " failed.";
-		else
-			Log(LogLevel::Warning) << "! CultureMapper - Attempting to match culture " << eu4culture << " in state " << v3state << " failed.";
-	}
-	return std::nullopt;
+	// For neoculture requests we need to consult and potentially expand our global registry.
+	return getNeoCultureMatch(eu4culture, v3state, clayManager);
 }
 
-std::optional<std::string> mappers::CultureMapper::cultureRegionalMatch(const V3::ClayManager& clayManager,
-	 const EU4::CultureLoader& cultureLoader,
-	 const EU4::ReligionLoader& religionLoader,
-	 const std::string& eu4culture,
-	 const std::string& eu4religion,
+std::optional<std::string> mappers::CultureMapper::getNeoCultureMatch(const std::string& eu4culture,
 	 const std::string& v3state,
-	 const std::string& v3ownerTag) const
+	 const V3::ClayManager& clayManager)
 {
-	for (const auto& cultureMappingRule: cultureMapRules)
-	{
-		const auto& possibleMatch =
-			 cultureMappingRule.cultureRegionalMatch(clayManager, cultureLoader, religionLoader, eu4culture, eu4religion, v3state, v3ownerTag);
-		if (possibleMatch)
-			return *possibleMatch;
-	}
-	return std::nullopt;
-}
+	if (v3state.empty())
+		return std::nullopt;
+	if (stateNeoCultureTargets.contains(v3state) && stateNeoCultureTargets.at(v3state).contains(eu4culture))
+		return stateNeoCultureTargets.at(v3state).at(eu4culture);
 
-std::optional<std::string> mappers::CultureMapper::cultureNonRegionalNonReligiousMatch(const V3::ClayManager& clayManager,
-	 const EU4::CultureLoader& cultureLoader,
-	 const EU4::ReligionLoader& religionLoader,
-	 const std::string& eu4culture,
-	 const std::string& eu4religion,
-	 const std::string& v3state,
-	 const std::string& v3ownerTag) const
-{
-	for (const auto& cultureMappingRule: cultureMapRules)
-	{
-		const auto& possibleMatch =
-			 cultureMappingRule.cultureNonRegionalNonReligiousMatch(clayManager, cultureLoader, religionLoader, eu4culture, eu4religion, v3state, v3ownerTag);
-		if (possibleMatch)
-			return *possibleMatch;
-	}
-	return std::nullopt;
+	// we have to generate a new neo culture.
+	auto generated = "new";
+
+	if (!stateNeoCultureTargets.contains(v3state))
+		stateNeoCultureTargets.emplace(v3state, std::map<std::string, std::string>{});
+	stateNeoCultureTargets.at(v3state).emplace(eu4culture, generated);
+	return generated;
 }
 
 void mappers::CultureMapper::expandCulturalMappings(const V3::ClayManager& clayManager,
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader)
 {
-	// We'll simply iterate over all known eu4 cultures, see what maps, and then add literal mappings for what doesn't.
+	// We'll simply iterate over all known eu4 cultures, see what maps, and then record what we see for the first time.
 
 	for (const auto& cultureGroup: cultureLoader.getCultureGroupsMap() | std::views::values)
 		for (const auto& cultureName: cultureGroup.getCultures() | std::views::keys)
-			if (!cultureMatch(clayManager, cultureLoader, religionLoader, cultureName, "", "", "", true))
+			if (!cultureMatch(clayManager, cultureLoader, religionLoader, cultureName, "", "", "", false))
 				unmappedCultures.emplace(cultureName);
-
-	for (const auto& culture: unmappedCultures)
-	{
-		CultureMappingRule newRule;
-		newRule.loadMappingRules("vic3 = " + culture + " eu4 = " + culture);
-		cultureMapRules.push_back(newRule);
-	}
 
 	Log(LogLevel::Info) << "<> Additional " << unmappedCultures.size() << " cultures imported.";
 }

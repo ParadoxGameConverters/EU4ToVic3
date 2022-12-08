@@ -34,6 +34,7 @@ class CultureMapper: commonItems::parser
 	void expandCulturalMappings(const V3::ClayManager& clayManager, const EU4::CultureLoader& cultureLoader, const EU4::ReligionLoader& religionLoader);
 
 	[[nodiscard]] const auto& getMacros() const { return encounteredMacros; }
+	[[nodiscard]] const auto& getUnMappedCultures() const { return unmappedCultures; }
 	[[nodiscard]] const auto& getV3CultureDefinitions() const { return v3CultureDefinitions; }
 
 	[[nodiscard]] std::optional<std::string> cultureMatch(const V3::ClayManager& clayManager,
@@ -43,21 +44,7 @@ class CultureMapper: commonItems::parser
 		 const std::string& eu4religion,
 		 const std::string& v3state,
 		 const std::string& v3ownerTag,
-		 bool silent = false) const;
-	[[nodiscard]] std::optional<std::string> cultureRegionalMatch(const V3::ClayManager& clayManager,
-		 const EU4::CultureLoader& cultureLoader,
-		 const EU4::ReligionLoader& religionLoader,
-		 const std::string& eu4culture,
-		 const std::string& eu4religion,
-		 const std::string& v3state,
-		 const std::string& v3ownerTag) const;
-	[[nodiscard]] std::optional<std::string> cultureNonRegionalNonReligiousMatch(const V3::ClayManager& clayManager,
-		 const EU4::CultureLoader& cultureLoader,
-		 const EU4::ReligionLoader& religionLoader,
-		 const std::string& eu4culture,
-		 const std::string& eu4religion,
-		 const std::string& v3state,
-		 const std::string& v3ownerTag) const;
+		 bool neoCultureRequest = false);
 
 	void generateCultureDefinitions(const commonItems::ModFilesystem& modFS,
 		 const std::string& nameListsPath,
@@ -69,12 +56,14 @@ class CultureMapper: commonItems::parser
 	void injectReligionsIntoCultureDefs(const V3::ClayManager& clayManager);
 
   private:
+	std::optional<std::string> getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager);
 	void registerKeys();
 
 	std::vector<CultureMappingRule> cultureMapRules;
 	std::map<std::string, std::string> encounteredMacros;
 	std::set<std::string> unmappedCultures; // same name for eu4 as for vic3.
 	std::map<std::string, CultureDef> v3CultureDefinitions;
+	std::map<std::string, std::map<std::string, std::string>> stateNeoCultureTargets; // state->[eu4 culture -> v3 neoculture]
 };
 } // namespace mappers
 

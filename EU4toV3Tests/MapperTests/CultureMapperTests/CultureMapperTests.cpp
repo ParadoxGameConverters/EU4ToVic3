@@ -28,17 +28,19 @@ std::tuple<mappers::CultureMapper, V3::ClayManager, EU4::CultureLoader, EU4::Rel
 	return std::tuple{culMapper, clayManager, cultureLoader, religionLoader};
 }
 
-TEST(Mappers_CultureMapperTests, noMatchesGiveEmptyOptionalAndWarns)
+TEST(Mappers_CultureMapperTests, noMatchesMatchesRequestRecordsAndWarnsOnce)
 {
 	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
 	std::cout.rdbuf(log.rdbuf());
-	EXPECT_FALSE(culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "nonsense", "", "SOMESTATE", ""));
+	const auto& match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "nonsense", "", "SOMESTATE", "");
 	std::cout.rdbuf(cout_buffer);
 
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] ! CultureMapper - Attempting to match culture nonsense in state SOMESTATE failed.)"));
+	EXPECT_EQ("nonsense", *match);
+	EXPECT_TRUE(culMapper.getUnMappedCultures().contains("nonsense"));
 }
 
 TEST(Mappers_CultureMapperTests, simpleMatchMatches)
@@ -189,16 +191,12 @@ TEST(Mappers_CultureMapperTests, rulesCanBeExpandedWithUnmappedCultures)
 {
 	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	std::stringstream log;
-	std::streambuf* cout_buffer = std::cout.rdbuf();
-	std::cout.rdbuf(log.rdbuf());
-	EXPECT_FALSE(culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "unmapped_culture", "", "SOMESTATE", ""));
-	std::cout.rdbuf(cout_buffer);
-
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] ! CultureMapper - Attempting to match culture unmapped_culture in state SOMESTATE failed.)"));
+	EXPECT_FALSE(culMapper.getUnMappedCultures().contains("unmapped_culture"));
 
 	// now expand
 	culMapper.expandCulturalMappings(clayManager, cultureLoader, religionLoader);
+
+	EXPECT_TRUE(culMapper.getUnMappedCultures().contains("unmapped_culture"));
 
 	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "unmapped_culture", "", "SOMESTATE", "");
 	ASSERT_TRUE(match);

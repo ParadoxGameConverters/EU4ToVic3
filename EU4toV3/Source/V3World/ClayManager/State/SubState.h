@@ -50,7 +50,7 @@ class SubState
 	void addPop(const Pop& pop) { subStatePops.addPop(pop); }
 
 	void convertDemographics(const ClayManager& clayManager,
-		 const mappers::CultureMapper& cultureMapper,
+		 mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader);
