@@ -1,5 +1,6 @@
 #ifndef CULTURE_MAPPER_H
 #define CULTURE_MAPPER_H
+#include "ColonialRegionMapper/ColonialRegionMapper.h"
 #include "CultureDefinitionLoader/CultureDef.h"
 #include "CultureMappingRule.h"
 #include "Parser.h"
@@ -31,10 +32,13 @@ class CultureMapper: commonItems::parser
 
 	void loadMappingRules(std::istream& theStream);
 	void loadMappingRules(const std::string& fileName);
+	void loadColonialRules(std::istream& theStream);
+	void loadColonialRules(const std::string& fileName);
 	void expandCulturalMappings(const V3::ClayManager& clayManager, const EU4::CultureLoader& cultureLoader, const EU4::ReligionLoader& religionLoader);
 
 	[[nodiscard]] const auto& getMacros() const { return encounteredMacros; }
 	[[nodiscard]] const auto& getUnMappedCultures() const { return unmappedCultures; }
+	[[nodiscard]] const auto& getUsedCultures() const { return usedCultures; }
 	[[nodiscard]] const auto& getV3CultureDefinitions() const { return v3CultureDefinitions; }
 
 	[[nodiscard]] std::optional<std::string> cultureMatch(const V3::ClayManager& clayManager,
@@ -44,7 +48,8 @@ class CultureMapper: commonItems::parser
 		 const std::string& eu4religion,
 		 const std::string& v3state,
 		 const std::string& v3ownerTag,
-		 bool neoCultureRequest = false);
+		 bool neoCultureRequest = false,
+		 bool silent = false);
 
 	void generateCultureDefinitions(const commonItems::ModFilesystem& modFS,
 		 const std::string& nameListsPath,
@@ -62,8 +67,11 @@ class CultureMapper: commonItems::parser
 	std::vector<CultureMappingRule> cultureMapRules;
 	std::map<std::string, std::string> encounteredMacros;
 	std::set<std::string> unmappedCultures; // same name for eu4 as for vic3.
+	std::set<std::string> usedCultures;		 // Only the stuff we actually use in Vic3.
 	std::map<std::string, CultureDef> v3CultureDefinitions;
 	std::map<std::string, std::map<std::string, std::string>> colonyNeoCultureTargets; // colony->[eu4 culture -> v3 neoculture]
+
+	ColonialRegionMapper colonialRegionMapper;
 };
 } // namespace mappers
 

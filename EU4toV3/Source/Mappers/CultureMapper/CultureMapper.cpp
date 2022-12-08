@@ -142,6 +142,13 @@ mappers::CultureDef generateCultureDefinition(const std::string& eu4CultureName,
 
 	return newDef;
 }
+void fixLocsForNeoCulture(mappers::CultureDef& newDef, const mappers::ColonialRegionMapping& colony, int colonialCulturesCount)
+{
+	if (colonialCulturesCount == 1)
+		for (auto& [language, loc]: newDef.locBlock)
+	// ne
+}
+
 } // namespace
 
 
@@ -159,6 +166,16 @@ void mappers::CultureMapper::loadMappingRules(const std::string& fileName)
 	parseFile(fileName);
 	clearRegisteredKeywords();
 	Log(LogLevel::Info) << "<> " << cultureMapRules.size() << " rules loaded.";
+}
+
+void mappers::CultureMapper::loadColonialRules(std::istream& theStream)
+{
+	colonialRegionMapper.loadMappingRules(theStream);
+}
+
+void mappers::CultureMapper::loadColonialRules(const std::string& fileName)
+{
+	colonialRegionMapper.loadMappingRules(fileName);
 }
 
 void mappers::CultureMapper::registerKeys()
@@ -185,23 +202,32 @@ void mappers::CultureMapper::registerKeys()
 	 const std::string& eu4religion,
 	 const std::string& v3state,
 	 const std::string& v3ownerTag,
-	 bool neoCultureRequest)
+	 bool neoCultureRequest,
+	 bool silent)
 {
 	for (const auto& cultureMappingRule: cultureMapRules)
 		if (const auto& possibleMatch = cultureMappingRule.cultureMatch(clayManager, cultureLoader, religionLoader, eu4culture, eu4religion, v3state, v3ownerTag);
 			 possibleMatch)
+		{
+			usedCultures.emplace(*possibleMatch);
 			return *possibleMatch;
+		}
 
-	// if this culture is already recorded as unmapped, all is well.
-	if (unmappedCultures.contains(eu4culture))
+	// if this normal culture is already recorded as unmapped, all is well.
+	if (!neoCultureRequest && unmappedCultures.contains(eu4culture))
+	{
+		usedCultures.emplace(eu4culture);
 		return eu4culture;
+	}
 
 	// Is this a normal unmapped culture? We shouldn't be here - it should have been recorded when expanding unless it's not present in vanilla eu4 defs,
 	// which is bad in itself.
 	if (!neoCultureRequest)
 	{
-		Log(LogLevel::Warning) << "! CultureMapper - Attempting to match culture " << eu4culture << " in state " << v3state << " failed.";
+		if (!silent)
+			Log(LogLevel::Warning) << "! CultureMapper - Attempting to match culture " << eu4culture << " in state " << v3state << " failed.";
 		unmappedCultures.emplace(eu4culture);
+		usedCultures.emplace(eu4culture);
 		return eu4culture;
 	}
 
@@ -216,17 +242,22 @@ std::optional<std::string> mappers::CultureMapper::getNeoCultureMatch(const std:
 	if (v3state.empty())
 		return std::nullopt;
 
-	auto colony = "col";
+	const auto& colony = colonialRegionMapper.getColonyNameForState(v3state, clayManager);
+	if (!colony)
+		return std::nullopt;
 
-	if (colonyNeoCultureTargets.contains(colony) && colonyNeoCultureTargets.at(colony).contains(eu4culture))
-		return colonyNeoCultureTargets.at(colony).at(eu4culture);
+	if (colonyNeoCultureTargets.contains(*colony) && colonyNeoCultureTargets.at(*colony).contains(eu4culture))
+		return colonyNeoCultureTargets.at(*colony).at(eu4culture);
 
-	// we have to generate a new neo culture.
-	auto generated = "new";
+	// we have to generate a new neo culture. SIMPLE!
+	auto generated = "neo-" + *colony + "-" + eu4culture;
+	// neo-usa_north_colony-dynamic-culture1-culture7-culture-num1. Trivial.
 
-	if (!colonyNeoCultureTargets.contains(colony))
-		colonyNeoCultureTargets.emplace(colony, std::map<std::string, std::string>{});
-	colonyNeoCultureTargets.at(colony).emplace(eu4culture, generated);
+	if (!colonyNeoCultureTargets.contains(*colony))
+		colonyNeoCultureTargets.emplace(*colony, std::map<std::string, std::string>{});
+	colonyNeoCultureTargets.at(*colony).emplace(eu4culture, generated);
+	unmappedCultures.emplace(generated);
+	usedCultures.emplace(generated);
 	return generated;
 }
 
@@ -238,7 +269,7 @@ void mappers::CultureMapper::expandCulturalMappings(const V3::ClayManager& clayM
 
 	for (const auto& cultureGroup: cultureLoader.getCultureGroupsMap() | std::views::values)
 		for (const auto& cultureName: cultureGroup.getCultures() | std::views::keys)
-			if (!cultureMatch(clayManager, cultureLoader, religionLoader, cultureName, "", "", "", false))
+			if (!cultureMatch(clayManager, cultureLoader, religionLoader, cultureName, "", "", "", false, true))
 				unmappedCultures.emplace(cultureName);
 
 	Log(LogLevel::Info) << "<> Additional " << unmappedCultures.size() << " cultures imported.";
@@ -266,13 +297,34 @@ void mappers::CultureMapper::generateCultureDefinitions(const commonItems::ModFi
 	v3CultureDefinitions = cultureDefinitionLoader.getDefinitions();
 	const auto& defCount = v3CultureDefinitions.size();
 
-	for (const auto& eu4CultureName: unmappedCultures)
+	for (const auto& eu4CultureName: usedCultures)
 	{
 		// do we have a ready definition already?
 		if (v3CultureDefinitions.contains(eu4CultureName))
 			continue;
 
-		// quick sanity, though this should never fire.
+		// neocultures need special treatment.
+		if (eu4CultureName.starts_with("neo-"))
+		{
+			std::string actualEU4CultureName;
+			ColonialRegionMapping colony;
+			std::string actualColonyName;
+
+			for (const auto& [colonyName, cultureMap]: colonyNeoCultureTargets)
+				for (const auto& [eu4Culture, neoCultureName]: cultureMap)
+					if (neoCultureName == eu4CultureName)
+					{
+						actualEU4CultureName = eu4Culture;
+						actualColonyName = colonyName;
+						colony = colonialRegionMapper.getColonialRegions().at(colonyName);
+					}
+			auto newDef = generateCultureDefinition(actualEU4CultureName, cultureTraitMapper, nameListMapper, nameListLoader, cultureLoader, eu4Locs);
+			newDef.name = eu4CultureName;
+			fixLocsForNeoCulture(newDef, colony, colonyNeoCultureTargets.at(actualColonyName).size());
+			v3CultureDefinitions.emplace(eu4CultureName, newDef);
+			continue;
+		}
+
 		if (!cultureLoader.containsCulture(eu4CultureName))
 		{
 			Log(LogLevel::Warning) << "EU4 cultures don't contain " << eu4CultureName << "? What are we even doing?";

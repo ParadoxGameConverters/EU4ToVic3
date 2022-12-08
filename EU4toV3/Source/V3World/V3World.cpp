@@ -25,6 +25,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getReligionLoader().getAllReligions(),
 		 sourceWorld.getEU4Localizations());
 	cultureMapper.loadMappingRules("configurables/culture_map.txt");
+	cultureMapper.loadColonialRules("configurables/colonial_regions.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	cultureMapper.generateCultureDefinitions(modFS,
 		 "configurables/name_lists.txt",
