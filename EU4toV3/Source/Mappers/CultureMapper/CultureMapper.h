@@ -63,7 +63,7 @@ class CultureMapper: commonItems::parser
 	std::map<std::string, std::string> encounteredMacros;
 	std::set<std::string> unmappedCultures; // same name for eu4 as for vic3.
 	std::map<std::string, CultureDef> v3CultureDefinitions;
-	std::map<std::string, std::map<std::string, std::string>> stateNeoCultureTargets; // state->[eu4 culture -> v3 neoculture]
+	std::map<std::string, std::map<std::string, std::string>> colonyNeoCultureTargets; // colony->[eu4 culture -> v3 neoculture]
 };
 } // namespace mappers
 

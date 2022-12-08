@@ -215,15 +215,18 @@ std::optional<std::string> mappers::CultureMapper::getNeoCultureMatch(const std:
 {
 	if (v3state.empty())
 		return std::nullopt;
-	if (stateNeoCultureTargets.contains(v3state) && stateNeoCultureTargets.at(v3state).contains(eu4culture))
-		return stateNeoCultureTargets.at(v3state).at(eu4culture);
+
+	auto colony = "col";
+
+	if (colonyNeoCultureTargets.contains(colony) && colonyNeoCultureTargets.at(colony).contains(eu4culture))
+		return colonyNeoCultureTargets.at(colony).at(eu4culture);
 
 	// we have to generate a new neo culture.
 	auto generated = "new";
 
-	if (!stateNeoCultureTargets.contains(v3state))
-		stateNeoCultureTargets.emplace(v3state, std::map<std::string, std::string>{});
-	stateNeoCultureTargets.at(v3state).emplace(eu4culture, generated);
+	if (!colonyNeoCultureTargets.contains(colony))
+		colonyNeoCultureTargets.emplace(colony, std::map<std::string, std::string>{});
+	colonyNeoCultureTargets.at(colony).emplace(eu4culture, generated);
 	return generated;
 }
 

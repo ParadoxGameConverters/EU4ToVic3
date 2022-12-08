@@ -1,6 +1,5 @@
 #include "CountryMapping.h"
 #include "CommonRegexes.h"
-#include "Configuration.h"
 #include "ParserHelpers.h"
 
 mappers::CountryMapping::CountryMapping(std::istream& theStream)
