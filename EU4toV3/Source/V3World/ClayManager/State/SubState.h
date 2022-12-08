@@ -44,6 +44,8 @@ class SubState
 	void setWeight(double theWeight) { weight = theWeight; }
 	void setSourceProvinceData(const std::vector<std::pair<SourceProvinceData, double>>& theData) { weightedSourceProvinceData = theData; }
 
+	void setMarketCapital() { marketCapital = true; }
+	void setUnincorporated() { incorporated = false; }
 	void setLandshare(const double theLandshare) { landshare = theLandshare; }
 	void setResource(const std::string& theResource, const int theAmount) { resources[theResource] = theAmount; }
 	void setDemographics(const std::vector<Demographic>& demos) { demographics = demos; }

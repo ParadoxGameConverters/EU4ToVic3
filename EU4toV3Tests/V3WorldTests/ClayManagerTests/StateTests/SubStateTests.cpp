@@ -1,6 +1,7 @@
 #include "ClayManager/ClayManager.h"
 #include "ClayManager/State/Province.h"
 #include "ClayManager/State/State.h"
+#include "ClayManager/State/StateModifier.h"
 #include "ClayManager/State/SubState.h"
 #include "CultureLoader/CultureLoader.h"
 #include "Mappers/CultureMapper/CultureMapper.h"
@@ -165,4 +166,143 @@ TEST(V3World_SubStateTests, coastalFlagCountsAsTerrain)
 	EXPECT_DOUBLE_EQ(1.0 / 4, substate.getTerrainFrequency("desert"));
 	EXPECT_DOUBLE_EQ(2.0 / 4, substate.getTerrainFrequency("plains"));
 	EXPECT_DOUBLE_EQ(1.0 / 4, substate.getTerrainFrequency("coastal"));
+}
+
+TEST(V3World_SubStateTests, InfrastructureCalculationIsolateStateModifieres)
+{
+	auto country = std::make_shared<V3::Country>();
+	auto state = std::make_shared<V3::State>();
+	auto substate = V3::SubState();
+
+	substate.setOwner(country);
+	substate.setHomeState(state);
+
+	std::stringstream input;
+	input << "id = 3002\n";
+	input << "provinces = { \"x112233\" }\n";
+	input << "traits = { \"trait0\" \"trait1\"\n }";
+
+	state->loadState(input);
+
+	std::stringstream modifierInput0;
+	modifierInput0 << "\tmodifier = {\n";
+	modifierInput0 << "\t\tstate_infrastructure_add = 10\n";
+	modifierInput0 << "\t}\n";
+
+	auto modifier0 = std::make_shared<V3::StateModifier>();
+	modifier0->loadStateModifier(modifierInput0);
+	modifier0->setName("trait0");
+
+	std::stringstream modifierInput1;
+	modifierInput1 << "\tmodifier = {\n";
+	modifierInput1 << "\t\tstate_infrastructure_mult = -0.2\n";
+	modifierInput1 << "\t}\n";
+
+	auto modifier1 = std::make_shared<V3::StateModifier>();
+	modifier1->loadStateModifier(modifierInput1);
+	modifier1->setName("trait1");
+
+	substate.calculateInfrastructure(V3::StateModifiers{{modifier0->getName(), modifier0}, {modifier1->getName(), modifier1}});
+
+	EXPECT_DOUBLE_EQ(10.4, substate.getInfrastructure());
+}
+
+// TODO(Gawquon): Finish test after tech is implemented
+TEST(DISABLED_V3World_SubStateTests, InfrastructureCalculationIsolatePopFactor)
+{
+	auto country = std::make_shared<V3::Country>();
+	auto state = std::make_shared<V3::State>();
+	auto substate = V3::SubState();
+
+	substate.setOwner(country);
+	substate.setHomeState(state);
+
+	V3::Demographic demo;
+	demo.culture = "cul";
+	demo.religion = "rel";
+	demo.upperRatio = 0.2; // total ratio sum 1
+	demo.middleRatio = 0.2;
+	demo.lowerRatio = 0.6;
+
+	substate.setDemographics({demo});
+	substate.generatePops(10000);
+
+
+	// country->setTech({"tech"});
+
+	std::stringstream techInput;
+	techInput << "\tmodifier = {\n";
+	techInput << "\t\tstate_infrastructure_from_population_add = 0.2\n";
+	techInput << "\t\tstate_infrastructure_from_population_max_add = 4\n";
+	techInput << "\t}\n";
+
+	// auto tech = std::make_shared<V3::Technology>();
+	// tech->loadTechnology(techInput);
+	// std::map<std::string, std::shared_ptr<V3::Technology>> techMap({"tech", tech});
+
+	substate.calculateInfrastructure(V3::StateModifiers{});
+
+	EXPECT_DOUBLE_EQ(3.2, substate.getInfrastructure());
+}
+
+
+TEST(V3World_SubStateTests, InfrastructureCalculationFactorsFromPrivateVariables)
+{
+	auto country = std::make_shared<V3::Country>();
+	auto state = std::make_shared<V3::State>();
+	auto substate = V3::SubState();
+
+	substate.setOwner(country);
+	substate.setHomeState(state);
+
+	substate.calculateInfrastructure(V3::StateModifiers{});
+	EXPECT_DOUBLE_EQ(3, substate.getInfrastructure());
+
+	substate.setMarketCapital();
+	substate.calculateInfrastructure(V3::StateModifiers{});
+	EXPECT_DOUBLE_EQ(3.75, substate.getInfrastructure());
+
+	substate.setUnincorporated();
+	substate.calculateInfrastructure(V3::StateModifiers{});
+	EXPECT_DOUBLE_EQ(3, substate.getInfrastructure());
+}
+
+
+TEST(V3World_SubStateTests, InfrastructureCalculationExcessNegativeModifiersCap)
+{
+	auto country = std::make_shared<V3::Country>();
+	auto state = std::make_shared<V3::State>();
+	auto substate = V3::SubState();
+
+	substate.setOwner(country);
+	substate.setHomeState(state);
+
+	std::stringstream input;
+	input << "id = 3002\n";
+	input << "provinces = { \"x112233\" }\n";
+	input << "traits = { \"trait0\" \"trait1\"\n }";
+
+	state->loadState(input);
+
+	std::stringstream modifierInput0;
+	modifierInput0 << "\tmodifier = {\n";
+	modifierInput0 << "\t\tstate_infrastructure_add = -10\n";
+	modifierInput0 << "\t}\n";
+
+	auto modifier0 = std::make_shared<V3::StateModifier>();
+	modifier0->loadStateModifier(modifierInput0);
+	modifier0->setName("trait0");
+
+	std::stringstream modifierInput1;
+	modifierInput1 << "\tmodifier = {\n";
+	modifierInput1 << "\t\tstate_infrastructure_mult = -1.2\n";
+	modifierInput1 << "\t}\n";
+
+	auto modifier1 = std::make_shared<V3::StateModifier>();
+	modifier1->loadStateModifier(modifierInput1);
+	modifier1->setName("trait1");
+
+	substate.calculateInfrastructure(V3::StateModifiers{{modifier0->getName(), modifier0}, {modifier1->getName(), modifier1}});
+
+	EXPECT_DOUBLE_EQ(0.0, substate.getInfrastructure());
 }

@@ -110,9 +110,13 @@ void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifie
 	const double infraBase = 3 + 2 * isCoastal() + stateModBonus + popInfra;
 
 	// Multipliers are additive, market capital + incorporation status + state modifier multipliers
-	const double multipliers = 0.25 * marketCapital + -0.25 * !incorporated + stateModMultipliers;
+	double multipliers = 0.25 * marketCapital + -0.25 * !incorporated + stateModMultipliers;
+	if (multipliers < -1)
+	{
+		multipliers = -1;
+	}
 
-	infrastructure = infraBase * multipliers;
+	infrastructure = std::max(0.0, infraBase * (1 + multipliers));
 }
 
 void V3::SubState::convertDemographics(const ClayManager& clayManager,
