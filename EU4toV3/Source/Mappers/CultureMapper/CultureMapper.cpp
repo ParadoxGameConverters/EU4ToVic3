@@ -142,11 +142,35 @@ mappers::CultureDef generateCultureDefinition(const std::string& eu4CultureName,
 
 	return newDef;
 }
-void fixLocsForNeoCulture(mappers::CultureDef& newDef, const mappers::ColonialRegionMapping& colony, int colonialCulturesCount)
+
+void importLocalizationForNeoCulture(mappers::CultureDef& newDef, const mappers::ColonialRegionMapping& colony, int colonialCulturesCount)
 {
 	if (colonialCulturesCount == 1)
-		for (auto& [language, loc]: newDef.locBlock)
-	// ne
+	{
+		// overwriting everything with preset english. sorry. yup.
+		for (auto& loc: newDef.locBlock | std::views::values)
+			loc = colony.getAloneName();
+	}
+	else
+	{
+		std::string eng;
+		if (newDef.locBlock.contains("english"))
+			eng = newDef.locBlock.at("english");
+		else
+		{
+			// ??? Don't have english? hmm.
+			eng = newDef.name;
+		}
+		const auto& splitSuffix = colony.getSplitName();
+		if (const auto& pos = splitSuffix.find("$PARENT$"); pos != std::string::npos)
+		{
+			eng = splitSuffix.substr(0, pos) + eng;
+			if (splitSuffix.size() > pos + 8)
+				eng += splitSuffix.substr(pos + 8, splitSuffix.size());
+		}
+		for (auto& loc: newDef.locBlock | std::views::values)
+			loc = eng;
+	}
 }
 
 } // namespace
@@ -320,7 +344,7 @@ void mappers::CultureMapper::generateCultureDefinitions(const commonItems::ModFi
 					}
 			auto newDef = generateCultureDefinition(actualEU4CultureName, cultureTraitMapper, nameListMapper, nameListLoader, cultureLoader, eu4Locs);
 			newDef.name = eu4CultureName;
-			fixLocsForNeoCulture(newDef, colony, colonyNeoCultureTargets.at(actualColonyName).size());
+			importLocalizationForNeoCulture(newDef, colony, static_cast<int>(colonyNeoCultureTargets.at(actualColonyName).size()));
 			v3CultureDefinitions.emplace(eu4CultureName, newDef);
 			continue;
 		}
