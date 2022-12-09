@@ -3,7 +3,6 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 #include "Province.h"
-#include "ProvinceTypeCounter.h"
 #include "SubState.h"
 #include <cmath>
 #include <numeric>
@@ -96,13 +95,13 @@ void V3::State::registerKeys()
 
 void V3::State::distributeLandshares() const
 {
-	const auto statewideProvinceTypes = countProvinceTypes(provinces);
-	const double weightedStatewideProvinces = calculateWeightedProvinceTotals(*statewideProvinceTypes);
+	const auto [statePrimes, stateImpassables] = countProvinceTypes(provinces);
+	const double weightedStatewideProvinces = getWeightedProvinceTotals(provinces.size(), statePrimes, stateImpassables);
 
 	for (const auto& substate: substates)
 	{
-		const auto substateCount = countProvinceTypes(substate->getProvinces());
-		const double weightedSubstateProvinces = calculateWeightedProvinceTotals(*substateCount);
+		const auto [subPrimes, subImpassables] = countProvinceTypes(substate->getProvinces());
+		const double weightedSubstateProvinces = getWeightedProvinceTotals(substate->getProvinces().size(), subPrimes, subImpassables);
 
 		double substateLandshare = weightedSubstateProvinces / weightedStatewideProvinces;
 		if (substateLandshare < 0.05) // In defines as SPLIT_STATE_MIN_LAND_SHARE
@@ -124,30 +123,30 @@ void V3::State::distributeResources()
 	}
 }
 
-int V3::State::calculateWeightedProvinceTotals(const ProvinceTypeCounter& theCount)
+int V3::State::getWeightedProvinceTotals(const int total, const int primes, const int impassables)
 {
 	// prime coefficient is the define SPLIT_STATE_PRIME_LAND_WEIGHT - 1
-	return theCount.every + (5 - 1) * theCount.prime - theCount.impassable;
+	return total + (5 - 1) * primes - impassables;
 }
 
-std::unique_ptr<V3::ProvinceTypeCounter> V3::State::countProvinceTypes(ProvinceMap provinces)
+std::pair<int, int> V3::State::countProvinceTypes(ProvinceMap provinces)
 {
-	auto typeCounter = std::make_unique<V3::ProvinceTypeCounter>();
+	int primes = 0;
+	int impassables = 0;
 
-	typeCounter->every = static_cast<int>(provinces.size());
 	for (const auto& province: std::views::values(provinces))
 	{
 		if (province->isPrime())
 		{
-			++typeCounter->prime;
+			++primes;
 		}
 		if (province->isImpassable())
 		{
-			++typeCounter->impassable;
+			++impassables;
 		}
 	}
 
-	return std::move(typeCounter);
+	return std::make_pair(primes, impassables);
 }
 
 std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& provinceName) const
