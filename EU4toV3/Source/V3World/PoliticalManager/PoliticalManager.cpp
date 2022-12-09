@@ -86,7 +86,6 @@ void V3::PoliticalManager::generateDecentralizedCountry(const std::string& cultu
 		subState->setOwner(newCountry);
 
 	countries.emplace(v3tag, newCountry);
-	Log(LogLevel::Debug) << "Generated new country for culture: " << culture << " from " << subStates.size() << " substates.";
 	// ... fingers crossed?
 }
 

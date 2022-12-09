@@ -156,7 +156,16 @@ void V3::SubState::convertDemographics(const ClayManager& clayManager,
 				 owner->getTag(),
 				 popratio.isNeoCulture());
 			if (!cultureMatch)
+			{
+				// This should happen literally never unless a system error in one of the mapping rules.
 				newDemo.culture = "noculture";
+				if (popratio.isNeoCulture())
+					Log(LogLevel::Warning) << "No neoculture match for: " << popratio.getCulture() << "/" << popratio.getReligion() << " in " << homeState->getName()
+												  << " for " << owner->getTag();
+				else
+					Log(LogLevel::Warning) << "No culture match for: " << popratio.getCulture() << "/" << popratio.getReligion() << " in " << homeState->getName()
+												  << " for " << owner->getTag();
+			}
 			else
 				newDemo.culture = *cultureMatch;
 

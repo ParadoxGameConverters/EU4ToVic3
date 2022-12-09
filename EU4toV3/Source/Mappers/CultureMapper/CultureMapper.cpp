@@ -259,16 +259,24 @@ void mappers::CultureMapper::registerKeys()
 	return getNeoCultureMatch(eu4culture, v3state, clayManager);
 }
 
-std::optional<std::string> mappers::CultureMapper::getNeoCultureMatch(const std::string& eu4culture,
-	 const std::string& v3state,
-	 const V3::ClayManager& clayManager)
+std::string mappers::CultureMapper::getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager)
 {
-	if (v3state.empty())
-		return std::nullopt;
+	if (v3state.empty()) // possibly pinging a general location.
+	{
+		unmappedCultures.emplace(eu4culture);
+		usedCultures.emplace(eu4culture);
+		return eu4culture;
+	}
 
 	const auto& colony = colonialRegionMapper.getColonyNameForState(v3state, clayManager);
 	if (!colony)
-		return std::nullopt;
+	{
+		// not uncommon if we don't have defined colonies.
+		Log(LogLevel::Warning) << "We don't have a defined colony for " << v3state << "! Can't create neoculture for " << eu4culture;
+		unmappedCultures.emplace(eu4culture);
+		usedCultures.emplace(eu4culture);
+		return eu4culture;
+	}
 
 	if (colonyNeoCultureTargets.contains(*colony) && colonyNeoCultureTargets.at(*colony).contains(eu4culture))
 		return colonyNeoCultureTargets.at(*colony).at(eu4culture);
