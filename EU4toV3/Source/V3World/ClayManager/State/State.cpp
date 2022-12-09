@@ -95,13 +95,13 @@ void V3::State::registerKeys()
 
 void V3::State::distributeLandshares() const
 {
-	const auto [statePrimes, stateImpassables] = countProvinceTypes(provinces);
-	const double weightedStatewideProvinces = getWeightedProvinceTotals(provinces.size(), statePrimes, stateImpassables);
+	const auto [stateTotal, statePrimes, stateImpassables] = countProvinceTypes(provinces);
+	const double weightedStatewideProvinces = getWeightedProvinceTotals(stateTotal, statePrimes, stateImpassables);
 
 	for (const auto& substate: substates)
 	{
-		const auto [subPrimes, subImpassables] = countProvinceTypes(substate->getProvinces());
-		const double weightedSubstateProvinces = getWeightedProvinceTotals(substate->getProvinces().size(), subPrimes, subImpassables);
+		const auto [substateTotal, substatePrimes, substateImpassables] = countProvinceTypes(substate->getProvinces());
+		const double weightedSubstateProvinces = getWeightedProvinceTotals(substateTotal, substatePrimes, substateImpassables);
 
 		double substateLandshare = weightedSubstateProvinces / weightedStatewideProvinces;
 		if (substateLandshare < 0.05) // In defines as SPLIT_STATE_MIN_LAND_SHARE
@@ -129,7 +129,7 @@ int V3::State::getWeightedProvinceTotals(const int total, const int primes, cons
 	return total + (5 - 1) * primes - impassables;
 }
 
-std::pair<int, int> V3::State::countProvinceTypes(ProvinceMap provinces)
+std::tuple<int, int, int> V3::State::countProvinceTypes(ProvinceMap provinces)
 {
 	int primes = 0;
 	int impassables = 0;
@@ -146,7 +146,7 @@ std::pair<int, int> V3::State::countProvinceTypes(ProvinceMap provinces)
 		}
 	}
 
-	return std::make_pair(primes, impassables);
+	return std::make_tuple(static_cast<int>(provinces.size()), primes, impassables);
 }
 
 std::shared_ptr<V3::Province> V3::State::getProvince(const std::string& provinceName) const

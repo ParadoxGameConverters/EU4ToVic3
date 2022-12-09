@@ -44,7 +44,7 @@ class State: commonItems::parser
 	void registerKeys();
 
 	static int getWeightedProvinceTotals(int total, int primes, int impassable);
-	static std::pair<int, int> countProvinceTypes(ProvinceMap provinces);
+	static std::tuple<int, int, int> countProvinceTypes(ProvinceMap provinces);
 
 	bool coastal = false;
 	std::string name;
