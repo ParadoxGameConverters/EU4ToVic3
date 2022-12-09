@@ -11,6 +11,7 @@ TEST(Mappers_CultureTraitMappingTests, primitivesDefaultsToBlank)
 	EXPECT_TRUE(mapping.getCultureGroup().empty());
 	EXPECT_TRUE(mapping.getTraits().empty());
 	EXPECT_TRUE(mapping.getEthnicity().empty());
+	EXPECT_TRUE(mapping.getGraphics().empty());
 }
 
 TEST(Mappers_CultureTraitMappingTests, primitivesCanBeLoaded)
