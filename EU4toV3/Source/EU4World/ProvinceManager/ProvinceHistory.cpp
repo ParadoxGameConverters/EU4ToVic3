@@ -245,3 +245,10 @@ void EU4::ProvinceHistory::decayPopRatios(const date& oldDate, const date& newDa
 
 	currentPop.increase(diffInYears, assimilationFactor);
 }
+
+void EU4::ProvinceHistory::markNeoCulture(const std::string& culture)
+{
+	for (auto& popRatio: popRatios)
+		if (popRatio.getCulture() == culture)
+			popRatio.markNeoCulture();
+}

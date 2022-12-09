@@ -130,10 +130,20 @@
     <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\SuperRegion.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\WarParser\WarDetails.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\WarParser\WarParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialRegionMapper\ColonialRegionMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialRegionMapper\ColonialRegionMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CountryMapper\CountryMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CountryMapper\CountryMapping.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionEntry.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureMappingRule.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureTraitMapper\CultureTraitMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureTraitMapper\CultureTraitMapping.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListLoader\NameListEntry.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListLoader\NameListLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListMapper\NameListMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListMapper\NameListMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\MergeBlock.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\NationMergeMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMapper.cpp" />
@@ -234,10 +244,20 @@
     <ClCompile Include="EU4WorldTests\RegionManagerTests\SuperRegionTests.cpp" />
     <ClCompile Include="EU4WorldTests\WarParserTests\WarDetailsTests.cpp" />
     <ClCompile Include="EU4WorldTests\WarParserTests\WarParserTests.cpp" />
+    <ClCompile Include="MapperTests\ColonialRegionMapper\ColonialRegionMapperTests.cpp" />
+    <ClCompile Include="MapperTests\ColonialRegionMapper\ColonialRegionMappingTests.cpp" />
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMapperTests.cpp" />
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMappingTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\CultureDefinitionLoaderTests\CultureDefinitionEntryTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\CultureDefinitionLoaderTests\CultureDefinitionLoaderTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureMapperTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureMappingRuleTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\CultureTraitMapperTests\CultureTraitMapperTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\CultureTraitMapperTests\CultureTraitMappingTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\NameListLoaderTests\NameListEntryTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\NameListLoaderTests\NameListLoaderTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\NameListMapperTests\NameListMapperTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\NameListMapperTests\NameListMappingTests.cpp" />
     <ClCompile Include="MapperTests\NationMergeMapperTests\MergeBlocksTests.cpp" />
     <ClCompile Include="MapperTests\NationMergeMapperTests\NationMergeMapperTests.cpp" />
     <ClCompile Include="MapperTests\ProvinceMapperTests\ProvinceMapperTests.cpp" />
@@ -510,6 +530,31 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\state_traits\test_state_traits.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/state_traits</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\name_lists.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\culture_trait_map.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\name_list_map.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\cultures\00_cultures.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/cultures</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\colonial_regions.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -24,6 +24,7 @@ class World
 
 	[[nodiscard]] const auto& getClayManager() const { return clayManager; }
 	[[nodiscard]] const auto& getPoliticalManager() const { return politicalManager; }
+	[[nodiscard]] const auto& getCultureMapper() const { return cultureMapper; }
 	[[nodiscard]] const auto& getReligionMapper() const { return religionMapper; }
 
   private:

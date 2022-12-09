@@ -35,7 +35,7 @@ const std::string& V3::SubState::getHomeStateName() const
 }
 
 void V3::SubState::convertDemographics(const ClayManager& clayManager,
-	 const mappers::CultureMapper& cultureMapper,
+	 mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader)
@@ -64,7 +64,8 @@ void V3::SubState::convertDemographics(const ClayManager& clayManager,
 				 popratio.getCulture(),
 				 popratio.getReligion(),
 				 homeState->getName(),
-				 owner->getTag());
+				 owner->getTag(),
+				 popratio.isNeoCulture());
 			if (!cultureMatch)
 				newDemo.culture = "noculture";
 			else

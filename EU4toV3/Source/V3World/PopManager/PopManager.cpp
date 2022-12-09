@@ -37,7 +37,7 @@ std::optional<V3::SubStatePops> V3::PopManager::getVanillaSubStatePops(const std
 }
 
 void V3::PopManager::convertDemographics(const ClayManager& clayManager,
-	 const mappers::CultureMapper& cultureMapper,
+	 mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader) const
@@ -193,8 +193,8 @@ void V3::PopManager::generatePopsForShovedSubStates(const std::shared_ptr<State>
 		if (subState->getDemographics().empty())
 		{
 			const auto generatedPopCount = generatePopCountForShovedSubState(subState, unassignedPopCount, unassignedProvinceCount);
-			// We have no demographics! Use best guess.
-			auto pop = Pop(getDominantVanillaCulture(stateName), getDominantVanillaCulture(stateName), "", generatedPopCount);
+			// We have no demographics! Use best guess. Also default religion to culture default.
+			auto pop = Pop(getDominantVanillaCulture(stateName), "", "", generatedPopCount);
 			subState->addPop(pop);
 			// and we're done with this one.
 		}

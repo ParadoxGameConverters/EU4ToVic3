@@ -123,6 +123,8 @@ EU4::World::World(const Configuration& theConfiguration, const commonItems::Conv
 
 	Log(LogLevel::Info) << "-> Cataloguing Native Fauna";
 	regionManager.catalogueNativeCultures(provinceManager);
+	Log(LogLevel::Info) << "-> Clasifying Invasive Fauna";
+	regionManager.flagNeoCultures(provinceManager);
 	Log(LogLevel::Progress) << "28 %";
 
 	Log(LogLevel::Info) << "-> Equipping Botanical Expedition";

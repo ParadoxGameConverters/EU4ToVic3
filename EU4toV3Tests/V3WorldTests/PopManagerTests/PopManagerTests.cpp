@@ -201,7 +201,7 @@ TEST(V3World_PopManagerTests, popManagerCanGeneratePops)
 	EXPECT_EQ(273, pop4.getSize()); // 273 = 0.09 * 3000
 
 	const auto& pop5 = clayManager.getStates().at("STATE_TEST_LAND3")->getSubStates()[0]->getSubStatePops().getPops()[0];
-	EXPECT_EQ(pop5, V3::Pop("swedish", "swedish", "", 0)); // vanilla demo
+	EXPECT_EQ(pop5, V3::Pop("swedish", "", "", 0)); // vanilla demo
 	EXPECT_EQ(900, pop5.getSize());
 
 	const auto& pop6 = clayManager.getStates().at("STATE_TEST_LAND4")->getSubStates()[0]->getSubStatePops().getPops()[0];

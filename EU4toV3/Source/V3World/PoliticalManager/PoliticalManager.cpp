@@ -128,9 +128,9 @@ std::string V3::PoliticalManager::getDominantDemographic(const std::vector<Demog
 	for (const auto& demo: demographics)
 	{
 		if (cultureScores.contains(demo.culture))
-			cultureScores.at(demo.culture) += demo.upperRatio; // using upper ratio to represent nobility sway.
+			cultureScores.at(demo.culture) += demo.lowerRatio; // using lower ratio to represent farmers - the majority.
 		else
-			cultureScores.emplace(demo.culture, demo.upperRatio);
+			cultureScores.emplace(demo.culture, demo.lowerRatio);
 	}
 
 	const auto highest = std::max_element(std::begin(cultureScores), std::end(cultureScores), [](const auto& p1, const auto& p2) {

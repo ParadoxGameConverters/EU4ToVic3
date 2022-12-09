@@ -28,7 +28,7 @@ class PopManager
 
 	void initializeVanillaPops(const commonItems::ModFilesystem& modFS);
 	void convertDemographics(const ClayManager& clayManager,
-		 const mappers::CultureMapper& cultureMapper,
+		 mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader) const;
