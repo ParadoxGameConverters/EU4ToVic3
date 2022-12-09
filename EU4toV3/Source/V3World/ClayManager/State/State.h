@@ -8,7 +8,6 @@ namespace V3
 {
 class SubState;
 class Province;
-struct ProvinceTypeCounter;
 class State: commonItems::parser
 {
   public:
@@ -44,8 +43,8 @@ class State: commonItems::parser
   private:
 	void registerKeys();
 
-	static int calculateWeightedProvinceTotals(const ProvinceTypeCounter& theCount);
-	static std::unique_ptr<ProvinceTypeCounter> countProvinceTypes(ProvinceMap provinces);
+	static int getWeightedProvinceTotals(int total, int primes, int impassable);
+	static std::tuple<int, int, int> countProvinceTypes(ProvinceMap provinces);
 
 	bool coastal = false;
 	std::string name;
