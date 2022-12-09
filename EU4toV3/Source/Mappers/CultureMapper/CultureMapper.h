@@ -61,7 +61,7 @@ class CultureMapper: commonItems::parser
 	void injectReligionsIntoCultureDefs(const V3::ClayManager& clayManager);
 
   private:
-	std::optional<std::string> getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager);
+	std::string getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager);
 	void registerKeys();
 
 	std::vector<CultureMappingRule> cultureMapRules;

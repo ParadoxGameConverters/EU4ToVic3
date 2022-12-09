@@ -251,7 +251,8 @@ void EU4::RegionManager::applySuperGroups()
 		}
 		else
 		{
-			Log(LogLevel::Warning) << "Superregion " << superRegionName << " doesn't have a supergroup in world_supergroups.txt!";
+			if (superRegionName.find("sea") == std::string::npos)
+				Log(LogLevel::Warning) << "Superregion " << superRegionName << " doesn't have a supergroup in world_supergroups.txt!";
 			superRegion->setSuperGroup("old_world"); // defaulting to the safe choice.
 		}
 	}
