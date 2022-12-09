@@ -66,6 +66,11 @@ class Country: commonItems::parser
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
 
+	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
+	[[nodiscard]] int getTechInfraCap() const { return 0; }
+	// TODO(Gawquon): Implement, multiplier for amount of infrastructure created by population
+	[[nodiscard]] double getTechInfraMult() const { return 0.0; }
+
   private:
 	void registerKeys();
 

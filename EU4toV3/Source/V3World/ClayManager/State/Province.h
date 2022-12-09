@@ -14,6 +14,7 @@ class Province
 	[[nodiscard]] auto getTerrain() const { return terrain; }
 	[[nodiscard]] auto isSea() const { return sea; }
 	[[nodiscard]] auto isLake() const { return lake; }
+	[[nodiscard]] auto isCoastal() const { return coastal; }
 	[[nodiscard]] auto isPrime() const { return prime; }
 	[[nodiscard]] auto isImpassable() const { return impassable; }
 
@@ -23,6 +24,7 @@ class Province
 		lake = true;
 		impassable = true;
 	}
+	void setCoastal() { coastal = true; }
 	void setPrime() { prime = true; }
 	void setImpassable() { impassable = true; }
 	void setName(const std::string& theName) { name = theName; }
@@ -35,6 +37,7 @@ class Province
 	std::string terrain;
 	bool sea = false;
 	bool lake = false;
+	bool coastal = false;
 	bool prime = false;
 	bool impassable = false;
 };

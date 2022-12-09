@@ -27,6 +27,7 @@ namespace V3
 class Country;
 class Chunk;
 class State;
+class StateModifier;
 class ClayManager;
 class SubState
 {
@@ -36,15 +37,17 @@ class SubState
 
 	void setHomeState(const std::shared_ptr<State>& theState) { homeState = theState; }
 	void setOwner(const std::shared_ptr<Country>& theOwner) { owner = theOwner; }
-	void setProvinces(const ProvinceMap& theProvinces) { provinces = theProvinces; }
+	void setProvinces(const ProvinceMap& theProvinces);
 	void setSubStateType(const std::string& theType) { subStateType = theType; }
 
 	void setSourceOwnerTag(const std::string& sourceTag) { sourceOwnerTag = sourceTag; }
 	void setWeight(double theWeight) { weight = theWeight; }
 	void setSourceProvinceData(const std::vector<std::pair<SourceProvinceData, double>>& theData) { weightedSourceProvinceData = theData; }
 
+	void setMarketCapital() { marketCapital = true; }
+	void setUnincorporated() { incorporated = false; }
 	void setLandshare(const double theLandshare) { landshare = theLandshare; }
-	void setResource(const std::string& theResource, int theAmount) { resources[theResource] = theAmount; }
+	void setResource(const std::string& theResource, const int theAmount) { resources[theResource] = theAmount; }
 	void setDemographics(const std::vector<Demographic>& demos) { demographics = demos; }
 	void setSubStatePops(const SubStatePops& thePops) { subStatePops = thePops; }
 	void addPop(const Pop& pop) { subStatePops.addPop(pop); }
@@ -57,6 +60,8 @@ class SubState
 
 	void generatePops(int totalAmount);
 
+	void calculateInfrastructure(const StateModifiers& theStateModifiers);
+
 	[[nodiscard]] const auto& getHomeState() const { return homeState; }
 	[[nodiscard]] const auto& getOwner() const { return owner; }
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
@@ -66,15 +71,25 @@ class SubState
 	[[nodiscard]] const auto& getWeight() const { return weight; }
 	[[nodiscard]] const auto& getSourceProvinceData() const { return weightedSourceProvinceData; }
 
-	[[nodiscard]] auto getLandshare() const { return landshare; }
+	[[nodiscard]] const auto& getLandshare() const { return landshare; }
+	[[nodiscard]] const auto& getInfrastructure() const { return infrastructure; }
 	[[nodiscard]] const auto& getResource(const std::string& theResource) { return resources[theResource]; }
+	[[nodiscard]] const auto& getTerrainFrequency(const std::string& theTerrain) { return terrainFrequency[theTerrain]; }
 	[[nodiscard]] const auto& getDemographics() const { return demographics; }
 	[[nodiscard]] const auto& getSubStatePops() const { return subStatePops; }
+
+	[[nodiscard]] auto isIncorporated() const { return incorporated; }
+	[[nodiscard]] auto isMarketCapital() const { return marketCapital; }
+	[[nodiscard]] bool isCoastal() const;
 
 	[[nodiscard]] std::optional<std::string> getOwnerTag() const;
 	[[nodiscard]] const std::string& getHomeStateName() const;
 
   private:
+	void calculateTerrainFrequency();
+	[[nodiscard]] double getPopInfrastructure() const;
+	[[nodiscard]] std::pair<int, double> getStateInfrastructureModifiers(const StateModifiers& theStateModifiers) const;
+
 	std::shared_ptr<State> homeState; // home state
 	std::shared_ptr<Country> owner;
 	ProvinceMap provinces; // V3 province codes
@@ -84,8 +99,12 @@ class SubState
 	std::optional<double> weight;					 // imported scaled sourceProvinceWeight from whatever source province(s) point generally here.
 	std::vector<std::pair<SourceProvinceData, double>> weightedSourceProvinceData;
 
-	double landshare = 0; // % of State's resources that are substate's
-	std::map<std::string, int> resources;
+	bool incorporated = true;
+	bool marketCapital = false;
+	double landshare = 0.0;									// % of State's resources that are substate's
+	double infrastructure = 0.0;							// limits the amount of industry a substate can support
+	std::map<std::string, int> resources;				// potential for a given resource based on landshare
+	std::map<std::string, double> terrainFrequency; // Normalized vector (math-wise) of terrain in substate as %
 	std::vector<Demographic> demographics;
 	SubStatePops subStatePops;
 };

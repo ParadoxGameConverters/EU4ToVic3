@@ -3,14 +3,33 @@
 #include "Mappers/CultureMapper/CultureMapper.h"
 #include "Mappers/ReligionMapper/ReligionMapper.h"
 #include "PoliticalManager/Country/Country.h"
+#include "Province.h"
 #include "ProvinceManager/PopRatio.h"
 #include "State.h"
+#include "StateModifier.h"
 #include <cmath>
 #include <numeric>
 #include <ranges>
 
+
 V3::SubState::SubState(std::shared_ptr<State> theHomeState, ProvinceMap theProvinces): homeState(std::move(theHomeState)), provinces(std::move(theProvinces))
 {
+	calculateTerrainFrequency();
+}
+
+void V3::SubState::setProvinces(const ProvinceMap& theProvinces)
+{
+	provinces = theProvinces;
+	calculateTerrainFrequency();
+}
+
+bool V3::SubState::isCoastal() const
+{
+	if (const auto& coastalFreq = terrainFrequency.find("coastal"); coastalFreq != terrainFrequency.end())
+	{
+		return coastalFreq->second > 0;
+	}
+	return false;
 }
 
 std::optional<std::string> V3::SubState::getOwnerTag() const
@@ -32,6 +51,76 @@ const std::string& V3::SubState::getHomeStateName() const
 		Log(LogLevel::Warning) << "Attempted to access the name of a nullptr state from a substate. Returning empty name.";
 		return empty;
 	}
+}
+
+void V3::SubState::calculateTerrainFrequency()
+{
+	for (const auto& province: std::views::values(provinces))
+	{
+		if (province->isCoastal())
+		{
+			// Create in effect coastal_mountains, coastal_plains, etc. terrain.
+			terrainFrequency["coastal"] += 0.5;
+			terrainFrequency[province->getTerrain()] += 0.5;
+		}
+		else
+		{
+			terrainFrequency[province->getTerrain()] += 1;
+		}
+	}
+
+	const auto& frequencies = std::views::values(terrainFrequency);
+	const double total = std::reduce(frequencies.begin(), frequencies.end());
+
+	for (const auto& [terrain, count]: terrainFrequency)
+	{
+		terrainFrequency[terrain] = count / total;
+	}
+}
+
+double V3::SubState::getPopInfrastructure() const
+{
+	const double popInfra = subStatePops.getPopCount() * owner->getTechInfraMult();
+	if (const int cap = owner->getTechInfraCap(); popInfra > cap)
+	{
+		return cap;
+	}
+	return popInfra;
+}
+
+std::pair<int, double> V3::SubState::getStateInfrastructureModifiers(const StateModifiers& theStateModifiers) const
+{
+	int bonus = 0;
+	double mult = 0;
+	for (const auto& stateModifier: getHomeState()->getTraits())
+	{
+		if (!theStateModifiers.contains(stateModifier))
+		{
+			// should never happen
+			continue;
+		}
+		bonus += theStateModifiers.at(stateModifier)->getInfrastructureBonus();
+		mult += theStateModifiers.at(stateModifier)->getInfrastructureMult();
+	}
+	return std::make_pair(bonus, mult);
+}
+
+void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifiers)
+{
+	const double popInfra = getPopInfrastructure();
+	auto [stateModBonus, stateModMultipliers] = getStateInfrastructureModifiers(theStateModifiers);
+
+	// Principal = Base + isCoastal(substate lvl) + State modifier bonus + (Pop * tech)_capped
+	const double infraBase = 3 + 2 * isCoastal() + stateModBonus + popInfra;
+
+	// Multipliers are additive, market capital + incorporation status + state modifier multipliers
+	double multipliers = 0.25 * marketCapital + -0.25 * !incorporated + stateModMultipliers;
+	if (multipliers < -1)
+	{
+		multipliers = -1;
+	}
+
+	infrastructure = std::max(0.0, infraBase * (1 + multipliers));
 }
 
 void V3::SubState::convertDemographics(const ClayManager& clayManager,
