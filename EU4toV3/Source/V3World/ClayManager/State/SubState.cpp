@@ -57,11 +57,15 @@ void V3::SubState::calculateTerrainFrequency()
 {
 	for (const auto& province: std::views::values(provinces))
 	{
-		terrainFrequency[province->getTerrain()] += 1;
 		if (province->isCoastal())
 		{
-			// By doubling counting provinces as coastal, coastal_mountains are differentiated from coastal_plains
-			terrainFrequency["coastal"] += 1;
+			// Create in effect coastal_mountains, coastal_plains, etc. terrain.
+			terrainFrequency["coastal"] += 0.5;
+			terrainFrequency[province->getTerrain()] += 0.5;
+		}
+		else
+		{
+			terrainFrequency[province->getTerrain()] += 1;
 		}
 	}
 

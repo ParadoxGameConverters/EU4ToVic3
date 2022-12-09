@@ -163,9 +163,9 @@ TEST(V3World_SubStateTests, coastalFlagCountsAsTerrain)
 	const V3::ProvinceMap provinces{{p0->getName(), p0}, {p1->getName(), p1}, {p2->getName(), p2}};
 	substate.setProvinces(provinces);
 
-	EXPECT_DOUBLE_EQ(1.0 / 4, substate.getTerrainFrequency("desert"));
-	EXPECT_DOUBLE_EQ(2.0 / 4, substate.getTerrainFrequency("plains"));
-	EXPECT_DOUBLE_EQ(1.0 / 4, substate.getTerrainFrequency("coastal"));
+	EXPECT_DOUBLE_EQ(0.5 / 3, substate.getTerrainFrequency("desert"));
+	EXPECT_DOUBLE_EQ(2.0 / 3, substate.getTerrainFrequency("plains"));
+	EXPECT_DOUBLE_EQ(0.5 / 3, substate.getTerrainFrequency("coastal"));
 }
 
 TEST(V3World_SubStateTests, InfrastructureCalculationIsolateStateModifieres)
