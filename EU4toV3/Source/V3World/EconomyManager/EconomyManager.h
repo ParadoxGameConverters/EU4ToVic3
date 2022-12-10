@@ -1,0 +1,42 @@
+#ifndef ECONOMY_MANAGER_H
+#define ECONOMY_MANAGER_H
+#include <memory>
+#include <vector>
+
+namespace V3
+{
+class Country;
+
+/*
+ * PreReqs: Clay(Substates merged under the right country), Pops, Laws, Tech, Institutions
+ * all must be converted first in the current design.
+ *
+ *
+ * Primarily handle buildings, and maybe trade routes?
+ * 1. For each centralized country get a CP budget based on population and Eurocentrism
+ * 2. Read in terrain based effect Matrices
+ * 3. For each substate in a centralized country get a CP budget based on population and terrain/state modifiers
+ * 4. Figure out the "national budget" of each country based on eurocentrism, colonialism, GP status, EU$ gov reform, manufactories maybe?
+ * 4b. National Budget is like 30% Agriculture, 25% Industry, etc.
+ * 4c. Military, Navy, exist outside or inside budget?
+ * 5. Figured out required bureaucracy, depends on tech, institutions, and maybe laws
+ * 6. Each Substate spends it's CP budget according to it's owners national budget and local terrain/state modifiers
+ * 6b. When a substate goes over its infrastructure, try to build ports/rails. If you can't, go over the limit by up to 20%
+ *
+ * 7. Trade routes?
+ * 7b. If ports are needed for trade build more ports?
+ */
+class EconomyManager
+{
+  public:
+	EconomyManager() = default;
+	void buildBuildings(const std::vector<std::shared_ptr<Country>>& a) const { temp; }
+
+
+  private:
+	int temp;
+};
+} // namespace V3
+
+
+#endif // ECONOMY_MANAGER_H
