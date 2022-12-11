@@ -89,14 +89,14 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Info) << "-> Converting Diplomacy";
 	Log(LogLevel::Progress) << "55 %";
 
-	Log(LogLevel::Info) << "-> Setting Up States";
 	Log(LogLevel::Progress) << "57 %";
+	// Place starting buildings for all centralized countries
 
-	Log(LogLevel::Info) << "-> Generating Unciv Reforms";
 	Log(LogLevel::Progress) << "58 %";
+	// Convert Army and Navy
 
-	Log(LogLevel::Info) << "-> Converting Technology Levels";
 	Log(LogLevel::Progress) << "59 %";
+	// Generate trade routes OR a bueracracy surplus for trade?
 
 	Log(LogLevel::Info) << "-> Distributing Factories";
 	Log(LogLevel::Progress) << "60 %";
