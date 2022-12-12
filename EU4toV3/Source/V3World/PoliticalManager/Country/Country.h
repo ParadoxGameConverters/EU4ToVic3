@@ -48,10 +48,9 @@ class Country: commonItems::parser
 	Country() = default;
 	void initializeCountry(std::istream& theStream);
 	void setTag(const std::string& theTag) { tag = theTag; }
-	void setIndustryFactor(int theIndustryFactor) { industryFactor = theIndustryFactor; }
-	void setIndustryScore(int theIndustryScore) { industryScore = theIndustryScore; }
-	void setCPBudget(int theBudget) { CPBudget = theBudget; }
-	void setTag(const std::string& theTag) { tag = theTag; }
+	void setIndustryFactor(const double theIndustryFactor) { industryFactor = theIndustryFactor; }
+	void setIndustryScore(const double theIndustryScore) { industryScore = theIndustryScore; }
+	void setCPBudget(const int theBudget) { CPBudget = theBudget; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 
 	void convertFromEU4Country(const ClayManager& clayManager);
