@@ -48,6 +48,9 @@ class Country: commonItems::parser
 	Country() = default;
 	void initializeCountry(std::istream& theStream);
 	void setTag(const std::string& theTag) { tag = theTag; }
+	void setIndustryFactor(int theIndustryFactor) { industryFactor = theIndustryFactor; }
+	void setIndustryScore(int theIndustryScore) { industryScore = theIndustryScore; }
+	void setTag(const std::string& theTag) { tag = theTag; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 
 	void convertFromEU4Country(const ClayManager& clayManager);
@@ -57,6 +60,8 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getTag() const { return tag; }
 	[[nodiscard]] const auto& getVanillaData() const { return vanillaData; }
 	[[nodiscard]] const auto& getProcessedData() const { return processedData; }
+	[[nodiscard]] const auto& getIndustryFactor() const { return industryFactor; }
+	[[nodiscard]] const auto& getIndustryScore() const { return industryScore; }
 	[[nodiscard]] const auto& getSourceCountry() const { return sourceCountry; }
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
 	void addSubState(const std::shared_ptr<SubState>& subState) { substates.push_back(subState); }
@@ -65,6 +70,8 @@ class Country: commonItems::parser
 
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
+	[[nodiscard]] int getPopCount() const;
+
 
 	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
 	[[nodiscard]] int getTechInfraCap() const { return 0; }
@@ -79,6 +86,9 @@ class Country: commonItems::parser
 	std::string tag;
 	std::optional<VanillaCommonCountryData> vanillaData;
 	ProcessedData processedData;
+
+	double industryFactor = 0; // Modifier set by EuroCentrism or calculated by dev
+	double industryScore = 0;	// Share of global industry a country has, not normalized
 
 	std::shared_ptr<EU4::Country> sourceCountry;
 	std::vector<std::shared_ptr<SubState>> substates;

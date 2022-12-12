@@ -1,5 +1,7 @@
 #include "EconomyManager.h"
+#include "ClayManager/State/SubState.h"
 #include "PoliticalManager/Country/Country.h"
+#include <numeric>
 #include <ranges>
 
 void V3::EconomyManager::loadCentralizedCountries(const std::map<std::string, std::shared_ptr<Country>>& countries)
@@ -14,12 +16,40 @@ void V3::EconomyManager::loadCentralizedCountries(const std::map<std::string, st
 	}
 }
 
-void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY& economySwitch) const
+void V3::EconomyManager::assignCountryCPBudgets(Configuration::ECONOMY economyType, const std::map<std::string, std::shared_ptr<Country>>& countries) const
 {
+	// Some global value of CP to spend
+	int globalCP = 500000;
+	// adjust based on date
+	// adjust based on amount of world centralized By..... population?
+	int worldPopulation = getWorldPopCount(countries);
+	int worldCentralizedPopulation = getCentralizedWorldPopCount();
+
 	// Fronter option 1 the default way. Pop & Eurocentrism
-	if (true)
+	if (economyType == Configuration::ECONOMY::EuroCentric)
 	{
-		
+		double totalIndustryScore = 0;
+		for (auto country: centralizedCountries)
+		{
+			int popCount = country->getPopCount();
+			country->setIndustryScore(popCount * country->getIndustryFactor() * calculatePopDistanceFactor(popCount, worldCentralizedPopulation));
+			totalIndustryScore += country->getIndustryScore();
+		}
 	}
-	// Fronter option 2 the mp map way. Pop & development
+	// Fronter option 2. Pop & development
+	if (economyType == Configuration::ECONOMY::DevBased)
+	{
+	}
+}
+
+int V3::EconomyManager::getCentralizedWorldPopCount() const
+{
+	return std::accumulate(centralizedCountries.begin(), centralizedCountries.end(), 0, [](int sum, const auto& country) {
+		return sum + country->getPopCount();
+	});
+}
+
+int V3::EconomyManager::getWorldPopCount(const std::map<std::string, std::shared_ptr<Country>>& countries) const
+{
+	return 0;
 }

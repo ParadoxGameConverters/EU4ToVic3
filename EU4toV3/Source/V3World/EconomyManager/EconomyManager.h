@@ -32,7 +32,7 @@ class EconomyManager
   public:
 	EconomyManager() = default;
 	void loadCentralizedCountries(const std::map<std::string, std::shared_ptr<Country>>& countries);
-	void assignCountryCPBudgets(const Configuration& configuration) const;
+	void assignCountryCPBudgets(Configuration::ECONOMY econmoyTrigger, const std::map<std::string, std::shared_ptr<Country>>& countries) const;
 	void loadTerrainModifierMatrices() const;
 	void assignSubStateCPBudgets() const;
 	void balanceNationalBudgets() const;
@@ -46,6 +46,10 @@ class EconomyManager
 
 
   private:
+	int getCentralizedWorldPopCount() const;
+	int getWorldPopCount(const std::map<std::string, std::shared_ptr<Country>>& countries) const;
+	double calculatePopDistanceFactor(int countryPopCount, int centralizedPopCount) const;
+
 	std::vector<std::shared_ptr<Country>> centralizedCountries;
 };
 } // namespace V3

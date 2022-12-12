@@ -196,3 +196,10 @@ std::string V3::Country::getAdjective(const std::string& language) const
 	// wing it.
 	return tag + "_ADJ";
 }
+
+int V3::Country::getPopCount() const
+{
+	return std::accumulate(substates.begin(), substates.end(), 0, [](int sum, const auto& substate) {
+		return sum + substate->getSubStatePops().getPopCount();
+	});
+}
