@@ -1,0 +1,4 @@
+#ifndef BUILDING_LOADER_H
+#define BUILDING_LOADER_H
+
+#endif // BUILDING_LOADER_H
