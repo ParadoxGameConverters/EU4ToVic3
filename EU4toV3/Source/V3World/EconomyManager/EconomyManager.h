@@ -1,14 +1,10 @@
 #ifndef ECONOMY_MANAGER_H
 #define ECONOMY_MANAGER_H
-#include <map>
-#include <memory>
-#include <string>
-#include <vector>
+#include "Configuration.h"
 
 namespace V3
 {
 class Country;
-
 /*
  * PreReqs: Clay(Substates merged under the right country), Pops, Laws, Tech
  * all must be converted first in the current design.
@@ -35,22 +31,22 @@ class EconomyManager
 {
   public:
 	EconomyManager() = default;
-	void assignCountryCPBudgets(const std::map<std::string, std::shared_ptr<Country>>& countries) const { temp; }
-	void loadTerrainModifierMatrices(const std::map<std::string, std::shared_ptr<Country>>& countries) const { temp; }
-	void assignSubStateCPBudgets(const std::map<std::string, std::shared_ptr<Country>>& countries) const { temp; }
-	void balanceNationalBudgets(const std::map<std::string, std::shared_ptr<Country>>& countries) const { temp; }
-	void buildBuildings(const std::map<std::string, std::shared_ptr<Country>>& countries) const { temp; }
+	void loadCentralizedCountries(const std::map<std::string, std::shared_ptr<Country>>& countries);
+	void assignCountryCPBudgets(const Configuration& configuration) const;
+	void loadTerrainModifierMatrices() const;
+	void assignSubStateCPBudgets() const;
+	void balanceNationalBudgets() const;
+	void buildBuildings() const;
 
-	void convertArmy(const std::map<std::string, std::shared_ptr<Country>>& countries);
-	void convertNavy(const std::map<std::string, std::shared_ptr<Country>>& countries);
+	void convertArmy() const;
+	void convertNavy() const;
 
-	void generateTrade(const std::map<std::string, std::shared_ptr<Country>>& countries) const { temp; }
-	void backfillBureaucracy(const std::map<std::string, std::shared_ptr<Country>>& countries) const { temp; }
+	void generateTrade() const;
+	void backfillBureaucracy() const;
 
 
   private:
-	auto selectCentralizedCountries(const std::map<std::string, std::shared_ptr<Country>>& countries);
-	int temp;
+	std::vector<std::shared_ptr<Country>> centralizedCountries;
 };
 } // namespace V3
 
