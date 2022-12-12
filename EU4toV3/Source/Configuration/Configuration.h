@@ -38,7 +38,8 @@ class Configuration: commonItems::parser
 	enum class ECONOMY
 	{
 		EuroCentric = 1,
-		DevBased = 2
+		TechGroup = 2,
+		DevBased = 3
 	};
 
 	struct ConfigBlock

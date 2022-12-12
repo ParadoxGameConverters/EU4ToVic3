@@ -47,8 +47,10 @@ class EconomyManager
 
   private:
 	int getCentralizedWorldPopCount() const;
-	int getWorldPopCount(const std::map<std::string, std::shared_ptr<Country>>& countries) const;
-	double calculatePopDistanceFactor(int countryPopCount, int centralizedPopCount) const;
+	int getWorldPopCount(const std::map<std::string, std::shared_ptr<Country>>& theCountries) const;
+	static double calculatePopDistanceFactor(int countryPopulation, double geoMeanPopulation);
+	double calculateGeoMeanCentralizedPops() const;
+	void distributeBudget(double globalCP, double totalIndustryScore) const;
 
 	std::vector<std::shared_ptr<Country>> centralizedCountries;
 };

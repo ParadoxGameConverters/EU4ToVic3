@@ -50,6 +50,7 @@ class Country: commonItems::parser
 	void setTag(const std::string& theTag) { tag = theTag; }
 	void setIndustryFactor(int theIndustryFactor) { industryFactor = theIndustryFactor; }
 	void setIndustryScore(int theIndustryScore) { industryScore = theIndustryScore; }
+	void setCPBudget(int theBudget) { CPBudget = theBudget; }
 	void setTag(const std::string& theTag) { tag = theTag; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 
@@ -89,6 +90,7 @@ class Country: commonItems::parser
 
 	double industryFactor = 0; // Modifier set by EuroCentrism or calculated by dev
 	double industryScore = 0;	// Share of global industry a country has, not normalized
+	int CPBudget = 0;				// Construction Points for a country to spend on it's development
 
 	std::shared_ptr<EU4::Country> sourceCountry;
 	std::vector<std::shared_ptr<SubState>> substates;
