@@ -8,6 +8,25 @@
 #include "ParserHelpers.h"
 #include <numeric>
 
+namespace
+{
+commonItems::Color generateDecentralizedColors(const std::string& tag)
+{
+	if (tag.size() < 3)
+		return commonItems::Color{std::array{15, 86, 112}}; // I just like these numbers.
+	int r = static_cast<int>(tag[0]) * 17 % 256;				 // should be random enough.
+	int g = static_cast<int>(tag[1]) * 43 % 256;
+	int b = static_cast<int>(tag[2]) * 11 % 256;
+	if (r < 50) // make them brighter.
+		r += 50;
+	if (g < 50)
+		g += 50;
+	if (b < 50)
+		b += 50;
+	return commonItems::Color{std::array{r, g, b}};
+}
+} // namespace
+
 void V3::Country::initializeCountry(std::istream& theStream)
 {
 	registerKeys();
@@ -80,7 +99,18 @@ void V3::Country::generateDecentralizedData(const ClayManager& clayManager,
 	 const LocalizationLoader& v3LocLoader,
 	 const EU4::EU4LocalizationLoader& eu4LocLoader)
 {
+	// COMMON/COUNTRY DATA
+	processedData.color = generateDecentralizedColors(tag);
+	processedData.tier = "principality";													// this appears to be common for decentralized nations.
+	if (!substates.empty())																		// this really shouldn't be empty.
+		processedData.capitalStateName = substates.front()->getHomeStateName(); // any will do.
 	generateDecentralizedLocs(v3LocLoader, eu4LocLoader);
+
+	// COMMON/HISTORY/COUNTRY - for now, let's default everything to tier: bottom regardless of geography.
+	processedData.effects.emplace("effect_starting_technology_tier_7_tech"); // tech
+	processedData.effects.emplace("effect_starting_politics_traditional");	 // politics
+	processedData.effects.emplace("effect_native_conscription_3");				 // conscription
+	processedData.laws.emplace("law_debt_slavery");									 // slavery
 }
 
 void V3::Country::generateDecentralizedLocs(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader)
