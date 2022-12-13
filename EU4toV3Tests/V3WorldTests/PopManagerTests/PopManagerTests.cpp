@@ -14,6 +14,8 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+namespace
+{
 std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
 {
 	auto eu4Path = "TestFiles/eu4installation/";
@@ -105,6 +107,7 @@ prepMappers()
 
 	return std::tuple{popManager, politicalManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader};
 }
+} // namespace
 
 TEST(V3World_PopManagerTests, popManagerCanInitializeVanillaPopsAndPingThem)
 {

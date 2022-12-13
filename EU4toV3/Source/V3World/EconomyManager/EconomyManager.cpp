@@ -1,8 +1,10 @@
 #include "EconomyManager.h"
 #include "ClayManager/State/SubState.h"
 #include "EU4World/CountryManager/EU4Country.h"
+#include "Log.h"
 #include "PoliticalManager/Country/Country.h"
 #include <cmath>
+#include <iomanip>
 #include <numeric>
 #include <ranges>
 
@@ -23,12 +25,14 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 {
 	// Some global value of CP to spend, calibrate to Vanilla.
 	double globalCP = 1208050;
-	// adjust based on date
+	// TODO(Gawquon): adjust based on date
 	globalCP *= 1;
 	// adjust based on amount of world centralized by population, calibrated to Vanilla
-	const int worldPopulation = getWorldPopCount(countries);
-	const double worldCentralizedPopulation = getCentralizedWorldPopCount();
-	const double globalPopFactor = worldCentralizedPopulation / worldPopulation / .975;
+	const double centralizedPopRatio = static_cast<double>(getCentralizedWorldPopCount()) / getWorldPopCount(countries);
+	const double globalPopFactor = centralizedPopRatio / .975;
+
+	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << centralizedPopRatio * 100
+							  << "% Centralized by population. Adjusting global CP values by: " << globalPopFactor * 100 << "%";
 
 	// Fronter option 1 the default way. Pop & Eurocentrism
 	if (economyType == Configuration::ECONOMY::EuroCentric)
@@ -49,6 +53,7 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 		// adjust global total by average industry factor compared to baseline
 		const double globalIndustryFactor = totalIndustryFactor / static_cast<double>(centralizedCountries.size()) / 0.8;
 		globalCP *= (globalIndustryFactor + globalPopFactor);
+		Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world has " << globalCP << " to spend on industry.";
 
 		// distribute each country its budget
 		distributeBudget(globalCP, totalIndustryScore);
@@ -77,6 +82,7 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 		// adjust global total by average tech group modifier compared to baseline
 		double globalTechGroupFactor = totalTechGroupFactor / static_cast<double>(centralizedCountries.size()) / 0.8;
 		globalCP *= (totalTechGroupFactor + globalPopFactor);
+		Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world has " << globalCP << " to spend on industry.";
 
 		// distribute each country it's budget
 		distributeBudget(globalCP, totalIndustryScore);
@@ -99,6 +105,7 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 		}
 
 		globalCP *= globalPopFactor;
+		Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world has " << globalCP << " to spend on industry.";
 
 		// distribute each country its budget
 		distributeBudget(globalCP, totalIndustryScore);

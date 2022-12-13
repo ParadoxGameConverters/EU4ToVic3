@@ -1,6 +1,6 @@
 #include "StateModifier.h"
 #include "CommonRegexes.h"
-#include "Loaders/BuildingLoader/BuildingGroups.h"
+#include "EconomyManager/Building/BuildingGroups.h"
 #include "ParserHelpers.h"
 
 void V3::StateModifier::loadStateModifier(std::istream& theStream)
