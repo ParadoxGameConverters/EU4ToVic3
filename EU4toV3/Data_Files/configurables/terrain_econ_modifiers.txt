@@ -1,0 +1,54 @@
+# Used to determine investment in state regions / building types
+# Applies based on the percentage a state is a particular terrain type
+# All values are 1 by default if not listed
+#
+# priority = x; A multiplier to a country's willingness to invest in a state
+# building_name = x; A multiplier to the chance of a building being built in a state
+
+
+coastal = {
+    priority = 1.5
+
+    building_shipyards = 2
+    building_fishing_wharf = 2.5
+}
+
+desert = {
+    priority = 0.7
+
+    building_glassworks = 1.2
+}
+
+forest = {
+    priority = 1.1
+}
+
+hills = {
+}
+
+jungle = {
+    priority = 0.9
+}
+
+mountain = {
+    priority = 0.8
+}
+
+plains = {
+    priority = 1.2
+}
+
+savanna = {
+    priority = 0.9
+}
+
+snow = {
+    priority = 0.7
+}
+
+tundra = {
+    priority = 0.6
+}
+
+wetland = {
+}
