@@ -1,6 +1,7 @@
 #include "EconomyManager.h"
 #include "ClayManager/State/SubState.h"
 #include "EU4World/CountryManager/EU4Country.h"
+#include "Loaders/TerrainLoader/TerrainModifierLoader.h"
 #include "Log.h"
 #include "PoliticalManager/Country/Country.h"
 #include <cmath>
@@ -14,7 +15,7 @@ void V3::EconomyManager::loadCentralizedCountries(const std::map<std::string, st
 		return country->getProcessedData().type != "decentralized";
 	};
 
-	for (auto country: std::ranges::filter_view(std::views::values(countries), selectCentralized))
+	for (const auto& country: std::ranges::filter_view(std::views::values(countries), selectCentralized))
 	{
 		centralizedCountries.push_back(country);
 	}
@@ -34,13 +35,14 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << centralizedPopRatio * 100
 							  << "% Centralized by population. Adjusting global CP values by: " << globalPopFactor * 100 << "%";
 
-	// Fronter option 1 the default way. Pop & Eurocentrism
-	if (economyType == Configuration::ECONOMY::EuroCentric)
+	double totalIndustryScore = 0;
+
+	// config option 1 the default way. Pop & culture TechGroup
+	if (economyType == Configuration::ECONOMY::TechGroup)
 	{
 		const double geoMeanPop = calculateGeoMeanCentralizedPops();
 
 		// while determining individual country's industry score, accumulate total industry score & factor
-		double totalIndustryScore = 0;
 		double totalIndustryFactor = 0;
 		for (const auto& country: centralizedCountries)
 		{
@@ -53,42 +55,17 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 		// adjust global total by average industry factor compared to baseline
 		const double globalIndustryFactor = totalIndustryFactor / static_cast<double>(centralizedCountries.size()) / 0.8;
 		globalCP *= (globalIndustryFactor + globalPopFactor);
-		Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world has " << globalCP << " to spend on industry.";
 
-		// distribute each country its budget
-		distributeBudget(globalCP, totalIndustryScore);
+		Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << globalIndustryFactor * 100
+								  << "% Developed compared to baseline. Compensating";
 	}
+
+	// distribute each country its budget
+	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world has " << globalCP << " to spend on industry.";
+	distributeBudget(globalCP, totalIndustryScore);
 
 	/*
-	// Fronter option 2. Pop & Tech Group. Like EuroCentrism but blunter
-	if (economyType == Configuration::ECONOMY::TechGroup)
-	{
-		const double geoMeanPop = calculateGeoMeanCentralizedPops();
-
-		// while determining individual country's industry score, accumulate total industry score & factor
-		double totalIndustryScore = 0;
-		double totalTechGroupFactor = 0;
-		for (const auto& country: centralizedCountries)
-		{
-			// Get country's EU4 techgroup and a config file map to get tech group factor
-			const double techGroupFactor = country->getSourceCountry()->getTechGroup().size();
-
-			const int popCount = country->getPopCount();
-			country->setIndustryScore(popCount * techGroupFactor * calculatePopDistanceFactor(popCount, geoMeanPop));
-			totalIndustryScore += country->getIndustryScore();
-			totalTechGroupFactor += country->getIndustryFactor();
-		}
-
-		// adjust global total by average tech group modifier compared to baseline
-		double globalTechGroupFactor = totalTechGroupFactor / static_cast<double>(centralizedCountries.size()) / 0.8;
-		globalCP *= (totalTechGroupFactor + globalPopFactor);
-		Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world has " << globalCP << " to spend on industry.";
-
-		// distribute each country it's budget
-		distributeBudget(globalCP, totalIndustryScore);
-	}
-
-	// Fronter option 3. Pop & development
+	// config option 2. Pop & development
 	if (economyType == Configuration::ECONOMY::DevBased)
 	{
 		// The more pop you have per dev, the less powerful your development
@@ -105,10 +82,6 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 		}
 
 		globalCP *= globalPopFactor;
-		Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world has " << globalCP << " to spend on industry.";
-
-		// distribute each country its budget
-		distributeBudget(globalCP, totalIndustryScore);
 	}
 	*/
 }
@@ -119,6 +92,12 @@ void V3::EconomyManager::loadTerrainModifierMatrices()
 	// Something where desert = priority 0.7 and desert = glassworks 1.2
 	// So a country invests less in a state with desert
 	// But also tends to build more glassworks than other factories in the desert
+
+	TerrainModifierLoader terrainModifierLoader;
+	terrainModifierLoader.loadTerrainModifiers("configurables/terrain_econ_modifiers.txt");
+
+	stateTerrainModifiers = terrainModifierLoader.getTerrainStateModifiers();
+	buildingTerrainModifiers = terrainModifierLoader.getTerrainBuildingModifiers();
 }
 
 void V3::EconomyManager::assignSubStateCPBudgets(const Configuration::ECONOMY economyType) const

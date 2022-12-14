@@ -53,6 +53,9 @@ class EconomyManager
 	void distributeBudget(double globalCP, double totalIndustryScore) const;
 
 	std::vector<std::shared_ptr<Country>> centralizedCountries;
+
+	std::map<std::string, double> stateTerrainModifiers;
+	std::map<std::string, std::map<std::string, double>> buildingTerrainModifiers;
 };
 } // namespace V3
 
