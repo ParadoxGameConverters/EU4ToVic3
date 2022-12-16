@@ -38,6 +38,7 @@ class PoliticalManager
 
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& v3Tag) const;
+	[[nodiscard]] int getWorldPopCount() const;
 	[[nodiscard]] bool isTagDecentralized(const std::string& v3Tag) const;
 
   private:

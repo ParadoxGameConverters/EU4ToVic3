@@ -33,6 +33,5 @@ TEST(V3World_TerrainModifierLoaderTests, terrainModifierLoaderCanLoadTerrainEffe
 
 	EXPECT_THAT(terrainModifierLoader.getTerrainBuildingModifiers().at("coastal"),
 		 testing::UnorderedElementsAre(testing::Pair("building_cave", 1.3), testing::Pair("building_fish", 2.5)));
-	EXPECT_THAT(terrainModifierLoader.getTerrainBuildingModifiers().at("wetlands"),
-		 testing::UnorderedElementsAre(testing::Pair("building_fish", 2.0)));
+	EXPECT_THAT(terrainModifierLoader.getTerrainBuildingModifiers().at("wetlands"), testing::UnorderedElementsAre(testing::Pair("building_fish", 2.0)));
 }

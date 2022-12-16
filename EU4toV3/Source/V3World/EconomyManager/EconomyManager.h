@@ -4,6 +4,7 @@
 
 namespace V3
 {
+class PoliticalManager;
 class Country;
 /*
  * PreReqs: Clay(Substates merged under the right country), Pops, Laws, Tech
@@ -32,7 +33,7 @@ class EconomyManager
   public:
 	EconomyManager() = default;
 	void loadCentralizedCountries(const std::map<std::string, std::shared_ptr<Country>>& countries);
-	void assignCountryCPBudgets(Configuration::ECONOMY economyType, const std::map<std::string, std::shared_ptr<Country>>& countries) const;
+	void assignCountryCPBudgets(Configuration::ECONOMY economyType, const PoliticalManager& politicalManager) const;
 	void loadTerrainModifierMatrices();
 	void assignSubStateCPBudgets(Configuration::ECONOMY economyType) const;
 	void balanceNationalBudgets() const;
@@ -47,7 +48,6 @@ class EconomyManager
 
   private:
 	[[nodiscard]] int getCentralizedWorldPopCount() const;
-	[[nodiscard]] int getWorldPopCount(const std::map<std::string, std::shared_ptr<Country>>& theCountries) const;
 	static double calculatePopDistanceFactor(int countryPopulation, double geoMeanPopulation);
 	[[nodiscard]] double calculateGeoMeanCentralizedPops() const;
 	void distributeBudget(double globalCP, double totalIndustryScore) const;

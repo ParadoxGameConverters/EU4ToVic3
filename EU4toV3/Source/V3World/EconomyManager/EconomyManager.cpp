@@ -9,10 +9,12 @@
 #include <numeric>
 #include <ranges>
 
+#include "PoliticalManager/PoliticalManager.h"
+
 void V3::EconomyManager::loadCentralizedCountries(const std::map<std::string, std::shared_ptr<Country>>& countries)
 {
 	auto selectCentralized = [](std::shared_ptr<Country> country) {
-		return country->getProcessedData().type != "decentralized";
+		return country && country->getProcessedData().type != "decentralized";
 	};
 
 	for (const auto& country: std::ranges::filter_view(std::views::values(countries), selectCentralized))
@@ -21,15 +23,14 @@ void V3::EconomyManager::loadCentralizedCountries(const std::map<std::string, st
 	}
 }
 
-void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY economyType,
-	 const std::map<std::string, std::shared_ptr<Country>>& countries) const
+void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY economyType, const PoliticalManager& politicalManager) const
 {
 	// Some global value of CP to spend, calibrate to Vanilla.
 	double globalCP = 1208050;
 	// TODO(Gawquon): adjust based on date
 	globalCP *= 1;
 	// adjust based on amount of world centralized by population, calibrated to Vanilla
-	const double centralizedPopRatio = static_cast<double>(getCentralizedWorldPopCount()) / getWorldPopCount(countries);
+	const double centralizedPopRatio = static_cast<double>(getCentralizedWorldPopCount()) / politicalManager.getWorldPopCount();
 	const double globalPopFactor = centralizedPopRatio / .975;
 
 	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << centralizedPopRatio * 100
@@ -147,14 +148,6 @@ void V3::EconomyManager::buildBuildings() const
 int V3::EconomyManager::getCentralizedWorldPopCount() const
 {
 	return std::accumulate(centralizedCountries.begin(), centralizedCountries.end(), 0, [](int sum, const auto& country) {
-		return sum + country->getPopCount();
-	});
-}
-
-int V3::EconomyManager::getWorldPopCount(const std::map<std::string, std::shared_ptr<Country>>& theCountries) const
-{
-	auto countries = std::views::values(theCountries);
-	return std::accumulate(countries.begin(), countries.end(), 0, [](int sum, const auto& country) {
 		return sum + country->getPopCount();
 	});
 }
