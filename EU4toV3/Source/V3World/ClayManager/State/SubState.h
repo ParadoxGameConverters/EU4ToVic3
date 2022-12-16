@@ -77,7 +77,8 @@ class SubState
 	[[nodiscard]] const auto& getLandshare() const { return landshare; }
 	[[nodiscard]] const auto& getInfrastructure() const { return infrastructure; }
 	[[nodiscard]] const auto& getResource(const std::string& theResource) { return resources[theResource]; }
-	[[nodiscard]] const auto& getTerrainFrequency() { return terrainFrequency; }
+	[[nodiscard]] const auto& getTerrainFrequency(const std::string& terrain) { return terrainFrequency[terrain]; }
+	[[nodiscard]] const auto& getTerrainFrequencies() { return terrainFrequency; }
 	[[nodiscard]] const auto& getDemographics() const { return demographics; }
 	[[nodiscard]] const auto& getSubStatePops() const { return subStatePops; }
 

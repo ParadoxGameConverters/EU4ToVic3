@@ -130,7 +130,7 @@ void V3::EconomyManager::assignSubStateCPBudgets(const Configuration::ECONOMY ec
 
 			// Adjust for terrain
 			double terrainMultiplier = -1; // Config is based around 1.0 for human readability
-			for (const auto& [terrain, frequency]: subState->getTerrainFrequency())
+			for (const auto& [terrain, frequency]: subState->getTerrainFrequencies())
 			{
 				if (!stateTerrainModifiers.contains(terrain))
 				{
