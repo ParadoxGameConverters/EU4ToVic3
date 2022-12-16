@@ -7,8 +7,8 @@
 #include "Log.h"
 #include "Mappers/CountryMapper/CountryMapper.h"
 #include "PopManager/PopManager.h"
-#include <ranges>
 #include <numeric>
+#include <ranges>
 
 void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFilesystem& modFS)
 {
@@ -187,6 +187,11 @@ std::shared_ptr<V3::Country> V3::PoliticalManager::getCountry(const std::string&
 int V3::PoliticalManager::getWorldPopCount() const
 {
 	auto theCountries = std::views::values(countries);
+	return getCountriesPopCount({theCountries.begin(), theCountries.end()});
+}
+
+int V3::PoliticalManager::getCountriesPopCount(std::vector<std::shared_ptr<Country>> theCountries)
+{
 	return std::accumulate(theCountries.begin(), theCountries.end(), 0, [](int sum, const auto& country) {
 		return sum + country->getPopCount();
 	});

@@ -1,10 +1,11 @@
 #ifndef ECONOMY_MANAGER_H
 #define ECONOMY_MANAGER_H
 #include "Configuration.h"
+#include "PoliticalManager/PoliticalManager.h"
 
 namespace V3
 {
-class PoliticalManager;
+class StateModifier;
 class Country;
 /*
  * PreReqs: Clay(Substates merged under the right country), Pops, Laws, Tech
@@ -32,10 +33,10 @@ class EconomyManager
 {
   public:
 	EconomyManager() = default;
-	void loadCentralizedCountries(const std::map<std::string, std::shared_ptr<Country>>& countries);
-	void assignCountryCPBudgets(Configuration::ECONOMY economyType, const PoliticalManager& politicalManager) const;
+	void loadPoliticalManager(const std::shared_ptr<PoliticalManager>& thePoliticalManager);
+	void assignCountryCPBudgets(Configuration::ECONOMY economyType) const;
 	void loadTerrainModifierMatrices();
-	void assignSubStateCPBudgets(Configuration::ECONOMY economyType) const;
+	void assignSubStateCPBudgets(Configuration::ECONOMY economyType, const std::map<std::string, std::shared_ptr<StateModifier>>& stateTraits) const;
 	void balanceNationalBudgets() const;
 	void buildBuildings() const;
 
@@ -47,13 +48,13 @@ class EconomyManager
 
 
   private:
-	[[nodiscard]] int getCentralizedWorldPopCount() const;
 	static double calculatePopDistanceFactor(int countryPopulation, double geoMeanPopulation);
 	[[nodiscard]] double calculateGeoMeanCentralizedPops() const;
 	void distributeBudget(double globalCP, double totalIndustryScore) const;
 
 	std::vector<std::shared_ptr<Country>> centralizedCountries;
 
+	std::shared_ptr<PoliticalManager> politicalManager;
 	std::map<std::string, double> stateTerrainModifiers;
 	std::map<std::string, std::map<std::string, double>> buildingTerrainModifiers;
 };

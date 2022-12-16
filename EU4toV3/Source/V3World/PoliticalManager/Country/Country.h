@@ -62,6 +62,7 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getProcessedData() const { return processedData; }
 	[[nodiscard]] const auto& getIndustryFactor() const { return industryFactor; }
 	[[nodiscard]] const auto& getIndustryScore() const { return industryScore; }
+	[[nodiscard]] const auto& getCPBudget() const { return industryScore; }
 	[[nodiscard]] const auto& getSourceCountry() const { return sourceCountry; }
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
 	void addSubState(const std::shared_ptr<SubState>& subState) { substates.push_back(subState); }
@@ -88,7 +89,7 @@ class Country: commonItems::parser
 	ProcessedData processedData;
 
 	double industryFactor = 0; // Modifier set by EuroCentrism or calculated by dev
-	double industryScore = 0;	// Share of global industry a country has, not normalized
+	double industryScore = 0;	// Share of global industry a country should get, not normalized
 	int CPBudget = 0;				// Construction Points for a country to spend on it's development
 
 	std::shared_ptr<EU4::Country> sourceCountry;

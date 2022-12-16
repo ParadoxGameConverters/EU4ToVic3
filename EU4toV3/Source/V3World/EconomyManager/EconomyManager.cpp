@@ -1,36 +1,41 @@
 #include "EconomyManager.h"
+#include "ClayManager/State/State.h"
+#include "ClayManager/State/StateModifier.h"
 #include "ClayManager/State/SubState.h"
 #include "EU4World/CountryManager/EU4Country.h"
 #include "Loaders/TerrainLoader/TerrainModifierLoader.h"
 #include "Log.h"
 #include "PoliticalManager/Country/Country.h"
+#include "PoliticalManager/PoliticalManager.h"
 #include <cmath>
 #include <iomanip>
-#include <numeric>
 #include <ranges>
 
-#include "PoliticalManager/PoliticalManager.h"
-
-void V3::EconomyManager::loadCentralizedCountries(const std::map<std::string, std::shared_ptr<Country>>& countries)
+void V3::EconomyManager::loadPoliticalManager(const std::shared_ptr<PoliticalManager>& thePoliticalManager)
 {
-	auto selectCentralized = [](std::shared_ptr<Country> country) {
-		return country && country->getProcessedData().type != "decentralized";
-	};
+	politicalManager = thePoliticalManager;
 
-	for (const auto& country: std::ranges::filter_view(std::views::values(countries), selectCentralized))
+	for (const auto& country: std::views::values(politicalManager->getCountries()))
 	{
+		if (!country)
+			continue;
+		if (country->getProcessedData().type == "decentralized")
+			continue;
+
 		centralizedCountries.push_back(country);
 	}
 }
 
-void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY economyType, const PoliticalManager& politicalManager) const
+void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY economyType) const
 {
 	// Some global value of CP to spend, calibrate to Vanilla.
 	double globalCP = 1208050;
+
 	// TODO(Gawquon): adjust based on date
 	globalCP *= 1;
+
 	// adjust based on amount of world centralized by population, calibrated to Vanilla
-	const double centralizedPopRatio = static_cast<double>(getCentralizedWorldPopCount()) / politicalManager.getWorldPopCount();
+	const double centralizedPopRatio = static_cast<double>(politicalManager->getCountriesPopCount(centralizedCountries)) / politicalManager->getWorldPopCount();
 	const double globalPopFactor = centralizedPopRatio / .975;
 
 	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << centralizedPopRatio * 100
@@ -66,6 +71,7 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 	distributeBudget(globalCP, totalIndustryScore);
 
 	/*
+	// TODO(Gawquon): Dev based
 	// config option 2. Pop & development
 	if (economyType == Configuration::ECONOMY::DevBased)
 	{
@@ -89,11 +95,6 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 
 void V3::EconomyManager::loadTerrainModifierMatrices()
 {
-	// Config file, loads in a mapping to the class data
-	// Something where desert = priority 0.7 and desert = glassworks 1.2
-	// So a country invests less in a state with desert
-	// But also tends to build more glassworks than other factories in the desert
-
 	TerrainModifierLoader terrainModifierLoader;
 	terrainModifierLoader.loadTerrainModifiers("configurables/terrain_econ_modifiers.txt");
 
@@ -101,18 +102,81 @@ void V3::EconomyManager::loadTerrainModifierMatrices()
 	buildingTerrainModifiers = terrainModifierLoader.getTerrainBuildingModifiers();
 }
 
-void V3::EconomyManager::assignSubStateCPBudgets(const Configuration::ECONOMY economyType) const
+void V3::EconomyManager::assignSubStateCPBudgets(const Configuration::ECONOMY economyType,
+	 const std::map<std::string, std::shared_ptr<StateModifier>>& stateTraits) const
 {
 	// Distribute CP budget from a country to its substates
 	for (const auto& country: centralizedCountries)
 	{
-		if (economyType != Configuration::ECONOMY::DevBased)
+		double totalIndustryScore = 0.0; // accumulate
+		for (const auto& subState: country->getSubStates())
 		{
-			// Score is based on population and adjusted by state modifiers/terrain
+			if (!subState)
+				continue;
+
+			double base = 0;
+
+			if (economyType == Configuration::ECONOMY::TechGroup)
+			{
+				// Score is based on population
+				base = subState->getSubStatePops().getPopCount();
+			}
+			if (economyType == Configuration::ECONOMY::DevBased)
+			{
+				// TODO(Gawquon): Dev based
+				// Score is based on Dev, penalized by population
+				// base = subState->getSourceProvinceData() ;
+			}
+
+			// Adjust for terrain
+			double terrainMultiplier = -1; // Config is based around 1.0 for human readability
+			for (const auto& [terrain, frequency]: subState->getTerrainFrequency())
+			{
+				if (!stateTerrainModifiers.contains(terrain))
+				{
+					if (terrain == "ocean" || terrain == "lake")
+					{
+						Log(LogLevel::Debug) << "Water terrain found in " << country->getTag() << "'s SubState " << subState->getHomeState()->getName()
+													<< " WTF Paradox. Ignoring.";
+					}
+					else
+					{
+						Log(LogLevel::Warning) << "Unrecognized terrain, " << terrain << ", in " << country->getTag() << "'s SubState "
+													  << subState->getHomeState()->getName() << ". Ignoring.";
+					}
+					continue;
+				}
+				terrainMultiplier += stateTerrainModifiers.at(terrain) * frequency;
+			}
+
+			// Adjust for state modifiers
+			double stateTraitMultiplier = 0;
+			for (const auto& trait: subState->getHomeState()->getTraits())
+			{
+				if (!stateTraits.contains(trait))
+				{
+					Log(LogLevel::Warning) << "Unrecognized state trait in " << subState->getHomeState()->getName() << ". Ignoring.";
+					continue;
+				}
+				const auto& stateTrait = stateTraits.at(trait);
+
+				// Throughput bonuses to goods, buildings or whole building groups factor in
+				const double goodsModifiers = stateTrait->getAllBonuses(stateTrait->getGoodsModifiersMap());
+				const double buildingsModifiers = stateTrait->getAllBonuses(stateTrait->getBuildingModifiersMap());
+				const double buildingGroupsModifiers = stateTrait->getAllBonuses(stateTrait->getBuildingGroupModifiersMap());
+
+				stateTraitMultiplier += goodsModifiers + buildingsModifiers + buildingGroupsModifiers;
+			}
+
+			subState->setIndustryScore(std::max(0.0, base * (1 + terrainMultiplier + stateTraitMultiplier)));
+			totalIndustryScore += subState->getIndustryScore();
 		}
-		else
+
+		// Now back through substates, give each a percentage of country's budget based on percent of total industry score
+		for (const auto& subState: country->getSubStates())
 		{
-			// Score is based on Dev, penalized by population and adjusted by state modifiers/terrain
+			const double stateBudget = country->getCPBudget() * subState->getIndustryScore() / totalIndustryScore;
+			subState->setCPBudget(static_cast<int>(std::round(stateBudget)));
 		}
 	}
 }
@@ -143,13 +207,6 @@ void V3::EconomyManager::buildBuildings() const
 			}
 		}
 	}
-}
-
-int V3::EconomyManager::getCentralizedWorldPopCount() const
-{
-	return std::accumulate(centralizedCountries.begin(), centralizedCountries.end(), 0, [](int sum, const auto& country) {
-		return sum + country->getPopCount();
-	});
 }
 
 double V3::EconomyManager::calculatePopDistanceFactor(const int countryPopulation, const double geoMeanPopulation)

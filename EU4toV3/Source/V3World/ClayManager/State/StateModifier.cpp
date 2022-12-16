@@ -2,6 +2,8 @@
 #include "CommonRegexes.h"
 #include "EconomyManager/Building/BuildingGroups.h"
 #include "ParserHelpers.h"
+#include <numeric>
+#include <ranges>
 
 void V3::StateModifier::loadStateModifier(std::istream& theStream)
 {
@@ -45,6 +47,13 @@ void V3::StateModifier::registerKeys()
 		buildingModifiers.emplace(id, commonItems::getDouble(theStream));
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+}
+
+double V3::StateModifier::getAllBonuses(std::map<std::string, double> modifierMap)
+{
+	auto modifiers = std::views::values(modifierMap);
+
+	return std::accumulate(modifiers.begin(), modifiers.end(), 0.0);
 }
 
 std::optional<double> V3::StateModifier::getBuildingGroupModifier(const std::string& buildingGroup, std::shared_ptr<BuildingGroups> bgs) const
