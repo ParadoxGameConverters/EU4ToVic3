@@ -11,11 +11,9 @@
 #include <iomanip>
 #include <ranges>
 
-void V3::EconomyManager::loadPoliticalManager(const std::shared_ptr<PoliticalManager>& thePoliticalManager)
+void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
 {
-	politicalManager = thePoliticalManager;
-
-	for (const auto& country: std::views::values(politicalManager->getCountries()))
+	for (const auto& country: std::views::values(countries))
 	{
 		if (!country)
 			continue;
@@ -26,7 +24,7 @@ void V3::EconomyManager::loadPoliticalManager(const std::shared_ptr<PoliticalMan
 	}
 }
 
-void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY economyType) const
+void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY economyType, const PoliticalManager& politicalManager) const
 {
 	// Some global value of CP to spend, calibrate to Vanilla.
 	double globalCP = 1208050;
@@ -35,8 +33,8 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 	globalCP *= 1;
 
 	// adjust based on amount of world centralized by population, calibrated to Vanilla
-	const double centralizedPopRatio = static_cast<double>(politicalManager->getCountriesPopCount(centralizedCountries)) / politicalManager->getWorldPopCount();
-	const double globalPopFactor = centralizedPopRatio / .975;
+	const double centralizedPopRatio = static_cast<double>(PoliticalManager::getCountriesPopCount(centralizedCountries)) / politicalManager.getWorldPopCount();
+	const double globalPopFactor = (centralizedPopRatio / .975) - 1; // TODO(Gawquon) Clean up these ratios readability, maybe add some helpers
 
 	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << centralizedPopRatio * 100
 							  << "% Centralized by population. Adjusting global CP values by: " << globalPopFactor * 100 << "%";
@@ -59,15 +57,19 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 		}
 
 		// adjust global total by average industry factor compared to baseline
-		const double globalIndustryFactor = totalIndustryFactor / static_cast<double>(centralizedCountries.size()) / 0.8;
-		globalCP *= (globalIndustryFactor + globalPopFactor);
+		const double globalIndustryFactor = (totalIndustryFactor / static_cast<double>(centralizedCountries.size()) / 0.8) - 1;
+		globalCP *= (1 + globalIndustryFactor + globalPopFactor);
 
-		Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << globalIndustryFactor * 100
-								  << "% Developed compared to baseline. Compensating";
+		Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << (globalIndustryFactor + 1) * 100
+								  << "% industrial compared to baseline. Compensating";
+	}
+	if (economyType == Configuration::ECONOMY::Test)
+	{
+		globalCP *= (1 + globalPopFactor);
 	}
 
 	// distribute each country its budget
-	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world has " << globalCP << " to spend on industry.";
+	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world has " << globalCP << " CP to spend on industry.";
 	distributeBudget(globalCP, totalIndustryScore);
 
 	/*
@@ -88,7 +90,7 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 			totalIndustryFactor += country->getIndustryFactor();
 		}
 
-		globalCP *= globalPopFactor;
+		globalCP *= (1 + globalPopFactor);
 	}
 	*/
 }
@@ -217,7 +219,7 @@ double V3::EconomyManager::calculatePopDistanceFactor(const int countryPopulatio
 	}
 	else
 	{
-		return log(popPercent + 1) + 0.7;
+		return log1p(popPercent) + 0.7;
 	}
 }
 
@@ -232,6 +234,7 @@ double V3::EconomyManager::calculateGeoMeanCentralizedPops() const
 
 	sum /= static_cast<double>(centralizedCountries.size());
 
+	Log(LogLevel::Debug) << "The Geometric Mean of all centralized countries population is : " << exp(sum);
 	return exp(sum);
 }
 

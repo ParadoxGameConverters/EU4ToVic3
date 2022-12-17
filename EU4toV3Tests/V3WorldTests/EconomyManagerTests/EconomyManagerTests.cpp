@@ -5,7 +5,8 @@
 #include "CountryMapper/CountryMapper.h"
 #include "CultureLoader/CultureLoader.h"
 #include "CultureMapper/CultureMapper.h"
-#include "PoliticalManager/PoliticalManager.h"
+#include "EconomyManager/EconomyManager.h"
+#include "PoliticalManager/Country/Country.h"
 #include "PopManager/PopManager.h"
 #include "ProvinceManager/ProvinceManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
@@ -15,6 +16,7 @@
 #include <Log.h>
 #include <gmock/gmock-matchers.h>
 
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 namespace
 {
 std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
@@ -77,8 +79,7 @@ std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
 	return {clayManager, politicalManager};
 }
 
-std::tuple<V3::PopManager, V3::PoliticalManager, mappers::CultureMapper, mappers::ReligionMapper, V3::ClayManager, EU4::CultureLoader, EU4::ReligionLoader>
-prepMappers()
+V3::PoliticalManager prepWorld()
 {
 	const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 	auto eu4Path = "TestFiles/eu4installation/";
@@ -106,11 +107,77 @@ prepMappers()
 
 	popManager.generatePops(clayManager);
 
-	return std::tuple{popManager, politicalManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader};
+	return politicalManager;
 }
 
 } // namespace
 
-TEST(V3World_EconomyManagerTests, TBD)
+TEST(V3World_EconomyManagerTests, EconomyManagerStoresOnlyCentralizedStates)
+{
+	V3::EconomyManager econManager;
+
+	auto politicalManager = prepWorld();
+
+	EXPECT_EQ(0, econManager.getCentralizedCountries().size());
+	EXPECT_EQ(5, politicalManager.getCountries().size());
+
+	econManager.loadCentralizedStates(politicalManager.getCountries());
+
+	EXPECT_EQ(3, econManager.getCentralizedCountries().size());
+	EXPECT_EQ("GA2", econManager.getCentralizedCountries()[0]->getTag());
+	EXPECT_EQ("GA9", econManager.getCentralizedCountries()[1]->getTag());
+	EXPECT_EQ("X00", econManager.getCentralizedCountries()[2]->getTag());
+}
+
+TEST(V3World_EconomyManagerTests, GlobalCPScalesByPopulation)
+{
+	auto politicalManager = prepWorld();
+
+	V3::EconomyManager econManager;
+	econManager.loadCentralizedStates(politicalManager.getCountries());
+
+	EXPECT_EQ(5500, politicalManager.getWorldPopCount());
+	EXPECT_EQ(4600, V3::PoliticalManager::getCountriesPopCount(econManager.getCentralizedCountries()));
+
+	std::stringstream log;
+	std::streambuf* cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+
+	econManager.assignCountryCPBudgets(Configuration::ECONOMY::Test, politicalManager);
+
+	std::cout.rdbuf(cout_buffer);
+
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> The world is 84% Centralized by population. Adjusting global CP values by: -14%)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> The world has 1036276 CP to spend on industry.)"));
+}
+
+// TODO(Gawquon): Implement date scaling and config point
+TEST(Disbaled_V3World_EconomyManagerTests, GlobalCPScalesByDate)
+{
+	auto politicalManager = prepWorld();
+
+	V3::EconomyManager econManager;
+	econManager.loadCentralizedStates(politicalManager.getCountries());
+
+
+}
+
+TEST(V3World_EconomyManagerTests, GlobalCPDistributionTechGroup)
+{
+}
+
+TEST(DISABLED_V3World_EconomyManagerTests, GlobalCPDistributionDev)
+{
+}
+
+TEST(V3World_EconomyManagerTests, CalculateGeoMeanTest)
+{
+}
+
+TEST(V3World_EconomyManagerTests, AssignSubStateCPBudgetsTechGroup)
+{
+}
+
+TEST(DISABLED_V3World_EconomyManagerTests, AssignSubStateCPBudgetsDev)
 {
 }

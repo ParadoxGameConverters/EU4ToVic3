@@ -19,6 +19,8 @@
 
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 
+namespace
+{
 std::tuple<V3::PoliticalManager, V3::PopManager, mappers::CultureMapper, mappers::ReligionMapper, V3::ClayManager, EU4::CultureLoader, EU4::ReligionLoader>
 prepMappers()
 {
@@ -100,6 +102,7 @@ prepMappers()
 
 	return std::tuple{politicalManager, popManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader};
 }
+} // namespace
 
 TEST(V3World_PoliticalManagerTests, PoliticalManagerCanInitializeVanillaCountries)
 {

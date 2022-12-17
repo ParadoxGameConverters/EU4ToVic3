@@ -33,8 +33,8 @@ class EconomyManager
 {
   public:
 	EconomyManager() = default;
-	void loadPoliticalManager(const std::shared_ptr<PoliticalManager>& thePoliticalManager);
-	void assignCountryCPBudgets(Configuration::ECONOMY economyType) const;
+	void loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries);
+	void assignCountryCPBudgets(Configuration::ECONOMY economyType, const PoliticalManager& politicalManager) const;
 	void loadTerrainModifierMatrices();
 	void assignSubStateCPBudgets(Configuration::ECONOMY economyType, const std::map<std::string, std::shared_ptr<StateModifier>>& stateTraits) const;
 	void balanceNationalBudgets() const;
@@ -46,6 +46,8 @@ class EconomyManager
 	void generateTrade() const;
 	void backfillBureaucracy() const;
 
+	[[nodiscard]] const auto& getCentralizedCountries() const { return centralizedCountries; }
+
 
   private:
 	static double calculatePopDistanceFactor(int countryPopulation, double geoMeanPopulation);
@@ -54,7 +56,6 @@ class EconomyManager
 
 	std::vector<std::shared_ptr<Country>> centralizedCountries;
 
-	std::shared_ptr<PoliticalManager> politicalManager;
 	std::map<std::string, double> stateTerrainModifiers;
 	std::map<std::string, std::map<std::string, double>> buildingTerrainModifiers;
 };
