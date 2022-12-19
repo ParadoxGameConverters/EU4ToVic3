@@ -153,7 +153,7 @@ void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
 	{
 		// this is a freshly-generated decentralized country with no source data whatsoever.
 		if (!country->getVanillaData() && country->getProcessedData().type == "decentralized")
-			country->generateDecentralizedData(clayManager, v3LocLoader, eu4LocLoader);
+			country->generateDecentralizedData(v3LocLoader, eu4LocLoader);
 
 		// this is a vic3-only (vanilla) country with no EU4 match. It's likely extinct.
 		else if (country->getVanillaData() && !country->getSourceCountry())

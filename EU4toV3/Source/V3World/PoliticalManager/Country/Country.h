@@ -93,6 +93,7 @@ class Country: commonItems::parser
 		 mappers::CultureMapper& cultureMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader);
+	void convertTier();
 	void generateDecentralizedLocs(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 
 	std::string tag;

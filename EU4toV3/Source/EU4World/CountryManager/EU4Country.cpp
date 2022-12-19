@@ -59,7 +59,7 @@ void EU4::Country::registerKeys()
 		libertyDesire = commonItems::getDouble(theStream);
 	});
 	registerKeyword("institutions", [this](std::istream& theStream) {
-		for (auto institution: commonItems::getInts(theStream))
+		for (const auto institution: commonItems::getInts(theStream))
 			if (institution == 1)
 				embracedInstitutions.push_back(true);
 			else
@@ -75,7 +75,7 @@ void EU4::Country::registerKeys()
 		religion = commonItems::getString(theStream);
 	});
 	registerKeyword("age_score", [this](std::istream& theStream) {
-		for (auto& agScore: commonItems::getDoubles(theStream))
+		for (const auto& agScore: commonItems::getDoubles(theStream))
 			score += agScore;
 	});
 	registerKeyword("stability", [this](std::istream& theStream) {
@@ -100,6 +100,9 @@ void EU4::Country::registerKeys()
 		const GovernmentSection theSection(theStream);
 		government = theSection.getGovernment();
 		governmentReforms = theSection.getGovernmentReforms();
+	});
+	registerKeyword("government_rank", [this](std::istream& theStream) {
+		governmentRank = commonItems::getInt(theStream);
 	});
 	registerKeyword("active_relations", [this](std::istream& theStream) {
 		const EU4Relations activeRelations(theStream);

@@ -100,14 +100,32 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	// Culture
 	convertCulture(clayManager, cultureMapper, cultureLoader, religionLoader);
 
+	// tier
+	convertTier();
+
 	// country type
 	processedData.type = "recognized";
-	// tier
-	processedData.tier = "kingdom";
-
 
 	// namedaftercapital
 	processedData.is_named_from_capital = false;
+}
+
+void V3::Country::convertTier()
+{
+	// TODO: Allow some dynamic configurable rules for this. VN for example has 6 incoming government ranks almost literally matching the Vic3 ones.
+
+	if (sourceCountry->getGovernmentRank() == 1 && substates.size() == 1)
+		processedData.tier = "city_state";
+	else if (sourceCountry->getGovernmentRank() == 1)
+		processedData.tier = "principality";
+	else if (sourceCountry->getGovernmentRank() == 2 && substates.size() <= 3)
+		processedData.tier = "grand_principality";
+	else if (sourceCountry->getGovernmentRank() == 2)
+		processedData.tier = "kingdom";
+	else if (sourceCountry->getGovernmentRank() == 3 && substates.size() <= 20)
+		processedData.tier = "empire";
+	else
+		processedData.tier = "hegemony";
 }
 
 void V3::Country::convertCulture(const ClayManager& clayManager,
