@@ -11,6 +11,8 @@ V3::Chunk prepChunk()
 	provinceStream << "-3={ owner = TA3 base_tax=1 base_production=1 base_manpower=1 culture = culture2 religion = religion2 }\n"; // weight 3
 	EU4::ProvinceManager provinceManager;
 	provinceManager.loadProvinces(provinceStream);
+	provinceManager.getProvince(2)->addCapital("TA2"); // we're transfering this as well.
+	provinceManager.getProvince(3)->addCapital("TA3"); // we're making both capitals to make things dramatic.
 	provinceManager.buildProvinceWeights();
 	provinceManager.buildPopRatios({}, false);
 
@@ -36,6 +38,7 @@ TEST(V3World_ChunkTests, SourceProvinceDataCanBeAdded)
 	ASSERT_EQ(1, sp1.popRatios.size());
 	EXPECT_EQ("culture", sp1.popRatios[0].getCulture());
 	EXPECT_EQ("religion", sp1.popRatios[0].getReligion());
+	EXPECT_THAT(sp1.eu4Capitals, testing::UnorderedElementsAre("TA2"));
 	EXPECT_DOUBLE_EQ(27, sp1weight);
 
 	EXPECT_EQ("TA3", sp2.owner);
@@ -43,7 +46,15 @@ TEST(V3World_ChunkTests, SourceProvinceDataCanBeAdded)
 	ASSERT_EQ(1, sp2.popRatios.size());
 	EXPECT_EQ("culture2", sp2.popRatios[0].getCulture());
 	EXPECT_EQ("religion2", sp2.popRatios[0].getReligion());
+	EXPECT_THAT(sp2.eu4Capitals, testing::UnorderedElementsAre("TA3"));
 	EXPECT_DOUBLE_EQ(3, sp2weight);
+}
+
+TEST(V3World_ChunkTests, CapitalsCanBeReported)
+{
+	const auto chunk = prepChunk();
+
+	EXPECT_THAT(chunk.getKnownCapitals(), testing::UnorderedElementsAre("TA2", "TA3"));
 }
 
 TEST(V3World_ChunkTests, OwnerWeightsCanBeCalced)

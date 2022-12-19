@@ -79,7 +79,7 @@ void V3::PoliticalManager::generateDecentralizedCountry(const std::string& cultu
 	newCountry->setTag(v3tag);
 	newCountry->setSubStates(subStates);
 	ProcessedData data;
-	data.cultures.emplace(culture);
+	data.cultures.emplace_back(culture);
 	data.type = "decentralized";
 	newCountry->setProcessedData(data);
 	for (const auto& subState: newCountry->getSubStates())
@@ -140,6 +140,10 @@ std::string V3::PoliticalManager::getDominantDemographic(const std::vector<Demog
 }
 
 void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
+	 mappers::CultureMapper& cultureMapper,
+	 const mappers::ReligionMapper& religionMapper,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader,
 	 const LocalizationLoader& v3LocLoader,
 	 const EU4::EU4LocalizationLoader& eu4LocLoader) const
 {
@@ -157,7 +161,7 @@ void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
 
 		// otherwise, this is a regular imported EU4 country
 		else if (country->getSourceCountry())
-			country->convertFromEU4Country(clayManager);
+			country->convertFromEU4Country(clayManager, cultureMapper, religionMapper, cultureLoader, religionLoader);
 
 		else
 			Log(LogLevel::Warning) << "Country " << tag << " has no known sources! Not importing!";

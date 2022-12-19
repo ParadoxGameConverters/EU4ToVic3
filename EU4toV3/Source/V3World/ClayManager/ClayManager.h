@@ -51,6 +51,7 @@ class ClayManager
 
 	[[nodiscard]] bool regionIsValid(const std::string& region) const;
 	[[nodiscard]] bool stateIsInRegion(const std::string& state, const std::string& region) const;
+	[[nodiscard]] std::optional<std::string> getHistoricalCapitalState(const std::string& eu4tag) const;
 
   private:
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> chunkToSubStatesTransferFunction(const std::shared_ptr<Chunk>& chunk) const;

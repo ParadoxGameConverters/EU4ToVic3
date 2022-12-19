@@ -51,6 +51,14 @@ class CultureMapper: commonItems::parser
 		 bool neoCultureRequest = false,
 		 bool silent = false);
 
+	[[nodiscard]] std::optional<std::string> suspiciousCultureMatch(const V3::ClayManager& clayManager,
+		 const EU4::CultureLoader& cultureLoader,
+		 const EU4::ReligionLoader& religionLoader,
+		 const std::string& eu4culture,
+		 const std::string& eu4religion,
+		 const std::string& v3state,
+		 const std::string& v3ownerTag);
+
 	void generateCultureDefinitions(const commonItems::ModFilesystem& modFS,
 		 const std::string& nameListsPath,
 		 const std::string& nameListMapPath,

@@ -1,11 +1,14 @@
 #include "Country.h"
+#include "ClayManager/ClayManager.h"
 #include "ClayManager/State/SubState.h"
 #include "CommonRegexes.h"
 #include "CountryManager/EU4Country.h"
+#include "CultureMapper/CultureMapper.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
 #include "Loaders/LocalizationLoader/EU4LocalizationLoader.h"
 #include "Log.h"
 #include "ParserHelpers.h"
+#include "ReligionMapper/ReligionMapper.h"
 #include <numeric>
 
 namespace
@@ -44,8 +47,7 @@ void V3::Country::registerKeys()
 		vanillaData->tier = commonItems::getString(theStream);
 	});
 	registerKeyword("cultures", [this](std::istream& theStream) {
-		for (const auto& culture: commonItems::getStrings(theStream))
-			vanillaData->cultures.insert(culture);
+		vanillaData->cultures = commonItems::getStrings(theStream);
 	});
 	registerKeyword("religion", [this](std::istream& theStream) {
 		vanillaData->religion = commonItems::getString(theStream);
@@ -63,13 +65,22 @@ void V3::Country::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-void V3::Country::convertFromEU4Country(const ClayManager& clayManager)
+void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
+	 mappers::CultureMapper& cultureMapper,
+	 const mappers::ReligionMapper& religionMapper,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader)
 {
 	// color - using eu4 colors so people don't lose their shit over red venice and orange england.
 	if (sourceCountry->getNationalColors().getMapColor())
+	{
 		processedData.color = sourceCountry->getNationalColors().getMapColor();
+	}
 	else
-		processedData.color = vanillaData->color;
+	{
+		if (vanillaData)
+			processedData.color = vanillaData->color;
+	}
 
 	// eu4 locs
 	processedData.name = sourceCountry->getName();
@@ -78,21 +89,118 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager)
 	processedData.adjectivesByLanguage = sourceCountry->getAllAdjectiveLocalizations();
 
 	// TODO: UNTESTED - TESTS IF POSSIBLE WHEN CONVERSION DONE
+
+	// Capital
+	convertCapital(clayManager);
+
+	// Religion
+	convertReligion(religionMapper);
+
+	// Culture
+	convertCulture(clayManager, cultureMapper, cultureLoader, religionLoader);
+
 	// country type
 	processedData.type = "recognized";
 	// tier
 	processedData.tier = "kingdom";
-	// cultures
-	processedData.cultures = {"basque"};
-	// religion
-	processedData.religion = "catholic";
-	// capital
-	if (!substates.empty())
-		processedData.capitalStateName = substates[0]->getHomeStateName();
-	else
-		processedData.capitalStateName = "STATE_NAVARRA";
+
+
 	// namedaftercapital
 	processedData.is_named_from_capital = false;
+}
+
+void V3::Country::convertCulture(const ClayManager& clayManager,
+	 mappers::CultureMapper& cultureMapper,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader)
+{
+	// Cultures can be tricky. We may have neocultures generated for our pops, meaning we need to account for being a neoculture country.
+	// We also can easily have a primary culture with 0 actual pops in our country.
+	// Again, as for Vic2, we're *ignoring* accepted cultures completely.
+
+	if (sourceCountry->getPrimaryCulture().empty())
+	{
+		Log(LogLevel::Warning) << "EU4 " << sourceCountry->getTag() << " had no primary culture!";
+		return;
+	}
+
+	// Do we have a capital?
+	if (processedData.capitalStateName.empty())
+	{
+		// We already resurrected dead capitals... Default.
+		// TODO: Try to figure out where's a majority of cores? Maybe?
+		const auto& cultureMatch = cultureMapper.cultureMatch(clayManager,
+			 cultureLoader,
+			 religionLoader,
+			 sourceCountry->getPrimaryCulture(),
+			 sourceCountry->getReligion(),
+			 "",
+			 tag,
+			 false,
+			 false);
+		if (cultureMatch)
+			processedData.cultures.push_back(*cultureMatch);
+		else
+			Log(LogLevel::Warning) << "Could not set primary culture for " << tag << "!";
+		return;
+	}
+
+	// We have a capital. This is good. Is by any chance the capital in some colonial region, where the eu4 primary culture is an invasive species?
+	// We leave such questions to the cultureMapper.
+	const auto& cultureMatch = cultureMapper.suspiciousCultureMatch(clayManager,
+		 cultureLoader,
+		 religionLoader,
+		 sourceCountry->getPrimaryCulture(),
+		 sourceCountry->getReligion(),
+		 processedData.capitalStateName,
+		 tag);
+	if (cultureMatch)
+		processedData.cultures.push_back(*cultureMatch);
+
+	// if this fails... do nothing for now.
+	if (processedData.cultures.empty())
+		Log(LogLevel::Warning) << "Could not determine culture for country: " << tag;
+}
+
+
+void V3::Country::convertReligion(const mappers::ReligionMapper& religionMapper)
+{
+	if (sourceCountry->getReligion().empty())
+	{
+		Log(LogLevel::Warning) << "EU4 " << sourceCountry->getTag() << " had no religion!";
+		return;
+	}
+
+	if (const auto& religionMatch = religionMapper.getV3Religion(sourceCountry->getReligion()); religionMatch)
+		processedData.religion = *religionMatch;
+
+	// if this fails... do nothing for now.
+	if (processedData.religion.empty())
+		Log(LogLevel::Warning) << "Could not determine religion for country: " << tag;
+}
+
+void V3::Country::convertCapital(const ClayManager& clayManager)
+{
+	for (const auto& substate: substates)
+		if (substate->isCapital())
+		{
+			processedData.capitalStateName = substate->getHomeStateName();
+			return;
+		}
+
+	// If that fails (capitals can get lost in  transition, dead countries have no substates...), try anything.
+	// maybe historical?
+	if (const auto& historicalMatch = clayManager.getHistoricalCapitalState(sourceCountry->getTag()); historicalMatch)
+	{
+		processedData.capitalStateName = *historicalMatch;
+		return;
+	}
+
+	// still nothing?
+	if (processedData.capitalStateName.empty() && !substates.empty())
+		processedData.capitalStateName = substates[0]->getHomeStateName();
+
+	// TODO: Try anything harder. At leat try to determine the majority of land?
 }
 
 void V3::Country::generateDecentralizedData(const ClayManager& clayManager,
