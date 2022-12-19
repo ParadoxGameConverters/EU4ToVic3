@@ -233,7 +233,7 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanGenerateDecentralizedCoun
 	EXPECT_EQ("X01", *substate->getOwnerTag());
 
 	// culture is based on original population of STATE_TEST_LAND3 in vanilla installation, thus, swedish.
-	EXPECT_EQ("swedish", x01->getProcessedData().cultures[0]);
+	EXPECT_TRUE(x01->getProcessedData().cultures.contains("swedish"));
 }
 
 TEST(V3World_PoliticalManagerTests, DecentralizedCountriesCanBeFilled)

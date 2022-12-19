@@ -23,7 +23,7 @@ struct VanillaCommonCountryData
 {
 	std::string type;
 	std::string tier;
-	std::vector<std::string> cultures;
+	std::set<std::string> cultures;
 	std::string religion;
 	std::string capitalStateName;
 	std::optional<commonItems::Color> color;
@@ -34,7 +34,7 @@ struct ProcessedData
 {
 	std::string type;
 	std::string tier;
-	std::vector<std::string> cultures;
+	std::set<std::string> cultures;
 	std::string religion;
 	std::string capitalStateName;
 	std::optional<commonItems::Color> color;
@@ -65,7 +65,7 @@ class Country: commonItems::parser
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader);
 	void copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
-	void generateDecentralizedData(const ClayManager& clayManager, const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
+	void generateDecentralizedData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 
 	[[nodiscard]] const auto& getTag() const { return tag; }
 	[[nodiscard]] const auto& getVanillaData() const { return vanillaData; }

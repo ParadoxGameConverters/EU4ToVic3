@@ -79,7 +79,7 @@ void V3::PoliticalManager::generateDecentralizedCountry(const std::string& cultu
 	newCountry->setTag(v3tag);
 	newCountry->setSubStates(subStates);
 	ProcessedData data;
-	data.cultures.emplace_back(culture);
+	data.cultures.emplace(culture);
 	data.type = "decentralized";
 	newCountry->setProcessedData(data);
 	for (const auto& subState: newCountry->getSubStates())

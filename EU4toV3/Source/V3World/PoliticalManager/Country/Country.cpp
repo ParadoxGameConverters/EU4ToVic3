@@ -47,7 +47,8 @@ void V3::Country::registerKeys()
 		vanillaData->tier = commonItems::getString(theStream);
 	});
 	registerKeyword("cultures", [this](std::istream& theStream) {
-		vanillaData->cultures = commonItems::getStrings(theStream);
+		for (const auto& culture: commonItems::getStrings(theStream))
+			vanillaData->cultures.emplace(culture);
 	});
 	registerKeyword("religion", [this](std::istream& theStream) {
 		vanillaData->religion = commonItems::getString(theStream);
@@ -139,7 +140,7 @@ void V3::Country::convertCulture(const ClayManager& clayManager,
 			 false,
 			 false);
 		if (cultureMatch)
-			processedData.cultures.push_back(*cultureMatch);
+			processedData.cultures.emplace(*cultureMatch);
 		else
 			Log(LogLevel::Warning) << "Could not set primary culture for " << tag << "!";
 		return;
@@ -155,13 +156,12 @@ void V3::Country::convertCulture(const ClayManager& clayManager,
 		 processedData.capitalStateName,
 		 tag);
 	if (cultureMatch)
-		processedData.cultures.push_back(*cultureMatch);
+		processedData.cultures.emplace(*cultureMatch);
 
 	// if this fails... do nothing for now.
 	if (processedData.cultures.empty())
 		Log(LogLevel::Warning) << "Could not determine culture for country: " << tag;
 }
-
 
 void V3::Country::convertReligion(const mappers::ReligionMapper& religionMapper)
 {
@@ -188,7 +188,7 @@ void V3::Country::convertCapital(const ClayManager& clayManager)
 			return;
 		}
 
-	// If that fails (capitals can get lost in  transition, dead countries have no substates...), try anything.
+	// If that fails (capitals can get lost in transition, dead countries have no substates...), try anything.
 	// maybe historical?
 	if (const auto& historicalMatch = clayManager.getHistoricalCapitalState(sourceCountry->getTag()); historicalMatch)
 	{
@@ -200,12 +200,10 @@ void V3::Country::convertCapital(const ClayManager& clayManager)
 	if (processedData.capitalStateName.empty() && !substates.empty())
 		processedData.capitalStateName = substates[0]->getHomeStateName();
 
-	// TODO: Try anything harder. At leat try to determine the majority of land?
+	// TODO: Try anything harder. At least try to determine the majority of land?
 }
 
-void V3::Country::generateDecentralizedData(const ClayManager& clayManager,
-	 const LocalizationLoader& v3LocLoader,
-	 const EU4::EU4LocalizationLoader& eu4LocLoader)
+void V3::Country::generateDecentralizedData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader)
 {
 	// COMMON/COUNTRY DATA
 	processedData.color = generateDecentralizedColors(tag);
