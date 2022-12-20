@@ -46,8 +46,7 @@ std::set<std::string> V3::Chunk::getKnownCapitals() const
 {
 	std::set<std::string> capitals;
 	for (const auto& wspd: weightedSourceProvinceData | std::views::keys)
-		if (!wspd.eu4Capitals.empty())
-			capitals.insert(wspd.eu4Capitals.begin(), wspd.eu4Capitals.end());
+		capitals.insert(wspd.eu4Capitals.begin(), wspd.eu4Capitals.end());
 	return capitals;
 }
 

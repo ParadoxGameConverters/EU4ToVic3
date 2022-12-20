@@ -279,6 +279,7 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::chunkToSubStatesTran
 		const double subStateWeight = totalChunkWeight * subStateSizeFactor;
 
 		// we need to return to the largest substate later to set a capital.
+		// TODO: Use landshare - set it up immediately after all substates are in place after shoving all remaining land into substates.
 		if (subStateWeight > largestSubStateWeight)
 		{
 			largestSubStateWeight = subStateWeight;

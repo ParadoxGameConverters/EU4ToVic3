@@ -219,6 +219,7 @@ void V3::Country::convertCapital(const ClayManager& clayManager)
 		processedData.capitalStateName = substates[0]->getHomeStateName();
 
 	// TODO: Try anything harder. At least try to determine the majority of land?
+	// TODO: After resource calc is called (call it early along with landshares!) use that.
 }
 
 void V3::Country::generateDecentralizedData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader)

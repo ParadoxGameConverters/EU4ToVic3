@@ -267,13 +267,6 @@ std::optional<std::string> mappers::CultureMapper::suspiciousCultureMatch(const 
 	 const std::string& v3state,
 	 const std::string& v3ownerTag)
 {
-	// This is a check where we ping for a v3 culture without having a clue what we're asking for exactly.
-	// 1. If the state is colonial, and we have a record of that eu4 culture having a neoculture in that colony,
-	//	then we return that neoculture.
-	// 2. If the state is colonial, and we don't have a record of eu4 culture having a neoculture in that colony,
-	//	it's possible we're a native country, and return regular match.
-	// 3. If the state is not colonial, return regular match same as 2.
-
 	if (const auto& potentialColony = colonialRegionMapper.getColonyNameForState(v3state, clayManager); potentialColony)
 	{
 		// this is option 1.
