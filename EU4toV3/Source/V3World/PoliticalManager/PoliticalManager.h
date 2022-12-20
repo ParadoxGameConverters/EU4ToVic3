@@ -10,11 +10,15 @@ namespace EU4
 {
 class EU4LocalizationLoader;
 class Country;
+class CultureLoader;
+class ReligionLoader;
 } // namespace EU4
 namespace mappers
 {
 class CountryMapper;
-}
+class CultureMapper;
+class ReligionMapper;
+} // namespace mappers
 namespace V3
 {
 struct Demographic;
@@ -34,7 +38,13 @@ class PoliticalManager
 	void loadCountryMapper(const std::shared_ptr<mappers::CountryMapper>& theCountryMapper);
 	void importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries);
 	void generateDecentralizedCountries(const ClayManager& clayManager, const PopManager& popManager);
-	void convertAllCountries(const ClayManager& clayManager, const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader) const;
+	void convertAllCountries(const ClayManager& clayManager,
+		 mappers::CultureMapper& cultureMapper,
+		 const mappers::ReligionMapper& religionMapper,
+		 const EU4::CultureLoader& cultureLoader,
+		 const EU4::ReligionLoader& religionLoader,
+		 const LocalizationLoader& v3LocLoader,
+		 const EU4::EU4LocalizationLoader& eu4LocLoader) const;
 
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& v3Tag) const;

@@ -259,6 +259,25 @@ void mappers::CultureMapper::registerKeys()
 	return getNeoCultureMatch(eu4culture, v3state, clayManager);
 }
 
+std::optional<std::string> mappers::CultureMapper::suspiciousCultureMatch(const V3::ClayManager& clayManager,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader,
+	 const std::string& eu4culture,
+	 const std::string& eu4religion,
+	 const std::string& v3state,
+	 const std::string& v3ownerTag)
+{
+	if (const auto& potentialColony = colonialRegionMapper.getColonyNameForState(v3state, clayManager); potentialColony)
+	{
+		// this is option 1.
+		if (colonyNeoCultureTargets.contains(*potentialColony) && colonyNeoCultureTargets.at(*potentialColony).contains(eu4culture))
+			return colonyNeoCultureTargets.at(*potentialColony).at(eu4culture);
+	}
+
+	// Otherwise, do a straight match at that location.
+	return cultureMatch(clayManager, cultureLoader, religionLoader, eu4culture, eu4religion, v3state, v3ownerTag, false, false);
+}
+
 std::string mappers::CultureMapper::getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager)
 {
 	if (v3state.empty()) // possibly pinging a general location.

@@ -174,6 +174,7 @@ void V3::ClayManager::unDisputeChunkOwnership(const SourceOwners& sourceCountrie
 	Log(LogLevel::Info) << "-> Untangling chunk ownerships.";
 
 	// Raw chunks can link to sourceProvinces of several owners. Entire chunk goes to the owner with most source Development Weight.
+	// Note: This may lead to loss of actual (not historical) capitals, but this is always a risk with N-to-X mappings.
 	// We'd let the chunks do this themselves, but we want to immediately filter out all sea chunks and random corruption.
 
 	std::vector<std::shared_ptr<Chunk>> filteredChunks;
@@ -216,6 +217,11 @@ void V3::ClayManager::unDisputeChunkOwnership(const SourceOwners& sourceCountrie
 		}
 
 		chunk->setSourceOwnerTag(newOwner->first);
+
+		// is this by any chance a capital of owner?
+		if (chunk->getKnownCapitals().contains(newOwner->first))
+			chunk->setCapital();
+
 		filteredChunks.push_back(chunk);
 	}
 	chunks.swap(filteredChunks);
@@ -260,6 +266,8 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::chunkToSubStatesTran
 	auto generatedSubStates = buildSubStates(sortedProvinces);
 
 	// update substates with metadata
+	std::shared_ptr<SubState> largestSubState;
+	double largestSubStateWeight = 0;
 	for (const auto& subState: generatedSubStates)
 	{
 		// for now, this is the simplest we can do. substateFactor is literally the amount of provinces / total provinces
@@ -269,6 +277,14 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::chunkToSubStatesTran
 		// substate weight is an *outwardly* factor, when comparing the impact of that substate's metadata against all other
 		// substates in the same state.
 		const double subStateWeight = totalChunkWeight * subStateSizeFactor;
+
+		// we need to return to the largest substate later to set a capital.
+		// TODO: Use landshare - set it up immediately after all substates are in place after shoving all remaining land into substates.
+		if (subStateWeight > largestSubStateWeight)
+		{
+			largestSubStateWeight = subStateWeight;
+			largestSubState = subState;
+		}
 
 		// This here is an *inwardly* factor - we scale chunk's metadata according to the size of our substate, so we'd receive
 		// fewer factories etc.
@@ -282,6 +298,15 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::chunkToSubStatesTran
 		if (chunk->getSourceOwnerTag())
 			subState->setSourceOwnerTag(*chunk->getSourceOwnerTag());
 	}
+
+	if (largestSubState)
+	{
+		if (chunk->isCapital())
+			largestSubState->setCapital();
+		// Also store historical capital info for eu4 countries. Relevant for dead eu4 countries.
+		largestSubState->addHistoricalCapitals(chunk->getKnownCapitals());
+	}
+
 	return generatedSubStates;
 }
 
@@ -342,7 +367,7 @@ void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::s
 
 		// all the rest must have an owner and that owner must be able to map properly.
 		auto eu4tag = substate->getSourceOwnerTag();
-		if (eu4tag->empty())
+		if (!eu4tag || eu4tag->empty())
 		{
 			Log(LogLevel::Warning) << "Substate belonging to EU4 country which we know nothing about? Ditching.";
 			continue;
@@ -667,4 +692,12 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 	newSubState->setSubStatePops(subStatePops);
 
 	return newSubState;
+}
+
+std::optional<std::string> V3::ClayManager::getHistoricalCapitalState(const std::string& eu4tag) const
+{
+	for (const auto& substate: substates)
+		if (substate->getHistoricalCapitals().contains(eu4tag))
+			return substate->getHomeStateName();
+	return std::nullopt;
 }

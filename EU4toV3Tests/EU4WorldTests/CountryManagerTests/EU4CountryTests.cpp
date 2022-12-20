@@ -400,6 +400,7 @@ TEST(EU4World_EU4CountryTests, DependentStuffCanBeSet)
 TEST(EU4World_EU4CountryTests, GovernmentAndReformsCanBeSetAndPinged)
 {
 	std::stringstream input;
+	input << "government_rank = 2\n";
 	input << "government = {\n";
 	input << "	government = monarchy\n";
 	input << "	reform_stack={\n";
@@ -408,6 +409,7 @@ TEST(EU4World_EU4CountryTests, GovernmentAndReformsCanBeSetAndPinged)
 	input << "}\n";
 	const EU4::Country country("TAG", input);
 
+	EXPECT_EQ(2, country.getGovernmentRank());
 	EXPECT_EQ("monarchy", country.getGovernment());
 	EXPECT_THAT(country.getReforms(), UnorderedElementsAre("monarchy_mechanic", "plutocratic_reform", "enforce_privileges_reform"));
 	EXPECT_TRUE(country.hasReform("plutocratic_reform"));

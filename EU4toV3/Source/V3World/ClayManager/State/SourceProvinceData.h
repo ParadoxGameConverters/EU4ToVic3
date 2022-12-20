@@ -23,6 +23,7 @@ struct SourceProvinceData
 	std::set<std::string> cores;
 	bool territorialCore = false;
 	bool sea = false;
+	std::set<std::string> eu4Capitals;
 };
 
 } // namespace V3

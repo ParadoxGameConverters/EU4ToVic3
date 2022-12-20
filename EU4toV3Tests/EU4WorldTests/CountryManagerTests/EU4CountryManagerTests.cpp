@@ -74,8 +74,8 @@ TEST(EU4World_CountryManagerTests, LinkingProvincesToOwnersWorks)
 	provinceManager.loadProvinces(provincesInput);
 
 	std::stringstream countryManagerInput;
-	countryManagerInput << "TAG = {}\n";
-	countryManagerInput << "GAT = {}\n";
+	countryManagerInput << "TAG = { capital = 2 }\n";
+	countryManagerInput << "GAT = { capital = 3 }\n";
 	EU4::CountryManager manager;
 	manager.loadCountries(countryManagerInput);
 
@@ -86,10 +86,13 @@ TEST(EU4World_CountryManagerTests, LinkingProvincesToOwnersWorks)
 
 	EXPECT_EQ(2, tag->getProvinces().size());
 	EXPECT_EQ(1, tag->getProvinces()[0]->getID());
+	EXPECT_TRUE(tag->getProvinces()[0]->getCapitals().empty());
 	EXPECT_EQ(2, tag->getProvinces()[1]->getID());
+	EXPECT_THAT(tag->getProvinces()[1]->getCapitals(), testing::UnorderedElementsAre("TAG"));
 
 	EXPECT_EQ(1, gat->getProvinces().size());
 	EXPECT_EQ(3, gat->getProvinces()[0]->getID());
+	EXPECT_THAT(gat->getProvinces()[0]->getCapitals(), testing::UnorderedElementsAre("GAT"));
 }
 
 TEST(EU4World_CountryManagerTests, LinkingProvincesToCoreOwnersWorks)

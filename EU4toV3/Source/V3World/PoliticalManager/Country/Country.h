@@ -9,7 +9,14 @@ namespace EU4
 {
 class Country;
 class EU4LocalizationLoader;
+class CultureLoader;
+class ReligionLoader;
 } // namespace EU4
+namespace mappers
+{
+class ReligionMapper;
+class CultureMapper;
+} // namespace mappers
 namespace V3
 {
 struct VanillaCommonCountryData
@@ -52,9 +59,13 @@ class Country: commonItems::parser
 	void setTag(const std::string& theTag) { tag = theTag; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 
-	void convertFromEU4Country(const ClayManager& clayManager);
+	void convertFromEU4Country(const ClayManager& clayManager,
+		 mappers::CultureMapper& cultureMapper,
+		 const mappers::ReligionMapper& religionMapper,
+		 const EU4::CultureLoader& cultureLoader,
+		 const EU4::ReligionLoader& religionLoader);
 	void copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
-	void generateDecentralizedData(const ClayManager& clayManager, const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
+	void generateDecentralizedData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 
 	[[nodiscard]] const auto& getTag() const { return tag; }
 	[[nodiscard]] const auto& getVanillaData() const { return vanillaData; }
@@ -76,6 +87,13 @@ class Country: commonItems::parser
   private:
 	void registerKeys();
 
+	void convertCapital(const ClayManager& clayManager);
+	void convertReligion(const mappers::ReligionMapper& religionMapper);
+	void convertCulture(const ClayManager& clayManager,
+		 mappers::CultureMapper& cultureMapper,
+		 const EU4::CultureLoader& cultureLoader,
+		 const EU4::ReligionLoader& religionLoader);
+	void convertTier();
 	void generateDecentralizedLocs(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 
 	std::string tag;
