@@ -18,8 +18,7 @@ void V3::StateEntries::registerKeys()
 		subStateEntries.loadSubStates(theStream);
 		StatePops theStatePops;
 		theStatePops.setSubStatePops(subStateEntries.getSubStatePops());
-		const auto state = getStateFromName(stateName);
-		if (state)
+		if (const auto state = getStateFromName(stateName); state)
 		{
 			theStatePops.setStateName(*state);
 			statePops.emplace(*state, theStatePops);
