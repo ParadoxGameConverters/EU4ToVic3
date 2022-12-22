@@ -35,6 +35,8 @@ class CultureMapper: commonItems::parser
 	void loadMappingRules(const std::string& fileName);
 	void loadColonialRules(std::istream& theStream);
 	void loadColonialRules(const std::string& fileName);
+	void loadWesternizationRules(std::istream& theStream);
+	void loadWesternizationRules(const std::string& fileName);
 	void expandCulturalMappings(const V3::ClayManager& clayManager, const EU4::CultureLoader& cultureLoader, const EU4::ReligionLoader& religionLoader);
 
 	[[nodiscard]] const auto& getMacros() const { return encounteredMacros; }
@@ -74,6 +76,10 @@ class CultureMapper: commonItems::parser
 		 const EU4::EU4LocalizationLoader& eu4Locs);
 
 	void injectReligionsIntoCultureDefs(const V3::ClayManager& clayManager);
+
+	[[nodiscard]] int getWesternizationScoreForCulture(const std::string& cultureName) const;
+	[[nodiscard]] int getLiteracyScoreForCulture(const std::string& cultureName) const;
+	[[nodiscard]] int getIndustryScoreForCulture(const std::string& cultureName) const;
 
   private:
 	std::string getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager);

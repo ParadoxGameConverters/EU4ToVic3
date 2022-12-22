@@ -3,9 +3,23 @@
 #include "ParserHelpers.h"
 #include "WesternizationMapping.h"
 
-void mappers::WesternizationMapper::loadRules(const std::string& filePath)
+void mappers::WesternizationMapper::loadMappingRules(const std::string& filePath)
 {
 	Log(LogLevel::Info) << "Parsing technology groups.";
+	registerKeys();
+	parseFile(filePath);
+	clearRegisteredKeywords();
+}
+
+void mappers::WesternizationMapper::loadMappingRules(std::istream& theStream)
+{
+	registerKeys();
+	parseStream(theStream);
+	clearRegisteredKeywords();
+}
+
+void mappers::WesternizationMapper::registerKeys()
+{
 	registerKeyword("link", [this](std::istream& theStream) {
 		const WesternizationMapping mapping(theStream);
 		for (const auto& trait: mapping.getTraits())
@@ -15,9 +29,6 @@ void mappers::WesternizationMapper::loadRules(const std::string& filePath)
 			industries.emplace(trait, mapping.getIndustry());
 		}
 	});
-
-	parseFile(filePath);
-	clearRegisteredKeywords();
 }
 
 int mappers::WesternizationMapper::getWesternizationForTraits(const std::set<std::string>& traits) const

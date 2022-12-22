@@ -202,6 +202,16 @@ void mappers::CultureMapper::loadColonialRules(const std::string& fileName)
 	colonialRegionMapper.loadMappingRules(fileName);
 }
 
+void mappers::CultureMapper::loadWesternizationRules(std::istream& theStream)
+{
+	westernizationMapper.loadMappingRules(theStream);
+}
+
+void mappers::CultureMapper::loadWesternizationRules(const std::string& fileName)
+{
+	westernizationMapper.loadMappingRules(fileName);
+}
+
 void mappers::CultureMapper::registerKeys()
 {
 	registerRegex(R"(@\w+)", [this](const std::string& macro, std::istream& theStream) {
@@ -422,4 +432,37 @@ void mappers::CultureMapper::injectReligionsIntoCultureDefs(const V3::ClayManage
 		v3CultureDefinitions.at(culture).religion = dominantReligion->first;
 	}
 	Log(LogLevel::Info) << "<> Update complete.";
+}
+
+int mappers::CultureMapper::getWesternizationScoreForCulture(const std::string& cultureName) const
+{
+	if (!v3CultureDefinitions.contains(cultureName))
+	{
+		Log(LogLevel::Warning) << "Can't retrieve Westernization for unknown culture: " << cultureName;
+		return 0;
+	}
+
+	return westernizationMapper.getWesternizationForTraits(v3CultureDefinitions.at(cultureName).traits);
+}
+
+int mappers::CultureMapper::getLiteracyScoreForCulture(const std::string& cultureName) const
+{
+	if (!v3CultureDefinitions.contains(cultureName))
+	{
+		Log(LogLevel::Warning) << "Can't retrieve Literacy for unknown culture: " << cultureName;
+		return 0;
+	}
+
+	return westernizationMapper.getLiteracyForTraits(v3CultureDefinitions.at(cultureName).traits);
+}
+
+int mappers::CultureMapper::getIndustryScoreForCulture(const std::string& cultureName) const
+{
+	if (!v3CultureDefinitions.contains(cultureName))
+	{
+		Log(LogLevel::Warning) << "Can't retrieve Industry for unknown culture: " << cultureName;
+		return 0;
+	}
+
+	return westernizationMapper.getIndustryForTraits(v3CultureDefinitions.at(cultureName).traits);
 }

@@ -5,7 +5,7 @@
 TEST(Mappers_WesternizationMapperTests, traitsCanBePinged)
 {
 	mappers::WesternizationMapper mapper;
-	mapper.loadRules("TestFiles/configurables/westernization.txt");
+	mapper.loadMappingRules("TestFiles/configurables/westernization.txt");
 
 	const std::set<std::string> traits = {"testtrait", "testtrait2"};
 
@@ -17,7 +17,7 @@ TEST(Mappers_WesternizationMapperTests, traitsCanBePinged)
 TEST(Mappers_WesternizationMapperTests, MismatchedTraitsReturnMaxValues)
 {
 	mappers::WesternizationMapper mapper;
-	mapper.loadRules("TestFiles/configurables/westernization.txt");
+	mapper.loadMappingRules("TestFiles/configurables/westernization.txt");
 
 	const std::set<std::string> traits = {"testtrait", "testtrait3"};
 
@@ -29,7 +29,7 @@ TEST(Mappers_WesternizationMapperTests, MismatchedTraitsReturnMaxValues)
 TEST(Mappers_WesternizationMapperTests, unknownTraitsReturnZeroAndWarn)
 {
 	mappers::WesternizationMapper mapper;
-	mapper.loadRules("TestFiles/configurables/westernization.txt");
+	mapper.loadMappingRules("TestFiles/configurables/westernization.txt");
 
 	const std::set<std::string> traits = {"unknown", "unknown2"};
 
