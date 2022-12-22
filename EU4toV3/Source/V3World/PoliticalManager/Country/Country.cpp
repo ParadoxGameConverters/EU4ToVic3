@@ -9,6 +9,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 #include "ReligionMapper/ReligionMapper.h"
+#include <cmath>
 #include <numeric>
 
 namespace
