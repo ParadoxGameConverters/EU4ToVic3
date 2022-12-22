@@ -158,6 +158,8 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\AssimilationParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperGroupMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\WesternizationMapper\WesternizationMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\WesternizationMapper\WesternizationMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Output\outPops\outPops.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\ClayManager.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\State\Chunk.cpp" />
@@ -272,6 +274,8 @@
     <ClCompile Include="MapperTests\SuperGroupMapperTests\AssimilationParserTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperGroupMapperTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperRegionParserTests.cpp" />
+    <ClCompile Include="MapperTests\WesternizationMapperTests\WesternizationMapperTests.cpp" />
+    <ClCompile Include="MapperTests\WesternizationMapperTests\WesternizationMappingTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\ClayManagerTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\ChunkTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\StateModifierTests.cpp" />
@@ -554,6 +558,11 @@
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\colonial_regions.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\westernization.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>

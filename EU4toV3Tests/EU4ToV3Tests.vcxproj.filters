@@ -703,6 +703,18 @@
     <ClCompile Include="MapperTests\ColonialRegionMapper\ColonialRegionMappingTests.cpp">
       <Filter>MapperTests\ColonialRegionMapperTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\WesternizationMapper\WesternizationMapper.cpp">
+      <Filter>ConverterFiles\Mappers\WesternizationMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\WesternizationMapper\WesternizationMapping.cpp">
+      <Filter>ConverterFiles\Mappers\WesternizationMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\WesternizationMapperTests\WesternizationMapperTests.cpp">
+      <Filter>MapperTests\WesternizationMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\WesternizationMapperTests\WesternizationMappingTests.cpp">
+      <Filter>MapperTests\WesternizationMapperTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1149,6 +1161,12 @@
     <Filter Include="MapperTests\ColonialRegionMapperTests">
       <UniqueIdentifier>{6899b28e-03e3-4aac-bfdb-b74391b1ca7f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\Mappers\WesternizationMapper">
+      <UniqueIdentifier>{b97a1768-6a38-4a9a-ab86-164764252b26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\WesternizationMapperTests">
+      <UniqueIdentifier>{921e1e32-4c6a-4a15-bf7a-175ef76b568c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1310,6 +1328,9 @@
       <Filter>TestFiles\vic3installation\game\common\cultures</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\colonial_regions.txt">
+      <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\westernization.txt">
       <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>
