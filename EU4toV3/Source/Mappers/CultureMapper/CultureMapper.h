@@ -4,6 +4,7 @@
 #include "CultureDefinitionLoader/CultureDef.h"
 #include "CultureMappingRule.h"
 #include "Parser.h"
+#include "WesternizationMapper/WesternizationMapper.h"
 
 namespace EU4
 {
@@ -86,6 +87,7 @@ class CultureMapper: commonItems::parser
 	std::map<std::string, std::map<std::string, std::string>> colonyNeoCultureTargets; // colony->[eu4 culture -> v3 neoculture]
 
 	ColonialRegionMapper colonialRegionMapper;
+	WesternizationMapper westernizationMapper;
 };
 } // namespace mappers
 

@@ -1,4 +1,4 @@
-#include "WesternizationMapper/WesternizationMapper.h"
+#include "CultureMapper/WesternizationMapper/WesternizationMapper.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
