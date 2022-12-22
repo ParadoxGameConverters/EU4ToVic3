@@ -352,8 +352,8 @@ std::string V3::Country::getAdjective(const std::string& language) const
 	return tag + "_ADJ";
 }
 
-void V3::Country::determineWesternizationAndLiteracy(int topTech,
-	 int topInstitutions,
+void V3::Country::determineWesternizationAndLiteracy(double topTech,
+	 double topInstitutions,
 	 const mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 Configuration::EUROCENTRISM eurocentrism,
@@ -398,8 +398,8 @@ void V3::Country::adjustLiteracy(const DatingData& datingData, const mappers::Cu
 		processedData.literacy *= pow(10, processedData.civLevel / 100 * 0.9 + 0.1) / 10;
 }
 
-void V3::Country::calculateWesternization(int topTech,
-	 int topInstitutions,
+void V3::Country::calculateWesternization(double topTech,
+	 double topInstitutions,
 	 const mappers::CultureMapper& cultureMapper,
 	 Configuration::EUROCENTRISM eurocentrism)
 {

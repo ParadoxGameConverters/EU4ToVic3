@@ -85,8 +85,8 @@ class Country: commonItems::parser
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
 
-	void determineWesternizationAndLiteracy(int topTech,
-		 int topInstitutions,
+	void determineWesternizationAndLiteracy(double topTech,
+		 double topInstitutions,
 		 const mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 Configuration::EUROCENTRISM eurocentrism,
@@ -109,7 +109,7 @@ class Country: commonItems::parser
 	void convertTier();
 	void generateDecentralizedLocs(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 	void calculateBaseLiteracy(const mappers::ReligionMapper& religionMapper);
-	void calculateWesternization(int topTech, int topInstitutions, const mappers::CultureMapper& cultureMapper, Configuration::EUROCENTRISM eurocentrism);
+	void calculateWesternization(double topTech, double topInstitutions, const mappers::CultureMapper& cultureMapper, Configuration::EUROCENTRISM eurocentrism);
 	void adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper);
 
 	std::string tag;

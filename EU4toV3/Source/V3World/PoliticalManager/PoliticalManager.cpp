@@ -194,8 +194,8 @@ void V3::PoliticalManager::determineWesternization(const mappers::CultureMapper&
 	 const DatingData& datingData)
 {
 	Log(LogLevel::Info) << "-> Determining Westernization.";
-	int topTech = 0;
-	int topInstitutions = 0;
+	double topTech = 0;
+	double topInstitutions = 0;
 
 	// Determine top tech/institutions.
 	for (const auto& country: countries | std::views::values)
@@ -214,8 +214,20 @@ void V3::PoliticalManager::determineWesternization(const mappers::CultureMapper&
 	}
 
 	// and distribute tech level.
+	int civs = 0;
+	int uncivs = 0;
 	for (const auto& country: countries | std::views::values)
 	{
 		country->determineWesternizationAndLiteracy(topTech, topInstitutions, cultureMapper, religionMapper, eurocentrism, datingData);
+
+		// Bookkeeping.
+		if (!country->getSubStates().empty())
+		{
+			if (country->getProcessedData().westernized)
+				++civs;
+			else
+				++uncivs;
+		}
 	}
+	Log(LogLevel::Info) << "<> There are " << civs << " westernized and " << uncivs << " unwesternized landed nations.";
 }
