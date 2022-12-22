@@ -377,7 +377,7 @@ std::string EU4::Country::getAdjective(const std::string& language) const
 int EU4::Country::getNumEmbracedInstitutions() const
 {
 	auto total = 0;
-	for (auto institution: embracedInstitutions)
+	for (const auto institution: embracedInstitutions)
 		if (institution)
 			total++;
 	return total;

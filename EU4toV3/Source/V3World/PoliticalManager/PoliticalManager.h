@@ -1,5 +1,7 @@
 #ifndef POLITICAL_MANAGER_H
 #define POLITICAL_MANAGER_H
+#include "Configuration.h"
+#include "DatingData.h"
 #include "ModLoader/ModFilesystem.h"
 #include <map>
 #include <memory>
@@ -49,6 +51,11 @@ class PoliticalManager
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& v3Tag) const;
 	[[nodiscard]] bool isTagDecentralized(const std::string& v3Tag) const;
+
+	void determineWesternization(const mappers::CultureMapper& cultureMapper,
+		 const mappers::ReligionMapper& religionMapper,
+		 Configuration::EUROCENTRISM eurocentrism,
+		 const DatingData& datingData);
 
   private:
 	void generateDecentralizedCountry(const std::string& culture, const std::vector<std::shared_ptr<SubState>>& subStates);

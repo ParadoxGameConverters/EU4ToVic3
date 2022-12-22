@@ -3,6 +3,7 @@
 #include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "Country/Country.h"
+#include "CountryManager/EU4Country.h"
 #include "Loaders/CountryDefinitionLoader/CountryDefinitionLoader.h"
 #include "Log.h"
 #include "Mappers/CountryMapper/CountryMapper.h"
@@ -185,4 +186,36 @@ std::shared_ptr<V3::Country> V3::PoliticalManager::getCountry(const std::string&
 	if (countries.contains(v3Tag))
 		return countries.at(v3Tag);
 	return nullptr;
+}
+
+void V3::PoliticalManager::determineWesternization(const mappers::CultureMapper& cultureMapper,
+	 const mappers::ReligionMapper& religionMapper,
+	 const Configuration::EUROCENTRISM eurocentrism,
+	 const DatingData& datingData)
+{
+	Log(LogLevel::Info) << "-> Determining Westernization.";
+	int topTech = 0;
+	int topInstitutions = 0;
+
+	// Determine top tech/institutions.
+	for (const auto& country: countries | std::views::values)
+	{
+		if (!country->getSourceCountry())
+			continue; // we need only eu4 imports
+		const auto& sourceCountry = country->getSourceCountry();
+		if (sourceCountry->getProvinces().empty())
+			continue; // dead nations are stuck.
+		const auto totalTechs = sourceCountry->getMilTech() + sourceCountry->getAdmTech() + sourceCountry->getDipTech();
+		if (totalTechs > topTech)
+			topTech = totalTechs;
+		const auto currInstitutions = sourceCountry->getNumEmbracedInstitutions();
+		if (currInstitutions > topInstitutions)
+			topInstitutions = currInstitutions;
+	}
+
+	// and distribute tech level.
+	for (const auto& country: countries | std::views::values)
+	{
+		country->determineWesternizationAndLiteracy(topTech, topInstitutions, cultureMapper, religionMapper, eurocentrism, datingData);
+	}
 }
