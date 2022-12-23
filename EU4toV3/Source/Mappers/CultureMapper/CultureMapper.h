@@ -4,6 +4,7 @@
 #include "CultureDefinitionLoader/CultureDef.h"
 #include "CultureMappingRule.h"
 #include "Parser.h"
+#include "WesternizationMapper/WesternizationMapper.h"
 
 namespace EU4
 {
@@ -34,6 +35,8 @@ class CultureMapper: commonItems::parser
 	void loadMappingRules(const std::string& fileName);
 	void loadColonialRules(std::istream& theStream);
 	void loadColonialRules(const std::string& fileName);
+	void loadWesternizationRules(std::istream& theStream);
+	void loadWesternizationRules(const std::string& fileName);
 	void expandCulturalMappings(const V3::ClayManager& clayManager, const EU4::CultureLoader& cultureLoader, const EU4::ReligionLoader& religionLoader);
 
 	[[nodiscard]] const auto& getMacros() const { return encounteredMacros; }
@@ -74,6 +77,10 @@ class CultureMapper: commonItems::parser
 
 	void injectReligionsIntoCultureDefs(const V3::ClayManager& clayManager);
 
+	[[nodiscard]] int getWesternizationScoreForCulture(const std::string& cultureName) const;
+	[[nodiscard]] int getLiteracyScoreForCulture(const std::string& cultureName) const;
+	[[nodiscard]] int getIndustryScoreForCulture(const std::string& cultureName) const;
+
   private:
 	std::string getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager);
 	void registerKeys();
@@ -86,6 +93,7 @@ class CultureMapper: commonItems::parser
 	std::map<std::string, std::map<std::string, std::string>> colonyNeoCultureTargets; // colony->[eu4 culture -> v3 neoculture]
 
 	ColonialRegionMapper colonialRegionMapper;
+	WesternizationMapper westernizationMapper;
 };
 } // namespace mappers
 

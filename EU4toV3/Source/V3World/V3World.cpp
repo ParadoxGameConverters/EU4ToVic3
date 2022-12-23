@@ -28,6 +28,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getEU4Localizations());
 	cultureMapper.loadMappingRules("configurables/culture_map.txt");
 	cultureMapper.loadColonialRules("configurables/colonial_regions.txt");
+	cultureMapper.loadWesternizationRules("configurables/westernization.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	localizationLoader.scrapeLocalizations(dwFS);
 
@@ -76,14 +77,16 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	popManager.generatePops(clayManager);
 
-	clayManager.squashAllSubStates(politicalManager);
-
 	cultureMapper.generateCultureDefinitions(allFS,
 		 "configurables/name_lists.txt",
 		 "configurables/name_list_map.txt",
 		 "configurables/culture_trait_map.txt",
 		 sourceWorld.getCultureLoader(),
 		 sourceWorld.getEU4Localizations());
+
+	politicalManager.determineWesternization(cultureMapper, religionMapper, configuration.configBlock.euroCentric, sourceWorld.getDatingData());
+
+	clayManager.squashAllSubStates(politicalManager);
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);
 
 	Log(LogLevel::Info) << "-> Converting Provinces";

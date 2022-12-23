@@ -34,6 +34,7 @@ class World: commonItems::parser
 	[[nodiscard]] const auto& getReligionLoader() const { return religionLoader; }
 	[[nodiscard]] const auto& getDiplomacy() const { return diplomacyParser; }
 	[[nodiscard]] const auto& getEU4Localizations() const { return countryManager.getLocalizationLoader(); }
+	[[nodiscard]] const auto& getDatingData() const { return datingData; }
 
   private:
 	void registerKeys(const Configuration& theConfiguration, const commonItems::ConverterVersion& converterVersion);

@@ -9,6 +9,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 #include "ReligionMapper/ReligionMapper.h"
+#include <cmath>
 #include <numeric>
 
 namespace
@@ -350,4 +351,136 @@ std::string V3::Country::getAdjective(const std::string& language) const
 
 	// wing it.
 	return tag + "_ADJ";
+}
+
+void V3::Country::determineWesternizationAndLiteracy(double topTech,
+	 double topInstitutions,
+	 const mappers::CultureMapper& cultureMapper,
+	 const mappers::ReligionMapper& religionMapper,
+	 Configuration::EUROCENTRISM eurocentrism,
+	 const DatingData& datingData)
+{
+	if (!sourceCountry)
+		return; // don't do non-imports.
+
+	calculateBaseLiteracy(religionMapper);
+	calculateWesternization(topTech, topInstitutions, cultureMapper, eurocentrism);
+	adjustLiteracy(datingData, cultureMapper);
+}
+
+void V3::Country::adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper)
+{
+	auto lastDate = datingData.lastEU4Date;
+	if (lastDate > datingData.hardEndingDate)
+		lastDate = datingData.hardEndingDate;
+
+	processedData.literacy *= yearCapFactor(lastDate);
+
+	// Apply cultural mod.
+	processedData.literacy *= 1 + (static_cast<double>(cultureMapper.getLiteracyScoreForCulture(*processedData.cultures.begin())) - 5.0) * 10.0 / 100.0;
+
+	// Reduce the literacy for non-westernized nations according to their civLevel score.
+	// -> Hardcoded exception to non-westernized literacy reduction for shinto countries so japan-likes may retain high industrialization potential.
+	if (sourceCountry->getReligion() != "shinto")
+		processedData.literacy *= pow(10, processedData.civLevel / 100 * 0.9 + 0.1) / 10;
+}
+
+double V3::Country::yearCapFactor(const date& targetDate)
+{
+	/*
+		Drop nominal literacy or industry according to starting date. The curve is crafted to hit the following literacy percentage points:
+		1836: 1
+		1821: 0.85
+		1750: 0.5
+		1650: 0.3
+		1490: 0.2
+		1350: 0.15
+		It will fail to hit those points exactly but won't err by much.
+	*/
+	const auto currentYear = std::fmax(targetDate.diffInYears(date("0.1.1")), 0);
+	const auto yearFactor = (0.1 + 4'614'700 * currentYear) / (1 + static_cast<double>(103'810'000.0f) * currentYear - 54'029 * pow(currentYear, 2));
+	return yearFactor;
+}
+
+void V3::Country::calculateWesternization(double topTech,
+	 double topInstitutions,
+	 const mappers::CultureMapper& cultureMapper,
+	 Configuration::EUROCENTRISM eurocentrism)
+{
+	// This is base calc, from EU4. Even western countries in severe tech deficit will have a lower civLevel score.
+	const auto totalTechs = sourceCountry->getMilTech() + sourceCountry->getAdmTech() + sourceCountry->getDipTech();
+	processedData.civLevel = (totalTechs + 31.0 - topTech) * 4;
+	processedData.civLevel += (static_cast<double>(sourceCountry->getNumEmbracedInstitutions()) - topInstitutions) * 8;
+
+	// If we're eurocentric, we're *ignoring* tech deficits and artificially deflating whatever score was achieved earlier for non-western countries.
+	if (eurocentrism == Configuration::EUROCENTRISM::EuroCentric)
+	{
+		if (processedData.cultures.empty())
+			Log(LogLevel::Warning) << "Trying to determine westernization of " << tag << " with no cultures!";
+		else
+		{
+			if (cultureMapper.getWesternizationScoreForCulture(*processedData.cultures.begin()) == 10)
+				processedData.civLevel = 100;
+			else
+				processedData.civLevel *= static_cast<double>(cultureMapper.getWesternizationScoreForCulture(*processedData.cultures.begin())) / 10.0;
+			processedData.industryFactor = cultureMapper.getIndustryScoreForCulture(*processedData.cultures.begin()) / 5.0; // ranges 0.0-2.0
+		}
+	}
+
+	if (processedData.civLevel < 0)
+	{
+		processedData.civLevel = 0;
+	}
+	if (processedData.civLevel >= 100)
+	{
+		processedData.civLevel = 100;
+		processedData.westernized = true;
+	}
+}
+
+void V3::Country::calculateBaseLiteracy(const mappers::ReligionMapper& religionMapper)
+{
+	auto literacy = 0.4;
+
+	if (religionMapper.getV3ReligionDefinitions().contains(processedData.religion))
+	{
+		const auto& religion = religionMapper.getV3ReligionDefinitions().at(processedData.religion);
+		const auto& traits = religion.traits;
+		if (religion.name == "protestant" || traits.contains("eastern"))
+			literacy += 0.1;
+	}
+
+	if (sourceCountry->hasModifier("sunday_schools"))
+		literacy += 0.05;
+	if (sourceCountry->hasModifier("the_education_act"))
+		literacy += 0.05;
+	if (sourceCountry->hasModifier("monastic_education_system"))
+		literacy += 0.05;
+	if (sourceCountry->hasModifier("western_embassy_mission"))
+		literacy += 0.05;
+
+	// Universities grant at most 10% literacy, with either having 10 or when having them in 10% of provinces, whichever comes sooner.
+
+	const auto& provinces = sourceCountry->getProvinces();
+	const auto numProvinces = provinces.size();
+	auto numUniversities = 0;
+
+	for (const auto& province: provinces)
+		if (province->hasBuilding("university"))
+			numUniversities++;
+
+	double universityBonus1 = 0;
+	if (numProvinces > 0)
+	{
+		universityBonus1 = static_cast<double>(numUniversities) / static_cast<double>(numProvinces);
+	}
+	const auto universityBonus2 = numUniversities * 0.01;
+
+	const auto universityBonus = std::min(std::max(universityBonus1, universityBonus2), 0.1);
+
+	literacy += universityBonus;
+
+	// TODO: Apply collective national literacy modifier.
+
+	processedData.literacy = literacy;
 }

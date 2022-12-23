@@ -1,6 +1,8 @@
 #ifndef V3_COUNTRY_H
 #define V3_COUNTRY_H
 #include "Color.h"
+#include "Configuration.h"
+#include "DatingData.h"
 #include "Parser.h"
 #include <memory>
 #include <string>
@@ -41,6 +43,10 @@ struct ProcessedData
 	bool is_named_from_capital = false;
 	std::set<std::string> effects;
 	std::set<std::string> laws;
+	double literacy = 0;
+	double civLevel = 0;
+	bool westernized = false;
+	double industryFactor = 1.0;
 
 	std::string name;
 	std::string adjective;
@@ -79,6 +85,13 @@ class Country: commonItems::parser
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
 
+	void determineWesternizationAndLiteracy(double topTech,
+		 double topInstitutions,
+		 const mappers::CultureMapper& cultureMapper,
+		 const mappers::ReligionMapper& religionMapper,
+		 Configuration::EUROCENTRISM eurocentrism,
+		 const DatingData& datingData);
+
 	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
 	[[nodiscard]] int getTechInfraCap() const { return 0; }
 	// TODO(Gawquon): Implement, multiplier for amount of infrastructure created by population
@@ -95,6 +108,10 @@ class Country: commonItems::parser
 		 const EU4::ReligionLoader& religionLoader);
 	void convertTier();
 	void generateDecentralizedLocs(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
+	void calculateBaseLiteracy(const mappers::ReligionMapper& religionMapper);
+	void calculateWesternization(double topTech, double topInstitutions, const mappers::CultureMapper& cultureMapper, Configuration::EUROCENTRISM eurocentrism);
+	void adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper);
+	[[nodiscard]] static double yearCapFactor(const date& targetDate);
 
 	std::string tag;
 	std::optional<VanillaCommonCountryData> vanillaData;

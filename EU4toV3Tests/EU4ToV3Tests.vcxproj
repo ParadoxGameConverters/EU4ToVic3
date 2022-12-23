@@ -144,6 +144,8 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListLoader\NameListLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListMapper\NameListMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListMapper\NameListMapping.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\MergeBlock.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\NationMergeMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMapper.cpp" />
@@ -258,6 +260,8 @@
     <ClCompile Include="MapperTests\CultureMapperTests\NameListLoaderTests\NameListLoaderTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\NameListMapperTests\NameListMapperTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\NameListMapperTests\NameListMappingTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\WesternizationMapperTests\WesternizationMapperTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\WesternizationMapperTests\WesternizationMappingTests.cpp" />
     <ClCompile Include="MapperTests\NationMergeMapperTests\MergeBlocksTests.cpp" />
     <ClCompile Include="MapperTests\NationMergeMapperTests\NationMergeMapperTests.cpp" />
     <ClCompile Include="MapperTests\ProvinceMapperTests\ProvinceMapperTests.cpp" />
@@ -554,6 +558,11 @@
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\colonial_regions.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\westernization.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>

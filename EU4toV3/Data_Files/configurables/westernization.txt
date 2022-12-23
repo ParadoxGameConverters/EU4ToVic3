@@ -1,0 +1,119 @@
+# This file allows technology groups to affect westernization of the country, should this option be enabled in the converter. 
+# This is done by describing a level of westernization, industry and literacy for a country with a culture (or multiples) that have these traits.
+# If EUROCENTRISM option is enabled, this file completely supercedes ANY EU4 tech levels.
+# 
+# Scale for westernization is 0 to 10 where:
+# 0 - These are stone-age people
+# 5 - Uncivilized but not primitive tribes of north africa
+# 10 - A modern tea-drinking Man-o-war sailing colonial empire
+# 
+# You can also set increased or decreased literacy to a particular cultural trait, where:
+# 0 - These people are illiterate.
+# 5 - Standard levels of literacy for this group
+# 10 - Extraordinarily literate aliens from Atlantis
+
+link = {
+	# western european
+	westernization = 10
+	industry = 5
+	traits = {
+		german_speaking european_heritage beneluxian_culture_group francophone anglophone celtic_people 
+		iberian_culture_group italophone scandinavian_culture_group finnic hispanophone lusophone
+		african_settler british_culture_group italian_culture_group
+	}
+}
+
+link = {
+	# eastern european/slavic
+	westernization = 10
+	literacy = 4
+	industry = 4
+	traits = {
+		jewish_group jugoslav albanian_language romanian_culture_group hungarian_culture_group west_slavic 
+		baltic_culture_group east_slavic greek_culture caucasus_group thracian_heritage slavic south_slavic 
+	}
+}
+
+link = {
+	# ottoman
+	westernization = 10
+	literacy = 3
+	industry = 2
+	traits = {
+		turkic
+	}
+}
+
+link = {
+	# arabic/middle-eastern
+	westernization = 6
+	industry = 2
+	traits = {
+		middle_eastern_heritage arab_speaking iranian_turanian_culture_group
+	}
+}
+
+link = {
+	# indian
+	westernization = 5
+	industry = 2
+	traits = {
+		northeast_indian south_asian_heritage hindustani dravidian
+	}
+}
+
+link = {
+	# east asian
+	westernization = 4
+	industry = 2
+	traits = {
+		malay_culture southeast_asian_heritage himalayan tibetan_language east_asian_heritage sinosphere 
+		khmer_language tai burmese_language yamato han_chinese korean_language ainu_language hmong_mien_language
+	}
+}
+
+link = {
+	# east african
+	westernization = 4
+	industry = 0
+	traits = {
+		african_heritage malagasy_language bantu east_african_culture_group ethiopian
+	}
+}
+
+link = {
+	# central asian/nomadic
+	westernization = 3
+	industry = 1
+	traits = {
+		central_asian_heritage mongol_language north_asian_heritage siberian_culture_group scythian_heritage
+	}
+}
+
+link = {
+	# north american native
+	westernization = 3
+	industry = 1
+	traits = {
+		north_american_group native_north_american_culture_group
+	}
+}
+
+link = {
+	# subsaharan, central/south/west african
+	westernization = 2
+	industry = 0
+	traits = {
+		west_african_culture_group central_african_culture_group southern_african_culture_group
+	}
+}
+
+link = {
+	# aboriginal, indigenous, natives...
+	westernization = 1
+	industry = 0
+	traits = {
+		indigenous_oceanic_heritage polynesian_group aboriginal_australian indigenous_american_heritage 
+		native_mesoamerican_culture_group south_american_group native_south_american_culture_group indigenous_andean
+	}
+}
