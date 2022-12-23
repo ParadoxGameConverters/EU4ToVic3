@@ -49,6 +49,7 @@ class Country: commonItems::parser
 	[[nodiscard]] auto getDipTech() const { return dipTech; }
 	[[nodiscard]] auto getMilTech() const { return milTech; }
 	[[nodiscard]] const auto& getTechGroup() const { return techGroup; }
+	[[nodiscard]] double getAverageDevelopment() const;
 
 	// culture religion
 	[[nodiscard]] const auto& getPrimaryCulture() const { return primaryCulture; }

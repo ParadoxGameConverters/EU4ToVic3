@@ -8,6 +8,7 @@
 #include "Loaders/LocalizationLoader/EU4LocalizationLoader.h"
 #include "Log.h"
 #include "ParserHelpers.h"
+#include "PopulationSetupMapper/PopulationSetupMapper.h"
 #include "ReligionMapper/ReligionMapper.h"
 #include <cmath>
 #include <numeric>
@@ -104,10 +105,9 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	// tier
 	convertTier();
 
-	// country type
-	processedData.type = "recognized";
+	// country type is determined after westernization is set.
 
-	// namedaftercapital
+	// namedaftercapital ? Unsure what to do with this.
 	processedData.is_named_from_capital = false;
 }
 
@@ -233,10 +233,12 @@ void V3::Country::generateDecentralizedData(const LocalizationLoader& v3LocLoade
 	generateDecentralizedLocs(v3LocLoader, eu4LocLoader);
 
 	// COMMON/HISTORY/COUNTRY - for now, let's default everything to tier: bottom regardless of geography.
-	processedData.effects.emplace("effect_starting_technology_tier_7_tech"); // tech
-	processedData.effects.emplace("effect_starting_politics_traditional");	 // politics
-	processedData.effects.emplace("effect_native_conscription_3");				 // conscription
-	processedData.laws.emplace("law_debt_slavery");									 // slavery
+	processedData.effects.emplace("effect_starting_technology_tier_7_tech");			 // tech
+	processedData.effects.emplace("effect_starting_politics_traditional");				 // politics
+	processedData.effects.emplace("effect_native_conscription_3");							 // conscription
+	processedData.laws.emplace("law_debt_slavery");												 // slavery
+	processedData.populationEffects.emplace("effect_starting_pop_literacy_baseline"); // no literacy
+	processedData.populationEffects.emplace("effect_starting_pop_wealth_low");			 // no wealth
 }
 
 void V3::Country::generateDecentralizedLocs(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader)
@@ -353,12 +355,13 @@ std::string V3::Country::getAdjective(const std::string& language) const
 	return tag + "_ADJ";
 }
 
-void V3::Country::determineWesternizationAndLiteracy(double topTech,
+void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 	 double topInstitutions,
 	 const mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 Configuration::EUROCENTRISM eurocentrism,
-	 const DatingData& datingData)
+	 const DatingData& datingData,
+	 const mappers::PopulationSetupMapper& populationSetupMapper)
 {
 	if (!sourceCountry)
 		return; // don't do non-imports.
@@ -366,6 +369,16 @@ void V3::Country::determineWesternizationAndLiteracy(double topTech,
 	calculateBaseLiteracy(religionMapper);
 	calculateWesternization(topTech, topInstitutions, cultureMapper, eurocentrism);
 	adjustLiteracy(datingData, cultureMapper);
+	applyLiteracyAndWealthEffects(populationSetupMapper);
+}
+
+void V3::Country::applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper)
+{
+	auto literacyEffect = populationSetupMapper.getLiteracyEffectForLiteracy(processedData.literacy);
+	const auto& averageDev = sourceCountry->getAverageDevelopment();
+	auto wealthEffect = populationSetupMapper.getWealthEffectForDev(averageDev);
+	processedData.populationEffects.emplace(literacyEffect);
+	processedData.populationEffects.emplace(wealthEffect);
 }
 
 void V3::Country::adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper)

@@ -79,6 +79,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Info) << "<- Writing Countries";
 	exportCommonCountries(outputName, world.getPoliticalManager().getCountries());
 	exportHistoryCountries(outputName, world.getPoliticalManager().getCountries());
+	exportHistoryPopulations(outputName, world.getPoliticalManager().getCountries());
 	Log(LogLevel::Progress) << "93 %";
 
 	Log(LogLevel::Info) << "<- Writing Diplomacy";

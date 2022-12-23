@@ -13,6 +13,7 @@
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 #include <cmath>
+#include <numeric>
 
 EU4::Country::Country(std::string countryTag, std::istream& theStream): tag(std::move(countryTag))
 {
@@ -399,4 +400,14 @@ double EU4::Country::getCountryWeight() const
 	for (const auto& province: provinces)
 		totalDev += province->getProvinceWeight();
 	return totalDev;
+}
+
+double EU4::Country::getAverageDevelopment() const
+{
+	if (provinces.empty())
+		return 0;
+	const double totalDev = std::accumulate(provinces.begin(), provinces.end(), 0, [](double sum, const std::shared_ptr<Province>& province) {
+		return sum + province->getBaseTax() + province->getBaseProduction() + province->getBaseManpower();
+	});
+	return totalDev / static_cast<double>(provinces.size());
 }
