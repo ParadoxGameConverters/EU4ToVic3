@@ -13,7 +13,7 @@ TEST(Mappers_WesternizationMappingTests, DefaultsDefaultToDefaults)
 	EXPECT_TRUE(mapping.getTraits().empty());
 }
 
-TEST(Mappers_WesternizationMappingTests, mappjngCanBeLoaded)
+TEST(Mappers_WesternizationMappingTests, mappingCanBeLoaded)
 {
 	std::stringstream input;
 	input << "westernization = 1\n";

@@ -111,6 +111,7 @@ class Country: commonItems::parser
 	void calculateBaseLiteracy(const mappers::ReligionMapper& religionMapper);
 	void calculateWesternization(double topTech, double topInstitutions, const mappers::CultureMapper& cultureMapper, Configuration::EUROCENTRISM eurocentrism);
 	void adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper);
+	[[nodiscard]] static double yearCapFactor(const date& targetDate);
 
 	std::string tag;
 	std::optional<VanillaCommonCountryData> vanillaData;

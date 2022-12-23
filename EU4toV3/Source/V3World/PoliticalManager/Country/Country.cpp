@@ -370,8 +370,25 @@ void V3::Country::determineWesternizationAndLiteracy(double topTech,
 
 void V3::Country::adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper)
 {
+	auto lastDate = datingData.lastEU4Date;
+	if (lastDate > datingData.hardEndingDate)
+		lastDate = datingData.hardEndingDate;
+
+	processedData.literacy *= yearCapFactor(lastDate);
+
+	// Apply cultural mod.
+	processedData.literacy *= 1 + (static_cast<double>(cultureMapper.getLiteracyScoreForCulture(*processedData.cultures.begin())) - 5.0) * 10.0 / 100.0;
+
+	// Reduce the literacy for non-westernized nations according to their civLevel score.
+	// -> Hardcoded exception to non-westernized literacy reduction for shinto countries so japan-likes may retain high industrialization potential.
+	if (sourceCountry->getReligion() != "shinto")
+		processedData.literacy *= pow(10, processedData.civLevel / 100 * 0.9 + 0.1) / 10;
+}
+
+double V3::Country::yearCapFactor(const date& targetDate)
+{
 	/*
-		Drop nominal literacy according to starting date. The curve is crafted to hit the following literacy percentage points:
+		Drop nominal literacy or industry according to starting date. The curve is crafted to hit the following literacy percentage points:
 		1836: 1
 		1821: 0.85
 		1750: 0.5
@@ -380,23 +397,9 @@ void V3::Country::adjustLiteracy(const DatingData& datingData, const mappers::Cu
 		1350: 0.15
 		It will fail to hit those points exactly but won't err by much.
 	*/
-
-	auto lastDate = datingData.lastEU4Date;
-	if (lastDate > datingData.hardEndingDate)
-		lastDate = datingData.hardEndingDate;
-
-	const auto currentYear = std::fmax(lastDate.diffInYears(date("0.1.1")), 0);
+	const auto currentYear = std::fmax(targetDate.diffInYears(date("0.1.1")), 0);
 	const auto yearFactor = (0.1 + 4'614'700 * currentYear) / (1 + static_cast<double>(103'810'000.0f) * currentYear - 54'029 * pow(currentYear, 2));
-
-	processedData.literacy *= yearFactor;
-
-	// Apply cultural mod.
-	processedData.literacy *= 1 + (static_cast<double>(cultureMapper.getLiteracyScoreForCulture(*processedData.cultures.begin())) - 5.0) * 10.0 / 100.0;
-
-	// Reduce the literacy for non-resternized nations according to their civLevel score.
-	// -> Hardcoded exception to non-westernized literacy reduction for shinto countries so japan-likes may retain high industrialization potential.
-	if (sourceCountry->getReligion() != "shinto")
-		processedData.literacy *= pow(10, processedData.civLevel / 100 * 0.9 + 0.1) / 10;
+	return yearFactor;
 }
 
 void V3::Country::calculateWesternization(double topTech,
@@ -409,7 +412,7 @@ void V3::Country::calculateWesternization(double topTech,
 	processedData.civLevel = (totalTechs + 31.0 - topTech) * 4;
 	processedData.civLevel += (static_cast<double>(sourceCountry->getNumEmbracedInstitutions()) - topInstitutions) * 8;
 
-	// If we're eurocentric, we're *ignoring* thech deficits and artificially deflating whatever score was acheived earlier for non-western countries.
+	// If we're eurocentric, we're *ignoring* tech deficits and artificially deflating whatever score was achieved earlier for non-western countries.
 	if (eurocentrism == Configuration::EUROCENTRISM::EuroCentric)
 	{
 		if (processedData.cultures.empty())
