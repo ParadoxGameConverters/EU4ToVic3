@@ -231,7 +231,11 @@ void V3::Country::generateDecentralizedData(const LocalizationLoader& v3LocLoade
 	if (!substates.empty())																		// this really shouldn't be empty.
 		processedData.capitalStateName = substates.front()->getHomeStateName(); // any will do.
 	generateDecentralizedLocs(v3LocLoader, eu4LocLoader);
+	setDecentralizedEffects();
+}
 
+void V3::Country::setDecentralizedEffects()
+{
 	// COMMON/HISTORY/COUNTRY - for now, let's default everything to tier: bottom regardless of geography.
 	processedData.effects.emplace("effect_starting_technology_tier_7_tech");			 // tech
 	processedData.effects.emplace("effect_starting_politics_traditional");				 // politics
@@ -299,6 +303,10 @@ void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const E
 	processedData.religion = vanillaData->religion;
 	processedData.capitalStateName = vanillaData->capitalStateName;
 	processedData.is_named_from_capital = vanillaData->is_named_from_capital;
+
+	// By default we're copying DECENTRALIZED nations. This means their effects should be set as if they were decentalized.
+	// TODO: When VN imports non-decentralized countries, alter this so we support loading and copying of out-of-scope vanilla effects.
+	setDecentralizedEffects();
 
 	// do we have a name waiting for us?
 	const auto& tagName = v3LocLoader.getLocMapForKey(tag);

@@ -116,6 +116,7 @@ class Country: commonItems::parser
 	void adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper);
 	[[nodiscard]] static double yearCapFactor(const date& targetDate);
 	void applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper);
+	void setDecentralizedEffects();
 
 	std::string tag;
 	std::optional<VanillaCommonCountryData> vanillaData;
