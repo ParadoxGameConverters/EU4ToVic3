@@ -237,10 +237,13 @@ void V3::Country::generateDecentralizedData(const LocalizationLoader& v3LocLoade
 void V3::Country::setDecentralizedEffects()
 {
 	// COMMON/HISTORY/COUNTRY - for now, let's default everything to tier: bottom regardless of geography.
-	processedData.effects.emplace("effect_starting_technology_tier_7_tech");			 // tech
-	processedData.effects.emplace("effect_starting_politics_traditional");				 // politics
-	processedData.effects.emplace("effect_native_conscription_3");							 // conscription
-	processedData.laws.emplace("law_debt_slavery");												 // slavery
+	processedData.effects.clear();
+	processedData.effects.emplace("effect_starting_technology_tier_7_tech"); // tech
+	processedData.effects.emplace("effect_starting_politics_traditional");	 // politics
+	processedData.effects.emplace("effect_native_conscription_3");				 // conscription
+	processedData.laws.clear();
+	processedData.laws.emplace("law_debt_slavery"); // slavery
+	processedData.populationEffects.clear();
 	processedData.populationEffects.emplace("effect_starting_pop_literacy_baseline"); // no literacy
 	processedData.populationEffects.emplace("effect_starting_pop_wealth_low");			 // no wealth
 }
@@ -304,7 +307,7 @@ void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const E
 	processedData.capitalStateName = vanillaData->capitalStateName;
 	processedData.is_named_from_capital = vanillaData->is_named_from_capital;
 
-	// By default we're copying DECENTRALIZED nations. This means their effects should be set as if they were decentalized.
+	// By default we're copying DECENTRALIZED nations. This means their effects should be set as if they were decentralized.
 	// TODO: When VN imports non-decentralized countries, alter this so we support loading and copying of out-of-scope vanilla effects.
 	setDecentralizedEffects();
 
@@ -378,6 +381,31 @@ void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 	calculateWesternization(topTech, topInstitutions, cultureMapper, eurocentrism);
 	adjustLiteracy(datingData, cultureMapper);
 	applyLiteracyAndWealthEffects(populationSetupMapper);
+	determineCountryType();
+}
+
+void V3::Country::determineCountryType()
+{
+	if (!processedData.westernized)
+	{
+		// 25 is the cutoff so american natives that heavily invest into tech
+		// end up with more than 25 civLevel score and remain unrecognized.
+		if (processedData.civLevel < 25)
+		{
+			processedData.type = "decentralized";
+			setDecentralizedEffects();
+		}
+		else
+			processedData.type = "unrecognized";
+	}
+	else
+	{
+		// civilized/westernized nations can either be recognized or colonial.
+		if (sourceCountry->isColony())
+			processedData.type = "colonial";
+		else
+			processedData.type = "recognized";
+	}
 }
 
 void V3::Country::applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper)
