@@ -28,6 +28,11 @@ void V3::PoliticalManager::loadCountryMapper(const std::shared_ptr<mappers::Coun
 		countryMapper->registerKnownVanillaV3Tag(countryTag);
 }
 
+void V3::PoliticalManager::loadPopulationSetupMapperRules(const std::string& filePath)
+{
+	populationSetupMapper.loadMappingRules(filePath);
+}
+
 void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries)
 {
 	Log(LogLevel::Info) << "-> Moving over EU4 Countries.";
@@ -188,7 +193,7 @@ std::shared_ptr<V3::Country> V3::PoliticalManager::getCountry(const std::string&
 	return nullptr;
 }
 
-void V3::PoliticalManager::determineWesternization(const mappers::CultureMapper& cultureMapper,
+void V3::PoliticalManager::determineAndApplyWesternization(const mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 const Configuration::EUROCENTRISM eurocentrism,
 	 const DatingData& datingData)
@@ -218,7 +223,8 @@ void V3::PoliticalManager::determineWesternization(const mappers::CultureMapper&
 	int uncivs = 0;
 	for (const auto& country: countries | std::views::values)
 	{
-		country->determineWesternizationAndLiteracy(topTech, topInstitutions, cultureMapper, religionMapper, eurocentrism, datingData);
+		country
+			 ->determineWesternizationWealthAndLiteracy(topTech, topInstitutions, cultureMapper, religionMapper, eurocentrism, datingData, populationSetupMapper);
 
 		// Bookkeeping.
 		if (!country->getSubStates().empty())

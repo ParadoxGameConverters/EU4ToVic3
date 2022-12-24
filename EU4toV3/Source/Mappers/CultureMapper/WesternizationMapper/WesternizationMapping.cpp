@@ -1,9 +1,15 @@
 #include "WesternizationMapping.h"
 #include "CommonRegexes.h"
-#include "Configuration.h"
 #include "ParserHelpers.h"
 
 mappers::WesternizationMapping::WesternizationMapping(std::istream& theStream)
+{
+	registerKeys();
+	parseStream(theStream);
+	clearRegisteredKeywords();
+}
+
+void mappers::WesternizationMapping::registerKeys()
 {
 	registerKeyword("westernization", [this](std::istream& theStream) {
 		westernization = commonItems::getInt(theStream);
@@ -19,7 +25,4 @@ mappers::WesternizationMapping::WesternizationMapping(std::istream& theStream)
 		traits.insert(traitList.begin(), traitList.end());
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
-
-	parseStream(theStream);
-	clearRegisteredKeywords();
 }

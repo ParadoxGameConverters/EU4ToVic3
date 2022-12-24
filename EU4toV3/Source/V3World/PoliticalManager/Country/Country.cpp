@@ -8,6 +8,7 @@
 #include "Loaders/LocalizationLoader/EU4LocalizationLoader.h"
 #include "Log.h"
 #include "ParserHelpers.h"
+#include "PopulationSetupMapper/PopulationSetupMapper.h"
 #include "ReligionMapper/ReligionMapper.h"
 #include <cmath>
 #include <numeric>
@@ -104,10 +105,9 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	// tier
 	convertTier();
 
-	// country type
-	processedData.type = "recognized";
+	// country type is determined after westernization is set.
 
-	// namedaftercapital
+	// namedaftercapital ? Unsure what to do with this.
 	processedData.is_named_from_capital = false;
 }
 
@@ -231,12 +231,21 @@ void V3::Country::generateDecentralizedData(const LocalizationLoader& v3LocLoade
 	if (!substates.empty())																		// this really shouldn't be empty.
 		processedData.capitalStateName = substates.front()->getHomeStateName(); // any will do.
 	generateDecentralizedLocs(v3LocLoader, eu4LocLoader);
+	setDecentralizedEffects();
+}
 
+void V3::Country::setDecentralizedEffects()
+{
 	// COMMON/HISTORY/COUNTRY - for now, let's default everything to tier: bottom regardless of geography.
+	processedData.effects.clear();
 	processedData.effects.emplace("effect_starting_technology_tier_7_tech"); // tech
 	processedData.effects.emplace("effect_starting_politics_traditional");	 // politics
 	processedData.effects.emplace("effect_native_conscription_3");				 // conscription
-	processedData.laws.emplace("law_debt_slavery");									 // slavery
+	processedData.laws.clear();
+	processedData.laws.emplace("law_debt_slavery"); // slavery
+	processedData.populationEffects.clear();
+	processedData.populationEffects.emplace("effect_starting_pop_literacy_baseline"); // no literacy
+	processedData.populationEffects.emplace("effect_starting_pop_wealth_low");			 // no wealth
 }
 
 void V3::Country::generateDecentralizedLocs(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader)
@@ -298,6 +307,10 @@ void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const E
 	processedData.capitalStateName = vanillaData->capitalStateName;
 	processedData.is_named_from_capital = vanillaData->is_named_from_capital;
 
+	// By default we're copying DECENTRALIZED nations. This means their effects should be set as if they were decentralized.
+	// TODO: When VN imports non-decentralized countries, alter this so we support loading and copying of out-of-scope vanilla effects.
+	setDecentralizedEffects();
+
 	// do we have a name waiting for us?
 	const auto& tagName = v3LocLoader.getLocMapForKey(tag);
 	const auto& tagAdj = v3LocLoader.getLocMapForKey(tag + "_ADJ");
@@ -353,12 +366,13 @@ std::string V3::Country::getAdjective(const std::string& language) const
 	return tag + "_ADJ";
 }
 
-void V3::Country::determineWesternizationAndLiteracy(double topTech,
+void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 	 double topInstitutions,
 	 const mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 Configuration::EUROCENTRISM eurocentrism,
-	 const DatingData& datingData)
+	 const DatingData& datingData,
+	 const mappers::PopulationSetupMapper& populationSetupMapper)
 {
 	if (!sourceCountry)
 		return; // don't do non-imports.
@@ -366,6 +380,41 @@ void V3::Country::determineWesternizationAndLiteracy(double topTech,
 	calculateBaseLiteracy(religionMapper);
 	calculateWesternization(topTech, topInstitutions, cultureMapper, eurocentrism);
 	adjustLiteracy(datingData, cultureMapper);
+	applyLiteracyAndWealthEffects(populationSetupMapper);
+	determineCountryType();
+}
+
+void V3::Country::determineCountryType()
+{
+	if (!processedData.westernized)
+	{
+		// 25 is the cutoff so american natives that heavily invest into tech
+		// end up with more than 25 civLevel score and remain unrecognized.
+		if (processedData.civLevel < 25)
+		{
+			processedData.type = "decentralized";
+			setDecentralizedEffects();
+		}
+		else
+			processedData.type = "unrecognized";
+	}
+	else
+	{
+		// civilized/westernized nations can either be recognized or colonial.
+		if (sourceCountry->isColony())
+			processedData.type = "colonial";
+		else
+			processedData.type = "recognized";
+	}
+}
+
+void V3::Country::applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper)
+{
+	auto literacyEffect = populationSetupMapper.getLiteracyEffectForLiteracy(processedData.literacy);
+	const auto& averageDev = sourceCountry->getAverageDevelopment();
+	auto wealthEffect = populationSetupMapper.getWealthEffectForDev(averageDev);
+	processedData.populationEffects.emplace(literacyEffect);
+	processedData.populationEffects.emplace(wealthEffect);
 }
 
 void V3::Country::adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper)

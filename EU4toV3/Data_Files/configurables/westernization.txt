@@ -11,6 +11,8 @@
 # 0 - These people are illiterate.
 # 5 - Standard levels of literacy for this group
 # 10 - Extraordinarily literate aliens from Atlantis
+#
+# Anything below westernization 3 should end up as decentralized.
 
 link = {
 	# western european
@@ -73,11 +75,11 @@ link = {
 }
 
 link = {
-	# east african
+	# ethiopian
 	westernization = 4
 	industry = 0
 	traits = {
-		african_heritage malagasy_language bantu east_african_culture_group ethiopian
+		ethiopian
 	}
 }
 
@@ -92,7 +94,7 @@ link = {
 
 link = {
 	# north american native
-	westernization = 3
+	westernization = 2
 	industry = 1
 	traits = {
 		north_american_group native_north_american_culture_group
@@ -100,11 +102,11 @@ link = {
 }
 
 link = {
-	# subsaharan, central/south/west african
+	# subsaharan, east/central/south/west african
 	westernization = 2
 	industry = 0
 	traits = {
-		west_african_culture_group central_african_culture_group southern_african_culture_group
+		african_heritage west_african_culture_group central_african_culture_group southern_african_culture_group bantu malagasy_language east_african_culture_group
 	}
 }
 

@@ -1,6 +1,5 @@
 #ifndef WESTERNIZATION_MAPPING_H
 #define WESTERNIZATION_MAPPING_H
-
 #include "Parser.h"
 #include <set>
 
@@ -17,6 +16,8 @@ class WesternizationMapping: commonItems::parser
 	[[nodiscard]] const auto& getTraits() const { return traits; }
 
   private:
+	void registerKeys();
+
 	// Values range 0-10. 5 is default.
 	int westernization = 5;
 	int literacy = 5;

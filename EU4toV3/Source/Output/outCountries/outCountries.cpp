@@ -42,6 +42,14 @@ void outHistoryCountry(std::ostream& output, const V3::Country& country)
 	output << "\t}\n";
 }
 
+void outHistoryPopulations(std::ostream& output, const V3::Country& country)
+{
+	output << "\tc:" << country.getTag() << " = {\n";
+	for (const auto& effect: country.getProcessedData().populationEffects)
+		output << "\t\t" << effect << " = yes\n";
+	output << "\t}\n";
+}
+
 } // namespace
 
 void OUT::exportCommonCountries(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
@@ -64,8 +72,22 @@ void OUT::exportHistoryCountries(const std::string& outputName, const std::map<s
 
 	output << commonItems::utf8BOM << "COUNTRIES = {\n";
 	for (const auto& country: countries | std::views::values)
-		if (!country->getSubStates().empty())
+		if (!country->getSubStates().empty() && !country->getProcessedData().effects.empty())
 			outHistoryCountry(output, *country);
+	output << "}\n";
+	output.close();
+}
+
+void OUT::exportHistoryPopulations(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+{
+	std::ofstream output("output/" + outputName + "/common/history/population/99_converted_countries.txt");
+	if (!output.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/history/population/99_converted_countries.txt");
+
+	output << commonItems::utf8BOM << "POPULATION = {\n";
+	for (const auto& country: countries | std::views::values)
+		if (!country->getSubStates().empty() && !country->getProcessedData().populationEffects.empty())
+			outHistoryPopulations(output, *country);
 	output << "}\n";
 	output.close();
 }

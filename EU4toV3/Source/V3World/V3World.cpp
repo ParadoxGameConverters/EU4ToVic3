@@ -84,7 +84,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getCultureLoader(),
 		 sourceWorld.getEU4Localizations());
 
-	politicalManager.determineWesternization(cultureMapper, religionMapper, configuration.configBlock.euroCentric, sourceWorld.getDatingData());
+	politicalManager.loadPopulationSetupMapperRules("configurables/population_setup.txt");
+	politicalManager.determineAndApplyWesternization(cultureMapper, religionMapper, configuration.configBlock.euroCentric, sourceWorld.getDatingData());
 
 	clayManager.squashAllSubStates(politicalManager);
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);

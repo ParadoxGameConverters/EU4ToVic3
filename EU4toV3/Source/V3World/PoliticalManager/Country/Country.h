@@ -18,6 +18,7 @@ namespace mappers
 {
 class ReligionMapper;
 class CultureMapper;
+class PopulationSetupMapper;
 } // namespace mappers
 namespace V3
 {
@@ -42,6 +43,7 @@ struct ProcessedData
 	std::optional<commonItems::Color> color;
 	bool is_named_from_capital = false;
 	std::set<std::string> effects;
+	std::set<std::string> populationEffects;
 	std::set<std::string> laws;
 	double literacy = 0;
 	double civLevel = 0;
@@ -85,12 +87,13 @@ class Country: commonItems::parser
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
 
-	void determineWesternizationAndLiteracy(double topTech,
+	void determineWesternizationWealthAndLiteracy(double topTech,
 		 double topInstitutions,
 		 const mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 Configuration::EUROCENTRISM eurocentrism,
-		 const DatingData& datingData);
+		 const DatingData& datingData,
+		 const mappers::PopulationSetupMapper& populationSetupMapper);
 
 	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
 	[[nodiscard]] int getTechInfraCap() const { return 0; }
@@ -112,6 +115,9 @@ class Country: commonItems::parser
 	void calculateWesternization(double topTech, double topInstitutions, const mappers::CultureMapper& cultureMapper, Configuration::EUROCENTRISM eurocentrism);
 	void adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper);
 	[[nodiscard]] static double yearCapFactor(const date& targetDate);
+	void applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper);
+	void setDecentralizedEffects();
+	void determineCountryType();
 
 	std::string tag;
 	std::optional<VanillaCommonCountryData> vanillaData;
