@@ -1,6 +1,8 @@
 #ifndef V3_COUNTRY_H
 #define V3_COUNTRY_H
 #include "Color.h"
+#include "Configuration.h"
+#include "DatingData.h"
 #include "Parser.h"
 #include <memory>
 #include <string>
@@ -9,7 +11,15 @@ namespace EU4
 {
 class Country;
 class EU4LocalizationLoader;
+class CultureLoader;
+class ReligionLoader;
 } // namespace EU4
+namespace mappers
+{
+class ReligionMapper;
+class CultureMapper;
+class PopulationSetupMapper;
+} // namespace mappers
 namespace V3
 {
 struct VanillaCommonCountryData
@@ -32,6 +42,13 @@ struct ProcessedData
 	std::string capitalStateName;
 	std::optional<commonItems::Color> color;
 	bool is_named_from_capital = false;
+	std::set<std::string> effects;
+	std::set<std::string> populationEffects;
+	std::set<std::string> laws;
+	double literacy = 0;
+	double civLevel = 0;
+	bool westernized = false;
+	double industryFactor = 1.0;
 
 	std::string name;
 	std::string adjective;
@@ -53,9 +70,13 @@ class Country: commonItems::parser
 	void setCPBudget(const int theBudget) { CPBudget = theBudget; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 
-	void convertFromEU4Country(const ClayManager& clayManager);
+	void convertFromEU4Country(const ClayManager& clayManager,
+		 mappers::CultureMapper& cultureMapper,
+		 const mappers::ReligionMapper& religionMapper,
+		 const EU4::CultureLoader& cultureLoader,
+		 const EU4::ReligionLoader& religionLoader);
 	void copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
-	void generateDecentralizedData(const ClayManager& clayManager, const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
+	void generateDecentralizedData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 
 	[[nodiscard]] const auto& getTag() const { return tag; }
 	[[nodiscard]] const auto& getVanillaData() const { return vanillaData; }
@@ -74,6 +95,14 @@ class Country: commonItems::parser
 	[[nodiscard]] int getPopCount() const;
 
 
+	void determineWesternizationWealthAndLiteracy(double topTech,
+		 double topInstitutions,
+		 const mappers::CultureMapper& cultureMapper,
+		 const mappers::ReligionMapper& religionMapper,
+		 Configuration::EUROCENTRISM eurocentrism,
+		 const DatingData& datingData,
+		 const mappers::PopulationSetupMapper& populationSetupMapper);
+
 	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
 	[[nodiscard]] int getTechInfraCap() const { return 0; }
 	// TODO(Gawquon): Implement, multiplier for amount of infrastructure created by population
@@ -82,7 +111,21 @@ class Country: commonItems::parser
   private:
 	void registerKeys();
 
+	void convertCapital(const ClayManager& clayManager);
+	void convertReligion(const mappers::ReligionMapper& religionMapper);
+	void convertCulture(const ClayManager& clayManager,
+		 mappers::CultureMapper& cultureMapper,
+		 const EU4::CultureLoader& cultureLoader,
+		 const EU4::ReligionLoader& religionLoader);
+	void convertTier();
 	void generateDecentralizedLocs(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
+	void calculateBaseLiteracy(const mappers::ReligionMapper& religionMapper);
+	void calculateWesternization(double topTech, double topInstitutions, const mappers::CultureMapper& cultureMapper, Configuration::EUROCENTRISM eurocentrism);
+	void adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper);
+	[[nodiscard]] static double yearCapFactor(const date& targetDate);
+	void applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper);
+	void setDecentralizedEffects();
+	void determineCountryType();
 
 	std::string tag;
 	std::optional<VanillaCommonCountryData> vanillaData;

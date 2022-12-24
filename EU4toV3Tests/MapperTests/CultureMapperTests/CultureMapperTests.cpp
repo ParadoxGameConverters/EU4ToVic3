@@ -25,6 +25,7 @@ std::tuple<mappers::CultureMapper, V3::ClayManager, EU4::CultureLoader, EU4::Rel
 
 	mappers::CultureMapper culMapper;
 	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
+	culMapper.loadWesternizationRules("TestFiles/configurables/westernization.txt");
 	return std::tuple{culMapper, clayManager, cultureLoader, religionLoader};
 }
 
@@ -253,6 +254,9 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
 	EXPECT_THAT(def1.ethnicities, testing::UnorderedElementsAre("testable2"));
 	EXPECT_EQ("gr2", def1.graphics);
 	EXPECT_EQ("Culture 5", def1.locBlock.at("english"));
+	EXPECT_EQ(10, culMapper.getWesternizationScoreForCulture("culture5"));
+	EXPECT_EQ(5, culMapper.getLiteracyScoreForCulture("culture5"));
+	EXPECT_EQ(5, culMapper.getIndustryScoreForCulture("culture5"));
 
 	// unmapped_culture has no mapping links whatsoever and is scraping defaults
 	EXPECT_EQ("unmapped_culture", def2.name);
@@ -268,4 +272,7 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
 	EXPECT_THAT(def2.ethnicities, testing::UnorderedElementsAre("neutral")); // fallback default
 	EXPECT_EQ("generic", def2.graphics);												 // generic fallback for everyone.
 	EXPECT_EQ("Unmapped", def2.locBlock.at("english"));
+	EXPECT_EQ(0, culMapper.getWesternizationScoreForCulture("unmapped_culture"));
+	EXPECT_EQ(0, culMapper.getLiteracyScoreForCulture("unmapped_culture"));
+	EXPECT_EQ(0, culMapper.getIndustryScoreForCulture("unmapped_culture"));
 }

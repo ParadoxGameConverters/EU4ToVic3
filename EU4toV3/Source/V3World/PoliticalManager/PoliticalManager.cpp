@@ -3,6 +3,7 @@
 #include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "Country/Country.h"
+#include "CountryManager/EU4Country.h"
 #include "Loaders/CountryDefinitionLoader/CountryDefinitionLoader.h"
 #include "Log.h"
 #include "Mappers/CountryMapper/CountryMapper.h"
@@ -26,6 +27,11 @@ void V3::PoliticalManager::loadCountryMapper(const std::shared_ptr<mappers::Coun
 	countryMapper = theCountryMapper;
 	for (const auto& countryTag: countries | std::views::keys)
 		countryMapper->registerKnownVanillaV3Tag(countryTag);
+}
+
+void V3::PoliticalManager::loadPopulationSetupMapperRules(const std::string& filePath)
+{
+	populationSetupMapper.loadMappingRules(filePath);
 }
 
 void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries)
@@ -141,6 +147,10 @@ std::string V3::PoliticalManager::getDominantDemographic(const std::vector<Demog
 }
 
 void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
+	 mappers::CultureMapper& cultureMapper,
+	 const mappers::ReligionMapper& religionMapper,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader,
 	 const LocalizationLoader& v3LocLoader,
 	 const EU4::EU4LocalizationLoader& eu4LocLoader) const
 {
@@ -150,7 +160,7 @@ void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
 	{
 		// this is a freshly-generated decentralized country with no source data whatsoever.
 		if (!country->getVanillaData() && country->getProcessedData().type == "decentralized")
-			country->generateDecentralizedData(clayManager, v3LocLoader, eu4LocLoader);
+			country->generateDecentralizedData(v3LocLoader, eu4LocLoader);
 
 		// this is a vic3-only (vanilla) country with no EU4 match. It's likely extinct.
 		else if (country->getVanillaData() && !country->getSourceCountry())
@@ -158,7 +168,7 @@ void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
 
 		// otherwise, this is a regular imported EU4 country
 		else if (country->getSourceCountry())
-			country->convertFromEU4Country(clayManager);
+			country->convertFromEU4Country(clayManager, cultureMapper, religionMapper, cultureLoader, religionLoader);
 
 		else
 			Log(LogLevel::Warning) << "Country " << tag << " has no known sources! Not importing!";
@@ -182,6 +192,51 @@ std::shared_ptr<V3::Country> V3::PoliticalManager::getCountry(const std::string&
 	if (countries.contains(v3Tag))
 		return countries.at(v3Tag);
 	return nullptr;
+}
+
+void V3::PoliticalManager::determineAndApplyWesternization(const mappers::CultureMapper& cultureMapper,
+	 const mappers::ReligionMapper& religionMapper,
+	 const Configuration::EUROCENTRISM eurocentrism,
+	 const DatingData& datingData)
+{
+	Log(LogLevel::Info) << "-> Determining Westernization.";
+	double topTech = 0;
+	double topInstitutions = 0;
+
+	// Determine top tech/institutions.
+	for (const auto& country: countries | std::views::values)
+	{
+		if (!country->getSourceCountry())
+			continue; // we need only eu4 imports
+		const auto& sourceCountry = country->getSourceCountry();
+		if (sourceCountry->getProvinces().empty())
+			continue; // dead nations are stuck.
+		const auto totalTechs = sourceCountry->getMilTech() + sourceCountry->getAdmTech() + sourceCountry->getDipTech();
+		if (totalTechs > topTech)
+			topTech = totalTechs;
+		const auto currInstitutions = sourceCountry->getNumEmbracedInstitutions();
+		if (currInstitutions > topInstitutions)
+			topInstitutions = currInstitutions;
+	}
+
+	// and distribute tech level.
+	int civs = 0;
+	int uncivs = 0;
+	for (const auto& country: countries | std::views::values)
+	{
+		country
+			 ->determineWesternizationWealthAndLiteracy(topTech, topInstitutions, cultureMapper, religionMapper, eurocentrism, datingData, populationSetupMapper);
+
+		// Bookkeeping.
+		if (!country->getSubStates().empty())
+		{
+			if (country->getProcessedData().westernized)
+				++civs;
+			else
+				++uncivs;
+		}
+	}
+	Log(LogLevel::Info) << "<> There are " << civs << " westernized and " << uncivs << " unwesternized landed nations.";
 }
 
 int V3::PoliticalManager::getWorldPopCount() const

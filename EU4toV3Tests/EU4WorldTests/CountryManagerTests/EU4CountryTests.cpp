@@ -400,6 +400,7 @@ TEST(EU4World_EU4CountryTests, DependentStuffCanBeSet)
 TEST(EU4World_EU4CountryTests, GovernmentAndReformsCanBeSetAndPinged)
 {
 	std::stringstream input;
+	input << "government_rank = 2\n";
 	input << "government = {\n";
 	input << "	government = monarchy\n";
 	input << "	reform_stack={\n";
@@ -408,6 +409,7 @@ TEST(EU4World_EU4CountryTests, GovernmentAndReformsCanBeSetAndPinged)
 	input << "}\n";
 	const EU4::Country country("TAG", input);
 
+	EXPECT_EQ(2, country.getGovernmentRank());
 	EXPECT_EQ("monarchy", country.getGovernment());
 	EXPECT_THAT(country.getReforms(), UnorderedElementsAre("monarchy_mechanic", "plutocratic_reform", "enforce_privileges_reform"));
 	EXPECT_TRUE(country.hasReform("plutocratic_reform"));
@@ -736,6 +738,39 @@ TEST(EU4World_EU4CountryTests, CountryWeightSumsProvinceWeight)
 	EXPECT_NEAR(12, province1->getProvinceWeight(), 0.0001);
 	EXPECT_NEAR(42, province2->getProvinceWeight(), 0.0001);
 	EXPECT_NEAR(54, country.getCountryWeight(), 0.0001);
+}
+
+TEST(EU4World_EU4CountryTests, CountryReturnsAverageProvinceDevelopment)
+{
+	std::stringstream province1Input;
+	province1Input << "owner = TAG\n";
+	province1Input << "base_tax = 3\n";
+	province1Input << "base_production = 4\n";
+	province1Input << "base_manpower = 5\n";
+	auto province1 = std::make_shared<EU4::Province>("-1", province1Input);
+
+	std::stringstream province2Input;
+	province2Input << "owner = TAG\n";
+	province2Input << "base_tax = 13\n";
+	province2Input << "base_production = 14\n";
+	province2Input << "base_manpower = 15\n";
+	auto province2 = std::make_shared<EU4::Province>("-2", province2Input);
+
+	std::stringstream input;
+	EU4::Country country("TAG", input);
+
+	country.addProvince(province1);
+	country.addProvince(province2);
+
+	EXPECT_NEAR(27, country.getAverageDevelopment(), 0.0001); // 12 + 42 = 54, 54 / 2 = 27
+}
+
+TEST(EU4World_EU4CountryTests, AverageProvinceDevelopmentForNoProvincesIsZero)
+{
+	std::stringstream input;
+	EU4::Country country("TAG", input);
+
+	EXPECT_DOUBLE_EQ(0, country.getAverageDevelopment());
 }
 
 TEST(EU4World_EU4CountryTests, UpdateRegimentTypesUpdatesallArmies)

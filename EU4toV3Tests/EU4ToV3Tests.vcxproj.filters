@@ -697,6 +697,30 @@
     <ClCompile Include="MapperTests\ColonialRegionMapper\ColonialRegionMappingTests.cpp">
       <Filter>MapperTests\ColonialRegionMapperTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapper.cpp">
+      <Filter>ConverterFiles\Mappers\CultureMapper\WesternizationMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapping.cpp">
+      <Filter>ConverterFiles\Mappers\CultureMapper\WesternizationMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\CultureMapperTests\WesternizationMapperTests\WesternizationMapperTests.cpp">
+      <Filter>MapperTests\CultureMapperTests\WesternizationMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\CultureMapperTests\WesternizationMapperTests\WesternizationMappingTests.cpp">
+      <Filter>MapperTests\CultureMapperTests\WesternizationMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\PopulationSetupMapper\PopulationSetupMapper.cpp">
+      <Filter>ConverterFiles\Mappers\PopulationSetupMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\PopulationSetupMapper\PopulationSetupMapping.cpp">
+      <Filter>ConverterFiles\Mappers\PopulationSetupMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\PopulationSetupMapperTests\PopulationSetupMapperTests.cpp">
+      <Filter>MapperTests\PopulationSetupMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\PopulationSetupMapperTests\PopulationSetupMappingTests.cpp">
+      <Filter>MapperTests\PopulationSetupMapperTests</Filter>
+    </ClCompile>
     <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\EconomyManager.cpp">
       <Filter>ConverterFiles\V3World\EconomyManager</Filter>
     </ClCompile>
@@ -1167,6 +1191,18 @@
     <Filter Include="MapperTests\ColonialRegionMapperTests">
       <UniqueIdentifier>{6899b28e-03e3-4aac-bfdb-b74391b1ca7f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\Mappers\CultureMapper\WesternizationMapper">
+      <UniqueIdentifier>{faf26dca-9e16-4ff2-9406-5951c1efadfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\CultureMapperTests\WesternizationMapperTests">
+      <UniqueIdentifier>{d7923070-5f3a-4368-a595-3a1c684711eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\PopulationSetupMapperTests">
+      <UniqueIdentifier>{691c173e-87a9-4006-8760-f61e6943d19c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\Mappers\PopulationSetupMapper">
+      <UniqueIdentifier>{46768afb-e991-441f-aa39-0d8f84cb5316}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ConverterFiles\V3World\EconomyManager">
       <UniqueIdentifier>{ef3bbcb1-99a5-46a1-89dd-7ecce6580a4c}</UniqueIdentifier>
     </Filter>
@@ -1340,6 +1376,9 @@
       <Filter>TestFiles\vic3installation\game\common\cultures</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\colonial_regions.txt">
+      <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\westernization.txt">
       <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>

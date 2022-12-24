@@ -49,6 +49,7 @@ class Country: commonItems::parser
 	[[nodiscard]] auto getDipTech() const { return dipTech; }
 	[[nodiscard]] auto getMilTech() const { return milTech; }
 	[[nodiscard]] const auto& getTechGroup() const { return techGroup; }
+	[[nodiscard]] double getAverageDevelopment() const;
 
 	// culture religion
 	[[nodiscard]] const auto& getPrimaryCulture() const { return primaryCulture; }
@@ -90,6 +91,7 @@ class Country: commonItems::parser
 
 	// government, reforms, ideas, institutions
 	[[nodiscard]] const auto& getGovernment() const { return government; }
+	[[nodiscard]] auto getGovernmentRank() const { return governmentRank; }
 	[[nodiscard]] const auto& getReforms() const { return governmentReforms; }
 	[[nodiscard]] bool hasReform(const std::string&) const;
 	void addReform(const std::string& theReform) { governmentReforms.emplace(theReform); }
@@ -187,6 +189,7 @@ class Country: commonItems::parser
 	double libertyDesire = 0.0;
 
 	std::string government = "monarchy";
+	int governmentRank = 0;
 	std::set<std::string> governmentReforms;
 	std::set<std::string> policies;
 	std::vector<bool> embracedInstitutions;

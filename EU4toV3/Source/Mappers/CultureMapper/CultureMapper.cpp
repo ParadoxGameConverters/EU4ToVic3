@@ -202,6 +202,16 @@ void mappers::CultureMapper::loadColonialRules(const std::string& fileName)
 	colonialRegionMapper.loadMappingRules(fileName);
 }
 
+void mappers::CultureMapper::loadWesternizationRules(std::istream& theStream)
+{
+	westernizationMapper.loadMappingRules(theStream);
+}
+
+void mappers::CultureMapper::loadWesternizationRules(const std::string& fileName)
+{
+	westernizationMapper.loadMappingRules(fileName);
+}
+
 void mappers::CultureMapper::registerKeys()
 {
 	registerRegex(R"(@\w+)", [this](const std::string& macro, std::istream& theStream) {
@@ -257,6 +267,25 @@ void mappers::CultureMapper::registerKeys()
 
 	// For neoculture requests we need to consult and potentially expand our global registry.
 	return getNeoCultureMatch(eu4culture, v3state, clayManager);
+}
+
+std::optional<std::string> mappers::CultureMapper::suspiciousCultureMatch(const V3::ClayManager& clayManager,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader,
+	 const std::string& eu4culture,
+	 const std::string& eu4religion,
+	 const std::string& v3state,
+	 const std::string& v3ownerTag)
+{
+	if (const auto& potentialColony = colonialRegionMapper.getColonyNameForState(v3state, clayManager); potentialColony)
+	{
+		// this is option 1.
+		if (colonyNeoCultureTargets.contains(*potentialColony) && colonyNeoCultureTargets.at(*potentialColony).contains(eu4culture))
+			return colonyNeoCultureTargets.at(*potentialColony).at(eu4culture);
+	}
+
+	// Otherwise, do a straight match at that location.
+	return cultureMatch(clayManager, cultureLoader, religionLoader, eu4culture, eu4religion, v3state, v3ownerTag, false, false);
 }
 
 std::string mappers::CultureMapper::getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager)
@@ -403,4 +432,37 @@ void mappers::CultureMapper::injectReligionsIntoCultureDefs(const V3::ClayManage
 		v3CultureDefinitions.at(culture).religion = dominantReligion->first;
 	}
 	Log(LogLevel::Info) << "<> Update complete.";
+}
+
+int mappers::CultureMapper::getWesternizationScoreForCulture(const std::string& cultureName) const
+{
+	if (!v3CultureDefinitions.contains(cultureName))
+	{
+		Log(LogLevel::Warning) << "Can't retrieve Westernization for unknown culture: " << cultureName;
+		return 0;
+	}
+
+	return westernizationMapper.getWesternizationForTraits(v3CultureDefinitions.at(cultureName).traits);
+}
+
+int mappers::CultureMapper::getLiteracyScoreForCulture(const std::string& cultureName) const
+{
+	if (!v3CultureDefinitions.contains(cultureName))
+	{
+		Log(LogLevel::Warning) << "Can't retrieve Literacy for unknown culture: " << cultureName;
+		return 0;
+	}
+
+	return westernizationMapper.getLiteracyForTraits(v3CultureDefinitions.at(cultureName).traits);
+}
+
+int mappers::CultureMapper::getIndustryScoreForCulture(const std::string& cultureName) const
+{
+	if (!v3CultureDefinitions.contains(cultureName))
+	{
+		Log(LogLevel::Warning) << "Can't retrieve Industry for unknown culture: " << cultureName;
+		return 0;
+	}
+
+	return westernizationMapper.getIndustryForTraits(v3CultureDefinitions.at(cultureName).traits);
 }

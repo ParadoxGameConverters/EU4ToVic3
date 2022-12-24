@@ -71,6 +71,15 @@ void EU4::CountryManager::linkProvincesToCountries(const ProvinceManager& provin
 		if (const auto& owner = countries.find(province->getOwnerTag()); owner != countries.end())
 			owner->second->addProvince(province);
 	}
+
+	// also record capital information.
+	for (const auto& [tag, country]: countries)
+	{
+		if (country->getCapital() != 0 && provinces.contains(country->getCapital()))
+		{
+			provinces.at(country->getCapital())->addCapital(tag);
+		}
+	}
 }
 
 void EU4::CountryManager::setHREAndEmperors(const std::string& HREmperor, const std::string& celestialEmperor, const ProvinceManager& provinceManager)

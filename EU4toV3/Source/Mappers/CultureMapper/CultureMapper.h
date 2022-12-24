@@ -4,6 +4,7 @@
 #include "CultureDefinitionLoader/CultureDef.h"
 #include "CultureMappingRule.h"
 #include "Parser.h"
+#include "WesternizationMapper/WesternizationMapper.h"
 
 namespace EU4
 {
@@ -34,6 +35,8 @@ class CultureMapper: commonItems::parser
 	void loadMappingRules(const std::string& fileName);
 	void loadColonialRules(std::istream& theStream);
 	void loadColonialRules(const std::string& fileName);
+	void loadWesternizationRules(std::istream& theStream);
+	void loadWesternizationRules(const std::string& fileName);
 	void expandCulturalMappings(const V3::ClayManager& clayManager, const EU4::CultureLoader& cultureLoader, const EU4::ReligionLoader& religionLoader);
 
 	[[nodiscard]] const auto& getMacros() const { return encounteredMacros; }
@@ -51,6 +54,20 @@ class CultureMapper: commonItems::parser
 		 bool neoCultureRequest = false,
 		 bool silent = false);
 
+	// This is a check where we ping for a v3 culture without having a clue what we're asking for exactly.
+	// 1. If the state is colonial, and we have a record of that eu4 culture having a neoculture in that colony,
+	//	then we return that neoculture.
+	// 2. If the state is colonial, and we don't have a record of eu4 culture having a neoculture in that colony,
+	//	it's possible we're a native country, and return regular match.
+	// 3. If the state is not colonial, return regular match same as 2.
+	[[nodiscard]] std::optional<std::string> suspiciousCultureMatch(const V3::ClayManager& clayManager,
+		 const EU4::CultureLoader& cultureLoader,
+		 const EU4::ReligionLoader& religionLoader,
+		 const std::string& eu4culture,
+		 const std::string& eu4religion,
+		 const std::string& v3state,
+		 const std::string& v3ownerTag);
+
 	void generateCultureDefinitions(const commonItems::ModFilesystem& modFS,
 		 const std::string& nameListsPath,
 		 const std::string& nameListMapPath,
@@ -59,6 +76,10 @@ class CultureMapper: commonItems::parser
 		 const EU4::EU4LocalizationLoader& eu4Locs);
 
 	void injectReligionsIntoCultureDefs(const V3::ClayManager& clayManager);
+
+	[[nodiscard]] int getWesternizationScoreForCulture(const std::string& cultureName) const;
+	[[nodiscard]] int getLiteracyScoreForCulture(const std::string& cultureName) const;
+	[[nodiscard]] int getIndustryScoreForCulture(const std::string& cultureName) const;
 
   private:
 	std::string getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager);
@@ -72,6 +93,7 @@ class CultureMapper: commonItems::parser
 	std::map<std::string, std::map<std::string, std::string>> colonyNeoCultureTargets; // colony->[eu4 culture -> v3 neoculture]
 
 	ColonialRegionMapper colonialRegionMapper;
+	WesternizationMapper westernizationMapper;
 };
 } // namespace mappers
 

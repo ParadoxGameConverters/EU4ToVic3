@@ -6,7 +6,7 @@
 #include "CultureLoader/CultureLoader.h"
 #include "CultureMapper/CultureMapper.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
-#include "Loaders/LocalizationLoader/EU4LocalizationLoader.h"
+#include "LocalizationLoader/EU4LocalizationLoader.h"
 #include "PoliticalManager/Country/Country.h"
 #include "PoliticalManager/PoliticalManager.h"
 #include "PopManager/PopManager.h"
@@ -196,7 +196,9 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanConvertVanillaCountries)
 	EXPECT_FALSE(country6->getProcessedData().color);
 	EXPECT_FALSE(country7->getProcessedData().color);
 
-	politicalManager.convertAllCountries(clayManager, v3LocLoader, eu4LocLoader); // now we process only the 3 vanilla countries.
+	mappers::CultureMapper culMapper;
+	politicalManager.convertAllCountries(clayManager, culMapper, {}, {}, {}, v3LocLoader,
+		 eu4LocLoader); // now we process only the 3 vanilla countries.
 
 	EXPECT_FALSE(country1->getProcessedData().color); // these 3 eu4 countries still have no color.
 	EXPECT_FALSE(country2->getProcessedData().color);
@@ -249,7 +251,8 @@ TEST(V3World_PoliticalManagerTests, DecentralizedCountriesCanBeFilled)
 	state->addSubState(sub5);
 
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);
-	politicalManager.convertAllCountries(clayManager, V3::LocalizationLoader(), EU4::EU4LocalizationLoader());
+	politicalManager
+		 .convertAllCountries(clayManager, culMapper, relMapper, cultureLoader, religionLoader, V3::LocalizationLoader(), EU4::EU4LocalizationLoader());
 
 	ASSERT_TRUE(politicalManager.getCountries().contains("X01"));
 	const auto& x01 = politicalManager.getCountries().at("X01");

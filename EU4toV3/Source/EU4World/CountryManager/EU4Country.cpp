@@ -13,6 +13,7 @@
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 #include <cmath>
+#include <numeric>
 
 EU4::Country::Country(std::string countryTag, std::istream& theStream): tag(std::move(countryTag))
 {
@@ -59,7 +60,7 @@ void EU4::Country::registerKeys()
 		libertyDesire = commonItems::getDouble(theStream);
 	});
 	registerKeyword("institutions", [this](std::istream& theStream) {
-		for (auto institution: commonItems::getInts(theStream))
+		for (const auto institution: commonItems::getInts(theStream))
 			if (institution == 1)
 				embracedInstitutions.push_back(true);
 			else
@@ -75,7 +76,7 @@ void EU4::Country::registerKeys()
 		religion = commonItems::getString(theStream);
 	});
 	registerKeyword("age_score", [this](std::istream& theStream) {
-		for (auto& agScore: commonItems::getDoubles(theStream))
+		for (const auto& agScore: commonItems::getDoubles(theStream))
 			score += agScore;
 	});
 	registerKeyword("stability", [this](std::istream& theStream) {
@@ -100,6 +101,9 @@ void EU4::Country::registerKeys()
 		const GovernmentSection theSection(theStream);
 		government = theSection.getGovernment();
 		governmentReforms = theSection.getGovernmentReforms();
+	});
+	registerKeyword("government_rank", [this](std::istream& theStream) {
+		governmentRank = commonItems::getInt(theStream);
 	});
 	registerKeyword("active_relations", [this](std::istream& theStream) {
 		const EU4Relations activeRelations(theStream);
@@ -374,7 +378,7 @@ std::string EU4::Country::getAdjective(const std::string& language) const
 int EU4::Country::getNumEmbracedInstitutions() const
 {
 	auto total = 0;
-	for (auto institution: embracedInstitutions)
+	for (const auto institution: embracedInstitutions)
 		if (institution)
 			total++;
 	return total;
@@ -396,4 +400,14 @@ double EU4::Country::getCountryWeight() const
 	for (const auto& province: provinces)
 		totalDev += province->getProvinceWeight();
 	return totalDev;
+}
+
+double EU4::Country::getAverageDevelopment() const
+{
+	if (provinces.empty())
+		return 0;
+	const double totalDev = std::accumulate(provinces.begin(), provinces.end(), 0, [](double sum, const std::shared_ptr<Province>& province) {
+		return sum + province->getBaseTax() + province->getBaseProduction() + province->getBaseManpower();
+	});
+	return totalDev / static_cast<double>(provinces.size());
 }

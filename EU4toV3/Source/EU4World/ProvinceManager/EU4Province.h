@@ -21,6 +21,8 @@ class Province: commonItems::convenientParser
 	void setControllerTag(const std::string& theTag) { controllerTag = theTag; }
 	[[nodiscard]] const auto& getCulture() const { return culture; }
 	[[nodiscard]] const auto& getReligion() const { return religion; }
+	void addCapital(const std::string& theTag) { capitals.emplace(theTag); }
+	[[nodiscard]] const auto& getCapitals() const { return capitals; }
 
 	[[nodiscard]] auto inHre() const { return inHRE; }
 	[[nodiscard]] auto isTerritorialCore() const { return territorialCore; }
@@ -65,6 +67,7 @@ class Province: commonItems::convenientParser
 	std::string controllerTag;
 	std::string culture;
 	std::string religion;
+	std::set<std::string> capitals; // eu4 tags for whichever countries this is capital.
 
 	bool inHRE = false;
 	bool territorialCore = false;

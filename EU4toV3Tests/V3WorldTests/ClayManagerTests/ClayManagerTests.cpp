@@ -40,6 +40,9 @@ V3::ClayManager generateChunks()
 	provinceStream << "-10={}\n";																																	  // irrelevant
 	EU4::ProvinceManager provinceManager;
 	provinceManager.loadProvinces(provinceStream);
+	// add 2 disputed capitals
+	provinceManager.getProvince(2)->addCapital("TA2");
+	provinceManager.getProvince(3)->addCapital("TA3");
 	provinceManager.loadDefaultMapParser(defaults);
 	provinceManager.loadDefinitionScraper(definitions);
 	provinceManager.classifyProvinces(regionMapper);
@@ -325,13 +328,16 @@ TEST(V3World_ClayManagerTests, clayManagerCanUndisputeChunkOwnership)
 	EXPECT_EQ("TA2", chunk1->getSourceOwnerTag());
 	EXPECT_TRUE(chunk1->getProvinces().contains("x000003"));
 	EXPECT_TRUE(chunk1->getProvinces().contains("x000004"));
+	EXPECT_TRUE(chunk1->isCapital()); // Capital of owner, TA2. TA3 lost its capital.
 
 	EXPECT_FALSE(chunk2->getSourceOwnerTag());
 	EXPECT_TRUE(chunk2->getProvinces().contains("x000005"));
+	EXPECT_FALSE(chunk2->isCapital());
 
 	ASSERT_TRUE(chunk3->getSourceOwnerTag());
 	EXPECT_EQ("TA9", chunk3->getSourceOwnerTag());
 	EXPECT_TRUE(chunk3->getProvinces().contains("x000008"));
+	EXPECT_FALSE(chunk3->isCapital()); // TA9 has a capital elsewhere.
 }
 
 TEST(V3World_ClayManagerTests, clayManagerResetsChunkOwnershipFromInvalidCountries)
@@ -450,23 +456,27 @@ TEST(V3World_ClayManagerTests, clayManagerCanSplitSubstatesFromChunks)
 	EXPECT_EQ(1, substate1->getProvinces().size());
 	EXPECT_TRUE(substate1->getProvinces().contains("x000003"));
 	EXPECT_EQ("STATE_TEST_LAND1", substate1->getHomeStateName());
+	EXPECT_TRUE(substate1->isCapital()); // TA2->GA2 capital goes here since it has 50% share and this one is first.
 
 	ASSERT_TRUE(substate2->getSourceOwnerTag());
 	EXPECT_EQ("TA2", *substate2->getSourceOwnerTag());
 	EXPECT_EQ(1, substate2->getProvinces().size());
 	EXPECT_TRUE(substate2->getProvinces().contains("x000004"));
 	EXPECT_EQ("STATE_TEST_LAND2", substate2->getHomeStateName());
+	EXPECT_FALSE(substate2->isCapital()); // Capital already spent
 
 	ASSERT_FALSE(substate3->getSourceOwnerTag());
 	EXPECT_EQ(1, substate3->getProvinces().size());
 	EXPECT_TRUE(substate3->getProvinces().contains("x000005"));
 	EXPECT_EQ("STATE_TEST_LAND3", substate3->getHomeStateName());
+	EXPECT_FALSE(substate3->isCapital()); // Capital never set
 
 	ASSERT_TRUE(substate4->getSourceOwnerTag());
 	EXPECT_EQ("TA9", *substate4->getSourceOwnerTag());
 	EXPECT_EQ(1, substate4->getProvinces().size());
 	EXPECT_TRUE(substate4->getProvinces().contains("x000008"));
 	EXPECT_EQ("STATE_TEST_LAND4", substate4->getHomeStateName());
+	EXPECT_FALSE(substate4->isCapital()); // Capital elsewhere
 }
 
 TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)

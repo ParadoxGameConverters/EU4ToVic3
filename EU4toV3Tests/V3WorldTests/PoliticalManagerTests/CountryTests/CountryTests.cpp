@@ -1,9 +1,13 @@
 #include "ClayManager/ClayManager.h"
 #include "CommonFunctions.h"
 #include "CountryManager/EU4Country.h"
+#include "CultureMapper/CultureMapper.h"
+#include "Loaders/CultureLoader/CultureLoader.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
 #include "Loaders/LocalizationLoader/EU4LocalizationLoader.h"
+#include "Loaders/ReligionLoader/ReligionLoader.h"
 #include "PoliticalManager/Country/Country.h"
+#include "ReligionMapper/ReligionMapper.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
@@ -37,7 +41,7 @@ TEST(V3World_CountryTests, CountryCanBeInitializedViaVanillaData)
 	std::stringstream input;
 	input << "country_type = recognized\n ";
 	input << "tier = empire\n ";
-	input << "cultures = { cul1 cul2 cul2 }\n ";
+	input << "cultures = { cul1 cul2 }\n ";
 	input << "religion = protestant\n ";
 	input << "capital = STATE_TEST_1\n ";
 	input << "color = {147 130 110}\n ";
@@ -72,7 +76,8 @@ TEST(V3World_CountryTests, CountryCanImportColorFromEU4)
 	srcCountry->setMapColor(commonItems::Color(std::array{1, 2, 3}));
 	country.setSourceCountry(srcCountry);
 
-	country.convertFromEU4Country(clayManager);
+	mappers::CultureMapper culMapper;
+	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {});
 
 	EXPECT_TRUE(country.getProcessedData().color);
 	EXPECT_EQ(commonItems::Color(std::array{1, 2, 3}), country.getProcessedData().color);
@@ -93,7 +98,8 @@ TEST(V3World_CountryTests, CountryWillOverrideVic3colorWithEU4Color)
 	srcCountry->setMapColor(commonItems::Color(std::array{1, 2, 3}));
 	country.setSourceCountry(srcCountry);
 
-	country.convertFromEU4Country(clayManager);
+	mappers::CultureMapper culMapper;
+	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {});
 
 	EXPECT_TRUE(country.getProcessedData().color);
 	EXPECT_EQ(commonItems::Color(std::array{1, 2, 3}), country.getProcessedData().color);
@@ -113,7 +119,8 @@ TEST(V3World_CountryTests, CountryWillNotOverrideVic3colorWithEU4ColorIfNone)
 	srcCountry->setTag("TAG");
 	country.setSourceCountry(srcCountry);
 
-	country.convertFromEU4Country(clayManager);
+	mappers::CultureMapper culMapper;
+	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {});
 
 	EXPECT_TRUE(country.getProcessedData().color);
 	EXPECT_EQ(commonItems::Color(std::array{4, 5, 6}), country.getProcessedData().color);
@@ -135,7 +142,8 @@ TEST(V3World_CountryTests, LocalizationsAreAvailable)
 	V3::Country country;
 	country.setTag("GAT");
 	country.setSourceCountry(srcCountry);
-	country.convertFromEU4Country(clayManager);
+	mappers::CultureMapper culMapper;
+	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {});
 
 	EXPECT_EQ("Name1", country.getName("english"));
 	EXPECT_EQ("Name2", country.getName("albanian"));
@@ -157,7 +165,8 @@ TEST(V3World_CountryTests, MissingLocalizationsDefaultToEnglish)
 	V3::Country country;
 	country.setTag("GAT");
 	country.setSourceCountry(srcCountry);
-	country.convertFromEU4Country(clayManager);
+	mappers::CultureMapper culMapper;
+	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {});
 
 	EXPECT_EQ("Name1", country.getName("english"));
 	EXPECT_EQ("Name1", country.getName("albanian"));
@@ -177,7 +186,8 @@ TEST(V3World_CountryTests, AbsentLocalizationsDefaultToTag)
 	V3::Country country;
 	country.setTag("GAT");
 	country.setSourceCountry(srcCountry);
-	country.convertFromEU4Country(clayManager);
+	mappers::CultureMapper culMapper;
+	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {});
 
 	EXPECT_EQ("GAT", country.getName("english"));
 	EXPECT_EQ("GAT_ADJ", country.getAdjective("english"));
@@ -188,7 +198,7 @@ TEST(V3World_CountryTests, CountryCanSpeedCopyVanillaData)
 	std::stringstream input;
 	input << "country_type = recognized\n ";
 	input << "tier = empire\n ";
-	input << "cultures = { cul1 cul2 cul2 }\n ";
+	input << "cultures = { cul1 cul2 }\n ";
 	input << "religion = protestant\n ";
 	input << "capital = STATE_TEST_1\n ";
 	input << "color = {147 130 110}\n ";

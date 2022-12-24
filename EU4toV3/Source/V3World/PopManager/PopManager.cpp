@@ -173,7 +173,16 @@ void V3::PopManager::generatePopsForNormalSubStates(const std::shared_ptr<State>
 
 		if (!subState->getWeight())
 		{
-			Log(LogLevel::Warning) << "Substate in " << state->getName() << " has NO WEIGHT! It's supposed to be imported from EU4! Not generating pops!";
+			if (subState->getOwnerTag())
+			{
+				Log(LogLevel::Warning) << "Substate " << *subState->getOwnerTag() << " in " << state->getName()
+											  << " has NO WEIGHT! It's supposed to be imported from EU4! Not generating pops!";
+				for (const auto& prov: subState->getProvinces())
+					Log(LogLevel::Debug) << "Provinces: " << prov.first;
+			}
+			else
+				Log(LogLevel::Warning) << "Substate (shoved) in " << state->getName()
+											  << " has NO WEIGHT! It's supposed to be imported from EU4! Not generating pops!";
 			continue;
 		}
 
