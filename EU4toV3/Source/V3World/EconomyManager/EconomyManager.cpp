@@ -30,16 +30,17 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 	double globalCP = 1208050;
 
 	// TODO(Gawquon): adjust based on date
-	globalCP *= 1;
+	double dateFactor = 0;
 
 	// adjust based on amount of world centralized by population, calibrated to Vanilla
 	const double centralizedPopRatio = static_cast<double>(PoliticalManager::getCountriesPopCount(centralizedCountries)) / politicalManager.getWorldPopCount();
-	const double globalPopFactor = (centralizedPopRatio / .975) - 1; // TODO(Gawquon) Clean up these ratios readability, maybe add some helpers
+	const double globalPopFactor = (centralizedPopRatio / ) - 1; // TODO(Gawquon) Clean up these ratios readability, maybe add some helpers
 
 	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << centralizedPopRatio * 100
 							  << "% Centralized by population. Adjusting global CP values by: " << globalPopFactor * 100 << "%";
 
 	double totalIndustryScore = 0;
+	double specialFactors = 0;
 
 	// config option 1 the default way. Pop & culture TechGroup
 	if (economyType == Configuration::ECONOMY::TechGroup)
@@ -58,17 +59,15 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 
 		// adjust global total by average industry factor compared to baseline
 		const double globalIndustryFactor = (totalIndustryFactor / static_cast<double>(centralizedCountries.size()) / 0.8) - 1;
-		globalCP *= (1 + globalIndustryFactor + globalPopFactor);
+		specialFactors = globalIndustryFactor;
 
 		Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << (globalIndustryFactor + 1) * 100
 								  << "% industrial compared to baseline. Compensating";
 	}
-	if (economyType == Configuration::ECONOMY::Test)
-	{
-		globalCP *= (1 + globalPopFactor);
-	}
+
 
 	// distribute each country its budget
+	globalCP *= (1 + dateFactor + globalPopFactor + specialFactors);
 	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world has " << globalCP << " CP to spend on industry.";
 	distributeBudget(globalCP, totalIndustryScore);
 

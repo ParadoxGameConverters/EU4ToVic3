@@ -158,12 +158,22 @@ TEST(Disbaled_V3World_EconomyManagerTests, GlobalCPScalesByDate)
 
 	V3::EconomyManager econManager;
 	econManager.loadCentralizedStates(politicalManager.getCountries());
-
-
 }
 
 TEST(V3World_EconomyManagerTests, GlobalCPDistributionTechGroup)
 {
+	auto politicalManager = prepWorld();
+
+	V3::EconomyManager econManager;
+	econManager.loadCentralizedStates(politicalManager.getCountries());
+
+	std::stringstream log;
+	std::streambuf* cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+
+	econManager.assignCountryCPBudgets(Configuration::ECONOMY::TechGroup, politicalManager);
+
+	std::cout.rdbuf(cout_buffer);
 }
 
 TEST(DISABLED_V3World_EconomyManagerTests, GlobalCPDistributionDev)
