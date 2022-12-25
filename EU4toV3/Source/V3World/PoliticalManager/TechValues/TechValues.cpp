@@ -14,14 +14,29 @@ V3::TechValues::TechValues(const std::map<std::string, std::shared_ptr<Country>>
 
 void V3::TechValues::gatherScores(const std::map<std::string, std::shared_ptr<Country>>& countries)
 {
+	std::map<std::string, double> prestigeScores;
 	for (const auto& [tag, country]: countries)
 	{
 		if (!isValidCountryForTechConversion(*country))
 			continue;
+		prestigeScores.emplace(tag, country->getSourceCountry()->getScore());
+	}
+	auto prestigeOrder = sortMap(prestigeScores);
+	if (prestigeOrder.size() >= 8) // take the top 8 EU4 GPs.
+		prestigeOrder = {prestigeOrder.begin() + prestigeOrder.size() - 8, prestigeOrder.end()};
+	const std::set<std::string> prestigeTags = {prestigeOrder.begin(), prestigeOrder.end()};
 
-		productionScores.emplace(tag, getCountryProductionTech(*country));
-		militaryScores.emplace(tag, getCountryMilitaryTech(*country));
-		societyScores.emplace(tag, getCountrySocietyTech(*country));
+	for (const auto& [tag, country]: countries)
+	{
+		if (!isValidCountryForTechConversion(*country))
+			continue;
+		auto bonus = 0;
+		if (prestigeTags.contains(tag) && country->getProcessedData().westernized)
+			bonus = 2;
+
+		productionScores.emplace(tag, getCountryProductionTech(*country) + bonus);
+		militaryScores.emplace(tag, getCountryMilitaryTech(*country) + bonus);
+		societyScores.emplace(tag, getCountrySocietyTech(*country) + bonus);
 	}
 }
 
