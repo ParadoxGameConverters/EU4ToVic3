@@ -416,10 +416,17 @@ void V3::Country::determineCountryType()
 void V3::Country::applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper)
 {
 	auto literacyEffect = populationSetupMapper.getLiteracyEffectForLiteracy(processedData.literacy);
+	if (literacyEffect.empty())
+		Log(LogLevel::Warning) << "Literacy effect for " << tag << " is empty! Something's wrong!";
+	else
+		processedData.populationEffects.emplace(literacyEffect);
+
 	const auto& averageDev = sourceCountry->getAverageDevelopment();
 	auto wealthEffect = populationSetupMapper.getWealthEffectForDev(averageDev);
-	processedData.populationEffects.emplace(literacyEffect);
-	processedData.populationEffects.emplace(wealthEffect);
+	if (wealthEffect.empty())
+		Log(LogLevel::Warning) << "Wealth effect for " << tag << " is empty! Something's wrong!";
+	else
+		processedData.populationEffects.emplace(wealthEffect);
 }
 
 void V3::Country::adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper)
@@ -536,7 +543,7 @@ void V3::Country::calculateBaseLiteracy(const mappers::ReligionMapper& religionM
 	literacy += universityBonus;
 
 	// Adding whatever literacy bonus or malus we have from eu4 ideas.
-	processedData.literacy = literacy + processedData.ideaEffect.literacy;
+	processedData.literacy = literacy + static_cast<double>(processedData.ideaEffect.literacy) / 100.0;
 }
 
 void V3::Country::setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore)
