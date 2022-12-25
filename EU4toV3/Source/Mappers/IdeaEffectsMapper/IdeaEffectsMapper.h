@@ -5,24 +5,25 @@
 
 namespace mappers
 {
+struct IdeaEffect
+{
+	[[nodiscard]] auto getTechMod() const { return adm + dip + mil; }
+
+	int literacy = 0;
+	int adm = 0;
+	int dip = 0;
+	int mil = 0;
+	std::set<std::string> igs;
+	std::set<std::string> noIgs;
+};
 class IdeaEffectsMapper: commonItems::parser
 {
   public:
-	struct Effect
-	{
-		int literacy = 0;
-		int adm = 0;
-		int dip = 0;
-		int mil = 0;
-		std::set<std::string> igs;
-		std::set<std::string> noIgs;
-	};
-
 	IdeaEffectsMapper() = default;
 	void loadMappingRules(const std::string& filePath);
 	void loadMappingRules(std::istream& theStream);
 
-	[[nodiscard]] Effect getEffectForIdeas(const std::set<std::string>& ideas) const;
+	[[nodiscard]] IdeaEffect getEffectForIdeas(const std::set<std::string>& ideas) const;
 
   private:
 	void registerKeys();

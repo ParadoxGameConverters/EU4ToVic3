@@ -10,6 +10,7 @@
 #include "ParserHelpers.h"
 #include "PopulationSetupMapper/PopulationSetupMapper.h"
 #include "ReligionMapper/ReligionMapper.h"
+#include "TechSetupMapper/TechSetupMapper.h"
 #include <cmath>
 #include <numeric>
 
@@ -72,7 +73,8 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	 mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 const EU4::CultureLoader& cultureLoader,
-	 const EU4::ReligionLoader& religionLoader)
+	 const EU4::ReligionLoader& religionLoader,
+	 const mappers::IdeaEffectsMapper& ideaEffectMapper)
 {
 	// color - using eu4 colors so people don't lose their shit over red venice and orange england.
 	if (sourceCountry->getNationalColors().getMapColor())
@@ -109,6 +111,9 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 
 	// namedaftercapital ? Unsure what to do with this.
 	processedData.is_named_from_capital = false;
+
+	// idea effects.
+	processedData.ideaEffect = ideaEffectMapper.getEffectForIdeas(sourceCountry->getNationalIdeas());
 }
 
 void V3::Country::convertTier()
@@ -457,7 +462,8 @@ void V3::Country::calculateWesternization(double topTech,
 	 Configuration::EUROCENTRISM eurocentrism)
 {
 	// This is base calc, from EU4. Even western countries in severe tech deficit will have a lower civLevel score.
-	const auto totalTechs = sourceCountry->getMilTech() + sourceCountry->getAdmTech() + sourceCountry->getDipTech();
+	const auto totalTechs = sourceCountry->getMilTech() + sourceCountry->getAdmTech() + sourceCountry->getDipTech() + processedData.ideaEffect.getTechMod();
+	// default cutoff point for civilization is ... 6! techs/ideas behind (total). (31 - 6) * 4 = 100 which is civilized, assuming no institution deficit.
 	processedData.civLevel = (totalTechs + 31.0 - topTech) * 4;
 	processedData.civLevel += (static_cast<double>(sourceCountry->getNumEmbracedInstitutions()) - topInstitutions) * 8;
 
@@ -529,7 +535,17 @@ void V3::Country::calculateBaseLiteracy(const mappers::ReligionMapper& religionM
 
 	literacy += universityBonus;
 
-	// TODO: Apply collective national literacy modifier.
+	// Adding whatever literacy bonus or malus we have from eu4 ideas.
+	processedData.literacy = literacy + processedData.ideaEffect.literacy;
+}
 
-	processedData.literacy = literacy;
+void V3::Country::setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore)
+{
+	auto productionTechs = techSetupMapper.getTechsForScoreTrack("production", productionScore);
+	auto militaryTechs = techSetupMapper.getTechsForScoreTrack("military", militaryScore);
+	auto societyTechs = techSetupMapper.getTechsForScoreTrack("society", societyScore);
+
+	processedData.techs.insert(productionTechs.begin(), productionTechs.end());
+	processedData.techs.insert(militaryTechs.begin(), militaryTechs.end());
+	processedData.techs.insert(societyTechs.begin(), societyTechs.end());
 }

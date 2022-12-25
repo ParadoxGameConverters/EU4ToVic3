@@ -25,9 +25,9 @@ void mappers::IdeaEffectsMapper::registerKeys()
 	});
 }
 
-mappers::IdeaEffectsMapper::Effect mappers::IdeaEffectsMapper::getEffectForIdeas(const std::set<std::string>& ideas) const
+mappers::IdeaEffect mappers::IdeaEffectsMapper::getEffectForIdeas(const std::set<std::string>& ideas) const
 {
-	Effect effect;
+	IdeaEffect effect;
 	std::map<std::string, int> igCounter;
 	for (const auto& idea: ideas)
 	{
