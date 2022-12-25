@@ -1,42 +1,29 @@
-#include "EconomyManager/Building/BuildingGroups.h"
-#include "Loaders/BuildingLoader/BuildingGroupLoader.h"
+#include "Loaders/BuildingLoader/BuildingLoader.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+#include "EconomyManager/Building/Building.h"
+
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
-TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderCanLoadBuildingGroups)
+TEST(V3World_BuildingLoaderTests, BuildingLoaderCanLoadBuildings)
 {
-	V3::BuildingGroupLoader buildingGroupLoader;
-	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
-	EXPECT_TRUE(buildingGroups->getBuildingGroupMap().empty());
-	buildingGroupLoader.loadBuildingGroups(modFS);
-	EXPECT_EQ(6, buildingGroups->getBuildingGroupMap().size());
-}
+	V3::BuildingLoader buildingLoader;
+	const auto buildings = buildingLoader.getBuildings();
+	EXPECT_TRUE(buildings.empty());
+	buildingLoader.loadBuildings(modFS);
+	EXPECT_EQ(3, buildings.size());
 
-TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderTracksHierarchy)
-{
-	V3::BuildingGroupLoader buildingGroupLoader;
-	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
-	buildingGroupLoader.loadBuildingGroups(modFS);
+	EXPECT_THAT("light_industry", buildings.at("building_food_industry")->getBuildingGroup());
+	EXPECT_THAT("manufacturies", buildings.at("building_food_industry")->getPreReqTech());
+	EXPECT_EQ(200, buildings.at("building_food_industry")->getConstructionCost());
+	EXPECT_THAT(buildings.at("building_food_industry")->getPMGroups(),
+		 testing::UnorderedElementsAre("pmg_food", "pmg_canning", "pmg_distillery", "pmg_automation", "pmg_ownership"));
 
-	EXPECT_TRUE(buildingGroups->getParentName("bg_manufacturing")->empty());
-	EXPECT_EQ("bg_manufacturing", buildingGroups->getParentName("bg_light_industry").value());
-	EXPECT_EQ("bg_manufacturing", buildingGroups->getParentName("bg_heavy_industry").value());
-	EXPECT_EQ("bg_heavy_industry", buildingGroups->getParentName("bg_ultra_industry").value());
-	EXPECT_EQ("bg_ultra_industry", buildingGroups->getParentName("bg_mega_industry").value());
-	EXPECT_EQ("bg_mega_industry", buildingGroups->getParentName("bg_giga_industry").value());
-}
+	EXPECT_EQ(239, buildings.at("building_textile_mills")->getConstructionCost());
+	EXPECT_THAT(buildings.at("building_textile_mills")->getPMGroups(),
+		 testing::UnorderedElementsAre("pmg_textile", "pmg_luxury", "pmg_automation", "pmg_ownership"));
 
-TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderSetsInfrastructureInheritance)
-{
-	V3::BuildingGroupLoader buildingGroupLoader;
-	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
-	buildingGroupLoader.loadBuildingGroups(modFS);
-
-	EXPECT_EQ(0, buildingGroups->getInfrastructureCost("bg_manufacturing").value());
-	EXPECT_EQ(2, buildingGroups->getInfrastructureCost("bg_light_industry").value());
-	EXPECT_EQ(3, buildingGroups->getInfrastructureCost("bg_heavy_industry").value());
-	EXPECT_EQ(1, buildingGroups->getInfrastructureCost("bg_ultra_industry").value());
-	EXPECT_EQ(1, buildingGroups->getInfrastructureCost("bg_mega_industry").value());
-	EXPECT_EQ(1, buildingGroups->getInfrastructureCost("bg_giga_industry").value());
+	EXPECT_EQ(50, buildings.at("building_furniture_manufacturies")->getConstructionCost());
+	EXPECT_THAT(buildings.at("building_furniture_manufacturies")->getPMGroups(),
+		 testing::UnorderedElementsAre("pmg_furniture", "pmg_luxury", "pmg_automation", "pmg_ownership"));
 }

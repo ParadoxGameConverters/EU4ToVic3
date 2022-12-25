@@ -171,9 +171,12 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\Building.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\BuildingGroup.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\BuildingGroups.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\ProductionMethods\ProductionMethod.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\ProductionMethods\ProductionMethodGroup.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\EconomyManager.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingGroupLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\CountryDefinitionLoader\CountryDefinitionLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\DefinesLoader\BuildingScriptValuesLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LocLoader\LocalizationLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\PopEntry.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\PopLoader.cpp" />
@@ -289,9 +292,17 @@
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\StateTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\SubStateTests.cpp" />
     <ClCompile Include="V3WorldTests\EconomyManagerTests\Building\BuildingGroupsTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\Building\BuildingTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\Building\ProductionMethodGroupTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\Building\ProductionMethodTests.cpp" />
     <ClCompile Include="V3WorldTests\EconomyManagerTests\EconomyManagerTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\BuildingGroupLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\BuildingLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\ProductionMethodGroupLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\ProductionMethodLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\CountryDefinitionLoaderTests\CountryDefinitionLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\BuildingScriptValuesLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\DefinesLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\LocLoaderTests\LocalizationLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\PopEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\PopLoaderTests.cpp" />
@@ -574,6 +585,11 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\westernization.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\script_values\building_values.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/script_values</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

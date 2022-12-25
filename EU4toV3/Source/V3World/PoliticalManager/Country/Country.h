@@ -48,7 +48,10 @@ struct ProcessedData
 	double literacy = 0;
 	double civLevel = 0;
 	bool westernized = false;
-	double industryFactor = 1.0;
+	double industryFactor = 1.0; // Modifier set by EuroCentrism or calculated by dev
+
+	double industryScore = 0;	// Share of global industry a country should get, not normalized
+	int CPBudget = 0;				// Construction Points for a country to spend on it's development
 
 	std::string name;
 	std::string adjective;
@@ -65,9 +68,9 @@ class Country: commonItems::parser
 	Country() = default;
 	void initializeCountry(std::istream& theStream);
 	void setTag(const std::string& theTag) { tag = theTag; }
-	void setIndustryFactor(const double theIndustryFactor) { industryFactor = theIndustryFactor; }
-	void setIndustryScore(const double theIndustryScore) { industryScore = theIndustryScore; }
-	void setCPBudget(const int theBudget) { CPBudget = theBudget; }
+	void setIndustryFactor(const double theIndustryFactor) { processedData.industryFactor = theIndustryFactor; } //TODO(Gawquon): BEFORE MERGE this might not be needed
+	void setIndustryScore(const double theIndustryScore) {processedData.industryScore = theIndustryScore; }
+	void setCPBudget(const int theBudget) {processedData.CPBudget = theBudget; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 
 	void convertFromEU4Country(const ClayManager& clayManager,
@@ -81,18 +84,19 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getTag() const { return tag; }
 	[[nodiscard]] const auto& getVanillaData() const { return vanillaData; }
 	[[nodiscard]] const auto& getProcessedData() const { return processedData; }
-	[[nodiscard]] const auto& getIndustryFactor() const { return industryFactor; }
-	[[nodiscard]] const auto& getIndustryScore() const { return industryScore; }
-	[[nodiscard]] const auto& getCPBudget() const { return industryScore; }
+	[[nodiscard]] const auto& getIndustryFactor() const { return processedData.industryFactor; }
+	[[nodiscard]] const auto& getIndustryScore() const { return processedData.industryScore; }
+	[[nodiscard]] const auto& getCPBudget() const { return processedData.CPBudget; }
 	[[nodiscard]] const auto& getSourceCountry() const { return sourceCountry; }
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
-	void addSubState(const std::shared_ptr<SubState>& subState) { substates.push_back(subState); }
-	void setSubStates(const std::vector<std::shared_ptr<SubState>>& subStates) { substates = subStates; }
+	void addSubState(const std::shared_ptr<SubState>& theSubstate) { substates.push_back(theSubstate); }
+	void setSubStates(const std::vector<std::shared_ptr<SubState>>& theSubstates) { substates = theSubstates; }
 	void setProcessedData(const ProcessedData& data) { processedData = data; }
 
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
 	[[nodiscard]] int getPopCount() const;
+	[[nodiscard]] static int getPopCount(std::vector<std::shared_ptr<SubState>> theSubstates);
 
 
 	void determineWesternizationWealthAndLiteracy(double topTech,
@@ -107,6 +111,10 @@ class Country: commonItems::parser
 	[[nodiscard]] int getTechInfraCap() const { return 0; }
 	// TODO(Gawquon): Implement, multiplier for amount of infrastructure created by population
 	[[nodiscard]] double getTechInfraMult() const { return 0.0; }
+
+	void distributeGovAdmins(int numGovAdmins) const;
+	[[nodiscard]] std::vector<std::shared_ptr<SubState>> topPercentileStatesByPop(double percentile) const;
+	[[nodiscard]] double calculateBureaucracyUsage() const;
 
   private:
 	void registerKeys();
@@ -131,9 +139,6 @@ class Country: commonItems::parser
 	std::optional<VanillaCommonCountryData> vanillaData;
 	ProcessedData processedData;
 
-	double industryFactor = 0; // Modifier set by EuroCentrism or calculated by dev
-	double industryScore = 0;	// Share of global industry a country should get, not normalized
-	int CPBudget = 0;				// Construction Points for a country to spend on it's development
 
 	std::shared_ptr<EU4::Country> sourceCountry;
 	std::vector<std::shared_ptr<SubState>> substates;

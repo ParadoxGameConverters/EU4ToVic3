@@ -56,6 +56,7 @@ class SubState
 
 	void setIndustryScore(const double theIndustryScore) { industryScore = theIndustryScore; }
 	void setCPBudget(const int theCPBudget) { CPBudget = theCPBudget; }
+	void setBuildingLevel(const std::string& building, const int level) { buildings[building] = level; }
 
 	void convertDemographics(const ClayManager& clayManager,
 		 mappers::CultureMapper& cultureMapper,
@@ -88,6 +89,7 @@ class SubState
 
 	[[nodiscard]] const auto& getIndustryScore() const { return industryScore; }
 	[[nodiscard]] const auto& getCPBudget() const { return CPBudget; }
+	[[nodiscard]] std::optional<int> getBuildingLevel(const std::string& building) const;
 
 	[[nodiscard]] auto isIncorporated() const { return incorporated; }
 	[[nodiscard]] auto isMarketCapital() const { return marketCapital; }
@@ -121,8 +123,9 @@ class SubState
 	std::vector<Demographic> demographics;
 	SubStatePops subStatePops;
 
-	double industryScore = 0; // Share of owner's industry a substate should get, not normalized
-	int CPBudget = 0;			  // Construction Points for a substate to spend on it's development
+	double industryScore = 0;				  // Share of owner's industry a substate should get, not normalized
+	int CPBudget = 0;							  // Construction Points for a substate to spend on it's development
+	std::map<std::string, int> buildings; // building -> level
 };
 } // namespace V3
 

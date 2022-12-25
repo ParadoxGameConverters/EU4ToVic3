@@ -9,6 +9,7 @@
 #include "PoliticalManager/PoliticalManager.h"
 #include <cmath>
 #include <iomanip>
+#include <numeric>
 #include <ranges>
 
 void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
@@ -34,7 +35,7 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 
 	// adjust based on amount of world centralized by population, calibrated to Vanilla
 	const double centralizedPopRatio = static_cast<double>(PoliticalManager::getCountriesPopCount(centralizedCountries)) / politicalManager.getWorldPopCount();
-	const double globalPopFactor = (centralizedPopRatio / ) - 1; // TODO(Gawquon) Clean up these ratios readability, maybe add some helpers
+	const double globalPopFactor = (centralizedPopRatio / 0.975) - 1; // TODO(Gawquon) Clean up these ratios readability, maybe add some helpers
 
 	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << centralizedPopRatio * 100
 							  << "% Centralized by population. Adjusting global CP values by: " << globalPopFactor * 100 << "%";
@@ -207,6 +208,24 @@ void V3::EconomyManager::buildBuildings() const
 				//    exit early
 			}
 		}
+	}
+}
+
+void V3::EconomyManager::backfillBureaucracy() const
+{
+	for (const auto& country: centralizedCountries)
+	{
+		// Give 5% extra for trade routes
+		const double generationTarget = country->calculateBureaucracyUsage() * 1.05;
+
+		// Which PMs are available?
+		// Use the best one
+		const int PMGeneration = 35;
+
+		// find # of buildings
+		const int numAdmins = static_cast<int>(generationTarget / PMGeneration + 1);
+	
+		country->distributeGovAdmins(numAdmins);
 	}
 }
 

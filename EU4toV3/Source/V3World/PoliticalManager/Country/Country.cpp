@@ -40,6 +40,77 @@ void V3::Country::initializeCountry(std::istream& theStream)
 	clearRegisteredKeywords();
 }
 
+std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop(const double percentile) const
+{
+	auto sortedSubstates(substates);
+
+	// descending order
+	auto popComparison = [](const std::shared_ptr<SubState>& lhs, const std::shared_ptr<SubState>& rhs) {
+		return lhs->getSubStatePops().getPopCount() > rhs->getSubStatePops().getPopCount();
+	};
+
+	std::ranges::sort(sortedSubstates, popComparison);
+
+	const int numTopSubstates = static_cast<int>(static_cast<double>(sortedSubstates.size()) * percentile);
+
+	return auto(sortedSubstates.begin(), sortedSubstates.begin() + numTopSubstates);
+}
+
+double V3::Country::calculateBureaucracyUsage() const
+{
+	// Non of these hard-coded Vic3 values are in hte defines for some reason.
+	double usage = 0.0;
+
+	// Incorporated States 10 * # incorporated
+	usage += 10 * std::accumulate(substates.begin(), substates.end(), 0, [](int sum, const auto& substate) {
+		return sum + substate->isIncorporated();
+	});
+
+	// Pops
+	// Modified by laws TODO(Gawquon): Plug in laws
+	usage += getPopCount() / 25000.0; // Multiplied by law and tech modifiers
+
+	// Institutions
+	// TODO(Gawquon): plug-in institutions
+	// cost = country->getPopCount() / 100,000;
+	// usage += cost * levels
+
+	// Characters
+	// TODO(Gawquon): plug-in characters
+
+	return usage;
+}
+
+void V3::Country::distributeGovAdmins(const int numGovAdmins) const
+{
+	const auto topSubstates = topPercentileStatesByPop(0.3);
+	const auto topPop = getPopCount(topSubstates);
+
+	// Pass out buildings by pop proportion of this subset of States, can't round, so truncate and hand out remainders later.
+	int assigned = 0;
+	for (const auto& substate: topSubstates)
+	{
+		const double popProportion = static_cast<double>(substate->getSubStatePops().getPopCount()) / topPop;
+		const int levels = static_cast<int>(popProportion * numGovAdmins);
+
+		substate->setBuildingLevel("building_government_administration", levels);
+		assigned += substate->getBuildingLevel("building_government_administration").value();
+	}
+
+	// Handing out remainders, should be less than # of topSubstates
+	for (const auto& substate: topSubstates)
+	{
+		const auto levels = substate->getBuildingLevel("building_government_administration");
+		substate->setBuildingLevel("building_government_administration", levels.value_or(0) + 1);
+		++assigned;
+
+		if (numGovAdmins - assigned <= 0)
+		{
+			break;
+		}
+	}
+}
+
 void V3::Country::registerKeys()
 {
 	registerKeyword("country_type", [this](std::istream& theStream) {
@@ -536,7 +607,12 @@ void V3::Country::calculateBaseLiteracy(const mappers::ReligionMapper& religionM
 
 int V3::Country::getPopCount() const
 {
-	return std::accumulate(substates.begin(), substates.end(), 0, [](int sum, const auto& substate) {
+	return getPopCount(substates);
+}
+
+int V3::Country::getPopCount(std::vector<std::shared_ptr<SubState>> theSubstates)
+{
+	return std::accumulate(theSubstates.begin(), theSubstates.end(), 0, [](int sum, const auto& substate) {
 		return sum + substate->getSubStatePops().getPopCount();
 	});
 }
