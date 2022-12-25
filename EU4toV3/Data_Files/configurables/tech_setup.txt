@@ -1,13 +1,13 @@
 # Technologies are assigned reverse median values; from 0 (everyone has them) to 100 
 # (only one nation has it). Score 50 means half the nations will have this tech.
 #
-# This is based on vanilla tier distribution (1->7): 5|48|41|83|30|51|55 = 413 total, distributed:
+# This is based on vanilla tier distribution (1->7): 5|48|41|83|30|51|55 = 313 total, distributed:
 # T1  |T2   |T3   |T4   |T5  |T6   |T7
 # 1.6%|15.3%|13.1%|26.5%|9.6%|16.3%|17.6%
 # 98  |83   |70   |43   |33  |17   |0
 #
-# Techs within "same tier" are sorthes so that ones with prereqs from the same tier come
-# earlier (line_infantry 65 -> army reserves 68)
+# Techs within "same tier" are sorted so that ones with prereqs from the same tier come
+# earlier (line_infantry 61 -> army reserves 70). Also, artistic licence.
 
 production = {
 	#tier 6
