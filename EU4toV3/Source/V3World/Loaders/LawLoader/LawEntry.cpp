@@ -19,15 +19,15 @@ void V3::LawEntry::registerKeys()
 	});
 	registerKeyword("unlocking_technologies", [this](std::istream& theStream) {
 		for (const auto& entry: commonItems::getStrings(theStream))
-			law.reqTechs.emplace(entry);
+			law.requiredTechs.emplace(entry);
 	});
 	registerKeyword("unlocking_laws", [this](std::istream& theStream) {
 		for (const auto& entry: commonItems::getStrings(theStream))
-			law.reqLaws.emplace(entry);
+			law.reqiredLaws.emplace(entry);
 	});
 	registerKeyword("disallowing_laws", [this](std::istream& theStream) {
 		for (const auto& entry: commonItems::getStrings(theStream))
-			law.blockLaws.emplace(entry);
+			law.blockingLaws.emplace(entry);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

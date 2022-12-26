@@ -14,6 +14,24 @@ V3::TechValues::TechValues(const std::map<std::string, std::shared_ptr<Country>>
 
 void V3::TechValues::gatherScores(const std::map<std::string, std::shared_ptr<Country>>& countries)
 {
+	const auto greatPowers = getGPsByScore(countries);
+
+	for (const auto& [tag, country]: countries)
+	{
+		if (!isValidCountryForTechConversion(*country))
+			continue;
+		auto bonus = 0;
+		if (greatPowers.contains(tag) && country->getProcessedData().westernized)
+			bonus = 2.0;
+
+		productionScores.emplace(tag, getCountryProductionTech(*country) + bonus);
+		militaryScores.emplace(tag, getCountryMilitaryTech(*country) + bonus);
+		societyScores.emplace(tag, getCountrySocietyTech(*country) + bonus);
+	}
+}
+
+std::set<std::string> V3::TechValues::getGPsByScore(const std::map<std::string, std::shared_ptr<Country>>& countries)
+{
 	std::map<std::string, double> prestigeScores;
 	for (const auto& [tag, country]: countries)
 	{
@@ -24,20 +42,8 @@ void V3::TechValues::gatherScores(const std::map<std::string, std::shared_ptr<Co
 	auto prestigeOrder = sortMap(prestigeScores);
 	if (prestigeOrder.size() >= 8) // take the top 8 EU4 GPs.
 		prestigeOrder = {prestigeOrder.begin() + prestigeOrder.size() - 8, prestigeOrder.end()};
-	const std::set<std::string> prestigeTags = {prestigeOrder.begin(), prestigeOrder.end()};
-
-	for (const auto& [tag, country]: countries)
-	{
-		if (!isValidCountryForTechConversion(*country))
-			continue;
-		auto bonus = 0;
-		if (prestigeTags.contains(tag) && country->getProcessedData().westernized)
-			bonus = 2;
-
-		productionScores.emplace(tag, getCountryProductionTech(*country) + bonus);
-		militaryScores.emplace(tag, getCountryMilitaryTech(*country) + bonus);
-		societyScores.emplace(tag, getCountrySocietyTech(*country) + bonus);
-	}
+	std::set<std::string> prestigeTags = {prestigeOrder.begin(), prestigeOrder.end()};
+	return prestigeTags;
 }
 
 void V3::TechValues::calculateOrders()
@@ -55,7 +61,7 @@ std::vector<std::string> V3::TechValues::sortMap(const std::map<std::string, dou
 	for (const auto& theElement: theMap)
 		pairs.emplace_back(theElement);
 
-	sort(pairs.begin(), pairs.end(), [=](const std::pair<std::string, double>& a, const std::pair<std::string, double>& b) {
+	std::ranges::sort(pairs.begin(), pairs.end(), [=](const std::pair<std::string, double>& a, const std::pair<std::string, double>& b) {
 		return a.second < b.second;
 	});
 

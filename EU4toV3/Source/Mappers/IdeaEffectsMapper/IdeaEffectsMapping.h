@@ -15,8 +15,8 @@ class IdeaEffectsMapping: commonItems::parser
 	[[nodiscard]] auto getAdm() const { return adm; }
 	[[nodiscard]] auto getDip() const { return dip; }
 	[[nodiscard]] auto getMil() const { return mil; }
-	[[nodiscard]] const auto& getIgs() const { return igs; }
-	[[nodiscard]] const auto& getNoIgs() const { return noIgs; }
+	[[nodiscard]] const auto& getBoostedInterestGroups() const { return boostedInterestGroups; }
+	[[nodiscard]] const auto& getSuppressedInterestGroups() const { return suppressedInterestGroups; }
 
   private:
 	void registerKeys();
@@ -25,8 +25,8 @@ class IdeaEffectsMapping: commonItems::parser
 	int adm = 0;
 	int dip = 0;
 	int mil = 0;
-	std::set<std::string> igs;
-	std::set<std::string> noIgs;
+	std::set<std::string> boostedInterestGroups;
+	std::set<std::string> suppressedInterestGroups;
 };
 } // namespace mappers
 

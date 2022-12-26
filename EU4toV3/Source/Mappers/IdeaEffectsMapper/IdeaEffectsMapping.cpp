@@ -24,10 +24,10 @@ void mappers::IdeaEffectsMapping::registerKeys()
 		mil = commonItems::getInt(theStream);
 	});
 	registerKeyword("ig", [this](std::istream& theStream) {
-		igs.emplace(commonItems::getString(theStream));
+		boostedInterestGroups.emplace(commonItems::getString(theStream));
 	});
 	registerKeyword("noig", [this](std::istream& theStream) {
-		noIgs.emplace(commonItems::getString(theStream));
+		suppressedInterestGroups.emplace(commonItems::getString(theStream));
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

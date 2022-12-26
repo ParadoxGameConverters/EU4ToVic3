@@ -16,8 +16,8 @@ TEST(Mappers_IdeaEffectsMapperTests, NonsenseIdeasReturnEmptyEffect)
 	EXPECT_EQ(0, effect.adm);
 	EXPECT_EQ(0, effect.dip);
 	EXPECT_EQ(0, effect.mil);
-	EXPECT_TRUE(effect.igs.empty());
-	EXPECT_TRUE(effect.noIgs.empty());
+	EXPECT_TRUE(effect.boostedInterestGroups.empty());
+	EXPECT_TRUE(effect.suppressedInterestGroups.empty());
 }
 
 TEST(Mappers_IdeaEffectsMapperTests, effectCanBeCalculated)
@@ -36,6 +36,6 @@ TEST(Mappers_IdeaEffectsMapperTests, effectCanBeCalculated)
 	EXPECT_EQ(6, effect.adm);
 	EXPECT_EQ(-2, effect.dip);
 	EXPECT_EQ(-2, effect.mil);
-	EXPECT_THAT(effect.igs, testing::UnorderedElementsAre("iggroup2", "iggroup3"));
-	EXPECT_THAT(effect.noIgs, testing::UnorderedElementsAre("noiggroup1", "noiggroup2"));
+	EXPECT_THAT(effect.boostedInterestGroups, testing::UnorderedElementsAre("iggroup2", "iggroup3"));
+	EXPECT_THAT(effect.suppressedInterestGroups, testing::UnorderedElementsAre("noiggroup1", "noiggroup2"));
 }

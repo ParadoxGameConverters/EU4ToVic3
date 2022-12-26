@@ -2,6 +2,7 @@
 #define TECH_CONVERSION_HELPERS_H
 #include <map>
 #include <memory>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -26,6 +27,7 @@ class TechValues
 	void gatherScores(const std::map<std::string, std::shared_ptr<Country>>& countries);
 	void calculateOrders();
 	[[nodiscard]] static std::vector<std::string> sortMap(const std::map<std::string, double>& theMap);
+	[[nodiscard]] static std::set<std::string> getGPsByScore(const std::map<std::string, std::shared_ptr<Country>>& countries);
 
 	std::map<std::string, double> productionScores;
 	std::map<std::string, double> militaryScores;

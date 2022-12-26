@@ -12,8 +12,8 @@ TEST(Mappers_IdeaEffectsMappingTests, DefaultsDefaultToDefaults)
 	EXPECT_EQ(0, mapping.getAdm());
 	EXPECT_EQ(0, mapping.getDip());
 	EXPECT_EQ(0, mapping.getMil());
-	EXPECT_TRUE(mapping.getIgs().empty());
-	EXPECT_TRUE(mapping.getNoIgs().empty());
+	EXPECT_TRUE(mapping.getBoostedInterestGroups().empty());
+	EXPECT_TRUE(mapping.getSuppressedInterestGroups().empty());
 }
 
 TEST(Mappers_IdeaEffectsMappingTests, RulesCanBeLoaded)
@@ -26,6 +26,6 @@ TEST(Mappers_IdeaEffectsMappingTests, RulesCanBeLoaded)
 	EXPECT_EQ(2, mapping.getAdm());
 	EXPECT_EQ(3, mapping.getDip());
 	EXPECT_EQ(4, mapping.getMil());
-	EXPECT_THAT(mapping.getIgs(), testing::UnorderedElementsAre("iggroup1", "iggroup2"));
-	EXPECT_THAT(mapping.getNoIgs(), testing::UnorderedElementsAre("noiggroup1", "noiggroup2"));
+	EXPECT_THAT(mapping.getBoostedInterestGroups(), testing::UnorderedElementsAre("iggroup1", "iggroup2"));
+	EXPECT_THAT(mapping.getSuppressedInterestGroups(), testing::UnorderedElementsAre("noiggroup1", "noiggroup2"));
 }

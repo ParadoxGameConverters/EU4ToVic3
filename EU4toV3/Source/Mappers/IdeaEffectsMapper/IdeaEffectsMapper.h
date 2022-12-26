@@ -13,8 +13,8 @@ struct IdeaEffect
 	int adm = 0;
 	int dip = 0;
 	int mil = 0;
-	std::set<std::string> igs;
-	std::set<std::string> noIgs;
+	std::set<std::string> boostedInterestGroups;
+	std::set<std::string> suppressedInterestGroups;
 };
 class IdeaEffectsMapper: commonItems::parser
 {

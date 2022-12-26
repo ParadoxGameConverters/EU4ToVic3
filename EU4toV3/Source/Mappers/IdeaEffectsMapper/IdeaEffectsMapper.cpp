@@ -28,7 +28,7 @@ void mappers::IdeaEffectsMapper::registerKeys()
 mappers::IdeaEffect mappers::IdeaEffectsMapper::getEffectForIdeas(const std::set<std::string>& ideas) const
 {
 	IdeaEffect effect;
-	std::map<std::string, int> igCounter;
+	std::map<std::string, int> interestGroupCounter;
 	for (const auto& idea: ideas)
 	{
 		if (!ideaEffects.contains(idea))
@@ -38,26 +38,26 @@ mappers::IdeaEffect mappers::IdeaEffectsMapper::getEffectForIdeas(const std::set
 		effect.adm += ideaEffect.getAdm();
 		effect.dip += ideaEffect.getDip();
 		effect.mil += ideaEffect.getMil();
-		for (const auto& ig: ideaEffect.getIgs())
+		for (const auto& ig: ideaEffect.getBoostedInterestGroups())
 		{
-			if (igCounter.contains(ig))
-				++igCounter.at(ig);
+			if (interestGroupCounter.contains(ig))
+				++interestGroupCounter.at(ig);
 			else
-				igCounter.emplace(ig, 1);
+				interestGroupCounter.emplace(ig, 1);
 		}
-		for (const auto& noIg: ideaEffect.getNoIgs())
+		for (const auto& noIg: ideaEffect.getSuppressedInterestGroups())
 		{
-			if (igCounter.contains(noIg))
-				--igCounter.at(noIg);
+			if (interestGroupCounter.contains(noIg))
+				--interestGroupCounter.at(noIg);
 			else
-				igCounter.emplace(noIg, -1);
+				interestGroupCounter.emplace(noIg, -1);
 		}
 	}
-	for (const auto& [ig, count]: igCounter)
+	for (const auto& [ig, count]: interestGroupCounter)
 		if (count > 0)
-			effect.igs.emplace(ig);
+			effect.boostedInterestGroups.emplace(ig);
 		else if (count < 0)
-			effect.noIgs.emplace(ig);
+			effect.suppressedInterestGroups.emplace(ig);
 
 	return effect;
 }

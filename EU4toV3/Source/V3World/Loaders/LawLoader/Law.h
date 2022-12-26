@@ -9,10 +9,10 @@ struct Law
 {
 	std::string name;
 	std::string group;
-	int progressiveness = 0;			// used for sorting for "best" law.
-	std::set<std::string> reqTechs;	// techs that are required for this law
-	std::set<std::string> reqLaws;	// laws that are required for this law
-	std::set<std::string> blockLaws; // laws that block this law
+	int progressiveness = 0;
+	std::set<std::string> requiredTechs;
+	std::set<std::string> reqiredLaws;
+	std::set<std::string> blockingLaws;
 };
 } // namespace V3
 #endif // LAW_H
