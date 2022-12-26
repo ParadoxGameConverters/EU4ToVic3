@@ -5,10 +5,6 @@
 #include <string>
 #include <vector>
 
-namespace EU4
-{
-class Country;
-}
 namespace V3
 {
 class Country;
