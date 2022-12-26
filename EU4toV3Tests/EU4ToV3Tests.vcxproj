@@ -148,6 +148,9 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapping.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\LawMapper\LawGroup.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\LawMapper\LawMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\LawMapper\LawMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\MergeBlock.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\NationMergeMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\PopulationSetupMapper\PopulationSetupMapper.cpp" />
@@ -273,6 +276,9 @@
     <ClCompile Include="MapperTests\CultureMapperTests\WesternizationMapperTests\WesternizationMappingTests.cpp" />
     <ClCompile Include="MapperTests\IdeaEffectsMapperTests\IdeaEffectsMapperTests.cpp" />
     <ClCompile Include="MapperTests\IdeaEffectsMapperTests\IdeaEffectsMappingTests.cpp" />
+    <ClCompile Include="MapperTests\LawMapperTests\LawGroupTests.cpp" />
+    <ClCompile Include="MapperTests\LawMapperTests\LawMapperTests.cpp" />
+    <ClCompile Include="MapperTests\LawMapperTests\LawMappingTests.cpp" />
     <ClCompile Include="MapperTests\NationMergeMapperTests\MergeBlocksTests.cpp" />
     <ClCompile Include="MapperTests\NationMergeMapperTests\NationMergeMapperTests.cpp" />
     <ClCompile Include="MapperTests\PopulationSetupMapperTests\PopulationSetupMapperTests.cpp" />
@@ -590,6 +596,11 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\laws\00_laws2.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/laws</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\law_map.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
