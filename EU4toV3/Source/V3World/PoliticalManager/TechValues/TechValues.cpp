@@ -113,18 +113,21 @@ double V3::TechValues::getSocietyTechPercentile(const std::string& tag) const
 
 double V3::TechValues::getCountryProductionTech(const Country& country)
 {
-	const auto totalDip = country.getSourceCountry()->getDipTech() + country.getProcessedData().ideaEffect.dip;
+	auto totalDip = country.getSourceCountry()->getDipTech() + country.getProcessedData().ideaEffect.dip;
+	totalDip += country.getSourceCountry()->getScore() / 100'000;
 	return totalDip * country.getProcessedData().civLevel / 100;
 }
 
 double V3::TechValues::getCountryMilitaryTech(const Country& country)
 {
-	const auto totalMil = country.getSourceCountry()->getMilTech() + country.getProcessedData().ideaEffect.mil;
+	auto totalMil = country.getSourceCountry()->getMilTech() + country.getProcessedData().ideaEffect.mil;
+	totalMil += country.getSourceCountry()->getScore() / 100'000;
 	return totalMil * country.getProcessedData().civLevel / 100;
 }
 
 double V3::TechValues::getCountrySocietyTech(const Country& country)
 {
-	const auto totalAdm = country.getSourceCountry()->getAdmTech() + country.getProcessedData().ideaEffect.adm;
+	auto totalAdm = country.getSourceCountry()->getAdmTech() + country.getProcessedData().ideaEffect.adm;
+	totalAdm += country.getSourceCountry()->getScore() / 100'000;
 	return totalAdm * country.getProcessedData().civLevel / 100;
 }
