@@ -769,6 +769,24 @@
     <ClCompile Include="V3WorldTests\LoaderTests\LawLoaderTests\LawLoaderTests.cpp">
       <Filter>V3WorldTests\LoaderTests\LawLoaderTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\LawMapper\LawGroup.cpp">
+      <Filter>ConverterFiles\Mappers\LawMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\LawMapper\LawMapper.cpp">
+      <Filter>ConverterFiles\Mappers\LawMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\LawMapper\LawMapping.cpp">
+      <Filter>ConverterFiles\Mappers\LawMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\LawMapperTests\LawGroupTests.cpp">
+      <Filter>MapperTests\LawMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\LawMapperTests\LawMapperTests.cpp">
+      <Filter>MapperTests\LawMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\LawMapperTests\LawMappingTests.cpp">
+      <Filter>MapperTests\LawMapperTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1254,6 +1272,12 @@
     <Filter Include="V3WorldTests\LoaderTests\LawLoaderTests">
       <UniqueIdentifier>{7c725354-1c7b-4a8a-b652-72e4adbce720}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\Mappers\LawMapper">
+      <UniqueIdentifier>{97a3f36a-279e-4716-a874-9dd1c1194bb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\LawMapperTests">
+      <UniqueIdentifier>{28e5c0b1-22e4-406e-a7e8-583101adf313}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1425,6 +1449,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\laws\00_laws2.txt">
       <Filter>TestFiles\vic3installation\game\common\laws</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\law_map.txt">
+      <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>
