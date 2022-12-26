@@ -12,13 +12,6 @@ void mappers::LawMapper::loadMappingRules(const std::string& filePath)
 	Log(LogLevel::Info) << "<> " << lawGroups.size() << " law groups loaded.";
 }
 
-void mappers::LawMapper::loadMappingRules(std::istream& theStream)
-{
-	registerKeys();
-	parseStream(theStream);
-	clearRegisteredKeywords();
-}
-
 void mappers::LawMapper::registerKeys()
 {
 	registerRegex(commonItems::catchallRegex, [this](const std::string& lawGroupName, std::istream& theStream) {
