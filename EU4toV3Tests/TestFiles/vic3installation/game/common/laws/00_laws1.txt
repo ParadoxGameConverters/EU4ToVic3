@@ -1,0 +1,17 @@
+﻿law_1 = {
+	group = lawgroup_1
+	progressiveness = -50
+}
+
+law_2 = {
+	group = lawgroup_2
+	unlocking_technologies = { tech1 }
+}
+
+law_3 = {
+	group = lawgroup_2
+	progressiveness = 50
+	unlocking_technologies = { tech2 }
+	disallowing_laws = { law_2 }
+	unlocking_laws = { law_1 }
+}
