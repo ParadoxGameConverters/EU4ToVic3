@@ -35,6 +35,8 @@ void outCommonCountry(std::ostream& output, const V3::Country& country)
 void outHistoryCountry(std::ostream& output, const V3::Country& country)
 {
 	output << "\tc:" << country.getTag() << " = {\n";
+	for (const auto& tech: country.getProcessedData().techs)
+		output << "\t\tadd_technology_researched = " << tech << "\n";
 	for (const auto& effect: country.getProcessedData().effects)
 		output << "\t\t" << effect << " = yes\n";
 	for (const auto& law: country.getProcessedData().laws)
@@ -72,7 +74,7 @@ void OUT::exportHistoryCountries(const std::string& outputName, const std::map<s
 
 	output << commonItems::utf8BOM << "COUNTRIES = {\n";
 	for (const auto& country: countries | std::views::values)
-		if (!country->getSubStates().empty() && !country->getProcessedData().effects.empty())
+		if (!country->getSubStates().empty())
 			outHistoryCountry(output, *country);
 	output << "}\n";
 	output.close();

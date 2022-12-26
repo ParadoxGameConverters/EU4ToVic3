@@ -727,6 +727,48 @@
     <ClCompile Include="MapperTests\PopulationSetupMapperTests\PopulationSetupMappingTests.cpp">
       <Filter>MapperTests\PopulationSetupMapperTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapper.cpp">
+      <Filter>ConverterFiles\Mappers\IdeaEffectsMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapping.cpp">
+      <Filter>ConverterFiles\Mappers\IdeaEffectsMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\IdeaEffectsMapperTests\IdeaEffectsMapperTests.cpp">
+      <Filter>MapperTests\IdeaEffectsMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\IdeaEffectsMapperTests\IdeaEffectsMappingTests.cpp">
+      <Filter>MapperTests\IdeaEffectsMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\TechSetupMapperTests\TechSetupMapperTests.cpp">
+      <Filter>MapperTests\TechSetupMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\TechSetupMapperTests\TechSetupMappingTests.cpp">
+      <Filter>MapperTests\TechSetupMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\TechSetupMapper\TechSetupMapper.cpp">
+      <Filter>ConverterFiles\Mappers\TechSetupMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\TechSetupMapper\TechSetupMapping.cpp">
+      <Filter>ConverterFiles\Mappers\TechSetupMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\PoliticalManager\TechValues\TechValues.cpp">
+      <Filter>ConverterFiles\V3World\PoliticalManager\TechValues</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\PoliticalManagerTests\TechValuesTests\TechValuesTests.cpp">
+      <Filter>V3WorldTests\PoliticalManagerTests\TechValuesTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LawLoader\LawEntry.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\LawLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LawLoader\LawLoader.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\LawLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\LawLoaderTests\LawEntryTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\LawLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\LawLoaderTests\LawLoaderTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\LawLoaderTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1185,6 +1227,33 @@
     <Filter Include="ConverterFiles\Mappers\PopulationSetupMapper">
       <UniqueIdentifier>{46768afb-e991-441f-aa39-0d8f84cb5316}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\Mappers\IdeaEffectsMapper">
+      <UniqueIdentifier>{72fb5a5f-dd38-4324-ba05-141340ddf1c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\IdeaEffectsMapperTests">
+      <UniqueIdentifier>{61d8cf98-685e-44da-8341-e87430d6bbfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\TechSetupMapperTests">
+      <UniqueIdentifier>{8879c215-cdd5-4594-bcd1-ec17813d49c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\Mappers\TechSetupMapper">
+      <UniqueIdentifier>{1270efd8-cbef-457f-9cc8-9955ce4cec31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\PoliticalManager\TechValues">
+      <UniqueIdentifier>{777d9fc0-2849-4011-97f3-b968bf2bcae2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\PoliticalManagerTests\TechValuesTests">
+      <UniqueIdentifier>{980c8272-a098-4b81-907d-1ba71e5f4164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\Loaders\LawLoader">
+      <UniqueIdentifier>{00d0f5e4-66fc-4e33-91f0-2bdbedaf761f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\laws">
+      <UniqueIdentifier>{048cd0ed-4de5-4734-921f-b9851cf25945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\LoaderTests\LawLoaderTests">
+      <UniqueIdentifier>{7c725354-1c7b-4a8a-b652-72e4adbce720}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1350,6 +1419,12 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\westernization.txt">
       <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\laws\00_laws1.txt">
+      <Filter>TestFiles\vic3installation\game\common\laws</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\laws\00_laws2.txt">
+      <Filter>TestFiles\vic3installation\game\common\laws</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

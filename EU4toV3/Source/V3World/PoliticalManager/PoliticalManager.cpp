@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Mappers/CountryMapper/CountryMapper.h"
 #include "PopManager/PopManager.h"
+#include "TechValues/TechValues.h"
 #include <ranges>
 
 void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFilesystem& modFS)
@@ -31,6 +32,16 @@ void V3::PoliticalManager::loadCountryMapper(const std::shared_ptr<mappers::Coun
 void V3::PoliticalManager::loadPopulationSetupMapperRules(const std::string& filePath)
 {
 	populationSetupMapper.loadMappingRules(filePath);
+}
+
+void V3::PoliticalManager::loadIdeaEffectMapperRules(const std::string& filePath)
+{
+	ideaEffectMapper.loadMappingRules(filePath);
+}
+
+void V3::PoliticalManager::loadTechSetupMapperRules(const std::string& filePath)
+{
+	techSetupMapper.loadMappingRules(filePath);
 }
 
 void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries)
@@ -167,7 +178,7 @@ void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
 
 		// otherwise, this is a regular imported EU4 country
 		else if (country->getSourceCountry())
-			country->convertFromEU4Country(clayManager, cultureMapper, religionMapper, cultureLoader, religionLoader);
+			country->convertFromEU4Country(clayManager, cultureMapper, religionMapper, cultureLoader, religionLoader, ideaEffectMapper);
 
 		else
 			Log(LogLevel::Warning) << "Country " << tag << " has no known sources! Not importing!";
@@ -210,7 +221,8 @@ void V3::PoliticalManager::determineAndApplyWesternization(const mappers::Cultur
 		const auto& sourceCountry = country->getSourceCountry();
 		if (sourceCountry->getProvinces().empty())
 			continue; // dead nations are stuck.
-		const auto totalTechs = sourceCountry->getMilTech() + sourceCountry->getAdmTech() + sourceCountry->getDipTech();
+		const auto totalTechs =
+			 sourceCountry->getMilTech() + sourceCountry->getAdmTech() + sourceCountry->getDipTech() + country->getProcessedData().ideaEffect.getTechMod();
 		if (totalTechs > topTech)
 			topTech = totalTechs;
 		const auto currInstitutions = sourceCountry->getNumEmbracedInstitutions();
@@ -236,4 +248,25 @@ void V3::PoliticalManager::determineAndApplyWesternization(const mappers::Cultur
 		}
 	}
 	Log(LogLevel::Info) << "<> There are " << civs << " westernized and " << uncivs << " unwesternized landed nations.";
+}
+
+void V3::PoliticalManager::setupTech()
+{
+	Log(LogLevel::Info) << "-> Setting up tech for landed EU4 countries.";
+
+	const TechValues techValues(countries);
+	auto counter = 0;
+	for (const auto& [tag, country]: countries)
+	{
+		if (!TechValues::isValidCountryForTechConversion(*country))
+			continue;
+
+		const auto productionScore = techValues.getProductionTechPercentile(tag);
+		const auto militaryScore = techValues.getMilitaryTechPercentile(tag);
+		const auto societyScore = techValues.getSocietyTechPercentile(tag);
+		country->setTechs(techSetupMapper, productionScore, militaryScore, societyScore);
+		++counter;
+	}
+
+	Log(LogLevel::Info) << "<> " << counter << " countries initialized.";
 }

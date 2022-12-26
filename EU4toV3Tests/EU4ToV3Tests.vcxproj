@@ -146,6 +146,8 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListMapper\NameListMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapping.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\MergeBlock.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\NationMergeMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\PopulationSetupMapper\PopulationSetupMapper.cpp" />
@@ -162,6 +164,8 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\AssimilationParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperGroupMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\TechSetupMapper\TechSetupMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\TechSetupMapper\TechSetupMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Output\outPops\outPops.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\ClayManager.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\State\Chunk.cpp" />
@@ -172,6 +176,8 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingGroupLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingGroups.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\CountryDefinitionLoader\CountryDefinitionLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LawLoader\LawEntry.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LawLoader\LawLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LocLoader\LocalizationLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\PopEntry.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\PopLoader.cpp" />
@@ -190,6 +196,7 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaSubStateEntry.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\PoliticalManager\Country\Country.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\PoliticalManager\PoliticalManager.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\PoliticalManager\TechValues\TechValues.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\PopManager.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\Pops\StatePops.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\Pops\SubStatePops.cpp" />
@@ -264,6 +271,8 @@
     <ClCompile Include="MapperTests\CultureMapperTests\NameListMapperTests\NameListMappingTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\WesternizationMapperTests\WesternizationMapperTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\WesternizationMapperTests\WesternizationMappingTests.cpp" />
+    <ClCompile Include="MapperTests\IdeaEffectsMapperTests\IdeaEffectsMapperTests.cpp" />
+    <ClCompile Include="MapperTests\IdeaEffectsMapperTests\IdeaEffectsMappingTests.cpp" />
     <ClCompile Include="MapperTests\NationMergeMapperTests\MergeBlocksTests.cpp" />
     <ClCompile Include="MapperTests\NationMergeMapperTests\NationMergeMapperTests.cpp" />
     <ClCompile Include="MapperTests\PopulationSetupMapperTests\PopulationSetupMapperTests.cpp" />
@@ -280,6 +289,8 @@
     <ClCompile Include="MapperTests\SuperGroupMapperTests\AssimilationParserTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperGroupMapperTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperRegionParserTests.cpp" />
+    <ClCompile Include="MapperTests\TechSetupMapperTests\TechSetupMapperTests.cpp" />
+    <ClCompile Include="MapperTests\TechSetupMapperTests\TechSetupMappingTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\ClayManagerTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\ChunkTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\StateModifierTests.cpp" />
@@ -287,6 +298,8 @@
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\SubStateTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\BuildingLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\CountryDefinitionLoaderTests\CountryDefinitionLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\LawLoaderTests\LawEntryTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\LawLoaderTests\LawLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\LocLoaderTests\LocalizationLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\PopEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\PopLoaderTests.cpp" />
@@ -305,6 +318,7 @@
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaStateLoaderTests\VanillaSubStateEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\PoliticalManagerTests\CountryTests\CountryTests.cpp" />
     <ClCompile Include="V3WorldTests\PoliticalManagerTests\PoliticalManagerTests.cpp" />
+    <ClCompile Include="V3WorldTests\PoliticalManagerTests\TechValuesTests\TechValuesTests.cpp" />
     <ClCompile Include="V3WorldTests\PopManagerTests\PopManagerTests.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -568,6 +582,14 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\westernization.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\laws\00_laws1.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/laws</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\laws\00_laws2.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/laws</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

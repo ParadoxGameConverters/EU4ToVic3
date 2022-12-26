@@ -139,6 +139,8 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\Mappers\CultureMapper\NameListMapper\NameListMapping.cpp" />
     <ClCompile Include="Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapper.cpp" />
     <ClCompile Include="Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapping.cpp" />
+    <ClCompile Include="Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapper.cpp" />
+    <ClCompile Include="Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapping.cpp" />
     <ClCompile Include="Source\Mappers\NationMergeMapper\MergeBlock.cpp" />
     <ClCompile Include="Source\Mappers\NationMergeMapper\NationMergeMapper.cpp" />
     <ClCompile Include="Source\Mappers\PopulationSetupMapper\PopulationSetupMapper.cpp" />
@@ -155,6 +157,8 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\Mappers\SuperGroupMapper\AssimilationParser.cpp" />
     <ClCompile Include="Source\Mappers\SuperGroupMapper\SuperGroupMapper.cpp" />
     <ClCompile Include="Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp" />
+    <ClCompile Include="Source\Mappers\TechSetupMapper\TechSetupMapper.cpp" />
+    <ClCompile Include="Source\Mappers\TechSetupMapper\TechSetupMapping.cpp" />
     <ClCompile Include="Source\Output\outCountries\outCountries.cpp" />
     <ClCompile Include="Source\Output\outCultures\outCultures.cpp" />
     <ClCompile Include="Source\Output\outLocalizations\outLocalizations.cpp" />
@@ -172,6 +176,8 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\V3World\Loaders\BuildingLoader\BuildingGroupLoader.cpp" />
     <ClCompile Include="Source\V3World\Loaders\BuildingLoader\BuildingGroups.cpp" />
     <ClCompile Include="Source\V3World\Loaders\CountryDefinitionLoader\CountryDefinitionLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\LawLoader\LawEntry.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\LawLoader\LawLoader.cpp" />
     <ClCompile Include="Source\V3World\Loaders\LocLoader\LocalizationLoader.cpp" />
     <ClCompile Include="Source\V3World\Loaders\PopLoader\PopEntry.cpp" />
     <ClCompile Include="Source\V3World\Loaders\PopLoader\PopLoader.cpp" />
@@ -190,6 +196,7 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\V3World\Loaders\VanillaStateLoader\VanillaSubStateEntry.cpp" />
     <ClCompile Include="Source\V3World\PoliticalManager\Country\Country.cpp" />
     <ClCompile Include="Source\V3World\PoliticalManager\PoliticalManager.cpp" />
+    <ClCompile Include="Source\V3World\PoliticalManager\TechValues\TechValues.cpp" />
     <ClCompile Include="Source\V3World\PopManager\PopManager.cpp" />
     <ClCompile Include="Source\V3World\PopManager\Pops\StatePops.cpp" />
     <ClCompile Include="Source\V3World\PopManager\Pops\SubStatePops.cpp" />
@@ -292,6 +299,8 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\Mappers\CultureMapper\NameListMapper\NameListMapping.h" />
     <ClInclude Include="Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapper.h" />
     <ClInclude Include="Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapping.h" />
+    <ClInclude Include="Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapper.h" />
+    <ClInclude Include="Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapping.h" />
     <ClInclude Include="Source\Mappers\NationMergeMapper\MergeBlock.h" />
     <ClInclude Include="Source\Mappers\NationMergeMapper\NationMergeMapper.h" />
     <ClInclude Include="Source\Mappers\PopulationSetupMapper\PopulationSetupMapper.h" />
@@ -309,6 +318,8 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\Mappers\SuperGroupMapper\AssimilationParser.h" />
     <ClInclude Include="Source\Mappers\SuperGroupMapper\SuperGroupMapper.h" />
     <ClInclude Include="Source\Mappers\SuperGroupMapper\SuperRegionParser.h" />
+    <ClInclude Include="Source\Mappers\TechSetupMapper\TechSetupMapper.h" />
+    <ClInclude Include="Source\Mappers\TechSetupMapper\TechSetupMapping.h" />
     <ClInclude Include="Source\Output\outCountries\outCountries.h" />
     <ClInclude Include="Source\Output\outCultures\outCultures.h" />
     <ClInclude Include="Source\Output\outLocalizations\outLocalizations.h" />
@@ -329,6 +340,9 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\V3World\Loaders\BuildingLoader\BuildingGroupLoader.h" />
     <ClInclude Include="Source\V3World\Loaders\BuildingLoader\BuildingGroups.h" />
     <ClInclude Include="Source\V3World\Loaders\CountryDefinitionLoader\CountryDefinitionLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\LawLoader\Law.h" />
+    <ClInclude Include="Source\V3World\Loaders\LawLoader\LawEntry.h" />
+    <ClInclude Include="Source\V3World\Loaders\LawLoader\LawLoader.h" />
     <ClInclude Include="Source\V3World\Loaders\LocLoader\LocalizationLoader.h" />
     <ClInclude Include="Source\V3World\Loaders\PopLoader\PopEntry.h" />
     <ClInclude Include="Source\V3World\Loaders\PopLoader\PopLoader.h" />
@@ -347,6 +361,7 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\V3World\Loaders\VanillaStateLoader\VanillaSubStateEntry.h" />
     <ClInclude Include="Source\V3World\PoliticalManager\Country\Country.h" />
     <ClInclude Include="Source\V3World\PoliticalManager\PoliticalManager.h" />
+    <ClInclude Include="Source\V3World\PoliticalManager\TechValues\TechValues.h" />
     <ClInclude Include="Source\V3World\PopManager\Demographic.h" />
     <ClInclude Include="Source\V3World\PopManager\PopManager.h" />
     <ClInclude Include="Source\V3World\PopManager\PopPoints.h" />

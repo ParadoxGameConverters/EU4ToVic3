@@ -3,6 +3,7 @@
 #include "Color.h"
 #include "Configuration.h"
 #include "DatingData.h"
+#include "IdeaEffectsMapper/IdeaEffectsMapper.h"
 #include "Parser.h"
 #include <memory>
 #include <string>
@@ -19,6 +20,7 @@ namespace mappers
 class ReligionMapper;
 class CultureMapper;
 class PopulationSetupMapper;
+class TechSetupMapper;
 } // namespace mappers
 namespace V3
 {
@@ -49,6 +51,8 @@ struct ProcessedData
 	double civLevel = 0;
 	bool westernized = false;
 	double industryFactor = 1.0;
+	mappers::IdeaEffect ideaEffect;
+	std::set<std::string> techs;
 
 	std::string name;
 	std::string adjective;
@@ -71,7 +75,8 @@ class Country: commonItems::parser
 		 mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
-		 const EU4::ReligionLoader& religionLoader);
+		 const EU4::ReligionLoader& religionLoader,
+		 const mappers::IdeaEffectsMapper& ideaEffectMapper);
 	void copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 	void generateDecentralizedData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 
@@ -94,6 +99,7 @@ class Country: commonItems::parser
 		 Configuration::EUROCENTRISM eurocentrism,
 		 const DatingData& datingData,
 		 const mappers::PopulationSetupMapper& populationSetupMapper);
+	void setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore);
 
 	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
 	[[nodiscard]] int getTechInfraCap() const { return 0; }
