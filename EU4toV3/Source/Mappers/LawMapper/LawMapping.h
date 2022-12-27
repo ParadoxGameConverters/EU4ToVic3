@@ -15,6 +15,8 @@ class LawMapping: commonItems::parser
 	[[nodiscard]] const auto& getIdeas() const { return ideas; }
 	[[nodiscard]] const auto& getReforms() const { return reforms; }
 
+	[[nodiscard]] double getScore(const std::string& incForm, const std::set<std::string>& incIdeas, const std::set<std::string>& incReforms) const;
+
   private:
 	void registerKeys();
 

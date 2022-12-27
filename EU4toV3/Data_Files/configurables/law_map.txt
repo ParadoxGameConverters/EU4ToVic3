@@ -1,15 +1,17 @@
 # First we set the FORM (monarchy, republic...) which sets the fallback default laws in case there's
 # no reforms or ideas (1444 conversions).
-# Then we apply IDEAS which alter the defaults at the same time as applying government REFORMS 
-# which further alter the law selections. If 2 selections (1 idea + 1 reform) want one law but
-# 1 selection (1 idea) wants another law, the law with most "votes" win. In case of a draw, the best one
-# (highest progressiveness) is selected.
-# 
+# Then we apply IDEAS and REFORMS which alter the defaults at the same time through a 1-for-1 voting system. 
+# If 2 selections (1 idea + 1 reform) want one law but 1 selection (1 idea) wants another law, the law with 
+# most "votes" win. In case of a draw, the best one (highest progressiveness) is selected.
+#
 # For every law that has tech prerequisites or that's incompatible with something else - we will IGNORE
 # this selection if the country doesn't have appropriate tech or has selected something that conflicts.
 # eg. If a country never banned slavery, it won't be able to get law_multicultural, no matter how high its
 # tech, because law_multicultural requires law_slavery_banned. So, it will get the next best selection, sorted
 # by progressiveness (law_racial_segregation with progressiveness 0).
+#
+# If we find zero matches, we will assing the most progressive law that we *can* assign (that's not blocked by 
+# something).
 #
 # Listed are only those tier-1 reforms that alter the base, so if a monarchist reform (daimyo) is also 
 # isolationist (as all monarchies default to), there's no need to list it separately. We don't want an 
@@ -49,7 +51,7 @@ lawgroup_governance_principles = {
 	law_monarchy = {
 		forms = { monarchy tribal native }
 		ideas = {}
-		reforms = { feudalism_reform centralize_tribal_power_reform native_hereditary_reform }
+		reforms = { feudalism_reform centralize_tribal_power_reform native_hereditary_reform shaka_regime }
 	}
 	law_theocracy = {
 		forms = { theocracy }
@@ -61,7 +63,7 @@ lawgroup_governance_principles = {
 	law_chiefdom = {
 		forms = {}
 		ideas = {}
-		reforms = { polynesian_tribe siberian_tribe stateless_society shaka_regime 
+		reforms = { polynesian_tribe siberian_tribe stateless_society  
 			retain_tribal_hierarchy_reform horde_barbaric_despoilers_reform horde_tribal_unity_reform 
 			tribe_remain_tribal_reform tribe_tribal_unity native_remain_being_native_reform	
 		}

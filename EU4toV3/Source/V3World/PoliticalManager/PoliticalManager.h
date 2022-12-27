@@ -3,6 +3,7 @@
 #include "Configuration.h"
 #include "DatingData.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
+#include "LawMapper/LawMapper.h"
 #include "ModLoader/ModFilesystem.h"
 #include "PopulationSetupMapper/PopulationSetupMapper.h"
 #include "TechSetupMapper/TechSetupMapper.h"
@@ -44,6 +45,8 @@ class PoliticalManager
 	void loadPopulationSetupMapperRules(const std::string& filePath);
 	void loadIdeaEffectMapperRules(const std::string& filePath);
 	void loadTechSetupMapperRules(const std::string& filePath);
+	void loadLawMapperRules(const std::string& filePath);
+	void loadLawDefinitions(const commonItems::ModFilesystem& modFS);
 	void importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries);
 	void generateDecentralizedCountries(const ClayManager& clayManager, const PopManager& popManager);
 	void convertAllCountries(const ClayManager& clayManager,
@@ -63,11 +66,13 @@ class PoliticalManager
 		 Configuration::EUROCENTRISM eurocentrism,
 		 const DatingData& datingData);
 	void setupTech();
+	void setupLaws();
 
   private:
 	void generateDecentralizedCountry(const std::string& culture, const std::vector<std::shared_ptr<SubState>>& subStates);
 	static CulturalSubStates sortSubStatesByCultures(const ClayManager& clayManager, const PopManager& popManager);
 	static std::string getDominantDemographic(const std::vector<Demographic>& demographics);
+	void grantLaw(const std::string& lawGroup, const std::shared_ptr<Country>& country) const;
 
 	std::map<std::string, std::shared_ptr<Country>> countries;
 
@@ -75,6 +80,7 @@ class PoliticalManager
 	mappers::PopulationSetupMapper populationSetupMapper;
 	mappers::IdeaEffectsMapper ideaEffectMapper;
 	mappers::TechSetupMapper techSetupMapper;
+	mappers::LawMapper lawMapper;
 };
 } // namespace V3
 #endif // POLITICAL_MANAGER_H
