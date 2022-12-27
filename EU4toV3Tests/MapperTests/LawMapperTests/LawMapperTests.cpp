@@ -43,11 +43,11 @@ TEST(Mappers_LawMapperTests, MatchingDefinitionlessLawsThrowsWarningAndReturnsNu
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
 	std::cout.rdbuf(log.rdbuf());
-	const auto match = mapper.grantLaw("lawgroup_1", *country);
+	const auto law = mapper.grantLawFromGroup("lawgroup_1", *country);
 	std::cout.rdbuf(cout_buffer);
 
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] We're trying to map to law: law_1 that has no definition! Skipping.)"));
-	EXPECT_FALSE(match);
+	EXPECT_FALSE(law);
 }
 
 TEST(Mappers_LawMapperTests, SimpleLawsMatchesCanBeAssigned)
@@ -64,9 +64,9 @@ TEST(Mappers_LawMapperTests, SimpleLawsMatchesCanBeAssigned)
 	const auto country = std::make_shared<V3::Country>();
 	country->setSourceCountry(eu4Country);
 
-	const auto match = mapper.grantLaw("lawgroup_1", *country);
-	ASSERT_TRUE(match);
-	EXPECT_EQ("law_1", *match);
+	const auto law = mapper.grantLawFromGroup("lawgroup_1", *country);
+	ASSERT_TRUE(law);
+	EXPECT_EQ("law_1", *law);
 }
 
 TEST(Mappers_LawMapperTests, HavingBlockingLawsPreventsAssignment)
@@ -86,8 +86,8 @@ TEST(Mappers_LawMapperTests, HavingBlockingLawsPreventsAssignment)
 	data.laws.emplace("law_1"); // law_1 will block law_4
 	country->setProcessedData(data);
 
-	const auto match = mapper.grantLaw("lawgroup_3", *country);
-	ASSERT_FALSE(match);
+	const auto law = mapper.grantLawFromGroup("lawgroup_3", *country);
+	ASSERT_FALSE(law);
 }
 
 TEST(Mappers_LawMapperTests, NotHavingBlockingLawsDoesNotPreventsAssignment)
@@ -107,9 +107,9 @@ TEST(Mappers_LawMapperTests, NotHavingBlockingLawsDoesNotPreventsAssignment)
 	data.laws.emplace("law_2"); // law_2 will not block law_4
 	country->setProcessedData(data);
 
-	const auto match = mapper.grantLaw("lawgroup_3", *country);
-	ASSERT_TRUE(match);
-	EXPECT_EQ("law_4", *match);
+	const auto law = mapper.grantLawFromGroup("lawgroup_3", *country);
+	ASSERT_TRUE(law);
+	EXPECT_EQ("law_4", *law);
 }
 
 TEST(Mappers_LawMapperTests, HavingMissingTechsPreventsAssignment)
@@ -128,8 +128,8 @@ TEST(Mappers_LawMapperTests, HavingMissingTechsPreventsAssignment)
 	const auto country = std::make_shared<V3::Country>();
 	country->setSourceCountry(eu4Country); // we have 0 techs, we won't get either law_2 or law_3.
 
-	const auto match = mapper.grantLaw("lawgroup_2", *country);
-	ASSERT_FALSE(match);
+	const auto law = mapper.grantLawFromGroup("lawgroup_2", *country);
+	ASSERT_FALSE(law);
 }
 
 TEST(Mappers_LawMapperTests, HavingMissingTechsAllowsForNextBestAssignment)
@@ -152,9 +152,9 @@ TEST(Mappers_LawMapperTests, HavingMissingTechsAllowsForNextBestAssignment)
 	data.laws.emplace("law_1");  // law_3 also requires law_1.
 	country->setProcessedData(data);
 
-	const auto match = mapper.grantLaw("lawgroup_2", *country);
-	ASSERT_TRUE(match);
-	EXPECT_EQ("law_3", *match);
+	const auto law = mapper.grantLawFromGroup("lawgroup_2", *country);
+	ASSERT_TRUE(law);
+	EXPECT_EQ("law_3", *law);
 }
 
 TEST(Mappers_LawMapperTests, HavingMissingLawsBlocksMatchAssignment)
@@ -176,8 +176,8 @@ TEST(Mappers_LawMapperTests, HavingMissingLawsBlocksMatchAssignment)
 	data.techs.emplace("tech2"); // tech2 only allows for law_3, not law_2 we'd prefer, but we're MISSING law_1!
 	country->setProcessedData(data);
 
-	const auto match = mapper.grantLaw("lawgroup_2", *country);
-	ASSERT_FALSE(match);
+	const auto law = mapper.grantLawFromGroup("lawgroup_2", *country);
+	ASSERT_FALSE(law);
 }
 
 TEST(Mappers_LawMapperTests, HavingRequiredTechsAllowsForBestAssignment)
@@ -201,9 +201,9 @@ TEST(Mappers_LawMapperTests, HavingRequiredTechsAllowsForBestAssignment)
 	data.laws.emplace("law_1");  // law_3 also requires law_1, otherwise it's not an option.
 	country->setProcessedData(data);
 
-	const auto match = mapper.grantLaw("lawgroup_2", *country);
-	ASSERT_TRUE(match);
-	EXPECT_EQ("law_2", *match);
+	const auto law = mapper.grantLawFromGroup("lawgroup_2", *country);
+	ASSERT_TRUE(law);
+	EXPECT_EQ("law_2", *law);
 }
 
 TEST(Mappers_LawMapperTests, LawsFromSameGroupAsExistingLawsDoNotGetConsidered)
@@ -228,8 +228,8 @@ TEST(Mappers_LawMapperTests, LawsFromSameGroupAsExistingLawsDoNotGetConsidered)
 	data.laws.emplace("law_3");
 	country->setProcessedData(data);
 
-	const auto match = mapper.grantLaw("lawgroup_2", *country);
-	ASSERT_FALSE(match);
+	const auto law = mapper.grantLawFromGroup("lawgroup_2", *country);
+	ASSERT_FALSE(law);
 }
 
 TEST(Mappers_LawMapperTests, NoMatchesDefaultsToBestNonBlockedLaw)
@@ -250,7 +250,7 @@ TEST(Mappers_LawMapperTests, NoMatchesDefaultsToBestNonBlockedLaw)
 	data.laws.emplace("law_1");
 	country->setProcessedData(data);
 
-	const auto match = mapper.grantLaw("lawgroup_2", *country);
-	ASSERT_TRUE(match);
-	EXPECT_EQ("law_3", *match);
+	const auto law = mapper.grantLawFromGroup("lawgroup_2", *country);
+	ASSERT_TRUE(law);
+	EXPECT_EQ("law_3", *law);
 }

@@ -20,7 +20,7 @@ class LawMapper: commonItems::parser
 
 	[[nodiscard]] const auto& getLawGroups() const { return lawGroups; }
 
-	[[nodiscard]] std::optional<std::string> grantLaw(const std::string& lawGroup, const V3::Country& country) const;
+	[[nodiscard]] std::optional<std::string> grantLawFromGroup(const std::string& lawGroup, const V3::Country& country) const;
 
   private:
 	void registerKeys();

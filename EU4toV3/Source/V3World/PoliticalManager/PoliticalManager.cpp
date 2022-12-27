@@ -295,33 +295,33 @@ void V3::PoliticalManager::setupLaws()
 
 		// ORDER matters! We can set some laws without having other blocking them if we set them first.
 		// We go by what's *important*. Political first!
-		grantLaw("lawgroup_governance_principles", country);
-		grantLaw("lawgroup_distribution_of_power", country);
-		grantLaw("lawgroup_slavery", country);
-		grantLaw("lawgroup_citizenship", country);
-		grantLaw("lawgroup_church_and_state", country);
-		grantLaw("lawgroup_economic_system", country);
-		grantLaw("lawgroup_bureaucracy", country);
-		grantLaw("lawgroup_army_model", country);
-		grantLaw("lawgroup_taxation", country);
-		grantLaw("lawgroup_trade_policy", country);
-		grantLaw("lawgroup_internal_security", country);
-		grantLaw("lawgroup_migration", country);
-		grantLaw("lawgroup_policing", country);
-		grantLaw("lawgroup_rights_of_women", country);
+		grantLawFromGroup("lawgroup_governance_principles", country);
+		grantLawFromGroup("lawgroup_distribution_of_power", country);
+		grantLawFromGroup("lawgroup_slavery", country);
+		grantLawFromGroup("lawgroup_citizenship", country);
+		grantLawFromGroup("lawgroup_church_and_state", country);
+		grantLawFromGroup("lawgroup_economic_system", country);
+		grantLawFromGroup("lawgroup_bureaucracy", country);
+		grantLawFromGroup("lawgroup_army_model", country);
+		grantLawFromGroup("lawgroup_taxation", country);
+		grantLawFromGroup("lawgroup_trade_policy", country);
+		grantLawFromGroup("lawgroup_internal_security", country);
+		grantLawFromGroup("lawgroup_migration", country);
+		grantLawFromGroup("lawgroup_policing", country);
+		grantLawFromGroup("lawgroup_rights_of_women", country);
 		// Social LAST.
-		grantLaw("lawgroup_education_system", country);
-		grantLaw("lawgroup_labor_rights", country);
-		grantLaw("lawgroup_free_speech", country);
-		grantLaw("lawgroup_health_system", country);
-		grantLaw("lawgroup_welfare", country);
+		grantLawFromGroup("lawgroup_education_system", country);
+		grantLawFromGroup("lawgroup_labor_rights", country);
+		grantLawFromGroup("lawgroup_free_speech", country);
+		grantLawFromGroup("lawgroup_health_system", country);
+		grantLawFromGroup("lawgroup_welfare", country);
 		++counter;
 	}
 	Log(LogLevel::Info) << "<> " << counter << " countries codified.";
 }
 
-void V3::PoliticalManager::grantLaw(const std::string& lawGroup, const std::shared_ptr<Country>& country) const
+void V3::PoliticalManager::grantLawFromGroup(const std::string& lawGroup, const std::shared_ptr<Country>& country) const
 {
-	if (const auto law = lawMapper.grantLaw(lawGroup, *country); law)
+	if (const auto law = lawMapper.grantLawFromGroup(lawGroup, *country); law)
 		country->addLaw(*law);
 }

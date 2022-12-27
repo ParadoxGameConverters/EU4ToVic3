@@ -50,7 +50,7 @@ void mappers::LawMapper::registerKeys()
 	});
 }
 
-std::optional<std::string> mappers::LawMapper::grantLaw(const std::string& lawGroup, const V3::Country& country) const
+std::optional<std::string> mappers::LawMapper::grantLawFromGroup(const std::string& lawGroup, const V3::Country& country) const
 {
 	if (!lawGroups.contains(lawGroup) || !country.getSourceCountry() || country.getSourceCountry()->getGovernment().empty())
 		return std::nullopt;

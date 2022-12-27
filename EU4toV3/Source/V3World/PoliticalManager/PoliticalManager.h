@@ -72,7 +72,7 @@ class PoliticalManager
 	void generateDecentralizedCountry(const std::string& culture, const std::vector<std::shared_ptr<SubState>>& subStates);
 	static CulturalSubStates sortSubStatesByCultures(const ClayManager& clayManager, const PopManager& popManager);
 	static std::string getDominantDemographic(const std::vector<Demographic>& demographics);
-	void grantLaw(const std::string& lawGroup, const std::shared_ptr<Country>& country) const;
+	void grantLawFromGroup(const std::string& lawGroup, const std::shared_ptr<Country>& country) const;
 
 	std::map<std::string, std::shared_ptr<Country>> countries;
 
