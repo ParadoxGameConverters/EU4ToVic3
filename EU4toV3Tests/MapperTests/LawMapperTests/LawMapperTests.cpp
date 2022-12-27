@@ -197,7 +197,7 @@ TEST(Mappers_LawMapperTests, HavingRequiredTechsAllowsForBestAssignment)
 	country->setSourceCountry(eu4Country);
 	V3::ProcessedData data;
 	data.techs.emplace("tech1"); // tech1 allows for law_2 which we're prefering.
-	data.techs.emplace("tech2"); // tech2 only allows for law_3, not law_2 we'd prefer.
+	data.techs.emplace("tech2"); // tech2 allows for law_3, not law_2 we'd prefer.
 	data.laws.emplace("law_1");  // law_3 also requires law_1, otherwise it's not an option.
 	country->setProcessedData(data);
 

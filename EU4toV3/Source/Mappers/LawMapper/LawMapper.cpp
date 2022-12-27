@@ -117,12 +117,25 @@ bool mappers::LawMapper::isLawBlocked(const std::string& lawName, const std::set
 	for (const auto& existingLaw: existingLaws)
 		if (law.blockingLaws.contains(existingLaw))
 			return true;
-	for (const auto& requiredLaw: law.reqiredLaws)
-		if (!existingLaws.contains(requiredLaw))
+
+	if (!law.reqiredLaws.empty())
+	{
+		const bool match = std::ranges::any_of(law.reqiredLaws.begin(), law.reqiredLaws.end(), [existingLaws](const auto& law) {
+			return existingLaws.contains(law);
+		});
+		if (!match)
 			return true;
-	for (const auto& tech: law.requiredTechs)
-		if (!existingTechs.contains(tech))
+	}
+
+	if (!law.requiredTechs.empty())
+	{
+		const bool match = std::ranges::any_of(law.requiredTechs.begin(), law.requiredTechs.end(), [existingTechs](const auto& tech) {
+			return existingTechs.contains(tech);
+		});
+		if (!match)
 			return true;
+	}
+
 	return false;
 }
 
