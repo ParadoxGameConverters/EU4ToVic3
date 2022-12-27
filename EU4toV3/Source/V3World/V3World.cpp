@@ -2,7 +2,8 @@
 #include "EU4World/World.h"
 #include "Log.h"
 
-V3::World::World(const Configuration& configuration, const EU4::World& sourceWorld): V3Path(configuration.getVic3Path()), configBlock(configuration.configBlock)
+V3::World::World(const Configuration& configuration, const EU4::World& sourceWorld):
+	 V3Path(configuration.getVic3Path()), configBlock(configuration.configBlock), datingData(sourceWorld.getDatingData())
 {
 	Mods overrideMods;
 	// We use decentralized world mod to fill out wasteland and out-of-scope clay with decentralized tribes.
@@ -89,7 +90,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getCultureLoader(),
 		 sourceWorld.getEU4Localizations());
 
-	politicalManager.determineAndApplyWesternization(cultureMapper, religionMapper, configuration.configBlock.euroCentric, sourceWorld.getDatingData());
+	politicalManager.determineAndApplyWesternization(cultureMapper, religionMapper, configBlock.euroCentric, datingData);
 	politicalManager.setupTech();
 	politicalManager.setupLaws();
 

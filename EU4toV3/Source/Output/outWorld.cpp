@@ -1,4 +1,5 @@
 #include "outWorld.h"
+#include "CommonFunctions.h"
 #include "OSCompatibilityLayer.h"
 #include "outCountries/outCountries.h"
 #include "outCultures/outCultures.h"
@@ -47,6 +48,9 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Progress) << "84 %";
 
 	// Update bookmark starting dates
+	Log(LogLevel::Info) << "<- Updating bookmarks";
+	exportBookmark(outputName, configuration, world.getDatingData());
+
 	Log(LogLevel::Info) << "<- Dumping common/history/states";
 	exportCommonHistoryStates(outputName, world.getClayManager().getStates());
 	Log(LogLevel::Progress) << "85 %";
@@ -115,5 +119,16 @@ void OUT::exportVersion(const std::string& outputName, const commonItems::Conver
 	if (!output.is_open())
 		throw std::runtime_error("Error writing version file! Is the output folder writable?");
 	output << converterVersion;
+	output.close();
+}
+
+void OUT::exportBookmark(const std::string& outputName, const Configuration& configuration, const DatingData& datingData)
+{
+	if (configuration.configBlock.startDate == Configuration::STARTDATE::Vanilla)
+		return;
+	std::ofstream output("output/" + outputName + "/common/defines/99_converter_defines.txt");
+	if (!output.is_open())
+		throw std::runtime_error("Error writing defines file! Is the output folder writable?");
+	output << commonItems::utf8BOM << "NGame = { START_DATE = \"" << datingData.lastEU4Date << "\" }\n";
 	output.close();
 }

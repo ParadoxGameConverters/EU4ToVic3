@@ -56,6 +56,11 @@ void Configuration::registerKeys()
 
 	// ------- options
 
+	registerKeyword("start_date", [this](std::istream& theStream) {
+		const auto startDateString = commonItems::getString(theStream);
+		configBlock.startDate = static_cast<STARTDATE>(std::stoi(startDateString));
+		Log(LogLevel::Info) << "Start Date: " << startDateString;
+	});
 	registerKeyword("max_literacy", [this](std::istream& theStream) {
 		const auto maxLiteracyString = commonItems::getString(theStream);
 		configBlock.MaxLiteracy = static_cast<double>(std::stoi(maxLiteracyString)) / 100;

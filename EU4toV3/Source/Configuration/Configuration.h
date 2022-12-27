@@ -11,6 +11,11 @@ class Configuration: commonItems::parser
 	explicit Configuration(const commonItems::ConverterVersion& converterVersion);
 	explicit Configuration(std::istream& theStream, const commonItems::ConverterVersion& converterVersion);
 
+	enum class STARTDATE
+	{
+		Vanilla = 1,
+		Dynamic = 2
+	};
 	enum class DEADCORES
 	{
 		LeaveAll = 1,
@@ -39,6 +44,7 @@ class Configuration: commonItems::parser
 	struct ConfigBlock
 	{
 		double MaxLiteracy = 1.0;
+		STARTDATE startDate = STARTDATE::Vanilla;
 		POPSHAPES popShaping = POPSHAPES::Vanilla;
 		COREHANDLES coreHandling = COREHANDLES::DropNone;
 		DEADCORES removeType = DEADCORES::DeadCores;

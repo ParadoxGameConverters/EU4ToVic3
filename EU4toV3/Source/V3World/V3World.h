@@ -26,10 +26,12 @@ class World
 	[[nodiscard]] const auto& getPoliticalManager() const { return politicalManager; }
 	[[nodiscard]] const auto& getCultureMapper() const { return cultureMapper; }
 	[[nodiscard]] const auto& getReligionMapper() const { return religionMapper; }
+	[[nodiscard]] const auto& getDatingData() const { return datingData; }
 
   private:
 	std::string V3Path;
 	Configuration::ConfigBlock configBlock;
+	DatingData datingData;
 
 	ClayManager clayManager;
 	PoliticalManager politicalManager;
