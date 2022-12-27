@@ -55,9 +55,15 @@ mappers::IdeaEffect mappers::IdeaEffectsMapper::getEffectForIdeas(const std::set
 	}
 	for (const auto& [ig, count]: interestGroupCounter)
 		if (count > 0)
+		{
 			effect.boostedInterestGroups.emplace(ig);
+			if (count >= 2)
+				effect.rulingInterestGroups.emplace(ig);
+		}
 		else if (count < 0)
+		{
 			effect.suppressedInterestGroups.emplace(ig);
+		}
 
 	return effect;
 }
