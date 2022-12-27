@@ -16,6 +16,10 @@ struct ConfigVariables
 
 class StateModifier;
 class Country;
+class Building;
+class BuildingGroups;
+class ProductionMethod;
+class ProductionMethodGroup;
 /*
  * PreReqs: Clay(Substates merged under the right country), Pops, Laws, Tech
  * all must be converted first in the current design.
@@ -42,18 +46,20 @@ class EconomyManager
 {
   public:
 	EconomyManager() = default;
+	void backfillBureaucracy() const;
+
 	void loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries);
 	void assignCountryCPBudgets(Configuration::ECONOMY economyType, const PoliticalManager& politicalManager) const;
 	void loadTerrainModifierMatrices();
 	void assignSubStateCPBudgets(Configuration::ECONOMY economyType, const std::map<std::string, std::shared_ptr<StateModifier>>& stateTraits) const;
 	void balanceNationalBudgets() const;
+	void loadBuildingInformation(const commonItems::ModFilesystem& modFS);
 	void buildBuildings() const;
 
 	void convertArmy() const;
 	void convertNavy() const;
 
-	void generateTrade() const;
-	void backfillBureaucracy() const;
+	void setPMs() const;
 
 	[[nodiscard]] const auto& getCentralizedCountries() const { return centralizedCountries; }
 
@@ -63,10 +69,17 @@ class EconomyManager
 	[[nodiscard]] double calculateGeoMeanCentralizedPops() const;
 	void distributeBudget(double globalCP, double totalIndustryScore) const;
 
+	[[nodiscard]] std::optional<std::string> pickBureaucracyPM(const std::shared_ptr<Country>& country) const;
+
 	std::vector<std::shared_ptr<Country>> centralizedCountries;
 
 	std::map<std::string, double> stateTerrainModifiers;
 	std::map<std::string, std::map<std::string, double>> buildingTerrainModifiers;
+
+	std::map<std::string, std::shared_ptr<Building>> buildings;
+	std::shared_ptr<BuildingGroups> buildingGroups;
+	std::map<std::string, std::shared_ptr<ProductionMethod>> PMs;
+	std::map<std::string, std::shared_ptr<ProductionMethodGroup>> PMGroups;
 };
 } // namespace V3
 

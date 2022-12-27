@@ -3,6 +3,10 @@
 #include "ClayManager/State/StateModifier.h"
 #include "ClayManager/State/SubState.h"
 #include "EU4World/CountryManager/EU4Country.h"
+#include "Loaders/BuildingLoader/BuildingGroupLoader.h"
+#include "Loaders/BuildingLoader/BuildingLoader.h"
+#include "Loaders/BuildingLoader/ProductionMethodLoader/ProductionMethodGroupLoader.h"
+#include "Loaders/BuildingLoader/ProductionMethodLoader/ProductionMethodLoader.h"
 #include "Loaders/TerrainLoader/TerrainModifierLoader.h"
 #include "Log.h"
 #include "PoliticalManager/Country/Country.h"
@@ -11,6 +15,10 @@
 #include <iomanip>
 #include <numeric>
 #include <ranges>
+
+#include "Building/Building.h"
+#include "Building/ProductionMethods/ProductionMethod.h"
+#include "Building/ProductionMethods/ProductionMethodGroup.h"
 
 void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
 {
@@ -192,6 +200,24 @@ void V3::EconomyManager::balanceNationalBudgets() const
 	// End result is each country has a set of instructions on what buildings have priority in its economy
 }
 
+void V3::EconomyManager::loadBuildingInformation(const commonItems::ModFilesystem& modFS)
+{
+	BuildingLoader buildingLoader;
+	BuildingGroupLoader buildingGroupLoader;
+	ProductionMethodLoader PMLoader;
+	ProductionMethodGroupLoader PMGroupLoader;
+
+	buildingLoader.loadBuildings(modFS);
+	buildingGroupLoader.loadBuildingGroups(modFS);
+	PMLoader.loadPMs(modFS);
+	PMGroupLoader.loadPMGroups(modFS);
+
+	buildings = buildingLoader.getBuildings();
+	buildingGroups = buildingGroupLoader.getBuildingGroups();
+	PMs = PMLoader.getPMs();
+	PMGroups = PMGroupLoader.getPMGroups();
+}
+
 void V3::EconomyManager::buildBuildings() const
 {
 	// Each substate consults its country's national budget and spends the substates CP budget
@@ -213,19 +239,37 @@ void V3::EconomyManager::buildBuildings() const
 
 void V3::EconomyManager::backfillBureaucracy() const
 {
+	// We are ignoring the tech requirement for buildings in this one case for game balance reasons
+
 	for (const auto& country: centralizedCountries)
 	{
 		// Give 5% extra for trade routes
 		const double generationTarget = country->calculateBureaucracyUsage() * 1.05;
 
-		// Which PMs are available?
-		// Use the best one
-		const int PMGeneration = 35;
+		// Use the PM with the most generation available
+		int PMGeneration = 35;
+		if (auto PMName = pickBureaucracyPM(country); PMName)
+		{
+			PMGeneration = PMs.at(PMName.value())->getBureaucracy();
+		}
 
 		// find # of buildings
 		const int numAdmins = static_cast<int>(generationTarget / PMGeneration + 1);
-	
+
 		country->distributeGovAdmins(numAdmins);
+	}
+}
+
+void V3::EconomyManager::setPMs() const
+{
+	// For now just set bureaucracy, default PMs everywhere else
+	// More detailed PM picking will happen later
+
+	for (const auto& country: centralizedCountries)
+	{
+		auto data = country->getProcessedData();
+		if (const auto& PMName = pickBureaucracyPM(country); PMName)
+			data.productionMethods["building_government_administration"] = {PMName.value()};
 	}
 }
 
@@ -262,4 +306,43 @@ void V3::EconomyManager::distributeBudget(const double globalCP, const double to
 	{
 		country->setCPBudget(static_cast<int>(std::round(globalCP * (country->getIndustryScore() / totalIndustryScore))));
 	}
+}
+
+std::optional<std::string> V3::EconomyManager::pickBureaucracyPM(const std::shared_ptr<Country>& country) const
+{
+	std::shared_ptr<ProductionMethod> best;
+
+	if (PMGroups.contains("pmg_base_building_government_administration"))
+	{
+		for (const auto& PMName: PMGroups.at("pmg_base_building_government_administration")->getPMs())
+		{
+			if (PMs.contains(PMName))
+			{
+				const auto& PM = PMs.at(PMName);
+
+				// Only use PMs we have unlocked
+				if (country->isTechLocked(PM->getUnlockingTechs()))
+				{
+					continue;
+				}
+
+				if (PM->getBureaucracy() > best->getBureaucracy())
+					best = PM;
+			}
+			else
+			{
+				Log(LogLevel::Error) << PMName << ": Not in loaded Production Methods";
+			}
+		}
+	}
+	else
+	{
+		Log(LogLevel::Error) << "pmg_base_building_government_administration: Not in loaded Production Method Groups";
+	}
+
+	if (best->getName() != "")
+	{
+		return best->getName();
+	}
+	return std::nullopt;
 }

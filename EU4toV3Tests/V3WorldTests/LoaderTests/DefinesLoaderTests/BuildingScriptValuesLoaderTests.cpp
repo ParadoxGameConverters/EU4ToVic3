@@ -6,13 +6,13 @@ const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/"
 TEST(V3World_BuildingScriptValuesLoaderTests, CostTiersCanBeLoaded)
 {
 	V3::BuildingScriptValuesLoader buildingScriptValuesLoader;
-	const auto costTiers = buildingScriptValuesLoader.getBuildingCostConstants();
-	EXPECT_TRUE(costTiers.empty());
+	EXPECT_TRUE(buildingScriptValuesLoader.getBuildingCostConstants().empty());
 	buildingScriptValuesLoader.loadBuildingScriptValues(modFS);
+	const auto costTiers = buildingScriptValuesLoader.getBuildingCostConstants();
 	EXPECT_EQ(3, costTiers.size());
 
 	EXPECT_THAT(costTiers,
 		 testing::UnorderedElementsAre(std::pair("construction_cost_very_low", 50),
-			  std::pair("construction_cost_low", 100),
-			  std::pair("construction_cost_medium", 200)));
+			  std::pair("construction_cost_low", 150),
+			  std::pair("construction_cost_medium", 300)));
 }

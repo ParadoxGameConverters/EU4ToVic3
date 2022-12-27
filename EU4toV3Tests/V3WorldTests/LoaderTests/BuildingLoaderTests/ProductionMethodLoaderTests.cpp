@@ -7,8 +7,8 @@ const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/"
 TEST(V3World_ProductionMethodLoaderTests, ProductionMethodLoaderCanLoadProductionMethods)
 {
 	V3::ProductionMethodLoader PMLoader;
-	const auto PMs = PMLoader.getPMs();
-	EXPECT_TRUE(PMs.empty());
+	EXPECT_TRUE(PMLoader.getPMs().empty());
 	PMLoader.loadPMs(modFS);
-	EXPECT_EQ(6, PMs.size());
+	const auto PMs = PMLoader.getPMs();
+	EXPECT_EQ(3, PMs.size());
 }

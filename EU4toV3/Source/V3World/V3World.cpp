@@ -106,7 +106,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	// Convert Army and Navy
 
 	Log(LogLevel::Progress) << "59 %";
-	// Generate trade routes OR a bueracracy surplus for trade?
+	economyManager.backfillBureaucracy();
+	economyManager.setPMs();
 
 	Log(LogLevel::Info) << "-> Distributing Factories";
 	Log(LogLevel::Progress) << "60 %";

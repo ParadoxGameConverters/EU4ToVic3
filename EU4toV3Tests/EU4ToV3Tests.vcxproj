@@ -175,6 +175,9 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\ProductionMethods\ProductionMethodGroup.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\EconomyManager.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingGroupLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\ProductionMethodLoader\ProductionMethodGroupLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\ProductionMethodLoader\ProductionMethodLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\CountryDefinitionLoader\CountryDefinitionLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\DefinesLoader\BuildingScriptValuesLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LocLoader\LocalizationLoader.cpp" />
@@ -590,6 +593,17 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\script_values\building_values.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/script_values</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\buildings\test_buildings.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/buildings</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\production_methods\test_pms.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/production_methods/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\production_method_groups\test_pm_groups.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/production_method_groups/</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

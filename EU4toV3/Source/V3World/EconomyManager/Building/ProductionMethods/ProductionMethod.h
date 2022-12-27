@@ -14,15 +14,18 @@ class ProductionMethod: commonItems::parser
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getEmployment() const { return employment; }
 	[[nodiscard]] const auto& getBureaucracy() const { return bureaucracy; }
-	[[nodiscard]] const auto& getPreReqTech() const { return preReqTech; }
+	[[nodiscard]] const auto& getUnlockingTechs() const { return unlockingTechs; }
 
   private:
 	void registerKeys();
 
+	parser cModUnwrapper;
+	parser bModUnwrapper;
+
 	std::string name;
 	std::map<std::string, int> employment;
 	int bureaucracy = 0;
-	std::string preReqTech;
+	std::vector<std::string> unlockingTechs;
 };
 } // namespace V3
 

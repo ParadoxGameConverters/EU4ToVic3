@@ -15,7 +15,7 @@ class Building: commonItems::parser
 	[[nodiscard]] const auto& getBuildingGroup() const { return buildingGroup; }
 	[[nodiscard]] const auto& getPMGroups() const { return PMGroups; }
 	[[nodiscard]] const auto& getConstructionCost() const { return constructionCost; }
-	[[nodiscard]] const auto& getPreReqTech() const { return preReqTech; }
+	[[nodiscard]] const auto& getUnlockingTechs() const { return unlockingTechs; }
 
   private:
 	void registerKeys(const std::map<std::string, int>& costTiers);
@@ -24,7 +24,7 @@ class Building: commonItems::parser
 	std::string buildingGroup;
 	std::vector<std::string> PMGroups;
 	int constructionCost = 50;
-	std::string preReqTech;
+	std::vector<std::string> unlockingTechs;
 };
 } // namespace V3
 

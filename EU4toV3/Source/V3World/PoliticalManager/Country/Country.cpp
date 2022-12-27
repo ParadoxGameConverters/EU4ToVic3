@@ -13,6 +13,8 @@
 #include <cmath>
 #include <numeric>
 
+#include "ClayManager/State/State.h"
+
 namespace
 {
 commonItems::Color generateDecentralizedColors(const std::string& tag)
@@ -53,12 +55,12 @@ std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop
 
 	const int numTopSubstates = static_cast<int>(static_cast<double>(sortedSubstates.size()) * percentile);
 
-	return auto(sortedSubstates.begin(), sortedSubstates.begin() + numTopSubstates);
+	return std::vector<std::shared_ptr<V3::SubState>>{sortedSubstates.begin(), sortedSubstates.begin() + numTopSubstates};
 }
 
 double V3::Country::calculateBureaucracyUsage() const
 {
-	// Non of these hard-coded Vic3 values are in hte defines for some reason.
+	// Non of these hard-coded Vic3 values are in the defines for some reason.
 	double usage = 0.0;
 
 	// Incorporated States 10 * # incorporated
@@ -71,7 +73,7 @@ double V3::Country::calculateBureaucracyUsage() const
 	usage += getPopCount() / 25000.0; // Multiplied by law and tech modifiers
 
 	// Institutions
-	// TODO(Gawquon): plug-in institutions
+	// TODO(Gawquon): plug-in institutions from law information
 	// cost = country->getPopCount() / 100,000;
 	// usage += cost * levels
 
@@ -94,7 +96,14 @@ void V3::Country::distributeGovAdmins(const int numGovAdmins) const
 		const int levels = static_cast<int>(popProportion * numGovAdmins);
 
 		substate->setBuildingLevel("building_government_administration", levels);
-		assigned += substate->getBuildingLevel("building_government_administration").value();
+		if (const auto setLevel = substate->getBuildingLevel("building_government_administration"); setLevel)
+		{
+			assigned += setLevel.value();
+		}
+		else
+		{
+			Log(LogLevel::Error) << "Couldn't set level of Government Administration in " << tag << "'s SubState in : " << substate->getHomeState()->getName();
+		}
 	}
 
 	// Handing out remainders, should be less than # of topSubstates

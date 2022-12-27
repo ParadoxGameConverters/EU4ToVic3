@@ -90,6 +90,7 @@ class SubState
 	[[nodiscard]] const auto& getIndustryScore() const { return industryScore; }
 	[[nodiscard]] const auto& getCPBudget() const { return CPBudget; }
 	[[nodiscard]] std::optional<int> getBuildingLevel(const std::string& building) const;
+	[[nodiscard]] const auto& getBuildings() const { return buildings; }
 
 	[[nodiscard]] auto isIncorporated() const { return incorporated; }
 	[[nodiscard]] auto isMarketCapital() const { return marketCapital; }

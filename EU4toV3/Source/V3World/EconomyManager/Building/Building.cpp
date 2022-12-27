@@ -19,8 +19,8 @@ void V3::Building::registerKeys(const std::map<std::string, int>& costTiers)
 	registerKeyword("production_method_groups", [this](std::istream& theStream) {
 		PMGroups = commonItems::getStrings(theStream);
 	});
-	registerKeyword("production_method_groups", [this](std::istream& theStream) {
-		preReqTech = commonItems::getStrings(theStream)[0]; // Only ever 1 tech actually present, technically could be more
+	registerKeyword("unlocking_technologies", [this](std::istream& theStream) {
+		unlockingTechs = commonItems::getStrings(theStream);
 	});
 	registerKeyword("required_construction", [this, &costTiers](std::istream& theStream) {
 		if (const std::string costTier = commonItems::getString(theStream); costTiers.contains(costTier))

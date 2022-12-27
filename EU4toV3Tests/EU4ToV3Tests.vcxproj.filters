@@ -778,6 +778,15 @@
     <ClCompile Include="V3WorldTests\EconomyManagerTests\Building\ProductionMethodTests.cpp">
       <Filter>V3WorldTests\EconomyManagerTests\Building</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\ProductionMethodLoader\ProductionMethodGroupLoader.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\BuildingLoader\ProductionMethodLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\ProductionMethodLoader\ProductionMethodLoader.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\BuildingLoader\ProductionMethodLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingLoader.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\BuildingLoader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1260,6 +1269,18 @@
     <Filter Include="V3WorldTests\LoaderTests\DefinesLoaderTests">
       <UniqueIdentifier>{dc05326d-e032-410e-8e85-c9f2cce282ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\V3World\Loaders\BuildingLoader\ProductionMethodLoader">
+      <UniqueIdentifier>{e4a0c649-86fa-4364-b6c6-90e6b874427d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\buildings">
+      <UniqueIdentifier>{b835f81d-26c5-4778-844d-b7ab55ea7d83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\production_methods">
+      <UniqueIdentifier>{d7b591a3-14f4-4bab-9066-6910b5c251ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\production_method_groups">
+      <UniqueIdentifier>{e63ab612-b774-48b0-83c0-a31e3e5457fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1428,6 +1449,15 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\script_values\building_values.txt">
       <Filter>TestFiles\vic3installation\game\common\script_values</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\buildings\test_buildings.txt">
+      <Filter>TestFiles\vic3installation\game\common\buildings</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\production_method_groups\test_pm_groups.txt">
+      <Filter>TestFiles\vic3installation\game\common\production_method_groups</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\production_methods\test_pms.txt">
+      <Filter>TestFiles\vic3installation\game\common\production_methods</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

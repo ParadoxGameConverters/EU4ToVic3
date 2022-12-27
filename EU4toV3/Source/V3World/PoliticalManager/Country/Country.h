@@ -50,8 +50,10 @@ struct ProcessedData
 	bool westernized = false;
 	double industryFactor = 1.0; // Modifier set by EuroCentrism or calculated by dev
 
-	double industryScore = 0;	// Share of global industry a country should get, not normalized
-	int CPBudget = 0;				// Construction Points for a country to spend on it's development
+	double industryScore = 0; // Share of global industry a country should get, not normalized
+	int CPBudget = 0;			  // Construction Points for a country to spend on it's development
+
+	std::map<std::string, std::vector<std::string>> productionMethods; // Non-default production methods used by country, Building -> PMs
 
 	std::string name;
 	std::string adjective;
@@ -68,9 +70,12 @@ class Country: commonItems::parser
 	Country() = default;
 	void initializeCountry(std::istream& theStream);
 	void setTag(const std::string& theTag) { tag = theTag; }
-	void setIndustryFactor(const double theIndustryFactor) { processedData.industryFactor = theIndustryFactor; } //TODO(Gawquon): BEFORE MERGE this might not be needed
-	void setIndustryScore(const double theIndustryScore) {processedData.industryScore = theIndustryScore; }
-	void setCPBudget(const int theBudget) {processedData.CPBudget = theBudget; }
+	void setIndustryFactor(const double theIndustryFactor)
+	{
+		processedData.industryFactor = theIndustryFactor;
+	} // TODO(Gawquon): BEFORE MERGE this might not be needed
+	void setIndustryScore(const double theIndustryScore) { processedData.industryScore = theIndustryScore; }
+	void setCPBudget(const int theBudget) { processedData.CPBudget = theBudget; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 
 	void convertFromEU4Country(const ClayManager& clayManager,
@@ -111,6 +116,7 @@ class Country: commonItems::parser
 	[[nodiscard]] int getTechInfraCap() const { return 0; }
 	// TODO(Gawquon): Implement, multiplier for amount of infrastructure created by population
 	[[nodiscard]] double getTechInfraMult() const { return 0.0; }
+	[[nodiscard]] bool isTechLocked(const std::vector<std::string>& techs) const { return false; }
 
 	void distributeGovAdmins(int numGovAdmins) const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> topPercentileStatesByPop(double percentile) const;

@@ -9,6 +9,8 @@
 #include "outStates/outCommonHistoryStates.h"
 #include <fstream>
 
+#include "outBuildings/outBuildings.h"
+
 void OUT::exportWorld(const Configuration& configuration, const V3::World& world, const commonItems::ConverterVersion& converterVersion)
 {
 	const auto& outputName = configuration.getOutputName();
@@ -98,6 +100,9 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Info) << "<- Writing Pops";
 	exportPops(outputName, world.getClayManager().getStates());
 	Log(LogLevel::Progress) << "97 %";
+
+	Log(LogLevel::Info) << "<- Writing Buildings";
+	exportBuildings(outputName, world.getClayManager().getStates());
 
 	Log(LogLevel::Info) << "<- Sending Botanical Expedition";
 	Log(LogLevel::Progress) << "98 %";
