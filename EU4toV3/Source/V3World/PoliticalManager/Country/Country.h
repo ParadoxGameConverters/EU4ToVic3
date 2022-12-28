@@ -55,6 +55,8 @@ struct ProcessedData
 	mappers::IdeaEffect ideaEffect;
 	std::set<std::string> techs;
 	std::map<std::string, Relation> relations;
+	std::set<std::string> rivals;
+	std::map<std::string, int> truces;
 
 	std::string name;
 	std::string adjective;
@@ -105,6 +107,10 @@ class Country: commonItems::parser
 	void addLaw(const auto& lawName) { processedData.laws.emplace(lawName); }
 	[[nodiscard]] Relation& getRelation(const std::string& target);
 	[[nodiscard]] const auto& getRelations() const { return processedData.relations; }
+	void setRivals(const std::set<std::string>& theRivals) { processedData.rivals = theRivals; }
+	[[nodiscard]] const auto& getRivals() const { return processedData.rivals; }
+	void addTruce(const std::string& target, int months) { processedData.truces.emplace(target, months); }
+	[[nodiscard]] const auto& getTruces() const { return processedData.truces; }
 
 	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
 	[[nodiscard]] int getTechInfraCap() const { return 0; }

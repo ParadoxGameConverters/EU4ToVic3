@@ -73,12 +73,15 @@ class PoliticalManager
 	void setupLaws();
 	void convertDiplomacy(const std::vector<EU4::EU4Agreement>& agreements);
 	[[nodiscard]] const auto& getAgreements() const { return agreements; }
+	void convertRivals();
+	void convertTruces(const date& lastEU4Date);
 
   private:
 	void generateDecentralizedCountry(const std::string& culture, const std::vector<std::shared_ptr<SubState>>& subStates);
 	static CulturalSubStates sortSubStatesByCultures(const ClayManager& clayManager, const PopManager& popManager);
 	static std::string getDominantDemographic(const std::vector<Demographic>& demographics);
 	void grantLawFromGroup(const std::string& lawGroup, const std::shared_ptr<Country>& country) const;
+	[[nodiscard]] bool isEU4CountryConvertedAndLanded(const std::string& eu4Tag) const;
 
 	std::map<std::string, std::shared_ptr<Country>> countries;
 	std::vector<Agreement> agreements;

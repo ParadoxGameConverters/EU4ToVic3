@@ -441,3 +441,84 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 	}
 	Log(LogLevel::Info) << "<> Transcribed " << agreements.size() << " agreements.";
 }
+
+void V3::PoliticalManager::convertRivals()
+{
+	Log(LogLevel::Info) << "-> Transcribing rivalries.";
+	auto counter = 0;
+
+	for (const auto& [tag, country]: countries)
+	{
+		if (!country->getSourceCountry())
+			continue;
+		if (country->getSubStates().empty())
+			continue;
+		const auto& eu4Rivals = country->getSourceCountry()->getRivals();
+		std::set<std::string> newRivals;
+		for (const auto& rival: eu4Rivals)
+		{
+			if (!isEU4CountryConvertedAndLanded(rival))
+				continue;
+
+			const auto& rivalTag = countryMapper->getV3Tag(rival);
+			const auto& rivalCountry = countries.at(*rivalTag);
+			if (rivalCountry->getSubStates().empty())
+				continue;
+
+			auto& r1 = country->getRelation(*rivalTag);
+			auto& r2 = rivalCountry->getRelation(tag);
+
+			r1.increaseRelations(-100);
+			r2.increaseRelations(-100);
+
+			newRivals.emplace(*rivalTag);
+			++counter;
+		}
+		country->setRivals(newRivals); // rivals are one-way, but relations suck both ways.
+	}
+	Log(LogLevel::Info) << "<> Transcribed " << counter << " rivalries.";
+}
+
+void V3::PoliticalManager::convertTruces(const date& lastEU4Date)
+{
+	Log(LogLevel::Info) << "-> Transcribing truces.";
+	auto counter = 0;
+
+	for (const auto& country: countries | std::views::values)
+	{
+		if (!country->getSourceCountry())
+			continue;
+		if (country->getSubStates().empty())
+			continue;
+		for (const auto& [target, relation]: country->getSourceCountry()->getRelations())
+		{
+			if (!relation.getTruceExpiry())
+				continue;
+			if (!isEU4CountryConvertedAndLanded(target))
+				continue;
+
+			auto nominalExpiry = *relation.getTruceExpiry();
+			const int conversionDateDays = lastEU4Date.getYear() * 365 + lastEU4Date.getMonth() * 12 + lastEU4Date.getDay();
+
+			const auto remainingTruceDays = nominalExpiry.getYear() * 365 + nominalExpiry.getMonth() * 12 + nominalExpiry.getDay() - conversionDateDays;
+			const auto remainingTruceMonths = static_cast<int>(std::round(static_cast<double>(remainingTruceDays) / 30.417)); // let's .. approximate.
+
+			country->addTruce(target, remainingTruceMonths);
+			counter++;
+		}
+	}
+	Log(LogLevel::Info) << "<> Transcribed " << counter << " truces.";
+}
+
+bool V3::PoliticalManager::isEU4CountryConvertedAndLanded(const std::string& eu4Tag) const
+{
+	const auto& targetTag = countryMapper->getV3Tag(eu4Tag);
+	if (!targetTag)
+		return false;
+	if (!countries.contains(*targetTag))
+		return false;
+	const auto& targetCountry = countries.at(*targetTag);
+	if (targetCountry->getSubStates().empty())
+		return false;
+	return true;
+}

@@ -23,12 +23,41 @@ void outCountryRelations(std::ostream& output, const std::string& tag, const std
 		output << "\t\tset_relations = { country = c:" << target << " value = " << relation.getRelations() << " }\n";
 	output << "\t}\n";
 }
+
+void outCountryRivals(std::ostream& output, const std::string& tag, const std::set<std::string>& rivals)
+{
+	output << "\tc:" << tag << " = {\n";
+	for (const auto& rival: rivals)
+	{
+		output << "\t\tcreate_diplomatic_pact = {\n";
+		output << "\t\t\tcountry = c:" << rival << "\n";
+		output << "\t\t\ttype = rivalry\n";
+		output << "\t\t}\n";
+	}
+	output << "\t}\n";
+}
+
+void outCountryTruces(std::ostream& output, const std::string& tag, const std::map<std::string, int>& truces)
+{
+	output << "\tc:" << tag << " = {\n";
+	for (const auto& [target, duration]: truces)
+	{
+		output << "\t\tcreate_truce = {\n";
+		output << "\t\t\tcountry = c:" << target << "\n";
+		output << "\t\t\tmonths = " << duration << "\n";
+		output << "\t\t}\n";
+	}
+	output << "\t}\n";
+}
+
 } // namespace
 
 void OUT::exportDiplomacy(const std::string& outputName, const V3::PoliticalManager& politicalManager)
 {
 	exportPacts(outputName, politicalManager.getAgreements());
 	exportRelations(outputName, politicalManager.getCountries());
+	exportRivals(outputName, politicalManager.getCountries());
+	exportTruces(outputName, politicalManager.getCountries());
 }
 
 void OUT::exportPacts(const std::string& outputName, const std::vector<V3::Agreement>& agreements)
@@ -70,4 +99,34 @@ void OUT::exportRelations(const std::string& outputName, const std::map<std::str
 
 	relations << "}\n";
 	relations.close();
+}
+
+void OUT::exportRivals(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+{
+	std::ofstream rivals("output/" + outputName + "/common/history/diplomacy/00_rivalries.txt");
+	if (!rivals.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/history/diplomacy/00_rivalries.txt");
+
+	rivals << commonItems::utf8BOM << "DIPLOMACY = {\n";
+	for (const auto& country: countries | std::views::values)
+		if (!country->getRivals().empty())
+			outCountryRivals(rivals, country->getTag(), country->getRivals());
+
+	rivals << "}\n";
+	rivals.close();
+}
+
+void OUT::exportTruces(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+{
+	std::ofstream truces("output/" + outputName + "/common/history/diplomacy/00_truces.txt");
+	if (!truces.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/history/diplomacy/00_truces.txt");
+
+	truces << commonItems::utf8BOM << "DIPLOMACY = {\n";
+	for (const auto& country: countries | std::views::values)
+		if (!country->getTruces().empty())
+			outCountryTruces(truces, country->getTag(), country->getTruces());
+
+	truces << "}\n";
+	truces.close();
 }

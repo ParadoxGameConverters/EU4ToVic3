@@ -95,6 +95,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.setupTech();
 	politicalManager.setupLaws();
 	politicalManager.convertDiplomacy(sourceWorld.getDiplomacy().getAgreements());
+	politicalManager.convertRivals();
+	politicalManager.convertTruces(datingData.lastEU4Date);
 
 	clayManager.squashAllSubStates(politicalManager);
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);
