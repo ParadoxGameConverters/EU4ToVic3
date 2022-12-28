@@ -11,6 +11,7 @@
 #include "Mappers/CountryMapper/CountryMapper.h"
 #include "PopManager/PopManager.h"
 #include "TechValues/TechValues.h"
+#include <cmath>
 #include <ranges>
 
 void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFilesystem& modFS)
