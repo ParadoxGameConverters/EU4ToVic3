@@ -4,6 +4,7 @@
 #include "ClayManager/State/SubState.h"
 #include "Country/Country.h"
 #include "CountryManager/EU4Country.h"
+#include "DiplomacyParser/EU4Agreement.h"
 #include "Loaders/CountryDefinitionLoader/CountryDefinitionLoader.h"
 #include "Loaders/LawLoader/LawLoader.h"
 #include "Log.h"
@@ -55,6 +56,11 @@ void V3::PoliticalManager::loadLawDefinitions(const commonItems::ModFilesystem& 
 	LawLoader loader;
 	loader.loadLaws(modFS);
 	lawMapper.loadLawDefinitions(loader.getLaws());
+}
+
+void V3::PoliticalManager::loadDiplomaticMapperRules(const std::string& filePath)
+{
+	diplomaticMapper.loadMappingRules(filePath);
 }
 
 void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries)
@@ -324,4 +330,114 @@ void V3::PoliticalManager::grantLawFromGroup(const std::string& lawGroup, const 
 {
 	if (const auto law = lawMapper.grantLawFromGroup(lawGroup, *country); law)
 		country->addLaw(*law);
+}
+
+void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>& eu4Agreements)
+{
+	Log(LogLevel::Info) << "-> Transcribing diplomatic agreements.";
+
+	for (auto& agreement: eu4Agreements)
+	{
+		auto EU4Tag1 = agreement.getOriginTag();
+		auto ifV3Tag1 = countryMapper->getV3Tag(EU4Tag1);
+		if (!ifV3Tag1)
+			continue;
+		auto V3Tag1 = *ifV3Tag1;
+
+		auto EU4Tag2 = agreement.getTargetTag();
+		auto ifV3Tag2 = countryMapper->getV3Tag(EU4Tag2);
+		if (!ifV3Tag2)
+			continue;
+		auto V3Tag2 = *ifV3Tag2;
+
+		const auto& country1 = countries.find(V3Tag1);
+		const auto& country2 = countries.find(V3Tag2);
+		if (country1 == countries.end())
+		{
+			Log(LogLevel::Warning) << "Vic3 country " << V3Tag1 << " used in diplomatic agreement doesn't exist";
+			continue;
+		}
+		if (country2 == countries.end())
+		{
+			Log(LogLevel::Warning) << "Vic3 country " << V3Tag2 << " used in diplomatic agreement doesn't exist";
+			continue;
+		}
+
+		// Don't create for/with nations that didn't survive province conversion!
+		if (country1->second->getSubStates().empty())
+			continue;
+		if (country2->second->getSubStates().empty())
+			continue;
+
+		auto& r1 = country1->second->getRelation(V3Tag2); // relation TO target
+		auto& r2 = country2->second->getRelation(V3Tag1); // relation TO source
+
+		Agreement newAgreement;
+		newAgreement.first = V3Tag1;
+		newAgreement.second = V3Tag2;
+		newAgreement.start_date = agreement.getStartDate();
+
+		if (diplomaticMapper.isAgreementInDominions(agreement.getAgreementType()))
+		{
+			newAgreement.type = "dominion";
+			r1.increaseRelations(10);
+			r2.increaseRelations(10);
+		}
+		if (diplomaticMapper.isAgreementInProtectorates(agreement.getAgreementType()))
+		{
+			newAgreement.type = "protectorate";
+			r1.increaseRelations(-15);
+			r2.increaseRelations(-15);
+		}
+		if (diplomaticMapper.isAgreementInDefensivePacts(agreement.getAgreementType()))
+		{
+			newAgreement.type = "defensive_pact";
+			r1.increaseRelations(15);
+			r2.increaseRelations(15);
+		}
+		if (diplomaticMapper.isAgreementInTributaries(agreement.getAgreementType()))
+		{
+			newAgreement.type = "tributary";
+			r1.increaseRelations(-15);
+			r2.increaseRelations(-15);
+		}
+		if (diplomaticMapper.isAgreementInPersonalUnions(agreement.getAgreementType()))
+		{
+			newAgreement.type = "personal_union";
+		}
+		if (diplomaticMapper.isAgreementInPuppets(agreement.getAgreementType()))
+		{
+			newAgreement.type = "puppet";
+		}
+		if (diplomaticMapper.isAgreementInVassals(agreement.getAgreementType()))
+		{
+			newAgreement.type = "vassal";
+			r1.increaseRelations(-5);
+			r2.increaseRelations(-5);
+		}
+		if (diplomaticMapper.isAgreementInDoubleRelationshipBoosts(agreement.getAgreementType()))
+		{
+			r1.increaseRelations(25);
+			r2.increaseRelations(25);
+		}
+		if (diplomaticMapper.isAgreementInDoubleDefensivePacts(agreement.getAgreementType()))
+		{
+			r1.increaseRelations(25);
+			r2.increaseRelations(25);
+			newAgreement.type = "defensive_pact";
+		}
+
+		// store agreement
+		if (!newAgreement.type.empty())
+			agreements.push_back(newAgreement);
+
+		if (diplomaticMapper.isAgreementInDoubleDefensivePacts(agreement.getAgreementType()))
+		{
+			newAgreement.first = V3Tag2;
+			newAgreement.second = V3Tag1;
+			newAgreement.type = "defensive_pact";
+			agreements.push_back(newAgreement);
+		}
+	}
+	Log(LogLevel::Info) << "<> Transcribed " << agreements.size() << " agreements.";
 }

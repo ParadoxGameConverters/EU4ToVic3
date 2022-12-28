@@ -146,6 +146,7 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListMapper\NameListMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapping.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\DiplomaticMapper\DiplomaticMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\LawMapper\LawGroup.cpp" />
@@ -258,8 +259,8 @@
     <ClCompile Include="EU4WorldTests\RegionManagerTests\SuperRegionTests.cpp" />
     <ClCompile Include="EU4WorldTests\WarParserTests\WarDetailsTests.cpp" />
     <ClCompile Include="EU4WorldTests\WarParserTests\WarParserTests.cpp" />
-    <ClCompile Include="MapperTests\ColonialRegionMapper\ColonialRegionMapperTests.cpp" />
-    <ClCompile Include="MapperTests\ColonialRegionMapper\ColonialRegionMappingTests.cpp" />
+    <ClCompile Include="MapperTests\ColonialRegionMapperTests\ColonialRegionMapperTests.cpp" />
+    <ClCompile Include="MapperTests\ColonialRegionMapperTests\ColonialRegionMappingTests.cpp" />
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMapperTests.cpp" />
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMappingTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureDefinitionLoaderTests\CultureDefinitionEntryTests.cpp" />
@@ -274,6 +275,7 @@
     <ClCompile Include="MapperTests\CultureMapperTests\NameListMapperTests\NameListMappingTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\WesternizationMapperTests\WesternizationMapperTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\WesternizationMapperTests\WesternizationMappingTests.cpp" />
+    <ClCompile Include="MapperTests\DiplomaticMapperTests\DiplomaticMapperTests.cpp" />
     <ClCompile Include="MapperTests\IdeaEffectsMapperTests\IdeaEffectsMapperTests.cpp" />
     <ClCompile Include="MapperTests\IdeaEffectsMapperTests\IdeaEffectsMappingTests.cpp" />
     <ClCompile Include="MapperTests\LawMapperTests\LawGroupTests.cpp" />
@@ -600,6 +602,11 @@
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\law_map.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\diplomatic_map.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>

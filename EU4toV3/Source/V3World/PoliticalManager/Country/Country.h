@@ -5,6 +5,7 @@
 #include "DatingData.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
 #include "Parser.h"
+#include "PoliticalManager/Diplomacy/Relation.h"
 #include <memory>
 #include <string>
 
@@ -53,6 +54,7 @@ struct ProcessedData
 	double industryFactor = 1.0;
 	mappers::IdeaEffect ideaEffect;
 	std::set<std::string> techs;
+	std::map<std::string, Relation> relations;
 
 	std::string name;
 	std::string adjective;
@@ -101,6 +103,7 @@ class Country: commonItems::parser
 		 const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore);
 	void addLaw(const auto& lawName) { processedData.laws.emplace(lawName); }
+	[[nodiscard]] Relation& getRelation(const std::string& target);
 
 	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
 	[[nodiscard]] int getTechInfraCap() const { return 0; }

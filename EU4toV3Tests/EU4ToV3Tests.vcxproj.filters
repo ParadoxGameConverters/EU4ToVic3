@@ -697,12 +697,6 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialRegionMapper\ColonialRegionMapping.cpp">
       <Filter>ConverterFiles\Mappers\ColonialRegionMapper</Filter>
     </ClCompile>
-    <ClCompile Include="MapperTests\ColonialRegionMapper\ColonialRegionMapperTests.cpp">
-      <Filter>MapperTests\ColonialRegionMapperTests</Filter>
-    </ClCompile>
-    <ClCompile Include="MapperTests\ColonialRegionMapper\ColonialRegionMappingTests.cpp">
-      <Filter>MapperTests\ColonialRegionMapperTests</Filter>
-    </ClCompile>
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapper.cpp">
       <Filter>ConverterFiles\Mappers\CultureMapper\WesternizationMapper</Filter>
     </ClCompile>
@@ -786,6 +780,18 @@
     </ClCompile>
     <ClCompile Include="MapperTests\LawMapperTests\LawMappingTests.cpp">
       <Filter>MapperTests\LawMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\ColonialRegionMapperTests\ColonialRegionMapperTests.cpp">
+      <Filter>MapperTests\ColonialRegionMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\ColonialRegionMapperTests\ColonialRegionMappingTests.cpp">
+      <Filter>MapperTests\ColonialRegionMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\DiplomaticMapperTests\DiplomaticMapperTests.cpp">
+      <Filter>MapperTests\DiplomaticMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\DiplomaticMapper\DiplomaticMapper.cpp">
+      <Filter>ConverterFiles\Mappers\DiplomaticMapper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1278,6 +1284,12 @@
     <Filter Include="MapperTests\LawMapperTests">
       <UniqueIdentifier>{28e5c0b1-22e4-406e-a7e8-583101adf313}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MapperTests\DiplomaticMapperTests">
+      <UniqueIdentifier>{a4ec3f65-92bf-43a1-a289-c8cee0dfe4ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\Mappers\DiplomaticMapper">
+      <UniqueIdentifier>{1ebd8397-46cc-4b67-b1f4-5673e94cb607}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1451,6 +1463,9 @@
       <Filter>TestFiles\vic3installation\game\common\laws</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\law_map.txt">
+      <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\diplomatic_map.txt">
       <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>

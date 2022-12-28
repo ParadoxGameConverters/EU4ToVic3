@@ -2,6 +2,8 @@
 #define POLITICAL_MANAGER_H
 #include "Configuration.h"
 #include "DatingData.h"
+#include "Diplomacy/Agreement.h"
+#include "DiplomaticMapper/DiplomaticMapper.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
 #include "LawMapper/LawMapper.h"
 #include "ModLoader/ModFilesystem.h"
@@ -14,6 +16,7 @@
 
 namespace EU4
 {
+class EU4Agreement;
 class EU4LocalizationLoader;
 class Country;
 class CultureLoader;
@@ -47,6 +50,7 @@ class PoliticalManager
 	void loadTechSetupMapperRules(const std::string& filePath);
 	void loadLawMapperRules(const std::string& filePath);
 	void loadLawDefinitions(const commonItems::ModFilesystem& modFS);
+	void loadDiplomaticMapperRules(const std::string& filePath);
 	void importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries);
 	void generateDecentralizedCountries(const ClayManager& clayManager, const PopManager& popManager);
 	void convertAllCountries(const ClayManager& clayManager,
@@ -67,6 +71,8 @@ class PoliticalManager
 		 const DatingData& datingData);
 	void setupTech();
 	void setupLaws();
+	void convertDiplomacy(const std::vector<EU4::EU4Agreement>& agreements);
+	[[nodiscard]] const auto& getAgreements() const { return agreements; }
 
   private:
 	void generateDecentralizedCountry(const std::string& culture, const std::vector<std::shared_ptr<SubState>>& subStates);
@@ -75,12 +81,14 @@ class PoliticalManager
 	void grantLawFromGroup(const std::string& lawGroup, const std::shared_ptr<Country>& country) const;
 
 	std::map<std::string, std::shared_ptr<Country>> countries;
+	std::vector<Agreement> agreements;
 
 	std::shared_ptr<mappers::CountryMapper> countryMapper;
 	mappers::PopulationSetupMapper populationSetupMapper;
 	mappers::IdeaEffectsMapper ideaEffectMapper;
 	mappers::TechSetupMapper techSetupMapper;
 	mappers::LawMapper lawMapper;
+	mappers::DiplomaticMapper diplomaticMapper;
 };
 } // namespace V3
 #endif // POLITICAL_MANAGER_H
