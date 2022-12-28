@@ -100,6 +100,7 @@ class Country: commonItems::parser
 		 const DatingData& datingData,
 		 const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore);
+	void addLaw(const auto& lawName) { processedData.laws.emplace(lawName); }
 
 	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
 	[[nodiscard]] int getTechInfraCap() const { return 0; }

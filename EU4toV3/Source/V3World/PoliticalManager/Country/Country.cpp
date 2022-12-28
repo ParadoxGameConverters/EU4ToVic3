@@ -114,6 +114,10 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 
 	// idea effects.
 	processedData.ideaEffect = ideaEffectMapper.getEffectForIdeas(sourceCountry->getNationalIdeas());
+
+	// slavery - we're setting this law right here and now as it's a base for further laws later when we have techs.
+	if (sourceCountry->hasModifier("the_abolish_slavery_act"))
+		processedData.laws.emplace("law_slavery_banned");
 }
 
 void V3::Country::convertTier()

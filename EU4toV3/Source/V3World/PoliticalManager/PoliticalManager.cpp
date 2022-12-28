@@ -5,6 +5,7 @@
 #include "Country/Country.h"
 #include "CountryManager/EU4Country.h"
 #include "Loaders/CountryDefinitionLoader/CountryDefinitionLoader.h"
+#include "Loaders/LawLoader/LawLoader.h"
 #include "Log.h"
 #include "Mappers/CountryMapper/CountryMapper.h"
 #include "PopManager/PopManager.h"
@@ -42,6 +43,18 @@ void V3::PoliticalManager::loadIdeaEffectMapperRules(const std::string& filePath
 void V3::PoliticalManager::loadTechSetupMapperRules(const std::string& filePath)
 {
 	techSetupMapper.loadMappingRules(filePath);
+}
+
+void V3::PoliticalManager::loadLawMapperRules(const std::string& filePath)
+{
+	lawMapper.loadMappingRules(filePath);
+}
+
+void V3::PoliticalManager::loadLawDefinitions(const commonItems::ModFilesystem& modFS)
+{
+	LawLoader loader;
+	loader.loadLaws(modFS);
+	lawMapper.loadLawDefinitions(loader.getLaws());
 }
 
 void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries)
@@ -269,4 +282,46 @@ void V3::PoliticalManager::setupTech()
 	}
 
 	Log(LogLevel::Info) << "<> " << counter << " countries initialized.";
+}
+
+void V3::PoliticalManager::setupLaws()
+{
+	Log(LogLevel::Info) << "-> Setting up laws for landed EU4 countries.";
+	auto counter = 0;
+	for (const auto& country: countries | std::views::values)
+	{
+		if (!TechValues::isValidCountryForTechConversion(*country))
+			continue;
+
+		// ORDER matters! We can set some laws without having other blocking them if we set them first.
+		// We go by what's *important*. Political first!
+		grantLawFromGroup("lawgroup_governance_principles", country);
+		grantLawFromGroup("lawgroup_distribution_of_power", country);
+		grantLawFromGroup("lawgroup_slavery", country);
+		grantLawFromGroup("lawgroup_citizenship", country);
+		grantLawFromGroup("lawgroup_church_and_state", country);
+		grantLawFromGroup("lawgroup_economic_system", country);
+		grantLawFromGroup("lawgroup_bureaucracy", country);
+		grantLawFromGroup("lawgroup_army_model", country);
+		grantLawFromGroup("lawgroup_taxation", country);
+		grantLawFromGroup("lawgroup_trade_policy", country);
+		grantLawFromGroup("lawgroup_internal_security", country);
+		grantLawFromGroup("lawgroup_migration", country);
+		grantLawFromGroup("lawgroup_policing", country);
+		grantLawFromGroup("lawgroup_rights_of_women", country);
+		// Social LAST.
+		grantLawFromGroup("lawgroup_education_system", country);
+		grantLawFromGroup("lawgroup_labor_rights", country);
+		grantLawFromGroup("lawgroup_free_speech", country);
+		grantLawFromGroup("lawgroup_health_system", country);
+		grantLawFromGroup("lawgroup_welfare", country);
+		++counter;
+	}
+	Log(LogLevel::Info) << "<> " << counter << " countries codified.";
+}
+
+void V3::PoliticalManager::grantLawFromGroup(const std::string& lawGroup, const std::shared_ptr<Country>& country) const
+{
+	if (const auto law = lawMapper.grantLawFromGroup(lawGroup, *country); law)
+		country->addLaw(*law);
 }

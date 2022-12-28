@@ -13,6 +13,7 @@ struct IdeaEffect
 	int adm = 0;
 	int dip = 0;
 	int mil = 0;
+	std::set<std::string> rulingInterestGroups;
 	std::set<std::string> boostedInterestGroups;
 	std::set<std::string> suppressedInterestGroups;
 };
