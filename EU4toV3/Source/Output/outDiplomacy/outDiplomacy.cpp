@@ -68,22 +68,38 @@ void OUT::exportPacts(const std::string& outputName, const std::vector<V3::Agree
 	std::ofstream subjects("output/" + outputName + "/common/history/diplomacy/00_subject_relationships.txt");
 	if (!subjects.is_open())
 		throw std::runtime_error("Could not create " + outputName + "/common/history/diplomacy/00_subject_relationships.txt");
+	std::ofstream trades("output/" + outputName + "/common/history/diplomacy/00_trade_agreement.txt");
+	if (!trades.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/history/00_trade_agreement.txt");
+	std::ofstream customs("output/" + outputName + "/common/history/diplomacy/00_customs_union.txt");
+	if (!customs.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/history/diplomacy/00_customs_union.txt");
 
 	defensivePacts << commonItems::utf8BOM << "DIPLOMACY = {\n";
 	subjects << commonItems::utf8BOM << "DIPLOMACY = {\n";
+	trades << commonItems::utf8BOM << "DIPLOMACY = {\n";
+	customs << commonItems::utf8BOM << "DIPLOMACY = {\n";
 
 	for (const auto& agreement: agreements)
 	{
 		if (agreement.type == "defensive_pact")
 			outAgreement(defensivePacts, agreement);
+		if (agreement.type == "trade_agreement")
+			outAgreement(trades, agreement);
+		if (agreement.type == "customs_union")
+			outAgreement(customs, agreement);
 		else
 			outAgreement(subjects, agreement);
 	}
 
 	defensivePacts << "}\n";
 	subjects << "}\n";
+	trades << "}\n";
+	customs << "}\n";
 	defensivePacts.close();
 	subjects.close();
+	trades.close();
+	customs.close();
 }
 
 void OUT::exportRelations(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)

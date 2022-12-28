@@ -18,6 +18,8 @@ class DiplomaticMapper: commonItems::parser
 	[[nodiscard]] auto isAgreementInPersonalUnions(const std::string& agreement) const { return personalUnions.contains(agreement); }
 	[[nodiscard]] auto isAgreementInPuppets(const std::string& agreement) const { return puppets.contains(agreement); }
 	[[nodiscard]] auto isAgreementInVassals(const std::string& agreement) const { return vassals.contains(agreement); }
+	[[nodiscard]] auto isAgreementInTradeAgreements(const std::string& agreement) const { return tradeAgreements.contains(agreement); }
+	[[nodiscard]] auto isAgreementInCustomsUnions(const std::string& agreement) const { return customsUnions.contains(agreement); }
 	[[nodiscard]] auto isAgreementInDoubleRelationshipBoosts(const std::string& agreement) const { return doubleRelationshipBoosts.contains(agreement); }
 	[[nodiscard]] auto isAgreementInDoubleDefensivePacts(const std::string& agreement) const { return doubleDefensivePacts.contains(agreement); }
 
@@ -31,6 +33,8 @@ class DiplomaticMapper: commonItems::parser
 	std::set<std::string> personalUnions;
 	std::set<std::string> puppets;
 	std::set<std::string> vassals;
+	std::set<std::string> tradeAgreements;
+	std::set<std::string> customsUnions;
 	std::set<std::string> doubleRelationshipBoosts;
 	std::set<std::string> doubleDefensivePacts;
 };

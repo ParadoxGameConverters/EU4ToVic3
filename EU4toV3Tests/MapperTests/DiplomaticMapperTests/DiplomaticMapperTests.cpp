@@ -15,6 +15,8 @@ TEST(Mappers_DiplomaticMapperTests, agreementsCanBeLoadedAndMatched)
 	EXPECT_TRUE(mapper.isAgreementInVassals("vassal"));
 	EXPECT_TRUE(mapper.isAgreementInDoubleRelationshipBoosts("royal_marriage"));
 	EXPECT_TRUE(mapper.isAgreementInDoubleDefensivePacts("alliance"));
+	EXPECT_TRUE(mapper.isAgreementInTradeAgreements("transfer_trade_power"));
+	EXPECT_TRUE(mapper.isAgreementInCustomsUnions("steer_trade"));
 }
 
 TEST(Mappers_DiplomaticMapperTests, agreementsCanBeMisMatched)
@@ -30,4 +32,6 @@ TEST(Mappers_DiplomaticMapperTests, agreementsCanBeMisMatched)
 	EXPECT_FALSE(mapper.isAgreementInVassals("vassal"));
 	EXPECT_FALSE(mapper.isAgreementInDoubleRelationshipBoosts("royal_marriage"));
 	EXPECT_FALSE(mapper.isAgreementInDoubleDefensivePacts("alliance"));
+	EXPECT_FALSE(mapper.isAgreementInTradeAgreements("transfer_trade_power"));
+	EXPECT_FALSE(mapper.isAgreementInCustomsUnions("steer_trade"));
 }

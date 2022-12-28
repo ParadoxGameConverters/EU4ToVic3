@@ -377,7 +377,7 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 		newAgreement.first = V3Tag1;
 		newAgreement.second = V3Tag2;
 		newAgreement.start_date = agreement.getStartDate();
-
+		Log(LogLevel::Debug) << agreement.getAgreementType() << " - " << V3Tag1 << "- " << V3Tag2;
 		if (diplomaticMapper.isAgreementInDominions(agreement.getAgreementType()))
 		{
 			newAgreement.type = "dominion";
@@ -426,6 +426,20 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 			r1.increaseRelations(25);
 			r2.increaseRelations(25);
 			newAgreement.type = "defensive_pact";
+		}
+		if (diplomaticMapper.isAgreementInTradeAgreements(agreement.getAgreementType()))
+		{
+			r1.increaseRelations(25);
+			r2.increaseRelations(25);
+			newAgreement.type = "trade_agreement";
+			Log(LogLevel::Debug) << newAgreement.type << " - " << V3Tag1 << "- " << V3Tag2;
+		}
+		if (diplomaticMapper.isAgreementInCustomsUnions(agreement.getAgreementType()))
+		{
+			r1.increaseRelations(25);
+			r2.increaseRelations(25);
+			newAgreement.type = "customs_union";
+			Log(LogLevel::Debug) << newAgreement.type << " - " << V3Tag1 << "- " << V3Tag2;
 		}
 
 		// store agreement

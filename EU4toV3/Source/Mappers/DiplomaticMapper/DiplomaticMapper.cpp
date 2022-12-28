@@ -41,6 +41,14 @@ void mappers::DiplomaticMapper::registerKeys()
 		const auto theList = commonItems::getStrings(theStream);
 		vassals.insert(theList.begin(), theList.end());
 	});
+	registerKeyword("trade_agreement", [this](std::istream& theStream) {
+		const auto theList = commonItems::getStrings(theStream);
+		tradeAgreements.insert(theList.begin(), theList.end());
+	});
+	registerKeyword("customs_union", [this](std::istream& theStream) {
+		const auto theList = commonItems::getStrings(theStream);
+		customsUnions.insert(theList.begin(), theList.end());
+	});
 	registerKeyword("double_relationship_boost", [this](std::istream& theStream) {
 		const auto theList = commonItems::getStrings(theStream);
 		doubleRelationshipBoosts.insert(theList.begin(), theList.end());
