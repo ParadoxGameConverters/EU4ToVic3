@@ -1,4 +1,7 @@
 #include "EconomyManager.h"
+#include "Building/Building.h"
+#include "Building/ProductionMethods/ProductionMethod.h"
+#include "Building/ProductionMethods/ProductionMethodGroup.h"
 #include "ClayManager/State/State.h"
 #include "ClayManager/State/StateModifier.h"
 #include "ClayManager/State/SubState.h"
@@ -15,10 +18,6 @@
 #include <iomanip>
 #include <numeric>
 #include <ranges>
-
-#include "Building/Building.h"
-#include "Building/ProductionMethods/ProductionMethod.h"
-#include "Building/ProductionMethods/ProductionMethodGroup.h"
 
 void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
 {
@@ -240,6 +239,7 @@ void V3::EconomyManager::buildBuildings() const
 void V3::EconomyManager::backfillBureaucracy() const
 {
 	// We are ignoring the tech requirement for buildings in this one case for game balance reasons
+	// Turns out game kills history buildings that a country does not have the tech to build
 
 	for (const auto& country: centralizedCountries)
 	{
@@ -326,7 +326,8 @@ std::optional<std::string> V3::EconomyManager::pickBureaucracyPM(const std::shar
 					continue;
 				}
 
-				if (PM->getBureaucracy() > best->getBureaucracy())
+				// Update best if the PM has a higher bureaucracy value
+				if (!best || PM->getBureaucracy() > best->getBureaucracy())
 					best = PM;
 			}
 			else
@@ -340,7 +341,7 @@ std::optional<std::string> V3::EconomyManager::pickBureaucracyPM(const std::shar
 		Log(LogLevel::Error) << "pmg_base_building_government_administration: Not in loaded Production Method Groups";
 	}
 
-	if (best->getName() != "")
+	if (best)
 	{
 		return best->getName();
 	}

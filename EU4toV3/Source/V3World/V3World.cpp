@@ -106,6 +106,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	// Convert Army and Navy
 
 	Log(LogLevel::Progress) << "59 %";
+	economyManager.loadCentralizedStates(politicalManager.getCountries());
+	economyManager.loadBuildingInformation(allFS);
 	economyManager.backfillBureaucracy();
 	economyManager.setPMs();
 

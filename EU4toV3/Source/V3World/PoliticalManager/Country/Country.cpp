@@ -44,6 +44,8 @@ void V3::Country::initializeCountry(std::istream& theStream)
 
 std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop(const double percentile) const
 {
+	// Ranks this country's substates by population then returns the top x% of them by population, the largest state will always be returned.
+
 	auto sortedSubstates(substates);
 
 	// descending order
@@ -53,7 +55,7 @@ std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop
 
 	std::ranges::sort(sortedSubstates, popComparison);
 
-	const int numTopSubstates = static_cast<int>(static_cast<double>(sortedSubstates.size()) * percentile);
+	const int numTopSubstates = std::max(static_cast<int>(static_cast<double>(sortedSubstates.size()) * percentile), 1);
 
 	return std::vector<std::shared_ptr<V3::SubState>>{sortedSubstates.begin(), sortedSubstates.begin() + numTopSubstates};
 }

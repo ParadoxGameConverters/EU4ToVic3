@@ -46,9 +46,9 @@ class EconomyManager
 {
   public:
 	EconomyManager() = default;
+	void loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries);
 	void backfillBureaucracy() const;
 
-	void loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries);
 	void assignCountryCPBudgets(Configuration::ECONOMY economyType, const PoliticalManager& politicalManager) const;
 	void loadTerrainModifierMatrices();
 	void assignSubStateCPBudgets(Configuration::ECONOMY economyType, const std::map<std::string, std::shared_ptr<StateModifier>>& stateTraits) const;

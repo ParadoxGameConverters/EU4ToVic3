@@ -37,7 +37,8 @@ void outSubStateBuildings(std::ostream& output, const V3::SubState& subState)
 	output << "\t\tregion_state:" << subState.getOwner()->getTag() << " = {\n";
 	for (const auto& [building, level]: subState.getBuildings())
 	{
-		outBuilding(output, building, level, *subState.getOwner());
+		if (level > 0)
+			outBuilding(output, building, level, *subState.getOwner());
 	}
 	output << "\t\t}\n";
 }
@@ -69,7 +70,6 @@ void OUT::exportBuildings(const std::string& outputName, const std::map<std::str
 			continue;
 		}
 
-		output << commonItems::utf8BOM << "s: " << state->getName() << " = {\n";
 		outStateBuildings(output, *state);
 	}
 	output << "}\n";
