@@ -432,14 +432,15 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 			r1.increaseRelations(25);
 			r2.increaseRelations(25);
 			newAgreement.type = "trade_agreement";
-			Log(LogLevel::Debug) << newAgreement.type << " - " << V3Tag1 << "- " << V3Tag2;
 		}
 		if (diplomaticMapper.isAgreementInCustomsUnions(agreement.getAgreementType()))
 		{
 			r1.increaseRelations(25);
 			r2.increaseRelations(25);
+			// vic3 has this reversed
+			newAgreement.first = V3Tag2;
+			newAgreement.second = V3Tag1;
 			newAgreement.type = "customs_union";
-			Log(LogLevel::Debug) << newAgreement.type << " - " << V3Tag1 << "- " << V3Tag2;
 		}
 
 		// store agreement
@@ -511,6 +512,7 @@ void V3::PoliticalManager::convertTruces(const date& lastEU4Date)
 				continue;
 			if (!isEU4CountryConvertedAndLanded(target))
 				continue;
+			const auto& targetTag = countryMapper->getV3Tag(target);
 
 			auto nominalExpiry = *relation.getTruceExpiry();
 			const int conversionDateDays = lastEU4Date.getYear() * 365 + lastEU4Date.getMonth() * 12 + lastEU4Date.getDay();
@@ -518,7 +520,7 @@ void V3::PoliticalManager::convertTruces(const date& lastEU4Date)
 			const auto remainingTruceDays = nominalExpiry.getYear() * 365 + nominalExpiry.getMonth() * 12 + nominalExpiry.getDay() - conversionDateDays;
 			const auto remainingTruceMonths = static_cast<int>(std::round(static_cast<double>(remainingTruceDays) / 30.417)); // let's .. approximate.
 
-			country->addTruce(target, remainingTruceMonths);
+			country->addTruce(*targetTag, remainingTruceMonths);
 			counter++;
 		}
 	}
