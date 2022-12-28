@@ -61,30 +61,15 @@ void Configuration::registerKeys()
 		configBlock.startDate = static_cast<STARTDATE>(std::stoi(startDateString));
 		Log(LogLevel::Info) << "Start Date: " << startDateString;
 	});
-	registerKeyword("max_literacy", [this](std::istream& theStream) {
-		const auto maxLiteracyString = commonItems::getString(theStream);
-		configBlock.MaxLiteracy = static_cast<double>(std::stoi(maxLiteracyString)) / 100;
-		Log(LogLevel::Info) << "Max Literacy: " << configBlock.MaxLiteracy;
-	});
 	registerKeyword("remove_type", [this](std::istream& theStream) {
 		const auto removeTypeString = commonItems::getString(theStream);
 		configBlock.removeType = static_cast<DEADCORES>(std::stoi(removeTypeString));
-		Log(LogLevel::Info) << "Core Removal: " << removeTypeString;
+		Log(LogLevel::Info) << "Releasables Removal: " << removeTypeString;
 	});
 	registerKeyword("pop_shaping", [this](std::istream& theStream) {
 		const auto popShapingString = commonItems::getString(theStream);
 		configBlock.popShaping = static_cast<POPSHAPES>(std::stoi(popShapingString));
 		Log(LogLevel::Info) << "Pop Shaping: " << popShapingString;
-	});
-	registerKeyword("core_handling", [this](std::istream& theStream) {
-		const auto coreHandlingString = commonItems::getString(theStream);
-		configBlock.coreHandling = static_cast<COREHANDLES>(std::stoi(coreHandlingString));
-		Log(LogLevel::Info) << "Core Handling: " << coreHandlingString;
-	});
-	registerKeyword("pop_shaping_factor", [this](std::istream& theStream) {
-		const auto popShapingFactorString = commonItems::getString(theStream);
-		configBlock.popShapingFactor = static_cast<double>(std::stoi(popShapingFactorString));
-		Log(LogLevel::Info) << "Pop Shaping Factor: " << configBlock.popShapingFactor;
 	});
 	registerKeyword("euro_centrism", [this](std::istream& theStream) {
 		const auto euroCentrismString = commonItems::getString(theStream);
