@@ -2,6 +2,7 @@
 #include "CommonRegexes.h"
 #include "Date.h"
 #include "ParserHelpers.h"
+#include <cmath>
 
 EU4::EU4RelationDetails::EU4RelationDetails(std::istream& theStream)
 {
