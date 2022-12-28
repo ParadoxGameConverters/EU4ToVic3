@@ -56,12 +56,6 @@ jobs:
        rm -rf Release/
        mkdir Release
        
-    - name: "Build frontend"
-      uses: ./Fronter.NET/.github/actions/build_frontend
-      with:
-        fronter_dir: 'Fronter.NET'
-        release_dir: 'Release'
-       
     - name: Build solution
       run: |
        chmod u+x build_linux.sh
