@@ -338,13 +338,13 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 
 	for (auto& agreement: eu4Agreements)
 	{
-		auto EU4Tag1 = agreement.getOriginTag();
+		const auto& EU4Tag1 = agreement.getOriginTag();
 		auto ifV3Tag1 = countryMapper->getV3Tag(EU4Tag1);
 		if (!ifV3Tag1)
 			continue;
 		auto V3Tag1 = *ifV3Tag1;
 
-		auto EU4Tag2 = agreement.getTargetTag();
+		const auto& EU4Tag2 = agreement.getTargetTag();
 		auto ifV3Tag2 = countryMapper->getV3Tag(EU4Tag2);
 		if (!ifV3Tag2)
 			continue;
@@ -386,8 +386,8 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 		if (diplomaticMapper.isAgreementInProtectorates(agreement.getAgreementType()))
 		{
 			newAgreement.type = "protectorate";
-			r1.increaseRelations(-15);
-			r2.increaseRelations(-15);
+			r1.increaseRelations(10);
+			r2.increaseRelations(10);
 		}
 		if (diplomaticMapper.isAgreementInDefensivePacts(agreement.getAgreementType()))
 		{
@@ -398,8 +398,8 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 		if (diplomaticMapper.isAgreementInTributaries(agreement.getAgreementType()))
 		{
 			newAgreement.type = "tributary";
-			r1.increaseRelations(-15);
-			r2.increaseRelations(-15);
+			r1.increaseRelations(10);
+			r2.increaseRelations(10);
 		}
 		if (diplomaticMapper.isAgreementInPersonalUnions(agreement.getAgreementType()))
 		{
@@ -412,8 +412,8 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 		if (diplomaticMapper.isAgreementInVassals(agreement.getAgreementType()))
 		{
 			newAgreement.type = "vassal";
-			r1.increaseRelations(-5);
-			r2.increaseRelations(-5);
+			r1.increaseRelations(10);
+			r2.increaseRelations(10);
 		}
 		if (diplomaticMapper.isAgreementInDoubleRelationshipBoosts(agreement.getAgreementType()))
 		{
