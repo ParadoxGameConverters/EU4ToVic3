@@ -9,53 +9,43 @@ void mappers::DiplomaticMapper::loadMappingRules(const std::string& filePath)
 	registerKeys();
 	parseFile(filePath);
 	clearRegisteredKeywords();
+	Log(LogLevel::Info) << "<> Loaded " << agreementTypes.size() + relationshipBoosts.size() << " categories.";
 }
 
 void mappers::DiplomaticMapper::registerKeys()
 {
-	registerKeyword("dominion", [this](std::istream& theStream) {
-		const auto theList = commonItems::getStrings(theStream);
-		dominions.insert(theList.begin(), theList.end());
+	registerRegex(R"([-+\d]+)", [this](const std::string& boostValue, std::istream& theStream) {
+		try
+		{
+			int boost = std::stoi(boostValue);
+			const auto theList = commonItems::getStrings(theStream);
+			relationshipBoosts.emplace(boost, std::set<std::string>{});
+			relationshipBoosts.at(boost).insert(theList.begin(), theList.end());
+		}
+		catch (std::exception& e)
+		{
+			Log(LogLevel::Error) << "Broken boost value inside diplomatic map: " << boostValue << " - " << e.what();
+		}
 	});
-	registerKeyword("protectorate", [this](std::istream& theStream) {
+	registerRegex(commonItems::catchallRegex, [this](const std::string& agreementType, std::istream& theStream) {
 		const auto theList = commonItems::getStrings(theStream);
-		protectorates.insert(theList.begin(), theList.end());
+		agreementTypes.emplace(agreementType, std::set<std::string>{});
+		agreementTypes.at(agreementType).insert(theList.begin(), theList.end());
 	});
-	registerKeyword("defensive_pact", [this](std::istream& theStream) {
-		const auto theList = commonItems::getStrings(theStream);
-		defensivePacts.insert(theList.begin(), theList.end());
-	});
-	registerKeyword("tributary", [this](std::istream& theStream) {
-		const auto theList = commonItems::getStrings(theStream);
-		tributaries.insert(theList.begin(), theList.end());
-	});
-	registerKeyword("personal_union", [this](std::istream& theStream) {
-		const auto theList = commonItems::getStrings(theStream);
-		personalUnions.insert(theList.begin(), theList.end());
-	});
-	registerKeyword("puppet", [this](std::istream& theStream) {
-		const auto theList = commonItems::getStrings(theStream);
-		puppets.insert(theList.begin(), theList.end());
-	});
-	registerKeyword("vassal", [this](std::istream& theStream) {
-		const auto theList = commonItems::getStrings(theStream);
-		vassals.insert(theList.begin(), theList.end());
-	});
-	registerKeyword("trade_agreement", [this](std::istream& theStream) {
-		const auto theList = commonItems::getStrings(theStream);
-		tradeAgreements.insert(theList.begin(), theList.end());
-	});
-	registerKeyword("customs_union", [this](std::istream& theStream) {
-		const auto theList = commonItems::getStrings(theStream);
-		customsUnions.insert(theList.begin(), theList.end());
-	});
-	registerKeyword("double_relationship_boost", [this](std::istream& theStream) {
-		const auto theList = commonItems::getStrings(theStream);
-		doubleRelationshipBoosts.insert(theList.begin(), theList.end());
-	});
-	registerKeyword("double_defensive_pact", [this](std::istream& theStream) {
-		const auto theList = commonItems::getStrings(theStream);
-		doubleDefensivePacts.insert(theList.begin(), theList.end());
-	});
-	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+}
+
+std::optional<std::string> mappers::DiplomaticMapper::getAgreementType(const std::string& agreement) const
+{
+	for (const auto& [type, agreements]: agreementTypes)
+		if (agreements.contains(agreement))
+			return type;
+	return std::nullopt;
+}
+
+int mappers::DiplomaticMapper::getRelationshipBoost(const std::string& agreement) const
+{
+	for (const auto& [boost, agreements]: relationshipBoosts)
+		if (agreements.contains(agreement))
+			return boost;
+	return 0;
 }

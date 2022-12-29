@@ -378,82 +378,35 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 		newAgreement.second = V3Tag2;
 		newAgreement.start_date = agreement.getStartDate();
 		Log(LogLevel::Debug) << agreement.getAgreementType() << " - " << V3Tag1 << "- " << V3Tag2;
-		if (diplomaticMapper.isAgreementInDominions(agreement.getAgreementType()))
+
+		// translate eu4 to vic3 agreement.
+		if (const auto& newType = diplomaticMapper.getAgreementType(agreement.getAgreementType()); newType)
+			newAgreement.type = *newType;
+
+		// boost relations.
+		const auto boost = diplomaticMapper.getRelationshipBoost(agreement.getAgreementType());
+		r1.increaseRelations(boost);
+		r2.increaseRelations(boost);
+
+		// fix specifics
+		if (newAgreement.type == "customs_union")
 		{
-			newAgreement.type = "dominion";
-			r1.increaseRelations(10);
-			r2.increaseRelations(10);
-		}
-		if (diplomaticMapper.isAgreementInProtectorates(agreement.getAgreementType()))
-		{
-			newAgreement.type = "protectorate";
-			r1.increaseRelations(10);
-			r2.increaseRelations(10);
-		}
-		if (diplomaticMapper.isAgreementInDefensivePacts(agreement.getAgreementType()))
-		{
-			newAgreement.type = "defensive_pact";
-			r1.increaseRelations(15);
-			r2.increaseRelations(15);
-		}
-		if (diplomaticMapper.isAgreementInTributaries(agreement.getAgreementType()))
-		{
-			newAgreement.type = "tributary";
-			r1.increaseRelations(10);
-			r2.increaseRelations(10);
-		}
-		if (diplomaticMapper.isAgreementInPersonalUnions(agreement.getAgreementType()))
-		{
-			newAgreement.type = "personal_union";
-		}
-		if (diplomaticMapper.isAgreementInPuppets(agreement.getAgreementType()))
-		{
-			newAgreement.type = "puppet";
-		}
-		if (diplomaticMapper.isAgreementInVassals(agreement.getAgreementType()))
-		{
-			newAgreement.type = "vassal";
-			r1.increaseRelations(10);
-			r2.increaseRelations(10);
-		}
-		if (diplomaticMapper.isAgreementInDoubleRelationshipBoosts(agreement.getAgreementType()))
-		{
-			r1.increaseRelations(25);
-			r2.increaseRelations(25);
-		}
-		if (diplomaticMapper.isAgreementInDoubleDefensivePacts(agreement.getAgreementType()))
-		{
-			r1.increaseRelations(25);
-			r2.increaseRelations(25);
-			newAgreement.type = "defensive_pact";
-		}
-		if (diplomaticMapper.isAgreementInTradeAgreements(agreement.getAgreementType()))
-		{
-			r1.increaseRelations(25);
-			r2.increaseRelations(25);
-			newAgreement.type = "trade_agreement";
-		}
-		if (diplomaticMapper.isAgreementInCustomsUnions(agreement.getAgreementType()))
-		{
-			r1.increaseRelations(25);
-			r2.increaseRelations(25);
 			// vic3 has this reversed
 			newAgreement.first = V3Tag2;
 			newAgreement.second = V3Tag1;
-			newAgreement.type = "customs_union";
+		}
+		if (newAgreement.type == "double_defensive_pact")
+		{
+			// fix and file twice.
+			newAgreement.type = "defensive_pact";
+			agreements.push_back(newAgreement);
+			newAgreement.first = V3Tag2;
+			newAgreement.second = V3Tag1;
 		}
 
 		// store agreement
 		if (!newAgreement.type.empty())
 			agreements.push_back(newAgreement);
-
-		if (diplomaticMapper.isAgreementInDoubleDefensivePacts(agreement.getAgreementType()))
-		{
-			newAgreement.first = V3Tag2;
-			newAgreement.second = V3Tag1;
-			newAgreement.type = "defensive_pact";
-			agreements.push_back(newAgreement);
-		}
 	}
 	Log(LogLevel::Info) << "<> Transcribed " << agreements.size() << " agreements.";
 }

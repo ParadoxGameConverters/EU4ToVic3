@@ -11,32 +11,14 @@ class DiplomaticMapper: commonItems::parser
 	DiplomaticMapper() = default;
 	void loadMappingRules(const std::string& filePath);
 
-	[[nodiscard]] auto isAgreementInDominions(const std::string& agreement) const { return dominions.contains(agreement); }
-	[[nodiscard]] auto isAgreementInProtectorates(const std::string& agreement) const { return protectorates.contains(agreement); }
-	[[nodiscard]] auto isAgreementInDefensivePacts(const std::string& agreement) const { return defensivePacts.contains(agreement); }
-	[[nodiscard]] auto isAgreementInTributaries(const std::string& agreement) const { return tributaries.contains(agreement); }
-	[[nodiscard]] auto isAgreementInPersonalUnions(const std::string& agreement) const { return personalUnions.contains(agreement); }
-	[[nodiscard]] auto isAgreementInPuppets(const std::string& agreement) const { return puppets.contains(agreement); }
-	[[nodiscard]] auto isAgreementInVassals(const std::string& agreement) const { return vassals.contains(agreement); }
-	[[nodiscard]] auto isAgreementInTradeAgreements(const std::string& agreement) const { return tradeAgreements.contains(agreement); }
-	[[nodiscard]] auto isAgreementInCustomsUnions(const std::string& agreement) const { return customsUnions.contains(agreement); }
-	[[nodiscard]] auto isAgreementInDoubleRelationshipBoosts(const std::string& agreement) const { return doubleRelationshipBoosts.contains(agreement); }
-	[[nodiscard]] auto isAgreementInDoubleDefensivePacts(const std::string& agreement) const { return doubleDefensivePacts.contains(agreement); }
+	[[nodiscard]] std::optional<std::string> getAgreementType(const std::string& agreement) const;
+	[[nodiscard]] int getRelationshipBoost(const std::string& agreement) const;
 
   private:
 	void registerKeys();
 
-	std::set<std::string> dominions;
-	std::set<std::string> protectorates;
-	std::set<std::string> defensivePacts;
-	std::set<std::string> tributaries;
-	std::set<std::string> personalUnions;
-	std::set<std::string> puppets;
-	std::set<std::string> vassals;
-	std::set<std::string> tradeAgreements;
-	std::set<std::string> customsUnions;
-	std::set<std::string> doubleRelationshipBoosts;
-	std::set<std::string> doubleDefensivePacts;
+	std::map<int, std::set<std::string>> relationshipBoosts;
+	std::map<std::string, std::set<std::string>> agreementTypes;
 };
 } // namespace mappers
 
