@@ -22,7 +22,6 @@ class CountryManager: public commonItems::parser
 
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& tag) const;
-	[[nodiscard]] const auto& getHistoricalData() const { return historicalData; }
 	[[nodiscard]] const auto& getLocalizationLoader() const { return localizationLoader; }
 
 	// the prep
@@ -44,9 +43,6 @@ class CountryManager: public commonItems::parser
 	void mergeNations();
 	void filterDeadNations(Configuration::DEADCORES toggle);
 
-	// the dessert
-	void fillHistoricalData();
-
   private:
 	void registerKeys();
 	void uniteJapan();
@@ -60,9 +56,6 @@ class CountryManager: public commonItems::parser
 	CommonCountryLoader commonCountryLoader;
 	mappers::NationMergeMapper nationMergeMapper;
 	EU4LocalizationLoader localizationLoader;
-
-	// export data for hoi4
-	std::vector<std::pair<std::string, HistoricalEntry>> historicalData;
 };
 } // namespace EU4
 

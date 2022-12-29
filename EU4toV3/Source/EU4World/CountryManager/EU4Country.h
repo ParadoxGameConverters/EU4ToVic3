@@ -11,13 +11,6 @@
 
 namespace EU4
 {
-// Export data for hoi4.
-struct HistoricalEntry
-{
-	std::string lastDynasty;
-	bool monarchy = true;
-};
-
 class Country: commonItems::parser
 {
   public:
@@ -67,9 +60,8 @@ class Country: commonItems::parser
 	[[nodiscard]] auto getModifiers() const { return modifiers; }
 	[[nodiscard]] bool hasModifier(const std::string&) const;
 
-	// leaders and armies
-	[[nodiscard]] const auto& getHistoricalLeaders() const { return historicalLeaders; }
-	[[nodiscard]] const auto& getMilitaryLeaders() const { return militaryLeaders; }
+	// characters and armies
+	[[nodiscard]] const auto& getCharacters() const { return filteredCharacters; }
 	[[nodiscard]] const auto& getArmies() const { return armies; }
 
 	// relations
@@ -121,14 +113,12 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getNationalColors() const { return nationalColors; }
 	void setMapColor(const commonItems::Color& color) { nationalColors.setMapColor(color); }
 
-	// botanical expedition
-	[[nodiscard]] const auto& getHistoricalEntry() const { return historicalEntry; }
-
 	// processing
 	[[nodiscard]] bool cultureSurvivesInCores(const std::map<std::string, std::shared_ptr<Country>>& theCountries) const;
 	[[nodiscard]] double getCountryWeight() const;
 	void updateRegimentTypes(const UnitTypeLoader& unitTypeLoader);
 	void eatCountry(const std::shared_ptr<Country>& target);
+	void filterActiveCharacters();
 
   private:
 	void registerKeys();
@@ -137,7 +127,6 @@ class Country: commonItems::parser
 	void determineJapaneseRelations();
 	void clearProvinces();
 	void clearCores();
-	void filterLeaders();
 	void increaseMfgTransfer(const int increase) { mfgTransfer += increase; }
 	void takeArmies(const std::shared_ptr<Country>& target);
 	void clearArmies();
@@ -170,10 +159,14 @@ class Country: commonItems::parser
 	std::set<std::string> flags;
 	std::set<std::string> modifiers;
 
+	int monarchID = 0;
+	int heirID = 0;
+	int consortID = 0;
 	std::set<int> activeLeaderIDs;
-	std::vector<Leader> historicalLeaders; // Historical leader information
-	std::vector<Leader> militaryLeaders;	// filtered active leaders
-	std::vector<EU4Army> armies;				// and navies
+	std::vector<Character> historicalCharacters; // Historical character information
+	std::vector<Character> filteredCharacters;	// filtered active characters
+
+	std::vector<EU4Army> armies; // and navies
 
 	std::map<std::string, EU4RelationDetails> relations;
 	std::set<std::string> rivals;
@@ -208,9 +201,6 @@ class Country: commonItems::parser
 
 	// Colors
 	NationalSymbol nationalColors;
-
-	// Botanical Expedition
-	HistoricalEntry historicalEntry;
 };
 } // namespace EU4
 

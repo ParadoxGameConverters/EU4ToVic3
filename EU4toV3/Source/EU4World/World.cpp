@@ -127,10 +127,6 @@ EU4::World::World(const Configuration& theConfiguration, const commonItems::Conv
 	regionManager.flagNeoCultures(provinceManager);
 	Log(LogLevel::Progress) << "28 %";
 
-	Log(LogLevel::Info) << "-> Equipping Botanical Expedition";
-	countryManager.fillHistoricalData();
-	Log(LogLevel::Progress) << "38 %";
-
 	Log(LogLevel::Info) << "-> Dropping Dead, Empty and/or Coreless Nations";
 	countryManager.filterDeadNations(theConfiguration.configBlock.removeType);
 	Log(LogLevel::Progress) << "39 %";

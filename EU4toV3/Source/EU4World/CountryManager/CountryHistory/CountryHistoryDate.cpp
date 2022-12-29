@@ -2,30 +2,31 @@
 #include "CommonRegexes.h"
 #include "ParserHelpers.h"
 
-EU4::CountryHistoryDate::CountryHistoryDate(std::istream& theStream, const std::string& leaderClass)
+EU4::CountryHistoryDate::CountryHistoryDate(std::istream& theStream)
 {
-	registerKeys(leaderClass);
+	registerKeys();
 	parseStream(theStream);
 	clearRegisteredKeywords();
 }
 
-void EU4::CountryHistoryDate::registerKeys(const std::string& leaderClass)
+void EU4::CountryHistoryDate::registerKeys()
 {
-	registerKeyword("leader", [this](const std::string& unused, std::istream& theStream) {
-		const Leader newLeader(theStream);
-		leaders.push_back(newLeader);
+	registerKeyword("leader", [this](std::istream& theStream) {
+		Leader leader;
+		leader.parseLeader(theStream);
+		characters.push_back(leader.getCharacter());
 	});
-	registerRegex("monarch|heir|queen", [this](const std::string& theLeaderClass, std::istream& theStream) {
-		const CountryHistoryDate lookForLeader(theStream, theLeaderClass);
-		const auto& incLeaders = lookForLeader.getLeaders();
-		leaders.insert(leaders.end(), incLeaders.begin(), incLeaders.end());
-		if (!lookForLeader.dynasty.empty())
-			dynasty = lookForLeader.dynasty;
-	});
-	registerKeyword("dynasty", [this, leaderClass](std::istream& theStream) {
-		const auto& dynastyString = commonItems::getString(theStream);
-		if (leaderClass == "monarch")
-			dynasty = dynastyString;
+	registerRegex("monarch|heir|queen", [this](const std::string& rulerType, std::istream& theStream) {
+		Leader leader;
+		leader.parseRuler(theStream);
+		auto character = leader.getCharacter();
+		if (rulerType == "monarch")
+			character.ruler = true;
+		else if (rulerType == "heir")
+			character.heir = true;
+		else
+			character.consort = true;
+		characters.push_back(character);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

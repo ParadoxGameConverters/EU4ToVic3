@@ -15,11 +15,9 @@ void EU4::CountryHistory::registerKeys()
 	registerSetter("primary_culture", primaryCulture);
 	registerSetter("religion", religion);
 	registerRegex(R"(\d+\.\d+\.\d+)", [this](const std::string& unused, std::istream& theStream) {
-		const CountryHistoryDate theDate(theStream, std::string());
-		auto incLeaders = theDate.getLeaders();
-		leaders.insert(leaders.end(), incLeaders.begin(), incLeaders.end());
-		if (!theDate.getDynasty().empty())
-			dynasty = theDate.getDynasty();
+		const CountryHistoryDate theDate(theStream);
+		auto incCharacters = theDate.getCharacters();
+		characters.insert(characters.end(), incCharacters.begin(), incCharacters.end());
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
