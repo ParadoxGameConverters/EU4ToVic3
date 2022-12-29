@@ -573,12 +573,13 @@ V3::Relation& V3::Country::getRelation(const std::string& target)
 }
 
 void V3::Country::convertCharacters(const mappers::CharacterTraitMapper& characterTraitMapper,
-	 const int ageShift,
+	 const float ageShift,
 	 const ClayManager& clayManager,
 	 mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 const EU4::CultureLoader& cultureLoader,
-	 const EU4::ReligionLoader& religionLoader)
+	 const EU4::ReligionLoader& religionLoader,
+	 const date& conversionDate)
 {
 	bool ruler = false;
 	bool consort = false;
@@ -600,7 +601,8 @@ void V3::Country::convertCharacters(const mappers::CharacterTraitMapper& charact
 			 cultureLoader,
 			 religionLoader,
 			 processedData.capitalStateName,
-			 tag);
+			 tag,
+			 conversionDate);
 		if (character.ruler && ruler && consort)
 			character.married = true;
 

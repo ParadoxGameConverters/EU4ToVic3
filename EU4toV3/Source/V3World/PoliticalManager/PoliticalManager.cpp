@@ -508,19 +508,15 @@ void V3::PoliticalManager::convertCharacters(const date& conversionDate,
 	Log(LogLevel::Info) << "-> Importing Characters.";
 	auto counter = 0;
 
-	int ageShift = 0; // how much do we shift the character's ages forward? We don't want a bunch of 200-year olds.
+	float ageShift = 0; // how much do we shift the character's ages forward? We don't want a bunch of 200-year olds.
 	if (startDate == Configuration::STARTDATE::Vanilla)
-	{
-		const auto startDays = 1836 * 365;
-		const auto conversionDays = conversionDate.getYear() * 365 + conversionDate.getMonth() * 30 + conversionDate.getDay(); // approximating
-		ageShift = static_cast<int>(std::round(static_cast<double>(startDays - conversionDays) / 365.0));
-	}
+		ageShift = date("1836.1.1").diffInYears(conversionDate);
 
 	for (const auto& country: countries | std::views::values)
 	{
 		if (!TechValues::isValidCountryForTechConversion(*country))
 			continue;
-		country->convertCharacters(characterTraitMapper, ageShift, clayManager, cultureMapper, religionMapper, cultureLoader, religionLoader);
+		country->convertCharacters(characterTraitMapper, ageShift, clayManager, cultureMapper, religionMapper, cultureLoader, religionLoader, conversionDate);
 		counter += static_cast<int>(country->getProcessedData().characters.size());
 	}
 	Log(LogLevel::Info) << "<> Imported " << counter << " Characters. Some died along the way. We buried those.";

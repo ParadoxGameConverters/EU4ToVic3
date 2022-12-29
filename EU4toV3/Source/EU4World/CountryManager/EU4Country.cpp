@@ -189,16 +189,14 @@ void EU4::Country::filterActiveCharacters()
 		else if (character.consort && character.monarchID == consortID && !seenMonarchIDs.contains(consortID))
 		{
 			filteredCharacters.push_back(character);
-			if (character.monarchID > 0)
-				seenMonarchIDs.emplace(character.monarchID);
+			seenMonarchIDs.emplace(character.monarchID);
 			if (character.leaderID > 0)
 				seenLeaderIDs.emplace(character.leaderID);
 		}
 		else if (character.heir && character.monarchID == heirID && !seenMonarchIDs.contains(heirID))
 		{
 			filteredCharacters.push_back(character);
-			if (character.monarchID > 0)
-				seenMonarchIDs.emplace(character.monarchID);
+			seenMonarchIDs.emplace(character.monarchID);
 			if (character.leaderID > 0)
 				seenLeaderIDs.emplace(character.leaderID);
 		}

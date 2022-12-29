@@ -25,14 +25,24 @@ struct Character
 	Character() = default;
 	explicit Character(const EU4::Character& character,
 		 const mappers::CharacterTraitMapper& characterTraitMapper,
-		 int ageShift,
+		 float ageShift,
 		 const ClayManager& clayManager,
 		 mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader,
 		 const std::string& capitalStateName,
-		 const std::string& tag);
+		 const std::string& tag,
+		 const date& conversionDate);
+
+	void convertName(const EU4::Character& character);
+	void convertRulership(const EU4::Character& character);
+	void convertLeadership(const EU4::Character& character, const mappers::CharacterTraitMapper& characterTraitMapper);
+	void convertAge(const EU4::Character& character, float ageShift, const date& conversionDate);
+	void convertTraits(const EU4::Character& character, const mappers::CharacterTraitMapper& characterTraitMapper);
+	[[nodiscard]] bool isCharacterDryAndIncompetent(const EU4::Character& character) const;
+	[[nodiscard]] bool isLeaderSemiDryAndHyperCompetent(const EU4::Character& character) const;
+	[[nodiscard]] bool isCharacterSemiDryAndOld(const EU4::Character& character) const;
 
 	std::string firstName; // KEY
 	std::string lastName;  // KEY

@@ -123,3 +123,47 @@ TEST(Mappers_CharacterTraitMapperTests, skillTraitsCombinesRulerAndLeaderTraits)
 
 	EXPECT_THAT(mapper.getSkillTraits(character1), testing::UnorderedElementsAre("expert_colonial_administrator", "expert_defensive_strategist"));
 }
+
+TEST(Mappers_CharacterTraitMapperTests, gratisIncompetenciesCanBeReturned)
+{
+	mappers::CharacterTraitMapper mapper;
+	mapper.loadMappingRules("TestFiles/configurables/character_traits.txt");
+
+	EXPECT_EQ("alcoholic", mapper.getGratisIncompetency(-76));
+	EXPECT_EQ("alcoholic", mapper.getGratisIncompetency(0));
+	EXPECT_EQ("opium_addiction", mapper.getGratisIncompetency(3));
+	EXPECT_EQ("alcoholic", mapper.getGratisIncompetency(4988));
+}
+
+TEST(Mappers_CharacterTraitMapperTests, gratisVeterancyCanBeReturned)
+{
+	mappers::CharacterTraitMapper mapper;
+	mapper.loadMappingRules("TestFiles/configurables/character_traits.txt");
+
+	EXPECT_EQ("beetle_ear", mapper.getGratisVeterancy(-76));
+	EXPECT_EQ("beetle_ear", mapper.getGratisVeterancy(0));
+	EXPECT_EQ("beetle_ear", mapper.getGratisVeterancy(3));
+	EXPECT_EQ("wounded", mapper.getGratisVeterancy(4988));
+}
+
+TEST(Mappers_CharacterTraitMapperTests, gratisAgeismCanBeReturned)
+{
+	mappers::CharacterTraitMapper mapper;
+	mapper.loadMappingRules("TestFiles/configurables/character_traits.txt");
+
+	EXPECT_EQ("cancer", mapper.getGratisAgeism(-76));
+	EXPECT_EQ("cancer", mapper.getGratisAgeism(0));
+	EXPECT_EQ("cancer", mapper.getGratisAgeism(3));
+	EXPECT_EQ("senile", mapper.getGratisAgeism(4988));
+}
+
+TEST(Mappers_CharacterTraitMapperTests, gratisDisordersCanBeReturned)
+{
+	mappers::CharacterTraitMapper mapper;
+	mapper.loadMappingRules("TestFiles/configurables/character_traits.txt");
+
+	EXPECT_EQ("expensive_tastes", mapper.getGratisDisorder(-76));
+	EXPECT_EQ("expensive_tastes", mapper.getGratisDisorder(0));
+	EXPECT_EQ("syphilis", mapper.getGratisDisorder(3));
+	EXPECT_EQ("expensive_tastes", mapper.getGratisDisorder(4988));
+}

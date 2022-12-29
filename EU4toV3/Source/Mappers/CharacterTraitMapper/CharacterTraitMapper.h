@@ -17,6 +17,10 @@ class CharacterTraitMapper: commonItems::parser
 
 	[[nodiscard]] std::optional<std::string> getPersonality(const std::string& eu4Personality) const;
 	[[nodiscard]] std::set<std::string> getSkillTraits(const EU4::Character& eu4Character) const;
+	[[nodiscard]] std::string getGratisIncompetency(int seed) const;
+	[[nodiscard]] std::string getGratisVeterancy(int seed) const;
+	[[nodiscard]] std::string getGratisAgeism(int seed) const;
+	[[nodiscard]] std::string getGratisDisorder(int seed) const;
 
   private:
 	void registerKeys();

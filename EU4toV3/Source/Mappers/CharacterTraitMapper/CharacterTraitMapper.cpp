@@ -97,3 +97,43 @@ std::optional<std::string> mappers::CharacterTraitMapper::matchLeaderSkill(const
 				return match;
 	return std::nullopt;
 }
+
+std::string mappers::CharacterTraitMapper::getGratisIncompetency(int seed) const
+{
+	auto pos = seed;
+	if (pos < 0)
+		pos = 0;
+	if (pos >= static_cast<int>(incompetencies.size()))
+		pos = pos % static_cast<int>(incompetencies.size());
+	return *std::next(incompetencies.begin(), pos);
+}
+
+std::string mappers::CharacterTraitMapper::getGratisVeterancy(int seed) const
+{
+	auto pos = seed;
+	if (pos < 0)
+		pos = 0;
+	if (pos >= static_cast<int>(veterancies.size()))
+		pos = pos % static_cast<int>(veterancies.size());
+	return *std::next(veterancies.begin(), pos);
+}
+
+std::string mappers::CharacterTraitMapper::getGratisAgeism(int seed) const
+{
+	auto pos = seed;
+	if (pos < 0)
+		pos = 0;
+	if (pos >= static_cast<int>(ageisms.size()))
+		pos = pos % static_cast<int>(ageisms.size());
+	return *std::next(ageisms.begin(), pos);
+}
+
+std::string mappers::CharacterTraitMapper::getGratisDisorder(int seed) const
+{
+	auto pos = seed;
+	if (pos < 0)
+		pos = 0;
+	if (pos >= static_cast<int>(disorders.size()))
+		pos = pos % static_cast<int>(disorders.size());
+	return *std::next(disorders.begin(), pos);
+}

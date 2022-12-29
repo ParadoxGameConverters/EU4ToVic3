@@ -116,12 +116,13 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getTruces() const { return processedData.truces; }
 
 	void convertCharacters(const mappers::CharacterTraitMapper& characterTraitMapper,
-		 int ageShift,
+		 float ageShift,
 		 const ClayManager& clayManager,
 		 mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
-		 const EU4::ReligionLoader& religionLoader);
+		 const EU4::ReligionLoader& religionLoader,
+		 const date& conversionDate);
 
 	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
 	[[nodiscard]] int getTechInfraCap() const { return 0; }
