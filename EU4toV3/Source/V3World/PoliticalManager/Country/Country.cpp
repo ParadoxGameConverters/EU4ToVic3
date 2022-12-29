@@ -571,3 +571,39 @@ V3::Relation& V3::Country::getRelation(const std::string& target)
 	const auto& newRelRef = processedData.relations.find(target);
 	return newRelRef->second;
 }
+
+void V3::Country::convertCharacters(const mappers::CharacterTraitMapper& characterTraitMapper,
+	 const int ageShift,
+	 const ClayManager& clayManager,
+	 mappers::CultureMapper& cultureMapper,
+	 const mappers::ReligionMapper& religionMapper,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader)
+{
+	bool ruler = false;
+	bool consort = false;
+	// check for married status.
+	for (const auto& eu4Character: sourceCountry->getCharacters())
+		if (eu4Character.ruler)
+			ruler = true;
+		else if (eu4Character.consort)
+			consort = true;
+
+	for (const auto& eu4Character: sourceCountry->getCharacters())
+	{
+		auto character = Character(eu4Character,
+			 characterTraitMapper,
+			 ageShift,
+			 clayManager,
+			 cultureMapper,
+			 religionMapper,
+			 cultureLoader,
+			 religionLoader,
+			 processedData.capitalStateName,
+			 tag);
+		if (character.ruler && ruler && consort)
+			character.married = true;
+
+		processedData.characters.emplace_back(character);
+	}
+}

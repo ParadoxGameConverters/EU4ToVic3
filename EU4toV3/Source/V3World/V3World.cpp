@@ -36,6 +36,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.loadLawMapperRules("configurables/law_map.txt");
 	politicalManager.loadLawDefinitions(dwFS);
 	politicalManager.loadDiplomaticMapperRules("configurables/diplomatic_map.txt");
+	politicalManager.loadCharacterTraitMapperRules("configurables/character_traits.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	localizationLoader.scrapeLocalizations(dwFS);
 
@@ -100,6 +101,13 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	clayManager.squashAllSubStates(politicalManager);
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);
+	politicalManager.convertCharacters(datingData.lastEU4Date,
+		 configBlock.startDate,
+		 clayManager,
+		 cultureMapper,
+		 religionMapper,
+		 sourceWorld.getCultureLoader(),
+		 sourceWorld.getReligionLoader());
 
 	Log(LogLevel::Info) << "-> Converting Provinces";
 	Log(LogLevel::Progress) << "53 %";

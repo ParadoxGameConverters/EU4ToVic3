@@ -16,11 +16,11 @@ void EU4::CountryHistoryDate::registerKeys()
 		leader.parseLeader(theStream);
 		characters.push_back(leader.getCharacter());
 	});
-	registerRegex("monarch|heir|queen", [this](const std::string& rulerType, std::istream& theStream) {
+	registerRegex("monarch|monarch_heir|heir|queen", [this](const std::string& rulerType, std::istream& theStream) {
 		Leader leader;
 		leader.parseRuler(theStream);
 		auto character = leader.getCharacter();
-		if (rulerType == "monarch")
+		if (rulerType == "monarch" || rulerType == "monarch_heir")
 			character.ruler = true;
 		else if (rulerType == "heir")
 			character.heir = true;

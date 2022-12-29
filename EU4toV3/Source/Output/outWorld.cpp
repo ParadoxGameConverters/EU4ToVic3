@@ -1,6 +1,7 @@
 #include "outWorld.h"
 #include "CommonFunctions.h"
 #include "OSCompatibilityLayer.h"
+#include "outCharacters/outCharacters.h"
 #include "outCountries/outCountries.h"
 #include "outCultures/outCultures.h"
 #include "outDiplomacy/outDiplomacy.h"
@@ -76,6 +77,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	exportCountryNamesAndAdjectives(outputName, world.getPoliticalManager().getCountries());
 	exportReligionLocs(outputName, world.getReligionMapper().getV3ReligionDefinitions());
 	exportCultureLocs(outputName, world.getCultureMapper().getV3CultureDefinitions());
+	exportCharacterLocs(outputName, world.getPoliticalManager().getCountries());
 	Log(LogLevel::Progress) << "91 %";
 
 	Log(LogLevel::Info) << "<- Writing Provinces";
@@ -102,6 +104,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	exportReligions(outputName, world.getReligionMapper().getV3ReligionDefinitions());
 
 	Log(LogLevel::Info) << "<- Writing Pops";
+	exportCharacters(outputName, world.getPoliticalManager().getCountries());
 	exportPops(outputName, world.getClayManager().getStates());
 	Log(LogLevel::Progress) << "97 %";
 

@@ -171,16 +171,44 @@ void EU4::Country::registerKeys()
 
 void EU4::Country::filterActiveCharacters()
 {
-	for (const auto& character: historicalCharacters)
+	// Ruling characters *repeat*. Because they aren't actually characters, they are records of character states at a given time.
+	// Filter out duplicates.
+	std::set<int> seenMonarchIDs;
+	std::set<int> seenLeaderIDs;
+
+	for (auto it = historicalCharacters.rbegin(); it != historicalCharacters.rend(); ++it)
 	{
-		if (character.leaderID > 0 && activeLeaderIDs.contains(character.leaderID))
+		const auto& character = *it;
+		if (character.ruler && monarchID == character.monarchID && !seenMonarchIDs.contains(monarchID))
+		{
 			filteredCharacters.push_back(character);
-		else if (character.ruler && monarchID == character.monarchID)
+			seenMonarchIDs.emplace(monarchID);
+			if (character.leaderID > 0)
+				seenLeaderIDs.emplace(character.leaderID);
+		}
+		else if (character.consort && (character.leaderID == consortID && !seenLeaderIDs.contains(consortID) ||
+													 character.monarchID == consortID && !seenMonarchIDs.contains(consortID))) // unclear which one.
+		{
 			filteredCharacters.push_back(character);
-		else if (character.consort && (character.leaderID == consortID || character.monarchID == consortID)) // unclear which one.
+			if (character.monarchID > 0)
+				seenMonarchIDs.emplace(character.monarchID);
+			if (character.leaderID > 0)
+				seenLeaderIDs.emplace(character.leaderID);
+		}
+		else if (character.heir && (character.leaderID == heirID && !seenLeaderIDs.contains(heirID) ||
+												 character.monarchID == heirID && !seenMonarchIDs.contains(heirID))) // unclear which one.
+		{
 			filteredCharacters.push_back(character);
-		else if (character.heir && (character.leaderID == heirID || character.monarchID == heirID)) // unclear which one.
+			if (character.monarchID > 0)
+				seenMonarchIDs.emplace(character.monarchID);
+			if (character.leaderID > 0)
+				seenLeaderIDs.emplace(character.leaderID);
+		}
+		else if (character.leaderID > 0 && activeLeaderIDs.contains(character.leaderID) && !seenLeaderIDs.contains(character.leaderID))
+		{
 			filteredCharacters.push_back(character);
+			seenLeaderIDs.emplace(character.leaderID);
+		}
 	}
 }
 
