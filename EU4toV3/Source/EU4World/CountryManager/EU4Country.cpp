@@ -186,8 +186,7 @@ void EU4::Country::filterActiveCharacters()
 			if (character.leaderID > 0)
 				seenLeaderIDs.emplace(character.leaderID);
 		}
-		else if (character.consort && (character.leaderID == consortID && !seenLeaderIDs.contains(consortID) ||
-													 character.monarchID == consortID && !seenMonarchIDs.contains(consortID))) // unclear which one.
+		else if (character.consort && character.monarchID == consortID && !seenMonarchIDs.contains(consortID))
 		{
 			filteredCharacters.push_back(character);
 			if (character.monarchID > 0)
@@ -195,8 +194,7 @@ void EU4::Country::filterActiveCharacters()
 			if (character.leaderID > 0)
 				seenLeaderIDs.emplace(character.leaderID);
 		}
-		else if (character.heir && (character.leaderID == heirID && !seenLeaderIDs.contains(heirID) ||
-												 character.monarchID == heirID && !seenMonarchIDs.contains(heirID))) // unclear which one.
+		else if (character.heir && character.monarchID == heirID && !seenMonarchIDs.contains(heirID))
 		{
 			filteredCharacters.push_back(character);
 			if (character.monarchID > 0)
@@ -206,6 +204,7 @@ void EU4::Country::filterActiveCharacters()
 		}
 		else if (character.leaderID > 0 && activeLeaderIDs.contains(character.leaderID) && !seenLeaderIDs.contains(character.leaderID))
 		{
+			// rulers and heirs that are also leaders have already been added so they won't replicate here.
 			filteredCharacters.push_back(character);
 			seenLeaderIDs.emplace(character.leaderID);
 		}

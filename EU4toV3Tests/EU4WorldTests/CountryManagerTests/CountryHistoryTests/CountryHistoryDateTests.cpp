@@ -46,6 +46,7 @@ TEST(EU4World_CountryHistoryDateTests, monarchLeaderAndDynastyCanBeLoaded)
 	EXPECT_EQ("Boby", leader.name);
 	EXPECT_EQ("Bobbypants", leader.dynasty);
 	EXPECT_EQ("Boby 1st of Bobbypants", leader.leaderName);
+	EXPECT_TRUE(leader.ruler);
 }
 
 TEST(EU4World_CountryHistoryDateTests, heirAndQueenCanBeLoaded)
@@ -55,14 +56,14 @@ TEST(EU4World_CountryHistoryDateTests, heirAndQueenCanBeLoaded)
 	input << "\tname = Boby\n";
 	input << "\tdynasty = Bobbypants\n";
 	input << "\tleader = {\n";
-	input << "\t\tname=\"Boby 1st of Bobbypants\"\n";
+	input << "\t\tname=\"Queen 1st of Bobbypants\"\n";
 	input << "\t}\n";
 	input << "}\n";
 	input << "heir = {\n";
 	input << "\tname = Boby\n";
 	input << "\tdynasty = Bobbypants\n";
 	input << "\tleader = {\n";
-	input << "\t\tname=\"Boby 2nd of Bobbypants\"\n";
+	input << "\t\tname=\"Heir 2nd of Bobbypants\"\n";
 	input << "\t}\n";
 	input << "}\n";
 	const EU4::CountryHistoryDate historyDate(input);
@@ -71,8 +72,10 @@ TEST(EU4World_CountryHistoryDateTests, heirAndQueenCanBeLoaded)
 	const auto& leader1 = historyDate.getCharacters()[0];
 	const auto& leader2 = historyDate.getCharacters()[1];
 
-	EXPECT_EQ("Boby 1st of Bobbypants", leader1.leaderName);
+	EXPECT_EQ("Queen 1st of Bobbypants", leader1.leaderName);
+	EXPECT_EQ("Bobbypants", leader1.dynasty);
+	EXPECT_TRUE(leader1.consort);
+	EXPECT_EQ("Heir 2nd of Bobbypants", leader2.leaderName);
 	EXPECT_EQ("Bobbypants", leader2.dynasty);
-	EXPECT_EQ("Boby 1st of Bobbypants", leader1.leaderName);
-	EXPECT_EQ("Bobbypants", leader2.dynasty);
+	EXPECT_TRUE(leader2.heir);
 }

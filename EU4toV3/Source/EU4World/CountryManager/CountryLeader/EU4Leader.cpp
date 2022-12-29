@@ -1,7 +1,6 @@
 #include "EU4Leader.h"
 #include "CommonRegexes.h"
 #include "EU4LeaderID.h"
-#include "Log.h"
 #include "ParserHelpers.h"
 
 void EU4::Leader::parseLeader(std::istream& theStream)
@@ -39,6 +38,10 @@ void EU4::Leader::registerKeys()
 	leaderParser.registerKeyword("id", [this](std::istream& theStream) {
 		const LeaderID theID(theStream);
 		character.leaderID = theID.getIDNum();
+	});
+	leaderParser.registerKeyword("monarch_id", [this](std::istream& theStream) {
+		const LeaderID theID(theStream);
+		character.monarchID = theID.getIDNum();
 	});
 	leaderParser.registerSetter("personality", character.leaderTrait);
 	leaderParser.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);

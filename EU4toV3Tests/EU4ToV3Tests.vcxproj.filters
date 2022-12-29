@@ -808,6 +808,15 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\CharacterTraitMapper\SkillMapping.cpp">
       <Filter>ConverterFiles\Mappers\CharacterTraitMapper</Filter>
     </ClCompile>
+    <ClCompile Include="MapperTests\CharacterTraitMapperTests\AssignmentMappingTests.cpp">
+      <Filter>MapperTests\CharacterTraitMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\CharacterTraitMapperTests\CharacterTraitMapperTests.cpp">
+      <Filter>MapperTests\CharacterTraitMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\CharacterTraitMapperTests\SkillMappingTests.cpp">
+      <Filter>MapperTests\CharacterTraitMapperTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1308,6 +1317,9 @@
     <Filter Include="ConverterFiles\Mappers\CharacterTraitMapper">
       <UniqueIdentifier>{c5bcab25-a70d-4d99-96f4-b2b2cd4f8f99}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MapperTests\CharacterTraitMapperTests">
+      <UniqueIdentifier>{ad7579fe-9dee-4071-b28a-384906519c1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1484,6 +1496,9 @@
       <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\diplomatic_map.txt">
+      <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\character_traits.txt">
       <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>

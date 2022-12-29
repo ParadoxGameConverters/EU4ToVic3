@@ -268,11 +268,49 @@ TEST(EU4World_EU4CountryTests, LeadersCanBeReadAndProcessed)
 	const auto& leader1 = leaders[0];
 	const auto& leader2 = leaders[1];
 
-	EXPECT_EQ("Sir. Still Alive", leader1.leaderName);
-	EXPECT_EQ(6, leader1.maneuver);
+	EXPECT_EQ("His Majesty Still Kicking", leader1.leaderName);
+	EXPECT_TRUE(leader1.ruler);
+	EXPECT_EQ(4, leader1.fire);
 
-	EXPECT_EQ("His Majesty Still Kicking", leader2.leaderName);
-	EXPECT_EQ(4, leader2.fire);
+	EXPECT_EQ("Sir. Still Alive", leader2.leaderName);
+	EXPECT_EQ(6, leader2.maneuver);
+}
+
+TEST(EU4World_EU4CountryTests, DuplicateLeadersAreDitched)
+{
+	std::stringstream input;
+	input << "history={\n";
+	input << "	1751.1.1={\n";
+	input << "		heir={\n";
+	input << "			name=\"I was heir\"\n";
+	input << "			id={\n";
+	input << "				id=1\n";
+	input << "			}\n";
+	input << "			monarch_name=\"I'll be monarch\"\n";
+	input << "		}\n";
+	input << "	}\n";
+	input << "	1768.1.1={\n";
+	input << "		monarch_heir={\n";
+	input << "			name=\"Now I'm monarch\"\n";
+	input << "			id={\n";
+	input << "				id=1\n";
+	input << "			}\n";
+	input << "		}\n";
+	input << "	}\n";
+	input << "}\n";
+	input << "monarch={\n";
+	input << "	id=1\n";
+	input << "}\n";
+
+	const EU4::Country country("TAG", input);
+	const auto& leaders = country.getCharacters();
+
+	ASSERT_EQ(1, leaders.size());
+
+	const auto& leader = leaders[0];
+
+	EXPECT_EQ("Now I'm monarch", leader.name);
+	EXPECT_TRUE(leader.ruler);
 }
 
 TEST(EU4World_EU4CountryTests, ArmiesCanBeLoaded)
