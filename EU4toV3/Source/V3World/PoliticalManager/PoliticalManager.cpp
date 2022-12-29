@@ -4,12 +4,14 @@
 #include "ClayManager/State/SubState.h"
 #include "Country/Country.h"
 #include "CountryManager/EU4Country.h"
+#include "DiplomacyParser/EU4Agreement.h"
 #include "Loaders/CountryDefinitionLoader/CountryDefinitionLoader.h"
 #include "Loaders/LawLoader/LawLoader.h"
 #include "Log.h"
 #include "Mappers/CountryMapper/CountryMapper.h"
 #include "PopManager/PopManager.h"
 #include "TechValues/TechValues.h"
+#include <cmath>
 #include <ranges>
 
 void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFilesystem& modFS)
@@ -55,6 +57,11 @@ void V3::PoliticalManager::loadLawDefinitions(const commonItems::ModFilesystem& 
 	LawLoader loader;
 	loader.loadLaws(modFS);
 	lawMapper.loadLawDefinitions(loader.getLaws());
+}
+
+void V3::PoliticalManager::loadDiplomaticMapperRules(const std::string& filePath)
+{
+	diplomaticMapper.loadMappingRules(filePath);
 }
 
 void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries)
@@ -324,4 +331,164 @@ void V3::PoliticalManager::grantLawFromGroup(const std::string& lawGroup, const 
 {
 	if (const auto law = lawMapper.grantLawFromGroup(lawGroup, *country); law)
 		country->addLaw(*law);
+}
+
+void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>& eu4Agreements)
+{
+	Log(LogLevel::Info) << "-> Transcribing diplomatic agreements.";
+
+	for (auto& agreement: eu4Agreements)
+	{
+		const auto& EU4Tag1 = agreement.getOriginTag();
+		auto ifV3Tag1 = countryMapper->getV3Tag(EU4Tag1);
+		if (!ifV3Tag1)
+			continue;
+		auto V3Tag1 = *ifV3Tag1;
+
+		const auto& EU4Tag2 = agreement.getTargetTag();
+		auto ifV3Tag2 = countryMapper->getV3Tag(EU4Tag2);
+		if (!ifV3Tag2)
+			continue;
+		auto V3Tag2 = *ifV3Tag2;
+
+		const auto& country1 = countries.find(V3Tag1);
+		const auto& country2 = countries.find(V3Tag2);
+		if (country1 == countries.end())
+		{
+			Log(LogLevel::Warning) << "Vic3 country " << V3Tag1 << " used in diplomatic agreement doesn't exist";
+			continue;
+		}
+		if (country2 == countries.end())
+		{
+			Log(LogLevel::Warning) << "Vic3 country " << V3Tag2 << " used in diplomatic agreement doesn't exist";
+			continue;
+		}
+
+		// Don't create for/with nations that didn't survive province conversion!
+		if (country1->second->getSubStates().empty())
+			continue;
+		if (country2->second->getSubStates().empty())
+			continue;
+
+		auto& r1 = country1->second->getRelation(V3Tag2); // relation TO target
+		auto& r2 = country2->second->getRelation(V3Tag1); // relation TO source
+
+		Agreement newAgreement;
+		newAgreement.first = V3Tag1;
+		newAgreement.second = V3Tag2;
+		newAgreement.start_date = agreement.getStartDate();
+		Log(LogLevel::Debug) << agreement.getAgreementType() << " - " << V3Tag1 << "- " << V3Tag2;
+
+		// translate eu4 to vic3 agreement.
+		if (const auto& newType = diplomaticMapper.getAgreementType(agreement.getAgreementType()); newType)
+			newAgreement.type = *newType;
+
+		// boost relations.
+		const auto boost = diplomaticMapper.getRelationshipBoost(agreement.getAgreementType());
+		r1.increaseRelations(boost);
+		r2.increaseRelations(boost);
+
+		// fix specifics
+		if (newAgreement.type == "customs_union")
+		{
+			// vic3 has this reversed
+			newAgreement.first = V3Tag2;
+			newAgreement.second = V3Tag1;
+		}
+		if (newAgreement.type == "double_defensive_pact")
+		{
+			// fix and file twice.
+			newAgreement.type = "defensive_pact";
+			agreements.push_back(newAgreement);
+			newAgreement.first = V3Tag2;
+			newAgreement.second = V3Tag1;
+		}
+
+		// store agreement
+		if (!newAgreement.type.empty())
+			agreements.push_back(newAgreement);
+	}
+	Log(LogLevel::Info) << "<> Transcribed " << agreements.size() << " agreements.";
+}
+
+void V3::PoliticalManager::convertRivals()
+{
+	Log(LogLevel::Info) << "-> Transcribing rivalries.";
+	auto counter = 0;
+
+	for (const auto& [tag, country]: countries)
+	{
+		if (!country->getSourceCountry())
+			continue;
+		if (country->getSubStates().empty())
+			continue;
+		const auto& eu4Rivals = country->getSourceCountry()->getRivals();
+		std::set<std::string> newRivals;
+		for (const auto& rival: eu4Rivals)
+		{
+			if (!isEU4CountryConvertedAndLanded(rival))
+				continue;
+
+			const auto& rivalTag = countryMapper->getV3Tag(rival);
+			const auto& rivalCountry = countries.at(*rivalTag);
+			if (rivalCountry->getSubStates().empty())
+				continue;
+
+			auto& r1 = country->getRelation(*rivalTag);
+			auto& r2 = rivalCountry->getRelation(tag);
+
+			r1.increaseRelations(-100);
+			r2.increaseRelations(-100);
+
+			newRivals.emplace(*rivalTag);
+			++counter;
+		}
+		country->setRivals(newRivals); // rivals are one-way, but relations suck both ways.
+	}
+	Log(LogLevel::Info) << "<> Transcribed " << counter << " rivalries.";
+}
+
+void V3::PoliticalManager::convertTruces(const date& lastEU4Date)
+{
+	Log(LogLevel::Info) << "-> Transcribing truces.";
+	auto counter = 0;
+
+	for (const auto& country: countries | std::views::values)
+	{
+		if (!country->getSourceCountry())
+			continue;
+		if (country->getSubStates().empty())
+			continue;
+		for (const auto& [target, relation]: country->getSourceCountry()->getRelations())
+		{
+			if (!relation.getTruceExpiry())
+				continue;
+			if (!isEU4CountryConvertedAndLanded(target))
+				continue;
+			const auto& targetTag = countryMapper->getV3Tag(target);
+
+			auto nominalExpiry = *relation.getTruceExpiry();
+			const int conversionDateDays = lastEU4Date.getYear() * 365 + lastEU4Date.getMonth() * 12 + lastEU4Date.getDay();
+
+			const auto remainingTruceDays = nominalExpiry.getYear() * 365 + nominalExpiry.getMonth() * 12 + nominalExpiry.getDay() - conversionDateDays;
+			const auto remainingTruceMonths = static_cast<int>(std::round(static_cast<double>(remainingTruceDays) / 30.417)); // let's .. approximate.
+
+			country->addTruce(*targetTag, remainingTruceMonths);
+			counter++;
+		}
+	}
+	Log(LogLevel::Info) << "<> Transcribed " << counter << " truces.";
+}
+
+bool V3::PoliticalManager::isEU4CountryConvertedAndLanded(const std::string& eu4Tag) const
+{
+	const auto& targetTag = countryMapper->getV3Tag(eu4Tag);
+	if (!targetTag)
+		return false;
+	if (!countries.contains(*targetTag))
+		return false;
+	const auto& targetCountry = countries.at(*targetTag);
+	if (targetCountry->getSubStates().empty())
+		return false;
+	return true;
 }

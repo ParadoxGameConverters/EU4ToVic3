@@ -104,3 +104,10 @@ jobs:
       run: |
        cd $Env:GITHUB_WORKSPACE\Release-Tests\
        .\EU4toV3Tests.exe
+       
+    - name: "Build frontend"
+      uses: ./Fronter.NET/.github/actions/build_frontend
+      with:
+        fronter_dir: 'Fronter.NET'
+        release_dir: 'Release'    
+

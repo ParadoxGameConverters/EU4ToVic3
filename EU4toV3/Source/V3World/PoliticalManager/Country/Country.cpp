@@ -560,3 +560,14 @@ void V3::Country::setTechs(const mappers::TechSetupMapper& techSetupMapper, doub
 	processedData.techs.insert(militaryTechs.begin(), militaryTechs.end());
 	processedData.techs.insert(societyTechs.begin(), societyTechs.end());
 }
+
+V3::Relation& V3::Country::getRelation(const std::string& target)
+{
+	const auto& relation = processedData.relations.find(target);
+	if (relation != processedData.relations.end())
+		return relation->second;
+	Relation newRelation(target);
+	processedData.relations.emplace(target, newRelation);
+	const auto& newRelRef = processedData.relations.find(target);
+	return newRelRef->second;
+}

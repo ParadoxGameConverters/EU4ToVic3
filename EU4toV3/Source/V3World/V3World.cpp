@@ -35,6 +35,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.loadTechSetupMapperRules("configurables/tech_setup.txt");
 	politicalManager.loadLawMapperRules("configurables/law_map.txt");
 	politicalManager.loadLawDefinitions(dwFS);
+	politicalManager.loadDiplomaticMapperRules("configurables/diplomatic_map.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	localizationLoader.scrapeLocalizations(dwFS);
 
@@ -93,6 +94,9 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.determineAndApplyWesternization(cultureMapper, religionMapper, configBlock.euroCentric, datingData);
 	politicalManager.setupTech();
 	politicalManager.setupLaws();
+	politicalManager.convertDiplomacy(sourceWorld.getDiplomacy().getAgreements());
+	politicalManager.convertRivals();
+	politicalManager.convertTruces(datingData.lastEU4Date);
 
 	clayManager.squashAllSubStates(politicalManager);
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);

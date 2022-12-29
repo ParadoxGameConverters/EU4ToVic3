@@ -74,6 +74,7 @@ class Country: commonItems::parser
 
 	// relations
 	[[nodiscard]] const auto& getRelations() const { return relations; }
+	[[nodiscard]] const auto& getRivals() const { return rivals; }
 
 	// country stats
 	[[nodiscard]] auto getLegitimacy() const { return legitimacyEquivalent; }
@@ -175,6 +176,7 @@ class Country: commonItems::parser
 	std::vector<EU4Army> armies;				// and navies
 
 	std::map<std::string, EU4RelationDetails> relations;
+	std::set<std::string> rivals;
 
 	double legitimacyEquivalent = 100; // country at 100 doesn't store the value at all for any of the legitimacy-type values
 	double stability = 0;

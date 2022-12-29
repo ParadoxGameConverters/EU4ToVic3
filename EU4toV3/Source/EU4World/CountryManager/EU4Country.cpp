@@ -8,6 +8,7 @@
 #include "EU4ActivePolicy.h"
 #include "EU4CountryFlags.h"
 #include "EU4CountryModifier.h"
+#include "EU4CountryRival.h"
 #include "EU4Technology.h"
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
@@ -108,6 +109,10 @@ void EU4::Country::registerKeys()
 	registerKeyword("active_relations", [this](std::istream& theStream) {
 		const EU4Relations activeRelations(theStream);
 		relations = activeRelations.getRelations();
+	});
+	registerKeyword("rival", [this](std::istream& theStream) {
+		const EU4CountryRival rival(theStream);
+		rivals.emplace(rival.getCountry());
 	});
 	registerRegex("army|navy", [this](const std::string& armyFloats, std::istream& theStream) {
 		const EU4Army theArmy(theStream, armyFloats);
@@ -406,7 +411,7 @@ double EU4::Country::getAverageDevelopment() const
 {
 	if (provinces.empty())
 		return 0;
-	const double totalDev = std::accumulate(provinces.begin(), provinces.end(), 0, [](double sum, const std::shared_ptr<Province>& province) {
+	const double totalDev = std::accumulate(provinces.begin(), provinces.end(), 0.0, [](double sum, const std::shared_ptr<Province>& province) {
 		return sum + province->getBaseTax() + province->getBaseProduction() + province->getBaseManpower();
 	});
 	return totalDev / static_cast<double>(provinces.size());

@@ -92,6 +92,20 @@ TEST(EU4World_EU4CountryTests, capitalScoreAndTechCanBeRead)
 	EXPECT_EQ("western", country.getTechGroup());
 }
 
+TEST(EU4World_EU4CountryTests, RivalsCanBeRead)
+{
+	std::stringstream input;
+	input << "rival = {\n";
+	input << "   country = TA1\n";
+	input << "}\n";
+	input << "rival = {\n";
+	input << "   country = TA2\n";
+	input << "}\n";
+	const EU4::Country country("TAG", input);
+
+	EXPECT_THAT(country.getRivals(), UnorderedElementsAre("TA1", "TA2"));
+}
+
 TEST(EU4World_EU4CountryTests, cultureAndReligionCanBeRead)
 {
 	std::stringstream deadInput;

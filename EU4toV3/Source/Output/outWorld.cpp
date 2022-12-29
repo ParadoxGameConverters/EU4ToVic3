@@ -3,6 +3,7 @@
 #include "OSCompatibilityLayer.h"
 #include "outCountries/outCountries.h"
 #include "outCultures/outCultures.h"
+#include "outDiplomacy/outDiplomacy.h"
 #include "outLocalizations/outLocalizations.h"
 #include "outMetadataFile/outMetadataFile.h"
 #include "outPops/outPops.h"
@@ -87,6 +88,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Progress) << "93 %";
 
 	Log(LogLevel::Info) << "<- Writing Diplomacy";
+	exportDiplomacy(outputName, world.getPoliticalManager());
 	Log(LogLevel::Progress) << "94 %";
 
 	Log(LogLevel::Info) << "<- Writing Armed and Unarmed Conflicts";

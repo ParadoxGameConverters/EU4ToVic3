@@ -11,7 +11,7 @@ void EU4::DiplomacyParser::loadDiplomacy(std::istream& theStream)
 
 void EU4::DiplomacyParser::registerKeys()
 {
-	registerRegex("royal_marriage|guarantee|alliance", [this](const std::string& agreementClass, std::istream& theStream) {
+	registerRegex("royal_marriage|guarantee|alliance|steer_trade|transfer_trade_power", [this](const std::string& agreementClass, std::istream& theStream) {
 		EU4Agreement newAgreement(theStream);
 		newAgreement.setAgreementType(agreementClass);
 		agreements.push_back(newAgreement);
