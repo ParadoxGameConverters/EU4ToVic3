@@ -1,5 +1,6 @@
 #ifndef V3_COUNTRY_H
 #define V3_COUNTRY_H
+#include "Character.h"
 #include "Color.h"
 #include "Configuration.h"
 #include "DatingData.h"
@@ -22,6 +23,7 @@ class ReligionMapper;
 class CultureMapper;
 class PopulationSetupMapper;
 class TechSetupMapper;
+class CharacterTraitMapper;
 } // namespace mappers
 namespace V3
 {
@@ -57,6 +59,7 @@ struct ProcessedData
 	std::map<std::string, Relation> relations;
 	std::set<std::string> rivals;
 	std::map<std::string, int> truces;
+	std::vector<Character> characters;
 
 	std::string name;
 	std::string adjective;
@@ -111,6 +114,15 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getRivals() const { return processedData.rivals; }
 	void addTruce(const std::string& target, int months) { processedData.truces.emplace(target, months); }
 	[[nodiscard]] const auto& getTruces() const { return processedData.truces; }
+
+	void convertCharacters(const mappers::CharacterTraitMapper& characterTraitMapper,
+		 float ageShift,
+		 const ClayManager& clayManager,
+		 mappers::CultureMapper& cultureMapper,
+		 const mappers::ReligionMapper& religionMapper,
+		 const EU4::CultureLoader& cultureLoader,
+		 const EU4::ReligionLoader& religionLoader,
+		 const date& conversionDate);
 
 	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
 	[[nodiscard]] int getTechInfraCap() const { return 0; }

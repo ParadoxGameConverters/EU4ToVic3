@@ -64,6 +64,11 @@ void V3::PoliticalManager::loadDiplomaticMapperRules(const std::string& filePath
 	diplomaticMapper.loadMappingRules(filePath);
 }
 
+void V3::PoliticalManager::loadCharacterTraitMapperRules(const std::string& filePath)
+{
+	characterTraitMapper.loadMappingRules(filePath);
+}
+
 void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries)
 {
 	Log(LogLevel::Info) << "-> Moving over EU4 Countries.";
@@ -377,7 +382,6 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 		newAgreement.first = V3Tag1;
 		newAgreement.second = V3Tag2;
 		newAgreement.start_date = agreement.getStartDate();
-		Log(LogLevel::Debug) << agreement.getAgreementType() << " - " << V3Tag1 << "- " << V3Tag2;
 
 		// translate eu4 to vic3 agreement.
 		if (const auto& newType = diplomaticMapper.getAgreementType(agreement.getAgreementType()); newType)
@@ -468,7 +472,7 @@ void V3::PoliticalManager::convertTruces(const date& lastEU4Date)
 			const auto& targetTag = countryMapper->getV3Tag(target);
 
 			auto nominalExpiry = *relation.getTruceExpiry();
-			const int conversionDateDays = lastEU4Date.getYear() * 365 + lastEU4Date.getMonth() * 12 + lastEU4Date.getDay();
+			const int conversionDateDays = lastEU4Date.getYear() * 365 + lastEU4Date.getMonth() * 30 + lastEU4Date.getDay(); // approximating
 
 			const auto remainingTruceDays = nominalExpiry.getYear() * 365 + nominalExpiry.getMonth() * 12 + nominalExpiry.getDay() - conversionDateDays;
 			const auto remainingTruceMonths = static_cast<int>(std::round(static_cast<double>(remainingTruceDays) / 30.417)); // let's .. approximate.
@@ -491,4 +495,30 @@ bool V3::PoliticalManager::isEU4CountryConvertedAndLanded(const std::string& eu4
 	if (targetCountry->getSubStates().empty())
 		return false;
 	return true;
+}
+
+void V3::PoliticalManager::convertCharacters(const date& conversionDate,
+	 Configuration::STARTDATE startDate,
+	 const ClayManager& clayManager,
+	 mappers::CultureMapper& cultureMapper,
+	 const mappers::ReligionMapper& religionMapper,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader)
+{
+	Log(LogLevel::Info) << "-> Importing Characters.";
+	auto counter = 0;
+
+	float ageShift = 0; // how much do we shift the character's ages forward? We don't want a bunch of 200-year olds.
+	if (startDate == Configuration::STARTDATE::Vanilla)
+		ageShift = date("1836.1.1").diffInYears(conversionDate);
+
+	for (const auto& country: countries | std::views::values)
+	{
+		if (!TechValues::isValidCountryForTechConversion(*country))
+			continue;
+		country->convertCharacters(characterTraitMapper, ageShift, clayManager, cultureMapper, religionMapper, cultureLoader, religionLoader, conversionDate);
+		counter += static_cast<int>(country->getProcessedData().characters.size());
+	}
+	Log(LogLevel::Info) << "<> Imported " << counter << " Characters. Some died along the way. We buried those.";
+	Log(LogLevel::Debug) << "You won't find the corpses.";
 }

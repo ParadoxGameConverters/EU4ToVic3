@@ -8,16 +8,14 @@ namespace EU4
 class CountryHistoryDate: commonItems::parser
 {
   public:
-	explicit CountryHistoryDate(std::istream& theStream, const std::string& leaderClass);
+	explicit CountryHistoryDate(std::istream& theStream);
 
-	[[nodiscard]] const auto& getLeaders() const { return leaders; }
-	[[nodiscard]] const auto& getDynasty() const { return dynasty; }
+	[[nodiscard]] const auto& getCharacters() const { return characters; }
 
   private:
-	void registerKeys(const std::string& leaderClass);
+	void registerKeys();
 
-	std::vector<Leader> leaders;
-	std::string dynasty; // This is used to prep hoi4 export data (botanical expedition) with the last *monarch* dynasty.
+	std::vector<Character> characters;
 };
 } // namespace EU4
 

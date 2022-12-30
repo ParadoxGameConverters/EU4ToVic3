@@ -10,16 +10,14 @@ class CountryHistory: commonItems::convenientParser
   public:
 	explicit CountryHistory(std::istream& theStream);
 
-	[[nodiscard]] const auto& getLeaders() const { return leaders; }
-	[[nodiscard]] const auto& getDynasty() const { return dynasty; }
+	[[nodiscard]] const auto& getCharacters() const { return characters; }
 	[[nodiscard]] const auto& getPrimaryCulture() const { return primaryCulture; }
 	[[nodiscard]] const auto& getReligion() const { return religion; }
 
   private:
 	void registerKeys();
 
-	std::vector<Leader> leaders;
-	std::string dynasty;
+	std::vector<Character> characters;
 	std::string religion;
 	std::string primaryCulture;
 };
