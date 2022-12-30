@@ -156,8 +156,10 @@ void V3::Character::convertLeadership(const EU4::Character& character, const map
 			admiral = true;
 
 		// rank
-		const auto rank = static_cast<int>(std::ceil(static_cast<double>(character.fire + character.shock + character.fire + character.siege) / 4.0));
-		commanderRank = "commander_rank_" + std::to_string(rank);
+		const auto rank = static_cast<int>(std::round(static_cast<double>(character.fire + character.shock + character.fire + character.siege) / 4.0));
+		if (rank > 0)
+			commanderRank = "commander_rank_" + std::to_string(rank);
+
 		if (!character.leaderTrait.empty())
 		{
 			if (const auto& personalityMatch = characterTraitMapper.getPersonality(character.leaderTrait); personalityMatch)
