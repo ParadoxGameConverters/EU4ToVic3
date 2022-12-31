@@ -14,7 +14,6 @@ add_compile_options("-pthread")
 add_link_options(-no-pie)
 
 include_directories("../commonItems")
-include_directories("../commonItems/external/zip")
 include_directories("Source")
 include_directories("Source/Mappers")
 include_directories("Source/EU4World")
@@ -56,7 +55,7 @@ set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/ParserHelpers.cpp")
 set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/StringUtils.cpp")
 set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/OSCommonLayer.cpp")
 set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/targa.cpp")
-set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/external/zip/zip.cpp")
+set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/external/zip/src/zip.cpp")
 
 add_executable(EU4ToVic3 
 	${MAIN_SOURCES}
