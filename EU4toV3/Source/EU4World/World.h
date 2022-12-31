@@ -38,10 +38,7 @@ class World: commonItems::parser
 
   private:
 	void registerKeys(const Configuration& theConfiguration, const commonItems::ConverterVersion& converterVersion);
-
 	void verifySave();
-	void verifySaveContents();
-	bool uncompressSave();
 
 	struct saveData
 	{
