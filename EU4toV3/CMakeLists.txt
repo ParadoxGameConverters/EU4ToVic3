@@ -14,6 +14,7 @@ add_compile_options("-pthread")
 add_link_options(-no-pie)
 
 include_directories("../commonItems")
+include_directories("../commonItems/external/zip/src")
 include_directories("Source")
 include_directories("Source/Mappers")
 include_directories("Source/EU4World")
