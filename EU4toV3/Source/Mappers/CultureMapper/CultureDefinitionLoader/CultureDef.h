@@ -20,8 +20,10 @@ struct CultureDef
 	std::set<std::string> ethnicities;
 	std::string graphics;
 	bool win1252Names = false;
+	bool skipExport = false; // We're skipping *separate* export for defs that we either import or just copy over from blankmod.
 
 	std::map<std::string, std::string> locBlock;
+	std::map<std::string, std::string> nameLocBlock; // all english since we load from disk
 };
 } // namespace mappers
 

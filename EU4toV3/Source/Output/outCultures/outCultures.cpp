@@ -91,6 +91,8 @@ void OUT::exportCultures(const std::string& outputName, const std::map<std::stri
 	output << commonItems::utf8BOM << "\n";
 	for (const auto& culture: cultures | std::views::values)
 	{
+		if (culture.skipExport)
+			continue;
 		outCulture(output, culture);
 	}
 	output << "\n";

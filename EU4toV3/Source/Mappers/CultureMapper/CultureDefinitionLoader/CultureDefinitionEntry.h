@@ -8,7 +8,7 @@ namespace mappers
 class CultureDefinitionEntry: commonItems::parser
 {
   public:
-	explicit CultureDefinitionEntry(std::istream& theStream);
+	explicit CultureDefinitionEntry(std::istream& theStream, bool skipExport);
 
 	[[nodiscard]] const auto& getCultureDef() const { return cultureDef; }
 
