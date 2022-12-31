@@ -3,8 +3,9 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-mappers::CultureDefinitionEntry::CultureDefinitionEntry(std::istream& theStream)
+mappers::CultureDefinitionEntry::CultureDefinitionEntry(std::istream& theStream, bool skipExport)
 {
+	cultureDef.skipExport = skipExport;
 	registerkeys();
 	parseStream(theStream);
 	clearRegisteredKeywords();

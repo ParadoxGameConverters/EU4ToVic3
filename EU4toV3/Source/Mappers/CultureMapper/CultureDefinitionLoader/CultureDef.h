@@ -20,6 +20,7 @@ struct CultureDef
 	std::set<std::string> ethnicities;
 	std::string graphics;
 	bool win1252Names = false;
+	bool skipExport = false;
 
 	std::map<std::string, std::string> locBlock;
 };

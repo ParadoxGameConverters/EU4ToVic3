@@ -19,6 +19,7 @@ class CultureDefinitionLoader: commonItems::parser
 	void registerKeys();
 
 	std::map<std::string, CultureDef> cultureDefinitions;
+	bool skipExport = true; // skip export for cultures not loaded from 99_<...>.txt!
 };
 } // namespace mappers
 
