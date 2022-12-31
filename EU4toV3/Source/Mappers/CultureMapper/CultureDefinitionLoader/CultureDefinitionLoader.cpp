@@ -11,7 +11,7 @@ void mappers::CultureDefinitionLoader::loadDefinitions(const commonItems::ModFil
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/cultures/"))
 	{
-		if (fileName.contains("99_"))
+		if (fileName.find("99_") != std::string::npos)
 			skipExport = false;
 		else
 			skipExport = true;
