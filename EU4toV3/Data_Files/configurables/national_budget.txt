@@ -1,23 +1,18 @@
 # This is the baseline national budget that all countries will use
-# Sectors marked as industrial will only be fully utalized by fully industrail countries
-# Sectors marked as agarian will be boosted by non-industrial countries
+# Sectors marked as industrial will get sever penalities for countries without a full industrial score
 
-# Sector wieghts may be modified by Vic3 laws, estates, or select EU4 gov reforms
+# Sector wieghts may be modified by Vic3 laws, colonial status
 
 # The national budget forms the country's opinon of what should be built,
 # but still must face the realities of technology/resource availability and the desire of the states.
 
 construction = {
-    type = nuetral
-
     weight = 0.25
 
     building_construction_center
 }
 
 infrastructure = {
-    type = nuetral
-
     weight = 5
 
     building_port
@@ -25,8 +20,6 @@ infrastructure = {
 }
 
 military = {
-    type = nuetral
-
     weight = 12
 
     building_barracks
@@ -42,16 +35,12 @@ military = {
 }
 
 naval = {
-    type = nuetral
-
     weight = 3
 
     buillding_naval_base
 }
 
 farming = {
-    type = nuetral
-
     weight = 15
 
     building_rye_farm
@@ -63,8 +52,6 @@ farming = {
 }
 
 extraction = {
-    type = nuetral
-
     weight = 5
 
     building_logging_camp
@@ -77,21 +64,16 @@ extraction = {
 }
 
 mining = {
-    type = industrial
+    weight = 10
 
     building_iron_mine
     building_lead_mine
     building_coal_mine
     building_sulfur_mine
     building_gold_mine
-
-    weight = 10
-
 }
 
 plantation = {
-    type = agarian
-
     weight = 15
 
     building_coffee_plantation
@@ -115,8 +97,6 @@ plantation = {
 }
 
 whaling = {
-    type = nuetral
-
     weight = 0.5
 
     building_whaling_station
@@ -124,7 +104,7 @@ whaling = {
 }
 
 scholarly = {
-    type = industrial
+    industrial = yes
 
     weight = 2.5
 
@@ -145,7 +125,7 @@ light_industry = {
 }
 
 western_industry = {
-    type = industrial
+    industrial = yes
 
     weight = 10
 
@@ -155,7 +135,7 @@ western_industry = {
 }
 
 heavy_industry = {
-    type = industrial
+    industrial = yes
 
     weight = 0
 

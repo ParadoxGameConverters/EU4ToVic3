@@ -787,6 +787,18 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingLoader.cpp">
       <Filter>ConverterFiles\V3World\Loaders\BuildingLoader</Filter>
     </ClCompile>
+    <ClCompile Include="MapperTests\BuildingMapperTests\BuildingMapperTests.cpp">
+      <Filter>MapperTests\BuildingMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\BuildingMapperTests\BuildingMappingTests.cpp">
+      <Filter>MapperTests\BuildingMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\BuildingMapper.cpp">
+      <Filter>ConverterFiles\Mappers\BuildingMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\BuildingMapping.cpp">
+      <Filter>ConverterFiles\Mappers\BuildingMapper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1281,6 +1293,12 @@
     <Filter Include="TestFiles\vic3installation\game\common\production_method_groups">
       <UniqueIdentifier>{e63ab612-b774-48b0-83c0-a31e3e5457fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MapperTests\BuildingMapperTests">
+      <UniqueIdentifier>{290c5f66-efe4-4d46-ae0d-66fd3d9aebbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\Mappers\BuildingMapper">
+      <UniqueIdentifier>{b6177dcc-c990-4292-9f87-5c7b53d99efd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1458,6 +1476,12 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\production_methods\test_pms.txt">
       <Filter>TestFiles\vic3installation\game\common\production_methods</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\buildings_map.txt">
+      <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\national_budget.txt">
+      <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>
