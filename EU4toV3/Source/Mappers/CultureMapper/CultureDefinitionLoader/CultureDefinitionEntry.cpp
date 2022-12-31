@@ -1,7 +1,19 @@
 #include "CultureDefinitionEntry.h"
 #include "CommonRegexes.h"
 #include "Log.h"
+#include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
+
+namespace
+{
+std::string normalizeString(const std::string& input)
+{
+	auto toReturn = commonItems::normalizeUTF8Path(input);
+	std::ranges::replace(toReturn.begin(), toReturn.end(), ' ', '_');
+	std::ranges::replace(toReturn.begin(), toReturn.end(), '\'', '_');
+	return toReturn;
+}
+} // namespace
 
 mappers::CultureDefinitionEntry::CultureDefinitionEntry(std::istream& theStream, bool skipExport)
 {
@@ -30,31 +42,94 @@ void mappers::CultureDefinitionEntry::registerkeys()
 	});
 	registerKeyword("male_common_first_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
-			cultureDef.maleCommonFirstNames.emplace(name);
+		{
+			if (cultureDef.skipExport)
+				cultureDef.maleCommonFirstNames.emplace(name);
+			else
+			{
+				auto dwName = "dw_" + normalizeString(name);
+				cultureDef.maleCommonFirstNames.emplace(dwName);
+				cultureDef.nameLocBlock.emplace(dwName, name);
+			}
+		}
 	});
 	registerKeyword("female_common_first_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
-			cultureDef.femaleCommonFirstNames.emplace(name);
+		{
+			if (cultureDef.skipExport)
+				cultureDef.femaleCommonFirstNames.emplace(name);
+			else
+			{
+				auto dwName = "dw_" + normalizeString(name);
+				cultureDef.femaleCommonFirstNames.emplace(dwName);
+				cultureDef.nameLocBlock.emplace(dwName, name);
+			}
+		}
 	});
 	registerKeyword("noble_last_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
-			cultureDef.nobleLastNames.emplace(name);
+		{
+			if (cultureDef.skipExport)
+				cultureDef.nobleLastNames.emplace(name);
+			else
+			{
+				auto dwName = "dw_" + normalizeString(name);
+				cultureDef.nobleLastNames.emplace(dwName);
+				cultureDef.nameLocBlock.emplace(dwName, name);
+			}
+		}
 	});
 	registerKeyword("common_last_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
-			cultureDef.commonLastNames.emplace(name);
+		{
+			if (cultureDef.skipExport)
+				cultureDef.commonLastNames.emplace(name);
+			else
+			{
+				auto dwName = "dw_" + normalizeString(name);
+				cultureDef.commonLastNames.emplace(dwName);
+				cultureDef.nameLocBlock.emplace(dwName, name);
+			}
+		}
 	});
 	registerKeyword("male_regal_first_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
-			cultureDef.maleRegalFirstNames.emplace(name);
+		{
+			if (cultureDef.skipExport)
+				cultureDef.maleRegalFirstNames.emplace(name);
+			else
+			{
+				auto dwName = "dw_" + normalizeString(name);
+				cultureDef.maleRegalFirstNames.emplace(dwName);
+				cultureDef.nameLocBlock.emplace(dwName, name);
+			}
+		}
 	});
 	registerKeyword("female_regal_first_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
-			cultureDef.femaleRegalFirstNames.emplace(name);
+		{
+			if (cultureDef.skipExport)
+				cultureDef.femaleRegalFirstNames.emplace(name);
+			else
+			{
+				auto dwName = "dw_" + normalizeString(name);
+				cultureDef.femaleRegalFirstNames.emplace(dwName);
+				cultureDef.nameLocBlock.emplace(dwName, name);
+			}
+		}
 	});
 	registerKeyword("regal_last_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
-			cultureDef.regalLastNames.emplace(name);
+		{
+			if (cultureDef.skipExport)
+				cultureDef.regalLastNames.emplace(name);
+			else
+			{
+				auto dwName = "dw_" + normalizeString(name);
+				cultureDef.regalLastNames.emplace(dwName);
+				cultureDef.nameLocBlock.emplace(dwName, name);
+			}
+		}
 	});
 	registerKeyword("ethnicities", [this](std::istream& theStream) {
 		ethStripper.parseStream(theStream);
