@@ -55,7 +55,7 @@ set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/ParserHelpers.cpp")
 set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/StringUtils.cpp")
 set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/OSCommonLayer.cpp")
 set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/targa.cpp")
-set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/external/zip/src/zip.cpp")
+set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/external/zip/src/zip.c")
 
 add_executable(EU4ToVic3 
 	${MAIN_SOURCES}
