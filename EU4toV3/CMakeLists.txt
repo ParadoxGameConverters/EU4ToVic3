@@ -14,7 +14,7 @@ add_compile_options("-pthread")
 add_link_options(-no-pie)
 
 include_directories("../commonItems")
-include_directories("../commonItems/ZipLib")
+include_directories("../commonItems/external/zip")
 include_directories("Source")
 include_directories("Source/Mappers")
 include_directories("Source/EU4World")
@@ -25,8 +25,6 @@ include_directories("Source/Output")
 include_directories("Source/Configuration")
 include_directories("${PROJECT_SOURCE_DIR}")
 link_directories(${CMAKE_SOURCE_DIR}/Resources)
-
-add_subdirectory(../commonItems/ZipLib [binary_dir])
 
 file(GLOB MAIN_SOURCES "${PROJECT_SOURCE_DIR}/*.cpp")
 file(GLOB CONFIGURATION_SOURCES "${PROJECT_SOURCE_DIR}/Configuration/*.cpp")
@@ -58,6 +56,7 @@ set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/ParserHelpers.cpp")
 set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/StringUtils.cpp")
 set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/OSCommonLayer.cpp")
 set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/targa.cpp")
+set(COMMON_SOURCES ${COMMON_SOURCES} "../commonItems/external/zip/zip.cpp")
 
 add_executable(EU4ToVic3 
 	${MAIN_SOURCES}
@@ -77,7 +76,7 @@ add_executable(EU4ToVic3
 	${COMMON_SOURCES}
 )
 
-target_link_libraries(EU4ToVic3 LINK_PUBLIC ZIPLIB stdc++fs rakaly)
+target_link_libraries(EU4ToVic3 LINK_PUBLIC stdc++fs rakaly)
 
 add_custom_command(TARGET EU4ToVic3 POST_BUILD WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} COMMAND git rev-parse HEAD > Release-Linux/commit_id.txt)
 add_custom_command(TARGET EU4ToVic3 POST_BUILD WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} COMMAND chmod u+x Copy_Files.sh)
