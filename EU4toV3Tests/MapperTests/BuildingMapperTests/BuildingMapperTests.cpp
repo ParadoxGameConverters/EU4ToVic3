@@ -2,7 +2,7 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
-TEST(Mappers_ColonialRegionMapperTests, rulesCanBeLoadedInOrder)
+TEST(Mappers_BuildingMapperTests, rulesCanBeLoaded)
 {
 	mappers::BuildingMapper mapper;
 	mapper.loadBuildingMappings("TestFiles/configurables/buildings_map.txt");
