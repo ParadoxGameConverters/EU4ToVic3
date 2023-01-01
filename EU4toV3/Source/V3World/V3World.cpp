@@ -109,6 +109,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getCultureLoader(),
 		 sourceWorld.getReligionLoader());
 
+	flagCrafter.loadAvailableFlags("configurables/blankMod/output/common/coat_of_arms/coat_of_arms/");
+
 	Log(LogLevel::Info) << "-> Converting Provinces";
 	Log(LogLevel::Progress) << "53 %";
 
