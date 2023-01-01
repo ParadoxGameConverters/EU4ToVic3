@@ -1,6 +1,8 @@
 #include "FlagCrafter.h"
+#include "CountryMapper/CountryMapper.h"
 #include "FlagNameLoader/FlagNameLoader.h"
 #include "Log.h"
+#include "PoliticalManager/Country/Country.h"
 
 void V3::FlagCrafter::loadAvailableFlags(const std::string& folderPath)
 {
@@ -85,4 +87,57 @@ std::optional<std::map<V3::FlagCrafter::FLAGTYPE, std::string>> V3::FlagCrafter:
 	}
 
 	return std::nullopt;
+}
+
+void V3::FlagCrafter::distributeAvailableFlags(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper)
+{
+	Log(LogLevel::Info) << "-> Distributing Available Flags.";
+	auto flagCodeCounter = 0;
+	auto tagCounter = 0;
+	auto nameCounter = 0;
+
+	for (const auto& [tag, country]: countries)
+	{
+		// do we have a flagcode? That'd be super helpful.
+		if (const auto& flagCode = countryMapper.getFlagCode(tag); flagCode && tryAssigningFlagViaValue(country, *flagCode))
+		{
+			++flagCodeCounter;
+			continue;
+		}
+
+		// try straight tag.
+		if (tryAssigningFlagViaValue(country, tag))
+		{
+			++tagCounter;
+			continue;
+		}
+
+		// umm. english name? yes?
+		auto name = country->getName("english");
+		std::ranges::transform(name.begin(), name.end(), name.begin(), ::tolower);
+		if (tryAssigningFlagViaValue(country, name))
+		{
+			++nameCounter;
+			continue;
+		}
+	}
+
+	Log(LogLevel::Info) << "<> Distributed flags for " << flagCodeCounter + tagCounter + nameCounter << " out of " << countries.size() << " countries.";
+	Log(LogLevel::Debug) << "Specifically, " << flagCodeCounter << " via flag codes, " << tagCounter << " via tag matches, " << nameCounter
+								<< " via name matches.";
+}
+
+bool V3::FlagCrafter::tryAssigningFlagViaValue(const std::shared_ptr<Country>& country, const std::string& value)
+{
+	// strip legacy if we have one.
+	auto actualValue = value;
+	if (actualValue.starts_with("legacy_") && value.size() > 7)
+		actualValue = value.substr(7, value.size());
+
+	if (const auto& match = getFlagsForEntity(actualValue); match)
+	{
+		country->setFlags(*match);
+		return true;
+	}
+	return false;
 }

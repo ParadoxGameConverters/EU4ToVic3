@@ -4,6 +4,7 @@
 #include "Color.h"
 #include "Configuration.h"
 #include "DatingData.h"
+#include "FlagCrafter/FlagCrafter.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
 #include "Parser.h"
 #include "PoliticalManager/Diplomacy/Relation.h"
@@ -65,6 +66,8 @@ struct ProcessedData
 	std::string adjective;
 	std::map<std::string, std::string> namesByLanguage;		// language, name
 	std::map<std::string, std::string> adjectivesByLanguage; // language, adj
+
+	std::map<FlagCrafter::FLAGTYPE, std::string> flags;
 };
 
 class SubState;
@@ -123,6 +126,9 @@ class Country: commonItems::parser
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader,
 		 const date& conversionDate);
+
+	void setFlags(const std::map<FlagCrafter::FLAGTYPE, std::string>& flags) { processedData.flags = flags; }
+	[[nodiscard]] const auto& getFlags() const { return processedData.flags; }
 
 	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
 	[[nodiscard]] int getTechInfraCap() const { return 0; }

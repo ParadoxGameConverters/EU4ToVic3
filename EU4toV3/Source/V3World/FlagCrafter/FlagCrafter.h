@@ -1,12 +1,18 @@
 #ifndef FLAG_CRAFTER
 #define FLAG_CRAFTER
 #include <map>
+#include <memory>
 #include <optional>
 #include <set>
 #include <string>
 
+namespace mappers
+{
+class CountryMapper;
+}
 namespace V3
 {
+class Country;
 class FlagCrafter
 {
   public:
@@ -20,10 +26,14 @@ class FlagCrafter
 	};
 
 	FlagCrafter() = default;
+
 	void loadAvailableFlags(const std::string& folderPath);
+	void distributeAvailableFlags(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper);
+
 	[[nodiscard]] std::optional<std::map<FLAGTYPE, std::string>> getFlagsForEntity(const std::string& name);
 
   private:
+	[[nodiscard]] bool tryAssigningFlagViaValue(const std::shared_ptr<Country>& country, const std::string& value);
 	void loadKnownFlags(const std::string& folderPath);
 	void filterKnownFlags();
 
