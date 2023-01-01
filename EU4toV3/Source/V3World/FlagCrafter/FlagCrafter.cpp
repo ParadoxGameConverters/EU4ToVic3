@@ -103,6 +103,13 @@ std::optional<std::map<V3::FlagCrafter::FLAGTYPE, std::string>> V3::FlagCrafter:
 void V3::FlagCrafter::distributeAvailableFlags(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper)
 {
 	Log(LogLevel::Info) << "-> Distributing Available Flags.";
+
+	// prep the battleground.
+	if (!commonItems::DeleteFolder("flags.tmp"))
+		Log(LogLevel::Error) << "Could not delete flags.tmp folder!";
+	else if (!commonItems::TryCreateFolder("flags.tmp"))
+		throw std::runtime_error("Could not create flags.tmp folder!");
+
 	auto flagCodeCounter = 0;
 	auto tagCounter = 0;
 	auto nameCounter = 0;
@@ -205,12 +212,13 @@ void V3::FlagCrafter::craftCustomFlag(const std::shared_ptr<Country>& country)
 			continue;
 
 		const auto& suffix = flagFileSuffixes[i];
-		auto sourceEmblemPath = baseFlagFolder + "/eu4_custom_emblems/" + std::to_string(emblem) + suffix;
+		const auto suffixExtension = suffix + ".tga";
+		auto sourceEmblemPath = baseFlagFolder + "/eu4_custom_emblems/" + std::to_string(emblem) + suffixExtension;
 		auto sourceFlagPath = baseFlagFolder + "/eu4_custom_bases/" + baseFlagStr + ".tga";
 
 		if (const auto flagFileFound = commonItems::DoesFileExist(sourceFlagPath) && commonItems::DoesFileExist(sourceEmblemPath); flagFileFound)
 		{
-			auto destFlagPath = "flags/" + v3Tag + suffix;
+			auto destFlagPath = "flags.tmp/" + v3Tag + suffixExtension;
 
 			auto rColor = flagColorLoader.getFlagColorByIndex(r);
 			auto gColor = flagColorLoader.getFlagColorByIndex(g);
@@ -227,15 +235,30 @@ void V3::FlagCrafter::craftCustomFlag(const std::shared_ptr<Country>& country)
 			else
 			{
 				if (i == 0)
+				{
+					country->addFlag(Default, v3Tag + suffix);
 					country->addCustomFlag(Default, v3Tag + suffix);
+				}
 				else if (i == 1)
+				{
+					country->addFlag(Communist, v3Tag + suffix);
 					country->addCustomFlag(Communist, v3Tag + suffix);
+				}
 				else if (i == 2)
+				{
+					country->addFlag(Fascist, v3Tag + suffix);
 					country->addCustomFlag(Fascist, v3Tag + suffix);
+				}
 				else if (i == 3)
+				{
+					country->addFlag(Monarchy, v3Tag + suffix);
 					country->addCustomFlag(Monarchy, v3Tag + suffix);
+				}
 				else if (i == 4)
+				{
+					country->addFlag(Republic, v3Tag + suffix);
 					country->addCustomFlag(Republic, v3Tag + suffix);
+				}
 			}
 		}
 		else

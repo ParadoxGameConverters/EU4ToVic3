@@ -132,6 +132,7 @@ class Country: commonItems::parser
 		 const date& conversionDate);
 
 	void setFlags(const std::map<FlagCrafter::FLAGTYPE, std::string>& flags) { processedData.flags = flags; }
+	void addFlag(const FlagCrafter::FLAGTYPE flagType, const std::string& flag) { processedData.flags.emplace(flagType, flag); }
 	[[nodiscard]] const auto& getFlags() const { return processedData.flags; }
 	void addCustomFlag(FlagCrafter::FLAGTYPE flagType, const std::string& flagName) { processedData.customFlags.emplace(flagType, flagName); }
 	[[nodiscard]] const auto& getCustomFlags() const { return processedData.customFlags; }

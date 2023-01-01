@@ -55,7 +55,7 @@ class FlagCrafter
 	std::set<std::string> knownVanillaFlags;
 	std::map<std::string, std::map<FLAGTYPE, std::string>> availableFlags;
 
-	std::vector<std::string> flagFileSuffixes = {".tga", "_communist.tga", "_fascist.tga", "_monarchy.tga", "_republic.tga"};
+	std::vector<std::string> flagFileSuffixes = {"", "_communist", "_fascist", "_monarchy", "_republic"};
 };
 } // namespace V3
 

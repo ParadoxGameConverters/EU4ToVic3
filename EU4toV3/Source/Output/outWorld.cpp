@@ -2,6 +2,7 @@
 #include "CommonFunctions.h"
 #include "OSCompatibilityLayer.h"
 #include "outCharacters/outCharacters.h"
+#include "outCoAs/outCoAa.h"
 #include "outCountries/outCountries.h"
 #include "outCultures/outCultures.h"
 #include "outDiplomacy/outDiplomacy.h"
@@ -72,6 +73,8 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Progress) << "89 %";
 
 	Log(LogLevel::Info) << "<- Writing Flags";
+	copyCustomFlags(outputName);
+	exportCustomCoAs(outputName, world.getPoliticalManager().getCountries());
 	exportFlagDefinitions(outputName, world.getPoliticalManager().getCountries());
 	Log(LogLevel::Progress) << "90 %";
 
@@ -138,4 +141,20 @@ void OUT::exportBookmark(const std::string& outputName, const Configuration& con
 		throw std::runtime_error("Error writing defines file! Is the output folder writable?");
 	output << commonItems::utf8BOM << "NGame = { START_DATE = \"" << datingData.lastEU4Date << "\" }\n";
 	output.close();
+}
+
+void OUT::copyCustomFlags(const std::string& outputName)
+{
+	auto counter = 0;
+	if (!commonItems::DoesFolderExist("flags.tmp"))
+	{
+		Log(LogLevel::Warning) << "Flag folder flags.tmp not found!";
+		return;
+	}
+	for (const auto& filename: commonItems::GetAllFilesInFolder("flags.tmp"))
+	{
+		if (commonItems::TryCopyFile("flags.tmp/" + filename, "output/" + outputName + "/gfx/coat_of_arms/textured_emblems/custom_export/" + filename))
+			++counter;
+	}
+	Log(LogLevel::Info) << "<< " << counter << " flags copied.";
 }
