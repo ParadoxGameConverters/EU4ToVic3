@@ -24,7 +24,7 @@ TEST(V3World_FlagNameLoaderTests, DirectLoadedMatchesCanBeReturnedOnce)
 			  std::pair(V3::FlagCrafter::FLAGTYPE::Fascist, "legacy_AAA_fascist"),
 			  std::pair(V3::FlagCrafter::FLAGTYPE::Communist, "legacy_AAA_communist")));
 
-	match = flagCrafter.getFlagsForEntity("AAC");
+	match = flagCrafter.getFlagsForEntity("AAA");
 	ASSERT_FALSE(match);
 }
 

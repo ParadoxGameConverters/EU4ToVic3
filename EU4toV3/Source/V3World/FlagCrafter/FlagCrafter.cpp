@@ -57,7 +57,7 @@ void V3::FlagCrafter::filterKnownFlags()
 
 std::optional<std::map<V3::FlagCrafter::FLAGTYPE, std::string>> V3::FlagCrafter::getFlagsForEntity(const std::string& name)
 {
-	if (const auto& itr = availableFlags.find(name); itr != availableFlags.end())
+	if (const auto& itr = availableFlags.find(name); itr != availableFlags.end() && !spentFlags.contains(name))
 	{
 		spentFlags.emplace(name);
 		return itr->second;
