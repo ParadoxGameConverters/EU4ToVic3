@@ -21,12 +21,13 @@ class FlagCrafter
 
 	FlagCrafter() = default;
 	void loadAvailableFlags(const std::string& folderPath);
-	[[nodiscard]] std::optional<std::map<FLAGTYPE, std::string>> getFlagsForEntity(const std::string& name) const;
+	[[nodiscard]] std::optional<std::map<FLAGTYPE, std::string>> getFlagsForEntity(const std::string& name);
 
   private:
 	void loadKnownFlags(const std::string& folderPath);
 	void filterKnownFlags();
 
+	std::set<std::string> spentFlags;
 	std::set<std::string> knownFlags;
 	std::map<std::string, std::map<FLAGTYPE, std::string>> availableFlags;
 };
