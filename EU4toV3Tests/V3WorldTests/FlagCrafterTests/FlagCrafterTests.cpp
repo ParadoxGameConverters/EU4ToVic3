@@ -130,7 +130,7 @@ TEST(V3World_FlagNameLoaderTests, FlagsCanBeAssignedViaNameMatch)
 	V3::FlagCrafter flagCrafter;
 	flagCrafter.loadAvailableFlags("TestFiles/configurables/blankMod/output/common/coat_of_arms/coat_of_arms/", "");
 
-	mappers::CountryMapper countryMapper; // no rules whatsoever.
+	const mappers::CountryMapper countryMapper; // no rules whatsoever.
 
 	auto country = std::make_shared<V3::Country>(); // no eu4 country. not relevant. Get it some name.
 	V3::ProcessedData data;
@@ -160,7 +160,7 @@ TEST(V3World_FlagNameLoaderTests, FlagsWithVanillaMatchesWillNotBeAssigned)
 	flagCrafter.loadAvailableFlags("TestFiles/configurables/blankMod/output/common/coat_of_arms/coat_of_arms/",
 		 "TestFiles/vic3installation/game/common/flag_definitions/");
 
-	mappers::CountryMapper countryMapper; // no rules whatsoever.
+	const mappers::CountryMapper countryMapper; // no rules whatsoever.
 
 	auto country = std::make_shared<V3::Country>(); // no eu4 country. not relevant. Get it some name.
 	V3::ProcessedData data;
