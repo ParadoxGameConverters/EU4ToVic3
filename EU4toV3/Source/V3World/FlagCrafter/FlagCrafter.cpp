@@ -14,6 +14,11 @@ void V3::FlagCrafter::loadAvailableFlags(const std::string& folderPath)
 	Log(LogLevel::Info) << "<> Loaded " << knownFlags.size() << " available flags for " << availableFlags.size() << " entitites.";
 }
 
+void V3::FlagCrafter::loadCustomColors(const std::string& filePath)
+{
+	flagColorLoader.loadFlagColors(filePath);
+}
+
 void V3::FlagCrafter::loadKnownFlags(const std::string& folderPath)
 {
 	FlagNameLoader flagNameLoader;

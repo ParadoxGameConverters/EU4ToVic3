@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "Color.h"
 #include "Configuration.h"
+#include "CountryManager/NationalSymbol/EU4CustomColors.h"
 #include "DatingData.h"
 #include "FlagCrafter/FlagCrafter.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
@@ -68,6 +69,8 @@ struct ProcessedData
 	std::map<std::string, std::string> adjectivesByLanguage; // language, adj
 
 	std::map<FlagCrafter::FLAGTYPE, std::string> flags;
+	std::optional<EU4::CustomColorsBlock> customColors;	// used for flag generation for custom flag.
+	std::optional<commonItems::Color> revolutionaryColor; // used for flag generation for revolutionary flag.
 };
 
 class SubState;

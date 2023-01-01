@@ -832,6 +832,12 @@
     <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagCrafterTests.cpp">
       <Filter>V3WorldTests\FlagCrafterTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\FlagCrafter\FlagColorLoader\FlagColorLoader.cpp">
+      <Filter>ConverterFiles\V3World\FlagCrafter\FlagColorLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagColorLoaderTests\FlagColorLoaderTests.cpp">
+      <Filter>V3WorldTests\FlagCrafterTests\FlagColorLoaderTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1365,6 +1371,15 @@
     <Filter Include="ConverterFiles\V3World\FlagCrafter\FlagNameLoader">
       <UniqueIdentifier>{8b54dd88-2c8b-4b29-8cd3-1390a17ada2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\V3World\FlagCrafter\FlagColorLoader">
+      <UniqueIdentifier>{2da8049d-4e39-40f4-adc8-479a7d365233}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\eu4installation\common\custom_country_colors">
+      <UniqueIdentifier>{cf42fc18-95b8-4b45-954e-b6323671b27b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\FlagCrafterTests\FlagColorLoaderTests">
+      <UniqueIdentifier>{341d0772-4aa5-4366-a7ee-7e5e47a5af60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1551,6 +1566,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\blankMod\output\common\coat_of_arms\coat_of_arms\99_flags.txt">
       <Filter>TestFiles\configurables\blankMod\output\common\coat_of_arms\coat_of_arms</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\custom_country_colors\00_custom_country_colors.txt">
+      <Filter>TestFiles\eu4installation\common\custom_country_colors</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

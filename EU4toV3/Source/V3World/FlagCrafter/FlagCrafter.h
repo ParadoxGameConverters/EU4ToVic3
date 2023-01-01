@@ -1,5 +1,6 @@
 #ifndef FLAG_CRAFTER
 #define FLAG_CRAFTER
+#include "FlagColorLoader/FlagColorLoader.h"
 #include <map>
 #include <memory>
 #include <optional>
@@ -28,6 +29,7 @@ class FlagCrafter
 	FlagCrafter() = default;
 
 	void loadAvailableFlags(const std::string& folderPath);
+	void loadCustomColors(const std::string& filePath);
 	void distributeAvailableFlags(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper);
 
 	[[nodiscard]] std::optional<std::map<FLAGTYPE, std::string>> getFlagsForEntity(const std::string& name);
@@ -36,6 +38,8 @@ class FlagCrafter
 	[[nodiscard]] bool tryAssigningFlagViaValue(const std::shared_ptr<Country>& country, const std::string& value);
 	void loadKnownFlags(const std::string& folderPath);
 	void filterKnownFlags();
+
+	FlagColorLoader flagColorLoader;
 
 	std::set<std::string> spentFlags;
 	std::set<std::string> knownFlags;

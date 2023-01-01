@@ -118,6 +118,12 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	// slavery - we're setting this law right here and now as it's a base for further laws later when we have techs.
 	if (sourceCountry->hasModifier("the_abolish_slavery_act"))
 		processedData.laws.emplace("law_slavery_banned");
+
+	// custom flag?
+	if (sourceCountry->getNationalColors().getCustomColors())
+		processedData.customColors = sourceCountry->getNationalColors().getCustomColors();
+	if (sourceCountry->isRevolutionary() && sourceCountry->getNationalColors().getRevolutionaryColor())
+		processedData.revolutionaryColor = sourceCountry->getNationalColors().getRevolutionaryColor();
 }
 
 void V3::Country::convertTier()
