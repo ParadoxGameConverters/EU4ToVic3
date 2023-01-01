@@ -15,7 +15,7 @@ TEST(V3World_FlagNameLoaderTests, NoLoadedMatchFails)
 TEST(V3World_FlagNameLoaderTests, DirectLoadedMatchesCanBeReturnedOnce)
 {
 	V3::FlagCrafter flagCrafter;
-	flagCrafter.loadAvailableFlags("TestFiles/configurables/blankMod/output/common/coat_of_arms/coat_of_arms/");
+	flagCrafter.loadAvailableFlags("TestFiles/configurables/blankMod/output/common/coat_of_arms/coat_of_arms/", "");
 
 	auto match = flagCrafter.getFlagsForEntity("AAA");
 
@@ -34,7 +34,7 @@ TEST(V3World_FlagNameLoaderTests, DirectLoadedMatchesCanBeReturnedOnce)
 TEST(V3World_FlagNameLoaderTests, FuzzyMatchingWorksAsLongAsThereAreCandidates)
 {
 	V3::FlagCrafter flagCrafter;
-	flagCrafter.loadAvailableFlags("TestFiles/configurables/blankMod/output/common/coat_of_arms/coat_of_arms/");
+	flagCrafter.loadAvailableFlags("TestFiles/configurables/blankMod/output/common/coat_of_arms/coat_of_arms/", "");
 
 	auto match = flagCrafter.getFlagsForEntity("title");
 
@@ -62,7 +62,7 @@ TEST(V3World_FlagNameLoaderTests, FuzzyMatchingWorksAsLongAsThereAreCandidates)
 TEST(V3World_FlagNameLoaderTests, FlagsCanBeAssignedViaFlagCodes)
 {
 	V3::FlagCrafter flagCrafter;
-	flagCrafter.loadAvailableFlags("TestFiles/configurables/blankMod/output/common/coat_of_arms/coat_of_arms/");
+	flagCrafter.loadAvailableFlags("TestFiles/configurables/blankMod/output/common/coat_of_arms/coat_of_arms/", "");
 
 	mappers::CountryMapper countryMapper;
 	std::stringstream countryInput;
@@ -95,7 +95,7 @@ TEST(V3World_FlagNameLoaderTests, FlagsCanBeAssignedViaFlagCodes)
 TEST(V3World_FlagNameLoaderTests, FlagsCanBeAssignedViaTAGs)
 {
 	V3::FlagCrafter flagCrafter;
-	flagCrafter.loadAvailableFlags("TestFiles/configurables/blankMod/output/common/coat_of_arms/coat_of_arms/");
+	flagCrafter.loadAvailableFlags("TestFiles/configurables/blankMod/output/common/coat_of_arms/coat_of_arms/", "");
 
 	mappers::CountryMapper countryMapper;
 	std::stringstream countryInput;
@@ -128,7 +128,7 @@ TEST(V3World_FlagNameLoaderTests, FlagsCanBeAssignedViaTAGs)
 TEST(V3World_FlagNameLoaderTests, FlagsCanBeAssignedViaNameMatch)
 {
 	V3::FlagCrafter flagCrafter;
-	flagCrafter.loadAvailableFlags("TestFiles/configurables/blankMod/output/common/coat_of_arms/coat_of_arms/");
+	flagCrafter.loadAvailableFlags("TestFiles/configurables/blankMod/output/common/coat_of_arms/coat_of_arms/", "");
 
 	mappers::CountryMapper countryMapper; // no rules whatsoever.
 
@@ -152,4 +152,29 @@ TEST(V3World_FlagNameLoaderTests, FlagsCanBeAssignedViaNameMatch)
 			  std::pair(V3::FlagCrafter::FLAGTYPE::Monarchy, "legacy_e_title_monarchy"),
 			  std::pair(V3::FlagCrafter::FLAGTYPE::Fascist, "legacy_e_title_fascist"),
 			  std::pair(V3::FlagCrafter::FLAGTYPE::Communist, "legacy_e_title_communist")));
+}
+
+TEST(V3World_FlagNameLoaderTests, FlagsWithVanillaMatchesWillNotBeAssigned)
+{
+	V3::FlagCrafter flagCrafter;
+	flagCrafter.loadAvailableFlags("TestFiles/configurables/blankMod/output/common/coat_of_arms/coat_of_arms/",
+		 "TestFiles/vic3installation/game/common/flag_definitions/");
+
+	mappers::CountryMapper countryMapper; // no rules whatsoever.
+
+	auto country = std::make_shared<V3::Country>(); // no eu4 country. not relevant. Get it some name.
+	V3::ProcessedData data;
+	data.namesByLanguage.emplace("english", "Title"); // this should match e_title in flags.
+	country->setProcessedData(data);
+
+	std::map<std::string, std::shared_ptr<V3::Country>> countries;
+	countries.emplace("ABC", country); // ABC has an override in vanilla flag definitions and will not be assigned a flag.
+
+	// now assign flags.
+	flagCrafter.distributeAvailableFlags(countries, countryMapper);
+
+	// do we have them yet?
+	const auto& flags = country->getFlags();
+
+	EXPECT_TRUE(flags.empty());
 }

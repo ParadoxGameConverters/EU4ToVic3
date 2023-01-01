@@ -28,7 +28,7 @@ class FlagCrafter
 
 	FlagCrafter() = default;
 
-	void loadAvailableFlags(const std::string& folderPath);
+	void loadAvailableFlags(const std::string& blankModPath, const std::string& vanillaPath);
 	void loadCustomColors(const std::string& filePath);
 	void distributeAvailableFlags(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper);
 
@@ -36,13 +36,14 @@ class FlagCrafter
 
   private:
 	[[nodiscard]] bool tryAssigningFlagViaValue(const std::shared_ptr<Country>& country, const std::string& value);
-	void loadKnownFlags(const std::string& folderPath);
+	void loadKnownFlags(const std::string& blankModPath, const std::string& vanillaPath);
 	void filterKnownFlags();
 
 	FlagColorLoader flagColorLoader;
 
 	std::set<std::string> spentFlags;
 	std::set<std::string> knownFlags;
+	std::set<std::string> knownVanillaFlags;
 	std::map<std::string, std::map<FLAGTYPE, std::string>> availableFlags;
 };
 } // namespace V3

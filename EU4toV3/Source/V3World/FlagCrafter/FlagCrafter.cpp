@@ -4,14 +4,15 @@
 #include "Log.h"
 #include "PoliticalManager/Country/Country.h"
 
-void V3::FlagCrafter::loadAvailableFlags(const std::string& folderPath)
+void V3::FlagCrafter::loadAvailableFlags(const std::string& blankModPath, const std::string& vanillaPath)
 {
 	Log(LogLevel::Info) << "-> Loading Available Flags.";
 
-	loadKnownFlags(folderPath);
+	loadKnownFlags(blankModPath, vanillaPath);
 	filterKnownFlags();
 
-	Log(LogLevel::Info) << "<> Loaded " << knownFlags.size() << " available flags for " << availableFlags.size() << " entitites.";
+	Log(LogLevel::Info) << "<> Loaded " << knownFlags.size() << " available flags for " << availableFlags.size() << " entitites, and "
+							  << knownVanillaFlags.size() << " vanilla flagsets.";
 }
 
 void V3::FlagCrafter::loadCustomColors(const std::string& filePath)
@@ -19,11 +20,14 @@ void V3::FlagCrafter::loadCustomColors(const std::string& filePath)
 	flagColorLoader.loadFlagColors(filePath);
 }
 
-void V3::FlagCrafter::loadKnownFlags(const std::string& folderPath)
+void V3::FlagCrafter::loadKnownFlags(const std::string& blankModPath, const std::string& vanillaPath)
 {
 	FlagNameLoader flagNameLoader;
-	flagNameLoader.loadKnownFlags(folderPath);
+	flagNameLoader.loadKnownFlags(blankModPath); // we're loading our COA DEFINITIONS, not flag definitions!
 	knownFlags = flagNameLoader.getKnownFlags();
+	FlagNameLoader vanillaFlagNameLoader;
+	vanillaFlagNameLoader.loadKnownFlags(vanillaPath); // Now we're loading vanilla flag DEFINITIONS for tags, directly.
+	knownVanillaFlags = vanillaFlagNameLoader.getKnownFlags();
 }
 
 void V3::FlagCrafter::filterKnownFlags()
@@ -100,9 +104,17 @@ void V3::FlagCrafter::distributeAvailableFlags(const std::map<std::string, std::
 	auto flagCodeCounter = 0;
 	auto tagCounter = 0;
 	auto nameCounter = 0;
+	auto vanillaCounter = 0;
 
 	for (const auto& [tag, country]: countries)
 	{
+		// are we already set?
+		if (knownVanillaFlags.contains(tag))
+		{
+			++vanillaCounter;
+			continue;
+		}
+
 		// do we have a flagcode? That'd be super helpful.
 		if (const auto& flagCode = countryMapper.getFlagCode(tag); flagCode && tryAssigningFlagViaValue(country, *flagCode))
 		{
@@ -127,9 +139,10 @@ void V3::FlagCrafter::distributeAvailableFlags(const std::map<std::string, std::
 		}
 	}
 
-	Log(LogLevel::Info) << "<> Distributed flags for " << flagCodeCounter + tagCounter + nameCounter << " out of " << countries.size() << " countries.";
+	Log(LogLevel::Info) << "<> Distributed flags for " << vanillaCounter + flagCodeCounter + tagCounter + nameCounter << " out of " << countries.size()
+							  << " countries.";
 	Log(LogLevel::Debug) << "Specifically, " << flagCodeCounter << " via flag codes, " << tagCounter << " via tag matches, " << nameCounter
-								<< " via name matches.";
+								<< " via name matches, and " << vanillaCounter << " have vanilla flags.";
 }
 
 bool V3::FlagCrafter::tryAssigningFlagViaValue(const std::shared_ptr<Country>& country, const std::string& value)

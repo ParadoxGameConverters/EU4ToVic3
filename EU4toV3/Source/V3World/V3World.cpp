@@ -109,7 +109,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getCultureLoader(),
 		 sourceWorld.getReligionLoader());
 
-	flagCrafter.loadAvailableFlags("blankMod/output/common/coat_of_arms/coat_of_arms/");
+	flagCrafter.loadAvailableFlags("blankMod/output/common/coat_of_arms/coat_of_arms/", V3Path + "/common/flag_definitions/");
 	flagCrafter.distributeAvailableFlags(politicalManager.getCountries(), *countryMapper);
 
 	Log(LogLevel::Info) << "-> Converting Provinces";
