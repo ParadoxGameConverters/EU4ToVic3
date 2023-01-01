@@ -2,7 +2,9 @@
 #include "CountryMapper/CountryMapper.h"
 #include "FlagNameLoader/FlagNameLoader.h"
 #include "Log.h"
+#include "OSCompatibilityLayer.h"
 #include "PoliticalManager/Country/Country.h"
+#include "targa.h"
 
 void V3::FlagCrafter::loadAvailableFlags(const std::string& blankModPath, const std::string& vanillaPath)
 {
@@ -137,6 +139,12 @@ void V3::FlagCrafter::distributeAvailableFlags(const std::map<std::string, std::
 			++nameCounter;
 			continue;
 		}
+
+		// do we need special attention?
+		if (country->getProcessedData().customColors)
+		{
+			craftCustomFlag(country);
+		}
 	}
 
 	Log(LogLevel::Info) << "<> Distributed flags for " << vanillaCounter + flagCodeCounter + tagCounter + nameCounter << " out of " << countries.size()
@@ -158,4 +166,180 @@ bool V3::FlagCrafter::tryAssigningFlagViaValue(const std::shared_ptr<Country>& c
 		return true;
 	}
 	return false;
+}
+
+void V3::FlagCrafter::craftCustomFlag(const std::shared_ptr<Country>& country)
+{
+	std::string baseFlagFolder = "blankMod/output/gfx/coat_of_arms/textured_emblems/";
+
+	const auto& v3Tag = country->getTag();
+	const auto& customColors = *country->getProcessedData().customColors;
+
+	auto baseFlagIndex = customColors.flagIndex;
+	auto baseFlagStr = std::to_string(baseFlagIndex);
+	auto emblem = customColors.symbolIndex;
+	auto flagColor = customColors.flagColors;
+	if (!flagColor)
+	{
+		Log(LogLevel::Error) << v3Tag << "'s flag colors are missing.";
+		return;
+	}
+	auto [r, g, b] = flagColor->getRgbComponents();
+
+	auto colourCount = static_cast<int>(flagColorLoader.getNumFlagColors());
+
+	if (r > colourCount || g > colourCount || b > colourCount)
+	{
+		Log(LogLevel::Error) << v3Tag << "'s flag has some invalid colors.";
+		return;
+	}
+
+	// We have 5 flags for every tag
+	for (auto i = 0; i < 5; i++)
+	{
+		if (baseFlagIndex == 0)
+			baseFlagStr = "tricolor";
+
+		// For custom/revolutionary flags we only create the fascist, absolutist and communist
+		if (baseFlagIndex == 0 && i != 0 && i != 4)
+			continue;
+
+		const auto& suffix = flagFileSuffixes[i];
+		auto sourceEmblemPath = baseFlagFolder + "/eu4_custom_emblems/" + std::to_string(emblem) + suffix;
+		auto sourceFlagPath = baseFlagFolder + "/eu4_custom_bases/" + baseFlagStr + ".tga";
+
+		if (const auto flagFileFound = commonItems::DoesFileExist(sourceFlagPath) && commonItems::DoesFileExist(sourceEmblemPath); flagFileFound)
+		{
+			auto destFlagPath = "flags/" + v3Tag + suffix;
+
+			auto rColor = flagColorLoader.getFlagColorByIndex(r);
+			auto gColor = flagColorLoader.getFlagColorByIndex(g);
+			auto bColor = flagColorLoader.getFlagColorByIndex(b);
+			if (!rColor)
+				rColor = commonItems::Color();
+			if (!gColor)
+				gColor = commonItems::Color();
+			if (!bColor)
+				bColor = commonItems::Color();
+			auto success = createCustomFlag(*rColor, *gColor, *bColor, sourceEmblemPath, sourceFlagPath, destFlagPath);
+			if (!success)
+				Log(LogLevel::Error) << "Flagcrafting of " << destFlagPath << " failed!";
+			else
+			{
+				if (i == 0)
+					country->addCustomFlag(Default, v3Tag + suffix);
+				else if (i == 1)
+					country->addCustomFlag(Communist, v3Tag + suffix);
+				else if (i == 2)
+					country->addCustomFlag(Fascist, v3Tag + suffix);
+				else if (i == 3)
+					country->addCustomFlag(Monarchy, v3Tag + suffix);
+				else if (i == 4)
+					country->addCustomFlag(Republic, v3Tag + suffix);
+			}
+		}
+		else
+		{
+			if (!commonItems::DoesFileExist(sourceFlagPath))
+				throw std::runtime_error("Could not find " + sourceFlagPath);
+			throw std::runtime_error("Could not find " + sourceEmblemPath);
+		}
+	}
+}
+
+bool V3::FlagCrafter::createCustomFlag(const commonItems::Color& c1,
+	 const commonItems::Color& c2,
+	 const commonItems::Color& c3,
+	 const std::string& emblemPath,
+	 const std::string& basePath,
+	 const std::string& targetPath)
+{
+	tga_image base;
+	tga_image emblem;
+
+	auto res = tga_read(&base, basePath.c_str());
+	if (res)
+	{
+		Log(LogLevel::Error) << "Failed to create custom flag: could not open " << basePath;
+		Log(LogLevel::Error) << "Error message from targa: " << tga_error(res);
+		return false;
+	}
+
+	res = tga_read(&emblem, emblemPath.c_str());
+	if (res)
+	{
+		Log(LogLevel::Error) << "Failed to create custom flag: could not open " << emblemPath;
+		Log(LogLevel::Error) << "Error message from targa: " << tga_error(res);
+		return false;
+	}
+
+	for (auto y = 0; y < base.height; y++)
+	{
+		for (auto x = 0; x < base.width; x++)
+		{
+			auto* targetAddress = tga_find_pixel(&base, x, y);
+
+			uint8_t r = 0, g = 0, b = 0;
+
+			res = tga_unpack_pixel(targetAddress, base.pixel_depth, &b, &g, &r, nullptr);
+			if (res)
+			{
+				Log(LogLevel::Error) << "Failed to create custom flag: could not read pixel data";
+				Log(LogLevel::Error) << "Error message from targa: " << tga_error(res);
+				return false;
+			}
+
+			const uint8_t c = ~r;
+			const uint8_t m = ~g;
+			const uint8_t z = ~b;
+
+			auto tr = int(m * c1.r()) + int(c * c2.r()) + int(z * c3.r());
+			auto tg = int(m * c1.g()) + int(c * c2.g()) + int(z * c3.g());
+			auto tb = int(m * c1.b()) + int(c * c2.b()) + int(z * c3.b());
+
+			tr /= 255;
+			tg /= 255;
+			tb /= 255;
+
+			uint8_t oRed = 0, oGreen = 0, oBlue = 0, oAlpha = 0;
+
+			auto* targetOverlayAddress = tga_find_pixel(&emblem, x, y);
+			if (targetOverlayAddress)
+			{
+				res = tga_unpack_pixel(targetOverlayAddress, emblem.pixel_depth, &oBlue, &oGreen, &oRed, &oAlpha);
+				if (res)
+				{
+					Log(LogLevel::Error) << "Failed to create custom flag: could not read pixel data";
+					Log(LogLevel::Error) << "Error message from targa: " << tga_error(res);
+					return false;
+				}
+
+				tr = oRed * oAlpha / 255 + tr * (255 - oAlpha) / 255;
+				tg = oGreen * oAlpha / 255 + tg * (255 - oAlpha) / 255;
+				tb = oBlue * oAlpha / 255 + tb * (255 - oAlpha) / 255;
+			}
+			else
+			{
+				Log(LogLevel::Warning) << "No targetOverlayAddress, error with targa handling.";
+			}
+
+			res = tga_pack_pixel(targetAddress, base.pixel_depth, tb, tg, tr, 255);
+			if (res)
+			{
+				Log(LogLevel::Error) << "Failed to create custom flag: could not write pixel data";
+				Log(LogLevel::Error) << "Error message from targa: " << tga_error(res);
+				return false;
+			}
+		}
+	}
+
+	res = tga_write(targetPath.c_str(), &base);
+	if (res)
+	{
+		Log(LogLevel::Error) << "Failed to create custom flag: could not write to " << targetPath;
+		Log(LogLevel::Error) << "Error message from targa: " << tga_error(res);
+		return false;
+	}
+
+	return true;
 }

@@ -69,8 +69,9 @@ struct ProcessedData
 	std::map<std::string, std::string> adjectivesByLanguage; // language, adj
 
 	std::map<FlagCrafter::FLAGTYPE, std::string> flags;
-	std::optional<EU4::CustomColorsBlock> customColors;	// used for flag generation for custom flag.
-	std::optional<commonItems::Color> revolutionaryColor; // used for flag generation for revolutionary flag.
+	std::optional<EU4::CustomColorsBlock> customColors;		 // used for flag generation for custom flag.
+	std::optional<commonItems::Color> revolutionaryColor;		 // used for flag generation for revolutionary flag.
+	std::map<FlagCrafter::FLAGTYPE, std::string> customFlags; // stuff we crafted ourselves.
 };
 
 class SubState;
@@ -132,6 +133,8 @@ class Country: commonItems::parser
 
 	void setFlags(const std::map<FlagCrafter::FLAGTYPE, std::string>& flags) { processedData.flags = flags; }
 	[[nodiscard]] const auto& getFlags() const { return processedData.flags; }
+	void addCustomFlag(FlagCrafter::FLAGTYPE flagType, const std::string& flagName) { processedData.customFlags.emplace(flagType, flagName); }
+	[[nodiscard]] const auto& getCustomFlags() const { return processedData.customFlags; }
 
 	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
 	[[nodiscard]] int getTechInfraCap() const { return 0; }

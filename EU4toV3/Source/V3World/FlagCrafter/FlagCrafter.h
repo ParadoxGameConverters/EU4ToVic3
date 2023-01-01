@@ -38,6 +38,15 @@ class FlagCrafter
 	[[nodiscard]] bool tryAssigningFlagViaValue(const std::shared_ptr<Country>& country, const std::string& value);
 	void loadKnownFlags(const std::string& blankModPath, const std::string& vanillaPath);
 	void filterKnownFlags();
+	void craftCustomFlag(const std::shared_ptr<Country>& country);
+
+	// FLAGUTILS
+	[[nodiscard]] static bool createCustomFlag(const commonItems::Color& c1,
+		 const commonItems::Color& c2,
+		 const commonItems::Color& c3,
+		 const std::string& emblemPath,
+		 const std::string& basePath,
+		 const std::string& targetPath);
 
 	FlagColorLoader flagColorLoader;
 
@@ -45,6 +54,8 @@ class FlagCrafter
 	std::set<std::string> knownFlags;
 	std::set<std::string> knownVanillaFlags;
 	std::map<std::string, std::map<FLAGTYPE, std::string>> availableFlags;
+
+	std::vector<std::string> flagFileSuffixes = {".tga", "_communist.tga", "_fascist.tga", "_monarchy.tga", "_republic.tga"};
 };
 } // namespace V3
 

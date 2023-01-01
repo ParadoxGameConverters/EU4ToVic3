@@ -109,6 +109,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getCultureLoader(),
 		 sourceWorld.getReligionLoader());
 
+	flagCrafter.loadCustomColors(configuration.getEU4Path() + "/common/custom_country_colors/00_custom_country_colors.txt");
 	flagCrafter.loadAvailableFlags("blankMod/output/common/coat_of_arms/coat_of_arms/", V3Path + "/common/flag_definitions/");
 	flagCrafter.distributeAvailableFlags(politicalManager.getCountries(), *countryMapper);
 
