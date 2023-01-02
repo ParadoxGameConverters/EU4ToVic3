@@ -1,30 +1,28 @@
 #ifndef V3_SECTOR_H
 #define V3_SECTOR_H
 #include "Parser.h"
-#include "Script/AddScript.h"
-#include "Script/MultiplyScript.h"
 
 namespace V3
 {
 // A Sector of industry is a group of vic3 buildings with similar characteristics and distribution
-
-class Sector: commonItems::parser
+class SectorLoader;
+class Country;
+class Sector
 {
   public:
 	Sector() = default;
-	void loadSector(std::istream& theStream);
-	void setName(const std::string& theName) { name = theName; }
+	void loadSector(std::shared_ptr<SectorLoader> sectorRules, std::shared_ptr<Country> country);
+
+	[[nodiscard]] const auto& getName() const { return name; }
+	[[nodiscard]] const auto& getCPBudget() const { return CPBudget; }
+	[[nodiscard]] const auto& getBuildings() const { return buildings; }
+	[[nodiscard]] bool hasBuilding(const std::string& building) const;
 
   private:
-	void registerKeys();
-	void mergeModifiers();
-
 	std::string name;
 	double weight = 0;
-	std::vector<std::string> buildings;
-
-	std::vector<AddScript> adders;
-	std::vector<MultiplyScript> multipliers;
+	int CPBudget = 0;
+	std::set<std::string> buildings;
 };
 } // namespace V3
 

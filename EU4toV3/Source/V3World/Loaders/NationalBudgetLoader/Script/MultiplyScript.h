@@ -6,7 +6,7 @@ namespace V3
 {
 
 class Country;
-class MultiplyScript: MathScript
+class MultiplyScript: public MathScript
 {
   public:
 	MultiplyScript() = default;

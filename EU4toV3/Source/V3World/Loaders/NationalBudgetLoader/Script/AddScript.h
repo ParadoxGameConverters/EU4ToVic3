@@ -6,7 +6,7 @@ namespace V3
 {
 
 class Country;
-class AddScript: MathScript
+class AddScript: public MathScript
 {
   public:
 	AddScript() = default;
