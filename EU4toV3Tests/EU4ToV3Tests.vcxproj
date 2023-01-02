@@ -176,6 +176,7 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\ProductionMethods\ProductionMethod.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\ProductionMethods\ProductionMethodGroup.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\EconomyManager.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\NationalBudget\Sector.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingGroupLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\ProductionMethodLoader\ProductionMethodGroupLoader.cpp" />
@@ -183,6 +184,11 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\CountryDefinitionLoader\CountryDefinitionLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\DefinesLoader\BuildingScriptValuesLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LocLoader\LocalizationLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\NationalBudgetLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\Script\AddScript.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\Script\MathScript.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\Script\MultiplyScript.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\SectorLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\PopEntry.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\PopLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\StateEntries.cpp" />
@@ -298,11 +304,12 @@
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\StateModifierTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\StateTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\SubStateTests.cpp" />
-    <ClCompile Include="V3WorldTests\EconomyManagerTests\Building\BuildingGroupsTests.cpp" />
-    <ClCompile Include="V3WorldTests\EconomyManagerTests\Building\BuildingTests.cpp" />
-    <ClCompile Include="V3WorldTests\EconomyManagerTests\Building\ProductionMethodGroupTests.cpp" />
-    <ClCompile Include="V3WorldTests\EconomyManagerTests\Building\ProductionMethodTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\BuildingGroupsTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\BuildingTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\ProductionMethodGroupTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\ProductionMethodTests.cpp" />
     <ClCompile Include="V3WorldTests\EconomyManagerTests\EconomyManagerTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\NationalBudgetTests\SectorTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\BuildingGroupLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\BuildingLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\ProductionMethodGroupLoaderTests.cpp" />
@@ -311,6 +318,9 @@
     <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\BuildingScriptValuesLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\DefinesLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\LocLoaderTests\LocalizationLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\NationalBudgetLoaderTests\MathScriptTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\NationalBudgetLoaderTests\NationalBudgetLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\NationalBudgetLoaderTests\SectorLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\PopEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\PopLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\StateEntriesTests.cpp" />

@@ -6,7 +6,7 @@ TEST(Mappers_BuildingMappingTests, RulesCanBeLoaded)
 {
 
 	std::stringstream input;
-	input << "eu4 = building_1 vic3 = { building_1, building_2 }\n";
+	input << "eu4 = building_1 vic3 = { building_1 building_2 }\n";
 
 	const mappers::BuildingMapping buildingMapping(input);
 
