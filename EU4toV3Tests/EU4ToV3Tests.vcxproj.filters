@@ -754,9 +754,6 @@
     <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\BuildingScriptValuesLoaderTests.cpp">
       <Filter>V3WorldTests\LoaderTests\DefinesLoaderTests</Filter>
     </ClCompile>
-    <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\DefinesLoaderTests.cpp">
-      <Filter>V3WorldTests\LoaderTests\DefinesLoaderTests</Filter>
-    </ClCompile>
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\BuildingLoaderTests.cpp">
       <Filter>V3WorldTests\LoaderTests\BuildingLoaderTests</Filter>
     </ClCompile>
@@ -828,6 +825,12 @@
     </ClCompile>
     <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\ProductionMethodTests.cpp">
       <Filter>V3WorldTests\EconomyManagerTests\BuildingTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\DefinesLoader\EconDefinesLoader.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\DefinesLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\EconDefniesLoaderTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\DefinesLoaderTests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1526,6 +1529,9 @@
       <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\national_budget.txt">
+      <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\econ_defines.txt">
       <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>

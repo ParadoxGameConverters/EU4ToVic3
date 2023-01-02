@@ -27,6 +27,8 @@ void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::
 			continue;
 		if (country->getProcessedData().type == "decentralized")
 			continue;
+		if (country->getSubStates().empty())
+			continue;
 
 		centralizedCountries.push_back(country);
 	}
@@ -35,7 +37,7 @@ void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::
 void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY economyType, const PoliticalManager& politicalManager) const
 {
 	// Some global value of CP to spend, calibrate to Vanilla.
-	double globalCP = 1208050;
+	double globalCP = 1451750;
 
 	// TODO(Gawquon): adjust based on date
 	double dateFactor = 0;

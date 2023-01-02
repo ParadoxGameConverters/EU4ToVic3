@@ -183,6 +183,7 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\ProductionMethodLoader\ProductionMethodLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\CountryDefinitionLoader\CountryDefinitionLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\DefinesLoader\BuildingScriptValuesLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\DefinesLoader\EconDefinesLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LocLoader\LocalizationLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\NationalBudgetLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\Script\AddScript.cpp" />
@@ -316,7 +317,7 @@
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\ProductionMethodLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\CountryDefinitionLoaderTests\CountryDefinitionLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\BuildingScriptValuesLoaderTests.cpp" />
-    <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\DefinesLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\EconDefniesLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\LocLoaderTests\LocalizationLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\NationalBudgetLoaderTests\MathScriptTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\NationalBudgetLoaderTests\NationalBudgetLoaderTests.cpp" />
@@ -625,6 +626,11 @@
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\national_budget.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\econ_defines.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>

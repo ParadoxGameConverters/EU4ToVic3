@@ -18,4 +18,4 @@ class BuildingScriptValuesLoader: commonItems::parser
 	std::map<std::string, int> buildingCostConstants;
 };
 } // namespace V3
-#endif // BUILDING_GROUP_LOADER_H
+#endif // BUILDING_SCRIPT_VALUES_LOADER_H

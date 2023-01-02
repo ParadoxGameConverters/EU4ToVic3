@@ -1,0 +1,22 @@
+# These defines are used by the economy manager to figure out the amount of buildings generated.
+# They are calibrated based on Vanilla Vic3.
+
+# (0 <-> INTMAX)
+# Total # of CP in the globe
+global_construction_points = 1451750
+
+# (0 <-> 1)
+# Expected % of population living in centralized countries
+centralized_population_ratio = 0.975
+
+# (0 <-> 10)
+# Expected average industrial score for all centralized nations
+average_industrial_score = 8
+
+# (0 <-> 1)
+# What % of a state trait bonus (i.e. 20% bonus to Iron Mine throughput) counts towards a state's attractiveness for investment.
+state_trait_strength = 0.5
+
+# (-1 <-> 1)
+# The higher this number is, the more a single sector of industry will cluster into fewer states.
+packet_factor = 0
