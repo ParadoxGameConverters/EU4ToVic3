@@ -11,7 +11,7 @@ void mappers::ColonialTagMapper::loadMappingRules(const std::string& filePath)
 	registerKeys();
 	parseFile(filePath);
 	clearRegisteredKeywords();
-	Log(LogLevel::Info) << "<> " << colonialTagMappings.size() << " rules loaded.";
+	Log(LogLevel::Info) << "<> " << colonialTagMappings.size() << " colonial tag rules loaded.";
 }
 
 void mappers::ColonialTagMapper::registerKeys()

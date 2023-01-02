@@ -1,6 +1,7 @@
 #ifndef POLITICAL_MANAGER_H
 #define POLITICAL_MANAGER_H
 #include "CharacterTraitMapper/CharacterTraitMapper.h"
+#include "ColonialTagMapper/ColonialTagMapper.h"
 #include "Configuration.h"
 #include "DatingData.h"
 #include "Diplomacy/Agreement.h"
@@ -53,6 +54,7 @@ class PoliticalManager
 	void loadLawDefinitions(const commonItems::ModFilesystem& modFS);
 	void loadDiplomaticMapperRules(const std::string& filePath);
 	void loadCharacterTraitMapperRules(const std::string& filePath);
+	void loadColonialTagMapperRules(const std::string& filePath);
 	void importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries);
 	void generateDecentralizedCountries(const ClayManager& clayManager, const PopManager& popManager);
 	void convertAllCountries(const ClayManager& clayManager,
@@ -85,12 +87,16 @@ class PoliticalManager
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader);
 
+	void attemptColonialTagReplacement(const mappers::ColonialRegionMapper& colonialRegionMapper, const ClayManager& clayManager);
+
   private:
 	void generateDecentralizedCountry(const std::string& culture, const std::vector<std::shared_ptr<SubState>>& subStates);
 	static CulturalSubStates sortSubStatesByCultures(const ClayManager& clayManager, const PopManager& popManager);
 	static std::string getDominantDemographic(const std::vector<Demographic>& demographics);
 	void grantLawFromGroup(const std::string& lawGroup, const std::shared_ptr<Country>& country) const;
 	[[nodiscard]] bool isEU4CountryConvertedAndLanded(const std::string& eu4Tag) const;
+	[[nodiscard]] bool isValidForColonialReplacement(const std::string& tag) const;
+	void changeTag(const std::string& replacement, const std::string& tag);
 
 	std::map<std::string, std::shared_ptr<Country>> countries;
 	std::vector<Agreement> agreements;
@@ -102,6 +108,7 @@ class PoliticalManager
 	mappers::LawMapper lawMapper;
 	mappers::DiplomaticMapper diplomaticMapper;
 	mappers::CharacterTraitMapper characterTraitMapper;
+	mappers::ColonialTagMapper colonialTagMapper;
 };
 } // namespace V3
 #endif // POLITICAL_MANAGER_H

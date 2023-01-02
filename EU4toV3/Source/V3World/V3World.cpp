@@ -37,6 +37,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.loadLawDefinitions(dwFS);
 	politicalManager.loadDiplomaticMapperRules("configurables/diplomatic_map.txt");
 	politicalManager.loadCharacterTraitMapperRules("configurables/character_traits.txt");
+	politicalManager.loadColonialTagMapperRules("configurables/colonial_tags.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	localizationLoader.scrapeLocalizations(dwFS);
 
@@ -82,6 +83,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getReligionLoader(),
 		 localizationLoader,
 		 sourceWorld.getEU4Localizations());
+
+	politicalManager.attemptColonialTagReplacement(cultureMapper.getColonialRegionMapper(), clayManager);
 
 	popManager.generatePops(clayManager);
 

@@ -35,13 +35,18 @@ std::optional<std::string> mappers::ColonialTagMapping::matchColonialTag(const V
 	const auto& subStates = country.getSubStates();
 	if (subStates.empty())
 		return std::nullopt;
+
 	const auto& capitalStateName = country.getProcessedData().capitalStateName;
 	if (capitalStateName.empty() && !tag.empty())
 		return std::nullopt;
 
 	// first the capital matches
-	if (!tag.empty() && capitalStateName == region)
-		return tag;
+	if (!tag.empty())
+	{
+		if (capitalStateName == region)
+			return tag;
+		return std::nullopt;
+	}
 
 	if (aloneName.empty())
 	{
@@ -75,5 +80,6 @@ std::optional<std::string> mappers::ColonialTagMapping::matchColonialTag(const V
 	for (const auto& requiredState: requiredStates)
 		if (!ownedStates.contains(requiredState))
 			return std::nullopt;
+
 	return aloneName;
 }
