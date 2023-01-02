@@ -3,7 +3,9 @@
 #include "Character.h"
 #include "Color.h"
 #include "Configuration.h"
+#include "CountryManager/NationalSymbol/EU4CustomColors.h"
 #include "DatingData.h"
+#include "FlagCrafter/FlagCrafter.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
 #include "Parser.h"
 #include "PoliticalManager/Diplomacy/Relation.h"
@@ -65,6 +67,11 @@ struct ProcessedData
 	std::string adjective;
 	std::map<std::string, std::string> namesByLanguage;		// language, name
 	std::map<std::string, std::string> adjectivesByLanguage; // language, adj
+
+	std::map<FlagCrafter::FLAGTYPE, std::string> flags;
+	std::optional<EU4::CustomColorsBlock> customColors;		 // used for flag generation for custom flag.
+	std::optional<commonItems::Color> revolutionaryColor;		 // used for flag generation for revolutionary flag.
+	std::map<FlagCrafter::FLAGTYPE, std::string> customFlags; // stuff we crafted ourselves.
 };
 
 class SubState;
@@ -123,6 +130,12 @@ class Country: commonItems::parser
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader,
 		 const date& conversionDate);
+
+	void setFlags(const std::map<FlagCrafter::FLAGTYPE, std::string>& flags) { processedData.flags = flags; }
+	void addFlag(const FlagCrafter::FLAGTYPE flagType, const std::string& flag) { processedData.flags.emplace(flagType, flag); }
+	[[nodiscard]] const auto& getFlags() const { return processedData.flags; }
+	void addCustomFlag(FlagCrafter::FLAGTYPE flagType, const std::string& flagName) { processedData.customFlags.emplace(flagType, flagName); }
+	[[nodiscard]] const auto& getCustomFlags() const { return processedData.customFlags; }
 
 	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
 	[[nodiscard]] int getTechInfraCap() const { return 0; }

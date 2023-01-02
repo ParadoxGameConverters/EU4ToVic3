@@ -216,6 +216,12 @@ void EU4::World::verifySave()
 	std::string save_string(save_size, '\0');
 	save_file.read(save_string.data(), save_size);
 
+	if (save_string.starts_with("EU4txt"))
+	{
+		saveGame.gamestate = save_string;
+		return;
+	}
+
 	const auto game_state = rakaly::meltEu4(save_string);
 	game_state.writeData(saveGame.gamestate);
 	if (game_state.has_unknown_tokens())

@@ -4,6 +4,7 @@
 #include "Configuration.h"
 #include "CountryMapper/CountryMapper.h"
 #include "CultureMapper/CultureMapper.h"
+#include "FlagCrafter/FlagCrafter.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
 #include "PoliticalManager/PoliticalManager.h"
 #include "PopManager/PopManager.h"
@@ -42,6 +43,7 @@ class World
 	mappers::ReligionMapper religionMapper;
 	mappers::CultureMapper cultureMapper;
 	std::shared_ptr<mappers::CountryMapper> countryMapper;
+	FlagCrafter flagCrafter;
 };
 
 } // namespace V3

@@ -1,0 +1,106 @@
+# If a colonial/ex-colonial country exists in the region specified, it gets the tag given.
+# If there's alone = TAG, it requires the country to own all states inside given colonial region.
+# Colonial regions are defined in colonial_regions.txt.
+
+# Canada and Alaska
+link = { region = canada_colony alone = CAN } # Canada
+link = { region = STATE_BRITISH_COLUMBIA tag = COL } # Columbia
+link = { region = STATE_NEWFOUNDLAND tag = NEW } # Newfoundland
+link = { region = STATE_QUEBEC tag = QUE } # Quebec
+link = { region = STATE_MANITOBA tag = HBC } # Hudson Bay
+link = { region = STATE_ONTARIO tag = ONT } # Ontario
+link = { region = STATE_NEW_BRUNSWICK tag = NBS } # New Brunswick
+#link = { tag = NOV v2region = ENG_68 } # Nova Scotia - Region "New Brunswick"
+#link = { tag = LSK v2region = USA_1 } #Alaska - In Alaska
+#link = { tag = LSK v2region = ENG_22 } #Alaska - In Colombia
+
+# Eastern USA
+link = { region = usa_north_colony alone = USA } # USA
+link = { region = STATE_MASSACHUSETTS tag = NEN } # New England
+#link = { tag = VRM v2region = USA_247 } # Vermont
+#link = { tag = UNY v2region = ENG_30 cultureGroup = british } #New York
+#link = { tag = MAN v2region = ENG_30 } #Manhattan Commune - Capital in and/or owns all of V2 region New York
+#link = { tag = FLR v2region = USA_200 } # Florida
+link = { region = STATE_TEXAS tag = TEX } # Texas
+link = { region = STATE_SOUTH_DAKOTA tag = DKT } # Dakota
+link = { region = STATE_MICHIGAN tag = UOM } # Michigan
+#link = { tag = UIL v2region = USA_168 } #Illinois
+#link = { tag = UNB v2region = USA_124 } #Nebraska
+#link = { tag = LOU } #Louisiana
+
+# Western USA
+#link = { region = colonial_california alone = CAL } # California
+link = { region = STATE_CALIFORNIA tag = CAL } # California
+link = { region = STATE_UTAH tag = DES } # Deseret
+link = { region = STATE_OREGON tag = ORG } # Oregon
+
+# Caribbean
+link = { region = STATE_CUBA tag = CUB } # Cuba
+link = { region = STATE_SANTO_DOMINGO tag = DOM } # Dominican Republic
+link = { region = STATE_HAITI tag = HAI } # Haiti
+link = { region = STATE_WEST_INDIES tag = WIN } # West Indies
+link = { region = STATE_JAMAICA tag = JAM } # Jamaica
+link = { region = STATE_BAHAMAS tag = BAH } # Bahamas
+link = { region = STATE_PUERTO_RICO tag = PCO } # Puerto Rico
+#link = { tag = CUR v2region = ENG_2224 cultureGroup = beneluxian } # Curaçao
+#link = { tag = CRB } #Caribbean - Fallback
+
+# Central America
+link = { region = mexico_colony alone = MEX } # Mexico
+link = { region = STATE_MEXICO tag = MEX } # Mexico
+link = { region = STATE_COSTA_RICA tag = COS } # Costa Rica
+link = { region = STATE_SAN_SALVADOR tag = ELS } # El Salvador
+link = { region = STATE_GUATEMALA tag = GUA } # Guatemala
+link = { region = STATE_HONDURAS tag = HON } # Honduras
+link = { region = STATE_NICARAGUA tag = NIC } # Nicaragua
+link = { region = STATE_PANAMA tag = PNM } # Panama
+link = { region = STATE_YUCATAN tag = YUC } # Yucatán
+#link = { tag = UNM v2region = MEX_103 } #New Mexico
+#link = { tag = BLZ v2region = UCA_2186 } #Belize
+#link = { tag = SON v2region = MEX_2138 } #Sonora
+
+# Brazil
+link = { region = brazil_colony alone = BRZ } # Brazil
+link = { region = STATE_AMAZONAS tag = AMZ } # Amazonas
+link = { region = STATE_RIO_GRANDE_DO_SUL tag = PNI } # Piratini
+link = { region = STATE_PARA tag = PRA } # Grão-Pará
+#link = { tag = CEQ v2region = BRZ_2428 } #Pernambuco
+
+# Peru
+link = { region = peru_colony alone = PEU } # Peru
+link = { region = STATE_SANTA_CRUZ tag = BOL } # Bolivia
+
+# La Plata
+link = { region = argentine_colony alone = ARG } # Argentina
+link = { region = STATE_SANTA_CRUZ tag = BOL } # Bolivia
+link = { region = STATE_SANTIAGO tag = CHL } # Chile
+link = { region = STATE_BAJO_PARAGUAY tag = PRG } # Paraguay
+link = { region = STATE_URUGUAY tag = URU } # Uruguay
+link = { region = STATE_PATAGONIA tag = PAT } # Patagonia
+#link = { tag = ENT cultureGroup = iberian v2region = ARG_2357 hpm_region = ARG_2360 } #Entre Ríos
+#link = { tag = SBA cultureGroup = iberian v2region = ARG_2355 } #Buenos Aires
+#link = { tag = LPL cultureGroup = iberian } #La Plata
+
+# Colombia
+link = { region = colombia_colony alone = GCO } # Gran Colombia
+link = { region = STATE_CUNDINAMARCA tag = CLM } # Colombia
+link = { region = STATE_ECUADOR tag = ECU } # Ecuador
+link = { region = STATE_MIRANDA tag = VNZ } # Venezuela
+
+# Guyana
+#link = { tag = SUR } #Suriname
+#link = { tag = CAY } #Cayenne/French Guyana
+#link = { tag = GUY } #Guyana
+
+# Oceania
+link = { region = australia_colony alone = AST } # Australia
+link = { region = STATE_FIJI tag = FJI } # Fiji
+link = { region = STATE_EAST_MICRONESIA tag = MCR } # Micronesia
+link = { region = STATE_VANUATU tag = VNT } # Vanuatu
+link = { region = STATE_NAURU tag = NRU } # Nauru
+link = { region = STATE_TAHITI tag = PLY } # Polynesia
+link = { region = STATE_NEW_SOUTH_WALES tag = NSW } # New South Wales
+link = { region = STATE_WESTERN_AUSTRALIA tag = WAS } # Western Australia
+link = { region = STATE_SOUTH_AUSTRALIA tag = SAS } # South Australia
+link = { region = STATE_NORTH_ISLAND tag = NZL } # New Zealand
+link = { region = STATE_VICTORIA tag = TAS } # Tasmania

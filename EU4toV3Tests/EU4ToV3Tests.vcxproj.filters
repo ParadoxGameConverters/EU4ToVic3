@@ -820,6 +820,27 @@
     <ClCompile Include="..\commonItems\external\zip\src\zip.c">
       <Filter>ConverterFiles\commonItems\zip</Filter>
     </ClCompile>
+    <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagNameLoaderTests\FlagNameLoaderTests.cpp">
+      <Filter>V3WorldTests\FlagCrafterTests\FlagNameLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\FlagCrafter\FlagNameLoader\FlagNameLoader.cpp">
+      <Filter>ConverterFiles\V3World\FlagCrafter\FlagNameLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\FlagCrafter\FlagCrafter.cpp">
+      <Filter>ConverterFiles\V3World\FlagCrafter</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagCrafterTests.cpp">
+      <Filter>V3WorldTests\FlagCrafterTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\FlagCrafter\FlagColorLoader\FlagColorLoader.cpp">
+      <Filter>ConverterFiles\V3World\FlagCrafter\FlagColorLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagColorLoaderTests\FlagColorLoaderTests.cpp">
+      <Filter>V3WorldTests\FlagCrafterTests\FlagColorLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\commonItems\targa.cpp">
+      <Filter>ConverterFiles\commonItems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1326,6 +1347,45 @@
     <Filter Include="ConverterFiles\commonItems\zip">
       <UniqueIdentifier>{8b48c9ed-17e5-46dc-bbad-489094ef4e85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TestFiles\configurables\blankMod">
+      <UniqueIdentifier>{e8d58524-6ec0-40bf-a727-b0e2de3f46c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\configurables\blankMod\output">
+      <UniqueIdentifier>{cae5331d-6b76-4d1a-b424-42fd81d01991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\configurables\blankMod\output\common">
+      <UniqueIdentifier>{a4b7ffb3-4c1b-4923-942e-b3c7d90b3c46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\configurables\blankMod\output\common\coat_of_arms">
+      <UniqueIdentifier>{d8bed658-9c9e-4fe6-8c03-df9e37acf77b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\configurables\blankMod\output\common\coat_of_arms\coat_of_arms">
+      <UniqueIdentifier>{4b4c2400-3a2a-4c3e-a080-f8df04882169}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\FlagCrafterTests">
+      <UniqueIdentifier>{543463dd-1472-4ddb-9865-7cd9f37e05c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\FlagCrafterTests\FlagNameLoaderTests">
+      <UniqueIdentifier>{5c89c2c0-61bf-498c-95c6-e9202155ea3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\FlagCrafter">
+      <UniqueIdentifier>{0540cc7f-e967-44ff-8692-402cd2bd6e0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\FlagCrafter\FlagNameLoader">
+      <UniqueIdentifier>{8b54dd88-2c8b-4b29-8cd3-1390a17ada2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\FlagCrafter\FlagColorLoader">
+      <UniqueIdentifier>{2da8049d-4e39-40f4-adc8-479a7d365233}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\eu4installation\common\custom_country_colors">
+      <UniqueIdentifier>{cf42fc18-95b8-4b45-954e-b6323671b27b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\FlagCrafterTests\FlagColorLoaderTests">
+      <UniqueIdentifier>{341d0772-4aa5-4366-a7ee-7e5e47a5af60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\flag_definitions">
+      <UniqueIdentifier>{ca85255b-b270-4a84-9a99-f95e64bdddc0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1506,6 +1566,18 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\character_traits.txt">
       <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\blankMod\output\common\coat_of_arms\coat_of_arms\00_flags.txt">
+      <Filter>TestFiles\configurables\blankMod\output\common\coat_of_arms\coat_of_arms</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\blankMod\output\common\coat_of_arms\coat_of_arms\99_flags.txt">
+      <Filter>TestFiles\configurables\blankMod\output\common\coat_of_arms\coat_of_arms</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\custom_country_colors\00_custom_country_colors.txt">
+      <Filter>TestFiles\eu4installation\common\custom_country_colors</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\flag_definitions\00_flag_definitions.txt">
+      <Filter>TestFiles\vic3installation\game\common\flag_definitions</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>
