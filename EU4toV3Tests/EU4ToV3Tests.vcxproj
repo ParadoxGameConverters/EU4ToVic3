@@ -138,6 +138,8 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\CharacterTraitMapper\SkillMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialRegionMapper\ColonialRegionMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialRegionMapper\ColonialRegionMapping.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialTagMapper\ColonialTagMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialTagMapper\ColonialTagMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CountryMapper\CountryMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CountryMapper\CountryMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionEntry.cpp" />
@@ -274,6 +276,8 @@
     <ClCompile Include="MapperTests\CharacterTraitMapperTests\SkillMappingTests.cpp" />
     <ClCompile Include="MapperTests\ColonialRegionMapperTests\ColonialRegionMapperTests.cpp" />
     <ClCompile Include="MapperTests\ColonialRegionMapperTests\ColonialRegionMappingTests.cpp" />
+    <ClCompile Include="MapperTests\ColonialTagMapperTests\ColonialTagMapperTests.cpp" />
+    <ClCompile Include="MapperTests\ColonialTagMapperTests\ColonialTagMappingTests.cpp" />
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMapperTests.cpp" />
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMappingTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureDefinitionLoaderTests\CultureDefinitionEntryTests.cpp" />
@@ -647,6 +651,11 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\flag_definitions\00_flag_definitions.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/flag_definitions</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\colonial_tags.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

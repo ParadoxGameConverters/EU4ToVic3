@@ -701,3 +701,34 @@ std::optional<std::string> V3::ClayManager::getHistoricalCapitalState(const std:
 			return substate->getHomeStateName();
 	return std::nullopt;
 }
+
+std::set<std::string> V3::ClayManager::getStateNamesForRegion(const std::string& regionName) const
+{
+	std::set<std::string> stateNames;
+	if (states.contains(regionName))
+	{
+		stateNames.emplace(regionName);
+		return stateNames;
+	}
+
+	if (superRegions.contains(regionName))
+	{
+		for (const auto& region: superRegions.at(regionName)->getRegions() | std::views::values)
+			for (const auto& state: region->getStates() | std::views::keys)
+				stateNames.emplace(state);
+		return stateNames;
+	}
+
+	for (const auto& superRegion: superRegions | std::views::values)
+	{
+		if (superRegion->getRegions().contains(regionName))
+		{
+			for (const auto& state: superRegion->getRegions().at(regionName)->getStates() | std::views::keys)
+				stateNames.emplace(state);
+			return stateNames;
+		}
+	}
+
+	Log(LogLevel::Warning) << "Attempting colonial lookup at " << regionName << " failed! It doesn't match anything we know!";
+	return stateNames;
+}

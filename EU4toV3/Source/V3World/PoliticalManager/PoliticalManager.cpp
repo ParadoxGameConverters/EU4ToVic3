@@ -2,6 +2,7 @@
 #include "ClayManager/ClayManager.h"
 #include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
+#include "ColonialRegionMapper/ColonialRegionMapper.h"
 #include "Country/Country.h"
 #include "CountryManager/EU4Country.h"
 #include "DiplomacyParser/EU4Agreement.h"
@@ -67,6 +68,11 @@ void V3::PoliticalManager::loadDiplomaticMapperRules(const std::string& filePath
 void V3::PoliticalManager::loadCharacterTraitMapperRules(const std::string& filePath)
 {
 	characterTraitMapper.loadMappingRules(filePath);
+}
+
+void V3::PoliticalManager::loadColonialTagMapperRules(const std::string& filePath)
+{
+	colonialTagMapper.loadMappingRules(filePath);
 }
 
 void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries)
@@ -217,7 +223,7 @@ bool V3::PoliticalManager::isTagDecentralized(const std::string& v3Tag) const
 	const auto& country = countries.at(v3Tag);
 
 	// this means it's loaded from disk, and it's decentralized.
-	if (country->getVanillaData() && country->getVanillaData()->type == "decentralized")
+	if (country->getVanillaData() && (*country->getVanillaData()).type == "decentralized")
 		return true;
 	return false;
 }
@@ -521,4 +527,56 @@ void V3::PoliticalManager::convertCharacters(const date& conversionDate,
 	}
 	Log(LogLevel::Info) << "<> Imported " << counter << " Characters. Some died along the way. We buried those.";
 	Log(LogLevel::Debug) << "You won't find the corpses.";
+}
+
+void V3::PoliticalManager::attemptColonialTagReplacement(const mappers::ColonialRegionMapper& colonialRegionMapper, const ClayManager& clayManager)
+{
+	Log(LogLevel::Info) << "-> Attempting colonial tag replacement.";
+
+	std::map<std::string, std::string> tagsToUpdate; // new->old
+
+	for (const auto& [tag, country]: countries)
+	{
+		if (!TechValues::isValidCountryForTechConversion(*country))
+			continue;
+		if (!country->getSourceCountry()->isColony())
+			continue;
+
+		// focus only on CXX countries.
+		const auto& eu4tag = country->getSourceCountry()->getTag();
+		if (!eu4tag.starts_with("C") || !mappers::CountryMapper::tagIsDynamic(eu4tag))
+			continue;
+
+		if (const auto replacement = colonialTagMapper.matchColonialTag(*country, colonialRegionMapper, clayManager); replacement)
+		{
+			if (isValidForColonialReplacement(*replacement) && !tagsToUpdate.contains(*replacement))
+				tagsToUpdate.emplace(*replacement, tag);
+		}
+	}
+
+	for (const auto& [replacement, tag]: tagsToUpdate)
+		changeTag(replacement, tag);
+
+	Log(LogLevel::Info) << "<> Swapped " << tagsToUpdate.size() << " countries for colonial tags.";
+}
+
+bool V3::PoliticalManager::isValidForColonialReplacement(const std::string& tag) const
+{
+	if (!countries.contains(tag))
+		return true;
+	if (!countries.at(tag)->getSourceCountry())
+		return true;
+	return false;
+}
+
+void V3::PoliticalManager::changeTag(const std::string& replacement, const std::string& tag)
+{
+	if (countries.contains(replacement))
+		countries[replacement] = countries[tag];
+	else
+		countries.emplace(replacement, countries.at(tag));
+
+	countries[replacement]->setTag(replacement);
+
+	countryMapper->relink(countries.at(replacement)->getSourceCountry()->getTag(), tag, replacement);
 }

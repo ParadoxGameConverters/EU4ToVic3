@@ -841,6 +841,18 @@
     <ClCompile Include="..\commonItems\targa.cpp">
       <Filter>ConverterFiles\commonItems</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialTagMapper\ColonialTagMapper.cpp">
+      <Filter>ConverterFiles\Mappers\ColonialTagMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialTagMapper\ColonialTagMapping.cpp">
+      <Filter>ConverterFiles\Mappers\ColonialTagMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\ColonialTagMapperTests\ColonialTagMapperTests.cpp">
+      <Filter>MapperTests\ColonialTagMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\ColonialTagMapperTests\ColonialTagMappingTests.cpp">
+      <Filter>MapperTests\ColonialTagMapperTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1386,6 +1398,12 @@
     <Filter Include="TestFiles\vic3installation\game\common\flag_definitions">
       <UniqueIdentifier>{ca85255b-b270-4a84-9a99-f95e64bdddc0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\Mappers\ColonialTagMapper">
+      <UniqueIdentifier>{d211ade1-d83c-4852-a3ef-9af5f9f198fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\ColonialTagMapperTests">
+      <UniqueIdentifier>{534a3502-8b86-4538-b3d1-392ee938a0a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1578,6 +1596,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\flag_definitions\00_flag_definitions.txt">
       <Filter>TestFiles\vic3installation\game\common\flag_definitions</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\colonial_tags.txt">
+      <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

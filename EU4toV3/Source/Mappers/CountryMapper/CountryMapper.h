@@ -30,6 +30,8 @@ class CountryMapper: commonItems::parser
 
 	[[nodiscard]] const auto& getMappingRules() const { return countryMappingRules; }
 
+	void relink(const std::string& eu4tag, const std::string& currentTag, const std::string& newTag);
+
   private:
 	void registerKeys();
 

@@ -197,3 +197,18 @@ std::string mappers::CountryMapper::requestNewV3Tag()
 	unmappedV3Tags.emplace(newTag);
 	return newTag;
 }
+
+void mappers::CountryMapper::relink(const std::string& eu4tag, const std::string& currentTag, const std::string& newTag)
+{
+	if (!eu4TagToV3TagMap.contains(eu4tag))
+		Log(LogLevel::Error) << "Relinking eu4 tag " + eu4tag + " failed, it was never linked!";
+
+	eu4TagToV3TagMap.at(eu4tag) = newTag;
+	v3TagToEU4TagMap.erase(currentTag);
+	v3TagToEU4TagMap.emplace(newTag, eu4tag);
+	if (v3FlagCodes.contains(currentTag))
+	{
+		v3FlagCodes.emplace(newTag, v3FlagCodes.at(currentTag));
+		v3FlagCodes.erase(currentTag);
+	}
+}
