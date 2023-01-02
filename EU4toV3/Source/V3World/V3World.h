@@ -28,6 +28,7 @@ class World
 	[[nodiscard]] const auto& getCultureMapper() const { return cultureMapper; }
 	[[nodiscard]] const auto& getReligionMapper() const { return religionMapper; }
 	[[nodiscard]] const auto& getDatingData() const { return datingData; }
+	[[nodiscard]] const auto& getVanillaLocalizations() const { return vanillaLocalizationLoader; }
 
   private:
 	std::string V3Path;
@@ -38,6 +39,7 @@ class World
 	PoliticalManager politicalManager;
 	PopManager popManager;
 	LocalizationLoader localizationLoader;
+	LocalizationLoader vanillaLocalizationLoader;
 
 	mappers::ProvinceMapper provinceMapper;
 	mappers::ReligionMapper religionMapper;

@@ -11,6 +11,9 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	const auto dwFS = commonItems::ModFilesystem(V3Path, overrideMods);
 	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output/"});
 	const auto allFS = commonItems::ModFilesystem(V3Path, overrideMods);
+	overrideMods.clear();
+	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output/"});
+	const auto blankModFS = commonItems::ModFilesystem(V3Path, overrideMods);
 
 	Log(LogLevel::Progress) << "45 %";
 	Log(LogLevel::Info) << "* Soaking up the shine *";
@@ -40,6 +43,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.loadColonialTagMapperRules("configurables/colonial_tags.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	localizationLoader.scrapeLocalizations(dwFS);
+	vanillaLocalizationLoader.scrapeLocalizations(blankModFS);
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
 	Log(LogLevel::Progress) << "46 %";

@@ -17,6 +17,7 @@
 void OUT::exportWorld(const Configuration& configuration, const V3::World& world, const commonItems::ConverterVersion& converterVersion)
 {
 	const auto& outputName = configuration.getOutputName();
+	const auto& knownLocs = world.getVanillaLocalizations();
 
 	Log(LogLevel::Info) << "---> Le Dump <---";
 
@@ -79,10 +80,10 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Progress) << "90 %";
 
 	Log(LogLevel::Info) << "<- Writing Localizations";
-	exportCountryNamesAndAdjectives(outputName, world.getPoliticalManager().getCountries());
-	exportReligionLocs(outputName, world.getReligionMapper().getV3ReligionDefinitions());
-	exportCultureLocs(outputName, world.getCultureMapper().getV3CultureDefinitions());
-	exportCharacterLocs(outputName, world.getPoliticalManager().getCountries());
+	exportCountryNamesAndAdjectives(outputName, world.getPoliticalManager().getCountries(), knownLocs);
+	exportReligionLocs(outputName, world.getReligionMapper().getV3ReligionDefinitions(), knownLocs);
+	exportCultureLocs(outputName, world.getCultureMapper().getV3CultureDefinitions(), knownLocs);
+	exportCharacterLocs(outputName, world.getPoliticalManager().getCountries(), knownLocs);
 	Log(LogLevel::Progress) << "91 %";
 
 	Log(LogLevel::Info) << "<- Writing Provinces";
