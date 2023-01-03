@@ -1,9 +1,11 @@
 #include "Country.h"
 #include "ClayManager/ClayManager.h"
+#include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "CommonRegexes.h"
 #include "CountryManager/EU4Country.h"
 #include "CultureMapper/CultureMapper.h"
+#include "Loaders/LawLoader/Law.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
 #include "Loaders/LocalizationLoader/EU4LocalizationLoader.h"
 #include "Log.h"
@@ -13,9 +15,6 @@
 #include "TechSetupMapper/TechSetupMapper.h"
 #include <cmath>
 #include <numeric>
-
-#include "ClayManager/State/State.h"
-#include "Loaders/LawLoader/Law.h"
 
 namespace
 {
@@ -47,7 +46,6 @@ void V3::Country::initializeCountry(std::istream& theStream)
 std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop(const double percentile) const
 {
 	// Ranks this country's substates by population then returns the top x% of them by population, the largest state will always be returned.
-
 	auto sortedSubstates(substates);
 
 	// descending order
@@ -67,13 +65,6 @@ double V3::Country::calculateBureaucracyUsage(const std::map<std::string, V3::La
 	// None of these hard-coded Vic3 values are in the defines for some reason.
 	double usage = 0.0;
 
-	// Incorporated States 10 * # incorporated
-	usage += 10 * std::accumulate(substates.begin(), substates.end(), 0, [](int sum, const auto& substate) {
-		return sum + substate->isIncorporated();
-	});
-
-	// Pops
-	// Modified by laws
 	double lawsMult = 0;
 	for (const auto& law: processedData.laws)
 	{
@@ -85,7 +76,23 @@ double V3::Country::calculateBureaucracyUsage(const std::map<std::string, V3::La
 
 		lawsMult += lawsMap.at(law).bureaucracyCostMult;
 	}
-	usage += getPopCount() / 25000.0 * (1 + lawsMult);
+
+	for (const auto& substate: substates)
+	{
+		if (substate->isIncorporated())
+		{
+			// Incorporated States - 10 per incorporated state
+			usage += 10;
+
+			// Pops - only pops in incorporated states count
+			// Modified by laws - game caps this at 0
+			if (lawsMult > -1)
+			{
+				usage += substate->getSubStatePops().getPopCount() / 25000.0 * (1 + lawsMult);
+			}
+		}
+	}
+
 
 	// Institutions
 	const double cost = getPopCount() / 100000.0;
@@ -100,12 +107,13 @@ double V3::Country::calculateBureaucracyUsage(const std::map<std::string, V3::La
 		if (!character.admiral && !character.general)
 			continue;
 
-		if (character.commanderRank == "")
+		// Defaulted commanders & rulers
+		if (character.commanderRank.empty() || character.commanderRank.find("ruler") != std::string::npos)
 		{
-			Log(LogLevel::Warning) << character.culture << " commander: " << character.lastName << " has no rank.";
-			continue;
+			usage += 10;
 		}
 
+		// Commanders with ranks 1->5
 		try
 		{
 			const int rank = std::stoi(character.commanderRank.substr(character.commanderRank.length() - 1));
@@ -120,14 +128,14 @@ double V3::Country::calculateBureaucracyUsage(const std::map<std::string, V3::La
 	return usage;
 }
 
-bool V3::Country::isTechLocked(const std::vector<std::string>& techs) const
+bool V3::Country::hasAnyOfTech(const std::vector<std::string>& techs) const
 {
 	if (techs.empty())
 	{
-		return false;
+		return true;
 	}
 
-	return !std::ranges::any_of(techs, [&](const std::string& tech) {
+	return std::ranges::any_of(techs, [&](const std::string& tech) {
 		return processedData.techs.contains(tech);
 	});
 }

@@ -346,7 +346,7 @@ void V3::PoliticalManager::setupInstitutions(const std::shared_ptr<Country>& cou
 {
 	for (const auto& law: country->getProcessedData().laws)
 	{
-		if (auto institution = lawMapper.getLaws().at(law).institution; institution != "")
+		if (auto institution = lawMapper.getLaws().at(law).institution; !institution.empty())
 		{
 			country->addInstitution(institution);
 		}

@@ -1,6 +1,7 @@
 #include "outWorld.h"
 #include "CommonFunctions.h"
 #include "OSCompatibilityLayer.h"
+#include "outBuildings/outBuildings.h"
 #include "outCharacters/outCharacters.h"
 #include "outCoAs/outCoAa.h"
 #include "outCountries/outCountries.h"
@@ -13,8 +14,6 @@
 #include "outReligions/outReligions.h"
 #include "outStates/outCommonHistoryStates.h"
 #include <fstream>
-
-#include "outBuildings/outBuildings.h"
 
 void OUT::exportWorld(const Configuration& configuration, const V3::World& world, const commonItems::ConverterVersion& converterVersion)
 {

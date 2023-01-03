@@ -1,5 +1,4 @@
 #include "MathScript.h"
-
 #include "CommonRegexes.h"
 #include "CountryManager/EU4Country.h"
 #include "Log.h"
@@ -36,8 +35,7 @@ bool V3::MathScript::isValid(const Country& country) const
 	}
 	if (trigger == "is_eu4_gp")
 	{
-		// TODO(Gawquon): Plug in GP status // return country.getSourceCountry()->isGP() == (triggerValue == "yes");
-		return false;
+		return country.getSourceCountry()->isGP() == (triggerValue == "yes");
 	}
 
 	Log(LogLevel::Error) << "Unknown trigger: " << trigger << " in MathScript.";

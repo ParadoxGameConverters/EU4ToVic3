@@ -1,20 +1,11 @@
 #ifndef ECONOMY_MANAGER_H
 #define ECONOMY_MANAGER_H
 #include "Configuration.h"
-#include "Date.h"
 #include "Loaders/DefinesLoader/EconDefinesLoader.h"
 #include "PoliticalManager/PoliticalManager.h"
 
 namespace V3
 {
-struct ConfigVariables
-{
-	date expectedStartDate;
-	double expectedCentralizedPopRatio = 0.975;
-	double expectedIndustrialLevel = 0.8;
-	double packetSize = 0;
-};
-
 class StateModifier;
 class Country;
 class Building;

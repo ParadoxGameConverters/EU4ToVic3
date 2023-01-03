@@ -11,7 +11,7 @@ class Sector
 {
   public:
 	Sector(const std::shared_ptr<SectorLoader>& sectorRules, const std::shared_ptr<Country>& country);
-	void calculateBudget(double totalWeight, const std::shared_ptr<Country>& country);
+	void calculateBudget(double totalWeight, const int countryCPBudget);
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getCPBudget() const { return CPBudget; }

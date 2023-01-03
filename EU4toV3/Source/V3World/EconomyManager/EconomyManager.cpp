@@ -56,7 +56,7 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 
 		// Use the PM with the most generation available
 		int PMGeneration = 35;
-		if (auto PMName = pickBureaucracyPM(country); PMName)
+		if (const auto& PMName = pickBureaucracyPM(country); PMName)
 		{
 			PMGeneration = PMs.at(PMName.value())->getBureaucracy();
 		}
@@ -226,12 +226,8 @@ void V3::EconomyManager::buildBuildings() const
 	{
 		for (const auto& substate: country->getSubStates())
 		{
-			// while(substate->getCPBudget() > 0)
+
 			{
-				// if(infrastructureCost > infrastructure)
-				//     try to make more infra
-				// if (can't make more infra)
-				//    exit early
 			}
 		}
 	}
@@ -277,7 +273,7 @@ std::optional<std::string> V3::EconomyManager::pickBureaucracyPM(const std::shar
 				const auto& PM = PMs.at(PMName);
 
 				// Only use PMs we have unlocked
-				if (country->isTechLocked(PM->getUnlockingTechs()))
+				if (!country->hasAnyOfTech(PM->getUnlockingTechs()))
 				{
 					continue;
 				}
@@ -390,7 +386,7 @@ void V3::EconomyManager::setPMs() const
 void V3::EconomyManager::loadTerrainModifierMatrices(const std::string& filePath)
 {
 	TerrainModifierLoader terrainModifierLoader;
-	terrainModifierLoader.loadTerrainModifiers(filePath + "configurables/terrain_econ_modifiers.txt");
+	terrainModifierLoader.loadTerrainModifiers(filePath + "configurables/economy/terrain_econ_modifiers.txt");
 
 	stateTerrainModifiers = terrainModifierLoader.getTerrainStateModifiers();
 	buildingTerrainModifiers = terrainModifierLoader.getTerrainBuildingModifiers();
@@ -423,5 +419,5 @@ void V3::EconomyManager::loadBuildingInformation(const commonItems::ModFilesyste
 
 void V3::EconomyManager::loadEconDefines(const std::string& filePath)
 {
-	econDefines.loadEconDefines(filePath + "configurables/econ_defines.txt");
+	econDefines.loadEconDefines(filePath + "configurables/economy/econ_defines.txt");
 }

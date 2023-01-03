@@ -158,7 +158,7 @@ class Country: commonItems::parser
 	[[nodiscard]] int getTechInfraCap() const { return 0; }
 	// TODO(Gawquon): Implement, multiplier for amount of infrastructure created by population
 	[[nodiscard]] double getTechInfraMult() const { return 0.0; }
-	[[nodiscard]] bool isTechLocked(const std::vector<std::string>& techs) const;
+	[[nodiscard]] bool hasAnyOfTech(const std::vector<std::string>& techs) const;
 
 	void distributeGovAdmins(int numGovAdmins) const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> topPercentileStatesByPop(double percentile) const;

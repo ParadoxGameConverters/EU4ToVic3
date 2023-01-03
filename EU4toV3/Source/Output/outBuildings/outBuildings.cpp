@@ -12,7 +12,7 @@ void outPMs(std::ostream& output, const std::string& building, const V3::Country
 	output << "\t\t\t\tactivate_production_methods = {";
 	if (country.getProcessedData().productionMethods.contains(building))
 	{
-		for (auto PM: country.getProcessedData().productionMethods.at(building))
+		for (const auto& PM: country.getProcessedData().productionMethods.at(building))
 		{
 			output << " \"" << PM << "\"";
 		}

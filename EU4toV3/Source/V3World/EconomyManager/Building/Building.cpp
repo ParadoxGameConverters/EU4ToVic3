@@ -1,5 +1,4 @@
 #include "Building.h"
-
 #include "CommonRegexes.h"
 #include "Log.h"
 #include "ParserHelpers.h"
@@ -23,7 +22,7 @@ void V3::Building::registerKeys(const std::map<std::string, int>& costTiers)
 		unlockingTechs = commonItems::getStrings(theStream);
 	});
 	registerKeyword("required_construction", [this, &costTiers](std::istream& theStream) {
-		if (const std::string costTier = commonItems::getString(theStream); costTiers.contains(costTier))
+		if (const auto costTier = commonItems::getString(theStream); costTiers.contains(costTier))
 		{
 			constructionCost = costTiers.at(costTier);
 		}

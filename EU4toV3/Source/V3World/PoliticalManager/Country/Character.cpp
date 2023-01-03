@@ -156,7 +156,7 @@ void V3::Character::convertLeadership(const EU4::Character& character, const map
 			admiral = true;
 
 		// rank
-		const auto rank = static_cast<int>(std::round(static_cast<double>(character.fire + character.shock + character.fire + character.siege) / 4.0));
+		const auto rank = static_cast<int>(std::round(static_cast<double>(character.fire + character.shock + character.fire + character.siege) / 4.8));
 		if (rank > 0)
 			commanderRank = "commander_rank_" + std::to_string(rank);
 

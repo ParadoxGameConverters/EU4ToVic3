@@ -1,5 +1,4 @@
 #include "NationalBudgetLoader.h"
-#include "CommonFunctions.h"
 #include "CommonRegexes.h"
 #include "Log.h"
 #include "ParserHelpers.h"
@@ -9,6 +8,7 @@ void V3::NationalBudgetLoader::loadNationalBudget(const std::string& filePath)
 	registerKeys();
 	parseFile(filePath);
 	clearRegisteredKeywords();
+	Log(LogLevel::Info) << sectorBlueprints.size() << " sectors of industry loaded.";
 }
 
 void V3::NationalBudgetLoader::registerKeys()

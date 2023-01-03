@@ -4,8 +4,6 @@
 
 namespace V3
 {
-
-class Country;
 class AddScript: public MathScript
 {
   public:

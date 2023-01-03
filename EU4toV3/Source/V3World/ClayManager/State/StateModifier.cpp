@@ -49,7 +49,7 @@ void V3::StateModifier::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-double V3::StateModifier::getAllBonuses(std::map<std::string, double> modifierMap)
+double V3::StateModifier::getAllBonuses(const std::map<std::string, double>& modifierMap)
 {
 	auto modifiers = std::views::values(modifierMap);
 

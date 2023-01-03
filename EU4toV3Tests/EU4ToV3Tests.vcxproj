@@ -710,16 +710,14 @@
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="TestFiles\configurables\buildings_map.txt">
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\economy\buildings_map.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables/economy</DestinationFolders>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="TestFiles\configurables\national_budget.txt">
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\economy\econ_defines.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables/economy</DestinationFolders>
     </CopyFileToFolders>
-  </ItemGroup>
-  <ItemGroup>
-    <CopyFileToFolders Include="TestFiles\configurables\econ_defines.txt">
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\economy\national_budget.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables/economy</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

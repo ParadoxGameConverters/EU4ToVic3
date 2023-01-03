@@ -1,10 +1,9 @@
-#include <gmock/gmock-matchers.h>
-
 #include "CountryManager/EU4Country.h"
 #include "EconomyManager/NationalBudget/Sector.h"
 #include "Loaders/NationalBudgetLoader/SectorLoader.h"
 #include "PoliticalManager/Country/Country.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
 
 
 TEST(V3World_SectorTests, SectorsCanLoadFromBlueprint)
@@ -17,10 +16,10 @@ TEST(V3World_SectorTests, SectorsCanLoadFromBlueprint)
 	input << "multiply = { value = 1.5 vic3_law = law_peasant_levy }\n";
 	input << "add = { value = 1 is_colony = no }\n";
 
-	auto sectorBlueprint = std::make_shared<V3::SectorLoader>();
+	const auto sectorBlueprint = std::make_shared<V3::SectorLoader>();
 	sectorBlueprint->loadSector(input);
 
-	auto country = std::make_shared<V3::Country>();
+	const auto country = std::make_shared<V3::Country>();
 	country->setSourceCountry(std::make_shared<EU4::Country>());
 	V3::ProcessedData data;
 	data.laws.emplace("law_quality");
@@ -33,7 +32,7 @@ TEST(V3World_SectorTests, SectorsCanLoadFromBlueprint)
 	EXPECT_THAT(sector.getBuildings(), testing::UnorderedElementsAre("building_barracks", "building_fort"));
 	EXPECT_EQ(0, sector.getCPBudget());
 
-	sector.calculateBudget(10, country); // The sector for this country should have a weight of 7.8
+	sector.calculateBudget(10, country->getCPBudget()); // The sector for this country should have a weight of 7.8
 
 	EXPECT_EQ(780, sector.getCPBudget());
 }
