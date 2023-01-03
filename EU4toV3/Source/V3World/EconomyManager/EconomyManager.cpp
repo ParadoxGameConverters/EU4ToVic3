@@ -45,14 +45,14 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 	loadEconDefines(filePath);
 }
 
-void V3::EconomyManager::establishBureaucracy() const
+void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalManager) const
 {
 	// TODO(Gawquon): Check tech requirement once tech is merged.
 
 	for (const auto& country: centralizedCountries)
 	{
 		// Give 5% extra for trade routes
-		const double generationTarget = country->calculateBureaucracyUsage() * 1.05;
+		const double generationTarget = country->calculateBureaucracyUsage(politicalManager.getLawsMap()) * 1.05;
 
 		// Use the PM with the most generation available
 		int PMGeneration = 35;
@@ -65,6 +65,20 @@ void V3::EconomyManager::establishBureaucracy() const
 		const int numAdmins = static_cast<int>(generationTarget / PMGeneration + 1);
 
 		country->distributeGovAdmins(numAdmins);
+	}
+}
+
+void V3::EconomyManager::hardcodePorts() const
+{
+	for (const auto& country: centralizedCountries)
+	{
+		for (const auto& substate: country->getSubStates())
+		{
+			if (substate->getHomeState()->isCoastal())
+			{
+				substate->setBuildingLevel("building_port", 1);
+			}
+		}
 	}
 }
 

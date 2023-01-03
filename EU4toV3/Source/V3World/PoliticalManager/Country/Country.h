@@ -29,6 +29,7 @@ class CharacterTraitMapper;
 } // namespace mappers
 namespace V3
 {
+struct Law;
 struct VanillaCommonCountryData
 {
 	std::string type;
@@ -52,6 +53,7 @@ struct ProcessedData
 	std::set<std::string> effects;
 	std::set<std::string> populationEffects;
 	std::set<std::string> laws;
+	std::set<std::string> institutions;
 	double literacy = 0;
 	double civLevel = 0;
 	bool westernized = false;
@@ -128,6 +130,7 @@ class Country: commonItems::parser
 		 const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore);
 	void addLaw(const auto& lawName) { processedData.laws.emplace(lawName); }
+	void addInstitution(const auto& institutionName) { processedData.institutions.emplace(institutionName); }
 	[[nodiscard]] Relation& getRelation(const std::string& target);
 	[[nodiscard]] const auto& getRelations() const { return processedData.relations; }
 	void setRivals(const std::set<std::string>& theRivals) { processedData.rivals = theRivals; }
@@ -158,7 +161,7 @@ class Country: commonItems::parser
 
 	void distributeGovAdmins(int numGovAdmins) const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> topPercentileStatesByPop(double percentile) const;
-	[[nodiscard]] double calculateBureaucracyUsage() const;
+	[[nodiscard]] double calculateBureaucracyUsage(const std::map<std::string, V3::Law>& lawsMap) const;
 
   private:
 	void registerKeys();

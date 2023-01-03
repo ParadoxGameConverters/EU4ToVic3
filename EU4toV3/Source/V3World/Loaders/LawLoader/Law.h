@@ -9,9 +9,11 @@ struct Law
 {
 	std::string name;
 	std::string group;
+	std::string institution;
 	int progressiveness = 0;
+	double bureaucracyCostMult = 0;
 	std::set<std::string> requiredTechs;
-	std::set<std::string> reqiredLaws;
+	std::set<std::string> requiredLaws;
 	std::set<std::string> blockingLaws;
 };
 } // namespace V3

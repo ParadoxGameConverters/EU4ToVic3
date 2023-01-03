@@ -137,7 +137,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	// Place starting buildings for all centralized countries
 	economyManager.loadCentralizedStates(politicalManager.getCountries());
 	economyManager.loadMappersAndConfigs(allFS);
-	economyManager.establishBureaucracy();
+	economyManager.establishBureaucracy(politicalManager);
+	economyManager.hardcodePorts();
 
 	Log(LogLevel::Info) << "-> Distributing Factories";
 	Log(LogLevel::Progress) << "60 %";

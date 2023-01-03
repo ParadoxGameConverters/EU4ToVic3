@@ -70,6 +70,7 @@ class PoliticalManager
 	[[nodiscard]] int getWorldPopCount() const;
 	[[nodiscard]] static int getCountriesPopCount(std::vector<std::shared_ptr<Country>> theCountries);
 	[[nodiscard]] bool isTagDecentralized(const std::string& v3Tag) const;
+	[[nodiscard]] std::map<std::string, Law> getLawsMap() const { return lawMapper.getLaws(); };
 
 	void determineAndApplyWesternization(const mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
@@ -77,6 +78,7 @@ class PoliticalManager
 		 const DatingData& datingData);
 	void setupTech();
 	void setupLaws();
+	void setupInstitutions(const std::shared_ptr<Country>& country) const;
 	void convertDiplomacy(const std::vector<EU4::EU4Agreement>& agreements);
 	[[nodiscard]] const auto& getAgreements() const { return agreements; }
 	void convertRivals();

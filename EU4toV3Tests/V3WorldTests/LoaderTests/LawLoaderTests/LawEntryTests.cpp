@@ -10,7 +10,7 @@ TEST(V3World_LawEntryTests, DefaultsDefaultToDefaults)
 	EXPECT_TRUE(law.group.empty());
 	EXPECT_EQ(0, law.progressiveness);
 	EXPECT_TRUE(law.requiredTechs.empty());
-	EXPECT_TRUE(law.reqiredLaws.empty());
+	EXPECT_TRUE(law.requiredLaws.empty());
 	EXPECT_TRUE(law.blockingLaws.empty());
 }
 
@@ -34,6 +34,6 @@ TEST(V3World_LawEntryTests, LawCanBeLoaded)
 	EXPECT_EQ("lawGroup", law.group);
 	EXPECT_EQ(-89, law.progressiveness);
 	EXPECT_THAT(law.requiredTechs, testing::UnorderedElementsAre("tech1", "tech2", "tech3"));
-	EXPECT_THAT(law.reqiredLaws, testing::UnorderedElementsAre("u1", "u2", "u3"));
+	EXPECT_THAT(law.requiredLaws, testing::UnorderedElementsAre("u1", "u2", "u3"));
 	EXPECT_THAT(law.blockingLaws, testing::UnorderedElementsAre("b1", "b2", "b3"));
 }

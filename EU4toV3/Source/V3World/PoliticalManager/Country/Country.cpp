@@ -15,6 +15,7 @@
 #include <numeric>
 
 #include "ClayManager/State/State.h"
+#include "Loaders/LawLoader/Law.h"
 
 namespace
 {
@@ -61,9 +62,9 @@ std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop
 	return std::vector<std::shared_ptr<V3::SubState>>{sortedSubstates.begin(), sortedSubstates.begin() + numTopSubstates};
 }
 
-double V3::Country::calculateBureaucracyUsage() const
+double V3::Country::calculateBureaucracyUsage(const std::map<std::string, V3::Law>& lawsMap) const
 {
-	// Non of these hard-coded Vic3 values are in the defines for some reason.
+	// None of these hard-coded Vic3 values are in the defines for some reason.
 	double usage = 0.0;
 
 	// Incorporated States 10 * # incorporated
@@ -72,16 +73,40 @@ double V3::Country::calculateBureaucracyUsage() const
 	});
 
 	// Pops
-	// Modified by laws TODO(Gawquon): Plug in laws
-	usage += getPopCount() / 25000.0; // Multiplied by law and tech modifiers
+	// Modified by laws
+	double lawsMult = 0;
+	for (const auto& law: processedData.laws)
+	{
+		if (!lawsMap.contains(law))
+		{
+			Log(LogLevel::Warning) << "Finding bureaucracy multiplier of law: " << law << " that has no definition! Skipping.";
+			continue;
+		}
+
+		lawsMult += lawsMap.at(law).bureaucracyCostMult;
+	}
+	usage += getPopCount() / 25000.0 * (1 + lawsMult);
 
 	// Institutions
-	// TODO(Gawquon): plug-in institutions from law information
-	// cost = country->getPopCount() / 100,000;
-	// usage += cost * levels
+	const double cost = getPopCount() / 100000.0;
+	for (const auto& institution: processedData.institutions)
+	{
+		usage += cost * 1; // If we end up mapping institution levels, it is cost * levels
+	}
 
 	// Characters
-	// TODO(Gawquon): plug-in characters
+	for (const auto& character: processedData.characters)
+	{
+		try
+		{
+			const int rank = std::stoi(std::string{character.commanderRank.back()});
+			usage += 5 * (rank + 1);
+		}
+		catch (std::exception& e)
+		{
+			Log(LogLevel::Error) << "Broken military leader rank: " << character.commanderRank << " - " << e.what();
+		}
+	}
 
 	return usage;
 }

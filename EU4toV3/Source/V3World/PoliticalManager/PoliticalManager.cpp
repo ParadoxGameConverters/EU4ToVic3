@@ -335,8 +335,22 @@ void V3::PoliticalManager::setupLaws()
 		grantLawFromGroup("lawgroup_health_system", country);
 		grantLawFromGroup("lawgroup_welfare", country);
 		++counter;
+
+		// Laws are set, figure out which institutions our laws have
+		setupInstitutions(country);
 	}
 	Log(LogLevel::Info) << "<> " << counter << " countries codified.";
+}
+
+void V3::PoliticalManager::setupInstitutions(const std::shared_ptr<Country>& country) const
+{
+	for (const auto& law: country->getProcessedData().laws)
+	{
+		if (auto institution = lawMapper.getLaws().at(law).institution; institution != "")
+		{
+			country->addInstitution(institution);
+		}
+	}
 }
 
 void V3::PoliticalManager::grantLawFromGroup(const std::string& lawGroup, const std::shared_ptr<Country>& country) const

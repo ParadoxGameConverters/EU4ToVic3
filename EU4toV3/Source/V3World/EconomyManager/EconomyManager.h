@@ -55,7 +55,8 @@ class EconomyManager
 	void loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries);
 	void loadMappersAndConfigs(const commonItems::ModFilesystem& modFS, const std::string& filePath = "");
 
-	void establishBureaucracy() const;
+	void establishBureaucracy(const PoliticalManager& politicalManager) const;
+	void hardcodePorts() const; // very temporary
 
 	void assignCountryCPBudgets(Configuration::ECONOMY economyType, const PoliticalManager& politicalManager) const;
 	void assignSubStateCPBudgets(Configuration::ECONOMY economyType) const;
