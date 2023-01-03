@@ -50,8 +50,8 @@ struct ProcessedData
 	bool westernized = false;
 	double industryFactor = 1.0; // Modifier set by EuroCentrism or calculated by dev
 
-	double industryScore = 0; // Share of global industry a country should get, not normalized
-	int CPBudget = 0;			  // Construction Points for a country to spend on it's development
+	double industryWeight = 0; // Share of global industry a country should get, not normalized
+	int CPBudget = 0;				// Construction Points for a country to spend on it's development
 
 	std::map<std::string, std::vector<std::string>> productionMethods; // Non-default production methods used by country, Building -> PMs
 
@@ -70,11 +70,7 @@ class Country: commonItems::parser
 	Country() = default;
 	void initializeCountry(std::istream& theStream);
 	void setTag(const std::string& theTag) { tag = theTag; }
-	void setIndustryFactor(const double theIndustryFactor)
-	{
-		processedData.industryFactor = theIndustryFactor;
-	} // TODO(Gawquon): BEFORE MERGE this might not be needed
-	void setIndustryScore(const double theIndustryScore) { processedData.industryScore = theIndustryScore; }
+	void setIndustryWeight(const double theIndustryWeight) { processedData.industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theBudget) { processedData.CPBudget = theBudget; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 
@@ -90,7 +86,7 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getVanillaData() const { return vanillaData; }
 	[[nodiscard]] const auto& getProcessedData() const { return processedData; }
 	[[nodiscard]] const auto& getIndustryFactor() const { return processedData.industryFactor; }
-	[[nodiscard]] const auto& getIndustryScore() const { return processedData.industryScore; }
+	[[nodiscard]] const auto& getIndustryWeight() const { return processedData.industryWeight; }
 	[[nodiscard]] const auto& getCPBudget() const { return processedData.CPBudget; }
 	[[nodiscard]] const auto& getSourceCountry() const { return sourceCountry; }
 	[[nodiscard]] const auto& getSubStates() const { return substates; }

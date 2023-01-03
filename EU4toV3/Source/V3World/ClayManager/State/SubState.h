@@ -54,7 +54,7 @@ class SubState
 	void setSubStatePops(const SubStatePops& thePops) { subStatePops = thePops; }
 	void addPop(const Pop& pop) { subStatePops.addPop(pop); }
 
-	void setIndustryScore(const double theIndustryScore) { industryScore = theIndustryScore; }
+	void setIndustryWeight(const double theIndustryWeight) { industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theCPBudget) { CPBudget = theCPBudget; }
 	void setBuildingLevel(const std::string& building, const int level) { buildings[building] = level; }
 
@@ -87,7 +87,7 @@ class SubState
 	[[nodiscard]] const auto& getDemographics() const { return demographics; }
 	[[nodiscard]] const auto& getSubStatePops() const { return subStatePops; }
 
-	[[nodiscard]] const auto& getIndustryScore() const { return industryScore; }
+	[[nodiscard]] const auto& getIndustryWeight() const { return industryWeight; }
 	[[nodiscard]] const auto& getCPBudget() const { return CPBudget; }
 	[[nodiscard]] std::optional<int> getBuildingLevel(const std::string& building) const;
 	[[nodiscard]] const auto& getBuildings() const { return buildings; }
@@ -124,7 +124,7 @@ class SubState
 	std::vector<Demographic> demographics;
 	SubStatePops subStatePops;
 
-	double industryScore = 0;				  // Share of owner's industry a substate should get, not normalized
+	double industryWeight = 0;				  // Share of owner's industry a substate should get, not normalized
 	int CPBudget = 0;							  // Construction Points for a substate to spend on it's development
 	std::map<std::string, int> buildings; // building -> level
 };

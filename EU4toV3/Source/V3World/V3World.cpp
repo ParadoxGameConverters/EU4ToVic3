@@ -100,16 +100,14 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "55 %";
 
 	Log(LogLevel::Progress) << "57 %";
-	// Place starting buildings for all centralized countries
 
 	Log(LogLevel::Progress) << "58 %";
-	// Convert Army and Navy
 
 	Log(LogLevel::Progress) << "59 %";
+	// Place starting buildings for all centralized countries
 	economyManager.loadCentralizedStates(politicalManager.getCountries());
-	economyManager.loadBuildingInformation(allFS);
-	economyManager.backfillBureaucracy();
-	economyManager.setPMs();
+	economyManager.loadMappersAndConfigs(allFS);
+	economyManager.establishBureaucracy();
 
 	Log(LogLevel::Info) << "-> Distributing Factories";
 	Log(LogLevel::Progress) << "60 %";

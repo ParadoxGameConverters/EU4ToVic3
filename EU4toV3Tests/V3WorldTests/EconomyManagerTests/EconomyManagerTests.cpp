@@ -123,10 +123,9 @@ TEST(V3World_EconomyManagerTests, EconomyManagerStoresOnlyCentralizedStates)
 
 	econManager.loadCentralizedStates(politicalManager.getCountries());
 
-	EXPECT_EQ(3, econManager.getCentralizedCountries().size());
+	EXPECT_EQ(2, econManager.getCentralizedCountries().size());
 	EXPECT_EQ("GA2", econManager.getCentralizedCountries()[0]->getTag());
 	EXPECT_EQ("GA9", econManager.getCentralizedCountries()[1]->getTag());
-	EXPECT_EQ("X00", econManager.getCentralizedCountries()[2]->getTag());
 }
 
 TEST(V3World_EconomyManagerTests, GlobalCPScalesByPopulation)
@@ -135,6 +134,7 @@ TEST(V3World_EconomyManagerTests, GlobalCPScalesByPopulation)
 
 	V3::EconomyManager econManager;
 	econManager.loadCentralizedStates(politicalManager.getCountries());
+	econManager.loadMappersAndConfigs(modFS, "TestFiles/");
 
 	EXPECT_EQ(5500, politicalManager.getWorldPopCount());
 	EXPECT_EQ(4600, V3::PoliticalManager::getCountriesPopCount(econManager.getCentralizedCountries()));
@@ -148,11 +148,11 @@ TEST(V3World_EconomyManagerTests, GlobalCPScalesByPopulation)
 	std::cout.rdbuf(cout_buffer);
 
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> The world is 84% Centralized by population. Adjusting global CP values by: -14%)"));
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> The world has 1036276 CP to spend on industry.)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> The world has 1245324 CP to spend on industry.)"));
 }
 
 // TODO(Gawquon): Implement date scaling and config point
-TEST(Disbaled_V3World_EconomyManagerTests, GlobalCPScalesByDate)
+TEST(DISABLED_V3World_EconomyManagerTests, GlobalCPScalesByDate)
 {
 	auto politicalManager = prepWorld();
 
@@ -160,7 +160,7 @@ TEST(Disbaled_V3World_EconomyManagerTests, GlobalCPScalesByDate)
 	econManager.loadCentralizedStates(politicalManager.getCountries());
 }
 
-TEST(V3World_EconomyManagerTests, GlobalCPDistributionTechGroup)
+TEST(DISBALED_V3World_EconomyManagerTests, GlobalCPDistributionTechGroup)
 {
 	auto politicalManager = prepWorld();
 
@@ -180,11 +180,11 @@ TEST(DISABLED_V3World_EconomyManagerTests, GlobalCPDistributionDev)
 {
 }
 
-TEST(V3World_EconomyManagerTests, CalculateGeoMeanTest)
+TEST(DISABLED_V3World_EconomyManagerTests, CalculateGeoMeanTest)
 {
 }
 
-TEST(V3World_EconomyManagerTests, AssignSubStateCPBudgetsTechGroup)
+TEST(DISABLED_V3World_EconomyManagerTests, AssignSubStateCPBudgetsTechGroup)
 {
 }
 

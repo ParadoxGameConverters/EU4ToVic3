@@ -11,7 +11,7 @@ V3::MultiplyScript V3::MultiplyScript::combine(const std::vector<MultiplyScript>
 
 	for (const auto& mult: multiplyVector)
 	{
-		newMultiply.value += (mult.value - 1);	
+		newMultiply.value += (mult.value - 1);
 	}
 	newMultiply.value += 1;
 

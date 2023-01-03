@@ -1,10 +1,9 @@
 #include "BuildingLoader.h"
-#include "Loaders/DefinesLoader/BuildingScriptValuesLoader.h"
-
 #include "CommonFunctions.h"
 #include "CommonRegexes.h"
-#include "ParserHelpers.h"
 #include "EconomyManager/Building/Building.h"
+#include "Loaders/DefinesLoader/BuildingScriptValuesLoader.h"
+#include "ParserHelpers.h"
 
 void V3::BuildingLoader::loadBuildings(const commonItems::ModFilesystem& modFS)
 {
