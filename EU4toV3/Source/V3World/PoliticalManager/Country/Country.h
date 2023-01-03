@@ -92,6 +92,7 @@ class Country: commonItems::parser
 	void setTag(const std::string& theTag) { tag = theTag; }
 	void setIndustryWeight(const double theIndustryWeight) { processedData.industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theBudget) { processedData.CPBudget = theBudget; }
+	void setProductionMethods(const std::map<std::string, std::vector<std::string>>& thePMs) { processedData.productionMethods = thePMs; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 
 	void convertFromEU4Country(const ClayManager& clayManager,
@@ -157,7 +158,7 @@ class Country: commonItems::parser
 	[[nodiscard]] int getTechInfraCap() const { return 0; }
 	// TODO(Gawquon): Implement, multiplier for amount of infrastructure created by population
 	[[nodiscard]] double getTechInfraMult() const { return 0.0; }
-	[[nodiscard]] bool isTechLocked(const std::vector<std::string>& techs) const { return false; }
+	[[nodiscard]] bool isTechLocked(const std::vector<std::string>& techs) const;
 
 	void distributeGovAdmins(int numGovAdmins) const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> topPercentileStatesByPop(double percentile) const;

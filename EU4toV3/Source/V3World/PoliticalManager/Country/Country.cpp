@@ -97,9 +97,18 @@ double V3::Country::calculateBureaucracyUsage(const std::map<std::string, V3::La
 	// Characters
 	for (const auto& character: processedData.characters)
 	{
+		if (!character.admiral && !character.general)
+			continue;
+
+		if (character.commanderRank == "")
+		{
+			Log(LogLevel::Warning) << character.culture << " commander: " << character.lastName << " has no rank.";
+			continue;
+		}
+
 		try
 		{
-			const int rank = std::stoi(std::string{character.commanderRank.back()});
+			const int rank = std::stoi(character.commanderRank.substr(character.commanderRank.length() - 1));
 			usage += 5 * (rank + 1);
 		}
 		catch (std::exception& e)
@@ -109,6 +118,18 @@ double V3::Country::calculateBureaucracyUsage(const std::map<std::string, V3::La
 	}
 
 	return usage;
+}
+
+bool V3::Country::isTechLocked(const std::vector<std::string>& techs) const
+{
+	if (techs.empty())
+	{
+		return false;
+	}
+
+	return !std::ranges::any_of(techs, [&](const std::string& tech) {
+		return processedData.techs.contains(tech);
+	});
 }
 
 void V3::Country::distributeGovAdmins(const int numGovAdmins) const

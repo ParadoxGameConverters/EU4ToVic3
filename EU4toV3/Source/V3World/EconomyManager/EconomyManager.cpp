@@ -61,11 +61,13 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 			PMGeneration = PMs.at(PMName.value())->getBureaucracy();
 		}
 
-		// find # of buildings
-		const int numAdmins = static_cast<int>(generationTarget / PMGeneration + 1);
+		// find # of buildings, 100 base value generation
+		const int numAdmins = static_cast<int>((generationTarget - 100) / PMGeneration + 1);
 
 		country->distributeGovAdmins(numAdmins);
 	}
+
+	setPMs();
 }
 
 void V3::EconomyManager::hardcodePorts() const
@@ -381,6 +383,7 @@ void V3::EconomyManager::setPMs() const
 		auto data = country->getProcessedData();
 		if (const auto& PMName = pickBureaucracyPM(country); PMName)
 			data.productionMethods["building_government_administration"] = {PMName.value()};
+		country->setProductionMethods(data.productionMethods);
 	}
 }
 

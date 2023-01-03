@@ -38,7 +38,7 @@ void V3::LawEntry::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 
 	modifierParser.registerKeyword("state_bureaucracy_population_base_cost_factor_mult", [this](std::istream& theStream) {
-		law.bureaucracyCostMult= commonItems::getString(theStream);
+		law.bureaucracyCostMult = commonItems::getDouble(theStream);
 	});
 	modifierParser.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
