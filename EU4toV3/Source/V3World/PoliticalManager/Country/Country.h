@@ -1,9 +1,14 @@
 #ifndef V3_COUNTRY_H
 #define V3_COUNTRY_H
+#include "Character.h"
 #include "Color.h"
 #include "Configuration.h"
+#include "CountryManager/NationalSymbol/EU4CustomColors.h"
 #include "DatingData.h"
+#include "FlagCrafter/FlagCrafter.h"
+#include "IdeaEffectsMapper/IdeaEffectsMapper.h"
 #include "Parser.h"
+#include "PoliticalManager/Diplomacy/Relation.h"
 #include <memory>
 #include <string>
 
@@ -19,6 +24,8 @@ namespace mappers
 class ReligionMapper;
 class CultureMapper;
 class PopulationSetupMapper;
+class TechSetupMapper;
+class CharacterTraitMapper;
 } // namespace mappers
 namespace V3
 {
@@ -49,6 +56,12 @@ struct ProcessedData
 	double civLevel = 0;
 	bool westernized = false;
 	double industryFactor = 1.0; // Modifier set by EuroCentrism or calculated by dev
+	mappers::IdeaEffect ideaEffect;
+	std::set<std::string> techs;
+	std::map<std::string, Relation> relations;
+	std::set<std::string> rivals;
+	std::map<std::string, int> truces;
+	std::vector<Character> characters;
 
 	double industryWeight = 0; // Share of global industry a country should get, not normalized
 	int CPBudget = 0;				// Construction Points for a country to spend on it's development
@@ -59,6 +72,11 @@ struct ProcessedData
 	std::string adjective;
 	std::map<std::string, std::string> namesByLanguage;		// language, name
 	std::map<std::string, std::string> adjectivesByLanguage; // language, adj
+
+	std::map<FlagCrafter::FLAGTYPE, std::string> flags;
+	std::optional<EU4::CustomColorsBlock> customColors;		 // used for flag generation for custom flag.
+	std::optional<commonItems::Color> revolutionaryColor;		 // used for flag generation for revolutionary flag.
+	std::map<FlagCrafter::FLAGTYPE, std::string> customFlags; // stuff we crafted ourselves.
 };
 
 class SubState;
@@ -78,7 +96,8 @@ class Country: commonItems::parser
 		 mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
-		 const EU4::ReligionLoader& religionLoader);
+		 const EU4::ReligionLoader& religionLoader,
+		 const mappers::IdeaEffectsMapper& ideaEffectMapper);
 	void copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 	void generateDecentralizedData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 
@@ -107,6 +126,29 @@ class Country: commonItems::parser
 		 Configuration::EUROCENTRISM eurocentrism,
 		 const DatingData& datingData,
 		 const mappers::PopulationSetupMapper& populationSetupMapper);
+	void setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore);
+	void addLaw(const auto& lawName) { processedData.laws.emplace(lawName); }
+	[[nodiscard]] Relation& getRelation(const std::string& target);
+	[[nodiscard]] const auto& getRelations() const { return processedData.relations; }
+	void setRivals(const std::set<std::string>& theRivals) { processedData.rivals = theRivals; }
+	[[nodiscard]] const auto& getRivals() const { return processedData.rivals; }
+	void addTruce(const std::string& target, int months) { processedData.truces.emplace(target, months); }
+	[[nodiscard]] const auto& getTruces() const { return processedData.truces; }
+
+	void convertCharacters(const mappers::CharacterTraitMapper& characterTraitMapper,
+		 float ageShift,
+		 const ClayManager& clayManager,
+		 mappers::CultureMapper& cultureMapper,
+		 const mappers::ReligionMapper& religionMapper,
+		 const EU4::CultureLoader& cultureLoader,
+		 const EU4::ReligionLoader& religionLoader,
+		 const date& conversionDate);
+
+	void setFlags(const std::map<FlagCrafter::FLAGTYPE, std::string>& flags) { processedData.flags = flags; }
+	void addFlag(const FlagCrafter::FLAGTYPE flagType, const std::string& flag) { processedData.flags.emplace(flagType, flag); }
+	[[nodiscard]] const auto& getFlags() const { return processedData.flags; }
+	void addCustomFlag(FlagCrafter::FLAGTYPE flagType, const std::string& flagName) { processedData.customFlags.emplace(flagType, flagName); }
+	[[nodiscard]] const auto& getCustomFlags() const { return processedData.customFlags; }
 
 	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
 	[[nodiscard]] int getTechInfraCap() const { return 0; }

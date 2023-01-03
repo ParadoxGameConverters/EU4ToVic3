@@ -43,7 +43,3 @@ cp -r "Data_Files/blankMod" "Release-Linux/blankMod"
 #mkdir "Release-Linux/blankMod/output/history/countries"
 #mkdir "Release-Linux/blankMod/output/history/diplomacy"
 #mkdir "Release-Linux/blankMod/output/history/units"
-
-# Copy Flags
-rm -rf "Release-Linux/flags"
-cp -r "Data_Files/flags" "Release-Linux/flags"

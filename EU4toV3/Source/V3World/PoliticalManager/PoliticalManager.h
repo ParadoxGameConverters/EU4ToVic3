@@ -1,9 +1,16 @@
 #ifndef POLITICAL_MANAGER_H
 #define POLITICAL_MANAGER_H
+#include "CharacterTraitMapper/CharacterTraitMapper.h"
+#include "ColonialTagMapper/ColonialTagMapper.h"
 #include "Configuration.h"
 #include "DatingData.h"
+#include "Diplomacy/Agreement.h"
+#include "DiplomaticMapper/DiplomaticMapper.h"
+#include "IdeaEffectsMapper/IdeaEffectsMapper.h"
+#include "LawMapper/LawMapper.h"
 #include "ModLoader/ModFilesystem.h"
 #include "PopulationSetupMapper/PopulationSetupMapper.h"
+#include "TechSetupMapper/TechSetupMapper.h"
 #include <map>
 #include <memory>
 #include <string>
@@ -11,6 +18,7 @@
 
 namespace EU4
 {
+class EU4Agreement;
 class EU4LocalizationLoader;
 class Country;
 class CultureLoader;
@@ -40,6 +48,13 @@ class PoliticalManager
 	void initializeVanillaCountries(const commonItems::ModFilesystem& modFS);
 	void loadCountryMapper(const std::shared_ptr<mappers::CountryMapper>& theCountryMapper);
 	void loadPopulationSetupMapperRules(const std::string& filePath);
+	void loadIdeaEffectMapperRules(const std::string& filePath);
+	void loadTechSetupMapperRules(const std::string& filePath);
+	void loadLawMapperRules(const std::string& filePath);
+	void loadLawDefinitions(const commonItems::ModFilesystem& modFS);
+	void loadDiplomaticMapperRules(const std::string& filePath);
+	void loadCharacterTraitMapperRules(const std::string& filePath);
+	void loadColonialTagMapperRules(const std::string& filePath);
 	void importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries);
 	void generateDecentralizedCountries(const ClayManager& clayManager, const PopManager& popManager);
 	void convertAllCountries(const ClayManager& clayManager,
@@ -60,16 +75,42 @@ class PoliticalManager
 		 const mappers::ReligionMapper& religionMapper,
 		 Configuration::EUROCENTRISM eurocentrism,
 		 const DatingData& datingData);
+	void setupTech();
+	void setupLaws();
+	void convertDiplomacy(const std::vector<EU4::EU4Agreement>& agreements);
+	[[nodiscard]] const auto& getAgreements() const { return agreements; }
+	void convertRivals();
+	void convertTruces(const date& lastEU4Date);
+	void convertCharacters(const date& conversionDate,
+		 Configuration::STARTDATE startDate,
+		 const ClayManager& clayManager,
+		 mappers::CultureMapper& cultureMapper,
+		 const mappers::ReligionMapper& religionMapper,
+		 const EU4::CultureLoader& cultureLoader,
+		 const EU4::ReligionLoader& religionLoader);
+
+	void attemptColonialTagReplacement(const mappers::ColonialRegionMapper& colonialRegionMapper, const ClayManager& clayManager);
 
   private:
 	void generateDecentralizedCountry(const std::string& culture, const std::vector<std::shared_ptr<SubState>>& subStates);
 	static CulturalSubStates sortSubStatesByCultures(const ClayManager& clayManager, const PopManager& popManager);
 	static std::string getDominantDemographic(const std::vector<Demographic>& demographics);
+	void grantLawFromGroup(const std::string& lawGroup, const std::shared_ptr<Country>& country) const;
+	[[nodiscard]] bool isEU4CountryConvertedAndLanded(const std::string& eu4Tag) const;
+	[[nodiscard]] bool isValidForColonialReplacement(const std::string& tag) const;
+	void changeTag(const std::string& replacement, const std::string& tag);
 
 	std::map<std::string, std::shared_ptr<Country>> countries;
+	std::vector<Agreement> agreements;
 
 	std::shared_ptr<mappers::CountryMapper> countryMapper;
 	mappers::PopulationSetupMapper populationSetupMapper;
+	mappers::IdeaEffectsMapper ideaEffectMapper;
+	mappers::TechSetupMapper techSetupMapper;
+	mappers::LawMapper lawMapper;
+	mappers::DiplomaticMapper diplomaticMapper;
+	mappers::CharacterTraitMapper characterTraitMapper;
+	mappers::ColonialTagMapper colonialTagMapper;
 };
 } // namespace V3
 #endif // POLITICAL_MANAGER_H

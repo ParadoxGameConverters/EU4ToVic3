@@ -11,6 +11,10 @@ void mappers::CultureDefinitionLoader::loadDefinitions(const commonItems::ModFil
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/cultures/"))
 	{
+		if (fileName.find("99_") != std::string::npos)
+			skipExport = false;
+		else
+			skipExport = true;
 		if (getExtension(fileName) == "txt")
 			parseFile(fileName);
 	}
@@ -28,7 +32,7 @@ void mappers::CultureDefinitionLoader::loadDefinitions(std::istream& theStream)
 void mappers::CultureDefinitionLoader::registerKeys()
 {
 	registerRegex(commonItems::catchallRegex, [this](const std::string& cultureName, std::istream& theStream) {
-		auto relDef = CultureDefinitionEntry(theStream).getCultureDef();
+		auto relDef = CultureDefinitionEntry(theStream, skipExport).getCultureDef();
 		relDef.name = cultureName;
 		cultureDefinitions.emplace(cultureName, relDef);
 	});

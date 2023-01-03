@@ -11,6 +11,11 @@ class Configuration: commonItems::parser
 	explicit Configuration(const commonItems::ConverterVersion& converterVersion);
 	explicit Configuration(std::istream& theStream, const commonItems::ConverterVersion& converterVersion);
 
+	enum class STARTDATE
+	{
+		Vanilla = 1,
+		Dynamic = 2
+	};
 	enum class DEADCORES
 	{
 		LeaveAll = 1,
@@ -22,13 +27,6 @@ class Configuration: commonItems::parser
 		Vanilla = 1,
 		PopShaping = 2,
 		Extreme = 3
-	};
-	enum class COREHANDLES
-	{
-		DropNone = 1,
-		DropNational = 2,
-		DropUnions = 3,
-		DropAll = 4
 	};
 	enum class EUROCENTRISM
 	{
@@ -44,12 +42,10 @@ class Configuration: commonItems::parser
 
 	struct ConfigBlock
 	{
-		double MaxLiteracy = 1.0;
+		STARTDATE startDate = STARTDATE::Vanilla;
 		POPSHAPES popShaping = POPSHAPES::Vanilla;
-		COREHANDLES coreHandling = COREHANDLES::DropNone;
 		DEADCORES removeType = DEADCORES::DeadCores;
 		EUROCENTRISM euroCentric = EUROCENTRISM::VanillaImport;
-		double popShapingFactor = 50.0;
 		bool convertAll = false;
 	} configBlock;
 

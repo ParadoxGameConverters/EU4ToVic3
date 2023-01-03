@@ -2,7 +2,8 @@
 #include "EU4World/World.h"
 #include "Log.h"
 
-V3::World::World(const Configuration& configuration, const EU4::World& sourceWorld): V3Path(configuration.getVic3Path()), configBlock(configuration.configBlock)
+V3::World::World(const Configuration& configuration, const EU4::World& sourceWorld):
+	 V3Path(configuration.getVic3Path()), configBlock(configuration.configBlock), datingData(sourceWorld.getDatingData())
 {
 	Mods overrideMods;
 	// We use decentralized world mod to fill out wasteland and out-of-scope clay with decentralized tribes.
@@ -10,6 +11,9 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	const auto dwFS = commonItems::ModFilesystem(V3Path, overrideMods);
 	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output/"});
 	const auto allFS = commonItems::ModFilesystem(V3Path, overrideMods);
+	overrideMods.clear();
+	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output/"});
+	const auto blankModFS = commonItems::ModFilesystem(V3Path, overrideMods);
 
 	Log(LogLevel::Progress) << "45 %";
 	Log(LogLevel::Info) << "* Soaking up the shine *";
@@ -29,8 +33,17 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	cultureMapper.loadMappingRules("configurables/culture_map.txt");
 	cultureMapper.loadColonialRules("configurables/colonial_regions.txt");
 	cultureMapper.loadWesternizationRules("configurables/westernization.txt");
+	politicalManager.loadPopulationSetupMapperRules("configurables/population_setup.txt");
+	politicalManager.loadIdeaEffectMapperRules("configurables/idea_effects.txt");
+	politicalManager.loadTechSetupMapperRules("configurables/tech_setup.txt");
+	politicalManager.loadLawMapperRules("configurables/law_map.txt");
+	politicalManager.loadLawDefinitions(dwFS);
+	politicalManager.loadDiplomaticMapperRules("configurables/diplomatic_map.txt");
+	politicalManager.loadCharacterTraitMapperRules("configurables/character_traits.txt");
+	politicalManager.loadColonialTagMapperRules("configurables/colonial_tags.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	localizationLoader.scrapeLocalizations(dwFS);
+	vanillaLocalizationLoader.scrapeLocalizations(blankModFS);
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
 	Log(LogLevel::Progress) << "46 %";
@@ -75,6 +88,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 localizationLoader,
 		 sourceWorld.getEU4Localizations());
 
+	politicalManager.attemptColonialTagReplacement(cultureMapper.getColonialRegionMapper(), clayManager);
+
 	popManager.generatePops(clayManager);
 
 	cultureMapper.generateCultureDefinitions(allFS,
@@ -84,11 +99,26 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getCultureLoader(),
 		 sourceWorld.getEU4Localizations());
 
-	politicalManager.loadPopulationSetupMapperRules("configurables/population_setup.txt");
-	politicalManager.determineAndApplyWesternization(cultureMapper, religionMapper, configuration.configBlock.euroCentric, sourceWorld.getDatingData());
+	politicalManager.determineAndApplyWesternization(cultureMapper, religionMapper, configBlock.euroCentric, datingData);
+	politicalManager.setupTech();
+	politicalManager.setupLaws();
+	politicalManager.convertDiplomacy(sourceWorld.getDiplomacy().getAgreements());
+	politicalManager.convertRivals();
+	politicalManager.convertTruces(datingData.lastEU4Date);
 
 	clayManager.squashAllSubStates(politicalManager);
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);
+	politicalManager.convertCharacters(datingData.lastEU4Date,
+		 configBlock.startDate,
+		 clayManager,
+		 cultureMapper,
+		 religionMapper,
+		 sourceWorld.getCultureLoader(),
+		 sourceWorld.getReligionLoader());
+
+	flagCrafter.loadCustomColors(configuration.getEU4Path() + "/common/custom_country_colors/00_custom_country_colors.txt");
+	flagCrafter.loadAvailableFlags("blankMod/output/common/coat_of_arms/coat_of_arms/", V3Path + "/common/flag_definitions/");
+	flagCrafter.distributeAvailableFlags(politicalManager.getCountries(), *countryMapper);
 
 	Log(LogLevel::Info) << "-> Converting Provinces";
 	Log(LogLevel::Progress) << "53 %";

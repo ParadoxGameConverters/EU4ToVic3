@@ -6,10 +6,8 @@ TEST(EU4World_CountryHistoryTests, primitivesDefaultToBlank)
 	std::stringstream input;
 	const EU4::CountryHistory history(input);
 
-	EXPECT_TRUE(history.getDynasty().empty());
 	EXPECT_TRUE(history.getReligion().empty());
 	EXPECT_TRUE(history.getPrimaryCulture().empty());
-	EXPECT_TRUE(history.getLeaders().empty());
 }
 
 TEST(EU4World_CountryHistoryTests, cultureAndReligionCanBeLoaded)
@@ -41,14 +39,14 @@ TEST(EU4World_CountryHistoryTests, datesCanBeParsedForLeaders)
 	input << "}";
 
 	const EU4::CountryHistory history(input);
-	const auto& leader1 = history.getLeaders()[0];
-	const auto& leader2 = history.getLeaders()[1];
-	const auto& leader3 = history.getLeaders()[2];
+	const auto& leader1 = history.getCharacters()[0];
+	const auto& leader2 = history.getCharacters()[1];
+	const auto& leader3 = history.getCharacters()[2];
 
-	EXPECT_EQ(3, history.getLeaders().size());
-	EXPECT_EQ("TheGeneral", leader1.getName());
-	EXPECT_EQ("TheAdmiral", leader2.getName());
-	EXPECT_EQ("TheExplorer", leader3.getName());
+	EXPECT_EQ(3, history.getCharacters().size());
+	EXPECT_EQ("TheGeneral", leader1.leaderName);
+	EXPECT_EQ("TheAdmiral", leader2.leaderName);
+	EXPECT_EQ("TheExplorer", leader3.leaderName);
 }
 
 TEST(EU4World_CountryHistoryTests, datesCanBeParsedForRulerLeaders)
@@ -82,12 +80,11 @@ TEST(EU4World_CountryHistoryTests, datesCanBeParsedForRulerLeaders)
 	input << "}\n";
 
 	const EU4::CountryHistory history(input);
-	const auto& leader1 = history.getLeaders()[0];
-	const auto& leader2 = history.getLeaders()[1];
-	const auto& leader3 = history.getLeaders()[2];
+	const auto& leader1 = history.getCharacters()[0];
+	const auto& leader2 = history.getCharacters()[1];
+	const auto& leader3 = history.getCharacters()[2];
 
-	EXPECT_EQ("Boby 1st of Bobbypants", leader1.getName());
-	EXPECT_EQ("Boby 2nd of Bobbypants", leader2.getName());
-	EXPECT_EQ("Boby 3rd of Bobbypants", leader3.getName());
-	EXPECT_EQ("Bobbypants", history.getDynasty());
+	EXPECT_EQ("Boby 1st of Bobbypants", leader1.leaderName);
+	EXPECT_EQ("Boby 2nd of Bobbypants", leader2.leaderName);
+	EXPECT_EQ("Boby 3rd of Bobbypants", leader3.leaderName);
 }

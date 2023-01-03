@@ -52,15 +52,25 @@ TEST(EU4World_DiplomacyTests, nonDependencyAgreementsHaveTypeOverridden)
 	input << "alliance = {\n";
 	input << "	type=irrelevant\n";
 	input << "}\n";
+	input << "transfer_trade_power = {\n";
+	input << "	type=irrelevant\n";
+	input << "}\n";
+	input << "steer_trade = {\n";
+	input << "	type=irrelevant\n";
+	input << "}\n";
 	EU4::DiplomacyParser diplomacy;
 	diplomacy.loadDiplomacy(input);
 
-	ASSERT_EQ(3, diplomacy.getAgreements().size());
+	ASSERT_EQ(5, diplomacy.getAgreements().size());
 	const auto& agreement1 = diplomacy.getAgreements()[0];
 	const auto& agreement2 = diplomacy.getAgreements()[1];
 	const auto& agreement3 = diplomacy.getAgreements()[2];
+	const auto& agreement4 = diplomacy.getAgreements()[3];
+	const auto& agreement5 = diplomacy.getAgreements()[4];
 
 	EXPECT_EQ("royal_marriage", agreement1.getAgreementType());
 	EXPECT_EQ("guarantee", agreement2.getAgreementType());
 	EXPECT_EQ("alliance", agreement3.getAgreementType());
+	EXPECT_EQ("transfer_trade_power", agreement4.getAgreementType());
+	EXPECT_EQ("steer_trade", agreement5.getAgreementType());
 }

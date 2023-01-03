@@ -192,12 +192,6 @@ void EU4::CountryManager::uniteJapan()
 			japan->eatCountry(country);
 }
 
-void EU4::CountryManager::fillHistoricalData()
-{
-	for (const auto& country: countries)
-		historicalData.emplace_back(std::make_pair(country.first, country.second->getHistoricalEntry()));
-}
-
 void EU4::CountryManager::injectLocalizations()
 {
 	auto counter = 0;

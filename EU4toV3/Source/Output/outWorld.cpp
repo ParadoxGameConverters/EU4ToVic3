@@ -1,7 +1,12 @@
 #include "outWorld.h"
+#include "CommonFunctions.h"
 #include "OSCompatibilityLayer.h"
+#include "outCharacters/outCharacters.h"
+#include "outCoAs/outCoAa.h"
 #include "outCountries/outCountries.h"
 #include "outCultures/outCultures.h"
+#include "outDiplomacy/outDiplomacy.h"
+#include "outFlagDefinitions/outFlagDefinitions.h"
 #include "outLocalizations/outLocalizations.h"
 #include "outMetadataFile/outMetadataFile.h"
 #include "outPops/outPops.h"
@@ -14,6 +19,7 @@
 void OUT::exportWorld(const Configuration& configuration, const V3::World& world, const commonItems::ConverterVersion& converterVersion)
 {
 	const auto& outputName = configuration.getOutputName();
+	const auto& knownLocs = world.getVanillaLocalizations();
 
 	Log(LogLevel::Info) << "---> Le Dump <---";
 
@@ -49,6 +55,9 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Progress) << "84 %";
 
 	// Update bookmark starting dates
+	Log(LogLevel::Info) << "<- Updating bookmarks";
+	exportBookmark(outputName, configuration, world.getDatingData());
+
 	Log(LogLevel::Info) << "<- Dumping common/history/states";
 	exportCommonHistoryStates(outputName, world.getClayManager().getStates());
 	Log(LogLevel::Progress) << "85 %";
@@ -67,12 +76,16 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Progress) << "89 %";
 
 	Log(LogLevel::Info) << "<- Writing Flags";
+	copyCustomFlags(outputName);
+	exportCustomCoAs(outputName, world.getPoliticalManager().getCountries());
+	exportFlagDefinitions(outputName, world.getPoliticalManager().getCountries());
 	Log(LogLevel::Progress) << "90 %";
 
 	Log(LogLevel::Info) << "<- Writing Localizations";
-	exportCountryNamesAndAdjectives(outputName, world.getPoliticalManager().getCountries());
-	exportReligionLocs(outputName, world.getReligionMapper().getV3ReligionDefinitions());
-	exportCultureLocs(outputName, world.getCultureMapper().getV3CultureDefinitions());
+	exportCountryNamesAndAdjectives(outputName, world.getPoliticalManager().getCountries(), knownLocs);
+	exportReligionLocs(outputName, world.getReligionMapper().getV3ReligionDefinitions(), knownLocs);
+	exportCultureLocs(outputName, world.getCultureMapper().getV3CultureDefinitions(), knownLocs);
+	exportCharacterLocs(outputName, world.getPoliticalManager().getCountries(), knownLocs);
 	Log(LogLevel::Progress) << "91 %";
 
 	Log(LogLevel::Info) << "<- Writing Provinces";
@@ -85,6 +98,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Progress) << "93 %";
 
 	Log(LogLevel::Info) << "<- Writing Diplomacy";
+	exportDiplomacy(outputName, world.getPoliticalManager());
 	Log(LogLevel::Progress) << "94 %";
 
 	Log(LogLevel::Info) << "<- Writing Armed and Unarmed Conflicts";
@@ -98,6 +112,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	exportReligions(outputName, world.getReligionMapper().getV3ReligionDefinitions());
 
 	Log(LogLevel::Info) << "<- Writing Pops";
+	exportCharacters(outputName, world.getPoliticalManager().getCountries());
 	exportPops(outputName, world.getClayManager().getStates());
 	Log(LogLevel::Progress) << "97 %";
 
@@ -121,4 +136,31 @@ void OUT::exportVersion(const std::string& outputName, const commonItems::Conver
 		throw std::runtime_error("Error writing version file! Is the output folder writable?");
 	output << converterVersion;
 	output.close();
+}
+
+void OUT::exportBookmark(const std::string& outputName, const Configuration& configuration, const DatingData& datingData)
+{
+	if (configuration.configBlock.startDate == Configuration::STARTDATE::Vanilla)
+		return;
+	std::ofstream output("output/" + outputName + "/common/defines/99_converter_defines.txt");
+	if (!output.is_open())
+		throw std::runtime_error("Error writing defines file! Is the output folder writable?");
+	output << commonItems::utf8BOM << "NGame = { START_DATE = \"" << datingData.lastEU4Date << "\" }\n";
+	output.close();
+}
+
+void OUT::copyCustomFlags(const std::string& outputName)
+{
+	auto counter = 0;
+	if (!commonItems::DoesFolderExist("flags.tmp"))
+	{
+		Log(LogLevel::Warning) << "Flag folder flags.tmp not found!";
+		return;
+	}
+	for (const auto& filename: commonItems::GetAllFilesInFolder("flags.tmp"))
+	{
+		if (commonItems::TryCopyFile("flags.tmp/" + filename, "output/" + outputName + "/gfx/coat_of_arms/textured_emblems/custom_export/" + filename))
+			++counter;
+	}
+	Log(LogLevel::Info) << "<< " << counter << " flags copied.";
 }

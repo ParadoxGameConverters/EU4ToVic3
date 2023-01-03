@@ -92,6 +92,20 @@ TEST(EU4World_EU4CountryTests, capitalScoreAndTechCanBeRead)
 	EXPECT_EQ("western", country.getTechGroup());
 }
 
+TEST(EU4World_EU4CountryTests, RivalsCanBeRead)
+{
+	std::stringstream input;
+	input << "rival = {\n";
+	input << "   country = TA1\n";
+	input << "}\n";
+	input << "rival = {\n";
+	input << "   country = TA2\n";
+	input << "}\n";
+	const EU4::Country country("TAG", input);
+
+	EXPECT_THAT(country.getRivals(), UnorderedElementsAre("TA1", "TA2"));
+}
+
 TEST(EU4World_EU4CountryTests, cultureAndReligionCanBeRead)
 {
 	std::stringstream deadInput;
@@ -247,20 +261,56 @@ TEST(EU4World_EU4CountryTests, LeadersCanBeReadAndProcessed)
 	input << "}\n";
 
 	const EU4::Country country("TAG", input);
-	const auto& leaders = country.getMilitaryLeaders();
+	const auto& leaders = country.getCharacters();
 
 	ASSERT_EQ(2, leaders.size());
 
 	const auto& leader1 = leaders[0];
 	const auto& leader2 = leaders[1];
 
-	EXPECT_EQ("Sir. Still Alive", leader1.getName());
-	EXPECT_FALSE(leader1.isLand());
-	EXPECT_EQ(6, leader1.getManeuver());
+	EXPECT_EQ("His Majesty Still Kicking", leader1.leaderName);
+	EXPECT_TRUE(leader1.ruler);
+	EXPECT_EQ(4, leader1.fire);
 
-	EXPECT_EQ("His Majesty Still Kicking", leader2.getName());
-	EXPECT_TRUE(leader2.isLand());
-	EXPECT_EQ(4, leader2.getFire());
+	EXPECT_EQ("Sir. Still Alive", leader2.leaderName);
+	EXPECT_EQ(6, leader2.maneuver);
+}
+
+TEST(EU4World_EU4CountryTests, DuplicateLeadersAreDitched)
+{
+	std::stringstream input;
+	input << "history={\n";
+	input << "	1751.1.1={\n";
+	input << "		heir={\n";
+	input << "			name=\"I was heir\"\n";
+	input << "			id={\n";
+	input << "				id=1\n";
+	input << "			}\n";
+	input << "			monarch_name=\"I'll be monarch\"\n";
+	input << "		}\n";
+	input << "	}\n";
+	input << "	1768.1.1={\n";
+	input << "		monarch_heir={\n";
+	input << "			name=\"Now I'm monarch\"\n";
+	input << "			id={\n";
+	input << "				id=1\n";
+	input << "			}\n";
+	input << "		}\n";
+	input << "	}\n";
+	input << "}\n";
+	input << "monarch={\n";
+	input << "	id=1\n";
+	input << "}\n";
+
+	const EU4::Country country("TAG", input);
+	const auto& leaders = country.getCharacters();
+
+	ASSERT_EQ(1, leaders.size());
+
+	const auto& leader = leaders[0];
+
+	EXPECT_EQ("Now I'm monarch", leader.name);
+	EXPECT_TRUE(leader.ruler);
 }
 
 TEST(EU4World_EU4CountryTests, ArmiesCanBeLoaded)
@@ -588,72 +638,6 @@ TEST(EU4World_EU4CountryTests, NationalColorsCanBeLoadedInTheirFullGlory)
 	EXPECT_EQ(24, symbol.getCustomColors()->colorIndex);
 	EXPECT_EQ(35, symbol.getCustomColors()->symbolIndex);
 	EXPECT_EQ("= rgb { 12 34 56 }", symbol.getCustomColors()->flagColors->outputRgb());
-}
-
-TEST(EU4World_EU4CountryTests, BotanicalExpeditionGrabsLastDynasty)
-{
-	std::stringstream input;
-	input << "history={\n";
-	input << "	1265.1.1={\n";
-	input << "		monarch={\n";
-	input << "			dynasty=\"fancyskirt\"\n";
-	input << "		}\n";
-	input << "	}\n";
-	input << "	1765.1.1={\n";
-	input << "		monarch={\n";
-	input << "			dynasty=\"fancykilt\"\n";
-	input << "		}\n";
-	input << "	}\n";
-	input << "	1768.1.1={\n";
-	input << "		monarch={\n";
-	input << "			dynasty=\"fancypants\"\n";
-	input << "		}\n";
-	input << "	}\n";
-	input << "}\n";
-	const EU4::Country country("TAG", input);
-
-	const auto& historicalEntry = country.getHistoricalEntry();
-
-	EXPECT_EQ("fancypants", historicalEntry.lastDynasty);
-	EXPECT_TRUE(historicalEntry.monarchy);
-}
-
-TEST(EU4World_EU4CountryTests, BotanicalExpeditionFlipsMonarchyForRepublics)
-{
-	std::stringstream input;
-	input << "government = { government = republic }\n";
-	input << "history={\n";
-	input << "	1768.1.1={\n";
-	input << "		monarch={\n";
-	input << "			dynasty=\"fancypants\"\n";
-	input << "		}\n";
-	input << "	}\n";
-	input << "}\n";
-	const EU4::Country country("TAG", input);
-
-	const auto& historicalEntry = country.getHistoricalEntry();
-
-	EXPECT_EQ("fancypants", historicalEntry.lastDynasty);
-	EXPECT_FALSE(historicalEntry.monarchy);
-}
-
-TEST(EU4World_EU4CountryTests, BotanicalExpeditionFlipsMonarchyForTheocracies)
-{
-	std::stringstream input;
-	input << "government = { government = theocracy }\n";
-	input << "history={\n";
-	input << "	1768.1.1={\n";
-	input << "		monarch={\n";
-	input << "			dynasty=\"fancypants\"\n";
-	input << "		}\n";
-	input << "	}\n";
-	input << "}\n";
-	const EU4::Country country("TAG", input);
-
-	const auto& historicalEntry = country.getHistoricalEntry();
-
-	EXPECT_EQ("fancypants", historicalEntry.lastDynasty);
-	EXPECT_FALSE(historicalEntry.monarchy);
 }
 
 TEST(EU4World_EU4CountryTests, CultureInCoresCanBePingedForCoresUnderForeignRule)

@@ -1,0 +1,128 @@
+# This file links various effects to various idea groups.
+# If the effects are conflicting, they cancel out.
+#
+# literacy = <+-number> <- negative or positive literacy percentage, that's about it.
+# eg. if a country's percentage would be 49%, and this would bump them to 51%, they might
+# switch the rating from high to very high literacy. Little in-game effect though.
+#
+# adm, dip, mil = <+-number> <- these count as extra (or missing) techs in this category.
+# This is relevant when scoring nations to assign starting tech.
+#
+# ig = <group> <- having this idea group means you are boosting these guys.
+# noig = <group> <- this idea would supress this interest group.
+# If an IG gets boosted two or more times, it also becomes one of the ruling IGs.
+
+administrative_ideas = {
+	literacy = 4
+	adm = 2
+}
+
+economic_ideas = {
+	adm = 1
+	ig = ig_industrialists
+}
+
+expansion_ideas = {
+	adm = 1
+}
+
+humanist_ideas = {
+	adm = 1
+	ig = ig_intelligentsia
+	noig = ig_devout
+}
+
+innovativeness_ideas = {
+	literacy = 3
+	adm = 1
+	dip = 1
+	mil = 1
+}
+
+religious_ideas = {
+	literacy = 3
+	adm = 1
+	ig = ig_devout
+	noig = ig_intelligentsia
+}
+
+# Diplomatic ideas
+
+diplomatic_ideas = {
+	dip = 2
+}
+
+spy_ideas = {
+	dip = 1	
+}
+
+exploration_ideas = {
+	dip = 1
+}
+
+influence_ideas = {
+	dip = 1
+}
+
+maritime_ideas = {
+	dip = 1
+}
+
+trade_ideas = {
+	dip = 1
+	ig = ig_trade_unions
+}
+
+# Military ideas
+
+aristocracy_ideas = {
+	literacy = -2
+	mil = 2
+	ig = ig_landowners
+	noig = ig_petty_bourgeoisie
+}
+
+theocracy_gov_ideas = {
+	mil = 1
+	ig = ig_devout
+	noig = ig_intelligentsia
+}
+
+horde_gov_ideas = {
+	literacy = -5
+	mil = 1
+}
+
+indigenous_ideas = {
+	literacy = -2
+	mil = 1
+}
+
+plutocracy_ideas = {
+	mil = 1
+	ig = ig_petty_bourgeoisie
+	noig = ig_landowners
+}
+
+defensive_ideas = {
+	mil = 1
+}
+
+naval_ideas = {
+	mil = 1
+}
+
+offensive_ideas = {
+	mil = 1
+	ig = ig_armed_forces
+}
+
+quality_ideas = {
+	literacy = 2
+	mil = 1
+}
+
+quantity_ideas = {
+	literacy = -2
+	mil = 1
+}

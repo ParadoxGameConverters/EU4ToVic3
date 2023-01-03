@@ -10,6 +10,7 @@
 #include "ParserHelpers.h"
 #include "PopulationSetupMapper/PopulationSetupMapper.h"
 #include "ReligionMapper/ReligionMapper.h"
+#include "TechSetupMapper/TechSetupMapper.h"
 #include <cmath>
 #include <numeric>
 
@@ -154,7 +155,8 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	 mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 const EU4::CultureLoader& cultureLoader,
-	 const EU4::ReligionLoader& religionLoader)
+	 const EU4::ReligionLoader& religionLoader,
+	 const mappers::IdeaEffectsMapper& ideaEffectMapper)
 {
 	// color - using eu4 colors so people don't lose their shit over red venice and orange england.
 	if (sourceCountry->getNationalColors().getMapColor())
@@ -191,6 +193,19 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 
 	// namedaftercapital ? Unsure what to do with this.
 	processedData.is_named_from_capital = false;
+
+	// idea effects.
+	processedData.ideaEffect = ideaEffectMapper.getEffectForIdeas(sourceCountry->getNationalIdeas());
+
+	// slavery - we're setting this law right here and now as it's a base for further laws later when we have techs.
+	if (sourceCountry->hasModifier("the_abolish_slavery_act"))
+		processedData.laws.emplace("law_slavery_banned");
+
+	// custom flag?
+	if (sourceCountry->getNationalColors().getCustomColors())
+		processedData.customColors = sourceCountry->getNationalColors().getCustomColors();
+	if (sourceCountry->isRevolutionary() && sourceCountry->getNationalColors().getRevolutionaryColor())
+		processedData.revolutionaryColor = sourceCountry->getNationalColors().getRevolutionaryColor();
 }
 
 void V3::Country::convertTier()
@@ -493,10 +508,17 @@ void V3::Country::determineCountryType()
 void V3::Country::applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper)
 {
 	auto literacyEffect = populationSetupMapper.getLiteracyEffectForLiteracy(processedData.literacy);
+	if (literacyEffect.empty())
+		Log(LogLevel::Warning) << "Literacy effect for " << tag << " is empty! Something's wrong!";
+	else
+		processedData.populationEffects.emplace(literacyEffect);
+
 	const auto& averageDev = sourceCountry->getAverageDevelopment();
 	auto wealthEffect = populationSetupMapper.getWealthEffectForDev(averageDev);
-	processedData.populationEffects.emplace(literacyEffect);
-	processedData.populationEffects.emplace(wealthEffect);
+	if (wealthEffect.empty())
+		Log(LogLevel::Warning) << "Wealth effect for " << tag << " is empty! Something's wrong!";
+	else
+		processedData.populationEffects.emplace(wealthEffect);
 }
 
 void V3::Country::adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper)
@@ -539,7 +561,8 @@ void V3::Country::calculateWesternization(double topTech,
 	 Configuration::EUROCENTRISM eurocentrism)
 {
 	// This is base calc, from EU4. Even western countries in severe tech deficit will have a lower civLevel score.
-	const auto totalTechs = sourceCountry->getMilTech() + sourceCountry->getAdmTech() + sourceCountry->getDipTech();
+	const auto totalTechs = sourceCountry->getMilTech() + sourceCountry->getAdmTech() + sourceCountry->getDipTech() + processedData.ideaEffect.getTechMod();
+	// default cutoff point for civilization is ... 6! techs/ideas behind (total). (31 - 6) * 4 = 100 which is civilized, assuming no institution deficit.
 	processedData.civLevel = (totalTechs + 31.0 - topTech) * 4;
 	processedData.civLevel += (static_cast<double>(sourceCountry->getNumEmbracedInstitutions()) - topInstitutions) * 8;
 
@@ -611,9 +634,68 @@ void V3::Country::calculateBaseLiteracy(const mappers::ReligionMapper& religionM
 
 	literacy += universityBonus;
 
-	// TODO: Apply collective national literacy modifier.
+	// Adding whatever literacy bonus or malus we have from eu4 ideas.
+	processedData.literacy = literacy + static_cast<double>(processedData.ideaEffect.literacy) / 100.0;
+}
 
-	processedData.literacy = literacy;
+void V3::Country::setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore)
+{
+	auto productionTechs = techSetupMapper.getTechsForScoreTrack("production", productionScore);
+	auto militaryTechs = techSetupMapper.getTechsForScoreTrack("military", militaryScore);
+	auto societyTechs = techSetupMapper.getTechsForScoreTrack("society", societyScore);
+
+	processedData.techs.insert(productionTechs.begin(), productionTechs.end());
+	processedData.techs.insert(militaryTechs.begin(), militaryTechs.end());
+	processedData.techs.insert(societyTechs.begin(), societyTechs.end());
+}
+
+V3::Relation& V3::Country::getRelation(const std::string& target)
+{
+	const auto& relation = processedData.relations.find(target);
+	if (relation != processedData.relations.end())
+		return relation->second;
+	Relation newRelation(target);
+	processedData.relations.emplace(target, newRelation);
+	const auto& newRelRef = processedData.relations.find(target);
+	return newRelRef->second;
+}
+
+void V3::Country::convertCharacters(const mappers::CharacterTraitMapper& characterTraitMapper,
+	 const float ageShift,
+	 const ClayManager& clayManager,
+	 mappers::CultureMapper& cultureMapper,
+	 const mappers::ReligionMapper& religionMapper,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader,
+	 const date& conversionDate)
+{
+	bool ruler = false;
+	bool consort = false;
+	// check for married status.
+	for (const auto& eu4Character: sourceCountry->getCharacters())
+		if (eu4Character.ruler)
+			ruler = true;
+		else if (eu4Character.consort)
+			consort = true;
+
+	for (const auto& eu4Character: sourceCountry->getCharacters())
+	{
+		auto character = Character(eu4Character,
+			 characterTraitMapper,
+			 ageShift,
+			 clayManager,
+			 cultureMapper,
+			 religionMapper,
+			 cultureLoader,
+			 religionLoader,
+			 processedData.capitalStateName,
+			 tag,
+			 conversionDate);
+		if (character.ruler && ruler && consort)
+			character.married = true;
+
+		processedData.characters.emplace_back(character);
+	}
 }
 
 int V3::Country::getPopCount() const

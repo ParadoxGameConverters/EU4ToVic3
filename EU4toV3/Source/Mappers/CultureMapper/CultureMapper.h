@@ -44,6 +44,8 @@ class CultureMapper: commonItems::parser
 	[[nodiscard]] const auto& getUsedCultures() const { return usedCultures; }
 	[[nodiscard]] const auto& getV3CultureDefinitions() const { return v3CultureDefinitions; }
 
+	[[nodiscard]] const auto& getColonialRegionMapper() const { return colonialRegionMapper; }
+
 	[[nodiscard]] std::optional<std::string> cultureMatch(const V3::ClayManager& clayManager,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader,

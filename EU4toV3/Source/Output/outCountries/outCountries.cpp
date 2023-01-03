@@ -35,10 +35,31 @@ void outCommonCountry(std::ostream& output, const V3::Country& country)
 void outHistoryCountry(std::ostream& output, const V3::Country& country)
 {
 	output << "\tc:" << country.getTag() << " = {\n";
+	for (const auto& tech: country.getProcessedData().techs)
+		output << "\t\tadd_technology_researched = " << tech << "\n";
 	for (const auto& effect: country.getProcessedData().effects)
 		output << "\t\t" << effect << " = yes\n";
 	for (const auto& law: country.getProcessedData().laws)
 		output << "\t\tactivate_law = law_type:" << law << "\n";
+	if (!country.getProcessedData().ideaEffect.rulingInterestGroups.empty())
+	{
+		output << "\t\tset_ruling_interest_groups = {\n\t\t\t";
+		for (const auto& ig: country.getProcessedData().ideaEffect.rulingInterestGroups)
+			output << ig << " ";
+		output << "\n\t\t}\n";
+	}
+	for (const auto& ig: country.getProcessedData().ideaEffect.boostedInterestGroups)
+	{
+		output << "\t\tig:" << ig << " = {\n";
+		output << "\t\t\tset_ig_bolstering = yes\n ";
+		output << "\t\t}\n";
+	}
+	for (const auto& ig: country.getProcessedData().ideaEffect.suppressedInterestGroups)
+	{
+		output << "\t\tig:" << ig << " = {\n";
+		output << "\t\t\tset_ig_suppression = yes\n";
+		output << "\t\t}\n";
+	}
 	output << "\t}\n";
 }
 
@@ -72,7 +93,7 @@ void OUT::exportHistoryCountries(const std::string& outputName, const std::map<s
 
 	output << commonItems::utf8BOM << "COUNTRIES = {\n";
 	for (const auto& country: countries | std::views::values)
-		if (!country->getSubStates().empty() && !country->getProcessedData().effects.empty())
+		if (!country->getSubStates().empty())
 			outHistoryCountry(output, *country);
 	output << "}\n";
 	output.close();

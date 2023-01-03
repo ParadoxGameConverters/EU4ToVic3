@@ -6,8 +6,8 @@
 #include "Log.h"
 #include "ModLoader/ModNames.h"
 #include "ParserHelpers.h"
-#include "rakaly_wrapper.h"
-#include <ZipFile.h>
+#include "rakaly.h"
+#include "zip.h"
 #include <exception>
 #include <filesystem>
 #include <fstream>
@@ -24,25 +24,6 @@ EU4::World::World(const Configuration& theConfiguration, const commonItems::Conv
 	Log(LogLevel::Info) << "-> Verifying EU4 save.";
 	verifySave();
 	Log(LogLevel::Progress) << "7 %";
-
-	Log(LogLevel::Info) << "-> Loading EU4 save.";
-	if (!saveGame.compressed)
-	{
-		std::ifstream inBinary(fs::u8path(saveGame.path), std::ios::binary);
-		if (!inBinary.is_open())
-		{
-			Log(LogLevel::Error) << "Could not open " << saveGame.path << " for parsing.";
-			throw std::runtime_error("Could not open " + saveGame.path + " for parsing.");
-		}
-		std::stringstream inStream;
-		inStream << inBinary.rdbuf();
-		saveGame.gamestate = inStream.str();
-	}
-	Log(LogLevel::Progress) << "8 %";
-
-	Log(LogLevel::Progress) << "-> Verifying Save Contents.";
-	verifySaveContents();
-	Log(LogLevel::Progress) << "9 %";
 
 	Log(LogLevel::Progress) << "\t* Importing Save. *";
 	auto metaData = std::istringstream(saveGame.metadata);
@@ -126,10 +107,6 @@ EU4::World::World(const Configuration& theConfiguration, const commonItems::Conv
 	Log(LogLevel::Info) << "-> Clasifying Invasive Fauna";
 	regionManager.flagNeoCultures(provinceManager);
 	Log(LogLevel::Progress) << "28 %";
-
-	Log(LogLevel::Info) << "-> Equipping Botanical Expedition";
-	countryManager.fillHistoricalData();
-	Log(LogLevel::Progress) << "38 %";
 
 	Log(LogLevel::Info) << "-> Dropping Dead, Empty and/or Coreless Nations";
 	countryManager.filterDeadNations(theConfiguration.configBlock.removeType);
@@ -232,56 +209,26 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const commo
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-void EU4::World::verifySaveContents()
-{
-	if (saveGame.gamestate.starts_with("EU4bin"))
-	{
-		saveGame.gamestate = rakaly::meltEU4(saveGame.gamestate);
-		saveGame.metadata = rakaly::meltEU4(saveGame.metadata);
-	}
-}
-
 void EU4::World::verifySave()
 {
-	std::ifstream saveFile(fs::u8path(saveGame.path));
-	if (!saveFile.is_open())
-		throw std::runtime_error("Could not open save! Exiting!");
+	std::ifstream save_file(std::filesystem::u8path(saveGame.path), std::ios::in | std::ios::binary);
+	const auto save_size = static_cast<std::streamsize>(std::filesystem::file_size(saveGame.path));
+	std::string save_string(save_size, '\0');
+	save_file.read(save_string.data(), save_size);
 
-	char buffer[3];
-	saveFile.get(buffer, 3);
-	if (buffer[0] == 'P' && buffer[1] == 'K')
+	if (save_string.starts_with("EU4txt"))
 	{
-		if (!uncompressSave())
-			throw std::runtime_error("Failed to unpack the compressed save!");
+		saveGame.gamestate = save_string;
+		return;
 	}
-	saveFile.close();
-}
 
-bool EU4::World::uncompressSave()
-{
-	auto saveFile = ZipFile::Open(saveGame.path);
-	if (!saveFile)
-		return false;
-	for (size_t entryNum = 0; entryNum < saveFile->GetEntriesCount(); ++entryNum)
-	{
-		const auto& entry = saveFile->GetEntry(static_cast<int>(entryNum));
-		if (const auto& name = entry->GetName(); name == "meta")
-		{
-			Log(LogLevel::Info) << ">> Uncompressing metadata";
-			saveGame.metadata = std::string{std::istreambuf_iterator<char>(*entry->GetDecompressionStream()), std::istreambuf_iterator<char>()};
-		}
-		else if (name == "gamestate")
-		{
-			Log(LogLevel::Info) << ">> Uncompressing gamestate";
-			saveGame.gamestate = std::string{std::istreambuf_iterator<char>(*entry->GetDecompressionStream()), std::istreambuf_iterator<char>()};
-		}
-		else if (name == "ai")
-		{
-			Log(LogLevel::Info) << ">> Uncompressing ai and forgetting it existed";
-			saveGame.compressed = true;
-		}
-		else
-			throw std::runtime_error("Unrecognized savegame structure! RNW savegames are NOT supported!");
-	}
-	return true;
+	const auto game_state = rakaly::meltEu4(save_string);
+	game_state.writeData(saveGame.gamestate);
+	if (game_state.has_unknown_tokens())
+		Log(LogLevel::Error) << "Rakaly melting had errors!";
+
+	zip_t* zip = zip_open(saveGame.path.c_str(), 0, 'r');
+	const auto entriesCount = zip_entries_total(zip);
+	if (entriesCount > 3)
+		throw std::runtime_error("Unrecognized savegame structure! RNW savegames are NOT supported!");
 }

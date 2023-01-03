@@ -4,10 +4,9 @@
 TEST(EU4World_CountryHistoryDateTests, primitivesDefaultToBlank)
 {
 	std::stringstream input;
-	const EU4::CountryHistoryDate historyDate(input, std::string());
+	const EU4::CountryHistoryDate historyDate(input);
 
-	EXPECT_TRUE(historyDate.getDynasty().empty());
-	EXPECT_TRUE(historyDate.getLeaders().empty());
+	EXPECT_TRUE(historyDate.getCharacters().empty());
 }
 
 TEST(EU4World_CountryHistoryDateTests, simpleLeadersCanBeLoaded)
@@ -19,14 +18,14 @@ TEST(EU4World_CountryHistoryDateTests, simpleLeadersCanBeLoaded)
 	input << "leader = {\n";
 	input << "\tname=Carol\n";
 	input << "}\n";
-	const EU4::CountryHistoryDate historyDate(input, std::string());
+	const EU4::CountryHistoryDate historyDate(input);
 
-	ASSERT_EQ(2, historyDate.getLeaders().size());
-	const auto& leader1 = historyDate.getLeaders()[0];
-	const auto& leader2 = historyDate.getLeaders()[1];
+	ASSERT_EQ(2, historyDate.getCharacters().size());
+	const auto& leader1 = historyDate.getCharacters()[0];
+	const auto& leader2 = historyDate.getCharacters()[1];
 
-	EXPECT_EQ("Boby", leader1.getName());
-	EXPECT_EQ("Carol", leader2.getName());
+	EXPECT_EQ("Boby", leader1.leaderName);
+	EXPECT_EQ("Carol", leader2.leaderName);
 }
 
 TEST(EU4World_CountryHistoryDateTests, monarchLeaderAndDynastyCanBeLoaded)
@@ -39,39 +38,44 @@ TEST(EU4World_CountryHistoryDateTests, monarchLeaderAndDynastyCanBeLoaded)
 	input << "\t\tname=\"Boby 1st of Bobbypants\"\n";
 	input << "\t}\n";
 	input << "}\n";
-	const EU4::CountryHistoryDate historyDate(input, std::string());
+	const EU4::CountryHistoryDate historyDate(input);
 
-	ASSERT_EQ(1, historyDate.getLeaders().size());
-	const auto& leader = historyDate.getLeaders()[0];
+	ASSERT_EQ(1, historyDate.getCharacters().size());
+	const auto& leader = historyDate.getCharacters()[0];
 
-	EXPECT_EQ("Boby 1st of Bobbypants", leader.getName());
-	EXPECT_EQ("Bobbypants", historyDate.getDynasty());
+	EXPECT_EQ("Boby", leader.name);
+	EXPECT_EQ("Bobbypants", leader.dynasty);
+	EXPECT_EQ("Boby 1st of Bobbypants", leader.leaderName);
+	EXPECT_TRUE(leader.ruler);
 }
 
-TEST(EU4World_CountryHistoryDateTests, heirAndQueenDoNotLoadDynasties)
+TEST(EU4World_CountryHistoryDateTests, heirAndQueenCanBeLoaded)
 {
 	std::stringstream input;
 	input << "queen = {\n";
 	input << "\tname = Boby\n";
 	input << "\tdynasty = Bobbypants\n";
 	input << "\tleader = {\n";
-	input << "\t\tname=\"Boby 1st of Bobbypants\"\n";
+	input << "\t\tname=\"Queen 1st of Bobbypants\"\n";
 	input << "\t}\n";
 	input << "}\n";
 	input << "heir = {\n";
 	input << "\tname = Boby\n";
 	input << "\tdynasty = Bobbypants\n";
 	input << "\tleader = {\n";
-	input << "\t\tname=\"Boby 2nd of Bobbypants\"\n";
+	input << "\t\tname=\"Heir 2nd of Bobbypants\"\n";
 	input << "\t}\n";
 	input << "}\n";
-	const EU4::CountryHistoryDate historyDate(input, std::string());
+	const EU4::CountryHistoryDate historyDate(input);
 
-	ASSERT_EQ(2, historyDate.getLeaders().size());
-	const auto& leader1 = historyDate.getLeaders()[0];
-	const auto& leader2 = historyDate.getLeaders()[1];
+	ASSERT_EQ(2, historyDate.getCharacters().size());
+	const auto& leader1 = historyDate.getCharacters()[0];
+	const auto& leader2 = historyDate.getCharacters()[1];
 
-	EXPECT_EQ("Boby 1st of Bobbypants", leader1.getName());
-	EXPECT_EQ("Boby 2nd of Bobbypants", leader2.getName());
-	EXPECT_TRUE(historyDate.getDynasty().empty());
+	EXPECT_EQ("Queen 1st of Bobbypants", leader1.leaderName);
+	EXPECT_EQ("Bobbypants", leader1.dynasty);
+	EXPECT_TRUE(leader1.consort);
+	EXPECT_EQ("Heir 2nd of Bobbypants", leader2.leaderName);
+	EXPECT_EQ("Bobbypants", leader2.dynasty);
+	EXPECT_TRUE(leader2.heir);
 }
