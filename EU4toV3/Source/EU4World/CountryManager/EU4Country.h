@@ -30,10 +30,12 @@ class Country: commonItems::parser
 	[[nodiscard]] auto isHREmperor() const { return holyRomanEmperor; }
 	[[nodiscard]] auto isCelestialEmperor() const { return celestialEmperor; }
 	[[nodiscard]] auto isRevolutionary() const { return revolutionary; }
+	[[nodiscard]] auto isGP() const { return GP; }
 	void setInHRE(const bool _inHRE) { inHRE = _inHRE; }
 	void setCelestialEmperor(const bool _celestialEmperor) { celestialEmperor = _celestialEmperor; }
 	void setEmperor(const bool _emperor) { holyRomanEmperor = _emperor; }
 	void setRevolutionary(const bool _rev) { revolutionary = _rev; }
+	void setGP() { GP = true; }
 
 	// in-game capital, score and tech
 	[[nodiscard]] auto getCapital() const { return capital; }
@@ -139,6 +141,7 @@ class Country: commonItems::parser
 	bool holyRomanEmperor = false;
 	bool celestialEmperor = false;
 	bool revolutionary = false;
+	bool GP = false;
 
 	int capital = 0; // provinceID
 	double score = 0.0;

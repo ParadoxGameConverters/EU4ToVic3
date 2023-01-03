@@ -42,6 +42,7 @@ class CountryManager: public commonItems::parser
 	void injectLocalizations();
 	void mergeNations();
 	void filterDeadNations(Configuration::DEADCORES toggle);
+	void assignGPStatuses();
 
   private:
 	void registerKeys();

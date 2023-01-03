@@ -4,6 +4,27 @@
 #include "ParserHelpers.h"
 #include <ranges>
 
+namespace
+{
+std::vector<std::string> sortMap(const std::map<std::string, double>& theMap)
+{
+	std::vector<std::string> sorted;
+
+	std::vector<std::pair<std::string, double>> pairs;
+	for (const auto& theElement: theMap)
+		pairs.emplace_back(theElement);
+
+	std::ranges::sort(pairs.begin(), pairs.end(), [=](const std::pair<std::string, double>& a, const std::pair<std::string, double>& b) {
+		return a.second < b.second;
+	});
+
+	for (const auto& tag: pairs | std::views::keys)
+		sorted.emplace_back(tag);
+
+	return sorted;
+}
+} // namespace
+
 void EU4::CountryManager::loadCountries(std::istream& theStream)
 {
 	registerKeys();
@@ -285,4 +306,21 @@ void EU4::CountryManager::removeLandlessNations()
 	countries.swap(survivingCountries);
 	counter -= countries.size();
 	Log(LogLevel::Info) << "<> " << counter << " landless nations disposed, " << countries.size() << " remain.";
+}
+
+void EU4::CountryManager::assignGPStatuses()
+{
+	std::map<std::string, double> prestigeScores;
+	for (const auto& [tag, country]: countries)
+	{
+		if (country->getProvinces().empty())
+			continue;
+		prestigeScores.emplace(tag, country->getScore());
+	}
+	auto prestigeOrder = sortMap(prestigeScores);
+	if (prestigeOrder.size() >= 8) // take the top 8 EU4 GPs.
+		prestigeOrder = {prestigeOrder.begin() + prestigeOrder.size() - 8, prestigeOrder.end()};
+	const std::set<std::string> prestigeTags = {prestigeOrder.begin(), prestigeOrder.end()};
+	for (const auto& tag: prestigeTags)
+		countries.at(tag)->setGP();
 }
