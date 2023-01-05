@@ -42,7 +42,7 @@ class World: commonItems::parser
 
 	struct saveData
 	{
-		bool compressed = false;
+		bool parsedMeta = false;
 		std::string metadata;
 		std::string gamestate;
 		std::string path;
