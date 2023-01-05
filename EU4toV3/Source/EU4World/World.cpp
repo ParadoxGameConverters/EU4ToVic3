@@ -30,6 +30,8 @@ EU4::World::World(const Configuration& theConfiguration, const commonItems::Conv
 	auto gameState = std::istringstream(saveGame.gamestate);
 	registerKeys(theConfiguration, converterVersion);
 	parseStream(metaData);
+	if (!saveGame.metadata.empty())
+		saveGame.parsedMeta = true;
 	parseStream(gameState);
 	clearRegisteredKeywords();
 	Log(LogLevel::Progress) << "\t* Import Complete. *";
@@ -121,7 +123,10 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const commo
 	registerKeyword("EU4txt", [](std::istream& theStream) {
 	});
 	registerKeyword("date", [this](std::istream& theStream) {
-		datingData.lastEU4Date = date(commonItems::getString(theStream));
+		if (saveGame.parsedMeta)
+			commonItems::ignoreItem("unused", theStream);
+		else
+			datingData.lastEU4Date = date(commonItems::getString(theStream));
 	});
 	registerKeyword("start_date", [this](std::istream& theStream) {
 		datingData.startEU4Date = date(commonItems::getString(theStream));
@@ -141,6 +146,12 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const commo
 		}
 	});
 	registerKeyword("savegame_version", [this, converterVersion](std::istream& theStream) {
+		if (saveGame.parsedMeta)
+		{
+			commonItems::ignoreItem("unused", theStream);
+			return;
+		}
+
 		version = GameVersion(theStream);
 		Log(LogLevel::Info) << "Savegave version: " << version;
 
@@ -156,6 +167,12 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const commo
 		}
 	});
 	registerKeyword("mods_enabled_names", [this, theConfiguration](std::istream& theStream) {
+		if (saveGame.parsedMeta)
+		{
+			commonItems::ignoreItem("unused", theStream);
+			return;
+		}
+
 		Log(LogLevel::Info) << "-> Detecting used mods.";
 		const auto& modBlobs = commonItems::blobList(theStream);
 		Log(LogLevel::Info) << "<> Savegame claims " << modBlobs.getBlobs().size() << " mods used:";
@@ -211,24 +228,51 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const commo
 
 void EU4::World::verifySave()
 {
-	std::ifstream save_file(std::filesystem::u8path(saveGame.path), std::ios::in | std::ios::binary);
-	const auto save_size = static_cast<std::streamsize>(std::filesystem::file_size(saveGame.path));
-	std::string save_string(save_size, '\0');
-	save_file.read(save_string.data(), save_size);
+	const std::ifstream saveFile(std::filesystem::u8path(saveGame.path), std::ios::in | std::ios::binary);
+	std::stringstream inStream;
+	inStream << saveFile.rdbuf();
+	saveGame.gamestate = inStream.str();
 
-	if (save_string.starts_with("EU4txt"))
+	const auto save = rakaly::parseEu4(saveGame.gamestate);
+	if (const auto& melt = save.meltMeta(); melt)
 	{
-		saveGame.gamestate = save_string;
-		return;
+		Log(LogLevel::Info) << "Meta extracted successfully.";
+		melt->writeData(saveGame.metadata);
+	}
+	else if (save.is_binary())
+	{
+		Log(LogLevel::Error) << "Binary Save and NO META!";
 	}
 
-	const auto game_state = rakaly::meltEu4(save_string);
-	game_state.writeData(saveGame.gamestate);
-	if (game_state.has_unknown_tokens())
-		Log(LogLevel::Error) << "Rakaly melting had errors!";
+	if (save.is_binary())
+	{
+		Log(LogLevel::Info) << "Gamestate is binary, melting.";
+		const auto& melt = save.melt();
+		if (melt.has_unknown_tokens())
+		{
+			Log(LogLevel::Error) << "Rakaly reports errors while melting ironman save!";
+		}
+
+		melt.writeData(saveGame.gamestate);
+	}
+	else
+	{
+		Log(LogLevel::Info) << "Gamestate is textual.";
+		const auto& melt = save.melt();
+		melt.writeData(saveGame.gamestate);
+	}
 
 	zip_t* zip = zip_open(saveGame.path.c_str(), 0, 'r');
 	const auto entriesCount = zip_entries_total(zip);
 	if (entriesCount > 3)
 		throw std::runtime_error("Unrecognized savegame structure! RNW savegames are NOT supported!");
+
+	// Always dump to disk for easier debug.
+	std::ofstream metaDump("metaDump.txt");
+	metaDump << saveGame.metadata;
+	metaDump.close();
+
+	std::ofstream saveDump("saveDump.txt");
+	saveDump << saveGame.gamestate;
+	saveDump.close();
 }
