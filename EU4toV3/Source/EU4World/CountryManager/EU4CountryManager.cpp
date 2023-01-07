@@ -59,9 +59,9 @@ void EU4::CountryManager::loadUnitTypes(const std::string& EU4Path, const Mods& 
 	unitTypeLoader.loadUnitTypes(EU4Path, mods);
 }
 
-void EU4::CountryManager::loadCommonCountries(const std::string& EU4Path, const Mods& mods)
+void EU4::CountryManager::loadCommonCountries(const commonItems::ModFilesystem& modFS)
 {
-	commonCountryLoader.loadCommonCountries(EU4Path, mods);
+	commonCountryLoader.loadCommonCountries(modFS);
 }
 
 void EU4::CountryManager::loadLocalizations(const std::string& EU4Path, const Mods& mods)

@@ -11,14 +11,14 @@ class CommonCountryLoader: commonItems::parser
   public:
 	CommonCountryLoader() = default;
 
-	void loadCommonCountries(const std::string& EU4Path, const Mods& mods);
+	void loadCommonCountries(const commonItems::ModFilesystem& modFS);
 
 	[[nodiscard]] std::optional<commonItems::Color> getCommonColor(const std::string& tag) const;
 
   private:
-	void readCommonCountriesFile(std::istream& in, const std::string& rootPath);
-
 	void registerKeys();
+
+	parser tagParser;
 
 	std::map<std::string, commonItems::Color> countryColors;
 	std::map<std::string, std::string> tagPaths;

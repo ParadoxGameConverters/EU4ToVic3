@@ -14,7 +14,7 @@ class ProvinceManager;
 class RegionManager: commonItems::parser
 {
   public:
-	void loadRegions(const std::string& EU4Path, const Mods& mods);
+	void loadRegions(const commonItems::ModFilesystem& modsFS);
 	void loadRegions(std::istream& areaStream, std::istream& regionStream, std::istream& superRegionStream); // for testing
 	void loadSuperGroups(const mappers::SuperGroupMapper& sgMapper) { superGroupMapper = sgMapper; }			// for testing
 

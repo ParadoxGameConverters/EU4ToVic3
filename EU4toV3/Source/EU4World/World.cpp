@@ -14,11 +14,11 @@
 #include <string>
 namespace fs = std::filesystem;
 
-EU4::World::World(const Configuration& theConfiguration, const commonItems::ConverterVersion& converterVersion)
+EU4::World::World(const std::shared_ptr<Configuration>& theConfiguration, const commonItems::ConverterVersion& converterVersion)
 {
 	Log(LogLevel::Info) << "*** Hello EU4, loading World. ***";
-	EU4Path = theConfiguration.getEU4Path();
-	saveGame.path = theConfiguration.getEU4SaveGamePath();
+	EU4Path = theConfiguration->getEU4Path();
+	saveGame.path = theConfiguration->getEU4SaveGamePath();
 	Log(LogLevel::Progress) << "6 %";
 
 	Log(LogLevel::Info) << "-> Verifying EU4 save.";
@@ -38,10 +38,11 @@ EU4::World::World(const Configuration& theConfiguration, const commonItems::Conv
 	Log(LogLevel::Progress) << "15 %";
 
 	// With mods loaded we can init stuff that requires them.
+	auto modFS = commonItems::ModFilesystem(EU4Path, mods);
 
 	Log(LogLevel::Info) << "-> Booting Loaders:";
 	Log(LogLevel::Info) << "\tRegions";
-	regionManager.loadRegions(EU4Path, mods);
+	regionManager.loadRegions(modFS);
 	Log(LogLevel::Info) << "\tColonial Regions";
 	regionManager.loadColonialRegions(EU4Path, mods);
 	Log(LogLevel::Info) << "\tReligions";
@@ -51,7 +52,7 @@ EU4::World::World(const Configuration& theConfiguration, const commonItems::Conv
 	Log(LogLevel::Info) << "\tUnit Types";
 	countryManager.loadUnitTypes(EU4Path, mods);
 	Log(LogLevel::Info) << "\tCommon Countries";
-	countryManager.loadCommonCountries(EU4Path, mods);
+	countryManager.loadCommonCountries(modFS);
 	Log(LogLevel::Info) << "\tLocalizations";
 	countryManager.loadLocalizations(EU4Path, mods);
 	Log(LogLevel::Progress) << "16 %";
@@ -68,7 +69,7 @@ EU4::World::World(const Configuration& theConfiguration, const commonItems::Conv
 	Log(LogLevel::Progress) << "18 %";
 
 	Log(LogLevel::Info) << "-> Determining Demographics";
-	provinceManager.buildPopRatios(datingData, theConfiguration.configBlock.convertAll);
+	provinceManager.buildPopRatios(datingData, theConfiguration->configBlock.convertAll);
 	Log(LogLevel::Progress) << "19 %";
 
 	Log(LogLevel::Info) << "-> Linking Provinces to Countries";
@@ -111,14 +112,14 @@ EU4::World::World(const Configuration& theConfiguration, const commonItems::Conv
 	Log(LogLevel::Progress) << "28 %";
 
 	Log(LogLevel::Info) << "-> Dropping Dead, Empty and/or Coreless Nations";
-	countryManager.filterDeadNations(theConfiguration.configBlock.removeType);
+	countryManager.filterDeadNations(theConfiguration->configBlock.removeType);
 	Log(LogLevel::Progress) << "39 %";
 
 	Log(LogLevel::Info) << "*** Good-bye EU4, you served us well. ***";
 	Log(LogLevel::Progress) << "40 %";
 }
 
-void EU4::World::registerKeys(const Configuration& theConfiguration, const commonItems::ConverterVersion& converterVersion)
+void EU4::World::registerKeys(const std::shared_ptr<Configuration>& theConfiguration, const commonItems::ConverterVersion& converterVersion)
 {
 	registerKeyword("EU4txt", [](std::istream& theStream) {
 	});
@@ -187,8 +188,23 @@ void EU4::World::registerKeys(const Configuration& theConfiguration, const commo
 
 		// Let's locate, verify and potentially update those mods immediately.
 		commonItems::ModLoader modLoader;
-		modLoader.loadMods(theConfiguration.getEU4DocumentsPath(), incomingMods);
+		modLoader.loadMods(theConfiguration->getEU4DocumentsPath(), incomingMods);
 		mods = modLoader.getMods();
+
+		// check for overrides.
+		for (const auto& mod: mods)
+		{
+			if (mod.name == "Voltaire's Nightmare")
+			{
+				Log(LogLevel::Notice) << "Voltaire's Nightmare detected. Enabling VN support.";
+				theConfiguration->setVN();
+				if (theConfiguration->configBlock.euroCentric != Configuration::EUROCENTRISM::EuroCentric)
+				{
+					Log(LogLevel::Notice) << "VN is auto-enabling Eurocentric conversion.";
+					theConfiguration->setEurocentric();
+				}
+			}
+		}
 	});
 	registerKeyword("provinces", [this](std::istream& theStream) {
 		Log(LogLevel::Info) << "-> Importing Provinces";
