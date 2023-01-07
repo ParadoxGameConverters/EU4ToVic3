@@ -41,9 +41,13 @@ class Configuration: commonItems::parser
 		DEADCORES removeType = DEADCORES::DeadCores;
 		EUROCENTRISM euroCentric = EUROCENTRISM::VanillaImport;
 		bool convertAll = false;
+		// runtime options.
+		bool vn = false; // Voltaire's Nightmare
 	} configBlock;
 
 	void setOutputName(const std::string& name) { outputName = name; }
+	void setVN() { configBlock.vn = true; }
+	void setEurocentric() { configBlock.euroCentric = EUROCENTRISM::EuroCentric; }
 
 	[[nodiscard]] const auto& getEU4SaveGamePath() const { return EU4SaveGamePath; }
 	[[nodiscard]] const auto& getEU4Path() const { return EU4Path; }
@@ -58,7 +62,6 @@ class Configuration: commonItems::parser
 	void setOutputName();
 	void verifyVic3Version(const commonItems::ConverterVersion& converterVersion) const;
 	void verifyEU4Version(const commonItems::ConverterVersion& converterVersion) const;
-
 
 	// options from configuration.txt
 	std::string EU4SaveGamePath;

@@ -18,6 +18,7 @@
 #include <gmock/gmock-matchers.h>
 
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {});
 
 std::tuple<V3::PoliticalManager, V3::PopManager, mappers::CultureMapper, mappers::ReligionMapper, V3::ClayManager, EU4::CultureLoader, EU4::ReligionLoader>
 prepMappers()
@@ -28,7 +29,7 @@ prepMappers()
 	EU4::DefinitionScraper definitions;
 	definitions.loadDefinitions(eu4Path, {});
 	EU4::RegionManager regionMapper;
-	regionMapper.loadRegions(eu4Path, {});
+	regionMapper.loadRegions(eu4FS);
 
 	std::stringstream provinceStream;
 	provinceStream << "-1={}\n";																																		// sea, no ownership

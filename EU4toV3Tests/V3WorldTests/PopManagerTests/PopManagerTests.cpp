@@ -14,6 +14,8 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {});
+
 std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
 {
 	auto eu4Path = "TestFiles/eu4installation/";
@@ -22,7 +24,7 @@ std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
 	EU4::DefinitionScraper definitions;
 	definitions.loadDefinitions(eu4Path, {});
 	EU4::RegionManager regionMapper;
-	regionMapper.loadRegions(eu4Path, {});
+	regionMapper.loadRegions(eu4FS);
 
 	std::stringstream provinceStream;
 	provinceStream << "-1={}\n";																																		// sea, no ownership

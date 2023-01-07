@@ -12,7 +12,7 @@ void EU4::DefinitionScraper::loadDefinitions(const std::string& EU4Path, const M
 			std::ifstream definitionsFile(mod.path + "/map/definition.csv");
 			parseStream(definitionsFile);
 			definitionsFile.close();
-			Log(LogLevel::Info) << "<> " << provinceIDs.size() << " province definitions registered from:" << mod.name;
+			Log(LogLevel::Info) << "<> " << provinceIDs.size() << " province definitions registered from: " << mod.name;
 			return;
 		}
 
@@ -102,20 +102,6 @@ std::optional<int> EU4::DefinitionScraper::parseLine(const std::string& line)
 	try
 	{
 		auto b = static_cast<unsigned char>(std::stoi(line.substr(sepLocSave + 1, sepLoc - sepLocSave - 1)));
-	}
-	catch (std::exception&)
-	{
-		return std::nullopt;
-	}
-	sepLocSave = sepLoc;
-	sepLoc = line.find(';', sepLocSave + 1);
-	if (sepLoc == std::string::npos)
-		return std::nullopt;
-
-	// simulate mapDataName
-	try
-	{
-		auto mapDataName = line.substr(sepLocSave + 1, sepLoc - sepLocSave - 1);
 	}
 	catch (std::exception&)
 	{

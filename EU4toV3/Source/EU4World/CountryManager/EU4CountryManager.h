@@ -26,7 +26,7 @@ class CountryManager: public commonItems::parser
 
 	// the prep
 	void loadUnitTypes(const std::string& EU4Path, const Mods& mods);
-	void loadCommonCountries(const std::string& EU4Path, const Mods& mods);
+	void loadCommonCountries(const commonItems::ModFilesystem& modFS);
 	void loadLocalizations(const std::string& EU4Path, const Mods& mods);
 	void loadLocalizations(const EU4LocalizationLoader& loader) { localizationLoader = loader; }
 	void bootNationMergeMapper() { nationMergeMapper.loadNationMerge(); }

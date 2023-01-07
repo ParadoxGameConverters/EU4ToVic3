@@ -7,7 +7,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 {
 	Mods overrideMods;
 	// We use decentralized world mod to fill out wasteland and out-of-scope clay with decentralized tribes.
-	overrideMods.emplace_back(Mod{"Decentralized World", "configurables/decentralized_world/"});
+	if (!configuration.configBlock.vn)
+		overrideMods.emplace_back(Mod{"Decentralized World", "configurables/decentralized_world/"});
 	const auto dwFS = commonItems::ModFilesystem(V3Path, overrideMods);
 	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output/"});
 	const auto allFS = commonItems::ModFilesystem(V3Path, overrideMods);
@@ -21,7 +22,10 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	clayManager.loadTerrainsIntoProvinces(dwFS);
 	clayManager.initializeSuperRegions(dwFS);
 	clayManager.loadStatesIntoSuperRegions();
-	provinceMapper.loadProvinceMappings("configurables/province_mappings.txt");
+	if (configuration.configBlock.vn)
+		provinceMapper.loadProvinceMappings("configurables/vn_province_mappings.txt");
+	else
+		provinceMapper.loadProvinceMappings("configurables/province_mappings.txt");
 	countryMapper = std::make_shared<mappers::CountryMapper>();
 	countryMapper->loadMappingRules("configurables/country_mappings.txt");
 	religionMapper.loadMappingRules("configurables/religion_map.txt");
