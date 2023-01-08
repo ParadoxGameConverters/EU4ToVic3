@@ -94,7 +94,7 @@ std::tuple<V3::ClayManager, V3::PoliticalManager> assignSubStateOwnership()
 	V3::PopManager popManager;
 	popManager.initializeVanillaPops(modFS);
 
-	clayManager.injectVanillaSubStates(modFS, politicalManager, popManager);
+	clayManager.injectVanillaSubStates(modFS, politicalManager, popManager, false);
 
 	return {clayManager, politicalManager};
 }
