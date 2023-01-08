@@ -48,6 +48,7 @@ class Configuration: commonItems::parser
 	void setOutputName(const std::string& name) { outputName = name; }
 	void setVN() { configBlock.vn = true; }
 	void setEurocentric() { configBlock.euroCentric = EUROCENTRISM::EuroCentric; }
+	void setVanillaStartDate() { configBlock.startDate = STARTDATE::Vanilla; }
 
 	[[nodiscard]] const auto& getEU4SaveGamePath() const { return EU4SaveGamePath; }
 	[[nodiscard]] const auto& getEU4Path() const { return EU4Path; }

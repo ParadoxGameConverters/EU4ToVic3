@@ -35,7 +35,6 @@ TEST(Mappers_ProvinceMapperTests, mappingsForDroppedEU4ProvincesAreNotCreated)
 	std::cout.rdbuf(log.rdbuf());
 
 	EXPECT_TRUE(provinceMapper.getV3Provinces(368).empty());
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Province Mapper warning - 368 has no Vic3 mappings!)"));
 
 	std::cout.rdbuf(cout_buffer);
 }
@@ -50,7 +49,6 @@ TEST(Mappers_ProvinceMapperTests, mappingsForDroppedV3ProvincesAreNotCreated)
 	std::cout.rdbuf(log.rdbuf());
 
 	EXPECT_TRUE(provinceMapper.getEU4Provinces("x655491").empty());
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Province Mapper warning - x655491 has no EU4 mappings!)"));
 
 	std::cout.rdbuf(cout_buffer);
 }

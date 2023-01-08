@@ -58,7 +58,6 @@ std::vector<int> mappers::ProvinceMapper::getEU4Provinces(const std::string& v3P
 	if (V3ToEU4ProvinceMap.contains(v3Province))
 		return V3ToEU4ProvinceMap.at(v3Province);
 
-	Log(LogLevel::Warning) << "Province Mapper warning - " << v3Province << " has no EU4 mappings!";
 	return {};
 }
 
@@ -67,6 +66,5 @@ std::vector<std::string> mappers::ProvinceMapper::getV3Provinces(int eu4Province
 	if (EU4ToV3ProvinceMap.contains(eu4Province))
 		return EU4ToV3ProvinceMap.at(eu4Province);
 
-	Log(LogLevel::Warning) << "Province Mapper warning - " << eu4Province << " has no Vic3 mappings!";
 	return {};
 }
