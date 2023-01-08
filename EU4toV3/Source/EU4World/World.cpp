@@ -203,6 +203,11 @@ void EU4::World::registerKeys(const std::shared_ptr<Configuration>& theConfigura
 					Log(LogLevel::Notice) << "VN is auto-enabling Eurocentric conversion.";
 					theConfiguration->setEurocentric();
 				}
+				if (theConfiguration->configBlock.startDate != Configuration::STARTDATE::Vanilla)
+				{
+					Log(LogLevel::Notice) << "VN is auto-enabling 1836 startdate.";
+					theConfiguration->setVanillaStartDate();
+				}
 			}
 		}
 	});

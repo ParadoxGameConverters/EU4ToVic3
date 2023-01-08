@@ -71,7 +71,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	popManager.initializeVanillaPops(dwFS);
 
 	// inject vanilla substates into map holes.
-	clayManager.injectVanillaSubStates(dwFS, politicalManager, popManager);
+	if (!configuration.configBlock.vn)
+		clayManager.injectVanillaSubStates(dwFS, politicalManager, popManager);
 
 	Log(LogLevel::Progress) << "50 %";
 	// handling demographics
@@ -79,8 +80,11 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	Log(LogLevel::Progress) << "51 %";
 	// generating decentralized countries
-	clayManager.shoveRemainingProvincesIntoSubStates();
-	politicalManager.generateDecentralizedCountries(clayManager, popManager);
+	if (!configuration.configBlock.vn)
+	{
+		clayManager.shoveRemainingProvincesIntoSubStates();
+		politicalManager.generateDecentralizedCountries(clayManager, popManager);
+	}
 
 	Log(LogLevel::Progress) << "52 %";
 	// converting all 3 types of countries - generated decentralized, extinct vanilla-only, and EU4 imports.
