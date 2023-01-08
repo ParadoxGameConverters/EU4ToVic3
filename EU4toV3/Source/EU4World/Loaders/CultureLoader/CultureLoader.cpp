@@ -1,20 +1,21 @@
 #include "CultureLoader.h"
+#include "CommonFunctions.h"
 #include "CommonRegexes.h"
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 #include <ranges>
 
-void EU4::CultureLoader::loadCultures(const std::string& EU4Path, const Mods& mods)
+void EU4::CultureLoader::loadCultures(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
 
-	for (const auto& cultureFile: commonItems::GetAllFilesInFolder(EU4Path + "/common/cultures/"))
-		parseFile(EU4Path + "/common/cultures/" + cultureFile);
-
-	for (const auto& mod: mods)
-		for (const auto& cultureFile: commonItems::GetAllFilesInFolder(mod.path + "/common/cultures/"))
-			parseFile(mod.path + "/common/cultures/" + cultureFile);
+	for (const auto& file: modFS.GetAllFilesInFolder("/common/cultures/"))
+	{
+		if (getExtension(file) != "txt")
+			continue;
+		parseFile(file);
+	}
 
 	clearRegisteredKeywords();
 

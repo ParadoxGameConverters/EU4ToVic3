@@ -1,6 +1,5 @@
 #ifndef RELIGION_LOADER
 #define RELIGION_LOADER
-#include "ModLoader/ModLoader.h"
 #include "Parser.h"
 #include "Religion.h"
 
@@ -11,7 +10,7 @@ class ReligionLoader: commonItems::parser
   public:
 	ReligionLoader() = default;
 
-	void loadReligions(const std::string& EU4Path, const Mods& mods);
+	void loadReligions(const commonItems::ModFilesystem& modFS);
 	void loadReligions(std::istream& theStream);
 
 	[[nodiscard]] const auto& getAllReligions() const { return religions; }

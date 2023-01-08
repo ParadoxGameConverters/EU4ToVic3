@@ -20,11 +20,10 @@ const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {});
 
 V3::ClayManager generateChunks()
 {
-	auto eu4Path = "TestFiles/eu4installation/";
 	EU4::DefaultMapParser defaults;
-	defaults.loadDefaultMap(eu4Path, {});
+	defaults.loadDefaultMap(eu4FS);
 	EU4::DefinitionScraper definitions;
-	definitions.loadDefinitions(eu4Path, {});
+	definitions.loadDefinitions(eu4FS);
 	EU4::RegionManager regionMapper;
 	regionMapper.loadRegions(eu4FS);
 
