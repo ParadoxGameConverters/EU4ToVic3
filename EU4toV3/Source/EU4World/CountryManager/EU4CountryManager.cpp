@@ -54,9 +54,9 @@ std::shared_ptr<EU4::Country> EU4::CountryManager::getCountry(const std::string&
 		return nullptr;
 }
 
-void EU4::CountryManager::loadUnitTypes(const std::string& EU4Path, const Mods& mods)
+void EU4::CountryManager::loadUnitTypes(const commonItems::ModFilesystem& modFS)
 {
-	unitTypeLoader.loadUnitTypes(EU4Path, mods);
+	unitTypeLoader.loadUnitTypes(modFS);
 }
 
 void EU4::CountryManager::loadCommonCountries(const commonItems::ModFilesystem& modFS)
@@ -64,9 +64,9 @@ void EU4::CountryManager::loadCommonCountries(const commonItems::ModFilesystem& 
 	commonCountryLoader.loadCommonCountries(modFS);
 }
 
-void EU4::CountryManager::loadLocalizations(const std::string& EU4Path, const Mods& mods)
+void EU4::CountryManager::loadLocalizations(const commonItems::ModFilesystem& modFS)
 {
-	localizationLoader.loadLocalizations(EU4Path, mods);
+	localizationLoader.loadLocalizations(modFS);
 }
 
 void EU4::CountryManager::updateUnitTypes()

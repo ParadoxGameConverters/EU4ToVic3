@@ -38,29 +38,29 @@ EU4::World::World(const std::shared_ptr<Configuration>& theConfiguration, const 
 	Log(LogLevel::Progress) << "15 %";
 
 	// With mods loaded we can init stuff that requires them.
-	auto modFS = commonItems::ModFilesystem(EU4Path, mods);
+	const auto modFS = commonItems::ModFilesystem(EU4Path, mods);
 
 	Log(LogLevel::Info) << "-> Booting Loaders:";
 	Log(LogLevel::Info) << "\tRegions";
 	regionManager.loadRegions(modFS);
 	Log(LogLevel::Info) << "\tColonial Regions";
-	regionManager.loadColonialRegions(EU4Path, mods);
+	regionManager.loadColonialRegions(modFS);
 	Log(LogLevel::Info) << "\tReligions";
-	religionLoader.loadReligions(EU4Path, mods);
+	religionLoader.loadReligions(modFS);
 	Log(LogLevel::Info) << "\tCultures";
-	cultureLoader.loadCultures(EU4Path, mods);
+	cultureLoader.loadCultures(modFS);
 	Log(LogLevel::Info) << "\tUnit Types";
-	countryManager.loadUnitTypes(EU4Path, mods);
+	countryManager.loadUnitTypes(modFS);
 	Log(LogLevel::Info) << "\tCommon Countries";
 	countryManager.loadCommonCountries(modFS);
 	Log(LogLevel::Info) << "\tLocalizations";
-	countryManager.loadLocalizations(EU4Path, mods);
+	countryManager.loadLocalizations(modFS);
 	Log(LogLevel::Progress) << "16 %";
 
 	Log(LogLevel::Info) << "*** Building world ***";
 
 	Log(LogLevel::Info) << "-> Classifying Provinces According to Aesthetic Principles";
-	provinceManager.loadParsers(EU4Path, mods);
+	provinceManager.loadParsers(modFS);
 	provinceManager.classifyProvinces(regionManager);
 	Log(LogLevel::Progress) << "17 %";
 

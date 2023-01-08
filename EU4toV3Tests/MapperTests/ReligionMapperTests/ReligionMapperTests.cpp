@@ -1,11 +1,12 @@
 #include "CommonFunctions.h"
 #include "LocalizationLoader/EU4LocalizationLoader.h"
-#include "Log.h"
 #include "ReligionLoader/ReligionLoader.h"
 #include "ReligionMapper/ReligionMapper.h"
 #include "gmock/gmock-matchers.h"
 #include "gtest/gtest.h"
+
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {Mod("Some mod", "TestFiles/mod/themod/")});
 
 TEST(Mappers_ReligionMapperTests, religionsCanBeRetrieved)
 {
@@ -42,11 +43,8 @@ TEST(Mappers_ReligionMapperTests, ReligionsMappingsCanBeExpanded)
 
 TEST(Mappers_ReligionMapperTests, ReligiousDefsCanBeGenerated)
 {
-	const auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader theReligions;
-	theReligions.loadReligions(eu4Path, mods);
+	theReligions.loadReligions(eu4FS);
 
 	std::stringstream input;
 	input << commonItems::utf8BOM << "l_english:\n";

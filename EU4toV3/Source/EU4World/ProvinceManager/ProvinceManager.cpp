@@ -29,11 +29,11 @@ std::shared_ptr<EU4::Province> EU4::ProvinceManager::getProvince(const int provi
 	return nullptr;
 }
 
-void EU4::ProvinceManager::loadParsers(const std::string& EU4Path, const Mods& mods)
+void EU4::ProvinceManager::loadParsers(const commonItems::ModFilesystem& modFS)
 {
-	defaultMapParser.loadDefaultMap(EU4Path, mods);
-	definitionScraper.loadDefinitions(EU4Path, mods);
-	buildingCostLoader.loadBuildingCosts(EU4Path, mods);
+	defaultMapParser.loadDefaultMap(modFS);
+	definitionScraper.loadDefinitions(modFS);
+	buildingCostLoader.loadBuildingCosts(modFS);
 }
 
 void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)

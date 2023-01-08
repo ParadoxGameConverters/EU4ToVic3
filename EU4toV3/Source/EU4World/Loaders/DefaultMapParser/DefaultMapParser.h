@@ -1,6 +1,5 @@
 #ifndef DEFAULTMAP_PARSER
 #define DEFAULTMAP_PARSER
-#include "ModLoader/ModLoader.h"
 #include "Parser.h"
 #include <set>
 
@@ -10,7 +9,7 @@ class DefaultMapParser: commonItems::parser
 {
   public:
 	DefaultMapParser() = default;
-	void loadDefaultMap(const std::string& EU4Path, const Mods& mods);
+	void loadDefaultMap(const commonItems::ModFilesystem& modFS);
 	void loadDefaultMap(std::istream& theStream);
 
 	[[nodiscard]] const auto& getSeaIDs() const { return seas; }

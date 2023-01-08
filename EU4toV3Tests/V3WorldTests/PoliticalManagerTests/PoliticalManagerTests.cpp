@@ -23,11 +23,10 @@ const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {});
 std::tuple<V3::PoliticalManager, V3::PopManager, mappers::CultureMapper, mappers::ReligionMapper, V3::ClayManager, EU4::CultureLoader, EU4::ReligionLoader>
 prepMappers()
 {
-	auto eu4Path = "TestFiles/eu4installation/";
 	EU4::DefaultMapParser defaults;
-	defaults.loadDefaultMap(eu4Path, {});
+	defaults.loadDefaultMap(eu4FS);
 	EU4::DefinitionScraper definitions;
-	definitions.loadDefinitions(eu4Path, {});
+	definitions.loadDefinitions(eu4FS);
 	EU4::RegionManager regionMapper;
 	regionMapper.loadRegions(eu4FS);
 
@@ -76,12 +75,10 @@ prepMappers()
 	politicalManager.importEU4Countries(countries);
 	clayManager.assignSubStateOwnership(politicalManager.getCountries(), *countryMapper);
 
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
+	religionLoader.loadReligions(eu4FS);
 	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	cultureLoader.loadCultures(eu4FS);
 
 	mappers::ReligionMapper relMapper;
 	relMapper.loadMappingRules("TestFiles/configurables/religion_map.txt");

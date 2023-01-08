@@ -18,7 +18,7 @@ class ProvinceManager: commonItems::parser
 	ProvinceManager() = default;
 	void loadProvinces(std::istream& theStream);
 
-	void loadParsers(const std::string& EU4Path, const Mods& mods);
+	void loadParsers(const commonItems::ModFilesystem& modFS);
 
 	// individual external loads for testing
 	void loadDefaultMapParser(const DefaultMapParser& defaultParser) { defaultMapParser = defaultParser; }
