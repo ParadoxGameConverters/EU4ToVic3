@@ -71,8 +71,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	popManager.initializeVanillaPops(dwFS);
 
 	// inject vanilla substates into map holes.
-	if (!configuration.configBlock.vn)
-		clayManager.injectVanillaSubStates(dwFS, politicalManager, popManager);
+	clayManager.injectVanillaSubStates(dwFS, politicalManager, popManager, configuration.configBlock.vn);
 
 	Log(LogLevel::Progress) << "50 %";
 	// handling demographics

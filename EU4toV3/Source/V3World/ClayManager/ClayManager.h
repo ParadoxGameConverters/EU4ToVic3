@@ -38,7 +38,7 @@ class ClayManager
 	void unDisputeChunkOwnership(const SourceOwners& sourceCountries);
 	void splitChunksIntoSubStates();
 	void assignSubStateOwnership(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper);
-	void injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager, const PopManager& popManager);
+	void injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager, const PopManager& popManager, bool vn);
 	void shoveRemainingProvincesIntoSubStates();
 	void squashAllSubStates(const PoliticalManager& politicalManager);
 
@@ -62,7 +62,8 @@ class ClayManager
 		 const VanillaStateEntry& entry,
 		 const ProvinceMap& unassignedProvinces,
 		 const PoliticalManager& politicalManager,
-		 const PopManager& popManager);
+		 const PopManager& popManager,
+		 bool vn);
 	void makeSubStateFromProvinces(const std::string& stateName, const ProvinceMap& unassignedProvinces);
 	[[nodiscard]] SubStatePops prepareInjectedSubStatePops(const std::shared_ptr<SubState>& subState, double subStateRatio, const PopManager& popManager) const;
 	[[nodiscard]] std::shared_ptr<SubState> squashSubStates(const std::vector<std::shared_ptr<SubState>>& subStates) const;
