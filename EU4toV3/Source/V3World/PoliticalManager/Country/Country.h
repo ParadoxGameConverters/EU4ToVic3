@@ -29,6 +29,7 @@ class CharacterTraitMapper;
 } // namespace mappers
 namespace V3
 {
+struct Law;
 struct VanillaCommonCountryData
 {
 	std::string type;
@@ -52,16 +53,22 @@ struct ProcessedData
 	std::set<std::string> effects;
 	std::set<std::string> populationEffects;
 	std::set<std::string> laws;
+	std::set<std::string> institutions;
 	double literacy = 0;
 	double civLevel = 0;
 	bool westernized = false;
-	double industryFactor = 1.0;
+	double industryFactor = 1.0; // Modifier set by EuroCentrism or calculated by dev
 	mappers::IdeaEffect ideaEffect;
 	std::set<std::string> techs;
 	std::map<std::string, Relation> relations;
 	std::set<std::string> rivals;
 	std::map<std::string, int> truces;
 	std::vector<Character> characters;
+
+	double industryWeight = 0; // Share of global industry a country should get, not normalized
+	int CPBudget = 0;				// Construction Points for a country to spend on it's development
+
+	std::map<std::string, std::vector<std::string>> productionMethods; // Non-default production methods used by country, Building -> PMs
 
 	std::string name;
 	std::string adjective;
@@ -83,6 +90,9 @@ class Country: commonItems::parser
 	Country() = default;
 	void initializeCountry(std::istream& theStream);
 	void setTag(const std::string& theTag) { tag = theTag; }
+	void setIndustryWeight(const double theIndustryWeight) { processedData.industryWeight = theIndustryWeight; }
+	void setCPBudget(const int theBudget) { processedData.CPBudget = theBudget; }
+	void setProductionMethods(const std::map<std::string, std::vector<std::string>>& thePMs) { processedData.productionMethods = thePMs; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 
 	void convertFromEU4Country(const ClayManager& clayManager,
@@ -97,14 +107,20 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getTag() const { return tag; }
 	[[nodiscard]] const auto& getVanillaData() const { return vanillaData; }
 	[[nodiscard]] const auto& getProcessedData() const { return processedData; }
+	[[nodiscard]] const auto& getIndustryFactor() const { return processedData.industryFactor; }
+	[[nodiscard]] const auto& getIndustryWeight() const { return processedData.industryWeight; }
+	[[nodiscard]] const auto& getCPBudget() const { return processedData.CPBudget; }
 	[[nodiscard]] const auto& getSourceCountry() const { return sourceCountry; }
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
-	void addSubState(const std::shared_ptr<SubState>& subState) { substates.push_back(subState); }
-	void setSubStates(const std::vector<std::shared_ptr<SubState>>& subStates) { substates = subStates; }
+	void addSubState(const std::shared_ptr<SubState>& theSubstate) { substates.push_back(theSubstate); }
+	void setSubStates(const std::vector<std::shared_ptr<SubState>>& theSubstates) { substates = theSubstates; }
 	void setProcessedData(const ProcessedData& data) { processedData = data; }
 
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
+	[[nodiscard]] int getPopCount() const;
+	[[nodiscard]] static int getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubstates);
+
 
 	void determineWesternizationWealthAndLiteracy(double topTech,
 		 double topInstitutions,
@@ -115,6 +131,7 @@ class Country: commonItems::parser
 		 const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore);
 	void addLaw(const auto& lawName) { processedData.laws.emplace(lawName); }
+	void addInstitution(const auto& institutionName) { processedData.institutions.emplace(institutionName); }
 	[[nodiscard]] Relation& getRelation(const std::string& target);
 	[[nodiscard]] const auto& getRelations() const { return processedData.relations; }
 	void setRivals(const std::set<std::string>& theRivals) { processedData.rivals = theRivals; }
@@ -141,6 +158,11 @@ class Country: commonItems::parser
 	[[nodiscard]] int getTechInfraCap() const { return 0; }
 	// TODO(Gawquon): Implement, multiplier for amount of infrastructure created by population
 	[[nodiscard]] double getTechInfraMult() const { return 0.0; }
+	[[nodiscard]] bool hasAnyOfTech(const std::vector<std::string>& techs) const;
+
+	void distributeGovAdmins(int numGovAdmins) const;
+	[[nodiscard]] std::vector<std::shared_ptr<SubState>> topPercentileStatesByPop(double percentile) const;
+	[[nodiscard]] double calculateBureaucracyUsage(const std::map<std::string, V3::Law>& lawsMap) const;
 
   private:
 	void registerKeys();
@@ -160,10 +182,14 @@ class Country: commonItems::parser
 	void applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setDecentralizedEffects();
 	void determineCountryType();
+	[[nodiscard]] double calcSubStateBureaucracy(const std::map<std::string, V3::Law>& lawsMap) const;
+	[[nodiscard]] double calcInstitutionBureaucracy() const;
+	[[nodiscard]] double calcCharacterBureaucracy() const;
 
 	std::string tag;
 	std::optional<VanillaCommonCountryData> vanillaData;
 	ProcessedData processedData;
+
 
 	std::shared_ptr<EU4::Country> sourceCountry;
 	std::vector<std::shared_ptr<SubState>> substates;

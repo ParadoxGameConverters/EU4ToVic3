@@ -4,6 +4,7 @@
 #include "Configuration.h"
 #include "CountryMapper/CountryMapper.h"
 #include "CultureMapper/CultureMapper.h"
+#include "EconomyManager/EconomyManager.h"
 #include "FlagCrafter/FlagCrafter.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
 #include "PoliticalManager/PoliticalManager.h"
@@ -38,6 +39,7 @@ class World
 	ClayManager clayManager;
 	PoliticalManager politicalManager;
 	PopManager popManager;
+	EconomyManager economyManager;
 	LocalizationLoader localizationLoader;
 	LocalizationLoader vanillaLocalizationLoader;
 

@@ -136,14 +136,16 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Info) << "-> Converting Diplomacy";
 	Log(LogLevel::Progress) << "55 %";
 
-	Log(LogLevel::Info) << "-> Setting Up States";
 	Log(LogLevel::Progress) << "57 %";
 
-	Log(LogLevel::Info) << "-> Generating Unciv Reforms";
 	Log(LogLevel::Progress) << "58 %";
 
-	Log(LogLevel::Info) << "-> Converting Technology Levels";
 	Log(LogLevel::Progress) << "59 %";
+	// Place starting buildings for all centralized countries
+	economyManager.loadCentralizedStates(politicalManager.getCountries());
+	economyManager.loadMappersAndConfigs(allFS);
+	economyManager.establishBureaucracy(politicalManager);
+	economyManager.hardcodePorts();
 
 	Log(LogLevel::Info) << "-> Distributing Factories";
 	Log(LogLevel::Progress) << "60 %";

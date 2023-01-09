@@ -1,0 +1,67 @@
+construction = {
+    weight = 0.25
+
+    building_construction_center
+}
+
+infrastructure = {
+    weight = 5
+
+    building_port
+    building_railway
+}
+
+military = {
+    weight = 12
+
+    building_barracks
+    building_fort
+
+    multiply = {
+        value = 0.1
+        vic3_law = law_national_militia
+    }
+    multiply = {
+        value = 1.5
+        vic3_law = law_peasant_levy
+    }
+}
+
+test = {
+    industrial = yes
+
+    weight = 0
+
+    building_chemical_plant
+    building_steel_mills
+    building_motor_industries
+    building_munition_plants
+
+    add = {
+        value = 3
+        is_colony = yes
+    }
+}
+
+farming = {
+    weight = 15
+
+    building_rye_farm
+    building_rice_farm
+    building_wheat_farm
+    building_maize_farm
+    building_millet_farm
+    building_livestock_ranch
+}
+
+extraction = {
+    weight = 5
+
+    building_logging_camp
+    building_fishing_wharf
+
+    multiply = {
+        value = 3
+        v3_law = law_serfdom
+    }
+}

@@ -1,0 +1,81 @@
+pm_simple_organization = {
+	texture = "gfx/interface/icons/production_method_icons/simple_organization.dds"
+	
+	country_modifiers = {
+		workforce_scaled = {
+			country_bureaucracy_add = 35
+
+		}
+	}	
+	
+	state_modifiers = {
+		workforce_scaled = {
+			state_tax_capacity_add = 5
+		}		
+	}
+
+	building_modifiers = {	
+		level_scaled = {
+			building_employment_clerks_add = 4000
+		}
+	}		
+}		
+
+pm_horizontal_drawer_cabinets = {
+	texture = "gfx/interface/icons/production_method_icons/horizontal_drawer_cabinets.dds"
+	
+	unlocking_technologies = {
+		centralization
+	}
+	
+	country_modifiers = {
+		workforce_scaled = {
+			country_bureaucracy_add = 50
+		}
+	}
+	
+	state_modifiers = {
+		workforce_scaled = {
+			state_tax_capacity_add = 10
+		}		
+	}	
+
+	building_modifiers = {
+		workforce_scaled = {
+			building_input_paper_add = 10
+		}			
+	
+		level_scaled = {
+			building_employment_clerks_add = 4000
+		}
+	}		
+}
+
+pm_vertical_filing_cabinets = {
+	texture = "gfx/interface/icons/production_method_icons/vertical_filing_cabinets.dds"
+	unlocking_technologies = {
+		central_archives
+	}
+	
+	country_modifiers = {
+		workforce_scaled = {
+			country_bureaucracy_add = 65
+		}
+	}	
+	
+	state_modifiers = {
+		workforce_scaled = {
+			state_tax_capacity_add = 15
+		}		
+	}	
+
+	building_modifiers = {
+		workforce_scaled = {
+			building_input_paper_add = 20
+		}	
+	
+		level_scaled = {
+			building_employment_clerks_add = 4000
+		}
+	}	
+}

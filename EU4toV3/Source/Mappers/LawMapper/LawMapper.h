@@ -19,6 +19,7 @@ class LawMapper: commonItems::parser
 	void loadLawDefinitions(const std::map<std::string, V3::Law>& theLaws) { laws = theLaws; }
 
 	[[nodiscard]] const auto& getLawGroups() const { return lawGroups; }
+	[[nodiscard]] const auto& getLaws() const { return laws; }
 
 	[[nodiscard]] std::optional<std::string> grantLawFromGroup(const std::string& lawGroup, const V3::Country& country) const;
 
