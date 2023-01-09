@@ -56,6 +56,8 @@ class ClayManager
 	[[nodiscard]] std::set<std::string> getStateNamesForRegion(const std::string& regionName) const;
 
 	void loadVNColonialRules(const std::string& fileName) { vnColonialMapper.loadMappingRules(fileName); }
+	[[nodiscard]] const auto& getVNColonialMapper() const { return vnColonialMapper; }
+	[[nodiscard]] std::optional<std::string> getProvinceOwnerTag(const std::string& provinceID) const;
 
   private:
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> chunkToSubStatesTransferFunction(const std::shared_ptr<Chunk>& chunk) const;
@@ -70,7 +72,6 @@ class ClayManager
 	void makeSubStateFromProvinces(const std::string& stateName, const ProvinceMap& unassignedProvinces);
 	[[nodiscard]] SubStatePops prepareInjectedSubStatePops(const std::shared_ptr<SubState>& subState, double subStateRatio, const PopManager& popManager) const;
 	[[nodiscard]] std::shared_ptr<SubState> squashSubStates(const std::vector<std::shared_ptr<SubState>>& subStates) const;
-	[[nodiscard]] std::optional<std::string> getProvinceOwner(const std::string& provinceID) const;
 
 	std::map<std::string, std::shared_ptr<State>> states;					// geographical entities
 	std::map<std::string, std::shared_ptr<SuperRegion>> superRegions; // geographical entities

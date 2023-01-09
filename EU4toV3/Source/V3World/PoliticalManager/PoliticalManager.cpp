@@ -580,3 +580,35 @@ void V3::PoliticalManager::changeTag(const std::string& replacement, const std::
 
 	countryMapper->relink(countries.at(replacement)->getSourceCountry()->getTag(), tag, replacement);
 }
+
+void V3::PoliticalManager::importVNColonialDiplomacy(const ClayManager& clayManager)
+{
+	for (const auto& colonyRule: clayManager.getVNColonialMapper().getVNColonies())
+	{
+		if (colonyRule.getSubjects().empty())
+			continue;
+		const auto& keyProvince = colonyRule.getKeyProvince();
+		const auto keyOwnerTag = clayManager.getProvinceOwnerTag(keyProvince);
+		if (!keyOwnerTag || !countries.contains(*keyOwnerTag))
+			continue;
+		const auto& keyOwner = countries.at(*keyOwnerTag);
+
+		for (const auto& targetTag: colonyRule.getSubjects())
+		{
+			if (!countries.contains(targetTag))
+				continue;
+			const auto& target = countries.at(targetTag);
+
+			auto& r1 = keyOwner->getRelation(targetTag);
+			auto& r2 = target->getRelation(*keyOwnerTag);
+			r1.increaseRelations(50);
+			r2.increaseRelations(50);
+
+			Agreement newAgreement;
+			newAgreement.first = *keyOwnerTag;
+			newAgreement.second = targetTag;
+			newAgreement.type = colonyRule.getSubjectType();
+			agreements.push_back(newAgreement);
+		}
+	}
+}

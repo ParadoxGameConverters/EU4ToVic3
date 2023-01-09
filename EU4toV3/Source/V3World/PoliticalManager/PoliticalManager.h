@@ -89,6 +89,8 @@ class PoliticalManager
 
 	void attemptColonialTagReplacement(const mappers::ColonialRegionMapper& colonialRegionMapper, const ClayManager& clayManager);
 
+	void importVNColonialDiplomacy(const ClayManager& clayManager);
+
   private:
 	void generateDecentralizedCountry(const std::string& culture, const std::vector<std::shared_ptr<SubState>>& subStates);
 	static CulturalSubStates sortSubStatesByCultures(const ClayManager& clayManager, const PopManager& popManager);

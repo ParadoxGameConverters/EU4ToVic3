@@ -508,7 +508,7 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		{
 			// who owns key province?
 			if (const auto& keyProvince = vnColonialMapper.getKeyProvince(stateName, ownerTag); keyProvince)
-				replacementOwner = getProvinceOwner(*keyProvince); // We won't replace the owner yet, we still need to grab the original pops.
+				replacementOwner = getProvinceOwnerTag(*keyProvince); // We won't replace the owner yet, we still need to grab the original pops.
 			// is this a decolonization situation?
 			if (replacementOwner && vnColonialMapper.isStateDecolonizable(stateName, ownerTag, *replacementOwner))
 				continue; // then simply skip any generation.
@@ -759,11 +759,11 @@ std::set<std::string> V3::ClayManager::getStateNamesForRegion(const std::string&
 	return stateNames;
 }
 
-std::optional<std::string> V3::ClayManager::getProvinceOwner(const std::string& provinceID) const
+std::optional<std::string> V3::ClayManager::getProvinceOwnerTag(const std::string& provinceID) const
 {
 	for (const auto& state: states | std::views::values)
-		for (const auto& substate: state->getSubStates())
-			if (substate->getProvinces().contains(provinceID))
-				return substate->getOwnerTag();
+		for (const auto& subState: state->getSubStates())
+			if (subState->getProvinces().contains(provinceID))
+				return subState->getOwnerTag();
 	return std::nullopt;
 }
