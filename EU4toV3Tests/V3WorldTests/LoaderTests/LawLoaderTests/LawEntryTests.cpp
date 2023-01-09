@@ -41,5 +41,5 @@ TEST(V3World_LawEntryTests, LawCanBeLoaded)
 	EXPECT_THAT(law.requiredLaws, testing::UnorderedElementsAre("u1", "u2", "u3"));
 	EXPECT_THAT(law.blockingLaws, testing::UnorderedElementsAre("b1", "b2", "b3"));
 	EXPECT_EQ("i1", law.institution);
-	EXPECT_EQ(-0.14 ,law.bureaucracyCostMult);
+	EXPECT_EQ(-0.14, law.bureaucracyCostMult);
 }
