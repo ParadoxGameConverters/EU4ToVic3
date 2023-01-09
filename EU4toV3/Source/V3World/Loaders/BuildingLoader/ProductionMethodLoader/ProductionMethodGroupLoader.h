@@ -1,11 +1,12 @@
 #ifndef PRODUCTION_METHOD_GROUP_LOADER_H
 #define PRODUCTION_METHOD_GROUP_LOADER_H
 
+#include "EconomyManager/Building/ProductionMethods/ProductionMethodGroup.h"
 #include "Parser.h"
+
 
 namespace V3
 {
-class ProductionMethodGroup;
 class ProductionMethodGroupLoader: commonItems::parser
 {
   public:
@@ -17,7 +18,7 @@ class ProductionMethodGroupLoader: commonItems::parser
   private:
 	void registerKeys();
 
-	std::map<std::string, std::shared_ptr<ProductionMethodGroup>> PMGroups;
+	std::map<std::string, ProductionMethodGroup> PMGroups;
 };
 } // namespace V3
 #endif // PRODUCTION_METHOD_GROUP_LOADER_H

@@ -25,17 +25,19 @@ void V3::ProductionMethod::registerKeys()
 
 	cModUnwrapper.registerKeyword("workforce_scaled", [this](std::istream& theStream) {
 		const auto& theAssignments = commonItems::assignments(theStream).getAssignments();
-		if (theAssignments.contains("country_bureaucracy_add"))
+		if (!theAssignments.contains("country_bureaucracy_add"))
 		{
-			const std::string& bureaucracyString = theAssignments.at("country_bureaucracy_add");
-			try
-			{
-				bureaucracy = std::stoi(bureaucracyString);
-			}
-			catch (const std::exception& e)
-			{
-				Log(LogLevel::Error) << "Failed to read bureaucracy output value " << bureaucracyString << ": " << e.what();
-			}
+			return;
+		}
+
+		const std::string& bureaucracyString = theAssignments.at("country_bureaucracy_add");
+		try
+		{
+			bureaucracy = std::stoi(bureaucracyString);
+		}
+		catch (const std::exception& e)
+		{
+			Log(LogLevel::Error) << "Failed to read bureaucracy output value " << bureaucracyString << ": " << e.what();
 		}
 	});
 	cModUnwrapper.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);

@@ -18,7 +18,7 @@ class NationalBudgetLoader: commonItems::parser
   private:
 	void registerKeys();
 
-	std::vector<std::shared_ptr<SectorLoader>> sectorBlueprints;
+	std::vector<SectorLoader> sectorBlueprints;
 };
 } // namespace V3
 

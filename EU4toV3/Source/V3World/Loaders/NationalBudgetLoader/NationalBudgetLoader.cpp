@@ -14,9 +14,9 @@ void V3::NationalBudgetLoader::loadNationalBudget(const std::string& filePath)
 void V3::NationalBudgetLoader::registerKeys()
 {
 	registerRegex(commonItems::catchallRegex, [this](const std::string& sectorName, std::istream& theStream) {
-		const auto newSectorBlueprint = std::make_shared<SectorLoader>();
-		newSectorBlueprint->loadSector(theStream);
-		newSectorBlueprint->setName(sectorName);
+		SectorLoader newSectorBlueprint;
+		newSectorBlueprint.loadSector(theStream);
+		newSectorBlueprint.setName(sectorName);
 		sectorBlueprints.push_back(newSectorBlueprint);
 	});
 }

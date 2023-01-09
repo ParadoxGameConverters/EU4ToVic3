@@ -16,8 +16,8 @@ TEST(V3World_SectorTests, SectorsCanLoadFromBlueprint)
 	input << "multiply = { value = 1.5 vic3_law = law_peasant_levy }\n";
 	input << "add = { value = 1 is_colony = no }\n";
 
-	const auto sectorBlueprint = std::make_shared<V3::SectorLoader>();
-	sectorBlueprint->loadSector(input);
+	V3::SectorLoader sectorBlueprint;
+	sectorBlueprint.loadSector(input);
 
 	const auto country = std::make_shared<V3::Country>();
 	country->setSourceCountry(std::make_shared<EU4::Country>());
@@ -27,7 +27,7 @@ TEST(V3World_SectorTests, SectorsCanLoadFromBlueprint)
 	data.CPBudget = 1000;
 	country->setProcessedData(data);
 
-	V3::Sector sector(sectorBlueprint, country);
+	V3::Sector sector(sectorBlueprint, *country);
 
 	EXPECT_THAT(sector.getBuildings(), testing::UnorderedElementsAre("building_barracks", "building_fort"));
 	EXPECT_EQ(0, sector.getCPBudget());

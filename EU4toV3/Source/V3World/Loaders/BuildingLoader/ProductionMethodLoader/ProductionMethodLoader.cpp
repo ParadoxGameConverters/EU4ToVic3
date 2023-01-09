@@ -1,6 +1,5 @@
 #include "ProductionMethodLoader.h"
 #include "CommonFunctions.h"
-#include "EconomyManager/Building/ProductionMethods/ProductionMethod.h"
 #include <CommonRegexes.h>
 
 void V3::ProductionMethodLoader::loadPMs(const commonItems::ModFilesystem& modFS)
@@ -17,9 +16,9 @@ void V3::ProductionMethodLoader::loadPMs(const commonItems::ModFilesystem& modFS
 void V3::ProductionMethodLoader::registerKeys()
 {
 	registerRegex(commonItems::catchallRegex, [this](const std::string& PMName, std::istream& theStream) {
-		auto newPM = std::make_unique<ProductionMethod>();
-		newPM->loadProductionMethod(theStream);
-		newPM->setName(PMName);
-		PMs.emplace(PMName, std::move(newPM));
+		ProductionMethod newPM;
+		newPM.loadProductionMethod(theStream);
+		newPM.setName(PMName);
+		PMs.emplace(PMName, newPM);
 	});
 }

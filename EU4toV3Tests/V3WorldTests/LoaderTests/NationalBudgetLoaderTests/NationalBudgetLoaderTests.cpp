@@ -15,6 +15,6 @@ TEST(V3World_NationalBudgetLoaderTests, NationalBudgetLoaderLoadsSectors)
 
 	for (const auto& sectorBlueprint: nationalBudgetLoader.getSectorBlueprints())
 	{
-		EXPECT_THAT(std::vector<std::string>{sectorBlueprint->getName()}, testing::IsSubsetOf(nameList));
+		EXPECT_THAT(std::vector<std::string>{sectorBlueprint.getName()}, testing::IsSubsetOf(nameList));
 	}
 }

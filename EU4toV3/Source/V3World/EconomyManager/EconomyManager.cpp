@@ -47,22 +47,35 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 
 void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalManager) const
 {
-	// TODO(Gawquon): Check tech requirement once tech is merged.
+	if (!buildings.contains("building_government_administration"))
+	{
+		Log(LogLevel::Error) << "No building definition found for: building_government_administration.";
+		return;
+	}
+
+	const auto& govAdmin = buildings.at("building_government_administration");
 
 	for (const auto& country: centralizedCountries)
 	{
+		// Check tech requirement for government administrations.
+		if (!country->hasAnyOfTech(govAdmin->getUnlockingTechs()))
+		{
+			continue;
+		}
+
 		// Give 5% extra for trade routes
 		const double generationTarget = country->calculateBureaucracyUsage(politicalManager.getLawsMap()) * 1.05;
 
 		// Use the PM with the most generation available
 		int PMGeneration = 35;
-		if (const auto& PMName = pickBureaucracyPM(country); PMName)
+		const auto& PMName = pickBureaucracyPM(country);
+		if (PMs.contains(PMName))
 		{
-			PMGeneration = PMs.at(PMName.value())->getBureaucracy();
+			PMGeneration = PMs.at(PMName).getBureaucracy();
 		}
 
 		// find # of buildings, 100 base value generation
-		const int numAdmins = static_cast<int>((generationTarget - 100) / PMGeneration + 1);
+		const int numAdmins = static_cast<int>(std::ceil((generationTarget - 100) / PMGeneration));
 
 		country->distributeGovAdmins(numAdmins);
 	}
@@ -260,44 +273,42 @@ double V3::EconomyManager::calculateGeoMeanCentralizedPops() const
 	return exp(sum);
 }
 
-std::optional<std::string> V3::EconomyManager::pickBureaucracyPM(const std::shared_ptr<Country>& country) const
+std::string V3::EconomyManager::pickBureaucracyPM(const std::shared_ptr<Country>& country) const
 {
-	std::shared_ptr<ProductionMethod> best;
+	int generation = 0;
+	std::string bestPMName = "pm_simple_organization";
 
-	if (PMGroups.contains("pmg_base_building_government_administration"))
-	{
-		for (const auto& PMName: PMGroups.at("pmg_base_building_government_administration")->getPMs())
-		{
-			if (PMs.contains(PMName))
-			{
-				const auto& PM = PMs.at(PMName);
-
-				// Only use PMs we have unlocked
-				if (!country->hasAnyOfTech(PM->getUnlockingTechs()))
-				{
-					continue;
-				}
-
-				// Update best if the PM has a higher bureaucracy value
-				if (!best || PM->getBureaucracy() > best->getBureaucracy())
-					best = PM;
-			}
-			else
-			{
-				Log(LogLevel::Error) << PMName << ": Not in loaded Production Methods";
-			}
-		}
-	}
-	else
+	if (!PMGroups.contains("pmg_base_building_government_administration"))
 	{
 		Log(LogLevel::Error) << "pmg_base_building_government_administration: Not in loaded Production Method Groups";
+		return bestPMName;
 	}
 
-	if (best)
+	for (const auto& PMName: PMGroups.at("pmg_base_building_government_administration").getPMs())
 	{
-		return best->getName();
+		if (!PMs.contains(PMName))
+		{
+			Log(LogLevel::Error) << PMName << ": Not in loaded Production Methods";
+			return bestPMName;
+		}
+
+		const auto& PM = PMs.at(PMName);
+
+		// Only use PMs we have unlocked
+		if (!country->hasAnyOfTech(PM.getUnlockingTechs()))
+		{
+			continue;
+		}
+
+		// Update best if the PM has a higher bureaucracy value
+		if (PM.getBureaucracy() > generation)
+		{
+			generation = PM.getBureaucracy();
+			bestPMName = PM.getName();
+		}
 	}
-	return std::nullopt;
+
+	return bestPMName;
 }
 
 double V3::EconomyManager::calculateGlobalPopFactor(const PoliticalManager& politicalManager) const
@@ -377,8 +388,8 @@ void V3::EconomyManager::setPMs() const
 	for (const auto& country: centralizedCountries)
 	{
 		auto data = country->getProcessedData();
-		if (const auto& PMName = pickBureaucracyPM(country); PMName)
-			data.productionMethods["building_government_administration"] = {PMName.value()};
+		const auto& PMName = pickBureaucracyPM(country);
+		data.productionMethods["building_government_administration"] = {PMName};
 		country->setProductionMethods(data.productionMethods);
 	}
 }

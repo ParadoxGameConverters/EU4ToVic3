@@ -1,11 +1,11 @@
 #ifndef PRODUCTION_METHOD_LOADER_H
 #define PRODUCTION_METHOD_LOADER_H
 
+#include "EconomyManager/Building/ProductionMethods/ProductionMethod.h"
 #include "Parser.h"
 
 namespace V3
 {
-class ProductionMethod;
 class ProductionMethodLoader: commonItems::parser
 {
   public:
@@ -17,7 +17,7 @@ class ProductionMethodLoader: commonItems::parser
   private:
 	void registerKeys();
 
-	std::map<std::string, std::shared_ptr<ProductionMethod>> PMs;
+	std::map<std::string, ProductionMethod> PMs;
 };
 } // namespace V3
 #endif // PRODUCTION_METHOD_LOADER_H

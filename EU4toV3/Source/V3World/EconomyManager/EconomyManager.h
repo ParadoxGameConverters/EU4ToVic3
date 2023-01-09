@@ -1,6 +1,8 @@
 #ifndef ECONOMY_MANAGER_H
 #define ECONOMY_MANAGER_H
 #include "Configuration.h"
+#include "EconomyManager/Building/ProductionMethods/ProductionMethod.h"
+#include "EconomyManager/Building/ProductionMethods/ProductionMethodGroup.h"
 #include "Loaders/DefinesLoader/EconDefinesLoader.h"
 #include "PoliticalManager/PoliticalManager.h"
 
@@ -10,8 +12,6 @@ class StateModifier;
 class Country;
 class Building;
 class BuildingGroups;
-class ProductionMethod;
-class ProductionMethodGroup;
 /*
  * PreReqs: Clay(Substates merged under the right country), Pops, Laws, Tech
  * all must be converted first in the current design.
@@ -61,7 +61,7 @@ class EconomyManager
 	static double calculatePopDistanceFactor(int countryPopulation, double geoMeanPopulation);
 
 	[[nodiscard]] double calculateGeoMeanCentralizedPops() const;
-	[[nodiscard]] std::optional<std::string> pickBureaucracyPM(const std::shared_ptr<Country>& country) const;
+	[[nodiscard]] std::string pickBureaucracyPM(const std::shared_ptr<Country>& country) const;
 	[[nodiscard]] double calculateGlobalPopFactor(const PoliticalManager& politicalManager) const;
 	[[nodiscard]] double calculateTerrainMultiplier(const std::shared_ptr<SubState>& subState) const;
 	[[nodiscard]] double calculateStateTraitMultiplier(const std::shared_ptr<SubState>& subState) const;
@@ -85,8 +85,8 @@ class EconomyManager
 
 	std::map<std::string, std::shared_ptr<Building>> buildings;
 	std::shared_ptr<BuildingGroups> buildingGroups;
-	std::map<std::string, std::shared_ptr<ProductionMethod>> PMs;
-	std::map<std::string, std::shared_ptr<ProductionMethodGroup>> PMGroups;
+	std::map<std::string, ProductionMethod> PMs;
+	std::map<std::string, ProductionMethodGroup> PMGroups;
 };
 } // namespace V3
 
