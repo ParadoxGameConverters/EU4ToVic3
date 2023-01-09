@@ -2,6 +2,17 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+TEST(Mappers_BuildingMappingTests, EmptyInputCreatesEmptyDefault)
+{
+
+	std::stringstream input;
+	input << "";
+	const mappers::BuildingMapping buildingMapping(input);
+
+	EXPECT_TRUE(buildingMapping.getVic3Buildings().empty());
+	EXPECT_TRUE(buildingMapping.getEU4Building().empty());
+}
+
 TEST(Mappers_BuildingMappingTests, RulesCanBeLoaded)
 {
 

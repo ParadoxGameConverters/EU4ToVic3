@@ -20,6 +20,8 @@ void V3::TerrainModifierLoader::loadTerrainModifiers(std::istream& theStream)
 void V3::TerrainModifierLoader::registerKeys()
 {
 	registerRegex(commonItems::catchallRegex, [this](const std::string& terrain, std::istream& theStream) {
+		stateTerrainModifiers[terrain] = 0;
+
 		for (const auto& [type, multiplier]: commonItems::assignments(theStream).getAssignments())
 		{
 			try

@@ -119,7 +119,7 @@ class Country: commonItems::parser
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
 	[[nodiscard]] int getPopCount() const;
-	[[nodiscard]] static int getPopCount(std::vector<std::shared_ptr<SubState>> theSubstates);
+	[[nodiscard]] static int getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubstates);
 
 
 	void determineWesternizationWealthAndLiteracy(double topTech,
@@ -182,6 +182,9 @@ class Country: commonItems::parser
 	void applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setDecentralizedEffects();
 	void determineCountryType();
+	[[nodiscard]] double calcSubStateBureaucracy(const std::map<std::string, V3::Law>& lawsMap) const;
+	[[nodiscard]] double calcInstitutionBureaucracy() const;
+	[[nodiscard]] double calcCharacterBureaucracy() const;
 
 	std::string tag;
 	std::optional<VanillaCommonCountryData> vanillaData;

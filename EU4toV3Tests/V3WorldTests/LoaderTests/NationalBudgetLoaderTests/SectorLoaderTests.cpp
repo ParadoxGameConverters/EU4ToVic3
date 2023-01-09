@@ -4,6 +4,19 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+TEST(V3World_SectorLoaderTests, DefaultsDefaultToDefaults)
+{
+	std::stringstream input;
+
+	V3::SectorLoader sectorBlueprint;
+	sectorBlueprint.loadSector(input);
+
+	V3::Country country;
+	country.setSourceCountry(std::make_shared<EU4::Country>());
+
+	EXPECT_DOUBLE_EQ(0, sectorBlueprint.calculateWeight(country));
+	EXPECT_TRUE(sectorBlueprint.getBuildings().empty());
+}
 
 TEST(V3World_SectorLoaderTests, SectorLoaderCanLoadSector)
 {

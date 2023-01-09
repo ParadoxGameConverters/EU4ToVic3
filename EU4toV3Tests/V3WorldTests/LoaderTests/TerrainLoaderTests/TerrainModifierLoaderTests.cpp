@@ -26,10 +26,11 @@ TEST(V3World_TerrainModifierLoaderTests, terrainModifierLoaderCanLoadTerrainEffe
 
 	terrainModifierLoader.loadTerrainModifiers(input);
 
-	EXPECT_EQ(2, terrainModifierLoader.getTerrainStateModifiers().size());
+	EXPECT_EQ(3, terrainModifierLoader.getTerrainStateModifiers().size());
 	EXPECT_EQ(2, terrainModifierLoader.getTerrainBuildingModifiers().size());
 
-	EXPECT_THAT(terrainModifierLoader.getTerrainStateModifiers(), testing::UnorderedElementsAre(testing::Pair("coastal", 0.2), testing::Pair("desert", -0.3)));
+	EXPECT_THAT(terrainModifierLoader.getTerrainStateModifiers(),
+		 testing::UnorderedElementsAre(testing::Pair("coastal", 0.2), testing::Pair("desert", -0.3), testing::Pair("wetlands", 0)));
 
 	EXPECT_THAT(terrainModifierLoader.getTerrainBuildingModifiers().at("coastal"),
 		 testing::UnorderedElementsAre(testing::Pair("building_cave", 0.3), testing::Pair("building_fish", 1.5)));

@@ -28,6 +28,10 @@ TEST(V3World_LawEntryTests, LawCanBeLoaded)
 	input << "disallowing_laws = {\n ";
 	input << "	b1 b2 b3\n";
 	input << "}\n ";
+	input << "institution = i1\n";
+	input << "modifier = {\n ";
+	input << "\tstate_bureaucracy_population_base_cost_factor_mult = -0.14\n";
+	input << "}\n ";
 	const V3::LawEntry entry(input);
 	const auto& law = entry.getLaw();
 
@@ -36,4 +40,6 @@ TEST(V3World_LawEntryTests, LawCanBeLoaded)
 	EXPECT_THAT(law.requiredTechs, testing::UnorderedElementsAre("tech1", "tech2", "tech3"));
 	EXPECT_THAT(law.requiredLaws, testing::UnorderedElementsAre("u1", "u2", "u3"));
 	EXPECT_THAT(law.blockingLaws, testing::UnorderedElementsAre("b1", "b2", "b3"));
+	EXPECT_EQ("i1", law.institution);
+	EXPECT_EQ(-0.14 ,law.bureaucracyCostMult);
 }

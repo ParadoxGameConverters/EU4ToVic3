@@ -47,7 +47,7 @@ TEST(V3World_MathScriptTests, MathScriptTriggersAreRecognized)
 	EXPECT_TRUE(colony.isValid(country));
 }
 
-TEST(V3World_AddScriptTests, AddScriptsAdd)
+TEST(V3World_AddScriptTests, AddScriptsAdds)
 {
 	std::stringstream input0;
 	std::stringstream input1;

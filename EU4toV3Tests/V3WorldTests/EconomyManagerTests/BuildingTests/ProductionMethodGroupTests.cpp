@@ -2,6 +2,16 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+TEST(V3World_ProductionMethodGroupsTests, DefaultsDefaultToDefaults)
+{
+	std::stringstream input;
+
+	V3::ProductionMethodGroup PMGroup;
+	PMGroup.loadProductionMethodGroup(input);
+
+	EXPECT_TRUE(PMGroup.getPMs().empty());
+}
+
 TEST(V3World_ProductionMethodGroupsTests, ProductionMethodGroupLoadsPMList)
 {
 	std::stringstream input;

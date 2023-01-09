@@ -62,68 +62,12 @@ std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop
 
 double V3::Country::calculateBureaucracyUsage(const std::map<std::string, V3::Law>& lawsMap) const
 {
-	// None of these hard-coded Vic3 values are in the defines for some reason.
+	// None of the hard-coded Vic3 values needed to calc this are in the defines for some reason.
 	double usage = 0.0;
 
-	double lawsMult = 0;
-	for (const auto& law: processedData.laws)
-	{
-		if (!lawsMap.contains(law))
-		{
-			Log(LogLevel::Warning) << "Finding bureaucracy multiplier of law: " << law << " that has no definition! Skipping.";
-			continue;
-		}
-
-		lawsMult += lawsMap.at(law).bureaucracyCostMult;
-	}
-
-	for (const auto& substate: substates)
-	{
-		if (substate->isIncorporated())
-		{
-			// Incorporated States - 10 per incorporated state
-			usage += 10;
-
-			// Pops - only pops in incorporated states count
-			// Modified by laws - game caps this at 0
-			if (lawsMult > -1)
-			{
-				usage += substate->getSubStatePops().getPopCount() / 25000.0 * (1 + lawsMult);
-			}
-		}
-	}
-
-
-	// Institutions
-	const double cost = getPopCount() / 100000.0;
-	for (const auto& institution: processedData.institutions)
-	{
-		usage += cost * 1; // If we end up mapping institution levels, it is cost * levels
-	}
-
-	// Characters
-	for (const auto& character: processedData.characters)
-	{
-		if (!character.admiral && !character.general)
-			continue;
-
-		// Defaulted commanders & rulers
-		if (character.commanderRank.empty() || character.commanderRank.find("ruler") != std::string::npos)
-		{
-			usage += 10;
-		}
-
-		// Commanders with ranks 1->5
-		try
-		{
-			const int rank = std::stoi(character.commanderRank.substr(character.commanderRank.length() - 1));
-			usage += 5 * (rank + 1);
-		}
-		catch (std::exception& e)
-		{
-			Log(LogLevel::Error) << "Broken military leader rank: " << character.commanderRank << " - " << e.what();
-		}
-	}
+	usage += calcSubStateBureaucracy(lawsMap);
+	usage += calcInstitutionBureaucracy();
+	usage += calcCharacterBureaucracy();
 
 	return usage;
 }
@@ -559,6 +503,80 @@ void V3::Country::determineCountryType()
 	}
 }
 
+[[nodiscard]] double V3::Country::calcSubStateBureaucracy(const std::map<std::string, V3::Law>& lawsMap) const
+{
+	double lawsMult = 0;
+	for (const auto& law: processedData.laws)
+	{
+		if (!lawsMap.contains(law))
+		{
+			Log(LogLevel::Warning) << "Finding bureaucracy multiplier of law: " << law << " that has no definition! Skipping.";
+			continue;
+		}
+
+		lawsMult += lawsMap.at(law).bureaucracyCostMult;
+	}
+	lawsMult = std::max(lawsMult + 1.0, 0.0);
+
+
+	double usage = 0;
+	for (const auto& substate: substates)
+	{
+		if (!substate->isIncorporated())
+		{
+			continue;
+		}
+		// Incorporated States - 10 per incorporated state
+		usage += 10;
+
+		// Pops - only pops in incorporated states count
+		// Modified by laws - game caps this at 0
+		usage += substate->getSubStatePops().getPopCount() / 25000.0 * lawsMult;
+	}
+	return usage;
+}
+
+[[nodiscard]] double V3::Country::calcInstitutionBureaucracy() const
+{
+	double usage = 0;
+	const double cost = getPopCount() / 100000.0;
+	for (const auto& institution: processedData.institutions)
+	{
+		usage += cost * 1; // If we end up mapping institution levels, it is cost * levels
+	}
+	return usage;
+}
+
+[[nodiscard]] double V3::Country::calcCharacterBureaucracy() const
+{
+	double usage = 0;
+
+	for (const auto& character: processedData.characters)
+	{
+		if (!character.admiral && !character.general)
+			continue;
+
+		// Defaulted commanders & rulers
+		if (character.commanderRank.empty() || character.commanderRank.find("ruler") != std::string::npos)
+		{
+			usage += 10;
+		}
+
+		// Commanders with ranks 1->5
+		try
+		{
+			const int rank = std::stoi(character.commanderRank.substr(character.commanderRank.length() - 1));
+			usage += 5 * (rank + 1);
+		}
+		catch (std::exception& e)
+		{
+			Log(LogLevel::Error) << "Broken military leader rank: " << character.commanderRank << " - " << e.what();
+		}
+	}
+
+	return usage;
+}
+
 void V3::Country::applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper)
 {
 	auto literacyEffect = populationSetupMapper.getLiteracyEffectForLiteracy(processedData.literacy);
@@ -757,7 +775,7 @@ int V3::Country::getPopCount() const
 	return getPopCount(substates);
 }
 
-int V3::Country::getPopCount(std::vector<std::shared_ptr<SubState>> theSubstates)
+int V3::Country::getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubstates)
 {
 	return std::accumulate(theSubstates.begin(), theSubstates.end(), 0, [](int sum, const auto& substate) {
 		return sum + substate->getSubStatePops().getPopCount();

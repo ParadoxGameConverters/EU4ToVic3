@@ -4,6 +4,32 @@
 #include <gmock/gmock-matchers.h>
 
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+
+TEST(V3World_BuildingTests, NameCanBeSet)
+{
+	V3::Building building;
+
+	EXPECT_TRUE(building.getName().empty());
+
+	building.setName("name");
+
+	EXPECT_EQ("name", building.getName());
+}
+
+TEST(V3World_SubStateTests, DefaultsDefaultToDefault)
+{
+	std::map<std::string, int> emptyCostTiers;
+	std::stringstream input;
+
+	V3::Building building;
+	building.loadBuilding(input, emptyCostTiers);
+
+	EXPECT_TRUE(building.getName().empty());
+	EXPECT_TRUE(building.getUnlockingTechs().empty());
+	EXPECT_TRUE(building.getBuildingGroup().empty());
+	EXPECT_EQ(50, building.getConstructionCost());
+}
+
 TEST(V3World_BuildingTests, ParserLoadsInValues)
 {
 	V3::BuildingScriptValuesLoader buildingScriptValuesLoader;
@@ -65,7 +91,7 @@ TEST(V3World_BuildingTests, UnkownConstructionCostIsCaught)
 	V3::Building building;
 	building.loadBuilding(input, costTiers);
 
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [ERROR] Failed to understand building cost a_lot:)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([ERROR] Failed to understand building cost a_lot:)"));
 
 	EXPECT_THAT("group_one", building.getBuildingGroup());
 	EXPECT_THAT(building.getUnlockingTechs(), testing::UnorderedElementsAre("fire"));

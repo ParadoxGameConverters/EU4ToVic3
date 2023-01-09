@@ -23,6 +23,15 @@ void V3::SubState::setProvinces(const ProvinceMap& theProvinces)
 	calculateTerrainFrequency();
 }
 
+double V3::SubState::getTerrainFrequency(const std::string& theTerrain) const
+{
+	if (const auto terrain = terrainFrequency.find(theTerrain); terrain != terrainFrequency.end())
+	{
+		return terrain->second;
+	}
+	return 0;
+}
+
 std::optional<int> V3::SubState::getBuildingLevel(const std::string& building) const
 {
 	if (buildings.contains(building))
