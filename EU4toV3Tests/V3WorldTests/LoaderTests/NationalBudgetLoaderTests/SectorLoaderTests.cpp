@@ -24,7 +24,7 @@ TEST(V3World_SectorLoaderTests, SectorLoaderCanLoadSector)
 
 	input << "weight = 12\n";
 	input << "building_barracks building_fort\n";
-	input << "multiply = {value = 0.1 vic3_law = law_quality}\n";
+	input << "multiply = { value = 0.1 vic3_law = law_quality }\n";
 	input << "multiply = { value = 1.5 vic3_law = law_peasant_levy }\n";
 	input << "add = { value = 1 is_colony = no }\n";
 

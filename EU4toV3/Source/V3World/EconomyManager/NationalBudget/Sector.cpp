@@ -3,8 +3,7 @@
 #include "PoliticalManager/Country/Country.h"
 #include <cmath>
 
-V3::Sector::Sector(const SectorLoader& sectorRules, const Country& country):
-	 name(sectorRules.getName()), buildings(sectorRules.getBuildings())
+V3::Sector::Sector(const SectorLoader& sectorRules, const Country& country): name(sectorRules.getName()), buildings(sectorRules.getBuildings())
 {
 	weight = sectorRules.calculateWeight(country);
 }
