@@ -22,7 +22,6 @@ namespace
 {
 std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
 {
-	auto eu4Path = "TestFiles/eu4installation/";
 	EU4::DefaultMapParser defaults;
 	defaults.loadDefaultMap(eu4FS);
 	EU4::DefinitionScraper definitions;

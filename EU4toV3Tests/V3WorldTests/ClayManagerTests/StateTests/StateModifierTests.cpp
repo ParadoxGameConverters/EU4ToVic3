@@ -173,10 +173,6 @@ TEST(V3World_StateModifierTests, GetAllBonusesCombinesLikeBonuses)
 	V3::StateModifier modifier;
 	modifier.loadStateModifier(input);
 
-	V3::BuildingGroupLoader buildingGroupLoader;
-	buildingGroupLoader.loadBuildingGroups(modFS);
-	auto buildingGroups = buildingGroupLoader.getBuildingGroups();
-
 	EXPECT_DOUBLE_EQ(0.5, V3::StateModifier::getAllBonuses(modifier.getBuildingGroupModifiersMap()));
 	EXPECT_DOUBLE_EQ(0, V3::StateModifier::getAllBonuses(modifier.getBuildingModifiersMap()));
 	EXPECT_DOUBLE_EQ(0.3, V3::StateModifier::getAllBonuses(modifier.getGoodsModifiersMap()));

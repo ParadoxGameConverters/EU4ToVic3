@@ -560,6 +560,7 @@ void V3::Country::determineCountryType()
 		if (character.commanderRank.empty() || character.commanderRank.find("ruler") != std::string::npos)
 		{
 			usage += 10;
+			continue;
 		}
 
 		// Commanders with ranks 1->5
