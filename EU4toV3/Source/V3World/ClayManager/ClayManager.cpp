@@ -427,7 +427,10 @@ bool V3::ClayManager::stateIsInRegion(const std::string& state, const std::strin
 	return false;
 }
 
-void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager, const PopManager& popManager)
+void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& modFS,
+	 const PoliticalManager& politicalManager,
+	 const PopManager& popManager,
+	 const bool vn)
 {
 	Log(LogLevel::Info) << "-> Injecting Vanilla substates into conversion map.";
 	auto subCounter = substates.size();
@@ -458,7 +461,7 @@ void V3::ClayManager::injectVanillaSubStates(const commonItems::ModFilesystem& m
 		}
 
 		const auto& vanillaStateEntry = loader.getStates().at(stateName);
-		const auto success = importVanillaSubStates(stateName, vanillaStateEntry, unassignedProvinces, politicalManager, popManager);
+		const auto success = importVanillaSubStates(stateName, vanillaStateEntry, unassignedProvinces, politicalManager, popManager, vn);
 
 		// If we imported anything, we should also copy any potential homelands. Unsure whom they belong to, but they surely won't do harm.
 		// What could possibly go wrong?
@@ -475,7 +478,8 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 	 const VanillaStateEntry& entry,
 	 const ProvinceMap& unassignedProvinces,
 	 const PoliticalManager& politicalManager,
-	 const PopManager& popManager)
+	 const PopManager& popManager,
+	 const bool vn)
 {
 	bool action = false;
 	for (const auto& subStateEntry: entry.getSubStates())
@@ -484,8 +488,8 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		if (ownerTag.empty())
 			continue;
 
-		// We have a substate owner. Is he vanilla-decentralized?
-		if (!politicalManager.isTagDecentralized(ownerTag))
+		// We have a substate owner. Is he vanilla-decentralized? Or are we doing VN?
+		if (!politicalManager.isTagDecentralized(ownerTag) && !vn)
 			continue;
 
 		// Now we have a state we can work with. Not all of its provinces are available!

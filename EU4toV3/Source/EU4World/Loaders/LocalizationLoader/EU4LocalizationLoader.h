@@ -1,6 +1,6 @@
 #ifndef EU4_LOCALIZATION_LOADER
 #define EU4_LOCALIZATION_LOADER
-#include "ModLoader/ModLoader.h"
+#include "ModLoader/ModFilesystem.h"
 #include <map>
 #include <optional>
 #include <string>
@@ -13,14 +13,13 @@ class EU4LocalizationLoader
   public:
 	EU4LocalizationLoader() = default;
 
-	void loadLocalizations(const std::string& EU4Path, const Mods& mods);
+	void loadLocalizations(const commonItems::ModFilesystem& modFS);
 	void loadLocalizations(std::istream& theStream);
 
 	[[nodiscard]] std::optional<std::map<std::string, std::string>> getTextInEachLanguage(const std::string& key) const;
 	[[nodiscard]] std::optional<std::string> getTextForKey(const std::string& key, const std::string& language) const;
 
   private:
-	void readFromAllFilesInFolder(const std::string& folderPath);
 	void readFromFile(const std::string& fileName);
 	void readFromStream(std::istream& theStream);
 

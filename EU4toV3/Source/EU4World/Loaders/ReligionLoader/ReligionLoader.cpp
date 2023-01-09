@@ -8,14 +8,14 @@
 #include "ReligionParser.h"
 #include <ranges>
 
-void EU4::ReligionLoader::loadReligions(const std::string& EU4Path, const Mods& mods)
+void EU4::ReligionLoader::loadReligions(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
 
-	const auto modFS = commonItems::ModFilesystem(EU4Path, mods);
-
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/religions/"))
 	{
+		if (getExtension(fileName) != "txt")
+			continue;
 		auto theFileName = trimPath(fileName);
 		// Watch out for our own special religions.
 		if (theFileName.starts_with("99_converted_"))

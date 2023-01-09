@@ -5,6 +5,8 @@
 #include <ranges>
 using testing::UnorderedElementsAre;
 
+const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {Mod("Some mod", "TestFiles/mod/themod/")});
+
 TEST(EU4World_ReligionLoaderTests, religionsDefaultToEmpty)
 {
 	std::stringstream input;
@@ -16,12 +18,8 @@ TEST(EU4World_ReligionLoaderTests, religionsDefaultToEmpty)
 
 TEST(EU4World_ReligionLoaderTests, religionNamesCanBeImported)
 {
-	const auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-
 	EU4::ReligionLoader theReligions;
-	theReligions.loadReligions(eu4Path, mods);
+	theReligions.loadReligions(eu4FS);
 
 	std::set<std::string> religionNames;
 	for (const auto& name: theReligions.getAllReligions() | std::views::keys)
@@ -32,12 +30,8 @@ TEST(EU4World_ReligionLoaderTests, religionNamesCanBeImported)
 
 TEST(EU4World_ReligionLoaderTests, religionsImportWithCorrectReligiousGroups)
 {
-	const auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-
 	EU4::ReligionLoader theReligions;
-	theReligions.loadReligions(eu4Path, mods);
+	theReligions.loadReligions(eu4FS);
 
 	EXPECT_THAT(theReligions.getAllReligions(),
 		 UnorderedElementsAre(std::pair("religion_2", EU4::Religion("religion_2", "mod_group_1")),
@@ -49,12 +43,8 @@ TEST(EU4World_ReligionLoaderTests, religionsImportWithCorrectReligiousGroups)
 
 TEST(EU4World_ReligionLoaderTests, trappingsAreLoadedForSaneCustomReligions)
 {
-	const auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-
 	EU4::ReligionLoader theReligions;
-	theReligions.loadReligions(eu4Path, mods);
+	theReligions.loadReligions(eu4FS);
 
 	const auto& religion107 = theReligions.getAllReligions().at("converted_dynamic_faith_107");
 	const auto& religion108 = theReligions.getAllReligions().at("converted_dynamic_faith_108");
@@ -65,16 +55,12 @@ TEST(EU4World_ReligionLoaderTests, trappingsAreLoadedForSaneCustomReligions)
 
 TEST(EU4World_ReligionLoaderTests, loadingInsaneCustomReligionsThrowsWarnings)
 {
-	const auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
-
 	EU4::ReligionLoader theReligions;
 
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
 	std::cout.rdbuf(log.rdbuf());
-	theReligions.loadReligions(eu4Path, mods);
+	theReligions.loadReligions(eu4FS);
 	std::cout.rdbuf(cout_buffer);
 
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] ! Religion Mapper: Cannot parse filename for metadata: 99_converted_dynamic_faith_108-from-.txt)"));

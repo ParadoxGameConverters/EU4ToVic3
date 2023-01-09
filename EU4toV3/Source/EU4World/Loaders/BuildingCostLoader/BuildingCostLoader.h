@@ -1,7 +1,6 @@
 #ifndef BUILDING_COST_LOADER
 #define BUILDING_COST_LOADER
 #include "BuildingCostLoader.h"
-#include "ModLoader/ModLoader.h"
 #include "Parser.h"
 #include <map>
 #include <optional>
@@ -13,7 +12,7 @@ class BuildingCostLoader: commonItems::parser
   public:
 	BuildingCostLoader() = default;
 
-	void loadBuildingCosts(const std::string& EU4Path, const Mods& mods);
+	void loadBuildingCosts(const commonItems::ModFilesystem& modFS);
 	void loadBuildingCosts(std::istream& theStream);
 
 	[[nodiscard]] std::optional<double> getBuildingCost(const std::string& buildingName) const;

@@ -16,16 +16,16 @@
 #include <gmock/gmock-matchers.h>
 
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {});
 
 V3::ClayManager generateChunks()
 {
-	auto eu4Path = "TestFiles/eu4installation/";
 	EU4::DefaultMapParser defaults;
-	defaults.loadDefaultMap(eu4Path, {});
+	defaults.loadDefaultMap(eu4FS);
 	EU4::DefinitionScraper definitions;
-	definitions.loadDefinitions(eu4Path, {});
+	definitions.loadDefinitions(eu4FS);
 	EU4::RegionManager regionMapper;
-	regionMapper.loadRegions(eu4Path, {});
+	regionMapper.loadRegions(eu4FS);
 
 	std::stringstream provinceStream;
 	provinceStream << "-1={}\n";																																	  // sea, no ownership
@@ -94,7 +94,7 @@ std::tuple<V3::ClayManager, V3::PoliticalManager> assignSubStateOwnership()
 	V3::PopManager popManager;
 	popManager.initializeVanillaPops(modFS);
 
-	clayManager.injectVanillaSubStates(modFS, politicalManager, popManager);
+	clayManager.injectVanillaSubStates(modFS, politicalManager, popManager, false);
 
 	return {clayManager, politicalManager};
 }

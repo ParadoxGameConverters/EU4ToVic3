@@ -1,4 +1,5 @@
 #include "CommonCountryLoader.h"
+#include "CommonFunctions.h"
 #include "CommonRegexes.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
@@ -7,31 +8,29 @@
 #include <ranges>
 namespace fs = std::filesystem;
 
-void EU4::CommonCountryLoader::loadCommonCountries(const std::string& EU4Path, const Mods& mods)
+void EU4::CommonCountryLoader::loadCommonCountries(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
 
 	// scoop up all country definitions
-	std::ifstream commonCountries(fs::u8path(EU4Path + "/common/country_tags/00_countries.txt"));
-	if (!commonCountries.is_open())
-		throw std::runtime_error("Could not open " + EU4Path + "/common/country_tags/00_countries.txt!");
-	readCommonCountriesFile(commonCountries, EU4Path);
-	commonCountries.close();
-
-	// and mods too.
-	for (const auto& mod: mods)
-		for (const auto& fileName: commonItems::GetAllFilesInFolder(mod.path + "/common/country_tags/"))
-		{
-			std::ifstream convertedCommonCountries(fs::u8path(mod.path + "/common/country_tags/" + fileName));
-			readCommonCountriesFile(convertedCommonCountries, mod.path);
-			convertedCommonCountries.close();
-		}
+	for (const auto& file: modFS.GetAllFilesInFolder("/common/country_tags/"))
+	{
+		if (getExtension(file) != "txt")
+			continue;
+		tagParser.parseFile(file);
+	}
 
 	// look in each file for color.
 	for (const auto& [tag, filePath]: tagPaths)
 	{
+		auto path = modFS.GetActualFileLocation("/common/" + filePath);
+		if (!path)
+		{
+			Log(LogLevel::Error) << "Where is this file: /common/" + filePath << "?";
+			continue;
+		}
 		color.reset();
-		parseFile(filePath);
+		parseFile(*path);
 		if (color)
 			countryColors.emplace(tag, *color);
 	}
@@ -40,38 +39,12 @@ void EU4::CommonCountryLoader::loadCommonCountries(const std::string& EU4Path, c
 	clearRegisteredKeywords();
 }
 
-void EU4::CommonCountryLoader::readCommonCountriesFile(std::istream& in, const std::string& rootPath)
-{
-	while (!in.eof())
-	{
-		std::string line;
-		std::getline(in, line);
-
-		if (line[0] == '#' || line.length() < 4)
-			continue;
-		auto tag = line.substr(0, 3);
-
-		// All file paths are in quotes. The ones outside are commented, so we can use those as markers.
-		auto quoteLoc = line.find_first_of('\"');
-		if (quoteLoc == std::string::npos)
-		{
-			Log(LogLevel::Warning) << "Iffy country line: " << line;
-			continue;
-		}
-		auto countryLine = line.substr(quoteLoc + 1, line.length());
-		quoteLoc = countryLine.find_last_of('\"');
-		if (quoteLoc == std::string::npos)
-		{
-			Log(LogLevel::Warning) << "Iffy country line: " << line;
-			continue;
-		}
-		countryLine = countryLine.substr(0, quoteLoc);
-		tagPaths.emplace(tag, rootPath + "/common/" + countryLine);
-	}
-}
-
 void EU4::CommonCountryLoader::registerKeys()
 {
+	tagParser.registerRegex(commonItems::catchallRegex, [this](const std::string& tag, std::istream& theStream) {
+		tagPaths.emplace(tag, commonItems::getString(theStream));
+	});
+
 	registerKeyword("color", [this](std::istream& theStream) {
 		color = commonItems::Color::Factory{}.getColor(theStream);
 	});

@@ -8,6 +8,7 @@
 #include <gmock/gmock-matchers.h>
 
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {Mod("Some mod", "TestFiles/mod/themod/")});
 
 std::tuple<mappers::CultureMapper, V3::ClayManager, EU4::CultureLoader, EU4::ReligionLoader> prepMappers()
 {
@@ -15,13 +16,10 @@ std::tuple<mappers::CultureMapper, V3::ClayManager, EU4::CultureLoader, EU4::Rel
 	clayManager.initializeVanillaStates(modFS);
 	clayManager.initializeSuperRegions(modFS);
 	clayManager.loadStatesIntoSuperRegions();
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
 	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
+	religionLoader.loadReligions(eu4FS);
 	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	cultureLoader.loadCultures(eu4FS);
 
 	mappers::CultureMapper culMapper;
 	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");

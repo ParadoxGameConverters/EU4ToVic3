@@ -14,11 +14,11 @@ class ProvinceManager;
 class RegionManager: commonItems::parser
 {
   public:
-	void loadRegions(const std::string& EU4Path, const Mods& mods);
+	void loadRegions(const commonItems::ModFilesystem& modsFS);
 	void loadRegions(std::istream& areaStream, std::istream& regionStream, std::istream& superRegionStream); // for testing
 	void loadSuperGroups(const mappers::SuperGroupMapper& sgMapper) { superGroupMapper = sgMapper; }			// for testing
 
-	void loadColonialRegions(const std::string& EU4Path, const Mods& mods) { colonialRegionLoader.loadColonialRegions(EU4Path, mods); }
+	void loadColonialRegions(const commonItems::ModFilesystem& modFS) { colonialRegionLoader.loadColonialRegions(modFS); }
 	void loadColonialRegions(const ColonialRegionLoader& loader) { colonialRegionLoader = loader; } // testing
 
 	[[nodiscard]] bool provinceIsInRegion(int provinceID, const std::string& regionName) const;

@@ -1,31 +1,23 @@
 #include "EU4LocalizationLoader.h"
-#include "OSCompatibilityLayer.h"
+#include "CommonFunctions.h"
 #include <filesystem>
 #include <fstream>
 #include <ranges>
-#include <set>
 namespace fs = std::filesystem;
 
-void EU4::EU4LocalizationLoader::loadLocalizations(const std::string& EU4Path, const Mods& mods)
+void EU4::EU4LocalizationLoader::loadLocalizations(const commonItems::ModFilesystem& modFS)
 {
-	readFromAllFilesInFolder(EU4Path + "/localisation");
-	for (const auto& mod: mods)
+	for (const auto& file: modFS.GetAllFilesInFolderRecursive("/localisation/"))
 	{
-		readFromAllFilesInFolder(mod.path + "/localisation");
-		readFromAllFilesInFolder(mod.path + "/localisation/replace");
+		if (getExtension(file) != "yml")
+			continue;
+		readFromFile(file);
 	}
 }
 
 void EU4::EU4LocalizationLoader::loadLocalizations(std::istream& theStream)
 {
 	readFromStream(theStream);
-}
-
-void EU4::EU4LocalizationLoader::readFromAllFilesInFolder(const std::string& folderPath)
-{
-	// There is no need to recurse as EU4 doesn't support subfolders in loc dir except for "replace"
-	for (const auto& fileName: commonItems::GetAllFilesInFolder(folderPath))
-		readFromFile(folderPath + '/' + fileName);
 }
 
 void EU4::EU4LocalizationLoader::readFromFile(const std::string& fileName)

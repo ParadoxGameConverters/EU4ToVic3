@@ -19,7 +19,7 @@ namespace EU4
 class World: commonItems::parser
 {
   public:
-	World(const Configuration& theConfiguration, const commonItems::ConverterVersion& converterVersion);
+	World(const std::shared_ptr<Configuration>& theConfiguration, const commonItems::ConverterVersion& converterVersion);
 
 	// V3World inputs
 	[[nodiscard]] bool isHREDecentralized() const { return hreReforms.contains("emperor_reichskrieg"); }
@@ -37,12 +37,12 @@ class World: commonItems::parser
 	[[nodiscard]] const auto& getDatingData() const { return datingData; }
 
   private:
-	void registerKeys(const Configuration& theConfiguration, const commonItems::ConverterVersion& converterVersion);
+	void registerKeys(const std::shared_ptr<Configuration>& theConfiguration, const commonItems::ConverterVersion& converterVersion);
 	void verifySave();
 
 	struct saveData
 	{
-		bool compressed = false;
+		bool parsedMeta = false;
 		std::string metadata;
 		std::string gamestate;
 		std::string path;

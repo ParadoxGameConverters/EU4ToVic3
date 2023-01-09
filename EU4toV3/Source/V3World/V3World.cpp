@@ -7,7 +7,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 {
 	Mods overrideMods;
 	// We use decentralized world mod to fill out wasteland and out-of-scope clay with decentralized tribes.
-	overrideMods.emplace_back(Mod{"Decentralized World", "configurables/decentralized_world/"});
+	if (!configuration.configBlock.vn)
+		overrideMods.emplace_back(Mod{"Decentralized World", "configurables/decentralized_world/"});
 	const auto dwFS = commonItems::ModFilesystem(V3Path, overrideMods);
 	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output/"});
 	const auto allFS = commonItems::ModFilesystem(V3Path, overrideMods);
@@ -21,7 +22,10 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	clayManager.loadTerrainsIntoProvinces(dwFS);
 	clayManager.initializeSuperRegions(dwFS);
 	clayManager.loadStatesIntoSuperRegions();
-	provinceMapper.loadProvinceMappings("configurables/province_mappings.txt");
+	if (configuration.configBlock.vn)
+		provinceMapper.loadProvinceMappings("configurables/vn_province_mappings.txt");
+	else
+		provinceMapper.loadProvinceMappings("configurables/province_mappings.txt");
 	countryMapper = std::make_shared<mappers::CountryMapper>();
 	countryMapper->loadMappingRules("configurables/country_mappings.txt");
 	religionMapper.loadMappingRules("configurables/religion_map.txt");
@@ -67,7 +71,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	popManager.initializeVanillaPops(dwFS);
 
 	// inject vanilla substates into map holes.
-	clayManager.injectVanillaSubStates(dwFS, politicalManager, popManager);
+	clayManager.injectVanillaSubStates(dwFS, politicalManager, popManager, configuration.configBlock.vn);
 
 	Log(LogLevel::Progress) << "50 %";
 	// handling demographics
@@ -75,8 +79,11 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	Log(LogLevel::Progress) << "51 %";
 	// generating decentralized countries
-	clayManager.shoveRemainingProvincesIntoSubStates();
-	politicalManager.generateDecentralizedCountries(clayManager, popManager);
+	if (!configuration.configBlock.vn)
+	{
+		clayManager.shoveRemainingProvincesIntoSubStates();
+		politicalManager.generateDecentralizedCountries(clayManager, popManager);
+	}
 
 	Log(LogLevel::Progress) << "52 %";
 	// converting all 3 types of countries - generated decentralized, extinct vanilla-only, and EU4 imports.
