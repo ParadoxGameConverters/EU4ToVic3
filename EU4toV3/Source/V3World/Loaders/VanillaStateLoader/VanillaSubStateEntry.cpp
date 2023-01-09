@@ -25,7 +25,15 @@ void V3::VanillaSubStateEntry::registerKeys()
 	registerKeyword("owned_provinces", [this](std::istream& theStream) {
 		const auto theProvinces = commonItems::getStrings(theStream);
 		for (const auto& province: theProvinces)
-			provinces.emplace(province);
+		{
+			auto theProvinceName = province;
+			std::ranges::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
+			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
+				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1); // from "x12345a" to x12345A
+			else
+				Log(LogLevel::Warning) << "Loading province " << theProvinceName << " in unknown format!";
+			provinces.emplace(theProvinceName);
+		}
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

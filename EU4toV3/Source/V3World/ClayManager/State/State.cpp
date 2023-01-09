@@ -24,7 +24,7 @@ void V3::State::registerKeys()
 		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{
 			auto theProvinceName = provinceName;
-			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
+			std::ranges::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
 			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
 				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1); // from "x12345a" to x12345A
 			else
@@ -38,7 +38,7 @@ void V3::State::registerKeys()
 		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{
 			auto theProvinceName = provinceName;
-			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
+			std::ranges::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
 			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
 				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1);
 			else
@@ -53,7 +53,7 @@ void V3::State::registerKeys()
 		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{
 			auto theProvinceName = provinceName;
-			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
+			std::ranges::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
 			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
 				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1);
 			else
