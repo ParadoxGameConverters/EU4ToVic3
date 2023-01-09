@@ -1,5 +1,4 @@
 #include "ClayManager/ClayManager.h"
-#include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "CountryManager/EU4Country.h"
 #include "CountryMapper/CountryMapper.h"
@@ -17,17 +16,19 @@
 #include <gmock/gmock-matchers.h>
 
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {Mod("Some mod", "TestFiles/mod/themod/")});
+
 namespace
 {
 std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
 {
 	auto eu4Path = "TestFiles/eu4installation/";
 	EU4::DefaultMapParser defaults;
-	defaults.loadDefaultMap(eu4Path, {});
+	defaults.loadDefaultMap(eu4FS);
 	EU4::DefinitionScraper definitions;
-	definitions.loadDefinitions(eu4Path, {});
+	definitions.loadDefinitions(eu4FS);
 	EU4::RegionManager regionMapper;
-	regionMapper.loadRegions(eu4Path, {});
+	regionMapper.loadRegions(eu4FS);
 
 	std::stringstream provinceStream;
 	provinceStream << "-1={}\n";																																		// sea, no ownership
@@ -82,13 +83,11 @@ std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
 V3::PoliticalManager prepWorld()
 {
 	const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
-	auto eu4Path = "TestFiles/eu4installation/";
-	Mods mods;
-	mods.emplace_back(Mod("Some mod", "TestFiles/mod/themod/"));
+
 	EU4::ReligionLoader religionLoader;
-	religionLoader.loadReligions(eu4Path, mods);
+	religionLoader.loadReligions(eu4FS);
 	EU4::CultureLoader cultureLoader;
-	cultureLoader.loadCultures(eu4Path, mods);
+	cultureLoader.loadCultures(eu4FS);
 
 	auto [clayManager, politicalManager] = prepManagers();
 	mappers::ReligionMapper relMapper;
