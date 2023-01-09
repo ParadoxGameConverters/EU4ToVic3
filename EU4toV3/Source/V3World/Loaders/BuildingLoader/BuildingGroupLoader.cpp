@@ -1,8 +1,8 @@
 #include "BuildingGroupLoader.h"
-#include "BuildingGroup.h"
-#include "BuildingGroups.h"
 #include "CommonFunctions.h"
 #include "CommonRegexes.h"
+#include "EconomyManager/Building/BuildingGroup.h"
+#include "EconomyManager/Building/BuildingGroups.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 

@@ -13,6 +13,7 @@
 #include "PopManager/PopManager.h"
 #include "TechValues/TechValues.h"
 #include <cmath>
+#include <numeric>
 #include <ranges>
 
 void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFilesystem& modFS)
@@ -334,8 +335,22 @@ void V3::PoliticalManager::setupLaws()
 		grantLawFromGroup("lawgroup_health_system", country);
 		grantLawFromGroup("lawgroup_welfare", country);
 		++counter;
+
+		// Laws are set, figure out which institutions our laws have
+		setupInstitutions(country);
 	}
 	Log(LogLevel::Info) << "<> " << counter << " countries codified.";
+}
+
+void V3::PoliticalManager::setupInstitutions(const std::shared_ptr<Country>& country) const
+{
+	for (const auto& law: country->getProcessedData().laws)
+	{
+		if (auto institution = lawMapper.getLaws().at(law).institution; !institution.empty())
+		{
+			country->addInstitution(institution);
+		}
+	}
 }
 
 void V3::PoliticalManager::grantLawFromGroup(const std::string& lawGroup, const std::shared_ptr<Country>& country) const
@@ -611,4 +626,17 @@ void V3::PoliticalManager::importVNColonialDiplomacy(const ClayManager& clayMana
 			agreements.push_back(newAgreement);
 		}
 	}
+}
+
+int V3::PoliticalManager::getWorldPopCount() const
+{
+	auto theCountries = std::views::values(countries);
+	return getCountriesPopCount({theCountries.begin(), theCountries.end()});
+}
+
+int V3::PoliticalManager::getCountriesPopCount(std::vector<std::shared_ptr<Country>> theCountries)
+{
+	return std::accumulate(theCountries.begin(), theCountries.end(), 0, [](int sum, const auto& country) {
+		return sum + country->getPopCount();
+	});
 }

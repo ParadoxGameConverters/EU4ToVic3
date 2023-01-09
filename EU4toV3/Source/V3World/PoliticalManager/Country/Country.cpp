@@ -1,9 +1,11 @@
 #include "Country.h"
 #include "ClayManager/ClayManager.h"
+#include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "CommonRegexes.h"
 #include "CountryManager/EU4Country.h"
 #include "CultureMapper/CultureMapper.h"
+#include "Loaders/LawLoader/Law.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
 #include "Loaders/LocalizationLoader/EU4LocalizationLoader.h"
 #include "Log.h"
@@ -39,6 +41,84 @@ void V3::Country::initializeCountry(std::istream& theStream)
 	vanillaData = VanillaCommonCountryData();
 	parseStream(theStream);
 	clearRegisteredKeywords();
+}
+
+std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop(const double percentile) const
+{
+	// Ranks this country's substates by population then returns the top x% of them by population, the largest state will always be returned.
+	auto sortedSubstates(substates);
+
+	// descending order
+	auto popComparison = [](const std::shared_ptr<SubState>& lhs, const std::shared_ptr<SubState>& rhs) {
+		return lhs->getSubStatePops().getPopCount() > rhs->getSubStatePops().getPopCount();
+	};
+
+	std::ranges::sort(sortedSubstates, popComparison);
+
+	const int numTopSubstates = std::max(static_cast<int>(static_cast<double>(sortedSubstates.size()) * percentile), 1);
+
+	return std::vector<std::shared_ptr<V3::SubState>>{sortedSubstates.begin(), sortedSubstates.begin() + numTopSubstates};
+}
+
+double V3::Country::calculateBureaucracyUsage(const std::map<std::string, V3::Law>& lawsMap) const
+{
+	// None of the hard-coded Vic3 values needed to calc this are in the defines for some reason.
+	double usage = 0.0;
+
+	usage += calcSubStateBureaucracy(lawsMap);
+	usage += calcInstitutionBureaucracy();
+	usage += calcCharacterBureaucracy();
+
+	return usage;
+}
+
+bool V3::Country::hasAnyOfTech(const std::vector<std::string>& techs) const
+{
+	if (techs.empty())
+	{
+		return true;
+	}
+
+	return std::ranges::any_of(techs, [&](const std::string& tech) {
+		return processedData.techs.contains(tech);
+	});
+}
+
+void V3::Country::distributeGovAdmins(const int numGovAdmins) const
+{
+	const auto topSubstates = topPercentileStatesByPop(0.3);
+	const auto topPop = getPopCount(topSubstates);
+
+	// Pass out buildings by pop proportion of this subset of States, can't round, so truncate and hand out remainders later.
+	int assigned = 0;
+	for (const auto& substate: topSubstates)
+	{
+		const double popProportion = static_cast<double>(substate->getSubStatePops().getPopCount()) / topPop;
+		const int levels = static_cast<int>(popProportion * numGovAdmins);
+
+		substate->setBuildingLevel("building_government_administration", levels);
+		if (const auto setLevel = substate->getBuildingLevel("building_government_administration"); setLevel)
+		{
+			assigned += setLevel.value();
+		}
+		else
+		{
+			Log(LogLevel::Error) << "Couldn't set level of Government Administration in " << tag << "'s SubState in : " << substate->getHomeState()->getName();
+		}
+	}
+
+	// Handing out remainders, should be less than # of topSubstates
+	for (const auto& substate: topSubstates)
+	{
+		const auto levels = substate->getBuildingLevel("building_government_administration");
+		substate->setBuildingLevel("building_government_administration", levels.value_or(0) + 1);
+		++assigned;
+
+		if (numGovAdmins - assigned <= 0)
+		{
+			break;
+		}
+	}
 }
 
 void V3::Country::registerKeys()
@@ -423,6 +503,81 @@ void V3::Country::determineCountryType()
 	}
 }
 
+[[nodiscard]] double V3::Country::calcSubStateBureaucracy(const std::map<std::string, V3::Law>& lawsMap) const
+{
+	double lawsMult = 0;
+	for (const auto& law: processedData.laws)
+	{
+		if (!lawsMap.contains(law))
+		{
+			Log(LogLevel::Warning) << "Finding bureaucracy multiplier of law: " << law << " that has no definition! Skipping.";
+			continue;
+		}
+
+		lawsMult += lawsMap.at(law).bureaucracyCostMult;
+	}
+	lawsMult = std::max(lawsMult + 1.0, 0.0);
+
+
+	double usage = 0;
+	for (const auto& substate: substates)
+	{
+		if (!substate->isIncorporated())
+		{
+			continue;
+		}
+		// Incorporated States - 10 per incorporated state
+		usage += 10;
+
+		// Pops - only pops in incorporated states count
+		// Modified by laws - game caps this at 0
+		usage += substate->getSubStatePops().getPopCount() / 25000.0 * lawsMult;
+	}
+	return usage;
+}
+
+[[nodiscard]] double V3::Country::calcInstitutionBureaucracy() const
+{
+	double usage = 0;
+	const double cost = getPopCount() / 100000.0;
+	for (const auto& institution: processedData.institutions)
+	{
+		usage += cost * 1; // If we end up mapping institution levels, it is cost * levels
+	}
+	return usage;
+}
+
+[[nodiscard]] double V3::Country::calcCharacterBureaucracy() const
+{
+	double usage = 0;
+
+	for (const auto& character: processedData.characters)
+	{
+		if (!character.admiral && !character.general)
+			continue;
+
+		// Defaulted commanders & rulers
+		if (character.commanderRank.empty() || character.commanderRank.find("ruler") != std::string::npos)
+		{
+			usage += 10;
+			continue;
+		}
+
+		// Commanders with ranks 1->5
+		try
+		{
+			const int rank = std::stoi(character.commanderRank.substr(character.commanderRank.length() - 1));
+			usage += 5 * (rank + 1);
+		}
+		catch (std::exception& e)
+		{
+			Log(LogLevel::Error) << "Broken military leader rank: " << character.commanderRank << " - " << e.what();
+		}
+	}
+
+	return usage;
+}
+
 void V3::Country::applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper)
 {
 	auto literacyEffect = populationSetupMapper.getLiteracyEffectForLiteracy(processedData.literacy);
@@ -614,4 +769,16 @@ void V3::Country::convertCharacters(const mappers::CharacterTraitMapper& charact
 
 		processedData.characters.emplace_back(character);
 	}
+}
+
+int V3::Country::getPopCount() const
+{
+	return getPopCount(substates);
+}
+
+int V3::Country::getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubstates)
+{
+	return std::accumulate(theSubstates.begin(), theSubstates.end(), 0, [](int sum, const auto& substate) {
+		return sum + substate->getSubStatePops().getPopCount();
+	});
 }

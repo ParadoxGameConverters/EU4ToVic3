@@ -157,3 +157,23 @@ TEST(V3World_StateModifierTests, GettingBuildingGroupDataTravelsHeirarchy)
 
 	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingGroupModifier("bg_light_industry", buildingGroups).value());
 }
+
+TEST(V3World_StateModifierTests, GetAllBonusesCombinesLikeBonuses)
+{
+	std::stringstream input;
+	input << "\ticon = \"gfx/ignore/me.dds\"\n";
+	input << "\tmodifier = {\n";
+	input << "\t\tbuilding_group_bg_manufacturing_throughput_mult = 0.2\n";
+	input << "\t\tbuilding_group_bg_fish_throughput_mult = 0.4\n";
+	input << "\t\tbuilding_group_bg_coconut_throughput_mult = -0.1\n";
+	input << "\t\tbuilding_output_lime_mult = 0.1\n";
+	input << "\t\tbuilding_output_coconut_mult = 0.2\n";
+	input << "\t}\n";
+
+	V3::StateModifier modifier;
+	modifier.loadStateModifier(input);
+
+	EXPECT_DOUBLE_EQ(0.5, V3::StateModifier::getAllBonuses(modifier.getBuildingGroupModifiersMap()));
+	EXPECT_DOUBLE_EQ(0, V3::StateModifier::getAllBonuses(modifier.getBuildingModifiersMap()));
+	EXPECT_DOUBLE_EQ(0.3, V3::StateModifier::getAllBonuses(modifier.getGoodsModifiersMap()));
+}

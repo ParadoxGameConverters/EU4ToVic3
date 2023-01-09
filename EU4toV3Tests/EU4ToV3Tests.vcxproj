@@ -136,6 +136,8 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\CharacterTraitMapper\AssignmentMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CharacterTraitMapper\CharacterTraitMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CharacterTraitMapper\SkillMapping.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\BuildingMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\BuildingMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialRegionMapper\ColonialRegionMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialRegionMapper\ColonialRegionMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialTagMapper\ColonialTagMapper.cpp" />
@@ -189,13 +191,28 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\FlagCrafter\FlagColorLoader\FlagColorLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\FlagCrafter\FlagCrafter.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\FlagCrafter\FlagNameLoader\FlagNameLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingGroup.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\Building.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\BuildingGroup.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\BuildingGroups.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\ProductionMethods\ProductionMethod.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\ProductionMethods\ProductionMethodGroup.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\EconomyManager.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\NationalBudget\Sector.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingGroupLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingGroups.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\ProductionMethodLoader\ProductionMethodGroupLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\ProductionMethodLoader\ProductionMethodLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\CountryDefinitionLoader\CountryDefinitionLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LawLoader\LawEntry.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LawLoader\LawLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\DefinesLoader\BuildingScriptValuesLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\DefinesLoader\EconDefinesLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LocLoader\LocalizationLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\NationalBudgetLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\Script\AddScript.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\Script\MathScript.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\Script\MultiplyScript.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\SectorLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\PopEntry.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\PopLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\StateEntries.cpp" />
@@ -207,6 +224,7 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\SuperRegionLoader\V3Region.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\SuperRegionLoader\V3SuperRegion.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TerrainLoader\TerrainLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TerrainLoader\TerrainModifierLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaStateEntries.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaStateEntry.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaStateLoader.cpp" />
@@ -280,6 +298,8 @@
     <ClCompile Include="MapperTests\ColonialRegionMapperTests\ColonialRegionMappingTests.cpp" />
     <ClCompile Include="MapperTests\ColonialTagMapperTests\ColonialTagMapperTests.cpp" />
     <ClCompile Include="MapperTests\ColonialTagMapperTests\ColonialTagMappingTests.cpp" />
+    <ClCompile Include="MapperTests\BuildingMapperTests\BuildingMapperTests.cpp" />
+    <ClCompile Include="MapperTests\BuildingMapperTests\BuildingMappingTests.cpp" />
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMapperTests.cpp" />
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMappingTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureDefinitionLoaderTests\CultureDefinitionEntryTests.cpp" />
@@ -328,11 +348,25 @@
     <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagColorLoaderTests\FlagColorLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagCrafterTests.cpp" />
     <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagNameLoaderTests\FlagNameLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\BuildingGroupsTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\BuildingTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\ProductionMethodGroupTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\ProductionMethodTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\EconomyManagerTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\NationalBudgetTests\SectorTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\BuildingGroupLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\BuildingLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\ProductionMethodGroupLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\ProductionMethodLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\CountryDefinitionLoaderTests\CountryDefinitionLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\LawLoaderTests\LawEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\LawLoaderTests\LawLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\BuildingScriptValuesLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\EconDefniesLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\LocLoaderTests\LocalizationLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\NationalBudgetLoaderTests\MathScriptTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\NationalBudgetLoaderTests\NationalBudgetLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\NationalBudgetLoaderTests\SectorLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\PopEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\PopLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\StateEntriesTests.cpp" />
@@ -344,6 +378,7 @@
     <ClCompile Include="V3WorldTests\LoaderTests\SuperRegionLoaderTests\V3RegionTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\SuperRegionLoaderTests\V3SuperRegionTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\TerrainLoaderTests\TerrainLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\TerrainLoaderTests\TerrainModifierLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaStateLoaderTests\VanillaStateEntriesTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaStateLoaderTests\VanillaStateEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaStateLoaderTests\VanillaStateLoaderTests.cpp" />
@@ -660,6 +695,33 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\colonial_tags.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\script_values\building_values.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/script_values</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\buildings\test_buildings.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/buildings</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\production_methods\test_pms.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/production_methods/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\production_method_groups\test_pm_groups.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/production_method_groups/</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\economy\buildings_map.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables/economy</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\economy\econ_defines.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables/economy</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\economy\national_budget.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables/economy</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

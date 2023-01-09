@@ -16,6 +16,8 @@
 
 const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {Mod("Some mod", "TestFiles/mod/themod/")});
 
+namespace
+{
 std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
 {
 	EU4::DefaultMapParser defaults;
@@ -103,6 +105,7 @@ prepMappers()
 
 	return std::tuple{popManager, politicalManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader};
 }
+} // namespace
 
 TEST(V3World_PopManagerTests, popManagerCanInitializeVanillaPopsAndPingThem)
 {

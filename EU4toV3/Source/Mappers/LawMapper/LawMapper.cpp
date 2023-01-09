@@ -118,9 +118,9 @@ bool mappers::LawMapper::isLawBlocked(const std::string& lawName, const std::set
 		if (law.blockingLaws.contains(existingLaw))
 			return true;
 
-	if (!law.reqiredLaws.empty())
+	if (!law.requiredLaws.empty())
 	{
-		const bool match = std::ranges::any_of(law.reqiredLaws.begin(), law.reqiredLaws.end(), [existingLaws](const auto& law) {
+		const bool match = std::ranges::any_of(law.requiredLaws.begin(), law.requiredLaws.end(), [existingLaws](const auto& law) {
 			return existingLaws.contains(law);
 		});
 		if (!match)

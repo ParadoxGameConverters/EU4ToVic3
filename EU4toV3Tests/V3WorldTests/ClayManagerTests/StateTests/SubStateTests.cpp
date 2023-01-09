@@ -306,3 +306,15 @@ TEST(V3World_SubStateTests, InfrastructureCalculationExcessNegativeModifiersCap)
 
 	EXPECT_DOUBLE_EQ(0.0, substate.getInfrastructure());
 }
+
+TEST(V3World_SubStateTests, BuildingLevelsCanBeGetAndSet)
+{
+	auto substate = V3::SubState();
+
+	EXPECT_TRUE(substate.getBuildings().empty());
+
+	substate.setBuildingLevel("fish", 5);
+
+	EXPECT_EQ(5, substate.getBuildingLevel("fish"));
+	EXPECT_FALSE(substate.getBuildingLevel("iron"));
+}

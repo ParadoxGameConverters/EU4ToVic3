@@ -17,6 +17,8 @@ class LawEntry: commonItems::parser
   private:
 	void registerKeys();
 
+	parser modifierParser;
+
 	Law law;
 };
 } // namespace V3

@@ -54,6 +54,10 @@ class SubState
 	void setSubStatePops(const SubStatePops& thePops) { subStatePops = thePops; }
 	void addPop(const Pop& pop) { subStatePops.addPop(pop); }
 
+	void setIndustryWeight(const double theIndustryWeight) { industryWeight = theIndustryWeight; }
+	void setCPBudget(const int theCPBudget) { CPBudget = theCPBudget; }
+	void setBuildingLevel(const std::string& building, const int level) { buildings[building] = level; }
+
 	void convertDemographics(const ClayManager& clayManager,
 		 mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
@@ -78,9 +82,15 @@ class SubState
 	[[nodiscard]] const auto& getLandshare() const { return landshare; }
 	[[nodiscard]] const auto& getInfrastructure() const { return infrastructure; }
 	[[nodiscard]] const auto& getResource(const std::string& theResource) { return resources[theResource]; }
-	[[nodiscard]] const auto& getTerrainFrequency(const std::string& theTerrain) { return terrainFrequency[theTerrain]; }
+	[[nodiscard]] double getTerrainFrequency(const std::string& theTerrain) const;
+	[[nodiscard]] const auto& getTerrainFrequencies() { return terrainFrequency; }
 	[[nodiscard]] const auto& getDemographics() const { return demographics; }
 	[[nodiscard]] const auto& getSubStatePops() const { return subStatePops; }
+
+	[[nodiscard]] const auto& getIndustryWeight() const { return industryWeight; }
+	[[nodiscard]] const auto& getCPBudget() const { return CPBudget; }
+	[[nodiscard]] std::optional<int> getBuildingLevel(const std::string& building) const;
+	[[nodiscard]] const auto& getBuildings() const { return buildings; }
 
 	[[nodiscard]] auto isIncorporated() const { return incorporated; }
 	[[nodiscard]] auto isMarketCapital() const { return marketCapital; }
@@ -113,6 +123,10 @@ class SubState
 	std::map<std::string, double> terrainFrequency; // Normalized vector (math-wise) of terrain in substate as %
 	std::vector<Demographic> demographics;
 	SubStatePops subStatePops;
+
+	double industryWeight = 0;				  // Share of owner's industry a substate should get, not normalized
+	int CPBudget = 0;							  // Construction Points for a substate to spend on it's development
+	std::map<std::string, int> buildings; // building -> level
 };
 } // namespace V3
 

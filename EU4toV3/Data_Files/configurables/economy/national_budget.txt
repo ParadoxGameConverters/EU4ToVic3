@@ -1,0 +1,149 @@
+# This is the baseline national budget that all countries will use
+# Sectors marked as industrial will get severe penalities for countries without a full industrial score
+
+# Sector weights may be modified by Vic3 laws, colonial status
+
+# The national budget forms the country's opinon of what should be built,
+# but still must face the realities of technology/resource availability and the desire of the states.
+
+construction = {
+    weight = 0.25
+
+    building_construction_center
+}
+
+infrastructure = {
+    weight = 5
+
+    building_port
+    building_railway
+}
+
+military = {
+    weight = 12
+
+    building_barracks
+
+    multiply = {
+        value = 0.1
+        vic3_law = law_national_militia
+    }
+    multiply = {
+        value = 1.5
+        vic3_law = law_peasant_levy
+    }
+}
+
+naval = {
+    weight = 3
+
+    buillding_naval_base
+}
+
+farming = {
+    weight = 15
+
+    building_rye_farm
+    building_rice_farm
+    building_wheat_farm
+    building_maize_farm
+    building_millet_farm
+    building_livestock_ranch
+}
+
+extraction = {
+    weight = 5
+
+    building_logging_camp
+    building_fishing_wharf
+
+    multiply = {
+        value = 3
+        v3_law = law_serfdom
+    }
+}
+
+mining = {
+    weight = 10
+
+    building_iron_mine
+    building_lead_mine
+    building_coal_mine
+    building_sulfur_mine
+    building_gold_mine
+}
+
+plantation = {
+    weight = 15
+
+    building_coffee_plantation
+    building_cotton_plantation
+    building_dye_plantation
+    building_opium_plantation
+    building_tea_plantation
+    building_tobacco_plantation
+    building_sugar_plantation
+    building_banana_plantation
+    building_silk_plantation
+
+    multiply = {
+        value = 1.5
+        is_colony = yes
+    }
+    # multiply = {
+    #     value = 2.5
+    #     is_trade_company = yes
+    # }
+}
+
+whaling = {
+    weight = 0.5
+
+    building_whaling_station
+
+}
+
+scholarly = {
+    industrial = yes
+
+    weight = 2.5
+
+    building_arts_academy
+    building_university
+}
+
+light_industry = {
+    wieght = 25
+
+    building_textile_mills
+    building_furniture_manufactories
+    building_glassworks
+    building_paper_mills
+    building_shipyards
+}
+
+western_industry = {
+    industrial = yes
+
+    weight = 10
+
+    building_tool_workshops
+    building_food_industry
+    building_arms_industry
+}
+
+heavy_industry = {
+    industrial = yes
+
+    weight = 0
+
+    building_chemical_plant
+    building_steel_mills
+    building_motor_industries
+    building_munition_plants
+
+   # add = {
+   #     value = 3
+   #     is_eu4_gp = yes
+   # }
+}

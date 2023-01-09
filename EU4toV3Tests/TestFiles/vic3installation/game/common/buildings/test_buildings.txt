@@ -1,0 +1,63 @@
+# MANUFACTURING INDUSTRIES
+
+building_food_industry = {
+	building_group = bg_light_industry
+	texture = "gfx/interface/icons/building_icons/food_industry.dds"
+	city_type = city
+	levels_per_mesh = 5
+	
+	unlocking_technologies = {
+		manufacturies
+	}
+
+	production_method_groups = {
+		pmg_food
+		pmg_canning
+		pmg_distillery
+		pmg_automation
+		pmg_ownership
+	}
+
+	required_construction = construction_cost_medium
+	
+}
+
+building_textile_mills = {
+	building_group = bg_light_industry
+	texture = "gfx/interface/icons/building_icons/textile_industry.dds"
+	city_type = city
+	levels_per_mesh = 5
+	
+	unlocking_technologies = {
+		manufacturies
+	}
+
+	production_method_groups = {
+		pmg_textile
+		pmg_luxury
+		pmg_automation
+		pmg_ownership
+	}
+	
+	required_construction = 239
+}
+
+building_furniture_manufacturies = {
+	building_group = bg_light_industry
+	texture = "gfx/interface/icons/building_icons/furniture_manufacturies.dds"
+	city_type = city
+	levels_per_mesh = 5
+	
+	unlocking_technologies = {
+		manufacturies
+	}
+
+	production_method_groups = {
+		pmg_furniture
+		pmg_luxury
+		pmg_automation
+		pmg_ownership
+	}
+
+	required_construction = apples
+}

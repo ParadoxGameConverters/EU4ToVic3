@@ -1,0 +1,127 @@
+# Used to determine investment in state regions / building types
+# Applies based on the percentage a state is a particular terrain type
+# All values are 0 by default if not listed
+#
+# priority = x; A % bonus to a country's willingness to invest in a state
+# building_name = x; A % bonus to the chance of a building being built in a state
+#
+# 0.2 = 20% bonus.
+
+
+coastal = {
+    priority = 0.5
+
+    building_fishing_wharf = 1.5
+    building_whaling_station = 0.5
+    building_shipyards = 1
+    building_textile_mills = 0.2
+    building_furniture_manufactories = 0.2
+    building_glassworks = 0.1
+    building_paper_mills = 0.1
+}
+
+desert = {
+    priority = -0.3
+
+    building_glassworks = 0.2
+
+    building_rye_farm = -0.3
+    building_rice_farm = -0.3
+    building_wheat_farm = -0.3
+    building_maize_farm = -0.3
+    building_millet_farm = -0.3
+}
+
+forest = {
+    priority = 0.1
+
+    building_paper_mills = 0.2
+    building_shipyards = 0.2
+    building_furniture_manufactories = 0.1
+    building_logging_camp = 0.8
+}
+
+hills = {
+    priority = 0
+
+    building_iron_mine = 0.4
+    building_lead_mine = 0.1
+    building_coal_mine = 0.2
+    building_sulfur_mine = 0.2
+    building_gold_mine = 0.2
+    building_livestock_ranch = 0.6
+}
+
+jungle = {
+    priority = -0.1
+
+    building_logging_camp = 0.2
+    building_coffee_plantation = 0.2
+    building_dye_plantation = 0.2
+    building_opium_plantation = 0.2
+    building_tea_plantation = 0.2
+    building_tobacco_plantation = 0.2
+    building_sugar_plantation = 0.2
+    building_banana_plantation = 0.2
+    building_livestock_ranch = 0.1
+}
+
+mountain = {
+    priority = -0.2
+
+    building_iron_mine = 0.8
+    building_lead_mine = 0.2
+    building_coal_mine = 1
+    building_sulfur_mine = 0.5
+    building_gold_mine = 1
+
+    building_rye_farm = -0.5
+    building_rice_farm = -0.5
+    building_wheat_farm = -0.5
+    building_maize_farm = -0.5
+    building_millet_farm = -0.5
+}
+
+plains = {
+    priority = 0.2
+
+    building_rye_farm = 0.5
+    building_wheat_farm = 0.5
+    building_maize_farm = 0.5
+    building_millet_farm = 0.5
+}
+
+savanna = {
+    priority = -0.1
+
+    building_wheat_farm = 0.3
+    building_maize_farm = 0.3
+    building_millet_farm = 0.4
+}
+
+snow = {
+    priority = -0.3
+
+    building_rye_farm = -0.3
+    building_rice_farm = -0.3
+    building_wheat_farm = -0.3
+    building_maize_farm = -0.3
+    building_millet_farm = -0.3
+}
+
+tundra = {
+    priority = -0.4
+
+    building_rye_farm = -0.5
+    building_rice_farm = -0.5
+    building_wheat_farm = -0.5
+    building_maize_farm = -0.5
+    building_millet_farm = -0.5
+}
+
+wetland = {
+    priority = 0
+
+    building_rice_farm = 0.6
+    building_sulfur_mine = 0.2
+}
