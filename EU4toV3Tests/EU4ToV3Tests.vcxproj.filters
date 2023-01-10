@@ -970,6 +970,36 @@
     <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\EconDefniesLoaderTests.cpp">
       <Filter>V3WorldTests\LoaderTests\DefinesLoaderTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaAgreementEntry.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\VanillaDiplomacyLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaDiplomacyEntries.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\VanillaDiplomacyLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaDiplomacyLoader.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\VanillaDiplomacyLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaRelationEntry.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\VanillaDiplomacyLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaTruceEntry.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\VanillaDiplomacyLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests\VanillaAgreementEntryTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests\VanillaDiplomacyEntriesTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests\VanillaDiplomacyLoaderTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests\VanillaRelationEntryTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests\VanillaTruceEntryTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1587,6 +1617,15 @@
     <Filter Include="MapperTests\VNColonialMapperTests">
       <UniqueIdentifier>{c65c49b1-cacd-457b-881a-443e87d6ba6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\history\diplomacy">
+      <UniqueIdentifier>{d1c6fca6-23c7-445a-8f39-7fca399d8b2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\V3World\Loaders\VanillaDiplomacyLoader">
+      <UniqueIdentifier>{214a6bfc-1f62-4939-95c1-edca0aed4193}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests">
+      <UniqueIdentifier>{d61d3d22-6b07-4b60-9ece-1b8e11e15683}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1803,6 +1842,30 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\economy\national_budget.txt">
       <Filter>TestFiles\configurables\economy</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_customs_union.txt">
+      <Filter>TestFiles\vic3installation\game\common\history\diplomacy</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_defensive_pacts.txt">
+      <Filter>TestFiles\vic3installation\game\common\history\diplomacy</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_favors.txt">
+      <Filter>TestFiles\vic3installation\game\common\history\diplomacy</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_relations.txt">
+      <Filter>TestFiles\vic3installation\game\common\history\diplomacy</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_rivalries.txt">
+      <Filter>TestFiles\vic3installation\game\common\history\diplomacy</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_subject_relationships.txt">
+      <Filter>TestFiles\vic3installation\game\common\history\diplomacy</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_trade_agreement.txt">
+      <Filter>TestFiles\vic3installation\game\common\history\diplomacy</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_truces.txt">
+      <Filter>TestFiles\vic3installation\game\common\history\diplomacy</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>
