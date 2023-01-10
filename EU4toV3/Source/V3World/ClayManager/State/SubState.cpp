@@ -11,6 +11,8 @@
 #include <numeric>
 #include <ranges>
 
+#include "EconomyManager/Building/Building.h"
+
 
 V3::SubState::SubState(std::shared_ptr<State> theHomeState, ProvinceMap theProvinces): homeState(std::move(theHomeState)), provinces(std::move(theProvinces))
 {
@@ -120,6 +122,45 @@ std::pair<int, double> V3::SubState::getStateInfrastructureModifiers(const State
 		mult += theStateModifiers.at(stateModifier)->getInfrastructureMult();
 	}
 	return std::make_pair(bonus, mult);
+}
+
+double V3::SubState::calcBuildingTerrainWeight(const std::string& building,
+	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers) const
+{
+	// Weight due to terrain
+	return 0.0;
+}
+
+double V3::SubState::calcBuildingEU4Weight(const std::string& building, const mappers::BuildingMapper& buildingMapper) const
+{
+	// Weight from having EU4 buildings that map to VIC3 buildings in SubState weighted data
+	return 0.0;
+}
+
+double V3::SubState::calcBuildingTraitWeight(const std::shared_ptr<V3::Building>& building,
+	 const std::map<std::string, std::shared_ptr<StateModifier>>& traitMap,
+	 const double traitStrength) const
+{
+	// Weight from having state traits that boost the building or building_group of building
+	// Goods outputs will be done later in PM pass
+	return 0.0;
+}
+
+double V3::SubState::calcBuildingInfrastructureWeight(const std::shared_ptr<V3::Building>& building) const
+{
+	// Weight for infrastructure producing buildings when near the infrastructure limit
+	// Hardcode to ports and rails until PM pass
+	return 0.0;
+}
+
+void V3::SubState::calcBuildingWeight(const std::shared_ptr<V3::Building>& building,
+	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
+	 const mappers::BuildingMapper& buildingMapper,
+	 const std::map<std::string, std::shared_ptr<StateModifier>>& traitMap,
+	 double traitStrength) const
+{
+	// sum all sub-functions functions, save to map of buildings -> weight
+	// possibly clean this up with some typedefs
 }
 
 void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap)

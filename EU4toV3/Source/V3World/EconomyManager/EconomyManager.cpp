@@ -42,6 +42,7 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 	loadTerrainModifierMatrices(filePath);
 	loadStateTraits(modFS);
 	loadBuildingInformation(modFS);
+	loadBuildingMappings(filePath);
 	loadEconDefines(filePath);
 	loadNationalBudgets(filePath);
 }
@@ -210,16 +211,53 @@ void V3::EconomyManager::assignSubStateCPBudgets(const Configuration::ECONOMY ec
 
 void V3::EconomyManager::balanceNationalBudgets() const
 {
-	// Read in national budget budget from configuration, calculate specifics based on country
-	// End result is each country has a set of instructions on what buildings have priority in its economy
+	// TODO(Gawquon): Implement and add sector map to country processed data
+	for (const auto& country: centralizedCountries)
+	{
+		double totalWeight = 0;
+
+		for (const auto& blueprint: nationalBudgets.getSectorBlueprints())
+		{
+			// Make sectors from blueprints
+			// Accumulate totalWeight
+		}
+
+		// for (const auto& sector: country->getProcessedData().sectors)
+		//{
+		//	sector.calculateBudget(totalWeight, country->getCPBudget());
+		// }
+
+		// Now subStates decide what they want, mostly independent of the nation as a whole.
+		planSubStateEconomies(country);
+	}
 }
 
-void V3::EconomyManager::planSubStateEconomies() const
+void V3::EconomyManager::planSubStateEconomies(const std::shared_ptr<Country>& country) const
 {
-	// Score each valid building for each SubState
-	// Terrain
-	// EU4Buildings
-	// State Traits
+	// Select the valid buildings
+	auto isValid = [country](const std::pair<std::string, std::shared_ptr<Building>>& buildingPair) {
+		// Skip government admins, they are special
+		if (buildingPair.first == "building_government_administration")
+		{
+			return false;
+		}
+		// We can only build what we have the tech for
+		if (!country->hasAnyOfTech(buildingPair.second->getUnlockingTechs()))
+		{
+			return false;
+		}
+
+		return true;
+	};
+
+	// Each SubState scores each valid building
+	for (const auto& substate: country->getSubStates())
+	{
+		for (const auto& [name, building]: buildings | std::views::filter(isValid))
+		{
+			substate->calcBuildingWeight(building, buildingTerrainModifiers, buildingMapper, stateTraits, econDefines.getStateTraitStrength());
+		}
+	}
 }
 
 void V3::EconomyManager::buildBuildings() const
@@ -427,6 +465,11 @@ void V3::EconomyManager::loadBuildingInformation(const commonItems::ModFilesyste
 	buildingGroups = buildingGroupLoader.getBuildingGroups();
 	PMs = PMLoader.getPMs();
 	PMGroups = PMGroupLoader.getPMGroups();
+}
+
+void V3::EconomyManager::loadBuildingMappings(const std::string& filePath)
+{
+	buildingMapper.loadBuildingMappings("configurables/economy/buildings_map.txt");
 }
 
 void V3::EconomyManager::loadEconDefines(const std::string& filePath)

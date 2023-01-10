@@ -2,6 +2,7 @@
 #define V3_SUBSTATE_H
 #include "ClayManager/ClayMapTypedefs.h"
 #include "Loaders/TechLoader/Tech.h"
+#include "Mappers/BuildingMapper/BuildingMapper.h"
 #include "PopManager/Demographic.h"
 #include "PopManager/Pops/SubStatePops.h"
 #include "SourceProvinceData.h"
@@ -29,6 +30,7 @@ class Country;
 class Chunk;
 class State;
 class StateModifier;
+class Building;
 class ClayManager;
 class SubState
 {
@@ -58,6 +60,12 @@ class SubState
 	void setIndustryWeight(const double theIndustryWeight) { industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theCPBudget) { CPBudget = theCPBudget; }
 	void setBuildingLevel(const std::string& building, const int level) { buildings[building] = level; }
+	void calcBuildingWeight(const std::shared_ptr<V3::Building>& building,
+		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
+		 const mappers::BuildingMapper& buildingMapper,
+		 const std::map<std::string, std::shared_ptr<StateModifier>>& traitMap,
+		 double traitStrength) const;
+	void calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap);
 
 	void convertDemographics(const ClayManager& clayManager,
 		 mappers::CultureMapper& cultureMapper,
@@ -67,7 +75,6 @@ class SubState
 
 	void generatePops(int totalAmount);
 
-	void calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap);
 
 	[[nodiscard]] const auto& getHomeState() const { return homeState; }
 	[[nodiscard]] const auto& getOwner() const { return owner; }
@@ -104,6 +111,14 @@ class SubState
 	void calculateTerrainFrequency();
 	[[nodiscard]] double getPopInfrastructure(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] std::pair<int, double> getStateInfrastructureModifiers(const StateModifiers& theStateModifiers) const;
+
+	[[nodiscard]] double calcBuildingTerrainWeight(const std::string& building,
+		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers) const;
+	[[nodiscard]] double calcBuildingEU4Weight(const std::string& building, const mappers::BuildingMapper& buildingMapper) const;
+	[[nodiscard]] double calcBuildingTraitWeight(const std::shared_ptr<V3::Building>& building,
+		 const std::map<std::string, std::shared_ptr<StateModifier>>& traitMap,
+		 double traitStrength) const;
+	[[nodiscard]] double calcBuildingInfrastructureWeight(const std::shared_ptr<V3::Building>& building) const;
 
 	std::shared_ptr<State> homeState; // home state
 	std::shared_ptr<Country> owner;

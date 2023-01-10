@@ -1,5 +1,6 @@
 #ifndef ECONOMY_MANAGER_H
 #define ECONOMY_MANAGER_H
+#include "BuildingMapper/BuildingMapper.h"
 #include "Configuration.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethod.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethodGroup.h"
@@ -54,7 +55,6 @@ class EconomyManager
 	void assignCountryCPBudgets(Configuration::ECONOMY economyType, const PoliticalManager& politicalManager) const;
 	void assignSubStateCPBudgets(Configuration::ECONOMY economyType) const;
 	void balanceNationalBudgets() const;
-	void planSubStateEconomies() const;
 	void buildBuildings() const;
 
 	[[nodiscard]] const auto& getCentralizedCountries() const { return centralizedCountries; }
@@ -68,12 +68,14 @@ class EconomyManager
 	[[nodiscard]] double calculateTerrainMultiplier(const std::shared_ptr<SubState>& subState) const;
 	[[nodiscard]] double calculateStateTraitMultiplier(const std::shared_ptr<SubState>& subState) const;
 
+	void planSubStateEconomies(const std::shared_ptr<Country>& country) const;
 	void distributeBudget(double globalCP, double totalIndustryScore) const;
 	void setPMs() const;
 
 	void loadTerrainModifierMatrices(const std::string& filePath = "");
 	void loadStateTraits(const commonItems::ModFilesystem& modFS);
 	void loadBuildingInformation(const commonItems::ModFilesystem& modFS);
+	void loadBuildingMappings(const std::string& filePath = "");
 	void loadEconDefines(const std::string& filePath = "");
 	void loadNationalBudgets(const std::string& filePath = "");
 	void loadTechMap(const commonItems::ModFilesystem& modFS);
@@ -90,6 +92,7 @@ class EconomyManager
 	std::map<std::string, double> stateTerrainModifiers;
 	std::map<std::string, std::map<std::string, double>> buildingTerrainModifiers;
 
+	mappers::BuildingMapper buildingMapper;
 	std::map<std::string, std::shared_ptr<Building>> buildings;
 	std::shared_ptr<BuildingGroups> buildingGroups;
 	std::map<std::string, ProductionMethod> PMs;
