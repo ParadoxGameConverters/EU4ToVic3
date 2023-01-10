@@ -7,10 +7,13 @@
 #include "Loaders/LocLoader/LocalizationLoader.h"
 #include "Loaders/LocalizationLoader/EU4LocalizationLoader.h"
 #include "Loaders/ReligionLoader/ReligionLoader.h"
+#include "Loaders/TechLoader/TechLoader.h"
 #include "PoliticalManager/Country/Country.h"
 #include "ReligionMapper/ReligionMapper.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
+
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 
 TEST(V3World_CountryTests, DefaultsDefaultToDefaults)
 {
@@ -271,4 +274,22 @@ TEST(V3World_CountryTests, PopCounterSumsSubStatePop)
 	country.addSubState(sub1);
 
 	EXPECT_EQ(1500, country.getPopCount());
+}
+
+TEST(V3World_CountryTests, InfrastructureFromCountryTech)
+{
+	V3::Country country;
+
+	V3::TechLoader techLoader;
+	techLoader.loadTechs(modFS);
+
+	V3::ProcessedData data;
+	data.techs.emplace("tech_1"); // Mult 20%, Max of 40
+	data.techs.emplace("tech_2"); // Mult 5%, Max of 10
+	data.techs.emplace("tech_4"); // No effect
+
+	country.setProcessedData(data);
+
+	EXPECT_EQ(50, country.getTechInfraCap(techLoader.getTechs()));
+	EXPECT_DOUBLE_EQ(0.25, country.getTechInfraMult(techLoader.getTechs()));
 }

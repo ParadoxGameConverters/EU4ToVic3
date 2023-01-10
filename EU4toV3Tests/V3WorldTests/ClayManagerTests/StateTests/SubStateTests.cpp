@@ -4,12 +4,15 @@
 #include "ClayManager/State/StateModifier.h"
 #include "ClayManager/State/SubState.h"
 #include "CultureLoader/CultureLoader.h"
+#include "Loaders/TechLoader/TechLoader.h"
 #include "Mappers/CultureMapper/CultureMapper.h"
 #include "Mappers/ReligionMapper/ReligionMapper.h"
 #include "PoliticalManager/Country/Country.h"
 #include "ReligionLoader/ReligionLoader.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
+
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 
 TEST(V3World_SubStateTests, OwnerTagCanBeSetAndRetrieved)
 {
@@ -202,47 +205,47 @@ TEST(V3World_SubStateTests, InfrastructureCalculationIsolateStateModifieres)
 	modifier1->loadStateModifier(modifierInput1);
 	modifier1->setName("trait1");
 
-	substate.calculateInfrastructure(V3::StateModifiers{{modifier0->getName(), modifier0}, {modifier1->getName(), modifier1}});
+	substate.calculateInfrastructure(V3::StateModifiers{{modifier0->getName(), modifier0}, {modifier1->getName(), modifier1}}, {});
 
 	EXPECT_DOUBLE_EQ(10.4, substate.getInfrastructure());
 }
 
-// TODO(Gawquon): Finish test after tech is implemented
-TEST(DISABLED_V3World_SubStateTests, InfrastructureCalculationIsolatePopFactor)
+TEST(V3World_SubStateTests, InfrastructureCalculationIsolatePopFactor)
 {
+	// Setup Country
 	auto country = std::make_shared<V3::Country>();
 	auto state = std::make_shared<V3::State>();
-	auto substate = V3::SubState();
 
-	substate.setOwner(country);
-	substate.setHomeState(state);
+	V3::ProcessedData data;
+	data.techs.emplace("tech_1");
+	country->setProcessedData(data);
 
-	V3::Demographic demo;
-	demo.culture = "cul";
-	demo.religion = "rel";
-	demo.upperRatio = 0.2; // total ratio sum 1
-	demo.middleRatio = 0.2;
-	demo.lowerRatio = 0.6;
+	auto substate0 = V3::SubState();
+	auto substate1 = V3::SubState();
 
-	substate.setDemographics({demo});
-	substate.generatePops(10000);
+	substate0.setOwner(country);
+	substate0.setHomeState(state);
+	substate1.setOwner(country);
+	substate1.setHomeState(state);
+
+	V3::Pop pop0;
+	V3::Pop pop1;
+	pop0.setSize(10000);
+	pop1.setSize(10000000);
+
+	substate0.addPop(pop0);
+	substate1.addPop(pop1);
 
 
-	// country->setTech({"tech"});
+	// Setup Loader
+	V3::TechLoader techLoader;
+	techLoader.loadTechs(modFS);
 
-	std::stringstream techInput;
-	techInput << "\tmodifier = {\n";
-	techInput << "\t\tstate_infrastructure_from_population_add = 0.2\n";
-	techInput << "\t\tstate_infrastructure_from_population_max_add = 4\n";
-	techInput << "\t}\n";
+	substate0.calculateInfrastructure({}, techLoader.getTechs());
+	substate1.calculateInfrastructure({}, techLoader.getTechs());
 
-	// auto tech = std::make_shared<V3::Technology>();
-	// tech->loadTechnology(techInput);
-	// std::map<std::string, std::shared_ptr<V3::Technology>> techMap({"tech", tech});
-
-	substate.calculateInfrastructure(V3::StateModifiers{});
-
-	EXPECT_DOUBLE_EQ(3.2, substate.getInfrastructure());
+	EXPECT_DOUBLE_EQ(3.2, substate0.getInfrastructure());
+	EXPECT_DOUBLE_EQ(43, substate1.getInfrastructure());
 }
 
 
@@ -255,15 +258,15 @@ TEST(V3World_SubStateTests, InfrastructureCalculationFactorsFromPrivateVariables
 	substate.setOwner(country);
 	substate.setHomeState(state);
 
-	substate.calculateInfrastructure(V3::StateModifiers{});
+	substate.calculateInfrastructure(V3::StateModifiers{}, {});
 	EXPECT_DOUBLE_EQ(3, substate.getInfrastructure());
 
 	substate.setMarketCapital();
-	substate.calculateInfrastructure(V3::StateModifiers{});
+	substate.calculateInfrastructure(V3::StateModifiers{}, {});
 	EXPECT_DOUBLE_EQ(3.75, substate.getInfrastructure());
 
 	substate.setUnincorporated();
-	substate.calculateInfrastructure(V3::StateModifiers{});
+	substate.calculateInfrastructure(V3::StateModifiers{}, {});
 	EXPECT_DOUBLE_EQ(3, substate.getInfrastructure());
 }
 
@@ -302,7 +305,7 @@ TEST(V3World_SubStateTests, InfrastructureCalculationExcessNegativeModifiersCap)
 	modifier1->loadStateModifier(modifierInput1);
 	modifier1->setName("trait1");
 
-	substate.calculateInfrastructure(V3::StateModifiers{{modifier0->getName(), modifier0}, {modifier1->getName(), modifier1}});
+	substate.calculateInfrastructure(V3::StateModifiers{{modifier0->getName(), modifier0}, {modifier1->getName(), modifier1}}, {});
 
 	EXPECT_DOUBLE_EQ(0.0, substate.getInfrastructure());
 }

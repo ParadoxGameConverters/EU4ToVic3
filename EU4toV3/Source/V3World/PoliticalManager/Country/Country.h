@@ -12,6 +12,8 @@
 #include <memory>
 #include <string>
 
+#include "Loaders/TechLoader/Tech.h"
+
 namespace EU4
 {
 class Country;
@@ -154,10 +156,8 @@ class Country: commonItems::parser
 	void addCustomFlag(FlagCrafter::FLAGTYPE flagType, const std::string& flagName) { processedData.customFlags.emplace(flagType, flagName); }
 	[[nodiscard]] const auto& getCustomFlags() const { return processedData.customFlags; }
 
-	// TODO(Gawquon): Implement, maximum infrastructure that can be created by population according to technology
-	[[nodiscard]] int getTechInfraCap() const { return 0; }
-	// TODO(Gawquon): Implement, multiplier for amount of infrastructure created by population
-	[[nodiscard]] double getTechInfraMult() const { return 0.0; }
+	[[nodiscard]] int getTechInfraCap(const std::map<std::string, Tech>& techMap) const;
+	[[nodiscard]] double getTechInfraMult(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] bool hasAnyOfTech(const std::vector<std::string>& techs) const;
 
 	void distributeGovAdmins(int numGovAdmins) const;
@@ -185,6 +185,7 @@ class Country: commonItems::parser
 	[[nodiscard]] double calcSubStateBureaucracy(const std::map<std::string, V3::Law>& lawsMap) const;
 	[[nodiscard]] double calcInstitutionBureaucracy() const;
 	[[nodiscard]] double calcCharacterBureaucracy() const;
+	[[nodiscard]] std::optional<Tech> getTechFromMap(const std::string& techName, const std::map<std::string, Tech>& techMap) const;
 
 	std::string tag;
 	std::optional<VanillaCommonCountryData> vanillaData;

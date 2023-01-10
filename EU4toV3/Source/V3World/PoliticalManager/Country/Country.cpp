@@ -72,6 +72,28 @@ double V3::Country::calculateBureaucracyUsage(const std::map<std::string, V3::La
 	return usage;
 }
 
+int V3::Country::getTechInfraCap(const std::map<std::string, Tech>& techMap) const
+{
+	return std::accumulate(processedData.techs.begin(), processedData.techs.end(), 0, [this, techMap](int sum, const std::string& techName) {
+		if (const auto& tech = getTechFromMap(techName, techMap); tech)
+		{
+			return sum + tech.value().infrastructureMax;
+		}
+		return sum;
+	});
+}
+
+double V3::Country::getTechInfraMult(const std::map<std::string, Tech>& techMap) const
+{
+	return std::accumulate(processedData.techs.begin(), processedData.techs.end(), 0.0, [this, techMap](double sum, const std::string& techName) {
+		if (const auto& tech = getTechFromMap(techName, techMap); tech)
+		{
+			return sum + tech.value().infrastructureMult;
+		}
+		return sum;
+	});
+}
+
 bool V3::Country::hasAnyOfTech(const std::vector<std::string>& techs) const
 {
 	if (techs.empty())
@@ -576,6 +598,16 @@ void V3::Country::determineCountryType()
 	}
 
 	return usage;
+}
+
+std::optional<V3::Tech> V3::Country::getTechFromMap(const std::string& techName, const std::map<std::string, Tech>& techMap) const
+{
+	if (!techMap.contains(techName))
+	{
+		Log(LogLevel::Error) << tag << "'s technology: " << techName << ", is not a recognized technology.";
+		return std::nullopt;
+	}
+	return techMap.at(techName);
 }
 
 void V3::Country::applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper)

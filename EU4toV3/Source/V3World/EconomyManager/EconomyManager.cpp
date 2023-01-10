@@ -439,3 +439,8 @@ void V3::EconomyManager::loadNationalBudgets(const std::string& filePath)
 	nationalBudgets.loadNationalBudget(filePath + "configurables/economy/national_budget.txt");
 	nationalBudgets.buildBuildingSectorMap();
 }
+
+void V3::EconomyManager::loadTechMap(const commonItems::ModFilesystem& modFS)
+{
+	techMap.loadTechs(modFS);
+}

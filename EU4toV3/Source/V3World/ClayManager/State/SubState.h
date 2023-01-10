@@ -1,6 +1,7 @@
 #ifndef V3_SUBSTATE_H
 #define V3_SUBSTATE_H
 #include "ClayManager/ClayMapTypedefs.h"
+#include "Loaders/TechLoader/Tech.h"
 #include "PopManager/Demographic.h"
 #include "PopManager/Pops/SubStatePops.h"
 #include "SourceProvinceData.h"
@@ -66,7 +67,7 @@ class SubState
 
 	void generatePops(int totalAmount);
 
-	void calculateInfrastructure(const StateModifiers& theStateModifiers);
+	void calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap);
 
 	[[nodiscard]] const auto& getHomeState() const { return homeState; }
 	[[nodiscard]] const auto& getOwner() const { return owner; }
@@ -101,7 +102,7 @@ class SubState
 
   private:
 	void calculateTerrainFrequency();
-	[[nodiscard]] double getPopInfrastructure() const;
+	[[nodiscard]] double getPopInfrastructure(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] std::pair<int, double> getStateInfrastructureModifiers(const StateModifiers& theStateModifiers) const;
 
 	std::shared_ptr<State> homeState; // home state

@@ -958,6 +958,18 @@
     <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\EconDefniesLoaderTests.cpp">
       <Filter>V3WorldTests\LoaderTests\DefinesLoaderTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TechLoader\TechEntry.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\TechLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TechLoader\TechLoader.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\TechLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\TechLoaderTests\TechEntryTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\TechLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\TechLoaderTests\TechLoaderTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\TechLoaderTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1569,6 +1581,18 @@
     <Filter Include="TestFiles\configurables\economy">
       <UniqueIdentifier>{87780099-ea20-452f-a003-b29afc7a4b78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\V3World\Loaders\TechLoader">
+      <UniqueIdentifier>{b31b12d2-5c3e-437b-b8f3-fd14f26446c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\LoaderTests\TechLoaderTests">
+      <UniqueIdentifier>{91baf2ed-9328-49d5-8e36-1cfb17af0ce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\technology">
+      <UniqueIdentifier>{f0567553-07b5-48dc-83ff-371eba4bad00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\technology\technologies">
+      <UniqueIdentifier>{3e9a6b9e-d057-4e9b-8279-eed2b240fa8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1785,6 +1809,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\economy\national_budget.txt">
       <Filter>TestFiles\configurables\economy</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\technology\technologies\test_tech.txt">
+      <Filter>TestFiles\vic3installation\game\common\technology\technologies</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

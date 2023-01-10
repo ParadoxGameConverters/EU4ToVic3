@@ -221,6 +221,8 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\SuperRegionLoader\SuperRegionLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\SuperRegionLoader\V3Region.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\SuperRegionLoader\V3SuperRegion.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TechLoader\TechEntry.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TechLoader\TechLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TerrainLoader\TerrainLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TerrainLoader\TerrainModifierLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaStateEntries.cpp" />
@@ -373,6 +375,8 @@
     <ClCompile Include="V3WorldTests\LoaderTests\SuperRegionLoaderTests\SuperRegionLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\SuperRegionLoaderTests\V3RegionTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\SuperRegionLoaderTests\V3SuperRegionTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\TechLoaderTests\TechEntryTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\TechLoaderTests\TechLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\TerrainLoaderTests\TerrainLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\TerrainLoaderTests\TerrainModifierLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaStateLoaderTests\VanillaStateEntriesTests.cpp" />
@@ -718,6 +722,11 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\economy\national_budget.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables/economy</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\technology\technologies\test_tech.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/technology/technologies</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

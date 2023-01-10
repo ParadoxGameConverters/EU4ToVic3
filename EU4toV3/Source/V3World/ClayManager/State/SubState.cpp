@@ -94,10 +94,11 @@ void V3::SubState::calculateTerrainFrequency()
 	}
 }
 
-double V3::SubState::getPopInfrastructure() const
+double V3::SubState::getPopInfrastructure(const std::map<std::string, Tech>& techMap) const
 {
-	const double popInfra = subStatePops.getPopCount() * owner->getTechInfraMult();
-	if (const int cap = owner->getTechInfraCap(); popInfra > cap)
+	// INDIVIDUALS_PER_POP_INFRASTRUCTURE = 10000
+	const double popInfra = subStatePops.getPopCount() * owner->getTechInfraMult(techMap) / 10000.0;
+	if (const int cap = owner->getTechInfraCap(techMap); popInfra > cap)
 	{
 		return cap;
 	}
@@ -121,9 +122,9 @@ std::pair<int, double> V3::SubState::getStateInfrastructureModifiers(const State
 	return std::make_pair(bonus, mult);
 }
 
-void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifiers)
+void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap)
 {
-	const double popInfra = getPopInfrastructure();
+	const double popInfra = getPopInfrastructure(techMap);
 	auto [stateModBonus, stateModMultipliers] = getStateInfrastructureModifiers(theStateModifiers);
 
 	// Principal = Base + isCoastal(substate lvl) + State modifier bonus + (Pop * tech)_capped
@@ -131,12 +132,9 @@ void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifie
 
 	// Multipliers are additive, market capital + incorporation status + state modifier multipliers
 	double multipliers = 0.25 * marketCapital + -0.25 * !incorporated + stateModMultipliers;
-	if (multipliers < -1)
-	{
-		multipliers = -1;
-	}
+	multipliers = std::max(0.0, multipliers + 1);
 
-	infrastructure = std::max(0.0, infraBase * (1 + multipliers));
+	infrastructure = infraBase * multipliers;
 }
 
 void V3::SubState::convertDemographics(const ClayManager& clayManager,
