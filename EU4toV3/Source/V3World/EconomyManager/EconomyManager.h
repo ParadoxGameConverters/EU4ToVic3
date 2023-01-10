@@ -4,6 +4,7 @@
 #include "EconomyManager/Building/ProductionMethods/ProductionMethod.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethodGroup.h"
 #include "Loaders/DefinesLoader/EconDefinesLoader.h"
+#include "Loaders/NationalBudgetLoader/NationalBudgetLoader.h"
 #include "PoliticalManager/PoliticalManager.h"
 
 namespace V3
@@ -73,11 +74,13 @@ class EconomyManager
 	void loadStateTraits(const commonItems::ModFilesystem& modFS);
 	void loadBuildingInformation(const commonItems::ModFilesystem& modFS);
 	void loadEconDefines(const std::string& filePath = "");
+	void loadNationalBudgets(const std::string& filePath = "");
 
 
 	std::vector<std::shared_ptr<Country>> centralizedCountries;
 
 	EconDefinesLoader econDefines;
+	NationalBudgetLoader nationalBudgets;
 
 	std::map<std::string, std::shared_ptr<StateModifier>> stateTraits;
 	std::map<std::string, double> stateTerrainModifiers;

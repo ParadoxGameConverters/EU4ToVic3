@@ -43,6 +43,7 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 	loadStateTraits(modFS);
 	loadBuildingInformation(modFS);
 	loadEconDefines(filePath);
+	loadNationalBudgets(filePath);
 }
 
 void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalManager) const
@@ -431,4 +432,10 @@ void V3::EconomyManager::loadBuildingInformation(const commonItems::ModFilesyste
 void V3::EconomyManager::loadEconDefines(const std::string& filePath)
 {
 	econDefines.loadEconDefines(filePath + "configurables/economy/econ_defines.txt");
+}
+
+void V3::EconomyManager::loadNationalBudgets(const std::string& filePath)
+{
+	nationalBudgets.loadNationalBudget(filePath + "configurables/economy/national_budget.txt");
+	nationalBudgets.buildBuildingSectorMap();
 }
