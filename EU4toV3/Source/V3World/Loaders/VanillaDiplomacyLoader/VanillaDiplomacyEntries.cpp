@@ -12,7 +12,7 @@ V3::VanillaDiplomacyEntries::VanillaDiplomacyEntries(std::istream& theStream)
 void V3::VanillaDiplomacyEntries::registerKeys()
 {
 	registerRegex(R"([c,C]:\w+)", [this](const std::string& sourceTag, std::istream& theStream) {
-		activeTag = sourceTag;
+		activeTag = sourceTag.substr(2, sourceTag.size());
 		entryParser.parseStream(theStream);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);

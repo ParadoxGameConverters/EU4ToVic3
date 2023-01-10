@@ -25,6 +25,12 @@ void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFile
 	countries = definitionLoader.getCountries();
 
 	Log(LogLevel::Info) << "<> " << countries.size() << " vanilla countries loaded.";
+
+	vanillaDiplomacyLoader.loadVanillaDiplomacy(modFS);
+
+	Log(LogLevel::Info) << "<> Loaded " << vanillaDiplomacyLoader.getAgreementEntries().size() << " vanilla agreements, "
+							  << vanillaDiplomacyLoader.getRelationEntries().size() << " vanilla relations and " << vanillaDiplomacyLoader.getTruceEntries().size()
+							  << " vanilla truces.";
 }
 
 void V3::PoliticalManager::loadCountryMapper(const std::shared_ptr<mappers::CountryMapper>& theCountryMapper)
@@ -598,6 +604,9 @@ void V3::PoliticalManager::changeTag(const std::string& replacement, const std::
 
 void V3::PoliticalManager::importVNColonialDiplomacy(const ClayManager& clayManager)
 {
+	Log(LogLevel::Info) << "-> Importing VN Colonial Diplomacy";
+	auto counter = 0;
+
 	for (const auto& colonyRule: clayManager.getVNColonialMapper().getVNColonies())
 	{
 		if (colonyRule.getSubjects().empty())
@@ -624,8 +633,11 @@ void V3::PoliticalManager::importVNColonialDiplomacy(const ClayManager& clayMana
 			newAgreement.second = targetTag;
 			newAgreement.type = colonyRule.getSubjectType();
 			agreements.push_back(newAgreement);
+			++counter;
 		}
 	}
+
+	Log(LogLevel::Info) << "<> Imported " << counter << " subject agreements.";
 }
 
 int V3::PoliticalManager::getWorldPopCount() const
@@ -639,4 +651,62 @@ int V3::PoliticalManager::getCountriesPopCount(std::vector<std::shared_ptr<Count
 	return std::accumulate(theCountries.begin(), theCountries.end(), 0, [](int sum, const auto& country) {
 		return sum + country->getPopCount();
 	});
+}
+
+void V3::PoliticalManager::importVanillaDiplomacy()
+{
+	Log(LogLevel::Info) << "-> Importing VN Vanilla Diplomacy";
+	auto agrCounter = 0;
+	auto relCounter = 0;
+	auto truCounter = 0;
+
+	for (const auto& agreement: vanillaDiplomacyLoader.getAgreementEntries())
+	{
+		if (!isVanillaCountryAndLanded(agreement.getSourceTag()))
+			continue;
+		if (!isVanillaCountryAndLanded(agreement.getTargetTag()))
+			continue;
+		Agreement newAgreement;
+		newAgreement.first = agreement.getSourceTag();
+		newAgreement.second = agreement.getTargetTag();
+		newAgreement.type = agreement.getAgreementType();
+		agreements.push_back(newAgreement);
+		++agrCounter;
+	}
+
+	for (const auto& relation: vanillaDiplomacyLoader.getRelationEntries())
+	{
+		if (!isVanillaCountryAndLanded(relation.getSourceTag()))
+			continue;
+		if (!isVanillaCountryAndLanded(relation.getTargetTag()))
+			continue;
+		auto& rel = countries.at(relation.getSourceTag())->getRelation(relation.getTargetTag());
+		rel.setRelations(relation.getRelationValue());
+		++relCounter;
+	}
+
+	for (const auto& truce: vanillaDiplomacyLoader.getTruceEntries())
+	{
+		if (!isVanillaCountryAndLanded(truce.getSourceTag()))
+			continue;
+		if (!isVanillaCountryAndLanded(truce.getTargetTag()))
+			continue;
+		countries.at(truce.getSourceTag())->addTruce(truce.getTargetTag(), truce.getDuration());
+		++truCounter;
+	}
+
+	Log(LogLevel::Info) << "<> Imported " << agrCounter << " vanilla agreements, " << relCounter << " vanilla relations and " << truCounter
+							  << " vanilla truces.";
+}
+
+bool V3::PoliticalManager::isVanillaCountryAndLanded(const std::string& tag) const
+{
+	if (!countries.contains(tag))
+		return false;
+	const auto& country = countries.at(tag);
+	if (country->getSourceCountry())
+		return false;
+	if (country->getSubStates().empty())
+		return false;
+	return true;
 }

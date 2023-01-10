@@ -115,7 +115,10 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.convertRivals();
 	politicalManager.convertTruces(datingData.lastEU4Date);
 	if (configuration.configBlock.vn)
+	{
 		politicalManager.importVNColonialDiplomacy(clayManager);
+		politicalManager.importVanillaDiplomacy();
+	}
 
 	clayManager.squashAllSubStates(politicalManager);
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);
