@@ -7,6 +7,7 @@
 #include "outCountries/outCountries.h"
 #include "outCultures/outCultures.h"
 #include "outDiplomacy/outDiplomacy.h"
+#include "outDiplomaticPlays/outDiplomaticPlays.h"
 #include "outFlagDefinitions/outFlagDefinitions.h"
 #include "outLocalizations/outLocalizations.h"
 #include "outMetadataFile/outMetadataFile.h"
@@ -98,6 +99,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 
 	Log(LogLevel::Info) << "<- Writing Diplomacy";
 	exportDiplomacy(outputName, world.getPoliticalManager());
+	exportDiplomaticPlays(outputName, world.getPoliticalManager().getCountries());
 	Log(LogLevel::Progress) << "94 %";
 
 	Log(LogLevel::Info) << "<- Writing Armed and Unarmed Conflicts";

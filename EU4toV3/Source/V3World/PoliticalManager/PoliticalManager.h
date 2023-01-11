@@ -8,8 +8,10 @@
 #include "DiplomaticMapper/DiplomaticMapper.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
 #include "LawMapper/LawMapper.h"
+#include "Loaders/VanillaCharacterLoader/VanillaCharacterLoader.h"
 #include "Loaders/VanillaCountryHistoryLoader/VanillaCountryHistoryLoader.h"
 #include "Loaders/VanillaDiplomacyLoader/VanillaDiplomacyLoader.h"
+#include "Loaders/VanillaDiplomaticPlayLoader/VanillaDiplomaticPlayLoader.h"
 #include "Loaders/VanillaPopulationHistoryLoader/VanillaPopulationHistoryLoader.h"
 #include "ModLoader/ModFilesystem.h"
 #include "PopulationSetupMapper/PopulationSetupMapper.h"
@@ -126,6 +128,8 @@ class PoliticalManager
 	VanillaDiplomacyLoader vanillaDiplomacyLoader;
 	VanillaCountryHistoryLoader vanillaCountryHistoryLoader;
 	VanillaPopulationHistoryLoader vanillaPopulationHistoryLoader;
+	VanillaCharacterLoader vanillaCharacterLoader;
+	VanillaDiplomaticPlayLoader vanillaDiplomaticPlayLoader;
 };
 } // namespace V3
 #endif // POLITICAL_MANAGER_H
