@@ -72,6 +72,8 @@ void outHistoryPopulations(std::ostream& output, const V3::Country& country)
 	output << "\tc:" << country.getTag() << " = {\n";
 	for (const auto& effect: country.getProcessedData().populationEffects)
 		output << "\t\t" << effect << " = yes\n";
+	for (const auto& element: country.getProcessedData().vanillaPopulationElements)
+		output << "\t\t" << element << "\n";
 	output << "\t}\n";
 }
 
@@ -111,7 +113,8 @@ void OUT::exportHistoryPopulations(const std::string& outputName, const std::map
 
 	output << commonItems::utf8BOM << "POPULATION = {\n";
 	for (const auto& country: countries | std::views::values)
-		if (!country->getSubStates().empty() && !country->getProcessedData().populationEffects.empty())
+		if (!country->getSubStates().empty() &&
+			 (!country->getProcessedData().populationEffects.empty() || !country->getProcessedData().vanillaPopulationElements.empty()))
 			outHistoryPopulations(output, *country);
 	output << "}\n";
 	output.close();

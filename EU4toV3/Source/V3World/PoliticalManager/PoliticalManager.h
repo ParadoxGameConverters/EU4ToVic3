@@ -10,6 +10,7 @@
 #include "LawMapper/LawMapper.h"
 #include "Loaders/VanillaCountryHistoryLoader/VanillaCountryHistoryLoader.h"
 #include "Loaders/VanillaDiplomacyLoader/VanillaDiplomacyLoader.h"
+#include "Loaders/VanillaPopulationHistoryLoader/VanillaPopulationHistoryLoader.h"
 #include "ModLoader/ModFilesystem.h"
 #include "PopulationSetupMapper/PopulationSetupMapper.h"
 #include "TechSetupMapper/TechSetupMapper.h"
@@ -78,6 +79,7 @@ class PoliticalManager
 	void determineAndApplyWesternization(const mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 Configuration::EUROCENTRISM eurocentrism,
+		 Configuration::STARTDATE startDate,
 		 const DatingData& datingData);
 	void setupTech();
 	void setupLaws();
@@ -123,6 +125,7 @@ class PoliticalManager
 	mappers::ColonialTagMapper colonialTagMapper;
 	VanillaDiplomacyLoader vanillaDiplomacyLoader;
 	VanillaCountryHistoryLoader vanillaCountryHistoryLoader;
+	VanillaPopulationHistoryLoader vanillaPopulationHistoryLoader;
 };
 } // namespace V3
 #endif // POLITICAL_MANAGER_H

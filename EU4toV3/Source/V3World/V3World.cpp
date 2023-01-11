@@ -109,7 +109,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getCultureLoader(),
 		 sourceWorld.getEU4Localizations());
 
-	politicalManager.determineAndApplyWesternization(cultureMapper, religionMapper, configBlock.euroCentric, datingData);
+	politicalManager.determineAndApplyWesternization(cultureMapper, religionMapper, configBlock.euroCentric, configBlock.startDate, datingData);
 	politicalManager.setupTech();
 	politicalManager.setupLaws();
 	politicalManager.convertDiplomacy(sourceWorld.getDiplomacy().getAgreements());

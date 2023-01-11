@@ -64,7 +64,8 @@ struct ProcessedData
 	std::set<std::string> rivals;
 	std::map<std::string, int> truces;
 	std::vector<Character> characters;
-	std::vector<std::string> vanillaHistoryElements; // stanzas from vanilla country histories, ready for direct dump.
+	std::vector<std::string> vanillaHistoryElements;	 // stanzas from vanilla country histories, ready for direct dump.
+	std::vector<std::string> vanillaPopulationElements; // stanzas from vanilla population histories, ready for direct dump.
 
 	double industryWeight = 0; // Share of global industry a country should get, not normalized
 	int CPBudget = 0;				// Construction Points for a country to spend on it's development
@@ -127,6 +128,7 @@ class Country: commonItems::parser
 		 const mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 Configuration::EUROCENTRISM eurocentrism,
+		 Configuration::STARTDATE startDate,
 		 const DatingData& datingData,
 		 const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore);
@@ -139,7 +141,7 @@ class Country: commonItems::parser
 	void addTruce(const std::string& target, int months) { processedData.truces.emplace(target, months); }
 	[[nodiscard]] const auto& getTruces() const { return processedData.truces; }
 	void setVanillaHistoryElements(const std::vector<std::string>& elements) { vanillaHistoryElements = elements; }
-	void copyVanillaHistoryElements() { processedData.vanillaHistoryElements = vanillaHistoryElements; }
+	void setVanillaPopulationElements(const std::vector<std::string>& elements) { vanillaPopulationElements = elements; }
 
 	void convertCharacters(const mappers::CharacterTraitMapper& characterTraitMapper,
 		 float ageShift,
@@ -192,6 +194,7 @@ class Country: commonItems::parser
 	std::optional<VanillaCommonCountryData> vanillaData;
 	ProcessedData processedData;
 	std::vector<std::string> vanillaHistoryElements;
+	std::vector<std::string> vanillaPopulationElements;
 
 	std::shared_ptr<EU4::Country> sourceCountry;
 	std::vector<std::shared_ptr<SubState>> substates;

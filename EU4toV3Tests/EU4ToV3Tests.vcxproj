@@ -232,6 +232,7 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaDiplomacyLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaRelationEntry.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaTruceEntry.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaPopulationHistoryLoader\VanillaPopulationHistoryLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaStateEntries.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaStateEntry.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaStateLoader.cpp" />
@@ -393,6 +394,7 @@
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests\VanillaDiplomacyLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests\VanillaRelationEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests\VanillaTruceEntryTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaPopulationHistoryLoaderTests\VanillaPopulationHistoryLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaStateLoaderTests\VanillaStateEntriesTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaStateLoaderTests\VanillaStateEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaStateLoaderTests\VanillaStateLoaderTests.cpp" />
@@ -770,6 +772,14 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\countries\ute - ute.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/countries</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\population\kra - krakow.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/population</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\population\rus - russia.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/population</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

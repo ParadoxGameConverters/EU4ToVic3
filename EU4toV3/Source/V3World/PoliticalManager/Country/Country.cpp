@@ -404,10 +404,15 @@ void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const E
 
 	// By default we're copying DECENTRALIZED nations. This means their effects should be set as if they were decentralized.
 	if (!vn)
+	{
 		setDecentralizedEffects();
+	}
 	else
+	{
 		// When VN imports non-decentralized countries, we want entire history.
 		processedData.vanillaHistoryElements = vanillaHistoryElements;
+		processedData.vanillaPopulationElements = vanillaPopulationElements;
+	}
 
 	// do we have a name waiting for us?
 	const auto& tagName = v3LocLoader.getLocMapForKey(tag);
@@ -469,6 +474,7 @@ void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 	 const mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 Configuration::EUROCENTRISM eurocentrism,
+	 Configuration::STARTDATE startDate,
 	 const DatingData& datingData,
 	 const mappers::PopulationSetupMapper& populationSetupMapper)
 {
@@ -477,7 +483,8 @@ void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 
 	calculateBaseLiteracy(religionMapper);
 	calculateWesternization(topTech, topInstitutions, cultureMapper, eurocentrism);
-	adjustLiteracy(datingData, cultureMapper);
+	if (startDate != Configuration::STARTDATE::Vanilla)
+		adjustLiteracy(datingData, cultureMapper);
 	applyLiteracyAndWealthEffects(populationSetupMapper);
 	determineCountryType();
 }

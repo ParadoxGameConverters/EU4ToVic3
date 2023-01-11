@@ -31,6 +31,13 @@ void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFile
 			countries.at(tag)->setVanillaHistoryElements(historyElements);
 	Log(LogLevel::Info) << "<> " << vanillaCountryHistoryLoader.getCountryHistoryElements().size() << " vanilla country histories loaded.";
 
+	Log(LogLevel::Info) << "-> Loading Vanilla Population Histories.";
+	vanillaPopulationHistoryLoader.loadVanillaPopulationHistories(modFS);
+	for (const auto& [tag, historyElements]: vanillaPopulationHistoryLoader.getPopulationHistoryElements())
+		if (countries.contains(tag))
+			countries.at(tag)->setVanillaPopulationElements(historyElements);
+	Log(LogLevel::Info) << "<> " << vanillaCountryHistoryLoader.getCountryHistoryElements().size() << " vanilla country histories loaded.";
+
 	Log(LogLevel::Info) << "-> Loading Vanilla Diplomacy.";
 	vanillaDiplomacyLoader.loadVanillaDiplomacy(modFS);
 	Log(LogLevel::Info) << "<> Loaded " << vanillaDiplomacyLoader.getAgreementEntries().size() << " vanilla agreements, "
@@ -251,6 +258,7 @@ std::shared_ptr<V3::Country> V3::PoliticalManager::getCountry(const std::string&
 void V3::PoliticalManager::determineAndApplyWesternization(const mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 const Configuration::EUROCENTRISM eurocentrism,
+	 const Configuration::STARTDATE startDate,
 	 const DatingData& datingData)
 {
 	Log(LogLevel::Info) << "-> Determining Westernization.";
@@ -279,8 +287,14 @@ void V3::PoliticalManager::determineAndApplyWesternization(const mappers::Cultur
 	int uncivs = 0;
 	for (const auto& country: countries | std::views::values)
 	{
-		country
-			 ->determineWesternizationWealthAndLiteracy(topTech, topInstitutions, cultureMapper, religionMapper, eurocentrism, datingData, populationSetupMapper);
+		country->determineWesternizationWealthAndLiteracy(topTech,
+			 topInstitutions,
+			 cultureMapper,
+			 religionMapper,
+			 eurocentrism,
+			 startDate,
+			 datingData,
+			 populationSetupMapper);
 
 		// Bookkeeping.
 		if (!country->getSubStates().empty())

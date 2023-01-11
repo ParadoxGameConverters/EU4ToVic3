@@ -1012,6 +1012,12 @@
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaCountryHistoryLoaderTests\VanillaCountryHistoryEntriesTests.cpp">
       <Filter>V3WorldTests\LoaderTests\VanillaCountryHistoryLoaderTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaPopulationHistoryLoader\VanillaPopulationHistoryLoader.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\VanillaPopulationHistoryLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaPopulationHistoryLoaderTests\VanillaPopulationHistoryLoaderTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\VanillaPopulationHistoryLoaderTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1647,6 +1653,15 @@
     <Filter Include="V3WorldTests\LoaderTests\VanillaCountryHistoryLoaderTests">
       <UniqueIdentifier>{8d708777-127b-4cf5-8c13-35c2b6f74450}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\V3World\Loaders\VanillaPopulationHistoryLoader">
+      <UniqueIdentifier>{11085940-cb3d-4a23-9bb1-38a79d25d727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\history\population">
+      <UniqueIdentifier>{9add5a71-a373-4cb3-8079-a4f7660ddd7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\LoaderTests\VanillaPopulationHistoryLoaderTests">
+      <UniqueIdentifier>{fe90b092-7996-4fc1-b005-a94a6bddc729}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1893,6 +1908,12 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\countries\usa - usa.txt">
       <Filter>TestFiles\vic3installation\game\common\history\countries</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\population\kra - krakow.txt">
+      <Filter>TestFiles\vic3installation\game\common\history\population</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\population\rus - russia.txt">
+      <Filter>TestFiles\vic3installation\game\common\history\population</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>
