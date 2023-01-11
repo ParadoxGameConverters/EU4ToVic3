@@ -88,14 +88,15 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 
 	Log(LogLevel::Progress) << "52 %";
-	// converting all 3 types of countries - generated decentralized, extinct vanilla-only, and EU4 imports.
+	// converting all 3 types of countries - generated decentralized, extinct/extant-VN vanilla-only, and EU4 imports.
 	politicalManager.convertAllCountries(clayManager,
 		 cultureMapper,
 		 religionMapper,
 		 sourceWorld.getCultureLoader(),
 		 sourceWorld.getReligionLoader(),
 		 localizationLoader,
-		 sourceWorld.getEU4Localizations());
+		 sourceWorld.getEU4Localizations(),
+		 configuration.configBlock.vn);
 
 	politicalManager.attemptColonialTagReplacement(cultureMapper.getColonialRegionMapper(), clayManager);
 

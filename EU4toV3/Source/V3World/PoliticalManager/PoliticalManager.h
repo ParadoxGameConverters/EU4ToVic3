@@ -8,6 +8,7 @@
 #include "DiplomaticMapper/DiplomaticMapper.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
 #include "LawMapper/LawMapper.h"
+#include "Loaders/VanillaCountryHistoryLoader/VanillaCountryHistoryLoader.h"
 #include "Loaders/VanillaDiplomacyLoader/VanillaDiplomacyLoader.h"
 #include "ModLoader/ModFilesystem.h"
 #include "PopulationSetupMapper/PopulationSetupMapper.h"
@@ -64,7 +65,8 @@ class PoliticalManager
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader,
 		 const LocalizationLoader& v3LocLoader,
-		 const EU4::EU4LocalizationLoader& eu4LocLoader) const;
+		 const EU4::EU4LocalizationLoader& eu4LocLoader,
+		 bool vn = false) const;
 
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& v3Tag) const;
@@ -94,6 +96,7 @@ class PoliticalManager
 
 	void attemptColonialTagReplacement(const mappers::ColonialRegionMapper& colonialRegionMapper, const ClayManager& clayManager);
 
+	// VN specifics
 	void importVNColonialDiplomacy(const ClayManager& clayManager);
 	void importVanillaDiplomacy();
 
@@ -119,6 +122,7 @@ class PoliticalManager
 	mappers::CharacterTraitMapper characterTraitMapper;
 	mappers::ColonialTagMapper colonialTagMapper;
 	VanillaDiplomacyLoader vanillaDiplomacyLoader;
+	VanillaCountryHistoryLoader vanillaCountryHistoryLoader;
 };
 } // namespace V3
 #endif // POLITICAL_MANAGER_H

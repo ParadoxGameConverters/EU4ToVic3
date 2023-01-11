@@ -60,6 +60,10 @@ void outHistoryCountry(std::ostream& output, const V3::Country& country)
 		output << "\t\t\tset_ig_suppression = yes\n";
 		output << "\t\t}\n";
 	}
+	for (const auto& element: country.getProcessedData().vanillaHistoryElements)
+	{
+		output << "\t\t" << element << "\n";
+	}
 	output << "\t}\n";
 }
 

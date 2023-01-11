@@ -64,6 +64,7 @@ struct ProcessedData
 	std::set<std::string> rivals;
 	std::map<std::string, int> truces;
 	std::vector<Character> characters;
+	std::vector<std::string> vanillaHistoryElements; // stanzas from vanilla country histories, ready for direct dump.
 
 	double industryWeight = 0; // Share of global industry a country should get, not normalized
 	int CPBudget = 0;				// Construction Points for a country to spend on it's development
@@ -101,7 +102,7 @@ class Country: commonItems::parser
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader,
 		 const mappers::IdeaEffectsMapper& ideaEffectMapper);
-	void copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
+	void copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader, bool vn = false);
 	void generateDecentralizedData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 
 	[[nodiscard]] const auto& getTag() const { return tag; }
@@ -121,7 +122,6 @@ class Country: commonItems::parser
 	[[nodiscard]] int getPopCount() const;
 	[[nodiscard]] static int getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubstates);
 
-
 	void determineWesternizationWealthAndLiteracy(double topTech,
 		 double topInstitutions,
 		 const mappers::CultureMapper& cultureMapper,
@@ -138,6 +138,8 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getRivals() const { return processedData.rivals; }
 	void addTruce(const std::string& target, int months) { processedData.truces.emplace(target, months); }
 	[[nodiscard]] const auto& getTruces() const { return processedData.truces; }
+	void setVanillaHistoryElements(const std::vector<std::string>& elements) { vanillaHistoryElements = elements; }
+	void copyVanillaHistoryElements() { processedData.vanillaHistoryElements = vanillaHistoryElements; }
 
 	void convertCharacters(const mappers::CharacterTraitMapper& characterTraitMapper,
 		 float ageShift,
@@ -189,7 +191,7 @@ class Country: commonItems::parser
 	std::string tag;
 	std::optional<VanillaCommonCountryData> vanillaData;
 	ProcessedData processedData;
-
+	std::vector<std::string> vanillaHistoryElements;
 
 	std::shared_ptr<EU4::Country> sourceCountry;
 	std::vector<std::shared_ptr<SubState>> substates;
