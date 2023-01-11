@@ -11,6 +11,7 @@
 #include "Loaders/VanillaCharacterLoader/VanillaCharacterLoader.h"
 #include "Loaders/VanillaCountryHistoryLoader/VanillaCountryHistoryLoader.h"
 #include "Loaders/VanillaDiplomacyLoader/VanillaDiplomacyLoader.h"
+#include "Loaders/VanillaDiplomaticPlayLoader/VanillaDiplomaticPlayLoader.h"
 #include "Loaders/VanillaPopulationHistoryLoader/VanillaPopulationHistoryLoader.h"
 #include "ModLoader/ModFilesystem.h"
 #include "PopulationSetupMapper/PopulationSetupMapper.h"
@@ -128,6 +129,7 @@ class PoliticalManager
 	VanillaCountryHistoryLoader vanillaCountryHistoryLoader;
 	VanillaPopulationHistoryLoader vanillaPopulationHistoryLoader;
 	VanillaCharacterLoader vanillaCharacterLoader;
+	VanillaDiplomaticPlayLoader vanillaDiplomaticPlayLoader;
 };
 } // namespace V3
 #endif // POLITICAL_MANAGER_H

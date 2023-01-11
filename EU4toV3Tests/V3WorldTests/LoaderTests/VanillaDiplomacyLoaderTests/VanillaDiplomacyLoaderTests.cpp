@@ -12,7 +12,7 @@ TEST(V3World_VanillaDiplomacyLoaderTests, DefaultsDefaultToDefaults)
 	EXPECT_TRUE(loader.getTruceEntries().empty());
 }
 
-TEST(V3World_VanillaDiplomacyLoaderTests, VanillaStatesCanBeLoaded)
+TEST(V3World_VanillaDiplomacyLoaderTests, VanillaAgreementsCanBeLoaded)
 {
 	V3::VanillaDiplomacyLoader loader;
 	loader.loadVanillaDiplomacy(modFS);

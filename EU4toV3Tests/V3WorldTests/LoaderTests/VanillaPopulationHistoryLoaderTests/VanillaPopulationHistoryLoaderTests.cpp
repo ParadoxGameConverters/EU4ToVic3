@@ -10,7 +10,7 @@ TEST(V3World_VanillaPopulationHistoryLoaderTests, DefaultsDefaultToDefaults)
 	EXPECT_TRUE(loader.getPopulationHistoryElements().empty());
 }
 
-TEST(V3World_VanillaPopulationHistoryLoaderTests, VanillaCountryHistoriesCanBeLoaded)
+TEST(V3World_VanillaPopulationHistoryLoaderTests, VanillaPopulationHistoriesCanBeLoaded)
 {
 	V3::VanillaPopulationHistoryLoader loader;
 	loader.loadVanillaPopulationHistories(modFS);

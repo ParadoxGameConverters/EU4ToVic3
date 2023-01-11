@@ -50,6 +50,13 @@ void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFile
 	Log(LogLevel::Info) << "<> Loaded " << vanillaDiplomacyLoader.getAgreementEntries().size() << " vanilla agreements, "
 							  << vanillaDiplomacyLoader.getRelationEntries().size() << " vanilla relations and " << vanillaDiplomacyLoader.getTruceEntries().size()
 							  << " vanilla truces.";
+
+	Log(LogLevel::Info) << "-> Loading Vanilla Diplomatic Plays.";
+	vanillaDiplomaticPlayLoader.loadVanillaDiplomaticPlays(modFS);
+	for (const auto& [tag, historyElements]: vanillaDiplomaticPlayLoader.getDiploPlayElements())
+		if (countries.contains(tag))
+			countries.at(tag)->setVanillaDiplomaticPlayElements(historyElements);
+	Log(LogLevel::Info) << "<> " << vanillaDiplomaticPlayLoader.getDiploPlayElements().size() << " vanilla characters loaded.";
 }
 
 void V3::PoliticalManager::loadCountryMapper(const std::shared_ptr<mappers::CountryMapper>& theCountryMapper)

@@ -46,6 +46,7 @@ struct UnprocessedData
 	std::vector<std::string> vanillaHistoryElements;
 	std::vector<std::string> vanillaPopulationElements;
 	std::vector<std::string> vanillaCharacterElements;
+	std::vector<std::string> vanillaDiplomaticPlayElements;
 };
 
 struct ProcessedData
@@ -71,9 +72,10 @@ struct ProcessedData
 	std::set<std::string> rivals;
 	std::map<std::string, int> truces;
 	std::vector<Character> characters;
-	std::vector<std::string> vanillaHistoryElements;	 // stanzas from vanilla country histories, ready for direct dump.
-	std::vector<std::string> vanillaPopulationElements; // stanzas from vanilla population histories, ready for direct dump.
-	std::vector<std::string> vanillaCharacterElements;	 // stanzas from vanilla character histories, ready for direct dump.
+	std::vector<std::string> vanillaHistoryElements;		  // stanzas from vanilla country histories, ready for direct dump.
+	std::vector<std::string> vanillaPopulationElements;	  // stanzas from vanilla population histories, ready for direct dump.
+	std::vector<std::string> vanillaCharacterElements;		  // stanzas from vanilla character histories, ready for direct dump.
+	std::vector<std::string> vanillaDiplomaticPlayElements; // stanzas from vanilla diplomatic play histories, ready for direct dump.
 
 	double industryWeight = 0; // Share of global industry a country should get, not normalized
 	int CPBudget = 0;				// Construction Points for a country to spend on it's development
@@ -151,6 +153,7 @@ class Country: commonItems::parser
 	void setVanillaHistoryElements(const std::vector<std::string>& elements) { unprocessedData.vanillaHistoryElements = elements; }
 	void setVanillaPopulationElements(const std::vector<std::string>& elements) { unprocessedData.vanillaPopulationElements = elements; }
 	void setVanillaCharacterElements(const std::vector<std::string>& elements) { unprocessedData.vanillaCharacterElements = elements; }
+	void setVanillaDiplomaticPlayElements(const std::vector<std::string>& elements) { unprocessedData.vanillaDiplomaticPlayElements = elements; }
 
 	void convertCharacters(const mappers::CharacterTraitMapper& characterTraitMapper,
 		 float ageShift,

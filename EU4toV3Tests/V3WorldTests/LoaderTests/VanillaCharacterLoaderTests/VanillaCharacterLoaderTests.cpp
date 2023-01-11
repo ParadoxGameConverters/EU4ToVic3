@@ -10,7 +10,7 @@ TEST(V3World_VanillaCharacterLoaderTests, DefaultsDefaultToDefaults)
 	EXPECT_TRUE(loader.getCharacterElements().empty());
 }
 
-TEST(V3World_VanillaCharacterLoaderTests, VanillaCountryHistoriesCanBeLoaded)
+TEST(V3World_VanillaCharacterLoaderTests, VanillaCharactersCanBeLoaded)
 {
 	V3::VanillaCharacterLoader loader;
 	loader.loadVanillaCharacters(modFS);

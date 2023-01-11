@@ -409,10 +409,11 @@ void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const E
 	}
 	else
 	{
-		// When VN imports non-decentralized countries, we want entire history.
+		// When VN imports non-decentralized countries, we want entire history, such as it is.
 		processedData.vanillaHistoryElements = unprocessedData.vanillaHistoryElements;
 		processedData.vanillaPopulationElements = unprocessedData.vanillaPopulationElements;
 		processedData.vanillaCharacterElements = unprocessedData.vanillaCharacterElements;
+		processedData.vanillaDiplomaticPlayElements = unprocessedData.vanillaDiplomaticPlayElements;
 	}
 
 	// do we have a name waiting for us?
