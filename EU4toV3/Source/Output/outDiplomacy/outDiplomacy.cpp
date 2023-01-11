@@ -74,20 +74,26 @@ void OUT::exportPacts(const std::string& outputName, const std::vector<V3::Agree
 	std::ofstream customs("output/" + outputName + "/common/history/diplomacy/00_customs_union.txt");
 	if (!customs.is_open())
 		throw std::runtime_error("Could not create " + outputName + "/common/history/diplomacy/00_customs_union.txt");
+	std::ofstream rivals("output/" + outputName + "/common/history/diplomacy/00_additional_rivalries.txt");
+	if (!rivals.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/history/diplomacy/00_additional_rivalries.txt");
 
 	defensivePacts << commonItems::utf8BOM << "DIPLOMACY = {\n";
 	subjects << commonItems::utf8BOM << "DIPLOMACY = {\n";
 	trades << commonItems::utf8BOM << "DIPLOMACY = {\n";
 	customs << commonItems::utf8BOM << "DIPLOMACY = {\n";
+	rivals << commonItems::utf8BOM << "DIPLOMACY = {\n";
 
 	for (const auto& agreement: agreements)
 	{
 		if (agreement.type == "defensive_pact")
 			outAgreement(defensivePacts, agreement);
-		if (agreement.type == "trade_agreement")
+		else if (agreement.type == "trade_agreement")
 			outAgreement(trades, agreement);
-		if (agreement.type == "customs_union")
+		else if (agreement.type == "customs_union")
 			outAgreement(customs, agreement);
+		else if (agreement.type == "rivalry") // VN-imported rivalries are agreements, not country-bound rivalries, so they end up here.
+			outAgreement(rivals, agreement);
 		else
 			outAgreement(subjects, agreement);
 	}
@@ -96,10 +102,12 @@ void OUT::exportPacts(const std::string& outputName, const std::vector<V3::Agree
 	subjects << "}\n";
 	trades << "}\n";
 	customs << "}\n";
+	rivals << "}\n";
 	defensivePacts.close();
 	subjects.close();
 	trades.close();
 	customs.close();
+	rivals.close();
 }
 
 void OUT::exportRelations(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)

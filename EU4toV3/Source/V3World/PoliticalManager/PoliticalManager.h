@@ -8,6 +8,7 @@
 #include "DiplomaticMapper/DiplomaticMapper.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
 #include "LawMapper/LawMapper.h"
+#include "Loaders/VanillaDiplomacyLoader/VanillaDiplomacyLoader.h"
 #include "ModLoader/ModFilesystem.h"
 #include "PopulationSetupMapper/PopulationSetupMapper.h"
 #include "TechSetupMapper/TechSetupMapper.h"
@@ -93,12 +94,16 @@ class PoliticalManager
 
 	void attemptColonialTagReplacement(const mappers::ColonialRegionMapper& colonialRegionMapper, const ClayManager& clayManager);
 
+	void importVNColonialDiplomacy(const ClayManager& clayManager);
+	void importVanillaDiplomacy();
+
   private:
 	void generateDecentralizedCountry(const std::string& culture, const std::vector<std::shared_ptr<SubState>>& subStates);
 	static CulturalSubStates sortSubStatesByCultures(const ClayManager& clayManager, const PopManager& popManager);
 	static std::string getDominantDemographic(const std::vector<Demographic>& demographics);
 	void grantLawFromGroup(const std::string& lawGroup, const std::shared_ptr<Country>& country) const;
 	[[nodiscard]] bool isEU4CountryConvertedAndLanded(const std::string& eu4Tag) const;
+	[[nodiscard]] bool isVanillaCountryAndLanded(const std::string& tag) const;
 	[[nodiscard]] bool isValidForColonialReplacement(const std::string& tag) const;
 	void changeTag(const std::string& replacement, const std::string& tag);
 
@@ -113,6 +118,7 @@ class PoliticalManager
 	mappers::DiplomaticMapper diplomaticMapper;
 	mappers::CharacterTraitMapper characterTraitMapper;
 	mappers::ColonialTagMapper colonialTagMapper;
+	VanillaDiplomacyLoader vanillaDiplomacyLoader;
 };
 } // namespace V3
 #endif // POLITICAL_MANAGER_H

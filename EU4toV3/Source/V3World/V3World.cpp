@@ -23,9 +23,14 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	clayManager.initializeSuperRegions(dwFS);
 	clayManager.loadStatesIntoSuperRegions();
 	if (configuration.configBlock.vn)
+	{
 		provinceMapper.loadProvinceMappings("configurables/vn_province_mappings.txt");
+		clayManager.loadVNColonialRules("configurables/vn_colonial.txt");
+	}
 	else
+	{
 		provinceMapper.loadProvinceMappings("configurables/province_mappings.txt");
+	}
 	countryMapper = std::make_shared<mappers::CountryMapper>();
 	countryMapper->loadMappingRules("configurables/country_mappings.txt");
 	religionMapper.loadMappingRules("configurables/religion_map.txt");
@@ -79,11 +84,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	Log(LogLevel::Progress) << "51 %";
 	// generating decentralized countries
-	if (!configuration.configBlock.vn)
-	{
-		clayManager.shoveRemainingProvincesIntoSubStates();
-		politicalManager.generateDecentralizedCountries(clayManager, popManager);
-	}
+	clayManager.shoveRemainingProvincesIntoSubStates();
+	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 
 	Log(LogLevel::Progress) << "52 %";
 	// converting all 3 types of countries - generated decentralized, extinct vanilla-only, and EU4 imports.
@@ -112,6 +114,11 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.convertDiplomacy(sourceWorld.getDiplomacy().getAgreements());
 	politicalManager.convertRivals();
 	politicalManager.convertTruces(datingData.lastEU4Date);
+	if (configuration.configBlock.vn)
+	{
+		politicalManager.importVNColonialDiplomacy(clayManager);
+		politicalManager.importVanillaDiplomacy();
+	}
 
 	clayManager.squashAllSubStates(politicalManager);
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);

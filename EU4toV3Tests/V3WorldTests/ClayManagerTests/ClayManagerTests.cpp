@@ -639,3 +639,19 @@ TEST(V3World_ClayManagerTests, clayManagerCanSquashSubStates)
 	EXPECT_EQ(4, clayManager.getSubStates().size());
 	EXPECT_EQ(1, clayManager.getStates().at("STATE_TEST_LAND1")->getSubStates().size());
 }
+
+TEST(V3World_ClayManagerTests, provinceOwnershipCanBePinged)
+{
+	auto [clayManager, polManager] = assignSubStateOwnership();
+
+	EXPECT_FALSE(clayManager.getProvinceOwnerTag("x000001"));
+	EXPECT_FALSE(clayManager.getProvinceOwnerTag("x000002"));
+	EXPECT_EQ("GA2", *clayManager.getProvinceOwnerTag("x000003"));
+	EXPECT_EQ("GA2", *clayManager.getProvinceOwnerTag("x000004"));
+	EXPECT_EQ("CCC", *clayManager.getProvinceOwnerTag("x000005"));
+	EXPECT_EQ("CCC", *clayManager.getProvinceOwnerTag("x000006"));
+	EXPECT_FALSE(clayManager.getProvinceOwnerTag("x000007"));
+	EXPECT_EQ("GA9", *clayManager.getProvinceOwnerTag("x000008"));
+	EXPECT_FALSE(clayManager.getProvinceOwnerTag("x000009"));
+	EXPECT_FALSE(clayManager.getProvinceOwnerTag("x000010"));
+}

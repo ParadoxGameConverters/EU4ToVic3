@@ -2,6 +2,7 @@
 #define CLAY_MANAGER_H
 #include "ClayMapTypedefs.h"
 #include "ModLoader/ModFilesystem.h"
+#include "VNColonialMapper/VNColonialMapper.h"
 #include <string>
 #include <vector>
 
@@ -54,6 +55,10 @@ class ClayManager
 	[[nodiscard]] std::optional<std::string> getHistoricalCapitalState(const std::string& eu4tag) const;
 	[[nodiscard]] std::set<std::string> getStateNamesForRegion(const std::string& regionName) const;
 
+	void loadVNColonialRules(const std::string& fileName) { vnColonialMapper.loadMappingRules(fileName); }
+	[[nodiscard]] const auto& getVNColonialMapper() const { return vnColonialMapper; }
+	[[nodiscard]] std::optional<std::string> getProvinceOwnerTag(const std::string& provinceID) const;
+
   private:
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> chunkToSubStatesTransferFunction(const std::shared_ptr<Chunk>& chunk) const;
 	[[nodiscard]] StateToProvinceMap sortChunkProvincesIntoStates(const std::shared_ptr<Chunk>& chunk) const;
@@ -74,6 +79,8 @@ class ClayManager
 
 	std::vector<std::shared_ptr<Chunk>> chunks;		  // political entities
 	std::vector<std::shared_ptr<SubState>> substates; // political entities
+
+	mappers::VNColonialMapper vnColonialMapper;
 };
 } // namespace V3
 #endif // CLAY_MANAGER_H

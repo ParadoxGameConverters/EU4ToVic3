@@ -502,6 +502,17 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		if (availableProvinces.empty())
 			continue;
 
+		// Hold the horses! VN ownership transfer situation?
+		std::optional<std::string> replacementOwner;
+		if (vn && vnColonialMapper.isStateVNColonial(stateName) && vnColonialMapper.getVanillaOwners(stateName).contains(ownerTag))
+		{
+			// who owns key province?
+			if (const auto& keyProvince = vnColonialMapper.getKeyProvince(stateName, ownerTag); keyProvince)
+				replacementOwner = getProvinceOwnerTag(*keyProvince); // We won't replace the owner yet, we still need to grab the original pops.
+			// is this a decolonization situation?
+			if (replacementOwner && vnColonialMapper.isStateDecolonizable(stateName, ownerTag, *replacementOwner))
+				continue; // then simply skip any generation.
+		}
 		const auto& owner = politicalManager.getCountry(ownerTag);
 		const auto& homeState = states.at(stateName);
 
@@ -523,7 +534,18 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 
 		// and register.
 		homeState->addSubState(newSubState);
-		owner->addSubState(newSubState);
+
+		if (replacementOwner) // now we replace.
+		{
+			const auto& newOwner = politicalManager.getCountry(*replacementOwner);
+			newSubState->setOwner(newOwner);
+			newOwner->addSubState(newSubState);
+		}
+		else
+		{
+			owner->addSubState(newSubState);
+		}
+
 		substates.emplace_back(newSubState);
 		action = true;
 	}
@@ -735,4 +757,13 @@ std::set<std::string> V3::ClayManager::getStateNamesForRegion(const std::string&
 
 	Log(LogLevel::Warning) << "Attempting colonial lookup at " << regionName << " failed! It doesn't match anything we know!";
 	return stateNames;
+}
+
+std::optional<std::string> V3::ClayManager::getProvinceOwnerTag(const std::string& provinceID) const
+{
+	for (const auto& state: states | std::views::values)
+		for (const auto& subState: state->getSubStates())
+			if (subState->getProvinces().contains(provinceID))
+				return subState->getOwnerTag();
+	return std::nullopt;
 }

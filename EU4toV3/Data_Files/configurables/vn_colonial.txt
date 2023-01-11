@@ -1,0 +1,131 @@
+# Colonizers such as England or France own lands outside the VN scope. By surgically mapping those lands to certain key provinces
+# we can reassign said colonies to whomever controls those places.
+#
+# link = { name = "French Carribean" key = xD0A040 states = { STATE_GUAYANA STATE_WEST_INDIES } owner = FRA }
+# Means FRA owned provinces in STATE_GUAYANA and STATE_WEST_INDIES are reassigned to whomever controls xD0A040.
+#
+# link = { name = "Russia" decolonize = RUS key = xE0A021 states = { STATE_KUBAN STATE_KURSK ... } owner = RUS }
+# Means RUS owned provinces in STATE_KUBAN, STATE_KURSK, ... are decolonized UNLESS owner of xE0A021 is RUS.
+#
+# link = { name = "Australia" key = xE0E0C0 subjects = { NSW WAS SAS TAS } type = puppet }
+# Means ex-British puppets NSW, WAS, SAS and TAS are reassigned as puppets to whomever controls xE0E0C0.
+# Don't mix subject relationships stanzas with state transferrance stanzas in a same link.
+#
+# We *ONLY* handle ownership and relations, not nationalities of pops within those states.
+
+###### England #######
+
+# Australia to London
+link = { name = "Australia" key = xE0E0C0 subjects = { NSW WAS SAS TAS } type = puppet }
+link = { name = "New Zealand" key = xE0E0C0 subjects = { UNT } type = protectorate }
+
+# India to London
+link = { name = "India" key = xE0E0C0 subjects = { BIC } type = dominion }
+
+# Canada to Liverpool (so it's not all to London)
+link = { name = "Canada" key = x60E000 subjects = { ONT QUE NBS NVS ORG } type = puppet }
+link = { name = "Hudson Bay Company" key = x60E000 subjects = { HBC } type = dominion }
+
+# Newfoundland to Okney (likely UK, Denmark or Norway)
+link = { name = "Newfoundland" key = x37518E states = { STATE_NEWFOUNDLAND } owner = GBR }
+
+# English Carribean / Central + South America to Plymouth
+link = { name = "British Carribean" key = x63EF7E states = { STATE_GUATEMALA STATE_GUAYANA STATE_SOUTH_ATLANTIC_ISLANDS STATE_BAHAMAS STATE_BERMUDA STATE_WEST_INDIES STATE_JAMAICA } owner = GBR }
+link = { name = "Miskito Kingdom" key = x63EF7E subjects = { MKT } type = protectorate }
+
+# British SEA to London
+link = { name = "British SEA" key = xE0E0C0 states = { STATE_MALAYA STATE_INDIAN_OCEAN_TERRITORY } owner = GBR }
+
+# African holdings to Cardigan
+link = { name = "British Africa" key = xB7FC74 states = { STATE_GHANA STATE_GAMBIA } owner = GBR }
+link = { name = "British African Holdings" key = xB7FC74 subjects = { SIL SAF } type = puppet }
+
+# Arabia to London
+link = { name = "British Arabia" key = xE0E0C0 subjects = { ABU } type = protectorate }
+
+###### Denmark ######
+
+# Iceland Greenland to Faroe (likely UK, Denmark or Norway)
+link = { name = "Greenland" key = x8B7790 states = { STATE_ICELAND STATE_GREENLAND } owner = DEN }
+
+# St. Thomas to Copenhagen
+link = { name = "Danish Togo" key = x7F0BF0 states = { STATE_TOGO } owner = DEN }
+
+###### France ######
+
+# French Carribean / South America to La Roche
+link = { name = "French Carribean" key = xD0A040 states = { STATE_GUAYANA STATE_WEST_INDIES } owner = FRA }
+
+# French Africa to Paris
+link = { name = "French Africa" key = x906000 states = { STATE_IVORY_COAST STATE_SENEGAL } owner = FRA }
+
+# French India to Paris 
+link = { name = "French India" key = x906000 states = { STATE_INDIAN_OCEAN_TERRITORY STATE_MADRAS } owner = FRA }
+
+###### Netherlands ######
+
+# Carribean to Utrecht
+link = { name = "Dutch Carribean" key = xC04021 states = { STATE_GUAYANA } owner = NET }
+
+# Indonesia to Amsterdam
+link = { name = "Dutch Indonesia" key = x777732 subjects = { DEI } type = dominion  }
+
+# Africa to Amsterdam
+link = { name = "Dutch Africa" key = x777732 states = { STATE_GHANA } owner = NET }
+
+###### Portugal ######
+
+# SEA to Lisabon
+link = { name = "Portugese SEA" key = x545164 states = { STATE_SUNDA_ISLANDS STATE_GUANGDONG } owner = POR }
+
+# Africa to Lisabon
+link = { name = "Portugese Africa" key = x545164 states = { STATE_NORTH_ANGOLA STATE_SOUTH_ANGOLA STATE_LOURENCO_MARQUES STATE_MOCAMBIQUE STATE_ZAMBEZIA STATE_CAPE_VERDE STATE_GAMBIA } owner = POR }
+
+# Goa to Lisabon
+link = { name = "Goa" key = x545164 states = { STATE_BOMBAY } owner = POR }
+
+# Azores to Lisabon
+link = { name = "Azores" key = x545164 states = { STATE_MADEIRA STATE_AZORES } owner = POR }
+
+###### Spain ######
+
+# Spanish Carribean to Madrid
+link = { name = "Spanish Carribean" key = xDCD24C states = { STATE_PUERTO_RICO } }
+link = { name = "Spanish Carribean Holdings" key = xDCD24C subjects = { CUB } type = puppet  }
+
+# Spanish Africa
+link = { name = "Spanish Africa" key = xDCD24C states = { STATE_SOUTH_CAMEROON } owner = SPA }
+
+# Spanish Indonesia to Madrid
+link = { name = "Spanish Indonesia" key = xDCD24C subjects = { PHI } type = puppet  }
+
+###### Russia ######
+
+# Russian Alaska to St. Petersburg
+link = { name = "Alaska" key = xCD164E states = { STATE_ALASKA } owner = RUS }
+
+# Russian Scandinavia to Petrozavodsk 
+link = { name = "Russian Scandinavia" key = xD8B025 states = { STATE_EAST_KARELIA } owner = RUS }
+
+# Russia - decolonize unless RUS in Moscow.
+link = { name = "Russia" decolonize = RUS key = xE0A021 states = { STATE_KUBAN STATE_KURSK STATE_ROSTOV STATE_TARTARIA STATE_KAZAN STATE_GALICH STATE_TVER STATE_SAMARA STATE_ARKHANGELSK STATE_NENETSIA STATE_PERM STATE_OB STATE_URAL STATE_TOBOLSK STATE_TOMSK STATE_UPPER_YENISEYSK STATE_IRKUTSK STATE_OKHOTSK STATE_YAKUTSK STATE_TRANS_BAIKAL STATE_CHUKOTKA STATE_KAMCHATKA STATE_MOSCOW } owner = RUS }
+
+###### Sweden ######
+
+# Sweden to Falun
+link = { name = "Sweden" key = x6F40EC states = { STATE_NORRLAND STATE_SVEALAND } owner = SWE }
+
+###### Norway ######
+
+# Norway to Bergen
+link = { name = "Norway" key = x79D41F states = { STATE_NORTHERN_NORWAY STATE_EASTERN_NORWAY } owner = NOR }
+
+###### Finland ######
+
+# Finland to Turku
+link = { name = "Finland" key = xD2FDBF states = { STATE_SOUTHERN_FINLAND STATE_WEST_KARELIA STATE_OSTROBOTHNIA } owner = FIN }
+ 
+###### Egypt ######
+
+# Egypt to Asyut
+link = { name = "South Egypt" key = x50D060 states = { STATE_UPPER_EGYPT STATE_EGYPTIAN_DESERT STATE_DONGOLA STATE_KORDOFAN STATE_BLUE_NILE STATE_ERITREA } owner = EGY }
