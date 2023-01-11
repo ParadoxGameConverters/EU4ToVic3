@@ -41,6 +41,13 @@ struct VanillaCommonCountryData
 	bool is_named_from_capital = false;
 };
 
+struct UnprocessedData
+{
+	std::vector<std::string> vanillaHistoryElements;
+	std::vector<std::string> vanillaPopulationElements;
+	std::vector<std::string> vanillaCharacterElements;
+};
+
 struct ProcessedData
 {
 	std::string type;
@@ -66,6 +73,7 @@ struct ProcessedData
 	std::vector<Character> characters;
 	std::vector<std::string> vanillaHistoryElements;	 // stanzas from vanilla country histories, ready for direct dump.
 	std::vector<std::string> vanillaPopulationElements; // stanzas from vanilla population histories, ready for direct dump.
+	std::vector<std::string> vanillaCharacterElements;	 // stanzas from vanilla character histories, ready for direct dump.
 
 	double industryWeight = 0; // Share of global industry a country should get, not normalized
 	int CPBudget = 0;				// Construction Points for a country to spend on it's development
@@ -113,15 +121,15 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getIndustryWeight() const { return processedData.industryWeight; }
 	[[nodiscard]] const auto& getCPBudget() const { return processedData.CPBudget; }
 	[[nodiscard]] const auto& getSourceCountry() const { return sourceCountry; }
-	[[nodiscard]] const auto& getSubStates() const { return substates; }
-	void addSubState(const std::shared_ptr<SubState>& theSubstate) { substates.push_back(theSubstate); }
-	void setSubStates(const std::vector<std::shared_ptr<SubState>>& theSubstates) { substates = theSubstates; }
+	[[nodiscard]] const auto& getSubStates() const { return subStates; }
+	void addSubState(const std::shared_ptr<SubState>& theSubState) { subStates.push_back(theSubState); }
+	void setSubStates(const std::vector<std::shared_ptr<SubState>>& theSubStates) { subStates = theSubStates; }
 	void setProcessedData(const ProcessedData& data) { processedData = data; }
 
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
 	[[nodiscard]] int getPopCount() const;
-	[[nodiscard]] static int getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubstates);
+	[[nodiscard]] static int getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubStates);
 
 	void determineWesternizationWealthAndLiteracy(double topTech,
 		 double topInstitutions,
@@ -140,8 +148,9 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getRivals() const { return processedData.rivals; }
 	void addTruce(const std::string& target, int months) { processedData.truces.emplace(target, months); }
 	[[nodiscard]] const auto& getTruces() const { return processedData.truces; }
-	void setVanillaHistoryElements(const std::vector<std::string>& elements) { vanillaHistoryElements = elements; }
-	void setVanillaPopulationElements(const std::vector<std::string>& elements) { vanillaPopulationElements = elements; }
+	void setVanillaHistoryElements(const std::vector<std::string>& elements) { unprocessedData.vanillaHistoryElements = elements; }
+	void setVanillaPopulationElements(const std::vector<std::string>& elements) { unprocessedData.vanillaPopulationElements = elements; }
+	void setVanillaCharacterElements(const std::vector<std::string>& elements) { unprocessedData.vanillaCharacterElements = elements; }
 
 	void convertCharacters(const mappers::CharacterTraitMapper& characterTraitMapper,
 		 float ageShift,
@@ -166,7 +175,7 @@ class Country: commonItems::parser
 
 	void distributeGovAdmins(int numGovAdmins) const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> topPercentileStatesByPop(double percentile) const;
-	[[nodiscard]] double calculateBureaucracyUsage(const std::map<std::string, V3::Law>& lawsMap) const;
+	[[nodiscard]] double calculateBureaucracyUsage(const std::map<std::string, Law>& lawsMap) const;
 
   private:
 	void registerKeys();
@@ -186,18 +195,17 @@ class Country: commonItems::parser
 	void applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setDecentralizedEffects();
 	void determineCountryType();
-	[[nodiscard]] double calcSubStateBureaucracy(const std::map<std::string, V3::Law>& lawsMap) const;
+	[[nodiscard]] double calcSubStateBureaucracy(const std::map<std::string, Law>& lawsMap) const;
 	[[nodiscard]] double calcInstitutionBureaucracy() const;
 	[[nodiscard]] double calcCharacterBureaucracy() const;
 
 	std::string tag;
 	std::optional<VanillaCommonCountryData> vanillaData;
 	ProcessedData processedData;
-	std::vector<std::string> vanillaHistoryElements;
-	std::vector<std::string> vanillaPopulationElements;
+	UnprocessedData unprocessedData;
 
 	std::shared_ptr<EU4::Country> sourceCountry;
-	std::vector<std::shared_ptr<SubState>> substates;
+	std::vector<std::shared_ptr<SubState>> subStates;
 };
 } // namespace V3
 

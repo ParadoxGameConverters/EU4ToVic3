@@ -1018,6 +1018,18 @@
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaPopulationHistoryLoaderTests\VanillaPopulationHistoryLoaderTests.cpp">
       <Filter>V3WorldTests\LoaderTests\VanillaPopulationHistoryLoaderTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaCharacterLoader\VanillaCharacterEntries.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\VanillaCharacterLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaCharacterLoader\VanillaCharacterLoader.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\VanillaCharacterLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaCharacterLoaderTests\VanillaCharacterEntriesTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\VanillaCharacterLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaCharacterLoaderTests\VanillaCharacterLoaderTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\VanillaCharacterLoaderTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1662,6 +1674,15 @@
     <Filter Include="V3WorldTests\LoaderTests\VanillaPopulationHistoryLoaderTests">
       <UniqueIdentifier>{fe90b092-7996-4fc1-b005-a94a6bddc729}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\V3World\Loaders\VanillaCharacterLoader">
+      <UniqueIdentifier>{bddebcae-00d3-4db5-82cf-f0464db70285}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\history\characters">
+      <UniqueIdentifier>{7f1be867-bd5f-4955-ba34-08cc845bf5f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\LoaderTests\VanillaCharacterLoaderTests">
+      <UniqueIdentifier>{f881fc37-9e16-4e90-9372-55285982516f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1914,6 +1935,12 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\population\rus - russia.txt">
       <Filter>TestFiles\vic3installation\game\common\history\population</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\characters\abu - abu dhabi.txt">
+      <Filter>TestFiles\vic3installation\game\common\history\characters</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\characters\ace - aceh.txt">
+      <Filter>TestFiles\vic3installation\game\common\history\characters</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

@@ -38,6 +38,13 @@ void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFile
 			countries.at(tag)->setVanillaPopulationElements(historyElements);
 	Log(LogLevel::Info) << "<> " << vanillaCountryHistoryLoader.getCountryHistoryElements().size() << " vanilla country histories loaded.";
 
+	Log(LogLevel::Info) << "-> Loading Vanilla Characters.";
+	vanillaCharacterLoader.loadVanillaCharacters(modFS);
+	for (const auto& [tag, historyElements]: vanillaCharacterLoader.getCharacterElements())
+		if (countries.contains(tag))
+			countries.at(tag)->setVanillaCharacterElements(historyElements);
+	Log(LogLevel::Info) << "<> " << vanillaCharacterLoader.getCharacterElements().size() << " vanilla characters loaded.";
+
 	Log(LogLevel::Info) << "-> Loading Vanilla Diplomacy.";
 	vanillaDiplomacyLoader.loadVanillaDiplomacy(modFS);
 	Log(LogLevel::Info) << "<> Loaded " << vanillaDiplomacyLoader.getAgreementEntries().size() << " vanilla agreements, "
