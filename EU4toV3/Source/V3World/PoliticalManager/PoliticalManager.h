@@ -8,7 +8,9 @@
 #include "DiplomaticMapper/DiplomaticMapper.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
 #include "LawMapper/LawMapper.h"
+#include "Loaders/VanillaCountryHistoryLoader/VanillaCountryHistoryLoader.h"
 #include "Loaders/VanillaDiplomacyLoader/VanillaDiplomacyLoader.h"
+#include "Loaders/VanillaPopulationHistoryLoader/VanillaPopulationHistoryLoader.h"
 #include "ModLoader/ModFilesystem.h"
 #include "PopulationSetupMapper/PopulationSetupMapper.h"
 #include "TechSetupMapper/TechSetupMapper.h"
@@ -64,7 +66,8 @@ class PoliticalManager
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader,
 		 const LocalizationLoader& v3LocLoader,
-		 const EU4::EU4LocalizationLoader& eu4LocLoader) const;
+		 const EU4::EU4LocalizationLoader& eu4LocLoader,
+		 bool vn = false) const;
 
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& v3Tag) const;
@@ -76,6 +79,7 @@ class PoliticalManager
 	void determineAndApplyWesternization(const mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 Configuration::EUROCENTRISM eurocentrism,
+		 Configuration::STARTDATE startDate,
 		 const DatingData& datingData);
 	void setupTech();
 	void setupLaws();
@@ -94,6 +98,7 @@ class PoliticalManager
 
 	void attemptColonialTagReplacement(const mappers::ColonialRegionMapper& colonialRegionMapper, const ClayManager& clayManager);
 
+	// VN specifics
 	void importVNColonialDiplomacy(const ClayManager& clayManager);
 	void importVanillaDiplomacy();
 
@@ -119,6 +124,8 @@ class PoliticalManager
 	mappers::CharacterTraitMapper characterTraitMapper;
 	mappers::ColonialTagMapper colonialTagMapper;
 	VanillaDiplomacyLoader vanillaDiplomacyLoader;
+	VanillaCountryHistoryLoader vanillaCountryHistoryLoader;
+	VanillaPopulationHistoryLoader vanillaPopulationHistoryLoader;
 };
 } // namespace V3
 #endif // POLITICAL_MANAGER_H

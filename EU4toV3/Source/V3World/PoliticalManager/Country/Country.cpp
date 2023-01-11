@@ -388,7 +388,7 @@ void V3::Country::generateDecentralizedLocs(const LocalizationLoader& v3LocLoade
 	processedData.name += " " + suffixes[selection];
 }
 
-void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader)
+void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader, bool vn)
 {
 	// this is done when conversion from eu4 source is impossible - likely because this country doesn't exist in eu4.
 	if (!vanillaData)
@@ -403,8 +403,16 @@ void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const E
 	processedData.is_named_from_capital = vanillaData->is_named_from_capital;
 
 	// By default we're copying DECENTRALIZED nations. This means their effects should be set as if they were decentralized.
-	// TODO: When VN imports non-decentralized countries, alter this so we support loading and copying of out-of-scope vanilla effects.
-	setDecentralizedEffects();
+	if (!vn)
+	{
+		setDecentralizedEffects();
+	}
+	else
+	{
+		// When VN imports non-decentralized countries, we want entire history.
+		processedData.vanillaHistoryElements = vanillaHistoryElements;
+		processedData.vanillaPopulationElements = vanillaPopulationElements;
+	}
 
 	// do we have a name waiting for us?
 	const auto& tagName = v3LocLoader.getLocMapForKey(tag);
@@ -466,6 +474,7 @@ void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 	 const mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 Configuration::EUROCENTRISM eurocentrism,
+	 Configuration::STARTDATE startDate,
 	 const DatingData& datingData,
 	 const mappers::PopulationSetupMapper& populationSetupMapper)
 {
@@ -474,7 +483,8 @@ void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 
 	calculateBaseLiteracy(religionMapper);
 	calculateWesternization(topTech, topInstitutions, cultureMapper, eurocentrism);
-	adjustLiteracy(datingData, cultureMapper);
+	if (startDate != Configuration::STARTDATE::Vanilla)
+		adjustLiteracy(datingData, cultureMapper);
 	applyLiteracyAndWealthEffects(populationSetupMapper);
 	determineCountryType();
 }

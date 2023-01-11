@@ -19,15 +19,27 @@
 void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Loading Vanilla Countries.";
-
 	CountryDefinitionLoader definitionLoader;
 	definitionLoader.loadCommonCountries(modFS);
 	countries = definitionLoader.getCountries();
-
 	Log(LogLevel::Info) << "<> " << countries.size() << " vanilla countries loaded.";
 
-	vanillaDiplomacyLoader.loadVanillaDiplomacy(modFS);
+	Log(LogLevel::Info) << "-> Loading Vanilla Country Histories.";
+	vanillaCountryHistoryLoader.loadVanillaCountryHistories(modFS);
+	for (const auto& [tag, historyElements]: vanillaCountryHistoryLoader.getCountryHistoryElements())
+		if (countries.contains(tag))
+			countries.at(tag)->setVanillaHistoryElements(historyElements);
+	Log(LogLevel::Info) << "<> " << vanillaCountryHistoryLoader.getCountryHistoryElements().size() << " vanilla country histories loaded.";
 
+	Log(LogLevel::Info) << "-> Loading Vanilla Population Histories.";
+	vanillaPopulationHistoryLoader.loadVanillaPopulationHistories(modFS);
+	for (const auto& [tag, historyElements]: vanillaPopulationHistoryLoader.getPopulationHistoryElements())
+		if (countries.contains(tag))
+			countries.at(tag)->setVanillaPopulationElements(historyElements);
+	Log(LogLevel::Info) << "<> " << vanillaCountryHistoryLoader.getCountryHistoryElements().size() << " vanilla country histories loaded.";
+
+	Log(LogLevel::Info) << "-> Loading Vanilla Diplomacy.";
+	vanillaDiplomacyLoader.loadVanillaDiplomacy(modFS);
 	Log(LogLevel::Info) << "<> Loaded " << vanillaDiplomacyLoader.getAgreementEntries().size() << " vanilla agreements, "
 							  << vanillaDiplomacyLoader.getRelationEntries().size() << " vanilla relations and " << vanillaDiplomacyLoader.getTruceEntries().size()
 							  << " vanilla truces.";
@@ -200,7 +212,8 @@ void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader,
 	 const LocalizationLoader& v3LocLoader,
-	 const EU4::EU4LocalizationLoader& eu4LocLoader) const
+	 const EU4::EU4LocalizationLoader& eu4LocLoader,
+	 const bool vn) const
 {
 	Log(LogLevel::Info) << "-> Converting countries.";
 
@@ -212,7 +225,7 @@ void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
 
 		// this is a vic3-only (vanilla) country with no EU4 match. It's likely extinct.
 		else if (country->getVanillaData() && !country->getSourceCountry())
-			country->copyVanillaData(v3LocLoader, eu4LocLoader);
+			country->copyVanillaData(v3LocLoader, eu4LocLoader, vn);
 
 		// otherwise, this is a regular imported EU4 country
 		else if (country->getSourceCountry())
@@ -245,6 +258,7 @@ std::shared_ptr<V3::Country> V3::PoliticalManager::getCountry(const std::string&
 void V3::PoliticalManager::determineAndApplyWesternization(const mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 const Configuration::EUROCENTRISM eurocentrism,
+	 const Configuration::STARTDATE startDate,
 	 const DatingData& datingData)
 {
 	Log(LogLevel::Info) << "-> Determining Westernization.";
@@ -273,8 +287,14 @@ void V3::PoliticalManager::determineAndApplyWesternization(const mappers::Cultur
 	int uncivs = 0;
 	for (const auto& country: countries | std::views::values)
 	{
-		country
-			 ->determineWesternizationWealthAndLiteracy(topTech, topInstitutions, cultureMapper, religionMapper, eurocentrism, datingData, populationSetupMapper);
+		country->determineWesternizationWealthAndLiteracy(topTech,
+			 topInstitutions,
+			 cultureMapper,
+			 religionMapper,
+			 eurocentrism,
+			 startDate,
+			 datingData,
+			 populationSetupMapper);
 
 		// Bookkeeping.
 		if (!country->getSubStates().empty())
