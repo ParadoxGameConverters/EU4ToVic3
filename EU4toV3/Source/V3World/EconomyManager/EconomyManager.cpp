@@ -89,9 +89,12 @@ void V3::EconomyManager::hardcodePorts() const
 	{
 		for (const auto& substate: country->getSubStates())
 		{
+			if (!substate->getVanillaBuildingElements().empty())
+				continue; // don't affect states imported from vanilla.
 			if (substate->getHomeState()->isCoastal())
 			{
 				substate->setBuildingLevel("building_port", 1);
+				substate->getOwner()->addTech("navigation");
 			}
 		}
 	}

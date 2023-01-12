@@ -52,6 +52,8 @@ void OUT::exportCharacters(const std::string& outputName, const std::map<std::st
 {
 	for (const auto& [tag, country]: countries)
 	{
+		if (country->getSubStates().empty())
+			continue;
 		if (country->getProcessedData().characters.empty() && country->getProcessedData().vanillaCharacterElements.empty())
 			continue;
 

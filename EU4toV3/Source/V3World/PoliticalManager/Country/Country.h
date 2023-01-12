@@ -142,6 +142,7 @@ class Country: commonItems::parser
 		 const DatingData& datingData,
 		 const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore);
+	void addTech(const std::string& tech) { processedData.techs.emplace(tech); }
 	void addLaw(const auto& lawName) { processedData.laws.emplace(lawName); }
 	void addInstitution(const auto& institutionName) { processedData.institutions.emplace(institutionName); }
 	[[nodiscard]] Relation& getRelation(const std::string& target);
