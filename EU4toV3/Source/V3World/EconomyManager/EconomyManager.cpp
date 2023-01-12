@@ -390,6 +390,7 @@ void V3::EconomyManager::setPMs() const
 		auto data = country->getProcessedData();
 		const auto& PMName = pickBureaucracyPM(country);
 		data.productionMethods["building_government_administration"] = {PMName};
+		data.productionMethods["building_port"] = {"pm_basic_port"};
 		country->setProductionMethods(data.productionMethods);
 	}
 }

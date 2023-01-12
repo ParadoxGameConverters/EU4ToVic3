@@ -40,6 +40,8 @@ void outSubStateBuildings(std::ostream& output, const V3::SubState& subState)
 		if (level > 0)
 			outBuilding(output, building, level, *subState.getOwner());
 	}
+	for (const auto& element: subState.getVanillaBuildingElements())
+		output << "\t\t\t" << element << "\n";
 	output << "\t\t}\n";
 }
 void outStateBuildings(std::ostream& output, const V3::State& state)
@@ -47,7 +49,7 @@ void outStateBuildings(std::ostream& output, const V3::State& state)
 	output << "\ts:" << state.getName() << " = {\n";
 	for (const auto& substate: state.getSubStates())
 	{
-		if (substate->getBuildings().empty())
+		if (substate->getBuildings().empty() && substate->getVanillaBuildingElements().empty())
 			continue;
 		outSubStateBuildings(output, *substate);
 	}
@@ -64,7 +66,7 @@ void OUT::exportBuildings(const std::string& outputName, const std::map<std::str
 	for (const auto& state: states | std::views::values)
 	{
 		if (std::ranges::all_of(state->getSubStates(), [](const auto& subState) {
-				 return subState->getBuildings().empty();
+				 return subState->getBuildings().empty() && subState->getVanillaBuildingElements().empty();
 			 }))
 		{
 			continue;

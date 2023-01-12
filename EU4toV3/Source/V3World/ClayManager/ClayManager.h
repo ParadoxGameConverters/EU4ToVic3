@@ -1,6 +1,7 @@
 #ifndef CLAY_MANAGER_H
 #define CLAY_MANAGER_H
 #include "ClayMapTypedefs.h"
+#include "Loaders/VanillaBuildingLoader/VanillaBuildingLoader.h"
 #include "ModLoader/ModFilesystem.h"
 #include "VNColonialMapper/VNColonialMapper.h"
 #include <string>
@@ -81,6 +82,7 @@ class ClayManager
 	std::vector<std::shared_ptr<SubState>> substates; // political entities
 
 	mappers::VNColonialMapper vnColonialMapper;
+	VanillaBuildingLoader vanillaBuildingLoader;
 };
 } // namespace V3
 #endif // CLAY_MANAGER_H
