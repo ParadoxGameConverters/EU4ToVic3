@@ -29,8 +29,11 @@ void V3::ClayManager::initializeVanillaStates(const commonItems::ModFilesystem& 
 	for (const auto& state: states | std::views::values)
 		for (const auto& provinceID: state->getProvinces() | std::views::keys)
 			provincesToStates.emplace(provinceID, state);
-
 	Log(LogLevel::Info) << "<> " << states.size() << " states loaded with " << provincesToStates.size() << " provinces inside.";
+
+	Log(LogLevel::Info) << "-> Loading Vanilla State Buildings.";
+	vanillaBuildingLoader.loadVanillaBuildings(modFS);
+	Log(LogLevel::Info) << "<> " << vanillaBuildingLoader.getBuildingElements().size() << " states loaded with buildings.";
 }
 
 void V3::ClayManager::loadTerrainsIntoProvinces(const commonItems::ModFilesystem& modFS)
@@ -529,6 +532,13 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		const double subStateRatio = static_cast<double>(availableProvinces.size()) / static_cast<double>(subStateEntry.getProvinces().size());
 		auto newPops = prepareInjectedSubStatePops(newSubState, subStateRatio, popManager);
 
+		// Transfer original buildings, unscaled at the moment.
+		// TODO: Scale this if necessary.
+		if (vanillaBuildingLoader.getBuildingElements().contains(stateName) && vanillaBuildingLoader.getBuildingElements().at(stateName).contains(ownerTag))
+		{
+			newSubState->setVanillaBuildingElements(vanillaBuildingLoader.getBuildingElements().at(stateName).at(ownerTag));
+		}
+
 		// and shove.
 		newSubState->setSubStatePops(newPops);
 
@@ -685,6 +695,7 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 	std::vector<Demographic> demographics;
 	SubStatePops subStatePops;
 	std::vector<Pop> pops;
+	std::vector<std::string> vanillaBuildingElements;
 
 	for (const auto& subState: subStates)
 	{
@@ -701,6 +712,9 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 		spData.insert(spData.end(), subState->getSourceProvinceData().begin(), subState->getSourceProvinceData().end());
 		demographics.insert(demographics.end(), subState->getDemographics().begin(), subState->getDemographics().end());
 		pops.insert(pops.end(), subState->getSubStatePops().getPops().begin(), subState->getSubStatePops().getPops().end());
+		vanillaBuildingElements.insert(vanillaBuildingElements.end(),
+			 subState->getVanillaBuildingElements().begin(),
+			 subState->getVanillaBuildingElements().end());
 	}
 	auto newSubState = std::make_shared<SubState>();
 	newSubState->setHomeState((*subStates.begin())->getHomeState());
@@ -716,6 +730,7 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 	subStatePops.setTag(newSubState->getOwner()->getTag());
 	subStatePops.setPops(pops);
 	newSubState->setSubStatePops(subStatePops);
+	newSubState->setVanillaBuildingElements(vanillaBuildingElements);
 
 	return newSubState;
 }

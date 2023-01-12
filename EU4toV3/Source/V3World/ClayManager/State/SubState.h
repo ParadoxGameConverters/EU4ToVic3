@@ -57,6 +57,7 @@ class SubState
 	void setIndustryWeight(const double theIndustryWeight) { industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theCPBudget) { CPBudget = theCPBudget; }
 	void setBuildingLevel(const std::string& building, const int level) { buildings[building] = level; }
+	void setVanillaBuildingElements(const std::vector<std::string>& elements) { vanillaBuildingElements = elements; }
 
 	void convertDemographics(const ClayManager& clayManager,
 		 mappers::CultureMapper& cultureMapper,
@@ -91,6 +92,7 @@ class SubState
 	[[nodiscard]] const auto& getCPBudget() const { return CPBudget; }
 	[[nodiscard]] std::optional<int> getBuildingLevel(const std::string& building) const;
 	[[nodiscard]] const auto& getBuildings() const { return buildings; }
+	[[nodiscard]] const auto& getVanillaBuildingElements() const { return vanillaBuildingElements; }
 
 	[[nodiscard]] auto isIncorporated() const { return incorporated; }
 	[[nodiscard]] auto isMarketCapital() const { return marketCapital; }
@@ -127,6 +129,8 @@ class SubState
 	double industryWeight = 0;				  // Share of owner's industry a substate should get, not normalized
 	int CPBudget = 0;							  // Construction Points for a substate to spend on it's development
 	std::map<std::string, int> buildings; // building -> level
+
+	std::vector<std::string> vanillaBuildingElements; // vanilla buildings for this substate, ready for direct dump.
 };
 } // namespace V3
 

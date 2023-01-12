@@ -42,7 +42,7 @@ struct Character
 	void convertTraits(const EU4::Character& character, const mappers::CharacterTraitMapper& characterTraitMapper);
 	[[nodiscard]] bool isCharacterDryAndIncompetent(const EU4::Character& character) const;
 	[[nodiscard]] bool isLeaderSemiDryAndHyperCompetent(const EU4::Character& character) const;
-	[[nodiscard]] bool isCharacterSemiDryAndOld(const EU4::Character& character) const;
+	[[nodiscard]] bool isCharacterSemiDryAndOld() const;
 
 	std::string firstName; // KEY
 	std::string lastName;  // KEY

@@ -1042,6 +1042,18 @@
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomaticPlayLoaderTests\VanillaDiplomaticPlayLoaderTests.cpp">
       <Filter>V3WorldTests\LoaderTests\VanillaDiplomaticPlayLoaderTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaBuildingLoader\VanillaBuildingEntries.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\VanillaBuildingLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaBuildingLoader\VanillaBuildingLoader.cpp">
+      <Filter>ConverterFiles\V3World\Loaders\VanillaBuildingLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaBuildingLoaderTests\VanillaBuildingEntriesTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\VanillaBuildingLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaBuildingLoaderTests\VanillaBuildingLoaderTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\VanillaBuildingLoaderTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1704,6 +1716,15 @@
     <Filter Include="V3WorldTests\LoaderTests\VanillaDiplomaticPlayLoaderTests">
       <UniqueIdentifier>{bc3f7edc-2685-4952-976d-a2649bf7db6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\V3World\Loaders\VanillaBuildingLoader">
+      <UniqueIdentifier>{bb236129-5449-4cb8-93d2-e07415bef458}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\vic3installation\game\common\history\buildings">
+      <UniqueIdentifier>{ffad5bfd-de20-4289-9336-d034d4d13fa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="V3WorldTests\LoaderTests\VanillaBuildingLoaderTests">
+      <UniqueIdentifier>{c966864f-7cc6-41e4-8378-c2718d674406}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -1968,6 +1989,12 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomatic_plays\00_bbb.txt">
       <Filter>TestFiles\vic3installation\game\common\history\diplomatic_plays</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\buildings\00_west_europe.txt">
+      <Filter>TestFiles\vic3installation\game\common\history\buildings</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\buildings\01_south_europe.txt">
+      <Filter>TestFiles\vic3installation\game\common\history\buildings</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>
