@@ -1,10 +1,10 @@
 #ifndef STATE_MODIFIER_H
 #define STATE_MODIFIER_H
+#include "EconomyManager/Building/BuildingGroups.h"
 #include "Parser.h"
 
 namespace V3
 {
-class BuildingGroups;
 class StateModifier: commonItems::parser
 {
   public:
@@ -21,7 +21,7 @@ class StateModifier: commonItems::parser
 	[[nodiscard]] const auto& getBuildingModifiersMap() const { return buildingModifiers; }
 	[[nodiscard]] const auto& getGoodsModifiersMap() const { return goodsModifiers; }
 	[[nodiscard]] static double getAllBonuses(const std::map<std::string, double>& modifierMap); // Sum of all modifiers off a single type
-	[[nodiscard]] std::optional<double> getBuildingGroupModifier(const std::string& buildingGroup, std::shared_ptr<BuildingGroups> bgs) const;
+	[[nodiscard]] std::optional<double> getBuildingGroupModifier(const std::string& buildingGroup, const BuildingGroups& bgs) const;
 	[[nodiscard]] std::optional<double> getBuildingModifier(const std::string& building) const;
 	[[nodiscard]] std::optional<double> getGoodsModifier(const std::string& good) const;
 

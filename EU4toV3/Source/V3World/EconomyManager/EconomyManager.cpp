@@ -60,7 +60,7 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 	for (const auto& country: centralizedCountries)
 	{
 		// Check tech requirement for government administrations.
-		if (!country->hasAnyOfTech(govAdmin->getUnlockingTechs()))
+		if (!country->hasAnyOfTech(govAdmin.getUnlockingTechs()))
 		{
 			continue;
 		}
@@ -235,14 +235,14 @@ void V3::EconomyManager::balanceNationalBudgets() const
 void V3::EconomyManager::planSubStateEconomies(const std::shared_ptr<Country>& country) const
 {
 	// Select the valid buildings
-	auto isValid = [country](const std::pair<std::string, std::shared_ptr<Building>>& buildingPair) {
+	auto isValid = [country](const std::pair<std::string, const Building&>& buildingPair) {
 		// Skip government admins, they are special
 		if (buildingPair.first == "building_government_administration")
 		{
 			return false;
 		}
 		// We can only build what we have the tech for
-		if (!country->hasAnyOfTech(buildingPair.second->getUnlockingTechs()))
+		if (!country->hasAnyOfTech(buildingPair.second.getUnlockingTechs()))
 		{
 			return false;
 		}
@@ -276,12 +276,6 @@ void V3::EconomyManager::buildBuildings() const
 
 	for (const auto& country: centralizedCountries)
 	{
-		for (const auto& substate: country->getSubStates())
-		{
-
-			{
-			}
-		}
 	}
 }
 
@@ -401,9 +395,9 @@ double V3::EconomyManager::calculateStateTraitMultiplier(const std::shared_ptr<S
 		const auto& stateTrait = stateTraits.at(trait);
 
 		// Throughput bonuses to goods, buildings or whole building groups factor in
-		const double goodsModifiers = stateTrait->getAllBonuses(stateTrait->getGoodsModifiersMap());
-		const double buildingsModifiers = stateTrait->getAllBonuses(stateTrait->getBuildingModifiersMap());
-		const double buildingGroupsModifiers = stateTrait->getAllBonuses(stateTrait->getBuildingGroupModifiersMap());
+		const double goodsModifiers = stateTrait.getAllBonuses(stateTrait.getGoodsModifiersMap());
+		const double buildingsModifiers = stateTrait.getAllBonuses(stateTrait.getBuildingModifiersMap());
+		const double buildingGroupsModifiers = stateTrait.getAllBonuses(stateTrait.getBuildingGroupModifiersMap());
 
 		// (20% goods bonus + -30% building bonus + 15% building group bonus) @ half strength = 2.5% Bonus = 0.025
 		stateTraitMultiplier += (goodsModifiers + buildingsModifiers + buildingGroupsModifiers) * econDefines.getStateTraitStrength();

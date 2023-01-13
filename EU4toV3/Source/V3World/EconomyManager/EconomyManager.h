@@ -1,6 +1,9 @@
 #ifndef ECONOMY_MANAGER_H
 #define ECONOMY_MANAGER_H
+#include "Building/Building.h"
+#include "Building/BuildingGroups.h"
 #include "BuildingMapper/BuildingMapper.h"
+#include "ClayManager/State/StateModifier.h"
 #include "Configuration.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethod.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethodGroup.h"
@@ -11,10 +14,7 @@
 
 namespace V3
 {
-class StateModifier;
 class Country;
-class Building;
-class BuildingGroups;
 /*
  * PreReqs: Clay(Substates merged under the right country), Pops, Laws, Tech
  * all must be converted first in the current design.
@@ -88,13 +88,13 @@ class EconomyManager
 
 	TechLoader techMap;
 
-	std::map<std::string, std::shared_ptr<StateModifier>> stateTraits;
+	std::map<std::string, StateModifier> stateTraits;
 	std::map<std::string, double> stateTerrainModifiers;
 	std::map<std::string, std::map<std::string, double>> buildingTerrainModifiers;
 
 	mappers::BuildingMapper buildingMapper;
-	std::map<std::string, std::shared_ptr<Building>> buildings;
-	std::shared_ptr<BuildingGroups> buildingGroups;
+	std::map<std::string, Building> buildings;
+	BuildingGroups buildingGroups;
 	std::map<std::string, ProductionMethod> PMs;
 	std::map<std::string, ProductionMethodGroup> PMGroups;
 };

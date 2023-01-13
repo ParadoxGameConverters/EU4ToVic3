@@ -19,7 +19,7 @@ TEST(V3World_StateModifierLoaderTests, StateModiferLoaderSetsStateModifierNames)
 
 	const auto stateModifiers = stateModifierLoader.getStateModifiers();
 
-	EXPECT_THAT("state_trait_harbor", stateModifiers.at("state_trait_harbor")->getName());
-	EXPECT_THAT("state_trait_falls", stateModifiers.at("state_trait_falls")->getName());
-	EXPECT_THAT("state_trait_prairies", stateModifiers.at("state_trait_prairies")->getName());
+	EXPECT_THAT("state_trait_harbor", stateModifiers.at("state_trait_harbor").getName());
+	EXPECT_THAT("state_trait_falls", stateModifiers.at("state_trait_falls").getName());
+	EXPECT_THAT("state_trait_prairies", stateModifiers.at("state_trait_prairies").getName());
 }

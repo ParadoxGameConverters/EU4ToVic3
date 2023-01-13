@@ -56,7 +56,7 @@ double V3::StateModifier::getAllBonuses(const std::map<std::string, double>& mod
 	return std::accumulate(modifiers.begin(), modifiers.end(), 0.0);
 }
 
-std::optional<double> V3::StateModifier::getBuildingGroupModifier(const std::string& buildingGroup, std::shared_ptr<BuildingGroups> bgs) const
+std::optional<double> V3::StateModifier::getBuildingGroupModifier(const std::string& buildingGroup, const BuildingGroups& bgs) const
 {
 	std::string theBuildingGroup = buildingGroup;
 	do
@@ -65,8 +65,8 @@ std::optional<double> V3::StateModifier::getBuildingGroupModifier(const std::str
 		{
 			return possibleModifier->second;
 		}
-		theBuildingGroup = bgs->safeGetParentName(theBuildingGroup);
-	} while (bgs->getParentName(theBuildingGroup));
+		theBuildingGroup = bgs.safeGetParentName(theBuildingGroup);
+	} while (bgs.getParentName(theBuildingGroup));
 	return std::nullopt;
 }
 
