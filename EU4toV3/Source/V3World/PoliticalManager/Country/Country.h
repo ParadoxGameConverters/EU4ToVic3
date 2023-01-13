@@ -26,6 +26,7 @@ class CultureMapper;
 class PopulationSetupMapper;
 class TechSetupMapper;
 class CharacterTraitMapper;
+class CountryTierMapper;
 } // namespace mappers
 namespace V3
 {
@@ -112,7 +113,9 @@ class Country: commonItems::parser
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader,
-		 const mappers::IdeaEffectsMapper& ideaEffectMapper);
+		 const mappers::IdeaEffectsMapper& ideaEffectMapper,
+		 const mappers::CountryTierMapper& countryTierMapper,
+		 bool vn = false);
 	void copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader, bool vn = false);
 	void generateDecentralizedData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 
@@ -190,7 +193,7 @@ class Country: commonItems::parser
 		 mappers::CultureMapper& cultureMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader);
-	void convertTier();
+	void convertTier(const mappers::CountryTierMapper& countryTierMapper, bool vn);
 	void generateDecentralizedLocs(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 	void calculateBaseLiteracy(const mappers::ReligionMapper& religionMapper);
 	void calculateWesternization(double topTech, double topInstitutions, const mappers::CultureMapper& cultureMapper, Configuration::EUROCENTRISM eurocentrism);

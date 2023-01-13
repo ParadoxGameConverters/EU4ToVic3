@@ -4,6 +4,7 @@
 #include "ClayManager/State/SubState.h"
 #include "CommonRegexes.h"
 #include "CountryManager/EU4Country.h"
+#include "CountryTierMapper/CountryTierMapper.h"
 #include "CultureMapper/CultureMapper.h"
 #include "Loaders/LawLoader/Law.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
@@ -154,7 +155,9 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	 const mappers::ReligionMapper& religionMapper,
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader,
-	 const mappers::IdeaEffectsMapper& ideaEffectMapper)
+	 const mappers::IdeaEffectsMapper& ideaEffectMapper,
+	 const mappers::CountryTierMapper& countryTierMapper,
+	 const bool vn)
 {
 	// color - using eu4 colors so people don't lose their shit over red venice and orange england.
 	if (sourceCountry->getNationalColors().getMapColor())
@@ -185,7 +188,7 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	convertCulture(clayManager, cultureMapper, cultureLoader, religionLoader);
 
 	// tier
-	convertTier();
+	convertTier(countryTierMapper, vn);
 
 	// country type is determined after westernization is set.
 
@@ -206,22 +209,13 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 		processedData.revolutionaryColor = sourceCountry->getNationalColors().getRevolutionaryColor();
 }
 
-void V3::Country::convertTier()
+void V3::Country::convertTier(const mappers::CountryTierMapper& countryTierMapper, const bool vn)
 {
-	// TODO: Allow some dynamic configurable rules for this. VN for example has 6 incoming government ranks almost literally matching the Vic3 ones.
-
-	if (sourceCountry->getGovernmentRank() == 1 && subStates.size() == 1)
-		processedData.tier = "city_state";
-	else if (sourceCountry->getGovernmentRank() == 1)
-		processedData.tier = "principality";
-	else if (sourceCountry->getGovernmentRank() == 2 && subStates.size() <= 3)
-		processedData.tier = "grand_principality";
-	else if (sourceCountry->getGovernmentRank() == 2)
-		processedData.tier = "kingdom";
-	else if (sourceCountry->getGovernmentRank() == 3 && subStates.size() <= 20)
-		processedData.tier = "empire";
+	if (const auto& match = countryTierMapper.matchCountryTier(sourceCountry->getGovernmentRank(), subStates.size(), vn); match)
+		processedData.tier = *match;
 	else
-		processedData.tier = "hegemony";
+		Log(LogLevel::Warning) << "No match for government rank " << sourceCountry->getGovernmentRank() << " (size " << subStates.size()
+									  << ") in country_tiers.txt!";
 }
 
 void V3::Country::convertCulture(const ClayManager& clayManager,

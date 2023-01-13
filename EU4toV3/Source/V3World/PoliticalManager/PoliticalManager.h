@@ -3,6 +3,7 @@
 #include "CharacterTraitMapper/CharacterTraitMapper.h"
 #include "ColonialTagMapper/ColonialTagMapper.h"
 #include "Configuration.h"
+#include "CountryTierMapper/CountryTierMapper.h"
 #include "DatingData.h"
 #include "Diplomacy/Agreement.h"
 #include "DiplomaticMapper/DiplomaticMapper.h"
@@ -60,6 +61,7 @@ class PoliticalManager
 	void loadDiplomaticMapperRules(const std::string& filePath);
 	void loadCharacterTraitMapperRules(const std::string& filePath);
 	void loadColonialTagMapperRules(const std::string& filePath);
+	void loadCountryTierMapperRules(const std::string& filePath);
 	void importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries);
 	void generateDecentralizedCountries(const ClayManager& clayManager, const PopManager& popManager);
 	void convertAllCountries(const ClayManager& clayManager,
@@ -125,6 +127,7 @@ class PoliticalManager
 	mappers::DiplomaticMapper diplomaticMapper;
 	mappers::CharacterTraitMapper characterTraitMapper;
 	mappers::ColonialTagMapper colonialTagMapper;
+	mappers::CountryTierMapper countryTierMapper;
 	VanillaDiplomacyLoader vanillaDiplomacyLoader;
 	VanillaCountryHistoryLoader vanillaCountryHistoryLoader;
 	VanillaPopulationHistoryLoader vanillaPopulationHistoryLoader;
