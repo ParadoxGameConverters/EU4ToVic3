@@ -144,6 +144,8 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialTagMapper\ColonialTagMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CountryMapper\CountryMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CountryMapper\CountryMapping.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CountryTierMapper\CountryTierMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CountryTierMapper\CountryTierMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionEntry.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureMapper.cpp" />
@@ -316,6 +318,8 @@
     <ClCompile Include="MapperTests\BuildingMapperTests\BuildingMappingTests.cpp" />
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMapperTests.cpp" />
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMappingTests.cpp" />
+    <ClCompile Include="MapperTests\CountryTierMapperTests\CountryTierMapperTests.cpp" />
+    <ClCompile Include="MapperTests\CountryTierMapperTests\CountryTierMappingTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureDefinitionLoaderTests\CultureDefinitionEntryTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureDefinitionLoaderTests\CultureDefinitionLoaderTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureMapperTests.cpp" />
@@ -816,6 +820,11 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\buildings\01_south_europe.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/buildings</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\country_tiers.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

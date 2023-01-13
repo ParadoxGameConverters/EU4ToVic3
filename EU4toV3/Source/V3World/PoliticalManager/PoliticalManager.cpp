@@ -81,6 +81,11 @@ void V3::PoliticalManager::loadTechSetupMapperRules(const std::string& filePath)
 	techSetupMapper.loadMappingRules(filePath);
 }
 
+void V3::PoliticalManager::loadCountryTierMapperRules(const std::string& filePath)
+{
+	countryTierMapper.loadMappingRules(filePath);
+}
+
 void V3::PoliticalManager::loadLawMapperRules(const std::string& filePath)
 {
 	lawMapper.loadMappingRules(filePath);
