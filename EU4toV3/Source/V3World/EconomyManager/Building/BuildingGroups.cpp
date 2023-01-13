@@ -39,7 +39,7 @@ const std::string& V3::BuildingGroups::safeGetParentName(const std::string& theB
 	return safeGetBuildingGroup(theBuildingGroupName)->getParentName();
 }
 
-std::optional<int> V3::BuildingGroups::getInfrastructureCost(const std::string& theBuildingGroupName) const
+std::optional<double> V3::BuildingGroups::getInfrastructureCost(const std::string& theBuildingGroupName) const
 {
 	const auto& possibleBuildingGroup = buildingGroups.find(theBuildingGroupName);
 	if (possibleBuildingGroup != buildingGroups.end())
@@ -52,7 +52,7 @@ std::optional<int> V3::BuildingGroups::getInfrastructureCost(const std::string& 
 	}
 }
 
-int V3::BuildingGroups::safeGetInfrastructureCost(const std::string& theBuildingGroupName) const
+double V3::BuildingGroups::safeGetInfrastructureCost(const std::string& theBuildingGroupName) const
 {
 	return safeGetBuildingGroup(theBuildingGroupName)->getInfrastructureCost();
 }

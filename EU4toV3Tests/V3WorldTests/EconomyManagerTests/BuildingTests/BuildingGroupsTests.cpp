@@ -15,14 +15,14 @@ TEST(V3World_BuildingGroupsTests, BadKeyReturnsDefaultValuesAndIsLogged)
 	std::cout.rdbuf(log.rdbuf());
 
 	const std::string& parentName = buildingGroups->safeGetParentName("not_a_key0");
-	const int infrastructureCost = buildingGroups->safeGetInfrastructureCost("not_a_key1");
+	const auto infrastructureCost = buildingGroups->safeGetInfrastructureCost("not_a_key1");
 
 	EXPECT_THAT(log.str(),
 		 testing::HasSubstr(R"([ERROR] Key not recognized: not_a_key0 is not a recognized building_group. Using an empty group in its place.)"));
 	EXPECT_THAT(log.str(),
 		 testing::HasSubstr(R"([ERROR] Key not recognized: not_a_key1 is not a recognized building_group. Using an empty group in its place.)"));
 	EXPECT_TRUE(parentName.empty());
-	EXPECT_EQ(0, infrastructureCost);
+	EXPECT_DOUBLE_EQ(0, infrastructureCost);
 
 	std::cout.rdbuf(cout_buffer);
 }
@@ -47,11 +47,11 @@ TEST(V3World_BuildingGroupsTests, BuildingsGroupsSetHierarchyAndCost)
 	buildingGroupLoader.loadBuildingGroups(modFS);
 
 	EXPECT_EQ("", buildingGroups->getParentName("bg_manufacturing"));
-	EXPECT_EQ(0, buildingGroups->getInfrastructureCost("bg_manufacturing"));
+	EXPECT_DOUBLE_EQ(0, *buildingGroups->getInfrastructureCost("bg_manufacturing"));
 
 	EXPECT_EQ("bg_manufacturing", buildingGroups->getParentName("bg_light_industry"));
-	EXPECT_EQ(2, buildingGroups->getInfrastructureCost("bg_light_industry"));
+	EXPECT_DOUBLE_EQ(2, *buildingGroups->getInfrastructureCost("bg_light_industry"));
 
 	EXPECT_EQ("bg_mega_industry", buildingGroups->getParentName("bg_giga_industry"));
-	EXPECT_EQ(1, buildingGroups->getInfrastructureCost("bg_giga_industry"));
+	EXPECT_DOUBLE_EQ(1, *buildingGroups->getInfrastructureCost("bg_giga_industry"));
 }

@@ -17,9 +17,8 @@ void outSubState(std::ostream& output, const V3::SubState& substate)
 	for (const auto& provinceID: substate.getProvinces() | std::views::keys)
 		output << provinceID << " ";
 	output << "}\n";
-
-	// TODO: \t\t\t state_type = unincorporated
-	// TODO: \t\t\t state_type = treaty_port (can be both)
+	for (const auto& stateType: substate.getSubStateTypes())
+		output << "\t\t\tstate_type = " << stateType << "\n";
 
 	output << "\t\t}\n";
 }
@@ -29,8 +28,9 @@ void outState(std::ostream& output, const V3::State& state)
 	output << "\ts:" << state.getName() << " = {\n";
 	for (const auto& substate: state.getSubStates())
 		outSubState(output, *substate);
+	for (const auto& homeLand: state.getHomelands())
+		output << "\t\tadd_homeland = " << homeLand << "\n";
 
-	// TODO: \t\t add_homeland = culture
 	// TODO: \t\t add_claim = c:TAG
 
 	output << "\t}\n";

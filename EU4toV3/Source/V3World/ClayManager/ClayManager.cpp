@@ -523,8 +523,9 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		auto newSubState = std::make_shared<SubState>();
 		newSubState->setOwner(owner);
 		newSubState->setProvinces(availableProvinces);
-		newSubState->setSubStateType(subStateEntry.getSubStateType());
+		newSubState->setSubStateTypes(subStateEntry.getSubStateTypes());
 		newSubState->setHomeState(homeState);
+		newSubState->setVanillaSubState();
 
 		// How many provinces did we lose in the transfer? Ie. How many of this substate's original provinces were already assigned to some other substate?
 		// We can use this ratio to cut our popcount. Or we could use any other more involved function.
@@ -689,7 +690,7 @@ void V3::ClayManager::squashAllSubStates(const PoliticalManager& politicalManage
 std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector<std::shared_ptr<SubState>>& subStates) const
 {
 	ProvinceMap provinces;
-	std::string subStateType;
+	std::set<std::string> subStateTypes;
 	double weight = 0;
 	std::vector<std::pair<SourceProvinceData, double>> spData;
 	std::vector<Demographic> demographics;
@@ -703,8 +704,8 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 
 		// unsure about this. If one is unincorporated, all are unincorporated?
 		// TODO: See what this does
-		if (!subState->getSubStateType().empty())
-			subStateType = subState->getSubStateType();
+		if (!subState->getSubStateTypes().empty())
+			subStateTypes = subState->getSubStateTypes();
 
 		if (subState->getWeight())
 			weight += *subState->getWeight();
@@ -721,7 +722,7 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 	newSubState->setOwner((*subStates.begin())->getOwner());
 
 	newSubState->setProvinces(provinces);
-	newSubState->setSubStateType(subStateType);
+	newSubState->setSubStateTypes(subStateTypes);
 	if (weight > 0)
 		newSubState->setWeight(weight);
 	newSubState->setSourceProvinceData(spData);

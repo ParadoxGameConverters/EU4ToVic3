@@ -10,18 +10,18 @@ class BuildingGroup: commonItems::parser
 	BuildingGroup() = default;
 	void loadBuildingGroup(std::istream& theStream);
 	void setName(const std::string& theName) { name = theName; }
-	void setInfrastructureCost(int theCost) { infrastructureCost = theCost; }
+	void setInfrastructureCost(double theCost) { infrastructureCost = theCost; }
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getParentName() const { return parent; }
-	[[nodiscard]] const auto& getInfrastructureCost() const { return infrastructureCost; }
+	[[nodiscard]] auto getInfrastructureCost() const { return infrastructureCost; }
 
 
   private:
 	void registerKeys();
 	std::string name;
 	std::string parent;
-	int infrastructureCost = 0;
+	double infrastructureCost = 0;
 };
 } // namespace V3
 

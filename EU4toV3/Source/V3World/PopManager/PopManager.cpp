@@ -61,11 +61,42 @@ void V3::PopManager::convertDemographics(const ClayManager& clayManager,
 		for (const auto& subState: state->getSubStates())
 		{
 			// skip imported substates, those already have pops and carry no demographics.
-			if (subState->getSubStatePops().getPopCount() > 0)
+			if (subState->isVanillaSubState())
 				continue;
 			subState->convertDemographics(clayManager, cultureMapper, religionMapper, cultureLoader, religionLoader);
 		}
 	}
+}
+
+void V3::PopManager::applyHomeLands(const ClayManager& clayManager) const
+{
+	Log(LogLevel::Info) << "-> Applying Homelands.";
+	auto counter = 0;
+	for (const auto& [stateName, state]: clayManager.getStates())
+	{
+		if (state->isSea() || state->isLake())
+			continue;
+
+		if (!vanillaStatePops.contains(stateName))
+		{
+			Log(LogLevel::Warning) << "State " << stateName << " is unknown. Not processing for homelands.";
+			continue;
+		}
+
+		for (const auto& subState: state->getSubStates())
+		{
+			// skip imported substates, those already have imported homelands into their states.
+			if (subState->isVanillaSubState())
+				continue;
+			if (const auto& primaryCulture = subState->getPrimaryCulture(); primaryCulture)
+			{
+				state->addHomeland(*primaryCulture);
+				++counter;
+			}
+		}
+	}
+
+	Log(LogLevel::Info) << "<> Applied " << counter << " homelands.";
 }
 
 std::string V3::PopManager::getDominantVanillaCulture(const std::string& stateName) const

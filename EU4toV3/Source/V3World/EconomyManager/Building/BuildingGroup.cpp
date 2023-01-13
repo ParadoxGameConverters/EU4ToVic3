@@ -15,7 +15,7 @@ void V3::BuildingGroup::registerKeys()
 		parent = commonItems::getString(theStream);
 	});
 	registerKeyword("infrastructure_usage_per_level", [this](std::istream& theStream) {
-		infrastructureCost = commonItems::getInt(theStream);
+		infrastructureCost = commonItems::getDouble(theStream);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

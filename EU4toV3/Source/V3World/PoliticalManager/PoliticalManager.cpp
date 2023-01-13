@@ -630,6 +630,7 @@ void V3::PoliticalManager::changeTag(const std::string& replacement, const std::
 		countries[replacement] = countries[tag];
 	else
 		countries.emplace(replacement, countries.at(tag));
+	countries.erase(tag);
 
 	countries[replacement]->setTag(replacement);
 
