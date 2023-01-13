@@ -115,7 +115,7 @@ class Country: commonItems::parser
 		 const EU4::ReligionLoader& religionLoader,
 		 const mappers::IdeaEffectsMapper& ideaEffectMapper,
 		 const mappers::CountryTierMapper& countryTierMapper,
-		 bool vn);
+		 bool vn = false);
 	void copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader, bool vn = false);
 	void generateDecentralizedData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 

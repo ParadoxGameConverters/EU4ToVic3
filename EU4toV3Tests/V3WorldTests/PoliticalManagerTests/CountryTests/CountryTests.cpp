@@ -2,6 +2,7 @@
 #include "ClayManager/State/SubState.h"
 #include "CommonFunctions.h"
 #include "CountryManager/EU4Country.h"
+#include "CountryTierMapper/CountryTierMapper.h"
 #include "CultureMapper/CultureMapper.h"
 #include "Loaders/CultureLoader/CultureLoader.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
@@ -78,7 +79,7 @@ TEST(V3World_CountryTests, CountryCanImportColorFromEU4)
 	country.setSourceCountry(srcCountry);
 
 	mappers::CultureMapper culMapper;
-	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {}, {});
+	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {}, {}, {});
 
 	EXPECT_TRUE(country.getProcessedData().color);
 	EXPECT_EQ(commonItems::Color(std::array{1, 2, 3}), country.getProcessedData().color);
@@ -100,7 +101,7 @@ TEST(V3World_CountryTests, CountryWillOverrideVic3colorWithEU4Color)
 	country.setSourceCountry(srcCountry);
 
 	mappers::CultureMapper culMapper;
-	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {}, {});
+	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {}, {}, {});
 
 	EXPECT_TRUE(country.getProcessedData().color);
 	EXPECT_EQ(commonItems::Color(std::array{1, 2, 3}), country.getProcessedData().color);
@@ -121,7 +122,7 @@ TEST(V3World_CountryTests, CountryWillNotOverrideVic3colorWithEU4ColorIfNone)
 	country.setSourceCountry(srcCountry);
 
 	mappers::CultureMapper culMapper;
-	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {}, {});
+	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {}, {}, {});
 
 	EXPECT_TRUE(country.getProcessedData().color);
 	EXPECT_EQ(commonItems::Color(std::array{4, 5, 6}), country.getProcessedData().color);
@@ -144,7 +145,7 @@ TEST(V3World_CountryTests, LocalizationsAreAvailable)
 	country.setTag("GAT");
 	country.setSourceCountry(srcCountry);
 	mappers::CultureMapper culMapper;
-	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {}, {});
+	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {}, {}, {});
 
 	EXPECT_EQ("Name1", country.getName("english"));
 	EXPECT_EQ("Name2", country.getName("albanian"));
@@ -167,7 +168,7 @@ TEST(V3World_CountryTests, MissingLocalizationsDefaultToEnglish)
 	country.setTag("GAT");
 	country.setSourceCountry(srcCountry);
 	mappers::CultureMapper culMapper;
-	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {}, {});
+	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {}, {}, {});
 
 	EXPECT_EQ("Name1", country.getName("english"));
 	EXPECT_EQ("Name1", country.getName("albanian"));
@@ -188,7 +189,7 @@ TEST(V3World_CountryTests, AbsentLocalizationsDefaultToTag)
 	country.setTag("GAT");
 	country.setSourceCountry(srcCountry);
 	mappers::CultureMapper culMapper;
-	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {}, {});
+	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {}, {}, {});
 
 	EXPECT_EQ("GAT", country.getName("english"));
 	EXPECT_EQ("GAT_ADJ", country.getAdjective("english"));
