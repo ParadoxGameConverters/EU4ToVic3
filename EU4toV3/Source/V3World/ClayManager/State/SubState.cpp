@@ -11,6 +11,27 @@
 #include <numeric>
 #include <ranges>
 
+namespace
+{
+std::vector<std::string> sortMap(const std::map<std::string, int>& theMap)
+{
+	std::vector<std::string> sorted;
+
+	std::vector<std::pair<std::string, int>> pairs;
+	for (const auto& theElement: theMap)
+		pairs.emplace_back(theElement);
+
+	std::ranges::sort(pairs.begin(), pairs.end(), [=](const std::pair<std::string, int>& a, const std::pair<std::string, int>& b) {
+		return a.second > b.second;
+	});
+
+	for (const auto& tag: pairs | std::views::keys)
+		sorted.emplace_back(tag);
+
+	return sorted;
+}
+} // namespace
+
 
 V3::SubState::SubState(std::shared_ptr<State> theHomeState, ProvinceMap theProvinces): homeState(std::move(theHomeState)), provinces(std::move(theProvinces))
 {
@@ -130,7 +151,7 @@ void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifie
 	const double infraBase = 3 + 2 * isCoastal() + stateModBonus + popInfra;
 
 	// Multipliers are additive, market capital + incorporation status + state modifier multipliers
-	double multipliers = 0.25 * marketCapital + -0.25 * !incorporated + stateModMultipliers;
+	double multipliers = 0.25 * marketCapital + -0.25 * !isIncorporated() + stateModMultipliers;
 	if (multipliers < -1)
 	{
 		multipliers = -1;
@@ -217,4 +238,20 @@ void V3::SubState::generatePops(int totalAmount)
 		auto pop = Pop(demo.culture, demo.religion, "", static_cast<int>(round(static_cast<double>(totalAmount) * demoSum / demoTotal)));
 		subStatePops.addPop(pop);
 	}
+}
+
+std::optional<std::string> V3::SubState::getPrimaryCulture() const
+{
+	if (subStatePops.getPopCount() == 0)
+		return std::nullopt;
+
+	std::map<std::string, int> census;
+	for (const auto& pop: subStatePops.getPops())
+	{
+		if (pop.getCulture().empty())
+			continue;
+		census[pop.getCulture()] += pop.getSize();
+	}
+	auto sorted = sortMap(census);
+	return *sorted.begin();
 }

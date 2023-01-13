@@ -20,7 +20,7 @@ void V3::VanillaSubStateEntry::registerKeys()
 			Log(LogLevel::Warning) << "Unrecognized substate country for " << ownerTag << "!";
 	});
 	registerKeyword("state_type", [this](std::istream& theStream) {
-		subStateType = commonItems::getString(theStream);
+		subStateTypes.emplace(commonItems::getString(theStream));
 	});
 	registerKeyword("owned_provinces", [this](std::istream& theStream) {
 		const auto theProvinces = commonItems::getStrings(theStream);

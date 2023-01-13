@@ -15,8 +15,8 @@ class BuildingGroups
 	[[nodiscard]] const auto& getBuildingGroupMap() const { return buildingGroups; }
 	[[nodiscard]] std::optional<std::string> getParentName(const std::string& theBuildingGroupName) const;
 	[[nodiscard]] const std::string& safeGetParentName(const std::string& theBuildingGroupName) const;
-	[[nodiscard]] std::optional<int> getInfrastructureCost(const std::string& theBuildingGroupName) const;
-	[[nodiscard]] int safeGetInfrastructureCost(const std::string& theBuildingGroupName) const;
+	[[nodiscard]] std::optional<double> getInfrastructureCost(const std::string& theBuildingGroupName) const;
+	[[nodiscard]] double safeGetInfrastructureCost(const std::string& theBuildingGroupName) const;
 
 
   private:

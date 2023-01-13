@@ -101,6 +101,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.attemptColonialTagReplacement(cultureMapper.getColonialRegionMapper(), clayManager);
 
 	popManager.generatePops(clayManager);
+	popManager.applyHomeLands(clayManager);
 
 	cultureMapper.generateCultureDefinitions(allFS,
 		 "configurables/name_lists.txt",
