@@ -26,6 +26,7 @@ class State: commonItems::parser
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
 	[[nodiscard]] const auto& getSubStates() const { return substates; }
 	[[nodiscard]] const auto& getHomelands() const { return homelands; }
+	[[nodiscard]] std::set<std::string> getClaims() const;
 
 	[[nodiscard]] bool isCoastal() const { return coastal; }
 	[[nodiscard]] bool isSea() const;

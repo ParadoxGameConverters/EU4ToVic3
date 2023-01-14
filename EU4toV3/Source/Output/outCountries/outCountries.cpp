@@ -1,10 +1,23 @@
 #include "outCountries.h"
+#include "ClayManager/State/SubState.h"
 #include "CommonFunctions.h"
 #include <fstream>
 #include <ranges>
 
 namespace
 {
+void outReleasableCountry(std::ostream& output, const V3::Country& country)
+{
+	output << country.getTag() << " = {\n";
+	output << "\tprovinces = { ";
+	for (const auto& subState: country.getUnownedCoreSubStates())
+		for (const auto& province: subState->getProvinces() | std::views::keys)
+			output << province << " ";
+	output << " }\n";
+	output << "\tai_will_do = { always = no }\n";
+	output << "}\n\n";
+}
+
 void outCommonCountry(std::ostream& output, const V3::Country& country)
 {
 	output << country.getTag() << " = {\n";
@@ -117,5 +130,18 @@ void OUT::exportHistoryPopulations(const std::string& outputName, const std::map
 			 (!country->getProcessedData().populationEffects.empty() || !country->getProcessedData().vanillaPopulationElements.empty()))
 			outHistoryPopulations(output, *country);
 	output << "}\n";
+	output.close();
+}
+
+void OUT::exportReleasables(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+{
+	std::ofstream output("output/" + outputName + "/common/country_creation/99_converted_releasables.txt");
+	if (!output.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/country_creation/99_converted_releasables.txt");
+
+	output << commonItems::utf8BOM;
+	for (const auto& country: countries | std::views::values)
+		if (country->getSubStates().empty() && !country->getUnownedCoreSubStates().empty())
+			outReleasableCountry(output, *country);
 	output.close();
 }

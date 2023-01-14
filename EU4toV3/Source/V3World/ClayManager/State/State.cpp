@@ -217,3 +217,11 @@ double V3::State::getTotalSubStateWeight() const
 			return sum;
 	});
 }
+
+std::set<std::string> V3::State::getClaims() const
+{
+	std::set<std::string> claims;
+	for (const auto& subState: substates)
+		claims.insert(subState->getClaims().begin(), subState->getClaims().end());
+	return claims;
+}

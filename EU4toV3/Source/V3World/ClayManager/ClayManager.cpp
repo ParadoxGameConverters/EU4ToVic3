@@ -400,11 +400,12 @@ void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::s
 				const auto& coreTag = countryMapper.getV3Tag(core);
 				if (!coreTag || !countries.contains(*coreTag))
 				{
-					Log(LogLevel::Warning) << "Attempt to assign core " << core << " failed - no V3 country matches it?";
+					// country has been ditched by EU4World. All good.
 					continue;
 				}
 				const auto& coreOwner = countries.at(*coreTag);
 				coreOwner->addUnownedCoreSubState(substate);
+				substate->addClaim(*coreTag);
 			}
 	}
 
@@ -713,6 +714,7 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 	SubStatePops subStatePops;
 	std::vector<Pop> pops;
 	std::vector<std::string> vanillaBuildingElements;
+	std::set<std::string> claims;
 
 	for (const auto& subState: subStates)
 	{
@@ -732,6 +734,7 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 		vanillaBuildingElements.insert(vanillaBuildingElements.end(),
 			 subState->getVanillaBuildingElements().begin(),
 			 subState->getVanillaBuildingElements().end());
+		claims.insert(subState->getClaims().begin(), subState->getClaims().end());
 	}
 	auto newSubState = std::make_shared<SubState>();
 	newSubState->setHomeState((*subStates.begin())->getHomeState());
@@ -748,6 +751,7 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 	subStatePops.setPops(pops);
 	newSubState->setSubStatePops(subStatePops);
 	newSubState->setVanillaBuildingElements(vanillaBuildingElements);
+	newSubState->setClaims(claims);
 
 	return newSubState;
 }
