@@ -41,6 +41,8 @@ class SubState
 	void addHistoricalCapitals(const std::set<std::string>& theCapitals) { eu4capitals = theCapitals; }
 	void setProvinces(const ProvinceMap& theProvinces);
 	void setSubStateTypes(const std::set<std::string>& theTypes) { subStateTypes = theTypes; }
+	void addClaim(const std::string& tag) { claims.emplace(tag); }
+	void setClaims(const std::set<std::string>& theClaims) { claims = theClaims; }
 
 	void setSourceOwnerTag(const std::string& sourceTag) { sourceOwnerTag = sourceTag; }
 	void setWeight(double theWeight) { weight = theWeight; }
@@ -77,6 +79,7 @@ class SubState
 	[[nodiscard]] const auto& getHistoricalCapitals() const { return eu4capitals; }
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
 	[[nodiscard]] const auto& getSubStateTypes() const { return subStateTypes; }
+	[[nodiscard]] const auto& getClaims() const { return claims; }
 
 	[[nodiscard]] const auto& getSourceOwnerTag() const { return sourceOwnerTag; }
 	[[nodiscard]] const auto& getWeight() const { return weight; }
@@ -136,6 +139,7 @@ class SubState
 	std::map<std::string, int> buildings; // building -> level
 
 	std::vector<std::string> vanillaBuildingElements; // vanilla buildings for this substate, ready for direct dump.
+	std::set<std::string> claims;
 };
 } // namespace V3
 

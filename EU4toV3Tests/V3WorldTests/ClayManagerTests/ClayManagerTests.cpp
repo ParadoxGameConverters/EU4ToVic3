@@ -28,16 +28,19 @@ V3::ClayManager generateChunks()
 	regionMapper.loadRegions(eu4FS);
 
 	std::stringstream provinceStream;
-	provinceStream << "-1={}\n";																																	  // sea, no ownership
-	provinceStream << "-2={ owner = TA2 base_tax=10 base_production=10 base_manpower=10 culture = culture religion = religion }\n"; // substate TA-2&3
-	provinceStream << "-3={ owner = TA3 base_tax=1 base_production=1 base_manpower=1 culture = culture2 religion = religion2 }\n";  // substate TA-2&3
-	provinceStream << "-4={}\n";																																	  // irrelevant
-	provinceStream << "-5={}\n";																																	  // irrelevant
-	provinceStream << "-6={}\n";																																	  // irrelevant
-	provinceStream << "-7={}\n";																																	  // irrelevant
-	provinceStream << "-8={}\n";																																	  // irrelevant
-	provinceStream << "-9={ owner = TA9 base_tax=1 base_production=1 base_manpower=1 culture = culture3 religion = religion3 }\n";  // substate TA-9
-	provinceStream << "-10={}\n";																																	  // irrelevant
+	provinceStream << "-1={}\n"; // sea, no ownership
+	provinceStream
+		 << "-2={ owner = TA2 base_tax=10 base_production=10 base_manpower=10 culture = culture religion = religion cores = { TA2 }}\n"; // substate TA-2&3
+	provinceStream
+		 << "-3={ owner = TA3 base_tax=1 base_production=1 base_manpower=1 culture = culture2 religion = religion2 cores = { TA3 }}\n"; // substate TA-2&3
+	provinceStream << "-4={}\n";																																		  // irrelevant
+	provinceStream << "-5={}\n";																																		  // irrelevant
+	provinceStream << "-6={}\n";																																		  // irrelevant
+	provinceStream << "-7={}\n";																																		  // irrelevant
+	provinceStream << "-8={}\n";																																		  // irrelevant
+	provinceStream
+		 << "-9={ owner = TA9 base_tax=1 base_production=1 base_manpower=1 culture = culture3 religion = religion3 cores = { TA9 TA2 }}\n"; // substate TA-9
+	provinceStream << "-10={}\n";																																				// irrelevant
 	EU4::ProvinceManager provinceManager;
 	provinceManager.loadProvinces(provinceStream);
 	// add 2 disputed capitals
@@ -531,6 +534,30 @@ TEST(V3World_ClayManagerTests, clayManagerCanAssignSubStatesToCountries)
 	EXPECT_EQ("STATE_TEST_LAND4", substate3->getOwner()->getSubStates()[0]->getHomeStateName());
 	// linkback through state's substate ownership vector
 	EXPECT_EQ("GA9", substate3->getHomeState()->getSubStates()[0]->getOwnerTag());
+}
+
+TEST(V3World_ClayManagerTests, clayManagerCanAssignUnownedCoreSubStatesToOtherCountries)
+{
+	auto [clayManager, polManager] = assignSubStateOwnership();
+
+	/*
+	link = { eu4 = 2 eu4 = 3 vic3 = x000003 vic3 = x000004 } #lands->lands // produces substates 1 & 2 for V3's GA2.
+	link = { eu4 = 8 eu4 = 9 vic3 = x000008 vic3 = x000009 } # lake,land->land,lake // produces substate 4, for V3's GA9.
+	TA2->GA2 - unowned core in eu4 = 9 goes to STATE_TEST_LAND4
+	TA3->X00 - dead core in eu4 = 3 gets split to STATE_TEST_LAND1 and STATE_TEST_LAND2
+	TA9->GA9 - no unowned cores
+	*/
+
+	const auto ga2 = polManager.getCountry("GA2");
+	const auto x00 = polManager.getCountry("X00");
+	const auto ga9 = polManager.getCountry("GA9");
+
+	ASSERT_EQ(1, ga2->getUnownedCoreSubStates().size());
+	EXPECT_EQ("STATE_TEST_LAND4", ga2->getUnownedCoreSubStates()[0]->getHomeStateName());
+	ASSERT_EQ(2, x00->getUnownedCoreSubStates().size());
+	EXPECT_EQ("STATE_TEST_LAND1", x00->getUnownedCoreSubStates()[0]->getHomeStateName());
+	EXPECT_EQ("STATE_TEST_LAND2", x00->getUnownedCoreSubStates()[1]->getHomeStateName());
+	EXPECT_TRUE(ga9->getUnownedCoreSubStates().empty());
 }
 
 TEST(V3World_ClayManagerTests, clayManagerCanInjectVanillaSubStates)

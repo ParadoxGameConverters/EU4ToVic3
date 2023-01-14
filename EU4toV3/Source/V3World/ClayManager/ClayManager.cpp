@@ -390,6 +390,23 @@ void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::s
 			// We're ditching substates of countries we haven't imported. Unsure how that'd happen but ok.
 			Log(LogLevel::Warning) << "Substate belonging to EU4 " << *eu4tag << " hasn't been mapped over? Ditching.";
 		}
+
+		// Now for all *other* cores link to countries regardless of ownership, so we may create releasables and claims.
+		for (const auto& spData: substate->getSourceProvinceData() | std::views::keys)
+			for (const auto& core: spData.cores)
+			{
+				if (core == *eu4tag)
+					continue;
+				const auto& coreTag = countryMapper.getV3Tag(core);
+				if (!coreTag || !countries.contains(*coreTag))
+				{
+					// country has been ditched by EU4World. All good.
+					continue;
+				}
+				const auto& coreOwner = countries.at(*coreTag);
+				coreOwner->addUnownedCoreSubState(substate);
+				substate->addClaim(*coreTag);
+			}
 	}
 
 	substates.swap(filteredSubstates);
@@ -697,6 +714,7 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 	SubStatePops subStatePops;
 	std::vector<Pop> pops;
 	std::vector<std::string> vanillaBuildingElements;
+	std::set<std::string> claims;
 
 	for (const auto& subState: subStates)
 	{
@@ -716,6 +734,7 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 		vanillaBuildingElements.insert(vanillaBuildingElements.end(),
 			 subState->getVanillaBuildingElements().begin(),
 			 subState->getVanillaBuildingElements().end());
+		claims.insert(subState->getClaims().begin(), subState->getClaims().end());
 	}
 	auto newSubState = std::make_shared<SubState>();
 	newSubState->setHomeState((*subStates.begin())->getHomeState());
@@ -732,6 +751,7 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 	subStatePops.setPops(pops);
 	newSubState->setSubStatePops(subStatePops);
 	newSubState->setVanillaBuildingElements(vanillaBuildingElements);
+	newSubState->setClaims(claims);
 
 	return newSubState;
 }
