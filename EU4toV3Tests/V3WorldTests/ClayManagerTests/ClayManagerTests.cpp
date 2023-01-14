@@ -15,8 +15,6 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
-#include "Log.h"
-
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {});
 
