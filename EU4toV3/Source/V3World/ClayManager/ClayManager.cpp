@@ -390,6 +390,22 @@ void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::s
 			// We're ditching substates of countries we haven't imported. Unsure how that'd happen but ok.
 			Log(LogLevel::Warning) << "Substate belonging to EU4 " << *eu4tag << " hasn't been mapped over? Ditching.";
 		}
+
+		// Now for all *other* cores link to countries regardless of ownership, so we may create releasables and claims.
+		for (const auto& spData: substate->getSourceProvinceData() | std::views::keys)
+			for (const auto& core: spData.cores)
+			{
+				if (core == *eu4tag)
+					continue;
+				const auto& coreTag = countryMapper.getV3Tag(core);
+				if (!coreTag || !countries.contains(*coreTag))
+				{
+					Log(LogLevel::Warning) << "Attempt to assign core " << core << " failed - no V3 country matches it?";
+					continue;
+				}
+				const auto& coreOwner = countries.at(*coreTag);
+				coreOwner->addUnownedCoreSubState(substate);
+			}
 	}
 
 	substates.swap(filteredSubstates);
