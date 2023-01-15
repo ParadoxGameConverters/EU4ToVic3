@@ -108,7 +108,9 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 "configurables/name_lists.txt",
 		 "configurables/name_list_map.txt",
 		 "configurables/culture_trait_map.txt",
+		 clayManager,
 		 sourceWorld.getCultureLoader(),
+		 sourceWorld.getReligionLoader(),
 		 sourceWorld.getEU4Localizations());
 
 	politicalManager.determineAndApplyWesternization(cultureMapper, religionMapper, configBlock.euroCentric, configBlock.startDate, datingData);
@@ -136,6 +138,9 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	flagCrafter.loadCustomColors(configuration.getEU4Path() + "/common/custom_country_colors/00_custom_country_colors.txt");
 	flagCrafter.loadAvailableFlags("blankMod/output/common/coat_of_arms/coat_of_arms/", V3Path + "/common/flag_definitions/");
 	flagCrafter.distributeAvailableFlags(politicalManager.getCountries(), *countryMapper);
+
+	politicalManager.injectDynamicCulturesIntoFormables(cultureMapper);
+	politicalManager.expandReleasablesFootprint(clayManager);
 
 	Log(LogLevel::Info) << "-> Converting Provinces";
 	Log(LogLevel::Progress) << "53 %";

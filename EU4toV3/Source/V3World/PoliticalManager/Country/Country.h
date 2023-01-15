@@ -128,8 +128,10 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getSourceCountry() const { return sourceCountry; }
 	[[nodiscard]] const auto& getSubStates() const { return subStates; }
 	[[nodiscard]] const auto& getUnownedCoreSubStates() const { return unownedCoreSubStates; }
+	[[nodiscard]] const auto& getUnownedProvinces() const { return unownedProvinces; }
 	void addSubState(const std::shared_ptr<SubState>& theSubState) { subStates.push_back(theSubState); }
 	void addUnownedCoreSubState(const std::shared_ptr<SubState>& theSubState) { unownedCoreSubStates.push_back(theSubState); }
+	void addUnownedProvinces(const std::set<std::string>& theProvinces) { unownedProvinces.insert(theProvinces.begin(), theProvinces.end()); }
 	void setSubStates(const std::vector<std::shared_ptr<SubState>>& theSubStates) { subStates = theSubStates; }
 	void setProcessedData(const ProcessedData& data) { processedData = data; }
 
@@ -216,6 +218,7 @@ class Country: commonItems::parser
 	std::shared_ptr<EU4::Country> sourceCountry;
 	std::vector<std::shared_ptr<SubState>> subStates;
 	std::vector<std::shared_ptr<SubState>> unownedCoreSubStates; // substates this country has eu4 cores on but does *not* own.
+	std::set<std::string> unownedProvinces; // Derived provinces we want released. Doesn't necessarily match unownedCoreSubStates! We tweak for borders!
 };
 } // namespace V3
 

@@ -48,15 +48,15 @@ void copyEU4Names(mappers::CultureDef& cultureDef, const EU4::CultureParser& sou
 	cultureDef.win1252Names = true; // Will need to normalize them later.
 }
 
-std::set<std::string> breakDownCulturalName(const std::string& eu4CultureName)
+std::vector<std::string> breakDownCulturalName(const std::string& eu4CultureName)
 {
 	// dynamic-afghani-culture-num1
 	// dynamic-afghani-panjabi-culture-num2
 
-	std::set<std::string> componentCultures;
+	std::vector<std::string> componentCultures;
 	if (!eu4CultureName.starts_with("dynamic-") || eu4CultureName.size() <= 8)
 	{
-		componentCultures.emplace(eu4CultureName);
+		componentCultures.emplace_back(eu4CultureName);
 		return componentCultures;
 	}
 
@@ -64,83 +64,15 @@ std::set<std::string> breakDownCulturalName(const std::string& eu4CultureName)
 	auto theName = eu4CultureName.substr(8, eu4CultureName.size());
 	if (const auto& pos = theName.find('-'); pos != std::string::npos && pos < theName.size() - 1)
 	{
-		componentCultures.emplace(theName.substr(0, pos));
+		componentCultures.emplace_back(theName.substr(0, pos));
 		theName = theName.substr(pos + 1, theName.size());
 	}
 	if (const auto& pos = theName.find('-'); pos != std::string::npos && pos < theName.size() - 1)
 	{
 		if (theName.substr(0, pos) != "culture")
-			componentCultures.emplace(theName.substr(0, pos));
+			componentCultures.emplace_back(theName.substr(0, pos));
 	}
 	return componentCultures;
-}
-
-mappers::CultureDef generateCultureDefinition(const std::string& eu4CultureName,
-	 const mappers::CultureTraitMapper& cultureTraitMapper,
-	 const mappers::NameListMapper& nameListMapper,
-	 const mappers::NameListLoader& nameListLoader,
-	 const EU4::CultureLoader& cultureLoader,
-	 const EU4::EU4LocalizationLoader& eu4Locs)
-{
-	mappers::CultureDef newDef;
-	newDef.name = eu4CultureName;
-
-	// NAMEPOOLS & TRAITS
-	// What's in a name? Could be a number of things.
-	for (const auto& sourceCultureName: breakDownCulturalName(eu4CultureName))
-	{
-		const auto& sourceCultureGroup = cultureLoader.getGroupForCulture(sourceCultureName);
-		if (!sourceCultureGroup)
-		{
-			// heavy corruption. CK3 ALWAYS maps to existing EU4 cultures! This is bullshit.
-			Log(LogLevel::Error) << "Cannot find EU4 culture " << sourceCultureName << " in EU4 cultures! THIS IS BAD. Cannot stat " << eu4CultureName << "!";
-			continue;
-		}
-
-		const auto& sourceCulture = sourceCultureGroup->getCultures().at(sourceCultureName);
-		const auto& groupName = sourceCultureGroup->getName();
-		if (const auto& traitsblock = cultureTraitMapper.getTraitsForCulture(sourceCultureName, groupName); !traitsblock)
-		{
-			Log(LogLevel::Warning) << "EU4 culture " << sourceCultureName << " has no mapped traits! Rectify!";
-		}
-		else
-		{
-			newDef.traits.insert(traitsblock->getTraits().begin(), traitsblock->getTraits().end());
-			newDef.ethnicities.emplace(traitsblock->getEthnicity());
-			newDef.graphics = traitsblock->getGraphics(); // Any will do but there must be only one.
-		}
-		if (const auto& nameListMatch = nameListMapper.getNamesForCulture(sourceCultureName, groupName); !nameListMatch)
-		{
-			Log(LogLevel::Warning) << "EU4 culture " << sourceCultureName << "/" << groupName << " has no mapped namelist! Falling back to EU4 names.";
-			copyEU4Names(newDef, sourceCulture); // ok, use eu4 names.
-		}
-		else if (const auto& nameList = nameListLoader.getNameList(nameListMatch->getNamePool()); !nameList)
-		{
-			Log(LogLevel::Warning) << "EU4 culture " << sourceCultureName << " has has a namepool " << nameListMatch->getNamePool()
-										  << " which doesn't exist! Falling back to EU4 names.";
-			copyEU4Names(newDef, sourceCulture); // ok, use eu4 names. sigh.
-		}
-		else
-		{
-			copyNamePoolNames(newDef, *nameList);
-		}
-	}
-
-	// sanities
-	if (newDef.ethnicities.empty())
-		newDef.ethnicities.emplace("neutral"); // fallback (?)
-
-	// graphics
-	if (newDef.graphics.empty())
-		newDef.graphics = "generic";
-
-	// locs
-	if (const auto& locMatch = eu4Locs.getTextInEachLanguage(eu4CultureName); !locMatch)
-		Log(LogLevel::Warning) << "WHY doesn't " << eu4CultureName << " have a localization in EU4?";
-	else
-		newDef.locBlock = *locMatch;
-
-	return newDef;
 }
 
 void importLocalizationForNeoCulture(mappers::CultureDef& newDef, const mappers::ColonialRegionMapping& colony, int colonialCulturesCount)
@@ -340,7 +272,9 @@ void mappers::CultureMapper::generateCultureDefinitions(const commonItems::ModFi
 	 const std::string& nameListsPath,
 	 const std::string& nameListMapPath,
 	 const std::string& cultureTraitsPath,
+	 const V3::ClayManager& clayManager,
 	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader,
 	 const EU4::EU4LocalizationLoader& eu4Locs)
 {
 	Log(LogLevel::Info) << "-> Generating culture definitions.";
@@ -379,7 +313,14 @@ void mappers::CultureMapper::generateCultureDefinitions(const commonItems::ModFi
 						actualColonyName = colonyName;
 						colony = colonialRegionMapper.getColonialRegions().at(colonyName);
 					}
-			auto newDef = generateCultureDefinition(actualEU4CultureName, cultureTraitMapper, nameListMapper, nameListLoader, cultureLoader, eu4Locs);
+			auto newDef = generateCultureDefinition(clayManager,
+				 actualEU4CultureName,
+				 cultureTraitMapper,
+				 nameListMapper,
+				 nameListLoader,
+				 cultureLoader,
+				 religionLoader,
+				 eu4Locs);
 			newDef.name = eu4CultureName;
 			importLocalizationForNeoCulture(newDef, colony, static_cast<int>(colonyNeoCultureTargets.at(actualColonyName).size()));
 			v3CultureDefinitions.emplace(eu4CultureName, newDef);
@@ -393,7 +334,8 @@ void mappers::CultureMapper::generateCultureDefinitions(const commonItems::ModFi
 		}
 
 		// generate a definition and file.
-		auto newDef = generateCultureDefinition(eu4CultureName, cultureTraitMapper, nameListMapper, nameListLoader, cultureLoader, eu4Locs);
+		auto newDef =
+			 generateCultureDefinition(clayManager, eu4CultureName, cultureTraitMapper, nameListMapper, nameListLoader, cultureLoader, religionLoader, eu4Locs);
 		v3CultureDefinitions.emplace(eu4CultureName, newDef);
 	}
 
@@ -465,4 +407,92 @@ int mappers::CultureMapper::getIndustryScoreForCulture(const std::string& cultur
 	}
 
 	return westernizationMapper.getIndustryForTraits(v3CultureDefinitions.at(cultureName).traits);
+}
+
+mappers::CultureDef mappers::CultureMapper::generateCultureDefinition(const V3::ClayManager& clayManager,
+	 const std::string& eu4CultureName,
+	 const CultureTraitMapper& cultureTraitMapper,
+	 const NameListMapper& nameListMapper,
+	 const NameListLoader& nameListLoader,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader,
+	 const EU4::EU4LocalizationLoader& eu4Locs)
+{
+	CultureDef newDef;
+	newDef.name = eu4CultureName;
+	bool dynamicCulture = false;
+	if (eu4CultureName.starts_with("dynamic-") && eu4CultureName.size() > 8)
+		dynamicCulture = true;
+	bool primaryComponent = true;
+
+	// NAMEPOOLS & TRAITS
+	// What's in a name? Could be a number of things.
+	for (const auto& sourceCultureName: breakDownCulturalName(eu4CultureName))
+	{
+		const auto& sourceCultureGroup = cultureLoader.getGroupForCulture(sourceCultureName);
+		if (!sourceCultureGroup)
+		{
+			// heavy corruption. CK3 ALWAYS maps to existing EU4 cultures! This is bullshit.
+			Log(LogLevel::Error) << "Cannot find EU4 culture " << sourceCultureName << " in EU4 cultures! THIS IS BAD. Cannot stat " << eu4CultureName << "!";
+			continue;
+		}
+
+		// If we broke down a dynamic culture, use its first component to find a closest vanilla vic3 culture. This is relevant for formables/releasables.
+		if (dynamicCulture && primaryComponent)
+		{
+			if (const auto& match = cultureMatch(clayManager, cultureLoader, religionLoader, sourceCultureName, "", "", ""); match)
+			{
+				relatedCultures[*match].emplace(eu4CultureName);
+				primaryComponent = false;
+			}
+			else
+				// primaryComponent intentionally remains true if we failed on the match so maybe second component can match something and become the primary
+				// component.
+				Log(LogLevel::Warning) << "Cannot find related/base culture of " << eu4CultureName << "!";
+		}
+
+		const auto& sourceCulture = sourceCultureGroup->getCultures().at(sourceCultureName);
+		const auto& groupName = sourceCultureGroup->getName();
+		if (const auto& traitsblock = cultureTraitMapper.getTraitsForCulture(sourceCultureName, groupName); !traitsblock)
+		{
+			Log(LogLevel::Warning) << "EU4 culture " << sourceCultureName << " has no mapped traits! Rectify!";
+		}
+		else
+		{
+			newDef.traits.insert(traitsblock->getTraits().begin(), traitsblock->getTraits().end());
+			newDef.ethnicities.emplace(traitsblock->getEthnicity());
+			newDef.graphics = traitsblock->getGraphics(); // Any will do but there must be only one.
+		}
+		if (const auto& nameListMatch = nameListMapper.getNamesForCulture(sourceCultureName, groupName); !nameListMatch)
+		{
+			Log(LogLevel::Warning) << "EU4 culture " << sourceCultureName << "/" << groupName << " has no mapped namelist! Falling back to EU4 names.";
+			copyEU4Names(newDef, sourceCulture); // ok, use eu4 names.
+		}
+		else if (const auto& nameList = nameListLoader.getNameList(nameListMatch->getNamePool()); !nameList)
+		{
+			Log(LogLevel::Warning) << "EU4 culture " << sourceCultureName << " has has a namepool " << nameListMatch->getNamePool()
+										  << " which doesn't exist! Falling back to EU4 names.";
+			copyEU4Names(newDef, sourceCulture); // ok, use eu4 names. sigh.
+		}
+		else
+		{
+			copyNamePoolNames(newDef, *nameList);
+		}
+	}
+
+	// sanities
+	if (newDef.ethnicities.empty())
+		newDef.ethnicities.emplace("neutral"); // fallback (?)
+
+	// graphics
+	if (newDef.graphics.empty())
+		newDef.graphics = "generic";
+
+	// locs
+	if (const auto& locMatch = eu4Locs.getTextInEachLanguage(eu4CultureName); !locMatch)
+		Log(LogLevel::Warning) << "WHY doesn't " << eu4CultureName << " have a localization in EU4?";
+	else
+		newDef.locBlock = *locMatch;
+
+	return newDef;
 }

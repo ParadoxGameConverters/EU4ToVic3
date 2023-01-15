@@ -803,3 +803,16 @@ std::optional<std::string> V3::ClayManager::getProvinceOwnerTag(const std::strin
 				return subState->getOwnerTag();
 	return std::nullopt;
 }
+
+std::set<std::string> V3::ClayManager::getStateProvinceIDs(const std::string& stateName) const
+{
+	std::set<std::string> IDs;
+	if (!states.contains(stateName))
+		return IDs;
+	for (const auto& subState: states.at(stateName)->getSubStates())
+	{
+		auto subIDs = subState->getProvinceIDs();
+		IDs.insert(subIDs.begin(), subIDs.end());
+	}
+	return IDs;
+}

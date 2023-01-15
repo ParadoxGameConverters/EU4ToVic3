@@ -10,9 +10,8 @@ void outReleasableCountry(std::ostream& output, const V3::Country& country)
 {
 	output << country.getTag() << " = {\n";
 	output << "\tprovinces = { ";
-	for (const auto& subState: country.getUnownedCoreSubStates())
-		for (const auto& province: subState->getProvinces() | std::views::keys)
-			output << province << " ";
+	for (const auto& province: country.getUnownedProvinces())
+		output << province << " ";
 	output << " }\n";
 	output << "\tai_will_do = { always = no }\n";
 	output << "}\n\n";
@@ -141,7 +140,7 @@ void OUT::exportReleasables(const std::string& outputName, const std::map<std::s
 
 	output << commonItems::utf8BOM;
 	for (const auto& country: countries | std::views::values)
-		if (country->getSubStates().empty() && !country->getUnownedCoreSubStates().empty())
+		if (country->getSubStates().empty() && !country->getUnownedProvinces().empty())
 			outReleasableCountry(output, *country);
 	output.close();
 }
