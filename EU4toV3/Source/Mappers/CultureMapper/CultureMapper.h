@@ -43,7 +43,7 @@ class CultureMapper: commonItems::parser
 	[[nodiscard]] const auto& getUnMappedCultures() const { return unmappedCultures; }
 	[[nodiscard]] const auto& getUsedCultures() const { return usedCultures; }
 	[[nodiscard]] const auto& getV3CultureDefinitions() const { return v3CultureDefinitions; }
-
+	[[nodiscard]] const auto& getRelatedCultures() const { return relatedCultures; }
 	[[nodiscard]] const auto& getColonialRegionMapper() const { return colonialRegionMapper; }
 
 	[[nodiscard]] std::optional<std::string> cultureMatch(const V3::ClayManager& clayManager,
@@ -74,7 +74,9 @@ class CultureMapper: commonItems::parser
 		 const std::string& nameListsPath,
 		 const std::string& nameListMapPath,
 		 const std::string& cultureTraitsPath,
+		 const V3::ClayManager& clayManager,
 		 const EU4::CultureLoader& cultureLoader,
+		 const EU4::ReligionLoader& religionLoader,
 		 const EU4::EU4LocalizationLoader& eu4Locs);
 
 	void injectReligionsIntoCultureDefs(const V3::ClayManager& clayManager);
@@ -84,7 +86,16 @@ class CultureMapper: commonItems::parser
 	[[nodiscard]] int getIndustryScoreForCulture(const std::string& cultureName) const;
 
   private:
-	std::string getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager);
+	[[nodiscard]] std::string getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager);
+	[[nodiscard]] CultureDef generateCultureDefinition(const V3::ClayManager& clayManager,
+		 const std::string& eu4CultureName,
+		 const CultureTraitMapper& cultureTraitMapper,
+		 const NameListMapper& nameListMapper,
+		 const NameListLoader& nameListLoader,
+		 const EU4::CultureLoader& cultureLoader,
+		 const EU4::ReligionLoader& religionLoader,
+		 const EU4::EU4LocalizationLoader& eu4Locs);
+
 	void registerKeys();
 
 	std::vector<CultureMappingRule> cultureMapRules;
@@ -93,6 +104,7 @@ class CultureMapper: commonItems::parser
 	std::set<std::string> usedCultures;		 // Only the stuff we actually use in Vic3.
 	std::map<std::string, CultureDef> v3CultureDefinitions;
 	std::map<std::string, std::map<std::string, std::string>> colonyNeoCultureTargets; // colony->[eu4 culture -> v3 neoculture]
+	std::map<std::string, std::set<std::string>> relatedCultures; // vanilla culture -> related dynamic cultures (hungarian -> {hungaro-latvian ... })
 
 	ColonialRegionMapper colonialRegionMapper;
 	WesternizationMapper westernizationMapper;

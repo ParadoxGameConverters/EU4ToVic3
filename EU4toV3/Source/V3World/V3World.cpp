@@ -108,7 +108,9 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 "configurables/name_lists.txt",
 		 "configurables/name_list_map.txt",
 		 "configurables/culture_trait_map.txt",
+		 clayManager,
 		 sourceWorld.getCultureLoader(),
+		 sourceWorld.getReligionLoader(),
 		 sourceWorld.getEU4Localizations());
 
 	politicalManager.determineAndApplyWesternization(cultureMapper, religionMapper, configBlock.euroCentric, configBlock.startDate, datingData);
