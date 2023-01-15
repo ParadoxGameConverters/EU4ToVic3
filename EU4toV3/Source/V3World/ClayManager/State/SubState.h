@@ -77,6 +77,7 @@ class SubState
 	[[nodiscard]] const auto& getOwner() const { return owner; }
 	[[nodiscard]] auto isCapital() const { return capital; }
 	[[nodiscard]] const auto& getHistoricalCapitals() const { return eu4capitals; }
+	[[nodiscard]] std::set<std::string> getProvinceIDs() const;
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
 	[[nodiscard]] const auto& getSubStateTypes() const { return subStateTypes; }
 	[[nodiscard]] const auto& getClaims() const { return claims; }

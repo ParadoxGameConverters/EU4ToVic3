@@ -139,6 +139,9 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	flagCrafter.loadAvailableFlags("blankMod/output/common/coat_of_arms/coat_of_arms/", V3Path + "/common/flag_definitions/");
 	flagCrafter.distributeAvailableFlags(politicalManager.getCountries(), *countryMapper);
 
+	politicalManager.injectDynamicCulturesIntoFormables(cultureMapper);
+	politicalManager.expandReleasablesFootprint(clayManager);
+
 	Log(LogLevel::Info) << "-> Converting Provinces";
 	Log(LogLevel::Progress) << "53 %";
 

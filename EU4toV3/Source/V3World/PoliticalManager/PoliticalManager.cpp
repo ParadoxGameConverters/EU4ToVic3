@@ -5,6 +5,7 @@
 #include "ColonialRegionMapper/ColonialRegionMapper.h"
 #include "Country/Country.h"
 #include "CountryManager/EU4Country.h"
+#include "CultureMapper/CultureMapper.h"
 #include "DiplomacyParser/EU4Agreement.h"
 #include "Loaders/CountryDefinitionLoader/CountryDefinitionLoader.h"
 #include "Loaders/LawLoader/LawLoader.h"
@@ -749,4 +750,77 @@ bool V3::PoliticalManager::isVanillaCountryAndLanded(const std::string& tag) con
 	if (country->getSubStates().empty())
 		return false;
 	return true;
+}
+
+void V3::PoliticalManager::injectDynamicCulturesIntoFormables(const mappers::CultureMapper& cultureMapper)
+{
+	Log(LogLevel::Info) << "-> Injecting dynamic cultures into formables.";
+	auto counter = 0;
+	const auto& related = cultureMapper.getRelatedCultures();
+
+	// The difference between formables and releasables, is that formables never existed. No cores.
+
+	for (const auto& country: countries | std::views::values)
+	{
+		if (!country->getSubStates().empty())
+			continue; // only need dead people.
+		if (!country->getUnownedCoreSubStates().empty())
+			continue; // without cores.
+
+		bool updated = false;
+		auto data = country->getProcessedData();
+		for (const auto& culture: country->getProcessedData().cultures)
+		{
+			if (!related.contains(culture))
+				continue;
+			data.cultures.insert(related.at(culture).begin(), related.at(culture).end());
+			updated = true;
+		}
+		if (updated)
+		{
+			++counter;
+			country->setProcessedData(data);
+		}
+	}
+	Log(LogLevel::Info) << "<> Updated " << counter << " formable countries.";
+}
+
+void V3::PoliticalManager::expandReleasablesFootprint(const ClayManager& clayManager)
+{
+	Log(LogLevel::Info) << "-> Expanding Releasables footprint.";
+	auto counter = 0;
+
+	// For releasables that have cores on >60% state provinces, we want to release entire state, not just the provinces they owned.
+	// Only reason for this is cleaner borders.
+
+	for (const auto& country: countries | std::views::values)
+	{
+		bool expanded = false;
+		// releasables own no states but have unowned cores somewhere.
+		if (!country->getSubStates().empty() || country->getUnownedCoreSubStates().empty())
+			continue;
+		std::map<std::string, std::set<std::string>> stateProvinces;
+		for (const auto& subState: country->getUnownedCoreSubStates())
+		{
+			if (!stateProvinces.contains(subState->getHomeStateName()))
+				stateProvinces.emplace(subState->getHomeStateName(), std::set<std::string>{});
+			auto stateProvinceIDs = subState->getProvinceIDs();
+			stateProvinces.at(subState->getHomeStateName()).insert(stateProvinceIDs.begin(), stateProvinceIDs.end());
+		}
+
+		for (const auto& [stateName, provinces]: stateProvinces)
+		{
+			auto allProvinceIDs = clayManager.getStateProvinceIDs(stateName);
+			if (static_cast<double>(provinces.size()) / static_cast<double>(allProvinceIDs.size()) > 0.6)
+			{
+				stateProvinces.at(stateName) = allProvinceIDs;
+				expanded = true;
+			}
+		}
+		for (const auto& provinces: stateProvinces | std::views::values)
+			country->addUnownedProvinces(provinces);
+		if (expanded)
+			++counter;
+	}
+	Log(LogLevel::Info) << "<> Expanded " << counter << " releasables.";
 }

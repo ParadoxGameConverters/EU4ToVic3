@@ -59,6 +59,7 @@ class ClayManager
 	void loadVNColonialRules(const std::string& fileName) { vnColonialMapper.loadMappingRules(fileName); }
 	[[nodiscard]] const auto& getVNColonialMapper() const { return vnColonialMapper; }
 	[[nodiscard]] std::optional<std::string> getProvinceOwnerTag(const std::string& provinceID) const;
+	[[nodiscard]] std::set<std::string> getStateProvinceIDs(const std::string& stateName) const;
 
   private:
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> chunkToSubStatesTransferFunction(const std::shared_ptr<Chunk>& chunk) const;

@@ -255,3 +255,11 @@ std::optional<std::string> V3::SubState::getPrimaryCulture() const
 	auto sorted = sortMap(census);
 	return *sorted.begin();
 }
+
+std::set<std::string> V3::SubState::getProvinceIDs() const
+{
+	std::set<std::string> IDs;
+	for (const auto& province: provinces | std::views::keys)
+		IDs.emplace(province);
+	return IDs;
+}
