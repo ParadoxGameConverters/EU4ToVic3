@@ -22,7 +22,7 @@ void V3::BuildingGroups::setResourceCaps()
 		auto parentGroupName = buildingGroup->getParentName();
 		while (!buildingGroup->possibleIsResourceCapped() && parentGroupName)
 		{
-			buildingGroup->setResourceCap(possibleIsResourceCapped(parentGroupName));
+			buildingGroup->setResourceCap(tryGetIsCapped(parentGroupName));
 			parentGroupName = tryGetParentName(parentGroupName);
 		}
 	}
@@ -61,7 +61,7 @@ std::optional<double> V3::BuildingGroups::tryGetInfraCost(const std::optional<st
 	return std::nullopt;
 }
 
-std::optional<bool> V3::BuildingGroups::possibleIsResourceCapped(const std::optional<std::string>& theGroupName) const
+std::optional<bool> V3::BuildingGroups::tryGetIsCapped(const std::optional<std::string>& theGroupName) const
 {
 	if (!theGroupName)
 		return std::nullopt;

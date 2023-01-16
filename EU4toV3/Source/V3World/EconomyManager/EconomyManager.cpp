@@ -241,8 +241,7 @@ void V3::EconomyManager::buildBuildings() const
 	// 3. The state then builds as many buildings of that kind as it can, limited by capacity, packet size and sector CP
 	// 3b. capacity is RGO/arable land capacity
 	// 3c. packet size is based on the mean amount of CP states have left to build and is configurable
-	// 4. The building substate then re-scores the building it just built adjusting for the satisfied need
-	// 5. If a sector or substate end up with less CP than the cost for any possible valid building, they relinquish it to the next sector/substate
+	// 4. If a sector or substate end up with less CP than the cost for any possible valid building, they relinquish it to the next sector/substate
 
 	for (const auto& country: centralizedCountries)
 	{
@@ -272,7 +271,7 @@ void V3::EconomyManager::buildBuildings() const
 
 			// Spend
 			// Chosen building construction cost
-			substate->spendCPBudget(50); // Update valid buildings in this?
+			substate->spendCPBudget(50);
 
 			// Sort
 			std::ranges::sort(subStatesByBudget, greaterBudget);

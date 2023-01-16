@@ -46,10 +46,10 @@ TEST(V3World_BuildingGroupLoaderTests, BuildingGroupLoaderSetsCappedResourcesFro
 	buildingGroupLoader.loadBuildingGroups(modFS);
 	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
 
-	EXPECT_TRUE(buildingGroups.possibleIsResourceCapped("bg_manufacturing").value());
-	EXPECT_TRUE(buildingGroups.possibleIsResourceCapped("bg_light_industry").value());
-	EXPECT_FALSE(buildingGroups.possibleIsResourceCapped("bg_heavy_industry").value());
-	EXPECT_FALSE(buildingGroups.possibleIsResourceCapped("bg_ultra_industry").value());
-	EXPECT_TRUE(buildingGroups.possibleIsResourceCapped("bg_mega_industry").value());
-	EXPECT_TRUE(buildingGroups.possibleIsResourceCapped("bg_giga_industry").value());
+	EXPECT_TRUE(buildingGroups.tryGetIsCapped("bg_manufacturing").value());
+	EXPECT_TRUE(buildingGroups.tryGetIsCapped("bg_light_industry").value());
+	EXPECT_FALSE(buildingGroups.tryGetIsCapped("bg_heavy_industry").value());
+	EXPECT_FALSE(buildingGroups.tryGetIsCapped("bg_ultra_industry").value());
+	EXPECT_TRUE(buildingGroups.tryGetIsCapped("bg_mega_industry").value());
+	EXPECT_TRUE(buildingGroups.tryGetIsCapped("bg_giga_industry").value());
 }

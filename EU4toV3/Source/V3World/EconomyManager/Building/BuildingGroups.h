@@ -16,10 +16,9 @@ class BuildingGroups
 	[[nodiscard]] const auto& getBuildingGroupMap() const { return buildingGroups; }
 	[[nodiscard]] std::optional<std::string> tryGetParentName(const std::optional<std::string>& theGroupName) const;
 	[[nodiscard]] std::optional<double> tryGetInfraCost(const std::optional<std::string>& theGroupName) const;
-	[[nodiscard]] std::optional<bool> possibleIsResourceCapped(const std::optional<std::string>& theGroupName) const;
+	[[nodiscard]] std::optional<bool> tryGetIsCapped(const std::optional<std::string>& theGroupName) const;
 
   private:
-
 	std::map<std::string, std::shared_ptr<BuildingGroup>> buildingGroups;
 };
 } // namespace V3
