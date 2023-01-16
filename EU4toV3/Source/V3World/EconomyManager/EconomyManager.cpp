@@ -18,6 +18,7 @@
 #include "PoliticalManager/PoliticalManager.h"
 #include <cmath>
 #include <iomanip>
+#include <numeric>
 #include <ranges>
 
 void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
@@ -234,30 +235,19 @@ void V3::EconomyManager::balanceNationalBudgets() const
 
 void V3::EconomyManager::planSubStateEconomies(const std::shared_ptr<Country>& country) const
 {
+	// Might not actually need this whole section
+
 	// Select the valid buildings
-	auto isValid = [country](const std::pair<std::string, const Building&>& buildingPair) {
-		// Skip government admins, they are special
-		if (buildingPair.first == "building_government_administration")
-		{
-			return false;
-		}
-		// We can only build what we have the tech for
-		if (!country->hasAnyOfTech(buildingPair.second.getUnlockingTechs()))
-		{
-			return false;
-		}
 
-		return true;
-	};
 
-	// Each SubState scores each valid building
-	for (const auto& substate: country->getSubStates())
-	{
-		for (const auto& [name, building]: buildings | std::views::filter(isValid))
-		{
-			substate->calcBuildingWeight(building, buildingTerrainModifiers, buildingMapper, stateTraits, econDefines.getStateTraitStrength());
-		}
-	}
+	//// Each SubState scores each valid building
+	// for (const auto& substate: country->getSubStates())
+	// {
+	//	for (const auto& [name, building]: buildings | std::views::filter(isValid))
+	//	{
+	//		substate->calcBuildingWeight(building, buildingTerrainModifiers, buildingMapper, stateTraits, econDefines.getStateTraitStrength());
+	//	}
+	// }
 }
 
 void V3::EconomyManager::buildBuildings() const
@@ -276,6 +266,41 @@ void V3::EconomyManager::buildBuildings() const
 
 	for (const auto& country: centralizedCountries)
 	{
+		// Prepare sorting lambda, we will use it more than once
+		auto greaterBudget = [](const std::shared_ptr<SubState>& lhs, const std::shared_ptr<SubState>& rhs) {
+			return lhs->getCPBudget() > rhs->getCPBudget();
+		};
+
+		// Copy substate vector. We will be sorting this one and removing finished substates until it is empty
+		// Sort Vector, remove substates that have less than the minimum pre-set construction cost, default to 50
+		auto subStatesByBudget(country->getSubStates());
+		std::ranges::sort(subStatesByBudget, greaterBudget);
+
+		// When removing substates grant their extra CP to the top State
+
+		while (!subStatesByBudget.empty())
+		{
+			// Enter negotiation
+			// Pick the substate with the most budget
+			const auto& substate = subStatesByBudget[0];
+
+
+			// Copy Sectors?
+			// while Sectors not empty
+			// Pick highest scoring building
+			// Country sees if it agrees
+
+			// Spend
+			// Chosen building construction cost
+			substate->spendCPBudget(50); // Update valid buildings in this?
+
+			// Sort
+			std::ranges::sort(subStatesByBudget, greaterBudget);
+
+
+			// After spend, remove substate if now low budget
+			removeSubStateIfLowBudget(subStatesByBudget, subStatesByBudget.end() - 1);
+		}
 	}
 }
 
@@ -425,6 +450,36 @@ void V3::EconomyManager::setPMs() const
 		data.productionMethods["building_government_administration"] = {PMName};
 		country->setProductionMethods(data.productionMethods);
 	}
+}
+
+void V3::EconomyManager::removeLowBudgetSubStates(std::vector<std::shared_ptr<SubState>>& subStates) const
+{
+	auto budgetBelowMinimumCost = [this](const std::shared_ptr<SubState>& substate) {
+		return substate->getCPBudget() < 50; // getConstructionMinCost();
+	};
+
+	const int carryBudget = std::accumulate(subStates.begin(), subStates.end(), 0, budgetBelowMinimumCost);
+	std::erase_if(subStates, budgetBelowMinimumCost);
+
+	if (!subStates.empty())
+	{
+		subStates[0]->spendCPBudget(-carryBudget);
+	}
+}
+
+void V3::EconomyManager::removeSubStateIfLowBudget(std::vector<std::shared_ptr<SubState>>& subStates,
+	 const std::vector<std::shared_ptr<SubState>>::iterator& it) const
+{
+	// if (it->get()->getBuildingWeights.empty())
+	//{
+	//	if (subStates.size() >= 2)
+	//	{
+	//		// Carry over budget to current highest budgeted state.
+	//		subStates[0]->spendCPBudget(-it->get()->getCPBudget());
+	//	}
+
+	//	subStates.erase(it);
+	//}
 }
 
 void V3::EconomyManager::loadTerrainModifierMatrices(const std::string& filePath)

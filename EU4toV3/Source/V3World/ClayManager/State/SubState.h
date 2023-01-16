@@ -59,12 +59,8 @@ class SubState
 
 	void setIndustryWeight(const double theIndustryWeight) { industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theCPBudget) { CPBudget = theCPBudget; }
+	void spendCPBudget(const int theCPExpense) { CPBudget -= theCPExpense; }
 	void setBuildingLevel(const std::string& building, const int level) { buildings[building] = level; }
-	void calcBuildingWeight(const Building& building,
-		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
-		 const mappers::BuildingMapper& buildingMapper,
-		 const std::map<std::string, StateModifier>& traitMap,
-		 double traitStrength) const;
 	void calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap);
 
 	void convertDemographics(const ClayManager& clayManager,
@@ -112,10 +108,18 @@ class SubState
 	[[nodiscard]] double getPopInfrastructure(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] std::pair<int, double> getStateInfrastructureModifiers(const StateModifiers& theStateModifiers) const;
 
+	[[nodiscard]] double calcBuildingWeight(const Building& building,
+		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
+		 const mappers::BuildingMapper& buildingMapper,
+		 const std::map<std::string, StateModifier>& traitMap,
+		 double traitStrength) const;
 	[[nodiscard]] double calcBuildingTerrainWeight(const std::string& building,
 		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers) const;
 	[[nodiscard]] double calcBuildingEU4Weight(const std::string& building, const mappers::BuildingMapper& buildingMapper) const;
 	[[nodiscard]] double calcBuildingTraitWeight(const Building& building, const std::map<std::string, StateModifier>& traitMap, double traitStrength) const;
+	[[nodiscard]] double calcBuildingInvestmentWeight(const Building& building) const;
+	[[nodiscard]] bool isBuildingValid(const Building& building, const BuildingGroups& buildingGroups) const;
+	[[nodiscard]] bool hasCapacity(const Building& building, const BuildingGroups& buildingGroups) const;
 
 	std::shared_ptr<State> homeState; // home state
 	std::shared_ptr<Country> owner;
@@ -139,6 +143,7 @@ class SubState
 
 	double industryWeight = 0;				  // Share of owner's industry a substate should get, not normalized
 	int CPBudget = 0;							  // Construction Points for a substate to spend on it's development
+	int originalCPBudget = 0;				  // Used in Building Weight calculations
 	std::map<std::string, int> buildings; // building -> level
 };
 } // namespace V3
