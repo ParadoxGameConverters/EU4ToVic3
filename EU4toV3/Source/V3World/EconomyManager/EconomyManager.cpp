@@ -518,7 +518,7 @@ void V3::EconomyManager::loadBuildingInformation(const commonItems::ModFilesyste
 	PMs = PMLoader.getPMs();
 	PMGroups = PMGroupLoader.getPMGroups();
 
-	Log(LogLevel::Info) << "<> Loaded " << buildings.size() << " buildings, " << buildingGroups->getBuildingGroupMap().size() << " building groups, "
+	Log(LogLevel::Info) << "<> Loaded " << buildings.size() << " buildings, " << buildingGroups.getBuildingGroupMap().size() << " building groups, "
 							  << PMs.size() << " PMs and " << PMGroups.size() << " PM groups.";
 }
 
