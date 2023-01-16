@@ -144,6 +144,8 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialTagMapper\ColonialTagMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CountryMapper\CountryMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CountryMapper\CountryMapping.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CountryTierMapper\CountryTierMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CountryTierMapper\CountryTierMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionEntry.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureMapper.cpp" />
@@ -180,6 +182,8 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\TechSetupMapper\TechSetupMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\TechSetupMapper\TechSetupMapping.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\VNColonialMapper\VNColonialMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\VNColonialMapper\VNColonialMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Output\outPops\outPops.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\ClayManager.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\State\Chunk.cpp" />
@@ -225,6 +229,20 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TechLoader\TechLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TerrainLoader\TerrainLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TerrainLoader\TerrainModifierLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaBuildingLoader\VanillaBuildingEntries.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaBuildingLoader\VanillaBuildingLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaCharacterLoader\VanillaCharacterEntries.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaCharacterLoader\VanillaCharacterLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaCountryHistoryLoader\VanillaCountryHistoryEntries.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaCountryHistoryLoader\VanillaCountryHistoryLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaAgreementEntry.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaDiplomacyEntries.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaDiplomacyLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaRelationEntry.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaTruceEntry.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomaticPlayLoader\VanillaDiplomaticPlayEntries.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomaticPlayLoader\VanillaDiplomaticPlayLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaPopulationHistoryLoader\VanillaPopulationHistoryLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaStateEntries.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaStateEntry.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaStateLoader.cpp" />
@@ -302,6 +320,8 @@
     <ClCompile Include="MapperTests\BuildingMapperTests\BuildingMappingTests.cpp" />
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMapperTests.cpp" />
     <ClCompile Include="MapperTests\CountryMapperTests\CountryMappingTests.cpp" />
+    <ClCompile Include="MapperTests\CountryTierMapperTests\CountryTierMapperTests.cpp" />
+    <ClCompile Include="MapperTests\CountryTierMapperTests\CountryTierMappingTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureDefinitionLoaderTests\CultureDefinitionEntryTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureDefinitionLoaderTests\CultureDefinitionLoaderTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\CultureMapperTests.cpp" />
@@ -338,6 +358,8 @@
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperRegionParserTests.cpp" />
     <ClCompile Include="MapperTests\TechSetupMapperTests\TechSetupMapperTests.cpp" />
     <ClCompile Include="MapperTests\TechSetupMapperTests\TechSetupMappingTests.cpp" />
+    <ClCompile Include="MapperTests\VNColonialMapper\VNColonialMapperTests.cpp" />
+    <ClCompile Include="MapperTests\VNColonialMapper\VNColonialMappingTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\ClayManagerTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\ChunkTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\StateModifierTests.cpp" />
@@ -379,6 +401,20 @@
     <ClCompile Include="V3WorldTests\LoaderTests\TechLoaderTests\TechLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\TerrainLoaderTests\TerrainLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\TerrainLoaderTests\TerrainModifierLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaBuildingLoaderTests\VanillaBuildingEntriesTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaBuildingLoaderTests\VanillaBuildingLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaCharacterLoaderTests\VanillaCharacterEntriesTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaCharacterLoaderTests\VanillaCharacterLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaCountryHistoryLoaderTests\VanillaCountryHistoryLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaCountryHistoryLoaderTests\VanillaCountryHistoryEntriesTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests\VanillaAgreementEntryTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests\VanillaDiplomacyEntriesTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests\VanillaDiplomacyLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests\VanillaRelationEntryTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomacyLoaderTests\VanillaTruceEntryTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomaticPlayLoaderTests\VanillaDiplomaticPlayEntriesTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaDiplomaticPlayLoaderTests\VanillaDiplomaticPlayLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\VanillaPopulationHistoryLoaderTests\VanillaPopulationHistoryLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaStateLoaderTests\VanillaStateEntriesTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaStateLoaderTests\VanillaStateEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\VanillaStateLoaderTests\VanillaStateLoaderTests.cpp" />
@@ -722,6 +758,77 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\economy\national_budget.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables/economy</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_customs_union.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/diplomacy</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_defensive_pacts.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/diplomacy</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_favors.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/diplomacy</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_relations.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/diplomacy</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_rivalries.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/diplomacy</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_subject_relationships.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/diplomacy</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_trade_agreement.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/diplomacy</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomacy\00_truces.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/diplomacy</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\countries\usa - usa.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/countries</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\countries\ute - ute.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/countries</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\population\kra - krakow.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/population</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\population\rus - russia.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/population</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\characters\abu - abu dhabi.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/characters</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\characters\ace - aceh.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/characters</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomatic_plays\00_aaa.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/diplomatic_plays</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\diplomatic_plays\00_bbb.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/diplomatic_plays</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\buildings\00_west_europe.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/buildings</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\history\buildings\01_south_europe.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/history/buildings</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\country_tiers.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>

@@ -13,6 +13,8 @@ std::string normalizeString(const std::string& input)
 	auto toReturn = commonItems::normalizeUTF8Path(input);
 	std::ranges::replace(toReturn.begin(), toReturn.end(), ' ', '_');
 	std::ranges::replace(toReturn.begin(), toReturn.end(), '\'', '_');
+	std::ranges::replace(toReturn.begin(), toReturn.end(), '(', '_');
+	std::ranges::replace(toReturn.begin(), toReturn.end(), ')', '_');
 	return toReturn;
 }
 } // namespace
@@ -73,7 +75,7 @@ V3::Character::Character(const EU4::Character& character,
 	}
 
 	// are we semi-dry and OLD?
-	if (isCharacterSemiDryAndOld(character))
+	if (isCharacterSemiDryAndOld())
 	{
 		const int seed = static_cast<int>(firstName[0]) * 11 + 51;
 		traits.emplace(characterTraitMapper.getGratisAgeism(seed));
@@ -224,7 +226,7 @@ bool V3::Character::isLeaderSemiDryAndHyperCompetent(const EU4::Character& chara
 	return false;
 }
 
-bool V3::Character::isCharacterSemiDryAndOld(const EU4::Character& character) const
+bool V3::Character::isCharacterSemiDryAndOld() const
 {
 	if (traits.size() > 1)
 		return false;

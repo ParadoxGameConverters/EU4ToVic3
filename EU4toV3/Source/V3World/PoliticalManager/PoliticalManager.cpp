@@ -5,6 +5,7 @@
 #include "ColonialRegionMapper/ColonialRegionMapper.h"
 #include "Country/Country.h"
 #include "CountryManager/EU4Country.h"
+#include "CultureMapper/CultureMapper.h"
 #include "DiplomacyParser/EU4Agreement.h"
 #include "Loaders/CountryDefinitionLoader/CountryDefinitionLoader.h"
 #include "Loaders/LawLoader/LawLoader.h"
@@ -19,12 +20,44 @@
 void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Loading Vanilla Countries.";
-
 	CountryDefinitionLoader definitionLoader;
 	definitionLoader.loadCommonCountries(modFS);
 	countries = definitionLoader.getCountries();
-
 	Log(LogLevel::Info) << "<> " << countries.size() << " vanilla countries loaded.";
+
+	Log(LogLevel::Info) << "-> Loading Vanilla Country Histories.";
+	vanillaCountryHistoryLoader.loadVanillaCountryHistories(modFS);
+	for (const auto& [tag, historyElements]: vanillaCountryHistoryLoader.getCountryHistoryElements())
+		if (countries.contains(tag))
+			countries.at(tag)->setVanillaHistoryElements(historyElements);
+	Log(LogLevel::Info) << "<> " << vanillaCountryHistoryLoader.getCountryHistoryElements().size() << " vanilla country histories loaded.";
+
+	Log(LogLevel::Info) << "-> Loading Vanilla Population Histories.";
+	vanillaPopulationHistoryLoader.loadVanillaPopulationHistories(modFS);
+	for (const auto& [tag, historyElements]: vanillaPopulationHistoryLoader.getPopulationHistoryElements())
+		if (countries.contains(tag))
+			countries.at(tag)->setVanillaPopulationElements(historyElements);
+	Log(LogLevel::Info) << "<> " << vanillaCountryHistoryLoader.getCountryHistoryElements().size() << " vanilla country histories loaded.";
+
+	Log(LogLevel::Info) << "-> Loading Vanilla Characters.";
+	vanillaCharacterLoader.loadVanillaCharacters(modFS);
+	for (const auto& [tag, historyElements]: vanillaCharacterLoader.getCharacterElements())
+		if (countries.contains(tag))
+			countries.at(tag)->setVanillaCharacterElements(historyElements);
+	Log(LogLevel::Info) << "<> " << vanillaCharacterLoader.getCharacterElements().size() << " vanilla characters loaded.";
+
+	Log(LogLevel::Info) << "-> Loading Vanilla Diplomacy.";
+	vanillaDiplomacyLoader.loadVanillaDiplomacy(modFS);
+	Log(LogLevel::Info) << "<> Loaded " << vanillaDiplomacyLoader.getAgreementEntries().size() << " vanilla agreements, "
+							  << vanillaDiplomacyLoader.getRelationEntries().size() << " vanilla relations and " << vanillaDiplomacyLoader.getTruceEntries().size()
+							  << " vanilla truces.";
+
+	Log(LogLevel::Info) << "-> Loading Vanilla Diplomatic Plays.";
+	vanillaDiplomaticPlayLoader.loadVanillaDiplomaticPlays(modFS);
+	for (const auto& [tag, historyElements]: vanillaDiplomaticPlayLoader.getDiploPlayElements())
+		if (countries.contains(tag))
+			countries.at(tag)->setVanillaDiplomaticPlayElements(historyElements);
+	Log(LogLevel::Info) << "<> " << vanillaDiplomaticPlayLoader.getDiploPlayElements().size() << " vanilla characters loaded.";
 }
 
 void V3::PoliticalManager::loadCountryMapper(const std::shared_ptr<mappers::CountryMapper>& theCountryMapper)
@@ -47,6 +80,11 @@ void V3::PoliticalManager::loadIdeaEffectMapperRules(const std::string& filePath
 void V3::PoliticalManager::loadTechSetupMapperRules(const std::string& filePath)
 {
 	techSetupMapper.loadMappingRules(filePath);
+}
+
+void V3::PoliticalManager::loadCountryTierMapperRules(const std::string& filePath)
+{
+	countryTierMapper.loadMappingRules(filePath);
 }
 
 void V3::PoliticalManager::loadLawMapperRules(const std::string& filePath)
@@ -194,7 +232,8 @@ void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader,
 	 const LocalizationLoader& v3LocLoader,
-	 const EU4::EU4LocalizationLoader& eu4LocLoader) const
+	 const EU4::EU4LocalizationLoader& eu4LocLoader,
+	 const bool vn) const
 {
 	Log(LogLevel::Info) << "-> Converting countries.";
 
@@ -206,11 +245,11 @@ void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
 
 		// this is a vic3-only (vanilla) country with no EU4 match. It's likely extinct.
 		else if (country->getVanillaData() && !country->getSourceCountry())
-			country->copyVanillaData(v3LocLoader, eu4LocLoader);
+			country->copyVanillaData(v3LocLoader, eu4LocLoader, vn);
 
 		// otherwise, this is a regular imported EU4 country
 		else if (country->getSourceCountry())
-			country->convertFromEU4Country(clayManager, cultureMapper, religionMapper, cultureLoader, religionLoader, ideaEffectMapper);
+			country->convertFromEU4Country(clayManager, cultureMapper, religionMapper, cultureLoader, religionLoader, ideaEffectMapper, countryTierMapper, vn);
 
 		else
 			Log(LogLevel::Warning) << "Country " << tag << " has no known sources! Not importing!";
@@ -239,6 +278,7 @@ std::shared_ptr<V3::Country> V3::PoliticalManager::getCountry(const std::string&
 void V3::PoliticalManager::determineAndApplyWesternization(const mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 const Configuration::EUROCENTRISM eurocentrism,
+	 const Configuration::STARTDATE startDate,
 	 const DatingData& datingData)
 {
 	Log(LogLevel::Info) << "-> Determining Westernization.";
@@ -267,8 +307,14 @@ void V3::PoliticalManager::determineAndApplyWesternization(const mappers::Cultur
 	int uncivs = 0;
 	for (const auto& country: countries | std::views::values)
 	{
-		country
-			 ->determineWesternizationWealthAndLiteracy(topTech, topInstitutions, cultureMapper, religionMapper, eurocentrism, datingData, populationSetupMapper);
+		country->determineWesternizationWealthAndLiteracy(topTech,
+			 topInstitutions,
+			 cultureMapper,
+			 religionMapper,
+			 eurocentrism,
+			 startDate,
+			 datingData,
+			 populationSetupMapper);
 
 		// Bookkeeping.
 		if (!country->getSubStates().empty())
@@ -590,10 +636,49 @@ void V3::PoliticalManager::changeTag(const std::string& replacement, const std::
 		countries[replacement] = countries[tag];
 	else
 		countries.emplace(replacement, countries.at(tag));
+	countries.erase(tag);
 
 	countries[replacement]->setTag(replacement);
 
 	countryMapper->relink(countries.at(replacement)->getSourceCountry()->getTag(), tag, replacement);
+}
+
+void V3::PoliticalManager::importVNColonialDiplomacy(const ClayManager& clayManager)
+{
+	Log(LogLevel::Info) << "-> Importing VN Colonial Diplomacy";
+	auto counter = 0;
+
+	for (const auto& colonyRule: clayManager.getVNColonialMapper().getVNColonies())
+	{
+		if (colonyRule.getSubjects().empty())
+			continue;
+		const auto& keyProvince = colonyRule.getKeyProvince();
+		const auto keyOwnerTag = clayManager.getProvinceOwnerTag(keyProvince);
+		if (!keyOwnerTag || !countries.contains(*keyOwnerTag))
+			continue;
+		const auto& keyOwner = countries.at(*keyOwnerTag);
+
+		for (const auto& targetTag: colonyRule.getSubjects())
+		{
+			if (!countries.contains(targetTag))
+				continue;
+			const auto& target = countries.at(targetTag);
+
+			auto& r1 = keyOwner->getRelation(targetTag);
+			auto& r2 = target->getRelation(*keyOwnerTag);
+			r1.increaseRelations(50);
+			r2.increaseRelations(50);
+
+			Agreement newAgreement;
+			newAgreement.first = *keyOwnerTag;
+			newAgreement.second = targetTag;
+			newAgreement.type = colonyRule.getSubjectType();
+			agreements.push_back(newAgreement);
+			++counter;
+		}
+	}
+
+	Log(LogLevel::Info) << "<> Imported " << counter << " subject agreements.";
 }
 
 int V3::PoliticalManager::getWorldPopCount() const
@@ -607,4 +692,135 @@ int V3::PoliticalManager::getCountriesPopCount(std::vector<std::shared_ptr<Count
 	return std::accumulate(theCountries.begin(), theCountries.end(), 0, [](int sum, const auto& country) {
 		return sum + country->getPopCount();
 	});
+}
+
+void V3::PoliticalManager::importVanillaDiplomacy()
+{
+	Log(LogLevel::Info) << "-> Importing VN Vanilla Diplomacy";
+	auto agrCounter = 0;
+	auto relCounter = 0;
+	auto truCounter = 0;
+
+	for (const auto& agreement: vanillaDiplomacyLoader.getAgreementEntries())
+	{
+		if (!isVanillaCountryAndLanded(agreement.getSourceTag()))
+			continue;
+		if (!isVanillaCountryAndLanded(agreement.getTargetTag()))
+			continue;
+		Agreement newAgreement;
+		newAgreement.first = agreement.getSourceTag();
+		newAgreement.second = agreement.getTargetTag();
+		newAgreement.type = agreement.getAgreementType();
+		agreements.push_back(newAgreement);
+		++agrCounter;
+	}
+
+	for (const auto& relation: vanillaDiplomacyLoader.getRelationEntries())
+	{
+		if (!isVanillaCountryAndLanded(relation.getSourceTag()))
+			continue;
+		if (!isVanillaCountryAndLanded(relation.getTargetTag()))
+			continue;
+		auto& rel = countries.at(relation.getSourceTag())->getRelation(relation.getTargetTag());
+		rel.setRelations(relation.getRelationValue());
+		++relCounter;
+	}
+
+	for (const auto& truce: vanillaDiplomacyLoader.getTruceEntries())
+	{
+		if (!isVanillaCountryAndLanded(truce.getSourceTag()))
+			continue;
+		if (!isVanillaCountryAndLanded(truce.getTargetTag()))
+			continue;
+		countries.at(truce.getSourceTag())->addTruce(truce.getTargetTag(), truce.getDuration());
+		++truCounter;
+	}
+
+	Log(LogLevel::Info) << "<> Imported " << agrCounter << " vanilla agreements, " << relCounter << " vanilla relations and " << truCounter
+							  << " vanilla truces.";
+}
+
+bool V3::PoliticalManager::isVanillaCountryAndLanded(const std::string& tag) const
+{
+	if (!countries.contains(tag))
+		return false;
+	const auto& country = countries.at(tag);
+	if (country->getSourceCountry())
+		return false;
+	if (country->getSubStates().empty())
+		return false;
+	return true;
+}
+
+void V3::PoliticalManager::injectDynamicCulturesIntoFormables(const mappers::CultureMapper& cultureMapper)
+{
+	Log(LogLevel::Info) << "-> Injecting dynamic cultures into formables.";
+	auto counter = 0;
+	const auto& related = cultureMapper.getRelatedCultures();
+
+	// The difference between formables and releasables, is that formables never existed. No cores.
+
+	for (const auto& country: countries | std::views::values)
+	{
+		if (!country->getSubStates().empty())
+			continue; // only need dead people.
+		if (!country->getUnownedCoreSubStates().empty())
+			continue; // without cores.
+
+		bool updated = false;
+		auto data = country->getProcessedData();
+		for (const auto& culture: country->getProcessedData().cultures)
+		{
+			if (!related.contains(culture))
+				continue;
+			data.cultures.insert(related.at(culture).begin(), related.at(culture).end());
+			updated = true;
+		}
+		if (updated)
+		{
+			++counter;
+			country->setProcessedData(data);
+		}
+	}
+	Log(LogLevel::Info) << "<> Updated " << counter << " formable countries.";
+}
+
+void V3::PoliticalManager::expandReleasablesFootprint(const ClayManager& clayManager)
+{
+	Log(LogLevel::Info) << "-> Expanding Releasables footprint.";
+	auto counter = 0;
+
+	// For releasables that have cores on >60% state provinces, we want to release entire state, not just the provinces they owned.
+	// Only reason for this is cleaner borders.
+
+	for (const auto& country: countries | std::views::values)
+	{
+		bool expanded = false;
+		// releasables own no states but have unowned cores somewhere.
+		if (!country->getSubStates().empty() || country->getUnownedCoreSubStates().empty())
+			continue;
+		std::map<std::string, std::set<std::string>> stateProvinces;
+		for (const auto& subState: country->getUnownedCoreSubStates())
+		{
+			if (!stateProvinces.contains(subState->getHomeStateName()))
+				stateProvinces.emplace(subState->getHomeStateName(), std::set<std::string>{});
+			auto stateProvinceIDs = subState->getProvinceIDs();
+			stateProvinces.at(subState->getHomeStateName()).insert(stateProvinceIDs.begin(), stateProvinceIDs.end());
+		}
+
+		for (const auto& [stateName, provinces]: stateProvinces)
+		{
+			auto allProvinceIDs = clayManager.getStateProvinceIDs(stateName);
+			if (static_cast<double>(provinces.size()) / static_cast<double>(allProvinceIDs.size()) > 0.6)
+			{
+				stateProvinces.at(stateName) = allProvinceIDs;
+				expanded = true;
+			}
+		}
+		for (const auto& provinces: stateProvinces | std::views::values)
+			country->addUnownedProvinces(provinces);
+		if (expanded)
+			++counter;
+	}
+	Log(LogLevel::Info) << "<> Expanded " << counter << " releasables.";
 }

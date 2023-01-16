@@ -76,6 +76,11 @@ jobs:
       with:
         languages: ${{ matrix.language }}
        
+    - name: "Setup Dotnet for use with actions"
+      uses: actions/setup-dotnet@v3
+      with:
+        global-json-file: Fronter.NET/global.json
+
     - name: Clean Release folder
       run: |
        rm -rf Release/

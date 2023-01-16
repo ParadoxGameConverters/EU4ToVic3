@@ -23,9 +23,14 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	clayManager.initializeSuperRegions(dwFS);
 	clayManager.loadStatesIntoSuperRegions();
 	if (configuration.configBlock.vn)
+	{
 		provinceMapper.loadProvinceMappings("configurables/vn_province_mappings.txt");
+		clayManager.loadVNColonialRules("configurables/vn_colonial.txt");
+	}
 	else
+	{
 		provinceMapper.loadProvinceMappings("configurables/province_mappings.txt");
+	}
 	countryMapper = std::make_shared<mappers::CountryMapper>();
 	countryMapper->loadMappingRules("configurables/country_mappings.txt");
 	religionMapper.loadMappingRules("configurables/religion_map.txt");
@@ -45,6 +50,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.loadDiplomaticMapperRules("configurables/diplomatic_map.txt");
 	politicalManager.loadCharacterTraitMapperRules("configurables/character_traits.txt");
 	politicalManager.loadColonialTagMapperRules("configurables/colonial_tags.txt");
+	politicalManager.loadCountryTierMapperRules("configurables/country_tiers.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	localizationLoader.scrapeLocalizations(dwFS);
 	vanillaLocalizationLoader.scrapeLocalizations(blankModFS);
@@ -79,39 +85,45 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	Log(LogLevel::Progress) << "51 %";
 	// generating decentralized countries
-	if (!configuration.configBlock.vn)
-	{
-		clayManager.shoveRemainingProvincesIntoSubStates();
-		politicalManager.generateDecentralizedCountries(clayManager, popManager);
-	}
+	clayManager.shoveRemainingProvincesIntoSubStates();
+	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 
 	Log(LogLevel::Progress) << "52 %";
-	// converting all 3 types of countries - generated decentralized, extinct vanilla-only, and EU4 imports.
+	// converting all 3 types of countries - generated decentralized, extinct/extant-VN vanilla-only, and EU4 imports.
 	politicalManager.convertAllCountries(clayManager,
 		 cultureMapper,
 		 religionMapper,
 		 sourceWorld.getCultureLoader(),
 		 sourceWorld.getReligionLoader(),
 		 localizationLoader,
-		 sourceWorld.getEU4Localizations());
+		 sourceWorld.getEU4Localizations(),
+		 configuration.configBlock.vn);
 
 	politicalManager.attemptColonialTagReplacement(cultureMapper.getColonialRegionMapper(), clayManager);
 
 	popManager.generatePops(clayManager);
+	popManager.applyHomeLands(clayManager);
 
 	cultureMapper.generateCultureDefinitions(allFS,
 		 "configurables/name_lists.txt",
 		 "configurables/name_list_map.txt",
 		 "configurables/culture_trait_map.txt",
+		 clayManager,
 		 sourceWorld.getCultureLoader(),
+		 sourceWorld.getReligionLoader(),
 		 sourceWorld.getEU4Localizations());
 
-	politicalManager.determineAndApplyWesternization(cultureMapper, religionMapper, configBlock.euroCentric, datingData);
+	politicalManager.determineAndApplyWesternization(cultureMapper, religionMapper, configBlock.euroCentric, configBlock.startDate, datingData);
 	politicalManager.setupTech();
 	politicalManager.setupLaws();
 	politicalManager.convertDiplomacy(sourceWorld.getDiplomacy().getAgreements());
 	politicalManager.convertRivals();
 	politicalManager.convertTruces(datingData.lastEU4Date);
+	if (configuration.configBlock.vn)
+	{
+		politicalManager.importVNColonialDiplomacy(clayManager);
+		politicalManager.importVanillaDiplomacy();
+	}
 
 	clayManager.squashAllSubStates(politicalManager);
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);
@@ -126,6 +138,9 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	flagCrafter.loadCustomColors(configuration.getEU4Path() + "/common/custom_country_colors/00_custom_country_colors.txt");
 	flagCrafter.loadAvailableFlags("blankMod/output/common/coat_of_arms/coat_of_arms/", V3Path + "/common/flag_definitions/");
 	flagCrafter.distributeAvailableFlags(politicalManager.getCountries(), *countryMapper);
+
+	politicalManager.injectDynamicCulturesIntoFormables(cultureMapper);
+	politicalManager.expandReleasablesFootprint(clayManager);
 
 	Log(LogLevel::Info) << "-> Converting Provinces";
 	Log(LogLevel::Progress) << "53 %";

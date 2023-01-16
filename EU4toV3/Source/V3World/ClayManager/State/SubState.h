@@ -43,14 +43,18 @@ class SubState
 	void setCapital() { capital = true; }
 	void addHistoricalCapitals(const std::set<std::string>& theCapitals) { eu4capitals = theCapitals; }
 	void setProvinces(const ProvinceMap& theProvinces);
-	void setSubStateType(const std::string& theType) { subStateType = theType; }
+	void setSubStateTypes(const std::set<std::string>& theTypes) { subStateTypes = theTypes; }
+	void addClaim(const std::string& tag) { claims.emplace(tag); }
+	void setClaims(const std::set<std::string>& theClaims) { claims = theClaims; }
 
 	void setSourceOwnerTag(const std::string& sourceTag) { sourceOwnerTag = sourceTag; }
 	void setWeight(double theWeight) { weight = theWeight; }
 	void setSourceProvinceData(const std::vector<std::pair<SourceProvinceData, double>>& theData) { weightedSourceProvinceData = theData; }
 
 	void setMarketCapital() { marketCapital = true; }
-	void setUnincorporated() { incorporated = false; }
+	void setUnincorporated() { subStateTypes.emplace("unincorporated"); }
+	void setTreatyPort() { subStateTypes.emplace("treaty_port"); }
+	void setVanillaSubState() { vanillaSubState = true; }
 	void setLandshare(const double theLandshare) { landshare = theLandshare; }
 	void setResource(const std::string& theResource, const int theAmount) { resources[theResource] = theAmount; }
 	void setDemographics(const std::vector<Demographic>& demos) { demographics = demos; }
@@ -61,6 +65,7 @@ class SubState
 	void setCPBudget(const int theCPBudget) { CPBudget = theCPBudget; }
 	void spendCPBudget(const int theCPExpense) { CPBudget -= theCPExpense; }
 	void setBuildingLevel(const std::string& building, const int level) { buildings[building] = level; }
+	void setVanillaBuildingElements(const std::vector<std::string>& elements) { vanillaBuildingElements = elements; }
 	void calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap);
 
 	void convertDemographics(const ClayManager& clayManager,
@@ -76,8 +81,10 @@ class SubState
 	[[nodiscard]] const auto& getOwner() const { return owner; }
 	[[nodiscard]] auto isCapital() const { return capital; }
 	[[nodiscard]] const auto& getHistoricalCapitals() const { return eu4capitals; }
+	[[nodiscard]] std::set<std::string> getProvinceIDs() const;
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
-	[[nodiscard]] const auto& getSubStateType() const { return subStateType; }
+	[[nodiscard]] const auto& getSubStateTypes() const { return subStateTypes; }
+	[[nodiscard]] const auto& getClaims() const { return claims; }
 
 	[[nodiscard]] const auto& getSourceOwnerTag() const { return sourceOwnerTag; }
 	[[nodiscard]] const auto& getWeight() const { return weight; }
@@ -90,13 +97,17 @@ class SubState
 	[[nodiscard]] const auto& getTerrainFrequencies() { return terrainFrequency; }
 	[[nodiscard]] const auto& getDemographics() const { return demographics; }
 	[[nodiscard]] const auto& getSubStatePops() const { return subStatePops; }
+	[[nodiscard]] std::optional<std::string> getPrimaryCulture() const;
 
 	[[nodiscard]] const auto& getIndustryWeight() const { return industryWeight; }
 	[[nodiscard]] const auto& getCPBudget() const { return CPBudget; }
 	[[nodiscard]] std::optional<int> getBuildingLevel(const std::string& building) const;
 	[[nodiscard]] const auto& getBuildings() const { return buildings; }
+	[[nodiscard]] const auto& getVanillaBuildingElements() const { return vanillaBuildingElements; }
 
-	[[nodiscard]] auto isIncorporated() const { return incorporated; }
+	[[nodiscard]] auto isVanillaSubState() const { return vanillaSubState; }
+	[[nodiscard]] auto isIncorporated() const { return !subStateTypes.contains("unincorporated"); }
+	[[nodiscard]] auto isTreatyPort() const { return !subStateTypes.contains("treaty_port"); }
 	[[nodiscard]] auto isMarketCapital() const { return marketCapital; }
 	[[nodiscard]] bool isCoastal() const;
 
@@ -124,15 +135,15 @@ class SubState
 	std::shared_ptr<State> homeState; // home state
 	std::shared_ptr<Country> owner;
 	bool capital = false;
-	std::set<std::string> eu4capitals; // these eu4 tags had a capital in roughly this spot.
-	ProvinceMap provinces;				  // V3 province codes
-	std::string subStateType;
+	std::set<std::string> eu4capitals;	 // these eu4 tags had a capital in roughly this spot.
+	ProvinceMap provinces;					 // V3 province codes
+	std::set<std::string> subStateTypes; // unincorporated, treat_port...
 
 	std::optional<std::string> sourceOwnerTag; // we may or may not have this, depending on where substate is imported from.
 	std::optional<double> weight;					 // imported scaled sourceProvinceWeight from whatever source province(s) point generally here.
 	std::vector<std::pair<SourceProvinceData, double>> weightedSourceProvinceData;
 
-	bool incorporated = true;
+	bool vanillaSubState = false; // Is this substate imported from vanilla?
 	bool marketCapital = false;
 	double landshare = 0.0;									// % of State's resources that are substate's
 	double infrastructure = 0.0;							// limits the amount of industry a substate can support
@@ -145,6 +156,9 @@ class SubState
 	int CPBudget = 0;							  // Construction Points for a substate to spend on it's development
 	int originalCPBudget = 0;				  // Used in Building Weight calculations
 	std::map<std::string, int> buildings; // building -> level
+
+	std::vector<std::string> vanillaBuildingElements; // vanilla buildings for this substate, ready for direct dump.
+	std::set<std::string> claims;
 };
 } // namespace V3
 

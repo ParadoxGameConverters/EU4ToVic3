@@ -3,11 +3,17 @@
 #include "CharacterTraitMapper/CharacterTraitMapper.h"
 #include "ColonialTagMapper/ColonialTagMapper.h"
 #include "Configuration.h"
+#include "CountryTierMapper/CountryTierMapper.h"
 #include "DatingData.h"
 #include "Diplomacy/Agreement.h"
 #include "DiplomaticMapper/DiplomaticMapper.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
 #include "LawMapper/LawMapper.h"
+#include "Loaders/VanillaCharacterLoader/VanillaCharacterLoader.h"
+#include "Loaders/VanillaCountryHistoryLoader/VanillaCountryHistoryLoader.h"
+#include "Loaders/VanillaDiplomacyLoader/VanillaDiplomacyLoader.h"
+#include "Loaders/VanillaDiplomaticPlayLoader/VanillaDiplomaticPlayLoader.h"
+#include "Loaders/VanillaPopulationHistoryLoader/VanillaPopulationHistoryLoader.h"
 #include "ModLoader/ModFilesystem.h"
 #include "PopulationSetupMapper/PopulationSetupMapper.h"
 #include "TechSetupMapper/TechSetupMapper.h"
@@ -55,6 +61,7 @@ class PoliticalManager
 	void loadDiplomaticMapperRules(const std::string& filePath);
 	void loadCharacterTraitMapperRules(const std::string& filePath);
 	void loadColonialTagMapperRules(const std::string& filePath);
+	void loadCountryTierMapperRules(const std::string& filePath);
 	void importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries);
 	void generateDecentralizedCountries(const ClayManager& clayManager, const PopManager& popManager);
 	void convertAllCountries(const ClayManager& clayManager,
@@ -63,7 +70,8 @@ class PoliticalManager
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader,
 		 const LocalizationLoader& v3LocLoader,
-		 const EU4::EU4LocalizationLoader& eu4LocLoader) const;
+		 const EU4::EU4LocalizationLoader& eu4LocLoader,
+		 bool vn = false) const;
 
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& v3Tag) const;
@@ -75,6 +83,7 @@ class PoliticalManager
 	void determineAndApplyWesternization(const mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 Configuration::EUROCENTRISM eurocentrism,
+		 Configuration::STARTDATE startDate,
 		 const DatingData& datingData);
 	void setupTech();
 	void setupLaws();
@@ -90,8 +99,14 @@ class PoliticalManager
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader);
+	void injectDynamicCulturesIntoFormables(const mappers::CultureMapper& cultureMapper);
+	void expandReleasablesFootprint(const ClayManager& clayManager);
 
 	void attemptColonialTagReplacement(const mappers::ColonialRegionMapper& colonialRegionMapper, const ClayManager& clayManager);
+
+	// VN specifics
+	void importVNColonialDiplomacy(const ClayManager& clayManager);
+	void importVanillaDiplomacy();
 
   private:
 	void generateDecentralizedCountry(const std::string& culture, const std::vector<std::shared_ptr<SubState>>& subStates);
@@ -99,6 +114,7 @@ class PoliticalManager
 	static std::string getDominantDemographic(const std::vector<Demographic>& demographics);
 	void grantLawFromGroup(const std::string& lawGroup, const std::shared_ptr<Country>& country) const;
 	[[nodiscard]] bool isEU4CountryConvertedAndLanded(const std::string& eu4Tag) const;
+	[[nodiscard]] bool isVanillaCountryAndLanded(const std::string& tag) const;
 	[[nodiscard]] bool isValidForColonialReplacement(const std::string& tag) const;
 	void changeTag(const std::string& replacement, const std::string& tag);
 
@@ -113,6 +129,12 @@ class PoliticalManager
 	mappers::DiplomaticMapper diplomaticMapper;
 	mappers::CharacterTraitMapper characterTraitMapper;
 	mappers::ColonialTagMapper colonialTagMapper;
+	mappers::CountryTierMapper countryTierMapper;
+	VanillaDiplomacyLoader vanillaDiplomacyLoader;
+	VanillaCountryHistoryLoader vanillaCountryHistoryLoader;
+	VanillaPopulationHistoryLoader vanillaPopulationHistoryLoader;
+	VanillaCharacterLoader vanillaCharacterLoader;
+	VanillaDiplomaticPlayLoader vanillaDiplomaticPlayLoader;
 };
 } // namespace V3
 #endif // POLITICAL_MANAGER_H

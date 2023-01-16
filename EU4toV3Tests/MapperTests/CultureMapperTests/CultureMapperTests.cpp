@@ -165,7 +165,7 @@ TEST(Mappers_CultureMapperTests, cultureGroupMatches)
 
 	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture6", "religion_1", "STATE_TEST_3", "GAT");
 	ASSERT_TRUE(match);
-	EXPECT_EQ("vculture15", *match);
+	EXPECT_EQ("culture6", *match); // this remains a dynamic name as there's no direct cultural group mapping for culture6.
 }
 
 TEST(Mappers_CultureMapperTests, macrosAreLoaded1)
@@ -220,7 +220,9 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
 		 "TestFiles/configurables/name_lists.txt",
 		 "TestFiles/configurables/name_list_map.txt",
 		 "TestFiles/configurables/culture_trait_map.txt",
+		 clayManager,
 		 cultureLoader,
+		 religionLoader,
 		 eu4LocLoader);
 
 	// eu4 cultures.txt defines cultures1-10 + unmapped_culture
@@ -230,7 +232,7 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
 	//
 	// In addition, inside are vanilla defs for vculture1 and vculture2 which are not interesting.
 
-	ASSERT_EQ(4, culMapper.getV3CultureDefinitions().size());
+	ASSERT_EQ(10, culMapper.getV3CultureDefinitions().size());
 	EXPECT_TRUE(culMapper.getV3CultureDefinitions().contains("vculture1"));
 	EXPECT_TRUE(culMapper.getV3CultureDefinitions().contains("vculture2"));
 	const auto& def1 = culMapper.getV3CultureDefinitions().at("culture5");
@@ -273,4 +275,40 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
 	EXPECT_EQ(0, culMapper.getWesternizationScoreForCulture("unmapped_culture"));
 	EXPECT_EQ(0, culMapper.getLiteracyScoreForCulture("unmapped_culture"));
 	EXPECT_EQ(0, culMapper.getIndustryScoreForCulture("unmapped_culture"));
+}
+
+TEST(Mappers_CultureMapperTests, cultureDefsLinksDynamicsToRelatedCultures)
+{
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
+	culMapper.expandCulturalMappings(clayManager, cultureLoader, religionLoader);
+
+	std::stringstream input;
+	input << commonItems::utf8BOM << "l_english:\n";
+	input << " unmapped_culture: \"Unmapped\"\n";
+	input << " culture5: \"Culture 5\"\n";
+	EU4::EU4LocalizationLoader eu4LocLoader;
+	eu4LocLoader.loadLocalizations(input);
+
+	const auto& match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "dynamic-culture1-culture7-culture-num1", "", "", "");
+	ASSERT_TRUE(match);
+	EXPECT_EQ("dynamic-culture1-culture7-culture-num1", *match); // this remains a dynamic culture.
+	const auto& match2 = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture1", "", "", "");
+	ASSERT_TRUE(match2);
+	EXPECT_EQ("vculture1", *match2); // dynamic-culture1-culture7-culture-num1 should be related to vculture1.
+
+	culMapper.generateCultureDefinitions(modFS,
+		 "TestFiles/configurables/name_lists.txt",
+		 "TestFiles/configurables/name_list_map.txt",
+		 "TestFiles/configurables/culture_trait_map.txt",
+		 clayManager,
+		 cultureLoader,
+		 religionLoader,
+		 eu4LocLoader);
+
+	const auto& related = culMapper.getRelatedCultures();
+
+	ASSERT_TRUE(related.contains("vculture1"));
+	EXPECT_THAT(related.at("vculture1"), testing::UnorderedElementsAre("dynamic-culture1-culture7-culture-num1"));
+	ASSERT_TRUE(related.contains("vculture17"));
+	EXPECT_THAT(related.at("vculture17"), testing::UnorderedElementsAre("dynamic-culture8-culture-num1"));
 }

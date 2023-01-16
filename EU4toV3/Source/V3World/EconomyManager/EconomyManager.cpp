@@ -1,5 +1,6 @@
 #include "EconomyManager.h"
 #include "Building/Building.h"
+#include "Building/BuildingGroups.h"
 #include "Building/ProductionMethods/ProductionMethod.h"
 #include "Building/ProductionMethods/ProductionMethodGroup.h"
 #include "ClayManager/State/State.h"
@@ -92,9 +93,12 @@ void V3::EconomyManager::hardcodePorts() const
 	{
 		for (const auto& substate: country->getSubStates())
 		{
+			if (!substate->getVanillaBuildingElements().empty())
+				continue; // don't affect states imported from vanilla.
 			if (substate->getHomeState()->isCoastal())
 			{
 				substate->setBuildingLevel("building_port", 1);
+				substate->getOwner()->addTech("navigation");
 			}
 		}
 	}
@@ -427,6 +431,7 @@ void V3::EconomyManager::setPMs() const
 		auto data = country->getProcessedData();
 		const auto& PMName = pickBureaucracyPM(country);
 		data.productionMethods["building_government_administration"] = {PMName};
+		data.productionMethods["building_port"] = {"pm_basic_port"};
 		country->setProductionMethods(data.productionMethods);
 	}
 }
@@ -472,22 +477,32 @@ void V3::EconomyManager::removeSubStateIfFinished(std::vector<std::shared_ptr<Su
 
 void V3::EconomyManager::loadTerrainModifierMatrices(const std::string& filePath)
 {
+	Log(LogLevel::Info) << "-> Loading Terrain Modifier Matrices.";
+
 	TerrainModifierLoader terrainModifierLoader;
 	terrainModifierLoader.loadTerrainModifiers(filePath + "configurables/economy/terrain_econ_modifiers.txt");
 
 	stateTerrainModifiers = terrainModifierLoader.getTerrainStateModifiers();
 	buildingTerrainModifiers = terrainModifierLoader.getTerrainBuildingModifiers();
+
+	Log(LogLevel::Info) << "<> Loaded " << stateTerrainModifiers.size() << "state and " << buildingTerrainModifiers.size() << " building terrain modifiers.";
 }
 
 void V3::EconomyManager::loadStateTraits(const commonItems::ModFilesystem& modFS)
 {
+	Log(LogLevel::Info) << "-> Loading State Traits.";
+
 	StateModifierLoader stateModifierLoader;
 	stateModifierLoader.loadStateModifiers(modFS);
 	stateTraits = stateModifierLoader.getStateModifiers();
+
+	Log(LogLevel::Info) << "<> Loaded " << stateTraits.size() << " state traits.";
 }
 
 void V3::EconomyManager::loadBuildingInformation(const commonItems::ModFilesystem& modFS)
 {
+	Log(LogLevel::Info) << "-> Loading building information.";
+
 	BuildingLoader buildingLoader;
 	BuildingGroupLoader buildingGroupLoader;
 	ProductionMethodLoader PMLoader;
@@ -502,6 +517,9 @@ void V3::EconomyManager::loadBuildingInformation(const commonItems::ModFilesyste
 	buildingGroups = buildingGroupLoader.getBuildingGroups();
 	PMs = PMLoader.getPMs();
 	PMGroups = PMGroupLoader.getPMGroups();
+
+	Log(LogLevel::Info) << "<> Loaded " << buildings.size() << " buildings, " << buildingGroups->getBuildingGroupMap().size() << " building groups, "
+							  << PMs.size() << " PMs and " << PMGroups.size() << " PM groups.";
 }
 
 void V3::EconomyManager::loadBuildingMappings(const std::string& filePath)
@@ -511,7 +529,11 @@ void V3::EconomyManager::loadBuildingMappings(const std::string& filePath)
 
 void V3::EconomyManager::loadEconDefines(const std::string& filePath)
 {
+	Log(LogLevel::Info) << "-> Loading economy defines.";
+
 	econDefines.loadEconDefines(filePath + "configurables/economy/econ_defines.txt");
+
+	Log(LogLevel::Info) << "<> Economy defines loaded.";
 }
 
 void V3::EconomyManager::loadNationalBudgets(const std::string& filePath)

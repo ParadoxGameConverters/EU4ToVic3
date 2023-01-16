@@ -28,6 +28,7 @@ class CultureMapper;
 class PopulationSetupMapper;
 class TechSetupMapper;
 class CharacterTraitMapper;
+class CountryTierMapper;
 } // namespace mappers
 namespace V3
 {
@@ -41,6 +42,14 @@ struct VanillaCommonCountryData
 	std::string capitalStateName;
 	std::optional<commonItems::Color> color;
 	bool is_named_from_capital = false;
+};
+
+struct UnprocessedData
+{
+	std::vector<std::string> vanillaHistoryElements;
+	std::vector<std::string> vanillaPopulationElements;
+	std::vector<std::string> vanillaCharacterElements;
+	std::vector<std::string> vanillaDiplomaticPlayElements;
 };
 
 struct ProcessedData
@@ -66,6 +75,10 @@ struct ProcessedData
 	std::set<std::string> rivals;
 	std::map<std::string, int> truces;
 	std::vector<Character> characters;
+	std::vector<std::string> vanillaHistoryElements;		  // stanzas from vanilla country histories, ready for direct dump.
+	std::vector<std::string> vanillaPopulationElements;	  // stanzas from vanilla population histories, ready for direct dump.
+	std::vector<std::string> vanillaCharacterElements;		  // stanzas from vanilla character histories, ready for direct dump.
+	std::vector<std::string> vanillaDiplomaticPlayElements; // stanzas from vanilla diplomatic play histories, ready for direct dump.
 
 	double industryWeight = 0; // Share of global industry a country should get, not normalized
 	int CPBudget = 0;				// Construction Points for a country to spend on it's development
@@ -102,8 +115,10 @@ class Country: commonItems::parser
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader,
-		 const mappers::IdeaEffectsMapper& ideaEffectMapper);
-	void copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
+		 const mappers::IdeaEffectsMapper& ideaEffectMapper,
+		 const mappers::CountryTierMapper& countryTierMapper,
+		 bool vn = false);
+	void copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader, bool vn = false);
 	void generateDecentralizedData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 
 	[[nodiscard]] const auto& getTag() const { return tag; }
@@ -113,25 +128,30 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getIndustryWeight() const { return processedData.industryWeight; }
 	[[nodiscard]] const auto& getCPBudget() const { return processedData.CPBudget; }
 	[[nodiscard]] const auto& getSourceCountry() const { return sourceCountry; }
-	[[nodiscard]] const auto& getSubStates() const { return substates; }
-	void addSubState(const std::shared_ptr<SubState>& theSubstate) { substates.push_back(theSubstate); }
-	void setSubStates(const std::vector<std::shared_ptr<SubState>>& theSubstates) { substates = theSubstates; }
+	[[nodiscard]] const auto& getSubStates() const { return subStates; }
+	[[nodiscard]] const auto& getUnownedCoreSubStates() const { return unownedCoreSubStates; }
+	[[nodiscard]] const auto& getUnownedProvinces() const { return unownedProvinces; }
+	void addSubState(const std::shared_ptr<SubState>& theSubState) { subStates.push_back(theSubState); }
+	void addUnownedCoreSubState(const std::shared_ptr<SubState>& theSubState) { unownedCoreSubStates.push_back(theSubState); }
+	void addUnownedProvinces(const std::set<std::string>& theProvinces) { unownedProvinces.insert(theProvinces.begin(), theProvinces.end()); }
+	void setSubStates(const std::vector<std::shared_ptr<SubState>>& theSubStates) { subStates = theSubStates; }
 	void setProcessedData(const ProcessedData& data) { processedData = data; }
 
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
 	[[nodiscard]] int getPopCount() const;
-	[[nodiscard]] static int getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubstates);
-
+	[[nodiscard]] static int getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubStates);
 
 	void determineWesternizationWealthAndLiteracy(double topTech,
 		 double topInstitutions,
 		 const mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 Configuration::EUROCENTRISM eurocentrism,
+		 Configuration::STARTDATE startDate,
 		 const DatingData& datingData,
 		 const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore);
+	void addTech(const std::string& tech) { processedData.techs.emplace(tech); }
 	void addLaw(const auto& lawName) { processedData.laws.emplace(lawName); }
 	void addInstitution(const auto& institutionName) { processedData.institutions.emplace(institutionName); }
 	[[nodiscard]] Relation& getRelation(const std::string& target);
@@ -140,6 +160,10 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getRivals() const { return processedData.rivals; }
 	void addTruce(const std::string& target, int months) { processedData.truces.emplace(target, months); }
 	[[nodiscard]] const auto& getTruces() const { return processedData.truces; }
+	void setVanillaHistoryElements(const std::vector<std::string>& elements) { unprocessedData.vanillaHistoryElements = elements; }
+	void setVanillaPopulationElements(const std::vector<std::string>& elements) { unprocessedData.vanillaPopulationElements = elements; }
+	void setVanillaCharacterElements(const std::vector<std::string>& elements) { unprocessedData.vanillaCharacterElements = elements; }
+	void setVanillaDiplomaticPlayElements(const std::vector<std::string>& elements) { unprocessedData.vanillaDiplomaticPlayElements = elements; }
 
 	void convertCharacters(const mappers::CharacterTraitMapper& characterTraitMapper,
 		 float ageShift,
@@ -162,7 +186,7 @@ class Country: commonItems::parser
 
 	void distributeGovAdmins(int numGovAdmins) const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> topPercentileStatesByPop(double percentile) const;
-	[[nodiscard]] double calculateBureaucracyUsage(const std::map<std::string, V3::Law>& lawsMap) const;
+	[[nodiscard]] double calculateBureaucracyUsage(const std::map<std::string, Law>& lawsMap) const;
 
   private:
 	void registerKeys();
@@ -173,7 +197,7 @@ class Country: commonItems::parser
 		 mappers::CultureMapper& cultureMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader);
-	void convertTier();
+	void convertTier(const mappers::CountryTierMapper& countryTierMapper, bool vn);
 	void generateDecentralizedLocs(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 	void calculateBaseLiteracy(const mappers::ReligionMapper& religionMapper);
 	void calculateWesternization(double topTech, double topInstitutions, const mappers::CultureMapper& cultureMapper, Configuration::EUROCENTRISM eurocentrism);
@@ -182,7 +206,7 @@ class Country: commonItems::parser
 	void applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setDecentralizedEffects();
 	void determineCountryType();
-	[[nodiscard]] double calcSubStateBureaucracy(const std::map<std::string, V3::Law>& lawsMap) const;
+	[[nodiscard]] double calcSubStateBureaucracy(const std::map<std::string, Law>& lawsMap) const;
 	[[nodiscard]] double calcInstitutionBureaucracy() const;
 	[[nodiscard]] double calcCharacterBureaucracy() const;
 	[[nodiscard]] std::optional<Tech> getTechFromMap(const std::string& techName, const std::map<std::string, Tech>& techMap) const;
@@ -190,10 +214,12 @@ class Country: commonItems::parser
 	std::string tag;
 	std::optional<VanillaCommonCountryData> vanillaData;
 	ProcessedData processedData;
-
+	UnprocessedData unprocessedData;
 
 	std::shared_ptr<EU4::Country> sourceCountry;
-	std::vector<std::shared_ptr<SubState>> substates;
+	std::vector<std::shared_ptr<SubState>> subStates;
+	std::vector<std::shared_ptr<SubState>> unownedCoreSubStates; // substates this country has eu4 cores on but does *not* own.
+	std::set<std::string> unownedProvinces; // Derived provinces we want released. Doesn't necessarily match unownedCoreSubStates! We tweak for borders!
 };
 } // namespace V3
 

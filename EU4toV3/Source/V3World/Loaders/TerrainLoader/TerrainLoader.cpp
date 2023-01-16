@@ -16,7 +16,7 @@ void V3::TerrainLoader::registerKeys()
 	registerRegex(commonItems::catchallRegex, [this](const std::string& provinceName, std::istream& theStream) {
 		const auto theTerrain = commonItems::getString(theStream);
 		auto theProvinceName = commonItems::remQuotes(provinceName);
-		std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
+		std::ranges::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
 		if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
 			theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1);
 		else

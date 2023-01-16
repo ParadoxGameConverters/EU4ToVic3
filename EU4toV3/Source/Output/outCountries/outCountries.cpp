@@ -1,10 +1,22 @@
 #include "outCountries.h"
+#include "ClayManager/State/SubState.h"
 #include "CommonFunctions.h"
 #include <fstream>
 #include <ranges>
 
 namespace
 {
+void outReleasableCountry(std::ostream& output, const V3::Country& country)
+{
+	output << country.getTag() << " = {\n";
+	output << "\tprovinces = { ";
+	for (const auto& province: country.getUnownedProvinces())
+		output << province << " ";
+	output << " }\n";
+	output << "\tai_will_do = { always = no }\n";
+	output << "}\n\n";
+}
+
 void outCommonCountry(std::ostream& output, const V3::Country& country)
 {
 	output << country.getTag() << " = {\n";
@@ -60,6 +72,10 @@ void outHistoryCountry(std::ostream& output, const V3::Country& country)
 		output << "\t\t\tset_ig_suppression = yes\n";
 		output << "\t\t}\n";
 	}
+	for (const auto& element: country.getProcessedData().vanillaHistoryElements)
+	{
+		output << "\t\t" << element << "\n";
+	}
 	output << "\t}\n";
 }
 
@@ -68,6 +84,8 @@ void outHistoryPopulations(std::ostream& output, const V3::Country& country)
 	output << "\tc:" << country.getTag() << " = {\n";
 	for (const auto& effect: country.getProcessedData().populationEffects)
 		output << "\t\t" << effect << " = yes\n";
+	for (const auto& element: country.getProcessedData().vanillaPopulationElements)
+		output << "\t\t" << element << "\n";
 	output << "\t}\n";
 }
 
@@ -107,8 +125,22 @@ void OUT::exportHistoryPopulations(const std::string& outputName, const std::map
 
 	output << commonItems::utf8BOM << "POPULATION = {\n";
 	for (const auto& country: countries | std::views::values)
-		if (!country->getSubStates().empty() && !country->getProcessedData().populationEffects.empty())
+		if (!country->getSubStates().empty() &&
+			 (!country->getProcessedData().populationEffects.empty() || !country->getProcessedData().vanillaPopulationElements.empty()))
 			outHistoryPopulations(output, *country);
 	output << "}\n";
+	output.close();
+}
+
+void OUT::exportReleasables(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+{
+	std::ofstream output("output/" + outputName + "/common/country_creation/99_converted_releasables.txt");
+	if (!output.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/country_creation/99_converted_releasables.txt");
+
+	output << commonItems::utf8BOM;
+	for (const auto& country: countries | std::views::values)
+		if (country->getSubStates().empty() && !country->getUnownedProvinces().empty())
+			outReleasableCountry(output, *country);
 	output.close();
 }

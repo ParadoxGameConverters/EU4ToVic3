@@ -29,8 +29,11 @@ void V3::ClayManager::initializeVanillaStates(const commonItems::ModFilesystem& 
 	for (const auto& state: states | std::views::values)
 		for (const auto& provinceID: state->getProvinces() | std::views::keys)
 			provincesToStates.emplace(provinceID, state);
-
 	Log(LogLevel::Info) << "<> " << states.size() << " states loaded with " << provincesToStates.size() << " provinces inside.";
+
+	Log(LogLevel::Info) << "-> Loading Vanilla State Buildings.";
+	vanillaBuildingLoader.loadVanillaBuildings(modFS);
+	Log(LogLevel::Info) << "<> " << vanillaBuildingLoader.getBuildingElements().size() << " states loaded with buildings.";
 }
 
 void V3::ClayManager::loadTerrainsIntoProvinces(const commonItems::ModFilesystem& modFS)
@@ -387,6 +390,23 @@ void V3::ClayManager::assignSubStateOwnership(const std::map<std::string, std::s
 			// We're ditching substates of countries we haven't imported. Unsure how that'd happen but ok.
 			Log(LogLevel::Warning) << "Substate belonging to EU4 " << *eu4tag << " hasn't been mapped over? Ditching.";
 		}
+
+		// Now for all *other* cores link to countries regardless of ownership, so we may create releasables and claims.
+		for (const auto& spData: substate->getSourceProvinceData() | std::views::keys)
+			for (const auto& core: spData.cores)
+			{
+				if (core == *eu4tag)
+					continue;
+				const auto& coreTag = countryMapper.getV3Tag(core);
+				if (!coreTag || !countries.contains(*coreTag))
+				{
+					// country has been ditched by EU4World. All good.
+					continue;
+				}
+				const auto& coreOwner = countries.at(*coreTag);
+				coreOwner->addUnownedCoreSubState(substate);
+				substate->addClaim(*coreTag);
+			}
 	}
 
 	substates.swap(filteredSubstates);
@@ -502,6 +522,17 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		if (availableProvinces.empty())
 			continue;
 
+		// Hold the horses! VN ownership transfer situation?
+		std::optional<std::string> replacementOwner;
+		if (vn && vnColonialMapper.isStateVNColonial(stateName) && vnColonialMapper.getVanillaOwners(stateName).contains(ownerTag))
+		{
+			// who owns key province?
+			if (const auto& keyProvince = vnColonialMapper.getKeyProvince(stateName, ownerTag); keyProvince)
+				replacementOwner = getProvinceOwnerTag(*keyProvince); // We won't replace the owner yet, we still need to grab the original pops.
+			// is this a decolonization situation?
+			if (replacementOwner && vnColonialMapper.isStateDecolonizable(stateName, ownerTag, *replacementOwner))
+				continue; // then simply skip any generation.
+		}
 		const auto& owner = politicalManager.getCountry(ownerTag);
 		const auto& homeState = states.at(stateName);
 
@@ -509,8 +540,9 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		auto newSubState = std::make_shared<SubState>();
 		newSubState->setOwner(owner);
 		newSubState->setProvinces(availableProvinces);
-		newSubState->setSubStateType(subStateEntry.getSubStateType());
+		newSubState->setSubStateTypes(subStateEntry.getSubStateTypes());
 		newSubState->setHomeState(homeState);
+		newSubState->setVanillaSubState();
 
 		// How many provinces did we lose in the transfer? Ie. How many of this substate's original provinces were already assigned to some other substate?
 		// We can use this ratio to cut our popcount. Or we could use any other more involved function.
@@ -518,12 +550,30 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		const double subStateRatio = static_cast<double>(availableProvinces.size()) / static_cast<double>(subStateEntry.getProvinces().size());
 		auto newPops = prepareInjectedSubStatePops(newSubState, subStateRatio, popManager);
 
+		// Transfer original buildings, unscaled at the moment.
+		// TODO: Scale this if necessary.
+		if (vanillaBuildingLoader.getBuildingElements().contains(stateName) && vanillaBuildingLoader.getBuildingElements().at(stateName).contains(ownerTag))
+		{
+			newSubState->setVanillaBuildingElements(vanillaBuildingLoader.getBuildingElements().at(stateName).at(ownerTag));
+		}
+
 		// and shove.
 		newSubState->setSubStatePops(newPops);
 
 		// and register.
 		homeState->addSubState(newSubState);
-		owner->addSubState(newSubState);
+
+		if (replacementOwner) // now we replace.
+		{
+			const auto& newOwner = politicalManager.getCountry(*replacementOwner);
+			newSubState->setOwner(newOwner);
+			newOwner->addSubState(newSubState);
+		}
+		else
+		{
+			owner->addSubState(newSubState);
+		}
+
 		substates.emplace_back(newSubState);
 		action = true;
 	}
@@ -657,12 +707,14 @@ void V3::ClayManager::squashAllSubStates(const PoliticalManager& politicalManage
 std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector<std::shared_ptr<SubState>>& subStates) const
 {
 	ProvinceMap provinces;
-	std::string subStateType;
+	std::set<std::string> subStateTypes;
 	double weight = 0;
 	std::vector<std::pair<SourceProvinceData, double>> spData;
 	std::vector<Demographic> demographics;
 	SubStatePops subStatePops;
 	std::vector<Pop> pops;
+	std::vector<std::string> vanillaBuildingElements;
+	std::set<std::string> claims;
 
 	for (const auto& subState: subStates)
 	{
@@ -670,8 +722,8 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 
 		// unsure about this. If one is unincorporated, all are unincorporated?
 		// TODO: See what this does
-		if (!subState->getSubStateType().empty())
-			subStateType = subState->getSubStateType();
+		if (!subState->getSubStateTypes().empty())
+			subStateTypes = subState->getSubStateTypes();
 
 		if (subState->getWeight())
 			weight += *subState->getWeight();
@@ -679,13 +731,17 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 		spData.insert(spData.end(), subState->getSourceProvinceData().begin(), subState->getSourceProvinceData().end());
 		demographics.insert(demographics.end(), subState->getDemographics().begin(), subState->getDemographics().end());
 		pops.insert(pops.end(), subState->getSubStatePops().getPops().begin(), subState->getSubStatePops().getPops().end());
+		vanillaBuildingElements.insert(vanillaBuildingElements.end(),
+			 subState->getVanillaBuildingElements().begin(),
+			 subState->getVanillaBuildingElements().end());
+		claims.insert(subState->getClaims().begin(), subState->getClaims().end());
 	}
 	auto newSubState = std::make_shared<SubState>();
 	newSubState->setHomeState((*subStates.begin())->getHomeState());
 	newSubState->setOwner((*subStates.begin())->getOwner());
 
 	newSubState->setProvinces(provinces);
-	newSubState->setSubStateType(subStateType);
+	newSubState->setSubStateTypes(subStateTypes);
 	if (weight > 0)
 		newSubState->setWeight(weight);
 	newSubState->setSourceProvinceData(spData);
@@ -694,6 +750,8 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 	subStatePops.setTag(newSubState->getOwner()->getTag());
 	subStatePops.setPops(pops);
 	newSubState->setSubStatePops(subStatePops);
+	newSubState->setVanillaBuildingElements(vanillaBuildingElements);
+	newSubState->setClaims(claims);
 
 	return newSubState;
 }
@@ -735,4 +793,26 @@ std::set<std::string> V3::ClayManager::getStateNamesForRegion(const std::string&
 
 	Log(LogLevel::Warning) << "Attempting colonial lookup at " << regionName << " failed! It doesn't match anything we know!";
 	return stateNames;
+}
+
+std::optional<std::string> V3::ClayManager::getProvinceOwnerTag(const std::string& provinceID) const
+{
+	for (const auto& state: states | std::views::values)
+		for (const auto& subState: state->getSubStates())
+			if (subState->getProvinces().contains(provinceID))
+				return subState->getOwnerTag();
+	return std::nullopt;
+}
+
+std::set<std::string> V3::ClayManager::getStateProvinceIDs(const std::string& stateName) const
+{
+	std::set<std::string> IDs;
+	if (!states.contains(stateName))
+		return IDs;
+	for (const auto& subState: states.at(stateName)->getSubStates())
+	{
+		auto subIDs = subState->getProvinceIDs();
+		IDs.insert(subIDs.begin(), subIDs.end());
+	}
+	return IDs;
 }

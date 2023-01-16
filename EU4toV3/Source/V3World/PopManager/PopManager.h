@@ -33,6 +33,7 @@ class PopManager
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader) const;
 	void generatePops(const ClayManager& clayManager) const;
+	void applyHomeLands(const ClayManager& clayManager) const;
 
 	[[nodiscard]] std::string getDominantVanillaCulture(const std::string& stateName) const;
 	[[nodiscard]] std::string getDominantVanillaReligion(const std::string& stateName) const;

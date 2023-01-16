@@ -4,6 +4,7 @@
 #include "ClayManager/State/SubState.h"
 #include "CommonRegexes.h"
 #include "CountryManager/EU4Country.h"
+#include "CountryTierMapper/CountryTierMapper.h"
 #include "CultureMapper/CultureMapper.h"
 #include "Loaders/LawLoader/Law.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
@@ -46,18 +47,18 @@ void V3::Country::initializeCountry(std::istream& theStream)
 std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop(const double percentile) const
 {
 	// Ranks this country's substates by population then returns the top x% of them by population, the largest state will always be returned.
-	auto sortedSubstates(substates);
+	auto sortedSubStates = subStates;
 
 	// descending order
 	auto popComparison = [](const std::shared_ptr<SubState>& lhs, const std::shared_ptr<SubState>& rhs) {
 		return lhs->getSubStatePops().getPopCount() > rhs->getSubStatePops().getPopCount();
 	};
 
-	std::ranges::sort(sortedSubstates, popComparison);
+	std::ranges::sort(sortedSubStates, popComparison);
 
-	const int numTopSubstates = std::max(static_cast<int>(static_cast<double>(sortedSubstates.size()) * percentile), 1);
+	const int numTopSubStates = std::max(static_cast<int>(static_cast<double>(sortedSubStates.size()) * percentile), 1);
 
-	return std::vector<std::shared_ptr<V3::SubState>>{sortedSubstates.begin(), sortedSubstates.begin() + numTopSubstates};
+	return std::vector<std::shared_ptr<SubState>>{sortedSubStates.begin(), sortedSubStates.begin() + numTopSubStates};
 }
 
 double V3::Country::calculateBureaucracyUsage(const std::map<std::string, V3::Law>& lawsMap) const
@@ -176,7 +177,9 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	 const mappers::ReligionMapper& religionMapper,
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader,
-	 const mappers::IdeaEffectsMapper& ideaEffectMapper)
+	 const mappers::IdeaEffectsMapper& ideaEffectMapper,
+	 const mappers::CountryTierMapper& countryTierMapper,
+	 const bool vn)
 {
 	// color - using eu4 colors so people don't lose their shit over red venice and orange england.
 	if (sourceCountry->getNationalColors().getMapColor())
@@ -207,7 +210,7 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	convertCulture(clayManager, cultureMapper, cultureLoader, religionLoader);
 
 	// tier
-	convertTier();
+	convertTier(countryTierMapper, vn);
 
 	// country type is determined after westernization is set.
 
@@ -228,22 +231,13 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 		processedData.revolutionaryColor = sourceCountry->getNationalColors().getRevolutionaryColor();
 }
 
-void V3::Country::convertTier()
+void V3::Country::convertTier(const mappers::CountryTierMapper& countryTierMapper, const bool vn)
 {
-	// TODO: Allow some dynamic configurable rules for this. VN for example has 6 incoming government ranks almost literally matching the Vic3 ones.
-
-	if (sourceCountry->getGovernmentRank() == 1 && substates.size() == 1)
-		processedData.tier = "city_state";
-	else if (sourceCountry->getGovernmentRank() == 1)
-		processedData.tier = "principality";
-	else if (sourceCountry->getGovernmentRank() == 2 && substates.size() <= 3)
-		processedData.tier = "grand_principality";
-	else if (sourceCountry->getGovernmentRank() == 2)
-		processedData.tier = "kingdom";
-	else if (sourceCountry->getGovernmentRank() == 3 && substates.size() <= 20)
-		processedData.tier = "empire";
+	if (const auto& match = countryTierMapper.matchCountryTier(sourceCountry->getGovernmentRank(), subStates.size(), vn); match)
+		processedData.tier = *match;
 	else
-		processedData.tier = "hegemony";
+		Log(LogLevel::Warning) << "No match for government rank " << sourceCountry->getGovernmentRank() << " (size " << subStates.size()
+									  << ") in country_tiers.txt!";
 }
 
 void V3::Country::convertCulture(const ClayManager& clayManager,
@@ -317,10 +311,10 @@ void V3::Country::convertReligion(const mappers::ReligionMapper& religionMapper)
 
 void V3::Country::convertCapital(const ClayManager& clayManager)
 {
-	for (const auto& substate: substates)
-		if (substate->isCapital())
+	for (const auto& subState: subStates)
+		if (subState->isCapital())
 		{
-			processedData.capitalStateName = substate->getHomeStateName();
+			processedData.capitalStateName = subState->getHomeStateName();
 			return;
 		}
 
@@ -333,8 +327,8 @@ void V3::Country::convertCapital(const ClayManager& clayManager)
 	}
 
 	// still nothing?
-	if (processedData.capitalStateName.empty() && !substates.empty())
-		processedData.capitalStateName = substates[0]->getHomeStateName();
+	if (processedData.capitalStateName.empty() && !subStates.empty())
+		processedData.capitalStateName = subStates[0]->getHomeStateName();
 
 	// TODO: Try anything harder. At least try to determine the majority of land?
 	// TODO: After resource calc is called (call it early along with landshares!) use that.
@@ -345,8 +339,8 @@ void V3::Country::generateDecentralizedData(const LocalizationLoader& v3LocLoade
 	// COMMON/COUNTRY DATA
 	processedData.color = generateDecentralizedColors(tag);
 	processedData.tier = "principality";													// this appears to be common for decentralized nations.
-	if (!substates.empty())																		// this really shouldn't be empty.
-		processedData.capitalStateName = substates.front()->getHomeStateName(); // any will do.
+	if (!subStates.empty())																		// this really shouldn't be empty.
+		processedData.capitalStateName = subStates.front()->getHomeStateName(); // any will do.
 	generateDecentralizedLocs(v3LocLoader, eu4LocLoader);
 	setDecentralizedEffects();
 }
@@ -410,7 +404,7 @@ void V3::Country::generateDecentralizedLocs(const LocalizationLoader& v3LocLoade
 	processedData.name += " " + suffixes[selection];
 }
 
-void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader)
+void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader, bool vn)
 {
 	// this is done when conversion from eu4 source is impossible - likely because this country doesn't exist in eu4.
 	if (!vanillaData)
@@ -425,8 +419,18 @@ void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const E
 	processedData.is_named_from_capital = vanillaData->is_named_from_capital;
 
 	// By default we're copying DECENTRALIZED nations. This means their effects should be set as if they were decentralized.
-	// TODO: When VN imports non-decentralized countries, alter this so we support loading and copying of out-of-scope vanilla effects.
-	setDecentralizedEffects();
+	if (!vn)
+	{
+		setDecentralizedEffects();
+	}
+	else
+	{
+		// When VN imports non-decentralized countries, we want entire history, such as it is.
+		processedData.vanillaHistoryElements = unprocessedData.vanillaHistoryElements;
+		processedData.vanillaPopulationElements = unprocessedData.vanillaPopulationElements;
+		processedData.vanillaCharacterElements = unprocessedData.vanillaCharacterElements;
+		processedData.vanillaDiplomaticPlayElements = unprocessedData.vanillaDiplomaticPlayElements;
+	}
 
 	// do we have a name waiting for us?
 	const auto& tagName = v3LocLoader.getLocMapForKey(tag);
@@ -488,6 +492,7 @@ void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 	 const mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
 	 Configuration::EUROCENTRISM eurocentrism,
+	 Configuration::STARTDATE startDate,
 	 const DatingData& datingData,
 	 const mappers::PopulationSetupMapper& populationSetupMapper)
 {
@@ -496,7 +501,8 @@ void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 
 	calculateBaseLiteracy(religionMapper);
 	calculateWesternization(topTech, topInstitutions, cultureMapper, eurocentrism);
-	adjustLiteracy(datingData, cultureMapper);
+	if (startDate != Configuration::STARTDATE::Vanilla)
+		adjustLiteracy(datingData, cultureMapper);
 	applyLiteracyAndWealthEffects(populationSetupMapper);
 	determineCountryType();
 }
@@ -525,7 +531,7 @@ void V3::Country::determineCountryType()
 	}
 }
 
-[[nodiscard]] double V3::Country::calcSubStateBureaucracy(const std::map<std::string, V3::Law>& lawsMap) const
+[[nodiscard]] double V3::Country::calcSubStateBureaucracy(const std::map<std::string, Law>& lawsMap) const
 {
 	double lawsMult = 0;
 	for (const auto& law: processedData.laws)
@@ -542,9 +548,9 @@ void V3::Country::determineCountryType()
 
 
 	double usage = 0;
-	for (const auto& substate: substates)
+	for (const auto& subState: subStates)
 	{
-		if (!substate->isIncorporated())
+		if (!subState->isIncorporated())
 		{
 			continue;
 		}
@@ -553,7 +559,7 @@ void V3::Country::determineCountryType()
 
 		// Pops - only pops in incorporated states count
 		// Modified by laws - game caps this at 0
-		usage += substate->getSubStatePops().getPopCount() / 25000.0 * lawsMult;
+		usage += subState->getSubStatePops().getPopCount() / 25000.0 * lawsMult;
 	}
 	return usage;
 }
@@ -805,12 +811,12 @@ void V3::Country::convertCharacters(const mappers::CharacterTraitMapper& charact
 
 int V3::Country::getPopCount() const
 {
-	return getPopCount(substates);
+	return getPopCount(subStates);
 }
 
-int V3::Country::getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubstates)
+int V3::Country::getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubStates)
 {
-	return std::accumulate(theSubstates.begin(), theSubstates.end(), 0, [](int sum, const auto& substate) {
+	return std::accumulate(theSubStates.begin(), theSubStates.end(), 0, [](int sum, const auto& substate) {
 		return sum + substate->getSubStatePops().getPopCount();
 	});
 }
