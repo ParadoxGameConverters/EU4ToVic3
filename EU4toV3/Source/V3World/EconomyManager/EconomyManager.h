@@ -68,12 +68,11 @@ class EconomyManager
 	[[nodiscard]] double calculateTerrainMultiplier(const std::shared_ptr<SubState>& subState) const;
 	[[nodiscard]] double calculateStateTraitMultiplier(const std::shared_ptr<SubState>& subState) const;
 
-	void planSubStateEconomies(const std::shared_ptr<Country>& country) const;
 	void distributeBudget(double globalCP, double totalIndustryScore) const;
 	void setPMs() const;
 
-	void removeLowBudgetSubStates(std::vector<std::shared_ptr<SubState>>& subStates) const;
-	void removeSubStateIfLowBudget(std::vector<std::shared_ptr<SubState>>& subStates, const std::vector<std::shared_ptr<SubState>>::iterator& it) const;
+	void removeNoBuildSubStates(std::vector<std::shared_ptr<SubState>>& subStates) const;
+	void removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates, const std::vector<std::shared_ptr<SubState>>::iterator& it) const;
 
 	void loadTerrainModifierMatrices(const std::string& filePath = "");
 	void loadStateTraits(const commonItems::ModFilesystem& modFS);

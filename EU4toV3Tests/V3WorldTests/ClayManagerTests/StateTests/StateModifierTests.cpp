@@ -155,7 +155,7 @@ TEST(V3World_StateModifierTests, GettingBuildingGroupDataTravelsHeirarchy)
 	buildingGroupLoader.loadBuildingGroups(modFS);
 	auto buildingGroups = buildingGroupLoader.getBuildingGroups();
 
-	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingGroupModifier("bg_light_industry", buildingGroups).value());
+	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingGroupModifier("bg_light_industry", buildingGroups).value_or(0));
 }
 
 TEST(V3World_StateModifierTests, GetAllBonusesCombinesLikeBonuses)

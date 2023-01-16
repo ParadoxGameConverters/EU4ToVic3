@@ -4,6 +4,8 @@ bg_manufacturing = {
 	should_auto_expand = { 
 		default_auto_expand_rule = yes
 	}
+
+	land_usage = rural
 }
 
 bg_light_industry = {
@@ -22,6 +24,8 @@ bg_heavy_industry = {
 	
 	urbanization = 30
 	infrastructure_usage_per_level = 3
+
+	capped_by_resources = no
 }
 
 bg_ultra_industry = {
@@ -31,6 +35,8 @@ bg_ultra_industry = {
 
 bg_mega_industry = {
 	parent_group = bg_ultra_industry
+
+	capped_by_resources = yes
 }
 
 bg_giga_industry = {

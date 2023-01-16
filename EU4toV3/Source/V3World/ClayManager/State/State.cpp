@@ -68,7 +68,7 @@ void V3::State::registerKeys()
 		traits = commonItems::getStrings(theStream);
 	});
 	registerKeyword("arable_land", [this](std::istream& theStream) {
-		cappedResources["arable_land"] = commonItems::getInt(theStream);
+		cappedResources["bg_agriculture"] = commonItems::getInt(theStream);
 	});
 	registerKeyword("arable_resources", [this](std::istream& theStream) {
 		arableResources = commonItems::getStrings(theStream);

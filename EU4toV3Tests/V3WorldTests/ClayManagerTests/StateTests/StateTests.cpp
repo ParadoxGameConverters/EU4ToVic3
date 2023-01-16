@@ -241,9 +241,9 @@ TEST(V3World_StateTests, arableLandValueSet)
 	input << "arable_land = 36\n ";
 	V3::State state;
 
-	EXPECT_EQ(state.getCappedResources().find("arable_land"), state.getCappedResources().end());
+	EXPECT_EQ(state.getCappedResources().find("bg_agriculture"), state.getCappedResources().end());
 	state.loadState(input);
-	EXPECT_EQ(state.getCappedResources().at("arable_land"), 36);
+	EXPECT_EQ(state.getCappedResources().at("bg_agriculture"), 36);
 }
 
 
@@ -317,6 +317,7 @@ TEST(V3World_StateTests, distributeResourcesTruncatesDoubles)
 	input << "prime_land = {\"x112234\"}\n ";
 	input << "impassable = { \"x445566\"}\n ";
 	input << "arable_land = 36\n ";
+	input << "arable_resources = { rice wheat }\n";
 	input << "capped_resources = { iron = 53 }\n ";
 	V3::State state;
 
@@ -337,9 +338,9 @@ TEST(V3World_StateTests, distributeResourcesTruncatesDoubles)
 	state.distributeResources();
 
 	const auto& substates = state.getSubStates();
-	EXPECT_EQ(substates[0]->getResource("arable_land"), 18);
-	EXPECT_EQ(substates[1]->getResource("arable_land"), 10);
-	EXPECT_EQ(substates[2]->getResource("arable_land"), 15);
+	EXPECT_EQ(substates[0]->getResource("bg_agriculture"), 18);
+	EXPECT_EQ(substates[1]->getResource("bg_agriculture"), 10);
+	EXPECT_EQ(substates[2]->getResource("bg_agriculture"), 15);
 
 	EXPECT_EQ(substates[0]->getResource("iron"), 26);
 	EXPECT_EQ(substates[1]->getResource("iron"), 15);

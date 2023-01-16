@@ -227,27 +227,7 @@ void V3::EconomyManager::balanceNationalBudgets() const
 		//{
 		//	sector.calculateBudget(totalWeight, country->getCPBudget());
 		// }
-
-		// Now subStates decide what they want, mostly independent of the nation as a whole.
-		planSubStateEconomies(country);
 	}
-}
-
-void V3::EconomyManager::planSubStateEconomies(const std::shared_ptr<Country>& country) const
-{
-	// Might not actually need this whole section
-
-	// Select the valid buildings
-
-
-	//// Each SubState scores each valid building
-	// for (const auto& substate: country->getSubStates())
-	// {
-	//	for (const auto& [name, building]: buildings | std::views::filter(isValid))
-	//	{
-	//		substate->calcBuildingWeight(building, buildingTerrainModifiers, buildingMapper, stateTraits, econDefines.getStateTraitStrength());
-	//	}
-	// }
 }
 
 void V3::EconomyManager::buildBuildings() const
@@ -299,7 +279,7 @@ void V3::EconomyManager::buildBuildings() const
 
 
 			// After spend, remove substate if now low budget
-			removeSubStateIfLowBudget(subStatesByBudget, subStatesByBudget.end() - 1);
+			removeSubStateIfFinished(subStatesByBudget, subStatesByBudget.end() - 1);
 		}
 	}
 }
@@ -452,33 +432,42 @@ void V3::EconomyManager::setPMs() const
 	}
 }
 
-void V3::EconomyManager::removeLowBudgetSubStates(std::vector<std::shared_ptr<SubState>>& subStates) const
+void V3::EconomyManager::removeNoBuildSubStates(std::vector<std::shared_ptr<SubState>>& subStates) const
 {
-	auto budgetBelowMinimumCost = [this](const std::shared_ptr<SubState>& substate) {
+	auto budgetBelowMinimumCost = [](const std::shared_ptr<SubState>& substate) {
 		return substate->getCPBudget() < 50; // getConstructionMinCost();
 	};
 
-	const int carryBudget = std::accumulate(subStates.begin(), subStates.end(), 0, budgetBelowMinimumCost);
+
+	// Collect budgets below threshold
+	int carryBudget = 0;
+	for (const auto& substate: subStates)
+	{
+		if (budgetBelowMinimumCost(substate))
+			carryBudget += substate->getCPBudget();
+	}
 	std::erase_if(subStates, budgetBelowMinimumCost);
 
+	// Add to top
 	if (!subStates.empty())
 	{
 		subStates[0]->spendCPBudget(-carryBudget);
 	}
 }
 
-void V3::EconomyManager::removeSubStateIfLowBudget(std::vector<std::shared_ptr<SubState>>& subStates,
+void V3::EconomyManager::removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
 	 const std::vector<std::shared_ptr<SubState>>::iterator& it) const
 {
 	// if (it->get()->getBuildingWeights.empty())
 	//{
-	//	if (subStates.size() >= 2)
-	//	{
-	//		// Carry over budget to current highest budgeted state.
-	//		subStates[0]->spendCPBudget(-it->get()->getCPBudget());
-	//	}
 
-	//	subStates.erase(it);
+	if (subStates.size() >= 2)
+	{
+		// Carry over budget to current highest budgeted state.
+		subStates[0]->spendCPBudget(-it->get()->getCPBudget());
+	}
+
+	subStates.erase(it);
 	//}
 }
 

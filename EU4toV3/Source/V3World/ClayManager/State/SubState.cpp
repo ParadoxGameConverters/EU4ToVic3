@@ -200,6 +200,12 @@ bool V3::SubState::isBuildingValid(const Building& building, const BuildingGroup
 	return true;
 }
 
+bool V3::SubState::hasCapacity(const Building& building, const BuildingGroups& buildingGroups) const
+{
+	// TODO(Gawquon)
+	return false;
+}
+
 double V3::SubState::calcBuildingWeight(const Building& building,
 	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
 	 const mappers::BuildingMapper& buildingMapper,

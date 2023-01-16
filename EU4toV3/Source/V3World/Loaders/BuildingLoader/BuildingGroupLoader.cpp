@@ -15,6 +15,7 @@ void V3::BuildingGroupLoader::loadBuildingGroups(const commonItems::ModFilesyste
 	}
 	clearRegisteredKeywords();
 	buildingGroups.setInfrastructureCosts();
+	buildingGroups.setResourceCaps();
 }
 
 void V3::BuildingGroupLoader::registerKeys()
