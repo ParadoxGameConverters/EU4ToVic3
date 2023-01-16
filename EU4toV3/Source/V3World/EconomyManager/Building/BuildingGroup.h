@@ -10,18 +10,24 @@ class BuildingGroup: commonItems::parser
 	BuildingGroup() = default;
 	void loadBuildingGroup(std::istream& theStream);
 	void setName(const std::string& theName) { name = theName; }
-	void setInfrastructureCost(double theCost) { infrastructureCost = theCost; }
+	void setInfrastructureCost(const std::optional<double> theCost) { infrastructureCost = theCost; }
+	void setResourceCap(const std::optional<bool> isCapped) { resourceCapped = isCapped; }
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getParentName() const { return parent; }
-	[[nodiscard]] auto getInfrastructureCost() const { return infrastructureCost; }
+	[[nodiscard]] const auto& getInfrastructureCost() const { return infrastructureCost; }
+	[[nodiscard]] const auto& possibleIsResourceCapped() const { return resourceCapped; }
 
 
   private:
 	void registerKeys();
 	std::string name;
-	std::string parent;
-	double infrastructureCost = 0;
+	std::optional<std::string> parent;
+	std::optional<double> infrastructureCost;
+	std::optional<bool> resourceCapped;
+
+	// 1. T -> 2. ~ -> 3. F -> 4. ~
+	// 2 inherits True while 4 inherits False
 };
 } // namespace V3
 

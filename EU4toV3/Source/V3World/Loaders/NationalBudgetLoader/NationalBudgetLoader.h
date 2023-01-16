@@ -12,13 +12,16 @@ class NationalBudgetLoader: commonItems::parser
   public:
 	NationalBudgetLoader() = default;
 	void loadNationalBudget(const std::string& filePath);
+	void buildBuildingSectorMap();
 
 	[[nodiscard]] const auto& getSectorBlueprints() const { return sectorBlueprints; }
+	[[nodiscard]] const auto& getBuildingSectorMap() const { return buildingSectorMap; }
 
   private:
 	void registerKeys();
 
 	std::vector<SectorLoader> sectorBlueprints;
+	std::map<std::string, std::string> buildingSectorMap; // Building Name -> Name of Sector Building is in
 };
 } // namespace V3
 

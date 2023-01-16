@@ -18,9 +18,9 @@ void V3::StateModifierLoader::loadStateModifiers(const commonItems::ModFilesyste
 void V3::StateModifierLoader::registerKeys()
 {
 	registerRegex(commonItems::catchallRegex, [this](const std::string& modifierName, std::istream& theStream) {
-		const auto newModifier = std::make_shared<StateModifier>();
-		newModifier->loadStateModifier(theStream);
-		newModifier->setName(modifierName);
+		StateModifier newModifier;
+		newModifier.loadStateModifier(theStream);
+		newModifier.setName(modifierName);
 		stateModifiers.emplace(modifierName, newModifier);
 	});
 }

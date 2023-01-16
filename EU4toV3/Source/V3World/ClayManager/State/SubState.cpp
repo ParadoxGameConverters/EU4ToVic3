@@ -1,4 +1,5 @@
 #include "SubState.h"
+#include "EconomyManager/Building/Building.h"
 #include "Log.h"
 #include "Mappers/CultureMapper/CultureMapper.h"
 #include "Mappers/ReligionMapper/ReligionMapper.h"
@@ -115,10 +116,11 @@ void V3::SubState::calculateTerrainFrequency()
 	}
 }
 
-double V3::SubState::getPopInfrastructure() const
+double V3::SubState::getPopInfrastructure(const std::map<std::string, Tech>& techMap) const
 {
-	const double popInfra = subStatePops.getPopCount() * owner->getTechInfraMult();
-	if (const int cap = owner->getTechInfraCap(); popInfra > cap)
+	// INDIVIDUALS_PER_POP_INFRASTRUCTURE = 10000
+	const double popInfra = subStatePops.getPopCount() * owner->getTechInfraMult(techMap) / 10000.0;
+	if (const int cap = owner->getTechInfraCap(techMap); popInfra > cap)
 	{
 		return cap;
 	}
@@ -142,9 +144,106 @@ std::pair<int, double> V3::SubState::getStateInfrastructureModifiers(const State
 	return std::make_pair(bonus, mult);
 }
 
-void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifiers)
+double V3::SubState::calcBuildingTerrainWeight(const std::string& building,
+	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers) const
 {
-	const double popInfra = getPopInfrastructure();
+
+	double theWeight = 0.0;
+	// Weight due to terrain
+	for (const auto& [terrain, frequency]: terrainFrequency)
+	{
+		if (!buildingTerrainModifiers.contains(terrain))
+			continue;
+		if (!buildingTerrainModifiers.at(terrain).contains(building))
+			continue;
+
+		theWeight += frequency * buildingTerrainModifiers.at(terrain).at(building);
+	}
+	return theWeight;
+}
+
+double V3::SubState::calcBuildingEU4Weight(const std::string& building, const mappers::BuildingMapper& buildingMapper) const
+{
+	// TODO(Gawquon):
+	// Weight from having EU4 buildings that map to VIC3 buildings in SubState weighted data
+	return 0.0;
+}
+
+double V3::SubState::calcBuildingTraitWeight(const Building& building, const std::map<std::string, StateModifier>& traitMap, double traitStrength) const
+{
+	// TODO(Gawquon):
+	// Weight from having state traits that boost the building or building_group of building
+	// Goods outputs will be done later in PM pass
+	return 0.0;
+}
+
+double V3::SubState::calcBuildingInvestmentWeight(const Building& building) const
+{
+	// Weight modifier due to amount already built of given Building
+	// Simple percentage
+	if (buildings.contains(building.getName()) && originalCPBudget > 0)
+	{
+		return std::max(1 - building.getConstructionCost() * buildings.at(building.getName()) / static_cast<double>(originalCPBudget), 0.0);
+	}
+	return 1;
+}
+
+bool V3::SubState::isBuildingValid(const Building& building, const BuildingGroups& buildingGroups) const
+{
+	// Government Admin is a special case, we're not building it
+	if (building.getName() == "building_government_administration")
+	{
+		return false;
+	}
+	// TODO(Gawquon): Update when ports go off harcode
+	if (building.getName() == "building_port")
+	{
+		return false;
+	}
+	// We can only build what we have the tech for
+	if (!getOwner()->hasAnyOfTech(building.getUnlockingTechs()))
+	{
+		return false;
+	}
+	if (!building.isBuildable())
+	{
+		return false;
+	}
+	if (building.getConstructionCost() > CPBudget)
+	{
+		return false;
+	}
+	if (!hasCapacity(building, buildingGroups))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool V3::SubState::hasCapacity(const Building& building, const BuildingGroups& buildingGroups) const
+{
+	// TODO(Gawquon)
+	return false;
+}
+
+double V3::SubState::calcBuildingWeight(const Building& building,
+	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
+	 const mappers::BuildingMapper& buildingMapper,
+	 const std::map<std::string, StateModifier>& traitMap,
+	 const double traitStrength) const
+{
+	const double terrainWeight = calcBuildingTerrainWeight(building.getName(), buildingTerrainModifiers);
+	const double EU4BuildingWeight = calcBuildingEU4Weight(building.getName(), buildingMapper);
+	const double traitWeight = calcBuildingTraitWeight(building, traitMap, traitStrength);
+	const double investmentWeight = calcBuildingInvestmentWeight(building);
+
+	return (terrainWeight + EU4BuildingWeight + traitWeight) * investmentWeight;
+}
+
+void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap)
+{
+	const double popInfra = getPopInfrastructure(techMap);
 	auto [stateModBonus, stateModMultipliers] = getStateInfrastructureModifiers(theStateModifiers);
 
 	// Principal = Base + isCoastal(substate lvl) + State modifier bonus + (Pop * tech)_capped
@@ -152,12 +251,9 @@ void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifie
 
 	// Multipliers are additive, market capital + incorporation status + state modifier multipliers
 	double multipliers = 0.25 * marketCapital + -0.25 * !isIncorporated() + stateModMultipliers;
-	if (multipliers < -1)
-	{
-		multipliers = -1;
-	}
+	multipliers = std::max(0.0, multipliers + 1);
 
-	infrastructure = std::max(0.0, infraBase * (1 + multipliers));
+	infrastructure = infraBase * multipliers;
 }
 
 void V3::SubState::convertDemographics(const ClayManager& clayManager,

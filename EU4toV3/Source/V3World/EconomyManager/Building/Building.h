@@ -16,6 +16,7 @@ class Building: commonItems::parser
 	[[nodiscard]] const auto& getPMGroups() const { return PMGroups; }
 	[[nodiscard]] const auto& getConstructionCost() const { return constructionCost; }
 	[[nodiscard]] const auto& getUnlockingTechs() const { return unlockingTechs; }
+	[[nodiscard]] const auto& isBuildable() const { return buildable; }
 
   private:
 	void registerKeys(const std::map<std::string, int>& costTiers);
@@ -25,6 +26,7 @@ class Building: commonItems::parser
 	std::vector<std::string> PMGroups;
 	int constructionCost = 50;
 	std::vector<std::string> unlockingTechs;
+	bool buildable = true;
 };
 } // namespace V3
 

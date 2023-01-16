@@ -1,5 +1,4 @@
 #include "BuildingScriptValuesLoader.h"
-#include "CommonFunctions.h"
 #include "CommonRegexes.h"
 #include "ParserHelpers.h"
 

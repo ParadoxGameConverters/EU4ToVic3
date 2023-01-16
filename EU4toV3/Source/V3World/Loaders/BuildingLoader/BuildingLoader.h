@@ -1,11 +1,11 @@
 #ifndef BUILDING_LOADER_H
 #define BUILDING_LOADER_H
 
+#include "EconomyManager/Building/Building.h"
 #include "Parser.h"
 
 namespace V3
 {
-class Building;
 class BuildingLoader: commonItems::parser
 {
   public:
@@ -17,7 +17,7 @@ class BuildingLoader: commonItems::parser
   private:
 	void registerKeys(const std::map<std::string, int>& costTiers);
 
-	std::map<std::string, std::shared_ptr<Building>> buildings;
+	std::map<std::string, Building> buildings;
 };
 } // namespace V3
 #endif // BUILDING_LOADER_H

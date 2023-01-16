@@ -1,9 +1,13 @@
 #ifndef V3_SUBSTATE_H
 #define V3_SUBSTATE_H
 #include "ClayManager/ClayMapTypedefs.h"
+#include "EconomyManager/Building/Building.h"
+#include "Loaders/TechLoader/Tech.h"
+#include "Mappers/BuildingMapper/BuildingMapper.h"
 #include "PopManager/Demographic.h"
 #include "PopManager/Pops/SubStatePops.h"
 #include "SourceProvinceData.h"
+#include "StateModifier.h"
 #include <optional>
 
 /* A Substate is a cross-section across a set of chunks where all relevant chunk provinces fall within a geographical V3 state.
@@ -27,7 +31,6 @@ namespace V3
 class Country;
 class Chunk;
 class State;
-class StateModifier;
 class ClayManager;
 class SubState
 {
@@ -60,8 +63,10 @@ class SubState
 
 	void setIndustryWeight(const double theIndustryWeight) { industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theCPBudget) { CPBudget = theCPBudget; }
+	void spendCPBudget(const int theCPExpense) { CPBudget -= theCPExpense; }
 	void setBuildingLevel(const std::string& building, const int level) { buildings[building] = level; }
 	void setVanillaBuildingElements(const std::vector<std::string>& elements) { vanillaBuildingElements = elements; }
+	void calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap);
 
 	void convertDemographics(const ClayManager& clayManager,
 		 mappers::CultureMapper& cultureMapper,
@@ -71,7 +76,6 @@ class SubState
 
 	void generatePops(int totalAmount);
 
-	void calculateInfrastructure(const StateModifiers& theStateModifiers);
 
 	[[nodiscard]] const auto& getHomeState() const { return homeState; }
 	[[nodiscard]] const auto& getOwner() const { return owner; }
@@ -112,8 +116,21 @@ class SubState
 
   private:
 	void calculateTerrainFrequency();
-	[[nodiscard]] double getPopInfrastructure() const;
+	[[nodiscard]] double getPopInfrastructure(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] std::pair<int, double> getStateInfrastructureModifiers(const StateModifiers& theStateModifiers) const;
+
+	[[nodiscard]] double calcBuildingWeight(const Building& building,
+		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
+		 const mappers::BuildingMapper& buildingMapper,
+		 const std::map<std::string, StateModifier>& traitMap,
+		 double traitStrength) const;
+	[[nodiscard]] double calcBuildingTerrainWeight(const std::string& building,
+		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers) const;
+	[[nodiscard]] double calcBuildingEU4Weight(const std::string& building, const mappers::BuildingMapper& buildingMapper) const;
+	[[nodiscard]] double calcBuildingTraitWeight(const Building& building, const std::map<std::string, StateModifier>& traitMap, double traitStrength) const;
+	[[nodiscard]] double calcBuildingInvestmentWeight(const Building& building) const;
+	[[nodiscard]] bool isBuildingValid(const Building& building, const BuildingGroups& buildingGroups) const;
+	[[nodiscard]] bool hasCapacity(const Building& building, const BuildingGroups& buildingGroups) const;
 
 	std::shared_ptr<State> homeState; // home state
 	std::shared_ptr<Country> owner;
@@ -137,6 +154,7 @@ class SubState
 
 	double industryWeight = 0;				  // Share of owner's industry a substate should get, not normalized
 	int CPBudget = 0;							  // Construction Points for a substate to spend on it's development
+	int originalCPBudget = 0;				  // Used in Building Weight calculations
 	std::map<std::string, int> buildings; // building -> level
 
 	std::vector<std::string> vanillaBuildingElements; // vanilla buildings for this substate, ready for direct dump.

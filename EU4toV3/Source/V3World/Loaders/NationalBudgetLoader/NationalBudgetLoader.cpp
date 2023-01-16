@@ -11,6 +11,11 @@ void V3::NationalBudgetLoader::loadNationalBudget(const std::string& filePath)
 	Log(LogLevel::Info) << sectorBlueprints.size() << " sectors of industry loaded.";
 }
 
+void V3::NationalBudgetLoader::buildBuildingSectorMap()
+{
+	// TODO(Gawquon): construct buildingSectorMap from sectorBlueprints
+}
+
 void V3::NationalBudgetLoader::registerKeys()
 {
 	registerRegex(commonItems::catchallRegex, [this](const std::string& sectorName, std::istream& theStream) {

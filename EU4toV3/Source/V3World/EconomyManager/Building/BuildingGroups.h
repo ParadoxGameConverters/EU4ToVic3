@@ -9,19 +9,16 @@ class BuildingGroups
 {
   public:
 	BuildingGroups() = default;
-	void addBuildingGroup(std::shared_ptr<BuildingGroup> theBuildingGroup);
+	void addBuildingGroup(const std::shared_ptr<BuildingGroup>& theBuildingGroup);
 	void setInfrastructureCosts();
+	void setResourceCaps();
 
 	[[nodiscard]] const auto& getBuildingGroupMap() const { return buildingGroups; }
-	[[nodiscard]] std::optional<std::string> getParentName(const std::string& theBuildingGroupName) const;
-	[[nodiscard]] const std::string& safeGetParentName(const std::string& theBuildingGroupName) const;
-	[[nodiscard]] std::optional<double> getInfrastructureCost(const std::string& theBuildingGroupName) const;
-	[[nodiscard]] double safeGetInfrastructureCost(const std::string& theBuildingGroupName) const;
-
+	[[nodiscard]] std::optional<std::string> tryGetParentName(const std::optional<std::string>& theGroupName) const;
+	[[nodiscard]] std::optional<double> tryGetInfraCost(const std::optional<std::string>& theGroupName) const;
+	[[nodiscard]] std::optional<bool> tryGetIsCapped(const std::optional<std::string>& theGroupName) const;
 
   private:
-	[[nodiscard]] std::shared_ptr<BuildingGroup> safeGetBuildingGroup(const std::string& theBuildingGroupName) const;
-
 	std::map<std::string, std::shared_ptr<BuildingGroup>> buildingGroups;
 };
 } // namespace V3

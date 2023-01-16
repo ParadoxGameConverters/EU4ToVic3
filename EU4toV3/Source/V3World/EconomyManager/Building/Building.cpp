@@ -15,6 +15,12 @@ void V3::Building::registerKeys(const std::map<std::string, int>& costTiers)
 	registerKeyword("building_group", [this](std::istream& theStream) {
 		buildingGroup = commonItems::getString(theStream);
 	});
+	registerKeyword("buildable", [this](std::istream& theStream) {
+		if (commonItems::getString(theStream) == "no")
+		{
+			buildable = false;
+		}
+	});
 	registerKeyword("production_method_groups", [this](std::istream& theStream) {
 		PMGroups = commonItems::getStrings(theStream);
 	});

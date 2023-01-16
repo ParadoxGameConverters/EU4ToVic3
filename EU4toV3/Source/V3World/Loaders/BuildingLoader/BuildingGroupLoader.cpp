@@ -2,13 +2,8 @@
 #include "CommonFunctions.h"
 #include "CommonRegexes.h"
 #include "EconomyManager/Building/BuildingGroup.h"
-#include "EconomyManager/Building/BuildingGroups.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
-
-V3::BuildingGroupLoader::BuildingGroupLoader(): buildingGroups(std::make_shared<BuildingGroups>())
-{
-}
 
 void V3::BuildingGroupLoader::loadBuildingGroups(const commonItems::ModFilesystem& modFS)
 {
@@ -19,7 +14,8 @@ void V3::BuildingGroupLoader::loadBuildingGroups(const commonItems::ModFilesyste
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();
-	buildingGroups->setInfrastructureCosts();
+	buildingGroups.setInfrastructureCosts();
+	buildingGroups.setResourceCaps();
 }
 
 void V3::BuildingGroupLoader::registerKeys()
@@ -28,6 +24,6 @@ void V3::BuildingGroupLoader::registerKeys()
 		auto newBuildingGroup = std::make_unique<BuildingGroup>();
 		newBuildingGroup->loadBuildingGroup(theStream);
 		newBuildingGroup->setName(buildingGroupName);
-		buildingGroups->addBuildingGroup(std::move(newBuildingGroup));
+		buildingGroups.addBuildingGroup(std::move(newBuildingGroup));
 	});
 }

@@ -19,6 +19,7 @@
 #include "PoliticalManager/PoliticalManager.h"
 #include <cmath>
 #include <iomanip>
+#include <numeric>
 #include <ranges>
 
 void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
@@ -43,7 +44,9 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 	loadTerrainModifierMatrices(filePath);
 	loadStateTraits(modFS);
 	loadBuildingInformation(modFS);
+	loadBuildingMappings(filePath);
 	loadEconDefines(filePath);
+	loadNationalBudgets(filePath);
 }
 
 void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalManager) const
@@ -59,7 +62,7 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 	for (const auto& country: centralizedCountries)
 	{
 		// Check tech requirement for government administrations.
-		if (!country->hasAnyOfTech(govAdmin->getUnlockingTechs()))
+		if (!country->hasAnyOfTech(govAdmin.getUnlockingTechs()))
 		{
 			continue;
 		}
@@ -213,16 +216,22 @@ void V3::EconomyManager::assignSubStateCPBudgets(const Configuration::ECONOMY ec
 
 void V3::EconomyManager::balanceNationalBudgets() const
 {
-	// Read in national budget budget from configuration, calculate specifics based on country
-	// End result is each country has a set of instructions on what buildings have priority in its economy
-}
+	// TODO(Gawquon): Implement and add sector map to country processed data
+	for (const auto& country: centralizedCountries)
+	{
+		double totalWeight = 0;
 
-void V3::EconomyManager::planSubStateEconomies() const
-{
-	// Score each valid building for each SubState
-	// Terrain
-	// EU4Buildings
-	// State Traits
+		for (const auto& blueprint: nationalBudgets.getSectorBlueprints())
+		{
+			// Make sectors from blueprints
+			// Accumulate totalWeight
+		}
+
+		// for (const auto& sector: country->getProcessedData().sectors)
+		//{
+		//	sector.calculateBudget(totalWeight, country->getCPBudget());
+		// }
+	}
 }
 
 void V3::EconomyManager::buildBuildings() const
@@ -236,16 +245,44 @@ void V3::EconomyManager::buildBuildings() const
 	// 3. The state then builds as many buildings of that kind as it can, limited by capacity, packet size and sector CP
 	// 3b. capacity is RGO/arable land capacity
 	// 3c. packet size is based on the mean amount of CP states have left to build and is configurable
-	// 4. The building substate then re-scores the building it just built adjusting for the satisfied need
-	// 5. If a sector or substate end up with less CP than the cost for any possible valid building, they relinquish it to the next sector/substate
+	// 4. If a sector or substate end up with less CP than the cost for any possible valid building, they relinquish it to the next sector/substate
 
 	for (const auto& country: centralizedCountries)
 	{
-		for (const auto& substate: country->getSubStates())
-		{
+		// Prepare sorting lambda, we will use it more than once
+		auto greaterBudget = [](const std::shared_ptr<SubState>& lhs, const std::shared_ptr<SubState>& rhs) {
+			return lhs->getCPBudget() > rhs->getCPBudget();
+		};
 
-			{
-			}
+		// Copy substate vector. We will be sorting this one and removing finished substates until it is empty
+		// Sort Vector, remove substates that have less than the minimum pre-set construction cost, default to 50
+		auto subStatesByBudget(country->getSubStates());
+		std::ranges::sort(subStatesByBudget, greaterBudget);
+
+		// When removing substates grant their extra CP to the top State
+
+		while (!subStatesByBudget.empty())
+		{
+			// Enter negotiation
+			// Pick the substate with the most budget
+			const auto& substate = subStatesByBudget[0];
+
+
+			// Copy Sectors?
+			// while Sectors not empty
+			// Pick highest scoring building
+			// Country sees if it agrees
+
+			// Spend
+			// Chosen building construction cost
+			substate->spendCPBudget(50);
+
+			// Sort
+			std::ranges::sort(subStatesByBudget, greaterBudget);
+
+
+			// After spend, remove substate if now low budget
+			removeSubStateIfFinished(subStatesByBudget, subStatesByBudget.end() - 1);
 		}
 	}
 }
@@ -366,9 +403,9 @@ double V3::EconomyManager::calculateStateTraitMultiplier(const std::shared_ptr<S
 		const auto& stateTrait = stateTraits.at(trait);
 
 		// Throughput bonuses to goods, buildings or whole building groups factor in
-		const double goodsModifiers = stateTrait->getAllBonuses(stateTrait->getGoodsModifiersMap());
-		const double buildingsModifiers = stateTrait->getAllBonuses(stateTrait->getBuildingModifiersMap());
-		const double buildingGroupsModifiers = stateTrait->getAllBonuses(stateTrait->getBuildingGroupModifiersMap());
+		const double goodsModifiers = stateTrait.getAllBonuses(stateTrait.getGoodsModifiersMap());
+		const double buildingsModifiers = stateTrait.getAllBonuses(stateTrait.getBuildingModifiersMap());
+		const double buildingGroupsModifiers = stateTrait.getAllBonuses(stateTrait.getBuildingGroupModifiersMap());
 
 		// (20% goods bonus + -30% building bonus + 15% building group bonus) @ half strength = 2.5% Bonus = 0.025
 		stateTraitMultiplier += (goodsModifiers + buildingsModifiers + buildingGroupsModifiers) * econDefines.getStateTraitStrength();
@@ -397,6 +434,45 @@ void V3::EconomyManager::setPMs() const
 		data.productionMethods["building_port"] = {"pm_basic_port"};
 		country->setProductionMethods(data.productionMethods);
 	}
+}
+
+void V3::EconomyManager::removeNoBuildSubStates(std::vector<std::shared_ptr<SubState>>& subStates) const
+{
+	auto budgetBelowMinimumCost = [](const std::shared_ptr<SubState>& substate) {
+		return substate->getCPBudget() < 50; // getConstructionMinCost();
+	};
+
+
+	// Collect budgets below threshold
+	int carryBudget = 0;
+	for (const auto& substate: subStates)
+	{
+		if (budgetBelowMinimumCost(substate))
+			carryBudget += substate->getCPBudget();
+	}
+	std::erase_if(subStates, budgetBelowMinimumCost);
+
+	// Add to top
+	if (!subStates.empty())
+	{
+		subStates[0]->spendCPBudget(-carryBudget);
+	}
+}
+
+void V3::EconomyManager::removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
+	 const std::vector<std::shared_ptr<SubState>>::iterator& it) const
+{
+	// if (it->get()->getBuildingWeights.empty())
+	//{
+
+	if (subStates.size() >= 2)
+	{
+		// Carry over budget to current highest budgeted state.
+		subStates[0]->spendCPBudget(-it->get()->getCPBudget());
+	}
+
+	subStates.erase(it);
+	//}
 }
 
 void V3::EconomyManager::loadTerrainModifierMatrices(const std::string& filePath)
@@ -442,8 +518,13 @@ void V3::EconomyManager::loadBuildingInformation(const commonItems::ModFilesyste
 	PMs = PMLoader.getPMs();
 	PMGroups = PMGroupLoader.getPMGroups();
 
-	Log(LogLevel::Info) << "<> Loaded " << buildings.size() << " buildings, " << buildingGroups->getBuildingGroupMap().size() << " building groups, "
+	Log(LogLevel::Info) << "<> Loaded " << buildings.size() << " buildings, " << buildingGroups.getBuildingGroupMap().size() << " building groups, "
 							  << PMs.size() << " PMs and " << PMGroups.size() << " PM groups.";
+}
+
+void V3::EconomyManager::loadBuildingMappings(const std::string& filePath)
+{
+	buildingMapper.loadBuildingMappings("configurables/economy/buildings_map.txt");
 }
 
 void V3::EconomyManager::loadEconDefines(const std::string& filePath)
@@ -453,4 +534,15 @@ void V3::EconomyManager::loadEconDefines(const std::string& filePath)
 	econDefines.loadEconDefines(filePath + "configurables/economy/econ_defines.txt");
 
 	Log(LogLevel::Info) << "<> Economy defines loaded.";
+}
+
+void V3::EconomyManager::loadNationalBudgets(const std::string& filePath)
+{
+	nationalBudgets.loadNationalBudget(filePath + "configurables/economy/national_budget.txt");
+	nationalBudgets.buildBuildingSectorMap();
+}
+
+void V3::EconomyManager::loadTechMap(const commonItems::ModFilesystem& modFS)
+{
+	techMap.loadTechs(modFS);
 }

@@ -1,10 +1,10 @@
 #ifndef STATE_MODIFIER_LOADER_H
 #define STATE_MODIFIER_LOADER_H
+#include "ClayManager/State/StateModifier.h"
 #include "Parser.h"
 
 namespace V3
 {
-class StateModifier;
 class StateModifierLoader: commonItems::parser
 {
   public:
@@ -16,7 +16,7 @@ class StateModifierLoader: commonItems::parser
   private:
 	void registerKeys();
 
-	std::map<std::string, std::shared_ptr<StateModifier>> stateModifiers;
+	std::map<std::string, StateModifier> stateModifiers;
 };
 } // namespace V3
 #endif // STATE_MODIFIER_LOADER_H

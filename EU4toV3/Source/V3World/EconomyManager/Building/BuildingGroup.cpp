@@ -14,6 +14,15 @@ void V3::BuildingGroup::registerKeys()
 	registerKeyword("parent_group", [this](std::istream& theStream) {
 		parent = commonItems::getString(theStream);
 	});
+	registerKeyword("capped_by_resources", [this](std::istream& theStream) {
+		resourceCapped = (commonItems::getString(theStream) == "yes");
+	});
+	registerKeyword("land_usage", [this](std::istream& theStream) {
+		resourceCapped = (commonItems::getString(theStream) == "rural");
+	});
+	registerKeyword("parent_group", [this](std::istream& theStream) {
+		parent = commonItems::getString(theStream);
+	});
 	registerKeyword("infrastructure_usage_per_level", [this](std::istream& theStream) {
 		infrastructureCost = commonItems::getDouble(theStream);
 	});

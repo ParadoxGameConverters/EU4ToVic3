@@ -1,72 +1,76 @@
 #include "BuildingGroups.h"
 #include "BuildingGroup.h"
-#include "Log.h"
 #include <ranges>
 
 void V3::BuildingGroups::setInfrastructureCosts()
 {
 	for (const auto& buildingGroup: std::views::values(buildingGroups))
 	{
-		std::string parentGroupName = buildingGroup->getParentName();
-		while (buildingGroup->getInfrastructureCost() == 0 && !parentGroupName.empty())
+		auto parentGroupName = buildingGroup->getParentName();
+		while (!buildingGroup->getInfrastructureCost() && parentGroupName)
 		{
-			buildingGroup->setInfrastructureCost(safeGetInfrastructureCost(parentGroupName));
-			parentGroupName = safeGetParentName(parentGroupName);
+			buildingGroup->setInfrastructureCost(tryGetInfraCost(parentGroupName));
+			parentGroupName = tryGetParentName(parentGroupName);
 		}
 	}
 }
 
-void V3::BuildingGroups::addBuildingGroup(std::shared_ptr<BuildingGroup> theBuildingGroup)
+void V3::BuildingGroups::setResourceCaps()
+{
+	for (const auto& buildingGroup: std::views::values(buildingGroups))
+	{
+		auto parentGroupName = buildingGroup->getParentName();
+		while (!buildingGroup->possibleIsResourceCapped() && parentGroupName)
+		{
+			buildingGroup->setResourceCap(tryGetIsCapped(parentGroupName));
+			parentGroupName = tryGetParentName(parentGroupName);
+		}
+	}
+}
+
+void V3::BuildingGroups::addBuildingGroup(const std::shared_ptr<BuildingGroup>& theBuildingGroup)
 {
 	buildingGroups[theBuildingGroup->getName()] = theBuildingGroup;
 }
 
-std::optional<std::string> V3::BuildingGroups::getParentName(const std::string& theBuildingGroupName) const
+std::optional<std::string> V3::BuildingGroups::tryGetParentName(const std::optional<std::string>& theGroupName) const
 {
-	const auto& possibleBuildingGroup = buildingGroups.find(theBuildingGroupName);
-	if (possibleBuildingGroup != buildingGroups.end())
-	{
-		return possibleBuildingGroup->second->getParentName();
-	}
-	else
-	{
+	if (!theGroupName)
 		return std::nullopt;
+
+	const auto& possibleGroup = buildingGroups.find(theGroupName.value());
+	if (possibleGroup != buildingGroups.end())
+	{
+		return possibleGroup->second->getParentName();
 	}
+
+	return std::nullopt;
 }
 
-const std::string& V3::BuildingGroups::safeGetParentName(const std::string& theBuildingGroupName) const
+std::optional<double> V3::BuildingGroups::tryGetInfraCost(const std::optional<std::string>& theGroupName) const
 {
-	return safeGetBuildingGroup(theBuildingGroupName)->getParentName();
-}
-
-std::optional<double> V3::BuildingGroups::getInfrastructureCost(const std::string& theBuildingGroupName) const
-{
-	const auto& possibleBuildingGroup = buildingGroups.find(theBuildingGroupName);
-	if (possibleBuildingGroup != buildingGroups.end())
-	{
-		return possibleBuildingGroup->second->getInfrastructureCost();
-	}
-	else
-	{
+	if (!theGroupName)
 		return std::nullopt;
+
+	const auto& possibleGroup = buildingGroups.find(theGroupName.value());
+	if (possibleGroup != buildingGroups.end())
+	{
+		return possibleGroup->second->getInfrastructureCost();
 	}
+
+	return std::nullopt;
 }
 
-double V3::BuildingGroups::safeGetInfrastructureCost(const std::string& theBuildingGroupName) const
+std::optional<bool> V3::BuildingGroups::tryGetIsCapped(const std::optional<std::string>& theGroupName) const
 {
-	return safeGetBuildingGroup(theBuildingGroupName)->getInfrastructureCost();
-}
+	if (!theGroupName)
+		return std::nullopt;
 
-std::shared_ptr<V3::BuildingGroup> V3::BuildingGroups::safeGetBuildingGroup(const std::string& theBuildingGroupName) const
-{
-	const auto& possibleBuildingGroup = buildingGroups.find(theBuildingGroupName);
-	if (possibleBuildingGroup != buildingGroups.end())
+	const auto& possibleGroup = buildingGroups.find(theGroupName.value());
+	if (possibleGroup != buildingGroups.end())
 	{
-		return possibleBuildingGroup->second;
+		return possibleGroup->second->possibleIsResourceCapped();
 	}
-	else
-	{
-		Log(LogLevel::Error) << "Key not recognized: " << theBuildingGroupName << " is not a recognized building_group. Using an empty group in its place.";
-		return std::move(std::make_unique<BuildingGroup>());
-	}
+
+	return std::nullopt;
 }

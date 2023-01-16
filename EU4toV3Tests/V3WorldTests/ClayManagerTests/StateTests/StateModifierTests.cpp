@@ -86,8 +86,8 @@ TEST(V3World_StateModifierTests, BuildingGroupModifiersAreSet)
 	V3::StateModifier modifier;
 	modifier.loadStateModifier(input);
 
-	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingGroupModifier("bg_agri", std::shared_ptr<V3::BuildingGroups>()).value());
-	EXPECT_DOUBLE_EQ(0.3, modifier.getBuildingGroupModifier("bg_fish", std::shared_ptr<V3::BuildingGroups>()).value());
+	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingGroupModifier("bg_agri", V3::BuildingGroups()).value());
+	EXPECT_DOUBLE_EQ(0.3, modifier.getBuildingGroupModifier("bg_fish", V3::BuildingGroups()).value());
 }
 
 TEST(V3World_StateModifierTests, BuildingModifiersAreSet)
@@ -137,7 +137,7 @@ TEST(V3World_StateModifierTests, RegexDontCollide)
 
 	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingModifier("building_house").value());
 	EXPECT_DOUBLE_EQ(0.3, modifier.getGoodsModifier("building_output_coconut").value());
-	EXPECT_DOUBLE_EQ(0.4, modifier.getBuildingGroupModifier("bg_fish", std::shared_ptr<V3::BuildingGroups>()).value());
+	EXPECT_DOUBLE_EQ(0.4, modifier.getBuildingGroupModifier("bg_fish", V3::BuildingGroups()).value());
 }
 
 TEST(V3World_StateModifierTests, GettingBuildingGroupDataTravelsHeirarchy)
@@ -155,7 +155,7 @@ TEST(V3World_StateModifierTests, GettingBuildingGroupDataTravelsHeirarchy)
 	buildingGroupLoader.loadBuildingGroups(modFS);
 	auto buildingGroups = buildingGroupLoader.getBuildingGroups();
 
-	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingGroupModifier("bg_light_industry", buildingGroups).value());
+	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingGroupModifier("bg_light_industry", buildingGroups).value_or(0));
 }
 
 TEST(V3World_StateModifierTests, GetAllBonusesCombinesLikeBonuses)
