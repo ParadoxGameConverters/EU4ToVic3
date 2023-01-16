@@ -210,6 +210,8 @@
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\DefinesLoader\BuildingScriptValuesLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\DefinesLoader\EconDefinesLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LocLoader\LocalizationLoader.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\MajorFormablesLoader\MajorFormablesEntry.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\MajorFormablesLoader\MajorFormablesLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\NationalBudgetLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\Script\AddScript.cpp" />
     <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\Script\MathScript.cpp" />
@@ -384,6 +386,8 @@
     <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\BuildingScriptValuesLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\EconDefniesLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\LocLoaderTests\LocalizationLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\MajorFormablesLoaderTests\MajorFormablesEntryTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\MajorFormablesLoaderTests\MajorFormablesLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\NationalBudgetLoaderTests\MathScriptTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\NationalBudgetLoaderTests\NationalBudgetLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\NationalBudgetLoaderTests\SectorLoaderTests.cpp" />
@@ -834,6 +838,11 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\technology\technologies\test_tech.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/technology/technologies</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\country_formation\00_major_formables.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/country_formation</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

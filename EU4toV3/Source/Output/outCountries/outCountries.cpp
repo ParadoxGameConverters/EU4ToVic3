@@ -6,6 +6,27 @@
 
 namespace
 {
+void outMajorFormable(std::ostream& output, const std::string& tag, const V3::MajorFormablesEntry& formable)
+{
+	output << tag << " = {\n";
+	for (const auto& stanza: formable.getStanzas())
+		output << "\t" << stanza << "\n";
+	output << "\tpossible = {\n";
+	output << "\t\tOR = {\n";
+	for (const auto& culture: formable.getCultures())
+		output << "\t\t\tcountry_has_primary_culture = cu:" << culture << "\n";
+	output << "\t\t}\n";
+	output << "\t\tany_country = {\n";
+	output << "\t\t\tOR = {\n";
+	for (const auto& culture: formable.getCultures())
+		output << "\t\t\t\tcountry_has_primary_culture = cu:" << culture << "\n";
+	output << "\t\t\t}\n";
+	output << "\t\t\thas_technology_researched = " << formable.getRequiredTechnology() << "\n";
+	output << "\t\t}\n";
+	output << "\t}\n";
+	output << "}\n\n";
+}
+
 void outReleasableCountry(std::ostream& output, const V3::Country& country)
 {
 	output << country.getTag() << " = {\n";
@@ -142,5 +163,17 @@ void OUT::exportReleasables(const std::string& outputName, const std::map<std::s
 	for (const auto& country: countries | std::views::values)
 		if (country->getSubStates().empty() && !country->getUnownedProvinces().empty())
 			outReleasableCountry(output, *country);
+	output.close();
+}
+
+void OUT::exportMajorFormables(const std::string& outputName, const std::map<std::string, V3::MajorFormablesEntry>& formables)
+{
+	std::ofstream output("output/" + outputName + "/common/country_formation/00_major_formables.txt");
+	if (!output.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/country_formation/00_major_formables.txt");
+
+	output << commonItems::utf8BOM;
+	for (const auto& [tag, formable]: formables)
+		outMajorFormable(output, tag, formable);
 	output.close();
 }

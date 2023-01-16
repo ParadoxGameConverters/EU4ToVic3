@@ -258,3 +258,22 @@ TEST(V3World_PoliticalManagerTests, DecentralizedCountriesCanBeFilled)
 	// Name is "generated". Don't need locmappers for simple capitalization example.
 	EXPECT_EQ("Swedish Federation", x01->getName("english"));
 }
+
+TEST(V3World_PoliticalManagerTests, MajorFormablesCanBeAltered)
+{
+	auto [politicalManager, popManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
+
+	politicalManager.loadMajorFormables("TestFiles/vic3installation/game/common/country_formation/00_major_formables.txt");
+
+	auto ger = std::make_shared<V3::Country>();
+	V3::ProcessedData data;
+	data.cultures = {"some_german"};
+	ger->setProcessedData(data);
+	politicalManager.addCountry({"GER", ger});
+
+	politicalManager.alterMajorFormables();
+
+	const auto& gerFormable = politicalManager.getMajorFormables().at("GER");
+
+	EXPECT_THAT(gerFormable.getCultures(), testing::UnorderedElementsAre("north_german", "south_german", "weder_german", "some_german"));
+}

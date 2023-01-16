@@ -824,3 +824,33 @@ void V3::PoliticalManager::expandReleasablesFootprint(const ClayManager& clayMan
 	}
 	Log(LogLevel::Info) << "<> Expanded " << counter << " releasables.";
 }
+
+void V3::PoliticalManager::loadMajorFormables(const std::string& filePath)
+{
+	majorFormablesLoader.loadMajorFormables(filePath);
+}
+
+void V3::PoliticalManager::alterMajorFormables()
+{
+	Log(LogLevel::Info) << "-> Altering Major Formables Requirements.";
+	auto counter = 0;
+
+	auto formables = majorFormablesLoader.getMajorFormables();
+	for (auto& [tag, formable]: formables)
+	{
+		if (!countries.contains(tag))
+			continue;
+		const auto& cultures = countries.at(tag)->getProcessedData().cultures;
+		bool altered = false;
+		for (const auto& culture: cultures)
+			if (!formable.getCultures().contains(culture))
+			{
+				altered = true;
+				formable.addCulture(culture);
+			}
+		if (altered)
+			++counter;
+	}
+	majorFormablesLoader.setFormables(formables);
+	Log(LogLevel::Info) << "<> Altered " << counter << " major formables.";
+}
