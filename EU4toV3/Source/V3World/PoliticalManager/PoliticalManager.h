@@ -9,6 +9,7 @@
 #include "DiplomaticMapper/DiplomaticMapper.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
 #include "LawMapper/LawMapper.h"
+#include "Loaders/MajorFormablesLoader/MajorFormablesLoader.h"
 #include "Loaders/VanillaCharacterLoader/VanillaCharacterLoader.h"
 #include "Loaders/VanillaCountryHistoryLoader/VanillaCountryHistoryLoader.h"
 #include "Loaders/VanillaDiplomacyLoader/VanillaDiplomacyLoader.h"
@@ -62,6 +63,7 @@ class PoliticalManager
 	void loadCharacterTraitMapperRules(const std::string& filePath);
 	void loadColonialTagMapperRules(const std::string& filePath);
 	void loadCountryTierMapperRules(const std::string& filePath);
+	void loadMajorFormables(const std::string& filePath);
 	void importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries);
 	void generateDecentralizedCountries(const ClayManager& clayManager, const PopManager& popManager);
 	void convertAllCountries(const ClayManager& clayManager,
@@ -72,13 +74,15 @@ class PoliticalManager
 		 const LocalizationLoader& v3LocLoader,
 		 const EU4::EU4LocalizationLoader& eu4LocLoader,
 		 bool vn = false) const;
+	void addCountry(const std::pair<std::string, std::shared_ptr<Country>>& country) { countries.emplace(country); }
 
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& v3Tag) const;
 	[[nodiscard]] int getWorldPopCount() const;
 	[[nodiscard]] static int getCountriesPopCount(std::vector<std::shared_ptr<Country>> theCountries);
 	[[nodiscard]] bool isTagDecentralized(const std::string& v3Tag) const;
-	[[nodiscard]] std::map<std::string, Law> getLawsMap() const { return lawMapper.getLaws(); };
+	[[nodiscard]] std::map<std::string, Law> getLawsMap() const { return lawMapper.getLaws(); }
+	[[nodiscard]] const auto& getMajorFormables() const { return majorFormablesLoader.getMajorFormables(); }
 
 	void determineAndApplyWesternization(const mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
@@ -101,6 +105,7 @@ class PoliticalManager
 		 const EU4::ReligionLoader& religionLoader);
 	void injectDynamicCulturesIntoFormables(const mappers::CultureMapper& cultureMapper);
 	void expandReleasablesFootprint(const ClayManager& clayManager);
+	void alterMajorFormables();
 
 	void attemptColonialTagReplacement(const mappers::ColonialRegionMapper& colonialRegionMapper, const ClayManager& clayManager);
 
@@ -135,6 +140,7 @@ class PoliticalManager
 	VanillaPopulationHistoryLoader vanillaPopulationHistoryLoader;
 	VanillaCharacterLoader vanillaCharacterLoader;
 	VanillaDiplomaticPlayLoader vanillaDiplomaticPlayLoader;
+	MajorFormablesLoader majorFormablesLoader;
 };
 } // namespace V3
 #endif // POLITICAL_MANAGER_H

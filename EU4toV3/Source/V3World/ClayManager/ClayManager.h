@@ -61,6 +61,8 @@ class ClayManager
 	[[nodiscard]] std::optional<std::string> getProvinceOwnerTag(const std::string& provinceID) const;
 	[[nodiscard]] std::set<std::string> getStateProvinceIDs(const std::string& stateName) const;
 
+	void filterInvalidClaims(const PoliticalManager& politicalManager) const;
+
   private:
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> chunkToSubStatesTransferFunction(const std::shared_ptr<Chunk>& chunk) const;
 	[[nodiscard]] StateToProvinceMap sortChunkProvincesIntoStates(const std::shared_ptr<Chunk>& chunk) const;

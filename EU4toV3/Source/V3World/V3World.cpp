@@ -51,6 +51,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.loadCharacterTraitMapperRules("configurables/character_traits.txt");
 	politicalManager.loadColonialTagMapperRules("configurables/colonial_tags.txt");
 	politicalManager.loadCountryTierMapperRules("configurables/country_tiers.txt");
+	politicalManager.loadMajorFormables("blankMod/output/common/country_formation/00_major_formables.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	localizationLoader.scrapeLocalizations(dwFS);
 	vanillaLocalizationLoader.scrapeLocalizations(blankModFS);
@@ -141,6 +142,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	politicalManager.injectDynamicCulturesIntoFormables(cultureMapper);
 	politicalManager.expandReleasablesFootprint(clayManager);
+	politicalManager.alterMajorFormables();
+	clayManager.filterInvalidClaims(politicalManager);
 
 	Log(LogLevel::Info) << "-> Converting Provinces";
 	Log(LogLevel::Progress) << "53 %";

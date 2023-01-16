@@ -816,3 +816,22 @@ std::set<std::string> V3::ClayManager::getStateProvinceIDs(const std::string& st
 	}
 	return IDs;
 }
+
+void V3::ClayManager::filterInvalidClaims(const PoliticalManager& politicalManager) const
+{
+	Log(LogLevel::Info) << "-> Filtering Invalid Claims.";
+	auto counter = 0;
+
+	// dead and deleted countries get no claims.
+	for (const auto& substate: substates)
+	{
+		std::set<std::string> validClaims;
+		for (const auto& claim: substate->getClaims())
+			if (politicalManager.getCountry(claim) && !politicalManager.getCountry(claim)->getSubStates().empty())
+				validClaims.emplace(claim);
+			else
+				++counter;
+		substate->setClaims(validClaims);
+	}
+	Log(LogLevel::Info) << "<> Filtered " << counter << " Dead Claims.";
+}
