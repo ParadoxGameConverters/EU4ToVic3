@@ -71,6 +71,7 @@ class EconomyManager
 	[[nodiscard]] double eurocentricCountryBudgets(double& accumulatedWeight) const;
 	[[nodiscard]] double civlevelCountryBudgets(double& accumulatedWeight) const;
 	[[nodiscard]] double devCountryBudgets(double& accumulatedWeight) const;
+	[[nodiscard]] double getBaseSubStateWeight(const std::shared_ptr<SubState>& subState, Configuration::ECONOMY economyType) const;
 
 	[[nodiscard]] double calculateGeoMeanCentralizedPops() const;
 	[[nodiscard]] std::string pickBureaucracyPM(const std::shared_ptr<Country>& country) const;
@@ -80,6 +81,7 @@ class EconomyManager
 
 	void distributeBudget(double globalCP, double totalIndustryScore) const;
 	void setPMs() const;
+
 
 	void removeNoBuildSubStates(std::vector<std::shared_ptr<SubState>>& subStates) const;
 	void removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates, const std::vector<std::shared_ptr<SubState>>::iterator& it) const;

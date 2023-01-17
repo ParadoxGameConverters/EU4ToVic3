@@ -135,19 +135,7 @@ void V3::EconomyManager::assignSubStateCPBudgets(const Configuration::ECONOMY ec
 			if (subState->getProvinces().empty())
 				continue;
 
-			double base = 0;
-
-			if (economyType == Configuration::ECONOMY::EuroCentric || economyType == Configuration::ECONOMY::CivLevel)
-			{
-				// Score is based on population
-				base = subState->getSubStatePops().getPopCount();
-			}
-			if (economyType == Configuration::ECONOMY::DevPerPop)
-			{
-				// TODO(Gawquon): Dev based
-				// Score is based on Dev, penalized by population
-				// base = subState->getSourceProvinceData() ;
-			}
+			const double base = getBaseSubStateWeight(subState, economyType);
 
 			// Adjust for terrain & state traits
 			const double terrainMultiplier = calculateTerrainMultiplier(subState);
@@ -458,6 +446,23 @@ void V3::EconomyManager::setPMs() const
 		data.productionMethods["building_port"] = {"pm_basic_port"};
 		country->setProductionMethods(data.productionMethods);
 	}
+}
+
+double V3::EconomyManager::getBaseSubStateWeight(const std::shared_ptr<SubState>& subState, const Configuration::ECONOMY economyType) const
+{
+	if (economyType == Configuration::ECONOMY::EuroCentric || economyType == Configuration::ECONOMY::CivLevel)
+	{
+		// Score is based on population
+		return subState->getSubStatePops().getPopCount();
+	}
+	if (economyType == Configuration::ECONOMY::DevPerPop)
+	{
+		// TODO(Gawquon): Dev based for now not static, might use an econ define
+		// Score is based on Dev, penalized by population
+		// base = subState->getSourceProvinceData() ;
+		return 0;
+	}
+	return 0;
 }
 
 void V3::EconomyManager::removeNoBuildSubStates(std::vector<std::shared_ptr<SubState>>& subStates) const
