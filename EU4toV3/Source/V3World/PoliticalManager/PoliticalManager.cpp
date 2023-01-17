@@ -854,3 +854,26 @@ void V3::PoliticalManager::alterMajorFormables()
 	majorFormablesLoader.setFormables(formables);
 	Log(LogLevel::Info) << "<> Altered " << counter << " major formables.";
 }
+
+void V3::PoliticalManager::loadIGIdeologiesMapperRules(const std::string& filePath)
+{
+	igIdeologiesMapper.loadMappingRules(filePath);
+}
+
+void V3::PoliticalManager::alterIGIdeologies(const mappers::CultureMapper& cultureMapper,
+	 const mappers::ReligionMapper& religionMapper,
+	 const ClayManager& clayManager)
+{
+	Log(LogLevel::Info) << "-> Altering IG Ideologies.";
+	auto counter = 0;
+	for (const auto& country: countries | std::views::values)
+	{
+		const auto igMods = igIdeologiesMapper.getIGIdeologyMods(*country, cultureMapper, religionMapper, clayManager);
+		if (!igMods.empty())
+		{
+			++counter;
+			country->setIGIdeologyModifiers(igMods);
+		}
+	}
+	Log(LogLevel::Info) << "<> " << counter << " countries had IGs altered.";
+}

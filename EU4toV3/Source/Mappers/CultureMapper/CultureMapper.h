@@ -43,6 +43,7 @@ class CultureMapper: commonItems::parser
 	[[nodiscard]] const auto& getUnMappedCultures() const { return unmappedCultures; }
 	[[nodiscard]] const auto& getUsedCultures() const { return usedCultures; }
 	[[nodiscard]] const auto& getV3CultureDefinitions() const { return v3CultureDefinitions; }
+	void setV3CultureDefinitions(const std::map<std::string, CultureDef>& culDefs) { v3CultureDefinitions = culDefs; }
 	[[nodiscard]] const auto& getRelatedCultures() const { return relatedCultures; }
 	[[nodiscard]] const auto& getColonialRegionMapper() const { return colonialRegionMapper; }
 

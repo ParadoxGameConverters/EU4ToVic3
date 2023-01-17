@@ -93,6 +93,17 @@ void outHistoryCountry(std::ostream& output, const V3::Country& country)
 		output << "\t\t\tset_ig_suppression = yes\n";
 		output << "\t\t}\n";
 	}
+	for (const auto& [ig, modifier]: country.getProcessedData().igIdeologyModifiers)
+	{
+		if (modifier.addedIdeologies.empty() && modifier.removedIdeologies.empty())
+			continue;
+		output << "\t\tig:" << ig << " = {\n";
+		for (const auto& ideology: modifier.removedIdeologies)
+			output << "\t\t\tremove_ideology = " << ideology << "\n ";
+		for (const auto& ideology: modifier.addedIdeologies)
+			output << "\t\t\tadd_ideology = " << ideology << "\n ";
+		output << "\t\t}\n";
+	}
 	for (const auto& element: country.getProcessedData().vanillaHistoryElements)
 	{
 		output << "\t\t" << element << "\n";

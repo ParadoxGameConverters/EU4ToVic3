@@ -7,6 +7,7 @@
 #include "DatingData.h"
 #include "Diplomacy/Agreement.h"
 #include "DiplomaticMapper/DiplomaticMapper.h"
+#include "IGIdeologiesMapper/IGIdeologiesMapper.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
 #include "LawMapper/LawMapper.h"
 #include "Loaders/MajorFormablesLoader/MajorFormablesLoader.h"
@@ -63,6 +64,7 @@ class PoliticalManager
 	void loadCharacterTraitMapperRules(const std::string& filePath);
 	void loadColonialTagMapperRules(const std::string& filePath);
 	void loadCountryTierMapperRules(const std::string& filePath);
+	void loadIGIdeologiesMapperRules(const std::string& filePath);
 	void loadMajorFormables(const std::string& filePath);
 	void importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries);
 	void generateDecentralizedCountries(const ClayManager& clayManager, const PopManager& popManager);
@@ -106,6 +108,7 @@ class PoliticalManager
 	void injectDynamicCulturesIntoFormables(const mappers::CultureMapper& cultureMapper);
 	void expandReleasablesFootprint(const ClayManager& clayManager);
 	void alterMajorFormables();
+	void alterIGIdeologies(const mappers::CultureMapper& cultureMapper, const mappers::ReligionMapper& religionMapper, const ClayManager& clayManager);
 
 	void attemptColonialTagReplacement(const mappers::ColonialRegionMapper& colonialRegionMapper, const ClayManager& clayManager);
 
@@ -135,6 +138,7 @@ class PoliticalManager
 	mappers::CharacterTraitMapper characterTraitMapper;
 	mappers::ColonialTagMapper colonialTagMapper;
 	mappers::CountryTierMapper countryTierMapper;
+	mappers::IGIdeologiesMapper igIdeologiesMapper;
 	VanillaDiplomacyLoader vanillaDiplomacyLoader;
 	VanillaCountryHistoryLoader vanillaCountryHistoryLoader;
 	VanillaPopulationHistoryLoader vanillaPopulationHistoryLoader;

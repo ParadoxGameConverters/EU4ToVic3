@@ -6,13 +6,13 @@
 #include "CountryManager/NationalSymbol/EU4CustomColors.h"
 #include "DatingData.h"
 #include "FlagCrafter/FlagCrafter.h"
+#include "IGIdeologiesMapper/IGIdeologiesMapping.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
+#include "Loaders/TechLoader/Tech.h"
 #include "Parser.h"
 #include "PoliticalManager/Diplomacy/Relation.h"
 #include <memory>
 #include <string>
-
-#include "Loaders/TechLoader/Tech.h"
 
 namespace EU4
 {
@@ -70,6 +70,7 @@ struct ProcessedData
 	bool westernized = false;
 	double industryFactor = 1.0; // Modifier set by EuroCentrism or calculated by dev
 	mappers::IdeaEffect ideaEffect;
+	std::map<std::string, mappers::IGIdeologyMod> igIdeologyModifiers;
 	std::set<std::string> techs;
 	std::map<std::string, Relation> relations;
 	std::set<std::string> rivals;
@@ -136,6 +137,7 @@ class Country: commonItems::parser
 	void addUnownedProvinces(const std::set<std::string>& theProvinces) { unownedProvinces.insert(theProvinces.begin(), theProvinces.end()); }
 	void setSubStates(const std::vector<std::shared_ptr<SubState>>& theSubStates) { subStates = theSubStates; }
 	void setProcessedData(const ProcessedData& data) { processedData = data; }
+	void setIGIdeologyModifiers(const std::map<std::string, mappers::IGIdeologyMod>& modifiers) { processedData.igIdeologyModifiers = modifiers; }
 
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
