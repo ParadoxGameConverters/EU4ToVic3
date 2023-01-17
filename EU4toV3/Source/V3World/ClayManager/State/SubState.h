@@ -60,6 +60,7 @@ class SubState
 	void setDemographics(const std::vector<Demographic>& demos) { demographics = demos; }
 	void setSubStatePops(const SubStatePops& thePops) { subStatePops = thePops; }
 	void addPop(const Pop& pop) { subStatePops.addPop(pop); }
+	void addPops(const std::vector<Pop>& pops) { subStatePops.addPops(pops); }
 
 	void setIndustryWeight(const double theIndustryWeight) { industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theCPBudget) { CPBudget = theCPBudget; }
@@ -114,6 +115,9 @@ class SubState
 	[[nodiscard]] std::optional<std::string> getOwnerTag() const;
 	[[nodiscard]] const std::string& getHomeStateName() const;
 
+	[[nodiscard]] bool isStagedForMinorities() const { return stageForMinorities; }
+	void setStageForMinorities(const bool stage) { stageForMinorities = stage; }
+
   private:
 	void calculateTerrainFrequency();
 	[[nodiscard]] double getPopInfrastructure(const std::map<std::string, Tech>& techMap) const;
@@ -159,6 +163,8 @@ class SubState
 
 	std::vector<std::string> vanillaBuildingElements; // vanilla buildings for this substate, ready for direct dump.
 	std::set<std::string> claims;
+
+	bool stageForMinorities = false; // runtime flag for pop processing
 };
 } // namespace V3
 

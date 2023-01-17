@@ -71,14 +71,15 @@ class CultureMapper: commonItems::parser
 		 const std::string& v3state,
 		 const std::string& v3ownerTag);
 
-	void generateCultureDefinitions(const commonItems::ModFilesystem& modFS,
-		 const std::string& nameListsPath,
+	void generateCultureDefinitions(const std::string& nameListsPath,
 		 const std::string& nameListMapPath,
 		 const std::string& cultureTraitsPath,
 		 const V3::ClayManager& clayManager,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader,
 		 const EU4::EU4LocalizationLoader& eu4Locs);
+
+	void loadCultureDefinitions(const commonItems::ModFilesystem& modFS);
 
 	void injectReligionsIntoCultureDefs(const V3::ClayManager& clayManager);
 

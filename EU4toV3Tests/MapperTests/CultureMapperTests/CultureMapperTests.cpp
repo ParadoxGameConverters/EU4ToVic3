@@ -216,8 +216,8 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
 	EU4::EU4LocalizationLoader eu4LocLoader;
 	eu4LocLoader.loadLocalizations(input);
 
-	culMapper.generateCultureDefinitions(modFS,
-		 "TestFiles/configurables/name_lists.txt",
+	culMapper.loadCultureDefinitions(modFS);
+	culMapper.generateCultureDefinitions("TestFiles/configurables/name_lists.txt",
 		 "TestFiles/configurables/name_list_map.txt",
 		 "TestFiles/configurables/culture_trait_map.txt",
 		 clayManager,
@@ -296,8 +296,8 @@ TEST(Mappers_CultureMapperTests, cultureDefsLinksDynamicsToRelatedCultures)
 	ASSERT_TRUE(match2);
 	EXPECT_EQ("vculture1", *match2); // dynamic-culture1-culture7-culture-num1 should be related to vculture1.
 
-	culMapper.generateCultureDefinitions(modFS,
-		 "TestFiles/configurables/name_lists.txt",
+	culMapper.loadCultureDefinitions(modFS);
+	culMapper.generateCultureDefinitions("TestFiles/configurables/name_lists.txt",
 		 "TestFiles/configurables/name_list_map.txt",
 		 "TestFiles/configurables/culture_trait_map.txt",
 		 clayManager,

@@ -24,6 +24,9 @@ class Pop
 	void setReligion(const std::string& theReligion) { religion = theReligion; }
 	void setType(const std::string& theType) { type = theType; }
 	void setSize(int theSize) { size = theSize; }
+	void blankReligion() { religion.clear(); }
+	void blankCulture() { culture.clear(); }
+	void setMinority() { minority = true; }
 
   private:
 	std::string culture;

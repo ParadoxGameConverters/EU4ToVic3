@@ -268,8 +268,14 @@ void mappers::CultureMapper::expandCulturalMappings(const V3::ClayManager& clayM
 	Log(LogLevel::Info) << "<> Additional " << unmappedCultures.size() << " cultures imported.";
 }
 
-void mappers::CultureMapper::generateCultureDefinitions(const commonItems::ModFilesystem& modFS,
-	 const std::string& nameListsPath,
+void mappers::CultureMapper::loadCultureDefinitions(const commonItems::ModFilesystem& modFS)
+{
+	CultureDefinitionLoader cultureDefinitionLoader;
+	cultureDefinitionLoader.loadDefinitions(modFS);
+	v3CultureDefinitions = cultureDefinitionLoader.getDefinitions();
+}
+
+void mappers::CultureMapper::generateCultureDefinitions(const std::string& nameListsPath,
 	 const std::string& nameListMapPath,
 	 const std::string& cultureTraitsPath,
 	 const V3::ClayManager& clayManager,
@@ -279,8 +285,6 @@ void mappers::CultureMapper::generateCultureDefinitions(const commonItems::ModFi
 {
 	Log(LogLevel::Info) << "-> Generating culture definitions.";
 
-	CultureDefinitionLoader cultureDefinitionLoader;
-	cultureDefinitionLoader.loadDefinitions(modFS);
 	NameListLoader nameListLoader;
 	nameListLoader.loadNameLists(nameListsPath);
 	NameListMapper nameListMapper;
@@ -289,7 +293,6 @@ void mappers::CultureMapper::generateCultureDefinitions(const commonItems::ModFi
 	cultureTraitMapper.loadMappingRules(cultureTraitsPath);
 
 	// shove existing vanilla defs into the bin.
-	v3CultureDefinitions = cultureDefinitionLoader.getDefinitions();
 	const auto& defCount = v3CultureDefinitions.size();
 
 	for (const auto& eu4CultureName: usedCultures)

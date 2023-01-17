@@ -53,9 +53,11 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.loadCountryTierMapperRules("configurables/country_tiers.txt");
 	politicalManager.loadMajorFormables("blankMod/output/common/country_formation/00_major_formables.txt");
 	politicalManager.loadIGIdeologiesMapperRules("configurables/ig_ideologies.txt");
+	popManager.loadMinorityPopRules("configurables/minority_pops.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	localizationLoader.scrapeLocalizations(dwFS);
 	vanillaLocalizationLoader.scrapeLocalizations(blankModFS);
+	cultureMapper.loadCultureDefinitions(allFS);
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
 	Log(LogLevel::Progress) << "46 %";
@@ -77,6 +79,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "49 %";
 	// soaking up vanilla pops
 	popManager.initializeVanillaPops(dwFS);
+	popManager.injectReligionsIntoVanillaPops(cultureMapper.getV3CultureDefinitions());
 
 	// inject vanilla substates into map holes.
 	clayManager.injectVanillaSubStates(dwFS, politicalManager, popManager, configuration.configBlock.vn);
@@ -106,8 +109,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	popManager.generatePops(clayManager);
 	popManager.applyHomeLands(clayManager);
 
-	cultureMapper.generateCultureDefinitions(allFS,
-		 "configurables/name_lists.txt",
+	cultureMapper.generateCultureDefinitions("configurables/name_lists.txt",
 		 "configurables/name_list_map.txt",
 		 "configurables/culture_trait_map.txt",
 		 clayManager,
