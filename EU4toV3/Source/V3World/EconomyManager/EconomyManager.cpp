@@ -175,14 +175,14 @@ void V3::EconomyManager::balanceNationalBudgets() const
 
 		for (const auto& blueprint: nationalBudgets.getSectorBlueprints())
 		{
-			// Make sectors from blueprints
+			// Add to country Sector Map. Sector name -> Sector
 			// Accumulate totalWeight
 		}
 
 		// for (const auto& sector: country->getProcessedData().sectors | std::views::values)
-		//{
+		// {
 		//	sector.calculateBudget(totalWeight, country->getCPBudget());
-		//}
+		// }
 	}
 }
 
@@ -288,6 +288,8 @@ double V3::EconomyManager::eurocentricCountryBudgets(double& accumulatedWeight) 
 
 	for (const auto& country: centralizedCountries)
 	{
+		// TODO(Gawquon) Industry Factor as boost for civlevel
+
 		const int popCount = country->getPopCount();
 		country->setIndustryWeight(popCount * country->getIndustryFactor() * calculatePopDistanceFactor(popCount, geoMeanPop));
 		accumulatedWeight += country->getIndustryWeight();
@@ -305,14 +307,14 @@ double V3::EconomyManager::eurocentricCountryBudgets(double& accumulatedWeight) 
 
 double V3::EconomyManager::civlevelCountryBudgets(double& accumulatedWeight) const
 {
-	// TODO(Gawquon)
+	// TODO(Gawquon) Straight civlevel as the modifier
 	return 0.0;
 }
 
 double V3::EconomyManager::devCountryBudgets(double& accumulatedWeight) const
 {
 	// TODO(Gawquon)
-	// config option 2. Pop & development
+	// config option 3. Pop & development
 	// The more pop you have per dev, the less powerful your development
 	// This is loosely assuming Dev = Pop + Economy so Economy = Dev - Pop
 
