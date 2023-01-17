@@ -137,7 +137,7 @@ void V3::EconomyManager::assignSubStateCPBudgets(const Configuration::ECONOMY ec
 
 			double base = 0;
 
-			if (economyType == Configuration::ECONOMY::EuroCentric)
+			if (economyType == Configuration::ECONOMY::EuroCentric || economyType == Configuration::ECONOMY::CivLevel)
 			{
 				// Score is based on population
 				base = subState->getSubStatePops().getPopCount();
