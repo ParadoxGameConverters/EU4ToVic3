@@ -294,3 +294,13 @@ TEST(V3World_CountryTests, InfrastructureFromCountryTech)
 	EXPECT_EQ(50, country.getTechInfraCap(techLoader.getTechs()));
 	EXPECT_DOUBLE_EQ(0.25, country.getTechInfraMult(techLoader.getTechs()));
 }
+
+TEST(V3World_CountryTests, YearCapFactorHitsCurve)
+{
+	EXPECT_NEAR(1, V3::Country::yearCapFactor(date("1836.1.1")), 0.01);
+	EXPECT_NEAR(0.85, V3::Country::yearCapFactor(date("1821.1.1")), 0.01);
+	EXPECT_NEAR(0.5, V3::Country::yearCapFactor(date("1750.1.1")), 0.01);
+	EXPECT_NEAR(0.3, V3::Country::yearCapFactor(date("1650.1.1")), 0.015);
+	EXPECT_NEAR(0.2, V3::Country::yearCapFactor(date("1490.1.1")), 0.01);
+	EXPECT_NEAR(0.15, V3::Country::yearCapFactor(date("1350.1.1")), 0.01);
+}

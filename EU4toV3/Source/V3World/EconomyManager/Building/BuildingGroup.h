@@ -25,9 +25,6 @@ class BuildingGroup: commonItems::parser
 	std::optional<std::string> parent;
 	std::optional<double> infrastructureCost;
 	std::optional<bool> resourceCapped;
-
-	// 1. T -> 2. ~ -> 3. F -> 4. ~
-	// 2 inherits True while 4 inherits False
 };
 } // namespace V3
 

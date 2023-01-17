@@ -5,8 +5,6 @@
 
 namespace V3
 {
-// A Sector of industry is a group of vic3 buildings with similar characteristics and distribution
-
 class NationalBudgetLoader: commonItems::parser
 {
   public:
