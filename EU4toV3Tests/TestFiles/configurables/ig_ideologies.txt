@@ -1,0 +1,35 @@
+###link = {
+#culturetrait = a		### What traits does the primary culture have in Victoria 3?
+#religiontrait = b		### What traits does the state religion have in Victoria 3?
+#eu4religion = c		### What was the state religion in EU4?
+#eu4gov = vv			### What was the country's government in EU4?
+#eu4idea = ww			### What idea groups did the country have in EU4??
+#eu4reform = zz			### What EU4 government reforms are required for this IG ideology?
+#capital = yy			### Where is the country's capital located?
+#law = xx				### What Victoria 3 laws does the country have?
+#colony = yes/no		### Is this country a former colony?
+#eoc = yes/no			### Is this country the Emperor of China?
+#hremperor = yes/no		### Is this country the Holy Roman Emperor?
+#ig_cc = [remove:|add:]ideology_dd	### Which IG gains or loses which ideology?
+#}
+
+link = { culturetrait = yamato eu4gov = monarchy eu4gov = theocracy ig_armed_forces = add:ideology_bakufu }
+link = { eoc = yes ig_landowners = add:ideology_scholar_paternalistic ig_landowners = remove:ideology_paternalistic }
+link = { culturetrait = han_chinese capital = europe_strategic_regions capital = west_south_asia_strategic_regions capital = region_indochina capital = region_indonesia capital = region_south_china capital = region_north_china capital = region_manchuria capital = region_japan capital = region_west_siberia capital = region_east_siberia capital = african_strategic_regions ig_landowners = add:ideology_scholar_paternalistic ig_landowners = remove:ideology_paternalistic }
+link = { eu4reform = prussian_monarchy eu4reform = prussian_republic_reform eu4reform = livonian_military_monarchy eu4reform = prussian_theocratic_reform eu4reform = militarized_crusader_order_reform eu4reform = shaka_regime ig_landowners = add:ideology_junker_paternalistic ig_landowners = remove:ideology_paternalistic }
+link = { religiontrait = buddhist ig_devout = add:ideology_buddhist_moralist ig_devout = remove:ideology_moralist }
+link = { eu4religion = hinduism ig_devout = add:ideology_hindu_moralist ig_devout = remove:ideology_moralist }		### This works for now, come back to this later
+link = { eu4religion = sikhism ig_devout = add:ideology_sikh_moralist ig_devout = remove:ideology_moralist }
+link = { eu4religion = shinto ig_devout = add:ideology_shinto_moralist ig_devout = remove:ideology_moralist }
+link = { eu4religion = confucianism ig_devout = add:ideology_confucian ig_devout = remove:ideology_pious ig_devout = remove:ideology_moralist ig_intelligentsia = remove:ideology_anti_clerical }
+link = { eu4religion = coptic ig_devout = add:ideology_oriental_orthodox_patriarch ig_devout = remove:ideology_patriarchal }	### This works for now, come back to this later
+link = { eu4religion = orthodox ig_devout = add:ideology_orthodox_patriarch ig_devout = remove:ideology_patriarchal }		### This works for now, come back to this later
+link = { eu4gov = monarchy eu4idea = aristocracy_ideas eu4religion = orthodox ig_devout = add:ideology_russian_patriarch ig_devout = remove:ideology_orthodox_patriarch ig_devout = remove:ideology_patriarchal }		### This works for now, come back to this later
+link = { culturetrait = indigenous_oceanic_heritage religiontrait = christian religiontrait = muslim religiontrait = jewish religiontrait = eastern ig_devout = add:ideology_laissez_faire }
+link = { culturetrait = indigenous_oceanic_heritage ig_landowners = add:ideology_loyalist }
+link = { eu4gov = theocracy ig_intelligentsia = remove:ideology_anti_clerical ig_landowners = add:ideology_papal_paternalistic ig_landowners = remove:ideology_paternalistic }
+link = { eu4gov = monarchy eu4idea = religious_ideas eu4idea = influence_ideas ig_landowners = add:ideology_pious }	### Ideas should be an AND here, not an OR
+link = { hremperor = yes ig_landowners = add:ideology_austrian_hegemony }			### Not the best here, should think of something better
+link = { eu4idea = religious_ideas eu4idea = offensive_ideas eu4idea = exploration_ideas eu4idea = expansion_ideas capital = north_america_strategic_regions capital = south_america_strategic_regions capital = region_indonesia capital = region_oceania ig_rural_folk = add:ideology_isolationist_expansionism ig_rural_folk = remove:ideology_isolationist }
+link = { eu4gov = republic capital = north_america_strategic_regions capital = south_america_strategic_regions capital = region_indonesia capital = region_oceania colony = yes ig_landowners = add:ideology_republican_paternalistic ig_landowners = remove:ideology_paternalistic }
+link = { capital = north_america_strategic_regions capital = south_america_strategic_regions capital = region_indonesia capital = region_oceania eu4reform = noble_elite_reform eu4reform = presidential_despot_reform eu4reform = republican_authoritarianism_reform eu4reform = nepotism_reform eu4reform = consolidation_of_power_reform eu4reform = seize_executive_power_reform eu4reform = broaden_executive_powers_reform eu4reform = absolute_president_reform eu4reform = military_principle_reform eu4reform = imperial_principle_reform eu4reform = military_rulership_reform eu4reform = military_electorate_reform eu4reform = strengthen_executive_powers_reform eu4reform = president_for_life_reform colony = yes ig_armed_forces = add:ideology_caudillismo ig_landowners = add:ideology_caudillismo ig_landowners = remove:ideology_republican_paternalistic ig_landowners = remove:ideology_paternalistic }			### In default Victoria 3, all indepenent Spanish colonies have this; maybe we should come up with a way to assign this to an entire former colonial language group?

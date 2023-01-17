@@ -1090,6 +1090,18 @@
     <ClCompile Include="V3WorldTests\LoaderTests\MajorFormablesLoaderTests\MajorFormablesLoaderTests.cpp">
       <Filter>V3WorldTests\LoaderTests\MajorFormablesLoaderTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\IGIdeologiesMapper\IGIdeologiesMapper.cpp">
+      <Filter>ConverterFiles\Mappers\IGIdeologiesMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\IGIdeologiesMapper\IGIdeologiesMapping.cpp">
+      <Filter>ConverterFiles\Mappers\IGIdeologiesMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\IGIdeologiesMapperTests\IGIdeologiesMapperTests.cpp">
+      <Filter>MapperTests\IGIdeologiesMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\IGIdeologiesMapperTests\IGIdeologiesMappingTests.cpp">
+      <Filter>MapperTests\IGIdeologiesMapperTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1788,6 +1800,12 @@
     <Filter Include="V3WorldTests\LoaderTests\MajorFormablesLoaderTests">
       <UniqueIdentifier>{7dcdd744-0f8b-4922-b814-79a6ce5fdd75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\Mappers\IGIdeologiesMapper">
+      <UniqueIdentifier>{84ce0ad5-9e5b-458b-af52-bf61276679fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\IGIdeologiesMapperTests">
+      <UniqueIdentifier>{781aac3f-b769-4971-986d-58e518b4494e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -2067,6 +2085,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\country_formation\00_major_formables.txt">
       <Filter>TestFiles\vic3installation\game\common\country_formation</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\ig_ideologies.txt">
+      <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>
