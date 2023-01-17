@@ -260,7 +260,7 @@ double V3::EconomyManager::calculateDateFactor(const Configuration::STARTDATE st
 								  << dateData.lastEU4Date << ".";
 		return factor;
 	}
-	return 1.0;
+	return 0.0;
 }
 
 std::pair<double, double> V3::EconomyManager::countryBudgetCalcs(const Configuration::ECONOMY economyType) const
