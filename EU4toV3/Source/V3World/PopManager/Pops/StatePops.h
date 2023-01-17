@@ -13,6 +13,7 @@ class StatePops
 	StatePops() = default;
 
 	void setSubStatePops(const std::vector<SubStatePops>& thePops) { subStatePops = thePops; }
+	void addSubStatePops(const SubStatePops& thePops) { subStatePops.emplace_back(thePops); }
 	void setStateName(const std::string& theName) { stateName = theName; }
 
 	[[nodiscard]] int getPopCount() const;
