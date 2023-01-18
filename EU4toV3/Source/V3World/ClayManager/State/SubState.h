@@ -130,10 +130,10 @@ class SubState
 		 double traitStrength) const;
 	[[nodiscard]] double calcBuildingTerrainWeight(const std::string& building,
 		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers) const;
-	[[nodiscard]] double calcBuildingEU4Weight(const std::string& building, const mappers::BuildingMapper& buildingMapper) const;
+	[[nodiscard]] double calcBuildingEU4Weight(const std::string& v3BuildingName, const mappers::BuildingMapper& buildingMapper) const;
 	[[nodiscard]] double calcBuildingTraitWeight(const Building& building, const std::map<std::string, StateModifier>& traitMap, double traitStrength) const;
 	[[nodiscard]] double calcBuildingInvestmentWeight(const Building& building) const;
-	[[nodiscard]] double calcBuildingIndustrialWeight(const Building& building) const;
+	[[nodiscard]] double calcBuildingIndustrialWeight(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] bool isBuildingValid(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] bool hasCapacity(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] int getRGOCapacity(const Building& building, const BuildingGroups& buildingGroups) const;

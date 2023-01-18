@@ -17,7 +17,7 @@ class BuildingMapping: commonItems::parser
 	void registerKeys();
 
 	std::string eu4Building;
-	std::vector<std::string> vic3Buildings;
+	std::set<std::string> vic3Buildings;
 };
 } // namespace mappers
 

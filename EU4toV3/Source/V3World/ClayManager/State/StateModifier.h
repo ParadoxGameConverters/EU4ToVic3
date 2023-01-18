@@ -27,7 +27,7 @@ class StateModifier: commonItems::parser
 
   private:
 	void registerKeys();
-	commonItems::parser modifierUnwrapper;
+	parser modifierUnwrapper;
 
 	std::string name; // state_trait_natural_harbors
 

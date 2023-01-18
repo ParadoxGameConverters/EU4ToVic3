@@ -11,12 +11,12 @@ class BuildingMapper: commonItems::parser
 	BuildingMapper() = default;
 	void loadBuildingMappings(const std::string& filePath);
 
-	[[nodiscard]] std::vector<std::string> getVic3Buildings(const std::string& eu4Building) const;
+	[[nodiscard]] std::set<std::string> getVic3Buildings(const std::string& eu4Building) const;
 
   private:
 	void registerKeys();
 
-	std::map<std::string, std::vector<std::string>> mappings;
+	std::map<std::string, std::set<std::string>> mappings;
 };
 } // namespace mappers
 

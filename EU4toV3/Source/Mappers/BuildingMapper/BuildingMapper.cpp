@@ -22,7 +22,7 @@ void mappers::BuildingMapper::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-std::vector<std::string> mappers::BuildingMapper::getVic3Buildings(const std::string& eu4Building) const
+std::set<std::string> mappers::BuildingMapper::getVic3Buildings(const std::string& eu4Building) const
 {
 	if (mappings.contains(eu4Building))
 	{
