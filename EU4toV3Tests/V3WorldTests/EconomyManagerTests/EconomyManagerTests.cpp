@@ -99,6 +99,7 @@ V3::PoliticalManager prepWorld()
 
 	V3::PopManager popManager;
 	popManager.initializeVanillaPops(modFS);
+	popManager.initializeDWPops(modFS);
 	popManager.convertDemographics(clayManager, culMapper, relMapper, cultureLoader, religionLoader);
 	clayManager.shoveRemainingProvincesIntoSubStates();
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);

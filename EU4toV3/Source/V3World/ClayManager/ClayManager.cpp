@@ -585,10 +585,10 @@ V3::SubStatePops V3::ClayManager::prepareInjectedSubStatePops(const std::shared_
 	 const PopManager& popManager) const
 {
 	// get its existing pops from vanilla
-	auto subStatePops = popManager.getVanillaSubStatePops(subState->getHomeStateName(), *subState->getOwnerTag());
+	auto subStatePops = popManager.getDWSubStatePops(subState->getHomeStateName(), *subState->getOwnerTag());
 	if (!subStatePops)
 	{
-		Log(LogLevel::Warning) << "Substate for " << *subState->getOwnerTag() << " in " << subState->getHomeStateName() << " had no vanilla pops! Not importing!";
+		Log(LogLevel::Warning) << "Substate for " << *subState->getOwnerTag() << " in " << subState->getHomeStateName() << " had no DW pops! Not importing!";
 		return SubStatePops();
 	}
 
@@ -834,4 +834,13 @@ void V3::ClayManager::filterInvalidClaims(const PoliticalManager& politicalManag
 		substate->setClaims(validClaims);
 	}
 	Log(LogLevel::Info) << "<> Filtered " << counter << " Dead Claims.";
+}
+
+void V3::ClayManager::redistributeResourcesandLandshares()
+{
+	for (const auto& state: states | std::views::values)
+	{
+		state->distributeLandshares();
+		state->distributeResources();
+	}
 }

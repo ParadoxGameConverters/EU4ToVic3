@@ -53,7 +53,7 @@ TEST(Mappers_IGIdeologiesMappingTests, LinkCanAlterMods)
 	// match
 	mods = mapping.alterIdeologyMods(mods, *country, culMapper, {}, {});
 
-	ASSERT_TRUE(1, mods.size());
+	ASSERT_EQ(1, mods.size());
 	EXPECT_THAT(mods.at("ig_armed_forces").addedIdeologies, testing::UnorderedElementsAre("ideology_bakufu", "ideology_paternalistic"));
 }
 
@@ -89,6 +89,6 @@ TEST(Mappers_IGIdeologiesMappingTests, LinkCanNullifyExistingMods)
 	// match
 	mods = mapping.alterIdeologyMods(mods, *country, culMapper, {}, {});
 
-	ASSERT_TRUE(1, mods.size());
+	ASSERT_EQ(1, mods.size());
 	EXPECT_THAT(mods.at("ig_armed_forces").addedIdeologies, testing::UnorderedElementsAre("ideology_paternalistic"));
 }

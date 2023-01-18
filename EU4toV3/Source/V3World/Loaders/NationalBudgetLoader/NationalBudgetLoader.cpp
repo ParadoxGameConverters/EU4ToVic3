@@ -13,7 +13,9 @@ void V3::NationalBudgetLoader::loadNationalBudget(const std::string& filePath)
 
 void V3::NationalBudgetLoader::buildBuildingSectorMap()
 {
-	// TODO(Gawquon): construct buildingSectorMap from sectorBlueprints. building name -> sector name of the sector building is in
+	for (const auto& blueprint: sectorBlueprints)
+		for (const auto& building: blueprint.getBuildings())
+			buildingSectorMap[building] = blueprint.getName();
 }
 
 void V3::NationalBudgetLoader::registerKeys()

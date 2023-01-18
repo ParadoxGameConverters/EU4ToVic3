@@ -46,6 +46,7 @@ class Configuration: commonItems::parser
 		POPSHAPES popShaping = POPSHAPES::Vanilla;
 		DEADCORES removeType = DEADCORES::DeadCores;
 		EUROCENTRISM euroCentric = EUROCENTRISM::VanillaImport;
+		ECONOMY economy = ECONOMY::CivLevel;
 		bool convertAll = false;
 		// runtime options.
 		bool vn = false; // Voltaire's Nightmare

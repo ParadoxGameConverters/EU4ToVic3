@@ -90,6 +90,7 @@ EU4::World::World(const std::shared_ptr<Configuration>& theConfiguration, const 
 
 	Log(LogLevel::Info) << "-> Injecting Smokestacks into Provinces";
 	countryManager.buildManufactoryCounts();
+	countryManager.assignGPStatuses();
 	Log(LogLevel::Progress) << "24 %";
 
 	Log(LogLevel::Info) << "-> Injecting Localizations into Countries";

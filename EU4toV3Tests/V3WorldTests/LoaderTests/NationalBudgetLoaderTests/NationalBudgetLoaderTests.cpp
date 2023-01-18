@@ -19,7 +19,7 @@ TEST(V3World_NationalBudgetLoaderTests, NationalBudgetLoaderLoadsSectors)
 	}
 }
 
-TEST(DISABLED_V3World_NationalBudgetLoaderTests, NationalBudgetLoaderBuildingsMapToSectors)
+TEST(V3World_NationalBudgetLoaderTests, NationalBudgetLoaderBuildingsMapToSectors)
 {
 	V3::NationalBudgetLoader nationalBudgetLoader;
 	nationalBudgetLoader.loadNationalBudget("TestFiles/configurables/economy/national_budget.txt");

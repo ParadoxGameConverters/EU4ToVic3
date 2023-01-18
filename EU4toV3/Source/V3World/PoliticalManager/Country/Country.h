@@ -5,6 +5,7 @@
 #include "Configuration.h"
 #include "CountryManager/NationalSymbol/EU4CustomColors.h"
 #include "DatingData.h"
+#include "EconomyManager/NationalBudget/Sector.h"
 #include "FlagCrafter/FlagCrafter.h"
 #include "IGIdeologiesMapper/IGIdeologiesMapping.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
@@ -32,6 +33,9 @@ class CountryTierMapper;
 } // namespace mappers
 namespace V3
 {
+class ClayManager;
+class LocalizationLoader;
+class SubState;
 struct Law;
 struct VanillaCommonCountryData
 {
@@ -83,6 +87,7 @@ struct ProcessedData
 
 	double industryWeight = 0; // Share of global industry a country should get, not normalized
 	int CPBudget = 0;				// Construction Points for a country to spend on it's development
+	std::map<std::string, std::shared_ptr<Sector>> industrySectors;
 
 	std::map<std::string, std::vector<std::string>> productionMethods; // Non-default production methods used by country, Building -> PMs
 
@@ -97,9 +102,6 @@ struct ProcessedData
 	std::map<FlagCrafter::FLAGTYPE, std::string> customFlags; // stuff we crafted ourselves.
 };
 
-class SubState;
-class ClayManager;
-class LocalizationLoader;
 class Country: commonItems::parser
 {
   public:
@@ -190,6 +192,7 @@ class Country: commonItems::parser
 	void distributeGovAdmins(int numGovAdmins) const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> topPercentileStatesByPop(double percentile) const;
 	[[nodiscard]] double calculateBureaucracyUsage(const std::map<std::string, Law>& lawsMap) const;
+	void addSector(const std::string& sectorName, const std::shared_ptr<Sector>& sector) { processedData.industrySectors.emplace(sectorName, sector); }
 
   private:
 	void registerKeys();
