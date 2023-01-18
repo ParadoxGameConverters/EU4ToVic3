@@ -19,6 +19,7 @@
 #include "PoliticalManager/PoliticalManager.h"
 #include <cmath>
 #include <iomanip>
+#include <numeric>
 #include <ranges>
 
 void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
@@ -268,7 +269,7 @@ double V3::EconomyManager::civlevelCountryBudgets(double& accumulatedWeight) con
 {
 	// The default way.
 
-	double totalIndustryFactor = 0.0;
+	double totalCivLevel = 0.0;
 	const double geoMeanPop = calculateGeoMeanCentralizedPops();
 	// while determining individual country's industry score, accumulate total industry factor & weight
 
@@ -277,11 +278,11 @@ double V3::EconomyManager::civlevelCountryBudgets(double& accumulatedWeight) con
 		const int popCount = country->getPopCount();
 		country->setIndustryWeight(popCount * (country->getProcessedData().civLevel / 100) * calculatePopDistanceFactor(popCount, geoMeanPop));
 		accumulatedWeight += country->getIndustryWeight();
-		totalIndustryFactor += country->getIndustryFactor();
+		totalCivLevel += country->getProcessedData().civLevel;
 	}
 
 	// adjust global total by average industry factor compared to baseline
-	const double globalIndustryFactor = (totalIndustryFactor / static_cast<double>(centralizedCountries.size()) / econDefines.getMeanIndustrialScore()) - 1;
+	const double globalIndustryFactor = (totalCivLevel / static_cast<double>(centralizedCountries.size()) / econDefines.getMeanCivlevel()) - 1;
 
 	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << (globalIndustryFactor + 1) * 100
 							  << "% industrial compared to baseline. Compensating";

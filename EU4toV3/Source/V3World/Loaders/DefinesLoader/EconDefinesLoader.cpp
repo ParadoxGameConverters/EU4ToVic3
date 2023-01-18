@@ -17,8 +17,8 @@ void V3::EconDefinesLoader::registerKeys()
 	registerKeyword("centralized_population_ratio", [this](std::istream& theStream) {
 		centralizedPopRatio = commonItems::getDouble(theStream);
 	});
-	registerKeyword("average_industrial_score", [this](std::istream& theStream) {
-		meanIndustrialScore = commonItems::getDouble(theStream);
+	registerKeyword("mean_civlevel", [this](std::istream& theStream) {
+		meanCivlevel = commonItems::getDouble(theStream);
 	});
 	registerKeyword("state_trait_strength", [this](std::istream& theStream) {
 		stateTraitStrength = commonItems::getDouble(theStream);

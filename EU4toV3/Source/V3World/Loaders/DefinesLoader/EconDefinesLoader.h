@@ -12,7 +12,7 @@ class EconDefinesLoader: commonItems::parser
 	void loadEconDefines(const std::string& filePath);
 	[[nodiscard]] const auto& getGlobalCP() const { return globalCP; }
 	[[nodiscard]] const auto& getCentralizedPopRatio() const { return centralizedPopRatio; }
-	[[nodiscard]] const auto& getMeanIndustrialScore() const { return meanIndustrialScore; }
+	[[nodiscard]] const auto& getMeanCivlevel() const { return meanCivlevel; }
 	[[nodiscard]] const auto& getStateTraitStrength() const { return stateTraitStrength; }
 	[[nodiscard]] const auto& getPacketFactor() const { return packetFactor; }
 
@@ -21,7 +21,7 @@ class EconDefinesLoader: commonItems::parser
 
 	int globalCP = 0;
 	double centralizedPopRatio = 0;
-	double meanIndustrialScore = 0;
+	double meanCivlevel = 0;
 	double stateTraitStrength = 0;
 	double packetFactor = 0;
 };
