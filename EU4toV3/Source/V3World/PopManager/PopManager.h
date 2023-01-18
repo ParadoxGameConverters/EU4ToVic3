@@ -24,6 +24,7 @@ namespace V3
 class ClayManager;
 class SubState;
 class State;
+class PoliticalManager;
 class PopManager
 {
   public:
@@ -42,6 +43,9 @@ class PopManager
 	void loadSlaveCultureRules(const std::string& filePath);
 	void injectReligionsIntoVanillaPops(const std::map<std::string, mappers::CultureDef>& cultureDefs);
 	void injectReligionsIntoDWPops(const std::map<std::string, mappers::CultureDef>& cultureDefs);
+	void alterSlaveCultures(const PoliticalManager& politicalManager,
+		 const ClayManager& clayManager,
+		 const std::map<std::string, mappers::CultureDef>& cultureDefs) const;
 
 	[[nodiscard]] std::string getDominantVanillaCulture(const std::string& stateName) const;
 	[[nodiscard]] std::string getDominantVanillaReligion(const std::string& stateName) const;

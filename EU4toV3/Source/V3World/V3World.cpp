@@ -153,6 +153,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.alterMajorFormables();
 	clayManager.filterInvalidClaims(politicalManager);
 	politicalManager.alterIGIdeologies(cultureMapper, religionMapper, clayManager);
+	popManager.alterSlaveCultures(politicalManager, clayManager, cultureMapper.getV3CultureDefinitions());
 
 	Log(LogLevel::Info) << "-> Converting Provinces";
 	Log(LogLevel::Progress) << "53 %";

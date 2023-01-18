@@ -6,6 +6,8 @@
 #include "CultureMapper/CultureMapper.h"
 #include "Loaders/PopLoader/PopLoader.h"
 #include "Log.h"
+#include "PoliticalManager/Country/Country.h"
+#include "PoliticalManager/PoliticalManager.h"
 #include "ReligionMapper/ReligionMapper.h"
 #include <cmath>
 #include <numeric>
@@ -500,4 +502,63 @@ std::map<std::string, V3::StatePops> V3::PopManager::injectReligionsIntoPops(con
 void V3::PopManager::loadSlaveCultureRules(const std::string& filePath)
 {
 	slaveCultureMapper.loadMappingRules(filePath);
+}
+
+void V3::PopManager::alterSlaveCultures(const PoliticalManager& politicalManager,
+	 const ClayManager& clayManager,
+	 const std::map<std::string, mappers::CultureDef>& cultureDefs) const
+{
+	Log(LogLevel::Info) << "-> Updating Slave Pop Cultures.";
+	auto counter = 0;
+
+	for (const auto& country: politicalManager.getCountries() | std::views::values)
+	{
+		std::set<std::string> cultureTraits;
+		for (const auto& culture: country->getProcessedData().cultures)
+		{
+			if (!cultureDefs.contains(culture))
+				continue;
+			const auto& traits = cultureDefs.at(culture).traits;
+			cultureTraits.insert(traits.begin(), traits.end());
+		}
+		std::optional<std::string> newSlaveCulture;
+		for (const auto& trait: cultureTraits)
+			if (slaveCultureMapper.getSlaveCulture(trait))
+			{
+				newSlaveCulture = *slaveCultureMapper.getSlaveCulture(trait);
+				break;
+			}
+		if (!newSlaveCulture)
+			continue;
+
+		for (const auto& subState: country->getSubStates())
+		{
+			if (subState->getSubStatePops().getSlavePopCount() == 0)
+				continue;
+			const auto& stateName = subState->getHomeStateName();
+			if (!clayManager.stateIsInRegion(stateName, "north_america_strategic_regions") &&
+				 !clayManager.stateIsInRegion(stateName, "south_america_strategic_regions"))
+				continue;
+
+			auto newSubStatePops = subState->getSubStatePops();
+			std::vector<Pop> newPops;
+			for (const auto& pop: subState->getSubStatePops().getPops())
+			{
+				if (pop.getType() == "slaves")
+				{
+					Pop newPop = pop;
+					newPop.setCulture(*newSlaveCulture);
+					newPops.emplace_back(newPop);
+					++counter;
+				}
+				else
+				{
+					newPops.emplace_back(pop);
+				}
+			}
+			newSubStatePops.setPops(newPops);
+			subState->setSubStatePops(newSubStatePops);
+		}
+	}
+	Log(LogLevel::Info) << "<> Updated " << counter << " Slave Pops.";
 }
