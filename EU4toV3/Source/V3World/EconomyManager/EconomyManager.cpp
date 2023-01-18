@@ -246,7 +246,7 @@ double V3::EconomyManager::calculateDateFactor(const Configuration::STARTDATE st
 	if (startDate == Configuration::STARTDATE::Dynamic)
 	{
 		const double factor = Country::yearCapFactor(dateData.lastEU4Date) - 1.0;
-		LOG(LogLevel::Info) << std::fixed << std::setprecision(0) << "Altering global industry by " << factor * 100 << "% due to start date of "
+		Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "Altering global industry by " << factor * 100 << "% due to start date of "
 								  << dateData.lastEU4Date << ".";
 		return factor;
 	}

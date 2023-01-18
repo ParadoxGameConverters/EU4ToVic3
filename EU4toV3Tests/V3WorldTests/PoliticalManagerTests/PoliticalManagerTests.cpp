@@ -92,6 +92,7 @@ prepMappers()
 
 	V3::PopManager popManager;
 	popManager.initializeVanillaPops(modFS);
+	popManager.initializeDWPops(modFS);
 	popManager.convertDemographics(clayManager, culMapper, relMapper, cultureLoader, religionLoader);
 
 	politicalManager.initializeVanillaCountries(modFS);
