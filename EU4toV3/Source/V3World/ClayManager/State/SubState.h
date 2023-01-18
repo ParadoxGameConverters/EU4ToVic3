@@ -133,8 +133,11 @@ class SubState
 	[[nodiscard]] double calcBuildingEU4Weight(const std::string& building, const mappers::BuildingMapper& buildingMapper) const;
 	[[nodiscard]] double calcBuildingTraitWeight(const Building& building, const std::map<std::string, StateModifier>& traitMap, double traitStrength) const;
 	[[nodiscard]] double calcBuildingInvestmentWeight(const Building& building) const;
+	[[nodiscard]] double calcBuildingIndustrialWeight(const Building& building) const;
 	[[nodiscard]] bool isBuildingValid(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] bool hasCapacity(const Building& building, const BuildingGroups& buildingGroups) const;
+	[[nodiscard]] int getRGOCapacity(const Building& building, const BuildingGroups& buildingGroups) const;
+	[[nodiscard]] bool hasRGO(const Building& building) const;
 
 	std::shared_ptr<State> homeState; // home state
 	std::shared_ptr<Country> owner;
@@ -151,7 +154,7 @@ class SubState
 	bool marketCapital = false;
 	double landshare = 0.0;									// % of State's resources that are substate's
 	double infrastructure = 0.0;							// limits the amount of industry a substate can support
-	std::map<std::string, int> resources;				// potential for a given resource based on landshare
+	std::map<std::string, int> resources;				// potential for a given resource based on landshare. {building_group -> #}
 	std::map<std::string, double> terrainFrequency; // Normalized vector (math-wise) of terrain in substate as %
 	std::vector<Demographic> demographics;
 	SubStatePops subStatePops;

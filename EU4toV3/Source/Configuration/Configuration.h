@@ -35,9 +35,8 @@ class Configuration: commonItems::parser
 	};
 	enum class ECONOMY
 	{
-		EuroCentric = 1,
-		CivLevel = 2,
-		DevPerPop = 3,
+		CivLevel = 1,
+		DevPerPop = 2,
 		Test = 0
 	};
 

@@ -68,7 +68,7 @@ struct ProcessedData
 	double literacy = 0;
 	double civLevel = 0;
 	bool westernized = false;
-	double industryFactor = 1.0; // Modifier set by EuroCentrism or calculated by dev
+	double industryFactor = 1.0; // Modifier set by EuroCentrism
 	mappers::IdeaEffect ideaEffect;
 	std::map<std::string, mappers::IGIdeologyMod> igIdeologyModifiers;
 	std::set<std::string> techs;
