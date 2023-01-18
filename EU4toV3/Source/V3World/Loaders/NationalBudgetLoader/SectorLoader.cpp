@@ -13,14 +13,13 @@ void V3::SectorLoader::loadSector(std::istream& theStream)
 double V3::SectorLoader::calculateWeight(const Country& country) const
 {
 	double theWeight = weight;
-
 	theWeight = mergeValidAdds(country) + theWeight;
 	theWeight = mergeValidMults(country) * theWeight;
 
 	// Severely penalize unrecognized countries for these sectors
 	if (industrial) // TODO(Gawquon) Might want to create 2 stages of this? Circle back after seeing it in action.
 	{
-		theWeight *= country.getProcessedData().civLevel * country.getIndustryFactor();
+		theWeight *= country.getProcessedData().civLevel / 100.0 * country.getIndustryFactor();
 	}
 
 	return theWeight;

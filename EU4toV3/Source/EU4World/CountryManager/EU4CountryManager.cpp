@@ -310,6 +310,7 @@ void EU4::CountryManager::removeLandlessNations()
 
 void EU4::CountryManager::assignGPStatuses()
 {
+	Log(LogLevel::Info) << "-> Assigning GP statuses.";
 	std::map<std::string, double> prestigeScores;
 	for (const auto& [tag, country]: countries)
 	{
@@ -323,4 +324,6 @@ void EU4::CountryManager::assignGPStatuses()
 	const std::set<std::string> prestigeTags = {prestigeOrder.begin(), prestigeOrder.end()};
 	for (const auto& tag: prestigeTags)
 		countries.at(tag)->setGP();
+
+	Log(LogLevel::Info) << "<> GPs assigned to " << prestigeTags.size() << " countries.";
 }

@@ -1,5 +1,6 @@
 #include "SubState.h"
 #include "EconomyManager/Building/Building.h"
+#include "EconomyManager/Building/BuildingGroup.h"
 #include "Log.h"
 #include "Mappers/CultureMapper/CultureMapper.h"
 #include "Mappers/ReligionMapper/ReligionMapper.h"
@@ -262,6 +263,19 @@ int V3::SubState::getRGOCapacity(const Building& building, const BuildingGroups&
 	// A building uses the capacity of their building group if that capacity exists
 	// otherwise they use the capacity of the parent of their building group
 	// if their building group's parent doesn't have capacity keep checking up the chain until a capacity is found or no more parents exist.
+
+	auto buildingGroupName = building.getBuildingGroup();
+	auto buildingGroup = buildingGroups.getBuildingGroupMap().at(buildingGroupName);
+	if (resources.contains(buildingGroupName))
+		return resources.at(buildingGroupName);
+
+	while (buildingGroup->getParentName())
+	{
+		buildingGroupName = *buildingGroup->getParentName();
+		buildingGroup = buildingGroups.getBuildingGroupMap().at(buildingGroupName);
+		if (resources.contains(buildingGroupName))
+			return resources.at(buildingGroupName);
+	}
 
 	return 0;
 }

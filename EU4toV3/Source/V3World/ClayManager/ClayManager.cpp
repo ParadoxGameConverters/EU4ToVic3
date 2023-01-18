@@ -835,3 +835,12 @@ void V3::ClayManager::filterInvalidClaims(const PoliticalManager& politicalManag
 	}
 	Log(LogLevel::Info) << "<> Filtered " << counter << " Dead Claims.";
 }
+
+void V3::ClayManager::redistributeResourcesandLandshares()
+{
+	for (const auto& state: states | std::views::values)
+	{
+		state->distributeLandshares();
+		state->distributeResources();
+	}
+}

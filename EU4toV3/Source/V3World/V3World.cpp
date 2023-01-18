@@ -130,6 +130,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	}
 
 	clayManager.squashAllSubStates(politicalManager);
+	clayManager.redistributeResourcesandLandshares();
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);
 	politicalManager.convertCharacters(datingData.lastEU4Date,
 		 configBlock.startDate,
@@ -168,6 +169,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	economyManager.loadMappersAndConfigs(allFS);
 	economyManager.establishBureaucracy(politicalManager);
 	economyManager.hardcodePorts();
+	economyManager.assignCountryCPBudgets(configBlock.economy, configBlock.startDate, datingData, politicalManager);
+	economyManager.balanceNationalBudgets();
 
 	Log(LogLevel::Info) << "-> Distributing Factories";
 	Log(LogLevel::Progress) << "60 %";

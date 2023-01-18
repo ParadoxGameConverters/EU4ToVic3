@@ -17,6 +17,7 @@ class Sector
 	[[nodiscard]] const auto& getCPBudget() const { return CPBudget; }
 	[[nodiscard]] const auto& getBuildings() const { return buildings; }
 	[[nodiscard]] bool hasBuilding(const std::string& building) const;
+	[[nodiscard]] auto getWeight() const { return weight; }
 
   private:
 	std::string name;

@@ -19,7 +19,6 @@
 #include "PoliticalManager/PoliticalManager.h"
 #include <cmath>
 #include <iomanip>
-#include <numeric>
 #include <ranges>
 
 void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
@@ -31,6 +30,8 @@ void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::
 		if (country->getProcessedData().type == "decentralized")
 			continue;
 		if (country->getSubStates().empty())
+			continue;
+		if (!country->getSourceCountry())
 			continue;
 
 		centralizedCountries.push_back(country);
@@ -157,21 +158,21 @@ void V3::EconomyManager::assignSubStateCPBudgets(const Configuration::ECONOMY ec
 
 void V3::EconomyManager::balanceNationalBudgets() const
 {
-	// TODO(Gawquon): Implement and add sector map to country processed data
 	for (const auto& country: centralizedCountries)
 	{
 		double totalWeight = 0;
 
 		for (const auto& blueprint: nationalBudgets.getSectorBlueprints())
 		{
-			// Add to country Sector Map. Sector name -> Sector
-			// Accumulate totalWeight
+			const auto sector = std::make_shared<Sector>(blueprint, *country);
+			country->addSector(blueprint.getName(), sector);
+			totalWeight += sector->getWeight();
 		}
 
-		// for (const auto& sector: country->getProcessedData().sectors | std::views::values)
-		// {
-		//	sector.calculateBudget(totalWeight, country->getCPBudget());
-		// }
+		for (const auto& sector: country->getProcessedData().industrySectors | std::views::values)
+		{
+			sector->calculateBudget(totalWeight, country->getCPBudget());
+		}
 	}
 }
 
