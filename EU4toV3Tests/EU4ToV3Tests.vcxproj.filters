@@ -1114,6 +1114,18 @@
     <ClCompile Include="MapperTests\MinorityPopMapperTests\MinorityPopTests.cpp">
       <Filter>MapperTests\MinorityPopMapperTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\SlaveCultureMapper\SlaveCultureMapper.cpp">
+      <Filter>ConverterFiles\Mappers\SlaveCultureMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\SlaveCultureMapper\SlaveCultureMapping.cpp">
+      <Filter>ConverterFiles\Mappers\SlaveCultureMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\SlaveCultureMapperTests\SlaveCultureMapperTests.cpp">
+      <Filter>MapperTests\SlaveCultureMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\SlaveCultureMapperTests\SlaveCultureMappingTests.cpp">
+      <Filter>MapperTests\SlaveCultureMapperTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1824,6 +1836,12 @@
     <Filter Include="MapperTests\MinorityPopMapperTests">
       <UniqueIdentifier>{f5ab94ff-af5b-4562-a4d0-8085a1f20269}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\Mappers\SlaveCultureMapper">
+      <UniqueIdentifier>{5c3fd30c-7d4b-4f86-868f-54fb767a4330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\SlaveCultureMapperTests">
+      <UniqueIdentifier>{81d64d41-8073-4105-a2e6-15107884eb19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -2105,6 +2123,9 @@
       <Filter>TestFiles\vic3installation\game\common\country_formation</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\ig_ideologies.txt">
+      <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\slave_culture_map.txt">
       <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>
