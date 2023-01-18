@@ -25,11 +25,36 @@ void V3::PopManager::initializeVanillaPops(const commonItems::ModFilesystem& mod
 	Log(LogLevel::Info) << "<> Vanilla had " << total << " pops.";
 }
 
+void V3::PopManager::initializeDWPops(const commonItems::ModFilesystem& modFS)
+{
+	Log(LogLevel::Info) << "-> Loading Decentralized World Pops.";
+	PopLoader popLoader;
+	popLoader.loadPops(modFS);
+	dwStatePops = popLoader.getStatePops();
+
+	const auto total = std::accumulate(dwStatePops.begin(), dwStatePops.end(), 0, [](int sum, const std::pair<std::string, StatePops>& statePop) {
+		return sum + statePop.second.getPopCount();
+	});
+
+	Log(LogLevel::Info) << "<> Decentralized World had " << total << " pops.";
+}
+
 std::optional<V3::SubStatePops> V3::PopManager::getVanillaSubStatePops(const std::string& stateName, const std::string& ownerTag) const
 {
 	if (!vanillaStatePops.contains(stateName))
 		return std::nullopt;
 	const auto& subStatePops = vanillaStatePops.at(stateName).getSubStatePops();
+	for (const auto& subStatePop: subStatePops)
+		if (subStatePop.getTag() == ownerTag)
+			return subStatePop;
+	return std::nullopt;
+}
+
+std::optional<V3::SubStatePops> V3::PopManager::getDWSubStatePops(const std::string& stateName, const std::string& ownerTag) const
+{
+	if (!dwStatePops.contains(stateName))
+		return std::nullopt;
+	const auto& subStatePops = dwStatePops.at(stateName).getSubStatePops();
 	for (const auto& subStatePop: subStatePops)
 		if (subStatePop.getTag() == ownerTag)
 			return subStatePop;
@@ -77,7 +102,7 @@ void V3::PopManager::applyHomeLands(const ClayManager& clayManager) const
 		if (state->isSea() || state->isLake())
 			continue;
 
-		if (!vanillaStatePops.contains(stateName))
+		if (!dwStatePops.contains(stateName))
 		{
 			Log(LogLevel::Warning) << "State " << stateName << " is unknown. Not processing for homelands.";
 			continue;
@@ -135,6 +160,42 @@ std::string V3::PopManager::getDominantVanillaReligion(const std::string& stateN
 	return *best;
 }
 
+std::string V3::PopManager::getDominantDWCulture(const std::string& stateName) const
+{
+	if (!dwStatePops.contains(stateName))
+	{
+		Log(LogLevel::Warning) << "PopManager knows nothing about DW state " << stateName;
+		return "noculture";
+	}
+
+	const auto best = dwStatePops.at(stateName).getDominantCulture();
+	if (!best)
+	{
+		Log(LogLevel::Warning) << "DW state " << stateName << " is dry!";
+		return "noculture";
+	}
+
+	return *best;
+}
+
+std::string V3::PopManager::getDominantDWReligion(const std::string& stateName) const
+{
+	if (!dwStatePops.contains(stateName))
+	{
+		Log(LogLevel::Warning) << "PopManager knows nothing about DW state " << stateName;
+		return "noreligion";
+	}
+
+	const auto best = dwStatePops.at(stateName).getDominantReligion();
+	if (!best)
+	{
+		Log(LogLevel::Warning) << "DW state " << stateName << " is dry!";
+		return "noreligion";
+	}
+
+	return *best;
+}
+
 void V3::PopManager::generatePops(const ClayManager& clayManager)
 {
 	const auto worldTotal = std::accumulate(vanillaStatePops.begin(), vanillaStatePops.end(), 0, [](int sum, const auto& statePops) {
@@ -159,7 +220,7 @@ void V3::PopManager::generatePops(const ClayManager& clayManager)
 		if (state->isSea() || state->isLake())
 			continue;
 
-		if (!vanillaStatePops.contains(stateName))
+		if (!vanillaStatePops.contains(stateName) || !dwStatePops.contains(stateName))
 			continue;
 
 		auto minorityPopCount = 0;
@@ -170,6 +231,8 @@ void V3::PopManager::generatePops(const ClayManager& clayManager)
 		// TODO: ... or something.
 		// do not count minorities towards vanilla population as they get added separately.
 		const auto vanillaStatePopCount = vanillaStatePops.at(stateName).getPopCount() - minorityPopCount;
+		// dw pops don't have minorities.
+		const auto dwStatePopCount = dwStatePops.at(stateName).getPopCount();
 
 		/* Now there's a few things to keep in mind. The substate we're operating on can be any of these:
 		 *
@@ -180,22 +243,23 @@ void V3::PopManager::generatePops(const ClayManager& clayManager)
 		 * Right now we're concerned only with 3, and after that 1. 2 doesn't need work done.
 		 * */
 
-		// what is our unassigned pop count? (vanilla statePopCount - what's in imported substates already)
-		auto unassignedPopCount = vanillaStatePopCount - state->getStatePopCount();
-
 		// assigned provinces are provinces in substates that have pops inside. We need to exclude them when building ratios.
 		const auto assignedProvinceCount = std::accumulate(state->getSubStates().begin(), state->getSubStates().end(), 0, [](int sum, const auto& subState) {
 			if (subState->getSubStatePops().getPopCount() > 0)
 				sum += static_cast<int>(subState->getProvinces().size());
 			return sum;
 		});
-		const auto unassignedProvinceCount = static_cast<int>(state->getProvinces().size()) - assignedProvinceCount;
-		generatePopsForShovedSubStates(state, unassignedPopCount, unassignedProvinceCount);
 
-		unassignedPopCount = vanillaStatePopCount - state->getStatePopCount();
+		// what is our unassigned pop count? (original statePopCount - what's in imported substates already)
+		// shoved states use dw popcount and pops
+		const auto unassignedDWPopCount = dwStatePopCount - state->getStatePopCount();
+		const auto unassignedProvinceCount = static_cast<int>(state->getProvinces().size()) - assignedProvinceCount;
+		generatePopsForShovedSubStates(state, unassignedDWPopCount, unassignedProvinceCount);
 
 		// now iterate again and distribute that unassigned count according to weights.
-		generatePopsForNormalSubStates(state, unassignedPopCount);
+		// normal/imported states use vanilla popcount and pops (with minorities)
+		const auto unassignedVanillaPopCount = vanillaStatePopCount - state->getStatePopCount();
+		generatePopsForNormalSubStates(state, unassignedVanillaPopCount);
 	}
 
 	const auto worldSum = std::accumulate(clayManager.getStates().begin(), clayManager.getStates().end(), 0, [](int sum, const auto& state) {
@@ -204,8 +268,8 @@ void V3::PopManager::generatePops(const ClayManager& clayManager)
 
 	const auto worldDelta = worldSum - worldTotal;
 	Log(LogLevel::Info) << "<> World now has " << worldSum << " pops (delta: " << worldDelta << " pops).";
-	if (std::abs(static_cast<double>(worldDelta) / static_cast<double>(worldTotal)) > 0.0001)
-		Log(LogLevel::Warning) << "World delta is over point one permille (" << std::abs(static_cast<double>(worldDelta) / static_cast<double>(worldTotal))
+	if (std::abs(static_cast<double>(worldDelta) / static_cast<double>(worldTotal)) > 0.001)
+		Log(LogLevel::Warning) << "World delta is over one permille (" << std::abs(static_cast<double>(worldDelta) / static_cast<double>(worldTotal))
 									  << "). This is troubling!";
 	else
 		Log(LogLevel::Info) << ">> World delta at " << std::abs(static_cast<double>(worldDelta) / static_cast<double>(worldTotal)) << ". Acceptable.";
@@ -300,34 +364,10 @@ void V3::PopManager::generatePopsForShovedSubStates(const std::shared_ptr<State>
 		{
 			const auto generatedPopCount = generatePopCountForShovedSubState(subState, unassignedPopCount, unassignedProvinceCount);
 			// We have no demographics! Use best guess. Also default religion to culture default.
-			auto pop = Pop(getDominantVanillaCulture(stateName), "", "", generatedPopCount);
+			auto pop = Pop(getDominantDWCulture(stateName), "", "", generatedPopCount);
 			subState->addPop(pop);
-			subState->setStageForMinorities(true); // go to this substate later and do minorities.
-																// and we're done with this one.
+			// and we're done with this one.
 		}
-	}
-	if (!vanillaMinorityStatePops.contains(state->getName()) || vanillaMinorityStatePops.at(stateName).getPopCount() == 0)
-	{
-		for (const auto& subState: state->getSubStates())
-			subState->setStageForMinorities(false);
-		return;
-	}
-
-	// minorities.
-	for (const auto& subState: state->getSubStates())
-	{
-		if (!subState->isStagedForMinorities())
-			continue;
-		const auto generatedPopCount = generatePopCountForShovedSubState(subState, unassignedPopCount, unassignedProvinceCount);
-		// if we assigned 10k out of 80k unassigned pops to this shoved substate, then multiply vanilla minority popcount by 1/8, and get that many pops.
-		const double minorityPopSizeTotal = std::round(static_cast<double>(vanillaMinorityStatePops.at(stateName).getPopCount()) *
-																	  static_cast<double>(generatedPopCount) / static_cast<double>(unassignedPopCount));
-		auto minorityPops = generateMinorityPops(stateName,
-			 minorityPopSizeTotal,
-			 subState->getSubStatePops().getDominantCulture(),
-			 subState->getSubStatePops().getDominantReligion());
-		subState->addPops(minorityPops);
-		subState->setStageForMinorities(false);
 	}
 }
 
@@ -396,10 +436,22 @@ void V3::PopManager::loadMinorityPopRules(const std::string& filePath)
 void V3::PopManager::injectReligionsIntoVanillaPops(const std::map<std::string, mappers::CultureDef>& cultureDefs)
 {
 	Log(LogLevel::Info) << "-> Injecting Religion into Vanilla Pops.";
-	auto counter = 0;
+	vanillaStatePops = injectReligionsIntoPops(cultureDefs, vanillaStatePops);
+	Log(LogLevel::Info) << "<> Updated vanilla pops.";
+}
 
+void V3::PopManager::injectReligionsIntoDWPops(const std::map<std::string, mappers::CultureDef>& cultureDefs)
+{
+	Log(LogLevel::Info) << "-> Injecting Religion into Decentralized World Pops.";
+	dwStatePops = injectReligionsIntoPops(cultureDefs, dwStatePops);
+	Log(LogLevel::Info) << "<> Updated decentralized world pops.";
+}
+
+std::map<std::string, V3::StatePops> V3::PopManager::injectReligionsIntoPops(const std::map<std::string, mappers::CultureDef>& cultureDefs,
+	 const std::map<std::string, StatePops>& pops)
+{
 	std::map<std::string, StatePops> newVanillaPops;
-	for (const auto& [stateName, statePops]: vanillaStatePops)
+	for (const auto& [stateName, statePops]: pops)
 	{
 		StatePops newStatePops;
 		newStatePops.setStateName(stateName);
@@ -411,16 +463,13 @@ void V3::PopManager::injectReligionsIntoVanillaPops(const std::map<std::string, 
 			{
 				auto newPop = pop;
 				if (pop.getReligion().empty() && cultureDefs.contains(pop.getCulture()))
-				{
 					newPop.setReligion(cultureDefs.at(pop.getCulture()).religion);
-					++counter;
-				}
+
 				newSubStatePops.addPop(newPop);
 			}
 			newStatePops.addSubStatePops(newSubStatePops);
 		}
 		newVanillaPops.emplace(stateName, newStatePops);
 	}
-	vanillaStatePops.swap(newVanillaPops);
-	Log(LogLevel::Info) << "<> Updated " << counter << " vanilla pops.";
+	return newVanillaPops;
 }

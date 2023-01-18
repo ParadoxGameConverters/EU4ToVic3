@@ -196,7 +196,7 @@ V3::PoliticalManager::CulturalSubStates V3::PoliticalManager::sortSubStatesByCul
 			else
 			{
 				// Ask popmanager for something vanillaish for the entire state (can't use our substates for this).
-				leadCulture = popManager.getDominantVanillaCulture(stateName);
+				leadCulture = popManager.getDominantDWCulture(stateName);
 			}
 			if (!culturalSubStates.contains(leadCulture))
 				culturalSubStates.emplace(leadCulture, std::vector<std::shared_ptr<SubState>>{});

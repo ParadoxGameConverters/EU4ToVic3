@@ -9,6 +9,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	// We use decentralized world mod to fill out wasteland and out-of-scope clay with decentralized tribes.
 	if (!configuration.configBlock.vn)
 		overrideMods.emplace_back(Mod{"Decentralized World", "configurables/decentralized_world/"});
+	const auto vanillaFS = commonItems::ModFilesystem(V3Path, {});
 	const auto dwFS = commonItems::ModFilesystem(V3Path, overrideMods);
 	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output/"});
 	const auto allFS = commonItems::ModFilesystem(V3Path, overrideMods);
@@ -78,8 +79,10 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	Log(LogLevel::Progress) << "49 %";
 	// soaking up vanilla pops
-	popManager.initializeVanillaPops(dwFS);
+	popManager.initializeVanillaPops(vanillaFS);
+	popManager.initializeDWPops(dwFS);
 	popManager.injectReligionsIntoVanillaPops(cultureMapper.getV3CultureDefinitions());
+	popManager.injectReligionsIntoDWPops(cultureMapper.getV3CultureDefinitions());
 
 	// inject vanilla substates into map holes.
 	clayManager.injectVanillaSubStates(dwFS, politicalManager, popManager, configuration.configBlock.vn);
