@@ -169,7 +169,7 @@ TEST(DISBALED_V3World_EconomyManagerTests, GlobalCPDistributionTechGroup)
 	std::streambuf* cout_buffer = std::cout.rdbuf();
 	std::cout.rdbuf(log.rdbuf());
 
-	econManager.assignCountryCPBudgets(Configuration::ECONOMY::EuroCentric, Configuration::STARTDATE::Vanilla, DatingData(), politicalManager);
+	econManager.assignCountryCPBudgets(Configuration::ECONOMY::CivLevel, Configuration::STARTDATE::Vanilla, DatingData(), politicalManager);
 
 	std::cout.rdbuf(cout_buffer);
 }

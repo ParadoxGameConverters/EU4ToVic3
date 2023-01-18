@@ -37,6 +37,17 @@ bool V3::MathScript::isValid(const Country& country) const
 	{
 		return country.getSourceCountry()->isGP() == (triggerValue == "yes");
 	}
+	if (trigger == "industry_score_less_than")
+	{
+		try
+		{
+			return country.getIndustryFactor() * 5 < std::stoi(triggerValue);
+		}
+		catch (const std::exception& e)
+		{
+			Log(LogLevel::Error) << "Failed to understand industry score " << triggerValue << ": " << e.what();
+		}
+	}
 
 	Log(LogLevel::Error) << "Unknown trigger: " << trigger << " in MathScript.";
 	return false;
