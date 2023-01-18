@@ -188,6 +188,12 @@ double V3::SubState::calcBuildingInvestmentWeight(const Building& building) cons
 	return 1;
 }
 
+double V3::SubState::calcBuildingIndustrialWeight(const Building& building) const
+{
+	// TODO(Gawquon): This is where Eurocentrisim's industry score will come in.
+	return 0.0;
+}
+
 bool V3::SubState::isBuildingValid(const Building& building, const BuildingGroups& buildingGroups) const
 {
 	// Government Admin is a special case, we're not building it
@@ -195,7 +201,7 @@ bool V3::SubState::isBuildingValid(const Building& building, const BuildingGroup
 	{
 		return false;
 	}
-	// TODO(Gawquon): Update when ports go off harcode
+	// TODO(Gawquon): Update when ports go off hardcode
 	if (building.getName() == "building_port")
 	{
 		return false;
@@ -213,6 +219,10 @@ bool V3::SubState::isBuildingValid(const Building& building, const BuildingGroup
 	{
 		return false;
 	}
+	if (!hasRGO(building))
+	{
+		return false;
+	}
 	if (!hasCapacity(building, buildingGroups))
 	{
 		return false;
@@ -223,8 +233,45 @@ bool V3::SubState::isBuildingValid(const Building& building, const BuildingGroup
 
 bool V3::SubState::hasCapacity(const Building& building, const BuildingGroups& buildingGroups) const
 {
-	// TODO(Gawquon)
-	return false;
+	// If no cap on building, return true
+	if (const auto& isCapped = buildingGroups.tryGetIsCapped(building.getBuildingGroup()); isCapped && !isCapped.value())
+	{
+		return true;
+	}
+
+	return getRGOCapacity(building, buildingGroups) > 0;
+}
+
+int V3::SubState::getRGOCapacity(const Building& building, const BuildingGroups& buildingGroups) const
+{
+	/*
+	 NOTE: arable_land is stored in resources as bg_agriculture = #
+	 all arable_resources have bg_agriculture as a parent group eventually, even if not directly
+	 resources is stored in SubState, already calced from State and landshare
+
+
+	 arable_land = 120
+	 arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" "bg_cotton_plantations" }
+	 capped_resources = {
+		  bg_sulfur_mining = 20
+		  bg_logging = 2
+		  bg_fishing = 6
+	 }
+	 */
+
+	// A building uses the capacity of their building group if that capacity exists
+	// otherwise they use the capacity of the parent of their building group
+	// if their building group's parent doesn't have capacity keep checking up the chain until a capacity is found or no more parents exist.
+
+	return 0;
+}
+
+bool V3::SubState::hasRGO(const Building& building) const
+{
+	if (const auto& arables = homeState->getArableResources(); std::ranges::find(arables, building.getBuildingGroup()) != arables.end())
+		return true;
+
+	return homeState->getCappedResources().contains(building.getBuildingGroup());
 }
 
 double V3::SubState::calcBuildingWeight(const Building& building,

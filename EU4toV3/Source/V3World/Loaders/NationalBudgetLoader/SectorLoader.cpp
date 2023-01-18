@@ -18,12 +18,9 @@ double V3::SectorLoader::calculateWeight(const Country& country) const
 	theWeight = mergeValidMults(country) * theWeight;
 
 	// Severely penalize unrecognized countries for these sectors
-	if (industrial)
+	if (industrial) // TODO(Gawquon) Might want to create 2 stages of this? Circle back after seeing it in action.
 	{
-		if (country.getProcessedData().type != "recognized")
-		{
-			theWeight *= 0.05;
-		}
+		theWeight *= country.getProcessedData().civLevel * country.getIndustryFactor();
 	}
 
 	return theWeight;

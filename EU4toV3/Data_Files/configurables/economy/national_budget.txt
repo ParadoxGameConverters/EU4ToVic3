@@ -64,6 +64,8 @@ extraction = {
 }
 
 mining = {
+industrial = yes
+
     weight = 10
 
     building_iron_mine
@@ -120,6 +122,12 @@ light_industry = {
     building_glassworks
     building_paper_mills
     building_shipyards
+
+    # Industry score from configurables/westernization.txt. No effect if no EuroCentrism
+    multiply = {
+        value = 0
+        industry_score_less_than = 2
+    }
 }
 
 western_industry = {

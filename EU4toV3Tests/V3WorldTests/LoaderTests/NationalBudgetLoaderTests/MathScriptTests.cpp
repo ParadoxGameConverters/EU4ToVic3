@@ -10,16 +10,23 @@ TEST(V3World_MathScriptTests, MathScriptTriggersAreRecognized)
 	std::stringstream lawInput;
 	std::stringstream colonyInput;
 	std::stringstream GPInput;
+	std::stringstream industryInput;
 	std::stringstream invalidInput;
 
 	lawInput << "\tvic3_law = law_serfdom";
 	colonyInput << "\tis_colony = yes";
+	GPInput << "\tis_eu4_gp = yes";
+	industryInput << "\tindustry_score_less_than = 2";
 	invalidInput << "\tis_awesome = yes";
 
 	V3::MathScript law;
 	law.loadMathScript(lawInput);
 	V3::MathScript colony;
 	colony.loadMathScript(colonyInput);
+	V3::MathScript gp;
+	gp.loadMathScript(GPInput);
+	V3::MathScript industry;
+	industry.loadMathScript(industryInput);
 	V3::MathScript invalid;
 	invalid.loadMathScript(invalidInput);
 
@@ -28,16 +35,20 @@ TEST(V3World_MathScriptTests, MathScriptTriggersAreRecognized)
 
 	EXPECT_FALSE(law.isValid(country));
 	EXPECT_FALSE(colony.isValid(country));
+	EXPECT_FALSE(gp.isValid(country));
+	EXPECT_FALSE(industry.isValid(country));
 	EXPECT_FALSE(invalid.isValid(country));
 
 
 	V3::ProcessedData data;
 	data.laws.emplace("law_serfdom");
+	data.industryFactor = 0.2;
 
 	std::stringstream eu4Input;
 	eu4Input << "colonial_parent = AAA";
 
 	auto sourceCountry = std::make_shared<EU4::Country>("TAG", eu4Input);
+	sourceCountry->setGP();
 
 	country.setProcessedData(data);
 	country.setSourceCountry(sourceCountry);
@@ -45,6 +56,8 @@ TEST(V3World_MathScriptTests, MathScriptTriggersAreRecognized)
 
 	EXPECT_TRUE(law.isValid(country));
 	EXPECT_TRUE(colony.isValid(country));
+	EXPECT_TRUE(gp.isValid(country));
+	EXPECT_TRUE(industry.isValid(country));
 }
 
 TEST(V3World_AddScriptTests, AddScriptsAdds)

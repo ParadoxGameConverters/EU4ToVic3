@@ -9,7 +9,7 @@ TEST(V3World_EconDefinesLoaderTests, EconDefinesCanBeLoaded)
 
 	EXPECT_EQ(0, econDefinesLoader.getGlobalCP());
 	EXPECT_DOUBLE_EQ(0, econDefinesLoader.getCentralizedPopRatio());
-	EXPECT_DOUBLE_EQ(0, econDefinesLoader.getMeanIndustrialScore());
+	EXPECT_DOUBLE_EQ(0, econDefinesLoader.getMeanCivlevel());
 	EXPECT_DOUBLE_EQ(0, econDefinesLoader.getStateTraitStrength());
 	EXPECT_DOUBLE_EQ(0, econDefinesLoader.getPacketFactor());
 
@@ -17,7 +17,7 @@ TEST(V3World_EconDefinesLoaderTests, EconDefinesCanBeLoaded)
 
 	EXPECT_EQ(1451750, econDefinesLoader.getGlobalCP());
 	EXPECT_DOUBLE_EQ(0.975, econDefinesLoader.getCentralizedPopRatio());
-	EXPECT_DOUBLE_EQ(8, econDefinesLoader.getMeanIndustrialScore());
+	EXPECT_DOUBLE_EQ(80, econDefinesLoader.getMeanCivlevel());
 	EXPECT_DOUBLE_EQ(0.5, econDefinesLoader.getStateTraitStrength());
 	EXPECT_DOUBLE_EQ(-0.5, econDefinesLoader.getPacketFactor());
 }
