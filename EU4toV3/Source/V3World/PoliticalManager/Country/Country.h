@@ -182,6 +182,7 @@ class Country: commonItems::parser
 	void addCustomFlag(FlagCrafter::FLAGTYPE flagType, const std::string& flagName) { processedData.customFlags.emplace(flagType, flagName); }
 	[[nodiscard]] const auto& getCustomFlags() const { return processedData.customFlags; }
 
+	[[nodiscard]] static double yearCapFactor(const date& targetDate);
 	[[nodiscard]] int getTechInfraCap(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] double getTechInfraMult(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] bool hasAnyOfTech(const std::vector<std::string>& techs) const;
@@ -204,7 +205,6 @@ class Country: commonItems::parser
 	void calculateBaseLiteracy(const mappers::ReligionMapper& religionMapper);
 	void calculateWesternization(double topTech, double topInstitutions, const mappers::CultureMapper& cultureMapper, Configuration::EUROCENTRISM eurocentrism);
 	void adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper);
-	[[nodiscard]] static double yearCapFactor(const date& targetDate);
 	void applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setDecentralizedEffects();
 	void determineCountryType();
