@@ -25,6 +25,7 @@ namespace mappers
 {
 class CultureMapper;
 class ReligionMapper;
+class SlaveCultureMapper;
 } // namespace mappers
 namespace V3
 {
@@ -75,8 +76,7 @@ class SubState
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader);
 
-	void generatePops(int totalAmount);
-
+	void generatePops(int totalAmount, int slaveAmount);
 
 	[[nodiscard]] const auto& getHomeState() const { return homeState; }
 	[[nodiscard]] const auto& getOwner() const { return owner; }

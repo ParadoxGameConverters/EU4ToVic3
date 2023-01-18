@@ -55,6 +55,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.loadMajorFormables("blankMod/output/common/country_formation/00_major_formables.txt");
 	politicalManager.loadIGIdeologiesMapperRules("configurables/ig_ideologies.txt");
 	popManager.loadMinorityPopRules("configurables/minority_pops.txt");
+	popManager.loadSlaveCultureRules("configurables/slave_culture_map.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	localizationLoader.scrapeLocalizations(dwFS);
 	vanillaLocalizationLoader.scrapeLocalizations(blankModFS);

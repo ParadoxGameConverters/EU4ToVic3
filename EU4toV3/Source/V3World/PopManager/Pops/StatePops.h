@@ -17,6 +17,7 @@ class StatePops
 	void setStateName(const std::string& theName) { stateName = theName; }
 
 	[[nodiscard]] int getPopCount() const;
+	[[nodiscard]] int getSlavePopCount() const;
 	[[nodiscard]] const auto& getSubStatePops() const { return subStatePops; }
 	[[nodiscard]] const auto& getStateName() const { return stateName; }
 

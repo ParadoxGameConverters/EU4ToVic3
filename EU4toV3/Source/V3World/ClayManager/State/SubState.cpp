@@ -417,7 +417,7 @@ void V3::SubState::convertDemographics(const ClayManager& clayManager,
 	demographics.swap(newDemographics);
 }
 
-void V3::SubState::generatePops(int totalAmount)
+void V3::SubState::generatePops(int totalAmount, const int slaveAmount)
 {
 	// At this moment we're not concerned with pop types. HOWEVER, demographics do carry a varying amount of ratios,
 	// which are (were?) supposed to apply to those types.
@@ -436,8 +436,21 @@ void V3::SubState::generatePops(int totalAmount)
 	for (const auto& demo: demographics)
 	{
 		const double demoSum = (demo.upperRatio + demo.middleRatio + demo.lowerRatio) / 3;
-		auto pop = Pop(demo.culture, demo.religion, "", static_cast<int>(round(static_cast<double>(totalAmount) * demoSum / demoTotal)));
-		subStatePops.addPop(pop);
+		if (totalAmount - slaveAmount >= 0)
+		{
+			auto pop = Pop(demo.culture, demo.religion, "", static_cast<int>(round(static_cast<double>(totalAmount - slaveAmount) * demoSum / demoTotal)));
+			subStatePops.addPop(pop);
+			if (slaveAmount > 0)
+			{
+				auto slavePop = Pop(demo.culture, demo.religion, "slaves", static_cast<int>(round(static_cast<double>(slaveAmount) * demoSum / demoTotal)));
+				subStatePops.addPop(slavePop);
+			}
+		}
+		else
+		{
+			Log(LogLevel::Warning) << "Substate in " << getHomeStateName() << " wants " << slaveAmount << " slaves but only gets " << totalAmount
+										  << " pops! Bailing!";
+		}
 	}
 }
 

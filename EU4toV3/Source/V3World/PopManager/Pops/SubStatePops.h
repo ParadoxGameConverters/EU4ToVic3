@@ -18,6 +18,7 @@ class SubStatePops
 	void setTag(const std::string& theTag) { tag = theTag; }
 
 	[[nodiscard]] int getPopCount() const;
+	[[nodiscard]] int getSlavePopCount() const;
 	[[nodiscard]] const auto& getPops() const { return pops; }
 	[[nodiscard]] const auto& getTag() const { return tag; }
 

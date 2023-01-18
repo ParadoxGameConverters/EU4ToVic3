@@ -39,6 +39,7 @@ class State: commonItems::parser
 	[[nodiscard]] ProvinceMap getUnassignedProvinces() const;
 	[[nodiscard]] bool hasUnassignedProvinces() const;
 	[[nodiscard]] int getStatePopCount() const;
+	[[nodiscard]] int getStateSlavePopCount() const;
 	[[nodiscard]] double getTotalSubStateWeight() const;
 
   private:

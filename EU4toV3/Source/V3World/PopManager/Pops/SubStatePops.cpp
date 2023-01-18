@@ -10,6 +10,16 @@ int V3::SubStatePops::getPopCount() const
 	});
 }
 
+int V3::SubStatePops::getSlavePopCount() const
+{
+	return std::accumulate(pops.begin(), pops.end(), 0, [](int sum, const auto& pop) {
+		if (pop.getType() == "slaves")
+			return sum + pop.getSize();
+		else
+			return sum;
+	});
+}
+
 std::optional<std::string> V3::SubStatePops::getDominantCulture() const
 {
 	std::map<std::string, int> cultureCounts;
