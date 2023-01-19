@@ -10,6 +10,8 @@ class Building: commonItems::parser
 	Building() = default;
 	void loadBuilding(std::istream& theStream, const std::map<std::string, int>& costTiers);
 	void setName(const std::string& theName) { name = theName; }
+	void setLevel(const int theLevel) { level = theLevel; }
+	void setWeight(const double theWeight) { weight = theWeight; }
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getBuildingGroup() const { return buildingGroup; }
@@ -17,6 +19,9 @@ class Building: commonItems::parser
 	[[nodiscard]] const auto& getConstructionCost() const { return constructionCost; }
 	[[nodiscard]] const auto& getUnlockingTechs() const { return unlockingTechs; }
 	[[nodiscard]] const auto& isBuildable() const { return buildable; }
+
+	[[nodiscard]] const auto& getLevel() const { return level; }
+	[[nodiscard]] const auto& getWeight() const { return weight; }
 
   private:
 	void registerKeys(const std::map<std::string, int>& costTiers);
@@ -27,6 +32,9 @@ class Building: commonItems::parser
 	int constructionCost = 50;
 	std::vector<std::string> unlockingTechs;
 	bool buildable = true;
+
+	int level = 0;
+	double weight = 0;
 };
 } // namespace V3
 

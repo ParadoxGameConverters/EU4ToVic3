@@ -14,6 +14,7 @@ class NationalBudgetLoader: commonItems::parser
 
 	[[nodiscard]] const auto& getSectorBlueprints() const { return sectorBlueprints; }
 	[[nodiscard]] const auto& getBuildingSectorMap() const { return buildingSectorMap; }
+	[[nodiscard]] std::optional<std::string> getSectorName(const std::string& buildingName) const;
 
   private:
 	void registerKeys();

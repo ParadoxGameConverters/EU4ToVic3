@@ -90,6 +90,10 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 
 void V3::EconomyManager::hardcodePorts() const
 {
+	Building portTemplate;
+	portTemplate.setName("building_port");
+	portTemplate.setLevel(1);
+
 	for (const auto& country: centralizedCountries)
 	{
 		for (const auto& substate: country->getSubStates())
@@ -98,7 +102,8 @@ void V3::EconomyManager::hardcodePorts() const
 				continue; // don't affect states imported from vanilla.
 			if (substate->getHomeState()->isCoastal())
 			{
-				substate->setBuildingLevel("building_port", 1);
+				auto port = std::make_shared<Building>(portTemplate);
+				substate->addBuilding(port);
 				substate->getOwner()->addTech("navigation");
 			}
 		}
@@ -196,6 +201,9 @@ void V3::EconomyManager::buildBuildings() const
 			return lhs->getCPBudget() > rhs->getCPBudget();
 		};
 
+		// Prepare sectors, this is probably where a sub-fxn will live
+		const auto& sectors = country->getProcessedData().industrySectors;
+
 		// Copy substate vector. We will be sorting this one and removing finished substates until it is empty
 		// Sort Vector, remove substates that have less than the minimum pre-set construction cost, default to 50
 		auto subStatesByBudget(country->getSubStates());
@@ -209,21 +217,50 @@ void V3::EconomyManager::buildBuildings() const
 			// Pick the substate with the most budget
 			const auto& substate = subStatesByBudget[0];
 
+			// Flag to see if negotiation was successful
+			bool talksFail = true;
 
-			// Copy Sectors?
-			// while Sectors not empty
-			// Pick highest scoring building
-			// Country sees if it agrees
+			// Find the building state wants most that is in the country budget
+			substate->weightBuildings(buildings, buildingGroups, buildingTerrainModifiers, buildingMapper, stateTraits, econDefines.getStateTraitStrength());
+			for (const auto& building: substate->getBuildings())
+			{
+				const int baseCost = building->getConstructionCost();
+				const auto& sector = nationalBudgets.getSectorName(building->getName());
 
-			// Spend
-			// Chosen building construction cost
-			substate->spendCPBudget(50);
+				if (!sector)
+				{
+					Log(LogLevel::Error) << "Building : " << building->getName() << " not identified in a known sector.";
+					continue;
+				}
+
+				if (!sectors.contains(sector.value()))
+				{
+					Log(LogLevel::Error) << "Unknown Industrial Sector : " << sector.value() << ".";
+					continue;
+				}
+
+				if (baseCost > sectors.at(sector.value())->getCPBudget())
+				{
+					continue;
+				}
+
+				// So we're a valid building in a valid sector and there is budget for us. Great!
+				// buildME
+				substate->spendCPBudget(baseCost); // * n
+				talksFail = false;
+				break;
+			}
+
+			if (talksFail)
+			{
+				// build the first building from score buildings, the only thing that changes is that it removes budget from the highest sector
+			}
+
 
 			// Sort
 			std::ranges::sort(subStatesByBudget, greaterBudget);
 
-
-			// After spend, remove substate if now low budget
+			// After spend, remove substate if now finished
 			removeSubStateIfFinished(subStatesByBudget, subStatesByBudget.end() - 1);
 		}
 	}

@@ -66,9 +66,16 @@ class SubState
 	void setIndustryWeight(const double theIndustryWeight) { industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theCPBudget) { CPBudget = theCPBudget; }
 	void spendCPBudget(const int theCPExpense) { CPBudget -= theCPExpense; }
-	void setBuildingLevel(const std::string& building, const int level) { buildings[building] = level; }
+	void addBuilding(const std::shared_ptr<Building>& building) { buildings.push_back(building); }
 	void setVanillaBuildingElements(const std::vector<std::string>& elements) { vanillaBuildingElements = elements; }
 	void calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap);
+
+	void weightBuildings(const std::map<std::string, Building>& templateBuildings,
+		 const BuildingGroups& buildingGroups,
+		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
+		 const mappers::BuildingMapper& buildingMapper,
+		 const std::map<std::string, StateModifier>& traitMap,
+		 double traitStrength);
 
 	void convertDemographics(const ClayManager& clayManager,
 		 mappers::CultureMapper& cultureMapper,
@@ -102,9 +109,14 @@ class SubState
 
 	[[nodiscard]] const auto& getIndustryWeight() const { return industryWeight; }
 	[[nodiscard]] const auto& getCPBudget() const { return CPBudget; }
-	[[nodiscard]] std::optional<int> getBuildingLevel(const std::string& building) const;
 	[[nodiscard]] const auto& getBuildings() const { return buildings; }
 	[[nodiscard]] const auto& getVanillaBuildingElements() const { return vanillaBuildingElements; }
+	[[nodiscard]] double calcBuildingWeight(const Building& building,
+		 const BuildingGroups& buildingGroups,
+		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
+		 const mappers::BuildingMapper& buildingMapper,
+		 const std::map<std::string, StateModifier>& traitMap,
+		 double traitStrength) const;
 
 	[[nodiscard]] auto isVanillaSubState() const { return vanillaSubState; }
 	[[nodiscard]] auto isIncorporated() const { return !subStateTypes.contains("unincorporated"); }
@@ -123,11 +135,6 @@ class SubState
 	[[nodiscard]] double getPopInfrastructure(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] std::pair<int, double> getStateInfrastructureModifiers(const StateModifiers& theStateModifiers) const;
 
-	[[nodiscard]] double calcBuildingWeight(const Building& building,
-		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
-		 const mappers::BuildingMapper& buildingMapper,
-		 const std::map<std::string, StateModifier>& traitMap,
-		 double traitStrength) const;
 	[[nodiscard]] double calcBuildingTerrainWeight(const std::string& building,
 		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers) const;
 	[[nodiscard]] double calcBuildingEU4Weight(const std::string& v3BuildingName, const mappers::BuildingMapper& buildingMapper) const;
@@ -159,10 +166,10 @@ class SubState
 	std::vector<Demographic> demographics;
 	SubStatePops subStatePops;
 
-	double industryWeight = 0;				  // Share of owner's industry a substate should get, not normalized
-	int CPBudget = 0;							  // Construction Points for a substate to spend on it's development
-	int originalCPBudget = 0;				  // Used in Building Weight calculations
-	std::map<std::string, int> buildings; // building -> level
+	double industryWeight = 0;			// Share of owner's industry a substate should get, not normalized
+	int CPBudget = 0;						// Construction Points for a substate to spend on it's development
+	int originalCPBudget = 0;			// Used in Building Weight calculations
+	std::vector<std::shared_ptr<Building>> buildings; // buildings available to build in the subState
 
 	std::vector<std::string> vanillaBuildingElements; // vanilla buildings for this substate, ready for direct dump.
 	std::set<std::string> claims;

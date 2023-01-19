@@ -55,11 +55,26 @@ double V3::SubState::getTerrainFrequency(const std::string& theTerrain) const
 	return 0;
 }
 
-std::optional<int> V3::SubState::getBuildingLevel(const std::string& building) const
+void V3::SubState::weightBuildings(const std::map<std::string, Building>& templateBuildings,
+                                  const BuildingGroups& buildingGroups,
+                                  const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
+                                  const mappers::BuildingMapper& buildingMapper,
+                                  const std::map<std::string, StateModifier>& traitMap,
+                                  const double traitStrength)
 {
-	if (buildings.contains(building))
-		return buildings.at(building);
-	return std::nullopt;
+	for (const auto& templateBuilding: templateBuildings | std::views::values)
+	{
+		if (!isBuildingValid(templateBuilding, buildingGroups))
+		{
+			continue;
+		}
+
+		// New building from template. Initialize weight and add to substate
+		const auto building  = std::make_shared<Building>(templateBuilding);
+
+		building->setWeight(calcBuildingWeight(*building, buildingGroups, buildingTerrainModifiers, buildingMapper, traitMap, traitStrength));
+		buildings.push_back(building);
+	}
 }
 
 bool V3::SubState::isCoastal() const
@@ -176,7 +191,7 @@ double V3::SubState::calcBuildingEU4Weight(const std::string& v3BuildingName, co
 	return totalWeight;
 }
 
-double V3::SubState::calcBuildingTraitWeight(const Building& building, const std::map<std::string, StateModifier>& traitMap, double traitStrength) const
+double V3::SubState::calcBuildingTraitWeight(const Building& building, const std::map<std::string, StateModifier>& traitMap, const double traitStrength) const
 {
 	// Weight from having state traits that boost the building or building_group of building
 	// Goods outputs will be done later in PM pass
@@ -205,11 +220,12 @@ double V3::SubState::calcBuildingInvestmentWeight(const Building& building) cons
 {
 	// Weight modifier due to amount already built of given Building
 	// Simple percentage
-	if (buildings.contains(building.getName()) && originalCPBudget > 0)
+	if (originalCPBudget <= 0)
 	{
-		return std::max(1 - building.getConstructionCost() * buildings.at(building.getName()) / static_cast<double>(originalCPBudget), 0.0);
+		return 1;
 	}
-	return 1;
+	
+	return std::max(1 - building.getConstructionCost() * building.getLevel() / static_cast<double>(originalCPBudget), 0.0);
 }
 
 double V3::SubState::calcBuildingIndustrialWeight(const Building& building, const BuildingGroups& buildingGroups) const
@@ -333,6 +349,7 @@ bool V3::SubState::hasRGO(const Building& building) const
 }
 
 double V3::SubState::calcBuildingWeight(const Building& building,
+	 const V3::BuildingGroups& buildingGroups,
 	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
 	 const mappers::BuildingMapper& buildingMapper,
 	 const std::map<std::string, StateModifier>& traitMap,
