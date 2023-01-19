@@ -26,6 +26,7 @@ class Building: commonItems::parser
   private:
 	void registerKeys(const std::map<std::string, int>& costTiers);
 
+	// Static per type of building e.g. "building_port"
 	std::string name;
 	std::string buildingGroup;
 	std::vector<std::string> PMGroups;
@@ -33,6 +34,7 @@ class Building: commonItems::parser
 	std::vector<std::string> unlockingTechs;
 	bool buildable = true;
 
+	// Specific to instance of building in SubState e.g. The port in New York
 	int level = 0;
 	double weight = 0;
 };
