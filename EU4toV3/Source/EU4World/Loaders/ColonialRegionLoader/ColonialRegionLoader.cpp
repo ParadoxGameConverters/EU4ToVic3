@@ -1,23 +1,22 @@
 #include "ColonialRegionLoader.h"
 #include "ColonialRegion.h"
+#include "CommonFunctions.h"
 #include "CommonRegexes.h"
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 #include <ranges>
 
-void EU4::ColonialRegionLoader::loadColonialRegions(const std::string& EU4Path, const Mods& mods)
+void EU4::ColonialRegionLoader::loadColonialRegions(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
 
-	if (!commonItems::DoesFileExist(EU4Path + "/common/colonial_regions/00_colonial_regions.txt"))
-		Log(LogLevel::Warning) << "Could not find " << EU4Path + "/common/colonial_regions/00_colonial_regions.txt";
-	else
-		parseFile(EU4Path + "/common/colonial_regions/00_colonial_regions.txt");
-
-	for (const auto& mod: mods)
-		for (const auto& filename: commonItems::GetAllFilesInFolder(mod.path + "/common/colonial_regions/"))
-			parseFile(mod.path + "/common/colonial_regions/" + filename);
+	for (const auto& file: modFS.GetAllFilesInFolder("/common/colonial_regions/"))
+	{
+		if (getExtension(file) != "txt")
+			continue;
+		parseFile(file);
+	}
 
 	clearRegisteredKeywords();
 

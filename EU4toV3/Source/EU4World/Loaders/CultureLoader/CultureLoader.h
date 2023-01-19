@@ -1,7 +1,6 @@
 #ifndef CULTURE_LOADER
 #define CULTURE_LOADER
 #include "CultureGroupParser.h"
-#include "ModLoader/ModLoader.h"
 #include "Parser.h"
 
 namespace EU4
@@ -11,10 +10,13 @@ class CultureLoader: commonItems::parser
   public:
 	CultureLoader() = default;
 
-	void loadCultures(const std::string& EU4Path, const Mods& mods);
+	void loadCultures(const commonItems::ModFilesystem& modFS);
 	void loadCultures(std::istream& theStream);
 
 	[[nodiscard]] const auto& getCultureGroupsMap() const { return cultureGroupsMap; }
+	[[nodiscard]] std::optional<std::string> getGroupNameForCulture(const std::string& culture) const;
+	[[nodiscard]] std::optional<CultureGroupParser> getGroupForCulture(const std::string& culture) const;
+	[[nodiscard]] bool containsCulture(const std::string& culture) const;
 
   private:
 	void registerKeys();

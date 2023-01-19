@@ -11,13 +11,6 @@
 
 namespace EU4
 {
-// Export data for hoi4.
-struct HistoricalEntry
-{
-	std::string lastDynasty;
-	bool monarchy = true;
-};
-
 class Country: commonItems::parser
 {
   public:
@@ -26,6 +19,7 @@ class Country: commonItems::parser
 
 	// Tag and links
 	[[nodiscard]] const auto& getTag() const { return tag; }
+	void setTag(const auto& theTag) { tag = theTag; }
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
 	[[nodiscard]] const auto& getCores() const { return cores; }
 	void addProvince(const std::shared_ptr<Province>& province);
@@ -36,10 +30,12 @@ class Country: commonItems::parser
 	[[nodiscard]] auto isHREmperor() const { return holyRomanEmperor; }
 	[[nodiscard]] auto isCelestialEmperor() const { return celestialEmperor; }
 	[[nodiscard]] auto isRevolutionary() const { return revolutionary; }
+	[[nodiscard]] auto isGP() const { return GP; }
 	void setInHRE(const bool _inHRE) { inHRE = _inHRE; }
 	void setCelestialEmperor(const bool _celestialEmperor) { celestialEmperor = _celestialEmperor; }
 	void setEmperor(const bool _emperor) { holyRomanEmperor = _emperor; }
 	void setRevolutionary(const bool _rev) { revolutionary = _rev; }
+	void setGP() { GP = true; }
 
 	// in-game capital, score and tech
 	[[nodiscard]] auto getCapital() const { return capital; }
@@ -48,6 +44,7 @@ class Country: commonItems::parser
 	[[nodiscard]] auto getDipTech() const { return dipTech; }
 	[[nodiscard]] auto getMilTech() const { return milTech; }
 	[[nodiscard]] const auto& getTechGroup() const { return techGroup; }
+	[[nodiscard]] double getAverageDevelopment() const;
 
 	// culture religion
 	[[nodiscard]] const auto& getPrimaryCulture() const { return primaryCulture; }
@@ -60,17 +57,18 @@ class Country: commonItems::parser
 
 	// flags and variables
 	[[nodiscard]] auto getFlags() const { return flags; }
+	void addFlag(const std::string& theFlag) { flags.emplace(theFlag); }
 	[[nodiscard]] bool hasFlag(const std::string&) const;
 	[[nodiscard]] auto getModifiers() const { return modifiers; }
 	[[nodiscard]] bool hasModifier(const std::string&) const;
 
-	// leaders and armies
-	[[nodiscard]] const auto& getHistoricalLeaders() const { return historicalLeaders; }
-	[[nodiscard]] const auto& getMilitaryLeaders() const { return militaryLeaders; }
+	// characters and armies
+	[[nodiscard]] const auto& getCharacters() const { return filteredCharacters; }
 	[[nodiscard]] const auto& getArmies() const { return armies; }
 
 	// relations
 	[[nodiscard]] const auto& getRelations() const { return relations; }
+	[[nodiscard]] const auto& getRivals() const { return rivals; }
 
 	// country stats
 	[[nodiscard]] auto getLegitimacy() const { return legitimacyEquivalent; }
@@ -88,8 +86,10 @@ class Country: commonItems::parser
 
 	// government, reforms, ideas, institutions
 	[[nodiscard]] const auto& getGovernment() const { return government; }
+	[[nodiscard]] auto getGovernmentRank() const { return governmentRank; }
 	[[nodiscard]] const auto& getReforms() const { return governmentReforms; }
 	[[nodiscard]] bool hasReform(const std::string&) const;
+	void addReform(const std::string& theReform) { governmentReforms.emplace(theReform); }
 	[[nodiscard]] const auto& getPolicies() const { return policies; }
 	[[nodiscard]] const auto& getEmbracedInstitutions() const { return embracedInstitutions; }
 	[[nodiscard]] int getNumEmbracedInstitutions() const;
@@ -103,7 +103,11 @@ class Country: commonItems::parser
 
 	// localizations
 	[[nodiscard]] std::string getName(const std::string& language) const;
+	[[nodiscard]] std::string getName() const { return name; }
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
+	[[nodiscard]] std::string getAdjective() const { return adjective; }
+	[[nodiscard]] const auto& getAllNameLocalizations() const { return namesByLanguage; }
+	[[nodiscard]] const auto& getAllAdjectiveLocalizations() const { return adjectivesByLanguage; }
 	void setLocalizationName(const std::string& language, const std::string& incName);
 	void setLocalizationAdjective(const std::string& language, const std::string& incAdjective);
 
@@ -111,14 +115,12 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getNationalColors() const { return nationalColors; }
 	void setMapColor(const commonItems::Color& color) { nationalColors.setMapColor(color); }
 
-	// botanical expedition
-	[[nodiscard]] const auto& getHistoricalEntry() const { return historicalEntry; }
-
 	// processing
-	[[nodiscard]] bool cultureSurvivesInCores(const std::map<std::string, std::shared_ptr<Country>>& theCountries);
+	[[nodiscard]] bool cultureSurvivesInCores(const std::map<std::string, std::shared_ptr<Country>>& theCountries) const;
 	[[nodiscard]] double getCountryWeight() const;
 	void updateRegimentTypes(const UnitTypeLoader& unitTypeLoader);
 	void eatCountry(const std::shared_ptr<Country>& target);
+	void filterActiveCharacters();
 
   private:
 	void registerKeys();
@@ -127,7 +129,6 @@ class Country: commonItems::parser
 	void determineJapaneseRelations();
 	void clearProvinces();
 	void clearCores();
-	void filterLeaders();
 	void increaseMfgTransfer(const int increase) { mfgTransfer += increase; }
 	void takeArmies(const std::shared_ptr<Country>& target);
 	void clearArmies();
@@ -140,6 +141,7 @@ class Country: commonItems::parser
 	bool holyRomanEmperor = false;
 	bool celestialEmperor = false;
 	bool revolutionary = false;
+	bool GP = false;
 
 	int capital = 0; // provinceID
 	double score = 0.0;
@@ -160,12 +162,17 @@ class Country: commonItems::parser
 	std::set<std::string> flags;
 	std::set<std::string> modifiers;
 
+	int monarchID = 0;
+	int heirID = 0;
+	int consortID = 0;
 	std::set<int> activeLeaderIDs;
-	std::vector<Leader> historicalLeaders; // Historical leader information
-	std::vector<Leader> militaryLeaders;	// filtered active leaders
-	std::vector<EU4Army> armies;				// and navies
+	std::vector<Character> historicalCharacters; // Historical character information
+	std::vector<Character> filteredCharacters;	// filtered active characters
+
+	std::vector<EU4Army> armies; // and navies
 
 	std::map<std::string, EU4RelationDetails> relations;
+	std::set<std::string> rivals;
 
 	double legitimacyEquivalent = 100; // country at 100 doesn't store the value at all for any of the legitimacy-type values
 	double stability = 0;
@@ -180,6 +187,7 @@ class Country: commonItems::parser
 	double libertyDesire = 0.0;
 
 	std::string government = "monarchy";
+	int governmentRank = 0;
 	std::set<std::string> governmentReforms;
 	std::set<std::string> policies;
 	std::vector<bool> embracedInstitutions;
@@ -196,9 +204,6 @@ class Country: commonItems::parser
 
 	// Colors
 	NationalSymbol nationalColors;
-
-	// Botanical Expedition
-	HistoricalEntry historicalEntry;
 };
 } // namespace EU4
 

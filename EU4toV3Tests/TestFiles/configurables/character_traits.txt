@@ -1,0 +1,148 @@
+# Ruler/General/Admiral conversion rules
+
+personalities = {
+	# No, personalities have nothing to do with skills (abilities/stats/stars/pips).
+	# Available vic3 personalities:
+	# ---direct persistent cautious arrogant bigoted reckless tactful ambitious imperious wrathful---
+	# ---reserved cruel meticulous charismatic romantic innovative hedonist pious---
+	# If leader has no personalities, they get none.
+
+	# eu4 general personality -> vic3 general personality
+	glory_seeker_personality = ambitious 
+	born_to_the_saddle_personality = brave
+	defensive_planner_personality = meticulous
+	battlefield_medic_personality = persistent
+	ruthless_personality = cruel
+	inspirational_leader_general_personality = charismatic
+	master_of_arms_personality = bigoted
+	goal_oriented_personality = innovative
+	hardy_warrior_personality = direct
+	siege_specialist_personality = cautious
+	cannoneer_personality = wrathful
+	
+	# eu4 admiral personality -> vic3 admiral personality
+	extortioner_personality = imperious
+	ruthless_blockader_personality = cruel
+	buccaneer_personality = romantic
+	prize_hunter_personality = arrogant
+	ironside_personality = persistent
+	naval_engineer_personality = meticulous
+	naval_showman_personality = reckless
+	ram_raider_personality = wrathful
+	naval_gunner_personality = tactful
+	accomplished_sailor_personality = charismatic
+	level_headed_personality = reserved
+	
+	# eu4 ruler personality -> vic3 personality
+	# These stack with those above in case ruler is an accomplished general.
+	just_personality = direct
+	righteous_personality = persistent
+	tolerant_personality = reserved
+	kind_hearted_personality = charismatic
+	free_thinker_personality = innovative
+	well_connected_personality = charismatic
+	calm_personality = cautious
+	careful_personality = cautious
+	secretive_personality = tactful
+	intricate_web_weaver_personality = tactful
+	fertile_personality = romantic
+	well_advised_personality = meticulous
+	benevolent_personality = persistent
+	zealot_personality = bigoted
+	pious_personality = pious
+	lawgiver_personality = reserved
+	midas_touched_personality = innovative
+	incorruptible_personality = reserved
+	architectural_visionary_personality = innovative
+	scholar_personality = innovative
+	entrepreneur_personality = ambitious
+	industrious_personality = ambitious
+	expansionist_personality = ambitious
+	charismatic_negotiator_personality = charismatic
+	silver_tongue_personality = tactful
+	conqueror_personality = wrathful
+	tactical_genius_personality = meticulous
+	bold_fighter_personality = direct
+	strict_personality = direct
+	inspiring_leader_personality = charismatic
+	martial_educator_personality = arrogant
+	navigator_personality = ambitious
+	fierce_negotiator_personality = charismatic
+	babbling_buffoon_personality = imperious
+	embezzler_personality = hedonist
+	infertile_personality = pious
+	drunkard_personality = hedonist
+	sinner_personality = reckless
+	greedy_personality = hedonist
+	cruel_personality = cruel
+	naive_personality = imperious
+	craven_personality = cautious
+	loose_lips_personality = arrogant
+	obsessive_perfectionist_personality = meticulous
+	malevolent_personality = cruel
+	immortal_personality = reserved
+	reformist_personality = innovative
+	legendary_pirate_personality = ambitious
+	humane_personality = reserved
+	petty_personality = hedonist
+}
+
+global = {
+	# This is only for explorers and conquistadors. Everyone gets it.
+	explorer = explorer
+	conquistador = surveyor
+	# generals and admirals get ONE skill based trait.
+}
+
+# Sum of pips, with majority in a type, gets this.
+# For simplification purposes, we're treating fire as defensive, shock as offensive. Reverse at will.
+# Use shortcodes: fir, sho, man, sie.
+
+admiral = { sum = 18 prim = sho trait = expert_naval_commander }
+admiral = { sum = 14 prim = sho trait = experienced_naval_commander }
+admiral = { sum = 10 prim = sho trait = basic_naval_commander }
+admiral = { sum = 18 prim = man trait = expert_convoy_raider }
+admiral = { sum = 14 prim = man trait = experienced_convoy_raider }
+admiral = { sum = 10 prim = man trait = convoy_raider_commander }
+admiral = { sum = 18 trait = celebrity_commander }
+admiral = { sum = 14 trait = popular_commander }
+admiral = { sum = 10 trait = traditionalist_commander }
+
+# sum of pips, with majority (or equal at least to others) in a type, gets this.
+general = { sum = 18 prim = fir trait = expert_defensive_strategist }
+general = { sum = 14 prim = fir trait = experienced_defensive_strategist }
+general = { sum = 10 prim = fir trait = basic_defensive_strategist }
+general = { sum = 18 prim = sho trait = expert_offensive_planner }
+general = { sum = 14 prim = sho trait = experienced_offensive_planner }
+general = { sum = 10 prim = sho trait = basic_offensive_planner }
+general = { sum = 18 prim = man trait = defense_in_depth_specialist }
+general = { sum = 14 prim = man trait = trench_rat }
+general = { sum = 10 prim = man trait = stalwart_defender }
+general = { sum = 18 prim = sie trait = expert_artillery_commander }
+general = { sum = 14 prim = sie trait = experienced_artillery_commander }
+general = { sum = 10 prim = sie trait = basic_artillery_commander }
+general = { sum = 18 trait = explorer }
+general = { sum = 14 trait = surveyor }
+general = { sum = 10 trait = resupply_commander }
+
+ruler = { sum = 15 prim = adm trait = expert_colonial_administrator }
+ruler = { sum = 12 prim = adm trait = experienced_colonial_administrator }
+ruler = { sum = 9 prim = adm trait = basic_colonial_administrator }
+ruler = { sum = 15 prim = dip trait = masterful_diplomat }
+ruler = { sum = 12 prim = dip trait = experienced_diplomat }
+ruler = { sum = 9 prim = dip trait = basic_diplomat }
+ruler = { sum = 15 trait = expert_political_operator }
+ruler = { sum = 12 trait = experienced_political_operator }
+ruler = { sum = 9 trait = basic_political_operator }
+
+# fellows without a skill *can* (not always) get a bonus incompetency!
+incompetency = { alcoholic opium_addiction cocaine_addiction grifter }
+
+# generals/admirals at 22+ *can* (not always) get a bonus veterancy!
+veterancy = { wounded scarred beetle_ear }
+
+# old people (70+) can also get a bonus age ... bonus!
+age = { kidney_stones senile cancer }
+
+# some get these. Some don't. Most don't actually.
+disorders = { psychological_affliction syphilis shellshocked expensive_tastes }

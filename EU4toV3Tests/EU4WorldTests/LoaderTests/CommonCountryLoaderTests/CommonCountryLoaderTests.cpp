@@ -19,8 +19,10 @@ TEST(EU4World_CommonCountryLoaderTests, colorsCanBeLoadedFromCommonCountries)
 	modLoader.loadMods(configuration.getEU4DocumentsPath(), mods);
 	mods = modLoader.getMods();
 
+	auto modFS = commonItems::ModFilesystem("TestFiles/eu4installation/", mods);
+
 	EU4::CommonCountryLoader loader;
-	loader.loadCommonCountries("TestFiles/eu4installation", mods);
+	loader.loadCommonCountries(modFS);
 
 	EXPECT_EQ("= rgb { 157 51 167 }", loader.getCommonColor("AAA")->outputRgb());
 	EXPECT_EQ("= rgb { 49 115 90 }", loader.getCommonColor("BBB")->outputRgb());

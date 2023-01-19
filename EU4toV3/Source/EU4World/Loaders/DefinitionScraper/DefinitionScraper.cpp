@@ -2,24 +2,13 @@
 #include "OSCompatibilityLayer.h"
 #include <fstream>
 
-void EU4::DefinitionScraper::loadDefinitions(const std::string& EU4Path, const Mods& mods)
+void EU4::DefinitionScraper::loadDefinitions(const commonItems::ModFilesystem& modFS)
 {
-	// This is a case where mods take priority over definitions. If a mod has defs than we use those and ignore EU4 installation.
+	const auto& file = modFS.GetActualFileLocation("/map/definition.csv");
+	if (!file)
+		throw std::runtime_error("/map/definition.csv cannot be found!");
 
-	for (const auto& mod: mods)
-		if (commonItems::DoesFileExist(mod.path + "/map/definition.csv"))
-		{
-			std::ifstream definitionsFile(mod.path + "/map/definition.csv");
-			parseStream(definitionsFile);
-			definitionsFile.close();
-			Log(LogLevel::Info) << "<> " << provinceIDs.size() << " province definitions registered from:" << mod.name;
-			return;
-		}
-
-	if (!commonItems::DoesFileExist(EU4Path + "/map/definition.csv"))
-		throw std::runtime_error(EU4Path + "/map/definition.csv cannot be found!");
-
-	std::ifstream definitionsFile(EU4Path + "/map/definition.csv");
+	std::ifstream definitionsFile(*file);
 	parseStream(definitionsFile);
 	definitionsFile.close();
 
@@ -102,20 +91,6 @@ std::optional<int> EU4::DefinitionScraper::parseLine(const std::string& line)
 	try
 	{
 		auto b = static_cast<unsigned char>(std::stoi(line.substr(sepLocSave + 1, sepLoc - sepLocSave - 1)));
-	}
-	catch (std::exception&)
-	{
-		return std::nullopt;
-	}
-	sepLocSave = sepLoc;
-	sepLoc = line.find(';', sepLocSave + 1);
-	if (sepLoc == std::string::npos)
-		return std::nullopt;
-
-	// simulate mapDataName
-	try
-	{
-		auto mapDataName = line.substr(sepLocSave + 1, sepLoc - sepLocSave - 1);
 	}
 	catch (std::exception&)
 	{

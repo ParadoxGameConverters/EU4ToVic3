@@ -1,0 +1,18 @@
+# This file sets the population effects used on Vic3 statup to set up baselines
+# We generate literacy internally (eg. 36.79%, then map to the closest (highest) supported preset level.
+# Anything above a level would fall into that level.
+
+link = { effect = effect_starting_pop_literacy_very_high literacy = 0.6 }
+link = { effect = effect_starting_pop_literacy_high literacy = 0.5 }
+link = { effect = effect_starting_pop_literacy_middling literacy = 0.35 }
+link = { effect = effect_starting_pop_literacy_low literacy = 0.2 }
+link = { effect = effect_starting_pop_literacy_very_low literacy = 0.1 }
+link = { effect = effect_starting_pop_literacy_baseline literacy = 0 }
+
+# As for wealth, we look at average development of the source country. 
+# Anything above a level would fall into that level.
+
+link = { effect = effect_starting_pop_wealth_very_high averagedev = 26 }
+link = { effect = effect_starting_pop_wealth_high averagedev = 19 }
+link = { effect = effect_starting_pop_wealth_medium averagedev = 13 }
+link = { effect = effect_starting_pop_wealth_low averagedev = 0 }

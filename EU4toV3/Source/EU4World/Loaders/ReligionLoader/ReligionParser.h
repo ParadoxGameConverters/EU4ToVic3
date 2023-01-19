@@ -1,7 +1,7 @@
 #ifndef RELIGIONPARSER
 #define RELIGIONPARSER
 #include "Parser.h"
-#include <set>
+#include "Religion.h"
 
 namespace EU4
 {
@@ -9,12 +9,12 @@ class ReligionParser: commonItems::parser
 {
   public:
 	ReligionParser(std::istream& theStream);
-	auto takeReligions() { return std::move(religions); }
+	[[nodiscard]] const auto& getReligions() const { return religions; }
 
   private:
 	void registerKeys();
 
-	std::set<std::string> religions;
+	std::vector<Religion> religions;
 };
 } // namespace EU4
 

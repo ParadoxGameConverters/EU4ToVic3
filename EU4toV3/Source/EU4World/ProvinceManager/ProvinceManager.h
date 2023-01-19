@@ -18,7 +18,7 @@ class ProvinceManager: commonItems::parser
 	ProvinceManager() = default;
 	void loadProvinces(std::istream& theStream);
 
-	void loadParsers(const std::string& EU4Path, const Mods& mods);
+	void loadParsers(const commonItems::ModFilesystem& modFS);
 
 	// individual external loads for testing
 	void loadDefaultMapParser(const DefaultMapParser& defaultParser) { defaultMapParser = defaultParser; }
@@ -27,6 +27,8 @@ class ProvinceManager: commonItems::parser
 
 	[[nodiscard]] const auto& getAllProvinces() const { return provinces; }
 	[[nodiscard]] std::shared_ptr<Province> getProvince(int provinceID) const;
+	[[nodiscard]] bool isProvinceWasteland(int provinceID) const { return wastelands.contains(provinceID); }
+	[[nodiscard]] bool isProvinceDiscarded(int provinceID) const { return discardedProvinces.contains(provinceID); }
 
 	void classifyProvinces(const RegionManager& regionManager);
 	void buildPopRatios(const DatingData& datingData, bool convertAll);
@@ -36,6 +38,8 @@ class ProvinceManager: commonItems::parser
 	void registerKeys();
 
 	std::map<int, std::shared_ptr<Province>> provinces;
+	std::map<int, std::shared_ptr<Province>> wastelands;			 // Wastelands we DO care for but can't use as we'd use regular provinces.
+	std::map<int, std::shared_ptr<Province>> discardedProvinces; // RNW, lakes etc. Stuff we know about but don't care for.
 
 	DefaultMapParser defaultMapParser;
 	DefinitionScraper definitionScraper;

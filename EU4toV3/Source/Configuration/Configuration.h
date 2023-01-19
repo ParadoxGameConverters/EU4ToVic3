@@ -11,6 +11,11 @@ class Configuration: commonItems::parser
 	explicit Configuration(const commonItems::ConverterVersion& converterVersion);
 	explicit Configuration(std::istream& theStream, const commonItems::ConverterVersion& converterVersion);
 
+	enum class STARTDATE
+	{
+		Vanilla = 1,
+		Dynamic = 2
+	};
 	enum class DEADCORES
 	{
 		LeaveAll = 1,
@@ -23,31 +28,34 @@ class Configuration: commonItems::parser
 		PopShaping = 2,
 		Extreme = 3
 	};
-	enum class COREHANDLES
-	{
-		DropNone = 1,
-		DropNational = 2,
-		DropUnions = 3,
-		DropAll = 4
-	};
 	enum class EUROCENTRISM
 	{
 		EuroCentric = 1,
 		VanillaImport = 2
 	};
+	enum class ECONOMY
+	{
+		CivLevel = 1,
+		DevPerPop = 2,
+		Test = 0
+	};
 
 	struct ConfigBlock
 	{
-		double MaxLiteracy = 1.0;
+		STARTDATE startDate = STARTDATE::Vanilla;
 		POPSHAPES popShaping = POPSHAPES::Vanilla;
-		COREHANDLES coreHandling = COREHANDLES::DropNone;
 		DEADCORES removeType = DEADCORES::DeadCores;
 		EUROCENTRISM euroCentric = EUROCENTRISM::VanillaImport;
-		double popShapingFactor = 50.0;
+		ECONOMY economy = ECONOMY::CivLevel;
 		bool convertAll = false;
+		// runtime options.
+		bool vn = false; // Voltaire's Nightmare
 	} configBlock;
 
 	void setOutputName(const std::string& name) { outputName = name; }
+	void setVN() { configBlock.vn = true; }
+	void setEurocentric() { configBlock.euroCentric = EUROCENTRISM::EuroCentric; }
+	void setVanillaStartDate() { configBlock.startDate = STARTDATE::Vanilla; }
 
 	[[nodiscard]] const auto& getEU4SaveGamePath() const { return EU4SaveGamePath; }
 	[[nodiscard]] const auto& getEU4Path() const { return EU4Path; }
@@ -62,7 +70,6 @@ class Configuration: commonItems::parser
 	void setOutputName();
 	void verifyVic3Version(const commonItems::ConverterVersion& converterVersion) const;
 	void verifyEU4Version(const commonItems::ConverterVersion& converterVersion) const;
-
 
 	// options from configuration.txt
 	std::string EU4SaveGamePath;

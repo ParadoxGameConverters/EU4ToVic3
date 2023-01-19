@@ -8,55 +8,36 @@
 #include <ranges>
 namespace fs = std::filesystem;
 
-void EU4::RegionManager::loadRegions(const std::string& EU4Path, const Mods& mods)
+void EU4::RegionManager::loadRegions(const commonItems::ModFilesystem& modsFS)
 {
-	auto areaFilename = EU4Path + "/map/area.txt";
-	auto regionFilename = EU4Path + "/map/region.txt";
-	auto superRegionFilename = EU4Path + "/map/superregion.txt";
-
-	for (const auto& mod: mods)
-		if (commonItems::DoesFileExist(mod.path + "/map/area.txt"))
-		{
-			Log(LogLevel::Info) << "-> Loading areas from mod: " << mod.name;
-			areaFilename = mod.path + "/map/area.txt";
-			break;
-		}
-
-	for (const auto& mod: mods)
-		if (commonItems::DoesFileExist(mod.path + "/map/region.txt"))
-		{
-			Log(LogLevel::Info) << "-> Loading regions from mod: " << mod.name;
-			areaFilename = mod.path + "/map/region.txt";
-			break;
-		}
-
-	for (const auto& mod: mods)
-		if (commonItems::DoesFileExist(mod.path + "/map/superregion.txt"))
-		{
-			Log(LogLevel::Info) << "-> Loading superregions from mod: " << mod.name;
-			areaFilename = mod.path + "/map/superregion.txt";
-			break;
-		}
-
-	std::ifstream areaStream(fs::u8path(areaFilename));
+	const auto& areaFile = modsFS.GetActualFileLocation("map/area.txt");
+	if (!areaFile)
+		throw std::runtime_error("There is no map/area.txt!");
+	std::ifstream areaStream(fs::u8path(*areaFile));
 	if (!areaStream.is_open())
-		throw std::runtime_error("Could not open map/area.txt!");
+		throw std::runtime_error("Could not open " + *areaFile + "!");
 	registerAreaKeys();
 	parseStream(areaStream);
 	clearRegisteredKeywords();
 	areaStream.close();
 
-	std::ifstream superRegionStream(fs::u8path(superRegionFilename));
+	const auto& sRegionFile = modsFS.GetActualFileLocation("map/superregion.txt");
+	if (!sRegionFile)
+		throw std::runtime_error("There is no map/superregion.txt!");
+	std::ifstream superRegionStream(fs::u8path(*sRegionFile));
 	if (!superRegionStream.is_open())
-		throw std::runtime_error("Could not open map/superregion.txt!");
+		throw std::runtime_error("Could not open " + *sRegionFile + "!");
 	registerSuperRegionKeys();
 	parseStream(superRegionStream);
 	clearRegisteredKeywords();
 	superRegionStream.close();
 
-	std::ifstream regionStream(fs::u8path(regionFilename));
+	const auto& regionFile = modsFS.GetActualFileLocation("map/region.txt");
+	if (!regionFile)
+		throw std::runtime_error("There is no map/region.txt!");
+	std::ifstream regionStream(fs::u8path(*regionFile));
 	if (!regionStream.is_open())
-		throw std::runtime_error("Could not open map/region.txt!");
+		throw std::runtime_error("Could not open " + *regionFile + "!");
 	registerRegionKeys();
 	parseStream(regionStream);
 	clearRegisteredKeywords();
@@ -65,6 +46,7 @@ void EU4::RegionManager::loadRegions(const std::string& EU4Path, const Mods& mod
 	linkSuperRegions();
 	linkRegions();
 	superGroupMapper.loadSuperGroups();
+	applySuperGroups();
 }
 
 void EU4::RegionManager::loadRegions(std::istream& areaStream, std::istream& regionStream, std::istream& superRegionStream)
@@ -244,14 +226,14 @@ void EU4::RegionManager::applySuperGroups()
 	for (const auto& [superRegionName, superRegion]: superRegions)
 	{
 		superRegion->setAssimilationFactor(superGroupMapper.getAssimilationFactor(superRegionName));
-		const auto& superGroup = superGroupMapper.getGroupForSuperRegion(superRegionName);
-		if (superGroup)
+		if (const auto& superGroup = superGroupMapper.getGroupForSuperRegion(superRegionName); superGroup)
 		{
 			superRegion->setSuperGroup(*superGroup);
 		}
 		else
 		{
-			Log(LogLevel::Warning) << "Superregion " << superRegionName << " doesn't have a supergroup in world_supergroups.txt!";
+			if (superRegionName.find("sea") == std::string::npos)
+				Log(LogLevel::Warning) << "Superregion " << superRegionName << " doesn't have a supergroup in world_supergroups.txt!";
 			superRegion->setSuperGroup("old_world"); // defaulting to the safe choice.
 		}
 	}
@@ -272,31 +254,61 @@ std::optional<std::string> EU4::RegionManager::getColonialRegionForProvince(int 
 	return colonialRegionLoader.getColonialRegionForProvince(province);
 }
 
-void EU4::RegionManager::catalogueNativeCultures(const ProvinceManager& provinceManager)
+void EU4::RegionManager::catalogueNativeCultures(const ProvinceManager& provinceManager) const
 {
 	for (const auto& [provinceID, province]: provinceManager.getAllProvinces())
 	{
 		if (province->getStartingCulture().empty())
 			continue;
-		const auto& superRegionName = getParentSuperRegionName(provinceID);
-		if (superRegionName)
+		if (const auto& superRegionName = getParentSuperRegionName(provinceID); superRegionName)
 			superRegions.at(*superRegionName)->registerNativeCulture(province->getStartingCulture());
+	}
+}
+
+void EU4::RegionManager::flagNeoCultures(const ProvinceManager& provinceManager) const
+{
+	for (const auto& [provinceID, province]: provinceManager.getAllProvinces())
+	{
+		// Are its cultures native or require flagging?
+		for (const auto& popRatio: province->getProvinceHistory().getPopRatios())
+		{
+			const auto& culture = popRatio.getCulture();
+			if (doesProvinceRequireNeoCulture(provinceID, culture))
+				province->markNeoCulture(culture);
+		}
 	}
 }
 
 bool EU4::RegionManager::doesProvinceRequireNeoCulture(int provinceID, const std::string& culture) const
 {
-	// This one is funny. A province requires a neoculture if:
+	// This one is funny. A province requires a neoculture if all of these:
 	// 1. it belongs to a colonial region
 	// 2. the culture given (presumably from that very province) is not native to the province's superRegion.
+	// 3. superRegion of province is in different group than native superregion
 	// result of this function fuels generation of a new neoculture in cultureManager.
 
 	if (!getColonialRegionForProvince(provinceID))
 		return false; // not in colonial region.
 
 	const auto& superRegionName = getParentSuperRegionName(provinceID);
-	if (superRegionName)
-		return !superRegions.at(*superRegionName)->superRegionContainsNativeCulture(culture);
+	if (!superRegionName)
+		return false;
+	const auto& superRegion = superRegions.at(*superRegionName);
+	if (superRegion->superRegionContainsNativeCulture(culture))
+		return false;
+	// this here does the same thing as superregion check but is slower so we put it last. Most cultures won't trip it.
+	const auto& superGroupName = superRegion->getSuperGroup();
+	if (superGroupContainsNativeCulture(culture, superGroupName))
+		return false;
+	return true;
+}
+
+bool EU4::RegionManager::superGroupContainsNativeCulture(const std::string& culture, const std::string& superGroupName) const
+{
+	for (const auto& superRegion: superRegions | std::views::values)
+		if (superRegion->getSuperGroup() == superGroupName)
+			if (superRegion->superRegionContainsNativeCulture(culture))
+				return true;
 
 	return false;
 }

@@ -1,6 +1,5 @@
 #ifndef UNIT_TYPE_LOADER
 #define UNIT_TYPE_LOADER
-#include "ModLoader/ModLoader.h"
 #include "Parser.h"
 #include "UnitType.h"
 
@@ -9,7 +8,7 @@ namespace EU4
 class UnitTypeLoader
 {
   public:
-	void loadUnitTypes(const std::string& EU4Path, const Mods& mods);
+	void loadUnitTypes(const commonItems::ModFilesystem& modFS);
 	void loadUnitType(const std::string& unitName, std::istream& theStream);
 
 	[[nodiscard]] std::optional<UnitType> getUnitTypeForRegimentTypeName(const std::string& regimentTypeName) const;

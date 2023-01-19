@@ -1,13 +1,11 @@
 #include "ReligionLoader/ReligionParser.h"
 #include "gtest/gtest.h"
-#include <gmock/gmock-matchers.h>
-using testing::UnorderedElementsAre;
 
 TEST(EU4World_ReligionParserTests, religionsDefaultToEmpty)
 {
 	std::stringstream input;
-	EU4::ReligionParser religionGroup(input);
-	const auto theReligions = religionGroup.takeReligions();
+	const EU4::ReligionParser religionGroup(input);
+	const auto& theReligions = religionGroup.getReligions();
 
 	EXPECT_TRUE(theReligions.empty());
 }
@@ -23,14 +21,18 @@ TEST(EU4World_ReligionParserTests, religionsCanBeImported)
 	input << "flag_emblem_index_range = { 110 110 }\n";
 	input << "ai_will_propagate_through_trade = yes\n";
 	input << "religious_schools = { big block of bull }\n";
-	input << "zoroastrian = {\n"; // Name is relevant, content is not.
-	input << "\tabsolutely irrelevant\n";
+	input << "zoroastrian = {\n";		 // <--
+	input << "\tcolor = { 1 2 3 }\n"; // <--
+	input << "\trest = irrelevant\n";
 	input << "}\n";
 	input << "harmonized_modifier = harmonized_zoroastrian_group\n"; // also not relevant.
 	input << "crusade_name = HOLY_WAR\n";
 
-	EU4::ReligionParser religionGroup(input);
-	const auto theReligions = religionGroup.takeReligions();
+	const EU4::ReligionParser religionGroup(input);
+	ASSERT_EQ(1, religionGroup.getReligions().size());
 
-	EXPECT_THAT(theReligions, UnorderedElementsAre("zoroastrian"));
+	const auto& religion = religionGroup.getReligions()[0];
+
+	EXPECT_EQ("zoroastrian", religion.name);
+	EXPECT_EQ(commonItems::Color(std::array{1, 2, 3}), religion.color);
 }

@@ -29,11 +29,11 @@ std::shared_ptr<EU4::Province> EU4::ProvinceManager::getProvince(const int provi
 	return nullptr;
 }
 
-void EU4::ProvinceManager::loadParsers(const std::string& EU4Path, const Mods& mods)
+void EU4::ProvinceManager::loadParsers(const commonItems::ModFilesystem& modFS)
 {
-	defaultMapParser.loadDefaultMap(EU4Path, mods);
-	definitionScraper.loadDefinitions(EU4Path, mods);
-	buildingCostLoader.loadBuildingCosts(EU4Path, mods);
+	defaultMapParser.loadDefaultMap(modFS);
+	definitionScraper.loadDefinitions(modFS);
+	buildingCostLoader.loadBuildingCosts(modFS);
 }
 
 void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)
@@ -57,11 +57,25 @@ void EU4::ProvinceManager::classifyProvinces(const RegionManager& regionManager)
 		}
 
 		if (defaultMapParser.isLake(provinceID)) // discard lake
+		{
+			discardedProvinces.emplace(provinceID, province);
 			continue;
+		}
 		if (defaultMapParser.isRNW(provinceID)) // discard RNW
+		{
+			discardedProvinces.emplace(provinceID, province);
 			continue;
+		}
 		if (!regionManager.provinceIsValid(provinceID)) // regionManager considers wastelands invalid, as they aren't registered.
+		{
+			// this is a special case. Wastelands DO map to something concrete - they generate their own chunks, albeit with no incoming demographics or ownership.
+			// Yet they don't participate in geopolitical structure (regions) and need to be tiptoed around.
+
+			// Mark as wasteland but don't discard.
+			wastelands.emplace(provinceID, province);
+			viableProvinces.emplace(provinceID, province);
 			continue;
+		}
 		if (defaultMapParser.isSea(provinceID))
 		{
 			province->setSea();

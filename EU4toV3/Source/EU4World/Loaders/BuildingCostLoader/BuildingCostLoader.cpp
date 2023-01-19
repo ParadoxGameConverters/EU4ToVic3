@@ -1,19 +1,20 @@
 #include "BuildingCostLoader.h"
 #include "BuildingCost.h"
+#include "CommonFunctions.h"
 #include "CommonRegexes.h"
 #include "OSCompatibilityLayer.h"
 #include <ranges>
 
-void EU4::BuildingCostLoader::loadBuildingCosts(const std::string& EU4Path, const Mods& mods)
+void EU4::BuildingCostLoader::loadBuildingCosts(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
 
-	for (const auto& filename: commonItems::GetAllFilesInFolder(EU4Path + "/common/buildings/"))
-		parseFile(EU4Path + "/common/buildings/" + filename);
-
-	for (const auto& mod: mods)
-		for (const auto& filename: commonItems::GetAllFilesInFolder(mod.path + "/common/buildings/"))
-			parseFile(mod.path + "/common/buildings/" + filename);
+	for (const auto& file: modFS.GetAllFilesInFolder("/common/buildings/"))
+	{
+		if (getExtension(file) != "txt")
+			continue;
+		parseFile(file);
+	}
 
 	clearRegisteredKeywords();
 }

@@ -26,8 +26,3 @@ rem Create Blank Mod
 del "..\Release\EU4ToVic3\blankMod" /Q
 rmdir "..\Release\EU4ToVic3\blankMod" /S /Q
 xcopy "Data_Files\blankMod" "..\Release\EU4ToVic3\blankMod" /Y /E /I
-
-rem Copy Flags
-del "..\Release\EU4ToVic3\flags" /Q
-rmdir "..\Release\EU4ToVic3\flags" /S /Q
-xcopy "Data_Files\flags" "..\Release\EU4ToVic3\flags" /Y /E /I

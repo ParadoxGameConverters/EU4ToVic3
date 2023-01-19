@@ -1,31 +1,23 @@
 #include "EU4LocalizationLoader.h"
-#include "OSCompatibilityLayer.h"
+#include "CommonFunctions.h"
 #include <filesystem>
 #include <fstream>
 #include <ranges>
-#include <set>
 namespace fs = std::filesystem;
 
-void EU4::EU4LocalizationLoader::loadLocalizations(const std::string& EU4Path, const Mods& mods)
+void EU4::EU4LocalizationLoader::loadLocalizations(const commonItems::ModFilesystem& modFS)
 {
-	readFromAllFilesInFolder(EU4Path + "/localisation");
-	for (const auto& mod: mods)
+	for (const auto& file: modFS.GetAllFilesInFolderRecursive("/localisation/"))
 	{
-		readFromAllFilesInFolder(mod.path + "/localisation");
-		readFromAllFilesInFolder(mod.path + "/localisation/replace");
+		if (getExtension(file) != "yml")
+			continue;
+		readFromFile(file);
 	}
 }
 
 void EU4::EU4LocalizationLoader::loadLocalizations(std::istream& theStream)
 {
 	readFromStream(theStream);
-}
-
-void EU4::EU4LocalizationLoader::readFromAllFilesInFolder(const std::string& folderPath)
-{
-	// There is no need to recurse as EU4 doesn't support subfolders in loc dir except for "replace"
-	for (const auto& fileName: commonItems::GetAllFilesInFolder(folderPath))
-		readFromFile(folderPath + '/' + fileName);
 }
 
 void EU4::EU4LocalizationLoader::readFromFile(const std::string& fileName)
@@ -60,6 +52,22 @@ std::optional<std::map<std::string, std::string>> EU4::EU4LocalizationLoader::ge
 		return std::nullopt;
 	else
 		return keyFindIter->second;
+}
+
+std::optional<std::string> EU4::EU4LocalizationLoader::getTextForKey(const std::string& key, const std::string& language) const
+{
+	const auto& keyFindIter = localizations.find(key);
+	if (keyFindIter == localizations.end())
+		return std::nullopt;
+
+	const auto& locMap = keyFindIter->second;
+	if (locMap.contains(language))
+		return locMap.at(language);
+	if (locMap.contains("english"))
+		return locMap.at("english");
+
+	// If we don't have anything but korean, we might as well not respond.
+	return std::nullopt;
 }
 
 std::optional<std::string> EU4::EU4LocalizationLoader::determineLanguageForFile(const std::string& text)

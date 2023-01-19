@@ -312,6 +312,12 @@ TEST(Mappers_RegionMapperTests, colonialRegionForProvinceCanBeRetrieved)
 
 TEST(Mappers_RegionMapperTests, nativeCulturesCanBeCataloguedAndBrowsed)
 {
+	std::stringstream worldInput;
+	worldInput << "old_world = { test_superregion3 = {assimilation = 2} }\n";
+	worldInput << "new_world = { test_superregion1 = {assimilation = 2} test_superregion2 = {assimilation = 2} }\n";
+	mappers::SuperGroupMapper superGroupMapper;
+	superGroupMapper.loadSuperGroups(worldInput);
+
 	std::stringstream colonialInput;
 	colonialInput << "colonial_alaska = {\n";
 	colonialInput << "	provinces = {\n";
@@ -329,28 +335,121 @@ TEST(Mappers_RegionMapperTests, nativeCulturesCanBeCataloguedAndBrowsed)
 
 	std::stringstream areaStream;
 	areaStream << "test_area = { 1 } \n"; // <- in colonial region
-	areaStream << "test_area2 = { 2 } ";
+	areaStream << "test_area2 = { 2 } ";  // <- not colonial but same continent/superregion/supergroup
+	areaStream << "test_area3 = { 3 } ";  // old world
 	std::stringstream regionStream;
 	regionStream << "test_region = { areas = { test_area } }";
 	regionStream << "test_region2 = { areas = { test_area2 } }\n";
+	regionStream << "test_region3 = { areas = { test_area3 } }\n";
 	std::stringstream superRegionStream;
-	superRegionStream << "test_superregion = { test_region }\n"; // <- colonial superregion
-	superRegionStream << "test_superregion2 = { test_region2 }";
+	superRegionStream << "test_superregion1 = { test_region }\n"; // <- colonial superregion, new world
+	superRegionStream << "test_superregion2 = { test_region2 }";  // new world
+	superRegionStream << "test_superregion3 = { test_region3 }";  // old world
 	mapper.loadRegions(areaStream, regionStream, superRegionStream);
+	mapper.loadSuperGroups(superGroupMapper);
+	mapper.applySuperGroups();
 
 	std::stringstream provincesInput;
-	provincesInput << "-1={ history = { culture = someCulture } }\n";
-	provincesInput << "-2={ history = { culture = someOtherCulture } }\n}";
+	provincesInput << "-1={ history = { culture = nativeCulture } }\n";
+	provincesInput << "-2={ history = { culture = otherNativeCulture } }\n}";
+	provincesInput << "-3={ history = { culture = invasiveCulture } }\n";
 	EU4::ProvinceManager theProvinceManager;
 	theProvinceManager.loadProvinces(provincesInput);
 
-	EXPECT_EQ("someCulture", theProvinceManager.getProvince(1)->getStartingCulture());
-	EXPECT_EQ("someOtherCulture", theProvinceManager.getProvince(2)->getStartingCulture());
+	EXPECT_EQ("nativeCulture", theProvinceManager.getProvince(1)->getStartingCulture());
+	EXPECT_EQ("otherNativeCulture", theProvinceManager.getProvince(2)->getStartingCulture());
+	EXPECT_EQ("invasiveCulture", theProvinceManager.getProvince(3)->getStartingCulture());
 
 	mapper.catalogueNativeCultures(theProvinceManager);
 
-	EXPECT_FALSE(mapper.doesProvinceRequireNeoCulture(1, "someCulture"));		// false because it's native to the region
-	EXPECT_TRUE(mapper.doesProvinceRequireNeoCulture(1, "someOtherCulture"));	// true as not native and province is colonial
-	EXPECT_FALSE(mapper.doesProvinceRequireNeoCulture(2, "someCulture"));		// false because not colonial
-	EXPECT_FALSE(mapper.doesProvinceRequireNeoCulture(2, "someOtherCulture")); // false because native to region
+	EXPECT_FALSE(mapper.doesProvinceRequireNeoCulture(1, "nativeCulture"));		  // false because it's native to the region
+	EXPECT_FALSE(mapper.doesProvinceRequireNeoCulture(1, "otherNativeCulture")); // false because it's native to the new world
+	EXPECT_TRUE(mapper.doesProvinceRequireNeoCulture(1, "invasiveCulture"));	  // true as not native and province is colonial
+
+	EXPECT_FALSE(mapper.doesProvinceRequireNeoCulture(2, "nativeCulture"));		  // false because not colonial
+	EXPECT_FALSE(mapper.doesProvinceRequireNeoCulture(2, "otherNativeCulture")); // false because not colonial
+	EXPECT_FALSE(mapper.doesProvinceRequireNeoCulture(2, "invasiveCulture"));	  // false because not colonial
+
+	EXPECT_FALSE(mapper.doesProvinceRequireNeoCulture(3, "nativeCulture"));		  // false because not colonial
+	EXPECT_FALSE(mapper.doesProvinceRequireNeoCulture(3, "otherNativeCulture")); // false because not colonial
+	EXPECT_FALSE(mapper.doesProvinceRequireNeoCulture(3, "invasiveCulture"));	  // false because not colonial
+}
+
+TEST(Mappers_RegionMapperTests, invasiveCulturesCanBeFlagged)
+{
+	std::stringstream worldInput;
+	worldInput << "old_world = { test_superregion3 = {assimilation = 2} }\n";
+	worldInput << "new_world = { test_superregion1 = {assimilation = 2} test_superregion2 = {assimilation = 2} }\n";
+	mappers::SuperGroupMapper superGroupMapper;
+	superGroupMapper.loadSuperGroups(worldInput);
+
+	std::stringstream colonialInput;
+	colonialInput << "colonial_alaska = {\n";
+	colonialInput << "	provinces = {\n";
+	colonialInput << "		1\n";
+	colonialInput << "	}\n";
+	colonialInput << "}\n";
+	EU4::ColonialRegionLoader regions;
+	regions.loadColonialRegions(colonialInput);
+
+	EU4::RegionManager mapper;
+	mapper.loadColonialRegions(regions);
+
+	EXPECT_EQ("colonial_alaska", mapper.getColonialRegionForProvince(1));
+	EXPECT_EQ(std::nullopt, mapper.getColonialRegionForProvince(2));
+
+	std::stringstream areaStream;
+	areaStream << "test_area = { 1 } \n"; // <- in colonial region
+	areaStream << "test_area2 = { 2 } ";  // <- not colonial but same continent/superregion/supergroup
+	areaStream << "test_area3 = { 3 } ";  // old world
+	std::stringstream regionStream;
+	regionStream << "test_region = { areas = { test_area } }";
+	regionStream << "test_region2 = { areas = { test_area2 } }\n";
+	regionStream << "test_region3 = { areas = { test_area3 } }\n";
+	std::stringstream superRegionStream;
+	superRegionStream << "test_superregion1 = { test_region }\n"; // <- colonial superregion, new world
+	superRegionStream << "test_superregion2 = { test_region2 }";  // new world
+	superRegionStream << "test_superregion3 = { test_region3 }";  // old world
+	mapper.loadRegions(areaStream, regionStream, superRegionStream);
+	mapper.loadSuperGroups(superGroupMapper);
+	mapper.applySuperGroups();
+
+	std::stringstream provincesInput;
+	provincesInput << "-1={ history = { culture = nativeCulture religion = rel } }\n";
+	provincesInput << "-2={ history = { culture = otherNativeCulture religion = rel } }\n}";
+	provincesInput << "-3={ history = { culture = invasiveCulture religion = rel } }\n";
+	EU4::ProvinceManager theProvinceManager;
+	theProvinceManager.loadProvinces(provincesInput);
+
+	EXPECT_EQ("nativeCulture", theProvinceManager.getProvince(1)->getStartingCulture());
+	EXPECT_EQ("otherNativeCulture", theProvinceManager.getProvince(2)->getStartingCulture());
+	EXPECT_EQ("invasiveCulture", theProvinceManager.getProvince(3)->getStartingCulture());
+
+	mapper.catalogueNativeCultures(theProvinceManager);
+
+	// let's put all cultures in province 1 which generates neocultures.
+	const auto& prov1 = theProvinceManager.getProvince(1);
+	prov1->buildPopRatios(DatingData()); // build native ratio
+	auto history = prov1->getProvinceHistory();
+	// first ratio is there:
+	EXPECT_EQ(1, history.getPopRatios().size());
+	history.addPopRatio(EU4::PopRatio("otherNativeCulture", "")); // add the other 2.
+	history.addPopRatio(EU4::PopRatio("invasiveCulture", ""));
+	prov1->setProvinceHistory(history);
+
+	mapper.flagNeoCultures(theProvinceManager);
+
+	// now grab all 3 popratios.
+	const auto& pop1 = prov1->getProvinceHistory().getPopRatios()[0];
+	const auto& pop2 = prov1->getProvinceHistory().getPopRatios()[1];
+	const auto& pop3 = prov1->getProvinceHistory().getPopRatios()[2];
+
+	EXPECT_EQ("nativeCulture", pop1.getCulture());
+	EXPECT_FALSE(pop1.isNeoCulture());
+
+	EXPECT_EQ("otherNativeCulture", pop2.getCulture());
+	EXPECT_FALSE(pop2.isNeoCulture());
+
+	EXPECT_EQ("invasiveCulture", pop3.getCulture());
+	EXPECT_TRUE(pop3.isNeoCulture());
 }

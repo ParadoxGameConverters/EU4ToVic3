@@ -1,0 +1,19 @@
+﻿DIPLOMATIC_PLAYS = {
+	c:TEX = {
+		create_diplomatic_play = {
+			name = texan_war_of_independence
+		
+			target_state = s:STATE_TEXAS.region_state:MEX
+			
+			war = yes
+			
+			type = dp_return_state
+			
+			add_war_goal = {
+				holder = c:MEX
+				type = return_state
+				target_state = s:STATE_TEXAS.region_state:TEX
+			}			
+		}	
+	}
+}

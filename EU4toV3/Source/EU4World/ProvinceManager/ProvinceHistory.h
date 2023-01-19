@@ -4,7 +4,6 @@
 #include "Date.h"
 #include "DatingData.h"
 #include "PopRatio.h"
-#include <optional>
 #include <vector>
 
 namespace EU4
@@ -29,6 +28,8 @@ class ProvinceHistory: commonItems::convenientParser
 	[[nodiscard]] const auto& getCultureHistory() const { return cultureHistory; }
 
 	void buildPopRatios(double assimilationFactor, const DatingData& datingData);
+	void addPopRatio(const PopRatio& pop) { popRatios.emplace_back(pop); }
+	void markNeoCulture(const std::string& culture);
 	void purgeHistories();
 	[[nodiscard]] const auto& getPopRatios() const { return popRatios; }
 

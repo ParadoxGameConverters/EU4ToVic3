@@ -8,11 +8,13 @@
 #include "EU4ActivePolicy.h"
 #include "EU4CountryFlags.h"
 #include "EU4CountryModifier.h"
+#include "EU4CountryRival.h"
 #include "EU4Technology.h"
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 #include <cmath>
+#include <numeric>
 
 EU4::Country::Country(std::string countryTag, std::istream& theStream): tag(std::move(countryTag))
 {
@@ -27,21 +29,20 @@ EU4::Country::Country(std::string countryTag, std::istream& theStream): tag(std:
 		religion = historicalReligion;
 
 	determineJapaneseRelations();
-	filterLeaders();
-
-	// finalize history data.
-	if (government == "republic" || government == "theocracy")
-		historicalEntry.monarchy = false;
+	filterActiveCharacters();
 }
 
 void EU4::Country::registerKeys()
 {
 	registerKeyword("name", [this](std::istream& theStream) {
 		name = commonItems::getString(theStream);
-		name = commonItems::normalizeUTF8Path(name); // normalize due to disk export!
+		// this is win1252 name, so, immediately convert to UTF8.
+		name = commonItems::convertWin1252ToUTF8(name);
 	});
 	registerKeyword("adjective", [this](std::istream& theStream) {
 		adjective = commonItems::singleString(theStream).getString();
+		// this is win1252 adjective, so, immediately convert to UTF8.
+		adjective = commonItems::convertWin1252ToUTF8(adjective);
 	});
 	registerKeyword("colors", [this](std::istream& theStream) {
 		nationalColors = NationalSymbol(theStream);
@@ -56,7 +57,7 @@ void EU4::Country::registerKeys()
 		libertyDesire = commonItems::getDouble(theStream);
 	});
 	registerKeyword("institutions", [this](std::istream& theStream) {
-		for (auto institution: commonItems::getInts(theStream))
+		for (const auto institution: commonItems::getInts(theStream))
 			if (institution == 1)
 				embracedInstitutions.push_back(true);
 			else
@@ -72,7 +73,7 @@ void EU4::Country::registerKeys()
 		religion = commonItems::getString(theStream);
 	});
 	registerKeyword("age_score", [this](std::istream& theStream) {
-		for (auto& agScore: commonItems::getDoubles(theStream))
+		for (const auto& agScore: commonItems::getDoubles(theStream))
 			score += agScore;
 	});
 	registerKeyword("stability", [this](std::istream& theStream) {
@@ -98,9 +99,16 @@ void EU4::Country::registerKeys()
 		government = theSection.getGovernment();
 		governmentReforms = theSection.getGovernmentReforms();
 	});
+	registerKeyword("government_rank", [this](std::istream& theStream) {
+		governmentRank = commonItems::getInt(theStream);
+	});
 	registerKeyword("active_relations", [this](std::istream& theStream) {
 		const EU4Relations activeRelations(theStream);
 		relations = activeRelations.getRelations();
+	});
+	registerKeyword("rival", [this](std::istream& theStream) {
+		const EU4CountryRival rival(theStream);
+		rivals.emplace(rival.getCountry());
 	});
 	registerRegex("army|navy", [this](const std::string& armyFloats, std::istream& theStream) {
 		const EU4Army theArmy(theStream, armyFloats);
@@ -125,9 +133,7 @@ void EU4::Country::registerKeys()
 	});
 	registerKeyword("history", [this](std::istream& theStream) {
 		const CountryHistory theCountryHistory(theStream);
-		historicalLeaders = theCountryHistory.getLeaders();
-		if (!theCountryHistory.getDynasty().empty())
-			historicalEntry.lastDynasty = theCountryHistory.getDynasty();
+		historicalCharacters = theCountryHistory.getCharacters();
 		historicalPrimaryCulture = theCountryHistory.getPrimaryCulture();
 		historicalReligion = theCountryHistory.getReligion();
 	});
@@ -151,15 +157,56 @@ void EU4::Country::registerKeys()
 	registerKeyword("army_professionalism", [this](std::istream& theStream) {
 		armyProfessionalism = commonItems::getDouble(theStream);
 	});
+	registerKeyword("monarch", [this](std::istream& theStream) {
+		monarchID = LeaderID(theStream).getIDNum();
+	});
+	registerKeyword("heir", [this](std::istream& theStream) {
+		heirID = LeaderID(theStream).getIDNum();
+	});
+	registerKeyword("queen", [this](std::istream& theStream) {
+		consortID = LeaderID(theStream).getIDNum();
+	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-void EU4::Country::filterLeaders()
+void EU4::Country::filterActiveCharacters()
 {
-	// Dropping all leaders not currently in service (regardless of assignment).
-	for (const auto& leader: historicalLeaders)
-		if (activeLeaderIDs.find(leader.getID()) != activeLeaderIDs.end())
-			militaryLeaders.push_back(leader);
+	// Ruling characters *repeat*. Because they aren't actually characters, they are records of character states at a given time.
+	// Filter out duplicates.
+	std::set<int> seenMonarchIDs;
+	std::set<int> seenLeaderIDs;
+
+	for (auto it = historicalCharacters.rbegin(); it != historicalCharacters.rend(); ++it)
+	{
+		const auto& character = *it;
+		if (character.ruler && monarchID == character.monarchID && !seenMonarchIDs.contains(monarchID))
+		{
+			filteredCharacters.push_back(character);
+			seenMonarchIDs.emplace(monarchID);
+			if (character.leaderID > 0)
+				seenLeaderIDs.emplace(character.leaderID);
+		}
+		else if (character.consort && character.monarchID == consortID && !seenMonarchIDs.contains(consortID))
+		{
+			filteredCharacters.push_back(character);
+			seenMonarchIDs.emplace(character.monarchID);
+			if (character.leaderID > 0)
+				seenLeaderIDs.emplace(character.leaderID);
+		}
+		else if (character.heir && character.monarchID == heirID && !seenMonarchIDs.contains(heirID))
+		{
+			filteredCharacters.push_back(character);
+			seenMonarchIDs.emplace(character.monarchID);
+			if (character.leaderID > 0)
+				seenLeaderIDs.emplace(character.leaderID);
+		}
+		else if (character.leaderID > 0 && activeLeaderIDs.contains(character.leaderID) && !seenLeaderIDs.contains(character.leaderID))
+		{
+			// rulers and heirs that are also leaders have already been added so they won't replicate here.
+			filteredCharacters.push_back(character);
+			seenLeaderIDs.emplace(character.leaderID);
+		}
+	}
 }
 
 void EU4::Country::determineJapaneseRelations()
@@ -315,17 +362,19 @@ void EU4::Country::takeArmies(const std::shared_ptr<Country>& target)
 {
 	// acquire target's armies, navies, admirals, and generals
 	armies.insert(armies.end(), target->armies.begin(), target->armies.end());
-	militaryLeaders.insert(militaryLeaders.end(), target->militaryLeaders.begin(), target->militaryLeaders.end());
+	for (const auto& character: target->getCharacters())
+		if (!character.leaderType.empty())
+			filteredCharacters.push_back(character);
 	target->clearArmies();
 }
 
 void EU4::Country::clearArmies()
 {
 	armies.clear();
-	militaryLeaders.clear();
+	filteredCharacters.clear();
 }
 
-bool EU4::Country::cultureSurvivesInCores(const std::map<std::string, std::shared_ptr<Country>>& theCountries)
+bool EU4::Country::cultureSurvivesInCores(const std::map<std::string, std::shared_ptr<Country>>& theCountries) const
 {
 	// If this were a LANDLESS country, is there some other country that contains our people?
 	// If so, we shouldn't delete this country as it may reappear.
@@ -371,7 +420,7 @@ std::string EU4::Country::getAdjective(const std::string& language) const
 int EU4::Country::getNumEmbracedInstitutions() const
 {
 	auto total = 0;
-	for (auto institution: embracedInstitutions)
+	for (const auto institution: embracedInstitutions)
 		if (institution)
 			total++;
 	return total;
@@ -393,4 +442,14 @@ double EU4::Country::getCountryWeight() const
 	for (const auto& province: provinces)
 		totalDev += province->getProvinceWeight();
 	return totalDev;
+}
+
+double EU4::Country::getAverageDevelopment() const
+{
+	if (provinces.empty())
+		return 0;
+	const double totalDev = std::accumulate(provinces.begin(), provinces.end(), 0.0, [](double sum, const std::shared_ptr<Province>& province) {
+		return sum + province->getBaseTax() + province->getBaseProduction() + province->getBaseManpower();
+	});
+	return totalDev / static_cast<double>(provinces.size());
 }

@@ -1,6 +1,6 @@
 #ifndef DEFINITION_SCRAPER
 #define DEFINITION_SCRAPER
-#include "ModLoader/ModLoader.h"
+#include "ModLoader/ModFilesystem.h"
 #include <optional>
 #include <set>
 #include <string>
@@ -10,7 +10,7 @@ namespace EU4
 class DefinitionScraper
 {
   public:
-	void loadDefinitions(const std::string& EU4Path, const Mods& mods);
+	void loadDefinitions(const commonItems::ModFilesystem& modFS);
 	void loadDefinitions(std::istream& theStream);
 
 	[[nodiscard]] const auto& getProvinceIDs() const { return provinceIDs; }

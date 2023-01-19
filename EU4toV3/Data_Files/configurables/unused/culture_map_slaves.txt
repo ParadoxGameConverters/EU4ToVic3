@@ -1,0 +1,13 @@
+## Slave generation
+# For countries whose primary culture is the listed Vic3 master culture, all slaves in it will be re-assigned another culture
+# Usage:
+# link = { master = [culture] slave = [culture] }
+# If a master culture has no slave culture defined, slaves will be of the same culture as master ones
+# The calculation is done BEFORE colonial culture dynamic generation
+
+link = { master = british slave = afro_american }
+#link = { master = british slave = afro_caribbean }
+link = { master = spanish slave = afro_caribeno }
+link = { master = catalan slave = afro_caribeno }
+link = { master = portuguese slave = afro_brazilian }
+link = { master = french slave = afro_antillean }

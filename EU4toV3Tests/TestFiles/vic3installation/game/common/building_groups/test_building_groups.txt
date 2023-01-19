@@ -1,0 +1,44 @@
+bg_manufacturing = {
+	category = urban
+	
+	should_auto_expand = { 
+		default_auto_expand_rule = yes
+	}
+
+	land_usage = rural
+}
+
+bg_light_industry = {
+	parent_group = bg_manufacturing
+
+	lens = light_industry
+	
+	urbanization = 20
+	infrastructure_usage_per_level = 2
+}
+
+bg_heavy_industry = {
+	parent_group = bg_manufacturing
+
+	lens = heavy_industry
+	
+	urbanization = 30
+	infrastructure_usage_per_level = 3
+
+	capped_by_resources = no
+}
+
+bg_ultra_industry = {
+	parent_group = bg_heavy_industry
+	infrastructure_usage_per_level = 1
+}
+
+bg_mega_industry = {
+	parent_group = bg_ultra_industry
+
+	capped_by_resources = yes
+}
+
+bg_giga_industry = {
+	parent_group = bg_mega_industry
+}

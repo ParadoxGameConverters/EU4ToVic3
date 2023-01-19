@@ -22,12 +22,12 @@ class CountryManager: public commonItems::parser
 
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 	[[nodiscard]] std::shared_ptr<Country> getCountry(const std::string& tag) const;
-	[[nodiscard]] const auto& getHistoricalData() const { return historicalData; }
+	[[nodiscard]] const auto& getLocalizationLoader() const { return localizationLoader; }
 
 	// the prep
-	void loadUnitTypes(const std::string& EU4Path, const Mods& mods);
-	void loadCommonCountries(const std::string& EU4Path, const Mods& mods);
-	void loadLocalizations(const std::string& EU4Path, const Mods& mods);
+	void loadUnitTypes(const commonItems::ModFilesystem& modFS);
+	void loadCommonCountries(const commonItems::ModFilesystem& modFS);
+	void loadLocalizations(const commonItems::ModFilesystem& modFS);
 	void loadLocalizations(const EU4LocalizationLoader& loader) { localizationLoader = loader; }
 	void bootNationMergeMapper() { nationMergeMapper.loadNationMerge(); }
 	void loadNationMergeMapper(const mappers::NationMergeMapper& mapper) { nationMergeMapper = mapper; }
@@ -42,9 +42,7 @@ class CountryManager: public commonItems::parser
 	void injectLocalizations();
 	void mergeNations();
 	void filterDeadNations(Configuration::DEADCORES toggle);
-
-	// the dessert
-	void fillHistoricalData();
+	void assignGPStatuses();
 
   private:
 	void registerKeys();
@@ -59,9 +57,6 @@ class CountryManager: public commonItems::parser
 	CommonCountryLoader commonCountryLoader;
 	mappers::NationMergeMapper nationMergeMapper;
 	EU4LocalizationLoader localizationLoader;
-
-	// export data for hoi4
-	std::vector<std::pair<std::string, HistoricalEntry>> historicalData;
 };
 } // namespace EU4
 

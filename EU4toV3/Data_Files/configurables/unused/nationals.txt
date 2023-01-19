@@ -1,0 +1,114 @@
+## TO BE UPDATED FOR VIC3 (mechanics yet to be understood)
+
+
+# Only add here national tags for cultures. If a culture only
+# has a national union TAG (ashkenazi), then it belongs here.
+# Otherwise (swedish, SCA) it also belongs in unions.txt
+
+# Germanics
+link = { tag = GER culture = north_german culture = south_german }
+link = { tag = NGF culture = north_german NOT = GER_unified }
+link = { tag = SGF culture = south_german NOT = GER_unified }
+
+#Beneluxian
+link = { tag = NET culture = dutch NOT = BEL_unified }
+link = { tag = BEL culture = flemish culture = wallonian }
+link = { tag = FLA culture = flemish NOT = BEL_unified }
+link = { tag = WLL culture = wallonian NOT = BEL_unified }
+
+#Swiss
+link = { tag = SWI culture = swiss NOT = GER_unified }
+
+#Scandinavian => Scandinavia
+link = { tag = SCA culture = swedish culture = danish culture = norwegian culture = icelandic }
+link = { tag = SWE culture = swedish NOT = SCA_unified } #Sweden
+link = { tag = DEN culture = danish NOT = SCA_unified } #Denmark
+link = { tag = NOR culture = norwegian NOT = SCA_unified } #Norway
+link = { tag = ICL culture = icelandic NOT = SCA_unified } #Iceland
+link = { tag = FIN culture = finnish NOT = SCA_unified } #Finland
+link = { tag = SMI culture = sami NOT = SCA_unified } #Sami
+
+#British
+link = { tag = GBR culture = english culture = scottish }
+link = { tag = ENG culture = english NOT = GBR_unified } #England
+link = { tag = SCO culture = scottish NOT = GBR_unified } #Scotland
+link = { tag = IRE culture = irish NOT = GBR_unified } #Ireland
+link = { tag = WLS culture = welsh NOT = GBR_unified NOT = ENG_unified } #Wales
+
+#Italian => Italy
+link = { tag = ITA culture = north_italian culture = south_italian }
+link = { tag = SIC culture = south_italian NOT = ITA_unified }
+link = { tag = LOM culture = north_italian NOT = ITA_unified }
+link = { tag = MLT culture = maltese NOT = ITA_unified } #Malta
+
+#Iberian => Spain
+link = { tag = SPA culture = catalan culture = spanish }
+link = { tag = CAT culture = catalan NOT = SPA_unified } #and Catalonia
+link = { tag = POR culture = portuguese } #Portugal
+
+#French => France
+link = { tag = FRA culture = french culture = occitan }
+link = { tag = OCC culture = occitan NOT = FRA_unified } #and Occitania
+link = { tag = BRI culture = breton } #and Brittany
+
+#South Slavic => Yugoslavia (and own nationstates)
+link = { tag = YUG culture = croat culture = serb culture = slovene culture = bosniak }
+link = { tag = CRO culture = croat NOT = YUG_unified }
+link = { tag = SER culture = ser NOT = YUG_unified }
+link = { tag = BUL culture = bulgarian NOT = YUG_unified }
+link = { tag = ALB culture = albanian }
+link = { tag = SLO culture = slovene NOT = YUG_unified }
+link = { tag = BOS culture = bosniak NOT = YUG_unified }
+
+#Romanian and Hungarian
+link = { tag = ROM culture = romanian } #Romania
+link = { tag = HUN culture = hungarian } #Hungary
+
+#Polish-Lithuanian => PLC
+link = { tag = POL culture = polish } #and Poland
+link = { tag = LIT culture = lithuanian } #and Lithuania
+link = { tag = PRU culture = pruthenian }
+link = { tag = SRB culture = sorbian }
+
+#Other West Slavic
+link = { tag = POM culture = old_pommeranian } #Slavic Pomerania
+
+#Czechoslovakian => Czechoslovakia
+link = { tag = CZH culture = czech NOT = SLV_unified } 
+link = { tag = SLV culture = slovak NOT = CZH_unified }
+
+#East Slavic
+link = { tag = RUS culture = russian }
+link = { tag = BYE culture = byelorussian NOT = RUS_unified } #Russia and Belarus
+link = { tag = UKR culture = ukrainian NOT = RUS_unified } #Ukraine
+
+#Baltic => United Baltic
+link = { tag = LAT culture = latvian } #and Latvia
+link = { tag = EST culture = estonian } #and Estonia
+
+#Levantine
+#link = { tag = GRE culture = greek } # Avoid, until we can block Byzantines out
+link = { tag = GEO culture = georgian } #Georgia
+link = { tag = ARM culture = armenian } #Armenia
+
+#Turkic
+link = { tag = TUR culture = turkish }
+link = { tag = AZB culture = azerbaijani } #Azerbaijan
+link = { tag = NCA culture = north_caucasian }
+
+#Arab => Arabia
+link = { tag = ARA culture = bedouin } # Just Saudi Arabia
+link = { tag = EGY culture = misri }
+link = { tag = IRQ culture = mashriqi }
+link = { tag = ADU culture = andalucian NOT = SPA_unified } #Andalucia (converted)
+
+#Persian
+link = { tag = PER culture = persian } #Persia
+link = { tag = TRH culture = uzbek culture = kirgiz culture = tajik }
+link = { tag = KAZ culture = kazak } #(Converted) Kazakh
+link = { tag = TRC culture = turkmen }
+link = { tag = XIN culture = uighur } #Xinjiang => Uyghurs
+
+#Oceanic
+link = { tag = HAW culture = hawaiian } #Hawaii
+link = { tag = UNT culture = maori } #Maori

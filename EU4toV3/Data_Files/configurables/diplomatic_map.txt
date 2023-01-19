@@ -1,0 +1,24 @@
+# EU4 agreement types map directly to Vic3 ones.
+# You can list a certain agreement in multiple categories (both types and boosts).
+# Since all agreements will break on poor relations (unlike eu4), we don't have agreement penalties.
+
+# AGREEMENT TYPES:
+# DO NOT ALTER LEFT SIDE, ONLY RIGHT!
+# Single-sided agreements
+dominion = { private_enterprise self_governing_colony }
+protectorate = { colony }
+defensive_pact = { guarantee }
+tributary = { tributary_state }
+personal_union = { personal_union }
+puppet = { client_march march crown_colony }
+vassal = { vassal client_vassal daimyo_vassal }
+trade_agreement = { steer_trade }
+customs_union = { transfer_trade_power }
+# Double-sided agreements
+double_defensive_pact = { alliance }
+
+# RELATIONSHIP BOOSTS:
+# You can alter both left and right side. Can also make left negative.
+10 = { private_enterprise self_governing_colony colony tributary_state client_march march crown_colony vassal client_vassal daimyo_vassal }
+25 = { royal_marriage guarantee personal_union steer_trade transfer_trade_power }
+50 = { alliance }

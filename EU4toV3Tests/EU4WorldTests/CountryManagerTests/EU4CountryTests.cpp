@@ -92,6 +92,20 @@ TEST(EU4World_EU4CountryTests, capitalScoreAndTechCanBeRead)
 	EXPECT_EQ("western", country.getTechGroup());
 }
 
+TEST(EU4World_EU4CountryTests, RivalsCanBeRead)
+{
+	std::stringstream input;
+	input << "rival = {\n";
+	input << "   country = TA1\n";
+	input << "}\n";
+	input << "rival = {\n";
+	input << "   country = TA2\n";
+	input << "}\n";
+	const EU4::Country country("TAG", input);
+
+	EXPECT_THAT(country.getRivals(), UnorderedElementsAre("TA1", "TA2"));
+}
+
 TEST(EU4World_EU4CountryTests, cultureAndReligionCanBeRead)
 {
 	std::stringstream deadInput;
@@ -247,20 +261,56 @@ TEST(EU4World_EU4CountryTests, LeadersCanBeReadAndProcessed)
 	input << "}\n";
 
 	const EU4::Country country("TAG", input);
-	const auto& leaders = country.getMilitaryLeaders();
+	const auto& leaders = country.getCharacters();
 
 	ASSERT_EQ(2, leaders.size());
 
 	const auto& leader1 = leaders[0];
 	const auto& leader2 = leaders[1];
 
-	EXPECT_EQ("Sir. Still Alive", leader1.getName());
-	EXPECT_FALSE(leader1.isLand());
-	EXPECT_EQ(6, leader1.getManeuver());
+	EXPECT_EQ("His Majesty Still Kicking", leader1.leaderName);
+	EXPECT_TRUE(leader1.ruler);
+	EXPECT_EQ(4, leader1.fire);
 
-	EXPECT_EQ("His Majesty Still Kicking", leader2.getName());
-	EXPECT_TRUE(leader2.isLand());
-	EXPECT_EQ(4, leader2.getFire());
+	EXPECT_EQ("Sir. Still Alive", leader2.leaderName);
+	EXPECT_EQ(6, leader2.maneuver);
+}
+
+TEST(EU4World_EU4CountryTests, DuplicateLeadersAreDitched)
+{
+	std::stringstream input;
+	input << "history={\n";
+	input << "	1751.1.1={\n";
+	input << "		heir={\n";
+	input << "			name=\"I was heir\"\n";
+	input << "			id={\n";
+	input << "				id=1\n";
+	input << "			}\n";
+	input << "			monarch_name=\"I'll be monarch\"\n";
+	input << "		}\n";
+	input << "	}\n";
+	input << "	1768.1.1={\n";
+	input << "		monarch_heir={\n";
+	input << "			name=\"Now I'm monarch\"\n";
+	input << "			id={\n";
+	input << "				id=1\n";
+	input << "			}\n";
+	input << "		}\n";
+	input << "	}\n";
+	input << "}\n";
+	input << "monarch={\n";
+	input << "	id=1\n";
+	input << "}\n";
+
+	const EU4::Country country("TAG", input);
+	const auto& leaders = country.getCharacters();
+
+	ASSERT_EQ(1, leaders.size());
+
+	const auto& leader = leaders[0];
+
+	EXPECT_EQ("Now I'm monarch", leader.name);
+	EXPECT_TRUE(leader.ruler);
 }
 
 TEST(EU4World_EU4CountryTests, ArmiesCanBeLoaded)
@@ -400,6 +450,7 @@ TEST(EU4World_EU4CountryTests, DependentStuffCanBeSet)
 TEST(EU4World_EU4CountryTests, GovernmentAndReformsCanBeSetAndPinged)
 {
 	std::stringstream input;
+	input << "government_rank = 2\n";
 	input << "government = {\n";
 	input << "	government = monarchy\n";
 	input << "	reform_stack={\n";
@@ -408,6 +459,7 @@ TEST(EU4World_EU4CountryTests, GovernmentAndReformsCanBeSetAndPinged)
 	input << "}\n";
 	const EU4::Country country("TAG", input);
 
+	EXPECT_EQ(2, country.getGovernmentRank());
 	EXPECT_EQ("monarchy", country.getGovernment());
 	EXPECT_THAT(country.getReforms(), UnorderedElementsAre("monarchy_mechanic", "plutocratic_reform", "enforce_privileges_reform"));
 	EXPECT_TRUE(country.hasReform("plutocratic_reform"));
@@ -588,72 +640,6 @@ TEST(EU4World_EU4CountryTests, NationalColorsCanBeLoadedInTheirFullGlory)
 	EXPECT_EQ("= rgb { 12 34 56 }", symbol.getCustomColors()->flagColors->outputRgb());
 }
 
-TEST(EU4World_EU4CountryTests, BotanicalExpeditionGrabsLastDynasty)
-{
-	std::stringstream input;
-	input << "history={\n";
-	input << "	1265.1.1={\n";
-	input << "		monarch={\n";
-	input << "			dynasty=\"fancyskirt\"\n";
-	input << "		}\n";
-	input << "	}\n";
-	input << "	1765.1.1={\n";
-	input << "		monarch={\n";
-	input << "			dynasty=\"fancykilt\"\n";
-	input << "		}\n";
-	input << "	}\n";
-	input << "	1768.1.1={\n";
-	input << "		monarch={\n";
-	input << "			dynasty=\"fancypants\"\n";
-	input << "		}\n";
-	input << "	}\n";
-	input << "}\n";
-	const EU4::Country country("TAG", input);
-
-	const auto& historicalEntry = country.getHistoricalEntry();
-
-	EXPECT_EQ("fancypants", historicalEntry.lastDynasty);
-	EXPECT_TRUE(historicalEntry.monarchy);
-}
-
-TEST(EU4World_EU4CountryTests, BotanicalExpeditionFlipsMonarchyForRepublics)
-{
-	std::stringstream input;
-	input << "government = { government = republic }\n";
-	input << "history={\n";
-	input << "	1768.1.1={\n";
-	input << "		monarch={\n";
-	input << "			dynasty=\"fancypants\"\n";
-	input << "		}\n";
-	input << "	}\n";
-	input << "}\n";
-	const EU4::Country country("TAG", input);
-
-	const auto& historicalEntry = country.getHistoricalEntry();
-
-	EXPECT_EQ("fancypants", historicalEntry.lastDynasty);
-	EXPECT_FALSE(historicalEntry.monarchy);
-}
-
-TEST(EU4World_EU4CountryTests, BotanicalExpeditionFlipsMonarchyForTheocracies)
-{
-	std::stringstream input;
-	input << "government = { government = theocracy }\n";
-	input << "history={\n";
-	input << "	1768.1.1={\n";
-	input << "		monarch={\n";
-	input << "			dynasty=\"fancypants\"\n";
-	input << "		}\n";
-	input << "	}\n";
-	input << "}\n";
-	const EU4::Country country("TAG", input);
-
-	const auto& historicalEntry = country.getHistoricalEntry();
-
-	EXPECT_EQ("fancypants", historicalEntry.lastDynasty);
-	EXPECT_FALSE(historicalEntry.monarchy);
-}
-
 TEST(EU4World_EU4CountryTests, CultureInCoresCanBePingedForCoresUnderForeignRule)
 {
 	std::stringstream provinceInput; // this province belongs to TAG, but it's a core of GAT and has their primary culture.
@@ -736,6 +722,39 @@ TEST(EU4World_EU4CountryTests, CountryWeightSumsProvinceWeight)
 	EXPECT_NEAR(12, province1->getProvinceWeight(), 0.0001);
 	EXPECT_NEAR(42, province2->getProvinceWeight(), 0.0001);
 	EXPECT_NEAR(54, country.getCountryWeight(), 0.0001);
+}
+
+TEST(EU4World_EU4CountryTests, CountryReturnsAverageProvinceDevelopment)
+{
+	std::stringstream province1Input;
+	province1Input << "owner = TAG\n";
+	province1Input << "base_tax = 3\n";
+	province1Input << "base_production = 4\n";
+	province1Input << "base_manpower = 5\n";
+	auto province1 = std::make_shared<EU4::Province>("-1", province1Input);
+
+	std::stringstream province2Input;
+	province2Input << "owner = TAG\n";
+	province2Input << "base_tax = 13\n";
+	province2Input << "base_production = 14\n";
+	province2Input << "base_manpower = 15\n";
+	auto province2 = std::make_shared<EU4::Province>("-2", province2Input);
+
+	std::stringstream input;
+	EU4::Country country("TAG", input);
+
+	country.addProvince(province1);
+	country.addProvince(province2);
+
+	EXPECT_NEAR(27, country.getAverageDevelopment(), 0.0001); // 12 + 42 = 54, 54 / 2 = 27
+}
+
+TEST(EU4World_EU4CountryTests, AverageProvinceDevelopmentForNoProvincesIsZero)
+{
+	std::stringstream input;
+	EU4::Country country("TAG", input);
+
+	EXPECT_DOUBLE_EQ(0, country.getAverageDevelopment());
 }
 
 TEST(EU4World_EU4CountryTests, UpdateRegimentTypesUpdatesallArmies)

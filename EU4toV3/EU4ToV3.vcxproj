@@ -1,26 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|x64">
-      <Configuration>Debug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release-NoCopies|Win32">
-      <Configuration>Release-NoCopies</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release-NoCopies|x64">
-      <Configuration>Release-NoCopies</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
@@ -33,200 +13,32 @@
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v141_xp</PlatformToolset>
-    <CharacterSet>NotSet</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v141_xp</PlatformToolset>
-    <CharacterSet>NotSet</CharacterSet>
-  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(SolutionDir)\DebugIntermediate\</IntDir>
-    <IncludePath>$(IncludePath)</IncludePath>
-    <OutDir>$(ProjectDir)\..\$(Configuration)\EU4ToVic3\</OutDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)$(Configuration)\EU4ToVic3\</OutDir>
-    <TargetName>EU4ToVic3Converter</TargetName>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)\ReleaseIntermediate\</IntDir>
-    <BOOST_INCLUDE Condition=" '$(BOOST_INCLUDE)' == '' ">
-		H:\Projects\Development\Boost\boost_1_57_0
-	</BOOST_INCLUDE>
-    <IncludePath>$(IncludePath)</IncludePath>
-    <TargetName>EU4ToVic3Converter</TargetName>
-    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <ReferencePath>$(ReferencePath)</ReferencePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <LibraryWPath>$(LibraryWPath)</LibraryWPath>
-    <SourcePath>$(SourcePath)</SourcePath>
-    <ExcludePath>$(ExcludePath)</ExcludePath>
-    <OutDir>$(ProjectDir)\..\$(Configuration)\EU4ToVic3\</OutDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <BOOST_INCLUDE Condition=" '$(BOOST_INCLUDE)' == '' ">
-		H:\Projects\Development\Boost\boost_1_57_0
-	</BOOST_INCLUDE>
     <TargetName>EU4ToVic3Converter</TargetName>
     <OutDir>$(SolutionDir)$(Configuration)\EU4ToVic3\</OutDir>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)\ReleaseIntermediate\</IntDir>
-    <BOOST_INCLUDE Condition=" '$(BOOST_INCLUDE)' == '' ">
-		H:\Projects\Development\Boost\boost_1_57_0
-	</BOOST_INCLUDE>
-    <IncludePath>$(UniversalCRT_IncludePath);$(BOOST_INCLUDE);$(VCInstallDir)include;$(WindowsSdkDir)include;../common_items</IncludePath>
-    <TargetName>EU4toV3Converter</TargetName>
-    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
-    <OutDir>$(SolutionDir)$(Configuration)\EU4ToVic3</OutDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|x64'">
-    <BOOST_INCLUDE Condition=" '$(BOOST_INCLUDE)' == '' ">
-		H:\Projects\Development\Boost\boost_1_57_0
-	</BOOST_INCLUDE>
-    <IncludePath>$(UniversalCRT_IncludePath);$(BOOST_INCLUDE);$(VCInstallDir)include;$(WindowsSdkDir)include;../common_items</IncludePath>
-    <TargetName>EU4toV3Converter</TargetName>
-    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\common_items;..\ZipLib;$(WindowsSDK_IncludePath)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Libraries\boost_1_55_0_lib\lib32-msvc-12.0;$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <PostBuildEvent>
-      <Command>Copy_Files_Debug.bat</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Copying Data Files</Message>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_SILENCE_CXX20_U8PATH_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\commonItems;..\ZipLib;Source\Mappers;Source;Source\EU4World;Source\Vic3World;Source\Helpers</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX20_U8PATH_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\commonItems;..\commonItems\external\zip\src;Source\Mappers;Source;Source\EU4World;Source\EU4World\Loaders;Source\V3World;Source\Helpers;Source\Configuration;Source\Output</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>Resources\rakaly.dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <PostBuildEvent>
-      <Command>Copy_Files_Debug.bat</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Copying Data Files</Message>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\commonItems;..\ZipLib</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <PostBuildEvent>
-      <Command>Copy_Files.bat</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Copying Data Files</Message>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX20_U8PATH_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\commonItems;..\commonItems\ZipLib;Source\Mappers;Source;Source\EU4World;Source\EU4World\Loaders;Source\V3World;Source\Helpers;Source\Configuration</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>Resources\rakaly.dll.lib;$(SolutionDir)$(Platform)\$(Configuration)\ZipLib.lib;$(SolutionDir)$(Platform)\$(Configuration)\lzma.lib;$(SolutionDir)$(Platform)\$(Configuration)\bzip2.lib;$(SolutionDir)$(Platform)\$(Configuration)\zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
@@ -238,73 +50,17 @@ call save_commit_id.bat</Command>
       <Message>Copying Data Files</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(BOOST_INCLUDE);$(WindowsSDK_IncludePath)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>
-      </Message>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-NoCopies|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(BOOST_INCLUDE);$(WindowsSDK_IncludePath)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>
-      </Message>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\commonItems\Color.cpp" />
     <ClCompile Include="..\commonItems\CommonFunctions.cpp" />
     <ClCompile Include="..\commonItems\ConvenientParser.cpp" />
     <ClCompile Include="..\commonItems\ConverterVersion.cpp" />
     <ClCompile Include="..\commonItems\Date.cpp" />
+    <ClCompile Include="..\commonItems\external\zip\src\zip.c" />
     <ClCompile Include="..\commonItems\GameVersion.cpp" />
     <ClCompile Include="..\commonItems\iconvlite.cpp" />
     <ClCompile Include="..\commonItems\Log.cpp" />
+    <ClCompile Include="..\commonItems\ModLoader\ModFilesystem.cpp" />
     <ClCompile Include="..\commonItems\ModLoader\ModLoader.cpp" />
     <ClCompile Include="..\commonItems\ModLoader\ModParser.cpp" />
     <ClCompile Include="..\commonItems\OSCommonLayer.cpp" />
@@ -331,6 +87,7 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\EU4World\CountryManager\EU4CountryFlags.cpp" />
     <ClCompile Include="Source\EU4World\CountryManager\EU4CountryManager.cpp" />
     <ClCompile Include="Source\EU4World\CountryManager\EU4CountryModifier.cpp" />
+    <ClCompile Include="Source\EU4World\CountryManager\EU4CountryRival.cpp" />
     <ClCompile Include="Source\EU4World\CountryManager\EU4Technology.cpp" />
     <ClCompile Include="Source\EU4World\CountryManager\NationalSymbol\EU4CustomColors.cpp" />
     <ClCompile Include="Source\EU4World\CountryManager\NationalSymbol\EU4NationalSymbol.cpp" />
@@ -349,6 +106,7 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\EU4World\Loaders\DefinitionScraper\DefinitionScraper.cpp" />
     <ClCompile Include="Source\EU4World\Loaders\LocalizationLoader\EU4LocalizationLoader.cpp" />
     <ClCompile Include="Source\EU4World\Loaders\ModLoader\ModNames.cpp" />
+    <ClCompile Include="Source\EU4World\Loaders\ReligionLoader\ReligionEntry.cpp" />
     <ClCompile Include="Source\EU4World\Loaders\ReligionLoader\ReligionLoader.cpp" />
     <ClCompile Include="Source\EU4World\Loaders\ReligionLoader\ReligionParser.cpp" />
     <ClCompile Include="Source\EU4World\Loaders\UnitTypeLoader\UnitTypeLoader.cpp" />
@@ -367,12 +125,146 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\EU4World\WarParser\WarParser.cpp" />
     <ClCompile Include="Source\EU4World\World.cpp" />
     <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\Mappers\CharacterTraitMapper\AssignmentMapping.cpp" />
+    <ClCompile Include="Source\Mappers\CharacterTraitMapper\CharacterTraitMapper.cpp" />
+    <ClCompile Include="Source\Mappers\CharacterTraitMapper\SkillMapping.cpp" />
+    <ClCompile Include="Source\Mappers\BuildingMapper\BuildingMapper.cpp" />
+    <ClCompile Include="Source\Mappers\BuildingMapper\BuildingMapping.cpp" />
+    <ClCompile Include="Source\Mappers\ColonialRegionMapper\ColonialRegionMapper.cpp" />
+    <ClCompile Include="Source\Mappers\ColonialRegionMapper\ColonialRegionMapping.cpp" />
+    <ClCompile Include="Source\Mappers\ColonialTagMapper\ColonialTagMapper.cpp" />
+    <ClCompile Include="Source\Mappers\ColonialTagMapper\ColonialTagMapping.cpp" />
+    <ClCompile Include="Source\Mappers\CountryMapper\CountryMapper.cpp" />
+    <ClCompile Include="Source\Mappers\CountryMapper\CountryMapping.cpp" />
+    <ClCompile Include="Source\Mappers\CountryTierMapper\CountryTierMapper.cpp" />
+    <ClCompile Include="Source\Mappers\CountryTierMapper\CountryTierMapping.cpp" />
+    <ClCompile Include="Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionEntry.cpp" />
+    <ClCompile Include="Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionLoader.cpp" />
+    <ClCompile Include="Source\Mappers\CultureMapper\CultureMapper.cpp" />
+    <ClCompile Include="Source\Mappers\CultureMapper\CultureMappingRule.cpp" />
+    <ClCompile Include="Source\Mappers\CultureMapper\CultureTraitMapper\CultureTraitMapper.cpp" />
+    <ClCompile Include="Source\Mappers\CultureMapper\CultureTraitMapper\CultureTraitMapping.cpp" />
+    <ClCompile Include="Source\Mappers\CultureMapper\NameListLoader\NameListEntry.cpp" />
+    <ClCompile Include="Source\Mappers\CultureMapper\NameListLoader\NameListLoader.cpp" />
+    <ClCompile Include="Source\Mappers\CultureMapper\NameListMapper\NameListMapper.cpp" />
+    <ClCompile Include="Source\Mappers\CultureMapper\NameListMapper\NameListMapping.cpp" />
+    <ClCompile Include="Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapper.cpp" />
+    <ClCompile Include="Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapping.cpp" />
+    <ClCompile Include="Source\Mappers\DiplomaticMapper\DiplomaticMapper.cpp" />
+    <ClCompile Include="Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapper.cpp" />
+    <ClCompile Include="Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapping.cpp" />
+    <ClCompile Include="Source\Mappers\IGIdeologiesMapper\IGIdeologiesMapper.cpp" />
+    <ClCompile Include="Source\Mappers\IGIdeologiesMapper\IGIdeologiesMapping.cpp" />
+    <ClCompile Include="Source\Mappers\LawMapper\LawGroup.cpp" />
+    <ClCompile Include="Source\Mappers\LawMapper\LawMapper.cpp" />
+    <ClCompile Include="Source\Mappers\LawMapper\LawMapping.cpp" />
+    <ClCompile Include="Source\Mappers\MinorityPopMapper\MinorityPop.cpp" />
+    <ClCompile Include="Source\Mappers\MinorityPopMapper\MinorityPopMapper.cpp" />
     <ClCompile Include="Source\Mappers\NationMergeMapper\MergeBlock.cpp" />
     <ClCompile Include="Source\Mappers\NationMergeMapper\NationMergeMapper.cpp" />
+    <ClCompile Include="Source\Mappers\PopulationSetupMapper\PopulationSetupMapper.cpp" />
+    <ClCompile Include="Source\Mappers\PopulationSetupMapper\PopulationSetupMapping.cpp" />
+    <ClCompile Include="Source\Mappers\ProvinceMapper\ProvinceMapper.cpp" />
+    <ClCompile Include="Source\Mappers\ProvinceMapper\ProvinceMapping.cpp" />
+    <ClCompile Include="Source\Mappers\ProvinceMapper\ProvinceMappingsVersion.cpp" />
+    <ClCompile Include="Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDefinitionEntry.cpp" />
+    <ClCompile Include="Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDefinitionLoader.cpp" />
+    <ClCompile Include="Source\Mappers\ReligionMapper\ReligionGroupMapper\ReligionGroupMapper.cpp" />
+    <ClCompile Include="Source\Mappers\ReligionMapper\ReligionGroupMapper\ReligionGroupMapping.cpp" />
+    <ClCompile Include="Source\Mappers\ReligionMapper\ReligionMapper.cpp" />
+    <ClCompile Include="Source\Mappers\ReligionMapper\ReligionMapping.cpp" />
     <ClCompile Include="Source\Mappers\SuperGroupMapper\AssimilationParser.cpp" />
     <ClCompile Include="Source\Mappers\SuperGroupMapper\SuperGroupMapper.cpp" />
     <ClCompile Include="Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp" />
-    <ClCompile Include="Source\V3World\Output\outModFile.cpp" />
+    <ClCompile Include="Source\Mappers\TechSetupMapper\TechSetupMapper.cpp" />
+    <ClCompile Include="Source\Mappers\TechSetupMapper\TechSetupMapping.cpp" />
+    <ClCompile Include="Source\Mappers\VNColonialMapper\VNColonialMapper.cpp" />
+    <ClCompile Include="Source\Mappers\VNColonialMapper\VNColonialMapping.cpp" />
+    <ClCompile Include="Source\Output\outCharacters\outCharacters.cpp" />
+    <ClCompile Include="Source\Output\outCoAs\outCoAa.cpp" />
+    <ClCompile Include="Source\Output\outBuildings\outBuildings.cpp" />
+    <ClCompile Include="Source\Output\outCountries\outCountries.cpp" />
+    <ClCompile Include="Source\Output\outCultures\outCultures.cpp" />
+    <ClCompile Include="Source\Output\outDiplomacy\outDiplomacy.cpp" />
+    <ClCompile Include="Source\Output\outDiplomaticPlays\outDiplomaticPlays.cpp" />
+    <ClCompile Include="Source\Output\outFlagDefinitions\outFlagDefinitions.cpp" />
+    <ClCompile Include="Source\Output\outLocalizations\outLocalizations.cpp" />
+    <ClCompile Include="Source\Output\outMetadataFile\outMetadataFile.cpp" />
+    <ClCompile Include="Source\Output\outPops\outPops.cpp" />
+    <ClCompile Include="Source\Output\outReligions\outReligions.cpp" />
+    <ClCompile Include="Source\Output\outStates\outCommonHistoryStates.cpp" />
+    <ClCompile Include="Source\Output\outWorld.cpp" />
+    <ClCompile Include="Source\V3World\ClayManager\ClayManager.cpp" />
+    <ClCompile Include="Source\V3World\ClayManager\State\Chunk.cpp" />
+    <ClCompile Include="Source\V3World\ClayManager\State\State.cpp" />
+    <ClCompile Include="Source\V3World\ClayManager\State\StateModifier.cpp" />
+    <ClCompile Include="Source\V3World\ClayManager\State\SubState.cpp" />
+    <ClCompile Include="Source\V3World\FlagCrafter\FlagColorLoader\FlagColorLoader.cpp" />
+    <ClCompile Include="Source\V3World\FlagCrafter\FlagCrafter.cpp" />
+    <ClCompile Include="Source\V3World\FlagCrafter\FlagNameLoader\FlagNameLoader.cpp" />
+    <ClCompile Include="Source\V3World\EconomyManager\Building\Building.cpp" />
+    <ClCompile Include="Source\V3World\EconomyManager\Building\BuildingGroup.cpp" />
+    <ClCompile Include="Source\V3World\EconomyManager\Building\BuildingGroups.cpp" />
+    <ClCompile Include="Source\V3World\EconomyManager\Building\ProductionMethods\ProductionMethod.cpp" />
+    <ClCompile Include="Source\V3World\EconomyManager\Building\ProductionMethods\ProductionMethodGroup.cpp" />
+    <ClCompile Include="Source\V3World\EconomyManager\EconomyManager.cpp" />
+    <ClCompile Include="Source\V3World\EconomyManager\NationalBudget\Sector.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\BuildingLoader\BuildingGroupLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\BuildingLoader\BuildingLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\BuildingLoader\ProductionMethodLoader\ProductionMethodGroupLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\BuildingLoader\ProductionMethodLoader\ProductionMethodLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\CountryDefinitionLoader\CountryDefinitionLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\LawLoader\LawEntry.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\LawLoader\LawLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\DefinesLoader\BuildingScriptValuesLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\DefinesLoader\EconDefinesLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\LocLoader\LocalizationLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\MajorFormablesLoader\MajorFormablesEntry.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\MajorFormablesLoader\MajorFormablesLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\NationalBudgetLoader\NationalBudgetLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\NationalBudgetLoader\Script\AddScript.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\NationalBudgetLoader\Script\MathScript.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\NationalBudgetLoader\Script\MultiplyScript.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\NationalBudgetLoader\SectorLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\PopLoader\PopEntry.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\PopLoader\PopLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\PopLoader\StateEntries.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\PopLoader\SubStateEntries.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\PopLoader\SubStatePopEntries.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\StateLoader\StateLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\StateModifierLoader\StateModifierLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\SuperRegionLoader\SuperRegionLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\SuperRegionLoader\V3Region.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\SuperRegionLoader\V3SuperRegion.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\TechLoader\TechEntry.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\TechLoader\TechLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\TerrainLoader\TerrainLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\TerrainLoader\TerrainModifierLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaBuildingLoader\VanillaBuildingEntries.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaBuildingLoader\VanillaBuildingLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaCharacterLoader\VanillaCharacterEntries.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaCharacterLoader\VanillaCharacterLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaCountryHistoryLoader\VanillaCountryHistoryEntries.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaCountryHistoryLoader\VanillaCountryHistoryLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaAgreementEntry.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaDiplomacyEntries.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaDiplomacyLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaRelationEntry.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaTruceEntry.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaDiplomaticPlayLoader\VanillaDiplomaticPlayEntries.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaDiplomaticPlayLoader\VanillaDiplomaticPlayLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaPopulationHistoryLoader\VanillaPopulationHistoryLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaStateLoader\VanillaStateEntries.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaStateLoader\VanillaStateEntry.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaStateLoader\VanillaStateLoader.cpp" />
+    <ClCompile Include="Source\V3World\Loaders\VanillaStateLoader\VanillaSubStateEntry.cpp" />
+    <ClCompile Include="Source\V3World\PoliticalManager\Country\Character.cpp" />
+    <ClCompile Include="Source\V3World\PoliticalManager\Country\Country.cpp" />
+    <ClCompile Include="Source\V3World\PoliticalManager\PoliticalManager.cpp" />
+    <ClCompile Include="Source\V3World\PoliticalManager\TechValues\TechValues.cpp" />
+    <ClCompile Include="Source\V3World\PopManager\PopManager.cpp" />
+    <ClCompile Include="Source\V3World\PopManager\Pops\StatePops.cpp" />
+    <ClCompile Include="Source\V3World\PopManager\Pops\SubStatePops.cpp" />
     <ClCompile Include="Source\V3World\V3World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -382,9 +274,12 @@ call save_commit_id.bat</Command>
     <ClInclude Include="..\commonItems\ConvenientParser.h" />
     <ClInclude Include="..\commonItems\ConverterVersion.h" />
     <ClInclude Include="..\commonItems\Date.h" />
+    <ClInclude Include="..\commonItems\external\zip\src\zip.h" />
     <ClInclude Include="..\commonItems\GameVersion.h" />
     <ClInclude Include="..\commonItems\iconvlite.h" />
     <ClInclude Include="..\commonItems\Log.h" />
+    <ClInclude Include="..\commonItems\ModLoader\Mod.h" />
+    <ClInclude Include="..\commonItems\ModLoader\ModFilesystem.h" />
     <ClInclude Include="..\commonItems\ModLoader\ModLoader.h" />
     <ClInclude Include="..\commonItems\ModLoader\ModParser.h" />
     <ClInclude Include="..\commonItems\OSCompatibilityLayer.h" />
@@ -401,6 +296,7 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\EU4World\CountryManager\CountryGovernment\EU4ReformStackSection.h" />
     <ClInclude Include="Source\EU4World\CountryManager\CountryHistory\CountryHistory.h" />
     <ClInclude Include="Source\EU4World\CountryManager\CountryHistory\CountryHistoryDate.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\CountryLeader\EU4Character.h" />
     <ClInclude Include="Source\EU4World\CountryManager\CountryLeader\EU4Leader.h" />
     <ClInclude Include="Source\EU4World\CountryManager\CountryLeader\EU4LeaderID.h" />
     <ClInclude Include="Source\EU4World\CountryManager\CountryRelations\EU4RelationDetails.h" />
@@ -411,6 +307,7 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\EU4World\CountryManager\EU4CountryFlags.h" />
     <ClInclude Include="Source\EU4World\CountryManager\EU4CountryManager.h" />
     <ClInclude Include="Source\EU4World\CountryManager\EU4CountryModifier.h" />
+    <ClInclude Include="Source\EU4World\CountryManager\EU4CountryRival.h" />
     <ClInclude Include="Source\EU4World\CountryManager\EU4Technology.h" />
     <ClInclude Include="Source\EU4World\CountryManager\NationalSymbol\EU4CustomColors.h" />
     <ClInclude Include="Source\EU4World\CountryManager\NationalSymbol\EU4CustomColorsBlock.h" />
@@ -430,6 +327,8 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\EU4World\Loaders\DefinitionScraper\DefinitionScraper.h" />
     <ClInclude Include="Source\EU4World\Loaders\LocalizationLoader\EU4LocalizationLoader.h" />
     <ClInclude Include="Source\EU4World\Loaders\ModLoader\ModNames.h" />
+    <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\Religion.h" />
+    <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\ReligionEntry.h" />
     <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\ReligionLoader.h" />
     <ClInclude Include="Source\EU4World\Loaders\ReligionLoader\ReligionParser.h" />
     <ClInclude Include="Source\EU4World\Loaders\UnitTypeLoader\UnitType.h" />
@@ -450,13 +349,159 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\EU4World\WarParser\WarParser.h" />
     <ClInclude Include="Source\EU4World\World.h" />
     <ClInclude Include="Source\Helpers\rakaly.h" />
+    <ClInclude Include="Source\Mappers\CharacterTraitMapper\AssignmentMapping.h" />
+    <ClInclude Include="Source\Mappers\CharacterTraitMapper\CharacterTraitMapper.h" />
+    <ClInclude Include="Source\Mappers\CharacterTraitMapper\SkillMapping.h" />
     <ClInclude Include="Source\Helpers\rakaly_wrapper.h" />
+    <ClInclude Include="Source\Mappers\BuildingMapper\BuildingMapper.h" />
+    <ClInclude Include="Source\Mappers\BuildingMapper\BuildingMapping.h" />
+    <ClInclude Include="Source\Mappers\ColonialRegionMapper\ColonialRegionMapper.h" />
+    <ClInclude Include="Source\Mappers\ColonialRegionMapper\ColonialRegionMapping.h" />
+    <ClInclude Include="Source\Mappers\ColonialTagMapper\ColonialTagMapper.h" />
+    <ClInclude Include="Source\Mappers\ColonialTagMapper\ColonialTagMapping.h" />
+    <ClInclude Include="Source\Mappers\CountryMapper\CountryMapper.h" />
+    <ClInclude Include="Source\Mappers\CountryMapper\CountryMapping.h" />
+    <ClInclude Include="Source\Mappers\CountryTierMapper\CountryTierMapper.h" />
+    <ClInclude Include="Source\Mappers\CountryTierMapper\CountryTierMapping.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDef.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionEntry.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionLoader.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\CultureMapper.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\CultureMappingRule.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\CultureTraitMapper\CultureTraitMapper.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\CultureTraitMapper\CultureTraitMapping.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\NameListLoader\NameListEntry.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\NameListLoader\NameListLoader.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\NameListMapper\NameListMapper.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\NameListMapper\NameListMapping.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapper.h" />
+    <ClInclude Include="Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapping.h" />
+    <ClInclude Include="Source\Mappers\DiplomaticMapper\DiplomaticMapper.h" />
+    <ClInclude Include="Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapper.h" />
+    <ClInclude Include="Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapping.h" />
+    <ClInclude Include="Source\Mappers\IGIdeologiesMapper\IGIdeologiesMapper.h" />
+    <ClInclude Include="Source\Mappers\IGIdeologiesMapper\IGIdeologiesMapping.h" />
+    <ClInclude Include="Source\Mappers\LawMapper\LawGroup.h" />
+    <ClInclude Include="Source\Mappers\LawMapper\LawMapper.h" />
+    <ClInclude Include="Source\Mappers\LawMapper\LawMapping.h" />
+    <ClInclude Include="Source\Mappers\MinorityPopMapper\MinorityPop.h" />
+    <ClInclude Include="Source\Mappers\MinorityPopMapper\MinorityPopMapper.h" />
     <ClInclude Include="Source\Mappers\NationMergeMapper\MergeBlock.h" />
     <ClInclude Include="Source\Mappers\NationMergeMapper\NationMergeMapper.h" />
+    <ClInclude Include="Source\Mappers\PopulationSetupMapper\PopulationSetupMapper.h" />
+    <ClInclude Include="Source\Mappers\PopulationSetupMapper\PopulationSetupMapping.h" />
+    <ClInclude Include="Source\Mappers\ProvinceMapper\ProvinceMapper.h" />
+    <ClInclude Include="Source\Mappers\ProvinceMapper\ProvinceMapping.h" />
+    <ClInclude Include="Source\Mappers\ProvinceMapper\ProvinceMappingsVersion.h" />
+    <ClInclude Include="Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDef.h" />
+    <ClInclude Include="Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDefinitionEntry.h" />
+    <ClInclude Include="Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDefinitionLoader.h" />
+    <ClInclude Include="Source\Mappers\ReligionMapper\ReligionGroupMapper\ReligionGroupMapper.h" />
+    <ClInclude Include="Source\Mappers\ReligionMapper\ReligionGroupMapper\ReligionGroupMapping.h" />
+    <ClInclude Include="Source\Mappers\ReligionMapper\ReligionMapper.h" />
+    <ClInclude Include="Source\Mappers\ReligionMapper\ReligionMapping.h" />
     <ClInclude Include="Source\Mappers\SuperGroupMapper\AssimilationParser.h" />
     <ClInclude Include="Source\Mappers\SuperGroupMapper\SuperGroupMapper.h" />
     <ClInclude Include="Source\Mappers\SuperGroupMapper\SuperRegionParser.h" />
-    <ClInclude Include="Source\V3World\Output\outModFile.h" />
+    <ClInclude Include="Source\Mappers\TechSetupMapper\TechSetupMapper.h" />
+    <ClInclude Include="Source\Mappers\TechSetupMapper\TechSetupMapping.h" />
+    <ClInclude Include="Source\Mappers\VNColonialMapper\VNColonialMapper.h" />
+    <ClInclude Include="Source\Mappers\VNColonialMapper\VNColonialMapping.h" />
+    <ClInclude Include="Source\Output\outCharacters\outCharacters.h" />
+    <ClInclude Include="Source\Output\outCoAs\outCoAa.h" />
+    <ClInclude Include="Source\Output\outBuildings\outBuildings.h" />
+    <ClInclude Include="Source\Output\outCountries\outCountries.h" />
+    <ClInclude Include="Source\Output\outCultures\outCultures.h" />
+    <ClInclude Include="Source\Output\outDiplomacy\outDiplomacy.h" />
+    <ClInclude Include="Source\Output\outDiplomaticPlays\outDiplomaticPlays.h" />
+    <ClInclude Include="Source\Output\outFlagDefinitions\outFlagDefinitions.h" />
+    <ClInclude Include="Source\Output\outLocalizations\outLocalizations.h" />
+    <ClInclude Include="Source\Output\outMetadataFile\outMetadataFile.h" />
+    <ClInclude Include="Source\Output\outPops\outPops.h" />
+    <ClInclude Include="Source\Output\outReligions\outReligions.h" />
+    <ClInclude Include="Source\Output\outStates\outCommonHistoryStates.h" />
+    <ClInclude Include="Source\Output\outWorld.h" />
+    <ClInclude Include="Source\V3World\ClayManager\ClayManager.h" />
+    <ClInclude Include="Source\V3World\ClayManager\ClayMapTypedefs.h" />
+    <ClInclude Include="Source\V3World\ClayManager\State\Chunk.h" />
+    <ClInclude Include="Source\V3World\ClayManager\State\Province.h" />
+    <ClInclude Include="Source\V3World\ClayManager\State\SourceProvinceData.h" />
+    <ClInclude Include="Source\V3World\ClayManager\State\State.h" />
+    <ClInclude Include="Source\V3World\ClayManager\State\StateModifier.h" />
+    <ClInclude Include="Source\V3World\ClayManager\State\SubState.h" />
+    <ClInclude Include="Source\V3World\FlagCrafter\FlagColorLoader\FlagColorLoader.h" />
+    <ClInclude Include="Source\V3World\FlagCrafter\FlagCrafter.h" />
+    <ClInclude Include="Source\V3World\FlagCrafter\FlagNameLoader\FlagNameLoader.h" />
+    <ClInclude Include="Source\V3World\EconomyManager\Building\Building.h" />
+    <ClInclude Include="Source\V3World\EconomyManager\Building\BuildingGroup.h" />
+    <ClInclude Include="Source\V3World\EconomyManager\Building\BuildingGroups.h" />
+    <ClInclude Include="Source\V3World\EconomyManager\Building\ProductionMethods\ProductionMethod.h" />
+    <ClInclude Include="Source\V3World\EconomyManager\Building\ProductionMethods\ProductionMethodGroup.h" />
+    <ClInclude Include="Source\V3World\EconomyManager\EconomyManager.h" />
+    <ClInclude Include="Source\V3World\EconomyManager\NationalBudget\Sector.h" />
+    <ClInclude Include="Source\V3World\Loaders\BuildingLoader\BuildingGroupLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\BuildingLoader\BuildingLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\BuildingLoader\ProductionMethodLoader\ProductionMethodGroupLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\BuildingLoader\ProductionMethodLoader\ProductionMethodLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\CountryDefinitionLoader\CountryDefinitionLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\LawLoader\Law.h" />
+    <ClInclude Include="Source\V3World\Loaders\LawLoader\LawEntry.h" />
+    <ClInclude Include="Source\V3World\Loaders\LawLoader\LawLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\DefinesLoader\BuildingScriptValuesLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\DefinesLoader\EconDefinesLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\LocLoader\LocalizationLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\MajorFormablesLoader\MajorFormablesEntry.h" />
+    <ClInclude Include="Source\V3World\Loaders\MajorFormablesLoader\MajorFormablesLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\NationalBudgetLoader\NationalBudgetLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\NationalBudgetLoader\Script\AddScript.h" />
+    <ClInclude Include="Source\V3World\Loaders\NationalBudgetLoader\Script\MathScript.h" />
+    <ClInclude Include="Source\V3World\Loaders\NationalBudgetLoader\Script\MultiplyScript.h" />
+    <ClInclude Include="Source\V3World\Loaders\NationalBudgetLoader\SectorLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\PopLoader\PopEntry.h" />
+    <ClInclude Include="Source\V3World\Loaders\PopLoader\PopLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\PopLoader\StateEntries.h" />
+    <ClInclude Include="Source\V3World\Loaders\PopLoader\SubStateEntries.h" />
+    <ClInclude Include="Source\V3World\Loaders\PopLoader\SubStatePopEntries.h" />
+    <ClInclude Include="Source\V3World\Loaders\StateLoader\StateLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\StateModifierLoader\StateModifierLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\SuperRegionLoader\SuperRegionLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\SuperRegionLoader\V3Region.h" />
+    <ClInclude Include="Source\V3World\Loaders\SuperRegionLoader\V3SuperRegion.h" />
+    <ClInclude Include="Source\V3World\Loaders\TechLoader\Tech.h" />
+    <ClInclude Include="Source\V3World\Loaders\TechLoader\TechEntry.h" />
+    <ClInclude Include="Source\V3World\Loaders\TechLoader\TechLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\TerrainLoader\TerrainLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\TerrainLoader\TerrainModifierLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaBuildingLoader\VanillaBuildingEntries.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaBuildingLoader\VanillaBuildingLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaCharacterLoader\VanillaCharacterEntries.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaCharacterLoader\VanillaCharacterLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaCountryHistoryLoader\VanillaCountryHistoryEntries.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaCountryHistoryLoader\VanillaCountryHistoryLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaAgreementEntry.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaDiplomacyEntries.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaDiplomacyLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaRelationEntry.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaTruceEntry.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaDiplomaticPlayLoader\VanillaDiplomaticPlayEntries.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaDiplomaticPlayLoader\VanillaDiplomaticPlayLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaPopulationHistoryLoader\VanillaPopulationHistoryLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaStateLoader\VanillaStateEntries.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaStateLoader\VanillaStateEntry.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaStateLoader\VanillaStateLoader.h" />
+    <ClInclude Include="Source\V3World\Loaders\VanillaStateLoader\VanillaSubStateEntry.h" />
+    <ClInclude Include="Source\V3World\PoliticalManager\Country\Character.h" />
+    <ClInclude Include="Source\V3World\PoliticalManager\Country\Country.h" />
+    <ClInclude Include="Source\V3World\PoliticalManager\Diplomacy\Agreement.h" />
+    <ClInclude Include="Source\V3World\PoliticalManager\Diplomacy\Relation.h" />
+    <ClInclude Include="Source\V3World\PoliticalManager\PoliticalManager.h" />
+    <ClInclude Include="Source\V3World\PoliticalManager\TechValues\TechValues.h" />
+    <ClInclude Include="Source\V3World\PopManager\Demographic.h" />
+    <ClInclude Include="Source\V3World\PopManager\PopManager.h" />
+    <ClInclude Include="Source\V3World\PopManager\PopPoints.h" />
+    <ClInclude Include="Source\V3World\PopManager\Pops\Pop.h" />
+    <ClInclude Include="Source\V3World\PopManager\Pops\StatePops.h" />
+    <ClInclude Include="Source\V3World\PopManager\Pops\SubStatePops.h" />
     <ClInclude Include="Source\V3World\V3World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

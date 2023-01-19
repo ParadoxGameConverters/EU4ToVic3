@@ -56,30 +56,20 @@ void Configuration::registerKeys()
 
 	// ------- options
 
-	registerKeyword("max_literacy", [this](std::istream& theStream) {
-		const auto maxLiteracyString = commonItems::getString(theStream);
-		configBlock.MaxLiteracy = static_cast<double>(std::stoi(maxLiteracyString)) / 100;
-		Log(LogLevel::Info) << "Max Literacy: " << configBlock.MaxLiteracy;
+	registerKeyword("start_date", [this](std::istream& theStream) {
+		const auto startDateString = commonItems::getString(theStream);
+		configBlock.startDate = static_cast<STARTDATE>(std::stoi(startDateString));
+		Log(LogLevel::Info) << "Start Date: " << startDateString;
 	});
 	registerKeyword("remove_type", [this](std::istream& theStream) {
 		const auto removeTypeString = commonItems::getString(theStream);
 		configBlock.removeType = static_cast<DEADCORES>(std::stoi(removeTypeString));
-		Log(LogLevel::Info) << "Core Removal: " << removeTypeString;
+		Log(LogLevel::Info) << "Releasables Removal: " << removeTypeString;
 	});
 	registerKeyword("pop_shaping", [this](std::istream& theStream) {
 		const auto popShapingString = commonItems::getString(theStream);
 		configBlock.popShaping = static_cast<POPSHAPES>(std::stoi(popShapingString));
 		Log(LogLevel::Info) << "Pop Shaping: " << popShapingString;
-	});
-	registerKeyword("core_handling", [this](std::istream& theStream) {
-		const auto coreHandlingString = commonItems::getString(theStream);
-		configBlock.coreHandling = static_cast<COREHANDLES>(std::stoi(coreHandlingString));
-		Log(LogLevel::Info) << "Core Handling: " << coreHandlingString;
-	});
-	registerKeyword("pop_shaping_factor", [this](std::istream& theStream) {
-		const auto popShapingFactorString = commonItems::getString(theStream);
-		configBlock.popShapingFactor = static_cast<double>(std::stoi(popShapingFactorString));
-		Log(LogLevel::Info) << "Pop Shaping Factor: " << configBlock.popShapingFactor;
 	});
 	registerKeyword("euro_centrism", [this](std::istream& theStream) {
 		const auto euroCentrismString = commonItems::getString(theStream);
@@ -116,10 +106,10 @@ void Configuration::verifyVic3Path()
 		throw std::runtime_error(Vic3Path + " does not exist!");
 	// TODO: OSX and Linux paths are speculative
 	// TODO: As a matter of fact...
-	if (!commonItems::DoesFileExist(Vic3Path + "/victoria2.exe") && !commonItems::DoesFileExist(Vic3Path + "/Vic3game") &&
+	if (!commonItems::DoesFileExist(Vic3Path + "/binaries/victoria3.exe") && !commonItems::DoesFileExist(Vic3Path + "/Vic3game") &&
 		 !commonItems::DoesFileExist(Vic3Path + "/binaries/victoria3"))
 		throw std::runtime_error(Vic3Path + " does not contain Victoria 3!");
-	if (!commonItems::DoesFileExist(Vic3Path + "/map/positions.txt"))
+	if (!commonItems::DoesFileExist(Vic3Path + "/game/map_data/provinces.png"))
 		throw std::runtime_error(Vic3Path + " does not appear to be a valid Vic3 install!");
 	Log(LogLevel::Info) << "\tVic3 install path is " << Vic3Path;
 	Vic3Path += "/game/"; // We're adding "/game/" since all we ever need from now on is in that subdirectory.

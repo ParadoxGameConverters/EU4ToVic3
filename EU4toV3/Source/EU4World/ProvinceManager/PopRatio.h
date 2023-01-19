@@ -16,6 +16,7 @@ class PopRatio
 	void convertToCulture(const std::string& culture);
 	void convertToReligion(const std::string& religion);
 	void convertTo(const std::string& culture, const std::string& religion);
+	void multiplyRatios(double factor);
 
 	[[nodiscard]] const auto& getCulture() const { return culture; }
 	[[nodiscard]] const auto& getReligion() const { return religion; }
@@ -25,6 +26,8 @@ class PopRatio
 
 	void markSpent() { spent = true; }
 	[[nodiscard]] auto isSpent() const { return spent; }
+	void markNeoCulture() { neoCulture = true; }
+	[[nodiscard]] auto isNeoCulture() const { return neoCulture; }
 
 	void mergeRatio(const PopRatio& ratio);
 
@@ -34,7 +37,8 @@ class PopRatio
 	double upperRatio = 1;
 	double middleRatio = 1;
 	double lowerRatio = 1;
-	bool spent = false; // Mark as disposable.
+	bool spent = false;		 // Mark as disposable.
+	bool neoCulture = false; // if true, V3World should map this to an appropriate neoculture.
 };
 } // namespace EU4
 
