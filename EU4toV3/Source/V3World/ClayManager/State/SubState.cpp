@@ -163,19 +163,42 @@ double V3::SubState::calcBuildingTerrainWeight(const std::string& building,
 	return theWeight;
 }
 
-double V3::SubState::calcBuildingEU4Weight(const std::string& building, const mappers::BuildingMapper& buildingMapper) const
+double V3::SubState::calcBuildingEU4Weight(const std::string& v3BuildingName, const mappers::BuildingMapper& buildingMapper) const
 {
-	// TODO(Gawquon):
-	// Weight from having EU4 buildings that map to VIC3 buildings in SubState weighted data
-	return 0.0;
+	// Weight from having EU4 buildings that map to VIC3 buildings in SubState weighted data.
+	// For a substate made from 5 full chunks each containing a university, weight for building_university will be 5.
+
+	double totalWeight = 0;
+	for (const auto& [weightedData, dataWeight]: weightedSourceProvinceData)
+		for (const auto& eu4building: weightedData.buildings)
+			if (buildingMapper.getVic3Buildings(eu4building).contains(v3BuildingName))
+				totalWeight += dataWeight;
+	return totalWeight;
 }
 
 double V3::SubState::calcBuildingTraitWeight(const Building& building, const std::map<std::string, StateModifier>& traitMap, double traitStrength) const
 {
-	// TODO(Gawquon):
 	// Weight from having state traits that boost the building or building_group of building
 	// Goods outputs will be done later in PM pass
-	return 0.0;
+
+	// Note: I have no idea what this function returns. -Z.
+
+	double totalWeight = 0;
+	const auto& buildingGroupName = building.getBuildingGroup();
+	const auto& subStateTraits = getHomeState()->getTraits();
+	for (const auto& trait: subStateTraits)
+	{
+		if (!traitMap.contains(trait))
+			continue;
+		const auto& modifier = traitMap.at(trait);
+
+		// take building if present, otherwise take building group. Don't stack both.
+		if (modifier.getBuildingModifiersMap().contains(building.getName()))
+			totalWeight += modifier.getBuildingModifiersMap().at(building.getName()) * traitStrength;
+		else if (modifier.getBuildingGroupModifiersMap().contains(buildingGroupName))
+			totalWeight += modifier.getBuildingGroupModifiersMap().at(buildingGroupName) * traitStrength;
+	}
+	return totalWeight;
 }
 
 double V3::SubState::calcBuildingInvestmentWeight(const Building& building) const
@@ -189,9 +212,30 @@ double V3::SubState::calcBuildingInvestmentWeight(const Building& building) cons
 	return 1;
 }
 
-double V3::SubState::calcBuildingIndustrialWeight(const Building& building) const
+double V3::SubState::calcBuildingIndustrialWeight(const Building& building, const BuildingGroups& buildingGroups) const
 {
-	// TODO(Gawquon): This is where Eurocentrisim's industry score will come in.
+	const auto civLevelFactor = owner->getProcessedData().civLevel / 100;
+	auto buildingGroup = buildingGroups.getBuildingGroupMap().at(building.getBuildingGroup());
+	if (buildingGroup->getCategory())
+	{
+		if (*buildingGroup->getCategory() == "urban")
+			return civLevelFactor;
+		else
+			return 1;
+	}
+
+	while (buildingGroup->getParentName())
+	{
+		buildingGroup = buildingGroups.getBuildingGroupMap().at(*buildingGroup->getParentName());
+		if (buildingGroup->getCategory())
+		{
+			if (*buildingGroup->getCategory() == "urban")
+				return civLevelFactor;
+			else
+				return 1;
+		}
+	}
+
 	return 0.0;
 }
 
@@ -373,7 +417,7 @@ void V3::SubState::convertDemographics(const ClayManager& clayManager,
 	demographics.swap(newDemographics);
 }
 
-void V3::SubState::generatePops(int totalAmount)
+void V3::SubState::generatePops(int totalAmount, const int slaveAmount)
 {
 	// At this moment we're not concerned with pop types. HOWEVER, demographics do carry a varying amount of ratios,
 	// which are (were?) supposed to apply to those types.
@@ -392,8 +436,21 @@ void V3::SubState::generatePops(int totalAmount)
 	for (const auto& demo: demographics)
 	{
 		const double demoSum = (demo.upperRatio + demo.middleRatio + demo.lowerRatio) / 3;
-		auto pop = Pop(demo.culture, demo.religion, "", static_cast<int>(round(static_cast<double>(totalAmount) * demoSum / demoTotal)));
-		subStatePops.addPop(pop);
+		if (totalAmount - slaveAmount >= 0)
+		{
+			auto pop = Pop(demo.culture, demo.religion, "", static_cast<int>(round(static_cast<double>(totalAmount - slaveAmount) * demoSum / demoTotal)));
+			subStatePops.addPop(pop);
+			if (slaveAmount > 0)
+			{
+				auto slavePop = Pop(demo.culture, demo.religion, "slaves", static_cast<int>(round(static_cast<double>(slaveAmount) * demoSum / demoTotal)));
+				subStatePops.addPop(slavePop);
+			}
+		}
+		else
+		{
+			Log(LogLevel::Warning) << "Substate in " << getHomeStateName() << " wants " << slaveAmount << " slaves but only gets " << totalAmount
+										  << " pops! Bailing!";
+		}
 	}
 }
 

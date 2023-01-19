@@ -15,6 +15,7 @@ class BuildingGroup: commonItems::parser
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getParentName() const { return parent; }
+	[[nodiscard]] const auto& getCategory() const { return category; }
 	[[nodiscard]] const auto& getInfrastructureCost() const { return infrastructureCost; }
 	[[nodiscard]] const auto& possibleIsResourceCapped() const { return resourceCapped; }
 
@@ -23,6 +24,7 @@ class BuildingGroup: commonItems::parser
 	void registerKeys();
 	std::string name;
 	std::optional<std::string> parent;
+	std::optional<std::string> category;
 	std::optional<double> infrastructureCost;
 	std::optional<bool> resourceCapped;
 };

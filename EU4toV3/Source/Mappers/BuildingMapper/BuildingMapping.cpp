@@ -15,7 +15,8 @@ void mappers::BuildingMapping::registerKeys()
 		eu4Building = commonItems::getString(theStream);
 	});
 	registerKeyword("vic3", [this](std::istream& theStream) {
-		vic3Buildings = commonItems::getStrings(theStream);
+		auto theVic3Buildings = commonItems::getStrings(theStream);
+		vic3Buildings.insert(theVic3Buildings.begin(), theVic3Buildings.end());
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

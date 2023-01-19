@@ -3,6 +3,7 @@
 #include "MinorityPopMapper/MinorityPopMapper.h"
 #include "ModLoader/ModFilesystem.h"
 #include "Pops/StatePops.h"
+#include "SlaveCultureMapper/SlaveCultureMapper.h"
 #include <map>
 #include <memory>
 #include <string>
@@ -23,6 +24,7 @@ namespace V3
 class ClayManager;
 class SubState;
 class State;
+class PoliticalManager;
 class PopManager
 {
   public:
@@ -38,8 +40,12 @@ class PopManager
 	void generatePops(const ClayManager& clayManager);
 	void applyHomeLands(const ClayManager& clayManager) const;
 	void loadMinorityPopRules(const std::string& filePath);
+	void loadSlaveCultureRules(const std::string& filePath);
 	void injectReligionsIntoVanillaPops(const std::map<std::string, mappers::CultureDef>& cultureDefs);
 	void injectReligionsIntoDWPops(const std::map<std::string, mappers::CultureDef>& cultureDefs);
+	void alterSlaveCultures(const PoliticalManager& politicalManager,
+		 const ClayManager& clayManager,
+		 const std::map<std::string, mappers::CultureDef>& cultureDefs) const;
 
 	[[nodiscard]] std::string getDominantVanillaCulture(const std::string& stateName) const;
 	[[nodiscard]] std::string getDominantVanillaReligion(const std::string& stateName) const;
@@ -50,7 +56,7 @@ class PopManager
 
   private:
 	void generatePopsForShovedSubStates(const std::shared_ptr<State>& state, int unassignedPopCount, int unassignedProvinceCount) const;
-	void generatePopsForNormalSubStates(const std::shared_ptr<State>& state, int unassignedPopCount) const;
+	void generatePopsForNormalSubStates(const std::shared_ptr<State>& state, int unassignedPopCount, int unassignedSlavePopCount) const;
 	[[nodiscard]] int generatePopCountForShovedSubState(const std::shared_ptr<SubState>& subState, int unassignedPopCount, int unassignedProvinces) const;
 	[[nodiscard]] int generatePopCountForNormalSubState(const std::shared_ptr<SubState>& subState, int unassignedPopCount) const;
 	void filterVanillaMinorityStatePops();
@@ -66,6 +72,7 @@ class PopManager
 	std::map<std::string, StatePops> dwStatePops;				  // decentralized world - used for shoved and imported states only!
 
 	mappers::MinorityPopMapper minorityPopMapper;
+	mappers::SlaveCultureMapper slaveCultureMapper;
 };
 } // namespace V3
 #endif // POP_MANAGER_H

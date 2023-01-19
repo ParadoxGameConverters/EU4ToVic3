@@ -6,6 +6,8 @@
 #include "CultureMapper/CultureMapper.h"
 #include "Loaders/PopLoader/PopLoader.h"
 #include "Log.h"
+#include "PoliticalManager/Country/Country.h"
+#include "PoliticalManager/PoliticalManager.h"
 #include "ReligionMapper/ReligionMapper.h"
 #include <cmath>
 #include <numeric>
@@ -231,8 +233,11 @@ void V3::PopManager::generatePops(const ClayManager& clayManager)
 		// TODO: ... or something.
 		// do not count minorities towards vanilla population as they get added separately.
 		const auto vanillaStatePopCount = vanillaStatePops.at(stateName).getPopCount() - minorityPopCount;
+		// we're assuming minorities are never slaves.
+		const auto vanillaStateSlavePopCount = vanillaStatePops.at(stateName).getSlavePopCount();
 		// dw pops don't have minorities.
 		const auto dwStatePopCount = dwStatePops.at(stateName).getPopCount();
+		const auto startingPopCount = state->getStatePopCount();
 
 		/* Now there's a few things to keep in mind. The substate we're operating on can be any of these:
 		 *
@@ -244,22 +249,40 @@ void V3::PopManager::generatePops(const ClayManager& clayManager)
 		 * */
 
 		// assigned provinces are provinces in substates that have pops inside. We need to exclude them when building ratios.
-		const auto assignedProvinceCount = std::accumulate(state->getSubStates().begin(), state->getSubStates().end(), 0, [](int sum, const auto& subState) {
+		auto assignedProvinceCount = std::accumulate(state->getSubStates().begin(), state->getSubStates().end(), 0, [](int sum, const auto& subState) {
 			if (subState->getSubStatePops().getPopCount() > 0)
 				sum += static_cast<int>(subState->getProvinces().size());
 			return sum;
 		});
 
 		// what is our unassigned pop count? (original statePopCount - what's in imported substates already)
-		// shoved states use dw popcount and pops
-		const auto unassignedDWPopCount = dwStatePopCount - state->getStatePopCount();
+		// shoved states use dw popcount and pops - we *pretend* we'll be using DW popcount for entire state
+		auto unassignedDWPopCount = dwStatePopCount - startingPopCount;
+		if (unassignedDWPopCount < 0)
+			unassignedDWPopCount = 0;
 		const auto unassignedProvinceCount = static_cast<int>(state->getProvinces().size()) - assignedProvinceCount;
-		generatePopsForShovedSubStates(state, unassignedDWPopCount, unassignedProvinceCount);
+		if (unassignedDWPopCount > 0)
+			generatePopsForShovedSubStates(state, unassignedDWPopCount, unassignedProvinceCount);
 
 		// now iterate again and distribute that unassigned count according to weights.
-		// normal/imported states use vanilla popcount and pops (with minorities)
-		const auto unassignedVanillaPopCount = vanillaStatePopCount - state->getStatePopCount();
-		generatePopsForNormalSubStates(state, unassignedVanillaPopCount);
+		// normal/imported states use vanilla popcount and pops (with minorities) - we *pretend* we've been using vanilla popcount from the start.
+		// cap the popcap at whatever clay isn't already assigned.
+		assignedProvinceCount = std::accumulate(state->getSubStates().begin(), state->getSubStates().end(), 0, [](int sum, const auto& subState) {
+			if (subState->getSubStatePops().getPopCount() > 0)
+				sum += static_cast<int>(subState->getProvinces().size());
+			return sum;
+		});
+
+		const double unassignedClayRatio =
+			 static_cast<double>(state->getProvinces().size() - assignedProvinceCount) / static_cast<double>(state->getProvinces().size());
+		auto unassignedVanillaPopCount = static_cast<int>(std::round(vanillaStatePopCount * unassignedClayRatio));
+		if (unassignedVanillaPopCount < 0)
+			unassignedVanillaPopCount = 0;
+		auto unassignedVanillaSlavePopCount = static_cast<int>(std::round(vanillaStateSlavePopCount * unassignedClayRatio));
+		if (unassignedVanillaSlavePopCount < 0)
+			unassignedVanillaSlavePopCount = 0;
+		if (unassignedVanillaPopCount > 0)
+			generatePopsForNormalSubStates(state, unassignedVanillaPopCount, unassignedVanillaSlavePopCount);
 	}
 
 	const auto worldSum = std::accumulate(clayManager.getStates().begin(), clayManager.getStates().end(), 0, [](int sum, const auto& state) {
@@ -302,9 +325,10 @@ void V3::PopManager::filterVanillaMinorityStatePops()
 	Log(LogLevel::Info) << "<> Fished out " << counter << " minority pops.";
 }
 
-void V3::PopManager::generatePopsForNormalSubStates(const std::shared_ptr<State>& state, int unassignedPopCount) const
+void V3::PopManager::generatePopsForNormalSubStates(const std::shared_ptr<State>& state, const int unassignedPopCount, const int unassignedSlavePopCount) const
 {
 	const auto& stateName = state->getName();
+
 	for (const auto& subState: state->getSubStates())
 	{
 		if (subState->getSubStatePops().getPopCount() > 0)
@@ -324,7 +348,8 @@ void V3::PopManager::generatePopsForNormalSubStates(const std::shared_ptr<State>
 		}
 
 		const auto generatedPopCount = generatePopCountForNormalSubState(subState, unassignedPopCount);
-		subState->generatePops(generatedPopCount);
+		const auto generatedSlavePopCount = generatePopCountForNormalSubState(subState, unassignedSlavePopCount);
+		subState->generatePops(generatedPopCount, generatedSlavePopCount);
 		subState->setStageForMinorities(true);
 	}
 
@@ -472,4 +497,68 @@ std::map<std::string, V3::StatePops> V3::PopManager::injectReligionsIntoPops(con
 		newVanillaPops.emplace(stateName, newStatePops);
 	}
 	return newVanillaPops;
+}
+
+void V3::PopManager::loadSlaveCultureRules(const std::string& filePath)
+{
+	slaveCultureMapper.loadMappingRules(filePath);
+}
+
+void V3::PopManager::alterSlaveCultures(const PoliticalManager& politicalManager,
+	 const ClayManager& clayManager,
+	 const std::map<std::string, mappers::CultureDef>& cultureDefs) const
+{
+	Log(LogLevel::Info) << "-> Updating Slave Pop Cultures.";
+	auto counter = 0;
+
+	for (const auto& country: politicalManager.getCountries() | std::views::values)
+	{
+		std::set<std::string> cultureTraits;
+		for (const auto& culture: country->getProcessedData().cultures)
+		{
+			if (!cultureDefs.contains(culture))
+				continue;
+			const auto& traits = cultureDefs.at(culture).traits;
+			cultureTraits.insert(traits.begin(), traits.end());
+		}
+		std::optional<std::string> newSlaveCulture;
+		for (const auto& trait: cultureTraits)
+			if (slaveCultureMapper.getSlaveCulture(trait))
+			{
+				newSlaveCulture = *slaveCultureMapper.getSlaveCulture(trait);
+				break;
+			}
+		if (!newSlaveCulture)
+			continue;
+
+		for (const auto& subState: country->getSubStates())
+		{
+			if (subState->getSubStatePops().getSlavePopCount() == 0)
+				continue;
+			const auto& stateName = subState->getHomeStateName();
+			if (!clayManager.stateIsInRegion(stateName, "north_america_strategic_regions") &&
+				 !clayManager.stateIsInRegion(stateName, "south_america_strategic_regions"))
+				continue;
+
+			auto newSubStatePops = subState->getSubStatePops();
+			std::vector<Pop> newPops;
+			for (const auto& pop: subState->getSubStatePops().getPops())
+			{
+				if (pop.getType() == "slaves")
+				{
+					Pop newPop = pop;
+					newPop.setCulture(*newSlaveCulture);
+					newPops.emplace_back(newPop);
+					++counter;
+				}
+				else
+				{
+					newPops.emplace_back(pop);
+				}
+			}
+			newSubStatePops.setPops(newPops);
+			subState->setSubStatePops(newSubStatePops);
+		}
+	}
+	Log(LogLevel::Info) << "<> Updated " << counter << " Slave Pops.";
 }

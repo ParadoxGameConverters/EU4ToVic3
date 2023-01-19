@@ -111,20 +111,34 @@ TEST(V3World_SubStateTests, SubStateCanGeneratePopsFromDemographics)
 
 	subState.setDemographics({demo1, demo2});
 
-	subState.generatePops(1000);
+	subState.generatePops(1000, 200);
 
 	const auto& pops = subState.getSubStatePops().getPops();
-	ASSERT_EQ(2, pops.size());
+	ASSERT_EQ(4, pops.size());
 	const auto& pop1 = pops[0];
 	const auto& pop2 = pops[1];
+	const auto& pop3 = pops[2];
+	const auto& pop4 = pops[3];
 
 	EXPECT_EQ("cul1", pop1.getCulture());
 	EXPECT_EQ("rel1", pop1.getReligion());
-	EXPECT_EQ(300, pop1.getSize());
+	EXPECT_TRUE(pop1.getType().empty());
+	EXPECT_EQ(240, pop1.getSize());
 
-	EXPECT_EQ("cul2", pop2.getCulture());
-	EXPECT_EQ("rel2", pop2.getReligion());
-	EXPECT_EQ(700, pop2.getSize());
+	EXPECT_EQ("cul1", pop2.getCulture());
+	EXPECT_EQ("rel1", pop2.getReligion());
+	EXPECT_EQ("slaves", pop2.getType());
+	EXPECT_EQ(60, pop2.getSize());
+
+	EXPECT_EQ("cul2", pop3.getCulture());
+	EXPECT_EQ("rel2", pop3.getReligion());
+	EXPECT_TRUE(pop3.getType().empty());
+	EXPECT_EQ(560, pop3.getSize());
+
+	EXPECT_EQ("cul2", pop4.getCulture());
+	EXPECT_EQ("rel2", pop4.getReligion());
+	EXPECT_EQ("slaves", pop4.getType());
+	EXPECT_EQ(140, pop4.getSize());
 }
 
 TEST(V3World_SubStateTests, SubStateCanReturnPrimaryCulture)
@@ -146,7 +160,7 @@ TEST(V3World_SubStateTests, SubStateCanReturnPrimaryCulture)
 
 	subState.setDemographics({demo1, demo2});
 
-	subState.generatePops(1000);
+	subState.generatePops(1000, 0);
 
 	const auto& pops = subState.getSubStatePops().getPops();
 	ASSERT_EQ(2, pops.size());
@@ -182,7 +196,7 @@ TEST(V3World_SubStateTests, SubStateReturnsNullPrimaryCultureForZeroPops)
 
 	subState.setDemographics({demo1, demo2});
 
-	subState.generatePops(0);
+	subState.generatePops(0, 0);
 
 	const auto& pops = subState.getSubStatePops().getPops();
 	ASSERT_EQ(2, pops.size());

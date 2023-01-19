@@ -181,6 +181,8 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionGroupMapper\ReligionGroupMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionMapping.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\SlaveCultureMapper\SlaveCultureMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\SlaveCultureMapper\SlaveCultureMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\AssimilationParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperGroupMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp" />
@@ -363,6 +365,8 @@
     <ClCompile Include="MapperTests\ReligionMapperTests\ReligionGroupMapperTests\ReligionGroupMappingTests.cpp" />
     <ClCompile Include="MapperTests\ReligionMapperTests\ReligionMapperTests.cpp" />
     <ClCompile Include="MapperTests\ReligionMapperTests\ReligionMappingTests.cpp" />
+    <ClCompile Include="MapperTests\SlaveCultureMapperTests\SlaveCultureMapperTests.cpp" />
+    <ClCompile Include="MapperTests\SlaveCultureMapperTests\SlaveCultureMappingTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\AssimilationParserTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperGroupMapperTests.cpp" />
     <ClCompile Include="MapperTests\SuperGroupMapperTests\SuperRegionParserTests.cpp" />
@@ -855,6 +859,11 @@
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\ig_ideologies.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\slave_culture_map.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>

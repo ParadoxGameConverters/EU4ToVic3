@@ -25,6 +25,7 @@ namespace mappers
 {
 class CultureMapper;
 class ReligionMapper;
+class SlaveCultureMapper;
 } // namespace mappers
 namespace V3
 {
@@ -75,8 +76,7 @@ class SubState
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader);
 
-	void generatePops(int totalAmount);
-
+	void generatePops(int totalAmount, int slaveAmount);
 
 	[[nodiscard]] const auto& getHomeState() const { return homeState; }
 	[[nodiscard]] const auto& getOwner() const { return owner; }
@@ -130,10 +130,10 @@ class SubState
 		 double traitStrength) const;
 	[[nodiscard]] double calcBuildingTerrainWeight(const std::string& building,
 		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers) const;
-	[[nodiscard]] double calcBuildingEU4Weight(const std::string& building, const mappers::BuildingMapper& buildingMapper) const;
+	[[nodiscard]] double calcBuildingEU4Weight(const std::string& v3BuildingName, const mappers::BuildingMapper& buildingMapper) const;
 	[[nodiscard]] double calcBuildingTraitWeight(const Building& building, const std::map<std::string, StateModifier>& traitMap, double traitStrength) const;
 	[[nodiscard]] double calcBuildingInvestmentWeight(const Building& building) const;
-	[[nodiscard]] double calcBuildingIndustrialWeight(const Building& building) const;
+	[[nodiscard]] double calcBuildingIndustrialWeight(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] bool isBuildingValid(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] bool hasCapacity(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] int getRGOCapacity(const Building& building, const BuildingGroups& buildingGroups) const;

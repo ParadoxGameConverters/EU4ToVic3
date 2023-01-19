@@ -208,6 +208,13 @@ int V3::State::getStatePopCount() const
 	});
 }
 
+int V3::State::getStateSlavePopCount() const
+{
+	return std::accumulate(substates.begin(), substates.end(), 0, [](int sum, const auto& subState) {
+		return sum + subState->getSubStatePops().getSlavePopCount();
+	});
+}
+
 double V3::State::getTotalSubStateWeight() const
 {
 	return std::accumulate(substates.begin(), substates.end(), 0.0, [](double sum, const auto& subState) {
