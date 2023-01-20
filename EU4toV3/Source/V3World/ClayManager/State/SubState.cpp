@@ -64,25 +64,19 @@ void V3::SubState::gatherPossibleBuildings(const std::map<std::string, Building>
 	 const std::map<std::string, StateModifier>& traitMap,
 	 const double traitStrength)
 {
-	Log(LogLevel::Debug) << "We know of " << templateBuildings.size() << " building templates.";
 	for (const auto& templateBuilding: templateBuildings | std::views::values)
 	{
-		//Log(LogLevel::Debug) << "\t\t\t\tStart of consideration: " << templateBuilding.getName();
 		if (!isBuildingValid(templateBuilding, buildingGroups, lawsMap, techMap, traitMap))
 		{
-			//Log(LogLevel::Debug) << "\t\t\t\tEnd of consideration: " << templateBuilding.getName() << " is invalid.";
 			continue;
 		}
 
 		// New building from template. Initialize weight and add to substate
-		//Log(LogLevel::Debug) << "\t\t\t\tCreating building!";
 		const auto building = std::make_shared<Building>(templateBuilding);
 
-		//Log(LogLevel::Debug) << "\t\t\t\tSetting weight!";
 		building->setWeight(calcBuildingWeight(*building, buildingGroups, buildingTerrainModifiers, buildingMapper, lawsMap, techMap, traitMap, traitStrength));
 		buildings.push_back(building);
 	}
-	Log(LogLevel::Debug) << buildings.size() << " buildings are valid.";
 	sortBuildingsByWeight();
 }
 
@@ -100,10 +94,6 @@ void V3::SubState::weightBuildings(const BuildingGroups& buildingGroups,
 	}
 
 	sortBuildingsByWeight();
-	std::string out;
-	for (const auto& building: buildings)
-		out += building->getName() + ": " + std::to_string(building->getWeight()) + " ";
-	Log(LogLevel::Debug) << " sorted: " << out;
 }
 
 void V3::SubState::sortBuildingsByWeight()
@@ -477,7 +467,7 @@ bool V3::SubState::hasRGO(const Building& building, const BuildingGroups& buildi
 		return false;
 
 	if (const auto& isCapped = buildingGroups.tryGetIsCapped(building.getBuildingGroup()); (isCapped && !isCapped.value()) || !isCapped)
-	return true;
+		return true;
 
 	if (const auto& arables = homeState->getArableResources(); std::ranges::find(arables, building.getBuildingGroup()) != arables.end())
 		return true;

@@ -63,16 +63,23 @@ extraction = {
     }
 }
 
-mining = {
-industrial = yes
+industrial_mining = {
+	industrial = yes
 
-    weight = 10
+    weight = 8
 
     building_iron_mine
-    building_lead_mine
     building_coal_mine
-    building_sulfur_mine
     building_gold_mine
+}
+
+military_mining = {
+	industrial = yes
+
+    weight = 2
+
+    building_lead_mine
+    building_sulfur_mine
 }
 
 plantation = {
