@@ -40,5 +40,8 @@ void V3::LawEntry::registerKeys()
 	modifierParser.registerKeyword("state_bureaucracy_population_base_cost_factor_mult", [this](std::istream& theStream) {
 		law.bureaucracyCostMult = commonItems::getDouble(theStream);
 	});
+	modifierParser.registerKeyword("state_building_barracks_max_level_add", [this](std::istream& theStream) {
+		law.barracksMax = commonItems::getInt(theStream);
+	});
 	modifierParser.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

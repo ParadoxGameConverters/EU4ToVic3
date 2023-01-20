@@ -107,6 +107,42 @@ bool V3::Country::hasAnyOfTech(const std::vector<std::string>& techs) const
 	});
 }
 
+int V3::Country::getPortsMax(const std::map<std::string, Tech>& techMap)
+{
+	return std::accumulate(processedData.techs.begin(), processedData.techs.end(), 0, [techMap](const int sum, const std::string& tech) {
+		if (!techMap.contains(tech))
+		{
+			Log(LogLevel::Error) << "Couldn't find tech definition for: " << tech;
+			return sum;
+		}
+		return sum + techMap.at(tech).portMax;
+	});
+}
+
+int V3::Country::getNavalBaseMax(const std::map<std::string, Tech>& techMap)
+{
+	return std::accumulate(processedData.techs.begin(), processedData.techs.end(), 0, [techMap](const int sum, const std::string& tech) {
+		if (!techMap.contains(tech))
+		{
+			Log(LogLevel::Error) << "Couldn't find tech definition for: " << tech;
+			return sum;
+		}
+		return sum + techMap.at(tech).navalBaseMax;
+	});
+}
+
+int V3::Country::getArmyMax(const std::map<std::string, Law>& lawsMap) const
+{
+	return std::accumulate(processedData.laws.begin(), processedData.laws.end(), 0, [lawsMap](const int sum, const std::string& law) {
+		if (!lawsMap.contains(law))
+		{
+			Log(LogLevel::Error) << "Couldn't find law definition for: " << law;
+			return sum;
+		}
+		return sum + lawsMap.at(law).barracksMax;
+	});
+}
+
 void V3::Country::distributeGovAdmins(const int numGovAdmins) const
 {
 	const auto topSubstates = topPercentileStatesByPop(0.3);

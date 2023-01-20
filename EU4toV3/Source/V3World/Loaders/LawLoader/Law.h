@@ -15,6 +15,7 @@ struct Law
 	std::set<std::string> requiredTechs;
 	std::set<std::string> requiredLaws;
 	std::set<std::string> blockingLaws;
+	int barracksMax = 0;
 };
 } // namespace V3
 #endif // LAW_H

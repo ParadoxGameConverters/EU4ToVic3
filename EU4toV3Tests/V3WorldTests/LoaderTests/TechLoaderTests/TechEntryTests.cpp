@@ -17,10 +17,14 @@ TEST(V3World_TechEntryTests, TechCanBeLoaded)
 	input << "modifier = {\n ";
 	input << "\tstate_infrastructure_from_population_add = 0.15\n";
 	input << "\tstate_infrastructure_from_population_max_add = 5\n";
+	input << "\tstate_building_port_max_level_add = 2\n";
+	input << "\tstate_building_naval_base_max_level_add = 20\n";
 	input << "}\n ";
 	const V3::TechEntry entry(input);
 	const auto& tech = entry.getTech();
 
 	EXPECT_DOUBLE_EQ(0.15, tech.infrastructureMult);
 	EXPECT_EQ(5, tech.infrastructureMax);
+	EXPECT_EQ(2, tech.portMax);
+	EXPECT_EQ(20, tech.navalBaseMax);
 }

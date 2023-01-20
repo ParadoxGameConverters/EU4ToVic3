@@ -22,5 +22,11 @@ void V3::TechEntry::registerKeys()
 	modifierParser.registerKeyword("state_infrastructure_from_population_max_add", [this](std::istream& theStream) {
 		tech.infrastructureMax = commonItems::getInt(theStream);
 	});
+	modifierParser.registerKeyword("state_building_port_max_level_add", [this](std::istream& theStream) {
+		tech.portMax = commonItems::getInt(theStream);
+	});
+	modifierParser.registerKeyword("state_building_naval_base_max_level_add", [this](std::istream& theStream) {
+		tech.navalBaseMax = commonItems::getInt(theStream);
+	});
 	modifierParser.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
