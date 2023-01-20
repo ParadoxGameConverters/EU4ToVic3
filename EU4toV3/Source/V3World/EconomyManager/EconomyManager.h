@@ -15,6 +15,7 @@
 namespace V3
 {
 class Country;
+class Sector;
 /*
  * PreReqs: Clay(Substates merged under the right country), Pops, Laws, Tech
  * all must be converted first in the current design.
@@ -58,7 +59,7 @@ class EconomyManager
 		 const PoliticalManager& politicalManager) const;
 	void assignSubStateCPBudgets(Configuration::ECONOMY economyType) const;
 	void balanceNationalBudgets() const;
-	void buildBuildings() const;
+	void buildBuildings(const std::map<std::string, Law>& lawsMap) const;
 
 	[[nodiscard]] const auto& getCentralizedCountries() const { return centralizedCountries; }
 
@@ -81,9 +82,28 @@ class EconomyManager
 	void distributeBudget(double globalCP, double totalIndustryScore) const;
 	void setPMs() const;
 
+	[[nodiscard]] std::vector<std::shared_ptr<SubState>> prepareSubstatesByBudget(const std::shared_ptr<Country>& country,
+		 const std::map<std::string, Law>& lawsMap) const;
+	void negotiateBuilding(const std::shared_ptr<SubState>& substate,
+		 const std::map<std::string, std::shared_ptr<Sector>>& sectors,
+		 const std::map<std::string, Law>& lawsMap,
+		 const std::vector<std::shared_ptr<SubState>>& substates) const;
+	[[nodiscard]] static std::shared_ptr<Sector> getSectorWithMostBudget(const std::map<std::string, std::shared_ptr<Sector>>& sectors);
+	void buildBuilding(const std::shared_ptr<Building>& building,
+		 const std::shared_ptr<SubState>& substate,
+		 const std::shared_ptr<Sector>& sector,
+		 const std::map<std::string, Law>& lawsMap,
+		 const std::vector<std::shared_ptr<SubState>>& substates) const;
+	void removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
+		 const std::vector<std::shared_ptr<SubState>>::iterator& substate,
+		 const std::map<std::string, Law>& lawsMap) const;
 
-	void removeNoBuildSubStates(std::vector<std::shared_ptr<SubState>>& subStates) const;
-	void removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates, const std::vector<std::shared_ptr<SubState>>::iterator& it) const;
+	[[nodiscard]] int determinePacketSize(const std::shared_ptr<Building>& building,
+		 const std::shared_ptr<Sector>& sector,
+		 const std::shared_ptr<SubState>& substate,
+		 const std::map<std::string, Law>& lawsMap,
+		 const std::vector<std::shared_ptr<SubState>>& substates) const;
+	[[nodiscard]] int getClusterPacket(int baseCost, const std::vector<std::shared_ptr<SubState>>& substates) const;
 
 	void loadTerrainModifierMatrices(const std::string& filePath = "");
 	void loadStateTraits(const commonItems::ModFilesystem& modFS);

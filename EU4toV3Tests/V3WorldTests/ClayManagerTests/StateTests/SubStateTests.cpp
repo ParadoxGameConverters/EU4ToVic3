@@ -395,14 +395,37 @@ TEST(V3World_SubStateTests, InfrastructureCalculationExcessNegativeModifiersCap)
 	EXPECT_DOUBLE_EQ(0.0, substate.getInfrastructure());
 }
 
-TEST(V3World_SubStateTests, BuildingLevelsCanBeGetAndSet)
+TEST(V3World_SubStateTests, AddBuilding)
+{
+	auto substate = V3::SubState();
+	V3::Building templateBuilding;
+	templateBuilding.setName("port");
+	templateBuilding.setLevel(1);
+
+	const auto building1 = std::make_shared<V3::Building>(templateBuilding);
+	const auto building2 = std::make_shared<V3::Building>(templateBuilding);
+
+	building2->setLevel(2);
+
+	substate.addBuilding(building1);
+	substate.addBuilding(building2);
+
+	EXPECT_EQ("port", substate.getBuildings()[0]->getName());
+	EXPECT_EQ(1, substate.getBuildings()[0]->getLevel());
+	EXPECT_EQ("port", substate.getBuildings()[1]->getName());
+	EXPECT_EQ(2, substate.getBuildings()[1]->getLevel());
+}
+
+TEST(DISABLED_V3World_SubStateTests, WeightBuildings)
 {
 	auto substate = V3::SubState();
 
-	EXPECT_TRUE(substate.getBuildings().empty());
+	EXPECT_FALSE(substate.getBuildings().empty());
+}
 
-	substate.setBuildingLevel("fish", 5);
+TEST(DISABLED_V3World_SubStateTests, CalcBuildingWeight)
+{
+	auto substate = V3::SubState();
 
-	EXPECT_EQ(5, substate.getBuildingLevel("fish"));
-	EXPECT_FALSE(substate.getBuildingLevel("iron"));
+	EXPECT_FALSE(substate.getBuildings().empty());
 }

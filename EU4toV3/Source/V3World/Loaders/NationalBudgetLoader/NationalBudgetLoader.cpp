@@ -18,6 +18,15 @@ void V3::NationalBudgetLoader::buildBuildingSectorMap()
 			buildingSectorMap[building] = blueprint.getName();
 }
 
+std::optional<std::string> V3::NationalBudgetLoader::getSectorName(const std::string& buildingName) const
+{
+	if (buildingSectorMap.contains(buildingName))
+	{
+		return buildingSectorMap.at(buildingName);
+	}
+	return std::nullopt;
+}
+
 void V3::NationalBudgetLoader::registerKeys()
 {
 	registerRegex(commonItems::catchallRegex, [this](const std::string& sectorName, std::istream& theStream) {

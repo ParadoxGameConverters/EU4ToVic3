@@ -19,14 +19,14 @@ void outPMs(std::ostream& output, const std::string& building, const V3::Country
 	}
 	output << " }\n";
 }
-void outBuilding(std::ostream& output, const std::string& building, const int level, const V3::Country& country)
+void outBuilding(std::ostream& output, const V3::Building& building, const V3::Country& country)
 {
 	output << "\t\t\tcreate_building = {\n";
-	output << "\t\t\t\tbuilding = \"" << building << "\"\n";
-	output << "\t\t\t\tlevel = " << level << "\n";
+	output << "\t\t\t\tbuilding = \"" << building.getName() << "\"\n";
+	output << "\t\t\t\tlevel = " << building.getLevel() << "\n";
 	output << "\t\t\t\treserves = " << 1 << "\n";
 
-	outPMs(output, building, country);
+	outPMs(output, building.getName(), country);
 
 	output << "\t\t\t}\n";
 }
@@ -35,10 +35,10 @@ void outSubStateBuildings(std::ostream& output, const V3::SubState& subState)
 	if (!subState.getOwner())
 		return;
 	output << "\t\tregion_state:" << subState.getOwner()->getTag() << " = {\n";
-	for (const auto& [building, level]: subState.getBuildings())
+	for (const auto& building: subState.getBuildings())
 	{
-		if (level > 0)
-			outBuilding(output, building, level, *subState.getOwner());
+		if (building->getLevel() > 0)
+			outBuilding(output, *building, *subState.getOwner());
 	}
 	for (const auto& element: subState.getVanillaBuildingElements())
 		output << "\t\t\t" << element << "\n";

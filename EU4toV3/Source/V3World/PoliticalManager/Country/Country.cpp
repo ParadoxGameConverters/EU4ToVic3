@@ -107,6 +107,38 @@ bool V3::Country::hasAnyOfTech(const std::vector<std::string>& techs) const
 	});
 }
 
+int V3::Country::getGovBuildingMax(const std::string& building, const std::map<std::string, Law>& lawsMap, const std::map<std::string, Tech>& techMap) const
+{
+	const auto tech = std::accumulate(processedData.techs.begin(), processedData.techs.end(), 0, [building, techMap](const int sum, const std::string& tech) {
+		if (!techMap.contains(tech))
+		{
+			Log(LogLevel::Error) << "Couldn't find tech definition for: " << tech;
+			return sum;
+		}
+		if (!techMap.at(tech).maxBuildingLevels.contains(building))
+		{
+			return sum;
+		}
+
+		return sum + techMap.at(tech).maxBuildingLevels.at(building);
+	});
+
+	const auto laws = std::accumulate(processedData.laws.begin(), processedData.laws.end(), 0, [building, lawsMap](const int sum, const std::string& law) {
+		if (!lawsMap.contains(law))
+		{
+			Log(LogLevel::Error) << "Couldn't find law definition for: " << law;
+			return sum;
+		}
+		if (!lawsMap.at(law).maxBuildingLevels.contains(building))
+		{
+			return sum;
+		}
+
+		return sum + lawsMap.at(law).maxBuildingLevels.at(building);
+	});
+	return tech + laws;
+}
+
 void V3::Country::distributeGovAdmins(const int numGovAdmins) const
 {
 	const auto topSubstates = topPercentileStatesByPop(0.3);
@@ -119,27 +151,35 @@ void V3::Country::distributeGovAdmins(const int numGovAdmins) const
 		const double popProportion = static_cast<double>(substate->getSubStatePops().getPopCount()) / topPop;
 		const int levels = static_cast<int>(popProportion * numGovAdmins);
 
-		substate->setBuildingLevel("building_government_administration", levels);
-		if (const auto setLevel = substate->getBuildingLevel("building_government_administration"); setLevel)
-		{
-			assigned += setLevel.value();
-		}
-		else
-		{
-			Log(LogLevel::Error) << "Couldn't set level of Government Administration in " << tag << "'s SubState in : " << substate->getHomeState()->getName();
-		}
+		const auto govAdmin = std::make_shared<Building>();
+		govAdmin->setName("building_government_administration");
+		govAdmin->setLevel(levels);
+
+		substate->addBuilding(govAdmin);
+		assigned += levels;
 	}
 
 	// Handing out remainders, should be less than # of topSubstates
 	for (const auto& substate: topSubstates)
 	{
-		const auto levels = substate->getBuildingLevel("building_government_administration");
-		substate->setBuildingLevel("building_government_administration", levels.value_or(0) + 1);
-		++assigned;
+		auto isGovAdmin = [](const std::shared_ptr<Building>& b) {
+			return b->getName() == "building_government_administration";
+		};
 
-		if (numGovAdmins - assigned <= 0)
+		if (auto govAdmin = std::ranges::find_if(substate->getBuildings(), isGovAdmin); govAdmin != substate->getBuildings().end())
 		{
-			break;
+			const auto levels = govAdmin->get()->getLevel();
+			govAdmin->get()->setLevel(levels + 1);
+			++assigned;
+
+			if (numGovAdmins - assigned <= 0)
+			{
+				break;
+			}
+		}
+		else
+		{
+			Log(LogLevel::Error) << "Failed to find building_government_administration in: " << substate->getHomeStateName();
 		}
 	}
 }

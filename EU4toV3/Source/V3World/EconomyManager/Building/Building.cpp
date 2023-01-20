@@ -21,6 +21,12 @@ void V3::Building::registerKeys(const std::map<std::string, int>& costTiers)
 			buildable = false;
 		}
 	});
+	registerKeyword("has_max_level", [this](std::istream& theStream) {
+		if (commonItems::getString(theStream) == "yes")
+		{
+			governmentCapped = true;
+		}
+	});
 	registerKeyword("production_method_groups", [this](std::istream& theStream) {
 		PMGroups = commonItems::getStrings(theStream);
 	});

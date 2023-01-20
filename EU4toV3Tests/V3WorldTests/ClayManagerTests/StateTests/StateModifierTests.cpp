@@ -11,8 +11,8 @@ TEST(V3World_StateModifierTests, DefaultsDefaultToDefaults)
 	EXPECT_TRUE(modifier.getName().empty());
 	EXPECT_EQ(0, modifier.getInfrastructureBonus());
 	EXPECT_EQ(0, modifier.getInfrastructureMult());
-	EXPECT_EQ(0, modifier.getPortBonus());
-	EXPECT_EQ(0, modifier.getNavalBaseBonus());
+	EXPECT_FALSE(modifier.getMaxBuildingBonus("building_port"));
+	EXPECT_FALSE(modifier.getMaxBuildingBonus("building_naval_base"));
 	EXPECT_TRUE(modifier.getBuildingGroupModifiersMap().empty());
 	EXPECT_TRUE(modifier.getBuildingModifiersMap().empty());
 	EXPECT_TRUE(modifier.getGoodsModifiersMap().empty());
@@ -46,32 +46,20 @@ TEST(V3World_StateModifierTests, InfrastructureModifierIsSet)
 	EXPECT_EQ(-0.4, modifier.getInfrastructureMult());
 }
 
-TEST(V3World_StateModifierTests, PortBonusIsSet)
+TEST(V3World_StateModifierTests, MaxBonusesAreSet)
 {
 	std::stringstream input;
 	input << "\ticon = \"gfx/ignore/me.dds\"\n";
 	input << "\tmodifier = {\n";
 	input << "\t\tstate_building_port_max_level_add = 2\n";
+	input << "\t\tstate_building_naval_base_max_level_add = 20\n";
 	input << "\t}\n";
 
 	V3::StateModifier modifier;
 	modifier.loadStateModifier(input);
 
-	EXPECT_EQ(2, modifier.getPortBonus());
-}
-
-TEST(V3World_StateModifierTests, NavalBaseBonusIsSet)
-{
-	std::stringstream input;
-	input << "\ticon = \"gfx/ignore/me.dds\"\n";
-	input << "\tmodifier = {\n";
-	input << "\t\tstate_building_naval_base_max_level_add = 5\n";
-	input << "\t}\n";
-
-	V3::StateModifier modifier;
-	modifier.loadStateModifier(input);
-
-	EXPECT_EQ(5, modifier.getNavalBaseBonus());
+	EXPECT_EQ(2, modifier.getMaxBuildingBonus("building_port"));
+	EXPECT_EQ(20, modifier.getMaxBuildingBonus("building_naval_base"));
 }
 
 TEST(V3World_StateModifierTests, BuildingGroupModifiersAreSet)

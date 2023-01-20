@@ -1,5 +1,6 @@
 #include "LawEntry.h"
 #include "CommonRegexes.h"
+#include "Log.h"
 #include "ParserHelpers.h"
 
 V3::LawEntry::LawEntry(std::istream& theStream)
@@ -39,6 +40,18 @@ void V3::LawEntry::registerKeys()
 
 	modifierParser.registerKeyword("state_bureaucracy_population_base_cost_factor_mult", [this](std::istream& theStream) {
 		law.bureaucracyCostMult = commonItems::getDouble(theStream);
+	});
+	modifierParser.registerRegex("state_building_[a-zA-Z_]+_max_level_add", [this](const std::string& modifier, std::istream& theStream) {
+		const std::regex pattern("state_building_([a-zA-Z_]+)_max_level_add");
+		std::smatch building;
+		if (std::regex_search(modifier, building, pattern)) // state_building_barracks_max_level_add -> barracks
+		{
+			law.maxBuildingLevels["building_" + building[1].str()] = commonItems::getInt(theStream);
+		}
+		else
+		{
+			Log(LogLevel::Error) << "Found a max level modifier, but could not parse it: " << modifier;
+		}
 	});
 	modifierParser.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

@@ -15,8 +15,7 @@ class StateModifier: commonItems::parser
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getInfrastructureBonus() const { return infrastructure; }
 	[[nodiscard]] const auto& getInfrastructureMult() const { return infrastructureMult; }
-	[[nodiscard]] const auto& getPortBonus() const { return port; }
-	[[nodiscard]] const auto& getNavalBaseBonus() const { return navalBase; }
+	[[nodiscard]] std::optional<int> getMaxBuildingBonus(const std::string& building) const;
 	[[nodiscard]] const auto& getBuildingGroupModifiersMap() const { return buildingGroupModifiers; }
 	[[nodiscard]] const auto& getBuildingModifiersMap() const { return buildingModifiers; }
 	[[nodiscard]] const auto& getGoodsModifiersMap() const { return goodsModifiers; }
@@ -33,8 +32,7 @@ class StateModifier: commonItems::parser
 
 	int infrastructure = 0;
 	double infrastructureMult = 0.0;
-	int port = 0;
-	int navalBase = 0;
+	std::map<std::string, int> maxBuildingLevels;			// how much this trait contributes to the max cap of a building
 	std::map<std::string, double> buildingGroupModifiers; // building_group to throughput modifier
 	std::map<std::string, double> buildingModifiers;		// building to throughput modifier
 	std::map<std::string, double> goodsModifiers;			// good to goods throughput modifier

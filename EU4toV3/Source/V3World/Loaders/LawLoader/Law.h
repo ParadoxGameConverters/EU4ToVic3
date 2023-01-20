@@ -1,5 +1,6 @@
 #ifndef LAW_H
 #define LAW_H
+#include <map>
 #include <set>
 #include <string>
 
@@ -15,6 +16,7 @@ struct Law
 	std::set<std::string> requiredTechs;
 	std::set<std::string> requiredLaws;
 	std::set<std::string> blockingLaws;
+	std::map<std::string, int> maxBuildingLevels;
 };
 } // namespace V3
 #endif // LAW_H

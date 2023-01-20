@@ -31,6 +31,7 @@ TEST(V3World_LawEntryTests, LawCanBeLoaded)
 	input << "institution = i1\n";
 	input << "modifier = {\n ";
 	input << "\tstate_bureaucracy_population_base_cost_factor_mult = -0.14\n";
+	input << "\tstate_building_barracks_max_level_add = 30\n";
 	input << "}\n ";
 	const V3::LawEntry entry(input);
 	const auto& law = entry.getLaw();
@@ -42,4 +43,5 @@ TEST(V3World_LawEntryTests, LawCanBeLoaded)
 	EXPECT_THAT(law.blockingLaws, testing::UnorderedElementsAre("b1", "b2", "b3"));
 	EXPECT_EQ("i1", law.institution);
 	EXPECT_EQ(-0.14, law.bureaucracyCostMult);
+	EXPECT_EQ(30, law.maxBuildingLevels.at("building_barracks"));
 }

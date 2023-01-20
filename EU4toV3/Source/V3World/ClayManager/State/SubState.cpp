@@ -55,11 +55,53 @@ double V3::SubState::getTerrainFrequency(const std::string& theTerrain) const
 	return 0;
 }
 
-std::optional<int> V3::SubState::getBuildingLevel(const std::string& building) const
+void V3::SubState::gatherPossibleBuildings(const std::map<std::string, Building>& templateBuildings,
+	 const BuildingGroups& buildingGroups,
+	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
+	 const mappers::BuildingMapper& buildingMapper,
+	 const std::map<std::string, V3::Law>& lawsMap,
+	 const std::map<std::string, V3::Tech>& techMap,
+	 const std::map<std::string, StateModifier>& traitMap,
+	 const double traitStrength)
 {
-	if (buildings.contains(building))
-		return buildings.at(building);
-	return std::nullopt;
+	for (const auto& templateBuilding: templateBuildings | std::views::values)
+	{
+		if (!isBuildingValid(templateBuilding, buildingGroups, lawsMap, techMap, traitMap))
+		{
+			continue;
+		}
+
+		// New building from template. Initialize weight and add to substate
+		const auto building = std::make_shared<Building>(templateBuilding);
+
+		building->setWeight(calcBuildingWeight(*building, buildingGroups, buildingTerrainModifiers, buildingMapper, lawsMap, techMap, traitMap, traitStrength));
+		buildings.push_back(building);
+	}
+
+	sortBuildingsByWeight();
+}
+
+void V3::SubState::weightBuildings(const BuildingGroups& buildingGroups,
+	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
+	 const mappers::BuildingMapper& buildingMapper,
+	 const std::map<std::string, V3::Law>& lawsMap,
+	 const std::map<std::string, V3::Tech>& techMap,
+	 const std::map<std::string, StateModifier>& traitMap,
+	 const double traitStrength)
+{
+	for (const auto& building: buildings)
+	{
+		building->setWeight(calcBuildingWeight(*building, buildingGroups, buildingTerrainModifiers, buildingMapper, lawsMap, techMap, traitMap, traitStrength));
+	}
+
+	sortBuildingsByWeight();
+}
+
+void V3::SubState::sortBuildingsByWeight()
+{
+	std::ranges::sort(buildings, [](const std::shared_ptr<Building>& lhs, const std::shared_ptr<Building>& rhs) {
+		return lhs->getWeight() > rhs->getWeight();
+	});
 }
 
 bool V3::SubState::isCoastal() const
@@ -90,6 +132,11 @@ const std::string& V3::SubState::getHomeStateName() const
 		Log(LogLevel::Warning) << "Attempted to access the name of a nullptr state from a substate. Returning empty name.";
 		return empty;
 	}
+}
+
+bool V3::SubState::greaterBudget(const std::shared_ptr<SubState>& lhs, const std::shared_ptr<SubState>& rhs)
+{
+	return lhs->getCPBudget() > rhs->getCPBudget();
 }
 
 void V3::SubState::calculateTerrainFrequency()
@@ -145,6 +192,8 @@ std::pair<int, double> V3::SubState::getStateInfrastructureModifiers(const State
 	return std::make_pair(bonus, mult);
 }
 
+
+
 double V3::SubState::calcBuildingTerrainWeight(const std::string& building,
 	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers) const
 {
@@ -166,24 +215,29 @@ double V3::SubState::calcBuildingTerrainWeight(const std::string& building,
 double V3::SubState::calcBuildingEU4Weight(const std::string& v3BuildingName, const mappers::BuildingMapper& buildingMapper) const
 {
 	// Weight from having EU4 buildings that map to VIC3 buildings in SubState weighted data.
-	// For a substate made from 5 full chunks each containing a university, weight for building_university will be 5.
+	// For a substate made from 5 full chunks each containing a university, weight for building_university will be 0.5.
+	// Give diminishing returns past 0.5 weight
 
 	double totalWeight = 0;
 	for (const auto& [weightedData, dataWeight]: weightedSourceProvinceData)
 		for (const auto& eu4building: weightedData.buildings)
 			if (buildingMapper.getVic3Buildings(eu4building).contains(v3BuildingName))
-				totalWeight += dataWeight;
-	return totalWeight;
+				totalWeight += dataWeight / 10;
+
+	// Diminishing returns past 5 buildings
+	if (totalWeight <= 0.5)
+		return totalWeight;
+
+	// The lower this coefficient the more powerful the diminishing effect
+	constexpr double diminishingCoefficient = 0.8;
+	return 0.5 + diminishingCoefficient * (totalWeight - 0.5) / log10(1 + totalWeight);
 }
 
-double V3::SubState::calcBuildingTraitWeight(const Building& building, const std::map<std::string, StateModifier>& traitMap, double traitStrength) const
+double V3::SubState::calcBuildingTraitWeight(const Building& building, const std::map<std::string, StateModifier>& traitMap, const double traitStrength) const
 {
 	// Weight from having state traits that boost the building or building_group of building
 	// Goods outputs will be done later in PM pass
 
-	// Note: I have no idea what this function returns. -Z.
-
-	double totalWeight = 0;
 	const auto& buildingGroupName = building.getBuildingGroup();
 	const auto& subStateTraits = getHomeState()->getTraits();
 	for (const auto& trait: subStateTraits)
@@ -194,34 +248,38 @@ double V3::SubState::calcBuildingTraitWeight(const Building& building, const std
 
 		// take building if present, otherwise take building group. Don't stack both.
 		if (modifier.getBuildingModifiersMap().contains(building.getName()))
-			totalWeight += modifier.getBuildingModifiersMap().at(building.getName()) * traitStrength;
-		else if (modifier.getBuildingGroupModifiersMap().contains(buildingGroupName))
-			totalWeight += modifier.getBuildingGroupModifiersMap().at(buildingGroupName) * traitStrength;
+			return 1 + modifier.getBuildingModifiersMap().at(building.getName()) * traitStrength;
+		if (modifier.getBuildingGroupModifiersMap().contains(buildingGroupName))
+			return 1 + modifier.getBuildingGroupModifiersMap().at(buildingGroupName) * traitStrength;
 	}
-	return totalWeight;
+	return 1;
 }
 
 double V3::SubState::calcBuildingInvestmentWeight(const Building& building) const
 {
 	// Weight modifier due to amount already built of given Building
 	// Simple percentage
-	if (buildings.contains(building.getName()) && originalCPBudget > 0)
+	if (originalCPBudget <= 0)
 	{
-		return std::max(1 - building.getConstructionCost() * buildings.at(building.getName()) / static_cast<double>(originalCPBudget), 0.0);
+		return 1;
 	}
-	return 1;
+
+	return std::max(1 - building.getConstructionCost() * building.getLevel() / static_cast<double>(originalCPBudget), 0.0);
 }
 
 double V3::SubState::calcBuildingIndustrialWeight(const Building& building, const BuildingGroups& buildingGroups) const
 {
-	const auto civLevelFactor = owner->getProcessedData().civLevel / 100;
+	// Must be at least a little bit industrial for this
+	// If your industrial then no effect
+	if (owner->getIndustryFactor() > 0 && owner->getProcessedData().civLevel >= 40)
+		return 1;
+
+	// Your non-industrial so urban buildings are not built
 	auto buildingGroup = buildingGroups.getBuildingGroupMap().at(building.getBuildingGroup());
 	if (buildingGroup->getCategory())
 	{
 		if (*buildingGroup->getCategory() == "urban")
-			return civLevelFactor;
-		else
-			return 1;
+			return 0;
 	}
 
 	while (buildingGroup->getParentName())
@@ -230,16 +288,19 @@ double V3::SubState::calcBuildingIndustrialWeight(const Building& building, cons
 		if (buildingGroup->getCategory())
 		{
 			if (*buildingGroup->getCategory() == "urban")
-				return civLevelFactor;
-			else
-				return 1;
+				return 0;
 		}
 	}
 
-	return 0.0;
+	// If building isn't urban no effect
+	return 1;
 }
 
-bool V3::SubState::isBuildingValid(const Building& building, const BuildingGroups& buildingGroups) const
+bool V3::SubState::isBuildingValid(const Building& building,
+	 const BuildingGroups& buildingGroups,
+	 const std::map<std::string, Law>& lawsMap,
+	 const std::map<std::string, Tech>& techMap,
+	 const std::map<std::string, StateModifier>& traitMap) const
 {
 	// Government Admin is a special case, we're not building it
 	if (building.getName() == "building_government_administration")
@@ -251,15 +312,16 @@ bool V3::SubState::isBuildingValid(const Building& building, const BuildingGroup
 	{
 		return false;
 	}
+	if (!building.isBuildable())
+	{
+		return false;
+	}
 	// We can only build what we have the tech for
 	if (!getOwner()->hasAnyOfTech(building.getUnlockingTechs()))
 	{
 		return false;
 	}
-	if (!building.isBuildable())
-	{
-		return false;
-	}
+	// Important, can't build a building if we have no CP to build it. This is what end the loop.
 	if (building.getConstructionCost() > CPBudget)
 	{
 		return false;
@@ -268,7 +330,7 @@ bool V3::SubState::isBuildingValid(const Building& building, const BuildingGroup
 	{
 		return false;
 	}
-	if (!hasCapacity(building, buildingGroups))
+	if (!hasCapacity(building, buildingGroups, lawsMap, techMap, traitMap))
 	{
 		return false;
 	}
@@ -276,14 +338,54 @@ bool V3::SubState::isBuildingValid(const Building& building, const BuildingGroup
 	return true;
 }
 
-bool V3::SubState::hasCapacity(const Building& building, const BuildingGroups& buildingGroups) const
+bool V3::SubState::hasValidBuildings(const BuildingGroups& buildingGroups,
+	 const std::map<std::string, Law>& lawsMap,
+	 const std::map<std::string, Tech>& techMap,
+	 const std::map<std::string, StateModifier>& traitMap) const
 {
+	return std::ranges::any_of(buildings, [this, buildingGroups, lawsMap, techMap, traitMap](const std::shared_ptr<Building>& building) {
+		return isBuildingValid(*building, buildingGroups, lawsMap, techMap, traitMap);
+	});
+}
+
+int V3::SubState::getBuildingCapacity(const Building& building,
+	 const BuildingGroups& buildingGroups,
+	 const std::map<std::string, Law>& lawsMap,
+	 const std::map<std::string, Tech>& techMap,
+	 const std::map<std::string, StateModifier>& traitMap) const
+{
+	if (building.isCappedByGov())
+	{
+		return getGovCapacity(building.getName(), lawsMap, techMap, traitMap);
+	}
+
+	if (const auto& isCapped = buildingGroups.tryGetIsCapped(building.getBuildingGroup()); isCapped && isCapped.value())
+	{
+		return getRGOCapacity(building, buildingGroups);
+	}
+
+	return INT_MAX;
+}
+
+bool V3::SubState::hasCapacity(const Building& building,
+	 const BuildingGroups& buildingGroups,
+	 const std::map<std::string, V3::Law>& lawsMap,
+	 const std::map<std::string, V3::Tech>& techMap,
+	 const std::map<std::string, V3::StateModifier>& traitMap) const
+{
+	// Check building cap first
+	if (building.isCappedByGov())
+	{
+		return getGovCapacity(building.getName(), lawsMap, techMap, traitMap) > 0;
+	}
+
 	// If no cap on building, return true
 	if (const auto& isCapped = buildingGroups.tryGetIsCapped(building.getBuildingGroup()); isCapped && !isCapped.value())
 	{
 		return true;
 	}
 
+	// Then check building group cap
 	return getRGOCapacity(building, buildingGroups) > 0;
 }
 
@@ -324,6 +426,29 @@ int V3::SubState::getRGOCapacity(const Building& building, const BuildingGroups&
 	return 0;
 }
 
+int V3::SubState::getGovCapacity(const std::string& building,
+	 const std::map<std::string, Law>& lawsMap,
+	 const std::map<std::string, Tech>& techMap,
+	 const std::map<std::string, StateModifier>& traitMap) const
+{
+	const auto nationwide = owner->getGovBuildingMax(building, lawsMap, techMap);
+	const auto traits =
+		 std::accumulate(homeState->getTraits().begin(), homeState->getTraits().end(), 0, [building, traitMap](const int sum, const std::string& trait) {
+			 if (!traitMap.contains(trait))
+			 {
+				 Log(LogLevel::Error) << "Couldn't find state trait definition for: " << trait;
+				 return sum;
+			 }
+			 if (const auto bonus = traitMap.at(trait).getMaxBuildingBonus(building); bonus)
+			 {
+				 return sum + bonus.value();
+			 }
+
+			 return sum;
+		 });
+	return nationwide + traits;
+}
+
 bool V3::SubState::hasRGO(const Building& building) const
 {
 	if (const auto& arables = homeState->getArableResources(); std::ranges::find(arables, building.getBuildingGroup()) != arables.end())
@@ -333,17 +458,26 @@ bool V3::SubState::hasRGO(const Building& building) const
 }
 
 double V3::SubState::calcBuildingWeight(const Building& building,
+	 const V3::BuildingGroups& buildingGroups,
 	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
 	 const mappers::BuildingMapper& buildingMapper,
+	 const std::map<std::string, V3::Law>& lawsMap,
+	 const std::map<std::string, V3::Tech>& techMap,
 	 const std::map<std::string, StateModifier>& traitMap,
 	 const double traitStrength) const
 {
+	if (!isBuildingValid(building, buildingGroups, lawsMap, techMap, traitMap))
+	{
+		return -1;
+	}
+
 	const double terrainWeight = calcBuildingTerrainWeight(building.getName(), buildingTerrainModifiers);
 	const double EU4BuildingWeight = calcBuildingEU4Weight(building.getName(), buildingMapper);
 	const double traitWeight = calcBuildingTraitWeight(building, traitMap, traitStrength);
 	const double investmentWeight = calcBuildingInvestmentWeight(building);
+	const double industrialWeight = calcBuildingIndustrialWeight(building, buildingGroups);
 
-	return (terrainWeight + EU4BuildingWeight + traitWeight) * investmentWeight;
+	return (1 + terrainWeight + EU4BuildingWeight) * traitWeight * investmentWeight * industrialWeight;
 }
 
 void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap)

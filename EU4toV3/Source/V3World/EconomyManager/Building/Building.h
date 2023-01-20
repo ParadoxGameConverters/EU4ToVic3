@@ -10,6 +10,8 @@ class Building: commonItems::parser
 	Building() = default;
 	void loadBuilding(std::istream& theStream, const std::map<std::string, int>& costTiers);
 	void setName(const std::string& theName) { name = theName; }
+	void setLevel(const int theLevel) { level = theLevel; }
+	void setWeight(const double theWeight) { weight = theWeight; }
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getBuildingGroup() const { return buildingGroup; }
@@ -17,16 +19,26 @@ class Building: commonItems::parser
 	[[nodiscard]] const auto& getConstructionCost() const { return constructionCost; }
 	[[nodiscard]] const auto& getUnlockingTechs() const { return unlockingTechs; }
 	[[nodiscard]] const auto& isBuildable() const { return buildable; }
+	[[nodiscard]] const auto& isCappedByGov() const { return governmentCapped; }
+
+	[[nodiscard]] const auto& getLevel() const { return level; }
+	[[nodiscard]] const auto& getWeight() const { return weight; }
 
   private:
 	void registerKeys(const std::map<std::string, int>& costTiers);
 
+	// Static per type of building e.g. "building_port"
 	std::string name;
 	std::string buildingGroup;
 	std::vector<std::string> PMGroups;
 	int constructionCost = 50;
 	std::vector<std::string> unlockingTechs;
 	bool buildable = true;
+	bool governmentCapped = false; // barracks, ports, other caps done at the building not building group level by techs/laws/traits.
+
+	// Specific to instance of building in SubState e.g. The port in New York
+	int level = 0;
+	double weight = 0;
 };
 } // namespace V3
 
