@@ -56,11 +56,11 @@ double V3::SubState::getTerrainFrequency(const std::string& theTerrain) const
 }
 
 void V3::SubState::weightBuildings(const std::map<std::string, Building>& templateBuildings,
-                                  const BuildingGroups& buildingGroups,
-                                  const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
-                                  const mappers::BuildingMapper& buildingMapper,
-                                  const std::map<std::string, StateModifier>& traitMap,
-                                  const double traitStrength)
+	 const BuildingGroups& buildingGroups,
+	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
+	 const mappers::BuildingMapper& buildingMapper,
+	 const std::map<std::string, StateModifier>& traitMap,
+	 const double traitStrength)
 {
 	for (const auto& templateBuilding: templateBuildings | std::views::values)
 	{
@@ -70,7 +70,7 @@ void V3::SubState::weightBuildings(const std::map<std::string, Building>& templa
 		}
 
 		// New building from template. Initialize weight and add to substate
-		const auto building  = std::make_shared<Building>(templateBuilding);
+		const auto building = std::make_shared<Building>(templateBuilding);
 
 		building->setWeight(calcBuildingWeight(*building, buildingGroups, buildingTerrainModifiers, buildingMapper, traitMap, traitStrength));
 		buildings.push_back(building);
@@ -224,7 +224,7 @@ double V3::SubState::calcBuildingInvestmentWeight(const Building& building) cons
 	{
 		return 1;
 	}
-	
+
 	return std::max(1 - building.getConstructionCost() * building.getLevel() / static_cast<double>(originalCPBudget), 0.0);
 }
 
@@ -338,6 +338,37 @@ int V3::SubState::getRGOCapacity(const Building& building, const BuildingGroups&
 	}
 
 	return 0;
+}
+
+int V3::SubState::getMilitaryCapacity(const std::map<std::string, Law>& lawsMap) const
+{
+	return owner->getArmyMax(lawsMap);
+}
+
+int V3::SubState::getNavalBaseCapacity(const std::map<std::string, Tech>& techMap, const std::map<std::string, V3::StateModifier>& traitMap) const
+{
+	return owner->getNavalBaseMax(techMap) +
+			 std::accumulate(homeState->getTraits().begin(), homeState->getTraits().end(), 0, [traitMap](const int sum, const std::string& trait) {
+				 if (!traitMap.contains(trait))
+				 {
+					 Log(LogLevel::Error) << "Couldn't find state trait definition for: " << trait;
+					 return sum;
+				 }
+				 return sum + traitMap.at(trait).getNavalBaseBonus();
+			 });
+}
+
+int V3::SubState::getPortCapacity(const std::map<std::string, Tech>& techMap, const std::map<std::string, V3::StateModifier>& traitMap) const
+{
+	return owner->getPortsMax(techMap) +
+			 std::accumulate(homeState->getTraits().begin(), homeState->getTraits().end(), 0, [traitMap](const int sum, const std::string& trait) {
+				 if (!traitMap.contains(trait))
+				 {
+					 Log(LogLevel::Error) << "Couldn't find state trait definition for: " << trait;
+					 return sum;
+				 }
+				 return sum + traitMap.at(trait).getPortBonus();
+			 });
 }
 
 bool V3::SubState::hasRGO(const Building& building) const

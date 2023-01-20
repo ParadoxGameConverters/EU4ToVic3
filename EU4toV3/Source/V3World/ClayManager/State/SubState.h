@@ -2,6 +2,7 @@
 #define V3_SUBSTATE_H
 #include "ClayManager/ClayMapTypedefs.h"
 #include "EconomyManager/Building/Building.h"
+#include "Loaders/LawLoader/Law.h"
 #include "Loaders/TechLoader/Tech.h"
 #include "Mappers/BuildingMapper/BuildingMapper.h"
 #include "PopManager/Demographic.h"
@@ -144,6 +145,9 @@ class SubState
 	[[nodiscard]] bool isBuildingValid(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] bool hasCapacity(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] int getRGOCapacity(const Building& building, const BuildingGroups& buildingGroups) const;
+	[[nodiscard]] int getMilitaryCapacity(const std::map<std::string, Law>& lawsMap) const;
+	[[nodiscard]] int getNavalBaseCapacity(const std::map<std::string, Tech>& techMap, const std::map<std::string, StateModifier>& traitMap) const;
+	[[nodiscard]] int getPortCapacity(const std::map<std::string, Tech>& techMap, const std::map<std::string, StateModifier>& traitMap) const;
 	[[nodiscard]] bool hasRGO(const Building& building) const;
 
 	std::shared_ptr<State> homeState; // home state
@@ -166,9 +170,9 @@ class SubState
 	std::vector<Demographic> demographics;
 	SubStatePops subStatePops;
 
-	double industryWeight = 0;			// Share of owner's industry a substate should get, not normalized
-	int CPBudget = 0;						// Construction Points for a substate to spend on it's development
-	int originalCPBudget = 0;			// Used in Building Weight calculations
+	double industryWeight = 0;								  // Share of owner's industry a substate should get, not normalized
+	int CPBudget = 0;											  // Construction Points for a substate to spend on it's development
+	int originalCPBudget = 0;								  // Used in Building Weight calculations
 	std::vector<std::shared_ptr<Building>> buildings; // buildings available to build in the subState
 
 	std::vector<std::string> vanillaBuildingElements; // vanilla buildings for this substate, ready for direct dump.
