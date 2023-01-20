@@ -71,12 +71,17 @@ class SubState
 	void setVanillaBuildingElements(const std::vector<std::string>& elements) { vanillaBuildingElements = elements; }
 	void calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap);
 
-	void weightBuildings(const std::map<std::string, Building>& templateBuildings,
+	void gatherPossibleBuildings(const std::map<std::string, Building>& templateBuildings,
 		 const BuildingGroups& buildingGroups,
 		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
 		 const mappers::BuildingMapper& buildingMapper,
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::map<std::string, Tech>& techMap,
+		 const std::map<std::string, StateModifier>& traitMap,
+		 double traitStrength);
+	void weightBuildings(const BuildingGroups& buildingGroups,
+		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
+		 const mappers::BuildingMapper& buildingMapper,
 		 const std::map<std::string, StateModifier>& traitMap,
 		 double traitStrength);
 
@@ -120,6 +125,10 @@ class SubState
 		 const mappers::BuildingMapper& buildingMapper,
 		 const std::map<std::string, StateModifier>& traitMap,
 		 double traitStrength) const;
+	[[nodiscard]] bool hasValidBuildings(const BuildingGroups& buildingGroups,
+		 const std::map<std::string, Law>& lawsMap,
+		 const std::map<std::string, Tech>& techMap,
+		 const std::map<std::string, StateModifier>& traitMap) const;
 
 	[[nodiscard]] auto isVanillaSubState() const { return vanillaSubState; }
 	[[nodiscard]] auto isIncorporated() const { return !subStateTypes.contains("unincorporated"); }

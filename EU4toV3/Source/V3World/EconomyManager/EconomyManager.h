@@ -83,7 +83,9 @@ class EconomyManager
 
 
 	void removeNoBuildSubStates(std::vector<std::shared_ptr<SubState>>& subStates) const;
-	void removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates, const std::vector<std::shared_ptr<SubState>>::iterator& it) const;
+	void removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
+		 const std::vector<std::shared_ptr<SubState>>::iterator& it,
+		 const std::map<std::string, Law>& lawsMap) const;
 
 	void loadTerrainModifierMatrices(const std::string& filePath = "");
 	void loadStateTraits(const commonItems::ModFilesystem& modFS);

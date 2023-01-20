@@ -55,7 +55,7 @@ double V3::SubState::getTerrainFrequency(const std::string& theTerrain) const
 	return 0;
 }
 
-void V3::SubState::weightBuildings(const std::map<std::string, Building>& templateBuildings,
+void V3::SubState::gatherPossibleBuildings(const std::map<std::string, Building>& templateBuildings,
 	 const BuildingGroups& buildingGroups,
 	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
 	 const mappers::BuildingMapper& buildingMapper,
@@ -77,6 +77,22 @@ void V3::SubState::weightBuildings(const std::map<std::string, Building>& templa
 		building->setWeight(calcBuildingWeight(*building, buildingGroups, buildingTerrainModifiers, buildingMapper, traitMap, traitStrength));
 		buildings.push_back(building);
 	}
+}
+
+void V3::SubState::weightBuildings(const BuildingGroups& buildingGroups,
+	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
+	 const mappers::BuildingMapper& buildingMapper,
+	 const std::map<std::string, StateModifier>& traitMap,
+	 const double traitStrength)
+{
+	for (const auto& building: buildings)
+	{
+		building->setWeight(calcBuildingWeight(*building, buildingGroups, buildingTerrainModifiers, buildingMapper, traitMap, traitStrength));
+	}
+
+	std::ranges::sort(buildings, [](const std::shared_ptr<Building>& lhs, const std::shared_ptr<Building>& rhs) {
+		return lhs->getWeight() > rhs->getWeight();
+	});
 }
 
 bool V3::SubState::isCoastal() const
@@ -282,6 +298,7 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	{
 		return false;
 	}
+	// Important, can't build a building if we have no CP to build it. This is what end the loop.
 	if (building.getConstructionCost() > CPBudget)
 	{
 		return false;
@@ -296,6 +313,16 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	}
 
 	return true;
+}
+
+bool V3::SubState::hasValidBuildings(const BuildingGroups& buildingGroups,
+	 const std::map<std::string, Law>& lawsMap,
+	 const std::map<std::string, Tech>& techMap,
+	 const std::map<std::string, StateModifier>& traitMap) const
+{
+	return std::ranges::any_of(buildings, [this, buildingGroups, lawsMap, techMap, traitMap](const std::shared_ptr<Building>& building) {
+		return isBuildingValid(*building, buildingGroups, lawsMap, techMap, traitMap);
+	});
 }
 
 bool V3::SubState::hasCapacity(const Building& building,

@@ -19,6 +19,7 @@
 #include "PoliticalManager/PoliticalManager.h"
 #include <cmath>
 #include <iomanip>
+#include <numeric>
 #include <ranges>
 
 void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
@@ -209,7 +210,36 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 		auto subStatesByBudget(country->getSubStates());
 		std::ranges::sort(subStatesByBudget, greaterBudget);
 
-		// When removing substates grant their extra CP to the top State
+		// Make buildings from template building
+		// Only valid building will added to the vector
+		for (const auto& substate: subStatesByBudget)
+		{
+			substate->gatherPossibleBuildings(buildings,
+				 buildingGroups,
+				 buildingTerrainModifiers,
+				 buildingMapper,
+				 lawsMap,
+				 techMap.getTechs(),
+				 stateTraits,
+				 econDefines.getStateTraitStrength());
+		}
+
+		// For logging and possibly compensating purposes.
+		const auto removedBudget =
+			 std::accumulate(subStatesByBudget.begin(), subStatesByBudget.end(), 0, [this, lawsMap](const int sum, const std::shared_ptr<SubState>& substate) {
+				 if (!substate->hasValidBuildings(buildingGroups, lawsMap, techMap.getTechs(), stateTraits))
+				 {
+					 return sum + substate->getCPBudget();
+				 }
+				 return sum;
+			 });
+
+		Log(LogLevel::Debug) << "Country: " << country->getTag() << " has lost " << removedBudget << " CP due to small states";
+
+		// Eliminate states with no building options
+		std::erase_if(subStatesByBudget, [this, lawsMap](const std::shared_ptr<SubState>& substate) {
+			return !substate->hasValidBuildings(buildingGroups, lawsMap, techMap.getTechs(), stateTraits);
+		});
 
 		while (!subStatesByBudget.empty())
 		{
@@ -220,15 +250,9 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 			// Flag to see if negotiation was successful
 			bool talksFail = true;
 
-			// Find the building state wants most that is in the country budget
-			substate->weightBuildings(buildings,
-				 buildingGroups,
-				 buildingTerrainModifiers,
-				 buildingMapper,
-				 lawsMap,
-				 techMap.getTechs(),
-				 stateTraits,
-				 econDefines.getStateTraitStrength());
+			// Find the building the state wants most that is in the country budget
+			substate->weightBuildings(buildingGroups, buildingTerrainModifiers, buildingMapper, stateTraits, econDefines.getStateTraitStrength());
+
 
 			for (const auto& building: substate->getBuildings())
 			{
@@ -269,7 +293,7 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 			std::ranges::sort(subStatesByBudget, greaterBudget);
 
 			// After spend, remove substate if now finished
-			removeSubStateIfFinished(subStatesByBudget, subStatesByBudget.end() - 1);
+			removeSubStateIfFinished(subStatesByBudget, subStatesByBudget.end() - 1, lawsMap);
 		}
 	}
 }
@@ -524,16 +548,16 @@ void V3::EconomyManager::removeNoBuildSubStates(std::vector<std::shared_ptr<SubS
 }
 
 void V3::EconomyManager::removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
-	 const std::vector<std::shared_ptr<SubState>>::iterator& it) const
+	 const std::vector<std::shared_ptr<SubState>>::iterator& it,
+	 const std::map<std::string, V3::Law>& lawsMap) const
 {
-	// if (it->get()->getBuildingWeights.empty())
-	//{
+	if (it->get()->hasValidBuildings(buildingGroups, lawsMap, techMap.getTechs(), stateTraits))
 
-	if (subStates.size() >= 2)
-	{
-		// Carry over budget to current highest budgeted state.
-		subStates[0]->spendCPBudget(-it->get()->getCPBudget());
-	}
+		if (subStates.size() >= 2)
+		{
+			// Carry over budget to current highest budgeted state.
+			subStates[0]->spendCPBudget(-it->get()->getCPBudget());
+		}
 
 	subStates.erase(it);
 	//}
