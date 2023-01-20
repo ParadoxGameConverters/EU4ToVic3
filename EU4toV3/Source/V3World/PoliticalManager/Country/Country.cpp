@@ -791,6 +791,8 @@ void V3::Country::convertCharacters(const mappers::CharacterTraitMapper& charact
 
 	for (const auto& eu4Character: sourceCountry->getCharacters())
 	{
+		if (eu4Character.name.empty() && eu4Character.leaderName.empty())
+			continue; // start-date regencies and similar
 		auto character = Character(eu4Character,
 			 characterTraitMapper,
 			 ageShift,

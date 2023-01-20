@@ -42,12 +42,16 @@ void OUT::exportCharacterLocs(const std::string& outputName,
 		if (!output.is_open())
 			throw std::runtime_error("output/" + outputName + "/localization/" + language + "/replace/converted_characters_l_" + language + ".yml");
 
+		std::set<std::string> exportedKeys;
 		output << commonItems::utf8BOM << "l_" << language << ":\n";
 		for (const auto& country: countries | std::views::values)
 			for (const auto& character: country->getProcessedData().characters)
 				for (const auto& [key, loc]: character.localizations)
-					if (!knownLocs.getLocMapForKey(key))
+					if (!knownLocs.getLocMapForKey(key) && !exportedKeys.contains(key))
+					{
 						output << " " << key << ": \"" << loc << "\"\n";
+						exportedKeys.emplace(key);
+					}
 		output.close();
 	}
 }
