@@ -66,6 +66,7 @@ class SubState
 
 	void setIndustryWeight(const double theIndustryWeight) { industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theCPBudget) { CPBudget = theCPBudget; }
+	void setOriginalCPBudget(const int theCPBudget) { originalCPBudget = theCPBudget; }
 	void spendCPBudget(const int theCPExpense) { CPBudget -= theCPExpense; }
 	void addBuilding(const std::shared_ptr<Building>& building) { buildings.push_back(building); }
 	void setVanillaBuildingElements(const std::vector<std::string>& elements) { vanillaBuildingElements = elements; }
@@ -181,7 +182,7 @@ class SubState
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::map<std::string, Tech>& techMap,
 		 const std::map<std::string, StateModifier>& traitMap) const;
-	[[nodiscard]] bool hasRGO(const Building& building) const;
+	[[nodiscard]] bool hasRGO(const Building& building, const BuildingGroups& buildingGroups) const;
 
 	std::shared_ptr<State> homeState; // home state
 	std::shared_ptr<Country> owner;

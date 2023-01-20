@@ -69,8 +69,8 @@ class EconomyManager
 
 	// Budget fxns set weight for all countries, accumulates the total weight, and returns a modifier to the globalCP pool (if any).
 	[[nodiscard]] std::pair<double, double> countryBudgetCalcs(Configuration::ECONOMY economyType) const; // Return total weight, any special factors
-	[[nodiscard]] double civlevelCountryBudgets(double& accumulatedWeight) const;
-	[[nodiscard]] double devCountryBudgets(double& accumulatedWeight) const;
+	[[nodiscard]] std::pair<double, double> civLevelCountryBudgets() const;
+	[[nodiscard]] std::pair<double, double> devCountryBudgets() const;
 	[[nodiscard]] double getBaseSubStateWeight(const std::shared_ptr<SubState>& subState, Configuration::ECONOMY economyType) const;
 
 	[[nodiscard]] double calculateGeoMeanCentralizedPops() const;
@@ -82,28 +82,28 @@ class EconomyManager
 	void distributeBudget(double globalCP, double totalIndustryScore) const;
 	void setPMs() const;
 
-	[[nodiscard]] std::vector<std::shared_ptr<SubState>> prepareSubstatesByBudget(const std::shared_ptr<Country>& country,
+	[[nodiscard]] std::vector<std::shared_ptr<SubState>> prepareSubStatesByBudget(const std::shared_ptr<Country>& country,
 		 const std::map<std::string, Law>& lawsMap) const;
-	void negotiateBuilding(const std::shared_ptr<SubState>& substate,
+	void negotiateBuilding(const std::shared_ptr<SubState>& subState,
 		 const std::map<std::string, std::shared_ptr<Sector>>& sectors,
 		 const std::map<std::string, Law>& lawsMap,
-		 const std::vector<std::shared_ptr<SubState>>& substates) const;
+		 const std::vector<std::shared_ptr<SubState>>& subStates) const;
 	[[nodiscard]] static std::shared_ptr<Sector> getSectorWithMostBudget(const std::map<std::string, std::shared_ptr<Sector>>& sectors);
 	void buildBuilding(const std::shared_ptr<Building>& building,
-		 const std::shared_ptr<SubState>& substate,
+		 const std::shared_ptr<SubState>& subState,
 		 const std::shared_ptr<Sector>& sector,
 		 const std::map<std::string, Law>& lawsMap,
-		 const std::vector<std::shared_ptr<SubState>>& substates) const;
+		 const std::vector<std::shared_ptr<SubState>>& subStates) const;
 	void removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
-		 const std::vector<std::shared_ptr<SubState>>::iterator& substate,
+		 const std::vector<std::shared_ptr<SubState>>::iterator& subState,
 		 const std::map<std::string, Law>& lawsMap) const;
 
 	[[nodiscard]] int determinePacketSize(const std::shared_ptr<Building>& building,
 		 const std::shared_ptr<Sector>& sector,
-		 const std::shared_ptr<SubState>& substate,
+		 const std::shared_ptr<SubState>& subState,
 		 const std::map<std::string, Law>& lawsMap,
-		 const std::vector<std::shared_ptr<SubState>>& substates) const;
-	[[nodiscard]] int getClusterPacket(int baseCost, const std::vector<std::shared_ptr<SubState>>& substates) const;
+		 const std::vector<std::shared_ptr<SubState>>& subStates) const;
+	[[nodiscard]] int getClusterPacket(int baseCost, const std::vector<std::shared_ptr<SubState>>& subStates) const;
 
 	void loadTerrainModifierMatrices(const std::string& filePath = "");
 	void loadStateTraits(const commonItems::ModFilesystem& modFS);

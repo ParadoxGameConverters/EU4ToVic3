@@ -60,6 +60,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	localizationLoader.scrapeLocalizations(dwFS);
 	vanillaLocalizationLoader.scrapeLocalizations(blankModFS);
 	cultureMapper.loadCultureDefinitions(allFS);
+	economyManager.loadMappersAndConfigs(allFS);
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
 	Log(LogLevel::Progress) << "46 %";
@@ -108,11 +109,14 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getEU4Localizations(),
 		 configuration.configBlock.vn);
 
+	Log(LogLevel::Progress) << "53 %";
 	politicalManager.attemptColonialTagReplacement(cultureMapper.getColonialRegionMapper(), clayManager);
 
+	Log(LogLevel::Progress) << "54 %";
 	popManager.generatePops(clayManager);
 	popManager.applyHomeLands(clayManager);
 
+	Log(LogLevel::Progress) << "55 %";
 	cultureMapper.generateCultureDefinitions("configurables/name_lists.txt",
 		 "configurables/name_list_map.txt",
 		 "configurables/culture_trait_map.txt",
@@ -121,8 +125,11 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getReligionLoader(),
 		 sourceWorld.getEU4Localizations());
 
+	Log(LogLevel::Progress) << "56 %";
 	politicalManager.determineAndApplyWesternization(cultureMapper, religionMapper, configBlock.euroCentric, configBlock.startDate, datingData);
+	Log(LogLevel::Progress) << "57 %";
 	politicalManager.setupTech();
+	Log(LogLevel::Progress) << "58 %";
 	politicalManager.setupLaws();
 	politicalManager.convertDiplomacy(sourceWorld.getDiplomacy().getAgreements());
 	politicalManager.convertRivals();
@@ -133,9 +140,14 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		politicalManager.importVanillaDiplomacy();
 	}
 
+	Log(LogLevel::Progress) << "59 %";
 	clayManager.squashAllSubStates(politicalManager);
+	Log(LogLevel::Progress) << "60 %";
 	clayManager.redistributeResourcesandLandshares();
+
+	Log(LogLevel::Progress) << "61 %";
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);
+	Log(LogLevel::Progress) << "62 %";
 	politicalManager.convertCharacters(datingData.lastEU4Date,
 		 configBlock.startDate,
 		 clayManager,
@@ -144,76 +156,39 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getCultureLoader(),
 		 sourceWorld.getReligionLoader());
 
+	Log(LogLevel::Progress) << "63 %";
 	flagCrafter.loadCustomColors(configuration.getEU4Path() + "/common/custom_country_colors/00_custom_country_colors.txt");
 	flagCrafter.loadAvailableFlags("blankMod/output/common/coat_of_arms/coat_of_arms/", V3Path + "/common/flag_definitions/");
+	Log(LogLevel::Progress) << "64 %";
 	flagCrafter.distributeAvailableFlags(politicalManager.getCountries(), *countryMapper);
 
+	Log(LogLevel::Progress) << "65 %";
 	politicalManager.injectDynamicCulturesIntoFormables(cultureMapper);
+	Log(LogLevel::Progress) << "66 %";
 	politicalManager.expandReleasablesFootprint(clayManager);
+	Log(LogLevel::Progress) << "67 %";
 	politicalManager.alterMajorFormables();
+	Log(LogLevel::Progress) << "68 %";
 	clayManager.filterInvalidClaims(politicalManager);
+	Log(LogLevel::Progress) << "69 %";
 	politicalManager.alterIGIdeologies(cultureMapper, religionMapper, clayManager);
+	Log(LogLevel::Progress) << "70 %";
 	popManager.alterSlaveCultures(politicalManager, clayManager, cultureMapper.getV3CultureDefinitions());
 
-	Log(LogLevel::Info) << "-> Converting Provinces";
-	Log(LogLevel::Progress) << "53 %";
-
-	Log(LogLevel::Info) << "-> Cataloguing Invasive Fauna";
-	Log(LogLevel::Progress) << "54 %";
-
-	Log(LogLevel::Info) << "-> Converting Diplomacy";
-	Log(LogLevel::Progress) << "55 %";
-
-	Log(LogLevel::Progress) << "57 %";
-
-	Log(LogLevel::Progress) << "58 %";
-
-	Log(LogLevel::Progress) << "59 %";
 	// Place starting buildings for all centralized countries
+	Log(LogLevel::Progress) << "71 %";
 	economyManager.loadCentralizedStates(politicalManager.getCountries());
-	economyManager.loadMappersAndConfigs(allFS);
+	Log(LogLevel::Progress) << "72 %";
 	economyManager.establishBureaucracy(politicalManager);
+	Log(LogLevel::Progress) << "73 %";
 	economyManager.hardcodePorts();
+	Log(LogLevel::Progress) << "74 %";
 	economyManager.assignCountryCPBudgets(configBlock.economy, configBlock.startDate, datingData, politicalManager);
 	economyManager.balanceNationalBudgets();
+	Log(LogLevel::Progress) << "75 %";
+	economyManager.assignSubStateCPBudgets(configBlock.economy);
+	Log(LogLevel::Progress) << "76 %";
 	economyManager.buildBuildings(politicalManager.getLawsMap());
-
-	Log(LogLevel::Info) << "-> Distributing Factories";
-	Log(LogLevel::Progress) << "60 %";
-
-	Log(LogLevel::Info) << "-> Distributing Pops";
-	Log(LogLevel::Progress) << "61 %";
-
-	Log(LogLevel::Info) << "-> Releasing Invasive Fauna Into Colonies";
-	Log(LogLevel::Progress) << "62 %";
-
-	Log(LogLevel::Info) << "-> Monitoring Native Fauna Reaction";
-	Log(LogLevel::Progress) << "63 %";
-
-	Log(LogLevel::Info) << "-> Dropping Infected AI Cores";
-	Log(LogLevel::Progress) << "64 %";
-
-	Log(LogLevel::Info) << "-> Dropping Poorly-Shaped States";
-	Log(LogLevel::Progress) << "65 %";
-
-	Log(LogLevel::Info) << "-> Merging Nations";
-	Log(LogLevel::Info) << "-> Invoking the Undead";
-	Log(LogLevel::Progress) << "66 %";
-
-	Log(LogLevel::Info) << "-> Converting Armies and Navies";
-	Log(LogLevel::Progress) << "67 %";
-
-	Log(LogLevel::Info) << "-> Converting Ongoing Conflicts";
-	Log(LogLevel::Progress) << "68 %";
-
-	Log(LogLevel::Info) << "-> Describing Religion";
-	Log(LogLevel::Progress) << "69 %";
-
-	Log(LogLevel::Info) << "-> Converting Botanical Definitions";
-	Log(LogLevel::Progress) << "70 %";
-
-	Log(LogLevel::Info) << "-> Converting country flags";
-	Log(LogLevel::Progress) << "71 %";
 
 	Log(LogLevel::Info) << "*** Goodbye, Vicky 3, and godspeed. ***";
 }
