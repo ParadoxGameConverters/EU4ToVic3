@@ -1,4 +1,4 @@
-#I cannot emphasize enough that most of these are random and only based very loosely on available data
+﻿#I cannot emphasize enough that most of these are random and only based very loosely on available data
 POPS = {
 	s:STATE_DISTRICT_OF_COLUMBIA = {
 		region_state:P05 = { #Tsenacommacah
@@ -1619,6 +1619,16 @@ POPS = {
 				size = 10000
 			}
 		}
+		region_state:C08 = { #Coahuiltecan
+			create_pop = {
+				culture = hokan
+				size = 26000
+			}
+			create_pop = {
+				culture = apache #Lipan Apache
+				size = 4000
+			}
+		}
 		region_state:COM = { #Comanche
 			create_pop = {
 				culture = comanche
@@ -1627,6 +1637,22 @@ POPS = {
 			create_pop = {
 				culture = apache
 				size = 8000
+			}
+		}
+		region_state:K07 = { #Karankawa
+			create_pop = {
+				culture = hokan
+				size = 26000
+			}
+			create_pop = {
+				culture = apache #Lipan Apache
+				size = 4000
+			}
+		}
+		region_state:Y04 = { #Yoli (Concho/Jumanos/La Junta)
+			create_pop = {
+				culture = oodham
+				size = 10000
 			}
 		}
 	}
@@ -1663,6 +1689,12 @@ POPS = {
 			create_pop = {
 				culture = pueblo
 				size = 8000
+			}
+		}
+		region_state:H07 = { #Hia C-eḍ
+			create_pop = {
+				culture = oodham
+				size = 83636
 			}
 		}
 		region_state:N04 = { #Nuwuvi
@@ -1709,6 +1741,12 @@ POPS = {
 				size = 6000
 			}
 		}
+		region_state:T13 = { #Tohono
+			create_pop = {
+				culture = oodham
+				size = 96997
+			}
+		}
 	}
 	s:STATE_NEW_MEXICO = {
 		region_state:APC = { #Apache
@@ -1751,8 +1789,24 @@ POPS = {
 				size = 43000
 			}
 		}
+		region_state:R03 = { #Rarámuri
+			create_pop = {
+				culture = oodham
+				size = 13000
+			}
+		}
 	}
 	s:STATE_CALIFORNIA = {
+		region_state:A09 = { #Akwa'ala (Paipai)
+			create_pop = {
+				culture = hokan
+				size = 11000
+			}
+			create_pop = {
+				culture = oodham
+				size = 1000
+			}
+		}
 		region_state:M06 = { #Muwekma
 			create_pop = {
 				culture = hokan
@@ -1895,91 +1949,248 @@ POPS = {
 	# 97864 in 1830, 127586 in 1840
 	# working total of 112724
 	s:STATE_SONORA = {
-		region_state:MEX = {
-			create_pop = {
-				culture = mexican
-				size = 69087
-			}
+		region_state:A08 = { #Acaxee
 			create_pop = {
 				culture = oodham
-				size = 43637
+				size = 14363
+			}
+		}
+		region_state:C10 = { #Cahitas
+			create_pop = {
+				culture = oodham
+				size = 143630
+			}
+		}
+		region_state:G06 = { #Guasaves
+			create_pop = {
+				culture = oodham
+				size = 133630
+			}
+		}
+		region_state:H07 = { #Hia C-eḍ
+			create_pop = {
+				culture = oodham
+				size = 163636
+			}
+		}
+		region_state:O03 = { #O'otham
+			create_pop = {
+				culture = oodham
+				size = 14363
+			}
+		}
+		region_state:T13 = { #Tohono
+			create_pop = {
+				culture = oodham
+				size = 143637
+			}
+		}
+		region_state:XK1 = { #Xawitt Kwñchawaay
+			create_pop = {
+				culture = hokan
+				size = 40637
 			}
 		}
 	}
 	s:STATE_CHIHUAHUA = { # total population: 132189 (1830), 147600 (1840)
-		region_state:MEX = {
+		region_state:A07 = { #Aztatlán
 			create_pop = {
-				culture = mexican
-				size = 139895
+				culture = nahua
+				size = 16543
 			}
 			create_pop = {
 				culture = oodham
-				size = 8000
+				size = 12345
 			}
+		}
+		region_state:A08 = { #Acaxee
 			create_pop = {
-				culture = apache
-				size = 16000
+				culture = oodham
+				size = 80000
+			}
+		}
+		region_state:O03 = { #O'otham
+			create_pop = {
+				culture = oodham
+				size = 180000
+			}
+		}
+		region_state:R03 = { #Rarámuri
+			create_pop = {
+				culture = oodham
+				size = 140000
+			}
+		}
+		region_state:X05 = { #Xiximes
+			create_pop = {
+				culture = oodham
+				size = 80000
+			}
+		}
+		region_state:Y04 = { #Yoli (Concho/Jumanos/La Junta)
+			create_pop = {
+				culture = oodham
+				size = 10000
 			}
 		}
 	}
 	s:STATE_RIO_GRANDE = { # Coahuila, Nuevo Leon and Tamaulipas. est. pop 182352 in 1830, 266647 in 1840
-		region_state:MEX = {
+		region_state:C08 = { #Coahuiltecan
 			create_pop = {
-				culture = mexican
-				size = 121499
+				culture = hokan
+				size = 100000
+			}
+		}
+		region_state:H06 = { #Hñähñu (Otomi)
+			create_pop = {
+				culture = otomi
+				size = 45000
 			}
 			create_pop = {
-				culture = oodham
-				size = 27000
+				culture = nahua
+				size = 5000
 			}
 			create_pop = {
-				culture = oodham
-				religion = catholic
-				size = 70004
+				culture = mayan
+				size = 500
+			}
+		}
+		region_state:NAH = { #Nahua (Aztec)
+			create_pop = {
+				culture = otomi
+				size = 10000
 			}
 			create_pop = {
-				culture = afro_caribeno
-				size = 6000
+				culture = nahua
+				size = 10000
+			}
+			create_pop = {
+				culture = mayan
+				size = 20000
+			}
+		}
+		region_state:T08 = { #Tének (Huastec)
+			create_pop = {
+				culture = mayan
+				size = 350000
+			}
+		}
+		region_state:T12 = { #Tlacuitlapan
+			create_pop = {
+				culture = otomi #Converter Culture
+				size = 70000
 			}
 		}
 	}
-	s:STATE_VERACRUZ = { # 242658 in 1830, 259463 in 1840
-		region_state:MEX = {
+	s:STATE_VERACRUZ = {
+		region_state:C12 = { #Copilco
 			create_pop = {
-				culture = mexican
-				size = 251061
-			}		
+				culture = nahua
+				size = 61250
+			}
+			create_pop = {
+				culture = mayan
+				size = 61200
+			}
+		}
+		region_state:MAY = { #Maya
+			create_pop = {
+				culture = mayan
+				size = 100000
+			}
+		}
+		region_state:NAH = { #Nahua (Aztec)
+			create_pop = {
+				culture = nahua
+				size = 1000000
+			}
+		}
+		region_state:T08 = { #Tének (Huastec)
+			create_pop = {
+				culture = mayan
+				size = 250000
+			}
+		}
+		region_state:Z02 = { #Zoque
+			create_pop = {
+				culture = nahua
+				size = 81250
+			}
+			create_pop = {
+				culture = zapotec
+				size = 41200
+			}
 		}
 	}
 	s:STATE_DURANGO = { # est. total of 156999. 153810 in 1830, 160187 in 1840
-		region_state:MEX = {
+		region_state:A07 = { #Aztatlán
 			create_pop = {
-				culture = mexican
-				size = 136199
+				culture = nahua
+				size = 65432
+			}
+			create_pop = {
+				culture = oodham
+				size = 23456
+			}
+		}
+		region_state:T12 = { #Tlacuitlapan
+			create_pop = {
+				culture = otomi #Converter Culture
+				size = 70000
+			}
+		}
+		region_state:X03 = { #Xalisco
+			create_pop = {
+				culture = nahua
+				size = 11384
 			}
 			create_pop = {
 				culture = oodham
 				size = 20000
 			}
+		}
+		region_state:X04 = { #Xécora
 			create_pop = {
-				culture = afro_caribeno
-				size = 800
+				culture = nahua
+				size = 90000
+			}
+			create_pop = {
+				culture = oodham
+				size = 26354
 			}
 		}
 	}
 	s:STATE_SINALOA = { # est. total of 134941. 122285 in 1830, 147596 in 1840
-		region_state:MEX = {
+		region_state:A07 = { #Aztatlán
 			create_pop = {
-				culture = mexican
-				size = 113841
+				culture = nahua
+				size = 55432
+			}
+			create_pop = {
+				culture = oodham
+				size = 43456
+			}
+		}
+		region_state:A08 = { #Acaxee
+			create_pop = {
+				culture = oodham
+				size = 8000
+			}
+		}
+		region_state:G06 = { #Guasaves
+			create_pop = {
+				culture = oodham
+				size = 33130
+			}
+		}
+		region_state:X03 = { #Xalisco
+			create_pop = {
+				culture = nahua
+				size = 11384
 			}
 			create_pop = {
 				culture = oodham
 				size = 20000
-			}
-			create_pop = {
-				culture = afro_caribeno
-				size = 1100
 			}
 		}
 	}
@@ -1988,22 +2199,46 @@ POPS = {
 	# Queretaro:		114437 in 1830, 122962 in 1840, so averaging out to 118699
 	# working total number of 950333
 	s:STATE_BAJIO = {
-		region_state:MEX = {
+		region_state:H06 = { #Hñähñu (Otomi)
 			create_pop = {
-				culture = mexican
-				size = 594909
+				culture = otomi
+				size = 300000
 			}
 			create_pop = {
 				culture = nahua
-				size = 266461
+				size = 45000
 			}
+		}
+		region_state:M10 = { #Metzitlan
+			create_pop = {
+				culture = otomi
+				size = 175000
+			}
+			create_pop = {
+				culture = nahua
+				size = 25000
+			}
+		}
+		region_state:MCO = { #Michoacán
 			create_pop = {
 				culture = tarascan
-				size = 85162
+				size = 683871
 			}
 			create_pop = {
-				culture = afro_caribeno
-				size = 3801
+				culture = nahua
+				size = 166461
+			}
+		}
+		region_state:NAH = { #Nahua (Aztec)
+			create_pop = {
+				culture = nahua
+				size = 116461
+			}
+		}
+		region_state:T12 = { #Tlacuitlapan
+			create_pop = {
+				culture = otomi #Converter Culture
+				size = 270000
 			}
 		}
 	}
@@ -2012,18 +2247,10 @@ POPS = {
 	# Tabasco:			58518 in 1830, 63919 in 1840, so averaging out to 61219
 	# working total number of 548936
 	s:STATE_YUCATAN = { 
-		region_state:MEX = {
-			create_pop = {
-				culture = mexican
-				size = 226764
-			}
+		region_state:MAY = { #Maya
 			create_pop = {
 				culture = mayan
-				size = 388804
-			}
-			create_pop = {
-				culture = afro_caribeno
-				size = 1400
+				size = 6000000
 			}
 		}
 	}
@@ -2032,27 +2259,24 @@ POPS = {
 	# Tlaxcala: 72271 in 1830, 81524 in 1840, so averaging out to 76897
 	# working total number of 1811090
 	s:STATE_MEXICO = {
-		region_state:MEX = {
+		region_state:NAH = { #Nahua (Aztec)
 			create_pop = {
-				culture = mexican
-				size = 763486
+				culture = nahua
+				size = 3507090
 			}
 			create_pop = {
 				culture = mixtec
-				religion = catholic
-				size = 39996
-			}
-			create_pop = {
-				culture = nahua
-				size = 689604
-			}
+				size = 399960
+			}			
 			create_pop = {
 				culture = zapotec
 				size = 264004
 			}
+		}
+		region_state:T09 = { #Tlaxcallān
 			create_pop = {
-				culture = afro_caribeno
-				size = 54000
+				culture = nahua
+				size = 650000
 			}
 		}
 	}
@@ -2060,50 +2284,96 @@ POPS = {
 	# total of 231319. This number was revealed to me in a dream.
 	# jk. Couldn't find estimates for Guerrero in 1830 or 1840, but they could be found for 1870 onwards, so some math trickery was done. Neighboring Oaxaca's estimated 1835 population is 74.7% of its 1870 population, and 50.61% of its 1900 population, so those percentages were applied to Guerrero's 1870 and 1900 population figures, and the two results were averaged together into the above.
 	s:STATE_GUERRERO = { 
-		region_state:MEX = {
+		region_state:MCO = { #Michoacán
 			create_pop = {
-				culture = mexican
-				size = 114874
+				culture = tarascan
+				size = 17225
 			}
 			create_pop = {
-				culture = zapotec
-				size = 13183
+				culture = tlapanec
+				size = 17225
+			}
+		}
+		region_state:NAH = { #Nahua (Aztec)
+			create_pop = {
+				culture = nahua
+				size = 105036
 			}
 			create_pop = {
 				culture = tarascan
 				size = 60846
 			}
 			create_pop = {
-				culture = nahua
-				size = 27381
+				culture = tlapanec
+				size = 142255
 			}
 			create_pop = {
-				culture = afro_caribeno
-				size = 15036
+				culture = zapotec
+				size = 13183
+			}
+		}
+		region_state:Y03 = { #Yopitzinco (Tlapanec)
+			create_pop = {
+				culture = tlapanec
+				size = 342255
 			}
 		}
 	}
 	s:STATE_OAXACA = { # approx 479674. 457504 in 1830, 501844 in 1840.
-		region_state:MEX = {
+		region_state:NAH = { #Nahua (Aztec)
 			create_pop = {
-				culture = mexican
-				size = 143903
-			}
-			create_pop = {
-				culture = zapotec
-				size = 40532
-			}
-			create_pop = {
-				culture = tarascan
-				size = 187073
+				culture = mixtec
+				size = 256962
 			}
 			create_pop = {
 				culture = nahua
-				size = 84182
+				size = 503069
 			}
 			create_pop = {
-				culture = afro_caribeno
-				size = 23984
+				culture = tarascan
+				size = 367073
+			}
+			create_pop = {
+				culture = zapotec
+				size = 80532
+			}
+		}
+		region_state:T10 = { #Teotitlán
+			create_pop = {
+				culture = nahua
+				size = 222222
+			}
+			create_pop = {
+				culture = mixtec
+				size = 111111
+			}			
+			create_pop = {
+				culture = zapotec
+				size = 111111
+			}
+		}
+		region_state:YD1 = { #Yucu Dzaa (Mixtec)
+			create_pop = {
+				culture = mixtec
+				size = 300000
+			}
+			create_pop = {
+				culture = nahua
+				size = 8053
+			}
+			create_pop = {
+				culture = zapotec
+				size = 25306
+			}
+		}
+		region_state:Z02 = { #Zoque
+			create_pop = {
+				culture = nahua
+				size = 20250
+			}
+			create_pop = {
+				culture = zapotec
+				size = 900000
 			}
 		}
 	}
@@ -2113,19 +2383,70 @@ POPS = {
 	# working total of 1190162
 	# 1.5858
 	s:STATE_JALISCO = {
-		region_state:MEX = {
+		region_state:C09 = { #Coliman
 			create_pop = {
-				culture = mexican
+				culture = nahua
 				size = 1011710
 			}
 			create_pop = {
 				culture = oodham
-				religion = catholic
 				size = 152078
 			}
 			create_pop = {
-				culture = oodham
+				culture = tarascan
 				size = 26373
+			}
+		}
+		region_state:MCO = { #Michoacán
+			create_pop = {
+				culture = nahua
+				size = 50000
+			}
+			create_pop = {
+				culture = tarascan
+				size = 600000
+			}
+		}
+		region_state:NAH = { #Nahua (Aztec)
+			create_pop = {
+				culture = nahua
+				size = 15000
+			}
+			create_pop = {
+				culture = tarascan
+				size = 16000
+			}
+		}
+		region_state:T11 = { #Tonallan
+			create_pop = {
+				culture = nahua
+				size = 2500
+			}
+			create_pop = {
+				culture = otomi
+				size = 2500
+			}
+			create_pop = {
+				culture = tarascan
+				size = 2500
+			}
+			create_pop = {
+				culture = zapotec
+				size = 17500
+			}
+		}
+		region_state:X03 = { #Xalisco
+			create_pop = {
+				culture = nahua
+				size = 600000
+			}
+			create_pop = {
+				culture = oodham
+				size = 250000
+			}
+			create_pop = {
+				culture = tarascan
+				size = 150000
 			}
 		}
 	}
@@ -2133,58 +2454,110 @@ POPS = {
 	# Aguascalientes: 57125 in 1830, 72193, so averaging out to 64659
 	# working total of 313308
 	s:STATE_ZACATECAS = {
-		region_state:MEX = {
-			create_pop = {
-				culture = mexican
-				size = 137347
-			}
+		region_state:G05 = { #Guamare
 			create_pop = {
 				culture = nahua
-				size = 175961
+				size = 27500
+			}
+			create_pop = {
+				culture = otomi
+				size = 450000
+			}
+			create_pop = {
+				culture = tarascan
+				size = 25000
+			}
+			create_pop = {
+				culture = zapotec
+				size = 10000
+			}
+		}
+		region_state:T11 = { #Tonallan
+			create_pop = {
+				culture = nahua
+				size = 27500
+			}
+			create_pop = {
+				culture = otomi
+				size = 30000
+			}
+			create_pop = {
+				culture = tarascan
+				size = 25000
+			}
+			create_pop = {
+				culture = zapotec
+				size = 92000
+			}
+		}
+		region_state:T12 = { #Tlacuitlapan
+			create_pop = {
+				culture = otomi #Converter Culture
+				size = 300000
 			}
 		}
 	}
 	# 121424 in 1830, 138595 in 1840
 	# working total of 130010
 	s:STATE_CHIAPAS = {
-		region_state:MEX = {
+		region_state:MAY = { #Maya
 			create_pop = {
-				culture = mexican
-				size = 57846
+				culture = mayan
+				size = 400000
+			}
+		}
+		region_state:NAH = { #Nahua (Aztec)
+			create_pop = {
+				culture = nahua
+				size = 5784
 			}
 			create_pop = {
 				culture = mayan
 				size = 72164
 			}
 		}
-		region_state:UCA = {
-			create_pop = {
-				culture = mexican
-				size = 5562
-			}
-			create_pop = {
-				culture = central_american
-				size = 1854
-			}
+		region_state:T14 = { #Tzotzil
 			create_pop = {
 				culture = mayan
-				size = 9251
+				size = 172164
+			}
+			create_pop = {
+				culture = nahua
+				size = 35784
 			}
 		}
 	}
 	s:STATE_BAJA_CALIFORNIA = {
-		region_state:MEX = {
+		region_state:A09 = { #Akwa'ala (Paipai)
 			create_pop = {
-				culture = mexican
-				size = 8264
+				culture = hokan
+				size = 7000
 			}
 			create_pop = {
 				culture = oodham
-				size = 13300
+				size = 1000
+			}
+		}
+		region_state:C11 = { #Cochimí
+			create_pop = {
+				culture = hokan
+				size = 60000
 			}
 			create_pop = {
-				culture = afro_caribeno
-				size = 1300
+				culture = guaicurian
+				size = 10000
+			}
+		}
+		region_state:G07 = { #Guaycura
+			create_pop = {
+				culture = guaicurian
+				size = 82000
+			}
+		}
+		region_state:L05 = { #Laymones
+			create_pop = {
+				culture = hokan
+				size = 66000
 			}
 		}
 	}
