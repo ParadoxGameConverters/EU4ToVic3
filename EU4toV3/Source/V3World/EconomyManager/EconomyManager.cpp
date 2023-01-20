@@ -246,17 +246,17 @@ std::pair<double, double> V3::EconomyManager::countryBudgetCalcs(const Configura
 	double totalWeight = 0;
 
 	if (Configuration::ECONOMY::CivLevel == economyType)
-		return {totalWeight, civLevelCountryBudgets(totalWeight)};
+		return civLevelCountryBudgets();
 	if (Configuration::ECONOMY::DevPerPop == economyType)
-		return {totalWeight, devCountryBudgets(totalWeight)};
+		return devCountryBudgets();
 
 	return {totalWeight, 0.0};
 }
 
-double V3::EconomyManager::civLevelCountryBudgets(double& accumulatedWeight) const
+std::pair<double, double> V3::EconomyManager::civLevelCountryBudgets() const
 {
 	// The default way.
-
+	double accumulatedWeight = 0;
 	double totalCivLevel = 0.0;
 	const double geoMeanPop = calculateGeoMeanCentralizedPops();
 	// while determining individual country's industry score, accumulate total industry factor & weight
@@ -275,17 +275,17 @@ double V3::EconomyManager::civLevelCountryBudgets(double& accumulatedWeight) con
 	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << (globalIndustryFactor + 1) * 100
 							  << "% industrial compared to baseline. Compensating";
 
-	return globalIndustryFactor;
+	return std::pair(accumulatedWeight, globalIndustryFactor);
 }
 
-double V3::EconomyManager::devCountryBudgets(double& accumulatedWeight) const
+std::pair<double, double> V3::EconomyManager::devCountryBudgets() const
 {
 	// TODO(Gawquon)
 	// config option 3. Pop & development
 	// The more pop you have per dev, the less powerful your development
 	// This is loosely assuming Dev = Pop + Economy so Economy = Dev - Pop
 
-	return 0.0;
+	return std::pair(0.0, 0.0);
 }
 
 double V3::EconomyManager::calculateGeoMeanCentralizedPops() const
