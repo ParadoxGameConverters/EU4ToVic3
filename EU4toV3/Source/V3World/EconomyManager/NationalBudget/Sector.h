@@ -12,6 +12,7 @@ class Sector
   public:
 	Sector(const SectorLoader& sectorRules, const Country& country);
 	void calculateBudget(double totalWeight, int countryCPBudget);
+	void spendCP(const int CPExpenditure) { CPBudget -= CPExpenditure; }
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getCPBudget() const { return CPBudget; }

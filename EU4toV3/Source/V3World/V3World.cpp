@@ -176,6 +176,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	economyManager.hardcodePorts();
 	economyManager.assignCountryCPBudgets(configBlock.economy, configBlock.startDate, datingData, politicalManager);
 	economyManager.balanceNationalBudgets();
+	economyManager.buildBuildings(politicalManager.getLawsMap());
 
 	Log(LogLevel::Info) << "-> Distributing Factories";
 	Log(LogLevel::Progress) << "60 %";

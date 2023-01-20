@@ -150,7 +150,6 @@ TEST(V3World_EconomyManagerTests, GlobalCPScalesByPopulation)
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> The world has 1245324 CP to spend on industry.)"));
 }
 
-// TODO(Gawquon): Implement date scaling and config point
 TEST(DISABLED_V3World_EconomyManagerTests, GlobalCPScalesByDate)
 {
 	auto politicalManager = prepWorld();

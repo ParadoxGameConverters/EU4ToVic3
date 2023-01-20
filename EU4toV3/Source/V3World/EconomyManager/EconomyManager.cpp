@@ -197,102 +197,18 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 
 	for (const auto& country: centralizedCountries)
 	{
-		// Prepare sorting lambda, we will use it more than once
-		auto greaterBudget = [](const std::shared_ptr<SubState>& lhs, const std::shared_ptr<SubState>& rhs) {
-			return lhs->getCPBudget() > rhs->getCPBudget();
-		};
-
-		// Prepare sectors, this is probably where a sub-fxn will live
 		const auto& sectors = country->getProcessedData().industrySectors;
+		auto subStatesByBudget = prepareSubstatesByBudget(country, lawsMap);
 
-		// Copy substate vector. We will be sorting this one and removing finished substates until it is empty
-		// Sort Vector, remove substates that have less than the minimum pre-set construction cost, default to 50
-		auto subStatesByBudget(country->getSubStates());
-		std::ranges::sort(subStatesByBudget, greaterBudget);
-
-		// Make buildings from template building
-		// Only valid building will added to the vector
-		for (const auto& substate: subStatesByBudget)
-		{
-			substate->gatherPossibleBuildings(buildings,
-				 buildingGroups,
-				 buildingTerrainModifiers,
-				 buildingMapper,
-				 lawsMap,
-				 techMap.getTechs(),
-				 stateTraits,
-				 econDefines.getStateTraitStrength());
-		}
-
-		// For logging and possibly compensating purposes.
-		const auto removedBudget =
-			 std::accumulate(subStatesByBudget.begin(), subStatesByBudget.end(), 0, [this, lawsMap](const int sum, const std::shared_ptr<SubState>& substate) {
-				 if (!substate->hasValidBuildings(buildingGroups, lawsMap, techMap.getTechs(), stateTraits))
-				 {
-					 return sum + substate->getCPBudget();
-				 }
-				 return sum;
-			 });
-
-		Log(LogLevel::Debug) << "Country: " << country->getTag() << " has lost " << removedBudget << " CP due to small states";
-
-		// Eliminate states with no building options
-		std::erase_if(subStatesByBudget, [this, lawsMap](const std::shared_ptr<SubState>& substate) {
-			return !substate->hasValidBuildings(buildingGroups, lawsMap, techMap.getTechs(), stateTraits);
-		});
-
+		// Until every substate is unable to build anything
 		while (!subStatesByBudget.empty())
 		{
 			// Enter negotiation
 			// Pick the substate with the most budget
-			const auto& substate = subStatesByBudget[0];
+			negotiateBuilding(subStatesByBudget[0], sectors, lawsMap, subStatesByBudget);
 
-			// Flag to see if negotiation was successful
-			bool talksFail = true;
-
-			// Find the building the state wants most that is in the country budget
-			substate->weightBuildings(buildingGroups, buildingTerrainModifiers, buildingMapper, stateTraits, econDefines.getStateTraitStrength());
-
-
-			for (const auto& building: substate->getBuildings())
-			{
-				const int baseCost = building->getConstructionCost();
-				const auto& sector = nationalBudgets.getSectorName(building->getName());
-
-				if (!sector)
-				{
-					Log(LogLevel::Error) << "Building : " << building->getName() << " not identified in a known sector.";
-					continue;
-				}
-
-				if (!sectors.contains(sector.value()))
-				{
-					Log(LogLevel::Error) << "Unknown Industrial Sector : " << sector.value() << ".";
-					continue;
-				}
-
-				if (baseCost > sectors.at(sector.value())->getCPBudget())
-				{
-					continue;
-				}
-
-				// So we're a valid building in a valid sector and there is budget for us. Great!
-				// buildME
-				substate->spendCPBudget(baseCost); // * n
-				talksFail = false;
-				break;
-			}
-
-			if (talksFail)
-			{
-				// build the first building from score buildings, the only thing that changes is that it removes budget from the highest sector
-			}
-
-
-			// Sort
-			std::ranges::sort(subStatesByBudget, greaterBudget);
-
-			// After spend, remove substate if now finished
+			// A Building has now been built, process for next round
+			std::ranges::sort(subStatesByBudget, SubState::greaterBudget);
 			removeSubStateIfFinished(subStatesByBudget, subStatesByBudget.end() - 1, lawsMap);
 		}
 	}
@@ -524,43 +440,193 @@ double V3::EconomyManager::getBaseSubStateWeight(const std::shared_ptr<SubState>
 	return 0;
 }
 
-void V3::EconomyManager::removeNoBuildSubStates(std::vector<std::shared_ptr<SubState>>& subStates) const
+std::vector<std::shared_ptr<V3::SubState>> V3::EconomyManager::prepareSubstatesByBudget(const std::shared_ptr<Country>& country,
+	 const std::map<std::string, Law>& lawsMap) const
 {
-	auto budgetBelowMinimumCost = [](const std::shared_ptr<SubState>& substate) {
-		return substate->getCPBudget() < 50; // getConstructionMinCost();
-	};
+	// Copy substate vector. We will be sorting this one and removing finished substates until it is empty
+	auto subStatesByBudget(country->getSubStates());
+	std::ranges::sort(subStatesByBudget, SubState::greaterBudget);
 
-
-	// Collect budgets below threshold
-	int carryBudget = 0;
-	for (const auto& substate: subStates)
+	// Make buildings from template buildings
+	// Only valid building will be added to the vector
+	for (const auto& substate: subStatesByBudget)
 	{
-		if (budgetBelowMinimumCost(substate))
-			carryBudget += substate->getCPBudget();
+		substate->gatherPossibleBuildings(buildings,
+			 buildingGroups,
+			 buildingTerrainModifiers,
+			 buildingMapper,
+			 lawsMap,
+			 techMap.getTechs(),
+			 stateTraits,
+			 econDefines.getStateTraitStrength());
 	}
-	std::erase_if(subStates, budgetBelowMinimumCost);
 
-	// Add to top
-	if (!subStates.empty())
+	// For logging and possibly compensating purposes.
+	const auto removedBudget =
+		 std::accumulate(subStatesByBudget.begin(), subStatesByBudget.end(), 0, [this, lawsMap](const int sum, const std::shared_ptr<SubState>& substate) {
+			 if (!substate->hasValidBuildings(buildingGroups, lawsMap, techMap.getTechs(), stateTraits))
+			 {
+				 return sum + substate->getCPBudget();
+			 }
+			 return sum;
+		 });
+
+	if (removedBudget > 0)
 	{
-		subStates[0]->spendCPBudget(-carryBudget);
+		Log(LogLevel::Debug) << "Country: " << country->getTag() << " has lost " << removedBudget << " CP due to small states";
+	}
+
+	// Eliminate states with no building options
+	std::erase_if(subStatesByBudget, [this, lawsMap](const std::shared_ptr<SubState>& substate) {
+		return !substate->hasValidBuildings(buildingGroups, lawsMap, techMap.getTechs(), stateTraits);
+	});
+
+	return subStatesByBudget;
+}
+
+void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& substate,
+	 const std::map<std::string, std::shared_ptr<Sector>>& sectors,
+	 const std::map<std::string, Law>& lawsMap,
+	 const std::vector<std::shared_ptr<V3::SubState>>& substates) const
+{
+	// Whether or not the negotiation succeeds, a building MUST be built.
+
+	// Flag to see if negotiation was successful
+	bool talksFail = true;
+
+	// Find the building the state wants most that is in the country budget
+	substate->weightBuildings(buildingGroups,
+		 buildingTerrainModifiers,
+		 buildingMapper,
+		 lawsMap,
+		 techMap.getTechs(),
+		 stateTraits,
+		 econDefines.getStateTraitStrength());
+	for (const auto& building: substate->getBuildings())
+	{
+		const int baseCost = building->getConstructionCost();
+		const auto& sector = nationalBudgets.getSectorName(building->getName());
+		if (!sector)
+		{
+			Log(LogLevel::Error) << "Building : " << building->getName() << " not identified in any known sector.";
+			continue;
+		}
+		if (!sectors.contains(sector.value()))
+		{
+			Log(LogLevel::Error) << "Unknown Industrial Sector : " << sector.value() << ".";
+			continue;
+		}
+		if (baseCost > sectors.at(sector.value())->getCPBudget())
+		{
+			continue;
+		}
+
+		// So we're a valid building in a valid sector and there is budget for us. Great!
+		buildBuilding(building, substate, sectors.at(sector.value()), lawsMap, substates);
+		talksFail = false;
+		break;
+	}
+
+	if (talksFail)
+	{
+		// Negotiation failed
+		// State picks it's favorite building, takes from biggest sector
+		buildBuilding(substate->getBuildings()[0], substate, getSectorWithMostBudget(sectors), lawsMap, substates);
 	}
 }
 
+std::shared_ptr<V3::Sector> V3::EconomyManager::getSectorWithMostBudget(const std::map<std::string, std::shared_ptr<Sector>>& sectors)
+{
+	auto maxIter = std::ranges::max_element(sectors, [](const auto& lhs, const auto& rhs) {
+		return lhs.second->getCPBudget() < rhs.second->getCPBudget();
+	});
+
+	return maxIter->second;
+}
+
+
+
+void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building,
+	 const std::shared_ptr<SubState>& substate,
+	 const std::shared_ptr<Sector>& sector,
+	 const std::map<std::string, V3::Law>& lawsMap,
+	 const std::vector<std::shared_ptr<V3::SubState>>& substates) const
+{
+	// SUBSTATE MUST SPEND ITS CP OR WE GET INFINITE LOOPS
+	// Spend sector CP if possible
+
+	// Pick a packet size!
+	const int p = determinePacketSize(building, sector, substate, lawsMap, substates);
+
+	substate->spendCPBudget(building->getConstructionCost() * p);
+	sector->spendCP(building->getConstructionCost() * p);
+
+	building->setLevel(building->getLevel() + p);
+}
+
 void V3::EconomyManager::removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
-	 const std::vector<std::shared_ptr<SubState>>::iterator& it,
+	 const std::vector<std::shared_ptr<SubState>>::iterator& substate,
 	 const std::map<std::string, V3::Law>& lawsMap) const
 {
-	if (it->get()->hasValidBuildings(buildingGroups, lawsMap, techMap.getTechs(), stateTraits))
-
+	if (substate->get()->hasValidBuildings(buildingGroups, lawsMap, techMap.getTechs(), stateTraits))
+	{
 		if (subStates.size() >= 2)
 		{
 			// Carry over budget to current highest budgeted state.
-			subStates[0]->spendCPBudget(-it->get()->getCPBudget());
+			subStates[0]->spendCPBudget(-substate->get()->getCPBudget());
 		}
+		subStates.erase(substate);
+	}
+}
 
-	subStates.erase(it);
-	//}
+int V3::EconomyManager::determinePacketSize(const std::shared_ptr<Building>& building,
+	 const std::shared_ptr<Sector>& sector,
+	 const std::shared_ptr<V3::SubState>& substate,
+	 const std::map<std::string, V3::Law>& lawsMap,
+	 const std::vector<std::shared_ptr<SubState>>& substates) const
+{
+	// Packet size is the minimum  of (Sector CP budget/cost, SubState CP budget/cost, SubState capacity, and our clustering metric)
+	const int sectorPacket = sector->getCPBudget() / building->getConstructionCost();
+	const int substatePacket = substate->getCPBudget() / building->getConstructionCost();
+	const int capacityPacket = substate->getBuildingCapacity(*building, buildingGroups, lawsMap, techMap.getTechs(), stateTraits);
+	const int clusterPacket = getClusterPacket(building->getConstructionCost(), substates);
+
+	const int packet = std::min({sectorPacket, substatePacket, capacityPacket, clusterPacket});
+
+	if (packet <= 0)
+	{
+		Log(LogLevel::Error) << "Building 0 building of type: " << building->getName() << ". This should never happen, infinite loop incoming.";
+	}
+
+	return packet;
+}
+
+int V3::EconomyManager::getClusterPacket(const int baseCost, const std::vector<std::shared_ptr<SubState>>& substates) const
+{
+	const int CPAll = std::accumulate(substates.begin(), substates.end(), 0, [](const int sum, const std::shared_ptr<SubState>& substate) {
+		return sum + substate->getCPBudget();
+	});
+	const double CPMean = static_cast<double>(CPAll) / substates.size();
+
+
+	const int maxCP = substates[0]->getCPBudget();
+	const int minCP = std::max(substates.back()->getCPBudget(), baseCost);
+
+	// Default, when factor is 0
+	int packet = static_cast<int>(CPMean / baseCost);
+	const double factor = econDefines.getPacketFactor();
+	if (factor < 0)
+	{
+		// Trends toward only building 1 building at a time
+		packet = static_cast<int>(std::floor(CPMean * (1.0 + factor) + minCP * -factor) / baseCost);
+	}
+	if (factor > 0)
+	{
+		// Trends toward building as many buildings as the substate can get away with at a time
+		packet = static_cast<int>(std::floor(CPMean * (1 - factor) + maxCP * factor) / baseCost);
+	}
+
+	return packet;
 }
 
 void V3::EconomyManager::loadTerrainModifierMatrices(const std::string& filePath)

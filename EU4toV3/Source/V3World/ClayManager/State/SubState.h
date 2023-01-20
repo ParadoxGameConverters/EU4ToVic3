@@ -82,6 +82,8 @@ class SubState
 	void weightBuildings(const BuildingGroups& buildingGroups,
 		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
 		 const mappers::BuildingMapper& buildingMapper,
+		 const std::map<std::string, Law>& lawsMap,
+		 const std::map<std::string, Tech>& techMap,
 		 const std::map<std::string, StateModifier>& traitMap,
 		 double traitStrength);
 
@@ -123,9 +125,16 @@ class SubState
 		 const BuildingGroups& buildingGroups,
 		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
 		 const mappers::BuildingMapper& buildingMapper,
+		 const std::map<std::string, Law>& lawsMap,
+		 const std::map<std::string, Tech>& techMap,
 		 const std::map<std::string, StateModifier>& traitMap,
 		 double traitStrength) const;
 	[[nodiscard]] bool hasValidBuildings(const BuildingGroups& buildingGroups,
+		 const std::map<std::string, Law>& lawsMap,
+		 const std::map<std::string, Tech>& techMap,
+		 const std::map<std::string, StateModifier>& traitMap) const;
+	[[nodiscard]] int getBuildingCapacity(const Building& building,
+		 const BuildingGroups& buildingGroups,
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::map<std::string, Tech>& techMap,
 		 const std::map<std::string, StateModifier>& traitMap) const;
@@ -142,10 +151,14 @@ class SubState
 	[[nodiscard]] bool isStagedForMinorities() const { return stageForMinorities; }
 	void setStageForMinorities(const bool stage) { stageForMinorities = stage; }
 
+	[[nodiscard]] static bool greaterBudget(const std::shared_ptr<SubState>& lhs, const std::shared_ptr<SubState>& rhs);
+
   private:
 	void calculateTerrainFrequency();
 	[[nodiscard]] double getPopInfrastructure(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] std::pair<int, double> getStateInfrastructureModifiers(const StateModifiers& theStateModifiers) const;
+
+	void sortBuildingsByWeight();
 
 	[[nodiscard]] double calcBuildingTerrainWeight(const std::string& building,
 		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers) const;

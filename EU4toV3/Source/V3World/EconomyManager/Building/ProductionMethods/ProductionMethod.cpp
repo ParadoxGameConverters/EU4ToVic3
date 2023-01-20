@@ -60,10 +60,6 @@ void V3::ProductionMethod::registerKeys()
 					Log(LogLevel::Error) << "Failed to read employment number " << employmentNumber << ": " << e.what();
 				}
 			}
-			else
-			{
-				Log(LogLevel::Error) << "Found employment data, but could not parse it: " << jobEffect;
-			}
 		}
 	});
 	bModUnwrapper.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
