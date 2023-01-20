@@ -146,45 +146,42 @@ void V3::Country::distributeGovAdmins(const int numGovAdmins) const
 
 	// Pass out buildings by pop proportion of this subset of States, can't round, so truncate and hand out remainders later.
 	int assigned = 0;
-	// for (const auto& substate: topSubstates)
-	//{
-	//	const double popProportion = static_cast<double>(substate->getSubStatePops().getPopCount()) / topPop;
-	//	const int levels = static_cast<int>(popProportion * numGovAdmins);
+	for (const auto& substate: topSubstates)
+	{
+		const double popProportion = static_cast<double>(substate->getSubStatePops().getPopCount()) / topPop;
+		const int levels = static_cast<int>(popProportion * numGovAdmins);
 
-	//	Building govAdmin;
-	//	govAdmin.setName("building_government_administration");
-	//	govAdmin.setLevel(levels);
+		const auto govAdmin = std::make_shared<Building>();
+		govAdmin->setName("building_government_administration");
+		govAdmin->setLevel(levels);
 
-	//	substate->addBuilding(govAdmin);
-	//	assigned += levels;
-	//}
+		substate->addBuilding(govAdmin);
+		assigned += levels;
+	}
 
-	//// Handing out remainders, should be less than # of topSubstates
-	// for (const auto& substate: topSubstates)
-	//{
-	//	auto isGovAdmin = [](const Building& b) {
-	//		return b.getName() == "building_government_administration";
-	//	};
+	// Handing out remainders, should be less than # of topSubstates
+	for (const auto& substate: topSubstates)
+	{
+		auto isGovAdmin = [](const std::shared_ptr<Building>& b) {
+			return b->getName() == "building_government_administration";
+		};
 
-	//	if (auto govAdmin = std::ranges::find_if(substate->getBuildings(), isGovAdmin); govAdmin != substate->getBuildings().end())
-	//	{
-	//		const auto levels = govAdmin->getLevel();
-	//		govAdmin->set
-	//	}
-	//	else
-	//	{
-	//		Log(LogLevel::Error) << "Failure to set and retrieve building_government_administration";
-	//	}
+		if (auto govAdmin = std::ranges::find_if(substate->getBuildings(), isGovAdmin); govAdmin != substate->getBuildings().end())
+		{
+			const auto levels = govAdmin->get()->getLevel();
+			govAdmin->get()->setLevel(levels + 1);
+			++assigned;
 
-	//	const auto levels = substate->getBuildingLevel("building_government_administration");
-	//	substate->setBuildingLevel("building_government_administration", levels.value_or(0) + 1);
-	//	++assigned;
-
-	//	if (numGovAdmins - assigned <= 0)
-	//	{
-	//		break;
-	//	}
-	//}
+			if (numGovAdmins - assigned <= 0)
+			{
+				break;
+			}
+		}
+		else
+		{
+			Log(LogLevel::Error) << "Failed to find building_government_administration in: " << substate->getHomeStateName();
+		}
+	}
 }
 
 void V3::Country::registerKeys()
