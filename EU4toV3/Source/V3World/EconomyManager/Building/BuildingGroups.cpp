@@ -66,9 +66,21 @@ std::optional<bool> V3::BuildingGroups::tryGetIsCapped(const std::optional<std::
 	if (!theGroupName)
 		return std::nullopt;
 
-	const auto& possibleGroup = buildingGroups.find(theGroupName.value());
+	auto possibleGroup = buildingGroups.find(theGroupName.value());
 	if (possibleGroup != buildingGroups.end())
 	{
+		if (possibleGroup->second->possibleIsResourceCapped() && !*possibleGroup->second->possibleIsResourceCapped())
+			return false;
+		if (possibleGroup->second->possibleIsResourceCapped() && *possibleGroup->second->possibleIsResourceCapped())
+			return true;
+		while (possibleGroup->second->getParentName())
+			possibleGroup = buildingGroups.find(*possibleGroup->second->getParentName());
+		{
+			if (possibleGroup->second->possibleIsResourceCapped() && !*possibleGroup->second->possibleIsResourceCapped())
+				return false;
+			if (possibleGroup->second->possibleIsResourceCapped() && *possibleGroup->second->possibleIsResourceCapped())
+				return true;
+		}
 		return possibleGroup->second->possibleIsResourceCapped();
 	}
 

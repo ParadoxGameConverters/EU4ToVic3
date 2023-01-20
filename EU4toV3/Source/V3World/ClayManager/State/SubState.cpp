@@ -59,33 +59,38 @@ void V3::SubState::gatherPossibleBuildings(const std::map<std::string, Building>
 	 const BuildingGroups& buildingGroups,
 	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
 	 const mappers::BuildingMapper& buildingMapper,
-	 const std::map<std::string, V3::Law>& lawsMap,
-	 const std::map<std::string, V3::Tech>& techMap,
+	 const std::map<std::string, Law>& lawsMap,
+	 const std::map<std::string, Tech>& techMap,
 	 const std::map<std::string, StateModifier>& traitMap,
 	 const double traitStrength)
 {
+	Log(LogLevel::Debug) << "We know of " << templateBuildings.size() << " building templates.";
 	for (const auto& templateBuilding: templateBuildings | std::views::values)
 	{
+		//Log(LogLevel::Debug) << "\t\t\t\tStart of consideration: " << templateBuilding.getName();
 		if (!isBuildingValid(templateBuilding, buildingGroups, lawsMap, techMap, traitMap))
 		{
+			//Log(LogLevel::Debug) << "\t\t\t\tEnd of consideration: " << templateBuilding.getName() << " is invalid.";
 			continue;
 		}
 
 		// New building from template. Initialize weight and add to substate
+		//Log(LogLevel::Debug) << "\t\t\t\tCreating building!";
 		const auto building = std::make_shared<Building>(templateBuilding);
 
+		//Log(LogLevel::Debug) << "\t\t\t\tSetting weight!";
 		building->setWeight(calcBuildingWeight(*building, buildingGroups, buildingTerrainModifiers, buildingMapper, lawsMap, techMap, traitMap, traitStrength));
 		buildings.push_back(building);
 	}
-
+	Log(LogLevel::Debug) << buildings.size() << " buildings are valid.";
 	sortBuildingsByWeight();
 }
 
 void V3::SubState::weightBuildings(const BuildingGroups& buildingGroups,
 	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
 	 const mappers::BuildingMapper& buildingMapper,
-	 const std::map<std::string, V3::Law>& lawsMap,
-	 const std::map<std::string, V3::Tech>& techMap,
+	 const std::map<std::string, Law>& lawsMap,
+	 const std::map<std::string, Tech>& techMap,
 	 const std::map<std::string, StateModifier>& traitMap,
 	 const double traitStrength)
 {
@@ -95,6 +100,10 @@ void V3::SubState::weightBuildings(const BuildingGroups& buildingGroups,
 	}
 
 	sortBuildingsByWeight();
+	std::string out;
+	for (const auto& building: buildings)
+		out += building->getName() + ": " + std::to_string(building->getWeight()) + " ";
+	Log(LogLevel::Debug) << " sorted: " << out;
 }
 
 void V3::SubState::sortBuildingsByWeight()
@@ -295,7 +304,6 @@ double V3::SubState::calcBuildingIndustrialWeight(const Building& building, cons
 	// If building isn't urban no effect
 	return 1;
 }
-
 bool V3::SubState::isBuildingValid(const Building& building,
 	 const BuildingGroups& buildingGroups,
 	 const std::map<std::string, Law>& lawsMap,
@@ -326,7 +334,7 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	{
 		return false;
 	}
-	if (!hasRGO(building))
+	if (!hasRGO(building, buildingGroups))
 	{
 		return false;
 	}
@@ -334,7 +342,6 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	{
 		return false;
 	}
-
 	return true;
 }
 
@@ -369,9 +376,9 @@ int V3::SubState::getBuildingCapacity(const Building& building,
 
 bool V3::SubState::hasCapacity(const Building& building,
 	 const BuildingGroups& buildingGroups,
-	 const std::map<std::string, V3::Law>& lawsMap,
-	 const std::map<std::string, V3::Tech>& techMap,
-	 const std::map<std::string, V3::StateModifier>& traitMap) const
+	 const std::map<std::string, Law>& lawsMap,
+	 const std::map<std::string, Tech>& techMap,
+	 const std::map<std::string, StateModifier>& traitMap) const
 {
 	// Check building cap first
 	if (building.isCappedByGov())
@@ -380,11 +387,10 @@ bool V3::SubState::hasCapacity(const Building& building,
 	}
 
 	// If no cap on building, return true
-	if (const auto& isCapped = buildingGroups.tryGetIsCapped(building.getBuildingGroup()); isCapped && !isCapped.value())
+	if (const auto& isCapped = buildingGroups.tryGetIsCapped(building.getBuildingGroup()); isCapped && !isCapped.value() || !isCapped)
 	{
 		return true;
 	}
-
 	// Then check building group cap
 	return getRGOCapacity(building, buildingGroups) > 0;
 }
@@ -412,17 +418,33 @@ int V3::SubState::getRGOCapacity(const Building& building, const BuildingGroups&
 
 	auto buildingGroupName = building.getBuildingGroup();
 	auto buildingGroup = buildingGroups.getBuildingGroupMap().at(buildingGroupName);
+
+	const std::set<std::string> stateArables = {homeState->getArableResources().begin(), homeState->getArableResources().end()};
+
+	// is this a mineral-type resource?
 	if (resources.contains(buildingGroupName))
+	{
 		return resources.at(buildingGroupName);
+	}
+
+	// maybe an arable one?
+	if (stateArables.contains(buildingGroupName))
+	{
+		if (resources.contains("bg_agriculture"))
+			return resources.at("bg_agriculture");
+		else
+			return 0;
+	}
 
 	while (buildingGroup->getParentName())
 	{
 		buildingGroupName = *buildingGroup->getParentName();
 		buildingGroup = buildingGroups.getBuildingGroupMap().at(buildingGroupName);
 		if (resources.contains(buildingGroupName))
+		{
 			return resources.at(buildingGroupName);
+		}
 	}
-
 	return 0;
 }
 
@@ -449,8 +471,14 @@ int V3::SubState::getGovCapacity(const std::string& building,
 	return nationwide + traits;
 }
 
-bool V3::SubState::hasRGO(const Building& building) const
+bool V3::SubState::hasRGO(const Building& building, const BuildingGroups& buildingGroups) const
 {
+	if (!buildingGroups.getBuildingGroupMap().contains(building.getBuildingGroup()))
+		return false;
+
+	if (const auto& isCapped = buildingGroups.tryGetIsCapped(building.getBuildingGroup()); (isCapped && !isCapped.value()) || !isCapped)
+	return true;
+
 	if (const auto& arables = homeState->getArableResources(); std::ranges::find(arables, building.getBuildingGroup()) != arables.end())
 		return true;
 
@@ -458,11 +486,11 @@ bool V3::SubState::hasRGO(const Building& building) const
 }
 
 double V3::SubState::calcBuildingWeight(const Building& building,
-	 const V3::BuildingGroups& buildingGroups,
+	 const BuildingGroups& buildingGroups,
 	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
 	 const mappers::BuildingMapper& buildingMapper,
-	 const std::map<std::string, V3::Law>& lawsMap,
-	 const std::map<std::string, V3::Tech>& techMap,
+	 const std::map<std::string, Law>& lawsMap,
+	 const std::map<std::string, Tech>& techMap,
 	 const std::map<std::string, StateModifier>& traitMap,
 	 const double traitStrength) const
 {

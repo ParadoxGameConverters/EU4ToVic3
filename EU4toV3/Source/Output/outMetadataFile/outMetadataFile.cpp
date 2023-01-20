@@ -1,6 +1,7 @@
 #include "outMetadataFile.h"
 #include "Log.h"
 #include <fstream>
+#include "CommonFunctions.h"
 
 namespace
 {

@@ -181,7 +181,7 @@ class SubState
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::map<std::string, Tech>& techMap,
 		 const std::map<std::string, StateModifier>& traitMap) const;
-	[[nodiscard]] bool hasRGO(const Building& building) const;
+	[[nodiscard]] bool hasRGO(const Building& building, const BuildingGroups& buildingGroups) const;
 
 	std::shared_ptr<State> homeState; // home state
 	std::shared_ptr<Country> owner;
