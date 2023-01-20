@@ -267,12 +267,12 @@ bool V3::SubState::isBuildingValid(const Building& building, const BuildingGroup
 	{
 		return false;
 	}
-	// We can only build what we have the tech for
-	if (!getOwner()->hasAnyOfTech(building.getUnlockingTechs()))
+	if (!building.isBuildable())
 	{
 		return false;
 	}
-	if (!building.isBuildable())
+	// We can only build what we have the tech for
+	if (!getOwner()->hasAnyOfTech(building.getUnlockingTechs()))
 	{
 		return false;
 	}
@@ -299,6 +299,8 @@ bool V3::SubState::hasCapacity(const Building& building, const BuildingGroups& b
 	{
 		return true;
 	}
+
+
 
 	return getRGOCapacity(building, buildingGroups) > 0;
 }
@@ -340,35 +342,27 @@ int V3::SubState::getRGOCapacity(const Building& building, const BuildingGroups&
 	return 0;
 }
 
-int V3::SubState::getMilitaryCapacity(const std::map<std::string, Law>& lawsMap) const
+int V3::SubState::getGovCapacity(const std::string& building,
+	 const std::map<std::string, Law>& lawsMap,
+	 const std::map<std::string, Tech>& techMap,
+	 const std::map<std::string, StateModifier>& traitMap) const
 {
-	return owner->getArmyMax(lawsMap);
-}
+	const auto nationwide = owner->getGovBuildingMax(building, lawsMap, techMap);
+	const auto traits =
+		 std::accumulate(homeState->getTraits().begin(), homeState->getTraits().end(), 0, [building, traitMap](const int sum, const std::string& trait) {
+			 if (!traitMap.contains(trait))
+			 {
+				 Log(LogLevel::Error) << "Couldn't find state trait definition for: " << trait;
+				 return sum;
+			 }
+			 if (const auto bonus = traitMap.at(trait).getMaxBuildingBonus(building); bonus)
+			 {
+				 return sum + bonus.value();
+			 }
 
-int V3::SubState::getNavalBaseCapacity(const std::map<std::string, Tech>& techMap, const std::map<std::string, V3::StateModifier>& traitMap) const
-{
-	return owner->getNavalBaseMax(techMap) +
-			 std::accumulate(homeState->getTraits().begin(), homeState->getTraits().end(), 0, [traitMap](const int sum, const std::string& trait) {
-				 if (!traitMap.contains(trait))
-				 {
-					 Log(LogLevel::Error) << "Couldn't find state trait definition for: " << trait;
-					 return sum;
-				 }
-				 return sum + traitMap.at(trait).getNavalBaseBonus();
-			 });
-}
-
-int V3::SubState::getPortCapacity(const std::map<std::string, Tech>& techMap, const std::map<std::string, V3::StateModifier>& traitMap) const
-{
-	return owner->getPortsMax(techMap) +
-			 std::accumulate(homeState->getTraits().begin(), homeState->getTraits().end(), 0, [traitMap](const int sum, const std::string& trait) {
-				 if (!traitMap.contains(trait))
-				 {
-					 Log(LogLevel::Error) << "Couldn't find state trait definition for: " << trait;
-					 return sum;
-				 }
-				 return sum + traitMap.at(trait).getPortBonus();
-			 });
+			 return sum;
+		 });
+	return nationwide + traits;
 }
 
 bool V3::SubState::hasRGO(const Building& building) const

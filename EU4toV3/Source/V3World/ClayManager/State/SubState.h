@@ -145,9 +145,10 @@ class SubState
 	[[nodiscard]] bool isBuildingValid(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] bool hasCapacity(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] int getRGOCapacity(const Building& building, const BuildingGroups& buildingGroups) const;
-	[[nodiscard]] int getMilitaryCapacity(const std::map<std::string, Law>& lawsMap) const;
-	[[nodiscard]] int getNavalBaseCapacity(const std::map<std::string, Tech>& techMap, const std::map<std::string, StateModifier>& traitMap) const;
-	[[nodiscard]] int getPortCapacity(const std::map<std::string, Tech>& techMap, const std::map<std::string, StateModifier>& traitMap) const;
+	[[nodiscard]] int getGovCapacity(const std::string& building, // barracks, ports things that have max capacities based on laws/tech/traits
+		 const std::map<std::string, Law>& lawsMap,
+		 const std::map<std::string, Tech>& techMap,
+		 const std::map<std::string, StateModifier>& traitMap) const;
 	[[nodiscard]] bool hasRGO(const Building& building) const;
 
 	std::shared_ptr<State> homeState; // home state

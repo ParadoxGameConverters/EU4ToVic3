@@ -107,40 +107,36 @@ bool V3::Country::hasAnyOfTech(const std::vector<std::string>& techs) const
 	});
 }
 
-int V3::Country::getPortsMax(const std::map<std::string, Tech>& techMap)
+int V3::Country::getGovBuildingMax(const std::string& building, const std::map<std::string, Law>& lawsMap, const std::map<std::string, Tech>& techMap) const
 {
-	return std::accumulate(processedData.techs.begin(), processedData.techs.end(), 0, [techMap](const int sum, const std::string& tech) {
+	const auto tech = std::accumulate(processedData.techs.begin(), processedData.techs.end(), 0, [building, techMap](const int sum, const std::string& tech) {
 		if (!techMap.contains(tech))
 		{
 			Log(LogLevel::Error) << "Couldn't find tech definition for: " << tech;
 			return sum;
 		}
-		return sum + techMap.at(tech).portMax;
-	});
-}
-
-int V3::Country::getNavalBaseMax(const std::map<std::string, Tech>& techMap)
-{
-	return std::accumulate(processedData.techs.begin(), processedData.techs.end(), 0, [techMap](const int sum, const std::string& tech) {
-		if (!techMap.contains(tech))
+		if (!techMap.at(tech).maxBuildingLevels.contains(building))
 		{
-			Log(LogLevel::Error) << "Couldn't find tech definition for: " << tech;
 			return sum;
 		}
-		return sum + techMap.at(tech).navalBaseMax;
-	});
-}
 
-int V3::Country::getArmyMax(const std::map<std::string, Law>& lawsMap) const
-{
-	return std::accumulate(processedData.laws.begin(), processedData.laws.end(), 0, [lawsMap](const int sum, const std::string& law) {
+		return sum + techMap.at(tech).maxBuildingLevels.at(building);
+	});
+
+	const auto laws = std::accumulate(processedData.laws.begin(), processedData.laws.end(), 0, [building, lawsMap](const int sum, const std::string& law) {
 		if (!lawsMap.contains(law))
 		{
 			Log(LogLevel::Error) << "Couldn't find law definition for: " << law;
 			return sum;
 		}
-		return sum + lawsMap.at(law).barracksMax;
+		if (!lawsMap.at(law).maxBuildingLevels.contains(building))
+		{
+			return sum;
+		}
+
+		return sum + lawsMap.at(law).maxBuildingLevels.at(building);
 	});
+	return tech + laws;
 }
 
 void V3::Country::distributeGovAdmins(const int numGovAdmins) const
@@ -150,7 +146,7 @@ void V3::Country::distributeGovAdmins(const int numGovAdmins) const
 
 	// Pass out buildings by pop proportion of this subset of States, can't round, so truncate and hand out remainders later.
 	int assigned = 0;
-	//for (const auto& substate: topSubstates)
+	// for (const auto& substate: topSubstates)
 	//{
 	//	const double popProportion = static_cast<double>(substate->getSubStatePops().getPopCount()) / topPop;
 	//	const int levels = static_cast<int>(popProportion * numGovAdmins);
@@ -164,7 +160,7 @@ void V3::Country::distributeGovAdmins(const int numGovAdmins) const
 	//}
 
 	//// Handing out remainders, should be less than # of topSubstates
-	//for (const auto& substate: topSubstates)
+	// for (const auto& substate: topSubstates)
 	//{
 	//	auto isGovAdmin = [](const Building& b) {
 	//		return b.getName() == "building_government_administration";

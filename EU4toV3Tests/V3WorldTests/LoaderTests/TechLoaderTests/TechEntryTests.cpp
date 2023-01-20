@@ -25,6 +25,6 @@ TEST(V3World_TechEntryTests, TechCanBeLoaded)
 
 	EXPECT_DOUBLE_EQ(0.15, tech.infrastructureMult);
 	EXPECT_EQ(5, tech.infrastructureMax);
-	EXPECT_EQ(2, tech.portMax);
-	EXPECT_EQ(20, tech.navalBaseMax);
+	EXPECT_EQ(2, tech.maxBuildingLevels.at("building_port"));
+	EXPECT_EQ(20, tech.maxBuildingLevels.at("building_naval_base"));
 }

@@ -7,8 +7,7 @@ struct Tech
 {
 	int infrastructureMax = 0;
 	double infrastructureMult = 0.0;
-	int navalBaseMax = 0;
-	int portMax = 0;
+	std::map<std::string, int> maxBuildingLevels;
 };
 } // namespace V3
 #endif // LAW_H

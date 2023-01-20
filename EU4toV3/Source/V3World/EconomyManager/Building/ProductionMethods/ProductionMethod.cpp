@@ -44,16 +44,25 @@ void V3::ProductionMethod::registerKeys()
 
 	bModUnwrapper.registerKeyword("level_scaled", [this](std::istream& theStream) {
 		const auto& theAssignments = commonItems::assignments(theStream).getAssignments();
+		const std::regex pattern("building_employment_([a-zA-Z_]+)_add");
+
 		for (const auto& [jobEffect, employmentNumber]: theAssignments)
 		{
-			const std::string& job = jobEffect.substr(20, jobEffect.length() - 24); // building_employment_clerks_add -> clerks
-			try
+			std::smatch job;
+			if (std::regex_search(jobEffect, job, pattern)) // building_employment_clerks_add -> clerks
 			{
-				employment[job] = std::stoi(employmentNumber);
+				try
+				{
+					employment[job[1].str()] = std::stoi(employmentNumber);
+				}
+				catch (const std::exception& e)
+				{
+					Log(LogLevel::Error) << "Failed to read employment number " << employmentNumber << ": " << e.what();
+				}
 			}
-			catch (const std::exception& e)
+			else
 			{
-				Log(LogLevel::Error) << "Failed to read employment number " << employmentNumber << ": " << e.what();
+				Log(LogLevel::Error) << "Found employment data, but could not parse it: " << jobEffect;
 			}
 		}
 	});

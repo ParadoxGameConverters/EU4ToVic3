@@ -5,6 +5,8 @@
 #include <numeric>
 #include <ranges>
 
+#include "Log.h"
+
 void V3::StateModifier::loadStateModifier(std::istream& theStream)
 {
 	registerKeys();
@@ -19,11 +21,17 @@ void V3::StateModifier::registerKeys()
 	});
 	modifierUnwrapper.IgnoreUnregisteredItems();
 
-	registerKeyword("state_building_port_max_level_add", [this](std::istream& theStream) {
-		port = commonItems::getInt(theStream);
-	});
-	registerKeyword("state_building_naval_base_max_level_add", [this](std::istream& theStream) {
-		navalBase = commonItems::getInt(theStream);
+	registerRegex("state_building_[a-zA-Z_]+_max_level_add", [this](const std::string& modifier, std::istream& theStream) {
+		const std::regex pattern("state_building_([a-zA-Z_]+)_max_level_add");
+		std::smatch building;
+		if (std::regex_search(modifier, building, pattern)) // state_building_port_max_level_add -> port
+		{
+			maxBuildingLevels["building_" + building[1].str()] = commonItems::getInt(theStream);
+		}
+		else
+		{
+			Log(LogLevel::Error) << "Found a max level modifier, but could not parse it: " << modifier;
+		}
 	});
 	registerKeyword("state_infrastructure_add", [this](std::istream& theStream) {
 		infrastructure = commonItems::getInt(theStream);
@@ -47,6 +55,15 @@ void V3::StateModifier::registerKeys()
 		buildingModifiers.emplace(id, commonItems::getDouble(theStream));
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+}
+
+std::optional<int> V3::StateModifier::getMaxBuildingBonus(const std::string& building) const
+{
+	if (maxBuildingLevels.contains(building))
+	{
+		return maxBuildingLevels.at(building);
+	}
+	return std::nullopt;
 }
 
 double V3::StateModifier::getAllBonuses(const std::map<std::string, double>& modifierMap)

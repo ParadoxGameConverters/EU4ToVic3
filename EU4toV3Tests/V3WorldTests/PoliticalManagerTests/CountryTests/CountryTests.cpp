@@ -296,55 +296,30 @@ TEST(V3World_CountryTests, InfrastructureFromCountryTech)
 	EXPECT_DOUBLE_EQ(0.25, country.getTechInfraMult(techLoader.getTechs()));
 }
 
-TEST(V3World_CountryTests, GetMilitaryMax)
+TEST(V3World_CountryTests, GetGovernmentBuildingMaxCapacities)
 {
 	V3::Country country;
 
 	V3::LawLoader lawLoader;
 	lawLoader.loadLaws(modFS);
 
-	V3::ProcessedData data;
-	data.laws.emplace("law_2"); // None
-	data.laws.emplace("law_3"); // 70
-	data.laws.emplace("law_4"); // 30
-
-	country.setProcessedData(data);
-
-	EXPECT_EQ(100, country.getArmyMax(lawLoader.getLaws()));
-}
-
-TEST(V3World_CountryTests, GetNavalBaseMax)
-{
-	V3::Country country;
-
 	V3::TechLoader techLoader;
 	techLoader.loadTechs(modFS);
 
+
 	V3::ProcessedData data;
-	data.techs.emplace("tech_2"); // 15
+	data.laws.emplace("law_2");	// None
+	data.laws.emplace("law_3");	// 70 Barracks
+	data.laws.emplace("law_4");	// 30 Barracks
+	data.techs.emplace("tech_2"); // 15 Bases, 2 Ports
 	data.techs.emplace("tech_3"); // None
-	data.techs.emplace("tech_4"); // 10
+	data.techs.emplace("tech_4"); // 10 Bases, 4 Ports
 
 	country.setProcessedData(data);
 
-	EXPECT_EQ(25, country.getNavalBaseMax(techLoader.getTechs()));
-}
-
-TEST(V3World_CountryTests, GetPortMax)
-{
-	V3::Country country;
-
-	V3::TechLoader techLoader;
-	techLoader.loadTechs(modFS);
-
-	V3::ProcessedData data;
-	data.techs.emplace("tech_2"); // 2
-	data.techs.emplace("tech_3"); // None
-	data.techs.emplace("tech_4"); // 4
-
-	country.setProcessedData(data);
-
-	EXPECT_EQ(6, country.getPortsMax(techLoader.getTechs()));
+	EXPECT_EQ(100, country.getGovBuildingMax("building_barracks", lawLoader.getLaws(), techLoader.getTechs()));
+	EXPECT_EQ(25, country.getGovBuildingMax("building_naval_base", lawLoader.getLaws(), techLoader.getTechs()));
+	EXPECT_EQ(6, country.getGovBuildingMax("building_port", lawLoader.getLaws(), techLoader.getTechs()));
 }
 
 TEST(V3World_CountryTests, YearCapFactorHitsCurve)

@@ -19,6 +19,7 @@ class Building: commonItems::parser
 	[[nodiscard]] const auto& getConstructionCost() const { return constructionCost; }
 	[[nodiscard]] const auto& getUnlockingTechs() const { return unlockingTechs; }
 	[[nodiscard]] const auto& isBuildable() const { return buildable; }
+	[[nodiscard]] const auto& isCappedByGov() const { return governmentCapped; }
 
 	[[nodiscard]] const auto& getLevel() const { return level; }
 	[[nodiscard]] const auto& getWeight() const { return weight; }
@@ -33,6 +34,7 @@ class Building: commonItems::parser
 	int constructionCost = 50;
 	std::vector<std::string> unlockingTechs;
 	bool buildable = true;
+	bool governmentCapped = false; // barracks, ports, other caps done at the building not building group level by techs/laws/traits.
 
 	// Specific to instance of building in SubState e.g. The port in New York
 	int level = 0;

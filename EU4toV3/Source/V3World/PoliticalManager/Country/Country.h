@@ -188,10 +188,9 @@ class Country: commonItems::parser
 	[[nodiscard]] int getTechInfraCap(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] double getTechInfraMult(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] bool hasAnyOfTech(const std::vector<std::string>& techs) const;
-
-	[[nodiscard]] int getPortsMax(const std::map<std::string, Tech>& techMap);
-	[[nodiscard]] int getNavalBaseMax(const std::map<std::string, Tech>& techMap);
-	[[nodiscard]] int getArmyMax(const std::map<std::string, Law>& lawsMap) const;
+	[[nodiscard]] int getGovBuildingMax(const std::string& building,
+		 const std::map<std::string, Law>& lawsMap,
+		 const std::map<std::string, Tech>& techMap) const;
 
 	void distributeGovAdmins(int numGovAdmins) const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> topPercentileStatesByPop(double percentile) const;
