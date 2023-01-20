@@ -24,6 +24,7 @@
 
 void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
 {
+	Log(LogLevel::Info) << "-> Loading Centralized Countries for Economy Application.";
 	for (const auto& country: std::views::values(countries))
 	{
 		if (!country)
@@ -37,6 +38,7 @@ void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::
 
 		centralizedCountries.push_back(country);
 	}
+	Log(LogLevel::Info) << "<> Loaded " << centralizedCountries.size() << "Centralized Countries.";
 }
 
 void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem& modFS, const std::string& filePath)
@@ -54,6 +56,7 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 
 void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalManager) const
 {
+	Log(LogLevel::Info) << "-> Establishing Bureaucracy.";
 	if (!buildings.contains("building_government_administration"))
 	{
 		Log(LogLevel::Error) << "No building definition found for: building_government_administration.";
@@ -88,10 +91,14 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 	}
 
 	setPMs();
+	Log(LogLevel::Info) << "<> Bureaucracy Established.";
 }
 
 void V3::EconomyManager::hardcodePorts() const
 {
+	Log(LogLevel::Info) << "-> Hardcoding Ports.";
+	auto counter = 0;
+
 	Building portTemplate;
 	portTemplate.setName("building_port");
 	portTemplate.setLevel(1);
@@ -106,10 +113,12 @@ void V3::EconomyManager::hardcodePorts() const
 			{
 				auto port = std::make_shared<Building>(portTemplate);
 				substate->addBuilding(port);
+				++counter;
 				substate->getOwner()->addTech("navigation");
 			}
 		}
 	}
+	Log(LogLevel::Info) << "<> Hardcoded " << counter << " ports.";
 }
 
 void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY economyType,
@@ -117,6 +126,7 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 	 const DatingData& dateData,
 	 const PoliticalManager& politicalManager) const
 {
+	Log(LogLevel::Info) << "-> Assigning CP Budgets to Countries.";
 	// Some global value of CP to spend
 	double globalCP = econDefines.getGlobalCP();
 	const double dateFactor = calculateDateFactor(startDate, dateData);
@@ -127,12 +137,14 @@ void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY eco
 
 	// distribute each country its budget
 	globalCP *= (1 + dateFactor + globalPopFactor + specialFactors);
-	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world has " << globalCP << " CP to spend on industry.";
 	distributeBudget(globalCP, totalIndustryWeight);
+	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world has " << globalCP << " CP to spend on industry.";
 }
 
 void V3::EconomyManager::assignSubStateCPBudgets(const Configuration::ECONOMY economyType) const
 {
+	Log(LogLevel::Info) << "-> Distributing Economy Budgets to Substates.";
+	auto counter = 0;
 	// Distribute CP budget from a country to its substates
 	for (const auto& country: centralizedCountries)
 	{
@@ -160,12 +172,15 @@ void V3::EconomyManager::assignSubStateCPBudgets(const Configuration::ECONOMY ec
 			const double stateBudget = country->getCPBudget() * subState->getIndustryWeight() / totalIndustryWeight;
 			subState->setCPBudget(static_cast<int>(std::round(stateBudget)));
 			subState->setOriginalCPBudget(subState->getCPBudget());
+			++counter;
 		}
 	}
+	Log(LogLevel::Info) << "<> Primed " << counter << " Substates for construction.";
 }
 
 void V3::EconomyManager::balanceNationalBudgets() const
 {
+	Log(LogLevel::Info) << "-> Balancing Sub-National Budgets into Industry Sectors.";
 	for (const auto& country: centralizedCountries)
 	{
 		double totalWeight = 0;
@@ -182,10 +197,14 @@ void V3::EconomyManager::balanceNationalBudgets() const
 			sector->calculateBudget(totalWeight, country->getCPBudget());
 		}
 	}
+	Log(LogLevel::Info) << "<> Industry Sectors Primed.";
 }
 
 void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMap) const
 {
+	Log(LogLevel::Info) << "-> Building buildings.";
+	auto counter = 0;
+
 	// The great negotiation
 	// 1. The substate w/ the most CP asks to build it's highest scoring building
 	// 2. The country checks if the sector that building belongs to has enough CP for at least 1 building
@@ -208,12 +227,14 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 			// Enter negotiation
 			// Pick the substate with the most budget
 			negotiateBuilding(subStatesByBudget[0], sectors, lawsMap, subStatesByBudget);
+			++counter;
 
 			// A Building has now been built, process for next round
 			std::ranges::sort(subStatesByBudget, SubState::greaterBudget);
 			removeSubStateIfFinished(subStatesByBudget, subStatesByBudget.end() - 1, lawsMap);
 		}
 	}
+	Log(LogLevel::Info) << "<> Built " << counter << " buildings world-wide.";
 }
 
 double V3::EconomyManager::calculatePopDistanceFactor(const int countryPopulation, const double geoMeanPopulation)
