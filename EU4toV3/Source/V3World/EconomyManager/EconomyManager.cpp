@@ -181,7 +181,7 @@ void V3::EconomyManager::balanceNationalBudgets() const
 	}
 }
 
-void V3::EconomyManager::buildBuildings() const
+void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMap) const
 {
 	// The great negotiation
 	// 1. The substate w/ the most CP asks to build it's highest scoring building
@@ -221,7 +221,15 @@ void V3::EconomyManager::buildBuildings() const
 			bool talksFail = true;
 
 			// Find the building state wants most that is in the country budget
-			substate->weightBuildings(buildings, buildingGroups, buildingTerrainModifiers, buildingMapper, stateTraits, econDefines.getStateTraitStrength());
+			substate->weightBuildings(buildings,
+				 buildingGroups,
+				 buildingTerrainModifiers,
+				 buildingMapper,
+				 lawsMap,
+				 techMap.getTechs(),
+				 stateTraits,
+				 econDefines.getStateTraitStrength());
+
 			for (const auto& building: substate->getBuildings())
 			{
 				const int baseCost = building->getConstructionCost();

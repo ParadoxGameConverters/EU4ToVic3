@@ -75,6 +75,8 @@ class SubState
 		 const BuildingGroups& buildingGroups,
 		 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
 		 const mappers::BuildingMapper& buildingMapper,
+		 const std::map<std::string, Law>& lawsMap,
+		 const std::map<std::string, Tech>& techMap,
 		 const std::map<std::string, StateModifier>& traitMap,
 		 double traitStrength);
 
@@ -142,8 +144,16 @@ class SubState
 	[[nodiscard]] double calcBuildingTraitWeight(const Building& building, const std::map<std::string, StateModifier>& traitMap, double traitStrength) const;
 	[[nodiscard]] double calcBuildingInvestmentWeight(const Building& building) const;
 	[[nodiscard]] double calcBuildingIndustrialWeight(const Building& building, const BuildingGroups& buildingGroups) const;
-	[[nodiscard]] bool isBuildingValid(const Building& building, const BuildingGroups& buildingGroups) const;
-	[[nodiscard]] bool hasCapacity(const Building& building, const BuildingGroups& buildingGroups) const;
+	[[nodiscard]] bool isBuildingValid(const Building& building,
+		 const BuildingGroups& buildingGroups,
+		 const std::map<std::string, Law>& lawsMap,
+		 const std::map<std::string, Tech>& techMap,
+		 const std::map<std::string, StateModifier>& traitMap) const;
+	[[nodiscard]] bool hasCapacity(const Building& building,
+		 const BuildingGroups& buildingGroups,
+		 const std::map<std::string, Law>& lawsMap,
+		 const std::map<std::string, Tech>& techMap,
+		 const std::map<std::string, StateModifier>& traitMap) const;
 	[[nodiscard]] int getRGOCapacity(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] int getGovCapacity(const std::string& building, // barracks, ports things that have max capacities based on laws/tech/traits
 		 const std::map<std::string, Law>& lawsMap,

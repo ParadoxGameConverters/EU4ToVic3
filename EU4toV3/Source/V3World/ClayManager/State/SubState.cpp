@@ -59,12 +59,14 @@ void V3::SubState::weightBuildings(const std::map<std::string, Building>& templa
 	 const BuildingGroups& buildingGroups,
 	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
 	 const mappers::BuildingMapper& buildingMapper,
+	 const std::map<std::string, V3::Law>& lawsMap,
+	 const std::map<std::string, V3::Tech>& techMap,
 	 const std::map<std::string, StateModifier>& traitMap,
 	 const double traitStrength)
 {
 	for (const auto& templateBuilding: templateBuildings | std::views::values)
 	{
-		if (!isBuildingValid(templateBuilding, buildingGroups))
+		if (!isBuildingValid(templateBuilding, buildingGroups, lawsMap, techMap, traitMap))
 		{
 			continue;
 		}
@@ -255,7 +257,11 @@ double V3::SubState::calcBuildingIndustrialWeight(const Building& building, cons
 	return 0.0;
 }
 
-bool V3::SubState::isBuildingValid(const Building& building, const BuildingGroups& buildingGroups) const
+bool V3::SubState::isBuildingValid(const Building& building,
+	 const BuildingGroups& buildingGroups,
+	 const std::map<std::string, Law>& lawsMap,
+	 const std::map<std::string, Tech>& techMap,
+	 const std::map<std::string, StateModifier>& traitMap) const
 {
 	// Government Admin is a special case, we're not building it
 	if (building.getName() == "building_government_administration")
@@ -284,7 +290,7 @@ bool V3::SubState::isBuildingValid(const Building& building, const BuildingGroup
 	{
 		return false;
 	}
-	if (!hasCapacity(building, buildingGroups))
+	if (!hasCapacity(building, buildingGroups, lawsMap, techMap, traitMap))
 	{
 		return false;
 	}
@@ -292,16 +298,25 @@ bool V3::SubState::isBuildingValid(const Building& building, const BuildingGroup
 	return true;
 }
 
-bool V3::SubState::hasCapacity(const Building& building, const BuildingGroups& buildingGroups) const
+bool V3::SubState::hasCapacity(const Building& building,
+	 const BuildingGroups& buildingGroups,
+	 const std::map<std::string, V3::Law>& lawsMap,
+	 const std::map<std::string, V3::Tech>& techMap,
+	 const std::map<std::string, V3::StateModifier>& traitMap) const
 {
+	// Check building cap first
+	if (building.isCappedByGov())
+	{
+		return getGovCapacity(building.getName(), lawsMap, techMap, traitMap) > 0;
+	}
+
 	// If no cap on building, return true
 	if (const auto& isCapped = buildingGroups.tryGetIsCapped(building.getBuildingGroup()); isCapped && !isCapped.value())
 	{
 		return true;
 	}
 
-
-
+	// Then check building group cap
 	return getRGOCapacity(building, buildingGroups) > 0;
 }
 
@@ -385,7 +400,7 @@ double V3::SubState::calcBuildingWeight(const Building& building,
 	const double traitWeight = calcBuildingTraitWeight(building, traitMap, traitStrength);
 	const double investmentWeight = calcBuildingInvestmentWeight(building);
 
-	return (terrainWeight + EU4BuildingWeight + traitWeight) * investmentWeight;
+	return (terrainWeight + EU4BuildingWeight) * traitWeight * investmentWeight;
 }
 
 void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap)
