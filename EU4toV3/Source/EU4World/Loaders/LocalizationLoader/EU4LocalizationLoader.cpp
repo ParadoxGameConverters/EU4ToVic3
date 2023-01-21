@@ -41,7 +41,12 @@ void EU4::EU4LocalizationLoader::readFromStream(std::istream& theStream)
 		std::getline(theStream, line); // Subsequent lines are ' KEY: "Text"'
 		const auto [key, value] = determineKeyLocalisationPair(line);
 		if (!key.empty() && !value.empty())
+		{
+			// We read the files in reverse, starting from mods. We don't want vanilla to override our locs.
+			if (localizations.contains(key) && localizations.at(key).contains(*language))
+				continue;
 			localizations[key][*language] = value;
+		}
 	}
 }
 
