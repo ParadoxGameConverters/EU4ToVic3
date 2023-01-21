@@ -274,10 +274,9 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 
 void V3::Country::convertTier(const mappers::CountryTierMapper& countryTierMapper, bool downTiers, const bool vn)
 {
-	if (downTiers)
+	if (downTiers && vanillaData && !vanillaData->tier.empty())
 	{
-		if (vanillaData && !vanillaData->tier.empty())
-			processedData.tier = vanillaData->tier;
+		processedData.tier = vanillaData->tier;
 		return;
 	}
 
