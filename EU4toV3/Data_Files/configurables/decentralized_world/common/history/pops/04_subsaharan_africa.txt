@@ -1651,7 +1651,7 @@
 		}
 	}
 	s:STATE_MOCAMBIQUE = {
-		region_state:POR = {
+		region_state:MKU = { #Makua
 			create_pop = {
 				culture = makua
 				size = 420000
@@ -1661,12 +1661,8 @@
 				size = 19996
 			}
 			create_pop = {
-				culture = portuguese
-				size = 3996
-			}
-			create_pop = {
 				culture = sena
-				size = 96004
+				size = 145910
 			}
 			create_pop = {
 				culture = makua
@@ -1677,6 +1673,8 @@
 				culture = lacustrine_bantu
 				size = 103996
 			}
+		}
+		region_state:UYA = { #Uyao
 			create_pop = {
 				culture = yao
 				size = 284300
@@ -2511,7 +2509,7 @@
 				size = 16000
 			}
 		}
-		region_state:BST = {
+		region_state:BST = { #Besotho
 			create_pop = {
 				culture = sotho
 				size = 120096
@@ -2552,6 +2550,17 @@
 		}
 	}
 	s:STATE_TRANSVAAL = {
+		region_state:BST = { #Besotho
+			create_pop = {
+				culture = sotho
+				size = 20096
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = sotho
+				size = 790
+			}
+		}
 		region_state:TSW = { #Tswana
 			create_pop = {
 				culture = nguni
