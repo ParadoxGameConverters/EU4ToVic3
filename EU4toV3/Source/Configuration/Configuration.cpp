@@ -81,6 +81,11 @@ void Configuration::registerKeys()
 		configBlock.convertAll = convertAllString == "yes";
 		Log(LogLevel::Info) << "Convert All: " << convertAllString;
 	});
+	registerKeyword("economy", [this](std::istream& theStream) {
+		const auto economyString = commonItems::getString(theStream);
+		configBlock.economy = static_cast<ECONOMY>(std::stoi(economyString));
+		Log(LogLevel::Info) << "Economy: " << economyString;
+	});
 	registerKeyword("output_name", [this](std::istream& theStream) {
 		outputName = commonItems::getString(theStream);
 		Log(LogLevel::Info) << "Output Name: " << outputName;

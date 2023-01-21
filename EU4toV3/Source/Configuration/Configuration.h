@@ -37,7 +37,7 @@ class Configuration: commonItems::parser
 	{
 		CivLevel = 1,
 		DevPerPop = 2,
-		Test = 0
+		Test = 9
 	};
 
 	struct ConfigBlock
