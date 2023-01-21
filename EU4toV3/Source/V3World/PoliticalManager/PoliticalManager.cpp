@@ -465,6 +465,10 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 			// vic3 has this reversed
 			newAgreement.first = V3Tag2;
 			newAgreement.second = V3Tag1;
+
+			// if someone's isolationist, bail.
+			if (country1->second->getProcessedData().laws.contains("law_isolationism") || country2->second->getProcessedData().laws.contains("law_isolationism"))
+				continue;
 		}
 		if (newAgreement.type == "double_defensive_pact")
 		{
@@ -473,6 +477,10 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 			agreements.push_back(newAgreement);
 			newAgreement.first = V3Tag2;
 			newAgreement.second = V3Tag1;
+
+			// if anyone doesn't have required diplo, bail.
+			if (!country1->second->getProcessedData().techs.contains("international_relations") || !country2->second->getProcessedData().techs.contains("international_relations"))
+				continue;
 		}
 
 		// store agreement
@@ -511,7 +519,9 @@ void V3::PoliticalManager::convertRivals()
 			r1.increaseRelations(-100);
 			r2.increaseRelations(-100);
 
-			newRivals.emplace(*rivalTag);
+			// only create an actual rivalry if it's a same-westernization country, or it'll autobreak at game start.
+			if (country->getProcessedData().westernized == rivalCountry->getProcessedData().westernized)
+				newRivals.emplace(*rivalTag);
 			++counter;
 		}
 		country->setRivals(newRivals); // rivals are one-way, but relations suck both ways.
