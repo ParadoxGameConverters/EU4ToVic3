@@ -105,11 +105,9 @@ void V3::SubState::sortBuildingsByWeight()
 
 bool V3::SubState::isCoastal() const
 {
-	if (const auto& coastalFreq = terrainFrequency.find("coastal"); coastalFreq != terrainFrequency.end())
-	{
-		return coastalFreq->second > 0;
-	}
-	return false;
+	return std::ranges::any_of(provinces, [this](const auto& province) {
+		return province.second->isCoastal();
+	});
 }
 
 std::optional<std::string> V3::SubState::getOwnerTag() const
@@ -309,6 +307,11 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	if (building.getName() == "building_port")
 	{
 		return false;
+	}
+	if (building.getName() == "building_naval_base")
+	{
+		if (!isCoastal())
+			return false;
 	}
 	if (!building.isBuildable())
 	{

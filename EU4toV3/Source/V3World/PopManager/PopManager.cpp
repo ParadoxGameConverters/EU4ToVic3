@@ -292,8 +292,8 @@ void V3::PopManager::generatePops(const ClayManager& clayManager)
 	const auto worldDelta = worldSum - worldTotal;
 	Log(LogLevel::Info) << "<> World now has " << worldSum << " pops (delta: " << worldDelta << " pops).";
 	if (std::abs(static_cast<double>(worldDelta) / static_cast<double>(worldTotal)) > 0.001)
-		Log(LogLevel::Warning) << "World delta is over one permille (" << std::abs(static_cast<double>(worldDelta) / static_cast<double>(worldTotal))
-									  << "). This is troubling!";
+		Log(LogLevel::Info) << ">> World delta is over one permille (" << std::abs(static_cast<double>(worldDelta) / static_cast<double>(worldTotal))
+								  << "). This is troubling, but not unexpected.";
 	else
 		Log(LogLevel::Info) << ">> World delta at " << std::abs(static_cast<double>(worldDelta) / static_cast<double>(worldTotal)) << ". Acceptable.";
 }

@@ -29,6 +29,8 @@ class State: commonItems::parser
 	[[nodiscard]] std::set<std::string> getClaims() const;
 
 	[[nodiscard]] bool isCoastal() const { return coastal; }
+	[[nodiscard]] auto getNavalExitID() const { return navalExitID; }
+	[[nodiscard]] auto getID() const { return ID; }
 	[[nodiscard]] bool isSea() const;
 	[[nodiscard]] bool isLake() const; // yes, an entire state can be a lake.
 
@@ -49,6 +51,8 @@ class State: commonItems::parser
 	static std::tuple<int, int, int> countProvinceTypes(ProvinceMap provinces);
 
 	bool coastal = false;
+	int navalExitID = 0;
+	int ID = 0;
 	std::string name;
 	ProvinceMap provinces; // in xA2345A format
 	std::vector<std::shared_ptr<SubState>> substates;

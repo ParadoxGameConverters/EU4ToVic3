@@ -14,6 +14,9 @@ void V3::EconDefinesLoader::registerKeys()
 	registerKeyword("global_construction_points", [this](std::istream& theStream) {
 		globalCP = commonItems::getInt(theStream);
 	});
+	registerKeyword("vn_global_construction_points", [this](std::istream& theStream) {
+		VNGlobalCP = commonItems::getInt(theStream);
+	});
 	registerKeyword("centralized_population_ratio", [this](std::istream& theStream) {
 		centralizedPopRatio = commonItems::getDouble(theStream);
 	});

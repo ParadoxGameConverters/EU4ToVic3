@@ -11,6 +11,7 @@ class EconDefinesLoader: commonItems::parser
 
 	void loadEconDefines(const std::string& filePath);
 	[[nodiscard]] const auto& getGlobalCP() const { return globalCP; }
+	[[nodiscard]] const auto& getVNGlobalCP() const { return VNGlobalCP; }
 	[[nodiscard]] const auto& getCentralizedPopRatio() const { return centralizedPopRatio; }
 	[[nodiscard]] const auto& getMeanCivlevel() const { return meanCivlevel; }
 	[[nodiscard]] const auto& getStateTraitStrength() const { return stateTraitStrength; }
@@ -20,6 +21,7 @@ class EconDefinesLoader: commonItems::parser
 	void registerKeys();
 
 	int globalCP = 0;
+	int VNGlobalCP = 0;
 	double centralizedPopRatio = 0;
 	double meanCivlevel = 0;
 	double stateTraitStrength = 0;

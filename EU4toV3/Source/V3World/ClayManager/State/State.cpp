@@ -86,8 +86,11 @@ void V3::State::registerKeys()
 			}
 		}
 	});
-	registerKeyword("naval_exit_id", [this](const std::string& unused, std::istream& theStream) {
-		commonItems::ignoreItem(unused, theStream);
+	registerKeyword("id", [this](std::istream& theStream) {
+		ID = commonItems::getInt(theStream);
+	});
+	registerKeyword("naval_exit_id", [this](std::istream& theStream) {
+		navalExitID = commonItems::getInt(theStream);
 		coastal = true;
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
@@ -98,27 +101,27 @@ void V3::State::distributeLandshares() const
 	const auto [stateTotal, statePrimes, stateImpassables] = countProvinceTypes(provinces);
 	const double weightedStatewideProvinces = getWeightedProvinceTotals(stateTotal, statePrimes, stateImpassables);
 
-	for (const auto& substate: substates)
+	for (const auto& subState: substates)
 	{
-		const auto [substateTotal, substatePrimes, substateImpassables] = countProvinceTypes(substate->getProvinces());
-		const double weightedSubstateProvinces = getWeightedProvinceTotals(substateTotal, substatePrimes, substateImpassables);
+		const auto [subStateTotal, subStatePrimes, subStateImpassables] = countProvinceTypes(subState->getProvinces());
+		const double weightedSubStateProvinces = getWeightedProvinceTotals(subStateTotal, subStatePrimes, subStateImpassables);
 
-		double substateLandshare = weightedSubstateProvinces / weightedStatewideProvinces;
-		if (substateLandshare < 0.05) // In defines as SPLIT_STATE_MIN_LAND_SHARE
+		double subStateLandshare = weightedSubStateProvinces / weightedStatewideProvinces;
+		if (subStateLandshare < 0.05) // In defines as SPLIT_STATE_MIN_LAND_SHARE
 		{
-			substateLandshare = 0.05;
+			subStateLandshare = 0.05;
 		}
-		substate->setLandshare(substateLandshare);
+		subState->setLandshare(subStateLandshare);
 	}
 }
 
 void V3::State::distributeResources()
 {
-	for (const auto& substate: substates)
+	for (const auto& subState: substates)
 	{
 		for (const auto& [resource, amount]: cappedResources)
 		{
-			substate->setResource(resource, static_cast<int>(floor(substate->getLandshare() * amount)));
+			subState->setResource(resource, static_cast<int>(floor(subState->getLandshare() * amount)));
 		}
 	}
 }

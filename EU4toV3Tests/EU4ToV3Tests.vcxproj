@@ -138,6 +138,7 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\CharacterTraitMapper\SkillMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\BuildingMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\BuildingMapping.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CoastalMapper\CoastalMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialRegionMapper\ColonialRegionMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialRegionMapper\ColonialRegionMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialTagMapper\ColonialTagMapper.cpp" />
@@ -320,6 +321,7 @@
     <ClCompile Include="MapperTests\CharacterTraitMapperTests\AssignmentMappingTests.cpp" />
     <ClCompile Include="MapperTests\CharacterTraitMapperTests\CharacterTraitMapperTests.cpp" />
     <ClCompile Include="MapperTests\CharacterTraitMapperTests\SkillMappingTests.cpp" />
+    <ClCompile Include="MapperTests\CoastalMapperTests\CoastalMapperTests.cpp" />
     <ClCompile Include="MapperTests\ColonialRegionMapperTests\ColonialRegionMapperTests.cpp" />
     <ClCompile Include="MapperTests\ColonialRegionMapperTests\ColonialRegionMappingTests.cpp" />
     <ClCompile Include="MapperTests\ColonialTagMapperTests\ColonialTagMapperTests.cpp" />
@@ -864,6 +866,11 @@
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\slave_culture_map.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\province_adjacencies.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>

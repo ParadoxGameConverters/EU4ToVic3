@@ -1,4 +1,4 @@
-This program will convert a Europa Universalis IV save game to a Victoria II save game.
+This program will convert a Europa Universalis IV save game to a Victoria 3 save game.
 
 ----
 IMPORTANT LINKS
@@ -26,8 +26,11 @@ CREDITS
 An (incomplete) list of those who contributed effort to this mammoth undertaking
 
 Elfangor567		- Code, Data Files
+Gawquon			- Code, Data Files
 Iohannes 		- Assets, Data Files
 Idhrendur		- Sanity Checks, Review
+Licarious		- Mapping, Code Support
+MrKinich		- Data Files
 Zemurin			- The Weave
 
  - AND ALL THE OTHERS WHO GAVE THEIR INPUT ON DISCORD AND THE FORUM -

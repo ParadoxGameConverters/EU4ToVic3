@@ -1126,6 +1126,12 @@
     <ClCompile Include="MapperTests\SlaveCultureMapperTests\SlaveCultureMappingTests.cpp">
       <Filter>MapperTests\SlaveCultureMapperTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\CoastalMapper\CoastalMapper.cpp">
+      <Filter>ConverterFiles\Mappers\CoastalMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\CoastalMapperTests\CoastalMapperTests.cpp">
+      <Filter>MapperTests\CoastalMapperTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1842,6 +1848,12 @@
     <Filter Include="MapperTests\SlaveCultureMapperTests">
       <UniqueIdentifier>{81d64d41-8073-4105-a2e6-15107884eb19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\Mappers\CoastalMapper">
+      <UniqueIdentifier>{2b253084-d6a3-4beb-8602-79d16776ccc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\CoastalMapperTests">
+      <UniqueIdentifier>{e36d27e5-770a-4604-bfd5-142d936796aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -2126,6 +2138,9 @@
       <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\slave_culture_map.txt">
+      <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\province_adjacencies.txt">
       <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>

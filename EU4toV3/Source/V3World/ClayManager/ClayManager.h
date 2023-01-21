@@ -1,6 +1,7 @@
 #ifndef CLAY_MANAGER_H
 #define CLAY_MANAGER_H
 #include "ClayMapTypedefs.h"
+#include "CoastalMapper/CoastalMapper.h"
 #include "Loaders/VanillaBuildingLoader/VanillaBuildingLoader.h"
 #include "ModLoader/ModFilesystem.h"
 #include "VNColonialMapper/VNColonialMapper.h"
@@ -43,8 +44,9 @@ class ClayManager
 	void injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager, const PopManager& popManager, bool vn);
 	void shoveRemainingProvincesIntoSubStates();
 	void squashAllSubStates(const PoliticalManager& politicalManager);
-	void redistributeResourcesandLandshares();
+	void redistributeResourcesAndLandshares();
 	void addSubState(const std::shared_ptr<SubState>& subState) { substates.emplace_back(subState); }
+	void loadAdjacencies(const std::string& filePath);
 
 	[[nodiscard]] const auto& getStates() const { return states; }
 	[[nodiscard]] const auto& getSuperRegions() const { return superRegions; }
@@ -80,11 +82,13 @@ class ClayManager
 	std::map<std::string, std::shared_ptr<State>> states;					// geographical entities
 	std::map<std::string, std::shared_ptr<SuperRegion>> superRegions; // geographical entities
 	std::map<std::string, std::shared_ptr<State>> provincesToStates;	// handy map for quickly referencing states;
+	std::map<int, std::string> stateIDs;										// handy!
 
 	std::vector<std::shared_ptr<Chunk>> chunks;		  // political entities
 	std::vector<std::shared_ptr<SubState>> substates; // political entities
 
 	mappers::VNColonialMapper vnColonialMapper;
+	mappers::CoastalMapper coastalMapper;
 	VanillaBuildingLoader vanillaBuildingLoader;
 };
 } // namespace V3
