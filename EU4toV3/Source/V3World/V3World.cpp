@@ -19,6 +19,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	Log(LogLevel::Progress) << "45 %";
 	Log(LogLevel::Info) << "* Soaking up the shine *";
+	clayManager.loadAdjacencies("configurables/province_adjacencies.txt");
 	clayManager.initializeVanillaStates(dwFS);
 	clayManager.loadTerrainsIntoProvinces(dwFS);
 	clayManager.initializeSuperRegions(dwFS);
@@ -143,7 +144,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "59 %";
 	clayManager.squashAllSubStates(politicalManager);
 	Log(LogLevel::Progress) << "60 %";
-	clayManager.redistributeResourcesandLandshares();
+	clayManager.redistributeResourcesAndLandshares();
 
 	Log(LogLevel::Progress) << "61 %";
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);
@@ -183,7 +184,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "73 %";
 	economyManager.hardcodePorts();
 	Log(LogLevel::Progress) << "74 %";
-	economyManager.assignCountryCPBudgets(configBlock.economy, configBlock.startDate, datingData, politicalManager);
+	economyManager.assignCountryCPBudgets(configBlock.economy, configBlock.startDate, datingData, politicalManager, configBlock.vn);
 	economyManager.balanceNationalBudgets();
 	Log(LogLevel::Progress) << "75 %";
 	economyManager.assignSubStateCPBudgets(configBlock.economy);

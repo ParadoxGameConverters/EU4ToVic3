@@ -105,16 +105,16 @@ void V3::EconomyManager::hardcodePorts() const
 
 	for (const auto& country: centralizedCountries)
 	{
-		for (const auto& substate: country->getSubStates())
+		for (const auto& subState: country->getSubStates())
 		{
-			if (!substate->getVanillaBuildingElements().empty())
+			if (!subState->getVanillaBuildingElements().empty())
 				continue; // don't affect states imported from vanilla.
-			if (substate->getHomeState()->isCoastal())
+			if (subState->isCoastal())
 			{
 				auto port = std::make_shared<Building>(portTemplate);
-				substate->addBuilding(port);
+				subState->addBuilding(port);
 				++counter;
-				substate->getOwner()->addTech("navigation");
+				subState->getOwner()->addTech("navigation");
 			}
 		}
 	}
@@ -124,11 +124,16 @@ void V3::EconomyManager::hardcodePorts() const
 void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY economyType,
 	 const Configuration::STARTDATE startDate,
 	 const DatingData& dateData,
-	 const PoliticalManager& politicalManager) const
+	 const PoliticalManager& politicalManager,
+	 const bool vn) const
 {
 	Log(LogLevel::Info) << "-> Assigning CP Budgets to Countries.";
 	// Some global value of CP to spend
-	double globalCP = econDefines.getGlobalCP();
+	double globalCP;
+	if (!vn)
+		globalCP = econDefines.getGlobalCP();
+	else
+		globalCP = econDefines.getVNGlobalCP();
 	const double dateFactor = calculateDateFactor(startDate, dateData);
 	const double globalPopFactor = calculateGlobalPopFactor(politicalManager); // Adjust based on amount of world centralized by population
 

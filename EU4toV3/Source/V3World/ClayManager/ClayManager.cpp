@@ -27,8 +27,12 @@ void V3::ClayManager::initializeVanillaStates(const commonItems::ModFilesystem& 
 	stateLoader.loadStates(modFS);
 	states = stateLoader.getStates();
 	for (const auto& state: states | std::views::values)
+	{
 		for (const auto& provinceID: state->getProvinces() | std::views::keys)
 			provincesToStates.emplace(provinceID, state);
+		if (state->getID() > 0)
+			stateIDs.emplace(state->getID(), state->getName());
+	}
 	Log(LogLevel::Info) << "<> " << states.size() << " states loaded with " << provincesToStates.size() << " provinces inside.";
 
 	Log(LogLevel::Info) << "-> Loading Vanilla State Buildings.";
@@ -43,7 +47,9 @@ void V3::ClayManager::loadTerrainsIntoProvinces(const commonItems::ModFilesystem
 	terrainLoader.loadTerrains(modFS);
 	const auto& terrains = terrainLoader.getTerrains();
 	for (const auto& state: states | std::views::values)
+	{
 		for (const auto& [provinceName, province]: state->getProvinces())
+		{
 			if (terrains.contains(provinceName))
 			{
 				const auto& terrain = terrains.at(provinceName);
@@ -57,6 +63,24 @@ void V3::ClayManager::loadTerrainsIntoProvinces(const commonItems::ModFilesystem
 			{
 				Log(LogLevel::Warning) << "Terrain for province " << provinceName << " cannot be found.";
 			}
+		}
+
+		// deal with coastals.
+		if (state->getNavalExitID() > 0 && stateIDs.contains(state->getNavalExitID()))
+		{
+			const auto& seaState = states.at(stateIDs.at(state->getNavalExitID()));
+			const auto& seaProvinces = seaState->getProvinces();
+			for (const auto& seaProvinceID: seaProvinces | std::views::keys)
+			{
+				auto seaProvinceNeighbors = coastalMapper.getAdjacencies(seaProvinceID); // neighbors of that province in that sea.
+				for (const auto& [provinceID, province]: state->getProvinces())
+				{
+					if (seaProvinceNeighbors.contains(provinceID))
+						province->setCoastal(); // this province is a direct physical neighbor to a sea province that our state has naval exit towards.
+				}
+			}
+		}
+	}
 }
 
 void V3::ClayManager::initializeSuperRegions(const commonItems::ModFilesystem& modFS)
@@ -836,11 +860,16 @@ void V3::ClayManager::filterInvalidClaims(const PoliticalManager& politicalManag
 	Log(LogLevel::Info) << "<> Filtered " << counter << " Dead Claims.";
 }
 
-void V3::ClayManager::redistributeResourcesandLandshares()
+void V3::ClayManager::redistributeResourcesAndLandshares()
 {
 	for (const auto& state: states | std::views::values)
 	{
 		state->distributeLandshares();
 		state->distributeResources();
 	}
+}
+
+void V3::ClayManager::loadAdjacencies(const std::string& filePath)
+{
+	coastalMapper.loadAdjacencies(filePath);
 }

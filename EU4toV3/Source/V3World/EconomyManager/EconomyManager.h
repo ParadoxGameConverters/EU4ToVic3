@@ -56,7 +56,8 @@ class EconomyManager
 	void assignCountryCPBudgets(Configuration::ECONOMY economyType,
 		 Configuration::STARTDATE startDate,
 		 const DatingData& dateData,
-		 const PoliticalManager& politicalManager) const;
+		 const PoliticalManager& politicalManager,
+		 bool vn = false) const;
 	void assignSubStateCPBudgets(Configuration::ECONOMY economyType) const;
 	void balanceNationalBudgets() const;
 	void buildBuildings(const std::map<std::string, Law>& lawsMap) const;
