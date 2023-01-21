@@ -88,7 +88,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	popManager.injectReligionsIntoDWPops(cultureMapper.getV3CultureDefinitions());
 
 	// inject vanilla substates into map holes.
-	clayManager.injectVanillaSubStates(dwFS, politicalManager, popManager, configuration.configBlock.vn);
+	clayManager.injectVanillaSubStates(dwFS, politicalManager, popManager, configBlock.vn);
 
 	Log(LogLevel::Progress) << "50 %";
 	// handling demographics
@@ -108,7 +108,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getReligionLoader(),
 		 localizationLoader,
 		 sourceWorld.getEU4Localizations(),
-		 configuration.configBlock.vn);
+		 configBlock.downTiers,
+		 configBlock.vn);
 
 	Log(LogLevel::Progress) << "53 %";
 	politicalManager.attemptColonialTagReplacement(cultureMapper.getColonialRegionMapper(), clayManager);

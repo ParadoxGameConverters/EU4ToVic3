@@ -81,6 +81,11 @@ void Configuration::registerKeys()
 		configBlock.convertAll = convertAllString == "yes";
 		Log(LogLevel::Info) << "Convert All: " << convertAllString;
 	});
+	registerKeyword("downtiers", [this](std::istream& theStream) {
+		const auto downTiersString = commonItems::getString(theStream);
+		configBlock.downTiers = downTiersString == "yes";
+		Log(LogLevel::Info) << "Downgrade Tiers: " << downTiersString;
+	});
 	registerKeyword("economy", [this](std::istream& theStream) {
 		const auto economyString = commonItems::getString(theStream);
 		configBlock.economy = static_cast<ECONOMY>(std::stoi(economyString));

@@ -75,6 +75,7 @@ class PoliticalManager
 		 const EU4::ReligionLoader& religionLoader,
 		 const LocalizationLoader& v3LocLoader,
 		 const EU4::EU4LocalizationLoader& eu4LocLoader,
+		 bool downTiers,
 		 bool vn = false) const;
 	void addCountry(const std::pair<std::string, std::shared_ptr<Country>>& country) { countries.emplace(country); }
 

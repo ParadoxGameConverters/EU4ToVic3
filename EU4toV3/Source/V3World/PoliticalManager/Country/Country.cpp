@@ -61,7 +61,7 @@ std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop
 	return std::vector<std::shared_ptr<SubState>>{sortedSubStates.begin(), sortedSubStates.begin() + numTopSubStates};
 }
 
-double V3::Country::calculateBureaucracyUsage(const std::map<std::string, V3::Law>& lawsMap) const
+double V3::Country::calculateBureaucracyUsage(const std::map<std::string, Law>& lawsMap) const
 {
 	// None of the hard-coded Vic3 values needed to calc this are in the defines for some reason.
 	double usage = 0.0;
@@ -219,6 +219,7 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	 const EU4::ReligionLoader& religionLoader,
 	 const mappers::IdeaEffectsMapper& ideaEffectMapper,
 	 const mappers::CountryTierMapper& countryTierMapper,
+	 const bool downTiers,
 	 const bool vn)
 {
 	// color - using eu4 colors so people don't lose their shit over red venice and orange england.
@@ -250,7 +251,7 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	convertCulture(clayManager, cultureMapper, cultureLoader, religionLoader);
 
 	// tier
-	convertTier(countryTierMapper, vn);
+	convertTier(countryTierMapper, downTiers, vn);
 
 	// country type is determined after westernization is set.
 
@@ -271,10 +272,25 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 		processedData.revolutionaryColor = sourceCountry->getNationalColors().getRevolutionaryColor();
 }
 
-void V3::Country::convertTier(const mappers::CountryTierMapper& countryTierMapper, const bool vn)
+void V3::Country::convertTier(const mappers::CountryTierMapper& countryTierMapper, bool downTiers, const bool vn)
 {
-	if (const auto& match = countryTierMapper.matchCountryTier(sourceCountry->getGovernmentRank(), subStates.size(), vn); match)
+	if (downTiers && vanillaData && !vanillaData->tier.empty())
+	{
+		processedData.tier = vanillaData->tier;
+		return;
+	}
+
+	auto startingRank = sourceCountry->getGovernmentRank();
+	if (downTiers)
+	{
+		if (startingRank > 2)
+			--startingRank;
+	}
+
+	if (const auto& match = countryTierMapper.matchCountryTier(startingRank, subStates.size(), vn); match)
+	{
 		processedData.tier = *match;
+	}
 	else
 		Log(LogLevel::Warning) << "No match for government rank " << sourceCountry->getGovernmentRank() << " (size " << subStates.size()
 									  << ") in country_tiers.txt!";
