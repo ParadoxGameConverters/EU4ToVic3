@@ -479,7 +479,8 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 			newAgreement.second = V3Tag1;
 
 			// if anyone doesn't have required diplotech, bail.
-			if (!country1->second->getProcessedData().techs.contains("international_relations") || !country2->second->getProcessedData().techs.contains("international_relations"))
+			if (!country1->second->getProcessedData().techs.contains("international_relations") ||
+				 !country2->second->getProcessedData().techs.contains("international_relations"))
 				continue;
 		}
 
