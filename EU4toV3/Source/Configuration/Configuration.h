@@ -48,6 +48,7 @@ class Configuration: commonItems::parser
 		EUROCENTRISM euroCentric = EUROCENTRISM::VanillaImport;
 		ECONOMY economy = ECONOMY::CivLevel;
 		bool convertAll = false;
+		bool downTiers = true;
 		// runtime options.
 		bool vn = false; // Voltaire's Nightmare
 	} configBlock;

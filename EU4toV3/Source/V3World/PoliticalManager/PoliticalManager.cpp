@@ -233,6 +233,7 @@ void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
 	 const EU4::ReligionLoader& religionLoader,
 	 const LocalizationLoader& v3LocLoader,
 	 const EU4::EU4LocalizationLoader& eu4LocLoader,
+	 const bool downTiers,
 	 const bool vn) const
 {
 	Log(LogLevel::Info) << "-> Converting countries.";
@@ -249,7 +250,15 @@ void V3::PoliticalManager::convertAllCountries(const ClayManager& clayManager,
 
 		// otherwise, this is a regular imported EU4 country
 		else if (country->getSourceCountry())
-			country->convertFromEU4Country(clayManager, cultureMapper, religionMapper, cultureLoader, religionLoader, ideaEffectMapper, countryTierMapper, vn);
+			country->convertFromEU4Country(clayManager,
+				 cultureMapper,
+				 religionMapper,
+				 cultureLoader,
+				 religionLoader,
+				 ideaEffectMapper,
+				 countryTierMapper,
+				 downTiers,
+				 vn);
 
 		else
 			Log(LogLevel::Warning) << "Country " << tag << " has no known sources! Not importing!";
