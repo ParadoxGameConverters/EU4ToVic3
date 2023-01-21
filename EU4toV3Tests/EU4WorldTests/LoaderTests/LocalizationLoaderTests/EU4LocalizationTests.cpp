@@ -19,9 +19,9 @@ EU4::EU4LocalizationLoader prepLoader()
 	input3 << " key1: \"replaced value 1\"\n"; // <- modded overrides
 
 	EU4::EU4LocalizationLoader locs;
+	locs.loadLocalizations(input3); // mods load first.
 	locs.loadLocalizations(input);
 	locs.loadLocalizations(input2);
-	locs.loadLocalizations(input3);
 
 	return locs;
 }
