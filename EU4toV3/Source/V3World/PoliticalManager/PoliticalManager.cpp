@@ -469,6 +469,18 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 		r2.increaseRelations(boost);
 
 		// fix specifics
+		if (newAgreement.type == "vassal")
+		{
+			// Watch for westernization!
+			if (country1->second->getProcessedData().type != "unrecognized")
+				newAgreement.type = "puppet";
+		}
+		if (newAgreement.type == "puppet")
+		{
+			// Watch for westernization!
+			if (country1->second->getProcessedData().type == "unrecognized")
+				newAgreement.type = "vassal";
+		}
 		if (newAgreement.type == "customs_union")
 		{
 			// vic3 has this reversed
