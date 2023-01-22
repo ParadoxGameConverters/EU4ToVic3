@@ -582,6 +582,13 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 	subState->spendCPBudget(building->getConstructionCost() * p);
 	sector->spendCP(building->getConstructionCost() * p);
 	building->setLevel(building->getLevel() + p);
+
+	// If arable, decrease arable land. This does have a side effect of no arable building being able to use more than 50% of the arable land
+	const auto& arables = subState->getHomeState()->getArableResources();
+	if (const auto& isArable = std::ranges::find(arables, building->getBuildingGroup()); isArable != arables.end())
+	{
+		subState->setResource("bg_agriculture", subState->getResource("bg_agriculture") - p);
+	}
 }
 
 void V3::EconomyManager::removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
@@ -608,7 +615,7 @@ int V3::EconomyManager::determinePacketSize(const std::shared_ptr<Building>& bui
 	// Packet size is the minimum  of (Sector CP budget/cost, SubState CP budget/cost, SubState capacity, and our clustering metric)
 	const int sectorPacket = sector->getCPBudget() / building->getConstructionCost();
 	const int subStatePacket = subState->getCPBudget() / building->getConstructionCost();
-	const int capacityPacket = subState->getBuildingCapacity(*building, buildingGroups, lawsMap, techMap.getTechs(), stateTraits);
+	const int capacityPacket = subState->getBuildingCapacity(*building, buildingGroups, lawsMap, techMap.getTechs(), stateTraits) - building->getLevel();
 	const int clusterPacket = getClusterPacket(building->getConstructionCost(), subStates);
 
 	const int packet = std::max(std::min({sectorPacket, subStatePacket, capacityPacket, clusterPacket}), 1);

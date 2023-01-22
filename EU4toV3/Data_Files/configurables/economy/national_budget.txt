@@ -7,13 +7,13 @@
 # but still must face the realities of technology/resource availability and the desire of the states.
 
 construction = {
-    weight = 0.25
+    weight = 0.15
 
     building_construction_sector
 }
 
 infrastructure = {
-    weight = 5
+    weight = 3
 
     building_port
     building_railway
@@ -66,7 +66,7 @@ extraction = {
 industrial_mining = {
 	industrial = yes
 
-    weight = 8
+    weight = 9
 
     building_iron_mine
     building_coal_mine
@@ -106,34 +106,32 @@ plantation = {
 }
 
 whaling = {
-    weight = 0.5
+    weight = 0.4
 
     building_whaling_station
 
 }
 
-scholarly = {
+shipwrights = {
+    weight = 4
+
     industrial = yes
 
-    weight = 2.5
-
-    building_arts_academy
-    building_university
+    building_shipyards
 }
 
 light_industry = {
-    weight = 25
+    weight = 21
 
     building_textile_mills
     building_furniture_manufacturies
     building_glassworks
     building_paper_mills
-    building_shipyards
 
     # Industry score from configurables/westernization.txt. No effect if no EuroCentrism
     multiply = {
         value = 0
-        industry_score_less_than = 2
+        industry_score_less_than = 1
     }
 }
 
@@ -144,6 +142,16 @@ western_industry = {
 
     building_food_industry
     building_arms_industry
+
+    # No effect if no EuroCentrism
+    add= {
+        value = -2
+        industry_score_less_than = 4
+    }
+    add= {
+        value = -3
+        industry_score_less_than = 3
+    }
 }
 
 tooling_industry = {
@@ -159,6 +167,15 @@ tooling_industry = {
    }
 }
 
+scholarly = {
+    industrial = yes
+
+    weight = 2.5
+
+    building_arts_academy
+    building_university
+}
+
 heavy_industry = {
     industrial = yes
 
@@ -170,7 +187,7 @@ heavy_industry = {
     building_munition_plants
 
    add = {
-       value = 3
+       value = 4
        is_eu4_gp = yes
    }
 }
