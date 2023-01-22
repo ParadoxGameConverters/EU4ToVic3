@@ -142,6 +142,16 @@ western_industry = {
 
     building_food_industry
     building_arms_industry
+
+    # No effect if no EuroCentrism
+    add= {
+        value = -2
+        industry_score_less_than = 4
+    }
+    add= {
+        value = -3
+        industry_score_less_than = 3
+    }
 }
 
 tooling_industry = {
