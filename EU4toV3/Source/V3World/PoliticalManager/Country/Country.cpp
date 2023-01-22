@@ -567,9 +567,9 @@ void V3::Country::determineCountryType()
 {
 	if (!processedData.westernized)
 	{
-		// 25 is the cutoff so american natives that heavily invest into tech
-		// end up with more than 25 civLevel score and remain unrecognized.
-		if (processedData.civLevel < 25)
+		// 20 is the cutoff so american natives that heavily invest into tech
+		// end up with more than 20 civLevel score and remain unrecognized.
+		if (processedData.civLevel <= 20)
 		{
 			processedData.type = "decentralized";
 			setDecentralizedEffects();
