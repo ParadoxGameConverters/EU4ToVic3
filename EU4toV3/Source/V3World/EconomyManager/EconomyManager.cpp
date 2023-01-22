@@ -587,7 +587,7 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 	const auto& arables = subState->getHomeState()->getArableResources();
 	if (const auto& hasArable = std::ranges::find(arables,""); hasArable != arables.end())
 	{
-		subState->setResource("arable", subState->getResource("arable") - p);
+		subState->setResource("bg_agriculture", subState->getResource("bg_agriculture") - p);
 	}
 }
 

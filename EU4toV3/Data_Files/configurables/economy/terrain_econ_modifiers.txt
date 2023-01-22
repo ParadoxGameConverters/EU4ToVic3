@@ -3,9 +3,10 @@
 # All values are 0 by default if not listed
 #
 # priority = x; A % bonus to a country's willingness to invest in a state
-# building_name = x; A % bonus to the chance of a building being built in a state
+# building_name = x; An additive bonus to the weight a state scores a building with
 #
-# 0.2 = 20% bonus.
+# priority = 0.2 = 20% priority bonus.
+# building = 0.2 = +0.2 weight bonus.
 
 
 coastal = {
@@ -15,13 +16,13 @@ coastal = {
     building_naval_base = 0.4
     building_port = 0.6
 
-    building_fishing_wharf = 0.5
+    building_fishing_wharf = 0.3
     building_whaling_station = 0.3
-    building_shipyards = 0.5
+    building_shipyards = 0.2
     building_tooling_workshops = 0.2
     building_textile_mills = 0.2
     building_furniture_manufactories = 0.2
-    building_university
+    building_university = 0.2
     building_glassworks = 0.1
     building_paper_mills = 0.1
     building_logging_camp = 0.1
@@ -45,13 +46,14 @@ forest = {
     priority = 0.1
 
     building_paper_mills = 0.3
-    building_shipyards = 0.3
     building_furniture_manufactories = 0.2
     building_arms_industry = 0.15
+    building_shipyards = 0.1
     building_glassworks = 0.1
     building_tooling_workshops = 0.1
     building_university = 0.05
     building_logging_camp = 0.7
+    building_fishing_wharf = 0.1
 }
 
 hills = {
@@ -119,16 +121,16 @@ plains = {
     building_silk_plantation = 0.3
     building_tea_plantation = 0.3
     building_furniture_manufactories = 0.2
-    building_university = 0.2
     building_barracks = 0.2
     building_railway = 0.1
     building_food_industry = 0.1
     building_textile_mills = 0.1
-    building_paper_mills = 0.1
+    building_glassworks = 0.08
     building_chemical_plants = 0.05
     building_steel_mills = 0.05
     building_motor_industry = 0.05
     building_munition_plants = 0.05
+    building_paper_mills = 0.02
 }
 
 savanna = {
@@ -165,8 +167,9 @@ snow = {
 tundra = {
     priority = -0.3
 
-    building_whaling_station = 0.1
+    building_whaling_station = 0.2
     building_livestock_ranch = 0.1
+    building_fishing_wharf = 0.1
     building_textile_mills = 0.05
 
     building_rye_farm = -0.5
