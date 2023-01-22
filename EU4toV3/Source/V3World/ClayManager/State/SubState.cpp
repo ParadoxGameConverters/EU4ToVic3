@@ -46,6 +46,15 @@ void V3::SubState::setProvinces(const ProvinceMap& theProvinces)
 	calculateTerrainFrequency();
 }
 
+int V3::SubState::getResource(const std::string& theResource) const
+{
+	if (const auto resource = resources.find(theResource); resource != resources.end())
+	{
+		return resource->second;
+	}
+	return 0;
+}
+
 double V3::SubState::getTerrainFrequency(const std::string& theTerrain) const
 {
 	if (const auto terrain = terrainFrequency.find(theTerrain); terrain != terrainFrequency.end())

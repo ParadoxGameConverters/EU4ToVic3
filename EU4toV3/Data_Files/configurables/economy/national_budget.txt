@@ -7,13 +7,13 @@
 # but still must face the realities of technology/resource availability and the desire of the states.
 
 construction = {
-    weight = 0.25
+    weight = 0.15
 
     building_construction_sector
 }
 
 infrastructure = {
-    weight = 5
+    weight = 3
 
     building_port
     building_railway
@@ -106,7 +106,7 @@ plantation = {
 }
 
 whaling = {
-    weight = 0.5
+    weight = 0.4
 
     building_whaling_station
 
@@ -133,7 +133,7 @@ light_industry = {
     # Industry score from configurables/westernization.txt. No effect if no EuroCentrism
     multiply = {
         value = 0
-        industry_score_less_than = 2
+        industry_score_less_than = 1
     }
 }
 
@@ -170,7 +170,7 @@ heavy_industry = {
     building_munition_plants
 
    add = {
-       value = 3
+       value = 4
        is_eu4_gp = yes
    }
 }
