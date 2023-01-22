@@ -585,7 +585,7 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 
 	// If arable, decrease arable land. This does have a side effect of no arable building being able to use more than 50% of the arable land
 	const auto& arables = subState->getHomeState()->getArableResources();
-	if (const auto& hasArable = std::ranges::find(arables,""); hasArable != arables.end())
+	if (const auto& hasArable = std::ranges::find(arables, ""); hasArable != arables.end())
 	{
 		subState->setResource("bg_agriculture", subState->getResource("bg_agriculture") - p);
 	}
