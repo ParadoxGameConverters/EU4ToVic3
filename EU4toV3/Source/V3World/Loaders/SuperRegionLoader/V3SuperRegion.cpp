@@ -1,4 +1,5 @@
 #include "V3SuperRegion.h"
+#include <numeric>
 #include "CommonFunctions.h"
 #include "CommonRegexes.h"
 #include "ParserHelpers.h"
@@ -20,5 +21,12 @@ void V3::SuperRegion::registerKeys()
 		region->initializeRegion(theStream);
 		region->setName(regionName);
 		regions.emplace(regionName, region);
+	});
+}
+
+double V3::SuperRegion::getTotalSubStateWeight() const
+{
+	return std::accumulate(regions.begin(), regions.end(), 0.0, [](double sum, const auto& region) {
+		return sum + region.second->getTotalSubStateWeight();
 	});
 }

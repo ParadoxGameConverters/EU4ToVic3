@@ -13,7 +13,7 @@ V3::Chunk prepChunk()
 	provinceManager.loadProvinces(provinceStream);
 	provinceManager.getProvince(2)->addCapital("TA2"); // we're transfering this as well.
 	provinceManager.getProvince(3)->addCapital("TA3"); // we're making both capitals to make things dramatic.
-	provinceManager.buildProvinceWeights();
+	provinceManager.buildProvinceWeights({});
 	provinceManager.buildPopRatios({}, false);
 
 	// shove provinces into a chunk.

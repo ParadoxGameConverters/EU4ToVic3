@@ -104,9 +104,64 @@ void EU4::ProvinceManager::buildPopRatios(const DatingData& datingData, bool con
 		}
 }
 
-void EU4::ProvinceManager::buildProvinceWeights()
+void EU4::ProvinceManager::buildProvinceWeights(const RegionManager& regionManager)
 {
-	for (const auto& province: provinces | std::views::values)
-		if (!province->isSea())
-			province->determineProvinceWeight(buildingCostLoader);
+	std::map<std::string, double> superRegionInvestmentWeight;
+	std::map<std::string, double> superRegionStartingWeight;
+	std::map<std::string, double> superRegionProvinces;
+
+	for (const auto& [provinceID, province]: provinces)
+	{
+		if (!regionManager.provinceIsValid(provinceID))
+			continue;
+		if (province->isSea())
+			continue;
+		province->determineProvinceWeight(buildingCostLoader);
+		const auto& superRegion = regionManager.getParentSuperRegionName(provinceID);
+		if (!superRegion)
+			continue;
+		superRegionInvestmentWeight[*superRegion] += province->getInvestedWeight();
+		superRegionStartingWeight[*superRegion] += province->getProvinceHistory().getOriginalDevelopment();
+		superRegionProvinces[*superRegion]++;
+	}
+
+	double europe = 0;
+	for (const auto& [provinceID, province]: provinces)
+	{
+		if (!regionManager.provinceIsValid(provinceID))
+			continue;
+		if (province->isSea())
+			continue;
+		const auto& superRegion = regionManager.getParentSuperRegionName(provinceID);
+		if (!superRegion)
+			continue;
+		const auto srWeightIncrease = superRegionInvestmentWeight[*superRegion] - superRegionStartingWeight[*superRegion];
+		if (srWeightIncrease <= 0)
+			continue;
+		const auto srAverageWeightIncrease = srWeightIncrease / superRegionProvinces[*superRegion];
+		const auto provinceIncreaseFactor = province->getInvestedWeight() / srAverageWeightIncrease;
+
+		// This formula gives +0.5 for 5x over average increase of dev, and -0.25 max penalty for no invested dev.
+		const auto investmentFactor = 1 / (1 + 3.32 * exp(-1.2 * provinceIncreaseFactor)) - 0.5;
+		province->setInvestmentFactor(investmentFactor);
+		if (*superRegion == "europe_superregion")
+		{
+			Log(LogLevel::Debug) << "prov " << *superRegion << " " << province->getID() << " start: " << province->getProvinceHistory().getOriginalDevelopment()
+										<< " end: " << province->getProvinceWeight() << " increase: " << province->getInvestedWeight()
+										<< " sr avg: " << srAverageWeightIncrease << " prov fact: " << provinceIncreaseFactor << " inv. fact: " << investmentFactor;
+			europe += investmentFactor;
+		}
+	}
+
+
+	Log(LogLevel::Debug) << "europe average investment factor: " << europe / superRegionProvinces["europe_superregion"] << " (tot " << europe << " / "
+								<< superRegionProvinces["europe_superregion"] << " )";
+	Log(LogLevel::Debug) << "europe start dev: " << superRegionStartingWeight["europe_superregion"] << " ending dev "
+								<< superRegionInvestmentWeight["europe_superregion"]
+								<< " average start: " << superRegionStartingWeight["europe_superregion"] / superRegionProvinces["europe_superregion"]
+								<< " average end: " << superRegionInvestmentWeight["europe_superregion"] / superRegionProvinces["europe_superregion"];
+
+	//								<< " provinces.";
+//	Log(LogLevel::Debug) << "average starting dev: " << totalStartingWeight / provinceCounter << " average ending weight " << totalInvestmentWeight / provinceCounter;
+//	Log(LogLevel::Debug) << "average weight/province increase: " << (totalInvestmentWeight - totalStartingWeight) / provinceCounter;
 }

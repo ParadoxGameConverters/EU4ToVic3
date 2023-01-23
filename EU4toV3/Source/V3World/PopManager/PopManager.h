@@ -7,6 +7,7 @@
 #include <map>
 #include <memory>
 #include <string>
+#include "Configuration.h"
 
 namespace EU4
 {
@@ -37,7 +38,7 @@ class PopManager
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader) const;
-	void generatePops(const ClayManager& clayManager);
+	void generatePops(const ClayManager& clayManager, Configuration::POPSHAPES popShapes);
 	void applyHomeLands(const ClayManager& clayManager) const;
 	void loadMinorityPopRules(const std::string& filePath);
 	void loadSlaveCultureRules(const std::string& filePath);
@@ -66,6 +67,8 @@ class PopManager
 		 const std::optional<std::string>& dominantReligion) const;
 	[[nodiscard]] static std::map<std::string, StatePops> injectReligionsIntoPops(const std::map<std::string, mappers::CultureDef>& cultureDefs,
 		 const std::map<std::string, StatePops>& pops);
+	[[nodiscard]] std::map<std::string, int> getVanillaSuperRegionalPopCounts(const ClayManager& clayManager) const;
+	[[nodiscard]] static std::map<std::string, double> getVanillaSuperRegionalWeights(const ClayManager& clayManager);
 
 	std::map<std::string, StatePops> vanillaStatePops;			  // state, StatePops
 	std::map<std::string, StatePops> vanillaMinorityStatePops; // state, StatePops

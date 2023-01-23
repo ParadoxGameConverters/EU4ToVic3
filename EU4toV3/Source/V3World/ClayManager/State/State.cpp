@@ -235,3 +235,13 @@ std::set<std::string> V3::State::getClaims() const
 		claims.insert(subState->getClaims().begin(), subState->getClaims().end());
 	return claims;
 }
+
+double V3::State::getInvestmentFactor() const
+{
+	double toReturn = 0;
+	for (const auto& subState: substates)
+		for (const auto& [data, weight]: subState->getSourceProvinceData())
+			toReturn += data.investmentFactor * weight;
+	toReturn /= static_cast<double>(substates.size());
+	return toReturn;
+}

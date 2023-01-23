@@ -45,7 +45,7 @@ std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
 	provinceManager.loadDefaultMapParser(defaults);
 	provinceManager.loadDefinitionScraper(definitions);
 	provinceManager.classifyProvinces(regionMapper);
-	provinceManager.buildProvinceWeights();
+	provinceManager.buildProvinceWeights({});
 	provinceManager.buildPopRatios({}, false);
 
 	mappers::ProvinceMapper provinceMapper;
@@ -104,7 +104,7 @@ V3::PoliticalManager prepWorld()
 	clayManager.shoveRemainingProvincesIntoSubStates();
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 
-	popManager.generatePops(clayManager);
+	popManager.generatePops(clayManager, Configuration::POPSHAPES::Vanilla);
 
 	return politicalManager;
 }

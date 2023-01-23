@@ -1,6 +1,8 @@
 #include "V3Region.h"
+#include <numeric>
 #include "CommonRegexes.h"
 #include "ParserHelpers.h"
+#include "ClayManager/State/State.h"
 
 void V3::Region::initializeRegion(std::istream& theStream)
 {
@@ -16,4 +18,11 @@ void V3::Region::registerKeys()
 			states.emplace(stateName, nullptr);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+}
+
+double V3::Region::getTotalSubStateWeight() const
+{
+	return std::accumulate(states.begin(), states.end(), 0.0, [](double sum, const auto& state) {
+			return sum + state.second->getTotalSubStateWeight();
+	});
 }

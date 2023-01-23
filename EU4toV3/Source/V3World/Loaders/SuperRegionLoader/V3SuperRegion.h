@@ -15,6 +15,8 @@ class SuperRegion: commonItems::parser
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getRegions() const { return regions; }
 	[[nodiscard]] bool containsRegion(const std::string& region) const { return regions.contains(region); }
+	[[nodiscard]] double getTotalSubStateWeight() const;
+
 
   private:
 	void registerKeys();

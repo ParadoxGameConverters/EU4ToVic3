@@ -80,8 +80,8 @@ void EU4::Province::determineProvinceWeight(const BuildingCostLoader& buildingTy
 	provinceWeight = currentDevelopment + buildingWeight;
 
 	// Investment weight is invested dev + buildings. Its FACTOR is used in devPush popShaping.
-	const auto investedWeight = developmentDelta + buildingWeight;
-
+	investedWeight = developmentDelta + buildingWeight;
+	/*
 	if (investedWeight > 0)
 	{
 		// provinces with modifier weights under 10 (under-invested with no buildings) get a penalty for popShaping, (realistically) up to -10.
@@ -90,7 +90,8 @@ void EU4::Province::determineProvinceWeight(const BuildingCostLoader& buildingTy
 	else
 	{
 		investmentFactor = -10 + investedWeight / 10; // For negatives, go linearly into debt.
-	}
+	Log(LogLevel::Debug) << "prov " << provID << " invest: " << investmentFactor << " from weight: " << investedWeight;
+	}*/
 }
 
 double EU4::Province::getCulturePercent(const std::string& theCulture) const

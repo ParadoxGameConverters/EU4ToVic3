@@ -49,7 +49,7 @@ V3::ClayManager generateChunks()
 	provinceManager.loadDefaultMapParser(defaults);
 	provinceManager.loadDefinitionScraper(definitions);
 	provinceManager.classifyProvinces(regionMapper);
-	provinceManager.buildProvinceWeights();
+	provinceManager.buildProvinceWeights({});
 	provinceManager.buildPopRatios({}, false);
 
 	mappers::ProvinceMapper provinceMapper;

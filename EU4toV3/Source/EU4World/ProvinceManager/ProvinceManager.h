@@ -5,7 +5,6 @@
 #include "DefaultMapParser/DefaultMapParser.h"
 #include "DefinitionScraper/DefinitionScraper.h"
 #include "EU4Province.h"
-#include "ModLoader/ModLoader.h"
 #include "Parser.h"
 #include "RegionManager/RegionManager.h"
 #include <map>
@@ -32,7 +31,7 @@ class ProvinceManager: commonItems::parser
 
 	void classifyProvinces(const RegionManager& regionManager);
 	void buildPopRatios(const DatingData& datingData, bool convertAll);
-	void buildProvinceWeights();
+	void buildProvinceWeights(const RegionManager& regionManager);
 
   private:
 	void registerKeys();
