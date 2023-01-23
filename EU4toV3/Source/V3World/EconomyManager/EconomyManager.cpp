@@ -38,7 +38,7 @@ void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::
 
 		centralizedCountries.push_back(country);
 	}
-	Log(LogLevel::Info) << "<> Loaded " << centralizedCountries.size() << "Centralized Countries.";
+	Log(LogLevel::Info) << "<> Loaded " << centralizedCountries.size() << " Centralized Countries.";
 }
 
 void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem& modFS, const std::string& filePath)
@@ -99,19 +99,20 @@ void V3::EconomyManager::hardcodePorts() const
 	Log(LogLevel::Info) << "-> Hardcoding Ports.";
 	auto counter = 0;
 
-	Building portTemplate;
-	portTemplate.setName("building_port");
-	portTemplate.setLevel(1);
-
 	for (const auto& country: centralizedCountries)
 	{
 		for (const auto& subState: country->getSubStates())
 		{
 			if (!subState->getVanillaBuildingElements().empty())
 				continue; // don't affect states imported from vanilla.
+			if (!subState->isCoastal())
+				continue;
 			if (subState->isCoastal())
 			{
-				auto port = std::make_shared<Building>(portTemplate);
+				auto port = std::make_shared<Building>();
+				port->setName("building_port");
+				port->setLevel(1);
+
 				subState->addBuilding(port);
 				++counter;
 				subState->getOwner()->addTech("navigation");
