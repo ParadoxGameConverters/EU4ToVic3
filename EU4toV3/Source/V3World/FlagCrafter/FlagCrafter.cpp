@@ -106,8 +106,8 @@ void V3::FlagCrafter::distributeAvailableFlags(const std::map<std::string, std::
 
 	// prep the battleground.
 	if (!commonItems::DeleteFolder("flags.tmp"))
-		Log(LogLevel::Error) << "Could not delete flags.tmp folder!";
-	else if (!commonItems::TryCreateFolder("flags.tmp"))
+		throw std::runtime_error("Could not delete flags.tmp folder!");
+	if (!commonItems::TryCreateFolder("flags.tmp"))
 		throw std::runtime_error("Could not create flags.tmp folder!");
 
 	auto flagCodeCounter = 0;
