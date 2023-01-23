@@ -48,7 +48,7 @@ jobs:
     - name: "Prepare release"
       if: ${{ github.event_name == 'push' }}
       run: |
-        rmdir "$Env:GITHUB_WORKSPACE\Release\win-x64" /S/Q
+        rmdir "$Env:GITHUB_WORKSPACE\Release\win-x64" /S /Q
         cd "C:\Program Files\7-Zip\"
         .\7z.exe a $Env:GITHUB_WORKSPACE\EU4ToVic3-0.1Adrianopole-win-x64.zip $Env:GITHUB_WORKSPACE\Release\*
         cp $Env:GITHUB_WORKSPACE\EU4ToVic3-0.1Adrianopole-win-x64.zip $Env:GITHUB_WORKSPACE\EU4ToVic3-latest-win-x64.zip
