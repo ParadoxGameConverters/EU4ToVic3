@@ -38,12 +38,9 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	}
 	Log(LogLevel::Progress) << "81 %";
 
-	Log(LogLevel::Info) << "<- Copying Mod Template";
-	commonItems::CopyFolder("blankMod/output", "output/output");
-	Log(LogLevel::Progress) << "82 %";
-
-	Log(LogLevel::Info) << "<- Moving Mod Template >> " << outputName;
-	commonItems::RenameFolder("output/output", "output/" + outputName);
+	Log(LogLevel::Info) << "<< Copying Mod Template to " << outputName;
+	if (!commonItems::CopyFolder("blankMod/output", "output/" + outputName))
+		throw std::runtime_error("Error copying mod template! Is the output/ folder writable?");
 	Log(LogLevel::Progress) << "83 %";
 
 	Log(LogLevel::Info) << "<- Crafting .metadata File";
