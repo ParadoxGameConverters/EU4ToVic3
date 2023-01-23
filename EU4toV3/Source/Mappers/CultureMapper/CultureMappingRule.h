@@ -67,6 +67,9 @@ class CultureMappingRule: commonItems::parser
 	std::set<std::string> religionGroups; // eu4
 	std::set<std::string> regions;		  // vic3
 	std::set<std::string> owners;			  // vic3
+	// Links without a region will still match for suspicious matches looking for neocultures.
+	// In practical terms, straight brazilian->brazilian link will match regardless of *where*.
+	bool neocultureOverride = false;
 
 	std::set<std::string> requestedMacros;
 };

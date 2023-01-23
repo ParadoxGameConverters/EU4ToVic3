@@ -48,6 +48,9 @@ void mappers::CultureMappingRule::registerKeys()
 	registerKeyword("owner", [this](std::istream& theStream) {
 		owners.insert(commonItems::getString(theStream));
 	});
+	registerKeyword("neoculture_override", [this](std::istream& theStream) {
+		neocultureOverride = (commonItems::getString(theStream) == "yes");
+	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
@@ -124,7 +127,8 @@ std::optional<std::string> mappers::CultureMappingRule::cultureRegionalMatch(con
 	// This is a regional match. We need a mapping within the given SPECIFIC region, so if the
 	// mapping rule has no regional qualifiers it needs to fail.
 
-	if (regions.empty())
+	// If we have a Neoculture Override, cheat and try to match anyway. This way brazilians match brazilian directly although the link lacks region.
+	if (regions.empty() && !neocultureOverride)
 		return std::nullopt;
 
 	// Otherwise, as usual.
