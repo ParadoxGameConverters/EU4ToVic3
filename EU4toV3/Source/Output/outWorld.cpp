@@ -23,22 +23,18 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 
 	Log(LogLevel::Info) << "---> Le Dump <---";
 	commonItems::TryCreateFolder("output");
-
-	// Delete broken remnants if any
-	Log(LogLevel::Info) << "<- Dropping Remnants";
-	if (commonItems::DoesFolderExist("output/output"))
-		commonItems::DeleteFolder("output/output");
 	Log(LogLevel::Progress) << "80 %";
 
 	// Delete old conversion
 	if (commonItems::DoesFolderExist("output/" + outputName))
 	{
 		Log(LogLevel::Info) << "<< Deleting existing mod folder.";
-		commonItems::DeleteFolder("output/" + outputName);
+		if (!commonItems::DeleteFolder("output/" + outputName))
+			throw std::runtime_error("Could not delete existing output/" + outputName + "! Please delete it manually and retry.");
 	}
 	Log(LogLevel::Progress) << "81 %";
 
-	Log(LogLevel::Info) << "<< Copying Mod Template to " << outputName;
+	Log(LogLevel::Info) << "<< Copying Mod Template from blankMod/output to output/" << outputName;
 	if (!commonItems::CopyFolder("blankMod/output", "output/" + outputName))
 		throw std::runtime_error("Error copying mod template! Is the output/ folder writable?");
 	Log(LogLevel::Progress) << "83 %";
