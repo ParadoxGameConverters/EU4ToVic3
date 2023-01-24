@@ -757,10 +757,19 @@ void V3::Country::calculateWesternization(double topTech,
 			Log(LogLevel::Warning) << "Trying to determine westernization of " << tag << " with no cultures!";
 		else
 		{
-			if (cultureMapper.getWesternizationScoreForCulture(*processedData.cultures.begin()) == 10)
+			const auto eurociv = cultureMapper.getWesternizationScoreForCulture(*processedData.cultures.begin());
+			if (eurociv == 10)
+			{
 				processedData.civLevel = 100;
+			}
 			else
-				processedData.civLevel *= static_cast<double>(cultureMapper.getWesternizationScoreForCulture(*processedData.cultures.begin())) / 10.0;
+			{
+				// Try to preserve eu4 centralized countries that suffer from *shit* tech.
+				if (processedData.civLevel >= 20)
+					processedData.civLevel = std::min(processedData.civLevel, eurociv * 10.0);
+				else
+					processedData.civLevel = std::max(processedData.civLevel, eurociv * 10.0);
+			}
 			processedData.industryFactor = cultureMapper.getIndustryScoreForCulture(*processedData.cultures.begin()) / 5.0; // ranges 0.0-2.0
 		}
 	}
