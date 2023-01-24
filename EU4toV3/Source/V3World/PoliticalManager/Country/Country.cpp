@@ -1,6 +1,5 @@
 #include "Country.h"
 #include "ClayManager/ClayManager.h"
-#include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "CommonRegexes.h"
 #include "CountryManager/EU4Country.h"
@@ -482,7 +481,7 @@ void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const E
 		return;
 
 	processedData.color = vanillaData->color;
-	if (!vanillaData->vanillaType.empty())
+	if (!vanillaData->vanillaType.empty() && vn) // restore *vanilla* vanilla country type.
 		processedData.type = vanillaData->vanillaType;
 	else
 		processedData.type = vanillaData->type;
@@ -638,7 +637,7 @@ void V3::Country::determineCountryType()
 	return usage;
 }
 
-[[nodiscard]] double V3::Country::calcInstitutionBureaucracy() const
+double V3::Country::calcInstitutionBureaucracy() const
 {
 	double usage = 0;
 	const double cost = getPopCount() / 100000.0;
@@ -649,7 +648,7 @@ void V3::Country::determineCountryType()
 	return usage;
 }
 
-[[nodiscard]] double V3::Country::calcCharacterBureaucracy() const
+double V3::Country::calcCharacterBureaucracy() const
 {
 	double usage = 0;
 
