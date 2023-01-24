@@ -44,6 +44,13 @@ void V3::Country::initializeCountry(std::istream& theStream)
 	clearRegisteredKeywords();
 }
 
+void V3::Country::storeVanillaCountryType(std::istream& theStream)
+{
+	registerVanillaTypeKeys();
+	parseStream(theStream);
+	clearRegisteredKeywords();
+}
+
 std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop(const double percentile) const
 {
 	// Ranks this country's substates by population then returns the top x% of them by population, the largest state will always be returned.
@@ -208,6 +215,14 @@ void V3::Country::registerKeys()
 	registerKeyword("is_named_from_capital", [this](const std::string& unused, std::istream& theStream) {
 		commonItems::ignoreItem(unused, theStream);
 		vanillaData->is_named_from_capital = true;
+	});
+	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+}
+
+void V3::Country::registerVanillaTypeKeys()
+{
+	registerKeyword("country_type", [this](std::istream& theStream) {
+		vanillaData->vanillaType = commonItems::getString(theStream);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
@@ -467,7 +482,10 @@ void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const E
 		return;
 
 	processedData.color = vanillaData->color;
-	processedData.type = vanillaData->type;
+	if (!vanillaData->vanillaType.empty())
+		processedData.type = vanillaData->vanillaType;
+	else
+		processedData.type = vanillaData->type;
 	processedData.tier = vanillaData->tier;
 	processedData.cultures = vanillaData->cultures;
 	processedData.religion = vanillaData->religion;

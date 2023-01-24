@@ -90,7 +90,7 @@ std::tuple<V3::ClayManager, V3::PoliticalManager> assignSubStateOwnership()
 	countryMapper->loadMappingRules("TestFiles/configurables/country_mappings.txt");
 	V3::PoliticalManager politicalManager;
 	politicalManager.loadCountryMapper(countryMapper);
-	politicalManager.initializeVanillaCountries(modFS);
+	politicalManager.initializeVanillaCountries(modFS, modFS);
 	politicalManager.importEU4Countries(countries);
 	clayManager.assignSubStateOwnership(politicalManager.getCountries(), *countryMapper);
 

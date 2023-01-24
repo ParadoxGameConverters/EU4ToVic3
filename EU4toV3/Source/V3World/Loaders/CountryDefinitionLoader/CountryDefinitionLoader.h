@@ -13,10 +13,12 @@ class CountryDefinitionLoader: commonItems::parser
 	CountryDefinitionLoader() = default;
 
 	void loadCommonCountries(const commonItems::ModFilesystem& modFS);
+	void reloadCommonCountries(const commonItems::ModFilesystem& vanillaFS);
 	[[nodiscard]] const auto& getCountries() const { return countries; }
 
   private:
 	void registerKeys();
+	void registerReloadKeys();
 
 	std::map<std::string, std::shared_ptr<Country>> countries;
 };

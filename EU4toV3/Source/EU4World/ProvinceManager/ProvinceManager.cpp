@@ -2,6 +2,7 @@
 #include "CommonRegexes.h"
 #include "Log.h"
 #include "ParserHelpers.h"
+#include <cmath>
 #include <ranges>
 
 void EU4::ProvinceManager::loadProvinces(std::istream& theStream)
@@ -135,7 +136,7 @@ void EU4::ProvinceManager::buildProvinceWeights(const RegionManager& regionManag
 		const auto& superRegion = regionManager.getParentSuperRegionName(provinceID);
 		if (!superRegion)
 			continue;
-		const auto srWeightIncrease = superRegionInvestmentWeight[*superRegion] - superRegionStartingWeight[*superRegion];
+		const auto srWeightIncrease = superRegionInvestmentWeight[*superRegion];
 		if (srWeightIncrease <= 0)
 			continue;
 		const auto srAverageWeightIncrease = srWeightIncrease / superRegionProvinces[*superRegion];
@@ -144,24 +145,5 @@ void EU4::ProvinceManager::buildProvinceWeights(const RegionManager& regionManag
 		// This formula gives +0.5 for 5x over average increase of dev, and -0.25 max penalty for no invested dev.
 		const auto investmentFactor = 1 / (1 + 3.32 * exp(-1.2 * provinceIncreaseFactor)) - 0.5;
 		province->setInvestmentFactor(investmentFactor);
-		if (*superRegion == "europe_superregion")
-		{
-			Log(LogLevel::Debug) << "prov " << *superRegion << " " << province->getID() << " start: " << province->getProvinceHistory().getOriginalDevelopment()
-										<< " end: " << province->getProvinceWeight() << " increase: " << province->getInvestedWeight()
-										<< " sr avg: " << srAverageWeightIncrease << " prov fact: " << provinceIncreaseFactor << " inv. fact: " << investmentFactor;
-			europe += investmentFactor;
-		}
 	}
-
-
-	Log(LogLevel::Debug) << "europe average investment factor: " << europe / superRegionProvinces["europe_superregion"] << " (tot " << europe << " / "
-								<< superRegionProvinces["europe_superregion"] << " )";
-	Log(LogLevel::Debug) << "europe start dev: " << superRegionStartingWeight["europe_superregion"] << " ending dev "
-								<< superRegionInvestmentWeight["europe_superregion"]
-								<< " average start: " << superRegionStartingWeight["europe_superregion"] / superRegionProvinces["europe_superregion"]
-								<< " average end: " << superRegionInvestmentWeight["europe_superregion"] / superRegionProvinces["europe_superregion"];
-
-	//								<< " provinces.";
-//	Log(LogLevel::Debug) << "average starting dev: " << totalStartingWeight / provinceCounter << " average ending weight " << totalInvestmentWeight / provinceCounter;
-//	Log(LogLevel::Debug) << "average weight/province increase: " << (totalInvestmentWeight - totalStartingWeight) / provinceCounter;
 }

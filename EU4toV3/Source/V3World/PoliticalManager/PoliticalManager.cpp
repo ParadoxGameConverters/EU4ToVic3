@@ -17,11 +17,12 @@
 #include <numeric>
 #include <ranges>
 
-void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFilesystem& modFS)
+void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFilesystem& modFS, const commonItems::ModFilesystem& vanillaFS)
 {
 	Log(LogLevel::Info) << "-> Loading Vanilla Countries.";
 	CountryDefinitionLoader definitionLoader;
 	definitionLoader.loadCommonCountries(modFS);
+	definitionLoader.reloadCommonCountries(vanillaFS);
 	countries = definitionLoader.getCountries();
 	Log(LogLevel::Info) << "<> " << countries.size() << " vanilla countries loaded.";
 

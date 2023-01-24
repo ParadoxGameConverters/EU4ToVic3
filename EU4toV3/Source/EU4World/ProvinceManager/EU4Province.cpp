@@ -2,7 +2,6 @@
 #include "CommonRegexes.h"
 #include "Log.h"
 #include "ParserHelpers.h"
-#include <cmath>
 
 EU4::Province::Province(const std::string& numString, std::istream& theStream)
 {
@@ -81,17 +80,6 @@ void EU4::Province::determineProvinceWeight(const BuildingCostLoader& buildingTy
 
 	// Investment weight is invested dev + buildings. Its FACTOR is used in devPush popShaping.
 	investedWeight = developmentDelta + buildingWeight;
-	/*
-	if (investedWeight > 0)
-	{
-		// provinces with modifier weights under 10 (under-invested with no buildings) get a penalty for popShaping, (realistically) up to -10.
-		investmentFactor = (std::log10(investedWeight) - 1) * 10;
-	}
-	else
-	{
-		investmentFactor = -10 + investedWeight / 10; // For negatives, go linearly into debt.
-	Log(LogLevel::Debug) << "prov " << provID << " invest: " << investmentFactor << " from weight: " << investedWeight;
-	}*/
 }
 
 double EU4::Province::getCulturePercent(const std::string& theCulture) const

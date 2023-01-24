@@ -219,8 +219,9 @@ void V3::PopManager::generatePops(const ClayManager& clayManager, const Configur
 	 * and only then distribute the remainder according to weights. Tad involved but no way around it.
 	 */
 
-	const auto vanillaSuperRegionPopCount = getVanillaSuperRegionalPopCounts(clayManager); // superregion -> total popcount
-	const auto vanillaSuperRegionWeights = getVanillaSuperRegionalWeights(clayManager);		// superregion -> total weight
+	const auto vanillaSuperRegionPopCount = getVanillaSuperRegionalPopCounts(clayManager);		// superregion -> total popcount
+	const auto vanillaSuperRegionWeights = getVanillaSuperRegionalWeights(clayManager);			// superregion -> total weight
+	const auto superRegionProjectedCounts = getSuperRegionPopShapingProjections(clayManager); // superregion -> pre-normalized popshaping projection
 
 	for (const auto& [stateName, state]: clayManager.getStates())
 	{
@@ -229,6 +230,11 @@ void V3::PopManager::generatePops(const ClayManager& clayManager, const Configur
 
 		if (!vanillaStatePops.contains(stateName) || !dwStatePops.contains(stateName))
 			continue;
+
+		const auto& superRegion = clayManager.getParentSuperRegion(stateName);
+		if (!superRegion)
+			continue;
+		const auto& superRegionName = superRegion->getName();
 
 		auto minorityPopCount = 0;
 		if (vanillaMinorityStatePops.contains(stateName))
@@ -245,10 +251,8 @@ void V3::PopManager::generatePops(const ClayManager& clayManager, const Configur
 			// Unlike Vic2, we're reshuffling the pops within specific superregions. There are 6 superregions in Vic3 and each of the major ones contains approx
 			// same amount of pops. We're just reshuffling them internally.
 			const auto totalStateWeight = state->getTotalSubStateWeight();
-			if (const auto& superRegion = clayManager.getParentSuperRegion(stateName);
-				 superRegion && vanillaSuperRegionWeights.contains(superRegion->getName()) && vanillaSuperRegionPopCount.contains(superRegion->getName()))
+			if (vanillaSuperRegionWeights.contains(superRegion->getName()) && vanillaSuperRegionPopCount.contains(superRegion->getName()))
 			{
-				const auto& superRegionName = superRegion->getName();
 				const auto totalSuperRegionWeight = vanillaSuperRegionWeights.at(superRegionName);
 				const auto popModifier = totalStateWeight / totalSuperRegionWeight;
 
@@ -257,14 +261,6 @@ void V3::PopManager::generatePops(const ClayManager& clayManager, const Configur
 				vanillaStatePopCount = static_cast<int>(std::round(vanillaSuperRegionPopCount.at(superRegionName) * popModifier));
 				stateFactor =
 					 (vanillaStatePopCount - vanillaStatePops.at(stateName).getPopCount()) / static_cast<double>(vanillaStatePops.at(stateName).getPopCount());
-
-				if (superRegionName == "europe_strategic_regions")
-					Log(LogLevel::Debug) << "state " << stateName << " vanilla " << vanillaStatePops.at(stateName).getPopCount()
-												<< " shaped: " << vanillaStatePopCount << " ( " << vanillaStatePopCount - vanillaStatePops.at(stateName).getPopCount()
-												<< " - " << (stateFactor)*100.0
-												<< "% ) "
-												<< " popmodifier: " << popModifier << " stateweight " << totalStateWeight << " sr weight: " << totalSuperRegionWeight
-											<< " sr pop: " << vanillaSuperRegionPopCount.at(superRegionName);
 			}
 			else
 			{
@@ -274,16 +270,12 @@ void V3::PopManager::generatePops(const ClayManager& clayManager, const Configur
 		}
 		else if (popShapes == Configuration::POPSHAPES::PopShaping)
 		{
+			const auto superRegionalNormalizationFactor = vanillaSuperRegionPopCount.at(superRegionName) / superRegionProjectedCounts.at(superRegionName);
 			const auto stateInvestmentFactor = 1.0 + state->getInvestmentFactor();
-			vanillaStatePopCount = static_cast<int>(vanillaStatePops.at(stateName).getPopCount() * stateInvestmentFactor);
+			const auto projectedPopCount = static_cast<double>(vanillaStatePops.at(stateName).getPopCount()) * stateInvestmentFactor;
+			vanillaStatePopCount = static_cast<int>(std::round(projectedPopCount * superRegionalNormalizationFactor));
 			stateFactor =
 				 (vanillaStatePopCount - vanillaStatePops.at(stateName).getPopCount()) / static_cast<double>(vanillaStatePops.at(stateName).getPopCount());
-			const auto& superRegion = clayManager.getParentSuperRegion(stateName);
-
-			if (superRegion->getName() == "europe_strategic_regions")
-				Log(LogLevel::Debug) << stateName << " invest " << stateInvestmentFactor << " van " << vanillaStatePops.at(stateName).getPopCount()
-										<< " shaped: " << vanillaStatePopCount << " ( " << vanillaStatePopCount - vanillaStatePops.at(stateName).getPopCount() << " - "
-										<< (stateFactor)*100.0 << "% ) ";
 		}
 
 		// do not count minorities towards vanilla population as they get added separately.
@@ -343,17 +335,6 @@ void V3::PopManager::generatePops(const ClayManager& clayManager, const Configur
 	const auto worldSum = std::accumulate(clayManager.getStates().begin(), clayManager.getStates().end(), 0, [](int sum, const auto& state) {
 		return sum + state.second->getStatePopCount();
 	});
-
-	const auto& europe = clayManager.getSuperRegions().at("europe_strategic_regions");
-	auto popc = 0;
-	for (const auto& [rn, region]: europe->getRegions())
-		for (const auto& state: region->getStates())
-			popc += state.second->getStatePopCount();
-	Log(LogLevel::Debug) << "europe vanilla: " << vanillaSuperRegionPopCount.at("europe_strategic_regions") <<", final popcount: " << popc
-								<< " delta: " << popc - vanillaSuperRegionPopCount.at("europe_strategic_regions") << " - "
-								<< (popc - vanillaSuperRegionPopCount.at("europe_strategic_regions")) * 100.0 /
-										 vanillaSuperRegionPopCount.at("europe_strategic_regions") * 1.0
-								<< "%";
 
 	const auto worldDelta = worldSum - worldTotal;
 	Log(LogLevel::Info) << "<> World now has " << worldSum << " pops (delta: " << worldDelta << " pops).";
@@ -649,5 +630,25 @@ std::map<std::string, double> V3::PopManager::getVanillaSuperRegionalWeights(con
 	for (const auto& [superRegionName, superRegion]: clayManager.getSuperRegions())
 		toReturn[superRegionName] = superRegion->getTotalSubStateWeight();
 
+	return toReturn;
+}
+
+std::map<std::string, double> V3::PopManager::getSuperRegionPopShapingProjections(const ClayManager& clayManager) const
+{
+	std::map<std::string, double> toReturn;
+	for (const auto& [stateName, state]: clayManager.getStates())
+	{
+		if (state->isSea() || state->isLake())
+			continue;
+		const auto& superRegion = clayManager.getParentSuperRegion(stateName);
+		if (!superRegion)
+			continue;
+		if (!vanillaStatePops.contains(stateName))
+			continue;
+
+		const auto stateInvestmentFactor = 1.0 + state->getInvestmentFactor();
+		const auto projectedPopCount = static_cast<int>(static_cast<double>(vanillaStatePops.at(stateName).getPopCount()) * stateInvestmentFactor);
+		toReturn[superRegion->getName()] += projectedPopCount;
+	}
 	return toReturn;
 }

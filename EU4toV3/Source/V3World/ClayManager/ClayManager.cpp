@@ -532,7 +532,7 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		if (ownerTag.empty())
 			continue;
 
-		// We have a substate owner. Is he vanilla-decentralized? Or are we doing VN?
+		// We have a substate owner. Is he not vanilla-decentralized? And are we not doing VN? Then bail.
 		if (!politicalManager.isTagDecentralized(ownerTag) && !vn)
 			continue;
 
@@ -541,7 +541,6 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		for (const auto& provinceID: subStateEntry.getProvinces())
 			if (unassignedProvinces.contains(provinceID))
 				availableProvinces.emplace(provinceID, unassignedProvinces.at(provinceID));
-
 		// Anything to work with?
 		if (availableProvinces.empty())
 			continue;

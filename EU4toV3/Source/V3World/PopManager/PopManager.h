@@ -1,5 +1,6 @@
 #ifndef POP_MANAGER_H
 #define POP_MANAGER_H
+#include "Configuration.h"
 #include "MinorityPopMapper/MinorityPopMapper.h"
 #include "ModLoader/ModFilesystem.h"
 #include "Pops/StatePops.h"
@@ -7,7 +8,6 @@
 #include <map>
 #include <memory>
 #include <string>
-#include "Configuration.h"
 
 namespace EU4
 {
@@ -69,6 +69,7 @@ class PopManager
 		 const std::map<std::string, StatePops>& pops);
 	[[nodiscard]] std::map<std::string, int> getVanillaSuperRegionalPopCounts(const ClayManager& clayManager) const;
 	[[nodiscard]] static std::map<std::string, double> getVanillaSuperRegionalWeights(const ClayManager& clayManager);
+	[[nodiscard]] std::map<std::string, double> getSuperRegionPopShapingProjections(const ClayManager& clayManager) const;
 
 	std::map<std::string, StatePops> vanillaStatePops;			  // state, StatePops
 	std::map<std::string, StatePops> vanillaMinorityStatePops; // state, StatePops
