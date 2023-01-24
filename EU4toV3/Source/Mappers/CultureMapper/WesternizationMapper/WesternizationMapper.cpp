@@ -5,10 +5,11 @@
 
 void mappers::WesternizationMapper::loadMappingRules(const std::string& filePath)
 {
-	Log(LogLevel::Info) << "Parsing technology groups.";
+	Log(LogLevel::Info) << "-> Parsing westernization groups.";
 	registerKeys();
 	parseFile(filePath);
 	clearRegisteredKeywords();
+	Log(LogLevel::Info) << "<> Parsed " << westernizations.size() << " groups.";
 }
 
 void mappers::WesternizationMapper::loadMappingRules(std::istream& theStream)

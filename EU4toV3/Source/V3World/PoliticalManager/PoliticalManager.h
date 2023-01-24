@@ -53,7 +53,7 @@ class PoliticalManager
 
 	PoliticalManager() = default;
 
-	void initializeVanillaCountries(const commonItems::ModFilesystem& modFS);
+	void initializeVanillaCountries(const commonItems::ModFilesystem& modFS, const commonItems::ModFilesystem& vanillaFS);
 	void loadCountryMapper(const std::shared_ptr<mappers::CountryMapper>& theCountryMapper);
 	void loadPopulationSetupMapperRules(const std::string& filePath);
 	void loadIdeaEffectMapperRules(const std::string& filePath);

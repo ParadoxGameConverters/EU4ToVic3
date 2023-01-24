@@ -5,10 +5,11 @@
 
 void mappers::PopulationSetupMapper::loadMappingRules(const std::string& filePath)
 {
-	Log(LogLevel::Info) << "Parsing population setup rules.";
+	Log(LogLevel::Info) << "-> Parsing population setup rules.";
 	registerKeys();
 	parseFile(filePath);
 	clearRegisteredKeywords();
+	Log(LogLevel::Info) << "<> Parsed " << literacySteps.size() << " literacy rules and " << wealthSteps.size() << " wealth rules.";
 }
 
 void mappers::PopulationSetupMapper::loadMappingRules(std::istream& theStream)

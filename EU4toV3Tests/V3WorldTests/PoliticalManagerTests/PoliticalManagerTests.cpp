@@ -48,7 +48,7 @@ prepMappers()
 	provinceManager.loadDefaultMapParser(defaults);
 	provinceManager.loadDefinitionScraper(definitions);
 	provinceManager.classifyProvinces(regionMapper);
-	provinceManager.buildProvinceWeights();
+	provinceManager.buildProvinceWeights({});
 	provinceManager.buildPopRatios({}, false);
 
 	mappers::ProvinceMapper provinceMapper;
@@ -95,7 +95,7 @@ prepMappers()
 	popManager.initializeDWPops(modFS);
 	popManager.convertDemographics(clayManager, culMapper, relMapper, cultureLoader, religionLoader);
 
-	politicalManager.initializeVanillaCountries(modFS);
+	politicalManager.initializeVanillaCountries(modFS, modFS);
 	politicalManager.loadCountryMapper(countryMapper);
 	politicalManager.importEU4Countries(countries);
 
@@ -109,7 +109,7 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanInitializeVanillaCountrie
 
 	EXPECT_EQ(0, politicalManager.getCountries().size());
 
-	politicalManager.initializeVanillaCountries(modFS);
+	politicalManager.initializeVanillaCountries(modFS, modFS);
 
 	ASSERT_EQ(4, politicalManager.getCountries().size());
 
@@ -173,7 +173,7 @@ TEST(V3World_PoliticalManagerTests, PoliticalManagerCanConvertVanillaCountries)
 	V3::PoliticalManager politicalManager;
 
 	EXPECT_EQ(0, politicalManager.getCountries().size());
-	politicalManager.initializeVanillaCountries(modFS);
+	politicalManager.initializeVanillaCountries(modFS, modFS);
 	EXPECT_EQ(4, politicalManager.getCountries().size()); // we have 4 vanilla vic3 countries, unrelated to eu4.
 	politicalManager.loadCountryMapper(countryMapper);
 	politicalManager.importEU4Countries(countries);

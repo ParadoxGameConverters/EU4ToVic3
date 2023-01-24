@@ -43,6 +43,7 @@ class State: commonItems::parser
 	[[nodiscard]] int getStatePopCount() const;
 	[[nodiscard]] int getStateSlavePopCount() const;
 	[[nodiscard]] double getTotalSubStateWeight() const;
+	[[nodiscard]] double getInvestmentFactor() const;
 
   private:
 	void registerKeys();

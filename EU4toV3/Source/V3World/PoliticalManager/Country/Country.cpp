@@ -1,6 +1,5 @@
 #include "Country.h"
 #include "ClayManager/ClayManager.h"
-#include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "CommonRegexes.h"
 #include "CountryManager/EU4Country.h"
@@ -40,6 +39,13 @@ void V3::Country::initializeCountry(std::istream& theStream)
 {
 	registerKeys();
 	vanillaData = VanillaCommonCountryData();
+	parseStream(theStream);
+	clearRegisteredKeywords();
+}
+
+void V3::Country::storeVanillaCountryType(std::istream& theStream)
+{
+	registerVanillaTypeKeys();
 	parseStream(theStream);
 	clearRegisteredKeywords();
 }
@@ -208,6 +214,14 @@ void V3::Country::registerKeys()
 	registerKeyword("is_named_from_capital", [this](const std::string& unused, std::istream& theStream) {
 		commonItems::ignoreItem(unused, theStream);
 		vanillaData->is_named_from_capital = true;
+	});
+	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+}
+
+void V3::Country::registerVanillaTypeKeys()
+{
+	registerKeyword("country_type", [this](std::istream& theStream) {
+		vanillaData->vanillaType = commonItems::getString(theStream);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
@@ -467,7 +481,10 @@ void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const E
 		return;
 
 	processedData.color = vanillaData->color;
-	processedData.type = vanillaData->type;
+	if (!vanillaData->vanillaType.empty() && vn) // restore *vanilla* vanilla country type.
+		processedData.type = vanillaData->vanillaType;
+	else
+		processedData.type = vanillaData->type;
 	processedData.tier = vanillaData->tier;
 	processedData.cultures = vanillaData->cultures;
 	processedData.religion = vanillaData->religion;
@@ -620,7 +637,7 @@ void V3::Country::determineCountryType()
 	return usage;
 }
 
-[[nodiscard]] double V3::Country::calcInstitutionBureaucracy() const
+double V3::Country::calcInstitutionBureaucracy() const
 {
 	double usage = 0;
 	const double cost = getPopCount() / 100000.0;
@@ -631,7 +648,7 @@ void V3::Country::determineCountryType()
 	return usage;
 }
 
-[[nodiscard]] double V3::Country::calcCharacterBureaucracy() const
+double V3::Country::calcCharacterBureaucracy() const
 {
 	double usage = 0;
 

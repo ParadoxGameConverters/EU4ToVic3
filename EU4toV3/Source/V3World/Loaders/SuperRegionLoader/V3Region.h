@@ -17,6 +17,8 @@ class Region: commonItems::parser
 	[[nodiscard]] bool containsState(const std::string& state) const { return states.contains(state); }
 	void replaceStates(const std::map<std::string, std::shared_ptr<State>>& theStates) { states = theStates; }
 
+	[[nodiscard]] double getTotalSubStateWeight() const;
+
   private:
 	void registerKeys();
 

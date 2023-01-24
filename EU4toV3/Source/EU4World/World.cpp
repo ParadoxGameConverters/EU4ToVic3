@@ -65,7 +65,7 @@ EU4::World::World(const std::shared_ptr<Configuration>& theConfiguration, const 
 	Log(LogLevel::Progress) << "17 %";
 
 	Log(LogLevel::Info) << "-> Calculating Province Weights";
-	provinceManager.buildProvinceWeights();
+	provinceManager.buildProvinceWeights(regionManager);
 	Log(LogLevel::Progress) << "18 %";
 
 	Log(LogLevel::Info) << "-> Determining Demographics";
