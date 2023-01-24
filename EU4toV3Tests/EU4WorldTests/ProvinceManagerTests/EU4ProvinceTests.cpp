@@ -225,7 +225,7 @@ TEST(EU4World_ProvinceTests, investmentFactorForNoOwnerIsZero)
 	EXPECT_EQ(0.0, theProvince.getInvestmentFactor());
 }
 
-TEST(EU4World_ProvinceTests, investmentFactorWithoutBuildingsCanBeCalculated)
+TEST(EU4World_ProvinceTests, investmentWeightWithoutBuildingsCanBeCalculated)
 {
 	std::stringstream input;
 	input << "owner = TST\n";
@@ -247,35 +247,10 @@ TEST(EU4World_ProvinceTests, investmentFactorWithoutBuildingsCanBeCalculated)
 	// Increasing development by 10 gives us a factor of 0 (log10(10) - 1) * 10
 	theProvince.determineProvinceWeight(buildings);
 
-	EXPECT_EQ(0.0, theProvince.getInvestmentFactor());
+	EXPECT_EQ(10.0, theProvince.getInvestedWeight());
 }
 
-TEST(EU4World_ProvinceTests, investmentFactorWithoutBuildingsCanBeCalculatedAbove10)
-{
-	std::stringstream input;
-	input << "owner = TST\n";
-	input << "base_tax = 1\n";
-	input << "base_production = 102\n"; // increased by 100
-	input << "base_manpower = 1\n";
-	input << "history = {\n";
-	input << "\tbase_tax = 1\n";
-	input << "\tbase_production = 2\n";
-	input << "\tbase_manpower = 1\n";
-	input << "}\n";
-
-	EU4::Province theProvince("-1", input);
-
-	std::stringstream buildingStream;
-	EU4::BuildingCostLoader buildings;
-	buildings.loadBuildingCosts(buildingStream);
-
-	// Increasing development by 100 gives us a factor of 10 (log10(100) - 1) * 10
-	theProvince.determineProvinceWeight(buildings);
-
-	EXPECT_NEAR(10.0, theProvince.getInvestmentFactor(), 0.001);
-}
-
-TEST(EU4World_ProvinceTests, investmentFactorUsesOnePercentBuildingsCostAsDev)
+TEST(EU4World_ProvinceTests, investmentWeightUsesOnePercentBuildingsCostAsDev)
 {
 	std::stringstream input;
 	input << "owner = TST\n";
@@ -299,81 +274,10 @@ TEST(EU4World_ProvinceTests, investmentFactorUsesOnePercentBuildingsCostAsDev)
 	EU4::BuildingCostLoader buildings;
 	buildings.loadBuildingCosts(buildingStream);
 
-	// Increasing development by 90 + 10 gives us a factor of 10 (log10(100) - 1) * 10
+	// Increasing development by 90 + 10
 	theProvince.determineProvinceWeight(buildings);
 
-	EXPECT_NEAR(10.0, theProvince.getInvestmentFactor(), 0.001);
-}
-
-TEST(EU4World_ProvinceTests, investmentFactorIsNegativeBelow10Investment)
-{
-	std::stringstream input;
-	input << "owner = TST\n";
-	input << "base_tax = 1\n";
-	input << "base_production = 3\n"; // increased by 1
-	input << "base_manpower = 1\n";
-	input << "history = {\n";
-	input << "\tbase_tax = 1\n";
-	input << "\tbase_production = 2\n";
-	input << "\tbase_manpower = 1\n";
-	input << "}\n";
-	EU4::Province theProvince("-1", input);
-
-	std::stringstream buildingStream;
-	EU4::BuildingCostLoader buildings;
-	buildings.loadBuildingCosts(buildingStream);
-
-	// Increasing development by 1 gives us a factor of -10 (log10(1) - 1) * 10
-	theProvince.determineProvinceWeight(buildings);
-
-	EXPECT_NEAR(-10.0, theProvince.getInvestmentFactor(), 0.001);
-}
-
-TEST(EU4World_ProvinceTests, investmentFactorIsNegative10ForZeroInvestment)
-{
-	std::stringstream input;
-	input << "owner = TST\n";
-	input << "base_tax = 1\n";
-	input << "base_production = 2\n";
-	input << "base_manpower = 1\n";
-	input << "history = {\n";
-	input << "\tbase_tax = 1\n";
-	input << "\tbase_production = 2\n";
-	input << "\tbase_manpower = 1\n";
-	input << "}\n";
-	EU4::Province theProvince("-1", input);
-
-	std::stringstream buildingStream;
-	EU4::BuildingCostLoader buildings;
-	buildings.loadBuildingCosts(buildingStream);
-
-	theProvince.determineProvinceWeight(buildings);
-
-	EXPECT_NEAR(-10.0, theProvince.getInvestmentFactor(), 0.001);
-}
-
-TEST(EU4World_ProvinceTests, investmentFactorScalesLinearlyForNegativeInvestment)
-{
-	std::stringstream input;
-	input << "owner = TST\n";
-	input << "base_tax = 1\n";
-	input << "base_production = 2\n"; // Decreased by 10
-	input << "base_manpower = 1\n";
-	input << "history = {\n";
-	input << "\tbase_tax = 1\n";
-	input << "\tbase_production = 12\n";
-	input << "\tbase_manpower = 1\n";
-	input << "}\n";
-	EU4::Province theProvince("-1", input);
-
-	std::stringstream buildingStream;
-	EU4::BuildingCostLoader buildings;
-	buildings.loadBuildingCosts(buildingStream);
-
-	// -10 - 0.1/dev
-	theProvince.determineProvinceWeight(buildings);
-
-	EXPECT_NEAR(-11.0, theProvince.getInvestmentFactor(), 0.001);
+	EXPECT_NEAR(100.0, theProvince.getInvestedWeight(), 0.001);
 }
 
 TEST(EU4World_ProvinceTests, startingCultureCanBeRetrieved)

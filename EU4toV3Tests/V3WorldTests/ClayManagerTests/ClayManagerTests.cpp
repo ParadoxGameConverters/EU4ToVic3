@@ -24,8 +24,8 @@ V3::ClayManager generateChunks()
 	defaults.loadDefaultMap(eu4FS);
 	EU4::DefinitionScraper definitions;
 	definitions.loadDefinitions(eu4FS);
-	EU4::RegionManager regionMapper;
-	regionMapper.loadRegions(eu4FS);
+	EU4::RegionManager regionManager;
+	regionManager.loadRegions(eu4FS);
 
 	std::stringstream provinceStream;
 	provinceStream << "-1={}\n"; // sea, no ownership
@@ -48,8 +48,8 @@ V3::ClayManager generateChunks()
 	provinceManager.getProvince(3)->addCapital("TA3");
 	provinceManager.loadDefaultMapParser(defaults);
 	provinceManager.loadDefinitionScraper(definitions);
-	provinceManager.classifyProvinces(regionMapper);
-	provinceManager.buildProvinceWeights({});
+	provinceManager.classifyProvinces(regionManager);
+	provinceManager.buildProvinceWeights(regionManager);
 	provinceManager.buildPopRatios({}, false);
 
 	mappers::ProvinceMapper provinceMapper;

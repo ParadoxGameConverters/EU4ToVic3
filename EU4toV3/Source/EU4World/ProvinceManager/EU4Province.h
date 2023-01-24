@@ -79,9 +79,9 @@ class Province: commonItems::convenientParser
 	double baseTax = 0;
 	double baseProduction = 0;
 	double baseManpower = 0;
-	double provinceWeight = 0; // absolute dev + buildings
-	double investedWeight = 0; // devpushed dev + buildings
-	double investmentFactor = 0; // some logarithm or something to normalise the investedWeight.
+	double provinceWeight = 0;	  // absolute dev + buildings
+	double investedWeight = 0;	  // devpushed dev + buildings
+	double investmentFactor = 0; // a log function to normalise the investedWeight.
 
 	ProvinceHistory provinceHistory;
 	std::set<std::string> cores;

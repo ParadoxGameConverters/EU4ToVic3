@@ -3,6 +3,8 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {});
+
 V3::Chunk prepChunk()
 {
 	// make a few provinces
@@ -13,7 +15,9 @@ V3::Chunk prepChunk()
 	provinceManager.loadProvinces(provinceStream);
 	provinceManager.getProvince(2)->addCapital("TA2"); // we're transfering this as well.
 	provinceManager.getProvince(3)->addCapital("TA3"); // we're making both capitals to make things dramatic.
-	provinceManager.buildProvinceWeights({});
+	EU4::RegionManager regionManager;
+	regionManager.loadRegions(eu4FS);
+	provinceManager.buildProvinceWeights(regionManager);
 	provinceManager.buildPopRatios({}, false);
 
 	// shove provinces into a chunk.
