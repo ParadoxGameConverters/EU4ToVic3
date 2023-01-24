@@ -203,7 +203,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanLinkStatesToSuperRegions)
 	const auto& regionA = superRegion1->getRegions().at("region_a");
 	const auto& states = regionA->getStates();
 
-	EXPECT_EQ(2, states.size());
+	EXPECT_EQ(4, states.size());
 
 	const auto& state_test_1 = states.at("STATE_TEST_1");
 
