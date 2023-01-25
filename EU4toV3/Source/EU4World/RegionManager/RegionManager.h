@@ -3,10 +3,10 @@
 #include "Area.h"
 #include "ColonialRegionLoader/ColonialRegionLoader.h"
 #include "Mappers/SuperGroupMapper/SuperGroupMapper.h"
-#include "ModLoader/ModLoader.h"
 #include "Parser.h"
 #include "Region.h"
 #include "SuperRegion.h"
+#include "TradeCompanyLoader/TradeCompanyLoader.h"
 
 namespace EU4
 {
@@ -20,6 +20,9 @@ class RegionManager: commonItems::parser
 
 	void loadColonialRegions(const commonItems::ModFilesystem& modFS) { colonialRegionLoader.loadColonialRegions(modFS); }
 	void loadColonialRegions(const ColonialRegionLoader& loader) { colonialRegionLoader = loader; } // testing
+
+	void loadTradeCompanies(const commonItems::ModFilesystem& modFS) { tradeCompanyLoader.loadTradeCompanies(modFS); }
+	void loadExcludedTradeCompanies(const std::string& filePath) { tradeCompanyLoader.loadExcludedTradeCompanies(filePath); }
 
 	[[nodiscard]] bool provinceIsInRegion(int provinceID, const std::string& regionName) const;
 	[[nodiscard]] bool regionNameIsValid(const std::string& regionName) const;
@@ -53,6 +56,7 @@ class RegionManager: commonItems::parser
 
 	mappers::SuperGroupMapper superGroupMapper;
 	ColonialRegionLoader colonialRegionLoader;
+	TradeCompanyLoader tradeCompanyLoader;
 };
 } // namespace EU4
 
