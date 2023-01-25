@@ -15,6 +15,7 @@
 #include "ParserHelpers.h"
 #include <cmath>
 #include <numeric>
+#include <ranges>
 
 EU4::Country::Country(std::string countryTag, std::istream& theStream): tag(std::move(countryTag))
 {
@@ -235,12 +236,12 @@ void EU4::Country::setLocalizationAdjective(const std::string& language, const s
 
 void EU4::Country::addProvince(const std::shared_ptr<Province>& province)
 {
-	provinces.push_back(province);
+	provinces.emplace(province->getID(), province);
 }
 
 void EU4::Country::addCore(const std::shared_ptr<Province>& core)
 {
-	cores.push_back(core);
+	cores.emplace(core->getID(), core);
 }
 
 bool EU4::Country::hasModifier(const std::string& modifier) const
@@ -271,7 +272,7 @@ void EU4::Country::updateRegimentTypes(const UnitTypeLoader& unitTypeLoader)
 
 void EU4::Country::buildManufactoryCount(const std::map<std::string, std::shared_ptr<Country>>& theCountries)
 {
-	for (const auto& province: provinces)
+	for (const auto& province: provinces | std::views::values)
 	{
 		if (province->hasBuilding("weapons"))
 			++mfgCount;
@@ -325,7 +326,7 @@ void EU4::Country::eatCountry(const std::shared_ptr<Country>& target)
 	const auto targetWeight = static_cast<double>(target->provinces.size()) / totalProvinces;
 
 	// acquire target's cores (always)
-	for (const auto& core: target->getCores())
+	for (const auto& core: target->getCores() | std::views::values)
 	{
 		addCore(core);
 		core->addCore(tag);
@@ -336,7 +337,7 @@ void EU4::Country::eatCountry(const std::shared_ptr<Country>& target)
 	if (!target->provinces.empty())
 	{
 		// acquire target's provinces
-		for (const auto& province: target->provinces)
+		for (const auto& province: target->provinces | std::views::values)
 		{
 			province->setOwnerTag(tag);
 			province->setControllerTag(tag);
@@ -379,7 +380,7 @@ bool EU4::Country::cultureSurvivesInCores(const std::map<std::string, std::share
 	// If this were a LANDLESS country, is there some other country that contains our people?
 	// If so, we shouldn't delete this country as it may reappear.
 
-	for (const auto& core: cores)
+	for (const auto& core: cores | std::views::values)
 	{
 		if (core->getOwnerTag().empty()) // this core province belongs to noone.
 			continue;
@@ -439,7 +440,7 @@ void EU4::Country::clearCores()
 double EU4::Country::getCountryWeight() const
 {
 	auto totalDev = 0.0;
-	for (const auto& province: provinces)
+	for (const auto& province: provinces | std::views::values)
 		totalDev += province->getProvinceWeight();
 	return totalDev;
 }
@@ -448,8 +449,19 @@ double EU4::Country::getAverageDevelopment() const
 {
 	if (provinces.empty())
 		return 0;
-	const double totalDev = std::accumulate(provinces.begin(), provinces.end(), 0.0, [](double sum, const std::shared_ptr<Province>& province) {
-		return sum + province->getBaseTax() + province->getBaseProduction() + province->getBaseManpower();
+	const double totalDev = std::accumulate(provinces.begin(), provinces.end(), 0.0, [](double sum, const auto& province) {
+		return sum + province.second->getBaseTax() + province.second->getBaseProduction() + province.second->getBaseManpower();
 	});
 	return totalDev / static_cast<double>(provinces.size());
+}
+
+void EU4::Country::removeProvince(int provinceID)
+{
+	if (provinces.contains(provinceID))
+	{
+		const auto& province = provinces.at(provinceID);
+		province->removeCore(tag);
+	}
+	provinces.erase(provinceID);
+	cores.erase(provinceID);
 }

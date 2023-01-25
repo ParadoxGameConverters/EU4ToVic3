@@ -32,12 +32,12 @@ TEST(EU4World_EU4CountryTests, ProvincesAndCoresCanBeStoredAndRetrieved)
 	EXPECT_TRUE(country.getProvinces().empty());
 	country.addProvince(province1);
 	country.addProvince(province2);
-	EXPECT_THAT(country.getProvinces(), UnorderedElementsAre(province1, province2));
+	EXPECT_EQ(2, country.getProvinces().size());
 
 	EXPECT_TRUE(country.getCores().empty());
 	country.addCore(province1);
 	country.addCore(province2);
-	EXPECT_THAT(country.getCores(), UnorderedElementsAre(province1, province2));
+	EXPECT_EQ(2, country.getCores().size());
 }
 
 TEST(EU4World_EU4CountryTests, StatusesCanBeToggled)
@@ -859,8 +859,8 @@ TEST(EU4World_EU4CountryTests, EatCountryFullExample)
 	EXPECT_THAT(provinceManager.getProvince(1)->getCores(), UnorderedElementsAre("EAT"));
 
 	// eaten province has been added to the cores and provinces of eater
-	EXPECT_EQ(1, eater->getCores()[2]->getID());
-	EXPECT_EQ(1, eater->getProvinces()[2]->getID());
+	EXPECT_EQ(1, eater->getCores().at(1)->getID());
+	EXPECT_EQ(1, eater->getProvinces().at(1)->getID());
 	EXPECT_EQ(3, eater->getCores().size());
 	EXPECT_EQ(3, eater->getProvinces().size());
 

@@ -41,19 +41,22 @@ EU4::World::World(const std::shared_ptr<Configuration>& theConfiguration, const 
 	const auto modFS = commonItems::ModFilesystem(EU4Path, mods);
 
 	Log(LogLevel::Info) << "-> Booting Loaders:";
-	Log(LogLevel::Info) << "\tRegions";
+	Log(LogLevel::Info) << "\t\tRegions";
 	regionManager.loadRegions(modFS);
-	Log(LogLevel::Info) << "\tColonial Regions";
+	Log(LogLevel::Info) << "\t\tColonial Regions";
 	regionManager.loadColonialRegions(modFS);
-	Log(LogLevel::Info) << "\tReligions";
+	Log(LogLevel::Info) << "\t\rTrade Companies";
+	regionManager.loadTradeCompanies(modFS);
+	regionManager.loadExcludedTradeCompanies("configurables/excluded_trade_companies.txt");
+	Log(LogLevel::Info) << "\t\tReligions";
 	religionLoader.loadReligions(modFS);
-	Log(LogLevel::Info) << "\tCultures";
+	Log(LogLevel::Info) << "\t\tCultures";
 	cultureLoader.loadCultures(modFS);
-	Log(LogLevel::Info) << "\tUnit Types";
+	Log(LogLevel::Info) << "\t\tUnit Types";
 	countryManager.loadUnitTypes(modFS);
-	Log(LogLevel::Info) << "\tCommon Countries";
+	Log(LogLevel::Info) << "\t\tCommon Countries";
 	countryManager.loadCommonCountries(modFS);
-	Log(LogLevel::Info) << "\tLocalizations";
+	Log(LogLevel::Info) << "\t\tLocalizations";
 	countryManager.loadLocalizations(modFS);
 	Log(LogLevel::Progress) << "16 %";
 
@@ -114,6 +117,10 @@ EU4::World::World(const std::shared_ptr<Configuration>& theConfiguration, const 
 
 	Log(LogLevel::Info) << "-> Dropping Dead, Empty and/or Coreless Nations";
 	countryManager.filterDeadNations(theConfiguration->configBlock.removeType);
+	Log(LogLevel::Progress) << "29 %";
+
+	Log(LogLevel::Info) << "-> Splitting Trade Companies into nations";
+	countryManager.splitTradeCompanies(provinceManager, regionManager, diplomacyParser);
 	Log(LogLevel::Progress) << "39 %";
 
 	Log(LogLevel::Info) << "*** Good-bye EU4, you served us well. ***";

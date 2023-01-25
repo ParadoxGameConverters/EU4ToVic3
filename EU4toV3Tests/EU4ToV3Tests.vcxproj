@@ -119,6 +119,8 @@
     <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ReligionLoader\ReligionEntry.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ReligionLoader\ReligionLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ReligionLoader\ReligionParser.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\TradeCompanyLoader\TradeCompanyEntry.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\TradeCompanyLoader\TradeCompanyLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\UnitTypeLoader\UnitTypeLoader.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\UnitTypeLoader\UnitTypeParser.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\DateItems.cpp" />
@@ -160,6 +162,7 @@
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\DiplomaticMapper\DiplomaticMapper.cpp" />
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ExcludedTradeCompaniesMapper\ExcludedTradeCompaniesMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapper.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapping.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Mappers\IGIdeologiesMapper\IGIdeologiesMapper.cpp" />
@@ -304,6 +307,8 @@
     <ClCompile Include="EU4WorldTests\LoaderTests\ReligionLoaderTests\ReligionEntryTests.cpp" />
     <ClCompile Include="EU4WorldTests\LoaderTests\ReligionLoaderTests\ReligionLoaderTests.cpp" />
     <ClCompile Include="EU4WorldTests\LoaderTests\ReligionLoaderTests\ReligionParserTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\TradeCompanyLoaderTests\TradeCompanyEntryTests.cpp" />
+    <ClCompile Include="EU4WorldTests\LoaderTests\TradeCompanyLoaderTests\TradeCompanyLoaderTests.cpp" />
     <ClCompile Include="EU4WorldTests\LoaderTests\UnitTypeLoaderTests\UnitTypeLoaderTests.cpp" />
     <ClCompile Include="EU4WorldTests\LoaderTests\UnitTypeLoaderTests\UnitTypeParserTests.cpp" />
     <ClCompile Include="EU4WorldTests\ProvinceManagerTests\DateItemsTests.cpp" />
@@ -345,6 +350,7 @@
     <ClCompile Include="MapperTests\CultureMapperTests\WesternizationMapperTests\WesternizationMapperTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\WesternizationMapperTests\WesternizationMappingTests.cpp" />
     <ClCompile Include="MapperTests\DiplomaticMapperTests\DiplomaticMapperTests.cpp" />
+    <ClCompile Include="MapperTests\ExcludedTradeCompaniesMapperTests\ExcludedTradeCompaniesMapperTests.cpp" />
     <ClCompile Include="MapperTests\IdeaEffectsMapperTests\IdeaEffectsMapperTests.cpp" />
     <ClCompile Include="MapperTests\IdeaEffectsMapperTests\IdeaEffectsMappingTests.cpp" />
     <ClCompile Include="MapperTests\IGIdeologiesMapperTests\IGIdeologiesMapperTests.cpp" />
@@ -872,6 +878,16 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\province_adjacencies.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\excluded_trade_companies.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\trade_companies\00_trade_companies.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/eu4installation/common/trade_companies</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

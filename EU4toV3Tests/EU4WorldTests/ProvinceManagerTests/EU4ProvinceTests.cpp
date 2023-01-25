@@ -24,6 +24,7 @@ TEST(EU4World_ProvinceTests, primitivesDefaultToDefaults)
 	EXPECT_TRUE(theProvince.getReligion().empty());
 
 	EXPECT_FALSE(theProvince.inHre());
+	EXPECT_FALSE(theProvince.isTradeCompany());
 	EXPECT_FALSE(theProvince.isTerritorialCore());
 
 	EXPECT_EQ(0.0, theProvince.getBaseTax());
@@ -44,6 +45,7 @@ TEST(EU4World_ProvinceTests, primitivesCanBeSet)
 	input << "religion = theReligion\n";
 
 	input << "hre = yes\n";
+	input << "active_trade_company = yes\n";
 	input << "territorial_core = irrelevant\n";
 
 	input << "base_tax = 3.000\n";
@@ -59,6 +61,7 @@ TEST(EU4World_ProvinceTests, primitivesCanBeSet)
 	EXPECT_EQ("theReligion", theProvince.getReligion());
 
 	EXPECT_TRUE(theProvince.isTerritorialCore());
+	EXPECT_TRUE(theProvince.isTradeCompany());
 	EXPECT_TRUE(theProvince.inHre());
 
 	EXPECT_DOUBLE_EQ(3.0, theProvince.getBaseTax());

@@ -200,6 +200,8 @@ class Country: commonItems::parser
 	[[nodiscard]] double calculateBureaucracyUsage(const std::map<std::string, Law>& lawsMap) const;
 	void addSector(const std::string& sectorName, const std::shared_ptr<Sector>& sector) { processedData.industrySectors.emplace(sectorName, sector); }
 
+	void leaveIsolationism();
+
   private:
 	void registerKeys();
 	void registerVanillaTypeKeys();

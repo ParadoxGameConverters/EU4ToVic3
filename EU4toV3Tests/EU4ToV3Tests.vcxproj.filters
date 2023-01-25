@@ -1132,6 +1132,24 @@
     <ClCompile Include="MapperTests\CoastalMapperTests\CoastalMapperTests.cpp">
       <Filter>MapperTests\CoastalMapperTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\TradeCompanyLoader\TradeCompanyEntry.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\TradeCompanyLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\TradeCompanyLoader\TradeCompanyLoader.cpp">
+      <Filter>ConverterFiles\EU4World\Loaders\TradeCompanyLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\ExcludedTradeCompaniesMapper\ExcludedTradeCompaniesMapper.cpp">
+      <Filter>ConverterFiles\Mappers\ExcludedTradeCompaniesMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\ExcludedTradeCompaniesMapperTests\ExcludedTradeCompaniesMapperTests.cpp">
+      <Filter>MapperTests\ExcludedTradeCompaniesMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\TradeCompanyLoaderTests\TradeCompanyEntryTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\TradeCompanyLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="EU4WorldTests\LoaderTests\TradeCompanyLoaderTests\TradeCompanyLoaderTests.cpp">
+      <Filter>EU4WorldTests\LoaderTests\TradeCompanyLoaderTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1854,6 +1872,21 @@
     <Filter Include="MapperTests\CoastalMapperTests">
       <UniqueIdentifier>{e36d27e5-770a-4604-bfd5-142d936796aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\EU4World\Loaders\TradeCompanyLoader">
+      <UniqueIdentifier>{17622889-d98f-4c1d-b20f-0bc706cd75b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConverterFiles\Mappers\ExcludedTradeCompaniesMapper">
+      <UniqueIdentifier>{21014fa0-7791-45d9-a6a9-cf70054753ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles\eu4installation\common\trade_companies">
+      <UniqueIdentifier>{25c5e07d-dd91-46ca-a560-f71c314c05d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapperTests\ExcludedTradeCompaniesMapperTests">
+      <UniqueIdentifier>{03649701-95eb-43da-b032-c7dd9d197ed1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4WorldTests\LoaderTests\TradeCompanyLoaderTests">
+      <UniqueIdentifier>{48e56511-bcd7-4793-814a-8724b09dec96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -2142,6 +2175,12 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\province_adjacencies.txt">
       <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\excluded_trade_companies.txt">
+      <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\eu4installation\common\trade_companies\00_trade_companies.txt">
+      <Filter>TestFiles\eu4installation\common\trade_companies</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

@@ -812,7 +812,7 @@ void V3::Country::calculateBaseLiteracy(const mappers::ReligionMapper& religionM
 	const auto numProvinces = provinces.size();
 	auto numUniversities = 0;
 
-	for (const auto& province: provinces)
+	for (const auto& province: provinces | std::views::values)
 		if (province->hasBuilding("university"))
 			numUniversities++;
 
@@ -903,4 +903,16 @@ int V3::Country::getPopCount(const std::vector<std::shared_ptr<SubState>>& theSu
 	return std::accumulate(theSubStates.begin(), theSubStates.end(), 0, [](int sum, const auto& substate) {
 		return sum + substate->getSubStatePops().getPopCount();
 	});
+}
+
+void V3::Country::leaveIsolationism()
+{
+	if (processedData.laws.contains("law_isolationism"))
+	{
+		processedData.laws.erase("law_isolationism");
+		processedData.laws.emplace("law_mercantilism");
+		processedData.techs.emplace("international_trade");
+		processedData.techs.emplace("tech_bureaucracy");
+		processedData.techs.emplace("urbanization");
+	}
 }
