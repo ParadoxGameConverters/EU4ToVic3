@@ -25,6 +25,7 @@ class Province: commonItems::convenientParser
 	[[nodiscard]] const auto& getCapitals() const { return capitals; }
 
 	[[nodiscard]] auto inHre() const { return inHRE; }
+	[[nodiscard]] auto isTradeCompany() const { return tradeCompany; }
 	[[nodiscard]] auto isTerritorialCore() const { return territorialCore; }
 
 	[[nodiscard]] auto getBaseTax() const { return baseTax; }
@@ -73,6 +74,7 @@ class Province: commonItems::convenientParser
 
 	bool inHRE = false;
 	bool territorialCore = false;
+	bool tradeCompany = false;
 	bool sea = false;
 
 	// province attributes for weights

@@ -37,6 +37,9 @@ void EU4::Province::registerKeys()
 		commonItems::ignoreItem("unused", theStream);
 		territorialCore = true;
 	});
+	registerKeyword("active_trade_company", [this](std::istream& theStream) {
+		tradeCompany = commonItems::getString(theStream) == "yes";
+	});
 	registerKeyword("hre", [this](std::istream& theStream) {
 		inHRE = commonItems::getString(theStream) == "yes";
 	});

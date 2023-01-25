@@ -15,6 +15,7 @@ class TradeCompanyLoader: commonItems::parser
 
 	[[nodiscard]] bool isProvinceInTradeRegion(int province) const;
 	[[nodiscard]] std::optional<TradeCompany> getTCForProvince(int province) const;
+	[[nodiscard]] const auto& getTradeCompany(const std::string& name) const { return tradingCompanies.at(name); }
 
   private:
 	void registerKeys();

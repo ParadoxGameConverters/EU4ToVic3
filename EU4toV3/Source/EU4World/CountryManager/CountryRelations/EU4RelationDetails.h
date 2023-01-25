@@ -8,9 +8,11 @@ namespace EU4
 class EU4RelationDetails: commonItems::convenientParser
 {
   public:
+	EU4RelationDetails() = default;
 	explicit EU4RelationDetails(std::istream& theStream);
 
 	[[nodiscard]] auto getRelations() const { return value; }
+	void setValue(int theValue) { value = theValue; }
 	[[nodiscard]] auto hasMilitaryAccess() const { return military_access; }
 	[[nodiscard]] const auto& getAttitude() const { return attitude; }
 	[[nodiscard]] std::optional<date> getTruceExpiry() const;

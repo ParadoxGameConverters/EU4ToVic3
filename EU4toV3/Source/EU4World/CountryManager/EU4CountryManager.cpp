@@ -1,7 +1,10 @@
 #include "EU4CountryManager.h"
 #include "CommonRegexes.h"
+#include "DiplomacyParser/DiplomacyParser.h"
 #include "Log.h"
 #include "ParserHelpers.h"
+#include "RegionManager/RegionManager.h"
+#include <iomanip>
 #include <ranges>
 
 namespace
@@ -326,4 +329,203 @@ void EU4::CountryManager::assignGPStatuses()
 		countries.at(tag)->setGP();
 
 	Log(LogLevel::Info) << "<> GPs assigned to " << prestigeTags.size() << " countries.";
+}
+
+void EU4::CountryManager::splitTradeCompanies(const ProvinceManager& provinceManager, const RegionManager& regionManager, DiplomacyParser& diplomacyParser)
+{
+	// filter by regions and tags
+	const auto& tcLoader = regionManager.getTradeCompanyLoader();
+	std::map<std::string, std::map<std::string, std::set<int>>> tagRegionProvinces; // tag-> region->provinces
+
+	for (const auto& [provinceID, province]: provinceManager.getAllProvinces())
+	{
+		if (!province->isTradeCompany())
+			continue;
+		// not yet.
+		const auto& tc = tcLoader.getTCForProvince(provinceID);
+		if (!tc)
+			continue;
+		// ok, where are we?
+		if (!tagRegionProvinces.contains(province->getOwnerTag()))
+			tagRegionProvinces.emplace(province->getOwnerTag(), std::map<std::string, std::set<int>>{});
+		if (!tagRegionProvinces.at(province->getOwnerTag()).contains(tc->name))
+			tagRegionProvinces.at(province->getOwnerTag()).emplace(tc->name, std::set<int>{});
+		tagRegionProvinces.at(province->getOwnerTag()).at(tc->name).emplace(provinceID);
+	}
+
+	// Now.. Now now now. Single province in a region should remain as is - as a trading port.
+	// More than one should get cut. So let's cut.
+	for (const auto& [tag, regionProvinces]: tagRegionProvinces)
+	{
+		for (const auto& [region, provinceIDs]: regionProvinces)
+		{
+			if (provinceIDs.size() <= 1)
+				continue;
+
+			const auto& tc = tcLoader.getTradeCompany(region);
+			std::map<int, std::shared_ptr<Province>> provinces;
+			for (const auto& provinceID: provinceIDs)
+				provinces.emplace(provinceID, provinceManager.getProvince(provinceID));
+			generateTradeCompany(provinces, tag, tc, diplomacyParser);
+		}
+	}
+}
+
+void EU4::CountryManager::generateTradeCompany(const std::map<int, std::shared_ptr<Province>>& provinces,
+	 const std::string& ownerTag,
+	 const TradeCompany& tc,
+	 DiplomacyParser& diplomacyParser)
+{
+	// Did we "accidentally" delete the owner?
+	if (!countries.contains(ownerTag))
+		return; // best not to dwell on this.
+
+	const auto tag = generateNewTag();
+	const auto tradingCountry = std::make_shared<Country>();
+	tradingCountry->setTag(tag);
+
+	const auto& owner = countries.at(ownerTag);
+	for (const auto& [provinceID, province]: provinces)
+	{
+		// clear provinces
+		owner->removeProvince(provinceID);
+		// reassign provinces
+		province->setOwnerTag(tag);
+		province->setControllerTag(tag);
+		province->addCore(tag);
+		tradingCountry->addProvince(province);
+		tradingCountry->addCore(province);
+	}
+
+	// lets transfer only what we actually need.
+	tradingCountry->setAdmTech(owner->getAdmTech());
+	tradingCountry->setDipTech(owner->getDipTech());
+	tradingCountry->setMilTech(owner->getMilTech());
+	tradingCountry->setTechGroup(owner->getTechGroup());
+	tradingCountry->setPrimaryCulture(owner->getPrimaryCulture());
+	tradingCountry->setReligion(owner->getReligion());
+	tradingCountry->setFlags(owner->getFlags());
+	tradingCountry->setModifiers(owner->getModifiers());
+	tradingCountry->setGovernmentRank(1); // force to 1.
+	tradingCountry->setReforms(owner->getReforms());
+	tradingCountry->setNationalIdeas(owner->getNationalIdeas());
+	tradingCountry->setEmbracedInstitutions(owner->getEmbracedInstitutions());
+	tradingCountry->setNationalColors(owner->getNationalColors()); // same color, buuut...
+	if (tc.color)
+		tradingCountry->setMapColor(*tc.color); // Let's try this for now.
+
+	// relations
+	tradingCountry->setOverLord(ownerTag);
+	auto relation = EU4RelationDetails();
+	relation.setValue(75);
+	tradingCountry->addRelation(ownerTag, relation);
+	owner->addRelation(tag, relation);
+
+	// subject status
+	EU4Agreement agreement;
+	agreement.setOriginTag(ownerTag);
+	agreement.setTargetTag(tag);
+	agreement.setAgreementType("private_enterprise");
+	diplomacyParser.addAgreement(agreement);
+
+	// Localizations are funny. First one is usually the one we want, the TRADE_COMPANY_SOUTH_AFRICA_Root_Culture_GetName
+	// That expands in locmapper to: [Root.Culture.GetName] South Africa Company, which we have to manually insert.
+	// Failing that, there's the second one: TRADE_COMPANY_SOUTH_AFRICA_Africa_Trade_Company
+	// That's a straight: South Africa Trade Company, no brains required. First one is better, if present.
+	// Failing everything, we generate.
+	bool haveName = false;
+	for (const auto& name: tc.locNameKeys)
+	{
+		if (const auto& locBlock = localizationLoader.getTextInEachLanguage(name); locBlock)
+		{
+			if (locBlock->contains("english") && locBlock->at("english").find("[Root.Culture.GetName]") != std::string::npos)
+			{
+				// we need to alter.
+				auto newBlock = *locBlock;
+				for (const auto& [language, longName]: *locBlock)
+				{
+					if (const auto& culName = localizationLoader.getTextForKey(owner->getPrimaryCulture(), language); culName)
+					{
+						auto pos1 = longName.find("[");
+						if (pos1 == std::string::npos)
+						{
+							newBlock.erase(language);
+							continue;
+						}
+						auto pos2 = longName.find("]");
+						if (pos2 == std::string::npos)
+						{
+							newBlock.erase(language);
+							continue;
+						}
+
+						newBlock[language] = longName.substr(0, pos1) + *culName + longName.substr(pos2 + 1, longName.size());
+					}
+					else
+					{
+						newBlock.erase(language);
+					}
+				}
+				if (!newBlock.empty())
+				{
+					haveName = true;
+					for (const auto& [language, longName]: newBlock)
+					{
+						tradingCountry->setLocalizationName(language, longName);
+						tradingCountry->setLocalizationAdjective(language, longName);
+					}
+					break;
+				}
+			}
+			else
+			{
+				// we're in the second one. Can't do anything about that.
+				for (const auto& [language, longName]: *locBlock)
+				{
+					tradingCountry->setLocalizationName(language, longName);
+					tradingCountry->setLocalizationAdjective(language, longName);
+				}
+				haveName = true;
+				break;
+			}
+		}
+	}
+	if (!haveName)
+	{
+		// Well shit. What are we even doing?
+		if (const auto& countryAdj = localizationLoader.getTextForKey(ownerTag + "_ADJ", "english"); countryAdj)
+		{
+			tradingCountry->setLocalizationName("english", *countryAdj + " Trading Company");
+			tradingCountry->setLocalizationAdjective("english", *countryAdj + " Trading Company");
+		}
+		else
+		{
+			// WTF time. We don't have any locs? NOT AN ISSUE! THIS WILL HAVE LOCS! THERE! THIS COUNTRY OF ALL COUNTRIES WILL HAVE LOCS!
+			tradingCountry->setLocalizationName("english", "Trading Company");
+			tradingCountry->setLocalizationAdjective("english", "Trading Company");
+			// THERE! HAPPY?!
+		}
+	}
+
+	// and FILE!
+	countries.emplace(tag, tradingCountry);
+}
+
+std::string EU4::CountryManager::generateNewTag()
+{
+	std::string eu4Tag;
+	do
+	{
+		std::ostringstream generatedV3TagStream;
+		generatedV3TagStream << generatedEU4TagPrefix << std::setfill('0') << std::setw(2) << generatedEU4TagSuffix;
+		eu4Tag = generatedV3TagStream.str();
+
+		++generatedEU4TagSuffix;
+		if (generatedEU4TagSuffix > 99)
+		{
+			generatedEU4TagSuffix = 0;
+			--generatedEU4TagPrefix;
+		}
+	} while (countries.contains(eu4Tag));
+	return eu4Tag;
 }

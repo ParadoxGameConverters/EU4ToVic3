@@ -23,6 +23,7 @@ class RegionManager: commonItems::parser
 
 	void loadTradeCompanies(const commonItems::ModFilesystem& modFS) { tradeCompanyLoader.loadTradeCompanies(modFS); }
 	void loadExcludedTradeCompanies(const std::string& filePath) { tradeCompanyLoader.loadExcludedTradeCompanies(filePath); }
+	[[nodiscard]] const auto& getTradeCompanyLoader() const { return tradeCompanyLoader; }
 
 	[[nodiscard]] bool provinceIsInRegion(int provinceID, const std::string& regionName) const;
 	[[nodiscard]] bool regionNameIsValid(const std::string& regionName) const;

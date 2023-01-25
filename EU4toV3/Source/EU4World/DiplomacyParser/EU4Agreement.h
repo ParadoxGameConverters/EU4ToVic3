@@ -8,9 +8,11 @@ namespace EU4
 class EU4Agreement: commonItems::parser
 {
   public:
+	EU4Agreement() = default;
 	explicit EU4Agreement(std::istream& theStream);
 
 	void setAgreementType(const std::string& _type) { agreementType = _type; }
+	void setOriginTag(const std::string& tag) { originTag = tag; }
 	void setTargetTag(const std::string& tag) { targetTag = tag; }
 
 	[[nodiscard]] const auto& getAgreementType() const { return agreementType; }

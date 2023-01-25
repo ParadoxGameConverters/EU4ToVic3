@@ -85,14 +85,14 @@ TEST(EU4World_CountryManagerTests, LinkingProvincesToOwnersWorks)
 	const auto& gat = manager.getCountry("GAT");
 
 	EXPECT_EQ(2, tag->getProvinces().size());
-	EXPECT_EQ(1, tag->getProvinces()[0]->getID());
-	EXPECT_TRUE(tag->getProvinces()[0]->getCapitals().empty());
-	EXPECT_EQ(2, tag->getProvinces()[1]->getID());
-	EXPECT_THAT(tag->getProvinces()[1]->getCapitals(), testing::UnorderedElementsAre("TAG"));
+	EXPECT_EQ(1, tag->getProvinces().at(1)->getID());
+	EXPECT_TRUE(tag->getProvinces().at(1)->getCapitals().empty());
+	EXPECT_EQ(2, tag->getProvinces().at(2)->getID());
+	EXPECT_THAT(tag->getProvinces().at(2)->getCapitals(), testing::UnorderedElementsAre("TAG"));
 
 	EXPECT_EQ(1, gat->getProvinces().size());
-	EXPECT_EQ(3, gat->getProvinces()[0]->getID());
-	EXPECT_THAT(gat->getProvinces()[0]->getCapitals(), testing::UnorderedElementsAre("GAT"));
+	EXPECT_EQ(3, gat->getProvinces().at(3)->getID());
+	EXPECT_THAT(gat->getProvinces().at(3)->getCapitals(), testing::UnorderedElementsAre("GAT"));
 }
 
 TEST(EU4World_CountryManagerTests, LinkingProvincesToCoreOwnersWorks)
@@ -118,12 +118,12 @@ TEST(EU4World_CountryManagerTests, LinkingProvincesToCoreOwnersWorks)
 	const auto& gat = manager.getCountry("GAT");
 
 	EXPECT_EQ(2, tag->getCores().size());
-	EXPECT_EQ(1, tag->getCores()[0]->getID());
-	EXPECT_EQ(2, tag->getCores()[1]->getID());
+	EXPECT_EQ(1, tag->getCores().at(1)->getID());
+	EXPECT_EQ(2, tag->getCores().at(2)->getID());
 
 	EXPECT_EQ(2, gat->getCores().size());
-	EXPECT_EQ(1, gat->getCores()[0]->getID());
-	EXPECT_EQ(3, gat->getCores()[1]->getID());
+	EXPECT_EQ(1, gat->getCores().at(1)->getID());
+	EXPECT_EQ(3, gat->getCores().at(3)->getID());
 }
 
 TEST(EU4World_CountryManagerTests, HREStatusInheritedFromCapitalProvince)
