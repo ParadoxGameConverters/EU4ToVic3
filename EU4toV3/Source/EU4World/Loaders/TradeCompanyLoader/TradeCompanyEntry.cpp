@@ -22,7 +22,7 @@ void EU4::TradeCompanyEntry::registerKeys()
 	});
 	registerKeyword("names", [this](std::istream& theStream) {
 		const auto entry = commonItems::stringOfItem(theStream).getString();
-		if (entry.contains("trigger")) // let's not go there - triggers need actual comprehension.
+		if (entry.find("trigger") != std::string::npos) // let's not go there - triggers need actual comprehension.
 			return;
 		std::stringstream theEntry(entry);
 		auto names = commonItems::assignments(theEntry).getAssignments();
