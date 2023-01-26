@@ -353,13 +353,13 @@ void EU4::CountryManager::splitTradeCompanies(const ProvinceManager& provinceMan
 		tagRegionProvinces.at(province->getOwnerTag()).at(tc->name).emplace(provinceID);
 	}
 
-	// Now.. Now now now. Single province in a region should remain as is - as a trading port.
+	// Now.. Now now now. Single province, or 3, in a region should remain as is - as a trading port.
 	// More than one should get cut. So let's cut.
 	for (const auto& [tag, regionProvinces]: tagRegionProvinces)
 	{
 		for (const auto& [region, provinceIDs]: regionProvinces)
 		{
-			if (provinceIDs.size() <= 1)
+			if (provinceIDs.size() <= 3)
 				continue;
 
 			const auto& tc = tcLoader.getTradeCompany(region);
@@ -438,13 +438,19 @@ void EU4::CountryManager::generateTradeCompany(const std::map<int, std::shared_p
 	{
 		if (const auto& locBlock = localizationLoader.getTextInEachLanguage(name); locBlock)
 		{
+			auto newBlock = *locBlock;
 			if (locBlock->contains("english") && locBlock->at("english").find("[Root.Culture.GetName]") != std::string::npos)
 			{
 				// we need to alter.
-				auto newBlock = *locBlock;
 				for (const auto& [language, longName]: *locBlock)
 				{
-					if (const auto& culName = localizationLoader.getTextForKey(owner->getPrimaryCulture(), language); culName)
+					std::string insertText;
+					if (const auto adj = localizationLoader.getTextForKey(ownerTag + "_ADJ", language); adj)
+						insertText = *adj; // "DUTCH East India Company" because NET_ADJ="Dutch"
+					else if (const auto& culName = localizationLoader.getTextForKey(owner->getPrimaryCulture(), language); culName)
+						insertText = *culName;
+
+					if (!insertText.empty())
 					{
 						auto pos1 = longName.find("[");
 						if (pos1 == std::string::npos)
@@ -459,33 +465,26 @@ void EU4::CountryManager::generateTradeCompany(const std::map<int, std::shared_p
 							continue;
 						}
 
-						newBlock[language] = longName.substr(0, pos1) + *culName + longName.substr(pos2 + 1, longName.size());
+						newBlock[language] = longName.substr(0, pos1) + insertText + longName.substr(pos2 + 1, longName.size());
 					}
 					else
 					{
 						newBlock.erase(language);
 					}
 				}
-				if (!newBlock.empty())
-				{
-					haveName = true;
-					for (const auto& [language, longName]: newBlock)
-					{
-						tradingCountry->setLocalizationName(language, longName);
-						tradingCountry->setLocalizationAdjective(language, longName);
-					}
-					break;
-				}
 			}
 			else
 			{
 				// we're in the second one. Can't do anything about that.
-				for (const auto& [language, longName]: *locBlock)
+			}
+			if (!newBlock.empty())
+			{
+				haveName = true;
+				for (const auto& [language, longName]: newBlock)
 				{
 					tradingCountry->setLocalizationName(language, longName);
 					tradingCountry->setLocalizationAdjective(language, longName);
 				}
-				haveName = true;
 				break;
 			}
 		}
