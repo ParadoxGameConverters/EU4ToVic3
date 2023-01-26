@@ -13,6 +13,6 @@ TEST(Mappers_ExcludedTradeCompaniesMapperTests, TCsCanBeLoaded)
 	mappers::ExcludedTradeCompaniesMapper mapper;
 	mapper.loadMappingRules("TestFiles/configurables/excluded_trade_companies.txt");
 
-	ASSERT_TRUE(10, mapper.getExcludedTCs().size());
+	ASSERT_EQ(10, mapper.getExcludedTCs().size());
 	EXPECT_TRUE(mapper.getExcludedTCs().contains("trade_company_west_africa"));
 }

@@ -4,17 +4,15 @@ export CC=/usr/bin/gcc-11 &&
 export CXX=/usr/bin/g++-11 &&
 
 rm -rf Release/ &&
-mkdir Release &&
-cd EU4toV3 &&
+cd Fronter &&
+./build_linux.sh &&
+mv Release ../ &&
+cd ../EU4toV3 &&
 rm -rf build &&
 rm -rf Release-Linux &&
 cmake -H. -Bbuild &&
 cmake --build build -- -j40  &&
 mv Release-Linux ../Release/EU4ToVic3 &&
-cd .. &&
-
-cd Fronter.NET &&
-dotnet publish -p:PublishProfile=linux-x64 --output:"../Release" &&
 cd .. &&
 
 cp EU4toV3/Data_Files/*yml Release/Configuration/ &&
