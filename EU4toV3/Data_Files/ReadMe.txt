@@ -26,7 +26,7 @@ CREDITS
 An (incomplete) list of those who contributed effort to this mammoth undertaking
 
 Elfangor567		- Code, Data Files
-Gawquon			- Code, Data Files
+Gawquon			- The Economy, Code, Data Files
 Iohannes 		- Assets, Data Files
 Idhrendur		- Sanity Checks, Review
 Licarious		- Mapping, Code Support

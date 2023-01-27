@@ -326,7 +326,7 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	{
 		return false;
 	}
-	// Important, can't build a building if we have no CP to build it. This is what end the loop.
+	// Important, can't build a building if we have no CP to build it. This is what ends the loop.
 	if (building.getConstructionCost() > CPBudget)
 	{
 		return false;
