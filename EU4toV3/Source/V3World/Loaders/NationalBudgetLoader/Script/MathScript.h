@@ -4,7 +4,7 @@
 
 namespace V3
 {
-/* A Math script is a primative form of Paradox's weight modifier script
+/* A Math script is a primitive form of Paradox's weight modifier script
  *  It only supports a single trigger.
  */
 class Country;
