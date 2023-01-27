@@ -172,12 +172,29 @@ void mappers::CultureMapper::registerKeys()
 	 bool silent)
 {
 	for (const auto& cultureMappingRule: cultureMapRules)
-		if (const auto& possibleMatch = cultureMappingRule.cultureMatch(clayManager, cultureLoader, religionLoader, eu4culture, eu4religion, v3state, v3ownerTag);
-			 possibleMatch)
+	{
+		if (!neoCultureRequest)
 		{
-			usedCultures.emplace(*possibleMatch);
-			return *possibleMatch;
+			if (const auto& possibleMatch =
+					  cultureMappingRule.cultureMatch(clayManager, cultureLoader, religionLoader, eu4culture, eu4religion, v3state, v3ownerTag);
+				 possibleMatch)
+			{
+				usedCultures.emplace(*possibleMatch);
+				return *possibleMatch;
+			}
 		}
+		else
+		{
+			// we want neocultures in a very specific region. General rules don't apply unless they cover our region.
+			if (const auto& possibleMatch =
+					  cultureMappingRule.cultureRegionalMatch(clayManager, cultureLoader, religionLoader, eu4culture, eu4religion, v3state, v3ownerTag);
+				 possibleMatch)
+			{
+				usedCultures.emplace(*possibleMatch);
+				return *possibleMatch;
+			}
+		}
+	}
 
 	// if this normal culture is already recorded as unmapped, all is well.
 	if (!neoCultureRequest && unmappedCultures.contains(eu4culture))

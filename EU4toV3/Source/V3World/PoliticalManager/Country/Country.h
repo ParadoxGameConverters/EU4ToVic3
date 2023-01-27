@@ -40,6 +40,7 @@ struct Law;
 struct VanillaCommonCountryData
 {
 	std::string type;
+	std::string vanillaType;
 	std::string tier;
 	std::set<std::string> cultures;
 	std::string religion;
@@ -107,6 +108,7 @@ class Country: commonItems::parser
   public:
 	Country() = default;
 	void initializeCountry(std::istream& theStream);
+	void storeVanillaCountryType(std::istream& theStream);
 	void setTag(const std::string& theTag) { tag = theTag; }
 	void setIndustryWeight(const double theIndustryWeight) { processedData.industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theBudget) { processedData.CPBudget = theBudget; }
@@ -198,8 +200,11 @@ class Country: commonItems::parser
 	[[nodiscard]] double calculateBureaucracyUsage(const std::map<std::string, Law>& lawsMap) const;
 	void addSector(const std::string& sectorName, const std::shared_ptr<Sector>& sector) { processedData.industrySectors.emplace(sectorName, sector); }
 
+	void leaveIsolationism();
+
   private:
 	void registerKeys();
+	void registerVanillaTypeKeys();
 
 	void convertCapital(const ClayManager& clayManager);
 	void convertReligion(const mappers::ReligionMapper& religionMapper);

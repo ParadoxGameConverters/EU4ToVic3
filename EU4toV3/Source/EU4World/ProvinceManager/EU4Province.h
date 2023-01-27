@@ -25,6 +25,7 @@ class Province: commonItems::convenientParser
 	[[nodiscard]] const auto& getCapitals() const { return capitals; }
 
 	[[nodiscard]] auto inHre() const { return inHRE; }
+	[[nodiscard]] auto isTradeCompany() const { return tradeCompany; }
 	[[nodiscard]] auto isTerritorialCore() const { return territorialCore; }
 
 	[[nodiscard]] auto getBaseTax() const { return baseTax; }
@@ -56,6 +57,8 @@ class Province: commonItems::convenientParser
 	// These relate to province weight, to be used in pop shaping.
 	void determineProvinceWeight(const BuildingCostLoader& buildingTypes);
 	[[nodiscard]] auto getProvinceWeight() const { return provinceWeight; }
+	[[nodiscard]] auto getInvestedWeight() const { return investedWeight; }
+	void setInvestmentFactor(double factor) { investmentFactor = factor; }
 	[[nodiscard]] auto getInvestmentFactor() const { return investmentFactor; }
 
   private:
@@ -71,14 +74,16 @@ class Province: commonItems::convenientParser
 
 	bool inHRE = false;
 	bool territorialCore = false;
+	bool tradeCompany = false;
 	bool sea = false;
 
 	// province attributes for weights
 	double baseTax = 0;
 	double baseProduction = 0;
 	double baseManpower = 0;
-	double provinceWeight = 0;
-	double investmentFactor = 0;
+	double provinceWeight = 0;	  // absolute dev + buildings
+	double investedWeight = 0;	  // devpushed dev + buildings
+	double investmentFactor = 0; // a log function to normalise the investedWeight.
 
 	ProvinceHistory provinceHistory;
 	std::set<std::string> cores;

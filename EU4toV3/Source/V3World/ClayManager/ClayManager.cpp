@@ -302,7 +302,7 @@ std::vector<std::shared_ptr<V3::SubState>> V3::ClayManager::chunkToSubStatesTran
 		const double subStateSizeFactor = static_cast<double>(subState->getProvinces().size()) / provincesCount;
 
 		// substate weight is an *outwardly* factor, when comparing the impact of that substate's metadata against all other
-		// substates in the same state.
+		// substates in the same state - or superregion.
 		const double subStateWeight = totalChunkWeight * subStateSizeFactor;
 
 		// we need to return to the largest substate later to set a capital.
@@ -532,7 +532,7 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		if (ownerTag.empty())
 			continue;
 
-		// We have a substate owner. Is he vanilla-decentralized? Or are we doing VN?
+		// We have a substate owner. Is he not vanilla-decentralized? And are we not doing VN? Then bail.
 		if (!politicalManager.isTagDecentralized(ownerTag) && !vn)
 			continue;
 
@@ -541,7 +541,6 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		for (const auto& provinceID: subStateEntry.getProvinces())
 			if (unassignedProvinces.contains(provinceID))
 				availableProvinces.emplace(provinceID, unassignedProvinces.at(provinceID));
-
 		// Anything to work with?
 		if (availableProvinces.empty())
 			continue;
@@ -872,4 +871,22 @@ void V3::ClayManager::redistributeResourcesAndLandshares()
 void V3::ClayManager::loadAdjacencies(const std::string& filePath)
 {
 	coastalMapper.loadAdjacencies(filePath);
+}
+
+std::shared_ptr<V3::SuperRegion> V3::ClayManager::getParentSuperRegion(const std::string& regionName) const
+{
+	for (const auto& [superRegionName, superRegion]: superRegions)
+	{
+		if (superRegionName == regionName)
+			return superRegion;
+		for (const auto& [currentRegionName, region]: superRegion->getRegions())
+		{
+			if (currentRegionName == regionName)
+				return superRegion;
+			for (const auto& stateName: region->getStates() | std::views::keys)
+				if (stateName == regionName)
+					return superRegion;
+		}
+	}
+	return nullptr;
 }

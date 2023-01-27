@@ -1,6 +1,5 @@
 #include "Country.h"
 #include "ClayManager/ClayManager.h"
-#include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "CommonRegexes.h"
 #include "CountryManager/EU4Country.h"
@@ -40,6 +39,13 @@ void V3::Country::initializeCountry(std::istream& theStream)
 {
 	registerKeys();
 	vanillaData = VanillaCommonCountryData();
+	parseStream(theStream);
+	clearRegisteredKeywords();
+}
+
+void V3::Country::storeVanillaCountryType(std::istream& theStream)
+{
+	registerVanillaTypeKeys();
 	parseStream(theStream);
 	clearRegisteredKeywords();
 }
@@ -208,6 +214,14 @@ void V3::Country::registerKeys()
 	registerKeyword("is_named_from_capital", [this](const std::string& unused, std::istream& theStream) {
 		commonItems::ignoreItem(unused, theStream);
 		vanillaData->is_named_from_capital = true;
+	});
+	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+}
+
+void V3::Country::registerVanillaTypeKeys()
+{
+	registerKeyword("country_type", [this](std::istream& theStream) {
+		vanillaData->vanillaType = commonItems::getString(theStream);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
@@ -467,7 +481,10 @@ void V3::Country::copyVanillaData(const LocalizationLoader& v3LocLoader, const E
 		return;
 
 	processedData.color = vanillaData->color;
-	processedData.type = vanillaData->type;
+	if (!vanillaData->vanillaType.empty() && vn) // restore *vanilla* vanilla country type.
+		processedData.type = vanillaData->vanillaType;
+	else
+		processedData.type = vanillaData->type;
 	processedData.tier = vanillaData->tier;
 	processedData.cultures = vanillaData->cultures;
 	processedData.religion = vanillaData->religion;
@@ -620,7 +637,7 @@ void V3::Country::determineCountryType()
 	return usage;
 }
 
-[[nodiscard]] double V3::Country::calcInstitutionBureaucracy() const
+double V3::Country::calcInstitutionBureaucracy() const
 {
 	double usage = 0;
 	const double cost = getPopCount() / 100000.0;
@@ -631,7 +648,7 @@ void V3::Country::determineCountryType()
 	return usage;
 }
 
-[[nodiscard]] double V3::Country::calcCharacterBureaucracy() const
+double V3::Country::calcCharacterBureaucracy() const
 {
 	double usage = 0;
 
@@ -740,10 +757,19 @@ void V3::Country::calculateWesternization(double topTech,
 			Log(LogLevel::Warning) << "Trying to determine westernization of " << tag << " with no cultures!";
 		else
 		{
-			if (cultureMapper.getWesternizationScoreForCulture(*processedData.cultures.begin()) == 10)
+			const auto eurociv = cultureMapper.getWesternizationScoreForCulture(*processedData.cultures.begin());
+			if (eurociv == 10)
+			{
 				processedData.civLevel = 100;
+			}
 			else
-				processedData.civLevel *= static_cast<double>(cultureMapper.getWesternizationScoreForCulture(*processedData.cultures.begin())) / 10.0;
+			{
+				// Try to preserve eu4 centralized countries that suffer from *shit* tech.
+				if (processedData.civLevel >= 20)
+					processedData.civLevel = std::min(processedData.civLevel, eurociv * 10.0);
+				else
+					processedData.civLevel = std::max(processedData.civLevel, eurociv * 10.0);
+			}
 			processedData.industryFactor = cultureMapper.getIndustryScoreForCulture(*processedData.cultures.begin()) / 5.0; // ranges 0.0-2.0
 		}
 	}
@@ -786,7 +812,7 @@ void V3::Country::calculateBaseLiteracy(const mappers::ReligionMapper& religionM
 	const auto numProvinces = provinces.size();
 	auto numUniversities = 0;
 
-	for (const auto& province: provinces)
+	for (const auto& province: provinces | std::views::values)
 		if (province->hasBuilding("university"))
 			numUniversities++;
 
@@ -877,4 +903,16 @@ int V3::Country::getPopCount(const std::vector<std::shared_ptr<SubState>>& theSu
 	return std::accumulate(theSubStates.begin(), theSubStates.end(), 0, [](int sum, const auto& substate) {
 		return sum + substate->getSubStatePops().getPopCount();
 	});
+}
+
+void V3::Country::leaveIsolationism()
+{
+	if (processedData.laws.contains("law_isolationism"))
+	{
+		processedData.laws.erase("law_isolationism");
+		processedData.laws.emplace("law_mercantilism");
+		processedData.techs.emplace("international_trade");
+		processedData.techs.emplace("tech_bureaucracy");
+		processedData.techs.emplace("urbanization");
+	}
 }

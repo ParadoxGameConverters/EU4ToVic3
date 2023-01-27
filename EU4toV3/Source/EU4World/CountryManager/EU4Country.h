@@ -23,6 +23,7 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getProvinces() const { return provinces; }
 	[[nodiscard]] const auto& getCores() const { return cores; }
 	void addProvince(const std::shared_ptr<Province>& province);
+	void removeProvince(int provinceID);
 	void addCore(const std::shared_ptr<Province>& core);
 
 	// statuses
@@ -41,14 +42,20 @@ class Country: commonItems::parser
 	[[nodiscard]] auto getCapital() const { return capital; }
 	[[nodiscard]] auto getScore() const { return score; }
 	[[nodiscard]] auto getAdmTech() const { return admTech; }
+	void setAdmTech(double tech) { admTech = tech; }
 	[[nodiscard]] auto getDipTech() const { return dipTech; }
+	void setDipTech(double tech) { dipTech = tech; }
 	[[nodiscard]] auto getMilTech() const { return milTech; }
+	void setMilTech(double tech) { milTech = tech; }
 	[[nodiscard]] const auto& getTechGroup() const { return techGroup; }
+	void setTechGroup(const std::string& group) { techGroup = group; }
 	[[nodiscard]] double getAverageDevelopment() const;
 
 	// culture religion
 	[[nodiscard]] const auto& getPrimaryCulture() const { return primaryCulture; }
+	void setPrimaryCulture(const std::string& culture) { primaryCulture = culture; }
 	[[nodiscard]] const auto& getReligion() const { return religion; }
+	void setReligion(const std::string& rel) { religion = rel; }
 
 	// japan
 	[[nodiscard]] auto getIsolationism() const { return isolationism; }
@@ -58,8 +65,10 @@ class Country: commonItems::parser
 	// flags and variables
 	[[nodiscard]] auto getFlags() const { return flags; }
 	void addFlag(const std::string& theFlag) { flags.emplace(theFlag); }
+	void setFlags(const std::set<std::string>& fla) { flags = fla; }
 	[[nodiscard]] bool hasFlag(const std::string&) const;
 	[[nodiscard]] auto getModifiers() const { return modifiers; }
+	void setModifiers(const std::set<std::string>& mods) { modifiers = mods; }
 	[[nodiscard]] bool hasModifier(const std::string&) const;
 
 	// characters and armies
@@ -68,6 +77,7 @@ class Country: commonItems::parser
 
 	// relations
 	[[nodiscard]] const auto& getRelations() const { return relations; }
+	void addRelation(const std::string& targetTag, const EU4RelationDetails& relation) { relations.emplace(targetTag, relation); }
 	[[nodiscard]] const auto& getRivals() const { return rivals; }
 
 	// country stats
@@ -81,20 +91,27 @@ class Country: commonItems::parser
 
 	// dependent stuff
 	[[nodiscard]] auto isColony() const { return colony; }
+	[[nodiscard]] auto isTradeCompany() const { return tradeCompany; }
+	void setTradeCompany() { tradeCompany = true; }
 	[[nodiscard]] const auto& getOverLord() const { return overlord; }
+	void setOverLord(const std::string& overLordTag) { overlord = overLordTag; }
 	[[nodiscard]] auto getLibertyDesire() const { return libertyDesire; }
 
 	// government, reforms, ideas, institutions
 	[[nodiscard]] const auto& getGovernment() const { return government; }
 	[[nodiscard]] auto getGovernmentRank() const { return governmentRank; }
+	void setGovernmentRank(int rank) { governmentRank = rank; }
 	[[nodiscard]] const auto& getReforms() const { return governmentReforms; }
 	[[nodiscard]] bool hasReform(const std::string&) const;
 	void addReform(const std::string& theReform) { governmentReforms.emplace(theReform); }
+	void setReforms(const std::set<std::string>& forms) { governmentReforms = forms; }
 	[[nodiscard]] const auto& getPolicies() const { return policies; }
 	[[nodiscard]] const auto& getEmbracedInstitutions() const { return embracedInstitutions; }
+	void setEmbracedInstitutions(const std::vector<bool>& institutions) { embracedInstitutions = institutions; }
 	[[nodiscard]] int getNumEmbracedInstitutions() const;
 	[[nodiscard]] bool hasNationalIdea(const std::string&) const;
 	[[nodiscard]] const auto& getNationalIdeas() const { return nationalIdeas; }
+	void setNationalIdeas(const std::set<std::string>& ideas) { nationalIdeas = ideas; }
 
 	// manufactories
 	[[nodiscard]] auto getManufactoryCount() const { return mfgCount + mfgTransfer; }
@@ -113,6 +130,7 @@ class Country: commonItems::parser
 
 	// colors
 	[[nodiscard]] const auto& getNationalColors() const { return nationalColors; }
+	void setNationalColors(const NationalSymbol& symbol) { nationalColors = symbol; }
 	void setMapColor(const commonItems::Color& color) { nationalColors.setMapColor(color); }
 
 	// processing
@@ -134,8 +152,8 @@ class Country: commonItems::parser
 	void clearArmies();
 
 	std::string tag;
-	std::vector<std::shared_ptr<Province>> provinces;
-	std::vector<std::shared_ptr<Province>> cores;
+	std::map<int, std::shared_ptr<Province>> provinces;
+	std::map<int, std::shared_ptr<Province>> cores;
 
 	bool inHRE = false;
 	bool holyRomanEmperor = false;
@@ -183,6 +201,7 @@ class Country: commonItems::parser
 	double armyProfessionalism = 0;
 
 	bool colony = false;
+	bool tradeCompany = false;
 	std::string overlord;
 	double libertyDesire = 0.0;
 

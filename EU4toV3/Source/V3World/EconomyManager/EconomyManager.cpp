@@ -300,7 +300,7 @@ std::pair<double, double> V3::EconomyManager::civLevelCountryBudgets() const
 	const double globalIndustryFactor = (totalCivLevel / static_cast<double>(centralizedCountries.size()) / econDefines.getMeanCivlevel()) - 1;
 
 	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << (globalIndustryFactor + 1) * 100
-							  << "% industrial compared to baseline. Compensating";
+							  << "% industrial compared to baseline. Compensating.";
 
 	return std::pair(accumulatedWeight, globalIndustryFactor);
 }
@@ -374,7 +374,7 @@ double V3::EconomyManager::calculateGlobalPopFactor(const PoliticalManager& poli
 	const double globalPopFactor = centralizedPopRatio / econDefines.getCentralizedPopRatio() - 1;
 
 	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << centralizedPopRatio * 100
-							  << "% Centralized by population. Adjusting global CP values by: " << globalPopFactor * 100 << "%";
+							  << "% Centralized by population. Adjusting global CP values by: " << globalPopFactor * 100 << "%.";
 	return globalPopFactor;
 }
 

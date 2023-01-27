@@ -17,11 +17,12 @@
 #include <numeric>
 #include <ranges>
 
-void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFilesystem& modFS)
+void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFilesystem& modFS, const commonItems::ModFilesystem& vanillaFS)
 {
 	Log(LogLevel::Info) << "-> Loading Vanilla Countries.";
 	CountryDefinitionLoader definitionLoader;
 	definitionLoader.loadCommonCountries(modFS);
+	definitionLoader.reloadCommonCountries(vanillaFS);
 	countries = definitionLoader.getCountries();
 	Log(LogLevel::Info) << "<> " << countries.size() << " vanilla countries loaded.";
 
@@ -469,6 +470,12 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 		r2.increaseRelations(boost);
 
 		// fix specifics
+		if (agreement.getAgreementType() == "private_enterprise" && country2->second->getSourceCountry()->isTradeCompany())
+		{
+			// if this is a TC agreement, push everyone out of isolationism into mercantilism!
+			country1->second->leaveIsolationism();
+			country2->second->leaveIsolationism();
+		}
 		if (newAgreement.type == "vassal")
 		{
 			// Watch for westernization!

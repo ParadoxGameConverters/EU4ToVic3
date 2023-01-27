@@ -26,8 +26,8 @@ std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
 	defaults.loadDefaultMap(eu4FS);
 	EU4::DefinitionScraper definitions;
 	definitions.loadDefinitions(eu4FS);
-	EU4::RegionManager regionMapper;
-	regionMapper.loadRegions(eu4FS);
+	EU4::RegionManager regionManager;
+	regionManager.loadRegions(eu4FS);
 
 	std::stringstream provinceStream;
 	provinceStream << "-1={}\n";																																		// sea, no ownership
@@ -44,8 +44,8 @@ std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
 	provinceManager.loadProvinces(provinceStream);
 	provinceManager.loadDefaultMapParser(defaults);
 	provinceManager.loadDefinitionScraper(definitions);
-	provinceManager.classifyProvinces(regionMapper);
-	provinceManager.buildProvinceWeights();
+	provinceManager.classifyProvinces(regionManager);
+	provinceManager.buildProvinceWeights(regionManager);
 	provinceManager.buildPopRatios({}, false);
 
 	mappers::ProvinceMapper provinceMapper;
@@ -104,7 +104,7 @@ V3::PoliticalManager prepWorld()
 	clayManager.shoveRemainingProvincesIntoSubStates();
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 
-	popManager.generatePops(clayManager);
+	popManager.generatePops(clayManager, Configuration::POPSHAPES::Vanilla);
 
 	return politicalManager;
 }

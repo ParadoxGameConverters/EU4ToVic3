@@ -13,6 +13,7 @@ class DiplomacyParser: commonItems::parser
 	void loadDiplomacy(std::istream& theStream);
 
 	[[nodiscard]] const auto& getAgreements() const { return agreements; }
+	void addAgreement(const EU4Agreement& agreement) { agreements.emplace_back(agreement); }
 
   private:
 	void registerKeys();

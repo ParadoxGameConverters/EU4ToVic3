@@ -24,8 +24,8 @@ V3::ClayManager generateChunks()
 	defaults.loadDefaultMap(eu4FS);
 	EU4::DefinitionScraper definitions;
 	definitions.loadDefinitions(eu4FS);
-	EU4::RegionManager regionMapper;
-	regionMapper.loadRegions(eu4FS);
+	EU4::RegionManager regionManager;
+	regionManager.loadRegions(eu4FS);
 
 	std::stringstream provinceStream;
 	provinceStream << "-1={}\n"; // sea, no ownership
@@ -48,8 +48,8 @@ V3::ClayManager generateChunks()
 	provinceManager.getProvince(3)->addCapital("TA3");
 	provinceManager.loadDefaultMapParser(defaults);
 	provinceManager.loadDefinitionScraper(definitions);
-	provinceManager.classifyProvinces(regionMapper);
-	provinceManager.buildProvinceWeights();
+	provinceManager.classifyProvinces(regionManager);
+	provinceManager.buildProvinceWeights(regionManager);
 	provinceManager.buildPopRatios({}, false);
 
 	mappers::ProvinceMapper provinceMapper;
@@ -90,7 +90,7 @@ std::tuple<V3::ClayManager, V3::PoliticalManager> assignSubStateOwnership()
 	countryMapper->loadMappingRules("TestFiles/configurables/country_mappings.txt");
 	V3::PoliticalManager politicalManager;
 	politicalManager.loadCountryMapper(countryMapper);
-	politicalManager.initializeVanillaCountries(modFS);
+	politicalManager.initializeVanillaCountries(modFS, modFS);
 	politicalManager.importEU4Countries(countries);
 	clayManager.assignSubStateOwnership(politicalManager.getCountries(), *countryMapper);
 
@@ -203,7 +203,7 @@ TEST(V3World_ClayManagerTests, clayManagerCanLinkStatesToSuperRegions)
 	const auto& regionA = superRegion1->getRegions().at("region_a");
 	const auto& states = regionA->getStates();
 
-	EXPECT_EQ(2, states.size());
+	EXPECT_EQ(4, states.size());
 
 	const auto& state_test_1 = states.at("STATE_TEST_1");
 

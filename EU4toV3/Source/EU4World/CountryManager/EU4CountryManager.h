@@ -13,6 +13,8 @@
 
 namespace EU4
 {
+class RegionManager;
+class DiplomacyParser;
 class CountryManager: public commonItems::parser
 {
   public:
@@ -43,6 +45,7 @@ class CountryManager: public commonItems::parser
 	void mergeNations();
 	void filterDeadNations(Configuration::DEADCORES toggle);
 	void assignGPStatuses();
+	void splitTradeCompanies(const ProvinceManager& provinceManager, const RegionManager& regionManager, DiplomacyParser& diplomacyParser);
 
   private:
 	void registerKeys();
@@ -50,6 +53,12 @@ class CountryManager: public commonItems::parser
 	void removeEmptyNations();
 	void removeDeadLandlessNations();
 	void removeLandlessNations();
+	void generateTradeCompany(const std::map<int, std::shared_ptr<Province>>& provinces,
+		 const std::string& ownerTag,
+		 const TradeCompany& tc,
+		 DiplomacyParser& diplomacyParser);
+
+	[[nodiscard]] std::string generateNewTag();
 
 	std::map<std::string, std::shared_ptr<Country>> countries;
 
@@ -57,6 +66,9 @@ class CountryManager: public commonItems::parser
 	CommonCountryLoader commonCountryLoader;
 	mappers::NationMergeMapper nationMergeMapper;
 	EU4LocalizationLoader localizationLoader;
+
+	char generatedEU4TagPrefix = 'X';
+	int generatedEU4TagSuffix = 0;
 };
 } // namespace EU4
 

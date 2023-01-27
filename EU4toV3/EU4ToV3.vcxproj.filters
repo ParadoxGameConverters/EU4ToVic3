@@ -651,6 +651,15 @@
     <ClCompile Include="Source\Mappers\CoastalMapper\CoastalMapper.cpp">
       <Filter>Mappers\CoastalMapper</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\TradeCompanyLoader\TradeCompanyLoader.cpp">
+      <Filter>EU4World\Loaders\TradeCompanyLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EU4World\Loaders\TradeCompanyLoader\TradeCompanyEntry.cpp">
+      <Filter>EU4World\Loaders\TradeCompanyLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mappers\ExcludedTradeCompaniesMapper\ExcludedTradeCompaniesMapper.cpp">
+      <Filter>Mappers\ExcludedTradeCompaniesMapper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\EU4ToVic3Converter.h" />
@@ -1275,7 +1284,6 @@
     <ClInclude Include="Source\Mappers\VNColonialMapper\VNColonialMapping.h">
       <Filter>Mappers\VNColonialMapper</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Helpers\rakaly_wrapper.h" />
     <ClInclude Include="Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaAgreementEntry.h">
       <Filter>Vic3World\Loaders\VanillaDiplomacyLoader</Filter>
     </ClInclude>
@@ -1363,6 +1371,18 @@
     </ClInclude>
     <ClInclude Include="Source\Mappers\CoastalMapper\CoastalMapper.h">
       <Filter>Mappers\CoastalMapper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\TradeCompanyLoader\TradeCompanyLoader.h">
+      <Filter>EU4World\Loaders\TradeCompanyLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\TradeCompanyLoader\TradeCompany.h">
+      <Filter>EU4World\Loaders\TradeCompanyLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EU4World\Loaders\TradeCompanyLoader\TradeCompanyEntry.h">
+      <Filter>EU4World\Loaders\TradeCompanyLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mappers\ExcludedTradeCompaniesMapper\ExcludedTradeCompaniesMapper.h">
+      <Filter>Mappers\ExcludedTradeCompaniesMapper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1698,6 +1718,12 @@
     </Filter>
     <Filter Include="Mappers\CoastalMapper">
       <UniqueIdentifier>{f33a6418-1170-4709-96b8-8234e4bae64f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EU4World\Loaders\TradeCompanyLoader">
+      <UniqueIdentifier>{fd92a3dd-36f7-4c7b-b9e9-83eebebced2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mappers\ExcludedTradeCompaniesMapper">
+      <UniqueIdentifier>{a475205d-ad96-417d-a634-fdfd6ee0a79d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
