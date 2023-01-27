@@ -1,6 +1,10 @@
 name: Build, test and publish
 on: [push, pull_request]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build_test_and_publish:
     name: Build, test and publish local
