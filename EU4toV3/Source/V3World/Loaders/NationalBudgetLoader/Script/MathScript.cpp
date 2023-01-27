@@ -29,6 +29,10 @@ bool V3::MathScript::isValid(const Country& country) const
 	{
 		return country.getSourceCountry()->isColony() == (triggerValue == "yes");
 	}
+	if (trigger == "is_trade_company")
+	{
+		return country.getSourceCountry()->isTradeCompany() == (triggerValue == "yes");
+	}
 	if (trigger == "vic3_law")
 	{
 		return country.getProcessedData().laws.contains(triggerValue);
