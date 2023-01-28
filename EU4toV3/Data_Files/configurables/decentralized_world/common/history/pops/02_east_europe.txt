@@ -384,10 +384,16 @@
 		}
 	}
 	s:STATE_GALICH = {
+		region_state:C01 = {
+			create_pop = {
+				culture = ugrian
+				size = 10000
+			}
+		}
 		region_state:M03 = { #Mari
 			create_pop = {
 				culture = ugrian
-				size = 23996
+				size = 13996
 			}
 		}
 		region_state:P03 = { #Pinega
@@ -890,10 +896,6 @@
 				size = 1375796
 			}
 			create_pop = {
-				culture = croat
-				size = 60000
-			}
-			create_pop = {
 				culture = avar
 				religion = catholic
 				size = 316400
@@ -914,6 +916,12 @@
 			create_pop = {
 				culture = slovene
 				size = 61096
+			}
+		}
+		region_state:S17 = { #Slavonia
+			create_pop = {
+				culture = croat
+				size = 60000
 			}
 		}
 	}
