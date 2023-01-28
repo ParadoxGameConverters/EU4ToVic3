@@ -1277,7 +1277,13 @@
 		region_state:BAV = { #Bavaria
 			create_pop = {
 				culture = south_german
-				size = 559304
+				size = 459304
+			}
+		}
+		region_state:OCC = { #Middle Francia
+			create_pop = {
+				culture = south_german
+				size = 100000
 			}
 		}
 	}
@@ -1299,6 +1305,8 @@
 				culture = kashubian
 				size = 1122800
 			}
+		}
+		region_state:W15 = { #Wologoszcz
 			create_pop = {
 				culture = polish
 				religion = animist
@@ -1482,6 +1490,12 @@
 		}		
 	}
 	s:STATE_BADEN = {
+		region_state:FRA = { #West Francia
+			create_pop = {
+				culture = south_german
+				size = 100000
+			}
+		}
 		region_state:OCC = { #Middle Francia
 			create_pop = {
 				culture = ashkenazi
@@ -1489,7 +1503,7 @@
 			}
 			create_pop = {
 				culture = south_german
-				size = 1299400
+				size = 1199400
 			}
 		}
 	}
@@ -1546,12 +1560,18 @@
 	s:STATE_FRANCONIA = {
 		region_state:BAV = { #Bavaria
 			create_pop = {
+				culture = south_german
+				size = 200000
+			}
+		}
+		region_state:FRA = {
+			create_pop = {
 				culture = ashkenazi
 				size = 4000
 			}
 			create_pop = {
 				culture = south_german
-				size = 1872192
+				size = 1672192
 			}
 		}
 	}
