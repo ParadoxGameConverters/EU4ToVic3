@@ -42,7 +42,7 @@ jobs:
     - name: "Prepare installer"
       # if: ${{ github.event_name == 'push' }}
       run: |
-        "c:\Program Files (x86)\Inno Setup 6\iscc" EU4ToVic3-Installer.iss
+        c:\"Program Files (x86)\Inno Setup 6\iscc" EU4ToVic3-Installer.iss
         cp $Env:GITHUB_WORKSPACE\Output\EU4ToVic3-latest-win-x64.exe $Env:GITHUB_WORKSPACE\Output\EU4ToVic3-0.1Adrianopole-win-x64.exe
        
     - name: "Upload binaries to release"
