@@ -3,16 +3,32 @@
 # If EUROCENTRISM option is enabled, this file completely supercedes ANY EU4 tech levels.
 # 
 # Scale for westernization is 0 to 10 where:
-# 0 - These are stone-age people
-# 5 - Uncivilized but not primitive tribes of north africa
-# 10 - A modern tea-drinking Man-o-war sailing colonial empire
+# 0 - These are stone-age people - ["euro-civlevel" zet to 0]
+# 5 - Uncivilized but not primitive tribes of north africa - ["euro-civlevel" zet to 50]
+# 10 - A modern tea-drinking Man-o-war sailing colonial empire - ["euro-civlevel" zet to 100]
 # 
 # You can also set increased or decreased literacy to a particular cultural trait, where:
-# 0 - These people are illiterate.
-# 5 - Standard levels of literacy for this group
-# 10 - Extraordinarily literate aliens from Atlantis
+# 0 - These people are illiterate. - [literacy is capped by "euro-civlevel"% and then halved]
+# 5 - Standard levels of literacy for this group - [literacy is capped by "euro-civlevel"%]
+# 10 - Extraordinarily literate aliens from Atlantis - [literacy is capped by "euro-civlevel"% and then boosted 50%]
 #
-# Anything at or below westernization 2 should end up as decentralized unless they tech up heavily.
+# You can also set increased or decreased industrial score to a particular cultural trait, where:
+# 0 - No industry - [industry is calculated for "euro-civlevel"% and then zeroed]
+# 5 - Standard levels of industry for this group - [industry is calculated for "euro-civlevel"%]
+# 10 - Extraordinarily literate aliens from Atlantis - [industry is calculated for "euro-civlevel"% and then doubled]
+#
+# So how does this work? Without westernization we use "civlevel" - which is basically
+# 	124 - missingTechs * 4 - missingInstitutions * 8, capped at 100.
+# meaning one can be 6 techs behind the world leader and will still be considered civilized. 
+# If the score is below 100, that's "unrecognized" territory.
+# If the score is below 20, that's "decentralized" territory.
+# 
+# With eurocentrism, we override that civlevel score with euro-civlevel 100 for westernization 10 countries, completely ignoring tech.
+# For others we have 2 cases:
+# - if civlevel (from tech) is >20 and <100, we take the minimum from civlevel and euro-civlevel, so there is greater variety
+# 	in technological levels across the world. This also means westernization [0,1] countries will always be decentralized.
+# - if civlevel <20 (horrible horrible tech, potentially "eurocentric institutions etc") we take the higher of civlevel and euro-civlevel,
+#	so that countries that's normally score higher get out of decentralized territory.
 
 link = {
 	# western european
