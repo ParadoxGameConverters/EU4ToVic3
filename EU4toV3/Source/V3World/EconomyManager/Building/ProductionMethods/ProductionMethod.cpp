@@ -13,7 +13,8 @@ void V3::ProductionMethod::loadProductionMethod(std::istream& theStream)
 void V3::ProductionMethod::registerKeys()
 {
 	registerKeyword("unlocking_technologies", [this](std::istream& theStream) {
-		unlockingTechs = commonItems::getStrings(theStream);
+		for (const auto& tech: commonItems::getStrings(theStream))
+			unlockingTechs.emplace(tech);
 	});
 	registerKeyword("country_modifiers", [this](std::istream& theStream) {
 		cModUnwrapper.parseStream(theStream);

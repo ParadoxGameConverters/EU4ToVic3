@@ -438,16 +438,12 @@ void V3::EconomyManager::distributeBudget(const double globalCP, const double to
 
 void V3::EconomyManager::setPMs() const
 {
-	// For now just set bureaucracy, default PMs everywhere else
-	// More detailed PM picking will happen later
+	// From config file, execute PM instructions
+	// Type 1: Walk towards this PM as far as tech will allow
+	// Type 2: Set only a percentage of PMs to this exact PM, by solving the Subset-sum problem
 
 	for (const auto& country: centralizedCountries)
 	{
-		auto data = country->getProcessedData();
-		const auto& PMName = pickBureaucracyPM(country);
-		data.productionMethods["building_government_administration"] = {PMName};
-		data.productionMethods["building_port"] = {"pm_basic_port"};
-		country->setProductionMethods(data.productionMethods);
 	}
 }
 

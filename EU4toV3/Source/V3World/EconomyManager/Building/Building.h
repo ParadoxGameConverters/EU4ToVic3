@@ -16,6 +16,7 @@ class Building: commonItems::parser
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getBuildingGroup() const { return buildingGroup; }
 	[[nodiscard]] const auto& getPMGroups() const { return PMGroups; }
+	[[nodiscard]] const auto& getPMs() const { return PMs; }
 	[[nodiscard]] const auto& getConstructionCost() const { return constructionCost; }
 	[[nodiscard]] const auto& getUnlockingTechs() const { return unlockingTechs; }
 	[[nodiscard]] const auto& isBuildable() const { return buildable; }
@@ -30,13 +31,14 @@ class Building: commonItems::parser
 	// Static per type of building e.g. "building_port"
 	std::string name;
 	std::string buildingGroup;
-	std::vector<std::string> PMGroups;
+	std::set<std::string> PMGroups;
 	int constructionCost = 50;
-	std::vector<std::string> unlockingTechs;
+	std::set<std::string> unlockingTechs;
 	bool buildable = true;
 	bool governmentCapped = false; // barracks, ports, other caps done at the building not building group level by techs/laws/traits.
 
 	// Specific to instance of building in SubState e.g. The port in New York
+	std::set<std::string> PMs; // Only Production Methods that are different from default
 	int level = 0;
 	double weight = 0;
 };

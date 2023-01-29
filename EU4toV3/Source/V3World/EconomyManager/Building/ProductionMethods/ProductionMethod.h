@@ -25,7 +25,7 @@ class ProductionMethod: commonItems::parser
 	std::string name;
 	std::map<std::string, int> employment;
 	int bureaucracy = 0;
-	std::vector<std::string> unlockingTechs;
+	std::set<std::string> unlockingTechs;
 };
 } // namespace V3
 
