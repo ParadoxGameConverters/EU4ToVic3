@@ -127,7 +127,8 @@ call save_commit_id.bat</Command>
     <ClCompile Include="Source\EU4World\WarParser\WarParser.cpp" />
     <ClCompile Include="Source\EU4World\World.cpp" />
     <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\Mappers\BuildingMapper\ProductionMethodRuleMapper.cpp" />
+    <ClCompile Include="Source\Mappers\BuildingMapper\ProductionMethods\ProductionMethodMapper.cpp" />
+    <ClCompile Include="Source\Mappers\BuildingMapper\ProductionMethods\ProductionMethodMapping.cpp" />
     <ClCompile Include="Source\Mappers\CharacterTraitMapper\AssignmentMapping.cpp" />
     <ClCompile Include="Source\Mappers\CharacterTraitMapper\CharacterTraitMapper.cpp" />
     <ClCompile Include="Source\Mappers\CharacterTraitMapper\SkillMapping.cpp" />
@@ -359,7 +360,7 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\EU4World\WarParser\WarParser.h" />
     <ClInclude Include="Source\EU4World\World.h" />
     <ClInclude Include="Source\Helpers\rakaly.h" />
-    <ClInclude Include="Source\Mappers\BuildingMapper\ProductionMethodRuleMapper.h" />
+    <ClInclude Include="Source\Mappers\BuildingMapper\ProductionMethods\ProductionMethodMapper.h" />
     <ClInclude Include="Source\Mappers\CharacterTraitMapper\AssignmentMapping.h" />
     <ClInclude Include="Source\Mappers\CharacterTraitMapper\CharacterTraitMapper.h" />
     <ClInclude Include="Source\Mappers\CharacterTraitMapper\SkillMapping.h" />
@@ -517,6 +518,9 @@ call save_commit_id.bat</Command>
     <ClInclude Include="Source\V3World\PopManager\Pops\StatePops.h" />
     <ClInclude Include="Source\V3World\PopManager\Pops\SubStatePops.h" />
     <ClInclude Include="Source\V3World\V3World.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\Mappers\BuildingMapper\ProductionMethods\ProductionMethodMapping.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

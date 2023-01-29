@@ -660,8 +660,11 @@
     <ClCompile Include="Source\Mappers\ExcludedTradeCompaniesMapper\ExcludedTradeCompaniesMapper.cpp">
       <Filter>Mappers\ExcludedTradeCompaniesMapper</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Mappers\BuildingMapper\ProductionMethodRuleMapper.cpp">
-      <Filter>Mappers\BuildingMapper</Filter>
+    <ClCompile Include="Source\Mappers\BuildingMapper\ProductionMethods\ProductionMethodMapper.cpp">
+      <Filter>Mappers\BuildingMapper\ProductionMethod</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mappers\BuildingMapper\ProductionMethods\ProductionMethodMapping.cpp">
+      <Filter>Mappers\BuildingMapper\ProductionMethod</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1386,8 +1389,8 @@
     <ClInclude Include="Source\Mappers\ExcludedTradeCompaniesMapper\ExcludedTradeCompaniesMapper.h">
       <Filter>Mappers\ExcludedTradeCompaniesMapper</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Mappers\BuildingMapper\ProductionMethodRuleMapper.h">
-      <Filter>Mappers\BuildingMapper</Filter>
+    <ClInclude Include="Source\Mappers\BuildingMapper\ProductionMethods\ProductionMethodMapper.h">
+      <Filter>Mappers\BuildingMapper\ProductionMethod</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1730,5 +1733,13 @@
     <Filter Include="Mappers\ExcludedTradeCompaniesMapper">
       <UniqueIdentifier>{a475205d-ad96-417d-a634-fdfd6ee0a79d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mappers\BuildingMapper\ProductionMethod">
+      <UniqueIdentifier>{597ae02f-204e-4a37-8e56-08ea35a8c0b6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\Mappers\BuildingMapper\ProductionMethods\ProductionMethodMapping.h">
+      <Filter>Mappers\BuildingMapper\ProductionMethod</Filter>
+    </None>
   </ItemGroup>
 </Project>
