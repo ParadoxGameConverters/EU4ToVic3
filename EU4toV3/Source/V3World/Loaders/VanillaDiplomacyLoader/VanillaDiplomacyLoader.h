@@ -1,5 +1,6 @@
 #ifndef VANILLA_DIPLOMACY_LOADER_H
 #define VANILLA_DIPLOMACY_LOADER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 #include "VanillaAgreementEntry.h"
 #include "VanillaRelationEntry.h"

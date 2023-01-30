@@ -1,5 +1,6 @@
 #ifndef COUNTRY_DEFINITION_LOADER_H
 #define COUNTRY_DEFINITION_LOADER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 #include <map>
 #include <string>

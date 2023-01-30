@@ -3,6 +3,7 @@
 #include "ColonialRegionMapper/ColonialRegionMapper.h"
 #include "CultureDefinitionLoader/CultureDef.h"
 #include "CultureMappingRule.h"
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 #include "WesternizationMapper/WesternizationMapper.h"
 

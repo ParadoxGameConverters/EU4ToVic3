@@ -1,5 +1,6 @@
 #ifndef VANILLA_DIPLOMATIC_PLAY_LOADER_H
 #define VANILLA_DIPLOMATIC_PLAY_LOADER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 
 namespace V3

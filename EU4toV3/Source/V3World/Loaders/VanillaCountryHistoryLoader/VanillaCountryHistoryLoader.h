@@ -1,5 +1,6 @@
 #ifndef VANILLA_COUNTRY_HISTORY_LOADER_H
 #define VANILLA_COUNTRY_HISTORY_LOADER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 
 namespace V3

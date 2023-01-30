@@ -1,5 +1,6 @@
 #ifndef UNIT_TYPE_LOADER
 #define UNIT_TYPE_LOADER
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 #include "UnitType.h"
 

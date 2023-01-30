@@ -1,6 +1,7 @@
 #ifndef LAW_LOADER_H
 #define LAW_LOADER_H
 #include "Law.h"
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 
 namespace V3

@@ -1,5 +1,6 @@
 #ifndef STATE_LOADER_H
 #define STATE_LOADER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 
 namespace V3
