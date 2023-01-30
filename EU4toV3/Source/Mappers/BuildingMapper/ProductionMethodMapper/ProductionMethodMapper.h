@@ -5,6 +5,7 @@
 
 namespace V3
 {
+class Building;
 class ProductionMethodGroup;
 class ProductionMethod;
 class Country;
@@ -18,7 +19,8 @@ class ProductionMethodMapper: commonItems::parser
 	void loadRules(const std::string& filePath);
 	void applyRules(const std::shared_ptr<V3::Country>& country,
 		 const std::map<std::string, V3::ProductionMethod>& PMs,
-		 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups) const;
+		 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups,
+		 const std::map<std::string, V3::Building> buildings) const;
 
 	[[nodiscard]] const auto& getRules() const { return buildingToRules; }
 

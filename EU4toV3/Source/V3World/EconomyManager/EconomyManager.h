@@ -3,6 +3,7 @@
 #include "Building/Building.h"
 #include "Building/BuildingGroups.h"
 #include "BuildingMapper/BuildingMapper.h"
+#include "BuildingMapper/ProductionMethodMapper/ProductionMethodMapper.h"
 #include "ClayManager/State/StateModifier.h"
 #include "Configuration.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethod.h"
@@ -11,7 +12,6 @@
 #include "Loaders/NationalBudgetLoader/NationalBudgetLoader.h"
 #include "Loaders/TechLoader/TechLoader.h"
 #include "PoliticalManager/PoliticalManager.h"
-#include <BuildingMapper/ProductionMethodMapper/ProductionMethodMapper.h>
 
 namespace V3
 {
@@ -38,7 +38,7 @@ class Sector;
  * 8c. The country says that building is in sector A and as a country we have X CP to spend in that sector.
  * 8d. The state then builds as many buildings of that kind as it can, limited by capacity, packet size and sector CP.
  * 8e. A bunch of small details that make this flow until all CP is assigned. Repeat for each country.
- * 
+ *
  * 9. Set Production Methods from a config file.
  *
  * This *should* give nice diverse, sensible, game-balanced economies while maintaining a reasonable configuration footprint.

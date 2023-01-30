@@ -12,6 +12,7 @@ class Building: commonItems::parser
 	void setName(const std::string& theName) { name = theName; }
 	void setLevel(const int theLevel) { level = theLevel; }
 	void setWeight(const double theWeight) { weight = theWeight; }
+	void addPM(const std::string& pm) { PMs.emplace(pm); }
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getBuildingGroup() const { return buildingGroup; }
