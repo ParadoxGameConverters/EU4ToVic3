@@ -1,5 +1,6 @@
 #ifndef VANILLA_STATE_LOADER_H
 #define VANILLA_STATE_LOADER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 #include "VanillaStateEntry.h"
 

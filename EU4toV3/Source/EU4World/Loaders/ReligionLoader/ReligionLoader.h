@@ -1,5 +1,6 @@
 #ifndef RELIGION_LOADER
 #define RELIGION_LOADER
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 #include "Religion.h"
 

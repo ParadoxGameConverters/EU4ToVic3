@@ -1,5 +1,6 @@
 #ifndef BUILDING_SCRIPT_VALUES_LOADER_H
 #define BUILDING_SCRIPT_VALUES_LOADER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 
 namespace V3

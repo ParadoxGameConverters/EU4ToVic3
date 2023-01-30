@@ -1,6 +1,7 @@
 #ifndef STATE_MODIFIER_LOADER_H
 #define STATE_MODIFIER_LOADER_H
 #include "ClayManager/State/StateModifier.h"
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 
 namespace V3

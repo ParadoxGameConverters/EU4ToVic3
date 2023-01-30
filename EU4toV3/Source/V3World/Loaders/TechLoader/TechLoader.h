@@ -1,5 +1,6 @@
 #ifndef TECH_LOADER_H
 #define TECH_LOADER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 #include "Tech.h"
 

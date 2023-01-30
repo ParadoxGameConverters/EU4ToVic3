@@ -1,5 +1,6 @@
 #ifndef TERRAIN_LOADER_H
 #define TERRAIN_LOADER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 #include <map>
 #include <string>

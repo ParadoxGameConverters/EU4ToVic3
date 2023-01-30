@@ -1,5 +1,6 @@
 #ifndef POP_LOADER_H
 #define POP_LOADER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 #include "PopManager/Pops/StatePops.h"
 

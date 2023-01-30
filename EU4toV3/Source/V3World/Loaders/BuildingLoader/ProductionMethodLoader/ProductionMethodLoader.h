@@ -1,7 +1,7 @@
 #ifndef PRODUCTION_METHOD_LOADER_H
 #define PRODUCTION_METHOD_LOADER_H
-
 #include "EconomyManager/Building/ProductionMethods/ProductionMethod.h"
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 
 namespace V3
