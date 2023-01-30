@@ -9,7 +9,7 @@ struct PMRule
 	std::string name;
 	double percent = 1.0;
 
-	bool operator==(const PMRule& rhs) const { return name == rhs.name && percent == rhs.percent; }
+	bool operator==(const PMRule&) const = default;
 };
 } // namespace mappers
 #endif // PM_RULE_H
