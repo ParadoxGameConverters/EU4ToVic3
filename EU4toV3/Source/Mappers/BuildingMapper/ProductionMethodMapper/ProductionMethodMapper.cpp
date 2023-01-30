@@ -25,7 +25,7 @@ void mappers::ProductionMethodMapper::registerKeys()
 
 void mappers::ProductionMethodMapper::applyRules(const std::shared_ptr<V3::Country>& country,
 	 const std::map<std::string, V3::ProductionMethod>& PMs,
-	 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups)
+	 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups) const
 {
 	// For all building types in a country gather all instances off the building in a single vector
 	// Apply Subset-sum problem to vector to find out remaining buildings (if percent < 1.0) NOTE(Gawquon): I have implemented this, all ready to transfer in
