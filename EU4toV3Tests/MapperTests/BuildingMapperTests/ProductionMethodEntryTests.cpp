@@ -7,7 +7,7 @@ TEST(Mappers_ProductionMethodEntryTests, DefaultsDefaultToDefaults)
 	const mappers::ProductionMethodEntry entry;
 	const auto& rule = entry.getRule();
 
-	EXPECT_TRUE(rule.name.empty());
+	EXPECT_TRUE(rule.pm.empty());
 	EXPECT_DOUBLE_EQ(1, rule.percent);
 }
 
@@ -19,6 +19,6 @@ TEST(V3World_ProductionMethodEntryTests, PMCanBeLoaded)
 	const mappers::ProductionMethodEntry entry(input);
 	const auto& rule = entry.getRule();
 
-	EXPECT_EQ("pm_hardwood", rule.name);
+	EXPECT_EQ("pm_hardwood", rule.pm);
 	EXPECT_DOUBLE_EQ(0.33, rule.percent);
 }

@@ -437,7 +437,20 @@ void V3::EconomyManager::setPMs() const
 {
 	for (const auto& country: centralizedCountries)
 	{
-		PMMapper.applyRules(country, PMs, PMGroups);
+		PMMapper.applyRules(*country, PMs, PMGroups);
+
+		// Gov Admin are special
+		const auto& adminPMName = pickBureaucracyPM(*country);
+		for (const auto& subState: country->getSubStates())
+		{
+			for (const auto& building: subState->getBuildings())
+			{
+				if (building->getName() != "building_government_administration ")
+					continue;
+
+				building->addPM(adminPMName);
+			}
+		}
 	}
 }
 

@@ -6,7 +6,7 @@ namespace mappers
 {
 struct PMRule
 {
-	std::string name;
+	std::string pm;
 	double percent = 1.0;
 
 	bool operator==(const PMRule&) const = default;
