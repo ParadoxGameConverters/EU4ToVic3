@@ -329,40 +329,40 @@ double V3::EconomyManager::calculateGeoMeanCentralizedPops() const
 
 std::string V3::EconomyManager::pickBureaucracyPM(const Country& country) const
 {
+	int generation = 0;
+	std::string bestPMName = "pm_simple_organization";
+
 	if (!PMGroups.contains("pmg_base_building_government_administration"))
 	{
-		Log(LogLevel::Error) << "Bureaucracy PM group not found.";
-		return "pm_simple_organization";
+		Log(LogLevel::Error) << "pmg_base_building_government_administration: Not in loaded Production Method Groups";
+		return bestPMName;
 	}
-	const auto& adminPMGroup = PMGroups.at("pmg_base_building_government_administration");
 
-	// Return default PM if we have no rule about it.
-	if (!PMMapper.getRules().contains("building_government_administration"))
-		return adminPMGroup.getPMs()[0];
-
-	// We have a rule, need to find right PMGroup
-	const auto& adminRules = PMMapper.getRules().at("building_government_administration");
-	for (const auto& rule: adminRules)
+	for (const auto& PMName: PMGroups.at("pmg_base_building_government_administration").getPMs())
 	{
-		if (!PMs.contains(rule.name)) // Bad PM name
-			continue;
-
-		if (std::ranges::find(adminPMGroup.getPMs(), rule.name) != adminPMGroup.getPMs().end())
+		if (!PMs.contains(PMName))
 		{
-			// We have a PM in the right PMGroup, check tech
-			auto pick = adminPMGroup.getPMs()[0];
-			for (auto PM: adminPMGroup.getPMs())
-			{
-				if (PM == rule.name)
-					return PM;
-				if (!country.hasAnyOfTech(PMs.at(PM).getUnlockingTechs()))
-					return pick;
-				pick = PM;
-			}
+			Log(LogLevel::Error) << PMName << ": Not in loaded Production Methods";
+			return bestPMName;
+		}
+
+		const auto& PM = PMs.at(PMName);
+
+		// Only use PMs we have unlocked
+		if (!country.hasAnyOfTech(PM.getUnlockingTechs()))
+		{
+			continue;
+		}
+
+		// Update best if the PM has a higher bureaucracy value
+		if (PM.getBureaucracy() > generation)
+		{
+			generation = PM.getBureaucracy();
+			bestPMName = PM.getName();
 		}
 	}
 
-	return adminPMGroup.getPMs()[0];
+	return bestPMName;
 }
 
 double V3::EconomyManager::calculateGlobalPopFactor(const PoliticalManager& politicalManager) const
