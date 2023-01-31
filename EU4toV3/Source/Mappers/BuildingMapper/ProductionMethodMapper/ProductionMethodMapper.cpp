@@ -231,7 +231,7 @@ std::vector<std::shared_ptr<V3::Building>> mappers::ProductionMethodMapper::subS
 		}
 		if (finalState[offBy] >= 0)
 		{
-			result = traceSteps(stateSpace, offBy, maxVal, breakIndex, subSet);
+			result = traceSteps(stateSpace, -offBy, maxVal, breakIndex, subSet);
 			break;
 		}
 	}
