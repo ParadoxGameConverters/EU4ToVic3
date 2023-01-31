@@ -510,8 +510,6 @@ void EU4::CountryManager::generateSuperRegionTradeCompany(const std::map<int, st
 	transferOwnerDataToTC(tradingCountry, ownerTag, provinces, diplomacyParser);
 
 	// For superregions, names are a simple affair.
-	bool haveName = false;
-
 	std::map<std::string, std::string> regionalNames;
 	if (const auto& regionalLocBlock = localizationLoader.getTextInEachLanguage(superRegionName); regionalLocBlock)
 		regionalNames = *regionalLocBlock;
