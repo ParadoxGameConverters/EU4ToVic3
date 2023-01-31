@@ -710,7 +710,7 @@ void V3::EconomyManager::loadBuildingMappings(const std::string& filePath)
 
 void V3::EconomyManager::loadPMMappings(const std::string& filePath)
 {
-	PMMapper.loadRules(filePath + "configurables/economy/buildings_map.txt");
+	PMMapper.loadRules(filePath + "configurables/economy/production_method_rules.txt");
 }
 
 void V3::EconomyManager::loadEconDefines(const std::string& filePath)
