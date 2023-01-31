@@ -1,6 +1,10 @@
 name: Build, test and publish
 on: [push, pull_request]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build_test_and_publish:
     name: Build, test and publish local
@@ -8,11 +12,19 @@ jobs:
     runs-on: [self-hosted, windows]
     
     steps:
-    - uses: actions/checkout@v3
+    - name: "Cloning repo"
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
-        submodules: recursive
-        
+
+    - name: "Cloning selective submodules"
+      run: |
+       git submodule update --init --recursive commonItems
+       git -c submodule."googletest".update=none `
+           -c submodule."external/googletest".update=none `
+           -c submodule."external/zip".update=none `
+           submodule update --init --recursive Fronter
+
     - name: "Get previous tag"
       if: ${{ github.event_name == 'push' }}
       id: previoustag
@@ -29,11 +41,17 @@ jobs:
        .\EU4toV3Tests.exe
 
     - name: "Prepare release"
-      if: ${{ github.event_name == 'push' }}
+      # if: ${{ github.event_name == 'push' }}
       run: |
         cd "C:\Program Files\7-Zip\"
         .\7z.exe a $Env:GITHUB_WORKSPACE\EU4ToVic3-0.1Adrianopole-win-x64.zip $Env:GITHUB_WORKSPACE\Release\*
         cp $Env:GITHUB_WORKSPACE\EU4ToVic3-0.1Adrianopole-win-x64.zip $Env:GITHUB_WORKSPACE\EU4ToVic3-latest-win-x64.zip
+
+    - name: "Prepare installer"
+      # if: ${{ github.event_name == 'push' }}
+      run: |
+        c:\"Program Files (x86)\Inno Setup 6\iscc" EU4ToVic3-Installer.iss
+        cp $Env:GITHUB_WORKSPACE\Output\EU4ToVic3-latest-win-x64.exe $Env:GITHUB_WORKSPACE\Output\EU4ToVic3-0.1Adrianopole-win-x64.exe
        
     - name: "Upload binaries to release"
       if: ${{ github.event_name == 'push' }}
@@ -43,7 +61,7 @@ jobs:
         allowUpdates: true
         omitBodyDuringUpdate: true
         omitNameDuringUpdate: true
-        artifacts: EU4ToVic3-0.1Adrianopole-win-x64.zip
+        artifacts: EU4ToVic3-0.1Adrianopole-win-x64.zip, Output\EU4ToVic3-0.1Adrianopole-win-x64.exe
         token: ${{ secrets.API_TOKEN_GITHUB }}
         
     - name: "Upload binaries to archive"
@@ -54,7 +72,7 @@ jobs:
         allowUpdates: true
         omitBodyDuringUpdate: true
         omitNameDuringUpdate: true
-        artifacts: EU4ToVic3-0.1Adrianopole-win-x64.zip, EU4ToVic3-latest-win-x64.zip
+        artifacts: EU4ToVic3-0.1Adrianopole-win-x64.zip, EU4ToVic3-latest-win-x64.zip, Output\EU4ToVic3-0.1Adrianopole-win-x64.exe, Output\EU4ToVic3-latest-win-x64.exe
         token: ${{ secrets.API_TOKEN_GITHUB }}
         
     - name: "Cleanup"
@@ -68,10 +86,16 @@ jobs:
     runs-on: windows-2022
     
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-        submodules: recursive
+    - name: "Cloning repo"
+      uses: actions/checkout@v3
+
+    - name: "Cloning selective submodules"
+      run: |
+       git submodule update --init --recursive commonItems       
+       git -c submodule."googletest".update=none `
+           -c submodule."external/googletest".update=none `
+           -c submodule."external/zip".update=none `
+           submodule update --init --recursive Fronter
 
     - name: "Build solution"
       run: |

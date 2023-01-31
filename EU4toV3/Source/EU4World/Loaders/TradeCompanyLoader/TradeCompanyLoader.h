@@ -1,6 +1,7 @@
 #ifndef TRADE_COMPANY_LOADER
 #define TRADE_COMPANY_LOADER
 #include "ExcludedTradeCompaniesMapper/ExcludedTradeCompaniesMapper.h"
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 #include "TradeCompany.h"
 

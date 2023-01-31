@@ -1,5 +1,6 @@
 #ifndef VANILLA_POPULATION_HISTORY_LOADER_H
 #define VANILLA_POPULATION_HISTORY_LOADER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 
 namespace V3

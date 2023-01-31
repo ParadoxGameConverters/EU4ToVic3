@@ -1,5 +1,6 @@
 #ifndef V3_PRODUCTION_METHOD_GROUP_H
 #define V3_PRODUCTION_METHOD_GROUP_H
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 
 namespace V3

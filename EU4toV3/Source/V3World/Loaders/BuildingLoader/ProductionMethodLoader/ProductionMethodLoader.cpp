@@ -1,5 +1,6 @@
 #include "ProductionMethodLoader.h"
 #include "CommonFunctions.h"
+#include "ModLoader/ModFilesystem.h"
 #include <CommonRegexes.h>
 
 void V3::ProductionMethodLoader::loadPMs(const commonItems::ModFilesystem& modFS)

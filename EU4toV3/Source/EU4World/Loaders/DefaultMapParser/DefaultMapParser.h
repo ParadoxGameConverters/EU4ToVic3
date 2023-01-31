@@ -1,5 +1,6 @@
 #ifndef DEFAULTMAP_PARSER
 #define DEFAULTMAP_PARSER
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 #include <set>
 

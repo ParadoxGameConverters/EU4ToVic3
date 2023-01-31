@@ -1,5 +1,6 @@
 #ifndef SUPERREGION_LOADER_H
 #define SUPERREGION_LOADER_H
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 
 namespace V3

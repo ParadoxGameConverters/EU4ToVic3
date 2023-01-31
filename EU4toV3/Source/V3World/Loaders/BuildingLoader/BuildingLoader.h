@@ -1,7 +1,7 @@
 #ifndef BUILDING_LOADER_H
 #define BUILDING_LOADER_H
-
 #include "EconomyManager/Building/Building.h"
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 
 namespace V3

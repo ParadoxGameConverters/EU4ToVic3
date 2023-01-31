@@ -1,6 +1,7 @@
 #ifndef BUILDING_GROUP_LOADER_H
 #define BUILDING_GROUP_LOADER_H
 #include "EconomyManager/Building/BuildingGroups.h"
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 
 namespace V3

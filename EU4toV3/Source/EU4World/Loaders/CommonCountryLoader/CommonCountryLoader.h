@@ -1,6 +1,7 @@
 #ifndef COMMON_COUNTRY_LOADER
 #define COMMON_COUNTRY_LOADER
 #include "Color.h"
+#include "ModLoader/ModFilesystem.h"
 #include "ModLoader/ModLoader.h"
 #include "Parser.h"
 

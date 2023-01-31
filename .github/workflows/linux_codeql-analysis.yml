@@ -1,15 +1,13 @@
-# For most projects, this workflow file will not need changing; you simply need
-# to commit it to your repository.
-#
-# You may wish to alter this file to override the set of languages analyzed,
-# or to provide custom queries or build logic.
 name: "CodeQL"
-
 on:
   push:
   pull_request:
   schedule:
     - cron: '0 16 * * 6'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   analyze_main:
@@ -23,11 +21,16 @@ jobs:
         language: ['cpp']
 
     steps:
-    - name: Checkout repository
+    - name: "Cloning repo"
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-        submodules: recursive
+
+    - name: "Cloning selective submodules"
+      run: |
+       git submodule update --init --recursive commonItems       
+       git -c submodule."googletest".update=none \
+           -c submodule."external/googletest".update=none \
+           -c submodule."external/zip".update=none \
+           submodule update --init --recursive Fronter
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
@@ -44,7 +47,7 @@ jobs:
       
     - name: Cleanup
       uses: colpal/actions-clean@v1
-      if: always() # To ensure this step runs even when earlier steps fail      
+      if: always()
 
   analyze:
     name: Analyze Foreign
@@ -57,11 +60,16 @@ jobs:
         language: ['cpp']
 
     steps:
-    - name: Checkout repository
+    - name: "Cloning repo"
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-        submodules: recursive
+
+    - name: "Cloning selective submodules"
+      run: |
+       git submodule update --init --recursive commonItems       
+       git -c submodule."googletest".update=none \
+           -c submodule."external/googletest".update=none \
+           -c submodule."external/zip".update=none \
+           submodule update --init --recursive Fronter
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2

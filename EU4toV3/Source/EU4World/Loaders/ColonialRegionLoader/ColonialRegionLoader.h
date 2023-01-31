@@ -1,5 +1,6 @@
 #ifndef COLONIAL_REGION_LOADER
 #define COLONIAL_REGION_LOADER
+#include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 #include <map>
 
