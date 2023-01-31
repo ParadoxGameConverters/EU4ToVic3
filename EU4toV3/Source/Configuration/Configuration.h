@@ -39,6 +39,12 @@ class Configuration: commonItems::parser
 		DevPerPop = 2,
 		Test = 9
 	};
+	enum class SPLITTCS
+	{
+		TradeRegions = 1,
+		SuperRegions = 2,
+		Disabled = 3
+	};
 
 	struct ConfigBlock
 	{
@@ -47,6 +53,7 @@ class Configuration: commonItems::parser
 		DEADCORES removeType = DEADCORES::DeadCores;
 		EUROCENTRISM euroCentric = EUROCENTRISM::VanillaImport;
 		ECONOMY economy = ECONOMY::CivLevel;
+		SPLITTCS splitTCs = SPLITTCS::SuperRegions;
 		bool convertAll = false;
 		bool downTiers = true;
 		// runtime options.

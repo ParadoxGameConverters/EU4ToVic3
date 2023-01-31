@@ -81,15 +81,20 @@ void Configuration::registerKeys()
 		configBlock.convertAll = convertAllString == "yes";
 		Log(LogLevel::Info) << "Convert All: " << convertAllString;
 	});
+	registerKeyword("economy", [this](std::istream& theStream) {
+		const auto economyString = commonItems::getString(theStream);
+		configBlock.economy = static_cast<ECONOMY>(std::stoi(economyString));
+		Log(LogLevel::Info) << "Economy: " << economyString;
+	});
 	registerKeyword("downtiers", [this](std::istream& theStream) {
 		const auto downTiersString = commonItems::getString(theStream);
 		configBlock.downTiers = downTiersString == "yes";
 		Log(LogLevel::Info) << "Downgrade Tiers: " << downTiersString;
 	});
-	registerKeyword("economy", [this](std::istream& theStream) {
-		const auto economyString = commonItems::getString(theStream);
-		configBlock.economy = static_cast<ECONOMY>(std::stoi(economyString));
-		Log(LogLevel::Info) << "Economy: " << economyString;
+	registerKeyword("splittcs", [this](std::istream& theStream) {
+		const auto splitTCsString = commonItems::getString(theStream);
+		configBlock.splitTCs = static_cast<SPLITTCS>(std::stoi(splitTCsString));
+		Log(LogLevel::Info) << "Split TCs: " << splitTCsString;
 	});
 	registerKeyword("output_name", [this](std::istream& theStream) {
 		outputName = commonItems::getString(theStream);
