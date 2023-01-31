@@ -1,22 +1,22 @@
 #ifndef PRODUCTION_METHOD_MAPPING_H
 #define PRODUCTION_METHOD_MAPPING_H
-#include "Parser.h"
 #include "PMRule.h"
+#include "Parser.h"
 
 namespace mappers
 {
 class ProductionMethodMapping: commonItems::parser
 {
-	  public:
-		ProductionMethodMapping() = default;
-		void loadRules(std::istream& theStream);
+  public:
+	ProductionMethodMapping() = default;
+	void loadRules(std::istream& theStream);
 
-		[[nodiscard]] const auto& getRules() const { return rules; }
+	[[nodiscard]] const auto& getRules() const { return rules; }
 
-	  private:
-		void registerKeys();
+  private:
+	void registerKeys();
 
-		std::vector<PMRule> rules;
+	std::vector<PMRule> rules;
 };
 } // namespace mappers
 

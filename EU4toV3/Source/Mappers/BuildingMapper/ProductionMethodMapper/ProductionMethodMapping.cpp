@@ -1,7 +1,7 @@
 #include "ProductionMethodMapping.h"
-#include "ProductionMethodEntry.h"
 #include "CommonRegexes.h"
 #include "ParserHelpers.h"
+#include "ProductionMethodEntry.h"
 
 void mappers::ProductionMethodMapping::loadRules(std::istream& theStream)
 {
