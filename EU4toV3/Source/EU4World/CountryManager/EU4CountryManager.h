@@ -45,7 +45,10 @@ class CountryManager: public commonItems::parser
 	void mergeNations();
 	void filterDeadNations(Configuration::DEADCORES toggle);
 	void assignGPStatuses();
-	void splitTradeCompanies(const ProvinceManager& provinceManager, const RegionManager& regionManager, DiplomacyParser& diplomacyParser);
+	void splitTradeCompanies(const ProvinceManager& provinceManager,
+		 const RegionManager& regionManager,
+		 DiplomacyParser& diplomacyParser,
+		 Configuration::SPLITTCS splitTCs);
 
   private:
 	void registerKeys();
@@ -53,9 +56,19 @@ class CountryManager: public commonItems::parser
 	void removeEmptyNations();
 	void removeDeadLandlessNations();
 	void removeLandlessNations();
-	void generateTradeCompany(const std::map<int, std::shared_ptr<Province>>& provinces,
+	void generateTradeCompanyTradeCompany(const std::map<int, std::shared_ptr<Province>>& provinces,
 		 const std::string& ownerTag,
 		 const TradeCompany& tc,
+		 DiplomacyParser& diplomacyParser);
+	void generateSuperRegionTradeCompany(const std::map<int, std::shared_ptr<Province>>& provinces,
+		 const std::string& ownerTag,
+		 const std::string& superRegionName,
+		 DiplomacyParser& diplomacyParser);
+	void splitTradeCompaniesByTradeRegions(const ProvinceManager& provinceManager, const RegionManager& regionManager, DiplomacyParser& diplomacyParser);
+	void splitTradeCompaniesBySuperRegions(const ProvinceManager& provinceManager, const RegionManager& regionManager, DiplomacyParser& diplomacyParser);
+	void transferOwnerDataToTC(const std::shared_ptr<Country>& tradingCountry,
+		 const std::string& ownerTag,
+		 const std::map<int, std::shared_ptr<Province>>& provinces,
 		 DiplomacyParser& diplomacyParser);
 
 	[[nodiscard]] std::string generateNewTag();

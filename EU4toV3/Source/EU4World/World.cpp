@@ -120,7 +120,7 @@ EU4::World::World(const std::shared_ptr<Configuration>& theConfiguration, const 
 	Log(LogLevel::Progress) << "29 %";
 
 	Log(LogLevel::Info) << "-> Splitting Trade Companies into nations";
-	countryManager.splitTradeCompanies(provinceManager, regionManager, diplomacyParser);
+	countryManager.splitTradeCompanies(provinceManager, regionManager, diplomacyParser, theConfiguration->configBlock.splitTCs);
 	Log(LogLevel::Progress) << "39 %";
 
 	Log(LogLevel::Info) << "*** Good-bye EU4, you served us well. ***";
