@@ -66,7 +66,7 @@ TEST(Mappers_ProductionMethodMapperTests, ApplyRules)
 	country.addTech("steelworking");				// Allows sawmills
 	country.addTech("electrical_generation"); // Allows PMs after sawmills
 
-	for (const int lvl: {3, 12, 14, 2, 7, 8, 9, 7, 5, 3, 5, 7, 1, 4, 6, 8, 4, 2, 1, 15})
+	for (const int lvl: {3, 12, 14, 2, 7, 8, 9, 7, 5, 3, 5, 7, 1, 4, 6, 8, 4, 2, 1, 15}) // TN: 79
 	{
 		auto subState = std::make_shared<V3::SubState>();
 		auto lumberCamp = std::make_shared<V3::Building>();

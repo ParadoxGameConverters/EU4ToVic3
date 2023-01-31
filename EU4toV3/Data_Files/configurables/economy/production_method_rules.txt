@@ -1,11 +1,53 @@
 # Linked buildings will walk towards the PMs specified until the PM is reached. or the next step is invalid due to tech.
 # The percent is the percent of building levels that will try to move off of default to adopt the defined PM. It is assumed to be 1(100%) unless specified.
 
-building_government_administration = { 
-    pm = { name = pm_vertical_filing_cabinets }
+# building_government_administration # SPECIAL CASE government administration links will be ignored even if defined.
+### Devlopment
+building_port = {
+    pm = { name = pm_basic_port }
+}
+building_barracks = {
+    pm = { name = pm_skirmish_infantry }
+    pm = { name = pm_mobile_artillery }
+}
+building_naval_base = {
+    pm = { name = pm_power_of_the_purse }
 }
 
+### Urban
+building_tooling_workshops = {
+    pm = { name = pm_pig_iron }
+}
+building_glassworks = {
+    pm = { name = pm_leaded_glass }
+}
+building_paper_mills = {
+    pm = { name = pm_sulfite_pulping }
+}
+building_furniture_manufactories = {
+    pm = { name = pm_lathe }
+    pm = { name = pm_luxury_furniture percent = 0.5}
+}
+building_shipyards = {
+    pm = { name = pm_military_shipbuilding_wooden }
+}
+building_arms_industry = {
+    pm = { name = pm_cannons }
+}
+building_food_industry = {
+    pm = { name = pm_pot_stills }
+}
+building_chemical_plants = {
+    pm = { name = pm_leblanc_process }
+}
+
+### Rural
 building_logging_camp = {
     pm = { name = pm_saw_mills }
     pm = { name = pm_hardwood percent = 0.33 }
 }
+
+# Farms need more code support due to clashing pm names
+#building_rye_farm = {
+#    pm = { name = pm_potatoes percent = 0.15 }
+#}
