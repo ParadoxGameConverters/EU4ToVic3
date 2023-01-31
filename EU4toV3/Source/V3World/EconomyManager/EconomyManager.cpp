@@ -110,6 +110,7 @@ void V3::EconomyManager::hardcodePorts() const
 			auto port = std::make_shared<Building>();
 			port->setName("building_port");
 			port->setLevel(1);
+			port->addPM("pm_basic_port"); // Until PM setting is off the ground
 
 			subState->addBuilding(port);
 			++counter;
@@ -445,7 +446,7 @@ void V3::EconomyManager::setPMs() const
 		{
 			for (const auto& building: subState->getBuildings())
 			{
-				if (building->getName() != "building_government_administration ")
+				if (building->getName() != "building_government_administration")
 					continue;
 
 				building->addPM(adminPMName);
