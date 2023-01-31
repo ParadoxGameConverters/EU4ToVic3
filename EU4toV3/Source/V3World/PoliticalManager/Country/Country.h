@@ -73,7 +73,7 @@ struct ProcessedData
 	double literacy = 0;
 	double civLevel = 0;
 	bool westernized = false;
-	double industryFactor = 1.0; // Modifier set by EuroCentrism
+	double industryFactor = 1.0; // Modifier changed if EuroCentrism enabled
 	mappers::IdeaEffect ideaEffect;
 	std::map<std::string, mappers::IGIdeologyMod> igIdeologyModifiers;
 	std::set<std::string> techs;
@@ -216,7 +216,7 @@ class Country: commonItems::parser
 	void generateDecentralizedLocs(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 	void calculateBaseLiteracy(const mappers::ReligionMapper& religionMapper);
 	void calculateWesternization(double topTech, double topInstitutions, const mappers::CultureMapper& cultureMapper, Configuration::EUROCENTRISM eurocentrism);
-	void adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper);
+	void adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper, Configuration::EUROCENTRISM eurocentrism);
 	void applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setDecentralizedEffects();
 	void determineCountryType();
