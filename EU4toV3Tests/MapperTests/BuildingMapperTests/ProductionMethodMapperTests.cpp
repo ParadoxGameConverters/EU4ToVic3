@@ -3,6 +3,7 @@
 #include "EconomyManager/Building/Building.h"
 #include "Loaders/BuildingLoader/ProductionMethodLoader/ProductionMethodGroupLoader.h"
 #include "Loaders/BuildingLoader/ProductionMethodLoader/ProductionMethodLoader.h"
+#include "ModLoader/ModFilesystem.h"
 #include "PoliticalManager/Country/Country.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
@@ -53,7 +54,7 @@ TEST(Mappers_ProductionMethodMapperTests, RulesCanBeLoaded)
 
 	EXPECT_FALSE(mapper.getRules().contains("building_government_administration"));
 	EXPECT_THAT(mapper.getRules().at("building_logging_camp"),
-		 testing::UnorderedElementsAre(mappers::PMRule{"pm_saw_mills"}, mappers::PMRule{"pm_hardwood", 0.33}));
+		 testing::UnorderedElementsAre(mappers::PMRule{"pm_saw_mills"}, mappers::PMRule{"pm_hardwood", 0.65}));
 }
 TEST(Mappers_ProductionMethodMapperTests, ApplyRules)
 {

@@ -40,13 +40,15 @@ class ProductionMethodMapper: commonItems::parser
 	static std::vector<std::shared_ptr<V3::Building>> subSetSum(const std::vector<std::shared_ptr<V3::Building>>& subSet, int targetVal);
 	static std::pair<int, int> findBreakIndexAndSum(const std::vector<std::shared_ptr<V3::Building>>& subSet, int targetNumber);
 	static void initializeBreakSolution(std::vector<std::vector<int>>& stateSpace, int maxVal, int breakIndex, int breakSum, int targetVal);
-	static void completeBalancedOperations(std::vector<std::vector<int>>& stateSpace, int maxVal, int breakIndex, const std::vector<int>& subSet);
-	static void traceSteps(const std::vector<std::vector<int>>& theStates,
-		 std::vector<int>& output,
+	static void completeBalancedOperations(std::vector<std::vector<int>>& stateSpace,
+		 int maxVal,
+		 int breakIndex,
+		 const std::vector<std::shared_ptr<V3::Building>>& subSet);
+	static std::vector<std::shared_ptr<V3::Building>> traceSteps(const std::vector<std::vector<int>>& theStates,
 		 int offBy,
 		 int maxVal,
 		 int breakIndex,
-		 const std::vector<int>& subSet);
+		 const std::vector<std::shared_ptr<V3::Building>>& subSet);
 
 	std::map<std::string, std::vector<PMRule>> buildingToRules; // building_name -> PMRules
 };

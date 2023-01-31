@@ -10,5 +10,5 @@ TEST(V3World_ProductionMethodLoaderTests, ProductionMethodLoaderCanLoadProductio
 	EXPECT_TRUE(PMLoader.getPMs().empty());
 	PMLoader.loadPMs(modFS);
 	const auto PMs = PMLoader.getPMs();
-	EXPECT_EQ(3, PMs.size());
+	EXPECT_EQ(18, PMs.size());
 }
