@@ -233,11 +233,13 @@ link = { vic3 = greek eu4group = byzantine }
 
 #Caucasian - Armenians, Azerbaijani, Georgian and North Caucasian
 ##Added - Alan
-link = { vic3 = alan eu4 = alan }
+link = { vic3 = alan eu4 = alan eu4 = ossetian }
 link = { vic3 = armenian eu4 = armenian eu4 = ge_armenian eu4 = owm_armenian }
 link = { vic3 = azerbaijani eu4 = azerbadjani eu4 = azerbaijani eu4 = shirvani }
 link = { vic3 = georgian eu4 = georgian }
-link = { vic3 = north_caucasian eu4 = circassian eu4 = dagestani eu4 = avar_culture eu4 = abazin eu4 = caucasian_albanian eu4 = chechen eu4 = ossetian }
+link = { vic3 = avar eu4 = avar eu4 = avar_culture }
+link = { vic3 = avar eu4 = dagestani owner = A15 }
+link = { vic3 = north_caucasian eu4 = circassian eu4 = dagestani eu4 = abazin eu4 = caucasian_albanian eu4 = chechen }
 
 
 # Arab-Speaking - Amazigh (Berber), Bedouin, Maghrebi, Mashriqi, Misir, Somali(x), Sudanese(x) and Yemenite
@@ -273,8 +275,8 @@ link = { vic3 = uzbek eu4 = chorasmian eu4 = uzbek eu4 = uzbehk eu4 = karluk }
 link = { vic3 = kalmyk eu4group = altaic region = region_anatolia region = region_caucasus region = region_dnieper region = region_russia region = STATE_INGRIA }
 link = { vic3 = tuvan eu4group = altaic region = STATE_TUVA }
 
-link = { vic3 = mongol eu4 = mongol eu4 = chahar eu4 = khalkha eu4 = oirats eu4 = khitan eu4 = yuan_culture eu4 = khalkas eu4 = khamnigan eu4 = khorchin eu4 = tumed eu4 = uriankhai eu4 = altaic_new eu4 = chaghatai }
-link = { vic3 = tuvan eu4 = tuvan }
+link = { vic3 = mongol eu4 = mongol eu4 = chahar eu4 = khalkha eu4 = oirats eu4 = khitan eu4 = yuan_culture eu4 = khalkas eu4 = khamnigan eu4 = khorchin eu4 = tumed eu4 = altaic_new eu4 = chaghatai }
+link = { vic3 = tuvan eu4 = tuvan eu4 = uriankhai }
 
 
 #Siberian - Siberian and Yakut
@@ -284,7 +286,9 @@ link = { vic3 = yakut eu4 = yakut eu4 = yukagyr eu4 = buryat eu4 = tungus eu4 = 
 
 #Turkic - Turkish, Azerbaijani, Tatar and Tuvan
 link = { vic3 = turkish eu4 = turkish eu4 = yorouk }
-link = { vic3 = tatar eu4 = sabir eu4 = hunnic eu4 = tartar eu4 = bolghar eu4 = cuman eu4 = avar eu4 = khazar eu4 = qasim  eu4 = avar eu4 = hunnic eu4 = sinoturk eu4 = nogai eu4 = chuvash }
+link = { vic3 = tatar eu4 = sabir eu4 = hunnic eu4 = tartar eu4 = bolghar eu4 = qasim eu4 = hunnic eu4 = sinoturk eu4 = nogai eu4 = chuvash }
+link = { vic3 = cuman eu4 = cuman }
+link = { vic3 = khazar eu4 = khazar }
 link = { vic3 = tatar eu4group = tartar } #Fallback
 
 
@@ -295,7 +299,8 @@ link = { vic3 = nahua eu4 = aztek eu4 = totonac eu4 = matlatzinca eu4 = tepic eu
 link = { vic3 = tarascan eu4 = purepecha eu4 = tecos }
 link = { vic3 = mixtec eu4 = mixtec eu4 = tlapanec eu4 = cuicatec }
 link = { vic3 = miskito eu4 = miskito }
-link = { vic3 = otomanguean eu4 = chichimecha eu4 = guamares eu4 = otomi eu4 = metztitlani eu4 = manguean }
+link = { vic3 = otomi eu4 = otomi }
+link = { vic3 = otomanguean eu4 = chichimecha eu4 = guamares eu4 = metztitlani eu4 = manguean }
 
 link = { vic3 = nahua eu4group = central_american } #Fallback
 ## Cultures left to dynamic generation: Atakapa, Beothuk, Calusa, Chitimacha, Chon, Ket, Puelche, Timicua, Tonkawa
@@ -346,9 +351,10 @@ link = { vic3 = quechua eu4 = inca eu4 = chimuan eu4 = chimu eu4 = culle eu4 = h
 link = { vic3 = muisca eu4 = muisca eu4 = chibcha eu4 = cara eu4 = chibchan eu4 = manteno eu4 = misumalpan eu4 = pech eu4 = xinca }
 link = { vic3 = patagonian eu4 = patagonian eu4 = het }
 link = { vic3 = tupinamba eu4 = tupinamba eu4 = tupi }
+link = { vic3 = taino eu4 = taino }
 
 link = { vic3 = araucanian eu4group = araucanian } #Mapuche, Huarpe, etc.
-link = { vic3 = cariban eu4group = carribean } #Carib, Arawak (Taino)
+link = { vic3 = cariban eu4group = carribean } #Carib, Arawak 
 link = { vic3 = chacoan eu4group = mataco } #Chacoan
 link = { vic3 = maranon eu4group = maranon } #Jivaro, Chachapoyan 
 
@@ -384,8 +390,10 @@ link = { vic3 = khmu eu4 = khmu }
 link = { vic3 = khmu eu4 = palaungic } # CK3ToEU4
 link = { vic3 = mon eu4 = mon eu4 = monic }
 link = { vic3 = bahnar eu4 = cham religion = animist owner = B08 }
+
 # Malay - Malay, Bornean, Sumatran, Balinese, Batak, Dayak, Filipino, Moro, Javan, Moluccan
-link = { vic3 = moro eu4 = filipino u4 = cebuano eu4 = maguindanao eu4 = philipino eu4 = tagalog eu4 = tausug religion_group = muslim }
+link = { vic3 = moro eu4 = filipino eu4 = cebuano eu4 = maguindanao eu4 = philipino eu4 = tagalog eu4 = tausug religion_group = muslim }
+link = { vic3 = filipino eu4 = filipino eu4 = cebuano eu4 = maguindanao eu4 = philipino eu4 = tagalog eu4 = tausug }
 link = { vic3 = balinese eu4 = balinese }
 link = { vic3 = batak eu4 = batak }
 link = { vic3 = bornean eu4 = bornean eu4 = banjar }
@@ -430,7 +438,10 @@ link = { vic3 = hawaiian eu4 = hawaian }
 link = { vic3 = maori eu4 = maori }
 link = { vic3 = melanesian eu4 = melanesian eu4 = papuan eu4 = halmahera }
 link = { vic3 = micronesian eu4 = micronesian }
-link = { vic3 = polynesian eu4 = polynesian eu4 = taiwanese }
+link = { vic3 = formosan eu4 = taiwanese }
+link = { vic3 = formosan eu4 = polynesian region = STATE_FORMOSA }
+link = { vic3 = polynesian eu4 = polynesian }
+
 
 link = { vic3 = aborigine eu4group = aboriginal_australian }
 
@@ -441,6 +452,8 @@ link = { vic3 = nepali eu4 = nepali eu4 = pahari eu4 = bhutanese eu4 = sikkimese
 
 # Indo-Aryan - Bengali, Bihari, Oriya, Sinhala, Avadhi, Kanauji, Panjabi, Kashmiri, Gujarati, Marathi, Sindi, Rajput
 ##Added - Parsi
+link = { vic3 = parsi eu4 = parsi }
+link = { vic3 = parsi eu4group = western_aryan religion = zoroastrian }
 link = { vic3 = avadhi eu4 = avadhi }
 link = { vic3 = bengali eu4 = bengali eu4 = kochi }
 link = { vic3 = bihari eu4 = bihari eu4 = jharkhandi eu4 = maithili }
@@ -450,7 +463,6 @@ link = { vic3 = kashmiri eu4 = kashmiri }
 link = { vic3 = marathi eu4 = marathi eu4 = bhil eu4 = khandeshi }
 link = { vic3 = oriya eu4 = oriya eu4 = garjati }
 link = { vic3 = panjabi eu4 = panjabi eu4 = urdu eu4 = dakani eu4 = jati }
-link = { vic3 = parsi eu4 = parsi }
 link = { vic3 = rajput eu4 = rajput eu4 = malvi eu4 = dhundari eu4 = harauti eu4 = marwari eu4 = meo eu4 = mewari eu4 = tomara eu4 = nimadi }
 link = { vic3 = sindi eu4 = sindhi eu4 = multani }
 link = { vic3 = sinhala eu4 = sinhala }
@@ -613,7 +625,8 @@ link = { vic3 = scythia eu4group = scythian_group }
 # All dynamically generated
 
 # Animals / Non-humans
-# All dynamically generated
+# All but dragons are dynamically generated
+link = { vic3 = dragon eu4 = dragon_culture }
 
 # IMP:CK3 cultures
 # All dynamically generated
