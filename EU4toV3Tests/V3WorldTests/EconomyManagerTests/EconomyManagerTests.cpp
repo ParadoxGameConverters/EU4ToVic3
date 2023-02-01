@@ -178,10 +178,6 @@ TEST(DISABLED_V3World_EconomyManagerTests, GlobalCPDistributionDev)
 {
 }
 
-TEST(DISABLED_V3World_EconomyManagerTests, CalculateGeoMeanTest)
-{
-}
-
 TEST(DISABLED_V3World_EconomyManagerTests, AssignSubStateCPBudgetsTechGroup)
 {
 }

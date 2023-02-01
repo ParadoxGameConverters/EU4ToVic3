@@ -1,0 +1,11 @@
+# Linked buildings will walk towards the PMs specified until the PM is reached. or the next step is invalid due to tech.
+# The percent is the percent of building levels that will try to move off of default to adopt the defined PM. It is assumed to be 1(100%) unless specified.
+
+building_government_administration = { 
+    pm = { name = pm_vertical_filing_cabinets }
+}
+
+building_logging_camp = {
+    pm = { name = pm_saw_mills }
+    pm = { name = pm_hardwood percent = 0.65 }
+}

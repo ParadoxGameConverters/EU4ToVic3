@@ -101,7 +101,7 @@ double V3::Country::getTechInfraMult(const std::map<std::string, Tech>& techMap)
 	});
 }
 
-bool V3::Country::hasAnyOfTech(const std::vector<std::string>& techs) const
+bool V3::Country::hasAnyOfTech(const std::set<std::string>& techs) const
 {
 	if (techs.empty())
 	{

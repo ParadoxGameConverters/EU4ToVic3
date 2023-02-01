@@ -90,8 +90,6 @@ struct ProcessedData
 	int CPBudget = 0;				// Construction Points for a country to spend on it's development
 	std::map<std::string, std::shared_ptr<Sector>> industrySectors;
 
-	std::map<std::string, std::vector<std::string>> productionMethods; // Non-default production methods used by country, Building -> PMs
-
 	std::string name;
 	std::string adjective;
 	std::map<std::string, std::string> namesByLanguage;		// language, name
@@ -112,7 +110,6 @@ class Country: commonItems::parser
 	void setTag(const std::string& theTag) { tag = theTag; }
 	void setIndustryWeight(const double theIndustryWeight) { processedData.industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theBudget) { processedData.CPBudget = theBudget; }
-	void setProductionMethods(const std::map<std::string, std::vector<std::string>>& thePMs) { processedData.productionMethods = thePMs; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 
 	void convertFromEU4Country(const ClayManager& clayManager,
@@ -190,7 +187,7 @@ class Country: commonItems::parser
 	[[nodiscard]] static double yearCapFactor(const date& targetDate);
 	[[nodiscard]] int getTechInfraCap(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] double getTechInfraMult(const std::map<std::string, Tech>& techMap) const;
-	[[nodiscard]] bool hasAnyOfTech(const std::vector<std::string>& techs) const;
+	[[nodiscard]] bool hasAnyOfTech(const std::set<std::string>& techs) const;
 	[[nodiscard]] int getGovBuildingMax(const std::string& building,
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::map<std::string, Tech>& techMap) const;

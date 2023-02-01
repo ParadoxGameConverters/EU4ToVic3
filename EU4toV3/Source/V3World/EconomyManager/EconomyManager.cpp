@@ -38,7 +38,7 @@ void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::
 
 		centralizedCountries.push_back(country);
 	}
-	Log(LogLevel::Info) << "<> Loaded " << centralizedCountries.size() << "Centralized Countries.";
+	Log(LogLevel::Info) << "<> Loaded " << centralizedCountries.size() << " Centralized Countries.";
 }
 
 void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem& modFS, const std::string& filePath)
@@ -49,6 +49,7 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 	loadStateTraits(modFS);
 	loadBuildingInformation(modFS);
 	loadBuildingMappings(filePath);
+	loadPMMappings(filePath);
 	loadEconDefines(filePath);
 	loadNationalBudgets(filePath);
 	loadTechMap(modFS);
@@ -78,7 +79,7 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 
 		// Use the PM with the most generation available
 		int PMGeneration = 35;
-		const auto& PMName = pickBureaucracyPM(country);
+		const auto& PMName = pickBureaucracyPM(*country);
 		if (PMs.contains(PMName))
 		{
 			PMGeneration = PMs.at(PMName).getBureaucracy();
@@ -89,8 +90,6 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 
 		country->distributeGovAdmins(numAdmins);
 	}
-
-	setPMs();
 	Log(LogLevel::Info) << "<> Bureaucracy Established.";
 }
 
@@ -99,23 +98,23 @@ void V3::EconomyManager::hardcodePorts() const
 	Log(LogLevel::Info) << "-> Hardcoding Ports.";
 	auto counter = 0;
 
-	Building portTemplate;
-	portTemplate.setName("building_port");
-	portTemplate.setLevel(1);
-
 	for (const auto& country: centralizedCountries)
 	{
 		for (const auto& subState: country->getSubStates())
 		{
 			if (!subState->getVanillaBuildingElements().empty())
 				continue; // don't affect states imported from vanilla.
-			if (subState->isCoastal())
-			{
-				auto port = std::make_shared<Building>(portTemplate);
-				subState->addBuilding(port);
-				++counter;
-				subState->getOwner()->addTech("navigation");
-			}
+			if (!subState->isCoastal())
+				continue;
+
+			auto port = std::make_shared<Building>();
+			port->setName("building_port");
+			port->setLevel(1);
+			port->addPM("pm_basic_port"); // Until PM setting is off the ground
+
+			subState->addBuilding(port);
+			++counter;
+			subState->getOwner()->addTech("navigation");
 		}
 	}
 	Log(LogLevel::Info) << "<> Hardcoded " << counter << " ports.";
@@ -215,11 +214,11 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 	// 2. The country checks if the sector that building belongs to has enough CP for at least 1 building
 	// 2b. If not, the substate moves on to the next highest scoring building until it exhausts its list.
 	// 2c. If a substate exhausts its building list without matching with a country's sector, it gets to ignore the country budget.
-	// 2d. The CP comes out of the country's biggest sector
+	// 2d. The CP then comes out of the country's biggest sector
 	// 3. The state then builds as many buildings of that kind as it can, limited by capacity, packet size and sector CP
-	// 3b. capacity is RGO/arable land capacity
+	// 3b. capacity is RGO/arable land capacity, or can be law/tech based.
 	// 3c. packet size is based on the mean amount of CP states have left to build and is configurable
-	// 4. If a sector or substate end up with less CP than the cost for any possible valid building, they relinquish it to the next sector/substate
+	// 4. If a substate ends up with less CP than the cost for any possible valid building, they relinquish it to the next sector/substate
 
 	for (const auto& country: centralizedCountries)
 	{
@@ -329,7 +328,7 @@ double V3::EconomyManager::calculateGeoMeanCentralizedPops() const
 	return exp(sum);
 }
 
-std::string V3::EconomyManager::pickBureaucracyPM(const std::shared_ptr<Country>& country) const
+std::string V3::EconomyManager::pickBureaucracyPM(const Country& country) const
 {
 	int generation = 0;
 	std::string bestPMName = "pm_simple_organization";
@@ -351,7 +350,7 @@ std::string V3::EconomyManager::pickBureaucracyPM(const std::shared_ptr<Country>
 		const auto& PM = PMs.at(PMName);
 
 		// Only use PMs we have unlocked
-		if (!country->hasAnyOfTech(PM.getUnlockingTechs()))
+		if (!country.hasAnyOfTech(PM.getUnlockingTechs()))
 		{
 			continue;
 		}
@@ -437,16 +436,22 @@ void V3::EconomyManager::distributeBudget(const double globalCP, const double to
 
 void V3::EconomyManager::setPMs() const
 {
-	// For now just set bureaucracy, default PMs everywhere else
-	// More detailed PM picking will happen later
-
 	for (const auto& country: centralizedCountries)
 	{
-		auto data = country->getProcessedData();
-		const auto& PMName = pickBureaucracyPM(country);
-		data.productionMethods["building_government_administration"] = {PMName};
-		data.productionMethods["building_port"] = {"pm_basic_port"};
-		country->setProductionMethods(data.productionMethods);
+		PMMapper.applyRules(*country, PMs, PMGroups);
+
+		// Gov Admin are special
+		const auto& adminPMName = pickBureaucracyPM(*country);
+		for (const auto& subState: country->getSubStates())
+		{
+			for (const auto& building: subState->getBuildings())
+			{
+				if (building->getName() != "building_government_administration")
+					continue;
+
+				building->addPM(adminPMName);
+			}
+		}
 	}
 }
 
@@ -476,9 +481,9 @@ std::vector<std::shared_ptr<V3::SubState>> V3::EconomyManager::prepareSubStatesB
 
 	// Make buildings from template buildings
 	// Only valid building will be added to the vector
-	for (const auto& substate: subStatesByBudget)
+	for (const auto& subState: subStatesByBudget)
 	{
-		substate->gatherPossibleBuildings(buildings,
+		subState->gatherPossibleBuildings(buildings,
 			 buildingGroups,
 			 buildingTerrainModifiers,
 			 buildingMapper,
@@ -700,7 +705,12 @@ void V3::EconomyManager::loadBuildingInformation(const commonItems::ModFilesyste
 
 void V3::EconomyManager::loadBuildingMappings(const std::string& filePath)
 {
-	buildingMapper.loadBuildingMappings("configurables/economy/buildings_map.txt");
+	buildingMapper.loadBuildingMappings(filePath + "configurables/economy/buildings_map.txt");
+}
+
+void V3::EconomyManager::loadPMMappings(const std::string& filePath)
+{
+	PMMapper.loadRules(filePath + "configurables/economy/production_method_rules.txt");
 }
 
 void V3::EconomyManager::loadEconDefines(const std::string& filePath)

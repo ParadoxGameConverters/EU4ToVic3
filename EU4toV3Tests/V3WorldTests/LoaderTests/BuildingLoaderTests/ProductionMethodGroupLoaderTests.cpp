@@ -10,5 +10,5 @@ TEST(V3World_ProductionMethodGroupLoaderTests, ProductionMethodGroupLoaderCanLoa
 	EXPECT_TRUE(PMGroupLoader.getPMGroups().empty());
 	PMGroupLoader.loadPMGroups(modFS);
 	const auto PMGroups = PMGroupLoader.getPMGroups();
-	EXPECT_EQ(3, PMGroups.size());
+	EXPECT_EQ(8, PMGroups.size());
 }

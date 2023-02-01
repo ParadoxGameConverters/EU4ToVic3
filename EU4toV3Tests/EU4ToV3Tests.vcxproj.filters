@@ -1147,6 +1147,24 @@
     <ClCompile Include="EU4WorldTests\LoaderTests\TradeCompanyLoaderTests\TradeCompanyLoaderTests.cpp">
       <Filter>EU4WorldTests\LoaderTests\TradeCompanyLoaderTests</Filter>
     </ClCompile>
+    <ClCompile Include="MapperTests\BuildingMapperTests\ProductionMethodMapperTests.cpp">
+      <Filter>MapperTests\BuildingMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\BuildingMapperTests\ProductionMethodMappingTests.cpp">
+      <Filter>MapperTests\BuildingMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodEntry.cpp">
+      <Filter>ConverterFiles\Mappers\BuildingMapper\ProductionMethods</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodMapper.cpp">
+      <Filter>ConverterFiles\Mappers\BuildingMapper\ProductionMethods</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodMapping.cpp">
+      <Filter>ConverterFiles\Mappers\BuildingMapper\ProductionMethods</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\BuildingMapperTests\ProductionMethodEntryTests.cpp">
+      <Filter>MapperTests\BuildingMapperTests</Filter>
+    </ClCompile>
     <ClCompile Include="..\commonItems\external\googletest\googletest\src\gtest_main.cc" />
     <ClCompile Include="..\commonItems\external\googletest\googletest\src\gtest-all.cc" />
     <ClCompile Include="..\commonItems\external\googletest\googlemock\src\gmock-all.cc" />
@@ -1887,6 +1905,9 @@
     <Filter Include="EU4WorldTests\LoaderTests\TradeCompanyLoaderTests">
       <UniqueIdentifier>{48e56511-bcd7-4793-814a-8724b09dec96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConverterFiles\Mappers\BuildingMapper\ProductionMethods">
+      <UniqueIdentifier>{25e7e535-39ab-4cdf-919b-7abde1c83fd3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\commonItems\ConvenientParser.h">
@@ -2181,6 +2202,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\eu4installation\common\trade_companies\00_trade_companies.txt">
       <Filter>TestFiles\eu4installation\common\trade_companies</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\economy\production_method_rules.txt">
+      <Filter>TestFiles\configurables\economy</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

@@ -1,12 +1,16 @@
-# This file allows technology groups to affect westernization of the country, should this option be enabled in the converter. 
+# Everything in this file only applies when EUROCENTRISIM is enabled.
+#
+# This file allows cultural traits to affect westernization of the country, should this option be enabled in the converter. 
 # This is done by describing a level of westernization, industry and literacy for a country with a culture (or multiples) that have these traits.
-# If EUROCENTRISM option is enabled, this file completely supercedes ANY EU4 tech levels.
+# This file completely supercedes ANY EU4 tech levels.
 # 
 # Scale for westernization is 0 to 10 where:
 # 0 - These are stone-age people - ["euro-civlevel" zet to 0]
 # 5 - Uncivilized but not primitive tribes of north africa - ["euro-civlevel" zet to 50]
 # 10 - A modern tea-drinking Man-o-war sailing colonial empire - ["euro-civlevel" zet to 100]
-# 
+#
+# If the economy configuration is set to CIVLEVEL, westernization strongly influences the amount of buildings a country gets to build.
+#
 # You can also set increased or decreased literacy to a particular cultural trait, where:
 # 0 - These people are illiterate. - [literacy is capped by "euro-civlevel"% and then halved]
 # 5 - Standard levels of literacy for this group - [literacy is capped by "euro-civlevel"%]
@@ -15,7 +19,11 @@
 # You can also set increased or decreased industrial score to a particular cultural trait, where:
 # 0 - No industry - [industry is calculated for "euro-civlevel"% and then zeroed]
 # 5 - Standard levels of industry for this group - [industry is calculated for "euro-civlevel"%]
-# 10 - Extraordinarily literate aliens from Atlantis - [industry is calculated for "euro-civlevel"% and then doubled]
+# 10 - Extraordinarily industrial aliens from Atlantis - [industry is calculated for "euro-civlevel"% and then doubled]
+#
+# Industry score mainly effects those sectors marked industrial in configurables/economy/national_budget.txt
+# It does NOT effect the total number of buildings built, just the types.
+# Those with an Industry score below 2 will struggle to build any urban buildings
 #
 # So how does this work? Without westernization we use "civlevel" - which is basically
 # 	124 - missingTechs * 4 - missingInstitutions * 8, capped at 100.
