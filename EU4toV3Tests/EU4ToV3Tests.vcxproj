@@ -50,36 +50,26 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>../commonItems;../commonItems/external/googletest/googletest;../commonItems/external/googletest/googletest/include;../commonItems/external/googletest/googlemock;../commonItems/external/googletest/googlemock/include;../EU4toV3/Source;../EU4toV3/Source/EU4World/Loaders;../EU4toV3/Source/EU4World;../EU4toV3/Source/Mappers;../EU4toV3/Source/V3World;../EU4toV3/Source/Configuration;../commonItems/external/zip/src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib;$(SolutionDir)commonItems\pch;../commonItems;../commonItems/external/googletest/googletest;../commonItems/external/googletest/googletest/include;../commonItems/external/googletest/googlemock;../commonItems/external/googletest/googlemock/include;../EU4toV3/Source;../EU4toV3/Source/EU4World/Loaders;../EU4toV3/Source/EU4World;../EU4toV3/Source/Mappers;../EU4toV3/Source/V3World;../EU4toV3/Source/Configuration;../commonItems/external/zip/src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX20_U8PATH_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(SolutionDir)lib\pch.pch</PrecompiledHeaderOutputFile>
+      <ProgramDataBaseFileName>$(SolutionDir)lib\common.pdb</ProgramDataBaseFileName>
+      <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pch.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\commonItems\Color.cpp" />
-    <ClCompile Include="..\commonItems\CommonFunctions.cpp" />
-    <ClCompile Include="..\commonItems\ConvenientParser.cpp" />
-    <ClCompile Include="..\commonItems\ConverterVersion.cpp" />
-    <ClCompile Include="..\commonItems\Date.cpp" />
     <ClCompile Include="..\commonItems\external\googletest\googlemock\src\gmock-all.cc" />
     <ClCompile Include="..\commonItems\external\googletest\googletest\src\gtest-all.cc" />
     <ClCompile Include="..\commonItems\external\googletest\googletest\src\gtest_main.cc" />
-    <ClCompile Include="..\commonItems\external\zip\src\zip.c" />
-    <ClCompile Include="..\commonItems\GameVersion.cpp" />
-    <ClCompile Include="..\commonItems\iconvlite.cpp" />
-    <ClCompile Include="..\commonItems\Log.cpp" />
-    <ClCompile Include="..\commonItems\ModLoader\ModFilesystem.cpp" />
-    <ClCompile Include="..\commonItems\ModLoader\ModLoader.cpp" />
-    <ClCompile Include="..\commonItems\ModLoader\ModParser.cpp" />
-    <ClCompile Include="..\commonItems\OSCommonLayer.cpp" />
-    <ClCompile Include="..\commonItems\Parser.cpp" />
-    <ClCompile Include="..\commonItems\ParserHelpers.cpp" />
-    <ClCompile Include="..\commonItems\StringUtils.cpp" />
-    <ClCompile Include="..\commonItems\targa.cpp" />
-    <ClCompile Include="..\commonItems\WinUtils.cpp" />
     <ClCompile Include="..\EU4toV3\Source\Configuration\Configuration.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryArmy\EU4Army.cpp" />
     <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryArmy\EU4Regiment.cpp" />
@@ -450,9 +440,6 @@
     <ClCompile Include="V3WorldTests\PoliticalManagerTests\PoliticalManagerTests.cpp" />
     <ClCompile Include="V3WorldTests\PoliticalManagerTests\TechValuesTests\TechValuesTests.cpp" />
     <ClCompile Include="V3WorldTests\PopManagerTests\PopManagerTests.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\commonItems\ConvenientParser.h" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\eu4installation\eu4">
