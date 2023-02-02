@@ -488,6 +488,18 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 			if (country1->second->getProcessedData().type == "unrecognized")
 				newAgreement.type = "vassal";
 		}
+		if (newAgreement.type == "tributary")
+		{
+			// Watch for westernization!
+			if (country1->second->getProcessedData().type != "unrecognized")
+				newAgreement.type = "protectorate";
+		}
+		if (newAgreement.type == "protectorate")
+		{
+			// Watch for westernization!
+			if (country1->second->getProcessedData().type == "unrecognized")
+				newAgreement.type = "tributary";
+		}
 		if (newAgreement.type == "customs_union")
 		{
 			// vic3 has this reversed
