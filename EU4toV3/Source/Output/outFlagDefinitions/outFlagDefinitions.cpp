@@ -13,10 +13,10 @@ void outFlagDefinitions(std::ostream& output, const std::string& tag, const V3::
 	{
 		output << "\tflag_definition = {\n";
 		output << "\t\tcoa = " << coaCode << "\n";
+		output << "\t\tallow_overlord_canton = yes\n";
 
 		if (flagType == V3::FlagCrafter::Default)
 		{
-			output << "\t\tallow_overlord_canton = yes\n";
 			output << "\t\tsubject_canton = " << coaCode << "\n";
 			output << "\t\tpriority = 1\n";
 		}
@@ -30,7 +30,6 @@ void outFlagDefinitions(std::ostream& output, const std::string& tag, const V3::
 		{
 			output << "\t\tpriority = 20\n";
 			output << "\t\tsubject_canton = " << coaCode << "\n";
-			output << "\t\tallow_overlord_canton = yes\n";
 			output << "\t\toverlord_canton_scale = { 0.337 0.337 }\n";
 			output << "\t\ttrigger = { coa_def_absolute_monarchy_flag_trigger = yes }\n";
 		}
