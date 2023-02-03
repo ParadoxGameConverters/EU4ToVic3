@@ -45,7 +45,7 @@ EU4::World::World(const std::shared_ptr<Configuration>& theConfiguration, const 
 	regionManager.loadRegions(modFS);
 	Log(LogLevel::Info) << "\t\tColonial Regions";
 	regionManager.loadColonialRegions(modFS);
-	Log(LogLevel::Info) << "\t\rTrade Companies";
+	Log(LogLevel::Info) << "\t\tTrade Companies";
 	regionManager.loadTradeCompanies(modFS);
 	regionManager.loadExcludedTradeCompanies("configurables/excluded_trade_companies.txt");
 	Log(LogLevel::Info) << "\t\tReligions";
@@ -240,8 +240,10 @@ void EU4::World::registerKeys(const std::shared_ptr<Configuration>& theConfigura
 		celestialEmperor = empireBlock.getEmperor();
 		Log(LogLevel::Info) << "-> Celestial emperor is: " << celestialEmperor;
 	});
-	registerKeyword("revolution_target", [this](std::istream& theStream) {
-		revolutionTarget = commonItems::getString(theStream);
+	registerKeyword("revolution", [this](std::istream& theStream) {
+		const RevolutionParse revolutionBlock(theStream);
+		revolutionTarget = revolutionBlock.getRevolutionTarget();
+		Log(LogLevel::Info) << "-> The revolutions leader is: " << revolutionTarget;
 	});
 	registerKeyword("diplomacy", [this](std::istream& theStream) {
 		Log(LogLevel::Info) << "-> Loading Diplomacy";

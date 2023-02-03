@@ -661,7 +661,7 @@ void V3::EconomyManager::loadTerrainModifierMatrices(const std::string& filePath
 	stateTerrainModifiers = terrainModifierLoader.getTerrainStateModifiers();
 	buildingTerrainModifiers = terrainModifierLoader.getTerrainBuildingModifiers();
 
-	Log(LogLevel::Info) << "<> Loaded " << stateTerrainModifiers.size() << "state and " << buildingTerrainModifiers.size() << " building terrain modifiers.";
+	Log(LogLevel::Info) << "<> Loaded " << stateTerrainModifiers.size() << " state and " << buildingTerrainModifiers.size() << " building terrain modifiers.";
 }
 
 void V3::EconomyManager::loadStateTraits(const commonItems::ModFilesystem& modFS)
