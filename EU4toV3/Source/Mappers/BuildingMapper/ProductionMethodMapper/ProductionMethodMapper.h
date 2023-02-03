@@ -31,8 +31,9 @@ class ProductionMethodMapper: commonItems::parser
 	[[nodiscard]] static std::set<std::string> getCountryBuildingTypes(const V3::Country& country);
 	[[nodiscard]] static std::vector<std::shared_ptr<V3::Building>> getBuiltBuildings(const V3::Country& country, const std::string& buildingType);
 	[[nodiscard]] static std::vector<std::shared_ptr<V3::Building>> pickBuildings(const std::vector<std::shared_ptr<V3::Building>>& buildings, double percent);
-	[[nodiscard]] static std::string pickPM(const V3::Country& country,
+	[[nodiscard]] static std::pair<std::string, std::string> pickPM(const V3::Country& country,
 		 const std::string& targetName,
+		 const std::set<std::string>& buildingPMGroups,
 		 const std::map<std::string, V3::ProductionMethod>& PMs,
 		 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups);
 

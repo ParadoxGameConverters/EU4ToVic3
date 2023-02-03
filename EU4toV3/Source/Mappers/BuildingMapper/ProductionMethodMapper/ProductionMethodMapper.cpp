@@ -46,11 +46,20 @@ void mappers::ProductionMethodMapper::applyRules(const V3::Country& country,
 		for (const auto& rule: buildingToRules.at(buildingType))
 		{
 			auto selectedBuildings = pickBuildings(builtBuildings, rule.percent);
-			const std::string selectedPM = pickPM(country, rule.pm, PMs, PMGroups); // select PM
+			if (selectedBuildings.empty())
+				continue;
+
+			const auto& buildingPMGroups = selectedBuildings[0]->getPMGroups();
+			const auto [defaultPM, selectedPM] = pickPM(country, rule.pm, buildingPMGroups, PMs, PMGroups); // select PM
 
 			// For each building in the vector, add the PMs to it
-			for (const auto& selectedBuilding: selectedBuildings)
-				selectedBuilding->addPM(selectedPM);
+			for (const auto& builtBuilding: builtBuildings)
+			{
+				if (std::ranges::find(selectedBuildings, builtBuilding) != selectedBuildings.end())
+					builtBuilding->addPM(selectedPM);
+				else
+					builtBuilding->addPM(defaultPM);
+			}
 		}
 	}
 }
@@ -101,7 +110,7 @@ std::vector<std::shared_ptr<V3::Building>> mappers::ProductionMethodMapper::pick
 	// Select all buildings with level <= target
 	std::vector<std::shared_ptr<V3::Building>> selectedBuildings;
 	std::ranges::copy_if(buildings, std::back_inserter(selectedBuildings), [target](const std::shared_ptr<V3::Building>& building) {
-		return building->getLevel() <= target;
+		return building->getLevel() <= target && building->getLevel() > 0;
 	});
 
 	if (std::accumulate(selectedBuildings.begin(), selectedBuildings.end(), 0, sumBuildingLevels) > target)
@@ -111,32 +120,12 @@ std::vector<std::shared_ptr<V3::Building>> mappers::ProductionMethodMapper::pick
 
 	// Now return either selectedBuildings, or a single building if the sum of selectedBuildings
 	// is further from target than the smallest building larger than target.
-	std::shared_ptr<V3::Building> smallestLargerBuilding = nullptr;
-	int smallestLargerBuildingLevel = INT_MAX;
-
-	for (const auto& building: buildings)
-	{
-		if (building->getLevel() > target && building->getLevel() < smallestLargerBuildingLevel)
-		{
-			smallestLargerBuilding = building;
-			smallestLargerBuildingLevel = building->getLevel();
-		}
-	}
-
-	if (smallestLargerBuilding)
-	{
-		if (smallestLargerBuildingLevel - target < target - std::accumulate(selectedBuildings.begin(), selectedBuildings.end(), 0, sumBuildingLevels))
-		{
-			selectedBuildings.clear();
-			selectedBuildings.push_back(smallestLargerBuilding);
-		}
-	}
-
 	return selectedBuildings;
 }
 
-std::string mappers::ProductionMethodMapper::pickPM(const V3::Country& country,
+std::pair<std::string, std::string> mappers::ProductionMethodMapper::pickPM(const V3::Country& country,
 	 const std::string& targetName,
+	 const std::set<std::string>& buildingPMGroups,
 	 const std::map<std::string, V3::ProductionMethod>& PMs,
 	 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups)
 {
@@ -144,6 +133,11 @@ std::string mappers::ProductionMethodMapper::pickPM(const V3::Country& country,
 	// This is just a basic version that will support every use-case we currently care about.
 	for (const auto& PMGroup: PMGroups | std::views::values)
 	{
+		if (!buildingPMGroups.contains(PMGroup.getName()))
+		{
+			continue; // We're only checking PMGroups that are present in the building we're working on
+		}
+
 		if (std::ranges::find(PMGroup.getPMs(), targetName) != PMGroup.getPMs().end())
 		{
 			// Validate every PM in group
@@ -152,7 +146,7 @@ std::string mappers::ProductionMethodMapper::pickPM(const V3::Country& country,
 				if (!PMs.contains(PM))
 				{
 					Log(LogLevel::Error) << "Unknown PM: " << PM << ".";
-					return "";
+					return {"", ""};
 				}
 			}
 
@@ -161,9 +155,9 @@ std::string mappers::ProductionMethodMapper::pickPM(const V3::Country& country,
 			for (auto PM: PMGroup.getPMs())
 			{
 				if (!country.hasAnyOfTech(PMs.at(PM).getUnlockingTechs()))
-					return pick;
+					return {PMGroup.getPMs()[0], pick};
 				if (PM == targetName)
-					return PM;
+					return {PMGroup.getPMs()[0], PM};
 				pick = PM;
 			}
 		}
@@ -171,7 +165,7 @@ std::string mappers::ProductionMethodMapper::pickPM(const V3::Country& country,
 
 	Log(LogLevel::Error) << "Could not find a PM group for PM: " << targetName << ".";
 
-	return "";
+	return {"", ""};
 }
 
 ////////////////////////////////////////// Subset-sum fxns

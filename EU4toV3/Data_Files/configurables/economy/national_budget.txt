@@ -161,9 +161,9 @@ tooling_industry = {
 
     building_tooling_workshops
 
-   add = {
-       value = 2.5
-       is_eu4_gp = yes
+    add = {
+        value = 2.5
+        is_eu4_gp = yes
    }
 }
 
@@ -186,8 +186,12 @@ heavy_industry = {
     building_motor_industry
     building_munition_plants
 
-   add = {
-       value = 4
-       is_eu4_gp = yes
-   }
+    add = {
+        value = 4
+        is_eu4_gp = yes
+    }
+    multiply = {
+        value = 0
+        industry_score_less_than = 3
+    }
 }
