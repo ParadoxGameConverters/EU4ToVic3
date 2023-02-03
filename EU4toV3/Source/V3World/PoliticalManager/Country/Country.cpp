@@ -101,7 +101,7 @@ double V3::Country::getTechInfraMult(const std::map<std::string, Tech>& techMap)
 	});
 }
 
-bool V3::Country::hasAnyOfTech(const std::vector<std::string>& techs) const
+bool V3::Country::hasAnyOfTech(const std::set<std::string>& techs) const
 {
 	if (techs.empty())
 	{
@@ -575,7 +575,7 @@ void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 	calculateBaseLiteracy(religionMapper);
 	calculateWesternization(topTech, topInstitutions, cultureMapper, eurocentrism);
 	if (startDate != Configuration::STARTDATE::Vanilla)
-		adjustLiteracy(datingData, cultureMapper);
+		adjustLiteracy(datingData, cultureMapper, eurocentrism);
 	applyLiteracyAndWealthEffects(populationSetupMapper);
 	determineCountryType();
 }
@@ -705,7 +705,7 @@ void V3::Country::applyLiteracyAndWealthEffects(const mappers::PopulationSetupMa
 		processedData.populationEffects.emplace(wealthEffect);
 }
 
-void V3::Country::adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper)
+void V3::Country::adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper, const Configuration::EUROCENTRISM eurocentrism)
 {
 	auto lastDate = datingData.lastEU4Date;
 	if (lastDate > datingData.hardEndingDate)
@@ -714,7 +714,8 @@ void V3::Country::adjustLiteracy(const DatingData& datingData, const mappers::Cu
 	processedData.literacy *= yearCapFactor(lastDate);
 
 	// Apply cultural mod.
-	processedData.literacy *= 1 + (static_cast<double>(cultureMapper.getLiteracyScoreForCulture(*processedData.cultures.begin())) - 5.0) * 10.0 / 100.0;
+	if (eurocentrism == Configuration::EUROCENTRISM::EuroCentric)
+		processedData.literacy *= 1 + (static_cast<double>(cultureMapper.getLiteracyScoreForCulture(*processedData.cultures.begin())) - 5.0) * 10.0 / 100.0;
 
 	// Reduce the literacy for non-westernized nations according to their civLevel score.
 	// -> Hardcoded exception to non-westernized literacy reduction for shinto countries so japan-likes may retain high industrialization potential.

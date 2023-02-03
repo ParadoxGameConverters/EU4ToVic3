@@ -312,12 +312,7 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	{
 		return false;
 	}
-	// TODO(Gawquon): Update when ports go off hardcode
-	if (building.getName() == "building_port")
-	{
-		return false;
-	}
-	if (building.getName() == "building_naval_base")
+	if (building.getName() == "building_naval_base" || building.getName() == "building_port")
 	{
 		if (!isCoastal())
 			return false;
@@ -331,7 +326,7 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	{
 		return false;
 	}
-	// Important, can't build a building if we have no CP to build it. This is what end the loop.
+	// Important, can't build a building if we have no CP to build it. This is what ends the loop.
 	if (building.getConstructionCost() > CPBudget)
 	{
 		return false;

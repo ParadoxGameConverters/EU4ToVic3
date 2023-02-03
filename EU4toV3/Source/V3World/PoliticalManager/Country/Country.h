@@ -73,7 +73,7 @@ struct ProcessedData
 	double literacy = 0;
 	double civLevel = 0;
 	bool westernized = false;
-	double industryFactor = 1.0; // Modifier set by EuroCentrism
+	double industryFactor = 1.0; // Modifier changed if EuroCentrism enabled
 	mappers::IdeaEffect ideaEffect;
 	std::map<std::string, mappers::IGIdeologyMod> igIdeologyModifiers;
 	std::set<std::string> techs;
@@ -89,8 +89,6 @@ struct ProcessedData
 	double industryWeight = 0; // Share of global industry a country should get, not normalized
 	int CPBudget = 0;				// Construction Points for a country to spend on it's development
 	std::map<std::string, std::shared_ptr<Sector>> industrySectors;
-
-	std::map<std::string, std::vector<std::string>> productionMethods; // Non-default production methods used by country, Building -> PMs
 
 	std::string name;
 	std::string adjective;
@@ -112,7 +110,6 @@ class Country: commonItems::parser
 	void setTag(const std::string& theTag) { tag = theTag; }
 	void setIndustryWeight(const double theIndustryWeight) { processedData.industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theBudget) { processedData.CPBudget = theBudget; }
-	void setProductionMethods(const std::map<std::string, std::vector<std::string>>& thePMs) { processedData.productionMethods = thePMs; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 
 	void convertFromEU4Country(const ClayManager& clayManager,
@@ -190,7 +187,7 @@ class Country: commonItems::parser
 	[[nodiscard]] static double yearCapFactor(const date& targetDate);
 	[[nodiscard]] int getTechInfraCap(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] double getTechInfraMult(const std::map<std::string, Tech>& techMap) const;
-	[[nodiscard]] bool hasAnyOfTech(const std::vector<std::string>& techs) const;
+	[[nodiscard]] bool hasAnyOfTech(const std::set<std::string>& techs) const;
 	[[nodiscard]] int getGovBuildingMax(const std::string& building,
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::map<std::string, Tech>& techMap) const;
@@ -216,7 +213,7 @@ class Country: commonItems::parser
 	void generateDecentralizedLocs(const LocalizationLoader& v3LocLoader, const EU4::EU4LocalizationLoader& eu4LocLoader);
 	void calculateBaseLiteracy(const mappers::ReligionMapper& religionMapper);
 	void calculateWesternization(double topTech, double topInstitutions, const mappers::CultureMapper& cultureMapper, Configuration::EUROCENTRISM eurocentrism);
-	void adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper);
+	void adjustLiteracy(const DatingData& datingData, const mappers::CultureMapper& cultureMapper, Configuration::EUROCENTRISM eurocentrism);
 	void applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setDecentralizedEffects();
 	void determineCountryType();

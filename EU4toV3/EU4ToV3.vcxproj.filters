@@ -9,45 +9,6 @@
     <ClCompile Include="Source\V3World\V3World.cpp">
       <Filter>Vic3World</Filter>
     </ClCompile>
-    <ClCompile Include="..\commonItems\Date.cpp">
-      <Filter>CommonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\iconvlite.cpp">
-      <Filter>CommonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\Log.cpp">
-      <Filter>CommonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\Parser.cpp">
-      <Filter>CommonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\ParserHelpers.cpp">
-      <Filter>CommonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\StringUtils.cpp">
-      <Filter>CommonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\WinUtils.cpp">
-      <Filter>CommonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\OSCommonLayer.cpp">
-      <Filter>CommonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\CommonFunctions.cpp">
-      <Filter>CommonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\GameVersion.cpp">
-      <Filter>CommonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\targa.cpp">
-      <Filter>CommonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\Color.cpp">
-      <Filter>CommonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\ConvenientParser.cpp">
-      <Filter>CommonItems</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Configuration\Configuration.cpp">
       <Filter>Configuration</Filter>
     </ClCompile>
@@ -215,18 +176,6 @@
     </ClCompile>
     <ClCompile Include="Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegionLoader.cpp">
       <Filter>EU4World\Loaders\ColonialRegionLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\ConverterVersion.cpp">
-      <Filter>CommonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\ModLoader\ModLoader.cpp">
-      <Filter>CommonItems\ModLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\ModLoader\ModParser.cpp">
-      <Filter>CommonItems\ModLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\ModLoader\ModFilesystem.cpp">
-      <Filter>CommonItems\ModLoader</Filter>
     </ClCompile>
     <ClCompile Include="Source\V3World\ClayManager\ClayManager.cpp">
       <Filter>Vic3World\ClayManager</Filter>
@@ -474,9 +423,6 @@
     <ClCompile Include="Source\Output\outCharacters\outCharacters.cpp">
       <Filter>Output\outCharacters</Filter>
     </ClCompile>
-    <ClCompile Include="..\commonItems\external\zip\src\zip.c">
-      <Filter>CommonItems\zip</Filter>
-    </ClCompile>
     <ClCompile Include="Source\V3World\FlagCrafter\FlagNameLoader\FlagNameLoader.cpp">
       <Filter>Vic3World\FlagCrafter\FlagNameLoader</Filter>
     </ClCompile>
@@ -663,6 +609,15 @@
     <ClCompile Include="Source\EU4World\EmpireParser\RevolutionParser.cpp">
       <Filter>EU4World\EmpireParser</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodMapper.cpp">
+      <Filter>Mappers\BuildingMapper\ProductionMethodMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodMapping.cpp">
+      <Filter>Mappers\BuildingMapper\ProductionMethodMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodEntry.cpp">
+      <Filter>Mappers\BuildingMapper\ProductionMethodMapper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\EU4ToVic3Converter.h" />
@@ -672,47 +627,8 @@
     <ClInclude Include="Source\V3World\V3World.h">
       <Filter>Vic3World</Filter>
     </ClInclude>
-    <ClInclude Include="..\commonItems\Date.h">
-      <Filter>CommonItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\iconvlite.h">
-      <Filter>CommonItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\Log.h">
-      <Filter>CommonItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\OSCompatibilityLayer.h">
-      <Filter>CommonItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\Parser.h">
-      <Filter>CommonItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\ParserHelpers.h">
-      <Filter>CommonItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\StringUtils.h">
-      <Filter>CommonItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\CommonFunctions.h">
-      <Filter>CommonItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\GameVersion.h">
-      <Filter>CommonItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\targa.h">
-      <Filter>CommonItems</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Helpers\rakaly.h">
       <Filter>Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\Color.h">
-      <Filter>CommonItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\CommonRegexes.h">
-      <Filter>CommonItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\ConvenientParser.h">
-      <Filter>CommonItems</Filter>
     </ClInclude>
     <ClInclude Include="Source\Configuration\Configuration.h">
       <Filter>Configuration</Filter>
@@ -893,21 +809,6 @@
     </ClInclude>
     <ClInclude Include="Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegionLoader.h">
       <Filter>EU4World\Loaders\ColonialRegionLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\ConverterVersion.h">
-      <Filter>CommonItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\ModLoader\ModLoader.h">
-      <Filter>CommonItems\ModLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\ModLoader\ModParser.h">
-      <Filter>CommonItems\ModLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\ModLoader\Mod.h">
-      <Filter>CommonItems\ModLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\commonItems\ModLoader\ModFilesystem.h">
-      <Filter>CommonItems\ModLoader</Filter>
     </ClInclude>
     <ClInclude Include="Source\V3World\ClayManager\ClayManager.h">
       <Filter>Vic3World\ClayManager</Filter>
@@ -1194,9 +1095,6 @@
     <ClInclude Include="Source\Output\outCharacters\outCharacters.h">
       <Filter>Output\outCharacters</Filter>
     </ClInclude>
-    <ClInclude Include="..\commonItems\external\zip\src\zip.h">
-      <Filter>CommonItems\zip</Filter>
-    </ClInclude>
     <ClInclude Include="Source\V3World\FlagCrafter\FlagNameLoader\FlagNameLoader.h">
       <Filter>Vic3World\FlagCrafter\FlagNameLoader</Filter>
     </ClInclude>
@@ -1386,6 +1284,18 @@
     <ClInclude Include="Source\Mappers\ExcludedTradeCompaniesMapper\ExcludedTradeCompaniesMapper.h">
       <Filter>Mappers\ExcludedTradeCompaniesMapper</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodMapper.h">
+      <Filter>Mappers\BuildingMapper\ProductionMethodMapper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodMapping.h">
+      <Filter>Mappers\BuildingMapper\ProductionMethodMapper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mappers\BuildingMapper\ProductionMethodMapper\PMRule.h">
+      <Filter>Mappers\BuildingMapper\ProductionMethodMapper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodEntry.h">
+      <Filter>Mappers\BuildingMapper\ProductionMethodMapper</Filter>
+    </ClInclude>
     <ClInclude Include="Source\EU4World\EmpireParser\RevolutionParser.h">
       <Filter>EU4World\EmpireParser</Filter>
     </ClInclude>
@@ -1399,9 +1309,6 @@
     </Filter>
     <Filter Include="Vic3World">
       <UniqueIdentifier>{54d664c9-6ab6-495c-860c-285dad122e46}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CommonItems">
-      <UniqueIdentifier>{92d9302b-67c1-46ea-9493-b56e75598574}</UniqueIdentifier>
     </Filter>
     <Filter Include="Helpers">
       <UniqueIdentifier>{ef5e0061-2ce9-448e-9f80-9fa52991faf9}</UniqueIdentifier>
@@ -1483,9 +1390,6 @@
     </Filter>
     <Filter Include="EU4World\Loaders\ColonialRegionLoader">
       <UniqueIdentifier>{9e5b88cc-ff57-4f96-b614-ad480c35973a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CommonItems\ModLoader">
-      <UniqueIdentifier>{7ceb24a6-d800-4a7a-81aa-33faf3e44a12}</UniqueIdentifier>
     </Filter>
     <Filter Include="Vic3World\ClayManager">
       <UniqueIdentifier>{0a378b7a-d1c3-4af9-a45a-15dba484c76d}</UniqueIdentifier>
@@ -1628,9 +1532,6 @@
     <Filter Include="Output\outCharacters">
       <UniqueIdentifier>{894845e8-f9b2-498d-8d40-b2e11f659785}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CommonItems\zip">
-      <UniqueIdentifier>{16b64fd1-ec61-48d1-8e88-635eb50af80d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Vic3World\FlagCrafter">
       <UniqueIdentifier>{8d4b8d26-6712-43f7-91c1-2a88bd4b0df5}</UniqueIdentifier>
     </Filter>
@@ -1729,6 +1630,9 @@
     </Filter>
     <Filter Include="Mappers\ExcludedTradeCompaniesMapper">
       <UniqueIdentifier>{a475205d-ad96-417d-a634-fdfd6ee0a79d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mappers\BuildingMapper\ProductionMethodMapper">
+      <UniqueIdentifier>{597ae02f-204e-4a37-8e56-08ea35a8c0b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

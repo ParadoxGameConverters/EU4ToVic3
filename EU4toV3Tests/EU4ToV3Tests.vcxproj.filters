@@ -1,42 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\commonItems\Date.cpp">
-      <Filter>ConverterFiles\commonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\iconvlite.cpp">
-      <Filter>ConverterFiles\commonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\Log.cpp">
-      <Filter>ConverterFiles\commonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\Parser.cpp">
-      <Filter>ConverterFiles\commonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\ParserHelpers.cpp">
-      <Filter>ConverterFiles\commonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\StringUtils.cpp">
-      <Filter>ConverterFiles\commonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\WinUtils.cpp">
-      <Filter>ConverterFiles\commonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\OSCommonLayer.cpp">
-      <Filter>ConverterFiles\commonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\GameVersion.cpp">
-      <Filter>ConverterFiles\commonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\CommonFunctions.cpp">
-      <Filter>ConverterFiles\commonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\Color.cpp">
-      <Filter>ConverterFiles\commonItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\ConvenientParser.cpp">
-      <Filter>ConverterFiles\commonItems</Filter>
-    </ClCompile>
     <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\Area.cpp">
       <Filter>ConverterFiles\EU4World\RegionManager</Filter>
     </ClCompile>
@@ -358,9 +322,6 @@
     <ClCompile Include="EU4WorldTests\LoaderTests\ColonialRegionLoaderTests\ColonialRegionTests.cpp">
       <Filter>EU4WorldTests\LoaderTests\ColonialRegionLoaderTests</Filter>
     </ClCompile>
-    <ClCompile Include="..\commonItems\ConverterVersion.cpp">
-      <Filter>ConverterFiles\commonItems</Filter>
-    </ClCompile>
     <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\MergeBlock.cpp">
       <Filter>ConverterFiles\Mappers\NationMergeMapper</Filter>
     </ClCompile>
@@ -375,15 +336,6 @@
     </ClCompile>
     <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp">
       <Filter>ConverterFiles\Mappers\SuperGroupMapper</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\ModLoader\ModLoader.cpp">
-      <Filter>ConverterFiles\commonItems\ModLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\ModLoader\ModParser.cpp">
-      <Filter>ConverterFiles\commonItems\ModLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\ModLoader\ModFilesystem.cpp">
-      <Filter>ConverterFiles\commonItems\ModLoader</Filter>
     </ClCompile>
     <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\ClayManager.cpp">
       <Filter>ConverterFiles\V3World\ClayManager</Filter>
@@ -808,9 +760,6 @@
     <ClCompile Include="MapperTests\CharacterTraitMapperTests\SkillMappingTests.cpp">
       <Filter>MapperTests\CharacterTraitMapperTests</Filter>
     </ClCompile>
-    <ClCompile Include="..\commonItems\external\zip\src\zip.c">
-      <Filter>ConverterFiles\commonItems\zip</Filter>
-    </ClCompile>
     <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagNameLoaderTests\FlagNameLoaderTests.cpp">
       <Filter>V3WorldTests\FlagCrafterTests\FlagNameLoaderTests</Filter>
     </ClCompile>
@@ -828,9 +777,6 @@
     </ClCompile>
     <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagColorLoaderTests\FlagColorLoaderTests.cpp">
       <Filter>V3WorldTests\FlagCrafterTests\FlagColorLoaderTests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\commonItems\targa.cpp">
-      <Filter>ConverterFiles\commonItems</Filter>
     </ClCompile>
     <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialTagMapper\ColonialTagMapper.cpp">
       <Filter>ConverterFiles\Mappers\ColonialTagMapper</Filter>
@@ -1147,6 +1093,24 @@
     <ClCompile Include="EU4WorldTests\LoaderTests\TradeCompanyLoaderTests\TradeCompanyLoaderTests.cpp">
       <Filter>EU4WorldTests\LoaderTests\TradeCompanyLoaderTests</Filter>
     </ClCompile>
+    <ClCompile Include="MapperTests\BuildingMapperTests\ProductionMethodMapperTests.cpp">
+      <Filter>MapperTests\BuildingMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\BuildingMapperTests\ProductionMethodMappingTests.cpp">
+      <Filter>MapperTests\BuildingMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodEntry.cpp">
+      <Filter>ConverterFiles\Mappers\BuildingMapper\ProductionMethods</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodMapper.cpp">
+      <Filter>ConverterFiles\Mappers\BuildingMapper\ProductionMethods</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodMapping.cpp">
+      <Filter>ConverterFiles\Mappers\BuildingMapper\ProductionMethods</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\BuildingMapperTests\ProductionMethodEntryTests.cpp">
+      <Filter>MapperTests\BuildingMapperTests</Filter>
+    </ClCompile>
     <ClCompile Include="..\commonItems\external\googletest\googletest\src\gtest_main.cc" />
     <ClCompile Include="..\commonItems\external\googletest\googletest\src\gtest-all.cc" />
     <ClCompile Include="..\commonItems\external\googletest\googlemock\src\gmock-all.cc" />
@@ -1172,9 +1136,6 @@
     </Filter>
     <Filter Include="ConverterFiles\Helpers">
       <UniqueIdentifier>{24f4672d-5798-4943-8a21-4d71d38580e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ConverterFiles\commonItems">
-      <UniqueIdentifier>{87c6ec85-b77f-4e5f-9685-fe52f9d29d40}</UniqueIdentifier>
     </Filter>
     <Filter Include="ConverterFiles\EU4World\RegionManager">
       <UniqueIdentifier>{2b0cd888-e71a-483c-89c8-4e5cad5fd49e}</UniqueIdentifier>
@@ -1376,9 +1337,6 @@
     </Filter>
     <Filter Include="ConverterFiles\Mappers\SuperGroupMapper">
       <UniqueIdentifier>{60d22cdf-0897-42b8-b56f-5ba5c47e0d40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ConverterFiles\commonItems\ModLoader">
-      <UniqueIdentifier>{97022d24-52d4-49d2-acf7-4f8211fee212}</UniqueIdentifier>
     </Filter>
     <Filter Include="TestFiles\vic3installation\game">
       <UniqueIdentifier>{2385347d-2d9c-415d-a2a0-d89a0d913214}</UniqueIdentifier>
@@ -1656,9 +1614,6 @@
     <Filter Include="MapperTests\CharacterTraitMapperTests">
       <UniqueIdentifier>{ad7579fe-9dee-4071-b28a-384906519c1e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ConverterFiles\commonItems\zip">
-      <UniqueIdentifier>{8b48c9ed-17e5-46dc-bbad-489094ef4e85}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TestFiles\configurables\blankMod">
       <UniqueIdentifier>{e8d58524-6ec0-40bf-a727-b0e2de3f46c6}</UniqueIdentifier>
     </Filter>
@@ -1890,11 +1845,9 @@
     <Filter Include="EU4WorldTests\LoaderTests\TradeCompanyLoaderTests">
       <UniqueIdentifier>{48e56511-bcd7-4793-814a-8724b09dec96}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\commonItems\ConvenientParser.h">
-      <Filter>ConverterFiles\commonItems</Filter>
-    </ClInclude>
+    <Filter Include="ConverterFiles\Mappers\BuildingMapper\ProductionMethods">
+      <UniqueIdentifier>{25e7e535-39ab-4cdf-919b-7abde1c83fd3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\eu4installation\eu4">
@@ -2184,6 +2137,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\eu4installation\common\trade_companies\00_trade_companies.txt">
       <Filter>TestFiles\eu4installation\common\trade_companies</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\economy\production_method_rules.txt">
+      <Filter>TestFiles\configurables\economy</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

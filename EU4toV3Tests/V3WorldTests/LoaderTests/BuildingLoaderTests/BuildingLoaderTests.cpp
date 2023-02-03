@@ -14,7 +14,7 @@ TEST(V3World_BuildingLoaderTests, BuildingLoaderCanLoadBuildings)
 	EXPECT_EQ(3, buildings.size());
 
 	EXPECT_THAT("bg_light_industry", buildings.at("building_food_industry").getBuildingGroup());
-	EXPECT_THAT("manufacturies", buildings.at("building_food_industry").getUnlockingTechs()[0]);
+	EXPECT_TRUE(buildings.at("building_food_industry").getUnlockingTechs().contains("manufacturies"));
 	EXPECT_EQ(300, buildings.at("building_food_industry").getConstructionCost());
 	EXPECT_THAT(buildings.at("building_food_industry").getPMGroups(),
 		 testing::UnorderedElementsAre("pmg_food", "pmg_canning", "pmg_distillery", "pmg_automation", "pmg_ownership"));

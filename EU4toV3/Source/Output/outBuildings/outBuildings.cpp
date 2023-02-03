@@ -7,26 +7,23 @@
 
 namespace
 {
-void outPMs(std::ostream& output, const std::string& building, const V3::Country& country)
+void outPMs(std::ostream& output, const V3::Building& building)
 {
 	output << "\t\t\t\tactivate_production_methods = {";
-	if (country.getProcessedData().productionMethods.contains(building))
+	for (const auto& PM: building.getPMs())
 	{
-		for (const auto& PM: country.getProcessedData().productionMethods.at(building))
-		{
-			output << " \"" << PM << "\"";
-		}
+		output << " \"" << PM << "\"";
 	}
 	output << " }\n";
 }
-void outBuilding(std::ostream& output, const V3::Building& building, const V3::Country& country)
+void outBuilding(std::ostream& output, const V3::Building& building)
 {
 	output << "\t\t\tcreate_building = {\n";
 	output << "\t\t\t\tbuilding = \"" << building.getName() << "\"\n";
 	output << "\t\t\t\tlevel = " << building.getLevel() << "\n";
 	output << "\t\t\t\treserves = " << 1 << "\n";
 
-	outPMs(output, building.getName(), country);
+	outPMs(output, building);
 
 	output << "\t\t\t}\n";
 }
@@ -38,7 +35,7 @@ void outSubStateBuildings(std::ostream& output, const V3::SubState& subState)
 	for (const auto& building: subState.getBuildings())
 	{
 		if (building->getLevel() > 0)
-			outBuilding(output, *building, *subState.getOwner());
+			outBuilding(output, *building);
 	}
 	for (const auto& element: subState.getVanillaBuildingElements())
 		output << "\t\t\t" << element << "\n";

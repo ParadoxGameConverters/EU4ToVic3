@@ -587,7 +587,7 @@ void EU4::CountryManager::generateTradeCompanyTradeCompany(const std::map<int, s
 		if (const auto& locBlock = localizationLoader.getTextInEachLanguage(name); locBlock)
 		{
 			auto newBlock = *locBlock;
-			if (locBlock->contains("english") && locBlock->at("english").find("[Root.Culture.GetName]") != std::string::npos)
+			if (locBlock->contains("english") && locBlock->at("english").find("[Root.") != std::string::npos)
 			{
 				// we need to alter.
 				for (const auto& [language, longName]: *locBlock)

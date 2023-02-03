@@ -28,10 +28,12 @@ void V3::Building::registerKeys(const std::map<std::string, int>& costTiers)
 		}
 	});
 	registerKeyword("production_method_groups", [this](std::istream& theStream) {
-		PMGroups = commonItems::getStrings(theStream);
+		for (const auto& PMGroup: commonItems::getStrings(theStream))
+			PMGroups.emplace(PMGroup);
 	});
 	registerKeyword("unlocking_technologies", [this](std::istream& theStream) {
-		unlockingTechs = commonItems::getStrings(theStream);
+		for (const auto& tech: commonItems::getStrings(theStream))
+			unlockingTechs.emplace(tech);
 	});
 	registerKeyword("required_construction", [this, &costTiers](std::istream& theStream) {
 		if (const auto costTier = commonItems::getString(theStream); costTiers.contains(costTier))
