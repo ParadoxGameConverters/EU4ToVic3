@@ -2,6 +2,7 @@
 #include "CommonRegexes.h"
 #include "Configuration.h"
 #include "EmpireParser/EmpireParser.h"
+#include "EmpireParser/RevolutionParser.h"
 #include "GameVersion.h"
 #include "Log.h"
 #include "ModLoader/ModNames.h"
@@ -241,9 +242,9 @@ void EU4::World::registerKeys(const std::shared_ptr<Configuration>& theConfigura
 		Log(LogLevel::Info) << "-> Celestial emperor is: " << celestialEmperor;
 	});
 	registerKeyword("revolution", [this](std::istream& theStream) {
-		const RevolutionParse revolutionBlock(theStream);
+		const RevolutionParser revolutionBlock(theStream);
 		revolutionTarget = revolutionBlock.getRevolutionTarget();
-		Log(LogLevel::Info) << "-> The revolutions leader is: " << revolutionTarget;
+		Log(LogLevel::Info) << "-> The revolution's leader is: " << revolutionTarget;
 	});
 	registerKeyword("diplomacy", [this](std::istream& theStream) {
 		Log(LogLevel::Info) << "-> Loading Diplomacy";
