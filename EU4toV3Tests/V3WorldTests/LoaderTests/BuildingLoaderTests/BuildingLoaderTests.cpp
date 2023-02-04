@@ -3,7 +3,11 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+namespace
+{
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+}
+
 TEST(V3World_BuildingLoaderTests, BuildingLoaderCanLoadBuildings)
 {
 	V3::BuildingLoader buildingLoader;

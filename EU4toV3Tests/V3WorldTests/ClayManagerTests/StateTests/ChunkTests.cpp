@@ -3,6 +3,8 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+namespace
+{
 const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {});
 
 V3::Chunk prepChunk()
@@ -27,6 +29,7 @@ V3::Chunk prepChunk()
 
 	return chunk;
 }
+} // namespace
 
 TEST(V3World_ChunkTests, SourceProvinceDataCanBeAdded)
 {

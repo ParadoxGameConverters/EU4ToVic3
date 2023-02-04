@@ -5,7 +5,10 @@
 #include <ranges>
 using testing::UnorderedElementsAre;
 
+namespace
+{
 const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {Mod("Some mod", "TestFiles/mod/themod/")});
+}
 
 TEST(EU4World_ReligionLoaderTests, religionsDefaultToEmpty)
 {

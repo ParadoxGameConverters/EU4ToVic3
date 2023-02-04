@@ -1,7 +1,10 @@
 #include "Loaders/TechLoader/TechLoader.h"
 #include "gtest/gtest.h"
 
+namespace
+{
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+}
 
 TEST(V3World_TechLoaderTests, DefaultsDefaultToDefaults)
 {
