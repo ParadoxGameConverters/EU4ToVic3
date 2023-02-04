@@ -2,6 +2,8 @@
 #include "ColonialRegionMapper/ColonialRegionMapper.h"
 #include "gtest/gtest.h"
 
+namespace
+{
 std::tuple<V3::ClayManager, mappers::ColonialRegionMapper> prepMappers()
 {
 	const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
@@ -16,6 +18,7 @@ std::tuple<V3::ClayManager, mappers::ColonialRegionMapper> prepMappers()
 
 	return {clayManager, mapper};
 }
+} // namespace
 
 TEST(Mappers_ColonialRegionMapperTests, rulesCanBeLoadedInOrder)
 {

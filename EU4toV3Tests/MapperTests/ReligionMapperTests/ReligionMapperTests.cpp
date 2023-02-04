@@ -5,8 +5,11 @@
 #include "gmock/gmock-matchers.h"
 #include "gtest/gtest.h"
 
+namespace
+{
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {Mod("Some mod", "TestFiles/mod/themod/")});
+} // namespace
 
 TEST(Mappers_ReligionMapperTests, religionsCanBeRetrieved)
 {

@@ -7,6 +7,8 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+namespace
+{
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {Mod("Some mod", "TestFiles/mod/themod/")});
 
@@ -26,6 +28,7 @@ std::tuple<mappers::CultureMapper, V3::ClayManager, EU4::CultureLoader, EU4::Rel
 	culMapper.loadWesternizationRules("TestFiles/configurables/westernization.txt");
 	return std::tuple{culMapper, clayManager, cultureLoader, religionLoader};
 }
+} // namespace
 
 TEST(Mappers_CultureMapperTests, noMatchesMatchesRequestRecordsAndWarnsOnce)
 {

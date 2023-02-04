@@ -1,7 +1,10 @@
 #include "TradeCompanyLoader/TradeCompanyLoader.h"
 #include "gtest/gtest.h"
 
+namespace
+{
 auto modFS = commonItems::ModFilesystem("TestFiles/eu4installation", {});
+}
 
 TEST(EU4World_TradeCompanyLoaderTests, TradeCompanyProvincesCanBePinged)
 {

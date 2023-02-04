@@ -12,14 +12,14 @@
 #include "ReligionLoader/ReligionLoader.h"
 #include "ReligionMapper/ReligionMapper.h"
 #include "gtest/gtest.h"
-#include <Log.h>
 #include <gmock/gmock-matchers.h>
 
-const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
-const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {Mod("Some mod", "TestFiles/mod/themod/")});
 
 namespace
 {
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {Mod("Some mod", "TestFiles/mod/themod/")});
+
 std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
 {
 	EU4::DefaultMapParser defaults;
@@ -51,8 +51,6 @@ std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
 	mappers::ProvinceMapper provinceMapper;
 	provinceMapper.loadProvinceMappings("TestFiles/configurables/province_mappings_chunks.txt");
 
-	const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
-
 	V3::ClayManager clayManager;
 	clayManager.initializeVanillaStates(modFS);
 	clayManager.loadTerrainsIntoProvinces(modFS);
@@ -81,8 +79,6 @@ std::tuple<V3::ClayManager, V3::PoliticalManager> prepManagers()
 
 V3::PoliticalManager prepWorld()
 {
-	const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
-
 	EU4::ReligionLoader religionLoader;
 	religionLoader.loadReligions(eu4FS);
 	EU4::CultureLoader cultureLoader;

@@ -15,6 +15,8 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
+namespace
+{
 const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
 const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {});
 
@@ -101,6 +103,7 @@ std::tuple<V3::ClayManager, V3::PoliticalManager> assignSubStateOwnership()
 
 	return {clayManager, politicalManager};
 }
+} // namespace
 
 TEST(V3World_ClayManagerTests, clayManagerCanInitializeVanillaStates)
 {

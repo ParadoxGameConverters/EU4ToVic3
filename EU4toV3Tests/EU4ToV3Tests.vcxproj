@@ -35,6 +35,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)$(Configuration)-Tests\</OutDir>
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -44,7 +45,6 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -63,203 +63,14 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>pch.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>CommonItems.lib;EU4toV3lib.lib;pch.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IncrementalLinkDatabaseFile>$(SolutionDir)lib\$(TargetName).ilk</IncrementalLinkDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\commonItems\external\googletest\googlemock\src\gmock-all.cc" />
     <ClCompile Include="..\commonItems\external\googletest\googletest\src\gtest-all.cc" />
     <ClCompile Include="..\commonItems\external\googletest\googletest\src\gtest_main.cc" />
-    <ClCompile Include="..\EU4toV3\Source\Configuration\Configuration.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryArmy\EU4Army.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryArmy\EU4Regiment.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryGovernment\EU4GovernmentSection.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryGovernment\EU4ReformStackSection.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryHistory\CountryHistory.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryHistory\CountryHistoryDate.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryLeader\EU4Leader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryLeader\EU4LeaderID.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryRelations\EU4RelationDetails.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\CountryRelations\EU4Relations.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4ActiveIdeas.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4ActivePolicy.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4Country.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4CountryFlags.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4CountryManager.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4CountryModifier.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4CountryRival.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\EU4Technology.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\NationalSymbol\EU4CustomColors.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\CountryManager\NationalSymbol\EU4NationalSymbol.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\DiplomacyParser\DiplomacyParser.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\DiplomacyParser\EU4Agreement.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\EmpireParser\EmpireParser.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\EmpireParser\RevolutionParser.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\BuildingCostLoader\BuildingCost.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\BuildingCostLoader\BuildingCostLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegion.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ColonialRegionLoader\ColonialRegionLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\CommonCountryLoader\CommonCountryLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\CultureLoader\CultureGroupParser.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\CultureLoader\CultureLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\CultureLoader\CultureParser.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\DefaultMapParser\DefaultMapParser.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\DefinitionScraper\DefinitionScraper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\LocalizationLoader\EU4LocalizationLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ModLoader\ModNames.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ReligionLoader\ReligionEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ReligionLoader\ReligionLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\ReligionLoader\ReligionParser.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\TradeCompanyLoader\TradeCompanyEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\TradeCompanyLoader\TradeCompanyLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\UnitTypeLoader\UnitTypeLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\Loaders\UnitTypeLoader\UnitTypeParser.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\DateItems.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\EU4Province.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\PopRatio.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\ProvinceBuildings.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\ProvinceHistory.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\ProvinceManager\ProvinceManager.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\Area.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\Region.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\RegionManager.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\RegionManager\SuperRegion.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\WarParser\WarDetails.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\EU4World\WarParser\WarParser.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\ProductionMethodMapper\ProductionMethodMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CharacterTraitMapper\AssignmentMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CharacterTraitMapper\CharacterTraitMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CharacterTraitMapper\SkillMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\BuildingMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\BuildingMapper\BuildingMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CoastalMapper\CoastalMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialRegionMapper\ColonialRegionMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialRegionMapper\ColonialRegionMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialTagMapper\ColonialTagMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ColonialTagMapper\ColonialTagMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CountryMapper\CountryMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CountryMapper\CountryMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CountryTierMapper\CountryTierMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CountryTierMapper\CountryTierMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureDefinitionLoader\CultureDefinitionLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureMappingRule.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureTraitMapper\CultureTraitMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\CultureTraitMapper\CultureTraitMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListLoader\NameListEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListLoader\NameListLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListMapper\NameListMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\NameListMapper\NameListMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\DiplomaticMapper\DiplomaticMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ExcludedTradeCompaniesMapper\ExcludedTradeCompaniesMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\IdeaEffectsMapper\IdeaEffectsMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\IGIdeologiesMapper\IGIdeologiesMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\IGIdeologiesMapper\IGIdeologiesMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\LawMapper\LawGroup.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\LawMapper\LawMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\LawMapper\LawMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\MinorityPopMapper\MinorityPop.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\MinorityPopMapper\MinorityPopMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\MergeBlock.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\NationMergeMapper\NationMergeMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\PopulationSetupMapper\PopulationSetupMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\PopulationSetupMapper\PopulationSetupMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ProvinceMapper\ProvinceMappingsVersion.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDefinitionEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionDefinitionLoader\ReligionDefinitionLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionGroupMapper\ReligionGroupMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionGroupMapper\ReligionGroupMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\ReligionMapper\ReligionMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\SlaveCultureMapper\SlaveCultureMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\SlaveCultureMapper\SlaveCultureMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\AssimilationParser.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperGroupMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\SuperGroupMapper\SuperRegionParser.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\TechSetupMapper\TechSetupMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\TechSetupMapper\TechSetupMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\VNColonialMapper\VNColonialMapper.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Mappers\VNColonialMapper\VNColonialMapping.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\Output\outPops\outPops.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\ClayManager.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\State\Chunk.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\State\State.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\State\StateModifier.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\ClayManager\State\SubState.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\FlagCrafter\FlagColorLoader\FlagColorLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\FlagCrafter\FlagCrafter.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\FlagCrafter\FlagNameLoader\FlagNameLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\Building.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\BuildingGroup.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\BuildingGroups.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\ProductionMethods\ProductionMethod.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\Building\ProductionMethods\ProductionMethodGroup.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\EconomyManager.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\EconomyManager\NationalBudget\Sector.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingGroupLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\BuildingLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\ProductionMethodLoader\ProductionMethodGroupLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\BuildingLoader\ProductionMethodLoader\ProductionMethodLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\CountryDefinitionLoader\CountryDefinitionLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LawLoader\LawEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LawLoader\LawLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\DefinesLoader\BuildingScriptValuesLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\DefinesLoader\EconDefinesLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\LocLoader\LocalizationLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\MajorFormablesLoader\MajorFormablesEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\MajorFormablesLoader\MajorFormablesLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\NationalBudgetLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\Script\AddScript.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\Script\MathScript.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\Script\MultiplyScript.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\NationalBudgetLoader\SectorLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\PopEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\PopLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\StateEntries.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\SubStateEntries.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\PopLoader\SubStatePopEntries.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\StateLoader\StateLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\StateModifierLoader\StateModifierLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\SuperRegionLoader\SuperRegionLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\SuperRegionLoader\V3Region.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\SuperRegionLoader\V3SuperRegion.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TechLoader\TechEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TechLoader\TechLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TerrainLoader\TerrainLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\TerrainLoader\TerrainModifierLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaBuildingLoader\VanillaBuildingEntries.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaBuildingLoader\VanillaBuildingLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaCharacterLoader\VanillaCharacterEntries.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaCharacterLoader\VanillaCharacterLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaCountryHistoryLoader\VanillaCountryHistoryEntries.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaCountryHistoryLoader\VanillaCountryHistoryLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaAgreementEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaDiplomacyEntries.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaDiplomacyLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaRelationEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomacyLoader\VanillaTruceEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomaticPlayLoader\VanillaDiplomaticPlayEntries.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaDiplomaticPlayLoader\VanillaDiplomaticPlayLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaPopulationHistoryLoader\VanillaPopulationHistoryLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaStateEntries.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaStateEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaStateLoader.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\Loaders\VanillaStateLoader\VanillaSubStateEntry.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\PoliticalManager\Country\Character.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\PoliticalManager\Country\Country.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\PoliticalManager\PoliticalManager.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\PoliticalManager\TechValues\TechValues.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\PopManager.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\Pops\StatePops.cpp" />
-    <ClCompile Include="..\EU4toV3\Source\V3World\PopManager\Pops\SubStatePops.cpp" />
     <ClCompile Include="ConfigurationTests\ConfigurationTests.cpp" />
     <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryArmyTests\EU4ArmyTests.cpp" />
     <ClCompile Include="EU4WorldTests\CountryManagerTests\CountryArmyTests\EU4RegimentTests.cpp" />
