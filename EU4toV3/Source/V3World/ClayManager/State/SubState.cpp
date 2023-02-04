@@ -312,7 +312,8 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	{
 		return false;
 	}
-	if (building.getName() == "building_naval_base" || building.getName() == "building_port")
+	if (const std::set<std::string> coastalBuildings = {"building_naval_base", "building_port", "building_shipyards"};
+		 coastalBuildings.contains(building.getName()))
 	{
 		if (!isCoastal())
 			return false;
