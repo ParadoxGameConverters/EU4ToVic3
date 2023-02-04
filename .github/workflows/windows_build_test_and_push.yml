@@ -26,8 +26,6 @@ jobs:
        git submodule update --init --recursive commonItems
        git -c submodule."external/commonItems".update=none `
            -c submodule."googletest".update=none `
-           -c submodule."external/googletest".update=none `
-           -c submodule."external/zip".update=none `
            submodule update --init --recursive Fronter
 
     - name: "Get previous tag"
@@ -99,8 +97,6 @@ jobs:
        git submodule update --init --recursive commonItems
        git -c submodule."external/commonItems".update=none `
            -c submodule."googletest".update=none `
-           -c submodule."external/googletest".update=none `
-           -c submodule."external/zip".update=none `
            submodule update --init --recursive Fronter
 
     - name: "Build solution"
