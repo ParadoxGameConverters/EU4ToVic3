@@ -21,7 +21,7 @@ class ProvinceMapper: commonItems::parser
 	void createMappings();
 
 	std::map<std::string, std::vector<int>> V3ToEU4ProvinceMap;
-	std::map<int, std::vector<std::string>> EU4ToV3ProvinceMap;
+	std::map<int, std::vector<std::string>> EU4ToVic3ProvinceMap;
 	std::vector<ProvinceMapping> mappings;
 };
 } // namespace mappers
