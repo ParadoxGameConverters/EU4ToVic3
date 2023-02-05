@@ -15,7 +15,7 @@ int main(const int argc, const char* argv[])
 		Log(LogLevel::Info) << converterVersion;
 		if (argc >= 2)
 		{
-			Log(LogLevel::Info) << "EU4toVic3 takes no parameters.";
+			Log(LogLevel::Info) << "EU4ToVic3 takes no parameters.";
 			Log(LogLevel::Info) << "It uses configuration.txt, configured manually or by the frontend.";
 		}
 		convertEU4ToVic3(std::move(converterVersion));

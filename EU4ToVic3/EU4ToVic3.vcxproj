@@ -9,7 +9,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{84ABCE0D-17FE-44A5-8684-5A8AA04E80B9}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>EU4ToV3</RootNamespace>
+    <RootNamespace>EU4ToVic3</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -45,7 +45,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>pch.lib;CommonItems.lib;EU4toV3lib.lib;Resources\rakaly.dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>pch.lib;CommonItems.lib;EU4ToVic3lib.lib;Resources\rakaly.dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)lib</AdditionalLibraryDirectories>
       <IncrementalLinkDatabaseFile>$(SolutionDir)lib\$(TargetName).ilk</IncrementalLinkDatabaseFile>
     </Link>

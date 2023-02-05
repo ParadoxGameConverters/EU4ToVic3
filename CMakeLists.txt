@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(EU4ToVic3)
-set(CONVERTER_SOURCE_DIR ${CMAKE_SOURCE_DIR}/EU4toV3/Source)
-set(CONVERTER_DIR ${CMAKE_SOURCE_DIR}/EU4toV3)
+set(CONVERTER_SOURCE_DIR ${CMAKE_SOURCE_DIR}/EU4ToVic3/Source)
+set(CONVERTER_DIR ${CMAKE_SOURCE_DIR}/EU4ToVic3)
 set(FRONTER_DIR ${CMAKE_SOURCE_DIR}/Fronter/)
 set(FRONTER_SOURCE_DIR ${CMAKE_SOURCE_DIR}/Fronter/Fronter/Source)
 set(FRONTER_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/Release-Linux)
@@ -179,9 +179,9 @@ add_custom_command(TARGET EU4ToVic3Converter POST_BUILD WORKING_DIRECTORY ${CONV
 
 ### TESTS ###
 
-file(GLOB TEST_SOURCES "EU4toV3Tests/*.cpp")
-file(GLOB TEST_SUB_SOURCES "EU4toV3Tests/*/*.cpp")
-file(GLOB TEST_SUB_SUB_SOURCES "EU4toV3Tests/*/*/*.cpp")
+file(GLOB TEST_SOURCES "EU4ToVic3Tests/*.cpp")
+file(GLOB TEST_SUB_SOURCES "EU4ToVic3Tests/*/*.cpp")
+file(GLOB TEST_SUB_SUB_SOURCES "EU4ToVic3Tests/*/*/*.cpp")
 set(GTEST_SOURCES ${GTEST_SOURCES} "commonItems/external/googletest/googletest/src/gtest_main.cc")
 set(GTEST_SOURCES ${GTEST_SOURCES} "commonItems/external/googletest/googletest/src/gtest-all.cc")
 set(GTEST_SOURCES ${GTEST_SOURCES} "commonItems/external/googletest/googlemock/src/gmock-all.cc")
@@ -202,4 +202,4 @@ set_target_properties(EU4ToVic3Tests
 target_precompile_headers(EU4ToVic3Tests REUSE_FROM EU4ToVic3lib)
 target_link_libraries(EU4ToVic3Tests LINK_PUBLIC EU4ToVic3lib)
 
-file(COPY "EU4toV3Tests/TestFiles" DESTINATION "${TEST_OUTPUT_DIRECTORY}")
+file(COPY "EU4ToVic3Tests/TestFiles" DESTINATION "${TEST_OUTPUT_DIRECTORY}")

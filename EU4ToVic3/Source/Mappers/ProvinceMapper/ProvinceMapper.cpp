@@ -48,7 +48,7 @@ void mappers::ProvinceMapper::createMappings()
 		for (const auto& eu4Number: mapping.getEU4Provinces())
 		{
 			if (eu4Number > 0)
-				EU4ToV3ProvinceMap.emplace(eu4Number, mapping.getV3Provinces());
+				EU4ToVic3ProvinceMap.emplace(eu4Number, mapping.getV3Provinces());
 		}
 	}
 }
@@ -63,8 +63,8 @@ std::vector<int> mappers::ProvinceMapper::getEU4Provinces(const std::string& v3P
 
 std::vector<std::string> mappers::ProvinceMapper::getV3Provinces(int eu4Province) const
 {
-	if (EU4ToV3ProvinceMap.contains(eu4Province))
-		return EU4ToV3ProvinceMap.at(eu4Province);
+	if (EU4ToVic3ProvinceMap.contains(eu4Province))
+		return EU4ToVic3ProvinceMap.at(eu4Province);
 
 	return {};
 }
