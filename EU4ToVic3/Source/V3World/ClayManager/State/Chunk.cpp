@@ -1,6 +1,7 @@
 #include "Chunk.h"
 #include "ProvinceManager/EU4Province.h"
 #include "SubState.h"
+#include <algorithm>
 #include <numeric>
 #include <ranges>
 

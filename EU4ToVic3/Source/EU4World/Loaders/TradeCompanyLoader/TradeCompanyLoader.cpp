@@ -2,6 +2,7 @@
 #include "CommonRegexes.h"
 #include "Log.h"
 #include "TradeCompanyEntry.h"
+#include <algorithm>
 #include <ranges>
 
 void EU4::TradeCompanyLoader::loadTradeCompanies(const commonItems::ModFilesystem& modFS)

@@ -24,7 +24,7 @@ void V3::State::registerKeys()
 		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{
 			auto theProvinceName = provinceName;
-			std::ranges::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
+			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
 			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
 				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1); // from "x12345a" to x12345A
 			else
@@ -38,7 +38,7 @@ void V3::State::registerKeys()
 		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{
 			auto theProvinceName = provinceName;
-			std::ranges::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
+			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
 			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
 				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1);
 			else
@@ -53,7 +53,7 @@ void V3::State::registerKeys()
 		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{
 			auto theProvinceName = provinceName;
-			std::ranges::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
+			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
 			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
 				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1);
 			else
@@ -163,7 +163,7 @@ bool V3::State::isSea() const
 {
 	// We allow for a sea to be mismapped along regular provinces as vanilla has a few seas so mismapped (CHAD! KORDOFAN! Literally everywhere!).
 
-	return std::ranges::all_of(provinces.begin(), provinces.end(), [](const std::pair<std::string, std::shared_ptr<Province>>& province) {
+	return std::all_of(provinces.begin(), provinces.end(), [](const std::pair<std::string, std::shared_ptr<Province>>& province) {
 		return province.second->isSea();
 	});
 }
@@ -172,7 +172,7 @@ bool V3::State::isLake() const
 {
 	// We allow for a lakes to be mismapped along regular provinces as vanilla has a few lakes so mismapped.
 
-	return std::ranges::all_of(provinces.begin(), provinces.end(), [](const std::pair<std::string, std::shared_ptr<Province>>& province) {
+	return std::all_of(provinces.begin(), provinces.end(), [](const std::pair<std::string, std::shared_ptr<Province>>& province) {
 		return province.second->isLake();
 	});
 }

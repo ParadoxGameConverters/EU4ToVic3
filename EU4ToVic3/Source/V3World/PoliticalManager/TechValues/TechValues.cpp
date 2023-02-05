@@ -43,7 +43,7 @@ std::vector<std::string> V3::TechValues::sortMap(const std::map<std::string, dou
 	for (const auto& theElement: theMap)
 		pairs.emplace_back(theElement);
 
-	std::ranges::sort(pairs.begin(), pairs.end(), [=](const std::pair<std::string, double>& a, const std::pair<std::string, double>& b) {
+	std::sort(pairs.begin(), pairs.end(), [=](const std::pair<std::string, double>& a, const std::pair<std::string, double>& b) {
 		return a.second < b.second;
 	});
 

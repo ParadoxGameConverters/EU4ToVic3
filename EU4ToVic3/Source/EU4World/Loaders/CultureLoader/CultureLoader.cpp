@@ -2,8 +2,8 @@
 #include "CommonFunctions.h"
 #include "CommonRegexes.h"
 #include "Log.h"
-#include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
+#include <algorithm>
 #include <ranges>
 
 void EU4::CultureLoader::loadCultures(const commonItems::ModFilesystem& modFS)

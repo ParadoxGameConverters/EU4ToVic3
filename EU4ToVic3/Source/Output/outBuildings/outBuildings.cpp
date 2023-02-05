@@ -53,6 +53,7 @@ void outStateBuildings(std::ostream& output, const V3::State& state)
 	output << "\t}\n";
 }
 } // namespace
+
 void OUT::exportBuildings(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::State>>& states)
 {
 	std::ofstream output("output/" + outputName + "/common/history/buildings/99_converted_buildings.txt");
@@ -62,7 +63,8 @@ void OUT::exportBuildings(const std::string& outputName, const std::map<std::str
 	output << commonItems::utf8BOM << "BUILDINGS = {\n";
 	for (const auto& state: states | std::views::values)
 	{
-		if (std::ranges::all_of(state->getSubStates(), [](const auto& subState) {
+		const auto& subs = state->getSubStates();
+		if (std::all_of(subs.begin(), subs.end(), [](const auto& subState) {
 				 return subState->getBuildings().empty() && subState->getVanillaBuildingElements().empty();
 			 }))
 		{

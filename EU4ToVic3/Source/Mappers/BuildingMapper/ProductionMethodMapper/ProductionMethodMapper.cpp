@@ -100,7 +100,7 @@ std::vector<std::shared_ptr<V3::Building>> mappers::ProductionMethodMapper::pick
 
 	// Select all buildings with level <= target
 	std::vector<std::shared_ptr<V3::Building>> selectedBuildings;
-	std::ranges::copy_if(buildings, std::back_inserter(selectedBuildings), [target](const std::shared_ptr<V3::Building>& building) {
+	std::copy_if(buildings.begin(), buildings.end(), std::back_inserter(selectedBuildings), [target](const std::shared_ptr<V3::Building>& building) {
 		return building->getLevel() <= target;
 	});
 
@@ -201,7 +201,7 @@ std::vector<std::shared_ptr<V3::Building>> mappers::ProductionMethodMapper::subS
 	 * 18 | 0   | 0 | 0
 	 */
 
-	const auto maxItem = *std::ranges::max_element(subSet, [](const std::shared_ptr<V3::Building>& lhs, const std::shared_ptr<V3::Building>& rhs) {
+	const auto maxItem = *std::max_element(subSet.begin(), subSet.end(), [](const std::shared_ptr<V3::Building>& lhs, const std::shared_ptr<V3::Building>& rhs) {
 		return lhs->getLevel() < rhs->getLevel();
 	});
 	const auto maxVal = maxItem->getLevel();

@@ -9,6 +9,7 @@
 #include "ProvinceManager/PopRatio.h"
 #include "State.h"
 #include "StateModifier.h"
+#include <algorithm>
 #include <cmath>
 #include <numeric>
 #include <ranges>
@@ -23,7 +24,7 @@ std::vector<std::string> sortMap(const std::map<std::string, int>& theMap)
 	for (const auto& theElement: theMap)
 		pairs.emplace_back(theElement);
 
-	std::ranges::sort(pairs.begin(), pairs.end(), [=](const std::pair<std::string, int>& a, const std::pair<std::string, int>& b) {
+	std::sort(pairs.begin(), pairs.end(), [=](const std::pair<std::string, int>& a, const std::pair<std::string, int>& b) {
 		return a.second > b.second;
 	});
 

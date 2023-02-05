@@ -28,9 +28,8 @@ jobs:
 
     - name: "Cloning selective submodules"
       run: |
-       git submodule update --init --recursive commonItems       
+       git submodule update --init --recursive commonItems
        git -c submodule."external/commonItems".update=none \
-           -c submodule."googletest".update=none \
            submodule update --init --recursive Fronter
 
     - name: Initialize CodeQL
@@ -71,9 +70,8 @@ jobs:
 
     - name: "Cloning selective submodules"
       run: |
-       git submodule update --init --recursive commonItems       
+       git submodule update --init --recursive commonItems
        git -c submodule."external/commonItems".update=none \
-           -c submodule."googletest".update=none \
            submodule update --init --recursive Fronter
 
     - name: Initialize CodeQL
