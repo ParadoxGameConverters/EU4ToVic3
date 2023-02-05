@@ -27,7 +27,7 @@ void V3::VanillaSubStateEntry::registerKeys()
 		for (const auto& province: theProvinces)
 		{
 			auto theProvinceName = province;
-			std::ranges::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
+			std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
 			if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
 				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1); // from "x12345a" to x12345A
 			else

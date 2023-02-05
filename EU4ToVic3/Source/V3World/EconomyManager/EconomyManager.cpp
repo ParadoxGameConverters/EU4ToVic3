@@ -234,7 +234,7 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 			++counter;
 
 			// A Building has now been built, process for next round
-			std::ranges::sort(subStatesByBudget, SubState::greaterBudget);
+			std::sort(subStatesByBudget.begin(), subStatesByBudget.end(), SubState::greaterBudget);
 			removeSubStateIfFinished(subStatesByBudget, subStatesByBudget.end() - 1, lawsMap);
 		}
 	}
@@ -477,7 +477,7 @@ std::vector<std::shared_ptr<V3::SubState>> V3::EconomyManager::prepareSubStatesB
 {
 	// Copy substate vector. We will be sorting this one and removing finished substates until it is empty
 	auto subStatesByBudget(country->getSubStates());
-	std::ranges::sort(subStatesByBudget, SubState::greaterBudget);
+	std::sort(subStatesByBudget.begin(), subStatesByBudget.end(), SubState::greaterBudget);
 
 	// Make buildings from template buildings
 	// Only valid building will be added to the vector

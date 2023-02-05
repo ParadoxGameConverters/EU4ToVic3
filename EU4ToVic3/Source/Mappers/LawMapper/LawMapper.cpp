@@ -17,7 +17,7 @@ std::vector<std::string> sortLaws(const std::map<std::string, std::pair<double, 
 	for (const auto& theElement: theMap)
 		pairs.emplace_back(theElement);
 
-	std::ranges::sort(pairs.begin(),
+	std::sort(pairs.begin(),
 		 pairs.end(),
 		 [=](const std::pair<std::string, std::pair<double, double>>& a, const std::pair<std::string, std::pair<double, double>>& b) {
 			 if (a.second.first > b.second.first)

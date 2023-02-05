@@ -61,7 +61,7 @@ std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop
 		return lhs->getSubStatePops().getPopCount() > rhs->getSubStatePops().getPopCount();
 	};
 
-	std::ranges::sort(sortedSubStates, popComparison);
+	std::sort(sortedSubStates.begin(), sortedSubStates.end(), popComparison);
 
 	const int numTopSubStates = std::max(static_cast<int>(static_cast<double>(sortedSubStates.size()) * percentile), 1);
 

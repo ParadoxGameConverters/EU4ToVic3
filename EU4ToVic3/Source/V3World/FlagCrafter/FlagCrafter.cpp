@@ -140,7 +140,7 @@ void V3::FlagCrafter::distributeAvailableFlags(const std::map<std::string, std::
 
 		// umm. english name? yes?
 		auto name = country->getName("english");
-		std::ranges::transform(name.begin(), name.end(), name.begin(), ::tolower);
+		std::transform(name.begin(), name.end(), name.begin(), ::tolower);
 		if (tryAssigningFlagViaValue(country, name))
 		{
 			++nameCounter;
