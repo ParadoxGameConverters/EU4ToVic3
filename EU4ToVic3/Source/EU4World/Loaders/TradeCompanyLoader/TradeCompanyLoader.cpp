@@ -3,6 +3,7 @@
 #include "Log.h"
 #include "TradeCompanyEntry.h"
 #include <ranges>
+#include <algorithm>
 
 void EU4::TradeCompanyLoader::loadTradeCompanies(const commonItems::ModFilesystem& modFS)
 {
