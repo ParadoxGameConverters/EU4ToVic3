@@ -1,6 +1,5 @@
 #include "CultureDefinitionEntry.h"
 #include "CommonRegexes.h"
-#include "Log.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 
@@ -9,8 +8,8 @@ namespace
 std::string normalizeString(const std::string& input)
 {
 	auto toReturn = commonItems::normalizeUTF8Path(input);
-	std::ranges::replace(toReturn.begin(), toReturn.end(), ' ', '_');
-	std::ranges::replace(toReturn.begin(), toReturn.end(), '\'', '_');
+	std::ranges::replace(toReturn, ' ', '_');
+	std::ranges::replace(toReturn, '\'', '_');
 	return toReturn;
 }
 } // namespace

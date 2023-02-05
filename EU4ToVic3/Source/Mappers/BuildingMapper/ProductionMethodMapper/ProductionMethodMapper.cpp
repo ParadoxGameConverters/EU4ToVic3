@@ -100,7 +100,7 @@ std::vector<std::shared_ptr<V3::Building>> mappers::ProductionMethodMapper::pick
 
 	// Select all buildings with level <= target
 	std::vector<std::shared_ptr<V3::Building>> selectedBuildings;
-	std::ranges::copy_if(buildings, std::back_inserter(selectedBuildings), [target](const std::shared_ptr<V3::Building>& building) {
+	std::copy_if(buildings.begin(), buildings.end(), std::back_inserter(selectedBuildings), [target](const std::shared_ptr<V3::Building>& building) {
 		return building->getLevel() <= target;
 	});
 
