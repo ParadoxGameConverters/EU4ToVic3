@@ -2,6 +2,7 @@
 #include "CommonRegexes.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
+#include <ranges>
 
 namespace
 {
