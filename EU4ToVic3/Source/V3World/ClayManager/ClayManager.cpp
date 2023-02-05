@@ -223,7 +223,7 @@ void V3::ClayManager::unDisputeChunkOwnership(const SourceOwners& sourceCountrie
 			continue;
 		}
 
-		const auto newOwner = std::ranges::max_element(ownerWeights, [](std::pair<std::string, double> a, std::pair<std::string, double> b) {
+		const auto newOwner = std::max_element(ownerWeights.begin(), ownerWeights.end(), [](std::pair<std::string, double> a, std::pair<std::string, double> b) {
 			return a.second < b.second;
 		});
 

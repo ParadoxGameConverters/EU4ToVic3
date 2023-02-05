@@ -565,7 +565,7 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 
 std::shared_ptr<V3::Sector> V3::EconomyManager::getSectorWithMostBudget(const std::map<std::string, std::shared_ptr<Sector>>& sectors)
 {
-	auto maxIter = std::ranges::max_element(sectors, [](const auto& lhs, const auto& rhs) {
+	auto maxIter = std::max_element(sectors.begin(), sectors.end(), [](const auto& lhs, const auto& rhs) {
 		return lhs.second->getCPBudget() < rhs.second->getCPBudget();
 	});
 

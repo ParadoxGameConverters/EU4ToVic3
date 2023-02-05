@@ -201,7 +201,7 @@ std::vector<std::shared_ptr<V3::Building>> mappers::ProductionMethodMapper::subS
 	 * 18 | 0   | 0 | 0
 	 */
 
-	const auto maxItem = *std::ranges::max_element(subSet, [](const std::shared_ptr<V3::Building>& lhs, const std::shared_ptr<V3::Building>& rhs) {
+	const auto maxItem = *std::max_element(subSet.begin(), subSet.end(), [](const std::shared_ptr<V3::Building>& lhs, const std::shared_ptr<V3::Building>& rhs) {
 		return lhs->getLevel() < rhs->getLevel();
 	});
 	const auto maxVal = maxItem->getLevel();
