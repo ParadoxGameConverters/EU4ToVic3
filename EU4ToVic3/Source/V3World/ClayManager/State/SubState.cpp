@@ -9,6 +9,7 @@
 #include "ProvinceManager/PopRatio.h"
 #include "State.h"
 #include "StateModifier.h"
+#include <algorithm>
 #include <cmath>
 #include <numeric>
 #include <ranges>

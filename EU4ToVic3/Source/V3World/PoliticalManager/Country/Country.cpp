@@ -13,6 +13,7 @@
 #include "PopulationSetupMapper/PopulationSetupMapper.h"
 #include "ReligionMapper/ReligionMapper.h"
 #include "TechSetupMapper/TechSetupMapper.h"
+#include <algorithm>
 #include <cmath>
 #include <numeric>
 

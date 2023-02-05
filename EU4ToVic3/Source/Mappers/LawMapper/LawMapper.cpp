@@ -4,6 +4,7 @@
 #include "LawGroup.h"
 #include "Log.h"
 #include "PoliticalManager/Country/Country.h"
+#include <algorithm>
 #include <ranges>
 
 namespace
