@@ -97,7 +97,8 @@ class CultureMapper: commonItems::parser
 		 const NameListLoader& nameListLoader,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader,
-		 const EU4::EU4LocalizationLoader& eu4Locs);
+		 const EU4::EU4LocalizationLoader& eu4Locs,
+		 const std::string& seedName = {});
 
 	void registerKeys();
 
