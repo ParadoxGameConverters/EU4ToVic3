@@ -245,7 +245,8 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
 	// link = { eu4group = culture_group trait = testtrait2 ethnicity = testable2 graphics = gr2 }
 	// link = { eu4group = culture_group name_pool = name_list_test2 }
 	EXPECT_EQ("culture5", def1.name);
-	EXPECT_FALSE(def1.color);
+	ASSERT_TRUE(def1.color);
+	EXPECT_EQ("= rgb { 112 254 237 }", (*def1.color).outputRgb());
 	EXPECT_THAT(def1.traits, testing::UnorderedElementsAre("testtrait2"));
 	EXPECT_THAT(def1.maleCommonFirstNames, testing::UnorderedElementsAre("male3", "male4"));
 	EXPECT_THAT(def1.femaleCommonFirstNames, testing::UnorderedElementsAre("female3", "female4"));
@@ -263,7 +264,8 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
 
 	// unmapped_culture has no mapping links whatsoever and is scraping defaults
 	EXPECT_EQ("unmapped_culture", def2.name);
-	EXPECT_FALSE(def2.color);
+	ASSERT_TRUE(def2.color);
+	EXPECT_EQ("= rgb { 254 61 136 }", (*def2.color).outputRgb());
 	EXPECT_TRUE(def2.traits.empty());
 	EXPECT_TRUE(def2.maleCommonFirstNames.empty());
 	EXPECT_TRUE(def2.femaleCommonFirstNames.empty());

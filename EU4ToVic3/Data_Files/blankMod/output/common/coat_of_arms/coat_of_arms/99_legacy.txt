@@ -2304,143 +2304,197 @@ legacy_ANH_republic = {
 		color2 = "white"
 	}
 }
-legacy_ANL = {
-	pattern = "pattern_solid.tga"
-	color1 = "red"
 
-	colored_emblem = {
-		texture = "ce_rhombus.dds"
-		color1 = "blue"
-		instance = { scale = { 0.83 0.83 } }
-	}
-	colored_emblem = {
-		texture = "ce_rhombus.dds"
-		color1 = "white"
-		instance = { scale = { 0.65 0.65 } }
-	}
-	colored_emblem = {
-		texture = "ce_star_05.dds"
-		color1 = "white"
-		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.55 0.18 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.62 0.25 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.68 0.31 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.74 0.37 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.79 0.43 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.85 0.5 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.80 0.55 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.74 0.61 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.69 0.67 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.64 0.72 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.58 0.77 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.53 0.82 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.46 0.83 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.40 0.77 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.35 0.71 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.30 0.66 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.25 0.61 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.19 0.56 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.14 0.50 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.19 0.43 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.26 0.37 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.31 0.31 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.19 0.43 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.38 0.25 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.44 0.19 } }
-	}
-	colored_emblem = {
-		texture = "ce_star_05.dds"
-		color1 = "blue"
-		instance = { scale = { 0.25 0.25 } position = { 0.35 0.5 } }
-		instance = { scale = { 0.25 0.25 } }
-		instance = { scale = { 0.25 0.25 } position = { 0.65 0.5 } }
-	}
-}
-legacy_ANL_communist = { textured_emblem = { texture = "EU4toVic2/ANL_communist.tga" } }
-legacy_ANL_fascist = {
+# ARKANSAS - unmapped. ARK is Arakan
+#legacy_ARK = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "blue"
+#		instance = { scale = { 0.83 0.83 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "white"
+#		instance = { scale = { 0.65 0.65 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "white"
+#		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.55 0.18 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.62 0.25 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.68 0.31 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.74 0.37 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.79 0.43 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.85 0.5 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.80 0.55 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.74 0.61 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.69 0.67 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.64 0.72 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.58 0.77 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.53 0.82 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.46 0.83 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.40 0.77 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.35 0.71 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.30 0.66 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.25 0.61 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.19 0.56 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.14 0.50 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.19 0.43 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.26 0.37 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.31 0.31 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.19 0.43 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.38 0.25 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.44 0.19 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "blue"
+#		instance = { scale = { 0.25 0.25 } position = { 0.35 0.5 } }
+#		instance = { scale = { 0.25 0.25 } }
+#		instance = { scale = { 0.25 0.25 } position = { 0.65 0.5 } }
+#	}
+#}
+#legacy_ARK_fascist = {
+#
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	color2 = "white"
+#	color3 = "blue"
+#
+#	colored_emblem = {
+#		texture = "ce_saltire_fimbriated.dds"
+#		color1 = color2
+#		color2 = color3
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_saltire_13.dds"
+#		color1 = color2
+#		color2 = color2
+#		instance = { scale = { 1.5 1.0 } position = { 0.5 0.5 } }
+#	}
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "blue"
+#		instance = { scale = { 0.83 0.83 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "white"
+#		instance = { scale = { 0.65 0.65 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "white"
+#		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.55 0.18 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.62 0.25 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.68 0.31 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.74 0.37 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.79 0.43 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.85 0.5 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.80 0.55 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.74 0.61 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.69 0.67 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.64 0.72 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.58 0.77 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.53 0.82 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.46 0.83 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.40 0.77 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.35 0.71 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.30 0.66 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.25 0.61 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.19 0.56 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.14 0.50 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.19 0.43 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.26 0.37 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.31 0.31 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.19 0.43 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.38 0.25 } }
+#		instance = { scale = { 0.05 0.05 } position = { 0.44 0.19 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "blue"
+#		instance = { scale = { 0.25 0.25 } position = { 0.35 0.5 } }
+#		instance = { scale = { 0.25 0.25 } }
+#		instance = { scale = { 0.25 0.25 } position = { 0.65 0.5 } }
+#	}
+#	sub = { parent = "censorship_mask" }
+#}
+#legacy_ARK_communist = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "white"
+#	color2 = "red"
+#
+#	colored_emblem = {
+#		texture = "ce_circle.dds"
+#		color1 = "blue"
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05_circle.dds"
+#		color1 = "white"
+#		color2 = "red"
+#		instance = { scale = { 0.8 0.8 } }
+#	}
+#}
+#legacy_ARK_monarchy = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#
+#	colored_emblem = {
+#		texture = "ce_stripes_07.dds"
+#		color1 = "blue"
+#	}
+#}
+#legacy_ARK_republic = legacy_ARK
+#legacy_arkansas = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#
+#	sub = {
+#		parent = "legacy_ARK"
+#		instance = { scale = { 0.5 0.5 } offset = { 0.75 0.75 } }
+#	}
+#}
+#legacy_arkansas_communist = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#
+#	colored_emblem = {
+#		texture = "ce_star_05_hollow.dds"
+#		color1 = "blue"
+#		color2 = "white"
+#	}
+#}
+#legacy_arkansas_fascist = { textured_emblem = { texture = "EU4toVic2/ARK_fascist.tga" } }
+#legacy_arkansas_monarchy = legacy_arkansas
+#legacy_arkansas_republic = legacy_ARK
 
-	pattern = "pattern_solid.tga"
-	color1 = "red"
-	color2 = "white"
-	color3 = "blue"
+legacy_ARK = { textured_emblem = { texture = "EU4toVic2/ARK.tga" } }
+legacy_ARK_communist = { textured_emblem = { texture = "EU4toVic2/ARK_communist.tga" } }
+legacy_ARK_fascist = { textured_emblem = { texture = "EU4toVic2/ARK_fascist.tga" } }
+legacy_ARK_monarchy = legacy_ARK
+legacy_ARK_republic = { textured_emblem = { texture = "EU4toVic2/ARK_republic.tga" } }
 
-	colored_emblem = {
-		texture = "ce_saltire_fimbriated.dds"
-		color1 = color2
-		color2 = color3
-	}
-	colored_emblem = {
-		texture = "ce_star_saltire_13.dds"
-		color1 = color2
-		color2 = color2
-		instance = { scale = { 1.5 1.0 } position = { 0.5 0.5 } }
-	}
-	pattern = "pattern_solid.tga"
-	color1 = "red"
-
-	colored_emblem = {
-		texture = "ce_rhombus.dds"
-		color1 = "blue"
-		instance = { scale = { 0.83 0.83 } }
-	}
-	colored_emblem = {
-		texture = "ce_rhombus.dds"
-		color1 = "white"
-		instance = { scale = { 0.65 0.65 } }
-	}
-	colored_emblem = {
-		texture = "ce_star_05.dds"
-		color1 = "white"
-		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.55 0.18 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.62 0.25 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.68 0.31 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.74 0.37 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.79 0.43 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.85 0.5 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.80 0.55 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.74 0.61 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.69 0.67 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.64 0.72 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.58 0.77 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.53 0.82 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.46 0.83 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.40 0.77 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.35 0.71 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.30 0.66 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.25 0.61 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.49 0.14 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.19 0.56 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.14 0.50 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.19 0.43 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.26 0.37 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.31 0.31 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.19 0.43 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.38 0.25 } }
-		instance = { scale = { 0.05 0.05 } position = { 0.44 0.19 } }
-	}
-	colored_emblem = {
-		texture = "ce_star_05.dds"
-		color1 = "blue"
-		instance = { scale = { 0.25 0.25 } position = { 0.35 0.5 } }
-		instance = { scale = { 0.25 0.25 } }
-		instance = { scale = { 0.25 0.25 } position = { 0.65 0.5 } }
-	}
-	sub = { parent = "censorship_mask" }
-}
-legacy_ANL_monarchy = legacy_ANL
-legacy_ANL_republic = legacy_ANL
 legacy_ANN = {
 	pattern = "pattern_solid.tga"
 	color1 = "yellow"
@@ -3203,56 +3257,6 @@ legacy_argentine_republic = {
 		instance = { scale = { 0.4 0.4 } }
 	}
 }
-legacy_ARK = { textured_emblem = { texture = "EU4toVic2/ARK.tga" } }
-legacy_arkansas = {
-	pattern = "pattern_solid.tga"
-	color1 = "red"
-
-	sub = {
-		parent = "legacy_ANL"
-		instance = { scale = { 0.5 0.5 } offset = { 0.75 0.75 } }
-	}
-}
-legacy_arkansas_communist = {
-	pattern = "pattern_solid.tga"
-	color1 = "red"
-
-	colored_emblem = {
-		texture = "ce_star_05_hollow.dds"
-		color1 = "blue"
-		color2 = "white"
-	}
-}
-legacy_arkansas_fascist = { textured_emblem = { texture = "EU4toVic2/arkansas_fascist.tga" } }
-legacy_arkansas_monarchy = legacy_arkansas
-legacy_arkansas_republic = legacy_ANL
-legacy_ARK_communist = {
-	pattern = "pattern_horizontal_split_01.tga"
-	color1 = "white"
-	color2 = "red"
-
-	colored_emblem = {
-		texture = "ce_circle.dds"
-		color1 = "blue"
-	}
-	colored_emblem = {
-		texture = "ce_star_05_circle.dds"
-		color1 = "white"
-		color2 = "red"
-		instance = { scale = { 0.8 0.8 } }
-	}
-}
-legacy_ARK_fascist = { textured_emblem = { texture = "EU4toVic2/ARK_fascist.tga" } }
-legacy_ARK_monarchy = {
-	pattern = "pattern_solid.tga"
-	color1 = "white"
-
-	colored_emblem = {
-		texture = "ce_stripes_07.dds"
-		color1 = "blue"
-	}
-}
-legacy_ARK_republic = { textured_emblem = { texture = "EU4toVic2/ARK_republic.tga" } }
 legacy_ARL = { textured_emblem = { texture = "EU4toVic2/ARL.tga" } }
 legacy_ARL_communist = { textured_emblem = { texture = "EU4toVic2/ARL_communist.tga" } }
 legacy_ARL_fascist = { textured_emblem = { texture = "EU4toVic2/ARL_fascist.tga" } }
