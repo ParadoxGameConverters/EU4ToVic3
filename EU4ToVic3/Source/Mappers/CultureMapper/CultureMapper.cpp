@@ -13,6 +13,7 @@
 #include "NameListLoader/NameListLoader.h"
 #include "NameListMapper/NameListMapper.h"
 #include "ParserHelpers.h"
+#include <numeric>
 #include <ranges>
 
 namespace
@@ -105,6 +106,25 @@ void importLocalizationForNeoCulture(mappers::CultureDef& newDef, const mappers:
 	}
 }
 
+commonItems::Color generateCultureColors(const std::string& cultureName, const std::string& saltName)
+{
+	const auto salt = std::accumulate(saltName.begin(), saltName.end(), 0, [](int sum, const char letter) {
+		return sum + static_cast<int>(static_cast<unsigned char>(letter));
+	});
+
+	if (cultureName.size() < 3)
+		return commonItems::Color{std::array{200, 164, 213}};		  // I just like these numbers.
+	int r = (static_cast<int>(cultureName[0]) * 29 + salt) % 256; // should be random enough.
+	int g = (static_cast<int>(cultureName[1]) * 17 + salt) % 256;
+	int b = (static_cast<int>(cultureName[2]) * 23 + salt) % 256;
+	if (r < 50) // make them brighter.
+		r += 50;
+	if (g < 50)
+		g += 50;
+	if (b < 50)
+		b += 50;
+	return commonItems::Color{std::array{r, g, b}};
+}
 } // namespace
 
 
@@ -340,7 +360,8 @@ void mappers::CultureMapper::generateCultureDefinitions(const std::string& nameL
 				 nameListLoader,
 				 cultureLoader,
 				 religionLoader,
-				 eu4Locs);
+				 eu4Locs,
+				 eu4CultureName);
 			newDef.name = eu4CultureName;
 			importLocalizationForNeoCulture(newDef, colony, static_cast<int>(colonyNeoCultureTargets.at(actualColonyName).size()));
 			v3CultureDefinitions.emplace(eu4CultureName, newDef);
@@ -436,7 +457,8 @@ mappers::CultureDef mappers::CultureMapper::generateCultureDefinition(const V3::
 	 const NameListLoader& nameListLoader,
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader,
-	 const EU4::EU4LocalizationLoader& eu4Locs)
+	 const EU4::EU4LocalizationLoader& eu4Locs,
+	 const std::string& seedName)
 {
 	CultureDef newDef;
 	newDef.name = eu4CultureName;
@@ -463,6 +485,11 @@ mappers::CultureDef mappers::CultureMapper::generateCultureDefinition(const V3::
 			if (const auto& match = cultureMatch(clayManager, cultureLoader, religionLoader, sourceCultureName, "", "", ""); match)
 			{
 				relatedCultures[*match].emplace(eu4CultureName);
+				// eu4 cultures have no color defined. We need to seed-generate something.
+				if (!seedName.empty())
+					newDef.color = generateCultureColors(sourceCultureName, seedName);
+				else
+					newDef.color = generateCultureColors(sourceCultureName, eu4CultureName);
 				primaryComponent = false;
 			}
 			else
@@ -513,6 +540,14 @@ mappers::CultureDef mappers::CultureMapper::generateCultureDefinition(const V3::
 		Log(LogLevel::Warning) << "WHY doesn't " << eu4CultureName << " have a localization in EU4?";
 	else
 		newDef.locBlock = *locMatch;
+
+	if (!newDef.color)
+	{
+		if (!seedName.empty())
+			newDef.color = generateCultureColors(eu4CultureName, seedName);
+		else
+			newDef.color = generateCultureColors(eu4CultureName, eu4CultureName);
+	}
 
 	return newDef;
 }
