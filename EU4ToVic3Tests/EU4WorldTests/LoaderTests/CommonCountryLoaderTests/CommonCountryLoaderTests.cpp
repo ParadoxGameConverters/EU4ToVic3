@@ -13,7 +13,7 @@ TEST(EU4World_CommonCountryLoaderTests, colorsCanBeLoadedFromCommonCountries)
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	Mods mods;
-	mods.emplace_back(Mod("Some mod", "themod.mod"));
+	mods.emplace_back(Mod("Some mod", "mod/themod.mod"));
 
 	commonItems::ModLoader modLoader;
 	modLoader.loadMods(configuration.getEU4DocumentsPath(), mods);
