@@ -18,7 +18,13 @@
 
 namespace
 {
-
+std::string normalizeString(const std::string& input)
+{
+	auto toReturn = commonItems::normalizeUTF8Path(input);
+	std::replace(toReturn.begin(), toReturn.end(), ' ', '_');
+	std::replace(toReturn.begin(), toReturn.end(), '\'', '_');
+	return toReturn;
+}
 void copyNamePoolNames(mappers::CultureDef& cultureDef, const mappers::NameListEntry& namePool)
 {
 	cultureDef.commonLastNames = namePool.getDynastyNames();
@@ -33,20 +39,25 @@ void copyEU4Names(mappers::CultureDef& cultureDef, const EU4::CultureParser& sou
 {
 	for (const auto& name: sourceCulture.getDynastyNames())
 	{
-		cultureDef.commonLastNames.emplace(name);
-		cultureDef.nobleLastNames.emplace(name);
+		auto normName = "eu4_" + normalizeString(name);
+		cultureDef.nameLocBlock.emplace(normName, name);
+		cultureDef.commonLastNames.emplace(normName);
+		cultureDef.nobleLastNames.emplace(normName);
 	}
 	for (const auto& name: sourceCulture.getMaleNames())
 	{
-		cultureDef.maleCommonFirstNames.emplace(name);
-		cultureDef.maleRegalFirstNames.emplace(name);
+		auto normName = "eu4_" + normalizeString(name);
+		cultureDef.nameLocBlock.emplace(normName, name);
+		cultureDef.maleCommonFirstNames.emplace(normName);
+		cultureDef.maleRegalFirstNames.emplace(normName);
 	}
 	for (const auto& name: sourceCulture.getFemaleNames())
 	{
-		cultureDef.femaleCommonFirstNames.emplace(name);
-		cultureDef.femaleRegalFirstNames.emplace(name);
+		auto normName = "eu4_" + normalizeString(name);
+		cultureDef.nameLocBlock.emplace(normName, name);
+		cultureDef.femaleCommonFirstNames.emplace(normName);
+		cultureDef.femaleRegalFirstNames.emplace(normName);
 	}
-	cultureDef.win1252Names = true; // Will need to normalize them later.
 }
 
 std::vector<std::string> breakDownCulturalName(const std::string& eu4CultureName)
