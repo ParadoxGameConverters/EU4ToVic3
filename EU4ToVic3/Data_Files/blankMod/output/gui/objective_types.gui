@@ -1,0 +1,811 @@
+types objective_types
+{
+	type objective_selection_menu = widget {
+		size = { 100% 100% }
+
+		vbox = {
+			
+			expand = {}
+			
+			vbox = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = preferred
+				margin = { 20 25 }
+				minimumsize = { 0 500 }
+				
+				background = {
+					using = default_background
+					alpha = 0.92
+					margin = { 30 0 }
+					margin_top = -60
+				}
+
+				background = {
+					texture = "gfx/interface/backgrounds/popup_bg_frame_frontend.dds"
+					spriteType = Corneredstretched
+					spriteborder = { 80 80 }
+					texture_density = 2
+					margin = { 28 10 }
+					margin_top = -50
+				}
+				
+				### HEADER
+				icon = {
+					texture = "gfx/interface/new_game_panel/frame_start_menu_top.dds"
+					size = { 450 56 }
+					spriteType = Corneredtiled
+					spriteborder = { 100 0 }
+					texture_density = 2
+					
+					textbox = {
+						using = fontsize_xxl
+						align = center|nobaseline
+						text = "SELECT_OBJECTIVE_TITLE"
+						size = { 100% 100% }
+						elide = right
+						fontsize_min = 14
+						margin = { 75 0 }
+						margin_bottom = 5
+					}
+				}
+				
+				hbox = {
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = preferred
+					margin_top = 15
+
+					### objectives
+					widget = {
+						layoutstretchfactor_horizontal = 1
+						layoutpolicy_horizontal = expanding
+						layoutpolicy_vertical = preferred
+						
+						hbox = {
+							layoutpolicy_horizontal = expanding
+							layoutpolicy_vertical = preferred
+							margin = { 10 0 }
+							spacing = 10
+							datamodel = "[GameSetup.GetObjectives]"
+							
+							item = {
+								widget = {
+									layoutpolicy_horizontal = expanding
+									layoutpolicy_vertical = preferred
+									
+									widget = {
+										size = { 100% 100% }
+										
+										background = {
+											texture = "[ObjectiveType.GetBackground]"
+											fittype = centercrop
+										}
+										
+										widget = {
+											size = { 100% 50 }
+											parentanchor = hcenter|bottom
+											
+											background = {
+												visible = "[Not(GameSetup.HasSelectedObjective)]"
+												using = dark_area
+												alpha = 0.3
+												
+												modify_texture = {
+													texture = "gfx/interface/masks/fade_horizontal_center.dds"
+													spriteType = Corneredstretched
+													spriteborder = { 0 0 }
+													blend_mode = alphamultiply
+													alpha = 0.5
+												}
+											}
+											
+											hbox = {
+												margin_left = 5
+												margin_right = 20
+												
+												icon = {
+													size = { 40 40 }
+													texture = "[ObjectiveType.GetIcon]"
+												}
+												
+												textbox = {
+													layoutpolicy_horizontal = expanding
+													layoutpolicy_vertical = expanding
+													text = "[ObjectiveType.GetName]"
+											
+													align = center|nobaseline
+													using = fontsize_xl
+													alwaystransparent = yes
+													elide = right
+													fontsize_min = 16
+												}
+											}
+										}
+										
+										button = {
+											using = glow_button_border
+											alpha = 0.65
+											size = { 100% 100% }
+											onclick = "[GameSetup.ToggleObjective(ObjectiveType.AccessSelf)]"
+										}
+									}
+									
+									icon = {
+										size = { 100% 100% }
+										using = simple_frame
+									}
+									
+									icon = {
+										using = highlighted_square_selection
+										visible = "[ObjectsEqual(ObjectiveType.AccessSelf, GameSetup.GetSelectedObjective)]"
+									}
+								}
+							}
+						}
+					}
+					
+					### sandbox (select any country)
+					widget = {
+						layoutstretchfactor_horizontal = 3
+						layoutpolicy_horizontal = expanding
+						layoutpolicy_vertical = preferred
+						
+						widget = {
+							visible = "[Not(GameSetup.HasSelectedObjective)]"
+							size = { 100% 100% }
+							
+							background = {
+								texture = "gfx/interface/icons/objectives/sandbox.dds"
+								fittype = centercrop
+								using = frame_small_mask
+							}
+							
+							textbox = {
+								position = { 0 10 }
+								size = { 100% 60 }
+								text = "SANDBOX"
+								align = center|nobaseline
+								using = fontsize_mega
+								margin = { 0 15 }
+								
+								background = {
+									using = default_header_bg_faded
+									margin = { -5 0 }
+									alpha = 0.8
+								}
+							}
+							
+							flowcontainer = {
+								direction = vertical
+								spacing = 10
+								parentanchor = bottom|hcenter
+								margin = { 0 15 }
+								
+								background = {
+									using = dark_area
+									alpha = 0.6
+									using = frame_small_mask
+									
+									modify_texture = {
+										texture = "gfx/interface/masks/fade_horizontal_center.dds"
+										spriteType = Corneredstretched
+										spriteborder = { 0 0 }
+										blend_mode = alphamultiply
+									}
+								}
+								
+								textbox = {
+									text = "START_GAME"
+									align = center|nobaseline
+									minimumsize = { 350 -1 }
+									maximumsize = { 350 -1 }
+									autoresize = yes
+									multiline = yes
+									using = fontsize_xxl
+								}
+								
+								textbox = {
+									text = "START_GAME_NO_OBJECTIVE_NO_TAG"
+									default_format = "#instruction"
+									align = center|nobaseline
+									minimumsize = { 350 -1 }
+									maximumsize = { 350 -1 }
+									autoresize = yes
+									multiline = yes
+									using = fontsize_large
+								}
+							}
+							
+							widget = {
+								size = { 50 50 }
+								parentanchor = bottom
+								position = { 0 -70 }
+								
+								hbox = {
+									margin_left = 5
+
+									icon = {
+										size = { 40 40 }
+										texture = "gfx/interface/icons/generic_icons/generic_concept_icon.dds"
+									}
+								}
+							}
+
+							button = {
+								using = glow_button_border
+								size = { 100% 100% }
+								onclick = "[GameSetup.OnStart]"
+								using = frame_small_mask
+								using = start_game_button_sound
+								
+								state = {
+									trigger_on_create = yes
+									name = 1
+									next = 2
+									alpha = 0.3
+									duration = 0.5
+									using = Animation_Curve_Default
+								}
+								state = {
+									name = 2
+									next = 1
+									alpha = 1
+									duration = 0.5
+									using = Animation_Curve_Default
+								}
+							}
+							
+							icon = {
+								size = { 100% 100% }
+								using = frame_small
+							}
+						}
+					}
+				}
+				
+				widget = {
+					#visible = "[GameSetup.HasSelectedObjective]"
+					size = { 1 20 }
+				}
+				
+				flowcontainer = {
+					spacing = 20
+					### SELECTED OBJECTIVE INFO
+					widget = {
+						visible = "[GameSetup.HasSelectedObjective]"
+						datacontext = "[GameSetup.GetSelectedObjective]"
+						size = { 530 0 }
+						
+						state = {
+							name = _show
+							size = { 530 610 }
+							duration = 0.3
+							alpha = 1
+							using = Animation_Curve_Default
+							on_finish = "[PdxGuiWidget.AccessChild('content').TriggerAnimation('show')]"
+						}
+						state = {
+							name = _hide
+							size = { 530 0 }
+							duration = 0.3
+							alpha = 0
+							using = Animation_Curve_Default
+							on_start = "[PdxGuiWidget.AccessChild('content').TriggerAnimation('hide')]"
+						}
+						
+						widget = {
+							name = "content"
+							size = { 100% 100% }
+
+							state = {
+								name = show
+								duration = 0.3
+								using = Animation_Curve_Default
+								alpha = 1
+							}
+							state = {
+								name = hide
+								duration = 0
+								alpha = 0
+							}
+							
+							background = {
+								texture = "[ObjectiveType.GetBackground]"
+								fittype = centercrop
+								using = frame_small_mask
+								margin = { -1 -1 }
+							}
+							background = {
+								using = dark_area
+								using = frame_small_mask
+								margin = { -1 -1 }
+								alpha = 0.6
+							}
+							
+							using = entry_bg_fancy
+						
+							vbox = {
+								margin = { 20 20 }
+								spacing = 20
+							
+								textbox = {
+									layoutpolicy_horizontal = expanding
+									size = { 0 50 }
+									text = "[ObjectiveType.GetName]"
+							
+									align = center|nobaseline
+									using = fontsize_mega
+									alwaystransparent = yes
+									elide = right
+									fontsize_min = 16
+									
+									background = {
+										using = default_header_bg_faded
+										margin = { -5 0 }
+									}
+								}
+								
+								icon = {
+									size = { 80 80 }
+									texture = "[ObjectiveType.GetIcon]"
+								}
+								
+								scrollarea = {
+									layoutpolicy_horizontal = expanding
+									layoutpolicy_vertical = expanding
+
+									scrollbarpolicy_horizontal = always_off
+									
+									scrollbar_vertical = {
+										using = vertical_scrollbar		
+									}
+
+									scrollwidget = {
+										vbox = {
+											text_multi = {
+												layoutpolicy_horizontal = expanding
+												layoutpolicy_vertical = expanding
+												text = "[ObjectiveType.GetDesc]"
+												align = top|nobaseline
+												using = fontsize_xl
+												alwaystransparent = yes
+											}
+
+											text_multi = {
+												visible = [ObjectiveType.HasRecommendedGameRules]
+												layoutpolicy_horizontal = expanding
+												layoutpolicy_vertical = expanding
+												text = "OBJECTIVE_TYPE_RECOMMENDED_GAME_RULE_DESC"
+
+												align = bottom|nobaseline
+												using = fontsize_xl
+												alwaystransparent = yes
+											}
+
+											vbox = {
+												margin = { 4 0 }
+												layoutpolicy_horizontal = expanding
+												datamodel = "[ObjectiveType.GetRecommendedGameRules]"
+												visible = "[DataModelHasItems( ObjectiveType.GetRecommendedGameRules )]"
+
+												item = {
+													text_single = {
+														layoutpolicy_horizontal = expanding
+														text = "OBJECTIVE_TYPE_RECOMMENDED_GAME_RULE_ITEM_TEXT"
+														tooltip = "[GameRuleSetting.GetDescription]"
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				
+					### RECOMMENDED COUNTRIES
+					widget = {
+						visible = "[GameSetup.HasSelectedObjective]"
+						size = { 1300 0 }
+
+						state = {
+							name = _show
+							size = { 1300 610 }
+							duration = 0.3
+							alpha = 1
+							using = Animation_Curve_Default
+							on_finish = "[PdxGuiWidget.AccessChild('content').TriggerAnimation('show')]"
+						}
+						state = {
+							name = _hide
+							next = 2
+							size = { 1300 610 }
+							duration = 0
+							alpha = 1
+							on_start = "[PdxGuiWidget.AccessChild('content').TriggerAnimation('hide')]"
+						}
+						state = {
+							name = 2
+							size = { 1300 0 }
+							duration = 0.3
+							alpha = 0
+							using = Animation_Curve_Default
+						}
+						
+						widget = {
+							name = "content"
+							size = { 100% 100% }
+							
+							state = {
+								name = show
+								duration = 0.3
+								using = Animation_Curve_Default
+								alpha = 1
+							}
+							state = {
+								name = hide
+								duration = 0
+								alpha = 0
+							}
+
+							background = {
+								using = entry_bg_simple
+							}
+							
+							textbox = {
+								text = "SELECT_OBJECTIVE_TAG_TITLE"
+								autoresize = yes
+								using = fontsize_large
+								margin = { 25 10 }
+								align = left|nobaseline
+							}
+							
+							scrollarea = {
+								parentanchor = bottom|hcenter
+								size = { 1290 570 }
+
+								scrollbarpolicy_horizontal = always_off
+								
+								scrollbar_vertical = {
+									using = vertical_scrollbar		
+								}
+
+								scrollwidget = {
+									fixedgridbox = {
+										addcolumn = 320
+										addrow = 560
+										maxhorizontalslots = 4
+										parentanchor = left
+										position = { 10 0 }
+										flipdirection = yes
+										datamodel = "[GameSetup.GetSelectedObjective.GetRecommendedTags]"
+										
+										item = {
+											widget = {
+												size = { 310 550 }
+												
+												button = {
+													using = default_button
+													size = { 100% 100% }
+													
+													down = "[ObjectsEqual(CountryDefinition.AccessSelf, GameSetup.GetSelectedTag)]"
+													onclick = "[GameSetup.ToggleTag(CountryDefinition.AccessSelf)]"
+													using = check_button_sound
+												}
+												
+												vbox = {
+													datacontext = "[GameSetup.GetSelectedObjective]"
+													layoutpolicy_horizontal = expanding
+													margin = { 15 20 }
+													spacing = 20
+													
+													hbox = {
+														layoutpolicy_horizontal = expanding
+														margin = { 5 0 }
+														spacing = 15
+													
+														icon = {
+															size = { 48 32 }
+															texture = "[CountryDefinition.GetBaseFlag.GetSmallFlagTexture]"
+															frame = "[CountryDefinition.GetBaseFlag.GetSmallFlagFrame]"
+															framesize = "[GetSmallFlagFrameSize]"
+															using = flag_overlay
+															
+															background = {
+																using = simple_frame
+																margin = { 3 3 }
+															}
+														}
+													
+														text_single = {
+															layoutpolicy_horizontal = expanding
+															text = "[ObjectiveType.GetNameForCountryDef(CountryDefinition.AccessSelf)]"
+															align = nobaseline
+															using = fontsize_xxl
+															alwaystransparent = yes
+														}
+													}
+														
+													text_multi = {
+														layoutpolicy_horizontal = expanding
+														layoutpolicy_vertical = expanding
+														text = "[ObjectiveType.GetDescForCountryDef(CountryDefinition.AccessSelf)]"
+														align = top|nobaseline
+														using = fontsize_large
+														alwaystransparent = yes
+														margin = { 10 5 }
+														
+														background = {
+															using = entry_bg_simple
+														}
+													}
+												}
+												
+												icon = {
+													using = highlighted_square_selection
+													visible = "[ObjectsEqual(CountryDefinition.AccessSelf, GameSetup.GetSelectedTag)]"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				widget = {
+					visible = "[GameSetup.HasSelectedObjective]"
+					size = { 1 20 }
+				}
+				
+				### BOTTOM BAR - OBJECTIVE NOT SELECTED
+				hbox = {
+					name = "bottom_panel_not_selected"
+					visible = "[Not(GameSetup.HasSelectedObjective)]"
+					layoutpolicy_horizontal = expanding
+					margin = { 15 0 }
+					using = default_fade_in_out
+
+					widget = {
+						layoutpolicy_horizontal = expanding
+						layoutpolicy_vertical = expanding
+					}
+
+					game_rules_hbox = {}
+
+					widget = {
+						layoutpolicy_horizontal = expanding
+						layoutpolicy_vertical = expanding
+					}
+					
+					start_game_buttons = {}
+				}
+
+				### BOTTOM BAR - OBJECTIVE SELECTED
+				hbox = {
+					name = "bottom_panel"
+					visible = "[GameSetup.HasSelectedObjective]"
+					layoutpolicy_horizontal = expanding
+					margin = { 15 0 }
+					using = default_fade_in_out
+
+					game_rules_hbox = {}
+
+					widget = {
+						layoutpolicy_horizontal = expanding
+						layoutpolicy_vertical = expanding
+					}
+					
+					start_game_buttons = {}
+				}
+			}
+			
+			expand = {}
+			
+			### BACK BUTTON
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				margin = { 15 0 }
+				margin_bottom = 10
+				
+				button_standard_back = {
+					visible = "[Not(GameSetup.HasSelectedObjective)]"
+					size = { 300 55 }
+					name = "back_button"
+					shortcut = "close_window"
+					using = fontsize_large
+
+					onclick = "[GameSetup.OnBack]"
+					oversound = "event:/SFX/UI/Global/pointer_over"
+					clicksound = "event:/SFX/UI/Global/close"
+				}
+
+				button_standard_back = {
+					visible = "[GameSetup.HasSelectedObjective]"
+					size = { 300 55 }
+					name = "back_button_objective_selected"
+					shortcut = "close_window"
+					using = fontsize_large
+
+					onclick = "[GameSetup.ToggleObjective(GameSetup.GetSelectedObjective)]"
+					oversound = "event:/SFX/UI/Global/pointer_over"
+					clicksound = "event:/SFX/UI/Global/close"
+				}
+				
+				expand = {}
+			}
+		}	
+	}
+
+	type game_rules_hbox = hbox {
+
+		### GAME RULES
+		layoutpolicy_horizontal = preferred
+		spacing = 15
+		margin = { 15 0 }
+		using = default_fade_in_out
+		
+		background = {
+			using = dark_area_rounded
+			alpha = 0.3
+		}
+		
+		button_standard = {
+			name = "game_rules_button"
+			size = { 200 45 }
+
+			text = "GAME_RULES"
+			onclick = "[OpenGameRules]"
+
+			button_rules = {
+				size = { 25 25 }
+				parentanchor = left|vcenter
+				position = { 5 0 }
+				alwaystransparent = yes
+			}
+		}
+		
+		divider_light = {
+			layoutpolicy_vertical = expanding
+		}
+		
+		flowcontainer_game_rules_mini = {
+			name = "game_rules_mini"
+		}
+		
+		divider_light = {
+			layoutpolicy_vertical = expanding
+		}
+
+		widget = {
+			size = { 180 60 }
+			
+			hbox = {
+				name = "buttons"
+				visible = "[Not( IsInGame )]"
+
+				button_checkbox_label = {
+					visible = "[Not( IsIronmanEnabled )]"
+					onclick = "[SetIronmanEnabledStatus( '(bool)yes' )]"
+
+					blockoverride "checkbox"
+					{
+						checked = "[IsIronmanEnabled]"
+					}
+
+					blockoverride "text"
+					{
+						text = "BOOKMARK_IRONMAN_DISABLED"
+					}
+				}
+
+				button_checkbox_label = {
+					visible = "[IsIronmanEnabled]"
+					onclick = "[SetIronmanEnabledStatus( '(bool)no' )]"
+
+					blockoverride "checkbox"
+					{
+						checked = "[IsIronmanEnabled]"
+					}
+
+					blockoverride "text"
+					{
+						text = "BOOKMARK_IRONMAN_ENABLED"
+					}
+				}
+			}
+		}						
+
+		divider_light = {
+			layoutpolicy_vertical = expanding
+		}
+
+		widget = {
+			size = { 180 80 }
+			
+			hbox_achievements_info = {
+				using = tooltip_ne
+				blockoverride "ai_background" {}
+
+				blockoverride "ai_icon_size"
+				{
+					size = { 36 36 }
+				}
+			}
+		}
+	}
+
+	type start_game_buttons = widget {
+		
+		### BUTTONS BOTTOM RIGHT
+		size = { 680 80 }
+		visible = "[GameSetup.HasSelectedObjective]"
+		using = default_fade_in_out
+		
+		# select any country
+		button = {
+			using = default_button_primary_big_action
+			parentanchor = left|vcenter
+			size = { 330 60 }
+			enabled = "[Not(GameSetup.HasSelectedTag)]"
+			visible = "[GameSetup.HasSelectedObjective]"
+			onclick = "[GameSetup.OnStart]"
+			onclick = "[PdxGuiTriggerAllAnimations('bookmarks_game_start')]"
+			using = default_fade_in_out
+			using = start_game_button_sound
+			
+			using = tooltip_above
+			tooltip = "[SelectLocalization(GameSetup.HasSelectedTag, 'HAS_SELECTED_COUNTRY_TOOLTIP', 'START_ANY_COUNTRY_TOOLTIP')]"
+
+			textbox = {
+				size = { 100% 100% }
+				text = "SELECT_ANY_COUNTRY"
+				align = center|nobaseline
+				using = fontsize_xl
+				fontsize_min = 14
+				elide = right
+				margin = { 20 0 }
+			}
+		}
+		
+		# start game
+		button = {
+			using = default_button_primary_big_action
+			parentanchor = right|vcenter
+			size = { 330 60 }
+			enabled = "[GameSetup.HasSelectedTag]"
+			visible = "[GameSetup.HasSelectedObjective]"
+			onclick = "[GameSetup.OnStart]"
+			onclick = "[PdxGuiTriggerAllAnimations('bookmarks_game_start')]"
+			using = default_fade_in_out
+			using = start_game_button_sound
+
+			# tooltip if country selected
+			widget = {
+				visible = "[GameSetup.HasSelectedTag]"
+				size = { 100% 100% }
+				using = tooltip_above
+				datacontext = "[GameSetup.GetSelectedTag]"
+				tooltip = "START_GAME_TOOLTIP"
+			}
+
+			# tooltip if no country selected
+			widget = {
+				visible = "[Not(GameSetup.HasSelectedTag)]"
+				size = { 100% 100% }
+				using = tooltip_above
+				tooltip = "NO_SELECTED_COUNTRY_TOOLTIP"
+			}
+
+			textbox = {
+				size = { 100% 100% }
+				text = "START_GAME"
+				align = center|nobaseline
+				using = fontsize_xxl
+				fontsize_min = 14
+				elide = right
+				margin = { 20 0 }
+			}
+		}
+	}
+}

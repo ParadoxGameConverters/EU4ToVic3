@@ -1,0 +1,61 @@
+﻿objective_tutorial = {
+	background = "gfx/interface/icons/objectives/learn.dds"
+	icon = "gfx/interface/icons/event_icons/tutorial_icon.dds"
+	
+	recommended_tags = { }	
+	recommended_game_rules = { lenient_ai_behavior low_ai_aggression }
+
+	objective_subgoals = {
+		sg_expand_basic_building
+		sg_fix_budget_deficit
+		sg_establish_trade_route
+		sg_change_production_method
+		sg_expand_productive_building
+		sg_increase_market_access_by_decree
+		sg_improve_market_access_with_railways
+		sg_increase_immigration
+		sg_fix_unproductive_building
+		sg_grow_gdp
+		sg_promote_ig
+		sg_expend_investment_pool
+		sg_improve_supply_network
+		sg_improve_consumer_goods_access
+		sg_make_interest_group_happy
+		sg_enact_institution_law
+		sg_invest_into_an_institution
+		sg_reform_government
+		sg_increase_relations
+		sg_improve_rank
+		sg_prevent_revolution
+		sg_earn_obligation
+		sg_expand_military
+		sg_recruit_promote_commander
+		sg_mobilize_army
+		sg_send_general_to_front
+		sg_convoy_raiding 
+		sg_recover_from_default
+		sg_start_diplomatic_play
+		sg_is_play_target
+		sg_capacity_deficit
+		sg_incorporate_state
+		sg_declare_an_interest
+		sg_make_peace
+		sg_reach_end_date
+		sg_colonize_state
+		sg_research_technology
+	}
+	
+	final_subgoal = sg_reach_end_date
+	
+	on_start = {
+		start_research_random_technology = yes
+# 		random_researchable_technology = {
+#			save_scope_as = initial_tech_research
+#		}
+#		if = {
+#			limit = { exists = initial_tech_research }
+#			start_research = initial_tech_research
+#		}
+		start_tutorial_lesson = { tutorial_lesson = lesson_basics }
+	}
+}
