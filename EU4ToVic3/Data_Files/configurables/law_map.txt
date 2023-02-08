@@ -224,6 +224,28 @@ lawgroup_citizenship = {
 	}
 }
 
+#COLONIAL AFFAIRS:
+#law_colonial_resettlement 25 *T=colonization
+#law_no_colonial_affairs 0
+#law_colonial_exploitation -25 *T=colonization
+lawgroup_colonization = {
+	law_colonial_resettlement = {
+		forms = { }
+		ideas = { maritime_ideas naval_ideas }
+		reforms = { penal_colonies_reform free_trade_reform cultural_administration_reform external_mission_reform commercial_mission_reform embedded_norse_government_reform }
+	}
+	law_no_colonial_affairs = {
+		forms = { republic theocracy monarchy tribal native }
+		ideas = { }
+		reforms = { indigenous_ideas }
+	}
+	law_colonial_exploitation = {
+		forms = { }
+		ideas = { expansion_ideas exploration_ideas trade_ideas }
+		reforms = { mercantilistic_approach_reform new_world_exploitation_reform mission_to_civilize_reform mission_to_protect_reform }
+	}
+}
+
 #CHURCHSTATE:
 #law_total_separation 50 !law_theocracy
 #law_freedom_of_conscience 0 !law_theocracy
