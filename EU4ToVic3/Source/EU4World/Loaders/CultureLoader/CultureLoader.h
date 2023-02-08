@@ -22,6 +22,7 @@ class CultureLoader: commonItems::parser
   private:
 	void registerKeys();
 
+	std::set<std::string> knownCultures; // used to discard excess definitions when parsing modded sources.
 	std::map<std::string, CultureGroupParser> cultureGroupsMap;
 };
 } // namespace EU4

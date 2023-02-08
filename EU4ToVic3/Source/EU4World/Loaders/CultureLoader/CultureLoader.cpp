@@ -31,8 +31,8 @@ void EU4::CultureLoader::loadCultures(std::istream& theStream)
 
 void EU4::CultureLoader::registerKeys()
 {
-	registerRegex(commonItems::stringRegex, [this](std::string cultureGroupName, std::istream& theStream) {
-		auto newGroup = CultureGroupParser(cultureGroupName, theStream);
+	registerRegex(commonItems::stringRegex, [this](const std::string& cultureGroupName, std::istream& theStream) {
+		auto newGroup = CultureGroupParser(cultureGroupName, theStream, knownCultures);
 
 		if (cultureGroupsMap.contains(cultureGroupName))
 		{
@@ -45,6 +45,8 @@ void EU4::CultureLoader::registerKeys()
 		{
 			cultureGroupsMap.emplace(cultureGroupName, newGroup);
 		}
+		const auto names = newGroup.getCultureNames();
+		knownCultures.insert(names.begin(), names.end());
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
