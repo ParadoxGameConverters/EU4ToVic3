@@ -3,7 +3,8 @@
 #include "ParserHelpers.h"
 #include <ranges>
 
-EU4::CultureGroupParser::CultureGroupParser(std::string theName, std::istream& theStream): cultureGroupName(std::move(theName))
+EU4::CultureGroupParser::CultureGroupParser(std::string theName, std::istream& theStream, std::set<std::string> theKnownCultures):
+	 cultureGroupName(std::move(theName)), knownCultures(std::move(theKnownCultures))
 {
 	registerKeys();
 	parseStream(theStream);
@@ -38,9 +39,9 @@ void EU4::CultureGroupParser::registerKeys()
 	});
 	registerRegex(commonItems::stringRegex, [this](const std::string& cultureName, std::istream& theStream) {
 		auto newCulture = CultureParser(theStream);
-		cultures.emplace(cultureName, newCulture);
+		if (!knownCultures.contains(cultureName))
+			cultures.emplace(cultureName, newCulture);
 	});
-	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
 void EU4::CultureGroupParser::mergeCulture(const std::string& cultureName, const CultureParser& cultureParser)
@@ -58,4 +59,12 @@ void EU4::CultureGroupParser::mergeCulture(const std::string& cultureName, const
 	{
 		cultures.emplace(cultureName, cultureParser);
 	}
+}
+
+std::set<std::string> EU4::CultureGroupParser::getCultureNames() const
+{
+	std::set<std::string> toReturn;
+	for (const auto& cultureName: cultures | std::views::keys)
+		toReturn.emplace(cultureName);
+	return toReturn;
 }

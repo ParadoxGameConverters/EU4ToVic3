@@ -15,6 +15,21 @@ TEST(EU4World_CultureLoaderTests, cultureGroupsCanBeLoaded)
 	EXPECT_TRUE(groups.getCultureGroupsMap().contains("groupB"));
 }
 
+TEST(EU4World_CultureLoaderTests, excessCulturesAreSkipped)
+{
+	std::stringstream input;
+	input << "groupA = { cultureA = {} }\n";
+	input << "groupB = { cultureA = {} }\n";
+	EU4::CultureLoader groups;
+	groups.loadCultures(input);
+
+	EXPECT_EQ(2, groups.getCultureGroupsMap().size());
+	EXPECT_TRUE(groups.getCultureGroupsMap().contains("groupA"));
+	EXPECT_TRUE(groups.getCultureGroupsMap().at("groupA").getCultureNames().contains("cultureA"));
+	EXPECT_TRUE(groups.getCultureGroupsMap().contains("groupB"));
+	EXPECT_FALSE(groups.getCultureGroupsMap().at("groupB").getCultureNames().contains("cultureA"));
+}
+
 TEST(EU4World_CultureLoaderTests, GroupNameForCultureCanBeRetrieved)
 {
 	std::stringstream input;
