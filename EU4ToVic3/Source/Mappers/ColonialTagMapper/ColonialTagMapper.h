@@ -23,6 +23,7 @@ class ColonialTagMapper: commonItems::parser
 	void registerKeys();
 
 	std::vector<ColonialTagMapping> colonialTagMappings;
+	std::set<std::string> knownColonialTags;
 };
 } // namespace mappers
 

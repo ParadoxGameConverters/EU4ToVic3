@@ -19,7 +19,8 @@ class CultureDefinitionLoader: commonItems::parser
 	void registerKeys();
 
 	std::map<std::string, CultureDef> cultureDefinitions;
-	bool skipExport = true; // skip export for cultures not loaded from 99_<...>.txt!
+	bool skipProcessing = true; // skip processing for cultures not loaded from 99_<...>.txt!
+	bool skipExport = true;		 // skip export for cultures loaded from */blankMod/*
 };
 } // namespace mappers
 

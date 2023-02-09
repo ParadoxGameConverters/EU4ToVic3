@@ -19,6 +19,7 @@ class ColonialTagMapping: commonItems::parser
 	[[nodiscard]] std::optional<std::string> matchColonialTag(const V3::Country& country,
 		 const ColonialRegionMapper& colonialRegionMapper,
 		 const V3::ClayManager& clayManager) const;
+	[[nodiscard]] const auto& getTag() const { return tag; }
 
   private:
 	void registerKeys();

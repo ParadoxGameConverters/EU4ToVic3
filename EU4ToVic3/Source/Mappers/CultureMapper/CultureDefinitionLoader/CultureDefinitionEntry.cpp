@@ -15,8 +15,9 @@ std::string normalizeString(const std::string& input)
 }
 } // namespace
 
-mappers::CultureDefinitionEntry::CultureDefinitionEntry(std::istream& theStream, bool skipExport)
+mappers::CultureDefinitionEntry::CultureDefinitionEntry(std::istream& theStream, bool skipProcessing, bool skipExport)
 {
+	cultureDef.skipProcessing = skipProcessing;
 	cultureDef.skipExport = skipExport;
 	registerkeys();
 	parseStream(theStream);
@@ -43,7 +44,7 @@ void mappers::CultureDefinitionEntry::registerkeys()
 	registerKeyword("male_common_first_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
 		{
-			if (cultureDef.skipExport)
+			if (cultureDef.skipProcessing)
 				cultureDef.maleCommonFirstNames.emplace(name);
 			else
 			{
@@ -56,7 +57,7 @@ void mappers::CultureDefinitionEntry::registerkeys()
 	registerKeyword("female_common_first_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
 		{
-			if (cultureDef.skipExport)
+			if (cultureDef.skipProcessing)
 				cultureDef.femaleCommonFirstNames.emplace(name);
 			else
 			{
@@ -69,7 +70,7 @@ void mappers::CultureDefinitionEntry::registerkeys()
 	registerKeyword("noble_last_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
 		{
-			if (cultureDef.skipExport)
+			if (cultureDef.skipProcessing)
 				cultureDef.nobleLastNames.emplace(name);
 			else
 			{
@@ -82,7 +83,7 @@ void mappers::CultureDefinitionEntry::registerkeys()
 	registerKeyword("common_last_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
 		{
-			if (cultureDef.skipExport)
+			if (cultureDef.skipProcessing)
 				cultureDef.commonLastNames.emplace(name);
 			else
 			{
@@ -95,7 +96,7 @@ void mappers::CultureDefinitionEntry::registerkeys()
 	registerKeyword("male_regal_first_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
 		{
-			if (cultureDef.skipExport)
+			if (cultureDef.skipProcessing)
 				cultureDef.maleRegalFirstNames.emplace(name);
 			else
 			{
@@ -108,7 +109,7 @@ void mappers::CultureDefinitionEntry::registerkeys()
 	registerKeyword("female_regal_first_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
 		{
-			if (cultureDef.skipExport)
+			if (cultureDef.skipProcessing)
 				cultureDef.femaleRegalFirstNames.emplace(name);
 			else
 			{
@@ -121,7 +122,7 @@ void mappers::CultureDefinitionEntry::registerkeys()
 	registerKeyword("regal_last_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
 		{
-			if (cultureDef.skipExport)
+			if (cultureDef.skipProcessing)
 				cultureDef.regalLastNames.emplace(name);
 			else
 			{

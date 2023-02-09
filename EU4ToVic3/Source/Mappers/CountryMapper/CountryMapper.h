@@ -22,8 +22,8 @@ class CountryMapper: commonItems::parser
 	[[nodiscard]] std::optional<std::string> getV3Tag(const std::string& eu4Tag) const;
 	[[nodiscard]] std::optional<std::string> getEU4Tag(const std::string& v3Tag) const;
 	[[nodiscard]] std::optional<std::string> getFlagCode(const std::string& v3Tag) const;
-	[[nodiscard]] static bool tagIsDynamic(const std::string& tag);  // alpha-digit-digit, eg. C01, T15
-	[[nodiscard]] static bool tagIsNonCanon(const std::string& tag); // both dynamic and imported, eg. Z0A, X0J
+	[[nodiscard]] bool tagIsDynamic(const std::string& tag) const;	 // alpha-digit-digit, eg. C01, T15
+	[[nodiscard]] bool tagIsNonCanon(const std::string& tag) const; // both dynamic and imported, eg. Z0A, X0J
 
 	[[nodiscard]] std::string assignV3TagToEU4Country(const std::shared_ptr<EU4::Country>& country);
 	[[nodiscard]] std::string requestNewV3Tag();
@@ -48,6 +48,7 @@ class CountryMapper: commonItems::parser
 	std::map<std::string, std::string> v3FlagCodes; // v3 tag -> flagcode
 	std::set<std::string> unmappedV3Tags;				// stuff we generate on the fly for decentralized countries.
 	std::set<std::string> knownVanillaV3Tags;			// countries we import at game start. Includes names with potential for generated-collisions.
+	std::set<std::string> dynamicallyGeneratedTags; // stuff we created ourselves. Safe to delete if needed.
 
 	char generatedV3TagPrefix = 'X';
 	int generatedV3TagSuffix = 0;

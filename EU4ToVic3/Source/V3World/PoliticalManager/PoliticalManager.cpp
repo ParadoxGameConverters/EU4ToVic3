@@ -655,9 +655,9 @@ void V3::PoliticalManager::attemptColonialTagReplacement(const mappers::Colonial
 		if (!country->getSourceCountry()->isColony())
 			continue;
 
-		// focus only on CXX countries.
+		// focus only on CXX countries. On vic3 side as well! We don't want to delete canonical vic3 countries!
 		const auto& eu4tag = country->getSourceCountry()->getTag();
-		if (!eu4tag.starts_with("C") || !mappers::CountryMapper::tagIsDynamic(eu4tag))
+		if (!eu4tag.starts_with("C") || !countryMapper->tagIsDynamic(eu4tag) || !countryMapper->tagIsDynamic(tag))
 			continue;
 
 		if (const auto replacement = colonialTagMapper.matchColonialTag(*country, colonialRegionMapper, clayManager); replacement)
