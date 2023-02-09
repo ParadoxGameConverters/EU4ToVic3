@@ -111,6 +111,7 @@ class Country: commonItems::parser
 	void setIndustryWeight(const double theIndustryWeight) { processedData.industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theBudget) { processedData.CPBudget = theBudget; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
+	void setReligion(const std::string& religion) { processedData.religion = religion; }
 
 	void convertFromEU4Country(const ClayManager& clayManager,
 		 mappers::CultureMapper& cultureMapper,

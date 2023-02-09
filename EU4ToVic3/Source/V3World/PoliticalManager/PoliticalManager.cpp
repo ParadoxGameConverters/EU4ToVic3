@@ -17,6 +17,28 @@
 #include <numeric>
 #include <ranges>
 
+namespace
+{
+std::vector<std::string> sortMap(const std::map<std::string, int>& theMap)
+{
+	std::vector<std::string> sorted;
+
+	std::vector<std::pair<std::string, int>> pairs;
+	for (const auto& theElement: theMap)
+		pairs.emplace_back(theElement);
+
+	std::sort(pairs.begin(), pairs.end(), [=](const std::pair<std::string, int>& a, const std::pair<std::string, int>& b) {
+		return a.second > b.second;
+	});
+
+	for (const auto& tag: pairs | std::views::keys)
+		sorted.emplace_back(tag);
+
+	return sorted;
+}
+} // namespace
+
+
 void V3::PoliticalManager::initializeVanillaCountries(const commonItems::ModFilesystem& modFS, const commonItems::ModFilesystem& vanillaFS)
 {
 	Log(LogLevel::Info) << "-> Loading Vanilla Countries.";
@@ -875,6 +897,40 @@ void V3::PoliticalManager::expandReleasablesFootprint(const ClayManager& clayMan
 			++counter;
 	}
 	Log(LogLevel::Info) << "<> Expanded " << counter << " releasables.";
+}
+
+void V3::PoliticalManager::alterReleasablesReligion()
+{
+	Log(LogLevel::Info) << "-> Altering Releasables state religions.";
+	auto counter = 0;
+
+	// Releasables are dead. We look at their core territories, make a census of their primary cultures' religions there,
+	// and pick the dominant one.
+	for (const auto& country: countries | std::views::values)
+	{
+		// releasables own no states but have unowned cores somewhere.
+		if (!country->getSubStates().empty() || country->getUnownedCoreSubStates().empty())
+			continue;
+
+		// the census.
+		const auto& stateCultures = country->getProcessedData().cultures;
+		std::map<std::string, int> religionCounts;
+		for (const auto& subState: country->getUnownedCoreSubStates())
+			for (const auto& pop: subState->getSubStatePops().getPops())
+				if (stateCultures.contains(pop.getCulture()) && !pop.getReligion().empty())
+					religionCounts[pop.getReligion()] += pop.getSize();
+
+		const auto sortedReligions = sortMap(religionCounts);
+		if (sortedReligions.empty()) // possible with 0 pops, but bad. Not our problem, this is legitimate under "don't delete dead nations".
+			continue;
+
+		if (*sortedReligions.begin() == country->getProcessedData().religion)
+			continue;
+
+		country->setReligion(*sortedReligions.begin());
+		++counter;
+	}
+	Log(LogLevel::Info) << "<> Updated religion for " << counter << " releasables.";
 }
 
 void V3::PoliticalManager::loadMajorFormables(const std::string& filePath)
