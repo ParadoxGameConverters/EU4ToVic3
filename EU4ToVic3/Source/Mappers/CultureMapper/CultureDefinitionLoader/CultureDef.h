@@ -19,7 +19,8 @@ struct CultureDef
 	std::set<std::string> regalLastNames;
 	std::set<std::string> ethnicities;
 	std::string graphics;
-	bool skipExport = false; // We're skipping *separate* export for defs that we either import or just copy over from blankmod.
+	bool skipProcessing = false; // We're skipping *separate* processing for defs that we import (from DW for example).
+	bool skipExport = false;	  // We're skipping *separate* export for defs that we copy over from blankmod.
 
 	std::map<std::string, std::string> locBlock;
 	std::map<std::string, std::string> nameLocBlock; // all english since we load from disk

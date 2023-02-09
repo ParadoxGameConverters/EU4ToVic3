@@ -23,6 +23,24 @@ TEST(Mappers_ColonialTagMapperTests, rulesCanBeLoadedAndMatched)
 	EXPECT_EQ("COL", *match);
 }
 
+TEST(Mappers_ColonialTagMapperTests, MatchWillFailForExistingColonialTag)
+{
+	mappers::ColonialTagMapper mapper;
+	mapper.loadMappingRules("TestFiles/configurables/colonial_tags.txt");
+
+	const auto country = std::make_shared<V3::Country>();
+	country->setTag("COL");
+	const auto subState = std::make_shared<V3::SubState>();
+	country->addSubState(subState);
+	V3::ProcessedData data;
+	data.capitalStateName = "STATE_BRITISH_COLUMBIA";
+	country->setProcessedData(data);
+
+	const auto& match = mapper.matchColonialTag(*country, {}, {});
+
+	EXPECT_FALSE(match);
+}
+
 TEST(Mappers_ColonialTagMapperTests, MatchWillFailForNoMatches)
 {
 	mappers::ColonialTagMapper mapper;

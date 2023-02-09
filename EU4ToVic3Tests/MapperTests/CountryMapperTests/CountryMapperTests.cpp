@@ -233,23 +233,25 @@ TEST(Mappers_CountryMapperTests, CountryWontGetReservedTag)
 
 TEST(Mappers_CountryMapperTests, tagIsDynamicWorksAsAdvertised)
 {
-	EXPECT_TRUE(mappers::CountryMapper::tagIsDynamic("C01"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsDynamic("CC1"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsDynamic("CCC"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsDynamic("0C0"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsDynamic("0CC"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsDynamic("00C"));
+	const mappers::CountryMapper mapper;
+	EXPECT_TRUE(mapper.tagIsDynamic("C01"));
+	EXPECT_FALSE(mapper.tagIsDynamic("CC1"));
+	EXPECT_FALSE(mapper.tagIsDynamic("CCC"));
+	EXPECT_FALSE(mapper.tagIsDynamic("0C0"));
+	EXPECT_FALSE(mapper.tagIsDynamic("0CC"));
+	EXPECT_FALSE(mapper.tagIsDynamic("00C"));
 }
 
 TEST(Mappers_CountryMapperTests, tagIsNonCanonWorksAsAdvertised)
 {
-	EXPECT_TRUE(mappers::CountryMapper::tagIsNonCanon("C01"));
-	EXPECT_TRUE(mappers::CountryMapper::tagIsNonCanon("C0C"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsNonCanon("CC1"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsNonCanon("CCC"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsNonCanon("0C0"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsNonCanon("0CC"));
-	EXPECT_FALSE(mappers::CountryMapper::tagIsNonCanon("00C"));
+	const mappers::CountryMapper mapper;
+	EXPECT_TRUE(mapper.tagIsNonCanon("C01"));
+	EXPECT_TRUE(mapper.tagIsNonCanon("C0C"));
+	EXPECT_FALSE(mapper.tagIsNonCanon("CC1"));
+	EXPECT_FALSE(mapper.tagIsNonCanon("CCC"));
+	EXPECT_FALSE(mapper.tagIsNonCanon("0C0"));
+	EXPECT_FALSE(mapper.tagIsNonCanon("0CC"));
+	EXPECT_FALSE(mapper.tagIsNonCanon("00C"));
 }
 
 TEST(Mappers_CountryMapperTests, newTagCanBeRequested)

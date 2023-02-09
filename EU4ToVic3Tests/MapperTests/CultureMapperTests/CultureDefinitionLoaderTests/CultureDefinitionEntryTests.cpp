@@ -5,7 +5,7 @@
 TEST(Mappers_CultureDefinitionEntryTests, DefaultsDefaultToDefaults)
 {
 	std::stringstream input;
-	const mappers::CultureDefinitionEntry entry(input, false);
+	const mappers::CultureDefinitionEntry entry(input, false, false);
 
 	EXPECT_TRUE(entry.getCultureDef().name.empty());
 	EXPECT_FALSE(entry.getCultureDef().color);
@@ -20,6 +20,7 @@ TEST(Mappers_CultureDefinitionEntryTests, DefaultsDefaultToDefaults)
 	EXPECT_TRUE(entry.getCultureDef().regalLastNames.empty());
 	EXPECT_TRUE(entry.getCultureDef().ethnicities.empty());
 	EXPECT_TRUE(entry.getCultureDef().graphics.empty());
+	EXPECT_FALSE(entry.getCultureDef().skipProcessing);
 	EXPECT_FALSE(entry.getCultureDef().skipExport);
 }
 
@@ -40,7 +41,7 @@ TEST(Mappers_CultureDefinitionEntryTests, EntryCanBeLoaded)
 	input << "	1 = ethnotest\n";
 	input << "}\n";
 	input << "graphics = graphtest\n";
-	const mappers::CultureDefinitionEntry entry(input, true);
+	const mappers::CultureDefinitionEntry entry(input, true, true);
 
 	EXPECT_TRUE(entry.getCultureDef().name.empty());
 	EXPECT_EQ(commonItems::Color(std::array{1, 2, 3}), *entry.getCultureDef().color);
@@ -54,5 +55,6 @@ TEST(Mappers_CultureDefinitionEntryTests, EntryCanBeLoaded)
 	EXPECT_THAT(entry.getCultureDef().regalLastNames, testing::UnorderedElementsAre("rln1", "rln2"));
 	EXPECT_THAT(entry.getCultureDef().ethnicities, testing::UnorderedElementsAre("ethnotest"));
 	EXPECT_EQ("graphtest", entry.getCultureDef().graphics);
+	EXPECT_TRUE(entry.getCultureDef().skipProcessing);
 	EXPECT_TRUE(entry.getCultureDef().skipExport);
 }

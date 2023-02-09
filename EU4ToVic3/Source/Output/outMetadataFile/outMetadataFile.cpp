@@ -16,7 +16,10 @@ void outMetadataFile(std::ostream& output, const std::string& outName)
 	output << "\t\"tags\" : [\"Alternative History\", \"Conversion\"],\n";
 	output << "\t\"relationships\" : [],\n";
 	output << "\t\"game_custom_data\" : {\n";
-	output << "\t\t\"multiplayer_synchronized\" : true\n";
+	output << "\t\t\"multiplayer_synchronized\" : true,\n";
+	output << "\t\t\"replace_paths\" : [\n";
+	output << "\t\t\t\"common/cultures\"\n";
+	output << "\t\t]\n";
 	output << "\t}\n";
 	output << "}\n";
 }
