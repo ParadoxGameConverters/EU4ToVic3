@@ -168,6 +168,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.injectDynamicCulturesIntoFormables(cultureMapper);
 	Log(LogLevel::Progress) << "66 %";
 	politicalManager.expandReleasablesFootprint(clayManager);
+	politicalManager.alterReleasablesReligion();
 	Log(LogLevel::Progress) << "67 %";
 	politicalManager.alterMajorFormables();
 	Log(LogLevel::Progress) << "68 %";
