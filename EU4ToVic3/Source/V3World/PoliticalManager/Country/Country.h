@@ -99,6 +99,10 @@ struct ProcessedData
 	std::optional<EU4::CustomColorsBlock> customColors;		 // used for flag generation for custom flag.
 	std::optional<commonItems::Color> revolutionaryColor;		 // used for flag generation for revolutionary flag.
 	std::map<FlagCrafter::FLAGTYPE, std::string> customFlags; // stuff we crafted ourselves.
+
+	std::map<std::string, int> admStrategies;
+	std::map<std::string, int> dipStrategies;
+	std::map<std::string, int> polStrategies;
 };
 
 class Country: commonItems::parser
@@ -199,6 +203,10 @@ class Country: commonItems::parser
 	void addSector(const std::string& sectorName, const std::shared_ptr<Sector>& sector) { processedData.industrySectors.emplace(sectorName, sector); }
 
 	void leaveIsolationism();
+
+	void setAdmStrategies(const std::map<std::string, int>& strategies) { processedData.admStrategies = strategies; }
+	void setDipStrategies(const std::map<std::string, int>& strategies) { processedData.dipStrategies = strategies; }
+	void setPolStrategies(const std::map<std::string, int>& strategies) { processedData.polStrategies = strategies; }
 
   private:
 	void registerKeys();

@@ -60,7 +60,7 @@ TEST(Mappers_AIStrategyMappingTests, EmptyMappingReturnsZero)
 TEST(Mappers_AIStrategyMappingTests, LawsAddValueToStrategy)
 {
 	std::stringstream input;
-	input << "laws = { law_slavery_banned = 25 law_presidential_republic = 10 }";
+	input << "laws = { law_slavery_banned = 25 law_presidential_republic = 10 }"; // matches both.
 	const mappers::AIStrategyMapping mapping(input);
 	const auto clayManager = V3::ClayManager();
 	const auto country = prepCountry();
@@ -72,7 +72,7 @@ TEST(Mappers_AIStrategyMappingTests, LawsAddValueToStrategy)
 TEST(Mappers_AIStrategyMappingTests, CapitalAddsValueToStrategy)
 {
 	std::stringstream input;
-	input << "capital = { STATE_TEST_LAND1 = 25 STATE_TEST_LAND2 = 10 }";
+	input << "capital = { STATE_TEST_LAND1 = 25 STATE_TEST_LAND2 = 10 }"; // matches STATE_TEST_LAND1
 	const mappers::AIStrategyMapping mapping(input);
 	const auto clayManager = prepClayManager();
 	const auto country = prepCountry();
@@ -83,7 +83,7 @@ TEST(Mappers_AIStrategyMappingTests, CapitalAddsValueToStrategy)
 TEST(Mappers_AIStrategyMappingTests, StatusesAddValueToStrategy)
 {
 	std::stringstream input;
-	input << "hremperor = 100 cemperor = 50 gp = 25 not_gp = 10";
+	input << "hremperor = 100 cemperor = 50 gp = 25 not_gp = 10"; // does NOT match gp, matches rest.
 	const mappers::AIStrategyMapping mapping(input);
 	const auto clayManager = prepClayManager();
 	const auto country = prepCountry();
