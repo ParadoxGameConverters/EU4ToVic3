@@ -46,3 +46,46 @@ void mappers::AIStrategyMapper::registerKeys()
 		polStrategies.emplace(strategyName, AIStrategyMapping(theStream));
 	});
 }
+
+std::map<std::string, int> mappers::AIStrategyMapper::getAdmStrategies(const V3::Country& country, const V3::ClayManager& clayManager) const
+{
+	return filterStrategies(admStrategies, defaultAdmStrategy, country, clayManager);
+}
+
+std::map<std::string, int> mappers::AIStrategyMapper::getDipStrategies(const V3::Country& country, const V3::ClayManager& clayManager) const
+{
+	return filterStrategies(dipStrategies, defaultDipStrategy, country, clayManager);
+}
+
+std::map<std::string, int> mappers::AIStrategyMapper::getPolStrategies(const V3::Country& country, const V3::ClayManager& clayManager) const
+{
+	return filterStrategies(polStrategies, defaultPolStrategy, country, clayManager);
+}
+
+std::map<std::string, int> mappers::AIStrategyMapper::filterStrategies(const std::map<std::string, AIStrategyMapping>& strategies,
+	 std::string defaultStrategy,
+	 const V3::Country& country,
+	 const V3::ClayManager& clayManager)
+{
+	// Matching strategies is a map of various strategies that seem likely. AI will p[ick some of them at random according to their values (which are random
+	// weights)
+
+	std::map<std::string, int> matchingStrategies;
+
+	for (const auto& [strategyName, strategy]: strategies)
+	{
+		auto value = strategy.matchStrategy(country, clayManager);
+		if (value > 0)
+		{
+			if (strategy.isOverride()) // overrides means ignore whatever else, and return this instead.
+				return std::map<std::string, int>{{strategyName, 0}};
+			matchingStrategies.emplace(strategyName, value);
+		}
+	}
+
+	// if we matched nothing, send whatever we have preset as default for this category.
+	if (matchingStrategies.empty() && !defaultStrategy.empty())
+		return std::map<std::string, int>{{defaultStrategy, 0}};
+	else
+		return matchingStrategies;
+}

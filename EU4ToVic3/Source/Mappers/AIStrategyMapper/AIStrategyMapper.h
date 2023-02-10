@@ -11,8 +11,17 @@ class AIStrategyMapper: commonItems::parser
 	AIStrategyMapper() = default;
 	void loadMappingRules(const std::string& filePath);
 
+	[[nodiscard]] std::map<std::string, int> getAdmStrategies(const V3::Country& country, const V3::ClayManager& clayManager) const;
+	[[nodiscard]] std::map<std::string, int> getDipStrategies(const V3::Country& country, const V3::ClayManager& clayManager) const;
+	[[nodiscard]] std::map<std::string, int> getPolStrategies(const V3::Country& country, const V3::ClayManager& clayManager) const;
+
   private:
 	void registerKeys();
+
+	[[nodiscard]] static std::map<std::string, int> filterStrategies(const std::map<std::string, AIStrategyMapping>& strategies,
+		 std::string defaultStrategy,
+		 const V3::Country& country,
+		 const V3::ClayManager& clayManager);
 
 	parser admParser;
 	parser dipParser;
