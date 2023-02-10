@@ -547,6 +547,12 @@
     <ClCompile Include="..\commonItems\external\googletest\googletest\src\gtest_main.cc" />
     <ClCompile Include="..\commonItems\external\googletest\googletest\src\gtest-all.cc" />
     <ClCompile Include="..\commonItems\external\googletest\googlemock\src\gmock-all.cc" />
+    <ClCompile Include="MapperTests\AIStrategyMapperTests\AIStrategyMapperTests.cpp">
+      <Filter>MapperTests\AIStrategyMapperTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapperTests\AIStrategyMapperTests\AIStrategyMappingTests.cpp">
+      <Filter>MapperTests\AIStrategyMapperTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -981,6 +987,9 @@
     <Filter Include="EU4WorldTests\LoaderTests\TradeCompanyLoaderTests">
       <UniqueIdentifier>{48e56511-bcd7-4793-814a-8724b09dec96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MapperTests\AIStrategyMapperTests">
+      <UniqueIdentifier>{bf9eba21-5f26-441a-95db-ac35d9f3539e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\eu4installation\eu4">
@@ -1273,6 +1282,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\economy\production_method_rules.txt">
       <Filter>TestFiles\configurables\economy</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\ai_strategy_map.txt">
+      <Filter>TestFiles\configurables</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>
