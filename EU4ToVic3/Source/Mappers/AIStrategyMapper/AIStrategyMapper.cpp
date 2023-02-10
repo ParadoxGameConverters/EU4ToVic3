@@ -67,7 +67,7 @@ std::map<std::string, int> mappers::AIStrategyMapper::filterStrategies(const std
 	 const V3::Country& country,
 	 const V3::ClayManager& clayManager)
 {
-	// Matching strategies is a map of various strategies that seem likely. AI will p[ick some of them at random according to their values (which are random
+	// Matching strategies is a map of various strategies that seem likely. AI will pick some of them at random according to their values (which are random
 	// weights)
 
 	std::map<std::string, int> matchingStrategies;
