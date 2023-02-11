@@ -137,6 +137,11 @@ void V3::PoliticalManager::loadColonialTagMapperRules(const std::string& filePat
 	colonialTagMapper.loadMappingRules(filePath);
 }
 
+void V3::PoliticalManager::loadAIStrategies(const std::string& filePath)
+{
+	aiStrategyMapper.loadMappingRules(filePath);
+}
+
 void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries)
 {
 	Log(LogLevel::Info) << "-> Moving over EU4 Countries.";
@@ -984,4 +989,24 @@ void V3::PoliticalManager::alterIGIdeologies(const mappers::CultureMapper& cultu
 		}
 	}
 	Log(LogLevel::Info) << "<> " << counter << " countries had IGs altered.";
+}
+
+void V3::PoliticalManager::generateAIStrategies(const ClayManager& clayManager)
+{
+	Log(LogLevel::Info) << "-> Generating AI Strategies.";
+	size_t counter = 0;
+
+	for (const auto& country: countries | std::views::values)
+	{
+		if (!country->getSourceCountry() || country->getProcessedData().type == "decentralized" || country->getSubStates().empty())
+			continue;
+
+		country->setAdmStrategies(aiStrategyMapper.getAdmStrategies(*country, clayManager));
+		country->setDipStrategies(aiStrategyMapper.getDipStrategies(*country, clayManager));
+		country->setPolStrategies(aiStrategyMapper.getPolStrategies(*country, clayManager));
+
+		counter += country->getProcessedData().admStrategies.size() + country->getProcessedData().dipStrategies.size() +
+					  country->getProcessedData().polStrategies.size();
+	}
+	Log(LogLevel::Info) << "<> Generated a total of " << counter << " strategies.";
 }

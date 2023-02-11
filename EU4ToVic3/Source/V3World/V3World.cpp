@@ -55,6 +55,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.loadCountryTierMapperRules("configurables/country_tiers.txt");
 	politicalManager.loadMajorFormables("blankMod/output/common/country_formation/00_major_formables.txt");
 	politicalManager.loadIGIdeologiesMapperRules("configurables/ig_ideologies.txt");
+	politicalManager.loadAIStrategies("configurables/ai_strategy_map.txt");
 	popManager.loadMinorityPopRules("configurables/minority_pops.txt");
 	popManager.loadSlaveCultureRules("configurables/slave_culture_map.txt");
 	cultureMapper.expandCulturalMappings(clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
@@ -175,6 +176,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	clayManager.filterInvalidClaims(politicalManager);
 	Log(LogLevel::Progress) << "69 %";
 	politicalManager.alterIGIdeologies(cultureMapper, religionMapper, clayManager);
+	politicalManager.generateAIStrategies(clayManager);
 	Log(LogLevel::Progress) << "70 %";
 	popManager.alterSlaveCultures(politicalManager, clayManager, cultureMapper.getV3CultureDefinitions());
 

@@ -1,5 +1,6 @@
 #ifndef POLITICAL_MANAGER_H
 #define POLITICAL_MANAGER_H
+#include "AIStrategyMapper/AIStrategyMapper.h"
 #include "CharacterTraitMapper/CharacterTraitMapper.h"
 #include "ColonialTagMapper/ColonialTagMapper.h"
 #include "Configuration.h"
@@ -66,6 +67,7 @@ class PoliticalManager
 	void loadCountryTierMapperRules(const std::string& filePath);
 	void loadIGIdeologiesMapperRules(const std::string& filePath);
 	void loadMajorFormables(const std::string& filePath);
+	void loadAIStrategies(const std::string& filePath);
 	void importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries);
 	void generateDecentralizedCountries(const ClayManager& clayManager, const PopManager& popManager);
 	void convertAllCountries(const ClayManager& clayManager,
@@ -111,7 +113,7 @@ class PoliticalManager
 	void alterReleasablesReligion();
 	void alterMajorFormables();
 	void alterIGIdeologies(const mappers::CultureMapper& cultureMapper, const mappers::ReligionMapper& religionMapper, const ClayManager& clayManager);
-
+	void generateAIStrategies(const ClayManager& clayManager);
 	void attemptColonialTagReplacement(const mappers::ColonialRegionMapper& colonialRegionMapper, const ClayManager& clayManager);
 
 	// VN specifics
@@ -141,6 +143,7 @@ class PoliticalManager
 	mappers::ColonialTagMapper colonialTagMapper;
 	mappers::CountryTierMapper countryTierMapper;
 	mappers::IGIdeologiesMapper igIdeologiesMapper;
+	mappers::AIStrategyMapper aiStrategyMapper;
 	VanillaDiplomacyLoader vanillaDiplomacyLoader;
 	VanillaCountryHistoryLoader vanillaCountryHistoryLoader;
 	VanillaPopulationHistoryLoader vanillaPopulationHistoryLoader;

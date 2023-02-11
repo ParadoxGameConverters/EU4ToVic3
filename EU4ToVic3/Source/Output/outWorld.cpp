@@ -14,6 +14,7 @@
 #include "outPops/outPops.h"
 #include "outReligions/outReligions.h"
 #include "outStates/outCommonHistoryStates.h"
+#include "outStrategies/outStrategies.h"
 #include <fstream>
 
 void OUT::exportWorld(const Configuration& configuration, const V3::World& world, const commonItems::ConverterVersion& converterVersion)
@@ -88,7 +89,10 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Progress) << "93 %";
 
 	// Log(LogLevel::Info) << "<- Writing Armed and Unarmed Conflicts";
-	// Log(LogLevel::Progress) << "94 %";
+
+	Log(LogLevel::Info) << "<- Writing AI Strategies";
+	exportStrategies(outputName, world.getPoliticalManager().getCountries());
+	Log(LogLevel::Progress) << "94 %";
 
 	Log(LogLevel::Info) << "<- Writing Culture Definitions";
 	exportCultures(outputName, world.getCultureMapper().getV3CultureDefinitions());

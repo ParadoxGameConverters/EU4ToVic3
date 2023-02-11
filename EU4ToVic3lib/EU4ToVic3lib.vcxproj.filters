@@ -334,6 +334,12 @@
     <Filter Include="Configuration">
       <UniqueIdentifier>{ee706bf8-01ff-4bce-94b2-cbb1564e1a0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mappers\AIStrategyMapper">
+      <UniqueIdentifier>{5aa9ea8c-2f74-49e7-a250-2c66e88b2463}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Output\outStrategies">
+      <UniqueIdentifier>{74604a7c-f19d-4bf2-bdaa-1f5039558052}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\EU4ToVic3\Source\EU4World\World.cpp">
@@ -951,6 +957,15 @@
     <ClCompile Include="..\EU4ToVic3\Source\EU4ToVic3Converter.cpp" />
     <ClCompile Include="..\EU4ToVic3\Source\Configuration\Configuration.cpp">
       <Filter>Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4ToVic3\Source\Mappers\AIStrategyMapper\AIStrategyMapper.cpp">
+      <Filter>Mappers\AIStrategyMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4ToVic3\Source\Mappers\AIStrategyMapper\AIStrategyMapping.cpp">
+      <Filter>Mappers\AIStrategyMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4ToVic3\Source\Output\outStrategies\outStrategies.cpp">
+      <Filter>Output\outStrategies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1632,6 +1647,15 @@
     </ClInclude>
     <ClInclude Include="..\EU4ToVic3\Source\Configuration\DatingData.h">
       <Filter>Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\Mappers\AIStrategyMapper\AIStrategyMapper.h">
+      <Filter>Mappers\AIStrategyMapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\Mappers\AIStrategyMapper\AIStrategyMapping.h">
+      <Filter>Mappers\AIStrategyMapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\Output\outStrategies\outStrategies.h">
+      <Filter>Output\outStrategies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
