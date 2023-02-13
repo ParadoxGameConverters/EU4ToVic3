@@ -81,7 +81,7 @@ bool mappers::AISecretGoalMapping::matchGoal(const V3::Country& country, const V
 	{
 		if (target.getProcessedData().capitalStateName.empty())
 			return false;
-		if (!clayManager.stateIsInRegion(target.getProcessedData().capitalStateName, *capital))
+		if (!clayManager.stateIsInRegion(target.getProcessedData().capitalStateName, *targetCapital))
 			return false;
 	}
 
@@ -93,7 +93,7 @@ bool mappers::AISecretGoalMapping::matchGoal(const V3::Country& country, const V
 		{
 			if (const auto& capTarget = clayManager.getParentSuperRegion(target.getProcessedData().capitalStateName); capTarget)
 			{
-				if ((capCountry->getName() == capTarget->getName()) != *targetCapitalDiffRegion)
+				if ((capCountry->getName() != capTarget->getName()) != *targetCapitalDiffRegion)
 					return false;
 			}
 			else
