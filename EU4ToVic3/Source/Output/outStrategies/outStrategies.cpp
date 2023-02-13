@@ -38,6 +38,7 @@ void outStrategies(std::ostream& output, const std::map<std::string, std::shared
 		outCountryStrategies(output, country->getProcessedData().admStrategies);
 		outCountryStrategies(output, country->getProcessedData().dipStrategies);
 		outCountryStrategies(output, country->getProcessedData().polStrategies);
+		output << "\t}\n";
 	}
 	output << "}\n";
 }
