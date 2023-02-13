@@ -142,6 +142,11 @@ void V3::PoliticalManager::loadAIStrategies(const std::string& filePath)
 	aiStrategyMapper.loadMappingRules(filePath);
 }
 
+void V3::PoliticalManager::loadAISecretGoals(const std::string& filePath)
+{
+	aiSecretGoalMapper.loadMappingRules(filePath);
+}
+
 void V3::PoliticalManager::importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries)
 {
 	Log(LogLevel::Info) << "-> Moving over EU4 Countries.";
@@ -447,6 +452,8 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 {
 	Log(LogLevel::Info) << "-> Transcribing diplomatic agreements.";
 
+	const std::set<std::string> subjects = {"dominion", "protectorate", "tributary", "personal_union", "puppet", "vassal"};
+
 	for (auto& agreement: eu4Agreements)
 	{
 		const auto& EU4Tag1 = agreement.getOriginTag();
@@ -554,7 +561,13 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 
 		// store agreement
 		if (!newAgreement.type.empty())
+		{
 			agreements.push_back(newAgreement);
+
+			// and record overlordship locally for further use.
+			if (subjects.contains(newAgreement.type))
+				country2->second->setOverlord(V3Tag1);
+		}
 	}
 	Log(LogLevel::Info) << "<> Transcribed " << agreements.size() << " agreements.";
 }
@@ -1009,4 +1022,34 @@ void V3::PoliticalManager::generateAIStrategies(const ClayManager& clayManager)
 					  country->getProcessedData().polStrategies.size();
 	}
 	Log(LogLevel::Info) << "<> Generated a total of " << counter << " strategies.";
+}
+
+void V3::PoliticalManager::generateAISecretGoals(const ClayManager& clayManager)
+{
+	Log(LogLevel::Info) << "-> Generating AI Secret Goals.";
+	auto counter = 0;
+
+	std::vector<std::shared_ptr<Country>> neededCountries;
+
+	for (const auto& country: countries | std::views::values)
+	{
+		if (!country->getSourceCountry() || country->getProcessedData().type == "decentralized" || country->getSubStates().empty())
+			continue;
+		neededCountries.emplace_back(country);
+	}
+
+	// O(n^2), but... no other way to do it.
+	for (const auto& country: neededCountries)
+		for (const auto& target: neededCountries)
+		{
+			if (country->getTag() == target->getTag())
+				continue;
+			if (const auto goal = aiSecretGoalMapper.matchSecretGoal(*country, *target, clayManager); goal)
+			{
+				country->addGoal(target->getTag(), *goal);
+				++counter;
+			}
+		}
+
+	Log(LogLevel::Info) << "<> Generated a total of " << counter << " secret goals.";
 }

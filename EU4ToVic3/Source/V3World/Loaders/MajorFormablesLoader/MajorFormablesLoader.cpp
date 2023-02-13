@@ -2,7 +2,6 @@
 #include "CommonRegexes.h"
 #include "Log.h"
 #include "MajorFormablesEntry.h"
-#include "ParserHelpers.h"
 
 void V3::MajorFormablesLoader::loadMajorFormables(const std::string& filePath)
 {
@@ -10,7 +9,7 @@ void V3::MajorFormablesLoader::loadMajorFormables(const std::string& filePath)
 	registerKeys();
 	parseFile(filePath);
 	clearRegisteredKeywords();
-	Log(LogLevel::Info) << "<> Loaded " << majorFormables.size() << "major formables.";
+	Log(LogLevel::Info) << "<> Loaded " << majorFormables.size() << " major formables.";
 }
 
 void V3::MajorFormablesLoader::registerKeys()

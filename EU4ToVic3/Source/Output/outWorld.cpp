@@ -13,6 +13,7 @@
 #include "outMetadataFile/outMetadataFile.h"
 #include "outPops/outPops.h"
 #include "outReligions/outReligions.h"
+#include "outSecretGoals/outSecretGoals.h"
 #include "outStates/outCommonHistoryStates.h"
 #include "outStrategies/outStrategies.h"
 #include <fstream>
@@ -92,6 +93,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 
 	Log(LogLevel::Info) << "<- Writing AI Strategies";
 	exportStrategies(outputName, world.getPoliticalManager().getCountries());
+	exportSecretGoals(outputName, world.getPoliticalManager().getCountries());
 	Log(LogLevel::Progress) << "94 %";
 
 	Log(LogLevel::Info) << "<- Writing Culture Definitions";

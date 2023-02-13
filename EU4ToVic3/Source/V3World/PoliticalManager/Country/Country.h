@@ -78,6 +78,7 @@ struct ProcessedData
 	std::map<std::string, mappers::IGIdeologyMod> igIdeologyModifiers;
 	std::set<std::string> techs;
 	std::map<std::string, Relation> relations;
+	std::string overlordTag;
 	std::set<std::string> rivals;
 	std::map<std::string, int> truces;
 	std::vector<Character> characters;
@@ -103,6 +104,7 @@ struct ProcessedData
 	std::map<std::string, int> admStrategies;
 	std::map<std::string, int> dipStrategies;
 	std::map<std::string, int> polStrategies;
+	std::map<std::string, std::string> targetSecretGoals;
 };
 
 class Country: commonItems::parser
@@ -207,6 +209,9 @@ class Country: commonItems::parser
 	void setAdmStrategies(const std::map<std::string, int>& strategies) { processedData.admStrategies = strategies; }
 	void setDipStrategies(const std::map<std::string, int>& strategies) { processedData.dipStrategies = strategies; }
 	void setPolStrategies(const std::map<std::string, int>& strategies) { processedData.polStrategies = strategies; }
+
+	void setOverlord(const std::string& overlordTag) { processedData.overlordTag = overlordTag; }
+	void addGoal(const std::string& target, const std::string& goal) { processedData.targetSecretGoals.emplace(target, goal); }
 
   private:
 	void registerKeys();
