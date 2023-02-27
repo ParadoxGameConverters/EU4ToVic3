@@ -1,0 +1,121 @@
+# This file defines some AI strategies according to their starting laws or conditions. AI will usually change strategies over the 
+# course of the game, so these are just here to kickstart the nations into action.
+#
+# Allowed:
+#  some_strategy = {
+#  		laws = { some_law = value } -> these laws add their value to the total score for this strategy
+#  		capital = { some_region = value } -> capital in region adds value.
+#  		gp = value -> is eu4 gp? add value.
+#  		not_gp = value -> is not eu4 gp? add value.
+#  		cemperor = value -> is celestial emperor? add value
+#  		hremperor = value -> is hre emperor? add value
+#		override = yes -> if this rule matches, ignore all others and use only this.
+#  }
+#  default = strategy -> if a country matches no strategy, they default to this strategy
+#
+# In the end a country will get 1 or more of strategies, with different cumulative values. These go in the initial random list:
+# c:TAG = {
+# 	random_list = {
+#		value1 = { set_strategy = strategy1 }
+#		value2 = { set_strategy = strategy2 }
+# 	}
+# }
+# Note the sum of values can be over or under 100 - this just shifts the weights around.
+
+adm = {
+	ai_strategy_agricultural_expansion = {
+		laws = { 
+			law_traditionalism = 25 
+			law_agrarianism = 75 
+		} 
+	}
+	ai_strategy_plantation_economy = {
+		capital = {
+			north_america_strategic_regions = 25
+			south_america_strategic_regions = 50
+		}
+	}
+	ai_strategy_resource_expansion = {
+		laws = {
+			law_slavery_banned = 25
+		}
+	}
+	ai_strategy_industrial_expansion = {
+		laws = { 
+			law_serfdom_banned = 50
+		} 
+	}
+	ai_strategy_placate_population = {
+		laws = { 
+			law_traditionalism = 25
+			law_autocracy = 25
+		} 
+	}
+	default = ai_strategy_resource_expansion
+}
+
+dip = {
+	ai_strategy_maintain_power_balance = {
+		not_gp = 50
+		hremperor = 100
+	}
+	ai_strategy_territorial_expansion = {
+		laws = {
+			law_national_supremacy = 25
+			law_racial_segregation = 25
+		}
+	}	
+	ai_strategy_colonial_expansion = {
+		laws = {
+			law_debt_slavery = 25
+			law_slave_trade = 25
+			law_colonial_resettlement = 25
+			law_colonial_exploitation = 50
+		}
+		gp = 10
+	}	
+	ai_strategy_armed_isolationism = {
+		laws = {
+			law_autocracy = 25
+			law_isolationism = 25
+		}
+	}	
+	ai_strategy_economic_imperialism = {
+		laws = {
+			law_monarchy = 25
+			law_laissez_faire = 25
+			law_interventionism = 25
+			law_mercantilism = 25			
+		}
+		gp = 10
+	}
+	default = ai_strategy_maintain_power_balance
+}
+
+pol = {
+	ai_strategy_conservative_agenda = { 
+		laws = {
+			law_hereditary_bureaucrats = 25
+			law_oligarchy = 25
+			law_autocracy = 50
+			law_theocracy = 100
+		}
+	}
+	ai_strategy_progressive_agenda = {
+		laws = {
+			law_elected_bureaucrats = 25
+			law_appointed_bureaucrats = 10
+			law_poor_laws = 25
+			law_presidential_republic = 25
+			law_parliamentary_republic = 25
+		}
+	}
+	ai_strategy_maintain_mandate_of_heaven = {
+		cemperor = 50
+		override = yes
+	}
+	default = ai_strategy_conservative_agenda
+# ai_strategy_reactionary_agenda - not at start
+# ai_strategy_egalitarian_agenda - not at start
+# ai_strategy_nationalist_agenda - not at start
+}

@@ -5,9 +5,9 @@ on:
   pull_request:
     branches: [ master ]
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+#concurrency:
+#  group: ${{ github.workflow }}-${{ github.ref }}
+#  cancel-in-progress: true
 
 jobs:
   build_test_and_publish:
@@ -25,9 +25,6 @@ jobs:
       run: |
        git submodule update --init --recursive commonItems
        git -c submodule."external/commonItems".update=none `
-           -c submodule."googletest".update=none `
-           -c submodule."external/googletest".update=none `
-           -c submodule."external/zip".update=none `
            submodule update --init --recursive Fronter
 
     - name: "Get previous tag"
@@ -38,12 +35,12 @@ jobs:
     - name: "Build solution"
       run: |
        cd "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\"
-       .\MSBuild.exe -m -p:Configuration=Release $Env:GITHUB_WORKSPACE\EU4toVic3.sln
+       .\MSBuild.exe -m -p:Configuration=Release $Env:GITHUB_WORKSPACE\EU4ToVic3.sln
        
     - name: "Run tests"
       run: |
        cd $Env:GITHUB_WORKSPACE\Release-Tests\
-       .\EU4toV3Tests.exe
+       .\EU4ToVic3Tests.exe
 
     - name: "Prepare release"
       # if: ${{ github.event_name == 'push' }}
@@ -98,17 +95,14 @@ jobs:
       run: |
        git submodule update --init --recursive commonItems
        git -c submodule."external/commonItems".update=none `
-           -c submodule."googletest".update=none `
-           -c submodule."external/googletest".update=none `
-           -c submodule."external/zip".update=none `
            submodule update --init --recursive Fronter
 
     - name: "Build solution"
       run: |
        cd "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\"
-       .\MSBuild.exe -m -p:Configuration=Release $Env:GITHUB_WORKSPACE\EU4toVic3.sln
+       .\MSBuild.exe -m -p:Configuration=Release $Env:GITHUB_WORKSPACE\EU4ToVic3.sln
 
     - name: "Run tests"
       run: |
        cd $Env:GITHUB_WORKSPACE\Release-Tests\
-       .\EU4toV3Tests.exe
+       .\EU4ToVic3Tests.exe
