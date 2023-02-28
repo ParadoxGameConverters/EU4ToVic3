@@ -102,6 +102,17 @@ double V3::Country::getTechInfraMult(const std::map<std::string, Tech>& techMap)
 	});
 }
 
+int V3::Country::getThroughputMax(const std::map<std::string, Tech>& techMap) const
+{
+	return std::accumulate(processedData.techs.begin(), processedData.techs.end(), 0, [this, techMap](int sum, const std::string& techName) {
+		if (const auto& tech = getTechFromMap(techName, techMap); tech)
+		{
+			return sum + tech.value().throughputMax;
+		}
+		return sum;
+	});
+}
+
 bool V3::Country::hasAnyOfTech(const std::set<std::string>& techs) const
 {
 	if (techs.empty())
@@ -146,27 +157,39 @@ int V3::Country::getGovBuildingMax(const std::string& building, const std::map<s
 	return tech + laws;
 }
 
-void V3::Country::distributeGovAdmins(const int numGovAdmins) const
+void V3::Country::distributeGovAdmins(const double target, const int PMGeneration, const std::map<std::string, V3::Tech>& techMap) const
 {
 	const auto topSubstates = topPercentileStatesByPop(0.3);
 	const auto topPop = getPopCount(topSubstates);
 
-	// Pass out buildings by pop proportion of this subset of States, can't round, so truncate and hand out remainders later.
-	int assigned = 0;
+	// Pass out buildings by pop proportion of this subset of States. Generate production targets and account for throughput bonuses.
+	double generated = 0;
 	for (const auto& substate: topSubstates)
 	{
 		const double popProportion = static_cast<double>(substate->getSubStatePops().getPopCount()) / topPop;
-		const int levels = static_cast<int>(popProportion * numGovAdmins);
+		const double stateTarget = target * popProportion;
+
+		// Calc levels for generation
+		int levels = static_cast<int>(stateTarget * 100 / 101 / PMGeneration);
+		double generation = levels * PMGeneration;
+		if (const int throughputMax = getThroughputMax(techMap); levels > throughputMax)
+		{
+			const double remainder = stateTarget - throughputMax * 101.0 / 100;
+			levels = throughputMax + static_cast<int>(remainder / PMGeneration);
+			generation = throughputMax * 101.0 / 100 * PMGeneration + (levels - throughputMax) * PMGeneration;
+		}
 
 		const auto govAdmin = std::make_shared<Building>();
 		govAdmin->setName("building_government_administration");
 		govAdmin->setLevel(levels);
 
 		substate->addBuilding(govAdmin);
-		assigned += levels;
+
+		generated += generation;
 	}
 
 	// Handing out remainders, should be less than # of topSubstates
+	// Treating throughput bonuses as negligible here
 	for (const auto& substate: topSubstates)
 	{
 		auto isGovAdmin = [](const std::shared_ptr<Building>& b) {
@@ -175,14 +198,14 @@ void V3::Country::distributeGovAdmins(const int numGovAdmins) const
 
 		if (auto govAdmin = std::ranges::find_if(substate->getBuildings(), isGovAdmin); govAdmin != substate->getBuildings().end())
 		{
-			const auto levels = govAdmin->get()->getLevel();
-			govAdmin->get()->setLevel(levels + 1);
-			++assigned;
-
-			if (numGovAdmins - assigned <= 0)
+			if (target <= generated + PMGeneration)
 			{
 				break;
 			}
+
+			const auto levels = govAdmin->get()->getLevel();
+			govAdmin->get()->setLevel(levels + 1);
+			generated += PMGeneration;
 		}
 		else
 		{
