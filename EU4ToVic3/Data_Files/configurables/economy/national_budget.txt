@@ -120,13 +120,29 @@ shipwrights = {
     building_shipyards
 }
 
+paper_industry = {
+    weight = 1
+
+    building_paper_mills
+
+    add = {
+        value = 7
+        vic3_tech = centralization
+    }
+
+    add = {
+        value = 7
+        vic3_tech = central_archives
+    }
+}
+
 light_industry = {
-    weight = 21
+    weight = 16
 
     building_textile_mills
     building_furniture_manufacturies
     building_glassworks
-    building_paper_mills
+    
 
     # Industry score from configurables/westernization.txt. No effect if no EuroCentrism
     multiply = {
