@@ -121,7 +121,6 @@ std::vector<std::shared_ptr<V3::Building>> mappers::ProductionMethodMapper::pick
 	// Now return either selectedBuildings, or a single building if the sum of selectedBuildings
 	// is further from target than the smallest building larger than target.
 
-
 	// Get smallest building larger than the target number
 	int smallestLargeBuildingLevel = INT_MAX;
 	std::shared_ptr<V3::Building> smallestLargeBuilding = nullptr;
