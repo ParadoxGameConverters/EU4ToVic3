@@ -104,7 +104,8 @@ double V3::Country::getTechInfraMult(const std::map<std::string, Tech>& techMap)
 
 int V3::Country::getThroughputMax(const std::map<std::string, Tech>& techMap) const
 {
-	return std::accumulate(processedData.techs.begin(), processedData.techs.end(), 0, [this, techMap](int sum, const std::string& techName) {
+	// 20 is base level Economy of Scale NOT a define.
+	return 20 + std::accumulate(processedData.techs.begin(), processedData.techs.end(), 0, [this, techMap](int sum, const std::string& techName) {
 		if (const auto& tech = getTechFromMap(techName, techMap); tech)
 		{
 			return sum + tech.value().throughputMax;
@@ -157,6 +158,8 @@ int V3::Country::getGovBuildingMax(const std::string& building, const std::map<s
 	return tech + laws;
 }
 
+#pragma optimize("", off)
+
 void V3::Country::distributeGovAdmins(const double target, const int PMGeneration, const std::map<std::string, V3::Tech>& techMap) const
 {
 	const auto topSubstates = topPercentileStatesByPop(0.3);
@@ -174,9 +177,8 @@ void V3::Country::distributeGovAdmins(const double target, const int PMGeneratio
 		double generation = levels * PMGeneration;
 		if (const int throughputMax = getThroughputMax(techMap); levels > throughputMax)
 		{
-			const double remainder = stateTarget - throughputMax * 101.0 / 100;
-			levels = throughputMax + static_cast<int>(remainder / PMGeneration);
-			generation = throughputMax * 101.0 / 100 * PMGeneration + (levels - throughputMax) * PMGeneration;
+			levels = static_cast<int>(stateTarget / (PMGeneration + PMGeneration * (throughputMax / 100.0)));
+			generation =  levels * PMGeneration * (1 + throughputMax / 100.0);
 		}
 
 		const auto govAdmin = std::make_shared<Building>();
@@ -198,14 +200,14 @@ void V3::Country::distributeGovAdmins(const double target, const int PMGeneratio
 
 		if (auto govAdmin = std::ranges::find_if(substate->getBuildings(), isGovAdmin); govAdmin != substate->getBuildings().end())
 		{
+			const auto levels = govAdmin->get()->getLevel();
+			govAdmin->get()->setLevel(levels + 1);
+			generated += PMGeneration;
+
 			if (target <= generated + PMGeneration)
 			{
 				break;
 			}
-
-			const auto levels = govAdmin->get()->getLevel();
-			govAdmin->get()->setLevel(levels + 1);
-			generated += PMGeneration;
 		}
 		else
 		{
@@ -213,6 +215,8 @@ void V3::Country::distributeGovAdmins(const double target, const int PMGeneratio
 		}
 	}
 }
+
+#pragma optimize("", on)
 
 void V3::Country::registerKeys()
 {
