@@ -158,8 +158,6 @@ int V3::Country::getGovBuildingMax(const std::string& building, const std::map<s
 	return tech + laws;
 }
 
-#pragma optimize("", off)
-
 void V3::Country::distributeGovAdmins(const double target, const int PMGeneration, const std::map<std::string, V3::Tech>& techMap) const
 {
 	const auto topSubstates = topPercentileStatesByPop(0.3);
@@ -178,7 +176,7 @@ void V3::Country::distributeGovAdmins(const double target, const int PMGeneratio
 		if (const int throughputMax = getThroughputMax(techMap); levels > throughputMax)
 		{
 			levels = static_cast<int>(stateTarget / (PMGeneration + PMGeneration * (throughputMax / 100.0)));
-			generation =  levels * PMGeneration * (1 + throughputMax / 100.0);
+			generation = levels * PMGeneration * (1 + throughputMax / 100.0);
 		}
 
 		const auto govAdmin = std::make_shared<Building>();
@@ -215,8 +213,6 @@ void V3::Country::distributeGovAdmins(const double target, const int PMGeneratio
 		}
 	}
 }
-
-#pragma optimize("", on)
 
 void V3::Country::registerKeys()
 {
