@@ -41,6 +41,13 @@ auto sumForestry = [](const int sum, const std::shared_ptr<V3::SubState> s) {
 		return sum + s->getBuildings()[0]->getLevel(); // Only built logging camps
 	return sum;
 };
+
+// Building pmgs
+const std::set<std::string> lumberPmgs = {"pmg_base_building_logging_camp",
+	 "pmg_hardwood",
+	 "pmg_equipment",
+	 "pmg_transportation_building_logging_camp",
+	 "pmg_ownership_capital_building_logging_camp"};
 } // namespace
 
 TEST(Mappers_ProductionMethodMapperTests, RulesCanBeLoaded)
@@ -70,6 +77,7 @@ TEST(Mappers_ProductionMethodMapperTests, ApplyRules)
 		auto subState = std::make_shared<V3::SubState>();
 		auto lumberCamp = std::make_shared<V3::Building>();
 		lumberCamp->setName("building_logging_camp");
+		lumberCamp->setPMGroups(lumberPmgs);
 		lumberCamp->setLevel(lvl);
 		subState->addBuilding(lumberCamp);
 		country.addSubState(subState);
@@ -95,6 +103,7 @@ TEST(Mappers_ProductionMethodMapperTests, ApplyRulesInexactOverClosest)
 		auto subState = std::make_shared<V3::SubState>();
 		auto lumberCamp = std::make_shared<V3::Building>();
 		lumberCamp->setName("building_logging_camp");
+		lumberCamp->setPMGroups(lumberPmgs);
 		lumberCamp->setLevel(lvl);
 		subState->addBuilding(lumberCamp);
 		country.addSubState(subState);
@@ -119,6 +128,7 @@ TEST(Mappers_ProductionMethodMapperTests, ApplyRulesInexactUnderClosest)
 		auto subState = std::make_shared<V3::SubState>();
 		auto lumberCamp = std::make_shared<V3::Building>();
 		lumberCamp->setName("building_logging_camp");
+		lumberCamp->setPMGroups(lumberPmgs);
 		lumberCamp->setLevel(lvl);
 		subState->addBuilding(lumberCamp);
 		country.addSubState(subState);
@@ -143,6 +153,7 @@ TEST(Mappers_ProductionMethodMapperTests, ApplyRulesSmallestLargeBuildingIsClose
 		auto subState = std::make_shared<V3::SubState>();
 		auto lumberCamp = std::make_shared<V3::Building>();
 		lumberCamp->setName("building_logging_camp");
+		lumberCamp->setPMGroups(lumberPmgs);
 		lumberCamp->setLevel(lvl);
 		subState->addBuilding(lumberCamp);
 		country.addSubState(subState);
@@ -167,6 +178,7 @@ TEST(Mappers_ProductionMethodMapperTests, ApplyRulesUnderTeched)
 		auto subState = std::make_shared<V3::SubState>();
 		auto lumberCamp = std::make_shared<V3::Building>();
 		lumberCamp->setName("building_logging_camp");
+		lumberCamp->setPMGroups(lumberPmgs);
 		lumberCamp->setLevel(lvl);
 		subState->addBuilding(lumberCamp);
 		country.addSubState(subState);

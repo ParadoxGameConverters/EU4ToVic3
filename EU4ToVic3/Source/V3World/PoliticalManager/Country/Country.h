@@ -194,12 +194,13 @@ class Country: commonItems::parser
 	[[nodiscard]] static double yearCapFactor(const date& targetDate);
 	[[nodiscard]] int getTechInfraCap(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] double getTechInfraMult(const std::map<std::string, Tech>& techMap) const;
+	[[nodiscard]] int getThroughputMax(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] bool hasAnyOfTech(const std::set<std::string>& techs) const;
 	[[nodiscard]] int getGovBuildingMax(const std::string& building,
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::map<std::string, Tech>& techMap) const;
 
-	void distributeGovAdmins(int numGovAdmins) const;
+	void distributeGovAdmins(double target, int PMGeneration, const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> topPercentileStatesByPop(double percentile) const;
 	[[nodiscard]] double calculateBureaucracyUsage(const std::map<std::string, Law>& lawsMap) const;
 	void addSector(const std::string& sectorName, const std::shared_ptr<Sector>& sector) { processedData.industrySectors.emplace(sectorName, sector); }

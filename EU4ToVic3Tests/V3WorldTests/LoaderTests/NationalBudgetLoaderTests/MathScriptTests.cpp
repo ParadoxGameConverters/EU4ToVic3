@@ -8,6 +8,7 @@
 TEST(V3World_MathScriptTests, MathScriptTriggersAreRecognized)
 {
 	std::stringstream lawInput;
+	std::stringstream techInput;
 	std::stringstream colonyInput;
 	std::stringstream tcInput;
 	std::stringstream GPInput;
@@ -15,6 +16,7 @@ TEST(V3World_MathScriptTests, MathScriptTriggersAreRecognized)
 	std::stringstream invalidInput;
 
 	lawInput << "\tvic3_law = law_serfdom";
+	techInput << "\tvic3_tech = centralization";
 	colonyInput << "\tis_colony = yes";
 	tcInput << "\tis_trade_company = yes";
 	GPInput << "\tis_eu4_gp = yes";
@@ -23,6 +25,8 @@ TEST(V3World_MathScriptTests, MathScriptTriggersAreRecognized)
 
 	V3::MathScript law;
 	law.loadMathScript(lawInput);
+	V3::MathScript tech;
+	tech.loadMathScript(techInput);
 	V3::MathScript colony;
 	colony.loadMathScript(colonyInput);
 	V3::MathScript tc;
@@ -38,6 +42,7 @@ TEST(V3World_MathScriptTests, MathScriptTriggersAreRecognized)
 	country.setSourceCountry(std::make_shared<EU4::Country>());
 
 	EXPECT_FALSE(law.isValid(country));
+	EXPECT_FALSE(tech.isValid(country));
 	EXPECT_FALSE(colony.isValid(country));
 	EXPECT_FALSE(tc.isValid(country));
 	EXPECT_FALSE(gp.isValid(country));
@@ -47,6 +52,7 @@ TEST(V3World_MathScriptTests, MathScriptTriggersAreRecognized)
 
 	V3::ProcessedData data;
 	data.laws.emplace("law_serfdom");
+	data.techs.emplace("centralization");
 	data.industryFactor = 0.2;
 
 	std::stringstream eu4Input;
@@ -61,6 +67,7 @@ TEST(V3World_MathScriptTests, MathScriptTriggersAreRecognized)
 
 
 	EXPECT_TRUE(law.isValid(country));
+	EXPECT_TRUE(tech.isValid(country));
 	EXPECT_TRUE(colony.isValid(country));
 	EXPECT_TRUE(tc.isValid(country));
 	EXPECT_TRUE(gp.isValid(country));

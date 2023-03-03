@@ -35,5 +35,8 @@ void V3::TechEntry::registerKeys()
 			Log(LogLevel::Error) << "Found a max level modifier, but could not parse it: " << modifier;
 		}
 	});
+	modifierParser.registerKeyword("building_economy_of_scale_level_cap_add", [this](std::istream& theStream) {
+		tech.throughputMax = commonItems::getInt(theStream);
+	});
 	modifierParser.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

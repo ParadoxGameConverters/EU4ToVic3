@@ -74,8 +74,9 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 			continue;
 		}
 
-		// Give 5% extra for trade routes
-		const double generationTarget = country->calculateBureaucracyUsage(politicalManager.getLawsMap()) * 1.05;
+		// Give 5% extra for trade routes - cap at +400
+		const double usage = country->calculateBureaucracyUsage(politicalManager.getLawsMap());
+		const double generationTarget = std::min(usage * 1.05, usage + 400) - 100;
 
 		// Use the PM with the most generation available
 		int PMGeneration = 35;
@@ -85,10 +86,7 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 			PMGeneration = PMs.at(PMName).getBureaucracy();
 		}
 
-		// find # of buildings, 100 base value generation
-		const int numAdmins = static_cast<int>(std::ceil((generationTarget - 100) / PMGeneration));
-
-		country->distributeGovAdmins(numAdmins);
+		country->distributeGovAdmins(generationTarget, PMGeneration, techMap.getTechs());
 	}
 	Log(LogLevel::Info) << "<> Bureaucracy Established.";
 }
@@ -109,8 +107,8 @@ void V3::EconomyManager::hardcodePorts() const
 
 			auto port = std::make_shared<Building>();
 			port->setName("building_port");
+			port->setPMGroups({"pmg_base_building_port"});
 			port->setLevel(1);
-			port->addPM("pm_basic_port"); // Until PM setting is off the ground
 
 			subState->addBuilding(port);
 			++counter;

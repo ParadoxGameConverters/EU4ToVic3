@@ -37,6 +37,10 @@ bool V3::MathScript::isValid(const Country& country) const
 	{
 		return country.getProcessedData().laws.contains(triggerValue);
 	}
+	if (trigger == "vic3_tech")
+	{
+		return country.getProcessedData().techs.contains(triggerValue);
+	}
 	if (trigger == "is_eu4_gp")
 	{
 		return country.getSourceCountry()->isGP() == (triggerValue == "yes");

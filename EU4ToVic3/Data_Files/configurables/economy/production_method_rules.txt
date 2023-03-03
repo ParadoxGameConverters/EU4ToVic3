@@ -2,7 +2,7 @@
 # The percent is the percent of building levels that will try to move off of default to adopt the defined PM. It is assumed to be 1(100%) unless specified.
 
 # building_government_administration # SPECIAL CASE government administration links will be ignored even if defined.
-### Devlopment
+##### Development
 building_port = {
     pm = { name = pm_basic_port }
 }
@@ -14,7 +14,7 @@ building_naval_base = {
     pm = { name = pm_power_of_the_purse }
 }
 
-### Urban
+##### Urban
 building_tooling_workshops = {
     pm = { name = pm_pig_iron }
 }
@@ -22,11 +22,15 @@ building_glassworks = {
     pm = { name = pm_leaded_glass }
 }
 building_paper_mills = {
-    pm = { name = pm_sulfite_pulping }
+    pm = { name = pm_sulfite_pulping percent = 0.4 }
 }
-building_furniture_manufactories = {
+building_furniture_manufacturies = {
     pm = { name = pm_lathe }
-    pm = { name = pm_luxury_furniture percent = 0.5}
+    pm = { name = pm_luxury_furniture percent = 0.5 }
+}
+building_textile_mills = {
+    pm = { name = pm_dye_workshops percent = 0.05 }
+    pm = { name = pm_craftsman_sewing percent = 0.1 }
 }
 building_shipyards = {
     pm = { name = pm_military_shipbuilding_wooden }
@@ -41,13 +45,37 @@ building_chemical_plants = {
     pm = { name = pm_leblanc_process }
 }
 
-### Rural
+##### Rural
 building_logging_camp = {
     pm = { name = pm_saw_mills }
-    pm = { name = pm_hardwood percent = 0.33 }
+    pm = { name = pm_hardwood percent = 0.4 }
 }
-
-# Farms need more code support due to clashing pm names
-#building_rye_farm = {
-#    pm = { name = pm_potatoes percent = 0.15 }
-#}
+### Farms
+building_rye_farm = {
+    pm = { name = pm_potatoes percent = 0.15 }
+}
+building_wheat_farm = {
+    pm = { name = pm_citrus_orchards percent = 0.2 }
+}
+building_millet_farm = {
+    pm = { name = pm_fig_orchards percent = 0.2 }
+}
+building_maize_farm = {
+    pm = { name = pm_citrus_orchards percent = 0.2 }
+}
+building_rice_farm = {
+    pm = { name = pm_fig_orchards percent = 0.1 }
+}
+### Mines
+building_coal_mine = {
+    pm = { name = pm_atmospheric_engine_pump_building_coal_mine }
+}
+building_iron_mine = {
+    pm = { name = pm_atmospheric_engine_pump_building_iron_mine }
+}
+building_gold_mine = {
+    pm = { name = pm_atmospheric_engine_pump_building_gold_mine }
+}
+building_sulfur_mine = {
+    pm = { name = pm_atmospheric_engine_pump_building_sulfur_mine }
+}
