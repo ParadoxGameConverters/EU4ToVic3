@@ -1,0 +1,23 @@
+# These defines are used by the economy manager to figure out the amount of buildings generated.
+# They are calibrated based on Vanilla Vic3.
+
+# (0 <-> INTMAX)
+# Total # of Construction Points(CP) in the globe
+global_construction_points = 1500000
+vn_global_construction_points = 871050
+
+# (0 <-> 1)
+# Expected % of population living in centralized countries
+centralized_population_ratio = 0.975
+
+# (0 <-> 100)
+# Expected average CivLevel score for all centralized nations
+mean_civlevel = 80
+
+# (0 <-> 1)
+# What % of a state trait bonus (i.e. 20% bonus to Iron Mine throughput) counts towards a state's attractiveness for investment.
+state_trait_strength = 0.5
+
+# (-1 <-> 1)
+# The higher this number is, the more a single sector of industry will cluster into fewer states.
+packet_factor = -0.1

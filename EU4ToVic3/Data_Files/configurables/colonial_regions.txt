@@ -1,0 +1,77 @@
+## This file tells which "regions" can have a special post-colonial culture generated,
+## as well as to what name to assign to it in "default" cases.
+## The format is [colony] = { region = [vic3 state, region or strategic region] alone_name = [abc] split_name = [xyz] }
+## colonial_cultures.txt will *override* both alone_name and split_name
+## alone_name is used if there is only one generated culture in the colonial region
+## split_name is used to all multiple generated cultures in the colonial region. As such, it has a dynamic $PARENT$ loc
+
+canada_colony = {
+	#override for new brunswick which is nominally in new_england under USA.
+	region = region_canada region = STATE_ALASKA region = STATE_YUKON_TERRITORY region = STATE_BRITISH_COLUMBIA region = STATE_ALBERTA region = STATE_SASKATCHEWAN region = STATE_NEW_BRUNSWICK 
+	alone_name = "Canadian"
+	split_name = "$PARENT$-Canadian"
+}
+usa_north_colony = {
+	region = region_new_england region = STATE_CALIFORNIA region = STATE_WASHINGTON region = STATE_OREGON region = STATE_IDAHO
+	region = STATE_NEVADA region = STATE_UTAH region = STATE_MONTANA region = STATE_WYOMING region = STATE_COLORADO region = STATE_NORTH_DAKOTA
+	region = STATE_SOUTH_DAKOTA region = STATE_NEBRASKA region = STATE_KANSAS region = region_the_midwest region = STATE_DISTRICT_OF_COLUMBIA
+	region = STATE_MARYLAND region = STATE_DELAWARE
+	alone_name = "Appalachian"
+	split_name = "$PARENT$-American"
+}
+usa_south_colony = {
+	region = STATE_MISSISSIPPI region = STATE_ALABAMA region = STATE_FLORIDA region = STATE_GEORGIA region = STATE_SOUTH_CAROLINA
+	region = STATE_NORTH_CAROLINA region = STATE_VIRGINIA region = STATE_LOUISIANA region = STATE_ARKANSAS
+	alone_name = "Floridian"
+	split_name = "$PARENT$-Floridian"
+}
+australia_colony = {
+	region = region_oceania
+	alone_name = "Australian"
+	split_name = "$PARENT$-Australian"
+}
+texas_colony = {
+	region = STATE_ARIZONA region = STATE_NEW_MEXICO region = STATE_TEXAS region = STATE_OKLAHOMA
+	alone_name = "Texan"
+	split_name = "$PARENT$-Texan"
+}
+mexico_colony = {
+	region = STATE_BAJA_CALIFORNIA region = region_mexico
+	alone_name = "Mexican"
+	split_name = "$PARENT$-Mexican" 
+}
+brazil_colony = {
+	region = region_brazil
+	alone_name = "Brazilian"
+	split_name = "$PARENT$-Brazilian"
+}
+colombia_colony = {
+	region = region_gran_colombia
+	alone_name = "North Andean"
+	split_name = "$PARENT$-Colombian"
+}
+peru_colony = {
+	region = region_andes
+	alone_name = "South Andean"
+	split_name = "$PARENT$-Peruvian"
+}
+argentine_colony = {
+	region = region_la_plata
+	alone_name = "Platinean"
+	split_name = "$PARENT$-Platinean"
+}
+africa_colony = {
+	region = niger_region region = guinea_region region = central_africa_region region = sahel_region region = horn_of_africa_region region = east_africa_region region = kongo_region region = south_africa_region
+	alone_name = "Neo-African"
+	split_name = "$PARENT$-African"
+}
+caribbean_colony = {
+	region = region_caribbean
+	alone_name = "West Indian"
+	split_name = "$PARENT$-Caraibic"
+}
+central_america_colony = {
+	region = region_central_america
+	alone_name = "Central American"
+	split_name = "$PARENT$-Centroamerican"
+}

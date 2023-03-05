@@ -1,0 +1,87 @@
+# Technologies are assigned reverse median values; from 0 (everyone has them) to 100 
+# (only one nation has it). Score 50 means half the nations will have this tech.
+#
+# This is based on vanilla tier distribution (1->7): 5|48|41|83|30|51|(55 ignored) = 257(+55 decentralized ignored) total, distributed:
+# T1  |T2   |T3   |T4   |T5   |T6
+# 1.9%|18.7%|16.0%|32.3%|11.7%|19.8%
+# 98  |79   |63   |30   |19   |0
+#
+# Techs within "same tier" are sorted so that ones with prereqs from the same tier come
+# earlier (line_infantry 61 -> army reserves 70). Also, artistic licence.
+
+production = {
+	#tier 6
+	enclosure = 0 # breakpoint
+	#tier 5
+	manufacturies = 15
+	shaft_mining = 19 # breakpoint
+	#tier 4
+	distillation = 23
+	prospecting = 26
+	steelworking = 30 # breakpoint
+	#tier 3
+	cotton_gin = 63 # breakpoint
+	#tier 2
+	lathe = 79 # breakpoint
+	#tier 1
+	intensive_agriculture = 83
+	mechanical_tools = 88
+	atmospheric_engine = 93
+	railways = 98 # breakpoint
+}
+
+military = {
+	#tier 6
+	standing_army = 0 # breakpoint
+	#tier 5
+	navigation = 10
+	military_drill = 19 # breakpoint
+	#tier 4
+	gunsmithing = 21
+	drydocks = 24
+	admiralty = 27
+	artillery = 30 # breakpoint
+	#tier 3
+	mandatory_service = 40
+	line_infantry = 50
+	army_reserves = 63 # breakpoint
+	#tier 2
+	napoleonic_warfare = 70
+	paddle_steamer = 79 # breakpoint
+	#tier 1
+	screw_frigate = 83
+	general_staff = 88
+	percussion_cap = 93
+	power_of_the_purse = 98 # breakpoint
+}
+
+society = {
+	#tier 6
+	urbanization = 0 # breakpoint
+	#tier 5
+	tech_bureaucracy = 5
+	rationalism = 19 # breakpoint
+	#tier 4
+	centralization = 21
+	democracy = 24
+	international_relations = 27
+	international_trade = 30 # breakpoint
+	#tier 3
+	urban_planning = 34
+	law_enforcement = 39
+	academia = 44
+	romanticism = 59
+	currency_standards = 53
+	medical_degrees = 58
+	colonization = 63 # breakpoint
+	#tier 2
+	mass_communication = 66
+	banking = 70
+	empiricism = 74
+	stock_exchange = 79 # breakpoint
+	#tier 1
+	dialectics = 83
+	egalitarianism = 88
+	central_archives = 93
+	central_banking = 98 # breakpoint
+}

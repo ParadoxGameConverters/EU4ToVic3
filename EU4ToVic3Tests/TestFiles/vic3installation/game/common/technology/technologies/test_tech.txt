@@ -1,0 +1,42 @@
+tech_1 = {
+	# Unlocks Urban Centers building
+	era = era_1
+	texture = "gfx/interface/icons/invention_icons/urbanization.dds"
+	category = society
+	
+	modifier = {
+		state_infrastructure_from_population_add = 0.2
+		state_infrastructure_from_population_max_add = 40	
+	}
+}
+
+tech_2 = {
+	era = era_1
+	texture = "gfx/interface/icons/invention_icons/urban_planning.dds"
+	category = society
+	
+	modifier = {
+		state_infrastructure_from_population_add = 0.05
+		state_infrastructure_from_population_max_add = 10
+		state_building_port_max_level_add = 2
+		state_building_naval_base_max_level_add = 15
+	}
+}
+
+tech_3 = {
+	era = era_1
+	texture = "gfx/interface/icons/invention_icons/urban_planning.dds"
+	category = society
+}
+
+tech_4 = {
+	era = era_1
+	texture = "gfx/interface/icons/invention_icons/urban_planning.dds"
+	category = society
+	
+	modifier = {
+		country_institution_schools_max_investment_add = 1
+		state_building_port_max_level_add = 4
+		state_building_naval_base_max_level_add = 10
+	}
+}

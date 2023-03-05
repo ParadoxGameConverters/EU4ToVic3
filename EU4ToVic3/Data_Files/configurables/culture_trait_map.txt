@@ -1,0 +1,153 @@
+# This file is used when generating culture definitions for any culture NOT already defined. 
+# This means wen importing flemish (already defined) we won't create a new def, but when importing
+#    dynamic-flemish-russian-culture-num3, we will be using both flemish and east_slavic entries.
+# Relevant to this is also name_list_map.txt which graps appropriate namelist for the culture being defines.
+#
+# Example usage:
+# link = { eu4 = A trait = B ethnicity = C } -> list individual cultures BEFORE group fallbacks!
+# link = { eu4group = X trait = Y ethnicity = Z }
+# There can be as many traits as needed and they are also optional
+# There must be either a SINGLE culture or SINGLE culture_group
+# There must be a SINGLE ethnicity
+
+link = { eu4 = swiss trait = german_speaking trait = francophone trait = italophone trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4 = dutch trait = beneluxian_culture_group trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4 = flemish trait = beneluxian_culture_group trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4 = frisian trait = beneluxian_culture_group trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = dutch_group trait = beneluxian_culture_group trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = germanic trait = german_speaking trait = german_speaking trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = scandinavian trait = scandinavian_culture_group trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4 = cornish trait = british_culture_group trait = celtic_people trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4 = welsh trait = british_culture_group trait = celtic_people trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = british trait = british_culture_group trait = anglophone trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = gaelic trait = celtic_people trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4 = friulan trait = italophone trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = rhaetic trait = german_speaking trait = italophone  trait = european_heritage ethnicity = caucasian graphics = european } # Italian
+link = { eu4group = latin trait = italian_culture_group trait = italophone trait = european_heritage ethnicity = caucasian graphics = european } # Italian
+link = { eu4 = basque trait = iberian_culture_group trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4 = portuguese trait = iberian_culture_group trait = lusophone trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = portugese_moroccan_macaronesia trait = iberian_culture_group trait = lusophone trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4 = catalan trait = iberian_culture_group trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = iberian trait = iberian_culture_group trait = hispanophone trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4 = walloon trait = beneluxian_culture_group trait = francophone trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4 = breton trait = francophone trait = celtic_people trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = french trait = francophone trait = francophone trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = finno_ugric trait = finnic trait = european_heritage ethnicity = circumpolar graphics = european }
+link = { eu4group = ugric trait = finnic trait = european_heritage ethnicity = circumpolar graphics = european }
+link = { eu4 = albanian trait = albanian_language trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4group = albanian_g trait = albanian_language trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4 = bulgarian trait = jugoslav trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4group = south_slavic trait = jugoslav trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4 = polish trait = west_slavic trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4 = silesian trait = west_slavic trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4group = west_slavic trait = west_slavic trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4 = romanian trait = romanian_culture_group trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4group = vlach trait = romanian_culture_group trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4 = transylvanian trait = romanian_culture_group trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4group = carpathian trait = hungarian_culture_group trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4group = magyar trait = hungarian_culture_group trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4group = east_slavic  trait = east_slavic trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4group = baltic trait = baltic_culture_group trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4group = byzantine trait = greek_culture trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4group = caucasian trait = caucasus_group trait = european_heritage ethnicity = slavic graphics = european }
+link = { eu4group = abkhazian_group trait = caucasus_group trait = middle_eastern_heritage ethnicity = north_caucasian graphics = european }
+link = { eu4group = oghuz trait = central_asian_heritage ethnicity = central_asian graphics = asian }
+link = { eu4 = turkish trait = turko_semitic_culture_group trait = turkic trait = middle_eastern_heritage ethnicity = arab graphics = generic }
+link = { eu4group = turko_semitic trait = arab_speaking trait = middle_eastern_heritage ethnicity = arab graphics = generic } # Arabs
+link = { eu4group = maghrebi trait = arab_speaking trait = middle_eastern_heritage ethnicity = arab graphics = generic }
+link = { eu4group = iranian trait = iranian_turanian_culture_group trait = middle_eastern_heritage ethnicity = arab graphics = generic }
+link = { eu4 = khalkha trait = mongol_language trait = central_asian_heritage ethnicity = central_asian graphics = asian }
+link = { eu4 = korchin trait = mongol_language trait = central_asian_heritage ethnicity = central_asian graphics = asian }
+link = { eu4 = mongol trait  = mongol_language trait = central_asian_heritage ethnicity = central_asian graphics = asian }
+link = { eu4 = oirat trait = mongol_language trait = central_asian_heritage ethnicity = central_asian graphics = asian }
+link = { eu4group = altaic trait = central_asian_heritage ethnicity = central_asian graphics = asian }
+link = { eu4group = central_american trait = native_mesoamerican_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = aridoamerican trait = native_mesoamerican_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = maya trait = native_mesoamerican_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = otomanguean trait = native_mesoamerican_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = andean_group trait = indigenous_andean trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = je_tupi trait = native_south_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = je trait = native_south_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = maranon trait = indigenous_andean trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = chibchan trait = indigenous_andean trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = mataco trait = native_south_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = araucanian trait = native_south_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = carribean trait = native_mesoamerican_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = eskaleut trait = native_north_american_culture_group trait = indigenous_american_heritage ethnicity = circumpolar graphics = generic }
+link = { eu4group = central_algonquian trait = native_north_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = plains_algonquian trait = native_north_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = eastern_algonquian trait = native_north_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = iroquoian trait = native_north_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = siouan trait = native_north_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = caddoan trait = native_north_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = muskogean trait = native_north_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = sonoran trait = native_north_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = apachean trait = native_north_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = na_dene trait = native_north_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4group = penutian trait = native_north_american_culture_group trait = indigenous_american_heritage ethnicity = native_american graphics = generic }
+link = { eu4 = hakka trait = han_chinese trait = sinosphere trait = east_asian_heritage ethnicity = asian graphics = asian }
+link = { eu4 = jianghua trait = han_chinese trait = sinosphere trait = east_asian_heritage ethnicity = asian graphics = asian }
+link = { eu4 = chihan trait = han_chinese trait = sinosphere trait = east_asian_heritage ethnicity = asian graphics = asian }
+link = { eu4 = shandong_culture trait = han_chinese trait = sinosphere trait = east_asian_heritage ethnicity = asian graphics = asian }
+link = { eu4 = xiang trait = han_chinese trait = sinosphere trait = east_asian_heritage ethnicity = asian graphics = asian }
+link = { eu4group = east_asian trait = sinosphere trait = east_asian_heritage ethnicity = asian graphics = asian }
+link = { eu4group = korean_g trait = korean_language trait = east_asian_heritage ethnicity = asian graphics = asian }
+link = { eu4group = japanese_g trait = yamato trait = east_asian_heritage ethnicity = asian graphics = asian }
+link = { eu4 = tibetan trait = tibetan_language trait = himalayan trait = east_asian_heritage ethnicity = asian graphics = asian }
+link = { eu4group = tibetan_group trait = hmong_mien_language  trait = east_asian_heritage ethnicity = asian graphics = asian } # Miao, Bai, Yi
+link = { eu4group = malay trait = malay_culture trait = southeast_asian_heritage ethnicity = south_east_asian graphics = mideast_indian }
+link = { eu4group = thai_group trait = southeast_asian_heritage ethnicity = south_east_asian graphics = asian }
+link = { eu4 = khmer trait = khmer_language trait = southeast_asian_heritage ethnicity = south_east_asian graphics = asian }
+link = { eu4group = southeastasian_group trait = southeast_asian_heritage ethnicity = south_east_asian graphics = asian }
+link = { eu4group = burman trait = burmese_language trait = southeast_asian_heritage ethnicity = south_east_asian graphics = asian }
+link = { eu4 = polynesian trait = polynesian_group trait = indigenous_oceanic_heritage ethnicity = polynesian graphics = generic }
+link = { eu4group = pacific trait = oceanic_culture_group trait = indigenous_oceanic_heritage ethnicity = polynesian graphics = generic }
+link = { eu4group = aboriginal_australian trait = aboriginal_australian trait = indigenous_oceanic_heritage ethnicity = polynesian graphics = generic }
+link = { eu4 = nepali trait = northeast_indian trait = himalayan trait = south_asian_heritage ethnicity = indian graphics = mideast_indian }
+link = { eu4group = eastern_aryan trait = northeast_indian trait = south_asian_heritage ethnicity = indian graphics = mideast_indian }
+link = { eu4group = hindusthani trait = hindustani trait = south_asian_heritage ethnicity = indian graphics = mideast_indian }
+link = { eu4group = western_aryan trait = south_asian_heritage trait = south_asian_heritage ethnicity = indian graphics = mideast_indian }
+link = { eu4group = dravidian trait = dravidian trait = south_asian_heritage ethnicity = indian graphics = mideast_indian }
+link = { eu4group = central_indic trait = south_asian_heritage trait = south_asian_heritage ethnicity = indian graphics = mideast_indian }
+link = { eu4group = mande trait = west_african_culture_group trait = african_heritage ethnicity = african graphics = generic }
+link = { eu4group = sahelian trait = west_african_culture_group trait = african_heritage ethnicity = african graphics = generic }
+link = { eu4group = west_african trait = west_african_culture_group trait = african_heritage ethnicity = african graphics = generic }
+link = { eu4group = southern_african trait = southern_african_culture_group trait = african_heritage ethnicity = african graphics = generic }
+link = { eu4group = kongo_group trait = central_african_culture_group trait = bantu trait = african_heritage ethnicity = african graphics = generic }
+link = { eu4group = great_lakes_group trait = central_african_culture_group trait = african_heritage ethnicity = african graphics = generic }
+link = { eu4 = malagasy trait = malagasy_language trait = east_african_culture_group trait = african_heritage ethnicity = african graphics = generic }
+link = { eu4group = african trait = east_african_culture_group trait = bantu trait = african_heritage ethnicity = african graphics = generic } #East Bantu
+link = { eu4 = somali trait = east_african_culture_group trait = african_heritage ethnicity = african graphics = generic }
+link = { eu4 = afar trait = east_african_culture_group trait = african_heritage ethnicity = african graphics = generic }
+link = { eu4group = cushitic trait = east_african_culture_group trait = ethiopian trait = african_heritage ethnicity = african graphics = generic }
+link = { eu4group = sudanese trait = east_african_culture_group trait = african_heritage ethnicity = african graphics = generic }
+link = { eu4group = evenks trait = siberian_culture_group trait = north_asian_heritage ethnicity = circumpolar graphics = generic }
+link = { eu4group = kamchatkan_g trait = ainu_language trait = north_asian_heritage ethnicity = asian graphics = generic }
+link = { eu4group = tartar trait = siberian_culture_group trait = central_asian_heritage ethnicity = asian graphics = asian }
+link = { eu4group = lost_cultures_group trait = european_heritage ethnicity = neutral graphics = generic }
+link = { eu4group = celtiberian_g trait = iberian_culture_group trait = celtic_people trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = celts trait = celtic_people trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = celtic trait = celtic_people trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = scordiscian_g trait = celtic_people trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = israelite trait = jewish_group ethnicity = caucasian graphics = european }
+link = { eu4group = gothic_group trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = barbaro_germanic trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = roman_group trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = equine_group trait = european_heritage ethnicity = neutral graphics = generic }
+link = { eu4group = cat_group trait = european_heritage ethnicity = neutral graphics = generic }
+link = { eu4group = bear_group trait = european_heritage ethnicity = neutral graphics = generic }
+link = { eu4group = hedgehog_group trait = european_heritage ethnicity = neutral graphics = generic }
+link = { eu4group = duck_group trait = european_heritage ethnicity = neutral graphics = generic }
+link = { eu4group = dog_group trait = european_heritage ethnicity = neutral graphics = generic }
+link = { eu4group = elephant_group trait = south_asian_heritage ethnicity = neutral graphics = generic }
+link = { eu4group = dragon_group trait = sinosphere ethnicity = neutral graphics = generic }
+link = { eu4group = red_panda_group trait = sinosphere ethnicity = neutral graphics = generic }
+link = { eu4group = punic_group trait = african_settler trait = middle_eastern_heritage ethnicity = arab graphics = generic }
+link = { eu4group = old_mashriqi trait = turko_semitic_culture_group trait = middle_eastern_heritage ethnicity = arab graphics = generic }
+link = { eu4group = chaldean trait = middle_eastern_heritage ethnicity = arab graphics = generic }
+link = { eu4group = hittite_group trait = middle_eastern_heritage ethnicity = arab graphics = european }
+link = { eu4group = scythian_group trait = central_asian_heritage ethnicity = central_asian graphics = european }
+link = { eu4group = dacian_group trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = tyrrhenian trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = old_lombard_g trait = italian_culture_group trait = european_heritage ethnicity = caucasian graphics = european }
+link = { eu4group = frankish_g trait = beneluxian_culture_group trait = european_heritage ethnicity = caucasian graphics = european }

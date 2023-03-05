@@ -1,0 +1,17 @@
+# This file maps EU4 religion GROUPS to Vic3 religion TRAITS, optionally adding taboos.
+# Icon refers to Vic3 RELIGION and will use whatever that religion uses.
+#
+# link = { vic3 = trait eu4 = religious_group taboo = some_taboo taboo = other_taboo icon = religion }
+#
+# This means ANY EU4 religion not directly mapped in religion_map.txt, belonging to RELIGIOUS_GROUP will 
+# get TRAIT, taboos (SOME_TABOO, OTHER_TABOO), and will use icon that vic3 RELIGION uses, while retaining its name.
+#
+# If you want to custimize specific religions, use religion_map.txt file, and bbe sure to add its definitions to
+# blankMod/output/common/religions/ folder, along with icons to gfx/interface/icons/religious_icons/.
+
+link = { vic3 = christian eu4 = christian eu4 = gnostic icon = protestant } # Gnostic *provisionally* here
+link = { vic3 = muslim eu4 = muslim eu4 = yazidism icon = sunni taboo = liquor taboo = wine }
+link = { vic3 = jewish eu4 = jewish_group eu4 = zoroastrian_group icon = jewish } # Zoroastrian *provisionally* here
+link = { vic3 = eastern eu4 = eastern eu4 = dharmic icon = gelugpa }
+link = { vic3 = animist eu4 = pagan eu4 = african_pagan eu4 = european_pagan eu4 = american_pagan eu4 = asian_pagan icon = animist }
+#link = { vic3 = buddhist eu4 = eastern }

@@ -1,0 +1,204 @@
+# Used to determine investment in state regions / building types
+# Applies based on the percentage a state is a particular terrain type
+# All values are 0 by default if not listed
+#
+# priority = x; A % bonus to a country's willingness to invest in a state
+# building_name = x; An additive bonus to the weight a state scores a building with
+#
+# priority = 0.2 = 20% priority bonus.
+# building = 0.2 = +0.2 weight bonus.
+
+
+coastal = {
+    priority = 0.4
+
+    building_barracks = 0.2
+    building_naval_base = 0.4
+    building_port = 0.6
+
+    building_fishing_wharf = 0.3
+    building_whaling_station = 0.3
+    building_shipyards = 0.2
+    building_tooling_workshops = 0.2
+    building_textile_mills = 0.2
+    building_furniture_manufacturies = 0.15
+    building_university = 0.2
+    building_glassworks = 0.1
+    building_paper_mills = 0.1
+    building_logging_camp = 0.1
+    building_steel_mills = 0.02
+}
+
+desert = {
+    priority = -0.3
+
+    building_glassworks = 0.3
+    building_lead_mine = 0.2
+    building_livestock_ranch = 0.1
+
+    building_rye_farm = -0.3
+    building_rice_farm = -0.3
+    building_wheat_farm = -0.3
+    building_maize_farm = -0.3
+    building_millet_farm = -0.3
+}
+
+forest = {
+    priority = 0.1
+
+    building_paper_mills = 0.3
+    building_furniture_manufacturies = 0.05
+    building_arms_industry = 0.15
+    building_shipyards = 0.1
+    building_glassworks = 0.1
+    building_tooling_workshops = 0.1
+    building_university = 0.05
+    building_logging_camp = 0.7
+    building_fishing_wharf = 0.1
+    building_munition_plants = 0.05
+}
+
+hills = {
+    priority = 0
+
+    building_iron_mine = 0.6
+    building_lead_mine = 0.1
+    building_coal_mine = 0.5
+    building_gold_mine = 0.5
+    building_arms_industry = 0.2
+    building_steel_mills = 0.3
+    building_motor_industry = 0.3
+    building_arts_academy = 0.1
+    building_tooling_workshops = 0.1
+
+    building_livestock_ranch = 0.3
+    building_opium_plantation = 0.4
+}
+
+jungle = {
+    priority = -0.1
+
+    building_logging_camp = 0.5
+    building_dye_plantation = 0.3
+    building_sugar_plantation = 0.3
+    building_tobacco_plantation = 0.2
+    building_banana_plantation = 0.2
+    building_coffee_plantation = 0.1
+    building_livestock_ranch = 0.1
+    building_silk_plantation = 0.1
+
+    building_motor_industry = -0.5
+}
+
+mountain = {
+    priority = -0.2
+
+    building_iron_mine = 0.6
+    building_lead_mine = 0.2
+    building_coal_mine = 0.7
+    building_gold_mine = 1
+    building_opium_plantation = 0.3
+    building_munition_plants = 0.05
+    building_arts_academy = 0.3
+    building_tooling_workshops = 0.2
+
+    building_rye_farm = -0.5
+    building_rice_farm = -0.5
+    building_wheat_farm = -0.5
+    building_maize_farm = -0.5
+    building_millet_farm = -0.5
+}
+
+plains = {
+    priority = 0.2
+
+    building_rye_farm = 0.5
+    building_wheat_farm = 0.5
+    building_maize_farm = 0.5
+    building_millet_farm = 0.5
+    building_rice_farm = 0.5
+    building_dye_plantation = 0.4
+    building_cotton_plantation = 0.3
+    building_silk_plantation = 0.3
+    building_tea_plantation = 0.3
+    building_furniture_manufacturies = 0.2
+    building_barracks = 0.2
+    building_railway = 0.1
+    building_food_industry = 0.1
+    building_textile_mills = 0.1
+    building_glassworks = 0.08
+    building_chemical_plants = 0.05
+    building_steel_mills = 0.05
+    building_motor_industry = 0.05
+    building_munition_plants = 0.05
+    building_paper_mills = 0.02
+}
+
+savanna = {
+    priority = -0.1
+
+    building_wheat_farm = 0.3
+    building_maize_farm = 0.3
+    building_millet_farm = 0.4
+    building_lead_mine = 0.1
+    building_coal_mine = 0.1
+    building_munition_plants = 0.05
+
+    building_motor_industry = -0.5
+}
+
+snow = {
+    priority = -0.4
+
+    building_whaling_station = 1
+    building_arts_academy = 0.1
+
+    building_rye_farm = -0.7
+    building_rice_farm = -0.7
+    building_wheat_farm = -0.7
+    building_maize_farm = -0.7
+    building_millet_farm = -0.7
+    building_motor_industry = -0.5
+    building_steel_mills = -0.5
+    building_chemical_plants = -0.5
+    building_munition_plants = -0.5
+    building_railway = -0.5
+    building_university = -0.4
+}
+
+tundra = {
+    priority = -0.3
+
+    building_whaling_station = 0.2
+    building_livestock_ranch = 0.1
+    building_fishing_wharf = 0.1
+    building_textile_mills = 0.05
+    building_arts_academy = 0.05
+
+    building_rye_farm = -0.5
+    building_rice_farm = -0.5
+    building_wheat_farm = -0.5
+    building_maize_farm = -0.5
+    building_millet_farm = -0.5
+    building_motor_industry = -0.3
+    building_steel_mills = -0.3
+    building_chemical_plants = -0.3
+    building_munition_plants = -0.3
+    building_railway = -0.3
+    building_university = -0.2
+}
+
+wetland = {
+    priority = 0
+
+    building_fishing_wharf = 0.5
+    building_sulfur_mine = 0.2
+    building_paper_mills = 0.1
+    building_port = 0.1
+    building_logging_camp = 0.1
+    building_chemical_plants = 0.1
+    building_munition_plants = 0.05
+    building_dye_plantation = 0.1
+    building_silk_plantation = 0.1
+    building_cotton_plantation = 0.1
+}

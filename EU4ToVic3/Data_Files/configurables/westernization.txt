@@ -1,0 +1,145 @@
+# Everything in this file only applies when EUROCENTRISIM is enabled.
+#
+# This file allows cultural traits to affect westernization of the country, should this option be enabled in the converter. 
+# This is done by describing a level of westernization, industry and literacy for a country with a culture (or multiples) that have these traits.
+# This file completely supercedes ANY EU4 tech levels.
+# 
+# Scale for westernization is 0 to 10 where:
+# 0 - These are stone-age people - ["euro-civlevel" zet to 0]
+# 5 - Uncivilized but not primitive tribes of north africa - ["euro-civlevel" zet to 50]
+# 10 - A modern tea-drinking Man-o-war sailing colonial empire - ["euro-civlevel" zet to 100]
+#
+# If the economy configuration is set to CIVLEVEL, westernization strongly influences the amount of buildings a country gets to build.
+#
+# You can also set increased or decreased literacy to a particular cultural trait, where:
+# 0 - These people are illiterate. - [literacy is capped by "euro-civlevel"% and then halved]
+# 5 - Standard levels of literacy for this group - [literacy is capped by "euro-civlevel"%]
+# 10 - Extraordinarily literate aliens from Atlantis - [literacy is capped by "euro-civlevel"% and then boosted 50%]
+#
+# You can also set increased or decreased industrial score to a particular cultural trait, where:
+# 0 - No industry - [industry is calculated for "euro-civlevel"% and then zeroed]
+# 5 - Standard levels of industry for this group - [industry is calculated for "euro-civlevel"%]
+# 10 - Extraordinarily industrial aliens from Atlantis - [industry is calculated for "euro-civlevel"% and then doubled]
+#
+# Industry score mainly effects those sectors marked industrial in configurables/economy/national_budget.txt
+# It does NOT effect the total number of buildings built, just the types.
+# Those with an Industry score below 2 will struggle to build any urban buildings
+#
+# So how does this work? Without westernization we use "civlevel" - which is basically
+# 	124 - missingTechs * 4 - missingInstitutions * 8, capped at 100.
+# meaning one can be 6 techs behind the world leader and will still be considered civilized. 
+# If the score is below 100, that's "unrecognized" territory.
+# If the score is below 20, that's "decentralized" territory.
+# 
+# With eurocentrism, we override that civlevel score with euro-civlevel 100 for westernization 10 countries, completely ignoring tech.
+# For others we have 2 cases:
+# - if civlevel (from tech) is >20 and <100, we take the minimum from civlevel and euro-civlevel, so there is greater variety
+# 	in technological levels across the world. This also means westernization [0,1] countries will always be decentralized.
+# - if civlevel <20 (horrible horrible tech, potentially "eurocentric institutions etc") we take the higher of civlevel and euro-civlevel,
+#	so that countries that's normally score higher get out of decentralized territory.
+
+link = {
+	# western european
+	westernization = 10
+	industry = 5
+	traits = {
+		german_speaking european_heritage beneluxian_culture_group francophone anglophone celtic_people 
+		iberian_culture_group italophone scandinavian_culture_group finnic hispanophone lusophone
+		african_settler british_culture_group italian_culture_group
+	}
+}
+
+link = {
+	# eastern european/slavic
+	westernization = 10
+	literacy = 4
+	industry = 4
+	traits = {
+		jewish_group jugoslav albanian_language romanian_culture_group hungarian_culture_group west_slavic 
+		baltic_culture_group east_slavic greek_culture caucasus_group thracian_heritage slavic south_slavic 
+	}
+}
+
+link = {
+	# ottoman
+	westernization = 10
+	literacy = 3
+	industry = 2
+	traits = {
+		turkic
+	}
+}
+
+link = {
+	# arabic/middle-eastern
+	westernization = 6
+	industry = 2
+	traits = {
+		middle_eastern_heritage arab_speaking iranian_turanian_culture_group
+	}
+}
+
+link = {
+	# indian
+	westernization = 5
+	industry = 2
+	traits = {
+		northeast_indian south_asian_heritage hindustani dravidian
+	}
+}
+
+link = {
+	# east asian
+	westernization = 4
+	industry = 2
+	traits = {
+		malay_culture southeast_asian_heritage himalayan tibetan_language east_asian_heritage sinosphere 
+		khmer_language tai burmese_language yamato han_chinese korean_language ainu_language hmong_mien_language
+	}
+}
+
+link = {
+	# ethiopian
+	westernization = 4
+	industry = 0
+	traits = {
+		ethiopian
+	}
+}
+
+link = {
+	# central asian/nomadic
+	westernization = 3
+	industry = 1
+	traits = {
+		central_asian_heritage mongol_language north_asian_heritage siberian_culture_group scythian_heritage
+	}
+}
+
+link = {
+	# north american native
+	westernization = 2
+	industry = 1
+	traits = {
+		north_american_group native_north_american_culture_group
+	}
+}
+
+link = {
+	# subsaharan, east/central/south/west african
+	westernization = 2
+	industry = 0
+	traits = {
+		african_heritage west_african_culture_group central_african_culture_group southern_african_culture_group bantu malagasy_language east_african_culture_group
+	}
+}
+
+link = {
+	# aboriginal, indigenous, natives...
+	westernization = 1
+	industry = 0
+	traits = {
+		indigenous_oceanic_heritage polynesian_group aboriginal_australian indigenous_american_heritage 
+		native_mesoamerican_culture_group south_american_group native_south_american_culture_group indigenous_andean
+	}
+}

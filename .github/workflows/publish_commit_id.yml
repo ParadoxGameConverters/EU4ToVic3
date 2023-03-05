@@ -6,6 +6,7 @@ on:
 
 jobs:
   publish_id:
+    if: github.repository_owner == 'ParadoxGameConverters'
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -16,8 +17,8 @@ jobs:
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        destination_file: 'EU4toVic3.txt'
+        destination_file: 'EU4ToVic3.txt'
         user_email: 'idhrendur@hotmail.com'
         user_name: 'idhrendur'
         destination_branch: 'main'
-        commit_message: "Publish EU4toVic3's commit id"
+        commit_message: "Publish EU4ToVic3's commit id"

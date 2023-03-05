@@ -1,0 +1,245 @@
+# This is the baseline national budget that all countries will use
+# Sectors marked as industrial will get severe penalities for countries without a full industrial score
+
+# Sector weights may be modified by Vic3 laws, colonial status
+
+# The national budget forms the country's opinion of what should be built, but still must face the realities of technology/resource availability and the desire of the states.
+# When a state asks to build logging camps, the nation will check if there still is an extraction budget left before giving its assent.
+# If the state and the nation can't agree on any building, the state's opinion will win out. The state builds what it wants and takes the cost out of the largest budget remaining.
+# This happens most often when there is budget for a resource that just does not exist in a state.
+
+# State: "I'd like to build a farm."
+# Nation: "We're out of farm budget."
+# State: "How about a mine?."
+# Nation: "Out of mine budget. We have only have whaling budget left. Do you want some whaling wharfs?"
+# State: "... I'm a landlocked state, screw you I'm building a farm and our oversized whaling industry is paying for it!"
+
+# There can be as many or as few sectors as you want, and they must have at minimum a defined non-negative weight and at least one vic3_building.
+# Every vic3_building possible to start the game with should belong to one and only one sector.
+# example_sector = {
+#    weight = 4 # Base weight of the sector
+#    industrial = yes # wieght is modified by civlevel and industry score (see configurables/westernization.txt)
+#
+#    building_1 # Anytime a state builds building_1, the cost is taken from example_sector budget
+#    building_2 # Anytime a state builds building_2, the cost is taken from example_sector budget
+#
+#    add = { # Modifiers to base weight based on a single trigger. Supports add/multiply
+#        value = 2 # Value of the addend/multiplier
+#        vic3_law = law_example_law # Trigger for modifier. Supported triggers are vic3_law, vic3_tech, is_colony, is_trade_company, is_eu4_gp, industry_score_less_than
+#    }
+#}
+
+construction = {
+    weight = 0.15
+
+    building_construction_sector
+}
+
+infrastructure = {
+    weight = 3.5
+
+    building_port
+    building_railway
+}
+
+military = {
+    weight = 12
+
+    building_barracks
+
+    multiply = {
+        value = 0.1
+        vic3_law = law_national_militia
+    }
+    multiply = {
+        value = 1.5
+        vic3_law = law_peasant_levy
+    }
+}
+
+naval = {
+    weight = 3
+
+    building_naval_base
+}
+
+farming = {
+    weight = 15
+
+    building_rye_farm
+    building_rice_farm
+    building_wheat_farm
+    building_maize_farm
+    building_millet_farm
+    building_livestock_ranch
+}
+
+extraction = {
+    weight = 5
+
+    building_logging_camp
+    building_fishing_wharf
+
+    multiply = {
+        value = 3
+        vic3_law = law_serfdom
+    }
+}
+
+industrial_mining = {
+	industrial = yes
+
+    weight = 9
+
+    building_iron_mine
+    building_coal_mine
+    building_gold_mine
+}
+
+military_mining = {
+	industrial = yes
+
+    weight = 2
+
+    building_lead_mine
+    building_sulfur_mine
+
+    add = {
+        value = 1
+        is_eu4_gp = yes
+    }
+    add = {
+        value = 0.5
+        vic3_tech = mechanical_tools
+    }
+}
+
+plantation = {
+    weight = 15
+
+    building_coffee_plantation
+    building_cotton_plantation
+    building_dye_plantation
+    building_opium_plantation
+    building_tea_plantation
+    building_tobacco_plantation
+    building_sugar_plantation
+    building_banana_plantation
+    building_silk_plantation
+
+    multiply = {
+        value = 1.5
+        is_colony = yes
+    }
+    multiply = {
+        value = 2.5
+        is_trade_company = yes
+    }
+}
+
+whaling = {
+    weight = 0.4
+
+    building_whaling_station
+
+}
+
+shipwrights = {
+    weight = 4
+
+    industrial = yes
+
+    building_shipyards
+}
+
+paper_industry = {
+    weight = 1
+
+    building_paper_mills
+
+    add = {
+        value = 7
+        vic3_tech = centralization
+    }
+
+    add = {
+        value = 7
+        vic3_tech = central_archives
+    }
+}
+
+light_industry = {
+    weight = 16
+
+    building_textile_mills
+    building_furniture_manufacturies
+    building_glassworks
+    
+
+    # Industry score from configurables/westernization.txt. No effect if no EuroCentrism
+    multiply = {
+        value = 0
+        industry_score_less_than = 1
+    }
+}
+
+western_industry = {
+    industrial = yes
+
+    weight = 10
+
+    building_food_industry
+    building_arms_industry
+
+    # No effect if no EuroCentrism
+    add= {
+        value = -2
+        industry_score_less_than = 4
+    }
+    add= {
+        value = -3
+        industry_score_less_than = 3
+    }
+}
+
+tooling_industry = {
+    industrial = yes
+
+    weight = 2.5
+
+    building_tooling_workshops
+
+    add = {
+        value = 2.5
+        is_eu4_gp = yes
+   }
+}
+
+scholarly = {
+    industrial = yes
+
+    weight = 2.5
+
+    building_arts_academy
+    building_university
+}
+
+heavy_industry = {
+    industrial = yes
+
+    weight = 0
+
+    building_chemical_plants
+    building_steel_mills
+    building_motor_industry
+    building_munition_plants
+
+    add = {
+        value = 4
+        is_eu4_gp = yes
+    }
+    multiply = {
+        value = 0
+        industry_score_less_than = 3
+    }
+}

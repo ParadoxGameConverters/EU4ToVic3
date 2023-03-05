@@ -1,0 +1,72 @@
+# NOTE: These do not make more buildings appear, they just adjust State level CP spending priority.
+# Meaning States will want to spend a greater portion of their budget on boosted buildings.
+
+# EU4 Building -> V3 building(s) it boosts.
+# Ex. 1 link = { eu4 = building vic3 = { building } }
+# Ex. 2 link = {
+#   eu4 = building
+#    vic3 = { 
+#        building_1 
+#        building_2 
+#    } 
+#}
+
+
+link = { eu4 = wharf vic3 = { building_fishing_wharf } }
+link = { eu4 = weapons vic3 = { building_arms_industry } }
+link = { eu4 = tradecompany vic3 = { building_port } }
+link = { eu4 = university vic3 = { building_university } }
+link = { eu4 = grand_shipyard vic3 = { building_shipyards } }
+
+link = { 
+    eu4 = textile
+    vic3 = { 
+        building_textile_mills
+        building_furniture_manufacturies
+    } 
+}
+
+link = { 
+    eu4 = mills 
+    vic3 = { 
+        building_glassworks
+        building_paper_mills
+        building_logging_camp
+        building_tooling_workshops
+    } 
+}
+
+link = { 
+    eu4 = furnace 
+    vic3 = { 
+        building_iron_mines
+        building_coal_mines
+    } 
+}
+
+link = {
+    eu4 = plantations
+    vic3 = { 
+        building_coffee_plantation
+        building_cotton_plantation
+        building_dye_plantation
+        building_opium_plantation
+        building_tea_plantation
+        building_tobacco_plantation
+        building_sugar_plantation
+        building_banana_plantation
+        building_silk_plantation
+    } 
+}
+
+link = {
+    eu4 = farm_estate
+    vic3 = { 
+        building_rye_farm
+        building_rice_farm
+        building_wheat_farm
+        building_maize_farm
+        building_millet_farm
+        building_livestock_ranch
+    } 
+}
