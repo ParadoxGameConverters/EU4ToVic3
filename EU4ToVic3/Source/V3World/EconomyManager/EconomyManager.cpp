@@ -270,8 +270,8 @@ std::pair<double, double> V3::EconomyManager::countryBudgetCalcs(const Configura
 
 	if (Configuration::ECONOMY::CivLevel == economyType)
 		return civLevelCountryBudgets();
-	if (Configuration::ECONOMY::DevPerPop == economyType)
-		return devCountryBudgets();
+	if (Configuration::ECONOMY::DevPopVanilla == economyType)
+		return devCountryBudgets(economyType);
 
 	return {totalWeight, 0.0};
 }
@@ -298,17 +298,41 @@ std::pair<double, double> V3::EconomyManager::civLevelCountryBudgets() const
 	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << (globalIndustryFactor + 1) * 100
 							  << "% industrial compared to baseline. Compensating.";
 
-	return std::pair(accumulatedWeight, globalIndustryFactor);
+	return {accumulatedWeight, globalIndustryFactor};
 }
 
-std::pair<double, double> V3::EconomyManager::devCountryBudgets() const
+std::pair<double, double> V3::EconomyManager::devCountryBudgets(const Configuration::ECONOMY perCapitaType) const
 {
+	double accumulatedWeight = 0;
+
 	// TODO(Gawquon)
 	// config option 3. Pop & development
 	// The more pop you have per dev, the less powerful your development
 	// This is loosely assuming Dev = Pop + Economy so Economy = Dev - Pop
 
-	return std::pair(0.0, 0.0);
+	// Pops
+	
+
+	for (const auto& country: centralizedCountries)
+	{
+		int popCount = 0;
+		if (perCapitaType == Configuration::ECONOMY::DevPopVanilla)
+		{
+			popCount = 1; //// TODO  Max pentalty ~ 0.2% max bonus ~1.2 % after combo dev per capita percentile and tech percentile
+			// tech should range from 0.7 to 1.2, per capita from 0.3 to 1
+		}
+		if (perCapitaType == Configuration::ECONOMY::DevPopActual)
+		{
+			popCount = country->getPopCount();
+		}
+
+		country->setIndustryWeight(popCount * 1); /////// TODO
+
+		accumulatedWeight += country->getIndustryWeight();
+	}
+	
+
+	return {accumulatedWeight, 0};
 }
 
 double V3::EconomyManager::calculateGeoMeanCentralizedPops() const
@@ -460,7 +484,7 @@ double V3::EconomyManager::getBaseSubStateWeight(const std::shared_ptr<SubState>
 		// Score is based on population
 		return subState->getSubStatePops().getPopCount();
 	}
-	if (economyType == Configuration::ECONOMY::DevPerPop)
+	if (economyType == Configuration::ECONOMY::DevPopVanilla || economyType == Configuration::ECONOMY::DevPopActual)
 	{
 		// TODO(Gawquon): Dev based for now not static, might use an econ define
 		// Score is based on Dev, penalized by population
