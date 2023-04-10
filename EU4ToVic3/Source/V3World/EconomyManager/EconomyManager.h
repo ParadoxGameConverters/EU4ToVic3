@@ -80,6 +80,7 @@ class EconomyManager
 	[[nodiscard]] double calculateGlobalPopFactor(const PoliticalManager& politicalManager) const;
 	[[nodiscard]] double calculateTerrainMultiplier(const std::shared_ptr<SubState>& subState) const;
 	[[nodiscard]] double calculateStateTraitMultiplier(const std::shared_ptr<SubState>& subState) const;
+	[[nodiscard]] double getDensityFactor(double perCapitaDev) const;
 
 	void distributeBudget(double globalCP, double totalIndustryScore) const;
 

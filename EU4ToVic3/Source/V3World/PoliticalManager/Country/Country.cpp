@@ -584,6 +584,13 @@ std::string V3::Country::getAdjective(const std::string& language) const
 	return tag + "_ADJ";
 }
 
+double V3::Country::getTotalDev() const
+{
+	return std::accumulate(subStates.begin(), subStates.end(), 0.0, [](double sum, const auto& substate) {
+		return sum + substate->getTotalDev();
+	});
+}
+
 void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 	 double topInstitutions,
 	 const mappers::CultureMapper& cultureMapper,

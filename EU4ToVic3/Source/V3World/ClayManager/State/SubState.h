@@ -139,6 +139,7 @@ class SubState
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::map<std::string, Tech>& techMap,
 		 const std::map<std::string, StateModifier>& traitMap) const;
+	[[nodiscard]] double getTotalDev() const;
 
 	[[nodiscard]] auto isVanillaSubState() const { return vanillaSubState; }
 	[[nodiscard]] auto isIncorporated() const { return !subStateTypes.contains("unincorporated"); }

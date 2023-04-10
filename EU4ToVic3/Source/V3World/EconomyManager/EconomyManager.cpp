@@ -305,32 +305,22 @@ std::pair<double, double> V3::EconomyManager::devCountryBudgets(const Configurat
 {
 	double accumulatedWeight = 0;
 
-	// TODO(Gawquon)
-	// config option 3. Pop & development
-	// The more pop you have per dev, the less powerful your development
-	// This is loosely assuming Dev = Pop + Economy so Economy = Dev - Pop
-
-	// Pops
-	
-
 	for (const auto& country: centralizedCountries)
 	{
-		int popCount = 0;
 		if (perCapitaType == Configuration::ECONOMY::DevPopVanilla)
 		{
-			popCount = 1; //// TODO  Max pentalty ~ 0.2% max bonus ~1.2 % after combo dev per capita percentile and tech percentile
-			// tech should range from 0.7 to 1.2, per capita from 0.3 to 1
+			country->setPerCapitaDev(country->getTotalDev() / country->getVanilla()); // TODO
 		}
 		if (perCapitaType == Configuration::ECONOMY::DevPopActual)
 		{
-			popCount = country->getPopCount();
+			country->setPerCapitaDev(country->getTotalDev() / country->getPopCount());
 		}
+		const double techFactor = std::min(0.5, country->getProcessedData().productionTechPercentile) + 0.2;
+		const double densityFactor = getDensityFactor(country->getProcessedData().perCapitaDev);
 
-		country->setIndustryWeight(popCount * 1); /////// TODO
-
+		country->setIndustryWeight(country->getTotalDev() * densityFactor * techFactor);
 		accumulatedWeight += country->getIndustryWeight();
 	}
-	
 
 	return {accumulatedWeight, 0};
 }
@@ -446,6 +436,18 @@ double V3::EconomyManager::calculateStateTraitMultiplier(const std::shared_ptr<S
 		stateTraitMultiplier += (goodsModifiers + buildingsModifiers + buildingGroupsModifiers) * econDefines.getStateTraitStrength();
 	}
 	return stateTraitMultiplier;
+}
+
+double V3::EconomyManager::getDensityFactor(const double perCapitaDev) const
+{
+	// Plot a line between min and max per capita dev. Return a factor between minFactor and 1 based on % position on that line.
+	constexpr double minFactor = 0.3;
+	const double p = (perCapitaDev - econDefines.getMinDevPerPop() / econDefines.getMaxDevPerPop() - econDefines.getMinDevPerPop());
+	if (p < 0)
+		return minFactor;
+	if (p > 1)
+		return 1;
+	return p + (1 - p) * minFactor;
 }
 
 void V3::EconomyManager::distributeBudget(const double globalCP, const double totalIndustryScore) const

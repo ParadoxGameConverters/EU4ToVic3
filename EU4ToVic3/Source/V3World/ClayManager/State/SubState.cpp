@@ -373,6 +373,13 @@ int V3::SubState::getBuildingCapacity(const Building& building,
 	return INT_MAX;
 }
 
+double V3::SubState::getTotalDev() const
+{
+	return std::accumulate(weightedSourceProvinceData.begin(), weightedSourceProvinceData.end(), 0.0, [](double sum, const auto& sourceProv) {
+		return sum + sourceProv.first.weight;
+	});
+}
+
 bool V3::SubState::hasCapacity(const Building& building,
 	 const BuildingGroups& buildingGroups,
 	 const std::map<std::string, Law>& lawsMap,

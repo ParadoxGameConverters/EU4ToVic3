@@ -29,5 +29,11 @@ void V3::EconDefinesLoader::registerKeys()
 	registerKeyword("packet_factor", [this](std::istream& theStream) {
 		packetFactor = commonItems::getDouble(theStream);
 	});
+	registerKeyword("min_dev_per_pop", [this](std::istream& theStream) {
+		packetFactor = commonItems::getDouble(theStream);
+	});
+	registerKeyword("max_dev_per_pop", [this](std::istream& theStream) {
+		packetFactor = commonItems::getDouble(theStream);
+	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

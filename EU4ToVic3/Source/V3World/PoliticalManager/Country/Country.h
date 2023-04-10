@@ -87,9 +87,11 @@ struct ProcessedData
 	std::vector<std::string> vanillaCharacterElements;		  // stanzas from vanilla character histories, ready for direct dump.
 	std::vector<std::string> vanillaDiplomaticPlayElements; // stanzas from vanilla diplomatic play histories, ready for direct dump.
 
-	double industryWeight = 0; // Share of global industry a country should get, not normalized
+	double industryWeight = 0; // share of global industry a country should get, not normalized
 	int CPBudget = 0;				// Construction Points for a country to spend on it's development
 	std::map<std::string, std::shared_ptr<Sector>> industrySectors;
+	double productionTechPercentile = 0;
+	double perCapitaDev = 0;
 
 	std::string name;
 	std::string adjective;
@@ -118,6 +120,8 @@ class Country: commonItems::parser
 	void setCPBudget(const int theBudget) { processedData.CPBudget = theBudget; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 	void setReligion(const std::string& religion) { processedData.religion = religion; }
+	void setProductionTechPercentile(const double productionScore) { processedData.productionTechPercentile = productionScore; }
+	void setPerCapitaDev(const double pDev) { processedData.perCapitaDev = pDev; }
 
 	void convertFromEU4Country(const ClayManager& clayManager,
 		 mappers::CultureMapper& cultureMapper,
@@ -148,8 +152,10 @@ class Country: commonItems::parser
 	void setProcessedData(const ProcessedData& data) { processedData = data; }
 	void setIGIdeologyModifiers(const std::map<std::string, mappers::IGIdeologyMod>& modifiers) { processedData.igIdeologyModifiers = modifiers; }
 
+
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
+	[[nodiscard]] double getTotalDev() const;
 	[[nodiscard]] int getPopCount() const;
 	[[nodiscard]] static int getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubStates);
 
