@@ -63,6 +63,7 @@ class SubState
 	void setSubStatePops(const SubStatePops& thePops) { subStatePops = thePops; }
 	void addPop(const Pop& pop) { subStatePops.addPop(pop); }
 	void addPops(const std::vector<Pop>& pops) { subStatePops.addPops(pops); }
+	void setVanillaPopCount(const int popCount) { vanillaPopCount = popCount; }
 
 	void setIndustryWeight(const double theIndustryWeight) { industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theCPBudget) { CPBudget = theCPBudget; }
@@ -116,6 +117,7 @@ class SubState
 	[[nodiscard]] const auto& getTerrainFrequencies() { return terrainFrequency; }
 	[[nodiscard]] const auto& getDemographics() const { return demographics; }
 	[[nodiscard]] const auto& getSubStatePops() const { return subStatePops; }
+	[[nodiscard]] const auto& getVanillaPopCount() const { return vanillaPopCount; }
 	[[nodiscard]] std::optional<std::string> getPrimaryCulture() const;
 
 	[[nodiscard]] const auto& getIndustryWeight() const { return industryWeight; }
@@ -204,6 +206,7 @@ class SubState
 	std::map<std::string, double> terrainFrequency; // Normalized vector (math-wise) of terrain in substate as %
 	std::vector<Demographic> demographics;
 	SubStatePops subStatePops;
+	int vanillaPopCount = 0; // What pop of substate would be without adjustments
 
 	double industryWeight = 0;								  // Share of owner's industry a substate should get, not normalized
 	int CPBudget = 0;											  // Construction Points for a substate to spend on it's development

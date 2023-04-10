@@ -937,6 +937,13 @@ int V3::Country::getPopCount(const std::vector<std::shared_ptr<SubState>>& theSu
 	});
 }
 
+int V3::Country::getVanillaPopCount() const
+{
+	return std::accumulate(subStates.begin(), subStates.end(), 0, [](int sum, const auto& substate) {
+		return sum + substate->getVanillaPopCount();
+	});
+}
+
 void V3::Country::leaveIsolationism()
 {
 	if (processedData.laws.contains("law_isolationism"))

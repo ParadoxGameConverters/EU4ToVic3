@@ -486,6 +486,9 @@ int V3::PopManager::generatePopCountForNormalSubState(const std::shared_ptr<SubS
 	const auto& state = subState->getHomeState();
 	const double subStateWeightRatio = *subState->getWeight() / state->getTotalSubStateWeight();
 
+	// Record what vanilla pop would be in the substate without adjustments - for some econ methods
+	subState->setVanillaPopCount(static_cast<int>(round(subStateWeightRatio * vanillaStatePops.at(state->getName()).getPopCount())));
+
 	// Size doesn't matter, only weight does. If our weight is 100 (from combined dev etc), and entire state had 1000 weight, we get 10% pops
 	// regardles of how big the substate is.
 
