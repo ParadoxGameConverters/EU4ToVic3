@@ -309,7 +309,7 @@ std::pair<double, double> V3::EconomyManager::devCountryBudgets(const Configurat
 	{
 		if (perCapitaType == Configuration::ECONOMY::DevPopVanilla)
 		{
-			country->setPerCapitaDev(country->getTotalDev() / country->getVanilla()); // TODO
+			country->setPerCapitaDev(country->getTotalDev() / country->getVanillaPopCount());
 		}
 		if (perCapitaType == Configuration::ECONOMY::DevPopActual)
 		{
@@ -486,12 +486,15 @@ double V3::EconomyManager::getBaseSubStateWeight(const std::shared_ptr<SubState>
 		// Score is based on population
 		return subState->getSubStatePops().getPopCount();
 	}
-	if (economyType == Configuration::ECONOMY::DevPopVanilla || economyType == Configuration::ECONOMY::DevPopActual)
+	if (economyType == Configuration::ECONOMY::DevPopVanilla)
 	{
-		// TODO(Gawquon): Dev based for now not static, might use an econ define
-		// Score is based on Dev, penalized by population
-		// base = subState->getSourceProvinceData() ;
-		return 0;
+		// Score is based on Dev, penalized by unadjusted population
+		return subState->getTotalDev() * getDensityFactor(subState->getTotalDev() / subState->getVanillaPopCount());
+	}
+	if (economyType == Configuration::ECONOMY::DevPopActual)
+	{
+		// Score is based on Dev, penalized by actual population present
+		return subState->getTotalDev() * getDensityFactor(subState->getTotalDev() / subState->getSubStatePops().getPopCount());
 	}
 	return 0;
 }
