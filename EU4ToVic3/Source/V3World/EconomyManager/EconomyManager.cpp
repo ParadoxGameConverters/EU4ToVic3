@@ -309,10 +309,14 @@ std::pair<double, double> V3::EconomyManager::devCountryBudgets(const Configurat
 	{
 		if (perCapitaType == Configuration::ECONOMY::DevPopVanilla)
 		{
+			if(country->getVanillaPopCount() <= 0)
+				continue;
 			country->setPerCapitaDev(country->getTotalDev() / country->getVanillaPopCount());
 		}
 		if (perCapitaType == Configuration::ECONOMY::DevPopActual)
 		{
+			if (country->getPopCount() <= 0)
+				continue;
 			country->setPerCapitaDev(country->getTotalDev() / country->getPopCount());
 		}
 		const double techFactor = std::min(0.5, country->getProcessedData().productionTechPercentile) + 0.2;
