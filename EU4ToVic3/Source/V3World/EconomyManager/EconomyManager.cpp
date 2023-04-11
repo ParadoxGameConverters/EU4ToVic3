@@ -35,6 +35,8 @@ void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::
 			continue;
 		if (!country->getSourceCountry())
 			continue;
+		if (country->getPopCount() <= 0)
+			continue;
 
 		centralizedCountries.push_back(country);
 	}
@@ -270,7 +272,7 @@ std::pair<double, double> V3::EconomyManager::countryBudgetCalcs(const Configura
 
 	if (Configuration::ECONOMY::CivLevel == economyType)
 		return civLevelCountryBudgets();
-	if (Configuration::ECONOMY::DevPopVanilla == economyType)
+	if (Configuration::ECONOMY::DevPopVanilla == economyType || Configuration::ECONOMY::DevPopActual == economyType)
 		return devCountryBudgets(economyType);
 
 	return {totalWeight, 0.0};

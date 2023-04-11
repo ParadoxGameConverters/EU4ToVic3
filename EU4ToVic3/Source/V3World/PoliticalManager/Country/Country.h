@@ -152,7 +152,6 @@ class Country: commonItems::parser
 	void setProcessedData(const ProcessedData& data) { processedData = data; }
 	void setIGIdeologyModifiers(const std::map<std::string, mappers::IGIdeologyMod>& modifiers) { processedData.igIdeologyModifiers = modifiers; }
 
-
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
 	[[nodiscard]] double getTotalDev() const;
