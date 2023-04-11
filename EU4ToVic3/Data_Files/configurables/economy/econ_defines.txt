@@ -4,7 +4,7 @@
 # (0 <-> INTMAX)
 # Total # of Construction Points(CP) in the globe
 global_construction_points = 1500000
-vn_global_construction_points = 871050
+vn_global_construction_points = 871050 # Used only for mod: Voltaire's nightmare
 
 # (0 <-> 1)
 # Expected % of population living in centralized countries
@@ -23,11 +23,11 @@ state_trait_strength = 0.5
 packet_factor = -0.1
 
 
-## Only Used in dev-based econ dsitribution settings
+## Only used in dev-based econ dsitribution settings
 # (0 <-> max)
 # At and below this point, per capita development CP penalities flatten
-min_dev_per_pop = 0.00016
+min_dev_per_pop = 0.00001
 
-# (min <-> 0.01)
+# (min <-> 0.1)
 # At and above this point, there are no CP penalities based on per capita development
-max_dev_per_pop = 0.02
+max_dev_per_pop = 0.0001
