@@ -311,7 +311,7 @@ std::pair<double, double> V3::EconomyManager::devCountryBudgets(const Configurat
 	{
 		if (perCapitaType == Configuration::ECONOMY::DevPopVanilla)
 		{
-			if(country->getVanillaPopCount() <= 0)
+			if (country->getVanillaPopCount() <= 0)
 				continue;
 			country->setPerCapitaDev(country->getTotalDev() / country->getVanillaPopCount());
 		}
