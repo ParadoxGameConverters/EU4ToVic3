@@ -665,9 +665,9 @@ double V3::Country::calcInstitutionBureaucracy() const
 {
 	double usage = 0;
 	const double cost = getPopCount() / 100000.0;
-	for (const auto& institution: processedData.institutions)
+	for (const auto& level: processedData.institutions | std::views::values)
 	{
-		usage += cost * 1; // If we end up mapping institution levels, it is cost * levels
+		usage += cost * level; // If we end up mapping institution levels, it is cost * levels
 	}
 	return usage;
 }

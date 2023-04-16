@@ -437,7 +437,10 @@ void V3::PoliticalManager::setupInstitutions(const std::shared_ptr<Country>& cou
 	{
 		if (auto institution = lawMapper.getLaws().at(law).institution; !institution.empty())
 		{
-			country->addInstitution(institution);
+			if (institution == "institution_schools")
+				country->addInstitution(institution, 3); // boost to max to generate starting literacy.
+			else
+				country->addInstitution(institution, 1); // otherwise don't.
 		}
 	}
 }
