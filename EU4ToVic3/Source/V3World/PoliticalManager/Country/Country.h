@@ -69,7 +69,7 @@ struct ProcessedData
 	std::set<std::string> effects;
 	std::set<std::string> populationEffects;
 	std::set<std::string> laws;
-	std::set<std::string> institutions;
+	std::map<std::string, int> institutions;
 	double literacy = 0;
 	double civLevel = 0;
 	bool westernized = false;
@@ -164,7 +164,7 @@ class Country: commonItems::parser
 	void setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore);
 	void addTech(const std::string& tech) { processedData.techs.emplace(tech); }
 	void addLaw(const auto& lawName) { processedData.laws.emplace(lawName); }
-	void addInstitution(const auto& institutionName) { processedData.institutions.emplace(institutionName); }
+	void addInstitution(const auto& institutionName, const int level = 1) { processedData.institutions.emplace(institutionName, level); }
 	[[nodiscard]] Relation& getRelation(const std::string& target);
 	[[nodiscard]] const auto& getRelations() const { return processedData.relations; }
 	void setRivals(const std::set<std::string>& theRivals) { processedData.rivals = theRivals; }

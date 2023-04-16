@@ -428,26 +428,23 @@ lawgroup_army_model = {
 #law_no_schools 0 !law_compulsory_primary_school
 lawgroup_education_system = {
 	law_public_schools = {
-		forms = {}
-		ideas = {}
-		reforms = { education_of_the_people_reform }
+		forms = { republic }
+		ideas = { innovativeness_ideas plutocracy_ideas quality_ideas }
+		reforms = { education_of_the_people_reform meritocratic_focus_reform }
 	}
 	law_private_schools = {
-		forms = {}
-		ideas = { quality_ideas naval_ideas education_of_the_bishop_reform education_of_the_advisors_reform 
-			education_of_the_missionaries_reform guru_advisors_reform pursuit_of_knowledge_reform
-			state_of_theologians_reform
-		}
-		reforms = {}
+		forms = { }
+		ideas = { naval_ideas economic_ideas influence_ideas }
+		reforms = { }
 	}
 	law_religious_schools = {
-		forms = { republic theocracy }
-		ideas = { innovativeness_ideas religious_ideas }
-		reforms = { native_oral_tradition_reform state_and_shrines_intertwined_reform }
+		forms = { theocracy }
+		ideas = { religious_ideas theocracy_gov_ideas administrative_ideas }
+		reforms = { native_oral_tradition_reform state_and_shrines_intertwined_reform education_of_the_bishop_reform education_of_the_advisors_reform education_of_the_missionaries_reform guru_advisors_reform state_of_theologians_reform pursuit_of_knowledge_reform }
 	}
 	law_no_schools = {
 		forms = { monarchy tribal native }
-		ideas = { expansion_ideas }
+		ideas = { expansion_ideas aristocracy_ideas }
 		reforms = { corvee_reform pirate_republic_reform }
 	}
 }
