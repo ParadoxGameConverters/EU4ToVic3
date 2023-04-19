@@ -10,7 +10,7 @@
 # tech, because law_multicultural requires law_slavery_banned. So, it will get the next best selection, sorted
 # by progressiveness (law_racial_segregation with progressiveness 0).
 #
-# If we find zero matches, we will assing the most progressive law that we *can* assign (that's not blocked by 
+# If we find zero matches, we will assign the most progressive law that we *can* assign (that's not blocked by 
 # something).
 #
 # Listed are only those tier-1 reforms that alter the base, so if a monarchist reform (daimyo) is also 
@@ -18,6 +18,8 @@
 # isolationist monarchy won't getting 2 votes because its tier-1 reform is both a monarchy and isolationist.
 # Tier-2+ government reforms are listed normally, and should all point somewhere unless they really
 # alter nothing of note.
+# Exception to above is when a T1 reform really stresses the point. A fifth_monarchists_reform is really really
+# theocratic so let's list it double.
 
 #GOVERNANCE:
 #law_council_republic 200 NO
@@ -36,7 +38,7 @@ lawgroup_governance_principles = {
 			federal_senate_reform unified_piratical_confederacy_reform protectorate_parliament_reform
 			revolutionary_republic_reform junior_revolutionary_republic_reform peasants_republic
 			kongsi_federation american_republic federal_republic republicanism_reform democratic_values_reform
-			parliamentary_reform
+			parliamentary_reform parliamentary_republic_reform english_parliamentary_republic_government
 		}
 	}
 	law_presidential_republic = {
@@ -45,7 +47,7 @@ lawgroup_governance_principles = {
 		reforms = { presidential_reform broaden_executive_powers_reform consolidate_power_to_the_ruler_reform 
 			pirate_king_reform absolute_president_reform strengthen_executive_powers_reform
 			president_for_life_reform government_for_people_reform millenarian_theocracy_reform	
-			republican_authoritarianism_reform aristocratic_values_reform 
+			republican_authoritarianism_reform aristocratic_values_reform roman_republic_government
 		}
 	}
 	law_monarchy = {
@@ -58,7 +60,7 @@ lawgroup_governance_principles = {
 	law_theocracy = {
 		forms = { theocracy }
 		ideas = {}
-		reforms = {}
+		reforms = { fifth_monarchists_reform papacy_reform }
 	}
 	# DECENTRALIZED NATIONS! By default everything from EU4 is not decentralized, unless they pick
 	# decentralizing ideas/reforms or decide to remain a tribe/native/horde.
@@ -87,7 +89,8 @@ lawgroup_distribution_of_power = {
 			articles_of_agreement_reform frequent_elections_reform 
 			consolidate_power_into_different_candidates_reform equal_electorate_reform three_classes_reform
 			pirate_representation_reform government_for_people_reform theocratic_democracy_reform
-			constitional_theocracy_reform monastic_elections_reform united_cantons_reform
+			constitional_theocracy_reform monastic_elections_reform united_cantons_reform strengthened_parliament_reform
+			civic_republicanism_government
 		}
 	}
 	law_wealth_voting = {
@@ -98,18 +101,20 @@ lawgroup_distribution_of_power = {
 			republicanism_reform consolidation_of_power_reform consolidate_power_in_cities_reform
 			legislative_assembly_reform national_assembly_reform power_to_the_raiders_reform
 			power_to_the_smugglers_reform revolutionary_council_reform empowered_quartermasters_reform
-			citizenry_reform
+			citizenry_reform elective_monarchy_reform administration_of_the_parliament_reform catalan_cortes_reform
+			courts_of_navarra governing_senate_reform plutocratic_reform
 		}
 	}
 	law_landed_voting = {
 		forms = { republic }
-		ideas = { plutocratic_reform }
+		ideas = { court_ideas }
 		reforms = { elective_monarchy english_monarchy polish_great_sejm polish_elective_monarchy 
 			livonian_elective_monarchy norwegian_parliamentary_monarchy grant_nobles_electorate_reform
 			imperial_nobility_reform decentralize_reform expand_imperial_court_reform states_general_reform
 			legislative_sejm integrated_sejmiks two_treatises_reform regional_representation_reform
 			aristocratic_values_reform fraternite_reform national_constituent_reform enlightened_principle_reform
-			landholders_reform clerical_commission_reform regionally_elected_commanders
+			landholders_reform clerical_commission_reform regionally_elected_commanders british_monarchy
+			tanistry_reform bohemian_elective_kingdom_reform house_of_lords_reform 
 		}
 	}
 	law_elder_council = {
@@ -131,7 +136,8 @@ lawgroup_distribution_of_power = {
 			unified_piratical_confederacy_reform scourge_of_the_seven_sea_reform leading_clergy_reform
 			prussian_theocratic_reform militarized_crusader_order_reform education_of_the_bishop_reform
 			conciliarism_reform native_federation_reform power_to_the_synagogoues_reform
-			empower_buddhist_temples_reform secure_clergy_power_reform
+			empower_buddhist_temples_reform secure_clergy_power_reform admiralty_regime_reform
+			japanese_divine_empire dutch_republic fifth_monarchists_reform namestnik_reform
 		}
 	}
 	law_autocracy = {
@@ -147,6 +153,9 @@ lawgroup_distribution_of_power = {
 			millenarian_theocracy_reform kingdom_of_god_reform battle_pope_reform divine_guidance_reform
 			commander_king_reform admiral_king_reform proclaim_religious_head_reform native_chiefdom_reform
 			native_hereditary_reform i_am_the_church_reform head_of_the_reformed_church_reform
+			direct_royal_administration_reform parliament_vs_monarchy_reform mng_seal_of_the_emperor_reform
+			absolute_shogunate_reform oprichnina_reform enforced_autocracy_reform head_of_the_patriarchy_reform
+			peters_government_reform
 		}
 	}
 }
@@ -208,6 +217,7 @@ lawgroup_citizenship = {
 		reforms = { legislative_assembly_reform cultural_administration_reform attorney_general_reform 
 			political_principle_reform internal_mission_reform mission_to_protect_reform
 			harmonization_of_cultures_reform taxation_of_the_foreigners_reform penal_colonies_reform
+			standardized_millets_reform strengthened_parliament_reform millennialistic_theocracy_reform
 		}
 	}
 	law_national_supremacy = {
@@ -218,7 +228,7 @@ lawgroup_citizenship = {
 			external_mission_reform mission_to_civilize_reform mission_to_kill_pirates_reform 
 			kingdom_of_god_reform combat_heresy_reform expel_heathens_reform faith_and_power_reform
 			religious_culture_reform religion_in_one_country_reform religious_permanent_revolution_reform
-			all_under_tengri_reform
+			all_under_tengri_reform japanese_divine_empire fifth_monarchists_reform 
 		}
 	}
 }
@@ -271,6 +281,7 @@ lawgroup_church_and_state = {
 			enlightened_principle_reform partial_secularisation_reform god_and_man_reform 
 			priestly_autonomy_reform lip_service_reform abolished_caste_system_reform
 			strengthen_the_dhimmi_reform curtail_clergy_power_reform maintain_clergy_balance_of_power_reform
+			english_conciliarism_reform
 		}
 	}
 	law_state_religion = {
@@ -284,7 +295,10 @@ lawgroup_church_and_state = {
 			head_of_the_reformed_church_reform confucian_governing_reform empower_buddhist_temples_reform
 			public_hindu_practices_reform strengthen_shaman_privileges_reform strengthen_the_ulema_reform
 			legacy_of_the_steppes_reform state_and_shrines_intertwined_reform embedded_norse_government_reform
-			strengthen_clergy_reform secure_clergy_power_reform conserve_the_religion_reform
+			strengthen_clergy_reform secure_clergy_power_reform conserve_the_religion_reform japanese_divine_empire
+			land_christian_sun_reform fifth_monarchists_reform millennialistic_theocracy_reform zoroastrian_theocracy_reform
+			ajuuraan_theocracy_reform holy_synod_reform strengthened_the_patriarchy_reform head_of_the_patriarchy_reform
+			fiqh_laws_reform sufism_decree_reform anglican_state_church_reform
 		}
 	}
 }
@@ -324,15 +338,16 @@ lawgroup_economic_system = {
 		ideas = { trade_ideas maritime_ideas }
 		reforms = { merchants_reform liberte_reform empowered_quartermasters_reform open_naval_services_reform 
 			master_smugglers_reform pious_merchants_reform priestly_autonomy_reform lockean_proviso_reform
-			embrace_the_economic_theory_reform
+			embrace_the_economic_theory_reform commercial_trade_empire_reform
 		}
 	}
 	law_interventionism = {
 		forms = { republic }
-		ideas = { diplomatic_ideas economic_ideas influence_ideas }
+		ideas = { diplomatic_ideas economic_ideas influence_ideas infrastructure_ideas }
 		reforms = { livonian_diplomatic_monarchy venice_merchants_reform stability_principle_reform 
 			military_principle_reform revolutionary_principle_reform external_mission_reform
-			mission_to_civilize_reform commercial_mission_reform
+			mission_to_civilize_reform commercial_mission_reform war_economy_reform thalassocracy_reform
+			royal_charters_reform
 		}
 	}
 	law_agrarianism = {
@@ -340,7 +355,7 @@ lawgroup_economic_system = {
 		ideas = { aristocracy_ideas indigenous_ideas }
 		reforms = { teutonic_bishopric_reform monastic_breweries_reform all_under_tengri_reform 
 			native_land_tradition_reform native_settle_down_reform lands_for_the_monasteries_reform
-			legacy_of_the_steppes_reform
+			legacy_of_the_steppes_reform jap_gokaido_reform
 		}
 	}
 	law_traditionalism = {
@@ -366,17 +381,20 @@ lawgroup_bureaucracy = {
 			federal_republic provincial_governments_reform union_of_states_reform 
 			cultural_administration_reform universal_suffrage_reform subservient_administrators_reform
 			pursuit_of_knowledge_reform regionally_elected_commanders monastic_elections_reform
-			priestly_autonomy_reform
+			priestly_autonomy_reform qng_grand_council_reform courts_of_navarra
 		}
 	}
 	law_appointed_bureaucrats = {
 		forms = { republic theocracy }
-		ideas = { diplomatic_ideas trade_ideas }
+		ideas = { diplomatic_ideas trade_ideas infrastructure_ideas }
 		reforms = { celestial_empire confucian_bureaucracy livonian_administrative_monarchy 
 			poligar_reform deccani_society_reform centralize_reform representation_of_the_crown_reform
 			clergy_in_administration_reform dakhni_culture_reform zabt_reform emperor_of_the_revolution_reform
 			administrative_divisions_reform appointment_by_committee_reform bureaucratic_aparatus_reform
 			religious_administrators_reform native_diplomatic_cermonies_reform confucian_governing_reform
+			separation_of_boyars_from_court_reform ottoman_provincial_government_system_reform justicia_de_aragon_reform
+			great_council_of_mechelen_reform strengthen_bakuhan_system_reform system_of_councils_reform
+			bureaucratic_rule_reform namestnik_reform
 		}
 	}
 	law_hereditary_bureaucrats = {
@@ -384,7 +402,8 @@ lawgroup_bureaucracy = {
 		ideas = { aristocracy_ideas influence_ideas }
 		reforms = { enforce_privileges_reform imperial_nobility_reform expand_imperial_court_reform 
 			of_noble_bearing_reform dyanstic_administration_reform signoria_reform noble_elite_reform
-			nepotism_reform native_codified_power_reform
+			nepotism_reform native_codified_power_reform ministerialis_promotion_reform parliament_vs_monarchy_reform
+			hereditary_religious_leadership_reform tysyatsky_reform
 		}
 	}
 }
@@ -397,11 +416,15 @@ lawgroup_bureaucracy = {
 lawgroup_army_model = {
 	law_national_militia = {
 		forms = {}
-		ideas = { defensive_ideas quantity_ideas }
+		ideas = { defensive_ideas quantity_ideas mercenary_ideas }
 		reforms = { principality tsardom misl_confederacy_reform livonian_mercenary_monarchy 
 			legion_of_honor_reform sidhi_recruitment mansabdari_reform corvee_reform allotment_system
 			militarized_crusader_order_reform holy_horde_reform warrior_monks_reform
 			native_martial_tradition_reform native_war_band_reform embedded_norse_government_reform
+			japanese_divine_empire land_christian_sun_reform cavalry_warfare_reform
+			doppelsoldner_reform expanded_devshirme_system_reform reformed_ottoman_conscription_reform
+			merchant_arsenal_reform rajput_military_leadership_reform the_maratha_army_reform subutais_strategies_reform
+			ordennancas_reform condottieri_contracts_reform staatse_leger_reform
 		}
 	}
 	law_professional_army = {
@@ -410,13 +433,24 @@ lawgroup_army_model = {
 		reforms = { prussian_monarchy livonian_military_monarchy livonian_naval_monarchy 
 			grant_military_command_reform khalsa_reform prussian_republic_reform 
 			war_against_the_world_doctrine_reform open_naval_services_reform cutthroat_approach_reform
-			military_principle_reform prussian_theocratic_reform
+			military_principle_reform prussian_theocratic_reform nizam_i_cedid_reform organized_military_staff_reform
+			military_engineering_reform sustained_discipline_reform amphibious_specialization_reform
+			maritime_military_reform mansure_army_reform compagnie_dordonnance_reform general_war_commissariat_reform
+			swiss_mercenary_reform expanded_black_army_reform royal_marines_reform professional_navy_reform
+			new_order_regiments_reform reform_the_samurai_reform tercios_reform
 		}
 	}
 	law_peasant_levies = {
 		forms = { monarchy tribal native }
 		ideas = { aristocracy_ideas administrative_ideas }
-		reforms = { ambrosian_republic imperial_diplomacy_reform crusading_kingdom_reform }
+		reforms = { ambrosian_republic imperial_diplomacy_reform crusading_kingdom_reform 
+			ottoman_conscription_reform absolute_shogunate_reform tysyatsky_reform defensive_stance_reform
+			mercenary_leadership_reform devshirme_system_reform janissary_military_reform wei_suo_system_reform
+			eight_banners_reform green_standard_army_reform early_bushido_code_reform the_righteous_army_reform
+			qollar_aghasi_regiments_reform ahmudan_system_reform ghazi_reform revive_the_almogavars_reform
+			volunteers_of_the_faith_reform manrent_reform sygnakhs_system_reform cossacks_registry_reform
+			lessons_of_the_hussite_wars_reform streltsy_reform
+		}
 	}
 }
 
@@ -439,7 +473,11 @@ lawgroup_education_system = {
 	law_religious_schools = {
 		forms = { theocracy }
 		ideas = { religious_ideas theocracy_gov_ideas administrative_ideas }
-		reforms = { native_oral_tradition_reform state_and_shrines_intertwined_reform education_of_the_bishop_reform education_of_the_advisors_reform education_of_the_missionaries_reform guru_advisors_reform state_of_theologians_reform pursuit_of_knowledge_reform }
+		reforms = { native_oral_tradition_reform state_and_shrines_intertwined_reform 
+			education_of_the_bishop_reform education_of_the_advisors_reform 
+			education_of_the_missionaries_reform guru_advisors_reform 
+			state_of_theologians_reform pursuit_of_knowledge_reform 
+		}
 	}
 	law_no_schools = {
 		forms = { monarchy tribal native }
@@ -462,7 +500,9 @@ lawgroup_free_speech = {
 	law_censorship = {
 		forms = { republic theocracy }
 		ideas = { spy_ideas }
-		reforms = { imperial_principle_reform warrior_monks_reform }
+		reforms = { imperial_principle_reform warrior_monks_reform mng_seal_of_the_emperor_reform 
+			absolute_shogunate_reform 
+		}
 	}
 }
 
@@ -496,7 +536,9 @@ lawgroup_internal_security = {
 		reforms = { prussian_monarchy poligar_reform black_army_reform prussian_republic_reform 
 			imperial_diplomacy_reform municipal_self_defense_reform military_principle_reform
 			monastic_order_reform prussian_theocratic_reform loyal_nobility_reform
-			safeguard_holy_sites_reform
+			safeguard_holy_sites_reform combat_heresy_reform oprichnina_reform green_standard_army_reform
+			ashigaru_reform the_cawa_regiments_reform tercio_reform fuero_militar_reform musketeers_reform
+			watergeuzen_reform boyars_army_reform
 		}
 	}
 	law_no_home_affairs = {
@@ -546,7 +588,7 @@ lawgroup_policing = {
 		ideas = { religious_ideas defensive_ideas quality_ideas }
 		reforms = { poligar_reform imperial_diplomacy_reform imperial_principle_reform 
 			militarized_crusader_order_reform mission_to_kill_pirates_reform warrior_monks_reform
-			focus_of_the_patriarchy_reform
+			focus_of_the_patriarchy_reform gendarmes_reform
 		}
 	}
 	law_no_police = {
@@ -565,7 +607,9 @@ lawgroup_rights_of_women = {
 	law_women_own_property = {
 		forms = {}
 		ideas = { plutocracy_ideas innovativeness_ideas }
-		reforms = { legion_of_honor_reform equality_principle_reform universal_suffrage_reform }
+		reforms = { legion_of_honor_reform equality_principle_reform universal_suffrage_reform 
+			sisterhood_of_jeanne_darc_reform 
+		}
 	}
 	law_no_womens_rights = {
 		forms = { monarchy tribal native republic theocracy }
@@ -587,6 +631,7 @@ lawgroup_taxation = {
 		reforms = { iqta quash_noble_power_reform zabt_reform merchants_reform free_city trading_city 
 			ambrosian_republic empowered_quartermasters_reform leading_clergy_reform merchant_theocracy_reform
 			divinity_through_craftsmanship_reform empower_the_burghers_reform reestablish_the_burgeoisie_reform
+			ottoman_siyasah_tax_reform
 		}
 	}
 	law_land_based_taxation = {
@@ -614,7 +659,7 @@ lawgroup_trade_policy = {
 		ideas = { trade_ideas }
 		reforms = { livonian_trade_monarchy free_city trading_city smugglers_haven_reform 
 			black_market_consortium_reform empowered_quartermasters_reform master_smugglers_reform
-			neutral_ground_reform free_trade_reform
+			neutral_ground_reform free_trade_reform commercial_trade_empire_reform
 		}
 	}
 	law_protectionism = {
@@ -624,7 +669,7 @@ lawgroup_trade_policy = {
 			self_governing_colony_government dutch_republic reformer_state_reform external_mission_reform 
 			mission_to_civilize_reform pious_merchants_reform monastic_breweries_reform 
 			divinity_through_craftsmanship_reform empower_the_burghers_reform reestablish_the_burgeoisie_reform 
-			new_world_exploitation_reform
+			new_world_exploitation_reform vodka_of_the_crown_reform
 		}
 	}
 	law_mercantilism = {
@@ -633,14 +678,15 @@ lawgroup_trade_policy = {
 		reforms = { enforce_trader_privileges_reform bengali_reform merchants_reform venice_merchants_reform 
 			open_naval_services_reform mission_to_kill_pirates_reform commercial_mission_reform
 			native_trading_with_foreigners_reform council_of_the_indies_reform curtail_the_burghers_reform
-			mercantilistic_approach_reform
+			mercantilistic_approach_reform trade_company_government namestnik_reform thalassocracy_reform
+			royal_charters_reform consulate_of_the_sea
 		}
 	}
 	law_isolationism = {
 		forms = { monarchy tribal native }
 		ideas = { offensive_ideas }
 		reforms = { pirate_republic_reform the_pirate_ways_reform war_against_the_world_doctrine_reform 
-			embedded_norse_government_reform
+			embedded_norse_government_reform war_economy_reform
 		}
 	}
 }
