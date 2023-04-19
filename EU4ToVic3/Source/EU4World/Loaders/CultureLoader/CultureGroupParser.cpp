@@ -25,6 +25,8 @@ EU4::CultureGroupParser::CultureGroupParser(std::string theName, std::istream& t
 
 void EU4::CultureGroupParser::registerKeys()
 {
+	registerKeyword("country", commonItems::ignoreItem);
+	registerKeyword("province", commonItems::ignoreItem);
 	registerRegex("second_graphical_culture|graphical_culture", [this](const std::string& unused, std::istream& theStream) {
 		commonItems::ignoreItem(unused, theStream);
 	});
