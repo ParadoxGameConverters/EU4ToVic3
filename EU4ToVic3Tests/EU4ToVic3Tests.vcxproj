@@ -156,6 +156,8 @@
     <ClCompile Include="MapperTests\CultureMapperTests\NameListLoaderTests\NameListLoaderTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\NameListMapperTests\NameListMapperTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\NameListMapperTests\NameListMappingTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\TraitDefinitionLoaderTests\TraitDefinitionEntryTests.cpp" />
+    <ClCompile Include="MapperTests\CultureMapperTests\TraitDefinitionLoaderTests\TraitDefinitionLoaderTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\WesternizationMapperTests\WesternizationMapperTests.cpp" />
     <ClCompile Include="MapperTests\CultureMapperTests\WesternizationMapperTests\WesternizationMappingTests.cpp" />
     <ClCompile Include="MapperTests\DiplomaticMapperTests\DiplomaticMapperTests.cpp" />
@@ -709,6 +711,14 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\ai_secret_goal_map.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\discrimination_traits\00_cultural_heritage.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/discrimination_traits/</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\discrimination_traits\02_cultural_descriptive.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/discrimination_traits/</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

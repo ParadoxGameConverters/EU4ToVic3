@@ -5,6 +5,7 @@
 #include "CultureMappingRule.h"
 #include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
+#include "TraitDefinitionLoader/TraitDef.h"
 #include "WesternizationMapper/WesternizationMapper.h"
 
 namespace EU4
@@ -81,12 +82,16 @@ class CultureMapper: commonItems::parser
 		 const EU4::EU4LocalizationLoader& eu4Locs);
 
 	void loadCultureDefinitions(const commonItems::ModFilesystem& modFS);
+	void loadTraitDefinitions(const commonItems::ModFilesystem& modFS);
 
 	void injectReligionsIntoCultureDefs(const V3::ClayManager& clayManager);
 
 	[[nodiscard]] int getWesternizationScoreForCulture(const std::string& cultureName) const;
 	[[nodiscard]] int getLiteracyScoreForCulture(const std::string& cultureName) const;
 	[[nodiscard]] int getIndustryScoreForCulture(const std::string& cultureName) const;
+
+	[[nodiscard]] std::optional<bool> doCulturesShareHeritageTrait(const std::string& cultureA, const std::string& cultureB) const;
+	[[nodiscard]] std::optional<bool> doCulturesShareNonHeritageTrait(const std::string& cultureA, const std::string& cultureB) const;
 
   private:
 	[[nodiscard]] std::string getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager);
@@ -107,6 +112,7 @@ class CultureMapper: commonItems::parser
 	std::set<std::string> unmappedCultures; // same name for eu4 as for vic3.
 	std::set<std::string> usedCultures;		 // Only the stuff we actually use in Vic3.
 	std::map<std::string, CultureDef> v3CultureDefinitions;
+	std::map<std::string, TraitDef> v3TraitDefinitions;
 	std::map<std::string, std::map<std::string, std::string>> colonyNeoCultureTargets; // colony->[eu4 culture -> v3 neoculture]
 	std::map<std::string, std::set<std::string>> relatedCultures; // vanilla culture -> related dynamic cultures (hungarian -> {hungaro-latvian ... })
 

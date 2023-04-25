@@ -267,6 +267,7 @@ TEST(V3World_SubStateTests, InfrastructureCalculationIsolateStateModifieres)
 
 	substate.setOwner(country);
 	substate.setHomeState(state);
+	substate.setIncorporated(true);
 
 	std::stringstream input;
 	input << "id = 3002\n";
@@ -313,8 +314,10 @@ TEST(V3World_SubStateTests, InfrastructureCalculationIsolatePopFactor)
 
 	substate0.setOwner(country);
 	substate0.setHomeState(state);
+	substate0.setIncorporated(true);
 	substate1.setOwner(country);
 	substate1.setHomeState(state);
+	substate1.setIncorporated(true);
 
 	V3::Pop pop0;
 	V3::Pop pop1;
@@ -345,6 +348,7 @@ TEST(V3World_SubStateTests, InfrastructureCalculationFactorsFromPrivateVariables
 
 	substate.setOwner(country);
 	substate.setHomeState(state);
+	substate.setIncorporated(true);
 
 	substate.calculateInfrastructure(V3::StateModifiers{}, {});
 	EXPECT_DOUBLE_EQ(3, substate.getInfrastructure());
@@ -353,7 +357,7 @@ TEST(V3World_SubStateTests, InfrastructureCalculationFactorsFromPrivateVariables
 	substate.calculateInfrastructure(V3::StateModifiers{}, {});
 	EXPECT_DOUBLE_EQ(3.75, substate.getInfrastructure());
 
-	substate.setUnincorporated();
+	substate.setIncorporated(false);
 	substate.calculateInfrastructure(V3::StateModifiers{}, {});
 	EXPECT_DOUBLE_EQ(3, substate.getInfrastructure());
 }

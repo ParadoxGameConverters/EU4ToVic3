@@ -448,7 +448,29 @@ void V3::PoliticalManager::setupInstitutions(const std::shared_ptr<Country>& cou
 void V3::PoliticalManager::grantLawFromGroup(const std::string& lawGroup, const std::shared_ptr<Country>& country) const
 {
 	if (const auto law = lawMapper.grantLawFromGroup(lawGroup, *country); law)
+	{
 		country->addLaw(*law);
+
+		// Knowing what's discrimination level in a country is relevant when incorporating or not incorporating states.
+		if (lawGroup == "lawgroup_citizenship")
+		{
+			ProcessedData::DISCRIMINATION_LEVEL discrimination;
+			if (*law == "law_ethnostate")
+				discrimination = ProcessedData::DISCRIMINATION_LEVEL::Ethnostate;
+			else if (*law == "law_national_supremacy")
+				discrimination = ProcessedData::DISCRIMINATION_LEVEL::National_Supremacy;
+			else if (*law == "law_racial_segregation")
+				discrimination = ProcessedData::DISCRIMINATION_LEVEL::Racial_Segregation;
+			else if (*law == "law_cultural_exclusion")
+				discrimination = ProcessedData::DISCRIMINATION_LEVEL::Cultural_Exclusion;
+			else if (*law == "law_multicultural")
+				discrimination = ProcessedData::DISCRIMINATION_LEVEL::Multicultural;
+			else
+				discrimination = ProcessedData::DISCRIMINATION_LEVEL::Unknown;
+
+			country->setDiscriminationLevel(discrimination);
+		}
+	}
 }
 
 void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>& eu4Agreements)
@@ -1055,4 +1077,55 @@ void V3::PoliticalManager::generateAISecretGoals(const ClayManager& clayManager)
 		}
 
 	Log(LogLevel::Info) << "<> Generated a total of " << counter << " secret goals.";
+}
+
+void V3::PoliticalManager::incorporateStates(const mappers::CultureMapper& cultureMapper, const ClayManager& clayManager)
+{
+	Log(LogLevel::Info) << "-> Incorporating States.";
+
+	auto incorporated = 0;
+	auto unIncorporated = 0;
+
+	for (const auto& country: countries | std::views::values)
+	{
+		const auto capitalState = country->getProcessedData().capitalStateName;
+		const auto capitalRegionName = clayManager.getParentRegionName(capitalState);
+
+		for (const auto& subState: country->getSubStates())
+		{
+			// If the state is in same region as capital, incorporate.
+
+			if (capitalRegionName)
+			{
+				const auto actualRegionName = clayManager.getParentRegionName(subState->getHomeStateName());
+				if (*actualRegionName == *capitalRegionName)
+				{
+					subState->setIncorporated(true);
+					++incorporated;
+					continue;
+				}
+			}
+
+			// Otherwise check if any of its homelands are not discriminated. If there's at least some accepted people (via homeland status), incorporate.
+
+			bool match = false;
+			for (const auto& culture: subState->getHomeState()->getHomelands())
+			{
+				if (!country->isCultureDiscriminated(culture, cultureMapper))
+				{
+					subState->setIncorporated(true);
+					match = true;
+					++incorporated;
+					break;
+				}
+			}
+			if (!match)
+			{
+				subState->setIncorporated(false);
+				++unIncorporated;
+			}
+		}
+	}
+
+	Log(LogLevel::Info) << "<> Incorporated " << incorporated << " states, " << unIncorporated << " are unincorporated.";
 }

@@ -59,7 +59,7 @@ TEST(EU4World_CultureParserTests, dynastyNamesCanBeRetrievedAndAdded)
 	EXPECT_THAT(culture.getDynastyNames(), ElementsAre("Bob", "Jon", "Dod", "Kro"));
 }
 
-TEST(Mappers_CultureTests, primaryTagCanBeLoadedAndAdded)
+TEST(EU4World_CultureParserTests, primaryTagCanBeLoadedAndAdded)
 {
 	std::stringstream input;
 	input << "primary = TAG";
