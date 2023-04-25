@@ -17,17 +17,17 @@ TEST(Mappers_TraitDefinitionLoaderTests, TraitsCanBeRetrieved)
 	mappers::TraitDefinitionLoader loader;
 	loader.loadDefinitions(modFS);
 
-	ASSERT_TRUE(loader.getDefinitions().contains("a_heritage"));
-	ASSERT_TRUE(loader.getDefinitions().contains("a_heritage_2"));
-	ASSERT_TRUE(loader.getDefinitions().contains("not_heritage"));
-	ASSERT_TRUE(loader.getDefinitions().contains("not_heritage_2"));
+	ASSERT_TRUE(loader.getDefinitions().contains("heritage_trait_1"));
+	ASSERT_TRUE(loader.getDefinitions().contains("heritage_trait_2"));
+	ASSERT_TRUE(loader.getDefinitions().contains("nonheritage_trait_1"));
+	ASSERT_TRUE(loader.getDefinitions().contains("nonheritage_trait_2"));
 
-	EXPECT_EQ("a_heritage", loader.getDefinitions().at("a_heritage").name);
-	EXPECT_TRUE(loader.getDefinitions().at("a_heritage").isHeritageTrait);
-	EXPECT_EQ("a_heritage_2", loader.getDefinitions().at("a_heritage_2").name);
-	EXPECT_TRUE(loader.getDefinitions().at("a_heritage_2").isHeritageTrait);
-	EXPECT_EQ("not_heritage", loader.getDefinitions().at("not_heritage").name);
-	EXPECT_FALSE(loader.getDefinitions().at("not_heritage").isHeritageTrait);
-	EXPECT_EQ("not_heritage_2", loader.getDefinitions().at("not_heritage_2").name);
-	EXPECT_FALSE(loader.getDefinitions().at("not_heritage_2").isHeritageTrait);
+	EXPECT_EQ("heritage_trait_1", loader.getDefinitions().at("heritage_trait_1").name);
+	EXPECT_TRUE(loader.getDefinitions().at("heritage_trait_1").isHeritageTrait);
+	EXPECT_EQ("heritage_trait_2", loader.getDefinitions().at("heritage_trait_2").name);
+	EXPECT_TRUE(loader.getDefinitions().at("heritage_trait_2").isHeritageTrait);
+	EXPECT_EQ("nonheritage_trait_1", loader.getDefinitions().at("nonheritage_trait_1").name);
+	EXPECT_FALSE(loader.getDefinitions().at("nonheritage_trait_1").isHeritageTrait);
+	EXPECT_EQ("nonheritage_trait_2", loader.getDefinitions().at("nonheritage_trait_2").name);
+	EXPECT_FALSE(loader.getDefinitions().at("nonheritage_trait_2").isHeritageTrait);
 }

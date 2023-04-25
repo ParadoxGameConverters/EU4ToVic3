@@ -7,7 +7,7 @@
 
 void mappers::CultureDefinitionLoader::loadDefinitions(const commonItems::ModFilesystem& modFS)
 {
-	Log(LogLevel::Info) << "-> Loading culture refinitions.";
+	Log(LogLevel::Info) << "-> Loading culture definitions.";
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/cultures/"))
 	{

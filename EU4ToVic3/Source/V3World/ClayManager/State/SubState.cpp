@@ -638,3 +638,12 @@ std::set<std::string> V3::SubState::getProvinceIDs() const
 		IDs.emplace(province);
 	return IDs;
 }
+
+void V3::SubState::setIncorporated(bool status)
+{
+	subStateTypes.clear();
+	if (status)
+		subStateTypes.emplace("incorporated");
+	else
+		subStateTypes.emplace("unincorporated");
+}

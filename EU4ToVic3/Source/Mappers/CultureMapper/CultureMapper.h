@@ -90,6 +90,9 @@ class CultureMapper: commonItems::parser
 	[[nodiscard]] int getLiteracyScoreForCulture(const std::string& cultureName) const;
 	[[nodiscard]] int getIndustryScoreForCulture(const std::string& cultureName) const;
 
+	[[nodiscard]] std::optional<bool> doCulturesShareHeritageTrait(const std::string& cultureA, const std::string& cultureB) const;
+	[[nodiscard]] std::optional<bool> doCulturesShareNonHeritageTrait(const std::string& cultureA, const std::string& cultureB) const;
+
   private:
 	[[nodiscard]] std::string getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager);
 	[[nodiscard]] CultureDef generateCultureDefinition(const V3::ClayManager& clayManager,

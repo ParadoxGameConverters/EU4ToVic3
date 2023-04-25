@@ -183,6 +183,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "70 %";
 	popManager.alterSlaveCultures(politicalManager, clayManager, cultureMapper.getV3CultureDefinitions());
 
+	politicalManager.incorporateStates(cultureMapper, clayManager);
+
 	// Place starting buildings for all centralized countries
 	Log(LogLevel::Progress) << "71 %";
 	economyManager.loadCentralizedStates(politicalManager.getCountries());

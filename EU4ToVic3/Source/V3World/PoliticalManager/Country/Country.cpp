@@ -53,8 +53,13 @@ void V3::Country::storeVanillaCountryType(std::istream& theStream)
 
 std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop(const double percentile) const
 {
+	std::vector<std::shared_ptr<SubState>> incorporatedStates;
+	for (const auto& state: subStates)
+		if (state->isIncorporated())
+			incorporatedStates.emplace_back(state);
+
 	// Ranks this country's substates by population then returns the top x% of them by population, the largest state will always be returned.
-	auto sortedSubStates = subStates;
+	auto sortedSubStates = incorporatedStates;
 
 	// descending order
 	auto popComparison = [](const std::shared_ptr<SubState>& lhs, const std::shared_ptr<SubState>& rhs) {
@@ -664,7 +669,7 @@ void V3::Country::determineCountryType()
 double V3::Country::calcInstitutionBureaucracy() const
 {
 	double usage = 0;
-	const double cost = getPopCount() / 100000.0;
+	const double cost = getIncorporatedPopCount() / 100000.0;
 	for (const auto& level: processedData.institutions | std::views::values)
 	{
 		usage += cost * level; // If we end up mapping institution levels, it is cost * levels
@@ -923,6 +928,15 @@ int V3::Country::getPopCount() const
 	return getPopCount(subStates);
 }
 
+int V3::Country::getIncorporatedPopCount() const
+{
+	std::vector<std::shared_ptr<SubState>> incorporatedSubStates;
+	for (const auto& subState: subStates)
+		if (subState->isIncorporated())
+			incorporatedSubStates.emplace_back(subState);
+	return getPopCount(incorporatedSubStates);
+}
+
 int V3::Country::getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubStates)
 {
 	return std::accumulate(theSubStates.begin(), theSubStates.end(), 0, [](int sum, const auto& substate) {
@@ -940,4 +954,48 @@ void V3::Country::leaveIsolationism()
 		processedData.techs.emplace("tech_bureaucracy");
 		processedData.techs.emplace("urbanization");
 	}
+}
+
+bool V3::Country::isCultureDiscriminated(const std::string& culture, const mappers::CultureMapper& cultureMapper) const
+{
+	if (processedData.cultures.contains(culture))
+		return false;
+
+	if (processedData.discriminationLevel == ProcessedData::DISCRIMINATION_LEVEL::National_Supremacy)
+	{
+		for (const auto& primaryCulture: processedData.cultures)
+		{
+			if (cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) &&
+				 cultureMapper.doCulturesShareNonHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareNonHeritageTrait(primaryCulture, culture))
+				return false;
+		}
+	}
+
+	if (processedData.discriminationLevel == ProcessedData::DISCRIMINATION_LEVEL::Racial_Segregation)
+	{
+		for (const auto& primaryCulture: processedData.cultures)
+		{
+			if (cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture))
+				return false;
+		}
+	}
+
+	if (processedData.discriminationLevel == ProcessedData::DISCRIMINATION_LEVEL::Cultural_Exclusion)
+	{
+		for (const auto& primaryCulture: processedData.cultures)
+		{
+			if (cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) ||
+				 cultureMapper.doCulturesShareNonHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareNonHeritageTrait(primaryCulture, culture))
+			{
+				return false;
+			}
+		}
+	}
+
+	if (processedData.discriminationLevel == ProcessedData::DISCRIMINATION_LEVEL::Multicultural)
+	{
+		return false;
+	}
+
+	return true;
 }
