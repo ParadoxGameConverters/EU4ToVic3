@@ -63,6 +63,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	localizationLoader.scrapeLocalizations(dwFS);
 	vanillaLocalizationLoader.scrapeLocalizations(blankModFS);
 	cultureMapper.loadCultureDefinitions(allFS);
+	cultureMapper.loadTraitDefinitions(allFS);
 	economyManager.loadMappersAndConfigs(allFS);
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";

@@ -13,6 +13,7 @@
 #include "NameListLoader/NameListLoader.h"
 #include "NameListMapper/NameListMapper.h"
 #include "ParserHelpers.h"
+#include "TraitDefinitionLoader/TraitDefinitionLoader.h"
 #include <numeric>
 #include <ranges>
 
@@ -321,6 +322,13 @@ void mappers::CultureMapper::loadCultureDefinitions(const commonItems::ModFilesy
 	CultureDefinitionLoader cultureDefinitionLoader;
 	cultureDefinitionLoader.loadDefinitions(modFS);
 	v3CultureDefinitions = cultureDefinitionLoader.getDefinitions();
+}
+
+void mappers::CultureMapper::loadTraitDefinitions(const commonItems::ModFilesystem& modFS)
+{
+	TraitDefinitionLoader traitDefinitionLoader;
+	traitDefinitionLoader.loadDefinitions(modFS);
+	v3TraitDefinitions = traitDefinitionLoader.getDefinitions();
 }
 
 void mappers::CultureMapper::generateCultureDefinitions(const std::string& nameListsPath,
