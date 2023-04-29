@@ -93,6 +93,18 @@ void V3::State::registerKeys()
 		navalExitID = commonItems::getInt(theStream);
 		coastal = true;
 	});
+	registerKeyword("port", [this](std::istream& theStream) {
+		auto theProvinceName = commonItems::getString(theStream);
+		std::transform(theProvinceName.begin(), theProvinceName.end(), theProvinceName.begin(), ::toupper);
+		if (theProvinceName.starts_with("X") && theProvinceName.size() == 7)
+			theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1);
+		else
+			Log(LogLevel::Warning) << "Encountered port " << theProvinceName << " in unknown format!";
+		if (provinces.contains(theProvinceName))
+			provinces.at(theProvinceName)->setPort();
+		else
+			Log(LogLevel::Warning) << "Port province " << theProvinceName << " isn't defined in the state! (Vanilla?) Map error. Ignoring port.";
+	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
