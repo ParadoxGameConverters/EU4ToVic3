@@ -57,6 +57,8 @@ std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop
 	for (const auto& state: subStates)
 		if (state->isIncorporated())
 			incorporatedStates.emplace_back(state);
+	if (incorporatedStates.empty())
+		return incorporatedStates;
 
 	// Ranks this country's substates by population then returns the top x% of them by population, the largest state will always be returned.
 	auto sortedSubStates = incorporatedStates;
@@ -166,6 +168,8 @@ int V3::Country::getGovBuildingMax(const std::string& building, const std::map<s
 void V3::Country::distributeGovAdmins(const double target, const int PMGeneration, const std::map<std::string, V3::Tech>& techMap) const
 {
 	const auto topSubstates = topPercentileStatesByPop(0.3);
+	if (topSubstates.empty())
+		return;
 	const auto topPop = getPopCount(topSubstates);
 
 	// Pass out buildings by pop proportion of this subset of States. Generate production targets and account for throughput bonuses.
