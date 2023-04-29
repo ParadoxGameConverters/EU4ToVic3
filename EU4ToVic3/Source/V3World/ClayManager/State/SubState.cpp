@@ -647,3 +647,10 @@ void V3::SubState::setIncorporated(bool status)
 	else
 		subStateTypes.emplace("unincorporated");
 }
+
+void V3::SubState::setTreatyPort()
+{
+	subStateTypes.clear();
+	subStateTypes.emplace("unincorporated");
+	subStateTypes.emplace("treaty_port");
+}

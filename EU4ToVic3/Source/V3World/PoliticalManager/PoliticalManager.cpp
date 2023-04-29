@@ -1,5 +1,6 @@
 #include "PoliticalManager.h"
 #include "ClayManager/ClayManager.h"
+#include "ClayManager/State/Province.h"
 #include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "ColonialRegionMapper/ColonialRegionMapper.h"
@@ -1128,4 +1129,46 @@ void V3::PoliticalManager::incorporateStates(const mappers::CultureMapper& cultu
 	}
 
 	Log(LogLevel::Info) << "<> Incorporated " << incorporated << " states, " << unIncorporated << " are unincorporated.";
+}
+
+void V3::PoliticalManager::designateTreatyPorts(const ClayManager& clayManager)
+{
+	Log(LogLevel::Info) << "-> Designating Treaty Ports.";
+
+	auto count = 0;
+
+	for (const auto& country: countries | std::views::values)
+	{
+		const auto capitalState = country->getProcessedData().capitalStateName;
+		const auto capitalRegionName = clayManager.getParentRegionName(capitalState);
+
+		for (const auto& subState: country->getSubStates())
+		{
+			// If the state is in same region as capital, skip!
+
+			if (capitalRegionName)
+			{
+				const auto actualRegionName = clayManager.getParentRegionName(subState->getHomeStateName());
+				if (*actualRegionName == *capitalRegionName)
+				{
+					continue;
+				}
+			}
+
+			// Otherwise check if it's a single-province state and a named port.
+
+			if (subState->getProvinces().size() != 1)
+				continue;
+
+			const auto& theProvince = subState->getProvinces().begin()->second;
+
+			if (theProvince->isPort())
+			{
+				subState->setTreatyPort();
+				++count;
+			}
+		}
+	}
+
+	Log(LogLevel::Info) << "<> Designated " << count << " treaty ports.";
 }

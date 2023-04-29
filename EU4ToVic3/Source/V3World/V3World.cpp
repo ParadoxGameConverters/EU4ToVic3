@@ -184,6 +184,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	popManager.alterSlaveCultures(politicalManager, clayManager, cultureMapper.getV3CultureDefinitions());
 
 	politicalManager.incorporateStates(cultureMapper, clayManager);
+	politicalManager.designateTreatyPorts(clayManager);
 
 	// Place starting buildings for all centralized countries
 	Log(LogLevel::Progress) << "71 %";
