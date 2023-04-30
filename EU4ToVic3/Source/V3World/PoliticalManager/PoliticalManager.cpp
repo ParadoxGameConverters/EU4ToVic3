@@ -1172,3 +1172,79 @@ void V3::PoliticalManager::designateTreatyPorts(const ClayManager& clayManager)
 
 	Log(LogLevel::Info) << "<> Designated " << count << " treaty ports.";
 }
+
+void V3::PoliticalManager::distributeColonialClaims(const ClayManager& clayManager)
+{
+	Log(LogLevel::Info) << "-> Distributing Colonial Claims.";
+	auto colonialCounter = 0;
+	auto destinyCounter = 0;
+
+	// sort all states with decentralized nations in them into a registry.
+	std::map<std::string, std::vector<std::shared_ptr<SubState>>> colonizableStates;
+	// And also all substates in a colonial region regardless of ownership.
+	std::map<std::string, std::vector<std::shared_ptr<SubState>>> manifestDestinyRegions;
+
+	for (const auto& [stateName, state]: clayManager.getStates())
+	{
+		for (const auto& subState: state->getSubStates())
+		{
+			if (subState->getOwner()->getProcessedData().type == "decentralized")
+			{
+
+				if (!colonizableStates.contains(stateName))
+					colonizableStates.emplace(stateName, std::vector<std::shared_ptr<SubState>>{});
+				colonizableStates.at(stateName).emplace_back(subState);
+			}
+
+			if (const auto& regionName = clayManager.getParentRegionName(subState->getHomeStateName()); regionName)
+			{
+				if (!manifestDestinyRegions.contains(*regionName))
+					manifestDestinyRegions.emplace(*regionName, std::vector<std::shared_ptr<SubState>>{});
+				manifestDestinyRegions.at(*regionName).emplace_back(subState);
+			}
+		}
+	}
+
+	// Now, for all countries, that are colonial, if they have a state (presence) in one of these states, claim all the uncolonized substates in the region.
+	// Also, for capital location, claim all substates in capital region.
+
+	for (const auto& country: countries | std::views::values)
+	{
+		if (country->getProcessedData().type == "colonial") // this affects both indeps and deps, no worries.
+		{
+			std::set<std::string> statesToClaim;
+			for (const auto& subState: country->getSubStates())
+				statesToClaim.emplace(subState->getHomeStateName());
+
+			const auto& capitalRegion = clayManager.getParentRegionName(country->getProcessedData().capitalStateName);
+
+			// now for all subStates in that state, that contain uncolonized clay (in the registry above), file a claim.
+
+			for (const auto& stateName: statesToClaim)
+			{
+				if (colonizableStates.contains(stateName))
+				{
+					for (const auto& subState: colonizableStates.at(stateName))
+					{
+						subState->addClaim(country->getTag());
+						++colonialCounter;
+					}
+				}
+
+				if (const auto& regionName = clayManager.getParentRegionName(stateName); regionName)
+				{
+					if (capitalRegion && *regionName == *capitalRegion)
+					{
+						for (const auto& subState: manifestDestinyRegions.at(*regionName))
+						{
+							subState->addClaim(country->getTag());
+							++destinyCounter;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	Log(LogLevel::Info) << "<> Distributed " << colonialCounter << " colonial claims and " << destinyCounter << " manifest destiny claims.";
+}

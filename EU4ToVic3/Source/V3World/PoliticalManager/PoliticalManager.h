@@ -120,6 +120,7 @@ class PoliticalManager
 	void attemptColonialTagReplacement(const mappers::ColonialRegionMapper& colonialRegionMapper, const ClayManager& clayManager);
 	void incorporateStates(const mappers::CultureMapper& cultureMapper, const ClayManager& clayManager);
 	void designateTreatyPorts(const ClayManager& clayManager);
+	void distributeColonialClaims(const ClayManager& clayManager);
 
 	// VN specifics
 	void importVNColonialDiplomacy(const ClayManager& clayManager);
