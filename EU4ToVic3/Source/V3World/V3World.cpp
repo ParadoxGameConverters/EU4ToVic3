@@ -185,6 +185,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	politicalManager.incorporateStates(cultureMapper, clayManager);
 	politicalManager.designateTreatyPorts(clayManager);
+	politicalManager.distributeColonialClaims(clayManager);
 
 	// Place starting buildings for all centralized countries
 	Log(LogLevel::Progress) << "71 %";
