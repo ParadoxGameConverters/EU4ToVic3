@@ -13,6 +13,7 @@
 #include "NameListLoader/NameListLoader.h"
 #include "NameListMapper/NameListMapper.h"
 #include "ParserHelpers.h"
+#include "TraitDefinitionLoader/TraitDefinitionLoader.h"
 #include <numeric>
 #include <ranges>
 
@@ -192,7 +193,7 @@ void mappers::CultureMapper::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-[[nodiscard]] std::optional<std::string> mappers::CultureMapper::cultureMatch(const V3::ClayManager& clayManager,
+std::optional<std::string> mappers::CultureMapper::cultureMatch(const V3::ClayManager& clayManager,
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader,
 	 const std::string& eu4culture,
@@ -321,6 +322,13 @@ void mappers::CultureMapper::loadCultureDefinitions(const commonItems::ModFilesy
 	CultureDefinitionLoader cultureDefinitionLoader;
 	cultureDefinitionLoader.loadDefinitions(modFS);
 	v3CultureDefinitions = cultureDefinitionLoader.getDefinitions();
+}
+
+void mappers::CultureMapper::loadTraitDefinitions(const commonItems::ModFilesystem& modFS)
+{
+	TraitDefinitionLoader traitDefinitionLoader;
+	traitDefinitionLoader.loadDefinitions(modFS);
+	v3TraitDefinitions = traitDefinitionLoader.getDefinitions();
 }
 
 void mappers::CultureMapper::generateCultureDefinitions(const std::string& nameListsPath,
@@ -562,4 +570,44 @@ mappers::CultureDef mappers::CultureMapper::generateCultureDefinition(const V3::
 	}
 
 	return newDef;
+}
+
+std::optional<bool> mappers::CultureMapper::doCulturesShareHeritageTrait(const std::string& cultureA, const std::string& cultureB) const
+{
+	if (!v3CultureDefinitions.contains(cultureA))
+		return std::nullopt;
+
+	if (!v3CultureDefinitions.contains(cultureB))
+		return std::nullopt;
+
+	for (const auto& traitA: v3CultureDefinitions.at(cultureA).traits)
+	{
+		if (!v3TraitDefinitions.contains(traitA) || !v3TraitDefinitions.at(traitA).isHeritageTrait)
+			continue;
+
+		if (v3CultureDefinitions.at(cultureB).traits.contains(traitA))
+			return true;
+	}
+
+	return false;
+}
+
+std::optional<bool> mappers::CultureMapper::doCulturesShareNonHeritageTrait(const std::string& cultureA, const std::string& cultureB) const
+{
+	if (!v3CultureDefinitions.contains(cultureA))
+		return std::nullopt;
+
+	if (!v3CultureDefinitions.contains(cultureB))
+		return std::nullopt;
+
+	for (const auto& traitA: v3CultureDefinitions.at(cultureA).traits)
+	{
+		if (!v3TraitDefinitions.contains(traitA) || v3TraitDefinitions.at(traitA).isHeritageTrait)
+			continue;
+
+		if (v3CultureDefinitions.at(cultureB).traits.contains(traitA))
+			return true;
+	}
+
+	return false;
 }

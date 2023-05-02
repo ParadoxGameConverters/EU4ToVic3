@@ -108,6 +108,13 @@ void outHistoryCountry(std::ostream& output, const V3::Country& country)
 	{
 		output << "\t\t" << element << "\n";
 	}
+	for (const auto& [institution, level]: country.getProcessedData().institutions)
+	{
+		output << "\t\tset_institution_investment_level = {\n";
+		output << "\t\t\tinstitution = " << institution << "\n";
+		output << "\t\t\tlevel = " << level << "\n";
+		output << "\t\t}\n";
+	}
 	output << "\t}\n";
 }
 

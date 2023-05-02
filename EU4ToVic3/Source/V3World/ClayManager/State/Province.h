@@ -17,6 +17,7 @@ class Province
 	[[nodiscard]] auto isCoastal() const { return coastal; }
 	[[nodiscard]] auto isPrime() const { return prime; }
 	[[nodiscard]] auto isImpassable() const { return impassable; }
+	[[nodiscard]] auto isPort() const { return port; }
 
 	void setSea() { sea = true; }
 	void setLake()
@@ -27,6 +28,7 @@ class Province
 	void setCoastal() { coastal = true; }
 	void setPrime() { prime = true; }
 	void setImpassable() { impassable = true; }
+	void setPort() { port = true; }
 	void setName(const std::string& theName) { name = theName; }
 	void setTerrain(const std::string& theTerrain) { terrain = theTerrain; };
 
@@ -40,6 +42,7 @@ class Province
 	bool coastal = false;
 	bool prime = false;
 	bool impassable = false;
+	bool port = false;
 };
 } // namespace V3
 
