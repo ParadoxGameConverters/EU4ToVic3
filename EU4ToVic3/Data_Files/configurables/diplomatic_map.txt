@@ -5,12 +5,12 @@
 # AGREEMENT TYPES:
 # DO NOT ALTER LEFT SIDE, ONLY RIGHT!
 # Single-sided agreements
-dominion = { private_enterprise self_governing_colony colony }
-protectorate = { }
+dominion = { private_enterprise self_governing_colony colony core_eyalet commercial_enterprise }
+protectorate = { trade_protectorate }
 defensive_pact = { guarantee }
 tributary = { tributary_state }
 personal_union = { personal_union }
-puppet = { client_march march crown_colony }
+puppet = { client_march march crown_colony appanage eyalet }
 vassal = { vassal client_vassal daimyo_vassal }
 trade_agreement = { steer_trade }
 customs_union = { transfer_trade_power }
@@ -19,6 +19,6 @@ double_defensive_pact = { alliance }
 
 # RELATIONSHIP BOOSTS:
 # You can alter both left and right side. Can also make left negative.
-10 = { private_enterprise self_governing_colony colony tributary_state client_march march crown_colony vassal client_vassal daimyo_vassal }
+10 = { private_enterprise self_governing_colony colony tributary_state client_march march crown_colony vassal client_vassal daimyo_vassal core_eyalet commercial_enterprise trade_protectorate appanage eyalet }
 25 = { royal_marriage guarantee personal_union steer_trade transfer_trade_power }
 50 = { alliance }
