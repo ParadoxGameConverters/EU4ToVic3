@@ -59,6 +59,16 @@ struct UnprocessedData
 
 struct ProcessedData
 {
+	enum class DISCRIMINATION_LEVEL
+	{
+		Ethnostate = 1,
+		National_Supremacy = 2,
+		Racial_Segregation = 3,
+		Cultural_Exclusion = 4,
+		Multicultural = 5,
+		Unknown = 6
+	};
+
 	std::string type;
 	std::string tier;
 	std::set<std::string> cultures;
@@ -69,7 +79,7 @@ struct ProcessedData
 	std::set<std::string> effects;
 	std::set<std::string> populationEffects;
 	std::set<std::string> laws;
-	std::set<std::string> institutions;
+	std::map<std::string, int> institutions;
 	double literacy = 0;
 	double civLevel = 0;
 	bool westernized = false;
@@ -107,6 +117,8 @@ struct ProcessedData
 	std::map<std::string, int> dipStrategies;
 	std::map<std::string, int> polStrategies;
 	std::map<std::string, std::string> targetSecretGoals;
+
+	DISCRIMINATION_LEVEL discriminationLevel = DISCRIMINATION_LEVEL::Unknown;
 };
 
 class Country: commonItems::parser
@@ -157,6 +169,7 @@ class Country: commonItems::parser
 	[[nodiscard]] double getTotalDev() const;
 	[[nodiscard]] int getPopCount() const;
 	[[nodiscard]] int getVanillaPopCount() const; // vanilla pop count of all the provinces this country holds
+	[[nodiscard]] int getIncorporatedPopCount() const;
 	[[nodiscard]] static int getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubStates);
 
 	void determineWesternizationWealthAndLiteracy(double topTech,
@@ -170,7 +183,7 @@ class Country: commonItems::parser
 	void setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore);
 	void addTech(const std::string& tech) { processedData.techs.emplace(tech); }
 	void addLaw(const auto& lawName) { processedData.laws.emplace(lawName); }
-	void addInstitution(const auto& institutionName) { processedData.institutions.emplace(institutionName); }
+	void addInstitution(const auto& institutionName, const int level = 1) { processedData.institutions.emplace(institutionName, level); }
 	[[nodiscard]] Relation& getRelation(const std::string& target);
 	[[nodiscard]] const auto& getRelations() const { return processedData.relations; }
 	void setRivals(const std::set<std::string>& theRivals) { processedData.rivals = theRivals; }
@@ -219,6 +232,9 @@ class Country: commonItems::parser
 
 	void setOverlord(const std::string& overlordTag) { processedData.overlordTag = overlordTag; }
 	void addGoal(const std::string& target, const std::string& goal) { processedData.targetSecretGoals.emplace(target, goal); }
+
+	void setDiscriminationLevel(const ProcessedData::DISCRIMINATION_LEVEL& discrimination) { processedData.discriminationLevel = discrimination; }
+	[[nodiscard]] bool isCultureDiscriminated(const std::string& culture, const mappers::CultureMapper& cultureMapper) const;
 
   private:
 	void registerKeys();

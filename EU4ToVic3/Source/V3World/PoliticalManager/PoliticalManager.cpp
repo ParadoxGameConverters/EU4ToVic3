@@ -1,5 +1,6 @@
 #include "PoliticalManager.h"
 #include "ClayManager/ClayManager.h"
+#include "ClayManager/State/Province.h"
 #include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "ColonialRegionMapper/ColonialRegionMapper.h"
@@ -438,7 +439,10 @@ void V3::PoliticalManager::setupInstitutions(const std::shared_ptr<Country>& cou
 	{
 		if (auto institution = lawMapper.getLaws().at(law).institution; !institution.empty())
 		{
-			country->addInstitution(institution);
+			if (institution == "institution_schools")
+				country->addInstitution(institution, 3); // boost to max to generate starting literacy.
+			else
+				country->addInstitution(institution, 1); // otherwise don't.
 		}
 	}
 }
@@ -446,7 +450,29 @@ void V3::PoliticalManager::setupInstitutions(const std::shared_ptr<Country>& cou
 void V3::PoliticalManager::grantLawFromGroup(const std::string& lawGroup, const std::shared_ptr<Country>& country) const
 {
 	if (const auto law = lawMapper.grantLawFromGroup(lawGroup, *country); law)
+	{
 		country->addLaw(*law);
+
+		// Knowing what's discrimination level in a country is relevant when incorporating or not incorporating states.
+		if (lawGroup == "lawgroup_citizenship")
+		{
+			ProcessedData::DISCRIMINATION_LEVEL discrimination;
+			if (*law == "law_ethnostate")
+				discrimination = ProcessedData::DISCRIMINATION_LEVEL::Ethnostate;
+			else if (*law == "law_national_supremacy")
+				discrimination = ProcessedData::DISCRIMINATION_LEVEL::National_Supremacy;
+			else if (*law == "law_racial_segregation")
+				discrimination = ProcessedData::DISCRIMINATION_LEVEL::Racial_Segregation;
+			else if (*law == "law_cultural_exclusion")
+				discrimination = ProcessedData::DISCRIMINATION_LEVEL::Cultural_Exclusion;
+			else if (*law == "law_multicultural")
+				discrimination = ProcessedData::DISCRIMINATION_LEVEL::Multicultural;
+			else
+				discrimination = ProcessedData::DISCRIMINATION_LEVEL::Unknown;
+
+			country->setDiscriminationLevel(discrimination);
+		}
+	}
 }
 
 void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>& eu4Agreements)
@@ -1053,4 +1079,173 @@ void V3::PoliticalManager::generateAISecretGoals(const ClayManager& clayManager)
 		}
 
 	Log(LogLevel::Info) << "<> Generated a total of " << counter << " secret goals.";
+}
+
+void V3::PoliticalManager::incorporateStates(const mappers::CultureMapper& cultureMapper, const ClayManager& clayManager)
+{
+	Log(LogLevel::Info) << "-> Incorporating States.";
+
+	auto incorporated = 0;
+	auto unIncorporated = 0;
+
+	for (const auto& country: countries | std::views::values)
+	{
+		const auto capitalState = country->getProcessedData().capitalStateName;
+		const auto capitalRegionName = clayManager.getParentRegionName(capitalState);
+
+		for (const auto& subState: country->getSubStates())
+		{
+			// If the state is in same region as capital, incorporate.
+
+			if (capitalRegionName)
+			{
+				const auto actualRegionName = clayManager.getParentRegionName(subState->getHomeStateName());
+				if (*actualRegionName == *capitalRegionName)
+				{
+					subState->setIncorporated(true);
+					++incorporated;
+					continue;
+				}
+			}
+
+			// Otherwise check if any of its homelands are not discriminated. If there's at least some accepted people (via homeland status), incorporate.
+
+			bool match = false;
+			for (const auto& culture: subState->getHomeState()->getHomelands())
+			{
+				if (!country->isCultureDiscriminated(culture, cultureMapper))
+				{
+					subState->setIncorporated(true);
+					match = true;
+					++incorporated;
+					break;
+				}
+			}
+			if (!match)
+			{
+				subState->setIncorporated(false);
+				++unIncorporated;
+			}
+		}
+	}
+
+	Log(LogLevel::Info) << "<> Incorporated " << incorporated << " states, " << unIncorporated << " are unincorporated.";
+}
+
+void V3::PoliticalManager::designateTreatyPorts(const ClayManager& clayManager)
+{
+	Log(LogLevel::Info) << "-> Designating Treaty Ports.";
+
+	auto count = 0;
+
+	for (const auto& country: countries | std::views::values)
+	{
+		const auto capitalState = country->getProcessedData().capitalStateName;
+		const auto capitalRegionName = clayManager.getParentRegionName(capitalState);
+
+		for (const auto& subState: country->getSubStates())
+		{
+			// If the state is in same region as capital, skip!
+
+			if (capitalRegionName)
+			{
+				const auto actualRegionName = clayManager.getParentRegionName(subState->getHomeStateName());
+				if (*actualRegionName == *capitalRegionName)
+				{
+					continue;
+				}
+			}
+
+			// Otherwise check if it's a single-province state and a named port.
+
+			if (subState->getProvinces().size() != 1)
+				continue;
+
+			const auto& theProvince = subState->getProvinces().begin()->second;
+
+			if (theProvince->isPort())
+			{
+				subState->setTreatyPort();
+				++count;
+			}
+		}
+	}
+
+	Log(LogLevel::Info) << "<> Designated " << count << " treaty ports.";
+}
+
+void V3::PoliticalManager::distributeColonialClaims(const ClayManager& clayManager)
+{
+	Log(LogLevel::Info) << "-> Distributing Colonial Claims.";
+	auto colonialCounter = 0;
+	auto destinyCounter = 0;
+
+	// sort all states with decentralized nations in them into a registry.
+	std::map<std::string, std::vector<std::shared_ptr<SubState>>> colonizableStates;
+	// And also all substates in a colonial region regardless of ownership.
+	std::map<std::string, std::vector<std::shared_ptr<SubState>>> manifestDestinyRegions;
+
+	for (const auto& [stateName, state]: clayManager.getStates())
+	{
+		for (const auto& subState: state->getSubStates())
+		{
+			if (subState->getOwner()->getProcessedData().type == "decentralized")
+			{
+
+				if (!colonizableStates.contains(stateName))
+					colonizableStates.emplace(stateName, std::vector<std::shared_ptr<SubState>>{});
+				colonizableStates.at(stateName).emplace_back(subState);
+			}
+
+			if (const auto& regionName = clayManager.getParentRegionName(subState->getHomeStateName()); regionName)
+			{
+				if (!manifestDestinyRegions.contains(*regionName))
+					manifestDestinyRegions.emplace(*regionName, std::vector<std::shared_ptr<SubState>>{});
+				manifestDestinyRegions.at(*regionName).emplace_back(subState);
+			}
+		}
+	}
+
+	// Now, for all countries, that are colonial, if they have a state (presence) in one of these states, claim all the uncolonized substates in the region.
+	// Also, for capital location, claim all substates in capital region.
+
+	for (const auto& country: countries | std::views::values)
+	{
+		if (country->getProcessedData().type == "colonial") // this affects both indeps and deps, no worries.
+		{
+			std::set<std::string> statesToClaim;
+			for (const auto& subState: country->getSubStates())
+				statesToClaim.emplace(subState->getHomeStateName());
+
+			const auto& capitalRegion = clayManager.getParentRegionName(country->getProcessedData().capitalStateName);
+
+			// now for all subStates in that state, that contain uncolonized clay (in the registry above), file a claim.
+
+			for (const auto& stateName: statesToClaim)
+			{
+				if (colonizableStates.contains(stateName))
+				{
+					for (const auto& subState: colonizableStates.at(stateName))
+					{
+						subState->addClaim(country->getTag());
+						++colonialCounter;
+					}
+				}
+
+				if (const auto& regionName = clayManager.getParentRegionName(stateName); regionName)
+				{
+					if (capitalRegion && *regionName == *capitalRegion)
+					{
+						for (const auto& subState: manifestDestinyRegions.at(*regionName))
+						{
+							subState->addClaim(country->getTag());
+							++destinyCounter;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	Log(LogLevel::Info) << "<> Distributed " << colonialCounter << " colonial claims and " << destinyCounter << " manifest destiny claims.";
 }

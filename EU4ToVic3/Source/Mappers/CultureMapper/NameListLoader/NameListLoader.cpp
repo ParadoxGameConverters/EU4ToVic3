@@ -21,6 +21,8 @@ void mappers::NameListLoader::loadNameLists(std::istream& theStream)
 
 void mappers::NameListLoader::registerKeys()
 {
+	registerKeyword("country", commonItems::ignoreItem);
+	registerKeyword("province", commonItems::ignoreItem);
 	registerRegex(commonItems::catchallRegex, [this](const std::string& nameListName, std::istream& theStream) {
 		nameLists.emplace(nameListName, NameListEntry(theStream));
 	});

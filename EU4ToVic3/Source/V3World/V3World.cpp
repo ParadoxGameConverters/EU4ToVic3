@@ -63,6 +63,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	localizationLoader.scrapeLocalizations(dwFS);
 	vanillaLocalizationLoader.scrapeLocalizations(blankModFS);
 	cultureMapper.loadCultureDefinitions(allFS);
+	cultureMapper.loadTraitDefinitions(allFS);
 	economyManager.loadMappersAndConfigs(allFS);
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
@@ -181,6 +182,10 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.generateAISecretGoals(clayManager);
 	Log(LogLevel::Progress) << "70 %";
 	popManager.alterSlaveCultures(politicalManager, clayManager, cultureMapper.getV3CultureDefinitions());
+
+	politicalManager.incorporateStates(cultureMapper, clayManager);
+	politicalManager.designateTreatyPorts(clayManager);
+	politicalManager.distributeColonialClaims(clayManager);
 
 	// Place starting buildings for all centralized countries
 	Log(LogLevel::Progress) << "71 %";

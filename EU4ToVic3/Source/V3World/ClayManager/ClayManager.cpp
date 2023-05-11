@@ -893,3 +893,16 @@ std::shared_ptr<V3::SuperRegion> V3::ClayManager::getParentSuperRegion(const std
 	}
 	return nullptr;
 }
+
+std::optional<std::string> V3::ClayManager::getParentRegionName(const std::string& stateName) const
+{
+	for (const auto& superRegion: superRegions | std::views::values)
+	{
+		for (const auto& [currentRegionName, region]: superRegion->getRegions())
+		{
+			if (region->getStates().contains(stateName))
+				return currentRegionName;
+		}
+	}
+	return std::nullopt;
+}

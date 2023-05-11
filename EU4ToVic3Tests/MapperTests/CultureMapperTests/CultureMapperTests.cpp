@@ -317,3 +317,25 @@ TEST(Mappers_CultureMapperTests, cultureDefsLinksDynamicsToRelatedCultures)
 	ASSERT_TRUE(related.contains("vculture17"));
 	EXPECT_THAT(related.at("vculture17"), testing::UnorderedElementsAre("dynamic-culture8-culture-num1"));
 }
+
+TEST(Mappers_CultureMapperTests, cultureMapperCanCompareCulturalTraits)
+{
+	mappers::CultureMapper culMapper;
+	culMapper.loadCultureDefinitions(modFS);
+	culMapper.loadTraitDefinitions(modFS);
+
+	ASSERT_TRUE(culMapper.doCulturesShareHeritageTrait("vculture1", "vculture2"));
+	EXPECT_FALSE(*culMapper.doCulturesShareHeritageTrait("vculture1", "vculture2"));
+	ASSERT_TRUE(culMapper.doCulturesShareNonHeritageTrait("vculture1", "vculture2"));
+	EXPECT_TRUE(*culMapper.doCulturesShareNonHeritageTrait("vculture1", "vculture2"));
+}
+
+TEST(Mappers_CultureMapperTests, cultureMapperDoesNotCompareBrokenCulturalTraits)
+{
+	mappers::CultureMapper culMapper;
+	culMapper.loadCultureDefinitions(modFS);
+	culMapper.loadTraitDefinitions(modFS);
+
+	EXPECT_EQ(std::nullopt, culMapper.doCulturesShareHeritageTrait("vculture1", "nonsense"));
+	EXPECT_EQ(std::nullopt, culMapper.doCulturesShareNonHeritageTrait("vculture1", "nonsense"));
+}

@@ -54,8 +54,6 @@ class SubState
 	void setSourceProvinceData(const std::vector<std::pair<SourceProvinceData, double>>& theData) { weightedSourceProvinceData = theData; }
 
 	void setMarketCapital() { marketCapital = true; }
-	void setUnincorporated() { subStateTypes.emplace("unincorporated"); }
-	void setTreatyPort() { subStateTypes.emplace("treaty_port"); }
 	void setVanillaSubState() { vanillaSubState = true; }
 	void setLandshare(const double theLandshare) { landshare = theLandshare; }
 	void setResource(const std::string& theResource, const int theAmount) { resources[theResource] = theAmount; }
@@ -144,8 +142,8 @@ class SubState
 	[[nodiscard]] double getTotalDev() const;
 
 	[[nodiscard]] auto isVanillaSubState() const { return vanillaSubState; }
-	[[nodiscard]] auto isIncorporated() const { return !subStateTypes.contains("unincorporated"); }
-	[[nodiscard]] auto isTreatyPort() const { return !subStateTypes.contains("treaty_port"); }
+	[[nodiscard]] auto isIncorporated() const { return subStateTypes.contains("incorporated"); }
+	[[nodiscard]] auto isTreatyPort() const { return subStateTypes.contains("treaty_port"); }
 	[[nodiscard]] auto isMarketCapital() const { return marketCapital; }
 	[[nodiscard]] bool isCoastal() const;
 
@@ -156,6 +154,9 @@ class SubState
 	void setStageForMinorities(const bool stage) { stageForMinorities = stage; }
 
 	[[nodiscard]] static bool greaterBudget(const std::shared_ptr<SubState>& lhs, const std::shared_ptr<SubState>& rhs);
+
+	void setIncorporated(bool status);
+	void setTreatyPort();
 
   private:
 	void calculateTerrainFrequency();
