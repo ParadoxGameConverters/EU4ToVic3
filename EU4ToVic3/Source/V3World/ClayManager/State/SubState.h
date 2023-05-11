@@ -171,6 +171,7 @@ class SubState
 	[[nodiscard]] double calcBuildingTraitWeight(const Building& building, const std::map<std::string, StateModifier>& traitMap, double traitStrength) const;
 	[[nodiscard]] double calcBuildingInvestmentWeight(const Building& building) const;
 	[[nodiscard]] double calcBuildingIndustrialWeight(const Building& building, const BuildingGroups& buildingGroups) const;
+	[[nodiscard]] double calcBuildingIncorporationWeight(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] bool isBuildingValid(const Building& building,
 		 const BuildingGroups& buildingGroups,
 		 const std::map<std::string, Law>& lawsMap,

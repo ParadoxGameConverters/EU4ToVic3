@@ -162,11 +162,12 @@ void V3::EconomyManager::assignSubStateCPBudgets(const Configuration::ECONOMY ec
 
 			const double base = getBaseSubStateWeight(subState, economyType);
 
-			// Adjust for terrain & state traits
+			// Adjust for terrain, incorporation status & state traits
 			const double terrainMultiplier = calculateTerrainMultiplier(subState);
 			const double stateTraitMultiplier = calculateStateTraitMultiplier(subState);
+			const double incorporatedMultiplier = subState->isIncorporated() ? 0.0 : econDefines.getIncorporatedModifier();
 
-			subState->setIndustryWeight(std::max(0.0, base * (1 + terrainMultiplier + stateTraitMultiplier)));
+			subState->setIndustryWeight(std::max(0.0, base * (1 + terrainMultiplier + stateTraitMultiplier + incorporatedMultiplier)));
 			totalIndustryWeight += subState->getIndustryWeight();
 		}
 
