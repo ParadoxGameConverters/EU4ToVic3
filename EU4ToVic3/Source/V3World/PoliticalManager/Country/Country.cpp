@@ -593,6 +593,13 @@ std::string V3::Country::getAdjective(const std::string& language) const
 	return tag + "_ADJ";
 }
 
+double V3::Country::getTotalDev() const
+{
+	return std::accumulate(subStates.begin(), subStates.end(), 0.0, [](double sum, const auto& substate) {
+		return sum + substate->getTotalDev();
+	});
+}
+
 void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 	 double topInstitutions,
 	 const mappers::CultureMapper& cultureMapper,
@@ -945,6 +952,13 @@ int V3::Country::getPopCount(const std::vector<std::shared_ptr<SubState>>& theSu
 {
 	return std::accumulate(theSubStates.begin(), theSubStates.end(), 0, [](int sum, const auto& substate) {
 		return sum + substate->getSubStatePops().getPopCount();
+	});
+}
+
+int V3::Country::getVanillaPopCount() const
+{
+	return std::accumulate(subStates.begin(), subStates.end(), 0, [](int sum, const auto& substate) {
+		return sum + substate->getVanillaPopCount();
 	});
 }
 

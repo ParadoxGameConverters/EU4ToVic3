@@ -277,9 +277,9 @@ double V3::SubState::calcBuildingInvestmentWeight(const Building& building) cons
 double V3::SubState::calcBuildingIndustrialWeight(const Building& building, const BuildingGroups& buildingGroups) const
 {
 	// Must be at least a little bit industrial for this
-	// If your industrial then no effect
+	// If you're industrial then check for incorporation
 	if (owner->getIndustryFactor() > 0 && owner->getProcessedData().civLevel >= 40)
-		return 1;
+		return calcBuildingIncorporationWeight(building, buildingGroups);
 
 	// Your non-industrial so urban buildings are not built
 	auto buildingGroup = buildingGroups.getBuildingGroupMap().at(building.getBuildingGroup());
@@ -299,7 +299,39 @@ double V3::SubState::calcBuildingIndustrialWeight(const Building& building, cons
 		}
 	}
 
-	// If building isn't urban no effect
+	// If building isn't urban, run incorporation check
+	return calcBuildingIncorporationWeight(building, buildingGroups);
+}
+double V3::SubState::calcBuildingIncorporationWeight(const Building& building, const BuildingGroups& buildingGroups) const
+{
+	// Only adjust unincorporated states
+	if (isIncorporated())
+		return 1;
+
+	// Build less urban buildings for unincorps
+	// Build far fewer military buildings in unincorps
+	auto buildingGroup = buildingGroups.getBuildingGroupMap().at(building.getBuildingGroup());
+	if (buildingGroup->getCategory())
+	{
+		if (*buildingGroup->getCategory() == "urban")
+			return 0.8;
+	}
+	if (buildingGroup->getName() == "bg_military")
+		return 0.4;
+
+	while (buildingGroup->getParentName())
+	{
+		buildingGroup = buildingGroups.getBuildingGroupMap().at(*buildingGroup->getParentName());
+		if (buildingGroup->getCategory())
+		{
+			if (*buildingGroup->getCategory() == "urban")
+				return 0.8;
+		}
+		if (buildingGroup->getName() == "bg_military")
+			return 0.4;
+	}
+
+	// If building isn't urban or military, no effect
 	return 1;
 }
 bool V3::SubState::isBuildingValid(const Building& building,
@@ -330,6 +362,11 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	}
 	// Important, can't build a building if we have no CP to build it. This is what ends the loop.
 	if (building.getConstructionCost() > CPBudget)
+	{
+		return false;
+	}
+	// Unincorporated states shouldn't build any heavy industry
+	if (!isIncorporated() && building.getBuildingGroup() == "bg_heavy_industry")
 	{
 		return false;
 	}
@@ -371,6 +408,13 @@ int V3::SubState::getBuildingCapacity(const Building& building,
 	}
 
 	return INT_MAX;
+}
+
+double V3::SubState::getTotalDev() const
+{
+	return std::accumulate(weightedSourceProvinceData.begin(), weightedSourceProvinceData.end(), 0.0, [](double sum, const auto& sourceProv) {
+		return sum + sourceProv.first.weight;
+	});
 }
 
 bool V3::SubState::hasCapacity(const Building& building,

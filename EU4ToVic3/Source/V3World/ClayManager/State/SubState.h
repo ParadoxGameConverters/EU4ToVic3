@@ -61,6 +61,7 @@ class SubState
 	void setSubStatePops(const SubStatePops& thePops) { subStatePops = thePops; }
 	void addPop(const Pop& pop) { subStatePops.addPop(pop); }
 	void addPops(const std::vector<Pop>& pops) { subStatePops.addPops(pops); }
+	void setVanillaPopCount(const int popCount) { vanillaPopCount = popCount; }
 
 	void setIndustryWeight(const double theIndustryWeight) { industryWeight = theIndustryWeight; }
 	void setCPBudget(const int theCPBudget) { CPBudget = theCPBudget; }
@@ -114,6 +115,7 @@ class SubState
 	[[nodiscard]] const auto& getTerrainFrequencies() { return terrainFrequency; }
 	[[nodiscard]] const auto& getDemographics() const { return demographics; }
 	[[nodiscard]] const auto& getSubStatePops() const { return subStatePops; }
+	[[nodiscard]] const auto& getVanillaPopCount() const { return vanillaPopCount; }
 	[[nodiscard]] std::optional<std::string> getPrimaryCulture() const;
 
 	[[nodiscard]] const auto& getIndustryWeight() const { return industryWeight; }
@@ -137,6 +139,7 @@ class SubState
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::map<std::string, Tech>& techMap,
 		 const std::map<std::string, StateModifier>& traitMap) const;
+	[[nodiscard]] double getTotalDev() const;
 
 	[[nodiscard]] auto isVanillaSubState() const { return vanillaSubState; }
 	[[nodiscard]] auto isIncorporated() const { return subStateTypes.contains("incorporated"); }
@@ -168,6 +171,7 @@ class SubState
 	[[nodiscard]] double calcBuildingTraitWeight(const Building& building, const std::map<std::string, StateModifier>& traitMap, double traitStrength) const;
 	[[nodiscard]] double calcBuildingInvestmentWeight(const Building& building) const;
 	[[nodiscard]] double calcBuildingIndustrialWeight(const Building& building, const BuildingGroups& buildingGroups) const;
+	[[nodiscard]] double calcBuildingIncorporationWeight(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] bool isBuildingValid(const Building& building,
 		 const BuildingGroups& buildingGroups,
 		 const std::map<std::string, Law>& lawsMap,
@@ -204,6 +208,7 @@ class SubState
 	std::map<std::string, double> terrainFrequency; // Normalized vector (math-wise) of terrain in substate as %
 	std::vector<Demographic> demographics;
 	SubStatePops subStatePops;
+	int vanillaPopCount = 0; // What pop of substate would be without adjustments
 
 	double industryWeight = 0;								  // Share of owner's industry a substate should get, not normalized
 	int CPBudget = 0;											  // Construction Points for a substate to spend on it's development

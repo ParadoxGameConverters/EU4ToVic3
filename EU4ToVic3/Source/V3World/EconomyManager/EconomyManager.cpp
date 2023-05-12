@@ -35,6 +35,8 @@ void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::
 			continue;
 		if (!country->getSourceCountry())
 			continue;
+		if (country->getPopCount() <= 0)
+			continue;
 
 		centralizedCountries.push_back(country);
 	}
@@ -160,11 +162,12 @@ void V3::EconomyManager::assignSubStateCPBudgets(const Configuration::ECONOMY ec
 
 			const double base = getBaseSubStateWeight(subState, economyType);
 
-			// Adjust for terrain & state traits
+			// Adjust for terrain, incorporation status & state traits
 			const double terrainMultiplier = calculateTerrainMultiplier(subState);
 			const double stateTraitMultiplier = calculateStateTraitMultiplier(subState);
+			const double incorporatedMultiplier = subState->isIncorporated() ? 0.0 : econDefines.getIncorporatedModifier();
 
-			subState->setIndustryWeight(std::max(0.0, base * (1 + terrainMultiplier + stateTraitMultiplier)));
+			subState->setIndustryWeight(std::max(0.0, base * (1 + terrainMultiplier + stateTraitMultiplier + incorporatedMultiplier)));
 			totalIndustryWeight += subState->getIndustryWeight();
 		}
 
@@ -270,8 +273,8 @@ std::pair<double, double> V3::EconomyManager::countryBudgetCalcs(const Configura
 
 	if (Configuration::ECONOMY::CivLevel == economyType)
 		return civLevelCountryBudgets();
-	if (Configuration::ECONOMY::DevPerPop == economyType)
-		return devCountryBudgets();
+	if (Configuration::ECONOMY::DevPopVanilla == economyType || Configuration::ECONOMY::DevPopActual == economyType)
+		return devCountryBudgets(economyType);
 
 	return {totalWeight, 0.0};
 }
@@ -298,17 +301,35 @@ std::pair<double, double> V3::EconomyManager::civLevelCountryBudgets() const
 	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << (globalIndustryFactor + 1) * 100
 							  << "% industrial compared to baseline. Compensating.";
 
-	return std::pair(accumulatedWeight, globalIndustryFactor);
+	return {accumulatedWeight, globalIndustryFactor};
 }
 
-std::pair<double, double> V3::EconomyManager::devCountryBudgets() const
+std::pair<double, double> V3::EconomyManager::devCountryBudgets(const Configuration::ECONOMY perCapitaType) const
 {
-	// TODO(Gawquon)
-	// config option 3. Pop & development
-	// The more pop you have per dev, the less powerful your development
-	// This is loosely assuming Dev = Pop + Economy so Economy = Dev - Pop
+	double accumulatedWeight = 0;
 
-	return std::pair(0.0, 0.0);
+	for (const auto& country: centralizedCountries)
+	{
+		if (perCapitaType == Configuration::ECONOMY::DevPopVanilla)
+		{
+			if (country->getVanillaPopCount() <= 0)
+				continue;
+			country->setPerCapitaDev(country->getTotalDev() / country->getVanillaPopCount());
+		}
+		if (perCapitaType == Configuration::ECONOMY::DevPopActual)
+		{
+			if (country->getPopCount() <= 0)
+				continue;
+			country->setPerCapitaDev(country->getTotalDev() / country->getPopCount());
+		}
+		const double techFactor = std::min(0.5, country->getProcessedData().productionTechPercentile) + 0.2;
+		const double densityFactor = getDensityFactor(country->getProcessedData().perCapitaDev);
+
+		country->setIndustryWeight(country->getTotalDev() * densityFactor * techFactor);
+		accumulatedWeight += country->getIndustryWeight();
+	}
+
+	return {accumulatedWeight, 0};
 }
 
 double V3::EconomyManager::calculateGeoMeanCentralizedPops() const
@@ -424,6 +445,18 @@ double V3::EconomyManager::calculateStateTraitMultiplier(const std::shared_ptr<S
 	return stateTraitMultiplier;
 }
 
+double V3::EconomyManager::getDensityFactor(const double perCapitaDev) const
+{
+	// Plot a line between min and max per capita dev. Return a factor between minFactor and 1 based on % position on that line.
+	constexpr double minFactor = 0.3;
+	const double p = (perCapitaDev - econDefines.getMinDevPerPop() / econDefines.getMaxDevPerPop() - econDefines.getMinDevPerPop());
+	if (p < 0)
+		return minFactor;
+	if (p > 1)
+		return 1;
+	return p + (1 - p) * minFactor;
+}
+
 void V3::EconomyManager::distributeBudget(const double globalCP, const double totalIndustryScore) const
 {
 	for (const auto& country: centralizedCountries)
@@ -460,12 +493,15 @@ double V3::EconomyManager::getBaseSubStateWeight(const std::shared_ptr<SubState>
 		// Score is based on population
 		return subState->getSubStatePops().getPopCount();
 	}
-	if (economyType == Configuration::ECONOMY::DevPerPop)
+	if (economyType == Configuration::ECONOMY::DevPopVanilla)
 	{
-		// TODO(Gawquon): Dev based for now not static, might use an econ define
-		// Score is based on Dev, penalized by population
-		// base = subState->getSourceProvinceData() ;
-		return 0;
+		// Score is based on Dev, penalized by unadjusted population
+		return subState->getTotalDev() * getDensityFactor(subState->getTotalDev() / subState->getVanillaPopCount());
+	}
+	if (economyType == Configuration::ECONOMY::DevPopActual)
+	{
+		// Score is based on Dev, penalized by actual population present
+		return subState->getTotalDev() * getDensityFactor(subState->getTotalDev() / subState->getSubStatePops().getPopCount());
 	}
 	return 0;
 }

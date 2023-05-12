@@ -396,8 +396,10 @@ void V3::PopManager::generatePopsForNormalSubStates(const std::shared_ptr<State>
 
 		const auto generatedPopCount = generatePopCountForNormalSubState(subState, unassignedPopCount);
 		const auto generatedSlavePopCount = generatePopCountForNormalSubState(subState, unassignedSlavePopCount);
+		const auto vanillaPopCount = generatePopCountForNormalSubState(subState, vanillaStatePops.at(state->getName()).getPopCount());
 		subState->generatePops(generatedPopCount, generatedSlavePopCount);
 		subState->setStageForMinorities(true);
+		subState->setVanillaPopCount(vanillaPopCount);
 	}
 
 	if (!vanillaMinorityStatePops.contains(state->getName()) || vanillaMinorityStatePops.at(stateName).getPopCount() == 0)

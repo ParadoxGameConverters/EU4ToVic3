@@ -386,6 +386,7 @@ void V3::PoliticalManager::setupTech()
 		const auto militaryScore = techValues.getMilitaryTechPercentile(tag);
 		const auto societyScore = techValues.getSocietyTechPercentile(tag);
 		country->setTechs(techSetupMapper, productionScore, militaryScore, societyScore);
+		country->setProductionTechPercentile(productionScore);
 		++counter;
 	}
 

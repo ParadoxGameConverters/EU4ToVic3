@@ -736,6 +736,7 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 	std::vector<Demographic> demographics;
 	SubStatePops subStatePops;
 	std::vector<Pop> pops;
+	int vanillaPopCount = 0;
 	std::vector<std::string> vanillaBuildingElements;
 	std::set<std::string> claims;
 
@@ -754,6 +755,7 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 		spData.insert(spData.end(), subState->getSourceProvinceData().begin(), subState->getSourceProvinceData().end());
 		demographics.insert(demographics.end(), subState->getDemographics().begin(), subState->getDemographics().end());
 		pops.insert(pops.end(), subState->getSubStatePops().getPops().begin(), subState->getSubStatePops().getPops().end());
+		vanillaPopCount += subState->getVanillaPopCount();
 		vanillaBuildingElements.insert(vanillaBuildingElements.end(),
 			 subState->getVanillaBuildingElements().begin(),
 			 subState->getVanillaBuildingElements().end());
@@ -773,6 +775,7 @@ std::shared_ptr<V3::SubState> V3::ClayManager::squashSubStates(const std::vector
 	subStatePops.setTag(newSubState->getOwner()->getTag());
 	subStatePops.setPops(pops);
 	newSubState->setSubStatePops(subStatePops);
+	newSubState->setVanillaPopCount(vanillaPopCount);
 	newSubState->setVanillaBuildingElements(vanillaBuildingElements);
 	newSubState->setClaims(claims);
 
