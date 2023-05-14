@@ -20,6 +20,8 @@ class State: commonItems::parser
 	void distributeResources();
 	void addHomeland(const auto& homeland) { homelands.emplace(homeland); }
 
+	void distributeNonTreatyPortPops(int incomingPops);
+
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] bool containsProvince(const std::string& provinceName) const { return provinces.contains(provinceName); }
 	[[nodiscard]] std::shared_ptr<Province> getProvince(const std::string& provinceName) const;

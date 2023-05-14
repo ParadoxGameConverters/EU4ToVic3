@@ -698,3 +698,15 @@ void V3::SubState::setTreatyPort()
 	subStateTypes.emplace("unincorporated");
 	subStateTypes.emplace("treaty_port");
 }
+
+void V3::SubState::vacateTreatyPortPops()
+{
+	// Goal of this function is to shift 80% of pops from this substate, which is a treaty port, to other substates in this homestate.
+	// Otherwise the pops will starve.
+
+	const auto totalPops = getSubStatePops().getPopCount();
+	const auto popsToVacate = static_cast<int>(std::round(totalPops * 0.8));
+
+	subStatePops.multiplyPops(0.2);
+	homeState->distributeNonTreatyPortPops(popsToVacate);
+}

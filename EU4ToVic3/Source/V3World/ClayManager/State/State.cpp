@@ -257,3 +257,24 @@ double V3::State::getInvestmentFactor() const
 	toReturn /= static_cast<double>(substates.size());
 	return toReturn;
 }
+
+void V3::State::distributeNonTreatyPortPops(int incomingPops)
+{
+	// We're taking pops from a treaty port in this state and distributing the number to other substates.
+
+	for (const auto& subState: substates)
+	{
+		if (subState->isTreatyPort())
+			continue;
+
+		const auto& landShare = subState->getLandshare();
+		const auto& originalSubStatePopCount = subState->getSubStatePops().getPopCount();
+		const double newPopCount = originalSubStatePopCount + static_cast<int>(std::round(landShare * incomingPops));
+		const double modifyFactor = newPopCount / originalSubStatePopCount;
+
+		auto newPops = subState->getSubStatePops();
+		newPops.multiplyPops(modifyFactor);
+
+		subState->setSubStatePops(newPops);
+	}
+}

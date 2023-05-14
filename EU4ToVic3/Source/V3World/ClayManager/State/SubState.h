@@ -157,6 +157,7 @@ class SubState
 
 	void setIncorporated(bool status);
 	void setTreatyPort();
+	void vacateTreatyPortPops();
 
   private:
 	void calculateTerrainFrequency();
