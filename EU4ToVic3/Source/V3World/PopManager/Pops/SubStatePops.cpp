@@ -1,8 +1,8 @@
 #include "SubStatePops.h"
 #include <algorithm>
+#include <cmath>
 #include <map>
 #include <numeric>
-#include <cmath>
 
 int V3::SubStatePops::getPopCount() const
 {
