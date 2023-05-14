@@ -425,13 +425,13 @@ void EU4::CountryManager::splitTradeCompaniesByTradeRegions(const ProvinceManage
 		tagRegionProvinces.at(province->getOwnerTag()).at(tc->name).emplace(provinceID);
 	}
 
-	// Now.. Now now now. Single province, or 3, in a region should remain as is - as a trading port.
+	// Now.. Now now now. Single province, or 4, in a region should remain as is - as a trading port.
 	// More than one should get cut. So let's cut.
 	for (const auto& [tag, regionProvinces]: tagRegionProvinces)
 	{
 		for (const auto& [region, provinceIDs]: regionProvinces)
 		{
-			if (provinceIDs.size() <= 3)
+			if (provinceIDs.size() <= 4)
 				continue;
 
 			const auto& tc = tcLoader.getTradeCompany(region);
