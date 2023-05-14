@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <map>
 #include <numeric>
+#include <cmath>
 
 int V3::SubStatePops::getPopCount() const
 {
