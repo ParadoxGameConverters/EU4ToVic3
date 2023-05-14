@@ -1134,7 +1134,7 @@ void V3::PoliticalManager::incorporateStates(const mappers::CultureMapper& cultu
 
 void V3::PoliticalManager::designateTreatyPorts(const ClayManager& clayManager)
 {
-	Log(LogLevel::Info) << "-> Designating Treaty Ports.";
+	Log(LogLevel::Info) << "-> Designating Treaty Ports and Vacating Pops.";
 
 	auto count = 0;
 
@@ -1166,6 +1166,7 @@ void V3::PoliticalManager::designateTreatyPorts(const ClayManager& clayManager)
 			if (theProvince->isPort())
 			{
 				subState->setTreatyPort();
+				subState->vacateTreatyPortPops();
 				++count;
 			}
 		}
