@@ -560,8 +560,8 @@ void V3::PopManager::liberateSlaves(const PoliticalManager& politicalManager) co
 
 	for (const auto& country: politicalManager.getCountries() | std::views::values)
 	{
-                if (!country->hasLaw("law_slavery_banned"))
-                        continue;
+		if (!country->hasLaw("law_slavery_banned"))
+			continue;
 		for (const auto& subState: country->getSubStates())
 		{
 			if (subState->getSubStatePops().getSlavePopCount() == 0)
