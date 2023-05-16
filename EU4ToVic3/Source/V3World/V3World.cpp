@@ -181,6 +181,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.generateAIStrategies(clayManager);
 	politicalManager.generateAISecretGoals(clayManager);
 	Log(LogLevel::Progress) << "70 %";
+	popManager.liberateSlaves(politicalManager);
 	popManager.alterSlaveCultures(politicalManager, clayManager, cultureMapper.getV3CultureDefinitions());
 
 	politicalManager.incorporateStates(cultureMapper, clayManager);
