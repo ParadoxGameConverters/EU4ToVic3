@@ -553,6 +553,42 @@ void V3::PopManager::loadSlaveCultureRules(const std::string& filePath)
 	slaveCultureMapper.loadMappingRules(filePath);
 }
 
+void V3::PopManager::liberateSlaves(const PoliticalManager& politicalManager) const
+{
+	Log(LogLevel::Info) << "-> Liberating slaves where it is banned.";
+	auto counter = 0;
+
+	for (const auto& country: politicalManager.getCountries() | std::views::values)
+	{
+                if (!country->hasLaw("law_slavery_banned"))
+                        continue;
+		for (const auto& subState: country->getSubStates())
+		{
+			if (subState->getSubStatePops().getSlavePopCount() == 0)
+				continue;
+			auto newSubStatePops = subState->getSubStatePops();
+			std::vector<Pop> newPops;
+			for (const auto& pop: subState->getSubStatePops().getPops())
+			{
+				if (pop.getType() == "slaves")
+				{
+					Pop newPop = pop;
+					newPop.setType("");
+					newPops.emplace_back(newPop);
+					++counter;
+				}
+				else
+				{
+					newPops.emplace_back(pop);
+				}
+			}
+			newSubStatePops.setPops(newPops);
+			subState->setSubStatePops(newSubStatePops);
+		}
+	}
+	Log(LogLevel::Info) << "<> Liberated " << counter << " Slave Pops.";
+}
+
 void V3::PopManager::alterSlaveCultures(const PoliticalManager& politicalManager,
 	 const ClayManager& clayManager,
 	 const std::map<std::string, mappers::CultureDef>& cultureDefs) const

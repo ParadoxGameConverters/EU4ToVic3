@@ -44,6 +44,7 @@ class PopManager
 	void loadSlaveCultureRules(const std::string& filePath);
 	void injectReligionsIntoVanillaPops(const std::map<std::string, mappers::CultureDef>& cultureDefs);
 	void injectReligionsIntoDWPops(const std::map<std::string, mappers::CultureDef>& cultureDefs);
+	void liberateSlaves(const PoliticalManager& politicalManager) const;
 	void alterSlaveCultures(const PoliticalManager& politicalManager,
 		 const ClayManager& clayManager,
 		 const std::map<std::string, mappers::CultureDef>& cultureDefs) const;
