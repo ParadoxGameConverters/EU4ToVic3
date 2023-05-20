@@ -211,7 +211,7 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 	auto counter = 0;
 
 	// The great negotiation
-	// 1. The substate w/ the most CP asks to build it's highest scoring building
+	// 1. The substate w/ the most CP asks to build its highest scoring building
 	// 2. The country checks if the sector that building belongs to has enough CP for at least 1 building
 	// 2b. If not, the substate moves on to the next highest scoring building until it exhausts its list.
 	// 2c. If a substate exhausts its building list without matching with a country's sector, it gets to ignore the country budget.
@@ -595,7 +595,7 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 	if (talksFail)
 	{
 		// Negotiation failed
-		// State picks it's favorite building, takes from biggest sector
+		// State picks its favorite building, takes from biggest sector
 		buildBuilding(subState->getBuildings()[0], subState, getSectorWithMostBudget(sectors), lawsMap, subStates);
 	}
 }
@@ -621,8 +621,9 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 	// Pick a packet size!
 	const int p = determinePacketSize(building, sector, subState, lawsMap, subStates);
 
-	subState->spendCPBudget(building->getConstructionCost() * p);
-	sector->spendCP(building->getConstructionCost() * p);
+	int cost = building->getConstructionCost() * p;
+	subState->spendCPBudget(cost);
+	sector->spendCP(cost);
 	building->setLevel(building->getLevel() + p);
 
 	// If arable, decrease arable land. This does have a side effect of no arable building being able to use more than 50% of the arable land
