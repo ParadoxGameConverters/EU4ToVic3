@@ -101,16 +101,10 @@ void V3::PopManager::applyHomeLands(const ClayManager& clayManager) const
 {
 	Log(LogLevel::Info) << "-> Applying Homelands.";
 	auto counter = 0;
-	for (const auto& [stateName, state]: clayManager.getStates())
+	for (const auto& state: clayManager.getStates() | std::views::values)
 	{
 		if (state->isSea() || state->isLake())
 			continue;
-
-		if (!dwStatePops.contains(stateName))
-		{
-			Log(LogLevel::Warning) << "State " << stateName << " is unknown. Not processing for homelands.";
-			continue;
-		}
 
 		for (const auto& subState: state->getSubStates())
 		{
