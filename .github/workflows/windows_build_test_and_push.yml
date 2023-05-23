@@ -46,14 +46,14 @@ jobs:
       # if: ${{ github.event_name == 'push' }}
       run: |
         cd "C:\Program Files\7-Zip\"
-        .\7z.exe a $Env:GITHUB_WORKSPACE\EU4ToVic3-0.2Belgrade-win-x64.zip $Env:GITHUB_WORKSPACE\Release\*
-        cp $Env:GITHUB_WORKSPACE\EU4ToVic3-0.2Belgrade-win-x64.zip $Env:GITHUB_WORKSPACE\EU4ToVic3-latest-win-x64.zip
+        .\7z.exe a $Env:GITHUB_WORKSPACE\EU4ToVic3-0.2.1Belgrade-win-x64.zip $Env:GITHUB_WORKSPACE\Release\*
+        cp $Env:GITHUB_WORKSPACE\EU4ToVic3-0.2.1Belgrade-win-x64.zip $Env:GITHUB_WORKSPACE\EU4ToVic3-latest-win-x64.zip
 
     - name: "Prepare installer"
       # if: ${{ github.event_name == 'push' }}
       run: |
         c:\"Program Files (x86)\Inno Setup 6\iscc" EU4ToVic3-Installer.iss
-        cp $Env:GITHUB_WORKSPACE\Output\EU4ToVic3-latest-win-x64.exe $Env:GITHUB_WORKSPACE\Output\EU4ToVic3-0.2Belgrade-win-x64.exe
+        cp $Env:GITHUB_WORKSPACE\Output\EU4ToVic3-latest-win-x64.exe $Env:GITHUB_WORKSPACE\Output\EU4ToVic3-0.2.1Belgrade-win-x64.exe
        
     - name: "Upload binaries to release"
       if: ${{ github.event_name == 'push' }}
@@ -63,7 +63,7 @@ jobs:
         allowUpdates: true
         omitBodyDuringUpdate: true
         omitNameDuringUpdate: true
-        artifacts: EU4ToVic3-0.2Belgrade-win-x64.zip, Output\EU4ToVic3-0.2Belgrade-win-x64.exe
+        artifacts: EU4ToVic3-0.2.1Belgrade-win-x64.zip, Output\EU4ToVic3-0.2.1Belgrade-win-x64.exe
         token: ${{ secrets.API_TOKEN_GITHUB }}
         
     - name: "Upload binaries to archive"
@@ -74,7 +74,7 @@ jobs:
         allowUpdates: true
         omitBodyDuringUpdate: true
         omitNameDuringUpdate: true
-        artifacts: EU4ToVic3-0.2Belgrade-win-x64.zip, EU4ToVic3-latest-win-x64.zip, Output\EU4ToVic3-0.2Belgrade-win-x64.exe, Output\EU4ToVic3-latest-win-x64.exe
+        artifacts: EU4ToVic3-0.2.1Belgrade-win-x64.zip, EU4ToVic3-latest-win-x64.zip, Output\EU4ToVic3-0.2.1Belgrade-win-x64.exe, Output\EU4ToVic3-latest-win-x64.exe
         token: ${{ secrets.API_TOKEN_GITHUB }}
         
     - name: "Cleanup"
