@@ -66,8 +66,8 @@ link = { vic3 = wallonian eu4 = wallonian eu4 = wallonian_UKS }
 
 # German Speaking - North German, South German and Swiss
 ##Added - Weder German
-link = { vic3 = swiss eu4group = germanic region = STATE_WEST_SWITZERLAND region = STATE_EAST_SWITZERLAND owner = SWI }
-link = { vic3 = swiss eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse }
+link = { vic3 = alemannic eu4group = germanic region = STATE_WEST_SWITZERLAND region = STATE_EAST_SWITZERLAND owner = SWI }
+link = { vic3 = alemannic eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse }
 
 link = { vic3 = south_german eu4group = germanic region = region_south_germany region = region_balkans region = region_italy region = region_danubia region = region_occitania region = region_iberia region = STATE_RHINELAND region = STATE_ALSACE_LORRAINE region = STATE_FRANCHE_COMTE }
 link = { vic3 = north_german eu4group = germanic region = region_north_germany region = region_baltic region = region_poland region = region_france region = region_england region = region_north_sea_coast region = region_rhine  }
@@ -154,7 +154,9 @@ link = { vic3 = cajun eu4group = french @usa_south_colony region = region_mexico
 link = { vic3 = breton eu4 = breton eu4 = breton_celtic eu4 = breton_UKS eu4 = celtic_breton }
 link = { vic3 = frankish eu4 = old_frankish }
 link = { vic3 = french eu4 = cosmopolitan_french eu4 = cosmopolitan_french_UKS eu4 = normand eu4 = normand_UKS eu4 = burgundian eu4 = burgundian_UKS eu4 = poitou eu4 = angevin eu4 = arpitan eu4 = bourguignon eu4 = creole eu4 = francien eu4 = javanaise eu4 = lorrain eu4 = poitevin eu4 = picard }
-link = { vic3 = occitan eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = provencal eu4 = acadian eu4 = auvergnat eu4 = limousin eu4 = vivaroaupenc }
+link = { vic3 = francoprovencal eu4group = french region = STATE_WEST_SWITZERLAND region = STATE_EAST_SWITZERLAND owner = SWI }
+link = { vic3 = francoprovencal eu4 = provencal eu4 = vivaroaupenc }
+link = { vic3 = occitan eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = acadian eu4 = auvergnat eu4 = limousin }
 link = { vic3 = franco_canadian eu4 = louisianans eu4 = quebecois neoculture_override = yes }
 # Dynamic generation for Outremer
 
@@ -428,12 +430,14 @@ link = { vic3 = tibetan eu4group = tibetan_group }
 # Polynesian - Polynesian, Hawaiian, Melanesian, Micronesian and Maori
 link = { vic3 = hawaiian eu4 = polynesian region = STATE_HAWAIIAN_ISLANDS }
 link = { vic3 = micronesian eu4 = polynesian region = STATE_EAST_MICRONESIA region = STATE_WEST_MICRONESIA region = STATE_KYUSHU }
+link = { vic3 = yuanzhumin eu4 = polynesian region = STATE_FORMOSA }
 
 link = { vic3 = hawaiian eu4 = hawaian }
 link = { vic3 = maori eu4 = maori }
 link = { vic3 = melanesian eu4 = melanesian eu4 = papuan eu4 = halmahera }
 link = { vic3 = micronesian eu4 = micronesian }
-link = { vic3 = polynesian eu4 = polynesian eu4 = taiwanese }
+link = { vic3 = yuanzhumin eu4 = taiwanese }
+link = { vic3 = polynesian eu4 = polynesian  }
 
 link = { vic3 = aborigine eu4group = aboriginal_australian }
 
@@ -470,14 +474,14 @@ link = { vic3 = telegu eu4 = telegu }
 #brahui are dynamically generated
 
 
-# West African - Akan, Bambara, Bassa, Dyula, Edo, Ewe, Fon, Fulbe, Haratin, Hausa, Ibibio, Ibo, Kissi, Kru, Mande, Maures, Mossi, Senufo, Songhai, Tiv, Tuareg, Wolof and Yoruba
+# West African - Akan, Bambara, Bassa, Dyula, Edo, Ewe, Fon, Fulbe, Haratin, Hausa, Ibibio, Ibo, Kissi, Kru, Mande, Bidan, Mossi, Senufo, Songhai, Tiv, Tuareg, Wolof and Yoruba
 link = { vic3 = edo eu4 = yorumba region = STATE_BENIN }
 #link = { vic3 = ewe eu4 = fon region = STATE_TOGO } #Too small and specific for state-based action
 link = { vic3 = haratin eu4 = senegambian eu4 = fulani region = STATE_MAURITANIA region = STATE_INNER_MAURITANIA } #Mauritanian West Africans
 link = { vic3 = kissi eu4 = senegambian region = STATE_SIERRA_LEONE }
 link = { vic3 = ibibio eu4 = nupe eu4 = igbo region = STATE_SOUTH_CAMEROON }
 link = { vic3 = ibo eu4 = yorumba region = STATE_NIGER_DELTA }
-link = { vic3 = maures eu4 = tuareg region = STATE_MAURITANIA region = STATE_INNER_MAURITANIA } #Mauritanian Tuaregs
+link = { vic3 = bidan eu4 = tuareg region = STATE_MAURITANIA region = STATE_INNER_MAURITANIA } #Mauritanian Tuaregs
 link = { vic3 = senufo eu4 = dyola region = STATE_IVORY_COAST } #Order matters, keep this above kru
 link = { vic3 = kru eu4 = senegambian eu4 = dyola region = STATE_LIBERIA region = STATE_IVORY_COAST }
 
@@ -490,7 +494,7 @@ link = { vic3 = fulbe eu4 = fulani }
 link = { vic3 = hausa eu4 = hausa eu4 = haussa }
 link = { vic3 = ibo eu4 = nupe eu4 = igbo }
 link = { vic3 = mande eu4 = mali eu4 = soninke }
-link = { vic3 = maures eu4 = maure }
+link = { vic3 = bidan eu4 = maure }
 link = { vic3 = mossi eu4 = mossi eu4 = dagomba }
 link = { vic3 = songhai eu4 = songhai }
 link = { vic3 = tiv eu4 = jukun } #May need revising
