@@ -65,6 +65,22 @@ double V3::SubState::getTerrainFrequency(const std::string& theTerrain) const
 	return 0;
 }
 
+double V3::SubState::getOverPopulation() const
+{
+        const double pops = subStatePops.getPopCount();
+        const double capacity = getResource("bg_agriculture") * 5000.0; // One arable land supports roughly 5k people.
+        if (capacity < 5000)
+        {
+		return 10.0;
+        }
+        const auto ratio = pops / capacity;
+        if (ratio < 1.0)
+        {
+		return 1.0;
+        }
+        return ratio;
+}
+
 void V3::SubState::gatherPossibleBuildings(const std::map<std::string, Building>& templateBuildings,
 	 const BuildingGroups& buildingGroups,
 	 const std::map<std::string, std::map<std::string, double>>& buildingTerrainModifiers,
@@ -281,27 +297,32 @@ double V3::SubState::calcBuildingIndustrialWeight(const Building& building, cons
 	if (owner->getIndustryFactor() > 0 && owner->getProcessedData().civLevel >= 40)
 		return calcBuildingIncorporationWeight(building, buildingGroups);
 
-	// Your non-industrial so urban buildings are not built
-	auto buildingGroup = buildingGroups.getBuildingGroupMap().at(building.getBuildingGroup());
-	if (buildingGroup->getCategory())
+	// You're non-industrial so urban buildings are not built.
+	const auto& category = buildingGroups.getAncestralCategory(building.getBuildingGroup());
+	if (category)
 	{
-		if (*buildingGroup->getCategory() == "urban")
+		if (*category == "urban")
 			return 0;
 	}
 
-	while (buildingGroup->getParentName())
-	{
-		buildingGroup = buildingGroups.getBuildingGroupMap().at(*buildingGroup->getParentName());
-		if (buildingGroup->getCategory())
-		{
-			if (*buildingGroup->getCategory() == "urban")
-				return 0;
-		}
-	}
-
-	// If building isn't urban, run incorporation check
+	// If building isn't urban, run incorporation check.
 	return calcBuildingIncorporationWeight(building, buildingGroups);
 }
+
+double V3::SubState::calcBuildingOverPopulationWeight(const Building& building, const BuildingGroups& buildingGroups) const
+{
+	auto overPop = getOverPopulation();
+	if (overPop <= 1.0)
+	{
+		return 1.0;
+	}
+	if (buildingGroups.usesArableLand(building.getBuildingGroup()))
+	{
+		return 1.0;
+	}
+	return overPop;
+}
+
 double V3::SubState::calcBuildingIncorporationWeight(const Building& building, const BuildingGroups& buildingGroups) const
 {
 	// Only adjust unincorporated states
@@ -547,8 +568,9 @@ double V3::SubState::calcBuildingWeight(const Building& building,
 	const double traitWeight = calcBuildingTraitWeight(building, traitMap, traitStrength);
 	const double investmentWeight = calcBuildingInvestmentWeight(building);
 	const double industrialWeight = calcBuildingIndustrialWeight(building, buildingGroups);
+	const double overPopWeight = calcBuildingOverPopulationWeight(building, buildingGroups);
 
-	return (1 + terrainWeight + EU4BuildingWeight) * traitWeight * investmentWeight * industrialWeight;
+	return (1 + terrainWeight + EU4BuildingWeight) * traitWeight * investmentWeight * industrialWeight * overPopWeight;
 }
 
 void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap)

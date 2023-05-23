@@ -112,6 +112,7 @@ class SubState
 	[[nodiscard]] const auto& getInfrastructure() const { return infrastructure; }
 	[[nodiscard]] int getResource(const std::string& theResource) const;
 	[[nodiscard]] double getTerrainFrequency(const std::string& theTerrain) const;
+	[[nodiscard]] double getOverPopulation() const;
 	[[nodiscard]] const auto& getTerrainFrequencies() { return terrainFrequency; }
 	[[nodiscard]] const auto& getDemographics() const { return demographics; }
 	[[nodiscard]] const auto& getSubStatePops() const { return subStatePops; }
@@ -173,6 +174,7 @@ class SubState
 	[[nodiscard]] double calcBuildingInvestmentWeight(const Building& building) const;
 	[[nodiscard]] double calcBuildingIndustrialWeight(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] double calcBuildingIncorporationWeight(const Building& building, const BuildingGroups& buildingGroups) const;
+	[[nodiscard]] double calcBuildingOverPopulationWeight(const Building& building, const BuildingGroups& buildingGroups) const;
 	[[nodiscard]] bool isBuildingValid(const Building& building,
 		 const BuildingGroups& buildingGroups,
 		 const std::map<std::string, Law>& lawsMap,

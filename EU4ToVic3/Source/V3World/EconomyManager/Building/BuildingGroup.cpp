@@ -18,7 +18,11 @@ void V3::BuildingGroup::registerKeys()
 		resourceCapped = (commonItems::getString(theStream) == "yes");
 	});
 	registerKeyword("land_usage", [this](std::istream& theStream) {
-		resourceCapped = (commonItems::getString(theStream) == "rural");
+		arableCapped = (commonItems::getString(theStream) == "rural");
+		if (arableCapped)
+		{
+			resourceCapped = true;
+		}
 	});
 	registerKeyword("parent_group", [this](std::istream& theStream) {
 		parent = commonItems::getString(theStream);

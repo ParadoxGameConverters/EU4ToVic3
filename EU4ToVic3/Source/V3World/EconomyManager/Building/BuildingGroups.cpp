@@ -33,6 +33,66 @@ void V3::BuildingGroups::addBuildingGroup(const std::shared_ptr<BuildingGroup>& 
 	buildingGroups[theBuildingGroup->getName()] = theBuildingGroup;
 }
 
+std::optional<std::string> V3::BuildingGroups::getAncestralCategory(const std::optional<std::string>& theGroupName) const
+{
+	if (!theGroupName)
+	{
+		return std::nullopt;
+	}
+	auto name = theGroupName.value();
+	while (!name.empty())
+	{
+		const auto& possibleGroup = buildingGroups.find(name);
+		if (possibleGroup == buildingGroups.end())
+		{
+			break;
+		}
+                const auto cat = possibleGroup->second->getCategory();
+		if (cat)
+		{
+			return *cat;
+		}
+		const auto& parentName = possibleGroup->second->getParentName();
+		if (!parentName)
+		{
+			break;
+		}
+		name = parentName.value();
+	}
+
+	return std::nullopt;
+}
+
+bool V3::BuildingGroups::usesArableLand(const std::optional<std::string>& theGroupName) const
+{
+	if (!theGroupName)
+	{
+		return false;
+	}
+	auto name = theGroupName.value();
+	while (!name.empty())
+	{
+		const auto& possibleGroup = buildingGroups.find(name);
+		if (possibleGroup == buildingGroups.end())
+		{
+			break;
+		}
+                const auto& cat = possibleGroup->second->getCategory();
+		if (possibleGroup->second->usesArableLand())
+		{
+			return true;
+		}
+		const auto& parentName = possibleGroup->second->getParentName();
+		if (!parentName)
+		{
+			break;
+		}
+		name = parentName.value();
+	}
+
+	return false;
+}
+
 std::optional<std::string> V3::BuildingGroups::tryGetParentName(const std::optional<std::string>& theGroupName) const
 {
 	if (!theGroupName)
