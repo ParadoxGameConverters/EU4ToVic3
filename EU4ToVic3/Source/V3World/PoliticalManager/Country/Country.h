@@ -167,6 +167,7 @@ class Country: commonItems::parser
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
 	[[nodiscard]] double getTotalDev() const;
+	[[nodiscard]] double getOverPopulation() const;
 	[[nodiscard]] int getPopCount() const;
 	[[nodiscard]] int getVanillaPopCount() const; // vanilla pop count of all the provinces this country holds
 	[[nodiscard]] int getIncorporatedPopCount() const;
