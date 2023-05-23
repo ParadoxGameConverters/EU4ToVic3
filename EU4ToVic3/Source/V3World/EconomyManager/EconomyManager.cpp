@@ -285,17 +285,20 @@ std::pair<double, double> V3::EconomyManager::civLevelCountryBudgets() const
 	double accumulatedWeight = 0;
 	double totalCivLevel = 0.0;
 	const double geoMeanPop = calculateGeoMeanCentralizedPops();
-	// while determining individual country's industry score, accumulate total industry factor & weight
+	// While determining individual countries' industry scores, accumulate total industry factor and weight.
 
 	for (const auto& country: centralizedCountries)
 	{
 		const int popCount = country->getPopCount();
-		country->setIndustryWeight(popCount * (country->getProcessedData().civLevel / 100) * calculatePopDistanceFactor(popCount, geoMeanPop));
+		double weight = popCount * (country->getProcessedData().civLevel * 0.01);
+		weight *= calculatePopDistanceFactor(popCount, geoMeanPop);
+		weight *= country->getOverPopulation();
+		country->setIndustryWeight(weight);
 		accumulatedWeight += country->getIndustryWeight();
 		totalCivLevel += country->getProcessedData().civLevel;
 	}
 
-	// adjust global total by average industry factor compared to baseline
+	// Adjust global total by average industry factor compared to baseline.
 	const double globalIndustryFactor = (totalCivLevel / static_cast<double>(centralizedCountries.size()) / econDefines.getMeanCivlevel()) - 1;
 
 	Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "<> The world is " << (globalIndustryFactor + 1) * 100

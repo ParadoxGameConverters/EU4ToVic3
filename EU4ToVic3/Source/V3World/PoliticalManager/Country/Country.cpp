@@ -600,6 +600,28 @@ double V3::Country::getTotalDev() const
 	});
 }
 
+double V3::Country::getOverPopulation() const
+{
+	double pops = 0;
+	double capacity = 0;
+	for (const auto& subState: subStates)
+	{
+		pops += subState->getSubStatePops().getPopCount();
+		capacity += subState->getResource("bg_agriculture");
+	}
+	capacity *= 5000;
+	if (capacity < 5000)
+	{
+		return 10.0;
+	}
+	const auto ratio = pops / capacity;
+	if (ratio < 1.0)
+	{
+		return 1.0;
+	}
+	return ratio;
+}
+
 void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 	 double topInstitutions,
 	 const mappers::CultureMapper& cultureMapper,
