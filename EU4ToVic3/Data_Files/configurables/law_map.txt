@@ -303,26 +303,43 @@ lawgroup_church_and_state = {
 	}
 }
 
-#LABOR:
-#law_worker_protections 100 NO
-#law_regulatory_bodies 50 NO
-#law_serfdom_banned 0 
+#LAND_REFORM
+#law_collectivized_agriculture NO
+#law_homesteading 25 
+#law_commercialized_agriculture NO
+#law_tenant_farmers 0
 #law_serfdom -50 !law_interventionism !law_laissez_faire !law_command_economy
-lawgroup_labor_rights = {
-	law_serfdom_banned = {
-		forms = { republic theocracy }
-		ideas = { plutocracy_ideas indigenous_ideas }
-		reforms = { revolutionary_empire_reform quash_noble_power_reform stability_principle_reform 
-			enlightened_principle_reform revolutionary_principle_reform equality_principle_reform
+lawgroup_land_reform = {
+	law_homesteading = {
+		forms = { republic }
+		ideas = { plutocracy_ideas }
+		reforms = { quash_noble_power_reform stability_principle_reform enlightened_principle_reform  equality_principle_reform
 			abolished_caste_system_reform
 		}
 	}
+	law_tenant_farmers = {
+		forms = { theocracy tribal native }
+		ideas = {  indigenous_ideas }
+		reforms = { revolutionary_empire_reform revolutionary_principle_reform }
+	}
 	law_serfdom = {
-		forms = { monarchy tribal native }
+		forms = { monarchy }
 		ideas = { aristocracy_ideas religious_ideas }
 		reforms = { enforce_privileges_reform corvee_reform cossacks_reform internal_mission_reform 
 			kingdom_of_god_reform expel_heathens_reform all_under_tengri_reform strengthen_the_dhimmi_reform
 		}
+	}
+}
+
+#LABOR:
+#law_worker_protections 100 NO
+#law_regulatory_bodies 50 NO
+#law_no_workers_rights 0 // Everyone starts here.
+lawgroup_labor_rights = {
+	law_no_workers_rights = {
+		forms = { republic theocracy monarchy tribal native }
+		ideas = { }
+		reforms = { }
 	}
 }
 
