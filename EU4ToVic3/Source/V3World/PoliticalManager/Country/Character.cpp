@@ -81,6 +81,10 @@ V3::Character::Character(const EU4::Character& character,
 		traits.emplace(characterTraitMapper.getGratisAgeism(seed));
 	}
 
+	// Are we young?
+	if (age < 15)
+		traits.emplace("trait_child");
+
 	// are we *still* dry?
 	if (traits.empty())
 	{

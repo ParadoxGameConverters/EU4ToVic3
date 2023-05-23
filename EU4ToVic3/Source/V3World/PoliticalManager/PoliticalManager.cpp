@@ -408,6 +408,7 @@ void V3::PoliticalManager::setupLaws()
 		grantLawFromGroup("lawgroup_distribution_of_power", country);
 		grantLawFromGroup("lawgroup_slavery", country);
 		grantLawFromGroup("lawgroup_citizenship", country);
+		grantLawFromGroup("lawgroup_land_reform", country);
 		grantLawFromGroup("lawgroup_colonization", country);
 		grantLawFromGroup("lawgroup_church_and_state", country);
 		grantLawFromGroup("lawgroup_economic_system", country);

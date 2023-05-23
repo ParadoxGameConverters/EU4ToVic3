@@ -67,18 +67,18 @@ double V3::SubState::getTerrainFrequency(const std::string& theTerrain) const
 
 double V3::SubState::getOverPopulation() const
 {
-        const double pops = subStatePops.getPopCount();
-        const double capacity = getResource("bg_agriculture") * 5000.0; // One arable land supports roughly 5k people.
-        if (capacity < 5000)
-        {
+	const double pops = subStatePops.getPopCount();
+	const double capacity = getResource("bg_agriculture") * 5000.0; // One arable land supports roughly 5k people.
+	if (capacity < 5000)
+	{
 		return 10.0;
-        }
-        const auto ratio = pops / capacity;
-        if (ratio < 1.0)
-        {
+	}
+	const auto ratio = pops / capacity;
+	if (ratio < 1.0)
+	{
 		return 1.0;
-        }
-        return ratio;
+	}
+	return ratio;
 }
 
 void V3::SubState::gatherPossibleBuildings(const std::map<std::string, Building>& templateBuildings,
