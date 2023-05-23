@@ -47,7 +47,7 @@ std::optional<std::string> V3::BuildingGroups::getAncestralCategory(const std::o
 		{
 			break;
 		}
-                const auto cat = possibleGroup->second->getCategory();
+		const auto cat = possibleGroup->second->getCategory();
 		if (cat)
 		{
 			return *cat;
@@ -77,7 +77,7 @@ bool V3::BuildingGroups::usesArableLand(const std::optional<std::string>& theGro
 		{
 			break;
 		}
-                const auto& cat = possibleGroup->second->getCategory();
+		const auto& cat = possibleGroup->second->getCategory();
 		if (possibleGroup->second->usesArableLand())
 		{
 			return true;
