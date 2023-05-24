@@ -177,7 +177,7 @@ void V3::Character::convertLeadership(const EU4::Character& character, const map
 void V3::Character::convertAge(const EU4::Character& character, float ageShift, const date& conversionDate)
 {
 	birthDate = character.birthDate;
-	age = static_cast<int>(std::round(birthDate.diffInYears(conversionDate)));
+	age = static_cast<int>(std::round(conversionDate.diffInYears(birthDate)));
 
 	birthDate.ChangeByYears(static_cast<int>(std::round(ageShift)));
 }
