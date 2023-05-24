@@ -94,6 +94,13 @@ void mappers::ReligionMapper::generateReligionDefinitions(const commonItems::Mod
 		vic3ReligionDefinitions.emplace(v3ReligionName, newDef);
 	}
 
+	// Do we have excess religions in vic3 we don't reference? (atheist?)
+	for (const auto& [v3ReligionName, religionDef]: religionDefinitionLoader.getReligionDefs())
+	{
+		if (!vic3ReligionDefinitions.contains(v3ReligionName))
+			vic3ReligionDefinitions.emplace(v3ReligionName, religionDef);
+	}
+
 	Log(LogLevel::Info) << "-> Generated " << vic3ReligionDefinitions.size() << " Religion Definitions.";
 }
 
