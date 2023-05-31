@@ -259,7 +259,12 @@ void V3::Country::registerVanillaTypeKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-bool V3::Country::humanPlayed() const {
+bool V3::Country::humanPlayed() const
+{
+	if (!sourceCountry)
+        {
+		return false;
+        }
 	return sourceCountry->humanPlayed();
 }
 
