@@ -70,6 +70,7 @@ class Country: commonItems::parser
 	[[nodiscard]] auto getModifiers() const { return modifiers; }
 	void setModifiers(const std::set<std::string>& mods) { modifiers = mods; }
 	[[nodiscard]] bool hasModifier(const std::string&) const;
+	[[nodiscard]] bool isHuman() const { return isHuman; }
 
 	// characters and armies
 	[[nodiscard]] const auto& getCharacters() const { return filteredCharacters; }
@@ -202,6 +203,7 @@ class Country: commonItems::parser
 
 	bool colony = false;
 	bool tradeCompany = false;
+	bool isHuman = false;
 	std::string overlord;
 	double libertyDesire = 0.0;
 

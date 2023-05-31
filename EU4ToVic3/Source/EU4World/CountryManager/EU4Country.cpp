@@ -167,6 +167,9 @@ void EU4::Country::registerKeys()
 	registerKeyword("queen", [this](std::istream& theStream) {
 		consortID = LeaderID(theStream).getIDNum();
 	});
+	registerKeyword("human", [this](std::istream& theStream) {
+	        isHuman = commonItems::getString(theStream) == "yes";
+	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
