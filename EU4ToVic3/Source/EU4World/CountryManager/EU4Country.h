@@ -70,7 +70,7 @@ class Country: commonItems::parser
 	[[nodiscard]] auto getModifiers() const { return modifiers; }
 	void setModifiers(const std::set<std::string>& mods) { modifiers = mods; }
 	[[nodiscard]] bool hasModifier(const std::string&) const;
-	[[nodiscard]] bool isHuman() const { return isHuman; }
+	[[nodiscard]] bool humanPlayed() const { return isHuman; }
 
 	// characters and armies
 	[[nodiscard]] const auto& getCharacters() const { return filteredCharacters; }
