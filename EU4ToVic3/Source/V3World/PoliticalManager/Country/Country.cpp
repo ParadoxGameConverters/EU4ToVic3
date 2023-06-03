@@ -259,6 +259,15 @@ void V3::Country::registerVanillaTypeKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
+bool V3::Country::humanPlayed() const
+{
+	if (!sourceCountry)
+	{
+		return false;
+	}
+	return sourceCountry->humanPlayed();
+}
+
 void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	 mappers::CultureMapper& cultureMapper,
 	 const mappers::ReligionMapper& religionMapper,
