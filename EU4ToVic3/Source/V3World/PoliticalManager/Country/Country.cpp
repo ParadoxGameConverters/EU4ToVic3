@@ -262,9 +262,9 @@ void V3::Country::registerVanillaTypeKeys()
 bool V3::Country::humanPlayed() const
 {
 	if (!sourceCountry)
-        {
+	{
 		return false;
-        }
+	}
 	return sourceCountry->humanPlayed();
 }
 
