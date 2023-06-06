@@ -958,8 +958,17 @@ void V3::Country::convertCharacters(const mappers::CharacterTraitMapper& charact
 			 processedData.capitalStateName,
 			 tag,
 			 conversionDate);
-		if (character.ruler && ruler && consort)
-			character.married = true;
+		if (character.ruler && ruler)
+		{
+			if (consort)
+			{
+				character.married = true;
+			}
+			if (!processedData.ideaEffect.rulingInterestGroups.empty())
+			{
+				character.interestGroup = *processedData.ideaEffect.rulingInterestGroups.begin();
+			}
+		}
 
 		processedData.characters.emplace_back(character);
 	}
