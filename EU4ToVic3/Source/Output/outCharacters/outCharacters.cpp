@@ -25,6 +25,8 @@ void outCharacter(std::ostream& output, const V3::Character& character)
 		output << "\t\t\tcommander_rank = " << character.commanderRank << "\n";
 	if (character.female)
 		output << "\t\t\tfemale = yes\n";
+	if (!character.interestGroup.empty())
+		output << "\t\t\tinterest_group = " << character.interestGroup << "\n";
 	if (!character.culture.empty())
 		output << "\t\t\tculture = cu:" << character.culture << "\n";
 	if (!character.religion.empty())
