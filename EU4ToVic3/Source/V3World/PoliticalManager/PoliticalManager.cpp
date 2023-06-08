@@ -397,6 +397,13 @@ void V3::PoliticalManager::setupLaws()
 {
 	Log(LogLevel::Info) << "-> Setting up laws for landed EU4 countries.";
 	auto counter = 0;
+	auto serf = 0;
+	auto tenet = 0;
+	auto home = 0;
+	auto noschool = 0;
+	auto relig = 0;
+	auto priv = 0;
+	auto univ = 0;
 	for (const auto& country: countries | std::views::values)
 	{
 		if (!TechValues::isValidCountryForTechConversion(*country))
@@ -408,6 +415,7 @@ void V3::PoliticalManager::setupLaws()
 		grantLawFromGroup("lawgroup_distribution_of_power", country);
 		grantLawFromGroup("lawgroup_slavery", country);
 		grantLawFromGroup("lawgroup_citizenship", country);
+		grantLawFromGroup("lawgroup_education_system", country); // exception to the rule, education is important to block serfdoms and other problematic reforms.
 		grantLawFromGroup("lawgroup_land_reform", country);
 		grantLawFromGroup("lawgroup_colonization", country);
 		grantLawFromGroup("lawgroup_church_and_state", country);
@@ -421,7 +429,6 @@ void V3::PoliticalManager::setupLaws()
 		grantLawFromGroup("lawgroup_policing", country);
 		grantLawFromGroup("lawgroup_rights_of_women", country);
 		// Social LAST.
-		grantLawFromGroup("lawgroup_education_system", country);
 		grantLawFromGroup("lawgroup_labor_rights", country);
 		grantLawFromGroup("lawgroup_free_speech", country);
 		grantLawFromGroup("lawgroup_health_system", country);
@@ -430,8 +437,29 @@ void V3::PoliticalManager::setupLaws()
 
 		// Laws are set, figure out which institutions our laws have
 		setupInstitutions(country);
+
+		// Some debugging logs to help with debugging on forums.
+		if (country->getProcessedData().laws.contains("law_serfdom"))
+		{
+			serf++;
+		}
+		if (country->getProcessedData().laws.contains("law_tenant_farmers"))
+			tenet++;
+		if (country->getProcessedData().laws.contains("law_homesteading"))
+			home++;
+		if (country->getProcessedData().laws.contains("law_no_schools"))
+			noschool++;
+		if (country->getProcessedData().laws.contains("law_religious_schools"))
+			relig++;
+		if (country->getProcessedData().laws.contains("law_private_schools"))
+			priv++;
+		if (country->getProcessedData().laws.contains("law_public_schools"))
+			univ++;
 	}
 	Log(LogLevel::Info) << "<> " << counter << " countries codified.";
+	Log(LogLevel::Debug) << "<> " << serf << " serfdom, " << tenet << " tenant farmers, " << home << " homesteading.";
+	Log(LogLevel::Debug) << "<> " << noschool << " no schooling, " << relig << " religious schools, " << priv << " private schools, " << univ
+								<< " public schools.";
 }
 
 void V3::PoliticalManager::setupInstitutions(const std::shared_ptr<Country>& country) const

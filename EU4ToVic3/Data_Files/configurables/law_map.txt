@@ -311,22 +311,27 @@ lawgroup_church_and_state = {
 #law_serfdom -50 !law_interventionism !law_laissez_faire !law_command_economy
 lawgroup_land_reform = {
 	law_homesteading = {
-		forms = { republic }
-		ideas = { plutocracy_ideas }
+		forms = { republic native }
+		ideas = { plutocracy_ideas humanist_ideas }
 		reforms = { quash_noble_power_reform stability_principle_reform enlightened_principle_reform  equality_principle_reform
-			abolished_caste_system_reform
+			abolished_caste_system_reform peasants_republic colonial_government crown_colony_government private_enterprise_colony_government
+			self_governing_colony_government liberte_reform egalite_reform fraternite_reform equal_electorate_reform three_classes_reform
 		}
 	}
 	law_tenant_farmers = {
-		forms = { theocracy tribal native }
-		ideas = {  indigenous_ideas }
-		reforms = { revolutionary_empire_reform revolutionary_principle_reform }
+		forms = { theocracy }
+		ideas = { indigenous_ideas administrative_ideas religious_ideas theocracy_gov_ideas innovativeness_ideas economic_ideas }
+		reforms = { revolutionary_empire_reform revolutionary_principle_reform maintain_nobles_status_quo_reform blackmail_nobility_reform
+			separation_of_boyars_from_court_reform revolutionary_republic_reform junior_revolutionary_republic_reform citizenry_reform
+			theocratic_democracy_reform religious_culture_reform regionally_elected_commanders
+		}
 	}
 	law_serfdom = {
-		forms = { monarchy }
-		ideas = { aristocracy_ideas religious_ideas }
-		reforms = { enforce_privileges_reform corvee_reform cossacks_reform internal_mission_reform 
-			kingdom_of_god_reform expel_heathens_reform all_under_tengri_reform strengthen_the_dhimmi_reform
+		forms = { monarchy tribal }
+		ideas = { aristocracy_ideas court_ideas horde_gov_ideas }
+		reforms = { enforce_privileges_reform corvee_reform strengthen_the_dhimmi_reform ministerialis_promotion_reform 
+			grant_noble_castle_rights_reform devshirme_system_reform trade_company_government aristocratic_values_reform landholders_reform
+			loyal_nobility_reform
 		}
 	}
 }

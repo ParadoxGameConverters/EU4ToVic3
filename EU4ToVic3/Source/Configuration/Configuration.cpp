@@ -106,7 +106,7 @@ void Configuration::registerKeys()
 void Configuration::verifyEU4Path() const
 {
 	if (!commonItems::DoesFolderExist(EU4Path))
-		throw std::runtime_error(EU4Path + " does not exist!");
+		throw std::runtime_error("EU4 path " + EU4Path + " does not exist!");
 	if (!commonItems::DoesFileExist(EU4Path + "/eu4.exe") && !commonItems::DoesFileExist(EU4Path + "/eu4") &&
 		 !commonItems::DoesFolderExist(EU4Path + "/eu4.app"))
 		throw std::runtime_error(EU4Path + " does not contain Europa Universalis 4!");
@@ -118,7 +118,7 @@ void Configuration::verifyEU4Path() const
 void Configuration::verifyVic3Path()
 {
 	if (!commonItems::DoesFolderExist(Vic3Path))
-		throw std::runtime_error(Vic3Path + " does not exist!");
+		throw std::runtime_error("Vic3 path " + Vic3Path + " does not exist!");
 	// TODO: OSX and Linux paths are speculative
 	// TODO: As a matter of fact...
 	if (!commonItems::DoesFileExist(Vic3Path + "/binaries/victoria3.exe") && !commonItems::DoesFileExist(Vic3Path + "/Vic3game") &&
