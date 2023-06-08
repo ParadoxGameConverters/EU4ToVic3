@@ -1,0 +1,105 @@
+﻿zzz_advanced_native_expansion = {
+	is_shown = {
+	    NOT = { is_country_type = decentralized }
+		OR = {
+			AND = {
+				# Only visible to native americans
+				cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT }
+				any_scope_state = {
+					any_neighbouring_state = {
+						OR = {
+							state_region = s:STATE_ALASKA
+							zzz_converter_state_is_in_canada = yes
+						}
+						owner = {
+							NOT = { has_truce_with = ROOT }
+							NOT = { has_war_with = ROOT }
+							is_country_type = decentralized
+						}
+					}
+				}
+			}
+			AND = {
+				# Only visible to australian aboriginals
+				cu:aborigine = { shares_non_heritage_trait_with_any_primary_culture = ROOT }
+				any_scope_state = {
+					any_neighbouring_state = {
+						zzz_converter_state_is_in_australia = yes
+						owner = {
+							NOT = { has_truce_with = ROOT }
+							NOT = { has_war_with = ROOT }
+							is_country_type = decentralized
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	possible = {
+		has_technology_researched = colonization
+		has_technology_researched = railways
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+		custom_tooltip = {
+			text = zzz_advanced_native_expansion.tt2
+			NOT = { has_variable = zzz_advanced_native_expansion_recently_had_war }
+		}
+	}
+
+	when_taken = {
+		custom_tooltip = zzz_advanced_native_expansion.tt
+		random_scope_state = {
+			limit = {
+				any_neighbouring_state = {
+					OR = {
+						state_region = s:STATE_ALASKA
+						zzz_converter_state_is_in_canada = yes
+						zzz_converter_state_is_in_australia = yes
+					}
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						is_country_type = decentralized
+					}
+				}
+			}
+			random_neighbouring_state = {
+				limit = {
+					OR = {
+						state_region = s:STATE_ALASKA
+						zzz_converter_state_is_in_canada = yes
+						zzz_converter_state_is_in_australia = yes
+					}
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						is_country_type = decentralized
+					}
+				}
+				hidden_effect = {
+					owner = { save_temporary_scope_as = defending_tribe_scope }
+					ROOT = {
+						create_diplomatic_play = {
+							target_country = scope:defending_tribe_scope
+							type = dp_annex_war #To be changed to some version of conquer_state as soon as you can do so against a decentralized nation
+						}
+						set_variable = {
+				            name = zzz_advanced_native_expansion_recently_had_war
+				            value = yes
+				        }
+						trigger_event = { id = zzz_cc_canada.5 years = 3 }
+					}
+				}
+			}
+		}
+	}
+
+	ai_chance = {
+		base = 30
+		modifier = {
+			is_diplomatic_play_undecided_participant = yes
+			add = -1000
+		}
+	}
+}

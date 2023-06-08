@@ -1,0 +1,144 @@
+﻿je_converter_colonization_frontier_wars = {
+	#The conflicts with aboriginals that stemmed from the exploration and settlement of the Australian outback (interior)
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	
+	is_shown_when_inactive = {
+		capital = {
+			zzz_converter_state_is_in_australia = yes
+		}
+		any_scope_state = { #So that only relevant nations see the journal entry
+			any_neighbouring_state = {
+				zzz_converter_state_is_in_australia = yes
+			}
+		}
+		NOT = { #No way of checking for trait directly, so we do this
+			cu:aborigine = { shares_non_heritage_trait_with_any_primary_culture = ROOT } # only visible to australian aboriginals
+		}
+	}
+	
+	possible = {
+		NOT = { has_law = law_type:law_no_colonial_affairs }
+		has_technology_researched = colonization
+		has_technology_researched = logistics
+	}
+	
+	complete = {
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_NEW_SOUTH_WALES
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_VICTORIA
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_QUEENSLAND
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_SOUTH_AUSTRALIA
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_WESTERN_AUSTRALIA
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_NORTHERN_TERRITORY
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_TASMANIA
+		}
+	}
+	
+	on_yearly_pulse = {
+		effect = {
+			random_list = {
+				14 = {
+					trigger = {
+						any_country = {
+							is_country_type = decentralized
+							has_state_in_state_region = STATE_NEW_SOUTH_WALES
+						}
+					}
+					trigger_event = { id = zzz_cc_australia.4 } #Bathurst War
+				}
+				16 = {
+					trigger = {
+						any_country = {
+							is_country_type = decentralized
+							has_state_in_state_region = STATE_VICTORIA
+						}
+					}
+					trigger_event = { id = zzz_cc_australia.5 } #Eumeralla Wars
+				}
+				14 = {
+					trigger = {
+						any_country = {
+							is_country_type = decentralized
+							has_state_in_state_region = STATE_QUEENSLAND
+						}
+					}
+					trigger_event = { id = zzz_cc_australia.6 } #War of Southern Queensland
+				}
+				14 = {
+					trigger = {
+						any_country = {
+							is_country_type = decentralized
+							has_state_in_state_region = STATE_SOUTH_AUSTRALIA
+						}
+					}
+					trigger_event = { id = zzz_cc_australia.7 } #Pastoralist Conflicts
+				}
+				14 = {
+					trigger = {
+						any_country = {
+							is_country_type = decentralized
+							has_state_in_state_region = STATE_WESTERN_AUSTRALIA
+						}
+					}
+					trigger_event = { id = zzz_cc_australia.8 } #Guerilla Wars and fear of Confederation
+				}
+				14 = {
+					trigger = {
+						any_country = {
+							is_country_type = decentralized
+							has_state_in_state_region = STATE_NORTHERN_TERRITORY
+						}
+					}
+					trigger_event = { id = zzz_cc_australia.9 } #Gold Rush
+				}
+				14 = {
+					trigger = {
+						any_country = {
+							is_country_type = decentralized
+							has_state_in_state_region = STATE_TASMANIA
+						}
+					}
+					trigger_event = { id = zzz_cc_australia.10 } #Black War
+				}			
+			}
+		}
+	}
+	
+	status_desc = {
+		first_valid = {
+			triggered_desc = { 
+				desc = je_converter_colonization_frontier_wars_status
+			}
+		}
+	}
+	
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}

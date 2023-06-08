@@ -1,0 +1,317 @@
+﻿namespace = zzz_cc_canada
+
+# Establish Treaty with Local Tribe
+zzz_cc_canada.1 = {
+	type = country_event
+	placement = scope:canada_annex_state_scope
+
+	title = zzz_cc_canada.1.t
+	desc = zzz_cc_canada.1.d
+	flavor = zzz_cc_canada.1.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_signed_contract.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+	
+	#cooldown = { months = 1 }
+	cooldown = { years = 4 }
+
+	trigger = {
+		has_journal_entry = je_converter_colonization_numbered_treaties
+		any_scope_state = {
+			any_neighbouring_state = {
+				OR = {
+					state_region = s:STATE_ALASKA
+					zzz_converter_state_is_in_canada = yes
+				}
+				owner = {
+					NOT = { has_truce_with = ROOT }
+					NOT = { has_war_with = ROOT }
+					this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+					is_country_type = decentralized
+				}
+			}
+		}
+	}
+	
+	immediate = {
+		save_scope_as = is_canada_scope
+		random_scope_state = {
+			limit = {
+				any_neighbouring_state = {
+					zzz_converter_state_is_in_canada = yes
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+			}
+			save_scope_as = canada_state_scope
+			random_neighbouring_state = {
+				limit = {
+					zzz_converter_state_is_in_canada = yes
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+				owner = { save_scope_as = canada_annex_scope }
+				save_scope_as = canada_annex_state_scope
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_canada.1.a
+		trigger = {
+			exists = scope:canada_annex_scope #On rare occasions the scope isn't set properly, and when/if this occurs, there is a CTD. This should avoid that.
+		}
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+		scope:canada_annex_scope = { trigger_event = zzz_cc_canada.2 }
+	}
+	
+	option = {
+		name = zzz_cc_canada.1.b
+		ai_chance = {
+			base = 0
+		}
+		add_treasury = 1000
+	}
+}
+
+	# Local Tribe Responds
+	zzz_cc_canada.2 = {
+		type = country_event
+		placement = scope:canada_annex_state_scope
+
+		title = zzz_cc_canada.2.t
+		desc = zzz_cc_canada.2.d
+		flavor = zzz_cc_canada.2.f
+
+		event_image = {
+			video = "gfx/event_pictures/unspecific_signed_contract.bk2"
+		}
+
+		on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+		on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+		icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+		duration = 3
+
+		trigger = {
+			# triggered by event
+		}
+
+		option = {
+			name = zzz_cc_canada.2.a
+			default_option = yes
+			ai_chance = {
+				base = 20
+			}
+			scope:is_canada_scope = { trigger_event = zzz_cc_canada.3 }
+			show_as_tooltip = {
+				scope:canada_annex_state_scope = { set_state_owner = scope:is_canada_scope }
+				create_truce = { country = scope:is_canada_scope months = 60 }
+			}
+		}
+		
+		option = {
+			name = zzz_cc_canada.2.b
+			ai_chance = {
+				base = 1
+			}
+			scope:is_canada_scope = { 
+				trigger_event = zzz_cc_canada.4
+				create_diplomatic_play = {
+					target_country = ROOT
+					type = dp_annex_war #Purposefully not dp_native_uprising
+					add_war_goal = {
+						holder = scope:canada_annex_scope
+						type = return_state
+						target_state = scope:canada_state_scope
+					}
+				}
+			}
+		}
+	}
+	
+	# Local Tribe Says Yes
+	zzz_cc_canada.3 = {
+		type = country_event
+		placement = scope:canada_annex_state_scope
+
+		title = zzz_cc_canada.3.t
+		desc = zzz_cc_canada.3.d
+		flavor = zzz_cc_canada.3.f
+
+		event_image = {
+			video = "gfx/event_pictures/unspecific_signed_contract.bk2"
+		}
+
+		on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+		on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+		icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+		duration = 3
+
+		trigger = {
+			# triggered by event
+		}
+
+		option = {
+			name = zzz_cc_canada.3.a
+			default_option = yes
+			scope:canada_annex_state_scope = { set_state_owner = scope:is_canada_scope }
+			create_truce = { country = scope:canada_annex_scope months = 120 }
+		}
+	}
+	
+	# Local Tribe Refuses
+	zzz_cc_canada.4 = {
+		type = country_event
+		placement = ROOT
+
+		title = zzz_cc_canada.4.t
+		desc = zzz_cc_canada.4.d
+		flavor = zzz_cc_canada.4.f
+
+		event_image = {
+			video = "gfx/event_pictures/unspecific_signed_contract.bk2"
+		}
+
+		on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+		on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+		icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+		duration = 3
+
+		trigger = {
+			# triggered by event
+		}
+
+		option = {
+			name = zzz_cc_canada.4.a
+			default_option = yes
+		}
+	}
+	
+#Timer for Native Border War
+zzz_cc_canada.5 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		remove_variable = zzz_advanced_native_expansion_recently_had_war
+	}
+}
+
+#Alaskan/Yukon Gold Rush
+zzz_cc_canada.6 = {
+	type = country_event
+	placement = scope:canada_annex_state_scope
+
+	title = zzz_cc_canada.6.t
+	desc = zzz_cc_canada.6.d
+	flavor = zzz_cc_canada.6.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_gold_prospectors.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+	
+	#cooldown = { months = 1 }
+	cooldown = { years = 1 }
+
+	trigger = {
+		has_journal_entry = je_converter_colonization_numbered_treaties
+		#Year should be around 1880-1900
+		has_technology_researched = steam_donkey
+		has_technology_researched = dynamite
+		has_technology_researched = logistics
+		has_technology_researched = camera
+		any_scope_state = {
+			any_neighbouring_state = {
+				OR = {
+					state_region = s:STATE_ALASKA
+					state_region = s:STATE_YUKON_TERRITORY
+				}
+				owner = {
+					NOT = { has_truce_with = ROOT }
+					NOT = { has_war_with = ROOT }
+					this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+					is_country_type = decentralized
+				}
+			}
+		}
+	}
+	
+	immediate = {
+		save_scope_as = is_canada_scope
+		random_scope_state = {
+			limit = {
+				any_neighbouring_state = {
+					OR = {
+						state_region = s:STATE_ALASKA
+						state_region = s:STATE_YUKON_TERRITORY
+					}
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+			}
+			save_scope_as = canada_state_scope
+			random_neighbouring_state = {
+				limit = {
+					OR = {
+						state_region = s:STATE_ALASKA
+						state_region = s:STATE_YUKON_TERRITORY
+					}
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+				owner = { save_scope_as = canada_annex_scope }
+				save_scope_as = canada_annex_state_scope
+				force_resource_discovery = bg_gold_mining
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_canada.6.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+		scope:canada_annex_scope = { trigger_event = zzz_cc_canada.2 }
+	}
+}
