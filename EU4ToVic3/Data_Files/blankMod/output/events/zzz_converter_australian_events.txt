@@ -1,0 +1,715 @@
+﻿namespace = zzz_cc_australia
+
+## Generic Responses, used for multiple events
+# Local Tribe Responds
+zzz_cc_australia.1 = {
+	type = country_event
+	placement = scope:australia_annex_state_scope
+
+	title = zzz_cc_australia.1.t
+	desc = zzz_cc_australia.1.d
+	flavor = zzz_cc_australia.1.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_signed_contract.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		# triggered by event
+	}
+
+	option = {
+		name = zzz_cc_australia.1.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+		scope:is_australia_scope = { trigger_event = zzz_cc_australia.2 }
+		show_as_tooltip = {
+			scope:australia_annex_state_scope = { set_state_owner = scope:is_australia_scope }
+			create_truce = { country = scope:is_australia_scope months = 60 }
+		}
+	}
+	
+	option = { #Conflict should be more likely than not
+		name = zzz_cc_australia.1.b
+		ai_chance = {
+			base = 25
+		}
+		scope:is_australia_scope = {
+			trigger_event = zzz_cc_australia.3
+			if = { #Reset target state to colonized state if possible
+				limit = {
+					scope:australia_annex_state_scope = {
+						state_region = {
+							any_state = {
+								owner = scope:is_australia_scope
+							}
+						}
+					}
+				}
+				scope:australia_annex_state_scope = {
+					state_region = {
+						random_scope_state = {
+							limit = { owner = scope:is_australia_scope }
+							THIS.state_region = { add_claim = scope:australia_annex_scope }
+							save_scope_as = australia_state_scope
+						}
+					}
+				}
+			}
+			if = {
+				limit = { NOT = { scope:is_australia_scope = { has_claim = scope:australia_annex_scope } } }
+				add_claim = scope:australia_annex_state_scope.state_region
+			}
+			create_diplomatic_play = {
+				target_country = ROOT
+				type = dp_annex_war #To be changed to some version of conquer_state as soon as you can do so against a decentralized nation
+				add_war_goal = {
+					holder = scope:australia_annex_scope
+					type = return_state
+					target_state = scope:australia_state_scope
+				}
+			}
+		}
+	}
+}
+
+# Local Tribe Says Yes
+zzz_cc_australia.2 = {
+	type = country_event
+	placement = scope:australia_annex_state_scope
+
+	title = zzz_cc_australia.2.t
+	desc = zzz_cc_australia.2.d
+	flavor = zzz_cc_australia.2.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_signed_contract.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		# triggered by event
+	}
+
+	option = {
+		name = zzz_cc_australia.2.a
+		default_option = yes
+		scope:australia_annex_state_scope = { set_state_owner = scope:is_australia_scope }
+		create_truce = { country = scope:australia_annex_scope months = 120 }
+	}
+}
+
+# Local Tribe Refuses
+zzz_cc_australia.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_australia.3.t
+	desc = zzz_cc_australia.3.d
+	flavor = zzz_cc_australia.3.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_signed_contract.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		# triggered by event
+	}
+
+	option = {
+		name = zzz_cc_australia.3.a
+		default_option = yes
+	}
+}
+
+##Frontier Wars' Events
+# Bathurst War, New South Wales
+zzz_cc_australia.4 = {
+	type = country_event
+	placement = scope:australia_annex_state_scope
+
+	title = zzz_cc_australia.4.t
+	desc = zzz_cc_australia.4.d
+	flavor = zzz_cc_australia.4.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_signed_contract.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+	
+	cooldown = { years = 5 }
+
+	trigger = {
+		has_journal_entry = je_converter_colonization_frontier_wars
+		any_scope_state = {
+			any_neighbouring_state = {
+				state_region = s:STATE_NEW_SOUTH_WALES
+				owner = {
+					NOT = { has_truce_with = ROOT }
+					NOT = { has_war_with = ROOT }
+					this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+					is_country_type = decentralized
+				}
+			}
+		}
+	}
+	
+	immediate = {
+		save_scope_as = is_australia_scope
+		random_scope_state = {
+			limit = {
+				any_neighbouring_state = {
+					state_region = s:STATE_NEW_SOUTH_WALES
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+			}
+			save_scope_as = australia_state_scope
+			random_neighbouring_state = {
+				limit = {
+					state_region = s:STATE_NEW_SOUTH_WALES
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+				owner = { save_scope_as = australia_annex_scope }
+				save_scope_as = australia_annex_state_scope
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_australia.4.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+		scope:australia_annex_scope = { trigger_event = zzz_cc_australia.1 }
+	}
+}
+
+# Eumeralla Wars, Victoria
+zzz_cc_australia.5 = {
+	type = country_event
+	placement = scope:australia_annex_state_scope
+
+	title = zzz_cc_australia.5.t
+	desc = zzz_cc_australia.5.d
+	flavor = zzz_cc_australia.5.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_signed_contract.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+	
+	cooldown = { years = 5 }
+
+	trigger = {
+		has_journal_entry = je_converter_colonization_frontier_wars
+		any_scope_state = {
+			any_neighbouring_state = {
+				state_region = s:STATE_VICTORIA
+				owner = {
+					NOT = { has_truce_with = ROOT }
+					NOT = { has_war_with = ROOT }
+					this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+					is_country_type = decentralized
+				}
+			}
+		}
+	}
+	
+	immediate = {
+		save_scope_as = is_australia_scope
+		random_scope_state = {
+			limit = {
+				any_neighbouring_state = {
+					state_region = s:STATE_VICTORIA
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+			}
+			save_scope_as = australia_state_scope
+			random_neighbouring_state = {
+				limit = {
+					state_region = s:STATE_VICTORIA
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+				owner = { save_scope_as = australia_annex_scope }
+				save_scope_as = australia_annex_state_scope
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_australia.5.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+		scope:australia_annex_scope = { trigger_event = zzz_cc_australia.1 }
+	}
+}
+
+#War of Southern Queensland, Queensland
+zzz_cc_australia.6 = {
+	type = country_event
+	placement = scope:australia_annex_state_scope
+
+	title = zzz_cc_australia.6.t
+	desc = zzz_cc_australia.6.d
+	flavor = zzz_cc_australia.6.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_signed_contract.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+	
+	cooldown = { years = 5 }
+
+	trigger = {
+		has_journal_entry = je_converter_colonization_frontier_wars
+		any_scope_state = {
+			any_neighbouring_state = {
+				state_region = s:STATE_QUEENSLAND
+				owner = {
+					NOT = { has_truce_with = ROOT }
+					NOT = { has_war_with = ROOT }
+					this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+					is_country_type = decentralized
+				}
+			}
+		}
+	}
+	
+	immediate = {
+		save_scope_as = is_australia_scope
+		random_scope_state = {
+			limit = {
+				any_neighbouring_state = {
+					state_region = s:STATE_QUEENSLAND
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+			}
+			save_scope_as = australia_state_scope
+			random_neighbouring_state = {
+				limit = {
+					state_region = s:STATE_QUEENSLAND
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+				save_scope_as = australia_annex_state_scope
+			}
+		}
+		create_country = {
+			tag = UT0
+			state = scope:australia_annex_state_scope
+		}
+		every_state = {
+			limit = {
+				state_region = s:STATE_QUEENSLAND
+				owner = { is_country_type = decentralized }
+			}
+			set_state_owner = c:UT0
+		}
+		s:STATE_QUEENSLAND.region_state:UT0 = { save_scope_as = australia_annex_state_scope }
+	}
+
+	option = {
+		name = zzz_cc_australia.6.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+		c:UT0 = { save_scope_as = australia_annex_scope } #Trying to put this in 'immediate' leads to crashes for some reason
+		scope:australia_annex_scope = { trigger_event = zzz_cc_australia.1 }
+	}
+}
+
+#Pastoralist Conflicts, South Australia
+zzz_cc_australia.7 = {
+	type = country_event
+	placement = scope:australia_annex_state_scope
+
+	title = zzz_cc_australia.7.t
+	desc = zzz_cc_australia.7.d
+	flavor = zzz_cc_australia.7.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_signed_contract.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+	
+	cooldown = { years = 5 }
+
+	trigger = {
+		has_journal_entry = je_converter_colonization_frontier_wars
+		any_scope_state = {
+			any_neighbouring_state = {
+				state_region = s:STATE_SOUTH_AUSTRALIA
+				owner = {
+					NOT = { has_truce_with = ROOT }
+					NOT = { has_war_with = ROOT }
+					this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+					is_country_type = decentralized
+				}
+			}
+		}
+	}
+	
+	immediate = {
+		save_scope_as = is_australia_scope
+		random_scope_state = {
+			limit = {
+				any_neighbouring_state = {
+					state_region = s:STATE_SOUTH_AUSTRALIA
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+			}
+			save_scope_as = australia_state_scope
+			random_neighbouring_state = {
+				limit = {
+					state_region = s:STATE_SOUTH_AUSTRALIA
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+				owner = { save_scope_as = australia_annex_scope }
+				save_scope_as = australia_annex_state_scope
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_australia.7.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+		scope:australia_annex_scope = { trigger_event = zzz_cc_australia.1 }
+	}
+}
+
+#Guerilla Wars/First Strike, Western Australia
+zzz_cc_australia.8 = {
+	type = country_event
+	placement = scope:australia_annex_state_scope
+
+	title = zzz_cc_australia.8.t
+	desc = zzz_cc_australia.8.d
+	flavor = zzz_cc_australia.8.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_signed_contract.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+	
+	cooldown = { years = 5 }
+
+	trigger = {
+		has_journal_entry = je_converter_colonization_frontier_wars
+		any_scope_state = {
+			any_neighbouring_state = {
+				state_region = s:STATE_WESTERN_AUSTRALIA
+				owner = {
+					NOT = { has_truce_with = ROOT }
+					NOT = { has_war_with = ROOT }
+					this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+					is_country_type = decentralized
+				}
+			}
+		}
+	}
+	
+	immediate = {
+		save_scope_as = is_australia_scope
+		random_scope_state = {
+			limit = {
+				any_neighbouring_state = {
+					state_region = s:STATE_WESTERN_AUSTRALIA
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+			}
+			save_scope_as = australia_state_scope
+			random_neighbouring_state = {
+				limit = {
+					state_region = s:STATE_WESTERN_AUSTRALIA
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+				owner = { save_scope_as = australia_annex_scope }
+				save_scope_as = australia_annex_state_scope
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_australia.8.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+		scope:australia_annex_scope = { trigger_event = zzz_cc_australia.1 }
+	}
+	
+	option = {
+		name = zzz_cc_australia.8.b
+		ai_chance = {
+			base = 0
+		}
+		add_treasury = 1000
+	}
+}	
+
+#Northern Territory Gold Rush
+zzz_cc_australia.9 = {
+	type = country_event
+	placement = scope:australia_annex_state_scope
+
+	title = zzz_cc_australia.9.t
+	desc = zzz_cc_australia.9.d
+	flavor = zzz_cc_australia.9.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_gold_prospectors.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+	
+	#cooldown = { months = 1 }
+	cooldown = { years = 5 }
+
+	trigger = {
+		has_journal_entry = je_converter_colonization_frontier_wars
+		has_technology_researched = electric_telegraph
+		any_scope_state = {
+			any_neighbouring_state = {
+				state_region = s:STATE_NORTHERN_TERRITORY
+				owner = {
+					NOT = { has_truce_with = ROOT }
+					NOT = { has_war_with = ROOT }
+					this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+					is_country_type = decentralized
+				}
+			}
+		}
+	}
+	
+	immediate = {
+		save_scope_as = is_australia_scope
+		random_scope_state = {
+			limit = {
+				any_neighbouring_state = {
+					state_region = s:STATE_NORTHERN_TERRITORY
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+			}
+			save_scope_as = australia_state_scope
+			random_neighbouring_state = {
+				limit = {
+					state_region = s:STATE_NORTHERN_TERRITORY
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+				owner = { save_scope_as = australia_annex_scope }
+				save_scope_as = australia_annex_state_scope
+				force_resource_discovery = bg_gold_mining
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_australia.9.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+		scope:australia_annex_scope = { trigger_event = zzz_cc_australia.1 }
+	}
+}
+
+#Black War, Tasmania
+zzz_cc_australia.10 = {
+	type = country_event
+	placement = scope:australia_annex_state_scope
+
+	title = zzz_cc_australia.10.t
+	desc = zzz_cc_australia.10.d
+	flavor = zzz_cc_australia.10.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_signed_contract.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/unspecific/signed_contract"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+	
+	cooldown = { years = 5 }
+
+	trigger = {
+		has_journal_entry = je_converter_colonization_frontier_wars
+		any_scope_state = {
+			any_neighbouring_state = {
+				state_region = s:STATE_TASMANIA
+				owner = {
+					NOT = { has_truce_with = ROOT }
+					NOT = { has_war_with = ROOT }
+					this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+					is_country_type = decentralized
+				}
+			}
+		}
+	}
+	
+	immediate = {
+		save_scope_as = is_australia_scope
+		random_scope_state = {
+			limit = {
+				any_neighbouring_state = {
+					state_region = s:STATE_TASMANIA
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+			}
+			save_scope_as = australia_state_scope
+			random_neighbouring_state = {
+				limit = {
+					state_region = s:STATE_TASMANIA
+					owner = {
+						NOT = { has_truce_with = ROOT }
+						NOT = { has_war_with = ROOT }
+						this.gdp < root.gdp #It would be really funny if this is the check that fails this event
+						is_country_type = decentralized
+					}
+				}
+				owner = { save_scope_as = australia_annex_scope }
+				save_scope_as = australia_annex_state_scope
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_australia.10.a
+		default_option = yes
+		ai_chance = {
+			base = 1
+		}
+		scope:australia_annex_scope = { trigger_event = zzz_cc_australia.1 }
+	}
+}	
