@@ -306,16 +306,6 @@ double V3::SubState::calcBuildingIndustrialWeight(const Building& building, cons
 			return 0;
 	}
 
-	while (buildingGroup->getParentName())
-	{
-		buildingGroup = buildingGroups.getBuildingGroupMap().at(*buildingGroup->getParentName());
-		if (buildingGroup->getCategory())
-		{
-			if (*buildingGroup->getCategory() == "urban")
-				return 0;
-		}
-	}
-
 	// If building isn't urban, run incorporation check.
 	return calcBuildingIncorporationWeight(building, buildingGroups);
 }
