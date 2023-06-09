@@ -11,9 +11,9 @@
 #include "StateModifier.h"
 #include <algorithm>
 #include <cmath>
+#include <iomanip>
 #include <numeric>
 #include <ranges>
-#include <iomanip>
 
 namespace
 {

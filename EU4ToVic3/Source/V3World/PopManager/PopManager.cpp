@@ -392,8 +392,8 @@ void V3::PopManager::generatePopsForNormalSubStates(const std::shared_ptr<State>
 				warnString += " " + pid;
 			}
 			warnString += ") has NO WEIGHT! It's supposed to be imported from EU4! Not generating pops!";
-                        Log(LogLevel::Warning) << warnString;
-                        continue;
+			Log(LogLevel::Warning) << warnString;
+			continue;
 		}
 
 		const auto generatedPopCount = generatePopCountForNormalSubState(subState, unassignedPopCount);
