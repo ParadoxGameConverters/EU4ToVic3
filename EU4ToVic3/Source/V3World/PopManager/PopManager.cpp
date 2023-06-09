@@ -377,26 +377,34 @@ void V3::PopManager::generatePopsForNormalSubStates(const std::shared_ptr<State>
 
 		if (!subState->getWeight())
 		{
+			std::string warnString = "Substate ";
 			if (subState->getOwnerTag())
 			{
-				Log(LogLevel::Warning) << "Substate " << *subState->getOwnerTag() << " in " << state->getName()
-											  << " has NO WEIGHT! It's supposed to be imported from EU4! Not generating pops!";
+				warnString += *subState->getOwnerTag();
 			}
 			else
-				Log(LogLevel::Warning) << "Substate (shoved) in " << state->getName()
-											  << " has NO WEIGHT! It's supposed to be imported from EU4! Not generating pops!";
+			{
+				warnString += "(shoved)";
+			}
+			warnString += " in " + stateName + " (provinces";
+			for (const auto& pid: subState->getProvinceIDs())
+			{
+				warnString += " " + pid;
+			}
+			warnString += ") has NO WEIGHT! It's supposed to be imported from EU4! Not generating pops!";
+			Log(LogLevel::Warning) << warnString;
 			continue;
 		}
 
 		const auto generatedPopCount = generatePopCountForNormalSubState(subState, unassignedPopCount);
 		const auto generatedSlavePopCount = generatePopCountForNormalSubState(subState, unassignedSlavePopCount);
-		const auto vanillaPopCount = generatePopCountForNormalSubState(subState, vanillaStatePops.at(state->getName()).getPopCount());
+		const auto vanillaPopCount = generatePopCountForNormalSubState(subState, vanillaStatePops.at(stateName).getPopCount());
 		subState->generatePops(generatedPopCount, generatedSlavePopCount);
 		subState->setStageForMinorities(true);
 		subState->setVanillaPopCount(vanillaPopCount);
 	}
 
-	if (!vanillaMinorityStatePops.contains(state->getName()) || vanillaMinorityStatePops.at(stateName).getPopCount() == 0)
+	if (!vanillaMinorityStatePops.contains(stateName) || vanillaMinorityStatePops.at(stateName).getPopCount() == 0)
 	{
 		for (const auto& subState: state->getSubStates())
 			subState->setStageForMinorities(false);

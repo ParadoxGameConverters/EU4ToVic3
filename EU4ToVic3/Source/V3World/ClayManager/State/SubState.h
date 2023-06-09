@@ -214,7 +214,7 @@ class SubState
 	int vanillaPopCount = 0; // What pop of substate would be without adjustments
 
 	double industryWeight = 0;								  // Share of owner's industry a substate should get, not normalized
-	int CPBudget = 0;											  // Construction Points for a substate to spend on it's development
+	int CPBudget = 0;											  // Construction Points for a substate to spend on its development
 	int originalCPBudget = 0;								  // Used in Building Weight calculations
 	std::vector<std::shared_ptr<Building>> buildings; // buildings available to build in the subState
 
