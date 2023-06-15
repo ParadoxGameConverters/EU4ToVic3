@@ -42,7 +42,11 @@ void mappers::CultureDefinitionLoader::registerKeys()
 	registerRegex(commonItems::catchallRegex, [this](const std::string& cultureName, std::istream& theStream) {
 		auto relDef = CultureDefinitionEntry(theStream, skipProcessing, skipExport).getCultureDef();
 		relDef.name = cultureName;
-		cultureDefinitions.emplace(cultureName, relDef);
+
+		if (!cultureDefinitions.contains(cultureName))
+			cultureDefinitions.emplace(cultureName, relDef);
+		else
+			cultureDefinitions.at(cultureName) = relDef;
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
