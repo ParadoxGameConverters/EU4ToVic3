@@ -321,6 +321,16 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	if (sourceCountry->hasModifier("the_abolish_slavery_act"))
 		processedData.laws.emplace("law_slavery_banned");
 
+	// (ex-)colonial countries require colonization to continue expanding.
+	if (sourceCountry->isColony())
+	{
+		processedData.laws.emplace("law_colonial_resettlement"); // exploatation is more for africa, imho.
+		processedData.techs.emplace("colonization");
+		processedData.techs.emplace("international_relations");
+		processedData.techs.emplace("tech_bureaucracy");
+		processedData.techs.emplace("urbanization");
+	}
+
 	// custom flag?
 	if (sourceCountry->getNationalColors().getCustomColors())
 		processedData.customColors = sourceCountry->getNationalColors().getCustomColors();
