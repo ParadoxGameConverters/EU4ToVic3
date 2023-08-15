@@ -98,7 +98,7 @@ void OUT::exportCultures(const std::string& outputName, const std::map<std::stri
 	output << "\n";
 	output.close();
 
-	//Copy over Decentralized World discrimination traits
+	// Copy over Decentralized World discrimination traits
 	auto files = commonItems::GetAllFilesInFolder("configurables/decentralized_world/common/discrimination_traits/");
 	for (const auto& file: files)
 		commonItems::TryCopyFile("configurables/decentralized_world/common/discrimination_traits/" + file, "output/" + outputName + "/common/discrimination_traits/" + file);
