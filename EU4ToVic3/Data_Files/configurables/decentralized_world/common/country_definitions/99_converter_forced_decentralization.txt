@@ -10,6 +10,16 @@ ACE = { #Aceh
 	cultures = { sumatran }
 	is_named_from_capital = yes
 }
+ANL = { #Umayyads (Andalusia)
+	color = hsv360{ 82  87  78 }
+	
+	country_type = decentralized
+
+	tier = empire
+	
+	cultures = { bedouin visigothic }
+	capital = STATE_ANDALUSIA
+}
 BAL = { #Bali
 	color = { 201  97  74 }
 	
@@ -91,6 +101,26 @@ BYZ = { #Byzantium
 	cultures = { greek }	
 	capital = STATE_EASTERN_THRACE
 }
+CAS = { #Asturias (Castile)
+	color = hsv360{ 51  67  78 }
+	
+	country_type = decentralized
+
+	tier = kingdom
+	
+	cultures = { visigothic }
+	capital = STATE_ASTURIAS
+}
+CHE = { # Cherokee
+	color = { 105  145  40 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { cherokee }
+	capital = STATE_ARKANSAS
+}
 CRO = { #Croatia
 	color = { 174  227  95 }
 	
@@ -108,9 +138,33 @@ CZH = { #Moravia (Czechoslovakia)
 	country_type = decentralized
 
 	tier = principality
+	religion = animist
 	
 	cultures = { slovak czech }
 	capital = STATE_MORAVIA
+}
+DEN = { # Denmark
+	color = hsv{ 1.01  0.8  0.5 }
+	
+	country_type = decentralized
+
+	tier = kingdom
+	religion = animist
+	
+	cultures = { norse danish }
+	capital = STATE_ZEALAND
+}
+EST = { #Estonia
+	color = { 179  29  100 }
+	
+	country_type = decentralized
+
+	tier = principality
+	religion = animist
+	
+	cultures = { estonian }
+	capital = STATE_ESTONIA
+	is_named_from_capital = yes
 }
 EZO = { # Emishi/Satsumon
 	color = { 129 40 147 }
@@ -122,6 +176,16 @@ EZO = { # Emishi/Satsumon
 	cultures = { ainu japanese }
 	
 	capital = STATE_HOKKAIDO
+}
+FIN = {
+	color = { 205  212  228 }
+	
+	country_type = decentralized
+
+	tier = principality
+	
+	cultures = { finnish }
+	capital = STATE_SOUTHERN_FINLAND
 }
 FRA = { #West Francia
 	color = { 20  50  210 }
@@ -145,7 +209,18 @@ FRS = { # Formosa
 	capital = STATE_FORMOSA
 	#is_named_from_capital = yes
 }
-HAW = { #Hawaii
+GAL = {
+	color = { 13  81  130 }
+	
+	country_type = decentralized
+
+	tier = principality
+	religion = animist
+	
+	cultures = { ukrainian polish }
+	capital = STATE_EAST_GALICIA
+}
+HAW = { # Hawaii
 	color = { 48  169  96 }
 	
 	tier = kingdom
@@ -169,6 +244,38 @@ HUN = { #Avaria
 	cultures = { avar hungarian }
 	capital = STATE_CENTRAL_HUNGARY
 }
+ICL = { #Iceland
+	color = { 62 129 155 }
+	
+	country_type = decentralized
+
+	tier = city_state
+	religion = catholic
+	
+	cultures = { irish }
+	capital = STATE_ICELAND
+}
+IRO = { # Haudenosaunee, archaically known as the Iroquois Confederacy
+	color = { 87 182 80 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	
+	cultures = { iroquoian }
+	
+	capital = STATE_NEW_YORK
+}
+JAN = { # Jan Mayen
+	color = { 17 225 48 }
+	country_type = decentralized
+	
+	tier = city_state
+	religion = animist
+	
+	cultures = { bear }
+	capital = STATE_NORTHERN_NORWAY
+}
 JAP = { # Yamato
 	color = { 194 53 60 }
 	country_type = decentralized
@@ -188,6 +295,17 @@ JMB = { # Jambi
 	cultures = { sumatran }
 	capital = STATE_NORTH_SUMATRA
 }
+KRA = { #Krakow
+	color = { 138  193  231 }
+	
+	country_type = decentralized
+
+	tier = city_state
+	religion = animist
+	
+	capital = STATE_WEST_GALICIA
+	cultures = { polish }
+}
 KOR = { #Gojoseon, but is it Go when it exists in this timeline?
 	color = { 157  144  97 }
 	
@@ -197,6 +315,26 @@ KOR = { #Gojoseon, but is it Go when it exists in this timeline?
 	
 	cultures = { korean }
 	capital = STATE_SEOUL
+}
+LAT = { #Latgale (Latvia)
+	color = { 99  137  153 }
+	
+	country_type = decentralized
+
+	tier = city_state
+	
+	cultures = { latvian }	
+	capital = STATE_LATVIA
+}
+LIT = { #Lithuania
+	color = { 154  69  116 }
+	
+	country_type = decentralized
+
+	tier = principality
+	
+	cultures = { lithuanian }	
+	capital = STATE_LITHUANIA
 }
 LOM = { #Lombardy
 	color = { 146 108 146 }
@@ -238,6 +376,17 @@ MON = { #Dyrrachion
 	cultures = { albanian }
 	capital = STATE_ALBANIA
 }
+PRM = { # Perm
+	color = { 236 159 90 }
+	
+	country_type = decentralized
+	
+	tier = principality
+
+	cultures = { ugrian }
+	
+	capital = STATE_PERM
+}
 KTI = { # Kutai
 	color = { 137 88 58 }
 	
@@ -248,7 +397,7 @@ KTI = { # Kutai
 	cultures = { bornean }
 	capital = STATE_EAST_BORNEO
 }
-LAN = { #Lanfang
+LAN = { # Lanfang
 	color = { 141  89  174 }
 	
 	country_type = decentralized
@@ -258,7 +407,27 @@ LAN = { #Lanfang
 	cultures = { hakka }
 	capital = STATE_WEST_BORNEO
 }
-OCC = { #Middle Francia
+MAY = { # Maya
+	color = { 98 88 142 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	
+	cultures = { mayan }
+	capital = STATE_YUCATAN
+}
+NAH = { # Aztec
+	color = hsv360{ 130 100 52 }
+	
+	country_type = decentralized
+	
+	tier = empire
+	
+	cultures = { nahua mixtec zapotec tarascan }
+	capital = STATE_MEXICO
+}
+OCC = { # Middle Francia
 	color = { 101 50 253 }
 	
 	country_type = decentralized
@@ -267,6 +436,17 @@ OCC = { #Middle Francia
 	
 	cultures = { frankish occitan }
 	capital = STATE_ILE_DE_FRANCE
+}
+OLD = { # Ostfriesland (Oldenburg)
+	color = { 147  130  118 }
+	
+	country_type = recognized
+
+	tier = principality
+	religion = animist
+	
+	cultures = { north_german }
+	capital = STATE_HANNOVER
 }
 PAP = {
 	color = { 211 220 178 }
@@ -277,6 +457,17 @@ PAP = {
 	
 	cultures = { south_italian lombard north_italian }
 	capital = STATE_LAZIO
+}
+POL = {
+	color = { 197  92  106 }
+	
+	country_type = decentralized
+
+	tier = principality
+	religion = animist
+	
+	cultures = { polish }
+	capital = STATE_POSEN
 }
 POM = { #Pomerania
 	color = { 177 51 34 }
@@ -298,6 +489,27 @@ PON = { # Pontianak
 	cultures = { bornean }
 	capital = STATE_WEST_BORNEO
 }
+PUE = { # Pueblo
+	color = { 162 128 8 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { pueblo }
+	
+	capital = STATE_NEW_MEXICO
+}
+PRU = { # Pruthenia (Prussia)
+	color = { 0 49 83 }
+	
+	country_type = decentralized
+
+	tier = principality
+	
+	cultures = { pruthenian }
+	capital = STATE_WEST_PRUSSIA
+}
 SAK = { #Siak
 	color = { 21  196  68 }
 	
@@ -314,9 +526,20 @@ SAX = { #Saxony
 	country_type = decentralized
 
 	tier = kingdom
+	religion = animist
 	
 	cultures = { north_german }
 	capital = STATE_ELBE
+}
+SCO = { # Pictland (Scotland)
+	color = { 199  175  12 }
+	
+	country_type = decentralized
+
+	tier = kingdom
+	
+	cultures = { pictish scottish }
+	capital = STATE_LOWLANDS
 }
 SCW = { #Nisani (Schwarzburg)
 	color = { 98 92 94 }
@@ -378,6 +601,29 @@ SKH = { # Ohtosk
 	cultures = { siberian ainu }
 	capital = STATE_SAKHALIN
 }
+SLV = {
+	color = { 158  161  188 }
+	
+	country_type = decentralized
+
+	tier = principality
+	religion = animist
+	
+	cultures = { slovak }
+	capital = STATE_WEST_SLOVAKIA
+}
+SMI = { # Sapmi
+	color = { 28 146 136 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	religion = animist
+	
+	cultures = { sami }
+	
+	capital = STATE_NORRLAND
+}
 SRB = { # Sorbia
 	color = { 67 80 128 }
 	
@@ -419,6 +665,17 @@ SUL = { #Sulu
 	cultures = { moro }
 	capital = STATE_MINDANAO
 }
+SWE = { #Sweden
+	color = { 87  130  199 }
+	
+	country_type = decentralized
+
+	tier = principality
+	religion = animist
+	
+	cultures = { norse swedish }
+	capital = STATE_SVEALAND
+}
 TID = { #Tidore
 	color = { 176  232  64 }
 	
@@ -429,6 +686,29 @@ TID = { #Tidore
 	cultures = { moluccan }
 	capital = STATE_MOLUCCAS
 }
+TWT = { # Tawantinsuyu
+	color = { 125 92 110 }
+	
+	country_type = decentralized
+	
+	tier = empire
+	religion = animist
+	
+	cultures = { quechua aimara }
+	
+	capital = STATE_LIMA
+}
+UKR = { # Kiev (Ukraine)
+	color = { 212 179 47 }
+	
+	country_type = decentralized
+
+	tier = principality
+	religion = animist
+	
+	cultures = { ukrainian }
+	capital = STATE_KIEV
+}
 UNT = { #United Tribes (Waikato Tainui)
 	color = { 170 167 151 }
 	
@@ -438,4 +718,15 @@ UNT = { #United Tribes (Waikato Tainui)
 	
 	cultures = { maori }
 	capital = STATE_NORTH_ISLAND
+}
+YAK = { # Yakutia
+	color = { 171 216 191 }
+	
+	country_type = decentralized
+	
+	tier = principality
+
+	cultures = { yakut }
+
+	capital = STATE_YAKUTSK
 }

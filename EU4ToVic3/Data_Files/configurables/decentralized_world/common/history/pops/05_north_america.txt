@@ -2504,13 +2504,17 @@ POPS = {
 	# Aguascalientes: 57125 in 1830, 72193, so averaging out to 64659
 	# working total of 313308
 	s:STATE_ZACATECAS = {
-		region_state:C09 = { #Coliman (Colima)
+		region_state:C09 = { # Coliman
+			create_pop = {
+				culture = tarascan
+				size = 10000
+			}
+		}
+		region_state:G05 = { # Guamare
 			create_pop = {
 				culture = nahua
 				size = 27500
 			}
-		}
-		region_state:G05 = { #Guamare
 			create_pop = {
 				culture = otomi
 				size = 450000
@@ -2524,7 +2528,25 @@ POPS = {
 				size = 10000
 			}
 		}
-		region_state:T11 = { #Tonallan
+		region_state:MCO = { # Irechikwa
+			create_pop = {
+				culture = nahua
+				size = 27500
+			}
+			create_pop = {
+				culture = otomi
+				size = 450000
+			}
+			create_pop = {
+				culture = tarascan
+				size = 25000
+			}
+			create_pop = {
+				culture = zapotec
+				size = 10000
+			}
+		}
+		region_state:T11 = { # Tonallan
 			create_pop = {
 				culture = nahua
 				size = 27500
@@ -2537,14 +2559,12 @@ POPS = {
 				culture = tarascan
 				size = 25000
 			}
-		}
-		region_state:MCO = { #Michoacan
 			create_pop = {
 				culture = zapotec
 				size = 92000
 			}
 		}
-		region_state:T12 = { #Tlacuitlapan
+		region_state:T12 = { # Tlacuitlapan
 			create_pop = {
 				culture = otomi #Converter Culture
 				size = 300000

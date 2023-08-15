@@ -169,31 +169,17 @@
 		}		
 	}
 	s:STATE_KAZAN = {
-		region_state:RUS = {
-			create_pop = {
-				culture = russian
-				size = 2455124
-			}
+		region_state:C18 = { #Cheremisa
 			create_pop = {
 				culture = ugrian
-				religion = orthodox
-				size = 100004
-			}
-			create_pop = {
-				culture = tatar
-				size = 642996
-			}
-			create_pop = {
-				culture = tatar
-				religion = orthodox
-				size = 220000
+				size = 320000
 			}
 		}
 		region_state:B20 = { #Bolghars
 			create_pop = {
 				culture = bulgarians
 				religion = animist
-				size = 2455124
+				size = 2400000
 			}
 			create_pop = {
 				culture = ugrian
@@ -204,27 +190,50 @@
 		region_state:M03 = { #Mari
 			create_pop = {
 				culture = ugrian
-				size = 862996
+				size = 662996
+			}
+		}
+		region_state:M25 = { #Murom
+			create_pop = {
+				culture = ugrian
+				size = 55124
 			}
 		}
 		region_state:PRM = { #Perm
 			create_pop = {
 				culture = ugrian
-				size = 100004
+				size = 200004
 			}
 		}
 	}
 	s:STATE_TARTARIA = {
 		region_state:B20 = { #Bolghars
 			create_pop = {
-				culture = bulgarian
-				size = 1656396
+				culture = ugrian
+				size = 30000
 			}
 		}
-		region_state:K24 = {  #Khazaria
+		region_state:C18 = { #Cheremisa
+			create_pop = {
+				culture = ugrian
+				size = 909465
+			}
+		}
+		region_state:K24 = { #Khazaria
 			create_pop = {
 				culture = khazar
-				size = 2000000
+				size = 77000
+			}
+		}
+		region_state:M26 = { #Mordva
+			create_pop = {
+				culture = ugrian
+				size = 1000930
+			}
+			create_pop = {
+				culture = alan
+				religion = animist
+				size = 63601
 			}
 		}
 	}
@@ -549,23 +558,24 @@
 		}
 	}
 	# Please do not ask where these numbers come from.
-	s:STATE_JETISY = {
+	s:STATE_JETISY = { #Ili
 		region_state:K20 = { #Kirgiz
 			create_pop = {
 				culture = kirgiz
-				size = 70642
+				size = 90642
 			}
 		}
 		region_state:K23 = { #Karlukids
 			create_pop = {
-				culture = kazak
-				size = 60000
+				culture = uzbek
+				religion = animist
+				size = 53000
 			}
 		}
 		region_state:U04 = { #Uyghur
 			create_pop = {
 				culture = uighur
-				size = 103000
+				size = 90000
 			}
 			create_pop = {
 				culture = tuvan

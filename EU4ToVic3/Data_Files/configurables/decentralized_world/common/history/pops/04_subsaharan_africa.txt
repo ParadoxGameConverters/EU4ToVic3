@@ -842,7 +842,7 @@
 		}
 	}
 	s:STATE_ZANZIBAR = {
-		region_state:OMA = {
+		region_state:ZAN = { #Zanzibar
 			create_pop = {
 				culture = swahili
 				size = 382800
@@ -1651,14 +1651,24 @@
 		}
 	}
 	s:STATE_MOCAMBIQUE = {
-		region_state:MKU = { #Makua
+		region_state:LMW = { #Lomwe
+			create_pop = {
+				culture = lomwe
+				size = 103000
+			}
 			create_pop = {
 				culture = makua
-				size = 420000
+				size = 10000
 			}
 			create_pop = {
 				culture = swahili
-				size = 19996
+				size = 10000
+			}
+		}
+		region_state:MKU = { #Makua
+			create_pop = {
+				culture = makua
+				size = 400000
 			}
 			create_pop = {
 				culture = makua
@@ -1666,8 +1676,26 @@
 				size = 55996
 			}
 			create_pop = {
+				culture = swahili
+				size = 9996
+			}
+			create_pop = {
+				culture = sena
+				size = 45910
+			}	
+			create_pop = {
 				culture = lacustrine_bantu
-				size = 103996
+				size = 996
+			}
+		}
+		region_state:SNA = { #Sena
+			create_pop = {
+				culture = sena
+				size = 100000
+			}
+			create_pop = {
+				culture = makua
+				size = 10000
 			}
 		}
 		region_state:UYA = { #Uyao
@@ -1679,17 +1707,9 @@
 				culture = chewa
 				size = 128000
 			}
-		}
-		region_state:LMW = {
 			create_pop = {
 				culture = lomwe
 				size = 60000
-			}
-		}
-		region_state:SNA = {
-			create_pop = {
-				culture = sena
-				size = 145910
 			}
 		}
 	}
@@ -2363,6 +2383,10 @@
 				size = 200000
 			}
 			create_pop = {
+				culture = sena
+				size = 22000
+			}
+			create_pop = {
 				culture = lacustrine_bantu
 				size = 6000
 			}
@@ -2377,7 +2401,7 @@
 				size = 2000
 			}
 		}
-		region_state:SNA = {
+		region_state:SNA = { # Sena
 			create_pop = {
 				culture = sena
 				size = 22000
