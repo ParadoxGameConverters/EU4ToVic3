@@ -66,8 +66,8 @@ zzz_cc_australia.1 = {
 				}
 			}
 			if = {
-				limit = { NOT = { scope:is_australia_scope = { has_claim = scope:australia_annex_scope } } }
-				add_claim = scope:australia_annex_state_scope.state_region
+				limit = { NOT = { scope:is_australia_scope = { has_claim = scope:australia_annex_state_scope.state_region } } }
+				scope:australia_annex_state_scope.state_region = { add_claim = scope:is_australia_scope }
 			}
 			create_diplomatic_play = {
 				target_country = ROOT
