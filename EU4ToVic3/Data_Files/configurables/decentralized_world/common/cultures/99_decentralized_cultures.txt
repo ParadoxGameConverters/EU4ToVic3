@@ -42,6 +42,31 @@
 		1 = slavic
 	}
 }
+anglo_saxon = {
+	color = { 230 110 60 }
+	religion = catholic
+	traits = { british_culture_group european_heritage }
+	male_common_first_names = {
+		norm_Adelfrid norm_Adelmar norm_Adelstan norm_Aethelstan norm_Alfric norm_Alfwine norm_Ceadda norm_Cenric norm_Cola norm_Cynebald norm_Cynefrith norm_Cyneric norm_Cyneweard norm_Ealhstan norm_Ecgberht norm_Eoforwine norm_Gladwine norm_Hildrad norm_Hrodulf norm_Hrothgar norm_Leofric norm_Leofsige norm_Leofwine norm_Oswine norm_Sawine norm_Wigberht norm_Wigmund norm_Wigstan norm_Wilfrid norm_Wine 
+	}
+
+	female_common_first_names = {
+		norm_Anne norm_Elizabeth 
+	}
+
+	noble_last_names = {
+		norm_Aelfwig norm_Alfstan norm_Athelred norm_Auchenceter norm_Auchterworthy norm_Bloccsham norm_Brownlowe norm_Burgwine norm_Cerdic norm_Coldren norm_Cuthberht norm_Cwmcott norm_Ecgred norm_Estmund norm_Gardyner norm_Glover norm_Godwinsson norm_Gorbold norm_Hrothsige norm_Hwitmann norm_Lea norm_Leofwine norm_Purcell norm_Unred norm_Wolfsige norm_Wulfstan norm_Wyndham norm_Wynstan norm_Wyther 
+	}
+
+	common_last_names = {
+		norm_Aelfwig norm_Alfstan norm_Athelred norm_Auchenceter norm_Auchterworthy norm_Bloccsham norm_Brownlowe norm_Burgwine norm_Cerdic norm_Coldren norm_Cuthberht norm_Cwmcott norm_Ecgred norm_Estmund norm_Gardyner norm_Glover norm_Godwinsson norm_Gorbold norm_Hrothsige norm_Hwitmann norm_Lea norm_Leofwine norm_Purcell norm_Unred norm_Wolfsige norm_Wulfstan norm_Wyndham norm_Wynstan norm_Wyther 
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian
+	}
+}
 avar={
 	color={ 250 120 90 }
 	religion = animist
@@ -212,6 +237,36 @@ bahnaric={ # Revise Names
 	}
 	graphics = asian
 }
+bear={
+	color={ 255 255 255 }
+	religion = animist
+	traits = { animal_heritage vivaparity }
+	
+	obsessions = {
+		sugar
+	} #Honey!
+	
+	male_common_first_names = {
+		Nanuk Ursus Isbjorn Grrrowr Bjorn Grrgrrr Rawr Bams
+	}
+	female_common_first_names = {
+		Winona Wilhelmina Edwina Maggie Samantha Maddie Ellie Audrey Precious
+		Abby Bitsy Coco Millie Hannah Princess Polly Taffy Candy Penelope Bella Wilma Betty Betsy
+		Ursula
+	}	
+	noble_last_names = {
+		Beliy Medved Bjorn Rawrrorr Rrrrr Grrr Gyp Qoi Styrbjorn Blomstfjellet
+		"Dancer" "Arctoidea" "Carnivora" "Shaggy" "Teddy" "Bera" "Baconi" "Cave" "Bär" "Den" "Teddy" "Fur" "Muncher" "Björnsson" "Threebear" "Sun" "Ursidae" "Carnivora" "Ide" "Brown" "Snout" "Cave" "Claw" "Ursidae" "Baconi" "Helarctos" "Threebear" "Growler" "Bär" "Sun" "Muncher" "Brown"
+	}
+	common_last_names = {
+		Beliy Medved Bjorn Rawrrorr Rrrrr Grrr Gyp Qoi Styrbjorn Blomstfjellet
+		"Dancer" "Arctoidea" "Carnivora" "Shaggy" "Teddy" "Bera" "Baconi" "Cave" "Bär" "Den" "Teddy" "Fur" "Muncher" "Björnsson" "Threebear" "Sun" "Ursidae" "Carnivora" "Ide" "Brown" "Snout" "Cave" "Claw" "Ursidae" "Baconi" "Helarctos" "Threebear" "Growler" "Bär" "Sun" "Muncher" "Brown"
+	}
+	ethnicities = {
+		1 = native_american
+	}
+	graphics = generic
+}
 cham={ # Revise Names
 	color={ 61 100 45 }
 	religion = sunni # Most converted to Islam by 1700s
@@ -290,6 +345,11 @@ dragon={
 	color= { 255 0 0 }
 	religion = animist
 	traits = { animal_heritage oviparity }
+	
+	obsessions = {
+		meat
+	}
+	
 	male_common_first_names = {
 		Fafnir Midgard Apopis Ladon Colchidei Piton Vouivre Drac Gorynych Bantu Mannu Khozen Morzas Xemcel Medeus Morva Nils Bahamut Leviathan Ryujin Zilant Typhos Puff Nyx
 		Toothless Smokey Deathwing Quicksilver "Grey Ghost" Seasmoke Pyre Scorch Dragon Wyrm Lindwurm Dovah Vlad Rattleskin Ash Benedict Rakshasha Draco Dracul
@@ -327,6 +387,63 @@ dragon={
 	}
 	common_last_names={
 		"Kytrapan" "Vorcasymath" "Kytrapan" "Carrafyrt" "Noighyd" "of the Fires" "Grautarrein" "Grautarrein" "of the Sun" "of the Skies" "of the Moon" "Grautarrein" "of the Skies" "Rainbowscale" "Carrafyrt" "of the Moon" "of the Waters" "Noighyd" "Mc’scale" "Colichir" "Eorikamat" "Colichir" "Grautarrein" "Vorcasymath" "Rackart" "of the Skies" "Vorcasymath" "Vilisynther" "of the Moon" "Kosorrat" "of the Waters" "of the Waters" "Seserriff" "Noighyd" "of the Moon" "of the Fires" "Vilisynther" "Gemhide" "of the Waters" "Vilisynther" "Goldscale" "Mc’scale" "Colichir" "Kerokarvar" "Kerokarvar" "Dragaret" "Kerokarvar" "Kytrapan" "Rainbowscale" "Grautarrein" "of the Moon" "Vorcasymath" "of the Skies" "Grautarrein" "of the Moon" "Colichir" "Kerokarvar" "Eorikamat" "of the Earths" "Colichir" "Noighyd" "of the Earths" "of the Fires" "Mc’scale" "Dragaret" "Draokoran" "Vilisynther" "of the Stars" "Vorcasymath" "of the Fires" "Mc’scale" "Eorikamat" "Lipari" "Cefalú" "Mazara" "Caltabellotta" "Catania" "Latakiah" "Rabat"
+	}
+	graphics = generic
+	ethnicities = {
+		1 = native_american
+	}
+}
+equine={
+	color= { 151 106 191 }
+	religion = animist
+	traits = { animal_heritage vivaparity }
+	
+	obsessions = {
+		grain
+	}
+	
+	male_common_first_names = {
+		Spot Star Spirit Blaze Lucky Chief Rain Stormy Duke Traveler "Clever Hans" Dreamer Midnight Twilight Arion Carlos Triumph
+	}
+	female_common_first_names = {
+		Star Misty Spirit Lucky Honey Lady Rain Stormy Annie Willow Dreamer Midnight Twilight Buttermilk Silhouette "Lady Wonder" Rainbow Epona Denise Charisma
+	}
+	noble_last_names = {
+		Glitterhoof Sparklemane Moontail Opaleye Silvercoat Goldmuzzle
+	}
+	common_last_names={
+		Glitterhoof Sparklemane Moontail Opaleye Silvercoat Goldmuzzle
+	}
+	graphics = generic
+	ethnicities = {
+		1 = native_american
+	}
+}
+embera={
+	color= { 235 77 77 }
+	religion = animist
+	traits = { indigenous_american_heritage south_american_group }
+	
+	#Mostly taken from EU4 Cara
+	male_common_first_names = {
+		Anquimarca Atoc Sopa Cayo Topa Coyllas Cusichaca Guaritopa Huachuri Huaypalcon Luyes Marcavilca 
+		Cuyuchi Orco Varanca Pascac Pomaguala Pumi Sopa Quispe Titu Ruminavi Sahuaraura Surandaman Taraque 
+		Tucuycuyche Usca Curiatao Villac Umu Yamqui Mayta Yupanqui Zambiza Zopahua Ninan
+	}
+	female_common_first_names = {
+		Axomamma Cavillaca Chia China Kantuta Nina Ana Maiara
+	}
+	noble_last_names = {
+		Anquimarca Apo Atahualpa Atoc Atoc-Suqui Auqui-Huaman Canchari Chalcuchima Challco Chiaquitinta Chilche Colla-Topa 
+		Curiatao Cusi  Guacra Guaritito Guaritopa Huachuri Huaman Huascar Huaypalcon Illaquita Inquill Llicllic Maila Maras 
+		Marcavilca Mayta  Ninancoro Ozcoc Parinango Paucar Paullu Pomacapi Puma Pusca Puyu-Vilca Quilaco Quingallumbo 
+		Quintiraura Quisquis Quizo Rimac Ronpa Sahuaraura Sotaurco Tanqui Tucuycuyche Tupac-Amaru Yupanqui
+	}
+	common_last_names={
+		Anquimarca Apo Atahualpa Atoc Atoc-Suqui Auqui-Huaman Canchari Chalcuchima Challco Chiaquitinta Chilche Colla-Topa 
+		Curiatao Cusi  Guacra Guaritito Guaritopa Huachuri Huaman Huascar Huaypalcon Illaquita Inquill Llicllic Maila Maras 
+		Marcavilca Mayta  Ninancoro Ozcoc Parinango Paucar Paullu Pomacapi Puma Pusca Puyu-Vilca Quilaco Quingallumbo 
+		Quintiraura Quisquis Quizo Rimac Ronpa Sahuaraura Sotaurco Tanqui Tucuycuyche Tupac-Amaru Yupanqui
 	}
 	graphics = generic
 	ethnicities = {
@@ -380,28 +497,6 @@ frankish = {
 		1 = caucasian
 	}
 }
-guanahatabey={
-	color= { 177 155 194 }
-	religion = animist
-	traits = { indigenous_american_heritage south_american_group }
-	male_common_first_names = {
-		Áhari Ebedimu Gunfuli Kaigouchi Ilumani Pirijá Semén
-		Wiwakaleme Haubariria Toratora Amorotahe Haubariria Kaigouchi Shoko Laliwa Arah Pirijá Arata Toruí Mbicy 
-	}
-	female_common_first_names = {
-		Hayá Isani Takuiba Twengga
-	}
-	noble_last_names = {
-		Eregu Heliya Nenege Waricha Kapongong Makushi Korobahado Panapi Muritaro Fararinno Kafotay Mudaukaho Waia Madinina
-	}
-	common_last_names={
-		Eregu Heliya Nenege Waricha Kapongong Makushi Korobahado Panapi Muritaro Fararinno Kafotay Mudaukaho Waia Madinina
-	}
-	graphics = generic
-	ethnicities = {
-		1 = native_american
-	}
-}
 guaicurian={ 
 	color= { 116 115 132 }
 	religion = animist
@@ -420,6 +515,28 @@ guaicurian={
 	common_last_names={
 		Akimel Tohono "Hia Ced" Sobaipuri Otama Kina Equituni Uturituc Sacaton "Onk Akimal"
 		Yoreme Hiakim Potam Vicam Torim Bacum Cocorit Huirivis Benem Rahum
+	}
+	graphics = generic
+	ethnicities = {
+		1 = native_american
+	}
+}
+guaicuruan={ 
+	color= { 2 13 54 }
+	religion = animist
+	traits = { indigenous_american_heritage south_american_group }
+	#Names taken from Chacoan in EU4
+	male_common_first_names = {
+		Sopa Cayo Topa Coyllas Cusichaca Huachuri Huaypalcon Luyes Marcavilca
+	}
+	female_common_first_names = {
+		Kantuta Nina Ana Maiara
+	}
+	noble_last_names = {
+		Atlatl Mocoví Tobi Pilagá Kadiweu Abipón Mbayá Kadiweu Payaguá
+	}
+	common_last_names={
+		Atlatl Mocoví Tobi Pilagá Kadiweu Abipón Mbayá Kadiweu Payaguá
 	}
 	graphics = generic
 	ethnicities = {
@@ -492,6 +609,50 @@ lokono={
 	}
 	common_last_names={
 		Eregu Heliya Nenege Waricha Kapongong Makushi Korobahado Panapi Muritaro Fararinno Kafotay Mudaukaho Waia Madinina
+	}
+	graphics = generic
+	ethnicities = {
+		1 = native_american
+	}
+}
+mascoian={
+	color= { 120 85 181 }
+	religion = animist
+	traits = { indigenous_american_heritage south_american_group }
+	#Names taken from Chacoan in EU4
+	male_common_first_names = {
+		Sopa Cayo Topa Coyllas Cusichaca Huachuri Huaypalcon Luyes Marcavilca
+	}
+	female_common_first_names = {
+		Kantuta Nina Ana Maiara
+	}
+	noble_last_names = {
+		Atlatl Maskoy Enxet Enlhet Kaskihá Sanapaná Angaité
+	}
+	common_last_names={
+		Atlatl Maskoy Enxet Enlhet Kaskihá Sanapaná Angaité
+	}
+	graphics = generic
+	ethnicities = {
+		1 = native_american
+	}
+}
+matacoan={ 
+	color= { 10 237 245 }
+	religion = animist
+	traits = { indigenous_american_heritage south_american_group }
+	#Names taken from Chacoan in EU4
+	male_common_first_names = {
+		Sopa Cayo Topa Coyllas Cusichaca Huachuri Huaypalcon Luyes Marcavilca
+	}
+	female_common_first_names = {
+		Kantuta Nina Ana Maiara
+	}
+	noble_last_names = {
+		Atlatl Wichí Chorote Maká Nivaclé
+	}
+	common_last_names={
+		Atlatl Vejoz Noktén Wiznay Matawayo Manhui Eklenhui Enimaga
 	}
 	graphics = generic
 	ethnicities = {
@@ -1035,6 +1196,79 @@ penutian = {
 		1 = native_american
 	}
 }
+pictish = {
+	color = { 51 153 153 }
+	religion = catholic
+	traits = { celtic_people european_heritage }
+	#Mostly taken from CK2
+	male_common_first_names={
+		Achiuir Aethon Aenbecan Allan Allcallorred Allisander Aniel Ardle Auust Bili Bran Breth Bridei Briog Broichan
+		Brude Caltram Canu Canuall Canan Caradaig Caruorst Castant Castantin Ciniod Crup Dabuut Deocillimon Deoord
+		Domelch Drest Drosten Eddarrnonn Elpin Enuidaig Erpin Galam Ganant Garalt Gede Gest Gigurum Girom Idual
+		Iduallon Iestan Iuan Irb Lutrin Mael Maelchon Manath Mordeleg Morleo Murtolic Naiton Ninian Pedric Pedur
+		Paul Pidarnoin Ru Ruatirch Rubert Rudri Telurg Telurgan Taran Tarla Uipoig Uist Uuochu
+		Uoret Unen Unuist Urguist Usuullt Uthoil Uudrost Uuen Uuid Uuirp Uuredach Uuroid
+	}
+	female_common_first_names = {
+		Addiena Abrella Allust Arnemetia Brethoc Bride Bronuen Caitrion Cristin Durilia Elaine
+		Elen Eua Madru Maelmurie Mairi Margrud Maud Mor Morag Morien Muriel Neulina Sara
+		Siunod Uen Uluen Uuena Uunis Uusbail
+	}	
+	noble_last_names = {
+		"map Achiuir" "map Bran" "map Caltram" "map Domelch" "map Elpin" "map Galam" "map Idual" "map Lutrin" "map Mordeleg"
+		"map Ninian" "map Paul" "map Ru" "map Taran" "map Uuid"
+	}
+	common_last_names={
+		"map Achiuir" "map Bran" "map Caltram" "map Domelch" "map Elpin" "map Galam" "map Idual" "map Lutrin" "map Mordeleg"
+		"map Ninian" "map Paul" "map Ru" "map Taran" "map Uuid"
+	}
+	graphics = european
+	ethnicities = {
+		1 = caucasian
+	}
+}
+suebi={
+	color= { 160 160 160 }
+	religion = animist
+	traits = { iberian_culture_group german_speaking european_heritage }
+	
+	# Mostly taken from CK2
+	male_common_first_names = {
+		Adeqisio Adoric Agimadus Agriulfum Alamiro Algaster Anila Ansuario Argiovitus Ariamir Arosinda Audeca
+		Badamundus Baldemarius Balderedo Baltarius Baudemiro Becilla Berteiro Bonesindus Boniza Cagildo Cartemiro
+		Chararici Commundus Crodemiro Dagaredus Daildus Damiro Docemiro Donazarius Donegildus Dulcemirus Eboric
+		Egenio Eimiro Eirigu Eisindus Eldegotus Eldesindus Elperico Engomiro Ensaldus Ermaric Evosindo Fagildus
+		Felmiro Fralenko Framuldo Francolino Fredoaldus Froatingus Fromildus Frumeiro Gardingus Gaudesindo Gomedei
+		Gomulfus Gresumarus Gudesteus Gumarius Gundivaldo Guntato Gunterotis Heremigar Hermeric Hespanisco Hildemir
+		Hilderic Hunisco Huniscus Leodegasti Leoderigus Leodulfus Leovaldo Lodemiro Magitus Malaredus Malaric Maldras
+		Marcosendus Massilan Mervigius Miro Moderido Nandaricus Nantildo Neufila Nitigis Notarius Odamiro Odemundus
+		Odericus Onemiro Onoricus Osdulfus Osorico Ostromirus Otualdo Pabregildus Pantard Pantinus Pappinus Pederagildu
+		Pennio Pipinus Provaredo Quedesendo Quedulfus Quidemiro Quidericus Ragimiro Ragolfus Rakericus Randinus
+		Randuarius Ranisclus Rechiar Rechila Refulfo Reirigus Remismund Remisol Rendericus Ricardo Richimund Rodomiro
+		Roelindus Romanisco Romarigus Sagatus Saxomero Segomirus Sentarius Sescutus Sisulfus Spanarius Spoderigo Suavarius
+		Sunila Teobald Teoderedus Theodemar Todegogia Trasmira Trasoldi Tumtuldo Uittimer Venedario Veremund Viamundus
+		Vidraldus Villisendo Vistremiro Zamarius Zendasindo
+	}
+	female_common_first_names = {
+		Acilo Ailo Alatrudia Aliverga Aliverta Aniedrudia Ansetrudia Astriverga Bagina Berina Cenabrida Cisilo Dadilo Dagadruida
+		Desteilli Donadildi Drusilla Ebragundia Ebrildi Eldegundia Emilo Entrudi Ermedrudia Ermildi Espallo Facalo Fagilo Faquilo
+		Fradegundia Framilli Fremosilli Frogildi Froilo Frolio Fronosili Frumildi Frunilo Gelvira Genlo Godoigia Goldrerona Granilo
+		Guandilo Gundiverga Guntedrudia Ildiverga Kindiverga Lallina Liuvilo Mansuara Margilli Mirosinda Penefreda Penetrudia
+		Ragesenda Randilo Raniverta Recerona Recesenda Recesuinda Rezevera Riquilo Rudilo Sabegoto Senuita Sindiverga
+		Sisilli Sisiverta Sitividis Sontrilli Sparuildi Stodildi Suevisco Tanquilli Tederona Tenildi Teodevirga Teodiverta Teodoriga
+		Teudileova Texilli Tractuilli Trasavara Trasmira Trastivigia Vergina Viscaverga Visterlo Vistravara Vistrildi Zanina
+	}
+	noble_last_names = {
+		"von Beira" "von Elbe" "von Galicia" "von Estremadura" "von Alentejo" "Suevi"
+	}
+	common_last_names={
+		"von Beira" "von Elbe" "von Galicia" "von Estremadura" "von Alentejo"
+	}
+	graphics = european
+	ethnicities = {
+		1 = caucasian
+	}
+}
 taino={
 	color= { 16 155 194 }
 	religion = animist
@@ -1270,5 +1504,52 @@ visigothic={
 	graphics = european
 	ethnicities = {
 		1 = caucasian
+	}
+}
+waroid={
+	color= { 177 155 194 }
+	religion = animist
+	traits = { indigenous_american_heritage south_american_group }
+	
+	male_common_first_names = {
+		Áhari Ebedimu Gunfuli Kaigouchi Ilumani Pirijá Semén
+		Wiwakaleme Haubariria Toratora Amorotahe Haubariria Kaigouchi Shoko Laliwa Arah Pirijá Arata Toruí Mbicy 
+	}
+	female_common_first_names = {
+		Hayá Isani Takuiba Twengga
+	}
+	noble_last_names = {
+		Eregu Heliya Nenege Waricha Kapongong Makushi Korobahado Panapi Muritaro Fararinno Kafotay Mudaukaho Waia Madinina
+	}
+	common_last_names={
+		Eregu Heliya Nenege Waricha Kapongong Makushi Korobahado Panapi Muritaro Fararinno Kafotay Mudaukaho Waia Madinina
+	}
+	graphics = generic
+	ethnicities = {
+		1 = native_american
+	}
+}
+zamucoan={
+	color= { 239 222 205 }
+	religion = animist
+	traits = { indigenous_american_heritage south_american_group }
+	
+	#Same as Matacoan
+	male_common_first_names = {
+		norm_Sopa norm_Cayo norm_Topa norm_Coyllas norm_Cusichaca norm_Huachuri norm_Huaypalcon norm_Luyes norm_Marcavilca
+	}
+	female_common_first_names = {
+		norm_Ana norm_Kantuta norm_Maiara norm_Nina
+	}
+	noble_last_names = {
+		norm_Atlatl norm_Chorote norm_Maka norm_Nivacle norm_Wichi
+	}
+	common_last_names={
+		norm_Atlatl norm_Eklenhui norm_Enimaga norm_Manhui norm_Matawayo
+		norm_Nokten norm_Vejoz norm_Wiznay
+	}
+	graphics = generic
+	ethnicities = {
+		1 = native_american
 	}
 }
