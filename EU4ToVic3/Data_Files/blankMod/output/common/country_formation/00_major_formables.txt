@@ -35,7 +35,7 @@ ITA = {
 	unification_play = dp_unify_italy
 	leadership_play = dp_leadership_italy
 
-	required_states_fraction = 0.9
+	required_states_fraction = 0.7
 
 	ai_will_do = { has_technology_researched = nationalism }
 
@@ -45,11 +45,14 @@ ITA = {
 			country_has_primary_culture = cu:south_italian
 		}
 		any_country = {
-			OR = {
-				country_has_primary_culture = cu:north_italian
-				country_has_primary_culture = cu:south_italian
+			filter = {
+				OR = {
+					country_has_primary_culture = cu:north_italian
+					country_has_primary_culture = cu:south_italian				
+				}
 			}
-			has_technology_researched = nationalism
+			has_technology_researched = nationalism	
+			percent = 1
 		}
 	}
 }
