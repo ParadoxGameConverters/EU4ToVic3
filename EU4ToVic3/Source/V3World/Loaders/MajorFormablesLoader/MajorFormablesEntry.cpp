@@ -27,7 +27,18 @@ void V3::MajorFormablesEntry::registerKeys()
 	anyCountryParser.registerKeyword("OR", [this](std::istream& theStream) {
 		orParser.parseStream(theStream);
 	});
+	anyCountryParser.registerKeyword("filter", [this](std::istream& theStream) {
+		filterParser.parseStream(theStream);
+	});
 	anyCountryParser.registerKeyword("has_technology_researched", [this](std::istream& theStream) {
+		requiredTechnology = commonItems::getString(theStream);
+	});
+	anyCountryParser.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+
+	filterParser.registerKeyword("OR", [this](std::istream& theStream) {
+		orParser.parseStream(theStream);
+	});
+	filterParser.registerKeyword("has_technology_researched", [this](std::istream& theStream) {
 		requiredTechnology = commonItems::getString(theStream);
 	});
 	anyCountryParser.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);

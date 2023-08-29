@@ -171,10 +171,10 @@ void EU4::CountryManager::mergeNations()
 		if (mergeBlock.shouldMerge() && !mergeBlock.getMaster().empty())
 		{
 			Log(LogLevel::Info) << "- Merging nations for: " << mergeBlock.getMaster();
-			auto master = getCountry(mergeBlock.getMaster());
+			const auto& master = getCountry(mergeBlock.getMaster());
 			if (!master)
 			{
-				Log(LogLevel::Warning) << "Country " << mergeBlock.getMaster() << " in configurables/merge_nations.txt does not exist in the save! Skipping.";
+				Log(LogLevel::Debug) << "Country " << mergeBlock.getMaster() << " in configurables/merge_nations.txt does not exist in the save! Skipping.";
 				continue;
 			}
 			for (const auto& slaveTag: mergeBlock.getSlaves())
@@ -182,7 +182,7 @@ void EU4::CountryManager::mergeNations()
 				const auto& slave = getCountry(slaveTag);
 				if (!slave)
 				{
-					Log(LogLevel::Warning) << "Country " << slaveTag << " in configurables/merge_nations.txt does not exist in the save! Skipping.";
+					Log(LogLevel::Debug) << "Country " << slaveTag << " in configurables/merge_nations.txt does not exist in the save! Skipping.";
 					continue;
 				}
 				master->eatCountry(slave);
