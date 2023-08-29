@@ -21,6 +21,7 @@ class MajorFormablesEntry: commonItems::parser
 	parser possibleParser;
 	parser anyCountryParser;
 	parser orParser;
+	parser filterParser;
 	std::string activeTag;
 
 	std::vector<std::string> stanzas; // unparsed stanzas.

@@ -36,3 +36,32 @@ TEST(V3World_MajorFormablesEntryTests, FormableCanBeLoaded)
 	EXPECT_THAT(entry.getCultures(), testing::UnorderedElementsAre("cul1", "cul2"));
 	EXPECT_EQ("theTechnology", entry.getRequiredTechnology());
 }
+
+TEST(V3World_MajorFormablesEntryTests, FilteredFormableCanBeLoaded)
+{
+	std::stringstream input;
+	input << "stanza = something\n";
+	input << "stanza2 = { something else }\n";
+	input << "possible = {\n";
+	input << "	OR = {\n";
+	input << "		not really relevant\n";
+	input << "	}\n";
+	input << "	any_country = {\n";
+	input << "		filter = {\n";
+	input << "			OR = {\n ";
+	input << "				country_has_primary_culture = cu:cul1\n";
+	input << "				country_has_primary_culture = cu:cul2\n";
+	input << "			}\n";
+	input << "		}\n";
+	input << "		has_technology_researched = theTechnology\n";
+	input << "		percent = 1\n ";
+	input << "	}\n";
+	input << "}\n";
+	const V3::MajorFormablesEntry entry(input);
+
+	ASSERT_EQ(2, entry.getStanzas().size());
+	EXPECT_EQ("stanza = something", entry.getStanzas()[0]);
+	EXPECT_EQ("stanza2 = { something else }", entry.getStanzas()[1]);
+	EXPECT_THAT(entry.getCultures(), testing::UnorderedElementsAre("cul1", "cul2"));
+	EXPECT_EQ("theTechnology", entry.getRequiredTechnology());
+}
