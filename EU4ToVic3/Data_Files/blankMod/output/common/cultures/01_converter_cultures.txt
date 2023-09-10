@@ -229,7 +229,7 @@ celtiberian = {
 }
 cham={ # Revise Names
 	color={ 61 100 45 }
-	religion = sunni # Most converted to Islam by 1700s
+	religion = sunni 
 	traits = { southeast_asian_heritage malay_culture }
 	male_common_first_names = {
 		Ibrahim Linh Yashya
@@ -434,6 +434,42 @@ gondi = {
 		1 = indian
 	}
 }
+huihui = {
+    color = hsv{0.55 0.45 0.5}
+    religion = sunni
+    traits = { han_chinese north_asian_heritage } # Done so that the Hui and Uighur discriminate eachother
+    male_common_first_names = {
+        "Ahmed"
+        "Hassan"
+        "Mohammed"
+        "Mustafa"
+        "Yusuf"
+        "Zubair"
+    }
+    female_common_first_names = {
+        "Aisha"
+        "Fatima"
+        "Jamila"
+        "Khadijah"
+        "Nadia"
+        "Samira"
+    }
+    noble_last_names = {"Chen" "Li" "Wang" "Zhang"}
+    common_last_names = {
+        "Huang"
+        "Liu"
+        "Ma"
+        "Sun"
+        "Wang"
+        "Xu"
+        "Zhang"
+        "Zhao"
+    }
+    ethnicities = {
+        1 = "asian"
+    }
+    graphics = "asian"
+}
 israeli = {
 	color = { 150  212  214 }
 	religion = jewish
@@ -527,7 +563,7 @@ kamarupan={ # Indo-Aryan Assamese
 }
 lolo = {
     color = hsv{0.6, 0.8, 0.4}
-    religion = "animism"
+    religion = animism
     traits = { burmese_language cuanman_ancestry east_asian_heritage }
     male_common_first_names = {
         "Bai"
@@ -568,9 +604,9 @@ lolo = {
         "Yundong"
 }
     ethnicities = {
-        1 = "asian"
-    }
-    graphics = "asian"
+        1 = south_east_asian
+   	}
+	graphics = asian
 }
 lombard = { # Old Lombard
 	color = { 150 130 160 }
@@ -672,7 +708,69 @@ matacoan = {
 		1 = native_american
 	}
 }
-(Insert Minjia/Bai here)
+minjia = {
+    color = hsv{0.1, 0.43, 0.34}
+    religion = gelugpa
+    traits = { han_chinese sinosphere cuanman_ancestry east_asian_heritage }
+    male_common_first_names = {
+        "Chen"
+        "Deng"
+        "Feng"
+        "Hong"
+        "Huang"
+        "Li"
+        "Liao"
+        "Liu"
+        "Qiu"
+        "Shi"
+        "Shu"
+        "Soong"
+        "Sun"
+        "Tsai"
+        "Wu"
+        "Xie"
+        "Xue"
+        "Yang"
+        "Ye"
+        "Zhang"
+        "Zhen"
+    }
+    female_common_first_names = {
+        "Akew"
+        "Jin"
+        "Jinhong"
+        "Junying"
+        "Qingtang"
+        "Sanniang"
+        "Shanziang"
+        "Shih"
+        "Taiqing"
+        "Xiefen"
+        "Xiugu"
+        "Xuanjiao"
+        "Yu"
+        "Yunmei"
+    }
+    noble_last_names = {"Cui" "Li" "Nie" "Zhang"}
+    common_last_names = {
+        "Dakai"
+        "Fengjia"
+        "Qiu"
+        "Rengan"
+        "Xiuqing"
+        "Xiuquan"
+        "Yatsen"
+        "Yongfu"
+        "Yucheng"
+        "Yunshan"
+        "Zicai"
+    }
+    ethnicities = {
+        1 = south_east_asian
+    }
+    graphics = asian
+}
+
 noric = {
 	color = { 231 34 161 }
 	religion = catholic
