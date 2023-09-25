@@ -1,0 +1,547 @@
+﻿namespace = marx_events
+
+# Marx Spawns
+marx_events.1 = {
+	type = country_event
+
+	title = marx_events.1.t
+	desc = marx_events.1.d
+	flavor = marx_events.1.f
+
+	event_image = {
+		video = "europenorthamerica_russian_serfs"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		has_technology_researched = socialism
+		NOT = { has_global_variable = marx_happened }
+		empty_agitator_slots >= 1
+	}
+
+	immediate = {
+		set_global_variable = {
+			name = marx_happened
+		}
+	}
+
+	option = { #support socialism not marx
+		name = marx_events.1.a
+		default_option = yes
+		ig:ig_trade_unions = {
+			add_modifier = {
+				name = modifier_supported_marx
+				months = normal_modifier_time
+			}
+		}
+		### Converter ###
+		if = {
+			limit = { is_matriarchal_country = yes }
+			random_list = {
+				95 = {
+					trigger = {
+						country_is_in_europe = no
+					}
+					create_character = {
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = yes
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				95 = {
+					trigger = {
+						country_is_in_europe = yes
+					}
+					create_character = {
+						first_name = Karola_Heinrike
+						last_name = Marx
+						historical = yes
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = yes
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					modifier = {
+						if = {
+							limit = {
+								OR = {
+									ruler = {
+										is_feminist_character = yes			### Converter
+									}
+									ig:ig_trade_unions = {
+										leader = {
+											OR = {
+												is_feminist_character = yes			### Converter
+												is_oppressed_gender = yes			### Converter
+											}
+										}
+									}
+								}
+							}
+							add = 10
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_women_in_the_workplace
+							}
+							add = 5
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_womens_suffrage
+							}
+							add = 5
+						}
+					}
+					create_character = { #Karla Marx
+						#role = politician # Remove this line
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = no
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					trigger = {
+						capital = { state_region = s:STATE_TEXAS }
+					}
+					create_character = {
+						first_name = Charleigh # howdy
+						last_name = Marx
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = yes
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				1 = {
+					trigger = {
+						capital = { state_region = s:STATE_ESTONIA } 
+					}
+					create_character = {
+						first_name = Kras
+						last_name = Masov
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = yes
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+			}
+		}
+		else = {
+			random_list = {
+				95 = {
+					trigger = {
+						country_is_in_europe = no
+					}
+					create_character = {
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = no
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				95 = {
+					trigger = {
+						country_is_in_europe = yes
+					}
+					create_character = {
+						first_name = Karl_Heinrich
+						last_name = Marx
+						historical = yes
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = no
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					modifier = {
+						if = {
+							limit = {
+								OR = {
+									ruler = {
+										is_feminist_character = yes			### Converter
+									}
+									ig:ig_trade_unions = {
+										leader = {
+											OR = {
+												is_feminist_character = yes			### Converter
+												is_oppressed_gender = yes			### Converter
+											}
+										}
+									}
+								}
+							}
+							add = 10
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_women_in_the_workplace
+							}
+							add = 5
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_womens_suffrage
+							}
+							add = 5
+						}
+					}
+					create_character = { #Karla Marx
+						#role = politician # Remove this line
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = yes
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					trigger = {
+						capital = { state_region = s:STATE_TEXAS }
+					}
+					create_character = {
+						first_name = Charlie # howdy
+						last_name = Marx
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = no
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				1 = {
+					trigger = {
+						capital = { state_region = s:STATE_ESTONIA } 
+					}
+					create_character = {
+						first_name = Kras
+						last_name = Masov
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = no
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = { #promote him / marxista porque me va la marxa
+		name = marx_events.1.b
+		ig:ig_trade_unions = {
+			add_modifier = {
+				name = modifier_promoted_marx
+				months = normal_modifier_time
+			}
+		}
+		### Converter ###
+		if = {
+			limit = { is_matriarchal_country = yes }
+			random_list = {
+				95 = {
+					trigger = {
+						country_is_in_europe = no
+					}
+					create_character = {
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = yes
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				95 = {
+					trigger = {
+						country_is_in_europe = yes
+					}
+					create_character = {
+						first_name = Karola_Heinrike
+						last_name = Marx
+						historical = yes
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = yes
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					modifier = {
+						if = {
+							limit = {
+								OR = {
+									ruler = {
+										is_feminist_character = yes			### Converter
+									}
+									ig:ig_trade_unions = {
+										leader = {
+											OR = {
+												is_feminist_character = yes			### Converter
+												is_oppressed_gender = yes			### Converter
+											}
+										}
+									}
+								}
+							}
+							add = 10
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_women_in_the_workplace
+							}
+							add = 5
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_womens_suffrage
+							}
+							add = 5
+						}
+					}
+					create_character = { #Karla Marx
+						#role = politician # Remove this line
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = no
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					trigger = {
+						capital = { state_region = s:STATE_TEXAS }
+					}
+					create_character = {
+						first_name = Charleigh # howdy
+						last_name = Marx
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = yes
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				1 = {
+					trigger = {
+						capital = { state_region = s:STATE_ESTONIA } 
+					}
+					create_character = {
+						first_name = Kras
+						last_name = Masov
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = yes
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+			}
+		}
+		else = {
+			random_list = {
+				95 = {
+					trigger = {
+						country_is_in_europe = no
+					}
+					create_character = {
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = no
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				95 = {
+					trigger = {
+						country_is_in_europe = yes
+					}
+					create_character = {
+						first_name = Karl_Heinrich
+						last_name = Marx
+						historical = yes
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = no
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					modifier = {
+						if = {
+							limit = {
+								OR = {
+									ruler = {
+										is_feminist_character = yes			### Converter
+									}
+									ig:ig_trade_unions = {
+										leader = {
+											OR = {
+												is_feminist_character = yes			### Converter
+												is_oppressed_gender = yes			### Converter
+											}
+										}
+									}
+								}
+							}
+							add = 10
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_women_in_the_workplace
+							}
+							add = 5
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_womens_suffrage
+							}
+							add = 5
+						}
+					}
+					create_character = { #Karla Marx
+						#role = politician # Remove this line
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = yes
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					trigger = {
+						capital = { state_region = s:STATE_TEXAS }
+					}
+					create_character = {
+						first_name = Charlie # howdy
+						last_name = Marx
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = no
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				1 = {
+					trigger = {
+						capital = { state_region = s:STATE_ESTONIA } 
+					}
+					create_character = {
+						first_name = Kras
+						last_name = Masov
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = no
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = { #get rid of this man
+		name = marx_events.1.c
+		ig:ig_trade_unions = {
+			add_modifier = {
+				name = modifier_ditched_marx
+				months = normal_modifier_time
+			}
+		}
+	}
+}

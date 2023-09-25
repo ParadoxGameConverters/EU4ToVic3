@@ -1,0 +1,156 @@
+﻿namespace = oscar_wilde_events
+
+oscar_wilde_events.1 = {
+	type = country_event
+	placement = root
+	title = oscar_wilde_events.1.t
+	desc = oscar_wilde_events.1.wilde
+	flavor = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					exists = c:GBR
+					this = c:GBR
+					game_date >= 1880.1.1
+				}
+				desc = oscar_wilde_events.1.flavor_wilde
+			}
+			desc = oscar_wilde_events.1.flavor_author
+		}
+		desc = oscar_wilde_events.1.flavor_quote
+	}
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	minor_left_icon = scope:oscar_wilde
+	
+	trigger = {
+		country_is_in_europe = yes
+		ig:ig_intelligentsia = {
+			is_marginal = no
+		}
+		game_date >= 1880
+		NOT = { has_variable = oscar_wilde_var }
+		has_technology_researched = behaviorism
+	}
+
+	immediate = {
+		set_variable = oscar_wilde_var
+		
+		if = {
+			limit = {
+				capital.region = sr:region_england
+			}
+			##Converter
+			converter_rule_63_effect = yes
+			if = {
+				limit = { has_variable = rule_63_effect }
+				create_character = {
+					template = fem_canonic_wilde_character_template
+					on_created = {
+						set_variable = wilde_var
+						place_character_in_void = 6
+					}
+				}
+			}
+			else = {
+				create_character = {
+					template = canonic_wilde_character_template
+					on_created = {
+						set_variable = wilde_var
+						place_character_in_void = 6
+					}
+				}
+			}
+			##Converter
+		}
+		else = {
+			##Converter
+			converter_rule_63_effect = yes
+			if = {
+				limit = { has_variable = rule_63_effect }
+				create_character = {
+					template = fem_dynamic_wilde_character_template
+					on_created = {
+						set_variable = wilde_var
+						place_character_in_void = 6
+					}
+				}
+			}
+			else = {
+				create_character = {
+					template = dynamic_wilde_character_template
+					on_created = {
+						set_variable = wilde_var
+						place_character_in_void = 6
+					}
+				}
+			}
+			##Converter
+		}
+
+		random_character_in_void = {
+			limit = {
+				has_variable = wilde_var
+			}
+			save_scope_as = oscar_wilde
+		}
+			
+		if = {
+			limit = {
+				game_date >= 1880
+			}
+			scope:oscar_wilde = {
+				set_ideology = ideology:ideology_communist
+			}
+		}
+
+	}
+
+	option = {
+		default_option = yes
+		name = oscar_wilde_events.1.a
+		custom_tooltip = oscar_wilde_tt
+		ig:ig_intelligentsia = {
+			add_modifier = {
+				name = happy_arts_protected
+				months = normal_modifier_time
+			}
+		}
+		ig:ig_devout = {
+			add_modifier = {
+				name = unhappy_defended_homosexuality
+				months = normal_modifier_time
+			}
+		}
+	}
+
+	option = { 
+		name = oscar_wilde_events.1.b
+		ig:ig_petty_bourgeoisie = {
+			add_modifier = {
+				name = imprisoning_gentlemen
+				months = normal_modifier_time
+			}
+		}
+		add_modifier = {
+			name = upheld_ruling
+			months = normal_modifier_time
+		}
+	}
+
+	option = { 
+		name = oscar_wilde_events.1.c
+		add_radicals = {
+			pop_type = clergymen
+			value = 0.1
+		}
+		add_loyalists = {
+			pop_type = academics
+			value = 0.2
+		}
+	}
+}

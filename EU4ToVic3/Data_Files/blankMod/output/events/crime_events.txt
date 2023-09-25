@@ -1,0 +1,542 @@
+﻿namespace = crime_events
+
+crime_events.1 = { #Train Robbery
+	type = country_event
+	placement = scope:train_robbery_state
+
+	title = crime_events.1.t
+	desc = crime_events.1.d
+	flavor = crime_events.1.f
+
+	event_image = {
+		video = "unspecific_trains"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	cooldown = { months = normal_modifier_time }
+
+	trigger = {
+		NOT = { has_variable = police_cooldown }
+		institution_investment_level = {
+			institution = institution_police
+			value < 4
+		}
+		any_state = {
+			owner = ROOT
+			radical_fraction = {
+				value > 0.40
+				pop_type = laborers
+			}
+			has_building = building_railway
+			NOT = {
+				has_variable = train_robbery_variable
+			}
+			is_incorporated = no
+			any_neighbouring_state = {
+				owner = ROOT
+				is_incorporated = yes
+			}
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = police_cooldown
+			years = 2
+		}
+		random_state = {
+			limit = {
+				owner = ROOT
+				radical_fraction = {
+					value > 0.40
+					pop_type = laborers
+				}
+				has_building = building_railway
+				NOT = {
+					has_variable = train_robbery_variable
+				}
+				is_incorporated = no
+				any_neighbouring_state = {
+					owner = ROOT
+					is_incorporated = yes
+				}
+			}
+			save_scope_as = train_robbery_state
+			set_variable = {
+				name = train_robbery_variable
+			}
+		}
+		random_character = {
+			limit = {
+				is_ruler = no
+				culture = {
+					NOT = { culture_is_discriminated_in = ROOT }
+				}
+			}
+			save_scope_as = suitable_name
+		}
+	}
+	option = {
+		name = crime_events.1.a
+		add_modifier = {
+			name = funding_marshals
+			months = normal_modifier_time
+		}
+	}
+	option = {
+		name = crime_events.1.b
+		default_option = yes
+		scope:train_robbery_state = {
+			add_modifier = {
+				name = modifier_train_robberies
+				months = normal_modifier_time
+			}
+		}
+	}
+}
+
+crime_events.2 = { #Organised crime found in state
+	type = country_event
+	placement = scope:organised_crime_state
+
+	title = crime_events.2.t
+	desc = crime_events.2.d
+	flavor = crime_events.2.f
+
+	event_image = {
+		video = "unspecific_vandalized_storefront"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	cooldown = { months = normal_modifier_time }
+
+	trigger = {
+		NOT = { has_variable = police_cooldown }
+		institution_investment_level = {
+			institution = institution_police
+			value < 4
+		}
+		any_scope_state = {
+			radical_fraction = {
+				value > 0.40
+				pop_type = laborers
+			}
+			has_building = building_urban_center
+			is_incorporated = yes
+			NOR = {
+				has_modifier = modifier_organised_crime_suppressed
+				has_modifier = modifier_organised_crime
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = police_cooldown
+			years = 2
+		}
+		random_scope_state = {
+			limit = {
+				radical_fraction = {
+					value > 0.40
+					pop_type = laborers
+				}
+				is_incorporated = yes
+				has_building = building_urban_center
+				NOR = {
+					has_modifier = modifier_organised_crime_suppressed
+					has_modifier = modifier_organised_crime
+				}
+			}
+			save_scope_as = organised_crime_state
+		}
+		set_variable = temperance_organised_crime_var
+	}
+
+	option = {
+		name = crime_events.2.a
+		add_modifier = {
+			name = modifier_organised_crime_suppressed
+			multiplier = money_amount_multiplier_small
+			months = normal_modifier_time
+		}
+		if = {
+			limit = {
+				has_variable = prohibition_laws_var
+			}
+			custom_tooltip = prohibition_laws_weak_pm.tt
+			change_variable = {
+				name = prohibition_laws_var
+				add = 2
+			}
+		}
+	}
+
+	option = {
+		name = crime_events.2.b
+		default_option = yes
+		add_modifier = {
+			name = modifier_organised_crime
+			months = normal_modifier_time
+		}
+	}
+}
+
+crime_events.10 = { #First horrific murders makes the newspapers
+	type = country_event
+	placement = scope:serial_killer_state
+
+	title = crime_events.10.t
+	desc = crime_events.10.d
+	flavor = crime_events.10.f
+
+	event_image = {
+		video = "southamerica_public_figure_assassination"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		has_variable = var_jack_ripper_possible
+		is_player = yes
+		any_scope_state = {
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_urban_center
+				level >= 10
+			}
+		}
+		NOT = { has_law = law_type:law_no_police }
+		NOT = { has_variable = had_serial_killer_event }
+		NOT = { has_variable = ongoing_assassination_je }
+	}
+
+	immediate = {
+		set_variable = had_serial_killer_event
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				any_scope_building = {
+					is_building_type = building_urban_center
+					level >= 10
+				}
+			}
+			save_scope_as = serial_killer_state
+		}
+	}
+
+	option = {
+		name = crime_events.10.a
+		scope:serial_killer_state = {
+			add_modifier = {
+				name = serial_killer_state_mod
+				months = very_long_modifier_time
+			}
+		}
+		add_journal_entry = {
+			type = je_serial_killer
+			target = scope:serial_killer_state
+		}
+		set_variable = ongoing_serial_killer_je #so you don't get the assassination JE at the same time
+	}
+}
+
+crime_events.11 = { #The Criminal was caught
+	type = country_event
+	placement = scope:serial_killer_state_scope
+
+	title = crime_events.11.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = crime_events.11.d
+				trigger = {
+					NOT = { has_variable = important_killer_var }
+				}
+			}
+			triggered_desc = {
+				desc = crime_events.11.d2
+				trigger = {
+					has_variable = important_killer_var
+				}
+			}
+		}
+	}
+	flavor = crime_events.11.f
+
+	event_image = {
+		video = "middleeast_police_breaking_door"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		# triggered by je_serial_killer pulse
+		any_scope_character = {
+			is_ruler = no
+			is_oppressed_gender = no		### Converter
+			interest_group = {
+				is_marginal = no
+			}
+			age > 18
+		}
+	}
+
+	immediate = {
+		random_scope_character = {
+			limit = {
+				is_ruler = no
+				is_oppressed_gender = no		### Converter
+				interest_group = {
+					is_marginal = no
+				}
+				age > 18
+			}
+			save_scope_as = important_killer
+		}
+		random_list = {
+			80 = { }
+			20 = {
+				set_variable = important_killer_var
+			}
+		}
+		random_scope_state = {
+			limit = {
+				has_modifier = serial_killer_state_mod
+			}
+			save_scope_as = serial_killer_state_scope
+		}
+		set_variable = serial_killer_caught
+	}
+
+	option = {
+		name = crime_events.11.a
+		default_option = yes
+		add_modifier = {
+			name = modifier_killer_caught
+			months = normal_modifier_time
+		}
+		if = {
+			limit = {
+				has_variable = important_killer_var
+			}
+			scope:important_killer = {
+				kill_character = yes
+				interest_group = {
+					add_modifier = {
+						name = serial_killer_ig
+						months = normal_modifier_time
+					}
+				}
+			}
+		}
+	}
+
+	option = { # cover up the identity of the killer
+		name = crime_events.11.b
+		trigger = {
+			has_variable = important_killer_var
+		}
+		set_variable = serial_killer_caught
+		if = {
+			limit = {
+				has_law = law_type:law_outlawed_dissent
+			}
+			scope:important_killer = { # small popularity hit
+				add_modifier = {
+					name = suspected_serial_killer
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_law = law_type:law_censorship
+			}
+			scope:important_killer = { # moderate popularity hit
+				add_modifier = {
+					name = suspected_serial_killer
+					multiplier = 2
+				}
+			}
+		}
+		else = {
+			scope:important_killer = { # major popularity hit
+				add_modifier = {
+					name = suspected_serial_killer
+					multiplier = 3
+				}
+			}
+		}
+	}	
+}
+
+crime_events.12 = { # Cryptic letter
+	type = country_event
+	placement = scope:serial_killer_state_scope
+
+	title = crime_events.12.t
+	desc = crime_events.12.d
+	flavor = crime_events.12.f
+
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		# triggered by je_serial_killer pulse
+		NOR = {
+			has_modifier = serial_killer_active_investigation
+			has_modifier = consulting_academics_serial_killer
+			has_modifier = police_investigation_serial_killer
+			has_modifier = bumbling_incompetence_serial_killer
+		}
+		any_scope_state = {
+			has_modifier = serial_killer_state_mod
+		}
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				has_modifier = serial_killer_state_mod
+			}
+			save_scope_as = serial_killer_state_scope
+		}
+	}
+
+	option = { # ask academics for help
+		name = crime_events.12.a
+		highlighted_option = yes
+		trigger = {
+			any_scope_state = {
+				any_scope_building = {
+					is_building_type = building_university
+					level >= 5
+				}
+			}
+		}
+		custom_tooltip = improved_serial_killer_chance
+		add_modifier = { # authority cost
+			name = serial_killer_active_investigation
+			months = short_modifier_time
+		}
+		add_modifier = { # academics polstr
+			name = consulting_academics_serial_killer
+			months = short_modifier_time
+		}
+	}
+
+	option = { # the police will examine this from every angle
+		name = crime_events.12.b
+		default_option = yes
+		highlighted_option = yes
+		trigger = {
+			institution_investment_level = {
+				institution = institution_police
+				value >= 3
+			}
+		}
+		custom_tooltip = improved_serial_killer_chance
+		add_modifier = { # authority cost
+			name = serial_killer_active_investigation
+			months = short_modifier_time
+		}
+		add_modifier = { # officers polstr
+			name = police_investigation_serial_killer
+			months = short_modifier_time
+		}
+	}
+
+	option = { # we have no idea how to use this
+		name = crime_events.12.c
+		default_option = yes
+		add_modifier = { # legitimacy
+			name = bumbling_incompetence_serial_killer
+			months = short_modifier_time
+		}
+	}
+}
+
+crime_events.13 = { #The murderer kills again
+	type = country_event
+	placement = scope:serial_killer_state_scope
+
+	title = crime_events.13.t
+	desc = crime_events.13.d
+	flavor = crime_events.13.f
+
+	event_image = {
+		video = "southamerica_public_figure_assassination"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	duration = 3
+
+	trigger = {
+		# triggered by je_serial_killer pulse
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				has_modifier = serial_killer_state_mod
+			}
+			save_scope_as = serial_killer_state_scope
+		}
+	}
+
+	option = { # the pattern is becoming clearer
+		name = crime_events.13.a
+		trigger = {
+			NOT = { has_modifier = serial_killer_active_investigation }
+		}
+		custom_tooltip = improved_serial_killer_chance
+		add_modifier = { # authority
+			name = serial_killer_active_investigation
+			months = short_modifier_time
+		}
+		scope:serial_killer_state_scope = {
+			add_modifier = {
+				name = modifier_public_worried
+				months = normal_modifier_time
+			}
+		}
+	}
+
+	option = { # tragic
+		name = crime_events.13.b
+		default_option = yes
+		scope:serial_killer_state_scope = {
+			add_modifier = {
+				name = modifier_public_worried
+				months = normal_modifier_time
+			}
+		}
+	}
+}
