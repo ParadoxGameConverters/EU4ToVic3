@@ -321,6 +321,15 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	if (sourceCountry->hasModifier("the_abolish_slavery_act"))
 		processedData.laws.emplace("law_slavery_banned");
 
+	// state atheism - we're setting this law right here and now as it's a base for further laws later when we have techs.
+	if (sourceCountry->hasModifier("cult_of_reason"))
+	{
+		processedData.techs.emplace("rationalism");
+		processedData.techs.emplace("academia");
+		processedData.techs.emplace("empiricism");
+		processedData.laws.emplace("law_state_atheism");
+	}
+
 	// (ex-)colonial countries require colonization to continue expanding.
 	if (sourceCountry->isColony())
 	{
