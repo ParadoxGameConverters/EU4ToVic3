@@ -916,6 +916,33 @@ zzz_cc_dynamic_characters.1 = {
 				remove_variable = potential_caudillismo_culture
 			}
 		}
+		if = {
+			limit = {
+				any_primary_culture = { has_variable = potential_russian_patriarch_culture }
+			}
+			every_primary_culture = {
+				limit = { has_variable = potential_russian_patriarch_culture }
+				remove_variable = potential_russian_patriarch_culture
+			}
+		}
+		if = {
+			limit = {
+				any_primary_culture = { has_variable = potential_pious_culture }
+			}
+			every_primary_culture = {
+				limit = { has_variable = potential_pious_culture }
+				remove_variable = potential_pious_culture
+			}
+		}
+		if = {
+			limit = {
+				any_primary_culture = { has_variable = potential_atheist_culture }
+			}
+			every_primary_culture = {
+				limit = { has_variable = potential_atheist_culture }
+				remove_variable = potential_atheist_culture
+			}
+		}
 	}
 
 	after = {

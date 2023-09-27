@@ -256,9 +256,10 @@ lawgroup_colonization = {
 }
 
 #CHURCHSTATE:
-#law_total_separation 50 !law_theocracy
-#law_freedom_of_conscience 0 !law_theocracy
-#law_state_religion -50
+#law_total_separation 50 !law_theocracy !law_state_atheism
+#law_freedom_of_conscience 0 !law_theocracy !law_state_atheism
+#law_state_religion -50 !law_state_atheism
+#law_state_atheism -100
 lawgroup_church_and_state = {
 	# !THEOCRACY
 	law_total_separation = {
@@ -300,6 +301,11 @@ lawgroup_church_and_state = {
 			ajuuraan_theocracy_reform holy_synod_reform strengthened_the_patriarchy_reform head_of_the_patriarchy_reform
 			fiqh_laws_reform sufism_decree_reform anglican_state_church_reform
 		}
+	}
+	law_state_atheism = {
+		forms = {}
+		ideas = {}
+		reforms = {}
 	}
 }
 
