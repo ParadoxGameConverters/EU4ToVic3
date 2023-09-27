@@ -241,14 +241,19 @@ ideology_atheist = {
 			add = 150
 		}
 		### Converter ###
-		# Since Gnostic intelligentsia aren't anti-clerical
+		# More common in Atheist cultures
 		if = {
 			limit = {
-				scope:interest_group = { is_interest_group_type = ig_intelligentsia }
-				religion = { has_discrimination_trait = gnostic }
+				scope:interest_group = {
+					OR = {
+						is_interest_group_type = ig_armed_forces
+						is_interest_group_type = ig_petty_bourgeoisie
+					}
+				}
+				culture = { is_target_in_global_variable_list = { name = global_atheist_cultures target = this } }
 			}
 			multiply = {
-				value = 0.33
+				value = 2
 			}
 		}
 	}
