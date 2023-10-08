@@ -163,3 +163,33 @@ on_secession_start = {
 		scope:target = { converter_released_country_effect = yes }		##Converter
 	}
 }
+
+# Root = Country
+# scope:target = Uprising country
+on_secession_end = {
+	effect = {
+		scope:target = {		##Converter
+			every_primary_culture = {
+				limit = {
+					OR = {
+						is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_american_cultures target = this }
+						is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+						is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+					}
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+}
