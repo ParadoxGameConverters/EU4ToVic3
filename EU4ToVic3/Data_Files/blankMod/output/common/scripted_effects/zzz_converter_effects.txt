@@ -12,6 +12,7 @@
 # converter_ig_landowners_feminism_matriarchy_effect
 # converter_set_feminist_ideology_effect
 # converter_rule_63_effect
+# converter_colonial_confederation_cultures_effect
 
 adopt_random_antigovernment_ideology = {
 	custom_tooltip = {
@@ -2351,7 +2352,11 @@ converter_historical_leader_culture_effect = {
 					any_scope_pop = {
 						#pop_has_primary_culture = yes
 						culture = {
-							has_discrimination_trait = celtic_people		##For converted IR gaul playthroughs
+							OR = {			##Most likely causes of french IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
 							has_homeland = prev.state
 						}
 					}
@@ -2364,7 +2369,11 @@ converter_historical_leader_culture_effect = {
 					any_scope_pop = {
 						#pop_has_primary_culture = yes
 						culture = {
-							has_discrimination_trait = celtic_people		##For converted IR gaul playthroughs
+							OR = {			##Most likely causes of french IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
 							has_homeland = prev.state
 						}
 					}
@@ -2373,7 +2382,11 @@ converter_historical_leader_culture_effect = {
 					limit = {
 						#pop_has_primary_culture = yes
 						culture = {
-							has_discrimination_trait = celtic_people		##For converted IR gaul playthroughs
+							OR = {			##Most likely causes of french IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
 							has_homeland = prev.state
 						}
 					}
@@ -2507,7 +2520,11 @@ converter_historical_leader_culture_effect = {
 					any_scope_pop = {
 						#culture_accepted = yes
 						culture = {
-							has_discrimination_trait = celtic_people		##For converted IR gaul playthroughs
+							OR = {			##Most likely causes of french IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
 							has_homeland = prev.state
 						}
 					}
@@ -2520,7 +2537,11 @@ converter_historical_leader_culture_effect = {
 					any_scope_pop = {
 						#culture_accepted = yes
 						culture = {
-							has_discrimination_trait = celtic_people		##For converted IR gaul playthroughs
+							OR = {			##Most likely causes of french IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
 							has_homeland = prev.state
 						}
 					}
@@ -2529,7 +2550,11 @@ converter_historical_leader_culture_effect = {
 					limit = {
 						#culture_accepted = yes
 						culture = {
-							has_discrimination_trait = celtic_people		##For converted IR gaul playthroughs
+							OR = {			##Most likely causes of french IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
 							has_homeland = prev.state
 						}
 					}
@@ -5167,11 +5192,14 @@ converter_historical_leader_culture_effect = {
 				any_scope_state = {
 					any_scope_pop = {
 						#pop_has_primary_culture = yes
-						OR = {			##Most likely causes of italian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of italian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 				}
 			}
@@ -5181,21 +5209,27 @@ converter_historical_leader_culture_effect = {
 				limit = {
 					any_scope_pop = {
 						#pop_has_primary_culture = yes
-						OR = {			##Most likely causes of italian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of italian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 				}
 				random_scope_pop = {
 					limit = {
 						#pop_has_primary_culture = yes
-						OR = {			##Most likely causes of italian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of italian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 					culture = {
 						set_global_variable = {
@@ -5396,11 +5430,14 @@ converter_historical_leader_culture_effect = {
 				any_scope_state = {
 					any_scope_pop = {
 						#pop_has_primary_culture = yes
-						OR = {			##Most likely causes of italian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of italian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 				}
 			}
@@ -5410,21 +5447,27 @@ converter_historical_leader_culture_effect = {
 				limit = {
 					any_scope_pop = {
 						#pop_has_primary_culture = yes
-						OR = {			##Most likely causes of italian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of italian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 				}
 				random_scope_pop = {
 					limit = {
 						#pop_has_primary_culture = yes
-						OR = {			##Most likely causes of italian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of italian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 					culture = {
 						set_global_variable = {
@@ -5625,11 +5668,14 @@ converter_historical_leader_culture_effect = {
 				any_scope_state = {
 					any_scope_pop = {
 						#culture_accepted = yes
-						OR = {			##Most likely causes of iberian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of iberian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 				}
 			}
@@ -5639,21 +5685,27 @@ converter_historical_leader_culture_effect = {
 				limit = {
 					any_scope_pop = {
 						#culture_accepted = yes
-						OR = {			##Most likely causes of iberian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of iberian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 				}
 				random_scope_pop = {
 					limit = {
 						#culture_accepted = yes
-						OR = {			##Most likely causes of iberian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of iberian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 					culture = {
 						set_global_variable = {
@@ -5851,11 +5903,14 @@ converter_historical_leader_culture_effect = {
 				any_scope_state = {
 					any_scope_pop = {
 						#pop_has_primary_culture = yes
-						OR = {			##Most likely causes of iberian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of iberian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 				}
 			}
@@ -5865,21 +5920,27 @@ converter_historical_leader_culture_effect = {
 				limit = {
 					any_scope_pop = {
 						#pop_has_primary_culture = yes
-						OR = {			##Most likely causes of iberian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of iberian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 				}
 				random_scope_pop = {
 					limit = {
 						#pop_has_primary_culture = yes
-						OR = {			##Most likely causes of iberian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of iberian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 					culture = {
 						set_global_variable = {
@@ -6252,6 +6313,8 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = caucasus_group
 								has_discrimination_trait = arab_speaking
 								has_discrimination_trait = iranian_turanian_culture_group
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = celtic_people
 							}
 							has_homeland = prev.state
@@ -6272,6 +6335,8 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = caucasus_group
 								has_discrimination_trait = arab_speaking
 								has_discrimination_trait = iranian_turanian_culture_group
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = celtic_people
 							}
 							has_homeland = prev.state
@@ -6288,6 +6353,8 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = caucasus_group
 								has_discrimination_trait = arab_speaking
 								has_discrimination_trait = iranian_turanian_culture_group
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = celtic_people
 							}
 							has_homeland = prev.state
@@ -6435,6 +6502,8 @@ converter_historical_leader_culture_effect = {
 							OR = {			##Most likely causes of romanian CK/IR weirdness
 								has_discrimination_trait = jugoslav
 								has_discrimination_trait = greek_culture
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = celtic_people
 							}
 							has_homeland = prev.state
@@ -6452,6 +6521,8 @@ converter_historical_leader_culture_effect = {
 							OR = {			##Most likely causes of romanian CK/IR weirdness
 								has_discrimination_trait = jugoslav
 								has_discrimination_trait = greek_culture
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = celtic_people
 							}
 							has_homeland = prev.state
@@ -6465,6 +6536,8 @@ converter_historical_leader_culture_effect = {
 							OR = {			##Most likely causes of romanian CK/IR weirdness
 								has_discrimination_trait = jugoslav
 								has_discrimination_trait = greek_culture
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = celtic_people
 							}
 							has_homeland = prev.state
@@ -6604,6 +6677,8 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = romanian_culture_group
 								has_discrimination_trait = west_slavic
 								has_discrimination_trait = greek_culture
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = celtic_people
 							}
 							has_homeland = prev.state
@@ -6622,6 +6697,8 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = romanian_culture_group
 								has_discrimination_trait = west_slavic
 								has_discrimination_trait = greek_culture
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = celtic_people
 							}
 							has_homeland = prev.state
@@ -6636,6 +6713,8 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = romanian_culture_group
 								has_discrimination_trait = west_slavic
 								has_discrimination_trait = greek_culture
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = celtic_people
 							}
 							has_homeland = prev.state
@@ -6775,6 +6854,8 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = romanian_culture_group
 								has_discrimination_trait = west_slavic
 								has_discrimination_trait = greek_culture
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = celtic_people
 							}
 							has_homeland = prev.state
@@ -6793,6 +6874,8 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = romanian_culture_group
 								has_discrimination_trait = west_slavic
 								has_discrimination_trait = greek_culture
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = celtic_people
 							}
 							has_homeland = prev.state
@@ -6807,6 +6890,8 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = romanian_culture_group
 								has_discrimination_trait = west_slavic
 								has_discrimination_trait = greek_culture
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = celtic_people
 							}
 							has_homeland = prev.state
@@ -6945,6 +7030,8 @@ converter_historical_leader_culture_effect = {
 							OR = {			##Most likely causes of north african CK/IR weirdness
 								has_discrimination_trait = greek_culture
 								has_discrimination_trait = italophone
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = african_settler
 							}
 							has_homeland = prev.state
@@ -6962,6 +7049,8 @@ converter_historical_leader_culture_effect = {
 							OR = {			##Most likely causes of north african CK/IR weirdness
 								has_discrimination_trait = greek_culture
 								has_discrimination_trait = italophone
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = african_settler
 							}
 							has_homeland = prev.state
@@ -6975,6 +7064,8 @@ converter_historical_leader_culture_effect = {
 							OR = {			##Most likely causes of north african CK/IR weirdness
 								has_discrimination_trait = greek_culture
 								has_discrimination_trait = italophone
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = african_settler
 							}
 							has_homeland = prev.state
@@ -7349,6 +7440,8 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = greek_culture
 								has_discrimination_trait = italophone
 								has_discrimination_trait = ethiopian
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = african_settler
 							}
 							has_homeland = prev.state
@@ -7367,6 +7460,8 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = greek_culture
 								has_discrimination_trait = italophone
 								has_discrimination_trait = ethiopian
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = african_settler
 							}
 							has_homeland = prev.state
@@ -7381,6 +7476,8 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = greek_culture
 								has_discrimination_trait = italophone
 								has_discrimination_trait = ethiopian
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
 								has_discrimination_trait = african_settler
 							}
 							has_homeland = prev.state
@@ -8636,7 +8733,10 @@ converter_historical_leader_culture_effect = {
 	}
 	every_country = {
 		if = {
-			limit = { is_settler_colonial_country = yes }
+			limit = {
+				is_settler_colonial_country = yes
+				coa_republic_trigger = yes
+			}
 			converter_caudillismo_ideology_effect = yes
 		}
 		if = {
@@ -8750,6 +8850,18 @@ converter_russian_patriarch_ideology_effect = {
 				has_law = law_type:law_traditionalism
 				has_law = law_type:law_peasant_levies
 				has_law = law_type:law_censorship
+			}
+			if = {
+				limit = {
+					ig:ig_devout = {
+						NOT = { has_ideology = ideology:ideology_russian_patriarch }
+					}
+				}
+				ig:ig_devout = {
+					set_interest_group_name = ig_orthodox_church
+					remove_ideology = ideology_patriarchal
+					add_ideology = ideology_russian_patriarch
+				}
 			}
 			every_primary_culture = {
 				change_variable = {
@@ -8874,6 +8986,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 	if = {		# Caudillo Ideology
 		limit = {
 			is_settler_colonial_country = yes
+			coa_republic_trigger = yes
 			is_subject = no
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_caudillismo_cultures target = this } }
 			NOR = {
@@ -9545,6 +9658,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 	if = {		# Caudillo Ideology
 		limit = {
 			is_settler_colonial_country = yes
+			coa_republic_trigger = yes
 			is_subject = no
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_caudillismo_cultures target = this } }
 			NOR = {
@@ -9584,6 +9698,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 	else_if = {		# Southern Planters (Ideology)
 		limit = {
 			is_settler_colonial_country = yes
+			coa_republic_trigger = yes
 			aggressive_diplomatic_plays_permitted = yes
 			OR = {
 				has_law = law_type:law_wealth_voting
@@ -9603,6 +9718,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 	if = {		# Southern Planters (Name)
 		limit = {
 			is_settler_colonial_country = yes
+			coa_republic_trigger = yes
 			country_is_in_north_america = yes
 			any_scope_state = { region = sr:region_dixie }
 		}
@@ -9657,6 +9773,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 			}
 			trigger_else = { has_law = law_type:law_homesteading }
 			is_settler_colonial_country = yes
+			coa_republic_trigger = yes
 			aggressive_diplomatic_plays_permitted = yes
 			any_scope_state = {
 				any_neighbouring_state = {
@@ -9760,6 +9877,16 @@ converter_state_atheism_effect = {
 		}
 	}
 	recalculate_pop_ig_support = yes
+	if = {
+		limit = {
+			ig:ig_petty_bourgeoisie = {
+				NOT = { has_ideology = ideology:ideology_anti_clerical_pb }
+			}
+		}
+		ig:ig_petty_bourgeoisie = {
+			add_ideology = ideology_anti_clerical_pb
+		}
+	}
 	every_primary_culture = {
 		if = {
 			limit = {
@@ -10110,6 +10237,7 @@ converter_copy_ideologies_effect = {
 			remove_ideology = ideology_moralist
 			add_ideology = ideology_confucian
 		}
+	}
 	else_if = {		# Evangelicals
 		limit = {
 			civil_war_origin_country = {
@@ -10581,6 +10709,7 @@ converter_copy_ideologies_effect = {
 		limit = {
 			civil_war_origin_country = {
 				is_settler_colonial_country = yes
+				coa_republic_trigger = yes
 				country_is_in_north_america = yes
 				any_scope_state = { region = sr:region_dixie }
 			}
@@ -10904,5 +11033,819 @@ converter_rule_63_effect = {
 	else_if = {
 		limit = { is_matriarchal_country = yes }
 		set_variable = { name = rule_63_effect value = yes days = 94 }
+	}
+}
+
+converter_colonial_confederation_cultures_effect = {
+	every_country = {
+		if = {
+			limit = {
+				any_scope_state = {
+					zzz_converter_state_is_in_canada = yes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+			}
+			every_scope_state = {
+				limit = {
+					zzz_converter_state_is_in_canada = yes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+				every_scope_pop = {
+					limit = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+					culture = {
+						add_to_global_variable_list = {
+							name = global_canadian_cultures
+							target = this
+						}
+					}
+				}
+			}
+		}
+		#if = {
+		#	limit = {
+		#		NOT = { is_target_in_global_variable_list = { name = global_canadian_cultures target = cu:metis } }
+		#	}
+		#	add_to_global_variable_list = {
+		#		name = global_canadian_cultures
+		#		target = cu:metis
+		#	}
+		#}
+		if = {
+			limit = {
+				any_scope_state = {
+					zzz_converter_state_is_in_america = yes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_american_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+			}
+			every_scope_state = {
+				limit = {
+					zzz_converter_state_is_in_america = yes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_american_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+				every_scope_pop = {
+					limit = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_american_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+					culture = {
+						add_to_global_variable_list = {
+							name = global_american_cultures
+							target = this
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					zzz_converter_state_is_in_california = yes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+			}
+			every_scope_state = {
+				limit = {
+					zzz_converter_state_is_in_california = yes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+				every_scope_pop = {
+					limit = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+					culture = {
+						add_to_global_variable_list = {
+							name = global_californian_cultures
+							target = this
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					zzz_converter_state_is_in_mexico = yes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+			}
+			every_scope_state = {
+				limit = {
+					zzz_converter_state_is_in_mexico = yes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+				every_scope_pop = {
+					limit = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+					culture = {
+						add_to_global_variable_list = {
+							name = global_mexican_cultures
+							target = this
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					zzz_converter_state_is_in_gran_colombia = yes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+			}
+			every_scope_state = {
+				limit = {
+					zzz_converter_state_is_in_gran_colombia = yes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+				every_scope_pop = {
+					limit = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+					culture = {
+						add_to_global_variable_list = {
+							name = global_colombian_cultures
+							target = this
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					region = sr:region_andes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+			}
+			every_scope_state = {
+				limit = {
+					region = sr:region_andes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+				every_scope_pop = {
+					limit = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+					culture = {
+						add_to_global_variable_list = {
+							name = global_andean_cultures
+							target = this
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					zzz_converter_state_is_in_argentina = yes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+			}
+			every_scope_state = {
+				limit = {
+					zzz_converter_state_is_in_argentina = yes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+				every_scope_pop = {
+					limit = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+					culture = {
+						add_to_global_variable_list = {
+							name = global_platinean_cultures
+							target = this
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					region = sr:region_brazil
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+			}
+			every_scope_state = {
+				limit = {
+					region = sr:region_brazil
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+				every_scope_pop = {
+					limit = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_american_heritage
+								is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+					culture = {
+						add_to_global_variable_list = {
+							name = global_brazilian_cultures
+							target = this
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					zzz_converter_state_is_in_australia = yes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_oceanic_heritage
+								is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+			}
+			every_scope_state = {
+				limit = {
+					zzz_converter_state_is_in_australia = yes
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_oceanic_heritage
+								is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+				every_scope_pop = {
+					limit = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = indigenous_oceanic_heritage
+								is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+					culture = {
+						add_to_global_variable_list = {
+							name = global_australian_cultures
+							target = this
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					region = sr:region_southern_africa
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = african_heritage
+								is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+			}
+			every_scope_state = {
+				limit = {
+					region = sr:region_southern_africa
+					any_scope_pop = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = african_heritage
+								is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+				every_scope_pop = {
+					limit = {
+						culture = {
+							NOR = {
+								has_discrimination_trait = african_heritage
+								is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+							}
+							has_homeland = prev.state
+						}
+					}
+					culture = {
+						add_to_global_variable_list = {
+							name = global_cape_cultures
+							target = this
+						}
+					}
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = c:CAN }
+		add_to_global_variable_list = {
+			name = global_unavailable_converter_confederations
+			target = flag:converter_CAN
+		}
+	}
+	else = {
+		#cd:CAN = {
+		#	every_primary_culture = {
+		#		cd:CAN = { remove_primary_culture = prev }
+		#	}
+		#}
+		every_country = {
+			limit = {
+				any_primary_culture = {
+					is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				#cd:CAN = { add_primary_culture = prev }
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = c:USA }
+		add_to_global_variable_list = {
+			name = global_unavailable_converter_confederations
+			target = flag:converter_USA
+		}
+	}
+	else = {
+		#cd:USA = {
+		#	every_primary_culture = {
+		#		cd:USA = { remove_primary_culture = prev }
+		#	}
+		#}
+		every_country = {
+			limit = {
+				any_primary_culture = {
+					is_target_in_global_variable_list = { name = global_american_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					is_target_in_global_variable_list = { name = global_american_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				#cd:USA = { add_primary_culture = prev }
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = c:CAL }
+		add_to_global_variable_list = {
+			name = global_unavailable_converter_confederations
+			target = flag:converter_CAL
+		}
+	}
+	else = {
+		#cd:CAL = {
+		#	every_primary_culture = {
+		#		cd:CAL = { remove_primary_culture = prev }
+		#	}
+		#}
+		every_country = {
+			limit = {
+				any_primary_culture = {
+					is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				#cd:CAL = { add_primary_culture = prev }
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = c:MEX }
+		add_to_global_variable_list = {
+			name = global_unavailable_converter_confederations
+			target = flag:converter_MEX
+		}
+	}
+	else = {
+		#cd:MEX = {
+		#	every_primary_culture = {
+		#		cd:MEX = { remove_primary_culture = prev }
+		#	}
+		#}
+		every_country = {
+			limit = {
+				any_primary_culture = {
+					is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				#cd:MEX = { add_primary_culture = prev }
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = c:GCO }
+		add_to_global_variable_list = {
+			name = global_unavailable_converter_confederations
+			target = flag:converter_GCO
+		}
+	}
+	else = {
+		#cd:GCO = {
+		#	every_primary_culture = {
+		#		cd:GCO = { remove_primary_culture = prev }
+		#	}
+		#}
+		every_country = {
+			limit = {
+				any_primary_culture = {
+					is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				#cd:GCO = { add_primary_culture = prev }
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = c:PEU }
+		add_to_global_variable_list = {
+			name = global_unavailable_converter_confederations
+			target = flag:converter_PEU
+		}
+	}
+	else = {
+		#cd:PEU = {
+		#	every_primary_culture = {
+		#		cd:PEU = { remove_primary_culture = prev }
+		#	}
+		#}
+		every_country = {
+			limit = {
+				any_primary_culture = {
+					is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				#cd:PEU = { add_primary_culture = prev }
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = c:BRZ }
+		add_to_global_variable_list = {
+			name = global_unavailable_converter_confederations
+			target = flag:converter_BRZ
+		}
+	}
+	else = {
+		#cd:BRZ = {
+		#	every_primary_culture = {
+		#		cd:BRZ = { remove_primary_culture = prev }
+		#	}
+		#}
+		every_country = {
+			limit = {
+				any_primary_culture = {
+					is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				#cd:BRZ = { add_primary_culture = prev }
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = c:ARG }
+		add_to_global_variable_list = {
+			name = global_unavailable_converter_confederations
+			target = flag:converter_ARG
+		}
+	}
+	else = {
+		#cd:ARG = {
+		#	every_primary_culture = {
+		#		cd:ARG = { remove_primary_culture = prev }
+		#	}
+		#}
+		every_country = {
+			limit = {
+				any_primary_culture = {
+					is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				#cd:ARG = { add_primary_culture = prev }
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = c:AST }
+		add_to_global_variable_list = {
+			name = global_unavailable_converter_confederations
+			target = flag:converter_AST
+		}
+	}
+	else = {
+		#cd:AST = {
+		#	every_primary_culture = {
+		#		cd:AST = { remove_primary_culture = prev }
+		#	}
+		#}
+		every_country = {
+			limit = {
+				any_primary_culture = {
+					is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				#cd:AST = { add_primary_culture = prev }
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = c:SAF }
+		add_to_global_variable_list = {
+			name = global_unavailable_converter_confederations
+			target = flag:converter_SAF
+		}
+	}
+	else = {
+		#cd:SAF = {
+		#	every_primary_culture = {
+		#		cd:SAF = { remove_primary_culture = prev }
+		#	}
+		#}
+		every_country = {
+			limit = {
+				any_primary_culture = {
+					is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				#cd:SAF = { add_primary_culture = prev }
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
 	}
 }
