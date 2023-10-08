@@ -11,6 +11,821 @@ zzz_cc_dynamic_characters.1 = {
 	immediate = {
 		if = {
 			limit = {
+				game_date < 1836.3.1
+				is_settler_colonial_country = yes
+			}
+			if = {
+				limit = {
+					converter_should_add_confederation_cultures = yes
+					exists = capital
+					capital = { zzz_converter_state_is_in_canada = yes }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_canada = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								NOT = { is_primary_culture_of = prev.owner }
+								converter_is_converter_confederation_culture = yes
+								is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+							}
+						}
+						culture = {
+							prev.owner = { add_primary_culture = prev }
+							if = {
+								limit = {
+									NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+								}
+								add_to_global_variable_list = {
+									name = global_colonial_primary_cultures
+									target = this
+								}
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = yes_converter_colonial_claims
+						is_subject = no
+					}
+					every_state = {
+						limit = {
+							NOR = {
+								owner = ROOT
+								owner = { is_country_type = decentralized }
+							}
+							zzz_converter_state_is_in_canada = yes
+						}
+						state_region = { add_claim = ROOT }
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					converter_should_add_confederation_cultures = yes
+					exists = capital
+					capital = { zzz_converter_state_is_in_america = yes }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_america = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								NOT = { is_primary_culture_of = prev.owner }
+								converter_is_converter_confederation_culture = yes
+								is_target_in_global_variable_list = { name = global_american_cultures target = this }
+							}
+						}
+						culture = {
+							prev.owner = { add_primary_culture = prev }
+							if = {
+								limit = {
+									NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+								}
+								add_to_global_variable_list = {
+									name = global_colonial_primary_cultures
+									target = this
+								}
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = yes_converter_colonial_claims
+						is_subject = no
+					}
+					every_state = {
+						limit = {
+							NOR = {
+								owner = ROOT
+								owner = { is_country_type = decentralized }
+							}
+							zzz_converter_state_is_in_america = yes
+						}
+						state_region = { add_claim = ROOT }
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					converter_should_add_confederation_cultures = yes
+					exists = capital
+					capital = { zzz_converter_state_is_in_california = yes }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_california = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								NOT = { is_primary_culture_of = prev.owner }
+								converter_is_converter_confederation_culture = yes
+								is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+							}
+						}
+						culture = {
+							prev.owner = { add_primary_culture = prev }
+							if = {
+								limit = {
+									NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+								}
+								add_to_global_variable_list = {
+									name = global_colonial_primary_cultures
+									target = this
+								}
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = yes_converter_colonial_claims
+						is_subject = no
+					}
+					every_state = {
+						limit = {
+							NOR = {
+								owner = ROOT
+								owner = { is_country_type = decentralized }
+							}
+							zzz_converter_state_is_in_california = yes
+						}
+						state_region = { add_claim = ROOT }
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					converter_should_add_confederation_cultures = yes
+					exists = capital
+					capital = { zzz_converter_state_is_in_mexico = yes }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_mexico = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								NOT = { is_primary_culture_of = prev.owner }
+								converter_is_converter_confederation_culture = yes
+								is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+							}
+						}
+						culture = {
+							prev.owner = { add_primary_culture = prev }
+							if = {
+								limit = {
+									NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+								}
+								add_to_global_variable_list = {
+									name = global_colonial_primary_cultures
+									target = this
+								}
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = yes_converter_colonial_claims
+						is_subject = no
+					}
+					every_state = {
+						limit = {
+							NOR = {
+								owner = ROOT
+								owner = { is_country_type = decentralized }
+							}
+							zzz_converter_state_is_in_mexico = yes
+						}
+						state_region = { add_claim = ROOT }
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					converter_should_add_confederation_cultures = yes
+					exists = capital
+					capital = { zzz_converter_state_is_in_gran_colombia = yes }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_gran_colombia = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								NOT = { is_primary_culture_of = prev.owner }
+								converter_is_converter_confederation_culture = yes
+								is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+							}
+						}
+						culture = {
+							prev.owner = { add_primary_culture = prev }
+							if = {
+								limit = {
+									NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+								}
+								add_to_global_variable_list = {
+									name = global_colonial_primary_cultures
+									target = this
+								}
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = yes_converter_colonial_claims
+						is_subject = no
+					}
+					every_state = {
+						limit = {
+							NOR = {
+								owner = ROOT
+								owner = { is_country_type = decentralized }
+							}
+							zzz_converter_state_is_in_gran_colombia = yes
+						}
+						state_region = { add_claim = ROOT }
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					converter_should_add_confederation_cultures = yes
+					exists = capital
+					capital = { region = sr:region_andes }
+				}
+				every_scope_state = {
+					limit = { region = sr:region_andes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								NOT = { is_primary_culture_of = prev.owner }
+								converter_is_converter_confederation_culture = yes
+								is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+							}
+						}
+						culture = {
+							prev.owner = { add_primary_culture = prev }
+							if = {
+								limit = {
+									NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+								}
+								add_to_global_variable_list = {
+									name = global_colonial_primary_cultures
+									target = this
+								}
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = yes_converter_colonial_claims
+						is_subject = no
+					}
+					every_state = {
+						limit = {
+							NOR = {
+								owner = ROOT
+								owner = { is_country_type = decentralized }
+							}
+							region = sr:region_andes
+						}
+						state_region = { add_claim = ROOT }
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					converter_should_add_confederation_cultures = yes
+					exists = capital
+					capital = { region = sr:region_brazil }
+				}
+				every_scope_state = {
+					limit = { region = sr:region_brazil }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								NOT = { is_primary_culture_of = prev.owner }
+								converter_is_converter_confederation_culture = yes
+								is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+							}
+						}
+						culture = {
+							prev.owner = { add_primary_culture = prev }
+							if = {
+								limit = {
+									NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+								}
+								add_to_global_variable_list = {
+									name = global_colonial_primary_cultures
+									target = this
+								}
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = yes_converter_colonial_claims
+						is_subject = no
+					}
+					every_state = {
+						limit = {
+							NOR = {
+								owner = ROOT
+								owner = { is_country_type = decentralized }
+							}
+							region = sr:region_brazil
+						}
+						state_region = { add_claim = ROOT }
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					converter_should_add_confederation_cultures = yes
+					exists = capital
+					capital = { zzz_converter_state_is_in_argentina = yes }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_argentina = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								NOT = { is_primary_culture_of = prev.owner }
+								converter_is_converter_confederation_culture = yes
+								is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+							}
+						}
+						culture = {
+							prev.owner = { add_primary_culture = prev }
+							if = {
+								limit = {
+									NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+								}
+								add_to_global_variable_list = {
+									name = global_colonial_primary_cultures
+									target = this
+								}
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = yes_converter_colonial_claims
+						is_subject = no
+					}
+					every_state = {
+						limit = {
+							NOR = {
+								owner = ROOT
+								owner = { is_country_type = decentralized }
+							}
+							zzz_converter_state_is_in_argentina = yes
+						}
+						state_region = { add_claim = ROOT }
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					converter_should_add_confederation_cultures = yes
+					exists = capital
+					capital = { zzz_converter_state_is_in_australia = yes }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_australia = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								NOT = { is_primary_culture_of = prev.owner }
+								converter_is_converter_confederation_culture = yes
+								is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+							}
+						}
+						culture = {
+							prev.owner = { add_primary_culture = prev }
+							if = {
+								limit = {
+									NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+								}
+								add_to_global_variable_list = {
+									name = global_colonial_primary_cultures
+									target = this
+								}
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = yes_converter_colonial_claims
+						is_subject = no
+					}
+					every_state = {
+						limit = {
+							NOR = {
+								owner = ROOT
+								owner = { is_country_type = decentralized }
+							}
+							zzz_converter_state_is_in_australia = yes
+						}
+						state_region = { add_claim = ROOT }
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					converter_should_add_confederation_cultures = yes
+					exists = capital
+					capital = { region = sr:region_southern_africa }
+				}
+				every_scope_state = {
+					limit = { region = sr:region_southern_africa }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								NOT = { is_primary_culture_of = prev.owner }
+								converter_is_converter_confederation_culture = yes
+								is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+							}
+						}
+						culture = {
+							prev.owner = { add_primary_culture = prev }
+							if = {
+								limit = {
+									NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+								}
+								add_to_global_variable_list = {
+									name = global_colonial_primary_cultures
+									target = this
+								}
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_game_rule = yes_converter_colonial_claims
+						is_subject = no
+					}
+					every_state = {
+						limit = {
+							NOR = {
+								owner = ROOT
+								owner = { is_country_type = decentralized }
+							}
+							zzz_converter_state_is_in_south_africa = yes
+						}
+						state_region = { add_claim = ROOT }
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { has_game_rule = converter_native_incorporation_none }
+				game_date < 1836.3.1
+				is_colonized_country = yes
+				is_subject = yes
+				religion = { shares_heritage_trait_with_state_religion = root.overlord }
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { zzz_converter_state_is_in_canada = yes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_canadian_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { zzz_converter_state_is_in_america = yes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_american_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { zzz_converter_state_is_in_california = yes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_californian_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { zzz_converter_state_is_in_mexico = yes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_mexican_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { zzz_converter_state_is_in_gran_colombia = yes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_colombian_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { region = sr:region_andes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_andean_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { region = sr:region_brazil }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_brazilian_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { zzz_converter_state_is_in_argentina = yes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_platinean_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { zzz_converter_state_is_in_australia = yes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_oceanic_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }
+					}
+					overlord = {
+						capital = { NOT = { region = sr:region_oceania } }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_oceanic_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_australian_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { region = sr:region_southern_africa }
+					any_primary_culture = {
+						has_discrimination_trait = african_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_africa = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = african_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_cape_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
 				exists = capital
 				capital = { region = sr:region_southern_africa }
 				any_primary_culture = { has_discrimination_trait = african_settler }
@@ -567,10 +1382,7 @@ zzz_cc_dynamic_characters.1 = {
 				global_var:pi_i_margall_culture = {
 					any_scope_pop = {
 						owner = root
-						OR = {
-							pop_has_primary_culture = yes
-							prev = { shares_non_heritage_trait_with_any_primary_culture = owner }
-						}
+						pop_has_primary_culture = yes
 					}
 				}
 			}
@@ -909,11 +1721,20 @@ zzz_cc_dynamic_characters.1 = {
 		if = {
 			limit = {
 				is_settler_colonial_country = yes
+				coa_republic_trigger = yes
 				any_primary_culture = { has_variable = potential_caudillismo_culture }
 			}
 			every_primary_culture = {
-				limit = { has_variable = potential_caudillismo_culture }
-				remove_variable = potential_caudillismo_culture
+				if = {
+					limit = { has_variable = potential_caudillismo_culture }
+					remove_variable = potential_caudillismo_culture
+				}
+				else = {
+					add_to_global_variable_list = {
+						name = global_caudillismo_cultures
+						target = this
+					}
+				}
 			}
 		}
 		if = {
@@ -939,8 +1760,16 @@ zzz_cc_dynamic_characters.1 = {
 				any_primary_culture = { has_variable = potential_atheist_culture }
 			}
 			every_primary_culture = {
-				limit = { has_variable = potential_atheist_culture }
-				remove_variable = potential_atheist_culture
+				if = {
+					limit = { has_variable = potential_atheist_culture }
+					remove_variable = potential_atheist_culture
+				}
+				else = {
+					add_to_global_variable_list = {
+						name = global_atheist_cultures
+						target = this
+					}
+				}
 			}
 		}
 	}
