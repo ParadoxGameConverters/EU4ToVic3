@@ -1,4 +1,3 @@
-﻿# is_settler_colonial_country
 # uses_new_england_yankee_characters
 # uses_midwest_yankee_characters
 # uses_dixie_characters
@@ -32,33 +31,6 @@
 # uses_tur_characters
 # uses_han_characters
 # uses_jap_characters
-
-is_settler_colonial_country = {
-	coa_republic_trigger = yes
-	trigger_if = {
-		limit = {
-			OR = {
-				country_is_in_north_america = yes
-				country_is_in_central_america = yes
-				country_is_in_south_america = yes
-			}
-		}
-		NOT = { any_primary_culture = { has_discrimination_trait = indigenous_american_heritage } }
-	}
-	trigger_else_if = {
-		limit = {
-			exists = capital
-			capital = { region = sr:region_oceania }
-		}
-		NOT = { any_primary_culture = { has_discrimination_trait = indigenous_oceanic_heritage } }
-	}
-	trigger_else_if = {
-		limit = { country_is_in_africa = yes }
-		any_primary_culture = { has_discrimination_trait = african_settler }
-		NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } }
-	}
-	trigger_else = { always = no }
-}
 
 uses_new_england_yankee_characters = {
 	trigger_if = {
