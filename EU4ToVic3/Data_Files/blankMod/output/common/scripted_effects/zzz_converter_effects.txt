@@ -6138,11 +6138,14 @@ converter_historical_leader_culture_effect = {
 				any_scope_state = {
 					any_scope_pop = {
 						#pop_has_primary_culture = yes
-						OR = {			##Most likely causes of iberian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of iberian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 				}
 			}
@@ -6152,21 +6155,27 @@ converter_historical_leader_culture_effect = {
 				limit = {
 					any_scope_pop = {
 						#pop_has_primary_culture = yes
-						OR = {			##Most likely causes of iberian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of iberian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 				}
 				random_scope_pop = {
 					limit = {
 						#pop_has_primary_culture = yes
-						OR = {			##Most likely causes of iberian IR weirdness
-							has_pop_culture = carthaginian
-							culture = { has_discrimination_trait = celtic_people }
+						culture = {
+							OR = {			##Most likely causes of iberian IR weirdness
+								has_discrimination_trait = latinophone
+								has_discrimination_trait = phoeniciophone
+								has_discrimination_trait = celtic_people
+							}
+							has_homeland = prev.state
 						}
-						culture = { has_homeland = prev.state }
 					}
 					culture = {
 						set_global_variable = {
@@ -11525,63 +11534,11 @@ converter_colonial_confederation_cultures_effect = {
 			target = flag:converter_CAN
 		}
 	}
-	else = {
-		#cd:CAN = {
-		#	every_primary_culture = {
-		#		cd:CAN = { remove_primary_culture = prev }
-		#	}
-		#}
-		every_country = {
-			limit = {
-				any_primary_culture = {
-					is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-			}
-			every_primary_culture = {
-				limit = {
-					is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-				#cd:CAN = { add_primary_culture = prev }
-				add_to_global_variable_list = {
-					name = global_colonial_primary_cultures
-					target = this
-				}
-			}
-		}
-	}
 	if = {
 		limit = { exists = c:USA }
 		add_to_global_variable_list = {
 			name = global_unavailable_converter_confederations
 			target = flag:converter_USA
-		}
-	}
-	else = {
-		#cd:USA = {
-		#	every_primary_culture = {
-		#		cd:USA = { remove_primary_culture = prev }
-		#	}
-		#}
-		every_country = {
-			limit = {
-				any_primary_culture = {
-					is_target_in_global_variable_list = { name = global_american_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-			}
-			every_primary_culture = {
-				limit = {
-					is_target_in_global_variable_list = { name = global_american_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-				#cd:USA = { add_primary_culture = prev }
-				add_to_global_variable_list = {
-					name = global_colonial_primary_cultures
-					target = this
-				}
-			}
 		}
 	}
 	if = {
@@ -11591,63 +11548,11 @@ converter_colonial_confederation_cultures_effect = {
 			target = flag:converter_CAL
 		}
 	}
-	else = {
-		#cd:CAL = {
-		#	every_primary_culture = {
-		#		cd:CAL = { remove_primary_culture = prev }
-		#	}
-		#}
-		every_country = {
-			limit = {
-				any_primary_culture = {
-					is_target_in_global_variable_list = { name = global_californian_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-			}
-			every_primary_culture = {
-				limit = {
-					is_target_in_global_variable_list = { name = global_californian_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-				#cd:CAL = { add_primary_culture = prev }
-				add_to_global_variable_list = {
-					name = global_colonial_primary_cultures
-					target = this
-				}
-			}
-		}
-	}
 	if = {
 		limit = { exists = c:MEX }
 		add_to_global_variable_list = {
 			name = global_unavailable_converter_confederations
 			target = flag:converter_MEX
-		}
-	}
-	else = {
-		#cd:MEX = {
-		#	every_primary_culture = {
-		#		cd:MEX = { remove_primary_culture = prev }
-		#	}
-		#}
-		every_country = {
-			limit = {
-				any_primary_culture = {
-					is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-			}
-			every_primary_culture = {
-				limit = {
-					is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-				#cd:MEX = { add_primary_culture = prev }
-				add_to_global_variable_list = {
-					name = global_colonial_primary_cultures
-					target = this
-				}
-			}
 		}
 	}
 	if = {
@@ -11657,63 +11562,11 @@ converter_colonial_confederation_cultures_effect = {
 			target = flag:converter_GCO
 		}
 	}
-	else = {
-		#cd:GCO = {
-		#	every_primary_culture = {
-		#		cd:GCO = { remove_primary_culture = prev }
-		#	}
-		#}
-		every_country = {
-			limit = {
-				any_primary_culture = {
-					is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-			}
-			every_primary_culture = {
-				limit = {
-					is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-				#cd:GCO = { add_primary_culture = prev }
-				add_to_global_variable_list = {
-					name = global_colonial_primary_cultures
-					target = this
-				}
-			}
-		}
-	}
 	if = {
 		limit = { exists = c:PEU }
 		add_to_global_variable_list = {
 			name = global_unavailable_converter_confederations
 			target = flag:converter_PEU
-		}
-	}
-	else = {
-		#cd:PEU = {
-		#	every_primary_culture = {
-		#		cd:PEU = { remove_primary_culture = prev }
-		#	}
-		#}
-		every_country = {
-			limit = {
-				any_primary_culture = {
-					is_target_in_global_variable_list = { name = global_andean_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-			}
-			every_primary_culture = {
-				limit = {
-					is_target_in_global_variable_list = { name = global_andean_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-				#cd:PEU = { add_primary_culture = prev }
-				add_to_global_variable_list = {
-					name = global_colonial_primary_cultures
-					target = this
-				}
-			}
 		}
 	}
 	if = {
@@ -11723,63 +11576,11 @@ converter_colonial_confederation_cultures_effect = {
 			target = flag:converter_BRZ
 		}
 	}
-	else = {
-		#cd:BRZ = {
-		#	every_primary_culture = {
-		#		cd:BRZ = { remove_primary_culture = prev }
-		#	}
-		#}
-		every_country = {
-			limit = {
-				any_primary_culture = {
-					is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-			}
-			every_primary_culture = {
-				limit = {
-					is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-				#cd:BRZ = { add_primary_culture = prev }
-				add_to_global_variable_list = {
-					name = global_colonial_primary_cultures
-					target = this
-				}
-			}
-		}
-	}
 	if = {
 		limit = { exists = c:ARG }
 		add_to_global_variable_list = {
 			name = global_unavailable_converter_confederations
 			target = flag:converter_ARG
-		}
-	}
-	else = {
-		#cd:ARG = {
-		#	every_primary_culture = {
-		#		cd:ARG = { remove_primary_culture = prev }
-		#	}
-		#}
-		every_country = {
-			limit = {
-				any_primary_culture = {
-					is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-			}
-			every_primary_culture = {
-				limit = {
-					is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-				#cd:ARG = { add_primary_culture = prev }
-				add_to_global_variable_list = {
-					name = global_colonial_primary_cultures
-					target = this
-				}
-			}
 		}
 	}
 	if = {
@@ -11789,32 +11590,6 @@ converter_colonial_confederation_cultures_effect = {
 			target = flag:converter_AST
 		}
 	}
-	else = {
-		#cd:AST = {
-		#	every_primary_culture = {
-		#		cd:AST = { remove_primary_culture = prev }
-		#	}
-		#}
-		every_country = {
-			limit = {
-				any_primary_culture = {
-					is_target_in_global_variable_list = { name = global_australian_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-			}
-			every_primary_culture = {
-				limit = {
-					is_target_in_global_variable_list = { name = global_australian_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				}
-				#cd:AST = { add_primary_culture = prev }
-				add_to_global_variable_list = {
-					name = global_colonial_primary_cultures
-					target = this
-				}
-			}
-		}
-	}
 	if = {
 		limit = { exists = c:SAF }
 		add_to_global_variable_list = {
@@ -11822,29 +11597,43 @@ converter_colonial_confederation_cultures_effect = {
 			target = flag:converter_SAF
 		}
 	}
-	else = {
-		#cd:SAF = {
-		#	every_primary_culture = {
-		#		cd:SAF = { remove_primary_culture = prev }
-		#	}
-		#}
-		every_country = {
-			limit = {
-				any_primary_culture = {
+	every_country = {
+		limit = {
+			any_primary_culture = {
+				OR = {
+					is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+					is_target_in_global_variable_list = { name = global_american_cultures target = this }
+					is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+					is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+					is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+					is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+					is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+					is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+					is_target_in_global_variable_list = { name = global_australian_cultures target = this }
 					is_target_in_global_variable_list = { name = global_cape_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				}
+				NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 			}
-			every_primary_culture = {
-				limit = {
+		}
+		every_primary_culture = {
+			limit = {
+				OR = {
+					is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+					is_target_in_global_variable_list = { name = global_american_cultures target = this }
+					is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+					is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+					is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+					is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+					is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+					is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+					is_target_in_global_variable_list = { name = global_australian_cultures target = this }
 					is_target_in_global_variable_list = { name = global_cape_cultures target = this }
-					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				}
-				#cd:SAF = { add_primary_culture = prev }
-				add_to_global_variable_list = {
-					name = global_colonial_primary_cultures
-					target = this
-				}
+				NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+			}
+			add_to_global_variable_list = {
+				name = global_colonial_primary_cultures
+				target = this
 			}
 		}
 	}
