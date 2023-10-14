@@ -29,6 +29,7 @@ zzz_cc_confederation.1 = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+					capital = { zzz_converter_state_is_in_america = yes }
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -80,6 +81,7 @@ zzz_cc_confederation.2 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+				capital = { zzz_converter_state_is_in_america = yes }
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 			}
@@ -88,6 +90,7 @@ zzz_cc_confederation.2 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+				capital = { zzz_converter_state_is_in_america = yes }
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 				NOT = {
@@ -146,6 +149,7 @@ zzz_cc_confederation.3 = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+					capital = { zzz_converter_state_is_in_california = yes }
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -200,6 +204,7 @@ zzz_cc_confederation.4 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+				capital = { zzz_converter_state_is_in_california = yes }
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 			}
@@ -208,6 +213,7 @@ zzz_cc_confederation.4 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+				capital = { zzz_converter_state_is_in_california = yes }
 				relations:root >= relations_threshold:amicable
 				NOT = {
 					scope:canada_scope_1 = THIS
@@ -361,6 +367,7 @@ zzz_cc_confederation.6 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+				capital = { zzz_converter_state_is_in_america = yes }
 				any_scope_state = {
 					OR = {
 						state_region = s:STATE_MASSACHUSETTS
@@ -587,6 +594,7 @@ zzz_cc_confederation.8 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+				capital = { zzz_converter_state_is_in_california = yes }
 				any_scope_state = {
 					OR = {
 						state_region = s:STATE_WASHINGTON
@@ -699,6 +707,7 @@ zzz_cc_confederation.9 = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+					capital = { zzz_converter_state_is_in_mexico = yes }
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -750,6 +759,7 @@ zzz_cc_confederation.10 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+				capital = { zzz_converter_state_is_in_mexico = yes }
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 			}
@@ -758,6 +768,7 @@ zzz_cc_confederation.10 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+				capital = { zzz_converter_state_is_in_mexico = yes }
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 				NOT = {
@@ -816,6 +827,7 @@ zzz_cc_confederation.11 = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+					capital = { zzz_converter_state_is_in_gran_colombia = yes }
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -870,6 +882,7 @@ zzz_cc_confederation.12 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+				capital = { zzz_converter_state_is_in_gran_colombia = yes }
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 			}
@@ -878,6 +891,7 @@ zzz_cc_confederation.12 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+				capital = { zzz_converter_state_is_in_gran_colombia = yes }
 				relations:root >= relations_threshold:amicable
 				NOT = {
 					scope:canada_scope_1 = THIS
@@ -1031,6 +1045,7 @@ zzz_cc_confederation.14 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+				capital = { zzz_converter_state_is_in_mexico = yes }
 				any_scope_state = {
 					OR = {
 						state_region = s:STATE_JALISCO
@@ -1243,6 +1258,7 @@ zzz_cc_confederation.16 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+				capital = { zzz_converter_state_is_in_gran_colombia = yes }
 				any_scope_state = {
 					OR = {
 						state_region = s:STATE_BOLIVAR
@@ -1349,6 +1365,7 @@ zzz_cc_confederation.17 = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+					capital = { region = sr:region_andes }
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -1400,6 +1417,7 @@ zzz_cc_confederation.18 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+				capital = { region = sr:region_andes }
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 			}
@@ -1408,6 +1426,7 @@ zzz_cc_confederation.18 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+				capital = { region = sr:region_andes }
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 				NOT = {
@@ -1466,6 +1485,7 @@ zzz_cc_confederation.19 = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+					capital = { region = sr:region_brazil }
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -1520,6 +1540,7 @@ zzz_cc_confederation.20 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+				capital = { region = sr:region_brazil }
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 			}
@@ -1528,6 +1549,7 @@ zzz_cc_confederation.20 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+				capital = { region = sr:region_brazil }
 				relations:root >= relations_threshold:amicable
 				NOT = {
 					scope:canada_scope_1 = THIS
@@ -1681,6 +1703,7 @@ zzz_cc_confederation.22 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+				capital = { region = sr:region_andes }
 				any_scope_state = {
 					OR = {
 						state_region = s:STATE_LIMA
@@ -1886,6 +1909,7 @@ zzz_cc_confederation.24 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+				capital = { region = sr:region_brazil }
 				any_scope_state = {
 					OR = {
 						state_region = s:STATE_PARANA
@@ -2001,6 +2025,7 @@ zzz_cc_confederation.25 = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+					capital = { zzz_converter_state_is_in_argentina = yes }
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -2052,6 +2077,7 @@ zzz_cc_confederation.26 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+				capital = { zzz_converter_state_is_in_argentina = yes }
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 			}
@@ -2060,6 +2086,7 @@ zzz_cc_confederation.26 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+				capital = { zzz_converter_state_is_in_argentina = yes }
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 				NOT = {
@@ -2118,6 +2145,7 @@ zzz_cc_confederation.27 = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+					capital = { region = sr:region_southern_africa }
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -2172,6 +2200,7 @@ zzz_cc_confederation.28 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+				capital = { region = sr:region_southern_africa }
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 			}
@@ -2180,6 +2209,7 @@ zzz_cc_confederation.28 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+				capital = { region = sr:region_southern_africa }
 				relations:root >= relations_threshold:amicable
 				NOT = {
 					scope:canada_scope_1 = THIS
@@ -2333,6 +2363,7 @@ zzz_cc_confederation.30 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+				capital = { zzz_converter_state_is_in_argentina = yes }
 				any_scope_state = {
 					OR = {
 						state_region = s:STATE_RIO_NEGRO
@@ -2558,6 +2589,7 @@ zzz_cc_confederation.32 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+				capital = { region = sr:region_southern_africa }
 				any_scope_state = {
 					OR = {
 						state_region = s:STATE_CAPE_COLONY
