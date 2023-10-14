@@ -3,6 +3,7 @@
 
 	is_shown_when_inactive = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+		capital = { zzz_converter_state_is_in_america = yes }
 		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_USA } }
 		is_subject = yes
 	}
@@ -70,10 +71,12 @@ je_america_gbr = {
 	is_shown_when_inactive = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+			capital = { zzz_converter_state_is_in_america = yes }
 			count >= 2
 		}
 		NOT = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+			capital = { zzz_converter_state_is_in_america = yes }
 			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_USA }
 		}
 	}
@@ -138,6 +141,7 @@ je_california_cal = {
 
 	is_shown_when_inactive = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+		capital = { zzz_converter_state_is_in_california = yes }
 		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_CAL } }
 		is_subject = yes
 	}
@@ -184,10 +188,12 @@ je_california_gbr = {
 	is_shown_when_inactive = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_california = yes }
 			count >= 2
 		}
 		NOT = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_california = yes }
 			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_CAL }
 		}
 	}
@@ -233,6 +239,7 @@ je_mexico_mex = {
 
 	is_shown_when_inactive = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+		capital = { zzz_converter_state_is_in_mexico = yes }
 		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_MEX } }
 		is_subject = yes
 	}
@@ -286,10 +293,12 @@ je_mexico_gbr = {
 	is_shown_when_inactive = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+			capital = { zzz_converter_state_is_in_mexico = yes }
 			count >= 2
 		}
 		NOT = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+			capital = { zzz_converter_state_is_in_mexico = yes }
 			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_MEX }
 		}
 	}
@@ -340,6 +349,7 @@ je_colombia_gco = {
 
 	is_shown_when_inactive = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+		capital = { zzz_converter_state_is_in_gran_colombia = yes }
 		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_GCO } }
 		is_subject = yes
 	}
@@ -380,10 +390,12 @@ je_colombia_gbr = {
 	is_shown_when_inactive = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_gran_colombia = yes }
 			count >= 2
 		}
 		NOT = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_gran_colombia = yes }
 			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_GCO }
 		}
 	}
@@ -423,6 +435,7 @@ je_peru_peu = {
 
 	is_shown_when_inactive = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+		capital = { region = sr:region_andes }
 		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_PEU } }
 		is_subject = yes
 	}
@@ -469,10 +482,12 @@ je_peru_gbr = {
 	is_shown_when_inactive = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+			capital = { region = sr:region_andes }
 			count >= 2
 		}
 		NOT = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+			capital = { region = sr:region_andes }
 			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_PEU }
 		}
 	}
@@ -516,6 +531,7 @@ je_brazil_brz = {
 
 	is_shown_when_inactive = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+		capital = { region = sr:region_brazil }
 		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_BRZ } }
 		is_subject = yes
 	}
@@ -565,10 +581,12 @@ je_brazil_gbr = {
 	is_shown_when_inactive = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+			capital = { region = sr:region_brazil }
 			count >= 2
 		}
 		NOT = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+			capital = { region = sr:region_brazil }
 			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_BRZ }
 		}
 	}
@@ -617,6 +635,7 @@ je_argentina_arg = {
 
 	is_shown_when_inactive = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+		capital = { zzz_converter_state_is_in_argentina = yes }
 		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_ARG } }
 		is_subject = yes
 	}
@@ -663,10 +682,12 @@ je_argentina_gbr = {
 	is_shown_when_inactive = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+			capital = { zzz_converter_state_is_in_argentina = yes }
 			count >= 2
 		}
 		NOT = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+			capital = { zzz_converter_state_is_in_argentina = yes }
 			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_ARG }
 		}
 	}
@@ -710,6 +731,7 @@ je_cape_saf = {
 
 	is_shown_when_inactive = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+		capital = { region = sr:region_southern_africa }
 		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_SAF } }
 		is_subject = yes
 	}
@@ -748,10 +770,12 @@ je_cape_gbr = {
 	is_shown_when_inactive = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+			capital = { region = sr:region_southern_africa }
 			count >= 2
 		}
 		NOT = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+			capital = { region = sr:region_southern_africa }
 			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_SAF }
 		}
 	}
