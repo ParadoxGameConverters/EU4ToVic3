@@ -29,6 +29,7 @@ can_aus.1 = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+					capital = { zzz_converter_state_is_in_canada = yes }								##Converter
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -80,6 +81,7 @@ can_aus.2 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+				capital = { zzz_converter_state_is_in_canada = yes }									##Converter
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 			}
@@ -88,6 +90,7 @@ can_aus.2 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+				capital = { zzz_converter_state_is_in_canada = yes }									##Converter
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 				NOT = {
@@ -146,6 +149,7 @@ can_aus.3 = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+					capital = { zzz_converter_state_is_in_australia = yes }										##Converter
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -200,6 +204,7 @@ can_aus.4 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+				capital = { zzz_converter_state_is_in_australia = yes }										##Converter
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 			}
@@ -208,6 +213,7 @@ can_aus.4 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+				capital = { zzz_converter_state_is_in_australia = yes }										##Converter
 				relations:root >= relations_threshold:amicable
 				NOT = {
 					scope:canada_scope_1 = THIS
@@ -363,10 +369,8 @@ can_aus.6 = {
 	immediate = {
 		random_subject_or_below = {
 			limit = {
-				OR = {
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
-					has_journal_entry = je_canada_can		##Converter
-				}
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+				capital = { zzz_converter_state_is_in_canada = yes }										##Converter
 				any_scope_state = {
 					OR = {
 						state_region = s:STATE_ONTARIO
@@ -573,11 +577,8 @@ can_aus.8 = {
 	immediate = {
 		random_subject_or_below = {
 			limit = {
-				OR = {
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
-					has_journal_entry = je_australia_aus		##Converter
-					country_has_primary_culture = cu:maori
-				}
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+				capital = { zzz_converter_state_is_in_australia = yes }										##Converter
 				any_scope_state = {
 					OR = {
 						state_region = s:STATE_NEW_SOUTH_WALES
