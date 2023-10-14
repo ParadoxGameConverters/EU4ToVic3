@@ -1,6 +1,7 @@
 ﻿america_unite_usa = {
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+		capital = { zzz_converter_state_is_in_america = yes }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
@@ -28,6 +29,7 @@
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+					capital = { zzz_converter_state_is_in_america = yes }
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -62,6 +64,7 @@ america_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+			capital = { zzz_converter_state_is_in_america = yes }
 			is_ai = yes
 			count >= 2
 		}
@@ -74,6 +77,7 @@ america_unite_gbr = {
 			text = gbr_usa_relations_tt
 			any_subject_or_below = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+				capital = { zzz_converter_state_is_in_america = yes }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
 				count >= 2
@@ -103,10 +107,12 @@ america_unite_gbr = {
 california_unite_cal = {
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+		capital = { zzz_converter_state_is_in_california = yes }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+				capital = { zzz_converter_state_is_in_california = yes }
 				is_ai = yes
 				is_subject = yes
 				NOT = { THIS = ROOT }
@@ -130,6 +136,7 @@ california_unite_cal = {
 				owner = {
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+					capital = { zzz_converter_state_is_in_california = yes }
 					is_ai = yes
 					is_subject = yes
 					NOT = { THIS = ROOT }
@@ -165,6 +172,7 @@ california_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_california = yes }
 			is_ai = yes
 			count >= 2
 		}
@@ -177,6 +185,7 @@ california_unite_gbr = {
 			text = gbr_cal_relations_tt
 			any_subject_or_below = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+				capital = { zzz_converter_state_is_in_california = yes }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
 				count >= 2
@@ -206,10 +215,12 @@ california_unite_gbr = {
 mexico_unite_mex = {
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+		capital = { zzz_converter_state_is_in_mexico = yes }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+				capital = { zzz_converter_state_is_in_mexico = yes }
 				is_subject = yes
 				NOT = { THIS = ROOT }
 				top_overlord = {
@@ -233,6 +244,7 @@ mexico_unite_mex = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+					capital = { zzz_converter_state_is_in_mexico = yes }
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -267,6 +279,7 @@ mexico_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+			capital = { zzz_converter_state_is_in_mexico = yes }
 			is_ai = yes
 			count >= 2
 		}
@@ -279,6 +292,7 @@ mexico_unite_gbr = {
 			text = gbr_mex_relations_tt
 			any_subject_or_below = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+				capital = { zzz_converter_state_is_in_mexico = yes }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
 				count >= 2
@@ -308,10 +322,12 @@ mexico_unite_gbr = {
 colombia_unite_gco = {
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+		capital = { zzz_converter_state_is_in_gran_colombia = yes }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+				capital = { zzz_converter_state_is_in_gran_colombia = yes }
 				is_subject = yes
 				NOT = { THIS = ROOT }
 				top_overlord = {
@@ -335,6 +351,7 @@ colombia_unite_gco = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+					capital = { zzz_converter_state_is_in_gran_colombia = yes }
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -369,6 +386,7 @@ colombia_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_gran_colombia = yes }
 			is_ai = yes
 			count >= 2
 		}
@@ -381,6 +399,7 @@ colombia_unite_gbr = {
 			text = gbr_gco_relations_tt
 			any_subject_or_below = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+				capital = { zzz_converter_state_is_in_gran_colombia = yes }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
 				count >= 2
@@ -410,10 +429,12 @@ colombia_unite_gbr = {
 peru_unite_peu = {
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+		capital = { region = sr:region_andes }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+				capital = { region = sr:region_andes }
 				is_ai = yes
 				is_subject = yes
 				NOT = { THIS = ROOT }
@@ -437,6 +458,7 @@ peru_unite_peu = {
 				owner = {
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+					capital = { region = sr:region_andes }
 					is_ai = yes
 					is_subject = yes
 					NOT = { THIS = ROOT }
@@ -472,6 +494,7 @@ peru_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+			capital = { region = sr:region_andes }
 			is_ai = yes
 			count >= 2
 		}
@@ -484,6 +507,7 @@ peru_unite_gbr = {
 			text = gbr_peu_relations_tt
 			any_subject_or_below = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+				capital = { region = sr:region_andes }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
 				count >= 2
@@ -513,10 +537,12 @@ peru_unite_gbr = {
 brazil_unite_brz = {
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+		capital = { region = sr:region_brazil }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+				capital = { region = sr:region_brazil }
 				is_subject = yes
 				NOT = { THIS = ROOT }
 				top_overlord = {
@@ -540,6 +566,7 @@ brazil_unite_brz = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+					capital = { region = sr:region_brazil }
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -574,6 +601,7 @@ brazil_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+			capital = { region = sr:region_brazil }
 			is_ai = yes
 			count >= 2
 		}
@@ -586,6 +614,7 @@ brazil_unite_gbr = {
 			text = gbr_brz_relations_tt
 			any_subject_or_below = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+				capital = { region = sr:region_brazil }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
 				count >= 2
@@ -615,10 +644,12 @@ brazil_unite_gbr = {
 argentina_unite_arg = {
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+		capital = { zzz_converter_state_is_in_argentina = yes }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+				capital = { zzz_converter_state_is_in_argentina = yes }
 				is_ai = yes
 				is_subject = yes
 				NOT = { THIS = ROOT }
@@ -642,6 +673,7 @@ argentina_unite_arg = {
 				owner = {
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+					capital = { zzz_converter_state_is_in_argentina = yes }
 					is_ai = yes
 					is_subject = yes
 					NOT = { THIS = ROOT }
@@ -677,6 +709,7 @@ argentina_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+			capital = { zzz_converter_state_is_in_argentina = yes }
 			is_ai = yes
 			count >= 2
 		}
@@ -689,6 +722,7 @@ argentina_unite_gbr = {
 			text = gbr_arg_relations_tt
 			any_subject_or_below = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+				capital = { zzz_converter_state_is_in_argentina = yes }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
 				count >= 2
@@ -718,10 +752,12 @@ argentina_unite_gbr = {
 cape_unite_saf = {
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+		capital = { region = sr:region_southern_africa }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+				capital = { region = sr:region_southern_africa }
 				is_ai = yes
 				is_subject = yes
 				NOT = { THIS = ROOT }
@@ -745,6 +781,7 @@ cape_unite_saf = {
 				owner = {
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+					capital = { region = sr:region_southern_africa }
 					is_ai = yes
 					is_subject = yes
 					NOT = { THIS = ROOT }
@@ -780,6 +817,7 @@ cape_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+			capital = { region = sr:region_southern_africa }
 			is_ai = yes
 			count >= 2
 		}
@@ -792,6 +830,7 @@ cape_unite_gbr = {
 			text = gbr_saf_relations_tt
 			any_subject_or_below = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+				capital = { region = sr:region_southern_africa }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
 				count >= 2
