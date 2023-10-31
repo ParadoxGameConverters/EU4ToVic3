@@ -194,7 +194,7 @@ std::string V3::PopManager::getDominantDWReligion(const std::string& stateName) 
 	return *best;
 }
 
-void V3::PopManager::generatePops(const ClayManager& clayManager, const Configuration::POPSHAPES popShapes)
+void V3::PopManager::generatePops(const ClayManager& clayManager, const Configuration::POPSHAPES popShapes, double shapingFactor)
 {
 	const auto worldTotal = std::accumulate(vanillaStatePops.begin(), vanillaStatePops.end(), 0, [](int sum, const auto& statePops) {
 		return sum + statePops.second.getPopCount();
@@ -253,6 +253,10 @@ void V3::PopManager::generatePops(const ClayManager& clayManager, const Configur
 				// Keep in mind - these popcounts are tied to states, not substates. A super-high-weight substate will take most of the pops however,
 				// so we're ok.
 				vanillaStatePopCount = static_cast<int>(std::round(vanillaSuperRegionPopCount.at(superRegionName) * popModifier));
+				// Normalize by shaping factor
+				vanillaStatePopCount = static_cast<int>(std::round(vanillaStatePopCount * shapingFactor)) +
+											  static_cast<int>(std::round(vanillaStatePops.at(stateName).getPopCount() * (1.0 - shapingFactor)));
+
 				stateFactor =
 					 (vanillaStatePopCount - vanillaStatePops.at(stateName).getPopCount()) / static_cast<double>(vanillaStatePops.at(stateName).getPopCount());
 			}
@@ -268,6 +272,9 @@ void V3::PopManager::generatePops(const ClayManager& clayManager, const Configur
 			const auto stateInvestmentFactor = 1.0 + state->getInvestmentFactor();
 			const auto projectedPopCount = static_cast<double>(vanillaStatePops.at(stateName).getPopCount()) * stateInvestmentFactor;
 			vanillaStatePopCount = static_cast<int>(std::round(projectedPopCount * superRegionalNormalizationFactor));
+			// Normalize by shaping factor
+			vanillaStatePopCount = static_cast<int>(std::round(vanillaStatePopCount * shapingFactor)) +
+										  static_cast<int>(std::round(vanillaStatePops.at(stateName).getPopCount() * (1.0 - shapingFactor)));
 			stateFactor =
 				 (vanillaStatePopCount - vanillaStatePops.at(stateName).getPopCount()) / static_cast<double>(vanillaStatePops.at(stateName).getPopCount());
 		}

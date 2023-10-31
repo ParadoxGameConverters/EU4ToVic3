@@ -57,6 +57,7 @@ class Configuration: commonItems::parser
 		SPLITTCS splitTCs = SPLITTCS::SuperRegions;
 		bool convertAll = false;
 		bool downTiers = true;
+		double shapingFactor = 1.0;
 		// runtime options.
 		bool vn = false; // Voltaire's Nightmare
 	} configBlock;

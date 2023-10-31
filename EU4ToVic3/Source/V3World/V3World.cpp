@@ -118,7 +118,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.attemptColonialTagReplacement(cultureMapper.getColonialRegionMapper(), clayManager);
 
 	Log(LogLevel::Progress) << "54 %";
-	popManager.generatePops(clayManager, configBlock.popShaping);
+	popManager.generatePops(clayManager, configBlock.popShaping, configBlock.shapingFactor);
 	popManager.applyHomeLands(clayManager);
 
 	Log(LogLevel::Progress) << "55 %";
