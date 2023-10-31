@@ -71,6 +71,16 @@ void Configuration::registerKeys()
 		configBlock.popShaping = static_cast<POPSHAPES>(std::stoi(popShapingString));
 		Log(LogLevel::Info) << "Pop Shaping: " << popShapingString;
 	});
+	registerKeyword("shaping_factor", [this](std::istream& theStream) {
+		const auto shapingFactorString = commonItems::getString(theStream);
+		configBlock.shapingFactor = std::stoi(shapingFactorString);
+		if (configBlock.shapingFactor < 0)
+			configBlock.shapingFactor = 0;
+		if (configBlock.shapingFactor > 100.0)
+			configBlock.shapingFactor = 100.0;
+		configBlock.shapingFactor /= 100.0;
+		Log(LogLevel::Info) << "Pop Shaping Factor: " << shapingFactorString;
+	});
 	registerKeyword("euro_centrism", [this](std::istream& theStream) {
 		const auto euroCentrismString = commonItems::getString(theStream);
 		configBlock.euroCentric = static_cast<EUROCENTRISM>(std::stoi(euroCentrismString));
