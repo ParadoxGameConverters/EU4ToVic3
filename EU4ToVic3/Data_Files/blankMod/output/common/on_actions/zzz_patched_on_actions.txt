@@ -1,0 +1,75 @@
+﻿on_law_activated = {
+	effect = {
+		if = {
+			limit = {
+				c:BRZ ?= {
+					has_journal_entry = je_matter_of_slavery
+					OR = {
+						has_modifier = unrestricted_slave_trade_modifier
+						has_modifier = restricted_slave_trade_modifier
+						has_modifier = slave_shipments_intercepted_small
+						has_modifier = slave_shipments_intercepted_large
+					}
+					OR = {
+						has_law = law_type:law_debt_slavery
+						has_law = law_type:law_legacy_slavery
+					}
+				}
+			}
+			c:BRZ ?= {
+				if = {
+					limit = {
+						has_modifier = unrestricted_slave_trade_modifier
+					}
+					remove_modifier = unrestricted_slave_trade_modifier
+				}
+				if = {
+					limit = {
+						has_modifier = restricted_slave_trade_modifier
+					}
+					remove_modifier = restricted_slave_trade_modifier
+				}
+				if = {
+					limit = {
+						has_modifier = slave_shipments_intercepted_small
+					}
+					remove_modifier = slave_shipments_intercepted_small
+				}
+				if = {
+					limit = {
+						has_modifier = slave_shipments_intercepted_large
+					}
+					remove_modifier = slave_shipments_intercepted_large
+				}
+				if = {
+					limit = {
+						has_variable = var_slave_trade_suppression_var
+					}
+					remove_variable = var_slave_trade_suppression_var
+				}
+			}
+		}
+		if = {
+			limit = {
+				c:BRZ ?= {
+					has_journal_entry = je_matter_of_slavery
+					OR = {
+						has_law = law_type:law_debt_slavery
+						has_law = law_type:law_legacy_slavery
+					}
+					any_interest_group = {
+						has_modifier = restricted_slave_trade_ig_modifier
+					}
+				}
+			}
+			c:BRZ ?= {
+				every_interest_group = {
+					limit = {
+						has_modifier = restricted_slave_trade_ig_modifier
+					}
+					remove_modifier = restricted_slave_trade_ig_modifier
+				}
+			}
+		}
+	}
+}

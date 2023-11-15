@@ -29,7 +29,7 @@ void outState(std::ostream& output, const V3::State& state)
 	for (const auto& substate: state.getSubStates())
 		outSubState(output, *substate);
 	for (const auto& homeLand: state.getHomelands())
-		output << "\t\tadd_homeland = " << homeLand << "\n";
+		output << "\t\tadd_homeland = cu:" << homeLand << "\n";
 	for (const auto& tag: state.getClaims())
 		output << "\t\tadd_claim = c:" << tag << "\n";
 

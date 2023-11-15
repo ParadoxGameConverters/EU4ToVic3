@@ -40,12 +40,6 @@
                 template = peasant_outfits
                 range = { 0 1 } # For the randomness to work correctly
             }
-            accessory = {
-                mode = add
-                gene = legwear
-                template = peasants_legwear
-                range = { 0 1 } # For the randomness to work correctly
-            }
         }
         weight = {
             base = 0
@@ -137,7 +131,15 @@
             modifier = {
                 add = 100
                 european_clothes_trigger = yes
-                south_american_clothes_character_trigger = no
+                NAND = {
+                    south_american_clothes_character_trigger = yes
+                    scope:character ?= {
+                        NOR = { 
+                            culture = cu:paulista 
+                            culture = cu:sulista
+                        }
+                    }
+                }
                 slavic_clothes_trigger = no
                 agitator_character_trigger = yes
             }
@@ -257,7 +259,75 @@
             modifier = {
                 add = 100
                 south_american_clothes_character_trigger = yes
+                scope:character ?= {
+                    NOR = {
+                        culture = cu:brazilian
+                        AND = {
+                            exists = cu:nordestino
+                            culture = cu:nordestino
+                        }
+                        AND = {
+                            exists = cu:paulista
+                            culture = cu:paulista
+                        }
+                        AND = {
+                            exists = cu:sulista
+                            culture = cu:sulista
+                        }
+
+                    }
+                }
                 agitator_character_trigger = yes 
+            }
+        }
+    }
+
+    brazil_agitator_clothes = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = top_layer
+                template = south_american_bandit_lampiao
+                range = { 0 1 }
+            }
+            accessory = {
+                mode = add
+                gene = legwear
+                template = south_american_legwear
+                range = { 0 1 } # For the randomness to work correctly
+            }
+            accessory = {
+                mode = add
+                gene = belts
+                template = gaucho_belts
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 90000
+                OR = {
+                    scope:character ?= {
+                        has_template = BRZ_virgulino_ferreira
+                    }
+                    AND = {
+                        scope:character ?= {
+                            OR = {
+                                culture = cu:brazilian
+                                AND = {
+                                    exists = cu:nordestino
+                                    culture = cu:nordestino
+                                }
+                                AND = {
+                                    exists = cu:amazonic
+                                    culture = cu:amazonic
+                                }
+                            }
+                        }
+                        agitator_character_trigger = yes 
+                    }
+                }
             }
         }
     }
@@ -467,7 +537,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 } # For the randomness to work correctly
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -499,7 +569,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 } # For the randomness to work correctly
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -548,7 +618,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0.7 1 } # There's three colors in the gene, the last one of the three being red.
+                accessory = male_legwear_european_01_black
             }
             accessory = {
                 mode = add
@@ -590,7 +660,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 } # For the randomness to work correctly
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -622,7 +692,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 } # For the randomness to work correctly
+                accessory = male_legwear_european_01_red
             }
         }
 
@@ -657,7 +727,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 } # For the randomness to work correctly
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -696,7 +766,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 } # For the randomness to work correctly
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -743,7 +813,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 }
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -808,7 +878,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 }
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -932,7 +1002,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 }
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -964,7 +1034,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 }
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -1003,7 +1073,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 }
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -1035,7 +1105,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 }
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -1159,7 +1229,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 }
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -1198,7 +1268,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 }
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -1230,7 +1300,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 }
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -1314,10 +1384,10 @@
 
         dna_modifiers = {
             accessory = {
-               mode = add
-               gene = legwear
-               template = european_legwear_colors
-               range = { 0 0.1 } 
+                mode = add
+                gene = legwear
+                template = european_legwear_colors
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -1396,10 +1466,10 @@
 
         dna_modifiers = {
             accessory = {
-               mode = add
-               gene = legwear
-               template = european_legwear_colors
-               range = { 0 0.1 } 
+                mode = add
+                gene = legwear
+                template = european_legwear_colors
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -1430,10 +1500,10 @@
 
         dna_modifiers = {
             accessory = {
-               mode = add
-               gene = legwear
-               template = european_legwear_colors
-               range = { 0 0.1 } 
+                mode = add
+                gene = legwear
+                template = european_legwear_colors
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -1464,10 +1534,10 @@
 
         dna_modifiers = {
             accessory = {
-               mode = add
-               gene = legwear
-               template = european_legwear_colors
-               range = { 0 0.1 } 
+                mode = add
+                gene = legwear
+                template = european_legwear_colors
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -1584,10 +1654,10 @@
 
         dna_modifiers = {
             accessory = {
-               mode = add
-               gene = legwear
-               template = european_legwear_colors
-               range = { 0 0.1 } 
+                mode = add
+                gene = legwear
+                template = european_legwear_colors
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -1675,7 +1745,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 }
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -1721,7 +1791,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 }
+                accessory = male_legwear_european_01_black
             }
         }
 
@@ -1771,6 +1841,66 @@
                         has_role = general
                         has_role = admiral
                     }
+                }
+            }
+        }
+    }
+
+    historical_lampiao = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = top_layer
+                template = south_american_bandit_lampiao
+                range = { 0 1 }
+            }
+            accessory = {
+                mode = add
+                gene = waistcoats
+                template = historical_waistcoats_madero
+                range = { 0 0.1 }
+             }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 90000
+
+                scope:character ?= {
+                    has_template = BRZ_virgulino_ferreira
+                }
+            }
+        }
+    }
+
+    historical_getulio_vargas = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = waistcoats
+                template = historical_waistcoats_madero
+                range = { 0 0.1 }
+            }
+            accessory = {
+                mode = add
+                gene = civilian_coats
+                template = european_civilian_coats
+                range = { 0 1 } # For the randomness to work correctly
+            }
+            accessory = {
+                mode = add
+                gene = legwear
+                template = european_legwear_colors
+                accessory = male_legwear_european_01_black
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 90000
+
+                scope:character ?= {
+                    has_template = BRZ_getulio_vargas_character_template
                 }
             }
         }
@@ -2058,6 +2188,7 @@
                 american_clothes_trigger = no
                 british_empire_clothes_trigger = no
                 french_empire_clothes_trigger = no
+                russian_empire_clothes_trigger = no
                 OR = {
                     european_clothes_trigger = yes
                     scope:character ?= {
@@ -2200,6 +2331,7 @@
                 arabic_clothes_trigger = no
                 british_empire_clothes_trigger = no
                 french_empire_clothes_trigger = no
+                russian_empire_clothes_trigger = no
                 OR = {
                     european_clothes_trigger = yes
                     AND = {
@@ -2252,7 +2384,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0.4 0.6 } # The gene has three color sets in it, the one in the middle being dark blue and sky blue.
+                accessory = male_legwear_european_01_blue
             }
         }
         weight = {
@@ -2343,7 +2475,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.6 } # black or blue
+                range = { 0 0.5 } # black or blue
             }
         }
         weight = {
@@ -2392,7 +2524,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range =  { 0 0.6 } # black or blue
+                range =  { 0 0.5 } # black or blue
             }
         }
         weight = {
@@ -2434,7 +2566,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 } # there's three colors in the gene, the first of which is black
+                accessory = male_legwear_european_01_black
             }
         }
         weight = {
@@ -2478,7 +2610,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0 0.1 } # there's three colors in the gene, the first of which is black
+                accessory = male_legwear_european_01_black
             }
         }
         weight = {
@@ -2509,13 +2641,19 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0.7 1 } # There's three colors in the gene, the last one of the three being red.
+                accessory = male_legwear_european_01_red
             }
             accessory = {
                 mode = add
                 gene = epaulettes
                 template = all_epaulettes
                 range = { 0 1 } # For the randomness to work correctly
+            }
+            accessory = {
+                mode = add
+                gene = belts
+                template = all_belts
+                range = { 0 1 }
             }
         }
         weight = {
@@ -2559,7 +2697,7 @@
                 mode = add
                 gene = legwear
                 template = european_legwear_colors
-                range = { 0.7 1 } # There's three colors in the gene, the last one of the three being red.
+                accessory = male_legwear_european_01_red
             }
         }
         weight = {
@@ -2568,6 +2706,195 @@
                 add = 10000
 
                 french_empire_clothes_pop_trigger = yes
+                soldier_clothes_pop_trigger = yes
+            }
+        }
+    }
+
+    russian_military_clothes = {
+        dna_modifiers = {
+             accessory = {
+                mode = add
+                gene = coats
+                template = russian_coats
+                range = { 0 0.5 } # Limited to single-breasted jacket so the aiguillette works properly
+            }
+            accessory = {
+                mode = add
+                gene = aiguillettes
+                template = all_aiguillettes
+                range = { 0 1 } # For the randomness to work correctly
+            }
+            accessory = {
+                mode = add
+                gene = legwear
+                template = slavic_legwear
+                range = { 0 1 } 
+             }
+            accessory = {
+                mode = add
+                gene = epaulettes
+                template = all_epaulettes
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 10000
+                OR = {
+                    AND = {
+                        scope:character ?= {
+                            age > 10
+                        }
+                        russian_empire_clothes_trigger = yes
+                        OR = {
+                            military_clothes_trigger = yes
+                            monarchy_clothes_trigger = yes
+                            AND = {
+                                armed_forces_clothes_trigger = yes
+                                politician_clothes_trigger = yes
+                            }
+                        }   
+                    }
+                    AND = {
+                        russian_empire_clothes_pop_trigger = yes
+                        officers_clothes_pop_trigger = yes
+                    }
+                }
+            }
+        }
+    }
+
+    russian_military_clothes_soldier = {
+        dna_modifiers = {
+             accessory = {
+                mode = add
+                gene = coats
+                template = russian_coats
+                range = { 0 1 }
+            }
+            # the common soldier gets no aguillettes or epaulettes :(
+            accessory = {
+                mode = add
+                gene = legwear
+                template = slavic_legwear
+                range = { 0 1 } 
+             }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 10000
+
+                russian_empire_clothes_pop_trigger = yes
+                soldier_clothes_pop_trigger = yes
+            }
+        }
+    }
+
+    brazilian_military_clothes = {
+        dna_modifiers = {
+             accessory = {
+                mode = add
+                gene = coats
+                template = brazilian_coats
+                accessory = male_coat_american_01
+            }
+            accessory = {
+                mode = add
+                gene = legwear
+                template = brazilian_white_legwear
+                accessory = male_legwear_european_01_white
+             }
+            accessory = {
+                mode = add
+                gene = epaulettes
+                template = all_epaulettes
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 10000
+                OR = {
+                    AND = {
+                        scope:character ?= {
+                            age > 10
+                            exists = c:BRZ
+                            home_country = {
+                                OR = {
+                                    AND = {
+                                        c:BRZ = this
+                                        is_subject = no # preventing uniform conflicts if BRZ becomes a subject of another country with puppet uniforms
+                                    }
+                                    is_subject_of = c:BRZ
+                                }       
+                            }
+                        }
+                        OR = {
+                            military_clothes_trigger = yes
+                            monarchy_clothes_trigger = yes
+                            AND = {
+                                armed_forces_clothes_trigger = yes
+                                politician_clothes_trigger = yes
+                            }
+                        }   
+                    }
+                    AND = {
+                        scope:pop ?= {
+                            exists = c:BRZ
+                            home_country = {
+                                OR = {
+                                    AND = {
+                                        c:BRZ = this
+                                        is_subject = no # preventing uniform conflicts if BRZ becomes a subject of another country with puppet uniforms
+                                    }
+                                    is_subject_of = c:BRZ
+                                }       
+                            }
+                        }
+                        officers_clothes_pop_trigger = yes
+                    }
+                }
+            }
+        }
+    }
+
+    brazilian_military_clothes_soldier = {
+        dna_modifiers = {
+             accessory = {
+                mode = add
+                gene = coats
+                template = brazilian_coats
+                accessory = male_top_layer_south_american_gaucho_01_brazilian_uniform
+            }
+            # the common soldier gets no aguillettes or epaulettes :(
+            accessory = {
+                mode = add
+                gene = legwear
+                template = brazilian_white_legwear
+                range = { 0 1 } 
+             }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 10000
+
+                scope:pop ?= {
+                    exists = c:BRZ
+                    home_country = {
+                        OR = {
+                            AND = {
+                                c:BRZ = this
+                                is_subject = no # preventing uniform conflicts if BRZ becomes a subject of another country with puppet uniforms
+                            }
+                            is_subject_of = c:BRZ
+                        }       
+                    }
+                }
                 soldier_clothes_pop_trigger = yes
             }
         }
@@ -2644,6 +2971,30 @@
             modifier = {
                 add  = 1100
                 OR = {
+                    scope:pop ?= {
+                        OR = {
+                            owner ?= {
+                                c:JAP ?= this
+                                NOT = { has_variable = meiji_restoration_complete }
+                            }
+                            owner ?= {
+                                NOT = { c:JAP ?= this }
+                            }
+                        }
+                    }
+                    scope:character ?= {
+                        OR = {
+                            owner ?= {
+                                c:JAP ?= this
+                                NOT = { has_variable = meiji_restoration_complete }
+                            }
+                            owner ?= {
+                                NOT = { c:JAP ?= this }
+                            }
+                        }
+                    }
+                }
+                OR = {
                     AND = {
                         exists = scope:pop
                         scope:pop = {
@@ -2666,7 +3017,7 @@
         }
     }
 
-        japanese_officers_clothes = {
+    japanese_officers_clothes = {
         dna_modifiers = {
             accessory = {
                 mode = add
@@ -2705,10 +3056,23 @@
                  AND = {
                     japanese_clothes_trigger = yes
                     OR = {
-                        military_clothes_trigger = yes
+                        AND = {
+                            military_clothes_trigger = yes
+                            scope:character ?= {
+                                owner ?= {
+                                    NOT = { has_variable = meiji_restoration_complete }
+                                }
+                            }
+                        }
                         AND = {
                             armed_forces_clothes_trigger = yes
                             politician_clothes_trigger = yes
+                            scope:character ?= {
+                                NOT = { has_ideology = ideology:ideology_traditionalist }
+                                owner ?= {
+                                    NOT = { has_variable = meiji_restoration_complete }
+                                }
+                            }
                         }
                     } 
                 }    
@@ -2854,6 +3218,11 @@
             modifier = {
                 add = 2000
                 japanese_imperial_clothes_trigger = yes
+                scope:character ?= {
+                    owner ?= {
+                        NOT = { has_variable = meiji_restoration_complete }
+                    }
+                }
             }
         }
     }
@@ -2874,6 +3243,13 @@
                 add = 500
                 japanese_clothes_pop_trigger = yes
                 poor_clothes_pop_trigger = yes
+                #scope:pop ?= {
+                #    owner = {
+                #        NOT = {
+                #            has_variable = meiji_restoration_complete
+                #        }
+                #    }
+                #}
             }
         }
     }
@@ -2887,13 +3263,13 @@
                 range = { 0 1 } # For the randomness to work correctly
             }
 
-                accessory = {
+            accessory = {
                 mode = add
                 gene = legwear
                 template = japanese_legwear
                 range = { 0 1 } # For the randomness to work correctly
             }
-                accessory = {
+            accessory = {
                 mode = add
                 gene = top_layer
                 template = japanese_top_layer
@@ -2917,6 +3293,22 @@
                             is_in_exile_pool = yes
                         }
                     }
+                }
+                NAND = {
+                    exists = scope:pop
+                    scope:pop = {
+                        AND = {
+                            culture = cu:japanese
+                            owner ?= {
+                                has_variable = meiji_restoration_complete
+                            }
+                        }
+                    }
+                    OR = {
+                        middle_clothes_pop_trigger = yes
+                        upper_clothes_pop_trigger = yes
+                    }
+                    clergy_clothes_pop_trigger = no
                 }
             }
         }
@@ -2951,14 +3343,20 @@
             modifier = {
                 add = 100
                 AND = {
-                    exists = scope:character
-                    scope:character = {
+                    agitator_character_trigger = no
+                    scope:character ?= {
                         OR = {
                             AND = {
                                 has_culture = cu:japanese
                                 monarchy_clothes_trigger = no
                             }
                             has_culture = cu:ainu
+                        }
+                        OR = {
+                            devout_clothes_trigger = yes
+                            owner ?= {
+                                NOT = { has_variable = meiji_restoration_complete }
+                            }
                         }
                     }
                 }
@@ -3048,9 +3446,16 @@
                     scope:character = {
                         has_culture = cu:korean
                         is_ruler = yes
+                        OR = {
+                            age <= 10
+                            NOT = {
+                                owner ?= {
+                                    has_variable = KOR_korean_empire_declared
+                                }
+                            }
+                        }
                     }
                 }
-                
            }
         }
     }
@@ -3315,6 +3720,7 @@ indian_royal_clothes = {
                         AND = {
                             politician_clothes_trigger = yes  
                             christian_clothes_trigger = yes
+                            monarchy_clothes_trigger = no
                             OR = {
                                 devout_clothes_trigger = yes
                                 AND = {
@@ -4132,6 +4538,18 @@ chinese_upper_clothes = {
                             OR = {
                                 culture = cu:cherokee 
                                 culture = cu:muskogean
+                                AND = {
+                                    culture = cu:japanese
+                                    owner ?= {
+                                        has_variable = meiji_restoration_complete
+                                    }
+                                }
+                                AND = {
+                                    culture = cu:korean
+                                    owner ?= {
+                                        has_variable = KOR_korean_empire_declared
+                                    }
+                                }
                             }
                         }
                         OR = {
@@ -4330,7 +4748,7 @@ chinese_upper_clothes = {
         }
     }
 
-        french_soldier_clothes = { 
+    french_soldier_clothes = { 
         dna_modifiers = {
             accessory = {
                 mode = add
@@ -4359,18 +4777,206 @@ chinese_upper_clothes = {
                 add = 10000
                 AND = {
                    french_empire_clothes_pop_trigger = yes
-                OR = {
+                    OR = {
                         soldier_clothes_pop_trigger = yes
                         officers_clothes_pop_trigger = yes
                     }
-                    
-                }
-                
-                
-           }
+                } 
+            }
         }
     }
-        prussian_soldier_clothes = { 
+
+    japanese_meiji_military_clothes = {
+        dna_modifiers = {
+             accessory = {
+                mode = add
+                gene = coats
+                template = french_coats
+                range = { 0 0.5 } # Limited to single-breasted jacket so the aiguillette works properly
+            }
+            accessory = {
+                mode = add
+                gene = aiguillettes
+                template = all_aiguillettes
+                range = { 0 1 } # For the randomness to work correctly
+            }
+            accessory = {
+                mode = add
+                gene = legwear
+                template = european_legwear_colors
+                range = { 0.34 1 } #
+            }
+            accessory = {
+                mode = add
+                gene = epaulettes
+                template = all_epaulettes
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 10000
+                AND = {
+                    scope:character ?= {
+                        age > 10
+                        culture = cu:japanese
+                        owner ?= {
+                            has_variable = meiji_restoration_complete
+                        }
+                    }
+                    OR = {
+                        military_clothes_trigger = yes
+                        monarchy_clothes_trigger = yes
+                        AND = {
+                            armed_forces_clothes_trigger = yes
+                            politician_clothes_trigger = yes
+                        }
+                    }   
+                }
+            }
+        }
+    }
+
+    japanese_meiji_soldier_clothes = { 
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = coats
+                template = japanese_meiji_coats
+                range = { 0 1 } # For the randomness to work correctly
+            }
+            accessory = {
+                mode = add
+                gene = legwear
+                template = european_legwear_colors
+                range = { 0.34 1 } # There's three colors in the gene, the second being blue and the third being red.
+            }
+
+            #accessory = {
+            #    mode = add
+            #    gene = epaulettes
+            #    template = all_epaulettes
+            #    range = { 0.5 0.8 } # For the randomness to work correctly
+            #}
+        } 
+
+        weight = {
+            base = 0
+            modifier = {
+                add = 10000
+                AND = {
+                    scope:pop ?= {
+                        culture = cu:japanese
+                        owner ?= {
+                            has_variable = meiji_restoration_complete
+                        }
+                    }
+                    OR = {
+                        soldier_clothes_pop_trigger = yes
+                        officers_clothes_pop_trigger = yes
+                    }
+                } 
+            }
+        }
+    }
+
+    korean_empire_military_clothes = {
+        dna_modifiers = {
+             accessory = {
+                mode = add
+                gene = coats
+                template = korean_empire_coats
+                range = { 0 0.5 } # Limited to single-breasted jacket so the aiguillette works properly
+            }
+            accessory = {
+                mode = add
+                gene = aiguillettes
+                template = all_aiguillettes
+                range = { 0 1 } # For the randomness to work correctly
+            }
+            accessory = {
+                mode = add
+                gene = legwear
+                template = european_legwear_colors
+                range = { 0.34 1 } #
+            }
+            accessory = {
+                mode = add
+                gene = epaulettes
+                template = all_epaulettes
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 10000
+                AND = {
+                    scope:character ?= {
+                        age > 10
+                        culture = cu:korean
+                        owner ?= {
+                            has_variable = KOR_korean_empire_declared
+                        }
+                    }
+                    OR = {
+                        military_clothes_trigger = yes
+                        monarchy_clothes_trigger = yes
+                        AND = {
+                            armed_forces_clothes_trigger = yes
+                            politician_clothes_trigger = yes
+                        }
+                    }   
+                }
+            }
+        }
+    }
+
+    korean_empire_soldier_clothes = { 
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = coats
+                template = korean_empire_coats
+                range = { 0 1 } # For the randomness to work correctly
+            }
+            accessory = {
+                mode = add
+                gene = legwear
+                template = european_legwear_colors
+                range = { 0.34 1 } # There's three colors in the gene, the second being blue and the third being red.
+            }
+
+            #accessory = {
+            #    mode = add
+            #    gene = epaulettes
+            #    template = all_epaulettes
+            #    range = { 0.5 0.8 } # For the randomness to work correctly
+            #}
+        } 
+
+        weight = {
+            base = 0
+            modifier = {
+                add = 10000
+                AND = {
+                    scope:pop ?= {
+                        culture = cu:korean
+                        owner ?= {
+                            has_variable = KOR_korean_empire_declared
+                        }
+                    }
+                    OR = {
+                        soldier_clothes_pop_trigger = yes
+                        officers_clothes_pop_trigger = yes
+                    }
+                } 
+            }
+        }
+    }
+
+    prussian_soldier_clothes = { 
         dna_modifiers = {
             accessory = {
                 mode = add
@@ -4994,7 +5600,7 @@ slavik_kokoshnik_clothes = {
                             scope:pop ?= {
                                 month = 5 # June. The trigger for months is on a 0-11 scale.
                             }
-                            owner = {
+                            owner ?= {
                                 OR = {
                                     has_modifier = royal_marriage
                                     any_scope_character = {
@@ -5118,6 +5724,240 @@ pierrot_clothing = {
             scope:pop ?= {
                 religion = rel:catholic
                 month = 1 # Carnival is /usually/ in February
+            }
+        }
+    }
+}
+
+gaucho_clothes = {
+    dna_modifiers = {
+        accessory = {
+            mode = add
+            gene = top_layer
+            template = south_american_gaucho
+            range = { 0 1 }
+        }
+        accessory = {
+            mode = add
+            gene = legwear
+            template = south_american_legwear
+            range = { 0 1 } # For the randomness to work correctly
+        }
+        accessory = {
+            mode = add
+            gene = belts
+            template = gaucho_belts
+            range = { 0 1 } # For the randomness to work correctly
+        }
+    }
+    weight = {
+        base = 0
+        modifier = {
+            add = 10000
+
+            OR = {
+                scope:character ?= { # Sulista, Platinean, Argentine and Uruguayan RF & TU leaders and Brazilian RF & TU leaders post-Sulista integration should wear this
+                    OR = {
+                        AND = {
+                            exists = cu:sulista
+                            culture = cu:sulista
+                        }
+                        AND = {
+                            exists = cu:platinean
+                            culture = cu:platinean
+                        }
+                        AND = {
+                            exists = cu:argentine
+                            culture = cu:argentine
+                        }
+                        AND = {
+                            exists = cu:uruguayan
+                            culture = cu:uruguayan
+                        }
+                        culture = cu:afro_brazilian
+                        AND = {
+                            culture = cu:brazilian
+                            home_country ?= {
+                                has_variable = sulistas_integrated
+                            }
+                        }
+                    }
+                    has_role = politician
+                    OR = {
+                        is_interest_group_type = ig_rural_folk
+                        is_interest_group_type = ig_trade_unions
+                    }
+                    OR = {
+                        is_ruler = no
+                        AND = {
+                            is_ruler = yes
+                            owner ?= {
+                                NOT = { has_law = law_type:law_monarchy}
+                            }
+                        }
+                    }
+                }
+                scope:pop ?= {
+                    OR = {
+                        AND = {
+                            exists = cu:sulista
+                            culture = cu:sulista
+                        }
+                        AND = {
+                            exists = cu:platinean
+                            culture = cu:platinean
+                        }
+                        AND = {
+                            exists = cu:argentine
+                            culture = cu:argentine
+                        }
+                        AND = {
+                            exists = cu:uruguayan
+                            culture = cu:uruguayan
+                        }
+                        culture = cu:afro_brazilian
+                        AND = {
+                            culture = cu:brazilian
+                            owner ?= {
+                                has_variable = sulistas_integrated
+                            }
+                        }
+                    }
+                    OR = {
+                        is_pop_type = farmers
+                        is_pop_type = laborers
+                        is_pop_type = peasants
+                    }
+                }
+                scope:character ?= { # All Sulista and Brazilian exiles (even pre-integration) should have this look.
+                    is_in_exile_pool = yes
+                    OR = {
+                        AND = {
+                            exists = cu:sulista
+                            culture = cu:sulista
+                        }
+                        AND = {
+                            exists = cu:platinean
+                            culture = cu:platinean
+                        }
+                        AND = {
+                            exists = cu:argentine
+                            culture = cu:argentine
+                        }
+                        AND = {
+                            exists = cu:uruguayan
+                            culture = cu:uruguayan
+                        }
+                        culture = cu:brazilian
+                    }
+                }
+            }
+        }
+    }
+}
+
+ottoman_sultan_clothes = {
+    dna_modifiers = {
+        accessory = {
+            mode = add
+            gene = coats
+            template = ottoman_sultan_coats
+            accessory = male_coat_european_08_blue
+        }
+        accessory = {
+            mode = add
+            gene = legwear
+            template = european_legwear_colors
+            accessory = male_legwear_european_01_white
+        }
+        accessory = {
+            mode = add
+            gene = belts
+            template = all_belts
+            accessory = male_belt_generic_02 # HE'S GOT A SWORD
+        }
+        accessory = {
+            mode = add
+            gene = epaulettes
+            template = all_epaulettes
+            accessory = male_epaulettes_04
+        }
+    }
+    weight = {
+        base = 0
+        modifier = {
+            add = 10000
+
+            scope:character ?= {
+                exists = owner
+                exists = c:TUR
+                owner ?= {
+                    c:TUR = this
+                }
+                monarchy_clothes_trigger = yes
+                is_female = no
+            }
+        }
+    }
+}
+
+ottoman_military_clothes = {
+    dna_modifiers = {
+         accessory = {
+            mode = add
+            gene = coats
+            template = french_coats
+            range = { 0 1 }
+        }
+        accessory = {
+            mode = add
+            gene = legwear
+            template = european_legwear_colors
+            accessory = male_legwear_european_01_white
+        }
+        accessory = {
+            mode = add
+            gene = epaulettes
+            template = all_epaulettes
+            range = { 0 1 } # For the randomness to work correctly
+        }
+        accessory = {
+            mode = add
+            gene = belts
+            template = all_belts
+            accessory = male_belt_generic_01
+        }
+    }
+    weight = {
+        base = 0
+        modifier = {
+            add = 10000
+            OR = {
+                AND = {
+                    exists = c:TUR
+                    scope:character ?= {
+                        age > 10
+                        owner ?= {
+                            c:TUR = this
+                        }
+                    }
+                    OR = {
+                        military_clothes_trigger = yes
+                        AND = {
+                            armed_forces_clothes_trigger = yes
+                            politician_clothes_trigger = yes
+                        }
+                    }   
+                }
+                AND = {
+                    exists = c:TUR
+                    scope:pop ?= {
+                        owner ?= {
+                            c:TUR = this
+                        }
+                    }
+                    officers_clothes_pop_trigger = yes
+                }
             }
         }
     }

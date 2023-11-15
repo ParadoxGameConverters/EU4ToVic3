@@ -15,6 +15,8 @@ void outMajorFormable(std::ostream& output, const std::string& tag, const V3::Ma
 	output << "\t\tOR = {\n";
 	for (const auto& culture: formable.getCultures())
 		output << "\t\t\tcountry_has_primary_culture = cu:" << culture << "\n";
+	for (const auto& possibleStanza: formable.getPossibleStanzas())
+		output << "\t\t" << possibleStanza << "\n";
 	output << "\t\t}\n";
 	output << "\t\tany_country = {\n";
 	output << "\t\t\tOR = {\n";
