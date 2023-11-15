@@ -225,6 +225,10 @@ void V3::Country::distributeGovAdmins(const double target, const int PMGeneratio
 
 void V3::Country::registerKeys()
 {
+	registerKeyword("dynamic_country_definition", [this](std::istream& theStream) {
+		dynamicCountry = true;
+		commonItems::ignoreItem("unused", theStream);
+	});
 	registerKeyword("country_type", [this](std::istream& theStream) {
 		vanillaData->type = commonItems::getString(theStream);
 	});

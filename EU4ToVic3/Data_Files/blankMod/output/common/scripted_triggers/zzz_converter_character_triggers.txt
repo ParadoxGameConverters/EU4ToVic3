@@ -289,8 +289,8 @@ uses_afro_braz_characters = {
 			}
 		}
 		OR = {
-			this = c:BRZ
-			this = c:AGJ
+			c:BRZ ?= this
+			c:AGJ ?= this
 		}
 		is_target_in_global_variable_list = { name = global_afro_braz_countries target = this }
 	}
@@ -468,8 +468,8 @@ uses_eng_gbr_characters = {
 			}
 		}
 		OR = {
-			this = c:GBR
-			this = c:ENG
+			c:GBR ?= this
+			c:ENG ?= this
 		}
 		is_target_in_global_variable_list = { name = global_gbr_countries target = this }
 	}
@@ -493,8 +493,8 @@ uses_nor_characters = {
 			}
 		}
 		OR = {
-			this = c:NOR
-			this = c:SCA
+			c:NOR ?= this
+			c:SCA ?= this
 		}
 		is_target_in_global_variable_list = { name = global_nor_countries target = this }
 	}
@@ -518,8 +518,8 @@ uses_den_characters = {
 			}
 		}
 		OR = {
-			this = c:DEN
-			this = c:SCA
+			c:DEN ?= this
+			c:SCA ?= this
 		}
 		is_target_in_global_variable_list = { name = global_den_countries target = this }
 	}
@@ -569,8 +569,8 @@ uses_nor_ita_characters = {
 			}
 		}
 		OR = {
-			this = c:SAR
-			this = c:ITA
+			c:SAR ?= this
+			c:ITA ?= this
 		}
 		is_target_in_global_variable_list = { name = global_nor_ita_countries target = this }
 	}
@@ -594,8 +594,8 @@ uses_sou_ita_characters = {
 			}
 		}
 		OR = {
-			this = c:SIC
-			this = c:ITA
+			c:SIC ?= this
+			c:ITA ?= this
 		}
 		is_target_in_global_variable_list = { name = global_sou_ita_countries target = this }
 	}
