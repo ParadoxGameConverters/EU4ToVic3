@@ -1,0 +1,77 @@
+﻿# Adding Turkey exists check as they forgot.
+
+je_veiled_protectorate = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	group = je_group_foreign_affairs
+
+	is_shown_when_inactive = {
+		trigger_if = {
+			limit = {
+				exists = c:EGY
+			}
+			c:EGY = {
+				is_subject = no
+				is_country_type = unrecognized
+			}
+		}
+		trigger_else = {
+			always = no
+		}
+		country_rank >= rank_value:major_power
+		any_scope_state = {
+			OR = {
+				state_region = s:STATE_LOWER_EGYPT
+				state_region = s:STATE_UPPER_EGYPT
+				state_region = s:STATE_MIDDLE_EGYPT
+				state_region = s:STATE_SINAI
+			}
+		}
+		any_neighbouring_state = {
+			owner = c:EGY
+		}
+	}
+
+	possible = {
+		exists = c:EGY
+		exists = C:TUR
+		c:EGY = {
+			OR = {
+				owes_obligation_to = ROOT
+				relations:root <= relations_threshold:poor
+			}
+			country_rank < rank_value:unrecognized_major_power
+		}
+		NOT = { THIS = c:TUR }
+	}
+
+	complete = {
+		c:EGY = {
+			is_subject_of = ROOT
+		}
+	}
+
+	on_complete = {
+		trigger_event = {
+			id = veiled_protectorate.1
+		}
+	}
+
+	fail = {
+		OR = {
+			NOT = { exists = c:EGY }
+			c:EGY = {
+				is_subject = yes
+				NOT = { is_subject_of = ROOT }
+			}
+			c:EGY = {
+				NOT = { is_country_type = unrecognized }
+			}
+		}
+	}
+
+	timeout = 3650
+
+	weight = 10000
+	should_be_pinned_by_default = yes
+}

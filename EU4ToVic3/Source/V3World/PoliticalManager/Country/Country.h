@@ -238,6 +238,7 @@ class Country: commonItems::parser
 
 	void setDiscriminationLevel(const ProcessedData::DISCRIMINATION_LEVEL& discrimination) { processedData.discriminationLevel = discrimination; }
 	[[nodiscard]] bool isCultureDiscriminated(const std::string& culture, const mappers::CultureMapper& cultureMapper) const;
+	[[nodiscard]] bool isCountryDynamic() const { return dynamicCountry; }
 
   private:
 	void registerKeys();
@@ -266,6 +267,7 @@ class Country: commonItems::parser
 	std::optional<VanillaCommonCountryData> vanillaData;
 	ProcessedData processedData;
 	UnprocessedData unprocessedData;
+	bool dynamicCountry = false;
 
 	std::shared_ptr<EU4::Country> sourceCountry;
 	std::vector<std::shared_ptr<SubState>> subStates;

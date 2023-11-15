@@ -167,16 +167,16 @@ converter_should_add_confederation_cultures = {
 					}
 				}
 			}
-			this = c:CAN
-			this = c:USA
-			this = c:CAL
-			this = c:MEX
-			this = c:GCO
-			this = c:PEU
-			this = c:BRZ
-			this = c:ARG
-			this = c:AST
-			this = c:SAF
+			c:CAN ?= this
+			c:USA ?= this
+			c:CAL ?= this
+			c:MEX ?= this
+			c:GCO ?= this
+			c:PEU ?= this
+			c:BRZ ?= this
+			c:ARG ?= this
+			c:AST ?= this
+			c:SAF ?= this
 		}
 	}
 	trigger_else = { always = yes }
