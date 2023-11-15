@@ -8816,7 +8816,7 @@ converter_caudillismo_ideology_effect = {
 	}
 	if = {
 		limit = {
-			any_primary_culture = { var:potential_caudillismo_culture >= 1 }
+			any_primary_culture = { has_variable = potential_caudillismo_culture }
 		}
 		every_primary_culture = {
 			limit = {
@@ -8890,7 +8890,7 @@ converter_russian_patriarch_ideology_effect = {
 	}
 	if = {
 		limit = {
-			any_primary_culture = { var:potential_russian_patriarch_culture >= 1 }
+			any_primary_culture = { has_variable = potential_russian_patriarch_culture }
 		}
 		every_primary_culture = {
 			limit = {
@@ -8975,7 +8975,7 @@ converter_pious_landowner_ideology_effect = {
 	}
 	if = {
 		limit = {
-			any_primary_culture = { var:potential_pious_culture >= 1 }
+			any_primary_culture = { has_variable = potential_pious_culture }
 		}
 		every_primary_culture = {
 			limit = {

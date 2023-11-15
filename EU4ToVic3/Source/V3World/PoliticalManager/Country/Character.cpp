@@ -13,6 +13,7 @@ std::string normalizeString(const std::string& input)
 	auto toReturn = commonItems::normalizeUTF8Path(input);
 	std::ranges::replace(toReturn, ' ', '_');
 	std::ranges::replace(toReturn, '\'', '_');
+	std::ranges::replace(toReturn, '`', '_');
 	std::ranges::replace(toReturn, '(', '_');
 	std::ranges::replace(toReturn, ')', '_');
 	return toReturn;
