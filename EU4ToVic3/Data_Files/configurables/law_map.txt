@@ -190,11 +190,11 @@ lawgroup_slavery = {
 }
 
 #CITIZENSHIP:
-#law_multicultural 100 *law_slavery_banned *T=egalitarianism T1
-#law_cultural_exclusion 50  *law_slavery_banned *law_debt_slavery
-#law_racial_segregation 0
-#law_national_supremacy -50
-#law_ethnostate -100 NO
+#law_multicultural 75 *law_slavery_banned *T=egalitarianism T1
+#law_cultural_exclusion 25  *law_slavery_banned *law_debt_slavery
+#law_racial_segregation 25
+#law_national_supremacy -25
+#law_ethnostate -75 NO
 lawgroup_citizenship = {
 	law_multicultural = {
 		forms = {}
@@ -234,24 +234,30 @@ lawgroup_citizenship = {
 }
 
 #COLONIAL AFFAIRS:
+#law_frontier_colonization 25 *T=colonization
 #law_colonial_resettlement 25 *T=colonization
 #law_no_colonial_affairs 0
 #law_colonial_exploitation -25 *T=colonization
 lawgroup_colonization = {
-	law_colonial_resettlement = {
-		forms = { }
-		ideas = { maritime_ideas naval_ideas }
-		reforms = { penal_colonies_reform free_trade_reform cultural_administration_reform external_mission_reform commercial_mission_reform embedded_norse_government_reform }
-	}
 	law_no_colonial_affairs = {
 		forms = { republic theocracy monarchy tribal native }
 		ideas = { }
 		reforms = { indigenous_ideas }
 	}
+	law_frontier_colonization = {
+		forms = { }
+		ideas = { expansion_ideas }
+		reforms = { }
+	}
+	law_colonial_resettlement = {
+		forms = { }
+		ideas = { naval_ideas }
+		reforms = { penal_colonies_reform free_trade_reform cultural_administration_reform external_mission_reform embedded_norse_government_reform }
+	}
 	law_colonial_exploitation = {
 		forms = { }
-		ideas = { expansion_ideas exploration_ideas trade_ideas }
-		reforms = { mercantilistic_approach_reform new_world_exploitation_reform mission_to_civilize_reform mission_to_protect_reform }
+		ideas = { exploration_ideas trade_ideas }
+		reforms = { mercantilistic_approach_reform new_world_exploitation_reform mission_to_civilize_reform mission_to_protect_reform commercial_mission_reform }
 	}
 }
 
@@ -360,6 +366,7 @@ lawgroup_labor_rights = {
 #law_interventionism 50 !law_serfdom *T=manufacturies
 #law_agrarianism 0 *T=romanticism
 #law_traditionalism -50 !law_per_capita_based_taxation !law_proportional_taxation !law_graduated_taxation
+#law_industry_banned NO
 lawgroup_economic_system = {
 	law_laissez_faire = {
 		forms = {}
