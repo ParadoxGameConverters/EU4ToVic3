@@ -21,47 +21,7 @@
 		ig_trait_old_ways
 	}
 
-	on_enable = {
-		ig:ig_rural_folk = {
-			set_ig_trait = ig_trait:ig_trait_old_ways
-			set_ig_trait = ig_trait:ig_trait_honest_work
-			set_ig_trait = ig_trait:ig_trait_farmers_markets
-		}
-
-		## Frontier Expansion Ideology
-		#if = {
-		#	limit = {
-		#		OR = {
-		#			c:HBC ?= this
-		#			c:CHL ?= this
-		#			c:ARG ?= this
-		#			country_has_primary_culture = cu:yankee
-		#			country_has_primary_culture = cu:dixie
-		#		}
-		#	}
-		#	ig:ig_rural_folk = {
-		#		remove_ideology = ideology_isolationist
-		#		add_ideology = ideology_isolationist_expansionism
-		#	}
-		#}
-		## Heimin
-		#if = {
-		#	limit = {
-		#		country_has_primary_culture = cu:japanese
-		#	}
-		#	ig:ig_rural_folk = {
-		#		set_interest_group_name = ig_peasants
-		#	}
-		#}
-		## Maka'āinana
-		#if = {
-		#	limit = {
-		#		country_has_primary_culture = cu:hawaiian
-		#	}
-		#	ig:ig_rural_folk = {
-		#		set_interest_group_name = ig_maka_ainana
-		#	}
-		#}
+	on_enable = {		### Converter ###
 	}
 	on_disable = {}
 	on_character_ig_membership = {}
@@ -148,6 +108,33 @@
 				value = 1
 				add = scope:interest_group.modifier:interest_group_in_government_attraction_mult
 				min = 0
+			}
+		}
+		
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_LOYALISTS"
+				value = pop_loyalist_fraction
+				divide = 4
+				add = 1
+			}
+		}
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = no
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_RADICALS"
+				value = pop_radical_fraction
+				divide = 4
+				add = 1
 			}
 		}
 	}
