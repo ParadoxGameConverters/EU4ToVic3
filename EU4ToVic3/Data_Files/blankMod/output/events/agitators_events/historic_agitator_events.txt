@@ -822,6 +822,12 @@ historical_agitators.7 = { #Giuseppe Mazzini
 		#Fired by character interaction
 	}
 
+	cancellation_trigger = {
+		scope:historic_agitator_scope = {
+			is_character_alive = no
+		}
+	}
+
 	immediate = {
 		random_scope_character = {
 			limit = {
@@ -983,6 +989,8 @@ historical_agitators.9 = { #Norton
 		game_date > 1860.1.1
 		game_date < 1880.1.1
 		NOT = { has_global_variable = emperor_norton_spawn }
+		##Converter
+		global_var:gbr_culture = { NOT = { culture_is_discriminated_in = root } }
 	}
 
 	immediate = {
