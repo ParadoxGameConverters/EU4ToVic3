@@ -1,14 +1,31 @@
-﻿ai_strategy_progressive_agenda = {
+ai_strategy_progressive_agenda = {
 	icon = "gfx/interface/icons/ai_strategy_icons/progressive_agenda.dds"
 	
 	type = political
 	
 	revolution_aversion = {
-		value = 2.5
+		value = 50
 	}
 	
 	min_law_chance_to_pass = {
 		value = 20
+		
+		if = {
+			limit = { 				
+				OR = {
+					any_political_movement = {
+						desired_law ?= scope:law.type
+						political_movement_radicalism >= 75
+					}
+					AND = {
+						has_journal_entry = je_government_petition
+						var:desired_law_var	?= scope:law			
+					}
+				}
+			}
+			
+			multiply = 0.5
+		}	
 	}
 	
 	max_progressiveness = {
@@ -25,6 +42,11 @@
 		if = {
 			limit = { any_interest_group = { is_insurrectionary = yes } }
 			add = 10
+		}	
+
+		if = {
+			limit = { has_journal_entry = je_government_petition  }
+			add = 25
 		}			
 	}	
 	
@@ -153,11 +175,28 @@ ai_strategy_egalitarian_agenda = {
 	type = political
 	
 	revolution_aversion = {
-		value = 1
+		value = 25
 	}
 	
 	min_law_chance_to_pass = {
 		value = 15
+		
+		if = {
+			limit = { 				
+				OR = {
+					any_political_movement = {
+						desired_law ?= scope:law.type
+						political_movement_radicalism >= 75
+					}
+					AND = {
+						has_journal_entry = je_government_petition
+						var:desired_law_var	?= scope:law			
+					}
+				}
+			}
+			
+			multiply = 0.5
+		}		
 	}
 	
 	max_progressiveness = {
@@ -174,6 +213,11 @@ ai_strategy_egalitarian_agenda = {
 		if = {
 			limit = { any_interest_group = { is_insurrectionary = yes } }
 			add = 5
+		}	
+
+		if = {
+			limit = { has_journal_entry = je_government_petition  }
+			add = 25
 		}			
 	}	
 	
@@ -268,6 +312,13 @@ ai_strategy_egalitarian_agenda = {
 			}
 			
 			add = 1000
+		}	
+		
+		if = {
+			limit = {
+				has_law = law_type:law_council_republic	
+			}
+			add = 250
 		}			
 	}
 }

@@ -25,11 +25,15 @@ zzz_cc_politics.1 = {
 			has_law = law_type:law_state_atheism
 		}
 		ig:ig_armed_forces = {
-			has_ideology = ideology:ideology_pious
+			OR = {
+				has_ideology = ideology:ideology_pious
+				has_ideology = ideology:ideology_corporatist
+			}
 			leader = {
 				NOR = {
 					has_ideology = ideology:ideology_theocrat
 					has_ideology = ideology:ideology_traditionalist
+					has_ideology = ideology:ideology_corporatist_leader
 				}
 			}
 		}
@@ -53,7 +57,13 @@ zzz_cc_politics.1 = {
 
 	option = {
 		name = zzz_cc_politics.1.a
-		ig:ig_armed_forces = { remove_ideology = ideology_pious }
+		ig:ig_armed_forces = {
+			if = {
+				limit = { has_ideology = ideology:ideology_pious }
+				remove_ideology = ideology_pious
+			}
+			else = { remove_ideology = ideology_corporatist }
+		}
 		ig:ig_devout = {
 			remove_ideology = ideology_jingoist
 			if = {
@@ -62,6 +72,7 @@ zzz_cc_politics.1 = {
 						OR = {
 							has_ideology = ideology:ideology_theocrat
 							has_ideology = ideology:ideology_traditionalist
+							has_ideology = ideology:ideology_corporatist_leader
 							has_ideology = ideology:ideology_jingoist_leader
 						}
 					}

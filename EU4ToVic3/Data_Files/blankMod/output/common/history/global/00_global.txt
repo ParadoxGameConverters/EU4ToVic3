@@ -288,6 +288,14 @@ GLOBAL = {
 		set_variable = manifest_mexico_ach_possible
 	}
 
+	#Not Yet Lost
+	every_country = {
+		limit = {
+			c:KRA ?= this
+		}
+		set_variable = not_yet_lost_ach_possible
+	}
+
 	#Event Variables
 	
 	set_global_variable = {

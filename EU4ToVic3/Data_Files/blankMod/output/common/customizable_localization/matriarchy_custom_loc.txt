@@ -2168,3 +2168,18 @@ TunicDressMatriarchalPluralCap = {	##Use this whenever 'Dresses' appears in vani
 		localization_key = custom_loc_dress_plural_cap
 	}
 }
+
+SuccubusIncubusMatriarchal = {	##Use this whenever 'incubus' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_succubus
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_incubus
+	}
+}
