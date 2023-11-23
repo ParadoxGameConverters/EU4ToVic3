@@ -164,7 +164,7 @@ social_democrat_party = {
 				}
 			}
 			triggered_desc = {
-				desc = party_sdp
+				desc = party_spd
 				trigger = {
 					OR = {
 						country_has_primary_culture = cu:north_german
@@ -184,7 +184,13 @@ social_democrat_party = {
 			triggered_desc = {
 				desc = party_socialist_party_of_america
 				trigger = {
-					country_has_primary_culture = cu:yankee
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_yankee_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_anl
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
@@ -228,6 +234,7 @@ social_democrat_party = {
 		leader = { # fascists and conservatives hate social democracy
 			NOT = {
 				has_ideology = ideology:ideology_fascist
+				has_ideology = ideology:ideology_integralist
 				has_ideology = ideology:ideology_ethno_nationalist
 				has_ideology = ideology:ideology_traditionalist
 				has_ideology = ideology:ideology_royalist
@@ -357,6 +364,7 @@ social_democrat_party = {
 						has_ideology = ideology:ideology_republican_leader
 						has_ideology = ideology:ideology_atheist
 						has_ideology = ideology:ideology_humanitarian
+						has_ideology = ideology:ideology_humanitarian_royalist
 					}
 				}
 			}
@@ -401,6 +409,9 @@ social_democrat_party = {
 					has_ideology = ideology:ideology_egalitarian
 					leader = {
 						has_ideology = ideology:ideology_humanitarian
+					}
+					leader = {
+						has_ideology = ideology:ideology_humanitarian_royalist
 					}
 				}
 				owner = {
@@ -657,7 +668,6 @@ social_democrat_party = {
 				OR = {
 					has_ideology = ideology:ideology_socialist
 					has_ideology = ideology:ideology_isolationist
-					has_ideology = ideology:ideology_isolationist_expansionism
 				}
 			}
 			add = {

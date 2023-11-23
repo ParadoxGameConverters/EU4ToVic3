@@ -56,6 +56,23 @@ free_trade_party = {
 				}
 			}
 			triggered_desc = {
+				desc = party_constitutional_union_party
+				trigger = {
+					exists = c:USA
+					THIS = c:USA
+					NOT = {
+						has_global_variable = american_civil_war
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_federalist_party
+				trigger = {
+					exists = c:NEN
+					THIS = c:NEN
+				}
+			}
+			triggered_desc = {
 				desc = party_free_minded_venstre
 				trigger = {
 					country_has_primary_culture = cu:norwegian
@@ -119,6 +136,34 @@ free_trade_party = {
 		value = {
 			value = -5
 			desc = "base_value"
+		}
+		if = {
+			limit = {
+				owner = {
+					country_is_in_south_america = yes
+					any_primary_culture = {
+						has_discrimination_trait = hispanophone
+					}
+				}
+			}
+			add = {
+				value = -10
+				desc = "south_america_two_party_system"
+			}
+		}
+		
+		if = {
+			limit = {
+				owner = {
+					country_is_in_north_america = yes
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }		### Converter
+					has_law = law_type:law_presidential_republic
+				}
+			}
+			add = {
+				value = -10
+				desc = "usa_two_party_system"
+			}
 		}
 		if = { # capitalists like capitalism
 			limit = {
@@ -274,6 +319,9 @@ free_trade_party = {
 					has_ideology = ideology:ideology_paternalistic
 					leader = {
 						has_ideology = ideology:ideology_fascist
+					}
+					leader = {
+						has_ideology = ideology:ideology_integralist
 					}
 					### Converter
 					has_ideology = ideology:ideology_maternalistic
@@ -509,6 +557,24 @@ free_trade_party = {
 			add = {
 				value = -5
 				desc = "from_french_monarchist_rival"
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }		### Converter
+					NOT = {
+						OR = {
+							has_technology_researched = socialism
+							has_technology_researched = corporatism
+							has_technology_researched = anarchism
+						}
+					}
+				}
+			}
+			add = {
+				value = -10
+				desc = "from_two_party_system"
 			}
 		}
 		if = {

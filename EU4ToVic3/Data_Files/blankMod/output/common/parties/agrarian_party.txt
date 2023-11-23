@@ -56,6 +56,16 @@ agrarian_party = {
 				}
 			}
 			triggered_desc = {
+				desc = party_conservative_republican_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }		### Converter
+					OR = {
+						has_law = law_type:law_presidential_republic
+						has_law = law_type:law_parliamentary_republic
+					}
+				}
+			}
+			triggered_desc = {
 				desc = party_landbund
 				trigger = {
 					exists = c:AUS
@@ -158,6 +168,33 @@ agrarian_party = {
 		value = {
 			value = -5
 			desc = "base_value"
+		}
+		if = {
+			limit = {
+				owner = {
+					country_is_in_south_america = yes
+					any_primary_culture = {
+						has_discrimination_trait = hispanophone
+					}
+				}
+			}
+			add = {
+				value = -10
+				desc = "south_america_two_party_system"
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					country_is_in_north_america = yes
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }		### Converter
+					has_law = law_type:law_presidential_republic
+				}
+			}
+			add = {
+				value = -10
+				desc = "usa_two_party_system"
+			}
 		}
 		if = { # a party for powerful farmers
 			limit = {
@@ -443,6 +480,24 @@ agrarian_party = {
 			multiply = {
 				value = 0.1
 				desc = "from_more_than_three_prior_members"
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }		### Converter
+					NOT = {
+						OR = {
+							has_technology_researched = socialism
+							has_technology_researched = corporatism
+							has_technology_researched = anarchism
+						}
+					}
+				}
+			}
+			add = {
+				value = -10
+				desc = "from_two_party_system"
 			}
 		}
 		if = {

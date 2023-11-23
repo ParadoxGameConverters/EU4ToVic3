@@ -120,6 +120,34 @@ military_party = {
 			value = -5
 			desc = "base_value"
 		}
+		if = {
+			limit = {
+				owner = {
+					country_is_in_south_america = yes
+					any_primary_culture = {
+						has_discrimination_trait = hispanophone
+					}
+				}
+			}
+			add = {
+				value = -10
+				desc = "south_america_two_party_system"
+			}
+		}
+		
+		if = {
+			limit = {
+				owner = {
+					country_is_in_north_america = yes
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }		### Converter
+					has_law = law_type:law_presidential_republic
+				}
+			}
+			add = {
+				value = -10
+				desc = "usa_two_party_system"
+			}
+		}
 		if = { # nobody will join if the armed forces don't join
 			limit = {
 				NOT = { is_interest_group_type = ig_armed_forces }
