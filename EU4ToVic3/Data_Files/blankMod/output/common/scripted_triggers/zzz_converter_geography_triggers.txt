@@ -9,6 +9,8 @@
 # zzz_converter_state_is_in_south_africa
 # converter_is_converter_confederation_culture
 # converter_should_add_confederation_cultures
+# converter_shares_colonial_region_with_capital
+# converter_culture_is_in_capital_list
 # is_settler_colonial_country
 # is_colonized_country
 
@@ -133,26 +135,24 @@ zzz_converter_state_is_in_south_africa = {
 
 converter_is_converter_confederation_culture = {
 	trigger_if = {
-		limit = { has_game_rule = converter_confederation_cultures_all }
+		limit = {
+			prev.owner = {
+				has_law = law_type:law_multicultural
+				has_law = law_type:law_slavery_banned
+			}
+		}
 		always = yes
 	}
 	trigger_else_if = {
-		limit = { has_game_rule = converter_confederation_cultures_any }
+		limit = {
+			prev.owner = {
+				has_law = law_type:law_cultural_exclusion
+				has_law = law_type:law_slavery_banned
+			}
+		}
 		shares_trait_with_any_primary_culture = prev.owner
 	}
-	trigger_else_if = {
-		limit = { has_game_rule = converter_confederation_cultures_heritage }
-		shares_heritage_trait_with_any_primary_culture = prev.owner
-	}
-	trigger_else_if = {
-		limit = { has_game_rule = converter_confederation_cultures_language }
-		shares_non_heritage_trait_with_any_primary_culture = prev.owner
-	}
-	trigger_else_if = {
-		limit = { has_game_rule = converter_confederation_cultures_heritage_language }
-		shares_heritage_and_other_trait_with_any_primary_culture = prev.owner
-	}
-	trigger_else = { always = no }
+	trigger_else = { shares_heritage_trait_with_any_primary_culture = prev.owner }
 }
 
 converter_should_add_confederation_cultures = {
@@ -182,6 +182,128 @@ converter_should_add_confederation_cultures = {
 	trigger_else = { always = yes }
 }
 
+converter_shares_colonial_region_with_capital = {
+	trigger_if = {
+		limit = {
+			prev.capital = { zzz_converter_state_is_in_canada = yes }
+		}
+		zzz_converter_state_is_in_canada = yes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { zzz_converter_state_is_in_america = yes }
+		}
+		zzz_converter_state_is_in_america = yes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { zzz_converter_state_is_in_california = yes }
+		}
+		zzz_converter_state_is_in_california = yes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { zzz_converter_state_is_in_mexico = yes }
+		}
+		zzz_converter_state_is_in_mexico = yes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { zzz_converter_state_is_in_gran_colombia = yes }
+		}
+		zzz_converter_state_is_in_gran_colombia = yes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { region = sr:region_andes }
+		}
+		region = sr:region_andes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { region = sr:region_brazil }
+		}
+		region = sr:region_brazil
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { zzz_converter_state_is_in_argentina = yes }
+		}
+		zzz_converter_state_is_in_argentina = yes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { zzz_converter_state_is_in_australia = yes }
+		}
+		zzz_converter_state_is_in_australia = yes
+	}
+	trigger_else = {
+		prev.capital = { region = sr:region_southern_africa }
+		region = sr:region_southern_africa
+	}
+}
+
+converter_culture_is_in_capital_list = {
+	trigger_if = {
+		limit = {
+			prev.owner.capital = { zzz_converter_state_is_in_canada = yes }
+		}
+		is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { zzz_converter_state_is_in_america = yes }
+		}
+		is_target_in_global_variable_list = { name = global_american_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { zzz_converter_state_is_in_california = yes }
+		}
+		is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { zzz_converter_state_is_in_mexico = yes }
+		}
+		is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { zzz_converter_state_is_in_gran_colombia = yes }
+		}
+		is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { region = sr:region_andes }
+		}
+		is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { region = sr:region_brazil }
+		}
+		is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { zzz_converter_state_is_in_argentina = yes }
+		}
+		is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { zzz_converter_state_is_in_australia = yes }
+		}
+		is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+	}
+	trigger_else = {
+		prev.owner.capital = { region = sr:region_southern_africa }
+		is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+	}
+}
+
 is_settler_colonial_country = {
 	trigger_if = {
 		limit = {
@@ -191,19 +313,23 @@ is_settler_colonial_country = {
 				country_is_in_south_america = yes
 			}
 		}
-		NOT = { any_primary_culture = { has_discrimination_trait = indigenous_american_heritage } }
+		any_primary_culture = { NOT = { has_discrimination_trait = indigenous_american_heritage } }
 	}
 	trigger_else_if = {
 		limit = {
 			exists = capital
 			capital = { region = sr:region_oceania }
 		}
-		NOT = { any_primary_culture = { has_discrimination_trait = indigenous_oceanic_heritage } }
+		any_primary_culture = { NOT = { has_discrimination_trait = indigenous_oceanic_heritage } }
 	}
 	trigger_else_if = {
 		limit = { country_is_in_africa = yes }
-		any_primary_culture = { has_discrimination_trait = african_settler }
-		NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } }
+		any_primary_culture = {
+			NOR = {
+				has_discrimination_trait = african_heritage
+				has_discrimination_trait = middle_eastern_heritage
+			}
+		}
 	}
 	trigger_else = { always = no }
 }
@@ -227,8 +353,11 @@ is_colonized_country = {
 		any_primary_culture = { has_discrimination_trait = indigenous_oceanic_heritage }
 	}
 	trigger_else_if = {
+		limit = { country_is_in_east_asia = yes }
+		any_primary_culture = { has_discrimination_trait = north_asian_heritage }
+	}
+	trigger_else_if = {
 		limit = { country_is_in_africa = yes }
-		NOT = { any_primary_culture = { has_discrimination_trait = african_settler } }
 		any_primary_culture = { has_discrimination_trait = african_heritage }
 	}
 	trigger_else = { always = no }
