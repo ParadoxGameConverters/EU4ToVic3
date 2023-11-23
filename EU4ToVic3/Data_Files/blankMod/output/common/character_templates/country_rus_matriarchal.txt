@@ -1,0 +1,415 @@
+﻿### Russia character template file ###
+
+### IG Leaders
+
+# Generated IG Leaders
+
+fem_rus_witte_character_template = {
+	first_name = Natalya
+	last_name = Witte
+	historical = yes
+	culture = global_var:rus_culture
+	female = yes
+	religion = orthodox
+	ideology = ideology_reformer
+	interest_group = ig_industrialists
+	birth_date = 1849.6.29
+	traits = {
+		experienced_political_operator
+		meticulous
+		innovative
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_witte
+				}
+			}
+			uses_rus_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_industrialists   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1879.1.1
+		latest_usage_date = 1915.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_witte
+		}
+	}
+}
+
+### Generals
+
+# Generated Generals
+
+fem_rus_general_chicherin = {
+	first_name = Petra
+	last_name = Chicherin
+	historical = yes
+	culture = global_var:rus_culture
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1778.2.21
+	traits = {
+		plains_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_chicherin
+				}
+			}
+			uses_rus_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1848.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_chicherin
+		}
+	}
+}
+
+fem_rus_general_von_tottleben = {
+	first_name = Ziska_Eduardine
+	last_name = von_Tottleben
+	historical = yes
+	culture = global_var:nor_ger_culture
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1818.5.20
+	traits = {
+		expert_defensive_strategist
+		innovative
+		trench_rat
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_tottleben
+				}
+			}
+			uses_rus_characters = yes
+			owns_entire_state_region = STATE_LATVIA
+		}
+		role = general
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1884.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_tottleben
+		}
+	}
+}
+
+fem_rus_general_von_rennenkampf = {
+	first_name = Paula
+	last_name = von_Rennenkampf
+	historical = yes
+	culture = global_var:nor_ger_culture
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1854.4.17
+	traits = {
+		basic_offensive_planner
+		reckless
+		persistent
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_rennenkampf
+				}
+			}
+			uses_rus_characters = yes
+			owns_entire_state_region = STATE_ESTONIA
+		}
+		role = general
+		earliest_usage_date = 1884.1.1
+		latest_usage_date = 1920.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_rennenkampf
+		}
+	}
+}
+
+fem_rus_general_grand_duke_nicholas = {
+	first_name = Grand_Duchess_Nikola
+	last_name = Romanov
+	historical = yes
+	culture = global_var:rus_culture
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1856.11.6
+	traits = {
+		popular_commander
+		pious
+		basic_offensive_planner
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_grand_duke_nicholas
+				}
+			}
+			uses_rus_characters = yes
+			has_law = law_type:law_monarchy
+		}
+		role = general
+		earliest_usage_date = 1884.1.1
+		latest_usage_date = 1920.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_grand_duke_nicholas
+		}
+	}
+}
+
+fem_rus_general_brusilov = {
+	first_name = Alexandra
+	last_name = Brusilov
+	historical = yes
+	culture = global_var:rus_culture
+	female = yes
+	ideology = ideology_moderate # argued for the abdication of Tsar Nicholas II
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1853.8.31
+	traits = {
+		expert_offensive_planner
+		innovative
+		direct
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_brusilov
+				}
+			}
+			uses_rus_characters = yes
+			owns_entire_state_region = STATE_GEORGIA
+		}
+		role = general
+		earliest_usage_date = 1874.1.1
+		latest_usage_date = 1920.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_brusilov
+		}
+	}
+}
+
+fem_rus_general_wrangel = {
+	first_name = Petra
+	last_name = Wrangel
+	historical = yes
+	culture = global_var:rus_culture
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1878.8.27
+	traits = {
+		experienced_offensive_planner
+		popular_commander
+		direct
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_wrangel
+				}
+			}
+			uses_rus_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1914.1.1
+		latest_usage_date = 1936.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_wrangel
+		}
+	}
+}
+
+fem_rus_general_skobelev = {
+	first_name = Mihaila
+	last_name = Skobelev
+	historical = yes
+	culture = global_var:rus_culture
+	female = yes
+	ideology = ideology_ethno_nationalist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1843.9.29
+	traits = {
+		expert_offensive_planner
+		popular_commander
+		bigoted
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_skobelev
+				}
+			}
+			uses_rus_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1870.1.1
+		latest_usage_date = 1910.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_skobelev
+		}
+	}
+}
+
+### Admirals
+
+# Generated Admirals
+
+fem_rus_admiral_makarov = {
+	first_name = Stefaniya
+	last_name = Makarov
+	historical = yes
+	culture = global_var:rus_culture
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1849.1.8
+	traits = {
+		explorer
+		experienced_naval_commander
+		innovative
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_makarov
+				}
+			}
+			uses_rus_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1881.1.1
+		latest_usage_date = 1918.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_makarov
+		}
+	}
+}
+
+fem_rus_admiral_nakhimov = {
+	first_name = Pavla
+	last_name = Nakhimov
+	historical = yes
+	culture = global_var:rus_culture
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1802.7.5
+	traits = {
+		brave
+		experienced_naval_commander
+		meticulous
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_nakhimov
+				}
+			}
+			uses_rus_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_nakhimov
+		}
+	}
+}

@@ -11,6 +11,7 @@ brz_admiral_inacio = {
 	interest_group = ig_armed_forces
 	ideology = ideology_royalist
 	birth_date = 1808.8.1
+	dna = dna_joaquim_jose_inacio
 	traits = {
 		brave
 		pious
@@ -51,6 +52,7 @@ brz_admiral_tamandare = {
 	interest_group = ig_armed_forces
 	ideology = ideology_royalist
 	birth_date = 1807.12.13
+	dna = dna_joaquim_marques_lisboa
 	traits = {
 		brave
 		experienced_naval_commander
@@ -90,6 +92,7 @@ brz_general_alves_de_lima_e_silva = {
 	interest_group = ig_landowners
 	ideology = ideology_royalist
 	birth_date = 1803.8.25
+	dna = dna_alves_de_lima_e_silva
 	traits = {
 		surveyor
 		charismatic
@@ -129,6 +132,7 @@ chl_admiral_prat = {
 	interest_group = ig_petty_bourgeoisie
 	ideology = ideology_reformer
 	birth_date = 1848.4.3
+	dna = dna_prat
 	traits = {
 		brave
 		innovative
@@ -178,6 +182,7 @@ mex_general_diaz = {
 	interest_group = ig_armed_forces
 	ideology = ideology_reformer
 	birth_date = 1830.9.15
+	dna = dna_porfirio_diaz
 	traits = {
 		ambitious
 		basic_defensive_strategist
@@ -217,6 +222,7 @@ mex_general_zaragoza = {
 	interest_group = ig_petty_bourgeoisie
 	ideology = ideology_radical
 	birth_date = 1829.3.24
+	dna = dna_ignacio_zaragoza
 	traits = {
 		stalwart_defender
 		direct
@@ -246,21 +252,21 @@ mex_general_zaragoza = {
 	}
 }
 # Paraguay - PRG
-par_general_solano_lopez = {
-	first_name = Francisco
-	last_name = Solano_Lopez
+prg_general_aquino = {
+	first_name = Elizardo
+	last_name = Aquino
 	historical = yes
 	culture = global_var:la_plata_culture
 	female = no
 	religion = catholic
 	commander_rank = default
 	interest_group = ig_armed_forces
-	ideology = ideology_reformer
-	birth_date = 1827.7.24
+	ideology = ideology_moderate
+	birth_date = 1825.2.5 # Only year known
 	traits = {
-		ambitious
-		innovative
-		cruel # He flogged and ordered the execution of his 70 year old mother for having revealed he was a bastard
+		engineer
+		trench_rat
+		brave
 	}
 	commander_usage = {
 		country_trigger = {
@@ -268,7 +274,7 @@ par_general_solano_lopez = {
 			NOT = {
 				is_target_in_global_variable_list = {
 					name = converter_unavailable_unique_characters
-					target = flag:converter_solano_lopez
+					target = flag:converter_elizardo_aquino
 				}
 			}
 			trigger_if = {
@@ -283,14 +289,210 @@ par_general_solano_lopez = {
 			}
 		}
 		role = general
-		earliest_usage_date = 1844.1.1 
+		earliest_usage_date = 1855.1.1 
 		latest_usage_date = 1880.1.1	
 		chance = 75
 	}
 	on_created = {
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
-			target = flag:converter_solano_lopez
+			target = flag:converter_elizardo_aquino
+		}
+	}
+}
+
+prg_general_bruguez = {
+	first_name = Jose_Maria
+	last_name = Bruguez
+	historical = yes
+	culture = global_var:la_plata_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1827.6.7 # Only year known
+	traits = {
+		meticulous
+		experienced_artillery_commander
+		stalwart_defender
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jose_maria_bruguez
+				}
+			}
+			trigger_if = {
+				limit = {
+					exists = c:PAR
+					is_target_in_global_variable_list = { name = global_la_plata_countries target = c:PAR }
+				}
+				this = c:PAR
+			}
+			trigger_else = {
+				is_target_in_global_variable_list = { name = global_la_plata_countries target = this }
+			}
+		}
+		role = general
+		earliest_usage_date = 1858.1.1 
+		latest_usage_date = 1880.1.1	
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jose_maria_bruguez
+		}
+	}
+}
+
+prg_general_caballero = {
+	first_name = Bernardino
+	last_name = Caballero
+	historical = yes
+	culture = global_var:la_plata_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1839.5.20
+	traits = {
+		experienced_political_operator
+		experienced_offensive_planner
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_bernardino_caballero
+				}
+			}
+			trigger_if = {
+				limit = {
+					exists = c:PAR
+					is_target_in_global_variable_list = { name = global_la_plata_countries target = c:PAR }
+				}
+				this = c:PAR
+			}
+			trigger_else = {
+				is_target_in_global_variable_list = { name = global_la_plata_countries target = this }
+			}
+		}
+		role = general
+		earliest_usage_date = 1863.1.1 
+		latest_usage_date = 1890.1.1	
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_bernardino_caballero
+		}
+	}
+}
+
+prg_general_diaz = {
+	first_name = JosE__Eduvigis
+	last_name = DI_az
+	historical = yes
+	culture = global_var:la_plata_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1833.10.17
+	traits = {
+		experienced_defensive_strategist
+		trench_rat
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jose_eduvigis_diaz
+				}
+			}
+			trigger_if = {
+				limit = {
+					exists = c:PAR
+					is_target_in_global_variable_list = { name = global_la_plata_countries target = c:PAR }
+				}
+				this = c:PAR
+			}
+			trigger_else = {
+				is_target_in_global_variable_list = { name = global_la_plata_countries target = this }
+			}
+		}
+		role = general
+		earliest_usage_date = 1860.1.1 
+		latest_usage_date = 1880.1.1	
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jose_eduvigis_diaz
+		}
+	}
+}
+
+prg_admiral_meza = {
+	first_name = Pedro_Ignacio
+	last_name = Meza
+	historical = yes
+	culture = global_var:la_plata_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1813.2.2 # only year known
+	traits = {
+		experienced_naval_commander
+		brave
+		reckless
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pedro_ignacio_meza
+				}
+			}
+			trigger_if = {
+				limit = {
+					exists = c:PAR
+					is_target_in_global_variable_list = { name = global_la_plata_countries target = c:PAR }
+				}
+				this = c:PAR
+			}
+			trigger_else = {
+				is_target_in_global_variable_list = { name = global_la_plata_countries target = this }
+			}
+		}
+		role = admiral
+		earliest_usage_date = 1854.1.1 
+		latest_usage_date = 1875.1.1	
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pedro_ignacio_meza
 		}
 	}
 }
@@ -306,6 +508,7 @@ peu_admiral_grau = {
 	interest_group = ig_armed_forces
 	ideology = ideology_reformer
 	birth_date = 1834.7.27
+	dna = dna_miguel_grau_seminario
 	traits = {
 		brave
 		romantic
@@ -353,6 +556,7 @@ usa_general_jesup = {
 	commander_rank = default
 	interest_group = ig_armed_forces
 	birth_date = 1788.12.16
+	dna = dna_thomas_jesup
 	traits = {
 		meticulous
 	}
@@ -388,6 +592,7 @@ usa_admiral_shubrick = {
 	commander_rank = default
 	interest_group = ig_armed_forces
 	birth_date = 1790.10.31
+	dna = dna_william_shubrick
 	traits = {
 		experienced_naval_commander
 	}
@@ -425,6 +630,7 @@ usa_admiral_dewey = {
 	commander_rank = default
 	interest_group = ig_armed_forces
 	birth_date = 1837.12.26
+	dna = dna_george_dewey
 	traits = {
 		experienced_naval_commander
 		persistent
@@ -464,6 +670,7 @@ usa_admiral_farragut = {
 	commander_rank = default
 	interest_group = ig_armed_forces
 	birth_date = 1801.7.5
+	dna = dna_david_farragut
 	traits = {
 		experienced_naval_commander
 		direct
@@ -503,6 +710,7 @@ usa_admiral_perry = {
 	commander_rank = default
 	interest_group = ig_armed_forces
 	birth_date = 1794.4.10
+	dna = dna_matthew_perry
 	traits = {
 		innovative
 		dockyard_master
@@ -542,6 +750,7 @@ usa_admiral_buchanan = {
 	commander_rank = default
 	interest_group = ig_armed_forces
 	birth_date = 1800.9.17
+	dna = dna_franklin_buchanan
 	traits = {
 		experienced_naval_commander
 		dockyard_master
@@ -581,6 +790,7 @@ usa_general_lee = {
 	commander_rank = default
 	interest_group = ig_landowners
 	birth_date = 1807.1.19
+	dna = dna_robert_e_lee
 	traits = {
 		experienced_defensive_strategist
 		innovative
@@ -620,6 +830,7 @@ usa_general_jackson = {
 	commander_rank = default
 	interest_group = ig_armed_forces
 	birth_date = 1824.1.21
+	dna = dna_stonewall_jackson
 	traits = {
 		surveyor
 		stalwart_defender
@@ -659,6 +870,7 @@ usa_general_longstreet = {
 	commander_rank = default
 	interest_group = ig_armed_forces
 	birth_date = 1821.1.8
+	dna = dna_james_longstreet
 	traits = {
 		experienced_offensive_planner
 		expert_defensive_strategist
@@ -698,6 +910,7 @@ usa_general_sherman = {
 	commander_rank = default
 	interest_group = ig_petty_bourgeoisie
 	birth_date = 1820.2.8
+	dna = dna_sherman
 	traits = {
 		expert_offensive_planner
 		resupply_commander
@@ -737,6 +950,7 @@ usa_general_chaffee = {
 	commander_rank = default
 	interest_group = ig_armed_forces
 	birth_date = 1842.4.14
+	dna = dna_chaffee
 	traits = {
 		innovative
 		basic_offensive_planner
@@ -775,6 +989,7 @@ usa_general_grant = {
 	commander_rank = default
 	interest_group = ig_petty_bourgeoisie
 	birth_date = 1822.1.21
+	dna = dna_ulysses_s_grant
 	traits = {
 		experienced_offensive_planner
 		persistent
@@ -814,6 +1029,7 @@ usa_general_pershing = {
 	commander_rank = default
 	interest_group = ig_armed_forces
 	birth_date = 1860.9.13
+	dna = dna_pershing
 	traits = {
 		experienced_offensive_planner
 		persistent
@@ -853,6 +1069,7 @@ usa_general_sheridan = {
 	commander_rank = default
 	interest_group = ig_armed_forces
 	birth_date = 1831.3.6
+	dna = dna_sheridan
 	traits = {
 		experienced_offensive_planner
 		pillager
