@@ -38,7 +38,8 @@ liberal_revolution_ongoing = {
 								has_ideology = ideology:ideology_radical
 								has_ideology = ideology:ideology_republican_leader
 								has_ideology = ideology:ideology_social_democrat
-								has_ideology = ideology:ideology_humanitarian
+								has_ideology = ideology:ideology_humanitarian	
+								has_ideology = ideology:ideology_humanitarian_royalist
 								is_feminist_character = yes			### Converter
 							}		
 						}
@@ -60,7 +61,8 @@ liberal_revolution_ongoing = {
 						has_ideology = ideology:ideology_radical
 						has_ideology = ideology:ideology_republican_leader
 						has_ideology = ideology:ideology_social_democrat
-						has_ideology = ideology:ideology_humanitarian
+						has_ideology = ideology:ideology_humanitarian	
+						has_ideology = ideology:ideology_humanitarian_royalist
 						is_feminist_character = yes			### Converter
 					}
 					AND = {
@@ -94,6 +96,7 @@ reactionary_revolution_ongoing = {
 							OR = {
 								has_ideology = ideology:ideology_slaver
 								has_ideology = ideology:ideology_fascist
+								has_ideology = ideology:ideology_integralist
 								has_ideology = ideology:ideology_royalist
 								has_ideology = ideology:ideology_orleanist
 								has_ideology = ideology:ideology_bonapartist
@@ -101,6 +104,7 @@ reactionary_revolution_ongoing = {
 								has_ideology = ideology:ideology_theocrat
 								has_ideology = ideology:ideology_ethno_nationalist
 								has_ideology = ideology:ideology_traditionalist
+								has_ideology = ideology:ideology_corporatist
 							}
 						}
 						AND = {
@@ -120,6 +124,7 @@ reactionary_revolution_ongoing = {
 					OR = {
 						has_ideology = ideology:ideology_slaver
 						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_integralist
 						has_ideology = ideology:ideology_royalist
 						has_ideology = ideology:ideology_orleanist
 						has_ideology = ideology:ideology_bonapartist
@@ -196,6 +201,9 @@ ig_is_dreyfusard = {
 		leader = {
 			has_ideology = ideology:ideology_humanitarian
 		}
+		leader = {
+			has_ideology = ideology:ideology_humanitarian_royalist
+		}
 	}
 }
 
@@ -207,6 +215,7 @@ has_progressive_ideology = {
 		has_ideology = ideology:ideology_pacifist
 		has_ideology = ideology:ideology_social_democrat
 		has_ideology = ideology:ideology_humanitarian
+		has_ideology = ideology:ideology_humanitarian_royalist
 	}
 }
 
