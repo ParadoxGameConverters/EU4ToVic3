@@ -1,5 +1,5 @@
-#For nations that are normally centralized, this file forcefully decentralizes them
-ACE = { #Aceh
+﻿#For nations that are normally centralized, this file forcefully decentralizes them
+ACE = { # Aceh
 	color = { 73  152  76 }
 	
 	country_type = decentralized
@@ -10,7 +10,19 @@ ACE = { #Aceh
 	cultures = { sumatran }
 	is_named_from_capital = yes
 }
-ANL = { #Umayyads (Andalusia)
+AFG = {
+	color = { 92  148  152 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	religion = animist # Zunist
+	
+	cultures = { pashtun tajik }
+	capital = STATE_EASTERN_AFGHANISTAN
+}
+ANL = { # Umayyads (Andalusia)
 	color = hsv360{ 82  87  78 }
 	
 	country_type = decentralized
@@ -19,6 +31,28 @@ ANL = { #Umayyads (Andalusia)
 	
 	cultures = { bedouin visigothic }
 	capital = STATE_ANDALUSIA
+}
+ARA = { # Abbasids (Arabia)
+	color = { 66  111  19 }
+	
+	country_type = decentralized
+	
+	tier = empire
+	
+	cultures = { mashriqi bedouin misri yemenite }
+	capital = STATE_BAGHDAD
+}
+ARM = { # Armenia
+	color = { 128 63 128 }
+	
+	country_type = decentralized
+
+	tier = kingdom
+	
+	religion = sunni
+	
+	cultures = { bedouin }
+	capital = STATE_ARMENIA
 }
 BAL = { #Bali
 	color = { 201  97  74 }
@@ -244,6 +278,19 @@ HUN = { #Avaria
 	cultures = { avar hungarian }
 	capital = STATE_CENTRAL_HUNGARY
 }
+HZJ = { # Hazarajat
+	color = { 236 159 90 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	religion = mahayana
+
+	cultures = { pashtun hazara }
+
+	capital = STATE_EASTERN_AFGHANISTAN
+}
 ICL = { #Iceland
 	color = { 62 129 155 }
 	
@@ -295,6 +342,30 @@ JMB = { # Jambi
 	cultures = { sumatran }
 	capital = STATE_NORTH_SUMATRA
 }
+KAL = {
+	color = { 97  98  195 }
+	
+	country_type = decentralized
+	
+	religion = mahayana
+	
+	tier = city_state
+	
+	cultures = { afghan baluchi }
+	capital = STATE_BALUCHISTAN
+}
+KHI = { # Bajanids (Khiva)
+	color = { 188  123  103 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	religion = sunni
+	
+	cultures = { bedouin }
+	capital = STATE_UZBEKIA
+}
 KRA = { #Krakow
 	color = { 138  193  231 }
 	
@@ -345,6 +416,18 @@ LOM = { #Lombardy
 	
 	cultures = { lombard north_italian }
 	capital = STATE_LOMBARDY
+}
+MAH = { # Yahballahas (Mahra)
+	color = { 0  153  76 }
+	
+	country_type = decentralized
+	
+	religion = nestorian
+	
+	tier = principality
+	
+	cultures = { bedouin yemenite }
+	capital = STATE_YEMEN
 }
 MEC = {
 	color = { 207  111  64 }
@@ -447,6 +530,17 @@ OLD = { # Ostfriesland (Oldenburg)
 	
 	cultures = { north_german }
 	capital = STATE_HANNOVER
+}
+OMA = { # Azd Umanids (Oman)
+	color = { 98  134  153 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { bedouin }
+	religion = ibadi
+	capital = STATE_OMAN
 }
 PAP = {
 	color = { 211 220 178 }
@@ -729,4 +823,16 @@ YAK = { # Yakutia
 	cultures = { yakut }
 
 	capital = STATE_YAKUTSK
+}
+YEM = { # Arwadids (Yemen)
+	color = { 255  191  191 }
+	
+	country_type = decentralized
+	
+	religion = sunni
+	
+	tier = principality
+	
+	cultures = { yemenite bedouin }
+	capital = STATE_YEMEN
 }
