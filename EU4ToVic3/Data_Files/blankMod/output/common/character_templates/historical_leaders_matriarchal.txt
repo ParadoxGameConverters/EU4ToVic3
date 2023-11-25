@@ -38,6 +38,12 @@
 				is_interest_group_type = ig_landowners
 				is_interest_group_type = ig_petty_bourgeoisie
 			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_ethno_nationalism
+			}
 		}
 		earliest_usage_date = 1852.1.1
 		latest_usage_date = 1899.1.1
@@ -61,6 +67,7 @@ fem_mex_juarez_character_template = {
 	ideology = ideology_market_liberal
 	interest_group = ig_intelligentsia
 	birth_date = 1806.3.21
+    dna = dna_benito_juarez
 	traits = {
 		experienced_political_operator
 		direct
@@ -87,7 +94,14 @@ fem_mex_juarez_character_template = {
 				is_interest_group_type = ig_petty_bourgeoisie
 				is_interest_group_type = ig_intelligentsia
 				is_interest_group_type = ig_rural_folk
-			} 
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
 		}   
 		earliest_usage_date = 1836.1.1
 		latest_usage_date = 1872.1.1
@@ -133,7 +147,14 @@ fem_usa_lincoln_character_template = {
 			OR = {
 				is_interest_group_type = ig_petty_bourgeoisie
 				is_interest_group_type = ig_intelligentsia
-			} 
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
 		}   
 		earliest_usage_date = 1844.2.12
 		latest_usage_date = 1890.1.1
@@ -156,6 +177,7 @@ fem_usa_roosevelt_character_template = {
 	ideology = ideology_reformer
 	interest_group = ig_industrialists
 	birth_date = 1858.8.28
+    dna = dna_roosevelt
 	traits = {
 		celebrity_commander
 		explorer
@@ -178,7 +200,14 @@ fem_usa_roosevelt_character_template = {
 				is_interest_group_type = ig_intelligentsia
 				is_interest_group_type = ig_industrialists
 				is_interest_group_type = ig_rural_folk
-			} 
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
 		}   
 		earliest_usage_date = 1882.1.1
 		latest_usage_date = 1919.1.1
@@ -190,6 +219,261 @@ fem_usa_roosevelt_character_template = {
 			target = flag:converter_roosevelt
 		}
 	}
+}
+fem_usa_rockefeller_character_template = {
+    first_name = Jane
+    last_name = Rockefeller
+    historical = yes
+    culture = global_var:new_england_yankee_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_industrialists
+    birth_date = 1839.6.8
+    traits = {
+        ambitious
+        persistent
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_rockefeller
+				}
+			}
+			uses_new_england_yankee_characters = yes
+            has_company = company_type:company_standard_oil
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1875.1.1
+        latest_usage_date = 1915.1.1
+        chance = 25
+    }   
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_rockefeller
+		}
+	}
+}
+fem_usa_carnegie_character_template = {
+    first_name = Andrea
+    last_name = Carnegie
+    historical = yes
+    culture = global_var:sct_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_market_liberal
+    interest_group = ig_industrialists
+    birth_date = 1835.11.25
+    traits = {
+        ambitious
+        literary
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_carnegie
+				}
+			}
+			uses_new_england_yankee_characters = yes
+			global_var:sct_culture = { NOT = { culture_is_discriminated_in = prev } }
+            has_company = company_type:company_us_steel
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1870.1.1
+        latest_usage_date = 1908.1.1
+        chance = 25
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_carnegie
+		}
+	}
+}
+fem_usa_jp_morgan_character_template = {
+    first_name = Jane_Pierpont
+    last_name = Morgan
+    historical = yes
+    culture = global_var:new_england_yankee_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_industrialists
+    birth_date = 1835.11.25
+    traits = {
+        imposing
+        pious
+        sickly
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jp_morgan
+				}
+			}
+			uses_new_england_yankee_characters = yes
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1865.1.1
+        latest_usage_date = 1913.1.1
+        chance = 25
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jp_morgan
+		}
+	}   
+}
+fem_usa_thomas_edison_character_template = {
+    first_name = Tamzen
+    last_name = Edison
+    historical = yes
+    culture = global_var:midwest_yankee_culture
+    female = yes
+    religion = atheist
+    ideology = ideology_pacifist
+    interest_group = ig_intelligentsia
+    birth_date = 1847.2.11
+    traits = {
+        ambitious
+        engineer
+        imperious
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_edison
+				}
+			}
+			uses_midwest_yankee_characters = yes
+            has_company = company_type:company_general_electric
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1876.1.1
+        latest_usage_date = 1920.1.1
+        chance = 25
+    }   
+    on_created = {
+        if = {
+            limit = {
+                owner = {
+                    has_technology_researched = feminism
+                    NOT = {
+                        has_law = law_type:law_womens_suffrage
+                    }
+                }
+            }
+            converter_set_feminist_ideology_effect = yes
+        }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_edison
+		}
+    }
+}
+fem_usa_mark_twain_character_template = { #Mark Twain
+    first_name = Hannah
+    last_name = Clemens
+    historical = yes
+    culture = global_var:dixie_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_jingoist
+    interest_group = ig_intelligentsia
+    birth_date = 1835.11.30
+    traits = {
+        literary
+        erudite
+        reckless
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mark_twain
+				}
+			}
+            country_has_primary_culture = global_var:dixie_culture
+            any_scope_state = {
+                state_region = s:STATE_MISSOURI
+            }
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1865.11.18
+        latest_usage_date = 1910.1.1
+        chance = 25
+    }   
+    on_created = {
+        if = {
+            limit = {
+                owner = {
+                    NOT = {
+                        has_law = law_type:law_slavery_banned
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_abolitionist
+        }
+        else_if = {
+            limit = {
+                owner = {
+                    any_country = {
+                        is_subject_of = prev
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_pacifist
+        }
+        else_if = {
+            limit = {
+                owner = {
+                    has_technology_researched = feminism
+                    NOT = {
+                        has_law = law_type:law_womens_suffrage
+                    }
+                }
+            }
+            converter_set_feminist_ideology_effect = yes
+        }
+        else = {
+            set_ideology = ideology:ideology_jingoist
+        }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_mark_twain
+		}
+    }
 }
 # China - CHI
 fem_chi_sun_character_template = { # Sun Yat-sen
@@ -224,6 +508,13 @@ fem_chi_sun_character_template = { # Sun Yat-sen
 				is_interest_group_type = ig_intelligentsia
 				is_interest_group_type = ig_trade_unions
 				is_interest_group_type = ig_petty_bourgeoisie
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
 			}
 		}
 		earliest_usage_date = 1888.1.1
@@ -269,11 +560,18 @@ fem_chi_gong_character_template = {
 			trigger_else = {
 				is_target_in_global_variable_list = { name = global_manchu_countries target = this }
 			}
-            has_law = law_type:law_monarchy
+			has_law = law_type:law_monarchy
 		}
 		interest_group_trigger = {
 			is_marginal = no
 			is_interest_group_type = ig_landowners
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
 		}
 		earliest_usage_date = 1853.1.1
 		latest_usage_date = 1898.1.1
@@ -318,7 +616,14 @@ fem_fra_clemenceau_character_template = {
 		}
 		interest_group_trigger = {
 			is_marginal = no
-			is_interest_group_type = ig_intelligentsia	
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
 		}   
 		earliest_usage_date = 1871.1.1
 		latest_usage_date = 1929.1.1
@@ -361,7 +666,14 @@ fem_frm_grimm_character_template = {
 		}
 		interest_group_trigger = {
 			is_marginal = no
-			is_interest_group_type = ig_intelligentsia		  
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
 		}   
 		earliest_usage_date = 1836.1.1
 		latest_usage_date = 1850.1.1
@@ -415,6 +727,13 @@ fem_gbr_o_connor_template = {
 			OR = {
 				is_interest_group_type = ig_trade_unions
 				is_interest_group_type = ig_intelligentsia
+			}   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
 			}
 		}   
 		earliest_usage_date = 1836.1.1
@@ -459,6 +778,13 @@ fem_gbr_wellington_character_template = {
 			OR = {
 				is_interest_group_type = ig_industrialists
 				is_interest_group_type = ig_landowners
+			}   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
 			}
 		}   
 		earliest_usage_date = 1836.1.1
@@ -500,7 +826,14 @@ fem_gbr_disraeli_character_template = { # Disraeli, Jingoist, Landowners
 		}
 		interest_group_trigger = {
 			is_marginal = no
-			is_interest_group_type = ig_landowners
+			is_interest_group_type = ig_landowners   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
 		}   
 		earliest_usage_date = 1868.1.1
 		latest_usage_date = 1880.1.1	
@@ -541,7 +874,14 @@ fem_gbr_gladstone_character_template = { # Gladstone, market liberal, intelligen
 		}
 		interest_group_trigger = {
 			is_marginal = no
-			is_interest_group_type = ig_intelligentsia		  
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
 		}   
 		earliest_usage_date = 1865.1.1
 		latest_usage_date = 1894.1.1
@@ -582,7 +922,14 @@ fem_gbr_temple_character_template = { # Viscount Palmerston
 		}
 		interest_group_trigger = {
 			is_marginal = no
-			is_interest_group_type = ig_intelligentsia		  
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
 		}   
 		earliest_usage_date = 1836.1.1
 		latest_usage_date = 1865.1.1
@@ -670,7 +1017,14 @@ fem_pru_bismarck_character_template = {
 		}
 		interest_group_trigger = {
 			is_marginal = no
-			is_interest_group_type = ig_landowners	  
+			is_interest_group_type = ig_landowners   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
 		}   
 		earliest_usage_date = 1847.1.1
 		latest_usage_date = 1884.1.1
@@ -680,48 +1034,6 @@ fem_pru_bismarck_character_template = {
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_bismarck
-		}
-	}
-}
-# Russia - RUS
-fem_rus_witte_character_template = {
-	first_name = Natalya
-	last_name = Witte
-	historical = yes
-	culture = global_var:rus_culture
-	female = yes
-	religion = orthodox
-	ideology = ideology_reformer
-	interest_group = ig_industrialists
-	birth_date = 1849.6.29
-	traits = {
-		experienced_political_operator
-		meticulous
-		innovative
-	}   
-	interest_group_leader_usage = {
-		country_trigger = {
-			should_have_female_characters = yes
-			NOT = {
-				is_target_in_global_variable_list = {
-					name = converter_unavailable_unique_characters
-					target = flag:converter_witte
-				}
-			}
-			uses_rus_characters = yes
-		}
-		interest_group_trigger = {
-			is_marginal = no
-			is_interest_group_type = ig_industrialists	
-		}   
-		earliest_usage_date = 1879.1.1
-		latest_usage_date = 1915.1.1
-		chance = 50
-	}
-	on_created = {
-		add_to_global_variable_list = {
-			name = converter_unavailable_unique_characters
-			target = flag:converter_witte
 		}
 	}
 }
@@ -754,7 +1066,14 @@ fem_sar_benso_character_template = { # The Count of Cavour
 		}
 		interest_group_trigger = {
 			is_marginal = no
-			is_interest_group_type = ig_industrialists	
+			is_interest_group_type = ig_industrialists   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
 		}   
 		earliest_usage_date = 1850.1.1
 		latest_usage_date = 1862.1.1
@@ -794,7 +1113,14 @@ fem_tur_koca_mustafa_reshid_pasha = { # Damad (or Damat) Mehmed Asi Pasha, grand
 		}
 		interest_group_trigger = {
 			is_marginal = no
-			is_interest_group_type = ig_intelligentsia
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
 		}   
 		earliest_usage_date = 1845.1.1
 		latest_usage_date = 1860.1.1

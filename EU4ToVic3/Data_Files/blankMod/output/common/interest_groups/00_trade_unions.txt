@@ -22,12 +22,7 @@
 		ig_trait_work_to_rule
 	}
 	
-	on_enable = {
-		ig:ig_trade_unions = {
-			set_ig_trait = ig_trait:ig_trait_work_to_rule
-			set_ig_trait = ig_trait:ig_trait_industrial_organizers
-			set_ig_trait = ig_trait:ig_trait_solidarity
-		}
+	on_enable = {		### Converter ###
 	}
 
 	on_disable = {}
@@ -40,10 +35,28 @@
 			is_pop_type = shopkeepers
 			is_pop_type = officers
 		}
-		NOR = {
-			pop_employment_building_group = bg_agriculture
-			pop_employment_building_group = bg_ranching
-			pop_employment_building_group = bg_plantations
+		OR = {
+			AND = {
+				custom_tooltip = {
+					text = owner_has_modern_agriculture_tt
+					owner = {
+						OR = {
+							has_law = law_type:law_commercialized_agriculture
+							has_law = law_type:law_collectivized_agriculture
+						}
+					}
+				}
+				strata = poor
+				NOR = {
+					pop_employment_building_group = bg_subsistence_agriculture
+					pop_employment_building_group = bg_subsistence_ranching
+				}
+			}
+			NOR = {
+				pop_employment_building_group = bg_agriculture
+				pop_employment_building_group = bg_ranching
+				pop_employment_building_group = bg_plantations
+			}
 		}
 	}
 
@@ -61,6 +74,12 @@
 					}
 				}
 				value = 50
+				if = {
+					limit = {
+						strata = middle
+					}
+					divide = 2
+				}
 			}
 		}
 
@@ -149,6 +168,33 @@
 				value = 1
 				add = scope:interest_group.modifier:interest_group_in_government_attraction_mult
 				min = 0
+			}
+		}
+		
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_LOYALISTS"
+				value = pop_loyalist_fraction
+				divide = 4
+				add = 1
+			}
+		}
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = no
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_RADICALS"
+				value = pop_radical_fraction
+				divide = 4
+				add = 1
 			}
 		}
 	}

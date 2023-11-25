@@ -1,12 +1,12 @@
 ﻿canada_unite_can = {
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
-		capital = { zzz_converter_state_is_in_canada = yes }									##Converter
+		capital = { zzz_converter_state_is_in_canada = yes }																##Converter
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
-				capital = { zzz_converter_state_is_in_canada = yes }									##Converter
+				capital = { zzz_converter_state_is_in_canada = yes }																##Converter
 				is_subject = yes
 				NOT = { THIS = ROOT }
 				top_overlord = {
@@ -30,7 +30,7 @@
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
-					capital = { zzz_converter_state_is_in_canada = yes }									##Converter
+					capital = { zzz_converter_state_is_in_canada = yes }																##Converter
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -65,7 +65,7 @@ canada_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
-			capital = { zzz_converter_state_is_in_canada = yes }									##Converter
+			capital = { zzz_converter_state_is_in_canada = yes }																##Converter
 			is_ai = yes
 			count >= 2
 		}
@@ -78,7 +78,7 @@ canada_unite_gbr = {
 			text = gbr_can_relations_tt
 			any_subject_or_below = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
-				capital = { zzz_converter_state_is_in_canada = yes }									##Converter
+				capital = { zzz_converter_state_is_in_canada = yes }																##Converter
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
 				count >= 2
@@ -108,12 +108,12 @@ canada_unite_gbr = {
 australia_unite_aus = {
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
-		capital = { zzz_converter_state_is_in_australia = yes }										##Converter
+		capital = { zzz_converter_state_is_in_australia = yes }																	##Converter
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
-				capital = { zzz_converter_state_is_in_australia = yes }									##Converter
+				capital = { zzz_converter_state_is_in_australia = yes }																	##Converter
 				is_ai = yes
 				is_subject = yes
 				NOT = { THIS = ROOT }
@@ -137,7 +137,7 @@ australia_unite_aus = {
 				owner = {
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
-					capital = { zzz_converter_state_is_in_australia = yes }										##Converter
+					capital = { zzz_converter_state_is_in_australia = yes }																	##Converter
 					is_ai = yes
 					is_subject = yes
 					NOT = { THIS = ROOT }
@@ -173,7 +173,7 @@ australia_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
-			capital = { zzz_converter_state_is_in_australia = yes }										##Converter
+			capital = { zzz_converter_state_is_in_australia = yes }																	##Converter
 			is_ai = yes
 			count >= 2
 		}
@@ -186,7 +186,7 @@ australia_unite_gbr = {
 			text = gbr_aus_relations_tt
 			any_subject_or_below = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
-				capital = { zzz_converter_state_is_in_australia = yes }									##Converter
+				capital = { zzz_converter_state_is_in_australia = yes }																	##Converter
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
 				count >= 2

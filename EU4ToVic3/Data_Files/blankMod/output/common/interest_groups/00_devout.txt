@@ -21,239 +21,31 @@
 		ig_trait_pious_fiction
 	}
 
-	on_enable = {
-		ig:ig_devout = {
-			set_ig_trait = ig_trait:ig_trait_pious_fiction
-			set_ig_trait = ig_trait:ig_trait_divine_right
-			set_ig_trait = ig_trait:ig_trait_be_fruitful_and_multiply
-		}
-
-		### Specific
-
-		## Buddhist Monks (Japan)
-		#if = {
-		#	limit = {
-		#		country_has_state_religion = rel:mahayana
-		#		country_has_primary_culture = cu:japanese
-		#	}
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_buddhist_monks
-		#		remove_ideology = ideology_moralist
-		#		add_ideology = ideology_buddhist_moralist
-		#	}
-		#}
-		## Shinto Monks (Japan)
-		#else_if = {
-		#	limit = {
-		#		country_has_state_religion = rel:shinto
-		#		country_has_primary_culture = cu:japanese
-		#	}
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_shinto_monks
-		#		remove_ideology = ideology_moralist
-		#		add_ideology = ideology_shinto_moralist
-		#	}
-		#}
-		## Christian Missionaries (Hawaii)
-		#else_if = {
-		#	limit = {
-		#		country_has_state_religion = rel:protestant
-		#		country_has_primary_culture = cu:hawaiian
-		#	}
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_christian_missionaries
-		#		add_ideology = ideology_laissez_faire
-		#	}
-		#}
-		## Anglicans
-		#else_if = {
-		#	limit = {
-		#		country_has_state_religion = rel:protestant
-		#		OR = {
-		#			country_has_primary_culture = cu:maori
-		#			country_has_primary_culture = cu:australian
-		#			country_has_primary_culture = cu:anglo_canadian
-		#			country_has_primary_culture = cu:british
-		#			country_has_primary_culture = cu:irish
-		#			c:NRU ?= this
-		#		}
-		#	}
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_anglican_church
-		#	}
-		#}
-		## Russian Orthodox Church
-		#else_if = {
-		#	limit = {
-		#		country_has_state_religion = rel:orthodox
-		#		OR = {
-		#			country_has_primary_culture = cu:russian
-		#			country_has_primary_culture = cu:byelorussian
-		#			country_has_primary_culture = cu:ukrainian
-		#		}
-		#	}
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_orthodox_church
-		#		remove_ideology = ideology_patriarchal
-		#		add_ideology = ideology_russian_patriarch
-		#	}
-		#}
-		## Church of Denmark
-		#else_if = {
-		#	limit = {
-		#		country_has_state_religion = rel:protestant
-		#		country_has_primary_culture = cu:danish
-		#	}
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_church_of_denmark
-		#	}
-		#}
-		## Church of Norway
-		#else_if = {
-		#	limit = {
-		#		country_has_state_religion = rel:protestant
-		#		country_has_primary_culture = cu:norwegian
-		#	}
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_church_of_norway
-		#	}
-		#}
-		## Church of Sweden
-		#else_if = {
-		#	limit = {
-		#		country_has_state_religion = rel:protestant
-		#		country_has_primary_culture = cu:swedish
-		#	}
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_church_of_sweden
-		#	}
-		#}
-		## Confucian Scholars
-		#else_if = {
-		#	limit = {
-		#		country_has_state_religion = rel:mahayana
-		#		OR = {
-		#			country_has_primary_culture = cu:korean
-		#			any_primary_culture = {
-		#				has_discrimination_trait = han_chinese
-		#			}
-		#		}
-		#	}
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_confucian
-		#		remove_ideology = ideology_pious
-		#		remove_ideology = ideology_moralist
-		#		add_ideology = ideology_confucian
-		#	}
-		#}
-		## Evangelicals
-		#else_if = {
-		#	limit = {
-		#		country_has_state_religion = rel:protestant
-		#		OR = {
-		#			country_has_primary_culture = cu:yankee
-		#			country_has_primary_culture = cu:dixie
-		#			country_has_primary_culture = cu:afro_american
-		#			country_has_primary_culture = cu:cherokee
-		#		}
-		#	}
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_evangelicals
-		#	}
-		#}
-		## Roman Curia
-		#else_if = {
-		#	limit = {
-		#		c:PAP ?= this
-		#	}
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_roman_curia
-		#	}
-		#}
-		
-		
-		### Generic
-		
-		## Catholic Church
-		#else_if = {
-		#	limit = { country_has_state_religion = rel:catholic }
-		#	ig:ig_devout = { 
-		#		set_interest_group_name = ig_catholic_church 
-		#	}
-		#}
-		## Evangelical Church
-		#else_if = {
-		#	limit = { country_has_state_religion = rel:protestant }
-		#	ig:ig_devout = { 
-		#		set_interest_group_name = ig_evangelical_church
-		#	}
-		#}
-		## Sunni Ulema
-		#else_if = {
-		#	limit = { country_has_state_religion = rel:sunni }
-		#	ig:ig_devout = { 
-		#		set_interest_group_name = ig_sunni_madrasahs
-		#	}
-		#}
-		## Shi'a Ulema
-		#else_if = {
-		#	limit = { country_has_state_religion = rel:shiite }
-		#	ig:ig_devout = { 
-		#		set_interest_group_name = ig_shia_madrasahs
-		#	}
-		#}
-		## Oriental Orthodox Church
-		#else_if = {
-		#	limit = { country_has_state_religion = rel:oriental_orthodox }
-		#	ig:ig_devout = { 
-		#		set_interest_group_name = ig_oriental_orthodox_church
-		#		remove_ideology = ideology_patriarchal
-		#		add_ideology = ideology_oriental_orthodox_patriarch
-		#	}
-		#}
-		## Orthodox Church
-		#else_if = {
-		#	limit = { 
-		#		country_has_state_religion = rel:orthodox
-		#		NOR = {
-		#			country_has_primary_culture = cu:russian
-		#			country_has_primary_culture = cu:byelorussian
-		#			country_has_primary_culture = cu:ukrainian
-		#		}
-		#	}
-		#	ig:ig_devout = { 
-		#		set_interest_group_name = ig_orthodox_church
-		#		remove_ideology = ideology_patriarchal
-		#		add_ideology = ideology_orthodox_patriarch
-		#	}
-		#}
-		## Hindu Priesthood
-		#else_if = {
-		#	limit = { country_has_state_religion = rel:hindu }
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_hindu_priesthood
-		#		remove_ideology = ideology_moralist
-		#		add_ideology = ideology_hindu_moralist
-		#	}
-		#}
-		## Mahayana Monks
-		#else_if = {
-		#	limit = { country_has_state_religion = rel:mahayana }
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_mahayana_monks
-		#		remove_ideology = ideology_moralist
-		#		add_ideology = ideology_buddhist_moralist
-		#	}
-		#}
+	on_enable = {		### Converter ###
 	}
 	on_disable = {}
 	on_character_ig_membership = {
-		change_character_religion = scope:interest_group.owner.religion
+		if = {
+			limit = {
+				NOT = {
+					owner = {
+						has_law = law_type:law_state_atheism
+					}
+				}
+			}
+			change_character_religion = scope:interest_group.owner.religion
+		}
+		else = {
+			change_character_religion = scope:interest_group.owner.country_definition.religion
+		}
 	}
 
 
 	pop_potential = {
 		has_state_religion = yes
+		NOT = {
+			has_pop_religion = atheist
+		}
 	}
 
 	pop_weight = {
@@ -265,7 +57,7 @@
 				limit = {
 					is_pop_type = clergymen
 				}
-				value = 200
+				value = 250
 			}
 		}
 
@@ -279,77 +71,77 @@
 			}
 		}
 
-		add = {
-			desc = "LITERACY_50_60"
-
-			if = {
-				limit = {
-					NOT = {
-						is_pop_type = clergymen
-					}
-					literacy_rate >= 0.50
-					literacy_rate < 0.60
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_state_atheism
 				}
-				add = -2
+			}
+			multiply = {
+				desc = "STATE_ATHEISM_LAW"
+				value = 0.1
+			}
+		}
+		
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_state_religion
+				}
+			}
+			multiply = {
+				desc = "STATE_RELIGION_LAW"
+				value = 1.5
+			}
+		}
+		
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_freedom_of_conscience
+				}
+			}
+			multiply = {
+				desc = "FREEDOM_OF_CONSCIENCE_LAW"
+				value = 1.25
+			}
+		}
+
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_religious_schools
+				}
+			}
+			multiply = {
+				desc = "RELIGIOUS_SCHOOLS_LAW"
+				value = owner.institution:institution_schools.investment
+				divide = 5
+				add = 1
+			}
+		}
+		
+		if = {
+			limit = {
+				owner = {
+					has_technology_researched = corporatism
+					NOT = {
+						has_law = law_type:law_total_separation
+						has_law = law_type:law_state_atheism
+					}
+				}
+			}
+			multiply = {
+				desc = "CORPORATISM_TECH"
+				value = 1.25
 			}
 		}
 
 		add = {
-			desc = "LITERACY_60_70"
-
-			if = {
-				limit = {
-					NOT = {
-						is_pop_type = clergymen
-					}
-					literacy_rate >= 0.60
-					literacy_rate < 0.70
-				}
-				add = -4
-			}
-		}
-
-		add = {
-			desc = "LITERACY_70_80"
-
-			if = {
-				limit = {
-					NOT = {
-						is_pop_type = clergymen
-					}
-					literacy_rate >= 0.70
-					literacy_rate < 0.80
-				}
-				add = -6
-			}
-		}
-
-		add = {
-			desc = "LITERACY_80_90"
-
-			if = {
-				limit = {
-					NOT = {
-						is_pop_type = clergymen
-					}
-					literacy_rate >= 0.80
-					literacy_rate < 0.90
-				}
-				add = -8
-			}
-		}
-
-		add = {
-			desc = "LITERACY_90_100"
-
-			if = {
-				limit = {
-					NOT = {
-						is_pop_type = clergymen
-					}
-					literacy_rate >= 0.90
-				}
-				add = -10
+			desc = "POP_LITERACY"
+			this = {
+				value = literacy_rate
+				multiply = -20
 			}
 		}
 
@@ -380,16 +172,30 @@
 			}
 		}
 
-
 		if = {
 			limit = {
-				owner = {
-					has_law = law_type:law_state_atheism
+				scope:interest_group = {
+					is_in_government = yes
 				}
 			}
-			multiply = {
-				desc = "STATE_ATHEISM_LAW"
-				value = 0.1
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_LOYALISTS"
+				value = pop_loyalist_fraction
+				divide = 4
+				add = 1
+			}
+		}
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = no
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_RADICALS"
+				value = pop_radical_fraction
+				divide = 4
+				add = 1
 			}
 		}
 	}

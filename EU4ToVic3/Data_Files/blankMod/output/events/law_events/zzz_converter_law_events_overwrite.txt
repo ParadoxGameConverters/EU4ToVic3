@@ -1,0 +1,110 @@
+﻿namespace = anarchy
+
+# Stall event - Propaganda of the Deed
+# anarchists assassinate reactionary IG leader
+anarchy.1 = {
+	type = country_event
+	placement = ROOT
+	
+	title = anarchy.1.t
+	desc = anarchy.1.d
+	flavor = anarchy.1.f
+
+	category = enactment
+	
+	event_image = {
+		video = "europenorthamerica_political_extremism"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	
+	duration = 3
+
+	cooldown = { months = normal_modifier_time }
+	
+	trigger = {
+		is_enacting_law = law_type:law_anarchy
+		any_interest_group = {
+			OR = {
+				has_ideology = ideology:ideology_reactionary
+				has_ideology = ideology:ideology_paternalistic
+				### Converter
+				has_ideology = ideology:ideology_maternalistic
+			}
+			is_marginal = no
+			leader = {
+				is_busy = no
+			}
+		}
+		NOT = {
+			has_modifier = anarchist_terrorism
+		}
+	}
+
+	immediate = {
+		random_interest_group = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_reactionary
+					has_ideology = ideology:ideology_paternalistic
+					### Converter
+					has_ideology = ideology:ideology_maternalistic
+				}
+				is_marginal = no
+				leader = {
+					is_busy = no
+				}
+			}
+			save_scope_as = anarchy_target_ig
+			leader = {
+				save_scope_as = anarchy_target_leader
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		NOT = { is_enacting_law = law_type:law_anarchy }
+	}
+
+	option = { # support terrorism - setback
+		name = anarchy.1.a
+		trigger = {
+			enactment_setback_count < 2
+		}
+		highlighted_option = yes
+		add_enactment_setback = 1
+		scope:anarchy_target_ig = {
+			add_modifier = {
+				name = anarchist_assassination
+				multiplier = 2
+			}
+		}
+		add_modifier = {
+			name = anarchist_assaination_opposition_approval
+			months = normal_modifier_time
+		}
+		scope:anarchy_target_leader = {
+			kill_character = yes
+		}
+	}
+
+	option = { # condemn terrorism
+		name = anarchy.1.b
+		default_option = yes
+		# lose some law progress, lose lots of opposition ig opinion
+		add_enactment_modifier = {
+			name = anarchist_terrorism
+			multiplier = 2
+		}
+		scope:anarchy_target_ig = {
+			add_modifier = {
+				name = anarchist_assassination
+			}
+		}
+		scope:anarchy_target_leader = {
+			kill_character = yes
+		}
+	}
+}

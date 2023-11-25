@@ -1,0 +1,1048 @@
+﻿# adopt_random_antigovernment_ideology
+# gen_ruler_party
+
+adopt_random_antigovernment_ideology = {
+	custom_tooltip = {
+		text = adopt_random_antigovernment_ideology_tt
+		random_list = { 
+			50 = {
+				trigger = {
+					owner = {
+						has_technology_researched = socialism
+						NOT = {
+							ruler = {
+								has_ideology = ideology:ideology_social_democrat	
+							}
+						}
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_council_republic
+							}
+						}
+						add = 50
+					}
+				}
+				set_ideology = ideology:ideology_social_democrat
+			}
+			100 = {
+				trigger = {
+					owner = {
+						has_technology_researched = socialism
+						NOT = {
+							ruler = {
+								has_ideology = ideology:ideology_communist	
+							}
+						}
+						NOT = {
+							has_law = law_type:law_council_republic
+						}
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_monarchy
+							}
+						}
+						add = 25
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_autocracy
+							}
+						}
+						add = 25
+					}
+					if = {
+						limit = {
+							this.interest_group = {
+								is_interest_group_type = ig_trade_unions
+							}
+						}
+						add = 100
+					}
+					if = {
+						limit = {
+							owner.ruler = {
+								OR = {
+									has_ideology = ideology:ideology_fascist
+									has_ideology = ideology:ideology_integralist
+									has_ideology = ideology:ideology_ethno_nationalist
+									has_ideology = ideology:ideology_traditionalist
+								}
+							}
+						}
+						add = 100
+					}
+				}
+				set_ideology = ideology:ideology_communist
+			}
+			100 = {
+				trigger = {
+					owner = {
+						has_technology_researched = socialism
+						NOT = {
+							ruler = {
+								has_ideology = ideology:ideology_vanguardist	
+							}
+						}
+						NOT = {
+							has_law = law_type:law_council_republic
+						}
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_monarchy
+							}
+						}
+						add = 25
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_autocracy
+							}
+						}
+						add = 25
+					}
+					if = {
+						limit = {
+							this.interest_group = {
+								is_interest_group_type = ig_trade_unions
+							}
+						}
+						add = 100
+					}
+					if = {
+						limit = {
+							owner.ruler = {
+								OR = {
+									has_ideology = ideology:ideology_fascist
+									has_ideology = ideology:ideology_integralist
+									has_ideology = ideology:ideology_ethno_nationalist
+									has_ideology = ideology:ideology_traditionalist
+								}
+							}
+						}
+						add = 100
+					}
+				}
+				set_ideology = ideology:ideology_vanguardist
+			}
+			100 = {
+				trigger = {
+					owner = {
+						has_technology_researched = anarchism
+						NOT = {
+							ruler = {
+								has_ideology = ideology:ideology_anarchist	
+							}
+						}
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_monarchy
+							}
+						}
+						add = 25
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_autocracy
+							}
+						}
+						add = 50
+					}
+					if = {
+						limit = {
+							this.interest_group = {
+								OR = {
+									is_interest_group_type = ig_trade_unions
+									is_interest_group_type = ig_rural_folk
+								}
+							}
+						}
+						add = 100
+					}
+					if = {
+						limit = {
+							owner.ruler = {
+								OR = {
+									has_ideology = ideology:ideology_fascist
+									has_ideology = ideology:ideology_integralist
+									has_ideology = ideology:ideology_ethno_nationalist
+									has_ideology = ideology:ideology_traditionalist
+								}
+							}
+						}
+						add = 100
+					}
+				}
+				set_ideology = ideology:ideology_anarchist
+			}
+			100 = {
+				trigger = {
+					owner = {
+						has_technology_researched = political_agitation
+						NOT = {
+							ruler = {
+								has_ideology = ideology:ideology_ethno_nationalist	
+							}
+						}
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							owner.ruler = {
+								OR = {
+									has_ideology = ideology:ideology_radical
+									is_feminist_character = yes			### Converter
+									has_ideology = ideology:ideology_humanitarian
+									has_ideology = ideology:ideology_humanitarian_royalist
+									has_ideology = ideology:ideology_social_democrat
+								}
+							}
+						}
+						add = 50
+					}
+					if = {
+						limit = {
+							owner.ruler = {
+								OR = {
+									has_ideology = ideology:ideology_communist
+									has_ideology = ideology:ideology_anarchist
+									has_ideology = ideology:ideology_vanguardist
+								}
+							}
+						}
+						add = 100
+					}
+					if = {
+						limit = {
+							owner.ruler = {
+								OR = {
+									has_ideology = ideology:ideology_fascist
+									has_ideology = ideology:ideology_integralist
+									has_ideology = ideology:ideology_ethno_nationalist
+									has_ideology = ideology:ideology_traditionalist
+								}
+							}
+						}
+						multiply = {
+							value = 0.25
+						}
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_no_migration_controls
+							}
+						}
+						add = 100
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_multicultural
+							}
+						}
+						multiply = {
+							value = 3
+						}
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_cultural_exclusion
+							}
+						}
+						multiply = {
+							value = 2
+						}
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_council_republic
+							}
+						}
+						multiply = {
+							value = 1.5
+						}
+					}
+				}
+				set_ideology = ideology:ideology_ethno_nationalist
+			}
+			50 = {
+				trigger = {
+					owner = {
+						has_technology_researched = realism
+						has_law = law_type:law_state_religion
+						NOT = {
+							ruler = {
+								has_ideology = ideology:ideology_atheist	
+							}
+						}
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_monarchy
+							}
+						}
+						add = 50
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_state_religion
+							}
+						}
+						add = 100
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_theocracy
+							}
+						}
+						add = 200
+					}
+				}
+				set_ideology = ideology:ideology_atheist
+			}
+			50 = {
+				trigger = {
+					owner = {
+						has_technology_researched = egalitarianism
+						NOT = {
+							ruler = {
+								has_ideology = ideology:ideology_radical	
+							}
+						}
+					}
+				}
+				modifier = {	
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_monarchy
+							}
+						}
+						add = 100
+					}	
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_autocracy
+							}
+						}
+						add = 100
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_oligarchy
+							}
+						}
+						add = 50
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_landed_voting
+							}
+						}
+						add = 25
+					}
+				}
+				set_ideology = ideology:ideology_radical
+			}
+			100 = {
+				trigger = {
+					owner = {
+						has_technology_researched = mass_propaganda
+						NOT = {
+							ruler = {
+								has_ideology = ideology:ideology_fascist	
+								has_ideology = ideology:ideology_integralist
+							}
+						}
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							owner.ruler = {
+								OR = {
+									has_ideology = ideology:ideology_radical
+									is_feminist_character = yes			### Converter
+									has_ideology = ideology:ideology_humanitarian
+									has_ideology = ideology:ideology_humanitarian_royalist
+									has_ideology = ideology:ideology_social_democrat
+								}
+							}
+						}
+						add = 50
+					}
+					if = {
+						limit = {
+							owner.ruler = {
+								OR = {
+									has_ideology = ideology:ideology_communist
+									has_ideology = ideology:ideology_anarchist
+									has_ideology = ideology:ideology_vanguardist
+								}
+							}
+						}
+						add = 100
+					}
+					if = {
+						limit = {
+							owner.ruler = {
+								OR = {
+									has_ideology = ideology:ideology_fascist
+									has_ideology = ideology:ideology_integralist
+									has_ideology = ideology:ideology_ethno_nationalist
+									has_ideology = ideology:ideology_traditionalist
+								}
+							}
+						}
+						multiply = {
+							value = 0.25
+						}
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_council_republic
+							}
+						}
+						multiply = {
+							value = 2
+						}
+					}
+				}
+				set_ideology = ideology:ideology_fascist
+			}
+			50 = {
+				trigger = {
+					owner = {
+						has_technology_researched = stock_exchange
+						NOT = {
+							ruler = {
+								has_ideology = ideology:ideology_market_liberal	
+							}
+						}
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_command_economy
+							}
+						}
+						add = 50
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_traditionalism
+							}
+						}
+						add = 50
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_isolationism
+							}
+						}
+						add = 50
+					}
+					if = {
+						limit = {
+							owner.ruler = {
+								OR = {
+									has_ideology = ideology:ideology_communist
+									has_ideology = ideology:ideology_anarchist
+									has_ideology = ideology:ideology_vanguardist
+								}
+							}
+						}
+						add = 100
+					}
+				}
+				set_ideology = ideology:ideology_market_liberal
+			}
+			50 = {
+				trigger = {
+					owner = {
+						has_technology_researched = romanticism
+						OR = {
+							has_law = law_type:law_command_economy
+							has_law = law_type:law_laissez_faire
+							has_law = law_type:law_interventionism
+						}
+						NOT = {
+							ruler = {
+								has_ideology = ideology:ideology_luddite	
+							}
+						}
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							owner = {
+								any_scope_state = {
+									any_scope_building = {
+										is_building_group = bg_heavy_industry
+										level >= 5
+									}
+									state_unemployment_rate > 0.1
+								}
+							}
+						}
+						add = 25
+					}
+					if = {
+						limit = {
+							owner = {
+								any_scope_building = {
+									is_building_group = bg_heavy_industry
+									level >= 5
+								}
+							}
+						}
+						add = 25
+					}
+					if = {
+						limit = {
+							OR = {
+								is_interest_group_type = ig_rural_folk
+								is_interest_group_type = ig_devout
+							}
+						}
+						add = 50
+					}
+					if = {
+						limit = {
+							NOR = {
+								is_interest_group_type = ig_rural_folk
+								is_interest_group_type = ig_devout
+							}
+						}
+						add = -50
+					}
+					if = {
+						limit = {
+							owner = {
+								has_ruling_interest_group = ig_industrialists
+							}
+						}
+						multiply = {
+							value = 2
+						}
+					}
+					if = {
+						limit = {
+							owner = {
+								has_ruling_interest_group = ig_rural_folk
+							}
+						}
+						multiply = {
+							value = 0.25
+						}
+					}
+				}
+				set_ideology = ideology:ideology_luddite
+			}
+			50 = {
+				trigger = {
+					owner = {
+						has_technology_researched = feminism
+						ruler = { is_feminist_character = no }			### Converter
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_monarchy
+							}
+						}
+						add = 25
+					}
+				}
+				converter_set_feminist_ideology_effect = yes			### Converter
+			}
+			50 = {
+				trigger = {
+					owner = {
+						has_technology_researched = feminism
+						NOT = {
+							ruler = {
+								OR = {
+									has_ideology = ideology:ideology_humanitarian	
+									has_ideology = ideology:ideology_humanitarian_royalist
+								}
+							}
+						}
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_monarchy
+							}
+						}
+						add = 25
+					}
+				}
+				set_ideology = ideology:ideology_humanitarian
+			}
+
+			50 = {
+				trigger = {
+					NOT = {	
+						owner.ruler = {
+							has_ideology = ideology:ideology_traditionalist	
+						}
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							this.interest_group = {
+								OR = {
+									is_interest_group_type = ig_landowners
+									is_interest_group_type = ig_devout
+								}
+							}
+						}
+						multiply = {
+							value = 2
+						}
+					}
+					if = {
+						limit = {
+							owner.ruler = {
+								OR = {
+									has_ideology = ideology:ideology_radical
+									is_feminist_character = yes			### Converter
+									has_ideology = ideology:ideology_humanitarian	
+									has_ideology = ideology:ideology_humanitarian_royalist
+									has_ideology = ideology:ideology_social_democrat
+								}
+							}
+						}
+						add = 50
+					}
+					if = {
+						limit = {
+							owner.ruler = {
+								OR = {
+									has_ideology = ideology:ideology_communist
+									has_ideology = ideology:ideology_anarchist
+									has_ideology = ideology:ideology_vanguardist
+								}
+							}
+						}
+						add = 100
+					}
+					if = {
+						limit = {
+							owner.ruler = {
+								OR = {
+									has_ideology = ideology:ideology_fascist
+									has_ideology = ideology:ideology_integralist
+									has_ideology = ideology:ideology_ethno_nationalist
+									has_ideology = ideology:ideology_traditionalist
+								}
+							}
+						}
+						multiply = {
+							value = 0.25
+						}
+					}
+					if = {
+						limit = {
+							this.interest_group = {
+								OR = {
+									is_interest_group_type = ig_intelligentsia
+									is_interest_group_type = ig_industrialists
+									is_interest_group_type = ig_trade_unions
+								}
+							}
+						}
+						multiply = {
+							value = 0.2
+						}
+					}
+				}
+				set_ideology = ideology:ideology_traditionalist
+			}
+
+			50 = {
+				trigger = {
+					NOT = {	
+						owner.ruler = {
+							has_ideology = ideology:ideology_republican_leader	
+						}
+					}
+					owner = {
+						has_law = law_type:law_monarchy
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_monarchy
+							}
+						}
+						multiply = {
+							value = 2
+						}
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_autocracy
+							}
+						}
+						multiply = {
+							value = 2
+						}
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_oligarchy
+							}
+						}
+						add = 25
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_landed_voting
+							}
+						}
+						add = 25
+					}
+					if = {
+						limit = {
+							this.interest_group = {
+								is_interest_group_type = ig_landowners
+							}
+						}
+						multiply = {
+							value = 0.10
+						}
+					}
+				}
+				set_ideology = ideology:ideology_republican_leader
+			}
+
+			50 = {
+				trigger = {
+					owner = {
+						NOT = {
+							ruler = {
+								has_ideology = ideology:ideology_abolitionist	
+							}
+						}
+						OR = {
+							has_law = law_type:law_serfdom
+							NOT = {
+								has_law = law_type:law_slavery_banned
+							}
+						}
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_serfdom
+							}
+						}
+						add = 25
+					}
+					if = {
+						limit = {
+							owner = {
+								NOT = {
+									has_law = law_type:law_slavery_banned
+								}
+							}
+						}
+						add = 25
+					}
+					if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_slave_trade
+							}
+						}
+						add = 50
+					}
+					if = {
+						limit = {
+							this.interest_group = {
+								is_interest_group_type = ig_landowners
+							}
+						}
+						multiply = {
+							value = 0.05
+						}
+					}
+				}
+				set_ideology = ideology:ideology_abolitionist
+			}
+		} 
+	}
+}
+
+gen_ruler_party = {
+	if = {
+		limit = {
+			has_technology_researched = socialism
+			OR = {
+				ruler = {
+					has_socialist_ideology = yes
+				}
+				ruler.interest_group.leader = {
+					has_socialist_ideology = yes
+				}
+			}
+		}
+		random_potential_party = {
+			limit = {
+				is_party_type = communist_party
+			}
+			save_scope_as = only_legit_party_scope
+		}
+		set_variable = { name = only_valid_party value = scope:only_legit_party_scope }
+	}
+	else_if = {
+		limit = {
+			has_technology_researched = political_agitation
+			OR = {
+				ruler = {
+					OR = {
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_integralist
+						has_ideology = ideology:ideology_ethno_nationalist
+					}
+				}
+				ruler.interest_group.leader = {
+					OR = {
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_integralist
+						has_ideology = ideology:ideology_ethno_nationalist
+					}
+				}
+			}
+		}
+		random_potential_party = {
+			limit = {
+				is_party_type = fascist_party
+			}
+			save_scope_as = only_legit_party_scope
+		}
+		set_variable = { name = only_valid_party value = scope:only_legit_party_scope }
+	}
+	else_if = {
+		limit = {
+			has_technology_researched = anarchism
+			OR = {
+				ruler = {
+					has_ideology = ideology:ideology_anarchist
+				}
+				ruler.interest_group.leader = {
+					has_ideology = ideology:ideology_anarchist
+				}
+			}
+		}
+		random_potential_party = {
+			limit = {
+				is_party_type = anarchist_party
+			}
+			save_scope_as = only_legit_party_scope
+		}
+		set_variable = { name = only_valid_party value = scope:only_legit_party_scope }
+	}
+	else_if = {
+		limit = {
+			has_technology_researched = labor_movement
+			OR = {
+				ruler = {
+					OR = {
+						has_ideology = ideology:ideology_social_democrat
+						is_feminist_character = yes			### Converter
+						has_ideology = ideology:ideology_humanitarian	
+						has_ideology = ideology:ideology_humanitarian_royalist
+					}
+				}
+				ruler.interest_group.leader = {
+					OR = {
+						has_ideology = ideology:ideology_social_democrat
+						is_feminist_character = yes			### Converter
+						has_ideology = ideology:ideology_humanitarian	
+						has_ideology = ideology:ideology_humanitarian_royalist
+					}
+				}
+				ruler = {
+					is_interest_group_type = ig_trade_unions
+				}
+			}
+		}
+		random_potential_party = {
+			limit = {
+				is_party_type = social_democrat_party
+			}
+			save_scope_as = only_legit_party_scope
+		}
+		set_variable = { name = only_valid_party value = scope:only_legit_party_scope }
+	}
+	else_if = {
+		limit = {
+			has_technology_researched = egalitarianism
+			OR = {
+				ruler = {
+					has_progressive_ideology = yes
+				}
+				ruler.interest_group.leader = {
+					has_progressive_ideology = yes
+				}
+			}
+		}
+		random_potential_party = {
+			limit = {
+				is_party_type = radical_party
+			}
+			save_scope_as = only_legit_party_scope
+		}
+		set_variable = { name = only_valid_party value = scope:only_legit_party_scope }
+	}
+	else_if = {
+		limit = {
+			has_technology_researched = empiricism
+			OR = {
+				ruler = {
+					has_liberal_ideology = yes
+				}
+				ruler.interest_group.leader = {
+					has_liberal_ideology = yes
+				}
+				ruler = {
+					is_interest_group_type = ig_intelligentsia
+				}
+			}
+		}
+		random_potential_party = {
+			limit = {
+				is_party_type = liberal_party
+			}
+			save_scope_as = only_legit_party_scope
+		}
+		set_variable = { name = only_valid_party value = scope:only_legit_party_scope }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				ruler = {
+					has_ideology = ideology:ideology_jingoist_leader
+				}
+				ruler.interest_group.leader = {
+					has_ideology = ideology:ideology_jingoist_leader
+				}
+				ruler = {
+					is_interest_group_type = ig_armed_forces
+				}
+			}
+		}
+		random_potential_party = {
+			limit = {
+				is_party_type = military_party
+			}
+			save_scope_as = only_legit_party_scope
+		}
+		set_variable = { name = only_valid_party value = scope:only_legit_party_scope }
+	}
+	else_if = {
+		limit = {
+			has_technology_researched = stock_exchange
+			OR = {
+				ruler = {
+					has_ideology = ideology:ideology_market_liberal
+				}
+				ruler.interest_group.leader = {
+					has_ideology = ideology:ideology_market_liberal
+				}
+				ruler = {
+					is_interest_group_type = ig_industrialists
+				}
+			}
+		}
+		random_potential_party = {
+			limit = {
+				is_party_type = free_trade_party
+			}
+			save_scope_as = only_legit_party_scope
+		}
+		set_variable = { name = only_valid_party value = scope:only_legit_party_scope }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				ruler = {
+					has_ideology = ideology:ideology_pacifist
+				}
+				ruler.interest_group.leader = {
+					has_ideology = ideology:ideology_pacifist
+				}
+				ruler = {
+					is_interest_group_type = ig_rural_folk
+				}
+			}
+		}
+		random_potential_party = {
+			limit = {
+				is_party_type = agrarian_party
+			}
+			save_scope_as = only_legit_party_scope
+		}
+		set_variable = { name = only_valid_party value = scope:only_legit_party_scope }
+	}
+	else = {
+		random_potential_party = {
+			limit = {
+				is_party_type = conservative_party
+			}
+			save_scope_as = only_legit_party_scope
+		}
+		set_variable = { name = only_valid_party value = scope:only_legit_party_scope }
+	}
+}

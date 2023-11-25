@@ -200,9 +200,39 @@ religious_party = {
 		if = {
 			limit = {
 				owner = {
+					country_is_in_south_america = yes
+					any_primary_culture = {
+						has_discrimination_trait = hispanophone
+					}
+				}
+			}
+			add = {
+				value = -10
+				desc = "south_america_two_party_system"
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					country_is_in_north_america = yes
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }		### Converter
+					has_law = law_type:law_presidential_republic
+				}
+			}
+			add = {
+				value = -10
+				desc = "usa_two_party_system"
+			}
+		}
+		if = {
+			limit = {
+				owner = {
 					any_interest_group = {
 						is_interest_group_type = ig_landowners
 						is_marginal = no
+					}
+					NOT = {
+						has_technology_researched = corporatism
 					}
 				}
 			}
@@ -265,6 +295,7 @@ religious_party = {
 					OR = {
 						has_ideology = ideology:ideology_traditionalist
 						has_ideology = ideology:ideology_theocrat
+						has_ideology = ideology:ideology_corporatist_leader
 					}
 				}
 			}
@@ -285,6 +316,20 @@ religious_party = {
 			add = {	
 				value = -15
 				desc = "from_antireligious"
+			}
+		}
+		if = { # Corporatism
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_corporatist
+					leader = {
+						has_ideology = ideology:ideology_corporatist_leader
+					}
+				}
+			}
+			add = {
+				value = 10
+				desc = "from_corporatism"
 			}
 		}
 		if = { # patriarchs more likely to join conservatives with women's suffrage

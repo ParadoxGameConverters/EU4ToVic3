@@ -21,152 +21,7 @@
 		ig_trait_noble_privileges
 	}
 
-	on_enable = {
-		ig:ig_landowners = {
-			set_ig_trait = ig_trait:ig_trait_noble_privileges
-			set_ig_trait = ig_trait:ig_trait_family_ties
-			set_ig_trait = ig_trait:ig_trait_noblesse_oblige
-		}
-		
-		# Squattocracy
-		#if = {
-		#	limit = {
-		#		country_has_primary_culture = cu:australian
-		#	}
-		#	ig:ig_landowners = {
-		#		set_interest_group_name = ig_squattocracy
-		#	}
-		#}
-		## Local Governors
-		#else_if = {
-		#	limit = {
-		#		c:TUR ?= this
-		#	}
-		#	ig:ig_landowners = {
-		#		set_interest_group_name = ig_local_governors
-		#	}
-		#}
-		## Junkers
-		#else_if = {
-		#	limit = {
-		#		c:PRU ?= this
-		#	}
-		#	ig:ig_landowners = {
-		#		set_interest_group_name = ig_junkers
-		#		remove_ideology = ideology_paternalistic
-		#		add_ideology = ideology_junker_paternalistic
-		#	}
-		#}
-		## Gentry Assembly
-		#else_if = {
-		#	limit = {
-		#		c:RUS ?= this
-		#	}
-		#	ig:ig_landowners = {
-		#		set_interest_group_name = ig_gentry_assembly
-		#	}
-		#}
-		## Roman Landowners
-		#else_if = {
-		#	limit = {
-		#		c:PAP ?= this
-		#	}
-		#	ig:ig_landowners = {
-		#		set_interest_group_name = ig_roman_landowners
-		#		remove_ideology = ideology_paternalistic
-		#		add_ideology = ideology_papal_paternalistic
-		#	}
-		#}
-		## Ali'i
-		#else_if = {
-		#	limit = {
-		#		country_has_primary_culture = cu:hawaiian
-		#	}
-		#	ig:ig_landowners = {
-		#		set_interest_group_name = ig_alii
-		#		add_ideology = ideology_loyalist
-		#	}
-		#}
-		## Landed Gentry
-		#else_if = {
-		#	limit = {
-		#		c:GBR ?= this
-		#	}
-		#	ig:ig_landowners = { 
-		#		set_interest_group_name = ig_landed_gentry
-		#	}
-		#}
-		## Yangban Officials
-		#else_if = {
-		#	limit = {
-		#		c:KOR ?= this
-		#	}
-		#	ig:ig_landowners = { 
-		#		set_interest_group_name = ig_yangban
-		#	}
-		#}
-		## Scholar Officials
-		#else_if = {
-		#	limit = {
-		#		c:CHI ?= this
-		#	}
-		#	ig:ig_landowners = { 
-		#		set_interest_group_name = ig_scholar_officials
-		#		remove_ideology = ideology_paternalistic
-		#		add_ideology = ideology_scholar_paternalistic
-		#	}
-		#}
-		## Pious Spanish Landowners
-		#else_if = {		## Handled by ig_ideologies.txt
-		#	limit = {
-		#		country_has_primary_culture = cu:spanish
-		#	}
-		#	ig:ig_landowners = {
-		#		add_ideology = ideology_pious
-		#	}
-		#}
-		## Aristocracy of Officials
-		#else_if = {
-		#	limit = {
-		#		country_has_primary_culture = cu:norwegian
-		#	}
-		#	ig:ig_landowners = {
-		#		set_interest_group_name = ig_aristocracy_of_officials
-		#	}
-		#}
-		## Caudillo Ideology
-		#else_if = {		## Handled by ig_ideologies.txt
-		#	limit = {
-		#		OR = {
-		#			country_has_primary_culture = cu:platinean
-		#			country_has_primary_culture = cu:south_andean
-		#			country_has_primary_culture = cu:north_andean
-		#			country_has_primary_culture = cu:central_american
-		#			country_has_primary_culture = cu:mexican
-		#		}
-		#	}
-		#	ig:ig_landowners = {
-		#		remove_ideology = ideology_paternalistic
-		#		add_ideology = ideology_caudillismo
-		#	}
-		#}
-		## Southern Planters
-		#else_if = {
-		#	limit = {
-		#		OR = {
-		#			AND = {
-		#				c:USA ?= this
-		#				NOT = { exists = c:CSA }
-		#			}
-		#			country_has_primary_culture = cu:dixie
-		#		}
-		#	}
-		#	ig:ig_landowners = {
-		#		set_interest_group_name = ig_southern_planters
-		#		remove_ideology = ideology_paternalistic
-		#		add_ideology = ideology_republican_paternalistic
-		#	}
-		#}
+	on_enable = {		### Converter ###
 	}
 	on_disable = {}
 	on_character_ig_membership = {}
@@ -219,11 +74,21 @@
 				limit = {
 					is_pop_type = farmers
 				}
-				value = 50
+				value = 25
+				add = this.standard_of_living
 				
 				if = {
 					limit = { owner = { has_law = law_type:law_homesteading } }
-					add = 50
+					multiply = 1.25
+				}
+
+				if = {
+					limit = {
+						state = {
+							is_slave_state = yes
+						}
+					}
+					multiply = 4
 				}
 			}
 		}
@@ -251,6 +116,33 @@
 				value = 1
 				add = scope:interest_group.modifier:interest_group_in_government_attraction_mult
 				min = 0
+			}
+		}
+		
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_LOYALISTS"
+				value = pop_loyalist_fraction
+				divide = 4
+				add = 1
+			}
+		}
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = no
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_RADICALS"
+				value = pop_radical_fraction
+				divide = 4
+				add = 1
 			}
 		}
 	}
