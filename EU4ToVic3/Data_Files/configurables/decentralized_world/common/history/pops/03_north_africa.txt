@@ -185,23 +185,20 @@
 		}
 	}
 	s:STATE_SINAI = {
-		region_state:EGY = {
-			create_pop = {
-				culture = misri
-				size = 8012
-			}
+		region_state:ARA = { # Abbasids (Arabia)
 			create_pop = {
 				culture = mashriqi
+				religion = oriental_orthodox
 				size = 512
-			}
-			create_pop = {
-				culture = bedouin
-				size = 11120
 			}
 			create_pop = {
 				culture = misri
 				religion = oriental_orthodox
-				size = 871
+				size = 8883
+			}
+			create_pop = {
+				culture = bedouin
+				size = 11120
 			}
 			create_pop = {
 				pop_type = slaves
@@ -417,15 +414,15 @@
 		region_state:MOR = {
 			create_pop = {
 				culture = maghrebi
-				size = 374188
+				size = 420588
 			}
 			create_pop = {
 				culture = sephardic
-				size = 12800
+				size = 13800
 			}
 			create_pop = {
 				culture = berber
-				size = 71800
+				size = 76800
 			}
 			create_pop = {
 				pop_type = slaves
@@ -433,30 +430,16 @@
 				size = 34000
 			}
 		}
-		region_state:SPA = {
-			create_pop = {
-				culture = maghrebi
-				size = 46400
-			}
-			create_pop = {
-				culture = spanish
-				size = 1000
-			}
-			create_pop = {
-				culture = berber
-				size = 5000
-			}
-		}
 	}
 	s:STATE_INNER_MOROCCO = {
 		region_state:MOR = {
 			create_pop = {
-				culture = berber
-				size = 322000
+				culture = bedouin
+				size = 31620
 			}
 			create_pop = {
-				culture = bedouin
-				size = 27008
+				culture = berber
+				size = 325109
 			}
 			create_pop = {
 				culture = maghrebi
@@ -466,16 +449,6 @@
 				pop_type = slaves
 				culture = bambara
 				size = 24000
-			}
-		}
-		region_state:SAH = {
-			create_pop = {
-				culture = berber
-				size = 3109
-			}
-			create_pop = {
-				culture = bedouin
-				size = 4612
 			}
 			create_pop = {
 				pop_type = slaves
@@ -980,8 +953,9 @@
 		region_state:WAD = {
 			create_pop = {
 				culture = bedouin
-				size = 42000
+				size = 82000
 			}
+			
 			create_pop = {
 				culture = equatorial_bantu
 				size = 49000
@@ -991,13 +965,17 @@
 				size = 32060
 			}
 			create_pop = {
+				culture = kanuri
+				size = 28000
+			}
+			create_pop = {
 				culture = tuareg
-				size = 3000
+				size = 8000
 			}
 			create_pop = {
 				pop_type = slaves
 				culture = equatorial_bantu
-				size = 8000
+				size = 11500
 			}
 		}
 		region_state:TBI = {
@@ -1007,7 +985,7 @@
 			}
 			create_pop = {
 				culture = bedouin
-				size = 20000
+				size = 22000
 			}
 			create_pop = {
 				pop_type = slaves
@@ -1017,26 +995,7 @@
 			create_pop = {
 				pop_type = slaves
 				culture = equatorial_bantu
-				size = 6000
-			}
-		}
-		region_state:BOR = {
-			create_pop = {
-				culture = kanuri
-				size = 28000
-			}
-			create_pop = {
-				culture = bedouin
-				size = 42000
-			}	
-			create_pop = {
-				culture = tuareg
-				size = 5000
-			}	
-			create_pop = {
-				pop_type = slaves
-				culture = equatorial_bantu
-				size = 7000
+				size = 9500
 			}
 		}
 	}

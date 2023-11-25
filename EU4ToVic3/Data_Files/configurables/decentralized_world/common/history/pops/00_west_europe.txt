@@ -622,17 +622,6 @@
 		}
 	}
 	s:STATE_WALES = {
-		region_state:GBR = {
-			create_pop = {
-				culture = welsh
-				size = 778557
-			}
-			create_pop = {
-				culture = british
-				size = 194639
-			}
-		}
-		
 		region_state:B22 = { #Brycheiniog
 			create_pop = {
 				culture = welsh
@@ -647,7 +636,7 @@
 				size = 108132
 			}
 		}
-		region_state:D13 = { #Dyfed
+		region_state:DY2 = { #Dyfed
 			create_pop = {
 				culture = welsh
 				religion = catholic
@@ -762,15 +751,9 @@
 				size = 524402
 			}
 		}
-		region_state:T26 = { #Tregor
-			create_pop = {
-				culture = breton
-				size = 500
-			}
-		}
 	}
 	s:STATE_WEST_COUNTRY = {
-		region_state:CNW = { #Cornwall
+		region_state:C20 = { #Cornwall
 			create_pop = {
 				culture = welsh
 				religion = catholic
@@ -786,6 +769,12 @@
 				culture = welsh
 				religion = catholic
 				size = 198640
+			}
+		}
+		region_state:T26 = { #Tregor
+			create_pop = {
+				culture = breton
+				size = 500
 			}
 		}
 		region_state:W16 = { #Wessex
@@ -861,7 +850,7 @@
 		}
 	}
 	s:STATE_MUNSTER = {
-		region_state:D14 = { #Deasmhumhain
+		region_state:DE3 = { #Deasmhumhain
 			create_pop = {
 				culture = irish
 				size = 587059
@@ -964,6 +953,10 @@
 				culture = occitan
 				size = 1362200
 			}
+			create_pop = {
+				culture = sephardic # Avignonese Jews, closer to Sephardi than Ashkenazi
+				size = 2440
+			}
 		}
 	}
 	s:STATE_NORMANDY = {
@@ -979,6 +972,10 @@
 			create_pop = {
 				culture = occitan
 				size = 1517200
+			}
+			create_pop = {
+				culture = sephardic
+				size = 895
 			}
 			create_pop = {
 				culture = visigothic
@@ -1083,24 +1080,18 @@
 		}
 	}
 	s:STATE_AUVERGNE_LIMOUSIN = {
-		region_state:FRA = { #West Francia
+		region_state:OCC = { #Middle Francia
 			create_pop = {
-				culture = occitan
+				culture = ashkenazi
+				size = 263
+			}
+			create_pop = {
+				culture = frankish
 				size = 320003
 			}
 			create_pop = {
-				culture = frankish
-				size = 80001
-			}
-		}
-		region_state:OCC = { #Middle Francia
-			create_pop = {
 				culture = occitan
-				size = 960008
-			}
-			create_pop = {
-				culture = frankish
-				size = 240002
+				size = 1280011
 			}
 		}
 	}
@@ -1128,6 +1119,10 @@
 				culture = breton
 				size = 507362
 			}
+			create_pop = {
+				culture = ashkenazi
+				size = 148
+			}
 		}
 		
 		region_state:FRA = { #West Francia
@@ -1146,6 +1141,10 @@
 			create_pop = {
 				culture = frankish
 				size = 2192800
+			}
+			create_pop = {
+				culture = ashkenazi
+				size = 595
 			}
 		}
 	}
@@ -1167,11 +1166,19 @@
 				culture = frankish
 				size = 858600
 			}
+			create_pop = {
+				culture = ashkenazi
+				size = 434
+			}
 		}
 		region_state:OCC = { #Middle Francia
 			create_pop = {
 				culture = frankish
 				size = 858600
+			}
+			create_pop = {
+				culture = ashkenazi
+				size = 434
 			}
 		}
 	}
@@ -1213,6 +1220,10 @@
 				culture = occitan
 				size = 180000
 			}
+			create_pop = {
+				culture = sephardic
+				size = 3203
+			}
 		}
 	}
 	s:STATE_ORLEANS = {
@@ -1243,6 +1254,10 @@
 			create_pop = {
 				culture = ashkenazi
 				size = 34004
+			}
+			create_pop = {
+				culture = sephardic # "Portuguese" Jews
+				size = 2908
 			}
 		}
 	}
