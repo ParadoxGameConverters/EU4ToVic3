@@ -53,6 +53,9 @@ german_unification.1 = {
 						country_has_primary_culture = cu:south_german
 					}					
 				}				
+				NOT = {
+					THIS = ROOT
+				}				
 			}
 			
 			if = {
@@ -66,7 +69,7 @@ german_unification.1 = {
 						is_supporting_unification_candidate = { who = root country_formation = GER }
 					}
 				}			
-				root = { annex = prev }
+				root = { annex_with_incorporation = prev }
 			}
 			else = {
 				trigger_event = { id = german_unification.2 days = 0 popup = yes }
@@ -180,7 +183,7 @@ german_unification.2 = {
 				is_subject_of = scope:german_unification_candidate
 			}				
 		}
-		scope:german_unification_candidate = { annex = root }
+		scope:german_unification_candidate = { annex_with_incorporation = root }
 		ai_chance = {
 			base = 9
 		}
