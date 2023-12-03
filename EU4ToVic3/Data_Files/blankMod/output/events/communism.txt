@@ -25,14 +25,9 @@ communism.1 = {
 	immediate = {
 		random_interest_group = {
 			limit = {
-				is_in_government = yes
-				ig_clout > 0.15
-				leader = {
-					OR = {
-						has_ideology = ideology:ideology_communist
-						has_ideology = ideology:ideology_vanguardist
-						has_ideology = ideology:ideology_anarchist
-					}
+				law_stance = {
+					law = law_type:law_council_republic
+					value > neutral
 				}
 			}
 			set_variable = communist_ig_var
@@ -57,7 +52,14 @@ communism.1 = {
 			NOT = { has_law = law_type:law_old_age_pension }
 		}
 		activate_law = law_type:law_wage_subsidies
-		custom_tooltip = communist_unions.tt
+		if = {
+			limit = {
+				any_interest_group = {
+					has_variable = communist_ig_var
+				}
+			}
+			custom_tooltip = communist_unions.tt
+		}
 	}
 	option = { # ban slavery
 		name = communism.1.b
@@ -65,7 +67,14 @@ communism.1 = {
 			NOT = { has_law = law_type:law_slavery_banned }
 		}
 		activate_law = law_type:law_slavery_banned
-		custom_tooltip = communist_unions.tt
+		if = {
+			limit = {
+				any_interest_group = {
+					has_variable = communist_ig_var
+				}
+			}
+			custom_tooltip = communist_unions.tt
+		}
 	}
 	option = { # Regulatory bodies
 		name = communism.1.c
@@ -74,12 +83,26 @@ communism.1 = {
 			NOT = { has_law = law_type:law_worker_protections }
 		}
 		activate_law = law_type:law_regulatory_bodies
-		custom_tooltip = communist_unions.tt
+		if = {
+			limit = {
+				any_interest_group = {
+					has_variable = communist_ig_var
+				}
+			}
+			custom_tooltip = communist_unions.tt
+		}
 	}
 	option = {
 		name = communism.1.d
 		default_option = yes
-		custom_tooltip = communist_unions.tt
+		if = {
+			limit = {
+				any_interest_group = {
+					has_variable = communist_ig_var
+				}
+			}
+			custom_tooltip = communist_unions.tt
+		}
 		every_interest_group = {
 			limit = {
 				leader = {
@@ -94,6 +117,10 @@ communism.1 = {
 				name = communist_government_modifier
 				months = normal_modifier_time
 			}
+		}
+		add_loyalists = {
+			value = medium_radicals
+			strata = rich
 		}
 	}
 }
@@ -740,7 +767,7 @@ communism.9 = {
 			any_scope_pop = {
 				pop_is_discriminated = no
 				standard_of_living > 15
-				workplace = {
+				workplace ?= {
 					OR = {
 					    has_active_production_method = pm_worker_cooperative_building_food_industry
 					    has_active_production_method = pm_worker_cooperative_building_textile_mills
@@ -779,7 +806,7 @@ communism.9 = {
 				any_scope_pop = {
 					pop_is_discriminated = no
 					standard_of_living > 15
-					workplace = {
+					workplace ?= {
 						OR = {
                             has_active_production_method = pm_worker_cooperative_building_food_industry
                             has_active_production_method = pm_worker_cooperative_building_textile_mills
@@ -812,7 +839,7 @@ communism.9 = {
 				limit = {
 					pop_is_discriminated = no
 					standard_of_living > 15
-					workplace = {
+					workplace ?= {
 						OR = {
                             has_active_production_method = pm_worker_cooperative_building_food_industry
                             has_active_production_method = pm_worker_cooperative_building_textile_mills
@@ -865,6 +892,127 @@ communism.9 = {
 				name = coop_migration_modifier
 				months = normal_modifier_time
 			}
+		}
+	}
+}
+
+# Startup event 1
+communism.10 = {
+	type = country_event
+	placement = root
+	title = communism.10.t
+	desc = communism.10.d
+	flavor = communism.10.f
+
+	duration = 3
+
+	event_image = {
+		video = "europenorthamerica_political_extremism"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		# triggered by communsim JE 1
+	}
+
+	immediate = {
+		set_variable = { name = communism_je_1_var value = 25 }
+	}
+
+	option = {
+		name = communism.10.a
+		default_option = yes
+		capital = {
+			add_radicals_in_state = {
+				value = medium_radicals
+				pop_type = laborers
+			}
+		}
+	}
+	option = {
+		name = communism.10.b
+		trigger = {
+			any_interest_group = {
+				is_in_government = yes
+				OR = {
+					has_ideology = ideology:ideology_socialist
+					leader = {
+						has_socialist_ideology = yes
+					}
+				}
+			}
+		}
+		capital = {
+			add_radicals_in_state = {
+				value = small_radicals
+				pop_type = laborers
+			}
+		}
+		custom_tooltip = {
+			text = communism_var_tick_05_tt
+			set_variable = { name = communism_progress_var_add value = 0.5 }
+		}
+	}
+}
+
+# Completion Event
+communism.11 = {
+	type = country_event
+	placement = root
+	title = communism.11.t
+	desc = communism.11.d
+	flavor = communism.11.f
+
+	duration = 3
+
+	event_image = {
+		video = "votp_realist_household"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		# triggered by communism JE 1
+	}
+
+	immediate = {
+
+	}
+
+	option = {
+		name = communism.11.a
+		default_option = yes
+		add_modifier = {
+			name = modifier_defeated_initial_socialist_movement
+			months = normal_modifier_time
+		}
+		add_loyalists = {
+			value = small_radicals
+			strata = rich
+		}
+		add_loyalists = {
+			value = small_radicals
+			strata = middle
+		}
+	}
+	option = {
+		name = communism.11.b
+		add_modifier = {
+			name = modifier_defeated_initial_socialist_movement_worries
+			months = normal_modifier_time
+		}
+		add_loyalists = {
+			value = medium_radicals
+			strata = rich
+		}
+		add_loyalists = {
+			value = medium_radicals
+			strata = middle
 		}
 	}
 }

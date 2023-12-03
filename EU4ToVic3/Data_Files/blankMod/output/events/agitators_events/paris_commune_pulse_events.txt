@@ -307,6 +307,7 @@ paris_commune_pulse_events.2 = {
 							OR = {
 								has_ideology = ideology:ideology_moderate
 								has_ideology = ideology:ideology_humanitarian
+								has_ideology = ideology:ideology_humanitarian_royalist
 								has_ideology = ideology:ideology_reformer
 							}
 						}
@@ -324,6 +325,7 @@ paris_commune_pulse_events.2 = {
 							OR = {
 								has_ideology = ideology:ideology_moderate
 								has_ideology = ideology:ideology_humanitarian
+								has_ideology = ideology:ideology_humanitarian_royalist
 								has_ideology = ideology:ideology_reformer
 							}
 						}
@@ -1240,6 +1242,12 @@ paris_commune_pulse_events.6 = {
 					}
 				}
 				activate_law = law_type:law_state_atheism
+				capital = {	
+					convert_population = {
+						target = rel:atheist
+						value = 0.1
+					}
+				}
 			}
 			if = {
 				limit = {
@@ -1499,20 +1507,28 @@ paris_commune_pulse_events.8 = {
 		random_list = {
 			60 = {
 				custom_tooltip = paris_commune_pulse_events.8.tt_1
+				custom_tooltip = {
+					text = commune_progress_subtract_5
+			        change_global_variable = {
+			            name = paris_commune_progress_var
+			            add = -5
+			        }
+				}
 				scope:cannon_seizing_general_scope = {
 					add_modifier = {
 						name = first_blood_modifier
 						months = short_modifier_time
 					}
 				}
+				post_notification = paris_commune_event_8_a1
 			}
 			40 = {
 				custom_tooltip = paris_commune_pulse_events.8.tt_2
 				custom_tooltip = {
-					text = commune_progress_subtract_10
+					text = commune_progress_add_10
 			        change_global_variable = {
 			            name = paris_commune_progress_var
-			            add = -10
+			            add = 10
 			        }
 				}
 				scope:cannon_seizing_general_scope = {
@@ -1542,16 +1558,17 @@ paris_commune_pulse_events.8 = {
 						}
 					}
 				}
+				post_notification = paris_commune_event_8_a2
 			}
 		}
 	}
 	option = { # There are too few men to seize them.
 		name = paris_commune_pulse_events.8.b
 		custom_tooltip = {
-			text = commune_progress_subtract_5
+			text = commune_progress_add_5
 	        change_global_variable = {
 	            name = paris_commune_progress_var
-	            add = -5
+	            add = 5
 	        }
 		}
 		c:PRC = {
@@ -1583,10 +1600,10 @@ paris_commune_pulse_events.8 = {
 			has_technology_researched = breech_loading_artillery
 		}
 		custom_tooltip = {
-			text = commune_progress_add_5
+			text = commune_progress_subtract_5
 	        change_global_variable = {
 	            name = paris_commune_progress_var
-	            add = 5
+	            add = -5
 	        }
 		}
 		c:PRC = {
