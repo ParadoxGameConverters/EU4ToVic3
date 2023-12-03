@@ -1,4 +1,4 @@
-# This file maps EU4 religion GROUPS to Vic3 religion TRAITS, optionally adding taboos.
+﻿# This file maps EU4 religion GROUPS to Vic3 religion TRAITS, optionally adding taboos.
 # Icon refers to Vic3 RELIGION and will use whatever that religion uses.
 #
 # link = { vic3 = trait eu4 = religious_group taboo = some_taboo taboo = other_taboo icon = religion }
@@ -9,21 +9,13 @@
 # If you want to custimize specific religions, use religion_map.txt file, and bbe sure to add its definitions to
 # blankMod/output/common/religions/ folder, along with icons to gfx/interface/icons/religious_icons/.
 
-link = { vic3 = christian eu4 = christian icon = protestant }
-link = { vic3 = muslim eu4 = muslim icon = sunni taboo = liquor taboo = wine }
-link = { vic3 = jewish eu4 = jewish_group icon = jewish }
-link = { vic3 = mazdan eu4 = zoroastrian_group icon = sikh }
-link = { vic3 = gnostic eu4 = gnostic icon = atheist }
-link = { vic3 = yazidi eu4 = yazidism icon = sikh }
-link = { vic3 = eastern eu4 = eastern eu4 = dharmic icon = gelugpa }
-link = { vic3 = animist eu4 = pagan eu4 = african_pagan eu4 = european_pagan eu4 = american_pagan eu4 = asian_pagan icon = animist }
+link = { vic3 = christian eu4 = christian icon = iconoclast } #iconoclast.dds
+link = { vic3 = muslim eu4 = muslim icon = kharijite taboo = liquor taboo = wine } #kharijite.dds
+link = { vic3 = jewish eu4 = jewish_group icon = karaite } # jewish_yellow.dds
+link = { vic3 = mazdan eu4 = zoroastrian_group icon = zoroastrian } #zoroastrian.dds
+link = { vic3 = gnostic eu4 = gnostic icon = valentinianism } #valentinianism.dds
+link = { vic3 = yazidi eu4 = yazidism icon = kitebacilweism } #kitebacilweism.dds
+link = { vic3 = eastern eu4 = eastern eu4 = dharmic icon = gelugpa } #gelugpa.dds (from vanilla)
+link = { vic3 = animist eu4 = pagan eu4 = african_pagan eu4 = european_pagan eu4 = american_pagan eu4 = asian_pagan icon = pagan_religion_reformed } #pagan.dds
 
-#link = { vic3 = christian eu4 = christian icon = reformed }
-#link = { vic3 = muslim eu4 = muslim icon = sunni taboo = liquor taboo = wine }
-#link = { vic3 = jewish eu4 = jewish_group icon = jewish_yellow }
-#link = { vic3 = mazdan eu4 = zoroastrian_group icon = gayomarthianism }
-#link = { vic3 = gnostic eu4 = gnostic icon = valentinianism }
-#link = { vic3 = yazidi eu4 = yazidism icon = kitebacilweism }
-#link = { vic3 = eastern eu4 = eastern eu4 = dharmic icon = confucianism }
-#link = { vic3 = animist eu4 = pagan eu4 = african_pagan eu4 = european_pagan eu4 = american_pagan eu4 = asian_pagan icon = pagan }
 #link = { vic3 = buddhist eu4 = eastern }
