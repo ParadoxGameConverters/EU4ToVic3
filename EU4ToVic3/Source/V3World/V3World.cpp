@@ -37,7 +37,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	countryMapper->loadMappingRules("configurables/country_mappings.txt");
 	religionMapper.loadMappingRules("configurables/religion_map.txt");
 	religionMapper.expandReligionMappings(sourceWorld.getReligionLoader().getAllReligions());
-	religionMapper.generateReligionDefinitions(dwFS,
+	religionMapper.generateReligionDefinitions(allFS,
 		 "configurables/religion_group_map.txt",
 		 sourceWorld.getReligionLoader().getAllReligions(),
 		 sourceWorld.getEU4Localizations());
