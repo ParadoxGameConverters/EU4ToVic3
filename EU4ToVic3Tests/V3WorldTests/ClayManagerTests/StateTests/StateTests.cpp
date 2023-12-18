@@ -142,6 +142,7 @@ TEST(V3World_StateTests, excessPrimeProvincesAreSimplyIgnored)
 	input << "provinces = { \"x123456\" }\n ";
 	input << "prime_land = { \"x123456\" \"x123457\" \"x123458\" }\n ";
 	V3::State state;
+	state.setStateName("test");
 
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
@@ -149,8 +150,8 @@ TEST(V3World_StateTests, excessPrimeProvincesAreSimplyIgnored)
 
 	state.loadState(input);
 
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Prime province x123457 isn't defined in the state! Ignoring.)"));
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Prime province x123458 isn't defined in the state! Ignoring.)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Prime province x123457 isn't defined in the state test! Ignoring.)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Prime province x123458 isn't defined in the state test! Ignoring.)"));
 
 	std::cout.rdbuf(cout_buffer);
 
@@ -216,6 +217,7 @@ TEST(V3World_StateTests, excessImpassableProvincesAreSimplyIgnored)
 	input << "provinces = { \"x123456\" }\n ";
 	input << "impassable = { \"x123456\" \"x123457\" \"x123458\" }\n ";
 	V3::State state;
+	state.setStateName("test");
 
 	std::stringstream log;
 	std::streambuf* cout_buffer = std::cout.rdbuf();
@@ -223,8 +225,8 @@ TEST(V3World_StateTests, excessImpassableProvincesAreSimplyIgnored)
 
 	state.loadState(input);
 
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Impassable province x123457 isn't defined in the state! Ignoring.)"));
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Impassable province x123458 isn't defined in the state! Ignoring.)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Impassable province x123457 isn't defined in the state test! Ignoring.)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"( [WARNING] Impassable province x123458 isn't defined in the state test! Ignoring.)"));
 
 	std::cout.rdbuf(cout_buffer);
 
