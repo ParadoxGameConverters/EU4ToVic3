@@ -227,6 +227,148 @@ on_country_released_as_overlord_subject = {
 }
 
 # Root = Country
+on_country_formed = {
+	effect = {
+		if = {
+			limit = {
+				c:LAO ?= ROOT
+			}
+			trigger_event = { id = formation.1 popup = yes }
+		}
+        else_if = {
+			limit = {
+				c:PLT ?= THIS
+				was_formed_from = PRG
+				has_variable = patino_paraguay_var
+			}
+			add_primary_culture = cu:guarani
+		}
+		else_if = {
+			limit = {
+				c:UBD ?= ROOT
+			}
+			trigger_event = { id = formation.2 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:BYZ ?= ROOT
+			}
+			trigger_event = { id = formation.3 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:IBE ?= ROOT
+			}
+			trigger_event = { id = formation.5 popup = yes }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					c:BRZ ?= ROOT
+					c:USA ?= ROOT
+					c:SAF ?= ROOT
+				}
+			}
+			trigger_event = { id = formation.6 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:KUK ?= ROOT
+			}
+			trigger_event = { id = formation.7 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:ARA ?= ROOT
+			}
+			trigger_event = { id = formation.8 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:YUG ?= ROOT
+			}
+			trigger_event = { id = formation.9 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:SCA ?= ROOT
+			}
+			trigger_event = { id = formation.10 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:MAL ?= ROOT
+			}
+			trigger_event = { id = formation.11 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:TRH ?= ROOT
+			}
+			trigger_event = { id = formation.12 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:IDN ?= ROOT
+			}
+			trigger_event = { id = formation.13 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:BHT ?= ROOT
+			}
+			trigger_event = { id = formation.14 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:YEM ?= ROOT
+			}
+			trigger_event = { id = formation.15 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:KAZ ?= ROOT
+			}
+			trigger_event = { id = formation.16 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:HRE ?= ROOT
+			}
+			trigger_event = { id = formation.18 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:UNL ?= ROOT
+			}
+			trigger_event = { id = formation.19 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:RHN ?= ROOT
+			}
+			trigger_event = { id = formation.20 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:GER ?= ROOT
+			}
+			trigger_event = { id = german_unification.4 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:ITA ?= ROOT
+			}
+			trigger_event = { id = italian_unification.1 popup = yes }
+		}
+		else = {
+			trigger_event = { id = formation.17 popup = yes }
+		}
+		converter_primary_cultures_effect = yes		##Converter
+	}
+}
+
+# Root = Country
 # scope:target = Uprising country
 on_revolution_start = {
 	effect = {
