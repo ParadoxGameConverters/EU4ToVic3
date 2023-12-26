@@ -492,8 +492,10 @@ liberal_party = {
 					has_ideology = ideology:ideology_egalitarian
 					has_ideology = ideology:ideology_egalitarian_modern
 					leader = {
-						has_ideology = ideology:ideology_humanitarian
-						has_ideology = ideology:ideology_humanitarian_royalist
+						OR = {
+							has_ideology = ideology:ideology_humanitarian
+							has_ideology = ideology:ideology_humanitarian_royalist
+						}
 					}
 				}
 				owner = {
@@ -635,6 +637,7 @@ liberal_party = {
 				desc = "from_modernizer"
 			}
 		}
+
 		# Special weights for ACW
 		if = {
 			limit = {
