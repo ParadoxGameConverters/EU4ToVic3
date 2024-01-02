@@ -853,7 +853,8 @@ void V3::ClayManager::filterInvalidClaims(const PoliticalManager& politicalManag
 	{
 		std::set<std::string> validClaims;
 		for (const auto& claim: substate->getClaims())
-			if (politicalManager.getCountry(claim) && !politicalManager.getCountry(claim)->getSubStates().empty())
+			if (politicalManager.getCountry(claim) && !politicalManager.getCountry(claim)->getSubStates().empty() &&
+				 (politicalManager.getCountry(claim)->getProcessedData().type != "decentralized"))
 				validClaims.emplace(claim);
 			else
 				++counter;
