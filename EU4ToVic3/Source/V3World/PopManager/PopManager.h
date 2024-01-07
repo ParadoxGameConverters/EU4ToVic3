@@ -38,12 +38,13 @@ class PopManager
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader) const;
-	void generatePops(const ClayManager& clayManager, Configuration::POPSHAPES popShapes);
+	void generatePops(const ClayManager& clayManager, Configuration::POPSHAPES popShapes, double shapingFactor);
 	void applyHomeLands(const ClayManager& clayManager) const;
 	void loadMinorityPopRules(const std::string& filePath);
 	void loadSlaveCultureRules(const std::string& filePath);
 	void injectReligionsIntoVanillaPops(const std::map<std::string, mappers::CultureDef>& cultureDefs);
 	void injectReligionsIntoDWPops(const std::map<std::string, mappers::CultureDef>& cultureDefs);
+	void liberateSlaves(const PoliticalManager& politicalManager) const;
 	void alterSlaveCultures(const PoliticalManager& politicalManager,
 		 const ClayManager& clayManager,
 		 const std::map<std::string, mappers::CultureDef>& cultureDefs) const;

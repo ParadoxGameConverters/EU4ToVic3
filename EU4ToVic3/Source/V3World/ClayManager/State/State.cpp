@@ -13,6 +13,7 @@ void V3::State::loadState(std::istream& theStream)
 	registerKeys();
 	parseStream(theStream);
 	clearRegisteredKeywords();
+	updateProvinces();
 
 	distributeLandshares();
 	distributeResources();
@@ -43,10 +44,7 @@ void V3::State::registerKeys()
 				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1);
 			else
 				Log(LogLevel::Warning) << "Encountered prime province " << theProvinceName << " in unknown format!";
-			if (provinces.contains(theProvinceName))
-				provinces.at(theProvinceName)->setPrime();
-			else
-				Log(LogLevel::Warning) << "Prime province " << theProvinceName << " isn't defined in the state! Ignoring.";
+			primeProvinces.emplace(theProvinceName);
 		}
 	});
 	registerKeyword("impassable", [this](std::istream& theStream) {
@@ -58,10 +56,7 @@ void V3::State::registerKeys()
 				theProvinceName = "x" + theProvinceName.substr(1, theProvinceName.length() - 1);
 			else
 				Log(LogLevel::Warning) << "Encountered impassable province " << theProvinceName << " in unknown format!";
-			if (provinces.contains(theProvinceName))
-				provinces.at(theProvinceName)->setImpassable();
-			else
-				Log(LogLevel::Warning) << "Impassable province " << theProvinceName << " isn't defined in the state! Ignoring.";
+			impassableProvinces.emplace(theProvinceName);
 		}
 	});
 	registerKeyword("traits", [this](std::istream& theStream) {
@@ -106,6 +101,24 @@ void V3::State::registerKeys()
 			Log(LogLevel::Warning) << "Port province " << theProvinceName << " isn't defined in the state! (Vanilla?) Map error. Ignoring port.";
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+}
+
+void V3::State::updateProvinces() const
+{
+	for (const auto& impassableProvince: impassableProvinces)
+	{
+		if (provinces.contains(impassableProvince))
+			provinces.at(impassableProvince)->setImpassable();
+		else
+			Log(LogLevel::Warning) << "Impassable province " << impassableProvince << " isn't defined in the state " << name << "! Ignoring.";
+	}
+	for (const auto& primeProvince: primeProvinces)
+	{
+		if (provinces.contains(primeProvince))
+			provinces.at(primeProvince)->setPrime();
+		else
+			Log(LogLevel::Warning) << "Prime province " << primeProvince << " isn't defined in the state " << name << "! Ignoring.";
+	}
 }
 
 void V3::State::distributeLandshares() const
@@ -256,4 +269,25 @@ double V3::State::getInvestmentFactor() const
 			toReturn += data.investmentFactor * weight;
 	toReturn /= static_cast<double>(substates.size());
 	return toReturn;
+}
+
+void V3::State::distributeNonTreatyPortPops(int incomingPops)
+{
+	// We're taking pops from a treaty port in this state and distributing the number to other substates.
+
+	for (const auto& subState: substates)
+	{
+		if (subState->isTreatyPort())
+			continue;
+
+		const auto& landShare = subState->getLandshare();
+		const auto& originalSubStatePopCount = subState->getSubStatePops().getPopCount();
+		const double newPopCount = originalSubStatePopCount + static_cast<int>(std::round(landShare * incomingPops));
+		const double modifyFactor = newPopCount / originalSubStatePopCount;
+
+		auto newPops = subState->getSubStatePops();
+		newPops.multiplyPops(modifyFactor);
+
+		subState->setSubStatePops(newPops);
+	}
 }

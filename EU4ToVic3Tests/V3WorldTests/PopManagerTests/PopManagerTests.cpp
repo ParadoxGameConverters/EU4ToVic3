@@ -100,8 +100,6 @@ prepMappers()
 	clayManager.shoveRemainingProvincesIntoSubStates();
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 
-	popManager.generatePops(clayManager, Configuration::POPSHAPES::Vanilla);
-
 	return std::tuple{popManager, politicalManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader};
 }
 } // namespace
@@ -177,6 +175,9 @@ TEST(V3World_PopManagerTests, popManagerCanGeneratePops)
 {
 	auto [popManager, politicalManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
+	popManager.generatePops(clayManager, Configuration::POPSHAPES::Vanilla, 1);
+
+
 	/*
 		STATE_TEST_LAND1 - 600 - goes to GA2 - split in 2 pops for its 2 demographics
 		STATE_TEST_LAND2 - 3000 - goes to GA2 - split in 2 pops for its 2 demographics
@@ -208,9 +209,86 @@ TEST(V3World_PopManagerTests, popManagerCanGeneratePops)
 	EXPECT_EQ(1000, pop6.getSize());
 }
 
+TEST(V3World_PopManagerTests, popManagerCanGenerateVanillaPopsThroughShaping)
+{
+	auto [popManager, politicalManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
+
+	popManager.generatePops(clayManager, Configuration::POPSHAPES::PopShaping, 0);
+
+
+	/*
+		STATE_TEST_LAND1 - 600 - goes to GA2 - split in 2 pops for its 2 demographics
+		STATE_TEST_LAND2 - 3000 - goes to GA2 - split in 2 pops for its 2 demographics
+		STATE_TEST_LAND3 - 900 - goes to shoved X02 substate with vanilla demo
+		STATE_TEST_LAND4 - 1000 - goes to GA9 - single pop for single demo
+		total: 5500
+	*/
+
+	const auto& pop1 = clayManager.getStates().at("STATE_TEST_LAND1")->getSubStates()[0]->getSubStatePops().getPops()[0];
+	const auto& pop2 = clayManager.getStates().at("STATE_TEST_LAND1")->getSubStates()[0]->getSubStatePops().getPops()[1];
+	EXPECT_EQ(pop1, V3::Pop("vculture1", "catholic", "", 0));
+	EXPECT_EQ(545, pop1.getSize()); // 545 = 0.91 * 600
+	EXPECT_EQ(pop2, V3::Pop("vculture2", "protestant", "", 0));
+	EXPECT_EQ(55, pop2.getSize()); // 55 = 0.09 * 600
+
+	const auto& pop3 = clayManager.getStates().at("STATE_TEST_LAND2")->getSubStates()[0]->getSubStatePops().getPops()[0];
+	const auto& pop4 = clayManager.getStates().at("STATE_TEST_LAND2")->getSubStates()[0]->getSubStatePops().getPops()[1];
+	EXPECT_EQ(pop3, V3::Pop("vculture1", "catholic", "", 0));
+	EXPECT_EQ(2727, pop3.getSize()); // 2727 = 0.91 * 3000
+	EXPECT_EQ(pop4, V3::Pop("vculture2", "protestant", "", 0));
+	EXPECT_EQ(273, pop4.getSize()); // 273 = 0.09 * 3000
+
+	const auto& pop5 = clayManager.getStates().at("STATE_TEST_LAND3")->getSubStates()[0]->getSubStatePops().getPops()[0];
+	EXPECT_EQ(pop5, V3::Pop("swedish", "", "", 0)); // vanilla demo
+	EXPECT_EQ(900, pop5.getSize());
+
+	const auto& pop6 = clayManager.getStates().at("STATE_TEST_LAND4")->getSubStates()[0]->getSubStatePops().getPops()[0];
+	EXPECT_EQ(pop6, V3::Pop("vculture2", "protestant", "", 0));
+	EXPECT_EQ(1000, pop6.getSize());
+}
+
+TEST(V3World_PopManagerTests, popManagerCanGenerateShapedPops)
+{
+	auto [popManager, politicalManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
+
+	popManager.generatePops(clayManager, Configuration::POPSHAPES::PopShaping, 1);
+
+	/*
+		STATE_TEST_LAND1 - 600 -> 622: projected popcount=725 * superRegionalNormalizationFactor=0.85649
+		STATE_TEST_LAND2 - 3000->3108
+		STATE_TEST_LAND3 - 900->900: vanilla state, no shaping
+		STATE_TEST_LAND4 - 1000->1001
+		total: 5500
+	*/
+
+	const auto& pop1 = clayManager.getStates().at("STATE_TEST_LAND1")->getSubStates()[0]->getSubStatePops().getPops()[0];
+	const auto& pop2 = clayManager.getStates().at("STATE_TEST_LAND1")->getSubStates()[0]->getSubStatePops().getPops()[1];
+	EXPECT_EQ(pop1, V3::Pop("vculture1", "catholic", "", 0));
+	EXPECT_EQ(565, pop1.getSize()); // 565 = 0.91 * 622
+	EXPECT_EQ(pop2, V3::Pop("vculture2", "protestant", "", 0));
+	EXPECT_EQ(57, pop2.getSize()); // 57 = 0.091 * 622
+
+	const auto& pop3 = clayManager.getStates().at("STATE_TEST_LAND2")->getSubStates()[0]->getSubStatePops().getPops()[0];
+	const auto& pop4 = clayManager.getStates().at("STATE_TEST_LAND2")->getSubStates()[0]->getSubStatePops().getPops()[1];
+	EXPECT_EQ(pop3, V3::Pop("vculture1", "catholic", "", 0));
+	EXPECT_EQ(2825, pop3.getSize()); // 2825 = 0.91 * 3108
+	EXPECT_EQ(pop4, V3::Pop("vculture2", "protestant", "", 0));
+	EXPECT_EQ(283, pop4.getSize()); // 283 = 0.091 * 3108
+
+	const auto& pop5 = clayManager.getStates().at("STATE_TEST_LAND3")->getSubStates()[0]->getSubStatePops().getPops()[0];
+	EXPECT_EQ(pop5, V3::Pop("swedish", "", "", 0)); // vanilla demo
+	EXPECT_EQ(900, pop5.getSize());
+
+	const auto& pop6 = clayManager.getStates().at("STATE_TEST_LAND4")->getSubStates()[0]->getSubStatePops().getPops()[0];
+	EXPECT_EQ(pop6, V3::Pop("vculture2", "protestant", "", 0));
+	EXPECT_EQ(1001, pop6.getSize());
+}
+
 TEST(V3World_PopManagerTests, popManagerCanGenerateHomelands)
 {
 	auto [popManager, politicalManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
+	popManager.generatePops(clayManager, Configuration::POPSHAPES::Vanilla, 1);
+
 
 	/*
 		STATE_TEST_LAND1 - 600 - goes to GA2 - split in 2 pops for its 2 demographics

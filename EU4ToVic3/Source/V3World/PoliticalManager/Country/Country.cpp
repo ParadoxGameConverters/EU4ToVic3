@@ -225,6 +225,10 @@ void V3::Country::distributeGovAdmins(const double target, const int PMGeneratio
 
 void V3::Country::registerKeys()
 {
+	registerKeyword("dynamic_country_definition", [this](std::istream& theStream) {
+		dynamicCountry = true;
+		commonItems::ignoreItem("unused", theStream);
+	});
 	registerKeyword("country_type", [this](std::istream& theStream) {
 		vanillaData->type = commonItems::getString(theStream);
 	});
@@ -257,6 +261,15 @@ void V3::Country::registerVanillaTypeKeys()
 		vanillaData->vanillaType = commonItems::getString(theStream);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+}
+
+bool V3::Country::humanPlayed() const
+{
+	if (!sourceCountry)
+	{
+		return false;
+	}
+	return sourceCountry->humanPlayed();
 }
 
 void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
@@ -311,6 +324,25 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	// slavery - we're setting this law right here and now as it's a base for further laws later when we have techs.
 	if (sourceCountry->hasModifier("the_abolish_slavery_act"))
 		processedData.laws.emplace("law_slavery_banned");
+
+	// state atheism - we're setting this law right here and now as it's a base for further laws later when we have techs.
+	if (sourceCountry->hasModifier("cult_of_reason"))
+	{
+		processedData.techs.emplace("rationalism");
+		processedData.techs.emplace("academia");
+		processedData.techs.emplace("empiricism");
+		processedData.laws.emplace("law_state_atheism");
+	}
+
+	// (ex-)colonial countries require colonization to continue expanding.
+	if (sourceCountry->isColony())
+	{
+		processedData.laws.emplace("law_colonial_resettlement"); // exploatation is more for africa, imho.
+		processedData.techs.emplace("colonization");
+		processedData.techs.emplace("international_relations");
+		processedData.techs.emplace("tech_bureaucracy");
+		processedData.techs.emplace("urbanization");
+	}
 
 	// custom flag?
 	if (sourceCountry->getNationalColors().getCustomColors())
@@ -591,6 +623,35 @@ std::string V3::Country::getAdjective(const std::string& language) const
 
 	// wing it.
 	return tag + "_ADJ";
+}
+
+double V3::Country::getTotalDev() const
+{
+	return std::accumulate(subStates.begin(), subStates.end(), 0.0, [](double sum, const auto& substate) {
+		return sum + substate->getTotalDev();
+	});
+}
+
+double V3::Country::getOverPopulation() const
+{
+	double pops = 0;
+	double capacity = 0;
+	for (const auto& subState: subStates)
+	{
+		pops += subState->getSubStatePops().getPopCount();
+		capacity += subState->getResource("bg_agriculture");
+	}
+	capacity *= 5000;
+	if (capacity < 5000)
+	{
+		return 10.0;
+	}
+	const auto ratio = pops / capacity;
+	if (ratio < 1.0)
+	{
+		return 1.0;
+	}
+	return ratio;
 }
 
 void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
@@ -920,8 +981,17 @@ void V3::Country::convertCharacters(const mappers::CharacterTraitMapper& charact
 			 processedData.capitalStateName,
 			 tag,
 			 conversionDate);
-		if (character.ruler && ruler && consort)
-			character.married = true;
+		if (character.ruler && ruler)
+		{
+			if (consort)
+			{
+				character.married = true;
+			}
+			if (!processedData.ideaEffect.rulingInterestGroups.empty())
+			{
+				character.interestGroup = *processedData.ideaEffect.rulingInterestGroups.begin();
+			}
+		}
 
 		processedData.characters.emplace_back(character);
 	}
@@ -945,6 +1015,13 @@ int V3::Country::getPopCount(const std::vector<std::shared_ptr<SubState>>& theSu
 {
 	return std::accumulate(theSubStates.begin(), theSubStates.end(), 0, [](int sum, const auto& substate) {
 		return sum + substate->getSubStatePops().getPopCount();
+	});
+}
+
+int V3::Country::getVanillaPopCount() const
+{
+	return std::accumulate(subStates.begin(), subStates.end(), 0, [](int sum, const auto& substate) {
+		return sum + substate->getVanillaPopCount();
 	});
 }
 

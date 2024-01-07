@@ -36,7 +36,8 @@ class Configuration: commonItems::parser
 	enum class ECONOMY
 	{
 		CivLevel = 1,
-		DevPerPop = 2,
+		DevPopVanilla = 2,
+		DevPopActual = 3,
 		Test = 9
 	};
 	enum class SPLITTCS
@@ -56,6 +57,7 @@ class Configuration: commonItems::parser
 		SPLITTCS splitTCs = SPLITTCS::SuperRegions;
 		bool convertAll = false;
 		bool downTiers = true;
+		double shapingFactor = 1.0;
 		// runtime options.
 		bool vn = false; // Voltaire's Nightmare
 	} configBlock;

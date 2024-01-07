@@ -1,0 +1,281 @@
+﻿# has_paternalist_ideology
+# liberal_revolution_ongoing
+# reactionary_revolution_ongoing
+# ig_is_dreyfusard
+# has_progressive_ideology
+# is_matriarchal_country
+# is_matriarchal_pop
+# is_feminist_country
+# is_feminist_pop
+# is_feminist_character
+# is_oppressed_gender
+# should_have_male_characters 
+# should_have_female_characters
+
+# IG scope
+has_paternalist_ideology = {
+	OR = {
+		has_ideology = ideology:ideology_paternalistic
+		has_ideology = ideology:ideology_maternalistic			### Converter
+		has_ideology = ideology:ideology_scholar_paternalistic
+		has_ideology = ideology:ideology_junker_paternalistic
+		has_ideology = ideology:ideology_papal_paternalistic
+	}
+}
+
+liberal_revolution_ongoing = {
+	custom_tooltip = {
+		text = liberal_revolution_ongoing_tt
+		any_political_movement = {
+			is_revolutionary_movement = yes
+			OR = {
+				any_supporting_interest_group = {
+					OR = {
+						has_ideology = ideology:ideology_republican
+						has_ideology = ideology:ideology_liberal
+						leader = {
+							OR = {
+								has_ideology = ideology:ideology_radical
+								has_ideology = ideology:ideology_republican_leader
+								has_ideology = ideology:ideology_social_democrat
+								has_ideology = ideology:ideology_humanitarian	
+								has_ideology = ideology:ideology_humanitarian_royalist
+								is_feminist_character = yes			### Converter
+							}		
+						}
+						AND = {
+							law_stance = {
+								law = law_type:law_autocracy
+								value < neutral
+							}
+							law_stance = {
+								law = law_type:law_council_republic
+								value < neutral
+							}
+						}
+					}
+				}
+				any_supporting_character = {
+					has_role = agitator
+					OR = {
+						has_ideology = ideology:ideology_radical
+						has_ideology = ideology:ideology_republican_leader
+						has_ideology = ideology:ideology_social_democrat
+						has_ideology = ideology:ideology_humanitarian	
+						has_ideology = ideology:ideology_humanitarian_royalist
+						is_feminist_character = yes			### Converter
+					}
+					AND = {
+						law_stance = {
+							law = law_type:law_autocracy
+							value < neutral
+						}
+						law_stance = {
+							law = law_type:law_council_republic
+							value < neutral
+						}
+					}
+				}
+			}		
+		}
+	}
+}
+
+reactionary_revolution_ongoing = {
+	custom_tooltip = {
+		text = reactionary_revolution_ongoing_tt
+		any_political_movement = {
+			is_revolutionary_movement = yes
+			OR = {
+				any_supporting_interest_group = {
+					OR = {
+						has_ideology = ideology:ideology_pro_slavery
+						has_ideology = ideology:ideology_paternalistic
+						has_ideology = ideology:ideology_maternalistic			### Converter
+						leader = {
+							OR = {
+								has_ideology = ideology:ideology_slaver
+								has_ideology = ideology:ideology_fascist
+								has_ideology = ideology:ideology_integralist
+								has_ideology = ideology:ideology_royalist
+								has_ideology = ideology:ideology_orleanist
+								has_ideology = ideology:ideology_bonapartist
+								has_ideology = ideology:ideology_legitimist
+								has_ideology = ideology:ideology_theocrat
+								has_ideology = ideology:ideology_ethno_nationalist
+								has_ideology = ideology:ideology_traditionalist
+								has_ideology = ideology:ideology_corporatist
+							}
+						}
+						AND = {
+							law_stance = {
+								law = law_type:law_autocracy
+								value >= neutral
+							}
+							law_stance = {
+								law = law_type:law_council_republic
+								value < neutral
+							}
+						}
+					}
+				}
+				any_supporting_character = {
+					has_role = agitator
+					OR = {
+						has_ideology = ideology:ideology_slaver
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_integralist
+						has_ideology = ideology:ideology_royalist
+						has_ideology = ideology:ideology_orleanist
+						has_ideology = ideology:ideology_bonapartist
+						has_ideology = ideology:ideology_legitimist
+						has_ideology = ideology:ideology_theocrat
+						has_ideology = ideology:ideology_ethno_nationalist
+						has_ideology = ideology:ideology_traditionalist
+					}
+					AND = {
+						OR = {
+							law_stance = {
+								law = law_type:law_autocracy
+								value >= neutral
+							}
+							law_stance = {
+								law = law_type:law_national_supremacy
+								value >= neutral
+							}
+							law_stance = {
+								law = law_type:law_slavery_banned
+								value < neutral
+							}
+						}
+						law_stance = {
+							law = law_type:law_council_republic
+							value < neutral
+						}
+					}
+				}
+			}		
+		}
+	}	
+}
+
+ig_is_dreyfusard = {
+	OR = {
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_trade_unions
+		is_interest_group_type = ig_petty_bourgeoisie
+		is_interest_group_type = ig_rural_folk
+		is_interest_group_type = ig_industrialists
+	}
+	OR = {
+		leader = {
+			has_ideology = ideology:ideology_vanguardist
+		}
+		leader = {
+			has_ideology = ideology:ideology_atheist
+		}
+		leader = {
+			has_ideology = ideology:ideology_anarchist
+		}
+		leader = {
+			has_ideology = ideology:ideology_communist
+		}
+		leader = {
+			has_ideology = ideology:ideology_republican_leader
+		}
+		leader = {
+			has_ideology = ideology:ideology_radical
+		}
+		leader = {
+			is_feminist_character = yes			### Converter
+		}
+		leader = {
+			has_ideology = ideology:ideology_abolitionist
+		}
+		leader = {
+			has_ideology = ideology:ideology_pacifist
+		}
+		leader = {
+			has_ideology = ideology:ideology_social_democrat
+		}
+		leader = {
+			has_ideology = ideology:ideology_humanitarian
+		}
+		leader = {
+			has_ideology = ideology:ideology_humanitarian_royalist
+		}
+	}
+}
+
+has_progressive_ideology = {
+	OR = {
+		has_ideology = ideology:ideology_atheist
+		has_ideology = ideology:ideology_radical
+		is_feminist_character = yes			### Converter
+		has_ideology = ideology:ideology_pacifist
+		has_ideology = ideology:ideology_social_democrat
+		has_ideology = ideology:ideology_humanitarian
+		has_ideology = ideology:ideology_humanitarian_royalist
+	}
+}
+
+is_matriarchal_country = {
+	OR = {
+		any_primary_culture = { has_discrimination_trait = matriarchal }
+		religion = { has_discrimination_trait = matriarchal }
+	}
+}
+
+is_matriarchal_pop = {
+	OR = {
+		culture = { has_discrimination_trait = matriarchal }
+		religion = { has_discrimination_trait = matriarchal }
+	}
+}
+
+is_feminist_country = {
+	OR = {
+		any_primary_culture = { has_discrimination_trait = feminist }
+		religion = { has_discrimination_trait = feminist }
+	}
+}
+
+is_feminist_pop = {
+	OR = {
+		culture = { has_discrimination_trait = feminist }
+		religion = { has_discrimination_trait = feminist }
+	}
+}
+
+is_feminist_character = {
+	OR = {
+		has_ideology = ideology:ideology_feminist
+		has_ideology = ideology:ideology_masculist
+	}
+}
+
+is_oppressed_gender = {
+	trigger_if = {
+		limit = {
+			owner = { is_matriarchal_country = no }
+		}
+		is_female = no
+	}
+	trigger_else = { is_female = yes }
+}
+
+should_have_male_characters = {
+	trigger_if = {
+		limit = { is_matriarchal_country = yes }
+		is_feminist_country = yes
+	}
+	trigger_else = { is_matriarchal_country = no }
+}
+
+should_have_female_characters = {
+	trigger_if = {
+		limit = { is_matriarchal_country = no }
+		is_feminist_country = yes
+	}
+	trigger_else = { is_matriarchal_country = yes }
+}

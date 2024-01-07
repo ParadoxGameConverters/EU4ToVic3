@@ -1,0 +1,1323 @@
+﻿namespace = zzz_cc_dynamic_characters
+
+zzz_cc_dynamic_characters.1 = {
+	type = country_event # It means that, root is the country which happend the event, instead of state.
+	hidden = yes # if there are no option, make it hidden
+	
+	trigger = {
+		NOT = { is_country_type = decentralized }
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				game_date < 1836.3.1
+				any_primary_culture = {
+					OR = {
+						is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_american_cultures target = this }
+						is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+						is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+					}
+				}
+				has_game_rule = yes_converter_colonial_claims
+				is_subject = no
+				exists = capital
+			}
+			every_state = {
+				limit = {
+					NOR = {
+						owner = ROOT
+						owner = { is_country_type = decentralized }
+					}
+					converter_shares_colonial_region_with_capital = yes
+				}
+				state_region = { add_claim = ROOT }
+			}
+		}
+		if = {
+			limit = {
+				NOT = { has_game_rule = converter_native_incorporation_none }
+				game_date < 1836.3.1
+				is_colonized_country = yes
+				is_subject = yes
+				religion = { shares_heritage_trait_with_state_religion = root.overlord }
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { zzz_converter_state_is_in_canada = yes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_canadian_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { zzz_converter_state_is_in_america = yes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_american_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { zzz_converter_state_is_in_california = yes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_californian_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { zzz_converter_state_is_in_mexico = yes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_mexican_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { zzz_converter_state_is_in_gran_colombia = yes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_colombian_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { region = sr:region_andes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_andean_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { region = sr:region_brazil }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_brazilian_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { zzz_converter_state_is_in_argentina = yes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_americas = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_platinean_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { zzz_converter_state_is_in_australia = yes }
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_oceanic_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }
+					}
+					overlord = {
+						capital = { NOT = { region = sr:region_oceania } }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_oceanic_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_australian_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					exists = capital
+					capital = { region = sr:region_southern_africa }
+					any_primary_culture = {
+						has_discrimination_trait = african_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+					}
+					overlord = {
+						capital = { state_is_in_africa = no }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = african_heritage
+						NOT = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_cape_cultures
+						target = this
+					}
+					if = {
+						limit = {
+							has_game_rule = converter_native_incorporation_full
+							NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+						}
+						add_to_global_variable_list = {
+							name = global_colonial_primary_cultures
+							target = this
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = capital
+				capital = { region = sr:region_southern_africa }
+				any_primary_culture = { has_discrimination_trait = african_settler }
+			}
+			add_to_global_variable_list = {
+				name = global_kruger_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_north_america = yes
+				any_scope_state = { region = sr:region_new_england }
+				global_var:new_england_yankee_culture = {
+					any_scope_pop = {
+						owner = root
+						culture_accepted = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_new_england_yankee_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_north_america = yes
+				any_scope_state = { region = sr:region_the_midwest }
+				global_var:midwest_yankee_culture = {
+					any_scope_pop = {
+						owner = root
+						culture_accepted = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_midwest_yankee_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_north_america = yes
+				any_scope_state = { region = sr:region_dixie }
+				global_var:dixie_culture = {
+					any_scope_pop = {
+						owner = root
+						culture_accepted = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_dixie_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_north_america = yes
+				any_scope_state = { region = sr:region_dixie }
+				global_var:afro_amer_culture = {
+					any_scope_pop = {
+						owner = root
+						OR = {
+							is_pop_type = slaves
+							culture_accepted = yes
+						}
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_afro_amer_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_north_america = yes
+				any_scope_state = { region = sr:region_mexico }
+				global_var:mexico_culture = {
+					any_scope_pop = {
+						owner = root
+						culture_accepted = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_mexico_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_south_america = yes
+				any_scope_state = { region = sr:region_brazil }
+				global_var:brazil_culture = {
+					any_scope_pop = {
+						owner = root
+						culture_accepted = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_brazil_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_south_america = yes
+				any_scope_state = { region = sr:region_brazil }
+				global_var:afro_braz_culture = {
+					any_scope_pop = {
+						owner = root
+						OR = {
+							is_pop_type = slaves
+							culture_accepted = yes
+						}
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_afro_braz_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_south_america = yes
+				any_scope_state = { region = sr:region_andes }
+				global_var:andes_culture = {
+					any_scope_pop = {
+						owner = root
+						culture_accepted = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_andes_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_south_america = yes
+				any_scope_state = { region = sr:region_la_plata }
+				global_var:la_plata_culture = {
+					any_scope_pop = {
+						owner = root
+						culture_accepted = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_la_plata_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_europe = yes
+				any_scope_state = {
+					OR = {
+						region = sr:region_france
+						region = sr:region_occitania
+						region = sr:region_rhine
+					}
+				}
+				global_var:fra_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_fra_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_europe = yes
+				any_scope_state = {
+					OR = {
+						region = sr:region_france
+						region = sr:region_occitania
+						region = sr:region_italy
+						region = sr:region_iberia
+					}
+				}
+				global_var:occ_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_occ_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_europe = yes
+				any_scope_state = {
+					OR = {
+						region = sr:region_rhine
+						region = sr:region_france
+						region = sr:region_north_germany
+					}
+				}
+				global_var:wal_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_wal_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_europe = yes
+				any_scope_state = {
+					OR = {
+						region = sr:region_rhine
+						region = sr:region_france
+						region = sr:region_north_germany
+					}
+				}
+				global_var:dut_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_dut_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_europe = yes
+				any_scope_state = {
+					OR = {
+						region = sr:region_north_germany
+						region = sr:region_south_germany
+						region = sr:region_rhine
+					}
+				}
+				global_var:nor_ger_culture = {
+					any_scope_pop = {
+						owner = root
+						#OR = {
+						#	pop_has_primary_culture = yes
+						#	prev = { shares_heritage_and_other_trait_with_any_primary_culture = yes }
+						#}
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_nor_ger_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_europe = yes
+				any_scope_state = {
+					OR = {
+						region = sr:region_north_germany
+						region = sr:region_south_germany
+						region = sr:region_rhine
+					}
+				}
+				global_var:sou_ger_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_sou_ger_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_europe = yes
+				any_scope_state = {
+					OR = {
+						region = sr:region_danubia
+						region = sr:region_poland
+						region = sr:region_south_germany
+						region = sr:region_balkans
+					}
+				}
+				global_var:hun_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_hun_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_europe = yes
+				any_scope_state = {
+					OR = {
+						region = sr:region_danubia
+						region = sr:region_poland
+						region = sr:region_south_germany
+						region = sr:region_balkans
+					}
+				}
+				global_var:pol_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_pol_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_europe = yes
+				any_scope_state = {
+					OR = {
+						region = sr:region_north_sea_coast
+						region = sr:region_england
+					}
+				}
+				global_var:ire_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_ire_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_europe = yes
+				any_scope_state = {
+					OR = {
+						region = sr:region_north_sea_coast
+						region = sr:region_england
+					}
+				}
+				global_var:gbr_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_gbr_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_europe = yes
+				any_scope_state = { region = sr:region_baltic }
+				global_var:nor_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_nor_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_europe = yes
+				any_scope_state = { region = sr:region_baltic }
+				global_var:dan_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_den_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_europe = yes
+				any_scope_state = { region = sr:region_baltic }
+				global_var:swe_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_swe_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_europe = yes
+				any_scope_state = { region = sr:region_baltic }
+				global_var:finn_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_finn_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				exists = capital
+				capital = {
+					OR = {
+						region = sr:region_russia
+						region = sr:region_dnieper
+						region = sr:region_baltic
+					}
+				}
+				any_scope_state = {
+					OR = {
+						region = sr:region_russia
+						region = sr:region_dnieper
+						region = sr:region_baltic
+					}
+				}
+				global_var:rus_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_rus_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				exists = capital
+				capital = {
+					OR = {
+						region = sr:region_russia
+						region = sr:region_dnieper
+						region = sr:region_baltic
+					}
+				}
+				any_scope_state = {
+					OR = {
+						region = sr:region_russia
+						region = sr:region_dnieper
+						region = sr:region_baltic
+					}
+				}
+				global_var:ukr_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_ukr_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_europe = yes
+					country_is_in_middle_east = yes
+					country_is_in_africa = yes
+				}
+				any_scope_state = { region = sr:region_italy }
+				global_var:nor_ita_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_nor_ita_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_europe = yes
+					country_is_in_middle_east = yes
+					country_is_in_africa = yes
+				}
+				any_scope_state = { region = sr:region_italy }
+				global_var:sou_ita_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_sou_ita_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_europe = yes
+					country_is_in_africa = yes
+				}
+				any_scope_state = { region = sr:region_iberia }
+				global_var:pi_i_margall_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_pi_i_margall_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_europe = yes
+					country_is_in_africa = yes
+				}
+				any_scope_state = { region = sr:region_iberia }
+				global_var:zorrilla_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_zorrilla_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_europe = yes
+					country_is_in_africa = yes
+				}
+				any_scope_state = { region = sr:region_iberia }
+				global_var:por_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_por_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_europe = yes
+					country_is_in_middle_east = yes
+					country_is_in_africa = yes
+				}
+				any_scope_state = { region = sr:region_balkans }
+				global_var:gre_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_gre_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_europe = yes
+					country_is_in_middle_east = yes
+					country_is_in_africa = yes
+				}
+				any_scope_state = { region = sr:region_danubia }
+				global_var:pitesti_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_pitesti_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_europe = yes
+					country_is_in_middle_east = yes
+					country_is_in_africa = yes
+				}
+				any_scope_state = { region = sr:region_balkans }
+				global_var:njegos_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_njegos_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_europe = yes
+					country_is_in_middle_east = yes
+					country_is_in_africa = yes
+				}
+				any_scope_state = { region = sr:region_balkans }
+				global_var:boroevic_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_boroevic_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_europe = yes
+					country_is_in_middle_east = yes
+					country_is_in_africa = yes
+				}
+				any_scope_state = { region = sr:region_north_africa }
+				global_var:ber_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_ber_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_europe = yes
+					country_is_in_middle_east = yes
+					country_is_in_africa = yes
+				}
+				any_scope_state = {
+					OR = {
+						region = sr:region_anatolia
+						region = sr:region_caucasus
+						region = sr:region_balkans
+					}
+				}
+				global_var:tur_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_tur_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_middle_east = yes
+					country_is_in_africa = yes
+				}
+				any_scope_state = {
+					OR = {
+						region = sr:region_nile_basin
+						region = sr:region_ethiopia
+						region = sr:region_north_africa
+						region = sr:region_arabic
+					}
+				}
+				global_var:urabi_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_urabi_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_middle_east = yes
+					country_is_in_central_asia = yes
+					country_is_in_india = yes
+				}
+				any_scope_state = {
+					OR = {
+						region = sr:region_persia
+						region = sr:region_central_asia
+						region = sr:region_himalayas
+						region = sr:region_north_india
+					}
+				}
+				global_var:afgh_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_afgh_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_east_asia = yes
+					country_is_in_central_asia = yes
+				}
+				any_scope_state = {
+					OR = {
+						region = sr:region_south_china
+						region = sr:region_north_china
+					}
+				}
+				global_var:han_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_han_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_east_asia = yes
+					country_is_in_central_asia = yes
+				}
+				any_scope_state = { region = sr:region_central_asia }
+				global_var:borjigin_culture = {
+					any_scope_pop = { owner = root }
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_borjigin_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_east_asia = yes
+				any_scope_state = { region = sr:region_manchuria }
+				global_var:manchu_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_manchu_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				country_is_in_east_asia = yes
+				any_scope_state = { region = sr:region_japan }
+				global_var:jap_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_jap_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_east_asia = yes
+					country_is_in_southeast_asia = yes
+				}
+				any_scope_state = { region = sr:region_indochina }
+				global_var:chakri_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_chakri_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_central_asia = yes
+					country_is_in_india = yes
+				}
+				any_scope_state = { region = sr:region_north_india }
+				global_var:singh_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_singh_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				any_primary_culture = { has_variable = potential_caudillismo_culture }
+			}
+			every_primary_culture = {
+				limit = { has_variable = potential_caudillismo_culture }
+				remove_variable = potential_caudillismo_culture
+			}
+		}
+		if = {
+			limit = {
+				any_primary_culture = { has_variable = potential_russian_patriarch_culture }
+			}
+			every_primary_culture = {
+				limit = { has_variable = potential_russian_patriarch_culture }
+				remove_variable = potential_russian_patriarch_culture
+			}
+		}
+		if = {
+			limit = {
+				any_primary_culture = { has_variable = potential_pious_culture }
+			}
+			every_primary_culture = {
+				limit = { has_variable = potential_pious_culture }
+				remove_variable = potential_pious_culture
+			}
+		}
+		if = {
+			limit = {
+				any_primary_culture = { has_variable = potential_atheist_culture }
+			}
+			every_primary_culture = {
+				limit = { has_variable = potential_atheist_culture }
+				remove_variable = potential_atheist_culture
+			}
+		}
+	}
+
+	after = {
+		if = {
+			limit = {
+				NOT = { has_global_variable = zzz_converter_effects_happened }
+			}
+			set_global_variable = zzz_converter_effects_happened
+		}
+	}
+}

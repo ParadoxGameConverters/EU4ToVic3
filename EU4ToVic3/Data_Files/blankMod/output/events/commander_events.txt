@@ -1,0 +1,466 @@
+﻿namespace = commander_events
+
+commander_events.2 = { #Commanders habit is getting out of control
+	type = country_event
+	placement = ROOT
+
+	title = commander_events.2.t
+	desc = commander_events.2.d
+	flavor = commander_events.2.f
+
+	gui_window = event_window_1char_tabloid
+
+	left_icon = scope:commander_with_addiction
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		any_scope_character = {
+			has_role = general
+			is_busy = no
+			is_ruler = no
+			OR = {
+				has_trait = alcoholic
+				has_trait = opium_addiction
+				has_trait = cocaine_addiction
+			}
+		}
+	}
+
+	immediate = {
+		random_scope_character = {
+			limit = {
+				has_role = general
+				is_busy = no
+				is_ruler = no
+				OR = {
+					has_trait = alcoholic
+					has_trait = opium_addiction
+					has_trait = cocaine_addiction
+				}
+			}
+			save_scope_as = commander_with_addiction
+		}
+	}
+
+	cancellation_trigger = {
+		NOT = {
+			exists = scope:commander_with_addiction
+		}
+	}
+
+	option = { #Fire them
+		name = commander_events.2.a
+		custom_tooltip = commander_events.2.a.tt
+		hidden_effect = {
+			scope:commander_with_addiction = {
+				kill_character = yes
+			}
+		}
+	}
+
+	option = { #They'll be fine
+		name = commander_events.2.b
+		default_option = yes
+		scope:commander_with_addiction = {
+			add_modifier = {
+				name = modifier_commander_with_addiction
+				months = normal_modifier_time
+			}
+		}
+	}
+}
+
+commander_events.4 = {
+	type = country_event
+    placement = ROOT
+
+    title = commander_events.4.t
+    desc = commander_events.4.d
+    flavor = commander_events.4.f
+
+    gui_window = event_window_2char
+
+	left_icon = scope:arguing_commander_one
+	right_icon = scope:arguing_commander_two
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/2Characters"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+    duration = 3
+
+	trigger = {
+		any_scope_character = {
+			or = {
+				has_role = general
+				has_role = admiral
+			}
+			is_ruler = no
+			is_busy = no
+			OR = {
+				has_trait = alcoholic
+				has_trait = opium_addiction
+				has_trait = cocaine_addiction
+			}
+			OR = {
+				has_trait = defense_in_depth_specialist
+				has_trait = expert_artillery_commander
+				has_trait = expert_naval_commander
+				has_trait = expert_convoy_raider
+				has_trait = celebrity_commander
+			}
+		}
+		any_scope_character = {
+			or = {
+				has_role = general
+				has_role = admiral
+			}
+			is_ruler = no
+			is_busy = no
+			NOT = {
+				has_trait = alcoholic
+				has_trait = opium_addiction
+				has_trait = cocaine_addiction
+			}
+		}
+	}
+
+	immediate = {
+		random_scope_character = {
+			limit = {
+				or = {
+					has_role = general
+					has_role = admiral
+				}
+				is_ruler = no
+				is_busy = no
+				NOT = {
+					has_trait = alcoholic
+					has_trait = opium_addiction
+					has_trait = cocaine_addiction
+				}
+			}
+			save_scope_as = arguing_commander_one
+			interest_group = { 
+				save_scope_as = arguing_commander_one_IG
+			}
+		}
+
+		random_scope_character = {
+			limit = {
+				or = {
+					has_role = general
+					has_role = admiral
+				}
+				is_ruler = no
+				is_busy = no
+				OR = {
+					has_trait = alcoholic
+					has_trait = opium_addiction
+					has_trait = cocaine_addiction
+				}
+				OR = {
+					has_trait = defense_in_depth_specialist
+					has_trait = expert_artillery_commander
+					has_trait = expert_naval_commander
+					has_trait = expert_convoy_raider
+					has_trait = celebrity_commander
+				}
+				NOT = { this = scope:arguing_commander_one }
+			}
+			save_scope_as = arguing_commander_two
+		}
+	}
+
+	cancellation_trigger = {
+		NOR = {
+			exists = scope:arguing_commander_one
+			exists = scope:arguing_commander_two
+		}
+	}
+
+	option = {
+		name = commander_events.4.a
+		scope:arguing_commander_one_IG = {
+			add_modifier = {
+				name = commander_kept
+				months = short_modifier_time
+			}
+		}
+        default_option = yes
+	}
+
+	option = {
+		name = commander_events.4.b
+		custom_tooltip = commander_events.4.b.tt
+		hidden_effect = {
+			scope:arguing_commander_two = {
+				kill_character = yes
+			}
+		}
+		scope:arguing_commander_one = {
+			add_modifier = {
+				name = commander_fired
+				months = short_modifier_time
+			}
+		}
+	}
+}
+
+# War of Progress
+commander_events.5 = {
+	type = country_event
+    placement = ROOT
+
+    title = commander_events.5.t
+    desc = commander_events.5.d
+    flavor = commander_events.5.f
+
+    gui_window = event_window_1char_tabloid
+
+	left_icon = scope:commander_invention
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+    duration = 3
+
+	trigger = {
+		any_scope_character = {
+			has_role = general
+			has_trait = meticulous
+		}
+		has_technology_researched = repeaters
+		NOT = { has_technology_researched = handcranked_machine_gun}
+		NOT = { has_technology_researched = bolt_action_rifles}
+		OR = {
+			can_research = handcranked_machine_gun
+			can_research = bolt_action_rifles
+		}
+	}
+
+	immediate = {
+		random_scope_character = {
+			limit = {
+				has_role = general
+				has_trait = meticulous
+			}
+			save_scope_as = commander_invention
+		}
+	}
+
+	cancellation_trigger = {
+		NOT = {
+			exists = scope:commander_invention
+		}
+	}
+
+	option = {
+		name = commander_events.5.a
+		default_option = yes
+		add_technology_progress = {	
+			progress = 4150
+			technology = handcranked_machine_gun
+		}
+	}
+
+	option = {
+		name = commander_events.5.b
+		add_technology_progress = {	
+			progress = 6000
+			technology = bolt_action_rifles
+		}
+	}
+}
+
+# Psychological Warfare
+# in loving memory of Matthew J. Clohessy, now living a better life as a programmer, may his content not be forgotten
+
+commander_events.6 = {
+	type = country_event
+    placement = ROOT
+
+    title = commander_events.6.t
+    desc = commander_events.6.d
+    flavor = commander_events.6.f
+
+    event_image = {
+		video = "europenorthamerica_before_the_battle"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+    duration = 3
+
+	trigger = {
+		NOT = { has_variable = psychological_warfare_var }
+		any_scope_character = {
+			is_busy = no
+			has_role = general
+			OR = {
+				has_trait = romantic
+				has_trait = arrogant
+				has_trait = bigoted
+				has_trait = reckless
+				has_trait = ambitious
+				has_trait = imperious
+				has_trait = charismatic
+				has_trait = hedonist
+				has_trait = persistent
+			}
+			NOR = {
+				has_trait = meticulous
+				has_trait = cautious
+				has_trait = pious
+			}
+		}
+		any_interest_group = {
+			is_marginal = no
+			leader = {
+				NOT = { has_trait = syphilis }
+				is_oppressed_gender = no		### Converter
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = psychological_warfare_var
+		random_scope_character = {
+			limit = {
+				has_role = general
+				is_busy = no
+				OR = {
+					has_trait = romantic
+					has_trait = arrogant
+					has_trait = bigoted
+					has_trait = reckless
+					has_trait = ambitious
+					has_trait = imperious
+					has_trait = charismatic
+					has_trait = hedonist
+					has_trait = persistent
+				}
+				NOR = {
+					has_trait = meticulous
+					has_trait = cautious
+					has_trait = pious
+				}
+			}
+			set_variable = seducer_commander_var
+			save_scope_as = seducer_commander
+		}
+		random_interest_group = {
+			limit = {
+				is_marginal = no
+				leader = {
+					NOT = { 
+						has_trait = syphilis
+						has_variable = seducer_commander_var
+					}
+					is_oppressed_gender = no		### Converter
+				}
+			}
+			save_scope_as = cheated_ig
+			leader = {
+				save_scope_as = cheated_leader
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		NOR = {
+			exists = scope:seducer_commander
+			exists = scope:cheated_leader
+			scope:cheated_ig = { is_marginal = yes }
+		}
+	}
+
+	option = { #cover the general
+		name = commander_events.6.a
+		default_option = yes
+		custom_tooltip = commander_events.6.a.tt
+		scope:cheated_leader = {
+			add_trait = syphilis
+			if = {
+				limit = {
+					NOT = { has_trait = alcoholic }
+				}
+				random_list = {
+					10 = { add_trait = alcoholic }
+					90 = { }
+				}
+			}
+		}
+		scope:seducer_commander = {
+			if = {
+				limit = { NOT = { has_trait = syphilis } }
+				add_trait = syphilis
+			}
+			remove_variable = seducer_commander_var
+		}
+		scope:cheated_ig = {
+			add_modifier = {
+				name = covered_affair_modifier #disapprove
+				months = normal_modifier_time
+			}
+		}
+	}
+
+	option = { #bruh
+		name = commander_events.6.b
+		custom_tooltip = commander_events.6.b.tt
+		hidden_effect = {
+			scope:seducer_commander = {
+				kill_character = yes
+				remove_variable = seducer_commander_var
+			}		
+		}
+		scope:cheated_leader = {
+			add_trait = syphilis
+		}
+		scope:cheated_ig = {
+			add_modifier = {
+				name = punished_commander_modifier #approve
+				months = normal_modifier_time
+			}
+		}
+	}
+	
+	option = { #let them fight
+		name = commander_events.6.c
+		trigger = { #if the leader has a reckless trait he punches the other guy
+			scope:cheated_leader = {
+				has_trait = reckless
+			}
+		}
+		scope:cheated_leader = {
+			add_trait = syphilis
+			add_modifier = {
+				name = punching_leader_modifier #popularity
+				months = normal_modifier_time
+			}
+		}
+		scope:seducer_commander = {
+			add_modifier = {
+				name = punched_commander_modifier #popularity bad
+				months = normal_modifier_time
+			}
+			remove_variable = seducer_commander_var
+			if = {
+				limit = { NOT = { has_trait = syphilis } }
+				add_trait = syphilis
+			}
+		}
+	}
+}

@@ -1,0 +1,2898 @@
+﻿namespace = zzz_cc_confederation
+
+# American colony absorbs a poorer neighbor
+zzz_cc_confederation.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.1.t
+	desc = zzz_cc_confederation.1.d
+	flavor = zzz_cc_confederation.1.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_neighbouring_state = {
+			limit = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+			owner = { save_scope_as = canada_annex_scope }
+		}
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+	}
+
+	option = {
+		name = can_aus.1.a
+		default_option = yes
+		hidden_effect = {
+			every_state = {
+				limit = {
+					has_claim_by = scope:canada_annex_scope
+				}
+				state_region = {
+					remove_claim = scope:canada_annex_scope
+					add_claim = ROOT
+				}
+			}
+		}
+		annex_with_incorporation = scope:canada_annex_scope
+	}
+}
+
+# Overlord mashes 2 Americans together
+zzz_cc_confederation.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.2.t
+	desc = zzz_cc_confederation.2.d
+	flavor = zzz_cc_confederation.1.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_1
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+				NOT = {
+					scope:canada_scope_1 = THIS
+				}
+			}
+			save_scope_as = canada_scope_2
+		}
+	}
+
+	option = {
+		name = can_aus.2.a
+		default_option = yes
+		if = {
+			limit = {
+				scope:canada_scope_1.gdp > scope:canada_scope_2.gdp
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_2
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_2
+						add_claim = scope:canada_scope_1
+					}
+				}
+			}
+			scope:canada_scope_1 = {
+				annex_with_incorporation = scope:canada_scope_2
+			}
+		}
+		else = {
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_1
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_1
+						add_claim = scope:canada_scope_2
+					}
+				}
+			}
+			scope:canada_scope_2 = {
+				annex_with_incorporation = scope:canada_scope_1
+			}
+		}
+	}
+}
+
+# Californian colony absorbs a poorer neighbor
+zzz_cc_confederation.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.1.t
+	desc = zzz_cc_confederation.3.d
+	flavor = zzz_cc_confederation.3.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_neighbouring_state = {
+			limit = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+			owner = { save_scope_as = canada_annex_scope }
+		}
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+	}
+
+	option = {
+		name = can_aus.1.a
+		default_option = yes
+		hidden_effect = {
+			every_state = {
+				limit = {
+					has_claim_by = scope:canada_annex_scope
+				}
+				state_region = {
+					remove_claim = scope:canada_annex_scope
+					add_claim = ROOT
+				}
+			}
+		}
+		annex_with_incorporation = scope:canada_annex_scope
+	}
+}
+
+# Overlord mashes 2 Californians together
+zzz_cc_confederation.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.2.t
+	desc = zzz_cc_confederation.4.d
+	flavor = zzz_cc_confederation.3.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		ruler = {
+			save_scope_as = australia_overlord_ruler
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_1
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				NOT = {
+					scope:canada_scope_1 = THIS
+				}
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_2
+		}
+	}
+
+	option = {
+		name = can_aus.2.a
+		default_option = yes
+		if = {
+			limit = {
+				scope:canada_scope_1.gdp > scope:canada_scope_2.gdp
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_2
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_2
+						add_claim = scope:canada_scope_1
+					}
+				}
+			}
+			scope:canada_scope_1 = {
+				annex_with_incorporation = scope:canada_scope_2
+			}
+		}
+		else = {
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_1
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_1
+						add_claim = scope:canada_scope_2
+					}
+				}
+			}
+			scope:canada_scope_2 = {
+				annex_with_incorporation = scope:canada_scope_1
+			}
+		}
+	}
+}
+
+# America complete event for America
+zzz_cc_confederation.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.5.t
+	desc = zzz_cc_confederation.5.d
+	flavor = zzz_cc_confederation.5.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+		}
+		if = {
+			limit = {
+				has_game_rule = converter_native_incorporation_access_addition
+				any_primary_culture = {
+					has_discrimination_trait = indigenous_american_heritage
+					is_target_in_global_variable_list = { name = global_american_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					has_discrimination_trait = indigenous_american_heritage
+					is_target_in_global_variable_list = { name = global_american_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.5.a
+		add_modifier = {
+			name = usa_unified_america
+			months = normal_modifier_time
+		}
+		if = {
+			limit = {
+				NOT = { is_subject_type = subject_type_dominion }
+			}
+			change_subject_type = subject_type_dominion
+		}
+		if = {
+			limit = {
+				top_overlord = {
+					any_scope_state = { zzz_converter_state_is_in_america = yes }
+				}
+			}
+			top_overlord = {
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_america = yes }
+					set_state_owner = root
+				}
+			}
+		}
+		change_tag = USA
+	}
+
+	after = {
+		every_primary_culture = {
+			c:USA = { remove_primary_culture = prev }
+		}
+		every_scope_state = {
+			limit = { zzz_converter_state_is_in_america = yes }
+			every_scope_pop = {
+				limit = {
+					culture = {
+						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+						is_target_in_global_variable_list = { name = global_american_cultures target = this }
+					}
+				}
+				culture = {
+					c:USA = { add_primary_culture = prev }
+				}
+			}
+		}
+	}
+}
+
+# America complete event for Overlord
+zzz_cc_confederation.6 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.5.t
+	desc = zzz_cc_confederation.6.d
+	flavor = zzz_cc_confederation.5.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+				any_scope_state = {
+					OR = {
+						state_region = s:STATE_MASSACHUSETTS
+						state_region = s:STATE_MAINE
+						state_region = s:STATE_CONNECTICUT
+						state_region = s:STATE_RHODE_ISLAND
+						state_region = s:STATE_VERMONT
+						state_region = s:STATE_NEW_HAMPSHIRE
+						state_region = s:STATE_PENNSYLVANIA
+						state_region = s:STATE_NEW_YORK
+						state_region = s:STATE_NEW_JERSEY
+						state_region = s:STATE_MINNESOTA
+						state_region = s:STATE_WISCONSIN
+						state_region = s:STATE_IOWA
+						state_region = s:STATE_MISSOURI
+						state_region = s:STATE_MICHIGAN
+						state_region = s:STATE_INDIANA
+						state_region = s:STATE_ILLINOIS
+						state_region = s:STATE_WEST_VIRGINIA
+						state_region = s:STATE_OHIO
+						state_region = s:STATE_KENTUCKY
+						state_region = s:STATE_TENNESSEE
+						state_region = s:STATE_MISSISSIPPI
+						state_region = s:STATE_ALABAMA
+						state_region = s:STATE_FLORIDA
+						state_region = s:STATE_GEORGIA
+						state_region = s:STATE_SOUTH_CAROLINA
+						state_region = s:STATE_NORTH_CAROLINA
+						state_region = s:STATE_VIRGINIA
+						state_region = s:STATE_DISTRICT_OF_COLUMBIA
+						state_region = s:STATE_MARYLAND
+						state_region = s:STATE_DELAWARE
+						state_region = s:STATE_LOUISIANA
+						state_region = s:STATE_ARKANSAS
+						state_region = s:STATE_NORTH_DAKOTA
+						state_region = s:STATE_SOUTH_DAKOTA
+					}
+					count >= 27
+				}
+			}
+			save_scope_as = canada_country
+		}
+		scope:canada_country = {
+			if = {
+				limit = {
+					has_game_rule = converter_native_incorporation_access_addition
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						is_target_in_global_variable_list = { name = global_american_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						is_target_in_global_variable_list = { name = global_american_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_colonial_primary_cultures
+						target = this
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.5.a
+		add_modifier = {
+			name = gbr_unified_america
+			months = normal_modifier_time
+		}
+		scope:canada_country = { change_tag = USA }
+	}
+
+	after = {
+		c:USA = {
+			every_primary_culture = {
+				c:USA = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { zzz_converter_state_is_in_america = yes }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_american_cultures target = this }
+						}
+					}
+					culture = {
+						c:USA = { add_primary_culture = prev }
+					}
+				}
+			}
+		}
+	}
+}
+
+# California complete event for California
+zzz_cc_confederation.7 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.7.t
+	desc = zzz_cc_confederation.7.d
+	flavor = zzz_cc_confederation.7.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = converter_native_incorporation_access_addition
+				any_primary_culture = {
+					has_discrimination_trait = indigenous_american_heritage
+					is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					has_discrimination_trait = indigenous_american_heritage
+					is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.7.a
+		add_modifier = {
+			name = cal_unified_california
+			months = normal_modifier_time
+		}
+		if = {
+			limit = {
+				NOT = { is_subject_type = subject_type_dominion }
+			}
+			change_subject_type = subject_type_dominion
+		}
+		if = {
+			limit = {
+				top_overlord = {
+					any_scope_state = { zzz_converter_state_is_in_california = yes }
+				}
+			}
+			top_overlord = {
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_california = yes }
+					set_state_owner = root
+				}
+			}
+		}
+		change_tag = CAL
+	}
+
+	after = {
+		every_primary_culture = {
+			c:CAL = { remove_primary_culture = prev }
+		}
+		every_scope_state = {
+			limit = { zzz_converter_state_is_in_california = yes }
+			every_scope_pop = {
+				limit = {
+					culture = {
+						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+						is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+					}
+				}
+				culture = {
+					c:CAL = { add_primary_culture = prev }
+				}
+			}
+		}
+	}
+}
+
+# California complete event for Overlord
+zzz_cc_confederation.8 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.7.t
+	desc = zzz_cc_confederation.8.d
+	flavor = zzz_cc_confederation.7.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+				any_scope_state = {
+					OR = {
+						state_region = s:STATE_WASHINGTON
+						state_region = s:STATE_OREGON
+						state_region = s:STATE_IDAHO
+						state_region = s:STATE_MONTANA
+						state_region = s:STATE_WYOMING
+						state_region = s:STATE_CALIFORNIA
+						state_region = s:STATE_NEVADA
+						state_region = s:STATE_UTAH
+						state_region = s:STATE_ARIZONA
+						state_region = s:STATE_NEW_MEXICO
+						state_region = s:STATE_COLORADO
+						state_region = s:STATE_NEBRASKA
+						state_region = s:STATE_KANSAS
+						state_region = s:STATE_OKLAHOMA
+						state_region = s:STATE_TEXAS
+					}
+					count >= 12
+				}
+			}
+			save_scope_as = canada_country
+			ruler = {
+				save_scope_as = canada_country_ruler
+			}
+		}
+		scope:canada_country = {
+			if = {
+				limit = {
+					has_game_rule = converter_native_incorporation_access_addition
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_colonial_primary_cultures
+						target = this
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.7.a
+		add_modifier = {
+			name = gbr_unified_california
+			months = normal_modifier_time
+		}
+		scope:canada_country = { change_tag = CAL }
+	}
+
+	after = {
+		c:CAL = {
+			every_primary_culture = {
+				c:CAL = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { zzz_converter_state_is_in_california = yes }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+						}
+					}
+					culture = {
+						c:CAL = { add_primary_culture = prev }
+					}
+				}
+			}
+		}
+	}
+}
+
+# Mexican colony absorbs a poorer neighbor
+zzz_cc_confederation.9 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.1.t
+	desc = zzz_cc_confederation.9.d
+	flavor = zzz_cc_confederation.9.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_neighbouring_state = {
+			limit = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+			owner = { save_scope_as = canada_annex_scope }
+		}
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+	}
+
+	option = {
+		name = can_aus.1.a
+		default_option = yes
+		hidden_effect = {
+			every_state = {
+				limit = {
+					has_claim_by = scope:canada_annex_scope
+				}
+				state_region = {
+					remove_claim = scope:canada_annex_scope
+					add_claim = ROOT
+				}
+			}
+		}
+		annex_with_incorporation = scope:canada_annex_scope
+	}
+}
+
+# Overlord mashes 2 Mexicans together
+zzz_cc_confederation.10 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.2.t
+	desc = zzz_cc_confederation.10.d
+	flavor = zzz_cc_confederation.9.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_1
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+				NOT = {
+					scope:canada_scope_1 = THIS
+				}
+			}
+			save_scope_as = canada_scope_2
+		}
+	}
+
+	option = {
+		name = can_aus.2.a
+		default_option = yes
+		if = {
+			limit = {
+				scope:canada_scope_1.gdp > scope:canada_scope_2.gdp
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_2
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_2
+						add_claim = scope:canada_scope_1
+					}
+				}
+			}
+			scope:canada_scope_1 = {
+				annex_with_incorporation = scope:canada_scope_2
+			}
+		}
+		else = {
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_1
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_1
+						add_claim = scope:canada_scope_2
+					}
+				}
+			}
+			scope:canada_scope_2 = {
+				annex_with_incorporation = scope:canada_scope_1
+			}
+		}
+	}
+}
+
+# Colombian colony absorbs a poorer neighbor
+zzz_cc_confederation.11 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.1.t
+	desc = zzz_cc_confederation.11.d
+	flavor = zzz_cc_confederation.11.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_neighbouring_state = {
+			limit = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+			owner = { save_scope_as = canada_annex_scope }
+		}
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+	}
+
+	option = {
+		name = can_aus.1.a
+		default_option = yes
+		hidden_effect = {
+			every_state = {
+				limit = {
+					has_claim_by = scope:canada_annex_scope
+				}
+				state_region = {
+					remove_claim = scope:canada_annex_scope
+					add_claim = ROOT
+				}
+			}
+		}
+		annex_with_incorporation = scope:canada_annex_scope
+	}
+}
+
+# Overlord mashes 2 Colombians together
+zzz_cc_confederation.12 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.2.t
+	desc = zzz_cc_confederation.4.d
+	flavor = zzz_cc_confederation.11.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		ruler = {
+			save_scope_as = australia_overlord_ruler
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_1
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				NOT = {
+					scope:canada_scope_1 = THIS
+				}
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_2
+		}
+	}
+
+	option = {
+		name = can_aus.2.a
+		default_option = yes
+		if = {
+			limit = {
+				scope:canada_scope_1.gdp > scope:canada_scope_2.gdp
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_2
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_2
+						add_claim = scope:canada_scope_1
+					}
+				}
+			}
+			scope:canada_scope_1 = {
+				annex_with_incorporation = scope:canada_scope_2
+			}
+		}
+		else = {
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_1
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_1
+						add_claim = scope:canada_scope_2
+					}
+				}
+			}
+			scope:canada_scope_2 = {
+				annex_with_incorporation = scope:canada_scope_1
+			}
+		}
+	}
+}
+
+# Mexico complete event for Mexico
+zzz_cc_confederation.13 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.13.t
+	desc = zzz_cc_confederation.13.d
+	flavor = zzz_cc_confederation.13.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+		}
+		if = {
+			limit = {
+				has_game_rule = converter_native_incorporation_access_addition
+				any_primary_culture = {
+					has_discrimination_trait = indigenous_american_heritage
+					is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					has_discrimination_trait = indigenous_american_heritage
+					is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.13.a
+		add_modifier = {
+			name = mex_unified_mexico
+			months = normal_modifier_time
+		}
+		if = {
+			limit = {
+				NOT = { is_subject_type = subject_type_dominion }
+			}
+			change_subject_type = subject_type_dominion
+		}
+		if = {
+			limit = {
+				top_overlord = {
+					any_scope_state = { zzz_converter_state_is_in_mexico = yes }
+				}
+			}
+			top_overlord = {
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_mexico = yes }
+					set_state_owner = root
+				}
+			}
+		}
+		change_tag = MEX
+	}
+
+	after = {
+		every_primary_culture = {
+			c:MEX = { remove_primary_culture = prev }
+		}
+		every_scope_state = {
+			limit = { zzz_converter_state_is_in_mexico = yes }
+			every_scope_pop = {
+				limit = {
+					culture = {
+						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+						is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+					}
+				}
+				culture = {
+					c:MEX = { add_primary_culture = prev }
+				}
+			}
+		}
+	}
+}
+
+# Mexico complete event for Overlord
+zzz_cc_confederation.14 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.13.t
+	desc = zzz_cc_confederation.14.d
+	flavor = zzz_cc_confederation.13.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+				any_scope_state = {
+					OR = {
+						state_region = s:STATE_JALISCO
+						state_region = s:STATE_ZACATECAS
+						state_region = s:STATE_GUERRERO
+						state_region = s:STATE_MEXICO
+						state_region = s:STATE_CHIHUAHUA
+						state_region = s:STATE_DURANGO
+						state_region = s:STATE_RIO_GRANDE
+						state_region = s:STATE_SONORA
+						state_region = s:STATE_VERACRUZ
+						state_region = s:STATE_SINALOA
+						state_region = s:STATE_BAJIO
+						state_region = s:STATE_OAXACA
+						state_region = s:STATE_BAJA_CALIFORNIA
+						state_region = s:STATE_CHIAPAS
+						state_region = s:STATE_YUCATAN
+						state_region = s:STATE_GUATEMALA
+						state_region = s:STATE_HONDURAS
+						state_region = s:STATE_NICARAGUA
+						state_region = s:STATE_COSTA_RICA
+						state_region = s:STATE_SAN_SALVADOR
+					}
+					count >= 16
+				}
+			}
+			save_scope_as = canada_country
+		}
+		scope:canada_country = {
+			if = {
+				limit = {
+					has_game_rule = converter_native_incorporation_access_addition
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_colonial_primary_cultures
+						target = this
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.13.a
+		add_modifier = {
+			name = gbr_unified_mexico
+			months = normal_modifier_time
+		}
+		scope:canada_country = { change_tag = MEX }
+	}
+
+	after = {
+		c:MEX = {
+			every_primary_culture = {
+				c:MEX = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { zzz_converter_state_is_in_mexico = yes }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+						}
+					}
+					culture = {
+						c:MEX = { add_primary_culture = prev }
+					}
+				}
+			}
+		}
+	}
+}
+
+# Colombia complete event for Colombia
+zzz_cc_confederation.15 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.15.t
+	desc = zzz_cc_confederation.15.d
+	flavor = zzz_cc_confederation.15.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = converter_native_incorporation_access_addition
+				any_primary_culture = {
+					has_discrimination_trait = indigenous_american_heritage
+					is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					has_discrimination_trait = indigenous_american_heritage
+					is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.15.a
+		add_modifier = {
+			name = gco_unified_colombia
+			months = normal_modifier_time
+		}
+		if = {
+			limit = {
+				NOT = { is_subject_type = subject_type_dominion }
+			}
+			change_subject_type = subject_type_dominion
+		}
+		if = {
+			limit = {
+				top_overlord = {
+					any_scope_state = { zzz_converter_state_is_in_gran_colombia = yes }
+				}
+			}
+			top_overlord = {
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_gran_colombia = yes }
+					set_state_owner = root
+				}
+			}
+		}
+		change_tag = GCO
+	}
+
+	after = {
+		every_primary_culture = {
+			c:GCO = { remove_primary_culture = prev }
+		}
+		every_scope_state = {
+			limit = { zzz_converter_state_is_in_gran_colombia = yes }
+			every_scope_pop = {
+				limit = {
+					culture = {
+						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+						is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+					}
+				}
+				culture = {
+					c:GCO = { add_primary_culture = prev }
+				}
+			}
+		}
+	}
+}
+
+# Colombia complete event for Overlord
+zzz_cc_confederation.16 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.15.t
+	desc = zzz_cc_confederation.16.d
+	flavor = zzz_cc_confederation.15.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+				any_scope_state = {
+					OR = {
+						state_region = s:STATE_BOLIVAR
+						state_region = s:STATE_GUAYANA
+						state_region = s:STATE_MIRANDA
+						state_region = s:STATE_ANTIOQUIA
+						state_region = s:STATE_ZULIA
+						state_region = s:STATE_GUAVIARE
+						state_region = s:STATE_CAUCA
+						state_region = s:STATE_CUNDINAMARCA
+						state_region = s:STATE_PANAMA
+					}
+					count >= 7
+				}
+			}
+			save_scope_as = canada_country
+			ruler = {
+				save_scope_as = canada_country_ruler
+			}
+		}
+		scope:canada_country = {
+			if = {
+				limit = {
+					has_game_rule = converter_native_incorporation_access_addition
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_colonial_primary_cultures
+						target = this
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.15.a
+		add_modifier = {
+			name = gbr_unified_colombia
+			months = normal_modifier_time
+		}
+		scope:canada_country = { change_tag = GCO }
+	}
+
+	after = {
+		c:GCO = {
+			every_primary_culture = {
+				c:GCO = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { zzz_converter_state_is_in_gran_colombia = yes }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+						}
+					}
+					culture = {
+						c:GCO = { add_primary_culture = prev }
+					}
+				}
+			}
+		}
+	}
+}
+
+# Peruvian colony absorbs a poorer neighbor
+zzz_cc_confederation.17 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.1.t
+	desc = zzz_cc_confederation.17.d
+	flavor = zzz_cc_confederation.17.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_neighbouring_state = {
+			limit = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+			owner = { save_scope_as = canada_annex_scope }
+		}
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+	}
+
+	option = {
+		name = can_aus.1.a
+		default_option = yes
+		hidden_effect = {
+			every_state = {
+				limit = {
+					has_claim_by = scope:canada_annex_scope
+				}
+				state_region = {
+					remove_claim = scope:canada_annex_scope
+					add_claim = ROOT
+				}
+			}
+		}
+		annex_with_incorporation = scope:canada_annex_scope
+	}
+}
+
+# Overlord mashes 2 Peruvians together
+zzz_cc_confederation.18 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.2.t
+	desc = zzz_cc_confederation.18.d
+	flavor = zzz_cc_confederation.17.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_1
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+				NOT = {
+					scope:canada_scope_1 = THIS
+				}
+			}
+			save_scope_as = canada_scope_2
+		}
+	}
+
+	option = {
+		name = can_aus.2.a
+		default_option = yes
+		if = {
+			limit = {
+				scope:canada_scope_1.gdp > scope:canada_scope_2.gdp
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_2
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_2
+						add_claim = scope:canada_scope_1
+					}
+				}
+			}
+			scope:canada_scope_1 = {
+				annex_with_incorporation = scope:canada_scope_2
+			}
+		}
+		else = {
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_1
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_1
+						add_claim = scope:canada_scope_2
+					}
+				}
+			}
+			scope:canada_scope_2 = {
+				annex_with_incorporation = scope:canada_scope_1
+			}
+		}
+	}
+}
+
+# Brazilian colony absorbs a poorer neighbor
+zzz_cc_confederation.19 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.1.t
+	desc = zzz_cc_confederation.19.d
+	flavor = zzz_cc_confederation.19.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_neighbouring_state = {
+			limit = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+			owner = { save_scope_as = canada_annex_scope }
+		}
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+	}
+
+	option = {
+		name = can_aus.1.a
+		default_option = yes
+		hidden_effect = {
+			every_state = {
+				limit = {
+					has_claim_by = scope:canada_annex_scope
+				}
+				state_region = {
+					remove_claim = scope:canada_annex_scope
+					add_claim = ROOT
+				}
+			}
+		}
+		annex_with_incorporation = scope:canada_annex_scope
+	}
+}
+
+# Overlord mashes 2 Brazilians together
+zzz_cc_confederation.20 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.2.t
+	desc = zzz_cc_confederation.4.d
+	flavor = zzz_cc_confederation.19.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		ruler = {
+			save_scope_as = australia_overlord_ruler
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_1
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				NOT = {
+					scope:canada_scope_1 = THIS
+				}
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_2
+		}
+	}
+
+	option = {
+		name = can_aus.2.a
+		default_option = yes
+		if = {
+			limit = {
+				scope:canada_scope_1.gdp > scope:canada_scope_2.gdp
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_2
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_2
+						add_claim = scope:canada_scope_1
+					}
+				}
+			}
+			scope:canada_scope_1 = {
+				annex_with_incorporation = scope:canada_scope_2
+			}
+		}
+		else = {
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_1
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_1
+						add_claim = scope:canada_scope_2
+					}
+				}
+			}
+			scope:canada_scope_2 = {
+				annex_with_incorporation = scope:canada_scope_1
+			}
+		}
+	}
+}
+
+# Peru complete event for Peru
+zzz_cc_confederation.21 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.21.t
+	desc = zzz_cc_confederation.21.d
+	flavor = zzz_cc_confederation.21.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+		}
+		if = {
+			limit = {
+				has_game_rule = converter_native_incorporation_access_addition
+				any_primary_culture = {
+					has_discrimination_trait = indigenous_american_heritage
+					is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					has_discrimination_trait = indigenous_american_heritage
+					is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.21.a
+		add_modifier = {
+			name = peu_unified_peru
+			months = normal_modifier_time
+		}
+		if = {
+			limit = {
+				NOT = { is_subject_type = subject_type_dominion }
+			}
+			change_subject_type = subject_type_dominion
+		}
+		if = {
+			limit = {
+				top_overlord = {
+					any_scope_state = { region = sr:region_andes }
+				}
+			}
+			top_overlord = {
+				every_scope_state = {
+					limit = { region = sr:region_andes }
+					set_state_owner = root
+				}
+			}
+		}
+		change_tag = PEU
+	}
+
+	after = {
+		every_primary_culture = {
+			c:PEU = { remove_primary_culture = prev }
+		}
+		every_scope_state = {
+			limit = { region = sr:region_andes }
+			every_scope_pop = {
+				limit = {
+					culture = {
+						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+					}
+				}
+				culture = {
+					c:PEU = { add_primary_culture = prev }
+				}
+			}
+		}
+	}
+}
+
+# Peru complete event for Overlord
+zzz_cc_confederation.22 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.21.t
+	desc = zzz_cc_confederation.22.d
+	flavor = zzz_cc_confederation.21.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+				any_scope_state = {
+					OR = {
+						state_region = s:STATE_LIMA
+						state_region = s:STATE_ICA
+						state_region = s:STATE_CAJAMARCA
+						state_region = s:STATE_AREQUIPA
+						state_region = s:STATE_SANTA_CRUZ
+						state_region = s:STATE_LA_PAZ
+						state_region = s:STATE_ECUADOR
+						state_region = s:STATE_JUJUY
+						state_region = s:STATE_PASTAZA
+						state_region = s:STATE_TARAPACA
+						state_region = s:STATE_ANTOFAGASTA
+						state_region = s:STATE_ACRE
+						state_region = s:STATE_POTOSI
+					}
+					count >= 10
+				}
+			}
+			save_scope_as = canada_country
+		}
+		scope:canada_country = {
+			if = {
+				limit = {
+					has_game_rule = converter_native_incorporation_access_addition
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_colonial_primary_cultures
+						target = this
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.21.a
+		add_modifier = {
+			name = gbr_unified_peru
+			months = normal_modifier_time
+		}
+		scope:canada_country = { change_tag = PEU }
+	}
+
+	after = {
+		c:PEU = {
+			every_primary_culture = {
+				c:PEU = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { region = sr:region_andes }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+						}
+					}
+					culture = {
+						c:PEU = { add_primary_culture = prev }
+					}
+				}
+			}
+		}
+	}
+}
+
+# Brazil complete event for Brazil
+zzz_cc_confederation.23 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.23.t
+	desc = zzz_cc_confederation.23.d
+	flavor = zzz_cc_confederation.23.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = converter_native_incorporation_access_addition
+				any_primary_culture = {
+					has_discrimination_trait = indigenous_american_heritage
+					is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					has_discrimination_trait = indigenous_american_heritage
+					is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.23.a
+		add_modifier = {
+			name = brz_unified_brazil
+			months = normal_modifier_time
+		}
+		if = {
+			limit = {
+				NOT = { is_subject_type = subject_type_dominion }
+			}
+			change_subject_type = subject_type_dominion
+		}
+		if = {
+			limit = {
+				top_overlord = {
+					any_scope_state = { region = sr:region_brazil }
+				}
+			}
+			top_overlord = {
+				every_scope_state = {
+					limit = { region = sr:region_brazil }
+					set_state_owner = root
+				}
+			}
+		}
+		change_tag = BRZ
+	}
+
+	after = {
+		every_primary_culture = {
+			c:BRZ = { remove_primary_culture = prev }
+		}
+		every_scope_state = {
+			limit = { region = sr:region_brazil }
+			every_scope_pop = {
+				limit = {
+					culture = {
+						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+					}
+				}
+				culture = {
+					c:BRZ = { add_primary_culture = prev }
+				}
+			}
+		}
+	}
+}
+
+# Brazil complete event for Overlord
+zzz_cc_confederation.24 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.23.t
+	desc = zzz_cc_confederation.24.d
+	flavor = zzz_cc_confederation.23.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+				any_scope_state = {
+					OR = {
+						state_region = s:STATE_PARANA
+						state_region = s:STATE_SAO_PAULO
+						state_region = s:STATE_RIO_DE_JANEIRO
+						state_region = s:STATE_URUGUAY
+						state_region = s:STATE_RIO_GRANDE_DO_SUL
+						state_region = s:STATE_MATO_GROSSO
+						state_region = s:STATE_MINAS_GERAIS
+						state_region = s:STATE_BAHIA
+						state_region = s:STATE_PERNAMBUCO
+						state_region = s:STATE_RIO_GRANDE_DO_NORTE
+						state_region = s:STATE_MARANHAO
+						state_region = s:STATE_GOIAS
+						state_region = s:STATE_CEARA
+						state_region = s:STATE_PIAUI
+						state_region = s:STATE_PARAIBA
+						state_region = s:STATE_SANTA_CATARINA
+						state_region = s:STATE_PARA
+						state_region = s:STATE_AMAZONAS
+					}
+					count >= 14
+				}
+			}
+			save_scope_as = canada_country
+			ruler = {
+				save_scope_as = canada_country_ruler
+			}
+		}
+		scope:canada_country = {
+			if = {
+				limit = {
+					has_game_rule = converter_native_incorporation_access_addition
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_colonial_primary_cultures
+						target = this
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.23.a
+		add_modifier = {
+			name = gbr_unified_brazil
+			months = normal_modifier_time
+		}
+		scope:canada_country = { change_tag = BRZ }
+	}
+
+	after = {
+		c:BRZ = {
+			every_primary_culture = {
+				c:BRZ = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { region = sr:region_brazil }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+						}
+					}
+					culture = {
+						c:BRZ = { add_primary_culture = prev }
+					}
+				}
+			}
+		}
+	}
+}
+
+# Argentine colony absorbs a poorer neighbor
+zzz_cc_confederation.25 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.1.t
+	desc = zzz_cc_confederation.25.d
+	flavor = zzz_cc_confederation.25.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_neighbouring_state = {
+			limit = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+			owner = { save_scope_as = canada_annex_scope }
+		}
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+	}
+
+	option = {
+		name = can_aus.1.a
+		default_option = yes
+		hidden_effect = {
+			every_state = {
+				limit = {
+					has_claim_by = scope:canada_annex_scope
+				}
+				state_region = {
+					remove_claim = scope:canada_annex_scope
+					add_claim = ROOT
+				}
+			}
+		}
+		annex_with_incorporation = scope:canada_annex_scope
+	}
+}
+
+# Overlord mashes 2 Argentines together
+zzz_cc_confederation.26 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.2.t
+	desc = zzz_cc_confederation.26.d
+	flavor = zzz_cc_confederation.25.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_1
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+				NOT = {
+					scope:canada_scope_1 = THIS
+				}
+			}
+			save_scope_as = canada_scope_2
+		}
+	}
+
+	option = {
+		name = can_aus.2.a
+		default_option = yes
+		if = {
+			limit = {
+				scope:canada_scope_1.gdp > scope:canada_scope_2.gdp
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_2
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_2
+						add_claim = scope:canada_scope_1
+					}
+				}
+			}
+			scope:canada_scope_1 = {
+				annex_with_incorporation = scope:canada_scope_2
+			}
+		}
+		else = {
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_1
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_1
+						add_claim = scope:canada_scope_2
+					}
+				}
+			}
+			scope:canada_scope_2 = {
+				annex_with_incorporation = scope:canada_scope_1
+			}
+		}
+	}
+}
+
+# Cape colony absorbs a poorer neighbor
+zzz_cc_confederation.27 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.1.t
+	desc = zzz_cc_confederation.27.d
+	flavor = zzz_cc_confederation.27.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_neighbouring_state = {
+			limit = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+			owner = { save_scope_as = canada_annex_scope }
+		}
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+	}
+
+	option = {
+		name = can_aus.1.a
+		default_option = yes
+		hidden_effect = {
+			every_state = {
+				limit = {
+					has_claim_by = scope:canada_annex_scope
+				}
+				state_region = {
+					remove_claim = scope:canada_annex_scope
+					add_claim = ROOT
+				}
+			}
+		}
+		annex_with_incorporation = scope:canada_annex_scope
+	}
+}
+
+# Overlord mashes 2 Cape Colonies together
+zzz_cc_confederation.28 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.2.t
+	desc = zzz_cc_confederation.4.d
+	flavor = zzz_cc_confederation.27.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		ruler = {
+			save_scope_as = australia_overlord_ruler
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_1
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+				relations:root >= relations_threshold:amicable
+				NOT = {
+					scope:canada_scope_1 = THIS
+				}
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_2
+		}
+	}
+
+	option = {
+		name = can_aus.2.a
+		default_option = yes
+		if = {
+			limit = {
+				scope:canada_scope_1.gdp > scope:canada_scope_2.gdp
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_2
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_2
+						add_claim = scope:canada_scope_1
+					}
+				}
+			}
+			scope:canada_scope_1 = {
+				annex_with_incorporation = scope:canada_scope_2
+			}
+		}
+		else = {
+			hidden_effect = {
+				every_state = {
+					limit = {
+						has_claim_by = scope:canada_scope_1
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_1
+						add_claim = scope:canada_scope_2
+					}
+				}
+			}
+			scope:canada_scope_2 = {
+				annex_with_incorporation = scope:canada_scope_1
+			}
+		}
+	}
+}
+
+# Argentina complete event for Argentina
+zzz_cc_confederation.29 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.29.t
+	desc = zzz_cc_confederation.29.d
+	flavor = zzz_cc_confederation.29.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+		}
+		if = {
+			limit = {
+				has_game_rule = converter_native_incorporation_access_addition
+				any_primary_culture = {
+					has_discrimination_trait = indigenous_american_heritage
+					is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					has_discrimination_trait = indigenous_american_heritage
+					is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.29.a
+		add_modifier = {
+			name = arg_unified_argentina
+			months = normal_modifier_time
+		}
+		if = {
+			limit = {
+				NOT = { is_subject_type = subject_type_dominion }
+			}
+			change_subject_type = subject_type_dominion
+		}
+		if = {
+			limit = {
+				top_overlord = {
+					any_scope_state = { zzz_converter_state_is_in_argentina = yes }
+				}
+			}
+			top_overlord = {
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_argentina = yes }
+					set_state_owner = root
+				}
+			}
+		}
+		change_tag = ARG
+	}
+
+	after = {
+		every_primary_culture = {
+			c:ARG = { remove_primary_culture = prev }
+		}
+		every_scope_state = {
+			limit = { zzz_converter_state_is_in_argentina = yes }
+			every_scope_pop = {
+				limit = {
+					culture = {
+						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+					}
+				}
+				culture = {
+					c:ARG = { add_primary_culture = prev }
+				}
+			}
+		}
+	}
+}
+
+# Argentina complete event for Overlord
+zzz_cc_confederation.30 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.29.t
+	desc = zzz_cc_confederation.30.d
+	flavor = zzz_cc_confederation.29.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+				any_scope_state = {
+					OR = {
+						state_region = s:STATE_RIO_NEGRO
+						state_region = s:STATE_LA_PAMPA
+						state_region = s:STATE_SANTA_FE
+						state_region = s:STATE_CORRIENTES
+						state_region = s:STATE_TUCUMAN
+						state_region = s:STATE_CHACO
+						state_region = s:STATE_BUENOS_AIRES
+						state_region = s:STATE_ALTO_PARAGUAY
+						state_region = s:STATE_BAJO_PARAGUAY
+						state_region = s:STATE_LOS_RIOS
+						state_region = s:STATE_ARAUCANIA
+						state_region = s:STATE_PATAGONIA
+						state_region = s:STATE_SANTIAGO
+					}
+					count >= 10
+				}
+			}
+			save_scope_as = canada_country
+		}
+		scope:canada_country = {
+			if = {
+				limit = {
+					has_game_rule = converter_native_incorporation_access_addition
+					any_primary_culture = {
+						has_discrimination_trait = indigenous_american_heritage
+						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = indigenous_american_heritage
+						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_colonial_primary_cultures
+						target = this
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.29.a
+		add_modifier = {
+			name = gbr_unified_argentina
+			months = normal_modifier_time
+		}
+		scope:canada_country = { change_tag = ARG }
+	}
+
+	after = {
+		c:ARG = {
+			every_primary_culture = {
+				c:ARG = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { zzz_converter_state_is_in_argentina = yes }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+						}
+					}
+					culture = {
+						c:ARG = { add_primary_culture = prev }
+					}
+				}
+			}
+		}
+	}
+}
+
+# South Africa complete event for South Africa
+zzz_cc_confederation.31 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.31.t
+	desc = zzz_cc_confederation.31.d
+	flavor = zzz_cc_confederation.31.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = converter_native_incorporation_access_addition
+				any_primary_culture = {
+					has_discrimination_trait = african_heritage
+					is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					has_discrimination_trait = african_heritage
+					is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.31.a
+		add_modifier = {
+			name = saf_unified_cape
+			months = normal_modifier_time
+		}
+		if = {
+			limit = {
+				NOT = { is_subject_type = subject_type_dominion }
+			}
+			change_subject_type = subject_type_dominion
+		}
+		if = {
+			limit = {
+				top_overlord = {
+					any_scope_state = {
+						OR = {
+							zzz_converter_state_is_in_south_africa = yes
+							any_scope_pop = {
+								culture = {
+									is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+									has_homeland = prev.state
+								}
+							}
+						}
+					}
+				}
+			}
+			top_overlord = {
+				every_scope_state = {
+					limit = {
+						OR = {
+							zzz_converter_state_is_in_south_africa = yes
+							any_scope_pop = {
+								culture = {
+									is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+									has_homeland = prev.state
+								}
+							}
+						}
+					}
+					set_state_owner = root
+				}
+			}
+		}
+		change_tag = SAF
+	}
+
+	after = {
+		every_primary_culture = {
+			c:SAF = { remove_primary_culture = prev }
+		}
+		every_scope_state = {
+			limit = { region = sr:region_southern_africa }
+			every_scope_pop = {
+				limit = {
+					culture = {
+						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+						is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+					}
+				}
+				culture = {
+					c:SAF = { add_primary_culture = prev }
+				}
+			}
+		}
+	}
+}
+
+# South Africa complete event for Overlord
+zzz_cc_confederation.32 = {
+	type = country_event
+	placement = ROOT
+
+	title = zzz_cc_confederation.31.t
+	desc = zzz_cc_confederation.32.d
+	flavor = zzz_cc_confederation.31.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+				any_scope_state = {
+					OR = {
+						state_region = s:STATE_CAPE_COLONY
+						state_region = s:STATE_NORTHERN_CAPE
+						state_region = s:STATE_EASTERN_CAPE
+						state_region = s:STATE_ZULULAND
+						state_region = s:STATE_VRYSTAAT
+						state_region = s:STATE_TRANSVAAL
+						state_region = s:STATE_LOURENCO_MARQUES
+					}
+					count >= 5
+				}
+			}
+			save_scope_as = canada_country
+			ruler = {
+				save_scope_as = canada_country_ruler
+			}
+		}
+		scope:canada_country = {
+			if = {
+				limit = {
+					has_game_rule = converter_native_incorporation_access_addition
+					any_primary_culture = {
+						has_discrimination_trait = african_heritage
+						is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait = african_heritage
+						is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_colonial_primary_cultures
+						target = this
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_confederation.31.a
+		add_modifier = {
+			name = gbr_unified_cape
+			months = normal_modifier_time
+		}
+		scope:canada_country = { change_tag = SAF }
+	}
+
+	after = {
+		c:SAF = {
+			every_primary_culture = {
+				c:SAF = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { region = sr:region_southern_africa }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+						}
+					}
+					culture = {
+						c:SAF = { add_primary_culture = prev }
+					}
+				}
+			}
+		}
+	}
+}

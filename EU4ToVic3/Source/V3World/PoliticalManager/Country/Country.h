@@ -97,9 +97,11 @@ struct ProcessedData
 	std::vector<std::string> vanillaCharacterElements;		  // stanzas from vanilla character histories, ready for direct dump.
 	std::vector<std::string> vanillaDiplomaticPlayElements; // stanzas from vanilla diplomatic play histories, ready for direct dump.
 
-	double industryWeight = 0; // Share of global industry a country should get, not normalized
+	double industryWeight = 0; // share of global industry a country should get, not normalized
 	int CPBudget = 0;				// Construction Points for a country to spend on it's development
 	std::map<std::string, std::shared_ptr<Sector>> industrySectors;
+	double productionTechPercentile = 0;
+	double perCapitaDev = 0;
 
 	std::string name;
 	std::string adjective;
@@ -130,6 +132,8 @@ class Country: commonItems::parser
 	void setCPBudget(const int theBudget) { processedData.CPBudget = theBudget; }
 	void setSourceCountry(const std::shared_ptr<EU4::Country>& theCountry) { sourceCountry = theCountry; }
 	void setReligion(const std::string& religion) { processedData.religion = religion; }
+	void setProductionTechPercentile(const double productionScore) { processedData.productionTechPercentile = productionScore; }
+	void setPerCapitaDev(const double pDev) { processedData.perCapitaDev = pDev; }
 
 	void convertFromEU4Country(const ClayManager& clayManager,
 		 mappers::CultureMapper& cultureMapper,
@@ -162,7 +166,10 @@ class Country: commonItems::parser
 
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
+	[[nodiscard]] double getTotalDev() const;
+	[[nodiscard]] double getOverPopulation() const;
 	[[nodiscard]] int getPopCount() const;
+	[[nodiscard]] int getVanillaPopCount() const; // vanilla pop count of all the provinces this country holds
 	[[nodiscard]] int getIncorporatedPopCount() const;
 	[[nodiscard]] static int getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubStates);
 
@@ -177,6 +184,8 @@ class Country: commonItems::parser
 	void setTechs(const mappers::TechSetupMapper& techSetupMapper, double productionScore, double militaryScore, double societyScore);
 	void addTech(const std::string& tech) { processedData.techs.emplace(tech); }
 	void addLaw(const auto& lawName) { processedData.laws.emplace(lawName); }
+	bool hasLaw(const auto& lawName) const { return processedData.laws.contains(lawName); };
+	bool humanPlayed() const;
 	void addInstitution(const auto& institutionName, const int level = 1) { processedData.institutions.emplace(institutionName, level); }
 	[[nodiscard]] Relation& getRelation(const std::string& target);
 	[[nodiscard]] const auto& getRelations() const { return processedData.relations; }
@@ -229,6 +238,7 @@ class Country: commonItems::parser
 
 	void setDiscriminationLevel(const ProcessedData::DISCRIMINATION_LEVEL& discrimination) { processedData.discriminationLevel = discrimination; }
 	[[nodiscard]] bool isCultureDiscriminated(const std::string& culture, const mappers::CultureMapper& cultureMapper) const;
+	[[nodiscard]] bool isCountryDynamic() const { return dynamicCountry; }
 
   private:
 	void registerKeys();
@@ -257,6 +267,7 @@ class Country: commonItems::parser
 	std::optional<VanillaCommonCountryData> vanillaData;
 	ProcessedData processedData;
 	UnprocessedData unprocessedData;
+	bool dynamicCountry = false;
 
 	std::shared_ptr<EU4::Country> sourceCountry;
 	std::vector<std::shared_ptr<SubState>> subStates;

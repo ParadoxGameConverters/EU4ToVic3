@@ -1,0 +1,214 @@
+﻿canada_unite_can = {
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+		capital = { zzz_converter_state_is_in_canada = yes }																##Converter
+		is_subject = yes
+		any_neighbouring_state = {
+			owner = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+				capital = { zzz_converter_state_is_in_canada = yes }																##Converter
+				is_subject = yes
+				NOT = { THIS = ROOT }
+				top_overlord = {
+					THIS = root.top_overlord
+				}
+			}
+		}
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		top_overlord = {
+			relations:root >= relations_threshold:amicable
+		}
+		NOT = { has_modifier = canada_test_modifier }
+		custom_tooltip = {
+			text = unite_canada_je_can_tt
+			any_neighbouring_state = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+					capital = { zzz_converter_state_is_in_canada = yes }																##Converter
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_canada_tt
+		hidden_effect = {
+			trigger_event = { id = can_aus.1 popup = yes }
+		}
+		add_modifier = {
+			name = canada_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+canada_unite_gbr = {
+	is_shown = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+			capital = { zzz_converter_state_is_in_canada = yes }																##Converter
+			is_ai = yes
+			count >= 2
+		}
+	}
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = canada_test_modifier }
+		custom_tooltip = {
+			text = gbr_can_relations_tt
+			any_subject_or_below = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+				capital = { zzz_converter_state_is_in_canada = yes }																##Converter
+				is_ai = yes
+				relations:root >= relations_threshold:amicable
+				count >= 2
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_canada_tt
+		hidden_effect = {
+			trigger_event = { id = can_aus.2 popup = yes }
+		}
+		add_modifier = {
+			name = canada_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+australia_unite_aus = {
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+		capital = { zzz_converter_state_is_in_australia = yes }																	##Converter
+		is_subject = yes
+		any_neighbouring_state = {
+			owner = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+				capital = { zzz_converter_state_is_in_australia = yes }																	##Converter
+				is_ai = yes
+				is_subject = yes
+				NOT = { THIS = ROOT }
+				top_overlord = {
+					THIS = root.top_overlord
+				}
+			}
+		}
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		top_overlord = {
+			relations:root >= relations_threshold:amicable
+		}
+		NOT = { has_modifier = australia_test_modifier }
+		custom_tooltip = {
+			text = unite_australia_je_aus_tt
+			any_neighbouring_state = {
+				owner = {
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+					capital = { zzz_converter_state_is_in_australia = yes }																	##Converter
+					is_ai = yes
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_australia_tt
+		hidden_effect = {
+			trigger_event = { id = can_aus.3 popup = yes }
+		}
+		add_modifier = {
+			name = australia_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+australia_unite_gbr = {
+	is_shown = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+			capital = { zzz_converter_state_is_in_australia = yes }																	##Converter
+			is_ai = yes
+			count >= 2
+		}
+	}
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = australia_test_modifier }
+		custom_tooltip = {
+			text = gbr_aus_relations_tt
+			any_subject_or_below = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+				capital = { zzz_converter_state_is_in_australia = yes }																	##Converter
+				is_ai = yes
+				relations:root >= relations_threshold:amicable
+				count >= 2
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_australia_tt
+		hidden_effect = {
+			trigger_event = { id = can_aus.4 popup = yes }
+		}
+		add_modifier = {
+			name = australia_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}

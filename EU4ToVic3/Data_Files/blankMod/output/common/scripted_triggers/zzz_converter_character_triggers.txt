@@ -1,0 +1,707 @@
+﻿# language_accepted
+# uses_new_england_yankee_characters
+# uses_midwest_yankee_characters
+# uses_dixie_characters
+# uses_dixie_traitor_characters
+# uses_usa_afro_amer_characters
+# uses_csa_afro_amer_characters
+# uses_mexico_characters
+# uses_brazil_characters
+# uses_afro_braz_characters
+# uses_fra_characters
+# uses_occ_characters
+# uses_occ_fra_characters
+# uses_dut_characters
+# uses_pru_ger_characters
+# uses_aus_ger_characters
+# uses_bav_ger_characters
+# uses_hun_characters
+# uses_ire_characters
+# uses_gbr_characters
+# uses_eng_gbr_characters
+# uses_nor_characters
+# uses_den_characters
+# uses_rus_characters
+# uses_ukr_characters
+# uses_nor_ita_characters
+# uses_sou_ita_characters
+# uses_pi_i_margall_characters
+# uses_por_characters
+# uses_gre_characters
+# uses_ber_characters
+# uses_tur_characters
+# uses_han_characters
+# uses_jap_characters
+
+language_accepted = {
+	OR = {
+		AND = {
+			culture = { has_discrimination_trait = francophone }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = francophone }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = hispanophone }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = hispanophone }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = lusophone }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = lusophone }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = anglophone }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = anglophone }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = german_speaking }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = german_speaking }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = italophone }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = italophone }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = arab_speaking }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = arab_speaking }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = albanian_language }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = albanian_language }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = mongol_language }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = mongol_language }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = khmer_language }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = khmer_language }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = malagasy_language }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = malagasy_language }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = burmese_language }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = burmese_language }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = korean_language }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = korean_language }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = ainu_language }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = ainu_language }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = hmong_mien_language }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = hmong_mien_language }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = tibetan_language }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = tibetan_language }
+			}
+		}
+		##Converter
+		AND = {
+			culture = { has_discrimination_trait = latinophone }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = latinophone }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = phoeniciophone }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = phoeniciophone }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = animal_speaking }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = animal_speaking }
+			}
+		}
+	}
+}
+
+uses_new_england_yankee_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:USA
+			is_target_in_global_variable_list = { name = global_new_england_yankee_countries target = c:USA }
+		}
+		this = c:USA
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_new_england_yankee_countries target = this }
+	}
+}
+
+uses_midwest_yankee_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:USA
+			is_target_in_global_variable_list = { name = global_midwest_yankee_countries target = c:USA }
+		}
+		this = c:USA
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_midwest_yankee_countries target = this }
+	}
+}
+
+uses_dixie_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:USA
+			is_target_in_global_variable_list = { name = global_dixie_countries target = c:USA }
+		}
+		this = c:USA
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_dixie_countries target = this }
+	}
+}
+
+uses_dixie_traitor_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:CSA
+			is_target_in_global_variable_list = { name = global_dixie_countries target = c:CSA }
+		}
+		this = c:CSA
+	}
+	trigger_else = {
+		uses_dixie_characters = yes
+	}
+}
+
+uses_usa_afro_amer_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:USA
+			is_target_in_global_variable_list = { name = global_afro_amer_countries target = c:USA }
+		}
+		this = c:USA
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_afro_amer_countries target = this }
+	}
+}
+
+uses_csa_afro_amer_characters = {
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:USA
+					is_target_in_global_variable_list = { name = global_afro_amer_countries target = c:USA }
+				}
+				AND = {
+					exists = c:CSA
+					is_target_in_global_variable_list = { name = global_afro_amer_countries target = c:CSA }
+				}
+				AND = {
+					exists = c:ASA
+					is_target_in_global_variable_list = { name = global_afro_amer_countries target = c:ASA }
+				}
+			}
+		}
+		OR = {
+			this = c:USA
+			this = c:CSA
+			this = c:ASA # Unlikely, but just in case
+		}
+		is_target_in_global_variable_list = { name = global_afro_amer_countries target = this }
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_afro_amer_countries target = this }
+	}
+}
+
+uses_mexico_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:MEX
+			is_target_in_global_variable_list = { name = global_mexico_countries target = c:MEX }
+		}
+		this = c:MEX
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_mexico_countries target = this }
+	}
+}
+
+uses_brazil_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:BRZ
+			is_target_in_global_variable_list = { name = global_brazil_countries target = c:BRZ }
+		}
+		this = c:BRZ
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_brazil_countries target = this }
+	}
+}
+
+uses_afro_braz_characters = {
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:BRZ
+					is_target_in_global_variable_list = { name = global_afro_braz_countries target = c:BRZ }
+				}
+				AND = {
+					exists = c:AGJ
+					is_target_in_global_variable_list = { name = global_afro_braz_countries target = c:AGJ }
+				}
+			}
+		}
+		OR = {
+			c:BRZ ?= this
+			c:AGJ ?= this
+		}
+		is_target_in_global_variable_list = { name = global_afro_braz_countries target = this }
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_afro_braz_countries target = this }
+	}
+}
+
+uses_fra_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:FRA
+			is_target_in_global_variable_list = { name = global_fra_countries target = c:FRA }
+		}
+		this = c:FRA
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_fra_countries target = this }
+	}
+}
+
+uses_occ_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:OCC
+			is_target_in_global_variable_list = { name = global_occ_countries target = c:OCC }
+		}
+		this = c:OCC
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_occ_countries target = this }
+	}
+}
+
+uses_occ_fra_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:OCC
+			is_target_in_global_variable_list = { name = global_occ_countries target = c:OCC }
+		}
+		this = c:OCC
+	}
+	trigger_else = {
+		OR = {
+			is_target_in_global_variable_list = { name = global_occ_countries target = this }
+			uses_fra_characters = yes
+		}
+	}
+}
+
+uses_dut_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:NET
+			is_target_in_global_variable_list = { name = global_dut_countries target = c:NET }
+		}
+		this = c:NET
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_dut_countries target = this }
+	}
+}
+
+uses_pru_ger_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:PRU
+			is_target_in_global_variable_list = { name = global_nor_ger_countries target = c:PRU }
+		}
+		this = c:PRU
+	}
+	trigger_else_if = {
+		limit = {
+			exists = c:GER
+			is_target_in_global_variable_list = { name = global_nor_ger_countries target = c:GER }
+		}
+		this = c:GER
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_nor_ger_countries target = this }
+	}
+}
+
+uses_aus_ger_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:AUS
+			is_target_in_global_variable_list = { name = global_sou_ger_countries target = c:AUS }
+		}
+		this = c:AUS
+	}
+	trigger_else_if = {
+		limit = {
+			exists = c:GER
+			is_target_in_global_variable_list = { name = global_sou_ger_countries target = c:GER }
+		}
+		this = c:GER
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_sou_ger_countries target = this }
+	}
+}
+
+uses_bav_ger_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:BAV
+			is_target_in_global_variable_list = { name = global_sou_ger_countries target = c:BAV }
+		}
+		this = c:BAV
+	}
+	trigger_else_if = {
+		limit = {
+			exists = c:GER
+			is_target_in_global_variable_list = { name = global_sou_ger_countries target = c:GER }
+		}
+		this = c:GER
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_sou_ger_countries target = this }
+	}
+}
+
+uses_hun_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:HUN
+			is_target_in_global_variable_list = { name = global_hun_countries target = c:HUN }
+		}
+		this = c:HUN
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_hun_countries target = this }
+	}
+}
+
+uses_ire_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:IRE
+			is_target_in_global_variable_list = { name = global_ire_countries target = c:IRE }
+		}
+		this = c:IRE
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_ire_countries target = this }
+	}
+}
+
+uses_gbr_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:GBR
+			is_target_in_global_variable_list = { name = global_gbr_countries target = c:GBR }
+		}
+		this = c:GBR
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_gbr_countries target = this }
+	}
+}
+
+uses_eng_gbr_characters = {
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:GBR
+					is_target_in_global_variable_list = { name = global_gbr_countries target = c:GBR }
+				}
+				AND = {
+					exists = c:ENG
+					is_target_in_global_variable_list = { name = global_gbr_countries target = c:ENG }
+				}
+			}
+		}
+		OR = {
+			c:GBR ?= this
+			c:ENG ?= this
+		}
+		is_target_in_global_variable_list = { name = global_gbr_countries target = this }
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_gbr_countries target = this }
+	}
+}
+
+uses_nor_characters = {
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:NOR
+					is_target_in_global_variable_list = { name = global_nor_countries target = c:NOR }
+				}
+				AND = {
+					exists = c:SCA
+					is_target_in_global_variable_list = { name = global_nor_countries target = c:SCA }
+				}
+			}
+		}
+		OR = {
+			c:NOR ?= this
+			c:SCA ?= this
+		}
+		is_target_in_global_variable_list = { name = global_nor_countries target = this }
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_nor_countries target = this }
+	}
+}
+
+uses_den_characters = {
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:DEN
+					is_target_in_global_variable_list = { name = global_den_countries target = c:DEN }
+				}
+				AND = {
+					exists = c:SCA
+					is_target_in_global_variable_list = { name = global_den_countries target = c:SCA }
+				}
+			}
+		}
+		OR = {
+			c:DEN ?= this
+			c:SCA ?= this
+		}
+		is_target_in_global_variable_list = { name = global_den_countries target = this }
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_den_countries target = this }
+	}
+}
+
+uses_rus_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:RUS
+			is_target_in_global_variable_list = { name = global_rus_countries target = c:RUS }
+		}
+		this = c:RUS
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_rus_countries target = this }
+	}
+}
+
+uses_ukr_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:UKR
+			is_target_in_global_variable_list = { name = global_ukr_countries target = c:UKR }
+		}
+		this = c:UKR
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_ukr_countries target = this }
+	}
+}
+
+uses_nor_ita_characters = {
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:SAR
+					is_target_in_global_variable_list = { name = global_nor_ita_countries target = c:SAR }
+				}
+				AND = {
+					exists = c:ITA
+					is_target_in_global_variable_list = { name = global_nor_ita_countries target = c:ITA }
+				}
+			}
+		}
+		OR = {
+			c:SAR ?= this
+			c:ITA ?= this
+		}
+		is_target_in_global_variable_list = { name = global_nor_ita_countries target = this }
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_nor_ita_countries target = this }
+	}
+}
+
+uses_sou_ita_characters = {
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:SIC
+					is_target_in_global_variable_list = { name = global_sou_ita_countries target = c:SIC }
+				}
+				AND = {
+					exists = c:ITA
+					is_target_in_global_variable_list = { name = global_sou_ita_countries target = c:ITA }
+				}
+			}
+		}
+		OR = {
+			c:SIC ?= this
+			c:ITA ?= this
+		}
+		is_target_in_global_variable_list = { name = global_sou_ita_countries target = this }
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_sou_ita_countries target = this }
+	}
+}
+
+uses_pi_i_margall_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:CAT
+			is_target_in_global_variable_list = { name = global_pi_i_margall_countries target = c:CAT }
+		}
+		this = c:CAT
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_pi_i_margall_countries target = this }
+	}
+}
+
+uses_por_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:POR
+			is_target_in_global_variable_list = { name = global_por_countries target = c:POR }
+		}
+		this = c:POR
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_por_countries target = this }
+	}
+}
+
+uses_gre_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:GRE
+			is_target_in_global_variable_list = { name = global_gre_countries target = c:GRE }
+		}
+		this = c:GRE
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_gre_countries target = this }
+	}
+}
+
+uses_ber_characters = {
+	is_target_in_global_variable_list = { name = global_ber_countries target = this }
+	is_subject = no
+	any_scope_state = {
+		OR = {
+			state_region = s:STATE_ORAN
+			state_region = s:STATE_ALGIERS
+			state_region = s:STATE_CONSTANTINE
+			state_region = s:STATE_EAST_SAHARA
+		}
+	}
+	any_country = {
+		country_is_in_africa = no
+		any_scope_state = {
+			OR = {
+				state_region = s:STATE_ORAN
+				state_region = s:STATE_ALGIERS
+				state_region = s:STATE_CONSTANTINE
+				state_region = s:STATE_EAST_SAHARA
+			}
+		}
+	}
+}
+
+uses_tur_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:TUR
+			is_target_in_global_variable_list = { name = global_tur_countries target = c:TUR }
+		}
+		this = c:TUR
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_tur_countries target = this }
+	}
+}
+
+uses_han_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:CHI
+			is_target_in_global_variable_list = { name = global_han_countries target = c:CHI }
+		}
+		this = c:CHI
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_han_countries target = this }
+	}
+}
+
+uses_jap_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:JAP
+			is_target_in_global_variable_list = { name = global_jap_countries target = c:JAP }
+		}
+		this = c:JAP
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_jap_countries target = this }
+	}
+}

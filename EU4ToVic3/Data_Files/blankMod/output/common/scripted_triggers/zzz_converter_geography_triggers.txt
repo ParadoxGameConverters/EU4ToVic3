@@ -1,0 +1,364 @@
+﻿# zzz_converter_state_is_in_canada
+# zzz_converter_state_is_in_australia
+# zzz_converter_state_is_in_america
+# zzz_converter_state_is_in_california
+# zzz_converter_state_is_in_mexico
+# zzz_converter_state_is_in_gran_colombia
+# zzz_converter_state_is_in_argentina
+# zzz_converter_state_is_in_caribbean
+# zzz_converter_state_is_in_south_africa
+# converter_is_converter_confederation_culture
+# converter_should_add_confederation_cultures
+# converter_shares_colonial_region_with_capital
+# converter_culture_is_in_capital_list
+# is_settler_colonial_country
+# is_colonized_country
+
+zzz_converter_state_is_in_canada = {
+	OR = {
+		region = sr:region_canada
+		state_region = s:STATE_NEW_BRUNSWICK
+		state_region = s:STATE_SASKATCHEWAN
+		state_region = s:STATE_ALBERTA
+		state_region = s:STATE_BRITISH_COLUMBIA
+		state_region = s:STATE_YUKON_TERRITORY
+	}
+}
+
+zzz_converter_state_is_in_australia = {
+	OR = {
+		state_region = s:STATE_NEW_SOUTH_WALES
+		state_region = s:STATE_VICTORIA
+		state_region = s:STATE_QUEENSLAND
+		state_region = s:STATE_SOUTH_AUSTRALIA
+		state_region = s:STATE_WESTERN_AUSTRALIA
+		state_region = s:STATE_NORTHERN_TERRITORY
+		state_region = s:STATE_TASMANIA
+		state_region = s:STATE_NORTH_ISLAND
+		state_region = s:STATE_SOUTH_ISLAND
+	}
+}
+
+zzz_converter_state_is_in_america = {
+	OR = {
+		region = sr:region_the_midwest
+		state_region = s:STATE_MAINE
+		state_region = s:STATE_NEW_HAMPSHIRE
+		state_region = s:STATE_VERMONT
+		state_region = s:STATE_MASSACHUSETTS
+		state_region = s:STATE_CONNECTICUT
+		state_region = s:STATE_RHODE_ISLAND
+		state_region = s:STATE_NEW_YORK
+		state_region = s:STATE_NEW_JERSEY
+		state_region = s:STATE_PENNSYLVANIA
+		state_region = s:STATE_MARYLAND
+		state_region = s:STATE_DELAWARE
+		state_region = s:STATE_DISTRICT_OF_COLUMBIA
+		state_region = s:STATE_VIRGINIA
+		state_region = s:STATE_NORTH_CAROLINA
+		state_region = s:STATE_SOUTH_CAROLINA
+		state_region = s:STATE_GEORGIA
+		state_region = s:STATE_FLORIDA
+		state_region = s:STATE_MISSISSIPPI
+		state_region = s:STATE_ALABAMA
+		state_region = s:STATE_LOUISIANA
+		state_region = s:STATE_ARKANSAS
+		state_region = s:STATE_NORTH_DAKOTA
+		state_region = s:STATE_SOUTH_DAKOTA
+	}
+}
+
+zzz_converter_state_is_in_california = {
+	OR = {
+		state_region = s:STATE_WASHINGTON
+		state_region = s:STATE_OREGON
+		state_region = s:STATE_IDAHO
+		state_region = s:STATE_MONTANA
+		state_region = s:STATE_WYOMING
+		state_region = s:STATE_CALIFORNIA
+		state_region = s:STATE_NEVADA
+		state_region = s:STATE_UTAH
+		state_region = s:STATE_ARIZONA
+		state_region = s:STATE_NEW_MEXICO
+		state_region = s:STATE_COLORADO
+		state_region = s:STATE_NEBRASKA
+		state_region = s:STATE_KANSAS
+		state_region = s:STATE_OKLAHOMA
+		state_region = s:STATE_TEXAS
+	}
+}
+
+zzz_converter_state_is_in_mexico = {
+	OR = {
+		region = sr:region_mexico
+		state_region = s:STATE_BAJA_CALIFORNIA
+		state_region = s:STATE_CHIAPAS
+		state_region = s:STATE_YUCATAN
+		state_region = s:STATE_GUATEMALA
+		state_region = s:STATE_HONDURAS
+		state_region = s:STATE_NICARAGUA
+		state_region = s:STATE_COSTA_RICA
+		state_region = s:STATE_SAN_SALVADOR
+	}
+}
+
+zzz_converter_state_is_in_gran_colombia = {
+	OR = {
+		region = sr:region_gran_colombia
+		state_region = s:STATE_PANAMA
+	}
+}
+
+zzz_converter_state_is_in_argentina = {
+	region = sr:region_la_plata
+	NOT = { state_region = s:STATE_SOUTH_ATLANTIC_ISLANDS }		##Argentenes furious
+}
+
+zzz_converter_state_is_in_caribbean = {
+	OR = {
+		region = sr:region_caribbean
+		state_region = s:STATE_BERMUDA
+	}
+}
+
+zzz_converter_state_is_in_south_africa = {
+	OR = {
+		state_region = s:STATE_CAPE_COLONY
+		state_region = s:STATE_NORTHERN_CAPE
+		state_region = s:STATE_EASTERN_CAPE
+		state_region = s:STATE_ZULULAND
+		state_region = s:STATE_VRYSTAAT
+		state_region = s:STATE_TRANSVAAL
+		state_region = s:STATE_LOURENCO_MARQUES
+	}
+}
+
+converter_is_converter_confederation_culture = {
+	trigger_if = {
+		limit = {
+			prev.owner = {
+				has_law = law_type:law_multicultural
+				has_law = law_type:law_slavery_banned
+			}
+		}
+		always = yes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner = {
+				has_law = law_type:law_cultural_exclusion
+				has_law = law_type:law_slavery_banned
+			}
+		}
+		shares_trait_with_any_primary_culture = prev.owner
+	}
+	trigger_else = { shares_heritage_trait_with_any_primary_culture = prev.owner }
+}
+
+converter_should_add_confederation_cultures = {
+	trigger_if = {
+		limit = { is_subject = yes }
+		OR = {
+			top_overlord = {
+				capital = {
+					OR = {
+						state_is_in_americas = yes
+						region = sr:region_oceania
+					}
+				}
+			}
+			c:CAN ?= this
+			c:USA ?= this
+			c:CAL ?= this
+			c:MEX ?= this
+			c:GCO ?= this
+			c:PEU ?= this
+			c:BRZ ?= this
+			c:ARG ?= this
+			c:AST ?= this
+			c:SAF ?= this
+		}
+	}
+	trigger_else = { always = yes }
+}
+
+converter_shares_colonial_region_with_capital = {
+	trigger_if = {
+		limit = {
+			prev.capital = { zzz_converter_state_is_in_canada = yes }
+		}
+		zzz_converter_state_is_in_canada = yes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { zzz_converter_state_is_in_america = yes }
+		}
+		zzz_converter_state_is_in_america = yes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { zzz_converter_state_is_in_california = yes }
+		}
+		zzz_converter_state_is_in_california = yes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { zzz_converter_state_is_in_mexico = yes }
+		}
+		zzz_converter_state_is_in_mexico = yes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { zzz_converter_state_is_in_gran_colombia = yes }
+		}
+		zzz_converter_state_is_in_gran_colombia = yes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { region = sr:region_andes }
+		}
+		region = sr:region_andes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { region = sr:region_brazil }
+		}
+		region = sr:region_brazil
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { zzz_converter_state_is_in_argentina = yes }
+		}
+		zzz_converter_state_is_in_argentina = yes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { zzz_converter_state_is_in_australia = yes }
+		}
+		zzz_converter_state_is_in_australia = yes
+	}
+	trigger_else = {
+		prev.capital = { region = sr:region_southern_africa }
+		region = sr:region_southern_africa
+	}
+}
+
+converter_culture_is_in_capital_list = {
+	trigger_if = {
+		limit = {
+			prev.owner.capital = { zzz_converter_state_is_in_canada = yes }
+		}
+		is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { zzz_converter_state_is_in_america = yes }
+		}
+		is_target_in_global_variable_list = { name = global_american_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { zzz_converter_state_is_in_california = yes }
+		}
+		is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { zzz_converter_state_is_in_mexico = yes }
+		}
+		is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { zzz_converter_state_is_in_gran_colombia = yes }
+		}
+		is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { region = sr:region_andes }
+		}
+		is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { region = sr:region_brazil }
+		}
+		is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { zzz_converter_state_is_in_argentina = yes }
+		}
+		is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { zzz_converter_state_is_in_australia = yes }
+		}
+		is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+	}
+	trigger_else = {
+		prev.owner.capital = { region = sr:region_southern_africa }
+		is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+	}
+}
+
+is_settler_colonial_country = {
+	trigger_if = {
+		limit = {
+			OR = {
+				country_is_in_north_america = yes
+				country_is_in_central_america = yes
+				country_is_in_south_america = yes
+			}
+		}
+		any_primary_culture = { NOT = { has_discrimination_trait = indigenous_american_heritage } }
+	}
+	trigger_else_if = {
+		limit = {
+			exists = capital
+			capital = { region = sr:region_oceania }
+		}
+		any_primary_culture = { NOT = { has_discrimination_trait = indigenous_oceanic_heritage } }
+	}
+	trigger_else_if = {
+		limit = { country_is_in_africa = yes }
+		any_primary_culture = {
+			NOR = {
+				has_discrimination_trait = african_heritage
+				has_discrimination_trait = middle_eastern_heritage
+			}
+		}
+	}
+	trigger_else = { always = no }
+}
+
+is_colonized_country = {
+	trigger_if = {
+		limit = {
+			OR = {
+				country_is_in_north_america = yes
+				country_is_in_central_america = yes
+				country_is_in_south_america = yes
+			}
+		}
+		any_primary_culture = { has_discrimination_trait = indigenous_american_heritage }
+	}
+	trigger_else_if = {
+		limit = {
+			exists = capital
+			capital = { region = sr:region_oceania }
+		}
+		any_primary_culture = { has_discrimination_trait = indigenous_oceanic_heritage }
+	}
+	trigger_else_if = {
+		limit = { country_is_in_east_asia = yes }
+		any_primary_culture = { has_discrimination_trait = north_asian_heritage }
+	}
+	trigger_else_if = {
+		limit = { country_is_in_africa = yes }
+		any_primary_culture = { has_discrimination_trait = african_heritage }
+	}
+	trigger_else = { always = no }
+}

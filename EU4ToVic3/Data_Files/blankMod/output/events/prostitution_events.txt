@@ -1,0 +1,545 @@
+﻿namespace = prostitution
+
+# Contagious Diseases Acts
+prostitution.1 = {
+	type = country_event
+	placement = scope:cda_state
+	title = prostitution.1.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = prostitution.1.d
+				trigger = {
+					NOT = {
+						scope:cda_ig = {
+							is_interest_group_type = ig_armed_forces
+						}
+					}
+				}
+			}
+			triggered_desc = {
+				desc = prostitution.1.d2
+				trigger = {
+					scope:cda_ig = {
+						is_interest_group_type = ig_armed_forces
+					}
+				}
+			}
+		}
+	}
+	flavor = prostitution.1.f
+
+	gui_window = event_window_1char_tabloid
+
+	left_icon = scope:cda_ig_leader
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_variable = police_cooldown }
+		NOT = {
+			has_variable = var_abolished_cda_permanently
+		}
+		institution_investment_level = {
+			institution = institution_police
+			value = 3
+		}
+		any_scope_state = {
+			is_incorporated = yes
+			has_building = building_urban_center
+		}
+		any_interest_group = {
+			is_in_government = yes
+			OR = {
+				leader = {
+					has_ideology = ideology:ideology_traditionalist
+				}
+				AND = {
+					OR = {
+						is_interest_group_type = ig_devout
+						is_interest_group_type = ig_armed_forces
+					}
+					### Converter
+					leader = { is_feminist_character = no }
+				}
+			}
+		}
+		any_primary_culture = { # these attitudes are fairly specific to the West
+			has_discrimination_trait = european_heritage
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = police_cooldown
+			years = 2
+		}
+		random_scope_state = {
+			limit = {
+				has_building = building_urban_center
+				is_incorporated = yes
+			}
+			save_scope_as = cda_state
+		}
+		random_interest_group = {
+			limit = {
+				is_in_government = yes
+				OR = {
+					leader = {
+						has_ideology = ideology:ideology_traditionalist
+					}
+					AND = {
+						OR = {
+							is_interest_group_type = ig_devout
+							is_interest_group_type = ig_armed_forces
+						}
+						### Converter
+						leader = { is_feminist_character = no }
+					}
+				}
+			}
+			save_scope_as = cda_ig
+			leader = {
+				save_scope_as = cda_ig_leader
+			}
+		}
+	}
+
+	option = {
+		name = prostitution.1.a
+		default_option = yes
+		scope:cda_state = {
+			add_modifier = {
+				name = cda_enacted
+				months = very_long_modifier_time
+			}
+		}
+		scope:cda_ig = {
+			add_modifier = {
+				name = cda_enacted_ig
+				months = normal_modifier_time
+			}
+		}
+	}
+	option = {
+		name = prostitution.1.b
+		scope:cda_ig = {
+			add_modifier = {
+				name = cda_not_enacted_ig
+				months = normal_modifier_time
+			}
+		}
+	}
+	option = {
+		name = prostitution.1.c
+		trigger = {
+			has_technology_researched = modern_nursing
+			institution_investment_level = {
+				institution = institution_health_system
+				value = 3
+			}
+		}
+		highlighted_option = yes
+		scope:cda_ig = {
+			add_modifier = {
+				name = cda_not_enacted_ig
+				months = normal_modifier_time
+			}
+		}
+		add_modifier = {
+			name = cda_following_the_science
+			months = normal_modifier_time
+		}
+	}
+}
+
+# Repeal of the CDA
+prostitution.2 = {
+	type = country_event
+	placement = scope:feminist_cda_state
+	title = prostitution.2.t
+	desc = prostitution.2.d
+	flavor = prostitution.2.f
+
+	gui_window = event_window_1char_tabloid
+
+	left_icon = scope:feminist_cda_ig_leader
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_variable = police_cooldown }
+		any_scope_state = {
+			has_modifier = cda_enacted
+			is_incorporated = yes
+		}
+		any_interest_group = {
+			### Converter
+			leader = { is_feminist_character = yes }
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = police_cooldown
+			years = 2
+		}
+		random_scope_state = {
+			limit = {
+				has_modifier = cda_enacted
+				is_incorporated = yes
+			}
+			save_scope_as = feminist_cda_state
+		}
+		random_interest_group = {
+			limit = {
+				### Converter
+				leader = { is_feminist_character = yes }
+			}
+			save_scope_as = feminist_cda_ig
+			leader = {
+				save_scope_as = feminist_cda_ig_leader
+			}
+		}
+	}
+
+	option = {
+		name = prostitution.2.a
+		default_option = yes
+		scope:feminist_cda_ig = {
+			add_modifier = {
+				name = cda_abolished
+				months = normal_modifier_time
+			}
+		}
+		scope:feminist_cda_state = {
+			remove_modifier = cda_enacted
+		}
+	}
+
+	option = {
+		name = prostitution.2.c
+		set_variable = {
+			name = var_abolished_cda_permanently
+		}
+		scope:feminist_cda_ig = {
+			add_modifier = {
+				name = cda_abolished
+				months = normal_modifier_time
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					OR = {
+						leader = {
+							has_ideology = ideology:ideology_traditionalist
+						}
+						AND = {
+							OR = {
+								is_interest_group_type = ig_devout
+								is_interest_group_type = ig_armed_forces
+							}
+							### Converter
+							leader = { is_feminist_character = no }
+						}
+					}
+				}
+			}
+			every_interest_group = {
+				limit = {
+					OR = {
+						leader = {
+							has_ideology = ideology:ideology_traditionalist
+						}
+						AND = {
+							OR = {
+								is_interest_group_type = ig_devout
+								is_interest_group_type = ig_armed_forces
+							}
+							### Converter
+							leader = { is_feminist_character = no }
+						}
+					}
+				}
+				add_modifier = {
+					name = cda_abolished_traditionalists
+					months = normal_modifier_time
+				}
+			}
+		}
+		every_scope_state = {
+			limit = {
+				has_modifier = cda_enacted
+				is_incorporated = yes
+			}
+			remove_modifier = cda_enacted
+		}
+	}
+
+	option = {
+		name = prostitution.2.b
+		scope:feminist_cda_ig = {
+			add_modifier = {
+				name = cda_not_abolished
+				months = 12
+			}
+		}
+	}
+}
+
+# Male brothel scandal
+prostitution.3 = {
+	type = country_event
+	placement = ROOT
+	title = prostitution.3.t
+	desc = prostitution.3.d
+	flavor = prostitution.3.f
+
+	gui_window = event_window_1char_tabloid
+
+	left_icon = scope:scandal_character
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_variable = police_cooldown }
+		any_primary_culture = { # doesn't fit that well outside of the West
+			has_discrimination_trait = european_heritage
+		}
+		institution_investment_level = {
+			institution = institution_police
+			value = 3
+		}
+		NOT = { has_law = law_type:law_outlawed_dissent }
+		any_interest_group = {
+			is_in_government = yes
+			OR = {
+				is_interest_group_type = ig_devout
+				is_interest_group_type = ig_industrialists
+				is_interest_group_type = ig_landowners
+				is_interest_group_type = ig_petty_bourgeoisie
+			}
+			leader = {
+				NOT = {
+					has_modifier = embroiled_in_scandal
+				}
+				is_oppressed_gender = no		### Converter
+				is_busy = no
+			}
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = police_cooldown
+			years = 2
+		}
+		random_scope_state = {
+			limit = {
+				is_capital = yes
+			}
+			save_scope_as = capital_state
+		}
+		random_interest_group = {
+			limit = {
+				is_in_government = yes
+				OR = {
+					is_interest_group_type = ig_devout
+					is_interest_group_type = ig_industrialists
+					is_interest_group_type = ig_landowners
+					is_interest_group_type = ig_petty_bourgeoisie
+				}
+				leader = {
+					NOT = {
+						has_modifier = embroiled_in_scandal
+					}
+					is_oppressed_gender = no		### Converter
+					is_busy = no
+				}
+			}
+			leader = {
+				save_scope_as = scandal_character
+			}
+		}
+	}
+	option = { # Character must resign
+		name = prostitution.3.a
+		trigger = {
+			scope:scandal_character = {
+				is_monarch = no
+			}
+		}
+		custom_tooltip = prostitution.3.a.tt
+		hidden_effect = {
+			scope:scandal_character = {
+				kill_character = {
+					hidden = yes
+				}
+			}
+		}
+	}
+	option = { # try to suppress the story
+		name = prostitution.3.b
+		default_option = yes
+		random_list = {
+			50 = {
+				modifier = {
+					if = {
+						limit = {
+							has_law = law_type:law_protected_speech
+						}
+					}
+					add = 25
+				}
+				if = {
+					limit = {
+						NOT = { has_law = law_type:law_censorship }
+					}
+					add_modifier = {
+						name = coverup_discovered
+						months = 12
+					}
+				}
+				scope:scandal_character = {
+					add_modifier = {
+						name = embroiled_in_scandal
+						months = 120
+					}
+				}
+			}
+			50 = {
+				modifier = {
+					if = {
+						limit = {
+							has_law = law_type:law_censorship
+						}
+					}
+					add = 25
+				}
+			}
+		}
+	}
+	option = { # our propagandists can minimize the impact
+		name = prostitution.3.c
+		trigger = {
+			has_technology_researched = mass_propaganda
+		}
+		scope:scandal_character = {
+			add_modifier = {
+				name = embroiled_in_scandal
+				months = normal_modifier_time
+			}
+		}
+	}
+}
+
+# Police Brutality
+prostitution.4 = {
+	type = country_event
+	placement = scope:police_brutality_state
+	title = prostitution.4.t
+	desc = prostitution.4.d
+	flavor = prostitution.4.f
+
+	event_image = {
+		video = "africa_soldiers_breaking_protest"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_variable = police_cooldown }
+		OR = {
+			institution_investment_level = {
+				institution = institution_police
+				value >= 3
+			}
+			has_law = law_type:law_militarized_police
+		}
+		any_scope_state = {
+			is_incorporated = yes
+			has_building = building_urban_center
+		}
+		NOT = {
+			any_interest_group = {
+				OR = {
+					has_modifier = unreasonable_force
+					has_modifier = defunded_police
+				}
+			}
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = police_cooldown
+			years = 2
+		}
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				has_building = building_urban_center
+			}
+			save_scope_as = police_brutality_state
+		}
+	}
+	option = { # defund the police
+		name = prostitution.4.a
+		change_institution_investment_level = {
+			institution = institution_police
+			investment = -1
+		}
+		every_interest_group = {
+			limit = {
+				law_stance = {
+					law = law_type:law_militarized_police
+					value < neutral
+				}
+			}
+			add_modifier = {
+				name = defunded_police
+				months = normal_modifier_time
+			}
+		}
+	}
+	option = { # this is fine
+		name = prostitution.4.b
+		default_option = yes
+		scope:police_brutality_state = {
+			add_radicals_in_state = {
+				value = medium_radicals
+				strata = poor
+			}
+		}
+		every_interest_group = {
+			limit = {
+				law_stance = {
+					law = law_type:law_militarized_police
+					value > neutral
+				}
+			}
+			add_modifier = {
+				name = unreasonable_force
+				months = normal_modifier_time
+			}
+		}
+	}
+}

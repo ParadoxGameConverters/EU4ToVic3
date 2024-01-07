@@ -1,0 +1,474 @@
+﻿namespace = german_unification
+
+# North/South German Confederation
+german_unification.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = german_unification.1.t
+	desc = {
+		first_valid = {		
+			triggered_desc = {
+				desc = german_unification.1.d1
+				trigger = {
+					country_has_primary_culture = cu:north_german
+				}
+			}
+			triggered_desc = {
+				desc = german_unification.1.d2
+				trigger = {
+					country_has_primary_culture = cu:south_german
+				}
+			}
+		}
+	}
+	flavor = german_unification.1.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		set_variable = je_german_confederate_unifier
+	
+		every_country = {
+			limit = {
+				country_rank < rank_value:great_power			
+				OR = {
+					AND = {
+						root = { country_has_primary_culture = cu:north_german }
+						country_has_primary_culture = cu:north_german
+					}
+					AND = {
+						root = { country_has_primary_culture = cu:south_german }
+						country_has_primary_culture = cu:south_german
+					}					
+				}				
+				NOT = {
+					THIS = ROOT
+				}				
+			}
+			
+			if = {
+				limit = {
+					is_ai = yes			
+					OR = {
+						has_diplomatic_pact = {
+							who = ROOT
+							type = customs_union
+						}
+						is_supporting_unification_candidate = { who = root country_formation = GER }
+					}
+				}			
+				root = { annex_with_incorporation = prev }
+			}
+			else = {
+				trigger_event = { id = german_unification.2 days = 0 popup = yes }
+			}
+		}
+	}
+
+	option = {
+		name = german_unification.1.a
+		default_option = yes
+		every_interest_group = {
+			limit = {
+				is_in_government = yes
+			}
+			leader = {
+				add_modifier = {
+					name = german_unification_popularity
+					months = long_modifier_time
+				}
+			}
+		}
+		if = {
+			limit = {
+				country_has_primary_culture = cu:north_german
+				NOT = { exists = c:NGF }
+				OR = {
+					country_tier = kingdom
+					country_tier = principality
+				}
+			}
+			change_tag = NGF
+		}
+		else_if = {
+			limit = {
+				country_has_primary_culture = cu:south_german
+				NOT = { exists = c:SGF }
+				OR = {
+					country_tier = kingdom
+					country_tier = principality
+				}
+			}
+			change_tag = SGF
+		}
+	}
+	option = {
+		name = german_unification.1.b
+		add_modifier = {
+			name = partial_german_unification_influence_prestige
+			months = normal_modifier_time
+		}
+		if = {
+			limit = {
+				country_has_primary_culture = cu:north_german
+				NOT = { exists = c:NGF }
+				OR = {
+					country_tier = kingdom
+					country_tier = principality
+				}
+			}
+			change_tag = NGF
+		}
+		else_if = {
+			limit = {
+				country_has_primary_culture = cu:south_german
+				NOT = { exists = c:SGF }
+				OR = {
+					NOT = { exists = c:AUS }
+					NOT = { THIS = c:AUS }
+				}
+				OR = {
+					country_tier = kingdom
+					country_tier = principality
+				}
+			}
+			change_tag = SGF
+		}
+	}
+}
+
+# Annex a German country after forming NGF/SGF
+german_unification.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = german_unification.2.t
+	desc = german_unification.2.d
+	flavor = german_unification.2.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+	
+	immediate = {
+		random_country = {
+			limit = { is_unification_candidate = GER }
+			save_scope_as = german_unification_candidate
+		}	
+	}
+
+	option = {
+		name = german_unification.2.a
+		trigger = {
+			OR = {
+				is_subject = no
+				is_subject_of = scope:german_unification_candidate
+			}				
+		}
+		scope:german_unification_candidate = { annex_with_incorporation = root }
+		ai_chance = {
+			base = 9
+		}
+	}
+	option = {
+		name = german_unification.2.b
+		default_option = yes
+		add_radicals = {
+			value = medium_radicals
+			culture = cu:south_german
+		}		
+		add_radicals = {
+			value = medium_radicals
+			culture = cu:north_german
+		}			
+		change_relations = {
+			country = scope:german_unification_candidate
+			value = -50
+		}
+		every_scope_state = {
+			if = {
+				limit = { 	
+					NOT = { has_claim_by = scope:german_unification_candidate }
+				}
+			}
+			state_region = {
+				add_claim = scope:german_unification_candidate
+			}
+		}		
+		hidden_effect = {
+			scope:german_unification_candidate = {
+				set_secret_goal = {
+					country = root
+					secret_goal = conquer
+				}
+			}
+		}
+		
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+# Bismarck
+german_unification.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = german_unification.3.t
+	desc = german_unification.3.d
+	flavor = german_unification.3.f
+
+	gui_window = event_window_1char_tabloid
+
+	left_icon = scope:bismarck_scope
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_global_variable = bismarck_variable }
+		ig:ig_landowners = {
+			is_powerful = yes
+			is_in_government = yes
+		}
+		is_unification_candidate = GER
+		has_technology_researched = nationalism
+		game_date > 1846.1.1
+		game_date < 1898.1.1
+	}
+
+	immediate = {
+		set_global_variable = bismarck_variable
+		### Converter ###
+		if = {
+			limit = { is_matriarchal_country = yes }
+			create_character = {
+				first_name = Uta
+				last_name = von_Bismarck
+				historical = yes
+				ig_leader = yes
+				interest_group = ig_landowners
+				female = yes
+				birth_date = 1815.4.1
+				dna = dna_otto_von_bismarck
+				ideology = ideology_royalist
+				traits = {
+					direct
+					cautious
+				}
+			}
+		}
+		else = {
+			create_character = {
+				first_name = Otto
+				last_name = von_Bismarck
+				historical = yes
+				ig_leader = yes
+				interest_group = ig_landowners
+				female = no
+				birth_date = 1815.4.1
+				dna = dna_otto_von_bismarck
+				ideology = ideology_royalist
+				traits = {
+					direct
+					cautious
+				}
+			}
+		}
+		### Converter ###
+		ig:ig_landowners = {
+			save_scope_as = junkers
+			leader = {
+				save_scope_as = bismarck_scope
+			}
+		}
+	}
+
+	option = {
+		name = german_unification.3.a
+		default_option = yes
+		show_as_tooltip = {
+			create_character = {
+				first_name = Otto
+				last_name = von_Bismarck
+				historical = yes
+				ig_leader = yes
+				interest_group = ig_landowners
+				female = no
+				birth_date = 1815.4.1
+				ideology = ideology_royalist
+				traits = {
+					direct
+					cautious
+				}
+			}
+		}
+		scope:bismarck_scope = {
+			add_modifier = {
+				name = bismarck_popular
+			}
+		}
+		add_modifier = {
+			name = realpolitik
+			months = normal_modifier_time
+		}
+	}
+	option = {
+		name = german_unification.3.b
+		default_option = yes
+		show_as_tooltip = {
+			create_character = {
+				first_name = Otto
+				last_name = von_Bismarck
+				historical = yes
+				ig_leader = yes
+				interest_group = ig_landowners
+				female = no
+				birth_date = 1815.4.1
+				ideology = ideology_royalist
+				traits = {
+					direct
+					cautious
+				}
+			}
+		}
+		scope:bismarck_scope = {
+			add_modifier = {
+				name = bismarck_unpopular
+			}
+		}
+		add_modifier = {
+			name = germany_aggressive_expansion
+			months = normal_modifier_time
+		}
+	}
+}
+
+# German Unification
+german_unification.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = german_unification.4.t
+	desc = german_unification.4.d
+	flavor = german_unification.4.f
+
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	option = {
+		name = german_unification.4.a
+		default_option = yes
+		give_claims_on_germany = yes
+		ruler = {
+			add_modifier = {
+				name = german_unifier_ruler
+			}
+		}
+	}
+	option = {
+		name = german_unification.4.b
+		give_claims_on_germany = yes
+		add_loyalists = {
+			value = 0.1
+			culture = cu:north_german
+		}
+		add_loyalists = {
+			value = 0.1
+			culture = cu:south_german
+		}
+	}
+}
+
+# German National Identity
+german_unification.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = german_unification.5.t
+	flavor = german_unification.5.f
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = german_unification.5.d1
+				trigger = {
+					this = scope:german_unifier_candidate
+				}
+			}
+			triggered_desc = {
+				desc = german_unification.5.d2
+				trigger = {
+					exists = scope:german_unifier_candidate
+				}
+			}
+			triggered_desc = {
+				desc = german_unification.5.d3
+				trigger = {
+					always = yes
+				}
+			}			
+		}
+	}
+
+	event_image = {
+		video = "europenorthamerica_political_extremism"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {}
+
+	option = {
+		name = german_unification.5.a
+		default_option = yes	
+		if = {
+			limit = { country_has_primary_culture = cu:north_german }
+			add_journal_entry = {
+				type = je_north_german_unification
+			}
+		}
+		else_if = {
+			limit = { country_has_primary_culture = cu:south_german }
+			add_journal_entry = {
+				type = je_south_german_unification
+			}
+		}		
+	}
+}

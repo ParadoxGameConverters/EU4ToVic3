@@ -1,0 +1,51 @@
+### EXPLANATION OF THIS FILE
+## This file is used to splice royal names into cultures,
+## by checking the properties of the religion assigned to
+## said culture. In such a way, the Western custom of
+## translating Western monarch names can be kept working
+## and one should see "George of England" and "Nicholas
+## of Russia" without any problem.
+## Currently, only the Christian world has been supplied
+## with such a list, namely because the rest of the world's
+## monarchs do not get any fancy translations.
+
+## Known problems with the Christian list:
+## JOHANNES: A divide between kings named John and Ivan
+## exists in vernacular translation, yet the name is the same,
+## Ivan being chosen east of Germany, John otherwise. This,
+## however, is impossible to code in.
+## ALOYSIUS/LUDOVICUS: The Louis-Ludwig divide
+## mimicks that of the name above, the dividing point being
+## the Rhine, west of which we have Louis, east of which
+## Ludwig.
+## CJK TRANSLATION: They don't translate it like we do,
+## meaning you should have "John of England" and "Jean of
+## France". Because of coding impossibility, they both get
+## either a transcription from Latin or the Biblical translation
+## of the name.
+
+christian_group = {
+	male_regal_first_names = {
+		k_adolphus k_albertus k_alexander k_alexius k_alphonsus k_ambrosius k_andreas
+		k_anselmus k_antonius k_antoninus k_augustus k_augustinus k_bartholomaeus
+		k_basilius k_benedictus k_bernardus k_blasius k_bonifacius k_callixtus k_camillus
+		k_casimirus k_caelestinus k_carolus k_christophorus k_clemens k_conradus
+		k_constantinus k_cyprianus k_cyrillus k_damasus k_damianus k_dominicus
+		k_eduardus k_eugenius k_ferdinandus k_firminus k_franciscus k_fridericus k_gabriel
+		k_georgius k_gregorius k_gustavus k_henricus k_jacobus k_hieronymus k_joachim
+		k_johannes k_joseph k_julianus k_julius k_justinianus k_ladislaus k_leo k_leonardus
+		k_aloysius k_lucianus k_ludovicus k_lucas k_marcus k_martinus k_matthaeus
+		k_maximilianus k_michael k_nicholaus k_patricius k_paulus k_petrus k_philippus
+		k_pius k_raphael k_raimondus k_richardus k_robertus k_romanus k_sebastianus
+		k_simon k_stanislaus k_stephanus k_sylvester k_theodorus k_thomas
+		k_titus k_valentinus k_valerianus k_victor k_vincentius k_gulielmus k_zacharias
+	}
+	female_regal_first_names = {
+		q_alexandra q_agatha q_agnes q_angela q_anna q_barbara q_basilissa
+		q_bernardina q_blanca q_brigitta q_catherina q_caecilia q_carola q_clara
+		q_clotilda q_constantia q_daria q_alienora q_elisabeth q_francisca q_friderica
+		q_helena q_irene q_johanna q_juliana q_justina q_lucia q_margarita q_martha
+		q_martina q_maria q_matilda q_philomena q_rita q_rosa q_rosalia q_sophia
+		q_teresa q_thecla q_theodora q_victoria
+	}
+}

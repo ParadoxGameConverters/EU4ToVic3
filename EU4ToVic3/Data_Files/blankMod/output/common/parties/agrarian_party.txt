@@ -1,0 +1,552 @@
+﻿# Fallback party for Rural Folk
+# Occasionally used for an anti-serfdom alliance
+# More popular in Nordic countries
+
+agrarian_party = {
+	color = { 64 173 59 }
+	name = {
+		first_valid = {
+			triggered_desc = {
+				desc = party_irish_national_land_league
+				trigger = {
+					exists = c:IRE
+					THIS = c:IRE
+				}
+			}
+			triggered_desc = {
+				desc = party_independent_agriculture_party
+				trigger = {
+					exists = c:GBR
+					THIS = c:GBR
+				}
+			}
+			triggered_desc = {
+				desc = party_farmers_party
+				trigger = {
+					exists = c:NOR
+					THIS = c:NOR
+				}
+			}
+			triggered_desc = {
+				desc = party_free_peoples_party
+				trigger = {
+					exists = c:DEN
+					THIS = c:DEN
+				}
+			}
+			triggered_desc = {
+				desc = party_farmers_league
+				trigger = {
+					exists = c:SWE
+					THIS = c:SWE
+				}
+			}
+			triggered_desc = {
+				desc = party_peoples_party
+				trigger = {
+					exists = c:FIN
+					THIS = c:FIN
+				}
+			}
+			triggered_desc = {
+				desc = party_agrarian_and_farmer_party
+				trigger = {
+					exists = c:FRA
+					THIS = c:FRA
+				}
+			}
+			triggered_desc = {
+				desc = party_conservative_republican_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }		### Converter
+					OR = {
+						has_law = law_type:law_presidential_republic
+						has_law = law_type:law_parliamentary_republic
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_landbund
+				trigger = {
+					exists = c:AUS
+					THIS = c:AUS
+				}
+			}
+			triggered_desc = {
+				desc = party_national_peasant_accord
+				trigger = {
+					exists = c:SER
+					THIS = c:SER
+				}
+			}
+			triggered_desc = {
+				desc = party_agrarian_national_union
+				trigger = {
+					exists = c:BUL
+					THIS = c:BUL
+				}
+			}
+			triggered_desc = {
+				desc = party_national_farmer_party
+				trigger = {
+					exists = c:HUN
+					THIS = c:HUN
+				}
+			}
+			triggered_desc = {
+				desc = party_peoples_party
+				trigger = {
+					exists = c:USA
+					THIS = c:USA
+				}
+			}
+			triggered_desc = {
+				desc = party_patrons_of_industry
+				trigger = {
+					country_has_primary_culture = cu:anglo_canadian
+				}
+			}
+			triggered_desc = {
+				desc = party_peasants_party
+				trigger = {
+					country_has_primary_culture = cu:romanian
+				}
+			}
+			triggered_desc = {
+				desc = party_peoples_party
+				trigger = {
+					country_has_primary_culture = cu:polish
+				}
+			}
+			triggered_desc = {
+				desc = party_agrarian_league
+				trigger = {
+					OR = {
+						country_has_primary_culture = cu:north_german
+						country_has_primary_culture = cu:south_german
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_agrarian
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+	icon = {
+		default = "/gfx/interface/icons/political_parties/agrarians.dds"
+	}
+
+	# THIS IS RUN ONLY ONCE AT GAME START
+	valid_for_country = {
+		always = yes
+	}
+	available_for_interest_group = {
+		owner = {
+			country_has_voting_franchise = yes
+			ig:ig_rural_folk = {
+				is_marginal = no
+			}
+		}
+		OR = {
+	     	NOT = {
+	         	owner = {
+	         		has_variable = only_valid_party
+	         	}
+	        }
+	        owner.var:only_valid_party = {
+	        	is_party_type = agrarian_party
+	        }
+	    }
+	}
+	
+	# Root - IG considering joining
+	# scope:number - the number of IGs that would join this party before the root IG
+	join_weight = {
+		value = {
+			value = -5
+			desc = "base_value"
+		}
+		if = {
+			limit = {
+				owner = {
+					country_is_in_south_america = yes
+					any_primary_culture = {
+						has_discrimination_trait = hispanophone
+					}
+				}
+			}
+			add = {
+				value = -10
+				desc = "south_america_two_party_system"
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					country_is_in_north_america = yes
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }		### Converter
+					has_law = law_type:law_presidential_republic
+				}
+			}
+			add = {
+				value = -10
+				desc = "usa_two_party_system"
+			}
+		}
+		if = { # a party for powerful farmers
+			limit = {
+				has_ideology = ideology:ideology_agrarian
+				is_powerful = yes
+			}
+			add = {
+				value = 10
+				desc = "from_peasants"
+			}
+		}
+		if = { # weak anti-serfdom types might fall in line behind strong farmers
+			limit = {
+				is_powerful = no
+				owner = {
+					has_law = law_type:law_serfdom
+				}
+				law_stance = {
+					law = law_type:law_serfdom
+					value < neutral
+				}
+			}
+			add = {
+				value = 10
+				desc = "from_powerful_farmers"
+			}
+		}
+		if = { # scandinavians are more likely to have agrarian parties
+			limit = {
+				owner = {
+					any_primary_culture = {
+						has_discrimination_trait = scandinavian_culture_group
+					}
+				}
+				OR = {
+					is_interest_group_type = ig_rural_folk
+					is_interest_group_type = ig_intelligentsia
+				}
+			}
+			add = {
+				value = 10
+				desc = "from_scandinavian"
+			}
+		}
+		if = { # pacifist anti-colonial alliance
+			limit = {
+				leader = {
+					has_ideology = ideology:ideology_pacifist
+				}
+				owner = {
+					NOT = { has_law = law_type:law_no_colonial_affairs }
+				}
+			}
+			add = {
+				value = 6
+				desc = "from_pacifism"
+			}
+		}
+		if = { # anti-immigration alliance
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_isolationist
+					has_ideology = ideology:ideology_populist
+					has_ideology = ideology:ideology_reactionary
+				}
+				owner = {
+					has_law = law_type:law_no_migration_controls
+				}
+			}
+			add = {
+				value = 6
+				desc = "from_migration_law"
+			}
+		}
+		if = { # against arbitrary or militarized policing
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_liberal
+					has_ideology = ideology:ideology_liberal_modern
+					has_ideology = ideology:ideology_particularist
+				}
+				owner = {
+					OR = {	
+						has_law = law_type:law_local_police
+						has_law = law_type:law_militarized_police
+					}
+				}
+			}
+			add = {
+				value = 6
+				desc = "from_bad_police"
+			}
+		}
+		if = { # against land-based taxation
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_meritocratic
+					has_ideology = ideology:ideology_agrarian
+					leader = {
+						has_ideology = ideology:ideology_social_democrat
+					}
+				}
+				owner = {
+					has_law = law_type:law_land_based_taxation
+				}
+			}
+			add = {
+				value = 6
+				desc = "from_land_tax"
+			}
+		}
+		if = { # against free trade - peasant/socialist alliance
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_proletarian
+					has_ideology = ideology:ideology_agrarian
+					has_ideology = ideology:ideology_paternalistic
+					### Converter
+					has_ideology = ideology:ideology_maternalistic
+				}
+				owner = {
+					has_law = law_type:law_free_trade
+				}
+				NOT = {
+					leader = {
+						has_ideology = ideology:ideology_market_liberal
+					}
+				}
+			}
+			add = {
+				value = 6
+				desc = "from_anti_free_trade"
+			}
+		}
+		if = { # against laissez-faire - peasant/socialist alliance
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_proletarian
+					has_ideology = ideology:ideology_agrarian
+					leader = {
+						has_ideology = ideology:ideology_protectionist
+					}
+				}
+				owner = {
+					has_law = law_type:law_laissez_faire
+				}
+				NOT = {
+					leader = {
+						has_ideology = ideology:ideology_market_liberal
+					}
+				}
+			}
+			add = {
+				value = 6
+				desc = "from_anti_free_trade"
+			}
+		}
+		if = { # opposition to peasant levies
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_jingoist
+					has_ideology = ideology:ideology_particularist
+					has_ideology = ideology:ideology_sikh_moralist
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_anarchist
+							has_ideology = ideology:ideology_pacifist
+							has_ideology = ideology:ideology_jingoist_leader
+						}
+					}
+				}
+				owner = {
+					has_law = law_type:law_peasant_levies
+				}
+			}
+			add = {
+				value = 6
+				desc = "from_peasant_levies"
+			}
+		}
+		if = { # anti-serfdom
+			limit = {
+				owner = {
+					has_law = law_type:law_serfdom
+				}
+				OR = {
+					has_ideology = ideology:ideology_egalitarian
+					has_ideology = ideology:ideology_egalitarian_modern
+					has_ideology = ideology:ideology_anti_slavery
+					has_ideology = ideology:ideology_laissez_faire
+					has_ideology = ideology:ideology_particularist
+					leader = {
+						has_ideology = ideology:ideology_abolitionist
+						has_ideology = ideology:ideology_social_democrat
+						has_ideology = ideology:ideology_communist
+					}
+				}
+			}
+			add = {
+				value = 10
+				desc = "from_serfdom"
+			}
+		}
+		if = { # opposition to debt slavery
+			limit = {
+				owner = {
+					has_law = law_type:law_debt_slavery
+				}
+				OR = {
+					has_ideology = ideology:ideology_anti_slavery
+					leader = {
+						has_ideology = ideology:ideology_abolitionist
+					}
+				}
+			}
+			add = {
+				value = 10
+				desc = "from_debt_slavery"
+			}
+		}
+		if = { # nobody will join if the rural folk don't join
+			limit = {
+				NOT = { is_interest_group_type = ig_rural_folk }
+				OR = {
+					NOT = { exists = owner.py:agrarian_party }
+					AND = {
+						exists = owner.py:agrarian_party
+						owner = {
+							ig:ig_rural_folk = {
+								NOT = { is_member_of_party = owner.py:agrarian_party }
+							}
+						}
+					}
+				}
+			}
+			add = {
+				value = -20
+				desc = "from_no_rural_folk_in_party" # this should probably never actually display in game because the party won't exist
+			}
+		}
+		if = {
+			limit = {
+				is_interest_group_type = ig_rural_folk
+				is_powerful = yes
+			}
+			multiply = {
+				value = 2
+				desc = "from_archetype_party"
+			}
+		}
+		if = {
+			limit = {
+				scope:number = 1
+				is_powerful = no
+				is_marginal = no
+			}
+			multiply = {
+				value = 2
+				desc = "from_influential_supporting_member"
+			}
+		}
+		else_if = {
+			limit = {
+				scope:number = 2
+			}
+			multiply = {
+				value = 0.5
+				desc = "from_two_prior_members"
+			}
+		}
+		else_if = {
+			limit = {
+				scope:number = 3
+			}
+			multiply = {
+				value = 0.25
+				desc = "from_three_prior_members"
+			}
+		}
+		else_if = {
+			limit = {
+				scope:number > 3
+			}
+			multiply = {
+				value = 0.1
+				desc = "from_more_than_three_prior_members"
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }		### Converter
+					NOT = {
+						OR = {
+							has_technology_researched = socialism
+							has_technology_researched = corporatism
+							has_technology_researched = anarchism
+						}
+					}
+				}
+			}
+			add = {
+				value = -10
+				desc = "from_two_party_system"
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+	         		has_variable = only_valid_party
+	         	}
+	         	NOT = {
+			        owner.var:only_valid_party = {
+			        	is_party_type = agrarian_party
+			        }
+			    }
+			}
+			multiply = {
+				value = 0
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+	         		has_variable = only_valid_party
+	         	}
+				 owner.var:only_valid_party = {
+					is_party_type = agrarian_party
+				}
+	         	owner.ruler = {
+					this.interest_group = prev
+				}
+			}
+			add = {
+				value = 1000
+				desc = "from_only_legal_party"
+			}
+		}
+		else_if = {
+			limit = {
+				owner = {
+	         		has_variable = only_valid_party
+	         	}
+	         	 owner.var:only_valid_party = {
+		        	is_party_type = agrarian_party
+		        }
+			}
+			add = {
+				value = 3
+				desc = "from_only_legal_party"
+			}
+		}
+	}
+}

@@ -13,6 +13,7 @@ std::string normalizeString(const std::string& input)
 	auto toReturn = commonItems::normalizeUTF8Path(input);
 	std::ranges::replace(toReturn, ' ', '_');
 	std::ranges::replace(toReturn, '\'', '_');
+	std::ranges::replace(toReturn, '`', '_');
 	std::ranges::replace(toReturn, '(', '_');
 	std::ranges::replace(toReturn, ')', '_');
 	return toReturn;
@@ -80,6 +81,10 @@ V3::Character::Character(const EU4::Character& character,
 		const int seed = static_cast<int>(firstName[0]) * 11 + 51;
 		traits.emplace(characterTraitMapper.getGratisAgeism(seed));
 	}
+
+	// Are we young?
+	if (age < 15)
+		traits.emplace("trait_child");
 
 	// are we *still* dry?
 	if (traits.empty())
@@ -173,7 +178,7 @@ void V3::Character::convertLeadership(const EU4::Character& character, const map
 void V3::Character::convertAge(const EU4::Character& character, float ageShift, const date& conversionDate)
 {
 	birthDate = character.birthDate;
-	age = static_cast<int>(std::round(birthDate.diffInYears(conversionDate)));
+	age = static_cast<int>(std::round(conversionDate.diffInYears(birthDate)));
 
 	birthDate.ChangeByYears(static_cast<int>(std::round(ageShift)));
 }

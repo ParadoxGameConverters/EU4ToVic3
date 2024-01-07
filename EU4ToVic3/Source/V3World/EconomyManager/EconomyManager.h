@@ -72,7 +72,7 @@ class EconomyManager
 	// Budget fxns set weight for all countries, accumulates the total weight, and returns a modifier to the globalCP pool (if any).
 	[[nodiscard]] std::pair<double, double> countryBudgetCalcs(Configuration::ECONOMY economyType) const; // Return total weight, any special factors
 	[[nodiscard]] std::pair<double, double> civLevelCountryBudgets() const;
-	[[nodiscard]] std::pair<double, double> devCountryBudgets() const;
+	[[nodiscard]] std::pair<double, double> devCountryBudgets(Configuration::ECONOMY perCapitaType) const;
 	[[nodiscard]] double getBaseSubStateWeight(const std::shared_ptr<SubState>& subState, Configuration::ECONOMY economyType) const;
 
 	[[nodiscard]] double calculateGeoMeanCentralizedPops() const;
@@ -80,6 +80,7 @@ class EconomyManager
 	[[nodiscard]] double calculateGlobalPopFactor(const PoliticalManager& politicalManager) const;
 	[[nodiscard]] double calculateTerrainMultiplier(const std::shared_ptr<SubState>& subState) const;
 	[[nodiscard]] double calculateStateTraitMultiplier(const std::shared_ptr<SubState>& subState) const;
+	[[nodiscard]] double getDensityFactor(double perCapitaDev) const;
 
 	void distributeBudget(double globalCP, double totalIndustryScore) const;
 

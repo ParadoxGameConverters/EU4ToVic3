@@ -1,5 +1,6 @@
 #include "SubStatePops.h"
 #include <algorithm>
+#include <cmath>
 #include <map>
 #include <numeric>
 
@@ -66,4 +67,16 @@ std::optional<std::string> V3::SubStatePops::getDominantReligion() const
 	});
 
 	return highest->first;
+}
+
+void V3::SubStatePops::multiplyPops(double factor)
+{
+	std::vector<Pop> replacementPops;
+	for (const auto& pop: pops)
+	{
+		auto newPop = pop;
+		newPop.setSize(static_cast<int>(std::round(pop.getSize() * factor)));
+		replacementPops.push_back(newPop);
+	}
+	pops.swap(replacementPops);
 }

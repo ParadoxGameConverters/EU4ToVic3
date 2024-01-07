@@ -16,8 +16,8 @@ namespace V3
 struct SourceProvinceData
 {
 	std::string owner;
-	double weight = 0;
-	double investmentFactor = 0;
+	double weight = 0;			  // absolute dev + buildings
+	double investmentFactor = 0; // a popshaping factor that is a log function of investedWeight in the source province
 	std::vector<EU4::PopRatio> popRatios;
 	std::set<std::string> buildings;
 	std::set<std::string> cores;

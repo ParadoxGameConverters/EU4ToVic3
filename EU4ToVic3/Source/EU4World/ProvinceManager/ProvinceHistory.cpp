@@ -116,7 +116,7 @@ void EU4::ProvinceHistory::buildPopRatios(const double assimilationFactor, const
 
 	// We start not by first date but by EU4 game start. We don't care what happened before.
 	auto lastLoopDate = datingData.startEU4Date;
-	const auto futureDate = date("2000.1.1"); // this is a future date we set to queues that we don't want to touch any more.
+	const auto futureDate = date("9999.1.1"); // this is a future date we set to queues that we don't want to touch any more.
 
 	while (cultureEvent != cultureHistory.end() || religionEvent != religionHistory.end())
 	{

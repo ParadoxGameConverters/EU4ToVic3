@@ -7,8 +7,7 @@ building_port = {
     pm = { name = pm_basic_port }
 }
 building_barracks = {
-    pm = { name = pm_skirmish_infantry }
-    pm = { name = pm_mobile_artillery }
+    pm = { name = pm_general_training }
 }
 building_naval_base = {
     pm = { name = pm_power_of_the_purse }
@@ -33,16 +32,22 @@ building_textile_mills = {
     pm = { name = pm_craftsman_sewing percent = 0.1 }
 }
 building_shipyards = {
+    pm = { name = pm_complex_shipbuilding }
+}
+building_military_shipyards = {
     pm = { name = pm_military_shipbuilding_wooden }
 }
 building_arms_industry = {
+    pm = { name = pm_rifles }
+}
+building_artillery_foundries = {
     pm = { name = pm_cannons }
 }
 building_food_industry = {
     pm = { name = pm_pot_stills }
 }
 building_chemical_plants = {
-    pm = { name = pm_leblanc_process }
+    pm = { name = pm_nitrogen_fixation }
 }
 
 ##### Rural
@@ -58,13 +63,10 @@ building_wheat_farm = {
     pm = { name = pm_citrus_orchards percent = 0.2 }
 }
 building_millet_farm = {
-    pm = { name = pm_fig_orchards percent = 0.2 }
+    pm = { name = pm_soil_enriching_farming percent = 0.2 }
 }
 building_maize_farm = {
     pm = { name = pm_citrus_orchards percent = 0.2 }
-}
-building_rice_farm = {
-    pm = { name = pm_fig_orchards percent = 0.1 }
 }
 ### Mines
 building_coal_mine = {

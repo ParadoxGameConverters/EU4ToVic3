@@ -244,15 +244,22 @@
 		}
 	}
 	s:STATE_OUTER_MANCHURIA = {
-		region_state:E03 = {
-			create_pop = {
-				culture = manchu
-				size = 1303996
-			}
-			create_pop = {
-				culture = korean
-				size = 11996
-			}
+		#region_state:CHI = {
+		#	create_pop = {
+		#		culture = manchu
+		#		size = 1303996
+		#	}
+		#	create_pop = {
+		#		culture = korean
+		#		size = 11996
+		#	}
+		#	create_pop = {
+		#		culture = siberian
+		#		size = 32800
+		#	}
+		#}
+		
+		region_state:E03 = { #Evesol
 			create_pop = {
 				culture = siberian
 				size = 32800
@@ -714,7 +721,7 @@
 	s:STATE_FORMOSA = {
 		region_state:A10 = { #Atayal
 			create_pop = {
-				culture = formosan
+				culture = yuanzhumin
 				size = 250000
 			}
 			create_pop = {
@@ -728,7 +735,7 @@
 		}
 		region_state:A00 = { #Ami(s)
 			create_pop = {
-				culture = formosan
+				culture = yuanzhumin
 				size = 250000
 			}
 			create_pop = {
@@ -742,7 +749,7 @@
 		}
 		region_state:G00 = { #Hoanya-Tsou-Bunun
 			create_pop = {
-				culture = formosan
+				culture = yuanzhumin
 				size = 250000
 			}
 			create_pop = {
@@ -756,7 +763,7 @@
 		}
 		region_state:K00 = { #Kavalan
 			create_pop = {
-				culture = formosan
+				culture = yuanzhumin
 				size = 250000
 			}
 			create_pop = {
@@ -770,7 +777,7 @@
 		}
 		region_state:T00 = { #Middag/Tautaro
 			create_pop = {
-				culture = formosan
+				culture = yuanzhumin
 				size = 250000
 			}
 			create_pop = {
@@ -784,7 +791,7 @@
 		}
 		region_state:P10 = { #Puyuma
 			create_pop = {
-				culture = formosan
+				culture = yuanzhumin
 				size = 250000
 			}
 			create_pop = {
@@ -798,7 +805,7 @@
 		}
 		region_state:S00 = { #Siraya
 			create_pop = {
-				culture = formosan
+				culture = yuanzhumin
 				size = 250000
 			}
 			create_pop = {
@@ -812,7 +819,7 @@
 		}
 		region_state:P00 = { #Paiwan(decen)/Tjaquvuquvulj(cen)
 			create_pop = {
-				culture = formosan
+				culture = yuanzhumin
 				size = 250000
 			}
 			create_pop = {
@@ -1438,14 +1445,14 @@
 		}
 	}
 	s:STATE_CHUBU = {
-		region_state:JAP = {
+		region_state:JAP = { #Japan
 			create_pop = {
 				culture = japanese
 				religion = shinto
 				size = 4127776
 			}
 		}
-		region_state:S15 = { #Saeki
+		region_state:K11 = { #Koshibuto
 			create_pop = {
 				culture = ainu
 				size = 872882
@@ -1456,7 +1463,7 @@
 				size = 872882
 			}
 		}
-		region_state:K11 = { #Koshibuto
+		region_state:S15 = { #Saeki
 			create_pop = {
 				culture = ainu
 				size = 872882
@@ -1532,7 +1539,7 @@
 	s:STATE_RYUKYU_ISLANDS = {
 		region_state:DL1 = { #Da Liuqio (Ryukyu)
 			create_pop = {
-				culture = formosan
+				culture = yuanzhumin
 				size = 259181
 			}
 		}
@@ -1557,7 +1564,7 @@
 		}
 	}
 	s:STATE_SEOUL = {
-		region_state:D00 = { #Dongye
+		region_state:DO0 = { #Dongye
 			create_pop = {
 				culture = korean
 				size = 1418978
@@ -1635,13 +1642,13 @@
 		}
 	}
 	s:STATE_SARIWON = {
-		region_state:D00 = { #Dongye
+		region_state:DO0 = { #Dongye
 			create_pop = {
 				culture = korean
 				size = 810051
 			}
 		}
-		region_state:D06 = { #Okjeo
+		region_state:O10 = { #Okjeo
 			create_pop = {
 				culture = korean
 				size = 810051

@@ -1,0 +1,322 @@
+﻿ig_devout = {
+	color = hsv{ 0.50 0.30 0.67 }
+	texture = "gfx/interface/icons/ig_icons/devout.dds"
+	layer = "revolution_dynamic_devout"
+	index = 1
+
+	ideologies = {
+		ideology_pious
+		ideology_moralist
+		ideology_patriarchal
+	}
+
+	enable = {
+		always = yes
+	}
+
+	# Deprecated; use on_enable effect to assign traits instead
+	traits = {
+		ig_trait_be_fruitful_and_multiply
+		ig_trait_divine_right
+		ig_trait_pious_fiction
+	}
+
+	on_enable = {		### Converter ###
+	}
+	on_disable = {}
+	on_character_ig_membership = {
+		if = {
+			limit = {
+				NOT = {
+					owner = {
+						has_law = law_type:law_state_atheism
+					}
+				}
+			}
+			change_character_religion = scope:interest_group.owner.religion
+		}
+		else = {
+			change_character_religion = scope:interest_group.owner.country_definition.religion
+		}
+	}
+
+
+	pop_potential = {
+		has_state_religion = yes
+		NOT = {
+			has_pop_religion = atheist
+		}
+	}
+
+	pop_weight = {
+		value = 25
+
+		add = {
+			desc = "POP_CLERGYMEN"
+			if = {
+				limit = {
+					is_pop_type = clergymen
+				}
+				value = 250
+			}
+		}
+
+		add = {
+			desc = "POP_PEASANTS"
+			if = {
+				limit = {
+					is_pop_type = peasants
+				}
+				value = 100
+			}
+		}
+
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_state_atheism
+				}
+			}
+			multiply = {
+				desc = "STATE_ATHEISM_LAW"
+				value = 0.1
+			}
+		}
+		
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_state_religion
+				}
+			}
+			multiply = {
+				desc = "STATE_RELIGION_LAW"
+				value = 1.5
+			}
+		}
+		
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_freedom_of_conscience
+				}
+			}
+			multiply = {
+				desc = "FREEDOM_OF_CONSCIENCE_LAW"
+				value = 1.25
+			}
+		}
+
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_religious_schools
+				}
+			}
+			multiply = {
+				desc = "RELIGIOUS_SCHOOLS_LAW"
+				value = owner.institution:institution_schools.investment
+				divide = 5
+				add = 1
+			}
+		}
+		
+		if = {
+			limit = {
+				owner = {
+					has_technology_researched = corporatism
+					NOT = {
+						has_law = law_type:law_total_separation
+						has_law = law_type:law_state_atheism
+					}
+				}
+			}
+			multiply = {
+				desc = "CORPORATISM_TECH"
+				value = 1.25
+			}
+		}
+
+		add = {
+			desc = "POP_LITERACY"
+			this = {
+				value = literacy_rate
+				multiply = -20
+			}
+		}
+
+		multiply = {
+			desc = "LEADER_POPULARITY"
+			scope:interest_group = {
+				leader ?= {
+					value = popularity
+					multiply = 0.0025
+					add = 1
+					max = 1.25
+					min = 0.75
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = {
+				desc = "IN_GOVERNMENT_ATTRACTION"
+				value = 1
+				add = scope:interest_group.modifier:interest_group_in_government_attraction_mult
+				min = 0
+			}
+		}
+
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_LOYALISTS"
+				value = pop_loyalist_fraction
+				divide = 4
+				add = 1
+			}
+		}
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = no
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_RADICALS"
+				value = pop_radical_fraction
+				divide = 4
+				add = 1
+			}
+		}
+	}
+
+	monarch_weight = {
+		value = 1.0
+		# Monarch is not likely to adopt a marginal IG
+		if = {
+			limit = {
+				is_marginal = yes
+			}
+			multiply = {
+				value = 0.1
+			}
+		}
+		# Monarch is more likely to adopt a Powerful IG
+		if = {
+			limit = {
+				is_powerful = yes
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		# More likely with State Religion
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_state_religion
+				}
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		# Less likely without State Religion
+		if = {
+			limit = {
+				owner = {
+					NOT = { has_law = law_type:law_state_religion }
+				}
+			}
+			multiply = {
+				value = 0.25
+			}
+		}
+		# Basically impossible with State Atheism
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_state_atheism
+				}
+			}
+			multiply = {
+				value = 0
+			}
+		}
+		# Muslims and Theravada more likely to adopt Devout
+		if = {
+			limit = {
+				OR = {
+					owner.religion = { has_discrimination_trait = muslim }		### Converter ###
+					owner.religion = rel:theravada
+				}
+			}
+			multiply = 2
+		}
+	}
+
+	agitator_weight = {
+		# Agitators more likely to come from populist IG's rather than elitist
+		value = 0.5
+		# Agitators will never be part of a marginalized IG
+		if = {
+			limit = {
+				owner.ig:ig_devout = {
+					is_marginal = yes
+				}
+			}
+			multiply = {
+				value = 0
+			}
+		}
+	}
+
+	commander_weight = {
+		value = 1.0
+	}
+
+	noble_chance = {
+		value = 0.5
+	}
+
+	female_commander_chance = {
+		### Converter ###
+		value = ig_female_general_chance
+	}
+
+	female_politician_chance = {
+		### Converter ###
+		value = ig_female_politician_chance_conversative
+	}
+
+	female_agitator_chance = {
+		### Converter ###
+		value = ig_female_agitator_chance_conversative
+	}
+
+	# The chance that a commander belonging to this IG takes over leadership when it changes
+	# scope:character is the most popular commander in the IG
+	commander_leader_chance = {
+		value = 0.25
+		if = {
+			limit = {
+				exists = scope:character
+			}
+			multiply = {
+				value = 1
+				add = scope:character.popularity
+				min = 0
+			}
+		}
+	}
+}

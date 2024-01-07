@@ -11,6 +11,7 @@
 #include "StateModifier.h"
 #include <algorithm>
 #include <cmath>
+#include <iomanip>
 #include <numeric>
 #include <ranges>
 
@@ -63,6 +64,22 @@ double V3::SubState::getTerrainFrequency(const std::string& theTerrain) const
 		return terrain->second;
 	}
 	return 0;
+}
+
+double V3::SubState::getOverPopulation() const
+{
+	const double pops = subStatePops.getPopCount();
+	const double capacity = getResource("bg_agriculture") * 5000.0; // One arable land supports roughly 5k people.
+	if (capacity < 5000)
+	{
+		return 10.0;
+	}
+	const auto ratio = pops / capacity;
+	if (ratio < 1.0)
+	{
+		return 1.0;
+	}
+	return ratio;
 }
 
 void V3::SubState::gatherPossibleBuildings(const std::map<std::string, Building>& templateBuildings,
@@ -276,18 +293,52 @@ double V3::SubState::calcBuildingInvestmentWeight(const Building& building) cons
 
 double V3::SubState::calcBuildingIndustrialWeight(const Building& building, const BuildingGroups& buildingGroups) const
 {
-	// Must be at least a little bit industrial for this
-	// If your industrial then no effect
+	// Must be at least a little bit industrial for this.
+	// If you're industrial then check for incorporation.
 	if (owner->getIndustryFactor() > 0 && owner->getProcessedData().civLevel >= 40)
+		return calcBuildingIncorporationWeight(building, buildingGroups);
+
+	// You're non-industrial so urban buildings are not built.
+	const auto& category = buildingGroups.getAncestralCategory(building.getBuildingGroup());
+	if (category)
+	{
+		if (*category == "urban")
+			return 0;
+	}
+
+	// If building isn't urban, run incorporation check.
+	return calcBuildingIncorporationWeight(building, buildingGroups);
+}
+
+double V3::SubState::calcBuildingOverPopulationWeight(const Building& building, const BuildingGroups& buildingGroups) const
+{
+	auto overPop = getOverPopulation();
+	if (overPop <= 1.0)
+	{
+		return 1.0;
+	}
+	if (buildingGroups.usesArableLand(building.getBuildingGroup()))
+	{
+		return 1.0;
+	}
+	return overPop;
+}
+
+double V3::SubState::calcBuildingIncorporationWeight(const Building& building, const BuildingGroups& buildingGroups) const
+{
+	// Only adjust unincorporated states.
+	if (isIncorporated())
 		return 1;
 
-	// Your non-industrial so urban buildings are not built
+	// Build fewer urban and military buildings for unincorps.
 	auto buildingGroup = buildingGroups.getBuildingGroupMap().at(building.getBuildingGroup());
 	if (buildingGroup->getCategory())
 	{
 		if (*buildingGroup->getCategory() == "urban")
-			return 0;
+			return 0.8;
 	}
+	if (buildingGroup->getName() == "bg_military")
+		return 0.4;
 
 	while (buildingGroup->getParentName())
 	{
@@ -295,11 +346,13 @@ double V3::SubState::calcBuildingIndustrialWeight(const Building& building, cons
 		if (buildingGroup->getCategory())
 		{
 			if (*buildingGroup->getCategory() == "urban")
-				return 0;
+				return 0.8;
 		}
+		if (buildingGroup->getName() == "bg_military")
+			return 0.4;
 	}
 
-	// If building isn't urban no effect
+	// If building isn't urban or military, no effect.
 	return 1;
 }
 bool V3::SubState::isBuildingValid(const Building& building,
@@ -308,7 +361,7 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	 const std::map<std::string, Tech>& techMap,
 	 const std::map<std::string, StateModifier>& traitMap) const
 {
-	// Government Admin is a special case, we're not building it
+	// Government Admin is a special case, we're not building it.
 	if (building.getName() == "building_government_administration")
 	{
 		return false;
@@ -323,13 +376,18 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	{
 		return false;
 	}
-	// We can only build what we have the tech for
+	// We can only build what we have the tech for.
 	if (!getOwner()->hasAnyOfTech(building.getUnlockingTechs()))
 	{
 		return false;
 	}
 	// Important, can't build a building if we have no CP to build it. This is what ends the loop.
 	if (building.getConstructionCost() > CPBudget)
+	{
+		return false;
+	}
+	// Unincorporated states shouldn't build any heavy industry.
+	if (!isIncorporated() && building.getBuildingGroup() == "bg_heavy_industry")
 	{
 		return false;
 	}
@@ -373,24 +431,31 @@ int V3::SubState::getBuildingCapacity(const Building& building,
 	return INT_MAX;
 }
 
+double V3::SubState::getTotalDev() const
+{
+	return std::accumulate(weightedSourceProvinceData.begin(), weightedSourceProvinceData.end(), 0.0, [](double sum, const auto& sourceProv) {
+		return sum + sourceProv.first.weight;
+	});
+}
+
 bool V3::SubState::hasCapacity(const Building& building,
 	 const BuildingGroups& buildingGroups,
 	 const std::map<std::string, Law>& lawsMap,
 	 const std::map<std::string, Tech>& techMap,
 	 const std::map<std::string, StateModifier>& traitMap) const
 {
-	// Check building cap first
+	// Check building cap first.
 	if (building.isCappedByGov())
 	{
 		return getGovCapacity(building.getName(), lawsMap, techMap, traitMap) > 0;
 	}
 
-	// If no cap on building, return true
+	// If no cap on building, return true.
 	if (const auto& isCapped = buildingGroups.tryGetIsCapped(building.getBuildingGroup()); isCapped && !isCapped.value() || !isCapped)
 	{
 		return true;
 	}
-	// Then check building group cap
+	// Then check building group cap.
 	return getRGOCapacity(building, buildingGroups) > 0;
 }
 
@@ -398,8 +463,8 @@ int V3::SubState::getRGOCapacity(const Building& building, const BuildingGroups&
 {
 	/*
 	 NOTE: arable_land is stored in resources as bg_agriculture = #
-	 all arable_resources have bg_agriculture as a parent group eventually, even if not directly
-	 resources is stored in SubState, already calced from State and landshare
+	 All arable_resources have bg_agriculture as a parent group eventually, even if not directly.
+	 Resources is stored in SubState, already calculated from State and landshare.
 
 
 	 arable_land = 120
@@ -411,22 +476,23 @@ int V3::SubState::getRGOCapacity(const Building& building, const BuildingGroups&
 	 }
 	 */
 
-	// A building uses the capacity of their building group if that capacity exists
-	// otherwise they use the capacity of the parent of their building group
-	// if their building group's parent doesn't have capacity keep checking up the chain until a capacity is found or no more parents exist.
+	// A building uses the capacity of their building group if that capacity exists,
+	// otherwise they use the capacity of the parent of their building group.
+	// If their building group's parent doesn't have capacity keep checking up the
+	// chain until a capacity is found or no more parents exist.
 
 	auto buildingGroupName = building.getBuildingGroup();
 	auto buildingGroup = buildingGroups.getBuildingGroupMap().at(buildingGroupName);
 
 	const std::set<std::string> stateArables = {homeState->getArableResources().begin(), homeState->getArableResources().end()};
 
-	// is this a mineral-type resource?
+	// Is this a mineral-type resource?
 	if (resources.contains(buildingGroupName))
 	{
 		return resources.at(buildingGroupName);
 	}
 
-	// maybe an arable one?
+	// Maybe an arable one?
 	if (stateArables.contains(buildingGroupName))
 	{
 		if (resources.contains("bg_agriculture"))
@@ -503,8 +569,9 @@ double V3::SubState::calcBuildingWeight(const Building& building,
 	const double traitWeight = calcBuildingTraitWeight(building, traitMap, traitStrength);
 	const double investmentWeight = calcBuildingInvestmentWeight(building);
 	const double industrialWeight = calcBuildingIndustrialWeight(building, buildingGroups);
+	const double overPopWeight = calcBuildingOverPopulationWeight(building, buildingGroups);
 
-	return (1 + terrainWeight + EU4BuildingWeight) * traitWeight * investmentWeight * industrialWeight;
+	return (1 + terrainWeight + EU4BuildingWeight) * traitWeight * investmentWeight * industrialWeight * overPopWeight;
 }
 
 void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap)
@@ -512,10 +579,10 @@ void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifie
 	const double popInfra = getPopInfrastructure(techMap);
 	auto [stateModBonus, stateModMultipliers] = getStateInfrastructureModifiers(theStateModifiers);
 
-	// Principal = Base + isCoastal(substate lvl) + State modifier bonus + (Pop * tech)_capped
+	// Principal = Base + isCoastal(substate lvl) + State modifier bonus + (Pop * tech)_capped.
 	const double infraBase = 3 + 2 * isCoastal() + stateModBonus + popInfra;
 
-	// Multipliers are additive, market capital + incorporation status + state modifier multipliers
+	// Multipliers are additive, market capital + incorporation status + state modifier multipliers.
 	double multipliers = 0.25 * marketCapital + -0.25 * !isIncorporated() + stateModMultipliers;
 	multipliers = std::max(0.0, multipliers + 1);
 
@@ -538,14 +605,14 @@ void V3::SubState::convertDemographics(const ClayManager& clayManager,
 		for (const auto& popratio: sourceData.popRatios)
 		{
 			Demographic newDemo;
-			// Religion
+			// Religion.
 			auto religionMatch = religionMapper.getV3Religion(popratio.getReligion());
 			if (!religionMatch)
 				newDemo.religion = "noreligion";
 			else
 				newDemo.religion = *religionMatch;
 
-			// Culture
+			// Culture.
 			auto cultureMatch = cultureMapper.cultureMatch(clayManager,
 				 cultureLoader,
 				 religionLoader,
@@ -556,7 +623,7 @@ void V3::SubState::convertDemographics(const ClayManager& clayManager,
 				 popratio.isNeoCulture());
 			if (!cultureMatch)
 			{
-				// This should happen literally never unless a system error in one of the mapping rules.
+				// This should happen literally never unless there is a system error in one of the mapping rules.
 				newDemo.culture = "noculture";
 				if (popratio.isNeoCulture())
 					Log(LogLevel::Warning) << "No neoculture match for: " << popratio.getCulture() << "/" << popratio.getReligion() << " in " << homeState->getName()
@@ -588,7 +655,7 @@ void V3::SubState::generatePops(int totalAmount, const int slaveAmount)
 	if (demographics.empty())
 		return;
 
-	// *technically* demoTotal should always be equal 1.
+	// *Technically* demoTotal should always equal 1.
 	const auto demoTotal = std::accumulate(demographics.begin(), demographics.end(), 0.0, [](double sum, const auto& demo) {
 		return sum + (demo.upperRatio + demo.middleRatio + demo.lowerRatio) / 3;
 	});
@@ -653,4 +720,16 @@ void V3::SubState::setTreatyPort()
 	subStateTypes.clear();
 	subStateTypes.emplace("unincorporated");
 	subStateTypes.emplace("treaty_port");
+}
+
+void V3::SubState::vacateTreatyPortPops()
+{
+	// Goal of this function is to shift 80% of pops from this substate, which is a treaty port, to other substates in this homestate.
+	// Otherwise the pops will starve.
+
+	const auto totalPops = getSubStatePops().getPopCount();
+	const auto popsToVacate = static_cast<int>(std::round(totalPops * 0.8));
+
+	subStatePops.multiplyPops(0.2);
+	homeState->distributeNonTreatyPortPops(popsToVacate);
 }

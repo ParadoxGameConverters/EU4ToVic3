@@ -101,16 +101,10 @@ void V3::PopManager::applyHomeLands(const ClayManager& clayManager) const
 {
 	Log(LogLevel::Info) << "-> Applying Homelands.";
 	auto counter = 0;
-	for (const auto& [stateName, state]: clayManager.getStates())
+	for (const auto& state: clayManager.getStates() | std::views::values)
 	{
 		if (state->isSea() || state->isLake())
 			continue;
-
-		if (!dwStatePops.contains(stateName))
-		{
-			Log(LogLevel::Warning) << "State " << stateName << " is unknown. Not processing for homelands.";
-			continue;
-		}
 
 		for (const auto& subState: state->getSubStates())
 		{
@@ -200,7 +194,7 @@ std::string V3::PopManager::getDominantDWReligion(const std::string& stateName) 
 	return *best;
 }
 
-void V3::PopManager::generatePops(const ClayManager& clayManager, const Configuration::POPSHAPES popShapes)
+void V3::PopManager::generatePops(const ClayManager& clayManager, const Configuration::POPSHAPES popShapes, double shapingFactor)
 {
 	const auto worldTotal = std::accumulate(vanillaStatePops.begin(), vanillaStatePops.end(), 0, [](int sum, const auto& statePops) {
 		return sum + statePops.second.getPopCount();
@@ -259,6 +253,10 @@ void V3::PopManager::generatePops(const ClayManager& clayManager, const Configur
 				// Keep in mind - these popcounts are tied to states, not substates. A super-high-weight substate will take most of the pops however,
 				// so we're ok.
 				vanillaStatePopCount = static_cast<int>(std::round(vanillaSuperRegionPopCount.at(superRegionName) * popModifier));
+				// Normalize by shaping factor
+				vanillaStatePopCount = static_cast<int>(std::round(vanillaStatePopCount * shapingFactor)) +
+											  static_cast<int>(std::round(vanillaStatePops.at(stateName).getPopCount() * (1.0 - shapingFactor)));
+
 				stateFactor =
 					 (vanillaStatePopCount - vanillaStatePops.at(stateName).getPopCount()) / static_cast<double>(vanillaStatePops.at(stateName).getPopCount());
 			}
@@ -274,6 +272,9 @@ void V3::PopManager::generatePops(const ClayManager& clayManager, const Configur
 			const auto stateInvestmentFactor = 1.0 + state->getInvestmentFactor();
 			const auto projectedPopCount = static_cast<double>(vanillaStatePops.at(stateName).getPopCount()) * stateInvestmentFactor;
 			vanillaStatePopCount = static_cast<int>(std::round(projectedPopCount * superRegionalNormalizationFactor));
+			// Normalize by shaping factor
+			vanillaStatePopCount = static_cast<int>(std::round(vanillaStatePopCount * shapingFactor)) +
+										  static_cast<int>(std::round(vanillaStatePops.at(stateName).getPopCount() * (1.0 - shapingFactor)));
 			stateFactor =
 				 (vanillaStatePopCount - vanillaStatePops.at(stateName).getPopCount()) / static_cast<double>(vanillaStatePops.at(stateName).getPopCount());
 		}
@@ -383,24 +384,34 @@ void V3::PopManager::generatePopsForNormalSubStates(const std::shared_ptr<State>
 
 		if (!subState->getWeight())
 		{
+			std::string warnString = "Substate ";
 			if (subState->getOwnerTag())
 			{
-				Log(LogLevel::Warning) << "Substate " << *subState->getOwnerTag() << " in " << state->getName()
-											  << " has NO WEIGHT! It's supposed to be imported from EU4! Not generating pops!";
+				warnString += *subState->getOwnerTag();
 			}
 			else
-				Log(LogLevel::Warning) << "Substate (shoved) in " << state->getName()
-											  << " has NO WEIGHT! It's supposed to be imported from EU4! Not generating pops!";
+			{
+				warnString += "(shoved)";
+			}
+			warnString += " in " + stateName + " (provinces";
+			for (const auto& pid: subState->getProvinceIDs())
+			{
+				warnString += " " + pid;
+			}
+			warnString += ") has NO WEIGHT! It's supposed to be imported from EU4! Not generating pops!";
+			Log(LogLevel::Warning) << warnString;
 			continue;
 		}
 
 		const auto generatedPopCount = generatePopCountForNormalSubState(subState, unassignedPopCount);
 		const auto generatedSlavePopCount = generatePopCountForNormalSubState(subState, unassignedSlavePopCount);
+		const auto vanillaPopCount = generatePopCountForNormalSubState(subState, vanillaStatePops.at(stateName).getPopCount());
 		subState->generatePops(generatedPopCount, generatedSlavePopCount);
 		subState->setStageForMinorities(true);
+		subState->setVanillaPopCount(vanillaPopCount);
 	}
 
-	if (!vanillaMinorityStatePops.contains(state->getName()) || vanillaMinorityStatePops.at(stateName).getPopCount() == 0)
+	if (!vanillaMinorityStatePops.contains(stateName) || vanillaMinorityStatePops.at(stateName).getPopCount() == 0)
 	{
 		for (const auto& subState: state->getSubStates())
 			subState->setStageForMinorities(false);
@@ -549,6 +560,42 @@ std::map<std::string, V3::StatePops> V3::PopManager::injectReligionsIntoPops(con
 void V3::PopManager::loadSlaveCultureRules(const std::string& filePath)
 {
 	slaveCultureMapper.loadMappingRules(filePath);
+}
+
+void V3::PopManager::liberateSlaves(const PoliticalManager& politicalManager) const
+{
+	Log(LogLevel::Info) << "-> Liberating slaves where it is banned.";
+	auto counter = 0;
+
+	for (const auto& country: politicalManager.getCountries() | std::views::values)
+	{
+		if (!country->hasLaw("law_slavery_banned"))
+			continue;
+		for (const auto& subState: country->getSubStates())
+		{
+			if (subState->getSubStatePops().getSlavePopCount() == 0)
+				continue;
+			auto newSubStatePops = subState->getSubStatePops();
+			std::vector<Pop> newPops;
+			for (const auto& pop: subState->getSubStatePops().getPops())
+			{
+				if (pop.getType() == "slaves")
+				{
+					Pop newPop = pop;
+					newPop.setType("");
+					newPops.emplace_back(newPop);
+					++counter;
+				}
+				else
+				{
+					newPops.emplace_back(pop);
+				}
+			}
+			newSubStatePops.setPops(newPops);
+			subState->setSubStatePops(newSubStatePops);
+		}
+	}
+	Log(LogLevel::Info) << "<> Liberated " << counter << " Slave Pops.";
 }
 
 void V3::PopManager::alterSlaveCultures(const PoliticalManager& politicalManager,

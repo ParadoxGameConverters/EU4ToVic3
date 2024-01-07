@@ -1,0 +1,265 @@
+﻿ig_industrialists = {
+	color = hsv{ 0.06 0.60 0.89 }
+	texture = "gfx/interface/icons/ig_icons/industrialists.dds"
+	layer = "revolution_dynamic_industrialists"
+	index = 2
+
+	ideologies = {
+		ideology_plutocratic
+		ideology_laissez_faire
+		ideology_individualist
+	}
+
+	enable = {
+		always = yes
+	}
+
+	# Deprecated; use on_enable effect to assign traits instead
+	traits = {
+		ig_trait_job_creators
+		ig_trait_engines_of_progress
+		ig_trait_tax_avoidance
+	}
+	
+	on_enable = {		### Converter ###
+	}
+
+	on_disable = {}
+	on_character_ig_membership = {}
+
+	pop_potential = {
+		OR = {
+			is_pop_type = capitalists
+			is_pop_type = engineers
+			is_pop_type = shopkeepers
+		}
+	}
+
+	pop_weight = {
+		value = 0
+
+		add = {
+			desc = "POP_CAPITALISTS"
+			if = {
+				limit = {
+					is_pop_type = capitalists
+				}
+				value = 250
+				add = this.standard_of_living
+			}
+		}
+
+		add = {
+			desc = "POP_ENGINEERS"
+			if = {
+				limit = {
+					is_pop_type = engineers
+				}
+				value = 50
+				add = this.standard_of_living
+			}
+		}
+
+		add = {
+			desc = "POP_SHOPKEEPERS"
+			if = {
+				limit = {
+					is_pop_type = shopkeepers
+				}
+				value = 50
+				add = this.standard_of_living
+			}
+		}
+
+		multiply = {
+			desc = "LEADER_POPULARITY"
+			scope:interest_group = {
+				leader ?= {
+					value = popularity
+					multiply = 0.0025
+					add = 1
+					max = 1.25
+					min = 0.75
+				}
+			}
+		}
+
+		multiply = {
+			desc = "decentralized_power"
+			value = 1.0
+
+			if = {
+				limit = {
+					owner = {
+						is_country_type = decentralized
+					}
+				}
+				value = 0.0
+			}
+		}
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = {
+				desc = "IN_GOVERNMENT_ATTRACTION"
+				value = 1
+				add = scope:interest_group.modifier:interest_group_in_government_attraction_mult
+				min = 0
+			}
+		}
+		
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_LOYALISTS"
+				value = pop_loyalist_fraction
+				divide = 4
+				add = 1
+			}
+		}
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = no
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_RADICALS"
+				value = pop_radical_fraction
+				divide = 4
+				add = 1
+			}
+		}
+	}
+
+	monarch_weight = {
+		value = 1
+		# Monarch is not likely to adopt a marginal IG
+		if = {
+			limit = {
+				is_marginal = yes
+			}
+			multiply = {
+				value = 0.1
+			}
+		}
+		# Monarch is more likely to adopt a Powerful IG
+		if = {
+			limit = {
+				is_powerful = yes
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		# More likely with Wealth Voting or Oligarchy
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						has_law = law_type:law_oligarchy
+						has_law = law_type:law_wealth_voting
+					}
+				}
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		# Slightly more likely with LF
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_laissez_faire
+				}
+			}
+			multiply = {
+				value = 1.25
+			}
+		}
+		# Less likely before researching Mutual Funds
+		if = {
+			limit = {
+				owner = {
+					NOT = { has_technology_researched = mutual_funds }
+				}
+			}
+			multiply = {
+				value = 0.5
+			}
+		}
+		# Impossible without Currency Standards
+		if = {
+			limit = {
+				owner = {
+					NOT = { has_technology_researched = currency_standards }
+				}
+			}
+			multiply = {
+				value = 0
+			}
+		}
+	}
+
+	agitator_weight = {
+		# Agitators more likely to come from populist IG's rather than elitist
+		value = 0.25
+		# Agitators will never be part of a marginalized IG
+		if = {
+			limit = {
+				owner.ig:ig_industrialists = {
+					is_marginal = yes
+				}
+			}
+			multiply = {
+				value = 0
+			}
+		}
+	}
+
+	commander_weight = {
+		value = 0.5
+	}
+
+	noble_chance = {
+		value = 0.3
+	}
+
+	female_commander_chance = {
+		### Converter ###
+		value = ig_female_general_chance
+	}
+
+	female_politician_chance = {
+		### Converter ###
+		value = ig_female_politician_chance_moderate
+	}
+
+	female_agitator_chance = {
+		### Converter ###
+		value = ig_female_agitator_chance_moderate
+	}
+
+	# The chance that a commander belonging to this IG takes over leadership when it changes
+	# scope:character is the most popular commander in the IG
+	commander_leader_chance = {
+		value = 0.25
+		if = {
+			limit = {
+				exists = scope:character
+			}
+			multiply = {
+				value = 1
+				add = scope:character.popularity
+				min = 0
+			}
+		}
+	}
+}

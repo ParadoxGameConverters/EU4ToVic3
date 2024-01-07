@@ -5,13 +5,13 @@
 # AGREEMENT TYPES:
 # DO NOT ALTER LEFT SIDE, ONLY RIGHT!
 # Single-sided agreements
-dominion = { private_enterprise self_governing_colony colony }
-protectorate = { }
+dominion = { private_enterprise self_governing_colony colony core_eyalet commercial_enterprise dominion dominion_tc autonomous_dominion autonomous_dominion_tc administrative_region viking_settlement banking_family_subject annexable_colony medieval_vassal }
+protectorate = { trade_protectorate protectorate trade_outpost native_reserve cultural_sphere_of_influence_subject }
 defensive_pact = { guarantee }
-tributary = { tributary_state }
-personal_union = { personal_union }
-puppet = { client_march march crown_colony }
-vassal = { vassal client_vassal daimyo_vassal }
+tributary = { tributary_state timar ME_TIM_trib_state imperial_tributary_state }
+personal_union = { personal_union permanent_union ME_personal_union ME_Austrian_personal_union salic_personal_union sister_republic integrated_personal_union brother_kingdom real_union_subject pronoia_subject_type }
+puppet = { client_march march crown_colony appanage eyalet french_hre_subject puppet_state crusader_state_vassal naval_march papal_sanctuary_subject imperial_feud_subject pagan_chiefdom defensive_march agricultural_march religious_march  }
+vassal = { vassal client_vassal daimyo_vassal cossack_vassal prussian_congress_vassal prussian_vassal brotherly_order QAR_baghdad_vassal canton roman_client_kingdom voivodeship fief_subject nahuatl_vassal peasant_vassal pirate_brotherhood_vassal muslim_tributary_vassal mandala_trade_vassal integrated_tribe_subject dutch_province_subject revolution_subject persian_satrapy iqta_vassal palatinate_vassal stato_da_mar_vassal exarchate_subject hereditary_pronoia_subject_type }
 trade_agreement = { steer_trade }
 customs_union = { transfer_trade_power }
 # Double-sided agreements
@@ -19,6 +19,6 @@ double_defensive_pact = { alliance }
 
 # RELATIONSHIP BOOSTS:
 # You can alter both left and right side. Can also make left negative.
-10 = { private_enterprise self_governing_colony colony tributary_state client_march march crown_colony vassal client_vassal daimyo_vassal }
+10 = { private_enterprise self_governing_colony colony tributary_state client_march march crown_colony vassal client_vassal daimyo_vassal core_eyalet commercial_enterprise trade_protectorate appanage eyalet }
 25 = { royal_marriage guarantee personal_union steer_trade transfer_trade_power }
 50 = { alliance }

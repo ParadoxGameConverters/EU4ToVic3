@@ -1,0 +1,490 @@
+﻿# Brazil - BRZ
+brz_pedro_braganca_template = {
+	# Pedro II
+	first_name = "Pedro"
+	last_name = "de_Braganca"
+	historical = yes
+	ruler = yes
+	birth_date = 1825.12.2
+	dna = dna_emperor_pedro_02
+	interest_group = ig_intelligentsia
+	ideology = ideology_reformer
+	traits = {
+		meticulous
+	}
+}
+
+# Chile - CHL
+chl_jose_joaquin_prieto_template = {
+	# Jose Joaquin Prieto
+	first_name = "Jose_Joaquin"
+	last_name = "Prieto"
+	historical = yes
+	ruler = yes
+	birth_date = 1786.8.20
+	dna = dna_president_joaquin_prieto
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	traits = {
+		persistent
+	}
+}
+
+# Mexico - MEX
+mex_juarez_character_template = {
+	first_name = Benito
+	last_name = Juarez
+	historical = yes
+	culture = cu:zapotec
+	female = no
+	religion = catholic
+	ideology = ideology_market_liberal
+	interest_group = ig_intelligentsia
+	birth_date = 1806.3.21
+    dna = dna_benito_juarez
+	traits = {
+		experienced_political_operator
+		direct
+		persistent
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_benito_juarez
+				}
+			}
+			OR = {
+				owns_entire_state_region = STATE_MEXICO
+				owns_entire_state_region = STATE_GUERRERO
+				owns_entire_state_region = STATE_OAXACA
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_rural_folk
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1872.1.1
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_benito_juarez
+		}
+	}
+}
+mex_miguel_barragan_template = {
+	# Miguel Barragan, notionally president of Mexico
+	first_name = Miguel
+	last_name = Barragan
+	historical = yes
+	ruler = yes
+	#ig_leader = yes
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1789.3.8
+	dna = dna_miguel_barragan
+	traits = {
+		reserved # Santa Anna's puppet
+		wounded # Probably contracted typhus, just needed something to make him less healthy here. Resigned February 27th, 1836, died March 1st, 1836
+	}
+}
+
+# United States - USA
+usa_lincoln_character_template = {
+	first_name = Abraham
+	last_name = Lincoln
+	historical = yes
+	culture = global_var:midwest_yankee_culture
+	female = no
+	religion = protestant
+	ideology = ideology_abolitionist
+	interest_group = ig_petty_bourgeoisie
+	birth_date = 1809.2.12
+	dna = dna_abraham_lincoln
+	traits = {
+		experienced_political_operator
+		inspirational_orator
+		tactful
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_lincoln
+				}
+			}
+			uses_midwest_yankee_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1844.2.12
+		latest_usage_date = 1890.1.1
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_lincoln
+		}
+	}
+}
+usa_andrew_jackson_template = {
+	first_name = Andrew
+	last_name = Jackson
+	historical = yes
+	culture = cu:dixie
+	ruler = yes
+	ig_leader = yes
+	interest_group = ig_rural_folk
+	ideology = ideology_jacksonian_democrat
+	birth_date = 1767.3.15
+	dna = dna_andrew_jackson
+	traits = {
+		bigoted
+		demagogue
+		expert_political_operator
+	}
+	on_created = {
+		set_variable = {
+			name = is_andrew_jackson
+		}
+	}
+}
+usa_roosevelt_character_template = {
+	first_name = Theodore_2
+	last_name = Roosevelt
+	historical = yes
+	culture = global_var:new_england_yankee_culture
+	female = no
+	religion = protestant
+	ideology = ideology_reformer
+	interest_group = ig_industrialists
+	birth_date = 1858.8.28
+    dna = dna_roosevelt
+	traits = {
+		celebrity_commander
+		explorer
+		brave
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_roosevelt
+				}
+			}
+			uses_new_england_yankee_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_industrialists
+				is_interest_group_type = ig_rural_folk
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1882.1.1
+		latest_usage_date = 1919.1.1
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_roosevelt
+		}
+	}
+}
+usa_rockefeller_character_template = {
+    first_name = John
+    last_name = Rockefeller
+    historical = yes
+    culture = global_var:new_england_yankee_culture
+    female = no
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_industrialists
+    birth_date = 1839.6.8
+    traits = {
+        ambitious
+        persistent
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_rockefeller
+				}
+			}
+			uses_new_england_yankee_characters = yes
+            has_company = company_type:company_standard_oil
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1875.1.1
+        latest_usage_date = 1915.1.1
+        chance = 25
+    }   
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_rockefeller
+		}
+	}
+}
+usa_carnegie_character_template = {
+    first_name = Andrew
+    last_name = Carnegie
+    historical = yes
+    culture = global_var:sct_culture
+    female = no
+    religion = protestant
+    ideology = ideology_market_liberal
+    interest_group = ig_industrialists
+    birth_date = 1835.11.25
+    traits = {
+        ambitious
+        literary
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_carnegie
+				}
+			}
+			uses_new_england_yankee_characters = yes
+			global_var:sct_culture = { NOT = { culture_is_discriminated_in = prev } }
+            has_company = company_type:company_us_steel
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1870.1.1
+        latest_usage_date = 1908.1.1
+        chance = 25
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_carnegie
+		}
+	}
+}
+usa_jp_morgan_character_template = {
+    first_name = John_Pierpont
+    last_name = Morgan
+    historical = yes
+    culture = global_var:new_england_yankee_culture
+    female = no
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_industrialists
+    birth_date = 1835.11.25
+    traits = {
+        imposing
+        pious
+        sickly
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jp_morgan
+				}
+			}
+			uses_new_england_yankee_characters = yes
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1865.1.1
+        latest_usage_date = 1913.1.1
+        chance = 25
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jp_morgan
+		}
+	}   
+}
+usa_thomas_edison_character_template = {
+    first_name = Thomas
+    last_name = Edison
+    historical = yes
+    culture = global_var:midwest_yankee_culture
+    female = no
+    religion = atheist
+    ideology = ideology_pacifist
+    interest_group = ig_intelligentsia
+    birth_date = 1847.2.11
+    traits = {
+        ambitious
+        engineer
+        imperious
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_edison
+				}
+			}
+			uses_midwest_yankee_characters = yes
+            has_company = company_type:company_general_electric
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1876.1.1
+        latest_usage_date = 1920.1.1
+        chance = 25
+    }   
+    on_created = {
+        if = {
+            limit = {
+                owner = {
+                    has_technology_researched = feminism
+                    NOT = {
+                        has_law = law_type:law_womens_suffrage
+                    }
+                }
+            }
+            converter_set_feminist_ideology_effect = yes
+        }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_edison
+		}
+    }
+}
+usa_mark_twain_character_template = { #Mark Twain
+    first_name = Samuel
+    last_name = Clemens
+    historical = yes
+    culture = global_var:dixie_culture
+    female = no
+    religion = protestant
+    ideology = ideology_jingoist
+    interest_group = ig_intelligentsia
+    birth_date = 1835.11.30
+    traits = {
+        literary
+        erudite
+        reckless
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mark_twain
+				}
+			}
+            country_has_primary_culture = global_var:dixie_culture
+            any_scope_state = {
+                state_region = s:STATE_MISSOURI
+            }
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1865.11.18
+        latest_usage_date = 1910.1.1
+        chance = 25
+    }   
+    on_created = {
+        if = {
+            limit = {
+                owner = {
+                    NOT = {
+                        has_law = law_type:law_slavery_banned
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_abolitionist
+        }
+        else_if = {
+            limit = {
+                owner = {
+                    any_country = {
+                        is_subject_of = prev
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_pacifist
+        }
+        else_if = {
+            limit = {
+                owner = {
+                    has_technology_researched = feminism
+                    NOT = {
+                        has_law = law_type:law_womens_suffrage
+                    }
+                }
+            }
+            converter_set_feminist_ideology_effect = yes
+        }
+        else = {
+            set_ideology = ideology:ideology_jingoist
+        }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_mark_twain
+		}
+    }
+}

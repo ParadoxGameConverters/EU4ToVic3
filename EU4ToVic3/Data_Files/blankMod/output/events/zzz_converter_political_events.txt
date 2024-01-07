@@ -1,0 +1,87 @@
+﻿namespace = zzz_cc_politics
+
+# Holy Order Secularization
+zzz_cc_politics.1 = {
+	type = country_event
+	placement = root
+	title = zzz_cc_politics.1.t
+	desc = zzz_cc_politics.1.d
+	flavor = zzz_cc_politics.1.f
+
+	duration = 3
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
+	trigger = {
+		OR = {
+			NOT = {	has_law = law_type:law_theocracy }
+			has_law = law_type:law_total_separation
+			has_law = law_type:law_state_atheism
+		}
+		ig:ig_armed_forces = {
+			OR = {
+				has_ideology = ideology:ideology_pious
+				has_ideology = ideology:ideology_corporatist
+			}
+			leader = {
+				NOR = {
+					has_ideology = ideology:ideology_theocrat
+					has_ideology = ideology:ideology_traditionalist
+					has_ideology = ideology:ideology_corporatist_leader
+				}
+			}
+		}
+		ig:ig_devout = { has_ideology = ideology:ideology_jingoist }
+	}
+
+	immediate = {
+		ig:ig_armed_forces = {
+			save_scope_as = teutonic_knights_ig
+			leader = {
+				save_scope_as = albert_of_prussia
+			}
+		}
+		ig:ig_devout = {
+			save_scope_as = catholic_church_ig
+			leader = {
+				save_scope_as = adrian_vi
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_politics.1.a
+		ig:ig_armed_forces = {
+			if = {
+				limit = { has_ideology = ideology:ideology_pious }
+				remove_ideology = ideology_pious
+			}
+			else = { remove_ideology = ideology_corporatist }
+		}
+		ig:ig_devout = {
+			remove_ideology = ideology_jingoist
+			if = {
+				limit = {
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_theocrat
+							has_ideology = ideology:ideology_traditionalist
+							has_ideology = ideology:ideology_corporatist_leader
+							has_ideology = ideology:ideology_jingoist_leader
+						}
+					}
+				}
+			}
+			add_modifier = {
+				name = ig_power_challenged
+				months = normal_modifier_time
+			}
+		}
+	}
+}

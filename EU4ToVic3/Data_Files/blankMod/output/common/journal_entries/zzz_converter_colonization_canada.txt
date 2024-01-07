@@ -1,0 +1,106 @@
+﻿je_converter_colonization_numbered_treaties = {
+	#The 11 numbered treaties between Canada and the Indigenous people of Canada.
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	group = je_group_converter_new
+
+	is_shown_when_inactive = {
+		capital = {
+			state_is_in_americas = yes
+		}
+		any_scope_state = { #So that only relevant nations see the journal entry
+			any_neighbouring_state = {
+				OR = {
+					state_region = s:STATE_ALASKA
+					zzz_converter_state_is_in_canada = yes
+				}
+			}
+		}
+		NOT = { #No way of checking for trait directly, so we do this
+			cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT }
+		}
+	}
+	
+	possible = {
+		NOT = { has_law = law_type:law_no_colonial_affairs }
+		has_technology_researched = colonization
+		has_technology_researched = railways
+	}
+	
+	complete = {
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_ONTARIO
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_NEW_BRUNSWICK
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_QUEBEC
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_NEWFOUNDLAND
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_ALBERTA
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_BRITISH_COLUMBIA
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_SASKATCHEWAN
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_MANITOBA
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_YUKON_TERRITORY
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_NORTHWEST_TERRITORIES
+		}
+		any_country = {
+			count < 1
+			is_country_type = decentralized
+			has_state_in_state_region = STATE_NUNAVUT
+		}
+	}
+	
+	on_yearly_pulse = {
+		events = {
+			zzz_cc_canada.1 # Establish Treaty with Local Tribe
+			zzz_cc_canada.6 # Gold RUSH, quickly stick the natives in reservations!
+		}
+	}
+	
+	status_desc = {
+		first_valid = {
+			triggered_desc = { 
+				desc = je_converter_colonization_numbered_treaties_status
+			}
+		}
+	}
+	
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}

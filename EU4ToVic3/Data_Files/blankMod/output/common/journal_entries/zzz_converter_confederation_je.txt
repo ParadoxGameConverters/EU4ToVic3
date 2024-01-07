@@ -1,0 +1,841 @@
+﻿je_america_usa = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+		capital = { zzz_converter_state_is_in_america = yes }
+		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_USA } }
+		is_subject = yes
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		calc_true_if = {
+			amount >= 27
+			owns_entire_state_region = STATE_MASSACHUSETTS
+			owns_entire_state_region = STATE_MAINE
+			owns_entire_state_region = STATE_CONNECTICUT
+			owns_entire_state_region = STATE_RHODE_ISLAND
+			owns_entire_state_region = STATE_VERMONT
+			owns_entire_state_region = STATE_NEW_HAMPSHIRE
+			owns_entire_state_region = STATE_PENNSYLVANIA
+			owns_entire_state_region = STATE_NEW_YORK
+			owns_entire_state_region = STATE_NEW_JERSEY
+			owns_entire_state_region = STATE_MINNESOTA
+			owns_entire_state_region = STATE_WISCONSIN
+			owns_entire_state_region = STATE_IOWA
+			owns_entire_state_region = STATE_MISSOURI
+			owns_entire_state_region = STATE_MICHIGAN
+			owns_entire_state_region = STATE_INDIANA
+			owns_entire_state_region = STATE_ILLINOIS
+			owns_entire_state_region = STATE_WEST_VIRGINIA
+			owns_entire_state_region = STATE_OHIO
+			owns_entire_state_region = STATE_KENTUCKY
+			owns_entire_state_region = STATE_TENNESSEE
+			owns_entire_state_region = STATE_MISSISSIPPI
+			owns_entire_state_region = STATE_ALABAMA
+			owns_entire_state_region = STATE_FLORIDA
+			owns_entire_state_region = STATE_GEORGIA
+			owns_entire_state_region = STATE_SOUTH_CAROLINA
+			owns_entire_state_region = STATE_NORTH_CAROLINA
+			owns_entire_state_region = STATE_VIRGINIA
+			owns_entire_state_region = STATE_DISTRICT_OF_COLUMBIA
+			owns_entire_state_region = STATE_MARYLAND
+			owns_entire_state_region = STATE_DELAWARE
+			owns_entire_state_region = STATE_LOUISIANA
+			owns_entire_state_region = STATE_ARKANSAS
+			owns_entire_state_region = STATE_NORTH_DAKOTA
+			owns_entire_state_region = STATE_SOUTH_DAKOTA
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.5 }
+	}
+
+	invalid = {
+		is_subject = no
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+je_america_gbr = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+			capital = { zzz_converter_state_is_in_america = yes }
+			count >= 2
+		}
+		NOT = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+			capital = { zzz_converter_state_is_in_america = yes }
+			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_USA }
+		}
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		any_subject_or_below = {
+			calc_true_if = {
+				amount >= 27
+				owns_entire_state_region = STATE_MASSACHUSETTS
+				owns_entire_state_region = STATE_MAINE
+				owns_entire_state_region = STATE_CONNECTICUT
+				owns_entire_state_region = STATE_RHODE_ISLAND
+				owns_entire_state_region = STATE_VERMONT
+				owns_entire_state_region = STATE_NEW_HAMPSHIRE
+				owns_entire_state_region = STATE_PENNSYLVANIA
+				owns_entire_state_region = STATE_NEW_YORK
+				owns_entire_state_region = STATE_NEW_JERSEY
+				owns_entire_state_region = STATE_MINNESOTA
+				owns_entire_state_region = STATE_WISCONSIN
+				owns_entire_state_region = STATE_IOWA
+				owns_entire_state_region = STATE_MISSOURI
+				owns_entire_state_region = STATE_MICHIGAN
+				owns_entire_state_region = STATE_INDIANA
+				owns_entire_state_region = STATE_ILLINOIS
+				owns_entire_state_region = STATE_WEST_VIRGINIA
+				owns_entire_state_region = STATE_OHIO
+				owns_entire_state_region = STATE_KENTUCKY
+				owns_entire_state_region = STATE_TENNESSEE
+				owns_entire_state_region = STATE_MISSISSIPPI
+				owns_entire_state_region = STATE_ALABAMA
+				owns_entire_state_region = STATE_FLORIDA
+				owns_entire_state_region = STATE_GEORGIA
+				owns_entire_state_region = STATE_SOUTH_CAROLINA
+				owns_entire_state_region = STATE_NORTH_CAROLINA
+				owns_entire_state_region = STATE_VIRGINIA
+				owns_entire_state_region = STATE_DISTRICT_OF_COLUMBIA
+				owns_entire_state_region = STATE_MARYLAND
+				owns_entire_state_region = STATE_DELAWARE
+				owns_entire_state_region = STATE_LOUISIANA
+				owns_entire_state_region = STATE_ARKANSAS
+				owns_entire_state_region = STATE_NORTH_DAKOTA
+				owns_entire_state_region = STATE_SOUTH_DAKOTA
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.6 }
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+je_california_cal = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+		capital = { zzz_converter_state_is_in_california = yes }
+		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_CAL } }
+		is_subject = yes
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		calc_true_if = {
+			amount >= 12
+			owns_entire_state_region = STATE_WASHINGTON
+			owns_entire_state_region = STATE_OREGON
+			owns_entire_state_region = STATE_IDAHO
+			owns_entire_state_region = STATE_MONTANA
+			owns_entire_state_region = STATE_WYOMING
+			owns_entire_state_region = STATE_CALIFORNIA
+			owns_entire_state_region = STATE_NEVADA
+			owns_entire_state_region = STATE_UTAH
+			owns_entire_state_region = STATE_ARIZONA
+			owns_entire_state_region = STATE_NEW_MEXICO
+			owns_entire_state_region = STATE_COLORADO
+			owns_entire_state_region = STATE_NEBRASKA
+			owns_entire_state_region = STATE_KANSAS
+            owns_entire_state_region = STATE_OKLAHOMA
+            owns_entire_state_region = STATE_TEXAS
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.7 }
+	}
+
+	invalid = {
+		is_subject = no
+	}
+
+	should_be_pinned_by_default = yes
+}
+
+je_california_gbr = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_california = yes }
+			count >= 2
+		}
+		NOT = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_california = yes }
+			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_CAL }
+		}
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		any_subject_or_below = {
+			calc_true_if = {
+				amount >= 12
+				owns_entire_state_region = STATE_WASHINGTON
+				owns_entire_state_region = STATE_OREGON
+				owns_entire_state_region = STATE_IDAHO
+				owns_entire_state_region = STATE_MONTANA
+				owns_entire_state_region = STATE_WYOMING
+				owns_entire_state_region = STATE_CALIFORNIA
+				owns_entire_state_region = STATE_NEVADA
+				owns_entire_state_region = STATE_UTAH
+				owns_entire_state_region = STATE_ARIZONA
+				owns_entire_state_region = STATE_NEW_MEXICO
+				owns_entire_state_region = STATE_COLORADO
+				owns_entire_state_region = STATE_NEBRASKA
+				owns_entire_state_region = STATE_KANSAS
+				owns_entire_state_region = STATE_OKLAHOMA
+				owns_entire_state_region = STATE_TEXAS
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.8 }
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+je_mexico_mex = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+		capital = { zzz_converter_state_is_in_mexico = yes }
+		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_MEX } }
+		is_subject = yes
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		calc_true_if = {
+			amount >= 16
+			owns_entire_state_region = STATE_JALISCO
+			owns_entire_state_region = STATE_ZACATECAS
+			owns_entire_state_region = STATE_GUERRERO
+			owns_entire_state_region = STATE_MEXICO
+			owns_entire_state_region = STATE_CHIHUAHUA
+			owns_entire_state_region = STATE_DURANGO
+			owns_entire_state_region = STATE_RIO_GRANDE
+			owns_entire_state_region = STATE_SONORA
+			owns_entire_state_region = STATE_VERACRUZ
+			owns_entire_state_region = STATE_SINALOA
+			owns_entire_state_region = STATE_BAJIO
+			owns_entire_state_region = STATE_OAXACA
+			owns_entire_state_region = STATE_BAJA_CALIFORNIA
+			owns_entire_state_region = STATE_CHIAPAS
+			owns_entire_state_region = STATE_YUCATAN
+			owns_entire_state_region = STATE_GUATEMALA
+			owns_entire_state_region = STATE_HONDURAS
+			owns_entire_state_region = STATE_NICARAGUA
+			owns_entire_state_region = STATE_COSTA_RICA
+			owns_entire_state_region = STATE_SAN_SALVADOR
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.13 }
+	}
+
+	invalid = {
+		is_subject = no
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+je_mexico_gbr = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+			capital = { zzz_converter_state_is_in_mexico = yes }
+			count >= 2
+		}
+		NOT = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+			capital = { zzz_converter_state_is_in_mexico = yes }
+			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_MEX }
+		}
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		any_subject_or_below = {
+			calc_true_if = {
+				amount >= 16
+				owns_entire_state_region = STATE_JALISCO
+				owns_entire_state_region = STATE_ZACATECAS
+				owns_entire_state_region = STATE_GUERRERO
+				owns_entire_state_region = STATE_MEXICO
+				owns_entire_state_region = STATE_CHIHUAHUA
+				owns_entire_state_region = STATE_DURANGO
+				owns_entire_state_region = STATE_RIO_GRANDE
+				owns_entire_state_region = STATE_SONORA
+				owns_entire_state_region = STATE_VERACRUZ
+				owns_entire_state_region = STATE_SINALOA
+				owns_entire_state_region = STATE_BAJIO
+				owns_entire_state_region = STATE_OAXACA
+				owns_entire_state_region = STATE_BAJA_CALIFORNIA
+				owns_entire_state_region = STATE_CHIAPAS
+				owns_entire_state_region = STATE_YUCATAN
+				owns_entire_state_region = STATE_GUATEMALA
+				owns_entire_state_region = STATE_HONDURAS
+				owns_entire_state_region = STATE_NICARAGUA
+				owns_entire_state_region = STATE_COSTA_RICA
+				owns_entire_state_region = STATE_SAN_SALVADOR
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.14 }
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+je_colombia_gco = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+		capital = { zzz_converter_state_is_in_gran_colombia = yes }
+		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_GCO } }
+		is_subject = yes
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		calc_true_if = {
+			amount >= 7
+			owns_entire_state_region = STATE_BOLIVAR
+			owns_entire_state_region = STATE_GUAYANA
+			owns_entire_state_region = STATE_MIRANDA
+			owns_entire_state_region = STATE_ANTIOQUIA
+			owns_entire_state_region = STATE_ZULIA
+			owns_entire_state_region = STATE_GUAVIARE
+			owns_entire_state_region = STATE_CAUCA
+			owns_entire_state_region = STATE_CUNDINAMARCA
+			owns_entire_state_region = STATE_PANAMA
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.15 }
+	}
+
+	invalid = {
+		is_subject = no
+	}
+
+	should_be_pinned_by_default = yes
+}
+
+je_colombia_gbr = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_gran_colombia = yes }
+			count >= 2
+		}
+		NOT = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_gran_colombia = yes }
+			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_GCO }
+		}
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		any_subject_or_below = {
+			calc_true_if = {
+				amount >= 7
+				owns_entire_state_region = STATE_BOLIVAR
+				owns_entire_state_region = STATE_GUAYANA
+				owns_entire_state_region = STATE_MIRANDA
+				owns_entire_state_region = STATE_ANTIOQUIA
+				owns_entire_state_region = STATE_ZULIA
+				owns_entire_state_region = STATE_GUAVIARE
+				owns_entire_state_region = STATE_CAUCA
+				owns_entire_state_region = STATE_CUNDINAMARCA
+				owns_entire_state_region = STATE_PANAMA
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.16 }
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+je_peru_peu = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+		capital = { region = sr:region_andes }
+		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_PEU } }
+		is_subject = yes
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		calc_true_if = {
+			amount >= 10
+			owns_entire_state_region = STATE_LIMA
+			owns_entire_state_region = STATE_ICA
+			owns_entire_state_region = STATE_CAJAMARCA
+			owns_entire_state_region = STATE_AREQUIPA
+			owns_entire_state_region = STATE_SANTA_CRUZ
+			owns_entire_state_region = STATE_LA_PAZ
+			owns_entire_state_region = STATE_ECUADOR
+			owns_entire_state_region = STATE_JUJUY
+			owns_entire_state_region = STATE_PASTAZA
+			owns_entire_state_region = STATE_TARAPACA
+			owns_entire_state_region = STATE_ANTOFAGASTA
+			owns_entire_state_region = STATE_ACRE
+			owns_entire_state_region = STATE_POTOSI
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.21 }
+	}
+
+	invalid = {
+		is_subject = no
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+je_peru_gbr = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+			capital = { region = sr:region_andes }
+			count >= 2
+		}
+		NOT = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+			capital = { region = sr:region_andes }
+			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_PEU }
+		}
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		any_subject_or_below = {
+			calc_true_if = {
+				amount >= 10
+				owns_entire_state_region = STATE_LIMA
+				owns_entire_state_region = STATE_ICA
+				owns_entire_state_region = STATE_CAJAMARCA
+				owns_entire_state_region = STATE_AREQUIPA
+				owns_entire_state_region = STATE_SANTA_CRUZ
+				owns_entire_state_region = STATE_LA_PAZ
+				owns_entire_state_region = STATE_ECUADOR
+				owns_entire_state_region = STATE_JUJUY
+				owns_entire_state_region = STATE_PASTAZA
+				owns_entire_state_region = STATE_TARAPACA
+				owns_entire_state_region = STATE_ANTOFAGASTA
+				owns_entire_state_region = STATE_ACRE
+				owns_entire_state_region = STATE_POTOSI
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.22 }
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+je_brazil_brz = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+		capital = { region = sr:region_brazil }
+		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_BRZ } }
+		is_subject = yes
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		calc_true_if = {
+			amount >= 14
+			owns_entire_state_region = STATE_PARANA
+			owns_entire_state_region = STATE_SAO_PAULO
+			owns_entire_state_region = STATE_RIO_DE_JANEIRO
+			owns_entire_state_region = STATE_URUGUAY
+			owns_entire_state_region = STATE_RIO_GRANDE_DO_SUL
+			owns_entire_state_region = STATE_MATO_GROSSO
+			owns_entire_state_region = STATE_MINAS_GERAIS
+			owns_entire_state_region = STATE_BAHIA
+			owns_entire_state_region = STATE_PERNAMBUCO
+			owns_entire_state_region = STATE_RIO_GRANDE_DO_NORTE
+			owns_entire_state_region = STATE_MARANHAO
+			owns_entire_state_region = STATE_GOIAS
+			owns_entire_state_region = STATE_CEARA
+			owns_entire_state_region = STATE_PIAUI
+			owns_entire_state_region = STATE_PARAIBA
+			owns_entire_state_region = STATE_SANTA_CATARINA
+			owns_entire_state_region = STATE_PARA
+			owns_entire_state_region = STATE_AMAZONAS
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.23 }
+	}
+
+	invalid = {
+		is_subject = no
+	}
+
+	should_be_pinned_by_default = yes
+}
+
+je_brazil_gbr = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+			capital = { region = sr:region_brazil }
+			count >= 2
+		}
+		NOT = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+			capital = { region = sr:region_brazil }
+			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_BRZ }
+		}
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		any_subject_or_below = {
+			calc_true_if = {
+				amount >= 14
+				owns_entire_state_region = STATE_PARANA
+				owns_entire_state_region = STATE_SAO_PAULO
+				owns_entire_state_region = STATE_RIO_DE_JANEIRO
+				owns_entire_state_region = STATE_URUGUAY
+				owns_entire_state_region = STATE_RIO_GRANDE_DO_SUL
+				owns_entire_state_region = STATE_MATO_GROSSO
+				owns_entire_state_region = STATE_MINAS_GERAIS
+				owns_entire_state_region = STATE_BAHIA
+				owns_entire_state_region = STATE_PERNAMBUCO
+				owns_entire_state_region = STATE_RIO_GRANDE_DO_NORTE
+				owns_entire_state_region = STATE_MARANHAO
+				owns_entire_state_region = STATE_GOIAS
+				owns_entire_state_region = STATE_CEARA
+				owns_entire_state_region = STATE_PIAUI
+				owns_entire_state_region = STATE_PARAIBA
+				owns_entire_state_region = STATE_SANTA_CATARINA
+				owns_entire_state_region = STATE_PARA
+				owns_entire_state_region = STATE_AMAZONAS
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.24 }
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+je_argentina_arg = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+		capital = { zzz_converter_state_is_in_argentina = yes }
+		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_ARG } }
+		is_subject = yes
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		calc_true_if = {
+			amount >= 10
+			owns_entire_state_region = STATE_RIO_NEGRO
+			owns_entire_state_region = STATE_LA_PAMPA
+			owns_entire_state_region = STATE_SANTA_FE
+			owns_entire_state_region = STATE_CORRIENTES
+			owns_entire_state_region = STATE_TUCUMAN
+			owns_entire_state_region = STATE_CHACO
+			owns_entire_state_region = STATE_BUENOS_AIRES
+			owns_entire_state_region = STATE_ALTO_PARAGUAY
+			owns_entire_state_region = STATE_BAJO_PARAGUAY
+			owns_entire_state_region = STATE_LOS_RIOS
+			owns_entire_state_region = STATE_ARAUCANIA
+			owns_entire_state_region = STATE_PATAGONIA
+			owns_entire_state_region = STATE_SANTIAGO
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.29 }
+	}
+
+	invalid = {
+		is_subject = no
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+je_argentina_gbr = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+			capital = { zzz_converter_state_is_in_argentina = yes }
+			count >= 2
+		}
+		NOT = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+			capital = { zzz_converter_state_is_in_argentina = yes }
+			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_ARG }
+		}
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		any_subject_or_below = {
+			calc_true_if = {
+				amount >= 10
+				owns_entire_state_region = STATE_RIO_NEGRO
+				owns_entire_state_region = STATE_LA_PAMPA
+				owns_entire_state_region = STATE_SANTA_FE
+				owns_entire_state_region = STATE_CORRIENTES
+				owns_entire_state_region = STATE_TUCUMAN
+				owns_entire_state_region = STATE_CHACO
+				owns_entire_state_region = STATE_BUENOS_AIRES
+				owns_entire_state_region = STATE_ALTO_PARAGUAY
+				owns_entire_state_region = STATE_BAJO_PARAGUAY
+				owns_entire_state_region = STATE_LOS_RIOS
+				owns_entire_state_region = STATE_ARAUCANIA
+				owns_entire_state_region = STATE_PATAGONIA
+				owns_entire_state_region = STATE_SANTIAGO
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.30 }
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+je_cape_saf = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+		capital = { region = sr:region_southern_africa }
+		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_SAF } }
+		is_subject = yes
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		calc_true_if = {
+			amount >= 5
+			owns_entire_state_region = STATE_CAPE_COLONY
+			owns_entire_state_region = STATE_NORTHERN_CAPE
+			owns_entire_state_region = STATE_EASTERN_CAPE
+			owns_entire_state_region = STATE_ZULULAND
+			owns_entire_state_region = STATE_VRYSTAAT
+			owns_entire_state_region = STATE_TRANSVAAL
+			owns_entire_state_region = STATE_LOURENCO_MARQUES
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.31 }
+	}
+
+	invalid = {
+		is_subject = no
+	}
+
+	should_be_pinned_by_default = yes
+}
+
+je_cape_gbr = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_converter_historical_content
+
+	is_shown_when_inactive = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+			capital = { region = sr:region_southern_africa }
+			count >= 2
+		}
+		NOT = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+			capital = { region = sr:region_southern_africa }
+			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_SAF }
+		}
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	complete = {
+		any_subject_or_below = {
+			calc_true_if = {
+				amount >= 5
+				owns_entire_state_region = STATE_CAPE_COLONY
+				owns_entire_state_region = STATE_NORTHERN_CAPE
+				owns_entire_state_region = STATE_EASTERN_CAPE
+				owns_entire_state_region = STATE_ZULULAND
+				owns_entire_state_region = STATE_VRYSTAAT
+				owns_entire_state_region = STATE_TRANSVAAL
+				owns_entire_state_region = STATE_LOURENCO_MARQUES
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zzz_cc_confederation.32 }
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}

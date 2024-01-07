@@ -1,0 +1,38 @@
+﻿# patching PDX issues.
+
+SAV = {
+	dynamic_country_name = {
+		name = dyn_c_lyon
+		adjective = SAV_ADJ
+		
+		is_main_tag_only = no
+		priority = 1
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = { 
+				exists = capital
+				capital = { 
+					state_region = s:STATE_RHONE 
+				}
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_romandy
+		adjective = SAV_ADJ
+		
+		is_main_tag_only = no
+		priority = 1
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = { 
+				exists = capital
+				capital = { 
+					state_region = s:STATE_WEST_SWITZERLAND
+				}
+			}
+		}
+	}
+}

@@ -4,14 +4,14 @@
 # (0 <-> INTMAX)
 # Total # of Construction Points(CP) in the globe
 global_construction_points = 1500000
-vn_global_construction_points = 871050
+vn_global_construction_points = 871050 # Used only for mod: Voltaire's nightmare
 
 # (0 <-> 1)
 # Expected % of population living in centralized countries
 centralized_population_ratio = 0.975
 
 # (0 <-> 100)
-# Expected average CivLevel score for all centralized nations
+# Expected average CivLevel score for all centralized nations. Basically, how advanced the "average" country is.
 mean_civlevel = 80
 
 # (0 <-> 1)
@@ -21,3 +21,17 @@ state_trait_strength = 0.5
 # (-1 <-> 1)
 # The higher this number is, the more a single sector of industry will cluster into fewer states.
 packet_factor = -0.1
+
+# (-1 <-> 0)
+# The stronger the penalty, the more of a country's industry will go to incorporated states over unincorporated ones.
+unincorporated_penalty = -0.3
+
+
+## Only used in dev-based econ distribution settings
+# (0 <-> max)
+# At and below this point, per capita development CP penalties flatten
+min_dev_per_pop = 0.00001
+
+# (min <-> 0.1)
+# At and above this point, there are no CP penalties based on per capita development
+max_dev_per_pop = 0.0001

@@ -16,6 +16,7 @@ class SubStatePops
 	void addPop(const Pop& pop) { pops.push_back(pop); }
 	void addPops(const std::vector<Pop>& thePops) { pops.insert(pops.end(), thePops.begin(), thePops.end()); }
 	void setTag(const std::string& theTag) { tag = theTag; }
+	void multiplyPops(double factor);
 
 	[[nodiscard]] int getPopCount() const;
 	[[nodiscard]] int getSlavePopCount() const;

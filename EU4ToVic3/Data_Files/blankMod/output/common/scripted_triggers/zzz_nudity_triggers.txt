@@ -1,0 +1,95 @@
+﻿#should_be_naked_trigger
+#should_be_naked_character_trigger
+
+should_be_naked_trigger = {
+	exists = scope:pop
+	scope:pop = {
+		trigger_if = {
+			limit = {
+				religion = { has_discrimination_trait = nudist }
+			}
+			NOT = { is_pop_type = academics }
+		}
+		trigger_else_if = {
+			limit = { is_pop_type = clergymen }
+			religion = { has_discrimination_trait = nudist_clerical }
+		}
+		trigger_else_if = {
+			limit = { is_pop_type = officers }
+			religion = { has_discrimination_trait = nudist_clerical }
+			has_state_religion = yes
+			owner = {
+				ig:ig_armed_forces = {
+					OR = {
+						has_ideology = ideology:ideology_pious
+						has_ideology = ideology:ideology_corporatist
+					}
+				}
+			}
+		}
+		trigger_else = {
+			OR = {
+				is_pop_type = farmers
+				is_pop_type = peasants
+				is_pop_type = laborers
+				is_pop_type = slaves
+			}
+			OR = {
+				culture = cu:amazonian
+				culture = cu:nuba
+				culture = cu:dinka
+			}
+		}
+	}
+}
+
+should_be_naked_character_trigger = {
+	should_show_nudity = yes
+	exists = scope:character
+	scope:character = {
+    	NOR = {
+			has_ideology = ideology:ideology_atheist
+			has_ideology = ideology:ideology_communist
+			has_ideology = ideology:ideology_positivist
+		}
+		trigger_if = {
+			limit = {
+				religion = { has_discrimination_trait = nudist }
+			}
+			NOT = { is_interest_group_type = ig_intelligentsia }
+		}
+		trigger_else_if = {
+			limit = {
+				religion = { has_discrimination_trait = nudist_clerical }
+			}
+			OR = {
+				has_ideology = ideology:ideology_theocrat
+				is_interest_group_type = ig_devout
+				trigger_if = {
+					limit = {
+						owner = { has_law = law_type:law_theocracy }
+					}
+					is_ruler = yes
+				}
+				trigger_if = {
+					limit = {
+						owner = {
+							religion = { has_discrimination_trait = nudist_clerical }
+							ig:ig_armed_forces = {
+								OR = {
+									has_ideology = ideology:ideology_pious
+									has_ideology = ideology:ideology_corporatist
+								}
+							}
+						}
+					}
+					OR = {
+						is_interest_group_type = ig_armed_forces
+						is_commander = yes
+					}
+				}
+			}
+		}
+		trigger_else = { always = no }
+	}
+}

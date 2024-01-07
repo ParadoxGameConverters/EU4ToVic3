@@ -1,0 +1,296 @@
+﻿ideology_maternalistic = {
+	icon = "gfx/interface/icons/ideology_icons/paternalistic.dds"
+	
+	lawgroup_governance_principles = {
+		law_monarchy = strongly_approve
+		law_theocracy = approve			
+		law_presidential_republic = neutral
+		law_parliamentary_republic = neutral
+		law_council_republic = strongly_disapprove
+	}
+	
+	lawgroup_distribution_of_power = {
+		law_single_party_state = neutral
+		law_landed_voting = strongly_approve
+		law_autocracy = strongly_approve
+		law_oligarchy = approve
+		law_wealth_voting = neutral
+		law_census_voting = disapprove
+		law_universal_suffrage = strongly_disapprove
+		law_anarchy = strongly_disapprove
+		law_technocracy = strongly_disapprove
+	}
+	
+	lawgroup_bureaucracy = {
+		law_hereditary_bureaucrats = approve
+		law_appointed_bureaucrats = neutral
+		law_elected_bureaucrats = disapprove
+	}
+
+	lawgroup_policing = {
+		law_local_police = approve
+		law_dedicated_police = neutral
+		law_militarized_police = neutral
+		law_no_police = disapprove
+	}
+	
+	lawgroup_economic_system = {		
+		law_traditionalism = strongly_approve
+		law_agrarianism = approve
+		law_interventionism = neutral
+		law_industry_banned = disapprove
+		law_laissez_faire = disapprove
+		law_cooperative_ownership = strongly_disapprove
+		law_command_economy = strongly_disapprove
+	}
+	
+	lawgroup_trade_policy = {		
+		law_isolationism = approve
+		law_mercantilism = approve
+		law_protectionism = neutral
+		law_free_trade = disapprove
+	}	
+}
+
+ideology_matriarchal = {
+	icon = "gfx/interface/icons/ideology_icons/patriarchal.dds"
+	
+	lawgroup_rights_of_women = {
+		law_no_womens_rights = approve
+		law_women_own_property = disapprove
+		law_women_in_the_workplace = disapprove
+		law_womens_suffrage = strongly_disapprove
+	}
+
+	lawgroup_free_speech = {
+		law_outlawed_dissent = approve
+		law_censorship = approve
+		law_right_of_assembly = neutral
+		law_protected_speech = disapprove
+	}
+}
+
+ideology_matriarchal_suffrage = {
+	icon = "gfx/interface/icons/ideology_icons/patriarchal.dds"
+	
+	priority = 100 # Overrides other non-leader ideologies with a lower prio
+	
+	lawgroup_rights_of_women = {
+		law_no_womens_rights = approve
+		law_women_own_property = neutral
+		law_women_in_the_workplace = neutral
+		law_womens_suffrage = neutral
+	}
+
+	lawgroup_free_speech = {
+		law_outlawed_dissent = strongly_approve
+		law_censorship = approve
+		law_right_of_assembly = neutral
+		law_protected_speech = disapprove
+	}
+}
+
+ideology_masculist_ig = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_womens_liberation.dds"
+	
+	priority = 100 # Overrides other non-leader ideologies with a lower prio
+	
+	lawgroup_rights_of_women = {
+		law_womens_suffrage = strongly_approve
+		law_women_in_the_workplace = approve
+		law_women_own_property = neutral
+		law_no_womens_rights = strongly_disapprove
+	}
+}
+
+ideology_masculist = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_womens_liberation.dds"
+	
+	character_ideology = yes
+	
+	lawgroup_rights_of_women = {
+		law_womens_suffrage = strongly_approve
+		law_women_in_the_workplace = neutral
+		law_women_own_property = disapprove
+		law_no_womens_rights = strongly_disapprove
+	}
+	
+	possible = {
+		owner = { 
+			### Converter ###
+			is_matriarchal_country = yes
+			OR = {
+				is_feminist_country = yes
+				has_technology_researched = feminism
+			}
+			### Converter ###
+			NOT = { has_law = law_type:law_womens_suffrage }
+		}
+		# Agitators should have an ideology at odds with current laws
+		NAND = {
+			has_role = agitator
+			owner = {
+				has_law = law_type:law_womens_suffrage
+			}
+		}
+		scope:interest_group = {
+			OR = {
+				is_interest_group_type = ig_rural_folk
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_trade_unions
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_industrialists
+				### Converter ###
+				trigger_if = {
+					limit = {
+						owner = { is_feminist_country = yes }
+					}
+					is_interest_group_type = ig_devout
+				}
+			}
+		}
+		scope:interest_group = {
+			NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}
+	}
+	
+	leader_weight = {
+		value = {
+			value = 100
+			 # less likely if issues are not relevant
+			if = {
+				limit = {
+					owner = {
+						OR = {
+							has_law = law_type:law_womens_suffrage
+							AND = {
+								has_law = law_type:law_women_in_the_workplace
+								OR = {
+									has_law = law_type:law_oligarchy
+									has_law = law_type:law_autocracy
+								}
+							}
+						}
+					}
+				}
+				add = -100
+			}
+			# more likely if character is a woman after mass propaganda
+			if = {
+				limit = {
+					owner = {
+						has_technology_researched = mass_propaganda
+						### Converter ###
+						is_matriarchal_country = no
+					}
+					is_female = yes
+				}
+				multiply = {
+					value = 2
+				}
+			}
+			### Converter ###
+			# more likely if character is a man after mass propaganda
+			if = {
+				limit = {
+					owner = {
+						has_technology_researched = mass_propaganda
+						is_matriarchal_country = yes
+					}
+					is_female = no
+				}
+				multiply = {
+					value = 2
+				}
+			}
+			# Patriarchal men are pissed in Matriarchal countries
+			if = {
+				limit = {
+					is_female = no
+					is_matriarchal_pop = no
+					owner = { is_matriarchal_country = yes }
+				}
+				multiply = {
+					value = 3
+				}
+			}
+			# Matriarchal women are pissed in Patriarchal countries
+			if = {
+				limit = {
+					is_female = yes
+					is_matriarchal_pop = yes
+					owner = { is_matriarchal_country = no }
+				}
+				multiply = {
+					value = 3
+				}
+			}
+			### Converter ###
+			# more likely with limited women's rights
+			if = {
+				limit = {
+					owner = { 
+						OR = {
+							has_law = law_type:law_no_womens_rights
+							has_law = law_type:law_women_own_property
+						}
+					}
+				}
+				multiply = {
+					value = 2
+				}
+			}
+			# less likely if humanitarian is an option
+			if = {
+				limit = {
+					OR = {
+						is_interest_group_type = ig_intelligentsia
+						is_interest_group_type = ig_trade_unions
+					}
+				}
+				add = -50
+			}
+			# liberal and/or radical leaders have a higher spawn chance if the Dreyfusards won.
+			if = {
+				limit = {
+					scope:interest_group = {
+						has_variable = dreyfusard_victory
+					}
+				}
+				add = 50
+			}
+		}
+	}
+}
+
+ideology_anti_clerical_pb = {
+	icon = "gfx/interface/icons/ideology_icons/anti_clerical.dds"
+	
+	lawgroup_church_and_state = {
+		law_state_atheism = strongly_approve
+		law_total_separation = approve
+		law_freedom_of_conscience = disapprove
+		law_state_religion = strongly_disapprove
+	}
+	
+	lawgroup_education_system = {
+		law_public_schools = approve
+		law_private_schools = approve
+		law_no_schools = disapprove
+		law_religious_schools = disapprove		
+	}
+}
+
+ideology_dummy_pious_01 = {
+	icon = "gfx/interface/icons/ideology_icons/pious.dds"
+}
+
+ideology_dummy_pious_02 = {
+	icon = "gfx/interface/icons/ideology_icons/pious.dds"
+}

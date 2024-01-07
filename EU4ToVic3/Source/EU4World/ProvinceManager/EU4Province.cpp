@@ -79,6 +79,7 @@ void EU4::Province::determineProvinceWeight(const BuildingCostLoader& buildingTy
 	const auto developmentDelta = currentDevelopment - provinceHistory.getOriginalDevelopment();
 
 	// Province weight is absolute dev + buildings. It is used in extreme popShaping.
+	// Also used in dev-based distributions of Vic3 Construction Points
 	provinceWeight = currentDevelopment + buildingWeight;
 
 	// Investment weight is invested dev + buildings. Its FACTOR is used in devPush popShaping.

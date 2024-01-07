@@ -33,14 +33,23 @@ void V3::CountryDefinitionLoader::registerKeys()
 		const auto newCountry = std::make_shared<Country>();
 		newCountry->setTag(countryTag);
 		newCountry->initializeCountry(theStream);
-		countries[countryTag] = newCountry;
+		if (!newCountry->isCountryDynamic()) // don't use their dynamic tags! Just ignore them.
+			countries[countryTag] = newCountry;
 	});
 }
 
 void V3::CountryDefinitionLoader::registerReloadKeys()
 {
 	registerRegex(commonItems::catchallRegex, [this](const std::string& countryTag, std::istream& theStream) {
-		const auto& country = countries.at(countryTag);
-		country->storeVanillaCountryType(theStream);
+		if (countries.contains(countryTag))
+		{
+			const auto& country = countries.at(countryTag);
+			country->storeVanillaCountryType(theStream);
+		}
+		else
+		{
+			// one of those dynamic countries we ignore.
+			commonItems::ignoreItem("unused", theStream);
+		}
 	});
 }

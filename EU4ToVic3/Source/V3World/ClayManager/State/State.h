@@ -19,6 +19,9 @@ class State: commonItems::parser
 	void distributeLandshares() const;
 	void distributeResources();
 	void addHomeland(const auto& homeland) { homelands.emplace(homeland); }
+	void updateProvinces() const;
+
+	void distributeNonTreatyPortPops(int incomingPops);
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] bool containsProvince(const std::string& provinceName) const { return provinces.contains(provinceName); }
@@ -56,6 +59,8 @@ class State: commonItems::parser
 	int ID = 0;
 	std::string name;
 	ProvinceMap provinces; // in xA2345A format
+	std::set<std::string> impassableProvinces;
+	std::set<std::string> primeProvinces;
 	std::vector<std::shared_ptr<SubState>> substates;
 	std::vector<std::string> traits;				  // state_trait_natural_harbors
 	std::map<std::string, int> cappedResources; // RGO and arable land potential

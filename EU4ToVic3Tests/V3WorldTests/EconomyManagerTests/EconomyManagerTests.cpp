@@ -100,7 +100,7 @@ V3::PoliticalManager prepWorld()
 	clayManager.shoveRemainingProvincesIntoSubStates();
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 
-	popManager.generatePops(clayManager, Configuration::POPSHAPES::Vanilla);
+	popManager.generatePops(clayManager, Configuration::POPSHAPES::Vanilla, 1);
 
 	return politicalManager;
 }

@@ -16,6 +16,9 @@ class EconDefinesLoader: commonItems::parser
 	[[nodiscard]] const auto& getMeanCivlevel() const { return meanCivlevel; }
 	[[nodiscard]] const auto& getStateTraitStrength() const { return stateTraitStrength; }
 	[[nodiscard]] const auto& getPacketFactor() const { return packetFactor; }
+	[[nodiscard]] const auto& getIncorporatedModifier() const { return incorpModifier; }
+	[[nodiscard]] const auto& getMinDevPerPop() const { return minDevPerPop; }
+	[[nodiscard]] const auto& getMaxDevPerPop() const { return maxDevPerPop; }
 
   private:
 	void registerKeys();
@@ -26,6 +29,9 @@ class EconDefinesLoader: commonItems::parser
 	double meanCivlevel = 0;
 	double stateTraitStrength = 0;
 	double packetFactor = 0;
+	double incorpModifier = 0.0;
+	double minDevPerPop = 0.0;
+	double maxDevPerPop = 1.0;
 };
 } // namespace V3
 #endif // ECON_DEFINES_LOADER_H

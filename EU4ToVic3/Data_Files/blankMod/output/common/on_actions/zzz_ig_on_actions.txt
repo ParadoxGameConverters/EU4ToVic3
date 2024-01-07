@@ -1,0 +1,599 @@
+﻿﻿# For on_actions launched by the code itself.
+
+# Root = Country
+on_yearly_pulse_country = {
+	#Holy Order Secularization
+	random_events = {
+		4 = 0
+		1 = zzz_cc_politics.1
+	}
+}
+
+# Root = The applicable country
+# scope:technology = The technology type they just acquired
+on_acquired_technology = {
+	effect = {
+		if = {
+			limit = {
+				has_variable = grand_exhibition_points_change
+			}
+			change_variable = {
+				name = grand_exhibition_points_change
+				add = 3
+			}
+		}
+		if = {
+			limit = {
+				has_game_started = yes
+			}
+			post_notification = acquired_technology_notification
+		}
+		if = {
+			limit = {
+				is_player = yes
+				has_technology_researched = pumpjacks
+				NOT = { has_variable = first_oil_discovered }
+			}
+			set_variable = first_oil_discovered
+			if = {
+				limit = {
+					any_scope_state = {
+						has_potential_resource = bg_oil_extraction
+					}
+				}
+				random_scope_state = {
+					limit = {
+						has_potential_resource = bg_oil_extraction
+					}
+					force_resource_discovery = bg_oil_extraction
+				}
+			}
+			else_if = {
+				limit = {
+					any_country = {
+						has_overlapping_interests = ROOT
+						any_scope_state = {
+							has_potential_resource = bg_oil_extraction
+						}
+					}
+				}
+				random_country = {
+					limit = {
+						has_overlapping_interests = ROOT
+						any_scope_state = {
+							has_potential_resource = bg_oil_extraction
+						}
+					}
+					random_scope_state = {
+						limit = {
+							has_potential_resource = bg_oil_extraction
+						}
+						force_resource_discovery = bg_oil_extraction
+					}
+				}
+			}
+			else = {
+				random_state = {
+					limit = {
+						has_potential_resource = bg_oil_extraction
+					}
+					force_resource_discovery = bg_oil_extraction
+				}
+			}
+		}
+		if = {		## Converter
+			limit = {
+				has_technology_researched = corporatism
+				ig:ig_armed_forces = {
+					has_ideology = ideology:ideology_pious
+				}
+			}
+			ig:ig_armed_forces = {
+				remove_ideology = ideology_pious
+				add_ideology = ideology_corporatist
+			}
+		}
+	}
+}
+
+# Root = Releasing Country
+# scope:target = Released Country
+on_country_released_as_independent = {
+	effect = {
+		if = {
+			limit = {
+				c:NEN ?= scope:target
+			}
+			scope:target = {
+				create_character = {
+					ig_leader = yes
+					interest_group = ig_rural_folk
+					ideology = ideology_luddite
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:target = {
+					country_has_primary_culture = cu:ashkenazi
+				}
+				NOT = {
+					s:STATE_PALESTINE = {
+						is_homeland = cu:ashkenazi
+					}
+				}
+			}
+			s:STATE_PALESTINE = {
+				add_homeland = cu:sephardic
+				add_homeland = cu:ashkenazi
+			}
+		}
+		if = {
+			limit = {
+				scope:target = {
+					OR = {
+						country_has_primary_culture = cu:afro_caribbean
+						country_has_primary_culture = cu:afro_antillean
+						country_has_primary_culture = cu:afro_american
+						country_has_primary_culture = cu:afro_caribeno
+						country_has_primary_culture = cu:afro_brazilian
+					}
+					OR = {
+						has_law = law_type:law_legacy_slavery
+						has_law = law_type:law_slave_trade
+					}
+				}
+			}
+			scope:target = {
+				trigger_event = { id = slave_revolt_events.1 days = 0 }
+			}
+		}
+		else_if = {
+			limit = {		## Converter
+				scope:target = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
+					OR = {
+						has_law = law_type:law_legacy_slavery
+						has_law = law_type:law_slave_trade
+					}
+				}
+			}
+			scope:target = {
+				trigger_event = { id = slave_revolt_events.1 days = 0 }
+			}
+		}
+		scope:target = { converter_released_country_effect = yes }
+	}
+}
+
+# Root = Releasing Country
+# scope:target = Released Country
+on_country_released_as_own_subject = {
+	effect = {
+		if = {
+			limit = {
+				c:NEN ?= scope:target
+			}
+			scope:target = {
+				create_character = {
+					ig_leader = yes
+					interest_group = ig_rural_folk
+					ideology = ideology_luddite
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:target = {
+					country_has_primary_culture = cu:ashkenazi
+				}
+				NOT = {
+					s:STATE_PALESTINE = {
+						is_homeland = cu:ashkenazi
+					}
+				}
+			}
+			s:STATE_PALESTINE = {
+				add_homeland = cu:sephardic
+				add_homeland = cu:ashkenazi
+			}
+		}
+		scope:target = { converter_released_country_effect = yes }		##Converter
+	}
+}
+
+# Root = Releasing Country
+# scope:target = Released Country
+on_country_released_as_overlord_subject = {
+	effect = {
+		if = {
+			limit = {
+				scope:target = {
+					country_has_primary_culture = cu:ashkenazi
+				}
+				NOT = {
+					s:STATE_PALESTINE = {
+						is_homeland = cu:ashkenazi
+					}
+				}
+			}
+			s:STATE_PALESTINE = {
+				add_homeland = cu:sephardic
+				add_homeland = cu:ashkenazi
+			}
+		}
+		scope:target = { converter_released_country_effect = yes }		##Converter
+	}
+}
+
+# Root = Country
+on_country_formed = {
+	effect = {
+		if = {
+			limit = {
+				c:LAO ?= ROOT
+			}
+			trigger_event = { id = formation.1 popup = yes }
+		}
+        else_if = {
+			limit = {
+				c:PLT ?= THIS
+				was_formed_from = PRG
+				has_variable = patino_paraguay_var
+			}
+			add_primary_culture = cu:guarani
+		}
+		else_if = {
+			limit = {
+				c:UBD ?= ROOT
+			}
+			trigger_event = { id = formation.2 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:BYZ ?= ROOT
+			}
+			trigger_event = { id = formation.3 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:IBE ?= ROOT
+			}
+			trigger_event = { id = formation.5 popup = yes }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					c:BRZ ?= ROOT
+					c:USA ?= ROOT
+					c:SAF ?= ROOT
+				}
+			}
+			trigger_event = { id = formation.6 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:KUK ?= ROOT
+			}
+			trigger_event = { id = formation.7 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:ARA ?= ROOT
+			}
+			trigger_event = { id = formation.8 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:YUG ?= ROOT
+			}
+			trigger_event = { id = formation.9 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:SCA ?= ROOT
+			}
+			trigger_event = { id = formation.10 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:MAL ?= ROOT
+			}
+			trigger_event = { id = formation.11 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:TRH ?= ROOT
+			}
+			trigger_event = { id = formation.12 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:IDN ?= ROOT
+			}
+			trigger_event = { id = formation.13 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:BHT ?= ROOT
+			}
+			trigger_event = { id = formation.14 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:YEM ?= ROOT
+			}
+			trigger_event = { id = formation.15 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:KAZ ?= ROOT
+			}
+			trigger_event = { id = formation.16 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:HRE ?= ROOT
+			}
+			trigger_event = { id = formation.18 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:UNL ?= ROOT
+			}
+			trigger_event = { id = formation.19 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:RHN ?= ROOT
+			}
+			trigger_event = { id = formation.20 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:GER ?= ROOT
+			}
+			trigger_event = { id = german_unification.4 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:ITA ?= ROOT
+			}
+			trigger_event = { id = italian_unification.1 popup = yes }
+		}
+		else = {
+			trigger_event = { id = formation.17 popup = yes }
+		}
+		converter_primary_cultures_effect = yes		##Converter
+	}
+}
+
+# Root = Country
+# scope:target = Uprising country
+on_revolution_start = {
+	effect = {
+		scope:target = {
+			converter_copy_ideologies_effect = yes		##Converter
+			enact_preferred_governance_principle = yes
+		}
+		if = {
+			limit = {
+				has_law = law_type:law_monarchy
+				scope:target = {
+					NOT = {
+						has_law = law_type:law_monarchy
+					}
+				}
+			}
+			set_variable = anti_monarchist_revolution
+		}
+		if = {
+			limit = {
+				has_journal_entry = je_warlord_china
+				NOT = { has_variable = china_warlord_explosion_revolution }
+			}
+			post_notification = warlord_china_explosion_point_add
+			change_variable = {
+				name = china_warlord_explosion
+				add = 1
+			}
+			set_variable = china_warlord_explosion_revolution
+		}
+		if = {
+			limit = {
+				has_journal_entry = je_meiji_restoration
+				scope:target = {
+					ig:ig_landowners = {
+						is_in_government = yes
+					}
+				}
+			}
+			set_variable = anti_shogunate_civil_war
+		}
+		if = {
+			limit = {
+				has_journal_entry = je_the_paris_commune_france
+			}
+			c:FRA = {
+				trigger_event = { id = paris_commune.4 popup = yes }
+			}
+			random_scope_state = {
+				limit = {
+					state_region = s:STATE_ILE_DE_FRANCE
+				}
+				set_state_owner = c:PRC
+			}
+			c:PRC = {
+				annex = scope:target
+				create_diplomatic_play = {
+					type = dp_revolution
+					target_state = c:FRA.capital
+					annex_as_civil_war = yes
+					add_war_goal = {
+						holder = c:FRA
+						type = annex_country
+						target_country = c:PRC
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_dlc_feature = voice_of_the_people_content
+				c:KRA ?= root
+				c:AUS ?= {
+					any_subject_or_below = {
+						c:KRA ?= this
+					}
+				}
+			}
+			c:AUS = {
+				trigger_event = { id = krakow.1 days = 3 popup = yes }
+			}
+		}
+	}
+}
+
+# Root = Country
+# scope:target = Uprising country
+on_secession_start = {
+	effect = {
+		if = {
+			limit = {
+				has_journal_entry = je_warlord_china
+				NOT = { has_variable = china_warlord_explosion_revolution }
+			}
+			post_notification = warlord_china_explosion_point_add
+			change_variable = {
+				name = china_warlord_explosion
+				add = 1
+			}
+			set_variable = china_warlord_explosion_revolution
+		}
+		if = {
+			limit = {
+				scope:target = {
+					OR = {
+						country_has_primary_culture = cu:north_italian
+						country_has_primary_culture = cu:south_italian
+					}
+				}
+				ROOT = {
+					NOR = {
+						country_has_primary_culture = cu:north_italian
+						country_has_primary_culture = cu:south_italian
+					}
+				}
+				any_country = {
+					has_journal_entry = je_risorgimento
+				}
+			}
+			root = {
+				trigger_event = { id = italian_unification.7 days = 3 }
+			}
+		}
+		if = {
+			limit = {
+				NOR = {
+			        c:POL ?= this
+			        c:KRA ?= this
+			        AND = {
+			            c:GAL ?= this
+			            ruler = {
+			                culture = cu:polish
+			            }
+			        }
+				}
+				scope:target = {
+					OR = {
+			            c:POL ?= this
+			            c:KRA ?= this
+			            AND = {
+			                c:GAL ?= this
+			                ruler = {
+			                    culture = cu:polish
+			                }
+			            }
+			        }
+				}
+				OR = {
+					c:POL ?= {
+						NOT = {
+							this = scope:target
+						}
+					}
+					c:KRA ?= {
+						NOT = {
+							this = scope:target
+						}
+					}
+					c:GAL ?= {
+						NOT = {
+							this = scope:target
+						}
+					}
+				}
+			}
+			scope:target = {
+				set_variable = {
+					name = polish_rebel_country_var
+					months = short_modifier_time
+				}
+			}
+			set_variable = {
+				name = polish_rebel_country_enemy_var
+				months = short_modifier_time
+			}
+			every_country = {
+				limit = {
+					OR = {
+						c:POL ?= this
+						c:KRA ?= this
+			            AND = {
+			                c:GAL ?= this
+			                ruler = {
+			                    culture = cu:polish
+			                }
+			            }
+					}
+					NOT = {
+						this = scope:target
+					}
+
+				}
+				trigger_event = { id = poland_events.5 days = 7 popup = yes }
+			}
+		}
+		scope:target = { converter_released_country_effect = yes }		##Converter
+	}
+}
+
+# Root = Country
+# scope:target = Uprising country
+on_secession_end = {
+	effect = {
+		scope:target = {		##Converter
+			every_primary_culture = {
+				limit = {
+					OR = {
+						is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_american_cultures target = this }
+						is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+						is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+					}
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+}

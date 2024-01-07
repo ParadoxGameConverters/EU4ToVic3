@@ -55,23 +55,17 @@ POPS = {
 		region_state:C03 = { #Chahta
 			create_pop = {
 				culture = muskogean
-				size = 85000
+				size = 116000
 			}
 		}
 		region_state:C04 = { #Chikashsha
 			create_pop = {
 				culture = muskogean
-				size = 7000
+				size = 40000
 			}
 			create_pop = {
 				culture = caddoan
-				size = 1000
-			}
-		}
-		region_state:C05 = { #Caddo
-			create_pop = {
-				culture = caddoan
-				size = 70000
+				size = 10000
 			}
 		}
 	}
@@ -120,13 +114,13 @@ POPS = {
 				size = 14270
 			}
 		}
-		region_state:D02 = { #Denaakk'e
+		region_state:DE0 = { #Denaakk'e
 			create_pop = {
 				culture = athabaskan
 				size = 15000
 			}
 		}
-		region_state:D03 = { #Dena'ina Elnena
+		region_state:DE1 = { #Dena'ina Elnena
 			create_pop = {
 				culture = athabaskan
 				size = 10000
@@ -193,13 +187,7 @@ POPS = {
 		region_state:S11 = { #Sugpiaq
 			create_pop = {
 				culture = inuit
-				size = 12000
-			}
-		}
-		region_state:S12 = { #Sallirmiut
-			create_pop = {
-				culture = inuit
-				size = 7000
+				size = 19000
 			}
 		}
 		region_state:T03 = { #Tanana
@@ -283,22 +271,16 @@ POPS = {
 		}
 	}
 	s:STATE_IDAHO = {
-		region_state:K03 = { #Ktunaxa
-			create_pop = {
-				culture = nez_perce
-				size = 10536
-			}
-		}
 		region_state:I01 = { #Ichishkin
 			create_pop = {
 				culture = nez_perce
-				size = 10000
+				size = 20000
 			}
 		}
 		region_state:N05 = { #Numu (Northern Paiute)
 			create_pop = {
 				culture = nez_perce
-				size = 1000
+				size = 1536
 			}
 			create_pop = {
 				culture = paiute
@@ -1245,7 +1227,7 @@ POPS = {
 				size = 35000
 			}
 		}
-		region_state:D04 = { #Denesoline
+		region_state:DE2 = { #Denesoline
 			create_pop = {
 				culture = athabaskan
 				size = 11980
@@ -1307,7 +1289,7 @@ POPS = {
 		}
 	}
 	s:STATE_BRITISH_COLUMBIA = {
-		region_state:D05 = { #Dakelh-ne (Carrier)
+		region_state:DA1 = { #Dakelh-ne (Carrier)
 			create_pop = {
 				culture = athabaskan
 				size = 50000
@@ -1428,7 +1410,7 @@ POPS = {
 				size = 10000
 			}
 		}
-		region_state:D04 = { #Denesoline
+		region_state:DE2 = { #Denesoline
 			create_pop = {
 				culture = athabaskan
 				size = 11980
@@ -1450,7 +1432,7 @@ POPS = {
 		}
 	}
 	s:STATE_MANITOBA = {
-		region_state:D04 = { #Denesoline
+		region_state:DE2 = { #Denesoline
 			create_pop = {
 				culture = athabaskan
 				size = 11980
@@ -1468,7 +1450,7 @@ POPS = {
 		}
 	}
 	s:STATE_YUKON_TERRITORY = {
-		region_state:D01 = { #Dakeyi
+		region_state:DA0 = { #Dakeyi
 			create_pop = {
 				culture = athabaskan
 				size = 22000
@@ -1498,16 +1480,16 @@ POPS = {
 				size = 20709
 			}
 		}
-		region_state:L04 = { #Lingit
-			create_pop = {
-				culture = athabaskan
-				size = 20000
-			}
-		}
 		region_state:KD1 = { #Kaska Dene
 			create_pop = {
 				culture = athabaskan
 				size = 10000
+			}
+		}
+		region_state:L04 = { #Lingit
+			create_pop = {
+				culture = athabaskan
+				size = 30000
 			}
 		}
 		region_state:S12 = { #Sallirmiut
@@ -1516,21 +1498,15 @@ POPS = {
 				size = 18000
 			}
 		}
-		region_state:S13 = { #Sahtúot’ine
-			create_pop = {
-				culture = athabaskan
-				size = 32000
-			}
-		}
 		region_state:T06 = { #Tahltan
 			create_pop = {
 				culture = athabaskan
-				size = 10000
+				size = 22000
 			}
 		}
 	}
 	s:STATE_NORTHWEST_TERRITORIES = {
-		region_state:D04 = { #Denesoline
+		region_state:DE2 = { #Denesoline
 			create_pop = {
 				culture = athabaskan
 				size = 22980
@@ -1598,7 +1574,7 @@ POPS = {
 				size = 11980
 			}
 		}
-		region_state:D04 = { #Denesoline
+		region_state:DE2 = { #Denesoline
 			create_pop = {
 				culture = athabaskan
 				size = 11980
@@ -2208,13 +2184,7 @@ POPS = {
 			}
 			create_pop = {
 				culture = oodham
-				size = 43456
-			}
-		}
-		region_state:A08 = { #Acaxee
-			create_pop = {
-				culture = oodham
-				size = 8000
+				size = 51456
 			}
 		}
 		region_state:G06 = { #Guasaves
@@ -2504,13 +2474,17 @@ POPS = {
 	# Aguascalientes: 57125 in 1830, 72193, so averaging out to 64659
 	# working total of 313308
 	s:STATE_ZACATECAS = {
-		region_state:C09 = { #Coliman (Colima)
+		region_state:C09 = { # Coliman
+			create_pop = {
+				culture = tarascan
+				size = 10000
+			}
+		}
+		region_state:G05 = { # Guamare
 			create_pop = {
 				culture = nahua
 				size = 27500
 			}
-		}
-		region_state:G05 = { #Guamare
 			create_pop = {
 				culture = otomi
 				size = 450000
@@ -2524,7 +2498,25 @@ POPS = {
 				size = 10000
 			}
 		}
-		region_state:T11 = { #Tonallan
+		region_state:MCO = { # Irechikwa
+			create_pop = {
+				culture = nahua
+				size = 27500
+			}
+			create_pop = {
+				culture = otomi
+				size = 450000
+			}
+			create_pop = {
+				culture = tarascan
+				size = 25000
+			}
+			create_pop = {
+				culture = zapotec
+				size = 10000
+			}
+		}
+		region_state:T11 = { # Tonallan
 			create_pop = {
 				culture = nahua
 				size = 27500
@@ -2537,14 +2529,12 @@ POPS = {
 				culture = tarascan
 				size = 25000
 			}
-		}
-		region_state:MCO = { #Michoacan
 			create_pop = {
 				culture = zapotec
 				size = 92000
 			}
 		}
-		region_state:T12 = { #Tlacuitlapan
+		region_state:T12 = { # Tlacuitlapan
 			create_pop = {
 				culture = otomi #Converter Culture
 				size = 300000

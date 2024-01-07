@@ -1,0 +1,1640 @@
+﻿namespace = dreyfus
+
+# Dreyfus conviction event
+dreyfus.1 = {
+	type = country_event
+	placement = root
+	title = dreyfus.1.t
+	desc = dreyfus.1.d
+	flavor = dreyfus.1.f
+
+	duration = 3
+
+	dlc = dlc004
+
+	event_image = {
+		video = "votp_hostile_court"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
+
+	trigger = {
+		has_dlc_feature = voice_of_the_people_content
+		uses_fra_characters = yes		##Converter
+		has_technology_researched = political_agitation
+		OR = {
+			OR = {
+				has_variable = recently_lost_war
+				AND = {
+					has_variable = recently_had_war
+					NOT = {
+						has_variable = recently_won_war
+					}
+				}
+			}
+			any_state = {
+				state_region = { 
+					is_homeland = global_var:fra_culture		##Converter
+				}
+				NOT = {
+					OR = {
+						state_region = s:STATE_SAVOY
+						AND = {
+							state_region = s:STATE_PROVENCE
+							state_region = {
+								any_scope_state = {
+									owner = root
+								}
+							}
+							is_split_state = yes
+						}
+					}
+					owner = root
+				}
+			}
+		}
+		ig:ig_armed_forces = {
+			is_marginal = no
+		}
+		NOT = {
+			has_law = law_type:law_multicultural
+		}
+		NOT = { 
+			has_variable = dreyfus_convicted
+		}
+		any_scope_state = {
+        	state_region = { 
+        		is_homeland = global_var:fra_culture		##Converter
+        	}
+        	any_scope_pop = {
+        		religion = rel:jewish
+        	}
+		}
+		any_country = {
+			has_diplomatic_pact = {
+				who = root
+				type = rivalry
+			}
+		}
+	}
+
+	immediate = {
+		##Converter
+		if = {
+			limit = {
+				any_scope_pop = { culture = cu:ashkenazi }
+			}
+			cu:ashkenazi = { save_scope_as = dreyfus_culture }
+		}
+		else_if = {
+			limit = {
+				any_scope_pop = { culture = { has_discrimination_trait = jewish_group } }
+			}
+			random_scope_pop = {
+				limit = { culture = { has_discrimination_trait = jewish_group } }
+				culture = { save_scope_as = dreyfus_culture }
+			}
+		}
+		else_if = {
+			limit = {
+				any_scope_pop = { religion = { has_discrimination_trait = jewish } }
+			}
+			random_scope_pop = {
+				limit = { religion = { has_discrimination_trait = jewish } }
+				culture = { save_scope_as = dreyfus_culture }
+			}
+		}
+		else = {
+			cu:ashkenazi = { save_scope_as = dreyfus_culture }
+		}
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_dreyfus_character_template			
+				save_scope_as = alfred_dreyfus_scope
+				on_created = {
+					place_character_in_void = 10000
+					set_variable = alfred_dreyfus_var
+				}
+			}
+		}
+		else = {
+			create_character = {
+				template = canonic_dreyfus_character_template			
+				save_scope_as = alfred_dreyfus_scope
+				on_created = {
+					place_character_in_void = 10000
+					set_variable = alfred_dreyfus_var
+				}
+			}
+		}
+		##Converter
+		random_country = {
+			limit = {
+				has_diplomatic_pact = {
+					who = root
+					type = rivalry
+				}
+			}
+			save_scope_as = dreyfus_rival_country_scope
+			set_variable = dreyfus_rival_country_var
+		}
+		ig:ig_armed_forces = {
+			save_scope_as = dreyfus_armed_forces_scope
+		}
+		set_variable = dreyfus_convicted
+	}
+
+	option = {
+		name = dreyfus.1.a
+		highlighted_option = yes
+		trigger = {
+			any_scope_state = {
+				state_region = s:STATE_GUAYANA
+			}
+		}
+		custom_tooltip = {
+			text = dreyfus.1.tt_1
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = army_honor_defended
+				months = normal_modifier_time
+				multiplier = 2
+			}
+			add_modifier = {
+				name = dreyfus_autonomous_army
+				months = normal_modifier_time
+			}
+		}
+		add_modifier = {
+			name = anti_semitic_demonstrations
+			months = short_modifier_time
+		}
+		hidden_effect = { 
+			trigger_event = { id = dreyfus.2 years = 2 popup = yes } 
+		}
+		random_list = {
+			50 = {
+				scope:alfred_dreyfus_scope = {
+					add_trait = psychological_affliction
+				}
+			}
+			50 = {
+			}
+		}
+	}
+	option = {
+		name = dreyfus.1.b
+		default_option = yes
+		custom_tooltip = {
+			text = dreyfus.1.tt_2
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = army_honor_defended
+				months = normal_modifier_time
+			}
+			add_modifier = {
+				name = dreyfus_autonomous_army
+				months = normal_modifier_time
+			}
+		}
+		add_modifier = {
+			name = anti_semitic_demonstrations
+			months = short_modifier_time
+		}
+		hidden_effect = { 
+			trigger_event = { id = dreyfus.2 years = 2 popup = yes } 
+		}
+	}
+	option = {
+		name = dreyfus.1.c
+		highlighted_option = yes
+		trigger = {
+			ig:ig_armed_forces = {
+				is_in_government = no
+			}
+			institution_investment_level = {
+				institution = institution_home_affairs
+				value >= 2
+			}
+		}
+		custom_tooltip = {
+			text = dreyfus.1.tt_3
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = dreyfus_subject_of_inquiry
+				months = normal_modifier_time
+			}
+			add_modifier = {
+				name = dreyfus_autonomous_army
+				months = normal_modifier_time
+			}
+		}
+		add_modifier = {
+			name = anti_semitic_demonstrations
+			months = short_modifier_time
+		}
+		hidden_effect = { 
+			trigger_event = { id = dreyfus.2 years = 2 popup = yes } 
+		}
+		custom_tooltip = {
+			text = dreyfus.1.tt_4
+			set_variable = dreyfus_early_investigation
+		}
+	}
+}
+
+# Esterhazy trial
+dreyfus.2 = {
+	type = country_event
+	placement = root
+	title = dreyfus.2.t
+	desc = dreyfus.2.d
+	flavor = dreyfus.2.f
+
+	duration = 3
+
+	dlc = dlc004
+
+	event_image = {
+		video = "votp_hostile_court"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		# Triggered by dreyfus.1
+	}
+
+	immediate = {
+		random_character_in_void = {
+			limit = {
+				has_variable = alfred_dreyfus_var
+			}
+			save_scope_as = alfred_dreyfus_scope
+		}
+		ig:ig_armed_forces = {
+			save_scope_as = dreyfus_armed_forces_scope
+		}
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_esterhazy_character_template			
+				save_scope_as = ferdinand_esterhazy_scope
+				on_created = {
+					place_character_in_void = 10000
+					set_variable = ferdinand_esterhazy_var
+				}
+			}
+		}
+		else = {
+			create_character = {
+				template = canonic_esterhazy_character_template			
+				save_scope_as = ferdinand_esterhazy_scope
+				on_created = {
+					place_character_in_void = 10000
+					set_variable = ferdinand_esterhazy_var
+				}
+			}
+		}
+		##Converter
+		random_country = {
+			limit = {
+				has_variable = dreyfus_rival_country_var
+			}
+			save_scope_as = dreyfus_rival_country_scope	
+		}
+	}
+
+	option = {
+		name = dreyfus.2.a
+		default_option = yes
+		trigger_event = { id = dreyfus.3 days = 7 popup = yes }
+		if = {
+			limit = {
+				ig:ig_armed_forces = {
+					has_modifier = army_honor_defended
+				}
+			}
+			ig:ig_armed_forces = {
+				remove_modifier = army_honor_defended
+			}
+		}
+	}
+	option = {
+		name = dreyfus.2.b
+		trigger_event = { id = dreyfus.3 days = 7 popup = yes }
+		if = {
+			limit = {
+				ig:ig_armed_forces = {
+					has_modifier = dreyfus_autonomous_army
+				}
+			}
+			ig:ig_armed_forces = {
+				remove_modifier = dreyfus_autonomous_army
+			}
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = dreyfus_wavering_army
+				months = normal_modifier_time
+			}
+		}
+	}
+}
+
+# J'Accuse...!
+dreyfus.3 = {
+	type = country_event
+	placement = root
+	title = dreyfus.3.t
+	desc = dreyfus.3.d
+	flavor = dreyfus.3.f
+
+	duration = 3
+
+	dlc = dlc004
+
+	event_image = {
+		video = "votp_conspiring"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	trigger = {
+		# Triggered by dreyfus.2
+	}
+
+	immediate = {
+		random_character_in_void = {
+			limit = {
+				has_variable = alfred_dreyfus_var
+			}
+			save_scope_as = alfred_dreyfus_scope
+		}
+		ig:ig_armed_forces = {
+			leader = {
+				save_scope_as = dreyfus_armed_forces_leader_scope
+			}
+			save_scope_as = dreyfus_armed_forces_scope
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					is_marginal = yes
+					is_in_government = yes
+					ig_is_dreyfusard = yes
+				}
+			}
+			random_interest_group = {
+				limit = {
+					is_marginal = no
+					is_in_government = no
+					ig_is_dreyfusard = yes
+				}
+				leader = {
+					save_scope_as = emile_zola_scope
+					set_variable = emile_zola_var
+				}
+			}
+		}
+		else = {
+			##Converter
+			converter_rule_63_effect = yes
+			if = {
+				limit = { has_variable = rule_63_effect }
+				create_character = {
+					template = fem_zola_character_template			
+					save_scope_as = emile_zola_scope
+					on_created = {
+						set_variable = emile_zola_var
+					}
+				}
+			}
+			else = {
+				create_character = {
+					template = canonic_zola_character_template			
+					save_scope_as = emile_zola_scope
+					on_created = {
+						set_variable = emile_zola_var
+					}
+				}
+			}
+			##Converter
+		}
+	}
+
+	option = {
+		name = dreyfus.3.a
+		default_option = yes
+		add_journal_entry = {
+			type = je_dreyfus_affair
+		}
+		custom_tooltip = {
+			text = dreyfus_case_strength_increase_by_1
+			change_variable = {
+				name = dreyfus_case_var
+				add = 1
+			}
+		}
+	}
+	option = {
+		name = dreyfus.3.b
+		default_option = yes
+		highlighted_option = yes
+		trigger = {
+			custom_tooltip = {
+				text = dreyfus.3.tt_2
+				has_variable = dreyfus_early_investigation
+			}
+		}
+		add_journal_entry = {
+			type = je_dreyfus_affair
+		}
+		custom_tooltip = {
+			text = dreyfus_case_strength_increase_by_1
+			change_variable = {
+				name = dreyfus_case_var
+				add = 1
+			}
+		}
+		custom_tooltip = {
+			text = dreyfus.3.tt_1
+			change_variable = {
+				name = dreyfus_case_var
+				add = 1
+			}
+		}
+	}
+}
+
+# At-home Asphyxiation
+dreyfus.4 = {
+	type = country_event
+	placement = root
+	title = dreyfus.4.t
+	desc = dreyfus.4.d
+	flavor = dreyfus.4.f
+
+	duration = 3
+
+	dlc = dlc004
+
+	event_image = {
+		video = "votp_agitators_sneaking"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	trigger = {
+		OR = {
+			any_scope_character = {
+				has_variable = emile_zola_var
+				is_busy = no
+			}
+			any_interest_group = {
+				ig_is_dreyfusard = yes
+				leader = {
+					is_busy = no
+				}
+			}
+		}
+		NOT = { has_variable = zola_asphyxiation }
+		var:rennes_retrial_var >= 35
+	}
+
+	immediate = {
+		ig:ig_armed_forces = {
+			save_scope_as = dreyfus_armed_forces_scope
+		}
+		random_character_in_void = {
+			limit = {
+				has_variable = alfred_dreyfus_var
+			}
+			save_scope_as = alfred_dreyfus_scope
+		}
+		if = {
+			limit = {
+				any_scope_character = {
+					has_variable = emile_zola_var
+				}
+			}
+			random_scope_character = {
+				limit = {
+					has_variable = emile_zola_var
+					is_busy = no
+				}
+				save_scope_as = emile_zola_scope
+				interest_group = {
+					save_scope_as = zola_asphyxiation_ig_pro
+				}
+			}
+		}
+		else_if = {
+			random_interest_group = {
+				limit = {
+					ig_is_dreyfusard = yes
+					leader = {
+						is_busy = no
+					}
+				}
+				leader = {
+					save_scope_as = zola_asphyxiation_leader
+				}
+				save_scope_as = zola_asphyxiation_ig_pro
+			}
+		}
+		set_variable = zola_asphyxiation
+		if = {
+			limit = {
+				any_interest_group = {
+					ig_is_anti_dreyfusard = yes
+					NOT = { is_interest_group_type = ig_armed_forces }
+				}
+			}
+			random_interest_group = {
+				limit = {
+					ig_is_anti_dreyfusard = yes
+					NOT = { is_interest_group_type = ig_armed_forces }
+				}
+				save_scope_as = zola_asphyxiation_ig_anti
+			}
+		}
+	}
+
+	option = {
+		name = dreyfus.4.a
+		default_option = yes
+		scope:zola_asphyxiation_leader = {
+			kill_character = yes
+		}
+		custom_tooltip = {
+			text = dreyfus_case_strength_decrease_by_1
+			change_variable = {
+				name = dreyfus_case_var
+				add = -1
+			}
+		}
+	}
+	option = {
+		name = dreyfus.4.b
+		scope:zola_asphyxiation_leader = {
+			kill_character = yes
+		}
+		scope:zola_asphyxiation_ig_pro = {
+			add_modifier = {
+				name = zola_state_funeral_positive
+				months = normal_modifier_time
+			}
+		}
+		scope:dreyfus_armed_forces_scope = {
+			add_modifier = {
+				name = zola_state_funeral_negative
+				months = normal_modifier_time
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:zola_asphyxiation_ig_anti
+			}
+			scope:zola_asphyxiation_ig_anti = {
+				add_modifier = {
+					name = zola_state_funeral_negative
+					months = normal_modifier_time
+				}
+			}
+		}
+		add_modifier = {
+			name = zola_state_funeral_expenses
+			months = short_modifier_time
+			multiplier = money_amount_multiplier_medium
+		}
+	}
+	option = {
+		name = dreyfus.4.c
+		scope:zola_asphyxiation_leader = {
+			kill_character = yes
+		}
+		custom_tooltip = {
+			text = dreyfus_case_strength_increase_by_1
+			change_variable = {
+				name = dreyfus_case_var
+				add = 1
+			}
+		}
+	}
+}
+
+# Émile Zola accused of libel
+dreyfus.5 = {
+	type = country_event
+	placement = root
+	title = dreyfus.5.t
+	desc = dreyfus.5.d
+	flavor = dreyfus.5.f
+
+	duration = 3
+
+	dlc = dlc004
+
+	event_image = {
+		video = "votp_hostile_court"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	trigger = {
+		any_scope_character = {
+			has_variable = emile_zola_var
+		}
+	}
+
+	immediate = {
+		ig:ig_armed_forces = {
+			leader = {
+				save_scope_as = dreyfus_armed_forces_leader_scope
+			}
+			save_scope_as = dreyfus_armed_forces_scope
+		}
+		random_scope_character = {
+			limit = {
+				has_variable = emile_zola_var
+			}
+			save_scope_as = emile_zola_scope
+			interest_group = {
+				save_scope_as = emile_zola_ig_scope
+			}
+		}
+		random_character_in_void = {
+			limit = {
+				has_variable = alfred_dreyfus_var
+			}
+			save_scope_as = alfred_dreyfus_scope
+		}
+		random_scope_state = {
+			limit = {
+				is_capital = yes
+			}
+			save_scope_as = emile_zola_libel_state_scope
+		}
+	}
+
+	option = {
+		name = dreyfus.5.a
+		default_option = yes
+		custom_tooltip = {
+			text = dreyfus_case_strength_decrease_by_1
+			change_variable = {
+				name = dreyfus_case_var
+				add = -1
+			}
+		}
+		custom_tooltip = dreyfus.5.tt_1
+		random_list = {
+			90 = {
+				scope:emile_zola_scope = {
+					exile_character_with_martyrdom = yes
+				}
+			}
+			10 = {
+				custom_tooltip = {
+					text = dreyfus.5.tt_2
+					scope:emile_zola_scope = {
+						kill_character = yes
+					}
+				}			
+			}
+		}
+		scope:emile_zola_ig_scope = {
+			add_modifier = {
+				name = dreyfus_outraged_by_court_desicion
+				months = normal_modifier_time
+			}
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = dreyfus_pleased_with_court_desicion
+				months = normal_modifier_time
+			}
+		}
+	}
+	option = {
+		name = dreyfus.5.b
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = dreyfus_imperfect_compromise
+				months = normal_modifier_time
+			}
+		}
+		scope:emile_zola_ig_scope = {
+			add_modifier = {
+				name = dreyfus_imperfect_compromise
+				months = normal_modifier_time
+			}
+		}
+	}
+	option = {
+		name = dreyfus.5.c
+		highlighted_option = yes
+		trigger = {
+			NOT = { has_law = law_type:law_outlawed_dissent }
+		}
+		custom_tooltip = {
+			text = dreyfus_case_strength_increase_by_1
+			change_variable = {
+				name = dreyfus_case_var
+				add = 1
+			}
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = dreyfus_outraged_by_court_desicion
+				months = normal_modifier_time
+			}
+		}
+		scope:emile_zola_libel_state_scope = {
+			add_radicals_in_state  = {
+				pop_type = officers
+				value = small_radicals
+			}
+		}
+	}
+}
+
+# Dreyfusard Board Game Released 
+dreyfus.6 = {
+	type = country_event
+	placement = scope:dreyfus_parlor_game_state
+	title = dreyfus.6.t
+	desc = dreyfus.6.d
+	flavor = dreyfus.6.f
+
+	duration = 3
+
+	dlc = dlc004
+
+	event_image = {
+		video = "unspecific_world_fair"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	trigger = {
+		NOT = { has_variable = dreyfusard_board_game_var }
+		any_interest_group = {
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_industrialists
+			}
+			is_marginal = no
+			is_in_government = no
+			ig_is_dreyfusard = yes
+		}
+		var:rennes_retrial_var >= 15
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_capital = yes
+			}
+			save_scope_as = dreyfus_parlor_game_state
+		}
+		random_character_in_void = {
+			limit = {
+				has_variable = alfred_dreyfus_var
+			}
+			save_scope_as = alfred_dreyfus_scope
+		}
+		set_variable = dreyfusard_board_game_var
+		ig:ig_armed_forces = {
+			leader = {
+				save_scope_as = dreyfus_armed_forces_leader_scope
+			}
+			save_scope_as = dreyfus_armed_forces_scope
+		}
+		random_interest_group = {
+			limit = {
+				OR = {
+					is_interest_group_type = ig_petty_bourgeoisie
+					is_interest_group_type = ig_intelligentsia
+					is_interest_group_type = ig_industrialists
+				}
+				is_marginal = no
+				is_in_government = no
+				ig_is_dreyfusard = yes
+			}
+			save_scope_as = dreyfus_parlor_game_ig_scope
+		}
+	}
+
+	option = {
+		name = dreyfus.6.a
+		default_option = yes
+		custom_tooltip = {
+			text = dreyfus_case_strength_increase_by_1
+			change_variable = {
+				name = dreyfus_case_var
+				add = 1
+			}
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = dreyfus_not_fun_and_games
+				months = normal_modifier_time
+			}
+		}
+		scope:dreyfus_parlor_game_state = {
+			add_radicals_in_state  = {
+				pop_type = officers
+				value = medium_radicals
+			}
+		}
+	}
+	option = {
+		name = dreyfus.6.b
+		highlighted_option = yes
+		trigger = {
+			NOT = {
+				has_law = law_type:law_protected_speech
+			}
+		}
+		scope:dreyfus_parlor_game_ig_scope = {
+			add_modifier = {
+				name = parlor_game_aggresive_censorship
+				months = normal_modifier_time
+			}
+		}
+		scope:dreyfus_parlor_game_state = {
+			add_radicals_in_state  = {
+				strata = rich
+				value = small_radicals
+			}
+		}
+	}
+}
+
+# Anti Dreyfusard Riot
+dreyfus.7 = {
+	type = country_event
+	placement = scope:anti_dreyfusard_riot_state
+	title = dreyfus.7.t
+	desc = dreyfus.7.d
+	flavor = dreyfus.7.f
+
+	duration = 3
+
+	dlc = dlc004
+
+	cooldown = { months = normal_modifier_time }
+
+	event_image = {
+		video = "europenorthamerica_political_extremism"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	trigger = {
+		any_scope_state = {
+			is_incorporated = yes
+			any_scope_pop = {
+				religion = rel:jewish
+			}
+		}
+		any_interest_group = {
+			is_marginal = no
+			ig_is_anti_dreyfusard = yes
+		}
+	}
+
+	immediate = {
+		random_character_in_void = {
+			limit = {
+				has_variable = alfred_dreyfus_var
+			}
+			save_scope_as = alfred_dreyfus_scope
+			culture = {
+				save_scope_as = alfred_dreyfus_culture
+			}
+			religion = {
+				save_scope_as = alfred_dreyfus_religion
+			}
+		}
+		random_interest_group = {
+			limit = {
+				is_marginal = no
+				ig_is_anti_dreyfusard = yes
+			}
+			leader = {
+				save_scope_as = anti_dreyfusard_riot_leader
+			}
+			save_scope_as = anti_dreyfusard_riot_ig
+		}
+		if = {
+			limit = {
+				NOT = { 
+					scope:anti_dreyfusard_riot_ig = { 
+						is_interest_group_type = ig_devout 
+					} 
+				}
+				ig:ig_devout = {
+					ig_is_anti_dreyfusard = yes
+				}
+			}
+			ig:ig_devout = {
+				save_scope_as = anti_dreyfusard_riot_ig_devout
+			}
+		}
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				any_scope_pop = {
+					religion = rel:jewish
+				}
+			}
+			random_scope_pop = {
+				limit = {
+					religion = rel:jewish
+				}
+				save_scope_as = anti_dreyfusard_riot_pop
+			}
+			save_scope_as = anti_dreyfusard_riot_state
+		}
+	}
+
+	option = {
+		name = dreyfus.7.a
+		custom_tooltip = {
+			text = dreyfus_case_strength_decrease_by_1
+			change_variable = {
+				name = dreyfus_case_var
+				add = -1
+			}
+		}
+		add_modifier = {
+			name = dreyfus_slipping_public_order
+			months = short_modifier_time
+		}
+		if = {
+			limit = {
+				exists = scope:anti_dreyfusard_riot_ig_devout
+			}
+			scope:anti_dreyfusard_riot_ig_devout = {
+				add_modifier = {
+					name = dreyfus_vox_dei
+					months = short_modifier_time
+				}
+			}
+		}
+		scope:anti_dreyfusard_riot_ig = {
+			add_modifier = {
+				name = dreyfus_vox_populi
+				months = short_modifier_time
+			}
+		}
+		scope:anti_dreyfusard_riot_state = {
+			add_radicals_in_state = {
+				religion = rel:jewish
+				value = small_radicals
+			}
+		}
+	}
+	option = {
+		name = dreyfus.7.b
+		default_option = yes
+		add_modifier = {
+			name = dreyfus_slipping_public_order
+			months = short_modifier_time
+		}
+		if = {
+			limit = {
+				exists = scope:anti_dreyfusard_riot_ig_devout
+			}
+			scope:anti_dreyfusard_riot_ig_devout = {
+				add_modifier = {
+					name = dreyfus_street_brawls
+					months = short_modifier_time
+				}
+			}
+		}
+		scope:anti_dreyfusard_riot_ig = {
+			add_modifier = {
+				name = dreyfus_street_brawls
+				months = short_modifier_time
+			}
+		}
+		scope:anti_dreyfusard_riot_state = {
+			add_radicals_in_state = {
+				religion = rel:catholic
+				value = small_radicals
+			}
+		}
+	}
+	option = {
+		name = dreyfus.7.c
+		highlighted_option = yes
+		trigger = {
+			institution_investment_level = {
+				institution = institution_police
+				value >= 1
+			}
+		}
+		custom_tooltip = {
+			text = dreyfus_case_strength_increase_by_1
+			change_variable = {
+				name = dreyfus_case_var
+				add = 1
+			}
+		}
+		add_modifier = {
+			name = dreyfus_slipping_public_order
+			months = short_modifier_time
+			multiplier = 0.5
+		}
+		if = {
+			limit = {
+				exists = scope:anti_dreyfusard_riot_ig_devout
+			}
+			scope:anti_dreyfusard_riot_ig_devout = {
+				add_modifier = {
+					name = dreyfus_street_brawls
+					months = short_modifier_time
+				}
+			}
+		}
+		scope:anti_dreyfusard_riot_ig = {
+			add_modifier = {
+				name = dreyfus_street_brawls
+				months = short_modifier_time
+			}
+		}
+		scope:anti_dreyfusard_riot_state = {
+			add_radicals_in_state = {
+				religion = rel:catholic
+				value = small_radicals
+			}
+		}
+		scope:anti_dreyfusard_riot_state = {
+			add_loyalists_in_state = {
+				religion = rel:jewish
+				value = small_radicals
+			}
+		}
+	}
+}
+
+# The Retrial
+dreyfus.8 = {
+	type = country_event
+	placement = root
+	title = dreyfus.8.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = dreyfus.8.d_1
+				trigger = {
+					has_variable = dreyfus_trial_exoneration
+				}
+			}
+			triggered_desc = {
+				desc = dreyfus.8.d_2
+				trigger = {
+					has_variable = dreyfus_trial_lesser_sentence
+				}
+			}
+			triggered_desc = {
+				desc = dreyfus.8.d_3
+				trigger = {
+					has_variable = dreyfus_trial_reincarceration
+				}
+			}
+		}
+	}
+	flavor = {
+		first_valid = {
+			triggered_desc = {
+				desc = dreyfus.8.f_1
+				trigger = {
+					has_variable = dreyfus_trial_exoneration
+				}
+			}
+			triggered_desc = {
+				desc = dreyfus.8.f_2
+				trigger = {
+					has_variable = dreyfus_trial_lesser_sentence
+				}
+			}
+			triggered_desc = {
+				desc = dreyfus.8.f_3
+				trigger = {
+					has_variable = dreyfus_trial_reincarceration
+				}
+			}
+		}
+	}
+
+	duration = 3
+
+	dlc = dlc004
+
+	event_image = {
+		video = "votp_hostile_court"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
+
+	trigger = {
+	}
+
+	immediate = {
+		random_character_in_void = {
+			limit = {
+				has_variable = alfred_dreyfus_var
+			}
+			save_scope_as = alfred_dreyfus_scope
+		}
+		random_character_in_void = {
+			limit = {
+				has_variable = ferdinand_esterhazy_var
+			}
+			save_scope_as = ferdinand_esterhazy_scope
+		}
+		ig:ig_armed_forces = {
+			save_scope_as = dreyfus_armed_forces_scope
+		}
+		if = {
+			limit = {
+				any_scope_character = {
+					has_role = general
+					is_heir = no
+					is_ruler = no
+					is_busy = no
+					interest_group = {
+						ig_is_dreyfusard = yes
+					}
+				}
+			}
+			random_scope_character = {
+				limit = {
+					has_role = general
+					is_heir = no
+					is_ruler = no
+					is_busy = no
+					interest_group = {
+						ig_is_dreyfusard = yes
+					}
+				}
+				save_scope_as = dreyfus_army_purges_general_1
+				set_variable = dreyfus_army_purges_general_1_var
+			}
+		}
+		if = {
+			limit = {
+				any_scope_character = {
+					has_role = general
+					is_heir = no
+					is_ruler = no
+					is_busy = no
+					NOT = { has_variable = dreyfus_army_purges_general_1_var }
+					interest_group = {
+						ig_is_dreyfusard = yes
+					}
+				}
+			}
+			random_scope_character = {
+				limit = {
+					has_role = general
+					is_heir = no
+					is_ruler = no
+					is_busy = no
+					NOT = { has_variable = dreyfus_army_purges_general_1_var }
+					interest_group = {
+						ig_is_dreyfusard = yes
+					}
+				}
+				save_scope_as = dreyfus_army_purges_general_2
+			}
+		}
+	}
+
+	option = {
+		name = dreyfus.8.a
+		default_option = yes
+		trigger = {
+			has_variable = dreyfus_trial_exoneration
+		}
+		custom_tooltip = {
+			text = dreyfus.8.tt_2
+			every_interest_group = {
+				set_variable = dreyfusard_victory
+			}
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = dreyfus_army_sanization
+				months = long_modifier_time
+			}
+		}
+		ig:ig_intelligentsia = {
+			add_modifier = {
+				name = dreyfus_pen_triumphant
+				months = long_modifier_time
+			}
+		}
+		scope:alfred_dreyfus_scope = {
+			if = {
+				limit = {
+					has_trait = psychological_affliction
+				}
+				random_list = {
+					50 = { remove_trait = psychological_affliction }
+					50 = { }
+				}
+			}
+			free_character_from_void = yes
+		}
+		if = {
+			limit = {
+				exists = scope:dreyfus_army_purges_general_1
+			}
+			scope:dreyfus_army_purges_general_1 = {
+				kill_character = yes
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:dreyfus_army_purges_general_2
+			}
+			scope:dreyfus_army_purges_general_2 = {
+				kill_character = yes
+			}
+		}
+	}
+	option = {
+		name = dreyfus.8.b
+		default_option = yes
+		trigger = {
+			has_variable = dreyfus_trial_exoneration
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = dreyfus_army_sanization
+				months = long_modifier_time
+			}
+		}
+		ig:ig_intelligentsia = {
+			add_modifier = {
+				name = dreyfus_france_of_voltaire
+				months = long_modifier_time
+				multiplier = 1.5
+			}
+		}
+		ig:ig_trade_unions = {
+			add_modifier = {
+				name = dreyfus_france_of_voltaire
+				months = long_modifier_time
+			}
+		}
+		if = {
+			limit = {
+				ig:ig_petty_bourgeoisie = {
+					ig_is_dreyfusard = yes
+				}
+			}
+			ig:ig_petty_bourgeoisie = {
+				add_modifier = {
+					name = dreyfus_france_of_voltaire
+					months = long_modifier_time
+				}
+			}
+		}
+		if = {
+			limit = {
+				ig:ig_rural_folk = {
+					ig_is_dreyfusard = yes
+				}
+			}
+			ig:ig_rural_folk = {
+				add_modifier = {
+					name = dreyfus_france_of_voltaire
+					months = long_modifier_time
+				}
+			}
+		}
+		if = {
+			limit = {
+				ig:ig_industrialists = {
+					ig_is_dreyfusard = yes
+				}
+			}
+			ig:ig_industrialists = {
+				add_modifier = {
+					name = dreyfus_france_of_voltaire
+					months = long_modifier_time
+				}
+			}
+		}
+		scope:alfred_dreyfus_scope = {
+			if = {
+				limit = {
+					has_trait = psychological_affliction
+				}
+				random_list = {
+					50 = { remove_trait = psychological_affliction }
+					50 = { }
+				}
+			}
+			free_character_from_void = yes
+		}
+	}
+	option = {
+		name = dreyfus.8.c
+		default_option = yes
+		trigger = {
+			has_variable = dreyfus_trial_lesser_sentence
+		}
+		every_interest_group = {
+			limit = {
+				is_marginal = no
+				OR = {
+					ig_is_dreyfusard = yes
+					ig_is_anti_dreyfusard = yes
+				}
+			}
+			add_modifier = {
+				name = dreyfus_unsatisfying_conclusion
+				months = long_modifier_time
+			}
+		}
+		add_modifier = {
+			name = dreyfus_legacy_modifier
+			months = long_modifier_time
+		}
+		add_radicals = {
+			value = small_radicals
+		}
+	}
+	option = {
+		name = dreyfus.8.e
+		default_option = yes
+		trigger = {
+			has_variable = dreyfus_trial_lesser_sentence
+		}
+		every_interest_group = {
+			limit = {
+				is_marginal = no
+				OR = {
+					ig_is_dreyfusard = yes
+					ig_is_anti_dreyfusard = yes
+				}
+			}
+			add_modifier = {
+				name = dreyfus_unsatisfying_conclusion
+				months = long_modifier_time
+			}
+		}
+		add_modifier = {
+			name = dreyfus_legacy_disc_modifier
+			months = long_modifier_time
+		}
+		add_radicals = {
+			value = small_radicals
+		}
+	}
+	option = {
+		name = dreyfus.8.g
+		default_option = yes
+		trigger = {
+			has_variable = dreyfus_trial_reincarceration
+		}
+		custom_tooltip = {
+			text = dreyfus.8.tt_1
+			every_interest_group = {
+				set_variable = anti_dreyfusard_victory
+			}
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = dreyfus_army_triumphant
+				months = long_modifier_time
+			}
+		}
+		scope:ferdinand_esterhazy_scope = {
+			free_character_from_void = yes
+		}
+	}
+	option = {
+		name = dreyfus.8.h
+		default_option = yes
+		trigger = {
+			has_variable = dreyfus_trial_reincarceration
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = dreyfus_france_of_st_louis
+				months = long_modifier_time
+				multiplier = 1.5
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					ig_is_anti_dreyfusard = yes
+					NOT = {	is_interest_group_type = ig_armed_forces }
+				}
+			}
+			every_interest_group = {
+				limit = {
+					ig_is_anti_dreyfusard = yes
+				}
+				add_modifier = {
+					name = dreyfus_france_of_voltaire
+					months = long_modifier_time
+				}
+			}
+		}
+		scope:ferdinand_esterhazy_scope = {
+			free_character_from_void = yes
+		}
+	}
+}
+
+# Esterhazy admits guilt in interview
+dreyfus.9 = {
+	type = country_event
+	placement = root
+	title = dreyfus.9.t
+	desc = dreyfus.9.d
+	flavor = dreyfus.9.f
+
+	duration = 3
+
+	dlc = dlc004
+
+	event_image = {
+		video = "middleeast_middleclass_cafe"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		any_country = {
+			country_rank >= rank_value:major_power
+			NOT = { is_country_type = unrecognized }
+		}
+		var:rennes_retrial_var >= 30
+	}
+	immediate = {
+		random_character_in_void = {
+			limit = {
+				has_variable = alfred_dreyfus_var
+			}
+			save_scope_as = alfred_dreyfus_scope
+		}
+		random_character_in_void = {
+			limit = {
+				has_variable = ferdinand_esterhazy_var
+			}
+			save_scope_as = ferdinand_esterhazy_scope
+		}
+		random_country = {
+			limit = {
+				country_rank >= rank_value:major_power
+				NOT = { is_country_type = unrecognized }
+			}
+			save_scope_as = ferdinand_esterhazy_country_scope
+		}
+		random_country = {
+			limit = {
+				has_variable = dreyfus_rival_country_var
+			}
+			save_scope_as = dreyfus_rival_country_scope	
+		}
+	}
+	option = {
+		name = dreyfus.9.a
+		default_option = yes
+		custom_tooltip = {
+			text = dreyfus_case_strength_increase_by_2
+			change_variable = {
+				name = dreyfus_case_var
+				add = 2
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					is_marginal = no
+					ig_is_anti_dreyfusard = yes
+				}
+			}
+			every_interest_group = {
+				limit = {
+					is_marginal = no
+					ig_is_anti_dreyfusard = yes
+				}
+				add_modifier = {
+					name = dreyfus_aknowledged_evidence
+					months = normal_modifier_time
+				}
+			}
+		}
+	}
+	option = {
+		name = dreyfus.9.b
+		custom_tooltip = {
+			text = dreyfus_case_strength_increase_by_1
+			change_variable = {
+				name = dreyfus_case_var
+				add = 1
+			}
+		}
+		change_relations = {
+			country = scope:ferdinand_esterhazy_country_scope
+			value = -20
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					is_marginal = no
+					ig_is_dreyfusard = yes
+				}
+			}
+			every_interest_group = {
+				limit = {
+					is_marginal = no
+					ig_is_dreyfusard = yes
+				}
+				add_modifier = {
+					name = dreyfus_truth_relative
+					months = normal_modifier_time
+					multiplier = 0.5
+				}
+			}
+		}
+	}
+	option = {
+		name = dreyfus.9.c
+		if = {
+			limit = {
+				any_interest_group = {
+					is_marginal = no
+					ig_is_dreyfusard = yes
+				}
+			}
+			every_interest_group = {
+				limit = {
+					is_marginal = no
+					ig_is_dreyfusard = yes
+				}
+				add_modifier = {
+					name = dreyfus_truth_relative
+					months = normal_modifier_time
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					is_marginal = no
+					ig_is_anti_dreyfusard = yes
+				}
+			}
+			every_interest_group = {
+				limit = {
+					is_marginal = no
+					ig_is_anti_dreyfusard = yes
+				}
+				add_modifier = {
+					name = dreyfus_truth_relative_positive
+					months = normal_modifier_time
+				}
+			}
+		}
+	}
+}

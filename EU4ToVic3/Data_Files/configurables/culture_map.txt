@@ -66,8 +66,8 @@ link = { vic3 = wallonian eu4 = wallonian eu4 = wallonian_UKS }
 
 # German Speaking - North German, South German and Swiss
 ##Added - Weder German
-link = { vic3 = swiss eu4group = germanic region = STATE_WEST_SWITZERLAND region = STATE_EAST_SWITZERLAND owner = SWI }
-link = { vic3 = swiss eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse }
+link = { vic3 = alemannic eu4group = germanic region = STATE_WEST_SWITZERLAND region = STATE_EAST_SWITZERLAND owner = SWI }
+link = { vic3 = alemannic eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse }
 
 link = { vic3 = south_german eu4group = germanic region = region_south_germany region = region_balkans region = region_italy region = region_danubia region = region_occitania region = region_iberia region = STATE_RHINELAND region = STATE_ALSACE_LORRAINE region = STATE_FRANCHE_COMTE }
 link = { vic3 = north_german eu4group = germanic region = region_north_germany region = region_baltic region = region_poland region = region_france region = region_england region = region_north_sea_coast region = region_rhine  }
@@ -129,6 +129,18 @@ link = { vic3 = caribeno @spanish_cultures region = region_caribbean }
 link = { vic3 = central_american @spanish_cultures region = region_central_america }
 link = { vic3 = mexican @spanish_cultures region = region_mexico }
 link = { vic3 = mexican eu4 = mexican neoculture_override = yes }
+### PDX went a bit overboard with all these cultures which are essentially identical. They only make sense for a very messy south america
+# which is uncommon for EU4 games. Unsure if it's worthwile or beneficial to link and use these. Needless to say, they don't have EU4 coutnerparts.
+# I'm enabling them for now, though, for historical reasons and flavor maybe. They are all linked to spanish anyway.
+link = { vic3 = peruvian @spanish_cultures owner = SPU owner = NPU owner = PBC owner = PEU }
+link = { vic3 = bolivian @spanish_cultures owner = BOL }
+link = { vic3 = ecuadorian @spanish_cultures owner = ECU owner = EQT }
+link = { vic3 = chilean @spanish_cultures owner = CHL }
+link = { vic3 = venezuelan @spanish_cultures owner = VNZ }
+link = { vic3 = argentine @spanish_cultures owner = ARG owner = PLT }
+link = { vic3 = uruguayan @spanish_cultures owner = URU }
+link = { vic3 = paraguayan @spanish_cultures owner = PRG }
+link = { vic3 = colombian @spanish_cultures owner = GCO owner = CLM }
 link = { vic3 = north_andean @spanish_cultures region = region_gran_colombia }
 link = { vic3 = platinean @spanish_cultures region = region_la_plata }
 link = { vic3 = platinean eu4 = platinean neoculture_override = yes }
@@ -154,7 +166,9 @@ link = { vic3 = cajun eu4group = french @usa_south_colony region = region_mexico
 link = { vic3 = breton eu4 = breton eu4 = breton_celtic eu4 = breton_UKS eu4 = celtic_breton }
 link = { vic3 = frankish eu4 = old_frankish }
 link = { vic3 = french eu4 = cosmopolitan_french eu4 = cosmopolitan_french_UKS eu4 = normand eu4 = normand_UKS eu4 = burgundian eu4 = burgundian_UKS eu4 = poitou eu4 = angevin eu4 = arpitan eu4 = bourguignon eu4 = creole eu4 = francien eu4 = javanaise eu4 = lorrain eu4 = poitevin eu4 = picard }
-link = { vic3 = occitan eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = provencal eu4 = acadian eu4 = auvergnat eu4 = limousin eu4 = vivaroaupenc }
+link = { vic3 = francoprovencal eu4group = french region = STATE_WEST_SWITZERLAND region = STATE_EAST_SWITZERLAND owner = SWI }
+link = { vic3 = francoprovencal eu4 = provencal eu4 = vivaroaupenc }
+link = { vic3 = occitan eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = acadian eu4 = auvergnat eu4 = limousin }
 link = { vic3 = franco_canadian eu4 = louisianans eu4 = quebecois neoculture_override = yes }
 # Dynamic generation for Outremer
 
@@ -236,7 +250,7 @@ link = { vic3 = greek eu4group = byzantine }
 link = { vic3 = alan eu4 = alan }
 link = { vic3 = armenian eu4 = armenian eu4 = ge_armenian eu4 = owm_armenian }
 link = { vic3 = azerbaijani eu4 = azerbadjani eu4 = azerbaijani eu4 = shirvani }
-link = { vic3 = georgian eu4 = georgian }
+link = { vic3 = georgian eu4 = georgian eu4 = georgian_new }
 link = { vic3 = circassian eu4 = circassian eu4 = abazin }
 link = { vic3 = north_caucasian eu4 = dagestani eu4 = avar_culture eu4 = caucasian_albanian eu4 = chechen eu4 = ossetian }
 
@@ -263,7 +277,7 @@ link = { vic3 = kazak eu4 = khazak }
 link = { vic3 = kurdish eu4 = kurdish eu4 = gorani }
 link = { vic3 = kirgiz eu4 = kirgiz eu4 = kirghiz eu4 = old_kirgiz }
 link = { vic3 = pashtun eu4 = east_persian eu4 = afghani eu4 = tabari eu4 = afghan eu4 = kushan eu4 = pashtun }
-link = { vic3 = persian eu4 = persian eu4 = saka eu4 = luri eu4 = khorasani eu4 = mazandarani eu4 = parthian eu4 = khuzi eu4 = lurish eu4 = qashqai }
+link = { vic3 = persian eu4 = turco_iranian eu4 = persian eu4 = saka eu4 = luri eu4 = khorasani eu4 = mazandarani eu4 = parthian eu4 = khuzi eu4 = lurish eu4 = qashqai }
 link = { vic3 = tajik eu4 = tajik eu4 = sogdian eu4 = tajihk }
 link = { vic3 = turkmen eu4 = turkmeni eu4 = mervi eu4 = hephthalite }
 link = { vic3 = uighur eu4 = uyghur eu4 = old_uyghur }
@@ -336,6 +350,7 @@ link = { vic3 = iroquoian eu4group = iroquoian }
 
 # South American - Quechua, Guarani, Aimara, Amazonian, Patagonian, Guajiro, Tupinamba, Muisca and Cariban
 ##Added - Araucanian, Charruan, Chacoan
+link = { vic3 = taino eu4group = carribean region = region_caribbean } # (Taino)
 link = { vic3 = guajiro eu4 = arawak region = STATE_ZULIA region = STATE_ANTIOQUIA }
 
 link = { vic3 = aimara eu4 = aimara eu4 = diaguita eu4 = chiribaya }
@@ -346,13 +361,12 @@ link = { vic3 = guarani eu4 = guarani }
 link = { vic3 = je eu4 = ge }
 link = { vic3 = quechua eu4 = inca eu4 = chimuan eu4 = chimu eu4 = culle eu4 = huaylas eu4 = nazca eu4 = quechuan }
 link = { vic3 = muisca eu4 = muisca eu4 = chibcha eu4 = cara eu4 = chibchan eu4 = manteno eu4 = misumalpan eu4 = pech eu4 = xinca }
-link = { vic3 = patagonian eu4 = patagonian eu4 = het }
 link = { vic3 = tupinamba eu4 = tupinamba eu4 = tupi }
 
-link = { vic3 = araucanian eu4group = araucanian } #Mapuche, Huarpe, etc.
+link = { vic3 = patagonian eu4group = araucanian } #Mapuche, Huarpe, Patagonian etc.
 link = { vic3 = cariban eu4group = carribean } #Carib, Arawak (Taino)
-link = { vic3 = chacoan eu4group = mataco } #Chacoan
-link = { vic3 = maranon eu4group = maranon } #Jivaro, Chachapoyan 
+link = { vic3 = matacoan eu4group = mataco } #Chacoan
+link = { vic3 = maranon eu4group = maranon } #Jivaro, Chachapoyan
 
 #Yamato - Japanese
 link = { vic3 = japanese eu4 = chubu eu4 = chugoku eu4 = hokkokujin eu4 = kansai eu4 = kanto eu4 = koshi eu4 = kyushu eu4 = nangokujin eu4 = nantoukokujin eu4 = ryukyuan eu4 = seikokujin eu4 = shikoku eu4 = shotoujin eu4 = tohoku eu4 = toukokujin }
@@ -406,9 +420,10 @@ link = { vic3 = shan eu4 = shan }
 link = { vic3 = zhuang eu4 = zhuang eu4 = zhuang_new }
 
 
-# Northeast Indian - Assamese and Manipuri
-link = { vic3 = assamese eu4 = assamese eu4 = kochrajbongshi eu4 = sutiya }
-link = { vic3 = manipuri eu4 = chin eu4 = meitei eu4 = tripuri eu4 = naga }
+# Northeast Indian - Assamese, Manipuri, Kochi
+link = { vic3 = assamese eu4 = assamese owner = ASM }
+link = { vic3 = kamarupan eu4 = assamese eu4 = kochrajbongshi eu4 = kochi }
+link = { vic3 = manipuri eu4 = chin eu4 = meitei eu4 = tripuri eu4 = naga eu4 = sutiya }
 #Munda is dynamically generated
 
 
@@ -428,12 +443,14 @@ link = { vic3 = tibetan eu4group = tibetan_group }
 # Polynesian - Polynesian, Hawaiian, Melanesian, Micronesian and Maori
 link = { vic3 = hawaiian eu4 = polynesian region = STATE_HAWAIIAN_ISLANDS }
 link = { vic3 = micronesian eu4 = polynesian region = STATE_EAST_MICRONESIA region = STATE_WEST_MICRONESIA region = STATE_KYUSHU }
+link = { vic3 = yuanzhumin eu4 = polynesian region = STATE_FORMOSA }
 
 link = { vic3 = hawaiian eu4 = hawaian }
 link = { vic3 = maori eu4 = maori }
 link = { vic3 = melanesian eu4 = melanesian eu4 = papuan eu4 = halmahera }
 link = { vic3 = micronesian eu4 = micronesian }
-link = { vic3 = polynesian eu4 = polynesian eu4 = taiwanese }
+link = { vic3 = yuanzhumin eu4 = taiwanese eu4 = formosan eu4 = minyue }
+link = { vic3 = polynesian eu4 = polynesian  }
 
 link = { vic3 = aborigine eu4group = aboriginal_australian }
 
@@ -445,7 +462,7 @@ link = { vic3 = nepali eu4 = nepali eu4 = pahari eu4 = bhutanese eu4 = sikkimese
 # Indo-Aryan - Bengali, Bihari, Oriya, Sinhala, Avadhi, Kanauji, Panjabi, Kashmiri, Gujarati, Marathi, Sindi, Rajput
 ##Added - Parsi
 link = { vic3 = avadhi eu4 = avadhi }
-link = { vic3 = bengali eu4 = bengali eu4 = kochi }
+link = { vic3 = bengali eu4 = bengali }
 link = { vic3 = bihari eu4 = bihari eu4 = jharkhandi eu4 = maithili }
 link = { vic3 = gujarati eu4 = gujarati eu4 = nagpuri eu4 = sambalpuri eu4 = saurashtri eu4 = kathiawari }
 link = { vic3 = kanauji eu4 = kanauji eu4 = vindhyan eu4 = bagheli eu4 = bundeli }
@@ -470,14 +487,14 @@ link = { vic3 = telegu eu4 = telegu }
 #brahui are dynamically generated
 
 
-# West African - Akan, Bambara, Bassa, Dyula, Edo, Ewe, Fon, Fulbe, Haratin, Hausa, Ibibio, Ibo, Kissi, Kru, Mande, Maures, Mossi, Senufo, Songhai, Tiv, Tuareg, Wolof and Yoruba
+# West African - Akan, Bambara, Bassa, Dyula, Edo, Ewe, Fon, Fulbe, Haratin, Hausa, Ibibio, Ibo, Kissi, Kru, Mande, Bidan, Mossi, Senufo, Songhai, Tiv, Tuareg, Wolof and Yoruba
 link = { vic3 = edo eu4 = yorumba region = STATE_BENIN }
 #link = { vic3 = ewe eu4 = fon region = STATE_TOGO } #Too small and specific for state-based action
 link = { vic3 = haratin eu4 = senegambian eu4 = fulani region = STATE_MAURITANIA region = STATE_INNER_MAURITANIA } #Mauritanian West Africans
 link = { vic3 = kissi eu4 = senegambian region = STATE_SIERRA_LEONE }
 link = { vic3 = ibibio eu4 = nupe eu4 = igbo region = STATE_SOUTH_CAMEROON }
 link = { vic3 = ibo eu4 = yorumba region = STATE_NIGER_DELTA }
-link = { vic3 = maures eu4 = tuareg region = STATE_MAURITANIA region = STATE_INNER_MAURITANIA } #Mauritanian Tuaregs
+link = { vic3 = bidan eu4 = tuareg region = STATE_MAURITANIA region = STATE_INNER_MAURITANIA } #Mauritanian Tuaregs
 link = { vic3 = senufo eu4 = dyola region = STATE_IVORY_COAST } #Order matters, keep this above kru
 link = { vic3 = kru eu4 = senegambian eu4 = dyola region = STATE_LIBERIA region = STATE_IVORY_COAST }
 
@@ -490,7 +507,7 @@ link = { vic3 = fulbe eu4 = fulani }
 link = { vic3 = hausa eu4 = hausa eu4 = haussa }
 link = { vic3 = ibo eu4 = nupe eu4 = igbo }
 link = { vic3 = mande eu4 = mali eu4 = soninke }
-link = { vic3 = maures eu4 = maure }
+link = { vic3 = bidan eu4 = maure }
 link = { vic3 = mossi eu4 = mossi eu4 = dagomba }
 link = { vic3 = songhai eu4 = songhai }
 link = { vic3 = tiv eu4 = jukun } #May need revising

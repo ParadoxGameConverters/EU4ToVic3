@@ -19,18 +19,34 @@ void V3::MajorFormablesEntry::registerKeys()
 		stanzas.emplace_back(stanzaKey + " " + commonItems::stringOfItem(theStream).getString());
 	});
 
+	possibleParser.registerKeyword("OR", [this](std::istream& theStream) {
+		orParser.parseStream(theStream);
+	});
 	possibleParser.registerKeyword("any_country", [this](std::istream& theStream) {
 		anyCountryParser.parseStream(theStream);
 	});
-	possibleParser.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+	possibleParser.registerRegex(commonItems::catchallRegex, [this](const std::string& stanzaKey, std::istream& theStream) {
+		possibleStanzas.emplace_back(stanzaKey + " " + commonItems::stringOfItem(theStream).getString());
+	});
 
 	anyCountryParser.registerKeyword("OR", [this](std::istream& theStream) {
 		orParser.parseStream(theStream);
+	});
+	anyCountryParser.registerKeyword("filter", [this](std::istream& theStream) {
+		filterParser.parseStream(theStream);
 	});
 	anyCountryParser.registerKeyword("has_technology_researched", [this](std::istream& theStream) {
 		requiredTechnology = commonItems::getString(theStream);
 	});
 	anyCountryParser.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+
+	filterParser.registerKeyword("OR", [this](std::istream& theStream) {
+		orParser.parseStream(theStream);
+	});
+	filterParser.registerKeyword("has_technology_researched", [this](std::istream& theStream) {
+		requiredTechnology = commonItems::getString(theStream);
+	});
+	filterParser.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 
 	orParser.registerKeyword("country_has_primary_culture", [this](std::istream& theStream) {
 		auto culture = commonItems::getString(theStream);

@@ -217,71 +217,102 @@
 		}
 	}
 	s:STATE_TOLEDO = {
-		region_state:SPA = {
+		region_state:ANL = { #Umayyads (Andalusia)
 			create_pop = {
-				culture = spanish
-				size = 1268400
+				culture = bedouin
+				size = 200000
+			}
+			create_pop = {
+				culture = berber
+				size = 68400
+			}
+			create_pop = {
+				culture = visigothic
+				size = 1000000
 			}
 		}
 	}
 	s:STATE_GALICIA = {
-		# 840792
-		region_state:SPA = {
+		region_state:CAS = { #Asturias (Castile)
 			create_pop = {
 				culture = galician
 				size = 828528
 			}
 			create_pop = {
-				culture = spanish
+				culture = suebi
 				size = 12264
 			}
 		}
 	}
 	s:STATE_ASTURIAS = {
-		# please don't ask for a source
-		region_state:SPA = {
-			create_pop = {
-				culture = spanish
-				size = 614264
-			}
+		region_state:CAS = { #Asturias (Castile)
 			create_pop = {
 				culture = basque
 				size = 32000
 			}
+			create_pop = {
+				culture = visigothic
+				size = 614264
+			}
 		}	
 	}
 	s:STATE_CASTILE = {
-		region_state:SPA = {
-			create_pop = {
-				culture = spanish
-				size = 1430808
-			}
+		region_state:ANL = { #Umayyads (Andalusia)
 			create_pop = {
 				culture = basque
-				size = 4000
+				size = 3000
+			}
+			create_pop = {
+				culture = bedouin
+				size = 73106
+			}
+			create_pop = {
+				culture = visigothic
+				size = 1000000
+			}
+		}
+		region_state:CAS = { #Asturias (Castile)
+			create_pop = {
+				culture = basque
+				size = 1000
+			}
+			create_pop = {
+				culture = visigothic
+				size = 357702
 			}
 		}
 	}
 	s:STATE_NAVARRA = {
-		region_state:SPA = {
-			create_pop = {
-				culture = spanish
-				size = 579200
-			}
-			create_pop = {
-				culture = catalan
-				size = 32220
-			}
+		region_state:ANL = { #Umayyads (Andalusia)
 			create_pop = {
 				culture = basque
-				size = 700060
+				size = 852840
+			}
+			create_pop = {
+				culture = bedouin
+				size = 1480
+			}			
+			create_pop = {
+				culture = visigothic
+				size = 20000
+			}
+			
+		}
+		region_state:CAS = { #Asturias (Castile)
+			create_pop = {
+				culture = basque
+				size = 426420
+			}
+			create_pop = {
+				culture = visigothic
+				size = 10740
 			}
 		}
 	}
 	s:STATE_ARAGON = {
-		region_state:SPA = {
+		region_state:ANL = { #Umayyads (Andalusia)
 			create_pop = {
-				culture = spanish
+				culture = visigothic
 				size = 401200
 			}
 			create_pop = {
@@ -289,19 +320,19 @@
 				size = 100008
 			}
 			create_pop = {
-				culture = catalan
+				culture = bedouin
 				size = 77996
 			}
 		}
 	}
 	s:STATE_CATALONIA = {
-		region_state:SPA = {
+		region_state:ANL = { #Umayyads (Andalusia)
 			create_pop = {
-				culture = catalan
+				culture = visigothic
 				size = 704308
 			}
 			create_pop = {
-				culture = spanish
+				culture = bedouin
 				size = 316804
 			}
 		}
@@ -320,126 +351,175 @@
 		}
 	}
 	s:STATE_ANDALUSIA = {
-		region_state:SPA = {
+		region_state:ANL = { #Umayyads (Andalusia)
 			create_pop = {
-				culture = spanish
-				size = 1057592
+				culture = bedouin
+				size = 7592
+			}
+			create_pop = {
+				culture = berber
+				size = 50000
+			}
+			create_pop = {
+				culture = visigothic
+				size = 1000000
 			}
 		}
 	}
 	s:STATE_GRANADA = {
-		region_state:SPA = {
+		region_state:ANL = { #Umayyads (Andalusia)
 			create_pop = {
-				culture = spanish
-				size = 1218404
-			}
-		}
-		region_state:GBR = {
-			create_pop = {
-				culture = spanish
-				size = 49024
-			}
-			create_pop = {
-				culture = british
+				culture = bedouin
 				size = 12336
+			}
+			create_pop = {
+				culture = berber
+				size = 49024
 			}
 			create_pop = {
 				culture = sephardic
 				size = 3200
 			}
+			create_pop = {
+				culture = visigothic
+				size = 1218404
+			}
 		}
 	}
 	s:STATE_BADAJOZ = {
-		region_state:SPA = {
+		region_state:ANL = { #Umayyads (Andalusia)
 			create_pop = {
-				culture = spanish
-				size = 579992
+				culture = bedouin
+				size = 79992
+			}
+			create_pop = {
+				culture = visigothic
+				size = 500000
 			}
 		}
 	}
 	s:STATE_VALENCIA = {
-		region_state:SPA = {
+		region_state:ANL = { #Umayyads (Andalusia)
 			create_pop = {
-				culture = spanish
-				size = 989604
+				culture = bedouin
+				size = 490392
 			}
 			create_pop = {
-				culture = catalan
-				size = 490392
+				culture = visigothic
+				size = 989604
 			}
 		}
 	}
 	s:STATE_BEIRA = {
-		region_state:POR = {
+		region_state:ANL = { #Umayyads (Andalusia)
 			create_pop = {
-				culture = portuguese
-				size = 1620800
+				culture = bedouin
+				size = 800
+			}
+			create_pop = {
+				culture = suebi
+				size = 1620000
 			}
 		}
 	}
 	s:STATE_ESTREMADURA = {
-		region_state:POR = {
+		region_state:ANL = { #Umayyads (Andalusia)
 			create_pop = {
-				culture = portuguese
-				size = 860796
+				culture = bedouin
+				size = 796
+			}
+			create_pop = {
+				culture = suebi
+				size = 60000
+			}
+			create_pop = {
+				culture = visigothic
+				size = 800000
 			}
 		}
 	}
 	s:STATE_ALENTEJO = {
-		region_state:POR = {
+		region_state:ANL = { #Umayyads (Andalusia)
 			create_pop = {
-				culture = portuguese
-				size = 372508
+				culture = bedouin
+				size = 2508
+			}
+			create_pop = {
+				culture = berber
+				size = 70000
+			}
+			create_pop = {
+				culture = visigothic
+				size = 300000
 			}
 		}
 	}
 	s:STATE_CAPE_VERDE = {
-		region_state:POR = {
+		region_state:G18 = { #The Gorgades
 			create_pop = {
-				culture = portuguese
-				size = 103532
-			}
-			create_pop = {
-				culture = afro_brazilian
-				size = 24666
+				culture = greek
+				religion = animist
+				size = 3 #The 3 Gorgons
 			}
 		}
 	}
 
 	s:STATE_MADEIRA = {
-		region_state:POR = {
+		region_state:SD0 = { #Secret Denmark
 			create_pop = {
-				culture = portuguese
-				size = 103532
+				culture = danish
+				size = 1030
 			}
 			create_pop = {
-				culture = afro_brazilian
-				size = 24666
+				culture = suebi
+				size = 240
 			}
 		}
 	}
 
 	s:STATE_CANARY_ISLANDS = {
-		region_state:SPA = {
+		region_state:A19 = { #Achinet (Tenerife)
 			create_pop = {
-				culture = spanish
-				size = 208004
+				culture = berber
+				size = 41601
+			}
+		}
+		region_state:B26 = { #Benahoare, Esero and Ghomara (La Palma, El Hierro and La Gomera)
+			create_pop = {
+				culture = berber
+				size = 41601
+			}
+		}
+		region_state:M33 = { #Maxorata (Fuerteventura)
+			create_pop = {
+				culture = berber
+				size = 41601
+			}
+		}
+		region_state:T27 = { #Tyterogaka (Lanzarote)
+			create_pop = {
+				culture = berber
+				size = 41601
+			}
+		}
+		region_state:T28 = { #Tamaran (Gran Canaria)
+			create_pop = {
+				culture = berber
+				size = 41601
 			}
 		}
 	}
 
 	s:STATE_AZORES = {
-		region_state:POR = {
+		region_state:IB0 = { #Isles of the Blest
 			create_pop = {
-				culture = portuguese
-				size = 103532
-			}
-			create_pop = {
-				culture = afro_brazilian
-				size = 24666
+				culture = greek
+				religion = animist
+				size = 3410 #3, 4 and 10
 			}
 		}
 	}
+	
 	s:STATE_EASTERN_THRACE = {
 		region_state:BYZ = { #Byzantium
 			create_pop = {
@@ -500,7 +580,7 @@
 		}
 	}
 	s:STATE_ALBANIA = {
-		region_state:D10 = { #Dyrrachion
+		region_state:DY0 = { #Dyrrachion
 			create_pop = {
 				culture = albanian
 				religion = orthodox
@@ -652,51 +732,34 @@
 			create_pop = {
 				culture = croat
 				religion = catholic
-				size = 148898
+				size = 179347
 			}
 			create_pop = {
 				culture = serb
 				religion = catholic
-				size = 40000
+				size = 50000
 			}
 			create_pop = {
 				culture = north_italian
 				religion = catholic
-				size = 10002
+				size = 13002
 			}
 		}
 		region_state:CRO = { #Croatia
 			create_pop = {
 				culture = croat
 				religion = catholic
-				size = 74449
+				size = 118449
 			}
 			create_pop = {
 				culture = serb
 				religion = catholic
-				size = 20000
+				size = 30000
 			}
 			create_pop = {
 				culture = north_italian
 				religion = catholic
-				size = 5001
-			}
-		}
-		region_state:SER = { #Serbia
-			create_pop = {
-				culture = croat
-				religion = catholic
-				size = 74449
-			}
-			create_pop = {
-				culture = serb
-				religion = catholic
-				size = 20000
-			}
-			create_pop = {
-				culture = north_italian
-				religion = catholic
-				size = 5001
+				size = 7001
 			}
 		}
 	}
@@ -860,18 +923,18 @@
 		}
 	}
 	s:STATE_NORTHERN_SERBIA = {
+		region_state:BUL = { #Bulgaria
+			create_pop = {
+				culture = romanian
+				religion = animist
+				size = 409604
+			}
+		}
 		region_state:SER = { #Serbia
 			create_pop = {
 				culture = serb
 				religion = animist
-				size = 609604
-			}
-		}
-		region_state:BUL = {
-			create_pop = {
-				culture = serb
-				religion = animist
-				size = 200000
+				size = 409604
 			}
 		}
 	}
@@ -879,7 +942,13 @@
 		region_state:BUL = { #Bulgaria
 			create_pop = {
 				culture = bulgarian
-				size = 173804
+				religion = animist
+				size = 73804
+			}
+			create_pop = {
+				culture = romanian
+				religion = orthodox
+				size = 100000
 			}
 		}
 		region_state:SER = { #Serbia

@@ -14,6 +14,7 @@ class ReligionDefinitionLoader: commonItems::parser
 	void loadDefinitions(std::istream& theStream);
 
 	[[nodiscard]] std::optional<ReligionDef> getReligionDef(const std::string& religion) const;
+	[[nodiscard]] const auto& getReligionDefs() const { return religionDefinitions; }
 
   private:
 	void registerKeys();

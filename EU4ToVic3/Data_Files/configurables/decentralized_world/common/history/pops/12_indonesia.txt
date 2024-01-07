@@ -384,16 +384,31 @@
 		}
 	}
 	s:STATE_EAST_JAVA = {
-		region_state:SRK = {
+		region_state:KK1 = { #Kumari Kandam (Lemuria)
 			create_pop = {
 				culture = malagasy
 				size = 2400
 			}
 		}
-		region_state:KK1 = { #Kumari Kandam (Lemuria)
+		region_state:SRK = { #Mataram
 			create_pop = {
-				culture = malagasy
-				size = 2400
+				culture = javan
+				size = 1873792
+			}
+			create_pop = {
+				culture = yue
+				size = 30400
+			}
+			create_pop = {
+				culture = javan
+				religion = animist
+				size = 152804
+			}
+			create_pop = {
+				culture = javan
+				religion = animist
+				pop_type = slaves
+				size = 21000
 			}
 		}
 	}
@@ -426,6 +441,54 @@
 		}
 	}
 	s:STATE_NORTH_SUMATRA = {
+		region_state:ACE = { # Aceh
+			create_pop = {
+				culture = sumatran
+				size = 462626
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = sumatran
+				size = 13000
+			}
+			create_pop = {
+				culture = batak
+				size = 5100
+			}
+			create_pop = {
+				culture = batak
+				religion = sunni
+				size = 1964
+			}
+			create_pop = {
+				culture = yue
+				size = 7600
+			}
+		}
+		region_state:I05 = { #Indragiri
+			create_pop = {
+				culture = sumatran
+				size = 462626
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = sumatran
+				size = 13000
+			}
+			create_pop = {
+				culture = batak
+				size = 5100
+			}
+			create_pop = {
+				culture = batak
+				religion = sunni
+				size = 1964
+			}
+			create_pop = {
+				culture = yue
+				size = 7600
+			}
+		}
 		region_state:P12 = { #Pagarruyung
 			create_pop = {
 				culture = sumatran
@@ -435,6 +498,10 @@
 				pop_type = slaves
 				culture = sumatran
 				size = 12422
+			}
+			create_pop = {
+				culture = dutch
+				size = 800
 			}
 			create_pop = {
 				culture = batak
@@ -458,25 +525,25 @@
 		region_state:SAK = { #Siak
 			create_pop = {
 				culture = sumatran
-				size = 775253
+				size = 462627
 			}
 			create_pop = {
 				pop_type = slaves
 				culture = sumatran
-				size = 26000
+				size = 13000
 			}
 			create_pop = {
 				culture = batak
-				size = 10200
+				size = 5100
 			}
 			create_pop = {
 				culture = batak
 				religion = sunni
-				size = 3928
+				size = 1964
 			}
 			create_pop = {
 				culture = yue
-				size = 15200
+				size = 7600
 			}
 		}
 		region_state:JMB = { #Jambi
@@ -501,18 +568,6 @@
 			create_pop = {
 				culture = yue
 				size = 1004
-			}
-		}
-		region_state:ACE = {
-			create_pop = {
-				culture = sumatran
-				size = 77021
-			}
-		}
-		region_state:I05 = {
-			create_pop = {
-				culture = sumatran
-				size = 77021
 			}
 		}
 	}
@@ -615,22 +670,11 @@
 		region_state:PPU = {
 			create_pop = {
 				culture = melanesian
-				size = 351996
+				size = 414996
 			}
-		}
-		region_state:TID = {
 			create_pop = {
 				culture = moluccan
 				size = 20404
-			}
-			create_pop = {
-				culture = melanesian
-				size = 61000
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = melanesian
-				size = 2000
 			}
 		}
 	}

@@ -1,0 +1,338 @@
+﻿# This is executed last among all history
+GLOBAL = {
+	
+	every_country = {
+		limit = { NOT = { has_law = law_type:law_slavery_banned } }
+		ig:ig_landowners = { add_ideology = ideology_pro_slavery }
+	}
+	
+	# Jack the ripper, prevents the event from happening every game
+
+	every_country = {
+		if = {
+			limit = {
+				is_player = yes
+			}
+		}
+		random_list = {
+			1 = { set_variable = var_jack_ripper_possible }
+			9 = {
+				#Nothing Happens
+			}
+		}
+	}
+
+###ACHIEVEMENT VARIABLES###
+	
+	#Serf's Up
+	every_country = {
+	   limit = { has_law = law_type:law_serfdom }
+	   set_variable = serfs_up_ach_possible
+	}
+	
+	#The Berlin Conference
+	every_country = {
+		limit = {
+			exists = c:PRU
+			this = c:PRU
+		}
+		set_variable = the_berlin_conference_ach_possible
+	}
+
+	#Muhammad Ali's Ambition
+	every_country = {
+		limit = {
+			exists = c:EGY
+			this = c:EGY
+		}
+		set_variable = muhammed_alis_ambition_ach_possible
+	}
+	
+	#Broken Promises
+	every_country = {
+		limit = {
+			can_form_nation = ITA
+		}
+		set_variable = broken_promises_ach_possible
+	}
+	
+	#Reading Campaign
+	every_country = {
+		limit = {
+			literacy_rate <= 0.2
+		}
+		set_variable = reading_campaign_ach_possible
+	}
+	
+	#We Are Not Amused
+	every_country = {
+		limit = {
+			exists = c:GBR
+			this = c:GBR
+		}
+		set_variable = we_are_not_amused_ach_possible
+	}
+	
+	#Star Swarmed Banner
+	every_country = {
+		limit = {
+			exists = c:USA
+			this = c:USA
+		}
+		set_variable = star_swarmed_banner_ach_possible
+	}
+	
+	#Peccavi
+	every_country = {
+		limit = {
+			exists = c:BIC
+			this = c:BIC
+		}
+		set_variable = peccavi_ach_possible
+	}
+	
+	#Perkeletankki
+	every_country = {
+		limit = {
+			exists = c:FIN
+			this = c:FIN
+		}
+		set_variable = perkeletankki_ach_possible
+	}
+	
+	#Luxurious Luxembourg
+	every_country = {
+		limit = {
+			exists = c:LUX
+			this = c:LUX
+		}
+		set_variable = luxurious_luxembourg_ach_possible
+	}
+	
+	#Anarchy in the UK
+	every_country = {
+		limit = {
+			exists = c:GBR
+			this = c:GBR
+		}
+		set_variable = anarchy_in_the_uk_ach_possible
+	}
+	
+	#An Empire Under the Pun
+	every_country = {
+		limit = {
+			exists = c:PAN
+			this = c:PAN
+		}
+		set_variable = an_empire_under_the_pun_ach_possible
+	}
+			
+	#I Didn't Vote for Pedro
+	every_country = {
+		limit = {
+			exists = c:BRZ
+			this = c:BRZ
+		}
+		set_variable = i_didnt_vote_for_pedro_ach_possible
+	}
+	
+	#Go West Young Man
+	every_country = {
+		limit = {
+			exists = c:USA
+			this = c:USA
+		}
+		set_variable = go_west_young_man_ach_possible
+	}
+	
+	#The Western Protectorate
+	every_country = {
+		limit = {
+			exists = c:CHI
+			this = c:CHI
+		}
+		set_variable = the_western_protectorate_ach_possible
+	}
+	
+	#The Paris Commune
+	every_country = {
+		limit = {
+			exists = c:FRA
+			this = c:FRA
+		}
+		set_variable = the_paris_commune_ach_possible
+	}
+	
+	#Barbarys Back
+	every_country = {
+		limit = {
+			OR = {
+				c:MAS ?= this
+				c:CON ?= this
+				c:AIT ?= this
+				c:TUG ?= this
+			}
+		}
+		set_variable = barbarys_back_ach_possible
+	}
+	
+	#Miners and Minors
+	every_country = {
+		limit = {
+			exists = c:LAN
+			this = c:LAN
+		}
+		set_variable = miners_and_minors_ach_possible
+	}
+	
+	#Healthy Man of Europe
+	every_country = {
+		limit = {
+			exists = c:TUR
+			this = c:TUR
+		}
+		set_variable = healthy_man_of_europe_ach_possible
+	}
+	
+	#Habsburg Resurgence
+	every_country = {
+		limit = {
+			exists = c:AUS
+			this = c:AUS
+		}
+		set_variable = habsburg_resurgence_ach_possible
+	}
+	
+	#The Great Game
+	every_country = {
+		limit = {
+			exists = c:RUS
+			this = c:RUS
+		}
+		set_variable = great_game_ach_possible
+	}
+	
+	#Bourbon for Everyone
+	every_country = {
+		limit = {
+			exists = c:SPA
+			this = c:SPA
+		}
+		set_variable = bourbon_for_everyone_ach_possible
+	}
+	
+	#American Territory
+	every_country = {
+		limit = {
+			exists = c:SEQ
+			this = c:SEQ
+		}
+		set_variable = american_territory_ach_possible
+	}
+	
+	#Belle Epoque
+	every_country = {
+		limit = {
+			exists = c:FRA
+			this = c:FRA
+		}
+		set_variable = belle_epoque_ach_possible
+	}
+	
+	#Risorgimento
+	every_country = {
+		limit = {
+			can_form_nation = ITA
+		}
+		set_variable = risorgimento_ach_possible
+	}
+	
+	#Three Hurrahs
+	every_country = {
+		limit = {
+			can_form_nation = GER
+		}
+		set_variable = three_hurrahs_ach_possible
+		set_variable = huge_ego_sorry_ach_possible
+	}
+	
+	#Solomon's Quest
+	every_country = {
+		limit = {
+			can_form_nation = ETH
+		}
+		set_variable = solomons_quest_ach_possible
+	}
+	
+	#I Am a Scandinavian
+	every_country = {
+		limit = {
+			can_form_nation = SCA
+		}
+		set_variable = i_am_a_scandinavian_ach_possible
+	}
+
+	#Grander Colombia
+	every_country = {
+		limit = {
+			can_form_nation = GCO
+		}
+		set_variable = grander_colombia_ach_possible
+	}
+
+	#Manifest Mexico
+	every_country = {
+		limit = {
+			c:MEX ?= this
+		}
+		set_variable = manifest_mexico_ach_possible
+	}
+
+	#Not Yet Lost
+	every_country = {
+		limit = {
+			c:KRA ?= this
+		}
+		set_variable = not_yet_lost_ach_possible
+	}
+
+	#Event Variables
+	
+	set_global_variable = {
+		name = number_of_mega_earthquakes
+		value = 0
+	}
+
+	set_global_variable = {
+		name = number_of_mega_floods
+		value = 0
+	}
+	
+	set_global_variable = {
+		name = number_of_mega_eruptions
+		value = 0
+	}
+	
+	s:STATE_DISTRICT_OF_COLUMBIA = {	
+		set_variable = {
+            name = usa_state_flag_block
+            value = yes
+        }
+
+        set_variable = {
+            name = district_of_columbia
+            value = yes
+        }
+	}
+	
+	s:STATE_WEST_VIRGINIA = {	
+        set_variable = {
+            name = usa_state_flag_block
+            value = yes
+        }
+	}
+
+	###Converter
+	converter_colonial_confederation_cultures_effect = yes
+	converter_historical_leader_culture_effect = yes
+}

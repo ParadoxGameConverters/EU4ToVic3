@@ -1,0 +1,1135 @@
+﻿fem_TRN_paul_kruger_template = { # Paul Kruger
+	first_name = Paula
+	last_name = Kruger
+	historical = yes
+	culture = global_var:kruger_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_traditionalist
+	interest_group = ig_rural_folk
+	birth_date = 1825.10.10
+	traits = {
+		pious
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_kruger
+				}
+			}
+			trigger_if = {
+				limit = {
+					exists = c:TRN
+					is_target_in_global_variable_list = { name = global_kruger_countries target = c:TRN }
+				}
+				this = c:TRN
+			}
+			trigger_else = {
+				is_target_in_global_variable_list = { name = global_kruger_countries target = this }
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_rural_folk
+				is_interest_group_type = ig_landowners
+				is_interest_group_type = ig_petty_bourgeoisie
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_ethno_nationalism
+			}
+		}
+		earliest_usage_date = 1852.1.1
+		latest_usage_date = 1899.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_kruger
+		}
+	}
+}
+# Mexico - MEX
+fem_mex_juarez_character_template = {
+	first_name = Benita
+	last_name = Juarez
+	historical = yes
+	culture = cu:zapotec
+	female = yes
+	religion = catholic
+	ideology = ideology_market_liberal
+	interest_group = ig_intelligentsia
+	birth_date = 1806.3.21
+    dna = dna_benito_juarez
+	traits = {
+		experienced_political_operator
+		direct
+		persistent
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_benito_juarez
+				}
+			}
+			OR = {
+				owns_entire_state_region = STATE_MEXICO
+				owns_entire_state_region = STATE_GUERRERO
+				owns_entire_state_region = STATE_OAXACA
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_rural_folk
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1872.1.1
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_benito_juarez
+		}
+	}
+}
+# United States - USA
+fem_usa_lincoln_character_template = {
+	first_name = Sarah
+	last_name = Lincoln
+	historical = yes
+	culture = global_var:midwest_yankee_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_abolitionist
+	interest_group = ig_petty_bourgeoisie
+	birth_date = 1809.2.12
+	dna = dna_abraham_lincoln
+	traits = {
+		experienced_political_operator
+		inspirational_orator
+		tactful
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_lincoln
+				}
+			}
+			uses_midwest_yankee_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1844.2.12
+		latest_usage_date = 1890.1.1
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_lincoln
+		}
+	}
+}
+fem_usa_roosevelt_character_template = {
+	first_name = Theodora
+	last_name = Roosevelt
+	historical = yes
+	culture = global_var:new_england_yankee_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_reformer
+	interest_group = ig_industrialists
+	birth_date = 1858.8.28
+    dna = dna_roosevelt
+	traits = {
+		celebrity_commander
+		explorer
+		brave
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_roosevelt
+				}
+			}
+			uses_new_england_yankee_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_industrialists
+				is_interest_group_type = ig_rural_folk
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1882.1.1
+		latest_usage_date = 1919.1.1
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_roosevelt
+		}
+	}
+}
+fem_usa_rockefeller_character_template = {
+    first_name = Jane
+    last_name = Rockefeller
+    historical = yes
+    culture = global_var:new_england_yankee_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_industrialists
+    birth_date = 1839.6.8
+    traits = {
+        ambitious
+        persistent
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_rockefeller
+				}
+			}
+			uses_new_england_yankee_characters = yes
+            has_company = company_type:company_standard_oil
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1875.1.1
+        latest_usage_date = 1915.1.1
+        chance = 25
+    }   
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_rockefeller
+		}
+	}
+}
+fem_usa_carnegie_character_template = {
+    first_name = Andrea
+    last_name = Carnegie
+    historical = yes
+    culture = global_var:sct_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_market_liberal
+    interest_group = ig_industrialists
+    birth_date = 1835.11.25
+    traits = {
+        ambitious
+        literary
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_carnegie
+				}
+			}
+			uses_new_england_yankee_characters = yes
+			global_var:sct_culture = { NOT = { culture_is_discriminated_in = prev } }
+            has_company = company_type:company_us_steel
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1870.1.1
+        latest_usage_date = 1908.1.1
+        chance = 25
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_carnegie
+		}
+	}
+}
+fem_usa_jp_morgan_character_template = {
+    first_name = Jane_Pierpont
+    last_name = Morgan
+    historical = yes
+    culture = global_var:new_england_yankee_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_industrialists
+    birth_date = 1835.11.25
+    traits = {
+        imposing
+        pious
+        sickly
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jp_morgan
+				}
+			}
+			uses_new_england_yankee_characters = yes
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1865.1.1
+        latest_usage_date = 1913.1.1
+        chance = 25
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jp_morgan
+		}
+	}   
+}
+fem_usa_thomas_edison_character_template = {
+    first_name = Tamzen
+    last_name = Edison
+    historical = yes
+    culture = global_var:midwest_yankee_culture
+    female = yes
+    religion = atheist
+    ideology = ideology_pacifist
+    interest_group = ig_intelligentsia
+    birth_date = 1847.2.11
+    traits = {
+        ambitious
+        engineer
+        imperious
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_edison
+				}
+			}
+			uses_midwest_yankee_characters = yes
+            has_company = company_type:company_general_electric
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1876.1.1
+        latest_usage_date = 1920.1.1
+        chance = 25
+    }   
+    on_created = {
+        if = {
+            limit = {
+                owner = {
+                    has_technology_researched = feminism
+                    NOT = {
+                        has_law = law_type:law_womens_suffrage
+                    }
+                }
+            }
+            converter_set_feminist_ideology_effect = yes
+        }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_edison
+		}
+    }
+}
+fem_usa_mark_twain_character_template = { #Mark Twain
+    first_name = Hannah
+    last_name = Clemens
+    historical = yes
+    culture = global_var:dixie_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_jingoist
+    interest_group = ig_intelligentsia
+    birth_date = 1835.11.30
+    traits = {
+        literary
+        erudite
+        reckless
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mark_twain
+				}
+			}
+            country_has_primary_culture = global_var:dixie_culture
+            any_scope_state = {
+                state_region = s:STATE_MISSOURI
+            }
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1865.11.18
+        latest_usage_date = 1910.1.1
+        chance = 25
+    }   
+    on_created = {
+        if = {
+            limit = {
+                owner = {
+                    NOT = {
+                        has_law = law_type:law_slavery_banned
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_abolitionist
+        }
+        else_if = {
+            limit = {
+                owner = {
+                    any_country = {
+                        is_subject_of = prev
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_pacifist
+        }
+        else_if = {
+            limit = {
+                owner = {
+                    has_technology_researched = feminism
+                    NOT = {
+                        has_law = law_type:law_womens_suffrage
+                    }
+                }
+            }
+            converter_set_feminist_ideology_effect = yes
+        }
+        else = {
+            set_ideology = ideology:ideology_jingoist
+        }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_mark_twain
+		}
+    }
+}
+# China - CHI
+fem_chi_sun_character_template = { # Sun Yat-sen
+	first_name = Wen
+	last_name = Sun
+	historical = yes
+	culture = global_var:han_culture
+	female = yes
+	religion = global_var:yat_sen_religion			# Converted to Christianity in the 80s.
+	ideology = ideology_republican_leader
+	interest_group = ig_intelligentsia
+	birth_date = 1866.11.12
+	traits = {
+		ambitious
+		persistent
+		inspirational_orator
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sun_yat_sen
+				}
+			}
+			uses_han_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_trade_unions
+				is_interest_group_type = ig_petty_bourgeoisie
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}
+		earliest_usage_date = 1888.1.1
+		latest_usage_date = 1925.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sun_yat_sen
+		}
+	}
+}
+fem_chi_gong_character_template = {
+	first_name = Yixin
+	last_name = Aisin_Gioro
+	historical = yes
+	culture = global_var:manchu_culture
+	female = yes
+	ideology = ideology_royalist
+	interest_group = ig_landowners
+	birth_date = 1833.1.11
+	traits = {
+		experienced_diplomat
+		expensive_tastes
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_prince_gong
+				}
+			}
+			trigger_if = {
+				limit = {
+					exists = c:CHI
+					is_target_in_global_variable_list = { name = global_manchu_countries target = c:CHI }
+				}
+				this = c:CHI
+			}
+			trigger_else = {
+				is_target_in_global_variable_list = { name = global_manchu_countries target = this }
+			}
+			has_law = law_type:law_monarchy
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}
+		earliest_usage_date = 1853.1.1
+		latest_usage_date = 1898.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_prince_gong
+		}
+	}
+}
+
+# France - FRA
+fem_fra_clemenceau_character_template = {
+	first_name = Georgette
+	last_name = Clemenceau
+	historical = yes
+	culture = global_var:fra_culture
+	female = yes
+	religion = catholic
+	ideology = ideology_radical
+	interest_group = ig_intelligentsia
+	dna = dna_georges_clemenceau
+	birth_date = 1841.9.11
+	traits = {
+		experienced_political_operator
+		persistent
+		direct
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_clemenceau
+				}
+			}
+			has_dlc_feature = voice_of_the_people_preorder
+			uses_fra_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1871.1.1
+		latest_usage_date = 1929.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_clemenceau
+		}
+	}
+}
+# Frankfurt - FRM
+fem_frm_grimm_character_template = {
+	first_name = Elma
+	last_name = Grimm
+	historical = yes
+	culture = global_var:nor_ger_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_reformer
+	interest_group = ig_intelligentsia
+	birth_date = 1786.2.24
+	dna = dna_grimm_wilhelm
+	traits = {
+		basic_political_operator
+		erudite
+		literary
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_grimm
+				}
+			}
+			is_target_in_global_variable_list = { name = global_nor_ger_countries target = this }		##She spawns for enough vanilla countries, no need to tag restrict
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.1.1
+		chance = 20
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_grimm
+		}
+	}
+}
+# Great Britain - GBR
+fem_gbr_o_connor_template = {
+	first_name = Begus
+	last_name = O_Connor
+	historical = yes
+	culture = global_var:ire_culture
+	female = yes
+	birth_date = 1796.1.1
+	ig_leader = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	traits = {
+		charismatic
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_o_connor
+				}
+			}
+			trigger_if = {
+				limit = {
+					NOT = {
+						any_country = { uses_ire_characters = yes }
+					}
+				}
+				uses_gbr_characters = yes
+				any_scope_state = {
+					state_region = { is_homeland = global_var:ire_culture }
+				}
+			}
+			trigger_else = { uses_ire_characters = yes }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_trade_unions
+				is_interest_group_type = ig_intelligentsia
+			}   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1852.1.1	
+		chance = 10
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_o_connor
+		}
+	}
+}
+fem_gbr_wellington_character_template = {
+	first_name = Morgana
+	last_name = Wellesley
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_jingoist_leader
+	interest_group = ig_armed_forces
+	birth_date = 1769.5.1
+	traits = {
+		celebrity_commander
+		expert_defensive_strategist
+		brave
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_wellington
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_industrialists
+				is_interest_group_type = ig_landowners
+			}   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1852.1.1	
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_wellington
+		}
+	}
+}
+fem_gbr_disraeli_character_template = { # Disraeli, Jingoist, Landowners
+	first_name = Benjamine
+	last_name = Disraeli
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_jingoist_leader
+	interest_group = ig_landowners
+	birth_date = 1804.1.1
+	traits = { 
+		expert_political_operator
+		ambitious
+		romantic
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_disraeli
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1868.1.1
+		latest_usage_date = 1880.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_disraeli
+		}
+	}
+}
+fem_gbr_gladstone_character_template = { # Gladstone, market liberal, intelligentsia
+	first_name = Willa
+	last_name = Gladstone
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_market_liberal
+	interest_group = ig_landowners
+	birth_date = 1809.1.1
+	traits = {
+		expert_political_operator
+		charismatic
+		inspirational_orator
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_gladstone
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1865.1.1
+		latest_usage_date = 1894.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_gladstone
+		}
+	}
+}
+fem_gbr_temple_character_template = { # Viscount Palmerston
+	first_name = Harriet
+	last_name = Temple
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_market_liberal
+	interest_group = ig_landowners
+	birth_date = 1784.8.20
+	traits = {
+		experienced_diplomat
+		charismatic
+		persistent
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_viscount_palmerston
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1865.1.1
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_viscount_palmerston
+		}
+	}
+}
+# Norway
+fem_nor_thrane_template = {
+	first_name = Marcia
+	last_name = Thrane
+	historical = yes
+	culture = global_var:nor_culture
+	female = yes
+	birth_date = 1817.10.14
+	ig_leader = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_radical
+	traits = {
+		demagogue
+		basic_political_operator
+		literary
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_marcus_thrane
+				}
+			}
+			uses_nor_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_trade_unions
+		}   
+		earliest_usage_date = 1848.1.1
+		latest_usage_date = 1890.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_marcus_thrane
+		}
+	}
+}
+# Prussia - PRU
+fem_pru_bismarck_character_template = {
+	first_name = Uta
+	last_name = von_Bismarck
+	historical = yes
+	culture = global_var:nor_ger_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_royalist
+	interest_group = ig_landowners
+	birth_date = 1815.4.1
+	traits = {
+		experienced_political_operator
+		masterful_diplomat
+		direct
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_bismarck
+				}
+			}
+			uses_pru_ger_characters = yes
+			owns_entire_state_region = STATE_BRANDENBURG
+			NOT = {
+				has_global_variable = bismarck_variable
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1847.1.1
+		latest_usage_date = 1884.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_bismarck
+		}
+	}
+}
+# Sardinia-Piedmont SAR
+fem_sar_benso_character_template = { # The Count of Cavour
+	first_name = Camilla
+	last_name = Benso
+	historical = yes
+	culture = global_var:nor_ita_culture
+	female = yes
+	religion = catholic
+	ideology = ideology_reformer
+	interest_group = ig_industrialists
+	birth_date = 1810.8.10
+	traits = {
+		experienced_political_operator
+		meticulous
+		innovative
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_count_of_cavour
+				}
+			}
+			uses_nor_ita_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_industrialists   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1862.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_count_of_cavour
+		}
+	}
+}
+# Turkey & the Ottoman Empire
+fem_tur_koca_mustafa_reshid_pasha = { # Damad (or Damat) Mehmed Asi Pasha, grand vizier in 1852-1853
+	first_name = Ayse
+	last_name = Ali
+	historical = yes
+	culture = global_var:tur_culture
+	female = yes
+	religion = sunni
+	ideology = ideology_reformer
+	interest_group = ig_intelligentsia
+	birth_date = 1813.1.1
+	traits = {
+		tactful
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_koca_mustafa_reshid_pasha
+				}
+			}
+			uses_tur_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1845.1.1
+		latest_usage_date = 1860.1.1
+		chance = 25
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_koca_mustafa_reshid_pasha
+		}
+	}
+}

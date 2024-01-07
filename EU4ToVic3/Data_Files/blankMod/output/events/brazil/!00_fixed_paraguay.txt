@@ -1,0 +1,105 @@
+﻿namespace = paraguay
+paraguay.11 = {
+	type = country_event
+	placement = scope:paraguay_scope.capital
+	
+	title = paraguay.11.t
+	desc = paraguay.11.d
+	flavor = paraguay.11.f
+
+	event_image = {
+		video = "europenorthamerica_before_the_battle"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	
+	duration = 3
+
+	#dlc = dlc008
+	
+	trigger = {
+		exists = c:PRG
+		NOR = {
+			is_diplomatic_play_ally_of = c:PRG
+			has_variable = paraguay_war_var
+			c:PRG ?= this
+		}
+		country_is_in_south_america = yes
+		c:PRG ?= {
+			has_journal_entry = je_expanding_paraguay
+			NOT = {
+				has_war_with = root
+			}
+			any_diplomatic_play = {
+				is_war = no
+				any_scope_play_involved = {
+					this = root
+				}
+				initiator = prev
+				target = {
+					any_scope_state = {
+						OR = {
+							state_region = s:STATE_CORRIENTES
+				            state_region = s:STATE_URUGUAY
+				            state_region = s:STATE_SANTA_FE
+				            state_region = s:STATE_PARANA
+				            state_region = s:STATE_RIO_GRANDE_DO_SUL
+						}
+					}
+				}
+				OR = {
+					has_play_goal = conquer_state
+					has_play_goal = return_state
+					has_play_goal = make_tributary
+					has_play_goal = make_protectorate
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = paraguay_war_var
+		c:PRG ?= {
+			random_diplomatic_play = {
+				limit = {
+					is_war = no
+					any_scope_play_involved = {
+						this = root
+					}
+					initiator = prev
+					target = {
+						any_scope_state = {
+							OR = {
+								state_region = s:STATE_CORRIENTES
+					            state_region = s:STATE_URUGUAY
+					            state_region = s:STATE_SANTA_FE
+					            state_region = s:STATE_PARANA
+					            state_region = s:STATE_RIO_GRANDE_DO_SUL
+							}
+						}
+					}
+					OR = {
+						has_play_goal = conquer_state
+						has_play_goal = return_state
+						has_play_goal = make_tributary
+						has_play_goal = make_protectorate
+					}
+				}
+				target = {
+					save_scope_as = paraguay_target_scope
+				}
+			}
+			save_scope_as = paraguay_scope
+			ruler = {
+				save_scope_as = paraguay_leader_scope
+			}
+		}
+	}
+	option = { 
+		name = paraguay.11.a
+		default_option = yes
+		add_journal_entry = { type = je_paraguayan_war }
+	}
+}

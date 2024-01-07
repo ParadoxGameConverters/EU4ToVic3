@@ -18,7 +18,7 @@ class BuildingGroup: commonItems::parser
 	[[nodiscard]] const auto& getCategory() const { return category; }
 	[[nodiscard]] const auto& getInfrastructureCost() const { return infrastructureCost; }
 	[[nodiscard]] const auto& possibleIsResourceCapped() const { return resourceCapped; }
-
+	[[nodiscard]] const auto& usesArableLand() const { return arableCapped; }
 
   private:
 	void registerKeys();
@@ -27,6 +27,7 @@ class BuildingGroup: commonItems::parser
 	std::optional<std::string> category;
 	std::optional<double> infrastructureCost;
 	std::optional<bool> resourceCapped;
+	std::optional<bool> arableCapped;
 };
 } // namespace V3
 
