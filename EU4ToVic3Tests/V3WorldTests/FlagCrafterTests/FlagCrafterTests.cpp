@@ -79,7 +79,7 @@ TEST(V3World_FlagNameLoaderTests, FlagsCanBeAssignedViaFlagCodes)
 	countries.emplace(v3Tag, country);
 
 	// now assign flags.
-	flagCrafter.distributeAvailableFlags(countries, countryMapper);
+	flagCrafter.distributeAvailableFlags(countries, countryMapper, commonItems::ModFilesystem());
 
 	// do we have them yet?
 	const auto& flags = country->getFlags();
@@ -112,7 +112,7 @@ TEST(V3World_FlagNameLoaderTests, FlagsCanBeAssignedViaTAGs)
 	countries.emplace(v3Tag, country);
 
 	// now assign flags.
-	flagCrafter.distributeAvailableFlags(countries, countryMapper);
+	flagCrafter.distributeAvailableFlags(countries, countryMapper, commonItems::ModFilesystem());
 
 	// do we have them yet?
 	const auto& flags = country->getFlags();
@@ -141,7 +141,7 @@ TEST(V3World_FlagNameLoaderTests, FlagsCanBeAssignedViaNameMatch)
 	countries.emplace("TAG", country);
 
 	// now assign flags.
-	flagCrafter.distributeAvailableFlags(countries, countryMapper);
+	flagCrafter.distributeAvailableFlags(countries, countryMapper, commonItems::ModFilesystem());
 
 	// do we have them yet?
 	const auto& flags = country->getFlags();
@@ -171,7 +171,7 @@ TEST(V3World_FlagNameLoaderTests, FlagsWithVanillaMatchesWillNotBeAssigned)
 	countries.emplace("ABC", country); // ABC has an override in vanilla flag definitions and will not be assigned a flag.
 
 	// now assign flags.
-	flagCrafter.distributeAvailableFlags(countries, countryMapper);
+	flagCrafter.distributeAvailableFlags(countries, countryMapper, commonItems::ModFilesystem());
 
 	// do we have them yet?
 	const auto& flags = country->getFlags();

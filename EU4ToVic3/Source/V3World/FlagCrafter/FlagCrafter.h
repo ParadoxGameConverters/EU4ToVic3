@@ -1,6 +1,7 @@
 #ifndef FLAG_CRAFTER
 #define FLAG_CRAFTER
 #include "FlagColorLoader/FlagColorLoader.h"
+#include "ModLoader/ModFilesystem.h"
 #include <map>
 #include <memory>
 #include <optional>
@@ -30,12 +31,15 @@ class FlagCrafter
 
 	void loadAvailableFlags(const std::string& blankModPath, const std::string& vanillaPath);
 	void loadCustomColors(const std::string& filePath);
-	void distributeAvailableFlags(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper);
+	void distributeAvailableFlags(const std::map<std::string, std::shared_ptr<Country>>& countries,
+		 const mappers::CountryMapper& countryMapper,
+		 const commonItems::ModFilesystem& eu4ModFS);
 
 	[[nodiscard]] std::optional<std::map<FLAGTYPE, std::string>> getFlagsForEntity(const std::string& name);
 
   private:
 	[[nodiscard]] bool tryAssigningFlagViaValue(const std::shared_ptr<Country>& country, const std::string& value);
+	[[nodiscard]] bool tryAssigningEU4Flag(const std::shared_ptr<Country>& country, const commonItems::ModFilesystem& eu4ModFS);
 	void loadKnownFlags(const std::string& blankModPath, const std::string& vanillaPath);
 	void filterKnownFlags();
 	void craftCustomFlag(const std::shared_ptr<Country>& country);
