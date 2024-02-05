@@ -35,6 +35,7 @@ class World: commonItems::parser
 	[[nodiscard]] const auto& getDiplomacy() const { return diplomacyParser; }
 	[[nodiscard]] const auto& getEU4Localizations() const { return countryManager.getLocalizationLoader(); }
 	[[nodiscard]] const auto& getDatingData() const { return datingData; }
+	[[nodiscard]] const auto& getEU4ModFS() const { return modFS; }
 
   private:
 	void registerKeys(const std::shared_ptr<Configuration>& theConfiguration, const commonItems::ConverterVersion& converterVersion);
@@ -50,6 +51,7 @@ class World: commonItems::parser
 
 	std::string EU4Path;
 	Mods mods;
+	commonItems::ModFilesystem modFS;
 
 	DatingData datingData;
 

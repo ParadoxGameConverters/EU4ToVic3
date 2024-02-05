@@ -165,7 +165,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	flagCrafter.loadCustomColors(configuration.getEU4Path() + "/common/custom_country_colors/00_custom_country_colors.txt");
 	flagCrafter.loadAvailableFlags("blankMod/output/common/coat_of_arms/coat_of_arms/", V3Path + "/common/flag_definitions/");
 	Log(LogLevel::Progress) << "64 %";
-	flagCrafter.distributeAvailableFlags(politicalManager.getCountries(), *countryMapper);
+	flagCrafter.distributeAvailableFlags(politicalManager.getCountries(), *countryMapper, sourceWorld.getEU4ModFS());
 
 	Log(LogLevel::Progress) << "65 %";
 	politicalManager.injectDynamicCulturesIntoFormables(cultureMapper);
