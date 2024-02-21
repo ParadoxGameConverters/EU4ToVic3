@@ -655,7 +655,7 @@ void V3::SubState::generatePops(int totalAmount, const int slaveAmount)
 	if (demographics.empty())
 		return;
 
-   if (totalAmount <= 0)
+	if (totalAmount <= 0)
 		return;
 
 	// *Technically* demoTotal should always equal 1.
