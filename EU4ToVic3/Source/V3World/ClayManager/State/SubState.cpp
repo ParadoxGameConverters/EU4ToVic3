@@ -655,6 +655,9 @@ void V3::SubState::generatePops(int totalAmount, const int slaveAmount)
 	if (demographics.empty())
 		return;
 
+   if (totalAmount <= 0)
+		return;
+
 	// *Technically* demoTotal should always equal 1.
 	const auto demoTotal = std::accumulate(demographics.begin(), demographics.end(), 0.0, [](double sum, const auto& demo) {
 		return sum + (demo.upperRatio + demo.middleRatio + demo.lowerRatio) / 3;
