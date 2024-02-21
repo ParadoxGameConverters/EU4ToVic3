@@ -180,7 +180,7 @@ TEST(V3World_SubStateTests, SubStateCanReturnPrimaryCulture)
 	EXPECT_EQ("cul2", *subState.getPrimaryCulture());
 }
 
-TEST(V3World_SubStateTests, SubStateReturnsNullPrimaryCultureForZeroPops)
+TEST(V3World_SubStateTests, SubStateGeneratesNoPopsForZeroPopsize)
 {
 	V3::SubState subState;
 	V3::Demographic demo1;
@@ -202,15 +202,7 @@ TEST(V3World_SubStateTests, SubStateReturnsNullPrimaryCultureForZeroPops)
 	subState.generatePops(0, 0);
 
 	const auto& pops = subState.getSubStatePops().getPops();
-	ASSERT_EQ(2, pops.size());
-	const auto& pop1 = pops[0];
-	const auto& pop2 = pops[1];
-
-	EXPECT_EQ("cul1", pop1.getCulture());
-	EXPECT_EQ(0, pop1.getSize());
-
-	EXPECT_EQ("cul2", pop2.getCulture());
-	EXPECT_EQ(0, pop2.getSize());
+	ASSERT_EQ(0, pops.size());
 
 	ASSERT_FALSE(subState.getPrimaryCulture());
 }
