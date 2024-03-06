@@ -157,6 +157,32 @@
 			}
 		}
 
+		add = { # There's one firearm for every twelve people on the planet. The question is, how do we arm the other eleven?
+			desc = "MILITARY_INDUSTRIES"
+			if = {
+				limit = {
+					OR = {
+						pop_employment_building_group = bg_munition_plants
+						pop_employment_building_group = bg_arms_industries
+						pop_employment_building_group = bg_artillery_foundaries
+						pop_employment_building_group = bg_military_shipyards
+					}
+				}
+				if = {
+					limit = {
+						strata = middle
+					}
+					value = 75
+				}
+				if = {
+					limit = {
+						strata = rich
+					}
+					value = 150
+				}
+			}
+		}
+
 		multiply = {
 			desc = "LEADER_POPULARITY"
 			scope:interest_group = {
