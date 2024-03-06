@@ -15,7 +15,11 @@ void V3::VanillaStateEntry::registerKeys()
 		subStateEntries.emplace_back(VanillaSubStateEntry(theStream));
 	});
 	registerKeyword("add_homeland", [this](std::istream& theStream) {
-		homelands.emplace(commonItems::getString(theStream));
+		auto homelandString = commonItems::getString(theStream);
+		if (homelandString.starts_with("cu:"))
+			homelands.emplace(homelandString.substr(3, homelandString.length()));
+		else
+			homelands.emplace(homelandString);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

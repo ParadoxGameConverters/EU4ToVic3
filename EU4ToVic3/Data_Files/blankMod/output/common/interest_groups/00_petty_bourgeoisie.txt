@@ -28,7 +28,15 @@
 	on_character_ig_membership = {}
 
 	pop_potential = {
-		pop_has_primary_culture = yes
+		custom_tooltip = {
+			text = would_be_accepted_under_national_supremacy_tt
+			this.culture = {
+				AND = {
+					shares_heritage_trait_with_any_primary_culture = prev.owner
+					shares_non_heritage_trait_with_any_primary_culture = prev.owner
+				}
+			}
+		}
 		NOR = {
 			is_pop_type = aristocrats
 			is_pop_type = capitalists

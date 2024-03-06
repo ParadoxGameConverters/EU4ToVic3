@@ -9,6 +9,8 @@ namespace
 {
 void outPop(std::ostream& output, const V3::Pop& pop)
 {
+	if (pop.getSize() <= 0)
+		return;
 	output << "\t\t\tcreate_pop = {\n";
 	if (!pop.getCulture().empty())
 		output << "\t\t\t\tculture = " << pop.getCulture() << "\n";

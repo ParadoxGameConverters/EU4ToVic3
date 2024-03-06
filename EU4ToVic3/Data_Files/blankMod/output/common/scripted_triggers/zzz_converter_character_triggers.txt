@@ -145,9 +145,15 @@ language_accepted = {
 			}
 		}
 		AND = {
-			culture = { has_discrimination_trait = animal_speaking }
+			culture = { has_discrimination_trait = oviparity }
 			owner = {
-				any_primary_culture = { has_discrimination_trait = animal_speaking }
+				any_primary_culture = { has_discrimination_trait = oviparity }
+			}
+		}
+		AND = {
+			culture = { has_discrimination_trait = vivaparity }
+			owner = {
+				any_primary_culture = { has_discrimination_trait = vivaparity }
 			}
 		}
 	}
