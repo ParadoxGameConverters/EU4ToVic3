@@ -39,7 +39,7 @@ EU4::World::World(const std::shared_ptr<Configuration>& theConfiguration, const 
 	Log(LogLevel::Progress) << "15 %";
 
 	// With mods loaded we can init stuff that requires them.
-	const auto modFS = commonItems::ModFilesystem(EU4Path, mods);
+	modFS = commonItems::ModFilesystem(EU4Path, mods);
 
 	Log(LogLevel::Info) << "-> Booting Loaders:";
 	Log(LogLevel::Info) << "\t\tRegions";

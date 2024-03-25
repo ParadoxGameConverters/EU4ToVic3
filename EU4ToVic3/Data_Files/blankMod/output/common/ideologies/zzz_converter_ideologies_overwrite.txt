@@ -27,8 +27,9 @@
 			}
 		}
 		NOT = {
-			exists = c:FRA
-			c:FRA = this
+			owner = {
+				c:FRA ?= this
+			}
 		}
 		scope:interest_group = {
 			OR = {

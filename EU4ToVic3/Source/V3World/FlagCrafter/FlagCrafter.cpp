@@ -1,4 +1,5 @@
 #include "FlagCrafter.h"
+#include "CountryManager/EU4Country.h"
 #include "CountryMapper/CountryMapper.h"
 #include "FlagNameLoader/FlagNameLoader.h"
 #include "Log.h"
@@ -100,7 +101,9 @@ std::optional<std::map<V3::FlagCrafter::FLAGTYPE, std::string>> V3::FlagCrafter:
 	return std::nullopt;
 }
 
-void V3::FlagCrafter::distributeAvailableFlags(const std::map<std::string, std::shared_ptr<Country>>& countries, const mappers::CountryMapper& countryMapper)
+void V3::FlagCrafter::distributeAvailableFlags(const std::map<std::string, std::shared_ptr<Country>>& countries,
+	 const mappers::CountryMapper& countryMapper,
+	 const commonItems::ModFilesystem& eu4ModFS)
 {
 	Log(LogLevel::Info) << "-> Distributing Available Flags.";
 
@@ -114,6 +117,7 @@ void V3::FlagCrafter::distributeAvailableFlags(const std::map<std::string, std::
 	auto tagCounter = 0;
 	auto nameCounter = 0;
 	auto vanillaCounter = 0;
+	auto eu4Counter = 0;
 
 	for (const auto& [tag, country]: countries)
 	{
@@ -151,13 +155,55 @@ void V3::FlagCrafter::distributeAvailableFlags(const std::map<std::string, std::
 		if (country->getProcessedData().customColors)
 		{
 			craftCustomFlag(country);
+			continue;
+		}
+
+		// Can we use EU4 flag?
+		if (tryAssigningEU4Flag(country, eu4ModFS))
+		{
+			++eu4Counter;
 		}
 	}
 
 	Log(LogLevel::Info) << "<> Distributed flags for " << vanillaCounter + flagCodeCounter + tagCounter + nameCounter << " out of " << countries.size()
 							  << " countries.";
 	Log(LogLevel::Debug) << "Specifically, " << flagCodeCounter << " via flag codes, " << tagCounter << " via tag matches, " << nameCounter
-								<< " via name matches, and " << vanillaCounter << " have vanilla flags.";
+								<< " via name matches, " << eu4Counter << " via EU4 flags, and " << vanillaCounter << " have vanilla flags.";
+}
+
+bool V3::FlagCrafter::tryAssigningEU4Flag(const std::shared_ptr<Country>& country, const commonItems::ModFilesystem& eu4ModFS)
+{
+	// Do we have EU4 nation and does it have a flag?
+	if (!country->getSourceCountry())
+		return false;
+
+	const auto& eu4Tag = country->getSourceCountry()->getTag();
+
+	// These would be full-path files. Let's trim and match.
+	const auto& eu4Flags = eu4ModFS.GetAllFilesInFolder("gfx/flags/");
+
+	std::string eu4FlagAbsolutePath;
+	for (const auto& incomingEU4Flag: eu4Flags)
+	{
+		if (trimExtension(trimPath(incomingEU4Flag)) == eu4Tag)
+		{
+			eu4FlagAbsolutePath = incomingEU4Flag;
+			break;
+		}
+	}
+
+	if (eu4FlagAbsolutePath.empty())
+		return false;
+
+	// Try and copy EU4 flag over to temp folder, rename to V3 tag.
+	if (!commonItems::TryCopyFile(eu4FlagAbsolutePath, "flags.tmp/" + country->getTag() + ".tga"))
+		return false;
+
+	// finally, add coa/flag record for the copied eu4 flag.
+	country->addFlag(Default, country->getTag());
+	country->addCustomFlag(Default, country->getTag());
+
+	return true;
 }
 
 bool V3::FlagCrafter::tryAssigningFlagViaValue(const std::shared_ptr<Country>& country, const std::string& value)
