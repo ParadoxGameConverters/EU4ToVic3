@@ -44,6 +44,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	cultureMapper.loadMappingRules("configurables/culture_map.txt");
 	cultureMapper.loadColonialRules("configurables/colonial_regions.txt");
 	cultureMapper.loadWesternizationRules("configurables/westernization.txt");
+	cultureMapper.loadNewEU4CultureRules("configurables/new_eu4_culture_map.txt");
 	politicalManager.loadPopulationSetupMapperRules("configurables/population_setup.txt");
 	politicalManager.loadIdeaEffectMapperRules("configurables/idea_effects.txt");
 	politicalManager.loadTechSetupMapperRules("configurables/tech_setup.txt");
@@ -129,6 +130,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 		 sourceWorld.getCultureLoader(),
 		 sourceWorld.getReligionLoader(),
 		 sourceWorld.getEU4Localizations());
+	cultureMapper.alterNewEU4CultureDefinitions(sourceWorld.getProvinceManager().getAllProvinces());
 
 	Log(LogLevel::Progress) << "56 %";
 	politicalManager.determineAndApplyWesternization(cultureMapper, religionMapper, configBlock.euroCentric, configBlock.startDate, datingData);
