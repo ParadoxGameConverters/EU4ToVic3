@@ -13,6 +13,7 @@
 #include "NameListLoader/NameListLoader.h"
 #include "NameListMapper/NameListMapper.h"
 #include "ParserHelpers.h"
+#include "ProvinceManager/EU4Province.h"
 #include "TraitDefinitionLoader/TraitDefinitionLoader.h"
 #include <numeric>
 #include <ranges>
@@ -176,6 +177,16 @@ void mappers::CultureMapper::loadWesternizationRules(const std::string& fileName
 	westernizationMapper.loadMappingRules(fileName);
 }
 
+void mappers::CultureMapper::loadNewEU4CultureRules(std::istream& theStream)
+{
+	newEU4CultureMapper.loadMappingRules(theStream);
+}
+
+void mappers::CultureMapper::loadNewEU4CultureRules(const std::string& fileName)
+{
+	newEU4CultureMapper.loadMappingRules(fileName);
+}
+
 void mappers::CultureMapper::registerKeys()
 {
 	registerRegex(R"(@\w+)", [this](const std::string& macro, std::istream& theStream) {
@@ -212,6 +223,7 @@ std::optional<std::string> mappers::CultureMapper::cultureMatch(const V3::ClayMa
 				 possibleMatch)
 			{
 				usedCultures.emplace(*possibleMatch);
+				recordCultureMapping(eu4culture, *possibleMatch);
 				return *possibleMatch;
 			}
 		}
@@ -223,6 +235,7 @@ std::optional<std::string> mappers::CultureMapper::cultureMatch(const V3::ClayMa
 				 possibleMatch)
 			{
 				usedCultures.emplace(*possibleMatch);
+				recordCultureMapping(eu4culture, *possibleMatch);
 				return *possibleMatch;
 			}
 		}
@@ -232,6 +245,7 @@ std::optional<std::string> mappers::CultureMapper::cultureMatch(const V3::ClayMa
 	if (!neoCultureRequest && unmappedCultures.contains(eu4culture))
 	{
 		usedCultures.emplace(eu4culture);
+		recordCultureMapping(eu4culture, eu4culture);
 		return eu4culture;
 	}
 
@@ -243,12 +257,67 @@ std::optional<std::string> mappers::CultureMapper::cultureMatch(const V3::ClayMa
 			Log(LogLevel::Warning) << "! CultureMapper - Attempting to match culture " << eu4culture << " in state " << v3state << " failed.";
 		unmappedCultures.emplace(eu4culture);
 		usedCultures.emplace(eu4culture);
+		recordCultureMapping(eu4culture, eu4culture);
 		return eu4culture;
 	}
 
 	// For neoculture requests we need to consult and potentially expand our global registry.
 	return getNeoCultureMatch(eu4culture, v3state, clayManager);
 }
+
+void mappers::CultureMapper::recordCultureMapping(const auto& eu4Culture, const auto& v3Culture)
+{
+	if (eu4ToVic3CultureRecord.contains(eu4Culture))
+		eu4ToVic3CultureRecord.at(eu4Culture).emplace(v3Culture);
+	else
+		eu4ToVic3CultureRecord.emplace(eu4Culture, std::set<std::string>{v3Culture});
+}
+
+void mappers::CultureMapper::alterNewEU4CultureDefinitions(const std::map<int, std::shared_ptr<EU4::Province>>& provinces)
+{
+	// Make a list of all extant eu4 cultures.
+	std::set<std::string> eu4Cultures;
+
+	for (const auto& province: provinces | std::views::values)
+	{
+		if (!province->getCulture().empty())
+			eu4Cultures.emplace(province->getCulture());
+	}
+
+	// See if any of those matches new_eu4_culture_map.txt. If they do, fix target defs.
+	for (const auto& eu4Culture: eu4Cultures)
+	{
+		if (!newEU4CultureMapper.isInterestingCulture(eu4Culture))
+			continue;
+
+		// does it have targets?
+		if (!eu4ToVic3CultureRecord.contains(eu4Culture))
+		{
+			Log(LogLevel::Warning) << "EU4 culture " << eu4Culture << " is extant but has no used targets? Odd.";
+			continue; // never used, although it exists in eu4. Odd.
+		}
+
+		// run through targets
+		for (const auto& target: eu4ToVic3CultureRecord.at(eu4Culture))
+		{
+			if (!v3CultureDefinitions.contains(target))
+			{
+				Log(LogLevel::Warning) << "EU4 culture " << eu4Culture << " target culture " << target << " has no definition. Investigate!";
+				continue;
+			}
+			// do post-processing on definition.
+			for (const auto& removeTrait: newEU4CultureMapper.getRemoveTraitsForCulture(eu4Culture))
+			{
+				v3CultureDefinitions.at(target).traits.erase(removeTrait);
+			}
+			for (const auto& addTrait: newEU4CultureMapper.getAddTraitsForCulture(eu4Culture))
+			{
+				v3CultureDefinitions.at(target).traits.emplace(addTrait);
+			}
+		}
+	}
+}
+
 
 std::optional<std::string> mappers::CultureMapper::suspiciousCultureMatch(const V3::ClayManager& clayManager,
 	 const EU4::CultureLoader& cultureLoader,
@@ -262,7 +331,10 @@ std::optional<std::string> mappers::CultureMapper::suspiciousCultureMatch(const 
 	{
 		// this is option 1.
 		if (colonyNeoCultureTargets.contains(*potentialColony) && colonyNeoCultureTargets.at(*potentialColony).contains(eu4culture))
+		{
+			recordCultureMapping(eu4culture, colonyNeoCultureTargets.at(*potentialColony).at(eu4culture));
 			return colonyNeoCultureTargets.at(*potentialColony).at(eu4culture);
+		}
 	}
 
 	// Otherwise, do a straight match at that location.
@@ -275,6 +347,7 @@ std::string mappers::CultureMapper::getNeoCultureMatch(const std::string& eu4cul
 	{
 		unmappedCultures.emplace(eu4culture);
 		usedCultures.emplace(eu4culture);
+		recordCultureMapping(eu4culture, eu4culture);
 		return eu4culture;
 	}
 
@@ -285,11 +358,15 @@ std::string mappers::CultureMapper::getNeoCultureMatch(const std::string& eu4cul
 		Log(LogLevel::Warning) << "We don't have a defined colony for " << v3state << "! Can't create neoculture for " << eu4culture;
 		unmappedCultures.emplace(eu4culture);
 		usedCultures.emplace(eu4culture);
+		recordCultureMapping(eu4culture, eu4culture);
 		return eu4culture;
 	}
 
 	if (colonyNeoCultureTargets.contains(*colony) && colonyNeoCultureTargets.at(*colony).contains(eu4culture))
+	{
+		recordCultureMapping(eu4culture, colonyNeoCultureTargets.at(*colony).at(eu4culture));
 		return colonyNeoCultureTargets.at(*colony).at(eu4culture);
+	}
 
 	// we have to generate a new neo culture. SIMPLE!
 	auto generated = "neo-" + *colony + "-" + eu4culture;
@@ -300,6 +377,7 @@ std::string mappers::CultureMapper::getNeoCultureMatch(const std::string& eu4cul
 	colonyNeoCultureTargets.at(*colony).emplace(eu4culture, generated);
 	unmappedCultures.emplace(generated);
 	usedCultures.emplace(generated);
+	recordCultureMapping(eu4culture, generated);
 	return generated;
 }
 

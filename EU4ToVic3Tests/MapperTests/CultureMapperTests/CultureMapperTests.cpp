@@ -2,6 +2,7 @@
 #include "CommonFunctions.h"
 #include "CultureLoader/CultureLoader.h"
 #include "CultureMapper/CultureMapper.h"
+#include "EU4World/ProvinceManager/EU4Province.h"
 #include "LocalizationLoader/EU4LocalizationLoader.h"
 #include "ReligionLoader/ReligionLoader.h"
 #include "gtest/gtest.h"
@@ -26,6 +27,7 @@ std::tuple<mappers::CultureMapper, V3::ClayManager, EU4::CultureLoader, EU4::Rel
 	mappers::CultureMapper culMapper;
 	culMapper.loadMappingRules("TestFiles/configurables/culture_map.txt");
 	culMapper.loadWesternizationRules("TestFiles/configurables/westernization.txt");
+	culMapper.loadNewEU4CultureRules("TestFiles/configurables/new_eu4_culture_map.txt");
 	return std::tuple{culMapper, clayManager, cultureLoader, religionLoader};
 }
 } // namespace
@@ -280,6 +282,49 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
 	EXPECT_EQ(0, culMapper.getWesternizationScoreForCulture("unmapped_culture"));
 	EXPECT_EQ(0, culMapper.getLiteracyScoreForCulture("unmapped_culture"));
 	EXPECT_EQ(0, culMapper.getIndustryScoreForCulture("unmapped_culture"));
+}
+
+TEST(Mappers_CultureMapperTests, cultureDefsCanBeAlteredInPostProcessing)
+{
+	auto [culMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
+	culMapper.expandCulturalMappings(clayManager, cultureLoader, religionLoader);
+
+	EXPECT_TRUE(culMapper.getV3CultureDefinitions().empty());
+
+	std::stringstream input;
+	input << commonItems::utf8BOM << "l_english:\n";
+	input << " culture3: \"Culture 3\"\n";
+	EU4::EU4LocalizationLoader eu4LocLoader;
+	eu4LocLoader.loadLocalizations(input);
+
+	// Mark culture3 as used by pinging it, so it records the targets.
+
+	auto match = culMapper.cultureMatch(clayManager, cultureLoader, religionLoader, "culture3", "", "", "", false, false);
+
+	// generate all culture defs.
+	culMapper.loadCultureDefinitions(modFS);
+	culMapper.generateCultureDefinitions("TestFiles/configurables/name_lists.txt",
+		 "TestFiles/configurables/name_list_map.txt",
+		 "TestFiles/configurables/culture_trait_map.txt",
+		 clayManager,
+		 cultureLoader,
+		 religionLoader,
+		 eu4LocLoader);
+
+	// mark culture3 used by placing it on map.
+	std::stringstream input2;
+	input2 << "culture = culture3";
+	auto eu4Province = std::make_shared<EU4::Province>("3", input2); // province has a culture3 culture.
+	std::map<int, std::shared_ptr<EU4::Province>> provinces;
+	provinces.emplace(3, eu4Province);
+
+	// alter all culture3 targets according to new_eu4_culture_map.txt
+	culMapper.alterNewEU4CultureDefinitions(provinces);
+
+	const auto& def1 = culMapper.getV3CultureDefinitions().at("vculture2");
+	EXPECT_EQ("vculture2", def1.name);
+	EXPECT_THAT(def1.traits,
+		 testing::UnorderedElementsAre("heritage_trait_2", "nonheritage_trait_1", "nonheritage_trait_2", "testaddedtrait")); // testtrait2 trait is gone.
 }
 
 TEST(Mappers_CultureMapperTests, cultureDefsLinksDynamicsToRelatedCultures)
