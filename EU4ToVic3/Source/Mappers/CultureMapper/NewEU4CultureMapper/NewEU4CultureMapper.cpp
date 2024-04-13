@@ -34,16 +34,24 @@ void mappers::NewEU4CultureMapper::registerKeys()
 
 std::set<std::string> mappers::NewEU4CultureMapper::getAddTraitsForCulture(const std::string& eu4Culture) const
 {
+	if (eu4Culture.empty())
+		return std::set<std::string>{};
+
 	for (const auto& mapping: mappings)
-		if (!eu4Culture.empty() && mapping.getCultures().contains(eu4Culture))
+		if (mapping.getCultures().contains(eu4Culture))
 			return mapping.getAddTraits();
+
 	return std::set<std::string>{};
 }
 
 std::set<std::string> mappers::NewEU4CultureMapper::getRemoveTraitsForCulture(const std::string& eu4Culture) const
 {
+	if (eu4Culture.empty())
+		return std::set<std::string>{};
+
 	for (const auto& mapping: mappings)
-		if (!eu4Culture.empty() && mapping.getCultures().contains(eu4Culture))
+		if (mapping.getCultures().contains(eu4Culture))
 			return mapping.getRemoveTraits();
+
 	return std::set<std::string>{};
 }
