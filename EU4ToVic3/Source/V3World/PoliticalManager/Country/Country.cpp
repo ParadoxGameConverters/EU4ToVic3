@@ -349,6 +349,13 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 		processedData.customColors = sourceCountry->getNationalColors().getCustomColors();
 	if (sourceCountry->isRevolutionary() && sourceCountry->getNationalColors().getRevolutionaryColor())
 		processedData.revolutionaryColor = sourceCountry->getNationalColors().getRevolutionaryColor();
+
+	// If source was a republic we mush add democracy immediately, or we risk not getting republic law later.
+	if (sourceCountry->getGovernment() == "republic")
+	{
+		processedData.techs.emplace("rationalism"); // rationalism is needed for democracy.
+		processedData.techs.emplace("democracy");
+	}
 }
 
 void V3::Country::convertTier(const mappers::CountryTierMapper& countryTierMapper, bool downTiers, const bool vn)
