@@ -60,22 +60,20 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         tag: ${{ steps.previoustag.outputs.tag }}
-        with:
-          files: |
-            EU4ToVic3-0.4Durres-win-x64.zip
-            Output/EU4ToVic3-0.4Durres-win-x64.exe
         token: ${{ secrets.API_TOKEN_GITHUB }}
-
+        files: |
+          EU4ToVic3-0.4Durres-win-x64.zip
+          Output/EU4ToVic3-0.4Durres-win-x64.exe
+ 
     - name: "Upload binaries to archive"
       if: ${{ github.event_name == 'push' }}
       uses: softprops/action-gh-release@v2
       with:
-        tag: windows_development_build
-        with:
-          files: |
-            EU4ToVic3-0.4Durres-win-x64.zip
-            Output/EU4ToVic3-0.4Durres-win-x64.exe
+        tag: ${{ steps.previoustag.outputs.tag }}
         token: ${{ secrets.API_TOKEN_GITHUB }}
+        files: |
+          EU4ToVic3-0.4Durres-win-x64.zip
+          Output/EU4ToVic3-0.4Durres-win-x64.exe
 
     #- name: "Upload binaries to release"
     #  if: ${{ github.event_name == 'push' }}
