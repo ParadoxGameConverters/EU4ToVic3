@@ -63,7 +63,7 @@ jobs:
         with:
           files: |
             EU4ToVic3-0.4Durres-win-x64.zip
-            Output\EU4ToVic3-0.4Durres-win-x64.exe
+            Output/EU4ToVic3-0.4Durres-win-x64.exe
         token: ${{ secrets.API_TOKEN_GITHUB }}
 
     - name: "Upload binaries to archive"
@@ -74,7 +74,7 @@ jobs:
         with:
           files: |
             EU4ToVic3-0.4Durres-win-x64.zip
-            Output\EU4ToVic3-0.4Durres-win-x64.exe
+            Output/EU4ToVic3-0.4Durres-win-x64.exe
         token: ${{ secrets.API_TOKEN_GITHUB }}
 
     #- name: "Upload binaries to release"
