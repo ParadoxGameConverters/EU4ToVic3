@@ -57,7 +57,7 @@ jobs:
        
     - name: "Upload binaries to release"
       if: ${{ github.event_name == 'push' }}
-      uses: ncipollo/release-action@v1
+      uses: ncipollo/release-action@v1.14
       with:
         tag: ${{ steps.previoustag.outputs.tag }}
         allowUpdates: true
@@ -68,7 +68,7 @@ jobs:
         
     - name: "Upload binaries to archive"
       if: ${{ github.event_name == 'push' }}
-      uses: ncipollo/release-action@v1
+      uses: ncipollo/release-action@v1.14
       with:
         tag: windows_development_build
         allowUpdates: true
