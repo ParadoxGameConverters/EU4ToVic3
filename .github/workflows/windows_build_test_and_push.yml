@@ -73,7 +73,9 @@ jobs:
         token: ${{ secrets.API_TOKEN_GITHUB }}
         files: |
           EU4ToVic3-0.4Durres-win-x64.zip
+          EU4ToVic3-latest-win-x64.zip
           Output/EU4ToVic3-0.4Durres-win-x64.exe
+          Output/EU4ToVic3-latest-win-x64.exe
 
     #- name: "Upload binaries to release"
     #  if: ${{ github.event_name == 'push' }}
