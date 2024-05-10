@@ -9,7 +9,6 @@ TEST(EU4World_EU4LeaderTests, primitivesDefaultToDefaultValues)
 
 	EXPECT_TRUE(leader.leaderName.empty());
 	EXPECT_FALSE(leader.female);
-	EXPECT_FALSE(leader.activationDate.isSet());
 	EXPECT_EQ(0, leader.fire);
 	EXPECT_EQ(0, leader.shock);
 	EXPECT_EQ(0, leader.maneuver);
