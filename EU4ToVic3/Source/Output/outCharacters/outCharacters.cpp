@@ -31,7 +31,7 @@ void outCharacter(std::ostream& output, const V3::Character& character)
 		output << "\t\t\tculture = cu:" << character.culture << "\n";
 	if (!character.religion.empty())
 		output << "\t\t\treligion = rel:" << character.religion << "\n";
-	if (character.birthDate.isSet())
+	if (character.birthDate != date(1, 1, 1))
 		output << "\t\t\tbirth_date = " << character.birthDate << "\n";
 	if (!character.traits.empty())
 	{

@@ -96,6 +96,8 @@
     <ClCompile Include="..\EU4ToVic3\Source\Mappers\CultureMapper\NameListLoader\NameListLoader.cpp" />
     <ClCompile Include="..\EU4ToVic3\Source\Mappers\CultureMapper\NameListMapper\NameListMapper.cpp" />
     <ClCompile Include="..\EU4ToVic3\Source\Mappers\CultureMapper\NameListMapper\NameListMapping.cpp" />
+    <ClCompile Include="..\EU4ToVic3\Source\Mappers\CultureMapper\NewEU4CultureMapper\NewEU4CultureMapper.cpp" />
+    <ClCompile Include="..\EU4ToVic3\Source\Mappers\CultureMapper\NewEU4CultureMapper\NewEU4CultureMapping.cpp" />
     <ClCompile Include="..\EU4ToVic3\Source\Mappers\CultureMapper\TraitDefinitionLoader\TraitDefinitionEntry.cpp" />
     <ClCompile Include="..\EU4ToVic3\Source\Mappers\CultureMapper\TraitDefinitionLoader\TraitDefinitionLoader.cpp" />
     <ClCompile Include="..\EU4ToVic3\Source\Mappers\CultureMapper\WesternizationMapper\WesternizationMapper.cpp" />
@@ -322,6 +324,8 @@
     <ClInclude Include="..\EU4ToVic3\Source\Mappers\CultureMapper\NameListLoader\NameListLoader.h" />
     <ClInclude Include="..\EU4ToVic3\Source\Mappers\CultureMapper\NameListMapper\NameListMapper.h" />
     <ClInclude Include="..\EU4ToVic3\Source\Mappers\CultureMapper\NameListMapper\NameListMapping.h" />
+    <ClInclude Include="..\EU4ToVic3\Source\Mappers\CultureMapper\NewEU4CultureMapper\NewEU4CultureMapper.h" />
+    <ClInclude Include="..\EU4ToVic3\Source\Mappers\CultureMapper\NewEU4CultureMapper\NewEU4CultureMapping.h" />
     <ClInclude Include="..\EU4ToVic3\Source\Mappers\CultureMapper\TraitDefinitionLoader\TraitDef.h" />
     <ClInclude Include="..\EU4ToVic3\Source\Mappers\CultureMapper\TraitDefinitionLoader\TraitDefinitionEntry.h" />
     <ClInclude Include="..\EU4ToVic3\Source\Mappers\CultureMapper\TraitDefinitionLoader\TraitDefinitionLoader.h" />
@@ -491,7 +495,7 @@
       <PreprocessorDefinitions>NDEBUG;_LIB;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX20_U8PATH_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>..\commonItems;..\commonItems\external\zip\src;$(SolutionDir)EU4ToVic3\Source\Mappers;$(SolutionDir)EU4ToVic3\Source;$(SolutionDir)EU4ToVic3\Source\EU4World;$(SolutionDir)EU4ToVic3\Source\EU4World\Loaders;$(SolutionDir)EU4ToVic3\Source\V3World;$(SolutionDir)EU4ToVic3\Source\Helpers;$(SolutionDir)EU4ToVic3\Source\Configuration;$(SolutionDir)EU4ToVic3\Source\Output;$(SolutionDir);$(SolutionDir)lib;$(SolutionDir)commonItems\pch</AdditionalIncludeDirectories>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>

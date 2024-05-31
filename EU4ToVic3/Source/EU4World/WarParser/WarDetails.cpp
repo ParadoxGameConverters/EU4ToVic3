@@ -15,7 +15,7 @@ void EU4::WarDetails::registerKeys()
 	registerSetter("province", targetProvinceID);
 	registerSetter("tag", targetTag);
 	registerRegex(R"(\d+\.\d+\.\d+)", [this](const std::string& dateString, std::istream& theStream) {
-		if (!startDate.isSet())
+		if (startDate == date(1, 1, 1))
 			startDate = date(dateString);
 		commonItems::ignoreItem(dateString, theStream);
 	});

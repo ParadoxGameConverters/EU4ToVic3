@@ -11,7 +11,6 @@ TEST(EU4World_WarParserTests, primitivesDefaultToDefaults)
 	EXPECT_TRUE(war.getAttackers().empty());
 	EXPECT_TRUE(war.getDefenders().empty());
 	EXPECT_TRUE(war.getName().empty());
-	EXPECT_FALSE(war.getDetails().startDate.isSet());
 	EXPECT_EQ(0, war.getDetails().targetProvinceID);
 	EXPECT_TRUE(war.getDetails().targetTag.empty());
 	EXPECT_TRUE(war.getDetails().warGoalClass.empty());

@@ -81,7 +81,7 @@ void EU4::ProvinceHistory::buildPopRatios(const double assimilationFactor, const
 		return;
 
 	auto endDate = datingData.lastEU4Date;
-	if (endDate > datingData.hardEndingDate || !endDate.isSet())
+	if (endDate > datingData.hardEndingDate || endDate == date(1, 1, 1))
 		endDate = datingData.hardEndingDate;
 
 	// position iterators at beginning of each queue + 1

@@ -4,12 +4,14 @@
 #include "CultureDefinitionLoader/CultureDef.h"
 #include "CultureMappingRule.h"
 #include "ModLoader/ModFilesystem.h"
+#include "NewEU4CultureMapper/NewEU4CultureMapper.h"
 #include "Parser.h"
 #include "TraitDefinitionLoader/TraitDef.h"
 #include "WesternizationMapper/WesternizationMapper.h"
 
 namespace EU4
 {
+class Province;
 class CultureLoader;
 class ReligionLoader;
 class CultureGroupParser;
@@ -39,6 +41,8 @@ class CultureMapper: commonItems::parser
 	void loadColonialRules(const std::string& fileName);
 	void loadWesternizationRules(std::istream& theStream);
 	void loadWesternizationRules(const std::string& fileName);
+	void loadNewEU4CultureRules(std::istream& theStream);
+	void loadNewEU4CultureRules(const std::string& fileName);
 	void expandCulturalMappings(const V3::ClayManager& clayManager, const EU4::CultureLoader& cultureLoader, const EU4::ReligionLoader& religionLoader);
 
 	[[nodiscard]] const auto& getMacros() const { return encounteredMacros; }
@@ -93,6 +97,8 @@ class CultureMapper: commonItems::parser
 	[[nodiscard]] std::optional<bool> doCulturesShareHeritageTrait(const std::string& cultureA, const std::string& cultureB) const;
 	[[nodiscard]] std::optional<bool> doCulturesShareNonHeritageTrait(const std::string& cultureA, const std::string& cultureB) const;
 
+	void alterNewEU4CultureDefinitions(const std::map<int, std::shared_ptr<EU4::Province>>& provinces);
+
   private:
 	[[nodiscard]] std::string getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager);
 	[[nodiscard]] CultureDef generateCultureDefinition(const V3::ClayManager& clayManager,
@@ -105,6 +111,8 @@ class CultureMapper: commonItems::parser
 		 const EU4::EU4LocalizationLoader& eu4Locs,
 		 const std::string& seedName = {});
 
+	void recordCultureMapping(const auto& eu4Culture, const auto& v3Culture);
+
 	void registerKeys();
 
 	std::vector<CultureMappingRule> cultureMapRules;
@@ -115,9 +123,12 @@ class CultureMapper: commonItems::parser
 	std::map<std::string, TraitDef> v3TraitDefinitions;
 	std::map<std::string, std::map<std::string, std::string>> colonyNeoCultureTargets; // colony->[eu4 culture -> v3 neoculture]
 	std::map<std::string, std::set<std::string>> relatedCultures; // vanilla culture -> related dynamic cultures (hungarian -> {hungaro-latvian ... })
+	std::map<std::string, std::set<std::string>>
+		 eu4ToVic3CultureRecord; // recording all targets a particular eu4 culture mapped to. Relevant if we're editing traits of all targets in postprocessing.
 
 	ColonialRegionMapper colonialRegionMapper;
 	WesternizationMapper westernizationMapper;
+	NewEU4CultureMapper newEU4CultureMapper;
 };
 } // namespace mappers
 

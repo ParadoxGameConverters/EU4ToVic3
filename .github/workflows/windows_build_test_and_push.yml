@@ -57,25 +57,47 @@ jobs:
        
     - name: "Upload binaries to release"
       if: ${{ github.event_name == 'push' }}
-      uses: ncipollo/release-action@v1
+      uses: softprops/action-gh-release@v2
       with:
-        tag: ${{ steps.previoustag.outputs.tag }}
-        allowUpdates: true
-        omitBodyDuringUpdate: true
-        omitNameDuringUpdate: true
-        artifacts: EU4ToVic3-0.4Durres-win-x64.zip, Output\EU4ToVic3-0.4Durres-win-x64.exe
+        tag_name: ${{ steps.previoustag.outputs.tag }}
         token: ${{ secrets.API_TOKEN_GITHUB }}
-        
+        files: |
+          EU4ToVic3-0.4Durres-win-x64.zip
+          Output/EU4ToVic3-0.4Durres-win-x64.exe
+ 
     - name: "Upload binaries to archive"
       if: ${{ github.event_name == 'push' }}
-      uses: ncipollo/release-action@v1
+      uses: softprops/action-gh-release@v2
       with:
-        tag: windows_development_build
-        allowUpdates: true
-        omitBodyDuringUpdate: true
-        omitNameDuringUpdate: true
-        artifacts: EU4ToVic3-0.4Durres-win-x64.zip, EU4ToVic3-latest-win-x64.zip, Output\EU4ToVic3-0.4Durres-win-x64.exe, Output\EU4ToVic3-latest-win-x64.exe
+        tag_name: windows_development_build
         token: ${{ secrets.API_TOKEN_GITHUB }}
+        files: |
+          EU4ToVic3-0.4Durres-win-x64.zip
+          EU4ToVic3-latest-win-x64.zip
+          Output/EU4ToVic3-0.4Durres-win-x64.exe
+          Output/EU4ToVic3-latest-win-x64.exe
+
+    #- name: "Upload binaries to release"
+    #  if: ${{ github.event_name == 'push' }}
+    #  uses: ncipollo/release-action@v1.14
+    #  with:
+    #    tag: ${{ steps.previoustag.outputs.tag }}
+    #    allowUpdates: true
+    #    omitBodyDuringUpdate: true
+    #    omitNameDuringUpdate: true
+    #    artifacts: EU4ToVic3-0.4Durres-win-x64.zip, Output\EU4ToVic3-0.4Durres-win-x64.exe
+    #    token: ${{ secrets.API_TOKEN_GITHUB }}
+        
+    #- name: "Upload binaries to archive"
+    #  if: ${{ github.event_name == 'push' }}
+    #  uses: ncipollo/release-action@v1.14
+    #  with:
+    #    tag: windows_development_build
+    #    allowUpdates: true
+    #    omitBodyDuringUpdate: true
+    #    omitNameDuringUpdate: true
+    #    artifacts: EU4ToVic3-0.4Durres-win-x64.zip, EU4ToVic3-latest-win-x64.zip, Output\EU4ToVic3-0.4Durres-win-x64.exe, Output\EU4ToVic3-latest-win-x64.exe
+    #    token: ${{ secrets.API_TOKEN_GITHUB }}
         
     - name: "Cleanup"
       if: always()
