@@ -37,6 +37,7 @@
 link = { eu4 = GER name = "Germany" vic3 = GER } # Germany
 link = { eu4 = GBR vic3 = GBR } # Great Britain
 link = { name = "Britannia" vic3 = GBR } # Britannia
+link = { name = "The United Crowns" vic3 = GBR } # Dutch Britian
 link = { eu4 = SCA name = "Scandinavia" vic3 = SCA }
 link = { eu4 = RUS name = "Russia" vic3 = RUS } # Russia
 link = { eu4 = FRA reform = stateless_society vic3 = PRC } # Paris Commune, easter egg
@@ -111,6 +112,7 @@ link = { eu4 = LUC name = "Lucca" vic3 = LUC } # Lucca
 link = { eu4 = MOD name = "Modena" vic3 = MOD } # Modena
 link = { name = "Kingdom of God" vic3 = ITA } # Kingdom of God => Italy
 link = { eu4 = PAP name = "The Papacy" vic3 = PAP } # Papal States 
+link = { eu4 = ROM vic3 = PAP } # Rome
 link = { eu4 = PAR name = "Parma" vic3 = PAR } # Parma
 link = { name = "Grao-Para" vic3 = PRA } # Grão-Pará
 link = { name = "Grão-Pará" vic3 = PRA } # Grão-Pará
@@ -118,8 +120,11 @@ link = { eu4 = SPI name = "Sardinia-Piedmont" vic3 = SAR } # Sardinia-Piedmont
 link = { eu4 = TTS name = "Two Sicilies" vic3 = SIC } # Two Sicilies
 link = { name = Trieste vic3 = TRE } # Trieste
 link = { eu4 = TUS name = "Toscana" vic3 = TUS } # Tuscany
+link = { eu4 = ETR vic3 = TUS } # Eturia => Tuscany
 link = { eu4 = VEN name = "Venice" vic3 = VEN } # Venice
 link = { name = "Venezia" vic3 = VEN } # Venezia => Venice
+link = { name = "Bohemian Commonwealth" vic3 = CZH } # Bohemian Commonwealth => Czechoslovakia
+link = { name = "Czechoslovakia" vic3 = CZH } # Czechoslovakia
 link = { eu4 = BOH name = "Bohemia" vic3 = BOH } # Bohemia
 link = { eu4 = KRA name = "Kraków" vic3 = KRA } # Krakow
 link = { eu4 = CRI name = "Crimea" vic3 = CRI } # Crimea
@@ -135,7 +140,7 @@ link = { eu4 = SLO vic3 = SLV } # Nitra => Slovakia
 link = { eu4 = SWI name = "Switzerland" vic3 = SWI } # Switzerland
 link = { eu4 = TRA name = "Transylvania" vic3 = TRS } # Transylvania
 link = { eu4 = UKR name = "Ruthenia" vic3 = UKR } # Ruthenia => Ukraine
-link = { name = "Czechoslovakia" vic3 = CZH } # Czechoslovakia
+# Czechoslovakia defined with Bohemia
 link = { eu4 = ALB name = "Albania" vic3 = ALB } # Albania
 link = { eu4 = BOS name = "Bosnia" vic3 = BOS } # Bosnia
 link = { eu4 = BUL name = "Bulgaria" vic3 = BUL } # Bulgaria
@@ -175,6 +180,9 @@ link = { eu4 = MUG name = "Mughals" vic3 = MUG } # Mughals
 link = { eu4 = NAJ name = "Nejd" vic3 = NEJ } # Nejd
 link = { eu4 = OMA name = "Oman" vic3 = OMA } # Oman
 link = { eu4 = PER name = "Persia" vic3 = PER } # Persia
+link = { name = "Seljuk Empire" vic3 = PER } # Seljuk Persia
+link = { name = "Gurkani" vic3 = PER } # Timurid Persia
+link = { eu4 = ERS name = "Iran" vic3 = PER } # Misc Persia
 link = { eu4 = SHM vic3 = JAB } # Shammar => Jabal-Shammar
 link = { eu4 = YEM name = "Yemen" vic3 = YEM } # Yemen
 link = { eu4 = MHR name = "Mahra" vic3 = MAH } # Mahra
@@ -182,7 +190,7 @@ link = { eu4 = HDR vic3 = KAT } # Hadramut => Kathiri
 link = { eu4 = RAS vic3 = ZAI } # Rassids => Azal/Qasimid State
 link = { eu4 = ADE vic3 = LAH } # Aden => Lahej
 link = { eu4 = ALH vic3 = BHN } # Haasa => Bahrain
-link = { eu4 = HIN name = "Hindustan" vic3 = HND } # Hindustan
+link = { eu4 = HIN name = "Hindustan" vic3 = PAK } # Vic3 HND is actually India, so Pakistan it is
 link = { eu4 = ODH vic3 = AWA } # Oudh => Awadh
 link = { eu4 = BST name = "Bastar" vic3 = BAS } # Bastar
 link = { eu4 = BDA name = "Baroda" vic3 = BER } # Baroda
@@ -240,6 +248,7 @@ link = { eu4 = WUU reform = celestial_empire vic3 = CHI } # Wu China
 link = { eu4 = QIC reform = celestial_empire vic3 = CHI } # Qi China
 link = { eu4 = YAN reform = celestial_empire vic3 = CHI } # Yan China
 link = { eu4 = JIN reform = celestial_empire vic3 = CHI } # Jin China
+link = { eu4 = GJN reform = celestial_empire vic3 = CHI } # Other Jin China
 link = { eu4 = LNG reform = celestial_empire vic3 = CHI } # Liang China
 link = { eu4 = QIN reform = celestial_empire vic3 = CHI } # Qin China
 link = { eu4 = HUA reform = celestial_empire vic3 = CHI } # Huai China
@@ -257,7 +266,7 @@ link = { eu4 = CZH reform = celestial_empire vic3 = CHI } # Zhou China
 link = { eu4 = DAI name = "Dai Nam" vic3 = DAI } # Dai Nam => Dai Viet
 link = { eu4 = ANN name = "Annam" vic3 = DAI } # Annam => Dai Viet (Nguyen Dynasty)
 link = { name = "Vietnam" vic3 = DAI } # Vietnam => Dai Viet
-link = { eu4 = BAN name = "Java" vic3 = JAV } # Banten => Java
+link = { eu4 = MAJ name = "Java" vic3 = JAV } # Majapahit => Java
 link = { eu4 = KOR vic3 = KOR } # Korea
 link = { eu4 = LXA vic3 = LAO } # Lan Xang => Laos
 link = { eu4 = LUA name = "Luang Prabang" vic3 = LUA } # Luang Prabang
@@ -265,6 +274,7 @@ link = { eu4 = CHK name = "Champassak" vic3 = CHP } # Champassak
 link = { eu4 = VIE name = "Vientiane" vic3 = VIE } # Vientiane
 link = { eu4 = JOH name = "Johor" vic3 = JOH } # Johor
 link = { eu4 = SIA name = "Siam" vic3 = SIA } # Siam
+link = { name = "Dvaravati" vic3 = DVR } # Dvaravati
 link = { eu4 = AYU vic3 = SIA } # Ayutthaya => Siam
 link = { eu4 = LNA vic3 = CMI } # Lan Na => Chiang Mai
 link = { eu4 = TIB name = "Tibet" vic3 = TIB } # Tibet
@@ -272,7 +282,7 @@ link = { eu4 = MGE vic3 = MGL } # Mongol Empire => Mongolia
 link = { eu4 = KHA name = "Mongolia" vic3 = MGL } # Mongolia
 link = { eu4 = YUA vic3 = MGL } # (Non-Emperor) Yuan => Mongolia
 link = { name = "Philippines" vic3 = PHI } # Philippines
-link = { eu4 = MCH vic3 = MCH } # Manchu(ria)
+link = { eu4 = MCH name = "Great Jin" vic3 = MCH } # Manchu(ria)
 link = { eu4 = CAL name = "California" vic3 = CAL } # California
 link = { eu4 = CAN name = "Canada" vic3 = CAN } # Canada
 link = { eu4 = CHE name = "Cherokee" vic3 = CHE } # Cherokee
@@ -298,7 +308,8 @@ link = { name = "Ontario" vic3 = ONT } # Ontario
 link = { name = "New Brunswick" vic3 = NBS } # New Brunswick
 link = { eu4 = TEX name = "Texas" vic3 = TEX } # Texas
 link = { eu4 = CAM vic3 = UCA } # Central America
-link = { eu4 = LAP vic3 = ARG } # La Plata => Argentina
+link = { eu4 = LAP vic3 = PLT } # La Plata
+link = { name = "Argentina" vic3 = ARG } # Argentina
 link = { name = "Bolivia" vic3 = BOL } # Bolivia
 link = { eu4 = BRZ name = "Brazil" vic3 = BRZ } # Brazil
 link = { eu4 = CHL name = "Chile" vic3 = CHL } # Chile
@@ -418,9 +429,9 @@ link = { name = "Phoenicia" vic3 = LEB } # Phoenicia => Lebanon
 #link = { eu4 = ??? vic3 = HNA } # Hunan
 #link = { eu4 = ??? vic3 = AHU } # Anhui
 link = { eu4 = YAN vic3 = ZHI } # Yan => Zhili ((Primary Culture)
-#link = { eu4 = ??? vic3 = SHN } # Shanxi
+#link = { eu4 = JIN vic3 = SHN } # Jin => Shanxi (Jin was still used as a synonym for Shanxi during Vic3's time)
 #link = { eu4 = ??? vic3 = GUI } # Guizhou
-#link = { eu4 = ??? vic3 = GNG } # Guangxi
+link = { eu4 = CGS vic3 = GNG } # Changsheng => Guangxi
 link = { eu4 = SHU vic3 = SIH } # Shu => Sichuan (Primary Culture)
 #link = { eu4 = ??? vic3 = SHA } # Shangdong
 link = { eu4 = CSH vic3 = XIB } # Shun => Xibei (Primary Culture)
@@ -440,7 +451,7 @@ link = { name = "Schaumburg-Lippe" vic3 = SCM } # Schaumburg-Lippe
 link = { name = "Mecklemburg-Strelitz" vic3 = MST } # Mecklemburg-Strelitz
 link = { name = "Zollern" vic3 = HOH } # Hohenzollern
 link = { name = "Waldeck" vic3 = WLD } # Waldeck
-link = { eu4 = BHA name = "Indian Empire" vic3 = BHT } # Bharat => India
+link = { eu4 = BHA name = "Indian Empire" vic3 = HND } # Bharat => India
 link = { name = "Michigan" vic3 = UOM } # Michigan
 link = { eu4 = CIR name = "Circassia" vic3 = CIR } # Circassia
 link = { name = "Chechnya" vic3 = CHC } # Chechnya
@@ -454,7 +465,12 @@ link = { name = "Orta Zhuz" vic3 = OZH } # Orta Zhuz
 link = { eu4 = SAV name = "Savoy" vic3 = SAV } # Savoy
 link = { name = "Rhineland" vic3 = SAV } # Rhineland
 link = { name = "Paris Commune" vic3 = PRC } # Paris Commune
-link = { name = "Nusantara" vic3 = IDN } # Nusantara => Indonesia
+link = { eu4 = MSA vic3 = IDN } # Malaya (and all of its renames which have equivalents in Vic3) => Indonesia
+link = { eu4 = FLO vic3 = FLR } # Florida
+link = { eu4 = HLR vic3 = HRE } # Holy Roman Empire
+link = { name = Benelux vic3 = UNL } # United Netherlands
+link = { eu4 = BUR name = Upper Burgundy vic3 = UNL } # Burgundy => United Netherlands (blame Vic3)
+
 
 #link = { eu4 = NAT vic3 = NAT } # Natives (Commented out in vanilla loc files)
 #link = { name = "Manchester" vic3 = MAC } # Manchester (Commented out in vanilla loc files)
@@ -468,7 +484,7 @@ link = { eu4 = ETH name = "Abyssinia" vic3 = ETH } # Ethiopia
 link = { eu4 = MIR vic3 = MAD } # (I)merina
 link = { name = "Mascara" vic3 = MAS } # Mascara
 link = { name = "Liberia" vic3 = LIB } # Liberia
-link = { eu4 = MOR name = "Maghreb" vic3 = MOR } # Morocco
+link = { eu4 = MOR vic3 = MOR } # Morocco
 link = { name = "Natal-Zululand"vic3 = NAL } # Natal-Zululand
 link = { name = "Oranje" vic3 = ORA } # Oranje
 link = { name = "South Africa" vic3 = SAF } # South Africa
@@ -614,6 +630,7 @@ link = { eu4 = MRA name = "Maravi" vic3 = MRV } # Maravi
 link = { name = "Borgu" vic3 = BRG } # Borgu
 link = { name = "Bamum" vic3 = BMM } # Bamum
 link = { eu4 = CRN name = "Cornwall" vic3 = CNW } # Cornwall
+link = ( name = "Maghreb" vic3 = MGB } # Maghreb
 
 ## 01_pacific_and_australasia.txt
 link = { eu4 = UHW vic3 = HAW } # Hawaii
@@ -645,7 +662,7 @@ link = { eu4 = GMI vic3 = GML } # Kamilaroi => Gamilaraay
 link = { eu4 = AUS name = "Australia" vic3 = AST } # Australia
 link = { eu4 = NZL vic3 = NZL } # Zealandia => New Zealand
 link = { name = "Tasmania" vic3 = TAS } # Tasmania
-#link = { eu4 = ??? vic3 = DEI } # Dutch East Indies
+link = { eu4 = VOC vic3 = DEI } # Dutch East Indies
 link = { eu4 = BNE vic3 = SLW } # Bone => Sulawesi (ruled by Bone Dynasty)
 
 ### EU4-Vic3 coded-in tags
@@ -744,6 +761,7 @@ link = { eu4 = SYD vic3 = D04 } # Sayisi Dene => Denésoliné
 link = { eu4 = MIA vic3 = D09 } # Mianjin => Durubalic
 link = { eu4 = ALB vic3 = D10 } # Dyrrachion
 #link = { eu4 = ??? vic3 = D11 } # Dulğan
+# Dvaravati defined with Ayutthaya
 #link = { eu4 = ??? vic3 = D12 } # Drevliania
 #link = { eu4 = ??? vic3 = D13 } # Dyfed
 link = { eu4 = DMS vic3 = D14 } # Desmond => Deasmhumhain
