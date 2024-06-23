@@ -299,6 +299,18 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	processedData.adjective = sourceCountry->getAdjective();
 	processedData.adjectivesByLanguage = sourceCountry->getAllAdjectiveLocalizations();
 
+	// A patch for localizations containing "'" - vic3 has an issue parsing those in debug mode, better to replace them with ` to avoid this.
+	std::ranges::replace(processedData.name, '\'', '`');
+	std::ranges::replace(processedData.adjective, '\'', '`');
+	for (const auto& language: processedData.namesByLanguage | std::views::keys)
+	{
+		std::ranges::replace(processedData.namesByLanguage[language], '\'', '`');
+	}
+	for (const auto& language: processedData.adjectivesByLanguage | std::views::keys)
+	{
+		std::ranges::replace(processedData.adjectivesByLanguage[language], '\'', '`');
+	}
+
 	// TODO: UNTESTED - TESTS IF POSSIBLE WHEN CONVERSION DONE
 
 	// Capital
