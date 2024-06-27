@@ -413,3 +413,137 @@ fem_rus_admiral_nakhimov = {
 		}
 	}
 }
+
+### Agitators
+
+# Generated
+
+fem_RUS_nikolai_vasilyevich_tchaikovsky = {
+	first_name = Nikola
+	last_name = Tchaikovsky
+	historical = yes
+	female = yes
+	is_agitator = yes
+	culture = global_var:rus_culture
+	religion = orthodox
+	interest_group = ig_rural_folk
+	ideology = ideology_radical
+	birth_date = 1851.1.7
+	traits = {
+		pious
+		experienced_diplomat
+		ambitious
+	}
+    agitator_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_nikolai_vasilyevich_tchaikovsky
+				}
+			}
+			uses_rus_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+        }   
+        earliest_usage_date = 1872.1.1
+        latest_usage_date = 1917.1.1
+        chance = 100
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_nikolai_vasilyevich_tchaikovsky
+		}
+	}
+}
+
+fem_RUS_sergei_gennadievich_nechaev = {
+	first_name = Seryozha
+	last_name = Nechaev
+	historical = yes
+	female = yes
+	is_agitator = yes
+	culture = global_var:rus_culture
+	religion = atheist
+	interest_group = ig_intelligentsia
+    #dna = dna_nechaev
+	ideology = ideology_atheist
+	birth_date = 1847.12.3
+	traits = {
+		direct
+		persistent
+		demagogue
+	}
+    agitator_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sergei_gennadievich_nechaev
+				}
+			}
+			uses_rus_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1868.1.1
+        latest_usage_date = 1880.1.1
+        chance = 100
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sergei_gennadievich_nechaev
+		}
+	}
+}
+
+fem_RUS_alexey_alekseevich_borovoy = {
+	first_name = Alexia
+	last_name = Borovoy
+	historical = yes
+	female = yes
+	is_agitator = yes
+	culture = global_var:rus_culture
+	religion = atheist
+	interest_group = ig_intelligentsia
+	ideology = ideology_atheist
+	birth_date = 1875.11.11
+	traits = {
+		erudite
+		brave
+		inspirational_orator
+	}
+    agitator_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_alexey_alekseevich_borovoy
+				}
+			}
+			uses_rus_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1900.1.1
+        latest_usage_date = 1936.1.1
+        chance = 100
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_alexey_alekseevich_borovoy
+		}
+	}
+}
