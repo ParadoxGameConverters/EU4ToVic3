@@ -58,6 +58,13 @@
 				size = 16000
 			}
 		}
+		region_state:V10 = { #Vasyugan
+			create_pop = {
+				culture = ugrian
+				religion = animist
+				size = 16000
+			}
+		}
 	}
 	s:STATE_TOBOLSK = {
 		region_state:K19 = { #Kimak
@@ -112,10 +119,32 @@
 			}
 		}
 	}
+	s:STATE_KRASNOYARSK = { #DONE
+		region_state:K21 = { #Khakas
+			create_pop = {
+				culture = siberian
+				size = 169990
+			}
+			create_pop = {
+				culture = buryat
+				size = 17665
+			}
+			create_pop = {
+				culture = tuvan
+				size = 8785
+			}
+		}
+	}
 	s:STATE_UPPER_YENISEYSK = {
 		region_state:A17 = { #Avam
 			create_pop = {
 				culture = ugrian
+				size = 7980
+			}
+		}
+		region_state:BRY = { #Buryatia
+			create_pop = {
+				culture = buryat
 				size = 7980
 			}
 		}
@@ -182,6 +211,16 @@
 				size = 596
 			}
 		}
+		region_state:S20 = { #Selkups
+			create_pop = {
+				culture = ugrian
+				size = 10776
+			}
+			create_pop = {
+				culture = siberian
+				size = 596
+			}
+		}
 	}
 	s:STATE_NENETSIA = {
 		region_state:L02 = { #Lyzhia
@@ -227,7 +266,26 @@
 			}
 		}
 	}
-
+	s:STATE_SURGUT = { #DONE
+		region_state:N18 = { #Nenetsia
+			create_pop = {
+				culture = ugrian
+				size = 8604
+			}
+		}
+		region_state:S20 = { #Selkups
+			create_pop = {
+				culture = siberian
+				size = 2500
+			}
+		}
+		region_state:Y10 = { #Yugra
+			create_pop = {
+				culture = ugrian
+				size = 3204
+			}
+		}
+	}
 	s:STATE_CHUKOTKA = {
 		region_state:A16 = { #Angqalghakku
 			create_pop = {
@@ -325,6 +383,16 @@
 	}
 
 	s:STATE_YAKUTSK = {
+		region_state:DU1 = { #Dulgan
+			create_pop = {
+				culture = siberian
+				size = 24096
+			}
+			create_pop = {
+				culture = yakut
+				size = 50100
+			}
+		}
 		region_state:E04 = { #Ewenki
 			create_pop = {
 				culture = siberian
@@ -390,11 +458,33 @@
 			}
 		}
 	}
+	s:STATE_BURYATIA = { #DONE
+		region_state:BRY = {
+			create_pop = {
+				culture = buryat
+				size = 169402
+			}
+			create_pop = {
+				culture = siberian
+				size = 3665
+			}
+			create_pop = {
+				culture = ashkenazi
+				size = 2520
+			}
+		}
+	}
 	s:STATE_IRKUTSK = {
 		region_state:BRY = { #Buryatia
 			create_pop = {
 				culture = buryat
 				size = 388408
+			}
+		}
+		region_state:E04 = { #Ewenki
+			create_pop = {
+				culture = siberian
+				size = 14996
 			}
 		}
 		region_state:K18 = { #Kets
@@ -417,6 +507,12 @@
 		}
 	}
 	s:STATE_KOLYMA = {
+		region_state:K17 = { #Koryaks
+			create_pop = {
+				culture = siberian
+				size = 6000
+			}
+		}
 		region_state:O05 = { #Omok
 			create_pop = {
 				culture = siberian
@@ -426,13 +522,19 @@
 		region_state:V09 = { #Vadul
 			create_pop = {
 				culture = siberian
-				size = 12000
+				size = 60000
 			}
 		}
 		region_state:Y02 = { #Yupighyt
 			create_pop = {
 				culture = inuit
 				size = 1728
+			}
+		}
+		region_state:YAK = { #Urangai Sakha
+			create_pop = {
+				culture = inuit
+				size = 10000
 			}
 		}
 	}
