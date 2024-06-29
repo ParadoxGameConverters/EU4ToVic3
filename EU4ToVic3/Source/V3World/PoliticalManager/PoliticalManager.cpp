@@ -591,7 +591,7 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 			if (country1->second->getProcessedData().type == "unrecognized")
 				newAgreement.type = "tributary";
 		}
-		if (newAgreement.type == "customs_union")
+		/* if (newAgreement.type == "customs_union") // Obsoleted by the new "Power Bloc" system
 		{
 			// vic3 has this reversed
 			newAgreement.first = V3Tag2;
@@ -600,7 +600,7 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 			// if someone's isolationist, bail.
 			if (country1->second->getProcessedData().laws.contains("law_isolationism") || country2->second->getProcessedData().laws.contains("law_isolationism"))
 				continue;
-		}
+		}*/
 		if (newAgreement.type == "double_defensive_pact")
 		{
 			// fix and file twice.

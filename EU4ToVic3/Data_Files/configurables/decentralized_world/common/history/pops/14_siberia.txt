@@ -32,7 +32,7 @@
 		}
 	}
 	s:STATE_TOMSK = {
-		region_state:K20 = { #Kirghiz
+		region_state:KYR = { #Kirghiz
 			create_pop = {
 				culture = kirgiz
 				religion = animist
@@ -66,7 +66,7 @@
 				size = 37909
 			}
 		}
-		region_state:K20 = { #Kirghiz
+		region_state:KYR = { #Kirghiz
 			create_pop = {
 				culture = kirgiz
 				religion = animist
@@ -292,22 +292,28 @@
 	}
 	
 	s:STATE_OKHOTSK = {
+		region_state:E03 = { #Evesel
+			create_pop = {
+				culture = siberian
+				size = 43008
+			}
+		}
 		region_state:K17 = { #Koryaks
 			create_pop = {
 				culture = siberian
-				size = 9400
+				size = 9000
+			}
+		}
+		region_state:O05 = { #Omok
+			create_pop = {
+				culture = siberian
+				size = 400
 			}
 		}
 		region_state:V09 = { #Vadul
 			create_pop = {
 				culture = siberian
 				size = 12400
-			}
-		}
-		region_state:E03 = { #Evesel
-			create_pop = {
-				culture = siberian
-				size = 43008
 			}
 		}
 		region_state:YAK = { #Urangai Sakha
@@ -407,6 +413,26 @@
 			create_pop = {
 				culture = uighur
 				size = 116004
+			}
+		}
+	}
+	s:STATE_KOLYMA = {
+		region_state:O05 = { #Omok
+			create_pop = {
+				culture = siberian
+				size = 6000
+			}
+		}
+		region_state:V09 = { #Vadul
+			create_pop = {
+				culture = siberian
+				size = 12000
+			}
+		}
+		region_state:Y02 = { #Yupighyt
+			create_pop = {
+				culture = inuit
+				size = 1728
 			}
 		}
 	}
