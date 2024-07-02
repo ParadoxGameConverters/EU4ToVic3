@@ -31,6 +31,7 @@ void outMetadataFile(std::ostream& output, const std::string& outName)
 	output << "\t\t\t\"common/history/military_formations\",\n";
 	output << "\t\t\t\"common/history/pops\",\n";
 	output << "\t\t\t\"common/history/population\",\n";
+	output << "\t\t\t\"common/history/power_blocs\",\n";
 	output << "\t\t\t\"common/history/production_methods\",\n";
 	output << "\t\t\t\"common/history/states\",\n";
 	output << "\t\t\t\"common/history/trade_routes\",\n";
