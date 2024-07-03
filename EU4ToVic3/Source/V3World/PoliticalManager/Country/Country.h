@@ -80,6 +80,7 @@ struct ProcessedData
 	std::set<std::string> populationEffects;
 	std::set<std::string> laws;
 	std::map<std::string, int> institutions;
+	bool wasGP = false;
 	double literacy = 0;
 	double civLevel = 0;
 	bool westernized = false;
@@ -102,6 +103,9 @@ struct ProcessedData
 	std::map<std::string, std::shared_ptr<Sector>> industrySectors;
 	double productionTechPercentile = 0;
 	double perCapitaDev = 0;
+
+	bool isHREmember = false;
+	bool isHREmperor = false;
 
 	std::string name;
 	std::string adjective;
@@ -157,6 +161,7 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getSubStates() const { return subStates; }
 	[[nodiscard]] const auto& getUnownedCoreSubStates() const { return unownedCoreSubStates; }
 	[[nodiscard]] const auto& getUnownedProvinces() const { return unownedProvinces; }
+	[[nodiscard]] bool getWasGP() const { return processedData.wasGP; }
 	void addSubState(const std::shared_ptr<SubState>& theSubState) { subStates.push_back(theSubState); }
 	void addUnownedCoreSubState(const std::shared_ptr<SubState>& theSubState) { unownedCoreSubStates.push_back(theSubState); }
 	void addUnownedProvinces(const std::set<std::string>& theProvinces) { unownedProvinces.insert(theProvinces.begin(), theProvinces.end()); }

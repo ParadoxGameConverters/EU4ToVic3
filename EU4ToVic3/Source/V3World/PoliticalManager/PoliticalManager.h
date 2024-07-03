@@ -8,6 +8,7 @@
 #include "CountryTierMapper/CountryTierMapper.h"
 #include "DatingData.h"
 #include "Diplomacy/Agreement.h"
+#include "Diplomacy/PowerBlock.h"
 #include "DiplomaticMapper/DiplomaticMapper.h"
 #include "IGIdeologiesMapper/IGIdeologiesMapper.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
@@ -121,6 +122,7 @@ class PoliticalManager
 	void incorporateStates(const mappers::CultureMapper& cultureMapper, const ClayManager& clayManager);
 	void designateTreatyPorts(const ClayManager& clayManager);
 	void distributeColonialClaims(const ClayManager& clayManager);
+	void createPowerBlocks();
 
 	// VN specifics
 	void importVNColonialDiplomacy(const ClayManager& clayManager);
@@ -138,6 +140,7 @@ class PoliticalManager
 
 	std::map<std::string, std::shared_ptr<Country>> countries;
 	std::vector<Agreement> agreements;
+	std::vector<PowerBlock> powerBlocks;
 
 	std::shared_ptr<mappers::CountryMapper> countryMapper;
 	mappers::PopulationSetupMapper populationSetupMapper;

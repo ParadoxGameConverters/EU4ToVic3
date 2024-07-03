@@ -628,6 +628,109 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 	Log(LogLevel::Info) << "<> Transcribed " << agreements.size() << " agreements.";
 }
 
+void V3::PoliticalManager::createPowerBlocks()
+{
+	// We ask if countries have subjects, and then make some determination based of their governing principles.
+	// The major exception is HRE, which we utterly ignore in this context and throw them manually into separate power block.
+
+	std::map<std::string, std::set<std::string>> ownerSubjects;
+	std::map<std::string, std::set<std::string>> mergedOwnerSubjects;
+	std::map<std::string, std::string> subjectOwner;
+	std::set<std::string> subjectTypes = {"dominion", "protectorate", "tributary", "personal_union", "puppet", "vassal"};
+	std::map<std::string, date> blockStartDates;
+
+	for (const auto& agreement: agreements)
+	{
+		auto first = countries.at(agreement.first);
+		auto second = countries.at(agreement.second);
+
+		// skip anything to do with HREmembers. They can't be members of any block but HRE. Their subjects also are NOT in HRE unless they are HREmembers.
+		if (first->getProcessedData().isHREmember || first->getProcessedData().isHREmperor)
+			continue;
+		if (second->getProcessedData().isHREmember || second->getProcessedData().isHREmperor)
+			continue;
+
+
+		if (subjectTypes.contains(agreement.type))
+		{
+			if (!ownerSubjects.contains(agreement.first))
+				ownerSubjects.emplace(agreement.first, std::set<std::string>{});
+			ownerSubjects.at(agreement.first).emplace(agreement.second);
+			subjectOwner.emplace(agreement.second, agreement.first);
+
+			// As for dating, only update if it's older than the current one we're processing.
+			if (!blockStartDates.contains(agreement.first))
+				blockStartDates.emplace(agreement.first, agreement.start_date);
+			// We're effectively saying the block started existing when the owner got its first subject, whomever it was.
+			if (blockStartDates.at(agreement.first) > agreement.start_date)
+				blockStartDates.at(agreement.first) = agreement.start_date;
+		}
+	}
+
+	// For subject chains, we need to throw everything under the overlord, including the owners.
+	for (const auto& [owner, subjects]: ownerSubjects)
+	{
+		if (subjects.contains(owner))
+		{
+			// This nation is both a subject and an owner, possibly a colonial nation or PU having own vassals.
+			auto overlord = subjectOwner.at(owner);
+			auto third = countries.at(overlord);
+
+			// If overlord is a HREmember, bail. Rest of the chain won't be a part of any block (they aren't in HRE unless they physically are HREmembers).
+			if (third->getProcessedData().isHREmember || third->getProcessedData().isHREmperor)
+				continue;
+
+			// Throw both owner and its subjects under the overlord.
+			if (!mergedOwnerSubjects.contains(overlord))
+				mergedOwnerSubjects.emplace(overlord, std::set<std::string>{});
+			mergedOwnerSubjects.at(overlord).emplace(owner);
+			mergedOwnerSubjects.at(overlord).insert(subjects.begin(), subjects.end());
+		}
+		else
+		{
+			mergedOwnerSubjects.emplace(owner, subjects);
+		}
+		// We'll be retaining the overlord's startDate of grabbing the original subject regardless of the subject's dates.
+	}
+
+	// Now throw everything into blocks.
+	for (const auto& [overlord, subjects]: mergedOwnerSubjects)
+	{
+		std::string blockType;
+		auto owner = countries.at(overlord);
+
+		// Are we, perchance, a revolutionary target?
+		if (owner->getSourceCountry()->isRevolutionary())
+		{
+			blockType = "identity_ideological_union";
+		}
+		// Or are we a native or tribal and a GP?
+		else if ((owner->getSourceCountry()->getGovernment() == "native" || owner->getSourceCountry()->getGovernment() == "tribal") && owner->getWasGP())
+		{
+			blockType = "identity_military_treaty_organization";
+		}
+		// Monarchies to empires
+		else if (owner->getSourceCountry()->getGovernment() == "monarchy" && owner->getWasGP())
+		{
+			blockType = "identity_sovereign_empire";
+		}
+		// Theologies to religious
+		else if (owner->getSourceCountry()->getGovernment() == "theocracy" && owner->getWasGP())
+		{
+			blockType = "identity_religious";
+		}
+		// Republics to trade_leagues
+		else if (owner->getSourceCountry()->getGovernment() == "republic" && owner->getWasGP())
+		{
+			blockType = "identity_trade_league";
+		}
+
+		powerBlocks.emplace_back(PowerBlock(overlord, subjects, blockType, blockStartDates.at(overlord)));
+	}
+
+	// Onto HRE.
+}
+
 void V3::PoliticalManager::convertRivals()
 {
 	Log(LogLevel::Info) << "-> Transcribing rivalries.";
