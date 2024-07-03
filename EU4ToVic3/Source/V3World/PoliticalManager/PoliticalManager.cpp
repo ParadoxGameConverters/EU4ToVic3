@@ -819,7 +819,7 @@ void V3::PoliticalManager::createHREPowerBloc(bool HREexists, bool decentralized
 
 	for (const auto& [tag, country]: countries)
 	{
-	  // Ignore dead people.
+		// Ignore dead people.
 		if (country->getSubStates().empty())
 			continue;
 
