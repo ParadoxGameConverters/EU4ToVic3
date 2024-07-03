@@ -139,7 +139,7 @@ class PoliticalManager
 	[[nodiscard]] bool isVanillaCountryAndLanded(const std::string& tag) const;
 	[[nodiscard]] bool isValidForColonialReplacement(const std::string& tag) const;
 	void changeTag(const std::string& replacement, const std::string& tag);
-	static [[nodiscard]] std::string generatePowerBlockSuffix(const std::string& tag, const std::string& identity);
+	[[nodiscard]] static std::string generatePowerBlockSuffix(const std::string& tag, const std::string& identity);
 
 	std::map<std::string, std::shared_ptr<Country>> countries;
 	std::vector<Agreement> agreements;
