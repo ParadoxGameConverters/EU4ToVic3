@@ -39,15 +39,34 @@ void outCountryRivals(std::ostream& output, const std::string& tag, const std::s
 
 void outCountryTruces(std::ostream& output, const std::string& tag, const std::map<std::string, int>& truces)
 {
-	output << "\tc:" << tag << " = {\n";
+	output << "\tc:" << tag << " ?= {\n";
 	for (const auto& [target, duration]: truces)
 	{
-		output << "\t\tcreate_truce = {\n";
+		output << "\t\tcreate_bidirectional_truce = {\n";
 		output << "\t\t\tcountry = c:" << target << "\n";
 		output << "\t\t\tmonths = " << duration << "\n";
 		output << "\t\t}\n";
 	}
 	output << "\t}\n";
+}
+
+void outPowerBloc(std::ostream& output, const V3::PowerBloc& bloc)
+{
+	output << "\tc:" << bloc.owner << " = {\n";
+	output << "\t\tcreate_power_bloc = {\n";
+	output << "\t\t\tname = " << bloc.name << "\n";
+	if (bloc.color)
+		output << "\t\t\tmap_color " << *bloc.color << "\n";
+	output << "\t\t\tfounding_date = " << bloc.start_date << "\n";
+	output << "\t\t\tidentity = " << bloc.identity << "\n";
+	output << "\t\t\tprinciple = " << bloc.principle << "\n";
+	output << "\t\t\t\n";
+	for (const auto& member: bloc.members)
+	{
+		output << "\t\t\tmember = c:" << member << "\n";
+	}
+	output << "\t\t}\n";
+	output << "\t}\n\n";
 }
 
 } // namespace
@@ -58,6 +77,7 @@ void OUT::exportDiplomacy(const std::string& outputName, const V3::PoliticalMana
 	exportRelations(outputName, politicalManager.getCountries());
 	exportRivals(outputName, politicalManager.getCountries());
 	exportTruces(outputName, politicalManager.getCountries());
+	exportPowerBlocs(outputName, politicalManager.getPowerBlocs());
 }
 
 void OUT::exportPacts(const std::string& outputName, const std::vector<V3::Agreement>& agreements)
@@ -145,4 +165,18 @@ void OUT::exportTruces(const std::string& outputName, const std::map<std::string
 
 	truces << "}\n";
 	truces.close();
+}
+
+void OUT::exportPowerBlocs(const std::string& outputName, const std::vector<V3::PowerBloc>& powerBlocs)
+{
+	std::ofstream blocs("output/" + outputName + "/common/history/power_blocs/00_power_blocs.txt");
+	if (!blocs.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/history/diplomacy/00_power_blocs.txt");
+
+	blocs << commonItems::utf8BOM << "POWER_BLOCS = {\n";
+	for (const auto& bloc: powerBlocs)
+		outPowerBloc(blocs, bloc);
+
+	blocs << "}\n";
+	blocs.close();
 }

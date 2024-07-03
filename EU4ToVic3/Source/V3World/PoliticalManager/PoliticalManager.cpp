@@ -628,23 +628,26 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 	Log(LogLevel::Info) << "<> Transcribed " << agreements.size() << " agreements.";
 }
 
-void V3::PoliticalManager::createPowerBlocks()
+void V3::PoliticalManager::createPowerBlocs()
 {
+
+	Log(LogLevel::Info) << "-> Creating Power Blocs.";
+
 	// We ask if countries have subjects, and then make some determination based of their governing principles.
-	// The major exception is HRE, which we utterly ignore in this context and throw them manually into separate power block.
+	// The major exception is HRE, which we utterly ignore in this context and throw them manually into separate power bloc.
 
 	std::map<std::string, std::set<std::string>> ownerSubjects;
 	std::map<std::string, std::set<std::string>> mergedOwnerSubjects;
 	std::map<std::string, std::string> subjectOwner;
 	std::set<std::string> subjectTypes = {"dominion", "protectorate", "tributary", "personal_union", "puppet", "vassal"};
-	std::map<std::string, date> blockStartDates;
+	std::map<std::string, date> blocStartDates;
 
 	for (const auto& agreement: agreements)
 	{
 		auto first = countries.at(agreement.first);
 		auto second = countries.at(agreement.second);
 
-		// skip anything to do with HREmembers. They can't be members of any block but HRE. Their subjects also are NOT in HRE unless they are HREmembers.
+		// skip anything to do with HREmembers. They can't be members of any bloc but HRE. Their subjects also are NOT in HRE unless they are HREmembers.
 		if (first->getProcessedData().isHREmember || first->getProcessedData().isHREmperor)
 			continue;
 		if (second->getProcessedData().isHREmember || second->getProcessedData().isHREmperor)
@@ -659,11 +662,11 @@ void V3::PoliticalManager::createPowerBlocks()
 			subjectOwner.emplace(agreement.second, agreement.first);
 
 			// As for dating, only update if it's older than the current one we're processing.
-			if (!blockStartDates.contains(agreement.first))
-				blockStartDates.emplace(agreement.first, agreement.start_date);
+			if (!blocStartDates.contains(agreement.first))
+				blocStartDates.emplace(agreement.first, agreement.start_date);
 			// We're effectively saying the block started existing when the owner got its first subject, whomever it was.
-			if (blockStartDates.at(agreement.first) > agreement.start_date)
-				blockStartDates.at(agreement.first) = agreement.start_date;
+			if (blocStartDates.at(agreement.first) > agreement.start_date)
+				blocStartDates.at(agreement.first) = agreement.start_date;
 		}
 	}
 
@@ -676,7 +679,7 @@ void V3::PoliticalManager::createPowerBlocks()
 			auto overlord = subjectOwner.at(owner);
 			auto third = countries.at(overlord);
 
-			// If overlord is a HREmember, bail. Rest of the chain won't be a part of any block (they aren't in HRE unless they physically are HREmembers).
+			// If overlord is a HREmember, bail. Rest of the chain won't be a part of any bloc (they aren't in HRE unless they physically are HREmembers).
 			if (third->getProcessedData().isHREmember || third->getProcessedData().isHREmperor)
 				continue;
 
@@ -693,42 +696,173 @@ void V3::PoliticalManager::createPowerBlocks()
 		// We'll be retaining the overlord's startDate of grabbing the original subject regardless of the subject's dates.
 	}
 
-	// Now throw everything into blocks.
+	// Now throw everything into blocs.
 	for (const auto& [overlord, subjects]: mergedOwnerSubjects)
 	{
-		std::string blockType;
+		std::string identity;
+		std::string principle;
+		std::string locSuffix;
+
 		auto owner = countries.at(overlord);
+		// Ignore dead people.
+		if (owner->getSubStates().empty())
+			continue;
 
 		// Are we, perchance, a revolutionary target?
 		if (owner->getSourceCountry()->isRevolutionary())
 		{
-			blockType = "identity_ideological_union";
+			identity = "identity_ideological_union";
+			principle = "principle_aggressive_coordination_2";
+			locSuffix = generatePowerBlockSuffix(overlord, identity);
 		}
 		// Or are we a native or tribal and a GP?
 		else if ((owner->getSourceCountry()->getGovernment() == "native" || owner->getSourceCountry()->getGovernment() == "tribal") && owner->getWasGP())
 		{
-			blockType = "identity_military_treaty_organization";
+			identity = "identity_military_treaty_organization";
+			principle = "principle_defensive_cooperation_2";
+			locSuffix = generatePowerBlockSuffix(overlord, identity);
 		}
 		// Monarchies to empires
 		else if (owner->getSourceCountry()->getGovernment() == "monarchy" && owner->getWasGP())
 		{
-			blockType = "identity_sovereign_empire";
+			identity = "identity_sovereign_empire";
+			principle = "principle_vassalization_1";
+			locSuffix = generatePowerBlockSuffix(overlord, identity);
 		}
 		// Theologies to religious
 		else if (owner->getSourceCountry()->getGovernment() == "theocracy" && owner->getWasGP())
 		{
-			blockType = "identity_religious";
+			identity = "identity_religious";
+			principle = "principle_divine_economics_1";
+			locSuffix = generatePowerBlockSuffix(overlord, identity);
 		}
 		// Republics to trade_leagues
 		else if (owner->getSourceCountry()->getGovernment() == "republic" && owner->getWasGP())
 		{
-			blockType = "identity_trade_league";
+			identity = "identity_trade_league";
+			principle = "principle_internal_trade_1";
+			locSuffix = generatePowerBlockSuffix(overlord, identity);
 		}
 
-		powerBlocks.emplace_back(PowerBlock(overlord, subjects, blockType, blockStartDates.at(overlord)));
+		// Overlord's block just wasn't good enough to become an actual block. This is fine.
+		if (identity.empty())
+			continue;
+
+		// Fix leftover blockers.
+		bool bail = false;
+		owner->leaveIsolationism();
+		for (const auto& tag: subjects)
+		{
+			auto subject = countries.at(tag);
+			subject->leaveIsolationism();
+			// Ignore dead people.
+			if (subject->getSubStates().empty())
+				bail = true;
+		}
+		if (bail)
+			continue;
+
+		auto bloc = PowerBloc(overlord, subjects, identity, overlord + "_BLOC", principle, owner->getProcessedData().color, blocStartDates.at(overlord));
+
+		// Let's briefly consider localization. In English only. Let's not even pretend we can dynamically generate bloc names for non-english.
+		const std::set<std::string> knownVic3Localizations =
+			 {"braz_por", "english", "french", "german", "japanese", "korean", "polish", "russian", "simp_chinese", "spanish", "turkish"};
+
+		for (const auto& locLanguage: knownVic3Localizations)
+		{
+			bloc.localizations.emplace(locLanguage, owner->getAdjective("english") + " " + locSuffix);
+		}
+
+		powerBlocs.emplace_back(bloc);
+	}
+	Log(LogLevel::Info) << "<> Crafted " << powerBlocs.size() << " power blocs.";
+	// Onto HRE.
+}
+
+std::string V3::PoliticalManager::generatePowerBlockSuffix(const std::string& tag, const std::string& identity)
+{
+	std::vector<std::string> empireNames = {"Empire", "Imperium", "United Front", "Association", "Dominion", "Imperial Circle", "Grand Coalition", "Expanse"};
+	std::vector<std::string> theocracyNames = {"Holy League", "Union", "Virtuous League", "Crusade", "League of the Faithful", "Harmony"};
+	std::vector<std::string> republicanNames = {"Syndicate", "Convention", "Trade Pact", "Customs Group", "Financial Bloc", "Import Export"};
+	std::vector<std::string> defensiveNames = {"Coalition", "Response Force", "Preventionist League", "Defensive Alliance", "Strategic Confederation"};
+	std::vector<std::string> ideologicalNames = {"League for Truth", "Congress", "Normalization Pact", "Pacification League", "Convention"};
+	std::string locSuffix;
+
+	int pick = tag[0] * 23 + tag[1] * 13 + tag[2] * 7 + 11; // Why the hell not. I will die on this hill.
+
+	if (identity == "identity_sovereign_empire")
+		return empireNames[pick % static_cast<int>(empireNames.size())];
+	if (identity == "identity_religious")
+		return theocracyNames[pick % static_cast<int>(theocracyNames.size())];
+	if (identity == "identity_trade_league")
+		return republicanNames[pick % static_cast<int>(republicanNames.size())];
+	if (identity == "identity_military_treaty_organization")
+		return defensiveNames[pick % static_cast<int>(defensiveNames.size())];
+	if (identity == "identity_ideological_union")
+		return ideologicalNames[pick % static_cast<int>(ideologicalNames.size())];
+
+	return "Joint Mass-Confederate Coalition of Force";
+}
+
+void V3::PoliticalManager::createHREPowerBloc(bool HREexists, bool decentralized)
+{
+	Log(LogLevel::Info) << "-> Creating HREBloc.";
+
+	if (!HREexists)
+	{
+		Log(LogLevel::Info) << "<> No HREmperor detected.";
+		return;
 	}
 
-	// Onto HRE.
+	std::set<std::string> members;
+	std::string emperor;
+
+	for (const auto& [tag, country]: countries)
+	{
+	  // Ignore dead people.
+		if (country->getSubStates().empty())
+			continue;
+
+		if (country->getProcessedData().isHREmperor)
+		{
+			emperor = tag;
+			continue;
+		}
+		if (country->getProcessedData().isHREmember)
+		{
+			members.emplace(tag);
+		}
+	}
+
+	if (members.empty())
+	{
+		Log(LogLevel::Info) << "<> No HRE members means no HRE.";
+		return;
+	}
+
+	if (emperor.empty())
+	{
+		Log(LogLevel::Warning) << "<> HRE exists but no emperor? Bailing!";
+		return;
+	}
+
+	std::string identity;
+	std::string principle;
+	if (decentralized)
+	{
+		identity = "identity_military_treaty_organization";
+		principle = "principle_defensive_cooperation_2";
+	}
+	else
+	{
+		identity = "identity_sovereign_empire";
+		principle = "principle_vassalization_2";
+	}
+
+	powerBlocs.emplace_back(
+		 PowerBloc(emperor, members, identity, "HOLY_ROMAN_EMPIRE_BLOC", principle, commonItems::Color(std::array<int, 3>{150, 177, 161}), date("962.2.2")));
+
+	Log(LogLevel::Info) << "<> HREBloc created, " << members.size() << " members, emperor " << emperor << ".";
 }
 
 void V3::PoliticalManager::convertRivals()

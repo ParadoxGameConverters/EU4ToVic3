@@ -9,6 +9,7 @@ void exportPacts(const std::string& outputName, const std::vector<V3::Agreement>
 void exportRelations(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries);
 void exportRivals(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries);
 void exportTruces(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries);
+void exportPowerBlocs(const std::string& outputName, const std::vector<V3::PowerBloc>& powerBlocs);
 } // namespace OUT
 
 #endif // OUT_DIPLOMACY_H
