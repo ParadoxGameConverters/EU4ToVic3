@@ -17,7 +17,7 @@ void EU4::Leader::parseRuler(std::istream& theStream)
 	clearRegisteredKeywords();
 
 	// Patch for oddities.
-	if (character.name.contains(','))
+	if (character.name.find(',') != std::string::npos)
 	{
 		const auto ret = std::ranges::remove(character.name, ',');
 	}
