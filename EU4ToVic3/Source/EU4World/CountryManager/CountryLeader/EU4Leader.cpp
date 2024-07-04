@@ -19,7 +19,7 @@ void EU4::Leader::parseRuler(std::istream& theStream)
 	// Patch for oddities.
 	if (character.name.find(',') != std::string::npos)
 	{
-		const auto ret = std::ranges::remove(character.name, ',');
+		character.name.erase(std::remove(character.name.begin(), character.name.end(), ','), character.name.end());
 	}
 }
 
