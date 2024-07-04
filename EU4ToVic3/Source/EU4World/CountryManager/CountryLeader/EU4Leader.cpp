@@ -15,6 +15,12 @@ void EU4::Leader::parseRuler(std::istream& theStream)
 	registerKeys();
 	rulerParser.parseStream(theStream);
 	clearRegisteredKeywords();
+
+	// Patch for oddities.
+	if (character.name.contains(','))
+	{
+		const auto ret = std::ranges::remove(character.name, ',');
+	}
 }
 
 void EU4::Leader::registerKeys()
