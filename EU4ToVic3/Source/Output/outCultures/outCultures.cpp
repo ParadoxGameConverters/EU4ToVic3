@@ -80,6 +80,30 @@ void outCulture(std::ostream& output, const mappers::CultureDef& culture)
 		output << "\tgraphics = " << culture.graphics << "\n";
 	output << "}\n\n";
 }
+
+void outCultureStaticModifiers(std::ostream& output, const mappers::CultureDef& culture)
+{
+	output << culture.name << "_standard_of_living_modifier_positive = {\n";
+	output << "\ticon = \"gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds\"\n";
+	output << "\tstate_" << culture.name << "_standard_of_living_add = 1\n";
+	output << "}\n";
+	output << culture.name << "_standard_of_living_modifier_negative = {\n";
+	output << "\ticon = \"gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds\"\n";
+	output << "\tstate_" << culture.name << "_standard_of_living_add = 1\n";
+	output << "}\n\n";
+}
+
+void outCultureModifierTypeDefs(std::ostream& output, const mappers::CultureDef& culture)
+{
+	output << "state_" << culture.name << "_standard_of_living_add = {\n";
+	output << "\tdecimals=1\n";
+	output << "\tcolor=good\n";
+	output << "\tgame_data={\n";
+	output << "\t\tai_value=0\n";
+	output << "\t}\n";
+	output << "}\n\n";
+}
+
 } // namespace
 
 void OUT::exportCultures(const std::string& outputName, const std::map<std::string, mappers::CultureDef>& cultures)
@@ -87,16 +111,33 @@ void OUT::exportCultures(const std::string& outputName, const std::map<std::stri
 	std::ofstream output("output/" + outputName + "/common/cultures/99_converted_cultures.txt");
 	if (!output.is_open())
 		throw std::runtime_error("Could not create " + outputName + "/common/religions/99_converted_cultures.txt");
+	std::ofstream outputCultureStatics("output/" + outputName + "/common/static_modifiers/99_converted_cultures_static_modifiers.txt");
+	if (!outputCultureStatics.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/static_modifiers/99_converted_cultures_static_modifiers.txt");
+	std::ofstream outputCultureModifierTypes("output/" + outputName + "/common/modifier_type_definitions/99_converted_cultures_modifier_type_defs.txt");
+	if (!outputCultureModifierTypes.is_open())
+		throw std::runtime_error("Could not create " + outputName + "/common/modifier_type_definitions/99_converted_cultures_modifier_type_defs.txt");
 
 	output << commonItems::utf8BOM << "\n";
+	outputCultureStatics << commonItems::utf8BOM << "\n";
+	outputCultureModifierTypes << commonItems::utf8BOM << "\n";
 	for (const auto& culture: cultures | std::views::values)
 	{
+		// We need statics no matter what.
+		outCultureStaticModifiers(outputCultureStatics, culture);
+		outCultureModifierTypeDefs(outputCultureModifierTypes, culture);
+
+		// but for already present cultures in blankmod or DW, we don't want to double them.
 		if (culture.skipExport)
 			continue;
 		outCulture(output, culture);
 	}
 	output << "\n";
 	output.close();
+	outputCultureStatics << "\n";
+	outputCultureStatics.close();
+	outputCultureModifierTypes << "\n";
+	outputCultureModifierTypes.close();
 
 	// Copy over Decentralized World discrimination traits
 	auto files = commonItems::GetAllFilesInFolder("configurables/decentralized_world/common/discrimination_traits/");
