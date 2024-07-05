@@ -1,0 +1,49 @@
+﻿namespace = tibet_expedition_events
+tibet_expedition_events.3 = { #Expedition Arrives
+	type = country_event
+    placement = ROOT
+
+    title = tibet_expedition_events.3.t
+    desc = tibet_expedition_events.3.d
+    flavor = tibet_expedition_events.3.f
+
+    duration = 3
+
+	event_image = {
+		video = "ep1_ca_mountain_pass_military"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	
+	immediate = {
+		
+		random_scope_character = {
+			limit = { has_variable = expedition_leader_var }
+			save_scope_as = expedition_leader
+		}
+	}
+
+	cancellation_trigger = {
+		OR = {
+			NOT = {
+				any_scope_character = {
+					has_variable = expedition_leader_var
+				}
+			}
+			NOT = {
+				exists = c:TIB
+			}
+		}
+	}
+
+	option = {
+		name = tibet_expedition_events.3.a
+		default_option = yes
+		add_journal_entry = {
+			type = je_tibet_expedition
+		}
+		set_variable = tibet_has_started
+	}
+}
