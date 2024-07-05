@@ -57,7 +57,6 @@
 						pop_employment_building_group = bg_fishing
 						pop_employment_building_group = bg_whaling
 						pop_employment_building_group = bg_manor_houses
-
 					}
 				}
 				value = 100
@@ -217,18 +216,63 @@
 	}
 
 	female_commander_chance = {
-		### Converter ###
-		value = ig_female_general_chance
+		value = 0.0
 	}
 
 	female_politician_chance = {
-		### Converter ###
-		value = ig_female_politician_chance_moderate
+		value = 0.0
+
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_womens_suffrage
+				}
+
+			}
+			add = {
+				value = 0.025
+			}
+		}
 	}
 
 	female_agitator_chance = {
-		### Converter ###
-		value = ig_female_agitator_chance_moderate
+		value = 0.025
+		
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_women_own_property
+				}
+
+			}
+			add = {
+				value = 0.025
+			}
+		}	
+		
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_women_in_the_workplace
+				}
+
+			}
+			add = {
+				value = 0.025
+			}
+		}
+
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_womens_suffrage
+				}
+
+			}
+			add = {
+				value = 0.025
+			}
+		}		
 	}
 
 	# The chance that a commander belonging to this IG takes over leadership when it changes

@@ -34,7 +34,7 @@ zzz_cc_australia.1 = {
 		scope:is_australia_scope = { trigger_event = zzz_cc_australia.2 }
 		show_as_tooltip = {
 			scope:australia_annex_state_scope = { set_state_owner = scope:is_australia_scope }
-			create_truce = { country = scope:is_australia_scope months = 60 }
+			create_bidirectional_truce = { country = scope:is_australia_scope months = 60 }
 		}
 	}
 	
@@ -110,7 +110,7 @@ zzz_cc_australia.2 = {
 		name = zzz_cc_australia.2.a
 		default_option = yes
 		scope:australia_annex_state_scope = { set_state_owner = scope:is_australia_scope }
-		create_truce = { country = scope:australia_annex_scope months = 120 }
+		create_bidirectional_truce = { country = scope:australia_annex_scope months = 120 }
 	}
 }
 

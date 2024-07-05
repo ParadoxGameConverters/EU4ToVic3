@@ -126,7 +126,7 @@ zzz_cc_canada.1 = {
 			scope:is_canada_scope = { trigger_event = zzz_cc_canada.3 }
 			show_as_tooltip = {
 				scope:canada_annex_state_scope = { set_state_owner = scope:is_canada_scope }
-				create_truce = { country = scope:is_canada_scope months = 60 }
+				create_bidirectional_truce = { country = scope:is_canada_scope months = 60 }
 			}
 		}
 		
@@ -178,7 +178,7 @@ zzz_cc_canada.1 = {
 			name = zzz_cc_canada.3.a
 			default_option = yes
 			scope:canada_annex_state_scope = { set_state_owner = scope:is_canada_scope }
-			create_truce = { country = scope:canada_annex_scope months = 120 }
+			create_bidirectional_truce = { country = scope:canada_annex_scope months = 120 }
 		}
 	}
 	
