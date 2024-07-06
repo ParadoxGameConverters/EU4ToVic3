@@ -1,1 +1,116 @@
-﻿
+﻿objective_economic_dominance = {
+	enabled_background = "gfx/interface/icons/objectives/economic_dominance_illu.dds"
+	icon = "gfx/interface/icons/objectives/economic_dominance.dds"
+	
+	recommended_tags = {}
+	
+	objective_subgoals = {
+		sg_expand_goods_production #rework
+
+		sg_refining_goods #rework, make X number in single, state loc for status
+		sg_specialized_goods #rework, make X number in single state, state loc for status
+		sg_expanding_the_market #rework, add subjects and customs union
+
+		sg_specialized_inputs #missing: LOC
+		sg_exporting_profits #missing: LOC
+		sg_utilizing_our_strength #missing: LOC
+		sg_raise_exports_value #missing: LOC
+		sg_lower_production_costs #missing: LOC
+
+		sg_strong_market #Keep
+	}
+	
+	final_subgoal = sg_strong_market
+	
+	on_start = {
+		start_tutorial_lesson = { tutorial_lesson = economic_dominance }
+	}
+}
+
+objective_hegemon = {
+	enabled_background = "gfx/interface/icons/objectives/hegemon_illu.dds"
+	icon = "gfx/interface/icons/objectives/hegemon.dds"
+	
+	recommended_tags = {}	
+	
+	objective_subgoals = {
+		sg_colonization_laws
+		sg_african_colonies
+		sg_expand_navy_and_army
+		sg_form_alliance
+		sg_take_subject
+		sg_increase_technology
+		sg_greatest_power
+		sg_greater_power
+		sg_great_power
+		sg_unrecognized_power
+		sg_the_hegemon
+	}
+	
+	final_subgoal = sg_the_hegemon
+	
+	on_start = {
+		start_tutorial_lesson = { tutorial_lesson = hegemon }
+	}
+}
+	
+objective_egalitarian_society = {
+	enabled_background = "gfx/interface/icons/objectives/egalitarian_society_illu.dds"
+	icon = "gfx/interface/icons/objectives/egalitarian_society.dds"
+	
+	recommended_tags = {}	
+	
+	objective_subgoals = {
+		sg_encourage_liberal_ideas
+		sg_pass_laws
+		sg_public_services
+		sg_liberate_the_slaves
+		sg_women_and_children
+		sg_egalitarian_society
+	}
+	
+	final_subgoal = sg_egalitarian_society
+	
+	on_start = {
+		start_tutorial_lesson = { tutorial_lesson = egalitarian_society }
+	}
+}
+
+objective_great_game = {
+	enabled_background = "gfx/interface/icons/objectives/great_game_illu.dds"
+	disabled_background = "gfx/interface/icons/objectives/great_game_illu_dis.dds"
+	icon = "gfx/interface/icons/objectives/great_game.dds"
+	
+	recommended_tags = {}
+	available_for_all_countries = no
+	
+	objective_subgoals = {
+		sg_great_game
+		sg_maintain_afghan_protectorate
+		sg_consolidate_afghanistan
+		sg_unify_afghanistan
+		sg_disrupt_russian_caucasus
+		sg_counter_russian_pacific_influence
+		sg_consolidate_british_india
+		sg_repulse_russian_pamirs
+		sg_secure_persian_border
+		sg_pacify_kazakh_steppe
+		sg_codify_chinese_border
+		sg_consolidate_central_asia
+		sg_acquire_chinese_concessions
+		sg_acquire_korean_protectorate
+		sg_expand_eastern_frontier
+		sg_secure_influence_over_persia
+		sg_consolidate_persia
+		sg_achieve_sovereignty
+		sg_secure_tibet
+	}
+	
+	final_subgoal = sg_great_game
+	
+	on_start = {
+
+	}
+	
+	required_dlc_feature = ep1_content
+}

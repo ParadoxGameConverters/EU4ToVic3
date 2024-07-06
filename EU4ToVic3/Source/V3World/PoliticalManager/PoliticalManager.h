@@ -8,6 +8,7 @@
 #include "CountryTierMapper/CountryTierMapper.h"
 #include "DatingData.h"
 #include "Diplomacy/Agreement.h"
+#include "Diplomacy/PowerBloc.h"
 #include "DiplomaticMapper/DiplomaticMapper.h"
 #include "IGIdeologiesMapper/IGIdeologiesMapper.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
@@ -121,6 +122,9 @@ class PoliticalManager
 	void incorporateStates(const mappers::CultureMapper& cultureMapper, const ClayManager& clayManager);
 	void designateTreatyPorts(const ClayManager& clayManager);
 	void distributeColonialClaims(const ClayManager& clayManager);
+	void createPowerBlocs();
+	void createHREPowerBloc(bool HREexists, bool decentralized);
+	[[nodiscard]] const auto& getPowerBlocs() const { return powerBlocs; }
 
 	// VN specifics
 	void importVNColonialDiplomacy(const ClayManager& clayManager);
@@ -135,9 +139,11 @@ class PoliticalManager
 	[[nodiscard]] bool isVanillaCountryAndLanded(const std::string& tag) const;
 	[[nodiscard]] bool isValidForColonialReplacement(const std::string& tag) const;
 	void changeTag(const std::string& replacement, const std::string& tag);
+	[[nodiscard]] static std::string generatePowerBlockSuffix(const std::string& tag, const std::string& identity);
 
 	std::map<std::string, std::shared_ptr<Country>> countries;
 	std::vector<Agreement> agreements;
+	std::vector<PowerBloc> powerBlocs;
 
 	std::shared_ptr<mappers::CountryMapper> countryMapper;
 	mappers::PopulationSetupMapper populationSetupMapper;

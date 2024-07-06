@@ -157,7 +157,9 @@ communism.2 = {
 	}
 	option = { # vanguardism
 		name = communism.2.a
-		default_option = yes
+		trigger = {
+			has_technology_researched = political_agitation
+		}
 		ig:ig_trade_unions = {
 			set_variable = chose_vanguardism
 		}
@@ -217,6 +219,7 @@ communism.2 = {
 	}
 	option = { # communism
 		name = communism.2.b
+		default_option = yes
 		trigger = {
 			OR = {
 				NOT = { exists = c:RUS }
@@ -399,6 +402,7 @@ communism.3 = {
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 
 	trigger = {
+		has_technology_researched = political_agitation
 		any_interest_group = {
 			is_marginal = yes
 			OR = {
@@ -760,46 +764,31 @@ communism.9 = {
 
 	trigger = {
 		has_law = law_type:law_council_republic
-		any_scope_state = {
-			is_incorporated = yes
-			NOT = { has_modifier = coop_loyalty_modifier }
-			NOT = { has_modifier = coop_migration_modifier }
-			any_scope_pop = {
-				pop_is_discriminated = no
-				standard_of_living > 15
-				workplace ?= {
-					OR = {
-					    has_active_production_method = pm_worker_cooperative_building_food_industry
-					    has_active_production_method = pm_worker_cooperative_building_textile_mills
-					    has_active_production_method = pm_worker_cooperative_building_furniture_manufacturies
-					    has_active_production_method = pm_worker_cooperative_building_glassworks
-					    has_active_production_method = pm_worker_cooperative_building_tooling_workshops
-					    has_active_production_method = pm_worker_cooperative_building_paper_mills
-					    has_active_production_method = pm_worker_cooperative_building_shipyards
-					    has_active_production_method = pm_worker_cooperative_building_arms_industry
-					    has_active_production_method = pm_worker_cooperative_farm
-					    has_active_production_method = pm_worker_cooperative_building_logging_camp
-					    has_active_production_method = pm_worker_cooperative_building_fishing_wharf
-					    has_active_production_method = pm_worker_cooperative_building_whaling_station
-					    has_active_production_method = pm_worker_cooperative_plantation
-					    has_active_production_method = pm_worker_cooperative_industry
-					    has_active_production_method = pm_worker_cooperative_building_coal_mine
-					    has_active_production_method = pm_worker_cooperative_building_iron_mine
-					    has_active_production_method = pm_worker_cooperative_building_lead_mine
-					    has_active_production_method = pm_worker_cooperative_building_sulfur_mine
-                    }
-					cash_reserves_ratio > 0.25
-					weekly_profit > 5
-					occupancy >= 0.95
-					level >= 5
-				}
-			}
-		}
-	}
+		has_law = law_type:law_cooperative_ownership
+ 		any_scope_state = {
+ 			is_incorporated = yes
+ 			NOT = { has_modifier = coop_loyalty_modifier }
+ 			NOT = { has_modifier = coop_migration_modifier }
+ 			any_scope_pop = {
+ 				pop_is_discriminated = no
+ 				standard_of_living > 15
+ 				workplace ?= {
+					NOR = {
+						is_building_type = building_manor_house
+						is_building_type = building_financial_district
+					}
+ 					cash_reserves_ratio > 0.25
+ 					weekly_profit > 5
+ 					occupancy >= 0.95
+ 					level >= 5
+ 				}
+ 			}
+ 		}
+ 	}
 
-	immediate = {
-		random_scope_state = {
-			limit = {
+ 	immediate = {
+ 		random_scope_state = {
+ 			limit = {
 				is_incorporated = yes
 				NOT = { has_modifier = coop_loyalty_modifier }
 				NOT = { has_modifier = coop_migration_modifier }
@@ -807,94 +796,62 @@ communism.9 = {
 					pop_is_discriminated = no
 					standard_of_living > 15
 					workplace ?= {
-						OR = {
-                            has_active_production_method = pm_worker_cooperative_building_food_industry
-                            has_active_production_method = pm_worker_cooperative_building_textile_mills
-                            has_active_production_method = pm_worker_cooperative_building_furniture_manufacturies
-                            has_active_production_method = pm_worker_cooperative_building_glassworks
-                            has_active_production_method = pm_worker_cooperative_building_tooling_workshops
-                            has_active_production_method = pm_worker_cooperative_building_paper_mills
-                            has_active_production_method = pm_worker_cooperative_building_shipyards
-                            has_active_production_method = pm_worker_cooperative_building_arms_industry
-                            has_active_production_method = pm_worker_cooperative_farm
-                            has_active_production_method = pm_worker_cooperative_building_logging_camp
-                            has_active_production_method = pm_worker_cooperative_building_fishing_wharf
-                            has_active_production_method = pm_worker_cooperative_building_whaling_station
-                            has_active_production_method = pm_worker_cooperative_plantation
-                            has_active_production_method = pm_worker_cooperative_industry
-                            has_active_production_method = pm_worker_cooperative_building_coal_mine
-                            has_active_production_method = pm_worker_cooperative_building_iron_mine
-                            has_active_production_method = pm_worker_cooperative_building_lead_mine
-                            has_active_production_method = pm_worker_cooperative_building_sulfur_mine
-                        }
+						NOR = {
+							is_building_type = building_manor_house
+							is_building_type = building_financial_district
+						}
 						cash_reserves_ratio > 0.25
 						weekly_profit > 5
 						occupancy >= 0.95
 						level >= 5
 					}
 				}
-			}
-			save_scope_as = coop_state
-			random_scope_pop = {
-				limit = {
+ 			}
+ 			save_scope_as = coop_state
+ 			random_scope_pop = {
+ 				limit = {
 					pop_is_discriminated = no
 					standard_of_living > 15
 					workplace ?= {
-						OR = {
-                            has_active_production_method = pm_worker_cooperative_building_food_industry
-                            has_active_production_method = pm_worker_cooperative_building_textile_mills
-                            has_active_production_method = pm_worker_cooperative_building_furniture_manufacturies
-                            has_active_production_method = pm_worker_cooperative_building_glassworks
-                            has_active_production_method = pm_worker_cooperative_building_tooling_workshops
-                            has_active_production_method = pm_worker_cooperative_building_paper_mills
-                            has_active_production_method = pm_worker_cooperative_building_shipyards
-                            has_active_production_method = pm_worker_cooperative_building_arms_industry
-                            has_active_production_method = pm_worker_cooperative_farm
-                            has_active_production_method = pm_worker_cooperative_building_logging_camp
-                            has_active_production_method = pm_worker_cooperative_building_fishing_wharf
-                            has_active_production_method = pm_worker_cooperative_building_whaling_station
-                            has_active_production_method = pm_worker_cooperative_plantation
-                            has_active_production_method = pm_worker_cooperative_industry
-                            has_active_production_method = pm_worker_cooperative_building_coal_mine
-                            has_active_production_method = pm_worker_cooperative_building_iron_mine
-                            has_active_production_method = pm_worker_cooperative_building_lead_mine
-                            has_active_production_method = pm_worker_cooperative_building_sulfur_mine
-                        }
+						NOR = {
+							is_building_type = building_manor_house
+							is_building_type = building_financial_district
+						}
 						cash_reserves_ratio > 0.25
 						weekly_profit > 5
 						occupancy >= 0.95
 						level >= 5
 					}
-				}
-				save_scope_as = coop_pop
-				workplace = {
-					save_scope_as = coop_building
-				}
-			}
-		}
-	}
+ 				}
+ 				save_scope_as = coop_pop
+ 				workplace = {
+ 					save_scope_as = coop_building
+ 				}
+ 			}
+ 		}
+ 	}
 
-	option = {
-		name = communism.9.a
-		default_option = yes
-		scope:coop_state = {
-			add_modifier = {
-				name = coop_loyalty_modifier
-				months = normal_modifier_time
-			}
-		}
-	}
+ 	option = {
+ 		name = communism.9.a
+ 		default_option = yes
+ 		scope:coop_state = {
+ 			add_modifier = {
+ 				name = coop_loyalty_modifier
+ 				months = normal_modifier_time
+ 			}
+ 		}
+ 	}
 
-	option = {
-		name = communism.9.b
-		scope:coop_state = {
-			add_modifier = {
-				name = coop_migration_modifier
-				months = normal_modifier_time
-			}
-		}
-	}
-}
+ 	option = {
+ 		name = communism.9.b
+ 		scope:coop_state = {
+ 			add_modifier = {
+ 				name = coop_migration_modifier
+ 				months = normal_modifier_time
+ 			}
+ 		}
+ 	}
+ }
 
 # Startup event 1
 communism.10 = {
@@ -916,10 +873,6 @@ communism.10 = {
 
 	trigger = {
 		# triggered by communsim JE 1
-	}
-
-	immediate = {
-		set_variable = { name = communism_je_1_var value = 25 }
 	}
 
 	option = {

@@ -36,6 +36,7 @@ class World: commonItems::parser
 	[[nodiscard]] const auto& getEU4Localizations() const { return countryManager.getLocalizationLoader(); }
 	[[nodiscard]] const auto& getDatingData() const { return datingData; }
 	[[nodiscard]] const auto& getEU4ModFS() const { return modFS; }
+	[[nodiscard]] const auto& getHREmperor() const { return HREmperor; }
 
   private:
 	void registerKeys(const std::shared_ptr<Configuration>& theConfiguration, const commonItems::ConverterVersion& converterVersion);

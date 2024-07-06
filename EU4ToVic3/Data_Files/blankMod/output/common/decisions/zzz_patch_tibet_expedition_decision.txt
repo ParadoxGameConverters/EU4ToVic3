@@ -1,0 +1,90 @@
+﻿tibet_expedition = {
+	is_shown = {		
+		NOT = { c:TIB ?= this }
+		c:TIB ?= { 
+			exists = yes 
+			is_country_type = unrecognized
+			NOT = { country_rank >= rank_value:great_power }
+		}
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+		NOT = { has_variable = on_expedition }		
+		has_technology_researched = colonization
+		NOT = { has_global_variable = tibet_expedition_completed }
+		NOT = { has_variable = tibet_expedition_var }
+		OR = {
+			is_ai = no
+			NOT = { has_variable = ai_expedition_cooldown }
+		}		
+	}
+	
+	possible = {
+		is_at_war = no	
+		NOT = {
+			c:TIB ?= {
+				OR = {
+					is_subject_of = ROOT
+					top_overlord ?= {
+						OR = {
+							country_rank >= rank_value:great_power
+							NOT = { is_country_type = unrecognized }
+						}
+					}
+				}
+			}
+		}
+		NOT = { has_modifier = tibetan_fiasco }
+		country_rank >= rank_value:great_power
+		has_interest_marker_in_region = region_himalayas
+		any_scope_character = {
+			OR = {
+				has_role = general
+				has_role = admiral
+			}	
+			count >= 3
+		}
+		has_technology_researched = civilizing_mission
+	}
+	
+	when_taken = {
+		trigger_event = { id = tibet_expedition_events.1 popup = yes }
+		set_variable = {
+			name = on_expedition
+			value = yes
+		}
+		hidden_effect = {
+			set_variable = {
+				name = ai_expedition_cooldown
+				value = yes
+				days = 1825
+			}	
+			set_variable = tibet_expedition_var	
+		}		
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			trigger = { 
+				weekly_net_fixed_income > money_amount_multiplier_medium
+				gold_reserves > 0		
+			}
+			add = 1
+		}
+		modifier = {
+			trigger = {
+				has_strategy = ai_strategy_armed_isolationism
+			}
+			add = -1000
+		}		
+		modifier = {
+			OR = {
+				is_diplomatic_play_committed_participant = yes
+				is_at_war = yes
+			}
+			add = -1000
+		}
+	}
+}

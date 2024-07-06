@@ -296,6 +296,14 @@ GLOBAL = {
 		set_variable = not_yet_lost_ach_possible
 	}
 
+	#Declaration of Independence
+	every_country = {
+		limit = {
+			is_subject = yes
+		}
+		set_variable = declaration_of_independence_ach_possible
+	}
+
 	#Event Variables
 	
 	set_global_variable = {
@@ -332,7 +340,5 @@ GLOBAL = {
         }
 	}
 
-	###Converter
-	converter_colonial_confederation_cultures_effect = yes
-	converter_historical_leader_culture_effect = yes
+	
 }

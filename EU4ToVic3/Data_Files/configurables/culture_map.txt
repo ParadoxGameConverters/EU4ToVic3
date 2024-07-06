@@ -118,7 +118,7 @@ link = { vic3 = noric eu4group = scordiscian_g }
 ##Added - Lombard
 link = { vic3 = corsican eu4 = corsican } #Must come before N/S Italian
 link = { vic3 = maltese eu4 = maltese } #Must come before N/S Italian
-link = { vic3 = north_italian eu4group = latin @north_italy_area region = STATE_SLOVENIA region = STATE_CROATIA region = STATE_SLAVONIA region = STATE_DALMATIA region = STATE_BOSNIA region = STATE_BULGARIA region = STATE_SOUTHERN_SERBIA region = STATE_NORTHERN_SERBIA region = region_occitania region = region_south_germany region = region_france region = region_rhine region = region_danubia region = region_poland region = region_north_germany region = region_baltic region = region_england region = region_north_sea_coast }
+link = { vic3 = north_italian eu4group = latin @north_italy_area region = STATE_SLOVENIA region = STATE_CROATIA region = STATE_SLAVONIA region = STATE_DALMATIA region = STATE_BOSNIA region = STATE_BULGARIA region = STATE_SOUTHERN_SERBIA region = STATE_NORTHERN_SERBIA region = region_occitania region = region_south_germany region = region_france region = region_rhine region = region_danubia region = region_poland region = region_north_germany region = region_england region = region_north_sea_coast }
 link = { vic3 = south_italian eu4group = latin @south_italy_area region = STATE_MONTENEGRO region = STATE_ALBANIA region = STATE_SKOPIA region = STATE_NORTHERN_THRACE region = STATE_PELOPONNESE region = STATE_IONIAN_ISLANDS region = STATE_ATTICA region = STATE_THESSALIA region = STATE_MACEDONIA region = STATE_WESTERN_THRACE region = STATE_CRETE region = STATE_WEST_AEGEAN_ISLANDS region = STATE_EASTERN_THRACE region = region_iberia }
 
 link = { vic3 = lombard eu4group = old_lombard_g }
@@ -175,9 +175,14 @@ link = { vic3 = franco_canadian eu4 = louisianans eu4 = quebecois neoculture_ove
 link = { vic3 = frankish eu4group = frankish_g }
 
 
-# Finnic - Finnish(x), Sami, Ugrian and Estonian(x)
+# Finnic - Finnish(x), Karelian, Mari, Mordvin, Sami, Ugrian and Estonian(x)
+
+link = { vic3 = karelian eu4 = karelian eu4 = vepsian eu4 = ingrian }
+link = { vic3 = mari eu4 = mari eu4 = mari_culture }
+link = { vic3 = mordvin eu4 = mordvin eu4 = meshchera }
 link = { vic3 = sami eu4 = sapmi eu4 = lappish }
-link = { vic3 = ugrian eu4 = komi eu4 = ugrorussian eu4 = mari eu4 = mari_culture eu4 = permic_culture eu4 = udmurt }
+link = { vic3 = udmurt eu4 = udmurt }
+link = { vic3 = ugrian eu4 = komi eu4 = ugrorussian eu4 = permic_culture  }
 link = { vic3 = ugrian eu4group = finno_ugric }
 
 
@@ -248,7 +253,8 @@ link = { vic3 = armenian eu4 = armenian eu4 = ge_armenian eu4 = owm_armenian }
 link = { vic3 = azerbaijani eu4 = azerbadjani eu4 = azerbaijani eu4 = shirvani }
 link = { vic3 = georgian eu4 = georgian eu4 = georgian_new }
 link = { vic3 = circassian eu4 = circassian eu4 = abazin }
-link = { vic3 = north_caucasian eu4 = dagestani eu4 = avar_culture eu4 = caucasian_albanian eu4 = chechen eu4 = ossetian }
+link = { vic3 = chechen eu4 = chechen }
+link = { vic3 = north_caucasian eu4 = dagestani eu4 = avar eu4 = avar_culture eu4 = caucasian_albanian eu4 = ossetian }
 
 
 # Hellenic - Greek
@@ -267,7 +273,7 @@ link = { vic3 = misri eu4 = al_misr_arabic eu4 = egyptian_arabic eu4 = egyptian 
 link = { vic3 = yemenite eu4 = yemeni eu4 = yemeni_culture eu4 = yemenite eu4 = shami }
 
 
-# Iranian-Turanian - Baluchi, Hazara, Kazakh, Kurdish, Kyrgyz, Pashtun, Persian, Tajik, Turkmen, Uighur and Uzbek
+# Iranian-Turanian - Baluchi, Hazara, Kazakh, Kurdish, Kyrgyz, Luri, Mazanderani, Pashtun, Persian, Tajik, Turkmen, Uighur and Uzbek
 link = { vic3 = hazara eu4 = mongol region = region_persia religion_group = muslim } #Moghols
 link = { vic3 = tajik eu4 = persian region = region_central_asia }
 
@@ -276,6 +282,8 @@ link = { vic3 = hazara eu4 = hazara }
 link = { vic3 = kazak eu4 = khazak }
 link = { vic3 = kurdish eu4 = kurdish eu4 = gorani }
 link = { vic3 = kirgiz eu4 = kirgiz eu4 = kirghiz eu4 = old_kirgiz }
+link = { vic3 = luri eu4 = luri }
+link = { vic3 = mazanderani eu4 = mazandarani }
 link = { vic3 = pashtun eu4 = east_persian eu4 = afghani eu4 = tabari eu4 = afghan eu4 = kushan eu4 = pashtun }
 link = { vic3 = persian eu4 = turco_iranian eu4 = persian eu4 = saka eu4 = luri eu4 = khorasani eu4 = mazandarani eu4 = parthian eu4 = khuzi eu4 = lurish eu4 = qashqai }
 link = { vic3 = tajik eu4 = tajik eu4 = sogdian eu4 = tajihk }
@@ -286,21 +294,26 @@ link = { vic3 = uzbek eu4 = chorasmian eu4 = uzbek eu4 = uzbehk eu4 = karluk }
 
 
 # Mongolian - Mongol, Kalmyk and Tuvan
-link = { vic3 = kalmyk eu4group = altaic region = region_anatolia region = region_caucasus region = region_dnieper region = region_russia region = STATE_INGRIA }
+link = { vic3 = kalmyk eu4group = altaic region = region_anatolia region = region_caucasus region = region_dnieper region = region_belarus region = region_arctic_russia region = region_russia region = STATE_INGRIA }
 link = { vic3 = tuvan eu4group = altaic region = STATE_TUVA }
 
 link = { vic3 = mongol eu4 = mongol eu4 = chahar eu4 = khalkha eu4 = oirats eu4 = khitan eu4 = yuan_culture eu4 = khalkas eu4 = khamnigan eu4 = khorchin eu4 = tumed eu4 = altaic_new eu4 = chaghatai }
 link = { vic3 = tuvan eu4 = tuvan eu4 = uriankhai }
 
+#North Asian
+#link = { vic3 = manul eu4 = ??? } - Here as a reminder to NOT map this vanilla placeholder culture
 
-#Siberian - Siberian and Yakut
-link = { vic3 = siberian eu4 = siberian eu4 = khanty eu4 = chukchi eu4 = mansi eu4 = nenet eu4 = nivkh eu4 = selkup }
-link = { vic3 = yakut eu4 = yakut eu4 = yukagyr eu4 = buryat eu4 = tungus eu4 = daur eu4 = eveni eu4 = evenki eu4 = oroqen eu4 = yukaghir eu4 = yeniseian }
+#Siberian - Buryat, Siberian and Yakut
+link = { vic3 = buryat eu4 = buryat }
+link = { vic3 = siberian eu4 = siberian eu4 = khanty eu4 = chukchi eu4 = mansi eu4 = nenet eu4 = nivkh eu4 = selkup eu4 = kamchatkan }
+link = { vic3 = yakut eu4 = yakut eu4 = yukagyr eu4 = tungus eu4 = daur eu4 = eveni eu4 = evenki eu4 = oroqen eu4 = yukaghir eu4 = yeniseian }
 
 
-#Turkic - Turkish, Azerbaijani, Tatar and Tuvan
+#Turkic - Turkish, Azerbaijani, Bashkir, Chuvash, Tatar and Tuvan
+link = { vic3 = bashkir eu4 = bashkir }
+link = { vic3 = chuvash eu4 = chuvash }
 link = { vic3 = turkish eu4 = turkish eu4 = yorouk }
-link = { vic3 = tatar eu4 = sabir eu4 = hunnic eu4 = tartar eu4 = bolghar eu4 = cuman eu4 = avar eu4 = khazar eu4 = qasim  eu4 = avar eu4 = hunnic eu4 = sinoturk eu4 = nogai eu4 = chuvash }
+link = { vic3 = tatar eu4 = sabir eu4 = hunnic eu4 = tartar eu4 = bolghar eu4 = cuman eu4 = khazar eu4 = qasim  eu4 = hunnic eu4 = sinoturk eu4 = nogai }
 link = { vic3 = tatar eu4group = tartar } #Fallback
 
 
@@ -333,7 +346,7 @@ link = { vic3 = muskogean eu4 = creek eu4 = chickasaw eu4 = yamasee eu4 = yoron 
 link = { vic3 = navajo eu4 = navajo }
 link = { vic3 = nez_perce eu4 = sahaptian }
 link = { vic3 = penutian eu4 = chinook eu4 = yokut eu4 = yokuts eu4 = tsimishian eu4 = wintuan }
-link = { vic3 = inuit eu4 = aleutian eu4 = inuit eu4 = yupik eu4 = kamchatkan }
+link = { vic3 = inuit eu4 = aleutian eu4 = inuit eu4 = yupik }
 link = { vic3 = iroquoian eu4 = iroquis eu4 = tuscarora eu4 = neutral eu4 = mingwe eu4 = erielhonan }
 link = { vic3 = oodham eu4 = piman eu4 = pima eu4 = cahuila eu4 = hopi eu4 = mayo eu4 = tarachatitian eu4 = tarahumaran eu4 = yaqui eu4 = cuitlatec }
 link = { vic3 = paiute eu4 = shoshone eu4 = ute }
@@ -466,6 +479,7 @@ link = { vic3 = bengali eu4 = bengali }
 link = { vic3 = bihari eu4 = bihari eu4 = jharkhandi eu4 = maithili }
 link = { vic3 = gujarati eu4 = gujarati eu4 = nagpuri eu4 = sambalpuri eu4 = saurashtri eu4 = kathiawari }
 link = { vic3 = kanauji eu4 = kanauji eu4 = vindhyan eu4 = bagheli eu4 = bundeli }
+link = { vic3 = kho eu4 = kashmiri region = STATE_PASHTUNISTAN }
 link = { vic3 = kashmiri eu4 = kashmiri }
 link = { vic3 = marathi eu4 = marathi eu4 = bhil eu4 = khandeshi }
 link = { vic3 = oriya eu4 = oriya eu4 = garjati }

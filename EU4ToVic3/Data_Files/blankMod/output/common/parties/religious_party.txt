@@ -334,12 +334,7 @@ religious_party = {
 		}
 		if = { # patriarchs more likely to join conservatives with women's suffrage
 			limit = {
-				### Converter
-				OR = {
-					has_ideology = ideology:ideology_patriarchal
-					has_ideology = ideology:ideology_matriarchal
-				}
-				### Converter
+				has_ideology = ideology:ideology_patriarchal
 				owner = {
 					has_law = law_type:law_womens_suffrage
 				}

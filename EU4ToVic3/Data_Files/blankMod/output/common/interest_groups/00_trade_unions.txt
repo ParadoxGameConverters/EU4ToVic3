@@ -268,8 +268,7 @@
 	}
 
 	female_commander_chance = {
-		### Converter ###
-		value = ig_female_general_chance
+		value = 0.0
 	}
 
 	female_politician_chance = {
@@ -279,112 +278,11 @@
 			limit = {
 				owner = {
 					has_law = law_type:law_womens_suffrage
-					### Converter ###
-					is_matriarchal_country = no
-					is_feminist_country = no
 				}
 
 			}
 			add = {
 				value = 0.05
-			}
-		}
-
-		### Converter ###
-		if = {
-			limit = {
-				owner = {
-					NOT = { has_law = law_type:law_womens_suffrage }
-					is_matriarchal_country = yes
-					is_feminist_country = no
-				}
-
-			}
-			add = {
-				value = 1
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-					has_law = law_type:law_womens_suffrage
-					is_matriarchal_country = yes
-					is_feminist_country = no
-				}
-
-			}
-			add = {
-				value = 0.95
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-					has_law = law_type:law_no_womens_rights
-					is_matriarchal_country = no
-					is_feminist_country = yes
-				}
-
-			}
-			add = {
-				value = 0.2
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-					has_law = law_type:law_no_womens_rights
-					is_matriarchal_country = yes
-					is_feminist_country = yes
-				}
-
-			}
-			add = {
-				value = 0.8
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-					NOR = {
-						has_law = law_type:law_no_womens_rights
-						has_law = law_type:law_womens_suffrage
-					}
-					is_matriarchal_country = no
-					is_feminist_country = yes
-				}
-
-			}
-			add = {
-				value = 0.35
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-					NOR = {
-						has_law = law_type:law_no_womens_rights
-						has_law = law_type:law_womens_suffrage
-					}
-					is_matriarchal_country = yes
-					is_feminist_country = yes
-				}
-
-			}
-			add = {
-				value = 0.65
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-					has_law = law_type:law_womens_suffrage
-					is_feminist_country = yes
-				}
-
-			}
-			add = {
-				value = 0.5
 			}
 		}
 	}
@@ -395,10 +293,19 @@
 		if = {
 			limit = {
 				owner = {
-					### Converter ###
-					NOT = { has_law = law_type:law_no_womens_rights }
-					is_matriarchal_country = no
-					is_feminist_country = no
+					has_law = law_type:law_women_own_property
+				}
+
+			}
+			add = {
+				value = 0.05
+			}
+		}	
+		
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_women_in_the_workplace
 				}
 
 			}
@@ -407,105 +314,17 @@
 			}
 		}
 
-		
-
-		### Converter ###
-		if = {
-			limit = {
-				owner = {
-					has_law = law_type:law_no_womens_rights
-					is_matriarchal_country = yes
-					is_feminist_country = no
-				}
-
-			}
-			add = {
-				value = 0.9
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-					NOT = { has_law = law_type:law_no_womens_rights }
-					is_matriarchal_country = yes
-					is_feminist_country = no
-				}
-
-			}
-			add = {
-				value = 0.85
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-					has_law = law_type:law_no_womens_rights
-					is_matriarchal_country = no
-					is_feminist_country = yes
-				}
-
-			}
-			add = {
-				value = 0.15
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-					has_law = law_type:law_no_womens_rights
-					is_matriarchal_country = yes
-					is_feminist_country = yes
-				}
-
-			}
-			add = {
-				value = 0.75
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-					NOR = {
-						has_law = law_type:law_no_womens_rights
-						has_law = law_type:law_womens_suffrage
-					}
-					is_matriarchal_country = no
-					is_feminist_country = yes
-				}
-
-			}
-			add = {
-				value = 0.3
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-					NOR = {
-						has_law = law_type:law_no_womens_rights
-						has_law = law_type:law_womens_suffrage
-					}
-					is_matriarchal_country = yes
-					is_feminist_country = yes
-				}
-
-			}
-			add = {
-				value = 0.6
-			}
-		}
 		if = {
 			limit = {
 				owner = {
 					has_law = law_type:law_womens_suffrage
-					is_feminist_country = yes
 				}
 
 			}
 			add = {
-				value = 0.45
+				value = 0.05
 			}
-		}
+		}		
 	}
 
 	# The chance that a commander belonging to this IG takes over leadership when it changes
