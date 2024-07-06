@@ -257,8 +257,8 @@
 		if = {
 			limit = {
 				OR = {
-					owner.religion = { has_discrimination_trait = muslim }		### Converter ###
-					owner.religion = rel:theravada
+					owner.religion ?= { has_discrimination_trait = muslim }		### Converter ###
+					owner.religion ?= rel:theravada
 				}
 			}
 			multiply = 2
