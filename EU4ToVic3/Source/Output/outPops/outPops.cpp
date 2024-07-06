@@ -38,11 +38,11 @@ void outSubStatePops(std::ostream& output, const V3::SubState& subState)
 void outStatePops(std::ostream& output, const V3::State& state)
 {
 	output << "\ts:" << state.getName() << " = {\n";
-	for (const auto& substate: state.getSubStates())
+	for (const auto& subState: state.getSubStates())
 	{
-		if (substate->getSubStatePops().getPopCount() <= 0)
+		if (subState->getSubStatePops().getPopCount() <= 0)
 			continue;
-		outSubStatePops(output, *substate);
+		outSubStatePops(output, *subState);
 	}
 	output << "\t}\n";
 }
