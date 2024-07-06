@@ -28,7 +28,7 @@ void outSubStatePops(std::ostream& output, const V3::SubState& subState)
 	output << "\t\tregion_state:" << subState.getOwner()->getTag() << " = {\n";
 	for (const auto& pop: subState.getSubStatePops().getPops())
 	{
-		if (pop.getSize() == 0)
+		if (pop.getSize() <= 0)
 			continue;
 		outPop(output, pop);
 	}
@@ -40,7 +40,7 @@ void outStatePops(std::ostream& output, const V3::State& state)
 	output << "\ts:" << state.getName() << " = {\n";
 	for (const auto& substate: state.getSubStates())
 	{
-		if (substate->getSubStatePops().getPopCount() == 0)
+		if (substate->getSubStatePops().getPopCount() <= 0)
 			continue;
 		outSubStatePops(output, *substate);
 	}
@@ -57,7 +57,7 @@ void OUT::exportPops(const std::string& outputName, const std::map<std::string, 
 	output << commonItems::utf8BOM << "POPS = {\n";
 	for (const auto& state: states | std::views::values)
 	{
-		if (state->getStatePopCount() == 0)
+		if (state->getStatePopCount() <= 0)
 			continue;
 		outStatePops(output, *state);
 	}
