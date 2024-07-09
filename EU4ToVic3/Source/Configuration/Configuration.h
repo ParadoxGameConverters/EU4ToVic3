@@ -46,6 +46,12 @@ class Configuration: commonItems::parser
 		SuperRegions = 2,
 		Disabled = 3
 	};
+	enum class FORMBLOCS
+	{
+		Enabled = 1,
+		Disabled = 2,
+		HREOnly = 3
+	};
 
 	struct ConfigBlock
 	{
@@ -55,6 +61,7 @@ class Configuration: commonItems::parser
 		EUROCENTRISM euroCentric = EUROCENTRISM::VanillaImport;
 		ECONOMY economy = ECONOMY::CivLevel;
 		SPLITTCS splitTCs = SPLITTCS::SuperRegions;
+		FORMBLOCS formBlocs = FORMBLOCS::Enabled;
 		bool convertAll = false;
 		bool downTiers = true;
 		double shapingFactor = 1.0;

@@ -1,9 +1,11 @@
 #include "PoliticalManager.h"
+
 #include "ClayManager/ClayManager.h"
 #include "ClayManager/State/Province.h"
 #include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "ColonialRegionMapper/ColonialRegionMapper.h"
+#include "Configuration.h"
 #include "Country/Country.h"
 #include "CountryManager/EU4Country.h"
 #include "CultureMapper/CultureMapper.h"
@@ -630,7 +632,6 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 
 void V3::PoliticalManager::createPowerBlocs()
 {
-
 	Log(LogLevel::Info) << "-> Creating Power Blocs.";
 
 	// We ask if countries have subjects, and then make some determination based of their governing principles.
