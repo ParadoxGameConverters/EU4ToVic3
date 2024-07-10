@@ -69,6 +69,11 @@ link = { vic3 = wallonian eu4 = wallonian eu4 = wallonian_UKS }
 link = { vic3 = alemannic eu4group = germanic region = STATE_WEST_SWITZERLAND region = STATE_EAST_SWITZERLAND owner = SWI }
 link = { vic3 = alemannic eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse }
 
+# Germanized Slavs must come before South-North-Weder
+link = { vic3 = czech eu4 = czechBOH }
+link = { vic3 = polish eu4 = polishBOH eu4 = schlesianBOH }
+link = { vic3 = sorb eu4 = sorbianBOH }
+
 link = { vic3 = south_german eu4group = germanic region = region_south_germany region = region_balkans region = region_italy region = region_danubia region = region_occitania region = region_iberia region = STATE_RHINELAND region = STATE_ALSACE_LORRAINE region = STATE_FRANCHE_COMTE }
 link = { vic3 = north_german eu4group = germanic region = region_north_germany region = region_baltic region = region_poland region = region_france region = region_england region = region_north_sea_coast region = region_rhine  }
 link = { vic3 = weder_german eu4group = germanic } # Fallback
@@ -218,10 +223,10 @@ link = { vic3 = albanian eu4group = albanian_g }
 
 
 # West Slavic - Czech, Polish, Slovak and Sorb
-link = { vic3 = czech eu4 = czech eu4 = czech_new eu4 = czechBOH eu4 = moravian eu4 = silesian }
-link = { vic3 = polish eu4 = mazovian eu4 = venedian eu4 = polish eu4 = polish_new eu4 = polishBOH eu4 = schlesian eu4 = schlesian_new eu4 = schlesianBOH }
+link = { vic3 = czech eu4 = czech eu4 = czech_new eu4 = moravian eu4 = silesian }
+link = { vic3 = polish eu4 = mazovian eu4 = venedian eu4 = polish eu4 = polish_new eu4 = schlesian eu4 = schlesian_new }
 link = { vic3 = slovak eu4 = slovak eu4 = slovak_new eu4 = chrobatian }
-link = { vic3 = sorb eu4 = sorbian eu4 = sorbian_new eu4 = sorbianBOH eu4 = polabian eu4 = sorbs eu4 = wendish eu4 = kashubian }
+link = { vic3 = sorb eu4 = sorbian eu4 = sorbian_new eu4 = polabian eu4 = sorbs eu4 = wendish eu4 = kashubian }
 # Dynamic generation for Old Pommeranian
 
 
