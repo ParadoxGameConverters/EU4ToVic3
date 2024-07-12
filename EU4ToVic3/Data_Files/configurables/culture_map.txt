@@ -34,7 +34,7 @@
 
 @african_cultures = "eu4 = egyptian eu4 = carthaginian eu4group = kongo_group  eu4group = cushitic eu4group = african eu4group = southern_african eu4group = great_lakes_group eu4group = maghrebi eu4group = mande eu4group = sahelian eu4group = sudanese eu4group = west_african eu4group = punic_group"
 
-@spanish_cultures = "eu4 = castillian eu4 = mexican eu4 = platinean eu4 = leonese eu4 = aragonese eu4 = catalan eu4 = galician eu4 = andalucian eu4 = basque"
+@spanish_cultures = "eu4 = castillian eu4 = mexican eu4 = platinean eu4 = leonese eu4 = aragonese eu4 = catalan eu4 = galician eu4 = andalucian eu4 = basque eu4 = mozarabic"
 ##Colonial
 @canada_colony = "region = region_canada region = STATE_SASKATCHEWAN region = STATE_ALBERTA region = STATE_BRITISH_COLUMBIA region = STATE_YUKON_TERRITORY region = STATE_ALASKA region = STATE_NEW_BRUNSWICK"
 @usa_north_colony = "region = region_new_england region = region_the_midwest region = STATE_NORTH_DAKOTA region = STATE_SOUTH_DAKOTA region = STATE_NEBRASKA"
@@ -47,11 +47,11 @@
 # Jewish - Ashkenazi and Sephardim
 ##Added - Israeli
 link = { vic3 = ashkenazi eu4group = germanic religion = jewish }
-link = { vic3 = sephardic eu4group = byzantine religion = jewish }
+link = { vic3 = sephardic eu4group = byzantine eu4group = iberian religion = jewish }
 
 link = { vic3 = ashkenazi eu4 = ashkenazi }
 link = { vic3 = israeli eu4 = israeli eu4 = aramaic }
-link = { vic3 = sephardic eu4 = sephardi eu4 = hebrew eu4 = mizrahim eu4 = mizrahi }
+link = { vic3 = sephardic eu4 = sephardi eu4 = sephardic eu4 = hebrew eu4 = mizrahim eu4 = mizrahi }
 
 # Dynamic generation for Knaanic, Magogic, Yevanic, Misrayim, Zarphatic, Laaz, Kaifeng
 
@@ -68,6 +68,11 @@ link = { vic3 = wallonian eu4 = wallonian eu4 = wallonian_UKS }
 ##Added - Weder German
 link = { vic3 = alemannic eu4group = germanic region = STATE_WEST_SWITZERLAND region = STATE_EAST_SWITZERLAND owner = SWI }
 link = { vic3 = alemannic eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse }
+
+# Germanized Slavs must come before South-North-Weder
+link = { vic3 = czech eu4 = czechBOH }
+link = { vic3 = polish eu4 = polishBOH eu4 = schlesianBOH }
+link = { vic3 = sorb eu4 = sorbianBOH }
 
 link = { vic3 = south_german eu4group = germanic region = region_south_germany region = region_balkans region = region_italy region = region_danubia region = region_occitania region = region_iberia region = STATE_RHINELAND region = STATE_ALSACE_LORRAINE region = STATE_FRANCHE_COMTE }
 link = { vic3 = north_german eu4group = germanic region = region_north_germany region = region_baltic region = region_poland region = region_france region = region_england region = region_north_sea_coast region = region_rhine  }
@@ -150,7 +155,7 @@ link = { vic3 = mexican eu4 = mexican }
 
 # Iberian - Basque, Catalan, Galician, Portuguese, Spanish
 ##Added - Andalucian
-link = { vic3 = andalucian eu4 = andalucian }
+link = { vic3 = andalucian eu4 = andalucian eu4 = mozarabic }
 link = { vic3 = basque eu4 = basque }
 link = { vic3 = catalan eu4 = catalan eu4 = aragonese eu4 = valencian eu4 = balearic }
 link = { vic3 = galician eu4 = galician }
@@ -219,7 +224,7 @@ link = { vic3 = albanian eu4group = albanian_g }
 
 # West Slavic - Czech, Polish, Slovak and Sorb
 link = { vic3 = czech eu4 = czech eu4 = czech_new eu4 = moravian eu4 = silesian }
-link = { vic3 = polish eu4 = mazovian eu4 = venedian eu4 = polish eu4 = polish_new eu4 = schlesian eu4 = schlesian_new}
+link = { vic3 = polish eu4 = mazovian eu4 = venedian eu4 = polish eu4 = polish_new eu4 = schlesian eu4 = schlesian_new }
 link = { vic3 = slovak eu4 = slovak eu4 = slovak_new eu4 = chrobatian }
 link = { vic3 = sorb eu4 = sorbian eu4 = sorbian_new eu4 = polabian eu4 = sorbs eu4 = wendish eu4 = kashubian }
 # Dynamic generation for Old Pommeranian
