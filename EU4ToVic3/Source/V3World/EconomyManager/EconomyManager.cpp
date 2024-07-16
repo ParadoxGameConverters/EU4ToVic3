@@ -468,6 +468,23 @@ void V3::EconomyManager::distributeBudget(const double globalCP, const double to
 	}
 }
 
+void V3::EconomyManager::investCapital() const
+{
+	for (const auto& country: centralizedCountries)
+	{
+		for (const auto& subState: country->getSubStates())
+		{
+			for (const auto& building: subState->getBuildings())
+			{
+					// Farms go to nobles
+					// Resource extraction is split between locals/capitalists/nobles
+					// Factories split between locals/capitalists/the state
+					// The rest is state owned (barracks, admin centers, whatnot)
+			}
+		}
+	}
+}
+
 void V3::EconomyManager::setPMs() const
 {
 	for (const auto& country: centralizedCountries)

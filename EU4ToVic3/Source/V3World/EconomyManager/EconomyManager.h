@@ -61,6 +61,7 @@ class EconomyManager
 	void assignSubStateCPBudgets(Configuration::ECONOMY economyType) const;
 	void balanceNationalBudgets() const;
 	void buildBuildings(const std::map<std::string, Law>& lawsMap) const;
+	void investCapital() const;
 	void setPMs() const;
 
 	[[nodiscard]] const auto& getCentralizedCountries() const { return centralizedCountries; }
