@@ -1,6 +1,7 @@
 #ifndef V3_BUILDING_H
 #define V3_BUILDING_H
 #include "Parser.h"
+#include "Shareholders.h"
 
 namespace V3
 {
@@ -25,6 +26,7 @@ class Building: commonItems::parser
 	[[nodiscard]] const auto& isCappedByGov() const { return governmentCapped; }
 
 	[[nodiscard]] const auto& getLevel() const { return level; }
+	[[nodiscard]] const auto& getShareholders() const { return shareholders; }
 	[[nodiscard]] const auto& getWeight() const { return weight; }
 
   private:
@@ -42,6 +44,7 @@ class Building: commonItems::parser
 	// Specific to instance of building in SubState e.g. The port in New York
 	std::set<std::string> PMs; // Only Production Methods that are different from default
 	int level = 0;
+	std::vector<V3::Shareholders> shareholders;
 	double weight = 0;
 };
 } // namespace V3

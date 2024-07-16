@@ -16,11 +16,56 @@ void outPMs(std::ostream& output, const V3::Building& building)
 	}
 	output << " }\n";
 }
+void outShareholders(std::ostream& output, const V3::Building& building)
+{
+	for (const auto& shareholder: building.getShareholders())
+	{
+		output << "\t\t\t\tadd_ownership = {\n";
+		if (shareholder.type == "national")
+		{
+			output << "\t\t\t\t\tcountry = {\n";
+			output << "\t\t\t\t\t\tcountry = c:" << shareholder.tag << "\n";
+			output << "\t\t\t\t\t\tlevels = " << shareholder.level << "\n";
+			output << "\t\t\t\t\t }\n";
+		}
+		if (shareholder.type == "local")
+		{
+			output << "\t\t\t\t\tbuilding = {\n";
+			output << "\t\t\t\t\t\ttype = " << building.getName() << "\n";
+			output << "\t\t\t\t\t\tcountry = c:" << shareholder.tag << "\n";
+			output << "\t\t\t\t\t\tlevels = " << shareholder.level << "\n";
+			output << "\t\t\t\t\t\rregion = " << shareholder.state << "\n";
+			output << "\t\t\t\t\t }\n";
+		}
+		output << "\t\t\t\t }\n";
+		if (shareholder.type == "capitalist")
+		{
+			output << "\t\t\t\t\tbuilding = {\n";
+			output << "\t\t\t\t\t\ttype = building_financial_district\n";
+			output << "\t\t\t\t\t\tcountry = c:" << shareholder.tag << "\n";
+			output << "\t\t\t\t\t\tlevels = " << shareholder.level << "\n";
+			output << "\t\t\t\t\t\rregion = " << shareholder.state << "\n";
+			output << "\t\t\t\t\t }\n";
+		}
+		if (shareholder.type == "aristocratic")
+		{
+			output << "\t\t\t\t\tbuilding = {\n";
+			output << "\t\t\t\t\t\ttype = building_manor_house\n";
+			output << "\t\t\t\t\t\tcountry = c:" << shareholder.tag << "\n";
+			output << "\t\t\t\t\t\tlevels = " << shareholder.level << "\n";
+			output << "\t\t\t\t\t\rregion = " << shareholder.state << "\n";
+			output << "\t\t\t\t\t }\n";
+		}
+		output << "\t\t\t\t }\n";
+	}
+}
 void outBuilding(std::ostream& output, const V3::Building& building)
 {
 	output << "\t\t\tcreate_building = {\n";
 	output << "\t\t\t\tbuilding = \"" << building.getName() << "\"\n";
-	output << "\t\t\t\tlevel = " << building.getLevel() << "\n";
+
+	outShareholders(output, building);
+
 	output << "\t\t\t\treserves = " << 1 << "\n";
 
 	outPMs(output, building);
