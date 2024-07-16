@@ -2,6 +2,7 @@
 #define OUT_LOCALIZATIONS_H
 #include "CultureMapper/CultureDefinitionLoader/CultureDef.h"
 #include "PoliticalManager/Country/Country.h"
+#include "PoliticalManager/Diplomacy/PowerBloc.h"
 #include "ReligionMapper/ReligionDefinitionLoader/ReligionDef.h"
 
 namespace OUT
@@ -14,6 +15,7 @@ void exportCultureLocs(const std::string& outputName, const std::map<std::string
 void exportCharacterLocs(const std::string& outputName,
 	 const std::map<std::string, std::shared_ptr<V3::Country>>& countries,
 	 const V3::LocalizationLoader& knownLocs);
+void exportPowerBlocLocs(const std::string& outputName, const std::vector<V3::PowerBloc>& powerBlocs);
 
 } // namespace OUT
 

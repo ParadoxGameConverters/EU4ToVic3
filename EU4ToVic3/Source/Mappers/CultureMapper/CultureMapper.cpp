@@ -314,6 +314,7 @@ void mappers::CultureMapper::alterNewEU4CultureDefinitions(const std::map<int, s
 			{
 				v3CultureDefinitions.at(target).traits.emplace(addTrait);
 			}
+			v3CultureDefinitions.at(target).skipExport = false;
 		}
 	}
 }

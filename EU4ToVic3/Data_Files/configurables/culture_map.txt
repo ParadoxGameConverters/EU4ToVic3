@@ -34,7 +34,7 @@
 
 @african_cultures = "eu4 = egyptian eu4 = carthaginian eu4group = kongo_group  eu4group = cushitic eu4group = african eu4group = southern_african eu4group = great_lakes_group eu4group = maghrebi eu4group = mande eu4group = sahelian eu4group = sudanese eu4group = west_african eu4group = punic_group"
 
-@spanish_cultures = "eu4 = castillian eu4 = mexican eu4 = platinean eu4 = leonese eu4 = aragonese eu4 = catalan eu4 = galician eu4 = andalucian eu4 = basque"
+@spanish_cultures = "eu4 = castillian eu4 = mexican eu4 = platinean eu4 = leonese eu4 = aragonese eu4 = catalan eu4 = galician eu4 = andalucian eu4 = basque eu4 = mozarabic"
 ##Colonial
 @canada_colony = "region = region_canada region = STATE_SASKATCHEWAN region = STATE_ALBERTA region = STATE_BRITISH_COLUMBIA region = STATE_YUKON_TERRITORY region = STATE_ALASKA region = STATE_NEW_BRUNSWICK"
 @usa_north_colony = "region = region_new_england region = region_the_midwest region = STATE_NORTH_DAKOTA region = STATE_SOUTH_DAKOTA region = STATE_NEBRASKA"
@@ -47,11 +47,11 @@
 # Jewish - Ashkenazi and Sephardim
 ##Added - Israeli
 link = { vic3 = ashkenazi eu4group = germanic religion = jewish }
-link = { vic3 = sephardic eu4group = byzantine religion = jewish }
+link = { vic3 = sephardic eu4group = byzantine eu4group = iberian religion = jewish }
 
 link = { vic3 = ashkenazi eu4 = ashkenazi }
 link = { vic3 = israeli eu4 = israeli eu4 = aramaic }
-link = { vic3 = sephardic eu4 = sephardi eu4 = hebrew eu4 = mizrahim eu4 = mizrahi }
+link = { vic3 = sephardic eu4 = sephardi eu4 = sephardic eu4 = hebrew eu4 = mizrahim eu4 = mizrahi }
 
 # Dynamic generation for Knaanic, Magogic, Yevanic, Misrayim, Zarphatic, Laaz, Kaifeng
 
@@ -68,6 +68,11 @@ link = { vic3 = wallonian eu4 = wallonian eu4 = wallonian_UKS }
 ##Added - Weder German
 link = { vic3 = alemannic eu4group = germanic region = STATE_WEST_SWITZERLAND region = STATE_EAST_SWITZERLAND owner = SWI }
 link = { vic3 = alemannic eu4 = swiss eu4 = alamanni eu4 = romansh eu4 = suisse }
+
+# Germanized Slavs must come before South-North-Weder
+link = { vic3 = czech eu4 = czechBOH }
+link = { vic3 = polish eu4 = polishBOH eu4 = schlesianBOH }
+link = { vic3 = sorb eu4 = sorbianBOH }
 
 link = { vic3 = south_german eu4group = germanic region = region_south_germany region = region_balkans region = region_italy region = region_danubia region = region_occitania region = region_iberia region = STATE_RHINELAND region = STATE_ALSACE_LORRAINE region = STATE_FRANCHE_COMTE }
 link = { vic3 = north_german eu4group = germanic region = region_north_germany region = region_baltic region = region_poland region = region_france region = region_england region = region_north_sea_coast region = region_rhine  }
@@ -94,16 +99,16 @@ link = { vic3 = yankee eu4group = british @usa_north_colony @usa_western_colony 
 link = { vic3 = yankee eu4 = american neoculture_override = yes }
 
 link = { vic3 = anglo_saxon eu4 = northumbrian eu4 = anglo_saxon eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = anglosaxon eu4 = northerner }
-link = { vic3 = british eu4 = english eu4 = anglois }
+link = { vic3 = british eu4 = english eu4 = anglois eu4 = anglo_irish }
 link = { vic3 = scottish eu4 = scottish eu4 = hibernic eu4 = orkney eu4 = shetland eu4 = lowland_scottish }
-link = { vic3 = welsh eu4 = welsh eu4 = welsh_celtic eu4 = cornish eu4 = east_welsh }
+link = { vic3 = welsh eu4 = welsh eu4 = welsh_celtic eu4 = cornish eu4 = east_welsh eu4 = brythons }
 
 
 # Celtic - Breton(x), Irish, Welsh(x)
 ##Added - Alpine, Belgian, Celtiberian, Gaelic, Gaulish, Noric
 link = { vic3 = alpine eu4 = lugdunian eu4 = arelatian eu4 = helvetian eu4 = lepontic }
 link = { vic3 = belgian eu4 = belgian eu4 = belgae eu4 = scaldic eu4 = treverian }
-link = { vic3 = celtiberian eu4 = galician_celtic }
+link = { vic3 = celtiberian eu4 = galician_celtic eu4 = galleaci }
 link = { vic3 = gaelic eu4 = scottish_celtic eu4 = manx eu4 = highland_scottish eu4 = gaelic_scottish }
 link = { vic3 = gaulish eu4 = gaulish eu4 = gallic eu4 = auscian eu4 = armorican eu4 = lutetian eu4 = neustrian }
 link = { vic3 = irish eu4 = irish eu4 = gallawa eu4 = hiberno_norman }
@@ -118,10 +123,11 @@ link = { vic3 = noric eu4group = scordiscian_g }
 ##Added - Lombard
 link = { vic3 = corsican eu4 = corsican } #Must come before N/S Italian
 link = { vic3 = maltese eu4 = maltese } #Must come before N/S Italian
-link = { vic3 = north_italian eu4group = latin @north_italy_area region = STATE_SLOVENIA region = STATE_CROATIA region = STATE_SLAVONIA region = STATE_DALMATIA region = STATE_BOSNIA region = STATE_BULGARIA region = STATE_SOUTHERN_SERBIA region = STATE_NORTHERN_SERBIA region = region_occitania region = region_south_germany region = region_france region = region_rhine region = region_danubia region = region_poland region = region_north_germany region = region_baltic region = region_england region = region_north_sea_coast }
+link = { vic3 = north_italian eu4group = latin @north_italy_area region = STATE_SLOVENIA region = STATE_CROATIA region = STATE_SLAVONIA region = STATE_DALMATIA region = STATE_BOSNIA region = STATE_BULGARIA region = STATE_SOUTHERN_SERBIA region = STATE_NORTHERN_SERBIA region = region_occitania region = region_south_germany region = region_france region = region_rhine region = region_danubia region = region_poland region = region_north_germany region = region_england region = region_north_sea_coast }
 link = { vic3 = south_italian eu4group = latin @south_italy_area region = STATE_MONTENEGRO region = STATE_ALBANIA region = STATE_SKOPIA region = STATE_NORTHERN_THRACE region = STATE_PELOPONNESE region = STATE_IONIAN_ISLANDS region = STATE_ATTICA region = STATE_THESSALIA region = STATE_MACEDONIA region = STATE_WESTERN_THRACE region = STATE_CRETE region = STATE_WEST_AEGEAN_ISLANDS region = STATE_EASTERN_THRACE region = region_iberia }
 
 link = { vic3 = lombard eu4group = old_lombard_g }
+link = { vic3 = maltese eu4 = siculo_arabic eu4 = sicilian_arabic } #Maltese are descendants of Siculo-Arabs
 
 #Hispanophone - Afro-Caribeno, Caribeno, Central American, Mexican, North Andean, Platinean, South Andean, Spanish(x), 
 link = { vic3 = afro_caribeno @african_cultures region = region_caribbean owner = CAS owner = SPA }
@@ -149,7 +155,7 @@ link = { vic3 = mexican eu4 = mexican }
 
 # Iberian - Basque, Catalan, Galician, Portuguese, Spanish
 ##Added - Andalucian
-link = { vic3 = andalucian eu4 = andalucian }
+link = { vic3 = andalucian eu4 = andalucian eu4 = mozarabic }
 link = { vic3 = basque eu4 = basque }
 link = { vic3 = catalan eu4 = catalan eu4 = aragonese eu4 = valencian eu4 = balearic }
 link = { vic3 = galician eu4 = galician }
@@ -175,9 +181,14 @@ link = { vic3 = franco_canadian eu4 = louisianans eu4 = quebecois neoculture_ove
 link = { vic3 = frankish eu4group = frankish_g }
 
 
-# Finnic - Finnish(x), Sami, Ugrian and Estonian(x)
+# Finnic - Finnish(x), Karelian, Mari, Mordvin, Sami, Ugrian and Estonian(x)
+
+link = { vic3 = karelian eu4 = karelian eu4 = vepsian eu4 = ingrian }
+link = { vic3 = mari eu4 = mari eu4 = mari_culture }
+link = { vic3 = mordvin eu4 = mordvin eu4 = meshchera }
 link = { vic3 = sami eu4 = sapmi eu4 = lappish }
-link = { vic3 = ugrian eu4 = komi eu4 = ugrorussian eu4 = mari eu4 = mari_culture eu4 = permic_culture eu4 = udmurt }
+link = { vic3 = udmurt eu4 = udmurt }
+link = { vic3 = ugrian eu4 = komi eu4 = ugrorussian eu4 = permic_culture  }
 link = { vic3 = ugrian eu4group = finno_ugric }
 
 
@@ -213,7 +224,7 @@ link = { vic3 = albanian eu4group = albanian_g }
 
 # West Slavic - Czech, Polish, Slovak and Sorb
 link = { vic3 = czech eu4 = czech eu4 = czech_new eu4 = moravian eu4 = silesian }
-link = { vic3 = polish eu4 = mazovian eu4 = venedian eu4 = polish eu4 = polish_new eu4 = schlesian eu4 = schlesian_new}
+link = { vic3 = polish eu4 = mazovian eu4 = venedian eu4 = polish eu4 = polish_new eu4 = schlesian eu4 = schlesian_new }
 link = { vic3 = slovak eu4 = slovak eu4 = slovak_new eu4 = chrobatian }
 link = { vic3 = sorb eu4 = sorbian eu4 = sorbian_new eu4 = polabian eu4 = sorbs eu4 = wendish eu4 = kashubian }
 # Dynamic generation for Old Pommeranian
@@ -248,7 +259,8 @@ link = { vic3 = armenian eu4 = armenian eu4 = ge_armenian eu4 = owm_armenian }
 link = { vic3 = azerbaijani eu4 = azerbadjani eu4 = azerbaijani eu4 = shirvani }
 link = { vic3 = georgian eu4 = georgian eu4 = georgian_new }
 link = { vic3 = circassian eu4 = circassian eu4 = abazin }
-link = { vic3 = north_caucasian eu4 = dagestani eu4 = avar_culture eu4 = caucasian_albanian eu4 = chechen eu4 = ossetian }
+link = { vic3 = chechen eu4 = chechen }
+link = { vic3 = north_caucasian eu4 = dagestani eu4 = dagestani_PER eu4 = avar eu4 = avar_culture eu4 = caucasian_albanian eu4 = ossetian }
 
 
 # Hellenic - Greek
@@ -267,7 +279,7 @@ link = { vic3 = misri eu4 = al_misr_arabic eu4 = egyptian_arabic eu4 = egyptian 
 link = { vic3 = yemenite eu4 = yemeni eu4 = yemeni_culture eu4 = yemenite eu4 = shami }
 
 
-# Iranian-Turanian - Baluchi, Hazara, Kazakh, Kurdish, Kyrgyz, Pashtun, Persian, Tajik, Turkmen, Uighur and Uzbek
+# Iranian-Turanian - Baluchi, Hazara, Kazakh, Kurdish, Kyrgyz, Luri, Mazanderani, Pashtun, Persian, Tajik, Turkmen, Uighur and Uzbek
 link = { vic3 = hazara eu4 = mongol region = region_persia religion_group = muslim } #Moghols
 link = { vic3 = tajik eu4 = persian region = region_central_asia }
 
@@ -276,9 +288,11 @@ link = { vic3 = hazara eu4 = hazara }
 link = { vic3 = kazak eu4 = khazak }
 link = { vic3 = kurdish eu4 = kurdish eu4 = gorani }
 link = { vic3 = kirgiz eu4 = kirgiz eu4 = kirghiz eu4 = old_kirgiz }
+link = { vic3 = luri eu4 = luri }
+link = { vic3 = mazanderani eu4 = mazandarani }
 link = { vic3 = pashtun eu4 = east_persian eu4 = afghani eu4 = tabari eu4 = afghan eu4 = kushan eu4 = pashtun }
-link = { vic3 = persian eu4 = turco_iranian eu4 = persian eu4 = saka eu4 = luri eu4 = khorasani eu4 = mazandarani eu4 = parthian eu4 = khuzi eu4 = lurish eu4 = qashqai }
-link = { vic3 = tajik eu4 = tajik eu4 = sogdian eu4 = tajihk }
+link = { vic3 = persian eu4 = turco_iranian eu4 = al_iraqiya_arabic_PER eu4 = persian eu4 = saka eu4 = luri eu4 = khorasani eu4 = mazandarani eu4 = parthian eu4 = khuzi eu4 = lurish eu4 = qashqai }
+link = { vic3 = tajik eu4 = tajik eu4 = sogdian eu4 = tajihk eu4 = tajiks eu4 = khwarezmians }
 link = { vic3 = turkmen eu4 = turkmeni eu4 = mervi eu4 = hephthalite }
 link = { vic3 = uighur eu4 = uyghur eu4 = old_uyghur }
 link = { vic3 = uzbek eu4 = chorasmian eu4 = uzbek eu4 = uzbehk eu4 = karluk }
@@ -286,21 +300,26 @@ link = { vic3 = uzbek eu4 = chorasmian eu4 = uzbek eu4 = uzbehk eu4 = karluk }
 
 
 # Mongolian - Mongol, Kalmyk and Tuvan
-link = { vic3 = kalmyk eu4group = altaic region = region_anatolia region = region_caucasus region = region_dnieper region = region_russia region = STATE_INGRIA }
+link = { vic3 = kalmyk eu4group = altaic region = region_anatolia region = region_caucasus region = region_dnieper region = region_belarus region = region_arctic_russia region = region_russia region = STATE_INGRIA }
 link = { vic3 = tuvan eu4group = altaic region = STATE_TUVA }
 
 link = { vic3 = mongol eu4 = mongol eu4 = chahar eu4 = khalkha eu4 = oirats eu4 = khitan eu4 = yuan_culture eu4 = khalkas eu4 = khamnigan eu4 = khorchin eu4 = tumed eu4 = altaic_new eu4 = chaghatai }
 link = { vic3 = tuvan eu4 = tuvan eu4 = uriankhai }
 
+#North Asian
+#link = { vic3 = manul eu4 = ??? } - Here as a reminder to NOT map this vanilla placeholder culture
 
-#Siberian - Siberian and Yakut
-link = { vic3 = siberian eu4 = siberian eu4 = khanty eu4 = chukchi eu4 = mansi eu4 = nenet eu4 = nivkh eu4 = selkup }
-link = { vic3 = yakut eu4 = yakut eu4 = yukagyr eu4 = buryat eu4 = tungus eu4 = daur eu4 = eveni eu4 = evenki eu4 = oroqen eu4 = yukaghir eu4 = yeniseian }
+#Siberian - Buryat, Siberian and Yakut
+link = { vic3 = buryat eu4 = buryat }
+link = { vic3 = siberian eu4 = siberian eu4 = khanty eu4 = chukchi eu4 = mansi eu4 = nenet eu4 = nivkh eu4 = selkup eu4 = kamchatkan }
+link = { vic3 = yakut eu4 = yakut eu4 = yukagyr eu4 = tungus eu4 = daur eu4 = eveni eu4 = evenki eu4 = oroqen eu4 = yukaghir eu4 = yeniseian }
 
 
-#Turkic - Turkish, Azerbaijani, Tatar and Tuvan
+#Turkic - Turkish, Azerbaijani, Bashkir, Chuvash, Tatar and Tuvan
+link = { vic3 = bashkir eu4 = bashkir }
+link = { vic3 = chuvash eu4 = chuvash }
 link = { vic3 = turkish eu4 = turkish eu4 = yorouk }
-link = { vic3 = tatar eu4 = sabir eu4 = hunnic eu4 = tartar eu4 = bolghar eu4 = cuman eu4 = avar eu4 = khazar eu4 = qasim  eu4 = avar eu4 = hunnic eu4 = sinoturk eu4 = nogai eu4 = chuvash }
+link = { vic3 = tatar eu4 = sabir eu4 = hunnic eu4 = tartar eu4 = bolghar eu4 = cuman eu4 = khazar eu4 = qasim  eu4 = hunnic eu4 = sinoturk eu4 = nogai }
 link = { vic3 = tatar eu4group = tartar } #Fallback
 
 
@@ -333,7 +352,7 @@ link = { vic3 = muskogean eu4 = creek eu4 = chickasaw eu4 = yamasee eu4 = yoron 
 link = { vic3 = navajo eu4 = navajo }
 link = { vic3 = nez_perce eu4 = sahaptian }
 link = { vic3 = penutian eu4 = chinook eu4 = yokut eu4 = yokuts eu4 = tsimishian eu4 = wintuan }
-link = { vic3 = inuit eu4 = aleutian eu4 = inuit eu4 = yupik eu4 = kamchatkan }
+link = { vic3 = inuit eu4 = aleutian eu4 = inuit eu4 = yupik }
 link = { vic3 = iroquoian eu4 = iroquis eu4 = tuscarora eu4 = neutral eu4 = mingwe eu4 = erielhonan }
 link = { vic3 = oodham eu4 = piman eu4 = pima eu4 = cahuila eu4 = hopi eu4 = mayo eu4 = tarachatitian eu4 = tarahumaran eu4 = yaqui eu4 = cuitlatec }
 link = { vic3 = paiute eu4 = shoshone eu4 = ute }
@@ -466,6 +485,7 @@ link = { vic3 = bengali eu4 = bengali }
 link = { vic3 = bihari eu4 = bihari eu4 = jharkhandi eu4 = maithili }
 link = { vic3 = gujarati eu4 = gujarati eu4 = nagpuri eu4 = sambalpuri eu4 = saurashtri eu4 = kathiawari }
 link = { vic3 = kanauji eu4 = kanauji eu4 = vindhyan eu4 = bagheli eu4 = bundeli }
+link = { vic3 = kho eu4 = kashmiri region = STATE_PASHTUNISTAN }
 link = { vic3 = kashmiri eu4 = kashmiri }
 link = { vic3 = marathi eu4 = marathi eu4 = bhil eu4 = khandeshi }
 link = { vic3 = oriya eu4 = oriya eu4 = garjati }

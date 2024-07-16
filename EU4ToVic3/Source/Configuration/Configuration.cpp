@@ -106,6 +106,11 @@ void Configuration::registerKeys()
 		configBlock.splitTCs = static_cast<SPLITTCS>(std::stoi(splitTCsString));
 		Log(LogLevel::Info) << "Split TCs: " << splitTCsString;
 	});
+	registerKeyword("formblocs", [this](std::istream& theStream) {
+		const auto formBlocsString = commonItems::getString(theStream);
+		configBlock.formBlocs = static_cast<FORMBLOCS>(std::stoi(formBlocsString));
+		Log(LogLevel::Info) << "Form Blocs: " << formBlocsString;
+	});
 	registerKeyword("output_name", [this](std::istream& theStream) {
 		outputName = commonItems::getString(theStream);
 		Log(LogLevel::Info) << "Output Name: " << outputName;

@@ -197,7 +197,20 @@ liberal_party = {
 				}
 			}
 			triggered_desc = {
-				desc = party_english_party
+				desc = party_constitutional_party
+				trigger = {
+					exists = c:GRE
+					THIS = c:GRE
+					has_law = law_type:law_monarchy
+					ruler = {
+						culture = {
+							has_discrimination_trait = german_speaking
+						}
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_neoteristikon_komma
 				trigger = {
 					exists = c:GRE
 					THIS = c:GRE
@@ -351,7 +364,7 @@ liberal_party = {
 			limit = {
 				leader = {
 					OR = {
-						is_feminist_character = yes			### Converter
+						has_ideology = ideology:ideology_feminist
 						has_ideology = ideology:ideology_abolitionist
 						has_ideology = ideology:ideology_pacifist
 						has_ideology = ideology:ideology_social_democrat
@@ -442,7 +455,7 @@ liberal_party = {
 			limit = {
 				OR = {
 					leader = {
-						is_feminist_character = yes			### Converter
+						has_ideology = ideology:ideology_feminist
 					}
 					has_ideology = ideology:ideology_liberal
 					has_ideology = ideology:ideology_liberal_modern
@@ -637,7 +650,6 @@ liberal_party = {
 				desc = "from_modernizer"
 			}
 		}
-
 		# Special weights for ACW
 		if = {
 			limit = {

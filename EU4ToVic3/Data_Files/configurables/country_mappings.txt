@@ -37,6 +37,7 @@
 link = { eu4 = GER name = "Germany" vic3 = GER } # Germany
 link = { eu4 = GBR vic3 = GBR } # Great Britain
 link = { name = "Britannia" vic3 = GBR } # Britannia
+link = { name = "The United Crowns" vic3 = GBR } # Dutch Britian
 link = { eu4 = SCA name = "Scandinavia" vic3 = SCA }
 link = { eu4 = RUS name = "Russia" vic3 = RUS } # Russia
 link = { eu4 = FRA reform = stateless_society vic3 = PRC } # Paris Commune, easter egg
@@ -110,7 +111,9 @@ link = { eu4 = MLO name = "Milan" vic3 = LOM } # Milan => Lombardy
 link = { eu4 = LUC name = "Lucca" vic3 = LUC } # Lucca
 link = { eu4 = MOD name = "Modena" vic3 = MOD } # Modena
 link = { name = "Kingdom of God" vic3 = ITA } # Kingdom of God => Italy
+link = { eu4 = PAP reform = kingdom_of_god_reform vic3 = ITA } # Kingdom of God => Italy
 link = { eu4 = PAP name = "The Papacy" vic3 = PAP } # Papal States 
+link = { eu4 = ROM vic3 = PAP } # Rome
 link = { eu4 = PAR name = "Parma" vic3 = PAR } # Parma
 link = { name = "Grao-Para" vic3 = PRA } # Grão-Pará
 link = { name = "Grão-Pará" vic3 = PRA } # Grão-Pará
@@ -118,8 +121,11 @@ link = { eu4 = SPI name = "Sardinia-Piedmont" vic3 = SAR } # Sardinia-Piedmont
 link = { eu4 = TTS name = "Two Sicilies" vic3 = SIC } # Two Sicilies
 link = { name = Trieste vic3 = TRE } # Trieste
 link = { eu4 = TUS name = "Toscana" vic3 = TUS } # Tuscany
+link = { eu4 = ETR vic3 = TUS } # Eturia => Tuscany
 link = { eu4 = VEN name = "Venice" vic3 = VEN } # Venice
 link = { name = "Venezia" vic3 = VEN } # Venezia => Venice
+link = { name = "Bohemian Commonwealth" vic3 = CZH } # Bohemian Commonwealth => Czechoslovakia
+link = { name = "Czechoslovakia" vic3 = CZH } # Czechoslovakia
 link = { eu4 = BOH name = "Bohemia" vic3 = BOH } # Bohemia
 link = { eu4 = KRA name = "Kraków" vic3 = KRA } # Krakow
 link = { eu4 = CRI name = "Crimea" vic3 = CRI } # Crimea
@@ -135,7 +141,7 @@ link = { eu4 = SLO vic3 = SLV } # Nitra => Slovakia
 link = { eu4 = SWI name = "Switzerland" vic3 = SWI } # Switzerland
 link = { eu4 = TRA name = "Transylvania" vic3 = TRS } # Transylvania
 link = { eu4 = UKR name = "Ruthenia" vic3 = UKR } # Ruthenia => Ukraine
-link = { name = "Czechoslovakia" vic3 = CZH } # Czechoslovakia
+# Czechoslovakia defined with Bohemia
 link = { eu4 = ALB name = "Albania" vic3 = ALB } # Albania
 link = { eu4 = BOS name = "Bosnia" vic3 = BOS } # Bosnia
 link = { eu4 = BUL name = "Bulgaria" vic3 = BUL } # Bulgaria
@@ -170,11 +176,13 @@ link = { eu4 = HED name = "Hedjaz" vic3 = HDJ } # Hedjaz
 link = { eu4 = IRQ name = "Mesopotamia" vic3 = IRQ } # Iraq
 link = { eu4 = KHI name = "Khiva" vic3 = KHI } # Khiva
 link = { eu4 = KOK vic3 = KOK } # Ferghana => Kokand
-link = { eu4 = KZH name = "Kazakh" vic3 = KAZ } # Kazakh
 link = { eu4 = MUG name = "Mughals" vic3 = MUG } # Mughals
 link = { eu4 = NAJ name = "Nejd" vic3 = NEJ } # Nejd
 link = { eu4 = OMA name = "Oman" vic3 = OMA } # Oman
 link = { eu4 = PER name = "Persia" vic3 = PER } # Persia
+link = { name = "Seljuk Empire" vic3 = PER } # Seljuk Persia
+link = { name = "Gurkani" vic3 = PER } # Timurid Persia
+link = { eu4 = ERS name = "Iran" vic3 = PER } # Misc Persia
 link = { eu4 = SHM vic3 = JAB } # Shammar => Jabal-Shammar
 link = { eu4 = YEM name = "Yemen" vic3 = YEM } # Yemen
 link = { eu4 = MHR name = "Mahra" vic3 = MAH } # Mahra
@@ -182,7 +190,7 @@ link = { eu4 = HDR vic3 = KAT } # Hadramut => Kathiri
 link = { eu4 = RAS vic3 = ZAI } # Rassids => Azal/Qasimid State
 link = { eu4 = ADE vic3 = LAH } # Aden => Lahej
 link = { eu4 = ALH vic3 = BHN } # Haasa => Bahrain
-link = { eu4 = HIN name = "Hindustan" vic3 = HND } # Hindustan
+link = { eu4 = HIN name = "Hindustan" vic3 = PAK } # Vic3 HND is actually India, so Pakistan it is
 link = { eu4 = ODH vic3 = AWA } # Oudh => Awadh
 link = { eu4 = BST name = "Bastar" vic3 = BAS } # Bastar
 link = { eu4 = BDA name = "Baroda" vic3 = BER } # Baroda
@@ -240,6 +248,7 @@ link = { eu4 = WUU reform = celestial_empire vic3 = CHI } # Wu China
 link = { eu4 = QIC reform = celestial_empire vic3 = CHI } # Qi China
 link = { eu4 = YAN reform = celestial_empire vic3 = CHI } # Yan China
 link = { eu4 = JIN reform = celestial_empire vic3 = CHI } # Jin China
+link = { eu4 = GJN reform = celestial_empire vic3 = CHI } # Other Jin China
 link = { eu4 = LNG reform = celestial_empire vic3 = CHI } # Liang China
 link = { eu4 = QIN reform = celestial_empire vic3 = CHI } # Qin China
 link = { eu4 = HUA reform = celestial_empire vic3 = CHI } # Huai China
@@ -257,7 +266,7 @@ link = { eu4 = CZH reform = celestial_empire vic3 = CHI } # Zhou China
 link = { eu4 = DAI name = "Dai Nam" vic3 = DAI } # Dai Nam => Dai Viet
 link = { eu4 = ANN name = "Annam" vic3 = DAI } # Annam => Dai Viet (Nguyen Dynasty)
 link = { name = "Vietnam" vic3 = DAI } # Vietnam => Dai Viet
-link = { eu4 = BAN name = "Java" vic3 = JAV } # Banten => Java
+link = { eu4 = MAJ name = "Java" vic3 = JAV } # Majapahit => Java
 link = { eu4 = KOR vic3 = KOR } # Korea
 link = { eu4 = LXA vic3 = LAO } # Lan Xang => Laos
 link = { eu4 = LUA name = "Luang Prabang" vic3 = LUA } # Luang Prabang
@@ -265,6 +274,7 @@ link = { eu4 = CHK name = "Champassak" vic3 = CHP } # Champassak
 link = { eu4 = VIE name = "Vientiane" vic3 = VIE } # Vientiane
 link = { eu4 = JOH name = "Johor" vic3 = JOH } # Johor
 link = { eu4 = SIA name = "Siam" vic3 = SIA } # Siam
+link = { name = "Dvaravati" vic3 = DVR } # Dvaravati
 link = { eu4 = AYU vic3 = SIA } # Ayutthaya => Siam
 link = { eu4 = LNA vic3 = CMI } # Lan Na => Chiang Mai
 link = { eu4 = TIB name = "Tibet" vic3 = TIB } # Tibet
@@ -272,7 +282,7 @@ link = { eu4 = MGE vic3 = MGL } # Mongol Empire => Mongolia
 link = { eu4 = KHA name = "Mongolia" vic3 = MGL } # Mongolia
 link = { eu4 = YUA vic3 = MGL } # (Non-Emperor) Yuan => Mongolia
 link = { name = "Philippines" vic3 = PHI } # Philippines
-link = { eu4 = MCH vic3 = MCH } # Manchu(ria)
+link = { eu4 = MCH name = "Great Jin" vic3 = MCH } # Manchu(ria)
 link = { eu4 = CAL name = "California" vic3 = CAL } # California
 link = { eu4 = CAN name = "Canada" vic3 = CAN } # Canada
 link = { eu4 = CHE name = "Cherokee" vic3 = CHE } # Cherokee
@@ -298,7 +308,8 @@ link = { name = "Ontario" vic3 = ONT } # Ontario
 link = { name = "New Brunswick" vic3 = NBS } # New Brunswick
 link = { eu4 = TEX name = "Texas" vic3 = TEX } # Texas
 link = { eu4 = CAM vic3 = UCA } # Central America
-link = { eu4 = LAP vic3 = ARG } # La Plata => Argentina
+link = { eu4 = LAP vic3 = PLT } # La Plata
+link = { name = "Argentina" vic3 = ARG } # Argentina
 link = { name = "Bolivia" vic3 = BOL } # Bolivia
 link = { eu4 = BRZ name = "Brazil" vic3 = BRZ } # Brazil
 link = { eu4 = CHL name = "Chile" vic3 = CHL } # Chile
@@ -314,8 +325,8 @@ link = { eu4 = ICE name = "Iceland" vic3 = ICL } # Iceland
 link = { eu4 = ARB name = "Arabia" vic3 = ARA } # Arabia
 link = { name = "Arabian Empire" vic3 = ARA }
 link = { name = "Baltic Union" vic3 = UBD } # United Baltic
-ink = { eu4 = PLT vic3 = BYE } # Polotsk => Belarus
-ink = { name = "White Rus" vic3 = BYE } # White Rus => Belarus
+link = { eu4 = PLT vic3 = BYE } # Polotsk => Belarus
+link = { name = "White Rus" vic3 = BYE } # White Rus => Belarus
 link = { eu4 = PLC name = "West-Slavia" vic3 = PLC } # Poland-Lithuania
 link = { name = "Gran Colombia" vic3 = GCO } # Gran Colombia
 link = { eu4 = JMN name = "Jan Mayen" vic3 = JAN } # Jan Mayen
@@ -353,7 +364,7 @@ link = { eu4 = JAI name = "Malta" vic3 = MLT } # Malta
 link = { eu4 = PRM name = "Permia" vic3 = PRM } # Perm
 link = { name = "Perm" vic3 = PRM } # Perm
 link = { name = "Hazarajat" vic3 = HZJ } # Hazarajat
-link = { name = "Turkmenistan" vic3 = TRC } # Turkmenia
+link = { name = "Turkmenistan" vic3 = TRC } # Turkmenistan
 #link = { eu4 = SIB name = "Siberia" vic3 = SIB } # Sibir => Siberia, SIB maps to S19 (Pan-nationalist formable)
 #link = { name = "Sibir" vic3 = SIB } # Sibir (NO MAPPING, Pan-nationalist formable)
 link = { eu4 = SKH name = "Sakha" vic3 = YAK } # Yakutia
@@ -385,7 +396,10 @@ link = { name = "Athabaska" vic3 = ATB } # Athabaska
 link = { eu4 = CSC name = "Cascadia" vic3 = CSC } # Cascadia
 link = { eu4 = IRO vic3 = IRO } # Iroquois => Haudenosaunee
 link = { name = "Council of Three Fires" vic3 = CTF } # Council of 3 Fires (Niswa-mishkodewinan)
+link = { eu4 = SAL name = "Salish" vic3 = SLS } # Salish
+link = { name = "Pannakwati" vic3 = BNN } # Bannock/Pannakwati
 link = { eu4 = CRE vic3 = MSC } # Creek => Muscogee
+link = { name = "Yat'siminoli" vic3 = SML } # Seminole/Yat'siminoli
 link = { name = "Ute" vic3 = UTE } # Ute
 link = { eu4 = PAW name = "Pawnee" vic3 = PWN } # Pawnee
 link = { eu4 = APA name = "Apache" vic3 = APC } # Apache
@@ -407,8 +421,10 @@ link = { name = "Occitania" vic3 = OCC } # Occitania
 link = { eu4 = TUV name = "Tuva" vic3 = TUV } # Tuva
 link = { eu4 = COR name = "Corsica" vic3 = COR } # Corsica
 link = { eu4 = SOL vic3 = TNS } # Solon => Tungus
-link = { eu4 = KMC vic3 = FER } # Kamchadals => Kamchatka
-link = { eu4 = KAZ name = "Kazan" vic3 = IUS } # Kazan
+#link = { eu4 = ??? vic3 = FER } # Far East
+link = { name = "Tatarstan" vic3 = TAR } # Tatarstan => Tatarstan
+link = { eu4 = KZH name = "Kazakh" vic3 = KAZ } # Kazakhstan -> Kazakhstan
+link = { eu4 = KAZ name = "Kazan" vic3 = TAR } # Kazan -> Tatarstan
 #link = { eu4 = ??? vic3 = NCA } # Mountain Republic (Caucasus)
 #link = { eu4 = ??? vic3 = DON } # Don Cossacks
 link = { eu4 = SYR name = "Syria" vic3 = SYR } # Syria
@@ -418,9 +434,9 @@ link = { name = "Phoenicia" vic3 = LEB } # Phoenicia => Lebanon
 #link = { eu4 = ??? vic3 = HNA } # Hunan
 #link = { eu4 = ??? vic3 = AHU } # Anhui
 link = { eu4 = YAN vic3 = ZHI } # Yan => Zhili ((Primary Culture)
-#link = { eu4 = ??? vic3 = SHN } # Shanxi
+#link = { eu4 = JIN vic3 = SHN } # Jin => Shanxi (Jin was still used as a synonym for Shanxi during Vic3's time)
 #link = { eu4 = ??? vic3 = GUI } # Guizhou
-#link = { eu4 = ??? vic3 = GNG } # Guangxi
+link = { eu4 = CGS vic3 = GNG } # Changsheng => Guangxi
 link = { eu4 = SHU vic3 = SIH } # Shu => Sichuan (Primary Culture)
 #link = { eu4 = ??? vic3 = SHA } # Shangdong
 link = { eu4 = CSH vic3 = XIB } # Shun => Xibei (Primary Culture)
@@ -440,7 +456,7 @@ link = { name = "Schaumburg-Lippe" vic3 = SCM } # Schaumburg-Lippe
 link = { name = "Mecklemburg-Strelitz" vic3 = MST } # Mecklemburg-Strelitz
 link = { name = "Zollern" vic3 = HOH } # Hohenzollern
 link = { name = "Waldeck" vic3 = WLD } # Waldeck
-link = { eu4 = BHA name = "Indian Empire" vic3 = BHT } # Bharat => India
+link = { eu4 = BHA name = "Indian Empire" vic3 = HND } # Bharat => India
 link = { name = "Michigan" vic3 = UOM } # Michigan
 link = { eu4 = CIR name = "Circassia" vic3 = CIR } # Circassia
 link = { name = "Chechnya" vic3 = CHC } # Chechnya
@@ -454,7 +470,39 @@ link = { name = "Orta Zhuz" vic3 = OZH } # Orta Zhuz
 link = { eu4 = SAV name = "Savoy" vic3 = SAV } # Savoy
 link = { name = "Rhineland" vic3 = SAV } # Rhineland
 link = { name = "Paris Commune" vic3 = PRC } # Paris Commune
-link = { name = "Nusantara" vic3 = IDN } # Nusantara => Indonesia
+link = { eu4 = KRL name = "Karelia" vic3 = KRL } # Karelia
+link = { eu4 = BSH name = "Bashkiria" vic3 = BKR } # Bashkiria
+link = { eu4 = BRT name = "Buryatia" vic3 = BRY } # Buryatia
+link = { eu4 = KMC name = "Kamchadals" vic3 = KMC } # Kamchadals => Kamchatka
+link = { eu4 = CHU name = "Chukchi" vic3 = CKC } # Chukchi => Chukotka
+link = { eu4 = OIR name = "Oirat" vic3 = ALI } # Oirat => Altai
+link = { name = "Ural" vic3 = URL } # Ural
+link = { eu4 = YUG name = "Yugra" vic3 = KNT } # Yugra => Kanty-Mansi
+link = { name = "Udmurtia" vic3 = UDM } # Udmurtia
+link = { eu4 = CVS name = "Chuvasa" vic3 = CHV } # Chuvasa => Chuvashia
+link = { eu4 = MDV name = "Mordvinia" vic3 = MRD } # Mordvinia => Erzya-Moksha
+link = { name = "Mari-El" vic3 = MRI } # Mari-El
+link = { eu4 = TRS name = "Tajikistan" vic3 = TJI } # Transoxiana => Tajikistan
+link = { eu4 = SHY name = "Uzbek" vic3 = UZB } # Uzbek => Uzbekistan
+link = { eu4 = CHG name = "Kirgizia" vic3 = KYR } # Moghulistan => Kirgizia
+link = { eu4 = MSA vic3 = IDN } # Malaya (and all of its renames which have equivalents in Vic3) => Indonesia
+link = { eu4 = FLO vic3 = FLR } # Florida
+link = { eu4 = HLR vic3 = HRE } # Holy Roman Empire
+link = { name = "Kabulistan" vic3 = KAB } # Kabul
+link = { name = "Kandahar" vic3 = KAN } # Kandahar
+link = { name = "Herat" vic3 = HER } # Herat
+link = { name = "Chitral" vic3 = CHT } # Chitral
+link = { name = "Maimana" vic3 = MAI } # Maimana
+link = { name = "Kunduz" vic3 = KUN } # Kunduz
+link = { eu4 = FRS name = "Fars" vic3 = ARB } # Fars => Arabistan
+link = { name = "Bahawalpur" vic3 = BHW } # Bahawalpur
+link = { name = "Turkmenia" vic3 = TRM } # Turkmenia
+link = { eu4 = IME name = "Abkhazia" vic3 = ABK } # Imereti => Abkhazia
+link = { eu4 = LRI name = "Luristan" vic3 = LUR } # Luristan
+link = { eu4 = TAB name = "Mazandaran" vic3 = MAZ } # Mazandaran
+link = { name = Benelux vic3 = UNL } # United Netherlands
+link = { eu4 = BUR name = "Upper Burgundy" vic3 = UNL } # Burgundy => United Netherlands (blame Vic3)
+
 
 #link = { eu4 = NAT vic3 = NAT } # Natives (Commented out in vanilla loc files)
 #link = { name = "Manchester" vic3 = MAC } # Manchester (Commented out in vanilla loc files)
@@ -468,7 +516,7 @@ link = { eu4 = ETH name = "Abyssinia" vic3 = ETH } # Ethiopia
 link = { eu4 = MIR vic3 = MAD } # (I)merina
 link = { name = "Mascara" vic3 = MAS } # Mascara
 link = { name = "Liberia" vic3 = LIB } # Liberia
-link = { eu4 = MOR name = "Maghreb" vic3 = MOR } # Morocco
+link = { eu4 = MOR vic3 = MOR } # Morocco
 link = { name = "Natal-Zululand"vic3 = NAL } # Natal-Zululand
 link = { name = "Oranje" vic3 = ORA } # Oranje
 link = { name = "South Africa" vic3 = SAF } # South Africa
@@ -614,6 +662,7 @@ link = { eu4 = MRA name = "Maravi" vic3 = MRV } # Maravi
 link = { name = "Borgu" vic3 = BRG } # Borgu
 link = { name = "Bamum" vic3 = BMM } # Bamum
 link = { eu4 = CRN name = "Cornwall" vic3 = CNW } # Cornwall
+link = { name = "Maghreb" vic3 = MGB } # Maghreb
 
 ## 01_pacific_and_australasia.txt
 link = { eu4 = UHW vic3 = HAW } # Hawaii
@@ -645,8 +694,10 @@ link = { eu4 = GMI vic3 = GML } # Kamilaroi => Gamilaraay
 link = { eu4 = AUS name = "Australia" vic3 = AST } # Australia
 link = { eu4 = NZL vic3 = NZL } # Zealandia => New Zealand
 link = { name = "Tasmania" vic3 = TAS } # Tasmania
-#link = { eu4 = ??? vic3 = DEI } # Dutch East Indies
+link = { eu4 = VOC vic3 = DEI } # Dutch East Indies
 link = { eu4 = BNE vic3 = SLW } # Bone => Sulawesi (ruled by Bone Dynasty)
+#link = { eu4 = ??? vic3 = WTI } # Wati
+#link = { eu4 = ??? vic3 = MRN } # Mirning
 
 ### EU4-Vic3 coded-in tags
 # Decentralized World
@@ -697,8 +748,8 @@ link = { eu4 = BTU vic3 = B14 } # Butuan
 #link = { eu4 = ??? vic3 = B15 } # Bunuban
 #link = { eu4 = ??? vic3 = B16 } # Barkly
 #link = { eu4 = ??? vic3 = B17 } # Bindal
-link = { eu4 = BRT vic3 = B18 } # Buryats => Buryaad Ulas
-link = { eu4 = BSH vic3 = B19 } # Bashkiria => Bashgirid
+#link = { eu4 = ??? vic3 = B18 } # ??? (Was Buryats => Buryaad Ulas)
+#link = { eu4 = ??? vic3 = B19 } # ??? (Was Bashgirid)
 #link = { eu4 = ??? vic3 = B20 } # Bolghars
 #link = { eu4 = ??? vic3 = B21 } # Burtas
 #link = { eu4 = ??? vic3 = B22 } # Brycheiniog
@@ -733,27 +784,28 @@ link = { eu4 = CUA vic3 = C23 } # Charrua
 #link = { eu4 = ??? vic3 = C24 } # Caeté
 #link = { eu4 = ??? vic3 = C25 } # Chono
 #link = { eu4 = ??? vic3 = CT1 } # Chimgi-Tura
-#link = { eu4 = ??? vic3 = D01 } # Dákéyi
-#link = { eu4 = ??? vic3 = D02 } # Denaakk'e
-#link = { eu4 = ??? vic3 = D03 } # Denaʼina Ełnena
-link = { eu4 = SYD vic3 = D04 } # Sayisi Dene => Denésoliné 
-#link = { eu4 = ??? vic3 = D05 } # Dakelh-ne
-#link = { eu4 = ??? vic3 = D06 } # Dongokjeo
-#link = { eu4 = ??? vic3 = D07 } # Daly
-#link = { eu4 = ??? vic3 = D08 } # Dyirbal
-link = { eu4 = MIA vic3 = D09 } # Mianjin => Durubalic
-link = { eu4 = ALB vic3 = D10 } # Dyrrachion
-#link = { eu4 = ??? vic3 = D11 } # Dulğan
-#link = { eu4 = ??? vic3 = D12 } # Drevliania
-#link = { eu4 = ??? vic3 = D13 } # Dyfed
-link = { eu4 = DMS vic3 = D14 } # Desmond => Deasmhumhain
-#link = { eu4 = ??? vic3 = D15 } # Dregovichia
+#link = { eu4 = ??? vic3 = DA0 } # Dákéyi
+#link = { eu4 = ??? vic3 = DA1 } # Dakelh-ne
+#link = { eu4 = ??? vic3 = DA2 } # Daly
 #link = { eu4 = ??? vic3 = DC1 } # Deh Cho
+#link = { eu4 = ??? vic3 = DE0 } # Denaakk'e
+#link = { eu4 = ??? vic3 = DE1 } # Denaʼina Ełnena
+link = { eu4 = SYD vic3 = DE2 } # Sayisi Dene => Denésoliné 
+link = { eu4 = DMS vic3 = DE3 } # Desmond => Deasmhumhain
 #link = { eu4 = ??? vic3 = DH1 } # Dichinanek' Hwt'ana
 #link = { eu4 = ??? vic3 = DH2 } # Doogh Hit’an
 link = { eu4 = RYU vic3 = DL1 } # Ryukyu => Da Liuqiu
+#link = { eu4 = ??? vic3 = DO0 } # Dongokjeo
+#link = { eu4 = ??? vic3 = DR0 } # Drevliania
 link = { eu4 = DGL vic3 = DR1 } # Maldives => Dhivehi Raajje
 link = { eu4 = LOI vic3 = DR2 } # The Isles => Dal Riata
+#link = { eu4 = ??? vic3 = DR3 } # Dregovichia
+link = { eu4 = MIA vic3 = DU0 } # Mianjin => Durubalic
+#link = { eu4 = ??? vic3 = DU1 } # Dulğan
+# Dvaravati defined with Ayutthaya
+link = { eu4 = ALB vic3 = DY0 } # Dyrrachion
+#link = { eu4 = ??? vic3 = DY1 } # Dyirbal
+#link = { eu4 = ??? vic3 = DY2 } # Dyfed
 #link = { eu4 = ??? vic3 = DX1 } # Deg Xitʼan
 #link = { eu4 = ??? vic3 = DZ1 } # Dane-Zaa
 #link = { eu4 = ??? vic3 = E01 } # Eystridal
@@ -815,7 +867,7 @@ link = { eu4 = IND vic3 = I04 } # Indrapura
 #link = { eu4 = ??? vic3 = I06 } # Igorot
 #link = { eu4 = ??? vic3 = I07 } # Ibalon
 #link = { eu4 = ??? vic3 = I08 } # Iwaidjan
-link = { eu4 = KMC vic3 = I09 } # Itelmens
+#link = { eu4 = ??? vic3 = I09 } # Itelmens
 #link = { eu4 = ??? vic3 = I10 } # Ilmenia
 #link = { eu4 = ??? vic3 = IB0 } # Isles of the Blest
 #link = { eu4 = ??? vic3 = IC0 } # Insee Cait
@@ -828,7 +880,7 @@ link = { eu4 = KMC vic3 = I09 } # Itelmens
 #link = { eu4 = ??? vic3 = J05 } # Jirajara
 #link = { eu4 = ??? vic3 = K00 } # Kavalan
 #link = { eu4 = ??? vic3 = K01 } # Kola
-link = { eu4 = KRL vic3 = K02 } # Karelia
+#link = { eu4 = ??? vic3 = K02 } # ??? (Was Karelia)
 #link = { eu4 = ??? vic3 = K03 } # Ktunaxa
 #link = { eu4 = ??? vic3 = K04 } # Kitlinermiut
 #link = { eu4 = ??? vic3 = K05 } # Kivallirmiutut
@@ -843,7 +895,7 @@ link = { eu4 = MLG vic3 = K13 } # Malgana => Kartu
 #link = { eu4 = ??? vic3 = K14 } # Karnic
 #link = { eu4 = ??? vic3 = K15 } # Kalkatungic
 link = { eu4 = WRU vic3 = K16 } # Wurundjeri => Kulinic
-link = { eu4 = CHU vic3 = K17 } # Chukchi => Koryaks
+#link = { eu4 = ??? vic3 = K17 } # Koryaks
 #link = { eu4 = ??? vic3 = K18 } # Kets
 #link = { eu4 = ??? vic3 = K19 } # Kimak
 #link = { eu4 = ??? vic3 = K20 } # Kirghiz
@@ -909,12 +961,12 @@ link = { eu4 = MKS vic3 = M15 } # Makassar
 link = { eu4 = MAS vic3 = M18 } # Madyas
 #link = { eu4 = ??? vic3 = M19 } # Ma-i
 #link = { eu4 = ??? vic3 = M20 } # Marrngu
-#link = { eu4 = ??? vic3 = M21 } # Mirning
+#link = { eu4 = ??? vic3 = M21 } # ??? (Was Mirning)
 #link = { eu4 = ??? vic3 = M22 } # Murri
 #link = { eu4 = ??? vic3 = M23 } # Mayi
 #link = { eu4 = ??? vic3 = M24 } # Muruwari
 #link = { eu4 = ??? vic3 = M25 } # Murom
-link = { eu4 = MDV vic3 = M26 } # Mordvinia => Mordva
+#link = { eu4 = ??? vic3 = M26 } # ??? (Was Mordvinia => Mordva)
 link = { eu4 = MSH vic3 = M27 } # Meshchera
 #link = { eu4 = ??? vic3 = M28 } # Merya
 link = { eu4 = MRC vic3 = M29 } # Mercia
@@ -1011,10 +1063,10 @@ link = { eu4 = QQA vic3 = Q02 } # Quisqueya
 #link = { eu4 = ??? vic3 = S03 } # Savo
 #link = { eu4 = ??? vic3 = S04 } # Sortavala
 #link = { eu4 = ??? vic3 = S05 } # Syktyvkar
-#link = { eu4 = ??? vic3 = S06 } # Yat'siminoli
+#link = { eu4 = ??? vic3 = S06 } # ??? (Was Yat'siminoli)
 #link = { eu4 = ??? vic3 = S07 } # S'amala
 #link = { eu4 = ??? vic3 = S08 } # Siletz Confederacy
-link = { eu4 = SAL vic3 = S09 } # Salish
+#link = { eu4 = ??? vic3 = S09 } # ??? (Was Salish)
 #link = { eu4 = ??? vic3 = S10 } # Shawnee (Done through "Merge Nations")
 link = { eu4 = SGP vic3 = S11 } # Sugpiaq
 #link = { eu4 = ??? vic3 = S12 } # Sallirmiut
@@ -1120,7 +1172,7 @@ link = { eu4 = WAM vic3 = W01 } # Wampanoag
 #link = { eu4 = ??? vic3 = W07 } # weSwatini
 #link = { eu4 = ??? vic3 = W08 } # Wehali
 #link = { eu4 = ??? vic3 = W09 } # Waray
-#link = { eu4 = ??? vic3 = W10 } # Wati
+#link = { eu4 = ??? vic3 = W10 } # ??? (Was Wati)
 #link = { eu4 = ??? vic3 = W11 } # Worrorran
 #link = { eu4 = ??? vic3 = W12 } # Warumungu
 #link = { eu4 = ??? vic3 = W13 } # Warluwar
@@ -1150,7 +1202,7 @@ link = { eu4 = YOL vic3 = Y06 } # Yolngu
 link = { eu4 = YNU vic3 = Y07 } # Yanuwa => Yanyuwa
 #link = { eu4 = ??? vic3 = Y08 } # Yarli
 #link = { eu4 = ??? vic3 = Y09 } # Yotayotic
-link = { eu4 = YUG vic3 = Y10 } # Yugra
+#link = { eu4 = ??? vic3 = Y10 } # ??? (Was Yugra)
 #link = { eu4 = ??? vic3 = Y11 } # Yabguids
 #link = { eu4 = ??? vic3 = Y12 } # Yatvingia
 #link = { eu4 = ??? vic3 = Y13 } # Yaghan
@@ -1679,8 +1731,8 @@ link = { eu4 = KOJ name = "Jerusalem" flag_code = legacy_JER } # Jerusalem
 link = { name = "Outremer" flag_code = legacy_JER }
 link = { eu4 = MSA name = "Malaya" flag_code = legacy_MLY } # Malaya
 
-link = { eu4 = ABE flag_code = legacy_ABE } # Abenaki
-link = { eu4 = ASI flag_code = legacy_ASI } # Assiniboine
+link = { eu4 = ABE flag_code = legacy_ABE vic3 = W02 } # Abenaki - mapping to W02 as they are leader of W02 mergeblock
+link = { eu4 = ASI flag_code = legacy_ASI vic3 = IRC } # Assiniboine
 link = { eu4 = CAD flag_code = legacy_CAD } # Caddo
 link = { eu4 = CHI flag_code = legacy_CHN } # Chickasaw
 link = { eu4 = CHO flag_code = legacy_CCW } # Choctaw
@@ -1691,7 +1743,7 @@ link = { eu4 = LEN flag_code = legacy_LEN } # Lenape
 link = { eu4 = MAH flag_code = legacy_MHC } # Mahican
 link = { eu4 = MIK flag_code = legacy_MIK } # Mikmaq
 link = { eu4 = MMI flag_code = legacy_MMI } # Miami
-link = { eu4 = OJI flag_code = legacy_OJI } # Ojibwa
+link = { eu4 = OJI flag_code = legacy_OJI vic3 = UN1 } # Ojibwa - mapping to UN1 as they are leader of UN1 mergeblock
 link = { eu4 = OSA flag_code = legacy_OSA } # Osage
 link = { eu4 = OTT flag_code = legacy_OTT } # Ottawa
 link = { eu4 = PEQ flag_code = legacy_PEQ } # Pequot
@@ -1922,7 +1974,7 @@ link = { eu4 = LAI flag_code = legacy_FJL } # Lau
 link = { eu4 = ALT flag_code = legacy_ALM } # Altamaha
 link = { eu4 = ICH flag_code = legacy_ICH } # Ichisi
 link = { eu4 = COF flag_code = legacy_COF } # Cofitachequi
-link = { eu4 = JOA flag_code = legacy_JOA } # Joara
+link = { eu4 = JOA flag_code = legacy_JOA vic3 = C02 } # Joara - Ye Iswa (Catawba) in Vic3
 link = { eu4 = ETO flag_code = legacy_ETO } # Etowah
 link = { eu4 = SAT flag_code = legacy_STP } # Satapo
 link = { eu4 = CIA flag_code = legacy_CIA } # Chiaha
@@ -1973,7 +2025,7 @@ link = { eu4 = MLS flag_code = legacy_MLS } # Maliseet
 link = { eu4 = NEH flag_code = legacy_NHY } # Nehiyaw
 link = { eu4 = NAK flag_code = legacy_NAK } # Nakawe
 link = { eu4 = HWK flag_code = legacy_HWK } # Hathawekela
-link = { eu4 = CLG flag_code = legacy_CLG } # Chalahgawtha
+link = { eu4 = CLG flag_code = legacy_CLG vic3 = S10 } # Chalahgawtha
 link = { eu4 = KSP flag_code = legacy_KSP } # Kispoko
 link = { eu4 = MSG flag_code = legacy_MSG } # Mississage
 link = { eu4 = WCY flag_code = legacy_WCY } # Wichiyena

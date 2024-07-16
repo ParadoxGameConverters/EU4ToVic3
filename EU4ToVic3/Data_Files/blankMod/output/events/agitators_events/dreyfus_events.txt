@@ -109,26 +109,12 @@ dreyfus.1 = {
 		else = {
 			cu:ashkenazi = { save_scope_as = dreyfus_culture }
 		}
-		converter_rule_63_effect = yes
-		if = {
-			limit = { has_variable = rule_63_effect }
-			create_character = {
-				template = fem_dreyfus_character_template			
-				save_scope_as = alfred_dreyfus_scope
+		create_character = {
+			template = canonic_dreyfus_character_template			
+			save_scope_as = alfred_dreyfus_scope
 				on_created = {
 					place_character_in_void = 10000
 					set_variable = alfred_dreyfus_var
-				}
-			}
-		}
-		else = {
-			create_character = {
-				template = canonic_dreyfus_character_template			
-				save_scope_as = alfred_dreyfus_scope
-				on_created = {
-					place_character_in_void = 10000
-					set_variable = alfred_dreyfus_var
-				}
 			}
 		}
 		##Converter
@@ -284,30 +270,14 @@ dreyfus.2 = {
 		ig:ig_armed_forces = {
 			save_scope_as = dreyfus_armed_forces_scope
 		}
-		##Converter
-		converter_rule_63_effect = yes
-		if = {
-			limit = { has_variable = rule_63_effect }
-			create_character = {
-				template = fem_esterhazy_character_template			
-				save_scope_as = ferdinand_esterhazy_scope
-				on_created = {
-					place_character_in_void = 10000
-					set_variable = ferdinand_esterhazy_var
-				}
+		create_character = {
+			template = canonic_esterhazy_character_template			
+			save_scope_as = ferdinand_esterhazy_scope
+			on_created = {
+				place_character_in_void = 10000
+				set_variable = ferdinand_esterhazy_var
 			}
 		}
-		else = {
-			create_character = {
-				template = canonic_esterhazy_character_template			
-				save_scope_as = ferdinand_esterhazy_scope
-				on_created = {
-					place_character_in_void = 10000
-					set_variable = ferdinand_esterhazy_var
-				}
-			}
-		}
-		##Converter
 		random_country = {
 			limit = {
 				has_variable = dreyfus_rival_country_var
@@ -411,28 +381,13 @@ dreyfus.3 = {
 			}
 		}
 		else = {
-			##Converter
-			converter_rule_63_effect = yes
-			if = {
-				limit = { has_variable = rule_63_effect }
-				create_character = {
-					template = fem_zola_character_template			
-					save_scope_as = emile_zola_scope
-					on_created = {
-						set_variable = emile_zola_var
-					}
+			create_character = {
+				template = canonic_zola_character_template			
+				save_scope_as = emile_zola_scope
+				on_created = {
+					set_variable = emile_zola_var
 				}
 			}
-			else = {
-				create_character = {
-					template = canonic_zola_character_template			
-					save_scope_as = emile_zola_scope
-					on_created = {
-						set_variable = emile_zola_var
-					}
-				}
-			}
-			##Converter
 		}
 	}
 

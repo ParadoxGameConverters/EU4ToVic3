@@ -15,6 +15,12 @@ void EU4::Leader::parseRuler(std::istream& theStream)
 	registerKeys();
 	rulerParser.parseStream(theStream);
 	clearRegisteredKeywords();
+
+	// Patch for oddities.
+	if (character.name.find(',') != std::string::npos)
+	{
+		character.name.erase(std::remove(character.name.begin(), character.name.end(), ','), character.name.end());
+	}
 }
 
 void EU4::Leader::registerKeys()

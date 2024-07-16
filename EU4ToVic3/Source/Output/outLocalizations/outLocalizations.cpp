@@ -4,6 +4,27 @@
 #include <fstream>
 #include <ranges>
 
+void OUT::exportPowerBlocLocs(const std::string& outputName, const std::vector<V3::PowerBloc>& powerBlocs)
+{
+	const std::set<std::string> knownVic3Localizations =
+		 {"braz_por", "english", "french", "german", "japanese", "korean", "polish", "russian", "simp_chinese", "spanish", "turkish"};
+
+	for (const auto& language: knownVic3Localizations)
+	{
+		std::ofstream output("output/" + outputName + "/localization/" + language + "/replace/converted_power_blocs_l_" + language + ".yml");
+		if (!output.is_open())
+			throw std::runtime_error("output/" + outputName + "/localization/" + language + "/replace/converted_power_blocs_l_" + language + ".yml");
+
+		output << commonItems::utf8BOM << "l_" << language << ":\n";
+		for (const auto& bloc: powerBlocs)
+		{
+			if (bloc.localizations.contains(language))
+				output << " " << bloc.owner << "_BLOC: \"" << bloc.localizations.at(language) << "\"\n";
+		}
+		output.close();
+	}
+}
+
 void OUT::exportCountryNamesAndAdjectives(const std::string& outputName,
 	 const std::map<std::string, std::shared_ptr<V3::Country>>& countries,
 	 const V3::LocalizationLoader& knownLocs)

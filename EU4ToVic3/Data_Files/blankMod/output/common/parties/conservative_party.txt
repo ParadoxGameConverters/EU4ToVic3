@@ -266,7 +266,20 @@ conservative_party = {
 				}
 			}
 			triggered_desc = {
-				desc = party_russian_party
+				desc = party_napist_party
+				trigger = {
+					exists = c:GRE
+					THIS = c:GRE
+					has_law = law_type:law_monarchy
+					ruler = {
+						culture = {
+							has_discrimination_trait = german_speaking
+						}
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_ethnikon_komma
 				trigger = {
 					exists = c:GRE
 					THIS = c:GRE
@@ -408,9 +421,6 @@ conservative_party = {
 					has_ideology = ideology:ideology_patriarchal
 					has_ideology = ideology:ideology_moralist
 					has_ideology = ideology:ideology_corporatist
-					### Converter
-					has_ideology = ideology:ideology_maternalistic
-					has_ideology = ideology:ideology_matriarchal
 				}
 			}
 			add = {
@@ -451,7 +461,7 @@ conservative_party = {
 			limit = {
 				leader = {
 					OR = {
-						is_feminist_character = yes			### Converter
+						has_ideology = ideology:ideology_feminist
 						has_ideology = ideology:ideology_pacifist
 						has_ideology = ideology:ideology_reformer
 						has_ideology = ideology:ideology_humanitarian
@@ -493,8 +503,6 @@ conservative_party = {
 				OR = {
 					has_ideology = ideology:ideology_plutocratic
 					has_ideology = ideology:ideology_paternalistic
-					### Converter
-					has_ideology = ideology:ideology_maternalistic
 				}
 				owner = {
 					has_law = law_type:law_universal_suffrage
@@ -573,12 +581,7 @@ conservative_party = {
 		}
 		if = { # patriarchs more likely to join conservatives with women's suffrage
 			limit = {
-				### Converter
-				OR = {
-					has_ideology = ideology:ideology_patriarchal
-					has_ideology = ideology:ideology_matriarchal
-				}
-				### Converter
+				has_ideology = ideology:ideology_patriarchal
 				owner = {
 					has_law = law_type:law_womens_suffrage
 				}
@@ -590,12 +593,7 @@ conservative_party = {
 		}
 		if = { # patriarchs more likely to join conservatives with working women
 			limit = {
-				### Converter
-				OR = {
-					has_ideology = ideology:ideology_patriarchal
-					has_ideology = ideology:ideology_matriarchal
-				}
-				### Converter
+				has_ideology = ideology:ideology_patriarchal
 				owner = {
 					has_law = law_type:law_women_in_the_workplace
 				}
@@ -649,8 +647,6 @@ conservative_party = {
 					has_ideology = ideology:ideology_patriarchal
 					has_ideology = ideology:ideology_patriotic
 					leader = { has_ideology = ideology:ideology_authoritarian }
-					### Converter
-					has_ideology = ideology:ideology_matriarchal
 				}
 			}
 			add = {
@@ -663,8 +659,6 @@ conservative_party = {
 				OR = {
 					has_ideology = ideology:ideology_moralist
 					has_ideology = ideology:ideology_paternalistic
-					### Converter
-					has_ideology = ideology:ideology_maternalistic
 				}
 				owner = {
 					NOR = {

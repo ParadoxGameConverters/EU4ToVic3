@@ -1,0 +1,450 @@
+coat_of_arms_template_lists = {
+	all = {
+		50 = template_charge
+		25 = template_charge_metal
+		20 = template_charge_offset
+		10 = template_charge_offset_metal
+		
+		25 = template_charge_in_circle
+		25 = template_charge_in_circle_metal		
+		25 = template_charge_in_ring
+		25 = template_charge_in_ring_metal
+		
+		50 = template_tricolor
+		20 = template_tricolor_vertical_charge
+		20 = template_tricolor_horizontal_charge
+		
+		40 = template_bicolor
+		
+		50 = template_ordinary
+		25 = template_ordinary_metal
+		
+		# stripes and pales
+		100 = template_stripes
+		10 = template_stripes_rotated		
+				
+		10 = template_per_saltire
+		10 = template_per_saltire_metal
+		10 = template_saltire
+		5 = template_saltire_metal
+		
+		10 = template_chile
+		10 = template_texas
+		10 = template_uruguay
+		10 = template_brazil
+		10 = template_czechia
+		10 = template_dominican
+		10 = template_spain
+		10 = template_canada
+		
+		10 = template_canton_ordinary
+		5 = template_canton_ordinary_metal
+		10 = template_canton_charge
+		5 = template_canton_charge_metal
+		
+		2 = template_quarter
+		2 = template_quarter_metal
+		2 = template_quarter_counterchanged
+		1 = template_quarter_counterchanged_metal
+		1 = template_quarter_counterchanged_charges
+		1 = template_quarter_counterchanged_charges_metal
+		2 = template_quarter_counterchanged_canton_charge
+		1 = template_quarter_counterchanged_canton_charge_metal
+		
+		1 = template_semy
+		1 = template_semy_metal
+		# extremely rare
+		
+		# borders (toned down for christian nations)
+		5 = template_border_charge
+		5 = template_border_charge_metal
+		5 = template_border_charge_offset
+		5 = template_border_charge_offset_metal
+		5 = template_border_of_three_charge_offset
+		5 = template_border_of_three_charge_offset_metal
+		
+		special_selection = {
+			trigger = {
+				exists = scope:target
+				scope:target ?= {
+					coa_def_cross_trigger = no
+				}
+			}				
+			20 = template_border_charge
+			20 = template_border_charge_metal
+			20 = template_border_charge_offset
+			20 = template_border_charge_offset_metal
+			20 = template_border_of_three_charge_offset
+			20 = template_border_of_three_charge_offset_metal
+		}			
+				
+		special_selection = {
+			trigger = {
+				exists = scope:target
+				scope:target ?= {
+					OR = {
+					 	coa_def_crescent_trigger = yes
+					 	coa_def_buddhist_trigger = yes
+						# for now just those two, but more designs/nations groups should be included
+					}
+				}
+			}					
+			50 = template_plain_flag
+			50 = template_plain_flag_metal			
+		}		
+		
+		special_selection = {
+			trigger = {
+				exists = scope:target
+				scope:target ?= {
+					 coa_def_african_trigger = yes
+				}
+			}					
+			25 = template_tricolor_fimbriated	
+		}	
+
+		special_selection = {
+			trigger = {
+				exists = scope:target
+				scope:target ?= {
+					 coa_def_west_african_trigger = yes
+				}
+			}					
+			300 = template_african_border_of_3	
+			300 = template_african_border_of_3_inverted	
+		}	
+
+		special_selection = {
+			trigger = {
+				exists = scope:target
+				scope:target ?= {
+					any_primary_culture = {
+						has_discrimination_trait = christian
+					}
+				}
+			}					
+			10 = template_cross_charge_in_canton
+			10 = template_cross_charge_in_canton_metal
+			10 = template_cross_charges_in_quadrants
+			10 = template_cross_charges_in_quadrants_metal				
+		}	
+		
+		# European States
+		
+		special_selection = {
+			trigger = {
+				exists = scope:target
+				scope:target ?= {
+					any_primary_culture = {
+						has_discrimination_trait = european_heritage
+					}
+					religion = {
+						has_discrimination_trait = christian
+					}
+				}
+			}					
+			100 = template_centered_coa
+			200 = template_bicolor 
+			200 = template_tricolor	
+			100 = template_cross
+			100 = template_cross_metal
+			
+			special_selection = {
+				trigger = {
+					exists = scope:target
+					scope:target = {					
+						coa_def_monarchy_flag_trigger = yes
+					}
+				}	
+				1000 = template_centered_coa
+			}	
+			special_selection = {
+				trigger = {
+					exists = scope:target
+					scope:target ?= {					
+						coa_republic_trigger = yes
+					}
+				}	
+				1000 = template_bicolor 
+				1000 = template_tricolor	
+			}			
+		}	
+
+		special_selection = {
+			trigger = {
+				exists = scope:target
+				scope:target ?= {
+					religion ?= {
+						has_discrimination_trait = christian
+					}				
+					OR = {
+					 	coa_def_italian_trigger = yes
+					 	coa_def_iberian_trigger = yes
+					}
+				}
+			}				
+			1000 = template_bicolor 
+			250 = template_cross
+			250 = template_cross_metal		
+			200 = template_cross_charge_in_canton
+			200 = template_cross_charge_in_canton_metal
+			200 = template_cross_charges_in_quadrants
+			200 = template_cross_charges_in_quadrants_metal			
+			500 = template_border_charge	
+			500 = template_stripes
+			400 = template_ordinary
+		}	
+		
+		special_selection = {
+			trigger = {
+				exists = scope:target
+				scope:target ?= {
+					coa_def_native_american_trigger = yes
+				}
+			}				
+			50 = template_charge_in_circle
+			50 = template_charge_in_circle_metal
+			50 = template_charge_in_ring
+			50 = template_charge_in_ring_metal
+
+		}			
+		# random commies
+		special_selection = {
+			trigger = {
+				exists = scope:target
+				scope:target ?= {
+					is_revolutionary = yes
+					OR = {
+						ig:ig_trade_unions = {
+							is_in_government = yes
+						}
+						any_interest_group = {
+							is_in_government = yes
+							has_ideology = ideology:ideology_proletarian
+						}
+					}
+				}
+			}
+
+			500 = template_communist_1
+			250 = template_communist_2
+			500 = template_communist_3
+			250 = template_communist_4
+			250 = template_communist_5
+			250 = template_communist_6
+			100 = template_communist_bicolor_1
+			250 = template_communist_bicolor_2
+			500 = template_communist_centered_stripe
+			500 = template_communist_bottom_stripe
+			250 = template_communist_left_stripe
+			100 = template_communist_right_stripe
+			100 = template_communist_vert_center_stripe
+			100 = template_communist_per_saltire_star
+			100 = template_communist_tribar
+			100 = template_communist_triangle		
+			500 = template_communist_horizontal_tricolor_fimbriated
+			500 = template_communist_horizontal_tricolor
+			250 = template_communist_charge_star		
+			100 = template_communist_canton
+			250 = template_communist_red_star_tricolor
+			100 = template_communist_red_star_center
+			100 = template_communist_red_star_canton
+		}
+
+		# russian commies!
+		special_selection = {
+			trigger = {
+				exists = scope:target
+				scope:target ?= {
+					is_revolutionary = yes
+					OR = {
+						ig:ig_trade_unions = {
+							is_in_government = yes
+						}
+						any_interest_group = {
+							is_in_government = yes
+							#has_ideology = ideology:ideology_proletarian
+						}
+					}
+					OR = {
+						country_has_primary_culture = cu:russian
+						country_has_primary_culture = cu:byelorussian
+						country_has_primary_culture = cu:ukrainian
+					}
+				}
+			}
+
+			100000 = template_communist_russia
+		}
+
+		special_selection = {
+			trigger = {
+				exists = scope:target
+				scope:target ?= {
+					is_revolutionary = yes
+					ig:ig_armed_forces = {
+						is_in_government = yes
+					}
+				}
+			}
+
+			100000 = template_revolution_armed_forces
+		}
+		
+		special_selection = {
+			trigger = {
+				exists = scope:target
+				scope:target ?= {
+					is_revolutionary = yes
+				}
+			}
+
+			500 = template_revolution_1
+			500 = template_revolution_2
+			500 = template_revolution_3
+		}
+		
+		### Fascist templates
+		
+		special_selection = {
+			trigger = {
+				exists = scope:target
+				scope:target ?= {					
+					coa_def_fascist_flag_trigger = yes
+				}
+			}	
+	
+			10000 = template_fascist_white_roundel
+			5000 = template_fascist_white_roundel_02
+			2500 = template_fascist_cross_roundel
+			2500 = template_fascist_cross_roundel_outline
+			5000 = template_fascist_outline
+			5000 = template_fascist_border_charge
+			2500 = template_fascist_white_square
+			2500 = template_fascist_outline_square
+			2500 = template_fascist_cross_square
+		}					
+	}
+	communist = {
+		50 = template_communist_1
+		25 = template_communist_2
+		50 = template_communist_3
+		10 = template_communist_bicolor_1
+		25 = template_communist_bicolor_2
+		50 = template_communist_centered_stripe
+		50 = template_communist_bottom_stripe
+		25 = template_communist_left_stripe
+		10 = template_communist_right_stripe
+		10 = template_communist_vert_center_stripe
+		10 = template_communist_per_saltire_star
+		10 = template_communist_tribar
+		10 = template_communist_triangle		
+		50 = template_communist_horizontal_tricolor_fimbriated
+		50 = template_communist_horizontal_tricolor
+		25 = template_communist_charge_star		
+		10 = template_communist_canton
+		25 = template_communist_red_star_tricolor
+		10 = template_communist_red_star_center
+		10 = template_communist_red_star_canton
+			
+		special_selection = {
+			trigger = { 
+				any_primary_culture = {
+					OR = {				
+						has_discrimination_trait = european_heritage
+						has_discrimination_trait = central_asian_heritage
+					}
+				}
+			}
+			300 = template_communist_centered_stripe
+			300 = template_communist_bottom_stripe
+			200 = template_communist_left_stripe
+			100 = template_communist_right_stripe
+			100 = template_communist_vert_center_stripe
+		}		
+
+		special_selection = {
+			trigger = { 
+				any_primary_culture = {
+					OR = {
+						has_discrimination_trait = south_asian_heritage
+						has_discrimination_trait = southeast_asian_heritage
+						has_discrimination_trait = east_asian_heritage
+					}
+				}
+			}
+			300 = template_communist_1
+			300 = template_communist_horizontal_tricolor_fimbriated
+			300 = template_communist_horizontal_tricolor
+			300 = template_communist_charge_star
+			300 = template_communist_roundel_canton
+			100 = template_communist_canton
+		}			
+		
+		special_selection = {
+			trigger = { 
+				coa_def_hispanic_american_trigger = yes
+			}
+			300 = template_communist_stripes_canton_1
+			300 = template_communist_stripes_canton_2
+			100 = template_communist_per_saltire_star
+			300 = template_communist_tribar
+			300 = template_communist_triangle	
+			300 = template_communist_red_star_tricolor
+		}		
+		
+		special_selection = {
+			trigger = { 
+				coa_def_native_american_trigger = yes
+			}
+			300 = template_communist_charge_star	
+		
+		}			
+	}	
+	anarchy = {
+		3000 = template_anarchy_1
+		3000 = template_anarchy_2
+		1500 = template_anarchy_3
+		1500 = template_anarchy_4
+	}
+
+	power_bloc = {
+		3000 = template_power_bloc_1
+
+		special_selection = {
+			trigger = { 
+				exists = c:GBR
+				ROOT.power_bloc_leader = c:GBR
+			}
+			90000 = gbr_power_bloc_1
+		}	
+		special_selection = {
+			trigger = { 
+				exists = c:AUS
+				ROOT.power_bloc_leader = c:AUS
+			}
+			90000 = aus_power_bloc_1
+		}	
+		special_selection = {
+			trigger = { 
+				exists = c:PRU
+				ROOT.power_bloc_leader = c:PRU
+			}
+			90000 = pru_power_bloc_1
+		}	
+		special_selection = {
+			trigger = { 
+				exists = c:RUS
+				ROOT.power_bloc_leader = c:RUS
+			}
+			90000 = rus_power_bloc_1
+		}	
+		special_selection = {
+			trigger = { 
+				exists = c:TUR
+				ROOT.power_bloc_leader = c:TUR
+			}
+			90000 = tur_power_bloc_1
+		}	
+	}
+}

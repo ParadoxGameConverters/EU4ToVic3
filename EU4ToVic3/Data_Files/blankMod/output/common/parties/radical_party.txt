@@ -115,13 +115,6 @@ radical_party = {
 				}
 			}
 			triggered_desc = {
-				desc = party_french_party
-				trigger = {
-					exists = c:GRE
-					THIS = c:GRE
-				}
-			}
-			triggered_desc = {
 				desc = party_republican_union
 				trigger = {
 					exists = c:FRA
@@ -417,7 +410,7 @@ radical_party = {
 			limit = {
 				leader = {
 					OR = {
-						is_feminist_character = yes			### Converter
+						has_ideology = ideology:ideology_feminist
 						has_ideology = ideology:ideology_abolitionist
 						has_ideology = ideology:ideology_pacifist
 						has_ideology = ideology:ideology_social_democrat

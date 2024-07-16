@@ -57,113 +57,11 @@ types objective_types
 					margin_top = 10
 					margin_bottom = 10
 					minimumsize = { 1400 60 }
-					maximumsize = { 1400 -1 }
+					maximumsize = { 1700 -1 }
 					spacing = 8
 
 					### objectives
-					widget = {
-						layoutpolicy_horizontal = expanding
-						layoutpolicy_vertical = preferred
-						
-						hbox = {	
-							layoutpolicy_horizontal = expanding
-							layoutpolicy_vertical = preferred
-							spacing = 5
-							datamodel = "[GameSetup.GetObjectives]"
-							
-							item = {
-								widget = {
-									layoutpolicy_horizontal = preferred
-									layoutpolicy_vertical = preferred
-									minimumsize = { 270 82 }
-									maximumsize = { 270 600 }
-									
-									widget = {
-										size = { 100% 100% }
-										
-										background = {
-											texture = "[ObjectiveType.GetBackground]"
-											fittype = centercrop
-										}
-
-										widget = {
-											size = { 100% 77 }
-											parentanchor = hcenter|bottom
-
-											widget = {
-												size = { 100% 62 }
-												parentanchor = hcenter|bottom
-
-												icon = {
-													size = { 100% 5% }
-													texture = "gfx/interface/backgrounds/divider_gold.dds"
-												}
-
-												background = {
-													#visible = "[Not(GameSetup.HasSelectedObjective)]"
-													using = dark_area
-													alpha = 0.7
-													
-													modify_texture = {
-														texture = "gfx/interface/masks/fade_horizontal_center.dds"
-														spriteType = Corneredstretched
-														spriteborder = { 0 0 }
-														blend_mode = alphamultiply
-														alpha = 0.5
-													}
-												}
-											}
-
-											vbox = {
-												icon = {
-													size = { 42 42 }
-													texture = "gfx/interface/backgrounds/round_button_bg.dds"
-													icon = {
-														size = { 37 37 }
-														parentanchor = center
-														texture = "[ObjectiveType.GetIcon]"
-													}
-												}
-
-												textbox = {
-													layoutpolicy_horizontal = expanding
-													layoutpolicy_vertical = expanding
-													text = "[ObjectiveType.GetName]"
-													margin_bottom = 10
-											
-													align = center|nobaseline
-													using = fontsize_xl
-													alwaystransparent = yes
-													elide = right
-													autoresize = yes
-													minimumsize = { 250 -1 }
-													maximumsize = { 250 -1 }
-													fontsize_min = 14
-												}
-											}
-										}
-										
-										button = {
-											using = glow_button_border
-											alpha = 0.65
-											size = { 100% 100% }
-											onclick = "[GameSetup.ToggleObjective(ObjectiveType.AccessSelf)]"
-										}
-									}
-									
-									icon = {
-										size = { 100% 100% }
-										using = entry_bg_unit_dark
-									}
-									
-									icon = {
-										using = highlighted_square_selection
-										visible = "[ObjectsEqual(ObjectiveType.AccessSelf, GameSetup.GetSelectedObjective)]"
-									}
-								}
-							}
-						}
-					}
+                    ### l'snip! l'deleted!
 					
 					### sandbox (select any country)
 					widget = {
@@ -318,7 +216,7 @@ types objective_types
 							}
 							
 							background = {
-								texture = "[ObjectiveType.GetBackground]"
+								texture = "[ObjectiveType.GetEnabledBackground]"
 								fittype = centercrop
 								using = frame_small_mask
 								margin = { -1 -1 }
@@ -460,108 +358,54 @@ types objective_types
 								duration = 0
 								alpha = 0
 							}
-
-							background = {
-								using = entry_bg_simple
-							}
-							
-							textbox = {
-								text = "SELECT_OBJECTIVE_TAG_TITLE"
-								autoresize = yes
-								using = fontsize_large
-								margin = { 25 10 }
-								align = left|nobaseline
-							}
 							
 							scrollarea = {
 								parentanchor = bottom|hcenter
-								size = { 1290 570 }
+								size = { 100% 100% }
 
 								scrollbarpolicy_horizontal = always_off
 								
 								scrollbar_vertical = {
-									using = vertical_scrollbar		
+									using = vertical_scrollbar
 								}
 
 								scrollwidget = {
-									fixedgridbox = {
-										addcolumn = 320
-										addrow = 560
-										maxhorizontalslots = 4
-										parentanchor = left
-										position = { 10 0 }
-										flipdirection = yes
-										datamodel = "[GameSetup.GetSelectedObjective.GetRecommendedTags]"
-										
-										item = {
-											widget = {
-												size = { 310 550 }
-												
-												button = {
-													using = default_button
-													size = { 100% 100% }
+
+									flowcontainer = {
+										parentanchor = hcenter
+										direction = vertical
+										margin = { 10 10 }
+
+										background = {
+											using = entry_bg_simple
+										}
+
+										textbox = {
+											text = "SELECT_OBJECTIVE_TAG_TITLE"
+											autoresize = yes
+											using = fontsize_large
+											margin = { 10 10 }
+											align = nobaseline
+										}
+
+										dynamicgridbox = {
+											parentanchor = hcenter
+											datamodel_wrap = 4
+											flipdirection = yes
+											datamodel = "[GameSetup.GetSelectedObjective.GetRecommendedTags]"
+
+											item = {
+												flowcontainer = {
+													direction = vertical
 													
-													down = "[ObjectsEqual(CountryDefinition.AccessSelf, GameSetup.GetSelectedTag)]"
-													onclick = "[GameSetup.ToggleTag(CountryDefinition.AccessSelf)]"
-													using = check_button_sound
-												}
-												
-												vbox = {
-													datacontext = "[GameSetup.GetSelectedObjective]"
-													layoutpolicy_horizontal = expanding
-													margin = { 15 20 }
-													spacing = 10
-													
-													hbox = {
-														layoutpolicy_horizontal = expanding
-														margin = { 5 0 }
-														spacing = 12
-													
-														icon = {
-															size = { 48 32 }
-															# Using medium size textures in small flag for better downscaling of flag details
-															texture = "[CountryDefinition.GetBaseFlag.GetMediumFlagTexture]"
-															frame = "[CountryDefinition.GetBaseFlag.GetMediumFlagFrame]"
-															framesize = "[GetMediumFlagFrameSize]"
-															using = flag_overlay
-															
-															background = {
-																using = simple_frame
-																margin = { 3 3 }
-															}
-														}
-													
-														text_single = {
-															layoutpolicy_horizontal = expanding
-															text = "[ObjectiveType.GetNameForCountryDef(CountryDefinition.AccessSelf)]"
-															align = nobaseline
-															elide = right
-															minimumsize = { 210 -1 }
-															maximumsize = { 210 -1 }
-															fontsize_min = 14
-															using = fontsize_xxl
-															alwaystransparent = yes
-														}
+													recommended_country = {
+														visible = "[LessThanOrEqualTo_int32(GetDataModelSize(GameSetup.GetSelectedObjective.GetRecommendedTags), '(int32)4')]"
 													}
-														
-													text_multi = {
-														layoutpolicy_horizontal = expanding
-														layoutpolicy_vertical = expanding
-														text = "[ObjectiveType.GetDescForCountryDef(CountryDefinition.AccessSelf)]"
-														align = top|nobaseline
-														using = fontsize_large
-														alwaystransparent = yes
-														margin = { 10 5 }
-														
-														background = {
-															using = entry_bg_simple
-														}
+
+													recommended_country = {
+														visible = "[GreaterThan_int32(GetDataModelSize(GameSetup.GetSelectedObjective.GetRecommendedTags), '(int32)4')]"
+														size = { 320 400 }
 													}
-												}
-												
-												icon = {
-													using = highlighted_square_selection
-													visible = "[ObjectsEqual(CountryDefinition.AccessSelf, GameSetup.GetSelectedTag)]"
 												}
 											}
 										}
@@ -654,6 +498,77 @@ types objective_types
 				expand = {}
 			}
 		}	
+	}
+
+	type recommended_country = widget {
+		size = { 320 540 }
+
+		button = {
+			using = default_button
+			size = { 100% 100% }
+
+			down = "[ObjectsEqual(CountryDefinition.AccessSelf, GameSetup.GetSelectedTag)]"
+			onclick = "[GameSetup.ToggleTag(CountryDefinition.AccessSelf)]"
+			using = check_button_sound
+		}
+
+		vbox = {
+			datacontext = "[GameSetup.GetSelectedObjective]"
+			layoutpolicy_horizontal = expanding
+			margin = { 15 20 }
+			spacing = 10
+
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				margin = { 5 0 }
+				spacing = 12
+
+				icon = {
+					size = { 48 32 }
+					# Using medium size textures in small flag for better downscaling of flag details
+					texture = "[CountryDefinition.GetBaseFlag.GetMediumFlagTexture]"
+					frame = "[CountryDefinition.GetBaseFlag.GetMediumFlagFrame]"
+					framesize = "[GetMediumFlagFrameSize]"
+					using = flag_overlay
+
+					background = {
+						using = simple_frame
+						margin = { 3 3 }
+					}
+				}
+
+				text_single = {
+					layoutpolicy_horizontal = expanding
+					text = "[ObjectiveType.GetNameForCountryDef(CountryDefinition.AccessSelf)]"
+					align = nobaseline
+					elide = right
+					minimumsize = { 210 -1 }
+					maximumsize = { 210 -1 }
+					fontsize_min = 14
+					using = fontsize_xxl
+					alwaystransparent = yes
+				}
+			}
+
+			text_multi = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				text = "[ObjectiveType.GetDescForCountryDef(CountryDefinition.AccessSelf)]"
+				align = top|nobaseline
+				using = fontsize_large
+				alwaystransparent = yes
+				margin = { 10 5 }
+
+				background = {
+					using = entry_bg_simple
+				}
+			}
+		}
+
+		icon = {
+			using = highlighted_square_selection
+			visible = "[ObjectsEqual(CountryDefinition.AccessSelf, GameSetup.GetSelectedTag)]"
+		}
 	}
 
 	type game_rules_hbox = hbox {
@@ -766,7 +681,7 @@ types objective_types
 			using = default_button_primary_big_action
 			parentanchor = left|vcenter
 			size = { 330 60 }
-			enabled = "[Not(GameSetup.HasSelectedTag)]"
+			enabled = "[And(Not(GameSetup.HasSelectedTag), GameSetup.GetSelectedObjective.IsAvailableForAllCountries)]"
 			visible = "[GameSetup.HasSelectedObjective]"
 			onclick = "[GameSetup.OnStart]"
 			onclick = "[PdxGuiTriggerAllAnimations('bookmarks_game_start')]"

@@ -74,6 +74,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	exportReligionLocs(outputName, world.getReligionMapper().getV3ReligionDefinitions(), knownLocs);
 	exportCultureLocs(outputName, world.getCultureMapper().getV3CultureDefinitions(), knownLocs);
 	exportCharacterLocs(outputName, world.getPoliticalManager().getCountries(), knownLocs);
+	exportPowerBlocLocs(outputName, world.getPoliticalManager().getPowerBlocs());
 	Log(LogLevel::Progress) << "91 %";
 
 	Log(LogLevel::Info) << "<- Writing Countries";

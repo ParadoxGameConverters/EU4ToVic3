@@ -1,4 +1,6 @@
 #include "V3World.h"
+
+#include "Configuration.h"
 #include "EU4World/World.h"
 #include "Log.h"
 
@@ -139,6 +141,14 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "58 %";
 	politicalManager.setupLaws();
 	politicalManager.convertDiplomacy(sourceWorld.getDiplomacy().getAgreements());
+	if (configuration.configBlock.formBlocs == Configuration::FORMBLOCS::Enabled)
+	{
+		politicalManager.createPowerBlocs();
+	}
+	if (configuration.configBlock.formBlocs != Configuration::FORMBLOCS::Disabled)
+	{
+		politicalManager.createHREPowerBloc(!sourceWorld.getHREmperor().empty(), sourceWorld.isHREDecentralized());
+	}
 	politicalManager.convertRivals();
 	politicalManager.convertTruces(datingData.lastEU4Date);
 	if (configuration.configBlock.vn)
