@@ -10,7 +10,17 @@ ACE = { # Aceh
 	cultures = { sumatran }
 	is_named_from_capital = yes
 }
-AFG = {
+ACH = { #Acholi
+	color = { 166 225 217 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { luo lacustrine_bantu }
+	capital = STATE_UGANDA
+}
+AFG = { # Zabulistan (Afghanistan)
 	color = { 92  148  152 }
 	
 	country_type = decentralized
@@ -21,6 +31,27 @@ AFG = {
 	
 	cultures = { pashtun tajik }
 	capital = STATE_KABUL
+}
+ALD = { #Algeria
+	color = { 220 202 96 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	
+	cultures = { maghrebi berber }
+	
+	capital = STATE_ALGIERS
+}
+ANK = { #Ankole
+	color = { 126 162 98 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { baganda lacustrine_bantu }
+	capital = STATE_UGANDA
 }
 ANL = { # Umayyads (Andalusia)
 	color = hsv360{ 82  87  78 }
@@ -38,6 +69,7 @@ ARA = { # Abbasids (Arabia)
 	country_type = decentralized
 	
 	tier = empire
+	religion = sunni
 	
 	cultures = { mashriqi bedouin misri yemenite }
 	capital = STATE_BAGHDAD
@@ -53,6 +85,38 @@ ARM = { # Armenia
 	
 	cultures = { bedouin }
 	capital = STATE_ARMENIA
+}
+ASH = { #Ashanti
+	color = { 97 98 195 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	
+	cultures = { akan }
+	capital = STATE_GHANA
+}
+ASM = { #Mlechchhas (Assam)
+	color = { 163 5 77 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	religion = hindu
+	
+	cultures = { assamese }
+	
+	capital = STATE_ASSAM
+}
+AWS = { #Aussa
+	color = { 125 125 100 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { afar tigray }
+	capital = STATE_GONDER
 }
 BAL = { #Bali
 	color = { 201  97  74 }
@@ -74,12 +138,62 @@ BAV = { #Bavaria
 	cultures = { south_german }
 	capital = STATE_BAVARIA
 }
+BEN = { #Benin
+	color = { 110 173 129 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { edo }
+	capital = STATE_BENIN
+}
+BER = { #Chawdas (Baroda)
+	color = { 120 77 119 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	religion = jain
+	
+	cultures = { gujarati }
+	capital = STATE_GUJARAT
+}
+BGI = { #Bagirmi
+	color = { 64 124 157 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { baguirmi }
+	capital = STATE_WADDAI
+}
+BGL = { #Palas (Bengal)
+	color = { 36 109 194 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	religion = hindu
+	
+	cultures = { bengali }
+	capital = STATE_NORTH_BENGAL
+}
+BGM = { #Bedemder
+	color = { 228 243 104 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { amhara oromo tigray }
+	capital = STATE_AMHARA
+}
 BKR = { #Bashkiria
 	color = { 71 219 129 }
 	
 	country_type = decentralized
 
 	tier = principality
+	religion = animist
 	
 	cultures = { bashkir }
 	capital = STATE_UFA
@@ -104,15 +218,54 @@ BNJ = { # Banjar
 	cultures = { bornean }
 	capital = STATE_EAST_BORNEO
 }
+BNY = { #Bunyoro
+	color = { 174 24 66 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { baganda lacustrine_bantu }
+	capital = STATE_UGANDA
+}
 BOH = { #Bohemia
 	color = { 161 139 40 }
 	
 	country_type = decentralized
 
 	tier = principality
+	religion = animist
 	
 	cultures = { czech }	
 	capital = STATE_BOHEMIA
+}
+BOR = { #Bornu
+	color = { 30 131 162 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { kanuri }
+	capital = STATE_BORNU
+}
+BRD = { #Burundi
+	color = { 21 191 16 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { rundi }
+	capital = STATE_TANGANYIKA
+}
+BRN = { #Borana
+	color = { 236 236 104 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { oromo }
+	capital = STATE_AMHARA
 }
 BRU = { #Brunei
 	color = { 41 89 174 }
@@ -130,9 +283,30 @@ BRY = { #Buryatia
 	country_type = decentralized
 
 	tier = principality
+	religion = animist
 	
 	cultures = { buryat }
 	capital = STATE_BURYATIA
+}
+BTN = { #Buton
+	color = { 209 203 31 }
+	
+	country_type = decentralized
+
+	tier = principality
+	
+	cultures = { moluccan }
+	capital = STATE_CELEBES
+}
+BUG = { #Buganda
+	color = { 21 21 227 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { baganda }
+	capital = STATE_UGANDA
 }
 BUL = { #Bulgaria
 	color = { 116 107 140 }
@@ -165,6 +339,17 @@ CAS = { #Asturias (Castile)
 	cultures = { visigothic }
 	capital = STATE_ASTURIAS
 }
+CEY = { #Lambakanna (Ceylon)
+	color = hsv360{ 0 70 61 }
+	
+	country_type = decentralized
+
+	tier = kingdom
+	religion = theravada
+	
+	cultures = { sinhala }
+	capital = STATE_CEYLON
+}
 CHE = { # Cherokee
 	color = { 105  145  40 }
 	
@@ -174,6 +359,16 @@ CHE = { # Cherokee
 	
 	cultures = { cherokee }
 	capital = STATE_ARKANSAS
+}
+CHI = { # Tang (China)
+	color = { 252 185 61 }
+	
+	country_type = decentralized
+	
+	tier = empire
+	
+	cultures = { han } 
+	capital = STATE_XIAN #Chang'an
 }
 CRO = { #Croatia
 	color = { 174  227  95 }
@@ -197,6 +392,15 @@ CZH = { #Moravia (Czechoslovakia)
 	cultures = { slovak czech }
 	capital = STATE_MORAVIA
 }
+DAH = { #Dahomey
+	color = { 11 84 179 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { fon }
+	capital = STATE_DAHOMEY
+}
 DEN = { # Denmark
 	color = hsv{ 1.01  0.8  0.5 }
 	
@@ -207,6 +411,26 @@ DEN = { # Denmark
 	
 	cultures = { norse danish }
 	capital = STATE_ZEALAND
+}
+DFR = { #Darfur
+	color = { 44 160 70 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { fur bedouin }
+	capital = STATE_DARFUR
+}
+EGY = { #Egypt
+	color = { 255 205 155 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	
+	cultures = { misri }
+	capital = STATE_LOWER_EGYPT
 }
 EST = { #Estonia
 	color = { 179  29  100 }
@@ -231,12 +455,13 @@ EZO = { # Emishi/Satsumon
 	
 	capital = STATE_HOKKAIDO
 }
-FIN = {
-	color = { 205  212  228 }
+FIN = { # Suomi (Finland)
+	color = { 205 212 228 }
 	
 	country_type = decentralized
 
 	tier = principality
+	religion = animist
 	
 	cultures = { finnish }
 	capital = STATE_UUSIMAA
@@ -263,7 +488,26 @@ FRS = { # Formosa
 	capital = STATE_FORMOSA
 	#is_named_from_capital = yes
 }
-GAL = {
+FTJ = { #Futa Jallon
+	color = { 230 125 127 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { fulbe }
+	capital = STATE_GUINEA
+}
+FTR = { #Futa Toro
+	color = { 115 204 102 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { fulbe wolof }
+	capital = STATE_SENEGAL
+}
+GAL = { # Galich (Galicia)
 	color = { 13  81  130 }
 	
 	country_type = decentralized
@@ -273,6 +517,44 @@ GAL = {
 	
 	cultures = { ukrainian polish }
 	capital = STATE_EAST_GALICIA
+}
+GLD = { #Geledi
+	color = { 38 160 67 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { somali }
+	capital = STATE_SOMALILAND
+}
+GJM = { #Gojjam
+	color = { 191 147 79 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { amhara oromo }
+	capital = STATE_AMHARA
+}
+HAR = { #Harar
+	color = { 175 75 15 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { somali amhara }
+	capital = STATE_OROMIA
+}
+HAU = { #Gobir
+	color = { 225 185 85 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { hausa }
+	capital = STATE_OUTER_HAUSALAND
 }
 HAW = { # Hawaii
 	color = { 48  169  96 }
@@ -287,7 +569,7 @@ HAW = { # Hawaii
 	capital = STATE_HAWAIIAN_ISLANDS
 	is_named_from_capital = yes
 }
-HUN = { #Avaria
+HUN = { #Magyar (Hungary)
 	color = { 152 85 92 }
 	
 	country_type = decentralized
@@ -311,7 +593,7 @@ HZJ = { # Hazarajat
 
 	capital = STATE_BALKH
 }
-ICL = { #Iceland
+ICL = { # Papars (Iceland)
 	color = { 62 129 155 }
 	
 	country_type = decentralized
@@ -333,6 +615,16 @@ IRO = { # Haudenosaunee, archaically known as the Iroquois Confederacy
 	
 	capital = STATE_NEW_YORK
 }
+ISQ = { #Isaaq
+	color = { 224 255 182 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { somali }
+	capital = STATE_SOMALILAND
+}
 JAN = { # Jan Mayen
 	color = { 17 225 48 }
 	country_type = decentralized
@@ -343,7 +635,7 @@ JAN = { # Jan Mayen
 	cultures = { bear }
 	capital = STATE_NORTHERN_NORWAY
 }
-JAP = { # Yamato
+JAP = { # Yamato (Japan)
 	color = { 194 53 60 }
 	country_type = decentralized
 	
@@ -355,14 +647,14 @@ JAP = { # Yamato
 JMB = { # Jambi
 	color = { 223  228  192 }
 	
-	country_type = unrecognized
+	country_type = decentralized
 
 	tier = principality
 	
 	cultures = { sumatran }
 	capital = STATE_NORTH_SUMATRA
 }
-KAL = {
+KAL = { #Kalat
 	color = { 97  98  195 }
 	
 	country_type = decentralized
@@ -373,6 +665,27 @@ KAL = {
 	
 	cultures = { pashtun baluchi }
 	capital = STATE_BALUCHISTAN
+}
+KAS = { #Karkotas (Kashmir)
+	color = { 63  150  30 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	
+	religion = sunni
+	
+	cultures = { kashmiri panjabi }
+	capital = STATE_KASHMIR
+}
+KFA = { #Kaffa
+	color = { 150 0 25 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { sidama oromo }
+	capital = STATE_AMHARA
 }
 KHI = { # Bajanids (Khiva)
 	color = { 188  123  103 }
@@ -397,15 +710,58 @@ KRA = { #Krakow
 	capital = STATE_WEST_GALICIA
 	cultures = { polish }
 }
+KRG = { #Karagwe
+	color = { 48 177 169 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { lacustrine_bantu baganda }
+	capital = STATE_TANGANYIKA
+}
 KRL = { # Karelia
 	color = { 22 63 26 }
 	
 	country_type = decentralized
 
 	tier = principality
+	religion = animist
 	
 	cultures = { karelian }
 	capital = STATE_EAST_KARELIA
+}
+KRT = { #Kaarta
+	color = { 127 28 45 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { bambara }
+	capital = STATE_WESTERN_MALI
+}
+KOK = { #Fergana (Kokand)
+	color = { 119 130 145 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	religion = sunni
+	
+	cultures = { sogdian }
+	capital = STATE_FERGANA
+}
+KON = { #Kongo
+	color = { 199 160 139 }
+	
+	country_type = decentralized
+	
+	tier = principality
+
+	religion = catholic
+	
+	cultures = { bakongo }
+	capital = STATE_BAS_CONGO
 }
 KOR = { #Gojoseon, but is it Go when it exists in this timeline?
 	color = { 157  144  97 }
@@ -417,6 +773,27 @@ KOR = { #Gojoseon, but is it Go when it exists in this timeline?
 	cultures = { korean }
 	capital = STATE_SEOUL
 }
+KTI = { # Kutai
+	color = { 137 88 58 }
+	
+	country_type = decentralized
+
+	tier = principality
+	
+	cultures = { bornean }
+	capital = STATE_EAST_BORNEO
+}
+KUT = { #Kutch
+	color = { 199 160 139 }
+	
+	country_type = decentralized
+	
+	tier = city_state
+	religion = jain
+	
+	cultures = { gujarati }
+	capital = STATE_GUJARAT
+}
 KYR = { #Kirghiz (Kirgizia)
 	color = { 161 87 87 }
 	
@@ -427,12 +804,23 @@ KYR = { #Kirghiz (Kirgizia)
 	cultures = { kirgiz }
 	capital = STATE_KIRGHIZIA
 }
+LAN = { # Lanfang
+	color = { 141  89  174 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { hakka }
+	capital = STATE_WEST_BORNEO
+}
 LAT = { #Latgale (Latvia)
 	color = { 99  137  153 }
 	
 	country_type = decentralized
 
 	tier = city_state
+	religion = animist
 	
 	cultures = { latvian }	
 	capital = STATE_RIGA
@@ -443,11 +831,12 @@ LIT = { #Lithuania
 	country_type = decentralized
 
 	tier = principality
+	religion = animist
 	
 	cultures = { lithuanian }	
 	capital = STATE_VILNIUS
 }
-LOM = { #Lombardy
+LOM = { #Lombardy (Lombardia)
 	color = { 146 108 146 }
 	
 	country_type = decentralized
@@ -456,6 +845,16 @@ LOM = { #Lombardy
 	
 	cultures = { lombard north_italian }
 	capital = STATE_LOMBARDY
+}
+MAD = { #Merina
+	color = { 117 150 120 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	
+	cultures = { malagasy }
+	capital = STATE_NORTH_MADAGASCAR
 }
 MAH = { # Yahballahas (Mahra)
 	color = { 0  153  76 }
@@ -469,12 +868,36 @@ MAH = { # Yahballahas (Mahra)
 	cultures = { bedouin yemenite }
 	capital = STATE_YEMEN
 }
-MEC = {
-	color = { 207  111  64 }
+MAY = { # Luub Mayapan (Maya)
+	color = { 98 88 142 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	
+	cultures = { mayan }
+	capital = STATE_YUCATAN
+}
+MCH = { #Balhae (Manchu)
+	color = { 255 254 124 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	religion = animist
+	
+	cultures = { manchu }
+	capital = STATE_SOUTHERN_MANCHURIA
+	is_named_from_capital = yes
+}
+#MCO = { # Iréchikwa (Michoacan)
+MEC = { #Obotritia (Mecklenberg)
+	color = { 207 111 64 }
 	
 	country_type = decentralized
 
 	tier = principality
+	religion = animist
 	
 	cultures = { old_pommeranian }
 	capital = STATE_MECKLENBURG
@@ -489,7 +912,38 @@ MGD = { # Maguindanao
 	cultures = { moro }
 	capital = STATE_MINDANAO
 }
-MON = { #Dyrrachion
+MJT = { #Majerteen
+	color = { 220 200 100 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { somali }
+	capital = STATE_SOMALILAND
+}
+MKT = { #Miskito
+	color = hsv{ 0.5  0.6  0.6 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { miskito afro_caribbean }
+	capital = STATE_NICARAGUA
+}
+MNP = { # Manipur
+	color = { 149 191 117 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { manipuri }
+	
+	capital = STATE_ASSAM
+}
+MON = { #Dyrrachion (Montenegro)
 	color = { 39 108 140 }
 	
 	country_type = decentralized
@@ -499,12 +953,23 @@ MON = { #Dyrrachion
 	cultures = { albanian }
 	capital = STATE_ALBANIA
 }
-MRD = { #Mordva
+MOR = { #Morocco
+	color = { 224 146 113 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	
+	cultures = { maghrebi berber }
+	capital = STATE_FEZ
+}
+MRD = { #Mordva (Erzya-Moksha)
 	color = { 222 147 226 }
 	
 	country_type = decentralized
 
 	tier = principality
+	religion = animist
 	
 	cultures = { mordvin }
 	capital = STATE_TAMBOV
@@ -520,49 +985,16 @@ MSC = { # Muscogee
 
 	capital = STATE_FLORIDA
 }
-
-PRM = { # Perm
-	color = { 236 159 90 }
-	
-	country_type = decentralized
-	
-	tier = principality
-
-	cultures = { ugrian }
-	
-	capital = STATE_PERM
-}
-KTI = { # Kutai
-	color = { 137 88 58 }
-	
-	country_type = decentralized
-
-	tier = principality
-	
-	cultures = { bornean }
-	capital = STATE_EAST_BORNEO
-}
-LAN = { # Lanfang
-	color = { 141  89  174 }
-	
+MSN = { #Massina
+	color = { 230 231 62 }
 	country_type = decentralized
 	
 	tier = principality
 	
-	cultures = { hakka }
-	capital = STATE_WEST_BORNEO
+	cultures = { fulbe }
+	capital = STATE_EASTERN_MALI
 }
-MAY = { # Maya
-	color = { 98 88 142 }
-	
-	country_type = decentralized
-	
-	tier = kingdom
-	
-	cultures = { mayan }
-	capital = STATE_YUCATAN
-}
-NAH = { # Aztec
+NAH = { # #Ēxcān Tlahtōlōyān (Anahuac)
 	color = hsv360{ 130 100 52 }
 	
 	country_type = decentralized
@@ -585,7 +1017,7 @@ OCC = { # Middle Francia
 OLD = { # Ostfriesland (Oldenburg)
 	color = { 147  130  118 }
 	
-	country_type = recognized
+	country_type = decentralized
 
 	tier = principality
 	religion = animist
@@ -604,7 +1036,16 @@ OMA = { # Azd Umanids (Oman)
 	religion = ibadi
 	capital = STATE_OMAN
 }
-PAP = {
+OYO = { #Oyo
+	color = { 211 184 179 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { yoruba }
+	capital = STATE_YORUBA_STATES
+}
+PAP = { # Papal States (Rome)
 	color = { 211 220 178 }
 	
 	country_type = decentralized
@@ -614,7 +1055,18 @@ PAP = {
 	cultures = { south_italian lombard north_italian }
 	capital = STATE_LAZIO
 }
-POL = {
+PLY = { # Tahiti
+	color = { 176 62 136 }
+	
+	country_type = decentralized
+
+	tier = principality
+	
+	cultures = { polynesian }
+	religion = protestant
+	capital = STATE_TAHITI
+}
+POL = { #Greater Poland (Poland)
 	color = { 197  92  106 }
 	
 	country_type = decentralized
@@ -645,6 +1097,17 @@ PON = { # Pontianak
 	cultures = { bornean }
 	capital = STATE_WEST_BORNEO
 }
+PRM = { # Perm
+	color = { 236 159 90 }
+	
+	country_type = decentralized
+	
+	tier = principality
+
+	cultures = { ugrian }
+	
+	capital = STATE_PERM
+}
 PUE = { # Pueblo
 	color = { 162 128 8 }
 	
@@ -662,9 +1125,20 @@ PRU = { # Pruthenia (Prussia)
 	country_type = decentralized
 
 	tier = principality
+	religion = animist
 	
 	cultures = { pruthenian }
 	capital = STATE_WEST_PRUSSIA
+}
+RWD = { #Rwanda
+	color = { 213 160 18 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { ruanda }
+	capital = STATE_TANGANYIKA
 }
 SAK = { #Siak
 	color = { 21  196  68 }
@@ -707,6 +1181,15 @@ SCW = { #Nisani (Schwarzburg)
 	cultures = { old_pommeranian }
 	capital = STATE_SAXONY
 }
+SDM = { #Sidamo
+	color = { 83 65 167 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { sidama oromo }
+	capital = STATE_AMHARA
+}
 SER = { #Serbia
 	color = { 166 72 57 }
 	
@@ -716,6 +1199,58 @@ SER = { #Serbia
 	
 	cultures = { serb }
 	capital = STATE_NORTHERN_SERBIA
+}
+SGU = { #Segou
+	color = { 27 28 145 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { bambara }
+	capital = STATE_WESTERN_MALI
+}
+SHW = { #Shewa
+	color = { 1 200 200 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { amhara oromo }
+	capital = STATE_OROMIA
+}
+SIC = { #Benevento (Two Sicilies)
+	color = { 73 152 76 }
+	
+	country_type = decentralized
+
+	tier = principality
+	
+	cultures = { south_italian }
+	capital = STATE_APULIA
+}
+SIN = { #Taghlibids (Sindh)
+	color = { 135 104 85 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	
+	religion = sunni
+	
+	cultures = { bedouin sindi }
+	capital = STATE_SINDH
+	is_named_from_capital = yes
+}
+SKH = { # Ohtosk (Sakhalin)
+	color = { 54 102 190 }
+	
+	country_type = decentralized
+
+	tier = principality
+	
+	cultures = { siberian ainu }
+	capital = STATE_SAKHALIN
 }
 SLO = { #Carantania (Slovenia)
 	color = { 65  91  126 }
@@ -727,37 +1262,7 @@ SLO = { #Carantania (Slovenia)
 	cultures = { slovene }
 	capital = STATE_SLOVENIA
 }
-SMB = { # Sambas
-	color = { 102  102  255 }
-	
-	country_type = decentralized
-
-	tier = principality
-	
-	cultures = { bornean }
-	capital = STATE_WEST_BORNEO
-}
-SIC = { #Benevento
-	color = { 73 152 76 }
-	
-	country_type = decentralized
-
-	tier = principality
-	
-	cultures = { south_italian }
-	capital = STATE_APULIA
-}
-SKH = { # Ohtosk 
-	color = { 54 102 190 }
-	
-	country_type = decentralized
-
-	tier = principality
-	
-	cultures = { siberian ainu }
-	capital = STATE_SAKHALIN
-}
-SLV = { # Slovakia
+SLV = { # Nitra (Slovakia)
 	color = { 158  161  188 }
 	
 	country_type = decentralized
@@ -767,6 +1272,17 @@ SLV = { # Slovakia
 	
 	cultures = { slovak }
 	capital = STATE_WEST_SLOVAKIA
+}
+#SLW = { #Luwu (Sulawesi)
+SMB = { # Sambas
+	color = { 102  102  255 }
+	
+	country_type = decentralized
+
+	tier = principality
+	
+	cultures = { bornean }
+	capital = STATE_WEST_BORNEO
 }
 SMI = { # Sapmi
 	color = { 28 146 136 }
@@ -780,6 +1296,16 @@ SMI = { # Sapmi
 	
 	capital = STATE_NORRLAND
 }
+SOK = { #Sokoto
+	color = { 0 135 81 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	
+	cultures = { hausa fulbe }
+	capital = STATE_HAUSALAND
+}
 SRB = { # Sorbia
 	color = { 67 80 128 }
 	
@@ -791,7 +1317,7 @@ SRB = { # Sorbia
 	
 	capital = STATE_BRANDENBURG
 }
-SRK = { # Surakarta
+SRK = { # Mataram (Surakarta)
 	color = { 239 51 64 }
 	
 	country_type = decentralized
@@ -821,7 +1347,7 @@ SUL = { #Sulu
 	cultures = { moro }
 	capital = STATE_MINDANAO
 }
-SWE = { #Sweden
+SWE = { #Sviþod (Sweden)
 	color = { 87  130  199 }
 	
 	country_type = decentralized
@@ -832,6 +1358,25 @@ SWE = { #Sweden
 	cultures = { norse swedish }
 	capital = STATE_SVEALAND
 }
+TGR = { #Tigray
+	color = { 167 218 207 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures =  { tigray amhara }
+	capital = STATE_AMHARA
+}
+TIB = { #Tibet
+	color = { 65  127  186 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	
+	cultures = { tibetan }
+	capital = STATE_LHASA
+}
 TID = { #Tidore
 	color = { 176  232  64 }
 	
@@ -841,6 +1386,28 @@ TID = { #Tidore
 	
 	cultures = { moluccan }
 	capital = STATE_MOLUCCAS
+}
+TRI = { #Tripolitania
+	color = { 180 137 148 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { maghrebi }
+	capital = STATE_TRIPOLI
+	is_named_from_capital = yes
+}
+TUN = { #Tunis
+	color = { 131 101 85 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	
+	cultures = { maghrebi }
+	capital = STATE_TUNISIA
+	is_named_from_capital = yes
 }
 TWT = { # Tawantinsuyu
 	color = { 125 92 110 }
@@ -875,12 +1442,50 @@ UNT = { #United Tribes (Waikato Tainui)
 	cultures = { maori }
 	capital = STATE_NORTH_ISLAND
 }
-YAK = { # Yakutia
+WAD = { #Wadai
+	color = { 194 66 41 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { fur }
+	capital = STATE_WADDAI
+}
+WLG = { #Welega
+	color = { 126 208 222 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { oromo }
+	capital = STATE_AMHARA
+}
+WLO = { #Wello
+	color = { 222 199 163 }
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { amhara }
+	capital = STATE_AMHARA
+}
+WSG = { #Warsangali
+	color = { 18 97 128 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { somali }
+	capital = STATE_SOMALILAND
+}
+YAK = { # Urangai Sakha (Yakutia)
 	color = { 171 216 191 }
 	
 	country_type = decentralized
 	
 	tier = principality
+	religion = animist
 
 	cultures = { yakut }
 
@@ -897,4 +1502,26 @@ YEM = { # Arwadids (Yemen)
 	
 	cultures = { yemenite bedouin }
 	capital = STATE_YEMEN
+}
+ZAN = { #Zanzibar
+	color = { 166 189 199 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { swahili }
+	capital = STATE_ZANZIBAR
+	is_named_from_capital = yes
+}
+ZUL = { #Zulu
+	color = { 204 186 201 }
+	
+	country_type = decentralized
+	
+	tier = principality
+	
+	cultures = { zulu }
+	capital = STATE_ZULULAND
+	is_named_from_capital = yes
 }
