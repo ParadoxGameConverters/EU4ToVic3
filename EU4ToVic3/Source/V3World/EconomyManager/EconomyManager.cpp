@@ -470,16 +470,38 @@ void V3::EconomyManager::distributeBudget(const double globalCP, const double to
 
 void V3::EconomyManager::investCapital() const
 {
+	// Farms go to nobles
+	// Resource extraction is split between locals/capitalists/nobles
+	// Factories split between locals/capitalists/the state
+	// The rest is state owned (barracks, admin centers, whatnot)
 	for (const auto& country: centralizedCountries)
 	{
 		for (const auto& subState: country->getSubStates())
 		{
 			for (const auto& building: subState->getBuildings())
 			{
-					// Farms go to nobles
-					// Resource extraction is split between locals/capitalists/nobles
-					// Factories split between locals/capitalists/the state
-					// The rest is state owned (barracks, admin centers, whatnot)
+				const auto& type = buildingGroups.getAncestralCategory(building->getBuildingGroup()).value_or("");
+				if (type.empty())
+				{
+					Log(LogLevel::Warning) << "Unrecognized building group " << type << " when investing.";
+				}
+				else if (type == "bg_agriculture" || type == "bg_plantation" || type == "bg_ranching")
+				{
+					building.addInvestor(building->getLevel(), "aristocratic", country->getTag());
+				}
+				else if (type == "bg_mining" || type == "bg_logging" || type == "bg_whaling" || type == "bg_fishing" || type == "bg_urban_facilities ")
+				{
+					building.addInvestor(building->getLevel(), "local", country->getTag());
+				}
+				else if (type == "bg_manufacturing")
+				{
+					building.addInvestor(building->getLevel(), "capitalist", country->getTag());
+				}
+				else
+				{
+					building.addInvestor(building->getLevel(), "national", country->getTag());
+				}
+				
 			}
 		}
 	}
