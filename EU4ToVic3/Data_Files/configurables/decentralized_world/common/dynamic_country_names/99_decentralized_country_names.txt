@@ -590,6 +590,22 @@ PAP = { # Papal States (Rome)
 		}
 	}
 }
+PAT = { # Wallmapu (Mapuche)
+	dynamic_country_name = {
+		name = PAT_decentralized
+		adjective = PAT_decentralized_ADJ
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= {
+				is_country_type = decentralized
+			}
+		}
+	}
+}
 POL = { #Greater Poland (Poland)
 	dynamic_country_name = {
 		name = POL_decentralized
