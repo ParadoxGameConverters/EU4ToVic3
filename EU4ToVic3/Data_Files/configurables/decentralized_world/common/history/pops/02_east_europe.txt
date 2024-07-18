@@ -22,14 +22,14 @@
 				size = 216000
 			}
 		}
-		region_state:L12 = { #Luki
+		region_state:S04 = { #Sortavala
 			create_pop = {
 				culture = byelorussian
 				religion = animist
 				size = 232000
 			}
 		}
-		region_state:S04 = { #Sortavala
+		region_state:V11 = { #Veps
 			create_pop = {
 				culture = finnish
 				religion = animist
@@ -38,24 +38,12 @@
 		}
 	}
 	s:STATE_MOSCOW = {
-		region_state:B21 = { #Burtas
-			create_pop = {
-				culture = alan
-				religion = animist
-				size = 32308
-			}
-			create_pop = {
-				culture = ugrian
-				size = 300000
-			}
-		}
-		region_state:M25 = { #Murom
+		region_state:M27 = { #Meshchera
 			create_pop = {
 				culture = ugrian
 				size = 1329234
 			}
-		}
-		region_state:MRD = { #Mordva
+			
 			create_pop = {
 				culture = alan
 				religion = animist
@@ -66,11 +54,48 @@
 				religion = animist
 				size = 662417
 			}
+			
+			create_pop = {
+				culture = alan
+				religion = animist
+				size = 32308
+			}
+			create_pop = {
+				culture = ugrian
+				religion = animist
+				size = 300000
+			}
+		}
+	}
+	s:STATE_ORYOL = {
+		region_state:B21 = { #Burtas
+			create_pop = {
+				culture = alan
+				religion = animist
+				size = 2127590
+			}
+			create_pop = {
+				culture = ashkenazi
+				size = 23410
+			}
+			create_pop = {
+				culture = ukrainian
+				religion = animist
+				size = 5122
+			}
+		}
+		region_state:HUN = { #Magyar (Hungary)
+			create_pop = {
+				culture = hungarian
+				religion = animist
+				size = 500000
+			}
 		}
 		region_state:M27 = { #Meshchera
 			create_pop = {
 				culture = ugrian
-				size = 1329234
+				religion = animist
+				size = 700000
 			}
 		}
 	}
@@ -92,7 +117,7 @@
 				size = 232998
 			}
 		}
-		region_state:S29 = { #Slutsk
+		region_state:K28 = { #Krivichia
 			create_pop = {
 				culture = ukrainian
 				religion = animist
@@ -124,138 +149,8 @@
 			}
 		}
 	}
-	s:STATE_VOLHYNIA = {
-		region_state:DR0 = { #Drevliania
-			create_pop = {
-				culture = ukrainian
-				size = 343300
-			}
-		}
-		region_state:U05 = { #Ushytsia
-			create_pop = {
-				culture = ukrainian
-				size = 253300
-			}
-			create_pop = {
-				culture = hungarian
-				size = 4004
-			}
-		}
-		region_state:UKR = { #Kiev (Ukraine)
-			create_pop = {
-				culture = ashkenazi
-				size = 164800
-			}
-			create_pop = {
-				culture = ukrainian
-				size = 273300
-			}
-		}
-		region_state:V13 = { #Volhynia
-			create_pop = {
-				culture = polish
-				size = 140004
-			}
-			create_pop = {
-				culture = ukrainian
-				size = 223300
-			}
-		}
-	}
-	s:STATE_KIEV = {
-		region_state:DR0 = { #Drevliania
-			create_pop = {
-				culture = ukrainian
-				religion = animist
-				size = 896778
-			}
-		}
-		region_state:HUN = { #Hungary (Magyar)
-			create_pop = {
-				culture = hungarian
-				religion = animist
-				size = 1961996
-			}
-			create_pop = {
-				culture = ukrainian
-				religion = animist
-				size = 279950
-			}
-		}
-		region_state:S21 = { #Severia
-			create_pop = {
-				culture = russian
-				religion = animist
-				size = 100000
-			}
-		}
-		region_state:UKR = { #Ukraine (Kiev)
-			create_pop = {
-				culture = ukrainian
-				religion = animist
-				size = 1345167
-			}
-		}
-		region_state:U05 = { #Ushytsia
-			create_pop = {
-				culture = ukrainian
-				religion = animist
-				size = 348389
-			}
-		}
-	}
-	s:STATE_MOGILEV = {
-		region_state:B21 = { #Burtas
-			create_pop = {
-				culture = alan
-				religion = animist
-				size = 667525
-			}
-			create_pop = {
-				culture = russian
-				religion = animist
-				size = 344004
-			}
-		}
-		region_state:M27 = { #Meshchera
-			create_pop = {
-				culture = russian
-				religion = animist
-				size = 70100
-			}
-			create_pop = {
-				culture = ugrian
-				size = 2600000
-			}
-		}
-		region_state:R04 = { #Radimichia
-			create_pop = {
-				culture = byelorussian
-				religion = animist
-				size = 377525
-			}
-			create_pop = {
-				culture = russian
-				religion = animist
-				size = 300800
-			}
-		}
-		region_state:S21 = { #Severia
-			create_pop = {
-				culture = russian
-				size = 80000
-			}
-		}
-		region_state:V12 = { #Vyatichia
-			create_pop = {
-				culture = byelorussian
-				size = 667525
-			}
-		}
-		
-	}
 	s:STATE_SMOLENSK = {
-		region_state:I10 = { #Ilmenia
+		region_state:B21 = { #Burtas
 			create_pop = {
 				culture = byelorussian
 				religion = animist
@@ -276,8 +171,7 @@
 				culture = ugrian
 				size = 17199
 			}
-		}
-		region_state:M28 = { #Merya
+			
 			create_pop = {
 				culture = byelorussian
 				religion = animist
@@ -316,124 +210,18 @@
 			}
 		}
 	}
-	s:STATE_VITEBSK = {
-		region_state:DR3 = { #Dregovichia
-			create_pop = {
-				culture = byelorussian
-				religion = animist
-				size = 64208
-			}
-		}
-		region_state:K28 = { #Krivichia
-			create_pop = {
-				culture = ashkenazi
-				size = 260004
-			}
-			create_pop = {
-				culture = byelorussian
-				religion = animist
-				size = 1000076
-			}
-			create_pop = {
-				culture = lithuanian
-				religion = animist
-				size = 53300
-			}
-		}
-		region_state:R04 = { #Radimichia
-			create_pop = {
-				culture = russian
-				religion = animist
-				size = 88400
-			}
-		}
-		region_state:S21 = { #Severia
-			create_pop = {
-				culture = russian
-				religion = animist
-				size = 478000
-			}
-		}
-		region_state:S29 = { #Slutsk
-			create_pop = {
-				culture = russian
-				religion = animist
-				size = 470000
-			}
-			create_pop = {
-				culture = ukrainian
-				religion = animist
-				size = 8000
-			}
-		}
-	}
-	s:STATE_EAST_KARELIA = {
-		region_state:A03 = { #Aaninen
-			create_pop = {
-				culture = ugrian
-				religion = animist
-				size = 10000
-			}
-		}
-		region_state:K01 = { #Kola
-			create_pop = {
-				culture = sami
-				religion = animist
-				size = 102996
-			}
-		}
-		region_state:KRL = { #Karelia
-			create_pop = {
-				culture = karelian
-				religion = animist
-				size = 57200
-			}
-		}
-		region_state:V11 = { #Veps
-			create_pop = {
-				culture = karelian
-				religion = animist
-				size = 57200
-			}
-		}
-	}
-	s:STATE_ARKHANGELSK = {
-		region_state:A03 = { #Aaninen
-			create_pop = {
-				culture = ugrian
-				size = 20048
-			}
-		}
-		region_state:B01 = { #Bjarmia
-			create_pop = {
-				culture = ugrian
-				size = 60144
-			}
-		}
-		region_state:P03 = { #Pinega
-			create_pop = {
-				culture = ugrian
-				size = 60144
-			}
-		}
-		region_state:V04 = { #Vashka
-			create_pop = {
-				culture = ugrian
-				size = 20048
-			}
-		}
-	}
 	s:STATE_TVER = {
-		region_state:A03 = { #Aaninen
+		region_state:I10 = { #Ilmenia
 			create_pop = {
 				culture = ugrian
 				size = 399932
+				religion = animist
 			}
-		}
-		region_state:C01 = { #Chud
+			
 			create_pop = {
-				culture = finnish
+				culture = ugrian
 				size = 399932
+				religion = animist
 			}
 		}
 		region_state:M28 = { #Merya
@@ -444,12 +232,12 @@
 			}
 			create_pop = {
 				culture = ugrian
+				religion = animist
 				size = 1169798
 			}
-		}
-		region_state:V06 = { #Vologda
 			create_pop = {
-				culture = ugrian
+				culture = mari
+				religion = animist
 				size = 399932
 			}
 		}
@@ -461,6 +249,7 @@
 			}
 			create_pop = {
 				culture = ugrian
+				religion = animist
 				size = 29998
 			}
 		}
@@ -488,21 +277,7 @@
 			}
 		}
 	}
-	s:STATE_TAURIDA = {
-		region_state:HUN = { #Hungary (Magyar)
-			create_pop = {
-				culture = hungarian
-				religion = animist
-				size = 243388
-			}
-		}
-		region_state:K24 = { #Khazaria
-			create_pop = {
-				culture = khazar
-				size = 1914584
-			}
-		}
-	}
+	
 	s:STATE_KURSK = {
 		region_state:B21 = { #Burtas
 			create_pop = {
@@ -542,150 +317,32 @@
 		}
 	}
 	s:STATE_NOVGOROD = {
+		region_state:C01 = { #Chud
+			create_pop = {
+				culture = byelorussian
+				religion = animist
+				size = 130000
+			}
+		}
 		region_state:I10 = { #Ilmenia
 			create_pop = {
 				culture = byelorussian
+				religion = animist
 				size = 535203
 			}
 		}
-		region_state:L11 = { #Ladoga
+		region_state:V06 = { #Vologda
 			create_pop = {
 				culture = estonian
+				religion = animist
 				size = 22000
 			}
 		}
 		region_state:V11 = { #Veps
 			create_pop = {
 				culture = byelorussian
-				size = 267601
-			}
-		}
-	}
-	s:STATE_CHERSON = {
-		region_state:HUN = { #Hungary (Magyar)
-			create_pop = {
-				culture = hungarian
 				religion = animist
-				size = 986108
-			}
-		}
-		region_state:K24 = { #Khazaria
-			create_pop = {
-				culture = khazar
-				size = 20000
-			}
-			create_pop = {
-				culture = bulgarian
-				religion = animist
-				size = 12000
-			}
-		}
-		region_state:O06 = { #Olvia
-			create_pop = {
-				culture = ukrainian
-				religion = animist
-				size = 337804
-			}
-		}
-		region_state:U05 = { #Ushytsia
-			create_pop = {
-				culture = ukrainian
-				religion = animist
-				size = 28000
-			}
-		}		
-	}
-	s:STATE_GALICH = {
-		region_state:C01 = { #Chud
-			create_pop = {
-				culture = finnish
-				size = 14399
-			}
-		}
-		region_state:M03 = { #Mari
-			create_pop = {
-				culture = ugrian
-				size = 23996
-			}
-		}
-		region_state:P03 = { #Pinega
-			create_pop = {
-				culture = ugrian
-				size = 200000
-			}
-		}
-		region_state:PRM = { #Perm
-			create_pop = {
-				culture = ugrian
-				size = 214399
-			}
-		}
-		region_state:S05 = { #Syktyvkar
-			create_pop = {
-				culture = ugrian
-				size = 214399
-			}
-		}
-		region_state:V05 = { #Vel
-			create_pop = {
-				culture = ugrian
-				size = 214399
-			}
-		}
-		region_state:V06 = { #Vologda
-			create_pop = {
-				culture = ugrian
-				size = 214399
-			}
-		}
-		region_state:VU1 = { #Veliky-Ustug
-			create_pop = {
-				culture = ugrian
-				size = 214400
-			}
-		}
-	}
-	s:STATE_MINSK = {
-		region_state:DR3 = { #Dregovichia
-			create_pop = {
-				culture = ashkenazi
-				size = 52200
-			}
-			create_pop = {
-				culture = byelorussian
-				religion = animist
-				size = 149400
-			}
-			create_pop = {
-				culture = russian
-				religion = animist
-				size = 76038
-			}
-			create_pop = {
-				culture = ukrainian
-				religion = animist
-				size = 253850
-			}
-		}
-		region_state:S29 = { #Slutsk
-			create_pop = {
-				culture = ashkenazi
-				size = 52200
-			}
-			create_pop = {
-				culture = byelorussian
-				religion = animist
-				size = 49400
-			}
-			create_pop = {
-				culture = russian
-				religion = animist
-				size = 176038
-			}
-			create_pop = {
-				culture = ukrainian
-				religion = animist
-				size = 253850
+				size = 137601
 			}
 		}
 	}
@@ -693,225 +350,48 @@
 		region_state:K24 = { #Khazaria
 			create_pop = {
 				culture = khazar
+				religion = animist
 				size = 532804
 			}
 		}
 	}
 	s:STATE_PERM = {
-		region_state:B20 = { #Bolghars
-			create_pop = {
-				culture = bulgarian
-				size = 16000
-			}
-		}
 		region_state:PRM = { #Perm
 			create_pop = {
 				culture = ugrian
+				religion = animist
 				size = 1903944
 			}
-		}
-		region_state:S05 = { #Syktyvkar
+			
+			create_pop = {
+				culture = bulgarian
+				religion = animist
+				size = 16000
+			}
+			
 			create_pop = {
 				culture = ugrian
+				religion = animist
 				size = 20000
 			}
-		}
-		region_state:V05 = { #Vel
+			
 			create_pop = {
 				culture = ugrian
-				size = 50000
+				religion = animist
+				size = 20000
 			}
 		}
 		region_state:V07 = { #Vychegda
 			create_pop = {
 				culture = ugrian
+				religion = animist
 				size = 50000
 			}
-		}
-		region_state:V08 = { #Vym
-			create_pop = {
-				culture = ugrian
-				size = 20000
-			}
-		}
-	}
-	s:STATE_TALINN = {		
-		region_state:EST = { #Estonia
-			create_pop = {
-				culture = estonian
-				religion = animist
-				size = 373800
-			}
-		}
-		region_state:S25 = { #Saaremaa
-			create_pop = {
-				culture = estonian
-				religion = animist
-				size = 101992
-			}
-			create_pop = {
-				culture = norse
-				size = 3000
-			}
-		}
-		region_state:S26 = { #Sakala
-			create_pop = {
-				culture = estonian
-				religion = animist
-				size = 200000
-			}
-		}
-	}
-	s:STATE_RIGA = {		
-		region_state:C22 = { #Curonia
-			create_pop = {
-				culture = latvian
-				religion = animist
-				size = 109499
-			}
-		}
-		region_state:LAT = { #Latgale (Latvia)
-			create_pop = {
-				culture = latvian
-				religion = animist
-				size = 309499
-			}
+			
 			create_pop = {
 				culture = ugrian
 				religion = animist
-				size = 900
-			}
-			create_pop = {
-				culture = russian
-				religion = animist
-				size = 21000
-			}
-		}
-		region_state:L15 = { #Livonia
-			create_pop = {
-				culture = latvian
-				religion = animist
-				size = 209499
-			}
-			create_pop = {
-				culture = estonian
-				religion = animist
-				size = 187996
-			}
-			create_pop = {
-				culture = ashkenazi
-				size = 53408
-			}
-		}
-		region_state:S27 = { #Selija
-			create_pop = {
-				culture = latvian
-				religion = animist
-				size = 209499
-			}
-		}
-		region_state:Z03 = { #Zemigallians
-			create_pop = {
-				culture = latvian
-				religion = animist
-				size = 109499
-			}
-		}
-	}
-	s:STATE_KAUNAS = {
-		region_state:C22 = { #Curonia
-			create_pop = {
-				culture = latvian
-				religion = animist
-				size = 160159
-			}
-			create_pop = {
-				culture = lithuanian
-				religion = animist
-				size = 40000
-			}
-		}
-		region_state:LIT = { #Lithuania
-			create_pop = {
-				culture = lithuanian
-				religion = animist
-				size = 220000
-			}
-			create_pop = {
-				culture = ashkenazi
-				size = 168159
-			}
-		}
-		region_state:S27 = { #Selija
-			create_pop = {
-				culture = latvian
-				religion = animist
-				size = 160000
-			}
-			create_pop = {
-				culture = lithuanian
-				religion = animist
-				size = 8159
-			}
-		}
-		region_state:Z03 = { #Zemigallians
-			create_pop = {
-				culture = latvian
-				religion = animist
-				size = 160000
-			}
-			create_pop = {
-				culture = lithuanian
-				religion = animist
-				size = 8159
-			}
-		}
-		region_state:Z04 = { #Zemaiteje
-			create_pop = {
-				culture = latvian
-				religion = animist
-				size = 38150
-			}
-			create_pop = {
-				culture = lithuanian
-				religion = animist
-				size = 130009
-			}
-		}
-	}
-	s:STATE_MAZOVIA = {
-		region_state:LP1 = { #Lesser Poland
-			create_pop = {
-				culture = polish
-				religion = animist
-				size = 134000
-			}
-		}
-		region_state:M34 = { #Mazovia
-			create_pop = {
-				culture = ashkenazi
-				size = 116000
-			}
-			create_pop = {
-				culture = polish
-				religion = animist
-				size = 676000
-			}
-		}
-		region_state:Y12 = { #Yatvingia
-			create_pop = {
-				culture = ashkenazi
-				size = 116000
-			}
-			create_pop = {
-				culture = lithuanian
-				religion = animist
-				size = 620000
-			}
-			create_pop = {
-				culture = polish
-				religion = animist
-				size = 376000
+				size = 50000
 			}
 		}
 	}
@@ -949,71 +429,6 @@
 			}
 		}
 	}
-	s:STATE_GREATER_POLAND = {
-		region_state:K27 = { #Kuyavia
-			create_pop = {
-				culture = polish
-				religion = animist
-				size = 127653
-			}
-		}
-		region_state:M34 = { #Mazovia
-			create_pop = {
-				culture = polish
-				religion = animist
-				size = 63826
-			}
-		}
-		region_state:LP1 = { #Lesser Poland
-			create_pop = {
-				culture = ashkenazi
-				size = 112400
-			}
-			create_pop = {
-				culture = polish
-				religion = animist
-				size = 382958
-			}
-		}
-		region_state:W18 = { #Wielun
-			create_pop = {
-				culture = polish
-				religion = animist
-				size = 382958
-			}
-		}
-	}
-	s:STATE_LESSER_POLAND = {
-		region_state:KRA = { #Krakow
-			create_pop = {
-				culture = polish
-				religion = animist
-				size = 100396
-			}
-		}
-		region_state:LP1 = { #Lesser Poland
-			create_pop = {
-				culture = ashkenazi
-				size = 59606
-			}
-			create_pop = {
-				culture = polish
-				religion = animist
-				size = 981000
-			}
-		}
-		region_state:V13 = { #Volhynia
-			create_pop = {
-				culture = ashkenazi
-				size = 59606
-			}
-			create_pop = {
-				culture = ukrainian
-				religion = animist
-				size = 108000
-			}
-		}
-	}
 	s:STATE_WEST_PRUSSIA = {
 		region_state:K27 = { #Kuyavia
 			create_pop = {
@@ -1047,6 +462,7 @@
 			}
 			create_pop = {
 				culture = pruthenian
+				religion = animist
 				size = 370000
 			}
 		}
@@ -1059,6 +475,7 @@
 			}
 			create_pop = {
 				culture = pruthenian
+				religion = animist
 				size = 409796
 			}
 		}
@@ -1070,6 +487,7 @@
 			}
 			create_pop = {
 				culture = pruthenian
+				religion = animist
 				size = 37196
 			}
 		}
@@ -1687,54 +1105,6 @@
 				culture = ukrainian
 				religion = animist
 				size = 404198
-			}
-		}
-	}
-	s:STATE_ORYOL = {
-		region_state:B21 = {
-			create_pop = {
-				culture = alan
-				size = 2327590
-			}
-			create_pop = {
-				culture = ashkenazi
-				size = 16410
-			}
-			create_pop = {
-				culture = ugrian
-				size = 1122
-			}
-			create_pop = {
-				culture = hungarian
-				size = 2122
-			}
-		}
-		region_state:HUN = {
-			create_pop = {
-				culture = hungarian
-				size = 327590
-			}
-			create_pop = {
-				culture = ashkenazi
-				size = 4410
-			}
-			create_pop = {
-				culture = ugrian
-				size = 1122
-			}
-		}
-		region_state:M27 = {
-			create_pop = {
-				culture = ugrian
-				size = 627590
-			}
-			create_pop = {
-				culture = ashkenazi
-				size = 5410
-			}
-			create_pop = {
-				culture = alan
-				size = 4122
 			}
 		}
 	}
