@@ -191,6 +191,7 @@ void V3::Country::distributeGovAdmins(const double target, const int PMGeneratio
 		const auto govAdmin = std::make_shared<Building>();
 		govAdmin->setName("building_government_administration");
 		govAdmin->setLevel(levels);
+		govAdmin->addInvestor(levels, "national_service", substate->getHomeStateName(), this->tag);
 
 		substate->addBuilding(govAdmin);
 

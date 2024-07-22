@@ -63,6 +63,10 @@ void outBuilding(std::ostream& output, const V3::Building& building)
 	output << "\t\t\tcreate_building = {\n";
 	output << "\t\t\t\tbuilding = \"" << building.getName() << "\"\n";
 
+	if (building.getShareholders().empty())
+	{
+		Log(LogLevel::Warning) << "Building " << building.getName() << " will be ignored by the game engine, no investor data.";
+	}
 	outShareholders(output, building);
 
 	output << "\t\t\t\treserves = " << 1 << "\n";

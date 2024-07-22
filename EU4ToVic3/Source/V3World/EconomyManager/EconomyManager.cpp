@@ -483,11 +483,7 @@ void V3::EconomyManager::investCapital() const
 			for (const auto& building: subState->getBuildings())
 			{
 				const auto& type = buildingGroups.getAncestralCategory(building->getBuildingGroup()).value_or("");
-				if (type.empty())
-				{
-					Log(LogLevel::Warning) << "Unrecognized building group " << type << " when investing. B: " << building->getName();
-				}
-				else if (type == "bg_agriculture" || type == "bg_plantation" || type == "bg_ranching")
+				if (type == "bg_agriculture" || type == "bg_plantation" || type == "bg_ranching")
 				{
 					building->addInvestor(building->getLevel(), "aristocratic", subState->getHomeStateName(), country->getTag());
 				}
