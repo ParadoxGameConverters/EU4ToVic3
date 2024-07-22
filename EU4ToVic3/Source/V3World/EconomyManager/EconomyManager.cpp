@@ -464,7 +464,8 @@ void V3::EconomyManager::distributeBudget(const double globalCP, const double to
 {
 	for (const auto& country: centralizedCountries)
 	{
-		country->setCPBudget(static_cast<int>(std::round(globalCP * (country->getIndustryWeight() / totalIndustryScore))));
+		int budget = static_cast<int>(std::round(globalCP * (country->getIndustryWeight() / totalIndustryScore)));
+		country->setCPBudget(budget);
 	}
 }
 
