@@ -203,16 +203,17 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "71 %";
 	economyManager.loadCentralizedStates(politicalManager.getCountries());
 	Log(LogLevel::Progress) << "72 %";
-	economyManager.establishBureaucracy(politicalManager);
-	Log(LogLevel::Progress) << "73 %";
 	economyManager.hardcodePorts();
-	Log(LogLevel::Progress) << "74 %";
+	Log(LogLevel::Progress) << "73 %";
 	economyManager.assignCountryCPBudgets(configBlock.economy, configBlock.startDate, datingData, politicalManager, configBlock.vn);
+	Log(LogLevel::Progress) << "74 %";
 	economyManager.balanceNationalBudgets();
 	Log(LogLevel::Progress) << "75 %";
 	economyManager.assignSubStateCPBudgets(configBlock.economy);
 	Log(LogLevel::Progress) << "76 %";
 	economyManager.buildBuildings(politicalManager.getLawsMap());
+	economyManager.investCapital();
+	economyManager.establishBureaucracy(politicalManager);
 	economyManager.setPMs();
 
 	Log(LogLevel::Info) << "*** Goodbye, Vicky 3, and godspeed. ***";

@@ -111,6 +111,7 @@ void V3::EconomyManager::hardcodePorts() const
 			port->setName("building_port");
 			port->setPMGroups({"pmg_base_building_port"});
 			port->setLevel(1);
+			port->addInvestor(1, "national_service", subState->getHomeStateName(), country->getTag());
 
 			subState->addBuilding(port);
 			++counter;
@@ -484,7 +485,7 @@ void V3::EconomyManager::investCapital() const
 				const auto& type = buildingGroups.getAncestralCategory(building->getBuildingGroup()).value_or("");
 				if (type.empty())
 				{
-					Log(LogLevel::Warning) << "Unrecognized building group " << type << " when investing.";
+					Log(LogLevel::Warning) << "Unrecognized building group " << type << " when investing. B: " << building->getName();
 				}
 				else if (type == "bg_agriculture" || type == "bg_plantation" || type == "bg_ranching")
 				{

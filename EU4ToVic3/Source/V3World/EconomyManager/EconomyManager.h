@@ -50,6 +50,7 @@ class EconomyManager
 	void loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries);
 	void loadMappersAndConfigs(const commonItems::ModFilesystem& modFS, const std::string& filePath = "");
 
+	void establishBureaucracy(const PoliticalManager& politicalManager) const;
 	void hardcodePorts() const;
 
 	void assignCountryCPBudgets(Configuration::ECONOMY economyType,
@@ -61,7 +62,6 @@ class EconomyManager
 	void balanceNationalBudgets() const;
 	void buildBuildings(const std::map<std::string, Law>& lawsMap) const;
 	void investCapital() const;
-	void establishBureaucracy(const PoliticalManager& politicalManager) const;
 	void setPMs() const;
 
 	[[nodiscard]] const auto& getCentralizedCountries() const { return centralizedCountries; }
