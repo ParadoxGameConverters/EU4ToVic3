@@ -1,24 +1,16 @@
 ﻿POPS = {
 	s:STATE_URAL = {
-		region_state:BKR = { #Bashkiria
-			create_pop = {
-				culture = bashkir
-				size = 5996
-			}
-		}
 		region_state:CT1 = { #Chimgi-Tura
 			create_pop = {
 				culture = cuman
 				size = 113504
 			}
-		}
-		region_state:N18 = { #Nenetsia
+			
 			create_pop = {
-				culture = ugrian
-				size = 107000
+				culture = bashkir
+				size = 5996
 			}
-		}
-		region_state:S19 = { #Sibir
+			
 			create_pop = {
 				culture = cuman
 				size = 13504
@@ -29,9 +21,20 @@
 				culture = ugrian
 				size = 470296
 			}
+			
+			create_pop = {
+				culture = ugrian
+				size = 107000
+			}
 		}
 	}
 	s:STATE_TOMSK = {
+		region_state:K19 = { #Kimak
+			create_pop = {
+				culture = siberian
+				size = 26008
+			}
+		}
 		region_state:KYR = { #Kirghiz
 			create_pop = {
 				culture = kirgiz
@@ -39,13 +42,13 @@
 				size = 1170008
 			}
 		}
-		region_state:K21 = { #Khakas
+		region_state:S20 = { #Selkups
 			create_pop = {
-				culture = siberian
-				size = 26008
+				culture = ugrian
+				size = 36000
 			}
 		}
-		region_state:S20 = { #Selkups
+		region_state:T22 = { #Tara
 			create_pop = {
 				culture = ugrian
 				size = 36000
@@ -67,13 +70,14 @@
 		}
 	}
 	s:STATE_TOBOLSK = {
-		region_state:K19 = { #Kimak
+		region_state:CT1 = { #Chimgi-Tura
 			create_pop = {
 				culture = cuman
+				religion = animist
 				size = 37909
 			}
 		}
-		region_state:KYR = { #Kirghiz
+		region_state:K19 = { #Kimak
 			create_pop = {
 				culture = kirgiz
 				religion = animist
@@ -83,30 +87,35 @@
 		region_state:S19 = { #Sibir
 			create_pop = {
 				culture = cuman
+				religion = animist
 				size = 37908
 			}
 		}
 		region_state:T22 = { #Tara
 			create_pop = {
 				culture = ugrian
+				religion = animist
 				size = 37908
 			}
 		}
 		region_state:T23 = { #Tui
 			create_pop = {
 				culture = ugrian
+				religion = animist
 				size = 37908
 			}
 		}
 		region_state:V10 = { #Vasyugan
 			create_pop = {
 				culture = ugrian
+				religion = animist
 				size = 37908
 			}
 		}
 		region_state:Y10 = { #Yugra
 			create_pop = {
 				culture = ugrian
+				religion = animist
 				size = 37908
 			}
 		}
@@ -115,22 +124,28 @@
 		region_state:U04 = { #Uyghur
 			create_pop = {
 				culture = tuvan
+				religion = animist
 				size = 30000
 			}
 		}
 	}
-	s:STATE_KRASNOYARSK = { #DONE
+	s:STATE_KRASNOYARSK = {
 		region_state:K21 = { #Khakas
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 169990
 			}
+		}
+		region_state:U04 = { #Uyghur
 			create_pop = {
-				culture = buryat
+				culture = uighur
+				religion = animist
 				size = 17665
 			}
 			create_pop = {
 				culture = tuvan
+				religion = animist
 				size = 8785
 			}
 		}
@@ -139,62 +154,73 @@
 		region_state:A17 = { #Avam
 			create_pop = {
 				culture = ugrian
+				religion = animist
 				size = 7980
 			}
 		}
 		region_state:BRY = { #Buryatia
 			create_pop = {
 				culture = buryat
+				religion = animist
 				size = 7980
 			}
 		}
 		region_state:DU1 = { #Dulgan
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 12780
 			}
 			create_pop = {
 				culture = yakut
+				religion = animist
 				size = 12568
 			}
 		}
 		region_state:E04 = { #Ewenki
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 2780
 			}
 			create_pop = {
 				culture = yakut
+				religion = animist
 				size = 19568
 			}
 		}
 		region_state:E05 = { #Enets
 			create_pop = {
 				culture = ugrian
+				religion = animist
 				size = 16980
 			}
 		}
 		region_state:K18 = { #Kets
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 20780
 			}
 		}
 		region_state:K21 = { #Khakas
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 852
 			}
 		}
 		region_state:N18 = { #Nenets
 			create_pop = {
 				culture = ugrian
+				religion = animist
 				size = 9000
 			}
 		}
 		region_state:S20 = { #Selkups
 			create_pop = {
 				culture = ugrian
+				religion = animist
 				size = 41980
 			}
 		}
@@ -279,6 +305,18 @@
 				size = 2500
 			}
 		}
+		region_state:T23 = { #Tui
+			create_pop = {
+				culture = siberian
+				size = 2500
+			}
+		}
+		region_state:V10 = { #Vasyugan
+			create_pop = {
+				culture = siberian
+				size = 2500
+			}
+		}
 		region_state:Y10 = { #Yugra
 			create_pop = {
 				culture = ugrian
@@ -335,15 +373,24 @@
 		}
 	}
 	s:STATE_KAMCHATKA = {
+		region_state:A16 = { #Angqalghakku
+			create_pop = {
+				culture = siberian
+				religion = animist
+				size = 60000
+			}
+		}
 		region_state:I09 = { #Itelmens
 			create_pop = {
 				culture = siberian
-				size = 156000
+				religion = animist
+				size = 150000
 			}
 		}
 		region_state:K17 = { #Koryaks
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 150000
 			}
 		}
@@ -353,30 +400,35 @@
 		region_state:E03 = { #Evesel
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 43008
 			}
 		}
 		region_state:K17 = { #Koryaks
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 9000
 			}
 		}
 		region_state:O05 = { #Omok
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 400
 			}
 		}
 		region_state:V09 = { #Vadul
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 12400
 			}
 		}
 		region_state:YAK = { #Urangai Sakha
 			create_pop = {
 				culture = yakut
+				religion = animist
 				size = 20196
 			}
 		}
@@ -386,36 +438,43 @@
 		region_state:DU1 = { #Dulgan
 			create_pop = {
 				culture = siberian
+				
 				size = 24096
 			}
 			create_pop = {
 				culture = yakut
+				religion = animist
 				size = 50100
 			}
 		}
 		region_state:E04 = { #Ewenki
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 24096
 			}
 			create_pop = {
 				culture = yakut
+				religion = animist
 				size = 50100
 			}
 		}
 		region_state:V09 = { #Vadul
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 8000
 			}
 		}
 		region_state:YAK = { #Urangai Sakha
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 16096
 			}
 			create_pop = {
 				culture = yakut
+				religion = animist
 				size = 41100
 			}
 		}
@@ -426,35 +485,148 @@
 		region_state:BRY = { #Buryatia
 			create_pop = {
 				culture = buryat
+				religion = animist
 				size = 36000
 			}
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 17996
 			}
-		}
-		region_state:E03 = { #Evesel
+			
 			create_pop = {
 				culture = manchu
+				religion = animist
 				size = 5996
-			}
-			create_pop = {
-				culture = siberian
-				size = 7996
 			}
 		}
 		region_state:YAK = { #Urangai Sakha
 			create_pop = {
 				culture = yakut
+				religion = animist
 				size = 127992
 			}
 			create_pop = {
 				culture = manchu
+				religion = animist
 				size = 80000
 			}
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 10000
+			}
+			
+			create_pop = {
+				culture = siberian
+				religion = animist
+				size = 7996
+			}
+		}
+	}
+	s:STATE_OUTER_MANCHURIA = {
+		region_state:HM0 = { #Heishu Mohe
+			create_pop = {
+				culture = siberian
+				religion = animist
+				size = 30006
+			}
+		}
+		region_state:MCH = { #Balhae (Manchu)
+			create_pop = {
+				culture = manchu
+				religion = animist
+				size = 1003990
+			}
+		}
+		region_state:N23 = { #Oroch Nani
+			create_pop = {
+				culture = siberian
+				religion = animist
+				size = 32800
+			}
+		}
+		region_state:N24 = { #Nʼivxgu (Nivkh)
+			create_pop = {
+				culture = siberian
+				religion = animist
+				size = 11996
+			}
+		}
+		
+	}
+	s:STATE_AMUR = {
+		region_state:E03 = { #Evesel (Evens)
+			create_pop = {
+				culture = siberian
+				religion = animist
+				size = 11123
+			}
+		}
+		region_state:EB0 = { #Elkan Bayenin (Negidals)
+			create_pop = {
+				culture = siberian
+				religion = animist
+				size = 11123
+			}
+		}
+		region_state:HM0 = { #Heishui Mohe
+			create_pop = {
+				culture = siberian
+				religion = animist
+				size = 11123
+			}
+			create_pop = {
+				culture = manchu
+				religion = animist
+				size = 450
+			}
+		}
+		region_state:N24 = { #Nʼivxgu (Nivkh)
+			create_pop = {
+				culture = siberian
+				religion = animist
+				size = 11123
+			}
+		}
+		region_state:N25 = { #Nanai
+			create_pop = {
+				culture = siberian
+				religion = animist
+				size = 11123
+			}
+		}
+		region_state:E03 = { #Evesel (Evens)
+			create_pop = {
+				culture = siberian
+				religion = animist
+				size = 11123
+			}
+		}
+		region_state:S33 = { #Solon
+			create_pop = {
+				culture = siberian
+				religion = animist
+				size = 11123
+			}
+			create_pop = {
+				culture = yakut
+				religion = animist
+				size = 1040
+			}
+		}
+		region_state:UN0 = { #Ulch Nani
+			create_pop = {
+				culture = siberian
+				religion = animist
+				size = 11123
+			}
+		}
+		region_state:YAK = { #Yakutia
+			create_pop = {
+				culture = yakut
+				religion = animist
+				size = 11123
 			}
 		}
 	}
@@ -478,31 +650,35 @@
 		region_state:BRY = { #Buryatia
 			create_pop = {
 				culture = buryat
+				religion = animist
 				size = 388408
+			}
+			
+			create_pop = {
+				culture = uighur
+				religion = animist
+				size = 116004
 			}
 		}
 		region_state:E04 = { #Ewenki
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 14996
 			}
 		}
 		region_state:K18 = { #Kets
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 14996
 			}
 		}
 		region_state:K21 = { #Khakas
 			create_pop = {
 				culture = siberian
+				religion = animist
 				size = 40996
-			}
-		}
-		region_state:U04 = { #Uyghur
-			create_pop = {
-				culture = uighur
-				size = 116004
 			}
 		}
 	}
@@ -518,6 +694,11 @@
 				culture = siberian
 				size = 6000
 			}
+			
+			create_pop = {
+				culture = inuit
+				size = 1728
+			}
 		}
 		region_state:V09 = { #Vadul
 			create_pop = {
@@ -525,28 +706,10 @@
 				size = 60000
 			}
 		}
-		region_state:Y02 = { #Yupighyt
-			create_pop = {
-				culture = inuit
-				size = 1728
-			}
-		}
 		region_state:YAK = { #Urangai Sakha
 			create_pop = {
-				culture = inuit
-				size = 10000
-			}
-		}
-	}
-s:STATE_AMUR = {
-		region_state:E03 = { #Evesel
-			create_pop = {
 				culture = siberian
-				size = 81123
-			}
-			create_pop = {
-				culture = manchu
-				size = 1490
+				size = 10000
 			}
 		}
 	}

@@ -690,11 +690,18 @@
 		}
 	}
 	s:STATE_SISTAN = {
+		region_state:AFG = { #Zabulistan (Afghanistan)
+			create_pop = {
+				culture = pashtun
+				religion = animist
+				size = 20000
+			}
+		}
 		region_state:ARA = { # Abbasids (Arabia)
 			create_pop = {
 				culture = baluchi
 				religion = zoroastrian
-				size = 82300
+				size = 72300
 			}
 			create_pop = {
 				culture = bedouin
@@ -703,7 +710,7 @@
 			create_pop = {
 				culture = persian
 				religion = zoroastrian
-				size = 113192
+				size = 103192
 			}
 		}
 	}
@@ -773,8 +780,7 @@
 				culture = sephardic
 				size = 2996
 			}
-		}
-		region_state:T37 = { # Taids
+			
 			create_pop = {
 				culture = armenian
 				size = 4000
@@ -839,6 +845,30 @@
 			}
 		}
 	}
+	s:STATE_SEMNAN = {
+		region_state:T37 = { #Taids
+			create_pop = {
+				culture = persian
+				religion = zoroastrian
+				size = 54300
+			}
+			create_pop = {
+				culture = persian
+				religion = sunni
+				size = 4010
+			}
+			create_pop = {
+				culture = circassian
+				religion = shiite
+				size = 701
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = circassian
+				size = 300
+			}
+		}
+	}
 	s:STATE_TABRIZ = {
 		region_state:ARA = { # Abbasids (Arabia)
 			create_pop = {
@@ -887,6 +917,114 @@
 				culture = kurdish
 				religion = zoroastrian
 				size = 79900
+			}
+		}
+	}
+	s:STATE_KERMAN = {
+		region_state:ARA = { #Abbasids (Arabia)
+			create_pop = {
+				culture = persian
+				religion = zoroastrian
+				size = 204339
+			}
+			create_pop = { # Kerman
+				culture = sephardic
+				size = 2920
+			}
+			create_pop = {
+				culture = baluchi
+				religion = zoroastrian
+				size = 10030
+			}
+			create_pop = {
+				culture = bedouin
+				religion = sunni
+				size = 4200
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = baluchi
+				religion = zoroastrian
+				size = 6200
+			}
+		}
+	}
+	s:STATE_URMIA = {
+		region_state:ARA = { #Abbasids (Arabia)
+			create_pop = {
+				culture = kurdish
+				size = 5047
+			}
+			create_pop = {
+				culture = persian
+				size = 20102
+			}
+			create_pop = { # Salamas
+				culture = assyrian
+				religion = nestorian
+				size = 1840
+			}
+		}
+		region_state:ARM = { #Armenia
+			create_pop = {
+				culture = kurdish
+				size = 150000
+			}
+			create_pop = {
+				culture = azerbaijani
+				size = 120100
+			}
+			create_pop = { # Urmia
+				culture = sephardic
+				size = 1562
+			}
+			create_pop = {
+				culture = armenian
+				size = 12050
+			}
+			create_pop = {
+				culture = assyrian
+				religion = nestorian
+				size = 46040
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = circassian
+				size = 4200
+			}
+		}
+	}
+	s:STATE_PERSIAN_KURDISTAN = {
+		region_state:ARA = { #Abbasids (Arabia)
+			create_pop = {
+				culture = kurdish
+				size = 322062
+			}
+			create_pop = {
+				culture = persian
+				size = 45010
+			}
+			create_pop = {
+				culture = luri
+				size = 20012
+			}
+			create_pop = { # Kermanshah, Sanadaj
+				culture = sephardic
+				size = 4976
+			}
+			create_pop = {
+				culture = armenian
+				size = 3910
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = lacustrine_bantu
+				size = 3200
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = circassian
+				size = 2200
 			}
 		}
 	}
@@ -1326,162 +1464,6 @@
 				pop_type = slaves
 				culture = georgian
 				size = 400
-			}
-		}
-	}
-	s:STATE_KERMAN = {
-		region_state:ARA = {
-			create_pop = {
-				culture = persian
-				size = 204339
-			}
-			create_pop = { # Kerman
-				culture = sephardic
-				size = 2920
-			}
-			create_pop = {
-				culture = baluchi
-				size = 10030
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = lacustrine_bantu
-				size = 4200
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = baluchi
-				size = 6200
-			}
-		}
-	}
-	s:STATE_PERSIAN_KURDISTAN = {
-		region_state:ARA = {
-			create_pop = {
-				culture = kurdish
-				size = 322062
-			}
-			create_pop = {
-				culture = persian
-				size = 45010
-			}
-			create_pop = {
-				culture = luri
-				size = 20012
-			}
-			create_pop = { # Kermanshah, Sanadaj
-				culture = sephardic
-				size = 4976
-			}
-			create_pop = {
-				culture = armenian
-				size = 3910
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = lacustrine_bantu
-				size = 3200
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = circassian
-				size = 2200
-			}
-		}
-	}
-	s:STATE_SEMNAN = {
-		region_state:T37 = {
-			create_pop = {
-				culture = persian
-				size = 54300
-			}
-			create_pop = {
-				culture = mazanderani
-				size = 4010
-			}
-			create_pop = {
-				culture = circassian
-				religion = shiite
-				size = 701
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = circassian
-				size = 300
-			}
-		}
-	}
-	s:STATE_URMIA = {
-		region_state:ARA = {
-			create_pop = {
-				culture = kurdish
-				size = 75047
-			}
-			create_pop = {
-				culture = azerbaijani
-				size = 60100
-			}
-			create_pop = { # Urmia
-				culture = sephardic
-				size = 762
-			}
-			create_pop = {
-				culture = armenian
-				size = 6050
-			}
-			create_pop = {
-				culture = persian
-				size = 20102
-			}
-			create_pop = {
-				culture = assyrian
-				size = 23040
-			}
-			create_pop = { # Salamas
-				culture = assyrian
-				religion = catholic
-				size = 940
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = circassian
-				size = 2200
-			}
-		}
-		region_state:ARM = {
-			create_pop = {
-				culture = kurdish
-				size = 75047
-			}
-			create_pop = {
-				culture = azerbaijani
-				size = 60100
-			}
-			create_pop = { # Urmia
-				culture = sephardic
-				size = 762
-			}
-			create_pop = {
-				culture = armenian
-				size = 6050
-			}
-			create_pop = {
-				culture = persian
-				size = 10102
-			}
-			create_pop = {
-				culture = assyrian
-				size = 26040
-			}
-			create_pop = { # Salamas
-				culture = assyrian
-				religion = catholic
-				size = 940
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = circassian
-				size = 2100
 			}
 		}
 	}

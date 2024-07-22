@@ -196,18 +196,17 @@ void EU4::CountryManager::uniteJapan()
 
 	// japan, right?
 	auto japan = getCountry("JAP");
-	if (!japan)
+	for (const auto& country: countries | std::views::values)
 	{
-		// no japan. look for japan.
-		for (const auto& country: countries | std::views::values)
+		if (country->isPossibleShogun())
 		{
-			if (country->isPossibleShogun())
-			{
-				const auto& tag = country->getTag();
-				Log(LogLevel::Info) << "- " << tag << " is the shogun.";
-				japan = getCountry(tag);
-				break;
-			}
+			const auto& tag = country->getTag();
+			Log(LogLevel::Info) << "- " << tag << " is the shogun.";
+			if (!japan)
+				japan = getCountry(tag); // no japan. elevate the shogun.
+			else
+				japan->eatCountry(country); // yes japan. eat the shogun.
+			break;
 		}
 	}
 
