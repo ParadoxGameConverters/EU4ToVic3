@@ -487,20 +487,23 @@ void V3::EconomyManager::investCapital() const
 				}
 				else if (type == "bg_agriculture" || type == "bg_plantation" || type == "bg_ranching") // All Aristocrats
 				{
-					building.addInvestor(building->getLevel(), "aristocratic", country->getTag());
+					building->addInvestor(building->getLevel(), "aristocratic", subState->getHomeStateName(), country->getTag());
 				}
 				else if (type == "bg_mining" || type == "bg_logging" || type == "bg_whaling" || type == "bg_fishing" ||
 							type == "bg_urban_facilities ") // Resource extraction and art is split between the middle class and the upper classes
 				{
-					building.addInvestor(building->getLevel(), "local", country->getTag()); // Industry is split between the middle, capitalists and the state
+					building->addInvestor(building->getLevel(),
+						 "local",
+						 subState->getHomeStateName(),
+						 country->getTag()); // Industry is split between the middle, capitalists and the state
 				}
 				else if (type == "bg_manufacturing")
 				{
-					building.addInvestor(building->getLevel(), "capitalist", country->getTag());
+					building->addInvestor(building->getLevel(), "capitalist", subState->getHomeStateName(), country->getTag());
 				}
 				else // services are owned by the state
 				{
-					building.addInvestor(building->getLevel(), "national_service", country->getTag());
+					building->addInvestor(building->getLevel(), "national_service", subState->getHomeStateName(), country->getTag());
 				}
 			}
 		}

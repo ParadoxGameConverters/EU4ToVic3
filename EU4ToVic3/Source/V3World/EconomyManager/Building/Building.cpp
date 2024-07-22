@@ -55,3 +55,8 @@ void V3::Building::registerKeys(const std::map<std::string, int>& costTiers)
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
+
+void V3::Building::addInvestor(const int theLevel, const std::string& type, const std::string& theState, const std::string& theNation)
+{
+	shareholders.push_back({type, theNation, theState, theLevel});
+}

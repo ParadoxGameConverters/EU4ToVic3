@@ -15,6 +15,7 @@ class Building: commonItems::parser
 	void setWeight(const double theWeight) { weight = theWeight; }
 	void addPM(const std::string& pm) { PMs.emplace(pm); }
 	void setPMGroups(const std::set<std::string>& pmgs) { PMGroups = pmgs; }
+	void addInvestor(const int theLevel, const std::string& type, const std::string& theState, const std::string& theNation);
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getBuildingGroup() const { return buildingGroup; }
