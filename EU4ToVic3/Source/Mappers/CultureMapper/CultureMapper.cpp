@@ -598,7 +598,6 @@ mappers::CultureDef mappers::CultureMapper::generateCultureDefinition(const V3::
 
 		const auto& sourceCulture = sourceCultureGroup->getCultures().at(sourceCultureName);
 		const auto& groupName = sourceCultureGroup->getName();
-		Log(LogLevel::Debug) << "name: " << eu4CultureName << " source " << sourceCultureName << " group " << groupName;
 		if (const auto& traitsblock = cultureTraitMapper.getTraitsForCulture(sourceCultureName, groupName); !traitsblock)
 		{
 			Log(LogLevel::Warning) << "EU4 culture " << sourceCultureName << " has no mapped traits! Rectify!";
@@ -606,8 +605,6 @@ mappers::CultureDef mappers::CultureMapper::generateCultureDefinition(const V3::
 		else
 		{
 			newDef.traits.insert(traitsblock->getTraits().begin(), traitsblock->getTraits().end());
-			for (const auto a: newDef.traits)
-				Log(LogLevel::Debug) << "trait: " << a;
 			newDef.ethnicities.emplace(traitsblock->getEthnicity());
 			newDef.graphics = traitsblock->getGraphics(); // Any will do but there must be only one.
 		}
