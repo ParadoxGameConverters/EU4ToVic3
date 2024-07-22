@@ -485,23 +485,23 @@ void V3::EconomyManager::investCapital() const
 				{
 					Log(LogLevel::Warning) << "Unrecognized building group " << type << " when investing.";
 				}
-				else if (type == "bg_agriculture" || type == "bg_plantation" || type == "bg_ranching")
+				else if (type == "bg_agriculture" || type == "bg_plantation" || type == "bg_ranching") // All Aristocrats
 				{
 					building.addInvestor(building->getLevel(), "aristocratic", country->getTag());
 				}
-				else if (type == "bg_mining" || type == "bg_logging" || type == "bg_whaling" || type == "bg_fishing" || type == "bg_urban_facilities ")
+				else if (type == "bg_mining" || type == "bg_logging" || type == "bg_whaling" || type == "bg_fishing" ||
+							type == "bg_urban_facilities ") // Resource extraction and art is split between the middle class and the upper classes
 				{
-					building.addInvestor(building->getLevel(), "local", country->getTag());
+					building.addInvestor(building->getLevel(), "local", country->getTag()); // Industry is split between the middle, capitalists and the state
 				}
 				else if (type == "bg_manufacturing")
 				{
 					building.addInvestor(building->getLevel(), "capitalist", country->getTag());
 				}
-				else
+				else // services are owned by the state
 				{
-					building.addInvestor(building->getLevel(), "national", country->getTag());
+					building.addInvestor(building->getLevel(), "national_service", country->getTag());
 				}
-				
 			}
 		}
 	}

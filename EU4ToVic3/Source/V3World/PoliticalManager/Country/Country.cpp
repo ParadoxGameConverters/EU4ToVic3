@@ -743,6 +743,18 @@ void V3::Country::determineCountryType()
 	double usage = 0;
 	for (const auto& subState: subStates)
 	{
+		// All States - 1 per level of state owned industry (excluding barracks, universities, etc.)
+		for (const auto& building: subState->getBuildings())
+		{
+			for (const auto& owner: building->getShareholders())
+			{
+				if (owner.type == "national")
+				{
+					usage += owner.level;
+				}
+			}
+		}
+
 		if (!subState->isIncorporated())
 		{
 			continue;
