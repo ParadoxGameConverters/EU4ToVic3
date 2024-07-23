@@ -63,6 +63,27 @@ std::optional<std::string> V3::BuildingGroups::getAncestralCategory(const std::o
 	return std::nullopt;
 }
 
+std::optional<std::string> V3::BuildingGroups::getAncestralGroup(const std::string& theGroupName) const
+{
+	auto name = theGroupName;
+	while (!name.empty())
+	{
+		const auto& possibleGroup = buildingGroups.find(name);
+		if (possibleGroup == buildingGroups.end())
+		{
+			return possibleGroup->first;
+		}
+		const auto& parentName = possibleGroup->second->getParentName();
+		if (!parentName)
+		{
+			return possibleGroup->first;
+		}
+		name = parentName.value();
+	}
+
+	return std::nullopt;
+}
+
 bool V3::BuildingGroups::usesArableLand(const std::optional<std::string>& theGroupName) const
 {
 	if (!theGroupName)

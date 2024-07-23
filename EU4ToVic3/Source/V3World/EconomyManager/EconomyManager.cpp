@@ -482,8 +482,8 @@ void V3::EconomyManager::investCapital() const
 		{
 			for (const auto& building: subState->getBuildings())
 			{
-				const auto& type = buildingGroups.getAncestralCategory(building->getBuildingGroup()).value_or("");
-				if (type == "bg_agriculture" || type == "bg_plantation" || type == "bg_ranching")
+				const auto& type = buildingGroups.getAncestralGroup(building->getBuildingGroup()).value_or("");
+				if (type == "bg_agriculture" || type == "bg_plantations" || type == "bg_ranching")
 				{
 					building->addInvestor(building->getLevel(), "aristocratic", subState->getHomeStateName(), country->getTag());
 				}
