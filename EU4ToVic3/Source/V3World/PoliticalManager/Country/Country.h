@@ -162,6 +162,7 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getUnownedCoreSubStates() const { return unownedCoreSubStates; }
 	[[nodiscard]] const auto& getUnownedProvinces() const { return unownedProvinces; }
 	[[nodiscard]] bool getWasGP() const { return processedData.wasGP; }
+	[[nodiscard]] const auto& getOverlord() { return processedData.overlordTag; }
 	void addSubState(const std::shared_ptr<SubState>& theSubState) { subStates.push_back(theSubState); }
 	void addUnownedCoreSubState(const std::shared_ptr<SubState>& theSubState) { unownedCoreSubStates.push_back(theSubState); }
 	void addUnownedProvinces(const std::set<std::string>& theProvinces) { unownedProvinces.insert(theProvinces.begin(), theProvinces.end()); }

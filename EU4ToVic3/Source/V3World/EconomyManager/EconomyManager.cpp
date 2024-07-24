@@ -484,6 +484,11 @@ void V3::EconomyManager::investCapital() const
 	for (const auto& country: centralizedCountries)
 	{
 		std::map<std::string, double> investorIOUs;
+		std::map<std::string, double> overlordIOUs;
+		std::map<std::string, double> capitalIOUs;
+
+		const std::string& overlordTag = country->getOverlord();
+		const std::string& overlordCapital = country->getProcessedData().capitalStateName;
 
 		for (const auto& subState: country->getSubStates())
 		{
@@ -521,6 +526,28 @@ void V3::EconomyManager::investCapital() const
 				}
 			}
 		}
+
+		// if (const auto& overlord = country->getOverlord(); overlord != "")
+		//{
+		//	for (const auto& subState: country->getSubStates())
+		//	{
+		//		for (const auto& building: subState->getBuildings())
+		//		{
+		//			if (building->getLevel() == 0)
+		//			{
+		//				continue;
+		//			}
+		//			if (const auto& shareholderIt = std::ranges::find_if(building->getShareholders(),
+		//					  [](const V3::Shareholders& s) {
+		//						  return s.type == "aristocratic";
+		//					  });
+		//				 shareholderIt != building->getShareholders().end())
+		//			{
+		//				// Apportion between local and overlord capital
+		//			}
+		//		}
+		//	}
+		// }
 	}
 }
 
