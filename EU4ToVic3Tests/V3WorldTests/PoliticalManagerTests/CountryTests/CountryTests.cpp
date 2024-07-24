@@ -92,7 +92,7 @@ TEST(V3World_CountryTests, CountryCanImportColorFromEU4)
 	EXPECT_EQ(commonItems::Color(std::array{1, 2, 3}), country.getProcessedData().color);
 }
 
-TEST(V3World_CountryTests, CountryWillOverrideVic3colorWithEU4Color)
+TEST(V3World_CountryTests, CountryWillOverrideEU4ColorWithVic3Color)
 {
 	const V3::ClayManager clayManager;
 
@@ -111,7 +111,7 @@ TEST(V3World_CountryTests, CountryWillOverrideVic3colorWithEU4Color)
 	country.convertFromEU4Country(clayManager, culMapper, {}, {}, {}, {}, {}, false);
 
 	EXPECT_TRUE(country.getProcessedData().color);
-	EXPECT_EQ(commonItems::Color(std::array{1, 2, 3}), country.getProcessedData().color);
+	EXPECT_EQ(commonItems::Color(std::array{4, 5, 6}), country.getProcessedData().color);
 }
 
 TEST(V3World_CountryTests, CountryWillNotOverrideVic3colorWithEU4ColorIfNone)
