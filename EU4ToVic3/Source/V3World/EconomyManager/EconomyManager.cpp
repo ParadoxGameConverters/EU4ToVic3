@@ -20,6 +20,7 @@
 #include <cmath>
 #include <iomanip>
 #include <numeric>
+#include <queue>
 #include <ranges>
 
 void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
@@ -476,12 +477,23 @@ void V3::EconomyManager::investCapital() const
 	// Resource extraction is split between locals/capitalists/nobles
 	// Factories split between locals/capitalists/the state
 	// The rest is state owned (barracks, admin centers, whatnot)
+	// TODO(Gawquon): Create a config file for these
+	const std::map<std::string, double> extractionWeights = {{"local", 0.5}, {"capitalist", 0.3}, {"aristocratic", 0.2}};
+	const std::map<std::string, double> manufacturingWeights = {{"local", 0.2}, {"capitalist", 0.6}, {"national", 0.2}};
+
 	for (const auto& country: centralizedCountries)
 	{
+		std::map<std::string, double> investorIOUs;
+
 		for (const auto& subState: country->getSubStates())
 		{
 			for (const auto& building: subState->getBuildings())
 			{
+				if (building->getLevel() == 0)
+				{
+					continue;
+				}
+
 				const auto& type = buildingGroups.getAncestralGroup(building->getBuildingGroup()).value_or("");
 				if (type == "bg_agriculture" || type == "bg_plantations" || type == "bg_ranching")
 				{
@@ -489,11 +501,19 @@ void V3::EconomyManager::investCapital() const
 				}
 				else if (type == "bg_mining" || type == "bg_logging" || type == "bg_whaling" || type == "bg_fishing" || type == "bg_urban_facilities ")
 				{
-					building->addInvestor(building->getLevel(), "local", subState->getHomeStateName(), country->getTag());
+					const auto& investorApportionment = apportionInvestors(building->getLevel(), extractionWeights, investorIOUs);
+					for (const auto& [investor, level]: investorApportionment)
+					{
+						building->addInvestor(level, investor, subState->getHomeStateName(), country->getTag());
+					}
 				}
 				else if (type == "bg_manufacturing")
 				{
-					building->addInvestor(building->getLevel(), "capitalist", subState->getHomeStateName(), country->getTag());
+					const auto& investorApportionment = apportionInvestors(building->getLevel(), manufacturingWeights, investorIOUs);
+					for (const auto& [investor, level]: investorApportionment)
+					{
+						building->addInvestor(level, investor, subState->getHomeStateName(), country->getTag());
+					}
 				}
 				else
 				{
@@ -728,6 +748,70 @@ int V3::EconomyManager::getClusterPacket(const int baseCost, const std::vector<s
 	}
 
 	return packet;
+}
+
+std::map<std::string, int> V3::EconomyManager::apportionInvestors(const int levels,
+	 const std::map<std::string, double>& investorWeights,
+	 std::map<std::string, double>& investorIOUs) const
+{
+	int apportionedLevels = 0;
+	std::priority_queue<std::tuple<double, std::string>> hamiltonQueue;
+	std::map<std::string, int> investorLevels;
+
+	// First apply IOUs so that minority owners still get buildings now and then.
+	for (const auto& [investor, IOU]: investorIOUs)
+	{
+		if (!investorWeights.contains(investor))
+		{
+			continue;
+		}
+
+		if (IOU > 1)
+		{
+			investorLevels[investor] += 1;
+			apportionedLevels += 1;
+			investorIOUs[investor] -= 1;
+		}
+
+		if (apportionedLevels == levels)
+		{
+			break;
+		}
+	}
+	const int repaidLevels = apportionedLevels;
+
+	for (const auto& [investor, weight]: investorWeights)
+	{
+		const double weightedLevels = weight * (levels - repaidLevels);
+		double apportionment;
+		const double IOU = std::modf(weightedLevels, &apportionment);
+		apportionedLevels += static_cast<int>(apportionment);
+		investorLevels[investor] += static_cast<int>(apportionment);
+		hamiltonQueue.emplace(IOU, investor);
+	}
+	while (apportionedLevels < levels)
+	{
+		const auto& [_, investor] = hamiltonQueue.top();
+		investorLevels[investor] += 1;
+		apportionedLevels += 1;
+		hamiltonQueue.pop();
+	}
+	while (!hamiltonQueue.empty())
+	{
+		const auto& [IOU, investor] = hamiltonQueue.top();
+
+		const auto& it = investorIOUs.find(investor);
+		if (it == investorIOUs.end())
+		{
+			investorIOUs.emplace(investor, IOU);
+		}
+		else
+		{
+			it->second += IOU;
+		}
+		hamiltonQueue.pop();
+	}
+	return investorLevels;
 }
 
 void V3::EconomyManager::loadTerrainModifierMatrices(const std::string& filePath)

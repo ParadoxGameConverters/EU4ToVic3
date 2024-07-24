@@ -34,7 +34,7 @@ void outShareholders(std::ostream& output, const V3::Building& building)
 			output << "\t\t\t\t\t\ttype = " << building.getName() << "\n";
 			output << "\t\t\t\t\t\tcountry = c:" << shareholder.tag << "\n";
 			output << "\t\t\t\t\t\tlevels = " << shareholder.level << "\n";
-			output << "\t\t\t\t\t\rregion = " << shareholder.state << "\n";
+			output << "\t\t\t\t\t\tregion = " << shareholder.state << "\n";
 			output << "\t\t\t\t\t}\n";
 		}
 		if (shareholder.type == "capitalist")
@@ -43,7 +43,7 @@ void outShareholders(std::ostream& output, const V3::Building& building)
 			output << "\t\t\t\t\t\ttype = building_financial_district\n";
 			output << "\t\t\t\t\t\tcountry = c:" << shareholder.tag << "\n";
 			output << "\t\t\t\t\t\tlevels = " << shareholder.level << "\n";
-			output << "\t\t\t\t\t\rregion = " << shareholder.state << "\n";
+			output << "\t\t\t\t\t\tregion = " << shareholder.state << "\n";
 			output << "\t\t\t\t\t}\n";
 		}
 		if (shareholder.type == "aristocratic")
@@ -52,7 +52,7 @@ void outShareholders(std::ostream& output, const V3::Building& building)
 			output << "\t\t\t\t\t\ttype = building_manor_house\n";
 			output << "\t\t\t\t\t\tcountry = c:" << shareholder.tag << "\n";
 			output << "\t\t\t\t\t\tlevels = " << shareholder.level << "\n";
-			output << "\t\t\t\t\t\rregion = " << shareholder.state << "\n";
+			output << "\t\t\t\t\t\tregion = " << shareholder.state << "\n";
 			output << "\t\t\t\t\t}\n";
 		}
 		output << "\t\t\t\t}\n";

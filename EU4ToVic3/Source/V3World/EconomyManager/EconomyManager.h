@@ -108,6 +108,10 @@ class EconomyManager
 		 const std::vector<std::shared_ptr<SubState>>& subStates) const;
 	[[nodiscard]] int getClusterPacket(int baseCost, const std::vector<std::shared_ptr<SubState>>& subStates) const;
 
+	[[nodiscard]] std::map<std::string, int> apportionInvestors(const int levels,
+		 const std::map<std::string, double>& investorWeights,
+		 std::map<std::string, double>& investorIOUs) const;
+
 	void loadTerrainModifierMatrices(const std::string& filePath = "");
 	void loadStateTraits(const commonItems::ModFilesystem& modFS);
 	void loadBuildingInformation(const commonItems::ModFilesystem& modFS);
