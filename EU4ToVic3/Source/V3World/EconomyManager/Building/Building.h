@@ -1,7 +1,7 @@
 #ifndef V3_BUILDING_H
 #define V3_BUILDING_H
+#include "Ownership/Shareholders.h"
 #include "Parser.h"
-#include "Shareholders.h"
 
 namespace V3
 {
