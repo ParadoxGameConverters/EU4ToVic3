@@ -182,6 +182,7 @@ add_custom_command(TARGET EU4ToVic3Converter POST_BUILD WORKING_DIRECTORY ${CONV
 file(GLOB TEST_SOURCES "EU4ToVic3Tests/*.cpp")
 file(GLOB TEST_SUB_SOURCES "EU4ToVic3Tests/*/*.cpp")
 file(GLOB TEST_SUB_SUB_SOURCES "EU4ToVic3Tests/*/*/*.cpp")
+file(GLOB TEST_SUB_SUB_SUB_SOURCES "EU4ToVic3Tests/*/*/*/*.cpp")
 set(GTEST_SOURCES ${GTEST_SOURCES} "commonItems/external/googletest/googletest/src/gtest_main.cc")
 set(GTEST_SOURCES ${GTEST_SOURCES} "commonItems/external/googletest/googletest/src/gtest-all.cc")
 set(GTEST_SOURCES ${GTEST_SOURCES} "commonItems/external/googletest/googlemock/src/gmock-all.cc")
@@ -191,6 +192,7 @@ add_executable(
 	${TEST_SOURCES}
 	${TEST_SUB_SOURCES}
 	${TEST_SUB_SUB_SOURCES}
+	${TEST_SUB_SUB_SUB_SOURCES}
 	${GTEST_SOURCES}
 )
 
