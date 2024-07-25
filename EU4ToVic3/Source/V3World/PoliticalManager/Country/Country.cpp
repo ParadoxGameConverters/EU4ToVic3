@@ -165,7 +165,10 @@ int V3::Country::getGovBuildingMax(const std::string& building, const std::map<s
 	return tech + laws;
 }
 
-void V3::Country::distributeGovAdmins(const double target, const int PMGeneration, const std::map<std::string, V3::Tech>& techMap) const
+void V3::Country::distributeGovAdmins(const double target,
+	 const int PMGeneration,
+	 const std::map<std::string, V3::Tech>& techMap,
+	 const Building& blueprint) const
 {
 	const auto topSubstates = topPercentileStatesByPop(0.3);
 	if (topSubstates.empty())
@@ -188,8 +191,7 @@ void V3::Country::distributeGovAdmins(const double target, const int PMGeneratio
 			generation = levels * PMGeneration * (1 + throughputMax / 100.0);
 		}
 
-		const auto govAdmin = std::make_shared<Building>();
-		govAdmin->setName("building_government_administration");
+		const auto govAdmin = std::make_shared<Building>(blueprint);
 		govAdmin->setLevel(levels);
 		govAdmin->addInvestor(levels, "national_service", substate->getHomeStateName(), this->tag);
 
@@ -210,6 +212,7 @@ void V3::Country::distributeGovAdmins(const double target, const int PMGeneratio
 		{
 			const auto levels = govAdmin->get()->getLevel();
 			govAdmin->get()->setLevel(levels + 1);
+			govAdmin->get()->addShareholderLevels(1, "national_service");
 			generated += PMGeneration;
 
 			if (target <= generated + PMGeneration)

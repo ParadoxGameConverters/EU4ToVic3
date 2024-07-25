@@ -90,7 +90,7 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 			PMGeneration = PMs.at(PMName).getBureaucracy();
 		}
 
-		country->distributeGovAdmins(generationTarget, PMGeneration, techMap.getTechs());
+		country->distributeGovAdmins(generationTarget, PMGeneration, techMap.getTechs(), buildings.at("building_government_administration"));
 	}
 	Log(LogLevel::Info) << "<> Bureaucracy Established.";
 }
@@ -537,7 +537,7 @@ void V3::EconomyManager::investCapital(const std::map<std::string, std::shared_p
 					if (ownership.financialCenterFrac > 0)
 					{
 						std::map<std::string, double> capitalWeights{{"local", 1 - ownership.financialCenterFrac}, {"capital", ownership.financialCenterFrac}};
-						empireLevels = apportionInvestors(levels, capitalWeights, capitalIOUs).at("capital");
+						capitalLevels = apportionInvestors(levels, capitalWeights, capitalIOUs).at("capital");
 					}
 
 					// Send some owners to the empire

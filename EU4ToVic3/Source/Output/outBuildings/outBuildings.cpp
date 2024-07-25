@@ -20,6 +20,12 @@ void outShareholders(std::ostream& output, const V3::Building& building)
 {
 	for (const auto& shareholder: building.getShareholders())
 	{
+		if (shareholder.level == 0)
+		{
+			Log(LogLevel::Warning) << shareholder.type << " ghost shareholder found in a lvl" << building.getLevel() << " " << building.getName()
+										  << ". The shareholder is based in " << shareholder.tag << ": " << shareholder.state << ".";
+		}
+
 		output << "\t\t\t\tadd_ownership = {\n";
 		if (shareholder.type == "national" || shareholder.type == "national_service")
 		{

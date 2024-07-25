@@ -60,3 +60,17 @@ void V3::Building::addInvestor(const int theLevel, const std::string& type, cons
 {
 	shareholders.push_back({type, theNation, theState, theLevel});
 }
+
+void V3::Building::addShareholderLevels(const int theLevels, const std::string& type)
+{
+	for (auto it = shareholders.begin(); it != shareholders.end(); ++it)
+	{
+		if (it->type == type)
+		{
+			it->level += theLevels;
+			return;
+		}
+	}
+
+	Log(LogLevel::Warning) << "Shareholder " << type << " not found in building.";
+}

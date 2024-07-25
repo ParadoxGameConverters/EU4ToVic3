@@ -5,6 +5,7 @@
 #include "Configuration.h"
 #include "CountryManager/NationalSymbol/EU4CustomColors.h"
 #include "DatingData.h"
+#include "EconomyManager/Building/Building.h"
 #include "EconomyManager/NationalBudget/Sector.h"
 #include "FlagCrafter/FlagCrafter.h"
 #include "IGIdeologiesMapper/IGIdeologiesMapping.h"
@@ -228,7 +229,7 @@ class Country: commonItems::parser
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::map<std::string, Tech>& techMap) const;
 
-	void distributeGovAdmins(double target, int PMGeneration, const std::map<std::string, Tech>& techMap) const;
+	void distributeGovAdmins(double target, int PMGeneration, const std::map<std::string, Tech>& techMap, const V3::Building& blueprint) const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> topPercentileStatesByPop(double percentile) const;
 	[[nodiscard]] double calculateBureaucracyUsage(const std::map<std::string, Law>& lawsMap) const;
 	void addSector(const std::string& sectorName, const std::shared_ptr<Sector>& sector) { processedData.industrySectors.emplace(sectorName, sector); }
