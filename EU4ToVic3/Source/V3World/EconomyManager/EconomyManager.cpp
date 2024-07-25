@@ -269,6 +269,11 @@ double V3::EconomyManager::calculateDateFactor(const Configuration::STARTDATE st
 	return 0.0;
 }
 
+bool V3::EconomyManager::isRecognized(const std::string& countryTier)
+{
+	return countryTier == "great_power" || countryTier == "major_power" || countryTier == "minor_power" || countryTier == "insignificant_power";
+}
+
 std::pair<double, double> V3::EconomyManager::countryBudgetCalcs(const Configuration::ECONOMY economyType) const
 {
 	// Returns total weight, and any special multiplicative factors specific to the method.
@@ -474,13 +479,9 @@ void V3::EconomyManager::distributeBudget(const double globalCP, const double to
 
 void V3::EconomyManager::investCapital() const
 {
-	// Farms go to nobles
-	// Resource extraction is split between locals/capitalists/nobles
-	// Factories split between locals/capitalists/the state
-	// The rest is state owned (barracks, admin centers, whatnot)
-	// TODO(Gawquon): Create a config file for these
-	const std::map<std::string, double> extractionWeights = {{"local", 0.5}, {"capitalist", 0.3}, {"aristocratic", 0.2}};
-	const std::map<std::string, double> manufacturingWeights = {{"local", 0.2}, {"capitalist", 0.6}, {"national", 0.2}};
+	// Each building get's it's ownership information from the ownership loader.
+	// Ownership levels are apportioned.
+	// Non-0 levels are further apportioned based on local/foreign/capital ownership
 
 	for (const auto& country: centralizedCountries)
 	{
@@ -489,7 +490,7 @@ void V3::EconomyManager::investCapital() const
 		std::map<std::string, double> capitalIOUs;
 
 		const std::string& overlordTag = country->getOverlord();
-		const std::string& overlordCapital = country->getProcessedData().capitalStateName;
+		const std::string& overlordCapital = country->getProcessedData().overlordCapitalState;
 
 		for (const auto& subState: country->getSubStates())
 		{
@@ -500,55 +501,66 @@ void V3::EconomyManager::investCapital() const
 					continue;
 				}
 
-				const auto& type = buildingGroups.getAncestralGroup(building->getBuildingGroup()).value_or("");
-				if (type == "bg_agriculture" || type == "bg_plantations" || type == "bg_ranching")
+				// First assemble the investor weights conditional on the country's state-space
+				const auto& ownershipMap = ownershipLoader.getOwnershipsFromBuilding(building->getName());
+				std::map<std::string, double> investorWeights;
+
+				double totalWeight = 0;
+				for (const auto& [type, investorData]: ownershipMap)
 				{
-					building->addInvestor(building->getLevel(), "aristocratic", subState->getHomeStateName(), country->getTag());
-				}
-				else if (type == "bg_mining" || type == "bg_logging" || type == "bg_whaling" || type == "bg_fishing" || type == "bg_urban_facilities ")
-				{
-					const auto& investorApportionment = apportionInvestors(building->getLevel(), extractionWeights, investorIOUs);
-					for (const auto& [investor, level]: investorApportionment)
+					if (investorData.recognized && !isRecognized(country->getProcessedData().tier))
 					{
-						building->addInvestor(level, investor, subState->getHomeStateName(), country->getTag());
+						continue;
 					}
+
+					investorWeights[type] = investorData.weight;
+					totalWeight += investorData.weight;
 				}
-				else if (type == "bg_manufacturing")
+				for (const auto& type: investorWeights | std::views::keys)
 				{
-					const auto& investorApportionment = apportionInvestors(building->getLevel(), manufacturingWeights, investorIOUs);
-					for (const auto& [investor, level]: investorApportionment)
+					investorWeights[type] /= totalWeight;
+				}
+
+				// Now apportion the buildings out among the different investor types
+				const auto& investorApportionment = apportionInvestors(building->getLevel(), investorWeights, investorIOUs);
+
+				// For each investor class with assigned buildings, split owners between local/foreign/capital as directed
+				for (const auto& [type, levels]: investorApportionment)
+				{
+					if (levels == 0)
 					{
-						building->addInvestor(level, investor, subState->getHomeStateName(), country->getTag());
+						continue;
 					}
-				}
-				else
-				{
-					building->addInvestor(building->getLevel(), "national_service", subState->getHomeStateName(), country->getTag());
+
+					int capitalLevels = 0, empireLevels = 0;
+
+					// Send some owners to the capital
+					if (ownershipMap.at(type).financialCenterFrac > 0)
+					{
+						// TODO(Gawquon): Do capitalist things
+					}
+
+					// Send some owners to the empire
+					if (ownershipMap.at(type).colonialFrac > 0 && overlordTag != "" && overlordCapital != "")
+					{
+						// TODO(Gawquon): Do imperialist things
+					}
+
+					if (levels - capitalLevels - empireLevels > 0)
+					{
+						building->addInvestor(levels - capitalLevels - empireLevels, type, subState->getHomeStateName(), country->getTag());
+					}
+					if (capitalLevels > 0)
+					{
+						building->addInvestor(capitalLevels, type, country->getProcessedData().capitalStateName, country->getTag());
+					}
+					if (empireLevels > 0)
+					{
+						building->addInvestor(empireLevels, type, overlordCapital, overlordTag);
+					}
 				}
 			}
 		}
-
-		// if (const auto& overlord = country->getOverlord(); overlord != "")
-		//{
-		//	for (const auto& subState: country->getSubStates())
-		//	{
-		//		for (const auto& building: subState->getBuildings())
-		//		{
-		//			if (building->getLevel() == 0)
-		//			{
-		//				continue;
-		//			}
-		//			if (const auto& shareholderIt = std::ranges::find_if(building->getShareholders(),
-		//					  [](const V3::Shareholders& s) {
-		//						  return s.type == "aristocratic";
-		//					  });
-		//				 shareholderIt != building->getShareholders().end())
-		//			{
-		//				// Apportion between local and overlord capital
-		//			}
-		//		}
-		//	}
-		// }
 	}
 }
 
