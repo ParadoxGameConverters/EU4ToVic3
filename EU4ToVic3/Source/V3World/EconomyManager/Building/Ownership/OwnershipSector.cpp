@@ -7,7 +7,6 @@ V3::OwnershipSector::OwnershipSector(std::istream& theStream)
 	clearRegisteredKeywords();
 }
 
-#pragma optimize("", off)
 void V3::OwnershipSector::registerKeys()
 {
 	ownershipsParser.registerKeyword("local", [this](const std::string& type, std::istream& theStream) {
@@ -41,4 +40,3 @@ void V3::OwnershipSector::registerKeys()
 		buildings.emplace(buildingName);
 	});
 }
-#pragma optimize("", on)

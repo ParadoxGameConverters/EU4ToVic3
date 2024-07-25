@@ -63,7 +63,7 @@ class EconomyManager
 	void assignSubStateCPBudgets(Configuration::ECONOMY economyType) const;
 	void balanceNationalBudgets() const;
 	void buildBuildings(const std::map<std::string, Law>& lawsMap) const;
-	void investCapital() const;
+	void investCapital(const std::map<std::string, std::shared_ptr<Country>>& countries) const;
 	void setPMs() const;
 
 	[[nodiscard]] const auto& getCentralizedCountries() const { return centralizedCountries; }
@@ -71,7 +71,6 @@ class EconomyManager
   private:
 	static double calculatePopDistanceFactor(int countryPopulation, double geoMeanPopulation);
 	static double calculateDateFactor(Configuration::STARTDATE startDate, const DatingData& dateData);
-	static bool isRecognized(const std::string& countryTier);
 
 	// Budget fxns set weight for all countries, accumulates the total weight, and returns a modifier to the globalCP pool (if any).
 	[[nodiscard]] std::pair<double, double> countryBudgetCalcs(Configuration::ECONOMY economyType) const; // Return total weight, any special factors

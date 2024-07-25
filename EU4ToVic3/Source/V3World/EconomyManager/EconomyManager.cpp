@@ -109,11 +109,8 @@ void V3::EconomyManager::hardcodePorts() const
 			if (!subState->isCoastal())
 				continue;
 
-			auto port = std::make_shared<Building>();
-			port->setName("building_port");
-			port->setPMGroups({"pmg_base_building_port"});
+			auto port = std::make_shared<Building>(buildings.at("building_port"));
 			port->setLevel(1);
-			port->addInvestor(1, "national_service", subState->getHomeStateName(), country->getTag());
 
 			subState->addBuilding(port);
 			++counter;
@@ -267,11 +264,6 @@ double V3::EconomyManager::calculateDateFactor(const Configuration::STARTDATE st
 		return factor;
 	}
 	return 0.0;
-}
-
-bool V3::EconomyManager::isRecognized(const std::string& countryTier)
-{
-	return countryTier == "great_power" || countryTier == "major_power" || countryTier == "minor_power" || countryTier == "insignificant_power";
 }
 
 std::pair<double, double> V3::EconomyManager::countryBudgetCalcs(const Configuration::ECONOMY economyType) const
@@ -477,20 +469,26 @@ void V3::EconomyManager::distributeBudget(const double globalCP, const double to
 	}
 }
 
-void V3::EconomyManager::investCapital() const
+void V3::EconomyManager::investCapital(const std::map<std::string, std::shared_ptr<Country>>& countries) const
 {
 	// Each building get's it's ownership information from the ownership loader.
 	// Ownership levels are apportioned.
 	// Non-0 levels are further apportioned based on local/foreign/capital ownership
+	int investedLevels = 0;
+	int investedBuildings = 0;
 
 	for (const auto& country: centralizedCountries)
 	{
 		std::map<std::string, double> investorIOUs;
-		std::map<std::string, double> overlordIOUs;
 		std::map<std::string, double> capitalIOUs;
+		std::map<std::string, double> overlordIOUs;
 
 		const std::string& overlordTag = country->getOverlord();
-		const std::string& overlordCapital = country->getProcessedData().overlordCapitalState;
+		std::string overlordCapital = "";
+		if (const auto& overlordIt = countries.find(overlordTag); overlordIt != countries.end())
+		{
+			overlordCapital = overlordIt->second->getProcessedData().capitalStateName;
+		}
 
 		for (const auto& subState: country->getSubStates())
 		{
@@ -508,7 +506,7 @@ void V3::EconomyManager::investCapital() const
 				double totalWeight = 0;
 				for (const auto& [type, investorData]: ownershipMap)
 				{
-					if (investorData.recognized && !isRecognized(country->getProcessedData().tier))
+					if (investorData.recognized && country->getProcessedData().type != "recognized")
 					{
 						continue;
 					}
@@ -533,35 +531,43 @@ void V3::EconomyManager::investCapital() const
 					}
 
 					int capitalLevels = 0, empireLevels = 0;
+					const auto& ownership = ownershipMap.at(type);
 
 					// Send some owners to the capital
-					if (ownershipMap.at(type).financialCenterFrac > 0)
+					if (ownership.financialCenterFrac > 0)
 					{
-						// TODO(Gawquon): Do capitalist things
+						std::map<std::string, double> capitalWeights{{"local", 1 - ownership.financialCenterFrac}, {"capital", ownership.financialCenterFrac}};
+						empireLevels = apportionInvestors(levels, capitalWeights, capitalIOUs).at("capital");
 					}
 
 					// Send some owners to the empire
-					if (ownershipMap.at(type).colonialFrac > 0 && overlordTag != "" && overlordCapital != "")
+					if (ownership.colonialFrac > 0 && overlordTag != "" && overlordCapital != "")
 					{
-						// TODO(Gawquon): Do imperialist things
+						std::map<std::string, double> imperialWeights{{"local", 1 - ownership.colonialFrac}, {"overlord", ownership.colonialFrac}};
+						empireLevels = apportionInvestors(levels, imperialWeights, overlordIOUs).at("overlord");
 					}
 
 					if (levels - capitalLevels - empireLevels > 0)
 					{
 						building->addInvestor(levels - capitalLevels - empireLevels, type, subState->getHomeStateName(), country->getTag());
+						investedLevels += levels - capitalLevels - empireLevels;
 					}
 					if (capitalLevels > 0)
 					{
 						building->addInvestor(capitalLevels, type, country->getProcessedData().capitalStateName, country->getTag());
+						investedLevels += capitalLevels;
 					}
 					if (empireLevels > 0)
 					{
 						building->addInvestor(empireLevels, type, overlordCapital, overlordTag);
+						investedLevels += empireLevels;
 					}
 				}
+				investedBuildings += 1;
 			}
 		}
 	}
+	Log(LogLevel::Info) << "<> Pops invested in " << investedLevels << " shares of " << investedBuildings << " buildings world-wide.";
 }
 
 void V3::EconomyManager::setPMs() const

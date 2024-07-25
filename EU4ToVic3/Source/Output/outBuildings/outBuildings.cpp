@@ -37,7 +37,7 @@ void outShareholders(std::ostream& output, const V3::Building& building)
 			output << "\t\t\t\t\t\tregion = " << shareholder.state << "\n";
 			output << "\t\t\t\t\t}\n";
 		}
-		if (shareholder.type == "capitalist")
+		if (shareholder.type == "building_financial_district")
 		{
 			output << "\t\t\t\t\tbuilding = {\n";
 			output << "\t\t\t\t\t\ttype = building_financial_district\n";
@@ -46,7 +46,7 @@ void outShareholders(std::ostream& output, const V3::Building& building)
 			output << "\t\t\t\t\t\tregion = " << shareholder.state << "\n";
 			output << "\t\t\t\t\t}\n";
 		}
-		if (shareholder.type == "aristocratic")
+		if (shareholder.type == "building_manor_house")
 		{
 			output << "\t\t\t\t\tbuilding = {\n";
 			output << "\t\t\t\t\t\ttype = building_manor_house\n";

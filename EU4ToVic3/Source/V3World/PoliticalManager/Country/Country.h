@@ -90,7 +90,6 @@ struct ProcessedData
 	std::set<std::string> techs;
 	std::map<std::string, Relation> relations;
 	std::string overlordTag;
-	std::string overlordCapitalState;
 	std::set<std::string> rivals;
 	std::map<std::string, int> truces;
 	std::vector<Character> characters;
@@ -241,7 +240,6 @@ class Country: commonItems::parser
 	void setPolStrategies(const std::map<std::string, int>& strategies) { processedData.polStrategies = strategies; }
 
 	void setOverlord(const std::string& overlordTag) { processedData.overlordTag = overlordTag; }
-	void trackOverlordCapital(const std::string& overlordCapitalStateName) { processedData.overlordCapitalState = overlordCapitalStateName; }
 	void addGoal(const std::string& target, const std::string& goal) { processedData.targetSecretGoals.emplace(target, goal); }
 
 	void setDiscriminationLevel(const ProcessedData::DISCRIMINATION_LEVEL& discrimination) { processedData.discriminationLevel = discrimination; }
