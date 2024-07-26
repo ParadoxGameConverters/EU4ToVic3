@@ -287,14 +287,25 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	 const bool vn)
 {
 	// color - using eu4 colors so people don't lose their shit over red venice and orange england.
-	if (sourceCountry->getNationalColors().getMapColor())
+	// Strike that. Red Venice FTW.
+
+	if (vanillaData && vanillaData->color)
+	{
+		processedData.color = vanillaData->color;
+	}
+	else if (sourceCountry->getNationalColors().getMapColor())
 	{
 		processedData.color = sourceCountry->getNationalColors().getMapColor();
 	}
-	else
+	// If nothing... well... Game will assign something.
+
+	// Maybe we're a colonial nation? In that case our colors will be within 1-2 of the overlord. We neeed to fluctuate.
+	if (!sourceCountry->getOverLord().empty() && sourceCountry->isColony())
 	{
-		if (vanillaData)
-			processedData.color = vanillaData->color;
+		if (processedData.color)
+		{
+			(*processedData.color).RandomlyFluctuate(30);
+		}
 	}
 
 	// eu4 locs

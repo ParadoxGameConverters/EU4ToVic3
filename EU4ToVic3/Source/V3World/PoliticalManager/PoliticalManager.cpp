@@ -575,7 +575,7 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 			if (country1->second->getProcessedData().type != "unrecognized")
 				newAgreement.type = "puppet";
 		}
-		if (newAgreement.type == "puppet")
+		if (newAgreement.type == "puppet" || newAgreement.type == "dominion")
 		{
 			// Watch for westernization!
 			if (country1->second->getProcessedData().type == "unrecognized")
