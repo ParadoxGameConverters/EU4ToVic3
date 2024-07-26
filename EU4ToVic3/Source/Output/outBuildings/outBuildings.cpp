@@ -22,7 +22,7 @@ void outShareholders(std::ostream& output, const V3::Building& building)
 	{
 		if (shareholder.level == 0)
 		{
-			Log(LogLevel::Warning) << shareholder.type << " ghost shareholder found in a lvl" << building.getLevel() << " " << building.getName()
+			Log(LogLevel::Warning) << shareholder.type << " ghost shareholder found in a lvl " << building.getLevel() << " " << building.getName()
 										  << ". The shareholder is based in " << shareholder.tag << ": " << shareholder.state << ".";
 		}
 
