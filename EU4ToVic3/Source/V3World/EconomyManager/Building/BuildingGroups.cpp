@@ -71,7 +71,7 @@ std::optional<std::string> V3::BuildingGroups::getAncestralGroup(const std::stri
 		const auto& possibleGroup = buildingGroups.find(name);
 		if (possibleGroup == buildingGroups.end())
 		{
-			return possibleGroup->first;
+			return std::nullopt;
 		}
 		const auto& parentName = possibleGroup->second->getParentName();
 		if (!parentName)

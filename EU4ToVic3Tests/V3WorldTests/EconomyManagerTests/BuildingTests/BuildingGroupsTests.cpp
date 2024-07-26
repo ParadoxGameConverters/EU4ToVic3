@@ -61,5 +61,5 @@ TEST(V3World_BuildingGroupsTests, InvalidGroupReturnsNullAncestor)
 	buildingGroupLoader.loadBuildingGroups(modFS);
 	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
 
-	EXPECT_EQ("", buildingGroups.getAncestralGroup("bg_none").value_or(""));
+	EXPECT_EQ(std::nullopt, buildingGroups.getAncestralGroup("bg_none"));
 }
