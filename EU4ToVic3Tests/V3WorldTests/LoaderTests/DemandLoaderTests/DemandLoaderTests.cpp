@@ -1,0 +1,29 @@
+#include "Loaders/DemandLoader/DemandLoader.h";
+#include "gtest/gtest.h"
+#include <gmock/gmock-matchers.h>
+
+namespace
+{
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+}
+
+TEST(V3World_DemandLoaderTests, DemandLoaderCanLoadDemandComponents)
+{
+	V3::DemandLoader demandLoader;
+	EXPECT_TRUE(demandLoader.getGoodsNeedsMap().empty());
+	EXPECT_TRUE(demandLoader.getPopneedsMap().empty());
+	EXPECT_TRUE(demandLoader.getWealthConsumptionMap().empty());
+
+	demandLoader.loadPopNeeds(modFS);
+	demandLoader.loadBuyPackages(modFS);
+
+	const auto goodsNeedsMap = {
+		 {"fabric", std::set{"popneed_simple_clothing"}},
+		 {"clothes", std::set{"popneed_simple_clothing, popneed_flame_items"}},
+		 {"wood", std::set{"popneed_flame_items"}},
+	};
+
+	EXPECT_EQ(goodsNeedsMap, demandLoader.getGoodsNeedsMap());
+	EXPECT_EQ(2, demandLoader.getPopneedsMap().size());
+	EXPECT_EQ(2, demandLoader.getWealthConsumptionMap().size());
+}

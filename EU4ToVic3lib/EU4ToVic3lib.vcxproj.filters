@@ -355,6 +355,9 @@
     <Filter Include="Vic3World\EconomyManager\Demand">
       <UniqueIdentifier>{aeb6819e-a839-444d-918e-59323e87b142}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Vic3World\Loaders\DemandLoader">
+      <UniqueIdentifier>{d845ec1d-2a02-4af7-adac-d867b5f6f48c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\EU4ToVic3\Source\EU4World\World.cpp">
@@ -1006,10 +1009,12 @@
     <ClCompile Include="..\EU4ToVic3\Source\V3World\EconomyManager\Demand\BuyPackage.cpp">
       <Filter>Vic3World\EconomyManager\Demand</Filter>
     </ClCompile>
-    <ClCompile Include="..\EU4ToVic3\Source\V3World\EconomyManager\Demand\PopNeed .cpp">
+    <ClCompile Include="..\EU4ToVic3\Source\V3World\EconomyManager\Demand\PopNeed.cpp">
       <Filter>Vic3World\EconomyManager\Demand</Filter>
     </ClCompile>
-    <ClCompile Include="..\EU4ToVic3\Source\V3World\EconomyManager\Demand\PopNeed.cpp" />
+    <ClCompile Include="..\EU4ToVic3\Source\V3World\Loaders\DemandLoader\DemandLoader.cpp">
+      <Filter>Vic3World\Loaders\DemandLoader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\EU4ToVic3\Source\EU4World\World.h">
@@ -1735,6 +1740,9 @@
     </ClInclude>
     <ClInclude Include="..\EU4ToVic3\Source\V3World\EconomyManager\Demand\GoodsFulfillment.h">
       <Filter>Vic3World\EconomyManager\Demand</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\V3World\Loaders\DemandLoader\DemandLoader.h">
+      <Filter>Vic3World\Loaders\DemandLoader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -216,6 +216,7 @@
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\ProductionMethodGroupLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\ProductionMethodLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\CountryDefinitionLoaderTests\CountryDefinitionLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\DemandLoaderTests\DemandLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\LawLoaderTests\LawEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\LawLoaderTests\LawLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\BuildingScriptValuesLoaderTests.cpp" />
@@ -728,6 +729,16 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\new_eu4_culture_map.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\buy_packages\00_buy_packages.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/buy_packages</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\pop_needs\00_pop_needs.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/popneeds</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
