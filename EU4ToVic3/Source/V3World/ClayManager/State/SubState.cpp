@@ -362,11 +362,11 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	 const std::map<std::string, StateModifier>& traitMap) const
 {
 	// Government Admin is a special case, we're not building it.
-	if (building.getName() == "building_government_administration")
+	if (building.getName() == "building_government_administration" || building.getName() == "building_port")
 	{
 		return false;
 	}
-	if (const std::set<std::string> coastalBuildings = {"building_naval_base", "building_port", "building_shipyards"};
+	if (const std::set<std::string> coastalBuildings = {"building_naval_base", "building_shipyards"}; // ports are pre-seeded
 		 coastalBuildings.contains(building.getName()))
 	{
 		if (!isCoastal())

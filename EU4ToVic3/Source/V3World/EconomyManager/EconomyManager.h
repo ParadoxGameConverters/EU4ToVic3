@@ -8,6 +8,7 @@
 #include "Configuration.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethod.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethodGroup.h"
+#include "Loaders/BuildingLoader/OwnershipLoader/OwnershipLoader.h"
 #include "Loaders/DefinesLoader/EconDefinesLoader.h"
 #include "Loaders/NationalBudgetLoader/NationalBudgetLoader.h"
 #include "Loaders/TechLoader/TechLoader.h"
@@ -39,7 +40,8 @@ class Sector;
  * 8d. The state then builds as many buildings of that kind as it can, limited by capacity, packet size and sector CP.
  * 8e. A bunch of small details that make this flow until all CP is assigned. Repeat for each country.
  *
- * 9. Set Production Methods from a config file.
+ * 9. Now that buildings are built, we assign investors/owners using ownership sector blueprints
+ * 10. Set Production Methods from a config file.
  *
  * This *should* give nice diverse, sensible, game-balanced economies while maintaining a reasonable configuration footprint.
  */
@@ -61,6 +63,7 @@ class EconomyManager
 	void assignSubStateCPBudgets(Configuration::ECONOMY economyType) const;
 	void balanceNationalBudgets() const;
 	void buildBuildings(const std::map<std::string, Law>& lawsMap) const;
+	void investCapital(const std::map<std::string, std::shared_ptr<Country>>& countries) const;
 	void setPMs() const;
 
 	[[nodiscard]] const auto& getCentralizedCountries() const { return centralizedCountries; }
@@ -107,6 +110,10 @@ class EconomyManager
 		 const std::vector<std::shared_ptr<SubState>>& subStates) const;
 	[[nodiscard]] int getClusterPacket(int baseCost, const std::vector<std::shared_ptr<SubState>>& subStates) const;
 
+	[[nodiscard]] std::map<std::string, int> apportionInvestors(const int levels,
+		 const std::map<std::string, double>& investorWeights,
+		 std::map<std::string, double>& investorIOUs) const;
+
 	void loadTerrainModifierMatrices(const std::string& filePath = "");
 	void loadStateTraits(const commonItems::ModFilesystem& modFS);
 	void loadBuildingInformation(const commonItems::ModFilesystem& modFS);
@@ -114,6 +121,7 @@ class EconomyManager
 	void loadPMMappings(const std::string& filePath = "");
 	void loadEconDefines(const std::string& filePath = "");
 	void loadNationalBudgets(const std::string& filePath = "");
+	void loadOwnerships(const std::string& filePath = "");
 	void loadTechMap(const commonItems::ModFilesystem& modFS);
 
 
@@ -122,6 +130,7 @@ class EconomyManager
 	EconDefinesLoader econDefines;
 	NationalBudgetLoader nationalBudgets;
 	mappers::ProductionMethodMapper PMMapper;
+	OwnershipLoader ownershipLoader;
 
 	TechLoader techMap;
 

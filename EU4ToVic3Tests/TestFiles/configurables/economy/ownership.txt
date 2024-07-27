@@ -1,0 +1,44 @@
+# Decide how ownership will be split among Vic 3 buildings.
+# Keywords are 'local', 'national', 'national_service', 'building_manor_house', 'building_financial_district'
+# colonial = 0.2 ### This shifts 20% of the aristocracy too be owned by an overlord if applicable; default is 0%
+# financial = 0.1 ### This shifts 10% of the capital to the nation's capital; default is 0%
+# recognized = yes ### This prevents capitalists from owning these buildings if a nation is unrecognized
+
+agriculture = {
+	ownership = {
+		building_manor_house = {
+			weight = 1
+			colonial = 0.2
+		}
+	}
+
+	building_dye_plantation
+	building_opium_plantation
+	building_tea_plantation
+}
+
+construction = {
+	ownership = { national_service = 1 }
+
+	building_construction_sector
+}
+
+extraction = {
+	ownership = {
+		local = 0.5
+		building_financial_district = {
+			weight = 0.3
+			financial = 0.1
+			colonial = 0.05
+			recognized = yes
+		}
+		building_manor_house = { 
+			weight = 0.2
+			colonial = 0.2
+		}
+		national = 0.1
+	}
+
+	building_iron_mine
+	building_coal_mine
+}
