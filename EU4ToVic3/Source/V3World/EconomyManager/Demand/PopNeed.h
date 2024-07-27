@@ -20,6 +20,7 @@ class PopNeed: commonItems::parser
   private:
 	void registerKeys();
 	parser goodsParser;
+	GoodsFulfillment goodsFulfillmentBuilder;
 
 	std::string name;
 	std::string defaultGood;

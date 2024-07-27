@@ -10,18 +10,16 @@ V3::PopNeed::PopNeed(std::istream& theStream)
 
 void V3::PopNeed::registerKeys()
 {
-	GoodsFulfillment goodsFulfillmentBuilder;
-
-	goodsParser.registerKeyword("goods", [this, &goodsFulfillmentBuilder](std::istream& theStream) {
+	goodsParser.registerKeyword("goods", [this](std::istream& theStream) {
 		goodsFulfillmentBuilder.good = commonItems::getString(theStream);
 	});
-	goodsParser.registerKeyword("weight", [this, &goodsFulfillmentBuilder](std::istream& theStream) {
+	goodsParser.registerKeyword("weight", [this](std::istream& theStream) {
 		goodsFulfillmentBuilder.weight = commonItems::getDouble(theStream);
 	});
-	goodsParser.registerKeyword("max_supply_share", [this, &goodsFulfillmentBuilder](std::istream& theStream) {
+	goodsParser.registerKeyword("max_supply_share", [this](std::istream& theStream) {
 		goodsFulfillmentBuilder.maxShare = commonItems::getDouble(theStream);
 	});
-	goodsParser.registerKeyword("min_supply_share", [this, &goodsFulfillmentBuilder](std::istream& theStream) {
+	goodsParser.registerKeyword("min_supply_share", [this](std::istream& theStream) {
 		goodsFulfillmentBuilder.minShare = commonItems::getDouble(theStream);
 	});
 	goodsParser.IgnoreUnregisteredItems();
@@ -29,9 +27,9 @@ void V3::PopNeed::registerKeys()
 	registerKeyword("default", [this](std::istream& theStream) {
 		defaultGood = commonItems::getString(theStream);
 	});
-	registerKeyword("entry", [this, &goodsFulfillmentBuilder](std::istream& theStream) {
-		goodsFulfillmentBuilder = {};
+	registerKeyword("entry", [this](std::istream& theStream) {
 		goodsParser.parseStream(theStream);
 		goodsFulfillment.emplace(goodsFulfillmentBuilder.good, goodsFulfillmentBuilder);
+		goodsFulfillmentBuilder = {};
 	});
 }
