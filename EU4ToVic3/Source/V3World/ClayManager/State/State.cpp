@@ -131,11 +131,8 @@ void V3::State::distributeLandshares() const
 		const auto [subStateTotal, subStatePrimes, subStateImpassables] = countProvinceTypes(subState->getProvinces());
 		const double weightedSubStateProvinces = getWeightedProvinceTotals(subStateTotal, subStatePrimes, subStateImpassables);
 
-		double subStateLandshare = weightedSubStateProvinces / weightedStatewideProvinces;
-		if (subStateLandshare < 0.05) // In defines as SPLIT_STATE_MIN_LAND_SHARE
-		{
-			subStateLandshare = 0.05;
-		}
+		const double subStateLandshare = weightedSubStateProvinces / weightedStatewideProvinces;
+
 		subState->setLandshare(subStateLandshare);
 	}
 }

@@ -292,7 +292,6 @@ std::pair<double, double> V3::EconomyManager::civLevelCountryBudgets() const
 		const int popCount = country->getPopCount();
 		double weight = popCount * (country->getProcessedData().civLevel * 0.01);
 		weight *= calculatePopDistanceFactor(popCount, geoMeanPop);
-		weight *= country->getOverPopulation();
 		country->setIndustryWeight(weight);
 		accumulatedWeight += country->getIndustryWeight();
 		totalCivLevel += country->getProcessedData().civLevel;
