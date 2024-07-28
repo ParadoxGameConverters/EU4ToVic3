@@ -30,221 +30,220 @@
 #}
 
 construction = {
-    weight = 0.15
+	weight = 0.15
 
-    building_construction_sector
+	building_construction_sector
 }
 
 infrastructure = {
-    weight = 3.5
+	weight = 3.5
 
-    building_port
-    building_railway
+	building_port
+	building_railway
 }
 
 military = {
-    weight = 12
+	weight = 12
 
-    building_barracks
+	building_barracks
 
-    multiply = {
-        value = 0.1
-        vic3_law = law_national_militia
-    }
-    multiply = {
-        value = 1.5
-        vic3_law = law_peasant_levies
-    }
+	multiply = {
+		value = 0.1
+		vic3_law = law_national_militia
+	}
+	multiply = {
+		value = 1.5
+		vic3_law = law_peasant_levies
+	}
 }
 
 naval = {
-    weight = 3
+	weight = 3
 
-    building_naval_base
+	building_naval_base
 }
 
 farming = {
-    weight = 15
+	weight = 15
 
-    building_rye_farm
-    building_rice_farm
-    building_wheat_farm
-    building_maize_farm
-    building_millet_farm
-    building_livestock_ranch
-	building_vineyard_plantation
+	building_rye_farm
+	building_rice_farm
+	building_wheat_farm
+	building_maize_farm
+	building_millet_farm
+	building_livestock_ranch
 }
 
 extraction = {
-    weight = 5
+	weight = 5
 
-    building_logging_camp
-    building_fishing_wharf
+	building_logging_camp
+	building_fishing_wharf
 
-    multiply = {
-        value = 3
-        vic3_law = law_serfdom
-    }
+	multiply = {
+		value = 3
+		vic3_law = law_serfdom
+	}
 }
 
 industrial_mining = {
 	industrial = yes
 
-    weight = 9
+	weight = 9
 
-    building_iron_mine
-    building_coal_mine
-    building_gold_mine
+	building_iron_mine
+	building_coal_mine
+	building_gold_mine
 }
 
 military_mining = {
 	industrial = yes
 
-    weight = 2
+	weight = 2
 
-    building_lead_mine
-    building_sulfur_mine
+	building_lead_mine
+	building_sulfur_mine
 
-    add = {
-        value = 1
-        is_eu4_gp = yes
-    }
-    add = {
-        value = 0.5
-        vic3_tech = mechanical_tools
-    }
+	add = {
+		value = 1
+		is_eu4_gp = yes
+	}
+	add = {
+		value = 0.5
+		vic3_tech = mechanical_tools
+	}
 }
 
 plantation = {
-    weight = 15
+	weight = 15
 
-    building_coffee_plantation
-    building_cotton_plantation
-    building_dye_plantation
-    building_opium_plantation
-    building_tea_plantation
-    building_tobacco_plantation
-    building_sugar_plantation
-    building_banana_plantation
-    building_silk_plantation
+	building_coffee_plantation
+	building_cotton_plantation
+	building_dye_plantation
+	building_opium_plantation
+	building_tea_plantation
+	building_tobacco_plantation
+	building_sugar_plantation
+	building_banana_plantation
+	building_silk_plantation
 	building_vineyard_plantation
 
-    multiply = {
-        value = 1.5
-        is_colony = yes
-    }
-    multiply = {
-        value = 2.5
-        is_trade_company = yes
-    }
+	multiply = {
+		value = 1.5
+		is_colony = yes
+	}
+	multiply = {
+		value = 2.5
+		is_trade_company = yes
+	}
 }
 
 whaling = {
-    weight = 0.4
+	weight = 0.4
 
-    building_whaling_station
+	building_whaling_station
 
 }
 
 shipwrights = {
-    weight = 4
+	weight = 4
 
-    industrial = yes
+	industrial = yes
 
-    building_shipyards
+	building_shipyards
 	building_military_shipyards
 }
 
 paper_industry = {
-    weight = 1
+	weight = 1
 
-    building_paper_mills
+	building_paper_mills
 
-    add = {
-        value = 7
-        vic3_tech = centralization
-    }
+	add = {
+		value = 7
+		vic3_tech = centralization
+	}
 
-    add = {
-        value = 7
-        vic3_tech = central_archives
-    }
+	add = {
+		value = 7
+		vic3_tech = central_archives
+	}
 }
 
 light_industry = {
-    weight = 16
+	weight = 16
 
-    building_textile_mills
-    building_furniture_manufacturies
-    building_glassworks
-    
+	building_textile_mills
+	building_furniture_manufacturies
+	building_glassworks
+	
 
-    # Industry score from configurables/westernization.txt. No effect if no EuroCentrism
-    multiply = {
-        value = 0
-        industry_score_less_than = 1
-    }
+	# Industry score from configurables/westernization.txt. No effect if no EuroCentrism
+	multiply = {
+		value = 0
+		industry_score_less_than = 1
+	}
 }
 
 western_industry = {
-    industrial = yes
+	industrial = yes
 
-    weight = 10
+	weight = 10
 
-    building_food_industry
-    building_arms_industry
+	building_food_industry
+	building_arms_industry
 	building_artillery_foundries
 
-    # No effect if no EuroCentrism
-    add= {
-        value = -2
-        industry_score_less_than = 4
-    }
-    add= {
-        value = -3
-        industry_score_less_than = 3
-    }
+	# No effect if no EuroCentrism
+	add= {
+		value = -2
+		industry_score_less_than = 4
+	}
+	add= {
+		value = -3
+		industry_score_less_than = 3
+	}
 }
 
 tooling_industry = {
-    industrial = yes
+	industrial = yes
 
-    weight = 2.5
+	weight = 2.5
 
-    building_tooling_workshops
+	building_tooling_workshops
 
-    add = {
-        value = 2.5
-        is_eu4_gp = yes
+	add = {
+		value = 2.5
+		is_eu4_gp = yes
    }
 }
 
 scholarly = {
-    industrial = yes
+	industrial = yes
 
-    weight = 2.5
+	weight = 2.5
 
-    building_arts_academy
-    building_university
+	building_arts_academy
+	building_university
 }
 
 heavy_industry = {
-    industrial = yes
+	industrial = yes
 
-    weight = 0
+	weight = 0
 
-    building_chemical_plants
-    building_steel_mills
-    building_motor_industry
-    building_munition_plants
+	building_chemical_plants
+	building_steel_mills
+	building_motor_industry
+	building_munition_plants
 	building_explosives_factory
 
-    add = {
-        value = 4
-        is_eu4_gp = yes
-    }
-    multiply = {
-        value = 0
-        industry_score_less_than = 3
-    }
+	add = {
+		value = 4
+		is_eu4_gp = yes
+	}
+	multiply = {
+		value = 0
+		industry_score_less_than = 3
+	}
 }

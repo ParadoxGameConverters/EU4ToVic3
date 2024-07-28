@@ -352,6 +352,12 @@
     <Filter Include="Mappers\CultureMapper\NewEU4CultureMapper">
       <UniqueIdentifier>{94b75393-448f-4968-aeff-0677ed603e9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Vic3World\EconomyManager\Building\Ownership">
+      <UniqueIdentifier>{dafbc718-c976-407e-81d9-e60cb7a08b5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vic3World\Loaders\BuildingLoader\OwnershipLoader">
+      <UniqueIdentifier>{ec4c0bf2-d02c-49ef-bd69-a95c68c2f4c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\EU4ToVic3\Source\EU4World\World.cpp">
@@ -999,6 +1005,15 @@
     </ClCompile>
     <ClCompile Include="..\EU4ToVic3\Source\Mappers\CultureMapper\NewEU4CultureMapper\NewEU4CultureMapping.cpp">
       <Filter>Mappers\CultureMapper\NewEU4CultureMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4ToVic3\Source\V3World\EconomyManager\Building\Ownership\OwnershipSector.cpp">
+      <Filter>Vic3World\EconomyManager\Building\Ownership</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4ToVic3\Source\V3World\Loaders\BuildingLoader\OwnershipLoader\OwnershipLoader.cpp">
+      <Filter>Vic3World\Loaders\BuildingLoader\OwnershipLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4ToVic3\Source\V3World\EconomyManager\Building\Ownership\Ownership.cpp">
+      <Filter>Vic3World\EconomyManager\Building\Ownership</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1716,6 +1731,18 @@
     </ClInclude>
     <ClInclude Include="..\EU4ToVic3\Source\V3World\PoliticalManager\Diplomacy\PowerBloc.h">
       <Filter>Vic3World\PoliticalManager\Diplomacy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\V3World\EconomyManager\Building\Ownership\OwnershipSector.h">
+      <Filter>Vic3World\EconomyManager\Building\Ownership</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\V3World\EconomyManager\Building\Ownership\Shareholders.h">
+      <Filter>Vic3World\EconomyManager\Building\Ownership</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\V3World\Loaders\BuildingLoader\OwnershipLoader\OwnershipLoader.h">
+      <Filter>Vic3World\Loaders\BuildingLoader\OwnershipLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\V3World\EconomyManager\Building\Ownership\Ownership.h">
+      <Filter>Vic3World\EconomyManager\Building\Ownership</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

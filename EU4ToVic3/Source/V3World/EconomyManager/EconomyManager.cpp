@@ -20,6 +20,7 @@
 #include <cmath>
 #include <iomanip>
 #include <numeric>
+#include <queue>
 #include <ranges>
 
 void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
@@ -54,6 +55,7 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 	loadPMMappings(filePath);
 	loadEconDefines(filePath);
 	loadNationalBudgets(filePath);
+	loadOwnerships(filePath);
 	loadTechMap(modFS);
 }
 
@@ -88,7 +90,7 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 			PMGeneration = PMs.at(PMName).getBureaucracy();
 		}
 
-		country->distributeGovAdmins(generationTarget, PMGeneration, techMap.getTechs());
+		country->distributeGovAdmins(generationTarget, PMGeneration, techMap.getTechs(), buildings.at("building_government_administration"));
 	}
 	Log(LogLevel::Info) << "<> Bureaucracy Established.";
 }
@@ -107,9 +109,7 @@ void V3::EconomyManager::hardcodePorts() const
 			if (!subState->isCoastal())
 				continue;
 
-			auto port = std::make_shared<Building>();
-			port->setName("building_port");
-			port->setPMGroups({"pmg_base_building_port"});
+			auto port = std::make_shared<Building>(buildings.at("building_port"));
 			port->setLevel(1);
 
 			subState->addBuilding(port);
@@ -464,8 +464,110 @@ void V3::EconomyManager::distributeBudget(const double globalCP, const double to
 {
 	for (const auto& country: centralizedCountries)
 	{
-		country->setCPBudget(static_cast<int>(std::round(globalCP * (country->getIndustryWeight() / totalIndustryScore))));
+		int budget = static_cast<int>(std::round(globalCP * (country->getIndustryWeight() / totalIndustryScore)));
+		country->setCPBudget(budget);
 	}
+}
+
+void V3::EconomyManager::investCapital(const std::map<std::string, std::shared_ptr<Country>>& countries) const
+{
+	// Each building get's it's ownership information from the ownership loader.
+	// Ownership levels are apportioned.
+	// Non-0 levels are further apportioned based on local/foreign/capital ownership
+	int investedLevels = 0;
+	int investedBuildings = 0;
+
+	for (const auto& country: centralizedCountries)
+	{
+		std::map<std::string, double> investorIOUs;
+		std::map<std::string, double> capitalIOUs;
+		std::map<std::string, double> overlordIOUs;
+
+		const std::string& overlordTag = country->getOverlord();
+		std::string overlordCapital = "";
+		if (const auto& overlordIt = countries.find(overlordTag); overlordIt != countries.end())
+		{
+			overlordCapital = overlordIt->second->getProcessedData().capitalStateName;
+		}
+
+		for (const auto& subState: country->getSubStates())
+		{
+			for (const auto& building: subState->getBuildings())
+			{
+				if (building->getLevel() == 0)
+				{
+					continue;
+				}
+
+				// First assemble the investor weights conditional on the country's state-space
+				const auto& ownershipMap = ownershipLoader.getOwnershipsFromBuilding(building->getName());
+				std::map<std::string, double> investorWeights;
+
+				double totalWeight = 0;
+				for (const auto& [type, investorData]: ownershipMap)
+				{
+					if (investorData.recognized && country->getProcessedData().type != "recognized")
+					{
+						continue;
+					}
+
+					investorWeights[type] = investorData.weight;
+					totalWeight += investorData.weight;
+				}
+				for (const auto& type: investorWeights | std::views::keys)
+				{
+					investorWeights[type] /= totalWeight;
+				}
+
+				// Now apportion the buildings out among the different investor types
+				const auto& investorApportionment = apportionInvestors(building->getLevel(), investorWeights, investorIOUs);
+
+				// For each investor class with assigned buildings, split owners between local/foreign/capital as directed
+				for (const auto& [type, levels]: investorApportionment)
+				{
+					if (levels == 0)
+					{
+						continue;
+					}
+
+					int capitalLevels = 0, empireLevels = 0;
+					const auto& ownership = ownershipMap.at(type);
+
+					// Send some owners to the capital
+					if (ownership.financialCenterFrac > 0)
+					{
+						std::map<std::string, double> capitalWeights{{"local", 1 - ownership.financialCenterFrac}, {"capital", ownership.financialCenterFrac}};
+						capitalLevels = apportionInvestors(levels, capitalWeights, capitalIOUs).at("capital");
+					}
+
+					// Send some owners to the empire
+					if (ownership.colonialFrac > 0 && overlordTag != "" && overlordCapital != "")
+					{
+						std::map<std::string, double> imperialWeights{{"local", 1 - ownership.colonialFrac}, {"overlord", ownership.colonialFrac}};
+						empireLevels = apportionInvestors(levels, imperialWeights, overlordIOUs).at("overlord");
+					}
+
+					if (levels - capitalLevels - empireLevels > 0)
+					{
+						building->addInvestor(levels - capitalLevels - empireLevels, type, subState->getHomeStateName(), country->getTag());
+						investedLevels += levels - capitalLevels - empireLevels;
+					}
+					if (capitalLevels > 0)
+					{
+						building->addInvestor(capitalLevels, type, country->getProcessedData().capitalStateName, country->getTag());
+						investedLevels += capitalLevels;
+					}
+					if (empireLevels > 0)
+					{
+						building->addInvestor(empireLevels, type, overlordCapital, overlordTag);
+						investedLevels += empireLevels;
+					}
+				}
+				investedBuildings += 1;
+			}
+		}
+	}
+	Log(LogLevel::Info) << "<> Pops invested in " << investedLevels << " shares of " << investedBuildings << " buildings world-wide.";
 }
 
 void V3::EconomyManager::setPMs() const
@@ -694,6 +796,70 @@ int V3::EconomyManager::getClusterPacket(const int baseCost, const std::vector<s
 	return packet;
 }
 
+std::map<std::string, int> V3::EconomyManager::apportionInvestors(const int levels,
+	 const std::map<std::string, double>& investorWeights,
+	 std::map<std::string, double>& investorIOUs) const
+{
+	int apportionedLevels = 0;
+	std::priority_queue<std::tuple<double, std::string>> hamiltonQueue;
+	std::map<std::string, int> investorLevels;
+
+	// First apply IOUs so that minority owners still get buildings now and then.
+	for (const auto& [investor, IOU]: investorIOUs)
+	{
+		if (!investorWeights.contains(investor))
+		{
+			continue;
+		}
+
+		if (IOU > 1)
+		{
+			investorLevels[investor] += 1;
+			apportionedLevels += 1;
+			investorIOUs[investor] -= 1;
+		}
+
+		if (apportionedLevels == levels)
+		{
+			break;
+		}
+	}
+	const int repaidLevels = apportionedLevels;
+
+	for (const auto& [investor, weight]: investorWeights)
+	{
+		const double weightedLevels = weight * (levels - repaidLevels);
+		double apportionment;
+		const double IOU = std::modf(weightedLevels, &apportionment);
+		apportionedLevels += static_cast<int>(apportionment);
+		investorLevels[investor] += static_cast<int>(apportionment);
+		hamiltonQueue.emplace(IOU, investor);
+	}
+	while (apportionedLevels < levels)
+	{
+		const auto& [_, investor] = hamiltonQueue.top();
+		investorLevels[investor] += 1;
+		apportionedLevels += 1;
+		hamiltonQueue.pop();
+	}
+	while (!hamiltonQueue.empty())
+	{
+		const auto& [IOU, investor] = hamiltonQueue.top();
+
+		const auto& it = investorIOUs.find(investor);
+		if (it == investorIOUs.end())
+		{
+			investorIOUs.emplace(investor, IOU);
+		}
+		else
+		{
+			it->second += IOU;
+		}
+		hamiltonQueue.pop();
+	}
+	return investorLevels;
+}
+
 void V3::EconomyManager::loadTerrainModifierMatrices(const std::string& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading Terrain Modifier Matrices.";
@@ -764,6 +930,11 @@ void V3::EconomyManager::loadNationalBudgets(const std::string& filePath)
 {
 	nationalBudgets.loadNationalBudget(filePath + "configurables/economy/national_budget.txt");
 	nationalBudgets.buildBuildingSectorMap();
+}
+
+void V3::EconomyManager::loadOwnerships(const std::string& filePath)
+{
+	ownershipLoader.loadOwnership(filePath + "configurables/economy/ownership.txt");
 }
 
 void V3::EconomyManager::loadTechMap(const commonItems::ModFilesystem& modFS)

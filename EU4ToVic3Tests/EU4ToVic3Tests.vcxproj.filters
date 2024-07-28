@@ -571,6 +571,15 @@
     <ClCompile Include="MapperTests\CultureMapperTests\NewEU4CultureMapperTests\NewEU4CultureMappingTests.cpp">
       <Filter>MapperTests\CultureMapperTests\NewEU4CultureMapperTests</Filter>
     </ClCompile>
+    <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\OwnershipLoaderTests.cpp">
+      <Filter>V3WorldTests\LoaderTests\BuildingLoaderTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\OwnershipSectorTests.cpp">
+      <Filter>V3WorldTests\EconomyManagerTests\BuildingTests</Filter>
+    </ClCompile>
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\OwnershipTests.cpp">
+      <Filter>V3WorldTests\EconomyManagerTests\BuildingTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EU4WorldTests">
@@ -1327,6 +1336,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="TestFiles\configurables\new_eu4_culture_map.txt">
       <Filter>TestFiles\configurables</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\configurables\economy\ownership.txt">
+      <Filter>TestFiles\configurables\economy</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

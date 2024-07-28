@@ -14,6 +14,7 @@ class BuildingGroups
 	void setResourceCaps();
 
 	[[nodiscard]] std::optional<std::string> getAncestralCategory(const std::optional<std::string>& theGroupName) const;
+	[[nodiscard]] std::optional<std::string> getAncestralGroup(const std::string& theGroupName) const;
 	[[nodiscard]] const auto& getBuildingGroupMap() const { return buildingGroups; }
 	[[nodiscard]] std::optional<std::string> tryGetParentName(const std::optional<std::string>& theGroupName) const;
 	[[nodiscard]] std::optional<double> tryGetInfraCost(const std::optional<std::string>& theGroupName) const;

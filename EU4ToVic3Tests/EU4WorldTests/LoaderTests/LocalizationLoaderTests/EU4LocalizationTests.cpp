@@ -4,6 +4,8 @@
 #include <gmock/gmock-matchers.h>
 using testing::UnorderedElementsAre;
 
+namespace
+{
 EU4::EU4LocalizationLoader prepLoader()
 {
 	std::stringstream input;
@@ -25,6 +27,7 @@ EU4::EU4LocalizationLoader prepLoader()
 
 	return locs;
 }
+} // namespace
 
 TEST(EU4World_LocalizationLoaderTests, localizationsReturnsLocMapForKey)
 {

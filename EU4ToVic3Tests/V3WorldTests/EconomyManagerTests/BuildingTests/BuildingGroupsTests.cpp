@@ -36,3 +36,30 @@ TEST(V3World_BuildingGroupsTests, BuildingsGroupsSetHierarchyAndCost)
 	EXPECT_EQ("bg_mega_industry", buildingGroups.tryGetParentName("bg_giga_industry").value());
 	EXPECT_DOUBLE_EQ(1, buildingGroups.tryGetInfraCost("bg_giga_industry").value());
 }
+
+TEST(V3World_BuildingGroupsTests, TopLevelAncestorIsDiscoverable)
+{
+	V3::BuildingGroupLoader buildingGroupLoader;
+	buildingGroupLoader.loadBuildingGroups(modFS);
+	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
+
+	EXPECT_EQ("bg_manufacturing", buildingGroups.getAncestralGroup("bg_giga_industry").value());
+}
+
+TEST(V3World_BuildingGroupsTests, TopLevelAncestorReturnsSelf)
+{
+	V3::BuildingGroupLoader buildingGroupLoader;
+	buildingGroupLoader.loadBuildingGroups(modFS);
+	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
+
+	EXPECT_EQ("bg_manufacturing", buildingGroups.getAncestralGroup("bg_manufacturing").value());
+}
+
+TEST(V3World_BuildingGroupsTests, InvalidGroupReturnsNullAncestor)
+{
+	V3::BuildingGroupLoader buildingGroupLoader;
+	buildingGroupLoader.loadBuildingGroups(modFS);
+	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
+
+	EXPECT_EQ(std::nullopt, buildingGroups.getAncestralGroup("bg_none"));
+}

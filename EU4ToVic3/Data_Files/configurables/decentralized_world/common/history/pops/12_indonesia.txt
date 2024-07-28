@@ -1,100 +1,43 @@
 ﻿POPS = {
 	s:STATE_MALAYA = {
-		region_state:JOH = {
+		region_state:S35 = { #Srivijaya
+			create_pop = {
+				culture = karen
+				religion = animist
+				size = 2796
+			}
 			create_pop = {
 				culture = malay
-				size = 399600
+				religion = hindu
+				size = 400000
+			}
+			create_pop = {
+				culture = malay
+				religion = mahayana
+				size = 692600
 			}
 			create_pop = {
 				pop_type = slaves
 				culture = malay
-				size = 11000
-			}
-			create_pop = {
-				culture = yue
-				size = 27404
-			}
-		}
-		region_state:SEL = {
-			create_pop = {
-				culture = malay
-				size = 209000
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = malay
-				size = 7000
-			}
-			create_pop = {
-				culture = yue
-				size = 22000
-			}
-		}
-		region_state:PRK = {
-			create_pop = {
-				culture = malay
-				size = 136000
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = malay
-				size = 2000
-			}
-			create_pop = {
-				culture = yue
-				size = 9000
-			}
-		}
-		region_state:SIA = {
-			create_pop = {
-				culture = malay
-				size = 248000
-			}
-			create_pop = {
-				culture = yue
-				size = 12800
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = yue
-				size = 4000
-			}
-		}
-		region_state:BIC = {
-			create_pop = {
-				culture = malay
-				size = 60000
+				religion = hindu
+				size = 20000
 			}
 			create_pop = {
 				culture = tamil
-				size = 2400
+				religion = hindu
+				size = 4400
 			}
 			create_pop = {
 				culture = yue
-				size = 4000
-			}
-			create_pop = {
-				culture = british
-				size = 600
-			}
-		}
-		region_state:GBR = {
-			create_pop = {
-				culture = malay
-				size = 40000
-			}
-			create_pop = {
-				culture = tamil
-				size = 2000
-			}
-			create_pop = {
-				culture = yue
+				religion = hindu
 				size = 13996
 			}
 			create_pop = {
-				culture = british
-				size = 2196
+				culture = yue
+				religion = mahayana
+				size = 75204
 			}
+			
 		}
 	}
 	s:STATE_NORTH_BORNEO = {
@@ -522,10 +465,17 @@
 				size = 5120
 			}
 		}
+		region_state:S35 = { #Srivijaya
+			create_pop = {
+				culture = sumatran
+				religion = hindu
+				size = 62627
+			}
+		}
 		region_state:SAK = { #Siak
 			create_pop = {
 				culture = sumatran
-				size = 462627
+				size = 400000
 			}
 			create_pop = {
 				pop_type = slaves

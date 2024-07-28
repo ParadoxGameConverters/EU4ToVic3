@@ -306,7 +306,7 @@ cuman={
 		crh_Ablaziz crh_Ahmadullah crh_Ahtem crh_Amet crh_Amet-Han crh_Asan crh_Avangard
 		crh_Bekir crh_Fikret crh_Ibraim crh_Ilmi crh_Khaybulla crh_Mamut crh_Memet crh_Redvan
 		crh_Refat crh_Refiyik crh_Remzi crh_Rustem crh_Safter crh_Seit crh_Seitnebi crh_Seitumer
-		crh_Server crh_Sidiyik crh_Sinaver crh_Umer crh_Usein crh_Uzeir crh_Vait
+		crh_Server crh_Sidiyik crhver crh_Umer crh_Usein crh_Uzeir crh_Vait
 	}
 	female_common_first_names = {
 		crh_Adilye crh_Alie crh_Alime crh_Anife crh_Arzi crh_Asine crh_Ayshe crh_Azime
@@ -516,6 +516,33 @@ khazar={
 	}
 	common_last_names={
 		Ashina Bukhal Karadakhu Yabghumakh
+	}
+	graphics = east_asian
+	ethnicities = {
+		1 = central_asian
+	}
+}
+khitan={ 
+	color= { 204 204 77 }
+	religion = animist
+	traits = { north_asian_heritage mongol_language }
+	
+	#Names taken from CK2
+	male_common_first_names = {
+		Abaoji Abugu Aguo Alian Anduan Axin Baling Bancai Bei Biegute Bishe Chala Chucai Dashi Deguang Dilie Dilu Dinianzhuli Duba Duolubu Duoluo Fuguzhi Gaoqi Gou'er Gou’er Gunai Guozhe Hanshe Hechen Heluwo Helü 
+		Hongji Hougu Hudugu Hudujin Jilujuan Jing Jinshan Julü Juqu Kailuo Keling Ketuyu Kuge Lihu Liuge Loguo Mergan Mohuai Mohuba Mohui Mopei Muyan Nieli Noulisi Nuohebo Nuosi Pidi Pidie Pogu Puhui Qidegui Qinde 
+		Qinu Qizhen Quju Qulü Qushu Rian Rilujuan RuanSuogu Saba Salade Saladi Shancai Shaogu Shefuchen Shegui Shifang Shihuo Shilu Shouguonu Shulü Sibu Sougu Tanmozhe Tiande Tiebu Tongguyu Tuyu Wenshunu Wogan Wolila 
+		Wuge Wuwuchen Wuyu Xian Xibaxiong Xiduguan Xiuge Xi’er Xi’erzhi Xuedu Yali Yaliguo Yanchege Yanxi Yaogu Yaoshinu Yexian Yidougui Yilie Yudu Yudugu Yundeshi Zhengge Zhigu Zhiligu Zhilugu Zhongyuan Zhulie Zongzhen
+	}
+	female_common_first_names = {
+		Bage Boshi Changshou Chaogui Cuiba Dianni Jiuge Kedun Lübugu Noujin Ping Pusuwan Saige Shige Shuge Shuogu Sokhatai Tabuyan Taige Taoge Xiao Xiao-Wen Xingge Yalixin Yange Yanmu Yanyan Yingtian Yueliduo
+	}
+	
+	noble_last_names = {
+		Genden Amar Tserendorj Tomorbaatar Damdinbazar Bodoo Sukhbaatar Jamyan Choibalsan Chagdarjav
+	}
+	common_last_names={
+		Genden Amar Tserendorj Tomorbaatar Damdinbazar Bodoo Sukhbaatar Jamyan Choibalsan Chagdarjav
 	}
 	graphics = east_asian
 	ethnicities = {
@@ -780,7 +807,7 @@ old_pommeranian={ #Kashubian
 		dyn_cs_Burda dyn_cs_Bures dyn_cs_Buresh dyn_cs_Burian dyn_cs_Busa dyn_cs_Busack
 		dyn_cs_Cada dyn_cs_Capek dyn_cs_Cech dyn_cs_Cejka dyn_cs_Ceka dyn_cs_Cermak
 		dyn_cs_Cernoch dyn_cs_Cerny dyn_cs_Cervenka dyn_cs_Cervicek dyn_cs_Check
-		dyn_cs_Chermak dyn_cs_Cherne dyn_cs_Cherney dyn_cs_Chiba dyn_cs_Chizmar
+		dyn_csmak dyn_csne dyn_csney dyn_cs_Chiba dyn_cs_Chizmar
 		dyn_cs_Chladek dyn_cs_Chovanec dyn_cs_Chovanek dyn_cs_Cihlar dyn_cs_Coufal
 		dyn_cs_Cuprik dyn_cs_Danek dyn_cs_Danko dyn_cs_Dec dyn_cs_Demchak dyn_cs_Demko
 		dyn_cs_Divis dyn_cs_Dlouhy dyn_cs_Dobransky dyn_cs_Dolezal dyn_cs_Dominik
@@ -887,7 +914,7 @@ old_pommeranian={ #Kashubian
 		dyn_cs_Burda dyn_cs_Bures dyn_cs_Buresh dyn_cs_Burian dyn_cs_Busa dyn_cs_Busack
 		dyn_cs_Cada dyn_cs_Capek dyn_cs_Cech dyn_cs_Cejka dyn_cs_Ceka dyn_cs_Cermak
 		dyn_cs_Cernoch dyn_cs_Cerny dyn_cs_Cervenka dyn_cs_Cervicek dyn_cs_Check
-		dyn_cs_Chermak dyn_cs_Cherne dyn_cs_Cherney dyn_cs_Chiba dyn_cs_Chizmar
+		dyn_csmak dyn_csne dyn_csney dyn_cs_Chiba dyn_cs_Chizmar
 		dyn_cs_Chladek dyn_cs_Chovanec dyn_cs_Chovanek dyn_cs_Cihlar dyn_cs_Coufal
 		dyn_cs_Cuprik dyn_cs_Danek dyn_cs_Danko dyn_cs_Dec dyn_cs_Demchak dyn_cs_Demko
 		dyn_cs_Divis dyn_cs_Dlouhy dyn_cs_Dobransky dyn_cs_Dolezal dyn_cs_Dominik
@@ -1032,7 +1059,7 @@ otomi={ #Oto-Pamean
 		nah_Cualli nah_Cuauhtli nah_Cuetlaxochitl nah_Cuetzpallin nah_Cuicatl nah_Cuitlaxaochitzin
 		nah_Ehecatl nah_Eloxochitl nah_Etalpalli nah_Eztli nah_Huitzilxochtzin nah_Huixtocihuatl
 		nah_Ichpochton nah_Ichtaca nah_Icnoyotl nah_Iczoxochitl nah_Ihuicatl nah_Ilancueitl
-		nah_Ilhuitl nah_Itotia nah_Ixtli nah_Izquixochitl nah_Malinal nah_Malinalli
+		nah_Ilhuitl nah_Itotia nah_Ixcatzin nah_Ixtli nah_Izquixochitl nah_Malinal nah_Malinalli
 		nah_Malinalxochitl nah_Malinche nah_Malintzin nah_Manauia nah_Matlacihuatl nah_Mazatl
 		nah_Mecatl nah_Metztli nah_Metztli nah_Miahuaxiuitl nah_Michtlantecahuatl nah_Miquiztli
 		nah_Miyahuaxiuhtzin nah_Miyaoaxochitl nah_Nahuatl nah_Necahual nah_Nelli
@@ -1117,6 +1144,81 @@ pictish = {
 		1 = caucasian
 	}
 }
+saka={
+	color= { 102 102 191 }
+	religion = gelugpa
+	obsessions = { tea }
+	traits = { iranian_turanian_culture_group himalayan middle_eastern_heritage }
+	
+	# Mostly taken from CK2
+	male_common_first_names = {
+		Alysanna Arsa Aryamgula Asi Baga Bahudhiva Bamdaka Bhadra Bradaysaa Brika Capastaka Ceguti Chika Daisai Dharma Dum Dzatsi Gostana Gulai Harka 
+		Haskadatta Huyi Hvam Hvarda Hvardamaya Hvimdu Ikam Irasamga Jabgu Jajahasa Kamnai Kayam Kharusa Khina Khuradatta Khvarnarse Kimashana Kimashani 
+		Kimatcuna Kirtti Kriti Kunala Kushtana Mamatti Manohara Murlimin Naganpaka Nipandaka Padatcaina Pakyau Phimduka Presamdha Punarrjam Punekula 
+		Purgula Raghu Samgai Samgaka Samgalaka Sangrama Sayausa Sham Shambhava Shikshananda Shinganca Shiresala Shirvamdai Shribhadra Shtrugize Shudamgula 
+		Shura Sidaka Sihya Siladharma Simhyi Skunkha Sthavira Sudarrjam Sudhana Sumauna Sumtharaka Tayasham Tcusyau Vadhaga Vagiti Vaham Vahana 
+		Vardhana Varman Vasudeva Vidakai Vidaram Vijita Vijitasimha Vikrama Virsha Visaram Vishirapumna Visma Ysambasta Zambasta
+	}
+	female_common_first_names = {
+		Alsamgya Alyonj Armaiti Dharmadasi Khivyaina Maya Nanda Nirmala Praniyata Safali Shandramata Shri Tisyarakshita Vimala Vimalaprabha Yavalac
+    }
+	noble_last_names = {
+		"nava Kashgar" "nava Pamir" "nava Khotan" "nava Kashmir"
+	}
+	common_last_names={
+		"nava Kashgar" "nava Artux" "nava Yopurga" "nava Tashkurgan"
+	}
+	graphics = arabic
+	ethnicities = {
+		1 = arabic
+	}
+}
+sogdian={
+	color= { 102 102 191 }
+	religion = zoroastrian
+	traits = { iranian_turanian_culture_group middle_eastern_heritage }
+	
+	# Mostly taken from CK2
+	male_common_first_names = {
+		Gurak Divashtich Yodkhsetak Tuhun Tarkhun Urak Turghar Lushan Nanaifarn Avyaman Yechi Chaki Mechun Tishifan Wupoyan
+		Tarxun Wanxanak Nawekat Wiyus Uxushukan Bharxuman Skatch Sheshch Chaxren Ramch Shaw Maxak Ramtish Axushfarn Bhurz Chukshak Fudanyan Dishebo Vandak Khudayfarn Sili Tishrat Chunakk Namdar Xutawch Pisak Karz Nijat Chatfaratsaran Dewastich 
+		Varzakk Nanai-thvar Chuzakk Khwatawch Karzh Nizat Nanaikuch Ukhwan Pator Wakhushuvirt Maniakh Watch Shafnoshak 
+		Akhurmaztakk Akhushfarn Anghatnaw Anghatspadh Anushirvan_Anushirvan Ardavan Ardeshir Armatsach Arsach Artikhuvandakh 
+		Artivan Aspandhat Astken Aurang_Aurang Avyaman-yan-yan Avyaman Avyamanchch Avyamanvandak Babak Bahram_Bahram 
+		Banda Barak Bharkhuman_Bharkhuman Bhurz_Bhurz Buddhadasa Chakar Chakhapak Chakhren Cher Chetvandak Dariush 
+		Devadasa Dewashtich Dhakh Dhruwaspvandak Esfandiar Eskander Ewakhsh Faramarz Farhad Farn Farnaghat 
+		Farnch Farnkhund Farroukh_Farroukh Farrukhzad_Farrukhzad Farzad_Farzad Fatmiwach Ferdows_Ferdows Fereedun_Feridun Frikhwataw Ghawtus Ghobad_Ghobad 
+		Ghoshfarn Ghotamsach Godarz Goshtasb Hazarasp_Hazarasp Hormazd Hormoz Induk Irkin Jamshid_Jamshid Jiamut 
+		Jimatvande Kanak Kanakk Kartir Karzhtik Kavoos_Kavoos Kaway Kharstrang Khosrow Khun Khurshid_Khurshid Khwadhawanakk 
+		Khwarmew Khwasaw Khwasawch Kund Kundakk Kurush_Cyrus Kushan Kushanakanak Makhak_Makhak Marti Marzuban Maymarghch Methakan Mew Miren 
+		Muqanna Nanai Nanaidhvar Nanaifarn Nanaikhsay Nanaithvar_Nanaydvar Nanaizanch Nanayakk Nanevante Narisaf Narshakhi Nawchirth 
+		Nibothak_Nibothak Nipak_Nipak Nithan_Nithan Ot-tegin_Ot-tegin Papakk Parsak Parviz_Parviz Pashang_Pashang Patrodhan Pekako Peroz_Peroz Pesakk 
+		Pujman Qishiq Ramtish_Ramtish Rashdhes Razmwanwan Resan Rewdhvar Rokhshan_Rokhshan Rostam Rutha Sagharak Sas Sasan Satasp 
+		Sesh_Sesh Shahbaz Shahin Shahrokh_Sharokh Shans Shapur_Shapur Shaw Shennu Shirch Sina Spadh Spadhkharsh Srawakk 
+		Stayidh Suryakk Tahmasb Takhsich Takhsichvandak Takut Tarkhun_Tarkhun Taw Tir Tishtrya_Tishtrya Tishvandak Turghar_Turghar Ukhushukan_Ukhushukan 
+		Urak Vagh Vaghrew Vahhab Varshasb Varzak Varzirak Vishtasb Viyus Vuvva Wakhunam Wakhushakk Wakhushu Wanenak 
+		Wankaway Wankhanak_Wankhanak Wanrazmak Wanwans Wishaghn Xeykhosrow Y’n Zand Zartosht Zymt
+	}
+	female_common_first_names = {
+		Nana Upach An Kang Aghatzak Anakhit Arghavan_Arghavan Banafsheh Chat_Chat Chatis Chet Chinanch Darya Funa Furuzan_Furuzan Ghamze_Ghamze Ghoncheh_Ghoncheh 
+		Golbahar_Golbahar Golshan_Golshan Khansch Makh Mah_Mah Mahtab_Mahtab Miwnay Nana_Nana Nanai Nanaidhat Navvaba Nazgol 
+		Nazilla Parvaneh Parvin Ranisa Roxana Sanakhram Shahrzad Shahzadeh Shayn Shirinn Touran 
+		Yasaman Yena
+	}
+	noble_last_names = {
+		Kayani Qiepantuo Kashgar Chaghan Khuda Bukhar Afshin
+	}
+	common_last_names={
+		Wakhanshah Muqannid Khuttalanshah Wardana Al-Barm Kumidji Palola Kang
+		Charkliq Aksu Cherchen Qiuzi Maymurg Kesh Varzakk Karzh Khwatawch Namdar
+		Lushan Tuhun Vijaya Amala Asu Phrom Hurod Bugunpan Gahjag Kausal Gank
+		Kasyar Sarikol Jemotwona Narubho Calmandana
+	}
+	graphics = arabic
+	ethnicities = {
+		1 = arabic
+	}
+}
 suebi={
 	color= { 160 160 160 }
 	religion = animist
@@ -1159,6 +1261,35 @@ suebi={
 		1 = caucasian
 	}
 }
+sumpa={
+	color= { 204 51 26 }
+	religion = animist #bon
+	traits = { tibetan_language east_asian_heritage }
+	
+	male_common_first_names = {
+		Dangraskya Datserhim Dirotiga Dudlutsen Krasnetse Kunhritse Litsakra Ljonlji Mangpu Martaskra Molingzan
+		Muba Muguni Mugunpu Murkya Nejini Nerkya Nyagdod Nyilni Pantihritse Pantimatso Rangskya Rangwerro Rawerni
+		Rtseni Sadslungse Sadsrung Shimwerro Skyartse Talsnetse Talwerni Thatseseto Thetsedar Thungni Tigrali
+		Tigratinsho Tigunyiri Timinrang Tisrang Tsakrani Xinuoluo Zarani Zlaririm
+	}
+	female_common_first_names = {
+		Ataklumo_Ataklumo Baninera Bartirkhum Bhardha Brizhalda Delhodshim Delosnyri Dhingtsamed Dhingyose
+		Dudelos Dunshogs Khikhar Khirnyiri Khizhi Necugni Nelnesla Neltunyose Pantitsamed Racugni Shekhonti
+		Sherkya Shethetse Shimdhing Shimyose Smarkangshe Smarshibi Smarshim Smartsamed Smaryose Thathurrtse
+		Thungtsamed Thungyose Tingsho Tiseto Tishekhon Tortseli Tritiga Yutsog Zangsyag Zhamze Zhimzhalsto
+	}
+	noble_last_names = {
+		Samtho Nagchu Qangtang
+	}
+	common_last_names={
+		Tong Nyima Chudmar Rigö Namra Kye Sekhor Belpa Ge Magyal Dongkar Suvarnagotra
+		Supi Sunpo Supiya Sumpa
+	}
+	graphics = east_asian
+	ethnicities = {
+		1 = asian
+	}
+}
 taino={
 	color= { 16 155 194 }
 	religion = animist
@@ -1180,6 +1311,54 @@ taino={
 	graphics = decentralised_americas
 	ethnicities = {
 		1 = native_american
+	}
+}
+tangut={
+	color= { 204 77 0 }
+	religion = animist #bon
+	traits = { tibetan_language east_asian_heritage }
+	
+	male_common_first_names = {
+		Abaoji Abo Abugu Aguo Aguzhi Ala Dorjee Kalden Karma Lobsang Mingma Nawang Nima Chodak Changyuan 
+		Chucai Chun Chunyou Chuzhi Ci Cite Ciwang Dali Dao Daoyin Dashi Deguang Deming Dewang Deyuan 
+		Di Diela Dilie Dilu Dorlipun Du Duolubu Duoluo Duomi Fangde Fuguzhi Fuliu Fuyi Gan Gang Gaoligu
+		Gongmao Gongzao Guan Guang Guangbi Gui Guochang Guozhe Hao He Hechen Hongben Hongdao Hongfan 
+		Hongji Hongyong Hongzhen Hougu Huaijie Huaixiu Hudujin Hui Huiyuan Hunhe Jie Jin Jing Jingtang 
+		Jinzhong Jiqian Jiuli Jiushao Jiyuan Jue Jun Junshi Kaigu Kailuo Keda Keling Kenagan Ketuyu 
+		Keyong Kuan Kuge Kui Kuo Liangzuo Lihu Lin Linggong Lishan Liuge Loguo Longqing Longxian Longxu 
+		Longyou Louguo Lu Luju Luzhi Mada Mai Maozhen Min Ming Mingyi Mohui Naihe Nieli Nielieji Noulisi 
+		Nu Paolu Pedie Pusuwan Qi Qianshun Qinde Quchulu Quju Qulie Qulu Renxian Renxiao Ruan Sage Salade 
+		Saladi Sha Shao Sheng Shenmi Shi Shihuo Shilu Shinan Shizhong Shu Shulu Si Sicheng Sidao Side Song 
+		Songrui Suogu Tabuyan Tadun Tai Taishan Taishi Taiyi Temei Tianxiang Tingjian Tong Tuguci Tuyu Waihe 
+		Wangrong Wansi Wanxin Wei Wen Wenshunu Wenzao Wolila Wotela Wuge Wujun Wumo Wuyi Wuyu Wuzheng Xi Xian 
+		Xiangwen Xiaozheng Xiaozhong Xiazhen Xidi Xinie Xiu Xiuge Xunning Yali Yan Yangxi Yanxi Yanzhang 
+		Yaogu Yaoshinu Yi Yilie Yiliu Yixinning Yongning Yougui Youqing Youyu Yu Yuanhao Yunching Yundeshi Yuyu 
+		Zanhua Zao Zeduan Zengbo Zhangyuan Zhaosan Zhen Zhengchang Zhengyan Zhibuwu Zhigu Zhilugu Zhixian Zhiyuan 
+		Zhong Zhonggong Zhongji Zhongxuan Zhongyan Zhongyuan Zhulie Zongjiao Zongzhen Zuli Zunxu Zuqian Xjwa Khej 
+		Xwej Thjij-po Changyun Cheng Chengjun Chixin Chonggui Chongrong
+	}
+	female_common_first_names = {
+		Ai Ankang Bage Bai Bohai Boshi Cao Chadan Chang Changshou Changshounu Chen Chonghua Chu Chunqin Chuo
+		Cui Cuiba Cuiluan Cuiping Da Daopo Daosheng Deng Deyao Dezhen Dianni Dong Duan Emei Feishan Fengcheng
+		Fu Fujin Gao Ge Guang Guanyinnu Guo Han Hanyue He Hongdu Hongfu Honghong Hou Hu Hua Huang Huarui Huiming
+		Jianchang Jiang Jin Jinfeng Jinluan Jiuge Lanling Li Liang Liao Liu Luanluan Ma Meizhu Meizi Meng Miaoniang
+		Miaoyin Nalan Neiming Noujin Nuoujin Panpan Ping Pucha Puci Puning Pusage Pusuwan Puwei Qian Qiao Qin Qinai
+		Qingnu Qingzhao Qungu Ren Renyi Ruishun Ruizhi Saige She Shen Shengtang Shi Shige Shiguang Shishi Shizhen
+		Shuge Shuiqiu Shuogu Shuzen Shuzheng Siao Song Su Sun Tabuyan Tabuye Taige Taihe Tangqiao Tao Taoge Tian
+		Tong Tudan Wa Wang Wenji Wu Wulinda Wuniang Xia Xiao Xiaoming Xiaoxiao Xingge Xingguo Xinyue Xu Xuanji 
+		Xuanyi Xueying Xunyang Yan Yange Yaniang Yanmu Yanshounu Yanxiu Yaonian Yaoniang Yaoying Ye Yi Yingtian Yingying 
+		Yongqing Yongxing Yu Yuan Yuanzhen Yuniang Yunying Yushan Zhai Zhang Zhaoyun Zheng Zhenjian Zhong 
+		Zhou Zhu Zhuzhu Zihe Ziye
+	}
+	noble_last_names = {
+		Doendrub Jyekundo Tsongkha Pangong Amdo Fuqi
+	}
+	common_last_names={
+		Tuoba Xifeng Feiting Wangli Pochao Yeci Fangdang Miqin Tangwu Pochou Wumi Qitai
+	}
+	graphics = east_asian
+	ethnicities = {
+		1 = asian
 	}
 }
 tlapanec={
@@ -1209,6 +1388,31 @@ tlapanec={
 		1 = native_american
 	}
 }
+tocharian={
+	color= { 191 115 242 }
+	religion = gelugpa
+	traits = { iranian_turanian_culture_group middle_eastern_heritage }
+	
+	male_common_first_names = {
+		Airawanta Ajatasatru Ajite Alp_Alp Ambare_Ambara Amprätasarme Amrätaraksite Amrätodane Anande Anathapindike Aniruddhe Andhave Anktsas Arjune_Arjuna Aranemi Arnyartate Arslam_Arslan Arthadarsi Aryamarg Aryaske Aryatewe Aryawarme Aryottame Asokamitre Asokaraksite Asoke_Ashoka Asärte Astawi Atakke Atidivakare Atyuccagami Atraikatte Bimbasare Caitike Caiytiska Cakravar Cakule Candramukhe Candravasu Candre Caracate Cina Cinatyuti Citre Cittaraksite Cowaske Dandakamal Devarakste Dhanike Dharma_Dharma Dharmacandre Dharmadase Dharmakame Dharmakamiske Dharmaraksite Dharmasome Dharmatrate Dharmawarme Dipankar Dirghanakhe Dravyasvare Durmukhe Ekasrinke Erkätsole Esmiñe Etrise Gayakasyape Gayasirs Gaye_Gaya Gunacamdre Gunasampade Hariscandre Hastake Hetubalike Indradhvaje Indratewe Indre_Indra Indriske Issapake Jatisrone Jetavam Jñanacamndre Jñanaghose Jñanakame Jñanakupte Jñanamokse Jñanasene Jñanasome Jñanasthite Jñanawirye Kadike Kalodaye Kalyanamokse Kalyanavraddhi Kalyanawartane Kanake Kanaske Kanthäke Kapilavarne Kapilavastu Kas Kasyap Katakarni Kaundinye
+		Kauravye Kausal Kemarcune Kentarske Kercampey Kercapiske Kerdipole Kereptaññe Kimñe Klenkarako Klpapatre Klyotiska Kotile Koysam Ksemankare Ksmarjune Ksmawarme Ksmate Ksmateworsa Ksmika Kulkera Kumarapunye Kumpante Kunacamttrakau Kunacamttre Kwirapabhadra Lariska Mahasammate Mahisvare Manisvare Mitrakseme Mitraske Mitre Moksasene Moksasome Moksawarme Molyoke Mukalanti Munkhare Murdhagate Nandabala Nandake Nande_Nanda Nandipale Nasme Ñatte Naradeve Ñirot Nupura Nyagrodhe Padmakesar Padmottare Pakacandre Pañcasikhi Pawaske Pesane Prabhankare Prabhase Pranada Prasamnake
+		Pravare_Pravara Priyadeve Ptompile Puñaiyse Puñakame Puñaraksite Puñicamndre Punyamitre Purtas Rahule_Rahula Raktadewe Ratnacuda Ratnasikhi Rsivadam Rudramukhe Rudrasarme Sagare Samantatir Samcite Samghatrate Sanavasi Sanghasarme Sankene Sanum Saputanase Sarasike Sarmacamdre Sarsire Satuma Satyake Satyaraksite Siddharthe_Siddhartha Sidhasamgha Siladewe Silamitre Silarakite Silaraksi Silasoma Silavande Silawarne Silayase Silopake Simpraye Siñcake Sinke Sinku Skanatatte Skwarle Slacamndre Solarke Some Srestake Sudarse Sudas Suddhodane Sujate Sukase Suklodane Sunaksatre Sunetre Sutasome Sutate Swarnabuspe Swarnatepe Tarmacandre Tarmaraksite Tenare Tohkem Tonke Tukik Tunka_Tunka Tusi Udanalankar Udayi Ulkamukhe Uluke Upage Upagupte Upanande
+		Uposathe Urbilvakasyape Uttaraphalguni Uttare Vaisravane Vaitike Varddhane Vidusake Vimalapuspe Vinaise Visale Wamsok Warwattaske Wäryaruci Wäryasene Wasampile Wasave Wiryadewe Wiryamitre Wiryasanti Wiryasiñi Wisikke Wrauske Yanayase Yarpaläske Yasa Yasawine Yase Yasonaka Yastare Yiswe_Jesus Yonge Yonu Ype Yudhisthire Yugaraje
+	}
+	female_common_first_names = {
+		Amprätasene Amrätasene Arjuna Arunavati Aryakose Aryaraksite Ayardhyame Bhadra Cañca Dhrtirastre Jñati Kolite Kosthile Malika_Malika Maya_Maya Nagasene Priyasarini Punyasene Purike Purnaya Purohite Putere Räknaska Revati Roce Saci Santa Santisene Sari Sthulananda Sudarsane Sumagati Sumaise Sumati Sundari Suwarte Tarma Tarmawirñe Tärtvisara Tati Tisye Upatisye Uppal Uppalavarna Vajrapani Vasisthe Vitasake Yasaraksite Yasodhara
+	}
+	noble_last_names = {
+		"mem Kashgar" "mem Karashar" "mem Kumul" "mem Hvamna" "mem Khotan"
+	}
+	common_last_names={
+		"mem Uchthurpan" "mem Bharuka" "mem Kubera" "mem Kuci" "mem Karashar" "mem Luntai" "mem Gaochang" "mem Yizhou" "mem Kumtag" "mem Loulan" "mem Mingoi" "mem Yuni" "mem Lop Nor" "mem Charkliq" "mem Cherchen" "mem Cadota" "mem Keriya" "mem Hvamna" "mem Suoju" "mem Karghalik"
+	}
+	graphics = arabic
+	ethnicities = {
+		1 = arabic
+	}
+}
 visigothic={
 	color= { 55 55 15 }
 	religion = catholic
@@ -1216,7 +1420,7 @@ visigothic={
 	
 	male_common_first_names = {
 		de_Achim de_Adalmund de_Adelbert de_Adelmute de_Adrian de_Albert de_Albrecht
-		de_Alexander de_Alfons de_Alfred de_Alois de_Alwin de_Anatol de_Anders de_Andreas
+		de de_Alfons de_Alfred de_Alois de_Alwin de_Anatol de_Anders de_Andreas
 		de_Aeneas de_Anselm de_Anton de_Aribert de_Arius de_Armin de_Arndt de_Arne
 		de_Arnim de_Arno de_Arnold de_Arnulf de_Artur de_August de_Axel de_Balthasar
 		de_Barnabas de_Bartholomaeus de_Bastian de_Benedikt de_Benjamin de_Bernd
@@ -1302,7 +1506,7 @@ visigothic={
 		de_Regina de_Regula de_Reintraud de_Renate de_Resi de_Ria de_Rita de_Romi de_Ronja
 		de_Rosa de_Rosalinde de_Rosamunde de_Rosemarie de_Roswitha de_Ruth de_Sabine
 		de_Sabrina de_Sandra de_Sara de_Selina de_Senta de_Sibylle de_Sieglinde de_Sigrid
-		de_Silja de_Silke de_Simone de_Sina de_Sinikka de_Sonja de_Sophia de_Stefanie de_Stella
+		de_Silja de_Silke de_Simone de de_Sinikka de_Sonja de_Sophia de_Stefanie de_Stella
 		de_Susanne de_Swenja de_Sylvia de_Tabea de_Tamara de_Tanja de_Tatiana de_Tereza
 		de_Thekla de_Theresa de_Thilde de_Tonja de_Traute de_Trina de_Trixi de_Ulla de_Ulrike
 		de_Ursula de_Usel de_Uta de_Vanessa de_Vera de_Verena de_Veronika de_Viktoria
@@ -1440,5 +1644,43 @@ zamucoan={
 	graphics = decentralised_americas
 	ethnicities = {
 		1 = native_american
+	}
+}
+zhangzhung={
+	color= { 255 102 0 }
+	religion = animist #bon
+	traits = { tibetan_language himalayan east_asian_heritage }
+	
+	male_common_first_names = {
+		Atimuwer Berkya Bonchung Chimetsukphü Chirum Chunmardang Dakhor Damitheke Damshe Dangwa Demdruk Denpar
+		Dokchen Donla Draktsen Draktsubkye Drenpa Dud Duddul Durshen Dzomar Gawagye Gekhö Gön Göwar Gurser Guwer
+		Gyalwa Gyer Gyerme Gyerpung Gyung Gyungyar Harachipar Hrido Hripa Hrista Jönwa Kalarasa Khyabpa Kuchi
+		Kunla Kyabpai Kyeshe Kyichuk Kyile Labchen Lakring Lampa Langboche Larje Likmigyal Likmikya Likmur
+		Liknyashur Liknyikya Liknyirhya Liwergyer Lokpai Löpo Lopön Ludrub Luje Lurab Lutsen Mabu Mangke Marpo
+		Martang Mebar Meka Meri Merutse Milüsamlek Mikmar Milwo Mra Mrabon Mranyite Mrawa Mucho Mukhö Mukhung
+		Mulakhung Mumar Muné_Muné Muwer Muwernor Namdak Namje Namkha Namse Nangwa Nangzher Naro Nor Norgyi Ökar
+		Ösel Pebon Pholha Pung Pungse Rabtson Rakhuk Salwa Sangjo Sangpo Sangto Sehrigyer Senggetram Shebu Shele
+		Shelgyung Shenlha Shenpa Shenrab Sridpa Takla Takma Tenzin Thenwa Thipang Thokgö Thoktse Thuchen Tobchen
+		Tonggyung Tönpa Traphü Trideiöpo Tridem Tridü Trimen Triwer Troto Tsepo Wal Werya Yangje Yidring Zache
+		Zijid Zingkye Zingpa Zutse
+	}
+	female_common_first_names = {
+		Atak Ataklumo_Ataklumo Atakmo Ba Batsame Bumtsho Cha Changmo Chatsame Chukmo Dangra Dongkar_Dongkar
+		Drangma Drablai Dronglek Duk Duktsuk Dzomo Gyi Gyichangmo Gyilumo Gyitsame Kering Khyungza Kyinam Kyidagi
+		Kyukma Lekyi Lhogyal Liwer Lumo Magyal_Magyal Menchung Mewar Molha Mracham Nangze Neuchung Nyakchikma
+		Ongma Ringtsun Semarkar_Sadmarkar Shenza Silema Takber Takliwer Ting Tingber Tinglumo Tingtsame Trakthung
+		Tsa Tsadagi Tsame Tsatsame Tshogyal Trinyen Wangmo Yid Yidongma Yum Yumtsame Yuyi Zamatok Zangza Zazu
+	}
+	noble_last_names = {
+		Mgar Phug Pung Brusha
+	}
+	common_last_names={
+		Zhangzhung Lig Ngülkhar Gurib Mu Triwer Khyung Tsepang Mra Chakpa Owo Hö Draktsa
+		Dro Namthuk Nganlam Pa Zhu Meu Bru Kong Dak Nyang Tridun Shang Phacho Rawa
+		Chuktshang Namru Se Ra Nang Ngam Rme'u Spa Gotsang
+	}
+	graphics = east_asian
+	ethnicities = {
+		1 = asian
 	}
 }
