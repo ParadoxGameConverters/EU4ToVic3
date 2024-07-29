@@ -1,4 +1,5 @@
 #include "DemandLoader.h"
+#include <ranges>
 
 void V3::DemandLoader::loadPopNeeds(const commonItems::ModFilesystem& modFS)
 {
@@ -10,6 +11,8 @@ void V3::DemandLoader::loadPopNeeds(const commonItems::ModFilesystem& modFS)
 		parseFile(fileName);
 	}
 	clearRegisteredKeywords();
+
+	cacheGoodsNeedsMap();
 }
 
 void V3::DemandLoader::loadBuyPackages(const commonItems::ModFilesystem& modFS)
@@ -41,4 +44,19 @@ void V3::DemandLoader::registerKeys()
 		}
 	});
 	IgnoreUnregisteredItems();
+}
+
+void V3::DemandLoader::cacheGoodsNeedsMap()
+{
+	for (const auto& [popneed_name, popneed]: popneedsMap)
+	{
+		for (const auto& good: popneed.getGoodsFulfillment() | std::views::keys)
+		{
+			if (const auto& it = goodsNeedsMap.find(good); it != goodsNeedsMap.end())
+			{
+				it->second.emplace(popneed_name);
+			}
+			goodsNeedsMap.emplace(good, std::set{popneed_name});
+		}
+	}
 }

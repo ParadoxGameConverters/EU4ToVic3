@@ -14,6 +14,7 @@ class DemandLoader: commonItems::parser
 
 	void loadPopNeeds(const commonItems::ModFilesystem& modFS);
 	void loadBuyPackages(const commonItems::ModFilesystem& modFS);
+	void cacheGoodsNeedsMap();
 
 	[[nodiscard]] const auto& getGoodsNeedsMap() { return goodsNeedsMap; }
 	[[nodiscard]] const auto& getPopneedsMap() { return popneedsMap; }

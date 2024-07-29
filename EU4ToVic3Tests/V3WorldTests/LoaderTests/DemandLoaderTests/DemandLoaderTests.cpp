@@ -17,10 +17,10 @@ TEST(V3World_DemandLoaderTests, DemandLoaderCanLoadDemandComponents)
 	demandLoader.loadPopNeeds(modFS);
 	demandLoader.loadBuyPackages(modFS);
 
-	const auto goodsNeedsMap = {
-		 {"fabric", std::set{"popneed_simple_clothing"}},
-		 {"clothes", std::set{"popneed_simple_clothing, popneed_flame_items"}},
-		 {"wood", std::set{"popneed_flame_items"}},
+	const std::map<std::string, std::set<std::string>> goodsNeedsMap = {
+		 {"fabric", std::set<std::string>{"popneed_simple_clothing"}},
+		 {"clothes", std::set<std::string>{"popneed_simple_clothing", "popneed_flame_items"}},
+		 {"wood", std::set<std::string>{"popneed_flame_items"}},
 	};
 
 	EXPECT_EQ(goodsNeedsMap, demandLoader.getGoodsNeedsMap());
