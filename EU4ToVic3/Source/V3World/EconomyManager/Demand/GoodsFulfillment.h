@@ -7,8 +7,8 @@ namespace V3
 struct GoodsFulfillment
 {
 	std::string good;
-	double weight = 0.0;
-	double maxShare = 0.0;
+	double weight = 1.0;
+	double maxShare = 1.0;
 	double minShare = 0.0;
 
 	std::partial_ordering operator<=>(const GoodsFulfillment&) const = default;

@@ -41,3 +41,21 @@ TEST(V3World_PopNeedTests, PopNeedLoadsGoodsSubstituions)
 	EXPECT_EQ("fabric", popNeed.getDefaultGood());
 	EXPECT_EQ(fulfillment, popNeed.getGoodsFulfillment());
 }
+TEST(V3World_PopNeedTests, DefaultSubstitutionWeightIsOne)
+{
+	std::stringstream input;
+
+	input << "default = services\n";
+	input << "entry = {\n";
+	input << "goods = services\n";
+	input << "}\n";
+
+	V3::PopNeed popNeed(input);
+	popNeed.setName("popneed_services");
+
+	const std::map<std::string, V3::GoodsFulfillment> fulfillment = {{"services", {"services", 1.0, 1.0, 0.0}}};
+
+	EXPECT_EQ("popneed_services", popNeed.getName());
+	EXPECT_EQ("services", popNeed.getDefaultGood());
+	EXPECT_EQ(fulfillment, popNeed.getGoodsFulfillment());
+}
