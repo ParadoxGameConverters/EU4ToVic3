@@ -201,6 +201,7 @@
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\StateTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\SubStateTests.cpp" />
     <ClCompile Include="V3WorldTests\EconomyManagerTests\DemandTests\BuyPackageTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\DemandTests\GoodTests.cpp" />
     <ClCompile Include="V3WorldTests\EconomyManagerTests\DemandTests\PopNeedTests.cpp" />
     <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagColorLoaderTests\FlagColorLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagCrafterTests.cpp" />
@@ -739,6 +740,11 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\pop_needs\00_pop_needs.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/pop_needs</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\goods\00_goods.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/goods</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

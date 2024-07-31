@@ -1,6 +1,18 @@
 #include "DemandLoader.h"
 #include <ranges>
 
+void V3::DemandLoader::loadGoods(const commonItems::ModFilesystem& modFS)
+{
+	registerKeys();
+	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/goods/"))
+	{
+		if (getExtension(fileName) != "txt")
+			continue;
+		parseFile(fileName);
+	}
+	clearRegisteredKeywords();
+}
+
 void V3::DemandLoader::loadPopNeeds(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
@@ -29,6 +41,11 @@ void V3::DemandLoader::loadBuyPackages(const commonItems::ModFilesystem& modFS)
 
 void V3::DemandLoader::registerKeys()
 {
+	registerRegex("[^\\W_]+", [this](const std::string& goodName, std::istream& theStream) {
+		auto good = Good(theStream);
+		good.setName(goodName);
+		goodsMap.emplace(goodName, good);
+	});
 	registerRegex("popneed_.*", [this](const std::string& popneed, std::istream& theStream) {
 		popneedsMap.emplace(popneed, PopNeed(theStream));
 	});

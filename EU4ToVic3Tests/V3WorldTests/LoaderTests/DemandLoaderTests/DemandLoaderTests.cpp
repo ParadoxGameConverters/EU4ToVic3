@@ -10,10 +10,12 @@ const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/"
 TEST(V3World_DemandLoaderTests, DemandLoaderCanLoadDemandComponents)
 {
 	V3::DemandLoader demandLoader;
+	EXPECT_TRUE(demandLoader.getGoodsMap().empty());
 	EXPECT_TRUE(demandLoader.getGoodsNeedsMap().empty());
 	EXPECT_TRUE(demandLoader.getPopneedsMap().empty());
 	EXPECT_TRUE(demandLoader.getWealthConsumptionMap().empty());
 
+	demandLoader.loadGoods(modFS);
 	demandLoader.loadPopNeeds(modFS);
 	demandLoader.loadBuyPackages(modFS);
 
@@ -24,6 +26,12 @@ TEST(V3World_DemandLoaderTests, DemandLoaderCanLoadDemandComponents)
 	};
 
 	EXPECT_EQ(goodsNeedsMap, demandLoader.getGoodsNeedsMap());
+	EXPECT_EQ(2, demandLoader.getGoodsMap().size());
 	EXPECT_EQ(2, demandLoader.getPopneedsMap().size());
 	EXPECT_EQ(2, demandLoader.getWealthConsumptionMap().size());
+
+	EXPECT_EQ(30, demandLoader.getGoodsMap().at("paper").getBasePrice());
+	EXPECT_EQ(30, demandLoader.getGoodsMap().at("services").getBasePrice());
+	EXPECT_FALSE(demandLoader.getGoodsMap().at("paper").isLocal());
+	EXPECT_TRUE(demandLoader.getGoodsMap().at("services").isLocal());
 }
