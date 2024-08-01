@@ -2,7 +2,6 @@
 #define V3_SUBSTATE_H
 #include "ClayManager/ClayMapTypedefs.h"
 #include "EconomyManager/Building/Building.h"
-#include "Loaders/DefinesLoader/Vic3DefinesLoader.h"
 #include "Loaders/LawLoader/Law.h"
 #include "Loaders/TechLoader/Tech.h"
 #include "Mappers/BuildingMapper/BuildingMapper.h"
