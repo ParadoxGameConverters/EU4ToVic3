@@ -10,7 +10,9 @@
 #include "EconomyManager/Building/ProductionMethods/ProductionMethodGroup.h"
 #include "Loaders/DefinesLoader/EconDefinesLoader.h"
 #include "Loaders/DefinesLoader/Vic3DefinesLoader.h"
+#include "Loaders/DemandLoader/DemandLoader.h"
 #include "Loaders/NationalBudgetLoader/NationalBudgetLoader.h"
+#include "Loaders/PopLoader/PopTypeLoader.h"
 #include "Loaders/TechLoader/TechLoader.h"
 #include "PoliticalManager/PoliticalManager.h"
 
@@ -69,6 +71,7 @@ class EconomyManager
   private:
 	static double calculatePopDistanceFactor(int countryPopulation, double geoMeanPopulation);
 	static double calculateDateFactor(Configuration::STARTDATE startDate, const DatingData& dateData);
+	static int estimateWealth(const std::string& strata);
 
 	// Budget fxns set weight for all countries, accumulates the total weight, and returns a modifier to the globalCP pool (if any).
 	[[nodiscard]] std::pair<double, double> countryBudgetCalcs(Configuration::ECONOMY economyType) const; // Return total weight, any special factors
@@ -108,6 +111,12 @@ class EconomyManager
 		 const std::vector<std::shared_ptr<SubState>>& subStates) const;
 	[[nodiscard]] int getClusterPacket(int baseCost, const std::vector<std::shared_ptr<SubState>>& subStates) const;
 
+	[[nodiscard]] std::map<std::string, double> calcPopDemand(int size,
+		 const std::string& popTypeName,
+		 const std::map<std::string, double>& marketSell,
+		 const std::map<std::string, double>& marketBuy,
+		 const Vic3DefinesLoader& defines);
+
 	void loadTerrainModifierMatrices(const std::string& filePath = "");
 	void loadStateTraits(const commonItems::ModFilesystem& modFS);
 	void loadBuildingInformation(const commonItems::ModFilesystem& modFS);
@@ -116,6 +125,8 @@ class EconomyManager
 	void loadEconDefines(const std::string& filePath = "");
 	void loadNationalBudgets(const std::string& filePath = "");
 	void loadTechMap(const commonItems::ModFilesystem& modFS);
+	void loadDemand(const commonItems::ModFilesystem& modFS);
+	void loadPopTypes(const commonItems::ModFilesystem& modFS);
 
 
 	std::vector<std::shared_ptr<Country>> centralizedCountries;
@@ -135,6 +146,9 @@ class EconomyManager
 	BuildingGroups buildingGroups;
 	std::map<std::string, ProductionMethod> PMs;
 	std::map<std::string, ProductionMethodGroup> PMGroups;
+
+	DemandLoader demand;
+	PopTypeLoader popTypeLoader;
 };
 } // namespace V3
 

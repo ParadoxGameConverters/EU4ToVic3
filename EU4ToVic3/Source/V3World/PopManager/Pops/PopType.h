@@ -15,6 +15,7 @@ class PopType: commonItems::parser
 	[[nodiscard]] const auto& getType() const { return type; }
 	[[nodiscard]] const auto& getConsumptionRate() const { return consumptionRate; }
 	[[nodiscard]] const auto& getDependentRatio() const { return dependentRatio; }
+	[[nodiscard]] const auto& getStrata() const { return strata; }
 
   private:
 	void registerKeys();
@@ -22,6 +23,7 @@ class PopType: commonItems::parser
 	std::string type;
 	double consumptionRate = 1;			  // What % of buy packages a Pop buys.
 	std::optional<double> dependentRatio; // The % of working adults in a Pop. Undefined ratios use a Vic3 define.
+	std::string strata;
 };
 } // namespace V3
 

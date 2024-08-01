@@ -9,6 +9,9 @@ V3::PopType::PopType(std::istream& theStream)
 
 void V3::PopType::registerKeys()
 {
+	registerKeyword("strata", [this](std::istream& theStream) {
+		strata = commonItems::getString(theStream);
+	});
 	registerKeyword("working_adult_ratio", [this](std::istream& theStream) {
 		dependentRatio = commonItems::getDouble(theStream);
 	});
