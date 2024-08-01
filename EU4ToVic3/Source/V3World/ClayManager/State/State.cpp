@@ -14,9 +14,6 @@ void V3::State::loadState(std::istream& theStream)
 	parseStream(theStream);
 	clearRegisteredKeywords();
 	updateProvinces();
-
-	distributeLandshares();
-	distributeResources();
 }
 
 void V3::State::registerKeys()
@@ -121,15 +118,15 @@ void V3::State::updateProvinces() const
 	}
 }
 
-void V3::State::distributeLandshares() const
+void V3::State::distributeLandshares(const int splitStatePrimeLandWeight) const
 {
 	const auto [stateTotal, statePrimes, stateImpassables] = countProvinceTypes(provinces);
-	const double weightedStatewideProvinces = getWeightedProvinceTotals(stateTotal, statePrimes, stateImpassables);
+	const double weightedStatewideProvinces = getWeightedProvinceTotals(stateTotal, statePrimes, stateImpassables, splitStatePrimeLandWeight);
 
 	for (const auto& subState: substates)
 	{
 		const auto [subStateTotal, subStatePrimes, subStateImpassables] = countProvinceTypes(subState->getProvinces());
-		const double weightedSubStateProvinces = getWeightedProvinceTotals(subStateTotal, subStatePrimes, subStateImpassables);
+		const double weightedSubStateProvinces = getWeightedProvinceTotals(subStateTotal, subStatePrimes, subStateImpassables, splitStatePrimeLandWeight);
 
 		const double subStateLandshare = weightedSubStateProvinces / weightedStatewideProvinces;
 
@@ -148,10 +145,10 @@ void V3::State::distributeResources()
 	}
 }
 
-int V3::State::getWeightedProvinceTotals(const int total, const int primes, const int impassables)
+int V3::State::getWeightedProvinceTotals(const int total, const int primes, const int impassables, const int splitStatePrimeLandWeight)
 {
 	// prime coefficient is the define SPLIT_STATE_PRIME_LAND_WEIGHT - 1
-	return total + (5 - 1) * primes - impassables;
+	return total + (splitStatePrimeLandWeight - 1) * primes - impassables;
 }
 
 std::tuple<int, int, int> V3::State::countProvinceTypes(ProvinceMap provinces)

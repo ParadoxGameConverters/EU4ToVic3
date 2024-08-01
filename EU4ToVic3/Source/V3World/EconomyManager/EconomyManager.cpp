@@ -57,7 +57,7 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 	loadTechMap(modFS);
 }
 
-void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalManager) const
+void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalManager, const Vic3DefinesLoader& defines) const
 {
 	Log(LogLevel::Info) << "-> Establishing Bureaucracy.";
 	if (!buildings.contains("building_government_administration"))
@@ -77,7 +77,7 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 		}
 
 		// Give 5% extra for trade routes - cap at +400
-		const double usage = country->calculateBureaucracyUsage(politicalManager.getLawsMap());
+		const double usage = country->calculateBureaucracyUsage(politicalManager.getLawsMap(), defines);
 		const double generationTarget = std::min(usage * 1.05, usage + 400) - 100;
 
 		// Use the PM with the most generation available

@@ -2,6 +2,7 @@
 #define V3_SUBSTATE_H
 #include "ClayManager/ClayMapTypedefs.h"
 #include "EconomyManager/Building/Building.h"
+#include "Loaders/DefinesLoader/Vic3DefinesLoader.h"
 #include "Loaders/LawLoader/Law.h"
 #include "Loaders/TechLoader/Tech.h"
 #include "Mappers/BuildingMapper/BuildingMapper.h"
@@ -9,6 +10,7 @@
 #include "PopManager/Pops/SubStatePops.h"
 #include "SourceProvinceData.h"
 #include "StateModifier.h"
+
 #include <optional>
 
 /* A Substate is a cross-section across a set of chunks where all relevant chunk provinces fall within a geographical V3 state.
@@ -69,7 +71,7 @@ class SubState
 	void spendCPBudget(const int theCPExpense) { CPBudget -= theCPExpense; }
 	void addBuilding(const std::shared_ptr<Building>& building) { buildings.push_back(building); }
 	void setVanillaBuildingElements(const std::vector<std::string>& elements) { vanillaBuildingElements = elements; }
-	void calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap);
+	void calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap, int popPerInfrastructure);
 
 	void gatherPossibleBuildings(const std::map<std::string, Building>& templateBuildings,
 		 const BuildingGroups& buildingGroups,
@@ -162,7 +164,7 @@ class SubState
 
   private:
 	void calculateTerrainFrequency();
-	[[nodiscard]] double getPopInfrastructure(const std::map<std::string, Tech>& techMap) const;
+	[[nodiscard]] double getPopInfrastructure(const std::map<std::string, Tech>& techMap, int popPerInfrastructure) const;
 	[[nodiscard]] std::pair<int, double> getStateInfrastructureModifiers(const StateModifiers& theStateModifiers) const;
 
 	void sortBuildingsByWeight();

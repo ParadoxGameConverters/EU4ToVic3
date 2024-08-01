@@ -6,6 +6,7 @@
 #include "CultureMapper/CultureMapper.h"
 #include "EconomyManager/EconomyManager.h"
 #include "FlagCrafter/FlagCrafter.h"
+#include "Loaders/DefinesLoader/Vic3DefinesLoader.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
 #include "PoliticalManager/PoliticalManager.h"
 #include "PopManager/PopManager.h"
@@ -42,6 +43,7 @@ class World
 	EconomyManager economyManager;
 	LocalizationLoader localizationLoader;
 	LocalizationLoader vanillaLocalizationLoader;
+	Vic3DefinesLoader definesLoader;
 
 	mappers::ProvinceMapper provinceMapper;
 	mappers::ReligionMapper religionMapper;

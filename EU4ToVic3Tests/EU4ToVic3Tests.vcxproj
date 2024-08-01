@@ -217,6 +217,7 @@
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\ProductionMethodGroupLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\ProductionMethodLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\CountryDefinitionLoaderTests\CountryDefinitionLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\Vic3DefinesLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\DemandLoaderTests\DemandLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\LawLoaderTests\LawEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\LawLoaderTests\LawLoaderTests.cpp" />
@@ -745,6 +746,11 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\goods\00_goods.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/goods</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\defines\00_defines.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/defines</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -9,6 +9,7 @@
 #include "EconomyManager/Building/ProductionMethods/ProductionMethod.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethodGroup.h"
 #include "Loaders/DefinesLoader/EconDefinesLoader.h"
+#include "Loaders/DefinesLoader/Vic3DefinesLoader.h"
 #include "Loaders/NationalBudgetLoader/NationalBudgetLoader.h"
 #include "Loaders/TechLoader/TechLoader.h"
 #include "PoliticalManager/PoliticalManager.h"
@@ -50,7 +51,7 @@ class EconomyManager
 	void loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries);
 	void loadMappersAndConfigs(const commonItems::ModFilesystem& modFS, const std::string& filePath = "");
 
-	void establishBureaucracy(const PoliticalManager& politicalManager) const;
+	void establishBureaucracy(const PoliticalManager& politicalManager, const Vic3DefinesLoader& defines) const;
 	void hardcodePorts() const;
 
 	void assignCountryCPBudgets(Configuration::ECONOMY economyType,
