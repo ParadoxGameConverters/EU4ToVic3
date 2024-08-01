@@ -16,6 +16,7 @@ struct Agreement
 	std::string second;
 	date start_date;
 	int duration = 0;
+	std::optional<double> libertyDesire;
 };
 } // namespace V3
 

@@ -14,6 +14,12 @@ void outAgreement(std::ostream& output, const V3::Agreement& agreement)
 	output << "\t\t\ttype = " << agreement.type << "\n";
 	output << "\t\t}\n";
 	output << "\t}\n";
+	if (agreement.libertyDesire)
+	{
+		output << "\tc:" << agreement.second << " = {\n";
+		output << "\t\tadd_liberty_desire = " << *agreement.libertyDesire << "\n";
+		output << "\t}\n";
+	}
 }
 
 void outCountryRelations(std::ostream& output, const std::string& tag, const std::map<std::string, V3::Relation>& relations)
