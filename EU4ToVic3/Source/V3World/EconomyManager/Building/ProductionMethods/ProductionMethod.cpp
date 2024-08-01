@@ -12,56 +12,58 @@ void V3::ProductionMethod::loadProductionMethod(std::istream& theStream)
 
 void V3::ProductionMethod::registerKeys()
 {
+	scalingParser.registerKeyword("country_bureaucracy_add", [this](std::istream& theStream) {
+		bureaucracy = commonItems::getInt(theStream);
+	});
+	scalingParser.registerRegex("goods_input\\w+_add", [this](const std::string& goodsType, std::istream& theStream) {
+		inputs.emplace(getType(goodsType), commonItems::getInt(theStream));
+	});
+	scalingParser.registerRegex("goods_output\\w+_add", [this](const std::string& goodsType, std::istream& theStream) {
+		outputs.emplace(getType(goodsType), commonItems::getInt(theStream));
+	});
+	scalingParser.registerRegex("building_employment_\\w+_add", [this](const std::string& employmentType, std::istream& theStream) {
+		employment.emplace(getType(employmentType), commonItems::getInt(theStream));
+	});
+	scalingParser.IgnoreUnregisteredItems();
+
+	modifiersParser.registerKeyword("workforce_scaled", [this](std::istream& theStream) {
+		scalingParser.parseStream(theStream);
+	});
+	modifiersParser.registerKeyword("level_scaled", [this](std::istream& theStream) {
+		scalingParser.parseStream(theStream);
+	});
+	modifiersParser.IgnoreUnregisteredItems();
+
 	registerKeyword("unlocking_technologies", [this](std::istream& theStream) {
 		for (const auto& tech: commonItems::getStrings(theStream))
 			unlockingTechs.emplace(tech);
 	});
+	registerKeyword("unlocking_laws", [this](std::istream& theStream) {
+		for (const auto& law: commonItems::getStrings(theStream))
+			unlockingLaws.emplace(law);
+	});
+	registerKeyword("disallowing_laws", [this](std::istream& theStream) {
+		for (const auto& law: commonItems::getStrings(theStream))
+			disallowingLaws.emplace(law);
+	});
 	registerKeyword("country_modifiers", [this](std::istream& theStream) {
-		cModUnwrapper.parseStream(theStream);
+		modifiersParser.parseStream(theStream);
 	});
 	registerKeyword("building_modifiers", [this](std::istream& theStream) {
-		bModUnwrapper.parseStream(theStream);
+		modifiersParser.parseStream(theStream);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+}
 
-	cModUnwrapper.registerKeyword("workforce_scaled", [this](std::istream& theStream) {
-		const auto& theAssignments = commonItems::assignments(theStream).getAssignments();
-		if (!theAssignments.contains("country_bureaucracy_add"))
-		{
-			return;
-		}
+std::string V3::ProductionMethod::getType(const std::string& typeString)
+{
+	std::stringstream typeStream(typeString);
+	std::string type;
 
-		const std::string& bureaucracyString = theAssignments.at("country_bureaucracy_add");
-		try
-		{
-			bureaucracy = std::stoi(bureaucracyString);
-		}
-		catch (const std::exception& e)
-		{
-			Log(LogLevel::Error) << "Failed to read bureaucracy output value " << bureaucracyString << ": " << e.what();
-		}
-	});
-	cModUnwrapper.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+	for (int i = 0; i < 3; i++)
+	{
+		std::getline(typeStream, type, '_');
+	}
 
-	bModUnwrapper.registerKeyword("level_scaled", [this](std::istream& theStream) {
-		const auto& theAssignments = commonItems::assignments(theStream).getAssignments();
-		const std::regex pattern("building_employment_([a-zA-Z_]+)_add");
-
-		for (const auto& [jobEffect, employmentNumber]: theAssignments)
-		{
-			std::smatch job;
-			if (std::regex_search(jobEffect, job, pattern)) // building_employment_clerks_add -> clerks
-			{
-				try
-				{
-					employment[job[1].str()] = std::stoi(employmentNumber);
-				}
-				catch (const std::exception& e)
-				{
-					Log(LogLevel::Error) << "Failed to read employment number " << employmentNumber << ": " << e.what();
-				}
-			}
-		}
-	});
-	bModUnwrapper.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
+	return type;
 }

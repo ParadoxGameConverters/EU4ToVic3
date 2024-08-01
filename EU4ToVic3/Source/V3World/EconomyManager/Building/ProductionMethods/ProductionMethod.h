@@ -13,19 +13,29 @@ class ProductionMethod: commonItems::parser
 
 	[[nodiscard]] const auto& getName() const { return name; }
 	[[nodiscard]] const auto& getEmployment() const { return employment; }
+	[[nodiscard]] const auto& getInputs() const { return inputs; }
+	[[nodiscard]] const auto& getOutputs() const { return outputs; }
 	[[nodiscard]] const auto& getBureaucracy() const { return bureaucracy; }
 	[[nodiscard]] const auto& getUnlockingTechs() const { return unlockingTechs; }
+	[[nodiscard]] const auto& getUnlockingLaws() const { return unlockingLaws; }
+	[[nodiscard]] const auto& getBlockingLaws() const { return disallowingLaws; }
 
   private:
 	void registerKeys();
 
-	parser cModUnwrapper;
-	parser bModUnwrapper;
+	static std::string getType(const std::string& typeString);
+
+	parser modifiersParser;
+	parser scalingParser;
 
 	std::string name;
 	std::map<std::string, int> employment;
+	std::map<std::string, int> inputs;
+	std::map<std::string, int> outputs;
 	int bureaucracy = 0;
 	std::set<std::string> unlockingTechs;
+	std::set<std::string> unlockingLaws;
+	std::set<std::string> disallowingLaws;
 };
 } // namespace V3
 
