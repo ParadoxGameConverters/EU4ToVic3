@@ -324,8 +324,8 @@ TEST(V3World_SubStateTests, InfrastructureCalculationIsolatePopFactor)
 	V3::TechLoader techLoader;
 	techLoader.loadTechs(modFS);
 
-	substate0.calculateInfrastructure({}, techLoader.getTechs(), 100000);
-	substate1.calculateInfrastructure({}, techLoader.getTechs(), 100000);
+	substate0.calculateInfrastructure({}, techLoader.getTechs(), 10000);
+	substate1.calculateInfrastructure({}, techLoader.getTechs(), 10000);
 
 	EXPECT_DOUBLE_EQ(3.2, substate0.getInfrastructure());
 	EXPECT_DOUBLE_EQ(43, substate1.getInfrastructure());

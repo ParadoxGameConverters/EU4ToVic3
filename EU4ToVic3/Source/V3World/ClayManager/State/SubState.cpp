@@ -190,7 +190,6 @@ void V3::SubState::calculateTerrainFrequency()
 
 double V3::SubState::getPopInfrastructure(const std::map<std::string, Tech>& techMap, const int popPerInfrastructure) const
 {
-	// INDIVIDUALS_PER_POP_INFRASTRUCTURE = 10000
 	const double popInfra = subStatePops.getPopCount() * owner->getTechInfraMult(techMap) / popPerInfrastructure;
 	if (const int cap = owner->getTechInfraCap(techMap); popInfra > cap)
 	{
