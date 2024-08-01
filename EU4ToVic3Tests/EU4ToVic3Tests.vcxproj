@@ -231,6 +231,7 @@
     <ClCompile Include="V3WorldTests\LoaderTests\NationalBudgetLoaderTests\SectorLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\PopEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\PopLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\PopTypeLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\StateEntriesTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\SubStateEntriesTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\SubStatePopEntriesTests.cpp" />
@@ -265,6 +266,7 @@
     <ClCompile Include="V3WorldTests\PoliticalManagerTests\PoliticalManagerTests.cpp" />
     <ClCompile Include="V3WorldTests\PoliticalManagerTests\TechValuesTests\TechValuesTests.cpp" />
     <ClCompile Include="V3WorldTests\PopManagerTests\PopManagerTests.cpp" />
+    <ClCompile Include="V3WorldTests\PopManagerTests\PopTests\PopTypeTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\eu4installation\eu4">
@@ -751,6 +753,14 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\vic3installation\game\common\defines\00_defines.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/defines</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\pop_types\aristocrats.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/pop_types</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\pop_types\peasants.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/pop_types</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

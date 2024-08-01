@@ -1,0 +1,56 @@
+﻿peasants = {
+	texture = "gfx/interface/icons/pops_icons/peasants.dds"
+	color = hsv{ 0.58 0.338 0.812 }
+	strata = poor
+	subsistence_income = yes
+	can_always_hire = yes
+	ignores_employment_proportionality = yes
+	start_quality_of_life = 5
+	wage_weight = 0.2
+	paid_private_wage = yes
+	consumption_mult = 0.05 	# The portion of Peasant buy packages that are added as state region consumption
+	dependent_wage = 0.25	# per year
+	unemployment = no
+
+	# 0% - 50% politically engaged	
+	political_engagement_base = 0.0
+	political_engagement_literacy_factor = 0.5
+	
+	political_engagement_mult = {
+		value = 1	
+		
+		add = {
+			desc = "POP_STARVATION"	
+			
+			if = {
+				limit = { 
+					standard_of_living < 5
+				}
+				value = 1
+			}		
+		}
+
+		multiply = {
+			desc = "HAS_POLITICAL_AGITATION"	
+			value = 1.0
+			
+			if = {
+				limit = { 
+					owner = {
+						NOT = { has_technology_researched = political_agitation	}
+					}
+				}
+				value = 1.5
+			}		
+		}			
+	}
+	
+	portrait_age = {
+		integer_range = {
+			min = define:NPortrait|GRACEFUL_AGING_START
+			max = define:NPortrait|GRACEFUL_AGING_END
+		}
+	}
+	portrait_pose = { value = 0 }			
+	portrait_is_female = { always = yes }
+}
