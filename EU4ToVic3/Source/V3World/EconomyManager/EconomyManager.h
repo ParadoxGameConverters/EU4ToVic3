@@ -28,21 +28,22 @@ class Sector;
  * Primarily handles buildings
  * 1. Load in centralized countries.
  * 2. Read in Mappers & Configs.
- * 3. Bureaucracy! Have to handle it separate for game balance. Hand out generation that ~ matches need.
- * 4. For each centralized country get a CP budget based on fronter option.
- * 5. For each substate in a centralized country get a CP budget based on fronter option and terrain/state modifiers.
- * 6. Figure out the "national budget" of each country using the sector blueprints in NationalBudgetLoader.
- * 6b. NationalBudget is a list of sectors like 30% Farming, 25% Light Industry, etc.
- * 6c. Each Sector has a list of buildings that fall under it.
- * 7. Each Substate scores buildings based on EU4 buildings, terrain, state modifiers, and other factors.
- * 7b. Only buildings that are valid (resource/tech-wise) are scored.
- * 8. A negotiation between the states and their country about what to build.
- * 8b. The state w/ the most CP asks to build it's highest scoring building.
- * 8c. The country says that building is in sector A and as a country we have X CP to spend in that sector.
- * 8d. The state then builds as many buildings of that kind as it can, limited by capacity, packet size and sector CP.
- * 8e. A bunch of small details that make this flow until all CP is assigned. Repeat for each country.
+ * 3. Prepare estimates
+ * 4. Bureaucracy! Have to handle it separate for game balance. Hand out generation that ~ matches need.
+ * 5. For each centralized country get a CP budget based on fronter option.
+ * 6. For each substate in a centralized country get a CP budget based on fronter option and terrain/state modifiers.
+ * 7. Figure out the "national budget" of each country using the sector blueprints in NationalBudgetLoader.
+ * 7b. NationalBudget is a list of sectors like 30% Farming, 25% Light Industry, etc.
+ * 7c. Each Sector has a list of buildings that fall under it.
+ * 8. Each Substate scores buildings based on EU4 buildings, terrain, state modifiers, and other factors.
+ * 8b. Only buildings that are valid (resource/tech-wise) are scored.
+ * 9. A negotiation between the states and their country about what to build.
+ * 9b. The state w/ the most CP asks to build it's highest scoring building.
+ * 9c. The country says that building is in sector A and as a country we have X CP to spend in that sector.
+ * 9d. The state then builds as many buildings of that kind as it can, limited by capacity, packet size and sector CP.
+ * 9e. A bunch of small details that make this flow until all CP is assigned. Repeat for each country.
  *
- * 9. Set Production Methods from a config file.
+ * 10. Set Production Methods from a config file.
  *
  * This *should* give nice diverse, sensible, game-balanced economies while maintaining a reasonable configuration footprint.
  */
@@ -111,11 +112,7 @@ class EconomyManager
 		 const std::vector<std::shared_ptr<SubState>>& subStates) const;
 	[[nodiscard]] int getClusterPacket(int baseCost, const std::vector<std::shared_ptr<SubState>>& subStates) const;
 
-	[[nodiscard]] std::map<std::string, double> calcPopDemand(int size,
-		 const std::string& popTypeName,
-		 const std::map<std::string, double>& marketSell,
-		 const std::map<std::string, double>& marketBuy,
-		 const Vic3DefinesLoader& defines);
+	[[nodiscard]] void calcNationalPopDemand(const std::shared_ptr<Country>& country, Vic3DefinesLoader& defines);
 
 	void loadTerrainModifierMatrices(const std::string& filePath = "");
 	void loadStateTraits(const commonItems::ModFilesystem& modFS);

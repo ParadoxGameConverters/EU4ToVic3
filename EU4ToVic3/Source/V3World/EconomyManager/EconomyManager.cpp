@@ -715,70 +715,9 @@ int V3::EconomyManager::getClusterPacket(const int baseCost, const std::vector<s
 	return packet;
 }
 
-std::map<std::string, double> V3::EconomyManager::calcPopDemand(int size,
-	 const std::string& popTypeName,
-	 const std::map<std::string, double>& marketSell,
-	 const std::map<std::string, double>& marketBuy,
-	 const Vic3DefinesLoader& defines)
+void V3::EconomyManager::calcNationalPopDemand(const std::shared_ptr<Country>& country, Vic3DefinesLoader& defines)
 {
-	// Validate popType.
-	if (!popTypeLoader.getPopTypes().contains(popTypeName))
-	{
-		Log(LogLevel::Warning) << "PopType: " << popTypeName << " has no recognized game data.";
-		return std::map<std::string, double>{};
-	}
-	const auto& popType = popTypeLoader.getPopTypes().at(popTypeName);
-
-	// Calculate pop factor
-	const double workingRatio = popType.getDependentRatio().value_or(defines.getWorkingAdultRatioBase());
-	const double popFactor = size * workingRatio + (1 - workingRatio) * defines.getDependentConsumptionRatio();
-
-	// Calculate market table
-	std::map<std::string, double> marketAdjusted;
-	for (const auto& [good, orders]: marketSell)
-	{
-		marketAdjusted.emplace(good, orders - marketBuy.at(good) * 0.5);
-	}
-
-	std::map<std::string, double> totalPopDemand;
-
-	// Estimate Wealth.
-	const int wealth = estimateWealth(popType.getStrata());
-
-	// Get buy packages for that wealth.
-	const auto& buyPackage = demand.getWealthConsumptionMap().at(wealth).getPopneeds();
-
-	// For each buy package, calculate the demand for each Good.
-	for (const auto& [popneedName, value]: buyPackage)
-	{
-		// Peasants consume much less
-		const double buyValue = value * popType.getConsumptionRate();
-
-		std::map<std::string, double> popNeedPopDemand;
-		double totalAdjustedShares = 0;
-
-		// Get total market shares for normalization factor
-		const auto& goods = demand.getPopneedsMap().at(popneedName).getGoodsFulfillment();
-		for (const auto& goodName: goods | std::views::keys)
-		{
-			totalAdjustedShares += marketAdjusted.at(goodName);
-		}
-
-		for (const auto& [goodName, fulfillment]: goods)
-		{
-			const auto& good = demand.getGoodsMap().at(goodName);
-			const double priceFactor = buyValue / good.getBasePrice();
-			double marketShare = marketAdjusted.at(goodName) / totalAdjustedShares;
-			marketShare = std::min(marketShare, fulfillment.maxShare);
-			marketShare = std::max(marketShare, fulfillment.minShare);
-			const double purchaseWeight = fulfillment.weight * marketShare;
-
-			totalPopDemand.at(goodName) += priceFactor * popFactor * purchaseWeight;
-			// TODO account for local goods quirks
-		}
-	}
-
-	return totalPopDemand;
+	return;
 }
 
 void V3::EconomyManager::loadTerrainModifierMatrices(const std::string& filePath)

@@ -18,10 +18,10 @@ class DemandLoader: commonItems::parser
 	void loadBuyPackages(const commonItems::ModFilesystem& modFS);
 	void cacheGoodsNeedsMap();
 
-	[[nodiscard]] const auto& getGoodsMap() { return goodsMap; }
-	[[nodiscard]] const auto& getGoodsNeedsMap() { return goodsNeedsMap; }
-	[[nodiscard]] const auto& getPopneedsMap() { return popneedsMap; }
-	[[nodiscard]] const auto& getWealthConsumptionMap() { return wealthConsumptionMap; }
+	[[nodiscard]] const auto& getGoodsMap() const { return goodsMap; }
+	[[nodiscard]] const auto& getGoodsNeedsMap() const { return goodsNeedsMap; }
+	[[nodiscard]] const auto& getPopneedsMap() const { return popneedsMap; }
+	[[nodiscard]] const auto& getWealthConsumptionMap() const { return wealthConsumptionMap; }
 
   private:
 	void registerKeys();
