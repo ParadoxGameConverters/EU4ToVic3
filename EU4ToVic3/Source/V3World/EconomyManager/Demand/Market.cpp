@@ -139,7 +139,7 @@ double V3::Market::calcCulturalFactor(const double culturalPrevalence)
 double V3::Market::calcPopFactor(const double size, const PopType& popType, const Vic3DefinesLoader& defines)
 {
 	const double workingRatio = popType.getDependentRatio().value_or(defines.getWorkingAdultRatioBase()); // Plus laws effect (Propertied woman)
-	return (size * workingRatio + size * (1 - workingRatio) * defines.getDependentConsumptionRatio()) / 10000;
+	return (size * workingRatio + size * (1 - workingRatio) * defines.getDependentConsumptionRatio()) * popType.getConsumptionRate() / 10000;
 }
 
 std::map<std::string, double> V3::Market::calcPurchaseWeights(const std::map<std::string, double>& marketShareMap,
@@ -162,7 +162,6 @@ std::map<std::string, double> V3::Market::calcPurchaseWeights(const std::map<std
 
 	return purchaseWeights;
 }
-
 
 double V3::Market::calcPurchaseWeight(const std::string& goodName,
 	 const double marketShare,
@@ -192,28 +191,17 @@ double V3::Market::calcPurchaseWeight(const std::string& goodName,
 	return marketShare * weight * culturalFactor;
 }
 
-#pragma optimize("", off)
 double V3::Market::calcCulturalNeedFactor(const std::vector<std::string>& goods, const std::map<std::string, double>& culturalPrevalence)
 {
-	// Taboos tap out at x0.5, Obsessions at x2.0. We're converting from these multipliers into the +-25% bonus/malus to the base need.
+	// Taboos tap out at x0.5, Obsessions at x2.0. But we're converting from prevalence(-1 <-> 1) into the +-25% bonus/malus to the base need.
 	double culturalNeedFactor = 0;
 	for (const std::string& goodName: goods)
 	{
-		const double factor = culturalPrevalence.at(goodName);
-		if (factor > 0)
-		{
-			culturalNeedFactor += factor / 4;
-		}
-		if (factor < 0)
-		{
-			culturalNeedFactor += factor / 2;
-		}
+		culturalNeedFactor += culturalPrevalence.at(goodName) / 4;
 	}
 
 	return culturalNeedFactor + 1;
 }
-#pragma optimize("", on)
-
 
 void V3::Market::calcPopOrders(const int popSize,
 	 const std::map<std::string, double>& jobData,

@@ -14,12 +14,6 @@ TEST(V3World_PopTypeLoaderTests, PopTypeLoaderCanLoadPopTypeComponents)
 
 	popTypeLoader.loadPopTypes(modFS);
 
-	const std::map<std::string, std::set<std::string>> goodsNeedsMap = {
-		 {"fabric", std::set<std::string>{"popneed_simple_clothing"}},
-		 {"clothes", std::set<std::string>{"popneed_simple_clothing", "popneed_flame_items"}},
-		 {"wood", std::set<std::string>{"popneed_flame_items"}},
-	};
-
 	EXPECT_EQ(2, popTypeLoader.getPopTypes().size());
 	EXPECT_EQ("peasants", popTypeLoader.getPopTypes().at("peasants").getType());
 	EXPECT_DOUBLE_EQ(0.05, popTypeLoader.getPopTypes().at("peasants").getConsumptionRate());
