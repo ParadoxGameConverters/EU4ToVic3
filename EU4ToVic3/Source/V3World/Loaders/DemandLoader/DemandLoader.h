@@ -14,8 +14,11 @@ class DemandLoader: commonItems::parser
 	DemandLoader() = default;
 
 	void loadGoods(const commonItems::ModFilesystem& modFS);
+	void loadGoods(std::istream& theStream);
 	void loadPopNeeds(const commonItems::ModFilesystem& modFS);
+	void loadPopNeeds(std::istream& theStream);
 	void loadBuyPackages(const commonItems::ModFilesystem& modFS);
+	void loadBuyPackages(std::istream& theStream);
 	void cacheGoodsNeedsMap();
 
 	[[nodiscard]] const auto& getGoodsMap() const { return goodsMap; }

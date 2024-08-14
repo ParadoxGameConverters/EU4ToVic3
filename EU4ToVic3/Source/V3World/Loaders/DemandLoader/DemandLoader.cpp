@@ -13,6 +13,13 @@ void V3::DemandLoader::loadGoods(const commonItems::ModFilesystem& modFS)
 	clearRegisteredKeywords();
 }
 
+void V3::DemandLoader::loadGoods(std::istream& theStream)
+{
+	registerKeys();
+	parseStream(theStream);
+	clearRegisteredKeywords();
+}
+
 void V3::DemandLoader::loadPopNeeds(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
@@ -27,6 +34,14 @@ void V3::DemandLoader::loadPopNeeds(const commonItems::ModFilesystem& modFS)
 	cacheGoodsNeedsMap();
 }
 
+void V3::DemandLoader::loadPopNeeds(std::istream& theStream)
+{
+	registerKeys();
+	parseStream(theStream);
+	clearRegisteredKeywords();
+	cacheGoodsNeedsMap();
+}
+
 void V3::DemandLoader::loadBuyPackages(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
@@ -36,6 +51,13 @@ void V3::DemandLoader::loadBuyPackages(const commonItems::ModFilesystem& modFS)
 			continue;
 		parseFile(fileName);
 	}
+	clearRegisteredKeywords();
+}
+
+void V3::DemandLoader::loadBuyPackages(std::istream& theStream)
+{
+	registerKeys();
+	parseStream(theStream);
 	clearRegisteredKeywords();
 }
 
