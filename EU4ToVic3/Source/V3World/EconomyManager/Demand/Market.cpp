@@ -1,4 +1,6 @@
 #include "Market.h"
+
+#include <numeric>
 #include <ranges>
 
 V3::Market::Market(const std::vector<std::string>& possibleGoods)
@@ -136,9 +138,14 @@ double V3::Market::calcCulturalFactor(const double culturalPrevalence)
 	return 1;
 }
 
-double V3::Market::calcPopFactor(const double size, const PopType& popType, const Vic3DefinesLoader& defines)
+double V3::Market::calcPopFactor(const double size,
+	 const PopType& popType,
+	 const Vic3DefinesLoader& defines,
+	 const std::set<std::string>& laws,
+	 const std::map<std::string, Law>& lawsMap)
 {
-	const double workingRatio = popType.getDependentRatio().value_or(defines.getWorkingAdultRatioBase()); // Plus laws effect (Propertied woman)
+	double workingRatio = popType.getDependentRatio().value_or(defines.getWorkingAdultRatioBase());
+	workingRatio += calcAddedWorkingPopPercent(laws, lawsMap); // Propertied Woman
 	return (size * workingRatio + size * (1 - workingRatio) * defines.getDependentConsumptionRatio()) * popType.getConsumptionRate() / 10000;
 }
 
@@ -203,6 +210,13 @@ double V3::Market::calcCulturalNeedFactor(const std::vector<std::string>& goods,
 	return culturalNeedFactor + 1;
 }
 
+double V3::Market::calcAddedWorkingPopPercent(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap)
+{
+	return std::accumulate(laws.begin(), laws.end(), 0.0, [lawsMap](double sum, const std::string& law) {
+		return sum + lawsMap.at(law).workingAdultRatioAdd;
+	});
+}
+
 void V3::Market::calcPopOrders(const int popSize,
 	 const std::map<std::string, double>& jobData,
 	 const std::map<std::string, double>& cultureData,
@@ -231,7 +245,7 @@ void V3::Market::calcPopOrders(const int popSize,
 		}
 		const auto& popType = popTypeMap.at(job);
 
-		const double popFactor = calcPopFactor(popSize * jobPercent, popType, defines);
+		const double popFactor = calcPopFactor(popSize * jobPercent, popType, defines, laws, lawsMap);
 		const int wealth = estimateWealth(popType.getStrata());
 
 		// TODO(Gawquon) validate maps

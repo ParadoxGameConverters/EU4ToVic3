@@ -50,12 +50,17 @@ class Market
 		 const std::map<std::string, mappers::ReligionDef>& religions,
 		 const std::map<std::string, Good>& goodsMap); // How much the market leans toward a certain good being a taboo or an obsession.
 	static double calcCulturalFactor(double culturalPrevalence);
-	static double calcPopFactor(double size, const PopType& popType, const Vic3DefinesLoader& defines);
+	static double calcPopFactor(double size,
+		 const PopType& popType,
+		 const Vic3DefinesLoader& defines,
+		 const std::set<std::string>& laws,
+		 const std::map<std::string, Law>& lawsMap);
 	static std::map<std::string, double> calcPurchaseWeights(const std::map<std::string, double>& marketShareMap,
 		 const std::map<std::string, GoodsFulfillment>& fulfillments,
 		 const std::map<std::string, double>& culturalPrevalence);
 	static double calcPurchaseWeight(const std::string& goodName, double marketShare, const GoodsFulfillment& fulfillment, double culturalPrevalence);
 	static double calcCulturalNeedFactor(const std::vector<std::string>& goods, const std::map<std::string, double>& culturalPrevalence);
+	static double calcAddedWorkingPopPercent(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap);
 };
 } // namespace V3
 
