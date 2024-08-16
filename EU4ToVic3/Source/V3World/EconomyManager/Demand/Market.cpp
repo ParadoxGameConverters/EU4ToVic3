@@ -32,6 +32,11 @@ std::map<std::string, double> V3::Market::getMarketShare(const std::vector<std::
 
 	for (const std::string& good: goods)
 	{
+		if (!validateGood(good))
+		{
+			continue;
+		}
+
 		const double adjustedOrder = std::max(sellOrders.at(good) - 0.5 * buyOrdersBuildings.at(good), 1.0);
 		totalAdjustedOrders += adjustedOrder;
 		adjustedOrders[good] = adjustedOrder;
@@ -45,6 +50,37 @@ std::map<std::string, double> V3::Market::getMarketShare(const std::vector<std::
 
 	return marketShare;
 }
+
+void V3::Market::sell(const std::string& good, const double amount)
+{
+	if (!validateGood(good))
+	{
+		return;
+	}
+
+	sellOrders.at(good) += amount;
+}
+
+void V3::Market::buyForBuilding(const std::string& good, double const amount)
+{
+	if (!validateGood(good))
+	{
+		return;
+	}
+
+	buyOrdersBuildings.at(good) += amount;
+}
+
+void V3::Market::buyForPop(const std::string& good, double const amount)
+{
+	if (!validateGood(good))
+	{
+		return;
+	}
+
+	buyOrdersPops.at(good) += amount;
+}
+
 
 int V3::Market::estimateWealth(const std::string& strata)
 {
@@ -67,36 +103,54 @@ int V3::Market::estimateWealth(const std::string& strata)
 
 std::set<std::string> V3::Market::getObsessions(const std::string& culture, const std::map<std::string, mappers::CultureDef>& cultures)
 {
-	// TODO(Gawquon): Read in obsessions to cultures
-	std::set<std::string> obsessions;
-	if (culture == "french")
-		return std::set<std::string>{"wine"};
-	return std::set<std::string>{};
-
-	// return cultures.at(culture).obsessions;
+	if (!cultures.contains(culture))
+	{
+		if (!cultureErrors.contains(culture))
+		{
+			Log(LogLevel::Warning) << "Culture: " << culture << " has no definition. Assuming no obsessions or taboos.";
+		}
+		return {};
+	}
+	return cultures.at(culture).obsessions;
 }
 
 std::set<std::string> V3::Market::getTaboos(const std::string& culture,
 	 const std::map<std::string, mappers::CultureDef>& cultures,
 	 const std::map<std::string, mappers::ReligionDef>& religions)
 {
-	return religions.at(cultures.at(culture).religion).taboos;
+	if (!cultures.contains(culture))
+	{
+		return {};
+	}
+	const auto religion = cultures.at(culture).religion;
+	if (!religions.contains(religion))
+	{
+		if (!religionErrors.contains(religion))
+		{
+			Log(LogLevel::Warning) << "Religion: " << religion << " has no definition. Assuming no taboos.";
+		}
+		return {};
+	}
+	return religions.at(religion).taboos;
 }
 
-std::vector<std::string> V3::Market::enumerateGoods(const std::map<std::string, GoodsFulfillment>& map)
+std::vector<std::string> V3::Market::enumerateGoods(const std::map<std::string, GoodsFulfillment>& map) const
 {
 	std::vector<std::string> goods;
 	for (const auto& good: map | std::views::keys)
 	{
-		goods.push_back(good);
+		if (validateGood(good))
+		{
+			goods.push_back(good);
+		}
 	}
 	return goods;
 }
 
-std::map<std::string, double> V3::Market::initCulturalFactors(const std::map<std::string, Good>& goodsMap)
+std::map<std::string, double> V3::Market::initCulturalFactors() const
 {
 	std::map<std::string, double> culturalFactors;
-	for (const auto& good: goodsMap | std::views::keys)
+	for (const auto& good: sellOrders | std::views::keys)
 	{
 		culturalFactors[good] = 0;
 	}
@@ -105,10 +159,9 @@ std::map<std::string, double> V3::Market::initCulturalFactors(const std::map<std
 
 std::map<std::string, double> V3::Market::estimateCulturalPrevalence(const std::map<std::string, double>& cultureData,
 	 const std::map<std::string, mappers::CultureDef>& cultures,
-	 const std::map<std::string, mappers::ReligionDef>& religions,
-	 const std::map<std::string, Good>& goodsMap)
+	 const std::map<std::string, mappers::ReligionDef>& religions) const
 {
-	auto culturalFactors = initCulturalFactors(goodsMap);
+	auto culturalFactors = initCulturalFactors();
 
 	for (const auto& [culture, percent]: cultureData)
 	{
@@ -117,10 +170,18 @@ std::map<std::string, double> V3::Market::estimateCulturalPrevalence(const std::
 
 		for (const auto& taboo: taboos)
 		{
+			if (!validateGood(taboo))
+			{
+				continue;
+			}
 			culturalFactors.at(taboo) -= percent;
 		}
 		for (const auto& obsession: obsessions)
 		{
+			if (!validateGood(obsession))
+			{
+				continue;
+			}
 			culturalFactors.at(obsession) += percent;
 		}
 	}
@@ -207,6 +268,8 @@ double V3::Market::calcCulturalNeedFactor(const std::vector<std::string>& goods,
 	{
 		culturalNeedFactor += culturalPrevalence.at(goodName) / 4;
 	}
+	culturalNeedFactor = std::max(culturalNeedFactor, -0.25);
+	culturalNeedFactor = std::min(culturalNeedFactor, 0.25);
 
 	return culturalNeedFactor + 1;
 }
@@ -216,6 +279,21 @@ double V3::Market::calcAddedWorkingPopPercent(const std::set<std::string>& laws,
 	return std::accumulate(laws.begin(), laws.end(), 0.0, [lawsMap](double sum, const std::string& law) {
 		return sum + lawsMap.at(law).workingAdultRatioAdd;
 	});
+}
+
+bool V3::Market::validateGood(const std::string& good) const
+{
+	if (!sellOrders.contains(good))
+	{
+		if (!goodsErrors.contains(good))
+		{
+
+			Log(LogLevel::Warning) << "Good: " << good << " not recognized in market. Converter will act like it doesn't exist.";
+			goodsErrors.emplace(good);
+		}
+		return false;
+	}
+	return true;
 }
 
 void V3::Market::calcPopOrders(const int popSize,
@@ -234,26 +312,49 @@ void V3::Market::calcPopOrders(const int popSize,
 		value = 0;
 	}
 
-	const auto& culturalPrevalence = estimateCulturalPrevalence(cultureData, cultures, religions, demand.getGoodsMap());
+	const auto& culturalPrevalence = estimateCulturalPrevalence(cultureData, cultures, religions);
+	const auto& goodsMap = demand.getGoodsMap();
 
 	// Assuming enough land for each pop (for now).
 	for (const auto& [job, jobPercent]: jobData)
 	{
-		// Validate popType.
 		if (!popTypeMap.contains(job))
 		{
-			Log(LogLevel::Warning) << "PopType: " << job << " has no recognized game data.";
+			if (!popTypeErrors.contains(job))
+			{
+				Log(LogLevel::Warning) << "PopType: " << job << " has no recognized game data.";
+				popTypeErrors.emplace(job);
+			}
+			continue;
 		}
 		const auto& popType = popTypeMap.at(job);
 
 		const double popFactor = calcPopFactor(popSize * jobPercent, popType, defines, laws, lawsMap);
 		const int wealth = estimateWealth(popType.getStrata());
 
-		// TODO(Gawquon) validate maps
+		if (!demand.getWealthConsumptionMap().contains(wealth))
+		{
+			if (!wealthErrors.contains(wealth))
+			{
+				Log(LogLevel::Warning) << "Wealth Lvl: " << wealth << " has no definition.";
+				wealthErrors.emplace(wealth);
+			}
+			continue;
+		}
 		const auto& buyPackage = demand.getWealthConsumptionMap().at(wealth);
 
 		for (const auto& [need, magnitude]: buyPackage.getPopneeds())
 		{
+			if (!demand.getPopneedsMap().contains(need))
+			{
+				if (!popneedsErrors.contains(need))
+				{
+					Log(LogLevel::Warning) << "Popneed: " << need << " has no definition.";
+					popneedsErrors.emplace(need);
+				}
+				continue;
+			}
+
 			const auto& popneed = demand.getPopneedsMap().at(need);
 			const auto& packageGoods = enumerateGoods(popneed.getGoodsFulfillment());
 
@@ -264,7 +365,17 @@ void V3::Market::calcPopOrders(const int popSize,
 			// Calc Pop demand
 			for (const auto& goodName: packageGoods)
 			{
-				const double basePrice = demand.getGoodsMap().at(goodName).getBasePrice();
+				if (!goodsMap.contains(goodName))
+				{
+					if (!goodsErrors.contains(goodName))
+					{
+						Log(LogLevel::Warning) << "Good: " << goodName << " has no definition.";
+						goodsErrors.emplace(goodName);
+					}
+					continue;
+				}
+
+				const double basePrice = goodsMap.at(goodName).getBasePrice();
 				const double popDemand = magnitude * culturalNeedFactor / basePrice * purchaseWeights.at(goodName) * popFactor;
 				buyForPop(goodName, popDemand);
 			}

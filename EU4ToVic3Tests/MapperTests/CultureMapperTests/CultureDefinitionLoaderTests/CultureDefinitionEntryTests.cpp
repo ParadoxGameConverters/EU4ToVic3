@@ -30,6 +30,7 @@ TEST(Mappers_CultureDefinitionEntryTests, EntryCanBeLoaded)
 	input << "color = rgb{ 1 2 3 }\n";
 	input << "religion = religion_1\n";
 	input << "traits = { testtrait1 }\n";
+	input << "obsessions = { obsession_1 }\n";
 	input << "male_common_first_names= { mcfn1 mcfn2 }\n";
 	input << "female_common_first_names = { fcfn1 fcfn2 }\n";
 	input << "noble_last_names = { nln1 nln2 }\n";
@@ -46,6 +47,7 @@ TEST(Mappers_CultureDefinitionEntryTests, EntryCanBeLoaded)
 	EXPECT_TRUE(entry.getCultureDef().name.empty());
 	EXPECT_EQ(commonItems::Color(std::array{1, 2, 3}), *entry.getCultureDef().color);
 	EXPECT_THAT(entry.getCultureDef().traits, testing::UnorderedElementsAre("testtrait1"));
+	EXPECT_THAT(entry.getCultureDef().obsessions, testing::UnorderedElementsAre("obsession_1"));
 	EXPECT_THAT(entry.getCultureDef().maleCommonFirstNames, testing::UnorderedElementsAre("mcfn1", "mcfn2"));
 	EXPECT_THAT(entry.getCultureDef().femaleCommonFirstNames, testing::UnorderedElementsAre("fcfn1", "fcfn2"));
 	EXPECT_THAT(entry.getCultureDef().nobleLastNames, testing::UnorderedElementsAre("nln1", "nln2"));

@@ -63,7 +63,7 @@ void V3::DemandLoader::loadBuyPackages(std::istream& theStream)
 
 void V3::DemandLoader::registerKeys()
 {
-	registerRegex("[^\\W_]+", [this](const std::string& goodName, std::istream& theStream) {
+	registerRegex("^(?!popneed_|wealth_)\\w+", [this](const std::string& goodName, std::istream& theStream) {
 		auto good = Good(theStream);
 		good.setName(goodName);
 		goodsMap.emplace(goodName, good);

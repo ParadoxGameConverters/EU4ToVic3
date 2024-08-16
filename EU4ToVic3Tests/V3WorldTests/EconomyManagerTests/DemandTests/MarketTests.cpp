@@ -172,9 +172,9 @@ TEST(V3World_MarketTests, FormulaBuildingEffectOnNeed)
 	market.calcPopOrders(53300, {{"poors", 1}}, {{"english", 1}}, defines, demand, {{"poors", poors}}, {{"english", english}}, {{"none", none}}, {}, {});
 	EXPECT_THAT(market.getMarketBalance(),
 		 testing::UnorderedElementsAre(testing::Pair("extra", testing::DoubleNear(0, 0.01)),
-			  testing::Pair("grain", testing::DoubleNear(100 - 9.61, 0.01)),
+			  testing::Pair("grain", testing::DoubleNear(10 - 9.61, 0.01)),
 			  testing::Pair("fish", testing::DoubleNear(30 - 5.24, 0.01)),
-			  testing::Pair("meat", testing::DoubleNear(40 - 1.16, 0.01)),
+			  testing::Pair("meat", testing::DoubleNear(-1.16, 0.01)),
 			  testing::Pair("groceries", testing::DoubleNear(10 - 0.87, 0.01)),
 			  testing::Pair("fruit", testing::DoubleNear(20 - 1.16, 0.01))));
 }
@@ -370,7 +370,7 @@ TEST(V3World_MarketTests, FormulaPredictsObsessionsNeed)
 TEST(V3World_MarketTests, FormulaPredictsTaboosNeed)
 {
 	// Religious Taboo suppresses both the tabooed goods and the overall need.
-	// TODO(Gawquon) Cap at +-25%
+	// Effect caps at +-25%
 	V3::Market market({"grain", "fish", "meat", "groceries", "fruit", "extra"});
 	market.sell("grain", 100);
 	market.sell("fish", 30);
@@ -413,23 +413,22 @@ TEST(V3World_MarketTests, FormulaPredictsTaboosNeed)
 	poors.setType("poors");
 
 	mappers::CultureDef english;
-	english.religion = "none";
+	english.religion = "eatmeat";
 	english.name = "english";
 
-	mappers::ReligionDef carnivore;
-	carnivore.name = "carnivore";
-	carnivore.taboos.insert("grain");
-	carnivore.taboos.insert("fish");
+	mappers::ReligionDef eatmeat;
+	eatmeat.name = "eatmeat";
+	eatmeat.taboos.insert("grain");
+	eatmeat.taboos.insert("fish");
 
-	market
-		 .calcPopOrders(53300, {{"poors", 1}}, {{"english", 1}}, defines, demand, {{"poors", poors}}, {{"english", english}}, {{"carnivore", carnivore}}, {}, {});
+	market.calcPopOrders(53300, {{"poors", 1}}, {{"english", 1}}, defines, demand, {{"poors", poors}}, {{"english", english}}, {{"eatmeat", eatmeat}}, {}, {});
 	EXPECT_THAT(market.getMarketBalance(),
 		 testing::UnorderedElementsAre(testing::Pair("extra", testing::DoubleNear(0, 0.01)),
-			  testing::Pair("grain", testing::DoubleNear(100 - 4.79, 0.01)),
-			  testing::Pair("fish", testing::DoubleNear(30 - 1.44, 0.01)),
-			  testing::Pair("meat", testing::DoubleNear(40 - 1.28, 0.01)),
-			  testing::Pair("groceries", testing::DoubleNear(10 - 0.48, 0.01)),
-			  testing::Pair("fruit", testing::DoubleNear(20 - 0.64, 0.01))));
+			  testing::Pair("grain", testing::DoubleNear(100 - 7.19, 0.01)),
+			  testing::Pair("fish", testing::DoubleNear(30 - 2.16, 0.01)),
+			  testing::Pair("meat", testing::DoubleNear(40 - 1.92, 0.01)),
+			  testing::Pair("groceries", testing::DoubleNear(10 - 0.72, 0.01)),
+			  testing::Pair("fruit", testing::DoubleNear(20 - 0.96, 0.01))));
 }
 
 TEST(V3World_MarketTests, FormulaPredictsObsessionsAndTaboosNeed)
@@ -622,11 +621,11 @@ TEST(V3World_MarketTests, FormulaAssumesMinimumSupply)
 	market.calcPopOrders(53300, {{"poors", 1}}, {{"english", 1}}, defines, demand, {{"poors", poors}}, {{"english", english}}, {{"none", none}}, {}, {});
 	EXPECT_THAT(market.getMarketBalance(),
 		 testing::UnorderedElementsAre(testing::Pair("extra", testing::DoubleNear(0, 0.01)),
-			  testing::Pair("grain", testing::DoubleNear(100 - 5.24, 0.01)),
-			  testing::Pair("fish", testing::DoubleNear(30 - 5.24, 0.01)),
-			  testing::Pair("meat", testing::DoubleNear(40 - 1.75, 0.01)),
-			  testing::Pair("groceries", testing::DoubleNear(10 - 2.62, 0.01)),
-			  testing::Pair("fruit", testing::DoubleNear(20 - 1.75, 0.01))));
+			  testing::Pair("grain", testing::DoubleNear(-5.24, 0.01)),
+			  testing::Pair("fish", testing::DoubleNear(-20 - 5.24, 0.01)),
+			  testing::Pair("meat", testing::DoubleNear(-1.75, 0.01)),
+			  testing::Pair("groceries", testing::DoubleNear(-2.62, 0.01)),
+			  testing::Pair("fruit", testing::DoubleNear(-20 - 1.75, 0.01))));
 }
 
 TEST(V3World_MarketTests, MissingGoodGivesWarning)
@@ -680,14 +679,21 @@ TEST(V3World_MarketTests, MissingGoodGivesWarning)
 	mappers::ReligionDef none;
 	none.name = "none";
 
+	std::stringstream log;
+	std::streambuf* cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+
 	market.calcPopOrders(53300, {{"poors", 1}}, {{"english", 1}}, defines, demand, {{"poors", poors}}, {{"english", english}}, {{"none", none}}, {}, {});
+
+	std::cout.rdbuf(cout_buffer);
+
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Good: not recognized in market. Converter will act like it doesn't exist.)"));
 	EXPECT_THAT(market.getMarketBalance(),
 		 testing::UnorderedElementsAre(testing::Pair("extra", testing::DoubleNear(0, 0.01)),
 			  testing::Pair("grain", testing::DoubleNear(100 - 12.48, 0.01)),
 			  testing::Pair("fish", testing::DoubleNear(30 - 3.74, 0.01)),
 			  testing::Pair("meat", testing::DoubleNear(40 - 1.66, 0.01)),
-			  testing::Pair("groceries", testing::DoubleNear(10 - 0.62, 0.01)),
-			  testing::Pair("fruit", testing::DoubleNear(0, 0.01))));
+			  testing::Pair("groceries", testing::DoubleNear(10 - 0.62, 0.01))));
 }
 
 TEST(V3World_MarketTests, MissingCultureGivesWarning)
@@ -743,14 +749,22 @@ TEST(V3World_MarketTests, MissingCultureGivesWarning)
 	sunni.name = "sunni";
 	sunni.taboos.insert("wine");
 
+	std::stringstream log;
+	std::streambuf* cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+
 	market.calcPopOrders(53300, {{"poors", 1}}, {{"french", 1}}, defines, demand, {{"poors", poors}}, {}, {{"sunni", sunni}}, {}, {});
+
+	std::cout.rdbuf(cout_buffer);
+
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Culture: french has no definition. Assuming no obsessions or taboos.)"));
 	EXPECT_THAT(market.getMarketBalance(),
 		 testing::UnorderedElementsAre(testing::Pair("extra", testing::DoubleNear(0, 0.01)),
-			  testing::Pair("grain", testing::DoubleNear(100 - 9.07, 0.01)),
-			  testing::Pair("fish", testing::DoubleNear(30 - 2.72, 0.01)),
-			  testing::Pair("meat", testing::DoubleNear(40 - 1.21, 0.01)),
-			  testing::Pair("groceries", testing::DoubleNear(10 - 0.45, 0.01)),
-			  testing::Pair("wine", testing::DoubleNear(20 - 0.30, 0.01))));
+			  testing::Pair("grain", testing::DoubleNear(100 - 11.73, 0.01)),
+			  testing::Pair("fish", testing::DoubleNear(30 - 3.52, 0.01)),
+			  testing::Pair("meat", testing::DoubleNear(40 - 1.56, 0.01)),
+			  testing::Pair("groceries", testing::DoubleNear(10 - 0.59, 0.01)),
+			  testing::Pair("wine", testing::DoubleNear(20 - 0.78, 0.01))));
 }
 
 TEST(V3World_MarketTests, MissingReligionGivesWarning)
@@ -806,7 +820,15 @@ TEST(V3World_MarketTests, MissingReligionGivesWarning)
 	sunni.name = "sunni";
 	sunni.taboos.insert("wine");
 
+	std::stringstream log;
+	std::streambuf* cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+
 	market.calcPopOrders(53300, {{"poors", 1}}, {{"french", 1}}, defines, demand, {{"poors", poors}}, {{"french", french}}, {}, {}, {});
+
+	std::cout.rdbuf(cout_buffer);
+
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Religion: sunni has no definition. Assuming no taboos.)"));
 	EXPECT_THAT(market.getMarketBalance(),
 		 testing::UnorderedElementsAre(testing::Pair("extra", testing::DoubleNear(0, 0.01)),
 			  testing::Pair("grain", testing::DoubleNear(100 - 12.44, 0.01)),
@@ -823,6 +845,7 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 		 "grain",
 		 "fish",
 		 "meat",
+		 "fruit",
 		 "groceries",
 		 "wine",
 		 "opium",
@@ -865,6 +888,7 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 	market.sell("luxury_clothes", 22.5);
 	market.sell("tea", 20.2);
 	market.sell("glass", 20.2);
+	market.sell("services", 2.27);
 
 	market.buyForBuilding("fabric", 403);
 	market.buyForBuilding("grain", 89);
@@ -946,20 +970,73 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 	popNeedsInput << "entry = { goods = sugar weight = 0.5 max_supply_share = 0.5 min_supply_share = 0.0 }\n";
 	popNeedsInput << "}\n";
 
-	popNeedsInput << "popneed_luxury_items = { default = tea\n";
+	popNeedsInput << "popneed_luxury_items = { default = luxury_clothes\n";
 	popNeedsInput << "entry = { goods = luxury_clothes weight = 1.0 max_supply_share = 0.5 min_supply_share = 0.1 }\n";
 	popNeedsInput << "entry = { goods = luxury_furniture weight = 1.0 max_supply_share = 0.5 min_supply_share = 0.1 }\n";
 	popNeedsInput << "entry = { goods = porcelain weight = 0.33 max_supply_share = 0.5 min_supply_share = 0.1 }\n";
 	popNeedsInput << "}\n";
 
+	popNeedsInput << "popneed_leisure = { default = services\n";
+	popNeedsInput << "entry = { goods = services weight = 0.1 max_supply_share = 1.0 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = small_arms weight = 0.75 max_supply_share = 0.25 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = opium weight = 0.5 max_supply_share = 0.5 min_supply_share = 0.0 }\n";
+	popNeedsInput << "}\n";
 
-	buyPackagesInput << "wealth_8 = { goods = { popneed_basic_food = 118 } }\n";
+	buyPackagesInput << "wealth_8 = { goods = { \n";
+	buyPackagesInput << "popneed_basic_food = 121\n";
+	buyPackagesInput << "popneed_crude_items = 39\n";
+	buyPackagesInput << "popneed_heating = 27\n";
+	buyPackagesInput << "popneed_intoxicants = 60\n";
+	buyPackagesInput << "popneed_simple_clothing = 43\n";
+	buyPackagesInput << "} }\n";
+
+	buyPackagesInput << "wealth_17 = { goods = { \n";
+	buyPackagesInput << "popneed_basic_food = 171\n";
+	buyPackagesInput << "popneed_household_items = 105\n";
+	buyPackagesInput << "popneed_heating = 26\n";
+	buyPackagesInput << "popneed_intoxicants = 79\n";
+	buyPackagesInput << "popneed_standard_clothing = 112\n";
+	buyPackagesInput << "popneed_services = 86\n";
+	buyPackagesInput << "popneed_luxury_drinks = 46\n";
+	buyPackagesInput << "popneed_luxury_items = 39\n";
+	buyPackagesInput << "} }\n";
+
+	buyPackagesInput << "wealth_30 = { goods = { \n";
+	buyPackagesInput << "popneed_luxury_food = 271\n";
+	buyPackagesInput << "popneed_household_items = 209\n";
+	buyPackagesInput << "popneed_heating = 26\n";
+	buyPackagesInput << "popneed_intoxicants = 216\n";
+	buyPackagesInput << "popneed_standard_clothing = 161\n";
+	buyPackagesInput << "popneed_services = 397\n";
+	buyPackagesInput << "popneed_luxury_drinks = 292\n";
+	buyPackagesInput << "popneed_luxury_items = 522\n";
+	buyPackagesInput << "popneed_leisure = 104\n";
+	buyPackagesInput << "} }\n";
+
 
 	goodsInput << "grain = { cost = 20 }\n";
+	goodsInput << "wood = { cost = 20 }\n";
+	goodsInput << "fabric = { cost = 20 }\n";
 	goodsInput << "fish = { cost = 20 }\n";
 	goodsInput << "meat = { cost = 30 }\n";
+	goodsInput << "fruit = { cost = 30 }\n";
+	goodsInput << "services = { cost = 30 }\n";
+	goodsInput << "paper = { cost = 30 }\n";
 	goodsInput << "groceries = { cost = 30 }\n";
-	goodsInput << "wine = { cost = 30 }\n";
+	goodsInput << "furniture = { cost = 30 }\n";
+	goodsInput << "clothes = { cost = 30 }\n";
+	goodsInput << "wine = { cost = 50 }\n";
+	goodsInput << "opium = { cost = 50 }\n";
+	goodsInput << "porcelain = { cost = 70 }\n";
+	goodsInput << "luxury_clothes = { cost = 60 }\n";
+	goodsInput << "luxury_furniture = { cost = 60 }\n";
+	goodsInput << "small_arms = { cost = 60 }\n";
+	goodsInput << "tobacco = { cost = 40 }\n";
+	goodsInput << "glass = { cost = 40 }\n";
+	goodsInput << "sugar = { cost = 30 }\n";
+	goodsInput << "coffee = { cost = 50 }\n";
+	goodsInput << "tea = { cost = 50 }\n";
+	goodsInput << "liquor = { cost = 30 }\n";
 
 	demand.loadPopNeeds(popNeedsInput);
 	demand.loadBuyPackages(buyPackagesInput);
@@ -974,18 +1051,18 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 	peasantsTypeInput << "strata = poor\n";
 	peasantsTypeInput << "consumption_mult = 0.05\n";
 	V3::PopType peasants(peasantsTypeInput);
-	poors.setType("peasants");
+	peasants.setType("peasants");
 
 	std::stringstream midTypeInput;
 	midTypeInput << "strata = middle";
 	V3::PopType mid(midTypeInput);
-	poors.setType("mid");
+	mid.setType("mid");
 
 	std::stringstream richTypeInput;
 	richTypeInput << "strata = rich\n";
 	richTypeInput << "working_adult_ratio = 0.2\n";
 	V3::PopType rich(richTypeInput);
-	poors.setType("rich");
+	rich.setType("rich");
 
 	mappers::CultureDef turkish;
 	turkish.religion = "sunni";
@@ -993,7 +1070,7 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 
 	mappers::CultureDef greek;
 	greek.religion = "orthodox";
-	turkish.obsessions.insert("wine");
+	greek.obsessions.insert("wine");
 
 	mappers::ReligionDef sunni;
 	sunni.taboos.insert("wine");
@@ -1007,7 +1084,7 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 		 {
 			  {"poors", 35904 / size},
 			  {"peasants", 90800 / size},
-			  {"middle", 8600 / size},
+			  {"mid", 8600 / size},
 			  {"rich", 1040 / size},
 		 },
 		 {
@@ -1033,12 +1110,29 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 		 {},
 		 {});
 	EXPECT_THAT(market.getMarketBalance(),
-		 testing::UnorderedElementsAre(testing::Pair("small_arms", testing::DoubleNear(0.04, 0.01)),
-			  testing::Pair("grain", testing::DoubleNear(12.1, 0.1)),
-			  testing::Pair("fish", testing::DoubleNear(7, 0.1)),
-			  testing::Pair("meat", testing::DoubleNear(0.7, 0.1)),
+		 testing::UnorderedElementsAre(testing::Pair("small_arms", testing::DoubleNear(30.16, 0.02)),
+			  testing::Pair("clothes", testing::DoubleNear(249.1, 0.6)),
+			  testing::Pair("coffee", testing::DoubleNear(90.6, 0.4)),
+			  testing::Pair("fabric", testing::DoubleNear(533.3, 0.5)),
+			  testing::Pair("fruit", testing::DoubleNear(44.8, 0.1)),
+			  testing::Pair("furniture", testing::DoubleNear(69.8, 0.4)),
+			  testing::Pair("fish", testing::DoubleNear(434, 0.6)),
+			  testing::Pair("grain", testing::DoubleNear(743.9, 0.6)),
+			  testing::Pair("glass", testing::DoubleNear(19.93, 0.15)),
+			  testing::Pair("liquor", testing::DoubleNear(38.8, 0.15)),
+			  testing::Pair("luxury_clothes", testing::DoubleNear(22.25, 0.1)),
+			  testing::Pair("luxury_furniture", testing::DoubleNear(34.61, 0.1)),
+			  testing::Pair("meat", testing::DoubleNear(125.3, 0.2)),
+			  testing::Pair("opium", testing::DoubleNear(68.1, 0.1)),
+			  testing::Pair("paper", testing::DoubleNear(-5.3266, 0.01)),
+			  testing::Pair("porcelain", testing::DoubleNear(45.18, 0.1)),
+			  testing::Pair("services", testing::DoubleNear(-0.45, 0.4)),
+			  testing::Pair("sugar", testing::DoubleNear(263.9, 0.2)),
+			  testing::Pair("tea", testing::DoubleNear(19.72, 0.25)),
+			  testing::Pair("tobacco", testing::DoubleNear(401.8, 0.8)),
+			  testing::Pair("wood", testing::DoubleNear(384.2, 0.25)),
 			  testing::Pair("groceries", testing::DoubleNear(0, 0.01)),
-			  testing::Pair("wine", testing::DoubleNear(0.3, 0.2))));
+			  testing::Pair("wine", testing::DoubleNear(-0.3, 0.3))));
 }
 
 // Test Local Goods

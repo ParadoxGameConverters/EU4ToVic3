@@ -41,6 +41,10 @@ void mappers::CultureDefinitionEntry::registerkeys()
 		for (const auto& trait: commonItems::getStrings(theStream))
 			cultureDef.traits.emplace(trait);
 	});
+	registerKeyword("obsessions", [this](std::istream& theStream) {
+		for (const auto& obsession: commonItems::getStrings(theStream))
+			cultureDef.obsessions.emplace(obsession);
+	});
 	registerKeyword("male_common_first_names", [this](std::istream& theStream) {
 		for (const auto& name: commonItems::getStrings(theStream))
 		{

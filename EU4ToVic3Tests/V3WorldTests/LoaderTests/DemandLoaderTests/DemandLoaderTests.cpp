@@ -26,7 +26,7 @@ TEST(V3World_DemandLoaderTests, DemandLoaderCanLoadDemandComponents)
 	};
 
 	EXPECT_EQ(goodsNeedsMap, demandLoader.getGoodsNeedsMap());
-	EXPECT_EQ(2, demandLoader.getGoodsMap().size());
+	EXPECT_EQ(3, demandLoader.getGoodsMap().size());
 	EXPECT_EQ(2, demandLoader.getPopneedsMap().size());
 	EXPECT_EQ(2, demandLoader.getWealthConsumptionMap().size());
 

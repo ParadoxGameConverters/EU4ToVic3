@@ -19,9 +19,9 @@ class Market
 	[[nodiscard]] std::map<std::string, double> getMarketBalance() const;
 	[[nodiscard]] std::map<std::string, double> getMarketShare(const std::vector<std::string>& goods) const;
 
-	void sell(const std::string& good, const double amount) { sellOrders.at(good) += amount; }
-	void buyForBuilding(const std::string& good, double const amount) { buyOrdersBuildings.at(good) += amount; }
-	void buyForPop(const std::string& good, double const amount) { buyOrdersPops.at(good) += amount; } // Public for Debug purposes
+	void sell(const std::string& good, double amount);
+	void buyForBuilding(const std::string& good, double amount);
+	void buyForPop(const std::string& good, double amount); // Public for Debug purposes
 	void calcPopOrders(int popSize,
 		 const std::map<std::string, double>& jobData,
 		 const std::map<std::string, double>& cultureData,
@@ -34,21 +34,11 @@ class Market
 		 const std::map<std::string, Law>& lawsMap);
 
   private:
-	std::map<std::string, double> sellOrders;
-	std::map<std::string, double> buyOrdersBuildings;
-	std::map<std::string, double> buyOrdersPops;
-
 	static int estimateWealth(const std::string& strata);
 	static std::set<std::string> getObsessions(const std::string& culture, const std::map<std::string, mappers::CultureDef>& cultures);
 	static std::set<std::string> getTaboos(const std::string& culture,
 		 const std::map<std::string, mappers::CultureDef>& cultures,
 		 const std::map<std::string, mappers::ReligionDef>& religions);
-	static std::vector<std::string> enumerateGoods(const std::map<std::string, GoodsFulfillment>& map);
-	static std::map<std::string, double> initCulturalFactors(const std::map<std::string, Good>& goodsMap);
-	static std::map<std::string, double> estimateCulturalPrevalence(const std::map<std::string, double>& cultureData,
-		 const std::map<std::string, mappers::CultureDef>& cultures,
-		 const std::map<std::string, mappers::ReligionDef>& religions,
-		 const std::map<std::string, Good>& goodsMap); // How much the market leans toward a certain good being a taboo or an obsession.
 	static double calcCulturalFactor(double culturalPrevalence);
 	static double calcPopFactor(double size,
 		 const PopType& popType,
@@ -61,6 +51,26 @@ class Market
 	static double calcPurchaseWeight(const std::string& goodName, double marketShare, const GoodsFulfillment& fulfillment, double culturalPrevalence);
 	static double calcCulturalNeedFactor(const std::vector<std::string>& goods, const std::map<std::string, double>& culturalPrevalence);
 	static double calcAddedWorkingPopPercent(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap);
+
+	[[nodsicard]] bool validateGood(const std::string& good) const;
+	[[nodiscard]] std::vector<std::string> enumerateGoods(const std::map<std::string, GoodsFulfillment>& map) const;
+	[[nodiscard]] std::map<std::string, double> initCulturalFactors() const;
+
+	// How much the market leans toward a certain good being a taboo or an obsession.
+	std::map<std::string, double> estimateCulturalPrevalence(const std::map<std::string, double>& cultureData,
+		 const std::map<std::string, mappers::CultureDef>& cultures,
+		 const std::map<std::string, mappers::ReligionDef>& religions) const;
+
+	std::map<std::string, double> sellOrders;
+	std::map<std::string, double> buyOrdersBuildings;
+	std::map<std::string, double> buyOrdersPops;
+
+	static inline std::set<std::string> popTypeErrors = {};
+	static inline std::set<std::string> goodsErrors = {};
+	static inline std::set<std::string> popneedsErrors = {};
+	static inline std::set<std::string> cultureErrors = {};
+	static inline std::set<std::string> religionErrors = {};
+	static inline std::set<int> wealthErrors = {};
 };
 } // namespace V3
 
