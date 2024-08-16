@@ -5,6 +5,7 @@
 #include "Configuration.h"
 #include "CountryManager/NationalSymbol/EU4CustomColors.h"
 #include "DatingData.h"
+#include "EconomyManager/Building/Building.h"
 #include "EconomyManager/NationalBudget/Sector.h"
 #include "FlagCrafter/FlagCrafter.h"
 #include "IGIdeologiesMapper/IGIdeologiesMapping.h"
@@ -163,6 +164,7 @@ class Country: commonItems::parser
 	[[nodiscard]] const auto& getUnownedCoreSubStates() const { return unownedCoreSubStates; }
 	[[nodiscard]] const auto& getUnownedProvinces() const { return unownedProvinces; }
 	[[nodiscard]] bool getWasGP() const { return processedData.wasGP; }
+	[[nodiscard]] const auto& getOverlord() { return processedData.overlordTag; }
 	void addSubState(const std::shared_ptr<SubState>& theSubState) { subStates.push_back(theSubState); }
 	void addUnownedCoreSubState(const std::shared_ptr<SubState>& theSubState) { unownedCoreSubStates.push_back(theSubState); }
 	void addUnownedProvinces(const std::set<std::string>& theProvinces) { unownedProvinces.insert(theProvinces.begin(), theProvinces.end()); }
@@ -227,7 +229,7 @@ class Country: commonItems::parser
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::map<std::string, Tech>& techMap) const;
 
-	void distributeGovAdmins(double target, int PMGeneration, const std::map<std::string, Tech>& techMap) const;
+	void distributeGovAdmins(double target, int PMGeneration, const std::map<std::string, Tech>& techMap, const V3::Building& blueprint) const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> topPercentileStatesByPop(double percentile) const;
 	[[nodiscard]] double calculateBureaucracyUsage(const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const;
 	void addSector(const std::string& sectorName, const std::shared_ptr<Sector>& sector) { processedData.industrySectors.emplace(sectorName, sector); }

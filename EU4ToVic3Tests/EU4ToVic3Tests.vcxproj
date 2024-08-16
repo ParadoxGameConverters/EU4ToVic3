@@ -200,6 +200,8 @@
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\StateModifierTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\StateTests.cpp" />
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\SubStateTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\OwnershipSectorTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\OwnershipTests.cpp" />
     <ClCompile Include="V3WorldTests\EconomyManagerTests\DemandTests\BuyPackageTests.cpp" />
     <ClCompile Include="V3WorldTests\EconomyManagerTests\DemandTests\GoodTests.cpp" />
     <ClCompile Include="V3WorldTests\EconomyManagerTests\DemandTests\MarketTests.cpp" />
@@ -215,6 +217,7 @@
     <ClCompile Include="V3WorldTests\EconomyManagerTests\NationalBudgetTests\SectorTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\BuildingGroupLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\BuildingLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\OwnershipLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\ProductionMethodGroupLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\ProductionMethodLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\CountryDefinitionLoaderTests\CountryDefinitionLoaderTests.cpp" />
@@ -734,6 +737,11 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\new_eu4_culture_map.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\configurables\economy\ownership.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables/economy</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>

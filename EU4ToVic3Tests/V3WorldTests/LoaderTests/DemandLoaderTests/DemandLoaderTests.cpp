@@ -1,4 +1,4 @@
-#include "Loaders/DemandLoader/DemandLoader.h";
+#include "Loaders/DemandLoader/DemandLoader.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 

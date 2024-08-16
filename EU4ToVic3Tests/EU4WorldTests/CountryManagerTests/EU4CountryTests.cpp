@@ -440,7 +440,7 @@ TEST(EU4World_EU4CountryTests, DependentStuffCanBeSet)
 {
 	std::stringstream input;
 	input << "overlord=SWE\n";
-	input << "liberty_desire=6.600\n";
+	input << "cached_liberty_desire=6.600\n";
 	const EU4::Country country("TAG", input);
 
 	EXPECT_EQ("SWE", country.getOverLord());
