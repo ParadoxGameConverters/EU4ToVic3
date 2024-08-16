@@ -81,7 +81,7 @@ TEST(V3World_MarketTests, FormulaPredictsSinglePopSingleNeed)
 	popNeedsInput << "entry = { goods = groceries weight = 0.75 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
 	popNeedsInput << "}\n";
 
-	buyPackagesInput << "wealth_7 = { goods = { popneed_basic_food = 118 } }\n";
+	buyPackagesInput << "wealth_8 = { goods = { popneed_basic_food = 118 } }\n";
 
 	goodsInput << "grain = { cost = 20 }\n";
 	goodsInput << "fish = { cost = 20 }\n";
@@ -116,9 +116,73 @@ TEST(V3World_MarketTests, FormulaPredictsSinglePopSingleNeed)
 			  testing::Pair("fruit", testing::DoubleNear(20 - 0.78, 0.01))));
 }
 
+TEST(V3World_MarketTests, FormulaBuildingEffectOnNeed)
+{
+	// Building buy orders discount supply by 1/2.
+	V3::Market market({"grain", "fish", "meat", "groceries", "fruit", "extra"});
+	market.sell("grain", 100);
+	market.sell("fish", 30);
+	market.sell("meat", 40);
+	market.sell("groceries", 10);
+	market.sell("fruit", 20);
+	market.buyForBuilding("grain", 90);
+	market.buyForBuilding("meat", 40);
+
+	V3::Vic3DefinesLoader defines;
+	defines.loadDefines(modFS);
+
+	V3::DemandLoader demand;
+	std::stringstream popNeedsInput;
+	std::stringstream buyPackagesInput;
+	std::stringstream goodsInput;
+
+	popNeedsInput << "popneed_basic_food = { default = grain\n";
+	popNeedsInput << "entry = { goods = grain weight = 1 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = fish weight = 1 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = meat weight = 0.5 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = fruit weight = 0.5 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = groceries weight = 0.75 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "}\n";
+
+	buyPackagesInput << "wealth_8 = { goods = { popneed_basic_food = 118 } }\n";
+
+	goodsInput << "grain = { cost = 20 }\n";
+	goodsInput << "fish = { cost = 20 }\n";
+	goodsInput << "meat = { cost = 30 }\n";
+	goodsInput << "groceries = { cost = 30 }\n";
+	goodsInput << "fruit = { cost = 30 }\n";
+	goodsInput << "extra = { cost = 90 }\n";
+
+	demand.loadPopNeeds(popNeedsInput);
+	demand.loadBuyPackages(buyPackagesInput);
+	demand.loadGoods(goodsInput);
+
+	std::stringstream popTypeInput;
+	popTypeInput << "strata = poor";
+	V3::PopType poors(popTypeInput);
+	poors.setType("poors");
+
+	mappers::CultureDef english;
+	english.religion = "none";
+	english.name = "english";
+
+	mappers::ReligionDef none;
+	none.name = "none";
+
+	market.calcPopOrders(53300, {{"poors", 1}}, {{"english", 1}}, defines, demand, {{"poors", poors}}, {{"english", english}}, {{"none", none}}, {}, {});
+	EXPECT_THAT(market.getMarketBalance(),
+		 testing::UnorderedElementsAre(testing::Pair("extra", testing::DoubleNear(0, 0.01)),
+			  testing::Pair("grain", testing::DoubleNear(100 - 9.61, 0.01)),
+			  testing::Pair("fish", testing::DoubleNear(30 - 5.24, 0.01)),
+			  testing::Pair("meat", testing::DoubleNear(40 - 1.16, 0.01)),
+			  testing::Pair("groceries", testing::DoubleNear(10 - 0.87, 0.01)),
+			  testing::Pair("fruit", testing::DoubleNear(20 - 1.16, 0.01))));
+}
+
 TEST(V3World_MarketTests, FormulaPredictsPeasantsNeed)
 {
-	// Single Pop, Single Need: Poor Food.
+	// A pop with a non-default consumption_mult changes the size of the need.
+	// (We incorporated this into the popFactor instead of the buy package size).
 	V3::Market market({"grain", "fish", "meat", "groceries", "fruit", "extra"});
 	market.sell("grain", 100);
 	market.sell("fish", 30);
@@ -142,7 +206,7 @@ TEST(V3World_MarketTests, FormulaPredictsPeasantsNeed)
 	popNeedsInput << "entry = { goods = groceries weight = 0.75 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
 	popNeedsInput << "}\n";
 
-	buyPackagesInput << "wealth_7 = { goods = { popneed_basic_food = 118 } }\n";
+	buyPackagesInput << "wealth_8 = { goods = { popneed_basic_food = 118 } }\n";
 
 	goodsInput << "grain = { cost = 20 }\n";
 	goodsInput << "fish = { cost = 20 }\n";
@@ -181,7 +245,7 @@ TEST(V3World_MarketTests, FormulaPredictsPeasantsNeed)
 
 TEST(V3World_MarketTests, FormulaPredictsAristocratsNeed)
 {
-	// Single Pop, Single Need: Poor Food.
+	// A pop with a non-default working_adult_ratio changes the popFactor.
 	V3::Market market({"grain", "fish", "meat", "groceries", "fruit", "extra"});
 	market.sell("grain", 100);
 	market.sell("fish", 30);
@@ -243,7 +307,7 @@ TEST(V3World_MarketTests, FormulaPredictsAristocratsNeed)
 
 TEST(V3World_MarketTests, FormulaPredictsObsessionsNeed)
 {
-	// Single Pop, Single Need: Poor Food.
+	// Cultural Obsession increases minimum weight, obsessed goods, and overall need.
 	V3::Market market({"grain", "fish", "meat", "groceries", "wine", "extra"});
 	market.sell("grain", 100);
 	market.sell("fish", 30);
@@ -267,7 +331,7 @@ TEST(V3World_MarketTests, FormulaPredictsObsessionsNeed)
 	popNeedsInput << "entry = { goods = groceries weight = 0.75 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
 	popNeedsInput << "}\n";
 
-	buyPackagesInput << "wealth_7 = { goods = { popneed_basic_food = 118 } }\n";
+	buyPackagesInput << "wealth_8 = { goods = { popneed_basic_food = 118 } }\n";
 
 	goodsInput << "grain = { cost = 20 }\n";
 	goodsInput << "fish = { cost = 20 }\n";
@@ -288,6 +352,7 @@ TEST(V3World_MarketTests, FormulaPredictsObsessionsNeed)
 	mappers::CultureDef french;
 	french.religion = "none";
 	french.name = "french";
+	french.obsessions.insert("wine");
 
 	mappers::ReligionDef none;
 	none.name = "none";
@@ -302,10 +367,10 @@ TEST(V3World_MarketTests, FormulaPredictsObsessionsNeed)
 			  testing::Pair("wine", testing::DoubleNear(20 - 3.32, 0.01))));
 }
 
-
 TEST(V3World_MarketTests, FormulaPredictsTaboosNeed)
 {
-	// Single Pop, Single Need: Poor Food.
+	// Religious Taboo suppresses both the tabooed goods and the overall need.
+   // TODO(Gawquon) Cap at +-25%
 	V3::Market market({"grain", "fish", "meat", "groceries", "fruit", "extra"});
 	market.sell("grain", 100);
 	market.sell("fish", 30);
@@ -329,7 +394,7 @@ TEST(V3World_MarketTests, FormulaPredictsTaboosNeed)
 	popNeedsInput << "entry = { goods = groceries weight = 0.75 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
 	popNeedsInput << "}\n";
 
-	buyPackagesInput << "wealth_7 = { goods = { popneed_basic_food = 118 } }\n";
+	buyPackagesInput << "wealth_8 = { goods = { popneed_basic_food = 118 } }\n";
 
 	goodsInput << "grain = { cost = 20 }\n";
 	goodsInput << "fish = { cost = 20 }\n";
@@ -351,12 +416,13 @@ TEST(V3World_MarketTests, FormulaPredictsTaboosNeed)
 	english.religion = "none";
 	english.name = "english";
 
-	mappers::ReligionDef none;
-	none.name = "none";
-	none.taboos.insert("grain");
-	none.taboos.insert("fish");
+	mappers::ReligionDef carnivore;
+	carnivore.name = "carnivore";
+	carnivore.taboos.insert("grain");
+	carnivore.taboos.insert("fish");
 
-	market.calcPopOrders(53300, {{"poors", 1}}, {{"english", 1}}, defines, demand, {{"poors", poors}}, {{"english", english}}, {{"none", none}}, {}, {});
+	market
+		 .calcPopOrders(53300, {{"poors", 1}}, {{"english", 1}}, defines, demand, {{"poors", poors}}, {{"english", english}}, {{"carnivore", carnivore}}, {}, {});
 	EXPECT_THAT(market.getMarketBalance(),
 		 testing::UnorderedElementsAre(testing::Pair("extra", testing::DoubleNear(0, 0.01)),
 			  testing::Pair("grain", testing::DoubleNear(100 - 4.79, 0.01)),
@@ -366,10 +432,9 @@ TEST(V3World_MarketTests, FormulaPredictsTaboosNeed)
 			  testing::Pair("fruit", testing::DoubleNear(20 - 0.64, 0.01))));
 }
 
-
 TEST(V3World_MarketTests, FormulaPredictsObsessionsAndTaboosNeed)
 {
-	// Single Pop, Single Need: Poor Food.
+	// The French Obsession for Wine and the Sunni Taboo on Wine cancel each other out.
 	V3::Market market({"grain", "fish", "meat", "groceries", "wine", "extra"});
 	market.sell("grain", 100);
 	market.sell("fish", 30);
@@ -393,7 +458,7 @@ TEST(V3World_MarketTests, FormulaPredictsObsessionsAndTaboosNeed)
 	popNeedsInput << "entry = { goods = groceries weight = 0.75 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
 	popNeedsInput << "}\n";
 
-	buyPackagesInput << "wealth_7 = { goods = { popneed_basic_food = 118 } }\n";
+	buyPackagesInput << "wealth_8 = { goods = { popneed_basic_food = 118 } }\n";
 
 	goodsInput << "grain = { cost = 20 }\n";
 	goodsInput << "fish = { cost = 20 }\n";
@@ -412,14 +477,15 @@ TEST(V3World_MarketTests, FormulaPredictsObsessionsAndTaboosNeed)
 	poors.setType("poors");
 
 	mappers::CultureDef french;
-	french.religion = "none";
+	french.religion = "sunni";
 	french.name = "french";
+	french.obsessions.insert("wine");
 
-	mappers::ReligionDef none;
-	none.name = "none";
-	none.taboos.insert("wine");
+	mappers::ReligionDef sunni;
+	sunni.name = "sunni";
+	sunni.taboos.insert("wine");
 
-	market.calcPopOrders(53300, {{"poors", 1}}, {{"french", 1}}, defines, demand, {{"poors", poors}}, {{"french", french}}, {{"none", none}}, {}, {});
+	market.calcPopOrders(53300, {{"poors", 1}}, {{"french", 1}}, defines, demand, {{"poors", poors}}, {{"french", french}}, {{"sunni", sunni}}, {}, {});
 	EXPECT_THAT(market.getMarketBalance(),
 		 testing::UnorderedElementsAre(testing::Pair("extra", testing::DoubleNear(0, 0.01)),
 			  testing::Pair("grain", testing::DoubleNear(100 - 11.73, 0.01)),
@@ -431,7 +497,7 @@ TEST(V3World_MarketTests, FormulaPredictsObsessionsAndTaboosNeed)
 
 TEST(V3World_MarketTests, FormulaPredictsEmpoweredWomenNeed)
 {
-	// Single Pop, Single Need: Poor Food.
+	// Country passes in a law with the working_adult_ratio_add modifier.
 	V3::Market market({"grain", "fish", "meat", "groceries", "fruit", "extra"});
 	market.sell("grain", 100);
 	market.sell("fish", 30);
@@ -455,7 +521,7 @@ TEST(V3World_MarketTests, FormulaPredictsEmpoweredWomenNeed)
 	popNeedsInput << "entry = { goods = groceries weight = 0.75 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
 	popNeedsInput << "}\n";
 
-	buyPackagesInput << "wealth_7 = { goods = { popneed_basic_food = 118 } }\n";
+	buyPackagesInput << "wealth_8 = { goods = { popneed_basic_food = 118 } }\n";
 
 	goodsInput << "grain = { cost = 20 }\n";
 	goodsInput << "fish = { cost = 20 }\n";
@@ -503,7 +569,253 @@ TEST(V3World_MarketTests, FormulaPredictsEmpoweredWomenNeed)
 			  testing::Pair("fruit", testing::DoubleNear(20 - 0.81, 0.01))));
 }
 
+TEST(V3World_MarketTests, FormulaAssumesMinimumSupply)
+{
+	// All supply is either 0 or negative.
+	// Should avoid / 0 errors.
+	// Predicted values should be positive, non-zero.
+	V3::Market market({"grain", "fish", "meat", "groceries", "fruit", "extra"});
+	market.buyForBuilding("fish", 20);
+	market.buyForBuilding("fruit", 20);
+
+	V3::Vic3DefinesLoader defines;
+	defines.loadDefines(modFS);
+
+	V3::DemandLoader demand;
+	std::stringstream popNeedsInput;
+	std::stringstream buyPackagesInput;
+	std::stringstream goodsInput;
+
+	popNeedsInput << "popneed_basic_food = { default = grain\n";
+	popNeedsInput << "entry = { goods = grain weight = 1 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = fish weight = 1 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = meat weight = 0.5 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = fruit weight = 0.5 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = groceries weight = 0.75 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "}\n";
+
+	buyPackagesInput << "wealth_8 = { goods = { popneed_basic_food = 118 } }\n";
+
+	goodsInput << "grain = { cost = 20 }\n";
+	goodsInput << "fish = { cost = 20 }\n";
+	goodsInput << "meat = { cost = 30 }\n";
+	goodsInput << "groceries = { cost = 30 }\n";
+	goodsInput << "fruit = { cost = 30 }\n";
+	goodsInput << "extra = { cost = 90 }\n";
+
+	demand.loadPopNeeds(popNeedsInput);
+	demand.loadBuyPackages(buyPackagesInput);
+	demand.loadGoods(goodsInput);
+
+	std::stringstream popTypeInput;
+	popTypeInput << "strata = poor";
+	V3::PopType poors(popTypeInput);
+	poors.setType("poors");
+
+	mappers::CultureDef english;
+	english.religion = "none";
+	english.name = "english";
+
+	mappers::ReligionDef none;
+	none.name = "none";
+
+	market.calcPopOrders(53300, {{"poors", 1}}, {{"english", 1}}, defines, demand, {{"poors", poors}}, {{"english", english}}, {{"none", none}}, {}, {});
+	EXPECT_THAT(market.getMarketBalance(),
+		 testing::UnorderedElementsAre(testing::Pair("extra", testing::DoubleNear(0, 0.01)),
+			  testing::Pair("grain", testing::DoubleNear(100 - 5.24, 0.01)),
+			  testing::Pair("fish", testing::DoubleNear(30 - 5.24, 0.01)),
+			  testing::Pair("meat", testing::DoubleNear(40 - 1.75, 0.01)),
+			  testing::Pair("groceries", testing::DoubleNear(10 - 2.62, 0.01)),
+			  testing::Pair("fruit", testing::DoubleNear(20 - 1.75, 0.01))));
+}
+
+TEST(V3World_MarketTests, MissingGoodGivesWarning)
+{
+	// Market does not load fruit. Expect to raise a Log(LogLevel::Error) about this. Don't crash.
+	V3::Market market({"grain", "fish", "meat", "groceries", "extra"});
+	market.sell("grain", 100);
+	market.sell("fish", 30);
+	market.sell("meat", 40);
+	market.sell("groceries", 10);
+	market.sell("fruit", 20);
+
+	V3::Vic3DefinesLoader defines;
+	defines.loadDefines(modFS);
+
+	V3::DemandLoader demand;
+	std::stringstream popNeedsInput;
+	std::stringstream buyPackagesInput;
+	std::stringstream goodsInput;
+
+	popNeedsInput << "popneed_basic_food = { default = grain\n";
+	popNeedsInput << "entry = { goods = grain weight = 1 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = fish weight = 1 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = meat weight = 0.5 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = fruit weight = 0.5 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = groceries weight = 0.75 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "}\n";
+
+	buyPackagesInput << "wealth_8 = { goods = { popneed_basic_food = 118 } }\n";
+
+	goodsInput << "grain = { cost = 20 }\n";
+	goodsInput << "fish = { cost = 20 }\n";
+	goodsInput << "meat = { cost = 30 }\n";
+	goodsInput << "groceries = { cost = 30 }\n";
+	goodsInput << "fruit = { cost = 30 }\n";
+	goodsInput << "extra = { cost = 90 }\n";
+
+	demand.loadPopNeeds(popNeedsInput);
+	demand.loadBuyPackages(buyPackagesInput);
+	demand.loadGoods(goodsInput);
+
+	std::stringstream popTypeInput;
+	popTypeInput << "strata = poor";
+	V3::PopType poors(popTypeInput);
+	poors.setType("poors");
+
+	mappers::CultureDef english;
+	english.religion = "none";
+	english.name = "english";
+
+	mappers::ReligionDef none;
+	none.name = "none";
+
+	market.calcPopOrders(53300, {{"poors", 1}}, {{"english", 1}}, defines, demand, {{"poors", poors}}, {{"english", english}}, {{"none", none}}, {}, {});
+	EXPECT_THAT(market.getMarketBalance(),
+		 testing::UnorderedElementsAre(testing::Pair("extra", testing::DoubleNear(0, 0.01)),
+			  testing::Pair("grain", testing::DoubleNear(100 - 12.48, 0.01)),
+			  testing::Pair("fish", testing::DoubleNear(30 - 3.74, 0.01)),
+			  testing::Pair("meat", testing::DoubleNear(40 - 1.66, 0.01)),
+			  testing::Pair("groceries", testing::DoubleNear(10 - 0.62, 0.01)),
+			  testing::Pair("fruit", testing::DoubleNear(0, 0.01))));
+}
+
+TEST(V3World_MarketTests, MissingCultureGivesWarning)
+{
+	// Input Culture lacks a CultureDef mapping. Expect to raise a Log(LogLevel::Warning) about this. Don't crash.
+	V3::Market market({"grain", "fish", "meat", "groceries", "wine", "extra"});
+	market.sell("grain", 100);
+	market.sell("fish", 30);
+	market.sell("meat", 40);
+	market.sell("groceries", 10);
+	market.sell("wine", 20);
+
+	V3::Vic3DefinesLoader defines;
+	defines.loadDefines(modFS);
+
+	V3::DemandLoader demand;
+	std::stringstream popNeedsInput;
+	std::stringstream buyPackagesInput;
+	std::stringstream goodsInput;
+
+	popNeedsInput << "popneed_basic_food = { default = grain\n";
+	popNeedsInput << "entry = { goods = grain weight = 1 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = fish weight = 1 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = meat weight = 0.5 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = wine weight = 0.5 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = groceries weight = 0.75 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "}\n";
+
+	buyPackagesInput << "wealth_8 = { goods = { popneed_basic_food = 118 } }\n";
+
+	goodsInput << "grain = { cost = 20 }\n";
+	goodsInput << "fish = { cost = 20 }\n";
+	goodsInput << "meat = { cost = 30 }\n";
+	goodsInput << "groceries = { cost = 30 }\n";
+	goodsInput << "wine = { cost = 30 }\n";
+	goodsInput << "extra = { cost = 90 }\n";
+
+	demand.loadPopNeeds(popNeedsInput);
+	demand.loadBuyPackages(buyPackagesInput);
+	demand.loadGoods(goodsInput);
+
+	std::stringstream popTypeInput;
+	popTypeInput << "strata = poor";
+	V3::PopType poors(popTypeInput);
+	poors.setType("poors");
+
+	mappers::CultureDef french;
+	french.religion = "sunni";
+	french.name = "french";
+	french.obsessions.insert("wine");
+
+	mappers::ReligionDef sunni;
+	sunni.name = "sunni";
+	sunni.taboos.insert("wine");
+
+	market.calcPopOrders(53300, {{"poors", 1}}, {{"french", 1}}, defines, demand, {{"poors", poors}}, {}, {{"sunni", sunni}}, {}, {});
+	EXPECT_THAT(market.getMarketBalance(),
+		 testing::UnorderedElementsAre(testing::Pair("extra", testing::DoubleNear(0, 0.01)),
+			  testing::Pair("grain", testing::DoubleNear(100 - 9.07, 0.01)),
+			  testing::Pair("fish", testing::DoubleNear(30 - 2.72, 0.01)),
+			  testing::Pair("meat", testing::DoubleNear(40 - 1.21, 0.01)),
+			  testing::Pair("groceries", testing::DoubleNear(10 - 0.45, 0.01)),
+			  testing::Pair("wine", testing::DoubleNear(20 - 0.30, 0.01))));
+}
+
+TEST(V3World_MarketTests, MissingReligionGivesWarning)
+{
+	// Input religion lacks a ReligionDef mapping. Expect to raise a Log(LogLevel::Warning) about this. Don't crash.
+	V3::Market market({"grain", "fish", "meat", "groceries", "wine", "extra"});
+	market.sell("grain", 100);
+	market.sell("fish", 30);
+	market.sell("meat", 40);
+	market.sell("groceries", 10);
+	market.sell("wine", 20);
+
+	V3::Vic3DefinesLoader defines;
+	defines.loadDefines(modFS);
+
+	V3::DemandLoader demand;
+	std::stringstream popNeedsInput;
+	std::stringstream buyPackagesInput;
+	std::stringstream goodsInput;
+
+	popNeedsInput << "popneed_basic_food = { default = grain\n";
+	popNeedsInput << "entry = { goods = grain weight = 1 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = fish weight = 1 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = meat weight = 0.5 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = wine weight = 0.5 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = groceries weight = 0.75 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "}\n";
+
+	buyPackagesInput << "wealth_8 = { goods = { popneed_basic_food = 118 } }\n";
+
+	goodsInput << "grain = { cost = 20 }\n";
+	goodsInput << "fish = { cost = 20 }\n";
+	goodsInput << "meat = { cost = 30 }\n";
+	goodsInput << "groceries = { cost = 30 }\n";
+	goodsInput << "wine = { cost = 30 }\n";
+	goodsInput << "extra = { cost = 90 }\n";
+
+	demand.loadPopNeeds(popNeedsInput);
+	demand.loadBuyPackages(buyPackagesInput);
+	demand.loadGoods(goodsInput);
+
+	std::stringstream popTypeInput;
+	popTypeInput << "strata = poor";
+	V3::PopType poors(popTypeInput);
+	poors.setType("poors");
+
+	mappers::CultureDef french;
+	french.religion = "sunni";
+	french.name = "french";
+	french.obsessions.insert("wine");
+
+	mappers::ReligionDef sunni;
+	sunni.name = "sunni";
+	sunni.taboos.insert("wine");
+
+	market.calcPopOrders(53300, {{"poors", 1}}, {{"french", 1}}, defines, demand, {{"poors", poors}}, {{"french", french}}, {}, {}, {});
+	EXPECT_THAT(market.getMarketBalance(),
+		 testing::UnorderedElementsAre(testing::Pair("extra", testing::DoubleNear(0, 0.01)),
+			  testing::Pair("grain", testing::DoubleNear(100 - 12.44, 0.01)),
+			  testing::Pair("fish", testing::DoubleNear(30 - 3.73, 0.01)),
+			  testing::Pair("meat", testing::DoubleNear(40 - 1.66, 0.01)),
+			  testing::Pair("groceries", testing::DoubleNear(10 - 0.62, 0.01)),
+			  testing::Pair("wine", testing::DoubleNear(20 - 3.32, 0.01))));
+}
+
 // Test Local Goods
-// Test 0s
 // Test nation-wide
 // Test multi-package

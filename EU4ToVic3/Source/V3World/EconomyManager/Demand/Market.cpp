@@ -24,6 +24,7 @@ std::map<std::string, double> V3::Market::getMarketBalance() const
 	return marketBalance;
 }
 
+// Public for Debug purposes
 std::map<std::string, double> V3::Market::getMarketShare(const std::vector<std::string>& goods) const
 {
 	double totalAdjustedOrders = 0;
@@ -31,7 +32,7 @@ std::map<std::string, double> V3::Market::getMarketShare(const std::vector<std::
 
 	for (const std::string& good: goods)
 	{
-		const double adjustedOrder = sellOrders.at(good) - 0.5 * buyOrdersBuildings.at(good);
+		const double adjustedOrder = std::max(sellOrders.at(good) - 0.5 * buyOrdersBuildings.at(good), 1.0);
 		totalAdjustedOrders += adjustedOrder;
 		adjustedOrders[good] = adjustedOrder;
 	}
@@ -39,7 +40,7 @@ std::map<std::string, double> V3::Market::getMarketShare(const std::vector<std::
 	std::map<std::string, double> marketShare;
 	for (const auto& [good, amount]: adjustedOrders)
 	{
-		marketShare[good] = amount / std::max(totalAdjustedOrders, 1.0);
+		marketShare[good] = amount / totalAdjustedOrders;
 	}
 
 	return marketShare;
@@ -49,11 +50,11 @@ int V3::Market::estimateWealth(const std::string& strata)
 {
 	if (strata == "poor")
 	{
-		return 7;
+		return 8;
 	}
 	if (strata == "middle")
 	{
-		return 12;
+		return 17;
 	}
 	if (strata == "rich")
 	{
@@ -181,7 +182,7 @@ double V3::Market::calcPurchaseWeight(const std::string& goodName,
 	// Obsessions set minimum weight at 1.
 	// Note(Gawquon): Because we already averaged out the effects of taboos/obsessions,
 	// this minimum weight will be slightly inaccurate in populations
-	// with a high prevalence of both the taboo and the obsession for  a given good.
+	// with a high prevalence of both the taboo and the obsession for a given good.
 
 	// Ex: A France could have 50% French pops(obsession Wine) and a 50% Muslim pops(taboo Wine).
 	// We'd underestimate the Wine demand from the increase in minimum weights,

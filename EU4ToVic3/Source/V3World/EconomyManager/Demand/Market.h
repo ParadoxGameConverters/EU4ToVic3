@@ -21,7 +21,7 @@ class Market
 
 	void sell(const std::string& good, const double amount) { sellOrders.at(good) += amount; }
 	void buyForBuilding(const std::string& good, double const amount) { buyOrdersBuildings.at(good) += amount; }
-	void buyForPop(const std::string& good, double const amount) { buyOrdersPops.at(good) += amount; }
+	void buyForPop(const std::string& good, double const amount) { buyOrdersPops.at(good) += amount; } // Public for Debug purposes
 	void calcPopOrders(int popSize,
 		 const std::map<std::string, double>& jobData,
 		 const std::map<std::string, double>& cultureData,
