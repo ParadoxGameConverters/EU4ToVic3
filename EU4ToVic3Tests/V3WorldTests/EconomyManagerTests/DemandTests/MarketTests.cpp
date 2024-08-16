@@ -370,7 +370,7 @@ TEST(V3World_MarketTests, FormulaPredictsObsessionsNeed)
 TEST(V3World_MarketTests, FormulaPredictsTaboosNeed)
 {
 	// Religious Taboo suppresses both the tabooed goods and the overall need.
-   // TODO(Gawquon) Cap at +-25%
+	// TODO(Gawquon) Cap at +-25%
 	V3::Market market({"grain", "fish", "meat", "groceries", "fruit", "extra"});
 	market.sell("grain", 100);
 	market.sell("fish", 30);
@@ -816,6 +816,229 @@ TEST(V3World_MarketTests, MissingReligionGivesWarning)
 			  testing::Pair("wine", testing::DoubleNear(20 - 3.32, 0.01))));
 }
 
+TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
+{
+	// Real test using 1.7* Crete.
+	V3::Market market({
+		 "grain",
+		 "fish",
+		 "meat",
+		 "groceries",
+		 "wine",
+		 "opium",
+		 "liquor",
+		 "tobacco",
+		 "wood",
+		 "furniture",
+		 "fabric",
+		 "clothes",
+		 "sugar",
+		 "services",
+		 "tea",
+		 "coffee",
+		 "sugar",
+		 "small_arms",
+		 "luxury_clothes",
+		 "luxury_furniture",
+		 "glass",
+		 "paper",
+		 "porcelain",
+	});
+
+	market.sell("fabric", 941);
+	market.sell("grain", 845);
+	market.sell("wood", 630);
+	market.sell("fish", 483);
+	market.sell("tobacco", 424);
+	market.sell("sugar", 299);
+	market.sell("clothes", 270);
+	market.sell("meat", 140);
+	market.sell("paper", 121);
+	market.sell("coffee", 91);
+	market.sell("furniture", 85);
+	market.sell("liquor", 85);
+	market.sell("opium", 73);
+	market.sell("small_arms", 60);
+	market.sell("fruit", 47.2);
+	market.sell("porcelain", 45.4);
+	market.sell("luxury_furniture", 35);
+	market.sell("luxury_clothes", 22.5);
+	market.sell("tea", 20.2);
+	market.sell("glass", 20.2);
+
+	market.buyForBuilding("fabric", 403);
+	market.buyForBuilding("grain", 89);
+	market.buyForBuilding("wood", 239);
+	market.buyForBuilding("fish", 41.7);
+	market.buyForBuilding("tobacco", 19.4);
+	market.buyForBuilding("sugar", 34.7);
+	market.buyForBuilding("clothes", 17.6);
+	market.buyForBuilding("meat", 14);
+	market.buyForBuilding("paper", 125.8);
+	market.buyForBuilding("furniture", 13);
+	market.buyForBuilding("liquor", 45.8);
+	market.buyForBuilding("opium", 4.2);
+	market.buyForBuilding("small_arms", 29.8);
+	market.buyForBuilding("fruit", 2.1);
+
+	V3::Vic3DefinesLoader defines;
+	defines.loadDefines(modFS);
+
+	V3::DemandLoader demand;
+	std::stringstream popNeedsInput;
+	std::stringstream buyPackagesInput;
+	std::stringstream goodsInput;
+
+	popNeedsInput << "popneed_basic_food = { default = grain\n";
+	popNeedsInput << "entry = { goods = grain weight = 1 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = fish weight = 1 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = meat weight = 0.5 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = fruit weight = 0.5 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = groceries weight = 0.75 max_supply_share = 0.9 min_supply_share = 0.0 }\n";
+	popNeedsInput << "}\n";
+
+	popNeedsInput << "popneed_simple_clothing = { default = fabric\n";
+	popNeedsInput << "entry = { goods = fabric weight = 1 max_supply_share = 0.5 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = clothes weight = 2 max_supply_share = 1.0 min_supply_share = 0.0 }\n";
+	popNeedsInput << "}\n";
+
+	popNeedsInput << "popneed_crude_items = { default = wood\n";
+	popNeedsInput << "entry = { goods = wood weight = 1 max_supply_share = 0.5 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = furniture weight = 2 max_supply_share = 1.0 min_supply_share = 0.0 }\n";
+	popNeedsInput << "}\n";
+
+	popNeedsInput << "popneed_heating = { default = wood\n";
+	popNeedsInput << "entry = { goods = wood weight = 0.75 max_supply_share = 0.5 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = fabric weight = 0.25 max_supply_share = 0.25 min_supply_share = 0.0 }\n";
+	popNeedsInput << "}\n";
+
+	popNeedsInput << "popneed_household_items = { default = furniture\n";
+	popNeedsInput << "entry = { goods = furniture weight = 1.0 max_supply_share = 0.75 min_supply_share = 0.1 }\n";
+	popNeedsInput << "entry = { goods = glass weight = 1.0 max_supply_share = 0.5 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = paper weight = 0.5 max_supply_share = 0.5 min_supply_share = 0.0 }\n";
+	popNeedsInput << "}\n";
+
+	popNeedsInput << "popneed_standard_clothing = { default = clothes\n";
+	popNeedsInput << "entry = { goods = clothes }\n";
+	popNeedsInput << "}\n";
+
+	popNeedsInput << "popneed_services = { default = services\n";
+	popNeedsInput << "entry = { goods = services }\n";
+	popNeedsInput << "}\n";
+
+	popNeedsInput << "popneed_intoxicants = { default = liquor\n";
+	popNeedsInput << "entry = { goods = liquor weight = 1.0 max_supply_share = 0.75 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = tobacco weight = 1.0 max_supply_share = 0.75 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = opium weight = 1.5 max_supply_share = 0.75 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = wine weight = 0.25 max_supply_share = 0.25 min_supply_share = 0.0 }\n";
+	popNeedsInput << "}\n";
+
+	popNeedsInput << "popneed_luxury_drinks = { default = tea\n";
+	popNeedsInput << "entry = { goods = tea weight = 1.0 max_supply_share = 0.75 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = coffee weight = 1.0 max_supply_share = 0.75 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = wine weight = 0.33 max_supply_share = 0.33 min_supply_share = 0.0 }\n";
+	popNeedsInput << "}\n";
+
+	popNeedsInput << "popneed_luxury_food = { default = meat\n";
+	popNeedsInput << "entry = { goods = meat weight = 0.75 max_supply_share = 0.75 min_supply_share = 0.1 }\n";
+	popNeedsInput << "entry = { goods = fruit weight = 0.75 max_supply_share = 0.75 min_supply_share = 0.1 }\n";
+	popNeedsInput << "entry = { goods = groceries weight = 1.0 max_supply_share = 1.0 min_supply_share = 0.0 }\n";
+	popNeedsInput << "entry = { goods = sugar weight = 0.5 max_supply_share = 0.5 min_supply_share = 0.0 }\n";
+	popNeedsInput << "}\n";
+
+	popNeedsInput << "popneed_luxury_items = { default = tea\n";
+	popNeedsInput << "entry = { goods = luxury_clothes weight = 1.0 max_supply_share = 0.5 min_supply_share = 0.1 }\n";
+	popNeedsInput << "entry = { goods = luxury_furniture weight = 1.0 max_supply_share = 0.5 min_supply_share = 0.1 }\n";
+	popNeedsInput << "entry = { goods = porcelain weight = 0.33 max_supply_share = 0.5 min_supply_share = 0.1 }\n";
+	popNeedsInput << "}\n";
+
+
+	buyPackagesInput << "wealth_8 = { goods = { popneed_basic_food = 118 } }\n";
+
+	goodsInput << "grain = { cost = 20 }\n";
+	goodsInput << "fish = { cost = 20 }\n";
+	goodsInput << "meat = { cost = 30 }\n";
+	goodsInput << "groceries = { cost = 30 }\n";
+	goodsInput << "wine = { cost = 30 }\n";
+
+	demand.loadPopNeeds(popNeedsInput);
+	demand.loadBuyPackages(buyPackagesInput);
+	demand.loadGoods(goodsInput);
+
+	std::stringstream poorsTypeInput;
+	poorsTypeInput << "strata = poor";
+	V3::PopType poors(poorsTypeInput);
+	poors.setType("poors");
+
+	std::stringstream peasantsTypeInput;
+	peasantsTypeInput << "strata = poor\n";
+	peasantsTypeInput << "consumption_mult = 0.05\n";
+	V3::PopType peasants(peasantsTypeInput);
+	poors.setType("peasants");
+
+	std::stringstream midTypeInput;
+	midTypeInput << "strata = middle";
+	V3::PopType mid(midTypeInput);
+	poors.setType("mid");
+
+	std::stringstream richTypeInput;
+	richTypeInput << "strata = rich\n";
+	richTypeInput << "working_adult_ratio = 0.2\n";
+	V3::PopType rich(richTypeInput);
+	poors.setType("rich");
+
+	mappers::CultureDef turkish;
+	turkish.religion = "sunni";
+	turkish.obsessions.insert("tea");
+
+	mappers::CultureDef greek;
+	greek.religion = "orthodox";
+	turkish.obsessions.insert("wine");
+
+	mappers::ReligionDef sunni;
+	sunni.taboos.insert("wine");
+	sunni.taboos.insert("liquor");
+
+	mappers::ReligionDef orthodox;
+
+	constexpr double size = 136344.0;
+
+	market.calcPopOrders(size,
+		 {
+			  {"poors", 35904 / size},
+			  {"peasants", 90800 / size},
+			  {"middle", 8600 / size},
+			  {"rich", 1040 / size},
+		 },
+		 {
+			  {"greek", 78704 / size},
+			  {"turkish", 59136 / size},
+		 },
+		 defines,
+		 demand,
+		 {
+			  {"poors", poors},
+			  {"peasants", peasants},
+			  {"mid", mid},
+			  {"rich", rich},
+		 },
+		 {
+			  {"greek", greek},
+			  {"turkish", turkish},
+		 },
+		 {
+			  {"orthodox", orthodox},
+			  {"sunni", sunni},
+		 },
+		 {},
+		 {});
+	EXPECT_THAT(market.getMarketBalance(),
+		 testing::UnorderedElementsAre(testing::Pair("small_arms", testing::DoubleNear(0.04, 0.01)),
+			  testing::Pair("grain", testing::DoubleNear(12.1, 0.1)),
+			  testing::Pair("fish", testing::DoubleNear(7, 0.1)),
+			  testing::Pair("meat", testing::DoubleNear(0.7, 0.1)),
+			  testing::Pair("groceries", testing::DoubleNear(0, 0.01)),
+			  testing::Pair("wine", testing::DoubleNear(0.3, 0.2))));
+}
+
 // Test Local Goods
-// Test nation-wide
-// Test multi-package
