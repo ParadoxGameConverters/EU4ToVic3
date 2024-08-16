@@ -16,10 +16,10 @@ void V3::ProductionMethod::registerKeys()
 		bureaucracy = commonItems::getInt(theStream);
 	});
 	scalingParser.registerRegex("goods_input\\w+_add", [this](const std::string& goodsType, std::istream& theStream) {
-		inputs.emplace(getType(goodsType), commonItems::getInt(theStream));
+		inputs.emplace(getType(goodsType), commonItems::getDouble(theStream));
 	});
 	scalingParser.registerRegex("goods_output\\w+_add", [this](const std::string& goodsType, std::istream& theStream) {
-		outputs.emplace(getType(goodsType), commonItems::getInt(theStream));
+		outputs.emplace(getType(goodsType), commonItems::getDouble(theStream));
 	});
 	scalingParser.registerRegex("building_employment_\\w+_add", [this](const std::string& employmentType, std::istream& theStream) {
 		employment.emplace(getType(employmentType), commonItems::getInt(theStream));

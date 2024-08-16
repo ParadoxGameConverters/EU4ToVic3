@@ -61,6 +61,7 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 	loadPopTypes(modFS);
 }
 
+#pragma optimize("", off)
 void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalManager, const Vic3DefinesLoader& defines) const
 {
 	Log(LogLevel::Info) << "-> Establishing Bureaucracy.";
@@ -79,10 +80,13 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 		{
 			continue;
 		}
-
+		if (country->getTag() == "USA")
+		{
+			int dummy = 0;
+		}
 		// Give 5% extra for trade routes - cap at +400
 		const double usage = country->calculateBureaucracyUsage(politicalManager.getLawsMap(), defines);
-		const double generationTarget = std::min(usage * 1.05, usage + 400) - 100;
+		const double generationTarget = std::min(usage * 1.1, usage + 500) - 100;
 
 		// Use the PM with the most generation available
 		int PMGeneration = 35;
@@ -96,6 +100,7 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 	}
 	Log(LogLevel::Info) << "<> Bureaucracy Established.";
 }
+#pragma optimize("", on)
 
 void V3::EconomyManager::hardcodePorts() const
 {
@@ -472,6 +477,8 @@ void V3::EconomyManager::distributeBudget(const double globalCP, const double to
 
 void V3::EconomyManager::investCapital(const std::map<std::string, std::shared_ptr<Country>>& countries) const
 {
+	Log(LogLevel::Info) << "-> Pops buying ownership shares.";
+
 	// Each building get's it's ownership information from the ownership loader.
 	// Ownership levels are apportioned.
 	// Non-0 levels are further apportioned based on local/foreign/capital ownership
@@ -485,6 +492,7 @@ void V3::EconomyManager::investCapital(const std::map<std::string, std::shared_p
 		std::map<std::string, double> overlordIOUs;
 
 		const std::string& overlordTag = country->getOverlord();
+		Log(LogLevel::Debug) << country->getTag();
 		std::string overlordCapital = "";
 		if (const auto& overlordIt = countries.find(overlordTag); overlordIt != countries.end())
 		{

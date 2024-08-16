@@ -10,6 +10,11 @@ void V3::OwnershipLoader::loadOwnership(const std::string& filePath)
 
 const std::map<std::string, V3::OwnershipData>& V3::OwnershipLoader::getOwnershipsFromBuilding(const std::string& building) const
 {
+	if (!buildingSectorMap.contains(building))
+	{
+		Log(LogLevel::Error) << "Building: " << building
+									<< " has no specified ownership types in configurables/economy/ownership.txt. Consider adding a mapping.";
+	}
 	return sectorMap.at(buildingSectorMap.at(building)).getOwnerships();
 }
 

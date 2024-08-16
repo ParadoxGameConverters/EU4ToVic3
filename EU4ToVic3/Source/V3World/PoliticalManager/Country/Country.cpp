@@ -193,7 +193,9 @@ void V3::Country::distributeGovAdmins(const double target,
 
 		const auto govAdmin = std::make_shared<Building>(blueprint);
 		govAdmin->setLevel(levels);
-		govAdmin->addInvestor(levels, "national_service", substate->getHomeStateName(), this->tag);
+
+		// TODO(Gawquon): Still need to decide on this fxn being before or after the building negotiation.
+		// govAdmin->addInvestor(levels, "national_service", substate->getHomeStateName(), this->tag);
 
 		substate->addBuilding(govAdmin);
 
@@ -212,7 +214,7 @@ void V3::Country::distributeGovAdmins(const double target,
 		{
 			const auto levels = govAdmin->get()->getLevel();
 			govAdmin->get()->setLevel(levels + 1);
-			govAdmin->get()->addShareholderLevels(1, "national_service");
+			// govAdmin->get()->addShareholderLevels(1, "national_service");
 			generated += PMGeneration;
 
 			if (target <= generated + PMGeneration)
@@ -767,7 +769,7 @@ double V3::Country::calcInstitutionBureaucracy(const Vic3DefinesLoader& defines)
 {
 	double usage = 0;
 	double cost = getIncorporatedPopCount() / defines.getStateBureaucracyPopMultiple();
-	cost = std::min(cost, defines.getMinimumInvestmentCost());
+	cost = std::max(cost, defines.getMinimumInvestmentCost());
 
 	for (const auto& level: processedData.institutions | std::views::values)
 	{

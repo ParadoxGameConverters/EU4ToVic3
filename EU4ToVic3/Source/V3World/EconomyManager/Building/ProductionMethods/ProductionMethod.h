@@ -30,8 +30,8 @@ class ProductionMethod: commonItems::parser
 
 	std::string name;
 	std::map<std::string, int> employment;
-	std::map<std::string, int> inputs;
-	std::map<std::string, int> outputs;
+	std::map<std::string, double> inputs;
+	std::map<std::string, double> outputs;
 	int bureaucracy = 0;
 	std::set<std::string> unlockingTechs;
 	std::set<std::string> unlockingLaws;

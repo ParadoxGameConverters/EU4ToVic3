@@ -47,13 +47,14 @@ class Market
 		 const std::map<std::string, Law>& lawsMap);
 	static std::map<std::string, double> calcPurchaseWeights(const std::map<std::string, double>& marketShareMap,
 		 const std::map<std::string, GoodsFulfillment>& fulfillments,
-		 const std::map<std::string, double>& culturalPrevalence);
-	static double calcPurchaseWeight(const std::string& goodName, double marketShare, const GoodsFulfillment& fulfillment, double culturalPrevalence);
+		 const std::map<std::string, double>& culturalPrevalence,
+		 const std::map<std::string, Good>& goodsMap);
+	static double calcPurchaseWeight(double marketShare, const GoodsFulfillment& fulfillment, double culturalPrevalence);
 	static double calcCulturalNeedFactor(const std::vector<std::string>& goods, const std::map<std::string, double>& culturalPrevalence);
 	static double calcAddedWorkingPopPercent(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap);
 
 	[[nodsicard]] bool validateGood(const std::string& good) const;
-	[[nodiscard]] std::vector<std::string> enumerateGoods(const std::map<std::string, GoodsFulfillment>& map) const;
+	[[nodiscard]] std::vector<std::string> enumerateGoods(const std::map<std::string, GoodsFulfillment>& map, const std::map<std::string, Good>& goodsMap) const;
 	[[nodiscard]] std::map<std::string, double> initCulturalFactors() const;
 
 	// How much the market leans toward a certain good being a taboo or an obsession.

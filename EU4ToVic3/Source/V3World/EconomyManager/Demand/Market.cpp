@@ -24,7 +24,7 @@ std::map<std::string, double> V3::Market::getMarketBalance() const
 	return marketBalance;
 }
 
-// Public for Debug purposes
+// Returns the true market share, before any adjustments/clamps.
 std::map<std::string, double> V3::Market::getMarketShare(const std::vector<std::string>& goods) const
 {
 	double totalAdjustedOrders = 0;
@@ -134,11 +134,20 @@ std::set<std::string> V3::Market::getTaboos(const std::string& culture,
 	return religions.at(religion).taboos;
 }
 
-std::vector<std::string> V3::Market::enumerateGoods(const std::map<std::string, GoodsFulfillment>& map) const
+std::vector<std::string> V3::Market::enumerateGoods(const std::map<std::string, GoodsFulfillment>& map, const std::map<std::string, Good>& goodsMap) const
 {
 	std::vector<std::string> goods;
 	for (const auto& good: map | std::views::keys)
 	{
+		if (!goodsMap.contains(good))
+		{
+			if (!goodsErrors.contains(good))
+			{
+				Log(LogLevel::Warning) << "Good: " << good << " has no definition.";
+				goodsErrors.emplace(good);
+			}
+			continue;
+		}
 		if (validateGood(good))
 		{
 			goods.push_back(good);
@@ -213,32 +222,37 @@ double V3::Market::calcPopFactor(const double size,
 
 std::map<std::string, double> V3::Market::calcPurchaseWeights(const std::map<std::string, double>& marketShareMap,
 	 const std::map<std::string, GoodsFulfillment>& fulfillments,
-	 const std::map<std::string, double>& culturalPrevalence)
+	 const std::map<std::string, double>& culturalPrevalence,
+	 const std::map<std::string, Good>& goodsMap)
 {
 	double total = 0;
 	std::map<std::string, double> purchaseWeights;
 
-	for (const auto& goodName: marketShareMap | std::views::keys)
+	for (const auto& good: marketShareMap | std::views::keys)
 	{
-		purchaseWeights[goodName] = calcPurchaseWeight(goodName, marketShareMap.at(goodName), fulfillments.at(goodName), culturalPrevalence.at(goodName));
-		total += purchaseWeights.at(goodName);
+		// Local goods assumed to have a 1/n market share, this will result in overestimation, but will subsequently be clamped by any max_share
+		double marketShare = marketShareMap.at(good);
+		if (goodsMap.at(good).isLocal())
+		{
+			marketShare = std::max(marketShare, 1.0 / marketShareMap.size());
+		}
+
+		purchaseWeights[good] = calcPurchaseWeight(marketShare, fulfillments.at(good), culturalPrevalence.at(good));
+		total += purchaseWeights.at(good);
 	}
 
-	for (const auto& goodName: marketShareMap | std::views::keys)
+	for (const auto& good: marketShareMap | std::views::keys)
 	{
-		purchaseWeights.at(goodName) /= total == 0 ? 1.0 : total;
+		purchaseWeights.at(good) /= total == 0 ? 1.0 : total;
 	}
 
 	return purchaseWeights;
 }
 
-double V3::Market::calcPurchaseWeight(const std::string& goodName,
-	 const double marketShare,
-	 const GoodsFulfillment& fulfillment,
-	 const double culturalPrevalence)
+double V3::Market::calcPurchaseWeight(double marketShare, const GoodsFulfillment& fulfillment, const double culturalPrevalence)
 {
-	double marketShareClamp = std::min(marketShare, fulfillment.maxShare);
-	marketShareClamp = std::max(marketShareClamp, fulfillment.minShare);
+	marketShare = std::min(marketShare, fulfillment.maxShare);
+	marketShare = std::max(marketShare, fulfillment.minShare);
 
 	// Obsessions set minimum weight at 1.
 	// Note(Gawquon): Because we already averaged out the effects of taboos/obsessions,
@@ -264,9 +278,9 @@ double V3::Market::calcCulturalNeedFactor(const std::vector<std::string>& goods,
 {
 	// Taboos tap out at x0.5, Obsessions at x2.0. But we're converting from prevalence(-1 <-> 1) into the +-25% bonus/malus to the base need.
 	double culturalNeedFactor = 0;
-	for (const std::string& goodName: goods)
+	for (const std::string& good: goods)
 	{
-		culturalNeedFactor += culturalPrevalence.at(goodName) / 4;
+		culturalNeedFactor += culturalPrevalence.at(good) / 4;
 	}
 	culturalNeedFactor = std::max(culturalNeedFactor, -0.25);
 	culturalNeedFactor = std::min(culturalNeedFactor, 0.25);
@@ -356,30 +370,19 @@ void V3::Market::calcPopOrders(const int popSize,
 			}
 
 			const auto& popneed = demand.getPopneedsMap().at(need);
-			const auto& packageGoods = enumerateGoods(popneed.getGoodsFulfillment());
+			const auto& packageGoods = enumerateGoods(popneed.getGoodsFulfillment(), goodsMap);
 
 			const auto& marketShareMap = getMarketShare(packageGoods);
-			const auto& purchaseWeights = calcPurchaseWeights(marketShareMap, popneed.getGoodsFulfillment(), culturalPrevalence);
+			const auto& purchaseWeights = calcPurchaseWeights(marketShareMap, popneed.getGoodsFulfillment(), culturalPrevalence, goodsMap);
 			const double culturalNeedFactor = calcCulturalNeedFactor(packageGoods, culturalPrevalence);
 
 			// Calc Pop demand
-			for (const auto& goodName: packageGoods)
+			for (const auto& good: packageGoods)
 			{
-				if (!goodsMap.contains(goodName))
-				{
-					if (!goodsErrors.contains(goodName))
-					{
-						Log(LogLevel::Warning) << "Good: " << goodName << " has no definition.";
-						goodsErrors.emplace(goodName);
-					}
-					continue;
-				}
-
-				const double basePrice = goodsMap.at(goodName).getBasePrice();
-				const double popDemand = magnitude * culturalNeedFactor / basePrice * purchaseWeights.at(goodName) * popFactor;
-				buyForPop(goodName, popDemand);
+				const double basePrice = goodsMap.at(good).getBasePrice();
+				const double popDemand = magnitude * culturalNeedFactor / basePrice * purchaseWeights.at(good) * popFactor;
+				buyForPop(good, popDemand);
 			}
-			// TODO account for local goods quirks
 		}
 	}
 }

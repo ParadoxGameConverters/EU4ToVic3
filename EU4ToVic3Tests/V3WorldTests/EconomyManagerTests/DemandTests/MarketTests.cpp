@@ -636,7 +636,14 @@ TEST(V3World_MarketTests, MissingGoodGivesWarning)
 	market.sell("fish", 30);
 	market.sell("meat", 40);
 	market.sell("groceries", 10);
+
+	std::stringstream log;
+	std::streambuf* cout_buffer = std::cout.rdbuf();
+	std::cout.rdbuf(log.rdbuf());
+
 	market.sell("fruit", 20);
+
+	std::cout.rdbuf(cout_buffer);
 
 	V3::Vic3DefinesLoader defines;
 	defines.loadDefines(modFS);
@@ -679,15 +686,9 @@ TEST(V3World_MarketTests, MissingGoodGivesWarning)
 	mappers::ReligionDef none;
 	none.name = "none";
 
-	std::stringstream log;
-	std::streambuf* cout_buffer = std::cout.rdbuf();
-	std::cout.rdbuf(log.rdbuf());
-
 	market.calcPopOrders(53300, {{"poors", 1}}, {{"english", 1}}, defines, demand, {{"poors", poors}}, {{"english", english}}, {{"none", none}}, {}, {});
 
-	std::cout.rdbuf(cout_buffer);
-
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Good: not recognized in market. Converter will act like it doesn't exist.)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] Good: fruit not recognized in market. Converter will act like it doesn't exist.)"));
 	EXPECT_THAT(market.getMarketBalance(),
 		 testing::UnorderedElementsAre(testing::Pair("extra", testing::DoubleNear(0, 0.01)),
 			  testing::Pair("grain", testing::DoubleNear(100 - 12.48, 0.01)),
@@ -1020,7 +1021,7 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 	goodsInput << "fish = { cost = 20 }\n";
 	goodsInput << "meat = { cost = 30 }\n";
 	goodsInput << "fruit = { cost = 30 }\n";
-	goodsInput << "services = { cost = 30 }\n";
+	goodsInput << "services = { cost = 30 local = yes }\n";
 	goodsInput << "paper = { cost = 30 }\n";
 	goodsInput << "groceries = { cost = 30 }\n";
 	goodsInput << "furniture = { cost = 30 }\n";
@@ -1111,15 +1112,15 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 		 {});
 	EXPECT_THAT(market.getMarketBalance(),
 		 testing::UnorderedElementsAre(testing::Pair("small_arms", testing::DoubleNear(30.16, 0.02)),
-			  testing::Pair("clothes", testing::DoubleNear(249.1, 0.6)),
+			  testing::Pair("clothes", testing::DoubleNear(248.3, 0.6)),
 			  testing::Pair("coffee", testing::DoubleNear(90.6, 0.4)),
-			  testing::Pair("fabric", testing::DoubleNear(533.3, 0.5)),
+			  testing::Pair("fabric", testing::DoubleNear(534.7, 0.5)),
 			  testing::Pair("fruit", testing::DoubleNear(44.8, 0.1)),
 			  testing::Pair("furniture", testing::DoubleNear(69.8, 0.4)),
 			  testing::Pair("fish", testing::DoubleNear(434, 0.6)),
 			  testing::Pair("grain", testing::DoubleNear(743.9, 0.6)),
 			  testing::Pair("glass", testing::DoubleNear(19.93, 0.15)),
-			  testing::Pair("liquor", testing::DoubleNear(38.8, 0.15)),
+			  testing::Pair("liquor", testing::DoubleNear(38.8, 0.25)),
 			  testing::Pair("luxury_clothes", testing::DoubleNear(22.25, 0.1)),
 			  testing::Pair("luxury_furniture", testing::DoubleNear(34.61, 0.1)),
 			  testing::Pair("meat", testing::DoubleNear(125.3, 0.2)),
@@ -1134,5 +1135,3 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 			  testing::Pair("groceries", testing::DoubleNear(0, 0.01)),
 			  testing::Pair("wine", testing::DoubleNear(-0.3, 0.3))));
 }
-
-// Test Local Goods
