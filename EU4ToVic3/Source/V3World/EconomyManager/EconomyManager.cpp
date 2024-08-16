@@ -268,25 +268,6 @@ double V3::EconomyManager::calculateDateFactor(const Configuration::STARTDATE st
 	return 0.0;
 }
 
-int V3::EconomyManager::estimateWealth(const std::string& strata)
-{
-	if (strata == "poor")
-	{
-		return 7;
-	}
-	if (strata == "middle")
-	{
-		return 12;
-	}
-	if (strata == "rich")
-	{
-		return 30;
-	}
-
-	Log(LogLevel::Warning) << "Unrecognized wealth strata: " << strata << ".";
-	return 7;
-}
-
 std::pair<double, double> V3::EconomyManager::countryBudgetCalcs(const Configuration::ECONOMY economyType) const
 {
 	// Returns total weight, and any special multiplicative factors specific to the method.

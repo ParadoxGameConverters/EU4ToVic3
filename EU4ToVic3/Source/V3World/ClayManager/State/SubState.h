@@ -9,7 +9,6 @@
 #include "PopManager/Pops/SubStatePops.h"
 #include "SourceProvinceData.h"
 #include "StateModifier.h"
-
 #include <optional>
 
 /* A Substate is a cross-section across a set of chunks where all relevant chunk provinces fall within a geographical V3 state.
