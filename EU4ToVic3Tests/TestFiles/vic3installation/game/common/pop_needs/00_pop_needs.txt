@@ -1,0 +1,44 @@
+﻿# goods						The good being referenced
+# weight					The base weight that is applied to this good based on market Sell Order share
+# max_supply_share			The maximum weight that can be applied to this good based on market Sell Order share, relative supply above this amount will have no further impact on base weight
+# min_supply_share			If above 0, a minimum of this multiplier of the base weight will be applied to a good regardless of its market Sell Order share
+
+popneed_simple_clothing = {
+	default = fabric
+
+	entry = {
+		goods = fabric
+		
+		weight = 1	
+		max_supply_share = 0.5 
+		min_supply_share = 0.0
+	}	
+	
+	entry = {
+		goods = clothes
+		
+		weight = 2
+		max_supply_share = 1.0
+		min_supply_share = 0.0
+	}
+}
+
+popneed_flame_items = {
+	default = wood
+
+	entry = {
+		goods = wood
+		
+		weight = 1
+		max_supply_share = 0.5
+		min_supply_share = 0.0
+	}
+	
+	entry = {
+		goods = clothes
+		
+		weight = 2
+		max_supply_share = 1.0
+		min_supply_share = 0.0
+	}
+}

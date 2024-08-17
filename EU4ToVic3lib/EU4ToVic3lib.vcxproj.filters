@@ -358,6 +358,12 @@
     <Filter Include="Vic3World\Loaders\BuildingLoader\OwnershipLoader">
       <UniqueIdentifier>{ec4c0bf2-d02c-49ef-bd69-a95c68c2f4c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Vic3World\EconomyManager\Demand">
+      <UniqueIdentifier>{aeb6819e-a839-444d-918e-59323e87b142}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vic3World\Loaders\DemandLoader">
+      <UniqueIdentifier>{d845ec1d-2a02-4af7-adac-d867b5f6f48c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\EU4ToVic3\Source\EU4World\World.cpp">
@@ -1014,6 +1020,30 @@
     </ClCompile>
     <ClCompile Include="..\EU4ToVic3\Source\V3World\EconomyManager\Building\Ownership\Ownership.cpp">
       <Filter>Vic3World\EconomyManager\Building\Ownership</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4ToVic3\Source\V3World\EconomyManager\Demand\BuyPackage.cpp">
+      <Filter>Vic3World\EconomyManager\Demand</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4ToVic3\Source\V3World\EconomyManager\Demand\PopNeed.cpp">
+      <Filter>Vic3World\EconomyManager\Demand</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4ToVic3\Source\V3World\Loaders\DemandLoader\DemandLoader.cpp">
+      <Filter>Vic3World\Loaders\DemandLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4ToVic3\Source\V3World\EconomyManager\Demand\Good.cpp">
+      <Filter>Vic3World\EconomyManager\Demand</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4ToVic3\Source\V3World\Loaders\DefinesLoader\Vic3DefinesLoader.cpp">
+      <Filter>Vic3World\Loaders\DefinesLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4ToVic3\Source\V3World\PopManager\Pops\PopType.cpp">
+      <Filter>Vic3World\PopManager\Pops</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4ToVic3\Source\V3World\Loaders\PopLoader\PopTypeLoader.cpp">
+      <Filter>Vic3World\Loaders\PopLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\EU4ToVic3\Source\V3World\EconomyManager\Demand\Market.cpp">
+      <Filter>Vic3World\EconomyManager\Demand</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1743,6 +1773,33 @@
     </ClInclude>
     <ClInclude Include="..\EU4ToVic3\Source\V3World\EconomyManager\Building\Ownership\Ownership.h">
       <Filter>Vic3World\EconomyManager\Building\Ownership</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\V3World\EconomyManager\Demand\BuyPackage.h">
+      <Filter>Vic3World\EconomyManager\Demand</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\V3World\EconomyManager\Demand\PopNeed.h">
+      <Filter>Vic3World\EconomyManager\Demand</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\V3World\EconomyManager\Demand\GoodsFulfillment.h">
+      <Filter>Vic3World\EconomyManager\Demand</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\V3World\Loaders\DemandLoader\DemandLoader.h">
+      <Filter>Vic3World\Loaders\DemandLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\V3World\EconomyManager\Demand\Good.h">
+      <Filter>Vic3World\EconomyManager\Demand</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\V3World\Loaders\DefinesLoader\Vic3DefinesLoader.h">
+      <Filter>Vic3World\Loaders\DefinesLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\V3World\PopManager\Pops\PopType.h">
+      <Filter>Vic3World\PopManager\Pops</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\V3World\Loaders\PopLoader\PopTypeLoader.h">
+      <Filter>Vic3World\Loaders\PopLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EU4ToVic3\Source\V3World\EconomyManager\Demand\Market.h">
+      <Filter>Vic3World\EconomyManager\Demand</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

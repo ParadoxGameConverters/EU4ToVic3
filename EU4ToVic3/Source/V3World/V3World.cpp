@@ -67,6 +67,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	cultureMapper.loadCultureDefinitions(allFS);
 	cultureMapper.loadTraitDefinitions(allFS);
 	economyManager.loadMappersAndConfigs(allFS);
+	definesLoader.loadDefines(allFS);
+
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
 	Log(LogLevel::Progress) << "46 %";
@@ -159,7 +161,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "59 %";
 	clayManager.squashAllSubStates(politicalManager);
 	Log(LogLevel::Progress) << "60 %";
-	clayManager.redistributeResourcesAndLandshares();
+	clayManager.redistributeResourcesAndLandshares(definesLoader.getSplitStatePrimeLandWeight());
 
 	Log(LogLevel::Progress) << "61 %";
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);
@@ -203,17 +205,17 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "71 %";
 	economyManager.loadCentralizedStates(politicalManager.getCountries());
 	Log(LogLevel::Progress) << "72 %";
-	economyManager.hardcodePorts();
+	economyManager.establishBureaucracy(politicalManager, definesLoader);
 	Log(LogLevel::Progress) << "73 %";
-	economyManager.assignCountryCPBudgets(configBlock.economy, configBlock.startDate, datingData, politicalManager, configBlock.vn);
+	economyManager.hardcodePorts();
 	Log(LogLevel::Progress) << "74 %";
+	economyManager.assignCountryCPBudgets(configBlock.economy, configBlock.startDate, datingData, politicalManager, configBlock.vn);
 	economyManager.balanceNationalBudgets();
 	Log(LogLevel::Progress) << "75 %";
 	economyManager.assignSubStateCPBudgets(configBlock.economy);
 	Log(LogLevel::Progress) << "76 %";
 	economyManager.buildBuildings(politicalManager.getLawsMap());
 	economyManager.investCapital(politicalManager.getCountries());
-	economyManager.establishBureaucracy(politicalManager);
 	economyManager.setPMs();
 
 	Log(LogLevel::Info) << "*** Goodbye, Vicky 3, and godspeed. ***";

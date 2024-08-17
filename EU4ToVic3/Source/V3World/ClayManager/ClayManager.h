@@ -45,7 +45,7 @@ class ClayManager
 	void injectVanillaSubStates(const commonItems::ModFilesystem& modFS, const PoliticalManager& politicalManager, const PopManager& popManager, bool vn);
 	void shoveRemainingProvincesIntoSubStates();
 	void squashAllSubStates(const PoliticalManager& politicalManager);
-	void redistributeResourcesAndLandshares();
+	void redistributeResourcesAndLandshares(int splitStatePrimeLandWeight);
 	void addSubState(const std::shared_ptr<SubState>& subState) { substates.emplace_back(subState); }
 	void loadAdjacencies(const std::string& filePath);
 

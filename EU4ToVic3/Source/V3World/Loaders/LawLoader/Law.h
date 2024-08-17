@@ -13,6 +13,7 @@ struct Law
 	std::string institution;
 	int progressiveness = 0;
 	double bureaucracyCostMult = 0;
+	double workingAdultRatioAdd = 0;
 	std::set<std::string> requiredTechs;
 	std::set<std::string> requiredLaws;
 	std::set<std::string> blockingLaws;

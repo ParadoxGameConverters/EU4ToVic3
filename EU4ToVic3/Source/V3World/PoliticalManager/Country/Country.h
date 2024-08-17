@@ -10,6 +10,7 @@
 #include "FlagCrafter/FlagCrafter.h"
 #include "IGIdeologiesMapper/IGIdeologiesMapping.h"
 #include "IdeaEffectsMapper/IdeaEffectsMapper.h"
+#include "Loaders/DefinesLoader/Vic3DefinesLoader.h"
 #include "Loaders/TechLoader/Tech.h"
 #include "Parser.h"
 #include "PoliticalManager/Diplomacy/Relation.h"
@@ -174,7 +175,6 @@ class Country: commonItems::parser
 	[[nodiscard]] std::string getName(const std::string& language) const;
 	[[nodiscard]] std::string getAdjective(const std::string& language) const;
 	[[nodiscard]] double getTotalDev() const;
-	[[nodiscard]] double getOverPopulation() const;
 	[[nodiscard]] int getPopCount() const;
 	[[nodiscard]] int getVanillaPopCount() const; // vanilla pop count of all the provinces this country holds
 	[[nodiscard]] int getIncorporatedPopCount() const;
@@ -231,7 +231,7 @@ class Country: commonItems::parser
 
 	void distributeGovAdmins(double target, int PMGeneration, const std::map<std::string, Tech>& techMap, const V3::Building& blueprint) const;
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> topPercentileStatesByPop(double percentile) const;
-	[[nodiscard]] double calculateBureaucracyUsage(const std::map<std::string, Law>& lawsMap) const;
+	[[nodiscard]] double calculateBureaucracyUsage(const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const;
 	void addSector(const std::string& sectorName, const std::shared_ptr<Sector>& sector) { processedData.industrySectors.emplace(sectorName, sector); }
 
 	void leaveIsolationism();
@@ -265,8 +265,8 @@ class Country: commonItems::parser
 	void applyLiteracyAndWealthEffects(const mappers::PopulationSetupMapper& populationSetupMapper);
 	void setDecentralizedEffects();
 	void determineCountryType();
-	[[nodiscard]] double calcSubStateBureaucracy(const std::map<std::string, Law>& lawsMap) const;
-	[[nodiscard]] double calcInstitutionBureaucracy() const;
+	[[nodiscard]] double calcSubStateBureaucracy(const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const;
+	[[nodiscard]] double calcInstitutionBureaucracy(const Vic3DefinesLoader& defines) const;
 	[[nodiscard]] double calcCharacterBureaucracy() const;
 	[[nodiscard]] std::optional<Tech> getTechFromMap(const std::string& techName, const std::map<std::string, Tech>& techMap) const;
 

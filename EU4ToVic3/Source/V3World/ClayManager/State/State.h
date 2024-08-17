@@ -16,7 +16,7 @@ class State: commonItems::parser
 	void setStateName(const std::string& theName) { name = theName; }
 	void addSubState(const std::shared_ptr<SubState>& substate) { substates.push_back(substate); }
 	void setSubStates(const std::vector<std::shared_ptr<SubState>>& theSubStates) { substates = theSubStates; }
-	void distributeLandshares() const;
+	void distributeLandshares(int splitStatePrimeLandWeight) const;
 	void distributeResources();
 	void addHomeland(const auto& homeland) { homelands.emplace(homeland); }
 	void updateProvinces() const;
@@ -51,7 +51,7 @@ class State: commonItems::parser
   private:
 	void registerKeys();
 
-	static int getWeightedProvinceTotals(int total, int primes, int impassable);
+	static int getWeightedProvinceTotals(int total, int primes, int impassables, int splitStatePrimeLandWeight);
 	static std::tuple<int, int, int> countProvinceTypes(ProvinceMap provinces);
 
 	bool coastal = false;

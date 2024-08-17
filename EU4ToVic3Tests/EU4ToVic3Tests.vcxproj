@@ -202,6 +202,10 @@
     <ClCompile Include="V3WorldTests\ClayManagerTests\StateTests\SubStateTests.cpp" />
     <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\OwnershipSectorTests.cpp" />
     <ClCompile Include="V3WorldTests\EconomyManagerTests\BuildingTests\OwnershipTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\DemandTests\BuyPackageTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\DemandTests\GoodTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\DemandTests\MarketTests.cpp" />
+    <ClCompile Include="V3WorldTests\EconomyManagerTests\DemandTests\PopNeedTests.cpp" />
     <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagColorLoaderTests\FlagColorLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagCrafterTests.cpp" />
     <ClCompile Include="V3WorldTests\FlagCrafterTests\FlagNameLoaderTests\FlagNameLoaderTests.cpp" />
@@ -217,6 +221,8 @@
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\ProductionMethodGroupLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\BuildingLoaderTests\ProductionMethodLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\CountryDefinitionLoaderTests\CountryDefinitionLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\Vic3DefinesLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\DemandLoaderTests\DemandLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\LawLoaderTests\LawEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\LawLoaderTests\LawLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\DefinesLoaderTests\BuildingScriptValuesLoaderTests.cpp" />
@@ -229,6 +235,7 @@
     <ClCompile Include="V3WorldTests\LoaderTests\NationalBudgetLoaderTests\SectorLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\PopEntryTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\PopLoaderTests.cpp" />
+    <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\PopTypeLoaderTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\StateEntriesTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\SubStateEntriesTests.cpp" />
     <ClCompile Include="V3WorldTests\LoaderTests\PopLoaderTests\SubStatePopEntriesTests.cpp" />
@@ -263,6 +270,7 @@
     <ClCompile Include="V3WorldTests\PoliticalManagerTests\PoliticalManagerTests.cpp" />
     <ClCompile Include="V3WorldTests\PoliticalManagerTests\TechValuesTests\TechValuesTests.cpp" />
     <ClCompile Include="V3WorldTests\PopManagerTests\PopManagerTests.cpp" />
+    <ClCompile Include="V3WorldTests\PopManagerTests\PopTests\PopTypeTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\eu4installation\eu4">
@@ -734,6 +742,34 @@
   <ItemGroup>
     <CopyFileToFolders Include="TestFiles\configurables\economy\ownership.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/configurables/economy</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\buy_packages\00_buy_packages.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/buy_packages</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\pop_needs\00_pop_needs.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/pop_needs</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\goods\00_goods.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/goods</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\defines\00_defines.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/defines</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\pop_types\aristocrats.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/pop_types</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="TestFiles\vic3installation\game\common\pop_types\peasants.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/TestFiles/vic3installation/game/common/pop_types</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
