@@ -61,7 +61,6 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 	loadPopTypes(modFS);
 }
 
-#pragma optimize("", off)
 void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalManager, const Vic3DefinesLoader& defines) const
 {
 	Log(LogLevel::Info) << "-> Establishing Bureaucracy.";
@@ -84,7 +83,7 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 		{
 			int dummy = 0;
 		}
-		// Give 5% extra for trade routes - cap at +400
+		// Give 10% extra for trade routes - cap at +400
 		const double usage = country->calculateBureaucracyUsage(politicalManager.getLawsMap(), defines);
 		const double generationTarget = std::min(usage * 1.1, usage + 500) - 100;
 
@@ -100,7 +99,6 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 	}
 	Log(LogLevel::Info) << "<> Bureaucracy Established.";
 }
-#pragma optimize("", on)
 
 void V3::EconomyManager::hardcodePorts() const
 {

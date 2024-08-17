@@ -53,7 +53,7 @@ class Market
 	static double calcCulturalNeedFactor(const std::vector<std::string>& goods, const std::map<std::string, double>& culturalPrevalence);
 	static double calcAddedWorkingPopPercent(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap);
 
-	[[nodsicard]] bool validateGood(const std::string& good) const;
+	[[nodiscard]] bool validateGood(const std::string& good) const;
 	[[nodiscard]] std::vector<std::string> enumerateGoods(const std::map<std::string, GoodsFulfillment>& map, const std::map<std::string, Good>& goodsMap) const;
 	[[nodiscard]] std::map<std::string, double> initCulturalFactors() const;
 
