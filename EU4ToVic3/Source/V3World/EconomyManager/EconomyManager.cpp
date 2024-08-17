@@ -79,10 +79,7 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 		{
 			continue;
 		}
-		if (country->getTag() == "USA")
-		{
-			int dummy = 0;
-		}
+
 		// Give 10% extra for trade routes - cap at +400
 		const double usage = country->calculateBureaucracyUsage(politicalManager.getLawsMap(), defines);
 		const double generationTarget = std::min(usage * 1.1, usage + 500) - 100;
