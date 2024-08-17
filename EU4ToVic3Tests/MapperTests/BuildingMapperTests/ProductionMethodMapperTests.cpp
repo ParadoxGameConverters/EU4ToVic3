@@ -192,3 +192,38 @@ TEST(Mappers_ProductionMethodMapperTests, ApplyRulesUnderTeched)
 	EXPECT_EQ(0, std::accumulate(country.getSubStates().begin(), country.getSubStates().end(), 0, sumSawmills));
 	EXPECT_EQ(123, std::accumulate(country.getSubStates().begin(), country.getSubStates().end(), 0, sumForestry));
 }
+TEST(Mappers_ProductionMethodMapperTests, EstimatesWalkPMList)
+{
+	mappers::ProductionMethodMapper mapper;
+	mapper.loadRules("TestFiles/configurables/economy/production_method_rules.txt");
+
+	// Set up countries with no, partial, and full tech
+	V3::Country countryNoTech;
+	V3::Country countrySomeTech;
+	V3::Country countryAllTech;
+
+	countrySomeTech.addTech("steelworking");
+	countryAllTech.addTech("steelworking");
+	countryAllTech.addTech("electrical_generation");
+
+	// Prepare Buildings
+	V3::Building lumberCamp;
+	lumberCamp.setName("building_logging_camp");
+	lumberCamp.setPMGroups(lumberPmgs);
+
+	std::map<std::string, V3::Building> buildingMap;
+	buildingMap.emplace("building_logging_camp", lumberCamp);
+
+	// Load in PM and PMGroup definitions
+	const auto [PMs, PMGroups] = prepPMData();
+
+	const auto& lowPMEstimates = mapper.estimatePMs(countryNoTech, PMs, PMGroups, buildingMap);
+	const auto& midPMEstimates = mapper.estimatePMs(countrySomeTech, PMs, PMGroups, buildingMap);
+	const auto& highPMEstimates = mapper.estimatePMs(countryAllTech, PMs, PMGroups, buildingMap);
+
+	// The rule says advance to saw_mills, not electric_sawmills
+
+	EXPECT_THAT(lowPMEstimates, testing::Contains(testing::Pair("pmg_base_building_logging_camp", std::make_tuple(0, 1.0))));
+	EXPECT_THAT(midPMEstimates, testing::Contains(testing::Pair("pmg_base_building_logging_camp", std::make_tuple(1, 1.0))));
+	EXPECT_THAT(highPMEstimates, testing::Contains(testing::Pair("pmg_base_building_logging_camp", std::make_tuple(1, 1.0))));
+}

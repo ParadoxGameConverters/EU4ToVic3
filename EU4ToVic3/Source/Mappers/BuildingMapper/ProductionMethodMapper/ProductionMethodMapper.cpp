@@ -191,6 +191,79 @@ std::pair<std::string, std::string> mappers::ProductionMethodMapper::pickPM(cons
 	return {"", ""};
 }
 
+int mappers::ProductionMethodMapper::walkPMs(const std::vector<std::string>& groupPMs,
+	 const V3::Country& country,
+	 const std::string& targetName,
+	 const std::map<std::string, V3::ProductionMethod>& PMs)
+{
+	// Validate every PM in group
+	for (const auto& PM: groupPMs)
+	{
+		if (!PMs.contains(PM))
+		{
+			Log(LogLevel::Error) << "Unknown PM: " << PM << ".";
+			return 0;
+		}
+	}
+
+	// Walk the group
+	int pick = 0;
+	for (const auto& PM: groupPMs)
+	{
+		if (!country.hasAnyOfTech(PMs.at(PM).getUnlockingTechs()))
+			return std::max(pick - 1, 0);
+		if (PM == targetName)
+			return pick;
+		++pick;
+	}
+	return std::max(pick - 1, 0);
+}
+
+std::map<std::string, std::tuple<int, double>> mappers::ProductionMethodMapper::estimatePMs(const V3::Country& country,
+	 const std::map<std::string, V3::ProductionMethod>& PMs,
+	 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups,
+	 const std::map<std::string, V3::Building>& buildings) const
+{
+	// PMs are not necessarily unique to a building, but PMGroups are.
+	// Additionally, no PM will appear twice in the same building.
+	std::map<std::string, std::tuple<int, double>> expectedPMs; // PMGroup -> (expectedPM#,%)
+
+	for (const auto& [buildingName, building]: buildings)
+	{
+		if (const auto& rulesIter = buildingToRules.find(buildingName); rulesIter != buildingToRules.end())
+		{
+			const auto& rules = rulesIter->second;
+			for (const auto& PMGroup: building.getPMGroups())
+			{
+				bool flag = false;
+				for (int ruleIndex = 0; ruleIndex < rules.size() && !flag; ruleIndex++)
+				{
+					const auto& groupPMs = PMGroups.at(PMGroup).getPMs();
+					for (const auto& PM: groupPMs)
+					{
+						if (const auto& rule = rules[ruleIndex]; rule.pm == PM)
+						{
+							expectedPMs.emplace(PMGroup, std::make_tuple(walkPMs(groupPMs, country, PM, PMs), rule.percent));
+							flag = true;
+							break;
+						}
+					}
+				}
+				if (!flag)
+					expectedPMs.emplace(PMGroup, std::tuple{0, 1.0});
+			}
+		}
+		else
+		{
+			for (const auto& PMGroup: building.getPMGroups())
+			{
+				expectedPMs.emplace(PMGroup, std::tuple{0, 1.0});
+			}
+		}
+	}
+	return expectedPMs;
+}
+
 ////////////////////////////////////////// Subset-sum fxns
 std::vector<std::shared_ptr<V3::Building>> mappers::ProductionMethodMapper::subSetSum(const std::vector<std::shared_ptr<V3::Building>>& subSet, int targetVal)
 {
