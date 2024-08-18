@@ -179,6 +179,7 @@ class Country: commonItems::parser
 	[[nodiscard]] int getVanillaPopCount() const; // vanilla pop count of all the provinces this country holds
 	[[nodiscard]] int getIncorporatedPopCount() const;
 	[[nodiscard]] static int getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubStates);
+	[[nodiscard]] std::map<std::string, double> getCultureBreakdown() const;
 
 	void determineWesternizationWealthAndLiteracy(double topTech,
 		 double topInstitutions,

@@ -117,7 +117,8 @@ std::set<std::string> V3::Market::getObsessions(const std::string& culture, cons
 	{
 		if (!cultureErrors.contains(culture))
 		{
-			Log(LogLevel::Warning) << "Culture: " << culture << " has no definition. Assuming no obsessions or taboos.";
+			const auto& theCulture = culture.empty() ? "None" : culture;
+			Log(LogLevel::Warning) << "Culture: " << theCulture << " has no definition. Assuming no obsessions or taboos.";
 		}
 		return {};
 	}
@@ -137,7 +138,8 @@ std::set<std::string> V3::Market::getTaboos(const std::string& culture,
 	{
 		if (!religionErrors.contains(religion))
 		{
-			Log(LogLevel::Warning) << "Religion: " << religion << " has no definition. Assuming no taboos.";
+			const auto& theReligion = religion.empty() ? "None" : religion;
+			Log(LogLevel::Warning) << "Religion: " << theReligion << " has no definition. Assuming no taboos.";
 		}
 		return {};
 	}

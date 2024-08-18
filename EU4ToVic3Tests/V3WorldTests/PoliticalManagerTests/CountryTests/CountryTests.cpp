@@ -281,6 +281,39 @@ TEST(V3World_CountryTests, PopCounterSumsSubStatePop)
 	EXPECT_EQ(1500, country.getPopCount());
 }
 
+TEST(V3World_CountryTests, CultureBreakdownSumsSubStateCultures)
+{
+	V3::Country country;
+	std::vector<std::shared_ptr<V3::SubState>> substates;
+
+	EXPECT_EQ(0, country.getPopCount());
+	EXPECT_EQ(0, V3::Country::getPopCount(substates));
+
+	auto sub0 = std::make_shared<V3::SubState>();
+	auto sub1 = std::make_shared<V3::SubState>();
+
+	V3::Pop pop0, pop1, pop2;
+	pop0.setSize(1000);
+	pop1.setSize(500);
+	pop2.setSize(500);
+
+	pop0.setCulture("english");
+	pop1.setCulture("german");
+	pop2.setCulture("english");
+
+	sub0->addPop(pop0);
+	sub1->addPop(pop1);
+	sub1->addPop(pop2);
+
+	substates.push_back(sub0);
+	substates.push_back(sub1);
+
+	country.addSubState(sub0);
+	country.addSubState(sub1);
+
+	EXPECT_THAT(country.getCultureBreakdown(), testing::UnorderedElementsAre(testing::Pair("english", 0.75), testing::Pair("german", 0.25)));
+}
+
 TEST(V3World_CountryTests, InfrastructureFromCountryTech)
 {
 	V3::Country country;

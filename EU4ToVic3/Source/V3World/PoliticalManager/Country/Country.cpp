@@ -1054,6 +1054,28 @@ int V3::Country::getPopCount(const std::vector<std::shared_ptr<SubState>>& theSu
 	});
 }
 
+// Returns the percentage breakdown of cultures
+std::map<std::string, double> V3::Country::getCultureBreakdown() const
+{
+	int total = 0;
+	std::map<std::string, double> cultureData;
+	for (const auto& subState: subStates)
+	{
+		for (const auto& [culture, amount]: subState->getSubStatePops().getCultureCounts())
+		{
+			cultureData[culture] += amount;
+			total += amount;
+		}
+	}
+
+	total = total == 0 ? 1 : total;
+	for (auto& amount: cultureData | std::views::values)
+	{
+		amount /= total;
+	}
+	return cultureData;
+}
+
 int V3::Country::getVanillaPopCount() const
 {
 	return std::accumulate(subStates.begin(), subStates.end(), 0, [](int sum, const auto& substate) {
