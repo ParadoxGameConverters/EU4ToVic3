@@ -15,6 +15,7 @@ class Market
   public:
 	Market() = default;
 	explicit Market(const std::vector<std::string>& possibleGoods);
+	void loadGoods(const std::map<std::string, Good>& goodsList);
 
 	[[nodiscard]] std::map<std::string, double> getMarketBalance() const;
 	[[nodiscard]] std::map<std::string, double> getMarketShare(const std::vector<std::string>& goods) const;
@@ -32,6 +33,7 @@ class Market
 		 const std::map<std::string, mappers::ReligionDef>& religions,
 		 const std::set<std::string>& laws,
 		 const std::map<std::string, Law>& lawsMap);
+	void clearMarket();
 
   private:
 	static int estimateWealth(const std::string& strata);

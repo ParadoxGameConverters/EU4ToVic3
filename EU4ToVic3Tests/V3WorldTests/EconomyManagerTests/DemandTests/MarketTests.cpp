@@ -39,6 +39,21 @@ TEST(V3World_MarketTests, MarketMutatorsMutateMarket)
 	EXPECT_THAT(market.getMarketBalance(), testing::UnorderedElementsAre(testing::Pair("oil", -5)));
 }
 
+TEST(V3World_MarketTests, ClearMarketResetsMarket)
+{
+	V3::Market market({"oil"});
+
+	market.sell("oil", 10.0);
+	market.buyForBuilding("oil", 5.0);
+	market.buyForPop("oil", 10.0);
+
+	EXPECT_THAT(market.getMarketBalance(), testing::UnorderedElementsAre(testing::Pair("oil", -5)));
+
+	market.clearMarket();
+
+	EXPECT_THAT(market.getMarketBalance(), testing::UnorderedElementsAre(testing::Pair("oil", 0)));
+}
+
 TEST(V3World_MarketTests, MarketShareFollowsFormula)
 {
 	V3::Market market({"oil", "wood", "fabric", "grain"});

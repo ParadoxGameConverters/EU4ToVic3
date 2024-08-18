@@ -253,13 +253,6 @@ std::map<std::string, std::tuple<int, double>> mappers::ProductionMethodMapper::
 					expectedPMs.emplace(PMGroup, std::tuple{0, 1.0});
 			}
 		}
-		else
-		{
-			for (const auto& PMGroup: building.getPMGroups())
-			{
-				expectedPMs.emplace(PMGroup, std::tuple{0, 1.0});
-			}
-		}
 	}
 	return expectedPMs;
 }

@@ -13,6 +13,16 @@ V3::Market::Market(const std::vector<std::string>& possibleGoods)
 	}
 }
 
+void V3::Market::loadGoods(const std::map<std::string, Good>& goodsList)
+{
+	for (const auto& good: goodsList | std::views::keys)
+	{
+		sellOrders[good] = 0;
+		buyOrdersBuildings[good] = 0;
+		buyOrdersPops[good] = 0;
+	}
+}
+
 std::map<std::string, double> V3::Market::getMarketBalance() const
 {
 	std::map<std::string, double> marketBalance;
@@ -384,5 +394,21 @@ void V3::Market::calcPopOrders(const int popSize,
 				buyForPop(good, popDemand);
 			}
 		}
+	}
+}
+
+void V3::Market::clearMarket()
+{
+	for (auto& value: sellOrders | std::views::values)
+	{
+		value = 0;
+	}
+	for (auto& value: buyOrdersPops | std::views::values)
+	{
+		value = 0;
+	}
+	for (auto& value: buyOrdersBuildings | std::views::values)
+	{
+		value = 0;
 	}
 }
