@@ -1125,6 +1125,9 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 		 },
 		 {},
 		 {});
+
+	Log(LogLevel::Debug) << market.printMarketAsTable().str();
+
 	EXPECT_THAT(market.getMarketBalance(),
 		 testing::UnorderedElementsAre(testing::Pair("small_arms", testing::DoubleNear(30.16, 0.02)),
 			  testing::Pair("clothes", testing::DoubleNear(248.3, 0.6)),
@@ -1148,5 +1151,5 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 			  testing::Pair("tobacco", testing::DoubleNear(401.8, 0.8)),
 			  testing::Pair("wood", testing::DoubleNear(384.2, 0.25)),
 			  testing::Pair("groceries", testing::DoubleNear(0, 0.01)),
-			  testing::Pair("wine", testing::DoubleNear(-0.3, 0.3))));
+			  testing::Pair("wine", testing::DoubleNear(-0.3, 0.1))));
 }
