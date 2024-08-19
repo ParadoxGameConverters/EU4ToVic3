@@ -3,9 +3,8 @@
 #include <numeric>
 
 
-V3::MarketJobs::MarketJobs(const std::map<std::string, double>& jobsList)
+V3::MarketJobs::MarketJobs(const std::map<std::string, double>& jobsList): jobCounts(jobsList)
 {
-	jobCounts = jobsList;
 	population = std::accumulate(jobCounts.begin(), jobCounts.end(), 0, [](int sum, const auto& pair) {
 		return sum + static_cast<int>(pair.second);
 	});

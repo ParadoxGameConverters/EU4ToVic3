@@ -34,6 +34,7 @@ class Market
 		 const std::set<std::string>& laws,
 		 const std::map<std::string, Law>& lawsMap);
 	void clearMarket();
+	std::stringstream printMarketAsTable();
 
   private:
 	static int estimateWealth(const std::string& strata);

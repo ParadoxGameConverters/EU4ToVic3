@@ -1,5 +1,6 @@
 #include "Market.h"
 
+#include <iomanip>
 #include <numeric>
 #include <ranges>
 
@@ -413,4 +414,28 @@ void V3::Market::clearMarket()
 	{
 		value = 0;
 	}
+}
+
+std::stringstream V3::Market::printMarketAsTable()
+{
+	std::stringstream out;
+	int goodLength = 0;
+	int amtLength = 0;
+	const auto& balance = getMarketBalance();
+	for (const auto& [good, amt]: balance)
+	{
+		goodLength = std::max(goodLength, static_cast<int>(good.length()));
+		amtLength = std::max(amtLength, static_cast<int>(std::to_string(amt).length()));
+	}
+
+	out << std::endl;
+	out << std::left << std::setw(goodLength + 2) << "Good" << std::setw(amtLength + 2) << "Balance" << std::endl;
+	out << std::setfill('-') << std::setw(goodLength + 2) << "" << std::setw(amtLength + 2) << "" << std::endl;
+	out << std::setfill(' ');
+
+	for (const auto& pair: balance)
+	{
+		out << std::left << std::setw(goodLength + 2) << pair.first << std::setw(amtLength + 2) << pair.second << std::endl;
+	}
+	return out;
 }
