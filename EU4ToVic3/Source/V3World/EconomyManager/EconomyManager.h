@@ -6,6 +6,7 @@
 #include "BuildingMapper/ProductionMethodMapper/ProductionMethodMapper.h"
 #include "ClayManager/State/StateModifier.h"
 #include "Configuration.h"
+#include "Demand/Market.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethod.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethodGroup.h"
 #include "Loaders/BuildingLoader/OwnershipLoader/OwnershipLoader.h"
@@ -97,13 +98,21 @@ class EconomyManager
 	void negotiateBuilding(const std::shared_ptr<SubState>& subState,
 		 const std::map<std::string, std::shared_ptr<Sector>>& sectors,
 		 const std::map<std::string, Law>& lawsMap,
-		 const std::vector<std::shared_ptr<SubState>>& subStates) const;
+		 const std::vector<std::shared_ptr<SubState>>& subStates,
+		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
+		 const std::map<std::string, double>& cultureData,
+		 std::map<std::string, double>& jobData,
+		 Market& market) const;
 	[[nodiscard]] static std::shared_ptr<Sector> getSectorWithMostBudget(const std::map<std::string, std::shared_ptr<Sector>>& sectors);
 	void buildBuilding(const std::shared_ptr<Building>& building,
 		 const std::shared_ptr<SubState>& subState,
 		 const std::shared_ptr<Sector>& sector,
 		 const std::map<std::string, Law>& lawsMap,
-		 const std::vector<std::shared_ptr<SubState>>& subStates) const;
+		 const std::vector<std::shared_ptr<SubState>>& subStates,
+		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
+		 const std::map<std::string, double>& cultureData,
+		 std::map<std::string, double>& jobData,
+		 Market& market) const;
 	void removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
 		 const std::vector<std::shared_ptr<SubState>>::iterator& subState,
 		 const std::map<std::string, Law>& lawsMap) const;

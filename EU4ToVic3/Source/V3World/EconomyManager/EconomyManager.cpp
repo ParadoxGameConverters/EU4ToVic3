@@ -1,6 +1,8 @@
 #include "EconomyManager.h"
 #include "Building/Building.h"
+#include "Building/BuildingGroup.h"
 #include "Building/BuildingGroups.h"
+#include "Building/BuildingResources.h"
 #include "Building/ProductionMethods/ProductionMethod.h"
 #include "Building/ProductionMethods/ProductionMethodGroup.h"
 #include "ClayManager/State/State.h"
@@ -223,23 +225,47 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 	// 3c. packet size is based on the mean amount of CP states have left to build and is configurable
 	// 4. If a substate ends up with less CP than the cost for any possible valid building, they relinquish it to the next sector/substate
 
+	Market market;
+	market.loadGoods(demand.getGoodsMap());
+
+	// Load up peasants
+	for (const auto& country: centralizedCountries)
+	{
+		for (const auto& subState: country->getSubStates())
+		{
+			const auto& subsistenceBuildingName = subState->getHomeState()->getSubsistenceBuilding();
+			if (const auto& subsistenceBuildingIter = buildings.find(subsistenceBuildingName); subsistenceBuildingIter != buildings.end())
+			{
+				const auto& subsistenceBuilding = subsistenceBuildingIter->second;
+			}
+			else
+			{
+				Log(LogLevel::Warning) << "Subsistence Building: " << subsistenceBuildingName << " has no definition.";
+			}
+		}
+	}
+
 	for (const auto& country: centralizedCountries)
 	{
 		const auto& sectors = country->getProcessedData().industrySectors;
 		auto subStatesByBudget = prepareSubStatesByBudget(country, lawsMap);
+		const auto& estimatedPMs = PMMapper.estimatePMs(*country, PMs, PMGroups, buildings);
+		const auto& cultureData = country->getCultureBreakdown();
+		std::map<std::string, double> jobData;
 
 		// Until every substate is unable to build anything
 		while (!subStatesByBudget.empty())
 		{
 			// Enter negotiation
 			// Pick the substate with the most budget
-			negotiateBuilding(subStatesByBudget[0], sectors, lawsMap, subStatesByBudget);
+			negotiateBuilding(subStatesByBudget[0], sectors, lawsMap, subStatesByBudget, estimatedPMs, cultureData, jobData, market);
 			++counter;
 
 			// A Building has now been built, process for next round
 			std::sort(subStatesByBudget.begin(), subStatesByBudget.end(), SubState::greaterBudget);
 			removeSubStateIfFinished(subStatesByBudget, subStatesByBudget.end() - 1, lawsMap);
 		}
+		// TODO(Gawquon): Add a debug printout of the estimated market.
 	}
 	Log(LogLevel::Info) << "<> Built " << counter << " buildings world-wide.";
 }
@@ -683,7 +709,11 @@ std::vector<std::shared_ptr<V3::SubState>> V3::EconomyManager::prepareSubStatesB
 void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subState,
 	 const std::map<std::string, std::shared_ptr<Sector>>& sectors,
 	 const std::map<std::string, Law>& lawsMap,
-	 const std::vector<std::shared_ptr<SubState>>& subStates) const
+	 const std::vector<std::shared_ptr<SubState>>& subStates,
+	 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
+	 const std::map<std::string, double>& cultureData,
+	 std::map<std::string, double>& jobData,
+	 Market& market) const
 {
 	// Whether or not the negotiation succeeds, a building MUST be built.
 
@@ -717,7 +747,7 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 		}
 
 		// So we're a valid building in a valid sector and there is budget for us. Great!
-		buildBuilding(building, subState, sectors.at(sector.value()), lawsMap, subStates);
+		buildBuilding(building, subState, sectors.at(sector.value()), lawsMap, subStates, estimatedPMs, cultureData, jobData, market);
 		talksFail = false;
 		break;
 	}
@@ -726,7 +756,7 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 	{
 		// Negotiation failed
 		// State picks its favorite building, takes from biggest sector
-		buildBuilding(subState->getBuildings()[0], subState, getSectorWithMostBudget(sectors), lawsMap, subStates);
+		buildBuilding(subState->getBuildings()[0], subState, getSectorWithMostBudget(sectors), lawsMap, subStates, estimatedPMs, cultureData, jobData, market);
 	}
 }
 
@@ -743,7 +773,11 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 	 const std::shared_ptr<SubState>& subState,
 	 const std::shared_ptr<Sector>& sector,
 	 const std::map<std::string, Law>& lawsMap,
-	 const std::vector<std::shared_ptr<SubState>>& subStates) const
+	 const std::vector<std::shared_ptr<SubState>>& subStates,
+	 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
+	 const std::map<std::string, double>& cultureData,
+	 std::map<std::string, double>& jobData,
+	 Market& market) const
 {
 	// SUBSTATE MUST SPEND ITS CP OR WE GET INFINITE LOOPS
 	// Spend sector CP if possible
@@ -762,6 +796,84 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 	{
 		subState->setResource("bg_agriculture", subState->getResource("bg_agriculture") - p);
 	}
+
+	// Track Demand
+	BuildingResources buildingResources;
+	buildingResources.evaluateResources(building->getPMGroups(), estimatedPMs, PMs, PMGroups);
+
+	// Collect any/all building or inherited building_group throughput modifiers
+	double throughputMod = 1;
+	for (const auto& trait: subState->getHomeState()->getTraits())
+	{
+		if (const auto& traitIter = stateTraits.find(trait); traitIter != stateTraits.end())
+		{
+			throughputMod += traitIter->second.calcBuildingModifiers(*building, buildingGroups);
+			continue;
+		}
+		Log(LogLevel::Warning) << "Trait: " << trait << "has no definition.";
+	}
+
+	// Evaluate the economy of scale cap
+	// There is an economy of scale penalty for nationalized buildings. For now we're ignoring it.
+	// subState->getOwner()->getProcessedData().techs, techMap);
+	int eosCap = subState->getOwner()->getThroughputMax(techMap.getTechs());
+	if (buildingGroups.getBuildingGroupMap().at(building->getBuildingGroup())->isSubsistence())
+	{
+		eosCap = 0;
+	}
+
+	//// Update the market
+	const int level = building->getLevel();
+	for (const auto& [good, amount]: buildingResources.getInputs())
+	{
+		double effectiveLevelsAdded;
+		if (level <= eosCap)
+		{
+			effectiveLevelsAdded = p * ((2 * level - p) / 100.0 + 1 + throughputMod);
+		}
+		else if (level - p > eosCap) // We're already past the economy of scale cap.
+		{
+			effectiveLevelsAdded = p * (eosCap / 100.0 + 1 + throughputMod);
+		}
+		else // The new level of buildings just jumped over the economy of scale cap.
+		{
+			effectiveLevelsAdded = p * (throughputMod + 1) + (eosCap * level + 2 * level * p - std::pow(level, 2) - std::pow(p, 2)) / 100.0;
+		}
+		market.sell(good, effectiveLevelsAdded * amount);
+	}
+	for (const auto& [good, amount]: buildingResources.getOutputs())
+	{
+		// Collect any/all good specific output modifiers
+		double outputMod = 1;
+		for (const auto& trait: subState->getHomeState()->getTraits())
+		{
+			if (const auto& traitIter = stateTraits.find(trait); traitIter != stateTraits.end())
+			{
+				outputMod += traitIter->second.getGoodsModifier(good).value_or(0);
+				continue;
+			}
+			Log(LogLevel::Warning) << "Trait: " << trait << "has no definition.";
+		}
+
+		double effectiveLevelsAdded;
+		if (level <= eosCap)
+		{
+			effectiveLevelsAdded = p * ((2 * level - p) / 100.0 + 1 + throughputMod + outputMod);
+		}
+		else if (level - p > eosCap) // We're already past the economy of scale cap.
+		{
+			effectiveLevelsAdded = p * (eosCap / 100.0 + 1 + throughputMod + outputMod);
+		}
+		else // The new level of buildings just jumped over the economy of scale cap.
+		{
+			effectiveLevelsAdded = p * (throughputMod + outputMod + 1) + (eosCap * level + 2 * level * p - std::pow(level, 2) - std::pow(p, 2)) / 100.0;
+		}
+		market.buyForBuilding(good, effectiveLevelsAdded * amount);
+	}
+	// for (const auto& [job, amount]: buildingResources.getJobs())
+	// {
+	//		marketJobs.createJobs(job, building->getLevel() * amount);
+	// }
 }
 
 void V3::EconomyManager::removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
