@@ -416,7 +416,7 @@ void V3::Market::clearMarket()
 	}
 }
 
-std::stringstream V3::Market::printMarketAsTable()
+std::stringstream V3::Market::marketAsTable() const
 {
 	std::stringstream out;
 	int goodLength = 0;
@@ -428,14 +428,16 @@ std::stringstream V3::Market::printMarketAsTable()
 		amtLength = std::max(amtLength, static_cast<int>(std::to_string(amt).length()));
 	}
 
+	out << std::setprecision(1);
 	out << std::endl;
-	out << std::left << std::setw(goodLength + 2) << "Good" << std::setw(amtLength + 2) << "Balance" << std::endl;
+	out << std::left << std::setw(goodLength + 2) << "Good" << std::setw(amtLength + 2) << "Price" << std::endl;
 	out << std::setfill('-') << std::setw(goodLength + 2) << "" << std::setw(amtLength + 2) << "" << std::endl;
 	out << std::setfill(' ');
 
 	for (const auto& pair: balance)
 	{
-		out << std::left << std::setw(goodLength + 2) << pair.first << std::setw(amtLength + 2) << pair.second << std::endl;
+		const double pricePercent = 0.75 * std::max(-1.0, std::min(1.0, pair.second / 100));
+		out << std::left << std::setw(goodLength + 2) << pair.first << std::setw(amtLength + 2) << pricePercent * 100 << "%" << std::endl;
 	}
 	return out;
 }

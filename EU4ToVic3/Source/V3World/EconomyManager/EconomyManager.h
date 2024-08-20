@@ -75,6 +75,7 @@ class EconomyManager
   private:
 	static double calculatePopDistanceFactor(int countryPopulation, double geoMeanPopulation);
 	static double calculateDateFactor(Configuration::STARTDATE startDate, const DatingData& dateData);
+	static std::stringstream breakdownAsTable(const std::map<std::string, double>& breakdown, int size);
 
 	// Budget fxns set weight for all countries, accumulates the total weight, and returns a modifier to the globalCP pool (if any).
 	[[nodiscard]] std::pair<double, double> countryBudgetCalcs(Configuration::ECONOMY economyType) const; // Return total weight, any special factors

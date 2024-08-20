@@ -268,6 +268,30 @@ double V3::EconomyManager::calculateDateFactor(const Configuration::STARTDATE st
 	return 0.0;
 }
 
+std::stringstream V3::EconomyManager::breakdownAsTable(const std::map<std::string, double>& breakdown, int size)
+{
+	std::stringstream out;
+	int nameLength = 0;
+	int percentLength = 0;
+	for (const auto& [good, amt]: breakdown)
+	{
+		nameLength = std::max(nameLength, static_cast<int>(good.length()));
+		percentLength = std::max(percentLength, static_cast<int>(std::to_string(amt).length()));
+	}
+
+	out << std::setprecision(1);
+	out << std::endl;
+	out << std::left << std::setw(nameLength + 2) << "Good" << std::setw(percentLength + 2) << "Price" << std::endl;
+	out << std::setfill('-') << std::setw(nameLength + 2) << "" << std::setw(percentLength + 2) << "" << std::endl;
+	out << std::setfill(' ');
+
+	for (const auto& pair: breakdown)
+	{
+		out << std::left << std::setw(nameLength + 2) << pair.first << std::setw(percentLength + 2) << pair.second * 100 << "%" << std::endl;
+	}
+	return out;
+}
+
 std::pair<double, double> V3::EconomyManager::countryBudgetCalcs(const Configuration::ECONOMY economyType) const
 {
 	// Returns total weight, and any special multiplicative factors specific to the method.
