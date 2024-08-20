@@ -1,0 +1,135 @@
+# Decide how ownership will be split among Vic 3 buildings.
+# Keywords are 'local', 'national', 'national_service', 'building_manor_house', 'building_financial_district'
+# colonial = 0.2 ### This shifts 20% of the aristocracy too be owned by an overlord if applicable; default is 0%
+# financial = 0.1 ### This shifts 10% of the capital to the nation's capital; default is 0%
+# recognized = yes ### This prevents capitalists from owning these buildings if a nation is unrecognized
+
+agriculture = {
+	ownership = {
+		building_manor_house = {
+			weight = 1
+			colonial = 0.2
+		}
+	}
+
+	building_coffee_plantation
+	building_cotton_plantation
+	building_dye_plantation
+	building_opium_plantation
+	building_tea_plantation
+	building_tobacco_plantation
+	building_sugar_plantation
+	building_banana_plantation
+	building_silk_plantation
+	building_vineyard_plantation
+	building_rye_farm
+	building_rice_farm
+	building_wheat_farm
+	building_maize_farm
+	building_millet_farm
+	building_livestock_ranch
+}
+
+fishing = {
+	ownership = { local = 1 }
+
+	building_fishing_wharf
+}
+
+extraction = {
+	ownership = {
+		local = 0.5
+		building_financial_district = 
+		{
+			weight = 0.3
+			financial = 0.1
+			colonial = 0.05
+			recognized = yes
+		}
+		building_manor_house = { 
+			weight = 0.2
+			colonial = 0.2
+		}
+	}
+
+	building_logging_camp
+	building_iron_mine
+	building_coal_mine
+	building_gold_mine
+	building_lead_mine
+	building_sulfur_mine
+	building_whaling_station
+}
+
+defense = {
+	ownership = {
+		national = 0.9
+		building_financial_district = { 
+			weight = 0.1
+			recognized = yes
+		}
+	}
+
+	building_military_shipyards
+	building_arms_industry
+	building_artillery_foundries
+	building_munition_plants
+}
+
+artisans = {
+	ownership = {
+		local = 0.5
+		building_financial_district = {
+			weight = 0.4
+			recognized = yes
+		}
+		building_manor_house = { weight = 0.1 }
+	}
+
+	building_textile_mills
+	building_furniture_manufacturies
+	building_glassworks
+	building_tooling_workshops
+	building_shipyards
+}
+
+industry = {
+	ownership = {
+		building_financial_district = {
+			weight = 0.7
+			financial = 0.3
+			recognized = yes
+		}
+		local = 0.2
+		national = 0.1
+	}
+
+	building_food_industry
+	building_paper_mills
+	building_chemical_plants
+	building_steel_mills
+	building_motor_industry
+	building_explosives_factory
+	building_railway
+}
+
+services = {
+	ownership = { national_service = 1 }
+
+	building_port
+	building_construction_sector
+	building_university
+	building_barracks
+	building_naval_base
+	building_government_administration
+}
+
+arts = {
+	ownership = {
+		local = 0.34
+		building_manor_house = { weight = 0.33 }
+		building_financial_district = { weight = 0.33 }
+	}
+
+	building_arts_academy
+}

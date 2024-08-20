@@ -9,6 +9,7 @@ struct CultureDef
 	std::string name;
 	std::optional<commonItems::Color> color;
 	std::string religion;
+	std::set<std::string> obsessions;
 	std::set<std::string> traits;
 	std::set<std::string> maleCommonFirstNames;
 	std::set<std::string> femaleCommonFirstNames;

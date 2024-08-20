@@ -573,9 +573,9 @@ bool V3::ClayManager::importVanillaSubStates(const std::string& stateName,
 		const double subStateRatio = static_cast<double>(availableProvinces.size()) / static_cast<double>(subStateEntry.getProvinces().size());
 		auto newPops = prepareInjectedSubStatePops(newSubState, subStateRatio, popManager);
 
-		// Transfer original buildings, unscaled at the moment.
+		// For VN, transfer original buildings, unscaled at the moment.
 		// TODO: Scale this if necessary.
-		if (vanillaBuildingLoader.getBuildingElements().contains(stateName) && vanillaBuildingLoader.getBuildingElements().at(stateName).contains(ownerTag))
+		if (vn && vanillaBuildingLoader.getBuildingElements().contains(stateName) && vanillaBuildingLoader.getBuildingElements().at(stateName).contains(ownerTag))
 		{
 			newSubState->setVanillaBuildingElements(vanillaBuildingLoader.getBuildingElements().at(stateName).at(ownerTag));
 		}
@@ -863,11 +863,11 @@ void V3::ClayManager::filterInvalidClaims(const PoliticalManager& politicalManag
 	Log(LogLevel::Info) << "<> Filtered " << counter << " Dead Claims.";
 }
 
-void V3::ClayManager::redistributeResourcesAndLandshares()
+void V3::ClayManager::redistributeResourcesAndLandshares(const int splitStatePrimeLandWeight)
 {
 	for (const auto& state: states | std::views::values)
 	{
-		state->distributeLandshares();
+		state->distributeLandshares(splitStatePrimeLandWeight);
 		state->distributeResources();
 	}
 }

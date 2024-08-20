@@ -188,10 +188,9 @@ void V3::SubState::calculateTerrainFrequency()
 	}
 }
 
-double V3::SubState::getPopInfrastructure(const std::map<std::string, Tech>& techMap) const
+double V3::SubState::getPopInfrastructure(const std::map<std::string, Tech>& techMap, const int popPerInfrastructure) const
 {
-	// INDIVIDUALS_PER_POP_INFRASTRUCTURE = 10000
-	const double popInfra = subStatePops.getPopCount() * owner->getTechInfraMult(techMap) / 10000.0;
+	const double popInfra = subStatePops.getPopCount() * owner->getTechInfraMult(techMap) / popPerInfrastructure;
 	if (const int cap = owner->getTechInfraCap(techMap); popInfra > cap)
 	{
 		return cap;
@@ -362,11 +361,11 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	 const std::map<std::string, StateModifier>& traitMap) const
 {
 	// Government Admin is a special case, we're not building it.
-	if (building.getName() == "building_government_administration")
+	if (building.getName() == "building_government_administration" || building.getName() == "building_port")
 	{
 		return false;
 	}
-	if (const std::set<std::string> coastalBuildings = {"building_naval_base", "building_port", "building_shipyards"};
+	if (const std::set<std::string> coastalBuildings = {"building_naval_base", "building_shipyards"}; // ports are pre-seeded
 		 coastalBuildings.contains(building.getName()))
 	{
 		if (!isCoastal())
@@ -574,9 +573,9 @@ double V3::SubState::calcBuildingWeight(const Building& building,
 	return (1 + terrainWeight + EU4BuildingWeight) * traitWeight * investmentWeight * industrialWeight * overPopWeight;
 }
 
-void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap)
+void V3::SubState::calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap, const int popPerInfrastructure)
 {
-	const double popInfra = getPopInfrastructure(techMap);
+	const double popInfra = getPopInfrastructure(techMap, popPerInfrastructure);
 	auto [stateModBonus, stateModMultipliers] = getStateInfrastructureModifiers(theStateModifiers);
 
 	// Principal = Base + isCoastal(substate lvl) + State modifier bonus + (Pop * tech)_capped.

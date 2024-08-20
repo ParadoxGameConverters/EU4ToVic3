@@ -575,7 +575,7 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 			if (country1->second->getProcessedData().type != "unrecognized")
 				newAgreement.type = "puppet";
 		}
-		if (newAgreement.type == "puppet")
+		if (newAgreement.type == "puppet" || newAgreement.type == "dominion")
 		{
 			// Watch for westernization!
 			if (country1->second->getProcessedData().type == "unrecognized")
@@ -617,14 +617,19 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 				continue;
 		}
 
+		if (subjects.contains(newAgreement.type))
+		{
+			// For subjects, set libertyDesire, reduced by 50 because Vic3 default is 50.
+			newAgreement.libertyDesire = country2->second->getSourceCountry()->getLibertyDesire() - 50;
+			Log(LogLevel::Debug) << newAgreement.first << " -> " << newAgreement.second << " typ: " << newAgreement.type << " ld: " << *newAgreement.libertyDesire;
+			// and record overlordship locally for further use.
+			country2->second->setOverlord(V3Tag1);
+		}
+
 		// store agreement
 		if (!newAgreement.type.empty())
 		{
 			agreements.push_back(newAgreement);
-
-			// and record overlordship locally for further use.
-			if (subjects.contains(newAgreement.type))
-				country2->second->setOverlord(V3Tag1);
 		}
 	}
 	Log(LogLevel::Info) << "<> Transcribed " << agreements.size() << " agreements.";

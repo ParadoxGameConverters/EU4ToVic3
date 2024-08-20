@@ -54,9 +54,10 @@ void EU4::Country::registerKeys()
 	registerKeyword("technology_group", [this](std::istream& theStream) {
 		techGroup = commonItems::getString(theStream);
 	});
-	registerKeyword("liberty_desire", [this](std::istream& theStream) {
-		libertyDesire = commonItems::getDouble(theStream);
-	});
+	// This is a red herring. We need to use cached value, not this, which is (I believe) events and decisions by overlord.
+	// registerKeyword("liberty_desire", [this](std::istream& theStream) {
+	//	libertyDesire = commonItems::getDouble(theStream);
+	//});
 	registerKeyword("institutions", [this](std::istream& theStream) {
 		for (const auto institution: commonItems::getInts(theStream))
 			if (institution == 1)
@@ -169,6 +170,9 @@ void EU4::Country::registerKeys()
 	});
 	registerKeyword("human", [this](std::istream& theStream) {
 		isHuman = commonItems::getString(theStream) == "yes";
+	});
+	registerKeyword("cached_liberty_desire", [this](std::istream& theStream) {
+		libertyDesire = commonItems::getDouble(theStream);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
