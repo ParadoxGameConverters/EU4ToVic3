@@ -183,11 +183,13 @@ void V3::Country::distributeGovAdmins(const double target,
 		const double stateTarget = target * popProportion;
 
 		// Calc levels for generation
-		int levels = static_cast<int>(stateTarget * 100 / 101 / PMGeneration);
-		double generation = levels * PMGeneration;
-		if (const int throughputMax = getThroughputMax(techMap); levels > throughputMax)
+		const double scaledLevels = (-1 + std::sqrt(1 + 0.04 * stateTarget / PMGeneration)) * 50;
+		int levels = static_cast<int>(std::round(scaledLevels));
+		double generation = levels * (0.01 * levels + 1) * PMGeneration;
+
+		if (const int throughputMax = getThroughputMax(techMap); scaledLevels > throughputMax)
 		{
-			levels = static_cast<int>(stateTarget / (PMGeneration + PMGeneration * (throughputMax / 100.0)));
+			levels = static_cast<int>(stateTarget / PMGeneration / (throughputMax / 100.0));
 			generation = levels * PMGeneration * (1 + throughputMax / 100.0);
 		}
 
