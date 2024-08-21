@@ -36,6 +36,8 @@ class Market
 	void clearMarket();
 	std::stringstream marketAsTable() const;
 
+	static double calcAddedWorkingPopPercent(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap);
+
   private:
 	static int estimateWealth(const std::string& strata);
 	static std::set<std::string> getObsessions(const std::string& culture, const std::map<std::string, mappers::CultureDef>& cultures);
@@ -54,7 +56,6 @@ class Market
 		 const std::map<std::string, Good>& goodsMap);
 	static double calcPurchaseWeight(double marketShare, const GoodsFulfillment& fulfillment, double culturalPrevalence);
 	static double calcCulturalNeedFactor(const std::vector<std::string>& goods, const std::map<std::string, double>& culturalPrevalence);
-	static double calcAddedWorkingPopPercent(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap);
 
 	[[nodiscard]] bool validateGood(const std::string& good) const;
 	[[nodiscard]] std::vector<std::string> enumerateGoods(const std::map<std::string, GoodsFulfillment>& map, const std::map<std::string, Good>& goodsMap) const;

@@ -3,7 +3,8 @@
 #include <numeric>
 
 
-V3::MarketJobs::MarketJobs(const std::map<std::string, double>& jobsList): jobCounts(jobsList)
+V3::MarketJobs::MarketJobs(const std::map<std::string, double>& jobsList, const std::vector<std::pair<std::string, int>>& manorHouseRoster):
+	 jobCounts(jobsList), manorHouseRoster(manorHouseRoster)
 {
 	population = std::accumulate(jobCounts.begin(), jobCounts.end(), 0, [](int sum, const auto& pair) {
 		return sum + static_cast<int>(pair.second);
@@ -24,17 +25,17 @@ std::map<std::string, double> V3::MarketJobs::getJobBreakdown() const
 	return jobBreakdown;
 }
 
-void V3::MarketJobs::createJobs(const PopType& popType, double amount, const double defaultRatio, const double womenJobRate)
+void V3::MarketJobs::createJobs(const PopType& popType, double amount, const double defaultRatio, const double womenJobRate, const int peasantsPerLevel)
 {
 	amount /= (popType.getDependentRatio().value_or(defaultRatio) + womenJobRate);
-	const double shortage = hireFromWorseJobs(amount);
+	const double shortage = hireFromWorseJobs(amount, peasantsPerLevel);
 	jobCounts[popType.getType()] += amount - shortage;
 }
 
-double V3::MarketJobs::hireFromWorseJobs(double amount)
+double V3::MarketJobs::hireFromWorseJobs(double amount, const int peasantsPerLevel)
 {
 	amount = hireFromUnemployed(amount);
-	amount = hireFromPeasants(amount);
+	amount = hireFromPeasants(amount, peasantsPerLevel);
 	return amount;
 }
 
@@ -51,15 +52,26 @@ double V3::MarketJobs::hireFromUnemployed(double amount)
 	return amount;
 }
 
-double V3::MarketJobs::hireFromPeasants(double amount)
+double V3::MarketJobs::hireFromPeasants(double amount, const int peasantsPerLevel)
 {
+	// When peasants are removed, Manor Houses downsize
 	const double peasants = jobCounts.at("peasants");
 	if (peasants > amount)
 	{
 		jobCounts["peasants"] -= amount;
+		downsizeManorHouses(amount, peasantsPerLevel);
 		return 0;
 	}
 	amount -= peasants;
 	jobCounts["peasants"] = 0;
+	downsizeManorHouses(peasants, peasantsPerLevel);
 	return amount;
+}
+
+void V3::MarketJobs::downsizeManorHouses(const double peasantAmount, const int peasantsPerLevel)
+{
+	for (const auto& [job, amount]: manorHouseRoster)
+	{
+		jobCounts[job] -= amount * peasantAmount / peasantsPerLevel;
+	}
 }

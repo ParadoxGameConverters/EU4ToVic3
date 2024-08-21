@@ -7,6 +7,7 @@
 #include "ClayManager/State/StateModifier.h"
 #include "Configuration.h"
 #include "Demand/Market.h"
+#include "Demand/MarketJobs.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethod.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethodGroup.h"
 #include "Loaders/BuildingLoader/OwnershipLoader/OwnershipLoader.h"
@@ -77,6 +78,7 @@ class EconomyManager
 	static double calculatePopDistanceFactor(int countryPopulation, double geoMeanPopulation);
 	static double calculateDateFactor(Configuration::STARTDATE startDate, const DatingData& dateData);
 	static std::stringstream breakdownAsTable(const std::map<std::string, double>& breakdown, int size);
+	static std::map<std::string, double> calcInvestorWeights(const std::map<std::string, OwnershipData>& buildingOwnershipMap, const Country& country);
 
 	// Budget fxns set weight for all countries, accumulates the total weight, and returns a modifier to the globalCP pool (if any).
 	[[nodiscard]] std::pair<double, double> countryBudgetCalcs(Configuration::ECONOMY economyType) const; // Return total weight, any special factors
@@ -100,8 +102,8 @@ class EconomyManager
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::vector<std::shared_ptr<SubState>>& subStates,
 		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
-		 const std::map<std::string, double>& cultureData,
-		 std::map<std::string, double>& jobData,
+		 const std::map<std::string, std::map<std::string, double>>& estimatedOwnershipFracs,
+		 MarketJobs& marketJobs,
 		 Market& market) const;
 	[[nodiscard]] static std::shared_ptr<Sector> getSectorWithMostBudget(const std::map<std::string, std::shared_ptr<Sector>>& sectors);
 	void buildBuilding(const std::shared_ptr<Building>& building,
@@ -110,8 +112,8 @@ class EconomyManager
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::vector<std::shared_ptr<SubState>>& subStates,
 		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
-		 const std::map<std::string, double>& cultureData,
-		 std::map<std::string, double>& jobData,
+		 const std::map<std::string, std::map<std::string, double>>& estimatedOwnershipFracs,
+		 MarketJobs& marketJobs,
 		 Market& market) const;
 	void removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
 		 const std::vector<std::shared_ptr<SubState>>::iterator& subState,
@@ -127,6 +129,7 @@ class EconomyManager
 	[[nodiscard]] std::map<std::string, int> apportionInvestors(int levels,
 		 const std::map<std::string, double>& investorWeights,
 		 std::map<std::string, double>& investorIOUs) const;
+	[[nodiscard]] std::map<std::string, std::map<std::string, double>> estimateInvestorBuildings(const Country& country) const;
 
 	void loadTerrainModifierMatrices(const std::string& filePath = "");
 	void loadStateTraits(const commonItems::ModFilesystem& modFS);

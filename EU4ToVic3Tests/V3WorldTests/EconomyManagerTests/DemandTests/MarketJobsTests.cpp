@@ -14,7 +14,7 @@ TEST(V3World_MarketJobsTests, DefaultsDefaultToDefaults)
 TEST(V3World_MarketJobsTests, JobBreakdownReturnsPercentages)
 {
 	std::map<std::string, double> jobList({{"poors", 250}, {"unemployed", 750}, {"peasants", 1000}});
-	const V3::MarketJobs marketJobs(jobList);
+	const V3::MarketJobs marketJobs(jobList, {});
 
 	EXPECT_THAT(marketJobs.getJobBreakdown(),
 		 testing::UnorderedElementsAre(testing::Pair("poors", .125), testing::Pair("unemployed", .375), testing::Pair("peasants", .5)));
@@ -23,14 +23,14 @@ TEST(V3World_MarketJobsTests, JobBreakdownReturnsPercentages)
 TEST(V3World_MarketJobsTests, CreateJobsTakesFromUnemployedAndPeasants)
 {
 	std::map<std::string, double> jobList({{"poors", 250}, {"unemployed", 750}, {"peasants", 1000}});
-	V3::MarketJobs marketJobs(jobList);
+	V3::MarketJobs marketJobs(jobList, {});
 
 	std::stringstream input;
 	input << "working_adult_ratio = 0.25\n";
 	V3::PopType clerks;
 	clerks.setType("clerks");
 
-	marketJobs.createJobs(clerks, 250, 0.25, 0);
+	marketJobs.createJobs(clerks, 250, 0.25, 0, 1);
 
 	EXPECT_THAT(marketJobs.getJobCounts(),
 		 testing::UnorderedElementsAre(testing::Pair("poors", 250),
@@ -38,3 +38,5 @@ TEST(V3World_MarketJobsTests, CreateJobsTakesFromUnemployedAndPeasants)
 			  testing::Pair("peasants", 750),
 			  testing::Pair("unemployed", 0)));
 }
+
+// TODO(Gawquon): Test Manor House Removal

@@ -250,15 +250,28 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 		const auto& sectors = country->getProcessedData().industrySectors;
 		auto subStatesByBudget = prepareSubStatesByBudget(country, lawsMap);
 		const auto& estimatedPMs = PMMapper.estimatePMs(*country, PMs, PMGroups, buildings);
+		const auto& estimatedOwnershipFracs = estimateInvestorBuildings(*country);
 		const auto& cultureData = country->getCultureBreakdown();
-		std::map<std::string, double> jobData;
+		MarketJobs marketJobs; // TODO(Gawquon): Init Market Jobs
 
 		// Until every substate is unable to build anything
 		while (!subStatesByBudget.empty())
 		{
 			// Enter negotiation
+			// Update the market
+			market.calcPopOrders(country->getPopCount(),
+				 marketJobs.getJobBreakdown(),
+				 cultureData,
+				 defines, // TODO(Gawquon): Load in defines
+				 demand,
+				 popTypeLoader.getPopTypes(),
+				 {}, // TODO(Gawquon): Load in cultures
+				 {}, // TODO(Gawquon): Load in religions
+				 country->getProcessedData().laws,
+				 lawsMap);
+
 			// Pick the substate with the most budget
-			negotiateBuilding(subStatesByBudget[0], sectors, lawsMap, subStatesByBudget, estimatedPMs, cultureData, jobData, market);
+			negotiateBuilding(subStatesByBudget[0], sectors, lawsMap, subStatesByBudget, estimatedPMs, estimatedOwnershipFracs, marketJobs, market);
 			++counter;
 
 			// A Building has now been built, process for next round
@@ -555,23 +568,8 @@ void V3::EconomyManager::investCapital(const std::map<std::string, std::shared_p
 
 				// First assemble the investor weights conditional on the country's state-space
 				const auto& ownershipMap = ownershipLoader.getOwnershipsFromBuilding(building->getName());
-				std::map<std::string, double> investorWeights;
+				const auto& investorWeights = calcInvestorWeights(ownershipMap, *country);
 
-				double totalWeight = 0;
-				for (const auto& [type, investorData]: ownershipMap)
-				{
-					if (investorData.recognized && country->getProcessedData().type != "recognized")
-					{
-						continue;
-					}
-
-					investorWeights[type] = investorData.weight;
-					totalWeight += investorData.weight;
-				}
-				for (const auto& type: investorWeights | std::views::keys)
-				{
-					investorWeights[type] /= totalWeight;
-				}
 
 				// Now apportion the buildings out among the different investor types
 				const auto& investorApportionment = apportionInvestors(building->getLevel(), investorWeights, investorIOUs);
@@ -711,8 +709,8 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 	 const std::map<std::string, Law>& lawsMap,
 	 const std::vector<std::shared_ptr<SubState>>& subStates,
 	 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
-	 const std::map<std::string, double>& cultureData,
-	 std::map<std::string, double>& jobData,
+	 const std::map<std::string, std::map<std::string, double>>& estimatedOwnershipFracs,
+	 MarketJobs& marketJobs,
 	 Market& market) const
 {
 	// Whether or not the negotiation succeeds, a building MUST be built.
@@ -747,7 +745,7 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 		}
 
 		// So we're a valid building in a valid sector and there is budget for us. Great!
-		buildBuilding(building, subState, sectors.at(sector.value()), lawsMap, subStates, estimatedPMs, cultureData, jobData, market);
+		buildBuilding(building, subState, sectors.at(sector.value()), lawsMap, subStates, estimatedPMs, estimatedOwnershipFracs, marketJobs, market);
 		talksFail = false;
 		break;
 	}
@@ -756,7 +754,15 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 	{
 		// Negotiation failed
 		// State picks its favorite building, takes from biggest sector
-		buildBuilding(subState->getBuildings()[0], subState, getSectorWithMostBudget(sectors), lawsMap, subStates, estimatedPMs, cultureData, jobData, market);
+		buildBuilding(subState->getBuildings()[0],
+			 subState,
+			 getSectorWithMostBudget(sectors),
+			 lawsMap,
+			 subStates,
+			 estimatedPMs,
+			 estimatedOwnershipFracs,
+			 marketJobs,
+			 market);
 	}
 }
 
@@ -775,8 +781,8 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 	 const std::map<std::string, Law>& lawsMap,
 	 const std::vector<std::shared_ptr<SubState>>& subStates,
 	 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
-	 const std::map<std::string, double>& cultureData,
-	 std::map<std::string, double>& jobData,
+	 const std::map<std::string, std::map<std::string, double>>& estimatedOwnershipFracs,
+	 MarketJobs& marketJobs,
 	 Market& market) const
 {
 	// SUBSTATE MUST SPEND ITS CP OR WE GET INFINITE LOOPS
@@ -815,7 +821,7 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 
 	// Evaluate the economy of scale cap
 	// There is an economy of scale penalty for nationalized buildings. For now we're ignoring it.
-	// subState->getOwner()->getProcessedData().techs, techMap);
+	// There are scenarios other than subsistence building that do not use economy of scale, but none that are currently relevant.
 	int eosCap = subState->getOwner()->getThroughputMax(techMap.getTechs());
 	if (buildingGroups.getBuildingGroupMap().at(building->getBuildingGroup())->isSubsistence())
 	{
@@ -870,10 +876,29 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 		}
 		market.buyForBuilding(good, effectiveLevelsAdded * amount);
 	}
-	// for (const auto& [job, amount]: buildingResources.getJobs())
-	// {
-	//		marketJobs.createJobs(job, building->getLevel() * amount);
-	// }
+	for (const auto& [job, amount]: buildingResources.getJobs())
+	{
+		marketJobs.createJobs(popTypeLoader.getPopTypes().at(job),
+			 building->getLevel() * amount,
+			 defines,
+			 Market::calcAddedWorkingPopPercent(subState->getOwner()->getProcessedData().laws, lawsMap));
+	}
+
+	//// Update the Market with new ownership building employment
+	for (const auto& [ownerType, fraction]: estimatedOwnershipFracs.at(building->getName()))
+	{
+		BuildingResources ownerResources;
+		ownerResources.evaluateResources(buildings.at(ownerType).getPMGroups(), estimatedPMs, PMs, PMGroups);
+
+		for (const auto& [job, amount]: ownerResources.getJobs())
+		{
+
+			marketJobs.createJobs(popTypeLoader.getPopTypes().at(job),
+				 building->getLevel() * amount * fraction,
+				 defines,
+				 Market::calcAddedWorkingPopPercent(subState->getOwner()->getProcessedData().laws, lawsMap));
+		}
+	}
 }
 
 void V3::EconomyManager::removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
@@ -998,6 +1023,63 @@ std::map<std::string, int> V3::EconomyManager::apportionInvestors(const int leve
 		hamiltonQueue.pop();
 	}
 	return investorLevels;
+}
+
+std::map<std::string, std::map<std::string, double>> V3::EconomyManager::estimateInvestorBuildings(const Country& country) const
+{
+	std::map<std::string, std::map<std::string, double>> buildingInvestorEstimates;
+
+	for (const auto& building: ownershipLoader.getBuildingSectorMap() | std::views::keys)
+	{
+		double totalWeight = 0;
+		std::map<std::string, double> investorWeights;
+		const auto& ownershipMap = ownershipLoader.getOwnershipsFromBuilding(building);
+
+		for (const auto& [type, data]: ownershipMap)
+		{
+			if (data.recognized && country.getProcessedData().type != "recognized")
+			{
+				continue;
+			}
+
+			totalWeight += data.weight;
+			if (type.contains("building"))
+				investorWeights[type] = data.weight;
+		}
+		for (const auto& type: investorWeights | std::views::keys)
+		{
+			investorWeights[type] /= totalWeight;
+		}
+		for (const auto& [type, weight]: investorWeights)
+		{
+			const auto& data = ownershipMap.at(type);
+			buildingInvestorEstimates[building][type] = weight - weight * (data.colonialFrac + data.financialCenterFrac);
+		}
+	}
+	return buildingInvestorEstimates;
+}
+
+std::map<std::string, double> V3::EconomyManager::calcInvestorWeights(const std::map<std::string, OwnershipData>& ownershipMap, const Country& country)
+{
+	std::map<std::string, double> investorWeights;
+
+	double totalWeight = 0;
+	for (const auto& [type, investorData]: ownershipMap)
+	{
+		if (investorData.recognized && country.getProcessedData().type != "recognized")
+		{
+			continue;
+		}
+
+		investorWeights[type] = investorData.weight;
+		totalWeight += investorData.weight;
+	}
+	for (const auto& type: investorWeights | std::views::keys)
+	{
+		investorWeights[type] /= totalWeight;
+	}
+
+	return investorWeights;
 }
 
 void V3::EconomyManager::loadTerrainModifierMatrices(const std::string& filePath)
