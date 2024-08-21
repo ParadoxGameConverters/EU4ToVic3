@@ -1,0 +1,1564 @@
+﻿namespace = commander_events
+namespace = communism
+namespace = crime_events
+namespace = german_unification
+namespace = marx_events
+namespace = oscar_wilde_events
+namespace = prostitution
+namespace = tibet_expedition_events
+
+# Psychological Warfare
+# in loving memory of Matthew J. Clohessy, now living a better life as a programmer, may his content not be forgotten
+
+commander_events.6 = {
+	type = country_event
+    placement = ROOT
+
+    title = commander_events.6.t
+    desc = commander_events.6.d
+    flavor = commander_events.6.f
+
+    event_image = {
+		video = "europenorthamerica_before_the_battle"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+    duration = 3
+
+	trigger = {
+		NOT = { has_variable = psychological_warfare_var }
+		any_scope_character = {
+			is_busy = no
+			has_role = general
+			OR = {
+				has_trait = romantic
+				has_trait = arrogant
+				has_trait = bigoted
+				has_trait = reckless
+				has_trait = ambitious
+				has_trait = imperious
+				has_trait = charismatic
+				has_trait = hedonist
+				has_trait = persistent
+			}
+			NOR = {
+				has_trait = meticulous
+				has_trait = cautious
+				has_trait = pious
+			}
+		}
+		any_interest_group = {
+			is_marginal = no
+			leader = {
+				NOT = { has_trait = syphilis }
+				is_oppressed_gender = no		### Converter
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = psychological_warfare_var
+		random_scope_character = {
+			limit = {
+				has_role = general
+				is_busy = no
+				OR = {
+					has_trait = romantic
+					has_trait = arrogant
+					has_trait = bigoted
+					has_trait = reckless
+					has_trait = ambitious
+					has_trait = imperious
+					has_trait = charismatic
+					has_trait = hedonist
+					has_trait = persistent
+				}
+				NOR = {
+					has_trait = meticulous
+					has_trait = cautious
+					has_trait = pious
+				}
+			}
+			set_variable = seducer_commander_var
+			save_scope_as = seducer_commander
+		}
+		random_interest_group = {
+			limit = {
+				is_marginal = no
+				leader = {
+					NOT = { 
+						has_trait = syphilis
+						has_variable = seducer_commander_var
+					}
+					is_oppressed_gender = no		### Converter
+				}
+			}
+			save_scope_as = cheated_ig
+			leader = {
+				save_scope_as = cheated_leader
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		NOR = {
+			exists = scope:seducer_commander
+			exists = scope:cheated_leader
+			scope:cheated_ig = { is_marginal = yes }
+		}
+	}
+
+	option = { #cover the general
+		name = commander_events.6.a
+		default_option = yes
+		custom_tooltip = commander_events.6.a.tt
+		scope:cheated_leader = {
+			add_trait = syphilis
+			if = {
+				limit = {
+					NOT = { has_trait = alcoholic }
+				}
+				random_list = {
+					10 = { add_trait = alcoholic }
+					90 = { }
+				}
+			}
+		}
+		scope:seducer_commander = {
+			if = {
+				limit = { NOT = { has_trait = syphilis } }
+				add_trait = syphilis
+			}
+			remove_variable = seducer_commander_var
+		}
+		scope:cheated_ig = {
+			add_modifier = {
+				name = covered_affair_modifier #disapprove
+				months = normal_modifier_time
+			}
+		}
+	}
+
+	option = { #bruh
+		name = commander_events.6.b
+		custom_tooltip = commander_events.6.b.tt
+		hidden_effect = {
+			scope:seducer_commander = {
+				kill_character = yes
+				remove_variable = seducer_commander_var
+			}		
+		}
+		scope:cheated_leader = {
+			add_trait = syphilis
+		}
+		scope:cheated_ig = {
+			add_modifier = {
+				name = punished_commander_modifier #approve
+				months = normal_modifier_time
+			}
+		}
+	}
+	
+	option = { #let them fight
+		name = commander_events.6.c
+		trigger = { #if the leader has a reckless trait he punches the other guy
+			scope:cheated_leader = {
+				has_trait = reckless
+			}
+		}
+		scope:cheated_leader = {
+			add_trait = syphilis
+			add_modifier = {
+				name = punching_leader_modifier #popularity
+				months = normal_modifier_time
+			}
+		}
+		scope:seducer_commander = {
+			add_modifier = {
+				name = punched_commander_modifier #popularity bad
+				months = normal_modifier_time
+			}
+			remove_variable = seducer_commander_var
+			if = {
+				limit = { NOT = { has_trait = syphilis } }
+				add_trait = syphilis
+			}
+		}
+	}
+}
+
+# The Red Army
+communism.8 = {
+	type = country_event
+	placement = root
+	title = communism.8.t
+	desc = communism.8.d
+	flavor = communism.8.f
+
+	duration = 3
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
+	trigger = {
+		has_law = law_type:law_council_republic
+		NOT = {	has_variable = red_army_var }
+		ig:ig_armed_forces = {
+			leader = {
+				OR = {
+					has_ideology = ideology:ideology_communist
+					has_ideology = ideology:ideology_vanguardist
+				}
+			}
+		}
+	}
+
+	immediate = {
+		ig:ig_armed_forces = {
+			save_scope_as = red_army_ig
+			leader = {
+				save_scope_as = red_army_general
+			}
+		}
+		set_variable = red_army_var
+	}
+
+	option = {
+		name = communism.8.a
+		ig:ig_armed_forces = {
+			custom_tooltip = red_army_tt
+			hidden_effect = {
+				set_interest_group_name = ig_red_army
+			}
+			remove_ideology = ideology_loyalist
+			### Converter
+			if = {
+				limit = { has_ideology = ideology:ideology_individualist }
+				remove_ideology = ideology_individualist
+				add_ideology = ideology_patriotic
+			}
+			### Converter
+			add_ideology = ideology_proletarian
+		}
+	}
+}
+
+crime_events.11 = { #The Criminal was caught
+	type = country_event
+	placement = scope:serial_killer_state_scope
+
+	title = crime_events.11.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = crime_events.11.d
+				trigger = {
+					NOT = { has_variable = important_killer_var }
+				}
+			}
+			triggered_desc = {
+				desc = crime_events.11.d2
+				trigger = {
+					has_variable = important_killer_var
+				}
+			}
+		}
+	}
+	flavor = crime_events.11.f
+
+	event_image = {
+		video = "middleeast_police_breaking_door"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		# triggered by je_serial_killer pulse
+		any_scope_character = {
+			is_ruler = no
+			is_oppressed_gender = no		### Converter
+			interest_group = {
+				is_marginal = no
+			}
+			age > 18
+		}
+	}
+
+	immediate = {
+		random_scope_character = {
+			limit = {
+				is_ruler = no
+				is_oppressed_gender = no		### Converter
+				interest_group = {
+					is_marginal = no
+				}
+				age > 18
+			}
+			save_scope_as = important_killer
+		}
+		random_list = {
+			80 = { }
+			20 = {
+				set_variable = important_killer_var
+			}
+		}
+		random_scope_state = {
+			limit = {
+				has_modifier = serial_killer_state_mod
+			}
+			save_scope_as = serial_killer_state_scope
+		}
+		set_variable = serial_killer_caught
+	}
+
+	option = {
+		name = crime_events.11.a
+		default_option = yes
+		add_modifier = {
+			name = modifier_killer_caught
+			months = normal_modifier_time
+		}
+		if = {
+			limit = {
+				has_variable = important_killer_var
+			}
+			scope:important_killer = {
+				kill_character = yes
+				interest_group = {
+					add_modifier = {
+						name = serial_killer_ig
+						months = normal_modifier_time
+					}
+				}
+			}
+		}
+	}
+
+	option = { # cover up the identity of the killer
+		name = crime_events.11.b
+		trigger = {
+			has_variable = important_killer_var
+		}
+		set_variable = serial_killer_caught
+		if = {
+			limit = {
+				has_law = law_type:law_outlawed_dissent
+			}
+			scope:important_killer = { # small popularity hit
+				add_modifier = {
+					name = suspected_serial_killer
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_law = law_type:law_censorship
+			}
+			scope:important_killer = { # moderate popularity hit
+				add_modifier = {
+					name = suspected_serial_killer
+					multiplier = 2
+				}
+			}
+		}
+		else = {
+			scope:important_killer = { # major popularity hit
+				add_modifier = {
+					name = suspected_serial_killer
+					multiplier = 3
+				}
+			}
+		}
+	}	
+}
+
+# Bismarck
+german_unification.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = german_unification.3.t
+	desc = german_unification.3.d
+	flavor = german_unification.3.f
+
+	gui_window = event_window_1char_tabloid
+
+	left_icon = scope:bismarck_scope
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_global_variable = bismarck_variable }
+		ig:ig_landowners = {
+			is_powerful = yes
+			is_in_government = yes
+		}
+		is_unification_candidate = GER
+		has_technology_researched = nationalism
+		game_date > 1846.1.1
+		game_date < 1898.1.1
+	}
+
+	immediate = {
+		set_global_variable = bismarck_variable
+		### Converter ###
+		if = {
+			limit = { is_matriarchal_country = yes }
+			create_character = {
+				first_name = Uta
+				last_name = von_Bismarck
+				historical = yes
+				ig_leader = yes
+				interest_group = ig_landowners
+				female = yes
+				birth_date = 1815.4.1
+				dna = dna_otto_von_bismarck
+				ideology = ideology_royalist
+				traits = {
+					direct
+					cautious
+				}
+			}
+		}
+		else = {
+			create_character = {
+				first_name = Otto
+				last_name = von_Bismarck
+				historical = yes
+				ig_leader = yes
+				interest_group = ig_landowners
+				female = no
+				birth_date = 1815.4.1
+				dna = dna_otto_von_bismarck
+				ideology = ideology_royalist
+				traits = {
+					direct
+					cautious
+				}
+			}
+		}
+		### Converter ###
+		ig:ig_landowners = {
+			save_scope_as = junkers
+			leader = {
+				save_scope_as = bismarck_scope
+			}
+		}
+	}
+
+	option = {
+		name = german_unification.3.a
+		default_option = yes
+		show_as_tooltip = {
+			create_character = {
+				first_name = Otto
+				last_name = von_Bismarck
+				historical = yes
+				ig_leader = yes
+				interest_group = ig_landowners
+				female = no
+				birth_date = 1815.4.1
+				ideology = ideology_royalist
+				traits = {
+					direct
+					cautious
+				}
+			}
+		}
+		scope:bismarck_scope = {
+			add_modifier = {
+				name = bismarck_popular
+			}
+		}
+		add_modifier = {
+			name = realpolitik
+			months = normal_modifier_time
+		}
+	}
+	option = {
+		name = german_unification.3.b
+		default_option = yes
+		show_as_tooltip = {
+			create_character = {
+				first_name = Otto
+				last_name = von_Bismarck
+				historical = yes
+				ig_leader = yes
+				interest_group = ig_landowners
+				female = no
+				birth_date = 1815.4.1
+				ideology = ideology_royalist
+				traits = {
+					direct
+					cautious
+				}
+			}
+		}
+		scope:bismarck_scope = {
+			add_modifier = {
+				name = bismarck_unpopular
+			}
+		}
+		add_modifier = {
+			name = germany_aggressive_expansion
+			months = normal_modifier_time
+		}
+	}
+}
+
+# Marx Spawns
+marx_events.1 = {
+	type = country_event
+
+	title = marx_events.1.t
+	desc = marx_events.1.d
+	flavor = marx_events.1.f
+
+	event_image = {
+		video = "europenorthamerica_russian_serfs"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		has_technology_researched = socialism
+		NOT = { has_global_variable = marx_happened }
+		empty_agitator_slots >= 1
+	}
+
+	immediate = {
+		set_global_variable = {
+			name = marx_happened
+		}
+	}
+
+	option = { #support socialism not marx
+		name = marx_events.1.a
+		default_option = yes
+		ig:ig_trade_unions = {
+			add_modifier = {
+				name = modifier_supported_marx
+				months = normal_modifier_time
+			}
+		}
+		### Converter ###
+		if = {
+			limit = { is_matriarchal_country = yes }
+			random_list = {
+				95 = {
+					trigger = {
+						country_is_in_europe = no
+					}
+					create_character = {
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = yes
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				95 = {
+					trigger = {
+						country_is_in_europe = yes
+					}
+					create_character = {
+						first_name = Karola_Heinrike
+						last_name = Marx
+						historical = yes
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = yes
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					modifier = {
+						if = {
+							limit = {
+								OR = {
+									ruler = { has_ideology = ideology:ideology_feminist }
+									ig:ig_trade_unions = {
+										leader = {
+											OR = {
+												has_ideology = ideology:ideology_feminist
+												is_oppressed_gender = yes			### Converter
+											}
+										}
+									}
+								}
+							}
+							add = 10
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_women_in_the_workplace
+							}
+							add = 5
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_womens_suffrage
+							}
+							add = 5
+						}
+					}
+					create_character = { #Karla Marx
+						#role = politician # Remove this line
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = no
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					trigger = {
+						capital = { state_region = s:STATE_TEXAS }
+					}
+					create_character = {
+						first_name = Charleigh # howdy
+						last_name = Marx
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = yes
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				1 = {
+					trigger = {
+						capital = { state_region = s:STATE_ESTONIA } 
+					}
+					create_character = {
+						first_name = Kras
+						last_name = Masov
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = yes
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+			}
+		}
+		else = {
+			random_list = {
+				95 = {
+					trigger = {
+						country_is_in_europe = no
+					}
+					create_character = {
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = no
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				95 = {
+					trigger = {
+						country_is_in_europe = yes
+					}
+					create_character = {
+						first_name = Karl_Heinrich
+						last_name = Marx
+						historical = yes
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = no
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					modifier = {
+						if = {
+							limit = {
+								OR = {
+									ruler = { has_ideology = ideology:ideology_feminist }
+									ig:ig_trade_unions = {
+										leader = {
+											OR = {
+												has_ideology = ideology:ideology_feminist
+												is_oppressed_gender = yes			### Converter
+											}
+										}
+									}
+								}
+							}
+							add = 10
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_women_in_the_workplace
+							}
+							add = 5
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_womens_suffrage
+							}
+							add = 5
+						}
+					}
+					create_character = { #Karla Marx
+						#role = politician # Remove this line
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = yes
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					trigger = {
+						capital = { state_region = s:STATE_TEXAS }
+					}
+					create_character = {
+						first_name = Charlie # howdy
+						last_name = Marx
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = no
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				1 = {
+					trigger = {
+						capital = { state_region = s:STATE_TALINN } 
+					}
+					create_character = {
+						first_name = Kras
+						last_name = Masov
+						is_agitator = yes
+						interest_group = ig_trade_unions
+						female = no
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = { #promote him / marxista porque me va la marxa
+		name = marx_events.1.b
+		ig:ig_trade_unions = {
+			add_modifier = {
+				name = modifier_promoted_marx
+				months = normal_modifier_time
+			}
+		}
+		### Converter ###
+		if = {
+			limit = { is_matriarchal_country = yes }
+			random_list = {
+				95 = {
+					trigger = {
+						country_is_in_europe = no
+					}
+					create_character = {
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = yes
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				95 = {
+					trigger = {
+						country_is_in_europe = yes
+					}
+					create_character = {
+						first_name = Karola_Heinrike
+						last_name = Marx
+						historical = yes
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = yes
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					modifier = {
+						if = {
+							limit = {
+								OR = {
+									ruler = { has_ideology = ideology:ideology_feminist }
+									ig:ig_trade_unions = {
+										leader = {
+											OR = {
+												has_ideology = ideology:ideology_feminist
+												is_oppressed_gender = yes			### Converter
+											}
+										}
+									}
+								}
+							}
+							add = 10
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_women_in_the_workplace
+							}
+							add = 5
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_womens_suffrage
+							}
+							add = 5
+						}
+					}
+					create_character = { #Karla Marx
+						#role = politician # Remove this line
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = no
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					trigger = {
+						capital = { state_region = s:STATE_TEXAS }
+					}
+					create_character = {
+						first_name = Charleigh # howdy
+						last_name = Marx
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = yes
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				1 = {
+					trigger = {
+						capital = { state_region = s:STATE_ESTONIA } 
+					}
+					create_character = {
+						first_name = Kras
+						last_name = Masov
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = yes
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+			}
+		}
+		else = {
+			random_list = {
+				95 = {
+					trigger = {
+						country_is_in_europe = no
+					}
+					create_character = {
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = no
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				95 = {
+					trigger = {
+						country_is_in_europe = yes
+					}
+					create_character = {
+						first_name = Karl_Heinrich
+						last_name = Marx
+						historical = yes
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = no
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					modifier = {
+						if = {
+							limit = {
+								OR = {
+									ruler = { has_ideology = ideology:ideology_feminist }
+									ig:ig_trade_unions = {
+										leader = {
+											OR = {
+												has_ideology = ideology:ideology_feminist
+												is_oppressed_gender = yes			### Converter
+											}
+										}
+									}
+								}
+							}
+							add = 10
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_women_in_the_workplace
+							}
+							add = 5
+						}
+						if = {
+							limit = {
+								has_law = law_type:law_womens_suffrage
+							}
+							add = 5
+						}
+					}
+					create_character = { #Karla Marx
+						#role = politician # Remove this line
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = yes
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				5 = {
+					trigger = {
+						capital = { state_region = s:STATE_TEXAS }
+					}
+					create_character = {
+						first_name = Charlie # howdy
+						last_name = Marx
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = no
+						dna = dna_karl_marx
+						ideology = ideology_communist
+						religion = rel:jewish
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+				1 = {
+					trigger = {
+						capital = { state_region = s:STATE_TALINN } 
+					}
+					create_character = {
+						first_name = Kras
+						last_name = Masov
+						ig_leader = yes
+						interest_group = ig_trade_unions
+						female = no
+						ideology = ideology_communist
+						traits = {
+							direct
+							persistent
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = { #get rid of this man
+		name = marx_events.1.c
+		ig:ig_trade_unions = {
+			add_modifier = {
+				name = modifier_ditched_marx
+				months = normal_modifier_time
+			}
+		}
+	}
+}
+
+oscar_wilde_events.1 = {
+	type = country_event
+	placement = root
+	title = oscar_wilde_events.1.t
+	desc = oscar_wilde_events.1.wilde
+	flavor = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					exists = c:GBR
+					this = c:GBR
+					game_date >= 1880.1.1
+				}
+				desc = oscar_wilde_events.1.flavor_wilde
+			}
+			desc = oscar_wilde_events.1.flavor_author
+		}
+		desc = oscar_wilde_events.1.flavor_quote
+	}
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	minor_left_icon = scope:oscar_wilde
+	
+	trigger = {
+		country_is_in_europe = yes
+		ig:ig_intelligentsia = {
+			is_marginal = no
+		}
+		game_date >= 1880
+		NOT = { has_variable = oscar_wilde_var }
+		has_technology_researched = behaviorism
+	}
+
+	immediate = {
+		set_variable = oscar_wilde_var
+		
+		if = {
+			limit = {
+				capital.region = sr:region_england
+			}
+			##Converter
+			converter_rule_63_effect = yes
+			if = {
+				limit = { has_variable = rule_63_effect }
+				create_character = {
+					template = fem_canonic_wilde_character_template
+					on_created = {
+						set_variable = wilde_var
+						place_character_in_void = 6
+					}
+				}
+			}
+			else = {
+				create_character = {
+					template = canonic_wilde_character_template
+					on_created = {
+						set_variable = wilde_var
+						place_character_in_void = 6
+					}
+				}
+			}
+			##Converter
+		}
+		else = {
+			##Converter
+			converter_rule_63_effect = yes
+			if = {
+				limit = { has_variable = rule_63_effect }
+				create_character = {
+					template = fem_dynamic_wilde_character_template
+					on_created = {
+						set_variable = wilde_var
+						place_character_in_void = 6
+					}
+				}
+			}
+			else = {
+				create_character = {
+					template = dynamic_wilde_character_template
+					on_created = {
+						set_variable = wilde_var
+						place_character_in_void = 6
+					}
+				}
+			}
+			##Converter
+		}
+
+		random_character_in_void = {
+			limit = {
+				has_variable = wilde_var
+			}
+			save_scope_as = oscar_wilde
+		}
+			
+		if = {
+			limit = {
+				game_date >= 1880
+			}
+			scope:oscar_wilde = {
+				set_ideology = ideology:ideology_communist
+			}
+		}
+
+	}
+
+	option = {
+		default_option = yes
+		name = oscar_wilde_events.1.a
+		custom_tooltip = oscar_wilde_tt
+		ig:ig_intelligentsia = {
+			add_modifier = {
+				name = happy_arts_protected
+				months = normal_modifier_time
+			}
+		}
+		ig:ig_devout = {
+			add_modifier = {
+				name = unhappy_defended_homosexuality
+				months = normal_modifier_time
+			}
+		}
+	}
+
+	option = { 
+		name = oscar_wilde_events.1.b
+		ig:ig_petty_bourgeoisie = {
+			add_modifier = {
+				name = imprisoning_gentlemen
+				months = normal_modifier_time
+			}
+		}
+		add_modifier = {
+			name = upheld_ruling
+			months = normal_modifier_time
+		}
+	}
+
+	option = { 
+		name = oscar_wilde_events.1.c
+		add_radicals = {
+			pop_type = clergymen
+			value = 0.1
+		}
+		add_loyalists = {
+			pop_type = academics
+			value = 0.2
+		}
+	}
+}
+
+# Male brothel scandal
+prostitution.3 = {
+	type = country_event
+	placement = ROOT
+	title = prostitution.3.t
+	desc = prostitution.3.d
+	flavor = prostitution.3.f
+
+	gui_window = event_window_1char_tabloid
+
+	left_icon = scope:scandal_character
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_variable = police_cooldown }
+		any_primary_culture = { # doesn't fit that well outside of the West
+			has_discrimination_trait = european_heritage
+		}
+		institution_investment_level = {
+			institution = institution_police
+			value = 3
+		}
+		NOT = { has_law = law_type:law_outlawed_dissent }
+		any_interest_group = {
+			is_in_government = yes
+			OR = {
+				is_interest_group_type = ig_devout
+				is_interest_group_type = ig_industrialists
+				is_interest_group_type = ig_landowners
+				is_interest_group_type = ig_petty_bourgeoisie
+			}
+			leader = {
+				NOT = {
+					has_modifier = embroiled_in_scandal
+				}
+				is_oppressed_gender = yes			### Converter
+				is_busy = no
+			}
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = police_cooldown
+			years = 2
+		}
+		random_scope_state = {
+			limit = {
+				is_capital = yes
+			}
+			save_scope_as = capital_state
+		}
+		random_interest_group = {
+			limit = {
+				is_in_government = yes
+				OR = {
+					is_interest_group_type = ig_devout
+					is_interest_group_type = ig_industrialists
+					is_interest_group_type = ig_landowners
+					is_interest_group_type = ig_petty_bourgeoisie
+				}
+				leader = {
+					NOT = {
+						has_modifier = embroiled_in_scandal
+					}
+					is_oppressed_gender = yes			### Converter
+					is_busy = no
+				}
+			}
+			leader = {
+				save_scope_as = scandal_character
+			}
+		}
+	}
+	option = { # Character must resign
+		name = prostitution.3.a
+		trigger = {
+			scope:scandal_character = {
+				is_monarch = no
+			}
+		}
+		custom_tooltip = prostitution.3.a.tt
+		hidden_effect = {
+			scope:scandal_character = {
+				kill_character = {
+					hidden = yes
+				}
+			}
+		}
+	}
+	option = { # try to suppress the story
+		name = prostitution.3.b
+		default_option = yes
+		random_list = {
+			50 = {
+				modifier = {
+					if = {
+						limit = {
+							has_law = law_type:law_protected_speech
+						}
+					}
+					add = 25
+				}
+				if = {
+					limit = {
+						NOT = { has_law = law_type:law_censorship }
+					}
+					add_modifier = {
+						name = coverup_discovered
+						months = 12
+					}
+				}
+				scope:scandal_character = {
+					add_modifier = {
+						name = embroiled_in_scandal
+						months = 120
+					}
+				}
+			}
+			50 = {
+				modifier = {
+					if = {
+						limit = {
+							has_law = law_type:law_censorship
+						}
+					}
+					add = 25
+				}
+			}
+		}
+	}
+	option = { # our propagandists can minimize the impact
+		name = prostitution.3.c
+		trigger = {
+			has_technology_researched = mass_propaganda
+		}
+		scope:scandal_character = {
+			add_modifier = {
+				name = embroiled_in_scandal
+				months = normal_modifier_time
+			}
+		}
+	}
+}
+
+tibet_expedition_events.5 = { # The Great Trigonometrical Survey Goes North (Mount Everest named)
+	type = country_event
+    placement = scope:current_expedition_location
+
+    title = tibet_expedition_events.5.t
+    desc = tibet_expedition_events.5.d
+    flavor = tibet_expedition_events.5.f
+
+    duration = 3
+
+	event_image = {
+		video = "ep1_ca_mountain_pass_military"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	trigger = {
+		var:tibet_expedition_progress_var < 4
+		NOT = {
+			any_scope_character = {
+				has_variable = everest_encountered
+			}
+		}
+	}
+	
+	immediate = {
+		##Converter
+		converter_rule_63_effect = yes
+		##Converter
+		random_scope_character = {
+			limit = { has_variable = expedition_leader_var }
+			save_scope_as = expedition_leader
+			set_variable = everest_encountered
+		}
+	}
+
+	cancellation_trigger = {
+		OR = {
+			NOT = {
+				any_scope_character = {
+					has_variable = expedition_leader_var
+				}
+			}
+			NOT = {
+				exists = c:TIB
+			}
+		}
+	}
+
+	option = {
+		name = tibet_expedition_events.5.a
+		default_option = yes
+
+		ai_chance = {
+			base = 1
+		}
+
+		create_character = {
+			is_general = yes
+			ig_leader = no
+			noble = no
+			traits = {
+			}
+			on_created = {
+				add_trait = engineer
+			}
+		}
+
+		scope:expedition_leader = {
+			add_modifier = {
+				name = sidelined_mountaineer
+				months = normal_modifier_time
+			}
+		}
+
+		custom_tooltip = {
+			text = je_tibet_expedition_advance
+			change_variable = { name = tibet_expedition_progress_var add = 1 }
+		}
+	}
+
+	option = {
+		name = tibet_expedition_events.5.b
+		trigger = {
+			OR = {
+				c:GBR ?= this
+				c:BIC ?= this
+			}
+			NOT = { has_global_variable = andrew_scott_waugh_is_real_and_my_friend }
+			game_date < 1870.1.1
+		}
+
+		ai_chance = {
+			base = 1
+		}
+
+		##Converter
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_GBR_andrew_scott_waugh
+			}
+		}
+		else = {
+			create_character = {
+				template = GBR_andrew_scott_waugh
+			}
+		}
+		##Converter
+
+		scope:expedition_leader = {
+			add_modifier = {
+				name = sidelined_mountaineer
+			}
+		}
+
+		custom_tooltip = {
+			text = je_tibet_expedition_advance
+			change_variable = { name = tibet_expedition_progress_var add = 1 }
+		}
+	}
+
+	option = {
+		name = tibet_expedition_events.5.c
+		trigger = {
+			OR = {
+				c:GBR ?= this
+				c:BIC ?= this
+			}
+			NOT = { has_global_variable = charles_granville_bruce_is_real_and_my_friend }
+			game_date > 1892.1.1 # First expedition to Mongolia and the Karakoram mountain range
+		}
+
+		ai_chance = {
+			base = 1
+		}
+
+		##Converter
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_GBR_charles_granville_bruce
+			}
+		}
+		else = {
+			create_character = {
+				template = GBR_charles_granville_bruce
+			}
+		}
+		##Converter
+
+		scope:expedition_leader = {
+			add_modifier = {
+				name = sidelined_mountaineer
+			}
+		}
+
+		custom_tooltip = {
+			text = je_tibet_expedition_advance
+			change_variable = { name = tibet_expedition_progress_var add = 1 }
+		}
+	}
+
+	option = {
+		name = tibet_expedition_events.5.dd
+
+		ai_chance = {
+			base = 1
+		}
+
+		random_list = {
+			1 = {
+				scope:expedition_leader = {
+					kill_character = yes
+				}
+			}
+			1 = {
+				scope:expedition_leader = {
+					add_modifier = famed_mountaineer
+					if = {
+						limit = {
+							NOT = { has_trait = surveyor }
+						}
+						add_trait = surveyor
+					}
+				}
+				custom_tooltip = {
+					text = je_tibet_expedition_advance
+					change_variable = { name = tibet_expedition_progress_var add = 1 }
+				}
+			}
+		}
+	}
+}
