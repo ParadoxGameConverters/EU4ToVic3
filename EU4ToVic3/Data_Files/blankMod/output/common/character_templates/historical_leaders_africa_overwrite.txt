@@ -1,0 +1,64 @@
+﻿# Transvaal - TRN
+TRN_paul_kruger_template = { # Paul Kruger
+	first_name = Paul
+	last_name = Kruger
+	historical = yes
+	#culture = global_var:kruger_culture
+	culture = cu:boer
+	female = no
+	religion = protestant
+	ideology = ideology_traditionalist
+	interest_group = ig_rural_folk
+	birth_date = 1825.10.10
+	traits = {
+		pious
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_kruger
+				}
+			}
+			is_settler_colonial_country = yes
+			trigger_if = {
+				limit = {
+					exists = c:TRN
+					#is_target_in_global_variable_list = { name = global_kruger_countries target = c:TRN }
+					c:TRN = { any_primary_culture = { is_target_in_global_variable_list = { name = global_dixie_cultures target = this } } }
+				}
+				this = c:TRN
+			}
+			trigger_else = {
+				#is_target_in_global_variable_list = { name = global_kruger_countries target = this }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_dixie_cultures target = this } }
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_rural_folk
+				is_interest_group_type = ig_landowners
+				is_interest_group_type = ig_petty_bourgeoisie
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_ethno_nationalism
+			}
+		}
+		earliest_usage_date = 1852.1.1
+		latest_usage_date = 1899.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_cape_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_kruger
+		}
+	}
+}

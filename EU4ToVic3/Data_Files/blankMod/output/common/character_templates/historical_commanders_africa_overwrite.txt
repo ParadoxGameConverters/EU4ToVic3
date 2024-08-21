@@ -1,0 +1,78 @@
+﻿ald_general_nsoumer = {
+	first_name = Lalla_Fatma
+	last_name = N_Soumer
+	historical = yes
+	culture = global_var:ber_culture
+	female = yes
+	religion = sunni
+	commander_rank = default
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+	birth_date = 1830.8.21 # estimate
+	traits = {
+		brave
+		charismatic
+		stalwart_defender
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_nsoumer
+				}
+			}
+			uses_ber_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1854.1.1	
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_nsoumer
+		}
+	}
+}
+ald_general_mokrani = {
+	first_name = Sheikh_Mohamed
+	last_name = al-Mokrani
+	historical = yes
+	culture = global_var:ber_culture
+	female = no
+	religion = sunni
+	commander_rank = default
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	birth_date = 1815.3.7 # only year known
+	traits = {
+		brave
+		popular_commander
+		experienced_offensive_planner
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mokrani
+				}
+			}
+			uses_ber_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1854.1.1	
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_mokrani
+		}
+	}
+}
