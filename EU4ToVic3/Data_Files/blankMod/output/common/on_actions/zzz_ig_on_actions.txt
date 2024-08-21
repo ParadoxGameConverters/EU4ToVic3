@@ -1,0 +1,166 @@
+﻿# Root = Country
+on_monthly_pulse_country = {
+	on_actions = {
+		converter_monthly_events
+	}
+}
+
+converter_monthly_events = {
+	random_events = {
+		chance_of_no_event = 80
+		1 = zzz_cc_politics.1	## Holy Order Secularization
+	}
+}
+
+# Root = The applicable country
+# scope:technology = The technology type they just acquired
+on_acquired_technology = {
+	on_actions = {
+		converter_acquired_technology_on_actions
+	}
+}
+
+converter_acquired_technology_on_actions = {
+	effect = {
+		if = {		## Corporatism in Holy Orders
+			limit = {
+				has_technology_researched = corporatism
+				ig:ig_armed_forces = {
+					has_ideology = ideology:ideology_pious
+				}
+			}
+			ig:ig_armed_forces = {
+				remove_ideology = ideology_pious
+				add_ideology = ideology_corporatist
+			}
+		}
+	}
+}
+
+# Root = Releasing Country
+# scope:target = Released Country
+on_country_released_as_independent = {
+	on_actions = {
+		converter_country_released_as_independent_on_actions
+		converter_country_released_on_actions
+	}
+}
+
+converter_country_released_as_independent_on_actions = {
+	effect = {
+		if = {		## Future-proofing for when slave pop generation happens
+			limit = {
+				scope:target = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
+					NOR = {
+						country_has_primary_culture = cu:afro_caribbean
+						country_has_primary_culture = cu:afro_antillean
+						country_has_primary_culture = cu:afro_american
+						country_has_primary_culture = cu:afro_caribeno
+						country_has_primary_culture = cu:afro_brazilian
+					}
+					OR = {
+						has_law = law_type:law_legacy_slavery
+						has_law = law_type:law_slave_trade
+					}
+				}
+			}
+			scope:target = {
+				trigger_event = { id = slave_revolt_events.1 days = 0 }
+			}
+		}
+	}
+}
+
+converter_country_released_on_actions = {
+	effect = {
+		scope:target = { converter_released_country_effect = yes }
+	}
+}
+
+# Root = Releasing Country
+# scope:target = Released Country
+on_country_released_as_own_subject = {
+	on_actions = {
+		converter_country_released_on_actions
+	}
+}
+
+# Root = Releasing Country
+# scope:target = Released Country
+on_country_released_as_overlord_subject = {
+	on_actions = {
+		converter_country_released_on_actions
+	}
+}
+
+# Root = Country
+on_country_formed = {
+	on_actions = {
+		converter_country_formed_on_actions
+	}
+}
+
+converter_country_formed_on_actions = {
+	effect = {
+		converter_primary_cultures_effect = yes
+	}
+}
+
+# Root = Country
+# scope:target = Uprising country
+on_revolution_start = {
+	on_actions = {
+		converter_revolution_start_on_actions
+	}
+}
+
+converter_revolution_start_on_actions = {
+	effect = {
+		scope:target = { converter_copy_ideologies_effect = yes }
+	}
+}
+
+# Root = Country
+# scope:target = Uprising country
+on_secession_start = {
+	on_actions = {
+		converter_country_released_on_actions
+	}
+}
+
+# Root = Country
+# scope:target = Uprising country
+on_secession_end = {
+	on_actions = {
+		converter_secession_end_on_actions
+	}
+}
+
+converter_secession_end_on_actions = {
+	effect = {
+		scope:target = {		## Add independent colonial primary cultures to list if they aren't already on it
+			every_primary_culture = {
+				limit = {
+					OR = {
+						is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_american_cultures target = this }
+						is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+						is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+						is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+					}
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+		}
+	}
+}
