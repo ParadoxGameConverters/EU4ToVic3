@@ -1,10 +1,11 @@
 ﻿# language_accepted
+# uses_integralist_ideology
 # uses_new_england_yankee_characters
 # uses_midwest_yankee_characters
+# is_yankee_culture
 # uses_dixie_characters
 # uses_dixie_traitor_characters
-# uses_usa_afro_amer_characters
-# uses_csa_afro_amer_characters
+# uses_afro_amer_characters
 # uses_mexico_characters
 # uses_brazil_characters
 # uses_afro_braz_characters
@@ -32,6 +33,22 @@
 # uses_tur_characters
 # uses_han_characters
 # uses_jap_characters
+# uses_spa_characters
+# uses_arg_characters
+# uses_bol_characters
+# uses_chl_characters
+# uses_clm_characters
+# uses_ecu_characters
+# uses_peu_characters
+# needs_state_lima
+# needs_state_arequipa
+# needs_state_ica
+# needs_state_cajamarca
+# needs_state_tarapaca
+# uses_prg_characters
+# uses_uru_characters
+# uses_vnz_characters
+# uses_per_characters
 
 language_accepted = {
 	OR = {
@@ -159,50 +176,89 @@ language_accepted = {
 	}
 }
 
+uses_integralist_ideology = {
+	NOT = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_atheist_cultures target = this } }
+	}
+	OR = { 
+		global_var:por_culture = { shares_non_heritage_trait_with_any_primary_culture = prev }
+		global_var:spa_culture = { shares_non_heritage_trait_with_any_primary_culture = prev }
+		global_var:fra_culture = { shares_non_heritage_trait_with_any_primary_culture = prev }
+	}
+}
+
 uses_new_england_yankee_characters = {
+	is_settler_colonial_country = yes
 	trigger_if = {
 		limit = {
 			exists = c:USA
-			is_target_in_global_variable_list = { name = global_new_england_yankee_countries target = c:USA }
+			#is_target_in_global_variable_list = { name = global_new_england_yankee_countries target = c:USA }
+			c:USA = { any_primary_culture = { is_target_in_global_variable_list = { name = global_ne_yankee_cultures target = this } } }
 		}
 		this = c:USA
 	}
 	trigger_else = {
-		is_target_in_global_variable_list = { name = global_new_england_yankee_countries target = this }
+		#is_target_in_global_variable_list = { name = global_new_england_yankee_countries target = c:USA }
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_ne_yankee_cultures target = this } }
 	}
 }
 
 uses_midwest_yankee_characters = {
+	is_settler_colonial_country = yes
 	trigger_if = {
 		limit = {
-			exists = c:USA
-			is_target_in_global_variable_list = { name = global_midwest_yankee_countries target = c:USA }
+			OR = {
+				AND = {
+					exists = c:USA
+					#is_target_in_global_variable_list = { name = global_midwest_yankee_countries target = c:USA }
+					c:USA = { any_primary_culture = { is_target_in_global_variable_list = { name = global_mw_yankee_cultures target = this } } }
+				}
+				AND = {
+					exists = c:UOM
+					#is_target_in_global_variable_list = { name = global_midwest_yankee_countries target = c:USA }
+					c:UOM = { any_primary_culture = { is_target_in_global_variable_list = { name = global_mw_yankee_cultures target = this } } }
+				}
+			}
 		}
-		this = c:USA
+		OR = {
+			c:USA ?= this
+			c:UOM ?= this
+		}
 	}
-	trigger_else = {
-		is_target_in_global_variable_list = { name = global_midwest_yankee_countries target = this }
+	#is_target_in_global_variable_list = { name = global_midwest_yankee_countries target = c:USA }
+	any_primary_culture = { is_target_in_global_variable_list = { name = global_mw_yankee_cultures target = this } }
+}
+
+is_yankee_culture = {
+	OR = {
+		is_target_in_global_variable_list = { name = global_ne_yankee_cultures target = this }
+		is_target_in_global_variable_list = { name = global_mw_yankee_cultures target = this }
 	}
 }
 
 uses_dixie_characters = {
+	is_settler_colonial_country = yes
 	trigger_if = {
 		limit = {
 			exists = c:USA
-			is_target_in_global_variable_list = { name = global_dixie_countries target = c:USA }
+			#is_target_in_global_variable_list = { name = global_dixie_countries target = c:USA }
+			c:USA = { any_primary_culture = { is_target_in_global_variable_list = { name = global_dixie_cultures target = this } } }
 		}
 		this = c:USA
 	}
 	trigger_else = {
-		is_target_in_global_variable_list = { name = global_dixie_countries target = this }
+		#is_target_in_global_variable_list = { name = global_dixie_countries target = this }
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_dixie_cultures target = this } }
 	}
 }
 
 uses_dixie_traitor_characters = {
+	is_settler_colonial_country = yes
 	trigger_if = {
 		limit = {
 			exists = c:CSA
-			is_target_in_global_variable_list = { name = global_dixie_countries target = c:CSA }
+			#is_target_in_global_variable_list = { name = global_dixie_countries target = c:CSA }
+			c:CSA = { any_primary_culture = { is_target_in_global_variable_list = { name = global_dixie_cultures target = this } } }
 		}
 		this = c:CSA
 	}
@@ -211,97 +267,79 @@ uses_dixie_traitor_characters = {
 	}
 }
 
-uses_usa_afro_amer_characters = {
+uses_afro_amer_characters = {
+	is_settler_colonial_country = yes
+	any_primary_culture = {	is_target_in_global_variable_list = { name = global_american_cultures target = this } }
 	trigger_if = {
 		limit = {
-			exists = c:USA
-			is_target_in_global_variable_list = { name = global_afro_amer_countries target = c:USA }
+			any_primary_culture = {	is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
 		}
-		this = c:USA
+		always = yes
 	}
 	trigger_else = {
-		is_target_in_global_variable_list = { name = global_afro_amer_countries target = this }
-	}
-}
-
-uses_csa_afro_amer_characters = {
-	trigger_if = {
-		limit = {
-			OR = {
-				AND = {
-					exists = c:USA
-					is_target_in_global_variable_list = { name = global_afro_amer_countries target = c:USA }
-				}
-				AND = {
-					exists = c:CSA
-					is_target_in_global_variable_list = { name = global_afro_amer_countries target = c:CSA }
-				}
-				AND = {
-					exists = c:ASA
-					is_target_in_global_variable_list = { name = global_afro_amer_countries target = c:ASA }
+		any_scope_state = {
+			region = sr:region_dixie
+			any_scope_pop = {
+				culture = {
+					is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this }
+					has_homeland = prev.state
 				}
 			}
 		}
-		OR = {
-			this = c:USA
-			this = c:CSA
-			this = c:ASA # Unlikely, but just in case
-		}
-		is_target_in_global_variable_list = { name = global_afro_amer_countries target = this }
-	}
-	trigger_else = {
-		is_target_in_global_variable_list = { name = global_afro_amer_countries target = this }
 	}
 }
 
 uses_mexico_characters = {
+	is_settler_colonial_country = yes
 	trigger_if = {
 		limit = {
 			exists = c:MEX
-			is_target_in_global_variable_list = { name = global_mexico_countries target = c:MEX }
+			#is_target_in_global_variable_list = { name = global_new_england_yankee_countries target = c:MEX }
+			c:MEX = { any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } } }
 		}
 		this = c:MEX
 	}
 	trigger_else = {
-		is_target_in_global_variable_list = { name = global_mexico_countries target = this }
+		#is_target_in_global_variable_list = { name = global_mexico_countries target = this }
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
 	}
 }
 
 uses_brazil_characters = {
+	is_settler_colonial_country = yes
 	trigger_if = {
 		limit = {
 			exists = c:BRZ
-			is_target_in_global_variable_list = { name = global_brazil_countries target = c:BRZ }
+			#is_target_in_global_variable_list = { name = global_brazil_countries target = c:BRZ }
+			c:BRZ = { any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } } }
 		}
 		this = c:BRZ
 	}
 	trigger_else = {
-		is_target_in_global_variable_list = { name = global_brazil_countries target = this }
+		#is_target_in_global_variable_list = { name = global_brazil_countries target = this }
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
 	}
 }
 
 uses_afro_braz_characters = {
+	is_settler_colonial_country = yes
+	any_primary_culture = {	is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
 	trigger_if = {
 		limit = {
-			OR = {
-				AND = {
-					exists = c:BRZ
-					is_target_in_global_variable_list = { name = global_afro_braz_countries target = c:BRZ }
-				}
-				AND = {
-					exists = c:AGJ
-					is_target_in_global_variable_list = { name = global_afro_braz_countries target = c:AGJ }
+			any_primary_culture = {	is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
+		}
+		always = yes
+	}
+	trigger_else = {
+		any_scope_state = {
+			region = sr:region_brazil
+			any_scope_pop = {
+				culture = {
+					is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this }
+					has_homeland = prev.state
 				}
 			}
 		}
-		OR = {
-			c:BRZ ?= this
-			c:AGJ ?= this
-		}
-		is_target_in_global_variable_list = { name = global_afro_braz_countries target = this }
-	}
-	trigger_else = {
-		is_target_in_global_variable_list = { name = global_afro_braz_countries target = this }
 	}
 }
 
@@ -709,5 +747,385 @@ uses_jap_characters = {
 	}
 	trigger_else = {
 		is_target_in_global_variable_list = { name = global_jap_countries target = this }
+	}
+}
+
+uses_spa_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:SPA
+			is_target_in_global_variable_list = { name = global_spa_countries target = c:SPA }
+		}
+		this = c:SPA
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_spa_countries target = this }
+	}
+}
+
+uses_arg_characters = {
+	is_settler_colonial_country = yes
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:ARG
+					#is_target_in_global_variable_list = { name = global_la_plata_countries target = c:ARG }
+					c:ARG = { any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } } }
+				}
+				AND = {
+					exists = c:PLT
+					#is_target_in_global_variable_list = { name = global_la_plata_countries target = c:PLT }
+					c:PLT = { any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } } }
+				}
+			}
+		}
+		OR = {
+			c:ARG ?= THIS
+			c:PLT ?= THIS
+		}
+	}
+	#is_target_in_global_variable_list = { name = global_la_plata_countries target = this }
+	any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+}
+
+uses_bol_characters = {
+	is_settler_colonial_country = yes
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:BOL
+					#is_target_in_global_variable_list = { name = global_nor_andes_countries target = c:BOL }
+					c:BOL = { any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } } }
+				}
+				AND = {
+					exists = c:PBC
+					#is_target_in_global_variable_list = { name = global_nor_andes_countries target = c:PBC }
+					c:PBC = { any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } } }
+				}
+				AND = {
+					exists = c:FND
+					#is_target_in_global_variable_list = { name = global_nor_andes_countries target = c:FND }
+					c:FND = { any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } } }
+				}
+			}
+		}
+		OR = {
+			c:BOL ?= THIS
+			c:PBC ?= THIS
+			c:FND ?= this
+		}
+	}
+	#is_target_in_global_variable_list = { name = global_nor_andes_countries target = this }
+	any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+	trigger_if = {
+		limit = {
+			NOR = {
+				c:BOL ?= THIS
+				c:PBC ?= THIS
+			}
+		}
+		any_scope_state = {
+			state_region = s:STATE_LA_PAZ
+		}
+	}
+}
+
+uses_chl_characters = {
+	is_settler_colonial_country = yes
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:CHL
+					#is_target_in_global_variable_list = { name = global_sou_andes_countries target = c:CHL }
+					c:CHL = { any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } } }
+				}
+				AND = {
+					exists = c:FND
+					#is_target_in_global_variable_list = { name = global_sou_andes_countries target = c:FND }
+					c:FND = { any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } } }
+				}
+				AND = {
+					exists = c:PLT
+					#is_target_in_global_variable_list = { name = global_sou_andes_countries target = c:PLT }
+					c:PLT = { any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } } }
+				}
+			}
+		}
+		OR = {
+			c:CHL ?= this
+			c:FND ?= this
+			c:PLT ?= this
+		}
+	}
+	#is_target_in_global_variable_list = { name = global_sou_andes_countries target = this }
+	any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+	trigger_if = {
+		limit = {
+			NOT = { c:CHL ?= this }
+		}
+		any_scope_state = {
+			state_region = s:STATE_SANTIAGO
+		}
+	}
+}
+
+uses_clm_characters = {
+	is_settler_colonial_country = yes
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:CLM
+					#is_target_in_global_variable_list = { name = global_nor_andes_countries target = c:CLM }
+					c:CLM = { any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } } }
+				}
+				AND = {
+					exists = c:GCO
+					#is_target_in_global_variable_list = { name = global_nor_andes_countries target = c:GCO }
+					c:GCO = { any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } } }
+				}
+				AND = {
+					exists = c:FND
+					#is_target_in_global_variable_list = { name = global_nor_andes_countries target = c:FND }
+					c:FND = { any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } } }
+				}
+			}
+		}
+		OR = {
+			c:CLM ?= this
+			c:GCO ?= this
+			c:FND ?= this
+		}
+	}
+	#is_target_in_global_variable_list = { name = global_nor_andes_countries target = this }
+	any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+	trigger_if = {
+		limit = {
+			NOR = {
+				c:CLM ?= this
+				c:GCO ?= this
+			}
+		}
+		any_scope_state = {
+			state_region = s:CUNDINAMARCA
+		}
+	}
+}
+
+uses_ecu_characters = {
+	is_settler_colonial_country = yes
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:ECU
+					#is_target_in_global_variable_list = { name = global_sou_andes_countries target = c:ECU }
+					c:ECU = { any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } } }
+				}
+				AND = {
+					exists = c:GCO
+					#is_target_in_global_variable_list = { name = global_sou_andes_countries target = c:GCO }
+					c:GCO = { any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } } }
+				}
+				AND = {
+					exists = c:FND
+					#is_target_in_global_variable_list = { name = global_sou_andes_countries target = c:FND }
+					c:FND = { any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } } }
+				}
+			}
+		}
+		OR = {
+			c:ECU ?= this
+			c:GCO ?= this
+			c:FND ?= this
+		}
+	}
+	#is_target_in_global_variable_list = { name = global_sou_andes_countries target = this }
+	any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+	trigger_if = {
+		limit = {
+			NOT = { c:ECU ?= this }
+		}
+		any_scope_state = {
+			state_region = s:STATE_ECUADOR
+		}
+	}
+}
+
+uses_peu_characters = {
+	is_settler_colonial_country = yes
+	#is_target_in_global_variable_list = { name = global_sou_andes_countries target = this }
+	any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+}
+
+needs_state_lima = {
+	any_scope_state = {
+		state_region = s:STATE_LIMA
+		is_incorporated = yes
+	}
+}
+
+needs_state_arequipa = {
+	any_scope_state = {
+		state_region = s:STATE_AREQUIPA
+		is_incorporated = yes
+	}
+}
+
+needs_state_ica = {
+	any_scope_state = {
+		state_region = s:STATE_ICA
+		is_incorporated = yes
+	}
+}
+
+needs_state_cajamarca = {
+	any_scope_state = {
+		state_region = s:STATE_CAJAMARCA
+		is_incorporated = yes
+	}
+}
+
+needs_state_tarapaca = {
+	any_scope_state = {
+		state_region = s:STATE_TARAPACA
+		is_incorporated = yes
+	}
+}
+
+uses_prg_characters = {
+	is_settler_colonial_country = yes
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:PRG
+					#is_target_in_global_variable_list = { name = global_la_plata_countries target = c:PRG }
+					c:PRG = { any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } } }
+				}
+				AND = {
+					exists = c:PLT
+					#is_target_in_global_variable_list = { name = global_la_plata_countries target = c:PLT }
+					c:PLT = { any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } } }
+				}
+			}
+		}
+		OR = {
+			c:PRG ?= this
+			c:PLT ?= this
+		}
+	}
+	#is_target_in_global_variable_list = { name = global_la_plata_countries target = this }
+	any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+	trigger_if = {
+		limit = {
+			NOT = { c:PRG ?= this }
+		}
+		any_scope_state = {
+			state_region = s:STATE_BAJO_PARAGUAY
+		}
+	}
+}
+
+uses_uru_characters = {
+	is_settler_colonial_country = yes
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:URU
+					c:URU = {
+						OR = {
+							any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+							any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+						}
+					}
+				}
+				AND = {
+					exists = c:PLT
+					c:PLT = {
+						OR = {
+							any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+							any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+						}
+					}
+				}
+			}
+		}
+		OR = {
+			c:URU ?= this
+			c:PLT ?= this
+		}
+	}
+	OR = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+	}
+	trigger_if = {
+		limit = {
+			NOT = { c:URU ?= this }
+		}
+		any_scope_state = {
+			state_region = s:STATE_URUGUAY
+		}
+	}
+}
+
+uses_vnz_characters = {
+	is_settler_colonial_country = yes
+	trigger_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:VNZ
+					#is_target_in_global_variable_list = { name = global_nor_andes_countries target = c:VNZ }
+					c:VNZ = { any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } } }
+				}
+				AND = {
+					exists = c:GCO
+					#is_target_in_global_variable_list = { name = global_nor_andes_countries target = c:GCO }
+					c:GCO = { any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } } }
+				}
+				AND = {
+					exists = c:FND
+					#is_target_in_global_variable_list = { name = global_nor_andes_countries target = c:FND }
+					c:FND = { any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } } }
+				}
+			}
+		}
+		OR = {
+			c:VNZ ?= this
+			c:GCO ?= this
+			c:FND ?= this
+		}
+	}
+	#is_target_in_global_variable_list = { name = global_nor_andes_countries target = this }
+	any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+	trigger_if = {
+		limit = {
+			NOR = {
+				c:VNZ ?= this
+				c:GCO ?= this
+			}
+		}
+		any_scope_state = {
+			state_region = s:STATE_MIRANDA
+		}
+	}
+}
+
+uses_per_characters = {
+	trigger_if = {
+		limit = {
+			exists = c:PER
+			is_target_in_global_variable_list = { name = global_per_countries target = c:PER }
+		}
+		this = c:PER
+	}
+	trigger_else = {
+		is_target_in_global_variable_list = { name = global_per_countries target = this }
 	}
 }
