@@ -17,6 +17,7 @@
 #include "Loaders/StateModifierLoader/StateModifierLoader.h"
 #include "Loaders/TerrainLoader/TerrainModifierLoader.h"
 #include "Log.h"
+#include "Packet.h"
 #include "PoliticalManager/Country/Country.h"
 #include "PoliticalManager/PoliticalManager.h"
 #include <cmath>
@@ -262,7 +263,7 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 			market.calcPopOrders(country->getPopCount(),
 				 marketJobs.getJobBreakdown(),
 				 cultureData,
-				 defines, // TODO(Gawquon): Load in defines
+				 {}, // defines, // TODO(Gawquon): Load in defines
 				 demand,
 				 popTypeLoader.getPopTypes(),
 				 {}, // TODO(Gawquon): Load in cultures
@@ -789,7 +790,9 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 	// Spend sector CP if possible
 
 	// Pick a packet size!
-	const int p = determinePacketSize(building, sector, subState, lawsMap, subStates);
+	const int p =
+		 Packet(*building, sector->getCPBudget(), econDefines.getPacketFactor(), *subState, subStates, lawsMap, techMap.getTechs(), stateTraits, buildingGroups)
+			  .getSize();
 
 	int cost = building->getConstructionCost() * p;
 	subState->spendCPBudget(cost);
@@ -837,7 +840,7 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 		{
 			effectiveLevelsAdded = p * ((2 * level - p) / 100.0 + 1 + throughputMod);
 		}
-		else if (level - p > eosCap) // We're already past the economy of scale cap.
+		else if (level - p >= eosCap) // We're already past the economy of scale cap.
 		{
 			effectiveLevelsAdded = p * (eosCap / 100.0 + 1 + throughputMod);
 		}
@@ -866,7 +869,7 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 		{
 			effectiveLevelsAdded = p * ((2 * level - p) / 100.0 + 1 + throughputMod + outputMod);
 		}
-		else if (level - p > eosCap) // We're already past the economy of scale cap.
+		else if (level - p >= eosCap) // We're already past the economy of scale cap.
 		{
 			effectiveLevelsAdded = p * (eosCap / 100.0 + 1 + throughputMod + outputMod);
 		}
@@ -878,10 +881,11 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 	}
 	for (const auto& [job, amount]: buildingResources.getJobs())
 	{
-		marketJobs.createJobs(popTypeLoader.getPopTypes().at(job),
+		marketJobs.createJobs(popTypeLoader.getPopTypes().at(job), // TODO add defines
 			 building->getLevel() * amount,
-			 defines,
-			 Market::calcAddedWorkingPopPercent(subState->getOwner()->getProcessedData().laws, lawsMap));
+			 0,
+			 Market::calcAddedWorkingPopPercent(subState->getOwner()->getProcessedData().laws, lawsMap),
+			 0);
 	}
 
 	//// Update the Market with new ownership building employment
@@ -895,8 +899,9 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 
 			marketJobs.createJobs(popTypeLoader.getPopTypes().at(job),
 				 building->getLevel() * amount * fraction,
-				 defines,
-				 Market::calcAddedWorkingPopPercent(subState->getOwner()->getProcessedData().laws, lawsMap));
+				 0, // TODO add defines
+				 Market::calcAddedWorkingPopPercent(subState->getOwner()->getProcessedData().laws, lawsMap),
+				 0);
 		}
 	}
 }
@@ -914,51 +919,6 @@ void V3::EconomyManager::removeSubStateIfFinished(std::vector<std::shared_ptr<Su
 		}
 		subStates.erase(subState);
 	}
-}
-
-int V3::EconomyManager::determinePacketSize(const std::shared_ptr<Building>& building,
-	 const std::shared_ptr<Sector>& sector,
-	 const std::shared_ptr<SubState>& subState,
-	 const std::map<std::string, Law>& lawsMap,
-	 const std::vector<std::shared_ptr<SubState>>& subStates) const
-{
-	// Packet size is the minimum  of (Sector CP budget/cost, SubState CP budget/cost, SubState capacity, and our clustering metric)
-	const int sectorPacket = sector->getCPBudget() / building->getConstructionCost();
-	const int subStatePacket = subState->getCPBudget() / building->getConstructionCost();
-	const int capacityPacket = subState->getBuildingCapacity(*building, buildingGroups, lawsMap, techMap.getTechs(), stateTraits) - building->getLevel();
-	const int clusterPacket = getClusterPacket(building->getConstructionCost(), subStates);
-
-	const int packet = std::max(std::min({sectorPacket, subStatePacket, capacityPacket, clusterPacket}), 1);
-
-	return packet;
-}
-
-int V3::EconomyManager::getClusterPacket(const int baseCost, const std::vector<std::shared_ptr<SubState>>& subStates) const
-{
-	const int CPAll = std::accumulate(subStates.begin(), subStates.end(), 0, [](const int sum, const std::shared_ptr<SubState>& subState) {
-		return sum + subState->getCPBudget();
-	});
-	const double CPMean = static_cast<double>(CPAll) / static_cast<double>(subStates.size());
-
-
-	const int maxCP = subStates[0]->getCPBudget();
-	const int minCP = std::max(subStates.back()->getCPBudget(), baseCost);
-
-	// Default, when factor is 0
-	int packet = static_cast<int>(CPMean / baseCost);
-	const double factor = econDefines.getPacketFactor();
-	if (factor < 0)
-	{
-		// Trends toward only building 1 building at a time
-		packet = static_cast<int>(std::floor(CPMean * (1.0 + factor) + minCP * -factor) / baseCost);
-	}
-	if (factor > 0)
-	{
-		// Trends toward building as many buildings as the substate can get away with at a time
-		packet = static_cast<int>(std::floor(CPMean * (1 - factor) + maxCP * factor) / baseCost);
-	}
-
-	return packet;
 }
 
 std::map<std::string, int> V3::EconomyManager::apportionInvestors(const int levels,

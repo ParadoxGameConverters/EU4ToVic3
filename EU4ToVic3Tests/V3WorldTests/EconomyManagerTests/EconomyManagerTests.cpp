@@ -145,39 +145,3 @@ TEST(V3World_EconomyManagerTests, GlobalCPScalesByPopulation)
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> The world is 84% Centralized by population. Adjusting global CP values by: -14%)"));
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> The world has 1245324 CP to spend on industry.)"));
 }
-
-TEST(DISABLED_V3World_EconomyManagerTests, GlobalCPScalesByDate)
-{
-	auto politicalManager = prepWorld();
-
-	V3::EconomyManager econManager;
-	econManager.loadCentralizedStates(politicalManager.getCountries());
-}
-
-TEST(DISBALED_V3World_EconomyManagerTests, GlobalCPDistributionTechGroup)
-{
-	auto politicalManager = prepWorld();
-
-	V3::EconomyManager econManager;
-	econManager.loadCentralizedStates(politicalManager.getCountries());
-
-	std::stringstream log;
-	std::streambuf* cout_buffer = std::cout.rdbuf();
-	std::cout.rdbuf(log.rdbuf());
-
-	econManager.assignCountryCPBudgets(Configuration::ECONOMY::CivLevel, Configuration::STARTDATE::Vanilla, DatingData(), politicalManager);
-
-	std::cout.rdbuf(cout_buffer);
-}
-
-TEST(DISABLED_V3World_EconomyManagerTests, GlobalCPDistributionDev)
-{
-}
-
-TEST(DISABLED_V3World_EconomyManagerTests, AssignSubStateCPBudgetsTechGroup)
-{
-}
-
-TEST(DISABLED_V3World_EconomyManagerTests, AssignSubStateCPBudgetsDev)
-{
-}

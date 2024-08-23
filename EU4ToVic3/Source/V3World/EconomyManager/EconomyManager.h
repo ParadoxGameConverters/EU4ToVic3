@@ -119,13 +119,6 @@ class EconomyManager
 		 const std::vector<std::shared_ptr<SubState>>::iterator& subState,
 		 const std::map<std::string, Law>& lawsMap) const;
 
-	[[nodiscard]] int determinePacketSize(const std::shared_ptr<Building>& building,
-		 const std::shared_ptr<Sector>& sector,
-		 const std::shared_ptr<SubState>& subState,
-		 const std::map<std::string, Law>& lawsMap,
-		 const std::vector<std::shared_ptr<SubState>>& subStates) const;
-	[[nodiscard]] int getClusterPacket(int baseCost, const std::vector<std::shared_ptr<SubState>>& subStates) const;
-
 	[[nodiscard]] std::map<std::string, int> apportionInvestors(int levels,
 		 const std::map<std::string, double>& investorWeights,
 		 std::map<std::string, double>& investorIOUs) const;
