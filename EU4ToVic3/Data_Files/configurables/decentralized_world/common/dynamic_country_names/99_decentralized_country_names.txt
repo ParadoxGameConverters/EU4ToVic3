@@ -846,3 +846,64 @@ YEM = { # Arwadids (Yemen)
 		}
 	}
 }
+###################### Decentralized renamings upon centralization for whatever reason ######################
+
+S34 = { # Shan Confederacy
+	dynamic_country_name = {
+		name = S34_centralized # Möng Tai
+		adjective = S34_ADJ
+		
+		is_main_tag_only = yes
+		priority = 5
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= {
+				NOT = { is_country_type = decentralized }
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = S34_recognized # Shan State
+		adjective = S34_ADJ
+		
+		is_main_tag_only = yes
+		priority = 10
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= {
+				NOT = { is_country_type = unrecognized }
+			}
+		}
+	}
+}
+S35 = { # Srivijaya
+	dynamic_country_name = {
+		name = S35_centralized # Singapura
+		adjective = S35_centralized_adj
+		
+		is_main_tag_only = yes
+		priority = 5
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= {
+				NOT = { is_country_type = decentralized }
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = S35_mallaca # Mallacca
+		adjective = S35_mallaca_adj
+		
+		is_main_tag_only = yes
+		priority = 6
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= {
+				
+			}
+		}
+	}
