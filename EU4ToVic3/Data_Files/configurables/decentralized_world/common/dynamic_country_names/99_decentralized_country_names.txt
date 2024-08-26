@@ -880,7 +880,7 @@ S34 = { # Shan Confederacy
 }
 S35 = { # Srivijaya
 	dynamic_country_name = {
-		name = S35_centralized # Singapura
+		name = S35_centralized # Malaya
 		adjective = S35_centralized_adj
 		
 		is_main_tag_only = yes
@@ -903,7 +903,24 @@ S35 = { # Srivijaya
 		trigger = {
 			exists = scope:actor
 			scope:actor ?= {
-				
+				owns_entire_state_region = STATE_MALAYA
+				has_law = law_type:law_state_religion
+				coa_def_monarchy_flag_trigger = yes
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = S35_malaysia # Malaysia
+		adjective = S35_malaysia_adj
+		
+		is_main_tag_only = yes
+		priority = 5
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= {
+				NOT = { is_country_type = unrecognized }
+				NOT = { exists = c:PHI } 
 			}
 		}
 	}
