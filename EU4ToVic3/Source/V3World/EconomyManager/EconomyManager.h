@@ -6,8 +6,8 @@
 #include "BuildingMapper/ProductionMethodMapper/ProductionMethodMapper.h"
 #include "ClayManager/State/StateModifier.h"
 #include "Configuration.h"
-#include "Demand/Market.h"
-#include "Demand/MarketJobs.h"
+#include "CultureMapper/CultureDefinitionLoader/CultureDef.h"
+#include "Demand/MarketTracker.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethod.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethodGroup.h"
 #include "Loaders/BuildingLoader/OwnershipLoader/OwnershipLoader.h"
@@ -18,6 +18,7 @@
 #include "Loaders/PopLoader/PopTypeLoader.h"
 #include "Loaders/TechLoader/TechLoader.h"
 #include "PoliticalManager/PoliticalManager.h"
+#include "ReligionMapper/ReligionDefinitionLoader/ReligionDef.h"
 
 namespace V3
 {
@@ -68,7 +69,10 @@ class EconomyManager
 		 bool vn = false) const;
 	void assignSubStateCPBudgets(Configuration::ECONOMY economyType) const;
 	void balanceNationalBudgets() const;
-	void buildBuildings(const std::map<std::string, Law>& lawsMap) const;
+	void buildBuildings(const std::map<std::string, Law>& lawsMap,
+		 const std::map<std::string, mappers::CultureDef>& cultures,
+		 const std::map<std::string, mappers::ReligionDef>& religions,
+		 const Vic3DefinesLoader& defines) const;
 	void investCapital(const std::map<std::string, std::shared_ptr<Country>>& countries) const;
 	void setPMs() const;
 
@@ -103,8 +107,7 @@ class EconomyManager
 		 const std::vector<std::shared_ptr<SubState>>& subStates,
 		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
 		 const std::map<std::string, std::map<std::string, double>>& estimatedOwnershipFracs,
-		 MarketJobs& marketJobs,
-		 Market& market) const;
+		 MarketTracker& marketTracker) const;
 	[[nodiscard]] static std::shared_ptr<Sector> getSectorWithMostBudget(const std::map<std::string, std::shared_ptr<Sector>>& sectors);
 	void buildBuilding(const std::shared_ptr<Building>& building,
 		 const std::shared_ptr<SubState>& subState,
@@ -113,8 +116,7 @@ class EconomyManager
 		 const std::vector<std::shared_ptr<SubState>>& subStates,
 		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
 		 const std::map<std::string, std::map<std::string, double>>& estimatedOwnershipFracs,
-		 MarketJobs& marketJobs,
-		 Market& market) const;
+		 MarketTracker& marketTracker) const;
 	void removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
 		 const std::vector<std::shared_ptr<SubState>>::iterator& subState,
 		 const std::map<std::string, Law>& lawsMap) const;

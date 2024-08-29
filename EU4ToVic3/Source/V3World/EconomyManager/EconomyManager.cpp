@@ -210,7 +210,10 @@ void V3::EconomyManager::balanceNationalBudgets() const
 	Log(LogLevel::Info) << "<> Industry Sectors Primed.";
 }
 
-void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMap) const
+void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMap,
+	 const std::map<std::string, mappers::CultureDef>& cultures,
+	 const std::map<std::string, mappers::ReligionDef>& religions,
+	 const Vic3DefinesLoader& defines) const
 {
 	Log(LogLevel::Info) << "-> Building buildings.";
 	auto counter = 0;
@@ -226,25 +229,7 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 	// 3c. packet size is based on the mean amount of CP states have left to build and is configurable
 	// 4. If a substate ends up with less CP than the cost for any possible valid building, they relinquish it to the next sector/substate
 
-	Market market;
-	market.loadGoods(demand.getGoodsMap());
-
-	// Load up peasants
-	for (const auto& country: centralizedCountries)
-	{
-		for (const auto& subState: country->getSubStates())
-		{
-			const auto& subsistenceBuildingName = subState->getHomeState()->getSubsistenceBuilding();
-			if (const auto& subsistenceBuildingIter = buildings.find(subsistenceBuildingName); subsistenceBuildingIter != buildings.end())
-			{
-				const auto& subsistenceBuilding = subsistenceBuildingIter->second;
-			}
-			else
-			{
-				Log(LogLevel::Warning) << "Subsistence Building: " << subsistenceBuildingName << " has no definition.";
-			}
-		}
-	}
+	MarketTracker market(demand.getGoodsMap(), buildings.at("building_manor_house").getPMGroups());
 
 	for (const auto& country: centralizedCountries)
 	{
@@ -252,34 +237,28 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 		auto subStatesByBudget = prepareSubStatesByBudget(country, lawsMap);
 		const auto& estimatedPMs = PMMapper.estimatePMs(*country, PMs, PMGroups, buildings);
 		const auto& estimatedOwnershipFracs = estimateInvestorBuildings(*country);
-		const auto& cultureData = country->getCultureBreakdown();
-		MarketJobs marketJobs; // TODO(Gawquon): Init Market Jobs
+		market.resetMarket();
+		market.loadPeasants(*country, PMGroups, PMs, buildings, lawsMap);
+		market.loadCultures(country->getCultureBreakdown());
 
 		// Until every substate is unable to build anything
 		while (!subStatesByBudget.empty())
 		{
 			// Enter negotiation
+
 			// Update the market
-			market.calcPopOrders(country->getPopCount(),
-				 marketJobs.getJobBreakdown(),
-				 cultureData,
-				 {}, // defines, // TODO(Gawquon): Load in defines
-				 demand,
-				 popTypeLoader.getPopTypes(),
-				 {}, // TODO(Gawquon): Load in cultures
-				 {}, // TODO(Gawquon): Load in religions
-				 country->getProcessedData().laws,
-				 lawsMap);
+			market.updatePopNeeds(defines, demand, country->getProcessedData().laws, popTypeLoader.getPopTypes(), cultures, religions, lawsMap);
 
 			// Pick the substate with the most budget
-			negotiateBuilding(subStatesByBudget[0], sectors, lawsMap, subStatesByBudget, estimatedPMs, estimatedOwnershipFracs, marketJobs, market);
+			negotiateBuilding(subStatesByBudget[0], sectors, lawsMap, subStatesByBudget, estimatedPMs, estimatedOwnershipFracs, market);
 			++counter;
 
 			// A Building has now been built, process for next round
 			std::sort(subStatesByBudget.begin(), subStatesByBudget.end(), SubState::greaterBudget);
 			removeSubStateIfFinished(subStatesByBudget, subStatesByBudget.end() - 1, lawsMap);
 		}
-		// TODO(Gawquon): Add a debug printout of the estimated market.
+		// DEBUG
+		market.logDebugMarket();
 	}
 	Log(LogLevel::Info) << "<> Built " << counter << " buildings world-wide.";
 }
@@ -711,8 +690,7 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 	 const std::vector<std::shared_ptr<SubState>>& subStates,
 	 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
 	 const std::map<std::string, std::map<std::string, double>>& estimatedOwnershipFracs,
-	 MarketJobs& marketJobs,
-	 Market& market) const
+	 MarketTracker& market) const
 {
 	// Whether or not the negotiation succeeds, a building MUST be built.
 
@@ -746,7 +724,7 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 		}
 
 		// So we're a valid building in a valid sector and there is budget for us. Great!
-		buildBuilding(building, subState, sectors.at(sector.value()), lawsMap, subStates, estimatedPMs, estimatedOwnershipFracs, marketJobs, market);
+		buildBuilding(building, subState, sectors.at(sector.value()), lawsMap, subStates, estimatedPMs, estimatedOwnershipFracs, market);
 		talksFail = false;
 		break;
 	}
@@ -755,15 +733,7 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 	{
 		// Negotiation failed
 		// State picks its favorite building, takes from biggest sector
-		buildBuilding(subState->getBuildings()[0],
-			 subState,
-			 getSectorWithMostBudget(sectors),
-			 lawsMap,
-			 subStates,
-			 estimatedPMs,
-			 estimatedOwnershipFracs,
-			 marketJobs,
-			 market);
+		buildBuilding(subState->getBuildings()[0], subState, getSectorWithMostBudget(sectors), lawsMap, subStates, estimatedPMs, estimatedOwnershipFracs, market);
 	}
 }
 

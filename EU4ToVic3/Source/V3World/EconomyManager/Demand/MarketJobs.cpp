@@ -3,12 +3,8 @@
 #include <numeric>
 
 
-V3::MarketJobs::MarketJobs(const std::map<std::string, double>& jobsList, const std::vector<std::pair<std::string, int>>& manorHouseRoster):
-	 jobCounts(jobsList), manorHouseRoster(manorHouseRoster)
+V3::MarketJobs::MarketJobs(const std::vector<std::pair<std::string, int>>& manorHouseRoster): manorHouseRoster(manorHouseRoster)
 {
-	population = std::accumulate(jobCounts.begin(), jobCounts.end(), 0, [](int sum, const auto& pair) {
-		return sum + static_cast<int>(pair.second);
-	});
 }
 
 // Returns a map of each job as a percentage of all jobs in the market.
@@ -30,6 +26,14 @@ void V3::MarketJobs::createJobs(const PopType& popType, double amount, const dou
 	amount /= (popType.getDependentRatio().value_or(defaultRatio) + womenJobRate);
 	const double shortage = hireFromWorseJobs(amount, peasantsPerLevel);
 	jobCounts[popType.getType()] += amount - shortage;
+}
+
+void V3::MarketJobs::loadInitialJobs(const std::map<std::string, double> jobsList)
+{
+	jobCounts = jobsList;
+	population = std::accumulate(jobCounts.begin(), jobCounts.end(), 0, [](int sum, const auto& pair) {
+		return sum + static_cast<int>(pair.second);
+	});
 }
 
 double V3::MarketJobs::hireFromWorseJobs(double amount, const int peasantsPerLevel)

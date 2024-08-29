@@ -14,16 +14,30 @@ TEST(V3World_MarketJobsTests, DefaultsDefaultToDefaults)
 TEST(V3World_MarketJobsTests, JobBreakdownReturnsPercentages)
 {
 	std::map<std::string, double> jobList({{"poors", 250}, {"unemployed", 750}, {"peasants", 1000}});
-	const V3::MarketJobs marketJobs(jobList, {});
+	V3::MarketJobs marketJobs({});
+	marketJobs.loadInitialJobs(jobList);
 
 	EXPECT_THAT(marketJobs.getJobBreakdown(),
 		 testing::UnorderedElementsAre(testing::Pair("poors", .125), testing::Pair("unemployed", .375), testing::Pair("peasants", .5)));
 }
 
+TEST(V3World_MarketJobsTests, ClearJobsEmptiesMap)
+{
+	std::map<std::string, double> jobList({{"poors", 250}, {"unemployed", 750}, {"peasants", 1000}});
+	V3::MarketJobs marketJobs({});
+	marketJobs.loadInitialJobs(jobList);
+
+	EXPECT_THAT(marketJobs.getJobCounts(),
+		 testing::UnorderedElementsAre(testing::Pair("poors", 250), testing::Pair("unemployed", 750), testing::Pair("peasants", 1000)));
+	marketJobs.clearJobs();
+	EXPECT_TRUE(marketJobs.getJobCounts().empty());
+}
+
 TEST(V3World_MarketJobsTests, CreateJobsTakesFromUnemployedAndPeasants)
 {
 	std::map<std::string, double> jobList({{"poors", 250}, {"unemployed", 750}, {"peasants", 1000}});
-	V3::MarketJobs marketJobs(jobList, {});
+	V3::MarketJobs marketJobs({});
+	marketJobs.loadInitialJobs(jobList);
 
 	std::stringstream input;
 	input << "working_adult_ratio = 0.25\n";
