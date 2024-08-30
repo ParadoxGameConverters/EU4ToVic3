@@ -238,7 +238,7 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 		const auto& estimatedPMs = PMMapper.estimatePMs(*country, PMs, PMGroups, buildings);
 		const auto& estimatedOwnershipFracs = estimateInvestorBuildings(*country);
 		market.resetMarket();
-		market.loadPeasants(*country, PMGroups, PMs, buildings, lawsMap);
+		market.loadPeasants(*country, PMGroups, PMs, buildings);
 		market.loadCultures(country->getCultureBreakdown());
 
 		// Until every substate is unable to build anything

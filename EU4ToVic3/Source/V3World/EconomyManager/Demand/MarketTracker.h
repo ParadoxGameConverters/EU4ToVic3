@@ -21,8 +21,7 @@ class MarketTracker
 	void loadPeasants(const Country& country,
 		 const std::map<std::string, ProductionMethodGroup>& PMGroups,
 		 const std::map<std::string, ProductionMethod>& PMs,
-		 const std::map<std::string, Building>& buildings,
-		 const std::map<std::string, Law>& lawsMap);
+		 const std::map<std::string, Building>& buildings);
 	void loadCultures(const std::map<std::string, double> cultureData) { marketCulture = cultureData; }
 
 	void updatePopNeeds(const Vic3DefinesLoader& defines,
@@ -41,12 +40,19 @@ class MarketTracker
 		 const std::set<std::string>& laws,
 		 const std::map<std::string, ProductionMethodGroup>& PMGroups,
 		 const std::map<std::string, ProductionMethod>& PMs) const;
-	bool hasUnlockingLaws(const std::set<std::string>& laws, const std::set<std::string>& targetLaws) const;
-	bool hasBlockingLaws(const std::set<std::string>& laws, const std::set<std::string>& targetLaws) const;
+	[[nodiscard]] bool hasUnlockingLaws(const std::set<std::string>& laws, const std::set<std::string>& targetLaws) const;
+	[[nodiscard]] bool hasBlockingLaws(const std::set<std::string>& laws, const std::set<std::string>& targetLaws) const;
+	[[nodiscard]] std::map<std::string, int> getSubsistenceEmployment(const std::string& subsistenceBuildingName,
+		 const std::set<std::string>& laws,
+		 const std::map<std::string, ProductionMethodGroup>& PMGroups,
+		 const std::map<std::string, ProductionMethod>& PMs,
+		 const std::map<std::string, Building>& buildings) const;
 
 	Market market;
 	MarketJobs marketJobs;
 	std::map<std::string, double> marketCulture;
+
+	static inline std::set<std::string> subsistenceErrors = {};
 };
 } // namespace V3
 

@@ -1,6 +1,6 @@
 #include "MarketJobs.h"
-
 #include <numeric>
+#include <ranges>
 
 
 V3::MarketJobs::MarketJobs(const std::vector<std::pair<std::string, int>>& manorHouseRoster): manorHouseRoster(manorHouseRoster)
@@ -28,7 +28,33 @@ void V3::MarketJobs::createJobs(const PopType& popType, double amount, const dou
 	jobCounts[popType.getType()] += amount - shortage;
 }
 
-void V3::MarketJobs::loadInitialJobs(const std::map<std::string, double> jobsList)
+// pre: subsistenceUnitEmployment must contain peasants TODO(Gawquon): Maybe not?
+// post: MarketJobs accumulates subStatePop, and an equal number of jobs are distributed
+// Returns number of subsistence building levels filled.
+double V3::MarketJobs::createPeasants(const std::map<std::string, int>& subsistenceUnitEmployment,
+	 double defaultRatio,
+	 double womenJobRate,
+	 int arableLand,
+	 int subStatePop,
+	 const std::map<std::string, PopType>& popTypes)
+{
+	auto unitEmployment = subsistenceUnitEmployment;
+	for (const auto& [job, amount]: manorHouseRoster) // Peasants create manor house jobs.
+	{
+		unitEmployment[job] += amount;
+	}
+	// const int totalUnitPop = std::accumulate(unitEmployment.begin(), unitEmployment.end(), 0, [](int sum, const auto& pair) {
+	//	return sum + pair.second;
+	// });
+
+
+
+	double levels = getLevelsFromUnitEmploymentArable(unitEmployment, defaultRatio, womenJobRate, arableLand, subStatePop, popTypes);
+
+	// TODO getLevelsFromUnitEmploymentArable
+}
+
+void V3::MarketJobs::loadInitialJobs(const std::map<std::string, double>& jobsList)
 {
 	jobCounts = jobsList;
 	population = std::accumulate(jobCounts.begin(), jobCounts.end(), 0, [](int sum, const auto& pair) {

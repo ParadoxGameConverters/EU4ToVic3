@@ -34,47 +34,38 @@ void V3::MarketTracker::resetMarket()
 void V3::MarketTracker::loadPeasants(const Country& country,
 	 const std::map<std::string, ProductionMethodGroup>& PMGroups,
 	 const std::map<std::string, ProductionMethod>& PMs,
-	 const std::map<std::string, Building>& buildings,
-	 const std::map<std::string, Law>& lawsMap)
+	 const std::map<std::string, Building>& buildings)
 {
-	// For each state check peasant PM
 	// from PM calc Jobs per arable land
 	// multiply Unit Jobs per filled arable land
 	// load in jobs
 	// "unemployed" for all who don't fit on the arable land
 
+	// For each state check peasant PM
 	for (const auto& subState: country.getSubStates())
 	{
 		const std::string& subsistenceBuildingName = subState->getHomeState()->getSubsistenceBuilding();
-		if (const auto& subsistenceBuildingIter = buildings.find(subsistenceBuildingName); subsistenceBuildingIter != buildings.end())
-		{
-			std::map<std::string, double> subsistenceEmployment;
-			double total = 0;
+		auto subsistenceEmployment = getSubsistenceEmployment(subsistenceBuildingName, country.getProcessedData().laws, PMGroups, PMs, buildings);
 
-			const auto& subsistenceBuilding = subsistenceBuildingIter->second;
-			for (const auto& PMg: subsistenceBuilding.getPMGroups())
+		if (!subsistenceEmployment.contains("peasants"))
+		{
+			if (!subsistenceErrors.contains(subsistenceBuildingName))
 			{
-				const auto& PMName = PMGroups.at(PMg).getPMs()[getPMAllowedByLaws(PMg, country.getProcessedData().laws, PMGroups, PMs)];
-				const auto& thePM = PMs.at(PMName);
-				for (const auto& [job, amount]: thePM.getEmployment()) // TODO(Gawquon) Note that we still need to add the market goods for subsistence farms
-				{
-					subsistenceEmployment[job] += amount;
-					total += amount;
-				}
+				Log(LogLevel::Warning) << "Building: " << subsistenceBuildingName << " is marked as subsistence, yet has no peasants.";
+				subsistenceErrors.emplace(subsistenceBuildingName);
 			}
-
-			int peasantsPerLevel = subsistenceEmployment.at("peasants"); // TODO validate
-			// TODO (stuff)
-
-			marketJobs.loadInitialJobs()
-			// Create the Unit Employment by accounting for subsistence farm size and manor house stuff.
-			// Employ people base on ratios in unit employment untill arabe land is filled
-			// the rest are unemployed,
+			continue;
 		}
-		else
-		{
-			Log(LogLevel::Warning) << "Subsistence Building: " << subsistenceBuildingName << " has no definition.";
-		}
+
+		marketJobs.createPeasants(subsistenceEmployment,
+			10000000000000, // TODO load in defines
+			10000000000000, // TODO do the law thingy
+			subState->getResource("bg_agriculture"),
+			subState->getSubStatePops().getPopCount(),
+			{});
+
+		// Get the arable land
+		// marketJobs.
 	}
 }
 
@@ -140,4 +131,32 @@ bool V3::MarketTracker::hasBlockingLaws(const std::set<std::string>& laws, const
 	return std::ranges::any_of(targetLaws, [laws](const std::string& targetLaw) {
 		return laws.contains(targetLaw);
 	});
+}
+
+std::map<std::string, int> V3::MarketTracker::getSubsistenceEmployment(const std::string& buildingName,
+	 const std::set<std::string>& laws,
+	 const std::map<std::string, ProductionMethodGroup>& PMGroups,
+	 const std::map<std::string, ProductionMethod>& PMs,
+	 const std::map<std::string, Building>& buildings) const
+{
+	const auto& subsistenceBuildingIter = buildings.find(buildingName);
+	if (subsistenceBuildingIter == buildings.end())
+	{
+		Log(LogLevel::Warning) << "Subsistence Building: " << buildingName << " has no definition.";
+	}
+
+	std::map<std::string, int> subsistenceEmployment;
+
+	const auto& subsistenceBuilding = subsistenceBuildingIter->second;
+	for (const auto& PMGroup: subsistenceBuilding.getPMGroups())
+	{
+		const auto& PMName = PMGroups.at(PMGroup).getPMs()[getPMAllowedByLaws(PMGroup, laws, PMGroups, PMs)];
+		const auto& thePM = PMs.at(PMName);
+		for (const auto& [job, amount]: thePM.getEmployment()) // TODO(Gawquon) Note that we still need to add the market goods for subsistence farms
+		{
+			subsistenceEmployment[job] += amount;
+		}
+	}
+
+	return subsistenceEmployment;
 }
