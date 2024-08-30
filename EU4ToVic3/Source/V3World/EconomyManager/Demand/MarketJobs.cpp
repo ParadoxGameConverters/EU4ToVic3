@@ -21,11 +21,24 @@ std::map<std::string, double> V3::MarketJobs::getJobBreakdown() const
 	return jobBreakdown;
 }
 
+// currenty assumes that enough potential workers exist
 void V3::MarketJobs::createJobs(const PopType& popType, double amount, const double defaultRatio, const double womenJobRate, const int peasantsPerLevel)
 {
 	amount /= (popType.getDependentRatio().value_or(defaultRatio) + womenJobRate);
 	const double shortage = hireFromWorseJobs(amount, peasantsPerLevel);
 	jobCounts[popType.getType()] += amount - shortage;
+}
+
+// Returns levels of displaced subsistence building.
+double V3::MarketJobs::createJobs(const std::map<std::string, int>& unitEmployment,
+	 double defaultRatio,
+	 double womenJobRate,
+	 int peasantsPerLevel,
+	 const std::map<std::string, double>& estimatedOwnerships,
+	 const std::map<std::string, int>& ownershipEmployments,
+	 const std::map<std::string, PopType>& popTypes)
+{
+	return 0.0;
 }
 
 // pre: subsistenceUnitEmployment must contain peasants TODO(Gawquon): Maybe not?
@@ -43,15 +56,20 @@ double V3::MarketJobs::createPeasants(const std::map<std::string, int>& subsiste
 	{
 		unitEmployment[job] += amount;
 	}
-	// const int totalUnitPop = std::accumulate(unitEmployment.begin(), unitEmployment.end(), 0, [](int sum, const auto& pair) {
-	//	return sum + pair.second;
-	// });
+	for (const auto& [job, amount]: unitEmployment) // Track Dependants
+	{
+		unitEmployment[job] = amount / (popTypes.at(job).getDependentRatio().value_or(defaultRatio) + womenJobRate);
+	}
+	double levels = getLevels(unitEmployment, arableLand, subStatePop);
 
-
-
-	double levels = getLevelsFromUnitEmploymentArable(unitEmployment, defaultRatio, womenJobRate, arableLand, subStatePop, popTypes);
-
-	// TODO getLevelsFromUnitEmploymentArable
+	const double capcity = levels > arableLand ? levels : arableLand;
+	for (const auto& [job, amount]: unitEmployment)
+	{
+		jobCounts[job] += amount * capcity;
+		jobCounts["unemployed"] += amount * (levels - capcity);
+	}
+	population += subStatePop;
+	return levels;
 }
 
 void V3::MarketJobs::loadInitialJobs(const std::map<std::string, double>& jobsList)
@@ -104,4 +122,12 @@ void V3::MarketJobs::downsizeManorHouses(const double peasantAmount, const int p
 	{
 		jobCounts[job] -= amount * peasantAmount / peasantsPerLevel;
 	}
+}
+
+double V3::MarketJobs::getLevels(std::map<std::string, int> unitEmployment, double arableLand, int subStatePop)
+{
+	double unitPop = std::accumulate(unitEmployment.begin(), unitEmployment.end(), 0.0, [](double sum, const auto& pair) {
+		return sum + pair.second;
+	});
+	return std::min(static_cast<double>(arableLand), subStatePop / unitPop);
 }

@@ -16,7 +16,7 @@ class MarketJobs
 	[[nodsicard]] std::map<std::string, double> getJobBreakdown() const;
 
 	void createJobs(const PopType& popType, double amount, double defaultRatio, double womenJobRate, int peasantsPerLevel);
-	void createJobs(const std::map<std::string, int>& unitEmployment,
+	double createJobs(const std::map<std::string, int>& unitEmployment,
 		 double defaultRatio,
 		 double womenJobRate,
 		 int peasantsPerLevel,
@@ -24,11 +24,11 @@ class MarketJobs
 		 const std::map<std::string, int>& ownershipEmployments,
 		 const std::map<std::string, PopType>& popTypes);
 	double createPeasants(const std::map<std::string, int>& subsistenceUnitEmployment,
-		double defaultRatio,
-		double womenJobRate,
-		int arableLand,
-		int subStatePop,
-		const std::map<std::string, PopType>& popTypes);
+		 double defaultRatio,
+		 double womenJobRate,
+		 int arableLand,
+		 int subStatePop,
+		 const std::map<std::string, PopType>& popTypes);
 	void clearJobs() { jobCounts.clear(); }
 	void loadInitialJobs(const std::map<std::string, double>& jobsList);
 
@@ -40,7 +40,7 @@ class MarketJobs
 	double hireFromUnemployed(double amount);										 // Returns the amount of jobs with no unemployed available.
 	double hireFromPeasants(double amount, int peasantsPerLevel);			 // Returns the amount of jobs with no peasants available.
 	void downsizeManorHouses(double peasantAmount, int peasantsPerLevel); // Removes employment from Manor Houses based on # of peasants who got real jobs.
-
+	static double getLevels(std::map<std::string, int> unitEmployment, double arableLand, int subStatePop);
 
 	std::vector<std::pair<std::string, int>> manorHouseRoster;
 };

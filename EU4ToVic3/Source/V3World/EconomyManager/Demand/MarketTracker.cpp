@@ -57,15 +57,14 @@ void V3::MarketTracker::loadPeasants(const Country& country,
 			continue;
 		}
 
-		marketJobs.createPeasants(subsistenceEmployment,
-			10000000000000, // TODO load in defines
-			10000000000000, // TODO do the law thingy
-			subState->getResource("bg_agriculture"),
-			subState->getSubStatePops().getPopCount(),
-			{});
+		const double levels = marketJobs.createPeasants(subsistenceEmployment,
+			 10000000000000, // TODO load in defines
+			 10000000000000, // TODO do the law thingy
+			 subState->getResource("bg_agriculture"),
+			 subState->getSubStatePops().getPopCount(),
+			 {});
 
-		// Get the arable land
-		// marketJobs.
+		// TODO(Gawquon): Account for market production of the subsistence buildings
 	}
 }
 
