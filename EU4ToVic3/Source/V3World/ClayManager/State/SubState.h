@@ -61,6 +61,8 @@ class SubState
 	void setSubStatePops(const SubStatePops& thePops) { subStatePops = thePops; }
 	void addPop(const Pop& pop) { subStatePops.addPop(pop); }
 	void addPops(const std::vector<Pop>& pops) { subStatePops.addPops(pops); }
+	void setJob(const std::string& job, const double amount) { estimatedJobs[job] = amount; }
+	void addJob(const std::string& job, const double amount) { estimatedJobs[job] += amount; }
 	void setVanillaPopCount(const int popCount) { vanillaPopCount = popCount; }
 
 	void setIndustryWeight(const double theIndustryWeight) { industryWeight = theIndustryWeight; }
@@ -116,6 +118,8 @@ class SubState
 	[[nodiscard]] const auto& getTerrainFrequencies() { return terrainFrequency; }
 	[[nodiscard]] const auto& getDemographics() const { return demographics; }
 	[[nodiscard]] const auto& getSubStatePops() const { return subStatePops; }
+	[[nodiscard]] double getJob(const std::string& job) const;
+	[[nodiscard]] const auto& getEstimatedJobs() const { return estimatedJobs; }
 	[[nodiscard]] const auto& getVanillaPopCount() const { return vanillaPopCount; }
 	[[nodiscard]] std::optional<std::string> getPrimaryCulture() const;
 
@@ -211,7 +215,8 @@ class SubState
 	std::map<std::string, double> terrainFrequency; // Normalized vector (math-wise) of terrain in substate as %
 	std::vector<Demographic> demographics;
 	SubStatePops subStatePops;
-	int vanillaPopCount = 0; // What pop of substate would be without adjustments
+	int vanillaPopCount = 0;							// What pop of substate would be without adjustments
+	std::map<std::string, double> estimatedJobs; // An estimated count of all pop's jobs, including dependents.
 
 	double industryWeight = 0;								  // Share of owner's industry a substate should get, not normalized
 	int CPBudget = 0;											  // Construction Points for a substate to spend on its development

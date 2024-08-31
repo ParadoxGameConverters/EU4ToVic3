@@ -685,6 +685,11 @@ void V3::SubState::generatePops(int totalAmount, const int slaveAmount)
 	}
 }
 
+double V3::SubState::getJob(const std::string& job) const
+{
+	return estimatedJobs.contains(job) ? estimatedJobs.at(job) : 0;
+}
+
 std::optional<std::string> V3::SubState::getPrimaryCulture() const
 {
 	if (subStatePops.getPopCount() == 0)

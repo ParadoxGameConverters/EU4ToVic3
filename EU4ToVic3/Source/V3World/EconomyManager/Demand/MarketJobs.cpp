@@ -1,4 +1,7 @@
 #include "MarketJobs.h"
+
+#include "ClayManager/State/SubState.h"
+
 #include <numeric>
 #include <ranges>
 
@@ -6,128 +9,181 @@
 V3::MarketJobs::MarketJobs(const std::vector<std::pair<std::string, int>>& manorHouseRoster): manorHouseRoster(manorHouseRoster)
 {
 }
+#pragma optimize("", off)
+//// Returns a map of each job as a percentage of all jobs in the market. TODO(Gawquon) Move to Country Class
+// std::map<std::string, double> V3::MarketJobs::getJobBreakdown() const
+//{
+//	std::map<std::string, double> jobBreakdown;
+//
+//	const auto thePop = population < 1 ? 1 : population;
+//	for (const auto& [job, amount]: jobCounts)
+//	{
+//		jobBreakdown[job] = amount / thePop;
+//	}
+//
+//	return jobBreakdown;
+// }
 
-// Returns a map of each job as a percentage of all jobs in the market.
-std::map<std::string, double> V3::MarketJobs::getJobBreakdown() const
-{
-	std::map<std::string, double> jobBreakdown;
-
-	const auto thePop = population < 1 ? 1 : population;
-	for (const auto& [job, amount]: jobCounts)
-	{
-		jobBreakdown[job] = amount / thePop;
-	}
-
-	return jobBreakdown;
-}
-
-// currenty assumes that enough potential workers exist
-void V3::MarketJobs::createJobs(const PopType& popType, double amount, const double defaultRatio, const double womenJobRate, const int peasantsPerLevel)
-{
-	amount /= (popType.getDependentRatio().value_or(defaultRatio) + womenJobRate);
-	const double shortage = hireFromWorseJobs(amount, peasantsPerLevel);
-	jobCounts[popType.getType()] += amount - shortage;
-}
 
 // Returns levels of displaced subsistence building.
-double V3::MarketJobs::createJobs(const std::map<std::string, int>& unitEmployment,
-	 double defaultRatio,
-	 double womenJobRate,
-	 int peasantsPerLevel,
+double V3::MarketJobs::createJobs(const std::map<std::string, int>& rgoUnitEmployment,
+	 const std::map<std::string, int>& subsistenceUnitEmployment,
+	 const int levels,
+	 const double defaultRatio,
+	 const double womenJobRate,
 	 const std::map<std::string, double>& estimatedOwnerships,
-	 const std::map<std::string, int>& ownershipEmployments,
-	 const std::map<std::string, PopType>& popTypes)
+	 const std::map<std::string, std::map<std::string, int>>& ownershipEmployments,
+	 const std::map<std::string, PopType>& popTypes,
+	 const std::shared_ptr<SubState>& subState)
 {
-	return 0.0;
+	std::map<std::string, double> unitEmployment;
+	for (const auto& [job, amount]: rgoUnitEmployment) // int -> double
+	{
+		unitEmployment[job] += amount;
+	}
+	for (const auto& [type, percent]: estimatedOwnerships)
+	{
+		for (const auto& [job, amount]: ownershipEmployments.at(type)) // Account for the owner of the buildings.
+		{
+			unitEmployment[job] += amount * percent;
+		}
+	}
+	for (const auto& [job, amount]: unitEmployment) // Track Dependents
+	{
+		unitEmployment[job] = amount / (popTypes.at(job).getDependentRatio().value_or(defaultRatio) + womenJobRate);
+	}
+
+	double totalPlaced = 0;
+	for (const auto& [job, amount]: unitEmployment)
+	{
+		subState->addJob(job, amount * levels);
+		totalPlaced += amount * levels;
+	}
+	return hireFromWorseJobs(totalPlaced, defaultRatio, womenJobRate, popTypes, subsistenceUnitEmployment, subState);
 }
 
-// pre: subsistenceUnitEmployment must contain peasants TODO(Gawquon): Maybe not?
-// post: MarketJobs accumulates subStatePop, and an equal number of jobs are distributed
+// post: The given subState's job estimate is initialized with the 0 buildings version of local employment.
 // Returns number of subsistence building levels filled.
-double V3::MarketJobs::createPeasants(const std::map<std::string, int>& subsistenceUnitEmployment,
+double V3::MarketJobs::createSubsistence(const std::map<std::string, int>& subsistenceUnitEmployment,
 	 double defaultRatio,
-	 double womenJobRate,
-	 int arableLand,
-	 int subStatePop,
-	 const std::map<std::string, PopType>& popTypes)
+	 const double womenJobRate,
+	 const int arableLand,
+	 const std::map<std::string, PopType>& popTypes,
+	 const std::shared_ptr<V3::SubState>& subState)
 {
-	auto unitEmployment = subsistenceUnitEmployment;
+	std::map<std::string, double> unitEmployment;
+
+	for (const auto& [job, amount]: subsistenceUnitEmployment)
+	{
+		unitEmployment[job] += amount;
+	}
 	for (const auto& [job, amount]: manorHouseRoster) // Peasants create manor house jobs.
 	{
 		unitEmployment[job] += amount;
 	}
-	for (const auto& [job, amount]: unitEmployment) // Track Dependants
+	for (const auto& [job, amount]: unitEmployment) // Track Dependents
 	{
 		unitEmployment[job] = amount / (popTypes.at(job).getDependentRatio().value_or(defaultRatio) + womenJobRate);
 	}
-	double levels = getLevels(unitEmployment, arableLand, subStatePop);
 
-	const double capcity = levels > arableLand ? levels : arableLand;
+	const double unitPop = std::accumulate(unitEmployment.begin(), unitEmployment.end(), 0.0, [](double sum, const auto& pair) {
+		return sum + pair.second;
+	});
+	const double unemployedPerUnit = subState->getSubStatePops().getPopCount() / unitPop;
+	const double levels = std::min(static_cast<double>(arableLand), unemployedPerUnit);
+
 	for (const auto& [job, amount]: unitEmployment)
 	{
-		jobCounts[job] += amount * capcity;
-		jobCounts["unemployed"] += amount * (levels - capcity);
+		subState->addJob(job, amount * levels);
+		subState->addJob("unemployed", amount * (unemployedPerUnit - levels));
 	}
-	population += subStatePop;
+
 	return levels;
 }
 
-void V3::MarketJobs::loadInitialJobs(const std::map<std::string, double>& jobsList)
+
+double V3::MarketJobs::hireFromWorseJobs(double amount,
+	 const double defaultRatio,
+	 const double womenJobRate,
+	 const std::map<std::string, PopType>& popTypes,
+	 const std::map<std::string, int>& subsistenceUnitEmployment,
+	 const std::shared_ptr<V3::SubState>& subState)
 {
-	jobCounts = jobsList;
-	population = std::accumulate(jobCounts.begin(), jobCounts.end(), 0, [](int sum, const auto& pair) {
-		return sum + static_cast<int>(pair.second);
-	});
+	amount = hireFromUnemployed(amount, subState);
+	return hireFromSubsistence(amount, subsistenceUnitEmployment, defaultRatio, womenJobRate, popTypes, subState);
 }
 
-double V3::MarketJobs::hireFromWorseJobs(double amount, const int peasantsPerLevel)
+double V3::MarketJobs::hireFromUnemployed(double amount, const std::shared_ptr<V3::SubState>& subState)
 {
-	amount = hireFromUnemployed(amount);
-	amount = hireFromPeasants(amount, peasantsPerLevel);
-	return amount;
-}
-
-double V3::MarketJobs::hireFromUnemployed(double amount)
-{
-	const double unemployed = jobCounts.at("unemployed");
+	const double unemployed = subState->getJob("unemployed");
 	if (unemployed > amount)
 	{
-		jobCounts["unemployed"] -= amount;
+		subState->addJob("unemployed", -amount);
 		return 0;
 	}
 	amount -= unemployed;
-	jobCounts["unemployed"] = 0;
+	subState->setJob("unemployed", 0);
 	return amount;
 }
 
-double V3::MarketJobs::hireFromPeasants(double amount, const int peasantsPerLevel)
+
+double V3::MarketJobs::hireFromSubsistence(const double amount,
+	 const std::map<std::string, int>& subsistenceUnitEmployment,
+	 const double defaultRatio,
+	 const double womenJobRate,
+	 const std::map<std::string, PopType>& popTypes,
+	 const std::shared_ptr<V3::SubState>& subState)
 {
-	// When peasants are removed, Manor Houses downsize
-	const double peasants = jobCounts.at("peasants");
-	if (peasants > amount)
+	// Use peasants as a proxy for subsistence worker presence.
+	if (subState->getJob("peasants") == 0)
 	{
-		jobCounts["peasants"] -= amount;
-		downsizeManorHouses(amount, peasantsPerLevel);
+		Log(LogLevel::Warning) << "No subsistence workers available.";
 		return 0;
 	}
-	amount -= peasants;
-	jobCounts["peasants"] = 0;
-	downsizeManorHouses(peasants, peasantsPerLevel);
-	return amount;
+
+	// Accounts for Homesteading, 2.5% of jobs are Farmers per subsistence level.
+	std::map<std::string, double> subsistenceCounts;
+	double unitSubsistencePop = 0; // Amount of workers + dependents in a subsistence level
+	for (const auto& [job, workers]: subsistenceUnitEmployment)
+	{
+		subsistenceCounts[job] = workers / (popTypes.at(job).getDependentRatio().value_or(defaultRatio) + womenJobRate);
+		unitSubsistencePop += subsistenceCounts[job];
+	}
+
+	if (!subsistenceCounts.contains("peasants") || subsistenceCounts.at("peasants") <= 0)
+	{
+		if (!peasantErrorFlag)
+		{
+			Log(LogLevel::Error) << "Supposed subsistence building contains no peasants in its production methods. Job predictions will be unreliable.";
+			peasantErrorFlag = true;
+		}
+		return 0;
+	}
+
+	const double lostSubsistenceLevels = std::min(amount / unitSubsistencePop, subState->getJob("peasants") / subsistenceCounts.at("peasants"));
+	for (const auto& [job, people]: subsistenceCounts)
+	{
+		subState->addJob(job, -people * lostSubsistenceLevels);
+	}
+	// When subsistence levels are removed, Manor Houses downsize
+	downsizeManorHouses(lostSubsistenceLevels, defaultRatio, womenJobRate, popTypes, subState);
+
+	if (const double remainder = amount - lostSubsistenceLevels * unitSubsistencePop; remainder > 0)
+	{
+		Log(LogLevel::Warning) << "Could not find available workers for " << remainder << " jobs."; // Should never happen.
+	}
+
+	return lostSubsistenceLevels;
 }
 
-void V3::MarketJobs::downsizeManorHouses(const double peasantAmount, const int peasantsPerLevel)
+void V3::MarketJobs::downsizeManorHouses(const double lostSubsistenceLevels,
+	 const double defaultRatio,
+	 const double womenJobRate,
+	 const std::map<std::string, V3::PopType>& popTypes,
+	 const std::shared_ptr<V3::SubState>& subState)
 {
 	for (const auto& [job, amount]: manorHouseRoster)
 	{
-		jobCounts[job] -= amount * peasantAmount / peasantsPerLevel;
+		subState->addJob(job, (-amount / (popTypes.at(job).getDependentRatio().value_or(defaultRatio) + womenJobRate)) * lostSubsistenceLevels);
 	}
-}
-
-double V3::MarketJobs::getLevels(std::map<std::string, int> unitEmployment, double arableLand, int subStatePop)
-{
-	double unitPop = std::accumulate(unitEmployment.begin(), unitEmployment.end(), 0.0, [](double sum, const auto& pair) {
-		return sum + pair.second;
-	});
-	return std::min(static_cast<double>(arableLand), subStatePop / unitPop);
 }
