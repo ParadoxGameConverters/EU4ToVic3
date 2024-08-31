@@ -233,7 +233,7 @@ TEST(V3World_MarketJobsTests, CreateJobsAddsAdditionalOwnershipJobs)
 			  testing::Pair("unemployed", testing::DoubleNear(1900, delta))));
 
 
-	std::map<std::string, int> rgoEmployment{{"laborers", 100}, {"clerks", 100}};
+	std::map<std::string, double> rgoEmployment{{"laborers", 100}, {"clerks", 100}};
 	std::map<std::string, double> estOwnerships{{"building_financial_district", 0.5}, {"building_manor_house", 0.25}};
 	std::map<std::string, int> capEmployment{{"capitalists", 10}};
 	std::map<std::string, int> ariEmployment{{"aristocrats", 10}, {"laborers", 90}};
@@ -295,3 +295,5 @@ TEST(V3World_MarketJobsTests, CreateJobsNoWorkers)
 
 	EXPECT_THAT(log.str(), testing::HasSubstr(R"([WARNING] No subsistence workers available.)"));
 }
+
+// Arable land can change as farms/plantations are built.

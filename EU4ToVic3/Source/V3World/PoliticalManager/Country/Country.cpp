@@ -1078,6 +1078,26 @@ std::map<std::string, double> V3::Country::getCultureBreakdown() const
 	return cultureData;
 }
 
+// Returns a map of each job as a percentage of all jobs in the market.
+std::map<std::string, double> V3::Country::getJobBreakdown() const
+{
+	std::map<std::string, double> jobBreakdown;
+
+	for (const auto& subState: subStates)
+	{
+		for (const auto& [job, amount]: subState->getEstimatedJobs())
+		{
+			jobBreakdown[job] += amount;
+		}
+	}
+	for (auto amount: jobBreakdown | std::views::values)
+	{
+		amount /= getPopCount();
+	}
+
+	return jobBreakdown;
+}
+
 int V3::Country::getVanillaPopCount() const
 {
 	return std::accumulate(subStates.begin(), subStates.end(), 0, [](int sum, const auto& substate) {

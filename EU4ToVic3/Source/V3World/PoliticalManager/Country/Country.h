@@ -180,6 +180,7 @@ class Country: commonItems::parser
 	[[nodiscard]] int getIncorporatedPopCount() const;
 	[[nodiscard]] static int getPopCount(const std::vector<std::shared_ptr<SubState>>& theSubStates);
 	[[nodiscard]] std::map<std::string, double> getCultureBreakdown() const;
+	[[nodiscard]] std::map<std::string, double> getJobBreakdown() const;
 
 	void determineWesternizationWealthAndLiteracy(double topTech,
 		 double topInstitutions,

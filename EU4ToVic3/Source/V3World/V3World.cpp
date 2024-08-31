@@ -214,7 +214,10 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "75 %";
 	economyManager.assignSubStateCPBudgets(configBlock.economy);
 	Log(LogLevel::Progress) << "76 %";
-	economyManager.buildBuildings(politicalManager.getLawsMap());
+	economyManager.buildBuildings(politicalManager.getLawsMap(),
+		 cultureMapper.getV3CultureDefinitions(),
+		 religionMapper.getV3ReligionDefinitions(),
+		 definesLoader);
 	economyManager.investCapital(politicalManager.getCountries());
 	economyManager.setPMs();
 

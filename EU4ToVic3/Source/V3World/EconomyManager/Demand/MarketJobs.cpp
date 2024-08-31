@@ -9,24 +9,9 @@
 V3::MarketJobs::MarketJobs(const std::vector<std::pair<std::string, int>>& manorHouseRoster): manorHouseRoster(manorHouseRoster)
 {
 }
-#pragma optimize("", off)
-//// Returns a map of each job as a percentage of all jobs in the market. TODO(Gawquon) Move to Country Class
-// std::map<std::string, double> V3::MarketJobs::getJobBreakdown() const
-//{
-//	std::map<std::string, double> jobBreakdown;
-//
-//	const auto thePop = population < 1 ? 1 : population;
-//	for (const auto& [job, amount]: jobCounts)
-//	{
-//		jobBreakdown[job] = amount / thePop;
-//	}
-//
-//	return jobBreakdown;
-// }
-
 
 // Returns levels of displaced subsistence building.
-double V3::MarketJobs::createJobs(const std::map<std::string, int>& rgoUnitEmployment,
+double V3::MarketJobs::createJobs(const std::map<std::string, double>& rgoUnitEmployment,
 	 const std::map<std::string, int>& subsistenceUnitEmployment,
 	 const int levels,
 	 const double defaultRatio,
@@ -36,11 +21,7 @@ double V3::MarketJobs::createJobs(const std::map<std::string, int>& rgoUnitEmplo
 	 const std::map<std::string, PopType>& popTypes,
 	 const std::shared_ptr<SubState>& subState)
 {
-	std::map<std::string, double> unitEmployment;
-	for (const auto& [job, amount]: rgoUnitEmployment) // int -> double
-	{
-		unitEmployment[job] += amount;
-	}
+	auto unitEmployment = rgoUnitEmployment;
 	for (const auto& [type, percent]: estimatedOwnerships)
 	{
 		for (const auto& [job, amount]: ownershipEmployments.at(type)) // Account for the owner of the buildings.

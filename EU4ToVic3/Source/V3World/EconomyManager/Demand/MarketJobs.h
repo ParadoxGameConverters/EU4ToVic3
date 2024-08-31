@@ -12,7 +12,7 @@ class MarketJobs
 	MarketJobs() = default;
 	explicit MarketJobs(const std::vector<std::pair<std::string, int>>& manorHouseRoster);
 
-	double createJobs(const std::map<std::string, int>& rgoUnitEmployment,
+	double createJobs(const std::map<std::string, double>& rgoUnitEmployment,
 		 const std::map<std::string, int>& subsistenceUnitEmployment,
 		 int levels,
 		 double defaultRatio,
@@ -46,7 +46,11 @@ class MarketJobs
 		 const std::map<std::string, PopType>& popTypes,
 		 const std::shared_ptr<V3::SubState>& subState);
 	// Removes employment from Manor Houses based on # of peasants who got real jobs.
-	void downsizeManorHouses(double lostSubsistenceLevels, double defaultRatio, double womenJobRate, const std::map<std::string, PopType>& popTypes, const std::shared_ptr<V3::SubState>& subState);
+	void downsizeManorHouses(double lostSubsistenceLevels,
+		 double defaultRatio,
+		 double womenJobRate,
+		 const std::map<std::string, PopType>& popTypes,
+		 const std::shared_ptr<V3::SubState>& subState);
 
 	std::vector<std::pair<std::string, int>> manorHouseRoster;
 
