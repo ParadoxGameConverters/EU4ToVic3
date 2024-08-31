@@ -86,7 +86,6 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 
 	BuildingResources buildingResources;
 	buildingResources.evaluateResources(building.getPMGroups(), estimatedPMs, PMs, PMGroups);
-
 	// Collect any/all building or inherited building_group throughput modifiers
 	double throughputMod = 1;
 	for (const auto& trait: subState->getHomeState()->getTraits())
@@ -127,6 +126,7 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 		}
 		market.sell(good, effectiveLevelsAdded * amount);
 	}
+
 	for (const auto& [good, amount]: buildingResources.getOutputs())
 	{
 		// Collect any/all good specific output modifiers
@@ -157,13 +157,27 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 		market.buyForBuilding(good, effectiveLevelsAdded * amount);
 	}
 
+	const auto& sub =
+		 getSubsistenceEmployment(subState->getHomeState()->getSubsistenceBuilding(), subState->getOwner()->getProcessedData().laws, PMGroups, PMs, buildings);
+
+	// ownership Frac filtering
+	std::map<std::string, double> estof;
+	if (estOwnershipFractions.contains(building.getName()))
+	{
+		estof = estOwnershipFractions.at(building.getName());
+	}
+
 	const double lostSubsistence = marketJobs.createJobs(buildingResources.getJobs(),
-		 getSubsistenceEmployment(subState->getHomeState()->getSubsistenceBuilding(), subState->getOwner()->getProcessedData().laws, PMGroups, PMs, buildings),
+		 sub,
 		 p,
 		 defaultRatio,
 		 Market::calcAddedWorkingPopPercent(subState->getOwner()->getProcessedData().laws, lawsMap),
-		 estOwnershipFractions.at(building.getName()),
-		 {},
+		 estof,
+		 {{
+				"building_financial_district",
+				{{"capitalists", 50}, {"shopkeepers", 100}, {"clerks", 100}},
+		  },
+			  {"building_manor_house", {{"aristocrats", 50}, {"laborers", 100}}}},
 		 popTypes,
 		 subState);
 
@@ -172,10 +186,10 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 
 void V3::MarketTracker::logDebugMarket(const Country& country) const
 {
-	Log(LogLevel::Debug) << country.getName("english") << "'s Market:\n"
-								<< market.marketAsTable().str() << "Jobs Estimate:\n"
-								<< breakdownAsTable(country.getJobBreakdown()).str() << "Culture Split:\n"
-								<< breakdownAsTable(marketCulture).str();
+	Log(LogLevel::Debug) << "\n"
+								<< country.getName("english") << "'s Market:\n"
+								<< market.marketAsTable().str() << "\nJobs Estimate:" << breakdownAsTable(country.getJobBreakdown()).str()
+								<< "\nCulture Split:" << breakdownAsTable(marketCulture).str();
 }
 
 std::stringstream V3::MarketTracker::breakdownAsTable(const std::map<std::string, double>& breakdown)
@@ -189,9 +203,8 @@ std::stringstream V3::MarketTracker::breakdownAsTable(const std::map<std::string
 		percentLength = std::max(percentLength, static_cast<int>(std::to_string(amt).length()));
 	}
 
-	out << std::setprecision(1);
+	// out << std::setprecision(3);
 	out << std::endl;
-	out << std::left << std::setw(nameLength + 2) << "Good" << std::setw(percentLength + 2) << "Price" << std::endl;
 	out << std::setfill('-') << std::setw(nameLength + 2) << "" << std::setw(percentLength + 2) << "" << std::endl;
 	out << std::setfill(' ');
 

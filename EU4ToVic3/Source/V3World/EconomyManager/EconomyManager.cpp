@@ -258,7 +258,10 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 			removeSubStateIfFinished(subStatesByBudget, subStatesByBudget.end() - 1, lawsMap);
 		}
 		// DEBUG
-		market.logDebugMarket(*country);
+		if (country->getTag() == "USA")
+		{
+			market.logDebugMarket(*country);
+		}
 	}
 	Log(LogLevel::Info) << "<> Built " << counter << " buildings world-wide.";
 }
