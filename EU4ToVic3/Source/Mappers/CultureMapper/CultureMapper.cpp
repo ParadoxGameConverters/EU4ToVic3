@@ -146,6 +146,7 @@ void mappers::CultureMapper::loadMappingRules(std::istream& theStream)
 	registerKeys();
 	parseStream(theStream);
 	clearRegisteredKeywords();
+	markNeoCultureOverrides();
 }
 
 void mappers::CultureMapper::loadMappingRules(const std::string& fileName)
@@ -154,6 +155,7 @@ void mappers::CultureMapper::loadMappingRules(const std::string& fileName)
 	registerKeys();
 	parseFile(fileName);
 	clearRegisteredKeywords();
+	markNeoCultureOverrides();
 	Log(LogLevel::Info) << "<> " << cultureMapRules.size() << " rules loaded.";
 }
 
@@ -198,7 +200,8 @@ void mappers::CultureMapper::registerKeys()
 		for (const auto& macro: rule.getRequestedMacros())
 			if (encounteredMacros.contains(macro))
 				rule.loadMappingRules(encounteredMacros.at(macro));
-		if ((!rule.getCultures().empty() || !rule.getCultureGroups().empty()) && !rule.getV3Culture().empty())
+		// We permit blank mapping rules with only one side for purposes of marking that culture/group with something.
+		if ((!rule.getCultures().empty() || !rule.getCultureGroups().empty()) || !rule.getV3Culture().empty())
 			cultureMapRules.emplace_back(rule);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
@@ -344,6 +347,24 @@ std::optional<std::string> mappers::CultureMapper::suspiciousCultureMatch(const 
 
 std::string mappers::CultureMapper::getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager)
 {
+	// Hold. Before we start processing, see if this culture is overridden. If it is, return as is.
+	if (!eu4CultureToGroup.contains(eu4culture))
+	{
+		Log(LogLevel::Error) << "Why does " << eu4culture << " not have a culture group?!";
+	}
+	else
+	{
+		auto eu4CultureGroup = eu4CultureToGroup.at(eu4culture);
+		if (isCultureNeoCulturallyOverridden(eu4culture) || isCultureNeoCulturallyOverridden(eu4CultureGroup))
+		{
+			// This means we marked this culture as overridden and won't be generating any names or similar.
+			unmappedCultures.emplace(eu4culture);
+			usedCultures.emplace(eu4culture);
+			recordCultureMapping(eu4culture, eu4culture);
+			return eu4culture;
+		}
+	}
+
 	if (v3state.empty()) // possibly pinging a general location.
 	{
 		unmappedCultures.emplace(eu4culture);
@@ -390,8 +411,11 @@ void mappers::CultureMapper::expandCulturalMappings(const V3::ClayManager& clayM
 
 	for (const auto& cultureGroup: cultureLoader.getCultureGroupsMap() | std::views::values)
 		for (const auto& cultureName: cultureGroup.getCultures() | std::views::keys)
+		{
 			if (!cultureMatch(clayManager, cultureLoader, religionLoader, cultureName, "", "", "", false, true))
 				unmappedCultures.emplace(cultureName);
+			eu4CultureToGroup.emplace(cultureName, cultureGroup.getName());
+		}
 
 	Log(LogLevel::Info) << "<> Additional " << unmappedCultures.size() << " cultures imported.";
 }
@@ -689,4 +713,31 @@ std::optional<bool> mappers::CultureMapper::doCulturesShareNonHeritageTrait(cons
 	}
 
 	return false;
+}
+
+bool mappers::CultureMapper::isCultureNeoCulturallyOverridden(const std::string& culture) const
+{
+	if (eu4OverriddenNeoCultures.contains(culture))
+		return true;
+	if (eu4OverriddenNeoCultureGroups.contains(culture))
+		return true;
+	return false;
+}
+
+void mappers::CultureMapper::markNeoCultureOverrides()
+{
+	for (const auto& rule: cultureMapRules)
+	{
+		if (rule.getNeoCultureOverride())
+		{
+			for (const auto& culture: rule.getCultures())
+			{
+				eu4OverriddenNeoCultures.emplace(culture);
+			}
+			for (const auto& cultureGroup: rule.getCultureGroups())
+			{
+				eu4OverriddenNeoCultureGroups.emplace(cultureGroup);
+			}
+		}
+	}
 }

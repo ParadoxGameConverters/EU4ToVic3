@@ -696,6 +696,11 @@ std::optional<std::string> V3::SubState::getPrimaryCulture() const
 			continue;
 		census[pop.getCulture()] += pop.getSize();
 	}
+	if (census.empty())
+	{
+		Log(LogLevel::Error) << "State " << getHomeStateName() << " contains substate with blank culture pops!";
+		return std::nullopt;
+	}
 	auto sorted = sortMap(census);
 	return *sorted.begin();
 }
