@@ -3,6 +3,7 @@
 #include "ClayManager/State/StateModifier.h"
 #include "EconomyManager/Building/Building.h"
 #include "EconomyManager/Building/BuildingGroups.h"
+#include "EconomyManager/Building/BuildingResources.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethod.h"
 #include "EconomyManager/Building/ProductionMethods/ProductionMethodGroup.h"
 #include "Market.h"
@@ -57,6 +58,14 @@ class MarketTracker
 
   private:
 	static std::stringstream breakdownAsTable(const std::map<std::string, double>& breakdown);
+	static double calcThroughputStateModifier(const std::vector<std::string>& traits,
+		 const Building& building,
+		 const BuildingGroups& buildingGroups,
+		 const std::map<std::string, StateModifier>& stateTraits);
+	static int calcEconomyOfScaleCap(const Country& country,
+		 const Building& building,
+		 const BuildingGroups& buildingGroups,
+		 const std::map<std::string, Tech>& techMap);
 
 	// Returns the index of the first valid PM according to laws.
 	int getPMAllowedByLaws(const std::string& PMGroup,
@@ -70,6 +79,14 @@ class MarketTracker
 		 const std::map<std::string, ProductionMethodGroup>& PMGroups,
 		 const std::map<std::string, ProductionMethod>& PMs,
 		 const std::map<std::string, Building>& buildings) const;
+	void updateMarketGoods(double level,
+		 int p,
+		 int eosCap,
+		 double throughputMod,
+		 const BuildingResources& buildingResources,
+		 const std::vector<std::string>& traits,
+		 const std::map<std::string, StateModifier>& stateTraits);
+
 
 
 	Market market;

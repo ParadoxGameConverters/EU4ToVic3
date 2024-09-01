@@ -1,5 +1,6 @@
 #ifndef PRODUCTION_METHOD_MAPPER_H
 #define PRODUCTION_METHOD_MAPPER_H
+#include "Loaders/LawLoader/Law.h"
 #include "Parser.h"
 #include "ProductionMethodMapping.h"
 
@@ -27,7 +28,8 @@ class ProductionMethodMapper: commonItems::parser
 	[[nodiscard]] std::map<std::string, std::tuple<int, double>> estimatePMs(const V3::Country& country,
 		 const std::map<std::string, V3::ProductionMethod>& PMs,
 		 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups,
-		 const std::map<std::string, V3::Building>& buildings) const;
+		 const std::map<std::string, V3::Building>& buildings,
+		 const std::map<std::string, V3::Law>& lawsMap) const;
 
   private:
 	void registerKeys();

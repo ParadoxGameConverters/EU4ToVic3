@@ -2,7 +2,6 @@
 #include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "EconomyManager/Building/BuildingGroup.h"
-#include "EconomyManager/Building/BuildingResources.h"
 
 #include <iomanip>
 
@@ -86,79 +85,23 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 
 	BuildingResources buildingResources;
 	buildingResources.evaluateResources(building.getPMGroups(), estimatedPMs, PMs, PMGroups);
+
 	// Collect any/all building or inherited building_group throughput modifiers
-	double throughputMod = 1;
-	for (const auto& trait: subState->getHomeState()->getTraits())
-	{
-		if (const auto& traitIter = stateTraits.find(trait); traitIter != stateTraits.end())
-		{
-			throughputMod += traitIter->second.calcBuildingModifiers(building, buildingGroups);
-			continue;
-		}
-		Log(LogLevel::Warning) << "Trait: " << trait << "has no definition.";
-	}
+	const double throughputMod = calcThroughputStateModifier(subState->getHomeState()->getTraits(), building, buildingGroups, stateTraits);
 
 	// Evaluate the economy of scale cap
 	// There is an economy of scale penalty for nationalized buildings. For now we're ignoring it.
 	// There are scenarios other than subsistence building that do not use economy of scale, but none that are currently relevant.
-	int eosCap = subState->getOwner()->getThroughputMax(techMap);
-	if (buildingGroups.getBuildingGroupMap().at(building.getBuildingGroup())->isSubsistence())
-	{
-		eosCap = 0;
-	}
+	const int eosCap = calcEconomyOfScaleCap(*subState->getOwner(), building, buildingGroups, techMap);
 
 	//// Update the market
-	const int level = building.getLevel();
-	for (const auto& [good, amount]: buildingResources.getInputs())
-	{
-		double effectiveLevelsAdded;
-		if (level <= eosCap)
-		{
-			effectiveLevelsAdded = p * ((2 * level - p) / 100.0 + 1 + throughputMod);
-		}
-		else if (level - p >= eosCap) // We're already past the economy of scale cap.
-		{
-			effectiveLevelsAdded = p * (eosCap / 100.0 + 1 + throughputMod);
-		}
-		else // The new level of buildings just jumped over the economy of scale cap.
-		{
-			effectiveLevelsAdded = p * (throughputMod + 1) + (eosCap * level + 2 * level * p - std::pow(level, 2) - std::pow(p, 2)) / 100.0;
-		}
-		market.sell(good, effectiveLevelsAdded * amount);
-	}
+	updateMarketGoods(building.getLevel(), p, eosCap, throughputMod, buildingResources, subState->getHomeState()->getTraits(), stateTraits);
 
-	for (const auto& [good, amount]: buildingResources.getOutputs())
-	{
-		// Collect any/all good specific output modifiers
-		double outputMod = 1;
-		for (const auto& trait: subState->getHomeState()->getTraits())
-		{
-			if (const auto& traitIter = stateTraits.find(trait); traitIter != stateTraits.end())
-			{
-				outputMod += traitIter->second.getGoodsModifier(good).value_or(0);
-				continue;
-			}
-			Log(LogLevel::Warning) << "Trait: " << trait << "has no definition.";
-		}
-
-		double effectiveLevelsAdded;
-		if (level <= eosCap)
-		{
-			effectiveLevelsAdded = p * ((2 * level - p) / 100.0 + 1 + throughputMod + outputMod);
-		}
-		else if (level - p >= eosCap) // We're already past the economy of scale cap.
-		{
-			effectiveLevelsAdded = p * (eosCap / 100.0 + 1 + throughputMod + outputMod);
-		}
-		else // The new level of buildings just jumped over the economy of scale cap.
-		{
-			effectiveLevelsAdded = p * (throughputMod + outputMod + 1) + (eosCap * level + 2 * level * p - std::pow(level, 2) - std::pow(p, 2)) / 100.0;
-		}
-		market.buyForBuilding(good, effectiveLevelsAdded * amount);
-	}
-
-	const auto& sub =
-		 getSubsistenceEmployment(subState->getHomeState()->getSubsistenceBuilding(), subState->getOwner()->getProcessedData().laws, PMGroups, PMs, buildings);
+	const auto& sub = getSubsistenceEmployment(subState->getHomeState()->getSubsistenceBuilding(),
+		 subState->getOwner()->getProcessedData().laws,
+		 PMGroups,
+		 PMs,
+		 buildings); // TODO Move this into BuildingResources as new function
 
 	// ownership Frac filtering
 	std::map<std::string, double> estof;
@@ -181,7 +124,12 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 		 popTypes,
 		 subState);
 
-	// TODO remove lost subsistence from market
+	BuildingResources subsistenceResources;
+	const Building& subsistenceBuilding = buildings.at(subState->getHomeState()->getSubsistenceBuilding());
+	subsistenceResources.evaluateResources(subsistenceBuilding.getPMGroups(), estimatedPMs, PMs, PMGroups);
+	const double subsistenceModifier = calcThroughputStateModifier(subState->getHomeState()->getTraits(), subsistenceBuilding, buildingGroups, stateTraits);
+
+	updateMarketGoods(lostSubsistence, lostSubsistence, 0, subsistenceModifier, subsistenceResources, subState->getHomeState()->getTraits(), stateTraits);
 }
 
 void V3::MarketTracker::logDebugMarket(const Country& country) const
@@ -294,4 +242,92 @@ std::map<std::string, int> V3::MarketTracker::getSubsistenceEmployment(const std
 	}
 
 	return subsistenceEmployment;
+}
+
+void V3::MarketTracker::updateMarketGoods(const double level,
+	 const int p,
+	 const int eosCap,
+	 const double throughputMod,
+	 const BuildingResources& buildingResources,
+	 const std::vector<std::string>& traits,
+	 const std::map<std::string, StateModifier>& stateTraits)
+{
+	for (const auto& [good, amount]: buildingResources.getInputs())
+	{
+		double effectiveLevelsAdded;
+		if (level <= eosCap)
+		{
+			effectiveLevelsAdded = p * ((2 * level - p) / 100.0 + 1 + throughputMod);
+		}
+		else if (level - p >= eosCap) // We're already past the economy of scale cap.
+		{
+			effectiveLevelsAdded = p * (eosCap / 100.0 + 1 + throughputMod);
+		}
+		else // The new level of buildings just jumped over the economy of scale cap.
+		{
+			effectiveLevelsAdded = p * (throughputMod + 1) + (eosCap * level + 2 * level * p - std::pow(level, 2) - std::pow(p, 2)) / 100.0;
+		}
+		market.sell(good, effectiveLevelsAdded * amount);
+	}
+
+	for (const auto& [good, amount]: buildingResources.getOutputs())
+	{
+		// Collect any/all good specific output modifiers
+		double outputMod = 1;
+		for (const auto& trait: traits)
+		{
+			if (const auto& traitIter = stateTraits.find(trait); traitIter != stateTraits.end())
+			{
+				outputMod += traitIter->second.getGoodsModifier(good).value_or(0);
+				continue;
+			}
+			Log(LogLevel::Warning) << "Trait: " << trait << "has no definition.";
+		}
+
+		double effectiveLevelsAdded;
+		if (level <= eosCap)
+		{
+			effectiveLevelsAdded = p * ((2 * level - p) / 100.0 + 1 + throughputMod + outputMod);
+		}
+		else if (level - p >= eosCap) // We're already past the economy of scale cap.
+		{
+			effectiveLevelsAdded = p * (eosCap / 100.0 + 1 + throughputMod + outputMod);
+		}
+		else // The new level of buildings just jumped over the economy of scale cap.
+		{
+			effectiveLevelsAdded = p * (throughputMod + outputMod + 1) + (eosCap * level + 2 * level * p - std::pow(level, 2) - std::pow(p, 2)) / 100.0;
+		}
+		market.buyForBuilding(good, effectiveLevelsAdded * amount);
+	}
+}
+
+double V3::MarketTracker::calcThroughputStateModifier(const std::vector<std::string>& traits,
+	 const Building& building,
+	 const BuildingGroups& buildingGroups,
+	 const std::map<std::string, StateModifier>& stateTraits)
+{
+	double throughputMod = 1;
+	for (const auto& trait: traits)
+	{
+		if (const auto& traitIter = stateTraits.find(trait); traitIter != stateTraits.end())
+		{
+			throughputMod += traitIter->second.calcBuildingModifiers(building, buildingGroups);
+			continue;
+		}
+		Log(LogLevel::Warning) << "Trait: " << trait << "has no definition.";
+	}
+
+	return throughputMod;
+}
+
+int V3::MarketTracker::calcEconomyOfScaleCap(const Country& country,
+	 const Building& building,
+	 const BuildingGroups& buildingGroups,
+	 const std::map<std::string, Tech>& techMap)
+{
+	if (buildingGroups.getBuildingGroupMap().at(building.getBuildingGroup())->isSubsistence())
+	{
+		return 0;
+	}
+	return country.getThroughputMax(techMap);
 }

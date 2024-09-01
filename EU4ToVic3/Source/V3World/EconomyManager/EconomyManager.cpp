@@ -235,7 +235,7 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 	{
 		const auto& sectors = country->getProcessedData().industrySectors;
 		auto subStatesByBudget = prepareSubStatesByBudget(country, lawsMap);
-		const auto& estimatedPMs = PMMapper.estimatePMs(*country, PMs, PMGroups, buildings);
+		const auto& estimatedPMs = PMMapper.estimatePMs(*country, PMs, PMGroups, buildings, lawsMap);
 		const auto& estimatedOwnershipFracs = estimateInvestorBuildings(*country);
 		market.resetMarket();
 		market.loadPeasants(*country, defines.getWorkingAdultRatioBase(), lawsMap, PMGroups, PMs, popTypeLoader.getPopTypes(), buildings);
