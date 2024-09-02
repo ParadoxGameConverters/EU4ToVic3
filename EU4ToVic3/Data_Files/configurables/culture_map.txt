@@ -218,10 +218,6 @@ link = { vic3 = brazilian eu4 = portugese region = region_brazil }
 link = { vic3 = brazilian eu4 = brazilian neoculture_override = yes }
 
 
-#Albanian - Albanian
-link = { vic3 = albanian eu4group = albanian_g }
-
-
 # West Slavic - Czech, Polish, Slovak and Sorb
 link = { vic3 = czech eu4 = czech eu4 = czech_new eu4 = moravian eu4 = silesian }
 link = { vic3 = polish eu4 = mazovian eu4 = venedian eu4 = polish eu4 = polish_new eu4 = schlesian eu4 = schlesian_new }
@@ -280,10 +276,12 @@ link = { eu4 = arkadian neoculture_override = yes }
 link = { eu4group = norse_g neoculture_override = yes }
 link = { eu4group = spartakian_group neoculture_override = yes }
 
+# Hellenic - Greek - Don't use byzantine group as it will override the TO mappings above. Goths and Griko are separate and dynamic.
+link = { vic3 = greek eu4 = greek eu4 = pontic_greek eu4 = cappadocian_greek  }
 
-# Hellenic - Greek
-link = { vic3 = greek eu4group = byzantine }
-
+#Albanian - Albanian
+link = { vic3 = albanian eu4 = albanian }
+link = { vic3 = albanian eu4group = albanian_g }
 
 # Arab-Speaking - Amazigh (Berber), Bedouin, Maghrebi, Mashriqi, Misir, Somali(x), Sudanese Arabs, and Yemenite
 link = { vic3 = mashriqi eu4 = bedouin_arabic region = STATE_TRANSJORDAN region = STATE_PALESTINE region = STATE_LEBANON region = STATE_SYRIA region = STATE_ALEPPO region = STATE_DEIR_EZ_ZOR region = STATE_BAGHDAD region = STATE_BASRA region = STATE_MOSUL region = STATE_HEDJAZ }

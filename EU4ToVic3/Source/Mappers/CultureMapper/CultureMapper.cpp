@@ -219,6 +219,10 @@ std::optional<std::string> mappers::CultureMapper::cultureMatch(const V3::ClayMa
 {
 	for (const auto& cultureMappingRule: cultureMapRules)
 	{
+		// For marking lines, bail immediately.
+		if (cultureMappingRule.getV3Culture().empty())
+			continue;
+
 		if (!neoCultureRequest)
 		{
 			if (const auto& possibleMatch =

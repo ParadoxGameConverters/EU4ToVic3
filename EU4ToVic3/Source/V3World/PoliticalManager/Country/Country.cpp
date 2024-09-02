@@ -464,7 +464,9 @@ void V3::Country::convertCulture(const ClayManager& clayManager,
 		 processedData.capitalStateName,
 		 tag);
 	if (cultureMatch)
+	{
 		processedData.cultures.emplace(*cultureMatch);
+	}
 
 	// if this fails... do nothing for now.
 	if (processedData.cultures.empty())

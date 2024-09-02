@@ -14,6 +14,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	const auto dwFS = commonItems::ModFilesystem(V3Path, overrideMods);
 	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output/"});
 	const auto allFS = commonItems::ModFilesystem(V3Path, overrideMods);
+	overrideMods.emplace_back(Mod{"TO", "configurables/third_odyssey/"});
+	const auto toFS = commonItems::ModFilesystem(V3Path, overrideMods);
 	overrideMods.clear();
 	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output/"});
 	const auto blankModFS = commonItems::ModFilesystem(V3Path, overrideMods);
@@ -21,7 +23,16 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "45 %";
 	Log(LogLevel::Info) << "* Soaking up the shine *";
 	clayManager.loadAdjacencies("configurables/province_adjacencies.txt");
-	clayManager.initializeVanillaStates(dwFS);
+	if (configBlock.thirdOdyssey)
+	{
+		// We alter vanilla states for TO.
+		clayManager.initializeVanillaStates(toFS);
+	}
+	else
+	{
+		clayManager.initializeVanillaStates(dwFS);
+	}
+
 	clayManager.loadTerrainsIntoProvinces(dwFS);
 	clayManager.initializeSuperRegions(dwFS);
 	clayManager.loadStatesIntoSuperRegions();
