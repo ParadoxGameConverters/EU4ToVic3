@@ -1,4 +1,4 @@
-#include "Loaders/PopLoader/PopTypeLoader.h";
+#include "Loaders/PopLoader/PopTypeLoader.h"
 #include "gtest/gtest.h"
 #include <gmock/gmock-matchers.h>
 
