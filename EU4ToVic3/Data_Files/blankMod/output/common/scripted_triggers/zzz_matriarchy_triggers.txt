@@ -1,0 +1,61 @@
+﻿# is_matriarchal_country
+# is_matriarchal_pop
+# is_feminist_country
+# is_feminist_pop
+# is_oppressed_gender
+# should_have_male_characters 
+# should_have_female_characters
+
+is_matriarchal_country = {
+	OR = {
+		any_primary_culture = { has_discrimination_trait = matriarchal }
+		religion = { has_discrimination_trait = matriarchal }
+	}
+}
+
+is_matriarchal_pop = {
+	OR = {
+		culture = { has_discrimination_trait = matriarchal }
+		religion = { has_discrimination_trait = matriarchal }
+	}
+}
+
+is_feminist_country = {
+	OR = {
+		any_primary_culture = { has_discrimination_trait = feminist }
+		religion = { has_discrimination_trait = feminist }
+	}
+}
+
+is_feminist_pop = {
+	OR = {
+		culture = { has_discrimination_trait = feminist }
+		religion = { has_discrimination_trait = feminist }
+	}
+}
+
+is_oppressed_gender = {
+	trigger_if = {
+		limit = {
+			owner = { is_matriarchal_country = yes }
+		}
+		is_female = no
+	}
+	trigger_else = { is_female = yes }
+}
+
+should_have_male_characters = {
+	trigger_if = {
+		limit = { is_matriarchal_country = yes }
+		is_feminist_country = yes
+	}
+	trigger_else = { is_matriarchal_country = no }
+}
+
+should_have_female_characters = {
+	trigger_if = {
+		limit = { is_matriarchal_country = no }
+		is_feminist_country = yes
+	}
+	trigger_else = { is_matriarchal_country = yes }
+}

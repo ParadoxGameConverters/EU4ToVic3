@@ -1,0 +1,557 @@
+﻿# ig_female_general_chance
+# ig_female_politician_chance_conversative
+# ig_female_politician_chance_moderate
+# ig_female_agitator_chance_conversative
+# ig_female_agitator_chance_moderate
+
+ig_female_general_chance = {
+	value = 0
+	if = {
+		limit = {
+			owner = {
+				is_matriarchal_country = yes
+				is_feminist_country = no
+			}
+
+		}
+		add = {
+			value = 1
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_no_womens_rights
+				is_matriarchal_country = no
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.05
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				NOR = {
+					has_law = law_type:law_no_womens_rights
+					has_law = law_type:law_womens_suffrage
+				}
+				is_matriarchal_country = no
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.12
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_womens_suffrage
+				is_matriarchal_country = no
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.20
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_no_womens_rights
+				is_matriarchal_country = yes
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.95
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				NOR = {
+					has_law = law_type:law_no_womens_rights
+					has_law = law_type:law_womens_suffrage
+				}
+				is_matriarchal_country = yes
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.88
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_womens_suffrage
+				is_matriarchal_country = yes
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.80
+		}
+	}
+}
+
+ig_female_politician_chance_conversative = {
+	value = 0.0
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_womens_suffrage
+				is_matriarchal_country = no
+				is_feminist_country = no
+			}
+
+		}
+		add = {
+			value = 0.01
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				NOT = { has_law = law_type:law_womens_suffrage }
+				is_matriarchal_country = yes
+				is_feminist_country = no
+			}
+
+		}
+		add = {
+			value = 1
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_womens_suffrage
+				is_matriarchal_country = yes
+				is_feminist_country = no
+			}
+
+		}
+		add = {
+			value = 0.99
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_no_womens_rights
+				is_matriarchal_country = no
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.2
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_no_womens_rights
+				is_matriarchal_country = yes
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.8
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				NOR = {
+					has_law = law_type:law_no_womens_rights
+					has_law = law_type:law_womens_suffrage
+				}
+				is_matriarchal_country = no
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.35
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				NOR = {
+					has_law = law_type:law_no_womens_rights
+					has_law = law_type:law_womens_suffrage
+				}
+				is_matriarchal_country = yes
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.65
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_womens_suffrage
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.5
+		}
+	}
+}
+
+ig_female_politician_chance_moderate = {
+	value = 0.0
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_womens_suffrage
+				is_matriarchal_country = no
+				is_feminist_country = no
+			}
+
+		}
+		add = {
+			value = 0.025
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				NOT = { has_law = law_type:law_womens_suffrage }
+				is_matriarchal_country = yes
+				is_feminist_country = no
+			}
+
+		}
+		add = {
+			value = 1
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_womens_suffrage
+				is_matriarchal_country = yes
+				is_feminist_country = no
+			}
+
+		}
+		add = {
+			value = 0.975
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_no_womens_rights
+				is_matriarchal_country = no
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.2
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_no_womens_rights
+				is_matriarchal_country = yes
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.8
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				NOR = {
+					has_law = law_type:law_no_womens_rights
+					has_law = law_type:law_womens_suffrage
+				}
+				is_matriarchal_country = no
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.35
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				NOR = {
+					has_law = law_type:law_no_womens_rights
+					has_law = law_type:law_womens_suffrage
+				}
+				is_matriarchal_country = yes
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.65
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_womens_suffrage
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.5
+		}
+	}
+}
+
+ig_female_agitator_chance_conversative = {
+	value = 0.01
+	if = {
+		limit = {
+			owner = {
+				NOT = { has_law = law_type:law_no_womens_rights }
+				is_matriarchal_country = no
+				is_feminist_country = no
+			}
+
+		}
+		add = {
+			value = 0.01
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_no_womens_rights
+				is_matriarchal_country = yes
+				is_feminist_country = no
+			}
+
+		}
+		add = {
+			value = 0.98
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				NOT = { has_law = law_type:law_no_womens_rights }
+				is_matriarchal_country = yes
+				is_feminist_country = no
+			}
+
+		}
+		add = {
+			value = 0.97
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_no_womens_rights
+				is_matriarchal_country = no
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.19
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_no_womens_rights
+				is_matriarchal_country = yes
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.79
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				NOR = {
+					has_law = law_type:law_no_womens_rights
+					has_law = law_type:law_womens_suffrage
+				}
+				is_matriarchal_country = no
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.34
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				NOR = {
+					has_law = law_type:law_no_womens_rights
+					has_law = law_type:law_womens_suffrage
+				}
+				is_matriarchal_country = yes
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.64
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_womens_suffrage
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.49
+		}
+	}
+}
+
+ig_female_agitator_chance_moderate = {
+	value = 0.025
+	if = {
+		limit = {
+			owner = {
+				NOT = { has_law = law_type:law_no_womens_rights }
+				is_matriarchal_country = no
+				is_feminist_country = no
+			}
+
+		}
+		add = {
+			value = 0.025
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_no_womens_rights
+				is_matriarchal_country = yes
+				is_feminist_country = no
+			}
+
+		}
+		add = {
+			value = 0.95
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				NOT = { has_law = law_type:law_no_womens_rights }
+				is_matriarchal_country = yes
+				is_feminist_country = no
+			}
+
+		}
+		add = {
+			value = 0.925
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_no_womens_rights
+				is_matriarchal_country = no
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.175
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_no_womens_rights
+				is_matriarchal_country = yes
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.775
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				NOR = {
+					has_law = law_type:law_no_womens_rights
+					has_law = law_type:law_womens_suffrage
+				}
+				is_matriarchal_country = no
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.325
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				NOR = {
+					has_law = law_type:law_no_womens_rights
+					has_law = law_type:law_womens_suffrage
+				}
+				is_matriarchal_country = yes
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.625
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = law_type:law_womens_suffrage
+				is_feminist_country = yes
+			}
+
+		}
+		add = {
+			value = 0.475
+		}
+	}
+}

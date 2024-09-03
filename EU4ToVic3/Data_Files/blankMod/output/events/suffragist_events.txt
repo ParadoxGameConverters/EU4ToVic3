@@ -1,0 +1,1349 @@
+﻿namespace = suffragist_events
+
+# Suffragist Protest
+suffragist_events.1 = {
+	type = country_event
+	placement = root
+
+	title = suffragist_events.1.t
+	desc = suffragist_events.1.d
+	flavor = suffragist_events.1.f
+
+	event_image = {
+		video = "europenorthamerica_sufferage"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_variable = suffrage_cooldown }
+		any_scope_character = {
+			OR = {
+				has_role = politician
+				has_role = agitator
+			}
+			has_ideology = ideology:ideology_feminist
+		}
+		NOT = { has_law = law_type:law_womens_suffrage }
+		OR = {
+			has_law = law_type:law_landed_voting
+			has_law = law_type:law_wealth_voting
+			has_law = law_type:law_census_voting
+			has_law = law_type:law_universal_suffrage
+		}
+		NOT = {
+			any_interest_group = {
+				OR = {
+					has_modifier = successful_protest
+					has_modifier = arrested_protesters
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = suffrage_cooldown
+			months = short_modifier_time
+		}
+		random_scope_character = {
+			limit = {
+				OR = {
+					has_role = politician
+					has_role = agitator
+				}
+				has_ideology = ideology:ideology_feminist
+			}
+			save_scope_as = suffragist_leader
+		}
+	}
+
+	option = {
+		name = suffragist_events.1.a
+
+		every_interest_group = {
+			limit = {
+				any_scope_character = { has_ideology = ideology:ideology_feminist }
+			}
+			add_modifier = {
+				name = successful_protest
+				months = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = suffragist_events.1.b
+		default_option = yes
+
+		every_interest_group = {
+			limit = {
+				any_scope_character = { has_ideology = ideology:ideology_feminist }
+			}
+			add_modifier = {
+				name = arrested_protesters
+				months = normal_modifier_time
+			}
+		}
+	}
+}
+
+# Suffragists speak in parliament
+suffragist_events.2 = {
+	type = country_event
+	event_image = {
+		video = "europenorthamerica_sufferage"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	placement = root
+
+	title = suffragist_events.2.t
+	desc = suffragist_events.2.d
+	flavor = suffragist_events.2.f
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_variable = suffrage_cooldown }
+		any_scope_character = {
+			OR = {
+				has_role = politician
+				has_role = agitator
+			}
+			is_oppressed_gender = yes			### Converter
+			has_ideology = ideology:ideology_feminist
+		}
+		any_interest_group = {
+			is_in_government = yes
+			law_stance = {
+				law = law_type:law_womens_suffrage
+				value < neutral
+			}
+		}
+		NOT = { has_law = law_type:law_womens_suffrage }
+		OR = {
+			has_law = law_type:law_landed_voting
+			has_law = law_type:law_wealth_voting
+			has_law = law_type:law_census_voting
+			has_law = law_type:law_universal_suffrage
+		}
+		NOT = {
+			any_interest_group = {
+				OR = {
+					has_modifier = parliament_speech
+					has_modifier = dismissed_suffragists
+				}
+			}
+		}
+	}
+
+	#weight_multiplier = {
+	#	base = 1
+	#	if = {
+	#		limit = {
+	#			any_interest_group = {
+	#				has_modifier = successful_protest
+	#			}
+	#		}
+	#		multiply = 2
+	#	}
+	#}
+
+	immediate = {
+		set_variable = {
+			name = suffrage_cooldown
+			months = short_modifier_time
+		}
+		random_scope_character = {
+			limit = {
+				OR = {
+					has_role = politician
+					has_role = agitator
+				}
+				has_ideology = ideology:ideology_feminist
+				is_oppressed_gender = yes			### Converter
+			}
+			save_scope_as = suffragist_leader
+		}
+
+		random_interest_group = {
+			limit = {
+				is_in_government = yes
+				law_stance = {
+					law = law_type:law_womens_suffrage
+					value < neutral
+				}
+			}
+			leader = {
+				save_scope_as = anti_feminist_leader
+			}
+		}
+	}
+
+	option = {
+		name = suffragist_events.2.a
+		scope:suffragist_leader.interest_group = {
+			add_modifier = {
+				name = parliament_speech
+				months = normal_modifier_time
+			}
+		}
+		scope:anti_feminist_leader.interest_group = {
+			add_modifier = {
+				name = suffragist_speech
+				months = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = suffragist_events.2.b
+		default_option = yes
+
+		scope:suffragist_leader.interest_group = {
+			add_modifier = {
+				name = dismissed_suffragists
+				months = normal_modifier_time
+			}
+		}
+		scope:anti_feminist_leader.interest_group = {
+			add_modifier = {
+				name = dismissed_suffragists
+				multiplier = -1
+				months = normal_modifier_time
+			}
+		}
+	}
+}
+
+# Arson Attack
+suffragist_events.3 = {
+	type = country_event
+	event_image = {
+		video = "unspecific_fire"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	placement = root
+
+	title = suffragist_events.3.t
+	desc = suffragist_events.3.d
+	flavor = suffragist_events.3.f
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_variable = suffrage_cooldown }
+		any_interest_group = {
+			any_scope_character = {
+				OR = {
+					has_role = politician
+					has_role = agitator
+				}
+				has_ideology = ideology:ideology_feminist
+			}
+			ig_approval <= unhappy
+			NOT = { has_modifier = leader_imprisoned }
+		}
+		any_interest_group = {
+			is_in_government = yes
+			law_stance = {
+				law = law_type:law_womens_suffrage
+				value < neutral
+			}
+		}
+		NOT = { has_law = law_type:law_womens_suffrage }
+		OR = {
+			has_law = law_type:law_landed_voting
+			has_law = law_type:law_wealth_voting
+			has_law = law_type:law_census_voting
+			has_law = law_type:law_universal_suffrage
+		}
+		NOT = {
+			any_interest_group = {
+				OR = {
+					has_modifier = leader_imprisoned
+					has_modifier = suffragist_leader_not_arrested
+				}
+			}
+		}
+	}
+
+	#weight_multiplier = {
+	#	base = 1
+	#	if = {
+	#		limit = {
+	#			any_interest_group = {
+	#				has_modifier = arrested_protesters
+	#			}
+	#		}
+	#		multiply = 2
+	#	}
+	#}
+
+	immediate = {
+		set_variable = {
+			name = suffrage_cooldown
+			months = short_modifier_time
+		}
+		random_scope_character = {
+			limit = {
+				OR = {
+					has_role = politician
+					has_role = agitator
+				}
+				has_ideology = ideology:ideology_feminist
+				interest_group = {
+					ig_approval <= unhappy
+				}
+			}
+			save_scope_as = militant_suffragist_leader
+		}
+
+		random_interest_group = {
+			limit = {
+				is_in_government = yes
+				law_stance = {
+					law = law_type:law_womens_suffrage
+					value < neutral
+				}
+			}
+			leader = {
+				save_scope_as = anti_feminist_leader
+			}
+		}
+	}
+
+	option = {
+		name = suffragist_events.3.a
+		custom_tooltip = suffragist_events.3.a.tt
+		scope:militant_suffragist_leader.interest_group = {
+			add_modifier = {
+				name = leader_imprisoned
+				years = 3
+			}
+		}
+	}
+
+	option = {
+		name = suffragist_events.3.b
+		default_option = yes
+		scope:anti_feminist_leader.interest_group = {
+			add_modifier = {
+				name = suffragist_leader_not_arrested
+				months = normal_modifier_time
+			}
+		}
+	}
+}
+
+# Protester Killed
+suffragist_events.4 = {
+	type = country_event
+	event_image = {
+		video = "europenorthamerica_sufferage"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	placement = root
+
+	title = suffragist_events.4.t
+	desc = suffragist_events.4.d
+	flavor = suffragist_events.4.f
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_variable = suffrage_cooldown }
+		any_interest_group = {
+			any_scope_character = {
+				OR = {
+					has_role = politician
+					has_role = agitator
+				}
+				has_ideology = ideology:ideology_feminist
+			}
+			NOT = { root.ruler.interest_group = this }
+			is_in_government = no
+		}
+		NOT = { has_law = law_type:law_womens_suffrage }
+		OR = {
+			has_law = law_type:law_landed_voting
+			has_law = law_type:law_wealth_voting
+			has_law = law_type:law_census_voting
+			has_law = law_type:law_universal_suffrage
+		}
+		NOT = {
+			any_interest_group = {
+				OR = {
+					has_modifier = martyr_for_the_cause
+					has_modifier = protester_death_disregarded
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = suffrage_cooldown
+			months = short_modifier_time
+		}
+		random_interest_group = {
+			limit = {
+				any_scope_character = {
+					OR = {
+						has_role = politician
+						has_role = agitator
+					}
+					has_ideology = ideology:ideology_feminist
+				}
+				NOT = { root.ruler.interest_group = this }
+				is_in_government = no
+			}
+			save_scope_as = suffragist_ig
+		}
+	}
+
+	option = {
+		name = suffragist_events.4.a
+		scope:suffragist_ig = {
+			add_modifier = {
+				name = martyr_for_the_cause
+				months = normal_modifier_time
+			}
+		}
+		ruler.interest_group = {
+			add_modifier = {
+				name = blamed_for_protester_death
+				months = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = suffragist_events.4.b
+		default_option = yes
+		scope:suffragist_ig = {
+			add_modifier = {
+				name = protester_death_disregarded
+				months = normal_modifier_time
+			}
+		}
+		ruler.interest_group = {
+			add_modifier = {
+				name = absolved_of_responsibility
+				months = normal_modifier_time
+			}
+		}
+	}
+}
+
+# Hunger Strikes
+suffragist_events.5 = {
+	type = country_event
+	event_image = {
+		video = "europenorthamerica_sufferage"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	placement = root
+
+	title = suffragist_events.5.t
+	desc = suffragist_events.5.d
+	flavor = suffragist_events.5.f
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_variable = suffrage_cooldown }
+		any_interest_group = {
+			any_scope_character = {
+				OR = {
+					has_role = politician
+					has_role = agitator
+				}
+				has_ideology = ideology:ideology_feminist
+			}
+			OR = {
+				has_modifier = arrested_protesters
+				has_modifier = leader_imprisoned
+			}
+		}
+		NOT = { has_law = law_type:law_womens_suffrage }
+		OR = {
+			has_law = law_type:law_landed_voting
+			has_law = law_type:law_wealth_voting
+			has_law = law_type:law_census_voting
+			has_law = law_type:law_universal_suffrage
+		}
+		NOT = {
+			any_interest_group = {
+				OR = {
+					has_modifier = force_feeding_hunger_strikers
+					has_modifier = released_suffragist_prisoners
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = suffrage_cooldown
+			months = short_modifier_time
+		}
+	}
+
+	option = {
+		name = suffragist_events.5.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				trigger = {
+					any_interest_group = {
+						any_scope_character = {
+							OR = {
+								has_role = politician
+								has_role = agitator
+							}
+							has_ideology = ideology:ideology_feminist
+						}
+						ig_approval < -5
+					}
+				}
+				add = -25
+			}
+		}
+		every_interest_group = {
+			limit = {
+				any_scope_character = {
+					OR = {
+						has_role = politician
+						has_role = agitator
+					}
+					has_ideology = ideology:ideology_feminist
+				}
+			}
+			add_modifier = {
+				name = force_feeding_hunger_strikers
+				months = normal_modifier_time
+			}
+		}
+		add_radicals = {
+			strata = middle
+			value = medium_radicals
+		}
+	}
+
+	option = {
+		name = suffragist_events.5.b
+		default_option = yes
+		ai_chance = {
+			base = 50
+		}
+		every_interest_group = {
+			limit = {
+				law_stance = {
+					law = law_type:law_womens_suffrage
+					value < neutral
+				}
+			}
+			add_modifier = {
+				name = released_suffragist_prisoners
+				months = normal_modifier_time
+			}
+		}
+		every_interest_group = {
+			limit = {
+				has_modifier = leader_imprisoned
+			}
+			remove_modifier = leader_imprisoned
+			custom_tooltip = suffragist_events.5.b.tt
+		}
+		trigger_event = {
+			id = suffragist_events.6
+			days = 90
+		}
+	}
+}
+
+# Cat and Mouse Act
+suffragist_events.6 = {
+	type = country_event
+	event_image = {
+		video = "europenorthamerica_sufferage"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	placement = root
+
+	title = suffragist_events.6.t
+	desc = suffragist_events.6.d
+	flavor = suffragist_events.6.f
+
+	duration = 3
+
+	option = {
+		name = suffragist_events.6.a
+		every_interest_group = {
+			limit = {
+				any_scope_character = {
+					OR = {
+						has_role = politician
+						has_role = agitator
+					}
+					has_ideology = ideology:ideology_feminist
+				}
+			}
+			add_modifier = {
+				name = cat_and_mouse_act
+				years = 3
+			}
+		}
+		every_interest_group = {
+			limit = {
+				is_in_government = yes
+			}
+			add_modifier = {
+				name = upheld_cat_and_mouse_act
+				months = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = suffragist_events.6.b
+		default_option = yes
+		add_modifier = {
+			name = backtracked_on_law
+			years = 3
+		}
+	}
+}
+
+# Treatise on the Rights of Woman
+suffragist_events.7 = {
+	type = country_event
+
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:suffragist_philosopher
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	placement = root
+
+	title = suffragist_events.7.t
+	desc = suffragist_events.7.d
+	flavor = suffragist_events.7.f
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_variable = suffrage_cooldown }
+		ig:ig_intelligentsia = {
+			any_scope_character = {
+				OR = {
+					has_role = politician
+					has_role = agitator
+				}
+				has_ideology = ideology:ideology_feminist
+			}
+		}
+		NOT = { has_law = law_type:law_womens_suffrage }
+		OR = {
+			has_law = law_type:law_landed_voting
+			has_law = law_type:law_wealth_voting
+			has_law = law_type:law_census_voting
+			has_law = law_type:law_universal_suffrage
+		}
+		NOT = {
+			any_interest_group = {
+				OR = {
+					leader = {
+						has_modifier = treatise_on_the_rights_of_women
+					}
+					has_modifier = treatise_banned
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = suffrage_cooldown
+			months = short_modifier_time
+		}
+		ig:ig_intelligentsia = {
+			random_scope_character = {
+				limit = {
+					OR = {
+						has_role = politician
+						has_role = agitator
+					}
+					has_ideology = ideology:ideology_feminist
+				}
+				save_scope_as = suffragist_philosopher
+			}
+		}
+	}
+
+	option = {
+		name = suffragist_events.7.a
+		default_option = yes
+
+		scope:suffragist_philosopher = {
+			add_modifier = {
+				name = treatise_on_the_rights_of_women
+				months = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = suffragist_events.7.b
+
+		trigger = {
+			OR = {
+				has_law = law_type:law_outlawed_dissent
+				has_law = law_type:law_censorship
+			}
+		}
+
+		ig:ig_intelligentsia = {
+			add_modifier = {
+				name = treatise_banned
+				months = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = suffragist_events.7.c
+
+		trigger = {
+			NAND = {
+				ig:ig_rural_folk = {
+					leader = { has_ideology = ideology:ideology_feminist }
+				}
+				ig:ig_trade_unions = {
+					leader = { has_ideology = ideology:ideology_feminist }
+				}
+				ig:ig_petty_bourgeoisie = {
+					leader = { has_ideology = ideology:ideology_feminist }
+				}
+				ig:ig_industrialists = {
+					leader = { has_ideology = ideology:ideology_feminist }
+				}
+			}
+		}
+
+		random_list = {
+			1 = {
+				modifier = {
+					if = {
+						limit = {
+							ig:ig_rural_folk = {
+								leader = { has_ideology = ideology:ideology_feminist }
+							}
+						}
+						add = -1
+					}
+				}
+				ig:ig_rural_folk = { leader = { set_ideology = ideology:ideology_feminist } }
+			}
+			1 = {
+				modifier = {
+					if = {
+						limit = {
+							ig:ig_trade_unions = {
+								leader = { has_ideology = ideology:ideology_feminist }
+							}
+						}
+						add = -1
+					}
+				}
+				ig:ig_trade_unions = { leader = { set_ideology = ideology:ideology_feminist } }
+			}
+			1 = {
+				modifier = {
+					if = {
+						limit = {
+							ig:ig_petty_bourgeoisie = {
+								leader = { has_ideology = ideology:ideology_feminist }
+							}
+						}
+						add = -1
+					}
+				}
+				ig:ig_petty_bourgeoisie = { leader = { set_ideology = ideology:ideology_feminist } }
+			}
+			1 = {
+				modifier = {
+					if = {
+						limit = {
+							ig:ig_industrialists = {
+								leader = { has_ideology = ideology:ideology_feminist }
+							}
+						}
+						add = -1
+					}
+				}
+				ig:ig_industrialists = { leader = { set_ideology = ideology:ideology_feminist } }
+			}
+		}
+	}
+}
+
+# Feminist Convention
+suffragist_events.8 = {
+	type = country_event
+	event_image = {
+		video = "europenorthamerica_sufferage"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	placement = root
+
+	title = suffragist_events.8.t
+	desc = suffragist_events.8.d
+	flavor = suffragist_events.8.f
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_variable = suffrage_cooldown }
+		has_law = law_type:law_no_womens_rights
+		OR = {
+			has_law = law_type:law_census_voting
+			has_law = law_type:law_universal_suffrage
+		}
+		any_interest_group = {
+			leader = { has_ideology = ideology:ideology_reformer }
+		}
+		any_interest_group = {
+			OR = {
+				is_interest_group_type = ig_rural_folk
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_trade_unions
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_industrialists
+			}
+			NOR = {
+				leader = { has_ideology = ideology:ideology_reformer }
+				any_scope_character = { has_ideology = ideology:ideology_feminist }
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = suffrage_cooldown
+			months = short_modifier_time
+		}
+	}
+
+	option = {
+		name = suffragist_events.8.a
+		random_list = {
+			1 = {
+				modifier = {
+					if = {
+						limit = {
+							ig:ig_rural_folk = {
+								leader = { has_ideology = ideology:ideology_feminist }
+							}
+						}
+						add = -1
+					}
+				}
+				ig:ig_rural_folk = { leader = { set_ideology = ideology:ideology_feminist } }
+			}
+			1 = {
+				modifier = {
+					if = {
+						limit = {
+							ig:ig_trade_unions = {
+								leader = { has_ideology = ideology:ideology_feminist }
+							}
+						}
+						add = -1
+					}
+				}
+				ig:ig_trade_unions = { leader = { set_ideology = ideology:ideology_feminist } }
+			}
+			1 = {
+				modifier = {
+					if = {
+						limit = {
+							ig:ig_petty_bourgeoisie = {
+								leader = { has_ideology = ideology:ideology_feminist }
+							}
+						}
+						add = -1
+					}
+				}
+				ig:ig_petty_bourgeoisie = { leader = { set_ideology = ideology:ideology_feminist } }
+			}
+			1 = {
+				modifier = {
+					if = {
+						limit = {
+							ig:ig_industrialists = {
+								leader = { has_ideology = ideology:ideology_feminist }
+							}
+						}
+						add = -1
+					}
+				}
+				ig:ig_industrialists = { leader = { set_ideology = ideology:ideology_feminist } }
+			}
+			1 = {
+				modifier = {
+					if = {
+						limit = {
+							ig:ig_intelligentsia = {
+								leader = { has_ideology = ideology:ideology_feminist }
+							}
+						}
+						add = -1
+					}
+				}
+				ig:ig_intelligentsia = { leader = { set_ideology = ideology:ideology_feminist } }
+			}
+		}
+	}
+
+	option = {
+		name = suffragist_events.8.b
+		default_option = yes
+
+		random_list = {
+			1 = {
+				modifier = {
+					if = {
+						limit = {
+							ig:ig_rural_folk = {
+								leader = { has_ideology = ideology:ideology_reformer }
+							}
+						}
+						add = -1
+					}
+				}
+				ig:ig_rural_folk = { leader = { set_ideology = ideology:ideology_reformer } }
+			}
+			1 = {
+				modifier = {
+					if = {
+						limit = {
+							ig:ig_trade_unions = {
+								leader = { has_ideology = ideology:ideology_reformer }
+							}
+						}
+						add = -1
+					}
+				}
+				ig:ig_trade_unions = { leader = { set_ideology = ideology:ideology_reformer } }
+			}
+			1 = {
+				modifier = {
+					if = {
+						limit = {
+							ig:ig_petty_bourgeoisie = {
+								leader = { has_ideology = ideology:ideology_reformer }
+							}
+						}
+						add = -1
+					}
+				}
+				ig:ig_petty_bourgeoisie = { leader = { set_ideology = ideology:ideology_reformer } }
+			}
+			1 = {
+				modifier = {
+					if = {
+						limit = {
+							ig:ig_industrialists = {
+								leader = { has_ideology = ideology:ideology_reformer }
+							}
+						}
+						add = -1
+					}
+				}
+				ig:ig_industrialists = { leader = { set_ideology = ideology:ideology_reformer } }
+			}
+			1 = {
+				modifier = {
+					if = {
+						limit = {
+							ig:ig_intelligentsia = {
+								leader = { has_ideology = ideology:ideology_reformer }
+							}
+						}
+						add = -1
+					}
+				}
+				ig:ig_intelligentsia = { leader = { set_ideology = ideology:ideology_reformer } }
+			}
+		}
+	}
+}
+
+# Votes for Women
+suffragist_events.9 = {
+	type = country_event
+	event_image = {
+		video = "europenorthamerica_sufferage"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	placement = root
+
+	title = suffragist_events.9.t
+	desc = suffragist_events.9.d
+	flavor = suffragist_events.9.f
+
+	duration = 3
+
+	immediate = {
+		if = {
+			limit = {
+				any_interest_group = {
+					OR = {
+						is_interest_group_type = ig_rural_folk
+						is_interest_group_type = ig_intelligentsia
+						is_interest_group_type = ig_trade_unions
+						is_interest_group_type = ig_petty_bourgeoisie
+						is_interest_group_type = ig_industrialists
+					}
+					is_marginal = no
+					NOT = {
+						leader = { has_ideology = ideology:ideology_feminist }
+					}
+				}
+			}
+			random_interest_group = {
+				limit = {
+					OR = {
+						is_interest_group_type = ig_rural_folk
+						is_interest_group_type = ig_intelligentsia
+						is_interest_group_type = ig_trade_unions
+						is_interest_group_type = ig_petty_bourgeoisie
+						is_interest_group_type = ig_industrialists
+					}
+					OR = {
+						is_marginal = no
+						is_in_government = yes
+					}
+					NOT = {
+						leader = { has_ideology = ideology:ideology_feminist }
+					}
+				}
+				save_scope_as = suffragist_ig
+			}
+			if = {			### Converter
+				limit = { is_matriarchal_country = yes }
+				create_character = {
+					is_agitator = yes
+					interest_group = scope:suffragist_ig
+					female = no
+					ideology = ideology_feminist
+					on_created = {
+						set_variable = suffragette_agitator
+					}
+				}
+			}
+			else = {
+				create_character = {
+					is_agitator = yes
+					interest_group = scope:suffragist_ig
+					female = yes
+					ideology = ideology_feminist
+					on_created = {
+						set_variable = suffragette_agitator
+					}
+				}
+			}
+		}
+		else = {
+			random_interest_group = {
+				limit = {
+					leader = { has_ideology = ideology:ideology_feminist }
+				}
+				save_scope_as = suffragist_ig
+			}
+		}
+		random_scope_character = {
+			limit = {
+				has_variable = suffragette_agitator
+			}
+			save_scope_as = suffragette_agitator_scope
+		}
+	}
+
+	option = {
+		name = suffragist_events.9.a
+		show_as_tooltip = {
+			if = {
+				limit = {
+					any_interest_group = {
+						OR = {
+							is_interest_group_type = ig_rural_folk
+							is_interest_group_type = ig_intelligentsia
+							is_interest_group_type = ig_trade_unions
+							is_interest_group_type = ig_petty_bourgeoisie
+							is_interest_group_type = ig_industrialists
+						}
+						is_marginal = no
+						NOT = {
+							leader = { has_ideology = ideology:ideology_feminist }
+						}
+					}
+				}
+				if = {			### Converter
+					limit = { is_matriarchal_country = yes }
+					create_character = {
+						is_agitator = yes
+						interest_group = scope:suffragist_ig
+						female = no
+						ideology = ideology_feminist
+						on_created = {
+							set_variable = suffragette_agitator
+						}
+					}
+				}
+				else = {
+					create_character = {
+						is_agitator = yes
+						interest_group = scope:suffragist_ig
+						female = yes
+						ideology = ideology_feminist
+						on_created = {
+							set_variable = suffragette_agitator
+						}
+					}
+				}
+			}
+		}
+		scope:suffragette_agitator_scope = {
+			add_modifier = {
+				name = suffragist_trailblazer
+				months = normal_modifier_time
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					is_in_government = yes
+					OR = {
+						is_interest_group_type = ig_rural_folk
+						is_interest_group_type = ig_intelligentsia
+						is_interest_group_type = ig_trade_unions
+						is_interest_group_type = ig_petty_bourgeoisie
+						is_interest_group_type = ig_industrialists
+					}
+					NOT = {
+						leader = { has_ideology = ideology:ideology_feminist }
+					}
+				}
+			}
+			random_interest_group = {
+				limit = {
+					is_in_government = yes
+					OR = {
+						is_interest_group_type = ig_rural_folk
+						is_interest_group_type = ig_intelligentsia
+						is_interest_group_type = ig_trade_unions
+						is_interest_group_type = ig_petty_bourgeoisie
+						is_interest_group_type = ig_industrialists
+					}
+					NOT = {
+						leader = { has_ideology = ideology:ideology_feminist }
+					}
+				}
+				leader = { set_ideology = ideology:ideology_feminist }
+			}
+		}
+	}
+
+	option = {
+		name = suffragist_events.9.b
+		default_option = yes
+		show_as_tooltip = {
+			if = {
+				limit = {
+					any_interest_group = {
+						OR = {
+							is_interest_group_type = ig_rural_folk
+							is_interest_group_type = ig_intelligentsia
+							is_interest_group_type = ig_trade_unions
+							is_interest_group_type = ig_petty_bourgeoisie
+							is_interest_group_type = ig_industrialists
+						}
+						is_marginal = no
+						NOT = {
+							leader = { has_ideology = ideology:ideology_feminist }
+						}
+					}
+				}
+				if = {			### Converter
+					limit = { is_matriarchal_country = yes }
+					create_character = {
+						is_agitator = yes
+						interest_group = scope:suffragist_ig
+						female = no
+						ideology = ideology_feminist
+						on_created = {
+							set_variable = suffragette_agitator
+						}
+					}
+				}
+				else = {
+					create_character = {
+						is_agitator = yes
+						interest_group = scope:suffragist_ig
+						female = yes
+						ideology = ideology_feminist
+						on_created = {
+							set_variable = suffragette_agitator
+						}
+					}
+				}
+			}
+		}
+		scope:suffragette_agitator_scope = {
+			add_modifier = {
+				name = suffragist_trailblazer
+				months = normal_modifier_time
+				multiplier = 0.5
+			}
+		}
+	}
+}
+
+suffragist_events.10 = {
+	type = country_event
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	placement = root
+
+	title = suffragist_events.10.t
+	desc = suffragist_events.10.d
+	flavor = suffragist_events.10.f
+
+	duration = 3
+
+	option = {
+		name = suffragist_events.10.a
+		trigger = {
+			ig:ig_trade_unions = { is_in_government = yes }
+		}
+		ig:ig_trade_unions = {
+			add_modifier = {
+				name = modifier_egalitarian_workers_movement
+				months = long_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = suffragist_events.10.b
+		trigger = {
+			ig:ig_intelligentsia = { is_in_government = yes }
+		}
+		ig:ig_intelligentsia = {
+			add_ideology = ideology_feminist_ig
+		}
+	}
+
+	option = {
+		name = suffragist_events.10.c
+		trigger = {
+			any_interest_group = {
+				is_in_government = yes
+				has_ideology = ideology:ideology_patriarchal
+			}
+		}
+		random_interest_group = {
+			limit = {
+				is_in_government = yes
+				has_ideology = ideology:ideology_patriarchal
+			}
+			remove_ideology = ideology_patriarchal
+			add_ideology = ideology_patriarchal_suffrage
+		}
+	}
+
+	option = {
+		name = suffragist_events.10.e
+		default_option = yes
+
+		if = {
+			limit = {
+				any_interest_group = {
+					leader = { has_ideology = ideology:ideology_feminist }
+				}
+			}
+			every_interest_group = {
+				limit = {
+					leader = { has_ideology = ideology:ideology_feminist }
+				}
+				leader = {
+					add_modifier = {
+						name = successful_suffragist
+						months = normal_modifier_time
+					}
+				}
+			}
+		}
+		else = {
+			random_interest_group = {
+				limit = {
+					OR = {
+						is_interest_group_type = ig_rural_folk
+						is_interest_group_type = ig_intelligentsia
+						is_interest_group_type = ig_trade_unions
+						is_interest_group_type = ig_petty_bourgeoisie
+						is_interest_group_type = ig_industrialists
+					}
+					NOT = {
+						leader = { has_ideology = ideology:ideology_feminist }
+					}
+				}
+				leader = { set_ideology = ideology:ideology_feminist }
+			}
+		}
+	}
+}

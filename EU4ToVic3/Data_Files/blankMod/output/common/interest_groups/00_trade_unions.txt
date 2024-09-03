@@ -1,0 +1,566 @@
+﻿ig_trade_unions = {
+	color = hsv{ 0 0.56 0.58 }
+	texture = "gfx/interface/icons/ig_icons/trade_unions.dds"
+	layer = "revolution_dynamic_trade_unions"
+	index = 7
+
+	ideologies = {
+		ideology_proletarian
+		ideology_egalitarian
+		ideology_populist
+		ideology_anti_slavery
+	}
+
+	enable = {
+		always = yes
+	}
+
+	# Deprecated; use on_enable effect to assign traits instead
+	traits = {
+		ig_trait_solidarity
+		ig_trait_industrial_organizers
+		ig_trait_work_to_rule
+	}
+	
+	on_enable = {
+		#ig:ig_trade_unions = {		### Converter; commenting out instead of deleting so it's easier to see any future changes
+		#	if = {
+		#		limit = {
+		#			has_dlc_feature = voice_of_the_people_content
+		#			owner = { c:FRA ?= this }
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_work_to_rule
+		#		set_ig_trait = ig_trait:ig_trait_industrial_organizers
+		#		set_ig_trait = ig_trait:ig_trait_bourse_du_travail
+		#	}
+		#	else = {
+		#		set_ig_trait = ig_trait:ig_trait_work_to_rule
+		#		set_ig_trait = ig_trait:ig_trait_industrial_organizers
+		#		set_ig_trait = ig_trait:ig_trait_solidarity
+		#	}
+		#}
+		#
+		#### Socialism
+		#if = {
+		#	limit = {
+		#		has_technology_researched = socialism
+		#	}
+		#	ig:ig_trade_unions = {
+		#		add_ideology = ideology_socialist
+		#	}
+		#}
+		#
+		#### Feminism
+		#if = {
+		#	limit = {
+		#		has_technology_researched = feminism
+		#	}
+		#	every_interest_group = {
+		#		limit = {
+		#			has_ideology = ideology:ideology_egalitarian
+		#		}
+		#		remove_ideology = ideology_egalitarian
+		#		add_ideology = ideology_egalitarian_modern
+		#	}
+		#}
+	}
+
+	on_disable = {}
+	on_character_ig_membership = {}
+
+	pop_potential = {
+		NOR = {
+			is_pop_type = aristocrats
+			is_pop_type = capitalists
+			is_pop_type = shopkeepers
+			is_pop_type = officers
+		}
+		OR = {
+			AND = {
+				custom_tooltip = {
+					text = owner_has_modern_agriculture_tt
+					owner = {
+						OR = {
+							has_law = law_type:law_commercialized_agriculture
+							has_law = law_type:law_collectivized_agriculture
+						}
+					}
+				}
+				strata = poor
+				NOR = {
+					pop_employment_building_group = bg_subsistence_agriculture
+					pop_employment_building_group = bg_subsistence_ranching
+				}
+			}
+			NOR = {
+				pop_employment_building_group = bg_agriculture
+				pop_employment_building_group = bg_ranching
+				pop_employment_building_group = bg_plantations
+			}
+		}
+	}
+
+	pop_weight = {
+		value = 0
+
+		add = {
+			desc = "URBAN_POP"
+			if = {
+				limit = {
+					NOR = {
+						pop_employment_building_group = bg_agriculture
+						pop_employment_building_group = bg_ranching
+						pop_employment_building_group = bg_plantations
+					}
+				}
+				value = 50
+				if = {
+					limit = {
+						strata = middle
+					}
+					divide = 2
+				}
+			}
+		}
+
+		add = {
+			desc = "POP_MACHINISTS"
+			if = {
+				limit = {
+					is_pop_type = machinists
+				}
+				value = 100
+			}
+		}
+
+		add = {
+			desc = "POP_LABORERS"
+			if = {
+				limit = {
+					is_pop_type = laborers
+				}
+				value = 50
+			}
+		}
+
+		multiply = {
+			desc = "LEADER_POPULARITY"
+			scope:interest_group = {
+				leader ?= {
+					value = popularity
+					multiply = 0.0025
+					add = 1
+					max = 1.25
+					min = 0.75
+				}
+			}
+		}
+
+		multiply = {
+			desc = "NO_LABOR_MOVEMENT"
+			value = 1.0
+
+			if = {
+				limit = {
+					owner = {
+						NOT = { has_technology_researched = labor_movement }
+					}
+				}
+				value = 0.5
+			}
+		}
+
+		multiply = {
+			desc = "NO_EGALITARIANISM"
+			value = 1.0
+
+			if = {
+				limit = {
+					owner = {
+						NOT = { has_technology_researched = egalitarianism }
+					}
+				}
+				value = 0.5
+			}
+		}
+
+		multiply = {
+			desc = "decentralized_power"
+			value = 1.0
+
+			if = {
+				limit = {
+					owner = {
+						is_country_type = decentralized
+					}
+				}
+				value = 0.0
+			}
+		}
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = {
+				desc = "IN_GOVERNMENT_ATTRACTION"
+				value = 1
+				add = scope:interest_group.modifier:interest_group_in_government_attraction_mult
+				min = 0
+			}
+		}
+		
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_LOYALISTS"
+				value = pop_loyalist_fraction
+				divide = 4
+				add = 1
+			}
+		}
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = no
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_RADICALS"
+				value = pop_radical_fraction
+				divide = 4
+				add = 1
+			}
+		}
+	}
+
+	monarch_weight = {
+		value = 0.1 # this is just inherently unlikely
+		# Monarch is not likely to adopt a marginal IG
+		if = {
+			limit = {
+				is_marginal = yes
+			}
+			multiply = {
+				value = 0.1
+			}
+		}
+		# Monarch is more likely to adopt a Powerful IG
+		if = {
+			limit = {
+				is_powerful = yes
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		# More likely with Worker's Protections
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_worker_protections
+				}
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		# Impossible with No Workers Rights
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_no_workers_rights
+				}
+			}
+			multiply = {
+				value = 0
+			}
+		}
+	}
+
+	agitator_weight = {
+		# Agitators more likely to come from populist IG's rather than elitist
+		value = 1.0
+		# Agitators will never be part of a marginalized IG
+		if = {
+			limit = {
+				owner.ig:ig_trade_unions = {
+					is_marginal = yes
+				}
+			}
+			multiply = {
+				value = 0
+			}
+		}
+	}
+
+	commander_weight = {
+		value = 0.5
+	}
+
+	noble_chance = {
+		value = 0.1
+	}
+
+	female_commander_chance = {
+		### Converter ###
+		value = ig_female_general_chance
+	}
+
+	female_politician_chance = {
+		value = 0.0
+
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_womens_suffrage
+					### Converter ###
+					is_matriarchal_country = no
+					is_feminist_country = no
+				}
+
+			}
+			add = {
+				value = 0.05
+			}
+		}
+
+		### Converter ###
+		if = {
+			limit = {
+				owner = {
+					NOT = { has_law = law_type:law_womens_suffrage }
+					is_matriarchal_country = yes
+					is_feminist_country = no
+				}
+
+			}
+			add = {
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_womens_suffrage
+					is_matriarchal_country = yes
+					is_feminist_country = no
+				}
+
+			}
+			add = {
+				value = 0.95
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_no_womens_rights
+					is_matriarchal_country = no
+					is_feminist_country = yes
+				}
+
+			}
+			add = {
+				value = 0.2
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_no_womens_rights
+					is_matriarchal_country = yes
+					is_feminist_country = yes
+				}
+
+			}
+			add = {
+				value = 0.8
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					NOR = {
+						has_law = law_type:law_no_womens_rights
+						has_law = law_type:law_womens_suffrage
+					}
+					is_matriarchal_country = no
+					is_feminist_country = yes
+				}
+
+			}
+			add = {
+				value = 0.35
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					NOR = {
+						has_law = law_type:law_no_womens_rights
+						has_law = law_type:law_womens_suffrage
+					}
+					is_matriarchal_country = yes
+					is_feminist_country = yes
+				}
+
+			}
+			add = {
+				value = 0.65
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_womens_suffrage
+					is_feminist_country = yes
+				}
+
+			}
+			add = {
+				value = 0.5
+			}
+		}
+	}
+
+	female_agitator_chance = {
+		value = 0.05
+		
+		if = {
+			limit = {
+				owner = {
+					### Converter ###
+					NOT = { has_law = law_type:law_no_womens_rights }
+					is_matriarchal_country = no
+					is_feminist_country = no
+				}
+
+			}
+			add = {
+				value = 0.05
+			}
+		}
+
+		
+
+		### Converter ###
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_no_womens_rights
+					is_matriarchal_country = yes
+					is_feminist_country = no
+				}
+
+			}
+			add = {
+				value = 0.9
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					NOT = { has_law = law_type:law_no_womens_rights }
+					is_matriarchal_country = yes
+					is_feminist_country = no
+				}
+
+			}
+			add = {
+				value = 0.85
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_no_womens_rights
+					is_matriarchal_country = no
+					is_feminist_country = yes
+				}
+
+			}
+			add = {
+				value = 0.15
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_no_womens_rights
+					is_matriarchal_country = yes
+					is_feminist_country = yes
+				}
+
+			}
+			add = {
+				value = 0.75
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					NOR = {
+						has_law = law_type:law_no_womens_rights
+						has_law = law_type:law_womens_suffrage
+					}
+					is_matriarchal_country = no
+					is_feminist_country = yes
+				}
+
+			}
+			add = {
+				value = 0.3
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					NOR = {
+						has_law = law_type:law_no_womens_rights
+						has_law = law_type:law_womens_suffrage
+					}
+					is_matriarchal_country = yes
+					is_feminist_country = yes
+				}
+
+			}
+			add = {
+				value = 0.6
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_womens_suffrage
+					is_feminist_country = yes
+				}
+
+			}
+			add = {
+				value = 0.45
+			}
+		}
+	}
+
+	# The chance that a commander belonging to this IG takes over leadership when it changes
+	# scope:character is the most popular commander in the IG
+	commander_leader_chance = {
+		value = 0.25
+		if = {
+			limit = {
+				exists = scope:character
+			}
+			multiply = {
+				value = 1
+				add = scope:character.popularity
+				min = 0
+			}
+		}
+	}
+}

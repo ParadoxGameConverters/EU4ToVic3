@@ -317,7 +317,7 @@ conservative_party = {
 			triggered_desc = {
 				desc = party_democratic_party
 				trigger = {
-					country_has_primary_culture = cu:dixie
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_dixie_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
@@ -948,7 +948,7 @@ conservative_party = {
 					}
 				}
 				leader = {
-					culture = { is_target_in_global_variable_list = { name = global_yankee_cultures target = this } }		### Converter
+					culture = { is_yankee_culture = yes }		### Converter
 				}
 			}
 			add = {

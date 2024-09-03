@@ -179,7 +179,7 @@ radical_party = {
 			triggered_desc = {
 				desc = party_radical_liberal_party
 				trigger = {
-					country_has_primary_culture = cu:dixie
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_dixie_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {

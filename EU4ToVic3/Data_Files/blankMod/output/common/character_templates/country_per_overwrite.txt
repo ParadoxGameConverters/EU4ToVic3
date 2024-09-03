@@ -1,0 +1,363 @@
+﻿### Persia character template file ###
+
+# Reza Shah Pahlavi
+PER_reza_pahlavi = {
+	first_name = Reza
+	last_name = Pahlavi
+	historical = yes
+	culture = global_var:reza_culture
+	interest_group = ig_armed_forces
+	ideology = ideology_authoritarian
+	ig_leader = yes
+	birth_date = 1878.3.15
+	dna = dna_reza_shah_pahlavi
+	traits = {
+		ambitious
+		direct
+		popular_commander
+	}
+	trait_generation = { }
+
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_reza_pahlavi
+				}
+			}
+            uses_per_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1915.1.1 # colonel
+		latest_usage_date = 1936.1.1	
+		chance = 25
+	} 
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_reza_pahlavi
+				}
+			}
+            uses_per_characters = yes
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_armed_forces
+        }   
+        earliest_usage_date = 1919.1.1 # Minister of War
+        latest_usage_date = 1936.1.1
+        chance = 75
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_reza_pahlavi
+		}
+	}
+}
+fem_PER_reza_pahlavi = {
+	first_name = Delshad
+	last_name = Pahlavi
+	historical = yes
+	female = yes
+	culture = global_var:reza_culture
+	interest_group = ig_armed_forces
+	ideology = ideology_authoritarian
+	ig_leader = yes
+	birth_date = 1878.3.15
+	dna = dna_reza_shah_pahlavi
+	traits = {
+		ambitious
+		direct
+		popular_commander
+	}
+	trait_generation = { }
+
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_reza_pahlavi
+				}
+			}
+            uses_per_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1915.1.1 # colonel
+		latest_usage_date = 1936.1.1	
+		chance = 25
+	} 
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_reza_pahlavi
+				}
+			}
+            uses_per_characters = yes
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_armed_forces
+        }   
+        earliest_usage_date = 1919.1.1 # Minister of War
+        latest_usage_date = 1936.1.1
+        chance = 75
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_reza_pahlavi
+		}
+	}
+}
+
+
+# Mirza Kuchik Khan
+PER_mirza_kuchik_khan = {
+    first_name = Mirza_Kuchik
+    last_name = Khan
+    historical = yes
+    culture = global_var:per_culture
+    interest_group = ig_rural_folk # Petty Bourgeoisie is also a potentially valid descriptor of Mirza Kuchik's IG, but communism isn't a valid ideology for the PB
+    ideology = ideology_communist
+    ig_leader = yes
+    birth_date = 1880.10.12
+    dna = dna_mizra_kuchak_khan
+    traits = {
+        imposing
+        pious
+        firebrand
+    }
+    trait_generation = { }
+
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mirza_kuchik_khan
+				}
+			}
+            uses_per_characters = yes
+            has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_rural_folk
+        }   
+        earliest_usage_date = 1909.1.1
+        latest_usage_date = 1936.1.1
+        chance = 75
+    }
+    agitator_usage = {
+        country_trigger = {
+            has_dlc_feature = voice_of_the_people_content
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mirza_kuchik_khan
+				}
+			}
+            uses_per_characters = yes
+            has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            OR = {
+                is_interest_group_type = ig_rural_folk
+                is_interest_group_type = ig_armed_forces
+            } 
+        }   
+        earliest_usage_date = 1909.1.1
+        latest_usage_date = 1936.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_mirza_kuchik_khan
+		}
+	}
+}
+fem_PER_mirza_kuchik_khan = {
+    first_name = Shahrazad_Kuchik
+    last_name = Khan
+    historical = yes
+	female = yes
+    culture = global_var:per_culture
+    interest_group = ig_rural_folk # Petty Bourgeoisie is also a potentially valid descriptor of Mirza Kuchik's IG, but communism isn't a valid ideology for the PB
+    ideology = ideology_communist
+    ig_leader = yes
+    birth_date = 1880.10.12
+    dna = dna_mizra_kuchak_khan
+    traits = {
+        imposing
+        pious
+        firebrand
+    }
+    trait_generation = { }
+
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mirza_kuchik_khan
+				}
+			}
+            uses_per_characters = yes
+            has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_rural_folk
+        }   
+        earliest_usage_date = 1909.1.1
+        latest_usage_date = 1936.1.1
+        chance = 75
+    }
+    agitator_usage = {
+        country_trigger = {
+            has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mirza_kuchik_khan
+				}
+			}
+            uses_per_characters = yes
+            has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            OR = {
+                is_interest_group_type = ig_rural_folk
+                is_interest_group_type = ig_armed_forces
+            } 
+        }   
+        earliest_usage_date = 1909.1.1
+        latest_usage_date = 1936.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_mirza_kuchik_khan
+		}
+	}
+}
+
+# Sattar Khan
+PER_sattar_khan = {
+    first_name = Sattar
+    last_name = Khan
+    historical = yes
+    culture = global_var:per_culture
+    interest_group = ig_petty_bourgeoisie
+    ideology = ideology_radical
+    ig_leader = yes
+    birth_date = 1866.10.20
+    dna = dna_sattar_khan
+    traits = {
+        brave
+        pious
+        popular_commander
+    }
+    trait_generation = { }
+
+    agitator_usage = {
+        country_trigger = {
+            has_dlc_feature = voice_of_the_people_content
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sattar_khan
+				}
+			}
+            uses_per_characters = yes
+            has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            OR = {
+                is_interest_group_type = ig_petty_bourgeoisie
+                is_interest_group_type = ig_intelligentsia
+                is_interest_group_type = ig_rural_folk
+            } 
+        }   
+        earliest_usage_date = 1905.1.1
+        latest_usage_date = 1936.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sattar_khan
+		}
+	}
+}
+fem_PER_sattar_khan = {
+    first_name = Hananeh
+    last_name = Khan
+    historical = yes
+	female = yes
+    culture = global_var:per_culture
+    interest_group = ig_petty_bourgeoisie
+    ideology = ideology_radical
+    ig_leader = yes
+    birth_date = 1866.10.20
+    dna = dna_sattar_khan
+    traits = {
+        brave
+        pious
+        popular_commander
+    }
+    trait_generation = { }
+
+    agitator_usage = {
+        country_trigger = {
+            has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sattar_khan
+				}
+			}
+            uses_per_characters = yes
+            has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            OR = {
+                is_interest_group_type = ig_petty_bourgeoisie
+                is_interest_group_type = ig_intelligentsia
+                is_interest_group_type = ig_rural_folk
+            } 
+        }   
+        earliest_usage_date = 1905.1.1
+        latest_usage_date = 1936.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sattar_khan
+		}
+	}
+}

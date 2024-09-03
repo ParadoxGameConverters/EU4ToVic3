@@ -1,0 +1,172 @@
+﻿# converter_ig_devout_feminism_matriarchy_effect
+# converter_ig_landowners_feminism_matriarchy_effect
+# converter_rule_63_effect
+
+converter_ig_devout_feminism_matriarchy_effect = {
+	if = {		# Cultural Gender Equality
+		limit = {
+			any_primary_culture = { has_discrimination_trait = feminist }
+			NOT = { religion = { has_discrimination_trait = feminist } }
+		}
+		ig:ig_devout = {
+			if = {
+				limit = { has_ideology = ideology:ideology_patriarchal }
+				remove_ideology = ideology_patriarchal
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_oriental_orthodox_patriarch }
+				remove_ideology = ideology_oriental_orthodox_patriarch
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_orthodox_patriarch }
+				remove_ideology = ideology_orthodox_patriarch
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_russian_patriarch }
+				remove_ideology = ideology_russian_patriarch
+			}
+			add_ideology = ideology_patriarchal_suffrage
+		}
+	}
+	else_if = {		# Religious Gender Equality
+		limit = {
+			religion = { has_discrimination_trait = feminist }
+		}
+		ig:ig_devout = {
+			if = {
+				limit = { has_ideology = ideology:ideology_patriarchal }
+				remove_ideology = ideology_patriarchal
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_oriental_orthodox_patriarch }
+				remove_ideology = ideology_oriental_orthodox_patriarch
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_orthodox_patriarch }
+				remove_ideology = ideology_orthodox_patriarch
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_russian_patriarch }
+				remove_ideology = ideology_russian_patriarch
+			}
+			add_ideology = ideology_feminist_ig
+		}
+	}
+}
+
+converter_ig_landowners_feminism_matriarchy_effect = {
+	if = {		# Religious Gender Equality
+		limit = {
+			religion = { has_discrimination_trait = feminist }
+			NOT = { any_primary_culture = { has_discrimination_trait = feminist } }
+		}
+		ig:ig_landowners = {
+			remove_ideology = ideology_patriarchal
+			add_ideology = ideology_patriarchal_suffrage
+		}
+	}
+	else_if = {		# Cultural Gender Equality
+		limit = {
+			any_primary_culture = { has_discrimination_trait = feminist }
+		}
+		ig:ig_landowners = {
+			remove_ideology = ideology_patriarchal
+			add_ideology = ideology_feminist_ig
+		}
+	}
+}
+
+converter_rule_63_effect = {
+	if = {
+		limit = { is_feminist_country = yes }
+		random_list = {
+			20 = {
+				modifier = {
+					if = {
+						limit = {
+							has_law = law_type:law_no_womens_rights
+							is_matriarchal_country = yes
+						}
+						add = 60
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							NOR = {
+								has_law = law_type:law_no_womens_rights
+								has_law = law_type:law_womens_suffrage
+							}
+							is_matriarchal_country = yes
+						}
+						add = 45
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							NOR = {
+								has_law = law_type:law_no_womens_rights
+								has_law = law_type:law_womens_suffrage
+							}
+							is_matriarchal_country = no
+						}
+						add = 15
+					}
+				}
+				modifier = {
+					if = {
+						limit = { has_law = law_type:law_womens_suffrage }
+						add = 30
+					}
+				}
+				set_variable = { name = rule_63_effect value = yes days = 94 }
+			}
+			80 = {
+				modifier = {
+					if = {
+						limit = {
+							has_law = law_type:law_no_womens_rights
+							is_matriarchal_country = yes
+						}
+						add = -60
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							NOR = {
+								has_law = law_type:law_no_womens_rights
+								has_law = law_type:law_womens_suffrage
+							}
+							is_matriarchal_country = yes
+						}
+						add = -45
+					}
+				}
+				modifier = {
+					if = {
+						limit = {
+							NOR = {
+								has_law = law_type:law_no_womens_rights
+								has_law = law_type:law_womens_suffrage
+							}
+							is_matriarchal_country = no
+						}
+						add = -15
+					}
+				}
+				modifier = {
+					if = {
+						limit = { has_law = law_type:law_womens_suffrage }
+						add = -30
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = { is_matriarchal_country = yes }
+		set_variable = { name = rule_63_effect value = yes days = 94 }
+	}
+}
