@@ -47,6 +47,8 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 			throw std::runtime_error("Error copying TO map_data! Is the output/ folder writable?");
 		if (!commonItems::CopyFolder("configurables/third_odyssey/localization", "output/" + outputName + "/localization"))
 			throw std::runtime_error("Error copying TO locs! Is the output/ folder writable?");
+		if (!commonItems::CopyFolder("configurables/third_odyssey/gfx", "output/" + outputName + "/gfx"))
+			throw std::runtime_error("Error copying TO gfx! Is the output/ folder writable?");
 	}
 
 	Log(LogLevel::Progress) << "83 %";
