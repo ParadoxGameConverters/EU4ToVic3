@@ -64,7 +64,7 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 	loadPopTypes(modFS);
 }
 
-void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalManager, const Vic3DefinesLoader& defines) const
+void V3::EconomyManager::establishBureaucracy(const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const
 {
 	Log(LogLevel::Info) << "-> Establishing Bureaucracy.";
 	if (!buildings.contains("building_government_administration"))
@@ -84,7 +84,7 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 		}
 
 		// Give 10% extra for trade routes - cap at +400
-		const double usage = country->calculateBureaucracyUsage(politicalManager.getLawsMap(), defines);
+		const double usage = country->calculateBureaucracyUsage(lawsMap, defines);
 		const double generationTarget = std::min(usage * 1.1, usage + 500) - 100;
 
 		// Use the PM with the most generation available
@@ -230,13 +230,18 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 	// 4. If a substate ends up with less CP than the cost for any possible valid building, they relinquish it to the next sector/substate
 
 	MarketTracker market(demand.getGoodsMap(), buildings.at("building_manor_house").getPMGroups(), PMGroups, PMs);
+	hardcodePorts();
+	establishBureaucracy(lawsMap, defines);
 
 	for (const auto& country: centralizedCountries)
 	{
+		// Make estimates from country data.
 		const auto& sectors = country->getProcessedData().industrySectors;
 		auto subStatesByBudget = prepareSubStatesByBudget(country, lawsMap);
 		const auto& estimatedPMs = PMMapper.estimatePMs(*country, PMs, PMGroups, buildings);
 		const auto& estimatedOwnershipFracs = estimateInvestorBuildings(*country);
+
+		// Initialize the market in a no-buildings state.
 		market.resetMarket();
 		market.loadPeasants(*country,
 			 defines.getWorkingAdultRatioBase(),
@@ -250,22 +255,25 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 			 stateTraits);
 		market.loadCultures(country->getCultureBreakdown());
 
-		// Until every substate is unable to build anything
+		// Initialize hard-coded buildings.
+		// TODO(Gawquon): Have hard-coded buildings account for market effects.
+
+		// Until no substate can build.
 		while (!subStatesByBudget.empty())
 		{
-			// Enter negotiation
-
-			// Update the market
+			// Update the pop's demand.
 			market.updatePopNeeds(*country, defines, demand, country->getProcessedData().laws, popTypeLoader.getPopTypes(), cultures, religions, lawsMap);
 
-			// Pick the substate with the most budget
+			// Enter negotiation.
+			// Pick the substate with the most budget.
 			negotiateBuilding(subStatesByBudget[0], sectors, lawsMap, subStatesByBudget, estimatedPMs, estimatedOwnershipFracs, market);
 			++counter;
 
-			// A Building has now been built, process for next round
+			// A Building has now been built, process for next round.
 			std::sort(subStatesByBudget.begin(), subStatesByBudget.end(), SubState::greaterBudget);
 			removeSubStateIfFinished(subStatesByBudget, subStatesByBudget.end() - 1, lawsMap);
 		}
+
 		// DEBUG
 		if (country->getTag() == "USA")
 		{

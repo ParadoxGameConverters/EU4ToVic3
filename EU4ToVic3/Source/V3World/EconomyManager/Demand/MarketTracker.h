@@ -77,16 +77,6 @@ class MarketTracker
 		 const BuildingResources& buildingResources,
 		 const std::vector<std::string>& traits,
 		 const std::map<std::string, StateModifier>& stateTraits);
-	void updateSubsistenceGoods(double levels,
-		 const std::shared_ptr<SubState>& subState,
-		 const std::map<std::string, Building>& buildings,
-		 const BuildingGroups& buildingGroups,
-		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
-		 const std::map<std::string, ProductionMethod>& PMs,
-		 const std::map<std::string, ProductionMethodGroup>& PMGroups,
-		 const std::vector<std::string>& traits,
-		 const std::map<std::string, StateModifier>& stateTraits);
-
 
 
 	Market market;

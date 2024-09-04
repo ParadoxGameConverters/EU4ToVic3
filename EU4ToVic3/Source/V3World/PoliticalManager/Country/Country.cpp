@@ -221,10 +221,6 @@ void V3::Country::distributeGovAdmins(const double target,
 
 		const auto govAdmin = std::make_shared<Building>(blueprint);
 		govAdmin->setLevel(levels);
-
-		// TODO(Gawquon): Still need to decide on this fxn being before or after the building negotiation.
-		// govAdmin->addInvestor(levels, "national_service", substate->getHomeStateName(), this->tag);
-
 		substate->addBuilding(govAdmin);
 
 		generated += generation;

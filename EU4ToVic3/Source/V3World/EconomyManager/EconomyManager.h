@@ -59,9 +59,6 @@ class EconomyManager
 	void loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries);
 	void loadMappersAndConfigs(const commonItems::ModFilesystem& modFS, const std::string& filePath = "");
 
-	void establishBureaucracy(const PoliticalManager& politicalManager, const Vic3DefinesLoader& defines) const;
-	void hardcodePorts() const;
-
 	void assignCountryCPBudgets(Configuration::ECONOMY economyType,
 		 Configuration::STARTDATE startDate,
 		 const DatingData& dateData,
@@ -96,6 +93,8 @@ class EconomyManager
 	[[nodiscard]] double calculateStateTraitMultiplier(const std::shared_ptr<SubState>& subState) const;
 	[[nodiscard]] double getDensityFactor(double perCapitaDev) const;
 
+	void establishBureaucracy(const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const;
+	void hardcodePorts() const;
 	void distributeBudget(double globalCP, double totalIndustryScore) const;
 
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> prepareSubStatesByBudget(const std::shared_ptr<Country>& country,
