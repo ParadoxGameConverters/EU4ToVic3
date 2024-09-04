@@ -12,7 +12,7 @@ V3::MarketJobs::MarketJobs(const std::vector<std::pair<std::string, int>>& manor
 
 // Returns levels of displaced subsistence building.
 double V3::MarketJobs::createJobs(const std::map<std::string, double>& rgoUnitEmployment,
-	 const std::map<std::string, int>& subsistenceUnitEmployment,
+	 const std::map<std::string, double>& subsistenceUnitEmployment,
 	 const int levels,
 	 const double defaultRatio,
 	 const double womenJobRate,
@@ -45,7 +45,7 @@ double V3::MarketJobs::createJobs(const std::map<std::string, double>& rgoUnitEm
 
 // post: The given subState's job estimate is initialized with the 0 buildings version of local employment.
 // Returns number of subsistence building levels filled.
-double V3::MarketJobs::createSubsistence(const std::map<std::string, int>& subsistenceUnitEmployment,
+double V3::MarketJobs::createSubsistence(const std::map<std::string, double>& subsistenceUnitEmployment,
 	 double defaultRatio,
 	 const double womenJobRate,
 	 const int arableLand,
@@ -87,7 +87,7 @@ double V3::MarketJobs::hireFromWorseJobs(double amount,
 	 const double defaultRatio,
 	 const double womenJobRate,
 	 const std::map<std::string, PopType>& popTypes,
-	 const std::map<std::string, int>& subsistenceUnitEmployment,
+	 const std::map<std::string, double>& subsistenceUnitEmployment,
 	 const std::shared_ptr<V3::SubState>& subState)
 {
 	amount = hireFromUnemployed(amount, subState);
@@ -109,7 +109,7 @@ double V3::MarketJobs::hireFromUnemployed(double amount, const std::shared_ptr<V
 
 
 double V3::MarketJobs::hireFromSubsistence(const double amount,
-	 const std::map<std::string, int>& subsistenceUnitEmployment,
+	 const std::map<std::string, double>& subsistenceUnitEmployment,
 	 const double defaultRatio,
 	 const double womenJobRate,
 	 const std::map<std::string, PopType>& popTypes,

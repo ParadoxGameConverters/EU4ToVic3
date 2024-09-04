@@ -25,10 +25,13 @@ class MarketTracker
 	void loadPeasants(const Country& country,
 		 double defaultRatio,
 		 const std::map<std::string, Law>& lawsMap,
-		 const std::map<std::string, ProductionMethodGroup>& PMGroups,
+		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
 		 const std::map<std::string, ProductionMethod>& PMs,
+		 const std::map<std::string, ProductionMethodGroup>& PMGroups,
 		 const std::map<std::string, PopType>& popTypes,
-		 const std::map<std::string, Building>& buildings);
+		 const std::map<std::string, Building>& buildings,
+		 const BuildingGroups& buildingGroups,
+		 const std::map<std::string, StateModifier>& stateTraits);
 	void loadCultures(const std::map<std::string, double>& cultureData) { marketCulture = cultureData; }
 
 	void updatePopNeeds(const Country& country,
@@ -67,23 +70,20 @@ class MarketTracker
 		 const BuildingGroups& buildingGroups,
 		 const std::map<std::string, Tech>& techMap);
 
-	// Returns the index of the first valid PM according to laws.
-	int getPMAllowedByLaws(const std::string& PMGroup,
-		 const std::set<std::string>& laws,
-		 const std::map<std::string, ProductionMethodGroup>& PMGroups,
-		 const std::map<std::string, ProductionMethod>& PMs) const;
-	[[nodiscard]] bool hasUnlockingLaws(const std::set<std::string>& laws, const std::set<std::string>& targetLaws) const;
-	[[nodiscard]] bool hasBlockingLaws(const std::set<std::string>& laws, const std::set<std::string>& targetLaws) const;
-	[[nodiscard]] std::map<std::string, int> getSubsistenceEmployment(const std::string& subsistenceBuildingName,
-		 const std::set<std::string>& laws,
-		 const std::map<std::string, ProductionMethodGroup>& PMGroups,
-		 const std::map<std::string, ProductionMethod>& PMs,
-		 const std::map<std::string, Building>& buildings) const;
 	void updateMarketGoods(double level,
 		 int p,
 		 int eosCap,
 		 double throughputMod,
 		 const BuildingResources& buildingResources,
+		 const std::vector<std::string>& traits,
+		 const std::map<std::string, StateModifier>& stateTraits);
+	void updateSubsistenceGoods(double levels,
+		 const std::shared_ptr<SubState>& subState,
+		 const std::map<std::string, Building>& buildings,
+		 const BuildingGroups& buildingGroups,
+		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
+		 const std::map<std::string, ProductionMethod>& PMs,
+		 const std::map<std::string, ProductionMethodGroup>& PMGroups,
 		 const std::vector<std::string>& traits,
 		 const std::map<std::string, StateModifier>& stateTraits);
 

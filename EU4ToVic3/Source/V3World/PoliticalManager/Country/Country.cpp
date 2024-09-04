@@ -128,10 +128,36 @@ bool V3::Country::hasAnyOfTech(const std::set<std::string>& techs) const
 		return true;
 	}
 
-	return std::ranges::any_of(techs, [&](const std::string& tech) {
+	return std::ranges::any_of(techs, [this](const std::string& tech) {
 		return processedData.techs.contains(tech);
 	});
 }
+
+bool V3::Country::hasAnyOfLawUnlocking(const std::set<std::string>& laws) const
+{
+	if (laws.empty())
+	{
+		return true;
+	}
+
+	return std::ranges::any_of(laws, [this](const std::string& targetLaw) {
+		return processedData.laws.contains(targetLaw);
+	});
+}
+
+bool V3::Country::hasAnyOfLawBlocking(const std::set<std::string>& laws) const
+{
+	if (laws.empty())
+	{
+		return false;
+	}
+
+	return std::ranges::any_of(laws, [this](const std::string& targetLaw) {
+		return processedData.laws.contains(targetLaw);
+	});
+}
+
+
 
 int V3::Country::getGovBuildingMax(const std::string& building, const std::map<std::string, Law>& lawsMap, const std::map<std::string, Tech>& techMap) const
 {

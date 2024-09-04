@@ -13,38 +13,38 @@ class MarketJobs
 	explicit MarketJobs(const std::vector<std::pair<std::string, int>>& manorHouseRoster);
 
 	double createJobs(const std::map<std::string, double>& rgoUnitEmployment,
-		 const std::map<std::string, int>& subsistenceUnitEmployment,
-		 int levels,
-		 double defaultRatio,
-		 double womenJobRate,
-		 const std::map<std::string, double>& estimatedOwnerships,
-		 const std::map<std::string, std::map<std::string, int>>& ownershipEmployments,
-		 const std::map<std::string, PopType>& popTypes,
-		 const std::shared_ptr<SubState>& subState);
-	double createSubsistence(const std::map<std::string, int>& subsistenceUnitEmployment,
-		 double defaultRatio,
-		 double womenJobRate,
-		 int arableLand,
-		 const std::map<std::string, PopType>& popTypes,
-		 const std::shared_ptr<SubState>& subState);
+		const std::map<std::string, double>& subsistenceUnitEmployment,
+		int levels,
+		double defaultRatio,
+		double womenJobRate,
+		const std::map<std::string, double>& estimatedOwnerships,
+		const std::map<std::string, std::map<std::string, int>>& ownershipEmployments,
+		const std::map<std::string, PopType>& popTypes,
+		const std::shared_ptr<SubState>& subState);
+	double createSubsistence(const std::map<std::string, double>& subsistenceUnitEmployment,
+		double defaultRatio,
+		double womenJobRate,
+		int arableLand,
+		const std::map<std::string, PopType>& popTypes,
+		const std::shared_ptr<SubState>& subState);
 
   private:
 	// Returns the level of subsistence buildings downsized.
 	double hireFromWorseJobs(double amount,
-		 double defaultRatio,
-		 const double womenJobRate,
-		 const std::map<std::string, PopType>& popTypes,
-		 const std::map<std::string, int>& subsistenceUnitEmployment,
-		 const std::shared_ptr<SubState>& subState);
+		double defaultRatio,
+		const double womenJobRate,
+		const std::map<std::string, PopType>& popTypes,
+		const std::map<std::string, double>& subsistenceUnitEmployment,
+		const std::shared_ptr<SubState>& subState);
 	// Returns the amount of jobs with no unemployed available.
 	static double hireFromUnemployed(double amount, const std::shared_ptr<SubState>& subState);
 	// Returns the level of subsistence buildings downsized.
 	double hireFromSubsistence(double amount,
-		 const std::map<std::string, int>& subsistenceUnitEmployment,
-		 double defaultRatio,
-		 double womenJobRate,
-		 const std::map<std::string, PopType>& popTypes,
-		 const std::shared_ptr<V3::SubState>& subState);
+		const std::map<std::string, double>& subsistenceUnitEmployment,
+		double defaultRatio,
+		double womenJobRate,
+		const std::map<std::string, PopType>& popTypes,
+		const std::shared_ptr<V3::SubState>& subState);
 	// Removes employment from Manor Houses based on # of peasants who got real jobs.
 	void downsizeManorHouses(double lostSubsistenceLevels,
 		 double defaultRatio,

@@ -227,6 +227,8 @@ class Country: commonItems::parser
 	[[nodiscard]] double getTechInfraMult(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] int getThroughputMax(const std::map<std::string, Tech>& techMap) const;
 	[[nodiscard]] bool hasAnyOfTech(const std::set<std::string>& techs) const;
+	[[nodiscard]] bool hasAnyOfLawUnlocking(const std::set<std::string>& laws) const;
+	[[nodiscard]] bool hasAnyOfLawBlocking(const std::set<std::string>& laws) const;
 	[[nodiscard]] int getGovBuildingMax(const std::string& building,
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::map<std::string, Tech>& techMap) const;

@@ -2,7 +2,6 @@
 #include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "EconomyManager/Building/BuildingGroup.h"
-
 #include <iomanip>
 
 V3::MarketTracker::MarketTracker(const std::map<std::string, Good>& possibleGoods,
@@ -19,12 +18,12 @@ V3::MarketTracker::MarketTracker(const std::map<std::string, Good>& possibleGood
 			manorHouseEmployment[job] = amount;
 		}
 	}
-	std::vector<std::pair<std::string, int>> mhr;
+	std::vector<std::pair<std::string, int>> manorHouseRoster;
 	for (const auto& pair: manorHouseEmployment)
 	{
-		mhr.push_back(pair);
+		manorHouseRoster.push_back(pair);
 	}
-	marketJobs = MarketJobs(mhr);
+	marketJobs = MarketJobs(manorHouseRoster);
 }
 
 void V3::MarketTracker::resetMarket()
@@ -36,22 +35,28 @@ void V3::MarketTracker::resetMarket()
 void V3::MarketTracker::loadPeasants(const Country& country,
 	 const double defaultRatio,
 	 const std::map<std::string, Law>& lawsMap,
-	 const std::map<std::string, ProductionMethodGroup>& PMGroups,
+	 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
 	 const std::map<std::string, ProductionMethod>& PMs,
+	 const std::map<std::string, ProductionMethodGroup>& PMGroups,
 	 const std::map<std::string, PopType>& popTypes,
-	 const std::map<std::string, Building>& buildings)
+	 const std::map<std::string, Building>& buildings,
+	 const V3::BuildingGroups& buildingGroups,
+	 const std::map<std::string, V3::StateModifier>& stateTraits)
 {
 	const double womenJobRate = Market::calcAddedWorkingPopPercent(country.getProcessedData().laws, lawsMap);
 
 	// For each state check peasant PM
 	for (const auto& subState: country.getSubStates())
 	{
-		const std::string& subsistenceBuildingName = subState->getHomeState()->getSubsistenceBuilding();
-		auto subsistenceEmployment = getSubsistenceEmployment(subsistenceBuildingName, country.getProcessedData().laws, PMGroups, PMs, buildings);
-		const double levels =
-			 marketJobs.createSubsistence(subsistenceEmployment, defaultRatio, womenJobRate, subState->getResource("bg_agriculture"), popTypes, subState);
+		const auto& traits = subState->getHomeState()->getTraits();
+		BuildingResources subsistenceResources;
+		const Building& subsistenceBuilding = buildings.at(subState->getHomeState()->getSubsistenceBuilding());
+		subsistenceResources.evaluateResources(subsistenceBuilding.getPMGroups(), estimatedPMs, PMs, PMGroups);
 
-		// TODO Send levels of subsistenceBuilding to Market
+		const double subsistenceModifier = calcThroughputStateModifier(traits, subsistenceBuilding, buildingGroups, stateTraits);
+		const double levels =
+			 marketJobs.createSubsistence(subsistenceResources.getJobs(), defaultRatio, womenJobRate, subState->getResource("bg_agriculture"), popTypes, subState);
+		updateMarketGoods(levels, levels, 0, subsistenceModifier, subsistenceResources, traits, stateTraits);
 	}
 }
 
@@ -94,28 +99,29 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 	// There are scenarios other than subsistence building that do not use economy of scale, but none that are currently relevant.
 	const int eosCap = calcEconomyOfScaleCap(*subState->getOwner(), building, buildingGroups, techMap);
 
-	//// Update the market
+	//// Update the market.
 	updateMarketGoods(building.getLevel(), p, eosCap, throughputMod, buildingResources, subState->getHomeState()->getTraits(), stateTraits);
 
-	const auto& sub = getSubsistenceEmployment(subState->getHomeState()->getSubsistenceBuilding(),
-		 subState->getOwner()->getProcessedData().laws,
-		 PMGroups,
-		 PMs,
-		 buildings); // TODO Move this into BuildingResources as new function
 
-	// ownership Frac filtering
-	std::map<std::string, double> estof;
+
+	// Ownership fraction filtering.
+	std::map<std::string, double> estOwnershipFraction;
 	if (estOwnershipFractions.contains(building.getName()))
 	{
-		estof = estOwnershipFractions.at(building.getName());
+		estOwnershipFraction = estOwnershipFractions.at(building.getName());
 	}
 
+	// Track Subsistence outputs.
+	BuildingResources subsistenceResources;
+	const Building& subsistenceBuilding = buildings.at(subState->getHomeState()->getSubsistenceBuilding());
+	subsistenceResources.evaluateResources(subsistenceBuilding.getPMGroups(), estimatedPMs, PMs, PMGroups);
+
 	const double lostSubsistence = marketJobs.createJobs(buildingResources.getJobs(),
-		 sub,
+		 subsistenceResources.getJobs(),
 		 p,
 		 defaultRatio,
 		 Market::calcAddedWorkingPopPercent(subState->getOwner()->getProcessedData().laws, lawsMap),
-		 estof,
+		 estOwnershipFraction,
 		 {{
 				"building_financial_district",
 				{{"capitalists", 50}, {"shopkeepers", 100}, {"clerks", 100}},
@@ -124,12 +130,9 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 		 popTypes,
 		 subState);
 
-	BuildingResources subsistenceResources;
-	const Building& subsistenceBuilding = buildings.at(subState->getHomeState()->getSubsistenceBuilding());
-	subsistenceResources.evaluateResources(subsistenceBuilding.getPMGroups(), estimatedPMs, PMs, PMGroups);
-	const double subsistenceModifier = calcThroughputStateModifier(subState->getHomeState()->getTraits(), subsistenceBuilding, buildingGroups, stateTraits);
 
-	updateMarketGoods(lostSubsistence, lostSubsistence, 0, subsistenceModifier, subsistenceResources, subState->getHomeState()->getTraits(), stateTraits);
+	const double subsistenceModifier = calcThroughputStateModifier(subState->getHomeState()->getTraits(), subsistenceBuilding, buildingGroups, stateTraits);
+	updateMarketGoods(-lostSubsistence, -lostSubsistence, 0, subsistenceModifier, subsistenceResources, subState->getHomeState()->getTraits(), stateTraits);
 }
 
 void V3::MarketTracker::logDebugMarket(const Country& country) const
@@ -161,87 +164,6 @@ std::stringstream V3::MarketTracker::breakdownAsTable(const std::map<std::string
 		out << std::left << std::setw(nameLength + 2) << pair.first << std::setw(percentLength + 2) << pair.second * 100 << "%" << std::endl;
 	}
 	return out;
-}
-
-int V3::MarketTracker::getPMAllowedByLaws(const std::string& PMGroup,
-	 const std::set<std::string>& laws,
-	 const std::map<std::string, ProductionMethodGroup>& PMGroups,
-	 const std::map<std::string, ProductionMethod>& PMs) const
-{
-	const auto& groupPMs = PMGroups.at(PMGroup).getPMs();
-
-	// Validate every PM in group
-	for (const auto& PM: groupPMs)
-	{
-		if (!PMs.contains(PM))
-		{
-			Log(LogLevel::Error) << "Unknown PM: " << PM << ".";
-			return 0;
-		}
-	}
-
-	// Walk the group
-	int pick = 0;
-	for (const auto& PM: groupPMs)
-	{
-		const auto& thePM = PMs.at(PM);
-		if (hasUnlockingLaws(laws, thePM.getUnlockingLaws()) && !hasBlockingLaws(laws, thePM.getBlockingLaws()))
-			return std::max(pick - 1, 0);
-		++pick;
-	}
-	return std::max(pick - 1, 0);
-}
-
-bool V3::MarketTracker::hasUnlockingLaws(const std::set<std::string>& laws, const std::set<std::string>& targetLaws) const
-{
-	if (targetLaws.empty())
-	{
-		return true;
-	}
-
-	return std::ranges::any_of(targetLaws, [laws](const std::string& targetLaw) {
-		return laws.contains(targetLaw);
-	});
-}
-
-bool V3::MarketTracker::hasBlockingLaws(const std::set<std::string>& laws, const std::set<std::string>& targetLaws) const
-{
-	if (targetLaws.empty())
-	{
-		return false;
-	}
-
-	return std::ranges::any_of(targetLaws, [laws](const std::string& targetLaw) {
-		return laws.contains(targetLaw);
-	});
-}
-
-std::map<std::string, int> V3::MarketTracker::getSubsistenceEmployment(const std::string& buildingName,
-	 const std::set<std::string>& laws,
-	 const std::map<std::string, ProductionMethodGroup>& PMGroups,
-	 const std::map<std::string, ProductionMethod>& PMs,
-	 const std::map<std::string, Building>& buildings) const
-{
-	const auto& subsistenceBuildingIter = buildings.find(buildingName);
-	if (subsistenceBuildingIter == buildings.end())
-	{
-		Log(LogLevel::Warning) << "Subsistence Building: " << buildingName << " has no definition.";
-	}
-
-	std::map<std::string, int> subsistenceEmployment;
-
-	const auto& subsistenceBuilding = subsistenceBuildingIter->second;
-	for (const auto& PMGroup: subsistenceBuilding.getPMGroups())
-	{
-		const auto& PMName = PMGroups.at(PMGroup).getPMs()[getPMAllowedByLaws(PMGroup, laws, PMGroups, PMs)];
-		const auto& thePM = PMs.at(PMName);
-		for (const auto& [job, amount]: thePM.getEmployment())
-		{
-			subsistenceEmployment[job] += amount;
-		}
-	}
-
-	return subsistenceEmployment;
 }
 
 void V3::MarketTracker::updateMarketGoods(const double level,

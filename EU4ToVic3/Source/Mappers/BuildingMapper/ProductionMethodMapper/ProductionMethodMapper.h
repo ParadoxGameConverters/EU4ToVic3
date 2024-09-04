@@ -28,8 +28,7 @@ class ProductionMethodMapper: commonItems::parser
 	[[nodiscard]] std::map<std::string, std::tuple<int, double>> estimatePMs(const V3::Country& country,
 		 const std::map<std::string, V3::ProductionMethod>& PMs,
 		 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups,
-		 const std::map<std::string, V3::Building>& buildings,
-		 const std::map<std::string, V3::Law>& lawsMap) const;
+		 const std::map<std::string, V3::Building>& buildings) const;
 
   private:
 	void registerKeys();
@@ -44,9 +43,12 @@ class ProductionMethodMapper: commonItems::parser
 		 const std::set<std::string>& buildingPMGroups,
 		 const std::map<std::string, V3::ProductionMethod>& PMs,
 		 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups);
-	[[nodiscard]] static int walkPMs(const std::vector<std::string>& groupPMs,
+	[[nodiscard]] static int walkPMsTechbound(const std::vector<std::string>& groupPMs,
 		 const V3::Country& country,
 		 const std::string& targetName,
+		 const std::map<std::string, V3::ProductionMethod>& PMs);
+	[[nodiscard]] static int walkPMsLawbound(const std::vector<std::string>& groupPMs,
+		 const V3::Country& country,
 		 const std::map<std::string, V3::ProductionMethod>& PMs);
 
 	// Subset-sum

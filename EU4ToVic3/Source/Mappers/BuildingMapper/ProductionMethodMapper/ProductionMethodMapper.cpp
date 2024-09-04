@@ -191,7 +191,7 @@ std::pair<std::string, std::string> mappers::ProductionMethodMapper::pickPM(cons
 	return {"", ""};
 }
 
-int mappers::ProductionMethodMapper::walkPMs(const std::vector<std::string>& groupPMs,
+int mappers::ProductionMethodMapper::walkPMsTechbound(const std::vector<std::string>& groupPMs,
 	 const V3::Country& country,
 	 const std::string& targetName,
 	 const std::map<std::string, V3::ProductionMethod>& PMs)
@@ -206,7 +206,7 @@ int mappers::ProductionMethodMapper::walkPMs(const std::vector<std::string>& gro
 		}
 	}
 
-	// Walk the group
+	// Walk the group, we're looking for the most advanced PM allowed by tech, up to our target PM.
 	int pick = 0;
 	for (const auto& PM: groupPMs)
 	{
@@ -219,16 +219,36 @@ int mappers::ProductionMethodMapper::walkPMs(const std::vector<std::string>& gro
 	return std::max(pick - 1, 0);
 }
 
+int mappers::ProductionMethodMapper::walkPMsLawbound(const std::vector<std::string>& groupPMs,
+	 const V3::Country& country,
+	 const std::map<std::string, V3::ProductionMethod>& PMs)
+{
+	int pick = 0;
+
+	// We're finding the first PM allowed by law.
+	for (const auto& PM: groupPMs)
+	{
+		const auto& thePM = PMs.at(PM);
+		const bool hasUnlockingLaws = country.hasAnyOfLawUnlocking(thePM.getUnlockingLaws());
+		const bool hasBlockingLaws = country.hasAnyOfLawBlocking(thePM.getBlockingLaws());
+
+		if (hasUnlockingLaws && !hasBlockingLaws)
+			return std::max(pick, 0);
+		++pick;
+	}
+	return 0; // Nothing is legal, just go with default PM.
+}
+
 std::map<std::string, std::tuple<int, double>> mappers::ProductionMethodMapper::estimatePMs(const V3::Country& country,
 	 const std::map<std::string, V3::ProductionMethod>& PMs,
 	 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups,
-	 const std::map<std::string, V3::Building>& buildings,
-	 const std::map<std::string, V3::Law>& lawsMap) const // TODO(Gawquon): For Subsistence buildings, use the laws version.
+	 const std::map<std::string, V3::Building>& buildings) const
 {
 	// PMs are not necessarily unique to a building, but PMGroups are.
 	// Additionally, no PM will appear twice in the same building.
 	std::map<std::string, std::tuple<int, double>> expectedPMs; // PMGroup -> (expectedPM#,%)
 
+	// Configuration based PMs, checked against available tech.
 	for (const auto& [buildingName, building]: buildings)
 	{
 		if (const auto& rulesIter = buildingToRules.find(buildingName); rulesIter != buildingToRules.end())
@@ -244,7 +264,7 @@ std::map<std::string, std::tuple<int, double>> mappers::ProductionMethodMapper::
 					{
 						if (const auto& rule = rules[ruleIndex]; rule.pm == PM)
 						{
-							expectedPMs.emplace(PMGroup, std::make_tuple(walkPMs(groupPMs, country, PM, PMs), rule.percent));
+							expectedPMs.emplace(PMGroup, std::make_tuple(walkPMsTechbound(groupPMs, country, PM, PMs), rule.percent));
 							flag = true;
 							break;
 						}
@@ -253,6 +273,20 @@ std::map<std::string, std::tuple<int, double>> mappers::ProductionMethodMapper::
 				if (!flag)
 					expectedPMs.emplace(PMGroup, std::tuple{0, 1.0});
 			}
+		}
+	}
+
+	// Law based PMs (Subsistence & Clergy)
+	for (const auto& [buildingName, building]: buildings)
+	{
+		// TODO(Gawquon): Need a better and/or agnostic method for selecting which buildings to filter out.
+		if (buildingName.find("subsistence") != std::string::npos)
+			continue;
+
+		for (const auto& PMGroup: building.getPMGroups())
+		{
+			const auto& groupPMs = PMGroups.at(PMGroup).getPMs();
+			expectedPMs.emplace(PMGroup, std::make_tuple(walkPMsLawbound(groupPMs, country, PMs), 1));
 		}
 	}
 	return expectedPMs;

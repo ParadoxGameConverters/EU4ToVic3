@@ -235,10 +235,19 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 	{
 		const auto& sectors = country->getProcessedData().industrySectors;
 		auto subStatesByBudget = prepareSubStatesByBudget(country, lawsMap);
-		const auto& estimatedPMs = PMMapper.estimatePMs(*country, PMs, PMGroups, buildings, lawsMap);
+		const auto& estimatedPMs = PMMapper.estimatePMs(*country, PMs, PMGroups, buildings);
 		const auto& estimatedOwnershipFracs = estimateInvestorBuildings(*country);
 		market.resetMarket();
-		market.loadPeasants(*country, defines.getWorkingAdultRatioBase(), lawsMap, PMGroups, PMs, popTypeLoader.getPopTypes(), buildings);
+		market.loadPeasants(*country,
+			 defines.getWorkingAdultRatioBase(),
+			 lawsMap,
+			 estimatedPMs,
+			 PMs,
+			 PMGroups,
+			 popTypeLoader.getPopTypes(),
+			 buildings,
+			 buildingGroups,
+			 stateTraits);
 		market.loadCultures(country->getCultureBreakdown());
 
 		// Until every substate is unable to build anything
@@ -757,7 +766,7 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 	// Track Demand
 	market.integrateBuilding(*building,
 		 p,
-		 0.25,
+		 0.25, // TODO(Gawquon): Load Defines
 		 estimatedPMs,
 		 PMGroups,
 		 PMs,

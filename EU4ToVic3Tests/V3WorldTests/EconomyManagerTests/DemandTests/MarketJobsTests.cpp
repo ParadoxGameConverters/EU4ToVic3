@@ -104,7 +104,7 @@ TEST(V3World_MarketJobsTests, CreateJobsTakesFromUnemployedFirst)
 	subState->addPop({"", "", "", 10000});
 
 	V3::MarketJobs marketJobs({{"aristocrats", 10}, {"laborers", 90}});
-	std::map<std::string, int> subsistenceEmployment{{"peasants", 90}, {"farmers", 10}};
+	std::map<std::string, double> subsistenceEmployment{{"peasants", 90}, {"farmers", 10}};
 	marketJobs.createSubsistence(subsistenceEmployment, .25, 0, 5, getPopTypes(), subState);
 
 	const double delta = 0.0000001;
@@ -133,7 +133,7 @@ TEST(V3World_MarketJobsTests, CreateJobsTakesFromPeasantsAfterUnemployed)
 	subState->addPop({"", "", "", 10000});
 
 	V3::MarketJobs marketJobs({{"aristocrats", 10}, {"laborers", 90}});
-	std::map<std::string, int> subsistenceEmployment{{"peasants", 90}, {"farmers", 10}};
+	std::map<std::string, double> subsistenceEmployment{{"peasants", 90}, {"farmers", 10}};
 	marketJobs.createSubsistence(subsistenceEmployment, .25, 0, 10, getPopTypes(), subState);
 
 	const double delta = 0.001;
@@ -162,7 +162,7 @@ TEST(V3World_MarketJobsTests, CreateJobsTakesFromPeasantsOnlyWhenNoUnemployed)
 	subState->addPop({"", "", "", 10000});
 
 	V3::MarketJobs marketJobs({{"aristocrats", 10}, {"laborers", 90}});
-	std::map<std::string, int> subsistenceEmployment{{"peasants", 90}, {"farmers", 10}};
+	std::map<std::string, double> subsistenceEmployment{{"peasants", 90}, {"farmers", 10}};
 	marketJobs.createSubsistence(subsistenceEmployment, .25, 0, 20, getPopTypes(), subState);
 
 	const double delta = 0.001;
@@ -191,7 +191,7 @@ TEST(V3World_MarketJobsTests, CreateJobsEmpoweredWomen)
 	subState->addPop({"", "", "", 5000});
 
 	V3::MarketJobs marketJobs({{"aristocrats", 10}, {"laborers", 90}});
-	std::map<std::string, int> subsistenceEmployment{{"peasants", 90}, {"farmers", 10}};
+	std::map<std::string, double> subsistenceEmployment{{"peasants", 90}, {"farmers", 10}};
 	marketJobs.createSubsistence(subsistenceEmployment, .25, 0.05, 5, getPopTypes(), subState);
 
 	const double delta = 0.001;
@@ -221,7 +221,7 @@ TEST(V3World_MarketJobsTests, CreateJobsAddsAdditionalOwnershipJobs)
 	subState->addPop({"", "", "", 10000});
 
 	V3::MarketJobs marketJobs({{"aristocrats", 10}, {"laborers", 90}});
-	std::map<std::string, int> subsistenceEmployment{{"peasants", 90}, {"farmers", 10}};
+	std::map<std::string, double> subsistenceEmployment{{"peasants", 90}, {"farmers", 10}};
 	marketJobs.createSubsistence(subsistenceEmployment, .25, 0, 10, getPopTypes(), subState);
 
 	const double delta = 0.001;
