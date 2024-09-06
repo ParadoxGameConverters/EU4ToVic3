@@ -280,7 +280,7 @@ std::map<std::string, std::tuple<int, double>> mappers::ProductionMethodMapper::
 	for (const auto& [buildingName, building]: buildings)
 	{
 		// TODO(Gawquon): Need a better and/or agnostic method for selecting which buildings to filter out.
-		if (buildingName.find("subsistence") != std::string::npos)
+		if (buildingName.find("subsistence") == std::string::npos)
 			continue;
 
 		for (const auto& PMGroup: building.getPMGroups())
