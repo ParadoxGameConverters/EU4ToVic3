@@ -257,6 +257,10 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 
 		// Initialize hard-coded buildings.
 		// TODO(Gawquon): Have hard-coded buildings account for market effects.
+		if (country->getTag() == "USA")
+		{
+			market.logDebugMarket(*country);
+		}
 
 		// Until no substate can build.
 		while (!subStatesByBudget.empty())

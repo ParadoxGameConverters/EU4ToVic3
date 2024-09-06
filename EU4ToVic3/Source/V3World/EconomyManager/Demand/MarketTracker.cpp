@@ -154,14 +154,14 @@ std::stringstream V3::MarketTracker::breakdownAsTable(const std::map<std::string
 		percentLength = std::max(percentLength, static_cast<int>(std::to_string(amt).length()));
 	}
 
-	// out << std::setprecision(3);
+	out << std::setprecision(3);
 	out << std::endl;
 	out << std::setfill('-') << std::setw(nameLength + 2) << "" << std::setw(percentLength + 2) << "" << std::endl;
 	out << std::setfill(' ');
 
 	for (const auto& pair: breakdown)
 	{
-		out << std::left << std::setw(nameLength + 2) << pair.first << std::setw(percentLength + 2) << pair.second * 100 << "%" << std::endl;
+		out << std::left << std::setw(nameLength + 2) << pair.first << std::setw(percentLength + 2) << pair.second * 16530000 << std::endl;
 	}
 	return out;
 }
@@ -189,7 +189,7 @@ void V3::MarketTracker::updateMarketGoods(const double level,
 		{
 			effectiveLevelsAdded = p * (throughputMod + 1) + (eosCap * level + 2 * level * p - std::pow(level, 2) - std::pow(p, 2)) / 100.0;
 		}
-		market.sell(good, effectiveLevelsAdded * amount);
+		market.buyForBuilding(good, effectiveLevelsAdded * amount);
 	}
 
 	for (const auto& [good, amount]: buildingResources.getOutputs())
@@ -219,7 +219,7 @@ void V3::MarketTracker::updateMarketGoods(const double level,
 		{
 			effectiveLevelsAdded = p * (throughputMod + outputMod + 1) + (eosCap * level + 2 * level * p - std::pow(level, 2) - std::pow(p, 2)) / 100.0;
 		}
-		market.buyForBuilding(good, effectiveLevelsAdded * amount);
+		market.sell(good, effectiveLevelsAdded * amount);
 	}
 }
 

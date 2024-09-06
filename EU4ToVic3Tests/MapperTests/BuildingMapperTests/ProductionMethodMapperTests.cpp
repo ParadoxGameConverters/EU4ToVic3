@@ -227,3 +227,5 @@ TEST(Mappers_ProductionMethodMapperTests, EstimatesWalkPMList)
 	EXPECT_THAT(midPMEstimates, testing::Contains(testing::Pair("pmg_base_building_logging_camp", std::make_tuple(1, 1.0))));
 	EXPECT_THAT(highPMEstimates, testing::Contains(testing::Pair("pmg_base_building_logging_camp", std::make_tuple(1, 1.0))));
 }
+
+// TODO(Gawquon): test law method

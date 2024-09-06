@@ -1112,9 +1112,9 @@ std::map<std::string, double> V3::Country::getJobBreakdown() const
 			jobBreakdown[job] += amount;
 		}
 	}
-	for (auto amount: jobBreakdown | std::views::values)
+	for (auto [job, amount]: jobBreakdown)
 	{
-		amount /= getPopCount();
+		jobBreakdown[job] = amount / getPopCount();
 	}
 
 	return jobBreakdown;

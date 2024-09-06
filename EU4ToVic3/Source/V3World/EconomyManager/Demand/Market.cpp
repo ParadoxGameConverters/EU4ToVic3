@@ -2,6 +2,7 @@
 
 #include <iomanip>
 #include <numeric>
+#include <queue>
 #include <ranges>
 
 V3::Market::Market(const std::vector<std::string>& possibleGoods)
@@ -427,19 +428,26 @@ std::stringstream V3::Market::marketAsTable() const
 		amtLength = std::max(amtLength, static_cast<int>(std::to_string(amt).length()));
 	}
 
-	// out << std::setprecision(3);
+	out << std::setprecision(3);
 	out << std::endl;
-	out << std::left << std::setw(goodLength + 2) << "Good" << std::setw(amtLength + 2) << "Balance" << std::endl;
+	out << std::left << std::setw(goodLength + 2) << "Good" << std::setw(amtLength + 2) << "Percent" << std::endl;
 	out << std::setfill('-') << std::setw(goodLength + 2) << "" << std::setw(amtLength + 2) << "" << std::endl;
 	out << std::setfill(' ');
 
-	for (const auto& pair: balance)
+	std::vector<std::pair<std::string, double>> balanceVector = {balance.begin(), balance.end()};
+
+	std::ranges::sort(balanceVector, [=](const std::pair<std::string, double>& lhs, const std::pair<std::string, double>& rhs) {
+		return lhs.second < rhs.second;
+	});
+
+	for (const auto& pair: balanceVector)
 	{
-		if (std::abs(pair.second) < 1 || std::abs(pair.second) > 100000)
+		if (std::abs(pair.second) < 1)
 			continue;
-		out << std::left << std::setw(goodLength + 2) << pair.first << std::setw(amtLength + 2) << pair.second << std::endl;
-		// const double pricePercent = 0.75 * std::max(-1.0, std::min(1.0, pair.second / 100));
-		// out << std::left << std::setw(goodLength + 2) << pair.first << std::setw(amtLength + 2) << pricePercent * 100 << "%" << std::endl;
+
+		// out << std::left << std::setw(goodLength + 2) << pair.first << std::setw(amtLength + 2) << pair.second << std::endl;
+		const double pricePercent = -0.75 * std::max(-1.0, std::min(1.0, pair.second / 100));
+		out << std::left << std::setw(goodLength + 2) << pair.first << std::setw(amtLength + 2) << pricePercent * 100 << "%" << std::endl;
 	}
 	return out;
 }
