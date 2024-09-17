@@ -10,7 +10,10 @@
 #include "EconomyManager/Building/ProductionMethods/ProductionMethodGroup.h"
 #include "Loaders/BuildingLoader/OwnershipLoader/OwnershipLoader.h"
 #include "Loaders/DefinesLoader/EconDefinesLoader.h"
+#include "Loaders/DefinesLoader/Vic3DefinesLoader.h"
+#include "Loaders/DemandLoader/DemandLoader.h"
 #include "Loaders/NationalBudgetLoader/NationalBudgetLoader.h"
+#include "Loaders/PopLoader/PopTypeLoader.h"
 #include "Loaders/TechLoader/TechLoader.h"
 #include "PoliticalManager/PoliticalManager.h"
 
@@ -26,22 +29,23 @@ class Sector;
  * Primarily handles buildings
  * 1. Load in centralized countries.
  * 2. Read in Mappers & Configs.
- * 3. Bureaucracy! Have to handle it separate for game balance. Hand out generation that ~ matches need.
- * 4. For each centralized country get a CP budget based on fronter option.
- * 5. For each substate in a centralized country get a CP budget based on fronter option and terrain/state modifiers.
- * 6. Figure out the "national budget" of each country using the sector blueprints in NationalBudgetLoader.
- * 6b. NationalBudget is a list of sectors like 30% Farming, 25% Light Industry, etc.
- * 6c. Each Sector has a list of buildings that fall under it.
- * 7. Each Substate scores buildings based on EU4 buildings, terrain, state modifiers, and other factors.
- * 7b. Only buildings that are valid (resource/tech-wise) are scored.
- * 8. A negotiation between the states and their country about what to build.
- * 8b. The state w/ the most CP asks to build it's highest scoring building.
- * 8c. The country says that building is in sector A and as a country we have X CP to spend in that sector.
- * 8d. The state then builds as many buildings of that kind as it can, limited by capacity, packet size and sector CP.
- * 8e. A bunch of small details that make this flow until all CP is assigned. Repeat for each country.
+ * 3. Prepare estimates
+ * 4. Bureaucracy! Have to handle it separate for game balance. Hand out generation that ~ matches need.
+ * 5. For each centralized country get a CP budget based on fronter option.
+ * 6. For each substate in a centralized country get a CP budget based on fronter option and terrain/state modifiers.
+ * 7. Figure out the "national budget" of each country using the sector blueprints in NationalBudgetLoader.
+ * 7b. NationalBudget is a list of sectors like 30% Farming, 25% Light Industry, etc.
+ * 7c. Each Sector has a list of buildings that fall under it.
+ * 8. Each Substate scores buildings based on EU4 buildings, terrain, state modifiers, and other factors.
+ * 8b. Only buildings that are valid (resource/tech-wise) are scored.
+ * 9. A negotiation between the states and their country about what to build.
+ * 9b. The state w/ the most CP asks to build it's highest scoring building.
+ * 9c. The country says that building is in sector A and as a country we have X CP to spend in that sector.
+ * 9d. The state then builds as many buildings of that kind as it can, limited by capacity, packet size and sector CP.
+ * 9e. A bunch of small details that make this flow until all CP is assigned. Repeat for each country.
  *
- * 9. Now that buildings are built, we assign investors/owners using ownership sector blueprints
- * 10. Set Production Methods from a config file.
+ * 10. Now that buildings are built, we assign investors/owners using ownership sector blueprints
+ * 11. Set Production Methods from a config file.
  *
  * This *should* give nice diverse, sensible, game-balanced economies while maintaining a reasonable configuration footprint.
  */
@@ -52,7 +56,7 @@ class EconomyManager
 	void loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries);
 	void loadMappersAndConfigs(const commonItems::ModFilesystem& modFS, const std::string& filePath = "");
 
-	void establishBureaucracy(const PoliticalManager& politicalManager) const;
+	void establishBureaucracy(const PoliticalManager& politicalManager, const Vic3DefinesLoader& defines) const;
 	void hardcodePorts() const;
 
 	void assignCountryCPBudgets(Configuration::ECONOMY economyType,
@@ -110,7 +114,7 @@ class EconomyManager
 		 const std::vector<std::shared_ptr<SubState>>& subStates) const;
 	[[nodiscard]] int getClusterPacket(int baseCost, const std::vector<std::shared_ptr<SubState>>& subStates) const;
 
-	[[nodiscard]] std::map<std::string, int> apportionInvestors(const int levels,
+	[[nodiscard]] std::map<std::string, int> apportionInvestors(int levels,
 		 const std::map<std::string, double>& investorWeights,
 		 std::map<std::string, double>& investorIOUs) const;
 
@@ -123,6 +127,8 @@ class EconomyManager
 	void loadNationalBudgets(const std::string& filePath = "");
 	void loadOwnerships(const std::string& filePath = "");
 	void loadTechMap(const commonItems::ModFilesystem& modFS);
+	void loadDemand(const commonItems::ModFilesystem& modFS);
+	void loadPopTypes(const commonItems::ModFilesystem& modFS);
 
 
 	std::vector<std::shared_ptr<Country>> centralizedCountries;
@@ -143,6 +149,9 @@ class EconomyManager
 	BuildingGroups buildingGroups;
 	std::map<std::string, ProductionMethod> PMs;
 	std::map<std::string, ProductionMethodGroup> PMGroups;
+
+	DemandLoader demand;
+	PopTypeLoader popTypeLoader;
 };
 } // namespace V3
 

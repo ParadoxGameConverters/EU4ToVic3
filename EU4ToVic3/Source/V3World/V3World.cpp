@@ -14,6 +14,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	const auto dwFS = commonItems::ModFilesystem(V3Path, overrideMods);
 	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output/"});
 	const auto allFS = commonItems::ModFilesystem(V3Path, overrideMods);
+	overrideMods.emplace_back(Mod{"TO", "configurables/third_odyssey/"});
+	const auto toFS = commonItems::ModFilesystem(V3Path, overrideMods);
 	overrideMods.clear();
 	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output/"});
 	const auto blankModFS = commonItems::ModFilesystem(V3Path, overrideMods);
@@ -21,7 +23,16 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "45 %";
 	Log(LogLevel::Info) << "* Soaking up the shine *";
 	clayManager.loadAdjacencies("configurables/province_adjacencies.txt");
-	clayManager.initializeVanillaStates(dwFS);
+	if (configBlock.thirdOdyssey)
+	{
+		// We alter vanilla states for TO.
+		clayManager.initializeVanillaStates(toFS);
+	}
+	else
+	{
+		clayManager.initializeVanillaStates(dwFS);
+	}
+
 	clayManager.loadTerrainsIntoProvinces(dwFS);
 	clayManager.initializeSuperRegions(dwFS);
 	clayManager.loadStatesIntoSuperRegions();
@@ -29,6 +40,10 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	{
 		provinceMapper.loadProvinceMappings("configurables/vn_province_mappings.txt");
 		clayManager.loadVNColonialRules("configurables/vn_colonial.txt");
+	}
+	else if (configuration.configBlock.thirdOdyssey)
+	{
+		provinceMapper.loadProvinceMappings("configurables/third_odyssey_province_mappings.txt");
 	}
 	else
 	{
@@ -67,6 +82,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	cultureMapper.loadCultureDefinitions(allFS);
 	cultureMapper.loadTraitDefinitions(allFS);
 	economyManager.loadMappersAndConfigs(allFS);
+	definesLoader.loadDefines(allFS);
+
 
 	Log(LogLevel::Info) << "*** Hello Vicky 3, creating world. ***";
 	Log(LogLevel::Progress) << "46 %";
@@ -159,7 +176,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "59 %";
 	clayManager.squashAllSubStates(politicalManager);
 	Log(LogLevel::Progress) << "60 %";
-	clayManager.redistributeResourcesAndLandshares();
+	clayManager.redistributeResourcesAndLandshares(definesLoader.getSplitStatePrimeLandWeight());
 
 	Log(LogLevel::Progress) << "61 %";
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);
@@ -203,17 +220,17 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "71 %";
 	economyManager.loadCentralizedStates(politicalManager.getCountries());
 	Log(LogLevel::Progress) << "72 %";
-	economyManager.hardcodePorts();
+	economyManager.establishBureaucracy(politicalManager, definesLoader);
 	Log(LogLevel::Progress) << "73 %";
-	economyManager.assignCountryCPBudgets(configBlock.economy, configBlock.startDate, datingData, politicalManager, configBlock.vn);
+	economyManager.hardcodePorts();
 	Log(LogLevel::Progress) << "74 %";
+	economyManager.assignCountryCPBudgets(configBlock.economy, configBlock.startDate, datingData, politicalManager, configBlock.vn);
 	economyManager.balanceNationalBudgets();
 	Log(LogLevel::Progress) << "75 %";
 	economyManager.assignSubStateCPBudgets(configBlock.economy);
 	Log(LogLevel::Progress) << "76 %";
 	economyManager.buildBuildings(politicalManager.getLawsMap());
 	economyManager.investCapital(politicalManager.getCountries());
-	economyManager.establishBureaucracy(politicalManager);
 	economyManager.setPMs();
 
 	Log(LogLevel::Info) << "*** Goodbye, Vicky 3, and godspeed. ***";

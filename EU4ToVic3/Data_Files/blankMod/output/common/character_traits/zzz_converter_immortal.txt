@@ -1,0 +1,26 @@
+﻿converter_immortal = {
+	type = condition
+	texture = "gfx/interface/icons/character_trait_icons/charismatic.dds"
+
+	character_modifier = {
+		character_health_add = 1
+		character_popularity_add = 25
+	}
+
+	#command_modifier = {
+	#	character_command_limit_mult = 0.1
+	#}
+
+	country_modifier = {
+		country_legitimacy_base_add = 20
+		country_authority_add = 100
+	}
+
+	interest_group_modifier = {
+		interest_group_pol_str_mult = 0.1
+	}
+
+	possible = {
+		always = no # reserved for events
+	}
+}

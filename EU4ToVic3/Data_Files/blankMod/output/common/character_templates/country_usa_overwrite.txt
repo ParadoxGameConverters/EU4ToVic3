@@ -1,0 +1,2052 @@
+﻿### USA character template file ###
+# USA - United States of America
+
+# United States - USA
+usa_lincoln_character_template = {
+	first_name = Abraham
+	last_name = Lincoln
+	historical = yes
+	#culture = global_var:midwest_yankee_culture
+	culture = cu:yankee
+	female = no
+	religion = protestant
+	ideology = ideology_abolitionist
+	interest_group = ig_petty_bourgeoisie
+	birth_date = 1809.2.12
+	dna = dna_abraham_lincoln
+	traits = {
+		experienced_political_operator
+		inspirational_orator
+		tactful
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_lincoln
+				}
+			}
+			uses_midwest_yankee_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1844.2.12
+		latest_usage_date = 1890.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_mw_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_lincoln
+		}
+	}
+}
+fem_usa_lincoln_character_template = {
+	first_name = Sarah
+	last_name = Lincoln
+	historical = yes
+	#culture = global_var:midwest_yankee_culture
+	culture = cu:yankee
+	female = yes
+	religion = protestant
+	ideology = ideology_abolitionist
+	interest_group = ig_petty_bourgeoisie
+	birth_date = 1809.2.12
+	dna = dna_abraham_lincoln
+	traits = {
+		experienced_political_operator
+		inspirational_orator
+		tactful
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_lincoln
+				}
+			}
+			uses_midwest_yankee_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1844.2.12
+		latest_usage_date = 1890.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_mw_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_lincoln
+		}
+	}
+}
+usa_roosevelt_character_template = {
+	first_name = Theodore_2
+	last_name = Roosevelt
+	historical = yes
+	#culture = global_var:new_england_yankee_culture
+	culture = cu:yankee
+	female = no
+	religion = protestant
+	ideology = ideology_reformer
+	interest_group = ig_industrialists
+	birth_date = 1858.8.28
+    dna = dna_roosevelt
+	traits = {
+		celebrity_commander
+		explorer
+		brave
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_roosevelt
+				}
+			}
+			uses_new_england_yankee_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_industrialists
+				is_interest_group_type = ig_rural_folk
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1882.1.1
+		latest_usage_date = 1919.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_ne_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_roosevelt
+		}
+	}
+}
+fem_usa_roosevelt_character_template = {
+	first_name = Theodora
+	last_name = Roosevelt
+	historical = yes
+	#culture = global_var:new_england_yankee_culture
+	culture = cu:yankee
+	female = yes
+	religion = protestant
+	ideology = ideology_reformer
+	interest_group = ig_industrialists
+	birth_date = 1858.8.28
+    dna = dna_roosevelt
+	traits = {
+		celebrity_commander
+		explorer
+		brave
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_roosevelt
+				}
+			}
+			uses_new_england_yankee_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_industrialists
+				is_interest_group_type = ig_rural_folk
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1882.1.1
+		latest_usage_date = 1919.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_ne_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_roosevelt
+		}
+	}
+}
+usa_rockefeller_character_template = {
+    first_name = John
+    last_name = Rockefeller
+    historical = yes
+    #culture = global_var:new_england_yankee_culture
+	culture = cu:yankee
+    female = no
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_industrialists
+    birth_date = 1839.6.8
+    traits = {
+        ambitious
+        persistent
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_rockefeller
+				}
+			}
+			uses_new_england_yankee_characters = yes
+            has_company = company_type:company_standard_oil
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1875.1.1
+        latest_usage_date = 1915.1.1
+        chance = 25
+    }   
+	on_created = {
+		converter_ne_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_rockefeller
+		}
+	}
+}
+fem_usa_rockefeller_character_template = {
+    first_name = Jane
+    last_name = Rockefeller
+    historical = yes
+    #culture = global_var:new_england_yankee_culture
+	culture = cu:yankee
+    female = yes
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_industrialists
+    birth_date = 1839.6.8
+    traits = {
+        ambitious
+        persistent
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_rockefeller
+				}
+			}
+			uses_new_england_yankee_characters = yes
+            has_company = company_type:company_standard_oil
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1875.1.1
+        latest_usage_date = 1915.1.1
+        chance = 25
+    }   
+	on_created = {
+		converter_ne_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_rockefeller
+		}
+	}
+}
+usa_carnegie_character_template = {
+    first_name = Andrew
+    last_name = Carnegie
+    historical = yes
+    culture = global_var:sct_culture
+    female = no
+    religion = protestant
+    ideology = ideology_market_liberal
+    interest_group = ig_industrialists
+    birth_date = 1835.11.25
+    traits = {
+        ambitious
+        literary
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_carnegie
+				}
+			}
+			uses_new_england_yankee_characters = yes
+			global_var:sct_culture = { NOT = { culture_is_discriminated_in = prev } }
+            has_company = company_type:company_us_steel
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1870.1.1
+        latest_usage_date = 1908.1.1
+        chance = 25
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_carnegie
+		}
+	}
+}
+fem_usa_carnegie_character_template = {
+    first_name = Andrea
+    last_name = Carnegie
+    historical = yes
+    culture = global_var:sct_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_market_liberal
+    interest_group = ig_industrialists
+    birth_date = 1835.11.25
+    traits = {
+        ambitious
+        literary
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_carnegie
+				}
+			}
+			uses_new_england_yankee_characters = yes
+			global_var:sct_culture = { NOT = { culture_is_discriminated_in = prev } }
+            has_company = company_type:company_us_steel
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1870.1.1
+        latest_usage_date = 1908.1.1
+        chance = 25
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_carnegie
+		}
+	}
+}
+usa_jp_morgan_character_template = {
+    first_name = John_Pierpont
+    last_name = Morgan
+    historical = yes
+    #culture = global_var:new_england_yankee_culture
+	culture = cu:yankee
+    female = no
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_industrialists
+    birth_date = 1835.11.25
+    traits = {
+        imposing
+        pious
+        sickly
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jp_morgan
+				}
+			}
+			uses_new_england_yankee_characters = yes
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1865.1.1
+        latest_usage_date = 1913.1.1
+        chance = 25
+    }
+	on_created = {
+		converter_ne_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jp_morgan
+		}
+	}   
+}
+fem_usa_jp_morgan_character_template = {
+    first_name = Jane_Pierpont
+    last_name = Morgan
+    historical = yes
+    #culture = global_var:new_england_yankee_culture
+	culture = cu:yankee
+    female = yes
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_industrialists
+    birth_date = 1835.11.25
+    traits = {
+        imposing
+        pious
+        sickly
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jp_morgan
+				}
+			}
+			uses_new_england_yankee_characters = yes
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1865.1.1
+        latest_usage_date = 1913.1.1
+        chance = 25
+    }
+	on_created = {
+		converter_ne_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jp_morgan
+		}
+	}   
+}
+usa_thomas_edison_character_template = {
+    first_name = Thomas
+    last_name = Edison
+    historical = yes
+    #culture = global_var:midwest_yankee_culture
+	culture = cu:yankee
+    female = no
+    religion = atheist
+    ideology = ideology_pacifist
+    interest_group = ig_intelligentsia
+    birth_date = 1847.2.11
+    traits = {
+        ambitious
+        engineer
+        imperious
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_edison
+				}
+			}
+			uses_midwest_yankee_characters = yes
+            has_company = company_type:company_general_electric
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1876.1.1
+        latest_usage_date = 1920.1.1
+        chance = 25
+    }   
+    on_created = {
+		converter_mw_yankee_template_effect = yes
+        if = {
+            limit = {
+                owner = {
+                    has_technology_researched = feminism
+                    NOT = {
+                        has_law = law_type:law_womens_suffrage
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_feminist
+        }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_edison
+		}
+    }
+}
+fem_usa_thomas_edison_character_template = {
+    first_name = Tamzen
+    last_name = Edison
+    historical = yes
+    #culture = global_var:midwest_yankee_culture
+	culture = cu:yankee
+    female = yes
+    religion = atheist
+    ideology = ideology_pacifist
+    interest_group = ig_intelligentsia
+    birth_date = 1847.2.11
+    traits = {
+        ambitious
+        engineer
+        imperious
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_edison
+				}
+			}
+			uses_midwest_yankee_characters = yes
+            has_company = company_type:company_general_electric
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1876.1.1
+        latest_usage_date = 1920.1.1
+        chance = 25
+    }   
+    on_created = {
+		converter_mw_yankee_template_effect = yes
+        if = {
+            limit = {
+                owner = {
+                    has_technology_researched = feminism
+                    NOT = {
+                        has_law = law_type:law_womens_suffrage
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_feminist
+        }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_edison
+		}
+    }
+}
+
+uom_mkc = {
+    first_name = "Michael"
+    last_name = "Kundak"
+    historical = yes
+    #culture = global_var:midwest_yankee_culture
+	culture = cu:yankee
+    female = no
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_rural_folk
+    birth_date = 1890.7.14
+    traits = {
+    	charistmatic
+        cautious
+        erudite
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_uom_mkc
+				}
+			}
+            uses_midwest_yankee_characters = yes
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_rural_folk
+        }   
+        earliest_usage_date = 1919.8.19
+        latest_usage_date = 1936.1.1
+        chance = 25
+    }   
+    on_created = {
+		converter_mw_yankee_template_effect = yes
+        if = {
+            limit = {
+                owner = {
+                    NOT = {
+                        has_law = law_type:law_slavery_banned
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_abolitionist
+        }
+        else_if = {
+            limit = {
+                owner = {
+                	has_technology_researched = socialism
+                	OR = {
+	                    has_law = law_type:law_no_workers_rights
+	                    NOT = { has_law = law_type:law_universal_suffrage }
+	                }
+                }
+            }
+            set_ideology = ideology:ideology_social_democrat
+        }
+        else = {
+            set_ideology = ideology:ideology_moderate
+        }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_uom_mkc
+		}
+    }
+}
+fem_uom_mkc = {
+    first_name = "Michaela"
+    last_name = "Kundak"
+    historical = yes
+    #culture = global_var:midwest_yankee_culture
+	culture = cu:yankee
+    female = yes
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_rural_folk
+    birth_date = 1890.7.14
+    traits = {
+    	charistmatic
+        cautious
+        erudite
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_uom_mkc
+				}
+			}
+            uses_midwest_yankee_characters = yes
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_rural_folk
+        }   
+        earliest_usage_date = 1919.8.19
+        latest_usage_date = 1936.1.1
+        chance = 25
+    }   
+    on_created = {
+		converter_mw_yankee_template_effect = yes
+        if = {
+            limit = {
+                owner = {
+                    NOT = {
+                        has_law = law_type:law_slavery_banned
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_abolitionist
+        }
+        else_if = {
+            limit = {
+                owner = {
+                	has_technology_researched = socialism
+                	OR = {
+	                    has_law = law_type:law_no_workers_rights
+	                    NOT = { has_law = law_type:law_universal_suffrage }
+	                }
+                }
+            }
+            set_ideology = ideology:ideology_social_democrat
+        }
+        else = {
+            set_ideology = ideology:ideology_moderate
+        }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_uom_mkc
+		}
+    }
+}
+
+usa_mark_twain_character_template = { #Mark Twain
+    first_name = Samuel
+    last_name = Clemens
+    historical = yes
+    #culture = global_var:dixie_culture
+	culture = cu:dixie
+    female = no
+    religion = protestant
+    ideology = ideology_jingoist
+    interest_group = ig_intelligentsia
+    birth_date = 1835.11.30
+    traits = {
+        literary
+        erudite
+        reckless
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mark_twain
+				}
+			}
+            uses_dixie_characters = yes
+            any_scope_state = {
+                state_region = s:STATE_MISSOURI
+            }
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1865.11.18
+        latest_usage_date = 1910.1.1
+        chance = 25
+    }   
+    on_created = {
+        converter_dixie_template_effect = yes
+		if = {
+            limit = {
+                owner = {
+                    NOT = {
+                        has_law = law_type:law_slavery_banned
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_abolitionist
+        }
+        else_if = {
+            limit = {
+                owner = {
+                    any_country = {
+                        is_subject_of = prev
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_pacifist
+        }
+        else_if = {
+            limit = {
+                owner = {
+                    has_technology_researched = feminism
+                    NOT = {
+                        has_law = law_type:law_womens_suffrage
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_feminist
+        }
+        else = {
+            set_ideology = ideology:ideology_jingoist
+        }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_mark_twain
+		}
+    }
+}
+fem_usa_mark_twain_character_template = { #Mark Twain
+    first_name = Hannah
+    last_name = Clemens
+    historical = yes
+    #culture = global_var:dixie_culture
+	culture = cu:dixie
+    female = yes
+    religion = protestant
+    ideology = ideology_jingoist
+    interest_group = ig_intelligentsia
+    birth_date = 1835.11.30
+    traits = {
+        literary
+        erudite
+        reckless
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mark_twain
+				}
+			}
+            uses_dixie_characters = yes
+            any_scope_state = {
+                state_region = s:STATE_MISSOURI
+            }
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1865.11.18
+        latest_usage_date = 1910.1.1
+        chance = 25
+    }   
+    on_created = {
+        converter_dixie_template_effect = yes
+        if = {
+            limit = {
+                owner = {
+                    NOT = {
+                        has_law = law_type:law_slavery_banned
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_abolitionist
+        }
+        else_if = {
+            limit = {
+                owner = {
+                    any_country = {
+                        is_subject_of = prev
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_pacifist
+        }
+        else_if = {
+            limit = {
+                owner = {
+                    has_technology_researched = feminism
+                    NOT = {
+                        has_law = law_type:law_womens_suffrage
+                    }
+                }
+            }
+            set_ideology = ideology:ideology_feminist
+        }
+        else = {
+            set_ideology = ideology:ideology_jingoist
+        }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_mark_twain
+		}
+    }
+}
+
+## Commanders ##
+
+usa_general_jesup = {
+	first_name = Thomas
+	last_name = Jesup
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie
+	female = no
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1788.12.16
+	dna = dna_thomas_jesup
+	traits = {
+		meticulous
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jesup
+				}
+			}
+			uses_dixie_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1860.1.1	
+		chance = 75
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jesup
+		}
+	}
+}
+fem_usa_general_jesup = {
+	first_name = Tamzen
+	last_name = Jesup
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie
+	female = yes
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1788.12.16
+	dna = dna_thomas_jesup
+	traits = {
+		meticulous
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jesup
+				}
+			}
+			uses_dixie_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1860.1.1	
+		chance = 75
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jesup
+		}
+	}
+}
+usa_admiral_shubrick = {
+	first_name = William
+	last_name = Shubrick
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie # Stayed loyal to the union during civil war, but from S.Car
+	female = no
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1790.10.31
+	dna = dna_william_shubrick
+	traits = {
+		experienced_naval_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_shubrick
+				}
+			}
+			uses_dixie_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1862.1.1	
+		chance = 75
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_shubrick
+		}
+	}
+}
+fem_usa_admiral_shubrick = {
+	first_name = Willa
+	last_name = Shubrick
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie # Stayed loyal to the union during civil war, but from S.Car
+	female = yes
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1790.10.31
+	dna = dna_william_shubrick
+	traits = {
+		experienced_naval_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_shubrick
+				}
+			}
+			uses_dixie_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1862.1.1	
+		chance = 75
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_shubrick
+		}
+	}
+}
+usa_admiral_dewey = {
+	first_name = George
+	last_name = Dewey
+	historical = yes
+	#culture = global_var:new_england_yankee_culture
+	culture = cu:yankee
+	female = no
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1837.12.26
+	dna = dna_george_dewey
+	traits = {
+		experienced_naval_commander
+		persistent
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_dewey
+				}
+			}
+			uses_new_england_yankee_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1861.1.1
+		latest_usage_date = 1903.1.1	
+		chance = 50
+	}
+	on_created = {
+		converter_ne_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_dewey
+		}
+	}
+}
+fem_usa_admiral_dewey = {
+	first_name = Gina
+	last_name = Dewey
+	historical = yes
+	#culture = global_var:new_england_yankee_culture
+	culture = cu:yankee
+	female = yes
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1837.12.26
+	dna = dna_george_dewey
+	traits = {
+		experienced_naval_commander
+		persistent
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_dewey
+				}
+			}
+			uses_new_england_yankee_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1861.1.1
+		latest_usage_date = 1903.1.1	
+		chance = 50
+	}
+	on_created = {
+		converter_ne_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_dewey
+		}
+	}
+}
+usa_admiral_farragut = {
+	first_name = David
+	last_name = Farragut
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie # NB Southern Unionist, regarded seccessionists as traitors
+	female = no
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1801.7.5
+	dna = dna_david_farragut
+	traits = {
+		experienced_naval_commander
+		direct
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_farragut
+				}
+			}
+			uses_dixie_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1860.1.1	
+		chance = 50
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_farragut
+		}
+	}
+}
+fem_usa_admiral_farragut = {
+	first_name = Bethsabee
+	last_name = Farragut
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie # NB Southern Unionist, regarded seccessionists as traitors
+	female = yes
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1801.7.5
+	dna = dna_david_farragut
+	traits = {
+		experienced_naval_commander
+		direct
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_farragut
+				}
+			}
+			uses_dixie_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1860.1.1	
+		chance = 50
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_farragut
+		}
+	}
+}
+usa_admiral_perry = {
+	first_name = Matthew
+	last_name = Perry
+	historical = yes
+	#culture = global_var:new_england_yankee_culture
+	culture = cu:yankee
+	female = no
+	religion = protestant
+	ideology = ideology_reformer
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1794.4.10
+	dna = dna_matthew_perry
+	traits = {
+		innovative
+		dockyard_master
+		explorer
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_perry
+				}
+			}
+			uses_new_england_yankee_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1855.1.1	
+		chance = 50
+	}
+	on_created = {
+		converter_ne_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_perry
+		}
+	}
+}
+fem_usa_admiral_perry = {
+	first_name = Iphigeneia
+	last_name = Perry
+	historical = yes
+	#culture = global_var:new_england_yankee_culture
+	culture = cu:yankee
+	female = yes
+	religion = protestant
+	ideology = ideology_reformer
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1794.4.10
+	dna = dna_matthew_perry
+	traits = {
+		innovative
+		dockyard_master
+		explorer
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_perry
+				}
+			}
+			uses_new_england_yankee_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1855.1.1	
+		chance = 50
+	}
+	on_created = {
+		converter_ne_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_perry
+		}
+	}
+}
+
+
+usa_admiral_buchanan = {
+	first_name = Franklin
+	last_name = Buchanan
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie
+	female = no
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1800.9.17
+	dna = dna_franklin_buchanan
+	traits = {
+		experienced_naval_commander
+		dockyard_master
+		innovative
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_buchanan
+				}
+			}
+			uses_dixie_traitor_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1841.1.1
+		latest_usage_date = 1860.1.1	
+		chance = 50
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_buchanan
+		}
+	}
+}
+fem_usa_admiral_buchanan = {
+	first_name = Frankie
+	last_name = Buchanan
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie
+	female = yes
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1800.9.17
+	dna = dna_franklin_buchanan
+	traits = {
+		experienced_naval_commander
+		dockyard_master
+		innovative
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_buchanan
+				}
+			}
+			uses_dixie_traitor_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1841.1.1
+		latest_usage_date = 1860.1.1	
+		chance = 50
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_buchanan
+		}
+	}
+}
+usa_general_lee = {
+	first_name = Robert_E
+	last_name = Lee
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie
+	female = no
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1807.1.19
+	dna = dna_robert_e_lee
+	traits = {
+		experienced_defensive_strategist
+		innovative
+		direct
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_robert_e_lee
+				}
+			}
+			uses_dixie_traitor_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 50
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_robert_e_lee
+		}
+	}
+}
+fem_usa_general_lee = {
+	first_name = Robynne_E
+	last_name = Lee
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie
+	female = yes
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1807.1.19
+	dna = dna_robert_e_lee
+	traits = {
+		experienced_defensive_strategist
+		innovative
+		direct
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_robert_e_lee
+				}
+			}
+			uses_dixie_traitor_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 50
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_robert_e_lee
+		}
+	}
+}
+usa_general_jackson = {
+	first_name = Thomas
+	last_name = Jackson
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie
+	female = no
+	religion = protestant
+	ideology = ideology_traditionalist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1824.1.21
+	dna = dna_stonewall_jackson
+	traits = {
+		surveyor
+		stalwart_defender
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_stonewall_jackson
+				}
+			}
+			uses_dixie_traitor_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 50
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_stonewall_jackson
+		}
+	}
+}
+fem_usa_general_jackson = {
+	first_name = Tamzen
+	last_name = Jackson
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie
+	female = yes
+	religion = protestant
+	ideology = ideology_traditionalist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1824.1.21
+	dna = dna_stonewall_jackson
+	traits = {
+		surveyor
+		stalwart_defender
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_stonewall_jackson
+				}
+			}
+			uses_dixie_traitor_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 50
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_stonewall_jackson
+		}
+	}
+}
+usa_general_longstreet = {
+	first_name = James
+	last_name = Longstreet
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie
+	female = no
+	religion = protestant
+	ideology = ideology_radical
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1821.1.8
+	dna = dna_james_longstreet
+	traits = {
+		experienced_offensive_planner
+		expert_defensive_strategist
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_longstreet
+				}
+			}
+			uses_dixie_traitor_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1874.1.1	
+		chance = 50
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_longstreet
+		}
+	}
+}
+fem_usa_general_longstreet = {
+	first_name = Lily
+	last_name = Longstreet
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie
+	female = yes
+	religion = protestant
+	ideology = ideology_radical
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1821.1.8
+	dna = dna_james_longstreet
+	traits = {
+		experienced_offensive_planner
+		expert_defensive_strategist
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_longstreet
+				}
+			}
+			uses_dixie_traitor_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1874.1.1	
+		chance = 50
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_longstreet
+		}
+	}
+}
+
+usa_general_sherman = {
+	first_name = William_Tecumseh
+	last_name = Sherman
+	historical = yes
+	#culture = global_var:midwest_yankee_culture
+	culture = cu:yankee
+	female = no
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_petty_bourgeoisie
+	birth_date = 1820.2.8
+	dna = dna_sherman
+	traits = {
+		expert_offensive_planner
+		resupply_commander
+		pillager
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_william_tecumseh_sherman
+				}
+			}
+			uses_midwest_yankee_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 50
+	}
+	on_created = {
+		converter_mw_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_william_tecumseh_sherman
+		}
+	}
+}
+fem_usa_general_sherman = {
+	first_name = Elma_Tecumapease
+	last_name = Sherman
+	historical = yes
+	#culture = global_var:midwest_yankee_culture
+	culture = cu:yankee
+	female = yes
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_petty_bourgeoisie
+	birth_date = 1820.2.8
+	dna = dna_sherman
+	traits = {
+		expert_offensive_planner
+		resupply_commander
+		pillager
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_william_tecumseh_sherman
+				}
+			}
+			uses_midwest_yankee_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 50
+	}
+	on_created = {
+		converter_mw_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_william_tecumseh_sherman
+		}
+	}
+}
+
+usa_general_chaffee = {
+	first_name = Adna
+	last_name = Chaffee
+	historical = yes
+	#culture = global_var:midwest_yankee_culture
+	culture = cu:yankee
+	female = no
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1842.4.14
+	dna = dna_chaffee
+	traits = {
+		innovative
+		basic_offensive_planner
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_chaffee
+				}
+			}
+			uses_midwest_yankee_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1882.1.1
+		latest_usage_date = 1906.1.1	
+		chance = 50
+	}
+	on_created = {
+		converter_mw_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_chaffee
+		}
+	}
+}
+fem_usa_general_chaffee = {
+	first_name = Annie
+	last_name = Chaffee
+	historical = yes
+	#culture = global_var:midwest_yankee_culture
+	culture = cu:yankee
+	female = yes
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1842.4.14
+	dna = dna_chaffee
+	traits = {
+		innovative
+		basic_offensive_planner
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_chaffee
+				}
+			}
+			uses_midwest_yankee_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1882.1.1
+		latest_usage_date = 1906.1.1	
+		chance = 50
+	}
+	on_created = {
+		converter_mw_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_chaffee
+		}
+	}
+}
+usa_general_grant = {
+	first_name = Ulysses
+	last_name = Grant
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie
+	female = no
+	religion = protestant
+	ideology = ideology_radical
+	commander_rank = default
+	interest_group = ig_petty_bourgeoisie
+	birth_date = 1822.1.21
+	dna = dna_ulysses_s_grant
+	traits = {
+		experienced_offensive_planner
+		persistent
+		alcoholic
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_us_grant
+				}
+			}
+			uses_dixie_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1874.1.1	
+		chance = 50
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_us_grant
+		}
+	}
+}
+fem_usa_general_grant = {
+	first_name = Penelope
+	last_name = Grant
+	historical = yes
+	#culture = global_var:dixie_culture
+	culture = cu:dixie
+	female = yes
+	religion = protestant
+	ideology = ideology_radical
+	commander_rank = default
+	interest_group = ig_petty_bourgeoisie
+	birth_date = 1822.1.21
+	dna = dna_ulysses_s_grant
+	traits = {
+		experienced_offensive_planner
+		persistent
+		alcoholic
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_us_grant
+				}
+			}
+			uses_dixie_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1874.1.1	
+		chance = 50
+	}
+	on_created = {
+        converter_dixie_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_us_grant
+		}
+	}
+}
+
+usa_general_pershing = {
+	first_name = John
+	last_name = Pershing
+	historical = yes
+	#culture = global_var:midwest_yankee_culture
+	culture = cu:yankee
+	female = no
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1860.9.13
+	dna = dna_pershing
+	traits = {
+		experienced_offensive_planner
+		persistent
+		reserved
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pershing
+				}
+			}
+			uses_midwest_yankee_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1895.1.1
+		latest_usage_date = 1920.1.1	
+		chance = 50
+	}
+	on_created = {
+		converter_mw_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pershing
+		}
+	}
+}
+fem_usa_general_pershing = {
+	first_name = Jane
+	last_name = Pershing
+	historical = yes
+	#culture = global_var:midwest_yankee_culture
+	culture = cu:yankee
+	female = yes
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1860.9.13
+	dna = dna_pershing
+	traits = {
+		experienced_offensive_planner
+		persistent
+		reserved
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pershing
+				}
+			}
+			uses_midwest_yankee_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1895.1.1
+		latest_usage_date = 1920.1.1	
+		chance = 50
+	}
+	on_created = {
+		converter_mw_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pershing
+		}
+	}
+}
+usa_general_sheridan = {
+	first_name = Philip
+	last_name = Sheridan
+	historical = yes
+	#culture = global_var:new_england_yankee_culture
+	culture = cu:yankee
+	female = no
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1831.3.6
+	dna = dna_sheridan
+	traits = {
+		experienced_offensive_planner
+		pillager
+		cruel
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sheridan
+				}
+			}
+			uses_new_england_yankee_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1865.1.1
+		latest_usage_date = 1890.1.1	
+		chance = 50
+	}
+	on_created = {
+		converter_ne_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sheridan
+		}
+	}
+}
+fem_usa_general_sheridan = {
+	first_name = Philippa
+	last_name = Sheridan
+	historical = yes
+	#culture = global_var:new_england_yankee_culture
+	culture = cu:yankee
+	female = yes
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1831.3.6
+	dna = dna_sheridan
+	traits = {
+		experienced_offensive_planner
+		pillager
+		cruel
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sheridan
+				}
+			}
+			uses_new_england_yankee_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1865.1.1
+		latest_usage_date = 1890.1.1	
+		chance = 50
+	}
+	on_created = {
+		converter_ne_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sheridan
+		}
+	}
+}

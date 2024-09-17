@@ -57,9 +57,11 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 	loadNationalBudgets(filePath);
 	loadOwnerships(filePath);
 	loadTechMap(modFS);
+	loadDemand(modFS);
+	loadPopTypes(modFS);
 }
 
-void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalManager) const
+void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalManager, const Vic3DefinesLoader& defines) const
 {
 	Log(LogLevel::Info) << "-> Establishing Bureaucracy.";
 	if (!buildings.contains("building_government_administration"))
@@ -78,9 +80,9 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 			continue;
 		}
 
-		// Give 5% extra for trade routes - cap at +400
-		const double usage = country->calculateBureaucracyUsage(politicalManager.getLawsMap());
-		const double generationTarget = std::min(usage * 1.05, usage + 400) - 100;
+		// Give 10% extra for trade routes - cap at +400
+		const double usage = country->calculateBureaucracyUsage(politicalManager.getLawsMap(), defines);
+		const double generationTarget = std::min(usage * 1.1, usage + 500) - 100;
 
 		// Use the PM with the most generation available
 		int PMGeneration = 35;
@@ -292,7 +294,6 @@ std::pair<double, double> V3::EconomyManager::civLevelCountryBudgets() const
 		const int popCount = country->getPopCount();
 		double weight = popCount * (country->getProcessedData().civLevel * 0.01);
 		weight *= calculatePopDistanceFactor(popCount, geoMeanPop);
-		weight *= country->getOverPopulation();
 		country->setIndustryWeight(weight);
 		accumulatedWeight += country->getIndustryWeight();
 		totalCivLevel += country->getProcessedData().civLevel;
@@ -471,6 +472,8 @@ void V3::EconomyManager::distributeBudget(const double globalCP, const double to
 
 void V3::EconomyManager::investCapital(const std::map<std::string, std::shared_ptr<Country>>& countries) const
 {
+	Log(LogLevel::Info) << "-> Pops buying ownership shares.";
+
 	// Each building get's it's ownership information from the ownership loader.
 	// Ownership levels are apportioned.
 	// Non-0 levels are further apportioned based on local/foreign/capital ownership
@@ -484,7 +487,8 @@ void V3::EconomyManager::investCapital(const std::map<std::string, std::shared_p
 		std::map<std::string, double> overlordIOUs;
 
 		const std::string& overlordTag = country->getOverlord();
-		std::string overlordCapital = "";
+		std::string overlordCapital;
+
 		if (const auto& overlordIt = countries.find(overlordTag); overlordIt != countries.end())
 		{
 			overlordCapital = overlordIt->second->getProcessedData().capitalStateName;
@@ -940,4 +944,16 @@ void V3::EconomyManager::loadOwnerships(const std::string& filePath)
 void V3::EconomyManager::loadTechMap(const commonItems::ModFilesystem& modFS)
 {
 	techMap.loadTechs(modFS);
+}
+
+void V3::EconomyManager::loadDemand(const commonItems::ModFilesystem& modFS)
+{
+	demand.loadGoods(modFS);
+	demand.loadPopNeeds(modFS);
+	demand.loadBuyPackages(modFS);
+}
+
+void V3::EconomyManager::loadPopTypes(const commonItems::ModFilesystem& modFS)
+{
+	popTypeLoader.loadPopTypes(modFS);
 }

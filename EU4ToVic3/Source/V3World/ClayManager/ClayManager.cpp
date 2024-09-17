@@ -863,11 +863,11 @@ void V3::ClayManager::filterInvalidClaims(const PoliticalManager& politicalManag
 	Log(LogLevel::Info) << "<> Filtered " << counter << " Dead Claims.";
 }
 
-void V3::ClayManager::redistributeResourcesAndLandshares()
+void V3::ClayManager::redistributeResourcesAndLandshares(const int splitStatePrimeLandWeight)
 {
 	for (const auto& state: states | std::views::values)
 	{
-		state->distributeLandshares();
+		state->distributeLandshares(splitStatePrimeLandWeight);
 		state->distributeResources();
 	}
 }

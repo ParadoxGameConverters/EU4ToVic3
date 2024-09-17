@@ -286,7 +286,7 @@ TEST(V3World_SubStateTests, InfrastructureCalculationIsolateStateModifieres)
 	modifier1->loadStateModifier(modifierInput1);
 	modifier1->setName("trait1");
 
-	substate.calculateInfrastructure(V3::StateModifiers{{modifier0->getName(), modifier0}, {modifier1->getName(), modifier1}}, {});
+	substate.calculateInfrastructure(V3::StateModifiers{{modifier0->getName(), modifier0}, {modifier1->getName(), modifier1}}, {}, 100000);
 
 	EXPECT_DOUBLE_EQ(10.4, substate.getInfrastructure());
 }
@@ -324,8 +324,8 @@ TEST(V3World_SubStateTests, InfrastructureCalculationIsolatePopFactor)
 	V3::TechLoader techLoader;
 	techLoader.loadTechs(modFS);
 
-	substate0.calculateInfrastructure({}, techLoader.getTechs());
-	substate1.calculateInfrastructure({}, techLoader.getTechs());
+	substate0.calculateInfrastructure({}, techLoader.getTechs(), 10000);
+	substate1.calculateInfrastructure({}, techLoader.getTechs(), 10000);
 
 	EXPECT_DOUBLE_EQ(3.2, substate0.getInfrastructure());
 	EXPECT_DOUBLE_EQ(43, substate1.getInfrastructure());
@@ -342,15 +342,15 @@ TEST(V3World_SubStateTests, InfrastructureCalculationFactorsFromPrivateVariables
 	substate.setHomeState(state);
 	substate.setIncorporated(true);
 
-	substate.calculateInfrastructure(V3::StateModifiers{}, {});
+	substate.calculateInfrastructure(V3::StateModifiers{}, {}, 100000);
 	EXPECT_DOUBLE_EQ(3, substate.getInfrastructure());
 
 	substate.setMarketCapital();
-	substate.calculateInfrastructure(V3::StateModifiers{}, {});
+	substate.calculateInfrastructure(V3::StateModifiers{}, {}, 100000);
 	EXPECT_DOUBLE_EQ(3.75, substate.getInfrastructure());
 
 	substate.setIncorporated(false);
-	substate.calculateInfrastructure(V3::StateModifiers{}, {});
+	substate.calculateInfrastructure(V3::StateModifiers{}, {}, 100000);
 	EXPECT_DOUBLE_EQ(3, substate.getInfrastructure());
 }
 
@@ -389,7 +389,7 @@ TEST(V3World_SubStateTests, InfrastructureCalculationExcessNegativeModifiersCap)
 	modifier1->loadStateModifier(modifierInput1);
 	modifier1->setName("trait1");
 
-	substate.calculateInfrastructure(V3::StateModifiers{{modifier0->getName(), modifier0}, {modifier1->getName(), modifier1}}, {});
+	substate.calculateInfrastructure(V3::StateModifiers{{modifier0->getName(), modifier0}, {modifier1->getName(), modifier1}}, {}, 100000);
 
 	EXPECT_DOUBLE_EQ(0.0, substate.getInfrastructure());
 }

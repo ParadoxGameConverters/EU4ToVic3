@@ -1,0 +1,2950 @@
+﻿# converter_caudillismo_ideology_effect
+# converter_pious_landowner_ideology_effect
+# converter_jeffersonian_ideology_effect
+# converter_russian_patriarch_ideology_effect
+# converter_ig_ideologies_effect
+# converter_state_atheism_effect
+# converter_released_country_effect
+# converter_copy_ideologies_effect
+# converter_ig_traits_effect
+# converter_decentralized_subjects_effect
+
+converter_caudillismo_ideology_effect = {
+	if = {
+		limit = { is_subject = no }
+		every_primary_culture = {
+			if = {
+				limit = {
+					NOT = { has_variable = potential_caudillismo_culture }
+				}
+				set_variable = {
+					name = potential_caudillismo_culture
+					value = 0
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOR = {
+					has_law = law_type:law_census_voting
+					has_law = law_type:law_universal_suffrage
+					has_law = law_type:law_anarchy
+					has_law = law_type:law_protected_speech
+				}
+			}
+			every_primary_culture = {
+				change_variable = {
+					name = potential_caudillismo_culture
+					add = 1
+				}
+			}
+		}
+		else = {
+			every_primary_culture = {
+				change_variable = {
+					name = potential_caudillismo_culture
+					add = -1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_primary_culture = { has_variable = potential_caudillismo_culture }
+		}
+		every_primary_culture = {
+			limit = {
+				has_variable = potential_caudillismo_culture
+				var:potential_caudillismo_culture >= 1
+				NOT = { is_target_in_global_variable_list = { name = global_caudillismo_cultures target = this } }
+			}
+			add_to_global_variable_list = {
+				name = global_caudillismo_cultures
+				target = this
+			}
+		}
+	}
+}
+
+converter_russian_patriarch_ideology_effect = {
+	if = {
+		limit = { aggressive_diplomatic_plays_permitted = yes }
+		every_primary_culture = {
+			if = {
+				limit = {
+					NOT = { has_variable = potential_russian_patriarch_culture }
+				}
+				set_variable = {
+					name = potential_russian_patriarch_culture
+					value = 0
+				}
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					has_law = law_type:law_monarchy
+					has_law = law_type:law_theocracy
+				}
+				has_law = law_type:law_autocracy
+				has_law = law_type:law_serfdom
+				has_law = law_type:law_land_based_taxation
+				has_law = law_type:law_hereditary_bureaucrats
+				has_law = law_type:law_state_religion
+				has_law = law_type:law_traditionalism
+				has_law = law_type:law_peasant_levies
+				has_law = law_type:law_censorship
+			}
+			if = {
+				limit = {
+					ig:ig_devout = {
+						NOT = { has_ideology = ideology:ideology_russian_patriarch }
+					}
+				}
+				ig:ig_devout = {
+					set_interest_group_name = ig_orthodox_church
+					remove_ideology = ideology_patriarchal
+					add_ideology = ideology_russian_patriarch
+				}
+			}
+			every_primary_culture = {
+				change_variable = {
+					name = potential_russian_patriarch_culture
+					add = 1
+				}
+			}
+		}
+		else = {
+			every_primary_culture = {
+				change_variable = {
+					name = potential_russian_patriarch_culture
+					add = -1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_primary_culture = { has_variable = potential_russian_patriarch_culture }
+		}
+		every_primary_culture = {
+			limit = {
+				has_variable = potential_russian_patriarch_culture
+				var:potential_russian_patriarch_culture >= 1
+				NOT = { is_target_in_global_variable_list = { name = global_russian_patriarch_cultures target = this } }
+			}
+			add_to_global_variable_list = {
+				name = global_russian_patriarch_cultures
+				target = this
+			}
+		}
+		while = {
+			limit = {
+				any_primary_culture = { var:potential_russian_patriarch_culture >= 1 }
+				any_scope_pop = {
+					culture = {
+						trigger_if = {
+							limit = {
+								prev.owner = {
+									OR = {
+										has_law = law_type:law_multicultural
+										has_law = law_type:law_cultural_exclusion
+									}
+								}
+							}
+							shares_non_heritage_trait_with_any_primary_culture = prev.owner
+						}
+						trigger_else = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+						NOR = {
+							is_target_in_global_variable_list = { name = global_russian_patriarch_cultures target = this }
+							has_variable = potential_russian_patriarch_culture
+						}
+					}
+				}
+			}
+			random_scope_pop = {
+				limit = {
+					culture = {
+						trigger_if = {
+							limit = {
+								prev.owner = {
+									OR = {
+										has_law = law_type:law_multicultural
+										has_law = law_type:law_cultural_exclusion
+									}
+								}
+							}
+							shares_non_heritage_trait_with_any_primary_culture = prev.owner
+						}
+						trigger_else = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+						NOR = {
+							is_target_in_global_variable_list = { name = global_russian_patriarch_cultures target = this }
+							has_variable = potential_russian_patriarch_culture
+						}
+					}
+				}
+				culture = {
+					add_to_global_variable_list = {
+						name = global_russian_patriarch_cultures
+						target = this
+					}
+				}
+			}
+		}
+	}
+}
+
+converter_pious_landowner_ideology_effect = {
+	if = {
+		limit = { aggressive_diplomatic_plays_permitted = yes }
+		every_primary_culture = {
+			if = {
+				limit = {
+					NOT = { has_variable = potential_pious_culture }
+				}
+				set_variable = {
+					name = potential_pious_culture
+					value = 0
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			NOT = { has_law = law_type:law_state_atheism }
+			ig:ig_landowners = {
+				has_ideology = ideology:ideology_dummy_pious_01
+				has_ideology = ideology:ideology_dummy_pious_02
+			}
+		}
+		ig:ig_landowners = {
+			remove_ideology = ideology_dummy_pious_01
+			remove_ideology = ideology_dummy_pious_02
+			add_ideology = ideology_pious
+		}
+		every_primary_culture = {
+			limit = { has_variable = potential_pious_culture }
+			change_variable = {
+				name = potential_pious_culture
+				add = 1
+			}
+		}
+	}
+	else = {
+		ig:ig_landowners = {
+			if = {
+				limit = { has_ideology = ideology:ideology_dummy_pious_01 }
+				remove_ideology = ideology_dummy_pious_01
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_dummy_pious_02 }
+				remove_ideology = ideology_dummy_pious_02
+			}
+		}
+		every_primary_culture = {
+			limit = { has_variable = potential_pious_culture }
+			change_variable = {
+				name = potential_pious_culture
+				add = -1
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_primary_culture = { has_variable = potential_pious_culture }
+		}
+		every_primary_culture = {
+			limit = {
+				has_variable = potential_pious_culture
+				var:potential_pious_culture >= 1
+				NOT = { is_target_in_global_variable_list = { name = global_pious_cultures target = this } }
+			}
+			add_to_global_variable_list = {
+				name = global_pious_cultures
+				target = this
+			}
+		}
+	}
+}
+
+converter_jeffersonian_ideology_effect = {
+	if = {
+		limit = {
+			ig:ig_rural_folk = { has_ideology = ideology:ideology_agrarian_jeffersonian }
+			NOT = {
+				is_target_in_global_variable_list = { name = global_jeffersonian_countries target = this }
+				has_global_variable = zzz_converter_effects_happened
+			}
+		}
+		add_to_global_variable_list = {
+			name = global_jeffersonian_countries
+			target = this
+		}
+	}
+	if = {
+		limit = { aggressive_diplomatic_plays_permitted = yes }
+		every_primary_culture = {
+			if = {
+				limit = {
+					NOT = { has_variable = potential_jeffersonian_culture }
+				}
+				set_variable = {
+					name = potential_jeffersonian_culture
+					value = 0
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			is_settler_colonial_country = yes
+			coa_republic_trigger = yes
+			aggressive_diplomatic_plays_permitted = yes
+			OR = {
+				has_law = law_type:law_wealth_voting
+				has_law = law_type:law_census_voting
+				has_law = law_type:law_universal_suffrage
+				has_law = law_type:law_anarchy
+			}
+		}
+		every_primary_culture = {
+			limit = { has_variable = potential_jeffersonian_culture }
+			change_variable = {
+				name = potential_jeffersonian_culture
+				add = 1
+			}
+		}
+	}
+	else = {
+		every_primary_culture = {
+			limit = { has_variable = potential_jeffersonian_culture }
+			change_variable = {
+				name = potential_jeffersonian_culture
+				add = -1
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_primary_culture = { has_variable = potential_jeffersonian_culture }
+		}
+		every_primary_culture = {
+			limit = {
+				has_variable = potential_jeffersonian_culture
+				var:potential_jeffersonian_culture >= 1
+				NOR = {
+					is_target_in_global_variable_list = { name = global_jeffersonian_cultures target = this }
+					is_target_in_global_variable_list = { name = global_caudillismo_cultures target = this }
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_jeffersonian_cultures
+				target = this
+			}
+		}
+	}
+}
+
+converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideologies.txt
+	converter_ig_traits_effect = yes
+	## Start Armed Forces
+	if = {		# Caudillo Ideology
+		limit = {
+			is_settler_colonial_country = yes
+			coa_republic_trigger = yes
+			is_subject = no
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_caudillismo_cultures target = this } }
+			NOT = {
+				ig:ig_armed_forces = { has_ideology = ideology:ideology_individualist }
+			}
+		}
+		ig:ig_armed_forces = {
+			add_ideology = ideology_caudillismo
+		}
+		if = {
+			limit = {
+				NOR = {
+					has_modifier = age_of_caudillos_modifier
+					has_global_variable = zzz_converter_effects_happened
+				}
+			}
+			add_modifier = {
+				name = age_of_caudillos_modifier
+				months = very_long_modifier_time
+				is_decaying = yes
+			}
+		}
+	}
+	if = {		# Samurai
+		limit = {
+			any_primary_culture = { has_discrimination_trait = yamato }
+			OR = {
+				has_law = law_type:law_monarchy
+				has_law = law_type:law_theocracy
+			}
+			NOT = { has_global_variable = fall_of_the_samurai_global_var }
+		}
+		ig:ig_armed_forces = {
+			add_ideology = ideology_bakufu
+			set_interest_group_name = ig_samurai
+		}
+	}
+	if = {		# Corporatism in Holy Orders
+		limit = {
+			has_technology_researched = corporatism
+			ig:ig_armed_forces = {
+				has_ideology = ideology:ideology_pious
+			}
+		}
+		ig:ig_armed_forces = {
+			remove_ideology = ideology_pious
+			add_ideology = ideology_corporatist
+		}
+	}
+	## End Armed Forces
+	## Start Rural Folk
+	else_if = {		# Jeffersonian (Afterwards)
+		limit = {
+			ig:ig_rural_folk = { has_ideology = ideology:ideology_agrarian }
+			ig:ig_armed_forces = {
+				NOT = { has_ideology = ideology:ideology_caudillismo }
+			}
+			OR = {
+				is_target_in_global_variable_list = { name = global_jeffersonian_countries target = this }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_jeffersonian_cultures target = this } }
+			}
+		}
+		ig:ig_rural_folk = {
+			remove_ideology = ideology_agrarian
+			add_ideology = ideology_agrarian_jeffersonian
+		}
+	}
+	if = {		# Yeoman Farmers
+		limit = {
+			NOR = {
+				has_law = law_type:law_serfdom
+				has_law = law_type:law_tenant_farmers
+			}
+			is_settler_colonial_country = yes
+			coa_republic_trigger = yes
+			ig:ig_rural_folk = {
+				has_ideology = ideology:ideology_agrarian_jeffersonian
+			}
+		}
+		ig:ig_rural_folk = {
+			set_interest_group_name = ig_yeoman_farmers
+		}
+	}
+	if = {		# Heimin
+		limit = {
+			any_primary_culture = { has_discrimination_trait = yamato }
+		}
+		ig:ig_rural_folk = {
+			set_interest_group_name = ig_peasants
+		}
+	}
+	if = {		# Maka'āinana
+		limit = { country_has_primary_culture = cu:hawaiian }
+		ig:ig_rural_folk = {
+			set_interest_group_name = ig_maka_ainana
+		}
+	}
+	## End Rural Folk
+	## Start Devout
+	if = {		# Buddhist Monks (Japan)
+		limit = {
+			religion = { has_discrimination_trait = buddhist }
+			any_primary_culture = { has_discrimination_trait = yamato }
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_buddhist_monks
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_buddhist_moralist
+		}
+	}
+	else_if = {		# Shinto Monks
+		limit = { country_has_state_religion = rel:shinto }
+		ig:ig_devout = {
+			set_interest_group_name = ig_shinto_monks
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_shinto_moralist
+		}
+	}
+	else_if = {		# Christian Missionaries (Hawaii)
+		limit = {
+			religion = { has_discrimination_trait = christian }
+			country_has_primary_culture = cu:hawaiian
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_christian_missionaries
+			add_ideology = ideology_laissez_faire
+		}
+	}
+	else_if = {		# Other Missionaries (Oceania)
+		limit = {
+			religion = {
+				OR = {
+					has_discrimination_trait = christian
+					has_discrimination_trait = muslim
+					has_discrimination_trait = eastern
+					has_discrimination_trait = mazdan
+				}
+			}
+			any_primary_culture = { has_discrimination_trait = indigenous_oceanic_heritage }
+		}
+		ig:ig_devout = {
+			add_ideology = ideology_laissez_faire
+		}
+	}
+	else_if = {		# Anglicans
+		limit = {
+			OR = {
+				country_has_state_religion = rel:protestant
+				religion = { has_discrimination_trait = proto_protestant }
+			}
+			OR = {
+				country_has_primary_culture = cu:maori
+				any_primary_culture = { has_discrimination_trait = anglophone }
+				any_primary_culture = { has_discrimination_trait = celtic_people }
+			}
+			exists = capital
+			trigger_if = {
+				limit = {
+					capital = {
+						OR = {
+							state_is_in_americas = yes
+							region = sr:region_oceania
+						}
+					}
+				}
+				is_subject = yes
+				religion = overlord.religion
+				overlord = {
+					OR = {
+						country_has_primary_culture = cu:maori
+						any_primary_culture = { has_discrimination_trait = anglophone }
+						any_primary_culture = { has_discrimination_trait = celtic_people }
+					}
+				}
+			}
+			trigger_else = {
+				capital = {
+					NOR = {
+						state_is_in_americas = yes
+						region = sr:region_oceania
+					}
+				}
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_anglican_church
+		}
+	}
+	else_if = {		# Russian Orthodox Church
+		limit = {
+			OR = {
+				country_has_state_religion = rel:orthodox
+				religion = { has_discrimination_trait = orthodoxy }
+			}
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_russian_patriarch_cultures target = this } }
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_orthodox_church
+			remove_ideology = ideology_patriarchal
+			add_ideology = ideology_russian_patriarch
+		}
+	}
+	else_if = {		# Church of Denmark
+		limit = {
+			OR = {
+				country_has_state_religion = rel:protestant
+				religion = { has_discrimination_trait = proto_protestant }
+			}
+			country_has_primary_culture = global_var:dan_culture
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_church_of_denmark
+		}
+	}
+	else_if = {		# Church of Norway
+		limit = {
+			OR = {
+				country_has_state_religion = rel:protestant
+				religion = { has_discrimination_trait = proto_protestant }
+			}
+			#country_has_primary_culture = cu:norwegian
+			any_primary_culture = { has_discrimination_trait = scandinavian_culture_group }
+			NOR = {
+				country_has_primary_culture = global_var:dan_culture
+				country_has_primary_culture = global_var:swe_culture
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_church_of_norway
+		}
+	}
+	else_if = {		# Church of Sweden
+		limit = {
+			OR = {
+				country_has_state_religion = rel:protestant
+				religion = { has_discrimination_trait = proto_protestant }
+			}
+			country_has_primary_culture = global_var:swe_culture
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_church_of_sweden
+		}
+	}
+	else_if = {		# Confucian Scholars
+		limit = {
+			OR = {
+				country_has_state_religion = rel:confucian
+				religion = { has_discrimination_trait = confucian_branch }
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_confucian
+			remove_ideology = ideology_pious
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_confucian
+		}
+	}
+	else_if = {		# Evangelicals
+		limit = {
+			OR = {
+				country_has_state_religion = rel:protestant
+				religion = { has_discrimination_trait = proto_protestant }
+			}
+			OR = {
+				country_has_primary_culture = cu:cherokee
+				any_primary_culture = { has_discrimination_trait = anglophone }
+				any_primary_culture = { has_discrimination_trait = celtic_people }
+			}
+			OR = {
+				country_is_in_north_america = yes
+				country_is_in_central_america = yes
+				country_is_in_south_america = yes
+				capital = { region = sr:region_oceania }
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_evangelicals
+		}
+	}
+	else_if = {		# Roman Curia
+		limit = {
+			c:PAP ?= this
+			country_has_state_religion = rel:catholic
+			has_law = law_type:law_theocracy
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_roman_curia
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_papal_moralist
+		}
+	}
+	else_if = {		# Catholic Church
+		limit = { country_has_state_religion = rel:catholic }
+		ig:ig_devout = { 
+			set_interest_group_name = ig_catholic_church 
+		}
+	}
+	else_if = {		# Evangelical Church
+		limit = {
+			OR = {
+				country_has_state_religion = rel:protestant
+				religion = { has_discrimination_trait = proto_protestant }
+			}
+		}
+		ig:ig_devout = { 
+			set_interest_group_name = ig_evangelical_church
+		}
+	}
+	else_if = {		# Sunni Ulema
+		limit = {
+			OR = {
+				country_has_state_religion = rel:sunni
+				religion = { has_discrimination_trait = sunni_branch }
+			}
+		}
+		ig:ig_devout = { 
+			set_interest_group_name = ig_sunni_madrasahs
+		}
+	}
+	else_if = {		# Shi'a Ulema
+		limit = {
+			OR = {
+				country_has_state_religion = rel:shiite
+				religion = { has_discrimination_trait = shiite_branch }
+			}
+		}
+		ig:ig_devout = { 
+			set_interest_group_name = ig_shia_madrasahs
+		}
+	}
+	else_if = {		# Sunni Ulema; this isn't controversial at all. Nope.
+		limit = {
+			religion = { has_discrimination_trait = muslim }
+		}
+		ig:ig_devout = { 
+			set_interest_group_name = ig_sunni_madrasahs
+		}
+	}
+	else_if = {		# Oriental Orthodox Church
+		limit = {
+			OR = {
+				country_has_state_religion = rel:oriental_orthodox
+				religion = { has_discrimination_trait = coptic }
+			}
+		}
+		ig:ig_devout = { 
+			set_interest_group_name = ig_oriental_orthodox_church
+			remove_ideology = ideology_patriarchal
+			add_ideology = ideology_oriental_orthodox_patriarch
+		}
+	}
+	else_if = {		# Orthodox Church
+		limit = { 
+			OR = {
+				country_has_state_religion = rel:orthodox
+				religion = { has_discrimination_trait = orthodoxy }
+			}
+		}
+		ig:ig_devout = { 
+			set_interest_group_name = ig_orthodox_church
+			remove_ideology = ideology_patriarchal
+			add_ideology = ideology_orthodox_patriarch
+		}
+	}
+	else_if = {		# Hindu Priesthood
+		limit = {
+			OR = {
+				country_has_state_religion = rel:hindu
+				religion = { has_discrimination_trait = vedic }
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_hindu_priesthood
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_hindu_moralist
+		}
+	}
+	else_if = {		# Vajrayana Monks
+		limit = { country_has_state_religion = rel:gelugpa }
+		ig:ig_devout = {
+			set_interest_group_name = ig_vajrayana_monks
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_buddhist_moralist
+		}
+	}
+	else_if = {		# Vajrayana Monks
+		limit = { country_has_state_religion = rel:theravada }
+		ig:ig_devout = {
+			set_interest_group_name = ig_theravada_monks
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_buddhist_moralist
+		}
+	}
+	else_if = {		# Mahayana Monks
+		limit = {
+			OR = {
+				country_has_state_religion = rel:mahayana
+				religion = { has_discrimination_trait = buddhist }
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_mahayana_monks
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_buddhist_moralist
+		}
+	}
+	else_if = {		# Sikh Priesthood
+		limit = { country_has_state_religion = rel:sikh }
+		ig:ig_devout = {
+			set_interest_group_name = ig_sikh_priesthood
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_sikh_moralist
+		}
+	}
+	else_if = {		# Mazdans
+		limit = {
+			religion = { has_discrimination_trait = mazdan }
+		}
+		ig:ig_devout = {
+			add_ideology = ideology_anti_slavery
+		}
+	}
+	else_if = {		# Rabbinical Council
+		limit = {
+			religion = { has_discrimination_trait = jewish }
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_rabbinical_council
+		}
+	}
+	else_if = {		# Pagan Shamans
+		limit = {
+			religion = { has_discrimination_trait = animist }
+			OR = {
+				any_primary_culture = { has_discrimination_trait = north_american_group }
+				any_primary_culture = { has_discrimination_trait = north_asian_heritage }
+				any_primary_culture = { has_discrimination_trait = central_asian_heritage }
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_pagan_shamans
+		}
+	}
+	if = {		# Egalitarianism
+		limit = {
+			OR = {
+				any_primary_culture = { has_discrimination_trait = egalitarian }
+				religion = { has_discrimination_trait = egalitarian }
+			}
+		}
+		ig:ig_devout = { add_ideology = ideology_egalitarian }
+	}
+	if = {		# Pluralism
+		limit = {
+			religion = { has_discrimination_trait = tolerant }
+		}
+		ig:ig_devout = {
+			if = {
+				limit = { has_ideology = ideology:ideology_moralist }
+				remove_ideology = ideology_moralist
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_buddhist_moralist }
+				remove_ideology = ideology_buddhist_moralist
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_hindu_moralist }
+				remove_ideology = ideology_hindu_moralist
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_sikh_moralist }
+				remove_ideology = ideology_sikh_moralist
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_shinto_moralist }
+				remove_ideology = ideology_shinto_moralist
+			}
+		}
+	}
+	if = {		# Trading/Exploration
+		limit = {
+			religion = { has_discrimination_trait = trader }
+			ig:ig_devout = {
+				NOT = { has_ideology = ideology:ideology_laissez_faire }
+			}
+		}
+		ig:ig_devout = { add_ideology = ideology_laissez_faire }
+	}
+	if = {		# Holy Warriors
+		limit = {
+			religion = { has_discrimination_trait = warmonger }
+			ig:ig_devout = {
+				NOT = { has_ideology = ideology:ideology_jingoist }
+			}
+		}
+		ig:ig_devout = { add_ideology = ideology_jingoist }
+	}
+	if = {		# Meritocratic
+		limit = {
+			religion = { has_discrimination_trait = meritocratic }
+		}
+		ig:ig_devout = { add_ideology = ideology_meritocratic }
+	}
+	if = {		# Pastoralism
+		limit = {
+			religion = { has_discrimination_trait = pastoralist }
+		}
+		ig:ig_devout = { add_ideology = ideology_agrarian }
+	}
+	if = {		# Legalism
+		limit = {
+			religion = { has_discrimination_trait = legalist }
+		}
+		ig:ig_devout = { add_ideology = ideology_loyalist }
+	}
+	if = {		# Theocracy
+		limit = { has_law = law_type:law_theocracy }
+		ig:ig_devout = {
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_papal_moralist
+		}
+	}
+	if = {		# Corporatism
+		limit = { has_technology_researched = corporatism }
+		ig:ig_devout = {
+			remove_ideology = ideology_pious
+			add_ideology = ideology_corporatist
+		}
+	}
+	converter_ig_devout_feminism_matriarchy_effect = yes
+	## End Devout
+	## Start Landowners
+	if = {		# Squattocracy
+		limit = {
+			exists = capital
+			capital = { region = sr:region_oceania }
+			any_primary_culture = {
+				is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+				NOT = { has_discrimination_trait = indigenous_oceanic_heritage }
+			}
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_squattocracy
+		}
+	}
+	else_if = {		# Local Governors
+		limit = {
+			any_primary_culture = { has_discrimination_trait = turkic }
+			exists = capital
+			capital = {
+				state_is_in_americas = no
+				NOT = { region = sr:region_oceania }
+			}
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_local_governors
+		}
+	}
+	if = {		# Junkers; actual ideology changes in ig_ideologies.txt since we have no way of knowing if the country used militarization in EU4
+		limit = {
+			ig:ig_landowners = { has_ideology = ideology:ideology_junker_paternalistic }
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_junkers
+		}
+		if = {
+			limit = {
+				NOT = {
+					is_target_in_global_variable_list = { name = global_junker_countries target = this }
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_junker_countries
+				target = this
+			}
+		}
+	}
+	else_if = {		# Junkers; for newly independent countries
+		limit = {
+			is_target_in_global_variable_list = { name = global_junker_countries target = this }
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_junkers
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_junker_paternalistic
+		}
+	}
+	else_if = {		# Gentry Assembly
+		limit = {
+			any_primary_culture = { has_discrimination_trait = east_slavic }
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_gentry_assembly
+		}
+	}
+	else_if = {		# Roman Landowners
+		limit = {
+			c:PAP ?= this
+			country_has_state_religion = rel:catholic
+			has_law = law_type:law_theocracy
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_roman_landowners
+		}
+	}
+	if = {		# Generic Theocracy
+		limit = {
+			has_law = law_type:law_theocracy
+		}
+		ig:ig_landowners = {
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_papal_paternalistic
+		}
+	}
+	if = {		# Ali'i
+		limit = { country_has_primary_culture = cu:hawaiian }
+		ig:ig_landowners = {
+			set_interest_group_name = ig_alii
+			add_ideology = ideology_loyalist
+		}
+	}
+	else_if = {		# Generic Polynesian
+		limit = {
+			any_primary_culture = { has_discrimination_trait = indigenous_oceanic_heritage }
+		}
+		ig:ig_landowners = {
+			add_ideology = ideology_loyalist
+		}
+	}
+	else_if = {		# Landed Gentry
+		limit = {
+			exists = capital
+			capital = {
+				OR = {
+					region = sr:region_england
+					region = sr:region_north_sea_coast
+				}
+			}
+			OR = {
+				any_primary_culture = { has_discrimination_trait = anglophone }
+				any_primary_culture = { has_discrimination_trait = celtic_people }
+			}
+		}
+		ig:ig_landowners = { 
+			set_interest_group_name = ig_landed_gentry
+		}
+	}
+	else_if = {		# Yangban Officials
+		limit = {
+			any_primary_culture = { has_discrimination_trait = korean_language }
+			exists = capital
+			capital = {
+				state_is_in_americas = no
+				NOT = { region = sr:region_oceania }
+			}
+			OR = {
+				country_has_state_religion = rel:confucian
+				religion = { has_discrimination_trait = confucian_branch }
+			}
+		}
+		ig:ig_landowners = { 
+			set_interest_group_name = ig_yangban
+		}
+	}
+	if = {		# Scholar Officials; actual ideology changes in ig_ideologies.txt since we have no way of knowing if the country was Emperor of China in EU4
+		limit = {
+			ig:ig_landowners = { has_ideology = ideology:ideology_scholar_paternalistic }
+		}
+		ig:ig_landowners = { 
+			set_interest_group_name = ig_scholar_officials
+		}
+		if = {
+			limit = {
+				NOT = {
+					is_target_in_global_variable_list = { name = global_scholar_countries target = this }
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_scholar_countries
+				target = this
+			}
+		}
+	}
+	else_if = {		# Scholar Officials; I can replace the *other* condition that gives ideology_scholar_paternalistic here, though
+		limit = {
+			OR = {
+				has_law = law_type:law_monarchy
+				has_law = law_type:law_theocracy
+			}
+			OR = {
+				any_primary_culture = { has_discrimination_trait = han_chinese }
+				any_primary_culture = { has_discrimination_trait = sinosphere }
+			}
+			exists = capital
+			capital = {
+				state_is_in_americas = no
+				NOT = { region = sr:region_oceania }
+			}
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_scholar_officials
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_scholar_paternalistic
+		}
+	}
+	else_if = {		# Scholar Officials; for newly independent countries that don't fulfill the above condition
+		limit = {
+			is_target_in_global_variable_list = { name = global_scholar_countries target = this }
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_scholar_officials
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_scholar_paternalistic
+		}
+	}
+	if = {		# Pious Spanish Landowners
+		limit = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_pious_cultures target = this } }
+			NOT = { ig:ig_landowners = { has_ideology = ideology:ideology_pious } }
+		}
+		ig:ig_landowners = {
+			add_ideology = ideology_pious
+		}
+	}
+	else_if = {		# Aristocracy of Officials
+		limit = {
+			#country_has_primary_culture = cu:norwegian
+			any_primary_culture = { has_discrimination_trait = scandinavian_culture_group }
+			NOR = {
+				country_has_primary_culture = global_var:dan_culture
+				country_has_primary_culture = global_var:swe_culture
+			}
+			NOR = {		##Now you *do* have a powerful nobility
+				has_law = law_type:law_serfdom
+				has_law = law_type:law_hereditary_bureaucrats
+			}
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_aristocracy_of_officials
+		}
+	}
+	if = {		# Caudillo Ideology
+		limit = {
+			is_settler_colonial_country = yes
+			coa_republic_trigger = yes
+			is_subject = no
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_caudillismo_cultures target = this } }
+			NOT = {
+				ig:ig_armed_forces = { has_ideology = ideology:ideology_individualist }
+			}
+		}
+		ig:ig_landowners = {
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_republican_paternalistic
+		}
+	}
+	if = {		# Surviving Revolutionary and/or Peasant and/or Pirate Republics (Game Start)
+		limit = {
+			ig:ig_landowners = { has_ideology = ideology:ideology_republican_paternalistic }
+			ig:ig_armed_forces = {
+				NOT = { has_ideology = ideology:ideology_caudillismo }
+			}
+		}
+		set_variable = monarchy_stamped_out_var
+		ig:ig_landowners = {
+			remove_ideology = ideology_paternalistic
+			remove_ideology = ideology_scholar_paternalistic
+			remove_ideology = ideology_junker_paternalistic
+			remove_ideology = ideology_papal_paternalistic
+		}
+	}
+	else_if = {		# Surviving Revolutionary and/or Peasant and/or Pirate Republics (Afterwards)
+		limit = { has_variable = monarchy_stamped_out_var }
+		ig:ig_landowners = {
+			remove_ideology = ideology_paternalistic
+			remove_ideology = ideology_scholar_paternalistic
+			remove_ideology = ideology_junker_paternalistic
+			remove_ideology = ideology_papal_paternalistic
+			add_ideology = ideology_republican_paternalistic
+		}
+	}
+	else_if = {		# Southern Planters (Ideology)
+		limit = {
+			is_settler_colonial_country = yes
+			coa_republic_trigger = yes
+			aggressive_diplomatic_plays_permitted = yes
+			OR = {
+				has_law = law_type:law_wealth_voting
+				has_law = law_type:law_census_voting
+				has_law = law_type:law_universal_suffrage
+				has_law = law_type:law_anarchy
+			}
+			ig:ig_armed_forces = {
+				NOT = { has_ideology = ideology:ideology_caudillismo }
+			}
+		}
+		ig:ig_landowners = {
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_republican_paternalistic
+		}
+	}
+	if = {		# Southern Planters (Name)
+		limit = {
+			is_settler_colonial_country = yes
+			coa_republic_trigger = yes
+			country_is_in_north_america = yes
+			any_scope_state = { region = sr:region_dixie }
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_southern_planters
+		}
+		if = {
+			limit = {
+				aggressive_diplomatic_plays_permitted = yes
+				NOT = { has_law = law_type:law_slavery_banned }
+				OR = {
+					any_scope_state = { region = sr:region_new_england }
+					any_scope_state = { region = sr:region_the_midwest }
+				}
+				NOR = {
+					has_journal_entry = je_acw_countdown
+					has_modifier = missouri_compromise
+				}
+			}
+			add_journal_entry = { type = je_acw_countdown }
+			add_modifier = {
+				name = missouri_compromise
+				months = 50
+				is_decaying = yes
+			}
+		}
+	}
+	converter_ig_landowners_feminism_matriarchy_effect = yes
+	## End Landowners
+	## Start Petite Bourgeoisie
+	if = {
+		limit = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_atheist_cultures target = this } }
+			ig:ig_petty_bourgeoisie = {
+				NOT = { has_ideology = ideology:ideology_anti_clerical_pb }
+			}
+		}
+		ig:ig_petty_bourgeoisie = {
+			add_ideology = ideology_anti_clerical_pb
+		}
+	}
+	## End Petite Bourgeoisie
+	## Start Intellegentsia
+	if = {		# Generic Theocracy
+		limit = {
+			has_law = law_type:law_theocracy
+		}
+		ig:ig_intelligentsia = {
+			remove_ideology = ideology_anti_clerical
+		}
+	}
+	if = {		# Hawaiian Democrats
+		limit = { country_has_primary_culture = cu:hawaiian }
+		ig:ig_intelligentsia = {
+			set_interest_group_name = ig_hawaiian_democrats
+		}
+	}
+	if = {		# Literati (Name & Ideology)
+		limit = {
+			OR = {
+				country_has_state_religion = rel:confucian
+				religion = { has_discrimination_trait = confucian_branch }
+			}
+		}
+		ig:ig_intelligentsia = { 
+			set_interest_group_name = ig_literati
+			remove_ideology = ideology_anti_clerical
+		}
+	}
+	else_if = {		# Literati (Name Only)
+		limit = {
+			any_primary_culture = {
+				has_discrimination_trait = han_chinese
+			}
+		}
+		ig:ig_intelligentsia = { 
+			set_interest_group_name = ig_literati
+		}
+	}
+	## End Intellegentsia
+	## Start Trade Unions
+	if = {		# Socialism
+		limit = {
+			has_technology_researched = socialism
+		}
+		ig:ig_trade_unions = {
+			add_ideology = ideology_socialist
+		}
+	}
+	## End Trade Unions
+	## Start Universal
+	if = {		# Feminism
+		limit = { has_technology_researched = feminism }
+		every_interest_group = {
+			limit = {
+				has_ideology = ideology:ideology_liberal
+			}
+			remove_ideology = ideology_liberal
+			add_ideology = ideology_liberal_modern
+		}
+		every_interest_group = {
+			limit = {
+				has_ideology = ideology:ideology_egalitarian
+			}
+			remove_ideology = ideology_egalitarian
+			add_ideology = ideology_egalitarian_modern
+		}
+	}
+	## End Universal
+}
+
+converter_state_atheism_effect = {
+	every_primary_culture = {
+		if = {
+			limit = {
+				NOT = { has_variable = potential_atheist_culture }
+			}
+			set_variable = {
+				name = potential_atheist_culture
+				value = 0
+			}
+		}
+	}
+	if = {
+		limit = { has_law = law_type:law_state_atheism }
+		every_scope_character = {
+			limit = {
+				NOR = {
+					has_ideology = ideology:ideology_theocrat
+					is_interest_group_type = ig_devout
+				}
+			}
+			change_character_religion = rel:atheist
+		}
+		set_state_religion = rel:atheist
+		every_scope_state = {
+			if = {
+				limit = { is_incorporated = yes }
+				convert_population = {
+					target = rel:atheist
+					value = 0.6
+				}
+			}
+			else = {
+				convert_population = {
+					target = rel:atheist
+					value = 0.1
+				}
+			}
+		}
+		recalculate_pop_ig_support = yes
+		if = {
+			limit = {
+				ig:ig_petty_bourgeoisie = {
+					NOT = { has_ideology = ideology:ideology_anti_clerical_pb }
+				}
+			}
+			ig:ig_petty_bourgeoisie = {
+				add_ideology = ideology_anti_clerical_pb
+			}
+		}
+		every_primary_culture = {
+			change_variable = {
+				name = potential_atheist_culture
+				add = 1
+			}
+		}
+	}
+	else = {
+		every_primary_culture = {
+			change_variable = {
+				name = potential_atheist_culture
+				add = -1
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_primary_culture = { has_variable = potential_atheist_culture }
+		}
+		every_primary_culture = {
+			limit = {
+				has_variable = potential_atheist_culture
+				var:potential_atheist_culture >= 1
+				NOT = { is_target_in_global_variable_list = { name = global_atheist_cultures target = this } }
+			}
+			add_to_global_variable_list = {
+				name = global_atheist_cultures
+				target = this
+			}
+		}
+		while = {
+			limit = {
+				any_primary_culture = { var:potential_atheist_culture >= 1 }
+				any_scope_pop = {
+					culture = {
+						trigger_if = {
+							limit = {
+								prev.owner = {
+									OR = {
+										has_law = law_type:law_multicultural
+										has_law = law_type:law_cultural_exclusion
+									}
+								}
+							}
+							shares_non_heritage_trait_with_any_primary_culture = prev.owner
+						}
+						trigger_else = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+						NOR = {
+							is_target_in_global_variable_list = { name = global_atheist_cultures target = this }
+							has_variable = potential_atheist_culture
+						}
+					}
+				}
+			}
+			random_scope_pop = {
+				limit = {
+					culture = {
+						trigger_if = {
+							limit = {
+								prev.owner = {
+									OR = {
+										has_law = law_type:law_multicultural
+										has_law = law_type:law_cultural_exclusion
+									}
+								}
+							}
+							shares_non_heritage_trait_with_any_primary_culture = prev.owner
+						}
+						trigger_else = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+						NOR = {
+							is_target_in_global_variable_list = { name = global_atheist_cultures target = this }
+							has_variable = potential_atheist_culture
+						}
+					}
+				}
+				culture = {
+					add_to_global_variable_list = {
+						name = global_atheist_cultures
+						target = this
+					}
+				}
+			}
+		}
+	}
+	every_country = {
+		limit = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_atheist_cultures target = this } }
+			ig:ig_petty_bourgeoisie = {
+				NOT = { has_ideology = ideology:ideology_anti_clerical_pb }
+			}
+		}
+		ig:ig_petty_bourgeoisie = {
+			add_ideology = ideology_anti_clerical_pb
+		}
+	}
+}
+
+converter_released_country_effect = {
+	converter_primary_cultures_effect = yes
+	if = {
+		limit = {
+			any_primary_culture = {
+				trigger_if = {
+					limit = {
+						prev = {
+							OR = {
+								has_law = law_type:law_multicultural
+								has_law = law_type:law_cultural_exclusion
+							}
+						}
+					}
+					shares_non_heritage_trait_with_any_primary_culture = root
+				}
+				trigger_else = { shares_heritage_and_other_trait_with_any_primary_culture = root }
+			}
+			root = {
+				ig:ig_landowners = { has_ideology = ideology:ideology_junker_paternalistic }
+			}
+			ig:ig_landowners = {
+				NOT = { has_ideology = ideology:ideology_junker_paternalistic }
+			}
+		}
+		ig:ig_landowners = {
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_junker_paternalistic
+		}
+		if = {
+			limit = {
+				NOR = {
+					is_revolutionary = yes
+					is_target_in_global_variable_list = { name = global_junker_countries target = this }
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_junker_countries
+				target = this
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_primary_culture = {
+				trigger_if = {
+					limit = {
+						prev = {
+							OR = {
+								has_law = law_type:law_multicultural
+								has_law = law_type:law_cultural_exclusion
+							}
+						}
+					}
+					shares_non_heritage_trait_with_any_primary_culture = root
+				}
+				trigger_else = { shares_heritage_and_other_trait_with_any_primary_culture = root }
+			}
+			root = {
+				has_law = law_type:law_monarchy
+				ig:ig_intelligentsia = { has_ideology = ideology:ideology_constitutionalist }
+			}
+			has_law = law_type:law_monarchy
+			ig:ig_landowners = {
+				NOT = { has_ideology = ideology:ideology_constitutionalist }
+			}
+		}
+		ig:ig_intelligentsia = {
+			remove_ideology = ideology_republican
+			add_ideology = ideology_constitutionalist
+		}
+	}
+	if = {
+		limit = {
+			is_target_in_global_variable_list = { name = global_jeffersonian_countries target = root }
+			any_primary_culture = {
+				trigger_if = {
+					limit = {
+						prev = {
+							OR = {
+								has_law = law_type:law_multicultural
+								has_law = law_type:law_cultural_exclusion
+							}
+						}
+					}
+					shares_non_heritage_trait_with_any_primary_culture = root
+				}
+				trigger_else = { shares_heritage_and_other_trait_with_any_primary_culture = root }
+			}
+			coa_republic_trigger = yes
+			ig:ig_landowners = {
+				NOT = { has_ideology = ideology:ideology_agrarian_jeffersonian }
+			}
+		}
+		ig:ig_rural_folk = {
+			remove_ideology = ideology_agrarian
+			add_ideology = ideology_agrarian_jeffersonian
+		}
+		if = {
+			limit = {
+				NOR = {
+					is_revolutionary = yes
+					is_target_in_global_variable_list = { name = global_jeffersonian_countries target = this }
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_jeffersonian_countries
+				target = this
+			}
+		}
+	}
+	converter_ig_ideologies_effect = yes
+	trigger_event = {
+		id = zzz_cc_dynamic_characters.1
+		days = 1
+	}
+}
+
+converter_copy_ideologies_effect = {
+	civil_war_origin_country = {
+		every_primary_culture = {
+			limit = { NOT = { is_primary_culture_of = scope:target } }
+			scope:target = { add_primary_culture = prev }
+		}
+	}
+	converter_ig_traits_effect = yes
+	## Start Armed Forces
+	if = {		# Caudillo Ideology
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_armed_forces = { has_ideology = ideology:ideology_caudillismo }
+			}
+		}
+		ig:ig_armed_forces = {
+			add_ideology = ideology_caudillismo
+		}
+	}
+	if = {		# Samurai
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_armed_forces = { has_ideology = ideology:ideology_bakufu }
+			}
+		}
+		ig:ig_armed_forces = {
+			set_interest_group_name = ig_samurai
+			add_ideology = ideology_bakufu
+		}
+	}
+	if = {		# Holy Order
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_armed_forces = { has_ideology = ideology:ideology_pious }
+			}
+		}
+		ig:ig_armed_forces = {
+			add_ideology = ideology_pious
+		}
+	}
+	if = {		# Corporatism in Holy Orders
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_armed_forces = { has_ideology = ideology:ideology_corporatist }
+			}
+		}
+		ig:ig_armed_forces = {
+			remove_ideology = ideology_pious
+			add_ideology = ideology_corporatist
+		}
+	}
+	if = {		# Pirate Republic
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_armed_forces = { has_ideology = ideology:ideology_individualist }
+			}
+			NOR = {
+				has_law = law_type:law_council_republic
+				has_law = law_type:law_cooperative_ownership
+				has_law = law_type:law_command_economy
+				ig:ig_armed_forces = { ig_is_socialist = yes }
+			}
+		}
+		ig:ig_armed_forces = {
+			add_ideology = ideology_individualist
+		}
+	}
+	## End Armed Forces
+	## Start Rural Folk
+	if = {		# Jeffersonian (Ideology)
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_rural_folk = { has_ideology = ideology:ideology_agrarian_jeffersonian }
+			}
+		}
+		ig:ig_rural_folk = {
+			remove_ideology = ideology_agrarian
+			add_ideology = ideology_agrarian_jeffersonian
+		}
+		if = {		# Yeoman Farmers
+			limit = {
+				coa_republic_trigger = yes
+				NOR = {
+					has_law = law_type:law_serfdom
+					has_law = law_type:law_tenant_farmers
+				}
+				civil_war_origin_country = { is_settler_colonial_country = yes }
+			}
+			ig:ig_rural_folk = {
+				set_interest_group_name = ig_yeoman_farmers
+			}
+		}
+	}
+	if = {		# Heimin
+		limit = {
+			civil_war_origin_country = {
+				any_primary_culture = { has_discrimination_trait = yamato }
+			}
+		}
+		ig:ig_rural_folk = {
+			set_interest_group_name = ig_peasants
+		}
+	}
+	if = {		# Maka'āinana
+		limit = {
+			civil_war_origin_country = { country_has_primary_culture = cu:hawaiian }
+		}
+		ig:ig_rural_folk = {
+			set_interest_group_name = ig_maka_ainana
+		}
+	}
+	## End Rural Folk
+	## Start Devout
+	if = {		# Buddhist Monks (Japan)
+		limit = {
+			civil_war_origin_country = {
+				any_primary_culture = { has_discrimination_trait = yamato }
+				ig:ig_devout = { has_ideology = ideology:ideology_buddhist_moralist }
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_buddhist_monks
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_buddhist_moralist
+		}
+	}
+	else_if = {		# Shinto Monks
+		limit = {
+			country_has_state_religion = rel:shinto
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_shinto_moralist }
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_shinto_monks
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_shinto_moralist
+		}
+	}
+	else_if = {		# Christian Missionaries (Hawaii)
+		limit = {
+			religion = { has_discrimination_trait = christian }
+			civil_war_origin_country = {
+				country_has_primary_culture = cu:hawaiian
+				ig:ig_devout = { has_ideology = ideology:ideology_laissez_faire }
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_christian_missionaries
+			add_ideology = ideology_laissez_faire
+		}
+	}
+	else_if = {		# Other Missionaries (Oceania)
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_laissez_faire }
+			}
+		}
+		ig:ig_devout = {
+			add_ideology = ideology_laissez_faire
+		}
+	}
+	else_if = {		# Anglicans
+		limit = {
+			OR = {
+				country_has_state_religion = rel:protestant
+				religion = { has_discrimination_trait = proto_protestant }
+			}
+			civil_war_origin_country = {
+				OR = {
+					country_has_primary_culture = cu:maori
+					any_primary_culture = { has_discrimination_trait = anglophone }
+					any_primary_culture = { has_discrimination_trait = celtic_people }
+				}
+				exists = capital
+				trigger_if = {
+					limit = {
+						capital = {
+							OR = {
+								state_is_in_americas = yes
+								region = sr:region_oceania
+							}
+						}
+					}
+					is_subject = yes
+					religion = overlord.religion
+					overlord = {
+						OR = {
+							country_has_primary_culture = cu:maori
+							any_primary_culture = { has_discrimination_trait = anglophone }
+							any_primary_culture = { has_discrimination_trait = celtic_people }
+						}
+					}
+				}
+				trigger_else = {
+					capital = {
+						NOR = {
+							state_is_in_americas = yes
+							region = sr:region_oceania
+						}
+					}
+				}
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_anglican_church
+		}
+	}
+	else_if = {		# Russian Orthodox Church
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_russian_patriarch }
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_orthodox_church
+			remove_ideology = ideology_patriarchal
+			add_ideology = ideology_russian_patriarch
+		}
+	}
+	else_if = {		# Church of Denmark
+		limit = {
+			OR = {
+				country_has_state_religion = rel:protestant
+				religion = { has_discrimination_trait = proto_protestant }
+			}
+			civil_war_origin_country = { country_has_primary_culture = global_var:dan_culture }
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_church_of_denmark
+		}
+	}
+	else_if = {		# Church of Norway
+		limit = {
+			OR = {
+				country_has_state_religion = rel:protestant
+				religion = { has_discrimination_trait = proto_protestant }
+			}
+			civil_war_origin_country = {
+				any_primary_culture = { has_discrimination_trait = scandinavian_culture_group }
+				NOR = {
+					country_has_primary_culture = global_var:dan_culture
+					country_has_primary_culture = global_var:swe_culture
+				}
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_church_of_norway
+		}
+	}
+	else_if = {		# Church of Sweden
+		limit = {
+			OR = {
+				country_has_state_religion = rel:protestant
+				religion = { has_discrimination_trait = proto_protestant }
+			}
+			civil_war_origin_country = { country_has_primary_culture = global_var:swe_culture }
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_church_of_sweden
+		}
+	}
+	else_if = {		# Confucian Scholars
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_confucian }
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_confucian
+			remove_ideology = ideology_pious
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_confucian
+		}
+	}
+	else_if = {		# Evangelicals
+		limit = {
+			OR = {
+				country_has_state_religion = rel:protestant
+				religion = { has_discrimination_trait = proto_protestant }
+			}
+			civil_war_origin_country = {
+				OR = {
+					country_has_primary_culture = cu:cherokee
+					any_primary_culture = { has_discrimination_trait = anglophone }
+					any_primary_culture = { has_discrimination_trait = celtic_people }
+				}
+				OR = {
+					country_is_in_north_america = yes
+					country_is_in_central_america = yes
+					country_is_in_south_america = yes
+					capital = { region = sr:region_oceania }
+				}
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_evangelicals
+		}
+	}
+	else_if = {		# Roman Curia
+		limit = {
+			civil_war_origin_country = {
+				c:PAP ?= this
+				country_has_state_religion = rel:catholic
+				has_law = law_type:law_theocracy
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_roman_curia
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_papal_moralist
+		}
+	}
+	else_if = {		# Catholic Church
+		limit = {
+			country_has_state_religion = rel:catholic
+		}
+		ig:ig_devout = { 
+			set_interest_group_name = ig_catholic_church 
+		}
+	}
+	else_if = {		# Evangelical Church
+		limit = {
+			OR = {
+				country_has_state_religion = rel:protestant
+				religion = { has_discrimination_trait = proto_protestant }
+			}
+		}
+		ig:ig_devout = { 
+			set_interest_group_name = ig_evangelical_church
+		}
+	}
+	else_if = {		# Sunni Ulema
+		limit = {
+			OR = {
+				country_has_state_religion = rel:sunni
+				religion = { has_discrimination_trait = sunni_branch }
+			}
+		}
+		ig:ig_devout = { 
+			set_interest_group_name = ig_sunni_madrasahs
+		}
+	}
+	else_if = {		# Shi'a Ulema
+		limit = {
+			OR = {
+				country_has_state_religion = rel:shiite
+				religion = { has_discrimination_trait = shiite_branch }
+			}
+		}
+		ig:ig_devout = { 
+			set_interest_group_name = ig_shia_madrasahs
+		}
+	}
+	else_if = {		# Sunni Ulema; this isn't controversial at all. Nope.
+		limit = {
+			religion = { has_discrimination_trait = muslim }
+		}
+		ig:ig_devout = { 
+			set_interest_group_name = ig_sunni_madrasahs
+		}
+	}
+	else_if = {		# Oriental Orthodox Church
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_oriental_orthodox_patriarch }
+			}
+		}
+		ig:ig_devout = { 
+			set_interest_group_name = ig_oriental_orthodox_church
+			remove_ideology = ideology_patriarchal
+			add_ideology = ideology_oriental_orthodox_patriarch
+		}
+	}
+	else_if = {		# Orthodox Church
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_orthodox_patriarch }
+			}
+		}
+		ig:ig_devout = { 
+			set_interest_group_name = ig_orthodox_church
+			remove_ideology = ideology_patriarchal
+			add_ideology = ideology_orthodox_patriarch
+		}
+	}
+	else_if = {		# Hindu Priesthood
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_hindu_moralist }
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_hindu_priesthood
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_hindu_moralist
+		}
+	}
+	else_if = {		# Vajrayana Monks
+		limit = {
+			civil_war_origin_country = { country_has_state_religion = rel:gelugpa }
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_vajrayana_monks
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_buddhist_moralist
+		}
+	}
+	else_if = {		# Vajrayana Monks
+		limit = {
+			civil_war_origin_country = { country_has_state_religion = rel:theravada }
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_theravada_monks
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_buddhist_moralist
+		}
+	}
+	else_if = {		# Mahayana Monks
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_buddhist_moralist }
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_mahayana_monks
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_buddhist_moralist
+		}
+	}
+	else_if = {		# Sikh Priesthood
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_sikh_moralist }
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_sikh_priesthood
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_sikh_moralist
+		}
+	}
+	else_if = {		# Mazdans
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_anti_slavery }
+			}
+		}
+		ig:ig_devout = {
+			add_ideology = ideology_anti_slavery
+		}
+	}
+	else_if = {		# Rabbinical Council
+		limit = {
+			religion = { has_discrimination_trait = jewish }
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_rabbinical_council
+		}
+	}
+	else_if = {		# Pagan Shamans
+		limit = {
+			religion = { has_discrimination_trait = animist }
+			civil_war_origin_country = {
+				OR = {
+					any_primary_culture = { has_discrimination_trait = north_american_group }
+					any_primary_culture = { has_discrimination_trait = north_asian_heritage }
+					any_primary_culture = { has_discrimination_trait = central_asian_heritage }
+				}
+			}
+		}
+		ig:ig_devout = {
+			set_interest_group_name = ig_pagan_shamans
+		}
+	}
+	if = {		# Egalitarianism
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_egalitarian }
+			}
+		}
+		ig:ig_devout = { add_ideology = ideology_egalitarian }
+	}
+	if = {		# Pluralism
+		limit = {
+			religion = { has_discrimination_trait = tolerant }
+		}
+		ig:ig_devout = {
+			if = {
+				limit = { has_ideology = ideology:ideology_moralist }
+				remove_ideology = ideology_moralist
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_buddhist_moralist }
+				remove_ideology = ideology_buddhist_moralist
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_hindu_moralist }
+				remove_ideology = ideology_hindu_moralist
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_sikh_moralist }
+				remove_ideology = ideology_sikh_moralist
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_shinto_moralist }
+				remove_ideology = ideology_shinto_moralist
+			}
+		}
+	}
+	if = {		# Holy Order
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_jingoist }
+			}
+		}
+		ig:ig_devout = { add_ideology = ideology_jingoist }
+	}
+	if = {		# Meritocratic
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_meritocratic }
+			}
+		}
+		ig:ig_devout = { add_ideology = ideology_meritocratic }
+	}
+	if = {		# Pastoralism
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_agrarian }
+			}
+		}
+		ig:ig_devout = { add_ideology = ideology_agrarian }
+	}
+	if = {		# Legalism
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_devout = { has_ideology = ideology:ideology_loyalist }
+			}
+		}
+		ig:ig_devout = { add_ideology = ideology_loyalist }
+	}
+	if = {		# Theocracy
+		limit = {
+			civil_war_origin_country = { has_law = law_type:law_theocracy }
+		}
+		ig:ig_devout = {
+			remove_ideology = ideology_moralist
+			add_ideology = ideology_papal_moralist
+		}
+	}
+	if = {		# Corporatism
+		limit = {
+			civil_war_origin_country = { has_technology_researched = corporatism }
+		}
+		ig:ig_devout = {
+			remove_ideology = ideology_pious
+			add_ideology = ideology_corporatist
+		}
+	}
+	converter_ig_devout_feminism_matriarchy_effect = yes
+	## End Devout
+	## Start Landowners
+	if = {		# Squattocracy
+		limit = {
+			civil_war_origin_country = {
+				exists = capital
+				capital = { region = sr:region_oceania }
+				NOT = { any_primary_culture = { has_discrimination_trait = indigenous_oceanic_heritage } }
+			}
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_squattocracy
+		}
+	}
+	else_if = {		# Local Governors
+		limit = {
+			civil_war_origin_country = {
+				any_primary_culture = { has_discrimination_trait = turkic }
+				exists = capital
+				capital = {
+					state_is_in_americas = no
+					NOT = { region = sr:region_oceania }
+				}
+			}
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_local_governors
+		}
+	}
+	if = {		# Junkers; actual ideology changes in ig_ideologies.txt since we have no way of knowing if the country used militarization in EU4
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_landowners = { has_ideology = ideology:ideology_junker_paternalistic }
+			}
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_junkers
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_junker_paternalistic
+		}
+	}
+	else_if = {		# Gentry Assembly
+		limit = {
+			civil_war_origin_country = {
+				any_primary_culture = { has_discrimination_trait = east_slavic }
+			}
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_gentry_assembly
+		}
+	}
+	else_if = {		# Roman Landowners
+		limit = {
+			civil_war_origin_country = {
+				c:PAP ?= this
+				country_has_state_religion = rel:catholic
+				has_law = law_type:law_theocracy
+			}
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_roman_landowners
+		}
+	}
+	if = {		# Generic Theocracy
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_landowners = { has_ideology = ideology:ideology_papal_paternalistic }
+			}
+		}
+		ig:ig_landowners = {
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_papal_paternalistic
+		}
+	}
+	if = {		# Ali'i
+		limit = {
+			civil_war_origin_country = { country_has_primary_culture = cu:hawaiian }
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_alii
+			add_ideology = ideology_loyalist
+		}
+	}
+	else_if = {		# Generic Polynesian
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_landowners = { has_ideology = ideology:ideology_loyalist }
+			}
+		}
+		ig:ig_landowners = {
+			add_ideology = ideology_loyalist
+		}
+	}
+	else_if = {		# Landed Gentry
+		limit = {
+			civil_war_origin_country = {
+				exists = capital
+				capital = {
+					OR = {
+						region = sr:region_england
+						region = sr:region_north_sea_coast
+					}
+				}
+				OR = {
+					any_primary_culture = { has_discrimination_trait = anglophone }
+					any_primary_culture = { has_discrimination_trait = celtic_people }
+				}
+			}
+		}
+		ig:ig_landowners = { 
+			set_interest_group_name = ig_landed_gentry
+		}
+	}
+	else_if = {		# Yangban Officials
+		limit = {
+			civil_war_origin_country = {
+				any_primary_culture = { has_discrimination_trait = korean_language }
+				exists = capital
+				capital = {
+					state_is_in_americas = no
+					NOT = { region = sr:region_oceania }
+				}
+				ig:ig_devout = { has_ideology = ideology:ideology_confucian }
+			}
+		}
+		ig:ig_landowners = { 
+			set_interest_group_name = ig_yangban
+		}
+	}
+	if = {		# Scholar Officials; actual ideology changes in ig_ideologies.txt since we have no way of knowing if the country was Emperor of China in EU4
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_landowners = { has_ideology = ideology:ideology_scholar_paternalistic }
+			}
+		}
+		ig:ig_landowners = { 
+			set_interest_group_name = ig_scholar_officials
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_scholar_paternalistic
+		}
+	}
+	if = {		# Pious Landowners
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_landowners = { has_ideology = ideology:ideology_pious }
+			}
+		}
+		ig:ig_landowners = {
+			add_ideology = ideology_pious
+		}
+	}
+	else_if = {		# Aristocracy of Officials
+		limit = {
+			civil_war_origin_country = {
+				#country_has_primary_culture = cu:norwegian
+				any_primary_culture = { has_discrimination_trait = scandinavian_culture_group }
+				NOR = {
+					country_has_primary_culture = global_var:dan_culture
+					country_has_primary_culture = global_var:swe_culture
+				}
+				NOR = {		##Now you *do* have a powerful nobility
+					has_law = law_type:law_serfdom
+					has_law = law_type:law_hereditary_bureaucrats
+				}
+			}
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_aristocracy_of_officials
+		}
+	}
+	if = {		# Revolutionary and/or Pirate and/or New World Republics
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_landowners = { has_ideology = ideology:ideology_republican_paternalistic }
+			}
+		}
+		ig:ig_landowners = {
+			remove_ideology = ideology_paternalistic
+			remove_ideology = ideology_scholar_paternalistic
+			remove_ideology = ideology_junker_paternalistic
+			remove_ideology = ideology_papal_paternalistic
+			add_ideology = ideology_republican_paternalistic
+		}
+	}
+	if = {		# Southern Planters (Name)
+		limit = {
+			civil_war_origin_country = {
+				is_settler_colonial_country = yes
+				coa_republic_trigger = yes
+				country_is_in_north_america = yes
+				any_scope_state = { region = sr:region_dixie }
+			}
+		}
+		ig:ig_landowners = {
+			set_interest_group_name = ig_southern_planters
+		}
+	}
+	converter_ig_landowners_feminism_matriarchy_effect = yes
+	## End Landowners
+	## Start Petite Bourgeoisie
+	if = {
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_petty_bourgeoisie = { has_ideology = ideology:ideology_anti_clerical_pb }
+			}
+		}
+		ig:ig_petty_bourgeoisie = {
+			add_ideology = ideology_anti_clerical_pb
+		}
+	}
+	## End Petite Bourgeoisie
+	## Start Intellegentsia
+	if = {		# Generic Theocracy
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_intelligentsia = { NOT = { has_ideology = ideology:ideology_anti_clerical } }
+			}
+			has_law = law_type:law_theocracy
+		}
+		ig:ig_intelligentsia = {
+			remove_ideology = ideology_anti_clerical
+		}
+	}
+	if = {		# Hawaiian Democrats
+		limit = {
+			civil_war_origin_country = { country_has_primary_culture = cu:hawaiian }
+		}
+		ig:ig_intelligentsia = {
+			set_interest_group_name = ig_hawaiian_democrats
+		}
+	}
+	if = {		# Literati (Name & Ideology)
+		limit = {
+			OR = {
+				country_has_state_religion = rel:confucian
+				religion = { has_discrimination_trait = confucian_branch }
+			}
+		}
+		ig:ig_intelligentsia = { 
+			set_interest_group_name = ig_literati
+			remove_ideology = ideology_anti_clerical
+		}
+	}
+	else_if = {		# Literati (Name Only)
+		limit = {
+			civil_war_origin_country = {
+				any_primary_culture = { has_discrimination_trait = han_chinese }
+			}
+		}
+		ig:ig_intelligentsia = { 
+			set_interest_group_name = ig_literati
+		}
+	}
+	if = {		# Constitutionalist
+		limit = {
+			civil_war_origin_country = {
+				ig:ig_intelligentsia = { has_ideology = ideology:ideology_constitutionalist }
+			}
+		}
+		ig:ig_intelligentsia = {
+			remove_ideology = ideology_republican
+			add_ideology = ideology_constitutionalist
+		}
+	}
+	## End Intellegentsia
+	## Start Trade Unions
+	if = {		# Socialism
+		limit = {
+			civil_war_origin_country = { has_technology_researched = socialism }
+		}
+		ig:ig_trade_unions = {
+			add_ideology = ideology_socialist
+		}
+	}
+	## End Trade Unions
+	## Start Universal
+	if = {		# Feminism
+		limit = {
+			civil_war_origin_country = { has_technology_researched = feminism }
+		}
+		every_interest_group = {
+			limit = {
+				has_ideology = ideology:ideology_liberal
+			}
+			remove_ideology = ideology_liberal
+			add_ideology = ideology_liberal_modern
+		}
+		every_interest_group = {
+			limit = {
+				has_ideology = ideology:ideology_egalitarian
+			}
+			remove_ideology = ideology_egalitarian
+			add_ideology = ideology_egalitarian_modern
+		}
+	}
+	## End Universal
+	trigger_event = {
+		id = zzz_cc_dynamic_characters.1
+		days = 1
+	}
+}
+
+converter_ig_traits_effect = {
+	ig:ig_armed_forces = {
+		if = {
+			limit = {
+				owner = {
+					ig:ig_landowners = { has_ideology = ideology:ideology_scholar_paternalistic }
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_newly_created_army
+			set_ig_trait = ig_trait:ig_trait_self_strengthening
+			set_ig_trait = ig_trait:ig_trait_parochial_leadership
+		}
+		else_if = {
+			limit = {
+				owner = { country_is_in_europe = yes }
+				global_var:fra_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+			}
+			set_ig_trait = ig_trait:ig_trait_materiel_waste
+			set_ig_trait = ig_trait:ig_trait_veteran_consultation
+			set_ig_trait = ig_trait:ig_trait_elan_vital
+		}
+		else_if = {
+			limit = {
+				owner = {
+					any_primary_culture = {
+						OR = {
+							is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+							is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+							is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+							is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+						}
+						NOR = {
+							has_discrimination_trait = indigenous_american_heritage
+							is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this }
+						}
+					}
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_materiel_waste
+			set_ig_trait = ig_trait:ig_trait_veteran_consultation
+			set_ig_trait = ig_trait:ig_trait_el_buen_jefe
+		}
+		else_if = {
+			limit = {
+				owner = {
+					has_dlc_feature = rp1_content
+					any_primary_culture = {
+						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+						NOT = { has_discrimination_trait = indigenous_american_heritage }
+					}
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_coronelismo
+			set_ig_trait = ig_trait:ig_trait_clube_militar
+			set_ig_trait = ig_trait:ig_trait_patriotic_fervor
+		}
+		else = {
+			set_ig_trait = ig_trait:ig_trait_materiel_waste
+			set_ig_trait = ig_trait:ig_trait_veteran_consultation
+			set_ig_trait = ig_trait:ig_trait_patriotic_fervor
+		}
+	}
+	ig:ig_devout = {
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						country_has_state_religion = rel:protestant
+						religion = { has_discrimination_trait = proto_protestant }
+					}
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_pious_fiction
+			set_ig_trait = ig_trait:ig_trait_divine_right
+			set_ig_trait = ig_trait:ig_trait_work_ethic
+		}
+		else_if = {
+			limit = {
+				owner = {
+					country_has_state_religion = rel:gelugpa
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_pious_fiction
+			set_ig_trait = ig_trait:ig_trait_divine_right
+			set_ig_trait = ig_trait:ig_trait_temporal_mandate
+		}
+		else_if = {
+			limit = {
+				owner = {
+					OR = {
+						country_has_state_religion = rel:hindu
+						religion = { has_discrimination_trait = buddhist }
+						religion = { has_discrimination_trait = vedic }
+					}
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_pious_fiction
+			set_ig_trait = ig_trait:ig_trait_divine_right
+			set_ig_trait = ig_trait:ig_trait_asceticism
+		}
+		else_if = {
+			limit = {
+				owner = {
+					country_has_state_religion = rel:sikh
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_pious_fiction
+			set_ig_trait = ig_trait:ig_trait_khalsa
+			set_ig_trait = ig_trait:ig_trait_kar_seva
+		}
+		else_if = {
+			limit = {
+				owner.religion = { has_discrimination_trait = jewish }
+			}
+			set_ig_trait = ig_trait:ig_trait_traditsye
+			set_ig_trait = ig_trait:ig_trait_yeshivot
+			set_ig_trait = ig_trait:ig_trait_the_best_revenge
+		}
+		else_if = {
+			limit = {
+				owner = {
+					country_has_state_religion = rel:shinto
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_haibutsu_kishaku
+			set_ig_trait = ig_trait:ig_trait_secular_shrine_theory
+			set_ig_trait = ig_trait:ig_trait_heavenly_sovereign
+		}
+		else_if = {
+			limit = {
+				owner = {
+					religion = { has_discrimination_trait = muslim }
+					NOT = { any_primary_culture = { has_discrimination_trait = turkic } }
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_pious_fiction
+			set_ig_trait = ig_trait:ig_trait_sharia
+			set_ig_trait = ig_trait:ig_trait_da_wat
+		}
+		else_if = {
+			limit = {
+				owner = {
+					religion = { has_discrimination_trait = muslim }
+					any_primary_culture = { has_discrimination_trait = turkic }
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_pious_fiction
+			set_ig_trait = ig_trait:ig_trait_mecelle
+			set_ig_trait = ig_trait:ig_trait_da_wat
+		}
+		else = {
+			set_ig_trait = ig_trait:ig_trait_pious_fiction
+			set_ig_trait = ig_trait:ig_trait_divine_right
+			set_ig_trait = ig_trait:ig_trait_be_fruitful_and_multiply
+		}
+	}
+	ig:ig_industrialists = {
+		if = {
+			limit = {
+				owner = { any_primary_culture = { has_discrimination_trait = yamato } }
+			}
+			set_ig_trait = ig_trait:ig_trait_zaibatsu_withdrawal
+			set_ig_trait = ig_trait:ig_trait_engines_of_progress
+			set_ig_trait = ig_trait:ig_trait_zaibatsu_cooperation
+		}
+		else_if = {
+			limit = {
+				owner = {
+					country_has_primary_culture = global_var:swe_culture
+					capital = {
+						OR = {
+							region = sr:region_north_sea_coast
+							region = sr:region_baltic
+						}
+					}
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_tax_avoidance
+			set_ig_trait = ig_trait:ig_trait_engines_of_progress
+			set_ig_trait = ig_trait:ig_trait_kommerskollegium
+		}
+		else_if = {
+			limit = {
+				has_dlc_feature = voice_of_the_people_content
+				owner = {
+					capital = {
+						OR = {
+							region = sr:region_france
+							region = sr:region_occitania
+						}
+					}
+				}
+				global_var:fra_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+			}
+			set_ig_trait = ig_trait:ig_trait_tax_avoidance
+			set_ig_trait = ig_trait:ig_trait_engines_of_progress
+			set_ig_trait = ig_trait:ig_trait_ventilate_unify_beautify
+		}
+		else_if = {
+			limit = {
+				has_dlc_feature = rp1_content
+				owner = {
+					any_primary_culture = {
+						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+						NOT = { has_discrimination_trait = indigenous_american_heritage }
+					}
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_tax_avoidance
+			set_ig_trait = ig_trait:ig_trait_the_goods_must_flow
+			set_ig_trait = ig_trait:ig_trait_job_creators
+		}
+		else = {
+			set_ig_trait = ig_trait:ig_trait_tax_avoidance
+			set_ig_trait = ig_trait:ig_trait_engines_of_progress
+			set_ig_trait = ig_trait:ig_trait_job_creators
+		}
+	}
+	ig:ig_intelligentsia = {
+		if = {
+			limit = {
+				owner = {
+					ig:ig_landowners = { has_ideology = ideology:ideology_scholar_paternalistic }
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_social_criticism
+			set_ig_trait = ig_trait:ig_trait_avant_garde
+			set_ig_trait = ig_trait:ig_trait_restoration
+		}
+		else_if = {
+			limit = {
+				owner = {
+					OR = {
+						country_tier = empire
+						country_tier = hegemony
+					}
+					OR = {
+						has_law = law_type:law_monarchy
+						has_law = law_type:law_theocracy
+					}
+					OR = {
+						has_law = law_type:law_autocracy
+						has_law = law_type:law_oligarchy
+					}
+					OR = {
+						has_law = law_type:law_traditionalism
+						has_law = law_type:law_agrarianism
+					}
+					OR = {
+						has_law = law_type:law_serfdom
+						has_law = law_type:law_tenant_farmers
+					}
+					OR = {
+						has_law = law_type:law_censorship
+						has_law = law_type:law_peasant_levies
+						has_law = law_type:law_slave_trade
+					}
+				}
+				OR = {
+					global_var:rus_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+					global_var:tur_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_crisis_of_identity
+			set_ig_trait = ig_trait:ig_trait_avant_garde
+			set_ig_trait = ig_trait:ig_trait_propagandists
+		}
+		else_if = {
+			limit = {
+				has_dlc_feature = voice_of_the_people_content
+				owner = {
+					capital = {
+						OR = {
+							region = sr:region_france
+							region = sr:region_occitania
+						}
+					}
+				}
+				global_var:fra_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+			}
+			set_ig_trait = ig_trait:ig_trait_social_criticism
+			set_ig_trait = ig_trait:ig_trait_avant_garde
+			set_ig_trait = ig_trait:ig_trait_les_beaux_arts
+		}
+		else_if = {
+			limit = {
+				has_dlc_feature = rp1_content
+				owner = {
+					any_primary_culture = {
+						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+						NOT = { has_discrimination_trait = indigenous_american_heritage }
+					}
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_brasilidade
+			set_ig_trait = ig_trait:ig_trait_bachareis
+			set_ig_trait = ig_trait:ig_trait_social_criticism
+		}
+		else = {
+			set_ig_trait = ig_trait:ig_trait_social_criticism
+			set_ig_trait = ig_trait:ig_trait_avant_garde
+			set_ig_trait = ig_trait:ig_trait_propagandists
+		}
+	}
+	ig:ig_landowners = {
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						has_law = law_type:law_traditionalism
+						has_law = law_type:law_agrarianism
+						has_law = law_type:law_serfdom
+						has_law = law_type:law_tenant_farmers
+						has_law = law_type:law_peasant_levies
+					}
+				}
+				global_var:rus_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+			}
+			set_ig_trait = ig_trait:ig_trait_profitable_estates
+			set_ig_trait = ig_trait:ig_trait_the_velvet_book
+			set_ig_trait = ig_trait:ig_trait_bad_boyars
+		}
+		else_if = {
+			limit = {
+				has_dlc_feature = rp1_content
+				owner = {
+					any_primary_culture = {
+						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+						NOT = { has_discrimination_trait = indigenous_american_heritage }
+					}
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_noble_privileges
+			set_ig_trait = ig_trait:ig_trait_fazenda_ibicaba
+			set_ig_trait = ig_trait:ig_trait_latifundios
+		}
+		else_if = {
+			limit = { has_ideology = ideology:ideology_junker_paternalistic }
+			set_ig_trait = ig_trait:ig_trait_noble_privileges
+			set_ig_trait = ig_trait:ig_trait_family_ties
+			set_ig_trait = ig_trait:ig_trait_junkerdom
+		}
+		else_if = {
+			limit = {
+				owner = {
+					OR = {
+						country_tier = empire
+						country_tier = hegemony
+					}
+					capital = { region = sr:region_south_germany }
+				}
+				global_var:sou_ger_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+			}
+			set_ig_trait = ig_trait:ig_trait_noble_privileges
+			set_ig_trait = ig_trait:ig_trait_family_ties
+			set_ig_trait = ig_trait:ig_trait_wiener_walzer
+		}
+		else_if = {
+			limit = {
+				owner = {
+					any_primary_culture = {
+						OR = {
+							is_target_in_global_variable_list = { name = global_american_cultures target = this }
+							is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+						}
+						NOT = { has_discrimination_trait = indigenous_american_heritage }
+					}
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_noble_privileges
+			set_ig_trait = ig_trait:ig_trait_family_ties
+			set_ig_trait = ig_trait:ig_trait_patrician_philanthropy
+		}
+		else = {
+			set_ig_trait = ig_trait:ig_trait_noble_privileges
+			set_ig_trait = ig_trait:ig_trait_family_ties
+			set_ig_trait = ig_trait:ig_trait_noblesse_oblige
+		}
+	}
+	ig:ig_petty_bourgeoisie = {
+		if = {
+			limit = {
+				owner = {
+					country_has_primary_culture = global_var:swe_culture
+					capital = {
+						OR = {
+							region = sr:region_north_sea_coast
+							region = sr:region_baltic
+						}
+					}
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_xenophobia
+			set_ig_trait = ig_trait:ig_trait_bergsbrukens_valdistrikten
+			set_ig_trait = ig_trait:ig_trait_treasury_bonds
+		}
+		else_if = {
+			limit = {
+				owner = { any_primary_culture = { has_discrimination_trait = turkic } }
+			}
+			set_ig_trait = ig_trait:ig_trait_xenophobia
+			set_ig_trait = ig_trait:ig_trait_effendi
+			set_ig_trait = ig_trait:ig_trait_reorganization
+		}
+		else_if = {
+			limit = {
+				owner = {
+					country_has_primary_culture = global_var:urabi_culture
+					capital = { region = sr:region_nile_basin }
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_xenophobia
+			set_ig_trait = ig_trait:ig_trait_effendi
+			set_ig_trait = ig_trait:ig_trait_treasury_bonds
+		}
+		else_if = {
+			limit = {
+				has_dlc_feature = voice_of_the_people_content
+				owner = {
+					capital = {
+						OR = {
+							region = sr:region_france
+							region = sr:region_occitania
+						}
+					}
+				}
+				global_var:fra_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+			}
+			set_ig_trait = ig_trait:ig_trait_xenophobia
+			set_ig_trait = ig_trait:ig_trait_haute_finance
+			set_ig_trait = ig_trait:ig_trait_master_of_the_house
+		}
+		else_if = {
+			limit = {
+				owner = {
+					capital = {
+						OR = {
+							region = sr:region_england
+							region = sr:region_north_sea_coast
+						}
+					}
+				}
+				global_var:gbr_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+			}
+			set_ig_trait = ig_trait:ig_trait_bah_humbug
+			set_ig_trait = ig_trait:ig_trait_civil_service
+			set_ig_trait = ig_trait:ig_trait_old_lady_of_threadneedle_street
+		}
+		else = {
+			set_ig_trait = ig_trait:ig_trait_xenophobia
+			set_ig_trait = ig_trait:ig_trait_middle_managers
+			set_ig_trait = ig_trait:ig_trait_treasury_bonds
+		}
+	}
+	ig:ig_rural_folk = {
+		if = {
+			limit = {
+				has_dlc_feature = rp1_content
+				owner = {
+					any_primary_culture = {
+						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+						NOT = { has_discrimination_trait = indigenous_american_heritage }
+					}
+				}
+			}
+			set_ig_trait = ig_trait:ig_trait_old_ways
+			set_ig_trait = ig_trait:ig_trait_plantation_work
+			set_ig_trait = ig_trait:ig_trait_nucleos_coloniais
+		}
+		else_if = {
+			limit = {
+				owner = {
+					OR = {
+						has_law = law_type:law_traditionalism
+						has_law = law_type:law_agrarianism
+						has_law = law_type:law_serfdom
+						has_law = law_type:law_tenant_farmers
+						has_law = law_type:law_homesteading
+						has_law = law_type:law_collectivized_agriculture
+					}
+				}
+				global_var:rus_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+			}
+			set_ig_trait = ig_trait:ig_trait_old_ways
+			set_ig_trait = ig_trait:ig_trait_honest_work
+			set_ig_trait = ig_trait:ig_trait_obshchina
+		}
+		else_if = {
+			limit = {
+				owner = {
+					country_has_primary_culture = global_var:urabi_culture
+					capital = { region = sr:region_nile_basin }
+				}
+			}
+			set_interest_group_name = ig_fellahin
+			set_ig_trait = ig_trait:ig_trait_old_ways
+			set_ig_trait = ig_trait:ig_trait_fellahin
+			set_ig_trait = ig_trait:ig_trait_farmers_markets
+		}
+		else = {
+			set_ig_trait = ig_trait:ig_trait_old_ways
+			set_ig_trait = ig_trait:ig_trait_honest_work
+			set_ig_trait = ig_trait:ig_trait_farmers_markets
+		}
+	}
+	ig:ig_trade_unions = {
+		if = {
+			limit = {
+				has_dlc_feature = voice_of_the_people_content
+				owner = {
+					capital = {
+						OR = {
+							region = sr:region_france
+							region = sr:region_occitania
+						}
+					}
+				}
+				global_var:fra_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+			}
+			set_ig_trait = ig_trait:ig_trait_work_to_rule
+			set_ig_trait = ig_trait:ig_trait_industrial_organizers
+			set_ig_trait = ig_trait:ig_trait_bourse_du_travail
+		}
+		else = {
+			set_ig_trait = ig_trait:ig_trait_work_to_rule
+			set_ig_trait = ig_trait:ig_trait_industrial_organizers
+			set_ig_trait = ig_trait:ig_trait_solidarity
+		}
+	}
+}
+
+converter_decentralized_subjects_effect = {
+	every_subject_or_below = {
+		limit = { is_country_type = decentralized }
+		effect_starting_technology_tier_4_tech = yes
+		every_subject_or_below = {
+			limit = { is_country_type = decentralized }
+			every_primary_culture = {
+				limit = { NOT = { is_primary_culture_of = prev.overlord } }
+				prev.overlord = {
+					add_to_local_variable_list = {
+						name = decentralized_potential_cultures
+						target = prev
+					}
+				}
+			}
+			overlord = { annex_with_incorporation = prev }
+		}
+		set_country_type = unrecognized
+		set_local_variable = converter_was_decentralized_subject
+	}
+}

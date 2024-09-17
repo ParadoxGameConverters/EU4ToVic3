@@ -1,0 +1,2233 @@
+﻿### Argentina character template file ###
+
+ARG_domingo_sarmiento = { #Domingo Faustino Sarmiento
+	first_name = Domingo
+	last_name = Sarmiento
+	historical = yes
+	female = no
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+	birth_date = 1811.2.15
+	traits = {
+		literary
+		bigoted
+		innovative
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_domingo_sarmiento
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1839.1.1
+        latest_usage_date = 1875.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_domingo_sarmiento
+		}
+	}
+}
+
+fem_ARG_domingo_sarmiento = { #Domingo Faustino Sarmiento
+	first_name = Dominga
+	last_name = Sarmiento
+	historical = yes
+	female = yes
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+	birth_date = 1811.2.15
+	traits = {
+		literary
+		bigoted
+		innovative
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_domingo_sarmiento
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1839.1.1
+        latest_usage_date = 1875.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_domingo_sarmiento
+		}
+	}
+}
+
+ARG_juan_del_campillo = { #Juan del Campillo
+	first_name = Juan
+	last_name = del_Campillo
+	historical = yes
+	female = no
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_traditionalist
+	birth_date = 1848.7.7
+	traits = {
+		basic_diplomat
+		pious
+		charismatic # Beautiful handwriting, apparently
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_juan_del_campillo
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_petty_bourgeoisie
+        }   
+        earliest_usage_date = 1850.1.1
+        latest_usage_date = 1866.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_juan_del_campillo
+		}
+	}
+}
+
+fem_ARG_juan_del_campillo = { #Juan del Campillo
+	first_name = Juanita
+	last_name = del_Campillo
+	historical = yes
+	female = yes
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_traditionalist
+	birth_date = 1848.7.7
+	traits = {
+		basic_diplomat
+		pious
+		charismatic # Beautiful handwriting, apparently
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_juan_del_campillo
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_petty_bourgeoisie
+        }   
+        earliest_usage_date = 1850.1.1
+        latest_usage_date = 1866.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_juan_del_campillo
+		}
+	}
+}
+
+ARG_pedro_ferre = { #Pedro Juan Ferré
+	first_name = Pedro
+	last_name = Ferre
+	historical = yes
+	female = no
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_industrialists
+	ideology = ideology_protectionist
+	birth_date = 1788.6.6
+	traits = {
+		innovative
+		basic_political_operator
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pedro_ferre
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1839.1.1
+        latest_usage_date = 1867.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pedro_ferre
+		}
+	}
+}
+
+fem_ARG_pedro_ferre = { #Pedro Juan Ferré
+	first_name = Petra
+	last_name = Ferre
+	historical = yes
+	female = yes
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_industrialists
+	ideology = ideology_protectionist
+	birth_date = 1788.6.6
+	traits = {
+		innovative
+		basic_political_operator
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pedro_ferre
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1839.1.1
+        latest_usage_date = 1867.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pedro_ferre
+		}
+	}
+}
+
+ARG_mariano_jose_de_escalada = { #Mariano José de Escalada, opponent of Rosas
+	first_name = Mariano_Jose
+	last_name = de_Escalada
+	historical = yes
+	female = no
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_devout
+	ideology = ideology_moderate
+	birth_date = 1799.11.26
+	traits = {
+		cautious
+		basic_diplomat
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mariano_jose_de_escalada
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1850.1.1
+        latest_usage_date = 1870.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_mariano_jose_de_escalada
+		}
+	}
+}
+
+fem_ARG_mariano_jose_de_escalada = { #Mariano José de Escalada, opponent of Rosas
+	first_name = Mariana_Pepita
+	last_name = de_Escalada
+	historical = yes
+	female = yes
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_devout
+	ideology = ideology_moderate
+	birth_date = 1799.11.26
+	traits = {
+		cautious
+		basic_diplomat
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mariano_jose_de_escalada
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1850.1.1
+        latest_usage_date = 1870.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_mariano_jose_de_escalada
+		}
+	}
+}
+
+ARG_leon_frederico_aneiros = { #Leon Federico Aneiros
+	first_name = Leon
+	last_name = Aneiros
+	historical = yes
+	female = no
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_devout
+	ideology = ideology_traditionalist
+	birth_date = 1826.6.28
+	traits = {
+		literary
+		ambitious
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_leon_frederico_aneiros
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1869.1.1
+        latest_usage_date = 1894.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_leon_frederico_aneiros
+		}
+	}
+}
+
+fem_ARG_leon_frederico_aneiros = { #Leon Federico Aneiros
+	first_name = Leandra
+	last_name = Aneiros
+	historical = yes
+	female = yes
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_devout
+	ideology = ideology_traditionalist
+	birth_date = 1826.6.28
+	traits = {
+		literary
+		ambitious
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_leon_frederico_aneiros
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1869.1.1
+        latest_usage_date = 1894.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_leon_frederico_aneiros
+		}
+	}
+}
+
+ARG_uladislao_castellano = { #Uladislao Castellano
+	first_name = Uladislao
+	last_name = Castellano
+	historical = yes
+	female = no
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_devout
+	ideology = ideology_moderate
+	birth_date = 1834.11.23
+	traits = {
+		pious
+		erudite
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_uladislao_castellano
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1873.1.1
+        latest_usage_date = 1900.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_uladislao_castellano
+		}
+	}
+}
+
+fem_ARG_uladislao_castellano = { #Uladislao Castellano
+	first_name = Maria
+	last_name = Castellano
+	historical = yes
+	female = yes
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_devout
+	ideology = ideology_moderate
+	birth_date = 1834.11.23
+	traits = {
+		pious
+		erudite
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_uladislao_castellano
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1873.1.1
+        latest_usage_date = 1900.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_uladislao_castellano
+		}
+	}
+}
+
+ARG_mariano_espinosa = { #Mariano Antonio Espinosa
+	first_name = Mariano
+	last_name = Espinosa
+	historical = yes
+	female = no
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_devout
+	ideology = ideology_reformer
+	birth_date = 1844.7.2
+	traits = {
+		pious
+		charismatic
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mariano_espinosa
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1895.1.1
+        latest_usage_date = 1920.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_mariano_espinosa
+		}
+	}
+}
+
+fem_ARG_mariano_espinosa = { #Mariano Antonio Espinosa
+	first_name = Mariana
+	last_name = Espinosa
+	historical = yes
+	female = yes
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_devout
+	ideology = ideology_reformer
+	birth_date = 1844.7.2
+	traits = {
+		pious
+		charismatic
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mariano_espinosa
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1895.1.1
+        latest_usage_date = 1920.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_mariano_espinosa
+		}
+	}
+}
+
+ARG_pedro_zenteno = { #Pedro Alejandrino Zenteno
+	first_name = Pedro
+	last_name = Zenteno
+	historical = yes
+	female = no
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_devout
+	ideology = ideology_traditionalist
+	birth_date = 1794.1.20
+	traits = {
+		basic_political_operator
+		reckless
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pedro_zenteno
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1841.1.1
+        latest_usage_date = 1853.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pedro_zenteno
+		}
+	}
+}
+
+fem_ARG_pedro_zenteno = { #Pedro Alejandrino Zenteno
+	first_name = Petra
+	last_name = Zenteno
+	historical = yes
+	female = yes
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_devout
+	ideology = ideology_traditionalist
+	birth_date = 1794.1.20
+	traits = {
+		basic_political_operator
+		reckless
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pedro_zenteno
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1841.1.1
+        latest_usage_date = 1853.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pedro_zenteno
+		}
+	}
+}
+
+ARG_santiago_luis_copello = { #Santiago Luis Copello
+	first_name = Santiago
+	last_name = Copello
+	historical = yes
+	female = no
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_devout
+	ideology = ideology_traditionalist
+	birth_date = 1794.1.20
+	traits = {
+		experienced_political_operator
+		ambitious
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_santiago_luis_copello
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1920.1.1
+        latest_usage_date = 1936.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_santiago_luis_copello
+		}
+	}
+}
+
+fem_ARG_santiago_luis_copello = { #Santiago Luis Copello
+	first_name = Raquel
+	last_name = Copello
+	historical = yes
+	female = yes
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_devout
+	ideology = ideology_traditionalist
+	birth_date = 1794.1.20
+	traits = {
+		experienced_political_operator
+		ambitious
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_santiago_luis_copello
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1920.1.1
+        latest_usage_date = 1936.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_santiago_luis_copello
+		}
+	}
+}
+
+ARG_manuel_leiva = { #Manuel Leiva
+	first_name = Manuel
+	last_name = Leiva
+	historical = yes
+	female = no
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_protectionist
+	birth_date = 1794.3.5 #Guesswork
+	traits = {
+		persistent
+		reckless
+		basic_diplomat
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_manuel_leiva
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_petty_bourgeoisie
+        }   
+        earliest_usage_date = 1850.1.1
+        latest_usage_date = 1870.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_manuel_leiva
+		}
+	}
+}
+
+fem_ARG_manuel_leiva = { #Manuel Leiva
+	first_name = Manuelita
+	last_name = Leiva
+	historical = yes
+	female = yes
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_protectionist
+	birth_date = 1794.3.5 #Guesswork
+	traits = {
+		persistent
+		reckless
+		basic_diplomat
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_manuel_leiva
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_petty_bourgeoisie
+        }   
+        earliest_usage_date = 1850.1.1
+        latest_usage_date = 1870.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_manuel_leiva
+		}
+	}
+}
+
+ARG_juan_maria_gutierrez = { #Juan María Gutiérrez
+	first_name = Juan_Maria
+	last_name = Gutierrez
+	historical = yes
+	female = no
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+	birth_date = 1809.5.6
+	traits = {
+		erudite
+		basic_political_operator
+		direct
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_juan_maria_gutierrez
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1852.1.1
+        latest_usage_date = 1872.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_juan_maria_gutierrez
+		}
+	}
+}
+
+fem_ARG_juan_maria_gutierrez = { #Juan María Gutiérrez
+	first_name = Giovana_Maria
+	last_name = Gutierrez
+	historical = yes
+	female = yes
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+	birth_date = 1809.5.6
+	traits = {
+		erudite
+		basic_political_operator
+		direct
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_juan_maria_gutierrez
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1852.1.1
+        latest_usage_date = 1872.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_juan_maria_gutierrez
+		}
+	}
+}
+
+ARG_aaron_castellanos = { #Aaron Castellanos
+	first_name = Aaron
+	last_name = Castellanos
+	historical = yes
+	female = no
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_jingoist_leader # Mostly because he was a massive coloniser
+	birth_date = 1799.8.8
+	traits = {
+		experienced_colonial_administrator
+		explorer
+		innovative
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_aaron_castellanos
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_landowners
+        }   
+        earliest_usage_date = 1837.1.1
+        latest_usage_date = 1880.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_aaron_castellanos
+		}
+	}
+}
+
+fem_ARG_aaron_castellanos = { #Aaron Castellanos
+	first_name = Elsy
+	last_name = Castellanos
+	historical = yes
+	female = yes
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_jingoist_leader # Mostly because he was a massive coloniser
+	birth_date = 1799.8.8
+	traits = {
+		experienced_colonial_administrator
+		explorer
+		innovative
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_aaron_castellanos
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_landowners
+        }   
+        earliest_usage_date = 1837.1.1
+        latest_usage_date = 1880.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_aaron_castellanos
+		}
+	}
+}
+
+ARG_pedro_antonio_echague = { #Pedro Antonio Echagüe
+	first_name = Pedro_Antonio
+	last_name = Echague
+	historical = yes
+	female = no
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	birth_date = 1859.12.24
+	traits = {
+		basic_political_operator
+		cautious
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pedro_antonio_echague
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_landowners
+        }   
+        earliest_usage_date = 1900.1.1
+        latest_usage_date = 1920.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pedro_antonio_echague
+		}
+	}
+}
+
+fem_ARG_pedro_antonio_echague = { #Pedro Antonio Echagüe
+	first_name = Petra_Antonia
+	last_name = Echague
+	historical = yes
+	female = yes
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	birth_date = 1859.12.24
+	traits = {
+		basic_political_operator
+		cautious
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pedro_antonio_echague
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_landowners
+        }   
+        earliest_usage_date = 1900.1.1
+        latest_usage_date = 1920.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pedro_antonio_echague
+		}
+	}
+}
+
+ARG_jose_hernandez = { #Jose Hernandez
+	first_name = JosE_
+	last_name = Hernandez
+	historical = yes
+	female = no
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_rural_folk
+	ideology = ideology_social_democrat
+	birth_date = 1834.11.10
+	traits = {
+		literary
+		inspirational_orator
+		romantic
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jose_hernandez
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+        }   
+        earliest_usage_date = 1856.1.1
+        latest_usage_date = 1886.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jose_hernandez
+		}
+	}
+}
+
+fem_ARG_jose_hernandez = { #Jose Hernandez
+	first_name = Pepita
+	last_name = Hernandez
+	historical = yes
+	female = yes
+	ig_leader = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_rural_folk
+	ideology = ideology_social_democrat
+	birth_date = 1834.11.10
+	traits = {
+		literary
+		inspirational_orator
+		romantic
+	}
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jose_hernandez
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+        }   
+        earliest_usage_date = 1856.1.1
+        latest_usage_date = 1886.1.1
+        chance = 75
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jose_hernandez
+		}
+	}
+}
+
+ARG_lucio_norberto_mansilla = {
+	# Lucio Norberto Mansilla
+	first_name = Lucio
+	last_name = Mansilla
+	historical = yes
+	birth_date = 1792.3.4
+	is_general = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_radical # Very committed to democracy
+	traits = {
+		explorer
+		experienced_defensive_strategist
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_lucio_norberto_mansilla
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 100
+	}
+	trait_generation = { }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_lucio_norberto_mansilla
+		}
+	}
+}
+
+fem_ARG_lucio_norberto_mansilla = {
+	# Lucio Norberto Mansilla
+	first_name = Lucia
+	last_name = Mansilla
+	historical = yes
+	female = yes
+	birth_date = 1792.3.4
+	is_general = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_radical # Very committed to democracy
+	traits = {
+		explorer
+		experienced_defensive_strategist
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_lucio_norberto_mansilla
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 100
+	}
+	trait_generation = { }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_lucio_norberto_mansilla
+		}
+	}
+}
+
+ARG_bartolome_mitre = {
+	# Bartolomé Mitre
+	first_name = Bartolome
+	last_name = Mitre
+	historical = yes
+	birth_date = 1821.6.26
+	is_general = yes
+	commander_rank = default
+	interest_group = ig_intelligentsia
+	ideology = ideology_jingoist_leader
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	traits = {
+		expert_political_operator
+		experienced_artillery_commander
+		ambitious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_bartolome_mitre
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = general
+		earliest_usage_date = 1859.1.1
+		latest_usage_date = 1895.1.1	
+		chance = 100
+	}
+	trait_generation = { }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_bartolome_mitre
+		}
+	}
+}
+
+fem_ARG_bartolome_mitre = {
+	# Bartolomé Mitre
+	first_name = Junia
+	last_name = Mitre
+	historical = yes
+	female = yes
+	birth_date = 1821.6.26
+	is_general = yes
+	commander_rank = default
+	interest_group = ig_intelligentsia
+	ideology = ideology_jingoist_leader
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	traits = {
+		expert_political_operator
+		experienced_artillery_commander
+		ambitious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_bartolome_mitre
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = general
+		earliest_usage_date = 1859.1.1
+		latest_usage_date = 1895.1.1	
+		chance = 100
+	}
+	trait_generation = { }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_bartolome_mitre
+		}
+	}
+}
+
+ARG_juan_andres_gelly_y_obes = {
+	# Juan Andrés Gelly y Obes
+	first_name = Juan_Andres
+	last_name = Gelly_y_Obes
+	historical = yes
+	birth_date = 1815.5.21
+	is_general = yes
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	traits = {
+		basic_diplomat
+		direct
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_juan_andres_gelly_y_obes
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = general
+		earliest_usage_date = 1862.1.1
+		latest_usage_date = 1890.1.1	
+		chance = 75
+	}
+	trait_generation = { }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_juan_andres_gelly_y_obes
+		}
+	}
+}
+
+fem_ARG_juan_andres_gelly_y_obes = {
+	# Juan Andrés Gelly y Obes
+	first_name = Giovana_Andrea
+	last_name = Gelly_y_Obes
+	historical = yes
+	female = yes
+	birth_date = 1815.5.21
+	is_general = yes
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	traits = {
+		basic_diplomat
+		direct
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_juan_andres_gelly_y_obes
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = general
+		earliest_usage_date = 1862.1.1
+		latest_usage_date = 1890.1.1	
+		chance = 75
+	}
+	trait_generation = { }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_juan_andres_gelly_y_obes
+		}
+	}
+}
+
+ARG_jose_felix_murature = {
+	# José Félix Murature
+	first_name = Jose_Felix
+	last_name = Murature
+	historical = yes
+	birth_date = 1804.6.15 # Unknown
+	is_admiral = yes
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	culture = global_var:nor_ita_culture
+	religion = rel:catholic
+	traits = {
+		brave
+		convoy_raider_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jose_felix_murature
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = admiral
+		earliest_usage_date = 1852.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 50
+	}
+	trait_generation = { }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jose_felix_murature
+		}
+	}
+}
+
+fem_ARG_jose_felix_murature = {
+	# José Félix Murature
+	first_name = Pepita_Felicidad
+	last_name = Murature
+	historical = yes
+	female = yes
+	birth_date = 1804.6.15 # Unknown
+	is_admiral = yes
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	culture = global_var:nor_ita_culture
+	religion = rel:catholic
+	traits = {
+		brave
+		convoy_raider_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jose_felix_murature
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = admiral
+		earliest_usage_date = 1852.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 50
+	}
+	trait_generation = { }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jose_felix_murature
+		}
+	}
+}
+
+ARG_pablo_ricchieri = {
+	# Pablo Ricchieri
+	first_name = Pablo
+	last_name = Ricchieri
+	historical = yes
+	birth_date = 1859.8.8
+	is_general = yes
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate # Very against military-political entanglement
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	traits = {
+		innovative
+		expert_defensive_strategist
+		basic_diplomat
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pablo_ricchieri
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = general
+		earliest_usage_date = 1890.1.1
+		latest_usage_date = 1922.1.1	
+		chance = 75
+	}
+	trait_generation = { }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pablo_ricchieri
+		}
+	}
+}
+
+fem_ARG_pablo_ricchieri = {
+	# Pablo Ricchieri
+	first_name = Paula
+	last_name = Ricchieri
+	historical = yes
+	female = yes
+	birth_date = 1859.8.8
+	is_general = yes
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate # Very against military-political entanglement
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	traits = {
+		innovative
+		expert_defensive_strategist
+		basic_diplomat
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pablo_ricchieri
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = general
+		earliest_usage_date = 1890.1.1
+		latest_usage_date = 1922.1.1	
+		chance = 75
+	}
+	trait_generation = { }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pablo_ricchieri
+		}
+	}
+}
+
+ARG_nicanor_caceres = {
+	# Nicanor Cáceres
+	first_name = Nicanor
+	last_name = Caceres
+	historical = yes
+	birth_date = 1813.5.10 # Guesswork
+	is_general = yes
+	commander_rank = default
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian # The Eternal Caudillo
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	traits = {
+		charismatic
+		experienced_offensive_planner
+		imperious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_nicanor_caceres
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = general
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 75
+	}
+	trait_generation = { }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_nicanor_caceres
+		}
+	}
+}
+
+fem_ARG_nicanor_caceres = {
+	# Nicanor Cáceres
+	first_name = Nicore
+	last_name = Caceres
+	historical = yes
+	female = yes
+	birth_date = 1813.5.10 # Guesswork
+	is_general = yes
+	commander_rank = default
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian # The Eternal Caudillo
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	traits = {
+		charismatic
+		experienced_offensive_planner
+		imperious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_nicanor_caceres
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = general
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 75
+	}
+	trait_generation = { }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_nicanor_caceres
+		}
+	}
+}
+
+ARG_julio_de_vedia = {
+	# Julio Fabián de Vedia
+	first_name = Julio
+	last_name = de_Vedia
+	historical = yes
+	birth_date = 1826.1.20
+	is_general = yes
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader # Colonizer
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	traits = {
+		basic_artillery_commander
+		persistent
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_julio_de_vedia
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = general
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1890.1.1	
+		chance = 75
+	}
+	trait_generation = { }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_julio_de_vedia
+		}
+	}
+}
+
+fem_ARG_julio_de_vedia = {
+	# Julio Fabián de Vedia
+	first_name = Julia
+	last_name = de_Vedia
+	historical = yes
+	female = yes
+	birth_date = 1826.1.20
+	is_general = yes
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader # Colonizer
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	traits = {
+		basic_artillery_commander
+		persistent
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_julio_de_vedia
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = general
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1890.1.1	
+		chance = 75
+	}
+	trait_generation = { }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_julio_de_vedia
+		}
+	}
+}
+
+ARG_alejo_roca = {
+	# Alejo Julio Argentino Roca 
+	first_name = Alejo
+	last_name = Argentino_Roca
+	historical = yes
+	birth_date = 1843.7.17
+	is_general = yes
+	commander_rank = default
+	interest_group = ig_landowners
+	ideology = ideology_jingoist_leader # Colonizer
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	traits = {
+		cruel
+		basic_offensive_planner
+		experienced_colonial_administrator
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_alejo_roca
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = general
+		earliest_usage_date = 1874.1.1
+		latest_usage_date = 1900.1.1	
+		chance = 75
+	}
+	trait_generation = { }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_alejo_roca
+		}
+	}
+}
+
+fem_ARG_alejo_roca = {
+	# Alejo Julio Argentino Roca 
+	first_name = Alexia
+	last_name = Argentino_Roca
+	historical = yes
+	female = yes
+	birth_date = 1843.7.17
+	is_general = yes
+	commander_rank = default
+	interest_group = ig_landowners
+	ideology = ideology_jingoist_leader # Colonizer
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	traits = {
+		cruel
+		basic_offensive_planner
+		experienced_colonial_administrator
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_alejo_roca
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+		}
+		role = general
+		earliest_usage_date = 1874.1.1
+		latest_usage_date = 1900.1.1	
+		chance = 75
+	}
+	trait_generation = { }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_alejo_roca
+		}
+	}
+}
+
+ARG_juan_bautista_alberdi = { #Juan Bautista Alberdi
+	first_name = Juan_Bautista
+	last_name = Alberdi
+	historical = yes
+	female = no
+	is_agitator = yes 
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	birth_date = 1810.8.29 
+	traits = {
+		erudite
+		brave
+		literary
+	}
+    agitator_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_juan_bautista_alberdi
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1837.1.1
+        latest_usage_date = 1880.1.1
+        chance = 100
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_juan_bautista_alberdi
+		}
+	}
+}
+
+fem_ARG_juan_bautista_alberdi = { #Juan Bautista Alberdi
+	first_name = Giovana_Juanita
+	last_name = Alberdi
+	historical = yes
+	female = yes
+	is_agitator = yes 
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	birth_date = 1810.8.29 
+	traits = {
+		erudite
+		brave
+		literary
+	}
+    agitator_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_juan_bautista_alberdi
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1837.1.1
+        latest_usage_date = 1880.1.1
+        chance = 100
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_juan_bautista_alberdi
+		}
+	}
+}
+
+ARG_juan_bautista_bairoletto = { #Juan Bautista Bairoletto
+	first_name = Juan_Bautista
+	last_name = Bairoletto
+	historical = yes
+	female = no
+	is_agitator = yes 
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_rural_folk
+	ideology = ideology_anarchist
+	birth_date = 1894.11.11
+	traits = {
+		bandit
+		charismatic
+		brave
+	}
+    agitator_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_juan_bautista_bairoletto
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+        }   
+        earliest_usage_date = 1920.1.1
+        latest_usage_date = 1936.1.1
+        chance = 100
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_juan_bautista_bairoletto
+		}
+	}
+}
+
+fem_ARG_juan_bautista_bairoletto = { #Juan Bautista Bairoletto
+	first_name = Giovana_Juanita
+	last_name = Bairoletto
+	historical = yes
+	female = yes
+	is_agitator = yes 
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:catholic
+	interest_group = ig_rural_folk
+	ideology = ideology_anarchist
+	birth_date = 1894.11.11
+	traits = {
+		bandit
+		charismatic
+		brave
+	}
+    agitator_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_juan_bautista_bairoletto
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+        }   
+        earliest_usage_date = 1920.1.1
+        latest_usage_date = 1936.1.1
+        chance = 100
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_juan_bautista_bairoletto
+		}
+	}
+}
+
+ARG_virginia_bolten = { #Virginia Bolten
+	first_name = Virginia
+	last_name = Bolten
+	historical = yes
+	female = yes
+	is_agitator = yes 
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:atheist
+	interest_group = ig_trade_unions
+	ideology = ideology_humanitarian # She was an anarchist, but this is important for council republics
+	birth_date = 1876.12.15 # Guesswork
+	traits = {
+		firebrand
+		persistent
+		brave
+	}
+    agitator_usage = {
+        country_trigger = {
+			is_matriarchal_country = no
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_virginia_bolten
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_trade_unions
+        }   
+        earliest_usage_date = 1900.1.1
+        latest_usage_date = 1936.1.1
+        chance = 100
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_virginia_bolten
+		}
+	}
+}
+
+masc_ARG_virginia_bolten = { #Virginia Bolten
+	first_name = Virginio
+	last_name = Bolten
+	historical = yes
+	female = no
+	is_agitator = yes 
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	religion = rel:atheist
+	interest_group = ig_trade_unions
+	ideology = ideology_humanitarian # She was an anarchist, but this is important for council republics
+	birth_date = 1876.12.15 # Guesswork
+	traits = {
+		firebrand
+		persistent
+		brave
+	}
+    agitator_usage = {
+        country_trigger = {
+			is_matriarchal_country = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_virginia_bolten
+				}
+			}
+			uses_arg_characters = yes
+			has_dlc_feature = rp1_content
+        }
+        interest_group_trigger = {
+			is_interest_group_type = ig_trade_unions
+        }   
+        earliest_usage_date = 1900.1.1
+        latest_usage_date = 1936.1.1
+        chance = 100
+    }
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_virginia_bolten
+		}
+	}
+}

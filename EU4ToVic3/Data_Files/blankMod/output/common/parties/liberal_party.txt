@@ -236,7 +236,7 @@ liberal_party = {
 				trigger = {
 					OR = {
 						AND = {
-							country_has_primary_culture = cu:dixie
+							any_primary_culture = { is_target_in_global_variable_list = { name = global_dixie_cultures target = this } }		### Converter
 							NOT = {
 								exists = c:USA
 								THIS = c:USA
@@ -874,7 +874,7 @@ liberal_party = {
 					}
 				}
 				leader = {
-					culture = { is_target_in_global_variable_list = { name = global_yankee_cultures target = this } }		### Converter
+					culture = { is_yankee_culture = yes }		### Converter
 				}
 			}
 			add = {

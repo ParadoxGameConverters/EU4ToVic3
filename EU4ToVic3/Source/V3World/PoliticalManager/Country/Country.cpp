@@ -5,6 +5,7 @@
 #include "CountryManager/EU4Country.h"
 #include "CountryTierMapper/CountryTierMapper.h"
 #include "CultureMapper/CultureMapper.h"
+#include "Loaders/DefinesLoader/Vic3DefinesLoader.h"
 #include "Loaders/LawLoader/Law.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
 #include "Loaders/LocalizationLoader/EU4LocalizationLoader.h"
@@ -75,13 +76,12 @@ std::vector<std::shared_ptr<V3::SubState>> V3::Country::topPercentileStatesByPop
 	return std::vector<std::shared_ptr<SubState>>{sortedSubStates.begin(), sortedSubStates.begin() + numTopSubStates};
 }
 
-double V3::Country::calculateBureaucracyUsage(const std::map<std::string, Law>& lawsMap) const
+double V3::Country::calculateBureaucracyUsage(const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const
 {
-	// None of the hard-coded Vic3 values needed to calc this are in the defines for some reason.
 	double usage = 0.0;
 
-	usage += calcSubStateBureaucracy(lawsMap);
-	usage += calcInstitutionBureaucracy();
+	usage += calcSubStateBureaucracy(lawsMap, defines);
+	usage += calcInstitutionBureaucracy(defines);
 	usage += calcCharacterBureaucracy();
 
 	return usage;
@@ -193,7 +193,9 @@ void V3::Country::distributeGovAdmins(const double target,
 
 		const auto govAdmin = std::make_shared<Building>(blueprint);
 		govAdmin->setLevel(levels);
-		govAdmin->addInvestor(levels, "national_service", substate->getHomeStateName(), this->tag);
+
+		// TODO(Gawquon): Still need to decide on this fxn being before or after the building negotiation.
+		// govAdmin->addInvestor(levels, "national_service", substate->getHomeStateName(), this->tag);
 
 		substate->addBuilding(govAdmin);
 
@@ -212,7 +214,7 @@ void V3::Country::distributeGovAdmins(const double target,
 		{
 			const auto levels = govAdmin->get()->getLevel();
 			govAdmin->get()->setLevel(levels + 1);
-			govAdmin->get()->addShareholderLevels(1, "national_service");
+			// govAdmin->get()->addShareholderLevels(1, "national_service");
 			generated += PMGeneration;
 
 			if (target <= generated + PMGeneration)
@@ -462,7 +464,9 @@ void V3::Country::convertCulture(const ClayManager& clayManager,
 		 processedData.capitalStateName,
 		 tag);
 	if (cultureMatch)
+	{
 		processedData.cultures.emplace(*cultureMatch);
+	}
 
 	// if this fails... do nothing for now.
 	if (processedData.cultures.empty())
@@ -673,28 +677,6 @@ double V3::Country::getTotalDev() const
 	});
 }
 
-double V3::Country::getOverPopulation() const
-{
-	double pops = 0;
-	double capacity = 0;
-	for (const auto& subState: subStates)
-	{
-		pops += subState->getSubStatePops().getPopCount();
-		capacity += subState->getResource("bg_agriculture");
-	}
-	capacity *= 5000;
-	if (capacity < 5000)
-	{
-		return 10.0;
-	}
-	const auto ratio = pops / capacity;
-	if (ratio < 1.0)
-	{
-		return 1.0;
-	}
-	return ratio;
-}
-
 void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 	 double topInstitutions,
 	 const mappers::CultureMapper& cultureMapper,
@@ -739,7 +721,7 @@ void V3::Country::determineCountryType()
 	}
 }
 
-[[nodiscard]] double V3::Country::calcSubStateBureaucracy(const std::map<std::string, Law>& lawsMap) const
+[[nodiscard]] double V3::Country::calcSubStateBureaucracy(const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const
 {
 	double lawsMult = 0;
 	for (const auto& law: processedData.laws)
@@ -774,23 +756,26 @@ void V3::Country::determineCountryType()
 		{
 			continue;
 		}
-		// Incorporated States - 10 per incorporated state
-		usage += 10;
+		// Incorporated States - STATE_BUREAUCRACY_BASE_COST per incorporated state
+		usage += defines.getStateBureaucracyBaseCost();
 
 		// Pops - only pops in incorporated states count
+		// Divisor = STATE_BUREAUCRACY_POP_MULTIPLE / STATE_BUREAUCRACY_POP_BASE_COST
 		// Modified by laws - game caps this at 0
-		usage += subState->getSubStatePops().getPopCount() / 25000.0 * lawsMult;
+		usage += subState->getSubStatePops().getPopCount() / (defines.getStateBureaucracyPopMultiple() / defines.getStateBureaucracyPopBaseCost()) * lawsMult;
 	}
 	return usage;
 }
 
-double V3::Country::calcInstitutionBureaucracy() const
+double V3::Country::calcInstitutionBureaucracy(const Vic3DefinesLoader& defines) const
 {
 	double usage = 0;
-	const double cost = getIncorporatedPopCount() / 100000.0;
+	double cost = getIncorporatedPopCount() / defines.getStateBureaucracyPopMultiple();
+	cost = std::max(cost, defines.getMinimumInvestmentCost());
+
 	for (const auto& level: processedData.institutions | std::views::values)
 	{
-		usage += cost * level; // If we end up mapping institution levels, it is cost * levels
+		usage += cost * level;
 	}
 	return usage;
 }

@@ -300,13 +300,13 @@ TEST(V3World_StateTests, landshareAccountsForPrimeAndImpassable)
 	const auto second = std::make_shared<V3::SubState>();
 	zeroth->setProvinces(std::map<std::string, std::shared_ptr<V3::Province>>{{"x112233", pm.at("x112233")}, {"x112234", pm.at("x112234")}});
 	first->setProvinces(std::map<std::string, std::shared_ptr<V3::Province>>{{"x112235", pm.at("x112235")}, {"x112236", pm.at("x112236")}});
-	second->setProvinces(std::map<std::string, std::shared_ptr<V3::Province>>{{"x112237", pm.at("x112237")}, {"x112234", pm.at("x445566")}});
+	second->setProvinces(std::map<std::string, std::shared_ptr<V3::Province>>{{"x112237", pm.at("x112237")}, {"x445566", pm.at("x445566")}});
 
 	state.addSubState(zeroth);
 	state.addSubState(first);
 	state.addSubState(second);
 
-	state.distributeLandshares();
+	state.distributeLandshares(5);
 
 	const auto& substates = state.getSubStates();
 	EXPECT_DOUBLE_EQ(substates[0]->getLandshare(), 6.0 / 9);

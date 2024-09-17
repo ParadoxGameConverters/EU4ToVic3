@@ -1,0 +1,58 @@
+﻿# Mexico - MEX
+mex_juarez_character_template = {
+	first_name = Benito
+	last_name = Juarez
+	historical = yes
+	culture = cu:zapotec
+	female = no
+	religion = catholic
+	ideology = ideology_market_liberal
+	interest_group = ig_intelligentsia
+	birth_date = 1806.3.21
+    dna = dna_benito_juarez
+	traits = {
+		experienced_political_operator
+		direct
+		persistent
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_benito_juarez
+				}
+			}
+			OR = {
+				owns_entire_state_region = STATE_MEXICO
+				owns_entire_state_region = STATE_GUERRERO
+				owns_entire_state_region = STATE_OAXACA
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_rural_folk
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1872.1.1
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_benito_juarez
+		}
+	}
+}

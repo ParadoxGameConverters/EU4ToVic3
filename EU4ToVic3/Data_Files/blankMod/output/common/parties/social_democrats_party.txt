@@ -184,7 +184,7 @@ social_democrat_party = {
 			triggered_desc = {
 				desc = party_socialist_party_of_america
 				trigger = {
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_yankee_cultures target = this } }		### Converter
+					any_primary_culture = { is_yankee_culture = yes }		### Converter
 				}
 			}
 			triggered_desc = {
@@ -338,7 +338,7 @@ social_democrat_party = {
 			limit = {
 				is_powerful = no
 				OR = {
-				has_ideology = ideology:ideology_liberal
+					has_ideology = ideology:ideology_liberal
 					has_ideology = ideology:ideology_liberal_modern
 				}
 				owner = {
@@ -507,8 +507,6 @@ social_democrat_party = {
 					has_ideology = ideology:ideology_proletarian
 					has_ideology = ideology:ideology_agrarian
 					has_ideology = ideology:ideology_paternalistic
-					### Converter
-					has_ideology = ideology:ideology_maternalistic
 				}
 				owner = {
 					has_law = law_type:law_free_trade

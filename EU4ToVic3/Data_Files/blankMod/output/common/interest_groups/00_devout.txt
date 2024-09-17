@@ -1,0 +1,668 @@
+﻿ig_devout = {
+	color = hsv{ 0.50 0.30 0.67 }
+	texture = "gfx/interface/icons/ig_icons/devout.dds"
+	layer = "revolution_dynamic_devout"
+	index = 1
+
+	ideologies = {
+		ideology_pious
+		ideology_moralist
+		ideology_patriarchal
+	}
+
+	enable = {
+		always = yes
+	}
+
+	# Deprecated; use on_enable effect to assign traits instead
+	traits = {
+		ig_trait_be_fruitful_and_multiply
+		ig_trait_divine_right
+		ig_trait_pious_fiction
+	}
+
+	on_enable = {
+		#ig:ig_devout = {		### Converter; commenting out instead of deleting so it's easier to see any future changes
+		#	if = {
+		#		limit = {
+		#			owner = {
+		#				country_has_state_religion = rel:protestant
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_divine_right
+		#		set_ig_trait = ig_trait:ig_trait_work_ethic
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = {
+		#				OR = {
+		#					country_has_state_religion = rel:hindu
+		#					country_has_state_religion = rel:mahayana
+		#					country_has_state_religion = rel:theravada
+		#					country_has_state_religion = rel:confucian
+		#				}
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_divine_right
+		#		set_ig_trait = ig_trait:ig_trait_asceticism
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = {
+		#				country_has_state_religion = rel:sikh
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_khalsa
+		#		set_ig_trait = ig_trait:ig_trait_kar_seva
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = {
+		#				country_has_state_religion = rel:gelugpa
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_divine_right
+		#		set_ig_trait = ig_trait:ig_trait_temporal_mandate
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = {
+		#				country_has_state_religion = rel:jewish
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_traditsye
+		#		set_ig_trait = ig_trait:ig_trait_yeshivot
+		#		set_ig_trait = ig_trait:ig_trait_the_best_revenge
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = {
+		#				country_has_state_religion = rel:shinto
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_haibutsu_kishaku
+		#		set_ig_trait = ig_trait:ig_trait_secular_shrine_theory
+		#		set_ig_trait = ig_trait:ig_trait_heavenly_sovereign
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = {
+		#				OR = {
+		#					country_has_state_religion = rel:sunni
+		#					country_has_state_religion = rel:shiite
+		#				}
+		#				NOT = { c:TUR ?= this }
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_sharia
+		#		set_ig_trait = ig_trait:ig_trait_da_wat
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = { c:TUR ?= this }
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_mecelle
+		#		set_ig_trait = ig_trait:ig_trait_da_wat
+		#	}
+		#	else = {
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_divine_right
+		#		set_ig_trait = ig_trait:ig_trait_be_fruitful_and_multiply
+		#	}
+		#}
+		#
+		#### Specific
+		#
+		## Buddhist Monks (Japan)
+		#if = {
+		#	limit = {
+		#		country_has_state_religion = rel:mahayana
+		#		country_has_primary_culture = cu:japanese
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_buddhist_monks
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_buddhist_moralist
+		#	}
+		#}
+		## Shinto Monks (Japan)
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:shinto
+		#		country_has_primary_culture = cu:japanese
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_shinto_monks
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_shinto_moralist
+		#	}
+		#}
+		## Christian Missionaries (Hawaii)
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:protestant
+		#		country_has_primary_culture = cu:hawaiian
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_christian_missionaries
+		#		add_ideology = ideology_laissez_faire
+		#	}
+		#}
+		## Anglicans
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:protestant
+		#		OR = {
+		#			country_has_primary_culture = cu:maori
+		#			country_has_primary_culture = cu:australian
+		#			country_has_primary_culture = cu:anglo_canadian
+		#			country_has_primary_culture = cu:british
+		#			country_has_primary_culture = cu:irish
+		#			c:NRU ?= this
+		#		}
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_anglican_church
+		#	}
+		#}
+		## Russian Orthodox Church
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:orthodox
+		#		OR = {
+		#			country_has_primary_culture = cu:russian
+		#			country_has_primary_culture = cu:byelorussian
+		#			country_has_primary_culture = cu:ukrainian
+		#		}
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_orthodox_church
+		#		remove_ideology = ideology_patriarchal
+		#		add_ideology = ideology_russian_patriarch
+		#	}
+		#}
+		## Church of Denmark
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:protestant
+		#		country_has_primary_culture = cu:danish
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_church_of_denmark
+		#	}
+		#}
+		## Church of Norway
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:protestant
+		#		country_has_primary_culture = cu:norwegian
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_church_of_norway
+		#	}
+		#}
+		## Church of Sweden
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:protestant
+		#		country_has_primary_culture = cu:swedish
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_church_of_sweden
+		#	}
+		#}
+		## Confucian Scholars
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:confucian
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_confucian
+		#		remove_ideology = ideology_pious
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_confucian
+		#	}
+		#}
+		## Evangelicals
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:protestant
+		#		OR = {
+		#			country_has_primary_culture = cu:yankee
+		#			country_has_primary_culture = cu:dixie
+		#			country_has_primary_culture = cu:afro_american
+		#			country_has_primary_culture = cu:cherokee
+		#		}
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_evangelicals
+		#	}
+		#}
+		## Roman Curia
+		#else_if = {
+		#	limit = {
+		#		c:PAP ?= this
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_roman_curia
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_papal_moralist
+		#	}
+		#}
+		#
+		#
+		#### Generic
+		#
+		## Catholic Church
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:catholic }
+		#	ig:ig_devout = { 
+		#		set_interest_group_name = ig_catholic_church 
+		#	}
+		#}
+		## Evangelical Church
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:protestant }
+		#	ig:ig_devout = { 
+		#		set_interest_group_name = ig_evangelical_church
+		#	}
+		#}
+		## Sunni Ulema
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:sunni }
+		#	ig:ig_devout = { 
+		#		set_interest_group_name = ig_sunni_madrasahs
+		#	}
+		#}
+		## Shi'a Ulema
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:shiite }
+		#	ig:ig_devout = { 
+		#		set_interest_group_name = ig_shia_madrasahs
+		#	}
+		#}
+		## Oriental Orthodox Church
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:oriental_orthodox }
+		#	ig:ig_devout = { 
+		#		set_interest_group_name = ig_oriental_orthodox_church
+		#		remove_ideology = ideology_patriarchal
+		#		add_ideology = ideology_oriental_orthodox_patriarch
+		#	}
+		#}
+		## Orthodox Church
+		#else_if = {
+		#	limit = { 
+		#		country_has_state_religion = rel:orthodox
+		#		NOR = {
+		#			country_has_primary_culture = cu:russian
+		#			country_has_primary_culture = cu:byelorussian
+		#			country_has_primary_culture = cu:ukrainian
+		#		}
+		#	}
+		#	ig:ig_devout = { 
+		#		set_interest_group_name = ig_orthodox_church
+		#		remove_ideology = ideology_patriarchal
+		#		add_ideology = ideology_orthodox_patriarch
+		#	}
+		#}
+		## Hindu Priesthood
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:hindu }
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_hindu_priesthood
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_hindu_moralist
+		#	}
+		#}
+		## Vajrayana Monks
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:gelugpa }
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_vajrayana_monks
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_buddhist_moralist
+		#	}
+		#}
+		## Vajrayana Monks
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:theravada }
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_theravada_monks
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_buddhist_moralist
+		#	}
+		#}
+		## Mahayana Monks
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:mahayana }
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_mahayana_monks
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_buddhist_moralist
+		#	}
+		#}
+		## Sikh Priesthood
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:sikh }
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_sikh_priesthood
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_sikh_moralist
+		#	}
+		#}
+		#
+		#### Corporatism
+		#if = {
+		#	limit = {
+		#		has_technology_researched = corporatism
+		#	}
+		#	ig:ig_devout = {
+		#		remove_ideology = ideology_pious
+		#		add_ideology = ideology_corporatist
+		#	}
+		#}
+	}
+	on_disable = {}
+	on_character_ig_membership = {
+		if = {
+			limit = {
+				NOT = {
+					owner = {
+						has_law = law_type:law_state_atheism
+					}
+				}
+			}
+			change_character_religion = scope:interest_group.owner.religion
+		}
+		else = {
+			change_character_religion = scope:interest_group.owner.country_definition.religion
+		}
+	}
+
+
+	pop_potential = {
+		has_state_religion = yes
+		NOT = {
+			has_pop_religion = atheist
+		}
+	}
+
+	pop_weight = {
+		value = 25
+
+		add = {
+			desc = "POP_CLERGYMEN"
+			if = {
+				limit = {
+					is_pop_type = clergymen
+				}
+				value = 250
+			}
+		}
+
+		add = {
+			desc = "POP_PEASANTS"
+			if = {
+				limit = {
+					is_pop_type = peasants
+				}
+				value = 100
+			}
+		}
+
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_state_atheism
+				}
+			}
+			multiply = {
+				desc = "STATE_ATHEISM_LAW"
+				value = 0.1
+			}
+		}
+		
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_state_religion
+				}
+			}
+			multiply = {
+				desc = "STATE_RELIGION_LAW"
+				value = 1.5
+			}
+		}
+		
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_freedom_of_conscience
+				}
+			}
+			multiply = {
+				desc = "FREEDOM_OF_CONSCIENCE_LAW"
+				value = 1.25
+			}
+		}
+
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_religious_schools
+				}
+			}
+			multiply = {
+				desc = "RELIGIOUS_SCHOOLS_LAW"
+				value = owner.institution:institution_schools.investment
+				divide = 5
+				add = 1
+			}
+		}
+		
+		if = {
+			limit = {
+				owner = {
+					has_technology_researched = corporatism
+					NOT = {
+						has_law = law_type:law_total_separation
+						has_law = law_type:law_state_atheism
+					}
+				}
+			}
+			multiply = {
+				desc = "CORPORATISM_TECH"
+				value = 1.25
+			}
+		}
+
+		add = {
+			desc = "POP_LITERACY"
+			this = {
+				value = literacy_rate
+				multiply = -20
+			}
+		}
+
+		multiply = {
+			desc = "LEADER_POPULARITY"
+			scope:interest_group = {
+				leader ?= {
+					value = popularity
+					multiply = 0.0025
+					add = 1
+					max = 1.25
+					min = 0.75
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = {
+				desc = "IN_GOVERNMENT_ATTRACTION"
+				value = 1
+				add = scope:interest_group.modifier:interest_group_in_government_attraction_mult
+				min = 0
+			}
+		}
+
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_LOYALISTS"
+				value = pop_loyalist_fraction
+				divide = 4
+				add = 1
+			}
+		}
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = no
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_RADICALS"
+				value = pop_radical_fraction
+				divide = 4
+				add = 1
+			}
+		}
+	}
+
+	monarch_weight = {
+		value = 1.0
+		# Monarch is not likely to adopt a marginal IG
+		if = {
+			limit = {
+				is_marginal = yes
+			}
+			multiply = {
+				value = 0.1
+			}
+		}
+		# Monarch is more likely to adopt a Powerful IG
+		if = {
+			limit = {
+				is_powerful = yes
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		# More likely with State Religion
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_state_religion
+				}
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		# Less likely without State Religion
+		if = {
+			limit = {
+				owner = {
+					NOT = { has_law = law_type:law_state_religion }
+				}
+			}
+			multiply = {
+				value = 0.25
+			}
+		}
+		# Basically impossible with State Atheism
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_state_atheism
+				}
+			}
+			multiply = {
+				value = 0
+			}
+		}
+		# Muslims and Theravada more likely to adopt Devout
+		if = {
+			limit = {
+				OR = {
+					owner.religion = { has_discrimination_trait = muslim }		### Converter ###
+					owner.religion = rel:theravada
+				}
+			}
+			multiply = 2
+		}
+	}
+
+	agitator_weight = {
+		# Agitators more likely to come from populist IG's rather than elitist
+		value = 0.5
+		# Agitators will never be part of a marginalized IG
+		if = {
+			limit = {
+				owner.ig:ig_devout = {
+					is_marginal = yes
+				}
+			}
+			multiply = {
+				value = 0
+			}
+		}
+	}
+
+	commander_weight = {
+		value = 1.0
+	}
+
+	noble_chance = {
+		value = 0.5
+	}
+
+	female_commander_chance = {
+		### Converter ###
+		value = ig_female_general_chance
+	}
+
+	female_politician_chance = {
+		### Converter ###
+		value = ig_female_politician_chance_conversative
+	}
+
+	female_agitator_chance = {
+		### Converter ###
+		value = ig_female_agitator_chance_conversative
+	}
+
+	# The chance that a commander belonging to this IG takes over leadership when it changes
+	# scope:character is the most popular commander in the IG
+	commander_leader_chance = {
+		value = 0.25
+		if = {
+			limit = {
+				exists = scope:character
+			}
+			multiply = {
+				value = 1
+				add = scope:character.popularity
+				min = 0
+			}
+		}
+	}
+}

@@ -69,7 +69,7 @@ class SubState
 	void spendCPBudget(const int theCPExpense) { CPBudget -= theCPExpense; }
 	void addBuilding(const std::shared_ptr<Building>& building) { buildings.push_back(building); }
 	void setVanillaBuildingElements(const std::vector<std::string>& elements) { vanillaBuildingElements = elements; }
-	void calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap);
+	void calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap, int popPerInfrastructure);
 
 	void gatherPossibleBuildings(const std::map<std::string, Building>& templateBuildings,
 		 const BuildingGroups& buildingGroups,
@@ -162,7 +162,7 @@ class SubState
 
   private:
 	void calculateTerrainFrequency();
-	[[nodiscard]] double getPopInfrastructure(const std::map<std::string, Tech>& techMap) const;
+	[[nodiscard]] double getPopInfrastructure(const std::map<std::string, Tech>& techMap, int popPerInfrastructure) const;
 	[[nodiscard]] std::pair<int, double> getStateInfrastructureModifiers(const StateModifiers& theStateModifiers) const;
 
 	void sortBuildingsByWeight();

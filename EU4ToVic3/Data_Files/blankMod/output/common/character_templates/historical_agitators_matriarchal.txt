@@ -1,0 +1,2235 @@
+﻿fem_agitator_pierre_joseph_proudhon = {
+	first_name = Pierrette_Josephine
+	last_name = Proudhon
+	historical = yes
+	culture = global_var:fra_culture
+	religion = rel:atheist
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_anarchist
+	birth_date = 1809.1.15
+	dna = dna_proudhon
+	traits = {
+		erudite # dude taught himself Latin
+		ambitious
+		persistent
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pierre_joseph_proudhon
+				}
+			}
+			uses_fra_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_trade_unions
+			} 
+		}   
+		earliest_usage_date = 1840.6.30 # first publication of "What is to be Done?""
+		latest_usage_date = 1865.1.19
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pierre_joseph_proudhon
+		}
+	}
+}
+
+fem_agitator_errico_malatesta = {
+	first_name = Enrica
+	last_name = Malatesta
+	historical = yes
+	culture = global_var:sou_ita_culture
+	religion = rel:atheist
+	female = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_anarchist
+	birth_date = 1853.12.4
+	dna = dna_malatesta
+	traits = {
+		persistent
+		charismatic
+		inspirational_orator
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_errico_malatesta
+				}
+			}
+			uses_sou_ita_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_trade_unions
+			} 
+		}   
+		earliest_usage_date = 1872.9.15 # Malatesta met Bakunin at the Saint-Inier Congress
+		latest_usage_date = 1900.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_errico_malatesta
+		}
+	}
+}
+
+fem_agitator_henry_ford = {
+	first_name = Harriet
+	last_name = Ford
+	historical = yes
+	#culture = global_var:midwest_yankee_culture
+	culture = cu:yankee
+	religion = rel:protestant
+	female = yes
+	interest_group = ig_industrialists
+	ideology = ideology_ethno_nationalist
+	birth_date = 1863.7.30
+	traits = {
+		bigoted
+		ambitious
+		direct
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_henry_ford
+				}
+			}
+			uses_midwest_yankee_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_industrialists
+		}   
+		earliest_usage_date = 1908.8.12 # first production Model T
+		latest_usage_date = 1935.12.31
+		chance = 50
+	}
+	on_created = {
+		converter_mw_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_henry_ford
+		}
+	}
+}
+
+masc_agitator_louise_michel = {
+	first_name = Louis
+	last_name = Michel
+	historical = yes
+	culture = global_var:fra_culture
+	religion = rel:catholic
+	female = no
+	interest_group = ig_intelligentsia
+	ideology = ideology_feminist
+	birth_date = 1830.5.29
+	dna = dna_louise_michel
+	traits = {
+		brave
+		firebrand
+		persistent
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			is_matriarchal_country = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_louise_michel
+				}
+			}
+			uses_fra_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_trade_unions
+			} 
+		}   
+		earliest_usage_date = 1869.1.1
+		latest_usage_date = 1890.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_louise_michel
+		}
+	}
+}
+
+fem_agitator_emiliano_zapata = {
+	first_name = Emiliana
+	last_name = Zapata
+	historical = yes
+	#culture = global_var:mexico_culture
+	culture = primary_culture
+	religion = rel:catholic
+	female = yes
+	interest_group = ig_rural_folk
+	ideology = ideology_anarchist
+	birth_date = 1879.8.8
+	dna = dna_zapata
+	traits = {
+		honorable
+		celebrity_commander
+		direct
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_emiliano_zapata
+				}
+			}
+			uses_mexico_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_trade_unions
+				is_interest_group_type = ig_rural_folk
+			} 
+		}   
+		earliest_usage_date = 1909.1.1
+		latest_usage_date = 1935.12.31
+		chance = 50
+	}
+	on_created = {
+		converter_mexican_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_emiliano_zapata
+		}
+	}
+}
+
+fem_agitator_ernst_rohm = {
+	first_name = Ernestine
+	last_name = RO_hm
+	historical = yes
+	culture = global_var:sou_ger_culture
+	religion = rel:protestant
+	female = yes
+	interest_group = ig_armed_forces
+	ideology = ideology_fascist
+	dna = dna_rohm_ernst
+	birth_date = 1887.11.28
+	traits = {
+		ambitious
+		bigoted
+		direct
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ernst_rohm
+				}
+			}
+			trigger_if = {
+				limit = {
+					OR = {
+						AND = {
+							exists = c:BAV
+							is_target_in_global_variable_list = { name = global_sou_ger_countries target = c:BAV }
+						}
+						AND = {
+							exists = c:SGF
+							is_target_in_global_variable_list = { name = global_sou_ger_countries target = c:SGF }
+						}
+						AND = {
+							exists = c:GER
+							is_target_in_global_variable_list = { name = global_sou_ger_countries target = c:GER }
+						}
+					}
+				}
+				OR = {
+					c:BAV ?= this
+					c:SGF ?= this
+					c:GER ?= this
+					c:BOL ?= this # Yes, Bolivia.
+				}
+				OR = {
+					is_target_in_global_variable_list = { name = global_sou_ger_countries target = this }
+					c:BOL ?= this # Yes, Bolivia.
+				}
+			}
+			trigger_else = {
+				OR = {
+					is_target_in_global_variable_list = { name = global_sou_ger_countries target = this }
+					c:BOL ?= this # Yes, Bolivia.
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_armed_forces
+				is_interest_group_type = ig_petty_bourgeoisie
+			} 
+		}   
+		earliest_usage_date = 1917.1.1
+		latest_usage_date = 1935.12.31
+		chance = 25
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ernst_rohm
+		}
+	}
+}
+
+fem_agitator_frederick_douglass = {
+	first_name = Frederica
+	last_name = Douglass
+	historical = yes
+	#culture = global_var:afro_amer_culture
+	culture = cu:afro_american
+	religion = rel:protestant
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_abolitionist
+	birth_date = 1817.2.14 # He was not entirely sure of his birthday or year, but remembered his mom called him "Little Valentine" so he settled for Valentine's Day
+	dna = dna_douglass
+	traits = {
+		firebrand
+		imposing
+		persistent
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_frederick_douglass
+				}
+			}
+			NOT = { has_law = law_type:law_slavery_banned }
+			uses_afro_amer_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}   
+		earliest_usage_date = 1840.1.1
+		latest_usage_date = 1877.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_afro-american_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_frederick_douglass
+		}
+	}
+}
+
+fem_agitator_ahmed_urabi = {
+	first_name = Hamidah
+	last_name = Urabi
+	historical = yes
+	culture = global_var:urabi_culture
+	religion = rel:sunni
+	female = yes
+	interest_group = ig_armed_forces
+	ideology = ideology_ethno_nationalist
+	birth_date = 1841.3.31
+	dna = dna_orabi_ahmed_pasha
+	traits = {
+		celebrity_commander
+		brave
+		direct
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ahmed_urabi
+				}
+			}
+			trigger_if = {
+				limit = {
+					exists = c:EGY
+					is_target_in_global_variable_list = { name = global_urabi_countries target = c:EGY }
+				}
+				this = c:EGY
+			}
+			trigger_else = {
+				is_target_in_global_variable_list = { name = global_urabi_countries target = this }
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_armed_forces
+		}   
+		earliest_usage_date = 1876.3.9 # End of the Egyptian-Ethiopian War
+		latest_usage_date = 1901.5.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ahmed_urabi
+		}
+	}
+}
+
+fem_agitator_eugene_debs = {
+	first_name = Eugenia
+	last_name = Debs
+	historical = yes
+	#culture = global_var:midwest_yankee_culture
+	culture = cu:yankee
+	religion = rel:protestant
+	female = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_social_democrat
+	birth_date = 1855.11.5
+	dna = dna_debs_eugene
+	traits = {
+		demagogue
+		charismatic
+		honorable
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_eugene_debs
+				}
+			}
+			uses_midwest_yankee_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_trade_unions
+		}   
+		earliest_usage_date = 1893.6.20 # foundation of the American Railway Union
+		latest_usage_date = 1921.12.25
+		chance = 50
+	}
+	on_created = {
+		converter_mw_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_eugene_debs
+		}
+	}
+}
+
+fem_agitator_saigo_takamori = {
+	first_name = Masa
+	last_name = Takamori
+	historical = yes
+	culture = global_var:jap_culture
+	religion = rel:shinto
+	female = yes
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	birth_date = 1828.1.23
+	traits = {
+		demagogue
+		charismatic
+		honorable
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_saigo_takamori
+				}
+			}
+			uses_jap_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+		}   
+		earliest_usage_date = 1868.1.27
+		latest_usage_date = 1877.9.24
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_saigo_takamori
+		}
+	}
+}
+
+fem_agitator_wichaichan = { # a.k.a. PRINCE GEORGE WASHINGTON
+	first_name = Aim
+	last_name = Chakri
+	historical = yes
+	culture = global_var:chakri_culture
+	religion = rel:theravada
+	female = yes
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	birth_date = 1838.4.6
+	traits = {
+		engineer
+		ambitious
+		reckless
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_wichaichan
+				}
+			}
+			trigger_if = {
+				limit = {
+					exists = c:SIA
+					is_target_in_global_variable_list = { name = global_chakri_countries target = c:SIA }
+				}
+				this = c:SIA
+			}
+			trigger_else = {
+				is_target_in_global_variable_list = { name = global_chakri_countries target = this }
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+		}   
+		earliest_usage_date = 1868.8.2
+		latest_usage_date = 1885.8.28
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_wichaichan
+		}
+	}
+}
+
+fem_agitator_enver_pasha = {
+	first_name = Naciye
+	last_name = Pasha
+	historical = yes
+	culture = global_var:tur_culture
+	religion = rel:sunni
+	female = yes
+	interest_group = ig_armed_forces
+	ideology = ideology_ethno_nationalist
+	birth_date = 1881.11.22
+	dna = dna_pasha_enver
+	traits = {
+		celebrity_commander
+		ambitious
+		direct
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_enver_pasha
+				}
+			}
+			uses_tur_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_armed_forces
+		}   
+		earliest_usage_date = 1906.1.1
+		latest_usage_date = 1922.8.4
+		chance = 25
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_enver_pasha
+				}
+			}
+			uses_tur_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_armed_forces
+		}
+		earliest_usage_date = 1908.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_enver_pasha
+		}
+	}
+}
+
+fem_agitator_alfred_hugenberg = {
+	first_name = Winifred
+	last_name = Hugenberg
+	historical = yes
+	culture = global_var:nor_ger_culture
+	religion = rel:protestant
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_fascist
+	birth_date = 1865.6.19
+	dna = dna_hugenberg
+	traits = {
+		direct
+		literary
+		master_bureaucrat
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_alfred_hugenberg
+				}
+			}
+			trigger_if = {
+				limit = {
+					OR = {
+						AND = {
+							exists = c:HAN
+							is_target_in_global_variable_list = { name = global_nor_ger_countries target = c:HAN }
+						}
+						AND = {
+							exists = c:NGF
+							is_target_in_global_variable_list = { name = global_nor_ger_countries target = c:NGF }
+						}
+						AND = {
+							exists = c:GER
+							is_target_in_global_variable_list = { name = global_nor_ger_countries target = c:GER }
+						}
+					}
+				}
+				OR = {
+					this = c:HAN
+					this = c:NGF
+					this = c:GER
+				}
+				is_target_in_global_variable_list = { name = global_nor_ger_countries target = this }
+			}
+			trigger_else = {
+				is_target_in_global_variable_list = { name = global_nor_ger_countries target = this }
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_petty_bourgeoisie
+		}   
+		earliest_usage_date = 1916.1.1
+		latest_usage_date = 1936.1.1
+		chance = 25
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_alfred_hugenberg
+		}
+	}
+}
+
+masc_agitator_susan_b_anthony = {
+	first_name = Elijah		#Not great, but no real good options here
+	last_name = Anthony
+	historical = yes
+	#culture = global_var:new_england_yankee_culture
+	culture = cu:yankee
+	religion = rel:protestant
+	female = no
+	interest_group = ig_intelligentsia
+	ideology = ideology_feminist
+	birth_date = 1820.2.15
+	dna = dna_susan_b_anthony
+	traits = {
+		persistent
+		demagogue
+		honorable
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			is_matriarchal_country = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_susan_b_anthony
+				}
+			}
+			OR = {
+				uses_new_england_yankee_characters = yes
+				trigger_if = {
+					limit = {
+						exists = c:NEN
+						#is_target_in_global_variable_list = { name = global_new_england_yankee_countries target = c:NEN }
+						c:NEN = { any_primary_culture = { is_target_in_global_variable_list = { name = global_ne_yankee_cultures target = this } } }
+					}
+					this = c:NEN
+				}
+				trigger_else = {
+					#is_target_in_global_variable_list = { name = global_new_england_yankee_countries target = this }
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_ne_yankee_cultures target = this } }
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_petty_bourgeoisie
+			} 
+		}   
+		earliest_usage_date = 1851.1.1
+		latest_usage_date = 1900.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_ne_yankee_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_susan_b_anthony
+		}
+	}
+}
+
+fem_agitator_giovanni_gentile = {
+	first_name = Giovanna
+	last_name = Gentile
+	historical = yes
+	culture = global_var:sou_ita_culture
+	religion = rel:catholic
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_fascist
+	birth_date = 1875.5.30
+	dna = dna_giovanni_gentille
+	traits = {
+		literary
+		charismatic
+		erudite
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_giovanni_gentile
+				}
+			}
+			uses_sou_ita_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+			}
+		}   
+		earliest_usage_date = 1922.1.1
+		latest_usage_date = 1935.12.31
+		chance = 25
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_giovanni_gentile
+		}
+	}
+}
+
+fem_agitator_lajos_kossuth = {
+	first_name = Lujza
+	last_name = Kossuth
+	historical = yes
+	culture = global_var:hun_culture
+	religion = rel:protestant
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_radical
+	birth_date = 1802.9.19
+	traits = {
+		charismatic
+		demagogue
+		imperious
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_lajos_kossuth
+				}
+			}
+			trigger_if = {
+				limit = {
+					NOT = {
+						any_country = { uses_hun_characters = yes }
+					}
+				}
+				uses_aus_ger_characters = yes
+				any_scope_state = {
+					state_region = { is_homeland = global_var:hun_culture }
+				}
+			}
+			trigger_else = { uses_hun_characters = yes }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_petty_bourgeoisie
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1867.5.29 # Compromise of 1867
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_lajos_kossuth
+		}
+	}
+}
+
+fem_agitator_ludwik_mieroslawski = {
+	first_name = Ludwika
+	last_name = Mieroslawski
+	historical = yes
+	culture = global_var:pol_culture
+	religion = rel:catholic
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_radical
+	birth_date = 1814.1.17
+	traits = {
+		celebrity_commander
+		inspirational_orator
+		literary
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ludwik_mieroslawski
+				}
+			}
+			trigger_if = {
+				limit = {
+					exists = c:POL
+					is_target_in_global_variable_list = { name = global_pol_countries target = c:POL }
+				}
+				this = c:POL
+			}
+			trigger_else = {
+				OR = {
+					is_target_in_global_variable_list = { name = global_pol_countries target = this }
+					uses_rus_characters = yes
+					uses_pru_ger_characters = yes
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_petty_bourgeoisie
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1871.1.28
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ludwik_mieroslawski
+		}
+	}
+}
+
+fem_agitator_francesco_crispi = {
+	first_name = Francesca
+	last_name = Crispi
+	historical = yes
+	culture = global_var:sou_ita_culture
+	religion = rel:catholic
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_radical
+	birth_date = 1818.10.4
+	dna = dna_francesco_crispi
+	traits = {
+		imperious
+		ambitious
+		experienced_diplomat
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_francesco_crispi
+				}
+			}
+			uses_sou_ita_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_rural_folk
+			}
+		}   
+		earliest_usage_date = 1847.1.1
+		latest_usage_date = 1893.1.1
+		chance = 25
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_francesco_crispi
+		}
+	}
+}
+
+fem_agitator_bjornstjerne_bjornson = {
+	first_name = Yrsastjerne
+	last_name = Yrsasdottir
+	historical = yes
+	culture = global_var:nor_culture
+	religion = rel:protestant
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	birth_date = 1832.12.8
+	traits = {
+		literary
+		inspirational_orator
+		cautious
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_bjornstjerne_bjornson
+				}
+			}
+			uses_nor_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+			}
+		}   
+		earliest_usage_date = 1857.1.1
+		latest_usage_date = 1894.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_bjornstjerne_bjornson
+		}
+	}
+}
+
+fem_agitator_orla_lehmann = { # Peter Martin Orla Lehmann
+	first_name = Orla
+	last_name = Lehmann
+	historical = yes
+	culture = global_var:dan_culture
+	religion = rel:protestant
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_radical
+	birth_date = 1810.5.19
+	traits = {
+		literary
+		demagogue
+		charismatic
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_orla_lehmann
+				}
+			}
+			uses_den_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_rural_folk
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1863.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_orla_lehmann
+		}
+	}
+}
+
+fem_agitator_prince_sabahaddin = { # Prince Sabahaddin de Neuchâtel 
+	first_name = Seniha
+	last_name = Osmanoglu
+	historical = yes
+	culture = global_var:tur_culture
+	religion = rel:sunni
+	female = yes
+	interest_group = ig_landowners
+	ideology = ideology_reformer
+	birth_date = 1879.2.13
+	dna = dna_sabahaddin_prince
+	traits = {
+		ambitious
+		literary
+		innovative
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_prince_sabahaddin
+				}
+			}
+			uses_tur_characters = yes
+			has_law = law_type:law_monarchy
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_landowners
+			}
+		}   
+		earliest_usage_date = 1899.1.1
+		latest_usage_date = 1935.12.31
+		chance = 25
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_prince_sabahaddin
+		}
+	}
+}
+
+fem_agitator_francisco_madero = { # Francisco Ignacio Madero Gonzalez
+	first_name = Francisca
+	last_name = Madero
+	historical = yes
+	#culture = global_var:mexico_culture
+	culture = primary_culture
+	religion = rel:catholic
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_market_liberal
+	birth_date = 1873.10.30
+	dna = dna_francisco_madero
+	traits = {
+		honorable
+		charismatic
+		basic_diplomat
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_francisco_madero
+				}
+			}
+			uses_mexico_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_petty_bourgeoisie
+			}
+		}   
+		earliest_usage_date = 1903.1.1
+		latest_usage_date = 1935.12.31
+		chance = 50
+	}
+	on_created = {
+		converter_mexican_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_francisco_madero
+		}
+	}
+}
+
+fem_agitator_gabriele_d_annunzio = { # Gabriele D'Annunzio
+	first_name = Gabriella
+	last_name = D_Annunzio
+	historical = yes
+	culture = global_var:sou_ita_culture
+	religion = rel:catholic
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_fascist
+	birth_date = 1863.3.12
+	dna = dna_gabriele_dannunzio
+	traits = {
+		hedonist
+		literary
+		ambitious
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_gabriele_d_annunzio
+				}
+			}
+			uses_sou_ita_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_landowners
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+			}
+		}   
+		earliest_usage_date = 1899.1.1
+		latest_usage_date = 1924.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_gabriele_d_annunzio
+		}
+	}
+}
+
+fem_agitator_jean_jaures = { # Jean Jaurès
+	first_name = Jeanne
+	last_name = JaurE_s
+	historical = yes
+	culture = global_var:fra_culture
+	religion = rel:catholic
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_social_democrat
+	birth_date = 1859.9.3
+	traits = {
+		firebrand
+		erudite
+		expert_political_operator
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jean_jaures
+				}
+			}
+			OR = {
+				uses_fra_characters = yes
+				uses_occ_characters = yes
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_trade_unions
+				is_interest_group_type = ig_intelligentsia
+			}
+		}   
+		earliest_usage_date = 1892.1.1
+		latest_usage_date = 1935.12.31
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jean_jaures
+		}
+	}
+}
+
+fem_agitator_viggo_horup = { # Viggo Hørup
+	first_name = Vigga
+	last_name = Horup
+	historical = yes
+	culture = global_var:dan_culture
+	religion = rel:protestant
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_radical
+	birth_date = 1841.5.22
+	traits = {
+		literary
+		basic_political_operator
+		charismatic
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_viggo_horup
+				}
+			}
+			uses_den_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+			}
+		}   
+		earliest_usage_date = 1876.1.1
+		latest_usage_date = 1900.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_viggo_horup
+		}
+	}
+}
+
+fem_agitator_georg_brandes = { # Georg Brandes
+	first_name = Jorja
+	last_name = Brandes
+	historical = yes
+	culture = global_var:dan_culture
+	religion = rel:jewish
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_radical
+	birth_date = 1841.5.22
+	traits = {
+		erudite
+		inspirational_orator
+		ambitious
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_georg_brandes
+				}
+			}
+			uses_den_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+			}
+		}   
+		earliest_usage_date = 1871.11.3
+		latest_usage_date = 1900.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_georg_brandes
+		}
+	}
+}
+
+fem_agitator_alexis_de_tocqueville = { # Alexis de Tocqueville
+	first_name = Alexia
+	last_name = de_Tocqueville
+	historical = yes
+	culture = global_var:fra_culture
+	religion = rel:catholic
+	female = yes
+	interest_group = ig_landowners
+	ideology = ideology_reformer
+	birth_date = 1805.7.29
+	dna = dna_alexis_de_tocqueville
+	traits = {
+		literary
+		honorable
+		basic_political_operator
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_preorder
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_alexis_de_tocqueville
+				}
+			}
+			uses_fra_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_landowners
+				is_interest_group_type = ig_intelligentsia
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1852.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_alexis_de_tocqueville
+		}
+	}
+}
+
+fem_agitator_jose_do_patrocinio = { # José do Patrocínio
+	first_name = Josefa
+	last_name = do_PatrocI_nio
+	historical = yes
+	#culture = global_var:afro_braz_culture
+	culture = cu:afro_brazilian
+	religion = rel:catholic
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_abolitionist
+	birth_date = 1853.10.9
+	dna = dna_jose_do_patrocinio
+	traits = {
+		literary
+		persistent
+		demagogue
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jose_do_patrocinio
+				}
+			}
+			NOT = { has_law = law_type:law_slavery_banned }
+			uses_afro_braz_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_rural_folk
+			} 
+		}   
+		earliest_usage_date = 1874.1.1
+		latest_usage_date = 1893.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_afro-brazilian_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jose_do_patrocinio
+		}
+	}
+}
+
+fem_agitator_karl_liebknecht = { # Karl Liebknecht, or as I like to call him, Chucky.
+	first_name = Karola
+	last_name = Liebknecht
+	historical = yes
+	culture = global_var:nor_ger_culture
+	religion = rel:protestant
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_communist
+	birth_date = 1871.8.13
+	dna = dna_karl_liebknecht
+	traits = {
+		erudite
+		experienced_political_operator
+		charismatic
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_karl_liebknecht
+				}
+			}
+			trigger_if = {
+				limit = {
+					OR = {
+						AND = {
+							exists = c:SAX
+							is_target_in_global_variable_list = { name = global_nor_ger_countries target = c:SAX }
+						}
+						AND = {
+							exists = c:NGF
+							is_target_in_global_variable_list = { name = global_nor_ger_countries target = c:NGF }
+						}
+						AND = {
+							exists = c:GER
+							is_target_in_global_variable_list = { name = global_nor_ger_countries target = c:GER }
+						}
+					}
+				}
+				OR = {
+					this = c:SAX
+					this = c:NGF
+					this = c:GER
+				}
+				is_target_in_global_variable_list = { name = global_nor_ger_countries target = this }
+			}
+			trigger_else = {
+				is_target_in_global_variable_list = { name = global_nor_ger_countries target = this }
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_trade_unions
+				is_interest_group_type = ig_intelligentsia
+			}
+		}   
+		earliest_usage_date = 1899.4.5
+		latest_usage_date = 1935.12.31
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_karl_liebknecht
+		}
+	}
+}
+
+fem_agitator_francesc_pi_i_margall = { # Francesc Pi i Margall
+	first_name = Francesca
+	last_name = Pi_i_Margall
+	historical = yes
+	culture = global_var:pi_i_margall_culture
+	religion = rel:catholic
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_radical
+	birth_date = 1824.4.29
+	dna = dna_francesc_pi_i_margall
+	traits = {
+		literary
+		inspirational_orator
+		direct
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_francesc_pi_i_margall
+				}
+			}
+			trigger_if = {
+				limit = {
+					NOT = {
+						any_country = { uses_pi_i_margall_characters = yes }
+					}
+				}
+				is_target_in_global_variable_list = { name = global_spa_countries target = this }
+				any_scope_state = {
+					state_region = { is_homeland = global_var:pi_i_margall_culture }
+				}
+			}
+			trigger_else = { uses_pi_i_margall_characters = yes }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+			}
+		}   
+		earliest_usage_date = 1854.1.1
+		latest_usage_date = 1893.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_francesc_pi_i_margall
+		}
+	}
+}
+
+fem_agitator_manuel_ruiz_zorrilla = { # Manuel Ruiz Zorrilla
+	first_name = Manuelita
+	last_name = Ruiz_Zorrilla
+	historical = yes
+	culture = global_var:spa_culture
+	religion = rel:catholic
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_radical
+	birth_date = 1824.4.29
+	dna = dna_manuel_ruiz_zorrilla
+	traits = {
+		ambitious
+		basic_political_operator
+		persistent
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_manuel_ruiz_zorrilla
+				}
+			}
+			uses_spa_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+			}
+		}   
+		earliest_usage_date = 1866.1.1
+		latest_usage_date = 1884.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_manuel_ruiz_zorrilla
+		}
+	}
+}
+
+fem_agitator_francois_rene_de_la_tour_du_pin_chambly = { # François-René de La Tour du Pin Chambly, marquis de La Charce, sacré bleu mon name is trés long
+	first_name = Fran_Coise-Ren_Ee
+	last_name = de_La_Tour_du_Pin_Chambly
+	historical = yes
+	culture = global_var:fra_culture
+	religion = rel:catholic
+	female = yes
+	interest_group = ig_landowners
+	ideology = ideology_legitimist
+	birth_date = 1834.4.1
+	traits = {
+		celebrity_commander
+		pious
+		erudite
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_francois_rene_de_la_tour_du_pin_chambly
+				}
+			}
+			uses_fra_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_landowners
+				is_interest_group_type = ig_armed_forces
+			}
+		}   
+		earliest_usage_date = 1870.1.1
+		latest_usage_date = 1900.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_francois_rene_de_la_tour_du_pin_chambly
+		}
+	}
+}
+
+fem_agitator_antonio_sardinha = { # António Sardinha, integralist
+	first_name = Antonia_2
+	last_name = Sardinha
+	historical = yes
+	culture = global_var:por_culture
+	religion = rel:catholic
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_fascist
+	birth_date = 1887.9.9
+	traits = {
+		direct
+		bigoted
+		ambitious
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_antonio_sardinha
+				}
+			}
+			uses_por_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_petty_bourgeoisie
+			}
+		}   
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1935.12.31 # Historically he died young in 1925 at the age of 37
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_antonio_sardinha
+		}
+	}
+}
+
+fem_agitator_ion_dragoumis = { # Ion Dragoumis
+	first_name = Creusa
+	last_name = Dragoumis
+	historical = yes
+	culture = global_var:gre_culture
+	religion = rel:orthodox
+	female = yes
+	interest_group = ig_landowners
+	ideology = ideology_fascist
+	birth_date = 1878.9.14
+	traits = {
+		experienced_diplomat
+		literary
+		ambitious
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ion_dragoumis
+				}
+			}
+			uses_gre_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_landowners
+				is_interest_group_type = ig_petty_bourgeoisie
+			}
+		}   
+		earliest_usage_date = 1907.1.1
+		latest_usage_date = 1935.12.31 # Historically, he was shot in 1920
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ion_dragoumis
+		}
+	}
+}
+
+fem_agitator_sandor_petofi = { # Sándor Petőfi
+	first_name = Alexandra
+	last_name = Petofi
+	historical = yes
+	culture = global_var:hun_culture
+	religion = rel:protestant
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	birth_date = 1823.1.1
+	traits = {
+		literary
+		charismatic
+		romantic
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sandor_petofi
+				}
+			}
+			uses_hun_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_petty_bourgeoisie
+			}
+		}   
+		earliest_usage_date = 1847.1.1
+		latest_usage_date = 1860.1.1 # he actually disappeared in 1860
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sandor_petofi
+		}
+	}
+}
+
+masc_agitator_harriet_tubman = {
+	first_name = Henry
+	last_name = Tubman
+	historical = yes
+	#culture = global_var:afro_amer_culture
+	culture = cu:afro_american
+	religion = rel:protestant
+	female = no
+	interest_group = ig_devout
+	ideology = ideology_abolitionist
+	birth_date = 1822.3.1 # exact birthdate unknown
+	dna = dna_harriet_tubman
+	traits = {
+		brave
+		charismatic
+		direct
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_harriet_tubman
+				}
+			}
+			NOT = { has_law = law_type:law_slavery_banned }
+			uses_afro_amer_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_devout
+			}
+		}   
+		earliest_usage_date = 1849.9.17
+		latest_usage_date = 1896.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_afro-american_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_harriet_tubman
+		}
+	}
+}
+
+fem_agitator_web_du_bois = { # W.E.B. Du Bois
+	first_name = Wilmot
+	last_name = Du_Bois
+	historical = yes
+	#culture = global_var:afro_amer_culture
+	culture = cu:afro_american
+	religion = rel:protestant
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_social_democrat
+	birth_date = 1868.2.23
+	dna = dna_web_du_bois
+	traits = {
+		erudite
+		literary
+		charismatic
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_web_du_bois
+				}
+			}
+			uses_afro_amer_characters = yes
+			any_scope_state = {
+				state_region = s:STATE_MASSACHUSETTS # He's from Massachusetts
+				is_incorporated = yes
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1894.6.1
+		latest_usage_date = 1935.12.31 # Died on August 27th, 1963
+		chance = 50
+	}
+	on_created = {
+		converter_afro-american_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_web_du_bois
+		}
+	}
+}
+
+fem_agitator_alexandru_bogdan_pitesti = { # Alexandru Bogdan-Pitești
+	first_name = Alexandrina
+	last_name = Bogdan-Pitesti
+	historical = yes
+	culture = global_var:pitesti_culture
+	religion = rel:catholic # He's not Orthodox. He converted to Catholicism. I don't make the rules.
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_anarchist
+	birth_date = 1870.6.13
+	dna = dna_bogdan_pitesti
+	traits = {
+		literary
+		charismatic
+		hedonist
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_alexandru_bogdan_pitesti
+				}
+			}
+			trigger_if = {
+				limit = {
+					OR = {
+						AND = {
+							exists = c:ROM
+							is_target_in_global_variable_list = { name = global_pitesti_countries target = c:ROM }
+						}
+						AND = {
+							exists = c:WAL
+							is_target_in_global_variable_list = { name = global_pitesti_countries target = c:WAL }
+						}
+					}
+				}
+				OR = {
+					this = c:ROM
+					this = c:WAL
+				}
+				is_target_in_global_variable_list = { name = global_pitesti_countries target = this }
+			}
+			trigger_else = {
+				is_target_in_global_variable_list = { name = global_pitesti_countries target = this }
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1894.1.1
+		latest_usage_date = 1918.1.1 # Died May 12, 1922
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_alexandru_bogdan_pitesti
+		}
+	}
+}
+
+fem_agitator_jules_brunet = { # Jules Brunet
+	first_name = Julie
+	last_name = Brunet
+	historical = yes
+	culture = global_var:fra_culture
+	religion = rel:catholic
+	female = yes
+	interest_group = ig_armed_forces
+	ideology = ideology_authoritarian
+	birth_date = 1838.1.2
+	dna = dna_jules_brunet
+	traits = {
+		ambitious
+		brave
+		basic_diplomat
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_preorder
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jules_brunet
+				}
+			}
+			c:JAP ?= this
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_armed_forces
+				is_interest_group_type = ig_landowners
+			}
+		}   
+		earliest_usage_date = 1867.1.1 # French military mission to Japan
+		latest_usage_date = 1892.1.1
+		chance = 25
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jules_brunet
+		}
+	}
+}
+
+fem_fra_delescluze_character_template = {
+	first_name = Louisa_Charlotte
+	last_name = Delescluze
+	historical = yes
+	birth_date = 1809.5.25
+	is_agitator = yes
+	female = yes
+	culture = global_var:fra_culture
+	interest_group = ig_intelligentsia
+	ideology = ideology_communist
+	dna = dna_louis_delescluze
+	traits = {
+		literary
+		inspirational_orator
+		brave
+	}
+}
+
+fem_fra_blanqui_character_template = {
+	first_name = Louisa
+	last_name = Blanqui
+	historical = yes
+	birth_date = 1805.2.8
+	culture = global_var:fra_culture
+	religion = rel:atheist
+	is_agitator = yes
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_communist
+	dna = dna_blanqui
+	traits = {
+		direct
+		basic_political_operator
+		ambitious
+	}
+}
+
+fem_usa_john_brown_character_template = {
+	#first_name = Joanna
+	first_name = Jane
+	last_name = Brown
+	historical = yes
+	birth_date = 1800.5.9
+	#culture = global_var:new_england_yankee_culture
+	culture = cu:yankee
+	is_agitator = yes
+	female = yes
+	interest_group = ig_devout
+	ideology = ideology_abolitionist
+	dna = dna_john_brown
+	traits = {
+		reserved
+		firebrand
+		reckless
+	} 
+	on_created = {
+		converter_ne_yankee_template_effect = yes
+	}
+}
+
+fem_fra_maurras_character_template = {
+	first_name = Charlotte
+	last_name = Maurras
+	historical = yes
+	birth_date = 1868.4.20
+	culture = global_var:fra_culture
+	is_agitator = yes
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_traditionalist
+	dna = dna_charles_maurras
+	traits = {
+		reserved
+		firebrand
+		reckless
+	}  
+}
+
+fem_usa_emperor_norton_character_template = {
+	first_name = Rahab
+	last_name = Norton
+	historical = yes
+	culture = global_var:gbr_culture
+	#religion = scope:norton_religion
+	female = yes
+	is_agitator = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_royalist
+	birth_date = 1818.2.4
+	dna = dna_emperor_norton
+	traits = {
+		charismatic
+		honorable
+		ambitious
+	}
+}
+
+masc_pol_rosa_luxemburg_character_template = {
+	first_name = Highgrove
+	last_name = Luxemburg
+	historical = yes
+	culture = global_var:pol_culture
+	religion = rel:atheist
+	female = no
+	is_agitator = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_communist
+	birth_date = 1871.3.5
+	dna = dna_rosa_luxemburg
+	traits = {
+		firebrand
+		brave
+		romantic
+	}
+}
+
+fem_fra_georges_sorel_character_template = {
+	first_name = Georgette
+	last_name = Sorel
+	historical = yes
+	culture = global_var:fra_culture
+	religion = rel:atheist
+	female = yes
+	is_agitator = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_atheist
+	birth_date = 1847.11.2
+	dna = dna_georges_sorel
+	traits = {
+		erudite
+		innovative
+		engineer
+	}
+}
+
+fem_fra_georges_boulanger_character_template = {
+	first_name = Georgette
+	last_name = Boulanger
+	historical = yes
+	culture = global_var:fra_culture
+	female = yes
+	is_agitator = yes
+	interest_group = ig_armed_forces
+	ideology = ideology_ethno_nationalist
+	birth_date = 1837.4.29
+	dna = dna_boulanger
+	traits = {
+		demagogue
+		innovative
+		romantic
+	}
+}
+
+fem_pru_ferdinand_lassalle_character_template = {
+	first_name = Fernanda
+	last_name = Lassalle
+	historical = yes
+	culture = global_var:nor_ger_culture
+	female = yes
+	is_agitator = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_social_democrat
+	dna = dna_lassalle
+	birth_date = 1825.4.11
+	traits = {
+		inspirational_orator
+		arrogant
+		ambitious
+	}
+}
+
+fem_brz_luis_gama_character_template = {
+	first_name = Luisa
+	last_name = Gama
+	historical = yes
+	#culture = global_var:afro_braz_culture
+	culture = cu:afro_brazilian
+	female = yes
+	is_agitator = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_abolitionist
+	birth_date = 1830.6.21
+	dna = dna_luis_gama
+	traits = {
+		erudite
+		meticulous
+	}
+	on_created = {
+		converter_afro-brazilian_template_effect = yes
+	}
+}
+
+fem_fra_victor_hugo_character_template = {
+	first_name = Victoria
+	last_name = Hugo
+	historical = yes
+	culture = global_var:fra_culture
+	female = yes
+	is_agitator = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_republican_leader
+	birth_date = 1802.2.26
+	dna = dna_victor_hugo
+	traits = {
+		direct
+		brave
+		literary
+	}
+}
+
+fem_chi_sun_yat_sen_character_template = {
+	first_name = Sun
+	last_name = Yat_Sen
+	historical = yes
+	culture = global_var:han_culture
+	religion = global_var:yat_sen_religion
+	female = yes
+	is_agitator = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_republican_leader
+	birth_date = 1866.11.12
+	dna = dna_sun_yat_sen
+	traits = {
+		erudite
+		persistent
+		ambitious
+	}
+}
