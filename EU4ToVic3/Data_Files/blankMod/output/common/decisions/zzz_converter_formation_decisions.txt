@@ -1,0 +1,3922 @@
+﻿### Confederations of Subjects
+america_unite_usa = {
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+		capital = { zzz_converter_state_is_in_america = yes }
+		is_subject = yes
+		any_neighbouring_state = {
+			owner = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+				is_subject = yes
+				NOT = { THIS = ROOT }
+				top_overlord = {
+					THIS = root.top_overlord
+				}
+			}
+		}
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		top_overlord = {
+			relations:root >= relations_threshold:amicable
+		}
+		NOT = { has_modifier = america_test_modifier }
+		custom_tooltip = {
+			text = unite_america_je_usa_tt
+			any_neighbouring_state = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+					capital = { zzz_converter_state_is_in_america = yes }
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_america_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.1 popup = yes }
+		}
+		add_modifier = {
+			name = america_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+america_unite_gbr = {
+	is_shown = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+			capital = { zzz_converter_state_is_in_america = yes }
+			is_ai = yes
+			count >= 2
+		}
+	}
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = america_test_modifier }
+		custom_tooltip = {
+			text = gbr_usa_relations_tt
+			any_subject_or_below = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+				capital = { zzz_converter_state_is_in_america = yes }
+				is_ai = yes
+				relations:root >= relations_threshold:amicable
+				count >= 2
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_america_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.2 popup = yes }
+		}
+		add_modifier = {
+			name = america_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+california_unite_cal = {
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+		capital = { zzz_converter_state_is_in_california = yes }
+		is_subject = yes
+		any_neighbouring_state = {
+			owner = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+				capital = { zzz_converter_state_is_in_california = yes }
+				is_ai = yes
+				is_subject = yes
+				NOT = { THIS = ROOT }
+				top_overlord = {
+					THIS = root.top_overlord
+				}
+			}
+		}
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		top_overlord = {
+			relations:root >= relations_threshold:amicable
+		}
+		NOT = { has_modifier = california_test_modifier }
+		custom_tooltip = {
+			text = unite_california_je_cal_tt
+			any_neighbouring_state = {
+				owner = {
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+					capital = { zzz_converter_state_is_in_california = yes }
+					is_ai = yes
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_california_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.3 popup = yes }
+		}
+		add_modifier = {
+			name = california_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+california_unite_gbr = {
+	is_shown = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_california = yes }
+			is_ai = yes
+			count >= 2
+		}
+	}
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = california_test_modifier }
+		custom_tooltip = {
+			text = gbr_cal_relations_tt
+			any_subject_or_below = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+				capital = { zzz_converter_state_is_in_california = yes }
+				is_ai = yes
+				relations:root >= relations_threshold:amicable
+				count >= 2
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_california_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.4 popup = yes }
+		}
+		add_modifier = {
+			name = california_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+mexico_unite_mex = {
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+		capital = { zzz_converter_state_is_in_mexico = yes }
+		is_subject = yes
+		any_neighbouring_state = {
+			owner = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+				capital = { zzz_converter_state_is_in_mexico = yes }
+				is_subject = yes
+				NOT = { THIS = ROOT }
+				top_overlord = {
+					THIS = root.top_overlord
+				}
+			}
+		}
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		top_overlord = {
+			relations:root >= relations_threshold:amicable
+		}
+		NOT = { has_modifier = mexico_test_modifier }
+		custom_tooltip = {
+			text = unite_mexico_je_mex_tt
+			any_neighbouring_state = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+					capital = { zzz_converter_state_is_in_mexico = yes }
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_mexico_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.9 popup = yes }
+		}
+		add_modifier = {
+			name = mexico_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+mexico_unite_gbr = {
+	is_shown = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+			capital = { zzz_converter_state_is_in_mexico = yes }
+			is_ai = yes
+			count >= 2
+		}
+	}
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = mexico_test_modifier }
+		custom_tooltip = {
+			text = gbr_mex_relations_tt
+			any_subject_or_below = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+				capital = { zzz_converter_state_is_in_mexico = yes }
+				is_ai = yes
+				relations:root >= relations_threshold:amicable
+				count >= 2
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_mexico_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.10 popup = yes }
+		}
+		add_modifier = {
+			name = mexico_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+colombia_unite_gco = {
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+		capital = { zzz_converter_state_is_in_gran_colombia = yes }
+		is_subject = yes
+		any_neighbouring_state = {
+			owner = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+				capital = { zzz_converter_state_is_in_gran_colombia = yes }
+				is_subject = yes
+				NOT = { THIS = ROOT }
+				top_overlord = {
+					THIS = root.top_overlord
+				}
+			}
+		}
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		top_overlord = {
+			relations:root >= relations_threshold:amicable
+		}
+		NOT = { has_modifier = colombia_test_modifier }
+		custom_tooltip = {
+			text = unite_colombia_je_gco_tt
+			any_neighbouring_state = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+					capital = { zzz_converter_state_is_in_gran_colombia = yes }
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_colombia_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.11 popup = yes }
+		}
+		add_modifier = {
+			name = colombia_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+colombia_unite_gbr = {
+	is_shown = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_gran_colombia = yes }
+			is_ai = yes
+			count >= 2
+		}
+	}
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = colombia_test_modifier }
+		custom_tooltip = {
+			text = gbr_gco_relations_tt
+			any_subject_or_below = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+				capital = { zzz_converter_state_is_in_gran_colombia = yes }
+				is_ai = yes
+				relations:root >= relations_threshold:amicable
+				count >= 2
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_colombia_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.12 popup = yes }
+		}
+		add_modifier = {
+			name = colombia_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+peru_unite_peu = {
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+		capital = { region = sr:region_andes }
+		is_subject = yes
+		any_neighbouring_state = {
+			owner = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+				capital = { region = sr:region_andes }
+				is_ai = yes
+				is_subject = yes
+				NOT = { THIS = ROOT }
+				top_overlord = {
+					THIS = root.top_overlord
+				}
+			}
+		}
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		top_overlord = {
+			relations:root >= relations_threshold:amicable
+		}
+		NOT = { has_modifier = peru_test_modifier }
+		custom_tooltip = {
+			text = unite_peru_je_peu_tt
+			any_neighbouring_state = {
+				owner = {
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+					capital = { region = sr:region_andes }
+					is_ai = yes
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_peru_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.17 popup = yes }
+		}
+		add_modifier = {
+			name = peru_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+peru_unite_gbr = {
+	is_shown = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+			capital = { region = sr:region_andes }
+			is_ai = yes
+			count >= 2
+		}
+	}
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = peru_test_modifier }
+		custom_tooltip = {
+			text = gbr_peu_relations_tt
+			any_subject_or_below = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+				capital = { region = sr:region_andes }
+				is_ai = yes
+				relations:root >= relations_threshold:amicable
+				count >= 2
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_peru_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.18 popup = yes }
+		}
+		add_modifier = {
+			name = peru_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+brazil_unite_brz = {
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+		capital = { region = sr:region_brazil }
+		is_subject = yes
+		any_neighbouring_state = {
+			owner = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+				capital = { region = sr:region_brazil }
+				is_subject = yes
+				NOT = { THIS = ROOT }
+				top_overlord = {
+					THIS = root.top_overlord
+				}
+			}
+		}
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		top_overlord = {
+			relations:root >= relations_threshold:amicable
+		}
+		NOT = { has_modifier = brazil_test_modifier }
+		custom_tooltip = {
+			text = unite_brazil_je_brz_tt
+			any_neighbouring_state = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+					capital = { region = sr:region_brazil }
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_brazil_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.19 popup = yes }
+		}
+		add_modifier = {
+			name = brazil_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+brazil_unite_gbr = {
+	is_shown = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+			capital = { region = sr:region_brazil }
+			is_ai = yes
+			count >= 2
+		}
+	}
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = brazil_test_modifier }
+		custom_tooltip = {
+			text = gbr_brz_relations_tt
+			any_subject_or_below = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+				capital = { region = sr:region_brazil }
+				is_ai = yes
+				relations:root >= relations_threshold:amicable
+				count >= 2
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_brazil_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.20 popup = yes }
+		}
+		add_modifier = {
+			name = brazil_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+argentina_unite_arg = {
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+		capital = { zzz_converter_state_is_in_argentina = yes }
+		is_subject = yes
+		any_neighbouring_state = {
+			owner = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+				capital = { zzz_converter_state_is_in_argentina = yes }
+				is_ai = yes
+				is_subject = yes
+				NOT = { THIS = ROOT }
+				top_overlord = {
+					THIS = root.top_overlord
+				}
+			}
+		}
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		top_overlord = {
+			relations:root >= relations_threshold:amicable
+		}
+		NOT = { has_modifier = argentina_test_modifier }
+		custom_tooltip = {
+			text = unite_argentina_je_arg_tt
+			any_neighbouring_state = {
+				owner = {
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+					capital = { zzz_converter_state_is_in_argentina = yes }
+					is_ai = yes
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_argentina_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.25 popup = yes }
+		}
+		add_modifier = {
+			name = argentina_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+argentina_unite_gbr = {
+	is_shown = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+			capital = { zzz_converter_state_is_in_argentina = yes }
+			is_ai = yes
+			count >= 2
+		}
+	}
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = argentina_test_modifier }
+		custom_tooltip = {
+			text = gbr_arg_relations_tt
+			any_subject_or_below = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+				capital = { zzz_converter_state_is_in_argentina = yes }
+				is_ai = yes
+				relations:root >= relations_threshold:amicable
+				count >= 2
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_argentina_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.26 popup = yes }
+		}
+		add_modifier = {
+			name = argentina_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+cape_unite_saf = {
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+		capital = { region = sr:region_southern_africa }
+		is_subject = yes
+		any_neighbouring_state = {
+			owner = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+				capital = { region = sr:region_southern_africa }
+				is_ai = yes
+				is_subject = yes
+				NOT = { THIS = ROOT }
+				top_overlord = {
+					THIS = root.top_overlord
+				}
+			}
+		}
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		top_overlord = {
+			relations:root >= relations_threshold:amicable
+		}
+		NOT = { has_modifier = cape_test_modifier }
+		custom_tooltip = {
+			text = unite_cape_je_saf_tt
+			any_neighbouring_state = {
+				owner = {
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+					capital = { region = sr:region_southern_africa }
+					is_ai = yes
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_cape_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.27 popup = yes }
+		}
+		add_modifier = {
+			name = cape_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+cape_unite_gbr = {
+	is_shown = {
+		any_subject_or_below = {
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+			capital = { region = sr:region_southern_africa }
+			is_ai = yes
+			count >= 2
+		}
+	}
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = cape_test_modifier }
+		custom_tooltip = {
+			text = gbr_saf_relations_tt
+			any_subject_or_below = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+				capital = { region = sr:region_southern_africa }
+				is_ai = yes
+				relations:root >= relations_threshold:amicable
+				count >= 2
+			}
+		}
+	}
+	when_taken = {
+		custom_tooltip = unite_cape_tt
+		hidden_effect = {
+			trigger_event = { id = zzz_cc_confederation.28 popup = yes }
+		}
+		add_modifier = {
+			name = cape_test_modifier
+			months = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		base = 0
+		modifier = {
+			has_technology_researched = pan-nationalism
+			add = 100
+		}		
+	}
+}
+
+### Independent Formation of Cultural Union
+converter_form_canada = {		##Since you can't change country definitions during gameplay, for some reason
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+		capital = { zzz_converter_state_is_in_canada = yes }
+		NOT = { exists = c:CAN }
+		is_subject = no
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		calc_true_if = {
+			amount >= 9
+			owns_entire_state_region = STATE_ONTARIO
+			owns_entire_state_region = STATE_NEW_BRUNSWICK
+			owns_entire_state_region = STATE_QUEBEC
+			owns_entire_state_region = STATE_NEWFOUNDLAND
+			owns_entire_state_region = STATE_ALBERTA
+			owns_entire_state_region = STATE_BRITISH_COLUMBIA
+			owns_entire_state_region = STATE_SASKATCHEWAN
+			owns_entire_state_region = STATE_MANITOBA
+			owns_entire_state_region = STATE_YUKON_TERRITORY
+			owns_entire_state_region = STATE_NORTHWEST_TERRITORIES
+			owns_entire_state_region = STATE_NUNAVUT
+		}
+	}
+	when_taken = {
+		add_modifier = {
+			name = can_unified_canada
+			months = normal_modifier_time
+		}
+		change_tag = CAN
+		if = {
+			limit = { exists = c:CAN } #Gives errors otherwise
+			hidden_effect = {
+				every_primary_culture = {
+					c:CAN = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_canada = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+							}
+						}
+						culture = {
+							c:CAN = { add_primary_culture = prev }
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ai_chance = { base = 100 }
+}
+
+converter_form_america = {		##Since you can't change country definitions during gameplay, for some reason
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+		capital = { zzz_converter_state_is_in_america = yes }
+		NOT = { exists = c:USA }
+		is_subject = no
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		calc_true_if = {
+			amount >= 27
+			owns_entire_state_region = STATE_MASSACHUSETTS
+			owns_entire_state_region = STATE_MAINE
+			owns_entire_state_region = STATE_CONNECTICUT
+			owns_entire_state_region = STATE_RHODE_ISLAND
+			owns_entire_state_region = STATE_VERMONT
+			owns_entire_state_region = STATE_NEW_HAMPSHIRE
+			owns_entire_state_region = STATE_PENNSYLVANIA
+			owns_entire_state_region = STATE_NEW_YORK
+			owns_entire_state_region = STATE_NEW_JERSEY
+			owns_entire_state_region = STATE_MINNESOTA
+			owns_entire_state_region = STATE_WISCONSIN
+			owns_entire_state_region = STATE_IOWA
+			owns_entire_state_region = STATE_MISSOURI
+			owns_entire_state_region = STATE_MICHIGAN
+			owns_entire_state_region = STATE_INDIANA
+			owns_entire_state_region = STATE_ILLINOIS
+			owns_entire_state_region = STATE_WEST_VIRGINIA
+			owns_entire_state_region = STATE_OHIO
+			owns_entire_state_region = STATE_KENTUCKY
+			owns_entire_state_region = STATE_TENNESSEE
+			owns_entire_state_region = STATE_MISSISSIPPI
+			owns_entire_state_region = STATE_ALABAMA
+			owns_entire_state_region = STATE_FLORIDA
+			owns_entire_state_region = STATE_GEORGIA
+			owns_entire_state_region = STATE_SOUTH_CAROLINA
+			owns_entire_state_region = STATE_NORTH_CAROLINA
+			owns_entire_state_region = STATE_VIRGINIA
+			owns_entire_state_region = STATE_DISTRICT_OF_COLUMBIA
+			owns_entire_state_region = STATE_MARYLAND
+			owns_entire_state_region = STATE_DELAWARE
+			owns_entire_state_region = STATE_LOUISIANA
+			owns_entire_state_region = STATE_ARKANSAS
+			owns_entire_state_region = STATE_NORTH_DAKOTA
+			owns_entire_state_region = STATE_SOUTH_DAKOTA
+		}
+	}
+	when_taken = {
+		add_modifier = {
+			name = usa_unified_america
+			months = normal_modifier_time
+		}
+		change_tag = USA
+		if = {
+			limit = { exists = c:USA } #Gives errors otherwise
+			hidden_effect = {
+				every_primary_culture = {
+					c:USA = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_america = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_american_cultures target = this }
+							}
+						}
+						culture = {
+							c:USA = { add_primary_culture = prev }
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ai_chance = { base = 100 }
+}
+
+converter_form_california = {		##Since you can't change country definitions during gameplay, for some reason
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+		capital = { zzz_converter_state_is_in_california = yes }
+		NOT = { exists = c:CAL }
+		is_subject = no
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		calc_true_if = {
+			amount >= 12
+			owns_entire_state_region = STATE_WASHINGTON
+			owns_entire_state_region = STATE_OREGON
+			owns_entire_state_region = STATE_IDAHO
+			owns_entire_state_region = STATE_MONTANA
+			owns_entire_state_region = STATE_WYOMING
+			owns_entire_state_region = STATE_CALIFORNIA
+			owns_entire_state_region = STATE_NEVADA
+			owns_entire_state_region = STATE_UTAH
+			owns_entire_state_region = STATE_ARIZONA
+			owns_entire_state_region = STATE_NEW_MEXICO
+			owns_entire_state_region = STATE_COLORADO
+			owns_entire_state_region = STATE_NEBRASKA
+			owns_entire_state_region = STATE_KANSAS
+            owns_entire_state_region = STATE_OKLAHOMA
+            owns_entire_state_region = STATE_TEXAS
+		}
+	}
+	when_taken = {
+		add_modifier = {
+			name = cal_unified_california
+			months = normal_modifier_time
+		}
+		change_tag = CAL
+		if = {
+			limit = { exists = c:CAL } #Gives errors otherwise
+			hidden_effect = {
+				every_primary_culture = {
+					c:CAL = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_california = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+							}
+						}
+						culture = {
+							c:CAL = { add_primary_culture = prev }
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ai_chance = { base = 100 }
+}
+
+converter_form_mexico = {		##Since you can't change country definitions during gameplay, for some reason
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+		capital = { zzz_converter_state_is_in_mexico = yes }
+		NOT = { exists = c:MEX }
+		is_subject = no
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		calc_true_if = {
+			amount >= 16
+			owns_entire_state_region = STATE_JALISCO
+			owns_entire_state_region = STATE_ZACATECAS
+			owns_entire_state_region = STATE_GUERRERO
+			owns_entire_state_region = STATE_MEXICO
+			owns_entire_state_region = STATE_CHIHUAHUA
+			owns_entire_state_region = STATE_DURANGO
+			owns_entire_state_region = STATE_RIO_GRANDE
+			owns_entire_state_region = STATE_SONORA
+			owns_entire_state_region = STATE_VERACRUZ
+			owns_entire_state_region = STATE_SINALOA
+			owns_entire_state_region = STATE_BAJIO
+			owns_entire_state_region = STATE_OAXACA
+			owns_entire_state_region = STATE_BAJA_CALIFORNIA
+			owns_entire_state_region = STATE_CHIAPAS
+			owns_entire_state_region = STATE_YUCATAN
+			owns_entire_state_region = STATE_GUATEMALA
+			owns_entire_state_region = STATE_HONDURAS
+			owns_entire_state_region = STATE_NICARAGUA
+			owns_entire_state_region = STATE_COSTA_RICA
+			owns_entire_state_region = STATE_SAN_SALVADOR
+		}
+	}
+	when_taken = {
+		add_modifier = {
+			name = mex_unified_mexico
+			months = normal_modifier_time
+		}
+		change_tag = MEX
+		if = {
+			limit = { exists = c:MEX } #Gives errors otherwise
+			hidden_effect = {
+				every_primary_culture = {
+					c:MEX = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_mexico = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+							}
+						}
+						culture = {
+							c:MEX = { add_primary_culture = prev }
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ai_chance = { base = 100 }
+}
+
+converter_form_colombia = {		##Since you can't change country definitions during gameplay, for some reason
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+		capital = { zzz_converter_state_is_in_gran_colombia = yes }
+		NOT = { exists = c:GCO }
+		is_subject = no
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		calc_true_if = {
+			amount >= 7
+			owns_entire_state_region = STATE_BOLIVAR
+			owns_entire_state_region = STATE_GUAYANA
+			owns_entire_state_region = STATE_MIRANDA
+			owns_entire_state_region = STATE_ANTIOQUIA
+			owns_entire_state_region = STATE_ZULIA
+			owns_entire_state_region = STATE_GUAVIARE
+			owns_entire_state_region = STATE_CAUCA
+			owns_entire_state_region = STATE_CUNDINAMARCA
+			owns_entire_state_region = STATE_PANAMA
+		}
+	}
+	when_taken = {
+		add_modifier = {
+			name = gco_unified_colombia
+			months = normal_modifier_time
+		}
+		change_tag = GCO
+		if = {
+			limit = { exists = c:GCO } #Gives errors otherwise
+			hidden_effect = {
+				every_primary_culture = {
+					c:GCO = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_gran_colombia = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+							}
+						}
+						culture = {
+							c:GCO = { add_primary_culture = prev }
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ai_chance = { base = 100 }
+}
+
+converter_form_peru = {		##Since you can't change country definitions during gameplay, for some reason
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+		capital = { region = sr:region_andes }
+		NOT = { exists = c:PEU }
+		is_subject = no
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		calc_true_if = {
+			amount >= 10
+			owns_entire_state_region = STATE_LIMA
+			owns_entire_state_region = STATE_ICA
+			owns_entire_state_region = STATE_CAJAMARCA
+			owns_entire_state_region = STATE_AREQUIPA
+			owns_entire_state_region = STATE_SANTA_CRUZ
+			owns_entire_state_region = STATE_LA_PAZ
+			owns_entire_state_region = STATE_ECUADOR
+			owns_entire_state_region = STATE_JUJUY
+			owns_entire_state_region = STATE_PASTAZA
+			owns_entire_state_region = STATE_TARAPACA
+			owns_entire_state_region = STATE_ANTOFAGASTA
+			owns_entire_state_region = STATE_ACRE
+			owns_entire_state_region = STATE_POTOSI
+		}
+	}
+	when_taken = {
+		add_modifier = {
+			name = peu_unified_peru
+			months = normal_modifier_time
+		}
+		change_tag = PEU
+		if = {
+			limit = { exists = c:PEU } #Gives errors otherwise
+			hidden_effect = {
+				every_primary_culture = {
+					c:PEU = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { region = sr:region_andes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+							}
+						}
+						culture = {
+							c:PEU = { add_primary_culture = prev }
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ai_chance = { base = 100 }
+}
+
+converter_form_brazil = {		##Since you can't change country definitions during gameplay, for some reason
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+		capital = { region = sr:region_brazil }
+		NOT = { exists = c:BRZ }
+		is_subject = no
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		calc_true_if = {
+			amount >= 14
+			owns_entire_state_region = STATE_PARANA
+			owns_entire_state_region = STATE_SAO_PAULO
+			owns_entire_state_region = STATE_RIO_DE_JANEIRO
+			owns_entire_state_region = STATE_URUGUAY
+			owns_entire_state_region = STATE_RIO_GRANDE_DO_SUL
+			owns_entire_state_region = STATE_MATO_GROSSO
+			owns_entire_state_region = STATE_MINAS_GERAIS
+			owns_entire_state_region = STATE_BAHIA
+			owns_entire_state_region = STATE_PERNAMBUCO
+			owns_entire_state_region = STATE_RIO_GRANDE_DO_NORTE
+			owns_entire_state_region = STATE_MARANHAO
+			owns_entire_state_region = STATE_GOIAS
+			owns_entire_state_region = STATE_CEARA
+			owns_entire_state_region = STATE_PIAUI
+			owns_entire_state_region = STATE_PARAIBA
+			owns_entire_state_region = STATE_SANTA_CATARINA
+			owns_entire_state_region = STATE_PARA
+			owns_entire_state_region = STATE_AMAZONAS
+		}
+	}
+	when_taken = {
+		add_modifier = {
+			name = brz_unified_brazil
+			months = normal_modifier_time
+		}
+		change_tag = BRZ
+		if = {
+			limit = { exists = c:BRZ } #Gives errors otherwise
+			hidden_effect = {
+				every_primary_culture = {
+					c:BRZ = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { region = sr:region_brazil }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+							}
+						}
+						culture = {
+							c:BRZ = { add_primary_culture = prev }
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ai_chance = { base = 100 }
+}
+
+converter_form_argentina = {		##Since you can't change country definitions during gameplay, for some reason
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+		capital = { zzz_converter_state_is_in_argentina = yes }
+		NOT = { exists = c:ARG }
+		is_subject = no
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		calc_true_if = {
+			amount >= 10
+			owns_entire_state_region = STATE_RIO_NEGRO
+			owns_entire_state_region = STATE_LA_PAMPA
+			owns_entire_state_region = STATE_SANTA_FE
+			owns_entire_state_region = STATE_CORRIENTES
+			owns_entire_state_region = STATE_TUCUMAN
+			owns_entire_state_region = STATE_CHACO
+			owns_entire_state_region = STATE_BUENOS_AIRES
+			owns_entire_state_region = STATE_ALTO_PARAGUAY
+			owns_entire_state_region = STATE_BAJO_PARAGUAY
+			owns_entire_state_region = STATE_LOS_RIOS
+			owns_entire_state_region = STATE_ARAUCANIA
+			owns_entire_state_region = STATE_PATAGONIA
+			owns_entire_state_region = STATE_SANTIAGO
+		}
+	}
+	when_taken = {
+		add_modifier = {
+			name = arg_unified_argentina
+			months = normal_modifier_time
+		}
+		change_tag = ARG
+		if = {
+			limit = { exists = c:ARG } #Gives errors otherwise
+			hidden_effect = {
+				every_primary_culture = {
+					c:ARG = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_argentina = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+							}
+						}
+						culture = {
+							c:ARG = { add_primary_culture = prev }
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ai_chance = { base = 100 }
+}
+
+converter_form_australia = {		##Since you can't change country definitions during gameplay, for some reason
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }
+		capital = { zzz_converter_state_is_in_australia = yes }
+		NOT = { exists = c:AST }
+		is_subject = no
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		calc_true_if = {
+			amount >= 7
+			owns_entire_state_region = STATE_NEW_SOUTH_WALES
+			owns_entire_state_region = STATE_VICTORIA
+			owns_entire_state_region = STATE_TASMANIA
+			owns_entire_state_region = STATE_QUEENSLAND
+			owns_entire_state_region = STATE_SOUTH_AUSTRALIA
+			owns_entire_state_region = STATE_WESTERN_AUSTRALIA
+			owns_entire_state_region = STATE_NORTHERN_TERRITORY
+			owns_entire_state_region = STATE_NORTH_ISLAND
+			owns_entire_state_region = STATE_SOUTH_ISLAND
+		}
+	}
+	when_taken = {
+		add_modifier = {
+			name = aus_unified_australia
+			months = normal_modifier_time
+		}
+		change_tag = AST
+		if = {
+			limit = { exists = c:AST } #Gives errors otherwise
+			hidden_effect = {
+				every_primary_culture = {
+					c:AST = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_australia = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+							}
+						}
+						culture = {
+							c:AST = { add_primary_culture = prev }
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ai_chance = { base = 100 }
+}
+
+converter_form_cape = {		##Since you can't change country definitions during gameplay, for some reason
+	is_shown = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+		capital = { region = sr:region_southern_africa }
+		NOT = { exists = c:SAF }
+		is_subject = no
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		calc_true_if = {
+			amount >= 5
+			owns_entire_state_region = STATE_CAPE_COLONY
+			owns_entire_state_region = STATE_NORTHERN_CAPE
+			owns_entire_state_region = STATE_EASTERN_CAPE
+			owns_entire_state_region = STATE_ZULULAND
+			owns_entire_state_region = STATE_VRYSTAAT
+			owns_entire_state_region = STATE_TRANSVAAL
+			owns_entire_state_region = STATE_LOURENCO_MARQUES
+		}
+	}
+	when_taken = {
+		add_modifier = {
+			name = saf_unified_cape
+			months = normal_modifier_time
+		}
+		change_tag = SAF
+		if = {
+			limit = { exists = c:SAF } #Gives errors otherwise
+			hidden_effect = {
+				every_primary_culture = {
+					c:SAF = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { region = sr:region_southern_africa }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+							}
+						}
+						culture = {
+							c:SAF = { add_primary_culture = prev }
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ai_chance = { base = 100 }
+}
+
+### Independent Formation of Minor Nation
+
+## Colonial Canada
+form_hudson_bay_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			zzz_converter_state_is_in_canada = yes
+		}
+		NOT = { exists = c:HBC }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = HBC
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					OR = {
+						state_region = s:STATE_ALBERTA
+						state_region = s:STATE_MANITOBA
+						state_region = s:STATE_NORTHWEST_TERRITORIES
+						state_region = s:STATE_ONTARIO
+						state_region = s:STATE_QUEBEC
+						state_region = s:STATE_SASKATCHEWAN
+					}
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_newfoundland_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			zzz_converter_state_is_in_canada = yes
+		}
+		NOT = { exists = c:NEW }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = NEW
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_NEWFOUNDLAND
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_nunavut_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				state_region = s:STATE_NUNAVUT
+				state_region = s:STATE_NORTHWEST_TERRITORIES
+				state_region = s:STATE_YUKON_TERRITORY
+				state_region = s:STATE_NEWFOUNDLAND
+				state_region = s:STATE_QUEBEC
+			}
+		}
+		NOT = { exists = c:NNV }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = NNV
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					OR = {
+						state_region = s:STATE_NUNAVUT
+						state_region = s:STATE_NORTHWEST_TERRITORIES
+						state_region = s:STATE_YUKON_TERRITORY
+					}
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_ontario_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			zzz_converter_state_is_in_canada = yes
+		}
+		NOT = { exists = c:ONT }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = ONT
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_ONTARIO
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_quebec_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			zzz_converter_state_is_in_canada = yes
+		}
+		NOT = { exists = c:QUE }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = QUE
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				cu:french = { shares_non_heritage_trait_with_any_primary_culture = ROOT } #Francophone
+			}
+			add = 99
+		}
+	}
+}
+form_new_brunswick_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			zzz_converter_state_is_in_canada = yes
+		}
+		NOT = { exists = c:NBS }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = NBS
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_NEW_BRUNSWICK
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_nova_scotia_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			zzz_converter_state_is_in_canada = yes
+		}
+		NOT = { exists = c:NVS }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = NVS
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_NEW_BRUNSWICK
+				}
+			}
+			add = 99
+		}
+	}
+}
+
+## Colonial Eastern America
+form_new_england_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				state_region = s:STATE_MAINE
+				state_region = s:STATE_NEW_HAMPSHIRE
+				state_region = s:STATE_VERMONT
+				state_region = s:STATE_MASSACHUSETTS #The Correct Option
+				state_region = s:STATE_CONNECTICUT
+				state_region = s:STATE_RHODE_ISLAND
+				
+				#Not part of New England, above Mason-Dixon line
+				state_region = s:STATE_NEW_YORK
+				state_region = s:STATE_NEW_JERSEY
+				state_region = s:STATE_PENNSYLVANIA
+				state_region = s:STATE_DELAWARE
+				
+				#DC
+				state_region = s:STATE_MARYLAND
+				state_region = s:STATE_DISTRICT_OF_COLUMBIA
+			}
+		}
+		NOT = { exists = c:NEN }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = NEN
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					OR = {
+						state_region = s:STATE_MAINE
+						state_region = s:STATE_NEW_HAMPSHIRE
+						state_region = s:STATE_VERMONT
+						state_region = s:STATE_MASSACHUSETTS #The Correct Option
+						state_region = s:STATE_CONNECTICUT
+						state_region = s:STATE_RHODE_ISLAND
+					}
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_free_states_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				zzz_converter_state_is_in_america = yes
+				zzz_converter_state_is_in_california = yes
+			}
+		}
+		NOT = { exists = c:FSA }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = FSA
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				has_law = law_type:law_slavery_banned
+			}
+			add = 99
+		}
+	}
+}
+form_confederate_states_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				zzz_converter_state_is_in_america = yes
+				zzz_converter_state_is_in_california = yes
+			}
+		}
+		NOT = { exists = c:CSA }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = CSA
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				NOT = { has_law = law_type:law_slavery_banned }
+			}
+			add = 99
+		}
+	}
+}
+form_north_carolina_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				zzz_converter_state_is_in_america = yes
+				zzz_converter_state_is_in_california = yes
+			}
+			#States south of North Carolina
+			NOT = { state_region = s:STATE_SOUTH_CAROLINA }
+			NOT = { state_region = s:STATE_GEORGIA }
+			NOT = { state_region = s:STATE_FLORIDA }
+			NOT = { state_region = s:STATE_ALABAMA }
+			NOT = { state_region = s:STATE_MISSISSIPPI }
+			NOT = { state_region = s:STATE_ARKANSAS }
+			NOT = { state_region = s:STATE_LOUISIANA }
+			NOT = { state_region = s:STATE_TEXAS }
+		}
+		NOT = { exists = c:NCR }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = NCR
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_NORTH_CAROLINA
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_south_carolina_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				#States south of North Carolina
+				state_region = s:STATE_SOUTH_CAROLINA
+				state_region = s:STATE_GEORGIA
+				state_region = s:STATE_FLORIDA
+				state_region = s:STATE_ALABAMA
+				state_region = s:STATE_MISSISSIPPI
+				state_region = s:STATE_ARKANSAS
+				state_region = s:STATE_LOUISIANA
+				state_region = s:STATE_TEXAS
+			}
+		}
+		NOT = { exists = c:SCR }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = SCR
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_NORTH_CAROLINA
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_united_carolina_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				zzz_converter_state_is_in_america = yes
+				zzz_converter_state_is_in_california = yes
+			}
+		}
+		NOT = { exists = c:CLI }
+		
+		#For converter-generated tags only
+		OR = {
+			zzz_is_non_major_new_world_tag = no
+			c:NCR = ROOT
+			c:SCR = ROOT
+		}
+		zzz_is_major_new_world_tag = no
+		
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+		OR = {
+			NOT = { exists = c:NCR }
+			if = {
+				limit = { exists = c:NCR }
+				c:NCR = ROOT
+			}
+		}
+		OR = {
+			NOT = { exists = c:SCR }
+			if = {
+				limit = { exists = c:SCR }
+				c:SCR = ROOT
+			}
+		}
+	}
+	
+	when_taken = {
+		change_tag = CLI
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					OR = {
+						state_region = s:STATE_NORTH_CAROLINA
+						state_region = s:STATE_SOUTH_CAROLINA
+					}
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_georgia_usa_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				zzz_converter_state_is_in_america = yes
+				zzz_converter_state_is_in_california = yes
+			}
+		}
+		NOT = { exists = c:GRG }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = GRG
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_GEORGIA
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_florida_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				zzz_converter_state_is_in_america = yes
+				zzz_converter_state_is_in_california = yes
+			}
+		}
+		NOT = { exists = c:FLR }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = FLR
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_FLORIDA
+				}
+			}
+			add = 99
+		}
+	}
+}
+
+## Colonial Louisiana
+form_michigan_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				state_region = s:STATE_MINNESOTA
+				state_region = s:STATE_WISCONSIN
+				state_region = s:STATE_MICHIGAN
+				state_region = s:STATE_ILLINOIS
+				state_region = s:STATE_INDIANA
+				state_region = s:STATE_OHIO
+				state_region = s:STATE_PENNSYLVANIA
+				state_region = s:STATE_NEW_YORK
+				state_region = s:STATE_ONTARIO
+			}
+		}
+		NOT = { exists = c:UOM }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = UOM
+	}
+	
+	ai_chance = {
+		base = 10
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_MICHIGAN
+				}
+			}
+			add = 90
+		}
+	}
+}
+form_dakota_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				state_region = s:STATE_MONTANA
+				state_region = s:STATE_NORTH_DAKOTA
+				state_region = s:STATE_MINNESOTA
+				state_region = s:STATE_WISCONSIN
+				state_region = s:STATE_IOWA
+				state_region = s:STATE_SOUTH_DAKOTA
+				state_region = s:STATE_NEBRASKA
+				state_region = s:STATE_WYOMING
+			}
+		}
+		NOT = { exists = c:DKT }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = DKT
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					OR = {
+						state_region = s:STATE_NORTH_DAKOTA
+						state_region = s:STATE_SOUTH_DAKOTA
+					}
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_louisiana_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				zzz_converter_state_is_in_america = yes
+				zzz_converter_state_is_in_california = yes
+			}
+		}
+		NOT = { exists = c:LOU }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = LOU
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				OR = {
+					cu:french = { shares_non_heritage_trait_with_any_primary_culture = ROOT } #Francophone
+					capital = {
+						state_region = s:STATE_LOUISIANA
+					}
+				}
+			}
+			add = 99
+		}
+	}
+}
+
+## Colonial California
+form_california_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		NOT = { any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } } } #Prevents collision with other Form California decision based on culture
+		capital = {
+			OR = {
+				state_region = s:STATE_CALIFORNIA
+				state_region = s:STATE_BAJA_CALIFORNIA
+			}
+		}
+		NOT = { exists = c:CAL }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = CAL
+	}
+	
+	ai_chance = {
+		base = 100
+	}
+}
+form_oregon_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			zzz_converter_state_is_in_california = yes
+		}
+		NOT = { exists = c:ORG }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = ORG
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_OREGON
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_deseret_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			zzz_converter_state_is_in_california = yes
+		}
+		NOT = { exists = c:DES }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = DES
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				country_has_state_religion = rel:protestant
+			}
+			add = 99
+		}
+	}
+}
+
+## Colonial Alaska
+form_cascadia_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				state_region = s:STATE_ALASKA
+				state_region = s:STATE_BRITISH_COLUMBIA
+				state_region = s:STATE_YUKON_TERRITORY
+				state_region = s:STATE_WASHINGTON
+				state_region = s:STATE_OREGON
+				state_region = s:STATE_CALIFORNIA
+				state_region = s:STATE_IDAHO
+				state_region = s:STATE_MONTANA
+				state_region = s:STATE_NEVADA
+				state_region = s:STATE_UTAH
+				state_region = s:STATE_WYOMING
+			}
+		}
+		NOT = { exists = c:CSC }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = CSC
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					OR = {
+						state_region = s:STATE_ALASKA
+						state_region = s:STATE_BRITISH_COLUMBIA
+						state_region = s:STATE_YUKON_TERRITORY
+						state_region = s:STATE_WASHINGTON
+						state_region = s:STATE_OREGON
+					}
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_columbia_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				state_region = s:STATE_OREGON
+				state_region = s:STATE_WASHINGTON
+				state_region = s:STATE_IDAHO
+				state_region = s:STATE_MONTANA
+				state_region = s:STATE_WYOMING
+				state_region = s:STATE_BRITISH_COLUMBIA
+			}
+		}
+		NOT = { exists = c:COL }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = COL
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					OR = {
+						state_region = s:STATE_OREGON
+						state_region = s:STATE_WASHINGTON
+					}
+				}
+			}
+			add = 49
+		}
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_BRITISH_COLUMBIA
+				}
+			}
+			add = 99
+		}
+	}
+}
+
+## Colonial Mexico
+form_texas_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				zzz_converter_state_is_in_california = yes #Please let a Texan never review this
+				state_region = s:STATE_RIO_GRANDE
+			}
+		}
+		NOT = { exists = c:TEX }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+		has_state_in_state_region = STATE_TEXAS
+	}
+	
+	when_taken = {
+		change_tag = TEX
+	}
+	
+	ai_chance = {
+		base = 100
+	}
+}
+form_rio_grande_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				zzz_converter_state_is_in_mexico = yes
+				state_region = s:STATE_TEXAS
+				state_region = s:STATE_NEW_MEXICO
+				state_region = s:STATE_COLORADO
+			}
+		}
+		NOT = { exists = c:RIO }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = RIO
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_RIO_GRANDE
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_yucatan_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			zzz_converter_state_is_in_mexico = yes
+		}
+		NOT = { exists = c:YUC }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+		OR = {
+			capital = {
+				state_region = s:STATE_YUCATAN
+			}
+			AND = {
+				owns_entire_state_region = STATE_YUCATAN
+				calc_true_if = {
+					amount >= 1
+					has_state_in_state_region = STATE_GUATEMALA
+					has_state_in_state_region = STATE_CHIAPAS
+					has_state_in_state_region = STATE_VERACRUZ
+				}
+			}
+		}
+	}
+	
+	when_taken = {
+		change_tag = YUC
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					OR = {
+						state_region = s:STATE_YUCATAN
+						state_region = s:STATE_CHIAPAS
+					}
+				}
+			}
+			add = 49
+		}
+	}
+}
+form_los_altos_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				#Mayan Highlands
+				state_region = s:STATE_CHIAPAS
+				state_region = s:STATE_GUATEMALA
+				state_region = s:STATE_YUCATAN
+				state_region = s:STATE_HONDURAS
+				state_region = s:STATE_SAN_SALVADOR
+			}
+		}
+		NOT = { exists = c:ALT }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = ALT
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					OR = {
+						state_region = s:STATE_GUATEMALA
+						state_region = s:STATE_CHIAPAS
+					}
+				}
+			}
+			add = 49
+		}
+	}
+}
+form_guatemala_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_GUATEMALA
+		}
+		NOT = { exists = c:GUA }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = GUA
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_honduras_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_HONDURAS
+		}
+		NOT = { exists = c:HON }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = HON
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_el_salvador_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_SAN_SALVADOR
+		}
+		NOT = { exists = c:ELS }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = ELS
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_nicaragua_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_NICARAGUA
+		}
+		NOT = { exists = c:NIC }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = NIC
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_costa_rica_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_COSTA_RICA
+		}
+		NOT = { exists = c:COS }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = COS
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_usca_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				zzz_converter_state_is_in_mexico = yes
+				state_region = s:STATE_PANAMA
+			}
+		}
+		NOT = { exists = c:UCA }
+		
+		#Can be formed by other Central American countries
+		#zzz_is_non_major_new_world_tag = no 
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+		calc_true_if = {
+			amount >= 5 #5 states of the USCA
+			owns_entire_state_region = STATE_CHIAPAS #Los Altos
+			owns_entire_state_region = STATE_GUATEMALA
+			owns_entire_state_region = STATE_HONDURAS
+			owns_entire_state_region = STATE_SAN_SALVADOR
+			owns_entire_state_region = STATE_NICARAGUA
+			owns_entire_state_region = STATE_COSTA_RICA
+			owns_entire_state_region = STATE_PANAMA
+		}
+	}
+	
+	when_taken = {
+		change_tag = UCA
+	}
+	
+	ai_chance = {
+		base = 100
+	}
+}
+
+## Colonial Colombia
+form_panama_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_PANAMA
+		}
+		NOT = { exists = c:PNM }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		hidden_effect = {
+			set_variable = free_nation_name_var
+		}
+		change_tag = PNM
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_colombia_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			zzz_converter_state_is_in_gran_colombia = yes
+		}
+		NOT = { exists = c:CLM }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		hidden_effect = {
+			set_variable = free_nation_name_var
+		}
+		change_tag = CLM
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					OR = {
+						state_region = s:STATE_CUNDINAMARCA
+						state_region = s:STATE_ANTIOQUIA
+						state_region = s:STATE_CAUCA
+						state_region = s:STATE_CUNDINAMARCA
+						state_region = s:STATE_GUAVIARE
+					}
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_venezuela_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			zzz_converter_state_is_in_gran_colombia = yes
+		}
+		NOT = { exists = c:VNZ }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = VNZ
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					OR = {
+						state_region = s:STATE_MIRANDA
+						state_region = s:STATE_ZULIA
+						state_region = s:STATE_BOLIVAR
+						state_region = s:STATE_GUAYANA
+					}
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_ecuador_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				state_region = s:STATE_ECUADOR
+				state_region = s:STATE_PASTAZA
+				state_region = s:STATE_CAUCA
+				state_region = s:STATE_AMAZONAS
+			}
+		}
+		NOT = { exists = c:ECU }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = ECU
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_ECUADOR
+				}
+			}
+			add = 49
+		}
+	}
+}
+#Federation of the Andes is skipped because it is a Hegemony
+
+## Colonial Peru
+form_north_peru_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				state_region = s:STATE_CAJAMARCA
+				state_region = s:STATE_PASTAZA
+				state_region = s:STATE_LIMA
+				state_region = s:STATE_ACRE
+			}
+		}
+		NOT = { exists = c:NPU }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = NPU
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+
+form_bolivia_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			region = sr:region_andes
+		}
+		NOT = { exists = c:BOL }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = BOL
+	}
+	
+	ai_chance = {
+		base = 100
+	}
+}
+
+## Colonial La Plata
+form_chile_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				zzz_converter_state_is_in_argentina = yes
+				state_region = s:STATE_ANTOFAGASTA
+				state_region = s:STATE_TARAPACA
+			}
+		}
+		NOT = { exists = c:CHL }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = CHL
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					OR = {
+						state_region = s:STATE_ANTOFAGASTA
+						state_region = s:STATE_TARAPACA
+						state_region = s:STATE_SANTIAGO
+						state_region = s:STATE_LOS_RIOS
+						state_region = s:STATE_ARAUCANIA
+					}
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_paraguay_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				#Paraguay River
+				state_region = s:STATE_MATO_GROSSO
+				state_region = s:STATE_ALTO_PARAGUAY
+				state_region = s:STATE_BAJO_PARAGUAY
+				state_region = s:STATE_CHACO
+				state_region = s:STATE_CORRIENTES
+			}
+		}
+		NOT = { exists = c:PRG }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = PRG
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					OR = {
+						state_region = s:STATE_ALTO_PARAGUAY
+						state_region = s:STATE_BAJO_PARAGUAY
+					}
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_uruguay_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			#Uruguay River
+			state_region = s:STATE_URUGUAY
+			state_region = s:STATE_CORRIENTES
+			state_region = s:STATE_SANTA_FE
+			state_region = s:STATE_RIO_GRANDE_DO_SUL
+			state_region = s:STATE_SANTA_CATARINA
+		}
+		NOT = { exists = c:URU }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = URU
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_URUGUAY
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_rio_de_la_plata_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				zzz_converter_state_is_in_argentina = yes
+				state_region = s:STATE_JUJUY
+				state_region = s:STATE_URUGUAY
+			}
+		}
+		NOT = { exists = c:PLT }
+		
+		#Can be formed by other South American countries
+		#zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+		calc_true_if = {
+			amount >= 12
+			owns_entire_state_region = STATE_RIO_NEGRO
+			owns_entire_state_region = STATE_LA_PAMPA
+			owns_entire_state_region = STATE_SANTA_FE
+			owns_entire_state_region = STATE_CORRIENTES
+			owns_entire_state_region = STATE_TUCUMAN
+			owns_entire_state_region = STATE_CHACO
+			owns_entire_state_region = STATE_BUENOS_AIRES
+			owns_entire_state_region = STATE_PATAGONIA
+			owns_entire_state_region = STATE_SOUTH_ATLANTIC_ISLANDS
+			owns_entire_state_region = STATE_JUJUY
+			owns_entire_state_region = STATE_URUGUAY
+			owns_entire_state_region = STATE_TARAPACA
+			owns_entire_state_region = STATE_ANTOFAGASTA
+			owns_entire_state_region = STATE_SANTIAGO
+			owns_entire_state_region = STATE_LOS_RIOS
+			owns_entire_state_region = STATE_ARAUCANIA
+		}
+	}
+	
+	when_taken = {
+		change_tag = PLT
+	}
+	
+	ai_chance = {
+		base = 200
+	}
+}
+
+## Colonial Brazil
+form_amazonia_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				#Amazon Rainforest
+				state_region = s:STATE_AMAZONAS
+				state_region = s:STATE_ACRE
+				state_region = s:STATE_GUAYANA
+				state_region = s:STATE_PARA
+				state_region = s:STATE_GOIAS
+				state_region = s:STATE_MATO_GROSSO
+				state_region = s:STATE_SANTA_CRUZ
+				state_region = s:STATE_LA_PAZ
+				state_region = s:STATE_GUAVIARE
+				state_region = s:STATE_PASTAZA
+			}
+		}
+		NOT = { exists = c:AMZ }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = AMZ
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_AMAZONAS
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_bahia_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			#Coastal Brazil
+			region = sr:region_brazil
+			NOT = { state_region = s:STATE_AMAZONAS }
+			NOT = { state_region = s:STATE_MATO_GROSSO }
+			NOT = { state_region = s:STATE_GOIAS }
+			NOT = { state_region = s:STATE_MINAS_GERAIS }
+		}
+		NOT = { exists = c:BHI }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = BHI
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_BAHIA
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_equator_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			region = sr:region_brazil
+		}
+		NOT = { exists = c:EQT }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = EQT
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					OR = {
+						state_region = s:STATE_MARANHAO
+						state_region = s:STATE_PIAUI
+						state_region = s:STATE_CEARA
+						state_region = s:STATE_RIO_GRANDE_DO_NORTE
+						state_region = s:STATE_PARAIBA
+						state_region = s:STATE_BAHIA
+					}
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_grao_para_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_PARA
+		}
+		NOT = { exists = c:PRA }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = PRA
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_minas_gerais_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			region = sr:region_brazil
+		}
+		NOT = { exists = c:MNG }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = MNG
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_MINAS_GERAIS
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_paulistania_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			region = sr:region_brazil
+		}
+		NOT = { exists = c:PAU }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = PAU
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_SAO_PAULO
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_piratini_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				state_region = s:STATE_RIO_GRANDE_DO_SUL
+				state_region = s:STATE_URUGUAY
+			}
+		}
+		NOT = { exists = c:PNI }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = PNI
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_RIO_GRANDE_DO_SUL
+				}
+			}
+			add = 99
+		}
+	}
+}
+form_santa_catarina_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			region = sr:region_brazil
+		}
+		NOT = { exists = c:CTR }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		hidden_effect = {
+			set_variable = free_nation_name_var
+		}
+		change_tag = CTR
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_SANTA_CATARINA
+				}
+			}
+			add = 99
+		}
+	}
+}
+
+## Colonial Caribbean
+form_bahamas_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_BAHAMAS
+		}
+		NOT = { exists = c:BAH }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = BAH
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_cuba_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_CUBA
+		}
+		NOT = { exists = c:CUB }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = CUB
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_haiti_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_HAITI
+		}
+		NOT = { exists = c:HAI }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = HAI
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_jamaica_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_JAMAICA
+		}
+		NOT = { exists = c:JAM }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = JAM
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_puerto_rico_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_PUERTO_RICO
+		}
+		NOT = { exists = c:PCO }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = PCO
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_santo_domingo_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_SANTO_DOMINGO
+		}
+		NOT = { exists = c:DOM }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = DOM
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_west_indies_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_WEST_INDIES
+		}
+		NOT = { exists = c:WIN }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	when_taken = {
+		change_tag = WIN
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+
+## Colonial Australia
+form_new_south_wales_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:aborigine = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				state_region = s:STATE_NEW_SOUTH_WALES
+				state_region = s:STATE_VICTORIA
+				state_region = s:STATE_QUEENSLAND
+			}
+		}
+		NOT = { exists = c:NSW }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	when_taken = {
+		change_tag = NSW
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_NEW_SOUTH_WALES
+				}
+			}
+			add = 49
+		}
+	}
+}
+form_new_zealand_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:aborigine = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				state_region = s:STATE_NORTH_ISLAND
+				state_region = s:STATE_SOUTH_ISLAND
+			}
+		}
+		NOT = { exists = c:NZL }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+		has_state_in_state_region = STATE_NORTH_ISLAND
+		has_state_in_state_region = STATE_SOUTH_ISLAND
+	}
+	when_taken = {
+		change_tag = NZL
+	}
+	
+	ai_chance = {
+		base = 100
+	}
+}
+form_south_australia_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:aborigine = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_SOUTH_AUSTRALIA
+		}
+		NOT = { exists = c:SAS }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	when_taken = {
+		change_tag = SAS
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_tasmania_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:aborigine = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			state_region = s:STATE_TASMANIA
+		}
+		NOT = { exists = c:TAS }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	when_taken = {
+		change_tag = TAS
+	}
+	
+	ai_chance = {
+		base = 50
+	}
+}
+form_western_australia_dec = {
+	is_shown = {
+		is_country_type = colonial
+		NOT = { cu:aborigine = { shares_heritage_trait_with_any_primary_culture = ROOT } }
+		capital = {
+			OR = {
+				state_region = s:STATE_WESTERN_AUSTRALIA
+				state_region = s:STATE_NORTHERN_TERRITORY
+			}
+		}
+		NOT = { exists = c:WAS }
+		
+		#For converter-generated tags only
+		zzz_is_non_major_new_world_tag = no
+		zzz_is_major_new_world_tag = no
+	}
+	
+	possible = {
+		is_subject = no
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	when_taken = {
+		change_tag = WAS
+	}
+	
+	ai_chance = {
+		base = 1
+		modifier = {
+			trigger = {
+				capital = {
+					state_region = s:STATE_WESTERN_AUSTRALIA
+				}
+			}
+			add = 49
+		}
+	}
+}
