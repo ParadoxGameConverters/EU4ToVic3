@@ -1,11 +1,23 @@
 #include "Market.h"
 
+#include <iomanip>
 #include <numeric>
+#include <queue>
 #include <ranges>
 
 V3::Market::Market(const std::vector<std::string>& possibleGoods)
 {
 	for (const auto& good: possibleGoods)
+	{
+		sellOrders[good] = 0;
+		buyOrdersBuildings[good] = 0;
+		buyOrdersPops[good] = 0;
+	}
+}
+
+void V3::Market::loadGoods(const std::map<std::string, Good>& goodsList)
+{
+	for (const auto& good: goodsList | std::views::keys)
 	{
 		sellOrders[good] = 0;
 		buyOrdersBuildings[good] = 0;
@@ -107,7 +119,8 @@ std::set<std::string> V3::Market::getObsessions(const std::string& culture, cons
 	{
 		if (!cultureErrors.contains(culture))
 		{
-			Log(LogLevel::Warning) << "Culture: " << culture << " has no definition. Assuming no obsessions or taboos.";
+			const auto& theCulture = culture.empty() ? "None" : culture;
+			Log(LogLevel::Warning) << "Culture: " << theCulture << " has no definition. Assuming no obsessions or taboos.";
 		}
 		return {};
 	}
@@ -127,7 +140,8 @@ std::set<std::string> V3::Market::getTaboos(const std::string& culture,
 	{
 		if (!religionErrors.contains(religion))
 		{
-			Log(LogLevel::Warning) << "Religion: " << religion << " has no definition. Assuming no taboos.";
+			const auto& theReligion = religion.empty() ? "None" : religion;
+			Log(LogLevel::Warning) << "Religion: " << theReligion << " has no definition. Assuming no taboos.";
 		}
 		return {};
 	}
@@ -301,7 +315,6 @@ bool V3::Market::validateGood(const std::string& good) const
 	{
 		if (!goodsErrors.contains(good))
 		{
-
 			Log(LogLevel::Warning) << "Good: " << good << " not recognized in market. Converter will act like it doesn't exist.";
 			goodsErrors.emplace(good);
 		}
@@ -385,4 +398,56 @@ void V3::Market::calcPopOrders(const int popSize,
 			}
 		}
 	}
+}
+
+void V3::Market::clearMarket()
+{
+	for (auto& value: sellOrders | std::views::values)
+	{
+		value = 0;
+	}
+	for (auto& value: buyOrdersPops | std::views::values)
+	{
+		value = 0;
+	}
+	for (auto& value: buyOrdersBuildings | std::views::values)
+	{
+		value = 0;
+	}
+}
+
+std::stringstream V3::Market::marketAsTable() const
+{
+	std::stringstream out;
+	int goodLength = 0;
+	int amtLength = 0;
+	const auto& balance = getMarketBalance();
+	for (const auto& [good, amt]: balance)
+	{
+		goodLength = std::max(goodLength, static_cast<int>(good.length()));
+		amtLength = std::max(amtLength, static_cast<int>(std::to_string(amt).length()));
+	}
+
+	out << std::setprecision(3);
+	out << std::endl;
+	out << std::left << std::setw(goodLength + 2) << "Good" << std::setw(amtLength + 2) << "Percent" << std::endl;
+	out << std::setfill('-') << std::setw(goodLength + 2) << "" << std::setw(amtLength + 2) << "" << std::endl;
+	out << std::setfill(' ');
+
+	std::vector<std::pair<std::string, double>> balanceVector = {balance.begin(), balance.end()};
+
+	std::ranges::sort(balanceVector, [=](const std::pair<std::string, double>& lhs, const std::pair<std::string, double>& rhs) {
+		return lhs.second < rhs.second;
+	});
+
+	for (const auto& pair: balanceVector)
+	{
+		if (std::abs(pair.second) < 1)
+			continue;
+
+		// out << std::left << std::setw(goodLength + 2) << pair.first << std::setw(amtLength + 2) << pair.second << std::endl;
+		const double pricePercent = -0.75 * std::max(-1.0, std::min(1.0, pair.second / 100));
+		out << std::left << std::setw(goodLength + 2) << pair.first << std::setw(amtLength + 2) << pricePercent * 100 << "%" << std::endl;
+	}
+	return out;
 }

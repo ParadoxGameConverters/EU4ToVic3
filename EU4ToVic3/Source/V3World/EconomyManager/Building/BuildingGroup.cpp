@@ -14,6 +14,9 @@ void V3::BuildingGroup::registerKeys()
 	registerKeyword("parent_group", [this](std::istream& theStream) {
 		parent = commonItems::getString(theStream);
 	});
+	registerKeyword("is_subsistence", [this](std::istream& theStream) {
+		subsistence = (commonItems::getString(theStream) == "yes");
+	});
 	registerKeyword("capped_by_resources", [this](std::istream& theStream) {
 		resourceCapped = (commonItems::getString(theStream) == "yes");
 	});

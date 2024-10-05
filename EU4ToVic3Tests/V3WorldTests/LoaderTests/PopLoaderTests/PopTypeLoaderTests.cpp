@@ -14,7 +14,7 @@ TEST(V3World_PopTypeLoaderTests, PopTypeLoaderCanLoadPopTypeComponents)
 
 	popTypeLoader.loadPopTypes(modFS);
 
-	EXPECT_EQ(2, popTypeLoader.getPopTypes().size());
+	EXPECT_EQ(3, popTypeLoader.getPopTypes().size());
 	EXPECT_EQ("peasants", popTypeLoader.getPopTypes().at("peasants").getType());
 	EXPECT_DOUBLE_EQ(0.05, popTypeLoader.getPopTypes().at("peasants").getConsumptionRate());
 	EXPECT_EQ(std::nullopt, popTypeLoader.getPopTypes().at("peasants").getDependentRatio());
