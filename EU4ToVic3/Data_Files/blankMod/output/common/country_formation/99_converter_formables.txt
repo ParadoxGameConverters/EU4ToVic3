@@ -469,6 +469,16 @@ GLI = { #Galicia, Galician People
 	
 	ai_will_do = { always = yes }
 }
+GNG = { #Da Cheng, Zhuang People, must be restricted, includes Han
+	states = {
+		STATE_GUANGXI
+		STATE_TONKIN
+	}
+
+	required_states_fraction = 1
+	
+	ai_will_do = { always = yes }
+}
 GRE = { #Greece, Greek People
 	use_culture_states = yes
 
@@ -946,12 +956,15 @@ PER = { #Persia, Persian People
 	
 	ai_will_do = { always = yes }
 }
-PER = { #Phillipines, Filipino/Moro People
+PHI = { #Phillipines, Filipino/Moro People
 	use_culture_states = yes
 
-	required_states_fraction = 0.5
-	
+	required_states_fraction = 1
+
 	ai_will_do = { always = yes }
+	possible = {
+		has_technology_researched = nationalism
+	}
 }
 POR = { #Portugal, Portuguese People
 	use_culture_states = yes
@@ -1265,6 +1278,15 @@ ZUL = { #Zulu, Zulu People
 
 #------------------
 ##Converter Defined Nations
+S34 = { #Shan, Shan People 
+	states = {
+		STATE_SHAN_STATES
+	}
+
+	required_states_fraction = 1
+	
+	ai_will_do = { always = yes }
+}
 UT0 = { #United Tribes of Australia, Aborigine Peoples
 	use_culture_states = yes
 
