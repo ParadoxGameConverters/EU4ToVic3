@@ -1,0 +1,61 @@
+PHI = {
+	dynamic_country_name = {
+		name = dyn_c_malaysia
+		adjective = dyn_c_malaysia_adj
+		
+		is_main_tag_only = yes
+		priority = 5
+		
+		trigger = {
+			OR = {
+				coa_def_catholic_trigger = no
+				coa_def_protestant_trigger = no
+				coa_def_orthodox_trigger = no
+				coa_def_oriental_orthodox_trigger = no
+				coa_def_gnostic_christianity_trigger = no
+				coa_def_nestorian_trigger = no
+				coa_def_hellenic_pagan_reformed_trigger = no
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_tagalog_republic
+		adjective = dyn_c_tagalog_republic_adj
+		
+		is_main_tag_only = yes
+		priority = 10
+		
+		trigger = {
+			coa_def_fascist_flag_trigger = yes
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_panyupayana 
+		adjective = dyn_c_panyupayana_adj
+		
+		is_main_tag_only = yes
+		priority = 10
+		
+		trigger = {
+			OR = {
+				coa_def_sikh_trigger = yes
+				coa_def_hindu_trigger = yes
+				coa_def_jain_trigger = yes
+				coa_def_theravada_trigger = yes
+				coa_def_mahayana_trigger = yes
+				coa_def_gelugpa_trigger = yes
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_ophir
+		adjective = dyn_c_ophir_adj
+		
+		is_main_tag_only = yes
+		priority = 10
+		
+		trigger = {
+			coa_def_jewish_trigger = yes
+		}
+	}
+}
