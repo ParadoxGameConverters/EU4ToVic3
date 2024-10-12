@@ -87,12 +87,12 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 	 const std::map<std::string, Building>& buildings,
 	 const std::shared_ptr<SubState>& subState)
 {
-
+	const auto& traits = subState->getHomeState()->getTraits();
 	BuildingResources buildingResources;
 	buildingResources.evaluateResources(building.getPMGroups(), estimatedPMs, PMs, PMGroups);
 
 	// Collect any/all building or inherited building_group throughput modifiers
-	const double throughputMod = calcThroughputStateModifier(subState->getHomeState()->getTraits(), building, buildingGroups, stateTraits);
+	const double throughputMod = calcThroughputStateModifier(traits, building, buildingGroups, stateTraits);
 
 	// Evaluate the economy of scale cap
 	// There is an economy of scale penalty for nationalized buildings. For now we're ignoring it.
@@ -100,9 +100,7 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 	const int eosCap = calcEconomyOfScaleCap(*subState->getOwner(), building, buildingGroups, techMap);
 
 	//// Update the market.
-	updateMarketGoods(building.getLevel(), p, eosCap, throughputMod, buildingResources, subState->getHomeState()->getTraits(), stateTraits);
-
-
+	updateMarketGoods(building.getLevel(), p, eosCap, throughputMod, buildingResources, traits, stateTraits);
 
 	// Ownership fraction filtering.
 	std::map<std::string, double> estOwnershipFraction;
@@ -111,28 +109,57 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 		estOwnershipFraction = estOwnershipFractions.at(building.getName());
 	}
 
-	// Track Subsistence outputs.
 	BuildingResources subsistenceResources;
 	const Building& subsistenceBuilding = buildings.at(subState->getHomeState()->getSubsistenceBuilding());
 	subsistenceResources.evaluateResources(subsistenceBuilding.getPMGroups(), estimatedPMs, PMs, PMGroups);
+	const double addedWorkingPopPercent = Market::calcAddedWorkingPopPercent(subState->getOwner()->getProcessedData().laws, lawsMap);
 
-	const double lostSubsistence = marketJobs.createJobs(buildingResources.getJobs(),
+	// Track Jobs changed.
+	double lostSubsistence = marketJobs.createJobs(buildingResources.getJobs(),
 		 subsistenceResources.getJobs(),
 		 p,
 		 defaultRatio,
-		 Market::calcAddedWorkingPopPercent(subState->getOwner()->getProcessedData().laws, lawsMap),
+		 addedWorkingPopPercent,
 		 estOwnershipFraction,
 		 {{
 				"building_financial_district",
 				{{"capitalists", 50}, {"shopkeepers", 100}, {"clerks", 100}},
 		  },
-			  {"building_manor_house", {{"aristocrats", 50}, {"laborers", 100}}}},
+			  {"building_manor_house", {{"aristocrats", 50}, {"laborers", 100}}}}, // TODO(Gawquon): Load in
 		 popTypes,
 		 subState);
 
+	// Track outputs and Jobs from new Urban Centers.
+	if (const auto& urbanization = buildingGroups.getUrbanization(building.getBuildingGroup()); urbanization > 0)
+	{
+		const double urbanFrac = urbanization / 100.0;
+		subState->addUrbanCenters(urbanFrac * p);
 
-	const double subsistenceModifier = calcThroughputStateModifier(subState->getHomeState()->getTraits(), subsistenceBuilding, buildingGroups, stateTraits);
-	updateMarketGoods(-lostSubsistence, -lostSubsistence, 0, subsistenceModifier, subsistenceResources, subState->getHomeState()->getTraits(), stateTraits);
+		BuildingResources urbanResources;
+		const Building& urbanBuilding = buildings.at("building_urban_center"); // TODO(Gawquon): Validate
+		const double urbanThroughputMod = calcThroughputStateModifier(traits, urbanBuilding, buildingGroups, stateTraits);
+		urbanResources.evaluateResources(urbanBuilding.getPMGroups(),
+			 estimatedPMs,
+			 PMs,
+			 PMGroups); // TODO(Gawquon): Update evaluate resources to handle this mixed law/tech building
+
+		const double urbanLevel = subState->getUrbanCenters() + urbanFrac * p;
+		updateMarketGoods(urbanLevel, urbanFrac * p, eosCap, urbanThroughputMod, urbanResources, traits, stateTraits);
+
+		lostSubsistence += marketJobs.createJobs(urbanResources.getJobs(),
+			 subsistenceResources.getJobs(),
+			 p * urbanFrac,
+			 defaultRatio,
+			 addedWorkingPopPercent,
+			 {},
+			 {},
+			 popTypes,
+			 subState);
+	}
+
+	// Track Subsistence outputs.
+	const double subsistenceModifier = calcThroughputStateModifier(traits, subsistenceBuilding, buildingGroups, stateTraits);
+	updateMarketGoods(-lostSubsistence, -lostSubsistence, 0, subsistenceModifier, subsistenceResources, traits, stateTraits);
 }
 
 void V3::MarketTracker::logDebugMarket(const Country& country) const
@@ -167,7 +194,7 @@ std::stringstream V3::MarketTracker::breakdownAsTable(const std::map<std::string
 }
 
 void V3::MarketTracker::updateMarketGoods(const double level,
-	 const int p,
+	 const double p,
 	 const int eosCap,
 	 const double throughputMod,
 	 const BuildingResources& buildingResources,

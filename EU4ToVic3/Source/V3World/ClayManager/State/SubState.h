@@ -70,6 +70,7 @@ class SubState
 	void setOriginalCPBudget(const int theCPBudget) { originalCPBudget = theCPBudget; }
 	void spendCPBudget(const int theCPExpense) { CPBudget -= theCPExpense; }
 	void addBuilding(const std::shared_ptr<Building>& building) { buildings.push_back(building); }
+	void addUrbanCenters(const double theUrbanCenters) { urbanCenters += theUrbanCenters; }
 	void setVanillaBuildingElements(const std::vector<std::string>& elements) { vanillaBuildingElements = elements; }
 	void calculateInfrastructure(const StateModifiers& theStateModifiers, const std::map<std::string, Tech>& techMap, int popPerInfrastructure);
 
@@ -126,6 +127,7 @@ class SubState
 	[[nodiscard]] const auto& getIndustryWeight() const { return industryWeight; }
 	[[nodiscard]] const auto& getCPBudget() const { return CPBudget; }
 	[[nodiscard]] const auto& getBuildings() const { return buildings; }
+	[[nodiscard]] const auto& getUrbanCenters() const { return urbanCenters; }
 	[[nodiscard]] const auto& getVanillaBuildingElements() const { return vanillaBuildingElements; }
 	[[nodiscard]] double calcBuildingWeight(const Building& building,
 		 const BuildingGroups& buildingGroups,
@@ -222,6 +224,7 @@ class SubState
 	int CPBudget = 0;											  // Construction Points for a substate to spend on its development
 	int originalCPBudget = 0;								  // Used in Building Weight calculations
 	std::vector<std::shared_ptr<Building>> buildings; // buildings available to build in the subState
+	double urbanCenters = 0;								  // Accumulated levels of Urban Centers
 
 	std::vector<std::string> vanillaBuildingElements; // vanilla buildings for this substate, ready for direct dump.
 	std::set<std::string> claims;

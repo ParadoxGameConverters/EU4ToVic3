@@ -71,12 +71,12 @@ class MarketTracker
 		 const std::map<std::string, Tech>& techMap);
 
 	void updateMarketGoods(double level,
-		 int p,
-		 int eosCap,
-		 double throughputMod,
-		 const BuildingResources& buildingResources,
-		 const std::vector<std::string>& traits,
-		 const std::map<std::string, StateModifier>& stateTraits);
+		const double p,
+		int eosCap,
+		double throughputMod,
+		const BuildingResources& buildingResources,
+		const std::vector<std::string>& traits,
+		const std::map<std::string, StateModifier>& stateTraits);
 
 
 	Market market;
