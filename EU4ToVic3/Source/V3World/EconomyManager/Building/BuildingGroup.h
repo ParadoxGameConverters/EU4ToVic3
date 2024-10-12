@@ -20,6 +20,7 @@ class BuildingGroup: commonItems::parser
 	[[nodiscard]] const auto& possibleIsResourceCapped() const { return resourceCapped; }
 	[[nodiscard]] const auto& usesArableLand() const { return arableCapped; }
 	[[nodiscard]] const auto& isSubsistence() const { return subsistence; }
+	[[nodiscard]] const auto& getUrbanization() const { return urbanization; }
 
   private:
 	void registerKeys();
@@ -30,6 +31,7 @@ class BuildingGroup: commonItems::parser
 	std::optional<bool> resourceCapped;
 	std::optional<bool> arableCapped;
 	bool subsistence;
+	int urbanization = 0;
 };
 } // namespace V3
 

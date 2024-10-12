@@ -33,6 +33,9 @@ void V3::BuildingGroup::registerKeys()
 	registerKeyword("category", [this](std::istream& theStream) {
 		category = commonItems::getString(theStream);
 	});
+	registerKeyword("urbanization", [this](std::istream& theStream) {
+		urbanization = commonItems::getInt(theStream);
+	});
 	registerKeyword("infrastructure_usage_per_level", [this](std::istream& theStream) {
 		infrastructureCost = commonItems::getDouble(theStream);
 	});
