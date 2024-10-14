@@ -64,7 +64,9 @@ TEST(Mappers_ProductionMethodMapperTests, RulesCanBeLoaded)
 
 	EXPECT_FALSE(mapper.getRules().contains("building_government_administration"));
 	EXPECT_THAT(mapper.getRules().at("building_logging_camp"),
-		 testing::UnorderedElementsAre(mappers::PMRule{"pm_saw_mills"}, mappers::PMRule{"pm_hardwood", 0.65}));
+		 testing::UnorderedElementsAre(mappers::PMRule{"pm_saw_mills"},
+			  mappers::PMRule{"pm_hardwood", 0.65},
+			  mappers::PMRule{"pm_merchant_guilds_building_logging_camp", 1, true}));
 }
 TEST(Mappers_ProductionMethodMapperTests, ApplyRules)
 {
@@ -230,6 +232,30 @@ TEST(Mappers_ProductionMethodMapperTests, EstimatesWalkPMList)
 	EXPECT_THAT(lowPMEstimates, testing::Contains(testing::Pair("pmg_base_building_logging_camp", std::make_tuple(0, 1.0))));
 	EXPECT_THAT(midPMEstimates, testing::Contains(testing::Pair("pmg_base_building_logging_camp", std::make_tuple(1, 1.0))));
 	EXPECT_THAT(highPMEstimates, testing::Contains(testing::Pair("pmg_base_building_logging_camp", std::make_tuple(1, 1.0))));
+}
+TEST(Mappers_ProductionMethodMapperTests, ConfigFlagSwitchesWalkType)
+{
+	mappers::ProductionMethodMapper mapper;
+	mapper.loadRules("TestFiles/configurables/economy/production_method_rules.txt");
+
+	// Set up countries with no, partial, and full tech
+	V3::Country countryNoTech;
+	countryNoTech.addLaw("law_command_economy");
+
+	// Prepare Buildings
+	V3::Building lumberCamp;
+	lumberCamp.setName("building_logging_camp");
+	lumberCamp.setPMGroups(lumberPmgs);
+
+	std::map<std::string, V3::Building> buildingMap;
+	buildingMap.emplace("building_logging_camp", lumberCamp);
+
+	// Load in PM and PMGroup definitions
+	const auto [PMs, PMGroups] = prepPMData();
+
+	const auto& lawPMEstimates = mapper.estimatePMs(countryNoTech, PMs, PMGroups, buildingMap);
+
+	EXPECT_THAT(lawPMEstimates, testing::Contains(testing::Pair("pmg_ownership_capital_building_logging_camp", std::make_tuple(3, 1.0))));
 }
 TEST(Mappers_ProductionMethodMapperTests, EstimatesWalkPMListLawMethod)
 {

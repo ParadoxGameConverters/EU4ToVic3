@@ -219,13 +219,13 @@ int mappers::ProductionMethodMapper::walkPMsTechbound(const std::vector<std::str
 	return std::max(pick - 1, 0);
 }
 
+// No explicit target, finds the first PM allowed by law.
 int mappers::ProductionMethodMapper::walkPMsLawbound(const std::vector<std::string>& groupPMs,
 	 const V3::Country& country,
 	 const std::map<std::string, V3::ProductionMethod>& PMs)
 {
 	int pick = 0;
 
-	// We're finding the first PM allowed by law.
 	for (const auto& PM: groupPMs)
 	{
 		const auto& thePM = PMs.at(PM);
@@ -264,7 +264,11 @@ std::map<std::string, std::tuple<int, double>> mappers::ProductionMethodMapper::
 					{
 						if (const auto& rule = rules[ruleIndex]; rule.pm == PM)
 						{
-							expectedPMs.emplace(PMGroup, std::make_tuple(walkPMsTechbound(groupPMs, country, PM, PMs), rule.percent));
+							if (rule.lawBound)
+								expectedPMs.emplace(PMGroup, std::make_tuple(walkPMsLawbound(groupPMs, country, PMs), rule.percent));
+							else
+								expectedPMs.emplace(PMGroup, std::make_tuple(walkPMsTechbound(groupPMs, country, PM, PMs), rule.percent));
+
 							flag = true;
 							break;
 						}
