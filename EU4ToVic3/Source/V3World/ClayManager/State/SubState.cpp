@@ -375,6 +375,11 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	{
 		return false;
 	}
+	// Economy builder will ignore all monuments, canals, and power block statues.
+	if (building.isUnique())
+	{
+		return false;
+	}
 	// We can only build what we have the tech for.
 	if (!getOwner()->hasAnyOfTech(building.getUnlockingTechs()))
 	{

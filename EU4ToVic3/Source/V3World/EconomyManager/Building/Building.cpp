@@ -16,16 +16,13 @@ void V3::Building::registerKeys(const std::map<std::string, int>& costTiers)
 		buildingGroup = commonItems::getString(theStream);
 	});
 	registerKeyword("buildable", [this](std::istream& theStream) {
-		if (commonItems::getString(theStream) == "no")
-		{
-			buildable = false;
-		}
+		buildable = commonItems::getString(theStream) == "yes";
 	});
 	registerKeyword("has_max_level", [this](std::istream& theStream) {
-		if (commonItems::getString(theStream) == "yes")
-		{
-			governmentCapped = true;
-		}
+		governmentCapped = commonItems::getString(theStream) == "yes";
+	});
+	registerKeyword("unique", [this](std::istream& theStream) {
+		unique = commonItems::getString(theStream) == "yes";
 	});
 	registerKeyword("production_method_groups", [this](std::istream& theStream) {
 		for (const auto& PMGroup: commonItems::getStrings(theStream))
