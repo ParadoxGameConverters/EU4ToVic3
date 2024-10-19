@@ -25,7 +25,7 @@
 #include <numeric>
 #include <queue>
 #include <ranges>
-
+#pragma optimize("", off)
 void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
 {
 	Log(LogLevel::Info) << "-> Loading Centralized Countries for Economy Application.";
@@ -128,7 +128,29 @@ void V3::EconomyManager::integrateHardcodedBuildings(const std::shared_ptr<Count
 	 const std::map<std::string, Building>& buildings,
 	 MarketTracker& market) const
 {
-	return;
+	for (const auto& subState: country->getSubStates())
+	{
+		for (const auto& building: subState->getBuildings())
+		{
+			if (building->getLevel() <= 0)
+				continue;
+
+			market.integrateBuilding(*building,
+				 building->getLevel(),
+				 defaultRatio,
+				 estimatedPMs,
+				 PMGroups,
+				 PMs,
+				 buildingGroups,
+				 {}, // All currently hardcoded buildings do not use ownership.
+				 lawsMap,
+				 techMap,
+				 stateTraits,
+				 popTypes,
+				 buildings,
+				 subState);
+		}
+	}
 }
 
 void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY economyType,
@@ -1040,3 +1062,4 @@ void V3::EconomyManager::loadPopTypes(const commonItems::ModFilesystem& modFS)
 {
 	popTypeLoader.loadPopTypes(modFS);
 }
+#pragma optimize("", on)
