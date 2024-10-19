@@ -10,6 +10,22 @@ void V3::PopTypeLoader::loadPopTypes(const commonItems::ModFilesystem& modFS)
 		parseFile(fileName);
 	}
 	clearRegisteredKeywords();
+
+	// A copy of the default pop type.
+	if (popTypes.contains("laborers"))
+	{
+		PopType unemployed = popTypes.at("laborers");
+		unemployed.setType("unemployed");
+		popTypes.emplace("unemployed", unemployed);
+	}
+	else
+	{
+		std::stringstream input;
+		input << "strata = poor";
+		PopType unemployed(input);
+		unemployed.setType("unemployed");
+		popTypes.emplace("unemployed", unemployed);
+	}
 }
 
 void V3::PopTypeLoader::registerKeys()
