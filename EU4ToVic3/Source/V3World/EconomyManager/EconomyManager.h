@@ -32,18 +32,19 @@ class Sector;
  * Primarily handles buildings
  * 1. Load in centralized countries.
  * 2. Read in Mappers & Configs.
- * 3. Prepare estimates
+ * 3. Prepare country specific estimates. Ownership fractions, PMs used, PM fractions, etc.
  * 4. Bureaucracy! Have to handle it separate for game balance. Hand out generation that ~ matches need.
+ * 4b. Ports! Easy for markets to end up cutoff without giving each eligible state 1 port.
  * 5. For each centralized country get a CP budget based on fronter option.
  * 6. For each substate in a centralized country get a CP budget based on fronter option and terrain/state modifiers.
  * 7. Figure out the "national budget" of each country using the sector blueprints in NationalBudgetLoader.
  * 7b. NationalBudget is a list of sectors like 30% Farming, 25% Light Industry, etc.
  * 7c. Each Sector has a list of buildings that fall under it.
- * 8. Each Substate scores buildings based on EU4 buildings, terrain, state modifiers, and other factors.
+ * 8. Each Substate scores buildings based on market demand, EU4 buildings, terrain, state modifiers, and other factors.
  * 8b. Only buildings that are valid (resource/tech-wise) are scored.
  * 9. A negotiation between the states and their country about what to build.
  * 9b. The state w/ the most CP asks to build it's highest scoring building.
- * 9c. The country says that building is in sector A and as a country we have X CP to spend in that sector.
+ * 9c. The country says, that building is in sector A and as a country we have X CP to spend in that sector.
  * 9d. The state then builds as many buildings of that kind as it can, limited by capacity, packet size and sector CP.
  * 9e. A bunch of small details that make this flow until all CP is assigned. Repeat for each country.
  *
@@ -93,8 +94,20 @@ class EconomyManager
 	[[nodiscard]] double calculateStateTraitMultiplier(const std::shared_ptr<SubState>& subState) const;
 	[[nodiscard]] double getDensityFactor(double perCapitaDev) const;
 
-	void establishBureaucracy(const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const;
-	void hardcodePorts() const;
+	void establishBureaucracy(const std::shared_ptr<Country>& country, const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const;
+	void hardcodePorts(const std::shared_ptr<Country>& country) const;
+	void integrateHardcodedBuildings(const std::shared_ptr<Country>& country,
+		 double defaultRatio,
+		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
+		 const std::map<std::string, ProductionMethodGroup>& PMGroups,
+		 const std::map<std::string, ProductionMethod>& PMs,
+		 const BuildingGroups& buildingGroups,
+		 const std::map<std::string, Law>& lawsMap,
+		 const std::map<std::string, Tech>& techMap,
+		 const std::map<std::string, StateModifier>& stateTraits,
+		 const std::map<std::string, PopType>& popTypes,
+		 const std::map<std::string, Building>& buildings,
+		 MarketTracker& market) const;
 	void distributeBudget(double globalCP, double totalIndustryScore) const;
 
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> prepareSubStatesByBudget(const std::shared_ptr<Country>& country,
