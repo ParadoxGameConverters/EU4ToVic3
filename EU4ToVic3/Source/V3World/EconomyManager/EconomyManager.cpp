@@ -486,11 +486,6 @@ void V3::EconomyManager::investCapital(const std::map<std::string, std::shared_p
 		std::map<std::string, double> capitalIOUs;
 		std::map<std::string, double> overlordIOUs;
 
-		if (country->getName("english") == "Canton")
-		{
-			Log(LogLevel::Debug) << country->getName("english");
-		}
-
 		const std::string& overlordTag = country->getOverlord();
 		std::string overlordCapital;
 
