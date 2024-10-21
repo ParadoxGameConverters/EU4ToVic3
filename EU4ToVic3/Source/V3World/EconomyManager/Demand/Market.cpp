@@ -1,5 +1,6 @@
 #include "Market.h"
 
+#include <algorithm>
 #include <iomanip>
 #include <numeric>
 #include <ranges>

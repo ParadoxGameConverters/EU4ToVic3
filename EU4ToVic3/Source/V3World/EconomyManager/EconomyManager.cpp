@@ -900,7 +900,7 @@ std::map<std::string, std::map<std::string, double>> V3::EconomyManager::estimat
 			}
 
 			totalWeight += data.weight;
-			if (type.contains("building"))
+			if (const auto& findIter = type.find("building"); findIter != std::string::npos)
 				investorWeights[type] = data.weight;
 		}
 		for (const auto& type: investorWeights | std::views::keys)

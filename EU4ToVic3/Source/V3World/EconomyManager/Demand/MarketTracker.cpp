@@ -2,6 +2,7 @@
 #include "ClayManager/State/State.h"
 #include "ClayManager/State/SubState.h"
 #include "EconomyManager/Building/BuildingGroup.h"
+#include <cmath>
 #include <iomanip>
 
 V3::MarketTracker::MarketTracker(const std::map<std::string, Good>& possibleGoods,
@@ -216,7 +217,7 @@ void V3::MarketTracker::updateMarketGoods(const double level,
 		}
 		else // The new level of buildings just jumped over the economy of scale cap.
 		{
-			effectiveLevelsAdded = p * (throughputMod + 1) + (eosCap * level + 2 * level * p - std::pow(level, 2) - std::pow(p, 2)) / 100.0;
+			effectiveLevelsAdded = p * (throughputMod + 1) + (eosCap * level + 2 * level * p - pow(level, 2) - pow(p, 2)) / 100.0;
 		}
 		market.buyForBuilding(good, effectiveLevelsAdded * amount);
 	}
@@ -246,7 +247,7 @@ void V3::MarketTracker::updateMarketGoods(const double level,
 		}
 		else // The new level of buildings just jumped over the economy of scale cap.
 		{
-			effectiveLevelsAdded = p * (throughputMod + outputMod + 1) + (eosCap * level + 2 * level * p - std::pow(level, 2) - std::pow(p, 2)) / 100.0;
+			effectiveLevelsAdded = p * (throughputMod + outputMod + 1) + (eosCap * level + 2 * level * p - pow(level, 2) - pow(p, 2)) / 100.0;
 		}
 		market.sell(good, effectiveLevelsAdded * amount);
 	}

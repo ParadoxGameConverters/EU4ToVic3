@@ -1,4 +1,5 @@
 #include "Packet.h"
+#include <cmath>
 #include <numeric>
 
 V3::Packet::Packet(const Building& building,
@@ -38,12 +39,12 @@ int V3::Packet::getClusterPacket(const int baseCost, const double factor, const 
 	if (factor < 0)
 	{
 		// Trends toward only building 1 building at a time
-		packet = static_cast<int>(std::floor(CPMean * (1.0 + factor) + minCP * -factor) / baseCost);
+		packet = static_cast<int>(floor(CPMean * (1.0 + factor) + minCP * -factor) / baseCost);
 	}
 	if (factor > 0)
 	{
 		// Trends toward building as many buildings as the substate can get away with at a time
-		packet = static_cast<int>(std::floor(CPMean * (1 - factor) + maxCP * factor) / baseCost);
+		packet = static_cast<int>(floor(CPMean * (1 - factor) + maxCP * factor) / baseCost);
 	}
 
 	return packet;
