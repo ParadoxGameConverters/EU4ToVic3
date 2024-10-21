@@ -275,11 +275,6 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 			 stateTraits);
 		market.loadCultures(country->getCultureBreakdown());
 
-		if (country->getTag() == "USA")
-		{
-			market.logDebugMarket(*country);
-		}
-
 		// Initialize hardcoded buildings needed for balance.
 		establishBureaucracy(country, lawsMap, defines);
 		hardcodePorts(country);
@@ -299,12 +294,6 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 			// A Building has now been built, process for next round.
 			std::sort(subStatesByBudget.begin(), subStatesByBudget.end(), SubState::greaterBudget);
 			removeSubStateIfFinished(subStatesByBudget, subStatesByBudget.end() - 1, lawsMap);
-		}
-
-		// DEBUG
-		if (country->getTag() == "USA")
-		{
-			market.logDebugMarket(*country);
 		}
 	}
 	Log(LogLevel::Info) << "<> Built " << counter << " buildings world-wide.";
