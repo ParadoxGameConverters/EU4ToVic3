@@ -60,7 +60,7 @@ class MarketTracker
 	void logDebugMarket(const Country& country) const;
 
   private:
-	static std::stringstream breakdownAsTable(const std::map<std::string, double>& breakdown);
+	static std::stringstream breakdownAsTable(const std::map<std::string, double>& breakdown, int popCount, bool asPercent = true);
 	static double calcThroughputStateModifier(const std::vector<std::string>& traits,
 		 const Building& building,
 		 const BuildingGroups& buildingGroups,

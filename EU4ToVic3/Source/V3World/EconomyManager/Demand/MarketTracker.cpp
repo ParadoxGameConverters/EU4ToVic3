@@ -166,11 +166,11 @@ void V3::MarketTracker::logDebugMarket(const Country& country) const
 {
 	Log(LogLevel::Debug) << "\n"
 								<< country.getName("english") << "'s Market:\n"
-								<< market.marketAsTable().str() << "\nJobs Estimate:" << breakdownAsTable(country.getJobBreakdown()).str()
-								<< "\nCulture Split:" << breakdownAsTable(marketCulture).str();
+								<< market.marketAsTable().str() << "\nJobs Estimate:" << breakdownAsTable(country.getJobBreakdown(), country.getPopCount(), false).str()
+								<< "\nCulture Split:" << breakdownAsTable(marketCulture, 0).str();
 }
 
-std::stringstream V3::MarketTracker::breakdownAsTable(const std::map<std::string, double>& breakdown)
+std::stringstream V3::MarketTracker::breakdownAsTable(const std::map<std::string, double>& breakdown, const int popCount, const bool asPercent)
 {
 	std::stringstream out;
 	int nameLength = 0;
@@ -186,9 +186,11 @@ std::stringstream V3::MarketTracker::breakdownAsTable(const std::map<std::string
 	out << std::setfill('-') << std::setw(nameLength + 2) << "" << std::setw(percentLength + 2) << "" << std::endl;
 	out << std::setfill(' ');
 
+	const double mult = asPercent ? 1 : popCount;
+
 	for (const auto& pair: breakdown)
 	{
-		out << std::left << std::setw(nameLength + 2) << pair.first << std::setw(percentLength + 2) << pair.second * 16530000 << std::endl;
+		out << std::left << std::setw(nameLength + 2) << pair.first << std::setw(percentLength + 2) << pair.second * mult << std::endl;
 	}
 	return out;
 }
@@ -222,7 +224,7 @@ void V3::MarketTracker::updateMarketGoods(const double level,
 	for (const auto& [good, amount]: buildingResources.getOutputs())
 	{
 		// Collect any/all good specific output modifiers
-		double outputMod = 1;
+		double outputMod = 0;
 		for (const auto& trait: traits)
 		{
 			if (const auto& traitIter = stateTraits.find(trait); traitIter != stateTraits.end())
@@ -255,7 +257,7 @@ double V3::MarketTracker::calcThroughputStateModifier(const std::vector<std::str
 	 const BuildingGroups& buildingGroups,
 	 const std::map<std::string, StateModifier>& stateTraits)
 {
-	double throughputMod = 1;
+	double throughputMod = 0;
 	for (const auto& trait: traits)
 	{
 		if (const auto& traitIter = stateTraits.find(trait); traitIter != stateTraits.end())

@@ -118,14 +118,8 @@ void V3::EconomyManager::hardcodePorts(const std::shared_ptr<V3::Country>& count
 void V3::EconomyManager::integrateHardcodedBuildings(const std::shared_ptr<Country>& country,
 	 double defaultRatio,
 	 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
-	 const std::map<std::string, ProductionMethodGroup>& PMGroups,
-	 const std::map<std::string, ProductionMethod>& PMs,
-	 const BuildingGroups& buildingGroups,
 	 const std::map<std::string, Law>& lawsMap,
-	 const std::map<std::string, Tech>& techMap,
-	 const std::map<std::string, StateModifier>& stateTraits,
 	 const std::map<std::string, PopType>& popTypes,
-	 const std::map<std::string, Building>& buildings,
 	 MarketTracker& market) const
 {
 	for (const auto& subState: country->getSubStates())
@@ -144,7 +138,7 @@ void V3::EconomyManager::integrateHardcodedBuildings(const std::shared_ptr<Count
 				 buildingGroups,
 				 {}, // All currently hardcoded buildings do not use ownership.
 				 lawsMap,
-				 techMap,
+				 techMap.getTechs(),
 				 stateTraits,
 				 popTypes,
 				 buildings,
@@ -267,7 +261,6 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 		const auto& estimatedPMs = PMMapper.estimatePMs(*country, PMs, PMGroups, buildings);
 		const auto& estimatedOwnershipFracs = estimateInvestorBuildings(*country);
 
-
 		// Initialize the market in a no-buildings state.
 		market.resetMarket();
 		market.loadPeasants(*country,
@@ -288,20 +281,9 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 		}
 
 		// Initialize hardcoded buildings needed for balance.
-		establishBureaucracy(country, lawsMap, defines); // add in market, no need to worry about ownership.
+		establishBureaucracy(country, lawsMap, defines);
 		hardcodePorts(country);
-		integrateHardcodedBuildings(country,
-			 defines.getWorkingAdultRatioBase(),
-			 estimatedPMs,
-			 PMGroups,
-			 PMs,
-			 buildingGroups,
-			 lawsMap,
-			 techMap.getTechs(),
-			 stateTraits,
-			 popTypeLoader.getPopTypes(),
-			 buildings,
-			 market);
+		integrateHardcodedBuildings(country, defines.getWorkingAdultRatioBase(), estimatedPMs, lawsMap, popTypeLoader.getPopTypes(), market);
 
 		// Until no substate can build.
 		while (!subStatesByBudget.empty())

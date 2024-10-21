@@ -97,17 +97,11 @@ class EconomyManager
 	void establishBureaucracy(const std::shared_ptr<Country>& country, const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const;
 	void hardcodePorts(const std::shared_ptr<Country>& country) const;
 	void integrateHardcodedBuildings(const std::shared_ptr<Country>& country,
-		 double defaultRatio,
-		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
-		 const std::map<std::string, ProductionMethodGroup>& PMGroups,
-		 const std::map<std::string, ProductionMethod>& PMs,
-		 const BuildingGroups& buildingGroups,
-		 const std::map<std::string, Law>& lawsMap,
-		 const std::map<std::string, Tech>& techMap,
-		 const std::map<std::string, StateModifier>& stateTraits,
-		 const std::map<std::string, PopType>& popTypes,
-		 const std::map<std::string, Building>& buildings,
-		 MarketTracker& market) const;
+		double defaultRatio,
+		const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
+		const std::map<std::string, Law>& lawsMap,
+		const std::map<std::string, PopType>& popTypes,
+		MarketTracker& market) const;
 	void distributeBudget(double globalCP, double totalIndustryScore) const;
 
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> prepareSubStatesByBudget(const std::shared_ptr<Country>& country,
