@@ -1,6 +1,5 @@
 #ifndef PRODUCTION_METHOD_MAPPER_H
 #define PRODUCTION_METHOD_MAPPER_H
-#include "Loaders/LawLoader/Law.h"
 #include "Parser.h"
 #include "ProductionMethodMapping.h"
 

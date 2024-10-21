@@ -25,7 +25,6 @@
 #include <numeric>
 #include <queue>
 #include <ranges>
-#pragma optimize("", off)
 void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
 {
 	Log(LogLevel::Info) << "-> Loading Centralized Countries for Economy Application.";
@@ -1033,4 +1032,3 @@ void V3::EconomyManager::loadPopTypes(const commonItems::ModFilesystem& modFS)
 {
 	popTypeLoader.loadPopTypes(modFS);
 }
-#pragma optimize("", on)

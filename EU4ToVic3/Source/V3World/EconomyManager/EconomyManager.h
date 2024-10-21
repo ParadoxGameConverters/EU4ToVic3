@@ -34,7 +34,7 @@ class Sector;
  * 2. Read in Mappers & Configs.
  * 3. Prepare country specific estimates. Ownership fractions, PMs used, PM fractions, etc.
  * 4. Bureaucracy! Have to handle it separate for game balance. Hand out generation that ~ matches need.
- * 4b. Ports! Easy for markets to end up cutoff without giving each eligible state 1 port.
+ * 4b. Ports! Easy for markets to end up cut off from your own market without giving each eligible state 1 port.
  * 5. For each centralized country get a CP budget based on fronter option.
  * 6. For each substate in a centralized country get a CP budget based on fronter option and terrain/state modifiers.
  * 7. Figure out the "national budget" of each country using the sector blueprints in NationalBudgetLoader.
@@ -97,11 +97,11 @@ class EconomyManager
 	void establishBureaucracy(const std::shared_ptr<Country>& country, const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const;
 	void hardcodePorts(const std::shared_ptr<Country>& country) const;
 	void integrateHardcodedBuildings(const std::shared_ptr<Country>& country,
-		double defaultRatio,
-		const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
-		const std::map<std::string, Law>& lawsMap,
-		const std::map<std::string, PopType>& popTypes,
-		MarketTracker& market) const;
+		 double defaultRatio,
+		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
+		 const std::map<std::string, Law>& lawsMap,
+		 const std::map<std::string, PopType>& popTypes,
+		 MarketTracker& market) const;
 	void distributeBudget(double globalCP, double totalIndustryScore) const;
 
 	[[nodiscard]] std::vector<std::shared_ptr<SubState>> prepareSubStatesByBudget(const std::shared_ptr<Country>& country,

@@ -2,7 +2,6 @@
 #define STATE_MODIFIER_H
 #include "EconomyManager/Building/Building.h"
 #include "EconomyManager/Building/BuildingGroups.h"
-#include "Loaders/TechLoader/Tech.h"
 #include "Parser.h"
 
 namespace V3

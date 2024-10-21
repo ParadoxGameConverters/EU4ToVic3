@@ -2,7 +2,6 @@
 
 #include <iomanip>
 #include <numeric>
-#include <queue>
 #include <ranges>
 
 V3::Market::Market(const std::vector<std::string>& possibleGoods)

@@ -283,8 +283,6 @@ TEST(Mappers_ProductionMethodMapperTests, EstimatesWalkPMListLawMethod)
 	const auto& serfPMEstimates = mapper.estimatePMs(countrySerfdom, PMs, PMGroups, buildingMap);
 	const auto& homesteadPMEstimates = mapper.estimatePMs(countryHomesteading, PMs, PMGroups, buildingMap);
 
-	// The rule says advance to saw_mills, not electric_sawmills
-
 	EXPECT_THAT(serfPMEstimates, testing::Contains(testing::Pair("pmg_serfdom_building_subsistence_farms", std::make_tuple(1, 1.0))));
 	EXPECT_THAT(homesteadPMEstimates, testing::Contains(testing::Pair("pmg_serfdom_building_subsistence_farms", std::make_tuple(2, 1.0))));
 }

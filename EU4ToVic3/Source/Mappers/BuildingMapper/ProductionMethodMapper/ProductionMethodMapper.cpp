@@ -153,6 +153,9 @@ std::pair<std::string, std::string> mappers::ProductionMethodMapper::pickPM(cons
 	 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups)
 {
 	// NOTE(Gawquon): This works for most PMs, but is not guaranteed to work for ownership PMs.
+	// Added a workaround for ownership PMs in Econ 2.0, but a unifying theory of PMs would be nice.
+	// Workaround will break for ownership PMs which require tech, should be none at the start.
+
 	// This is just a basic version that will support every use-case we currently care about.
 	for (const auto& PMGroup: PMGroups | std::views::values)
 	{
@@ -246,7 +249,7 @@ std::map<std::string, std::tuple<int, double>> mappers::ProductionMethodMapper::
 {
 	// PMs are not necessarily unique to a building, but PMGroups are.
 	// Additionally, no PM will appear twice in the same building.
-	std::map<std::string, std::tuple<int, double>> expectedPMs; // PMGroup -> (expectedPM#,%)
+	std::map<std::string, std::tuple<int, double>> expectedPMs; // PMGroup -> (expected PM index, %)
 
 	// Configuration based PMs, checked against available tech.
 	for (const auto& [buildingName, building]: buildings)
@@ -283,7 +286,6 @@ std::map<std::string, std::tuple<int, double>> mappers::ProductionMethodMapper::
 	// Law based PMs (Subsistence & Clergy)
 	for (const auto& [buildingName, building]: buildings)
 	{
-		// TODO(Gawquon): Need a better and/or agnostic method for selecting which buildings to filter out.
 		if (buildingName.find("subsistence") == std::string::npos)
 			continue;
 
