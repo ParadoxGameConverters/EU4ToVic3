@@ -1,0 +1,249 @@
+﻿# France - FRA
+fra_clemenceau_character_template = {
+	first_name = Georges
+	last_name = Clemenceau
+	historical = yes
+	culture = global_var:fra_culture
+	female = no
+	religion = catholic
+	ideology = ideology_radical
+	interest_group = ig_intelligentsia
+	dna = dna_georges_clemenceau
+	birth_date = 1841.9.11
+	traits = {
+		experienced_political_operator
+		persistent
+		direct
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_clemenceau
+				}
+			}
+			has_dlc_feature = voice_of_the_people_preorder
+			uses_fra_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1871.1.1
+		latest_usage_date = 1929.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_clemenceau
+		}
+	}
+}
+
+# Frankfurt - FRM
+frm_grimm_character_template = {
+	first_name = Wilhelm
+	last_name = Grimm
+	historical = yes
+	culture = global_var:nor_ger_culture
+	female = no
+	religion = protestant
+	ideology = ideology_reformer
+	interest_group = ig_intelligentsia
+	birth_date = 1786.2.24
+	dna = dna_grimm_wilhelm
+	traits = {
+		basic_political_operator
+		erudite
+		literary
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_grimm
+				}
+			}
+			is_target_in_global_variable_list = { name = global_nor_ger_countries target = this }		##He spawns for enough vanilla countries, no need to tag restrict
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.1.1
+		chance = 20
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_grimm
+		}
+	}
+}
+
+# Norway
+nor_thrane_template = {
+	first_name = Marcus
+	last_name = Thrane
+	historical = yes
+	culture = global_var:nor_culture
+	birth_date = 1817.10.14
+	ig_leader = yes
+    dna = dna_marcus_thrane 
+	interest_group = ig_trade_unions
+	ideology = ideology_radical
+	traits = {
+		demagogue
+		basic_political_operator
+		literary
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_marcus_thrane
+				}
+			}
+			uses_nor_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_trade_unions
+		}   
+		earliest_usage_date = 1848.1.1
+		latest_usage_date = 1890.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_marcus_thrane
+		}
+	}
+}
+
+# Prussia - PRU
+pru_bismarck_character_template = {
+	first_name = Otto
+	last_name = von_Bismarck
+	historical = yes
+	culture = global_var:nor_ger_culture
+	female = no
+	religion = protestant
+	ideology = ideology_royalist
+	interest_group = ig_landowners
+	birth_date = 1815.4.1
+	traits = {
+		experienced_political_operator
+		masterful_diplomat
+		direct
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_bismarck
+				}
+			}
+			uses_pru_ger_characters = yes
+			owns_entire_state_region = STATE_BRANDENBURG
+			NOT = {
+				has_global_variable = bismarck_variable
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1847.1.1
+		latest_usage_date = 1884.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_bismarck
+		}
+	}
+}
+# Sardinia-Piedmont - SAR
+sar_benso_character_template = { # The Count of Cavour
+	first_name = Camillo
+	last_name = Benso
+	historical = yes
+	culture = global_var:nor_ita_culture
+	female = no
+	religion = catholic
+    dna = dna_count_of_cavour
+    ideology = ideology_reformer
+	interest_group = ig_industrialists
+	birth_date = 1810.8.10
+	traits = {
+		experienced_political_operator
+		meticulous
+		innovative
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_count_of_cavour
+				}
+			}
+			uses_nor_ita_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_industrialists   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1862.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_count_of_cavour
+		}
+	}
+}

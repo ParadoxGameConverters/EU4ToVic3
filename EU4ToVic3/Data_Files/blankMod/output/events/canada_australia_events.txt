@@ -323,6 +323,16 @@ can_aus.5 = {
 					target = this
 				}
 			}
+			set_global_variable = { name = converter_tag_switch_CAN value = yes days = 100 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_settler_colonial_country = yes
+					has_game_rule = converter_native_incorporation_full
+				}
+			}
+			set_global_variable = { name = converter_tag_switch_CAN value = yes days = 100 }
 		}
 	}
 
@@ -352,27 +362,34 @@ can_aus.5 = {
 				}
 			}
 		}
-		change_tag = CAN
+		if = {
+			limit = { has_variable = converter_tag_switch_CAN }
+			change_tag = CAN
+		}
 		##Converter
 	}
 
-	after = {		##Converter
-		every_primary_culture = {
-			c:CAN = { remove_primary_culture = prev }
-		}
-		every_scope_state = {
-			limit = { zzz_converter_state_is_in_canada = yes }
-			every_scope_pop = {
-				limit = {
+	after = {
+		if = {		##Converter
+			limit = { c:CAN ?= this }
+			every_primary_culture = {
+				c:CAN = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { zzz_converter_state_is_in_canada = yes }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+						}
+					}
 					culture = {
-						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-						is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+						c:CAN = { add_primary_culture = prev }
 					}
 				}
-				culture = {
-					c:CAN = { add_primary_culture = prev }
-				}
 			}
+			remove_global_variable = converter_tag_switch_CAN
 		}
 	}
 }
@@ -445,6 +462,16 @@ can_aus.6 = {
 						target = this
 					}
 				}
+				set_global_variable = { name = converter_tag_switch_CAN value = yes days = 100 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_settler_colonial_country = yes
+						has_game_rule = converter_native_incorporation_full
+					}
+				}
+				set_global_variable = { name = converter_tag_switch_CAN value = yes days = 100 }
 			}
 		}
 	}
@@ -455,28 +482,35 @@ can_aus.6 = {
 			name = gbr_unified_canada
 			months = normal_modifier_time
 		}
-		scope:canada_country = { change_tag = CAN }		##Converter
+		if = {		##Converter
+			limit = { has_global_variable = converter_tag_switch_CAN }
+			scope:canada_country = { change_tag = CAN }
+		}
 	}
 
-	after = {		##Converter
-		c:CAN = {
-			every_primary_culture = {
-				c:CAN = { remove_primary_culture = prev }
-			}
-			every_scope_state = {
-				limit = { zzz_converter_state_is_in_canada = yes }
-				every_scope_pop = {
-					limit = {
-						culture = {
-							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-							is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+	after = {
+		if = {		##Converter
+			limit = { has_global_variable = converter_tag_switch_CAN }
+			c:CAN = {
+				every_primary_culture = {
+					c:CAN = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_canada = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+							}
 						}
-					}
-					culture = {
-						c:CAN = { add_primary_culture = prev }
+						culture = {
+							c:CAN = { add_primary_culture = prev }
+						}
 					}
 				}
 			}
+			remove_global_variable = converter_tag_switch_CAN
 		}
 	}
 }
@@ -531,6 +565,16 @@ can_aus.7 = {
 					target = this
 				}
 			}
+			set_global_variable = { name = converter_tag_switch_AST value = yes days = 100 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_settler_colonial_country = yes
+					has_game_rule = converter_native_incorporation_full
+				}
+			}
+			set_global_variable = { name = converter_tag_switch_AST value = yes days = 100 }
 		}
 	}
 
@@ -560,27 +604,34 @@ can_aus.7 = {
 				}
 			}
 		}
-		change_tag = AST
+		if = {
+			limit = { has_variable = converter_tag_switch_AST }
+			change_tag = AST
+		}
 		##Converter
 	}
 
-	after = {		##Converter
-		every_primary_culture = {
-			c:AST = { remove_primary_culture = prev }
-		}
-		every_scope_state = {
-			limit = { zzz_converter_state_is_in_australia = yes }
-			every_scope_pop = {
-				limit = {
+	after = {
+		if = {		##Converter
+			limit = { c:AST ?= this }
+			every_primary_culture = {
+				c:AST = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { zzz_converter_state_is_in_australia = yes }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+						}
+					}
 					culture = {
-						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-						is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+						c:AST = { add_primary_culture = prev }
 					}
 				}
-				culture = {
-					c:AST = { add_primary_culture = prev }
-				}
 			}
+			remove_global_variable = converter_tag_switch_AST
 		}
 	}
 }
@@ -654,6 +705,16 @@ can_aus.8 = {
 						target = this
 					}
 				}
+				set_global_variable = { name = converter_tag_switch_AST value = yes days = 100 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_settler_colonial_country = yes
+						has_game_rule = converter_native_incorporation_full
+					}
+				}
+				set_global_variable = { name = converter_tag_switch_AST value = yes days = 100 }
 			}
 		}
 	}
@@ -664,28 +725,35 @@ can_aus.8 = {
 			name = gbr_unified_australia
 			months = normal_modifier_time
 		}
-		scope:canada_country = { change_tag = AST }		##Converter
+		if = {		##Converter
+			limit = { has_global_variable = converter_tag_switch_AST }
+			scope:canada_country = { change_tag = AST }
+		}
 	}
 
-	after = {		##Converter
-		c:AST = {
-			every_primary_culture = {
-				c:AST = { remove_primary_culture = prev }
-			}
-			every_scope_state = {
-				limit = { zzz_converter_state_is_in_australia = yes }
-				every_scope_pop = {
-					limit = {
-						culture = {
-							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-							is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+	after = {
+		if = {		##Converter
+			limit = { has_variable = converter_tag_switch_AST }
+			c:AST = {
+				every_primary_culture = {
+					c:AST = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_australia = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+							}
 						}
-					}
-					culture = {
-						c:AST = { add_primary_culture = prev }
+						culture = {
+							c:AST = { add_primary_culture = prev }
+						}
 					}
 				}
 			}
+			remove_global_variable = converter_tag_switch_AST
 		}
 	}
 }

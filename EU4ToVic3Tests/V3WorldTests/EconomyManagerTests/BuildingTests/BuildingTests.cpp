@@ -30,6 +30,7 @@ TEST(V3World_SubStateTests, DefaultsDefaultToDefault)
 	EXPECT_TRUE(building.getName().empty());
 	EXPECT_TRUE(building.isBuildable());
 	EXPECT_FALSE(building.isCappedByGov());
+	EXPECT_FALSE(building.isUnique());
 	EXPECT_TRUE(building.getUnlockingTechs().empty());
 	EXPECT_TRUE(building.getBuildingGroup().empty());
 	EXPECT_EQ(50, building.getConstructionCost());
@@ -44,6 +45,7 @@ TEST(V3World_BuildingTests, ParserLoadsInValues)
 	std::stringstream input;
 	input << "\tbuilding_group = group_one\n";
 	input << "\tbuildable = no\n";
+	input << "\tunique = yes\n";
 	input << "\thas_max_level = yes\n";
 	input << "\tunlocking_technologies = { fire mistake }\n";
 	input << "\tproduction_method_groups =  { pmg_group_base pmg_group_secondary }\n";
@@ -55,6 +57,7 @@ TEST(V3World_BuildingTests, ParserLoadsInValues)
 	EXPECT_THAT("group_one", building.getBuildingGroup());
 	EXPECT_FALSE(building.isBuildable());
 	EXPECT_TRUE(building.isCappedByGov());
+	EXPECT_TRUE(building.isUnique());
 	EXPECT_THAT(building.getUnlockingTechs(), testing::UnorderedElementsAre("fire", "mistake"));
 	EXPECT_THAT(building.getPMGroups(), testing::UnorderedElementsAre("pmg_group_base", "pmg_group_secondary"));
 	EXPECT_EQ(300, building.getConstructionCost());

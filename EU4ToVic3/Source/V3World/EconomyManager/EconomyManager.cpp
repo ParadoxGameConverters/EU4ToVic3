@@ -542,8 +542,8 @@ void V3::EconomyManager::investCapital(const std::map<std::string, std::shared_p
 		std::map<std::string, double> overlordIOUs;
 
 		const std::string& overlordTag = country->getOverlord();
-		Log(LogLevel::Debug) << country->getTag();
-		std::string overlordCapital = "";
+		std::string overlordCapital;
+
 		if (const auto& overlordIt = countries.find(overlordTag); overlordIt != countries.end())
 		{
 			overlordCapital = overlordIt->second->getProcessedData().capitalStateName;

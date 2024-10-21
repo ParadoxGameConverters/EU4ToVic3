@@ -362,3 +362,338 @@ is_colonized_country = {
 	}
 	trigger_else = { always = no }
 }
+
+zzz_is_non_major_new_world_tag = {
+	OR = {
+		#AND = {
+		#	exists = c:CAN = ROOT #MAJOR
+		#	c:CAN = ROOT
+		#}
+		AND = {
+			exists = c:HBC
+			c:HBC = ROOT
+		}
+		AND = {
+			exists = c:NEW
+			c:NEW = ROOT
+		}
+		AND = {
+			exists = c:NNV
+			c:NNV = ROOT
+		}
+		AND = {
+			exists = c:ONT
+			c:ONT = ROOT
+		}
+		AND = {
+			exists = c:QUE
+			c:QUE = ROOT
+		}
+		AND = {
+			exists = c:NBS
+			c:NBS = ROOT
+		}
+		AND = {
+			exists = c:NVS
+			c:NVS = ROOT
+		}
+		
+		AND = {
+			exists = c:NEN
+			c:NEN = ROOT
+		}
+		AND = {
+			exists = c:FSA
+			c:FSA = ROOT
+		}
+		#AND = {
+		#	exists = c:USA #MAJOR
+		#	c:USA = ROOT
+		#}
+		AND = {
+			exists = c:CSA
+			c:CSA = ROOT
+		}
+		AND = {
+			exists = c:NCR
+			c:NCR = ROOT
+		}
+		AND = {
+			exists = c:SCR
+			c:SCR = ROOT
+		}
+		AND = {
+			exists = c:CLI
+			c:CLI = ROOT
+		}
+		AND = {
+			exists = c:GRG
+			c:GRG = ROOT
+		}
+		AND = {
+			exists = c:FLR
+			c:FLR = ROOT
+		}
+		
+		AND = {
+			exists = c:UOM
+			c:UOM = ROOT
+		}
+		AND = {
+			exists = c:DKT
+			c:DKT = ROOT
+		}
+		AND = {
+			exists = c:LOU
+			c:LOU = ROOT
+		}
+		
+		AND = {
+			exists = c:CAL
+			c:CAL = ROOT
+		}
+		AND = {
+			exists = c:ORG
+			c:ORG = ROOT
+		}
+		AND = {
+			exists = c:DES
+			c:DES = ROOT
+		}
+		
+		AND = {
+			exists = c:CSC
+			c:CSC = ROOT
+		}
+		AND = {
+			exists = c:COL
+			c:COL = ROOT
+		}
+		
+		AND = {
+			exists = c:TEX
+			c:TEX = ROOT
+		}
+		AND = {
+			exists = c:RIO
+			c:RIO = ROOT
+		}
+		AND = {
+			exists = c:YUC
+			c:YUC = ROOT
+		}
+		#AND = {
+		#	exists = c:MEX #MAJOR
+		#	c:MEX = ROOT
+		#}
+		AND = {
+			exists = c:ALT
+			c:ALT = ROOT
+		}
+		AND = {
+			exists = c:GUA
+			c:GUA = ROOT
+		}
+		AND = {
+			exists = c:HON
+			c:HON = ROOT
+		}
+		AND = {
+			exists = c:ELS
+			c:ELS = ROOT
+		}
+		AND = {
+			exists = c:NIC
+			c:NIC = ROOT
+		}
+		AND = {
+			exists = c:COS
+			c:COS = ROOT
+		}
+		#AND = {
+		#	exists = c:UCA #MAJOR
+		#	c:UCA = ROOT
+		#}
+		
+		AND = {
+			exists = c:PNM
+			c:PNM = ROOT
+		}
+		AND = {
+			exists = c:CLM
+			c:CLM = ROOT
+		}
+		AND = {
+			exists = c:VNZ
+			c:VNZ = ROOT
+		}
+		AND = {
+			exists = c:ECU
+			c:ECU = ROOT
+		}
+		#AND = {
+		#	exists = c:GCO
+		#	c:GCO = ROOT
+		#}
+		AND = {
+			exists = c:NPU
+			c:NPU = ROOT
+		}
+		AND = {
+			exists = c:PEU
+			c:PEU = ROOT
+		}
+		AND = {
+			exists = c:BOL
+			c:BOL = ROOT
+		}
+		
+		AND = {
+			exists = c:CHL
+			c:CHL = ROOT
+		}
+		AND = {
+			exists = c:ARG
+			c:ARG = ROOT
+		}
+		AND = {
+			exists = c:PRG
+			c:PRG = ROOT
+		}
+		AND = {
+			exists = c:URU
+			c:URU = ROOT
+		}
+		#AND = {
+		#	exists = c:PLT #MAJOR
+		#	c:PLT = ROOT
+		#}
+		
+		AND = {
+			exists = c:AMZ
+			c:AMZ = ROOT
+		}
+		AND = {
+			exists = c:BHI
+			c:BHI = ROOT
+		}
+		AND = {
+			exists = c:EQT
+			c:EQT = ROOT
+		}
+		AND = {
+			exists = c:PRA
+			c:PRA = ROOT
+		}
+		AND = {
+			exists = c:MNG
+			c:MNG = ROOT
+		}
+		AND = {
+			exists = c:PAU
+			c:PAU = ROOT
+		}
+		AND = {
+			exists = c:PNI
+			c:PNI = ROOT
+		}
+		AND = {
+			exists = c:CTR
+			c:CTR = ROOT
+		}
+		#AND = {
+		#	exists = c:BRZ #MAJOR
+		#	c:BRZ = ROOT
+		#}
+		
+		AND = {
+			exists = c:BAH
+			c:BAH = ROOT
+		}
+		AND = {
+			exists = c:CUB
+			c:CUB = ROOT
+		}
+		AND = {
+			exists = c:HAI
+			c:HAI = ROOT
+		}
+		AND = {
+			exists = c:JAM
+			c:JAM = ROOT
+		}
+		AND = {
+			exists = c:PCO
+			c:PCO = ROOT
+		}
+		AND = {
+			exists = c:DOM
+			c:DOM = ROOT
+		}
+		AND = {
+			exists = c:WIN
+			c:WIN = ROOT
+		}
+		
+		#AND = {
+		#	exists = c:AST #MAJOR
+		#	c:AST = ROOT
+		#}
+		AND = {
+			exists = c:NSW
+			c:NSW = ROOT
+		}
+		AND = {
+			exists = c:NZL
+			c:NZL = ROOT
+		}
+		AND = {
+			exists = c:SAS
+			c:SAS = ROOT
+		}
+		AND = {
+			exists = c:TAS
+			c:TAS = ROOT
+		}
+		AND = {
+			exists = c:WAS
+			c:WAS = ROOT
+		}
+	}
+}
+zzz_is_major_new_world_tag = {
+	OR = {
+		AND = {
+			exists = c:CAN
+			c:CAN = ROOT
+		}
+		AND = {
+			exists = c:USA
+			c:USA = ROOT
+		}
+		AND = {
+			exists = c:MEX
+			c:MEX = ROOT
+		}
+		AND = {
+			exists = c:UCA
+			c:UCA = ROOT
+		}
+		AND = {
+			exists = c:GCO
+			c:GCO = ROOT
+		}
+		AND = {
+			exists = c:PLT
+			c:PLT = ROOT
+		}
+		AND = {
+			exists = c:BRZ
+			c:BRZ = ROOT
+		}
+		AND = {
+			exists = c:AST
+			c:AST = ROOT
+		}
+	}
+}

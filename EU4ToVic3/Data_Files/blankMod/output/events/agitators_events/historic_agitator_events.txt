@@ -37,12 +37,26 @@ historical_agitators.1 = { #Vladimir Lenin
 	}
 
 	immediate = {
-		create_character = {
-			template = rus_lenin_character_template
-			on_created = {
-				set_variable = lenin_var
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_rus_lenin_character_template
+				on_created = {
+					set_variable = lenin_var
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = rus_lenin_character_template
+				on_created = {
+					set_variable = lenin_var
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = lenin_var
@@ -157,22 +171,46 @@ historical_agitators.2 = { #Louis Delescluze
 	}
 
 	immediate = {
-		create_character = {
-			template = fra_delescluze_character_template
-			on_created = {
-				set_variable = delescluze_var
-				if = {
-					limit = {
-						owner = {
-							NOT = {
-								has_technology_researched = socialism
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_fra_delescluze_character_template
+				on_created = {
+					set_variable = delescluze_var
+					if = {
+						limit = {
+							owner = {
+								NOT = {
+									has_technology_researched = socialism
+								}
 							}
 						}
+						set_ideology = ideology:ideology_radical
 					}
-					set_ideology = ideology:ideology_radical
 				}
 			}
 		}
+		else = {
+			create_character = {
+				template = fra_delescluze_character_template
+				on_created = {
+					set_variable = delescluze_var
+					if = {
+						limit = {
+							owner = {
+								NOT = {
+									has_technology_researched = socialism
+								}
+							}
+						}
+						set_ideology = ideology:ideology_radical
+					}
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = delescluze_var
@@ -252,22 +290,46 @@ historical_agitators.3 = { #Louis Blanqui
 	}
 
 	immediate = {
-		create_character = {
-			template = fra_blanqui_character_template
-			on_created = {
-				set_variable = blanqui_var
-				if = {
-					limit = {
-						owner = {
-							NOT = {
-								has_technology_researched = socialism
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_fra_blanqui_character_template
+				on_created = {
+					set_variable = blanqui_var
+					if = {
+						limit = {
+							owner = {
+								NOT = {
+									has_technology_researched = socialism
+								}
 							}
 						}
+						set_ideology = ideology:ideology_radical
 					}
-					set_ideology = ideology:ideology_radical
 				}
 			}
 		}
+		else = {
+			create_character = {
+				template = fra_blanqui_character_template
+				on_created = {
+					set_variable = blanqui_var
+					if = {
+						limit = {
+							owner = {
+								NOT = {
+									has_technology_researched = socialism
+								}
+							}
+						}
+						set_ideology = ideology:ideology_radical
+					}
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = blanqui_var
@@ -342,12 +404,25 @@ historical_agitators.4 = { #Emmeline Pankhurst
 	}
 
 	immediate = {
-		create_character = {
-			template = gbr_pankhurst_character_template
-			on_created = {
-				set_variable = pankhurst_var
+		##Converter
+		if = {
+			limit = { is_matriarchal_country = yes }
+			create_character = {
+				template = masc_gbr_pankhurst_character_template
+				on_created = {
+					set_variable = pankhurst_var
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = gbr_pankhurst_character_template
+				on_created = {
+					set_variable = pankhurst_var
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = pankhurst_var
@@ -439,12 +514,26 @@ historical_agitators.5 = { #John Brown
 	}
 
 	immediate = {
-		create_character = {
-			template = usa_john_brown_character_template
-			on_created = {
-				set_variable = john_brown_var
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_usa_john_brown_character_template
+				on_created = {
+					set_variable = john_brown_var
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = usa_john_brown_character_template
+				on_created = {
+					set_variable = john_brown_var
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = john_brown_var
@@ -567,31 +656,64 @@ historical_agitators.6 = { #Charles Maurras
 	}
 
 	immediate = {
-		create_character = {
-			template = fra_maurras_character_template
-			on_created = {
-				set_variable = maurras_var
-				if = {
-					limit = {
-						owner = {
-							has_journal_entry = je_divided_monarchists
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_fra_maurras_character_template
+				on_created = {
+					set_variable = maurras_var
+					if = {
+						limit = {
+							owner = {
+								has_journal_entry = je_divided_monarchists
+							}
 						}
+						set_ideology = ideology:ideology_legitimist
 					}
-					set_ideology = ideology:ideology_legitimist
-				}
-				else_if = {
-					limit = {
-						owner = {
-							has_law = law_type:law_monarchy
+					else_if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_monarchy
+							}
 						}
+						set_ideology = ideology:ideology_fascist
 					}
-					set_ideology = ideology:ideology_fascist
-				}
-				else = {
-					set_ideology = ideology:ideology_traditionalist
+					else = {
+						set_ideology = ideology:ideology_traditionalist
+					}
 				}
 			}
 		}
+		else = {
+			create_character = {
+				template = fra_maurras_character_template
+				on_created = {
+					set_variable = maurras_var
+					if = {
+						limit = {
+							owner = {
+								has_journal_entry = je_divided_monarchists
+							}
+						}
+						set_ideology = ideology:ideology_legitimist
+					}
+					else_if = {
+						limit = {
+							owner = {
+								has_law = law_type:law_monarchy
+							}
+						}
+						set_ideology = ideology:ideology_fascist
+					}
+					else = {
+						set_ideology = ideology:ideology_traditionalist
+					}
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = maurras_var
@@ -874,12 +996,26 @@ historical_agitators.9 = { #Norton
 	}
 
 	immediate = {
-		create_character = {
-			template = usa_emperor_norton_character_template
-			on_created = {
-				set_variable = emperor_norton_var		
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_usa_emperor_norton_character_template
+				on_created = {
+					set_variable = emperor_norton_var		
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = usa_emperor_norton_character_template
+				on_created = {
+					set_variable = emperor_norton_var		
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = emperor_norton_var
@@ -955,12 +1091,26 @@ historical_agitators.10 = { #Kropotkin
 	}
 
 	immediate = {
-		create_character = {
-			template = rus_pyotr_kropotkin_character_template
-			on_created = {
-				set_variable = kropotkin_var		
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_rus_pyotr_kropotkin_character_template
+				on_created = {
+					set_variable = kropotkin_var		
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = rus_pyotr_kropotkin_character_template
+				on_created = {
+					set_variable = kropotkin_var		
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = kropotkin_var
@@ -1067,12 +1217,26 @@ historical_agitators.11 = { #Bakunin
 	}
 
 	immediate = {
-		create_character = {
-			template = rus_mikhail_bakunin_character_template
-			on_created = {
-				set_variable = bakunin_var		
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_rus_mikhail_bakunin_character_template
+				on_created = {
+					set_variable = bakunin_var		
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = rus_mikhail_bakunin_character_template
+				on_created = {
+					set_variable = bakunin_var		
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = bakunin_var
@@ -1170,13 +1334,25 @@ historical_agitators.12 = { #Trotsky
 		else = {
 			cu:ashkenazi = { save_scope_as = trotsky_culture }
 		}
-		##Converter
-		create_character = {
-			template = rus_leon_trotsky_character_template
-			on_created = {
-				set_variable = trotsky_var		
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_rus_leon_trotsky_character_template
+				on_created = {
+					set_variable = trotsky_var		
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = rus_leon_trotsky_character_template
+				on_created = {
+					set_variable = trotsky_var		
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = trotsky_var
@@ -1263,12 +1439,26 @@ historical_agitators.13 = { #Dabrowski
 	}
 
 	immediate = {
-		create_character = {
-			template = rus_jaroslaw_dabrowski_character_template
-			on_created = {
-				set_variable = dabrowski_var		
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_rus_jaroslaw_dabrowski_character_template
+				on_created = {
+					set_variable = dabrowski_var		
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = rus_jaroslaw_dabrowski_character_template
+				on_created = {
+					set_variable = dabrowski_var		
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = dabrowski_var
@@ -1352,12 +1542,26 @@ historical_agitators.14 = { #Dickens
 	}
 
 	immediate = {
-		create_character = {
-			template = gbr_charles_dickens_character_template
-			on_created = {
-				set_variable = dickens_var		
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_gbr_charles_dickens_character_template
+				on_created = {
+					set_variable = dickens_var		
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = gbr_charles_dickens_character_template
+				on_created = {
+					set_variable = dickens_var		
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = dickens_var
@@ -1446,12 +1650,26 @@ historical_agitators.15 = { #Luxemburg
 	}
 
 	immediate = {
-		create_character = {
-			template = pol_rosa_luxemburg_character_template
-			on_created = {
-				set_variable = luxemburg_var		
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = masc_pol_rosa_luxemburg_character_template
+				on_created = {
+					set_variable = luxemburg_var		
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = pol_rosa_luxemburg_character_template
+				on_created = {
+					set_variable = luxemburg_var		
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = luxemburg_var
@@ -1524,12 +1742,26 @@ historical_agitators.16 = { #Sorel
 	}
 
 	immediate = {
-		create_character = {
-			template = fra_georges_sorel_character_template
-			on_created = {
-				set_variable = sorel_var		
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_fra_georges_sorel_character_template
+				on_created = {
+					set_variable = sorel_var		
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = fra_georges_sorel_character_template
+				on_created = {
+					set_variable = sorel_var		
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = sorel_var
@@ -1621,12 +1853,26 @@ historical_agitators.17 = { #Boulanger
 	}
 
 	immediate = {
-		create_character = {
-			template = fra_georges_boulanger_character_template
-			on_created = {
-				set_variable = boulanger_var	
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_fra_georges_boulanger_character_template
+				on_created = {
+					set_variable = boulanger_var	
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = fra_georges_boulanger_character_template
+				on_created = {
+					set_variable = boulanger_var	
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = boulanger_var
@@ -1745,12 +1991,26 @@ historical_agitators.18 = { #Lassalle
 	}
 
 	immediate = {
-		create_character = {
-			template = pru_ferdinand_lassalle_character_template
-			on_created = {
-				set_variable = lassalle_var		
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_pru_ferdinand_lassalle_character_template
+				on_created = {
+					set_variable = lassalle_var		
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = pru_ferdinand_lassalle_character_template
+				on_created = {
+					set_variable = lassalle_var		
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = lassalle_var
@@ -1828,12 +2088,26 @@ historical_agitators.19 = { #Gama
 	}
 
 	immediate = {
-		create_character = {
-			template = brz_luis_gama_character_template
-			on_created = {
-				set_variable = gama_var		
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_brz_luis_gama_character_template
+				on_created = {
+					set_variable = gama_var		
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = brz_luis_gama_character_template
+				on_created = {
+					set_variable = gama_var		
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = gama_var
@@ -1941,12 +2215,26 @@ historical_agitators.20 = { #Hugo
 	}
 
 	immediate = {
-		create_character = {
-			template = fra_victor_hugo_character_template
-			on_created = {
-				set_variable = victor_hugo_var		
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_fra_victor_hugo_character_template
+				on_created = {
+					set_variable = victor_hugo_var		
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = fra_victor_hugo_character_template
+				on_created = {
+					set_variable = victor_hugo_var		
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = victor_hugo_var
@@ -2047,12 +2335,26 @@ historical_agitators.21 = { #Sun
 	}
 
 	immediate = {
-		create_character = {
-			template = chi_sun_yat_sen_character_template
-			on_created = {
-				set_variable = sun_yat_sen_var		
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_chi_sun_yat_sen_character_template
+				on_created = {
+					set_variable = sun_yat_sen_var		
+				}
 			}
 		}
+		else = {
+			create_character = {
+				template = chi_sun_yat_sen_character_template
+				on_created = {
+					set_variable = sun_yat_sen_var		
+				}
+			}
+		}
+		##Converter
 		random_scope_character = {
 			limit = {
 				has_variable = sun_yat_sen_var
