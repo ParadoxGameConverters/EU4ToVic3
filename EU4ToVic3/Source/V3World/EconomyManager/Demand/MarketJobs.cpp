@@ -118,7 +118,7 @@ double V3::MarketJobs::hireFromSubsistence(const double amount,
 	// Use peasants as a proxy for subsistence worker presence.
 	if (subState->getJob("peasants") == 0)
 	{
-		Log(LogLevel::Warning) << "No subsistence workers available.";
+		// Log(LogLevel::Warning) << "No subsistence workers available.";
 		return 0;
 	}
 
@@ -149,10 +149,10 @@ double V3::MarketJobs::hireFromSubsistence(const double amount,
 	// When subsistence levels are removed, Manor Houses downsize
 	downsizeManorHouses(lostSubsistenceLevels, defaultRatio, womenJobRate, popTypes, subState);
 
-	if (const double remainder = amount - lostSubsistenceLevels * unitSubsistencePop; remainder > 0)
-	{
-		Log(LogLevel::Warning) << "Could not find available workers for " << remainder << " jobs."; // Should never happen.
-	}
+	// if (const double remainder = amount - lostSubsistenceLevels * unitSubsistencePop; remainder > 0)
+	//{
+	//	Log(LogLevel::Warning) << "Could not find available workers for " << remainder << " jobs."; // Should never happen.
+	// }
 
 	return lostSubsistenceLevels;
 }
