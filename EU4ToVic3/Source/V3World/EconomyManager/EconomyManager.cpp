@@ -1,8 +1,6 @@
 #include "EconomyManager.h"
 #include "Building/Building.h"
-#include "Building/BuildingGroup.h"
 #include "Building/BuildingGroups.h"
-#include "Building/BuildingResources.h"
 #include "Building/ProductionMethods/ProductionMethod.h"
 #include "Building/ProductionMethods/ProductionMethodGroup.h"
 #include "ClayManager/State/State.h"
@@ -287,7 +285,14 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 
 			// Enter negotiation.
 			// Pick the substate with the most budget.
-			negotiateBuilding(subStatesByBudget[0], sectors, lawsMap, subStatesByBudget, estimatedPMs, estimatedOwnershipFracs, market);
+			negotiateBuilding(subStatesByBudget[0],
+				 sectors,
+				 lawsMap,
+				 subStatesByBudget,
+				 estimatedPMs,
+				 estimatedOwnershipFracs,
+				 defines.getWorkingAdultRatioBase(),
+				 market);
 			++counter;
 
 			// A Building has now been built, process for next round.
@@ -701,6 +706,7 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 	 const std::vector<std::shared_ptr<SubState>>& subStates,
 	 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
 	 const std::map<std::string, std::map<std::string, double>>& estimatedOwnershipFracs,
+	 const double defaultRatio,
 	 MarketTracker& market) const
 {
 	// Whether or not the negotiation succeeds, a building MUST be built.
@@ -735,7 +741,7 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 		}
 
 		// So we're a valid building in a valid sector and there is budget for us. Great!
-		buildBuilding(building, subState, sectors.at(sector.value()), lawsMap, subStates, estimatedPMs, estimatedOwnershipFracs, market);
+		buildBuilding(building, subState, sectors.at(sector.value()), lawsMap, subStates, estimatedPMs, estimatedOwnershipFracs, defaultRatio, market);
 		talksFail = false;
 		break;
 	}
@@ -744,7 +750,15 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 	{
 		// Negotiation failed
 		// State picks its favorite building, takes from biggest sector
-		buildBuilding(subState->getBuildings()[0], subState, getSectorWithMostBudget(sectors), lawsMap, subStates, estimatedPMs, estimatedOwnershipFracs, market);
+		buildBuilding(subState->getBuildings()[0],
+			 subState,
+			 getSectorWithMostBudget(sectors),
+			 lawsMap,
+			 subStates,
+			 estimatedPMs,
+			 estimatedOwnershipFracs,
+			 defaultRatio,
+			 market);
 	}
 }
 
@@ -764,6 +778,7 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 	 const std::vector<std::shared_ptr<SubState>>& subStates,
 	 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
 	 const std::map<std::string, std::map<std::string, double>>& estimatedOwnershipFracs,
+	 const double defaultRatio,
 	 MarketTracker& market) const
 {
 	// SUBSTATE MUST SPEND ITS CP OR WE GET INFINITE LOOPS
@@ -789,7 +804,7 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 	// Track Demand
 	market.integrateBuilding(*building,
 		 p,
-		 0.25, // TODO(Gawquon): Load Defines
+		 defaultRatio,
 		 estimatedPMs,
 		 PMGroups,
 		 PMs,

@@ -112,6 +112,7 @@ class EconomyManager
 		 const std::vector<std::shared_ptr<SubState>>& subStates,
 		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
 		 const std::map<std::string, std::map<std::string, double>>& estimatedOwnershipFracs,
+		 double defaultRatio,
 		 MarketTracker& marketTracker) const;
 	[[nodiscard]] static std::shared_ptr<Sector> getSectorWithMostBudget(const std::map<std::string, std::shared_ptr<Sector>>& sectors);
 	void buildBuilding(const std::shared_ptr<Building>& building,
@@ -121,6 +122,7 @@ class EconomyManager
 		 const std::vector<std::shared_ptr<SubState>>& subStates,
 		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
 		 const std::map<std::string, std::map<std::string, double>>& estimatedOwnershipFracs,
+		 double defaultRatio,
 		 MarketTracker& marketTracker) const;
 	void removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
 		 const std::vector<std::shared_ptr<SubState>>::iterator& subState,

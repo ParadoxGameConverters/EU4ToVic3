@@ -110,6 +110,7 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 		estOwnershipFraction = estOwnershipFractions.at(building.getName());
 	}
 
+	// Set up Subsistence
 	BuildingResources subsistenceResources;
 	const Building& subsistenceBuilding = buildings.at(subState->getHomeState()->getSubsistenceBuilding());
 	subsistenceResources.evaluateResources(subsistenceBuilding.getPMGroups(), estimatedPMs, PMs, PMGroups);
@@ -137,12 +138,13 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 		subState->addUrbanCenters(urbanFrac * p);
 
 		BuildingResources urbanResources;
-		const Building& urbanBuilding = buildings.at("building_urban_center"); // TODO(Gawquon): Validate
+		if (!buildings.contains("building_urban_center"))
+		{
+			Log(LogLevel::Error) << "No building definition of Urban Center.";
+		}
+		const Building& urbanBuilding = buildings.at("building_urban_center");
 		const double urbanThroughputMod = calcThroughputStateModifier(traits, urbanBuilding, buildingGroups, stateTraits);
-		urbanResources.evaluateResources(urbanBuilding.getPMGroups(),
-			 estimatedPMs,
-			 PMs,
-			 PMGroups); // TODO(Gawquon): Update evaluate resources to handle this mixed law/tech building
+		urbanResources.evaluateResources(urbanBuilding.getPMGroups(), estimatedPMs, PMs, PMGroups);
 
 		const double urbanLevel = subState->getUrbanCenters() + urbanFrac * p;
 		updateMarketGoods(urbanLevel, urbanFrac * p, eosCap, urbanThroughputMod, urbanResources, traits, stateTraits);
