@@ -113,14 +113,8 @@ std::optional<double> V3::StateModifier::getGoodsModifier(const std::string& goo
 
 double V3::StateModifier::calcBuildingModifiers(const Building& building, const BuildingGroups& buildingGroups) const
 {
-	double modifierTotal = 0;
-	for (const auto& [buildingName, modifier]: buildingModifiers)
-	{
-		if (buildingName == building.getName())
-		{
-			modifierTotal += modifier;
-		}
-	}
+	const auto& modifierIter = buildingModifiers.find(building.getName());
+	double modifierTotal = modifierIter == buildingModifiers.end() ? 0 : modifierIter->second;
 	modifierTotal += getBuildingGroupModifier(building.getBuildingGroup(), buildingGroups);
 
 	return modifierTotal;
