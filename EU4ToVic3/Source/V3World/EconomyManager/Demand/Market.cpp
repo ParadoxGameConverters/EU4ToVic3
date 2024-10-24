@@ -230,7 +230,7 @@ double V3::Market::calcPopFactor(const double size,
 	 const std::map<std::string, Law>& lawsMap)
 {
 	double workingRatio = popType.getDependentRatio().value_or(defines.getWorkingAdultRatioBase());
-	workingRatio += calcAddedWorkingPopPercent(laws, lawsMap); // Propertied Woman
+	workingRatio += calcAddedWorkingPopFraction(laws, lawsMap); // Propertied Woman
 	return (size * workingRatio + size * (1 - workingRatio) * defines.getDependentConsumptionRatio()) * popType.getConsumptionRate() / 10000;
 }
 
@@ -302,7 +302,7 @@ double V3::Market::calcCulturalNeedFactor(const std::vector<std::string>& goods,
 	return culturalNeedFactor + 1;
 }
 
-double V3::Market::calcAddedWorkingPopPercent(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap)
+double V3::Market::calcAddedWorkingPopFraction(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap)
 {
 	return std::accumulate(laws.begin(), laws.end(), 0.0, [lawsMap](double sum, const std::string& law) {
 		return sum + lawsMap.at(law).workingAdultRatioAdd;
@@ -416,22 +416,23 @@ void V3::Market::clearMarket()
 	}
 }
 
+// Debugging function
 std::stringstream V3::Market::marketAsTable() const
 {
 	std::stringstream out;
 	int goodLength = 0;
-	int amtLength = 0;
+	int amountLength = 0;
 	const auto& balance = getMarketBalance();
-	for (const auto& [good, amt]: balance)
+	for (const auto& [good, amount]: balance)
 	{
 		goodLength = std::max(goodLength, static_cast<int>(good.length()));
-		amtLength = std::max(amtLength, static_cast<int>(std::to_string(amt).length()));
+		amountLength = std::max(amountLength, static_cast<int>(std::to_string(amount).length()));
 	}
 
 	out << std::setprecision(3);
 	out << std::endl;
-	out << std::left << std::setw(goodLength + 2) << "Good" << std::setw(amtLength + 2) << "Percent" << std::endl;
-	out << std::setfill('-') << std::setw(goodLength + 2) << "" << std::setw(amtLength + 2) << "" << std::endl;
+	out << std::left << std::setw(goodLength + 2) << "Good" << std::setw(amountLength + 2) << "Percent" << std::endl;
+	out << std::setfill('-') << std::setw(goodLength + 2) << "" << std::setw(amountLength + 2) << "" << std::endl;
 	out << std::setfill(' ');
 
 	std::vector<std::pair<std::string, double>> balanceVector = {balance.begin(), balance.end()};
@@ -445,9 +446,8 @@ std::stringstream V3::Market::marketAsTable() const
 		if (std::abs(pair.second) < 1)
 			continue;
 
-		// out << std::left << std::setw(goodLength + 2) << pair.first << std::setw(amtLength + 2) << pair.second << std::endl;
 		const double pricePercent = -0.75 * std::max(-1.0, std::min(1.0, pair.second / 100));
-		out << std::left << std::setw(goodLength + 2) << pair.first << std::setw(amtLength + 2) << pricePercent * 100 << "%" << std::endl;
+		out << std::left << std::setw(goodLength + 2) << pair.first << std::setw(amountLength + 2) << pricePercent * 100 << "%" << std::endl;
 	}
 	return out;
 }

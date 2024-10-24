@@ -238,7 +238,7 @@ TEST(Mappers_ProductionMethodMapperTests, ConfigFlagSwitchesWalkType)
 	mappers::ProductionMethodMapper mapper;
 	mapper.loadRules("TestFiles/configurables/economy/production_method_rules.txt");
 
-	// Set up countries with no, partial, and full tech
+	// Set up a country using command economy to use the 4th pm in the pmg.
 	V3::Country countryNoTech;
 	countryNoTech.addLaw("law_command_economy");
 

@@ -22,11 +22,11 @@ double V3::MarketJobs::createJobs(const std::map<std::string, double>& rgoUnitEm
 	 const std::shared_ptr<SubState>& subState)
 {
 	auto unitEmployment = rgoUnitEmployment;
-	for (const auto& [type, percent]: estimatedOwnerships)
+	for (const auto& [type, fraction]: estimatedOwnerships)
 	{
 		for (const auto& [job, amount]: ownershipEmployments.at(type)) // Account for the owner of the buildings.
 		{
-			unitEmployment[job] += amount * percent;
+			unitEmployment[job] += amount * fraction;
 		}
 	}
 	for (const auto& [job, amount]: unitEmployment) // Track Dependents

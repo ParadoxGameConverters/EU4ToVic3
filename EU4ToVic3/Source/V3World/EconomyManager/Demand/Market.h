@@ -36,7 +36,7 @@ class Market
 	void clearMarket();
 	std::stringstream marketAsTable() const;
 
-	static double calcAddedWorkingPopPercent(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap);
+	static double calcAddedWorkingPopFraction(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap);
 
   private:
 	static int estimateWealth(const std::string& strata);

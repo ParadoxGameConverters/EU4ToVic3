@@ -44,7 +44,7 @@ void V3::MarketTracker::loadPeasants(const Country& country,
 	 const V3::BuildingGroups& buildingGroups,
 	 const std::map<std::string, V3::StateModifier>& stateTraits)
 {
-	const double womenJobRate = Market::calcAddedWorkingPopPercent(country.getProcessedData().laws, lawsMap);
+	const double womenJobRate = Market::calcAddedWorkingPopFraction(country.getProcessedData().laws, lawsMap);
 
 	// For each state check peasant PM
 	for (const auto& subState: country.getSubStates())
@@ -114,7 +114,7 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 	BuildingResources subsistenceResources;
 	const Building& subsistenceBuilding = buildings.at(subState->getHomeState()->getSubsistenceBuilding());
 	subsistenceResources.evaluateResources(subsistenceBuilding.getPMGroups(), estimatedPMs, PMs, PMGroups);
-	const double addedWorkingPopPercent = Market::calcAddedWorkingPopPercent(subState->getOwner()->getProcessedData().laws, lawsMap);
+	const double addedWorkingPopPercent = Market::calcAddedWorkingPopFraction(subState->getOwner()->getProcessedData().laws, lawsMap);
 
 	// Track Jobs changed.
 	double lostSubsistence = marketJobs.createJobs(buildingResources.getJobs(),
