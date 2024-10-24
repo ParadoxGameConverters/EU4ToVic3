@@ -12,6 +12,9 @@ class Country;
 } // namespace V3
 namespace mappers
 {
+using PmIndex = int;
+using PmFraction = double;
+using PmGroup = std::string;
 class ProductionMethodMapper: commonItems::parser
 {
   public:
@@ -24,7 +27,7 @@ class ProductionMethodMapper: commonItems::parser
 	[[nodiscard]] const auto& getRules() const { return buildingToRules; }
 
 	// demandEstimates helper
-	[[nodiscard]] std::map<std::string, std::tuple<int, double>> estimatePMs(const V3::Country& country,
+	[[nodiscard]] std::map<PmGroup, std::tuple<PmIndex, PmFraction>> estimatePMs(const V3::Country& country,
 		 const std::map<std::string, V3::ProductionMethod>& PMs,
 		 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups,
 		 const std::map<std::string, V3::Building>& buildings) const;

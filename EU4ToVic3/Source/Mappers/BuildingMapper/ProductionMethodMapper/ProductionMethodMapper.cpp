@@ -242,7 +242,7 @@ int mappers::ProductionMethodMapper::walkPMsLawbound(const std::vector<std::stri
 	return 0; // Nothing is legal, just go with default PM.
 }
 
-std::map<std::string, std::tuple<int, double>> mappers::ProductionMethodMapper::estimatePMs(const V3::Country& country,
+std::map<mappers::PmGroup, std::tuple<mappers::PmIndex, mappers::PmFraction>> mappers::ProductionMethodMapper::estimatePMs(const V3::Country& country,
 	 const std::map<std::string, V3::ProductionMethod>& PMs,
 	 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups,
 	 const std::map<std::string, V3::Building>& buildings) const
