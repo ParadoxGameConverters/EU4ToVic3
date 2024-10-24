@@ -20,10 +20,9 @@ void V3::PopTypeLoader::loadPopTypes(const commonItems::ModFilesystem& modFS)
 	}
 	else
 	{
-		std::stringstream input;
-		input << "strata = poor";
-		PopType unemployed(input);
+		PopType unemployed;
 		unemployed.setType("unemployed");
+		unemployed.setStrata("poor");
 		popTypes.emplace("unemployed", unemployed);
 	}
 }
