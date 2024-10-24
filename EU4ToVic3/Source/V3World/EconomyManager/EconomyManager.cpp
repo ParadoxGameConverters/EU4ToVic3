@@ -564,11 +564,11 @@ void V3::EconomyManager::investCapital(const std::map<std::string, std::shared_p
 
 				// First assemble the investor weights conditional on the country's state-space
 				const auto& ownershipMap = ownershipLoader.getOwnershipsFromBuilding(building->getName());
-				const auto& investorWeights = calcInvestorWeights(ownershipMap, *country);
+				const auto& investorFractions = calcInvestorFractions(ownershipMap, *country);
 
 
 				// Now apportion the buildings out among the different investor types
-				const auto& investorApportionment = apportionInvestors(building->getLevel(), investorWeights, investorIOUs);
+				const auto& investorApportionment = apportionInvestors(building->getLevel(), investorFractions, investorIOUs);
 
 				// For each investor class with assigned buildings, split owners between local/foreign/capital as directed
 				for (const auto& [type, levels]: investorApportionment)
@@ -931,7 +931,7 @@ std::map<std::string, std::map<std::string, double>> V3::EconomyManager::estimat
 	return buildingInvestorEstimates;
 }
 
-std::map<std::string, double> V3::EconomyManager::calcInvestorWeights(const std::map<std::string, OwnershipData>& ownershipMap, const Country& country)
+std::map<std::string, double> V3::EconomyManager::calcInvestorFractions(const std::map<std::string, OwnershipData>& ownershipMap, const Country& country)
 {
 	std::map<std::string, double> investorWeights;
 
@@ -946,6 +946,8 @@ std::map<std::string, double> V3::EconomyManager::calcInvestorWeights(const std:
 		investorWeights[type] = investorData.weight;
 		totalWeight += investorData.weight;
 	}
+
+	// Turn weights into fractions
 	for (const auto& type: investorWeights | std::views::keys)
 	{
 		investorWeights[type] /= totalWeight;

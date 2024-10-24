@@ -67,10 +67,11 @@ double V3::MarketJobs::createSubsistence(const std::map<std::string, double>& su
 		unitEmployment[job] = amount / (popTypes.at(job).getDependentRatio().value_or(defaultRatio) + womenJobRate);
 	}
 
-	const double unitPop = std::accumulate(unitEmployment.begin(), unitEmployment.end(), 0.0, [](double sum, const auto& pair) {
+	double unitEmploymentPop = std::accumulate(unitEmployment.begin(), unitEmployment.end(), 0.0, [](double sum, const auto& pair) {
 		return sum + pair.second;
 	});
-	const double unemployedPerUnit = subState->getSubStatePops().getPopCount() / unitPop;
+	unitEmploymentPop = std::max(unitEmploymentPop, 1.0);
+	const double unemployedPerUnit = subState->getSubStatePops().getPopCount() / unitEmploymentPop;
 	const double levels = std::min(static_cast<double>(arableLand), unemployedPerUnit);
 
 	for (const auto& [job, amount]: unitEmployment)
