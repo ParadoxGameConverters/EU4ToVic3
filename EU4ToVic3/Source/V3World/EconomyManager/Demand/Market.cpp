@@ -186,7 +186,7 @@ std::map<std::string, double> V3::Market::estimateCulturalPrevalence(const std::
 {
 	auto culturalFactors = initCulturalFactors();
 
-	for (const auto& [culture, percent]: cultureData)
+	for (const auto& [culture, fraction]: cultureData)
 	{
 		const auto& taboos = getTaboos(culture, cultures, religions);
 		const auto& obsessions = getObsessions(culture, cultures);
@@ -197,7 +197,7 @@ std::map<std::string, double> V3::Market::estimateCulturalPrevalence(const std::
 			{
 				continue;
 			}
-			culturalFactors.at(taboo) -= percent;
+			culturalFactors.at(taboo) -= fraction;
 		}
 		for (const auto& obsession: obsessions)
 		{
@@ -205,7 +205,7 @@ std::map<std::string, double> V3::Market::estimateCulturalPrevalence(const std::
 			{
 				continue;
 			}
-			culturalFactors.at(obsession) += percent;
+			culturalFactors.at(obsession) += fraction;
 		}
 	}
 
@@ -281,8 +281,8 @@ double V3::Market::calcPurchaseWeight(double marketShare, const GoodsFulfillment
 	const double culturalFactor = calcCulturalFactor(culturalPrevalence);
 	if (culturalFactor > 1)
 	{
-		const double percent = culturalFactor - 1;
-		weight = std::max(weight, percent + (1 - percent) * weight); // (x * 1) + (1 - x)y
+		const double fraction = culturalFactor - 1;
+		weight = std::max(weight, fraction + (1 - fraction) * weight); // (x * 1) + (1 - x)y
 	}
 
 	return marketShare * weight * culturalFactor;
@@ -342,8 +342,7 @@ void V3::Market::calcPopOrders(const int popSize,
 	const auto& culturalPrevalence = estimateCulturalPrevalence(cultureData, cultures, religions);
 	const auto& goodsMap = demand.getGoodsMap();
 
-	// Assuming enough land for each pop (for now).
-	for (const auto& [job, jobPercent]: jobData)
+	for (const auto& [job, jobFraction]: jobData)
 	{
 		if (!popTypeMap.contains(job))
 		{
@@ -356,7 +355,7 @@ void V3::Market::calcPopOrders(const int popSize,
 		}
 		const auto& popType = popTypeMap.at(job);
 
-		const double popFactor = calcPopFactor(popSize * jobPercent, popType, defines, laws, lawsMap);
+		const double popFactor = calcPopFactor(popSize * jobFraction, popType, defines, laws, lawsMap);
 		const int wealth = estimateWealth(popType.getStrata());
 
 		if (!demand.getWealthConsumptionMap().contains(wealth))

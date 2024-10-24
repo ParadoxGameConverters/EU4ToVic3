@@ -114,14 +114,14 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 	BuildingResources subsistenceResources;
 	const Building& subsistenceBuilding = buildings.at(subState->getHomeState()->getSubsistenceBuilding());
 	subsistenceResources.evaluateResources(subsistenceBuilding.getPMGroups(), estimatedPMs, PMs, PMGroups);
-	const double addedWorkingPopPercent = Market::calcAddedWorkingPopFraction(subState->getOwner()->getProcessedData().laws, lawsMap);
+	const double addedWorkingPopFraction = Market::calcAddedWorkingPopFraction(subState->getOwner()->getProcessedData().laws, lawsMap);
 
 	// Track Jobs changed.
 	double lostSubsistence = marketJobs.createJobs(buildingResources.getJobs(),
 		 subsistenceResources.getJobs(),
 		 p,
 		 defaultRatio,
-		 addedWorkingPopPercent,
+		 addedWorkingPopFraction,
 		 estOwnershipFraction,
 		 {{
 				"building_financial_district",
@@ -153,7 +153,7 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 			 subsistenceResources.getJobs(),
 			 p * urbanFrac,
 			 defaultRatio,
-			 addedWorkingPopPercent,
+			 addedWorkingPopFraction,
 			 {},
 			 {},
 			 popTypes,
@@ -173,6 +173,7 @@ void V3::MarketTracker::logDebugMarket(const Country& country) const
 								<< "\nCulture Split:" << breakdownAsTable(marketCulture, 0).str();
 }
 
+// Debugging function
 std::stringstream V3::MarketTracker::breakdownAsTable(const std::map<std::string, double>& breakdown, const int popCount, const bool asPercent)
 {
 	std::stringstream out;
