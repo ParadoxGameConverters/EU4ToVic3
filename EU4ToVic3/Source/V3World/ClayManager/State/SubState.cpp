@@ -375,6 +375,11 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	{
 		return false;
 	}
+	// Economy builder will ignore all monuments, canals, and power block statues.
+	if (building.isUnique())
+	{
+		return false;
+	}
 	// We can only build what we have the tech for.
 	if (!getOwner()->hasAnyOfTech(building.getUnlockingTechs()))
 	{
@@ -695,6 +700,11 @@ std::optional<std::string> V3::SubState::getPrimaryCulture() const
 		if (pop.getCulture().empty())
 			continue;
 		census[pop.getCulture()] += pop.getSize();
+	}
+	if (census.empty())
+	{
+		Log(LogLevel::Error) << "State " << getHomeStateName() << " contains substate with blank culture pops!";
+		return std::nullopt;
 	}
 	auto sorted = sortMap(census);
 	return *sorted.begin();

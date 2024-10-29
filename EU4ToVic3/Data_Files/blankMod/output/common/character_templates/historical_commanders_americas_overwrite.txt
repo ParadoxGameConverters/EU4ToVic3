@@ -1,0 +1,509 @@
+﻿# Brazil - BRZ
+brz_admiral_inacio = {
+	historical = yes
+	first_name = Joaquim_Jose
+	last_name = Inacio
+	historical = yes
+	#culture = global_var:brazil_culture
+	culture = primary_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_royalist
+	birth_date = 1808.8.1
+	dna = dna_joaquim_jose_inacio
+	traits = {
+		brave
+		pious
+		experienced_naval_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_inacio
+				}
+			}
+			uses_brazil_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 75
+	}
+	on_created = {
+		converter_brazilian_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_inacio
+		}
+	}
+}
+brz_admiral_tamandare = {
+	historical = yes
+	first_name = Joaquim_Marques
+	last_name = Lisboa # Marquis of Tamandaré
+	historical = yes
+	#culture = global_var:brazil_culture
+	culture = primary_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_royalist
+	birth_date = 1807.12.13
+	dna = dna_joaquim_marques_lisboa
+	traits = {
+		brave
+		experienced_naval_commander
+		dockyard_master
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_tamandare
+				}
+			}
+			uses_brazil_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1847.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 75
+	}
+	on_created = {
+		converter_brazilian_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_tamandare
+		}
+	}
+}
+brz_general_alves_de_lima_e_silva = {
+	first_name = Luis_2
+	last_name = Alves_de_Lima_e_Silva
+	historical = yes
+	#culture = global_var:brazil_culture
+	culture = primary_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_landowners
+	ideology = ideology_royalist
+	birth_date = 1803.8.25
+	dna = dna_alves_de_lima_e_silva
+	traits = {
+		surveyor
+		charismatic
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_alves_de_lima_e_silva
+				}
+			}
+			uses_brazil_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 75
+	}
+	on_created = {
+		converter_brazilian_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_alves_de_lima_e_silva
+		}
+	}
+}
+# Chile - CHL
+chl_admiral_prat = {
+	first_name = Arturo
+	last_name = Prat
+	historical = yes
+	#culture = global_var:sou_andes_culture
+	culture = primary_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_reformer
+	birth_date = 1848.4.3
+	dna = dna_prat
+	traits = {
+		brave
+		innovative
+		experienced_naval_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_admiral_prat
+				}
+			}
+			uses_chl_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1872.1.1 
+		latest_usage_date = 1890.1.1	
+		chance = 75
+	}
+	on_created = {
+		converter_andean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_admiral_prat
+		}
+	}
+}
+# Mexico - MEX
+mex_general_diaz = {
+	first_name = Porfirio
+	last_name = DIaz
+	historical = yes
+	#culture = global_var:mexico_culture
+	culture = primary_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_reformer
+	birth_date = 1830.9.15
+	dna = dna_porfirio_diaz
+	traits = {
+		ambitious
+		basic_defensive_strategist
+		cruel
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_porfirio_diaz
+				}
+			}
+			uses_mexico_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1890.1.1	
+		chance = 75
+	}
+	on_created = {
+		converter_mexican_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_porfirio_diaz
+		}
+	}
+}
+mex_general_zaragoza = {
+	first_name = Ignacio
+	last_name = Zaragoza
+	historical = yes
+	#culture = global_var:mexico_culture
+	culture = primary_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_radical
+	birth_date = 1829.3.24
+	dna = dna_ignacio_zaragoza
+	traits = {
+		stalwart_defender
+		direct
+		celebrity_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_zaragoza
+				}
+			}
+			uses_mexico_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1856.1.1
+		latest_usage_date = 1880.1.1	
+		chance = 75
+	}
+	on_created = {
+		converter_mexican_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_zaragoza
+		}
+	}
+}
+# Paraguay - PRG
+prg_general_aquino = {
+	first_name = Elizardo
+	last_name = Aquino
+	historical = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1825.2.5 # Only year known
+	traits = {
+		engineer
+		trench_rat
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_elizardo_aquino
+				}
+			}
+			uses_prg_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1855.1.1 
+		latest_usage_date = 1880.1.1	
+		chance = 75
+	}
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_elizardo_aquino
+		}
+	}
+}
+
+prg_general_bruguez = {
+	first_name = Jose_Maria
+	last_name = Bruguez
+	historical = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1827.6.7 # Only year known
+	traits = {
+		meticulous
+		experienced_artillery_commander
+		stalwart_defender
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jose_maria_bruguez
+				}
+			}
+			uses_prg_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1858.1.1 
+		latest_usage_date = 1880.1.1	
+		chance = 75
+	}
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jose_maria_bruguez
+		}
+	}
+}
+
+prg_general_caballero = {
+	first_name = Bernardino
+	last_name = Caballero
+	historical = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1839.5.20
+	traits = {
+		experienced_political_operator
+		experienced_offensive_planner
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_bernardino_caballero
+				}
+			}
+			uses_prg_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1863.1.1 
+		latest_usage_date = 1890.1.1	
+		chance = 75
+	}
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_bernardino_caballero
+		}
+	}
+}
+
+prg_general_diaz = {
+	first_name = JosE__Eduvigis
+	last_name = DI_az
+	historical = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1833.10.17
+	traits = {
+		experienced_defensive_strategist
+		trench_rat
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jose_eduvigis_diaz
+				}
+			}
+			uses_prg_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1860.1.1 
+		latest_usage_date = 1880.1.1	
+		chance = 75
+	}
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jose_eduvigis_diaz
+		}
+	}
+}
+
+prg_admiral_meza = {
+	first_name = Pedro_Ignacio
+	last_name = Meza
+	historical = yes
+	#culture = global_var:la_plata_culture
+	culture = primary_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1813.2.2 # only year known
+	traits = {
+		experienced_naval_commander
+		brave
+		reckless
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pedro_ignacio_meza
+				}
+			}
+			uses_prg_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1854.1.1 
+		latest_usage_date = 1875.1.1	
+		chance = 75
+	}
+	on_created = {
+		converter_platinean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pedro_ignacio_meza
+		}
+	}
+}
+# Peru - PEU
+peu_admiral_grau = {
+	first_name = Miguel
+	last_name = Grau_Seminario
+	historical = yes
+	#culture = global_var:sou_andes_culture
+	culture = primary_culture
+	female = no
+	religion = catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_reformer
+	birth_date = 1834.7.27
+	dna = dna_miguel_grau_seminario
+	traits = {
+		brave
+		romantic
+		experienced_naval_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_grau_seminario
+				}
+			}
+			uses_peu_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1865.1.1 
+		latest_usage_date = 1890.1.1	
+		chance = 75
+	}
+	on_created = {
+		converter_andean_template_effect = yes
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_grau_seminario
+		}
+	}
+}

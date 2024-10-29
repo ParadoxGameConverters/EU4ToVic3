@@ -39,6 +39,18 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Info) << "<< Copying Mod Template from blankMod/output to output/" << outputName;
 	if (!commonItems::CopyFolder("blankMod/output", "output/" + outputName))
 		throw std::runtime_error("Error copying mod template! Is the output/ folder writable?");
+
+	if (configuration.configBlock.thirdOdyssey)
+	{
+		if (!commonItems::TryCopyFile("configurables/third_odyssey/map_data/state_regions/05_north_america.txt",
+				  "output/" + outputName + "/map_data/state_regions/05_north_america.txt"))
+			throw std::runtime_error("Error copying TO map_data! Is the output/ folder writable?");
+		if (!commonItems::CopyFolder("configurables/third_odyssey/localization", "output/" + outputName + "/localization"))
+			throw std::runtime_error("Error copying TO locs! Is the output/ folder writable?");
+		if (!commonItems::CopyFolder("configurables/third_odyssey/gfx", "output/" + outputName + "/gfx"))
+			throw std::runtime_error("Error copying TO gfx! Is the output/ folder writable?");
+	}
+
 	Log(LogLevel::Progress) << "83 %";
 
 	Log(LogLevel::Info) << "<- Crafting .metadata File";

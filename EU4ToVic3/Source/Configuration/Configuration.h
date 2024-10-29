@@ -66,11 +66,13 @@ class Configuration: commonItems::parser
 		bool downTiers = true;
 		double shapingFactor = 1.0;
 		// runtime options.
-		bool vn = false; // Voltaire's Nightmare
+		bool vn = false;				// Voltaire's Nightmare
+		bool thirdOdyssey = false; // Third Odyssey: Back to the Motherland
 	} configBlock;
 
 	void setOutputName(const std::string& name) { outputName = name; }
 	void setVN() { configBlock.vn = true; }
+	void setTO() { configBlock.thirdOdyssey = true; }
 	void setEurocentric() { configBlock.euroCentric = EUROCENTRISM::EuroCentric; }
 	void setVanillaStartDate() { configBlock.startDate = STARTDATE::Vanilla; }
 

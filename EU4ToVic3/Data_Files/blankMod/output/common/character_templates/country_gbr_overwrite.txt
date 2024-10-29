@@ -1,0 +1,4987 @@
+﻿# Great Britain - GBR
+
+# Generated IG Leaders
+
+gbr_o_connor_template = {
+	first_name = Feargus
+	last_name = O_Connor
+	historical = yes
+	culture = global_var:ire_culture
+	birth_date = 1796.1.1
+	ig_leader = yes
+    dna = dna_feargus_o_connor
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	traits = {
+		charismatic
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_o_connor
+				}
+			}
+			trigger_if = {
+				limit = {
+					NOT = {
+						any_country = { uses_ire_characters = yes }
+					}
+				}
+				uses_gbr_characters = yes
+				any_scope_state = {
+					state_region = { is_homeland = global_var:ire_culture }
+				}
+			}
+			trigger_else = { uses_ire_characters = yes }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_trade_unions
+				is_interest_group_type = ig_intelligentsia
+			}   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1852.1.1	
+		chance = 10
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_o_connor
+		}
+	}
+}
+fem_gbr_o_connor_template = {
+	first_name = Begus
+	last_name = O_Connor
+	historical = yes
+	culture = global_var:ire_culture
+	female = yes
+	birth_date = 1796.1.1
+	ig_leader = yes
+    dna = dna_feargus_o_connor
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	traits = {
+		charismatic
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_o_connor
+				}
+			}
+			trigger_if = {
+				limit = {
+					NOT = {
+						any_country = { uses_ire_characters = yes }
+					}
+				}
+				uses_gbr_characters = yes
+				any_scope_state = {
+					state_region = { is_homeland = global_var:ire_culture }
+				}
+			}
+			trigger_else = { uses_ire_characters = yes }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_trade_unions
+				is_interest_group_type = ig_intelligentsia
+			}   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1852.1.1	
+		chance = 10
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_o_connor
+		}
+	}
+}
+
+gbr_wellington_character_template = {
+	first_name = Arthur
+	last_name = Wellesley
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	religion = protestant
+	ideology = ideology_jingoist_leader
+    dna = dna_lord_wellington
+	interest_group = ig_armed_forces
+	birth_date = 1769.5.1
+	traits = {
+		celebrity_commander
+		expert_defensive_strategist
+		brave
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_wellington
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_industrialists
+				is_interest_group_type = ig_landowners
+			}   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1852.1.1	
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_wellington
+		}
+	}
+}
+fem_gbr_wellington_character_template = {
+	first_name = Morgana
+	last_name = Wellesley
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_jingoist_leader
+    dna = dna_lord_wellington
+	interest_group = ig_armed_forces
+	birth_date = 1769.5.1
+	traits = {
+		celebrity_commander
+		expert_defensive_strategist
+		brave
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_wellington
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_industrialists
+				is_interest_group_type = ig_landowners
+			}   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1852.1.1	
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_wellington
+		}
+	}
+}
+
+gbr_disraeli_character_template = { # Disraeli, Jingoist, Landowners
+	first_name = Benjamin
+	last_name = Disraeli
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+    dna = dna_benjamin_disraeli
+	religion = protestant
+	ideology = ideology_jingoist_leader
+	interest_group = ig_landowners
+	birth_date = 1804.1.1
+	traits = { 
+		expert_political_operator
+		ambitious
+		romantic
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_disraeli
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1868.1.1
+		latest_usage_date = 1880.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_disraeli
+		}
+	}
+}
+fem_gbr_disraeli_character_template = { # Disraeli, Jingoist, Landowners
+	first_name = Benjamine
+	last_name = Disraeli
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+    dna = dna_benjamin_disraeli
+	religion = protestant
+	ideology = ideology_jingoist_leader
+	interest_group = ig_landowners
+	birth_date = 1804.1.1
+	traits = { 
+		expert_political_operator
+		ambitious
+		romantic
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_disraeli
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1868.1.1
+		latest_usage_date = 1880.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_disraeli
+		}
+	}
+}
+
+gbr_gladstone_character_template = { # Gladstone, market liberal, intelligentsia
+	first_name = William
+	last_name = Gladstone
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	religion = protestant
+	ideology = ideology_market_liberal
+	interest_group = ig_landowners
+	birth_date = 1809.1.1
+    dna = dna_william_ewart_gladstone
+	traits = {
+		expert_political_operator
+		charismatic
+		inspirational_orator
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_gladstone
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1865.1.1
+		latest_usage_date = 1894.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_gladstone
+		}
+	}
+}
+fem_gbr_gladstone_character_template = { # Gladstone, market liberal, intelligentsia
+	first_name = Willa
+	last_name = Gladstone
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_market_liberal
+	interest_group = ig_landowners
+	birth_date = 1809.1.1
+    dna = dna_william_ewart_gladstone
+	traits = {
+		expert_political_operator
+		charismatic
+		inspirational_orator
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_gladstone
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1865.1.1
+		latest_usage_date = 1894.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_gladstone
+		}
+	}
+}
+
+gbr_temple_character_template = { # Viscount Palmerston
+	first_name = Henry
+	last_name = Temple
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	religion = protestant
+	ideology = ideology_market_liberal
+	interest_group = ig_landowners
+	birth_date = 1784.8.20
+    dna = dna_lord_palmerston
+	traits = {
+		experienced_diplomat
+		charismatic
+		persistent
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_viscount_palmerston
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1865.1.1
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_viscount_palmerston
+		}
+	}
+}
+fem_gbr_temple_character_template = { # Viscount Palmerston
+	first_name = Harriet
+	last_name = Temple
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_market_liberal
+	interest_group = ig_landowners
+	birth_date = 1784.8.20
+    dna = dna_lord_palmerston
+	traits = {
+		experienced_diplomat
+		charismatic
+		persistent
+	}   
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_viscount_palmerston
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia   
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1865.1.1
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_viscount_palmerston
+		}
+	}
+}
+
+gbr_george_curzon = { # George Curzon, 1 Marquess Curzon of Kedleston
+    first_name = George
+    last_name = Curzon
+    historical = yes
+    culture = global_var:gbr_culture
+    female = no
+    religion = protestant
+    ideology = ideology_reformer
+    interest_group = ig_landowners
+    birth_date = 1859.1.11
+	ig_leader = yes
+    dna = dna_george_curzon
+    traits = {
+        masterful_diplomat
+        ambitious
+        imperious
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_george_curzon
+				}
+			}
+			trigger_if = {
+				limit = {
+					OR = {
+						country_is_in_india = yes
+						state_is_in_southeast_asia = yes
+					}
+				}
+				is_subject = yes
+				overlord = { uses_gbr_characters = yes }
+				country_has_primary_culture = global_var:gbr_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_landowners     
+        }   
+        earliest_usage_date = 1895.1.1
+        latest_usage_date = 1910.1.1
+        chance = 75
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_george_curzon
+		}
+	}
+}
+fem_gbr_george_curzon = { # George Curzon, 1 Marquess Curzon of Kedleston
+    first_name = Georgia
+    last_name = Curzon
+    historical = yes
+    culture = global_var:gbr_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_reformer
+    interest_group = ig_landowners
+    birth_date = 1859.1.11
+	ig_leader = yes
+    dna = dna_george_curzon
+    traits = {
+        masterful_diplomat
+        ambitious
+        imperious
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_george_curzon
+				}
+			}
+			trigger_if = {
+				limit = {
+					OR = {
+						country_is_in_india = yes
+						state_is_in_southeast_asia = yes
+					}
+				}
+				is_subject = yes
+				overlord = { uses_gbr_characters = yes }
+				country_has_primary_culture = global_var:gbr_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_landowners     
+        }   
+        earliest_usage_date = 1895.1.1
+        latest_usage_date = 1910.1.1
+        chance = 75
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_george_curzon
+		}
+	}
+}
+
+GBR_anthony_ashley-cooper = {
+    first_name = Anthony
+    last_name = Ashley-Cooper
+    historical = yes
+    culture = global_var:gbr_culture
+    female = no
+    religion = protestant
+    ideology = ideology_reformer
+    interest_group = ig_landowners
+    birth_date = 1801.4.28
+    traits = {
+        pious
+        persistent
+        basic_diplomat
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_anthony_ashley-cooper
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_landowners
+        }   
+        earliest_usage_date = 1836.1.1
+        latest_usage_date = 1852.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_anthony_ashley-cooper
+		}
+	}
+}
+fem_GBR_anthony_ashley-cooper = {
+    first_name = Antonia
+    last_name = Ashley-Cooper
+    historical = yes
+    culture = global_var:gbr_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_reformer
+    interest_group = ig_landowners
+    birth_date = 1801.4.28
+    traits = {
+        pious
+        persistent
+        basic_diplomat
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_anthony_ashley-cooper
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_landowners
+        }   
+        earliest_usage_date = 1836.1.1
+        latest_usage_date = 1852.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_anthony_ashley-cooper
+		}
+	}
+}
+
+GBR_john_russell = {
+    first_name = John 
+    last_name = Russell
+    historical = yes
+    culture = global_var:gbr_culture
+    female = no
+    religion = protestant
+    ideology = ideology_pacifist
+    interest_group = ig_intelligentsia
+    birth_date = 1792.8.18
+    traits = {
+        reckless
+        experienced_political_operator
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_russell
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1840.1.1
+        latest_usage_date = 1870.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_russell
+		}
+	}
+}
+fem_GBR_john_russell = {
+    first_name = Jane 
+    last_name = Russell
+    historical = yes
+    culture = global_var:gbr_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_pacifist
+    interest_group = ig_intelligentsia
+    birth_date = 1792.8.18
+    traits = {
+        reckless
+        experienced_political_operator
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_russell
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1840.1.1
+        latest_usage_date = 1870.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_russell
+		}
+	}
+}
+
+GBR_richard_cobden = {
+    first_name = Richard
+    last_name = Cobden
+    historical = yes
+    culture = global_var:gbr_culture
+    female = no
+    religion = protestant
+    ideology = ideology_pacifist
+    interest_group = ig_petty_bourgeoisie
+    birth_date = 1804.6.3
+    traits = {
+        experienced_diplomat
+        wrathful
+        reserved
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_richard_cobden
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_petty_bourgeoisie
+        }   
+        earliest_usage_date = 1840.1.1
+        latest_usage_date = 1863.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_richard_cobden
+		}
+	}
+}
+fem_GBR_richard_cobden = {
+    first_name = Rikki
+    last_name = Cobden
+    historical = yes
+    culture = global_var:gbr_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_pacifist
+    interest_group = ig_petty_bourgeoisie
+    birth_date = 1804.6.3
+    traits = {
+        experienced_diplomat
+        wrathful
+        reserved
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_richard_cobden
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_petty_bourgeoisie
+        }   
+        earliest_usage_date = 1840.1.1
+        latest_usage_date = 1863.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_richard_cobden
+		}
+	}
+}
+
+GBR_john_bright = {
+    first_name = John
+    last_name = Bright
+    historical = yes
+    culture = global_var:gbr_culture
+    female = no
+    religion = protestant
+    ideology = ideology_market_liberal
+    interest_group = ig_petty_bourgeoisie
+    birth_date = 1811.11.16
+    traits = {
+        basic_diplomat
+        firebrand
+        charismatic
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_bright
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_petty_bourgeoisie
+        }   
+        earliest_usage_date = 1843.1.1
+        latest_usage_date = 1870.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_bright
+		}
+	}
+}
+fem_GBR_john_bright = {
+    first_name = Jane
+    last_name = Bright
+    historical = yes
+    culture = global_var:gbr_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_market_liberal
+    interest_group = ig_petty_bourgeoisie
+    birth_date = 1811.11.16
+    traits = {
+        basic_diplomat
+        firebrand
+        charismatic
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_bright
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_petty_bourgeoisie
+        }   
+        earliest_usage_date = 1843.1.1
+        latest_usage_date = 1870.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_bright
+		}
+	}
+}
+
+GBR_george_hamilton-gordon = {
+    first_name = George
+    last_name = Hamilton-Gordon
+    historical = yes
+    culture = global_var:sct_culture
+    female = no
+    religion = protestant
+    ideology = ideology_market_liberal
+    interest_group = ig_industrialists
+    birth_date = 1784.1.28
+    traits = {
+        innovative
+        experienced_diplomat
+        reserved
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_george_hamilton-gordon
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:sct_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1845.1.1
+        latest_usage_date = 1860.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_george_hamilton-gordon
+		}
+	}
+}
+fem_GBR_george_hamilton-gordon = {
+    first_name = Georgia
+    last_name = Hamilton-Gordon
+    historical = yes
+    culture = global_var:sct_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_market_liberal
+    interest_group = ig_industrialists
+    birth_date = 1784.1.28
+    traits = {
+        innovative
+        experienced_diplomat
+        reserved
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_george_hamilton-gordon
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:sct_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_industrialists
+        }   
+        earliest_usage_date = 1845.1.1
+        latest_usage_date = 1860.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_george_hamilton-gordon
+		}
+	}
+}
+
+GBR_joseph_chamberlain = {
+    first_name = Joseph
+    last_name = Chamberlain
+    historical = yes
+    culture = global_var:gbr_culture
+    female = no
+    religion = protestant
+    ideology = ideology_jingoist_leader
+    interest_group = ig_petty_bourgeoisie
+    birth_date = 1836.7.8
+    dna = dna_joseph_chamberlain
+    traits = {
+        arrogant
+        ambitious
+        expert_colonial_administrator
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_joseph_chamberlain
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_petty_bourgeoisie
+        }   
+        earliest_usage_date = 1875.1.1
+        latest_usage_date = 1905.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_joseph_chamberlain
+		}
+	}
+}
+fem_GBR_joseph_chamberlain = {
+    first_name = Josephine
+    last_name = Chamberlain
+    historical = yes
+    culture = global_var:gbr_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_jingoist_leader
+    interest_group = ig_petty_bourgeoisie
+    birth_date = 1836.7.8
+    dna = dna_joseph_chamberlain
+    traits = {
+        arrogant
+        ambitious
+        expert_colonial_administrator
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_joseph_chamberlain
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_petty_bourgeoisie
+        }   
+        earliest_usage_date = 1875.1.1
+        latest_usage_date = 1905.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_joseph_chamberlain
+		}
+	}
+}
+
+GBR_john_bird_sumner = {
+    first_name = John
+    last_name = Sumner
+    historical = yes
+    culture = global_var:gbr_culture
+    female = no
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_devout
+    birth_date = 1780.2.25
+    traits = {
+        literary
+        basic_political_operator
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_bird_sumner
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1845.1.1
+        latest_usage_date = 1862.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_bird_sumner
+		}
+	}
+}
+fem_GBR_john_bird_sumner = {
+    first_name = Jane
+    last_name = Sumner
+    historical = yes
+    culture = global_var:gbr_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_devout
+    birth_date = 1780.2.25
+    traits = {
+        literary
+        basic_political_operator
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_bird_sumner
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1845.1.1
+        latest_usage_date = 1862.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_bird_sumner
+		}
+	}
+}
+
+GBR_charles_longley = {
+    first_name = Charles
+    last_name = Longley
+    historical = yes
+    culture = global_var:gbr_culture
+    female = no
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_devout
+    birth_date = 1794.7.28
+    traits = {
+        tactful
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_charles_longley
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1860.1.1
+        latest_usage_date = 1870.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_charles_longley
+		}
+	}
+}
+fem_GBR_charles_longley = {
+    first_name = Charlotte
+    last_name = Longley
+    historical = yes
+    culture = global_var:gbr_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_moderate
+    interest_group = ig_devout
+    birth_date = 1794.7.28
+    traits = {
+        tactful
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_charles_longley
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1860.1.1
+        latest_usage_date = 1870.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_charles_longley
+		}
+	}
+}
+
+GBR_archibald_campbell_tait = {
+    first_name = Archibald
+    last_name = Tait
+    historical = yes
+    culture = global_var:sct_culture
+    female = no
+    religion = protestant
+    ideology = ideology_liberal_leader
+    interest_group = ig_devout
+    birth_date = 1811.12.21
+    traits = {
+        pious
+        master_bureaucrat
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_archibald_campbell_tait
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:sct_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1865.1.1
+        latest_usage_date = 1882.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_archibald_campbell_tait
+		}
+	}
+}
+fem_GBR_archibald_campbell_tait = {
+    first_name = Archie
+    last_name = Tait
+    historical = yes
+    culture = global_var:sct_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_liberal_leader
+    interest_group = ig_devout
+    birth_date = 1811.12.21
+    traits = {
+        pious
+        master_bureaucrat
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_archibald_campbell_tait
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:sct_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1865.1.1
+        latest_usage_date = 1882.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_archibald_campbell_tait
+		}
+	}
+}
+
+GBR_edward_white_benson = {
+    first_name = Edward
+    last_name = Benson
+    historical = yes
+    culture = global_var:gbr_culture
+    female = no
+    religion = protestant
+    ideology = ideology_traditionalist
+    interest_group = ig_devout
+    birth_date = 1829.7.14
+    traits = {
+        persistent
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_edward_white_benson
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1880.1.1
+        latest_usage_date = 1900.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_edward_white_benson
+		}
+	}
+}
+fem_GBR_edward_white_benson = {
+    first_name = Edwardine
+    last_name = Benson
+    historical = yes
+    culture = global_var:gbr_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_traditionalist
+    interest_group = ig_devout
+    birth_date = 1829.7.14
+    traits = {
+        persistent
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_edward_white_benson
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1880.1.1
+        latest_usage_date = 1900.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_edward_white_benson
+		}
+	}
+}
+
+GBR_frederick_temple = {
+    first_name = Frederick
+    last_name = Temple
+    historical = yes
+    culture = global_var:gbr_culture
+    female = no
+    religion = protestant
+    ideology = ideology_reformer
+    interest_group = ig_devout
+    birth_date = 1821.11.30
+    traits = {
+        imposing
+        pious
+        meticulous
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_frederick_temple
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1895.1.1
+        latest_usage_date = 1903.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_frederick_temple
+		}
+	}
+}
+fem_GBR_frederick_temple = {
+    first_name = Frederica
+    last_name = Temple
+    historical = yes
+    culture = global_var:gbr_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_reformer
+    interest_group = ig_devout
+    birth_date = 1821.11.30
+    traits = {
+        imposing
+        pious
+        meticulous
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_frederick_temple
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1895.1.1
+        latest_usage_date = 1903.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_frederick_temple
+		}
+	}
+}
+
+GBR_randall_davidson = {
+    first_name = Randall
+    last_name = Davidson
+    historical = yes
+    culture = global_var:sct_culture
+    female = no
+    religion = protestant
+    ideology = ideology_liberal_leader
+    interest_group = ig_devout
+    birth_date = 1848.4.7
+    traits = {
+        experienced_political_operator
+        tactful
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_randall_davidson
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:sct_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1900.1.1
+        latest_usage_date = 1928.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_randall_davidson
+		}
+	}
+}
+fem_GBR_randall_davidson = {
+    first_name = Rhiannon
+    last_name = Davidson
+    historical = yes
+    culture = global_var:sct_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_liberal_leader
+    interest_group = ig_devout
+    birth_date = 1848.4.7
+    traits = {
+        experienced_political_operator
+        tactful
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_randall_davidson
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:sct_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1900.1.1
+        latest_usage_date = 1928.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_randall_davidson
+		}
+	}
+}
+
+GBR_cosmo_gordon_lang = {
+    first_name = Cosmo
+    last_name = Lang
+    historical = yes
+    culture = global_var:sct_culture
+    female = no
+    religion = protestant
+    ideology = ideology_pacifist
+    interest_group = ig_devout
+    birth_date = 1864.10.31
+    traits = {
+        meticulous
+        ambitious
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_cosmo_gordon_lang
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:sct_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1925.1.1
+        latest_usage_date = 1936.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_cosmo_gordon_lang
+		}
+	}
+}
+fem_GBR_cosmo_gordon_lang = {
+    first_name = Wanda
+    last_name = Lang
+    historical = yes
+    culture = global_var:sct_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_pacifist
+    interest_group = ig_devout
+    birth_date = 1864.10.31
+    traits = {
+        meticulous
+        ambitious
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_cosmo_gordon_lang
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:sct_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_devout
+        }   
+        earliest_usage_date = 1925.1.1
+        latest_usage_date = 1936.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_cosmo_gordon_lang
+		}
+	}
+}
+
+GBR_thomas_burt = {
+    first_name = Thomas
+    last_name = Burt
+    historical = yes
+    culture = global_var:gbr_culture
+    female = no
+    religion = protestant
+    ideology = ideology_reformer
+    interest_group = ig_trade_unions
+    birth_date = 1837.11.12
+    traits = {
+        basic_political_operator
+        ambitious
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_thomas_burt
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_trade_unions
+        }   
+        earliest_usage_date = 1870.1.1
+        latest_usage_date = 1910.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_thomas_burt
+		}
+	}
+}
+fem_GBR_thomas_burt = {
+    first_name = Tamzen
+    last_name = Burt
+    historical = yes
+    culture = global_var:gbr_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_reformer
+    interest_group = ig_trade_unions
+    birth_date = 1837.11.12
+    traits = {
+        basic_political_operator
+        ambitious
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_thomas_burt
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_trade_unions
+        }   
+        earliest_usage_date = 1870.1.1
+        latest_usage_date = 1910.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_thomas_burt
+		}
+	}
+}
+
+GBR_john_maynard_keynes = {
+    first_name = John
+    last_name = Keynes
+    historical = yes
+    culture = global_var:gbr_culture
+    female = no
+    religion = atheist
+    ideology = ideology_protectionist
+    interest_group = ig_intelligentsia
+    birth_date = 1883.6.5
+    dna = dna_john_maynard_keynes
+    traits = {
+        wrathful
+        expensive_tastes
+        erudite
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_maynard_keynes
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1914.1.1
+        latest_usage_date = 1936.12.31
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_maynard_keynes
+		}
+	}
+}
+fem_GBR_john_maynard_keynes = {
+    first_name = Jane
+    last_name = Keynes
+    historical = yes
+    culture = global_var:gbr_culture
+    female = yes
+    religion = atheist
+    ideology = ideology_protectionist
+    interest_group = ig_intelligentsia
+    birth_date = 1883.6.5
+    dna = dna_john_maynard_keynes
+    traits = {
+        wrathful
+        expensive_tastes
+        erudite
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_maynard_keynes
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1914.1.1
+        latest_usage_date = 1936.12.31
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_maynard_keynes
+		}
+	}
+}
+
+GBR_david_lloyd_george = {
+    first_name = David
+    last_name = Lloyd_George
+    historical = yes
+    culture = global_var:wls_culture
+    female = no
+    religion = protestant
+    ideology = ideology_corporatist_leader
+    interest_group = ig_intelligentsia
+    birth_date = 1863.1.17
+    dna = dna_david_lloyd_george
+    traits = {
+        inspirational_orator
+        experienced_political_operator
+        direct
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_david_lloyd_george
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:wls_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1900.1.1
+        latest_usage_date = 1930.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_david_lloyd_george
+		}
+	}
+}
+fem_GBR_david_lloyd_george = {
+    first_name = Margaret
+    last_name = Lloyd_George
+    historical = yes
+    culture = global_var:wls_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_corporatist_leader
+    interest_group = ig_intelligentsia
+    birth_date = 1863.1.17
+    dna = dna_david_lloyd_george
+    traits = {
+        inspirational_orator
+        experienced_political_operator
+        direct
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_david_lloyd_george
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:wls_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+        earliest_usage_date = 1900.1.1
+        latest_usage_date = 1930.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_david_lloyd_george
+		}
+	}
+}
+
+GBR_arthur_balfour = {
+    first_name = Arthur
+    last_name = Balfour
+    historical = yes
+    culture = global_var:sct_culture
+    female = no
+    religion = protestant
+    ideology = ideology_traditionalist
+    interest_group = ig_rural_folk
+    birth_date = 1848.7.25
+    dna = dna_arthur_balfour
+    traits = {
+        charismatic
+        arrogant
+        bigoted
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_arthur_balfour
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:sct_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_rural_folk
+        }   
+        earliest_usage_date = 1885.1.1
+        latest_usage_date = 1925.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_arthur_balfour
+		}
+	}
+}
+fem_GBR_arthur_balfour = {
+    first_name = Morgana
+    last_name = Balfour
+    historical = yes
+    culture = global_var:sct_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_traditionalist
+    interest_group = ig_rural_folk
+    birth_date = 1848.7.25
+    dna = dna_arthur_balfour
+    traits = {
+        charismatic
+        arrogant
+        bigoted
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_arthur_balfour
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:sct_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_rural_folk
+        }   
+        earliest_usage_date = 1885.1.1
+        latest_usage_date = 1925.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_arthur_balfour
+		}
+	}
+}
+
+GBR_george_barnes = {
+    first_name = George
+    last_name = Barnes
+    historical = yes
+    culture = global_var:gbr_culture
+    female = no
+    religion = protestant
+    ideology = ideology_social_democrat
+    interest_group = ig_trade_unions
+    birth_date = 1859.1.2
+    traits = {
+        basic_political_operator
+        reserved
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_george_barnes
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_trade_unions
+        }   
+        earliest_usage_date = 1895.1.1
+        latest_usage_date = 1920.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_george_barnes
+		}
+	}
+}
+fem_GBR_george_barnes = {
+    first_name = Georgia
+    last_name = Barnes
+    historical = yes
+    culture = global_var:gbr_culture
+    female = yes
+    religion = protestant
+    ideology = ideology_social_democrat
+    interest_group = ig_trade_unions
+    birth_date = 1859.1.2
+    traits = {
+        basic_political_operator
+        reserved
+    }   
+    interest_group_leader_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_george_barnes
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_trade_unions
+        }   
+        earliest_usage_date = 1895.1.1
+        latest_usage_date = 1920.1.1
+        chance = 50
+    }
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_george_barnes
+		}
+	}
+}
+
+### Generals
+
+# Generated Generals
+
+gbr_general_smith = {
+	first_name = Sir_Henry
+	last_name = Wakelyn_Smith
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+    is_general = yes
+	birth_date = 1787.6.28
+	traits = {
+		experienced_colonial_administrator
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_wakelyn_smith
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_wakelyn_smith
+		}
+	}
+}
+fem_gbr_general_smith = {
+	first_name = Madam_Harriet
+	last_name = Wakelyn_Smith
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+    is_general = yes
+	birth_date = 1787.6.28
+	traits = {
+		experienced_colonial_administrator
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_wakelyn_smith
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_wakelyn_smith
+		}
+	}
+}
+
+gbr_general_kitchener = {
+	first_name = Herbert
+	last_name = Kitchener
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	religion = protestant
+	ideology = ideology_jingoist_leader
+	commander_rank = default
+	interest_group = ig_armed_forces
+    is_general = yes
+	birth_date = 1850.6.24
+	traits = {
+		surveyor
+		pillager
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_kitchener
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1883.1.4
+		latest_usage_date = 1920.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_kitchener
+		}
+	}
+}
+fem_gbr_general_kitchener = {
+	first_name = Bertina
+	last_name = Kitchener
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_jingoist_leader
+	commander_rank = default
+	interest_group = ig_armed_forces
+    is_general = yes
+	birth_date = 1850.6.24
+	traits = {
+		surveyor
+		pillager
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_kitchener
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1883.1.4
+		latest_usage_date = 1920.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_kitchener
+		}
+	}
+}
+
+gbr_general_gordon = {
+	first_name = Charles_George
+	last_name = Gordon
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	religion = protestant
+	ideology = ideology_abolitionist # actively fought against slave traders in the Sudan
+	commander_rank = default
+	interest_group = ig_armed_forces
+    is_general = yes
+	birth_date = 1833.1.28
+	traits = {
+		explorer
+		charismatic
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_gordon
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1859.1.4
+		latest_usage_date = 1910.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_gordon
+		}
+	}
+}
+fem_gbr_general_gordon = {
+	first_name = Charleigh_Gina
+	last_name = Gordon
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_abolitionist # actively fought against slave traders in the Sudan
+	commander_rank = default
+	interest_group = ig_armed_forces
+    is_general = yes
+	birth_date = 1833.1.28
+	traits = {
+		explorer
+		charismatic
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_gordon
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1859.1.4
+		latest_usage_date = 1910.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_gordon
+		}
+	}
+}
+
+gbr_general_french = {
+	first_name = John
+	last_name = French
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	religion = protestant
+	ideology = ideology_market_liberal
+	commander_rank = default
+	interest_group = ig_armed_forces
+    is_general = yes
+	birth_date = 1852.9.28
+	traits = {
+		resupply_commander
+		hedonist
+		basic_defensive_strategist
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_french
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1874.1.1
+		latest_usage_date = 1910.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_french
+		}
+	}
+}
+fem_gbr_general_french = {
+	first_name = Jane
+	last_name = French
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_market_liberal
+	commander_rank = default
+	interest_group = ig_armed_forces
+    is_general = yes
+	birth_date = 1852.9.28
+	traits = {
+		resupply_commander
+		hedonist
+		basic_defensive_strategist
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_french
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1874.1.1
+		latest_usage_date = 1910.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_french
+		}
+	}
+}
+
+gbr_general_baden_powell = {
+	first_name = Robert
+	last_name = Baden_Powell
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	religion = protestant
+	ideology = ideology_reformer
+	commander_rank = default
+	interest_group = ig_armed_forces
+    is_general = yes
+	birth_date = 1857.2.22
+	traits = {
+		surveyor
+		innovative
+		stalwart_defender
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_baden_powell
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1890.1.4
+		latest_usage_date = 1920.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_baden_powell
+		}
+	}
+}
+fem_gbr_general_baden_powell = {
+	first_name = Robynne
+	last_name = Baden_Powell
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_reformer
+	commander_rank = default
+	interest_group = ig_armed_forces
+    is_general = yes
+	birth_date = 1857.2.22
+	traits = {
+		surveyor
+		innovative
+		stalwart_defender
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_baden_powell
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1890.1.4
+		latest_usage_date = 1920.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_baden_powell
+		}
+	}
+}
+
+gbr_general_prince_george = {
+	first_name = Prince_George
+	last_name = of_Hanover
+	historical = yes
+	culture = global_var:nor_ger_culture
+	female = no
+	religion = protestant
+	ideology = ideology_traditionalist
+	commander_rank = default
+	interest_group = ig_armed_forces
+    is_general = yes
+	birth_date = 1819.4.26
+	traits = {
+		arrogant
+		cautious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_prince_george
+				}
+			}
+			uses_gbr_characters = yes
+			ruler = { has_culture = global_var:nor_ger_culture }
+			has_law = law_type:law_monarchy
+		}
+		role = general
+		earliest_usage_date = 1854.1.4
+		latest_usage_date = 1904.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_prince_george
+		}
+	}
+}
+fem_gbr_general_prince_george = {
+	first_name = Princess_Gina
+	last_name = of_Hanover
+	historical = yes
+	culture = global_var:nor_ger_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_traditionalist
+	commander_rank = default
+	interest_group = ig_armed_forces
+    is_general = yes
+	birth_date = 1819.4.26
+	traits = {
+		arrogant
+		cautious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_prince_george
+				}
+			}
+			uses_gbr_characters = yes
+			ruler = { has_culture = global_var:nor_ger_culture }
+			has_law = law_type:law_monarchy
+		}
+		role = general
+		earliest_usage_date = 1854.1.4
+		latest_usage_date = 1904.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_prince_george
+		}
+	}
+}
+GBR_fitzroy_somerset = {
+	first_name = FitzRoy
+	last_name = Somerset
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	is_general = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_landowners
+	ideology = ideology_jingoist_leader
+	birth_date = 1788.9.30
+	traits = {
+        experienced_defensive_strategist
+        scarred
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_fitzroy_somerset
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+		role = general
+		earliest_usage_date = 1838.1.1
+		latest_usage_date = 1855.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_fitzroy_somerset
+		}
+	}
+}
+fem_GBR_fitzroy_somerset = {
+	first_name = FillReyne
+	last_name = Somerset
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	is_general = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_landowners
+	ideology = ideology_jingoist_leader
+	birth_date = 1788.9.30
+	traits = {
+        experienced_defensive_strategist
+        scarred
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_fitzroy_somerset
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+		role = general
+		earliest_usage_date = 1838.1.1
+		latest_usage_date = 1855.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_fitzroy_somerset
+		}
+	}
+}
+
+GBR_frederick_roberts = {
+	first_name = Frederick
+	last_name = Roberts
+	historical = yes
+	culture = global_var:ire_culture
+	female = no
+	is_general = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	birth_date = 1832.9.30
+	traits = {
+        experienced_artillery_commander
+        cruel
+        brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_frederick_roberts
+				}
+			}
+			trigger_if = {
+				limit = {
+					NOT = {
+						any_country = { uses_ire_characters = yes }
+					}
+				}
+				uses_gbr_characters = yes
+				any_scope_state = {
+					state_region = { is_homeland = global_var:ire_culture }
+				}
+			}
+			trigger_else = { uses_ire_characters = yes }
+			has_dlc_feature = ep1_content
+		}
+		role = general
+		earliest_usage_date = 1878.1.1
+		latest_usage_date = 1892.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_frederick_roberts
+		}
+	}
+}
+fem_GBR_frederick_roberts = {
+	first_name = Frederica
+	last_name = Roberts
+	historical = yes
+	culture = global_var:ire_culture
+	female = yes
+	is_general = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	birth_date = 1832.9.30
+	traits = {
+        experienced_artillery_commander
+        cruel
+        brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_frederick_roberts
+				}
+			}
+			trigger_if = {
+				limit = {
+					NOT = {
+						any_country = { uses_ire_characters = yes }
+					}
+				}
+				uses_gbr_characters = yes
+				any_scope_state = {
+					state_region = { is_homeland = global_var:ire_culture }
+				}
+			}
+			trigger_else = { uses_ire_characters = yes }
+			has_dlc_feature = ep1_content
+		}
+		role = general
+		earliest_usage_date = 1878.1.1
+		latest_usage_date = 1892.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_frederick_roberts
+		}
+	}
+}
+
+GBR_garnet_wolseley = {
+	first_name = Garnet
+	last_name = Wolseley
+	historical = yes
+	culture = global_var:ire_culture
+	female = no
+	is_general = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_ethno_nationalist
+	birth_date = 1833.6.4
+	traits = {
+        innovative
+        bigoted
+        resupply_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_garnet_wolseley
+				}
+			}
+			trigger_if = {
+				limit = {
+					NOT = {
+						any_country = { uses_ire_characters = yes }
+					}
+				}
+				uses_gbr_characters = yes
+				any_scope_state = {
+					state_region = { is_homeland = global_var:ire_culture }
+				}
+			}
+			trigger_else = { uses_ire_characters = yes }
+			has_dlc_feature = ep1_content
+		}
+		role = general
+		earliest_usage_date = 1875.1.1
+		latest_usage_date = 1901.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_garnet_wolseley
+		}
+	}
+}
+fem_GBR_garnet_wolseley = {
+	first_name = Garnet
+	last_name = Wolseley
+	historical = yes
+	culture = global_var:ire_culture
+	female = yes
+	is_general = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_ethno_nationalist
+	birth_date = 1833.6.4
+	traits = {
+        innovative
+        bigoted
+        resupply_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_garnet_wolseley
+				}
+			}
+			trigger_if = {
+				limit = {
+					NOT = {
+						any_country = { uses_ire_characters = yes }
+					}
+				}
+				uses_gbr_characters = yes
+				any_scope_state = {
+					state_region = { is_homeland = global_var:ire_culture }
+				}
+			}
+			trigger_else = { uses_ire_characters = yes }
+			has_dlc_feature = ep1_content
+		}
+		role = general
+		earliest_usage_date = 1875.1.1
+		latest_usage_date = 1901.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_garnet_wolseley
+		}
+	}
+}
+
+GBR_william_bellairs = {
+	first_name = William
+	last_name = Bellairs
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	is_general = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1828.8.28
+	traits = {
+        experienced_colonial_administrator
+        resupply_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_william_bellairs
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+		role = general
+		earliest_usage_date = 1880.1.1
+		latest_usage_date = 1890.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_william_bellairs
+		}
+	}
+}
+fem_GBR_william_bellairs = {
+	first_name = Willa
+	last_name = Bellairs
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	is_general = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1828.8.28
+	traits = {
+        experienced_colonial_administrator
+        resupply_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_william_bellairs
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+		role = general
+		earliest_usage_date = 1880.1.1
+		latest_usage_date = 1890.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_william_bellairs
+		}
+	}
+}
+
+GBR_douglas_haig = {
+	first_name = Douglas
+	last_name = Haig
+	historical = yes
+	culture = global_var:sct_culture
+	female = no
+	is_general = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1861.6.19
+    dna = dna_douglas_haig
+	traits = {
+        meticulous
+        ambitious
+        experienced_offensive_planner
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_douglas_haig
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:sct_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+		}
+		role = general
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_douglas_haig
+		}
+	}
+}
+fem_GBR_douglas_haig = {
+	first_name = Douglas
+	last_name = Haig
+	historical = yes
+	culture = global_var:sct_culture
+	female = yes
+	is_general = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1861.6.19
+    dna = dna_douglas_haig
+	traits = {
+        meticulous
+        ambitious
+        experienced_offensive_planner
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_douglas_haig
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:sct_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+		}
+		role = general
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_douglas_haig
+		}
+	}
+}
+
+### Admirals
+        
+# Generated Admirals
+
+gbr_admiral_beatty = {
+	first_name = David
+	last_name = Beatty
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+    dna = dna_david_beatty
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1871.1.17
+	traits = {
+		experienced_naval_commander
+		reckless
+		charismatic
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_beatty
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1899.2.5
+		latest_usage_date = 1936.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_beatty
+		}
+	}
+}
+fem_gbr_admiral_beatty = {
+	first_name = Bethsabee
+	last_name = Beatty
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+    dna = dna_david_beatty
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1871.1.17
+	traits = {
+		experienced_naval_commander
+		reckless
+		charismatic
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_beatty
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1899.2.5
+		latest_usage_date = 1936.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_beatty
+		}
+	}
+}
+
+gbr_admiral_fisher = {
+	first_name = John
+	last_name = Fisher
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	religion = protestant
+    dna = dna_john_fisher
+	ideology = ideology_reformer
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1841.1.25
+	traits = {
+		experienced_naval_commander
+		innovative
+		dockyard_master
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_fisher
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1869.2.5
+		latest_usage_date = 1925.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_fisher
+		}
+	}
+}
+fem_gbr_admiral_fisher = {
+	first_name = Jane
+	last_name = Fisher
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	religion = protestant
+    dna = dna_john_fisher
+	ideology = ideology_reformer
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1841.1.25
+	traits = {
+		experienced_naval_commander
+		innovative
+		dockyard_master
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_fisher
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1869.2.5
+		latest_usage_date = 1925.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_fisher
+		}
+	}
+}
+
+gbr_admiral_mountbatten = { # Louis Alexander Mountbatten
+	first_name = Prince_Louis
+	last_name = of_Battenberg
+	historical = yes
+	culture = global_var:nor_ger_culture
+	female = no
+	religion = protestant
+	ideology = ideology_royalist
+	commander_rank = default
+    dna = dna_prince_louis_of_battenberg
+	interest_group = ig_landowners
+	birth_date = 1854.1.25
+	traits = {
+		experienced_naval_commander
+		tactful
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mountbatten
+				}
+			}
+			uses_gbr_characters = yes
+			ruler = { has_culture = global_var:nor_ger_culture }
+			has_law = law_type:law_monarchy
+		}
+		role = admiral
+		earliest_usage_date = 1885.2.5
+		latest_usage_date = 1924.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_mountbatten
+		}
+	}
+}
+fem_gbr_admiral_mountbatten = { # Louis Alexander Mountbatten
+	first_name = Princess_Luise
+	last_name = of_Battenberg
+	historical = yes
+	culture = global_var:nor_ger_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_royalist
+	commander_rank = default
+    dna = dna_prince_louis_of_battenberg
+	interest_group = ig_landowners
+	birth_date = 1854.1.25
+	traits = {
+		experienced_naval_commander
+		tactful
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_mountbatten
+				}
+			}
+			uses_gbr_characters = yes
+			ruler = { has_culture = global_var:nor_ger_culture }
+			has_law = law_type:law_monarchy
+		}
+		role = admiral
+		earliest_usage_date = 1885.2.5
+		latest_usage_date = 1924.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_mountbatten
+		}
+	}
+}
+
+gbr_admiral_milne = {
+	first_name = Sir_Alexander
+	last_name = Milne
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	religion = protestant
+	ideology = ideology_abolitionist # famous for hunting down slavers on the high seas
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1806.11.10
+	traits = {
+		experienced_naval_commander
+		persistent
+		tactful
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_milne
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1839.1.30
+		latest_usage_date = 1876.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_milne
+		}
+	}
+}
+fem_gbr_admiral_milne = {
+	first_name = Madam_Alexandra
+	last_name = Milne
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	religion = protestant
+	ideology = ideology_abolitionist # famous for hunting down slavers on the high seas
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1806.11.10
+	traits = {
+		experienced_naval_commander
+		persistent
+		tactful
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_milne
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1839.1.30
+		latest_usage_date = 1876.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_milne
+		}
+	}
+}
+
+gbr_admiral_seymour = {
+	first_name = Edward
+	last_name = Seymour
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+    dna = dna_edward_seymour
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1840.4.30
+	traits = {
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_seymour
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1873.3.13
+		latest_usage_date = 1910.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_seymour
+		}
+	}
+}
+fem_gbr_admiral_seymour = {
+	first_name = Edwardine
+	last_name = Seymour
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+    dna = dna_edward_seymour
+	religion = protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1840.4.30
+	traits = {
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_seymour
+				}
+			}
+			uses_gbr_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1873.3.13
+		latest_usage_date = 1910.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_seymour
+		}
+	}
+}
+
+GBR_algernon_percy = {
+	first_name = Algernon
+	last_name = Percy
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	is_admiral = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1792.2.12
+	traits = {
+        explorer
+        basic_naval_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_algernon_percy
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+		role = admiral
+		earliest_usage_date = 1845.1.1
+		latest_usage_date = 1865.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_algernon_percy
+		}
+	}
+}
+
+fem_GBR_algernon_percy = {
+	first_name = Alice
+	last_name = Percy
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	is_admiral = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1792.2.12
+	traits = {
+        explorer
+        basic_naval_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_algernon_percy
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+		role = admiral
+		earliest_usage_date = 1845.1.1
+		latest_usage_date = 1865.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_algernon_percy
+		}
+	}
+}
+
+GBR_provo_wallis = {
+	first_name = Provo
+	last_name = Wallis
+	historical = yes
+	culture = cu:anglo_canadian
+	female = no
+	is_admiral = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1791.4.12
+    dna = dna_provo_wallis
+	traits = {
+        persistent
+        cautious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_provo_wallis
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+		role = admiral
+		earliest_usage_date = 1845.1.1
+		latest_usage_date = 1875.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_provo_wallis
+		}
+	}
+}
+
+fem_GBR_provo_wallis = {
+	first_name = Shannon
+	last_name = Wallis
+	historical = yes
+	culture = cu:anglo_canadian
+	female = yes
+	is_admiral = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1791.4.12
+    dna = dna_provo_wallis
+	traits = {
+        persistent
+        cautious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_provo_wallis
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+		role = admiral
+		earliest_usage_date = 1845.1.1
+		latest_usage_date = 1875.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_provo_wallis
+		}
+	}
+}
+
+GBR_john_edmund_commerell = {
+	first_name = John
+	last_name = Commerell
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	is_admiral = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1829.1.13
+	traits = {
+        experienced_naval_commander
+        brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_edmund_commerell
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+		role = admiral
+		earliest_usage_date = 1870.1.1
+		latest_usage_date = 1890.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_edmund_commerell
+		}
+	}
+}
+
+fem_GBR_john_edmund_commerell = {
+	first_name = Jane
+	last_name = Commerell
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	is_admiral = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1829.1.13
+	traits = {
+        experienced_naval_commander
+        brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_edmund_commerell
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+		role = admiral
+		earliest_usage_date = 1870.1.1
+		latest_usage_date = 1890.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_edmund_commerell
+		}
+	}
+}
+
+GBR_james_elphinstone_erskine = {
+	first_name = James 
+	last_name = Erskine
+	historical = yes
+	culture = global_var:sct_culture
+	female = no
+	is_admiral = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	birth_date = 1838.12.2
+	traits = {
+        basic_colonial_administrator
+        explorer
+        ambitious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_james_elphinstone_erskine
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:sct_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+		}
+		role = admiral
+		earliest_usage_date = 1880.1.1
+		latest_usage_date = 1905.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_james_elphinstone_erskine
+		}
+	}
+}
+
+fem_GBR_james_elphinstone_erskine = {
+	first_name = Lily
+	last_name = Erskine
+	historical = yes
+	culture = global_var:sct_culture
+	female = yes
+	is_admiral = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	birth_date = 1838.12.2
+	traits = {
+        basic_colonial_administrator
+        explorer
+        ambitious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_james_elphinstone_erskine
+				}
+			}
+			trigger_if = {
+				limit = { uses_gbr_characters = no }
+				country_is_in_europe = yes
+				country_has_primary_culture = global_var:sct_culture
+			}
+			trigger_else = { uses_gbr_characters = yes }
+			has_dlc_feature = ep1_content
+		}
+		role = admiral
+		earliest_usage_date = 1880.1.1
+		latest_usage_date = 1905.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_james_elphinstone_erskine
+		}
+	}
+}
+
+GBR_charles_ogle = {
+	first_name = Charles
+	last_name = Ogle
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	is_admiral = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1775.5.24
+	traits = {
+        brave
+        experienced_convoy_raider
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_charles_ogle
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+		role = admiral
+		earliest_usage_date = 1840.1.1
+		latest_usage_date = 1858.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_charles_ogle
+		}
+	}
+}
+
+fem_GBR_charles_ogle = {
+	first_name = Charleigh
+	last_name = Ogle
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	is_admiral = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1775.5.24
+	traits = {
+        brave
+        experienced_convoy_raider
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_charles_ogle
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+		role = admiral
+		earliest_usage_date = 1840.1.1
+		latest_usage_date = 1858.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_charles_ogle
+		}
+	}
+}
+
+GBR_augustus_leopold_kuper = {
+	first_name = Augustus
+	last_name = Kuper
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	is_admiral = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	birth_date = 1809.8.16
+	traits = {
+        experienced_naval_commander
+        direct
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_augustus_leopold_kuper
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+		role = admiral
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1875.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_augustus_leopold_kuper
+		}
+	}
+}
+
+fem_GBR_augustus_leopold_kuper = {
+	first_name = Gussie
+	last_name = Kuper
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	is_admiral = yes
+	religion = protestant
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	birth_date = 1809.8.16
+	traits = {
+        experienced_naval_commander
+        direct
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_augustus_leopold_kuper
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+		role = admiral
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1875.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_augustus_leopold_kuper
+		}
+	}
+}
+
+### Agitators
+
+# Generated Agitators
+
+agitator_john_stuart_mill = {
+	first_name = John
+	last_name = Mill
+	historical = yes
+	culture = global_var:gbr_culture
+	religion = rel:protestant
+	female = no
+	interest_group = ig_intelligentsia
+	ideology = ideology_reformer
+	birth_date = 1806.5.20
+	dna = dna_john_stuart_mill
+	traits = {
+		erudite
+		ambitious
+		persistent
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_stuart_mill
+				}
+			}
+			uses_eng_gbr_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}   
+		earliest_usage_date = 1843.1.1 # Publication year of "A System of Logic"
+		latest_usage_date = 1865.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_stuart_mill
+		}
+	}
+}
+
+fem_agitator_john_stuart_mill = {
+	first_name = Jane
+	last_name = Mill
+	historical = yes
+	culture = global_var:gbr_culture
+	religion = rel:protestant
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_reformer
+	birth_date = 1806.5.20
+	dna = dna_john_stuart_mill
+	traits = {
+		erudite
+		ambitious
+		persistent
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_stuart_mill
+				}
+			}
+			uses_eng_gbr_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}   
+		earliest_usage_date = 1843.1.1 # Publication year of "A System of Logic"
+		latest_usage_date = 1865.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_stuart_mill
+		}
+	}
+}
+
+agitator_william_smith_o_brien = {
+	first_name = William
+	last_name = Smith_O_Brien
+	historical = yes
+	culture = global_var:ire_culture
+	religion = rel:protestant
+	female = no
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_radical
+	birth_date = 1803.10.17
+	traits = {
+		inspirational_orator
+		direct
+		persistent
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_william_smith_o_brien
+				}
+			}
+			trigger_if = {
+				limit = {
+					NOT = {
+						any_country = { uses_ire_characters = yes }
+					}
+				}
+				uses_gbr_characters = yes
+				any_scope_state = {
+					state_region = { is_homeland = global_var:ire_culture }
+				}
+			}
+			trigger_else = { uses_ire_characters = yes }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_rural_folk
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1856.1.1
+		chance = 25
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_william_smith_o_brien
+		}
+	}
+}
+
+fem_agitator_william_smith_o_brien = {
+	first_name = Elma
+	last_name = Smith_O_Brien
+	historical = yes
+	culture = global_var:ire_culture
+	religion = rel:protestant
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_radical
+	birth_date = 1803.10.17
+	traits = {
+		inspirational_orator
+		direct
+		persistent
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_william_smith_o_brien
+				}
+			}
+			trigger_if = {
+				limit = {
+					NOT = {
+						any_country = { uses_ire_characters = yes }
+					}
+				}
+				uses_gbr_characters = yes
+				any_scope_state = {
+					state_region = { is_homeland = global_var:ire_culture }
+				}
+			}
+			trigger_else = { uses_ire_characters = yes }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_rural_folk
+			}
+		}   
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1856.1.1
+		chance = 25
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_william_smith_o_brien
+		}
+	}
+}
+
+gbr_pankhurst_character_template = {
+	first_name = Emmeline
+	last_name = Pankhurst
+	historical = yes
+	birth_date = 1858.7.15
+	culture = global_var:gbr_culture
+	is_agitator = yes
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_feminist
+	dna = dna_emmeline_pankhurst
+	traits = {
+		persistent
+		firebrand
+	}  
+}
+
+masc_gbr_pankhurst_character_template = {
+	first_name = Emery
+	last_name = Pankhurst
+	historical = yes
+	birth_date = 1858.7.15
+	culture = global_var:gbr_culture
+	is_agitator = yes
+	female = no
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_feminist
+	dna = dna_emmeline_pankhurst
+	traits = {
+		persistent
+		firebrand
+	}  
+}
+
+gbr_charles_dickens_character_template = {
+	first_name = Charles
+	last_name = Dickens
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	is_agitator = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_reformer
+	birth_date = 1812.2.7
+	dna = dna_dickens
+	traits = {
+		cautious
+		literary
+		persistent
+	}
+}
+
+fem_gbr_charles_dickens_character_template = {
+	first_name = Charlotte
+	last_name = Dickens
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	is_agitator = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_reformer
+	birth_date = 1812.2.7
+	dna = dna_dickens
+	traits = {
+		cautious
+		literary
+		persistent
+	}
+}
+
+GBR_john_bedford_leno = {
+	first_name = John 
+	last_name = Leno
+	historical = yes
+	culture = global_var:gbr_culture
+	religion = protestant
+	female = no
+	interest_group = ig_trade_unions
+	ideology = ideology_radical
+    is_agitator = yes
+	birth_date = 1826.6.29
+	traits = {
+        brave
+        charismatic
+        wrathful
+	}
+	agitator_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_bedford_leno
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_trade_unions
+        }   
+		earliest_usage_date = 1848.1.1
+		latest_usage_date = 1880.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_bedford_leno
+		}
+	}
+}
+
+fem_GBR_john_bedford_leno = {
+	first_name = Jane
+	last_name = Leno
+	historical = yes
+	culture = global_var:gbr_culture
+	religion = protestant
+	female = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_radical
+    is_agitator = yes
+	birth_date = 1826.6.29
+	traits = {
+        brave
+        charismatic
+        wrathful
+	}
+	agitator_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_bedford_leno
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_trade_unions
+        }   
+		earliest_usage_date = 1848.1.1
+		latest_usage_date = 1880.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_bedford_leno
+		}
+	}
+}
+
+GBR_arthur_james_cook = {
+	first_name = Arthur
+	last_name = Cook
+	historical = yes
+	culture = global_var:gbr_culture
+	religion = protestant
+	female = no
+	interest_group = ig_trade_unions
+	ideology = ideology_communist
+    is_agitator = yes
+	birth_date = 1883.11.22
+	traits = {
+        brave
+        innovative
+        inspirational_orator
+	}
+	agitator_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_arthur_james_cook
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_trade_unions
+        }   
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1931.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_arthur_james_cook
+		}
+	}
+}
+
+fem_GBR_arthur_james_cook = {
+	first_name = Morgana
+	last_name = Cook
+	historical = yes
+	culture = global_var:gbr_culture
+	religion = protestant
+	female = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_communist
+    is_agitator = yes
+	birth_date = 1883.11.22
+	traits = {
+        brave
+        innovative
+        inspirational_orator
+	}
+	agitator_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_arthur_james_cook
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_trade_unions
+        }   
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1931.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_arthur_james_cook
+		}
+	}
+}
+
+GBR_albert_inkpin = {
+	first_name = Albert
+	last_name = Inkpin
+	historical = yes
+	culture = global_var:gbr_culture
+	religion = atheist
+	female = no
+	interest_group = ig_trade_unions
+	ideology = ideology_vanguardist
+    is_agitator = yes
+	birth_date = 1884.6.16
+	traits = {
+        inspirational_orator
+        basic_political_operator
+        meticulous
+	}
+	agitator_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_albert_inkpin
+				}
+			}
+			uses_gbr_characters = yes
+            has_technology_researched = political_agitation
+			has_dlc_feature = ep1_content
+		}
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_trade_unions
+        }   
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1925.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_albert_inkpin
+		}
+	}
+}
+
+fem_GBR_albert_inkpin = {
+	first_name = Bertina
+	last_name = Inkpin
+	historical = yes
+	culture = global_var:gbr_culture
+	religion = atheist
+	female = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_vanguardist
+    is_agitator = yes
+	birth_date = 1884.6.16
+	traits = {
+        inspirational_orator
+        basic_political_operator
+        meticulous
+	}
+	agitator_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_albert_inkpin
+				}
+			}
+			uses_gbr_characters = yes
+            has_technology_researched = political_agitation
+			has_dlc_feature = ep1_content
+		}
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_trade_unions
+        }   
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1925.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_albert_inkpin
+		}
+	}
+}
+
+GBR_friedrich_engels = {
+	first_name = Friedrich
+	last_name = Engels
+	historical = yes
+	culture = global_var:nor_ger_culture
+	religion = atheist
+	female = no
+	interest_group = ig_intelligentsia
+	ideology = ideology_communist
+    is_agitator = yes
+	birth_date = 1820.11.28
+    dna = dna_friedrich_engels
+	traits = {
+        literary
+        hedonist
+        charismatic
+	}
+	agitator_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_friedrich_engels
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+            has_technology_researched = socialism
+		}
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1890.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_friedrich_engels
+		}
+	}
+}
+
+fem_GBR_friedrich_engels = {
+	first_name = Fritzi
+	last_name = Engels
+	historical = yes
+	culture = global_var:nor_ger_culture
+	religion = atheist
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_communist
+    is_agitator = yes
+	birth_date = 1820.11.28
+    dna = dna_friedrich_engels
+	traits = {
+        literary
+        hedonist
+        charismatic
+	}
+	agitator_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_friedrich_engels
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+            has_technology_researched = socialism
+		}
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1890.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_friedrich_engels
+		}
+	}
+}
+
+GBR_rotha_lintorn-orman = {
+	first_name = Rotha
+	last_name = Lintorn-Orman
+	historical = yes
+	culture = global_var:gbr_culture
+	religion = protestant
+	female = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_fascist
+    is_agitator = yes
+	birth_date = 1895.2.7
+    dna = dna_rotha_lintorn_orman
+	traits = {
+        hedonist
+        alcoholic
+        demagogue
+	}
+	agitator_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_rotha_lintorn-orman
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+            has_technology_researched = political_agitation
+		}
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_petty_bourgeoisie
+        }   
+		earliest_usage_date = 1923.1.1
+		latest_usage_date = 1933.12.30
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_rotha_lintorn-orman
+		}
+	}
+}
+
+masc_GBR_rotha_lintorn-orman = {
+	first_name = Highgrove
+	last_name = Lintorn-Orman
+	historical = yes
+	culture = global_var:gbr_culture
+	religion = protestant
+	female = no
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_fascist
+    is_agitator = yes
+	birth_date = 1895.2.7
+    dna = dna_rotha_lintorn_orman
+	traits = {
+        hedonist
+        alcoholic
+        demagogue
+	}
+	agitator_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_rotha_lintorn-orman
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+            has_technology_researched = political_agitation
+		}
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_petty_bourgeoisie
+        }   
+		earliest_usage_date = 1923.1.1
+		latest_usage_date = 1933.12.30
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_rotha_lintorn-orman
+		}
+	}
+}
+
+GBR_charles_prestwich_scott = {
+	first_name = Charles
+	last_name = Scott
+	historical = yes
+	culture = global_var:gbr_culture
+	religion = protestant
+	female = no
+	interest_group = ig_intelligentsia
+	ideology = ideology_reformer
+    is_agitator = yes
+	birth_date = 1846.10.26
+	traits = {
+        literary
+        meticulous
+        basic_diplomat
+	}
+	agitator_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_charles_prestwich_scott
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+		earliest_usage_date = 1872.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_charles_prestwich_scott
+		}
+	}
+}
+
+fem_GBR_charles_prestwich_scott = {
+	first_name = Charleigh
+	last_name = Scott
+	historical = yes
+	culture = global_var:gbr_culture
+	religion = protestant
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_reformer
+    is_agitator = yes
+	birth_date = 1846.10.26
+	traits = {
+        literary
+        meticulous
+        basic_diplomat
+	}
+	agitator_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_charles_prestwich_scott
+				}
+			}
+			uses_gbr_characters = yes
+			has_dlc_feature = ep1_content
+		}
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_intelligentsia
+        }   
+		earliest_usage_date = 1872.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_charles_prestwich_scott
+		}
+	}
+}
+
+GBR_andrew_scott_waugh = {
+    first_name = Andrew_Scott
+    last_name = Waugh
+    is_general = yes
+    interest_group = ig_armed_forces
+    culture = global_var:gbr_culture
+    ig_leader = no
+    historical = yes
+    noble = no
+    birth_date = 1810.2.3
+    traits = {
+        surveyor
+        cautious
+        meticulous
+    }
+    on_created = {
+        set_global_variable = andrew_scott_waugh_is_real_and_my_friend
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_andrew_scott_waugh
+		}
+    }
+}
+
+fem_GBR_andrew_scott_waugh = {
+    first_name = Andrea_Scott
+    last_name = Waugh
+    is_general = yes
+	female = yes
+    interest_group = ig_armed_forces
+    culture = global_var:gbr_culture
+    ig_leader = no
+    historical = yes
+    noble = no
+    birth_date = 1810.2.3
+    traits = {
+        surveyor
+        cautious
+        meticulous
+    }
+    on_created = {
+        set_global_variable = andrew_scott_waugh_is_real_and_my_friend
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_andrew_scott_waugh
+		}
+    }
+}
+
+GBR_charles_granville_bruce = {
+    first_name = Charles_Granville
+    last_name = Bruce
+    is_general = yes
+    interest_group = ig_industrialists # Coal-mining family, son of the 1st Baron Aberdare
+    culture = global_var:wls_culture
+    ig_leader = no
+    historical = yes
+    birth_date = 1866.4.7
+    traits = {
+        surveyor
+        brave
+        imposing
+    }
+    on_created = {
+        set_global_variable = charles_granville_bruce_is_real_and_my_friend
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_charles_granville_bruce
+		}
+    }
+}
+
+fem_GBR_charles_granville_bruce = {
+    first_name = Charleigh_Granville
+    last_name = Bruce
+    is_general = yes
+	female = yes
+    interest_group = ig_industrialists # Coal-mining family, son of the 1st Baron Aberdare
+    culture = global_var:wls_culture
+    ig_leader = no
+    historical = yes
+    birth_date = 1866.4.7
+    traits = {
+        surveyor
+        brave
+        imposing
+    }
+    on_created = {
+        set_global_variable = charles_granville_bruce_is_real_and_my_friend
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_charles_granville_bruce
+		}
+    }
+}

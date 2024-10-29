@@ -621,7 +621,6 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 		{
 			// For subjects, set libertyDesire, reduced by 50 because Vic3 default is 50.
 			newAgreement.libertyDesire = country2->second->getSourceCountry()->getLibertyDesire() - 50;
-			Log(LogLevel::Debug) << newAgreement.first << " -> " << newAgreement.second << " typ: " << newAgreement.type << " ld: " << *newAgreement.libertyDesire;
 			// and record overlordship locally for further use.
 			country2->second->setOverlord(V3Tag1);
 		}

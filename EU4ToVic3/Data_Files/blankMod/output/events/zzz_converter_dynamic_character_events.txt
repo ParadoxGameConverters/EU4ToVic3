@@ -380,167 +380,183 @@ zzz_cc_dynamic_characters.1 = {
 				}
 			}
 		}
-		if = {
-			limit = {
-				exists = capital
-				capital = { region = sr:region_southern_africa }
-				any_primary_culture = { has_discrimination_trait = african_settler }
-			}
-			add_to_global_variable_list = {
-				name = global_kruger_countries
-				target = root
-			}
-		}
-		if = {
-			limit = {
-				country_is_in_north_america = yes
-				any_scope_state = { region = sr:region_new_england }
-				global_var:new_england_yankee_culture = {
-					any_scope_pop = {
-						owner = root
-						culture_accepted = yes
-					}
-				}
-			}
-			add_to_global_variable_list = {
-				name = global_new_england_yankee_countries
-				target = root
-			}
-		}
-		if = {
-			limit = {
-				country_is_in_north_america = yes
-				any_scope_state = { region = sr:region_the_midwest }
-				global_var:midwest_yankee_culture = {
-					any_scope_pop = {
-						owner = root
-						culture_accepted = yes
-					}
-				}
-			}
-			add_to_global_variable_list = {
-				name = global_midwest_yankee_countries
-				target = root
-			}
-		}
-		if = {
-			limit = {
-				country_is_in_north_america = yes
-				any_scope_state = { region = sr:region_dixie }
-				global_var:dixie_culture = {
-					any_scope_pop = {
-						owner = root
-						culture_accepted = yes
-					}
-				}
-			}
-			add_to_global_variable_list = {
-				name = global_dixie_countries
-				target = root
-			}
-		}
-		if = {
-			limit = {
-				country_is_in_north_america = yes
-				any_scope_state = { region = sr:region_dixie }
-				global_var:afro_amer_culture = {
-					any_scope_pop = {
-						owner = root
-						OR = {
-							is_pop_type = slaves
-							culture_accepted = yes
-						}
-					}
-				}
-			}
-			add_to_global_variable_list = {
-				name = global_afro_amer_countries
-				target = root
-			}
-		}
-		if = {
-			limit = {
-				country_is_in_north_america = yes
-				any_scope_state = { region = sr:region_mexico }
-				global_var:mexico_culture = {
-					any_scope_pop = {
-						owner = root
-						culture_accepted = yes
-					}
-				}
-			}
-			add_to_global_variable_list = {
-				name = global_mexico_countries
-				target = root
-			}
-		}
-		if = {
-			limit = {
-				country_is_in_south_america = yes
-				any_scope_state = { region = sr:region_brazil }
-				global_var:brazil_culture = {
-					any_scope_pop = {
-						owner = root
-						culture_accepted = yes
-					}
-				}
-			}
-			add_to_global_variable_list = {
-				name = global_brazil_countries
-				target = root
-			}
-		}
-		if = {
-			limit = {
-				country_is_in_south_america = yes
-				any_scope_state = { region = sr:region_brazil }
-				global_var:afro_braz_culture = {
-					any_scope_pop = {
-						owner = root
-						OR = {
-							is_pop_type = slaves
-							culture_accepted = yes
-						}
-					}
-				}
-			}
-			add_to_global_variable_list = {
-				name = global_afro_braz_countries
-				target = root
-			}
-		}
-		if = {
-			limit = {
-				country_is_in_south_america = yes
-				any_scope_state = { region = sr:region_andes }
-				global_var:andes_culture = {
-					any_scope_pop = {
-						owner = root
-						culture_accepted = yes
-					}
-				}
-			}
-			add_to_global_variable_list = {
-				name = global_andes_countries
-				target = root
-			}
-		}
-		if = {
-			limit = {
-				country_is_in_south_america = yes
-				any_scope_state = { region = sr:region_la_plata }
-				global_var:la_plata_culture = {
-					any_scope_pop = {
-						owner = root
-						culture_accepted = yes
-					}
-				}
-			}
-			add_to_global_variable_list = {
-				name = global_la_plata_countries
-				target = root
-			}
-		}
+		#if = {
+		#	limit = {
+		#		exists = capital
+		#		capital = { region = sr:region_southern_africa }
+		#		any_primary_culture = { has_discrimination_trait = african_settler }
+		#	}
+		#	add_to_global_variable_list = {
+		#		name = global_kruger_countries
+		#		target = root
+		#	}
+		#}
+		#if = {
+		#	limit = {
+		#		country_is_in_north_america = yes
+		#		any_scope_state = { region = sr:region_new_england }
+		#		global_var:new_england_yankee_culture = {
+		#			any_scope_pop = {
+		#				owner = root
+		#				culture_accepted = yes
+		#			}
+		#		}
+		#	}
+		#	add_to_global_variable_list = {
+		#		name = global_new_england_yankee_countries
+		#		target = root
+		#	}
+		#}
+		#if = {
+		#	limit = {
+		#		country_is_in_north_america = yes
+		#		any_scope_state = { region = sr:region_the_midwest }
+		#		global_var:midwest_yankee_culture = {
+		#			any_scope_pop = {
+		#				owner = root
+		#				culture_accepted = yes
+		#			}
+		#		}
+		#	}
+		#	add_to_global_variable_list = {
+		#		name = global_midwest_yankee_countries
+		#		target = root
+		#	}
+		#}
+		#if = {
+		#	limit = {
+		#		country_is_in_north_america = yes
+		#		any_scope_state = { region = sr:region_dixie }
+		#		global_var:dixie_culture = {
+		#			any_scope_pop = {
+		#				owner = root
+		#				culture_accepted = yes
+		#			}
+		#		}
+		#	}
+		#	add_to_global_variable_list = {
+		#		name = global_dixie_countries
+		#		target = root
+		#	}
+		#}
+		#if = {
+		#	limit = {
+		#		country_is_in_north_america = yes
+		#		any_scope_state = { region = sr:region_dixie }
+		#		global_var:afro_amer_culture = {
+		#			any_scope_pop = {
+		#				owner = root
+		#				OR = {
+		#					is_pop_type = slaves
+		#					culture_accepted = yes
+		#				}
+		#			}
+		#		}
+		#	}
+		#	add_to_global_variable_list = {
+		#		name = global_afro_amer_countries
+		#		target = root
+		#	}
+		#}
+		#if = {
+		#	limit = {
+		#		country_is_in_north_america = yes
+		#		any_scope_state = { region = sr:region_mexico }
+		#		global_var:mexico_culture = {
+		#			any_scope_pop = {
+		#				owner = root
+		#				culture_accepted = yes
+		#			}
+		#		}
+		#	}
+		#	add_to_global_variable_list = {
+		#		name = global_mexico_countries
+		#		target = root
+		#	}
+		#}
+		#if = {
+		#	limit = {
+		#		country_is_in_south_america = yes
+		#		any_scope_state = { region = sr:region_brazil }
+		#		global_var:brazil_culture = {
+		#			any_scope_pop = {
+		#				owner = root
+		#				culture_accepted = yes
+		#			}
+		#		}
+		#	}
+		#	add_to_global_variable_list = {
+		#		name = global_brazil_countries
+		#		target = root
+		#	}
+		#}
+		#if = {
+		#	limit = {
+		#		country_is_in_south_america = yes
+		#		any_scope_state = { region = sr:region_brazil }
+		#		global_var:afro_braz_culture = {
+		#			any_scope_pop = {
+		#				owner = root
+		#				OR = {
+		#					is_pop_type = slaves
+		#					culture_accepted = yes
+		#				}
+		#			}
+		#		}
+		#	}
+		#	add_to_global_variable_list = {
+		#		name = global_afro_braz_countries
+		#		target = root
+		#	}
+		#}
+		#if = {
+		#	limit = {
+		#		country_is_in_south_america = yes
+		#		any_scope_state = { region = sr:region_gran_colombia }
+		#		global_var:nor_andes_culture = {
+		#			any_scope_pop = {
+		#				owner = root
+		#				culture_accepted = yes
+		#			}
+		#		}
+		#	}
+		#	add_to_global_variable_list = {
+		#		name = global_nor_andes_countries
+		#		target = root
+		#	}
+		#}
+		#if = {
+		#	limit = {
+		#		country_is_in_south_america = yes
+		#		any_scope_state = { region = sr:region_andes }
+		#		global_var:sou_andes_culture = {
+		#			any_scope_pop = {
+		#				owner = root
+		#				culture_accepted = yes
+		#			}
+		#		}
+		#	}
+		#	add_to_global_variable_list = {
+		#		name = global_sou_andes_countries
+		#		target = root
+		#	}
+		#}
+		#if = {
+		#	limit = {
+		#		country_is_in_south_america = yes
+		#		any_scope_state = { region = sr:region_la_plata }
+		#		global_var:la_plata_culture = {
+		#			any_scope_pop = {
+		#				owner = root
+		#				culture_accepted = yes
+		#			}
+		#		}
+		#	}
+		#	add_to_global_variable_list = {
+		#		name = global_la_plata_countries
+		#		target = root
+		#	}
+		#}
 		if = {
 			limit = {
 				country_is_in_europe = yes
@@ -954,7 +970,7 @@ zzz_cc_dynamic_characters.1 = {
 					country_is_in_africa = yes
 				}
 				any_scope_state = { region = sr:region_iberia }
-				global_var:zorrilla_culture = {
+				global_var:spa_culture = {
 					any_scope_pop = {
 						owner = root
 						pop_has_primary_culture = yes
@@ -962,7 +978,7 @@ zzz_cc_dynamic_characters.1 = {
 				}
 			}
 			add_to_global_variable_list = {
-				name = global_zorrilla_countries
+				name = global_spa_countries
 				target = root
 			}
 		}
@@ -1148,6 +1164,33 @@ zzz_cc_dynamic_characters.1 = {
 					OR = {
 						region = sr:region_persia
 						region = sr:region_central_asia
+						region = sr:region_anatolia
+						region = sr:region_caucasus
+					}
+				}
+				global_var:per_culture = {
+					any_scope_pop = {
+						owner = root
+						pop_has_primary_culture = yes
+					}
+				}
+			}
+			add_to_global_variable_list = {
+				name = global_per_countries
+				target = root
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					country_is_in_middle_east = yes
+					country_is_in_central_asia = yes
+					country_is_in_india = yes
+				}
+				any_scope_state = {
+					OR = {
+						region = sr:region_persia
+						region = sr:region_central_asia
 						region = sr:region_himalayas
 						region = sr:region_north_india
 					}
@@ -1285,6 +1328,15 @@ zzz_cc_dynamic_characters.1 = {
 		}
 		if = {
 			limit = {
+				any_primary_culture = { has_variable = potential_jeffersonian_culture }
+			}
+			every_primary_culture = {
+				limit = { has_variable = potential_jeffersonian_culture }
+				remove_variable = potential_jeffersonian_culture
+			}
+		}
+		if = {
+			limit = {
 				any_primary_culture = { has_variable = potential_russian_patriarch_culture }
 			}
 			every_primary_culture = {
@@ -1318,6 +1370,11 @@ zzz_cc_dynamic_characters.1 = {
 				NOT = { has_global_variable = zzz_converter_effects_happened }
 			}
 			set_global_variable = zzz_converter_effects_happened
+		}
+		if = {
+			limit = { has_local_variable = converter_was_decentralized_subject }
+			remove_local_variable = converter_was_decentralized_subject
+			clear_local_variable_list = decentralized_potential_cultures
 		}
 	}
 }

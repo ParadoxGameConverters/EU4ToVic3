@@ -218,6 +218,16 @@ void EU4::World::registerKeys(const std::shared_ptr<Configuration>& theConfigura
 					theConfiguration->setVanillaStartDate();
 				}
 			}
+			if (mod.name == "Third Odyssey: Back to the Motherland")
+			{
+				Log(LogLevel::Notice) << "Third Odyssey: Back to the Motherland detected. Enabling TO support.";
+				theConfiguration->setTO();
+				if (theConfiguration->configBlock.euroCentric != Configuration::EUROCENTRISM::EuroCentric)
+				{
+					Log(LogLevel::Notice) << "TO is auto-enabling Eurocentric conversion.";
+					theConfiguration->setEurocentric();
+				}
+			}
 		}
 	});
 	registerKeyword("provinces", [this](std::istream& theStream) {

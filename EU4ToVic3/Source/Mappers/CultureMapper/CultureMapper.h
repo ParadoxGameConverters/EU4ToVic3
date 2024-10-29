@@ -98,6 +98,7 @@ class CultureMapper: commonItems::parser
 	[[nodiscard]] std::optional<bool> doCulturesShareNonHeritageTrait(const std::string& cultureA, const std::string& cultureB) const;
 
 	void alterNewEU4CultureDefinitions(const std::map<int, std::shared_ptr<EU4::Province>>& provinces);
+	[[nodiscard]] bool isCultureNeoCulturallyOverridden(const std::string& culture) const;
 
   private:
 	[[nodiscard]] std::string getNeoCultureMatch(const std::string& eu4culture, const std::string& v3state, const V3::ClayManager& clayManager);
@@ -112,6 +113,7 @@ class CultureMapper: commonItems::parser
 		 const std::string& seedName = {});
 
 	void recordCultureMapping(const auto& eu4Culture, const auto& v3Culture);
+	void markNeoCultureOverrides();
 
 	void registerKeys();
 
@@ -125,6 +127,10 @@ class CultureMapper: commonItems::parser
 	std::map<std::string, std::set<std::string>> relatedCultures; // vanilla culture -> related dynamic cultures (hungarian -> {hungaro-latvian ... })
 	std::map<std::string, std::set<std::string>>
 		 eu4ToVic3CultureRecord; // recording all targets a particular eu4 culture mapped to. Relevant if we're editing traits of all targets in postprocessing.
+	std::set<std::string> eu4OverriddenNeoCultures; // Stuff like brazilian, american, or modded like elysian - these must not generate neocultures
+	std::set<std::string>
+		 eu4OverriddenNeoCultureGroups; // Stuff like norse_g for vinland, spartakian_group etc, mostly Third Odyssey  - these must not generate neocultures
+	std::map<std::string, std::string> eu4CultureToGroup; // Simple map castillian->iberian for eu4 cultures.
 
 	ColonialRegionMapper colonialRegionMapper;
 	WesternizationMapper westernizationMapper;

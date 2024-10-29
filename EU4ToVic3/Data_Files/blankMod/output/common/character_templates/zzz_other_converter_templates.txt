@@ -1,0 +1,258 @@
+﻿garibaldi_character_template = {
+	first_name = Giuseppe
+	last_name = Garibaldi
+	historical = yes
+	culture = global_var:nor_ita_culture
+	#religion = catholic # He hated the pope, but still identified as a Christian
+	interest_group = ig_trade_unions
+	is_agitator = yes 
+	female = no
+	birth_date = 1807.7.4
+	dna = dna_giuseppe_garibaldi
+	ideology = ideology_radical
+	traits = {
+		brave
+		basic_offensive_planner
+	}
+	on_created = {
+		set_global_variable = garibaldi_is_alive_global_var
+	}
+}
+
+fem_garibaldi_character_template = {
+	first_name = Giuseppina
+	last_name = Garibaldi
+	historical = yes
+	culture = global_var:nor_ita_culture
+	#religion = catholic # He hated the pope, but still identified as a Christian
+	interest_group = ig_trade_unions
+	is_agitator = yes 
+	female = yes
+	birth_date = 1807.7.4
+	dna = dna_giuseppe_garibaldi
+	ideology = ideology_radical
+	traits = {
+		brave
+		basic_offensive_planner
+	}
+	on_created = {
+		set_global_variable = garibaldi_is_alive_global_var
+	}
+}
+
+canonic_wilde_character_template = {
+	first_name = Oscar
+	last_name = Wilde
+	historical = yes
+	culture = global_var:gbr_culture
+	female = no
+	dna = dna_oscar_wilde
+	interest_group = ig_intelligentsia
+	birth_date = 1854.10.16
+	religion = catholic
+	traits = {
+		romantic
+	}
+}
+
+fem_canonic_wilde_character_template = {
+	first_name = Cara
+	last_name = Wilde
+	historical = yes
+	culture = global_var:gbr_culture
+	female = yes
+	dna = dna_oscar_wilde
+	interest_group = ig_intelligentsia
+	birth_date = 1854.10.16
+	religion = catholic
+	traits = {
+		romantic
+	}
+}
+
+dynamic_wilde_character_template = {
+	first_name = Oscar
+	last_name = culture
+	historical = yes
+	culture = primary_culture
+	female = no
+	dna = dna_oscar_wilde
+	interest_group = ig_intelligentsia
+	birth_date = 1854.10.16
+	religion = random
+	traits = {
+		romantic
+	}
+}
+
+fem_dynamic_wilde_character_template = {
+	first_name = Cara
+	last_name = culture
+	historical = yes
+	culture = primary_culture
+	female = yes
+	dna = dna_oscar_wilde
+	interest_group = ig_intelligentsia
+	birth_date = 1854.10.16
+	religion = random
+	traits = {
+		romantic
+	}
+}
+
+canonic_dreyfus_character_template = {
+	first_name = Alfred
+	last_name = Dreyfus
+	historical = yes
+	culture = scope:dreyfus_culture			##Converter
+	religion = jewish
+	female = no
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	age = 32
+	is_general = yes
+	hq = region_france
+	birth_date = 1859.10.9
+	traits = {
+		basic_artillery_commander
+		reserved
+		ambitious
+	}
+}
+
+fem_dreyfus_character_template = {
+	first_name = Winifred
+	last_name = Dreyfus
+	historical = yes
+	culture = scope:dreyfus_culture
+	religion = jewish
+	female = yes
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	age = 32
+	is_general = yes
+	hq = region_france
+	birth_date = 1859.10.9
+	traits = {
+		basic_artillery_commander
+		reserved
+		ambitious
+	}
+}
+
+canonic_esterhazy_character_template = {
+	first_name = Ferdinand_Walsin
+	last_name = Esterhazy
+	historical = yes
+	culture = global_var:fra_culture
+	#religion = scope:root
+	female = no
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	age = 41
+	is_general = yes
+	hq = region_france
+	birth_date = 1847.12.16
+	traits = {
+		basic_colonial_administrator
+		expensive_tastes
+		reckless
+	}
+}
+
+fem_esterhazy_character_template = {
+	first_name = Marie-Anne
+	last_name = Esterhazy
+	historical = yes
+	culture = global_var:fra_culture
+	#religion = scope:root
+	female = yes
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	age = 41
+	is_general = yes
+	hq = region_france
+	birth_date = 1847.12.16
+	traits = {
+		basic_colonial_administrator
+		expensive_tastes
+		reckless
+	}
+}
+
+canonic_zola_character_template = {
+	first_name = Emile
+	last_name = Zola
+	historical = yes
+	culture = global_var:fra_culture
+	#religion = scope:root
+	female = no
+	ig_leader = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	age = 52
+	#birth_date = 1840.4.2
+	traits = {
+		persistent
+		meticulous
+		inspirational_orator
+	}
+}
+
+fem_zola_character_template = {
+	first_name = Aemilia
+	last_name = Zola
+	historical = yes
+	culture = global_var:fra_culture
+	#religion = scope:root
+	female = yes
+	ig_leader = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	age = 52
+	#birth_date = 1840.4.2
+	traits = {
+		persistent
+		meticulous
+		inspirational_orator
+	}
+}
+
+fra_auguste_comte_character_template = {
+	first_name = Auguste
+	last_name = Comte
+	historical = yes
+	birth_date = 1798.1.19
+	culture = global_var:fra_culture
+	religion = rel:atheist
+	is_agitator = yes
+	female = no
+	interest_group = ig_intelligentsia
+	ideology = ideology_positivist
+	#dna = 
+	traits = {
+		charismatic
+		sickly
+		erudite
+	}  
+}
+
+fem_fra_auguste_comte_character_template = {
+	first_name = Augusta
+	#first_name = Gussie
+	last_name = Comte
+	historical = yes
+	birth_date = 1798.1.19
+	culture = global_var:fra_culture
+	religion = rel:atheist
+	is_agitator = yes
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_positivist
+	#dna = 
+	traits = {
+		charismatic
+		sickly
+		erudite
+	}  
+}

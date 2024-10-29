@@ -10,7 +10,7 @@ zzz_cc_confederation.1 = {
 	flavor = zzz_cc_confederation.1.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_transfer_of_authority"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -75,7 +75,7 @@ zzz_cc_confederation.2 = {
 	flavor = zzz_cc_confederation.1.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_power_blocs"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -160,7 +160,7 @@ zzz_cc_confederation.3 = {
 	flavor = zzz_cc_confederation.3.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_transfer_of_authority"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -225,7 +225,7 @@ zzz_cc_confederation.4 = {
 	flavor = zzz_cc_confederation.3.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_power_blocs"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -349,6 +349,16 @@ zzz_cc_confederation.5 = {
 					target = this
 				}
 			}
+			set_global_variable = { name = converter_tag_switch_USA value = yes days = 100 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_settler_colonial_country = yes
+					has_game_rule = converter_native_incorporation_full
+				}
+			}
+			set_global_variable = { name = converter_tag_switch_USA value = yes days = 100 }
 		}
 	}
 
@@ -377,26 +387,33 @@ zzz_cc_confederation.5 = {
 				}
 			}
 		}
-		change_tag = USA
+		if = {
+			limit = { has_variable = converter_tag_switch_USA }
+			change_tag = USA
+		}
 	}
 
 	after = {
-		every_primary_culture = {
-			c:USA = { remove_primary_culture = prev }
-		}
-		every_scope_state = {
-			limit = { zzz_converter_state_is_in_america = yes }
-			every_scope_pop = {
-				limit = {
+		if = {
+			limit = { c:USA ?= this }
+			every_primary_culture = {
+				c:USA = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { zzz_converter_state_is_in_america = yes }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_american_cultures target = this }
+						}
+					}
 					culture = {
-						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-						is_target_in_global_variable_list = { name = global_american_cultures target = this }
+						c:USA = { add_primary_culture = prev }
 					}
 				}
-				culture = {
-					c:USA = { add_primary_culture = prev }
-				}
 			}
+			remove_global_variable = converter_tag_switch_USA
 		}
 	}
 }
@@ -490,6 +507,16 @@ zzz_cc_confederation.6 = {
 						target = this
 					}
 				}
+				set_global_variable = { name = converter_tag_switch_USA value = yes days = 100 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_settler_colonial_country = yes
+						has_game_rule = converter_native_incorporation_full
+					}
+				}
+				set_global_variable = { name = converter_tag_switch_USA value = yes days = 100 }
 			}
 		}
 	}
@@ -500,28 +527,35 @@ zzz_cc_confederation.6 = {
 			name = gbr_unified_america
 			months = normal_modifier_time
 		}
-		scope:canada_country = { change_tag = USA }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_USA }
+			scope:canada_country = { change_tag = USA }
+		}
 	}
 
 	after = {
-		c:USA = {
-			every_primary_culture = {
-				c:USA = { remove_primary_culture = prev }
-			}
-			every_scope_state = {
-				limit = { zzz_converter_state_is_in_america = yes }
-				every_scope_pop = {
-					limit = {
-						culture = {
-							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-							is_target_in_global_variable_list = { name = global_american_cultures target = this }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_USA }
+			c:USA = {
+				every_primary_culture = {
+					c:USA = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_america = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_american_cultures target = this }
+							}
 						}
-					}
-					culture = {
-						c:USA = { add_primary_culture = prev }
+						culture = {
+							c:USA = { add_primary_culture = prev }
+						}
 					}
 				}
 			}
+			remove_global_variable = converter_tag_switch_USA
 		}
 	}
 }
@@ -575,6 +609,16 @@ zzz_cc_confederation.7 = {
 					target = this
 				}
 			}
+			set_global_variable = { name = converter_tag_switch_CAL value = yes days = 100 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_settler_colonial_country = yes
+					has_game_rule = converter_native_incorporation_full
+				}
+			}
+			set_global_variable = { name = converter_tag_switch_CAL value = yes days = 100 }
 		}
 	}
 
@@ -603,26 +647,33 @@ zzz_cc_confederation.7 = {
 				}
 			}
 		}
-		change_tag = CAL
+		if = {
+			limit = { has_variable = converter_tag_switch_CAL }
+			change_tag = CAL
+		}
 	}
 
 	after = {
-		every_primary_culture = {
-			c:CAL = { remove_primary_culture = prev }
-		}
-		every_scope_state = {
-			limit = { zzz_converter_state_is_in_california = yes }
-			every_scope_pop = {
-				limit = {
+		if = {
+			limit = { c:CAL ?= this }
+			every_primary_culture = {
+				c:CAL = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { zzz_converter_state_is_in_california = yes }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+						}
+					}
 					culture = {
-						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-						is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+						c:CAL = { add_primary_culture = prev }
 					}
 				}
-				culture = {
-					c:CAL = { add_primary_culture = prev }
-				}
 			}
+			remove_global_variable = converter_tag_switch_CAL
 		}
 	}
 }
@@ -700,6 +751,16 @@ zzz_cc_confederation.8 = {
 						target = this
 					}
 				}
+				set_global_variable = { name = converter_tag_switch_CAL value = yes days = 100 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_settler_colonial_country = yes
+						has_game_rule = converter_native_incorporation_full
+					}
+				}
+				set_global_variable = { name = converter_tag_switch_CAL value = yes days = 100 }
 			}
 		}
 	}
@@ -710,28 +771,35 @@ zzz_cc_confederation.8 = {
 			name = gbr_unified_california
 			months = normal_modifier_time
 		}
-		scope:canada_country = { change_tag = CAL }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_CAL }
+			scope:canada_country = { change_tag = CAL }
+		}
 	}
 
 	after = {
-		c:CAL = {
-			every_primary_culture = {
-				c:CAL = { remove_primary_culture = prev }
-			}
-			every_scope_state = {
-				limit = { zzz_converter_state_is_in_california = yes }
-				every_scope_pop = {
-					limit = {
-						culture = {
-							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-							is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_CAL }
+			c:CAL = {
+				every_primary_culture = {
+					c:CAL = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_california = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+							}
 						}
-					}
-					culture = {
-						c:CAL = { add_primary_culture = prev }
+						culture = {
+							c:CAL = { add_primary_culture = prev }
+						}
 					}
 				}
 			}
+			remove_global_variable = converter_tag_switch_CAL
 		}
 	}
 }
@@ -746,7 +814,7 @@ zzz_cc_confederation.9 = {
 	flavor = zzz_cc_confederation.9.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_transfer_of_authority"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -811,7 +879,7 @@ zzz_cc_confederation.10 = {
 	flavor = zzz_cc_confederation.9.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_power_blocs"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -896,7 +964,7 @@ zzz_cc_confederation.11 = {
 	flavor = zzz_cc_confederation.11.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_transfer_of_authority"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -961,7 +1029,7 @@ zzz_cc_confederation.12 = {
 	flavor = zzz_cc_confederation.11.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_power_blocs"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -1085,6 +1153,16 @@ zzz_cc_confederation.13 = {
 					target = this
 				}
 			}
+			set_global_variable = { name = converter_tag_switch_MEX value = yes days = 100 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_settler_colonial_country = yes
+					has_game_rule = converter_native_incorporation_full
+				}
+			}
+			set_global_variable = { name = converter_tag_switch_MEX value = yes days = 100 }
 		}
 	}
 
@@ -1113,26 +1191,33 @@ zzz_cc_confederation.13 = {
 				}
 			}
 		}
-		change_tag = MEX
+		if = {
+			limit = { has_variable = converter_tag_switch_MEX }
+			change_tag = MEX
+		}
 	}
 
 	after = {
-		every_primary_culture = {
-			c:MEX = { remove_primary_culture = prev }
-		}
-		every_scope_state = {
-			limit = { zzz_converter_state_is_in_mexico = yes }
-			every_scope_pop = {
-				limit = {
+		if = {
+			limit = { c:MEX ?= this }
+			every_primary_culture = {
+				c:MEX = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { zzz_converter_state_is_in_mexico = yes }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+						}
+					}
 					culture = {
-						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-						is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+						c:MEX = { add_primary_culture = prev }
 					}
 				}
-				culture = {
-					c:MEX = { add_primary_culture = prev }
-				}
 			}
+			remove_global_variable = converter_tag_switch_MEX
 		}
 	}
 }
@@ -1212,6 +1297,16 @@ zzz_cc_confederation.14 = {
 						target = this
 					}
 				}
+				set_global_variable = { name = converter_tag_switch_MEX value = yes days = 100 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_settler_colonial_country = yes
+						has_game_rule = converter_native_incorporation_full
+					}
+				}
+				set_global_variable = { name = converter_tag_switch_MEX value = yes days = 100 }
 			}
 		}
 	}
@@ -1222,28 +1317,35 @@ zzz_cc_confederation.14 = {
 			name = gbr_unified_mexico
 			months = normal_modifier_time
 		}
-		scope:canada_country = { change_tag = MEX }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_MEX }
+			scope:canada_country = { change_tag = MEX }
+		}
 	}
 
 	after = {
-		c:MEX = {
-			every_primary_culture = {
-				c:MEX = { remove_primary_culture = prev }
-			}
-			every_scope_state = {
-				limit = { zzz_converter_state_is_in_mexico = yes }
-				every_scope_pop = {
-					limit = {
-						culture = {
-							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-							is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_MEX }
+			c:MEX = {
+				every_primary_culture = {
+					c:MEX = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_mexico = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+							}
 						}
-					}
-					culture = {
-						c:MEX = { add_primary_culture = prev }
+						culture = {
+							c:MEX = { add_primary_culture = prev }
+						}
 					}
 				}
 			}
+			remove_global_variable = converter_tag_switch_MEX
 		}
 	}
 }
@@ -1297,6 +1399,16 @@ zzz_cc_confederation.15 = {
 					target = this
 				}
 			}
+			set_global_variable = { name = converter_tag_switch_GCO value = yes days = 100 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_settler_colonial_country = yes
+					has_game_rule = converter_native_incorporation_full
+				}
+			}
+			set_global_variable = { name = converter_tag_switch_GCO value = yes days = 100 }
 		}
 	}
 
@@ -1325,26 +1437,33 @@ zzz_cc_confederation.15 = {
 				}
 			}
 		}
-		change_tag = GCO
+		if = {
+			limit = { has_variable = converter_tag_switch_GCO }
+			change_tag = GCO
+		}
 	}
 
 	after = {
-		every_primary_culture = {
-			c:GCO = { remove_primary_culture = prev }
-		}
-		every_scope_state = {
-			limit = { zzz_converter_state_is_in_gran_colombia = yes }
-			every_scope_pop = {
-				limit = {
+		if = {
+			limit = { c:GCO ?= this }
+			every_primary_culture = {
+				c:GCO = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { zzz_converter_state_is_in_gran_colombia = yes }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+						}
+					}
 					culture = {
-						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-						is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+						c:GCO = { add_primary_culture = prev }
 					}
 				}
-				culture = {
-					c:GCO = { add_primary_culture = prev }
-				}
 			}
+			remove_global_variable = converter_tag_switch_GCO
 		}
 	}
 }
@@ -1416,6 +1535,16 @@ zzz_cc_confederation.16 = {
 						target = this
 					}
 				}
+				set_global_variable = { name = converter_tag_switch_GCO value = yes days = 100 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_settler_colonial_country = yes
+						has_game_rule = converter_native_incorporation_full
+					}
+				}
+				set_global_variable = { name = converter_tag_switch_GCO value = yes days = 100 }
 			}
 		}
 	}
@@ -1426,28 +1555,35 @@ zzz_cc_confederation.16 = {
 			name = gbr_unified_colombia
 			months = normal_modifier_time
 		}
-		scope:canada_country = { change_tag = GCO }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_GCO }
+			scope:canada_country = { change_tag = GCO }
+		}
 	}
 
 	after = {
-		c:GCO = {
-			every_primary_culture = {
-				c:GCO = { remove_primary_culture = prev }
-			}
-			every_scope_state = {
-				limit = { zzz_converter_state_is_in_gran_colombia = yes }
-				every_scope_pop = {
-					limit = {
-						culture = {
-							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-							is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_GCO }
+			c:GCO = {
+				every_primary_culture = {
+					c:GCO = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_gran_colombia = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+							}
 						}
-					}
-					culture = {
-						c:GCO = { add_primary_culture = prev }
+						culture = {
+							c:GCO = { add_primary_culture = prev }
+						}
 					}
 				}
 			}
+			remove_global_variable = converter_tag_switch_GCO
 		}
 	}
 }
@@ -1462,7 +1598,7 @@ zzz_cc_confederation.17 = {
 	flavor = zzz_cc_confederation.17.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_transfer_of_authority"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -1527,7 +1663,7 @@ zzz_cc_confederation.18 = {
 	flavor = zzz_cc_confederation.17.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_power_blocs"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -1612,7 +1748,7 @@ zzz_cc_confederation.19 = {
 	flavor = zzz_cc_confederation.19.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_transfer_of_authority"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -1677,7 +1813,7 @@ zzz_cc_confederation.20 = {
 	flavor = zzz_cc_confederation.19.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_power_blocs"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -1801,6 +1937,16 @@ zzz_cc_confederation.21 = {
 					target = this
 				}
 			}
+			set_global_variable = { name = converter_tag_switch_PEU value = yes days = 100 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_settler_colonial_country = yes
+					has_game_rule = converter_native_incorporation_full
+				}
+			}
+			set_global_variable = { name = converter_tag_switch_PEU value = yes days = 100 }
 		}
 	}
 
@@ -1829,26 +1975,33 @@ zzz_cc_confederation.21 = {
 				}
 			}
 		}
-		change_tag = PEU
+		if = {
+			limit = { has_variable = converter_tag_switch_PEU }
+			change_tag = PEU
+		}
 	}
 
 	after = {
-		every_primary_culture = {
-			c:PEU = { remove_primary_culture = prev }
-		}
-		every_scope_state = {
-			limit = { region = sr:region_andes }
-			every_scope_pop = {
-				limit = {
+		if = {
+			limit = { c:PEU ?= this }
+			every_primary_culture = {
+				c:PEU = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { region = sr:region_andes }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+						}
+					}
 					culture = {
-						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+						c:PEU = { add_primary_culture = prev }
 					}
 				}
-				culture = {
-					c:PEU = { add_primary_culture = prev }
-				}
 			}
+			remove_global_variable = converter_tag_switch_PEU
 		}
 	}
 }
@@ -1921,6 +2074,16 @@ zzz_cc_confederation.22 = {
 						target = this
 					}
 				}
+				set_global_variable = { name = converter_tag_switch_PEU value = yes days = 100 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_settler_colonial_country = yes
+						has_game_rule = converter_native_incorporation_full
+					}
+				}
+				set_global_variable = { name = converter_tag_switch_PEU value = yes days = 100 }
 			}
 		}
 	}
@@ -1931,28 +2094,35 @@ zzz_cc_confederation.22 = {
 			name = gbr_unified_peru
 			months = normal_modifier_time
 		}
-		scope:canada_country = { change_tag = PEU }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_PEU }
+			scope:canada_country = { change_tag = PEU }
+		}
 	}
 
 	after = {
-		c:PEU = {
-			every_primary_culture = {
-				c:PEU = { remove_primary_culture = prev }
-			}
-			every_scope_state = {
-				limit = { region = sr:region_andes }
-				every_scope_pop = {
-					limit = {
-						culture = {
-							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-							is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_PEU }
+			c:PEU = {
+				every_primary_culture = {
+					c:PEU = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { region = sr:region_andes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+							}
 						}
-					}
-					culture = {
-						c:PEU = { add_primary_culture = prev }
+						culture = {
+							c:PEU = { add_primary_culture = prev }
+						}
 					}
 				}
 			}
+			remove_global_variable = converter_tag_switch_PEU
 		}
 	}
 }
@@ -2006,6 +2176,16 @@ zzz_cc_confederation.23 = {
 					target = this
 				}
 			}
+			set_global_variable = { name = converter_tag_switch_BRZ value = yes days = 100 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_settler_colonial_country = yes
+					has_game_rule = converter_native_incorporation_full
+				}
+			}
+			set_global_variable = { name = converter_tag_switch_BRZ value = yes days = 100 }
 		}
 	}
 
@@ -2034,26 +2214,33 @@ zzz_cc_confederation.23 = {
 				}
 			}
 		}
-		change_tag = BRZ
+		if = {
+			limit = { has_variable = converter_tag_switch_BRZ }
+			change_tag = BRZ
+		}
 	}
 
 	after = {
-		every_primary_culture = {
-			c:BRZ = { remove_primary_culture = prev }
-		}
-		every_scope_state = {
-			limit = { region = sr:region_brazil }
-			every_scope_pop = {
-				limit = {
+		if = {
+			limit = { c:BRZ ?= this }
+			every_primary_culture = {
+				c:BRZ = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { region = sr:region_brazil }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+						}
+					}
 					culture = {
-						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+						c:BRZ = { add_primary_culture = prev }
 					}
 				}
-				culture = {
-					c:BRZ = { add_primary_culture = prev }
-				}
 			}
+			remove_global_variable = converter_tag_switch_BRZ
 		}
 	}
 }
@@ -2134,6 +2321,16 @@ zzz_cc_confederation.24 = {
 						target = this
 					}
 				}
+				set_global_variable = { name = converter_tag_switch_BRZ value = yes days = 100 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_settler_colonial_country = yes
+						has_game_rule = converter_native_incorporation_full
+					}
+				}
+				set_global_variable = { name = converter_tag_switch_BRZ value = yes days = 100 }
 			}
 		}
 	}
@@ -2144,28 +2341,35 @@ zzz_cc_confederation.24 = {
 			name = gbr_unified_brazil
 			months = normal_modifier_time
 		}
-		scope:canada_country = { change_tag = BRZ }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_BRZ }
+			scope:canada_country = { change_tag = BRZ }
+		}
 	}
 
 	after = {
-		c:BRZ = {
-			every_primary_culture = {
-				c:BRZ = { remove_primary_culture = prev }
-			}
-			every_scope_state = {
-				limit = { region = sr:region_brazil }
-				every_scope_pop = {
-					limit = {
-						culture = {
-							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-							is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_BRZ }
+			c:BRZ = {
+				every_primary_culture = {
+					c:BRZ = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { region = sr:region_brazil }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+							}
 						}
-					}
-					culture = {
-						c:BRZ = { add_primary_culture = prev }
+						culture = {
+							c:BRZ = { add_primary_culture = prev }
+						}
 					}
 				}
 			}
+			remove_global_variable = converter_tag_switch_BRZ
 		}
 	}
 }
@@ -2180,7 +2384,7 @@ zzz_cc_confederation.25 = {
 	flavor = zzz_cc_confederation.25.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_transfer_of_authority"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -2245,7 +2449,7 @@ zzz_cc_confederation.26 = {
 	flavor = zzz_cc_confederation.25.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_power_blocs"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -2330,7 +2534,7 @@ zzz_cc_confederation.27 = {
 	flavor = zzz_cc_confederation.27.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_transfer_of_authority"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -2395,7 +2599,7 @@ zzz_cc_confederation.28 = {
 	flavor = zzz_cc_confederation.27.f
 
 	event_image = {
-		video = "unspecific_signed_contract"
+		video = "ep1_power_blocs"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -2519,6 +2723,16 @@ zzz_cc_confederation.29 = {
 					target = this
 				}
 			}
+			set_global_variable = { name = converter_tag_switch_ARG value = yes days = 100 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_settler_colonial_country = yes
+					has_game_rule = converter_native_incorporation_full
+				}
+			}
+			set_global_variable = { name = converter_tag_switch_ARG value = yes days = 100 }
 		}
 	}
 
@@ -2547,26 +2761,33 @@ zzz_cc_confederation.29 = {
 				}
 			}
 		}
-		change_tag = ARG
+		if = {
+			limit = { has_variable = converter_tag_switch_ARG }
+			change_tag = ARG
+		}
 	}
 
 	after = {
-		every_primary_culture = {
-			c:ARG = { remove_primary_culture = prev }
-		}
-		every_scope_state = {
-			limit = { zzz_converter_state_is_in_argentina = yes }
-			every_scope_pop = {
-				limit = {
+		if = {
+			limit = { c:ARG ?= this }
+			every_primary_culture = {
+				c:ARG = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { zzz_converter_state_is_in_argentina = yes }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+						}
+					}
 					culture = {
-						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+						c:ARG = { add_primary_culture = prev }
 					}
 				}
-				culture = {
-					c:ARG = { add_primary_culture = prev }
-				}
 			}
+			remove_global_variable = converter_tag_switch_ARG
 		}
 	}
 }
@@ -2639,6 +2860,16 @@ zzz_cc_confederation.30 = {
 						target = this
 					}
 				}
+				set_global_variable = { name = converter_tag_switch_ARG value = yes days = 100 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_settler_colonial_country = yes
+						has_game_rule = converter_native_incorporation_full
+					}
+				}
+				set_global_variable = { name = converter_tag_switch_ARG value = yes days = 100 }
 			}
 		}
 	}
@@ -2649,28 +2880,35 @@ zzz_cc_confederation.30 = {
 			name = gbr_unified_argentina
 			months = normal_modifier_time
 		}
-		scope:canada_country = { change_tag = ARG }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_ARG }
+			scope:canada_country = { change_tag = ARG }
+		}
 	}
 
 	after = {
-		c:ARG = {
-			every_primary_culture = {
-				c:ARG = { remove_primary_culture = prev }
-			}
-			every_scope_state = {
-				limit = { zzz_converter_state_is_in_argentina = yes }
-				every_scope_pop = {
-					limit = {
-						culture = {
-							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-							is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_ARG }
+			c:ARG = {
+				every_primary_culture = {
+					c:ARG = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { zzz_converter_state_is_in_argentina = yes }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+							}
 						}
-					}
-					culture = {
-						c:ARG = { add_primary_culture = prev }
+						culture = {
+							c:ARG = { add_primary_culture = prev }
+						}
 					}
 				}
 			}
+			remove_global_variable = converter_tag_switch_ARG
 		}
 	}
 }
@@ -2724,6 +2962,16 @@ zzz_cc_confederation.31 = {
 					target = this
 				}
 			}
+			set_global_variable = { name = converter_tag_switch_SAF value = yes days = 100 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_settler_colonial_country = yes
+					has_game_rule = converter_native_incorporation_full
+				}
+			}
+			set_global_variable = { name = converter_tag_switch_SAF value = yes days = 100 }
 		}
 	}
 
@@ -2772,26 +3020,33 @@ zzz_cc_confederation.31 = {
 				}
 			}
 		}
-		change_tag = SAF
+		if = {
+			limit = { has_variable = converter_tag_switch_SAF }
+			change_tag = SAF
+		}
 	}
 
 	after = {
-		every_primary_culture = {
-			c:SAF = { remove_primary_culture = prev }
-		}
-		every_scope_state = {
-			limit = { region = sr:region_southern_africa }
-			every_scope_pop = {
-				limit = {
+		if = {
+			limit = { c:SAF ?= this }
+			every_primary_culture = {
+				c:SAF = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { region = sr:region_southern_africa }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+						}
+					}
 					culture = {
-						is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-						is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+						c:SAF = { add_primary_culture = prev }
 					}
 				}
-				culture = {
-					c:SAF = { add_primary_culture = prev }
-				}
 			}
+			remove_global_variable = converter_tag_switch_SAF
 		}
 	}
 }
@@ -2861,6 +3116,16 @@ zzz_cc_confederation.32 = {
 						target = this
 					}
 				}
+				set_global_variable = { name = converter_tag_switch_SAF value = yes days = 100 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_settler_colonial_country = yes
+						has_game_rule = converter_native_incorporation_full
+					}
+				}
+				set_global_variable = { name = converter_tag_switch_SAF value = yes days = 100 }
 			}
 		}
 	}
@@ -2871,28 +3136,35 @@ zzz_cc_confederation.32 = {
 			name = gbr_unified_cape
 			months = normal_modifier_time
 		}
-		scope:canada_country = { change_tag = SAF }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_SAF }
+			scope:canada_country = { change_tag = SAF }
+		}
 	}
 
 	after = {
-		c:SAF = {
-			every_primary_culture = {
-				c:SAF = { remove_primary_culture = prev }
-			}
-			every_scope_state = {
-				limit = { region = sr:region_southern_africa }
-				every_scope_pop = {
-					limit = {
-						culture = {
-							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
-							is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+		if = {
+			limit = { has_global_variable = converter_tag_switch_SAF }
+			c:SAF = {
+				every_primary_culture = {
+					c:SAF = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { region = sr:region_southern_africa }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+							}
 						}
-					}
-					culture = {
-						c:SAF = { add_primary_culture = prev }
+						culture = {
+							c:SAF = { add_primary_culture = prev }
+						}
 					}
 				}
 			}
+			remove_global_variable = converter_tag_switch_SAF
 		}
 	}
 }

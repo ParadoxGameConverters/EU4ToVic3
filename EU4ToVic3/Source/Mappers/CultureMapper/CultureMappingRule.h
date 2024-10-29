@@ -32,6 +32,7 @@ class CultureMappingRule: commonItems::parser
 	[[nodiscard]] auto getRegions() const { return regions; }
 	[[nodiscard]] auto getOwners() const { return owners; }
 	[[nodiscard]] auto getRequestedMacros() const { return requestedMacros; }
+	[[nodiscard]] auto getNeoCultureOverride() const { return neocultureOverride; }
 
 	[[nodiscard]] std::optional<std::string> cultureMatch(const V3::ClayManager& clayManager,
 		 const EU4::CultureLoader& cultureLoader,

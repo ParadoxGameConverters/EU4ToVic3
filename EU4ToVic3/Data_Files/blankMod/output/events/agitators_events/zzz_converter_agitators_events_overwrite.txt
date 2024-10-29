@@ -1,0 +1,1028 @@
+﻿namespace = dreyfus
+namespace = paris_commune_pulse_events
+
+# Dreyfus conviction event
+dreyfus.1 = {
+	type = country_event
+	placement = root
+	title = dreyfus.1.t
+	desc = dreyfus.1.d
+	flavor = dreyfus.1.f
+
+	duration = 3
+
+	dlc = dlc004
+
+	event_image = {
+		video = "votp_hostile_court"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
+
+	trigger = {
+		has_dlc_feature = voice_of_the_people_content
+		uses_fra_characters = yes		##Converter
+		has_technology_researched = political_agitation
+		OR = {
+			OR = {
+				has_variable = recently_lost_war
+				AND = {
+					has_variable = recently_had_war
+					NOT = {
+						has_variable = recently_won_war
+					}
+				}
+			}
+			any_state = {
+				state_region = { 
+					is_homeland = global_var:fra_culture		##Converter
+				}
+				NOT = {
+					OR = {
+						state_region = s:STATE_SAVOY
+						AND = {
+							state_region = s:STATE_PROVENCE
+							state_region = {
+								any_scope_state = {
+									owner = root
+								}
+							}
+							is_split_state = yes
+						}
+					}
+					owner = root
+				}
+			}
+		}
+		ig:ig_armed_forces = {
+			is_marginal = no
+		}
+		NOT = {
+			has_law = law_type:law_multicultural
+		}
+		NOT = { 
+			has_variable = dreyfus_convicted
+		}
+		any_scope_state = {
+        	state_region = { 
+        		is_homeland = global_var:fra_culture		##Converter
+        	}
+        	any_scope_pop = {
+        		religion = rel:jewish
+        	}
+		}
+		any_country = {
+			has_diplomatic_pact = {
+				who = root
+				type = rivalry
+			}
+		}
+	}
+
+	immediate = {
+		##Converter
+		if = {
+			limit = {
+				any_scope_pop = { culture = cu:ashkenazi }
+			}
+			cu:ashkenazi = { save_scope_as = dreyfus_culture }
+		}
+		else_if = {
+			limit = {
+				any_scope_pop = { culture = { has_discrimination_trait = jewish_group } }
+			}
+			random_scope_pop = {
+				limit = { culture = { has_discrimination_trait = jewish_group } }
+				culture = { save_scope_as = dreyfus_culture }
+			}
+		}
+		else_if = {
+			limit = {
+				any_scope_pop = { religion = { has_discrimination_trait = jewish } }
+			}
+			random_scope_pop = {
+				limit = { religion = { has_discrimination_trait = jewish } }
+				culture = { save_scope_as = dreyfus_culture }
+			}
+		}
+		else = {
+			cu:ashkenazi = { save_scope_as = dreyfus_culture }
+		}
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_dreyfus_character_template			
+				save_scope_as = alfred_dreyfus_scope
+				on_created = {
+					place_character_in_void = 10000
+					set_variable = alfred_dreyfus_var
+				}
+			}
+		}
+		else = {
+			create_character = {
+				template = canonic_dreyfus_character_template			
+				save_scope_as = alfred_dreyfus_scope
+				on_created = {
+					place_character_in_void = 10000
+					set_variable = alfred_dreyfus_var
+				}
+			}
+		}
+		##Converter
+		random_country = {
+			limit = {
+				has_diplomatic_pact = {
+					who = root
+					type = rivalry
+				}
+			}
+			save_scope_as = dreyfus_rival_country_scope
+			set_variable = dreyfus_rival_country_var
+		}
+		ig:ig_armed_forces = {
+			save_scope_as = dreyfus_armed_forces_scope
+		}
+		set_variable = dreyfus_convicted
+	}
+
+	option = {
+		name = dreyfus.1.a
+		highlighted_option = yes
+		trigger = {
+			any_scope_state = {
+				state_region = s:STATE_GUAYANA
+			}
+		}
+		custom_tooltip = {
+			text = dreyfus.1.tt_1
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = army_honor_defended
+				months = normal_modifier_time
+				multiplier = 2
+			}
+			add_modifier = {
+				name = dreyfus_autonomous_army
+				months = normal_modifier_time
+			}
+		}
+		add_modifier = {
+			name = anti_semitic_demonstrations
+			months = short_modifier_time
+		}
+		hidden_effect = { 
+			trigger_event = { id = dreyfus.2 years = 2 popup = yes } 
+		}
+		random_list = {
+			50 = {
+				scope:alfred_dreyfus_scope = {
+					add_trait = psychological_affliction
+				}
+			}
+			50 = {
+			}
+		}
+	}
+	option = {
+		name = dreyfus.1.b
+		default_option = yes
+		custom_tooltip = {
+			text = dreyfus.1.tt_2
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = army_honor_defended
+				months = normal_modifier_time
+			}
+			add_modifier = {
+				name = dreyfus_autonomous_army
+				months = normal_modifier_time
+			}
+		}
+		add_modifier = {
+			name = anti_semitic_demonstrations
+			months = short_modifier_time
+		}
+		hidden_effect = { 
+			trigger_event = { id = dreyfus.2 years = 2 popup = yes } 
+		}
+	}
+	option = {
+		name = dreyfus.1.c
+		highlighted_option = yes
+		trigger = {
+			ig:ig_armed_forces = {
+				is_in_government = no
+			}
+			institution_investment_level = {
+				institution = institution_home_affairs
+				value >= 2
+			}
+		}
+		custom_tooltip = {
+			text = dreyfus.1.tt_3
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = dreyfus_subject_of_inquiry
+				months = normal_modifier_time
+			}
+			add_modifier = {
+				name = dreyfus_autonomous_army
+				months = normal_modifier_time
+			}
+		}
+		add_modifier = {
+			name = anti_semitic_demonstrations
+			months = short_modifier_time
+		}
+		hidden_effect = { 
+			trigger_event = { id = dreyfus.2 years = 2 popup = yes } 
+		}
+		custom_tooltip = {
+			text = dreyfus.1.tt_4
+			set_variable = dreyfus_early_investigation
+		}
+	}
+}
+
+# Esterhazy trial
+dreyfus.2 = {
+	type = country_event
+	placement = root
+	title = dreyfus.2.t
+	desc = dreyfus.2.d
+	flavor = dreyfus.2.f
+
+	duration = 3
+
+	dlc = dlc004
+
+	event_image = {
+		video = "votp_hostile_court"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		# Triggered by dreyfus.1
+	}
+
+	immediate = {
+		random_character_in_void = {
+			limit = {
+				has_variable = alfred_dreyfus_var
+			}
+			save_scope_as = alfred_dreyfus_scope
+		}
+		ig:ig_armed_forces = {
+			save_scope_as = dreyfus_armed_forces_scope
+		}
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_esterhazy_character_template			
+				save_scope_as = ferdinand_esterhazy_scope
+				on_created = {
+					place_character_in_void = 10000
+					set_variable = ferdinand_esterhazy_var
+				}
+			}
+		}
+		else = {
+			create_character = {
+				template = canonic_esterhazy_character_template			
+				save_scope_as = ferdinand_esterhazy_scope
+				on_created = {
+					place_character_in_void = 10000
+					set_variable = ferdinand_esterhazy_var
+				}
+			}
+		}
+		##Converter
+		random_country = {
+			limit = {
+				has_variable = dreyfus_rival_country_var
+			}
+			save_scope_as = dreyfus_rival_country_scope	
+		}
+	}
+
+	option = {
+		name = dreyfus.2.a
+		default_option = yes
+		trigger_event = { id = dreyfus.3 days = 7 popup = yes }
+		if = {
+			limit = {
+				ig:ig_armed_forces = {
+					has_modifier = army_honor_defended
+				}
+			}
+			ig:ig_armed_forces = {
+				remove_modifier = army_honor_defended
+			}
+		}
+	}
+	option = {
+		name = dreyfus.2.b
+		trigger_event = { id = dreyfus.3 days = 7 popup = yes }
+		if = {
+			limit = {
+				ig:ig_armed_forces = {
+					has_modifier = dreyfus_autonomous_army
+				}
+			}
+			ig:ig_armed_forces = {
+				remove_modifier = dreyfus_autonomous_army
+			}
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = dreyfus_wavering_army
+				months = normal_modifier_time
+			}
+		}
+	}
+}
+
+# J'Accuse...!
+dreyfus.3 = {
+	type = country_event
+	placement = root
+	title = dreyfus.3.t
+	desc = dreyfus.3.d
+	flavor = dreyfus.3.f
+
+	duration = 3
+
+	dlc = dlc004
+
+	event_image = {
+		video = "votp_conspiring"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	trigger = {
+		# Triggered by dreyfus.2
+	}
+
+	immediate = {
+		random_character_in_void = {
+			limit = {
+				has_variable = alfred_dreyfus_var
+			}
+			save_scope_as = alfred_dreyfus_scope
+		}
+		ig:ig_armed_forces = {
+			leader = {
+				save_scope_as = dreyfus_armed_forces_leader_scope
+			}
+			save_scope_as = dreyfus_armed_forces_scope
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					is_marginal = yes
+					is_in_government = yes
+					ig_is_dreyfusard = yes
+				}
+			}
+			random_interest_group = {
+				limit = {
+					is_marginal = no
+					is_in_government = no
+					ig_is_dreyfusard = yes
+				}
+				leader = {
+					save_scope_as = emile_zola_scope
+					set_variable = emile_zola_var
+				}
+			}
+		}
+		else = {
+			##Converter
+			converter_rule_63_effect = yes
+			if = {
+				limit = { has_variable = rule_63_effect }
+				create_character = {
+					template = fem_zola_character_template			
+					save_scope_as = emile_zola_scope
+					on_created = {
+						set_variable = emile_zola_var
+					}
+				}
+			}
+			else = {
+				create_character = {
+					template = canonic_zola_character_template			
+					save_scope_as = emile_zola_scope
+					on_created = {
+						set_variable = emile_zola_var
+					}
+				}
+			}
+			##Converter
+		}
+	}
+
+	option = {
+		name = dreyfus.3.a
+		default_option = yes
+		add_journal_entry = {
+			type = je_dreyfus_affair
+		}
+		custom_tooltip = {
+			text = dreyfus_case_strength_increase_by_1
+			change_variable = {
+				name = dreyfus_case_var
+				add = 1
+			}
+		}
+	}
+	option = {
+		name = dreyfus.3.b
+		default_option = yes
+		highlighted_option = yes
+		trigger = {
+			custom_tooltip = {
+				text = dreyfus.3.tt_2
+				has_variable = dreyfus_early_investigation
+			}
+		}
+		add_journal_entry = {
+			type = je_dreyfus_affair
+		}
+		custom_tooltip = {
+			text = dreyfus_case_strength_increase_by_1
+			change_variable = {
+				name = dreyfus_case_var
+				add = 1
+			}
+		}
+		custom_tooltip = {
+			text = dreyfus.3.tt_1
+			change_variable = {
+				name = dreyfus_case_var
+				add = 1
+			}
+		}
+	}
+}
+
+# 4 - Petrol Maidens
+paris_commune_pulse_events.4 = {
+	type = country_event
+	placement = scope:paris_scope
+	event_image = {
+		video = "unspecific_fire"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	title = paris_commune_pulse_events.4.t
+	desc = paris_commune_pulse_events.4.d
+	flavor = paris_commune_pulse_events.4.f
+
+	duration = 3
+
+	dlc = dlc004
+	
+	cooldown = { months = normal_modifier_time }
+
+	trigger = {
+		has_variable = paris_commune_prc_perspective
+		c:PRC = {
+			any_interest_group = {
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_feminist
+						AND = {
+							is_oppressed_gender = yes		### Converter
+							OR = {
+								has_ideology = ideology:ideology_radical
+								has_ideology = ideology:ideology_communist
+								has_ideology = ideology:ideology_social_democrat
+								has_ideology = ideology:ideology_anarchist
+								has_ideology = ideology:ideology_vanguardist
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	immediate = {
+		c:PRC = {
+			save_scope_as = paris_commune_nation_scope
+			random_scope_state = {
+				limit = {
+					state_region = s:STATE_ILE_DE_FRANCE
+				}
+				save_scope_as = paris_scope		
+			}
+		}
+
+	}
+
+	option = { # Collateral damage happens in war.
+		name = paris_commune_pulse_events.4.a
+		default_option = yes
+		custom_tooltip = {
+			text = commune_progress_add_10
+	        change_global_variable = {
+	            name = paris_commune_progress_var
+	            add = 10
+	        }
+		}
+		s:STATE_ILE_DE_FRANCE = {
+			add_devastation = 5
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_feminist
+							AND = {
+								is_oppressed_gender = yes		### Converter
+								OR = {
+									has_ideology = ideology:ideology_radical
+									has_ideology = ideology:ideology_communist
+									has_ideology = ideology:ideology_social_democrat
+									has_ideology = ideology:ideology_anarchist
+									has_ideology = ideology:ideology_vanguardist
+								}
+							}
+						}
+					}
+					is_marginal = no
+				}
+			}
+			every_interest_group = {
+				limit = {
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_feminist
+							AND = {
+								is_oppressed_gender = yes		### Converter
+								OR = {
+									has_ideology = ideology:ideology_radical
+									has_ideology = ideology:ideology_communist
+									has_ideology = ideology:ideology_social_democrat
+									has_ideology = ideology:ideology_anarchist
+									has_ideology = ideology:ideology_vanguardist
+								}
+							}
+						}
+					}
+					is_marginal = no
+				}
+				leader = {
+					add_modifier = {
+						name = accusations_of_hysterical_mania_modifier
+						months = normal_modifier_time
+					}
+				}
+			}
+		}
+		c:PRC = {
+			if = {
+				limit = {
+					any_interest_group = {
+						leader = {
+							OR = {
+								has_ideology = ideology:ideology_feminist
+								AND = {
+									is_oppressed_gender = yes		### Converter
+									OR = {
+										has_ideology = ideology:ideology_radical
+										has_ideology = ideology:ideology_communist
+										has_ideology = ideology:ideology_social_democrat
+										has_ideology = ideology:ideology_anarchist
+										has_ideology = ideology:ideology_vanguardist
+									}
+								}
+							}
+						}
+						is_marginal = no
+					}
+				}
+				custom_tooltip = {
+					text = communard_effects_header_tt
+				}
+				every_interest_group = {
+					limit = {
+						leader = {
+							OR = {
+								has_ideology = ideology:ideology_feminist
+								AND = {
+									is_oppressed_gender = yes		### Converter
+									OR = {
+										has_ideology = ideology:ideology_radical
+										has_ideology = ideology:ideology_communist
+										has_ideology = ideology:ideology_social_democrat
+										has_ideology = ideology:ideology_anarchist
+										has_ideology = ideology:ideology_vanguardist
+									}
+								}
+							}
+						}
+						is_marginal = no
+					}
+					add_modifier = {
+						name = rallying_cries_ignored_modifier
+						months = short_modifier_time
+					}
+				}
+			}		
+		}
+	}
+	option = { # Men’s tempers get fiery in times like this.
+		name = paris_commune_pulse_events.4.b
+		custom_tooltip = {
+			text = commune_progress_subtract_10
+	        change_global_variable = {
+	            name = paris_commune_progress_var
+	            add = -10
+	        }
+		}
+		s:STATE_ILE_DE_FRANCE = {
+			add_devastation = 5
+		}
+		if = {
+			limit = {
+				c:PRC = {
+					any_interest_group = {
+						leader = {
+							OR = {
+								has_ideology = ideology:ideology_jingoist_leader
+								has_ideology = ideology:ideology_authoritarian
+							}
+						}
+					}
+				}
+			}
+			custom_tooltip = {
+				text = communard_effects_header_tt
+			}
+			c:PRC = {
+				every_interest_group = {
+					limit = {
+						leader = {
+							OR = {
+								has_ideology = ideology:ideology_jingoist_leader
+								has_ideology = ideology:ideology_authoritarian
+							}
+						}
+						is_marginal = no
+					}
+					add_modifier = {
+						name = cries_of_havoc_modifier
+						months = short_modifier_time
+					}
+				}
+			}
+		}
+	}
+	option = { # The women must vent their fury too.
+		name = paris_commune_pulse_events.4.c
+		custom_tooltip = {
+			text = commune_progress_subtract_5
+	        change_global_variable = {
+	            name = paris_commune_progress_var
+	            add = -5
+	        }
+		}
+		s:STATE_ILE_DE_FRANCE = {
+			add_devastation = 10
+		}
+		c:PRC = {
+			if = {
+				limit = {
+					any_interest_group = {
+						leader = {
+							OR = {
+								has_ideology = ideology:ideology_feminist
+								AND = {
+									is_oppressed_gender = yes		### Converter
+									OR = {
+										has_ideology = ideology:ideology_radical
+										has_ideology = ideology:ideology_communist
+										has_ideology = ideology:ideology_social_democrat
+										has_ideology = ideology:ideology_anarchist
+										has_ideology = ideology:ideology_vanguardist
+									}
+								}
+							}
+						}
+						is_marginal = no
+					}
+				}
+				custom_tooltip = {
+					text = communard_effects_header_tt
+				}
+				every_interest_group = {
+					limit = {
+						leader = {
+							OR = {
+								has_ideology = ideology:ideology_feminist
+								AND = {
+									is_oppressed_gender = yes		### Converter
+									OR = {
+										has_ideology = ideology:ideology_radical
+										has_ideology = ideology:ideology_communist
+										has_ideology = ideology:ideology_social_democrat
+										has_ideology = ideology:ideology_anarchist
+										has_ideology = ideology:ideology_vanguardist
+									}
+								}
+							}
+						}
+						is_marginal = no
+					}
+					add_modifier = {
+						name = cries_of_havoc_modifier
+						months = short_modifier_time
+					}
+				}
+			}		
+		}
+	}
+}
+
+# 9 - Our Bodies, Our Rules
+paris_commune_pulse_events.9 = {
+	type = country_event
+	placement = scope:paris_scope
+	event_image = {
+		video = "europenorthamerica_sufferage"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	title = paris_commune_pulse_events.9.t
+	desc = paris_commune_pulse_events.9.d
+	flavor = paris_commune_pulse_events.9.f
+
+	duration = 3
+
+	dlc = dlc004
+	
+	cooldown = { months = normal_modifier_time }
+
+	trigger = {
+		has_variable = paris_commune_prc_perspective
+		c:PRC = {
+			any_interest_group = {
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_feminist
+						AND = {
+							is_oppressed_gender = yes		### Converter
+							OR = {
+								has_ideology = ideology:ideology_radical
+								has_ideology = ideology:ideology_communist
+								has_ideology = ideology:ideology_social_democrat
+								has_ideology = ideology:ideology_anarchist
+								has_ideology = ideology:ideology_vanguardist
+							}
+						}
+					}
+				}
+				is_marginal = no
+			}
+		}	
+	}
+
+	immediate = {
+		c:PRC = {
+			save_scope_as = paris_commune_nation_scope
+			random_scope_state = {
+				limit = {
+					state_region = s:STATE_ILE_DE_FRANCE
+				}
+				save_scope_as = paris_scope		
+			}
+		}
+
+		c:PRC = {
+			random_interest_group = {
+				limit = {
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_feminist
+							AND = {
+								is_oppressed_gender = yes		### Converter
+								OR = {
+									has_ideology = ideology:ideology_radical
+									has_ideology = ideology:ideology_communist
+									has_ideology = ideology:ideology_social_democrat
+									has_ideology = ideology:ideology_anarchist
+									has_ideology = ideology:ideology_vanguardist
+								}
+							}
+						}
+					}
+					is_marginal = no
+				}
+				save_scope_as = paris_feminist_ig_scope
+			}
+		}
+		random_interest_group = {
+			limit = {
+				is_same_interest_group_type = scope:paris_feminist_ig_scope
+			}
+			save_scope_as = france_feminist_ig_scope
+		}
+		c:FRA = {
+			save_scope_as = france_scope
+		}
+	}
+
+	option = { # A woman’s body is her right.
+		name = paris_commune_pulse_events.9.a
+		default_option = yes
+		custom_tooltip = {
+			text = commune_progress_add_5
+	        change_global_variable = {
+	            name = paris_commune_progress_var
+	            add = 5
+	        }
+		}
+		if = {
+			limit = {
+				NOT = {
+					any_scope_character = {
+						has_role = agitator
+						has_ideology = ideology:ideology_feminist
+					}
+				}
+			}
+			custom_tooltip = {
+				text = possible_feminist_agitator_spawn
+				random_list = {
+					50 = {
+						create_character = {
+							is_agitator = yes
+							interest_group = scope:france_feminist_ig_scope
+							ideology = ideology_feminist
+						}
+					}
+					50 = {
+					}
+				}
+			}
+		}
+		c:PRC = {
+			if = {
+				limit = {
+					any_interest_group = {
+						leader = {
+							OR = {
+								has_ideology = ideology:ideology_feminist
+								AND = {
+									is_oppressed_gender = yes		### Converter
+									OR = {
+										has_ideology = ideology:ideology_radical
+										has_ideology = ideology:ideology_communist
+										has_ideology = ideology:ideology_social_democrat
+										has_ideology = ideology:ideology_anarchist
+										has_ideology = ideology:ideology_vanguardist
+									}
+								}
+							}
+						}
+						is_marginal = no
+					}
+				}
+				custom_tooltip = {
+					text = communard_effects_header_tt
+				}
+				every_interest_group = {
+					limit = {
+						leader = {
+							OR = {
+								has_ideology = ideology:ideology_feminist
+								AND = {
+									is_oppressed_gender = yes		### Converter
+									OR = {
+										has_ideology = ideology:ideology_radical
+										has_ideology = ideology:ideology_communist
+										has_ideology = ideology:ideology_social_democrat
+										has_ideology = ideology:ideology_anarchist
+										has_ideology = ideology:ideology_vanguardist
+									}
+								}
+							}
+						}
+						is_marginal = no
+					}
+					add_modifier = {
+						name = assertion_of_rights_modifier
+						months = short_modifier_time
+					}
+				}
+			}	
+		}
+	}
+	option = { # Men’s urges are best contained in those walls.
+		name = paris_commune_pulse_events.9.b
+		custom_tooltip = {
+			text = commune_progress_subtract_5
+	        change_global_variable = {
+	            name = paris_commune_progress_var
+	            add = -5
+	        }
+		}
+		c:PRC = {
+			if = {
+				limit = {
+					any_interest_group = {
+						leader = {
+							OR = {
+								has_ideology = ideology:ideology_feminist
+								AND = {
+									is_oppressed_gender = yes		### Converter
+									OR = {
+										has_ideology = ideology:ideology_radical
+										has_ideology = ideology:ideology_communist
+										has_ideology = ideology:ideology_social_democrat
+										has_ideology = ideology:ideology_anarchist
+										has_ideology = ideology:ideology_vanguardist
+									}
+								}
+							}
+						}
+						is_marginal = no
+					}
+				}
+				custom_tooltip = {
+					text = communard_effects_header_tt
+				}
+				every_interest_group = {
+					limit = {
+						leader = {
+							OR = {
+								has_ideology = ideology:ideology_feminist
+								AND = {
+									is_oppressed_gender = yes		### Converter
+									OR = {
+										has_ideology = ideology:ideology_radical
+										has_ideology = ideology:ideology_communist
+										has_ideology = ideology:ideology_social_democrat
+										has_ideology = ideology:ideology_anarchist
+										has_ideology = ideology:ideology_vanguardist
+									}
+								}
+							}
+						}
+						is_marginal = no
+					}
+					add_modifier = {
+						name = lingering_male_gaze_modifier
+						months = short_modifier_time
+					}
+				}
+			}	
+		}
+	}
+
+	option = { # They have a point. Make dens of sin illegal in totality.
+		name = paris_commune_pulse_events.9.c
+		custom_tooltip = {
+			text = commune_progress_subtract_5
+	        change_global_variable = {
+	            name = paris_commune_progress_var
+	            add = -5
+	        }
+		}
+		custom_tooltip = {
+			text = communard_effects_header_tt
+		}
+		c:PRC = {
+			ig:ig_devout = {
+				add_modifier = {
+					name = fruit_of_the_loin_modifier
+					months = short_modifier_time
+				}
+			}
+		}
+	}
+}

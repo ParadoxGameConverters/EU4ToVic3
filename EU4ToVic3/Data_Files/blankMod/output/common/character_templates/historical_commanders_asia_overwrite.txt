@@ -1,0 +1,437 @@
+﻿# Afghanistan - AFG
+afg_general_mohammed = {
+	first_name = Yar
+	last_name = Mohammed
+	historical = yes
+	culture = global_var:afgh_culture
+	female = no
+	religion = sunni
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1800.1.1 # Uncertain birth date
+	traits = {
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_afg_general_mohammed
+				}
+			}
+			trigger_if = {
+				limit = {
+					exists = c:AFG
+					is_target_in_global_variable_list = { name = global_afgh_countries target = c:AFG }
+				}
+				this = c:AFG
+			}
+			trigger_else = {
+				is_target_in_global_variable_list = { name = global_afgh_countries target = this }
+			}
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1865.1.1	
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_afg_general_mohammed
+		}
+	}
+}
+# China - CHI
+chi_admiral_ding_ruchang = {
+	first_name = Ruchang
+	last_name = Ding
+	historical = yes
+	culture = global_var:han_culture
+	female = no
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1836.11.18
+	traits = {
+		basic_naval_commander
+		dockyard_master
+		direct
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ding_ruchang
+				}
+			}
+			uses_han_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1875.2.5
+		latest_usage_date = 1905.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ding_ruchang
+		}
+	}
+}
+chi_admiral_sa_chenbing = {
+	first_name = Chenbing
+	last_name = Sa
+	historical = yes
+	culture = global_var:han_culture
+	female = no
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1859.4.30
+	traits = {
+		basic_naval_commander
+		innovative
+		cautious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sa_chenbing
+				}
+			}
+			uses_han_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1892.2.5
+		latest_usage_date = 1920.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sa_chenbing
+		}
+	}
+}
+chi_general_yuan_shikai = {
+	first_name = Shikai
+	last_name = Yuan
+	historical = yes
+	culture = global_var:han_culture
+	female = no
+	ideology = ideology_reformer
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1859.9.16
+	traits = {
+		ambitious
+		persistent
+		# army reformer, but insignificant field commander 
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_yuan_shikai
+				}
+			}
+			uses_han_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1885.1.1
+		latest_usage_date = 1920.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_yuan_shikai
+		}
+	}
+}
+chi_general_zeng_guofan = {
+	first_name = Guofan
+	last_name = Zeng
+	historical = yes
+	culture = global_var:han_culture
+	female = no
+	ideology = ideology_traditionalist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1811.11.26
+	traits = {
+		plains_commander
+		pious
+		pillager
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_zeng_guofan
+				}
+			}
+			uses_han_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1851.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_zeng_guofan
+		}
+	}
+}
+chi_general_sengge_rinchen = {
+	first_name = Sengge_Rinchen
+	last_name = Borjigin
+	historical = yes
+	culture = global_var:borjigin_culture
+	female = no
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1811.2.26
+	traits = {
+		stalwart_defender
+		experienced_artillery_commander
+		meticulous
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sengge_rinchen
+				}
+			}
+			is_target_in_global_variable_list = { name = global_borjigin_countries target = this }
+			has_law = law_type:law_monarchy 
+			owns_entire_state_region = STATE_HINGGAN
+		}
+		role = general
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1873.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sengge_rinchen
+		}
+	}
+}
+# Japan - JAP
+jap_admiral_togo = {
+	first_name = Heihachiro
+	last_name = Togo
+	historical = yes
+	culture = global_var:jap_culture
+	female = no
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1848.1.27
+	traits = {
+		expert_naval_commander
+		direct
+		meticulous
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_admiral_togo
+				}
+			}
+			uses_jap_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1883.2.5
+		latest_usage_date = 1913.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_admiral_togo
+		}
+	}
+}
+jap_general_saigo = {
+	first_name = Takamori
+	last_name = Saigo
+	historical = yes
+	culture = global_var:jap_culture
+	female = no
+	ideology = ideology_jingoist_leader
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1828.1.23
+	traits = {
+		basic_offensive_planner
+		romantic
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_saigo
+				}
+			}
+			uses_jap_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1880.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_saigo
+		}
+	}
+}
+jap_general_gentaro = {
+	first_name = Gentaro
+	last_name = Kodama
+	historical = yes
+	culture = global_var:jap_culture
+	female = no
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1852.3.16
+	traits = {
+		experienced_offensive_planner
+		experienced_colonial_administrator
+		innovative
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_gentaro
+				}
+			}
+			uses_jap_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1889.1.1
+		latest_usage_date = 1906.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_gentaro
+		}
+	}
+}
+jap_general_oyama = {
+	first_name = Iwao
+	last_name = Oyama
+	historical = yes
+	culture = global_var:jap_culture
+	female = no
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1842.11.12
+	traits = {
+		experienced_offensive_planner
+		trench_rat
+		reserved
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_oyama
+				}
+			}
+			uses_jap_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1889.1.1
+		latest_usage_date = 1906.1.1	
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_oyama
+		}
+	}
+}
+# Punjab - PAN
+pan_general_singh = {
+	first_name = Sher
+	last_name = Singh
+	historical = yes
+	culture = global_var:singh_culture
+	female = no
+	religion = sikh
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1807.12.4
+	traits = {
+		reckless
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_singh
+				}
+			}
+			trigger_if = {
+				limit = {
+					exists = c:PAN
+					is_target_in_global_variable_list = { name = global_singh_countries target = c:PAN }
+				}
+				this = c:PAN
+			}
+			trigger_else = {
+				is_target_in_global_variable_list = { name = global_singh_countries target = this }
+			}
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1870.1.1	
+		chance = 75
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_singh
+		}
+	}
+}

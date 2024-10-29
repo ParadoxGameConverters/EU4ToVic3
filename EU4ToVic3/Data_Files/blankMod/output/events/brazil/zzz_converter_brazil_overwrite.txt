@@ -1,0 +1,112 @@
+﻿namespace = positivism
+
+positivism.1 = {
+	type = country_event
+	placement = root
+
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:comte_scope
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	duration = 3
+
+	# Intentionally not DLC locked
+
+	title = positivism.1.t
+	desc = positivism.1.d
+	flavor = positivism.1.f
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	cooldown = { months = normal_modifier_time }
+
+	trigger = {
+		NOT = {
+			has_global_variable = positivism_invented
+		}
+		game_date >= 1842.6.1
+		any_scope_state = {
+			state_region = s:STATE_ILE_DE_FRANCE
+		}
+	}
+	
+	immediate = {
+		##Converter
+		converter_rule_63_effect = yes
+		if = {
+			limit = { has_variable = rule_63_effect }
+			create_character = {
+				template = fem_fra_auguste_comte_character_template
+				on_created = {
+					set_variable = auguste_comte_var
+					place_character_in_void = 9
+				}
+			}
+		}
+		else = {
+			create_character = {
+				template = fra_auguste_comte_character_template
+				on_created = {
+					set_variable = auguste_comte_var
+					place_character_in_void = 9
+				}
+			}
+		}
+		##Converter
+		random_character_in_void = {
+			limit = {
+				has_variable = auguste_comte_var
+			}
+			save_scope_as = comte_scope
+		}
+		random_scope_state = {
+			limit = {
+				state_region = s:STATE_ILE_DE_FRANCE
+			}
+			save_scope_as = paris_scope
+		}
+		set_global_variable = positivism_invented
+	}
+	
+	option = {
+		name = positivism.1.a 
+		default_option = yes
+		scope:comte_scope.interest_group = {
+			add_modifier = {
+				name = modifier_positivist_teaching
+				months = short_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = positivism.1.b
+		trigger = {
+			can_research = philosophical_pragmatism
+			NOT = {
+				has_technology_researched = philosophical_pragmatism
+			}
+		}
+		if = {
+			limit = {
+				can_research = philosophical_pragmatism
+				NOT = {
+					has_technology_researched = philosophical_pragmatism
+				}
+			}
+			add_technology_progress = { progress = 4150 technology = philosophical_pragmatism }
+		}
+	}
+
+	option = {
+		name = positivism.1.c
+		custom_tooltip = {
+			text = comte_recruited_tt
+			scope:comte_scope = {
+				free_character_from_void = yes
+			}
+		}
+	}
+}

@@ -464,7 +464,9 @@ void V3::Country::convertCulture(const ClayManager& clayManager,
 		 processedData.capitalStateName,
 		 tag);
 	if (cultureMatch)
+	{
 		processedData.cultures.emplace(*cultureMatch);
+	}
 
 	// if this fails... do nothing for now.
 	if (processedData.cultures.empty())
@@ -697,7 +699,12 @@ void V3::Country::determineWesternizationWealthAndLiteracy(double topTech,
 
 void V3::Country::determineCountryType()
 {
-	if (!processedData.westernized)
+	// Colonies should always be colonial, as it affects triggers
+	if (sourceCountry->isColony())
+	{
+		processedData.type = "colonial";
+	}
+	else if (!processedData.westernized)
 	{
 		// 20 is the cutoff so american natives that heavily invest into tech
 		// end up with more than 20 civLevel score and remain unrecognized.
@@ -711,11 +718,7 @@ void V3::Country::determineCountryType()
 	}
 	else
 	{
-		// civilized/westernized nations can either be recognized or colonial.
-		if (sourceCountry->isColony())
-			processedData.type = "colonial";
-		else
-			processedData.type = "recognized";
+		processedData.type = "recognized";
 	}
 }
 

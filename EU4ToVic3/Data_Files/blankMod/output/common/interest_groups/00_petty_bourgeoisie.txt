@@ -1,0 +1,375 @@
+﻿ig_petty_bourgeoisie = {
+	color = hsv{ 0.65 0.54 0.52 }
+	texture = "gfx/interface/icons/ig_icons/petty_bourgeoisie.dds"
+	layer = "revolution_dynamic_petty_bourgeoisie"
+	index = 5
+
+	ideologies = {
+		ideology_reactionary
+		ideology_meritocratic
+		ideology_patriotic
+	}
+
+	enable = {
+		always = yes
+	}
+
+	# Deprecated; use on_enable effect to assign traits instead
+	traits = {
+		ig_trait_treasury_bonds
+		ig_trait_middle_managers
+		ig_trait_xenophobia
+	}
+	
+	on_enable = {
+		#ig:ig_petty_bourgeoisie = {		### Converter; commenting out instead of deleting so it's easier to see any future changes
+		#	if = {
+		#		limit = {
+		#			owner = { c:SWE ?= this}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_xenophobia
+		#		set_ig_trait = ig_trait:ig_trait_bergsbrukens_valdistrikten
+		#		set_ig_trait = ig_trait:ig_trait_treasury_bonds
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = { c:TUR ?= this }
+		#		}
+		#				set_ig_trait = ig_trait:ig_trait_xenophobia
+		#				set_ig_trait = ig_trait:ig_trait_effendi
+		#				set_ig_trait = ig_trait:ig_trait_reorganization
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = { c:EGY ?= this }
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_xenophobia
+		#		set_ig_trait = ig_trait:ig_trait_effendi
+		#		set_ig_trait = ig_trait:ig_trait_treasury_bonds
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			has_dlc_feature = voice_of_the_people_content
+		#			owner = { c:FRA ?= this }
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_xenophobia
+		#		set_ig_trait = ig_trait:ig_trait_haute_finance
+		#		set_ig_trait = ig_trait:ig_trait_master_of_the_house
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = { c:GBR ?= this }
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_bah_humbug
+		#		set_ig_trait = ig_trait:ig_trait_civil_service
+		#		set_ig_trait = ig_trait:ig_trait_old_lady_of_threadneedle_street
+		#	}
+		#	else = {
+		#		set_ig_trait = ig_trait:ig_trait_xenophobia
+		#		set_ig_trait = ig_trait:ig_trait_middle_managers
+		#		set_ig_trait = ig_trait:ig_trait_treasury_bonds
+		#	}
+		#}
+	}
+
+	on_disable = {}
+	on_character_ig_membership = {}
+
+	pop_potential = {
+		custom_tooltip = {
+			text = would_be_accepted_under_national_supremacy_tt
+			this.culture = {
+				AND = {
+					shares_heritage_trait_with_any_primary_culture = prev.owner
+					shares_non_heritage_trait_with_any_primary_culture = prev.owner
+				}
+			}
+		}
+		NOR = {
+			is_pop_type = aristocrats
+			is_pop_type = capitalists
+		}
+		OR = {
+			pop_employment_building_group = bg_manufacturing
+			pop_employment_building_group = bg_service
+			pop_employment_building_group = bg_urban_facilities
+			pop_employment_building_group = bg_government
+			pop_employment_building_group = bg_logging
+			pop_employment_building_group = bg_mining
+			pop_employment_building_group = bg_fishing
+			pop_employment_building_group = bg_whaling
+			pop_employment_building_group = bg_oil_extraction
+			AND = {
+				custom_tooltip = {
+					text = owner_has_homesteading_tt
+					owner = {
+						OR = {
+							has_law = law_type:law_homesteading
+							has_law = law_type:law_commercialized_agriculture
+						}
+					}
+				}
+				OR = {
+					pop_employment_building_group = bg_agriculture
+					pop_employment_building_group = bg_ranching
+					pop_employment_building_group = bg_plantations
+				}
+				strata = middle
+			}
+		}
+	}
+
+	pop_weight = {
+		value = 50
+
+		add = {
+			desc = "POP_SHOPKEEPERS"
+			if = {
+				limit = {
+					is_pop_type = shopkeepers
+				}
+				value = 250
+			}
+		}
+
+		add = {
+			desc = "POP_CLERKS"
+			if = {
+				limit = {
+					is_pop_type = clerks
+				}
+				value = 100
+			}
+		}
+
+		add = {
+			desc = "POP_ENGINEERS"
+			if = {
+				limit = {
+					is_pop_type = engineers
+				}
+				value = 50
+			}
+		}
+
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_elected_bureaucrats
+				}
+			}
+			add = {
+				desc = "POP_BUREAUCRATS_ELECTED"
+				if = {
+					limit = {
+						is_pop_type = bureaucrats
+					}
+					value = 50
+				}
+			}
+		}
+
+		add = {
+			desc = "HOMESTEADING_LAW"
+			if = {
+				limit = {
+					is_pop_type = farmers
+					owner = {
+						has_law = law_type:law_homesteading
+					}
+				}
+				value = 25
+
+				if = {
+					limit = {
+						state = {
+							is_slave_state = yes
+						}
+					}
+					subtract = 25
+				}
+			}
+		}
+
+		add = {
+			desc = "URBAN_POP"
+			if = {
+				limit = {
+					NOR = {
+						pop_employment_building_group = bg_agriculture
+						pop_employment_building_group = bg_ranching
+						pop_employment_building_group = bg_plantations
+					}
+				}
+				value = 25
+				add = this.standard_of_living
+			}
+		}
+
+		multiply = {
+			desc = "LEADER_POPULARITY"
+			scope:interest_group = {
+				leader ?= {
+					value = popularity
+					multiply = 0.0025
+					add = 1
+					max = 1.25
+					min = 0.75
+				}
+			}
+		}
+
+		multiply = {
+			desc = "decentralized_power"
+			value = 1.0
+
+			if = {
+				limit = {
+					owner = {
+						is_country_type = decentralized
+					}
+				}
+				value = 0.0
+			}
+		}
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = {
+				desc = "IN_GOVERNMENT_ATTRACTION"
+				value = 1
+				add = scope:interest_group.modifier:interest_group_in_government_attraction_mult
+				min = 0
+			}
+		}
+		
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_LOYALISTS"
+				value = pop_loyalist_fraction
+				divide = 4
+				add = 1
+			}
+		}
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = no
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_RADICALS"
+				value = pop_radical_fraction
+				divide = 4
+				add = 1
+			}
+		}
+	}
+
+	monarch_weight = {
+		value = 1
+		# Monarch is not likely to adopt a marginal IG
+		if = {
+			limit = {
+				is_marginal = yes
+			}
+			multiply = {
+				value = 0.1
+			}
+		}
+		# Monarch is more likely to adopt a Powerful IG
+		if = {
+			limit = {
+				is_powerful = yes
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		# More likely with Elected Bureaucrats
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_elected_bureaucrats
+				}
+			}
+			multiply = {
+				value = 1.5
+			}
+		}
+		# More likely with ethnostate
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_ethnostate
+				}
+			}
+			multiply = {
+				value = 2
+			}
+		}
+	}
+
+	agitator_weight = {
+		# Agitators more likely to come from populist IG's rather than elitist
+		value = 1.0
+		# Agitators will never be part of a marginalized IG
+		if = {
+			limit = {
+				owner.ig:ig_petty_bourgeoisie = {
+					is_marginal = yes
+				}
+			}
+			multiply = {
+				value = 0
+			}
+		}
+	}
+
+	commander_weight = {
+		value = 1.0
+	}
+
+	noble_chance = {
+		value = 0.1
+	}
+
+	female_commander_chance = {
+		### Converter ###
+		value = ig_female_general_chance
+	}
+
+	female_politician_chance = {
+		### Converter ###
+		value = ig_female_politician_chance_moderate
+	}
+
+	female_agitator_chance = {
+		### Converter ###
+		value = ig_female_agitator_chance_moderate
+	}
+
+	# The chance that a commander belonging to this IG takes over leadership when it changes
+	# scope:character is the most popular commander in the IG
+	commander_leader_chance = {
+		value = 0.25
+		if = {
+			limit = {
+				exists = scope:character
+			}
+			multiply = {
+				value = 1
+				add = scope:character.popularity
+				min = 0
+			}
+		}
+	}
+}
