@@ -2632,3 +2632,18 @@ SuccubusIncubusMatriarchal = {	##Use this whenever 'incubus' appears in vanilla 
 		localization_key = custom_loc_incubus
 	}
 }
+
+BarmanBarmaidMatriarchal = {	##Use this whenever 'barmaid' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_barman
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_barmaid
+	}
+}
