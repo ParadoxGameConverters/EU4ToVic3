@@ -298,6 +298,66 @@ HeSheMatriarchalCap = {	##Use this whenever 'She' appears in vanilla loc
 	}
 }
 
+HersHisMatriarchal = {	##Use this whenever 'his' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_hers
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_his
+	}
+}
+
+HersHisMatriarchalCap = {	##Use this whenever 'His' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_hers_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_his_cap
+	}
+}
+
+HisHersMatriarchal = {	##Use this whenever 'hers' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_his
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_hers
+	}
+}
+
+HisHersMatriarchalCap = {	##Use this whenever 'Hers' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_his_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_hers_cap
+	}
+}
+
 WomanManMatriarchal = {	##Use this whenever 'man' appears in vanilla loc
 	type = country
 	random_valid = no
@@ -487,6 +547,126 @@ MenWomenMatriarchalCap = {	##Use this whenever 'Women' appears in vanilla loc
 #		localization_key = custom_loc_men_cap
 #	}
 #}			I hate Vic3 custom localization
+
+FeminineMasculineMatriarchal = {	##Use this whenever 'masculine' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_feminine
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_masculine
+	}
+}
+
+FeminineMasculineMatriarchalCap = {	##Use this whenever 'Masculine' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_feminine_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_masculine_cap
+	}
+}
+
+MasculineFeminineMatriarchal = {	##Use this whenever 'feminine' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_masculine
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_feminine
+	}
+}
+
+MasculineFeminineMatriarchalCap = {	##Use this whenever 'Feminine' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_masculine_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_feminine_cap
+	}
+}
+
+FemaleMaleMatriarchal = {	##Use this whenever 'male' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_female
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_male
+	}
+}
+
+FemaleMaleMatriarchalCap = {	##Use this whenever 'Male' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_female_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_male_cap
+	}
+}
+
+MaleFemaleMatriarchal = {	##Use this whenever 'female' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_male
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_female
+	}
+}
+
+MaleFemaleMatriarchalCap = {	##Use this whenever 'Female' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_male_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_female_cap
+	}
+}
 
 GirlBoyMatriarchal = {	##Use this whenever 'boy' appears in vanilla loc
 	type = country
@@ -1883,6 +2063,275 @@ KingQueenMatriarchalCap = {	##Use this whenever 'Queen' appears in vanilla loc
 	}
 }
 
+KingQueenMatriarchalPlural = {	##Use this whenever 'queens' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_king_plural
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_queen_plural
+	}
+}
+
+KingQueenMatriarchalPluralCap = {	##Use this whenever 'Queens' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_king_plural_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_queen_plural_cap
+	}
+}
+
+EmperorEmpressMatriarchal = {	##Use this whenever 'emperor' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_empress
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_emperor
+	}
+}
+
+EmperorEmpressMatriarchalCap = {	##Use this whenever 'Emperor' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_empress_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_emperor_cap
+	}
+}
+
+EmperorEmpressMatriarchalPlural = {	##Use this whenever 'emperors' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_empress_plural
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_emperor_plural
+	}
+}
+
+EmperorEmpressMatriarchalPluralCap = {	##Use this whenever 'Emperors' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_empress_plural_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_emperor_plural_cap
+	}
+}
+
+EmpressEmperorMatriarchal = {	##Use this whenever 'empress' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_emperor
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_empress
+	}
+}
+
+EmpressEmperorMatriarchalCap = {	##Use this whenever 'Empress' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_emperor_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_empress_cap
+	}
+}
+
+EmpressEmperorMatriarchalPlural = {	##Use this whenever 'empresses' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_emperor_plural
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_empress_plural
+	}
+}
+
+EmpressEmperorMatriarchalPluralCap = {	##Use this whenever 'Empresses' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_emperor_plural_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_empress_plural_cap
+	}
+}
+
+PrincePrincessMatriarchal = {	##Use this whenever 'prince' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_princess
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_prince
+	}
+}
+
+PrincePrincessMatriarchalCap = {	##Use this whenever 'Prince' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_princess_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_prince_cap
+	}
+}
+
+PrincePrincessMatriarchalPlural = {	##Use this whenever 'princes' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_princess_plural
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_prince_plural
+	}
+}
+
+PrincePrincessMatriarchalPluralCap = {	##Use this whenever 'Princes' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_princess_plural_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_prince_plural_cap
+	}
+}
+
+PrincessPrinceMatriarchal = {	##Use this whenever 'princess' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_prince
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_princess
+	}
+}
+
+PrincessPrinceMatriarchalCap = {	##Use this whenever 'Princess' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_prince_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_princess_cap
+	}
+}
+
+PrincessPrinceMatriarchalPlural = {	##Use this whenever 'princesses' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_prince_plural
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_princess_plural
+	}
+}
+
+PrincessPrinceMatriarchalPluralCap = {	##Use this whenever 'Princesses' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_prince_plural_cap
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_princess_plural_cap
+	}
+}
 
 AmazonMatriarchal = {	##Use this whenever 'amazon' appears in vanilla loc
 	type = country
@@ -2181,5 +2630,20 @@ SuccubusIncubusMatriarchal = {	##Use this whenever 'incubus' appears in vanilla 
 	text = {
 		trigger = { is_matriarchal_country = no }
 		localization_key = custom_loc_incubus
+	}
+}
+
+BarmanBarmaidMatriarchal = {	##Use this whenever 'barmaid' appears in vanilla loc
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { is_matriarchal_country = yes }
+		localization_key = custom_loc_barman
+	}
+
+	text = {
+		trigger = { is_matriarchal_country = no }
+		localization_key = custom_loc_barmaid
 	}
 }
