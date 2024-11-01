@@ -167,13 +167,9 @@ std::optional<bool> V3::BuildingGroups::tryGetIsCapped(const std::optional<std::
 	return std::nullopt;
 }
 
-int V3::BuildingGroups::getUrbanization(const std::optional<std::string>& theGroupName) const
+int V3::BuildingGroups::getUrbanization(const std::string& theGroupName) const
 {
-	if (!theGroupName)
-	{
-		return 0;
-	}
-	auto name = theGroupName.value();
+	auto name = theGroupName;
 	while (!name.empty())
 	{
 		const auto& possibleGroup = buildingGroups.find(name);
