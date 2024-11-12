@@ -367,3 +367,105 @@ TEST(V3World_CountryTests, YearCapFactorHitsCurve)
 	EXPECT_NEAR(0.2, V3::Country::yearCapFactor(date("1490.1.1")), 0.01);
 	EXPECT_NEAR(0.15, V3::Country::yearCapFactor(date("1350.1.1")), 0.01);
 }
+
+TEST(V3World_CountryTests, HasAnyOfLawUnlockingPositiveCase)
+{
+	V3::Country country;
+
+	V3::ProcessedData data;
+	data.laws.emplace("law_2");
+	data.laws.emplace("law_3");
+	data.laws.emplace("law_4");
+
+	country.setProcessedData(data);
+
+	EXPECT_TRUE(country.hasAnyOfLawUnlocking({"law_2"}));
+	EXPECT_TRUE(country.hasAnyOfLawUnlocking({"law_1", "law_2"}));
+	EXPECT_TRUE(country.hasAnyOfLawUnlocking({"law_2", "law_3"}));
+}
+
+TEST(V3World_CountryTests, HasAnyOfLawUnlockingNegativeCase)
+{
+	V3::Country country;
+
+	V3::ProcessedData data;
+	data.laws.emplace("law_2");
+	data.laws.emplace("law_3");
+	data.laws.emplace("law_4");
+
+	country.setProcessedData(data);
+
+	EXPECT_FALSE(country.hasAnyOfLawUnlocking({"law_1"}));
+	EXPECT_FALSE(country.hasAnyOfLawUnlocking({"law_1", "law_5"}));
+}
+
+TEST(V3World_CountryTests, HasAnyOfLawBlockingPositiveCase)
+{
+	V3::Country country;
+
+	V3::ProcessedData data;
+	data.laws.emplace("law_2");
+	data.laws.emplace("law_3");
+	data.laws.emplace("law_4");
+
+	country.setProcessedData(data);
+
+	EXPECT_TRUE(country.hasAnyOfLawBlocking({"law_2"}));
+	EXPECT_TRUE(country.hasAnyOfLawBlocking({"law_1", "law_2"}));
+	EXPECT_TRUE(country.hasAnyOfLawBlocking({"law_2", "law_3"}));
+}
+
+TEST(V3World_CountryTests, HasAnyOfLawBlockingNegativeCase)
+{
+	V3::Country country;
+
+	V3::ProcessedData data;
+	data.laws.emplace("law_2");
+	data.laws.emplace("law_3");
+	data.laws.emplace("law_4");
+
+	country.setProcessedData(data);
+
+	EXPECT_FALSE(country.hasAnyOfLawBlocking({"law_1"}));
+	EXPECT_FALSE(country.hasAnyOfLawBlocking({"law_1", "law_5"}));
+}
+
+TEST(V3World_CountryTests, GetCultureBreakdownReturnsPopulationFractions)
+{
+	V3::Country country;
+
+	std::shared_ptr<V3::SubState> subState = std::make_shared<V3::SubState>();
+	subState->addPop(V3::Pop("german", "no_religion", "", 650));
+	subState->addPop(V3::Pop("khmer", "crusader_kings_two", "", 250));
+
+	std::shared_ptr<V3::SubState> subState2 = std::make_shared<V3::SubState>();
+	subState2->addPop(V3::Pop("english", "no_religion", "", 100));
+
+	country.addSubState(subState);
+	country.addSubState(subState2);
+
+	EXPECT_THAT(country.getCultureBreakdown(),
+		 testing::UnorderedElementsAre(testing::Pair("german", 0.65), testing::Pair("khmer", 0.25), testing::Pair("english", 0.1)));
+}
+
+TEST(V3World_CountryTests, GetJobBreakdownReturnsPopTypeFractions)
+{
+	V3::Country country;
+
+	std::shared_ptr<V3::SubState> subState = std::make_shared<V3::SubState>();
+	subState->addJob("peasants", 500);
+	subState->addJob("machinists", 400);
+	subState->addPop(V3::Pop("german", "no_religion", "", 650));
+	subState->addPop(V3::Pop("khmer", "crusader_kings_two", "", 250));
+
+
+	std::shared_ptr<V3::SubState> subState2 = std::make_shared<V3::SubState>();
+	subState2->addJob("laborers", 100);
+	subState2->addPop(V3::Pop("english", "no_religion", "", 100));
+
+	country.addSubState(subState);
+	country.addSubState(subState2);
+
+	EXPECT_THAT(country.getJobBreakdown(),
+		 testing::UnorderedElementsAre(testing::Pair("peasants", 0.5), testing::Pair("machinists", 0.4), testing::Pair("laborers", 0.1)));
+}
