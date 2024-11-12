@@ -232,6 +232,16 @@ TEST(Mappers_ProductionMethodMapperTests, EstimatesWalkPMList)
 	EXPECT_THAT(lowPMEstimates, testing::Contains(testing::Pair("pmg_base_building_logging_camp", std::make_tuple(0, 1.0))));
 	EXPECT_THAT(midPMEstimates, testing::Contains(testing::Pair("pmg_base_building_logging_camp", std::make_tuple(1, 1.0))));
 	EXPECT_THAT(highPMEstimates, testing::Contains(testing::Pair("pmg_base_building_logging_camp", std::make_tuple(1, 1.0))));
+
+	/*
+	 * pmg_base_building_logging_camp = {
+	 *	production_methods = {
+	 *		pm_simple_forestry // countryNoTech
+	 *		pm_saw_mills // countrySomeTech & countryAllTech
+	 *		pm_electric_saw_mills // not countryAllTech because the rule in mapper.loadRules() limits the highest PM to saw_mills
+	 *		}
+	 * }
+	 */
 }
 TEST(Mappers_ProductionMethodMapperTests, ConfigFlagSwitchesWalkType)
 {
@@ -256,6 +266,18 @@ TEST(Mappers_ProductionMethodMapperTests, ConfigFlagSwitchesWalkType)
 	const auto& lawPMEstimates = mapper.estimatePMs(countryNoTech, PMs, PMGroups, buildingMap);
 
 	EXPECT_THAT(lawPMEstimates, testing::Contains(testing::Pair("pmg_ownership_capital_building_logging_camp", std::make_tuple(3, 1.0))));
+
+	/*
+	 * pmg_ownership_capital_building_logging_camp = {
+	 *	production_methods = {
+	 *		pm_merchant_guilds_building_logging_camp
+	 *		pm_privately_owned_building_logging_camp
+	 *		pm_publicly_traded_building_logging_camp
+	 *		pm_government_run_building_logging_camp // this one
+	 *		pm_worker_cooperative_building_logging_camp
+	 *		}
+	 * }
+	 */
 }
 TEST(Mappers_ProductionMethodMapperTests, EstimatesWalkPMListLawMethod)
 {
@@ -285,4 +307,14 @@ TEST(Mappers_ProductionMethodMapperTests, EstimatesWalkPMListLawMethod)
 
 	EXPECT_THAT(serfPMEstimates, testing::Contains(testing::Pair("pmg_serfdom_building_subsistence_farms", std::make_tuple(1, 1.0))));
 	EXPECT_THAT(homesteadPMEstimates, testing::Contains(testing::Pair("pmg_serfdom_building_subsistence_farms", std::make_tuple(2, 1.0))));
+
+	/*
+	 * pmg_serfdom_building_subsistence_farms  = {
+	 *	production_methods = {
+	 *		pm_serfdom_no
+	 *		pm_serfdom // countrySerfdom
+	 *		pm_homesteading_building_subsistence // countryHomesteading
+	 *		}
+	 * }
+	 */
 }
