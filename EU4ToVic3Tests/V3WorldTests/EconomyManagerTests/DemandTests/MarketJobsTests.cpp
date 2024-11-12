@@ -26,7 +26,7 @@ std::map<std::string, V3::PopType> getPopTypes()
 }
 } // namespace
 
-TEST(V3World_MarketJobsTests, CreateSubsistenceNotEnoughLand)
+TEST(V3World_MarketJobsTests, CreateSubsistenceLeavesUnemployedPopsWhenNotEnoughLand)
 {
 	auto subState = std::make_shared<V3::SubState>();
 	subState->addPop({"", "", "", 5000});
@@ -44,13 +44,15 @@ TEST(V3World_MarketJobsTests, CreateSubsistenceNotEnoughLand)
 	EXPECT_DOUBLE_EQ(5, levels);
 }
 
-TEST(V3World_MarketJobsTests, CreateSubsistenceNotEnoughLandEmpoweredWomen)
+TEST(V3World_MarketJobsTests, CreateSubsistenceLeavesMoreUnemployedPopsWhenMoreWomenWork)
 {
 	auto subState = std::make_shared<V3::SubState>();
 	subState->addPop({"", "", "", 5000});
 
+	constexpr double moreWomenWorking = 0.05;
+
 	V3::MarketJobs marketJobs({{"aristocrats", 10}, {"laborers", 90}});
-	double levels = marketJobs.createSubsistence({{"peasants", 90}, {"farmers", 10}}, .25, 0.05, 5, getPopTypes(), subState);
+	double levels = marketJobs.createSubsistence({{"peasants", 90}, {"farmers", 10}}, .25, moreWomenWorking, 5, getPopTypes(), subState);
 
 	const double delta = 0.001;
 	EXPECT_THAT(subState->getEstimatedJobs(),
@@ -62,7 +64,7 @@ TEST(V3World_MarketJobsTests, CreateSubsistenceNotEnoughLandEmpoweredWomen)
 	EXPECT_DOUBLE_EQ(5, levels);
 }
 
-TEST(V3World_MarketJobsTests, CreateSubsistenceEnoughLand)
+TEST(V3World_MarketJobsTests, CreateSubsistenceLeavesNoUnemployedPopsWhenEnoughLand)
 {
 	auto subState = std::make_shared<V3::SubState>();
 	subState->addPop({"", "", "", 5000});
@@ -80,7 +82,7 @@ TEST(V3World_MarketJobsTests, CreateSubsistenceEnoughLand)
 	EXPECT_DOUBLE_EQ(6.17283950617284, levels);
 }
 
-TEST(V3World_MarketJobsTests, CreateSubsistenceNoHomesteading)
+TEST(V3World_MarketJobsTests, CreateSubsistenceUsesHomesteadingLawsToPickNumbersAndTypesOfPopsWorkingSubsistence)
 {
 	// Just peasants, no farmers
 	auto subState = std::make_shared<V3::SubState>();
@@ -98,7 +100,7 @@ TEST(V3World_MarketJobsTests, CreateSubsistenceNoHomesteading)
 	EXPECT_DOUBLE_EQ(5, levels);
 }
 
-TEST(V3World_MarketJobsTests, CreateJobsTakesFromUnemployedFirst)
+TEST(V3World_MarketJobsTests, CreateJobsTakesFromUnemployedPopsFirst)
 {
 	auto subState = std::make_shared<V3::SubState>();
 	subState->addPop({"", "", "", 10000});
@@ -127,7 +129,7 @@ TEST(V3World_MarketJobsTests, CreateJobsTakesFromUnemployedFirst)
 	EXPECT_DOUBLE_EQ(0, levels);
 }
 
-TEST(V3World_MarketJobsTests, CreateJobsTakesFromPeasantsAfterUnemployed)
+TEST(V3World_MarketJobsTests, CreateJobsTakesFromPeasantPopsAfterUnemployedPops)
 {
 	auto subState = std::make_shared<V3::SubState>();
 	subState->addPop({"", "", "", 10000});
@@ -185,14 +187,16 @@ TEST(V3World_MarketJobsTests, CreateJobsTakesFromPeasantsOnlyWhenNoUnemployed)
 	EXPECT_DOUBLE_EQ(10, levels);
 }
 
-TEST(V3World_MarketJobsTests, CreateJobsEmpoweredWomen)
+TEST(V3World_MarketJobsTests, CreateJobsMakesFewerDependantsWithMoreEmpoweredWomen)
 {
 	auto subState = std::make_shared<V3::SubState>();
 	subState->addPop({"", "", "", 5000});
 
+	constexpr double moreWomenWorking = 0.05;
+
 	V3::MarketJobs marketJobs({{"aristocrats", 10}, {"laborers", 90}});
 	std::map<std::string, double> subsistenceEmployment{{"peasants", 90}, {"farmers", 10}};
-	marketJobs.createSubsistence(subsistenceEmployment, .25, 0.05, 5, getPopTypes(), subState);
+	marketJobs.createSubsistence(subsistenceEmployment, .25, moreWomenWorking, 5, getPopTypes(), subState);
 
 	const double delta = 0.001;
 	EXPECT_THAT(subState->getEstimatedJobs(),
@@ -255,7 +259,7 @@ TEST(V3World_MarketJobsTests, CreateJobsAddsAdditionalOwnershipJobs)
 	EXPECT_DOUBLE_EQ(2712.5 / 400.0, levels);
 }
 
-TEST(V3World_MarketJobsTests, CreateJobsNoPeasants)
+TEST(V3World_MarketJobsTests, CreateJobsYieldsWarningIfASubsistenceBuildingEmploysNoPeasants)
 {
 	// Just peasants, no farmers
 	auto subState = std::make_shared<V3::SubState>();
