@@ -60,7 +60,7 @@ TEST(V3World_ProductionMethodTests, ProductionMethodGetTypeExtractsMiddleRegex)
 	V3::ProductionMethod PM;
 	PM.loadProductionMethod(input);
 
-   // Make sure keywords with _s in the name are captured in full, and not just the first part. E.g. "small" vs "small_arms"
+	// Make sure keywords with _s in the name are captured in full, and not just the first part. E.g. "small" vs "small_arms"
 	EXPECT_THAT(PM.getInputs(), testing::UnorderedElementsAre(std::make_pair("small_arms", 1)));
 	EXPECT_THAT(PM.getOutputs(), testing::UnorderedElementsAre(std::make_pair("grain", 10)));
 }
