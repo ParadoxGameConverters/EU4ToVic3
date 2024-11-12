@@ -55,6 +55,7 @@ void V3::ProductionMethod::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
+// Returns the \\w+ part of goods_output_\\w+_add and similar regexs
 std::string V3::ProductionMethod::getType(const std::string& typeString)
 {
 	std::stringstream typeStream(typeString);

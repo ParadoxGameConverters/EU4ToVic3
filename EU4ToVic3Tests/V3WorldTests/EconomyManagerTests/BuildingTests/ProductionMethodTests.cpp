@@ -46,3 +46,21 @@ TEST(V3World_ProductionMethodTests, ProductionMethodLoadsPMData)
 	EXPECT_THAT(PM.getInputs(), testing::UnorderedElementsAre(std::make_pair("tools", 15), std::make_pair("oil", 5)));
 	EXPECT_THAT(PM.getOutputs(), testing::UnorderedElementsAre(std::make_pair("coal", 90), std::make_pair("grain", 10), std::make_pair("small_arms", 1)));
 }
+
+TEST(V3World_ProductionMethodTests, ProductionMethodGetTypeExtractsMiddleRegex)
+{
+	std::stringstream input;
+	input << "\tbuilding_modifiers = {\n";
+	input << "\tworkforce_scaled = {\n";
+	input << "\tgoods_output_grain_add = 10\n";
+	input << "\tgoods_input_small_arms_add = 1\n";
+	input << "\t}\n";
+	input << "\t}\n";
+
+	V3::ProductionMethod PM;
+	PM.loadProductionMethod(input);
+
+   // Make sure keywords with _s in the name are captured in full, and not just the first part. E.g. "small" vs "small_arms"
+	EXPECT_THAT(PM.getInputs(), testing::UnorderedElementsAre(std::make_pair("small_arms", 1)));
+	EXPECT_THAT(PM.getOutputs(), testing::UnorderedElementsAre(std::make_pair("grain", 10)));
+}
