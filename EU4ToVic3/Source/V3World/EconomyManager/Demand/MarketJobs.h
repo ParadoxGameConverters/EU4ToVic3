@@ -60,6 +60,7 @@ class MarketJobs
 	std::vector<std::pair<std::string, int>> manorHouseRoster;
 
 	inline static bool peasantErrorFlag = false;
+	inline static std::set<std::string> ownershipEmploymentsErrorFlag = {};
 };
 } // namespace V3
 

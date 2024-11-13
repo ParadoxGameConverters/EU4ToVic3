@@ -22,9 +22,19 @@ double V3::MarketJobs::createJobs(const std::map<std::string, double>& rgoUnitEm
 	 const std::shared_ptr<SubState>& subState)
 {
 	auto unitEmployment = rgoUnitEmployment;
-	for (const auto& [type, fraction]: estimatedOwnerships)
+	for (const auto& [ownershipBuildingName, fraction]: estimatedOwnerships)
 	{
-		for (const auto& [job, amount]: ownershipEmployments.at(type)) // Account for the owner of the buildings.
+		if (!ownershipEmployments.contains(ownershipBuildingName))
+		{
+			if (ownershipEmploymentsErrorFlag.find(ownershipBuildingName) == ownershipEmploymentsErrorFlag.end())
+			{
+				Log(LogLevel::Error) << ownershipBuildingName << ": has no known employment data, economy generation will be broken.";
+				ownershipEmploymentsErrorFlag.emplace(ownershipBuildingName);
+			}
+			continue;
+		}
+
+		for (const auto& [job, amount]: ownershipEmployments.at(ownershipBuildingName)) // Account for the owner of the buildings.
 		{
 			unitEmployment[job] += amount * fraction;
 		}
@@ -46,7 +56,7 @@ double V3::MarketJobs::createJobs(const std::map<std::string, double>& rgoUnitEm
 // post: The given subState's job estimate is initialized with the 0 buildings version of local employment.
 // Returns number of subsistence building levels filled.
 double V3::MarketJobs::createSubsistence(const std::map<std::string, double>& subsistenceUnitEmployment,
-	 double defaultRatio,
+	 const double defaultRatio,
 	 const double womenJobRate,
 	 const int arableLand,
 	 const std::map<std::string, PopType>& popTypes,
