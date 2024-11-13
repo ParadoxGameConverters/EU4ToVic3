@@ -24,6 +24,9 @@ void V3::Building::registerKeys(const std::map<std::string, int>& costTiers)
 	registerKeyword("unique", [this](std::istream& theStream) {
 		unique = commonItems::getString(theStream) == "yes";
 	});
+	registerKeyword("statue", [this](std::istream& theStream) {
+		statue = commonItems::getString(theStream) == "yes";
+	});
 	registerKeyword("production_method_groups", [this](std::istream& theStream) {
 		for (const auto& PMGroup: commonItems::getStrings(theStream))
 			PMGroups.emplace(PMGroup);

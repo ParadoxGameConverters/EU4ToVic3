@@ -376,7 +376,7 @@ bool V3::SubState::isBuildingValid(const Building& building,
 		return false;
 	}
 	// Economy builder will ignore all monuments, canals, and power block statues.
-	if (building.isUnique())
+	if (building.isUnique() || building.isStatue())
 	{
 		return false;
 	}
