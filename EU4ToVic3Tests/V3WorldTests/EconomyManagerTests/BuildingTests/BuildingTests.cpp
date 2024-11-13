@@ -115,3 +115,18 @@ TEST(V3World_BuildingTests, UnkownConstructionCostIsCaught)
 
 	std::cout.rdbuf(cout_buffer);
 }
+
+TEST(V3World_BuildingTests, MonumentsAreRecognized)
+{
+	V3::BuildingScriptValuesLoader buildingScriptValuesLoader;
+	buildingScriptValuesLoader.loadBuildingScriptValues(modFS);
+	const auto& costTiers = buildingScriptValuesLoader.getBuildingCostConstants();
+
+	std::stringstream input;
+	input << "\trequired_construction = construction_cost_monument\n";
+
+	V3::Building building;
+	building.loadBuilding(input, costTiers);
+
+	EXPECT_TRUE(building.isMonumental());
+}
