@@ -103,7 +103,7 @@ double V3::MarketJobs::hireFromUnemployed(double amount, const std::shared_ptr<V
 		subState->addJob("unemployed", -amount);
 		return 0;
 	}
-       	subState->setJob("unemployed", 0);
+	subState->setJob("unemployed", 0);
 	return amount - unemployed;
 }
 
