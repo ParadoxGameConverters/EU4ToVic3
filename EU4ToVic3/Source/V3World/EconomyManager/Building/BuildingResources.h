@@ -10,9 +10,9 @@ class BuildingResources
   public:
 	BuildingResources() = default;
 
-	void addJobs(const std::string& job, const double amount) { jobs[job] += amount; }
-	void addInputs(const std::string& input, const double amount) { inputs[input] += amount; }
-	void addOutputs(const std::string& output, const double amount) { outputs[output] += amount; }
+	void addJobs(const std::string& job, const double amount) { jobs[job] += std::max(0.0, amount); }
+	void addInputs(const std::string& input, const double amount) { inputs[input] += std::max(0.0, amount); }
+	void addOutputs(const std::string& output, const double amount) { outputs[output] += std::max(0.0, amount); }
 	void evaluateResources(const std::set<std::string>& usedPMGroups,
 		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
 		 const std::map<std::string, ProductionMethod>& PMs,
