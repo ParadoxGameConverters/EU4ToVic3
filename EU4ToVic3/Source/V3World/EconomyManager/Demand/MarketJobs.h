@@ -29,15 +29,20 @@ class MarketJobs
 		 const std::shared_ptr<SubState>& subState);
 
   private:
+	// For a given popType, what % of that popType have jobs?
+	static double calculateWorkerDependencyRatio(const PopType& popType, double defaultRatio, double womenJobRate);
+	// How many people do x number of jobs support?
+	static double getWorkersPlusDependents(double amountOfJobs, const PopType& popType, double defaultRatio, double womenJobRate);
+
+	// Returns the amount of jobs with no unemployed available.
+	static double hireFromUnemployed(double amount, const std::shared_ptr<SubState>& subState);
 	// Returns the level of subsistence buildings downsized.
 	double hireFromWorseJobs(double amount,
 		 double defaultRatio,
-		 const double womenJobRate,
+		 double womenJobRate,
 		 const std::map<std::string, PopType>& popTypes,
 		 const std::map<std::string, double>& subsistenceUnitEmployment,
 		 const std::shared_ptr<SubState>& subState);
-	// Returns the amount of jobs with no unemployed available.
-	static double hireFromUnemployed(double amount, const std::shared_ptr<SubState>& subState);
 	// Returns the level of subsistence buildings downsized.
 	double hireFromSubsistence(double amount,
 		 const std::map<std::string, double>& subsistenceUnitEmployment,

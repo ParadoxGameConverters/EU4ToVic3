@@ -31,7 +31,7 @@ double V3::MarketJobs::createJobs(const std::map<std::string, double>& rgoUnitEm
 	}
 	for (const auto& [job, amount]: unitEmployment) // Track Dependents
 	{
-		unitEmployment[job] = amount / (popTypes.at(job).getDependentRatio().value_or(defaultRatio) + womenJobRate);
+		unitEmployment[job] = getWorkersPlusDependents(amount, popTypes.at(job), defaultRatio, womenJobRate);
 	}
 
 	double totalPlaced = 0;
@@ -64,7 +64,7 @@ double V3::MarketJobs::createSubsistence(const std::map<std::string, double>& su
 	}
 	for (const auto& [job, amount]: unitEmployment) // Track Dependents
 	{
-		unitEmployment[job] = amount / (popTypes.at(job).getDependentRatio().value_or(defaultRatio) + womenJobRate);
+		unitEmployment[job] = getWorkersPlusDependents(amount, popTypes.at(job), defaultRatio, womenJobRate);
 	}
 
 	double unitEmploymentPop = std::accumulate(unitEmployment.begin(), unitEmployment.end(), 0.0, [](double sum, const auto& pair) {
@@ -84,6 +84,17 @@ double V3::MarketJobs::createSubsistence(const std::map<std::string, double>& su
 }
 
 
+double V3::MarketJobs::calculateWorkerDependencyRatio(const PopType& popType, const double defaultRatio, const double womenJobRate)
+{
+	return popType.getDependentRatio().value_or(defaultRatio) + womenJobRate;
+}
+
+double V3::MarketJobs::getWorkersPlusDependents(const double amountOfJobs, const PopType& popType, const double defaultRatio, const double womenJobRate)
+{
+	return amountOfJobs / calculateWorkerDependencyRatio(popType, defaultRatio, womenJobRate);
+}
+
+
 double V3::MarketJobs::hireFromWorseJobs(double amount,
 	 const double defaultRatio,
 	 const double womenJobRate,
@@ -95,7 +106,7 @@ double V3::MarketJobs::hireFromWorseJobs(double amount,
 	return hireFromSubsistence(amount, subsistenceUnitEmployment, defaultRatio, womenJobRate, popTypes, subState);
 }
 
-double V3::MarketJobs::hireFromUnemployed(double amount, const std::shared_ptr<V3::SubState>& subState)
+double V3::MarketJobs::hireFromUnemployed(const double amount, const std::shared_ptr<V3::SubState>& subState)
 {
 	const double unemployed = subState->getJob("unemployed");
 	if (unemployed > amount)
@@ -127,7 +138,7 @@ double V3::MarketJobs::hireFromSubsistence(const double amount,
 	double unitSubsistencePop = 0; // Amount of workers + dependents in a subsistence level
 	for (const auto& [job, workers]: subsistenceUnitEmployment)
 	{
-		subsistenceCounts[job] = workers / (popTypes.at(job).getDependentRatio().value_or(defaultRatio) + womenJobRate);
+		subsistenceCounts[job] = getWorkersPlusDependents(workers, popTypes.at(job), defaultRatio, womenJobRate);
 		unitSubsistencePop += subsistenceCounts[job];
 	}
 
@@ -165,6 +176,6 @@ void V3::MarketJobs::downsizeManorHouses(const double lostSubsistenceLevels,
 {
 	for (const auto& [job, amount]: manorHouseRoster)
 	{
-		subState->addJob(job, (-amount / (popTypes.at(job).getDependentRatio().value_or(defaultRatio) + womenJobRate)) * lostSubsistenceLevels);
+		subState->addJob(job, -getWorkersPlusDependents(amount, popTypes.at(job), defaultRatio, womenJobRate) * lostSubsistenceLevels);
 	}
 }
