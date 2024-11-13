@@ -39,6 +39,10 @@ void V3::Building::registerKeys(const std::map<std::string, int>& costTiers)
 		if (const auto costTier = commonItems::getString(theStream); costTiers.contains(costTier))
 		{
 			constructionCost = costTiers.at(costTier);
+			if (costTier == "construction_cost_monument")
+			{
+				monumental = true;
+			}
 		}
 		else
 		{
