@@ -10,6 +10,17 @@
 		ideology_republican
 		ideology_anti_slavery
 	}
+	
+	character_ideologies = {
+		ideology_moderate
+		ideology_republican_leader
+		ideology_radical
+		ideology_reformer
+		ideology_sovereignist_leader
+		ideology_orleanist
+		ideology_despotic_utopian
+		ideology_humanitarian
+	}
 
 	enable = {
 		always = yes
@@ -23,7 +34,7 @@
 	}
 
 	on_enable = {
-		#ig:ig_intelligentsia = {		### Converter; commenting out instead of deleting so it's easier to see any future changes
+		ig:ig_intelligentsia = {		### Converter; commenting out instead of deleting so it's easier to see any future changes
 		#	if = {
 		#		limit = {
 		#			owner = { c:CHI ?= this }
@@ -54,12 +65,21 @@
 		#		set_ig_trait = ig_trait:ig_trait_avant_garde
 		#		set_ig_trait = ig_trait:ig_trait_les_beaux_arts
 		#	}
-		#	else = {
-		#		set_ig_trait = ig_trait:ig_trait_social_criticism
-		#		set_ig_trait = ig_trait:ig_trait_avant_garde
-		#		set_ig_trait = ig_trait:ig_trait_propagandists
-		#	}
-		#}
+			if = {
+				limit = {
+					has_dlc_feature = ip2_content
+					owner = { c:BIC ?= this }
+				}
+				set_ig_trait = ig_trait:ig_trait_swaraj
+				set_ig_trait = ig_trait:ig_trait_civil_service
+				set_ig_trait = ig_trait:ig_trait_westernisation
+			}
+			else = {
+				set_ig_trait = ig_trait:ig_trait_social_criticism
+				set_ig_trait = ig_trait:ig_trait_avant_garde
+				set_ig_trait = ig_trait:ig_trait_propagandists
+			}
+		}
 		#
 		## Papal Intellegentsia
 		#if = {
@@ -106,6 +126,18 @@
 		#		add_ideology = ideology_constitutionalist
 		#	}
 		#}
+		# India
+		else_if = {
+			limit = {
+				c:BIC ?= THIS
+			}
+			ig:ig_intelligentsia = {
+				set_interest_group_name = ig_civil_servants
+
+				remove_ideology = ideology_republican
+				add_ideology = ideology_constitutionalist
+			}
+		}
 		## Britain and other Constitutionalists
 		#else_if = {
 		#	limit = {
@@ -134,6 +166,19 @@
 		#}
 	}
 	on_disable = {}
+	priority_cultures = { #Country scope
+		rule = {
+			trigger = {
+				c:BIC ?= this
+				any_primary_culture = { 
+					cu:british = this
+				}
+			}
+			cultures = {
+				assamese avadhi baluchi bengali bihari gujarati kannada malayalam marathi oriya panjabi pathan rajput sindi tamil telegu hindustani bundeli pahari gondi bageli chhattisgarhi deccani
+			}
+		}
+	}
 	on_character_ig_membership = {}
 
 	pop_potential = {
@@ -218,6 +263,49 @@
 					}
 				}
 				value = 100
+			}
+		}
+
+		if = {
+			limit = {
+				owner = {
+					c:BIC ?= this
+				}
+				OR = {
+					is_pop_type = bureaucrats
+					is_pop_type = clerks
+				}
+			}
+			if = {
+				limit = {
+					culture = {
+						has_discrimination_trait = european_heritage
+					}
+				}
+				multiply = {
+					desc = "POP_INDIA_COLONIAL_RULE"
+					value = 0.25
+				}
+			}
+			else = {
+				multiply = {
+					desc = "POP_INDIA_CIVIL_SERVICE"
+					value = 1.5
+				}
+			}
+		}
+		
+		add = {
+			desc = "POP_MILITARY_BUREAUCRACY"
+			if = {
+				limit = {
+					is_pop_type = bureaucrats
+					owner = {
+						c:ALK ?= this
+						has_government_type = gov_chartered_company
+					}
+				}
+				multiply = 0.25
 			}
 		}
 		
@@ -624,15 +712,6 @@
 	# scope:character is the most popular commander in the IG
 	commander_leader_chance = {
 		value = 0.25
-		if = {
-			limit = {
-				exists = scope:character
-			}
-			multiply = {
-				value = 1
-				add = scope:character.popularity
-				min = 0
-			}
-		}
+		multiply = ig_commander_leader_chance_mult
 	}
 }

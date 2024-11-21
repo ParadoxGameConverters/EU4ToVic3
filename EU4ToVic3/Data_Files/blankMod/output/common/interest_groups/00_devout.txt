@@ -9,6 +9,12 @@
 		ideology_moralist
 		ideology_patriarchal
 	}
+	
+	character_ideologies = {
+		ideology_moderate
+		ideology_traditionalist
+		ideology_legitimist
+	}
 
 	enable = {
 		always = yes
@@ -22,17 +28,20 @@
 	}
 
 	on_enable = {
-		#ig:ig_devout = {		### Converter; commenting out instead of deleting so it's easier to see any future changes
-		#	if = {
-		#		limit = {
-		#			owner = {
-		#				country_has_state_religion = rel:protestant
-		#			}
-		#		}
-		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
-		#		set_ig_trait = ig_trait:ig_trait_divine_right
-		#		set_ig_trait = ig_trait:ig_trait_work_ethic
-		#	}
+		ig:ig_devout = {		### Converter; commenting out instead of deleting so it's easier to see any future changes
+			if = {
+				limit = {
+					owner = {
+						country_has_state_religion = rel:protestant
+						NOT = {
+							c:BIC ?= this
+						}
+					}
+				}
+				set_ig_trait = ig_trait:ig_trait_pious_fiction
+				set_ig_trait = ig_trait:ig_trait_divine_right
+				set_ig_trait = ig_trait:ig_trait_work_ethic
+			}
 		#	else_if = {
 		#		limit = {
 		#			owner = {
@@ -55,7 +64,7 @@
 		#			}
 		#		}
 		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
-		#		set_ig_trait = ig_trait:ig_trait_khalsa
+		#		set_ig_trait = ig_trait:ig_trait_rehat
 		#		set_ig_trait = ig_trait:ig_trait_kar_seva
 		#	}
 		#	else_if = {
@@ -110,12 +119,22 @@
 		#		set_ig_trait = ig_trait:ig_trait_mecelle
 		#		set_ig_trait = ig_trait:ig_trait_da_wat
 		#	}
-		#	else = {
-		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
-		#		set_ig_trait = ig_trait:ig_trait_divine_right
-		#		set_ig_trait = ig_trait:ig_trait_be_fruitful_and_multiply
-		#	}
-		#}
+			else_if = {
+				limit = {
+					owner = {
+						c:BIC ?= this
+					}
+				}
+				set_ig_trait = ig_trait:ig_trait_pious_fiction
+				set_ig_trait = ig_trait:ig_trait_divine_right
+				set_ig_trait = ig_trait:ig_trait_asceticism
+			}
+			else = {
+				set_ig_trait = ig_trait:ig_trait_pious_fiction
+				set_ig_trait = ig_trait:ig_trait_divine_right
+				set_ig_trait = ig_trait:ig_trait_be_fruitful_and_multiply
+			}
+		}
 		#
 		#### Specific
 		#
@@ -154,23 +173,26 @@
 		#		add_ideology = ideology_laissez_faire
 		#	}
 		#}
-		## Anglicans
-		#else_if = {
-		#	limit = {
-		#		country_has_state_religion = rel:protestant
-		#		OR = {
-		#			country_has_primary_culture = cu:maori
-		#			country_has_primary_culture = cu:australian
-		#			country_has_primary_culture = cu:anglo_canadian
-		#			country_has_primary_culture = cu:british
-		#			country_has_primary_culture = cu:irish
-		#			c:NRU ?= this
-		#		}
-		#	}
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_anglican_church
-		#	}
-		#}
+		# Anglicans
+		if = {
+			limit = {
+				country_has_state_religion = rel:protestant
+				OR = {
+					country_has_primary_culture = cu:maori
+					country_has_primary_culture = cu:australian
+					country_has_primary_culture = cu:anglo_canadian
+					country_has_primary_culture = cu:british
+					country_has_primary_culture = cu:irish
+					c:NRU ?= this
+				}
+				NOT = {
+					c:BIC ?= this
+				}
+			}
+			ig:ig_devout = {
+				set_interest_group_name = ig_anglican_church
+			}
+		}
 		## Russian Orthodox Church
 		#else_if = {
 		#	limit = {
@@ -207,6 +229,16 @@
 		#		set_interest_group_name = ig_church_of_norway
 		#	}
 		#}
+		# Church of Finland
+		else_if = {
+			limit = {
+				country_has_state_religion = rel:protestant
+				country_has_primary_culture = cu:finnish
+			}
+			ig:ig_devout = {
+				set_interest_group_name = ig_church_of_finland
+			}
+		}
 		## Church of Sweden
 		#else_if = {
 		#	limit = {
@@ -266,13 +298,18 @@
 		#		set_interest_group_name = ig_catholic_church 
 		#	}
 		#}
-		## Evangelical Church
-		#else_if = {
-		#	limit = { country_has_state_religion = rel:protestant }
-		#	ig:ig_devout = { 
-		#		set_interest_group_name = ig_evangelical_church
-		#	}
-		#}
+		# Evangelical Church
+		else_if = {
+			limit = { 
+				country_has_state_religion = rel:protestant 
+				NOT = {
+					c:BIC ?= this
+				}
+			}
+			ig:ig_devout = { 
+				set_interest_group_name = ig_evangelical_church
+			}
+		}
 		## Sunni Ulema
 		#else_if = {
 		#	limit = { country_has_state_religion = rel:sunni }
@@ -312,15 +349,31 @@
 		#		add_ideology = ideology_orthodox_patriarch
 		#	}
 		#}
-		## Hindu Priesthood
-		#else_if = {
-		#	limit = { country_has_state_religion = rel:hindu }
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_hindu_priesthood
-		#		remove_ideology = ideology_moralist
-		#		add_ideology = ideology_hindu_moralist
-		#	}
-		#}
+		# Hindu Priesthood
+		else_if = {
+			limit = { 
+				OR = {
+					country_has_state_religion = rel:hindu 
+					c:BIC ?= this
+				}
+			}
+			ig:ig_devout = {
+				set_interest_group_name = ig_hindu_priesthood
+				if = {
+					limit = {
+						owner = {
+							c:BIC ?= this
+						}
+					}
+					remove_ideology = ideology_moralist
+					add_ideology = ideology_hindu_moralist_british_india
+				}
+				else = {
+					remove_ideology = ideology_moralist
+					add_ideology = ideology_hindu_moralist
+				}
+			}
+		}
 		## Vajrayana Monks
 		#else_if = {
 		#	limit = { country_has_state_religion = rel:gelugpa }
@@ -348,15 +401,15 @@
 		#		add_ideology = ideology_buddhist_moralist
 		#	}
 		#}
-		## Sikh Priesthood
-		#else_if = {
-		#	limit = { country_has_state_religion = rel:sikh }
-		#	ig:ig_devout = {
-		#		set_interest_group_name = ig_sikh_priesthood
-		#		remove_ideology = ideology_moralist
-		#		add_ideology = ideology_sikh_moralist
-		#	}
-		#}
+		# Sikh Granthis
+		else_if = {
+			limit = { country_has_state_religion = rel:sikh }
+			ig:ig_devout = {
+				set_interest_group_name = ig_granthis
+				remove_ideology = ideology_moralist
+				add_ideology = ideology_sikh_moralist
+			}
+		}
 		#
 		#### Corporatism
 		#if = {
@@ -370,8 +423,31 @@
 		#}
 	}
 	on_disable = {}
+
+	priority_cultures = { #Country scope
+		rule = {
+			trigger = {
+				c:BIC ?= this
+				any_primary_culture = { 
+					cu:british = this
+				}
+			}
+			cultures = {
+				assamese avadhi baluchi bengali bihari gujarati kannada malayalam marathi oriya panjabi pathan rajput sindi tamil telegu hindustani bundeli pahari gondi bageli chhattisgarhi deccani
+			}
+		}
+	}
+
 	on_character_ig_membership = {
 		if = {
+			limit = {
+				owner = {
+					c:BIC ?= this
+				}
+			}
+			change_character_religion = rel:hindu
+		}
+		else_if = {
 			limit = {
 				NOT = {
 					owner = {
@@ -388,14 +464,24 @@
 
 
 	pop_potential = {
-		has_state_religion = yes
+		OR = {
+			has_state_religion = yes
+			AND = {
+				exists = c:BIC
+				owner ?= c:BIC
+				has_pop_religion = hindu
+			}
+		}
 		NOT = {
 			has_pop_religion = atheist
 		}
 	}
 
 	pop_weight = {
-		value = 25
+		add = {
+			desc = "POP_BASE_ATTRACTION"
+			value = 25
+		}
 
 		add = {
 			desc = "POP_CLERGYMEN"
@@ -654,15 +740,6 @@
 	# scope:character is the most popular commander in the IG
 	commander_leader_chance = {
 		value = 0.25
-		if = {
-			limit = {
-				exists = scope:character
-			}
-			multiply = {
-				value = 1
-				add = scope:character.popularity
-				min = 0
-			}
-		}
+		multiply = ig_commander_leader_chance_mult
 	}
 }

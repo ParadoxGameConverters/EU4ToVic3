@@ -9,6 +9,13 @@
 		ideology_particularist
 		ideology_isolationist
 	}
+	
+	character_ideologies = {
+		ideology_moderate
+		ideology_pacifist
+		ideology_bonapartist
+		ideology_legitimist
+	}
 
 	enable = {
 		always = yes
@@ -22,7 +29,7 @@
 	}
 
 	on_enable = {
-		#ig:ig_rural_folk = {		### Converter; commenting out instead of deleting so it's easier to see any future changes
+		ig:ig_rural_folk = {		### Converter; commenting out instead of deleting so it's easier to see any future changes
 		#	if = {
 		#		limit = {
 		#			has_dlc_feature = rp1_content
@@ -49,12 +56,40 @@
 		#		set_ig_trait = ig_trait:ig_trait_fellahin
 		#		set_ig_trait = ig_trait:ig_trait_farmers_markets
 		#	}
-		#	else = {
-		#		set_ig_trait = ig_trait:ig_trait_old_ways
-		#		set_ig_trait = ig_trait:ig_trait_honest_work
-		#		set_ig_trait = ig_trait:ig_trait_farmers_markets
-		#	}
-		#}
+			else_if = {
+				limit = {
+					owner = { 
+						OR = {
+							c:BIC ?= this
+							any_primary_culture = {
+								has_discrimination_trait = south_asian_heritage
+								NOT = {
+									has_discrimination_trait = himalayan
+								}
+							}
+						}
+					}
+				}
+				set_interest_group_name = ig_ryots
+				set_ig_trait = ig_trait:ig_trait_of_the_sovereign_alone
+				set_ig_trait = ig_trait:ig_trait_imandari
+				set_ig_trait = ig_trait:ig_trait_bazaar_bargains
+			}
+			else_if = {
+				limit = {
+					owner = { c:PAN ?= this }
+				}
+				set_interest_group_name = ig_jats
+				set_ig_trait = ig_trait:ig_trait_old_ways
+				set_ig_trait = ig_trait:ig_trait_honest_work
+				set_ig_trait = ig_trait:ig_trait_khalsa_panth
+			}
+			else = {
+				set_ig_trait = ig_trait:ig_trait_old_ways
+				set_ig_trait = ig_trait:ig_trait_honest_work
+				set_ig_trait = ig_trait:ig_trait_farmers_markets
+			}
+		}
 		#
 		## Jeffersonian Ideology
 		#if = {
@@ -89,8 +124,59 @@
 		#		set_interest_group_name = ig_maka_ainana
 		#	}
 		#}
+		# Sikh Empire
+		if = {
+			limit = {
+				c:PAN ?= this
+			}
+			ig:ig_rural_folk = {
+				set_interest_group_name = ig_jats
+			}
+		}
+		# India
+		else_if = {
+			limit = {
+				OR = {
+					c:BIC ?= this
+					any_primary_culture = {
+						has_discrimination_trait = south_asian_heritage
+						NOT = {
+							has_discrimination_trait = himalayan
+						}
+					}
+				}
+			}
+			ig:ig_rural_folk = {
+				set_interest_group_name = ig_ryots
+			}
+		}
+		# Nepal
+		else_if = {
+			limit = {
+				any_primary_culture = {
+					has_discrimination_trait = south_asian_heritage
+					has_discrimination_trait = himalayan
+				}
+			}
+			ig:ig_rural_folk = {
+				set_interest_group_name = ig_kisanharu
+			}
+		}
 	}
 	on_disable = {}
+	priority_cultures = { #Country scope
+		rule = {
+			trigger = {
+				c:BIC ?= this
+				any_primary_culture = { 
+					cu:british = this
+				}
+			}
+			cultures = {
+				assamese avadhi baluchi bengali bihari gujarati kannada malayalam marathi oriya panjabi pathan rajput sindi tamil telegu hindustani bundeli pahari gondi bageli chhattisgarhi deccani
+			}
+		}
+	}
 	on_character_ig_membership = {}
 
 	pop_potential = {
@@ -126,7 +212,15 @@
 						pop_employment_building_group = bg_manor_houses
 					}
 				}
-				value = 100
+				if = {
+					limit = {
+						is_pop_type = clergymen
+					}
+					value = 25
+				}
+				else = {
+					value = 100
+				}
 			}
 		}
 
@@ -156,10 +250,23 @@
 				limit = {
 					is_pop_type = clergymen
 				}
-				value = 100
+				value = 75
 			}
 		}
-
+		
+		if = {
+			limit = {
+				c:BIC ?= owner
+				culture = {
+					has_discrimination_trait = european_heritage
+				}
+			}
+			multiply = {
+				desc = "POP_INDIA_COLONIAL_RULE"
+				value = 0.1
+			}
+		}
+	
 		multiply = {
 			desc = "LEADER_POPULARITY"
 			scope:interest_group = {
@@ -301,15 +408,6 @@
 	# scope:character is the most popular commander in the IG
 	commander_leader_chance = {
 		value = 0.5
-		if = {
-			limit = {
-				exists = scope:character
-			}
-			multiply = {
-				value = 1
-				add = scope:character.popularity
-				min = 0
-			}
-		}
+		multiply = ig_commander_leader_chance_mult
 	}
 }
