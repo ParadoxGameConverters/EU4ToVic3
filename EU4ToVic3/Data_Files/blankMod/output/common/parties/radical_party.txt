@@ -225,6 +225,18 @@ radical_party = {
 				}
 			}
 			triggered_desc = {
+				desc = party_swaraj_party
+				trigger = {
+					OR = {
+						c:BIC ?= this
+						AND = {
+							c:BHT ?= this
+							is_subject = yes
+						}
+					}
+				}
+			}
+			triggered_desc = {
 				desc = party_radicals
 				trigger = {
 					always = yes
@@ -247,19 +259,17 @@ radical_party = {
 			country_has_voting_franchise = yes
 			any_interest_group = {
 				is_marginal = no
-				leader = {
-					has_ideology = ideology:ideology_radical
+				OR = {
+					leader = {
+						has_ideology = ideology:ideology_radical
+					}
+					AND = {
+						is_interest_group_type = ig_trade_unions
+						NOT = {
+							has_ideology = ideology:ideology_socialist
+						}
+					}
 				}
-			}
-		}
-		OR = {
-	     	NOT = {
-	         	owner = {
-	         		has_variable = only_valid_party
-	         	}
-	        }
-	        owner.var:only_valid_party = {
-	        	is_party_type = radical_party
 	        }
 	    }
 		NOR = {
@@ -288,6 +298,26 @@ radical_party = {
 		value = {
 			value = -5
 			desc = "base_value"
+		}
+		if = {
+			limit = {
+				owner = {
+					c:BIC ?= this
+					is_subject = yes
+					OR = {
+						has_modifier = modifier_india_crown_rule
+						has_modifier = modifier_india_company_rule
+					}
+				}
+				OR = {
+					is_interest_group_type = ig_industrialists
+					is_interest_group_type = ig_armed_forces
+				}
+			}
+			add = {
+				value = -100
+				desc = "india_colonial_government"
+			}
 		}
 		if = {
 			limit = {
@@ -606,6 +636,19 @@ radical_party = {
 				desc = "from_serfdom"
 			}
 		}
+		if = { # early Trade Unions
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				is_powerful = no
+				NOT = {
+					has_ideology = ideology:ideology_socialist
+				}
+			}
+			add = {
+				value = 10
+				desc = "from_early_trade_unions"
+			}
+		}
 		if = {
 			limit = {
 				scope:number = 1
@@ -642,52 +685,6 @@ radical_party = {
 			multiply = {
 				value = 0.1
 				desc = "from_more_than_three_prior_members"
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-	         	NOT = {
-			        owner.var:only_valid_party = {
-			        	is_party_type = radical_party
-			        }
-			    }
-			}
-			multiply = {
-				value = 0
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-				 owner.var:only_valid_party = {
-					 is_party_type = radical_party
-				 }
-	         	owner.ruler = {
-					this.interest_group = prev
-				}
-			}
-			add = {
-				value = 1000
-				desc = "from_only_legal_party"
-			}
-		}
-		else_if = {
-			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-	         	 owner.var:only_valid_party = {
-		        	is_party_type = radical_party
-		        }
-			}
-			add = {
-				value = 3
-				desc = "from_only_legal_party"
 			}
 		}
 	}

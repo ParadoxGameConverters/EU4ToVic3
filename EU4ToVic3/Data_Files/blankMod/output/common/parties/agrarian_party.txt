@@ -128,6 +128,18 @@ agrarian_party = {
 				}
 			}
 			triggered_desc = {
+				desc = party_justice_party
+				trigger = {
+					OR = {
+						c:BIC ?= this
+						AND = {
+							c:BHT ?= this
+							is_subject = yes
+						}
+					}
+				}
+			}
+			triggered_desc = {
 				desc = party_agrarian
 				trigger = {
 					always = yes
@@ -150,16 +162,6 @@ agrarian_party = {
 				is_marginal = no
 			}
 		}
-		OR = {
-	     	NOT = {
-	         	owner = {
-	         		has_variable = only_valid_party
-	         	}
-	        }
-	        owner.var:only_valid_party = {
-	        	is_party_type = agrarian_party
-	        }
-	    }
 	}
 	
 	# Root - IG considering joining
@@ -168,6 +170,26 @@ agrarian_party = {
 		value = {
 			value = -5
 			desc = "base_value"
+		}
+		if = {
+			limit = {
+				owner = {
+					c:BIC ?= this
+					is_subject = yes
+					OR = {
+						has_modifier = modifier_india_crown_rule
+						has_modifier = modifier_india_company_rule
+					}
+				}
+				OR = {
+					is_interest_group_type = ig_industrialists
+					is_interest_group_type = ig_armed_forces
+				}
+			}
+			add = {
+				value = -100
+				desc = "india_colonial_government"
+			}
 		}
 		if = {
 			limit = {
@@ -498,52 +520,6 @@ agrarian_party = {
 			add = {
 				value = -10
 				desc = "from_two_party_system"
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-	         	NOT = {
-			        owner.var:only_valid_party = {
-			        	is_party_type = agrarian_party
-			        }
-			    }
-			}
-			multiply = {
-				value = 0
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-				 owner.var:only_valid_party = {
-					is_party_type = agrarian_party
-				}
-	         	owner.ruler = {
-					this.interest_group = prev
-				}
-			}
-			add = {
-				value = 1000
-				desc = "from_only_legal_party"
-			}
-		}
-		else_if = {
-			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-	         	 owner.var:only_valid_party = {
-		        	is_party_type = agrarian_party
-		        }
-			}
-			add = {
-				value = 3
-				desc = "from_only_legal_party"
 			}
 		}
 	}

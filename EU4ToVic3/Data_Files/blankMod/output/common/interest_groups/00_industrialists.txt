@@ -10,6 +10,14 @@
 		ideology_individualist
 	}
 
+	character_ideologies = {
+		ideology_moderate
+		ideology_market_liberal
+		ideology_protectionist
+		ideology_orleanist
+		ideology_bonapartist
+	}
+
 	enable = {
 		always = yes
 	}
@@ -66,6 +74,21 @@
 	}
 
 	on_disable = {}
+
+	priority_cultures = { #Country scope
+		rule = {
+			trigger = {
+				c:BIC ?= this
+				any_primary_culture = { 
+					cu:british = this
+				}
+			}
+			cultures = {
+				british scottish irish
+			}
+		}
+	}
+
 	on_character_ig_membership = {}
 
 	pop_potential = {
@@ -73,6 +96,17 @@
 			is_pop_type = capitalists
 			is_pop_type = engineers
 			is_pop_type = shopkeepers
+			AND = {
+				exists = c:BIC
+				owner ?= c:BIC
+				OR = {
+					culture ?= {
+						has_discrimination_trait = european_heritage
+					}
+					is_pop_type = bureaucrats
+					is_pop_type = clerks
+				}
+			}
 		}
 	}
 
@@ -109,6 +143,69 @@
 				}
 				value = 50
 				add = this.standard_of_living
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					c:BIC ?= this
+				}
+				culture = {
+					has_discrimination_trait = european_heritage
+				}
+				OR = {
+					strata = upper
+					strata = middle
+				}
+				NOT = {
+					is_pop_type = officers
+				}
+			}
+			add = {
+				desc = "POP_INDIA_EUROPEAN_ADMINISTRATORS"
+				value = 250
+			}
+		}
+		
+		if = {
+			limit = {
+				owner = {
+					c:BIC ?= this
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						culture = {
+							has_discrimination_trait = european_heritage
+						}
+					}
+					OR = {
+						is_pop_type = bureaucrats
+						is_pop_type = clerks
+					}
+				}
+				add = {
+					desc = "POP_INDIA_NATIVE_ADMINISTRATORS"
+					value = 25
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						culture = {
+							has_discrimination_trait = european_heritage
+						}
+					}
+					NOR = {
+						is_pop_type = bureaucrats
+						is_pop_type = clerks
+					}
+				}
+				multiply = {
+					desc = "POP_INDIA_ADMINISTRATION_PRIVILEGES"
+					value = 0.05
+				}
 			}
 		}
 
@@ -292,15 +389,6 @@
 	# scope:character is the most popular commander in the IG
 	commander_leader_chance = {
 		value = 0.25
-		if = {
-			limit = {
-				exists = scope:character
-			}
-			multiply = {
-				value = 1
-				add = scope:character.popularity
-				min = 0
-			}
-		}
+		multiply = ig_commander_leader_chance_mult
 	}
 }
