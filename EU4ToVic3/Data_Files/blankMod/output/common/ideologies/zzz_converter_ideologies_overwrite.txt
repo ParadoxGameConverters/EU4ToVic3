@@ -83,12 +83,10 @@
 						has_law = law_type:law_freedom_of_conscience
 					}
 				}
-				interest_group = {
-					is_interest_group_type = ig_armed_forces
-					OR = {
-						has_ideology = ideology:ideology_pious
-						has_ideology = ideology:ideology_corporatist
-					}
+				is_interest_group_type = ig_armed_forces
+				OR = {
+					has_ideology = ideology:ideology_pious
+					has_ideology = ideology:ideology_corporatist
 				}
 			}
 			add = 30
@@ -103,12 +101,10 @@
 						has_law = law_type:law_state_atheism
 					}
 				}
-				interest_group = {
-					is_interest_group_type = ig_armed_forces
-					OR = {
-						has_ideology = ideology:ideology_pious
-						has_ideology = ideology:ideology_corporatist
-					}
+				is_interest_group_type = ig_armed_forces
+				OR = {
+					has_ideology = ideology:ideology_pious
+					has_ideology = ideology:ideology_corporatist
 				}
 			}
 			add = 10
@@ -650,7 +646,7 @@ ideology_pacifist = {
 		# Pacifists are pacifict
 		if = {
 			limit = {
-				interest_group = { is_interest_group_type = ig_devout }
+				is_interest_group_type = ig_devout
 				religion = { has_discrimination_trait = pacifist }
 			}
 			multiply = {
@@ -1061,12 +1057,10 @@ ideology_theocrat = {
 						has_law = law_type:law_freedom_of_conscience
 					}
 				}
-				interest_group = {
-					is_interest_group_type = ig_armed_forces
-					OR = {
-						has_ideology = ideology:ideology_pious
-						has_ideology = ideology:ideology_corporatist
-					}
+				is_interest_group_type = ig_armed_forces
+				OR = {
+					has_ideology = ideology:ideology_pious
+					has_ideology = ideology:ideology_corporatist
 				}
 			}
 			add = 75
@@ -1081,12 +1075,10 @@ ideology_theocrat = {
 						has_law = law_type:law_state_atheism
 					}
 				}
-				interest_group = {
-					is_interest_group_type = ig_armed_forces
-					OR = {
-						has_ideology = ideology:ideology_pious
-						has_ideology = ideology:ideology_corporatist
-					}
+				is_interest_group_type = ig_armed_forces
+				OR = {
+					has_ideology = ideology:ideology_pious
+					has_ideology = ideology:ideology_corporatist
 				}
 			}
 			add = 25
