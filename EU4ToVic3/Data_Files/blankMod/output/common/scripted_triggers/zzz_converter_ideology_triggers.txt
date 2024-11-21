@@ -60,9 +60,9 @@ ideology_slaver_valid_trigger = {
 	}
 	### Converter ###
 	# Since I'm making Mazdans abolitionist by default
-	if = {
+	trigger_if = {
 		limit = {
-			religion = { has_discrimination_trait = mazdan }
+			owner.religion = { has_discrimination_trait = mazdan }
 		}
 		NOT = { is_interest_group_type = ig_devout }
 	}
