@@ -19,7 +19,8 @@ TEST(Mappers_IdeaEffectsMapperTests, NonsenseIdeasReturnEmptyEffect)
 	EXPECT_TRUE(effect.boostedInterestGroups.empty());
 	EXPECT_TRUE(effect.suppressedInterestGroups.empty());
 }
-
+/*
+ * Disabled as of 1.8+ until bolstering/suppression exists once again.
 TEST(Mappers_IdeaEffectsMapperTests, effectCanBeCalculated)
 {
 	mappers::IdeaEffectsMapper mapper;
@@ -39,7 +40,7 @@ TEST(Mappers_IdeaEffectsMapperTests, effectCanBeCalculated)
 	EXPECT_THAT(effect.boostedInterestGroups, testing::UnorderedElementsAre("iggroup2", "iggroup3"));
 	EXPECT_THAT(effect.suppressedInterestGroups, testing::UnorderedElementsAre("noiggroup1", "noiggroup2"));
 }
-
+*/
 TEST(Mappers_IdeaEffectsMapperTests, doubleBoostedInterestGroupBecomesRuling)
 {
 	mappers::IdeaEffectsMapper mapper;
@@ -53,6 +54,4 @@ TEST(Mappers_IdeaEffectsMapperTests, doubleBoostedInterestGroupBecomesRuling)
 	const auto effect = mapper.getEffectForIdeas(ideas);
 
 	EXPECT_THAT(effect.rulingInterestGroups, testing::UnorderedElementsAre("iggroup1"));
-	EXPECT_THAT(effect.boostedInterestGroups, testing::UnorderedElementsAre("iggroup1"));
-	EXPECT_THAT(effect.suppressedInterestGroups, testing::UnorderedElementsAre());
 }
