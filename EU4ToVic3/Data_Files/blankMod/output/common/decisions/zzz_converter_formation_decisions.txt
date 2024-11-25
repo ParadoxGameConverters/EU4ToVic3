@@ -1513,6 +1513,7 @@ form_hudson_bay_dec = {
 	
 	when_taken = {
 		change_tag = HBC
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1556,6 +1557,7 @@ form_newfoundland_dec = {
 	
 	when_taken = {
 		change_tag = NEW
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1598,6 +1600,7 @@ form_nunavut_dec = {
 	
 	when_taken = {
 		change_tag = NNV
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1638,6 +1641,7 @@ form_ontario_dec = {
 	
 	when_taken = {
 		change_tag = ONT
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1674,6 +1678,7 @@ form_quebec_dec = {
 	
 	when_taken = {
 		change_tag = QUE
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1708,6 +1713,7 @@ form_new_brunswick_dec = {
 	
 	when_taken = {
 		change_tag = NBS
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1744,6 +1750,7 @@ form_nova_scotia_dec = {
 	
 	when_taken = {
 		change_tag = NVS
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1799,6 +1806,7 @@ form_new_england_dec = {
 	
 	when_taken = {
 		change_tag = NEN
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1845,6 +1853,7 @@ form_free_states_dec = {
 	
 	when_taken = {
 		change_tag = FSA
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1882,6 +1891,7 @@ form_confederate_states_dec = {
 	
 	when_taken = {
 		change_tag = CSA
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1928,6 +1938,7 @@ form_north_carolina_dec = {
 	
 	when_taken = {
 		change_tag = NCR
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1974,6 +1985,7 @@ form_south_carolina_dec = {
 	
 	when_taken = {
 		change_tag = SCR
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2003,8 +2015,8 @@ form_united_carolina_dec = {
 		#For converter-generated tags only
 		OR = {
 			zzz_is_non_major_new_world_tag = no
-			c:NCR = ROOT
-			c:SCR = ROOT
+			c:NCR ?= ROOT
+			c:SCR ?= ROOT
 		}
 		zzz_is_major_new_world_tag = no
 		
@@ -2014,24 +2026,25 @@ form_united_carolina_dec = {
 		is_subject = no
 		is_at_war = no
 		is_diplomatic_play_committed_participant = no
-		OR = {
-			NOT = { exists = c:NCR }
-			if = {
-				limit = { exists = c:NCR }
-				c:NCR = ROOT
-			}
+		trigger_if = {
+			limit = { exists = c:NCR }
+			c:NCR = ROOT
 		}
-		OR = {
+		trigger_else = {
+			NOT = { exists = c:NCR }
+		}
+		trigger_if = {
+			limit = { exists = c:SCR }
+			c:SCR = ROOT
+		}
+		trigger_else = {
 			NOT = { exists = c:SCR }
-			if = {
-				limit = { exists = c:SCR }
-				c:SCR = ROOT
-			}
 		}
 	}
 	
 	when_taken = {
 		change_tag = CLI
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2074,6 +2087,7 @@ form_georgia_usa_dec = {
 	
 	when_taken = {
 		change_tag = GRG
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2113,6 +2127,7 @@ form_florida_dec = {
 	
 	when_taken = {
 		change_tag = FLR
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2161,6 +2176,7 @@ form_michigan_dec = {
 	
 	when_taken = {
 		change_tag = UOM
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2206,6 +2222,7 @@ form_dakota_dec = {
 	
 	when_taken = {
 		change_tag = DKT
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2248,6 +2265,7 @@ form_louisiana_dec = {
 	
 	when_taken = {
 		change_tag = LOU
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2293,6 +2311,7 @@ form_california_dec = {
 	
 	when_taken = {
 		change_tag = CAL
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2321,6 +2340,7 @@ form_oregon_dec = {
 	
 	when_taken = {
 		change_tag = ORG
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2357,6 +2377,7 @@ form_deseret_dec = {
 	
 	when_taken = {
 		change_tag = DES
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2405,6 +2426,7 @@ form_cascadia_dec = {
 	
 	when_taken = {
 		change_tag = CSC
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2454,6 +2476,7 @@ form_columbia_dec = {
 	
 	when_taken = {
 		change_tag = COL
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2507,6 +2530,7 @@ form_texas_dec = {
 	
 	when_taken = {
 		change_tag = TEX
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2540,6 +2564,7 @@ form_rio_grande_dec = {
 	
 	when_taken = {
 		change_tag = RIO
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2590,6 +2615,7 @@ form_yucatan_dec = {
 	
 	when_taken = {
 		change_tag = YUC
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2636,6 +2662,7 @@ form_los_altos_dec = {
 	
 	when_taken = {
 		change_tag = ALT
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2675,6 +2702,7 @@ form_guatemala_dec = {
 	
 	when_taken = {
 		change_tag = GUA
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2703,6 +2731,7 @@ form_honduras_dec = {
 	
 	when_taken = {
 		change_tag = HON
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2731,6 +2760,7 @@ form_el_salvador_dec = {
 	
 	when_taken = {
 		change_tag = ELS
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2759,6 +2789,7 @@ form_nicaragua_dec = {
 	
 	when_taken = {
 		change_tag = NIC
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2787,6 +2818,7 @@ form_costa_rica_dec = {
 	
 	when_taken = {
 		change_tag = COS
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2828,6 +2860,7 @@ form_usca_dec = {
 	
 	when_taken = {
 		change_tag = UCA
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2861,6 +2894,7 @@ form_panama_dec = {
 			set_variable = free_nation_name_var
 		}
 		change_tag = PNM
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2892,6 +2926,7 @@ form_colombia_dec = {
 			set_variable = free_nation_name_var
 		}
 		change_tag = CLM
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2934,6 +2969,7 @@ form_venezuela_dec = {
 	
 	when_taken = {
 		change_tag = VNZ
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2980,6 +3016,7 @@ form_ecuador_dec = {
 	
 	when_taken = {
 		change_tag = ECU
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3024,6 +3061,7 @@ form_north_peru_dec = {
 	
 	when_taken = {
 		change_tag = NPU
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3053,6 +3091,7 @@ form_bolivia_dec = {
 	
 	when_taken = {
 		change_tag = BOL
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3087,6 +3126,7 @@ form_chile_dec = {
 	
 	when_taken = {
 		change_tag = CHL
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3136,6 +3176,7 @@ form_paraguay_dec = {
 	
 	when_taken = {
 		change_tag = PRG
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3180,6 +3221,7 @@ form_uruguay_dec = {
 	
 	when_taken = {
 		change_tag = URU
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3239,6 +3281,7 @@ form_rio_de_la_plata_dec = {
 	
 	when_taken = {
 		change_tag = PLT
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3281,6 +3324,7 @@ form_amazonia_dec = {
 	
 	when_taken = {
 		change_tag = AMZ
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3322,6 +3366,7 @@ form_bahia_dec = {
 	
 	when_taken = {
 		change_tag = BHI
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3358,6 +3403,7 @@ form_equator_dec = {
 	
 	when_taken = {
 		change_tag = EQT
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3401,6 +3447,7 @@ form_grao_para_dec = {
 	
 	when_taken = {
 		change_tag = PRA
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3429,6 +3476,7 @@ form_minas_gerais_dec = {
 	
 	when_taken = {
 		change_tag = MNG
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3465,6 +3513,7 @@ form_paulistania_dec = {
 	
 	when_taken = {
 		change_tag = PAU
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3504,6 +3553,7 @@ form_piratini_dec = {
 	
 	when_taken = {
 		change_tag = PNI
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3543,6 +3593,7 @@ form_santa_catarina_dec = {
 			set_variable = free_nation_name_var
 		}
 		change_tag = CTR
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3581,6 +3632,7 @@ form_bahamas_dec = {
 	
 	when_taken = {
 		change_tag = BAH
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3609,6 +3661,7 @@ form_cuba_dec = {
 	
 	when_taken = {
 		change_tag = CUB
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3637,6 +3690,7 @@ form_haiti_dec = {
 	
 	when_taken = {
 		change_tag = HAI
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3665,6 +3719,7 @@ form_jamaica_dec = {
 	
 	when_taken = {
 		change_tag = JAM
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3693,6 +3748,7 @@ form_puerto_rico_dec = {
 	
 	when_taken = {
 		change_tag = PCO
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3721,6 +3777,7 @@ form_santo_domingo_dec = {
 	
 	when_taken = {
 		change_tag = DOM
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3749,6 +3806,7 @@ form_west_indies_dec = {
 	
 	when_taken = {
 		change_tag = WIN
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3782,6 +3840,7 @@ form_new_south_wales_dec = {
 	}
 	when_taken = {
 		change_tag = NSW
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3822,6 +3881,7 @@ form_new_zealand_dec = {
 	}
 	when_taken = {
 		change_tag = NZL
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3849,6 +3909,7 @@ form_south_australia_dec = {
 	}
 	when_taken = {
 		change_tag = SAS
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3876,6 +3937,7 @@ form_tasmania_dec = {
 	}
 	when_taken = {
 		change_tag = TAS
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3906,6 +3968,7 @@ form_western_australia_dec = {
 	}
 	when_taken = {
 		change_tag = WAS
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {

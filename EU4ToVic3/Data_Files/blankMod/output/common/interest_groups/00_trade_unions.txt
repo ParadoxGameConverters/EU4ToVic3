@@ -11,6 +11,12 @@
 		ideology_anti_slavery
 	}
 
+	character_ideologies = {
+		ideology_moderate
+		ideology_reformer
+		ideology_radical
+	}
+
 	enable = {
 		always = yes
 	}
@@ -66,6 +72,19 @@
 	}
 
 	on_disable = {}
+	priority_cultures = { #Country scope
+		rule = {
+			trigger = {
+				c:BIC ?= this
+				any_primary_culture = { 
+					cu:british = this
+				}
+			}
+			cultures = {
+				assamese avadhi baluchi bengali bihari gujarati kannada malayalam marathi oriya panjabi pathan rajput sindi tamil telegu hindustani bundeli pahari gondi bageli chhattisgarhi deccani
+			}
+		}
+	}
 	on_character_ig_membership = {}
 
 	pop_potential = {
@@ -86,7 +105,7 @@
 						}
 					}
 				}
-				strata = poor
+				strata = lower
 				NOR = {
 					pop_employment_building_group = bg_subsistence_agriculture
 					pop_employment_building_group = bg_subsistence_ranching
@@ -552,15 +571,6 @@
 	# scope:character is the most popular commander in the IG
 	commander_leader_chance = {
 		value = 0.25
-		if = {
-			limit = {
-				exists = scope:character
-			}
-			multiply = {
-				value = 1
-				add = scope:character.popularity
-				min = 0
-			}
-		}
+		multiply = ig_commander_leader_chance_mult
 	}
 }

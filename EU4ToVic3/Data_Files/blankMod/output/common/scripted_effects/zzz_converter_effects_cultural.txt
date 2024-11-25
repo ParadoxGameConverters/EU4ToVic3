@@ -16,1114 +16,6 @@
 # converter_cape_template_effect
 
 converter_historical_leader_culture_effect = {
-	#if = {
-	#	limit = {
-	#		sr:region_southern_africa = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					has_pop_culture = boer
-	#					culture = { has_homeland = prev.state }
-	#				}
-	#			}
-	#		}
-	#	}
-	#	cu:boer = {
-	#		set_global_variable = {
-	#			name = kruger_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_southern_africa = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						has_discrimination_trait = african_settler
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_southern_africa = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						has_discrimination_trait = african_settler
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						has_discrimination_trait = african_settler
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = kruger_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else = {
-	#	cu:boer = {
-	#		set_global_variable = {
-	#			name = kruger_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#if = {
-	#	limit = {
-	#		sr:region_new_england = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					has_pop_culture = yankee
-	#					culture = { has_homeland = prev.state }
-	#				}
-	#			}
-	#		}
-	#	}
-	#	cu:yankee = {
-	#		set_global_variable = {
-	#			name = new_england_yankee_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_new_england = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_new_england = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = new_england_yankee_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_new_england = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_new_england = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = new_england_yankee_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else = {
-	#	cu:yankee = {
-	#		set_global_variable = {
-	#			name = new_england_yankee_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#if = {
-	#	limit = {
-	#		sr:region_the_midwest = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					has_pop_culture = yankee
-	#					culture = { has_homeland = prev.state }
-	#				}
-	#			}
-	#		}
-	#	}
-	#	cu:yankee = {
-	#		set_global_variable = {
-	#			name = midwest_yankee_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_the_midwest = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_the_midwest = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = midwest_yankee_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_the_midwest = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_the_midwest = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = midwest_yankee_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else = {
-	#	cu:yankee = {
-	#		set_global_variable = {
-	#			name = midwest_yankee_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#if = {
-	#	limit = {
-	#		sr:region_dixie = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					has_pop_culture = dixie
-	#					culture = { has_homeland = prev.state }
-	#				}
-	#			}
-	#		}
-	#	}
-	#	cu:dixie = {
-	#		set_global_variable = {
-	#			name = dixie_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_dixie = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_dixie = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = dixie_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_dixie = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_dixie = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = dixie_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else = {
-	#	cu:dixie = {
-	#		set_global_variable = {
-	#			name = dixie_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#if = {
-	#	limit = {
-	#		sr:region_dixie = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					has_pop_culture = afro_american
-	#					OR = {
-	#						is_pop_type = slaves
-	#						pop_has_primary_culture = yes		##So Harriet Tubman & Frederick Douglass can spawn in New Africa
-	#					}
-	#					culture = { has_homeland = prev.state }
-	#				}
-	#			}
-	#		}
-	#	}
-	#	cu:afro_american = {
-	#		set_global_variable = {
-	#			name = afro_amer_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_dixie = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					OR = {
-	#						is_pop_type = slaves
-	#						pop_has_primary_culture = yes
-	#					}
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_dixie = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					OR = {
-	#						is_pop_type = slaves
-	#						pop_has_primary_culture = yes
-	#					}
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					OR = {
-	#						is_pop_type = slaves
-	#						pop_has_primary_culture = yes
-	#					}
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_american_cultures target = this }
-	#						is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = afro_amer_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else = {
-	#	cu:afro_american = {
-	#		set_global_variable = {
-	#			name = afro_amer_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#if = {
-	#	limit = {
-	#		sr:region_mexico = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					has_pop_culture = mexican
-	#					culture = { has_homeland = prev.state }
-	#				}
-	#			}
-	#		}
-	#	}
-	#	cu:mexican = {
-	#		set_global_variable = {
-	#			name = mexico_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_mexico = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_mexico = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = mexico_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_mexico = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_mexico = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = mexico_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else = {
-	#	cu:mexican = {
-	#		set_global_variable = {
-	#			name = mexico_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#if = {
-	#	limit = {
-	#		sr:region_brazil = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					has_pop_culture = brazilian
-	#					culture = { has_homeland = prev.state }
-	#				}
-	#			}
-	#		}
-	#	}
-	#	cu:brazilian = {
-	#		set_global_variable = {
-	#			name = brazil_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_brazil = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_brazil = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = brazil_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_brazil = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_brazil = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = brazil_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else = {
-	#	cu:brazilian = {
-	#		set_global_variable = {
-	#			name = brazil_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#if = {
-	#	limit = {
-	#		sr:region_brazil = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					has_pop_culture = afro_brazilian
-	#					OR = {
-	#						is_pop_type = slaves
-	#						pop_has_primary_culture = yes		##So José do Patrocínio & Luís Gama can spawn in Angola Janga
-	#					}
-	#					culture = { has_homeland = prev.state }
-	#				}
-	#			}
-	#		}
-	#	}
-	#	cu:afro_brazilian = {
-	#		set_global_variable = {
-	#			name = afro_braz_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_brazil = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					OR = {
-	#						is_pop_type = slaves
-	#						pop_has_primary_culture = yes
-	#					}
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
-	#						is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_brazil = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					OR = {
-	#						is_pop_type = slaves
-	#						pop_has_primary_culture = yes
-	#					}
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
-	#						is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					OR = {
-	#						is_pop_type = slaves
-	#						pop_has_primary_culture = yes
-	#					}
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
-	#						is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = afro_braz_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else = {
-	#	cu:afro_brazilian = {
-	#		set_global_variable = {
-	#			name = afro_braz_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#if = {
-	#	limit = {
-	#		sr:region_gran_colombia = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					has_pop_culture = north_andean
-	#					culture = { has_homeland = prev.state }
-	#				}
-	#			}
-	#		}
-	#	}
-	#	cu:north_andean = {
-	#		set_global_variable = {
-	#			name = nor_andes_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_gran_colombia = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_gran_colombia = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = nor_andes_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_gran_colombia = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_gran_colombia = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = nor_andes_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else = {
-	#	cu:north_andean = {
-	#		set_global_variable = {
-	#			name = nor_andes_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#if = {
-	#	limit = {
-	#		sr:region_andes = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					has_pop_culture = south_andean
-	#					culture = { has_homeland = prev.state }
-	#				}
-	#			}
-	#		}
-	#	}
-	#	cu:south_andean = {
-	#		set_global_variable = {
-	#			name = sou_andes_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_andes = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_andes = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = sou_andes_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_andes = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_andes = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_andean_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = sou_andes_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else = {
-	#	cu:south_andean = {
-	#		set_global_variable = {
-	#			name = sou_andes_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#if = {
-	#	limit = {
-	#		sr:region_la_plata = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					has_pop_culture = platinean
-	#					culture = { has_homeland = prev.state }
-	#				}
-	#			}
-	#		}
-	#	}
-	#	cu:platinean = {
-	#		set_global_variable = {
-	#			name = la_plata_culture
-	#			value = this
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_la_plata = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_la_plata = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
-	#						NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = la_plata_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else_if = {
-	#	limit = {
-	#		sr:region_la_plata = {
-	#			any_scope_state = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#	sr:region_la_plata = {
-	#		random_scope_state = {
-	#			limit = {
-	#				any_scope_pop = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#			}
-	#			random_scope_pop = {
-	#				limit = {
-	#					culture = {
-	#						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
-	#						has_homeland = prev.state
-	#					}
-	#				}
-	#				culture = {
-	#					set_global_variable = {
-	#						name = la_plata_culture
-	#						value = this
-	#					}
-	#				}
-	#			}
-	#		}
-	#	}
-	#}
-	#else = {
-	#	cu:platinean = {
-	#		set_global_variable = {
-	#			name = la_plata_culture
-	#			value = this
-	#		}
-	#	}
-	#}
 	if = {
 		limit = {
 			sr:region_france = {
@@ -6172,7 +5064,6 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = italophone
 								has_discrimination_trait = latinophone
 								has_discrimination_trait = phoeniciophone
-								has_discrimination_trait = african_settler
 							}
 							has_homeland = prev.state
 						}
@@ -6190,7 +5081,6 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = italophone
 								has_discrimination_trait = latinophone
 								has_discrimination_trait = phoeniciophone
-								has_discrimination_trait = african_settler
 							}
 							has_homeland = prev.state
 						}
@@ -6204,7 +5094,6 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = italophone
 								has_discrimination_trait = latinophone
 								has_discrimination_trait = phoeniciophone
-								has_discrimination_trait = african_settler
 							}
 							has_homeland = prev.state
 						}
@@ -6559,7 +5448,6 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = ethiopian
 								has_discrimination_trait = latinophone
 								has_discrimination_trait = phoeniciophone
-								has_discrimination_trait = african_settler
 							}
 							has_homeland = prev.state
 						}
@@ -6578,7 +5466,6 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = ethiopian
 								has_discrimination_trait = latinophone
 								has_discrimination_trait = phoeniciophone
-								has_discrimination_trait = african_settler
 							}
 							has_homeland = prev.state
 						}
@@ -6593,7 +5480,6 @@ converter_historical_leader_culture_effect = {
 								has_discrimination_trait = ethiopian
 								has_discrimination_trait = latinophone
 								has_discrimination_trait = phoeniciophone
-								has_discrimination_trait = african_settler
 							}
 							has_homeland = prev.state
 						}
@@ -6730,7 +5616,7 @@ converter_historical_leader_culture_effect = {
 					any_scope_pop = {
 						culture = {
 							OR = {			##Most likely causes of iranian CK/IR weirdness
-								has_discrimination_trait = hindustani
+								has_discrimination_trait = indo_aryan_language
 								has_discrimination_trait = himalayan
 								has_discrimination_trait = turkic
 								has_discrimination_trait = mongol_language
@@ -6750,7 +5636,7 @@ converter_historical_leader_culture_effect = {
 					any_scope_pop = {
 						culture = {
 							OR = {			##Most likely causes of iranian CK/IR weirdness
-								has_discrimination_trait = hindustani
+								has_discrimination_trait = indo_aryan_language
 								has_discrimination_trait = himalayan
 								has_discrimination_trait = turkic
 								has_discrimination_trait = mongol_language
@@ -6766,7 +5652,7 @@ converter_historical_leader_culture_effect = {
 					limit = {
 						culture = {
 							OR = {			##Most likely causes of iranian CK/IR weirdness
-								has_discrimination_trait = hindustani
+								has_discrimination_trait = indo_aryan_language
 								has_discrimination_trait = himalayan
 								has_discrimination_trait = turkic
 								has_discrimination_trait = mongol_language
@@ -6912,7 +5798,7 @@ converter_historical_leader_culture_effect = {
 					any_scope_pop = {
 						culture = {
 							OR = {			##Most likely causes of iranian CK/IR weirdness
-								has_discrimination_trait = hindustani
+								has_discrimination_trait = indo_aryan_language
 								has_discrimination_trait = himalayan
 								has_discrimination_trait = turkic
 								has_discrimination_trait = mongol_language
@@ -6932,7 +5818,7 @@ converter_historical_leader_culture_effect = {
 					any_scope_pop = {
 						culture = {
 							OR = {			##Most likely causes of iranian CK/IR weirdness
-								has_discrimination_trait = hindustani
+								has_discrimination_trait = indo_aryan_language
 								has_discrimination_trait = himalayan
 								has_discrimination_trait = turkic
 								has_discrimination_trait = mongol_language
@@ -6948,7 +5834,7 @@ converter_historical_leader_culture_effect = {
 					limit = {
 						culture = {
 							OR = {			##Most likely causes of iranian CK/IR weirdness
-								has_discrimination_trait = hindustani
+								has_discrimination_trait = indo_aryan_language
 								has_discrimination_trait = himalayan
 								has_discrimination_trait = turkic
 								has_discrimination_trait = mongol_language
@@ -7094,7 +5980,7 @@ converter_historical_leader_culture_effect = {
 					any_scope_pop = {
 						culture = {
 							OR = {			##Most likely causes of afghan CK weirdness
-								has_discrimination_trait = hindustani
+								has_discrimination_trait = indo_aryan_language
 								has_discrimination_trait = himalayan
 								has_discrimination_trait = turkic
 								has_discrimination_trait = mongol_language
@@ -7112,7 +5998,7 @@ converter_historical_leader_culture_effect = {
 					any_scope_pop = {
 						culture = {
 							OR = {			##Most likely causes of afghan CK weirdness
-								has_discrimination_trait = hindustani
+								has_discrimination_trait = indo_aryan_language
 								has_discrimination_trait = himalayan
 								has_discrimination_trait = turkic
 								has_discrimination_trait = mongol_language
@@ -7126,7 +6012,7 @@ converter_historical_leader_culture_effect = {
 					limit = {
 						culture = {
 							OR = {			##Most likely causes of afghan CK weirdness
-								has_discrimination_trait = hindustani
+								has_discrimination_trait = indo_aryan_language
 								has_discrimination_trait = himalayan
 								has_discrimination_trait = turkic
 								has_discrimination_trait = mongol_language
@@ -8049,7 +6935,7 @@ converter_historical_leader_culture_effect = {
 	}
 	if = {
 		limit = {
-			sr:region_north_india = {
+			sr:region_punjab = {
 				any_scope_state = {
 					any_scope_pop = {
 						has_pop_culture = panjabi
@@ -8067,23 +6953,23 @@ converter_historical_leader_culture_effect = {
 	}
 	else_if = {
 		limit = {
-			sr:region_north_india = {
+			sr:region_punjab = {
 				any_scope_state = {
 					any_scope_pop = {
 						culture = {
-							has_discrimination_trait = hindustani
+							has_discrimination_trait = indo_aryan_language
 							has_homeland = prev.state
 						}
 					}
 				}
 			}
 		}
-		sr:region_north_india = {
+		sr:region_punjab = {
 			random_scope_state = {
 				limit = {
 					any_scope_pop = {
 						culture = {
-							has_discrimination_trait = hindustani
+							has_discrimination_trait = indo_aryan_language
 							has_homeland = prev.state
 						}
 					}
@@ -8091,7 +6977,7 @@ converter_historical_leader_culture_effect = {
 				random_scope_pop = {
 					limit = {
 						culture = {
-							has_discrimination_trait = hindustani
+							has_discrimination_trait = indo_aryan_language
 							has_homeland = prev.state
 						}
 					}
@@ -8107,7 +6993,7 @@ converter_historical_leader_culture_effect = {
 	}
 	else_if = {
 		limit = {
-			sr:region_north_india = {
+			sr:region_punjab = {
 				any_scope_state = {
 					any_scope_pop = {
 						culture = {
@@ -8118,7 +7004,7 @@ converter_historical_leader_culture_effect = {
 				}
 			}
 		}
-		sr:region_north_india = {
+		sr:region_punjab = {
 			random_scope_state = {
 				limit = {
 					any_scope_pop = {
@@ -9057,7 +7943,7 @@ converter_primary_cultures_effect = {
 				c:SIB ?= this
 				##If only we could reference flags, would love to get Malaya & Rum in this list
 			}
-			ig:ig_intelligentsia = { is_being_suppressed = no }		##This is the only thing vanilla France & Russia have in common that Britain & Persia don't
+			NOT = { has_law = law_type:law_censorship }		##Go with this for now; old trigger doesn't work anymore
 		}
 		every_scope_pop = {
 			limit = {
@@ -9068,7 +7954,7 @@ converter_primary_cultures_effect = {
 					prev.owner = {
 						culture_percent_country = {
 							target = prev
-							value >= 0.08		##Need to come up with a % that would ensure vanilla Britain gets Scottish but not Welsh & vanilla Persia doesn't get Kurdish
+							value >= 0.05
 						}
 					}
 				}

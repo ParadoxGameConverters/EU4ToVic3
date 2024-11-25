@@ -330,7 +330,10 @@ usa_carnegie_character_template = {
 				}
 			}
 			uses_new_england_yankee_characters = yes
-			global_var:sct_culture = { NOT = { culture_is_discriminated_in = prev } }
+			country_average_cultural_acceptance = {
+				target = global_var:sct_culture
+				value >= acceptance_status_4
+			}
             has_company = company_type:company_us_steel
         }
         interest_group_trigger = {
@@ -372,7 +375,10 @@ fem_usa_carnegie_character_template = {
 				}
 			}
 			uses_new_england_yankee_characters = yes
-			global_var:sct_culture = { NOT = { culture_is_discriminated_in = prev } }
+			country_average_cultural_acceptance = {
+				target = global_var:sct_culture
+				value >= acceptance_status_4
+			}
             has_company = company_type:company_us_steel
         }
         interest_group_trigger = {
