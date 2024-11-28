@@ -19,6 +19,17 @@ TEST(V3World_StateTests, nameCanBeSetAndRetrieved)
 	EXPECT_EQ("test_name", state.getName());
 }
 
+TEST(V3World_StateTests, stateSubsistenceBuildingLoads)
+{
+	std::stringstream input;
+	input << "id = 3002\n";
+	input << "subsistence_building = building_subsistence_farms\n ";
+	V3::State state;
+	state.loadState(input);
+
+	EXPECT_EQ(state.getSubsistenceBuilding(), "building_subsistence_farms");
+}
+
 TEST(V3World_StateTests, stateCanInitializeProvinces)
 {
 	std::stringstream input;

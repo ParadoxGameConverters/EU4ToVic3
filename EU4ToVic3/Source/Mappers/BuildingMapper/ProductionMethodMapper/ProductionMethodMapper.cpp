@@ -153,6 +153,9 @@ std::pair<std::string, std::string> mappers::ProductionMethodMapper::pickPM(cons
 	 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups)
 {
 	// NOTE(Gawquon): This works for most PMs, but is not guaranteed to work for ownership PMs.
+	// Added a workaround for ownership PMs in Econ 2.0, but a unifying theory of PMs would be nice.
+	// Workaround will break for ownership PMs which require tech, should be none at the start.
+
 	// This is just a basic version that will support every use-case we currently care about.
 	for (const auto& PMGroup: PMGroups | std::views::values)
 	{
@@ -189,6 +192,110 @@ std::pair<std::string, std::string> mappers::ProductionMethodMapper::pickPM(cons
 	Log(LogLevel::Error) << "Could not find a PM group for PM: " << targetName << ".";
 
 	return {"", ""};
+}
+
+int mappers::ProductionMethodMapper::walkPMsTechbound(const std::vector<std::string>& groupPMs,
+	 const V3::Country& country,
+	 const std::string& targetName,
+	 const std::map<std::string, V3::ProductionMethod>& PMs)
+{
+	// Validate every PM in group
+	for (const auto& PM: groupPMs)
+	{
+		if (!PMs.contains(PM))
+		{
+			Log(LogLevel::Error) << "Unknown PM: " << PM << ".";
+			return 0;
+		}
+	}
+
+	// Walk the group, we're looking for the most advanced PM allowed by tech, up to our target PM.
+	int pick = 0;
+	for (const auto& PM: groupPMs)
+	{
+		if (!country.hasAnyOfTech(PMs.at(PM).getUnlockingTechs()))
+			return std::max(pick - 1, 0);
+		if (PM == targetName)
+			return pick;
+		++pick;
+	}
+	return std::max(pick - 1, 0);
+}
+
+// No explicit target, finds the first PM allowed by law.
+int mappers::ProductionMethodMapper::walkPMsLawbound(const std::vector<std::string>& groupPMs,
+	 const V3::Country& country,
+	 const std::map<std::string, V3::ProductionMethod>& PMs)
+{
+	int pick = 0;
+
+	for (const auto& PM: groupPMs)
+	{
+		const auto& thePM = PMs.at(PM);
+		const bool hasUnlockingLaws = country.hasAnyOfLawUnlocking(thePM.getUnlockingLaws());
+		const bool hasBlockingLaws = country.hasAnyOfLawBlocking(thePM.getBlockingLaws());
+
+		if (hasUnlockingLaws && !hasBlockingLaws)
+			return std::max(pick, 0);
+		++pick;
+	}
+	return 0; // Nothing is legal, just go with default PM.
+}
+
+std::map<mappers::PmGroup, std::tuple<mappers::PmIndex, mappers::PmFraction>> mappers::ProductionMethodMapper::estimatePMs(const V3::Country& country,
+	 const std::map<std::string, V3::ProductionMethod>& PMs,
+	 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups,
+	 const std::map<std::string, V3::Building>& buildings) const
+{
+	// PMs are not necessarily unique to a building, but PMGroups are.
+	// Additionally, no PM will appear twice in the same building.
+	std::map<std::string, std::tuple<int, double>> expectedPMs; // PMGroup -> (expected PM index, %)
+
+	// Configuration based PMs, checked against available tech.
+	for (const auto& [buildingName, building]: buildings)
+	{
+		if (const auto& rulesIter = buildingToRules.find(buildingName); rulesIter != buildingToRules.end())
+		{
+			const auto& rules = rulesIter->second;
+			for (const auto& PMGroup: building.getPMGroups())
+			{
+				bool flag = false;
+				for (int ruleIndex = 0; ruleIndex < rules.size() && !flag; ruleIndex++)
+				{
+					const auto& groupPMs = PMGroups.at(PMGroup).getPMs();
+					for (const auto& PM: groupPMs)
+					{
+						if (const auto& rule = rules[ruleIndex]; rule.pm == PM)
+						{
+							if (rule.lawBound)
+								expectedPMs.emplace(PMGroup, std::make_tuple(walkPMsLawbound(groupPMs, country, PMs), rule.percent));
+							else
+								expectedPMs.emplace(PMGroup, std::make_tuple(walkPMsTechbound(groupPMs, country, PM, PMs), rule.percent));
+
+							flag = true;
+							break;
+						}
+					}
+				}
+				if (!flag)
+					expectedPMs.emplace(PMGroup, std::tuple{0, 1.0});
+			}
+		}
+	}
+
+	// Law based PMs (Subsistence & Clergy)
+	for (const auto& [buildingName, building]: buildings)
+	{
+		if (buildingName.find("subsistence") == std::string::npos)
+			continue;
+
+		for (const auto& PMGroup: building.getPMGroups())
+		{
+			const auto& groupPMs = PMGroups.at(PMGroup).getPMs();
+			expectedPMs.emplace(PMGroup, std::make_tuple(walkPMsLawbound(groupPMs, country, PMs), 1));
+		}
+	}
+	return expectedPMs;
 }
 
 ////////////////////////////////////////// Subset-sum fxns

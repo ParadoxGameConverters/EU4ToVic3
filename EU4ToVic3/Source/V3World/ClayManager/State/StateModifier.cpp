@@ -73,19 +73,24 @@ double V3::StateModifier::getAllBonuses(const std::map<std::string, double>& mod
 	return std::accumulate(modifiers.begin(), modifiers.end(), 0.0);
 }
 
-std::optional<double> V3::StateModifier::getBuildingGroupModifier(const std::string& buildingGroup, const BuildingGroups& bgs) const
+double V3::StateModifier::getBuildingGroupModifier(const std::string& buildingGroup, const BuildingGroups& bgs) const
 {
-	std::optional currentGroup = buildingGroup;
-	do
+	double modifierTotal = 0;
+	for (const auto& [groupName, modifier]: buildingGroupModifiers)
 	{
-		if (const auto& mod = buildingGroupModifiers.find(currentGroup.value()); mod != buildingGroupModifiers.end())
-		{
-			return mod->second;
-		}
-		currentGroup = bgs.tryGetParentName(currentGroup);
-	} while (currentGroup);
+		std::optional currentGroup = buildingGroup;
 
-	return std::nullopt;
+		do
+		{
+			if (groupName == currentGroup.value())
+			{
+				modifierTotal += modifier;
+				break;
+			}
+			currentGroup = bgs.tryGetParentName(currentGroup);
+		} while (currentGroup);
+	}
+	return modifierTotal;
 }
 
 std::optional<double> V3::StateModifier::getBuildingModifier(const std::string& building) const
@@ -104,4 +109,13 @@ std::optional<double> V3::StateModifier::getGoodsModifier(const std::string& goo
 		return possibleModifier->second;
 	}
 	return std::nullopt;
+}
+
+double V3::StateModifier::calcBuildingModifiers(const Building& building, const BuildingGroups& buildingGroups) const
+{
+	const auto& modifierIter = buildingModifiers.find(building.getName());
+	double modifierTotal = modifierIter == buildingModifiers.end() ? 0 : modifierIter->second;
+	modifierTotal += getBuildingGroupModifier(building.getBuildingGroup(), buildingGroups);
+
+	return modifierTotal;
 }
