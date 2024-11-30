@@ -5,9 +5,15 @@
 ## alone_name is used if there is only one generated culture in the colonial region
 ## split_name is used to all multiple generated cultures in the colonial region. As such, it has a dynamic $PARENT$ loc
 
+alaska_colony = {
+	region = STATE_ALASKA
+	alone_name = "Alaskan"
+	split_name = "$PARENT$-Alaskan"
+}
+
 canada_colony = {
 	#override for new brunswick which is nominally in new_england under USA.
-	region = region_canada region = STATE_ALASKA region = STATE_YUKON_TERRITORY region = STATE_BRITISH_COLUMBIA region = STATE_ALBERTA region = STATE_SASKATCHEWAN region = STATE_NEW_BRUNSWICK 
+	region = region_canada region = STATE_YUKON_TERRITORY region = STATE_BRITISH_COLUMBIA region = STATE_ALBERTA region = STATE_SASKATCHEWAN region = STATE_NEW_BRUNSWICK 
 	alone_name = "Canadian"
 	split_name = "$PARENT$-Canadian"
 }
