@@ -52,17 +52,17 @@
 			}
 		}
 	}
-	s:STATE_NORTH_BENGAL = {
+	s:STATE_WEST_BENGAL = {
 		region_state:ASM = { #Mlechchhas (Assam)
 			create_pop = {
 				culture = assamese
 				religion = mahayana
-				size = 420100
+				size = 210050
 			}
 			create_pop = {
 				culture = bengali
 				religion = mahayana
-				size = 210002
+				size = 105001
 			}
 		}
 		region_state:BGL = { #Palas (Bengal)
@@ -70,18 +70,6 @@
 				culture = bengali
 				religion = mahayana
 				size = 14062032
-			}
-		}
-		region_state:S32 = { #Shantidevas
-			create_pop = {
-				culture = bengali
-				religion = gelugpa
-				size = 7604060
-			}
-			create_pop = {
-				culture = bengali
-				religion = hindu
-				size = 1040102
 			}
 		}
 	}
@@ -124,7 +112,7 @@
 				size = 96
 			}
 			create_pop = {
-				culture = kachin
+				culture = naga
 				religion = animist
 				size = 60400
 			}
@@ -149,87 +137,21 @@
 		}
 	}
 	s:STATE_DELHI = {
-		region_state:A30 = { #Ayudhas
-			create_pop = {
-				culture = avadhi
-				religion = gelugpa
-				size = 3000000
-			}
-			create_pop = {
-				culture = avadhi
-				religion = jain
-				size = 2900848
-			}
-		}
 		region_state:T38 = { #Tomaras
 			create_pop = {
-				culture = kanauji
+				culture = hindustani
 				religion = gelugpa
-				size = 4000000
+				size = 2000000
 			}
 			create_pop = {
-				culture = kanauji
+				culture = hindustani
 				religion = jain
-				size = 4000000
+				size = 2000000
 			}
 			create_pop = {
 				culture = rajput
 				religion = hindu
-				size = 100320
-			}
-		}
-		region_state:TIB = { #Tibet
-			create_pop = {
-				culture = avadhi
-				religion = gelugpa
-				size = 440136
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = avadhi
-				religion = gelugpa
-				size = 100200
-			}
-			create_pop = {
-				culture = kanauji
-				religion = gelugpa
-				size = 1010100
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = kanauji
-				religion = gelugpa
-				size = 130000
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = kanauji
-				religion = hindu
-				size = 40000
-			}
-			create_pop = {
-				culture = nepali
-				size = 286020
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = nepali
-				size = 10000
-			}
-			create_pop = {
-				culture = panjabi
-				religion = gelugpa
-				size = 644400
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = panjabi
-				religion = gelugpa
-				size = 70300
-			}
-			create_pop = {
-				culture = tibetan
-				size = 304
+				size = 50160
 			}
 		}
 	}
@@ -300,7 +222,7 @@
 			}
 			create_pop = {
 				pop_type = slaves
-				culture = kanauji
+				culture = hindustani
 				religion = jain
 				size = 32000
 			}
@@ -391,85 +313,33 @@
 			}
 		}
 	}
-	s:STATE_CENTRAL_INDIA = {
+	s:STATE_MALWA = {
 		region_state:A30 = { #Ayudhas
 			create_pop = {
 				culture = avadhi
 				religion = jain
-				size = 1060992
+				size = 560992
 			}
 			create_pop = {
 				culture = avadhi
 				religion = mahayana
-				size = 185002
+				size = 95002
 			}
 			create_pop = {
 				pop_type = slaves
 				culture = rajput
 				religion = mahayana
-				size = 5002
-			}
-		}
-		region_state:B32 = { #Banas
-			create_pop = {
-				culture = bihari
-				religion = hindu
-				size = 200000
-			}
-		}
-		region_state:C27 = { #Cedis
-			create_pop = {
-				culture = bihari
-				religion = hindu
-				size = 3039096
-			}
-			create_pop = {
-				culture = bihari
-				religion = mahayana
-				size = 20080 
-			}
-			create_pop = {
-				culture = marathi
-				religion = hindu
-				size = 139908
-			}
-			create_pop = {
-				culture = marathi
-				religion = jain
-				size = 100900 
-			}
-			create_pop = {
-				culture = oriya
-				religion = mahayana
-				size = 96
-			}
-		}
-		region_state:J06 = { #Jharkand
-			create_pop = {
-				culture = bengali
-				religion = mahayana
-				size = 770000
-			}
-			create_pop = {
-				culture = bengali
-				religion = hindu
-				size = 41000
-			}
-			create_pop = {
-				pop_type = slaves
-				culture = oriya
-				religion = mahayana
-				size = 1000 
+				size = 3002
 			}
 		}
 		region_state:P27 = { #Pratiharas
 			create_pop = {
-				culture = kanauji
+				culture = hindustani
 				religion = jain
 				size = 845004
 			}
 			create_pop = {
-				culture = kanauji
+				culture = hindustani
 				religion = hindu
 				size = 33000
 			}
@@ -477,13 +347,13 @@
 		region_state:R06 = { #Rashtrakutas
 			create_pop = {
 				pop_type = slaves
-				culture = kanauji
+				culture = hindustani
 				religion = hindu
 				size = 40200 
 			}
 			create_pop = {
 				pop_type = slaves
-				culture = kanauji
+				culture = hindustani
 				religion = jain
 				size = 30000
 			}
@@ -510,7 +380,6 @@
 				size = 496033
 			}
 		}
-		
 	}
 	s:STATE_KASHMIR = {
 		region_state:KAS = { #Karkota (Kashmir)
@@ -548,51 +417,15 @@
 			create_pop = {
 				culture = panjabi
 				religion = gelugpa
-				size = 3033705
+				size = 1533705
 			}
 			create_pop = {
 				culture = panjabi
 				religion = hindu
-				size = 4000000
+				size = 2000000
 			}
 		}
-		region_state:T38 = { #Tomaras
-			create_pop = {
-				culture = kanauji
-				religion = gelugpa
-				size = 200000
-			}
-			create_pop = {
-				culture = kanauji
-				religion = hindu
-				size = 100000
-			}
-			create_pop = {
-				culture = rajput
-				religion = hindu
-				size = 86485
-			}
-			
-		}
-		region_state:TIB = { #Tibet
-			create_pop = {
-				culture = nepali
-				religion = gelugpa
-				size = 366552
-			}
-			
-			create_pop = {
-				culture = panjabi
-				religion = gelugpa
-				size = 2656912
-			}
-			create_pop = {
-				culture = zhangzhung
-				religion = gelugpa
-				size = 1000000
-			}
-			
-		}
+		
 		region_state:SIN = { #Taghlibids (Sindh)
 			create_pop = {
 				culture = panjabi
@@ -605,7 +438,7 @@
 				size = 133867
 			}
 			create_pop = {
-				culture = kanauji
+				culture = hindustani
 				religion = hindu
 				size = 326183
 			}
@@ -627,7 +460,7 @@
 			}
 		}
 	}
-	s:STATE_NAGPUR = {
+	s:STATE_CENTRAL_PROVINCES = {
 		region_state:B32 = { #Banas
 			create_pop = {
 				culture = marathi
@@ -644,6 +477,12 @@
 				religion = jain
 				size = 310070
 			}
+			
+			create_pop = {
+				culture = bihari
+				religion = hindu
+				size = 200000
+			}
 		}
 		region_state:C26 = { #Cakrukata
 			create_pop = {
@@ -656,30 +495,44 @@
 			create_pop = {
 				culture = marathi
 				religion = jain
-				size = 50200
+				size = 40200
 			}
 			create_pop = {
 				culture = marathi
 				religion = hindu
-				size = 20700
+				size = 10700
 			}
 			create_pop = {
 				pop_type = slaves
 				culture = bihari
 				religion = hindu
-				size = 11000
+				size = 10000
 			}
-		}
-		region_state:M47 = { #Mundas
+			
 			create_pop = {
-				culture = oriya
+				culture = bihari
 				religion = hindu
-				size = 135037
+				size = 2039096
+			}
+			create_pop = {
+				culture = bihari
+				religion = mahayana
+				size = 10080 
+			}
+			create_pop = {
+				culture = marathi
+				religion = hindu
+				size = 129908
+			}
+			create_pop = {
+				culture = marathi
+				religion = jain
+				size = 90900 
 			}
 			create_pop = {
 				culture = oriya
 				religion = mahayana
-				size = 1214700
+				size = 86
 			}
 		}
 		region_state:R06 = { #Rashtrakutas
@@ -710,16 +563,28 @@
 			create_pop = {
 				culture = oriya
 				religion = hindu
-				size = 2004314
+				size = 1904314
 			}
 			create_pop = {
 				culture = oriya
 				religion = mahayana
-				size = 493712
+				size = 483712
 			}
 		}
 	}
-	s:STATE_SOUTH_BENGAL = {
+	s:STATE_EAST_BENGAL = {
+		region_state:ASM = { #Mlechchhas (Assam)
+			create_pop = {
+				culture = assamese
+				religion = mahayana
+				size = 210050
+			}
+			create_pop = {
+				culture = bengali
+				religion = mahayana
+				size = 105001
+			}
+		}
 		region_state:BGL = { #Palas (Bengal)
 			create_pop = {
 				culture = bengali
@@ -759,6 +624,17 @@
 				culture = bengali
 				religion = jain
 				size = 10007
+			}
+			
+			create_pop = {
+				culture = bengali
+				religion = gelugpa
+				size = 7604060
+			}
+			create_pop = {
+				culture = bengali
+				religion = hindu
+				size = 1040102
 			}
 		}
 	}
@@ -1002,18 +878,6 @@
 			create_pop = {
 				culture = kannada
 				size = 246095
-				religion = hindu
-			}
-		}
-		region_state:R06 = { #Rashtrakutas
-			create_pop = {
-				culture = telegu
-				religion = jain
-				size = 250000
-			}
-			create_pop = {
-				culture = kannada
-				size = 80000
 				religion = hindu
 			}
 		}
@@ -1297,6 +1161,324 @@
 				religion = jain
 				size = 5681
 			}
+		}
+	}
+	s:STATE_KURNOOL = {
+		region_state:P28 = { #Pallavas
+			create_pop = {
+				culture = telegu
+				size = 960075
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = telegu
+				religion = jain
+				size = 20360
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = deccani
+				religion = jain
+				size = 70160
+			}
+			create_pop = {
+				culture = telegu
+				religion = nestorian
+				size = 22590
+			}
+			create_pop = {
+				culture = kannada
+				size = 301200
+			}
+		}
+		region_state:R06 = { #Rashtrakutas
+			create_pop = {
+				culture = telegu
+				size = 279935
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = telegu
+				religion = jain
+				size = 15837
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = deccani
+				religion = sunni
+				size = 45162
+			}
+			create_pop = {
+				culture = pathan
+				size = 5001
+			}
+			create_pop = {
+				culture = kannada
+				size = 21200
+			}
+			
+			create_pop = {
+				culture = telegu
+				religion = jain
+				size = 250000
+			}
+			create_pop = {
+				culture = kannada
+				size = 80000
+				religion = hindu
+			}
+		}
+	}
+	s:STATE_BUNDELKHAND = {
+		region_state:A30 = { #Ayudhas
+			create_pop = {
+				culture = avadhi
+				religion = jain
+				size = 500000
+			}
+			create_pop = {
+				culture = avadhi
+				religion = mahayana
+				size = 90000
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = rajput
+				religion = mahayana
+				size = 2000
+			}
+		}
+		region_state:C27 = { #Cedis
+			create_pop = {
+				culture = marathi
+				religion = jain
+				size = 10000
+			}
+			create_pop = {
+				culture = marathi
+				religion = hindu
+				size = 10000
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = bihari
+				religion = hindu
+				size = 1000
+			}
+			
+			create_pop = {
+				culture = bihari
+				religion = hindu
+				size = 1000000
+			}
+			create_pop = {
+				culture = bihari
+				religion = mahayana
+				size = 10000 
+			}
+			create_pop = {
+				culture = marathi
+				religion = hindu
+				size = 20000
+			}
+			create_pop = {
+				culture = marathi
+				religion = jain
+				size = 10000 
+			}
+			create_pop = {
+				culture = oriya
+				religion = mahayana
+				size = 10
+			}
+		}
+		region_state:J06 = { #Jharkand
+			create_pop = {
+				culture = bengali
+				religion = mahayana
+				size = 770000
+			}
+			create_pop = {
+				culture = bengali
+				religion = hindu
+				size = 41000
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = oriya
+				religion = mahayana
+				size = 1000 
+			}
+		}
+		region_state:M47 = { #Mundas
+			create_pop = {
+				culture = oriya
+				religion = hindu
+				size = 135037
+			}
+			create_pop = {
+				culture = oriya
+				religion = mahayana
+				size = 1214700
+			}
+		}
+		region_state:S30 = { #Somavamsis
+			create_pop = {
+				culture = oriya
+				religion = hindu
+				size = 100000
+			}
+			create_pop = {
+				culture = oriya
+				religion = mahayana
+				size = 10000
+			}
+		}
+	}
+	s:STATE_AGRA = {
+		region_state:A30 = { #Ayudhas
+			create_pop = {
+				culture = avadhi
+				religion = gelugpa
+				size = 1500000
+			}
+			create_pop = {
+				culture = avadhi
+				religion = jain
+				size = 1450424
+			}
+			create_pop = {
+				culture = avadhi
+				religion = gelugpa
+				size = 1500000
+			}
+			create_pop = {
+				culture = avadhi
+				religion = jain
+				size = 1450424
+			}
+		}
+		region_state:T38 = { #Tomaras
+			create_pop = {
+				culture = hindustani
+				religion = gelugpa
+				size = 2000000
+			}
+			create_pop = {
+				culture = hindustani
+				religion = jain
+				size = 2000000
+			}
+			create_pop = {
+				culture = rajput
+				religion = hindu
+				size = 50160
+			}
+		}
+		region_state:TIB = { #Tibet
+			create_pop = {
+				culture = avadhi
+				religion = gelugpa
+				size = 440136
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = avadhi
+				religion = gelugpa
+				size = 100200
+			}
+			create_pop = {
+				culture = hindustani
+				religion = gelugpa
+				size = 1010100
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = hindustani
+				religion = gelugpa
+				size = 130000
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = hindustani
+				religion = hindu
+				size = 40000
+			}
+			create_pop = {
+				culture = nepali
+				size = 286020
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = nepali
+				size = 10000
+			}
+			create_pop = {
+				culture = panjabi
+				religion = gelugpa
+				size = 644400
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = panjabi
+				religion = gelugpa
+				size = 70300
+			}
+			create_pop = {
+				culture = tibetan
+				size = 304
+			}
+		}
+	}
+	s:STATE_HILL_PUNJAB = {
+		region_state:KAS = { #Karkotas (Kashmir)
+			create_pop = {
+				culture = panjabi
+				religion = gelugpa
+				size = 1500000
+			}
+			create_pop = {
+				culture = panjabi
+				religion = hindu
+				size = 2000000
+			}
+		}
+		region_state:T38 = { #Tomaras
+			create_pop = {
+				culture = hindustani
+				religion = gelugpa
+				size = 200000
+			}
+			create_pop = {
+				culture = hindustani
+				religion = hindu
+				size = 100000
+			}
+			create_pop = {
+				culture = rajput
+				religion = hindu
+				size = 86485
+			}
+			
+		}
+		region_state:TIB = { #Tibet
+			create_pop = {
+				culture = nepali
+				religion = gelugpa
+				size = 366552
+			}
+			
+			create_pop = {
+				culture = panjabi
+				religion = gelugpa
+				size = 2656912
+			}
+			create_pop = {
+				culture = zhangzhung
+				religion = gelugpa
+				size = 1000000
+			}
+			
 		}
 	}
 }
