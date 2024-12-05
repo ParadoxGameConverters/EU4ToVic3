@@ -92,6 +92,7 @@ class Country: commonItems::parser
 
 	// dependent stuff
 	[[nodiscard]] auto isColony() const { return colony; }
+	void setColony(bool isColony) { colony = isColony; }
 	[[nodiscard]] auto isTradeCompany() const { return tradeCompany; }
 	void setTradeCompany() { tradeCompany = true; }
 	[[nodiscard]] const auto& getOverLord() const { return overlord; }

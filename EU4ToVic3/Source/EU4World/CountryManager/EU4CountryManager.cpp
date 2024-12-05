@@ -477,6 +477,7 @@ void EU4::CountryManager::transferOwnerDataToTC(const std::shared_ptr<Country>& 
 	tradingCountry->setNationalIdeas(owner->getNationalIdeas());
 	tradingCountry->setEmbracedInstitutions(owner->getEmbracedInstitutions());
 	tradingCountry->setNationalColors(owner->getNationalColors()); // same color. yah.
+	tradingCountry->setColony(true);
 
 	// relations
 	tradingCountry->setOverLord(ownerTag);
