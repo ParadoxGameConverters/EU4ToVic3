@@ -78,8 +78,8 @@ TEST(V3World_StateModifierTests, BuildingGroupModifiersAreSet)
 	V3::StateModifier modifier;
 	modifier.loadStateModifier(input);
 
-	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingGroupModifier("bg_agri", V3::BuildingGroups()).value());
-	EXPECT_DOUBLE_EQ(0.3, modifier.getBuildingGroupModifier("bg_fish", V3::BuildingGroups()).value());
+	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingGroupModifier("bg_agri", V3::BuildingGroups()));
+	EXPECT_DOUBLE_EQ(0.3, modifier.getBuildingGroupModifier("bg_fish", V3::BuildingGroups()));
 }
 
 TEST(V3World_StateModifierTests, BuildingModifiersAreSet)
@@ -97,6 +97,7 @@ TEST(V3World_StateModifierTests, BuildingModifiersAreSet)
 	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingModifier("building_house").value());
 	EXPECT_DOUBLE_EQ(0.3, modifier.getBuildingModifier("building_factory").value());
 }
+
 
 TEST(V3World_StateModifierTests, GoodsModifiersAreSet)
 {
@@ -129,7 +130,7 @@ TEST(V3World_StateModifierTests, RegexDontCollide)
 
 	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingModifier("building_house").value());
 	EXPECT_DOUBLE_EQ(0.3, modifier.getGoodsModifier("building_output_coconut").value());
-	EXPECT_DOUBLE_EQ(0.4, modifier.getBuildingGroupModifier("bg_fish", V3::BuildingGroups()).value());
+	EXPECT_DOUBLE_EQ(0.4, modifier.getBuildingGroupModifier("bg_fish", V3::BuildingGroups()));
 }
 
 TEST(V3World_StateModifierTests, GettingBuildingGroupDataTravelsHeirarchy)
@@ -147,7 +148,7 @@ TEST(V3World_StateModifierTests, GettingBuildingGroupDataTravelsHeirarchy)
 	buildingGroupLoader.loadBuildingGroups(modFS);
 	auto buildingGroups = buildingGroupLoader.getBuildingGroups();
 
-	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingGroupModifier("bg_light_industry", buildingGroups).value_or(0));
+	EXPECT_DOUBLE_EQ(0.2, modifier.getBuildingGroupModifier("bg_light_industry", buildingGroups));
 }
 
 TEST(V3World_StateModifierTests, GetAllBonusesCombinesLikeBonuses)
@@ -168,4 +169,32 @@ TEST(V3World_StateModifierTests, GetAllBonusesCombinesLikeBonuses)
 	EXPECT_DOUBLE_EQ(0.5, V3::StateModifier::getAllBonuses(modifier.getBuildingGroupModifiersMap()));
 	EXPECT_DOUBLE_EQ(0, V3::StateModifier::getAllBonuses(modifier.getBuildingModifiersMap()));
 	EXPECT_DOUBLE_EQ(0.3, V3::StateModifier::getAllBonuses(modifier.getGoodsModifiersMap()));
+}
+
+TEST(V3World_StateModifierTests, GivenBuildingAllModifiersAreSummed)
+{
+	std::stringstream buildingInput;
+	buildingInput << "building_group = bg_light_industry\n";
+
+	V3::Building building;
+	building.loadBuilding(buildingInput, {});
+	building.setName("building_factory");
+
+	std::stringstream modInput;
+	modInput << "\ticon = \"gfx/ignore/me.dds\"\n";
+	modInput << "\tmodifier = {\n";
+	modInput << "\t\tbuilding_house_throughput_mult = 0.2\n";
+	modInput << "\t\tbuilding_factory_throughput_mult = 0.3\n";
+	modInput << "\t\tbuilding_group_bg_manufacturing_throughput_mult = 0.4\n";
+	modInput << "\t\tbuilding_group_bg_light_industry_throughput_mult = 0.5\n";
+	modInput << "\t}\n";
+
+	V3::BuildingGroupLoader buildingGroupLoader;
+	buildingGroupLoader.loadBuildingGroups(modFS);
+	auto buildingGroups = buildingGroupLoader.getBuildingGroups();
+
+	V3::StateModifier modifier;
+	modifier.loadStateModifier(modInput);
+
+	EXPECT_DOUBLE_EQ(1.2, modifier.calcBuildingModifiers(building, buildingGroups));
 }
