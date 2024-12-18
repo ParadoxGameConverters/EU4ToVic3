@@ -42,13 +42,14 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 
 	if (configuration.configBlock.thirdOdyssey)
 	{
-		if (!commonItems::TryCopyFile("configurables/third_odyssey/map_data/state_regions/05_north_america.txt",
-				  "output/" + outputName + "/map_data/state_regions/05_north_america.txt"))
-			throw std::runtime_error("Error copying TO map_data! Is the output/ folder writable?");
+		// Disabling TO custom mapmodding until vic3 map is stable.
+		// if (!commonItems::TryCopyFile("configurables/third_odyssey/map_data/state_regions/05_north_america.txt",
+		//		  "output/" + outputName + "/map_data/state_regions/05_north_america.txt"))
+		//	throw std::runtime_error("Error copying TO map_data! Is the output/ folder writable?");
 		if (!commonItems::CopyFolder("configurables/third_odyssey/localization", "output/" + outputName + "/localization"))
 			throw std::runtime_error("Error copying TO locs! Is the output/ folder writable?");
-		if (!commonItems::CopyFolder("configurables/third_odyssey/gfx", "output/" + outputName + "/gfx"))
-			throw std::runtime_error("Error copying TO gfx! Is the output/ folder writable?");
+		// if (!commonItems::CopyFolder("configurables/third_odyssey/gfx", "output/" + outputName + "/gfx"))
+		//	throw std::runtime_error("Error copying TO gfx! Is the output/ folder writable?");
 	}
 
 	Log(LogLevel::Progress) << "83 %";
