@@ -8,6 +8,7 @@ struct PMRule
 {
 	std::string pm;
 	double percent = 1.0;
+	bool lawBound = false;
 
 	bool operator==(const PMRule&) const = default;
 };

@@ -40,6 +40,7 @@ class State: commonItems::parser
 	[[nodiscard]] const auto& getTraits() const { return traits; }
 	[[nodiscard]] const auto& getCappedResources() const { return cappedResources; }
 	[[nodiscard]] const auto& getArableResources() const { return arableResources; }
+	[[nodiscard]] const auto& getSubsistenceBuilding() const { return subsistenceBuilding; }
 
 	[[nodiscard]] ProvinceMap getUnassignedProvinces() const;
 	[[nodiscard]] bool hasUnassignedProvinces() const;
@@ -65,6 +66,7 @@ class State: commonItems::parser
 	std::vector<std::string> traits;				  // state_trait_natural_harbors
 	std::map<std::string, int> cappedResources; // RGO and arable land potential
 	std::vector<std::string> arableResources;	  // Which buildings can be built on arable land
+	std::string subsistenceBuilding;				  // building_subsistence_fishing_villages
 	std::set<std::string> homelands;
 };
 } // namespace V3
