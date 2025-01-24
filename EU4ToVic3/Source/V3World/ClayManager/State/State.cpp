@@ -18,6 +18,9 @@ void V3::State::loadState(std::istream& theStream)
 
 void V3::State::registerKeys()
 {
+	registerKeyword("subsistence_building", [this](std::istream& theStream) {
+		subsistenceBuilding = commonItems::getString(theStream);
+	});
 	registerKeyword("provinces", [this](std::istream& theStream) {
 		for (const auto& provinceName: commonItems::getStrings(theStream))
 		{

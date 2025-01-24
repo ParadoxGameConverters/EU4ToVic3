@@ -68,6 +68,7 @@ double V3::SubState::getTerrainFrequency(const std::string& theTerrain) const
 
 double V3::SubState::getOverPopulation() const
 {
+	// TODO(Gawquon) Have this check type of subsistence, they give different amount of jobs now. Also capacity is land * jobs / working_adult_ratio.
 	const double pops = subStatePops.getPopCount();
 	const double capacity = getResource("bg_agriculture") * 5000.0; // One arable land supports roughly 5k people.
 	if (capacity < 5000)
@@ -687,6 +688,11 @@ void V3::SubState::generatePops(int totalAmount, const int slaveAmount)
 										  << " pops! Bailing!";
 		}
 	}
+}
+
+double V3::SubState::getJob(const std::string& job) const
+{
+	return estimatedJobs.contains(job) ? estimatedJobs.at(job) : 0;
 }
 
 std::optional<std::string> V3::SubState::getPrimaryCulture() const
