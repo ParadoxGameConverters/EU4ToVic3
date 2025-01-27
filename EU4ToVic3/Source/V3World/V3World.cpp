@@ -45,6 +45,10 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	{
 		provinceMapper.loadProvinceMappings("configurables/third_odyssey_province_mappings.txt");
 	}
+	else if (configuration.configBlock.extendedTimeline)
+	{
+		provinceMapper.loadProvinceMappings("configurables/et_province_mappings.txt");
+	}
 	else
 	{
 		provinceMapper.loadProvinceMappings("configurables/province_mappings.txt");
