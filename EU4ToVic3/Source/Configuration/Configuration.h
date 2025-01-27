@@ -66,13 +66,15 @@ class Configuration: commonItems::parser
 		bool downTiers = true;
 		double shapingFactor = 1.0;
 		// runtime options.
-		bool vn = false;				// Voltaire's Nightmare
-		bool thirdOdyssey = false; // Third Odyssey: Back to the Motherland
+		bool vn = false;					 // Voltaire's Nightmare
+		bool thirdOdyssey = false;		 // Third Odyssey: Back to the Motherland
+		bool extendedTimeline = false; // Extended Timeline
 	} configBlock;
 
 	void setOutputName(const std::string& name) { outputName = name; }
 	void setVN() { configBlock.vn = true; }
 	void setTO() { configBlock.thirdOdyssey = true; }
+	void setET() { configBlock.extendedTimeline = true; }
 	void setEurocentric() { configBlock.euroCentric = EUROCENTRISM::EuroCentric; }
 	void setVanillaStartDate() { configBlock.startDate = STARTDATE::Vanilla; }
 

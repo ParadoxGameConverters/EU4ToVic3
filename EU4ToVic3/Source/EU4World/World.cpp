@@ -220,7 +220,6 @@ void EU4::World::registerKeys(const std::shared_ptr<Configuration>& theConfigura
 			}
 			if (mod.name == "Third Odyssey: Back to the Motherland")
 			{
-				// throw std::runtime_error("1.8 update broke Third Odyssey: Back to the Motherland support. We're working on re-enabling it.");
 				Log(LogLevel::Notice) << "Third Odyssey: Back to the Motherland detected. Enabling TO support.";
 				theConfiguration->setTO();
 				if (theConfiguration->configBlock.euroCentric != Configuration::EUROCENTRISM::EuroCentric)
@@ -228,6 +227,11 @@ void EU4::World::registerKeys(const std::shared_ptr<Configuration>& theConfigura
 					Log(LogLevel::Notice) << "TO is auto-enabling Eurocentric conversion.";
 					theConfiguration->setEurocentric();
 				}
+			}
+			if (mod.name == "Extended Timeline")
+			{
+				Log(LogLevel::Notice) << "Extended Timeline detected. Enabling ET support.";
+				theConfiguration->setET();
 			}
 		}
 	});
