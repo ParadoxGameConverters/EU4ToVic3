@@ -20,6 +20,10 @@
 # alter nothing of note.
 # Exception to above is when a T1 reform really stresses the point. A fifth_monarchists_reform is really really
 # theocratic so let's list it double.
+# NOTES: The `governance_principles` lawgroup should really only rely on the `forms`. A monarchy in EU4 should be
+# a monarchy in Vic3. NO COMMON REFORMS should be used in this lawgroup, since that can lead to an eu4 monarchy
+# becoming a Vic3 parliamentary republic. Since an eu4 republic can either be a vic3 parliamentary or presidential one,
+# it is ok to use reforms there. Similarly for decentralized nations.
 
 #GOVERNANCE:
 #law_council_republic 200 NO
@@ -38,7 +42,7 @@ lawgroup_governance_principles = {
 			federal_senate_reform unified_piratical_confederacy_reform protectorate_parliament_reform
 			revolutionary_republic_reform junior_revolutionary_republic_reform peasants_republic
 			kongsi_federation american_republic federal_republic republicanism_reform democratic_values_reform
-			parliamentary_reform parliamentary_republic_reform english_parliamentary_republic_government
+			parliamentary_republic_reform english_parliamentary_republic_government
 		}
 	}
 	law_presidential_republic = {
@@ -53,9 +57,7 @@ lawgroup_governance_principles = {
 	law_monarchy = {
 		forms = { monarchy tribal native }
 		ideas = {}
-		reforms = { feudalism_reform centralize_tribal_power_reform native_hereditary_reform shaka_regime 
-			retain_tribal_hierarchy_reform horde_barbaric_despoilers_reform horde_tribal_unity_reform 
-			tribe_remain_tribal_reform tribe_tribal_unity native_remain_being_native_reform feudal_theocracy }
+		reforms = {}
 	}
 	law_theocracy = {
 		forms = { theocracy }
