@@ -62,9 +62,7 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 	loadPopTypes(modFS);
 }
 
-void V3::EconomyManager::establishBureaucracy(const Country& country,
-	 const std::map<std::string, Law>& lawsMap,
-	 const Vic3DefinesLoader& defines) const
+void V3::EconomyManager::establishBureaucracy(const Country& country, const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const
 {
 	if (!buildings.contains("building_government_administration"))
 	{
