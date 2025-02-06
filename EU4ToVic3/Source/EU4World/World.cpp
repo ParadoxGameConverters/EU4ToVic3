@@ -228,6 +228,11 @@ void EU4::World::registerKeys(const std::shared_ptr<Configuration>& theConfigura
 					theConfiguration->setEurocentric();
 				}
 			}
+			if (mod.name == "Extended Timeline")
+			{
+				Log(LogLevel::Notice) << "Extended Timeline detected. Enabling ET support.";
+				theConfiguration->setET();
+			}
 		}
 	});
 	registerKeyword("provinces", [this](std::istream& theStream) {

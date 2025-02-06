@@ -333,6 +333,16 @@ conservative_party = {
 				}
 			}
 			triggered_desc = {
+				desc = party_congress_nationalist_party
+				trigger = {
+					exists = py:social_democrat_party
+					OR = {
+						c:BIC ?= this
+						c:BHT ?= this
+					}
+				}
+			}
+			triggered_desc = {
 				desc = party_conservative
 				trigger = {
 					always = yes
@@ -356,16 +366,6 @@ conservative_party = {
 		}
 		# unions can never be conservative
 		NOT = { is_interest_group_type = ig_trade_unions }
-		OR = {
-	     	NOT = {
-	         	owner = {
-	         		has_variable = only_valid_party
-	         	}
-	        }
-	        owner.var:only_valid_party = {
-	        	is_party_type = conservative_party
-	        }
-	    }
 	}
 	
 	# Root - IG considering joining
@@ -374,6 +374,26 @@ conservative_party = {
 		value = {
 			value = -5
 			desc = "base_value"
+		}
+		if = {
+			limit = {
+				owner = {
+					c:BIC ?= this
+					is_subject = yes
+					OR = {
+						has_modifier = modifier_india_crown_rule
+						has_modifier = modifier_india_company_rule
+					}
+				}
+				OR = {
+					is_interest_group_type = ig_industrialists
+					is_interest_group_type = ig_armed_forces
+				}
+			}
+			add = {
+				value = -100
+				desc = "india_colonial_government"
+			}
 		}
 		if = { # socialists and radicals won't join conservative parties
 			limit = {
@@ -978,21 +998,6 @@ conservative_party = {
 		}
 		if = {
 			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-	         	NOT = {
-			        owner.var:only_valid_party = {
-			        	is_party_type = conservative_party
-			        }
-			    }
-			}
-			multiply = {
-				value = 0
-			}
-		}
-		if = {
-			limit = {
 				leader = {
 					has_ideology = ideology:ideology_jacksonian_democrat
 				}
@@ -1000,37 +1005,6 @@ conservative_party = {
 			add = {
 				value = 1000
 				desc = "from_jacksonian_democrat"
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-				owner.var:only_valid_party = {
-					is_party_type = conservative_party
-				}
-	         	owner.ruler = {
-					this.interest_group = prev
-				}
-			}
-			add = {
-				value = 1000
-				desc = "from_only_legal_party"
-			}
-		}
-		else_if = {
-			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-	         	 owner.var:only_valid_party = {
-		        	is_party_type = conservative_party
-		        }
-			}
-			add = {
-				value = 3
-				desc = "from_only_legal_party"
 			}
 		}
 		if = { # Also Brazil

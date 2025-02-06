@@ -56,13 +56,14 @@ mappers::IdeaEffect mappers::IdeaEffectsMapper::getEffectForIdeas(const std::set
 	for (const auto& [ig, count]: interestGroupCounter)
 		if (count > 0)
 		{
-			effect.boostedInterestGroups.emplace(ig);
+			// Temporarily disabling boosting and suppression until it becomes clear what's going on with these. Both seems to have been disabled/deleted on 1.8+.
+			// effect.boostedInterestGroups.emplace(ig);
 			if (count >= 2)
 				effect.rulingInterestGroups.emplace(ig);
 		}
 		else if (count < 0)
 		{
-			effect.suppressedInterestGroups.emplace(ig);
+			// effect.suppressedInterestGroups.emplace(ig);
 		}
 
 	return effect;

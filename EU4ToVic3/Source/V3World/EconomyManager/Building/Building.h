@@ -27,6 +27,8 @@ class Building: commonItems::parser
 	[[nodiscard]] const auto& isBuildable() const { return buildable; }
 	[[nodiscard]] const auto& isCappedByGov() const { return governmentCapped; }
 	[[nodiscard]] const auto& isUnique() const { return unique; }
+	[[nodiscard]] const auto& isStatue() const { return statue; }
+	[[nodiscard]] const auto& isMonumental() const { return monumental; }
 
 	[[nodiscard]] const auto& getLevel() const { return level; }
 	[[nodiscard]] const auto& getShareholders() const { return shareholders; }
@@ -43,7 +45,9 @@ class Building: commonItems::parser
 	std::set<std::string> unlockingTechs;
 	bool buildable = true;
 	bool governmentCapped = false; // barracks, ports, other caps done at the building not building group level by techs/laws/traits.
-	bool unique = false;				 // Monument, Canal or Power Block.
+	bool unique = false;				 // Monument or Canal.
+	bool statue = false;				 // Power Block
+	bool monumental = false;		 // Misc monumental stuff eg. skyscrapers
 
 	// Specific to instance of building in SubState e.g. The port in New York
 	std::set<std::string> PMs; // Only Production Methods that are different from default

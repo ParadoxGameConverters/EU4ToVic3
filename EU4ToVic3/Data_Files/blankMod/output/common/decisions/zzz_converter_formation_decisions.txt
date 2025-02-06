@@ -1,12 +1,13 @@
 ﻿### Confederations of Subjects
 america_unite_usa = {
 	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 		capital = { zzz_converter_state_is_in_america = yes }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				capital = { zzz_converter_state_is_in_america = yes }
 				is_subject = yes
 				NOT = { THIS = ROOT }
 				top_overlord = {
@@ -29,7 +30,7 @@ america_unite_usa = {
 				owner = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 					capital = { zzz_converter_state_is_in_america = yes }
 					is_subject = yes
 					NOT = { THIS = ROOT }
@@ -64,7 +65,7 @@ america_unite_usa = {
 america_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 			capital = { zzz_converter_state_is_in_america = yes }
 			is_ai = yes
 			count >= 2
@@ -77,7 +78,7 @@ america_unite_gbr = {
 		custom_tooltip = {
 			text = gbr_usa_relations_tt
 			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { zzz_converter_state_is_in_america = yes }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
@@ -112,7 +113,7 @@ california_unite_cal = {
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { zzz_converter_state_is_in_california = yes }
 				is_ai = yes
 				is_subject = yes
@@ -136,7 +137,7 @@ california_unite_cal = {
 			any_neighbouring_state = {
 				owner = {
 					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 					capital = { zzz_converter_state_is_in_california = yes }
 					is_ai = yes
 					is_subject = yes
@@ -172,7 +173,7 @@ california_unite_cal = {
 california_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 			capital = { zzz_converter_state_is_in_california = yes }
 			is_ai = yes
 			count >= 2
@@ -185,7 +186,7 @@ california_unite_gbr = {
 		custom_tooltip = {
 			text = gbr_cal_relations_tt
 			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { zzz_converter_state_is_in_california = yes }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
@@ -215,12 +216,12 @@ california_unite_gbr = {
 
 mexico_unite_mex = {
 	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 		capital = { zzz_converter_state_is_in_mexico = yes }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { zzz_converter_state_is_in_mexico = yes }
 				is_subject = yes
 				NOT = { THIS = ROOT }
@@ -244,7 +245,7 @@ mexico_unite_mex = {
 				owner = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 					capital = { zzz_converter_state_is_in_mexico = yes }
 					is_subject = yes
 					NOT = { THIS = ROOT }
@@ -279,7 +280,7 @@ mexico_unite_mex = {
 mexico_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 			capital = { zzz_converter_state_is_in_mexico = yes }
 			is_ai = yes
 			count >= 2
@@ -292,7 +293,7 @@ mexico_unite_gbr = {
 		custom_tooltip = {
 			text = gbr_mex_relations_tt
 			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { zzz_converter_state_is_in_mexico = yes }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
@@ -322,12 +323,12 @@ mexico_unite_gbr = {
 
 colombia_unite_gco = {
 	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 		capital = { zzz_converter_state_is_in_gran_colombia = yes }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { zzz_converter_state_is_in_gran_colombia = yes }
 				is_subject = yes
 				NOT = { THIS = ROOT }
@@ -351,7 +352,7 @@ colombia_unite_gco = {
 				owner = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 					capital = { zzz_converter_state_is_in_gran_colombia = yes }
 					is_subject = yes
 					NOT = { THIS = ROOT }
@@ -386,7 +387,7 @@ colombia_unite_gco = {
 colombia_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 			capital = { zzz_converter_state_is_in_gran_colombia = yes }
 			is_ai = yes
 			count >= 2
@@ -399,7 +400,7 @@ colombia_unite_gbr = {
 		custom_tooltip = {
 			text = gbr_gco_relations_tt
 			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { zzz_converter_state_is_in_gran_colombia = yes }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
@@ -429,12 +430,12 @@ colombia_unite_gbr = {
 
 peru_unite_peu = {
 	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 		capital = { region = sr:region_andes }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { region = sr:region_andes }
 				is_ai = yes
 				is_subject = yes
@@ -458,7 +459,7 @@ peru_unite_peu = {
 			any_neighbouring_state = {
 				owner = {
 					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 					capital = { region = sr:region_andes }
 					is_ai = yes
 					is_subject = yes
@@ -494,7 +495,7 @@ peru_unite_peu = {
 peru_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 			capital = { region = sr:region_andes }
 			is_ai = yes
 			count >= 2
@@ -507,7 +508,7 @@ peru_unite_gbr = {
 		custom_tooltip = {
 			text = gbr_peu_relations_tt
 			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { region = sr:region_andes }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
@@ -537,12 +538,12 @@ peru_unite_gbr = {
 
 brazil_unite_brz = {
 	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 		capital = { region = sr:region_brazil }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { region = sr:region_brazil }
 				is_subject = yes
 				NOT = { THIS = ROOT }
@@ -566,7 +567,7 @@ brazil_unite_brz = {
 				owner = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 					capital = { region = sr:region_brazil }
 					is_subject = yes
 					NOT = { THIS = ROOT }
@@ -601,7 +602,7 @@ brazil_unite_brz = {
 brazil_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 			capital = { region = sr:region_brazil }
 			is_ai = yes
 			count >= 2
@@ -614,7 +615,7 @@ brazil_unite_gbr = {
 		custom_tooltip = {
 			text = gbr_brz_relations_tt
 			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { region = sr:region_brazil }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
@@ -644,12 +645,12 @@ brazil_unite_gbr = {
 
 argentina_unite_arg = {
 	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 		capital = { zzz_converter_state_is_in_argentina = yes }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { zzz_converter_state_is_in_argentina = yes }
 				is_ai = yes
 				is_subject = yes
@@ -673,7 +674,7 @@ argentina_unite_arg = {
 			any_neighbouring_state = {
 				owner = {
 					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 					capital = { zzz_converter_state_is_in_argentina = yes }
 					is_ai = yes
 					is_subject = yes
@@ -709,7 +710,7 @@ argentina_unite_arg = {
 argentina_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 			capital = { zzz_converter_state_is_in_argentina = yes }
 			is_ai = yes
 			count >= 2
@@ -722,7 +723,7 @@ argentina_unite_gbr = {
 		custom_tooltip = {
 			text = gbr_arg_relations_tt
 			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { zzz_converter_state_is_in_argentina = yes }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
@@ -752,12 +753,12 @@ argentina_unite_gbr = {
 
 cape_unite_saf = {
 	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 		capital = { region = sr:region_southern_africa }
 		is_subject = yes
 		any_neighbouring_state = {
 			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { region = sr:region_southern_africa }
 				is_ai = yes
 				is_subject = yes
@@ -781,7 +782,7 @@ cape_unite_saf = {
 			any_neighbouring_state = {
 				owner = {
 					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 					capital = { region = sr:region_southern_africa }
 					is_ai = yes
 					is_subject = yes
@@ -817,7 +818,7 @@ cape_unite_saf = {
 cape_unite_gbr = {
 	is_shown = {
 		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 			capital = { region = sr:region_southern_africa }
 			is_ai = yes
 			count >= 2
@@ -830,7 +831,7 @@ cape_unite_gbr = {
 		custom_tooltip = {
 			text = gbr_saf_relations_tt
 			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				capital = { region = sr:region_southern_africa }
 				is_ai = yes
 				relations:root >= relations_threshold:amicable
@@ -1513,6 +1514,7 @@ form_hudson_bay_dec = {
 	
 	when_taken = {
 		change_tag = HBC
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1556,6 +1558,7 @@ form_newfoundland_dec = {
 	
 	when_taken = {
 		change_tag = NEW
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1598,6 +1601,7 @@ form_nunavut_dec = {
 	
 	when_taken = {
 		change_tag = NNV
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1638,6 +1642,7 @@ form_ontario_dec = {
 	
 	when_taken = {
 		change_tag = ONT
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1674,6 +1679,7 @@ form_quebec_dec = {
 	
 	when_taken = {
 		change_tag = QUE
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1708,6 +1714,7 @@ form_new_brunswick_dec = {
 	
 	when_taken = {
 		change_tag = NBS
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1744,6 +1751,7 @@ form_nova_scotia_dec = {
 	
 	when_taken = {
 		change_tag = NVS
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1799,6 +1807,7 @@ form_new_england_dec = {
 	
 	when_taken = {
 		change_tag = NEN
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1845,6 +1854,7 @@ form_free_states_dec = {
 	
 	when_taken = {
 		change_tag = FSA
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1882,6 +1892,7 @@ form_confederate_states_dec = {
 	
 	when_taken = {
 		change_tag = CSA
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1928,6 +1939,7 @@ form_north_carolina_dec = {
 	
 	when_taken = {
 		change_tag = NCR
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1974,6 +1986,7 @@ form_south_carolina_dec = {
 	
 	when_taken = {
 		change_tag = SCR
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -1990,7 +2003,11 @@ form_south_carolina_dec = {
 }
 form_united_carolina_dec = {
 	is_shown = {
-		is_country_type = colonial
+		OR = {
+			is_country_type = colonial
+			c:NCR ?= ROOT
+			c:SCR ?= ROOT
+		}
 		NOT = { cu:iroquoian = { shares_heritage_trait_with_any_primary_culture = ROOT } }
 		capital = {
 			OR = {
@@ -2003,8 +2020,8 @@ form_united_carolina_dec = {
 		#For converter-generated tags only
 		OR = {
 			zzz_is_non_major_new_world_tag = no
-			c:NCR = ROOT
-			c:SCR = ROOT
+			c:NCR ?= ROOT
+			c:SCR ?= ROOT
 		}
 		zzz_is_major_new_world_tag = no
 		
@@ -2014,24 +2031,25 @@ form_united_carolina_dec = {
 		is_subject = no
 		is_at_war = no
 		is_diplomatic_play_committed_participant = no
-		OR = {
-			NOT = { exists = c:NCR }
-			if = {
-				limit = { exists = c:NCR }
-				c:NCR = ROOT
-			}
+		trigger_if = {
+			limit = { exists = c:NCR }
+			c:NCR = ROOT
 		}
-		OR = {
+		trigger_else = {
+			NOT = { exists = c:NCR }
+		}
+		trigger_if = {
+			limit = { exists = c:SCR }
+			c:SCR = ROOT
+		}
+		trigger_else = {
 			NOT = { exists = c:SCR }
-			if = {
-				limit = { exists = c:SCR }
-				c:SCR = ROOT
-			}
 		}
 	}
 	
 	when_taken = {
 		change_tag = CLI
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2074,6 +2092,7 @@ form_georgia_usa_dec = {
 	
 	when_taken = {
 		change_tag = GRG
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2113,6 +2132,7 @@ form_florida_dec = {
 	
 	when_taken = {
 		change_tag = FLR
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2161,6 +2181,7 @@ form_michigan_dec = {
 	
 	when_taken = {
 		change_tag = UOM
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2206,6 +2227,7 @@ form_dakota_dec = {
 	
 	when_taken = {
 		change_tag = DKT
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2248,6 +2270,7 @@ form_louisiana_dec = {
 	
 	when_taken = {
 		change_tag = LOU
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2293,6 +2316,7 @@ form_california_dec = {
 	
 	when_taken = {
 		change_tag = CAL
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2321,6 +2345,7 @@ form_oregon_dec = {
 	
 	when_taken = {
 		change_tag = ORG
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2357,6 +2382,7 @@ form_deseret_dec = {
 	
 	when_taken = {
 		change_tag = DES
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2405,6 +2431,7 @@ form_cascadia_dec = {
 	
 	when_taken = {
 		change_tag = CSC
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2454,6 +2481,7 @@ form_columbia_dec = {
 	
 	when_taken = {
 		change_tag = COL
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2507,6 +2535,7 @@ form_texas_dec = {
 	
 	when_taken = {
 		change_tag = TEX
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2540,6 +2569,7 @@ form_rio_grande_dec = {
 	
 	when_taken = {
 		change_tag = RIO
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2590,6 +2620,7 @@ form_yucatan_dec = {
 	
 	when_taken = {
 		change_tag = YUC
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2636,6 +2667,7 @@ form_los_altos_dec = {
 	
 	when_taken = {
 		change_tag = ALT
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2675,6 +2707,7 @@ form_guatemala_dec = {
 	
 	when_taken = {
 		change_tag = GUA
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2703,6 +2736,7 @@ form_honduras_dec = {
 	
 	when_taken = {
 		change_tag = HON
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2731,6 +2765,7 @@ form_el_salvador_dec = {
 	
 	when_taken = {
 		change_tag = ELS
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2759,6 +2794,7 @@ form_nicaragua_dec = {
 	
 	when_taken = {
 		change_tag = NIC
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2787,6 +2823,7 @@ form_costa_rica_dec = {
 	
 	when_taken = {
 		change_tag = COS
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2828,6 +2865,7 @@ form_usca_dec = {
 	
 	when_taken = {
 		change_tag = UCA
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2861,6 +2899,7 @@ form_panama_dec = {
 			set_variable = free_nation_name_var
 		}
 		change_tag = PNM
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2892,6 +2931,7 @@ form_colombia_dec = {
 			set_variable = free_nation_name_var
 		}
 		change_tag = CLM
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2934,6 +2974,7 @@ form_venezuela_dec = {
 	
 	when_taken = {
 		change_tag = VNZ
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -2980,6 +3021,7 @@ form_ecuador_dec = {
 	
 	when_taken = {
 		change_tag = ECU
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3024,6 +3066,7 @@ form_north_peru_dec = {
 	
 	when_taken = {
 		change_tag = NPU
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3053,6 +3096,7 @@ form_bolivia_dec = {
 	
 	when_taken = {
 		change_tag = BOL
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3087,6 +3131,7 @@ form_chile_dec = {
 	
 	when_taken = {
 		change_tag = CHL
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3136,6 +3181,7 @@ form_paraguay_dec = {
 	
 	when_taken = {
 		change_tag = PRG
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3180,6 +3226,7 @@ form_uruguay_dec = {
 	
 	when_taken = {
 		change_tag = URU
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3239,6 +3286,7 @@ form_rio_de_la_plata_dec = {
 	
 	when_taken = {
 		change_tag = PLT
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3281,6 +3329,7 @@ form_amazonia_dec = {
 	
 	when_taken = {
 		change_tag = AMZ
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3322,6 +3371,7 @@ form_bahia_dec = {
 	
 	when_taken = {
 		change_tag = BHI
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3358,6 +3408,7 @@ form_equator_dec = {
 	
 	when_taken = {
 		change_tag = EQT
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3401,6 +3452,7 @@ form_grao_para_dec = {
 	
 	when_taken = {
 		change_tag = PRA
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3429,6 +3481,7 @@ form_minas_gerais_dec = {
 	
 	when_taken = {
 		change_tag = MNG
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3465,6 +3518,7 @@ form_paulistania_dec = {
 	
 	when_taken = {
 		change_tag = PAU
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3504,6 +3558,7 @@ form_piratini_dec = {
 	
 	when_taken = {
 		change_tag = PNI
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3543,6 +3598,7 @@ form_santa_catarina_dec = {
 			set_variable = free_nation_name_var
 		}
 		change_tag = CTR
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3581,6 +3637,7 @@ form_bahamas_dec = {
 	
 	when_taken = {
 		change_tag = BAH
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3609,6 +3666,7 @@ form_cuba_dec = {
 	
 	when_taken = {
 		change_tag = CUB
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3637,6 +3695,7 @@ form_haiti_dec = {
 	
 	when_taken = {
 		change_tag = HAI
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3665,6 +3724,7 @@ form_jamaica_dec = {
 	
 	when_taken = {
 		change_tag = JAM
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3693,6 +3753,7 @@ form_puerto_rico_dec = {
 	
 	when_taken = {
 		change_tag = PCO
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3721,6 +3782,7 @@ form_santo_domingo_dec = {
 	
 	when_taken = {
 		change_tag = DOM
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3749,6 +3811,7 @@ form_west_indies_dec = {
 	
 	when_taken = {
 		change_tag = WIN
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3782,6 +3845,7 @@ form_new_south_wales_dec = {
 	}
 	when_taken = {
 		change_tag = NSW
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3822,6 +3886,7 @@ form_new_zealand_dec = {
 	}
 	when_taken = {
 		change_tag = NZL
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3849,6 +3914,7 @@ form_south_australia_dec = {
 	}
 	when_taken = {
 		change_tag = SAS
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3876,6 +3942,7 @@ form_tasmania_dec = {
 	}
 	when_taken = {
 		change_tag = TAS
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {
@@ -3906,6 +3973,7 @@ form_western_australia_dec = {
 	}
 	when_taken = {
 		change_tag = WAS
+		converter_primary_cultures_effect = yes
 	}
 	
 	ai_chance = {

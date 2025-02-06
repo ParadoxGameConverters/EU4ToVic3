@@ -4,6 +4,9 @@
 # 
 # Whatever is not here will be generated automatically using religion_group_map.txt
 
+# Dummy - for incoming EU4 breakage
+link = { vic3 = noreligion eu4 = noreligion }
+
 # Christians
 link = { vic3 = catholic eu4 = catholic eu4 = insular_celtic eu4 = catholique }
 link = { vic3 = protestant eu4 = protestant eu4 = reformed eu4 = anglican eu4 = anabaptist }
@@ -48,11 +51,11 @@ link = { vic3 = masmudi eu4 = masmudi }
 
 # Eastern
 link = { vic3 = confucian eu4 = confucianism }
-link = { vic3 = mahayana eu4 = mahayana }
+link = { vic3 = mahayana eu4 = mahayana eu4 = shinto }
 link = { vic3 = theravada eu4 = buddhism }
 link = { vic3 = sikh eu4 = sikhism }
 link = { vic3 = hindu eu4 = hinduism }
-link = { vic3 = shinto eu4 = shinto }
+#link = { vic3 = shinto eu4 = shinto } Match vanilla setup
 link = { vic3 = gelugpa eu4 = vajrayana }
 
 link = { vic3 = jain eu4 = jain }
@@ -91,7 +94,7 @@ link = { vic3 = magyar_pagan_reformed eu4 = magyar_pagan eu4 = magyar_pagan_refo
 link = { vic3 = siberian_pagan_reformed eu4 = siberian_pagan eu4 = siberian_pagan_reformed eu4 = converted_siberian_pagan }
 link = { vic3 = zun_pagan_reformed eu4 = zun_pagan eu4 = zun_pagan_reformed }
 link = { vic3 = bon eu4 = bon eu4 = bon_reformed }
-link = { vic3 = hellenic_pagan_reformed eu4 = hellenic_pagan eu4 = hellenic_pagan_reformed }
+link = { vic3 = hellenic_pagan_reformed eu4 = hellenic_pagan eu4 = hellenic_pagan_reformed eu4 = hellenism eu4 = nabataean }
 link = { vic3 = west_african_pagan_reformed eu4 = west_african_pagan_reformed }
 ##link = { vic3 = kushitism_pagan_reformed eu4 = kushitism_pagan_reformed } #Linked with Kemetic
 
@@ -133,3 +136,7 @@ link = { vic3 = heathenry eu4 = germanic_pagan eu4 = anglo_pagan }
 link = { vic3 = yazidi eu4 = yazidi }
 link = { vic3 = meshefaresism eu4 = meshefaresism }
 link = { vic3 = kitebacilweism eu4 = kitebacilweism }
+
+###### ET
+
+link = { vic3 = atheist eu4 = irreligious eu4 = secularism }

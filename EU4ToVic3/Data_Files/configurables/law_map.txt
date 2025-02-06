@@ -20,6 +20,10 @@
 # alter nothing of note.
 # Exception to above is when a T1 reform really stresses the point. A fifth_monarchists_reform is really really
 # theocratic so let's list it double.
+# NOTES: The `governance_principles` lawgroup should really only rely on the `forms`. A monarchy in EU4 should be
+# a monarchy in Vic3. NO COMMON REFORMS should be used in this lawgroup, since that can lead to an eu4 monarchy
+# becoming a Vic3 parliamentary republic. Since an eu4 republic can either be a vic3 parliamentary or presidential one,
+# it is ok to use reforms there. Similarly for decentralized nations.
 
 #GOVERNANCE:
 #law_council_republic 200 NO
@@ -38,7 +42,7 @@ lawgroup_governance_principles = {
 			federal_senate_reform unified_piratical_confederacy_reform protectorate_parliament_reform
 			revolutionary_republic_reform junior_revolutionary_republic_reform peasants_republic
 			kongsi_federation american_republic federal_republic republicanism_reform democratic_values_reform
-			parliamentary_reform parliamentary_republic_reform english_parliamentary_republic_government
+			parliamentary_republic_reform english_parliamentary_republic_government
 		}
 	}
 	law_presidential_republic = {
@@ -53,9 +57,7 @@ lawgroup_governance_principles = {
 	law_monarchy = {
 		forms = { monarchy tribal native }
 		ideas = {}
-		reforms = { feudalism_reform centralize_tribal_power_reform native_hereditary_reform shaka_regime 
-			retain_tribal_hierarchy_reform horde_barbaric_despoilers_reform horde_tribal_unity_reform 
-			tribe_remain_tribal_reform tribe_tribal_unity native_remain_being_native_reform feudal_theocracy }
+		reforms = {}
 	}
 	law_theocracy = {
 		forms = { theocracy }
@@ -90,7 +92,7 @@ lawgroup_distribution_of_power = {
 			consolidate_power_into_different_candidates_reform equal_electorate_reform three_classes_reform
 			pirate_representation_reform government_for_people_reform theocratic_democracy_reform
 			constitional_theocracy_reform monastic_elections_reform united_cantons_reform strengthened_parliament_reform
-			civic_republicanism_government
+			civic_republicanism_government parliamentary_reform presidential_monarchy_reform the_social_contract_reform
 		}
 	}
 	law_wealth_voting = {
@@ -103,7 +105,8 @@ lawgroup_distribution_of_power = {
 			power_to_the_smugglers_reform revolutionary_council_reform empowered_quartermasters_reform
 			citizenry_reform elective_monarchy_reform administration_of_the_parliament_reform catalan_cortes_reform
 			courts_of_navarra governing_senate_reform plutocratic_reform restoration_of_the_senate_reform
-			ven_promissione_ducale_reform support_state_reform
+			ven_promissione_ducale_reform support_state_reform regional_representation_reform parliamentary_reform
+			presidential_monarchy_reform two_treatises_reform
 		}
 	}
 	law_landed_voting = {
@@ -115,7 +118,7 @@ lawgroup_distribution_of_power = {
 			legislative_sejm integrated_sejmiks two_treatises_reform regional_representation_reform
 			aristocratic_values_reform fraternite_reform national_constituent_reform enlightened_principle_reform
 			landholders_reform clerical_commission_reform regionally_elected_commanders british_monarchy
-			tanistry_reform bohemian_elective_kingdom_reform house_of_lords_reform nakharar_title
+			tanistry_reform bohemian_elective_kingdom_reform house_of_lords_reform nakharar_title parliamentary_reform
 		}
 	}
 	law_elder_council = {
@@ -147,8 +150,8 @@ lawgroup_distribution_of_power = {
 		ideas = {}
 		reforms = { blackmail_nobility_reform legion_of_honor_reform limit_imperial_court_reform 
 			royal_decree_reform imperial_decree_reform machiavellianistic_rule_reform letat_cest_moi_reform
-			deified_monarchy_reform  political_absolutism_reform presidential_monarchy_reform 
-			emperor_of_the_revolution_reform enlightened_monarchy_reform protectorate_parliament_reform
+			deified_monarchy_reform  political_absolutism_reform emperor_of_the_revolution_reform 
+			enlightened_monarchy_reform protectorate_parliament_reform
 			presidential_despot_reform military_dictatorship_reform devotee_to_the_people_reform
 			consolidate_power_in_doge_reform consolidate_power_to_the_ruler_reform pirate_king_reform
 			absolute_president_reform dynastic_rulership_reform president_for_life_reform

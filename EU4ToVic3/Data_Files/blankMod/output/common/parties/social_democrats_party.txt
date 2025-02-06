@@ -194,6 +194,15 @@ social_democrat_party = {
 				}
 			}
 			triggered_desc = {
+				desc = party_inc
+				trigger = {
+					OR = {
+						c:BIC ?= this
+						c:BHT ?= this
+					}
+				}
+			}
+			triggered_desc = {
 				desc = party_social_democrats
 				trigger = {
 					always = yes
@@ -244,16 +253,6 @@ social_democrat_party = {
 				has_ideology = ideology:ideology_theocrat
 			}
 		}
-		OR = {
-	     	NOT = {
-	         	owner = {
-	         		has_variable = only_valid_party
-	         	}
-	        }
-	        owner.var:only_valid_party = {
-	        	is_party_type = social_democrat_party
-	        }
-	    }
 	}
 	
 	# Root - IG considering joining
@@ -262,6 +261,26 @@ social_democrat_party = {
 		value = {
 			value = -5
 			desc = "base_value"
+		}
+		if = {
+			limit = {
+				owner = {
+					c:BIC ?= this
+					is_subject = yes
+					OR = {
+						has_modifier = modifier_india_crown_rule
+						has_modifier = modifier_india_company_rule
+					}
+				}
+				OR = {
+					is_interest_group_type = ig_industrialists
+					is_interest_group_type = ig_armed_forces
+				}
+			}
+			add = {
+				value = -100
+				desc = "india_colonial_government"
+			}
 		}
 		if = { # social democrats love social democracy
 			limit = {
@@ -306,7 +325,7 @@ social_democrat_party = {
 				}
 			}
 			add = {	
-				value = 5
+				value = -5
 				desc = from_powerful_communists
 			}
 		}
@@ -616,6 +635,56 @@ social_democrat_party = {
 				desc = "from_slavery"
 			}
 		}
+		if = { # early Trade Unions
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				is_powerful = no
+				NOT = {
+					has_ideology = ideology:ideology_socialist
+				}
+			}
+			add = {
+				value = -3
+				desc = "from_early_trade_unions"
+			}
+		}
+		if = { # against free trade
+			limit = {
+				owner = {
+					has_law = law_type:law_free_trade
+				}
+				OR = {
+					has_ideology = ideology:ideology_socialist
+					has_ideology = ideology:ideology_isolationist
+				}
+			}
+			add = {
+				value = 3
+				desc = "from_free_trade"
+			}
+		}
+		if = { # against l-f
+			limit = {
+				owner = {
+					has_law = law_type:law_laissez_faire
+				}
+				OR = {
+					has_ideology = ideology:ideology_agrarian
+					has_ideology = ideology:ideology_socialist
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_vanguardist
+							has_ideology = ideology:ideology_protectionist
+							has_ideology = ideology:ideology_luddite
+						}
+					}
+				}
+			}
+			add = {
+				value = 3
+				desc = "from_anti_laissez_faire"
+			}
+		}
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
@@ -662,89 +731,6 @@ social_democrat_party = {
 			multiply = {
 				value = 0.1
 				desc = "from_more_than_three_prior_members"
-			}
-		}
-		if = { # againt free trade
-			limit = {
-				owner = {
-					has_law = law_type:law_free_trade
-				}
-				OR = {
-					has_ideology = ideology:ideology_socialist
-					has_ideology = ideology:ideology_isolationist
-				}
-			}
-			add = {
-				value = 3
-				desc = "from_free_trade"
-			}
-		}
-		if = { # against l-f
-			limit = {
-				owner = {
-					has_law = law_type:law_laissez_faire
-				}
-				OR = {
-					has_ideology = ideology:ideology_agrarian
-					has_ideology = ideology:ideology_socialist
-					leader = {
-						OR = {
-							has_ideology = ideology:ideology_vanguardist
-							has_ideology = ideology:ideology_protectionist
-							has_ideology = ideology:ideology_luddite
-						}
-					}
-				}
-			}
-			add = {
-				value = 3
-				desc = "from_anti_laissez_faire"
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-	         	NOT = {
-			        owner.var:only_valid_party = {
-			        	is_party_type = social_democrat_party
-			        }
-			    }
-			}
-			multiply = {
-				value = 0
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-				owner.var:only_valid_party = {
-					is_party_type = social_democrat_party
-				}
-	         	owner.ruler = {
-					this.interest_group = prev
-				}
-			}
-			add = {
-				value = 1000
-				desc = "from_only_legal_party"
-			}
-		}
-		else_if = {
-			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-	         	 owner.var:only_valid_party = {
-		        	is_party_type = social_democrat_party
-		        }
-			}
-			add = {
-				value = 3
-				desc = "from_only_legal_party"
 			}
 		}
 	}

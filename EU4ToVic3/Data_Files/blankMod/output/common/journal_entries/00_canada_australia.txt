@@ -33,6 +33,23 @@
 
 	on_complete = {
 		trigger_event = { id = can_aus.5 }
+		hidden_effect = {
+			if = {
+				limit = {
+					any_scope_state = {
+						state_region = s:STATE_ONTARIO
+					}
+				}
+			}
+			s:STATE_ONTARIO = {
+				random_scope_state = {
+			        set_hub_name = {
+			            type = city
+			            name = HUB_NAME_STATE_ONTARIO_city_ottawa
+			        }
+				}
+			}
+		}
 	}
 
 	invalid = {
@@ -87,6 +104,25 @@ je_canada_gbr = {
 
 	on_complete = {
 		trigger_event = { id = can_aus.6 }
+		hidden_effect = {
+			if = {
+				limit = {
+					any_subject_or_below = {
+						any_scope_state = {
+							state_region = s:STATE_ONTARIO
+						}
+					}
+				}
+			}
+			s:STATE_ONTARIO = {
+				random_scope_state = {
+			        set_hub_name = {
+			            type = city
+			            name = HUB_NAME_STATE_ONTARIO_city_ottawa
+			        }
+				}
+			}
+		}
 	}
 
 	weight = 100

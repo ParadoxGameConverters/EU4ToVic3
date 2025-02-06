@@ -18,6 +18,7 @@
 #include "Packet.h"
 #include "PoliticalManager/Country/Country.h"
 #include "PoliticalManager/PoliticalManager.h"
+#include <algorithm>
 #include <cmath>
 #include <iomanip>
 #include <numeric>
@@ -320,7 +321,9 @@ double V3::EconomyManager::calculateDateFactor(const Configuration::STARTDATE st
 {
 	if (startDate == Configuration::STARTDATE::Dynamic)
 	{
-		const double factor = Country::yearCapFactor(dateData.lastEU4Date) - 1.0;
+		double factor = Country::yearCapFactor(dateData.lastEU4Date) - 1.0;
+		// Hard cap factor to 100% as we really don't want *10000% for converting a 1948 ET game.
+		factor = std::min(factor, 1.0);
 		Log(LogLevel::Info) << std::fixed << std::setprecision(0) << "Altering global industry by " << factor * 100 << "% due to start date of "
 								  << dateData.lastEU4Date << ".";
 		return factor;

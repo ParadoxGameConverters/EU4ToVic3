@@ -135,18 +135,18 @@ link = { vic3 = caribeno @spanish_cultures region = region_caribbean }
 link = { vic3 = central_american @spanish_cultures region = region_central_america }
 link = { vic3 = mexican @spanish_cultures region = region_mexico }
 link = { vic3 = mexican eu4 = mexican neoculture_override = yes }
-### PDX went a bit overboard with all these cultures which are essentially identical. They only make sense for a very messy south america
-# which is uncommon for EU4 games. Unsure if it's worthwile or beneficial to link and use these. Needless to say, they don't have EU4 coutnerparts.
-# I'm enabling them for now, though, for historical reasons and flavor maybe. They are all linked to spanish anyway.
-link = { vic3 = peruvian @spanish_cultures owner = SPU owner = NPU owner = PBC owner = PEU }
-link = { vic3 = bolivian @spanish_cultures owner = BOL }
-link = { vic3 = ecuadorian @spanish_cultures owner = ECU owner = EQT }
-link = { vic3 = chilean @spanish_cultures owner = CHL }
-link = { vic3 = venezuelan @spanish_cultures owner = VNZ }
-link = { vic3 = argentine @spanish_cultures owner = ARG owner = PLT }
-link = { vic3 = uruguayan @spanish_cultures owner = URU }
-link = { vic3 = paraguayan @spanish_cultures owner = PRG }
-link = { vic3 = colombian @spanish_cultures owner = GCO owner = CLM }
+### PDX created the following cultures for when their respective countries gain independence. 
+# We should not map to them at the start.
+#link = { vic3 = peruvian @spanish_cultures owner = SPU owner = NPU owner = PBC owner = PEU }
+#link = { vic3 = bolivian @spanish_cultures owner = BOL }
+#link = { vic3 = ecuadorian @spanish_cultures owner = ECU owner = EQT }
+#link = { vic3 = chilean @spanish_cultures owner = CHL }
+#link = { vic3 = venezuelan @spanish_cultures owner = VNZ }
+#link = { vic3 = argentine @spanish_cultures owner = ARG owner = PLT }
+#link = { vic3 = uruguayan @spanish_cultures owner = URU }
+#link = { vic3 = paraguayan @spanish_cultures owner = PRG }
+#link = { vic3 = colombian @spanish_cultures owner = GCO owner = CLM }
+
 link = { vic3 = north_andean @spanish_cultures region = region_gran_colombia }
 link = { vic3 = platinean @spanish_cultures region = region_la_plata }
 link = { vic3 = platinean eu4 = platinean neoculture_override = yes }
@@ -460,13 +460,16 @@ link = { vic3 = zhuang eu4 = zhuang eu4 = zhuang_new }
 # Northeast Indian - Assamese, Manipuri, Kochi
 link = { vic3 = assamese eu4 = assamese owner = ASM }
 link = { vic3 = kamarupan eu4 = assamese eu4 = kochrajbongshi eu4 = kochi }
-link = { vic3 = manipuri eu4 = chin eu4 = meitei eu4 = tripuri eu4 = naga eu4 = sutiya }
+link = { vic3 = manipuri eu4 = chin eu4 = meitei eu4 = tripuri eu4 = sutiya }
+link = { vic3 = naga eu4 = naga }
 #Munda is dynamically generated
 
 
-# Burmese - Burmese, Kachin, Karen
+# Burmese - Burmese, Kachin, Karen, Lushai
 link = { vic3 = kachin eu4 = kachin }
 link = { vic3 = karen eu4 = karen }
+link = { vic3 = lushai eu4 = lushai }
+link = { vic3 = lushai eu4 = burmese region = STATE_ARAKAN }
 link = { vic3 = burmese eu4group = burman }
 
 
@@ -493,22 +496,33 @@ link = { vic3 = aborigine eu4group = aboriginal_australian }
 
 
 #Himalayan - Tibetan and Nepali
-link = { vic3 = nepali eu4 = nepali eu4 = pahari eu4 = bhutanese eu4 = sikkimese }
+link = { vic3 = nepali eu4 = nepali eu4 = bhutanese eu4 = sikkimese }
 
 
-# Indo-Aryan - Bengali, Bihari, Oriya, Sinhala, Avadhi, Kanauji, Panjabi, Kashmiri, Gujarati, Marathi, Sindi, Rajput
+# Indo-Aryan - Bageli, Bengali, Bihari, Chhattisgarhi, Deccani, Oriya, Sinhala, Avadhi, Hindustani, Pahari, Panjabi, Kashmiri, Gujarati, Marathi, Sindi, Rajput
 ##Added - Parsi
+link = { vic3 = chhattisgarhi eu4group = eastern_aryan region = STATE_BUNDELKHAND region = STATE_CENTRAL_PROVINCES }
+link = { vic3 = chhattisgarhi eu4group = western_aryan region = STATE_BUNDELKHAND }
+
+#Deccani in all non-Marathi provinces that aren't too far south
+link = { vic3 = deccani eu4group = western_aryan eu4group = eastern_aryan region = STATE_KURNOOL region = STATE_MADRAS region = STATE_MYSORE region = TRAVANCORE }
+link = { vic3 = marathi eu4 = marathi eu4 = bhil eu4 = khandeshi }
+link = { vic3 = deccani eu4group = western_aryan eu4group = eastern_aryan region = STATE_BOMBAY region = STATE_HYDERABAD }
+
 link = { vic3 = avadhi eu4 = avadhi }
+link = { vic3 = bageli eu4 = bagheli }
 link = { vic3 = bengali eu4 = bengali }
 link = { vic3 = bihari eu4 = bihari eu4 = jharkhandi eu4 = maithili }
 link = { vic3 = gujarati eu4 = gujarati eu4 = nagpuri eu4 = sambalpuri eu4 = saurashtri eu4 = kathiawari }
-link = { vic3 = kanauji eu4 = kanauji eu4 = vindhyan eu4 = bagheli eu4 = bundeli }
+link = { vic3 = hindustani eu4 = kanauji eu4 = vindhyan }
+link = { vic3 = bundeli eu4 = bundeli }
 link = { vic3 = kho eu4 = kashmiri region = STATE_PASHTUNISTAN }
 link = { vic3 = kashmiri eu4 = kashmiri }
-link = { vic3 = marathi eu4 = marathi eu4 = bhil eu4 = khandeshi }
 link = { vic3 = oriya eu4 = oriya eu4 = garjati }
+link = { vic3 = pahari eu4 = pahari }
 link = { vic3 = panjabi eu4 = panjabi eu4 = urdu eu4 = dakani eu4 = jati }
 link = { vic3 = parsi eu4 = parsi }
+link = { vic3 = pathan eu4 = east_persian eu4 = afghani eu4 = tabari eu4 = afghan eu4 = kushan eu4 = pashtun region = region_punjab region = region_bombay region = region_bengal region = region_madras region = region_central_india region = STATE_HIMALAYAS region = STATE_EASTERN_HIMALAYAS  }
 link = { vic3 = rajput eu4 = rajput eu4 = malvi eu4 = dhundari eu4 = harauti eu4 = marwari eu4 = meo eu4 = mewari eu4 = tomara eu4 = nimadi }
 link = { vic3 = sindi eu4 = sindhi eu4 = multani }
 link = { vic3 = sinhala eu4 = sinhala }
@@ -583,7 +597,7 @@ link = { vic3 = zulu eu4 = nguni region = STATE_ZULULAND }
 
 link = { vic3 = chewa eu4 = nyasa }
 link = { vic3 = khoisan eu4 = khoisan }
-#link = { vic3 = lomwe  } Close relatives to the Makua, currently impossible to map
+#link = { vic3 = lomwe } Close relatives to the Makua, currently impossible to map
 link = { vic3 = makua eu4 = makua }
 link = { vic3 = nguni eu4 = nguni } # South Africa
 link = { vic3 = ovimbundu eu4 = mbundu } # Angola

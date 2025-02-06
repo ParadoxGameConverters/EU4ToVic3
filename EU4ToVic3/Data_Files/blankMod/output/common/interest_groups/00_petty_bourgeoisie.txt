@@ -10,6 +10,17 @@
 		ideology_patriotic
 	}
 
+	character_ideologies = {
+		ideology_moderate
+		ideology_traditionalist
+		ideology_jingoist_leader
+		ideology_protectionist
+		ideology_orleanist
+		ideology_bonapartist
+		ideology_legitimist
+		ideology_sovereignist_leader
+	}
+
 	enable = {
 		always = yes
 	}
@@ -73,21 +84,47 @@
 	}
 
 	on_disable = {}
+	priority_cultures = { #Country scope
+		rule = {
+			trigger = {
+				c:BIC ?= this
+				any_primary_culture = { 
+					cu:british = this
+				}
+			}
+			cultures = {
+				assamese avadhi baluchi bengali bihari gujarati kannada malayalam marathi oriya panjabi pathan rajput sindi tamil telegu hindustani bundeli pahari gondi bageli chhattisgarhi deccani
+			}
+		}
+	}
 	on_character_ig_membership = {}
 
 	pop_potential = {
 		custom_tooltip = {
 			text = would_be_accepted_under_national_supremacy_tt
 			this.culture = {
-				AND = {
-					shares_heritage_trait_with_any_primary_culture = prev.owner
-					shares_non_heritage_trait_with_any_primary_culture = prev.owner
+				OR = {
+					AND = {
+						shares_heritage_trait_with_any_primary_culture = prev.owner
+						shares_non_heritage_trait_with_any_primary_culture = prev.owner
+					}
+					AND = {
+						c:BIC ?= prev.owner
+						has_discrimination_trait = south_asian_heritage
+					}
 				}
 			}
 		}
 		NOR = {
 			is_pop_type = aristocrats
-			is_pop_type = capitalists
+			trigger_if = {
+				limit = {
+					NOT = {
+						c:BIC ?= owner
+					}
+				}
+				is_pop_type = capitalists
+			}
 		}
 		OR = {
 			pop_employment_building_group = bg_manufacturing
@@ -120,7 +157,24 @@
 	}
 
 	pop_weight = {
-		value = 50
+		if = {
+			limit = {
+				strata = lower
+			}
+			add = {
+				desc = "POP_BASE_ATTRACTION"
+				value = 25
+			}
+		}
+		else_if = {
+			limit = {
+				strata = middle
+			}
+			add = {
+				desc = "POP_BASE_ATTRACTION"
+				value = 50
+			}
+		}
 
 		add = {
 			desc = "POP_SHOPKEEPERS"
@@ -203,6 +257,36 @@
 				}
 				value = 25
 				add = this.standard_of_living
+			}
+		}
+
+		if = {
+			limit = {
+				c:BIC ?= owner
+				culture = {
+					has_discrimination_trait = european_heritage
+				}
+			}
+			multiply = {
+				desc = "POP_INDIA_COLONIAL_RULE"
+				value = 0.1
+			}
+		}
+		
+		if = {
+			limit = {
+				c:BIC ?= owner
+				culture = {
+					has_discrimination_trait = south_asian_heritage
+				}
+				OR = {
+					is_pop_type = capitalists
+					is_pop_type = shopkeepers
+				}
+			}
+			add = {
+				desc = "POP_INDIA_MONEYED_ELITES"
+				value = 75
 			}
 		}
 
@@ -361,15 +445,6 @@
 	# scope:character is the most popular commander in the IG
 	commander_leader_chance = {
 		value = 0.25
-		if = {
-			limit = {
-				exists = scope:character
-			}
-			multiply = {
-				value = 1
-				add = scope:character.popularity
-				min = 0
-			}
-		}
+		multiply = ig_commander_leader_chance_mult
 	}
 }
