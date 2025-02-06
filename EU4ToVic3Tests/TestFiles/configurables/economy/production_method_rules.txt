@@ -1,11 +1,13 @@
 # Linked buildings will walk towards the PMs specified until the PM is reached. or the next step is invalid due to tech.
+# Law-bound PMs (Like ownership PMs) will walk towards the first PM allowed by law. These should be flagged with law_bound = yes.
 # The percent is the percent of building levels that will try to move off of default to adopt the defined PM. It is assumed to be 1(100%) unless specified.
 
 building_government_administration = { 
-    pm = { name = pm_vertical_filing_cabinets }
+	pm = { name = pm_vertical_filing_cabinets }
 }
 
 building_logging_camp = {
-    pm = { name = pm_saw_mills }
-    pm = { name = pm_hardwood percent = 0.65 }
+	pm = { name = pm_saw_mills }
+	pm = { name = pm_hardwood percent = 0.65 }
+	pm = { name = pm_merchant_guilds_building_logging_camp law_bound = yes }
 }

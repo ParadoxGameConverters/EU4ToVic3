@@ -35,7 +35,7 @@ class Vic3DefinesLoader: commonItems::parser
 	double minimumInvestmentCost = 0;		 // The absolute minimum cost in BUR per investment level
 
 
-	double workingAdultRatioBase = 0.0;		 // Base ratio of working adults to dependents, this can be overridden by pop type definition and country modifiers.
+	double workingAdultRatioBase = 0.25;	 // Base ratio of working adults to dependents, this can be overridden by pop type definition and country modifiers.
 	double dependentConsumptionRatio = 0.0; // Dependents consume this multiple of Needs compared to Working Adults.
 };
 } // namespace V3

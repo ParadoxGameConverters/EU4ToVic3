@@ -15,6 +15,7 @@
 #include "Loaders/StateModifierLoader/StateModifierLoader.h"
 #include "Loaders/TerrainLoader/TerrainModifierLoader.h"
 #include "Log.h"
+#include "Packet.h"
 #include "PoliticalManager/Country/Country.h"
 #include "PoliticalManager/PoliticalManager.h"
 #include <algorithm>
@@ -23,7 +24,6 @@
 #include <numeric>
 #include <queue>
 #include <ranges>
-
 void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries)
 {
 	Log(LogLevel::Info) << "-> Loading Centralized Countries for Economy Application.";
@@ -62,9 +62,8 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 	loadPopTypes(modFS);
 }
 
-void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalManager, const Vic3DefinesLoader& defines) const
+void V3::EconomyManager::establishBureaucracy(const Country& country, const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const
 {
-	Log(LogLevel::Info) << "-> Establishing Bureaucracy.";
 	if (!buildings.contains("building_government_administration"))
 	{
 		Log(LogLevel::Error) << "No building definition found for: building_government_administration.";
@@ -73,54 +72,76 @@ void V3::EconomyManager::establishBureaucracy(const PoliticalManager& politicalM
 
 	const auto& govAdmin = buildings.at("building_government_administration");
 
-	for (const auto& country: centralizedCountries)
+	// Check tech requirement for government administrations.
+	if (!country.hasAnyOfTech(govAdmin.getUnlockingTechs()))
 	{
-		// Check tech requirement for government administrations.
-		if (!country->hasAnyOfTech(govAdmin.getUnlockingTechs()))
-		{
-			continue;
-		}
-
-		// Give 10% extra for trade routes - cap at +400
-		const double usage = country->calculateBureaucracyUsage(politicalManager.getLawsMap(), defines);
-		const double generationTarget = std::min(usage * 1.1, usage + 500) - 100;
-
-		// Use the PM with the most generation available
-		int PMGeneration = 35;
-		const auto& PMName = pickBureaucracyPM(*country);
-		if (PMs.contains(PMName))
-		{
-			PMGeneration = PMs.at(PMName).getBureaucracy();
-		}
-
-		country->distributeGovAdmins(generationTarget, PMGeneration, techMap.getTechs(), buildings.at("building_government_administration"));
+		return;
 	}
-	Log(LogLevel::Info) << "<> Bureaucracy Established.";
+
+	// Give 10% extra for trade routes - cap at +400
+	const double usage = country.calculateBureaucracyUsage(lawsMap, defines);
+	const double generationTarget = std::min(usage * 1.1, usage + 500) - 100;
+
+	// Use the PM with the most generation available
+	int PMGeneration = 35;
+	const auto& PMName = pickBureaucracyPM(country);
+	if (PMs.contains(PMName))
+	{
+		PMGeneration = PMs.at(PMName).getBureaucracy();
+	}
+
+	country.distributeGovAdmins(generationTarget, PMGeneration, techMap.getTechs(), buildings.at("building_government_administration"));
 }
 
-void V3::EconomyManager::hardcodePorts() const
+void V3::EconomyManager::hardcodePorts(const Country& country) const
 {
-	Log(LogLevel::Info) << "-> Hardcoding Ports.";
-	auto counter = 0;
 
-	for (const auto& country: centralizedCountries)
+	for (const auto& subState: country.getSubStates())
 	{
-		for (const auto& subState: country->getSubStates())
+		if (!subState->getVanillaBuildingElements().empty())
+			continue; // don't affect states imported from vanilla.
+		if (!subState->isCoastal())
+			continue;
+
+		auto port = std::make_shared<Building>(buildings.at("building_port"));
+		port->setLevel(1);
+
+		subState->addBuilding(port);
+		subState->getOwner()->addTech("navigation");
+	}
+}
+
+void V3::EconomyManager::integrateHardcodedBuildings(const Country& country,
+	 double defaultRatio,
+	 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
+	 const std::map<std::string, Law>& lawsMap,
+	 const std::map<std::string, PopType>& popTypes,
+	 MarketTracker& market) const
+{
+	for (const auto& subState: country.getSubStates())
+	{
+		for (const auto& building_ref: subState->getBuildings())
 		{
-			if (!subState->getVanillaBuildingElements().empty())
-				continue; // don't affect states imported from vanilla.
-			if (!subState->isCoastal())
+			const auto& building = *building_ref;
+			if (building.getLevel() <= 0)
 				continue;
 
-			auto port = std::make_shared<Building>(buildings.at("building_port"));
-			port->setLevel(1);
-
-			subState->addBuilding(port);
-			++counter;
-			subState->getOwner()->addTech("navigation");
+			market.integrateBuilding(building,
+				 building.getLevel(),
+				 defaultRatio,
+				 estimatedPMs,
+				 PMGroups,
+				 PMs,
+				 buildingGroups,
+				 {}, // All currently hardcoded buildings do not use ownership.
+				 lawsMap,
+				 techMap.getTechs(),
+				 stateTraits,
+				 popTypes,
+				 buildings,
+				 subState);
 		}
 	}
-	Log(LogLevel::Info) << "<> Hardcoded " << counter << " ports.";
 }
 
 void V3::EconomyManager::assignCountryCPBudgets(const Configuration::ECONOMY economyType,
@@ -208,7 +229,10 @@ void V3::EconomyManager::balanceNationalBudgets() const
 	Log(LogLevel::Info) << "<> Industry Sectors Primed.";
 }
 
-void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMap) const
+void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMap,
+	 const std::map<std::string, mappers::CultureDef>& cultures,
+	 const std::map<std::string, mappers::ReligionDef>& religions,
+	 const Vic3DefinesLoader& defines) const
 {
 	Log(LogLevel::Info) << "-> Building buildings.";
 	auto counter = 0;
@@ -224,20 +248,54 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 	// 3c. packet size is based on the mean amount of CP states have left to build and is configurable
 	// 4. If a substate ends up with less CP than the cost for any possible valid building, they relinquish it to the next sector/substate
 
+	MarketTracker market(demand.getGoodsMap(), buildings.at("building_manor_house").getPMGroups(), PMGroups, PMs);
+
 	for (const auto& country: centralizedCountries)
 	{
+		// Make estimates from country data.
 		const auto& sectors = country->getProcessedData().industrySectors;
 		auto subStatesByBudget = prepareSubStatesByBudget(country, lawsMap);
+		const auto& estimatedPMs = PMMapper.estimatePMs(*country, PMs, PMGroups, buildings);
+		const auto& estimatedOwnershipFracs = estimateInvestorBuildings(*country);
 
-		// Until every substate is unable to build anything
+		// Initialize the market in a no-buildings state.
+		market.resetMarket();
+		market.loadPeasants(*country,
+			 defines.getWorkingAdultRatioBase(),
+			 lawsMap,
+			 estimatedPMs,
+			 PMs,
+			 PMGroups,
+			 popTypeLoader.getPopTypes(),
+			 buildings,
+			 buildingGroups,
+			 stateTraits);
+		market.loadCultures(country->getCultureBreakdown());
+
+		// Initialize hardcoded buildings needed for balance.
+		establishBureaucracy(*country, lawsMap, defines);
+		hardcodePorts(*country);
+		integrateHardcodedBuildings(*country, defines.getWorkingAdultRatioBase(), estimatedPMs, lawsMap, popTypeLoader.getPopTypes(), market);
+
+		// Until no substate can build.
 		while (!subStatesByBudget.empty())
 		{
-			// Enter negotiation
-			// Pick the substate with the most budget
-			negotiateBuilding(subStatesByBudget[0], sectors, lawsMap, subStatesByBudget);
+			// Update the pop's demand.
+			market.updatePopNeeds(*country, defines, demand, country->getProcessedData().laws, popTypeLoader.getPopTypes(), cultures, religions, lawsMap);
+
+			// Enter negotiation.
+			// Pick the substate with the most budget.
+			negotiateBuilding(subStatesByBudget[0],
+				 sectors,
+				 lawsMap,
+				 subStatesByBudget,
+				 estimatedPMs,
+				 estimatedOwnershipFracs,
+				 defines.getWorkingAdultRatioBase(),
+				 market);
 			++counter;
 
-			// A Building has now been built, process for next round
+			// A Building has now been built, process for next round.
 			std::sort(subStatesByBudget.begin(), subStatesByBudget.end(), SubState::greaterBudget);
 			removeSubStateIfFinished(subStatesByBudget, subStatesByBudget.end() - 1, lawsMap);
 		}
@@ -508,26 +566,11 @@ void V3::EconomyManager::investCapital(const std::map<std::string, std::shared_p
 
 				// First assemble the investor weights conditional on the country's state-space
 				const auto& ownershipMap = ownershipLoader.getOwnershipsFromBuilding(building->getName());
-				std::map<std::string, double> investorWeights;
+				const auto& investorFractions = calcInvestorFractions(ownershipMap, *country);
 
-				double totalWeight = 0;
-				for (const auto& [type, investorData]: ownershipMap)
-				{
-					if (investorData.recognized && country->getProcessedData().type != "recognized")
-					{
-						continue;
-					}
-
-					investorWeights[type] = investorData.weight;
-					totalWeight += investorData.weight;
-				}
-				for (const auto& type: investorWeights | std::views::keys)
-				{
-					investorWeights[type] /= totalWeight;
-				}
 
 				// Now apportion the buildings out among the different investor types
-				const auto& investorApportionment = apportionInvestors(building->getLevel(), investorWeights, investorIOUs);
+				const auto& investorApportionment = apportionInvestors(building->getLevel(), investorFractions, investorIOUs);
 
 				// For each investor class with assigned buildings, split owners between local/foreign/capital as directed
 				for (const auto& [type, levels]: investorApportionment)
@@ -662,7 +705,11 @@ std::vector<std::shared_ptr<V3::SubState>> V3::EconomyManager::prepareSubStatesB
 void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subState,
 	 const std::map<std::string, std::shared_ptr<Sector>>& sectors,
 	 const std::map<std::string, Law>& lawsMap,
-	 const std::vector<std::shared_ptr<SubState>>& subStates) const
+	 const std::vector<std::shared_ptr<SubState>>& subStates,
+	 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
+	 const std::map<std::string, std::map<std::string, double>>& estimatedOwnershipFracs,
+	 const double defaultRatio,
+	 MarketTracker& market) const
 {
 	// Whether or not the negotiation succeeds, a building MUST be built.
 
@@ -696,7 +743,7 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 		}
 
 		// So we're a valid building in a valid sector and there is budget for us. Great!
-		buildBuilding(building, subState, sectors.at(sector.value()), lawsMap, subStates);
+		buildBuilding(building, subState, sectors.at(sector.value()), lawsMap, subStates, estimatedPMs, estimatedOwnershipFracs, defaultRatio, market);
 		talksFail = false;
 		break;
 	}
@@ -705,7 +752,15 @@ void V3::EconomyManager::negotiateBuilding(const std::shared_ptr<SubState>& subS
 	{
 		// Negotiation failed
 		// State picks its favorite building, takes from biggest sector
-		buildBuilding(subState->getBuildings()[0], subState, getSectorWithMostBudget(sectors), lawsMap, subStates);
+		buildBuilding(subState->getBuildings()[0],
+			 subState,
+			 getSectorWithMostBudget(sectors),
+			 lawsMap,
+			 subStates,
+			 estimatedPMs,
+			 estimatedOwnershipFracs,
+			 defaultRatio,
+			 market);
 	}
 }
 
@@ -722,13 +777,19 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 	 const std::shared_ptr<SubState>& subState,
 	 const std::shared_ptr<Sector>& sector,
 	 const std::map<std::string, Law>& lawsMap,
-	 const std::vector<std::shared_ptr<SubState>>& subStates) const
+	 const std::vector<std::shared_ptr<SubState>>& subStates,
+	 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
+	 const std::map<std::string, std::map<std::string, double>>& estimatedOwnershipFracs,
+	 const double defaultRatio,
+	 MarketTracker& market) const
 {
 	// SUBSTATE MUST SPEND ITS CP OR WE GET INFINITE LOOPS
 	// Spend sector CP if possible
 
 	// Pick a packet size!
-	const int p = determinePacketSize(building, sector, subState, lawsMap, subStates);
+	const int p =
+		 Packet(*building, sector->getCPBudget(), econDefines.getPacketFactor(), *subState, subStates, lawsMap, techMap.getTechs(), stateTraits, buildingGroups)
+			  .getSize();
 
 	int cost = building->getConstructionCost() * p;
 	subState->spendCPBudget(cost);
@@ -741,6 +802,22 @@ void V3::EconomyManager::buildBuilding(const std::shared_ptr<Building>& building
 	{
 		subState->setResource("bg_agriculture", subState->getResource("bg_agriculture") - p);
 	}
+
+	// Track Demand
+	market.integrateBuilding(*building,
+		 p,
+		 defaultRatio,
+		 estimatedPMs,
+		 PMGroups,
+		 PMs,
+		 buildingGroups,
+		 estimatedOwnershipFracs,
+		 lawsMap,
+		 techMap.getTechs(),
+		 stateTraits,
+		 popTypeLoader.getPopTypes(),
+		 buildings,
+		 subState);
 }
 
 void V3::EconomyManager::removeSubStateIfFinished(std::vector<std::shared_ptr<SubState>>& subStates,
@@ -756,51 +833,6 @@ void V3::EconomyManager::removeSubStateIfFinished(std::vector<std::shared_ptr<Su
 		}
 		subStates.erase(subState);
 	}
-}
-
-int V3::EconomyManager::determinePacketSize(const std::shared_ptr<Building>& building,
-	 const std::shared_ptr<Sector>& sector,
-	 const std::shared_ptr<SubState>& subState,
-	 const std::map<std::string, Law>& lawsMap,
-	 const std::vector<std::shared_ptr<SubState>>& subStates) const
-{
-	// Packet size is the minimum  of (Sector CP budget/cost, SubState CP budget/cost, SubState capacity, and our clustering metric)
-	const int sectorPacket = sector->getCPBudget() / building->getConstructionCost();
-	const int subStatePacket = subState->getCPBudget() / building->getConstructionCost();
-	const int capacityPacket = subState->getBuildingCapacity(*building, buildingGroups, lawsMap, techMap.getTechs(), stateTraits) - building->getLevel();
-	const int clusterPacket = getClusterPacket(building->getConstructionCost(), subStates);
-
-	const int packet = std::max(std::min({sectorPacket, subStatePacket, capacityPacket, clusterPacket}), 1);
-
-	return packet;
-}
-
-int V3::EconomyManager::getClusterPacket(const int baseCost, const std::vector<std::shared_ptr<SubState>>& subStates) const
-{
-	const int CPAll = std::accumulate(subStates.begin(), subStates.end(), 0, [](const int sum, const std::shared_ptr<SubState>& subState) {
-		return sum + subState->getCPBudget();
-	});
-	const double CPMean = static_cast<double>(CPAll) / static_cast<double>(subStates.size());
-
-
-	const int maxCP = subStates[0]->getCPBudget();
-	const int minCP = std::max(subStates.back()->getCPBudget(), baseCost);
-
-	// Default, when factor is 0
-	int packet = static_cast<int>(CPMean / baseCost);
-	const double factor = econDefines.getPacketFactor();
-	if (factor < 0)
-	{
-		// Trends toward only building 1 building at a time
-		packet = static_cast<int>(std::floor(CPMean * (1.0 + factor) + minCP * -factor) / baseCost);
-	}
-	if (factor > 0)
-	{
-		// Trends toward building as many buildings as the substate can get away with at a time
-		packet = static_cast<int>(std::floor(CPMean * (1 - factor) + maxCP * factor) / baseCost);
-	}
-
-	return packet;
 }
 
 std::map<std::string, int> V3::EconomyManager::apportionInvestors(const int levels,
@@ -865,6 +897,65 @@ std::map<std::string, int> V3::EconomyManager::apportionInvestors(const int leve
 		hamiltonQueue.pop();
 	}
 	return investorLevels;
+}
+
+std::map<std::string, std::map<std::string, double>> V3::EconomyManager::estimateInvestorBuildings(const Country& country) const
+{
+	std::map<std::string, std::map<std::string, double>> buildingInvestorEstimates;
+
+	for (const auto& building: ownershipLoader.getBuildingSectorMap() | std::views::keys)
+	{
+		double totalWeight = 0;
+		std::map<std::string, double> investorWeights;
+		const auto& ownershipMap = ownershipLoader.getOwnershipsFromBuilding(building);
+
+		for (const auto& [type, data]: ownershipMap)
+		{
+			if (data.recognized && country.getProcessedData().type != "recognized")
+			{
+				continue;
+			}
+
+			totalWeight += data.weight;
+			if (const auto& findIter = type.find("building"); findIter != std::string::npos)
+				investorWeights[type] = data.weight;
+		}
+		for (const auto& type: investorWeights | std::views::keys)
+		{
+			investorWeights[type] /= totalWeight;
+		}
+		for (const auto& [type, weight]: investorWeights)
+		{
+			const auto& data = ownershipMap.at(type);
+			buildingInvestorEstimates[building][type] = weight - weight * (data.colonialFrac + data.financialCenterFrac);
+		}
+	}
+	return buildingInvestorEstimates;
+}
+
+std::map<std::string, double> V3::EconomyManager::calcInvestorFractions(const std::map<std::string, OwnershipData>& ownershipMap, const Country& country)
+{
+	std::map<std::string, double> investorWeights;
+
+	double totalWeight = 0;
+	for (const auto& [type, investorData]: ownershipMap)
+	{
+		if (investorData.recognized && country.getProcessedData().type != "recognized")
+		{
+			continue;
+		}
+
+		investorWeights[type] = investorData.weight;
+		totalWeight += investorData.weight;
+	}
+
+	// Turn weights into fractions
+	for (const auto& type: investorWeights | std::views::keys)
+	{
+		investorWeights[type] /= totalWeight;
+	}
+
+	return investorWeights;
 }
 
 void V3::EconomyManager::loadTerrainModifierMatrices(const std::string& filePath)
