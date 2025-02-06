@@ -94,9 +94,9 @@ class EconomyManager
 	[[nodiscard]] double calculateStateTraitMultiplier(const std::shared_ptr<SubState>& subState) const;
 	[[nodiscard]] double getDensityFactor(double perCapitaDev) const;
 
-	void establishBureaucracy(const std::shared_ptr<Country>& country, const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const;
-	void hardcodePorts(const std::shared_ptr<Country>& country) const;
-	void integrateHardcodedBuildings(const std::shared_ptr<Country>& country,
+	void establishBureaucracy(const Country& country, const std::map<std::string, Law>& lawsMap, const Vic3DefinesLoader& defines) const;
+	void hardcodePorts(const Country& country) const;
+	void integrateHardcodedBuildings(const Country& country,
 		 double defaultRatio,
 		 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
 		 const std::map<std::string, Law>& lawsMap,

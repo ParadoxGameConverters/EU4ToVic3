@@ -3,7 +3,33 @@
 #include "ClayManager/State/SubState.h"
 
 #include <numeric>
-#include <ranges>
+
+namespace
+{
+// For a given popType, what % of that popType have jobs?
+double calculateWorkerDependencyRatio(const V3::PopType& popType, const double defaultRatio, const double womenJobRate)
+{
+	return popType.getDependentRatio().value_or(defaultRatio) + womenJobRate;
+}
+// How many people do x number of jobs support?
+double getWorkersPlusDependents(const double amountOfJobs, const V3::PopType& popType, const double defaultRatio, const double womenJobRate)
+{
+	return amountOfJobs / calculateWorkerDependencyRatio(popType, defaultRatio, womenJobRate);
+}
+// Returns the amount of jobs with no unemployed available.
+double hireFromUnemployed(const double amount, const std::shared_ptr<V3::SubState>& subState)
+{
+	const double unemployed = subState->getJob("unemployed");
+	if (unemployed > amount)
+	{
+		subState->addJob("unemployed", -amount);
+		return 0;
+	}
+	subState->setJob("unemployed", 0);
+	return amount - unemployed;
+}
+
+} // namespace
 
 
 V3::MarketJobs::MarketJobs(const std::vector<std::pair<std::string, int>>& manorHouseRoster): manorHouseRoster(manorHouseRoster)
@@ -93,18 +119,6 @@ double V3::MarketJobs::createSubsistence(const std::map<std::string, double>& su
 	return levels;
 }
 
-
-double V3::MarketJobs::calculateWorkerDependencyRatio(const PopType& popType, const double defaultRatio, const double womenJobRate)
-{
-	return popType.getDependentRatio().value_or(defaultRatio) + womenJobRate;
-}
-
-double V3::MarketJobs::getWorkersPlusDependents(const double amountOfJobs, const PopType& popType, const double defaultRatio, const double womenJobRate)
-{
-	return amountOfJobs / calculateWorkerDependencyRatio(popType, defaultRatio, womenJobRate);
-}
-
-
 double V3::MarketJobs::hireFromWorseJobs(double amount,
 	 const double defaultRatio,
 	 const double womenJobRate,
@@ -115,19 +129,6 @@ double V3::MarketJobs::hireFromWorseJobs(double amount,
 	amount = hireFromUnemployed(amount, subState);
 	return hireFromSubsistence(amount, subsistenceUnitEmployment, defaultRatio, womenJobRate, popTypes, subState);
 }
-
-double V3::MarketJobs::hireFromUnemployed(const double amount, const std::shared_ptr<V3::SubState>& subState)
-{
-	const double unemployed = subState->getJob("unemployed");
-	if (unemployed > amount)
-	{
-		subState->addJob("unemployed", -amount);
-		return 0;
-	}
-	subState->setJob("unemployed", 0);
-	return amount - unemployed;
-}
-
 
 double V3::MarketJobs::hireFromSubsistence(const double amount,
 	 const std::map<std::string, double>& subsistenceUnitEmployment,

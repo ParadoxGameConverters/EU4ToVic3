@@ -292,14 +292,9 @@ TEST(V3World_CountryTests, CultureBreakdownSumsSubStateCultures)
 	auto sub0 = std::make_shared<V3::SubState>();
 	auto sub1 = std::make_shared<V3::SubState>();
 
-	V3::Pop pop0, pop1, pop2;
-	pop0.setSize(1000);
-	pop1.setSize(500);
-	pop2.setSize(500);
-
-	pop0.setCulture("english");
-	pop1.setCulture("german");
-	pop2.setCulture("english");
+	V3::Pop pop0("english", "", "", 1000);
+	V3::Pop pop1("german", "", "", 500);
+	V3::Pop pop2("english", "", "", 500);
 
 	sub0->addPop(pop0);
 	sub1->addPop(pop1);
@@ -368,7 +363,7 @@ TEST(V3World_CountryTests, YearCapFactorHitsCurve)
 	EXPECT_NEAR(0.15, V3::Country::yearCapFactor(date("1350.1.1")), 0.01);
 }
 
-TEST(V3World_CountryTests, HasAnyOfLawUnlockingPositiveCase)
+TEST(V3World_CountryTests, HasAnyOfLawUnlockingIsTrueIfAnyOfLawsArePresent)
 {
 	V3::Country country;
 
@@ -384,7 +379,21 @@ TEST(V3World_CountryTests, HasAnyOfLawUnlockingPositiveCase)
 	EXPECT_TRUE(country.hasAnyOfLawUnlocking({"law_2", "law_3"}));
 }
 
-TEST(V3World_CountryTests, HasAnyOfLawUnlockingNegativeCase)
+TEST(V3World_CountryTests, HasAnyOfLawUnlockingIsTrueIfLawsAreEmpty)
+{
+	V3::Country country;
+
+	V3::ProcessedData data;
+	data.laws.emplace("law_2");
+	data.laws.emplace("law_3");
+	data.laws.emplace("law_4");
+
+	country.setProcessedData(data);
+
+	EXPECT_TRUE(country.hasAnyOfLawUnlocking({}));
+}
+
+TEST(V3World_CountryTests, HasAnyOfLawUnlockingFalseIfNoneOfLawsPresent)
 {
 	V3::Country country;
 
@@ -399,7 +408,7 @@ TEST(V3World_CountryTests, HasAnyOfLawUnlockingNegativeCase)
 	EXPECT_FALSE(country.hasAnyOfLawUnlocking({"law_1", "law_5"}));
 }
 
-TEST(V3World_CountryTests, HasAnyOfLawBlockingPositiveCase)
+TEST(V3World_CountryTests, HasAnyOfLawBlockingTrueIfAnyOfLawsArePresent)
 {
 	V3::Country country;
 
@@ -415,7 +424,18 @@ TEST(V3World_CountryTests, HasAnyOfLawBlockingPositiveCase)
 	EXPECT_TRUE(country.hasAnyOfLawBlocking({"law_2", "law_3"}));
 }
 
-TEST(V3World_CountryTests, HasAnyOfLawBlockingNegativeCase)
+TEST(V3World_CountryTests, HasAnyOfLawBlockingFalseIfLawsAreEmpty)
+{
+	V3::Country country;
+
+	V3::ProcessedData data;
+
+	country.setProcessedData(data);
+
+	EXPECT_FALSE(country.hasAnyOfLawBlocking({}));
+}
+
+TEST(V3World_CountryTests, HasAnyOfLawBlockingFalseIfNoneOfLawsPresent)
 {
 	V3::Country country;
 

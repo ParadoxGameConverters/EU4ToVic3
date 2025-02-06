@@ -61,7 +61,7 @@ void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem&
 	loadPopTypes(modFS);
 }
 
-void V3::EconomyManager::establishBureaucracy(const std::shared_ptr<V3::Country>& country,
+void V3::EconomyManager::establishBureaucracy(const Country& country,
 	 const std::map<std::string, Law>& lawsMap,
 	 const Vic3DefinesLoader& defines) const
 {
@@ -74,30 +74,30 @@ void V3::EconomyManager::establishBureaucracy(const std::shared_ptr<V3::Country>
 	const auto& govAdmin = buildings.at("building_government_administration");
 
 	// Check tech requirement for government administrations.
-	if (!country->hasAnyOfTech(govAdmin.getUnlockingTechs()))
+	if (!country.hasAnyOfTech(govAdmin.getUnlockingTechs()))
 	{
 		return;
 	}
 
 	// Give 10% extra for trade routes - cap at +400
-	const double usage = country->calculateBureaucracyUsage(lawsMap, defines);
+	const double usage = country.calculateBureaucracyUsage(lawsMap, defines);
 	const double generationTarget = std::min(usage * 1.1, usage + 500) - 100;
 
 	// Use the PM with the most generation available
 	int PMGeneration = 35;
-	const auto& PMName = pickBureaucracyPM(*country);
+	const auto& PMName = pickBureaucracyPM(country);
 	if (PMs.contains(PMName))
 	{
 		PMGeneration = PMs.at(PMName).getBureaucracy();
 	}
 
-	country->distributeGovAdmins(generationTarget, PMGeneration, techMap.getTechs(), buildings.at("building_government_administration"));
+	country.distributeGovAdmins(generationTarget, PMGeneration, techMap.getTechs(), buildings.at("building_government_administration"));
 }
 
-void V3::EconomyManager::hardcodePorts(const std::shared_ptr<V3::Country>& country) const
+void V3::EconomyManager::hardcodePorts(const Country& country) const
 {
 
-	for (const auto& subState: country->getSubStates())
+	for (const auto& subState: country.getSubStates())
 	{
 		if (!subState->getVanillaBuildingElements().empty())
 			continue; // don't affect states imported from vanilla.
@@ -112,22 +112,23 @@ void V3::EconomyManager::hardcodePorts(const std::shared_ptr<V3::Country>& count
 	}
 }
 
-void V3::EconomyManager::integrateHardcodedBuildings(const std::shared_ptr<Country>& country,
+void V3::EconomyManager::integrateHardcodedBuildings(const Country& country,
 	 double defaultRatio,
 	 const std::map<std::string, std::tuple<int, double>>& estimatedPMs,
 	 const std::map<std::string, Law>& lawsMap,
 	 const std::map<std::string, PopType>& popTypes,
 	 MarketTracker& market) const
 {
-	for (const auto& subState: country->getSubStates())
+	for (const auto& subState: country.getSubStates())
 	{
-		for (const auto& building: subState->getBuildings())
+		for (const auto& building_ref: subState->getBuildings())
 		{
-			if (building->getLevel() <= 0)
+			const auto& building = *building_ref;
+			if (building.getLevel() <= 0)
 				continue;
 
-			market.integrateBuilding(*building,
-				 building->getLevel(),
+			market.integrateBuilding(building,
+				 building.getLevel(),
 				 defaultRatio,
 				 estimatedPMs,
 				 PMGroups,
@@ -273,9 +274,9 @@ void V3::EconomyManager::buildBuildings(const std::map<std::string, Law>& lawsMa
 		market.loadCultures(country->getCultureBreakdown());
 
 		// Initialize hardcoded buildings needed for balance.
-		establishBureaucracy(country, lawsMap, defines);
-		hardcodePorts(country);
-		integrateHardcodedBuildings(country, defines.getWorkingAdultRatioBase(), estimatedPMs, lawsMap, popTypeLoader.getPopTypes(), market);
+		establishBureaucracy(*country, lawsMap, defines);
+		hardcodePorts(*country);
+		integrateHardcodedBuildings(*country, defines.getWorkingAdultRatioBase(), estimatedPMs, lawsMap, popTypeLoader.getPopTypes(), market);
 
 		// Until no substate can build.
 		while (!subStatesByBudget.empty())
