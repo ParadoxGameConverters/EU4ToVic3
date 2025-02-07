@@ -128,10 +128,36 @@ bool V3::Country::hasAnyOfTech(const std::set<std::string>& techs) const
 		return true;
 	}
 
-	return std::ranges::any_of(techs, [&](const std::string& tech) {
+	return std::ranges::any_of(techs, [this](const std::string& tech) {
 		return processedData.techs.contains(tech);
 	});
 }
+
+bool V3::Country::hasAnyOfLawUnlocking(const std::set<std::string>& laws) const
+{
+	if (laws.empty())
+	{
+		return true;
+	}
+
+	return std::ranges::any_of(laws, [this](const std::string& targetLaw) {
+		return processedData.laws.contains(targetLaw);
+	});
+}
+
+bool V3::Country::hasAnyOfLawBlocking(const std::set<std::string>& laws) const
+{
+	if (laws.empty())
+	{
+		return false;
+	}
+
+	return std::ranges::any_of(laws, [this](const std::string& targetLaw) {
+		return processedData.laws.contains(targetLaw);
+	});
+}
+
+
 
 int V3::Country::getGovBuildingMax(const std::string& building, const std::map<std::string, Law>& lawsMap, const std::map<std::string, Tech>& techMap) const
 {
@@ -183,20 +209,18 @@ void V3::Country::distributeGovAdmins(const double target,
 		const double stateTarget = target * popProportion;
 
 		// Calc levels for generation
-		int levels = static_cast<int>(stateTarget * 100 / 101 / PMGeneration);
-		double generation = levels * PMGeneration;
-		if (const int throughputMax = getThroughputMax(techMap); levels > throughputMax)
+		const double scaledLevels = (-1 + std::sqrt(1 + 0.04 * stateTarget / PMGeneration)) * 50;
+		int levels = static_cast<int>(std::round(scaledLevels));
+		double generation = levels * (0.01 * levels + 1) * PMGeneration;
+
+		if (const int throughputMax = getThroughputMax(techMap); scaledLevels > throughputMax)
 		{
-			levels = static_cast<int>(stateTarget / (PMGeneration + PMGeneration * (throughputMax / 100.0)));
+			levels = static_cast<int>(stateTarget / PMGeneration / (throughputMax / 100.0));
 			generation = levels * PMGeneration * (1 + throughputMax / 100.0);
 		}
 
 		const auto govAdmin = std::make_shared<Building>(blueprint);
 		govAdmin->setLevel(levels);
-
-		// TODO(Gawquon): Still need to decide on this fxn being before or after the building negotiation.
-		// govAdmin->addInvestor(levels, "national_service", substate->getHomeStateName(), this->tag);
-
 		substate->addBuilding(govAdmin);
 
 		generated += generation;
@@ -1055,6 +1079,48 @@ int V3::Country::getPopCount(const std::vector<std::shared_ptr<SubState>>& theSu
 	return std::accumulate(theSubStates.begin(), theSubStates.end(), 0, [](int sum, const auto& substate) {
 		return sum + substate->getSubStatePops().getPopCount();
 	});
+}
+
+// Returns the percentage breakdown of cultures
+std::map<std::string, double> V3::Country::getCultureBreakdown() const
+{
+	int total = 0;
+	std::map<std::string, double> cultureData;
+	for (const auto& subState: subStates)
+	{
+		for (const auto& [culture, amount]: subState->getSubStatePops().getCultureCounts())
+		{
+			cultureData[culture] += amount;
+			total += amount;
+		}
+	}
+
+	total = total == 0 ? 1 : total;
+	for (auto& amount: cultureData | std::views::values)
+	{
+		amount /= total;
+	}
+	return cultureData;
+}
+
+// Returns a map of each job as a percentage of all jobs in the market.
+std::map<std::string, double> V3::Country::getJobBreakdown() const
+{
+	std::map<std::string, double> jobBreakdown;
+
+	for (const auto& subState: subStates)
+	{
+		for (const auto& [job, amount]: subState->getEstimatedJobs())
+		{
+			jobBreakdown[job] += amount;
+		}
+	}
+	for (auto [job, amount]: jobBreakdown)
+	{
+		jobBreakdown[job] = amount / getPopCount();
+	}
+
+	return jobBreakdown;
 }
 
 int V3::Country::getVanillaPopCount() const

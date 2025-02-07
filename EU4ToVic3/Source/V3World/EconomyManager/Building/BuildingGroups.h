@@ -19,6 +19,7 @@ class BuildingGroups
 	[[nodiscard]] std::optional<std::string> tryGetParentName(const std::optional<std::string>& theGroupName) const;
 	[[nodiscard]] std::optional<double> tryGetInfraCost(const std::optional<std::string>& theGroupName) const;
 	[[nodiscard]] std::optional<bool> tryGetIsCapped(const std::optional<std::string>& theGroupName) const;
+	[[nodiscard]] int getUrbanization(const std::string& theGroupName) const;
 	[[nodiscard]] bool usesArableLand(const std::optional<std::string>& theGroupName) const;
 
   private:

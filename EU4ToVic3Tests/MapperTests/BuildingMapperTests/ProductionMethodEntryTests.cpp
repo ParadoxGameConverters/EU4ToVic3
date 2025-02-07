@@ -9,6 +9,7 @@ TEST(Mappers_ProductionMethodEntryTests, DefaultsDefaultToDefaults)
 
 	EXPECT_TRUE(rule.pm.empty());
 	EXPECT_DOUBLE_EQ(1, rule.percent);
+	EXPECT_FALSE(rule.lawBound);
 }
 
 TEST(V3World_ProductionMethodEntryTests, PMCanBeLoaded)
@@ -16,9 +17,12 @@ TEST(V3World_ProductionMethodEntryTests, PMCanBeLoaded)
 	std::stringstream input;
 	input << "name = pm_hardwood\n ";
 	input << "percent = 0.33\n ";
+	input << "law_bound = yes\n";
+
 	const mappers::ProductionMethodEntry entry(input);
 	const auto& rule = entry.getRule();
 
 	EXPECT_EQ("pm_hardwood", rule.pm);
 	EXPECT_DOUBLE_EQ(0.33, rule.percent);
+	EXPECT_TRUE(rule.lawBound);
 }

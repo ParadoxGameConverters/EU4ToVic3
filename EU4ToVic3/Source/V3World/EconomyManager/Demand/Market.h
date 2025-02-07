@@ -15,6 +15,7 @@ class Market
   public:
 	Market() = default;
 	explicit Market(const std::vector<std::string>& possibleGoods);
+	void loadGoods(const std::map<std::string, Good>& goodsList);
 
 	[[nodiscard]] std::map<std::string, double> getMarketBalance() const;
 	[[nodiscard]] std::map<std::string, double> getMarketShare(const std::vector<std::string>& goods) const;
@@ -32,6 +33,10 @@ class Market
 		 const std::map<std::string, mappers::ReligionDef>& religions,
 		 const std::set<std::string>& laws,
 		 const std::map<std::string, Law>& lawsMap);
+	void clearMarket();
+	std::stringstream marketAsTable() const;
+
+	static double calcAddedWorkingPopFraction(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap);
 
   private:
 	static int estimateWealth(const std::string& strata);
@@ -51,7 +56,6 @@ class Market
 		 const std::map<std::string, Good>& goodsMap);
 	static double calcPurchaseWeight(double marketShare, const GoodsFulfillment& fulfillment, double culturalPrevalence);
 	static double calcCulturalNeedFactor(const std::vector<std::string>& goods, const std::map<std::string, double>& culturalPrevalence);
-	static double calcAddedWorkingPopPercent(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap);
 
 	[[nodiscard]] bool validateGood(const std::string& good) const;
 	[[nodiscard]] std::vector<std::string> enumerateGoods(const std::map<std::string, GoodsFulfillment>& map, const std::map<std::string, Good>& goodsMap) const;

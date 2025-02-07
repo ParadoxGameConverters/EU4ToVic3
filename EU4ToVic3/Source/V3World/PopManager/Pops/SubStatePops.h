@@ -25,6 +25,7 @@ class SubStatePops
 
 	[[nodiscard]] std::optional<std::string> getDominantCulture() const;
 	[[nodiscard]] std::optional<std::string> getDominantReligion() const;
+	[[nodiscard]] std::map<std::string, int> getCultureCounts() const;
 
   private:
 	std::string tag;

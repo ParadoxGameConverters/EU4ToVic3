@@ -69,6 +69,16 @@ std::optional<std::string> V3::SubStatePops::getDominantReligion() const
 	return highest->first;
 }
 
+std::map<std::string, int> V3::SubStatePops::getCultureCounts() const
+{
+	std::map<std::string, int> cultureCounts;
+	for (const auto& pop: pops)
+	{
+		cultureCounts[pop.getCulture()] += pop.getSize();
+	}
+	return cultureCounts;
+}
+
 void V3::SubStatePops::multiplyPops(double factor)
 {
 	std::vector<Pop> replacementPops;

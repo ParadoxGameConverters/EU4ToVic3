@@ -98,7 +98,6 @@ bool V3::BuildingGroups::usesArableLand(const std::optional<std::string>& theGro
 		{
 			break;
 		}
-		const auto& cat = possibleGroup->second->getCategory();
 		if (possibleGroup->second->usesArableLand())
 		{
 			return true;
@@ -166,4 +165,29 @@ std::optional<bool> V3::BuildingGroups::tryGetIsCapped(const std::optional<std::
 	}
 
 	return std::nullopt;
+}
+
+int V3::BuildingGroups::getUrbanization(const std::string& theGroupName) const
+{
+	auto name = theGroupName;
+	while (!name.empty())
+	{
+		const auto& possibleGroup = buildingGroups.find(name);
+		if (possibleGroup == buildingGroups.end())
+		{
+			break;
+		}
+		if (const auto& urbanization = possibleGroup->second->getUrbanization(); urbanization > 0)
+		{
+			return urbanization;
+		}
+		const auto& parentName = possibleGroup->second->getParentName();
+		if (!parentName)
+		{
+			break;
+		}
+		name = parentName.value();
+	}
+
+	return 0;
 }

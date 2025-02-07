@@ -63,3 +63,14 @@ TEST(V3World_BuildingGroupsTests, InvalidGroupReturnsNullAncestor)
 
 	EXPECT_EQ(std::nullopt, buildingGroups.getAncestralGroup("bg_none"));
 }
+
+TEST(V3World_BuildingGroupsTests, UrbanizationLooksThroughHeirarchy)
+{
+	V3::BuildingGroupLoader buildingGroupLoader;
+	buildingGroupLoader.loadBuildingGroups(modFS);
+	const auto buildingGroups = buildingGroupLoader.getBuildingGroups();
+
+	EXPECT_EQ(0, buildingGroups.getUrbanization("bg_manufacturing"));
+	EXPECT_EQ(20, buildingGroups.getUrbanization("bg_light_industry"));
+	EXPECT_EQ(30, buildingGroups.getUrbanization("bg_giga_industry"));
+}

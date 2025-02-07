@@ -17,5 +17,8 @@ void mappers::ProductionMethodEntry::registerKeys()
 	registerKeyword("percent", [this](std::istream& theStream) {
 		rule.percent = commonItems::getDouble(theStream);
 	});
+	registerKeyword("law_bound", [this](std::istream& theStream) {
+		rule.lawBound = commonItems::getString(theStream) == "yes";
+	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

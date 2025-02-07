@@ -1,11 +1,23 @@
 #include "Market.h"
 
+#include <algorithm>
+#include <iomanip>
 #include <numeric>
 #include <ranges>
 
 V3::Market::Market(const std::vector<std::string>& possibleGoods)
 {
 	for (const auto& good: possibleGoods)
+	{
+		sellOrders[good] = 0;
+		buyOrdersBuildings[good] = 0;
+		buyOrdersPops[good] = 0;
+	}
+}
+
+void V3::Market::loadGoods(const std::map<std::string, Good>& goodsList)
+{
+	for (const auto& good: goodsList | std::views::keys)
 	{
 		sellOrders[good] = 0;
 		buyOrdersBuildings[good] = 0;
@@ -107,7 +119,8 @@ std::set<std::string> V3::Market::getObsessions(const std::string& culture, cons
 	{
 		if (!cultureErrors.contains(culture))
 		{
-			Log(LogLevel::Warning) << "Culture: " << culture << " has no definition. Assuming no obsessions or taboos.";
+			const auto& theCulture = culture.empty() ? "None" : culture;
+			Log(LogLevel::Warning) << "Culture: " << theCulture << " has no definition. Assuming no obsessions or taboos.";
 		}
 		return {};
 	}
@@ -127,7 +140,8 @@ std::set<std::string> V3::Market::getTaboos(const std::string& culture,
 	{
 		if (!religionErrors.contains(religion))
 		{
-			Log(LogLevel::Warning) << "Religion: " << religion << " has no definition. Assuming no taboos.";
+			const auto& theReligion = religion.empty() ? "None" : religion;
+			Log(LogLevel::Warning) << "Religion: " << theReligion << " has no definition. Assuming no taboos.";
 		}
 		return {};
 	}
@@ -172,7 +186,7 @@ std::map<std::string, double> V3::Market::estimateCulturalPrevalence(const std::
 {
 	auto culturalFactors = initCulturalFactors();
 
-	for (const auto& [culture, percent]: cultureData)
+	for (const auto& [culture, fraction]: cultureData)
 	{
 		const auto& taboos = getTaboos(culture, cultures, religions);
 		const auto& obsessions = getObsessions(culture, cultures);
@@ -183,7 +197,7 @@ std::map<std::string, double> V3::Market::estimateCulturalPrevalence(const std::
 			{
 				continue;
 			}
-			culturalFactors.at(taboo) -= percent;
+			culturalFactors.at(taboo) -= fraction;
 		}
 		for (const auto& obsession: obsessions)
 		{
@@ -191,7 +205,7 @@ std::map<std::string, double> V3::Market::estimateCulturalPrevalence(const std::
 			{
 				continue;
 			}
-			culturalFactors.at(obsession) += percent;
+			culturalFactors.at(obsession) += fraction;
 		}
 	}
 
@@ -216,7 +230,7 @@ double V3::Market::calcPopFactor(const double size,
 	 const std::map<std::string, Law>& lawsMap)
 {
 	double workingRatio = popType.getDependentRatio().value_or(defines.getWorkingAdultRatioBase());
-	workingRatio += calcAddedWorkingPopPercent(laws, lawsMap); // Propertied Woman
+	workingRatio += calcAddedWorkingPopFraction(laws, lawsMap); // Propertied Woman
 	return (size * workingRatio + size * (1 - workingRatio) * defines.getDependentConsumptionRatio()) * popType.getConsumptionRate() / 10000;
 }
 
@@ -267,8 +281,8 @@ double V3::Market::calcPurchaseWeight(double marketShare, const GoodsFulfillment
 	const double culturalFactor = calcCulturalFactor(culturalPrevalence);
 	if (culturalFactor > 1)
 	{
-		const double percent = culturalFactor - 1;
-		weight = std::max(weight, percent + (1 - percent) * weight); // (x * 1) + (1 - x)y
+		const double fraction = culturalFactor - 1;
+		weight = std::max(weight, fraction + (1 - fraction) * weight); // (x * 1) + (1 - x)y
 	}
 
 	return marketShare * weight * culturalFactor;
@@ -288,7 +302,7 @@ double V3::Market::calcCulturalNeedFactor(const std::vector<std::string>& goods,
 	return culturalNeedFactor + 1;
 }
 
-double V3::Market::calcAddedWorkingPopPercent(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap)
+double V3::Market::calcAddedWorkingPopFraction(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap)
 {
 	return std::accumulate(laws.begin(), laws.end(), 0.0, [lawsMap](double sum, const std::string& law) {
 		return sum + lawsMap.at(law).workingAdultRatioAdd;
@@ -301,7 +315,6 @@ bool V3::Market::validateGood(const std::string& good) const
 	{
 		if (!goodsErrors.contains(good))
 		{
-
 			Log(LogLevel::Warning) << "Good: " << good << " not recognized in market. Converter will act like it doesn't exist.";
 			goodsErrors.emplace(good);
 		}
@@ -329,8 +342,7 @@ void V3::Market::calcPopOrders(const int popSize,
 	const auto& culturalPrevalence = estimateCulturalPrevalence(cultureData, cultures, religions);
 	const auto& goodsMap = demand.getGoodsMap();
 
-	// Assuming enough land for each pop (for now).
-	for (const auto& [job, jobPercent]: jobData)
+	for (const auto& [job, jobFraction]: jobData)
 	{
 		if (!popTypeMap.contains(job))
 		{
@@ -343,7 +355,7 @@ void V3::Market::calcPopOrders(const int popSize,
 		}
 		const auto& popType = popTypeMap.at(job);
 
-		const double popFactor = calcPopFactor(popSize * jobPercent, popType, defines, laws, lawsMap);
+		const double popFactor = calcPopFactor(popSize * jobFraction, popType, defines, laws, lawsMap);
 		const int wealth = estimateWealth(popType.getStrata());
 
 		if (!demand.getWealthConsumptionMap().contains(wealth))
@@ -385,4 +397,56 @@ void V3::Market::calcPopOrders(const int popSize,
 			}
 		}
 	}
+}
+
+void V3::Market::clearMarket()
+{
+	for (auto& value: sellOrders | std::views::values)
+	{
+		value = 0;
+	}
+	for (auto& value: buyOrdersPops | std::views::values)
+	{
+		value = 0;
+	}
+	for (auto& value: buyOrdersBuildings | std::views::values)
+	{
+		value = 0;
+	}
+}
+
+// Debugging function
+std::stringstream V3::Market::marketAsTable() const
+{
+	std::stringstream out;
+	int goodLength = 0;
+	int amountLength = 0;
+	const auto& balance = getMarketBalance();
+	for (const auto& [good, amount]: balance)
+	{
+		goodLength = std::max(goodLength, static_cast<int>(good.length()));
+		amountLength = std::max(amountLength, static_cast<int>(std::to_string(amount).length()));
+	}
+
+	out << std::setprecision(3);
+	out << std::endl;
+	out << std::left << std::setw(goodLength + 2) << "Good" << std::setw(amountLength + 2) << "Percent" << std::endl;
+	out << std::setfill('-') << std::setw(goodLength + 2) << "" << std::setw(amountLength + 2) << "" << std::endl;
+	out << std::setfill(' ');
+
+	std::vector<std::pair<std::string, double>> balanceVector = {balance.begin(), balance.end()};
+
+	std::ranges::sort(balanceVector, [=](const std::pair<std::string, double>& lhs, const std::pair<std::string, double>& rhs) {
+		return lhs.second < rhs.second;
+	});
+
+	for (const auto& pair: balanceVector)
+	{
+		if (std::abs(pair.second) < 1)
+			continue;
+
+		const double pricePercent = -0.75 * std::max(-1.0, std::min(1.0, pair.second / 100));
+		out << std::left << std::setw(goodLength + 2) << pair.first << std::setw(amountLength + 2) << pricePercent * 100 << "%" << std::endl;
+	}
+	return out;
 }

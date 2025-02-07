@@ -11,6 +11,7 @@ class PopType: commonItems::parser
 	explicit PopType(std::istream& theStream);
 
 	void setType(const std::string& theType) { type = theType; }
+	void setStrata(const std::string& theStrata) { strata = theStrata; }
 
 	[[nodiscard]] const auto& getType() const { return type; }
 	[[nodiscard]] const auto& getConsumptionRate() const { return consumptionRate; }
