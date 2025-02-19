@@ -298,7 +298,7 @@ TEST(V3World_MarketTests, FormulaPredictsAristocratsNeed)
 	demand.loadGoods(goodsInput);
 
 	std::stringstream popTypeInput;
-	popTypeInput << "strata = rich\n";
+	popTypeInput << "start_quality_of_life = 20\n";
 	popTypeInput << "working_adult_ratio = 0.2\n";
 	V3::PopType nobles(popTypeInput);
 	nobles.setType("nobles");
@@ -1059,23 +1059,23 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 	demand.loadGoods(goodsInput);
 
 	std::stringstream poorsTypeInput;
-	poorsTypeInput << "strata = poor";
+	poorsTypeInput << "start_quality_of_life = 5";
 	V3::PopType poors(poorsTypeInput);
 	poors.setType("poors");
 
 	std::stringstream peasantsTypeInput;
-	peasantsTypeInput << "strata = poor\n";
+	peasantsTypeInput << "start_quality_of_life = 5\n";
 	peasantsTypeInput << "consumption_mult = 0.05\n";
 	V3::PopType peasants(peasantsTypeInput);
 	peasants.setType("peasants");
 
 	std::stringstream midTypeInput;
-	midTypeInput << "strata = middle";
+	midTypeInput << "start_quality_of_life = 10";
 	V3::PopType mid(midTypeInput);
 	mid.setType("mid");
 
 	std::stringstream richTypeInput;
-	richTypeInput << "strata = rich\n";
+	richTypeInput << "start_quality_of_life = 20\n";
 	richTypeInput << "working_adult_ratio = 0.2\n";
 	V3::PopType rich(richTypeInput);
 	rich.setType("rich");

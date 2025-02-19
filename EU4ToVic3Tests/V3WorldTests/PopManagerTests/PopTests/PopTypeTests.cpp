@@ -11,14 +11,14 @@ TEST(V3World_PopTypeTests, DefaultsDefaultToDefaults)
 	EXPECT_EQ("", popType.getType());
 	EXPECT_DOUBLE_EQ(1, popType.getConsumptionRate());
 	EXPECT_EQ(std::nullopt, popType.getDependentRatio());
-	EXPECT_EQ("", popType.getStrata());
+	EXPECT_EQ(7, popType.getStartingQOL());
 }
 
 TEST(V3World_PopTypeTests, PopTypeLoadsPopTypeData)
 {
 	std::stringstream input;
 
-	input << "strata = middle\n";
+	input << "start_quality_of_life = 5\n";
 	input << "working_adult_ratio = 0.2\n";
 	input << "consumption_mult = 0.05\n";
 
@@ -28,5 +28,5 @@ TEST(V3World_PopTypeTests, PopTypeLoadsPopTypeData)
 	EXPECT_EQ("aristocratic_peasants", popType.getType());
 	EXPECT_DOUBLE_EQ(0.05, popType.getConsumptionRate());
 	EXPECT_DOUBLE_EQ(0.2, popType.getDependentRatio().value());
-	EXPECT_EQ("middle", popType.getStrata());
+	EXPECT_EQ(5, popType.getStartingQOL());
 }

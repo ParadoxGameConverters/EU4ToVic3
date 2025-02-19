@@ -11,12 +11,12 @@ class PopType: commonItems::parser
 	explicit PopType(std::istream& theStream);
 
 	void setType(const std::string& theType) { type = theType; }
-	void setStrata(const std::string& theStrata) { strata = theStrata; }
+	void setStartingQOL(const int theQOL) { startingQOL = theQOL; }
 
 	[[nodiscard]] const auto& getType() const { return type; }
 	[[nodiscard]] const auto& getConsumptionRate() const { return consumptionRate; }
 	[[nodiscard]] const auto& getDependentRatio() const { return dependentRatio; }
-	[[nodiscard]] const auto& getStrata() const { return strata; }
+	[[nodiscard]] const auto& getStartingQOL() const { return startingQOL; }
 
   private:
 	void registerKeys();
@@ -24,7 +24,7 @@ class PopType: commonItems::parser
 	std::string type;
 	double consumptionRate = 1;			  // What % of buy packages a Pop buys.
 	std::optional<double> dependentRatio; // The % of working adults in a Pop. Undefined ratios use a Vic3 define.
-	std::string strata;
+	int startingQOL = 7;						  // Hardcoding to 7 for unresolved types.
 };
 } // namespace V3
 

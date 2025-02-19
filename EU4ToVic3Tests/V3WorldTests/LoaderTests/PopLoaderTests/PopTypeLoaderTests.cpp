@@ -18,9 +18,9 @@ TEST(V3World_PopTypeLoaderTests, PopTypeLoaderCanLoadPopTypeComponents)
 	EXPECT_EQ("peasants", popTypeLoader.getPopTypes().at("peasants").getType());
 	EXPECT_DOUBLE_EQ(0.05, popTypeLoader.getPopTypes().at("peasants").getConsumptionRate());
 	EXPECT_EQ(std::nullopt, popTypeLoader.getPopTypes().at("peasants").getDependentRatio());
-	EXPECT_EQ("poor", popTypeLoader.getPopTypes().at("peasants").getStrata());
+	EXPECT_EQ(5, popTypeLoader.getPopTypes().at("peasants").getStartingQOL());
 	EXPECT_EQ("aristocrats", popTypeLoader.getPopTypes().at("aristocrats").getType());
 	EXPECT_DOUBLE_EQ(1.0, popTypeLoader.getPopTypes().at("aristocrats").getConsumptionRate());
 	EXPECT_DOUBLE_EQ(0.2, popTypeLoader.getPopTypes().at("aristocrats").getDependentRatio().value());
-	EXPECT_EQ("rich", popTypeLoader.getPopTypes().at("aristocrats").getStrata());
+	EXPECT_EQ(20, popTypeLoader.getPopTypes().at("aristocrats").getStartingQOL());
 }

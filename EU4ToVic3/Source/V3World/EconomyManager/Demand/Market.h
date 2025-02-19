@@ -39,7 +39,7 @@ class Market
 	static double calcAddedWorkingPopFraction(const std::set<std::string>& laws, const std::map<std::string, Law>& lawsMap);
 
   private:
-	static int estimateWealth(const std::string& strata);
+	static int estimateWealth(int startingQOL);
 	static std::set<std::string> getObsessions(const std::string& culture, const std::map<std::string, mappers::CultureDef>& cultures);
 	static std::set<std::string> getTaboos(const std::string& culture,
 		 const std::map<std::string, mappers::CultureDef>& cultures,
