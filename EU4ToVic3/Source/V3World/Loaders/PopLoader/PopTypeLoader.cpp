@@ -22,7 +22,7 @@ void V3::PopTypeLoader::loadPopTypes(const commonItems::ModFilesystem& modFS)
 	{
 		PopType unemployed;
 		unemployed.setType("unemployed");
-		unemployed.setStrata("poor");
+		unemployed.setStartingQOL(5);
 		popTypes.emplace("unemployed", unemployed);
 	}
 }

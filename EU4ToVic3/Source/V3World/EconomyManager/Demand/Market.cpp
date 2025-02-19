@@ -94,22 +94,22 @@ void V3::Market::buyForPop(const std::string& good, double const amount)
 }
 
 
-int V3::Market::estimateWealth(const std::string& strata)
+int V3::Market::estimateWealth(const int startingQOL)
 {
-	if (strata == "poor")
+	if (startingQOL < 10)
 	{
 		return 8;
 	}
-	if (strata == "middle")
+	if (startingQOL < 20)
 	{
 		return 17;
 	}
-	if (strata == "rich")
+	if (startingQOL < 40)
 	{
 		return 30;
 	}
 
-	Log(LogLevel::Warning) << "Unrecognized wealth strata: " << strata << ".";
+	Log(LogLevel::Warning) << "Unexpected poptype starting QOL: " << startingQOL << ".";
 	return 7;
 }
 
@@ -356,7 +356,7 @@ void V3::Market::calcPopOrders(const int popSize,
 		const auto& popType = popTypeMap.at(job);
 
 		const double popFactor = calcPopFactor(popSize * jobFraction, popType, defines, laws, lawsMap);
-		const int wealth = estimateWealth(popType.getStrata());
+		const int wealth = estimateWealth(popType.getStartingQOL());
 
 		if (!demand.getWealthConsumptionMap().contains(wealth))
 		{

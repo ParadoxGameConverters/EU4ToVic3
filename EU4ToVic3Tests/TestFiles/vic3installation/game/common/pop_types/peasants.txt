@@ -1,7 +1,6 @@
 ﻿peasants = {
 	texture = "gfx/interface/icons/pops_icons/peasants.dds"
 	color = hsv{ 0.58 0.338 0.812 }
-	strata = poor
 	subsistence_income = yes
 	can_always_hire = yes
 	ignores_employment_proportionality = yes
@@ -12,8 +11,8 @@
 	dependent_wage = 0.25	# per year
 	unemployment = no
 
-	# 0% - 50% politically engaged	
-	political_engagement_base = 0.0
+	# 10% - 50% politically engaged	
+	political_engagement_base = 0.1
 	political_engagement_literacy_factor = 0.5
 	
 	political_engagement_mult = {
@@ -23,11 +22,17 @@
 			desc = "POP_STARVATION"	
 			
 			if = {
-				limit = { 
-					standard_of_living < 5
+				limit = {
+					is_in_mild_starvation = yes
 				}
-				value = 1
-			}		
+				value = 0.25
+			}
+			else_if = {
+				limit = {
+					is_in_severe_starvation = yes
+				}
+				value = 0.75
+			}
 		}
 
 		multiply = {
@@ -37,7 +42,7 @@
 			if = {
 				limit = { 
 					owner = {
-						NOT = { has_technology_researched = political_agitation	}
+						has_technology_researched = political_agitation
 					}
 				}
 				value = 1.5

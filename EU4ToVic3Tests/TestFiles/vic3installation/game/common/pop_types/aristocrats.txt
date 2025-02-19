@@ -1,10 +1,9 @@
 ﻿aristocrats = {
 	texture = "gfx/interface/icons/pops_icons/aristocrats.dds"
 	color = hsv{ 0.60 0.58 0.46 }
-	strata = rich
 	start_quality_of_life = 20
 	working_adult_ratio = 0.2
-	wage_weight = 6
+	wage_weight = 5
 	paid_private_wage = no
 	literacy_target = 0.60
 	dependent_wage = 0.0	# per year
@@ -21,11 +20,11 @@
 			desc = "POP_STARVATION"	
 			
 			if = {
-				limit = { 
-					standard_of_living < 5
+				limit = {
+					is_in_starvation = yes
 				}
 				value = 1
-			}		
+			}
 		}
 		
 	}	
@@ -92,7 +91,12 @@
 
 			if = {
 				limit = {
-					culture_accepted = no
+					state = {
+						state_cultural_acceptance = {  
+							target = PREV.culture
+						   	value < acceptance_status_4 
+					   	}
+					}
 				}
 				multiply = {
 					value = 0.1
