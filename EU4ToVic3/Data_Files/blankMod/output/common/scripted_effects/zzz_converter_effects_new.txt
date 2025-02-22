@@ -2948,3 +2948,88 @@ converter_decentralized_subjects_effect = {
 		set_local_variable = converter_was_decentralized_subject
 	}
 }
+
+convert_subject_type = {
+	if = {
+		limit = { overlord = { is_country_type = unrecognized } }
+		make_subject_of_unrecognized = yes
+	}
+	else_if = {
+		limit = { is_country_type = colonial }
+		make_colonial_subject = yes
+	}
+	else = {
+		make_recognized_subject = yes
+	}
+}
+
+make_subject_of_unrecognized = {
+	if = {
+		limit = {
+			OR = {
+				is_subject_type = subject_type_protectorate
+				is_subject_type = subject_type_dominion
+				is_subject_type = subject_type_chartered_company
+			}
+		}
+		set_variable = converter_made_into_tributary
+		change_subject_type = subject_type_tributary
+	}
+	else_if = {
+		limit = {
+			OR = {
+				is_subject_type = subject_type_colony
+				is_subject_type = subject_type_puppet
+			}
+		}
+		set_variable = converter_made_into_vassal
+		change_subject_type = subject_type_vassal
+	}
+}
+
+make_colonial_subject = {
+	if = {
+		limit = {
+			OR = {
+				is_subject_type = subject_type_protectorate
+				is_subject_type = subject_type_tributary
+			}
+		}
+		set_variable = converter_made_into_dominion
+		change_subject_type = subject_type_dominion
+	}
+	else_if = {
+		limit = {
+			OR = {
+				is_subject_type = subject_type_vassal
+				is_subject_type = subject_type_puppet
+			}
+		}
+		set_variable = converter_made_into_colony
+		change_subject_type = subject_type_colony
+	}
+}
+
+make_recognized_subject = {
+	if = {
+		limit = {
+			OR = {
+				is_subject_type = subject_type_dominion
+				is_subject_type = subject_type_chartered_company
+				is_subject_type = subject_type_tributary
+			}
+		}
+		set_variable = converter_made_into_protectorate
+		change_subject_type = subject_type_protectorate
+	}
+	else_if = {
+		limit = {
+			OR = {
+				is_subject_type = subject_type_vassal
+				is_subject_type = subject_type_colony
+			}
+		}
+		set_variable = converter_made_into_puppet
+		change_subject_type = subject_type_puppet
+	}
+}
