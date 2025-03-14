@@ -3,7 +3,82 @@
 # converter_rule_63_effect
 
 converter_ig_devout_feminism_matriarchy_effect = {
-	if = {		# Cultural Gender Equality
+	if = {		# Cultural Gender Equality, TC
+		limit = {
+			is_old_world_trading_company = yes
+			any_scope_pop = {
+				pop_has_primary_culture = no
+				culture = {
+					prev.owner = {
+						culture_percent_country = {
+							target = prev
+							value >= 0.05
+						}
+					}
+					has_discrimination_trait = feminist
+					has_homeland = prev.state
+				}
+			}
+			trigger_if = {
+				limit = { has_variable = zzz_converter_tc_religion_set }
+				NOT = { var:tc_majority_religion = { has_discrimination_trait = feminist } }
+			}
+			trigger_else = {
+				NOT = { religion = { has_discrimination_trait = feminist } }
+			}
+		}
+		ig:ig_devout = {
+			if = {
+				limit = { has_ideology = ideology:ideology_patriarchal }
+				remove_ideology = ideology_patriarchal
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_oriental_orthodox_patriarch }
+				remove_ideology = ideology_oriental_orthodox_patriarch
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_orthodox_patriarch }
+				remove_ideology = ideology_orthodox_patriarch
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_russian_patriarch }
+				remove_ideology = ideology_russian_patriarch
+			}
+			add_ideology = ideology_patriarchal_suffrage
+		}
+	}
+	else_if = {		# Religious Gender Equality, TC
+		limit = {
+			is_old_world_trading_company = yes
+			trigger_if = {
+				limit = { has_variable = zzz_converter_tc_religion_set }
+				var:tc_majority_religion = { has_discrimination_trait = feminist }
+			}
+			trigger_else = {
+				religion = { has_discrimination_trait = feminist }
+			}
+		}
+		ig:ig_devout = {
+			if = {
+				limit = { has_ideology = ideology:ideology_patriarchal }
+				remove_ideology = ideology_patriarchal
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_oriental_orthodox_patriarch }
+				remove_ideology = ideology_oriental_orthodox_patriarch
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_orthodox_patriarch }
+				remove_ideology = ideology_orthodox_patriarch
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_russian_patriarch }
+				remove_ideology = ideology_russian_patriarch
+			}
+			add_ideology = ideology_feminist_ig
+		}
+	}
+	else_if = {		# Cultural Gender Equality, not TC
 		limit = {
 			any_primary_culture = { has_discrimination_trait = feminist }
 			NOT = { religion = { has_discrimination_trait = feminist } }
@@ -28,7 +103,7 @@ converter_ig_devout_feminism_matriarchy_effect = {
 			add_ideology = ideology_patriarchal_suffrage
 		}
 	}
-	else_if = {		# Religious Gender Equality
+	else_if = {		# Religious Gender Equality, not TC
 		limit = {
 			religion = { has_discrimination_trait = feminist }
 		}
@@ -55,7 +130,60 @@ converter_ig_devout_feminism_matriarchy_effect = {
 }
 
 converter_ig_landowners_feminism_matriarchy_effect = {
-	if = {		# Religious Gender Equality
+	if = {		# Religious Gender Equality, TC
+		limit = {
+			is_old_world_trading_company = yes
+			trigger_if = {
+				limit = { has_variable = zzz_converter_tc_religion_set }
+				var:tc_majority_religion = { has_discrimination_trait = feminist }
+			}
+			trigger_else = {
+				religion = { has_discrimination_trait = feminist }
+			}
+			NOT = {
+				any_scope_pop = {
+					pop_has_primary_culture = no
+					culture = {
+						prev.owner = {
+							culture_percent_country = {
+								target = prev
+								value >= 0.05
+							}
+						}
+						has_discrimination_trait = feminist
+						has_homeland = prev.state
+					}
+				}
+			}
+		}
+		ig:ig_landowners = {
+			remove_ideology = ideology_patriarchal
+			add_ideology = ideology_patriarchal_suffrage
+		}
+	}
+	else_if = {		# Cultural Gender Equality, TC
+		limit = {
+			is_old_world_trading_company = yes
+			any_scope_pop = {
+				pop_has_primary_culture = no
+				culture = {
+					prev.owner = {
+						culture_percent_country = {
+							target = prev
+							value >= 0.05
+						}
+					}
+					has_discrimination_trait = feminist
+					has_homeland = prev.state
+				}
+			}
+		}
+		ig:ig_landowners = {
+			remove_ideology = ideology_patriarchal
+			add_ideology = ideology_feminist_ig
+		}
+	}
+	else_if = {		# Religious Gender Equality, not TC
 		limit = {
 			religion = { has_discrimination_trait = feminist }
 			NOT = { any_primary_culture = { has_discrimination_trait = feminist } }
@@ -65,7 +193,7 @@ converter_ig_landowners_feminism_matriarchy_effect = {
 			add_ideology = ideology_patriarchal_suffrage
 		}
 	}
-	else_if = {		# Cultural Gender Equality
+	else_if = {		# Cultural Gender Equality, not TC
 		limit = {
 			any_primary_culture = { has_discrimination_trait = feminist }
 		}

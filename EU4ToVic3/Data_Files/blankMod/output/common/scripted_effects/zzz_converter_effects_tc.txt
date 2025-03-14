@@ -1,0 +1,296 @@
+﻿# converter_trade_company_religion_effect
+# converter_transfer_trading_company_subjects_effect
+
+converter_trade_company_religion_effect = {
+	if = {
+		limit = {
+			any_scope_pop = {
+				has_state_religion = no
+				religion = {
+					prev.owner = {
+						religion_percent_country = {
+							target = prev
+							value >= 0.6
+						}
+					}
+				}
+			}
+		}
+		random_scope_pop = {
+			limit = {
+				has_state_religion = no
+				religion = {
+					prev.owner = {
+						religion_percent_country = {
+							target = prev
+							value >= 0.6
+						}
+					}
+				}
+			}
+			religion = {
+				prev.owner = {	
+					set_variable = {
+						name = tc_majority_religion
+						value = prev
+					}
+					set_variable = zzz_converter_tc_religion_set
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			any_scope_pop = {
+				has_state_religion = no
+				religion = {
+					prev.owner = {
+						religion_percent_country = {
+							target = prev
+							value >= 0.5
+						}
+					}
+				}
+			}
+		}
+		random_scope_pop = {
+			limit = {
+				has_state_religion = no
+				religion = {
+					prev.owner = {
+						religion_percent_country = {
+							target = prev
+							value >= 0.5
+						}
+					}
+				}
+			}
+			religion = {
+				prev.owner = {	
+					set_variable = {
+						name = tc_majority_religion
+						value = prev
+					}
+					set_variable = zzz_converter_tc_religion_set
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			any_scope_pop = {
+				has_state_religion = no
+				religion = {
+					prev.owner = {
+						religion_percent_country = {
+							target = prev
+							value >= 0.45
+						}
+					}
+				}
+			}
+		}
+		random_scope_pop = {
+			limit = {
+				has_state_religion = no
+				religion = {
+					prev.owner = {
+						religion_percent_country = {
+							target = prev
+							value >= 0.45
+						}
+					}
+				}
+			}
+			religion = {
+				prev.owner = {	
+					set_variable = {
+						name = tc_majority_religion
+						value = prev
+					}
+					set_variable = zzz_converter_tc_religion_set
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			any_scope_pop = {
+				has_state_religion = no
+				religion = {
+					prev.owner = {
+						religion_percent_country = {
+							target = prev
+							value >= 0.4		#Anyting less than this & I'm just saying that the colonial religion dominates the local ones
+						}
+					}
+				}
+			}
+		}
+		random_scope_pop = {
+			limit = {
+				has_state_religion = no
+				religion = {
+					prev.owner = {
+						religion_percent_country = {
+							target = prev
+							value >= 0.4
+						}
+					}
+				}
+			}
+			religion = {
+				prev.owner = {	
+					set_variable = {
+						name = tc_majority_religion
+						value = prev
+					}
+					set_variable = zzz_converter_tc_religion_set
+				}
+			}
+		}
+	}
+	else = { set_variable = zzz_converter_no_tc_religion }
+}
+
+converter_transfer_trading_company_subjects_effect = {
+	save_scope_as = eu4_trade_company
+	capital.region = { save_scope_as = eu4_tc_capital }
+	overlord = {
+		if = {
+			limit = {
+				any_direct_subject = {
+					is_potential_tc_subject = yes
+					capital = { region = scope:eu4_tc_capital }
+				}
+			}
+			every_direct_subject = {
+				limit = {
+					is_potential_tc_subject = yes
+					capital = { region = scope:eu4_tc_capital }
+				}
+				if = {
+					limit = { is_subject_type = subject_type_puppet }
+					make_independent = yes
+					scope:eu4_trade_company = {
+						create_diplomatic_pact = {
+							country = PREV
+							type = puppet
+						}
+					}
+				}
+				else = {
+					make_independent = yes
+					scope:eu4_trade_company = {
+						create_diplomatic_pact = {
+							country = PREV
+							type = protectorate
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				scope:eu4_trade_company = { country_is_in_india = yes }
+				any_direct_subject = {
+					is_potential_tc_subject = yes
+					country_is_in_india = yes
+				}
+			}
+			every_direct_subject = {
+				limit = {
+					is_potential_tc_subject = yes
+					country_is_in_india = yes
+				}
+				if = {
+					limit = { is_subject_type = subject_type_puppet }
+					make_independent = yes
+					scope:eu4_trade_company = {
+						create_diplomatic_pact = {
+							country = PREV
+							type = puppet
+						}
+					}
+				}
+				else = {
+					make_independent = yes
+					scope:eu4_trade_company = {
+						create_diplomatic_pact = {
+							country = PREV
+							type = protectorate
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				scope:eu4_trade_company = { country_is_in_southeast_asia = yes }
+				any_direct_subject = {
+					is_potential_tc_subject = yes
+					country_is_in_southeast_asia = yes
+				}
+			}
+			every_direct_subject = {
+				limit = {
+					is_potential_tc_subject = yes
+					country_is_in_southeast_asia = yes
+				}
+				if = {
+					limit = { is_subject_type = subject_type_puppet }
+					make_independent = yes
+					scope:eu4_trade_company = {
+						create_diplomatic_pact = {
+							country = PREV
+							type = puppet
+						}
+					}
+				}
+				else = {
+					make_independent = yes
+					scope:eu4_trade_company = {
+						create_diplomatic_pact = {
+							country = PREV
+							type = protectorate
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				scope:eu4_trade_company = { country_is_in_china = yes }
+				any_direct_subject = {
+					is_potential_tc_subject = yes
+					country_is_in_china = yes
+				}
+			}
+			every_direct_subject = {
+				limit = {
+					is_potential_tc_subject = yes
+					country_is_in_china = yes
+				}
+				if = {
+					limit = { is_subject_type = subject_type_puppet }
+					make_independent = yes
+					scope:eu4_trade_company = {
+						create_diplomatic_pact = {
+							country = PREV
+							type = puppet
+						}
+					}
+				}
+				else = {
+					make_independent = yes
+					scope:eu4_trade_company = {
+						create_diplomatic_pact = {
+							country = PREV
+							type = protectorate
+						}
+					}
+				}
+			}
+		}
+	}
+}
