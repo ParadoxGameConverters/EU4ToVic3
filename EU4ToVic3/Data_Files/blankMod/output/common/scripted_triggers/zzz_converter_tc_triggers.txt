@@ -1,0 +1,59 @@
+﻿# is_old_world_trading_company
+# is_tc_preferred_culture
+# is_potential_tc_subject
+
+is_old_world_trading_company = {
+	custom_tooltip = {
+		text = is_old_world_trading_company_tt
+		is_subject = yes
+		OR = {
+			is_subject_type = subject_type_chartered_company
+			has_variable = converter_was_old_world_trading_company
+		}
+		country_is_in_north_america = no
+		country_is_in_central_america = no
+		country_is_in_south_america = no
+	}
+}
+
+is_tc_preferred_culture = {
+	trigger_if = {
+		limit = { country_has_primary_culture = $TARGET$ }
+		always = yes
+	}
+	trigger_else = {
+		any_scope_state = {
+			state_region = { is_homeland = $TARGET$ }
+		}
+		culture_percent_country = {
+			target = $TARGET$
+			value >= 0.15
+		}
+		cultural_acceptance_base = {
+			target = $TARGET$
+			value >= acceptance_status_3
+		}
+	}
+	#OR = {
+	#	country_has_primary_culture = $TARGET$
+	#	AND = {
+	#		any_scope_state = { is_homeland = $TARGET$ }
+	#		culture_percent_country = {
+	#			target = $TARGET$
+	#			value >= 0.15
+	#		}
+	#		cultural_acceptance_base = {
+	#			target = $TARGET$
+	#			value >= acceptance_status_3
+	#		}
+	#	}
+	#}
+}
+
+is_potential_tc_subject = {
+	is_old_world_trading_company = no
+	OR = {
+		is_subject_type = subject_type_protectorate
+		is_subject_type = subject_type_puppet
+	}
+}
