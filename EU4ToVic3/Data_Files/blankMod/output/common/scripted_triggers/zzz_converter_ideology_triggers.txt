@@ -1,0 +1,220 @@
+﻿# ideology_traditionalist_valid_trigger
+# ideology_traditionalist_minoritarian_valid_trigger
+# ideology_slaver_valid_trigger
+# ideology_feminist_valid_trigger
+# ideology_vanguardist_scripted_trigger
+# ideology_anarchist_valid_trigger
+# ideology_ethno_nationalist_valid_trigger
+# ideology_theocrat_valid_trigger
+# ideology_humanitarian_valid_trigger
+# ideology_humanitarian_royalist_valid_trigger
+# ideology_utilitarian_leader_valid_trigger
+
+ideology_traditionalist_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_rural_folk
+		is_interest_group_type = ig_trade_unions
+		is_interest_group_type = ig_armed_forces
+		is_interest_group_type = ig_petty_bourgeoisie
+		is_interest_group_type = ig_landowners
+		is_interest_group_type = ig_devout
+	}
+	trigger_if = {
+		limit = {
+			owner = { is_old_world_trading_company = yes }		### Converter ###
+		}
+		NOR = {
+			is_interest_group_type = ig_trade_unions
+			is_interest_group_type = ig_rural_folk
+			is_interest_group_type = ig_petty_bourgeoisie
+			is_interest_group_type = ig_landowners
+			is_interest_group_type = ig_devout
+			is_interest_group_type = ig_intelligentsia
+		}
+	}
+}
+
+ideology_traditionalist_minoritarian_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_rural_folk
+		is_interest_group_type = ig_trade_unions
+		is_interest_group_type = ig_armed_forces
+		is_interest_group_type = ig_petty_bourgeoisie
+		is_interest_group_type = ig_landowners
+		is_interest_group_type = ig_devout
+	}
+	trigger_if = {
+		limit = {
+			owner = { is_old_world_trading_company = yes }		### Converter ###
+		}
+		NOR = {
+			is_interest_group_type = ig_armed_forces
+			is_interest_group_type = ig_industrialists
+		}
+	}
+}
+
+ideology_slaver_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_landowners
+		is_interest_group_type = ig_devout
+		is_interest_group_type = ig_rural_folk
+	}
+	### Converter ###
+	# Since I'm making Mazdans abolitionist by default
+	trigger_if = {
+		limit = {
+			owner.religion = { has_discrimination_trait = mazdan }
+		}
+		NOT = { is_interest_group_type = ig_devout }
+	}
+}
+
+ideology_feminist_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_rural_folk
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_trade_unions
+		is_interest_group_type = ig_petty_bourgeoisie
+		is_interest_group_type = ig_industrialists
+		### Converter ###
+		trigger_if = {
+			limit = {
+				owner = { is_feminist_country = yes }
+			}
+			is_interest_group_type = ig_devout
+		}
+	}
+}
+
+ideology_vanguardist_scripted_trigger = {
+	OR = {
+		is_interest_group_type = ig_rural_folk
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_trade_unions
+		is_interest_group_type = ig_armed_forces
+		### Converter ###
+		#Vanguardists have no opinion on religion, for some reason, so commie religions can support them
+		trigger_if = {
+			limit = {
+				owner = {
+					religion = { has_discrimination_trait = egalitarian }
+				}
+			}
+			is_interest_group_type = ig_devout
+		}
+	}
+}
+
+ideology_anarchist_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_rural_folk
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_trade_unions
+		### Converter ###
+		#Anarchists have no opinion on religion, so commie religions can support them
+		trigger_if = {
+			limit = {
+				owner = {
+					religion = { has_discrimination_trait = egalitarian }
+				}
+			}
+			is_interest_group_type = ig_devout
+		}
+	}
+}
+
+ideology_ethno_nationalist_valid_trigger = {
+	trigger_if = {
+		limit = {
+			owner = { is_old_world_trading_company = yes }		### Converter ###
+		}
+		NOR = {
+			is_interest_group_type = ig_trade_unions
+			is_interest_group_type = ig_rural_folk
+			is_interest_group_type = ig_petty_bourgeoisie
+			is_interest_group_type = ig_landowners
+			is_interest_group_type = ig_devout
+			is_interest_group_type = ig_intelligentsia
+		}
+	}
+}
+
+ideology_theocrat_valid_trigger = {
+	OR = {
+		owner = {
+			has_law = law_type:law_theocracy
+		}
+		is_interest_group_type = ig_devout
+		### Converter ###
+		#Holy Order
+		trigger_if = {
+			limit = {
+				owner.ig:ig_armed_forces = {
+					OR = {
+						has_ideology = ideology:ideology_pious
+						has_ideology = ideology:ideology_corporatist
+					}
+				}
+			}
+			is_interest_group_type = ig_armed_forces
+		}
+	}
+}
+
+ideology_humanitarian_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_trade_unions
+		### Converter ###
+		#Medieval hippies
+		trigger_if = {
+			limit = {
+				owner.religion = {
+					OR = {
+						has_discrimination_trait = egalitarian
+						has_discrimination_trait = tolerant
+					}
+				}
+			}
+			is_interest_group_type = ig_devout
+		}
+	}
+}
+
+ideology_humanitarian_royalist_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_trade_unions
+		### Converter ###
+		#Medieval hippies
+		trigger_if = {
+			limit = {
+				owner.religion = {
+					OR = {
+						has_discrimination_trait = egalitarian
+						has_discrimination_trait = tolerant
+					}
+				}
+			}
+			is_interest_group_type = ig_devout
+		}
+	}
+}
+
+ideology_utilitarian_leader_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_industrialists # "The ethics of bourgeois bookkeeping" - Leon Trotsky
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_petty_bourgeoisie
+	}
+	trigger_if = {
+		limit = {
+			owner = { is_old_world_trading_company = yes }		### Converter ###
+		}
+		NOR = {
+			is_interest_group_type = ig_intelligentsia
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+	}
+}

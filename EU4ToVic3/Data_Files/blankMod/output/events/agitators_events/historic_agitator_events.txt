@@ -991,6 +991,11 @@ historical_agitators.9 = { #Norton
 		game_date > 1860.1.1
 		game_date < 1880.1.1
 		NOT = { has_global_variable = emperor_norton_spawn }
+		##Converter
+		country_average_cultural_acceptance = {
+			target = global_var:gbr_culture
+			value >= acceptance_status_4
+		}
 	}
 
 	immediate = {
@@ -2187,7 +2192,7 @@ historical_agitators.20 = { #Hugo
 			OR = {
 				law_stance = {
 					law = law_type:law_autocracy
-					value < neutral
+					value > neutral
 				}
 				AND = {	
 					law_stance = {
@@ -2197,7 +2202,7 @@ historical_agitators.20 = { #Hugo
 					interest_group = {
 						law_stance = {
 							law = law_type:law_autocracy
-							value < neutral
+							value > neutral
 						}
 						NOT = {
 							law_stance = {

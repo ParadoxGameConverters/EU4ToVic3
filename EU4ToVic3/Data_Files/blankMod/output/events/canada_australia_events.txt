@@ -342,13 +342,8 @@ can_aus.5 = {
 			name = can_unified_canada
 			months = normal_modifier_time
 		}
-		if = {
-			limit = {
-				NOT = { is_subject_type = subject_type_dominion }
-			}
-			change_subject_type = subject_type_dominion
-		}
 		##Converter
+		converter_make_dominion = yes
 		if = {
 			limit = {
 				top_overlord = {
@@ -584,13 +579,8 @@ can_aus.7 = {
 			name = aus_unified_australia
 			months = normal_modifier_time
 		}
-		if = {
-			limit = {
-				NOT = { is_subject_type = subject_type_dominion }
-			}
-			change_subject_type = subject_type_dominion
-		}
 		##Converter
+		converter_make_dominion = yes
 		if = {
 			limit = {
 				top_overlord = {
