@@ -11,13 +11,14 @@ class PopLoader: commonItems::parser
   public:
 	PopLoader() = default;
 
-	void loadPops(const commonItems::ModFilesystem& modFS);
+	void loadPops(const commonItems::ModFilesystem& modFS, double incPopulationMultiplier);
 	[[nodiscard]] const auto& getStatePops() const { return statePops; }
 
   private:
 	void registerKeys();
 
 	std::map<std::string, StatePops> statePops;
+	double populationMultiplier = 1.0;
 };
 } // namespace V3
 #endif // POP_LOADER_H

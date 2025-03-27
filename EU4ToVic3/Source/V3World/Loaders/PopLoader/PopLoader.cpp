@@ -4,9 +4,11 @@
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 #include "StateEntries.h"
+#include <ranges>
 
-void V3::PopLoader::loadPops(const commonItems::ModFilesystem& modFS)
+void V3::PopLoader::loadPops(const commonItems::ModFilesystem& modFS, double incPopulationMultiplier)
 {
+	populationMultiplier = incPopulationMultiplier;
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/pops/"))
 	{
@@ -15,6 +17,9 @@ void V3::PopLoader::loadPops(const commonItems::ModFilesystem& modFS)
 		parseFile(fileName);
 	}
 	clearRegisteredKeywords();
+
+	for (auto& pops: statePops | std::views::values)
+		pops.applyPopulationMultipler(incPopulationMultiplier);
 }
 
 void V3::PopLoader::registerKeys()

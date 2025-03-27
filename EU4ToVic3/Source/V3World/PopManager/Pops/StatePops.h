@@ -15,6 +15,7 @@ class StatePops
 	void setSubStatePops(const std::vector<SubStatePops>& thePops) { subStatePops = thePops; }
 	void addSubStatePops(const SubStatePops& thePops) { subStatePops.emplace_back(thePops); }
 	void setStateName(const std::string& theName) { stateName = theName; }
+	void applyPopulationMultipler(double populationMultiplier);
 
 	[[nodiscard]] int getPopCount() const;
 	[[nodiscard]] int getSlavePopCount() const;

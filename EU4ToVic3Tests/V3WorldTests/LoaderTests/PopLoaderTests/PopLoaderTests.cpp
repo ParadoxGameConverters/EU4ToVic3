@@ -16,7 +16,7 @@ TEST(V3World_PopLoaderTests, DefaultsDefaultToDefaults)
 TEST(V3World_PopLoaderTests, PopsCanBeLoadedFromMultipleFiles)
 {
 	V3::PopLoader popLoader;
-	popLoader.loadPops(modFS);
+	popLoader.loadPops(modFS, 1.0);
 
 	ASSERT_EQ(4, popLoader.getStatePops().size());
 
@@ -38,10 +38,35 @@ TEST(V3World_PopLoaderTests, PopsCanBeLoadedFromMultipleFiles)
 	EXPECT_EQ(1000, sp4.getPopCount());
 }
 
+TEST(V3World_PopLoaderTests, PopsCanBeMultipled)
+{
+	V3::PopLoader popLoader;
+	popLoader.loadPops(modFS, 1.5);
+
+	ASSERT_EQ(4, popLoader.getStatePops().size());
+
+	const auto& sp1 = popLoader.getStatePops().at("STATE_TEST_LAND1");
+	const auto& sp2 = popLoader.getStatePops().at("STATE_TEST_LAND2");
+	const auto& sp3 = popLoader.getStatePops().at("STATE_TEST_LAND3");
+	const auto& sp4 = popLoader.getStatePops().at("STATE_TEST_LAND4");
+
+	EXPECT_EQ("STATE_TEST_LAND1", sp1.getStateName());
+	EXPECT_EQ(900, sp1.getPopCount());
+
+	EXPECT_EQ("STATE_TEST_LAND2", sp2.getStateName());
+	EXPECT_EQ(4500, sp2.getPopCount());
+
+	EXPECT_EQ("STATE_TEST_LAND3", sp3.getStateName());
+	EXPECT_EQ(1350, sp3.getPopCount());
+
+	EXPECT_EQ("STATE_TEST_LAND4", sp4.getStateName());
+	EXPECT_EQ(1500, sp4.getPopCount());
+}
+
 TEST(V3World_PopLoaderTests, PopLoaderIgnoresNonTXTFiles)
 {
 	V3::PopLoader popLoader;
-	popLoader.loadPops(modFS);
+	popLoader.loadPops(modFS, 1.0);
 
 	EXPECT_FALSE(popLoader.getStatePops().contains("STATE_TEST_EXCESS"));
 }

@@ -65,6 +65,7 @@ class Configuration: commonItems::parser
 		bool convertAll = false;
 		bool downTiers = true;
 		double shapingFactor = 1.0;
+		double populationMultiplier = 1.0;
 		// runtime options.
 		bool vn = false;					 // Voltaire's Nightmare
 		bool thirdOdyssey = false;		 // Third Odyssey: Back to the Motherland

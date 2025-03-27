@@ -66,3 +66,9 @@ std::optional<std::string> V3::StatePops::getDominantReligion() const
 
 	return highest->first;
 }
+
+void V3::StatePops::applyPopulationMultipler(double populationMultiplier)
+{
+	for (auto& subStatePop: subStatePops)
+		subStatePop.multiplyPops(populationMultiplier);
+}
