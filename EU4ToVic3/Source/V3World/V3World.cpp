@@ -108,8 +108,8 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	Log(LogLevel::Progress) << "49 %";
 	// soaking up vanilla pops
-	popManager.initializeVanillaPops(vanillaFS);
-	popManager.initializeDWPops(dwFS);
+	popManager.initializeVanillaPops(vanillaFS, configBlock.populationMultiplier);
+	popManager.initializeDWPops(dwFS, configBlock.populationMultiplier);
 	popManager.injectReligionsIntoVanillaPops(cultureMapper.getV3CultureDefinitions());
 	popManager.injectReligionsIntoDWPops(cultureMapper.getV3CultureDefinitions());
 
@@ -141,7 +141,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	politicalManager.attemptColonialTagReplacement(cultureMapper.getColonialRegionMapper(), clayManager);
 
 	Log(LogLevel::Progress) << "54 %";
-	popManager.generatePops(clayManager, configBlock.popShaping, configBlock.shapingFactor);
+	popManager.generatePops(clayManager, configBlock.popShaping, configBlock.shapingFactor, configBlock.populationMultiplier);
 	popManager.applyHomeLands(clayManager);
 
 	Log(LogLevel::Progress) << "55 %";

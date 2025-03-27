@@ -74,12 +74,17 @@ void Configuration::registerKeys()
 	registerKeyword("shaping_factor", [this](std::istream& theStream) {
 		const auto shapingFactorString = commonItems::getString(theStream);
 		configBlock.shapingFactor = std::stoi(shapingFactorString);
-		if (configBlock.shapingFactor < 0)
-			configBlock.shapingFactor = 0;
-		if (configBlock.shapingFactor > 100.0)
-			configBlock.shapingFactor = 100.0;
+		configBlock.shapingFactor = std::max(configBlock.shapingFactor, 0.0);
+		configBlock.shapingFactor = std::min(configBlock.shapingFactor, 100.0);
 		configBlock.shapingFactor /= 100.0;
 		Log(LogLevel::Info) << "Pop Shaping Factor: " << shapingFactorString;
+	});
+	registerKeyword("population_multiplier", [this](std::istream& theStream) {
+		const auto populationMultiplierString = commonItems::getString(theStream);
+		configBlock.populationMultiplier = std::stod(populationMultiplierString);
+		configBlock.populationMultiplier = std::max(configBlock.populationMultiplier, 0.1);
+		configBlock.populationMultiplier = std::min(configBlock.populationMultiplier, 10.0);
+		Log(LogLevel::Info) << "Population Multiplier: " << populationMultiplierString;
 	});
 	registerKeyword("euro_centrism", [this](std::istream& theStream) {
 		const auto euroCentrismString = commonItems::getString(theStream);

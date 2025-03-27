@@ -94,13 +94,13 @@ V3::PoliticalManager prepWorld()
 	culMapper.expandCulturalMappings(clayManager, cultureLoader, religionLoader);
 
 	V3::PopManager popManager;
-	popManager.initializeVanillaPops(modFS);
-	popManager.initializeDWPops(modFS);
+	popManager.initializeVanillaPops(modFS, 1.0);
+	popManager.initializeDWPops(modFS, 1.0);
 	popManager.convertDemographics(clayManager, culMapper, relMapper, cultureLoader, religionLoader);
 	clayManager.shoveRemainingProvincesIntoSubStates();
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);
 
-	popManager.generatePops(clayManager, Configuration::POPSHAPES::Vanilla, 1);
+	popManager.generatePops(clayManager, Configuration::POPSHAPES::Vanilla, 1, 1.0);
 
 	return politicalManager;
 }

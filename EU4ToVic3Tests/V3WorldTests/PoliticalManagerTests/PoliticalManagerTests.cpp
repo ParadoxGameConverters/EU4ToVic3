@@ -91,8 +91,8 @@ prepMappers()
 	culMapper.expandCulturalMappings(clayManager, cultureLoader, religionLoader);
 
 	V3::PopManager popManager;
-	popManager.initializeVanillaPops(modFS);
-	popManager.initializeDWPops(modFS);
+	popManager.initializeVanillaPops(modFS, 1.0);
+	popManager.initializeDWPops(modFS, 1.0);
 	popManager.convertDemographics(clayManager, culMapper, relMapper, cultureLoader, religionLoader);
 
 	politicalManager.initializeVanillaCountries(modFS, modFS);

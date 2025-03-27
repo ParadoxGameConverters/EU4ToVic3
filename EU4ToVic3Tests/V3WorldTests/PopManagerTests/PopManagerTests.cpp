@@ -94,8 +94,8 @@ prepMappers()
 	culMapper.expandCulturalMappings(clayManager, cultureLoader, religionLoader);
 
 	V3::PopManager popManager;
-	popManager.initializeVanillaPops(modFS);
-	popManager.initializeDWPops(modFS);
+	popManager.initializeVanillaPops(modFS, 1.0);
+	popManager.initializeDWPops(modFS, 1.0);
 	popManager.convertDemographics(clayManager, culMapper, relMapper, cultureLoader, religionLoader);
 	clayManager.shoveRemainingProvincesIntoSubStates();
 	politicalManager.generateDecentralizedCountries(clayManager, popManager);
@@ -112,7 +112,7 @@ TEST(V3World_PopManagerTests, popManagerCanInitializeVanillaPopsAndPingThem)
 	std::streambuf* cout_buffer = std::cout.rdbuf();
 	std::cout.rdbuf(log.rdbuf());
 
-	popManager.initializeVanillaPops(modFS);
+	popManager.initializeVanillaPops(modFS, 1.0);
 
 	std::cout.rdbuf(cout_buffer);
 
@@ -124,7 +124,7 @@ TEST(V3World_PopManagerTests, popManagerCanInitializeVanillaPopsAndPingThem)
 	total: 5500
 	*/
 
-	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> Vanilla had 5500 pops.)"));
+	EXPECT_THAT(log.str(), testing::HasSubstr(R"([INFO] <> Vanilla had 5500 pops with population multiplier: 1)"));
 
 	EXPECT_FALSE(popManager.getVanillaSubStatePops("STATE_NONSENSE", "AAA"));
 	EXPECT_FALSE(popManager.getVanillaSubStatePops("STATE_TEST_LAND1", "NONSENSE"));
@@ -175,7 +175,7 @@ TEST(V3World_PopManagerTests, popManagerCanGeneratePops)
 {
 	auto [popManager, politicalManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	popManager.generatePops(clayManager, Configuration::POPSHAPES::Vanilla, 1);
+	popManager.generatePops(clayManager, Configuration::POPSHAPES::Vanilla, 1, 1.0);
 
 
 	/*
@@ -213,7 +213,7 @@ TEST(V3World_PopManagerTests, popManagerCanGenerateVanillaPopsThroughShaping)
 {
 	auto [popManager, politicalManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	popManager.generatePops(clayManager, Configuration::POPSHAPES::PopShaping, 0);
+	popManager.generatePops(clayManager, Configuration::POPSHAPES::PopShaping, 0, 1.0);
 
 
 	/*
@@ -251,7 +251,7 @@ TEST(V3World_PopManagerTests, popManagerCanGenerateShapedPops)
 {
 	auto [popManager, politicalManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
 
-	popManager.generatePops(clayManager, Configuration::POPSHAPES::PopShaping, 1);
+	popManager.generatePops(clayManager, Configuration::POPSHAPES::PopShaping, 1, 1.0);
 
 	/*
 		STATE_TEST_LAND1 - 600 -> 622: projected popcount=725 * superRegionalNormalizationFactor=0.85649
@@ -287,7 +287,7 @@ TEST(V3World_PopManagerTests, popManagerCanGenerateShapedPops)
 TEST(V3World_PopManagerTests, popManagerCanGenerateHomelands)
 {
 	auto [popManager, politicalManager, culMapper, relMapper, clayManager, cultureLoader, religionLoader] = prepMappers();
-	popManager.generatePops(clayManager, Configuration::POPSHAPES::Vanilla, 1);
+	popManager.generatePops(clayManager, Configuration::POPSHAPES::Vanilla, 1, 1.0);
 
 
 	/*

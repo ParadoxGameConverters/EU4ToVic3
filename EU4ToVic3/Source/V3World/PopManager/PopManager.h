@@ -31,14 +31,14 @@ class PopManager
   public:
 	PopManager() = default;
 
-	void initializeVanillaPops(const commonItems::ModFilesystem& modFS);
-	void initializeDWPops(const commonItems::ModFilesystem& modFS);
+	void initializeVanillaPops(const commonItems::ModFilesystem& modFS, double populationMultiplier);
+	void initializeDWPops(const commonItems::ModFilesystem& modFS, double populationMultiplier);
 	void convertDemographics(const ClayManager& clayManager,
 		 mappers::CultureMapper& cultureMapper,
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader) const;
-	void generatePops(const ClayManager& clayManager, Configuration::POPSHAPES popShapes, double shapingFactor);
+	void generatePops(const ClayManager& clayManager, Configuration::POPSHAPES popShapes, double shapingFactor, double populationMultipler);
 	void applyHomeLands(const ClayManager& clayManager) const;
 	void loadMinorityPopRules(const std::string& filePath);
 	void loadSlaveCultureRules(const std::string& filePath);

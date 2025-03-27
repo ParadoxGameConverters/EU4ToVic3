@@ -97,7 +97,7 @@ std::tuple<V3::ClayManager, V3::PoliticalManager> assignSubStateOwnership()
 	clayManager.assignSubStateOwnership(politicalManager.getCountries(), *countryMapper);
 
 	V3::PopManager popManager;
-	popManager.initializeVanillaPops(modFS);
+	popManager.initializeVanillaPops(modFS, 1.0);
 
 	clayManager.injectVanillaSubStates(modFS, politicalManager, popManager, false);
 
