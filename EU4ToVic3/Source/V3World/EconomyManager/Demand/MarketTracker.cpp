@@ -51,6 +51,11 @@ void V3::MarketTracker::loadPeasants(const Country& country,
 	{
 		const auto& traits = subState->getHomeState()->getTraits();
 		BuildingResources subsistenceResources;
+		if (subState->getHomeState()->getSubsistenceBuilding().empty())
+		{
+			// This is a sea tile someone assigned an actual core to via console. Happened.
+			continue;
+		}
 		const Building& subsistenceBuilding = buildings.at(subState->getHomeState()->getSubsistenceBuilding());
 		subsistenceResources.evaluateResources(subsistenceBuilding.getPMGroups(), estimatedPMs, PMs, PMGroups);
 
