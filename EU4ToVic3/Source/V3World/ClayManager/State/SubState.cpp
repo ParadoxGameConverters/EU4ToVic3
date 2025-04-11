@@ -366,11 +366,9 @@ bool V3::SubState::isBuildingValid(const Building& building,
 	{
 		return false;
 	}
-	if (const std::set<std::string> coastalBuildings = {"building_naval_base", "building_shipyards"}; // ports are pre-seeded
-		 coastalBuildings.contains(building.getName()))
+	if (building.isCoastalOnly() && !isCoastal())
 	{
-		if (!isCoastal())
-			return false;
+		return false;
 	}
 	if (!building.isBuildable())
 	{
