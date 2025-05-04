@@ -8,9 +8,9 @@ void EU4::UnitTypeLoader::loadUnitTypes(const commonItems::ModFilesystem& modFS)
 {
 	for (const auto& file: modFS.GetAllFilesInFolder("/common/units/"))
 	{
-		if (getExtension(file) != "txt")
+		if (file.extension() != ".txt")
 			continue;
-		addUnitFileToRegimentTypeMap(getPath(file), trimPath(file));
+		addUnitFileToRegimentTypeMap(file.parent_path(), file.filename());
 	}
 
 	Log(LogLevel::Info) << "<> Loaded " << unitTypeMap.size() << " unit definitions.";
@@ -22,11 +22,11 @@ void EU4::UnitTypeLoader::loadUnitType(const std::string& unitName, std::istream
 	unitTypeMap.emplace(unitName, unitType.getUnitType());
 }
 
-void EU4::UnitTypeLoader::addUnitFileToRegimentTypeMap(const std::string& directory, const std::string& filename)
+void EU4::UnitTypeLoader::addUnitFileToRegimentTypeMap(const std::filesystem::path& directory, const std::filesystem::path& filename)
 {
-	auto name = trimExtension(filename);
+	const auto name = filename.stem().string();
 
-	const UnitTypeParser unitType(directory + "/" + filename);
+	const UnitTypeParser unitType(directory / filename);
 	if (unitType.getUnitType().unitType.empty())
 	{
 		Log(LogLevel::Warning) << "Unit file for " << name << " at: " << directory << "/" << filename << " has no type!";

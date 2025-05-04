@@ -15,7 +15,7 @@ void EU4::CommonCountryLoader::loadCommonCountries(const commonItems::ModFilesys
 	// scoop up all country definitions
 	for (const auto& file: modFS.GetAllFilesInFolder("/common/country_tags/"))
 	{
-		if (getExtension(file) != "txt")
+		if (file.extension() != ".txt")
 			continue;
 		tagParser.parseFile(file);
 	}

@@ -9,7 +9,7 @@ void EU4::EU4LocalizationLoader::loadLocalizations(const commonItems::ModFilesys
 {
 	for (const auto& file: modFS.GetAllFilesInFolderRecursive("/localisation/"))
 	{
-		if (getExtension(file) != "yml")
+		if (file.extension() != ".yml")
 			continue;
 		readFromFile(file);
 	}
@@ -20,9 +20,9 @@ void EU4::EU4LocalizationLoader::loadLocalizations(std::istream& theStream)
 	readFromStream(theStream);
 }
 
-void EU4::EU4LocalizationLoader::readFromFile(const std::string& fileName)
+void EU4::EU4LocalizationLoader::readFromFile(const fs::path& fileName)
 {
-	std::ifstream locFile(fs::u8path(fileName));
+	std::ifstream locFile(fileName);
 	readFromStream(locFile);
 	locFile.close();
 }

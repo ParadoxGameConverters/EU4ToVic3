@@ -3,6 +3,7 @@
 #include "CommonFunctions.h"
 #include "CommonRegexes.h"
 #include "OSCompatibilityLayer.h"
+#include <filesystem>
 #include <ranges>
 
 void EU4::BuildingCostLoader::loadBuildingCosts(const commonItems::ModFilesystem& modFS)
@@ -11,7 +12,7 @@ void EU4::BuildingCostLoader::loadBuildingCosts(const commonItems::ModFilesystem
 
 	for (const auto& file: modFS.GetAllFilesInFolder("/common/buildings/"))
 	{
-		if (getExtension(file) != "txt")
+		if (file.extension() != ".txt")
 			continue;
 		parseFile(file);
 	}
