@@ -11,7 +11,7 @@ void mappers::ReligionDefinitionLoader::loadDefinitions(const commonItems::ModFi
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/religions/"))
 	{
-		if (getExtension(fileName) == "txt")
+		if (fileName.extension() == ".txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

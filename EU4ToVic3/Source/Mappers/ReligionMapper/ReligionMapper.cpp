@@ -10,7 +10,7 @@
 #include "ReligionMapping.h"
 #include <ranges>
 
-void mappers::ReligionMapper::loadMappingRules(const std::string& filePath)
+void mappers::ReligionMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Parsing religion mapping rules.";
 	registerKeys();

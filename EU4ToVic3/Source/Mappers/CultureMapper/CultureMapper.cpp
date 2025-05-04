@@ -149,7 +149,7 @@ void mappers::CultureMapper::loadMappingRules(std::istream& theStream)
 	markNeoCultureOverrides();
 }
 
-void mappers::CultureMapper::loadMappingRules(const std::string& fileName)
+void mappers::CultureMapper::loadMappingRules(const std::filesystem::path& fileName)
 {
 	Log(LogLevel::Info) << "-> Parsing culture mapping rules.";
 	registerKeys();

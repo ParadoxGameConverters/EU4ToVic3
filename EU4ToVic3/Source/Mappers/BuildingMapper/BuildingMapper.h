@@ -2,6 +2,7 @@
 #define BUILDING_MAPPER_H
 #include "Parser.h"
 #include <map>
+#include <filesystem>
 
 namespace mappers
 {
@@ -9,7 +10,7 @@ class BuildingMapper: commonItems::parser
 {
   public:
 	BuildingMapper() = default;
-	void loadBuildingMappings(const std::string& filePath);
+	void loadBuildingMappings(const std::filesystem::path& filePath);
 
 	[[nodiscard]] std::set<std::string> getVic3Buildings(const std::string& eu4Building) const;
 

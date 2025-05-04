@@ -7,7 +7,7 @@
 
 #include "CountryManager/CountryLeader/EU4Character.h"
 
-void mappers::CharacterTraitMapper::loadMappingRules(const std::string& filePath)
+void mappers::CharacterTraitMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading character trait mapping rules.";
 	registerKeys();
@@ -68,7 +68,7 @@ std::set<std::string> mappers::CharacterTraitMapper::getSkillTraits(const EU4::C
 			traits.emplace(global.at(eu4Character.leaderType));
 		else if (const auto& traitMatch = matchLeaderSkill(eu4Character.leaderType,
 						 std::vector<int>{eu4Character.fire, eu4Character.shock, eu4Character.maneuver, eu4Character.siege});
-					traitMatch)
+			 traitMatch)
 			traits.emplace(*traitMatch);
 	}
 	// map ruler trait

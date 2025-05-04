@@ -10,7 +10,7 @@ void mappers::TraitDefinitionLoader::loadDefinitions(const commonItems::ModFiles
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/discrimination_traits/"))
 	{
-		if (getExtension(fileName) != "txt")
+		if (fileName.extension() != ".txt")
 			continue;
 
 		parseFile(fileName);

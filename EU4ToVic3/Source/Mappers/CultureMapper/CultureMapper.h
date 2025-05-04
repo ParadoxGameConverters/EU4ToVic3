@@ -8,6 +8,7 @@
 #include "Parser.h"
 #include "TraitDefinitionLoader/TraitDef.h"
 #include "WesternizationMapper/WesternizationMapper.h"
+#include <filesystem>
 
 namespace EU4
 {
@@ -36,7 +37,7 @@ class CultureMapper: commonItems::parser
 	CultureMapper() = default;
 
 	void loadMappingRules(std::istream& theStream);
-	void loadMappingRules(const std::string& fileName);
+	void loadMappingRules(const std::filesystem::path& fileName);
 	void loadColonialRules(std::istream& theStream);
 	void loadColonialRules(const std::string& fileName);
 	void loadWesternizationRules(std::istream& theStream);
