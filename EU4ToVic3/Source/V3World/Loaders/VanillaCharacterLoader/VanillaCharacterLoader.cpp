@@ -9,7 +9,7 @@ void V3::VanillaCharacterLoader::loadVanillaCharacters(const commonItems::ModFil
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/characters/"))
 	{
-		if (getExtension(fileName) == "txt")
+		if (fileName.extension() == ".txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

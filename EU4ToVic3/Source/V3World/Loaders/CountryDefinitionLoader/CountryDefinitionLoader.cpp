@@ -10,7 +10,7 @@ void V3::CountryDefinitionLoader::loadCommonCountries(const commonItems::ModFile
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/country_definitions/"))
 	{
-		if (getExtension(fileName) == "txt")
+		if (fileName.extension() == ".txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();
@@ -21,7 +21,7 @@ void V3::CountryDefinitionLoader::reloadCommonCountries(const commonItems::ModFi
 	registerReloadKeys();
 	for (const auto& fileName: vanillaFS.GetAllFilesInFolder("/common/country_definitions/"))
 	{
-		if (getExtension(fileName) == "txt")
+		if (fileName.extension() == ".txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

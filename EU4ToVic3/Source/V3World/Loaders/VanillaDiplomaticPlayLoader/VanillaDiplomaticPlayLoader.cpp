@@ -9,7 +9,7 @@ void V3::VanillaDiplomaticPlayLoader::loadVanillaDiplomaticPlays(const commonIte
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/diplomatic_plays/"))
 	{
-		if (getExtension(fileName) == "txt")
+		if (fileName.extension() == ".txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

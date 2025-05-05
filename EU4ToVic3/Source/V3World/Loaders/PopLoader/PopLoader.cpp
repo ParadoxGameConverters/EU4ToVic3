@@ -12,7 +12,7 @@ void V3::PopLoader::loadPops(const commonItems::ModFilesystem& modFS, double inc
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/pops/"))
 	{
-		if (getExtension(fileName) != "txt")
+		if (fileName.extension() != ".txt")
 			continue;
 		parseFile(fileName);
 	}

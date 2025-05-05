@@ -9,7 +9,7 @@ void V3::VanillaBuildingLoader::loadVanillaBuildings(const commonItems::ModFiles
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/buildings/"))
 	{
-		if (getExtension(fileName) == "txt")
+		if (fileName.extension() == ".txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

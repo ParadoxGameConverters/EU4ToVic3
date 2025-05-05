@@ -12,7 +12,7 @@ void V3::BuildingLoader::loadBuildings(const commonItems::ModFilesystem& modFS)
 	registerKeys(bsvl.getBuildingCostConstants());
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/buildings/"))
 	{
-		if (getExtension(fileName) == "txt")
+		if (fileName.extension() == ".txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

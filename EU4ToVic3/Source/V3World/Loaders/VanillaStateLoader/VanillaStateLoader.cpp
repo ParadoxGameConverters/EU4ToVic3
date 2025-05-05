@@ -9,7 +9,7 @@ void V3::VanillaStateLoader::loadVanillaStates(const commonItems::ModFilesystem&
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/states/"))
 	{
-		if (getExtension(fileName) == "txt")
+		if (fileName.extension() == ".txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

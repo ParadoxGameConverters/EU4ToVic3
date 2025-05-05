@@ -10,7 +10,7 @@ void V3::VanillaPopulationHistoryLoader::loadVanillaPopulationHistories(const co
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/population/"))
 	{
-		if (getExtension(fileName) == "txt")
+		if (fileName.extension() == ".txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

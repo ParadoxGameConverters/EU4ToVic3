@@ -8,7 +8,7 @@ void V3::ProductionMethodLoader::loadPMs(const commonItems::ModFilesystem& modFS
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/production_methods/"))
 	{
-		if (getExtension(fileName) == "txt")
+		if (fileName.extension() == ".txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

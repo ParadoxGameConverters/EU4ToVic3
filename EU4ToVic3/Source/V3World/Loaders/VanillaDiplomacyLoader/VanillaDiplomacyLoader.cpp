@@ -9,7 +9,7 @@ void V3::VanillaDiplomacyLoader::loadVanillaDiplomacy(const commonItems::ModFile
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/diplomacy/"))
 	{
-		if (getExtension(fileName) == "txt")
+		if (fileName.extension() == ".txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

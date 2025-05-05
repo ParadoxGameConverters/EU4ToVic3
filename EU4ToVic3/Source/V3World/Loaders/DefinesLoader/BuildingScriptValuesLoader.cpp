@@ -7,7 +7,7 @@ void V3::BuildingScriptValuesLoader::loadBuildingScriptValues(const commonItems:
 	registerKeys();
 	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/script_values"))
 	{
-		if (fileName.find("building_values") == std::string::npos)
+		if (fileName.string().find("building_values") == std::string::npos)
 			continue;
 		parseFile(fileName);
 	}
