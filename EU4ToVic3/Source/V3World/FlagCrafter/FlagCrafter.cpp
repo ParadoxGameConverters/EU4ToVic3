@@ -7,7 +7,7 @@
 #include "PoliticalManager/Country/Country.h"
 #include "targa.h"
 
-void V3::FlagCrafter::loadAvailableFlags(const std::string& blankModPath, const std::string& vanillaPath)
+void V3::FlagCrafter::loadAvailableFlags(const std::filesystem::path& blankModPath, const std::filesystem::path& vanillaPath)
 {
 	Log(LogLevel::Info) << "-> Loading Available Flags.";
 
@@ -18,12 +18,12 @@ void V3::FlagCrafter::loadAvailableFlags(const std::string& blankModPath, const 
 							  << knownVanillaFlags.size() << " vanilla flagsets.";
 }
 
-void V3::FlagCrafter::loadCustomColors(const std::string& filePath)
+void V3::FlagCrafter::loadCustomColors(const std::filesystem::path& filePath)
 {
 	flagColorLoader.loadFlagColors(filePath);
 }
 
-void V3::FlagCrafter::loadKnownFlags(const std::string& blankModPath, const std::string& vanillaPath)
+void V3::FlagCrafter::loadKnownFlags(const std::filesystem::path& blankModPath, const std::filesystem::path& vanillaPath)
 {
 	FlagNameLoader flagNameLoader;
 	flagNameLoader.loadKnownFlags(blankModPath); // we're loading our COA DEFINITIONS, not flag definitions!
@@ -182,10 +182,10 @@ bool V3::FlagCrafter::tryAssigningEU4Flag(const std::shared_ptr<Country>& countr
 	// These would be full-path files. Let's trim and match.
 	const auto& eu4Flags = eu4ModFS.GetAllFilesInFolder("gfx/flags/");
 
-	std::string eu4FlagAbsolutePath;
+	std::filesystem::path eu4FlagAbsolutePath;
 	for (const auto& incomingEU4Flag: eu4Flags)
 	{
-		if (trimExtension(trimPath(incomingEU4Flag)) == eu4Tag)
+		if (incomingEU4Flag.stem() == eu4Tag)
 		{
 			eu4FlagAbsolutePath = incomingEU4Flag;
 			break;
@@ -196,7 +196,7 @@ bool V3::FlagCrafter::tryAssigningEU4Flag(const std::shared_ptr<Country>& countr
 		return false;
 
 	// Try and copy EU4 flag over to temp folder, rename to V3 tag.
-	if (!commonItems::TryCopyFile(eu4FlagAbsolutePath, "flags.tmp/" + country->getTag() + ".tga"))
+	if (!std::filesystem::copy_file(eu4FlagAbsolutePath, "flags.tmp/" + country->getTag() + ".tga", std::filesystem::copy_options::overwrite_existing))
 		return false;
 
 	// finally, add coa/flag record for the copied eu4 flag.
