@@ -3,7 +3,7 @@
 
 namespace
 {
-const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+const auto modFS = commonItems::ModFilesystem(std::filesystem::path("TestFiles/vic3installation/game/"), {});
 }
 
 TEST(V3World_TechLoaderTests, DefaultsDefaultToDefaults)
