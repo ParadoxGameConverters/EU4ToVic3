@@ -11,7 +11,7 @@
 
 namespace
 {
-const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+const auto modFS = commonItems::ModFilesystem(std::filesystem::path("TestFiles/vic3installation/game/"), {});
 std::pair<std::map<std::string, V3::ProductionMethod>, std::map<std::string, V3::ProductionMethodGroup>> prepPMData()
 {
 	V3::ProductionMethodLoader PMLoader;

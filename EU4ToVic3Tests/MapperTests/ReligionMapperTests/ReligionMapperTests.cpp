@@ -7,8 +7,8 @@
 
 namespace
 {
-const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
-const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {Mod("Some mod", "TestFiles/mod/themod/")});
+const auto modFS = commonItems::ModFilesystem(std::filesystem::path("TestFiles/vic3installation/game/"), {});
+const auto eu4FS = commonItems::ModFilesystem(std::filesystem::path("TestFiles/eu4installation/"), {Mod("Some mod", "TestFiles/mod/themod/")});
 } // namespace
 
 TEST(Mappers_ReligionMapperTests, religionsCanBeRetrieved)
