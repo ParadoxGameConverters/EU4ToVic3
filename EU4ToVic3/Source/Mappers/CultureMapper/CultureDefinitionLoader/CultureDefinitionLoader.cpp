@@ -9,7 +9,7 @@ void mappers::CultureDefinitionLoader::loadDefinitions(const commonItems::ModFil
 {
 	Log(LogLevel::Info) << "-> Loading culture definitions.";
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/cultures/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/cultures"))
 	{
 		if (fileName.extension() != ".txt")
 			continue;

@@ -12,7 +12,7 @@ void EU4::ColonialRegionLoader::loadColonialRegions(const commonItems::ModFilesy
 {
 	registerKeys();
 
-	for (const auto& file: modFS.GetAllFilesInFolder("/common/colonial_regions/"))
+	for (const auto& file: modFS.GetAllFilesInFolder("common/colonial_regions"))
 	{
 		if (file.extension() != ".txt")
 			continue;

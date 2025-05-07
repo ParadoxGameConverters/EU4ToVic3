@@ -10,7 +10,7 @@ void V3::BuildingLoader::loadBuildings(const commonItems::ModFilesystem& modFS)
 	bsvl.loadBuildingScriptValues(modFS);
 
 	registerKeys(bsvl.getBuildingCostConstants());
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/buildings/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/buildings"))
 	{
 		if (fileName.extension() == ".txt")
 			parseFile(fileName);

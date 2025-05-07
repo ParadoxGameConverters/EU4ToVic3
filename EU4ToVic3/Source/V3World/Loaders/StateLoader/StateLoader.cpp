@@ -6,7 +6,7 @@
 void V3::StateLoader::loadStates(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/map_data/state_regions/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("map_data/state_regions"))
 	{
 		if (fileName.extension() == ".txt")
 			parseFile(fileName);

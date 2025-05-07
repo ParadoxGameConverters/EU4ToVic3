@@ -6,7 +6,7 @@
 
 void EU4::UnitTypeLoader::loadUnitTypes(const commonItems::ModFilesystem& modFS)
 {
-	for (const auto& file: modFS.GetAllFilesInFolder("/common/units/"))
+	for (const auto& file: modFS.GetAllFilesInFolder("common/units"))
 	{
 		if (file.extension() != ".txt")
 			continue;

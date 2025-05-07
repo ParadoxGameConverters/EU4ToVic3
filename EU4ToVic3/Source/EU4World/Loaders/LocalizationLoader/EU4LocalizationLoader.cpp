@@ -7,7 +7,7 @@ namespace fs = std::filesystem;
 
 void EU4::EU4LocalizationLoader::loadLocalizations(const commonItems::ModFilesystem& modFS)
 {
-	for (const auto& file: modFS.GetAllFilesInFolderRecursive("/localisation/"))
+	for (const auto& file: modFS.GetAllFilesInFolderRecursive("localisation"))
 	{
 		if (file.extension() != ".yml")
 			continue;

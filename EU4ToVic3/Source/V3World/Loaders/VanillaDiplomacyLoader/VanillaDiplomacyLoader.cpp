@@ -7,7 +7,7 @@
 void V3::VanillaDiplomacyLoader::loadVanillaDiplomacy(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/diplomacy/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/history/diplomacy"))
 	{
 		if (fileName.extension() == ".txt")
 			parseFile(fileName);

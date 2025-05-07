@@ -4,7 +4,7 @@
 void V3::DemandLoader::loadGoods(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/goods/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/goods"))
 	{
 		if (fileName.extension() != ".txt")
 			continue;
@@ -23,7 +23,7 @@ void V3::DemandLoader::loadGoods(std::istream& theStream)
 void V3::DemandLoader::loadPopNeeds(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/pop_needs/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/pop_needs"))
 	{
 		if (fileName.extension() != ".txt")
 			continue;
@@ -45,7 +45,7 @@ void V3::DemandLoader::loadPopNeeds(std::istream& theStream)
 void V3::DemandLoader::loadBuyPackages(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/buy_packages/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/buy_packages"))
 	{
 		if (fileName.extension() != ".txt")
 			continue;

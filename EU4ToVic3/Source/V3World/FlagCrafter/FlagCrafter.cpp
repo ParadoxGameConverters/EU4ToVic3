@@ -180,7 +180,7 @@ bool V3::FlagCrafter::tryAssigningEU4Flag(const std::shared_ptr<Country>& countr
 	const auto& eu4Tag = country->getSourceCountry()->getTag();
 
 	// These would be full-path files. Let's trim and match.
-	const auto& eu4Flags = eu4ModFS.GetAllFilesInFolder("gfx/flags/");
+	const auto& eu4Flags = eu4ModFS.GetAllFilesInFolder("gfx/flags");
 
 	std::filesystem::path eu4FlagAbsolutePath;
 	for (const auto& incomingEU4Flag: eu4Flags)

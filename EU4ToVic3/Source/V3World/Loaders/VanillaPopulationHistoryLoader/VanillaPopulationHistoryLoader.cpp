@@ -8,7 +8,7 @@
 void V3::VanillaPopulationHistoryLoader::loadVanillaPopulationHistories(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/population/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/history/population"))
 	{
 		if (fileName.extension() == ".txt")
 			parseFile(fileName);

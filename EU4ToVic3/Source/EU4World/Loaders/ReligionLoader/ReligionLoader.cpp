@@ -12,7 +12,7 @@ void EU4::ReligionLoader::loadReligions(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
 
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/religions/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/religions"))
 	{
 		if (fileName.extension() != ".txt")
 			continue;

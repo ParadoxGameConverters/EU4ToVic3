@@ -10,7 +10,7 @@ void EU4::BuildingCostLoader::loadBuildingCosts(const commonItems::ModFilesystem
 {
 	registerKeys();
 
-	for (const auto& file: modFS.GetAllFilesInFolder("/common/buildings/"))
+	for (const auto& file: modFS.GetAllFilesInFolder("common/buildings"))
 	{
 		if (file.extension() != ".txt")
 			continue;

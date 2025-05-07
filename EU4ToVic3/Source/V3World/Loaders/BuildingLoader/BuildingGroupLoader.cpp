@@ -8,7 +8,7 @@
 void V3::BuildingGroupLoader::loadBuildingGroups(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/building_groups/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/building_groups"))
 	{
 		if (fileName.extension() == ".txt")
 			parseFile(fileName);

@@ -7,7 +7,7 @@ namespace fs = std::filesystem;
 
 void V3::SuperRegionLoader::loadSuperRegions(const commonItems::ModFilesystem& modFS)
 {
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/strategic_regions/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/strategic_regions"))
 	{
 		if (fileName.extension() != ".txt")
 			continue;
