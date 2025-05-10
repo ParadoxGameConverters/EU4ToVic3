@@ -42,7 +42,7 @@ std::pair<std::shared_ptr<V3::Country>, std::shared_ptr<V3::Country>> prepCountr
 	return std::pair{newCountry, newCountry2};
 }
 
-const auto modFS = commonItems::ModFilesystem(std::filesystem::path("TestFiles/vic3installation/game/"), {});
+const auto modFS = commonItems::ModFilesystem(std::filesystem::path("TestFiles/vic3installation/game"), {});
 
 V3::ClayManager prepClayManager()
 {
