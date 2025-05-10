@@ -98,7 +98,7 @@ class Configuration: commonItems::parser
 	std::filesystem::path EU4Path;
 	std::filesystem::path EU4DocumentsPath;
 	std::filesystem::path Vic3Path;
-	std::string outputName;
+	std::filesystem::path outputName;
 };
 
 #endif // CONFIGURATION_H

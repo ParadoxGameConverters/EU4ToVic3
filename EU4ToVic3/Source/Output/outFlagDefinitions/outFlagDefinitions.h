@@ -4,7 +4,7 @@
 
 namespace OUT
 {
-void exportFlagDefinitions(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries);
+void exportFlagDefinitions(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries);
 
 } // namespace OUT
 

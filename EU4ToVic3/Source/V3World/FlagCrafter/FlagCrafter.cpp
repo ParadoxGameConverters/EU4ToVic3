@@ -223,7 +223,7 @@ bool V3::FlagCrafter::tryAssigningFlagViaValue(const std::shared_ptr<Country>& c
 
 void V3::FlagCrafter::craftCustomFlag(const std::shared_ptr<Country>& country)
 {
-	std::string baseFlagFolder = "blankMod/output/gfx/coat_of_arms/textured_emblems/";
+	std::filesystem::path baseFlagFolder = "blankMod/output/gfx/coat_of_arms/textured_emblems";
 
 	const auto& v3Tag = country->getTag();
 	const auto& customColors = *country->getProcessedData().customColors;
@@ -259,8 +259,8 @@ void V3::FlagCrafter::craftCustomFlag(const std::shared_ptr<Country>& country)
 
 		const auto& suffix = flagFileSuffixes[i];
 		const auto suffixExtension = suffix + ".tga";
-		auto sourceEmblemPath = baseFlagFolder + "/eu4_custom_emblems/" + std::to_string(emblem) + suffixExtension;
-		auto sourceFlagPath = baseFlagFolder + "/eu4_custom_bases/" + baseFlagStr + ".tga";
+		auto sourceEmblemPath = baseFlagFolder / "eu4_custom_emblems" / (std::to_string(emblem) + suffixExtension);
+		auto sourceFlagPath = baseFlagFolder / "eu4_custom_bases" / (baseFlagStr + ".tga");
 
 		if (const auto flagFileFound = commonItems::DoesFileExist(sourceFlagPath) && commonItems::DoesFileExist(sourceEmblemPath); flagFileFound)
 		{
@@ -310,8 +310,8 @@ void V3::FlagCrafter::craftCustomFlag(const std::shared_ptr<Country>& country)
 		else
 		{
 			if (!commonItems::DoesFileExist(sourceFlagPath))
-				throw std::runtime_error("Could not find " + sourceFlagPath);
-			throw std::runtime_error("Could not find " + sourceEmblemPath);
+				throw std::runtime_error("Could not find " + sourceFlagPath.string());
+			throw std::runtime_error("Could not find " + sourceEmblemPath.string());
 		}
 	}
 }
@@ -319,14 +319,14 @@ void V3::FlagCrafter::craftCustomFlag(const std::shared_ptr<Country>& country)
 bool V3::FlagCrafter::createCustomFlag(const commonItems::Color& c1,
 	 const commonItems::Color& c2,
 	 const commonItems::Color& c3,
-	 const std::string& emblemPath,
-	 const std::string& basePath,
-	 const std::string& targetPath)
+	 const std::filesystem::path& emblemPath,
+	 const std::filesystem::path& basePath,
+	 const std::filesystem::path& targetPath)
 {
 	tga_image base;
 	tga_image emblem;
 
-	auto res = tga_read(&base, basePath.c_str());
+	auto res = tga_read(&base, basePath.string().c_str());
 	if (res)
 	{
 		Log(LogLevel::Error) << "Failed to create custom flag: could not open " << basePath;
@@ -334,7 +334,7 @@ bool V3::FlagCrafter::createCustomFlag(const commonItems::Color& c1,
 		return false;
 	}
 
-	res = tga_read(&emblem, emblemPath.c_str());
+	res = tga_read(&emblem, emblemPath.string().c_str());
 	if (res)
 	{
 		Log(LogLevel::Error) << "Failed to create custom flag: could not open " << emblemPath;
@@ -402,7 +402,7 @@ bool V3::FlagCrafter::createCustomFlag(const commonItems::Color& c1,
 		}
 	}
 
-	res = tga_write(targetPath.c_str(), &base);
+	res = tga_write(targetPath.string().c_str(), &base);
 	if (res)
 	{
 		Log(LogLevel::Error) << "Failed to create custom flag: could not write to " << targetPath;

@@ -106,17 +106,17 @@ void outCultureModifierTypeDefs(std::ostream& output, const mappers::CultureDef&
 
 } // namespace
 
-void OUT::exportCultures(const std::string& outputName, const std::map<std::string, mappers::CultureDef>& cultures)
+void OUT::exportCultures(const std::filesystem::path& outputName, const std::map<std::string, mappers::CultureDef>& cultures)
 {
-	std::ofstream output("output/" + outputName + "/common/cultures/99_converted_cultures.txt");
+	std::ofstream output("output" / outputName / "common/cultures/99_converted_cultures.txt");
 	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName + "/common/religions/99_converted_cultures.txt");
-	std::ofstream outputCultureStatics("output/" + outputName + "/common/static_modifiers/99_converted_cultures_static_modifiers.txt");
+		throw std::runtime_error("Could not create " + outputName.string() + "/common/religions/99_converted_cultures.txt");
+	std::ofstream outputCultureStatics("output" / outputName / "common/static_modifiers/99_converted_cultures_static_modifiers.txt");
 	if (!outputCultureStatics.is_open())
-		throw std::runtime_error("Could not create " + outputName + "/common/static_modifiers/99_converted_cultures_static_modifiers.txt");
-	std::ofstream outputCultureModifierTypes("output/" + outputName + "/common/modifier_type_definitions/99_converted_cultures_modifier_type_defs.txt");
+		throw std::runtime_error("Could not create " + outputName.string() + "/common/static_modifiers/99_converted_cultures_static_modifiers.txt");
+	std::ofstream outputCultureModifierTypes("output" / outputName / "common/modifier_type_definitions/99_converted_cultures_modifier_type_defs.txt");
 	if (!outputCultureModifierTypes.is_open())
-		throw std::runtime_error("Could not create " + outputName + "/common/modifier_type_definitions/99_converted_cultures_modifier_type_defs.txt");
+		throw std::runtime_error("Could not create " + outputName.string() + "/common/modifier_type_definitions/99_converted_cultures_modifier_type_defs.txt");
 
 	output << commonItems::utf8BOM << "\n";
 	outputCultureStatics << commonItems::utf8BOM << "\n";

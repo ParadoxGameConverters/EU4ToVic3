@@ -48,9 +48,9 @@ class FlagCrafter
 	[[nodiscard]] static bool createCustomFlag(const commonItems::Color& c1,
 		 const commonItems::Color& c2,
 		 const commonItems::Color& c3,
-		 const std::string& emblemPath,
-		 const std::string& basePath,
-		 const std::string& targetPath);
+		 const std::filesystem::path& emblemPath,
+		 const std::filesystem::path& basePath,
+		 const std::filesystem::path& targetPath);
 
 	FlagColorLoader flagColorLoader;
 

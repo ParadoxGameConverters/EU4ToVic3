@@ -4,7 +4,7 @@
 
 namespace OUT
 {
-void exportMetadataFile(const std::string& outputName);
+void exportMetadataFile(const std::filesystem::path& outputName);
 
 } // namespace OUT
 

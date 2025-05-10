@@ -131,27 +131,27 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Progress) << "99 %";
 }
 
-void OUT::exportVersion(const std::string& outputName, const commonItems::ConverterVersion& converterVersion)
+void OUT::exportVersion(const std::filesystem::path& outputName, const commonItems::ConverterVersion& converterVersion)
 {
-	std::ofstream output("output/" + outputName + "/eu4tovic3_version.txt");
+	std::ofstream output("output" / outputName / "eu4tovic3_version.txt");
 	if (!output.is_open())
 		throw std::runtime_error("Error writing version file! Is the output folder writable?");
 	output << converterVersion;
 	output.close();
 }
 
-void OUT::exportBookmark(const std::string& outputName, const Configuration& configuration, const DatingData& datingData)
+void OUT::exportBookmark(const std::filesystem::path& outputName, const Configuration& configuration, const DatingData& datingData)
 {
 	if (configuration.configBlock.startDate == Configuration::STARTDATE::Vanilla)
 		return;
-	std::ofstream output("output/" + outputName + "/common/defines/99_converter_defines.txt");
+	std::ofstream output("output" / outputName / "common/defines/99_converter_defines.txt");
 	if (!output.is_open())
 		throw std::runtime_error("Error writing defines file! Is the output folder writable?");
 	output << commonItems::utf8BOM << "NGame = { START_DATE = \"" << datingData.lastEU4Date << "\" }\n";
 	output.close();
 }
 
-void OUT::copyCustomFlags(const std::string& outputName)
+void OUT::copyCustomFlags(const std::filesystem::path& outputName)
 {
 	auto counter = 0;
 	if (!commonItems::DoesFolderExist(std::filesystem::path("flags.tmp")))

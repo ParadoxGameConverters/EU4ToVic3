@@ -151,16 +151,21 @@ void Configuration::verifyVic3Path()
 
 void Configuration::setOutputName()
 {
+	std::string outputNameString;
 	if (outputName.empty())
 	{
-		outputName = EU4SaveGamePath.filename().stem().string();
+		outputNameString = EU4SaveGamePath.filename().stem().string();
+	}
+	else
+	{
+		outputNameString = outputName.string();
 	}
 
-	outputName = replaceCharacter(outputName, '-');
-	outputName = replaceCharacter(outputName, ' ');
+	outputNameString = replaceCharacter(outputNameString, '-');
+	outputNameString = replaceCharacter(outputNameString, ' ');
 
-	outputName = commonItems::normalizeUTF8Path(outputName);
-	Log(LogLevel::Info) << "Using output name " << outputName;
+	outputName = commonItems::normalizeUTF8Path(outputNameString);
+	Log(LogLevel::Info) << "Using output name " << outputName.string();
 }
 
 void Configuration::verifyEU4Version(const commonItems::ConverterVersion& converterVersion) const
