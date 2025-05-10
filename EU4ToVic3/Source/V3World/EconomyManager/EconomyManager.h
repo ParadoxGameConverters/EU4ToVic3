@@ -58,7 +58,7 @@ class EconomyManager
   public:
 	EconomyManager() = default;
 	void loadCentralizedStates(const std::map<std::string, std::shared_ptr<Country>>& countries);
-	void loadMappersAndConfigs(const commonItems::ModFilesystem& modFS, const std::string& filePath = "");
+	void loadMappersAndConfigs(const commonItems::ModFilesystem& modFS, const std::filesystem::path& filePath = "");
 
 	void assignCountryCPBudgets(Configuration::ECONOMY economyType,
 		 Configuration::STARTDATE startDate,

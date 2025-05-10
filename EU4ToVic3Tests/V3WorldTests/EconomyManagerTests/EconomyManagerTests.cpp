@@ -129,7 +129,7 @@ TEST(V3World_EconomyManagerTests, GlobalCPScalesByPopulation)
 
 	V3::EconomyManager econManager;
 	econManager.loadCentralizedStates(politicalManager.getCountries());
-	econManager.loadMappersAndConfigs(modFS, "TestFiles/");
+	econManager.loadMappersAndConfigs(modFS, "TestFiles");
 
 	EXPECT_EQ(5500, politicalManager.getWorldPopCount());
 	EXPECT_EQ(4600, V3::PoliticalManager::getCountriesPopCount(econManager.getCentralizedCountries()));

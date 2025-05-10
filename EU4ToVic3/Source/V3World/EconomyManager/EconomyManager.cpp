@@ -45,7 +45,7 @@ void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::
 	Log(LogLevel::Info) << "<> Loaded " << centralizedCountries.size() << " Centralized Countries.";
 }
 
-void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem& modFS, const std::string& filePath)
+void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem& modFS, const std::filesystem::path& filePath)
 {
 	// If anything else ends up needing these, pass them in from World instead of loading direct in Econ
 
