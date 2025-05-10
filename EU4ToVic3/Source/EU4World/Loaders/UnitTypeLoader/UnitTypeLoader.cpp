@@ -25,11 +25,12 @@ void EU4::UnitTypeLoader::loadUnitType(const std::string& unitName, std::istream
 void EU4::UnitTypeLoader::addUnitFileToRegimentTypeMap(const std::filesystem::path& directory, const std::filesystem::path& filename)
 {
 	const auto name = filename.stem().string();
+	const auto path = directory / filename;
 
-	const UnitTypeParser unitType(directory / filename);
+	const UnitTypeParser unitType(path);
 	if (unitType.getUnitType().unitType.empty())
 	{
-		Log(LogLevel::Warning) << "Unit file for " << name << " at: " << directory << "/" << filename << " has no type!";
+		Log(LogLevel::Warning) << "Unit file for " << name << " at: " << path << " has no type!";
 		return;
 	}
 
