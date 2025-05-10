@@ -33,7 +33,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	if (commonItems::DoesFolderExist("output" / outputName))
 	{
 		Log(LogLevel::Info) << "<< Deleting existing mod folder.";
-		if (std::filesystem::remove_all("output" / outputName) != static_cast<std::uintmax_t>(-1))
+		if (std::filesystem::remove_all("output" / outputName) == static_cast<std::uintmax_t>(-1))
 			throw std::runtime_error("Could not delete existing output" + outputName.string() + "! Please delete it manually and retry.");
 	}
 	Log(LogLevel::Progress) << "81 %";

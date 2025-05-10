@@ -108,7 +108,7 @@ void V3::FlagCrafter::distributeAvailableFlags(const std::map<std::string, std::
 	Log(LogLevel::Info) << "-> Distributing Available Flags.";
 
 	// prep the battleground.
-	if (std::filesystem::remove_all("flags.tmp") != static_cast<std::uintmax_t>(-1))
+	if (std::filesystem::exists("flags.tmp") && std::filesystem::remove_all("flags.tmp") == static_cast<std::uintmax_t>(-1))
 		throw std::runtime_error("Could not delete flags.tmp folder!");
 	if (!std::filesystem::create_directory("flags.tmp"))
 		throw std::runtime_error("Could not create flags.tmp folder!");

@@ -146,7 +146,7 @@ void Configuration::verifyVic3Path()
 	if (!commonItems::DoesFileExist(Vic3Path / "game/map_data/provinces.png"))
 		throw std::runtime_error(Vic3Path.string() + " does not appear to be a valid Vic3 install!");
 	Log(LogLevel::Info) << "\tVic3 install path is " << Vic3Path;
-	Vic3Path += "/game/"; // We're adding "/game/" since all we ever need from now on is in that subdirectory.
+	Vic3Path += "/game"; // We're adding "/game/" since all we ever need from now on is in that subdirectory.
 }
 
 void Configuration::setOutputName()
