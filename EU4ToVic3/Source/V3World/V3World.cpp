@@ -9,15 +9,15 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Mods overrideMods;
 	// We use decentralized world mod to fill out wasteland and out-of-scope clay with decentralized tribes.
 	if (!configuration.configBlock.vn)
-		overrideMods.emplace_back(Mod{"Decentralized World", "configurables/decentralized_world/"});
+		overrideMods.emplace_back(Mod{"Decentralized World", "configurables/decentralized_world"});
 	const auto vanillaFS = commonItems::ModFilesystem(V3Path, {});
 	const auto dwFS = commonItems::ModFilesystem(V3Path, overrideMods);
-	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output/"});
+	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output"});
 	const auto allFS = commonItems::ModFilesystem(V3Path, overrideMods);
-	overrideMods.emplace_back(Mod{"TO", "configurables/third_odyssey/"});
+	overrideMods.emplace_back(Mod{"TO", "configurables/third_odyssey"});
 	const auto toFS = commonItems::ModFilesystem(V3Path, overrideMods);
 	overrideMods.clear();
-	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output/"});
+	overrideMods.emplace_back(Mod{"Blankmod", "blankMod/output"});
 	const auto blankModFS = commonItems::ModFilesystem(V3Path, overrideMods);
 
 	Log(LogLevel::Progress) << "45 %";

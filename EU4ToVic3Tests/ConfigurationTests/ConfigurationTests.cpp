@@ -30,7 +30,7 @@ TEST(ConfigurationTests, InstallationPathsCanBeUpdatedRetrieved)
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
 	EXPECT_EQ(std::filesystem::path("TestFiles/eu4installation"), configuration.getEU4Path());
-	EXPECT_EQ(std::filesystem::path("TestFiles/vic3installation/game/"), configuration.getVic3Path());
+	EXPECT_EQ(std::filesystem::path("TestFiles/vic3installation/game"), configuration.getVic3Path());
 }
 
 TEST(ConfigurationTests, SaveAndDocumentsPathCanBeRetrieved)
