@@ -2,6 +2,7 @@
 #define AI_STRATEGY_MAPPER
 #include "AIStrategyMapping.h"
 #include "Parser.h"
+#include <filesystem>
 
 namespace mappers
 {
@@ -9,7 +10,7 @@ class AIStrategyMapper: commonItems::parser
 {
   public:
 	AIStrategyMapper() = default;
-	void loadMappingRules(const std::string& filePath);
+	void loadMappingRules(const std::filesystem::path& filePath);
 
 	[[nodiscard]] std::map<std::string, int> getAdmStrategies(const V3::Country& country, const V3::ClayManager& clayManager) const;
 	[[nodiscard]] std::map<std::string, int> getDipStrategies(const V3::Country& country, const V3::ClayManager& clayManager) const;

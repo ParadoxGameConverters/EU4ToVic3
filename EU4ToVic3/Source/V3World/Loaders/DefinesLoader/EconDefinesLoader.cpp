@@ -2,7 +2,7 @@
 #include "CommonRegexes.h"
 #include "ParserHelpers.h"
 
-void V3::EconDefinesLoader::loadEconDefines(const std::string& filePath)
+void V3::EconDefinesLoader::loadEconDefines(const std::filesystem::path& filePath)
 {
 	registerKeys();
 	parseFile(filePath);

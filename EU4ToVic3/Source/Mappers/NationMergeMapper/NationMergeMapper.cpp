@@ -1,11 +1,12 @@
 #include "NationMergeMapper.h"
 #include "CommonRegexes.h"
 #include "ParserHelpers.h"
+#include <filesystem>
 
 void mappers::NationMergeMapper::loadNationMerge()
 {
 	registerKeys();
-	parseFile("configurables/merge_nations.txt");
+	parseFile(std::filesystem::path("configurables/merge_nations.txt"));
 	clearRegisteredKeywords();
 }
 

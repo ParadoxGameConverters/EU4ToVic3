@@ -2,6 +2,7 @@
 #define CULTURE_TRAIT_MAPPER_H
 #include "CultureTraitMapping.h"
 #include "Parser.h"
+#include <filesystem>
 
 namespace mappers
 {
@@ -9,7 +10,7 @@ class CultureTraitMapper: commonItems::parser
 {
   public:
 	CultureTraitMapper() = default;
-	void loadMappingRules(const std::string& filePath);
+	void loadMappingRules(const std::filesystem::path& filePath);
 	void loadMappingRules(std::istream& theStream);
 
 	[[nodiscard]] std::optional<CultureTraitMapping> getTraitsForCulture(const std::string& eu4Culture, const std::string& eu4CultureGroup) const;

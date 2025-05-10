@@ -9,7 +9,7 @@ EU4::UnitTypeParser::UnitTypeParser(std::istream& theStream)
 	clearRegisteredKeywords();
 }
 
-EU4::UnitTypeParser::UnitTypeParser(const std::string& filePath)
+EU4::UnitTypeParser::UnitTypeParser(const std::filesystem::path& filePath)
 {
 	registerKeys();
 	parseFile(filePath);

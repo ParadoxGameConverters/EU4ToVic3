@@ -1,6 +1,7 @@
 #ifndef COASTAL_MAPPER_H
 #define COASTAL_MAPPER_H
 #include "Parser.h"
+#include <filesystem>
 
 namespace mappers
 {
@@ -8,7 +9,7 @@ class CoastalMapper: commonItems::parser
 {
   public:
 	CoastalMapper() = default;
-	void loadAdjacencies(const std::string& filePath);
+	void loadAdjacencies(const std::filesystem::path& filePath);
 
 	[[nodiscard]] std::set<std::string> getAdjacencies(const std::string& province) const;
 

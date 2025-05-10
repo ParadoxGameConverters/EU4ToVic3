@@ -4,12 +4,13 @@
 #include "ParserHelpers.h"
 #include "SuperRegionParser.h"
 #include <cmath>
+#include <filesystem>
 
 void mappers::SuperGroupMapper::loadSuperGroups()
 {
 	Log(LogLevel::Info) << "-> Parsing starting supergroups.";
 	registerKeys();
-	parseFile("configurables/world_supergroups.txt");
+	parseFile(std::filesystem::path("configurables/world_supergroups.txt"));
 	clearRegisteredKeywords();
 }
 

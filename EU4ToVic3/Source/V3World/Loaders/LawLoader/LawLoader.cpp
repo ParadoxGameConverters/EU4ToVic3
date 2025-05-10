@@ -9,9 +9,9 @@ void V3::LawLoader::loadLaws(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Loading Laws.";
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/laws/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/laws"))
 	{
-		if (getExtension(fileName) == "txt")
+		if (fileName.extension() == ".txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

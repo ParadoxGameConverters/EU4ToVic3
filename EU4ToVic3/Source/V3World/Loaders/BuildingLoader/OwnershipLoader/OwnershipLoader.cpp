@@ -1,6 +1,6 @@
 #include "OwnershipLoader.h"
 
-void V3::OwnershipLoader::loadOwnership(const std::string& filePath)
+void V3::OwnershipLoader::loadOwnership(const std::filesystem::path& filePath)
 {
 	registerKeys();
 	parseFile(filePath);

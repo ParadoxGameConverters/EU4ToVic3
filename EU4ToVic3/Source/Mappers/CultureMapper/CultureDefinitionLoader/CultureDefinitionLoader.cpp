@@ -9,17 +9,17 @@ void mappers::CultureDefinitionLoader::loadDefinitions(const commonItems::ModFil
 {
 	Log(LogLevel::Info) << "-> Loading culture definitions.";
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/cultures/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/cultures"))
 	{
-		if (getExtension(fileName) != "txt")
+		if (fileName.extension() != ".txt")
 			continue;
 
-		if (fileName.find("99_") != std::string::npos)
+		if (fileName.string().find("99_") != std::string::npos)
 			skipProcessing = false;
 		else
 			skipProcessing = true;
 
-		if (fileName.find("blankMod") != std::string::npos)
+		if (fileName.string().find("blankMod") != std::string::npos)
 			skipExport = true;
 		else
 			skipExport = false;

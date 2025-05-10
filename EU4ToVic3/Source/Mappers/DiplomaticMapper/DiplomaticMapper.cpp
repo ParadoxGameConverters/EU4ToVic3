@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-void mappers::DiplomaticMapper::loadMappingRules(const std::string& filePath)
+void mappers::DiplomaticMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Parsing Diplomatic Mapping Rules.";
 	registerKeys();

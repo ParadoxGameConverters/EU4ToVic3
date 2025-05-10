@@ -11,7 +11,7 @@ class TerrainModifierLoader: commonItems::parser
   public:
 	TerrainModifierLoader() = default;
 
-	void loadTerrainModifiers(const std::string& filePath);
+	void loadTerrainModifiers(const std::filesystem::path& filePath);
 	void loadTerrainModifiers(std::istream& theStream);
 	[[nodiscard]] const auto& getTerrainStateModifiers() const { return stateTerrainModifiers; }
 	[[nodiscard]] const auto& getTerrainBuildingModifiers() const { return buildingTerrainModifiers; }

@@ -2,6 +2,7 @@
 #define COUNTRY_MAPPER_H
 #include "CountryMapping.h"
 #include "Parser.h"
+#include <filesystem>
 
 namespace EU4
 {
@@ -14,7 +15,7 @@ class CountryMapper: commonItems::parser
 {
   public:
 	CountryMapper() = default;
-	void loadMappingRules(const std::string& filePath);
+	void loadMappingRules(const std::filesystem::path& filePath);
 	void loadMappingRules(std::istream& theStream);
 
 	void registerKnownVanillaV3Tag(const std::string& tag) { knownVanillaV3Tags.emplace(tag); }

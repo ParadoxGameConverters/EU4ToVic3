@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-void mappers::IGIdeologiesMapper::loadMappingRules(const std::string& filePath)
+void mappers::IGIdeologiesMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading IG Ideology Mod Rules.";
 	registerKeys();

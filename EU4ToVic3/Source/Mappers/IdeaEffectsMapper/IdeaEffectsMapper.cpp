@@ -2,7 +2,7 @@
 #include "CommonRegexes.h"
 #include "Log.h"
 
-void mappers::IdeaEffectsMapper::loadMappingRules(const std::string& filePath)
+void mappers::IdeaEffectsMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading Idea Effects.";
 	registerKeys();

@@ -26,7 +26,7 @@ std::vector<std::string> sortMap(const std::map<std::string, int>& theMap)
 } // namespace
 
 
-void mappers::AISecretGoalMapper::loadMappingRules(const std::string& filePath)
+void mappers::AISecretGoalMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading AI Secret Goal mapping rules.";
 	registerKeys();

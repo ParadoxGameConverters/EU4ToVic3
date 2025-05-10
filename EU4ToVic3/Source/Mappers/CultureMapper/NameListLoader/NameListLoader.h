@@ -2,6 +2,7 @@
 #define NAME_LIST_LOADER_H
 #include "NameListEntry.h"
 #include "Parser.h"
+#include <filesystem>
 
 namespace mappers
 {
@@ -9,7 +10,7 @@ class NameListLoader: commonItems::parser
 {
   public:
 	NameListLoader() = default;
-	void loadNameLists(const std::string& nameListPath);
+	void loadNameLists(const std::filesystem::path& nameListPath);
 	void loadNameLists(std::istream& theStream);
 
 	[[nodiscard]] std::optional<NameListEntry> getNameList(const std::string& nameListName) const;

@@ -9,7 +9,7 @@ class NationalBudgetLoader: commonItems::parser
 {
   public:
 	NationalBudgetLoader() = default;
-	void loadNationalBudget(const std::string& filePath);
+	void loadNationalBudget(const std::filesystem::path& filePath);
 	void buildBuildingSectorMap();
 
 	[[nodiscard]] const auto& getSectorBlueprints() const { return sectorBlueprints; }

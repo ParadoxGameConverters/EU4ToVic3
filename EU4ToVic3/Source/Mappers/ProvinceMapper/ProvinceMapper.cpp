@@ -4,7 +4,7 @@
 #include "ParserHelpers.h"
 #include "ProvinceMapping.h"
 
-void mappers::ProvinceMapper::loadProvinceMappings(const std::string& fileName)
+void mappers::ProvinceMapper::loadProvinceMappings(const std::filesystem::path& fileName)
 {
 	Log(LogLevel::Info) << "-> Parsing province mapping rules.";
 	registerKeys();

@@ -5,9 +5,9 @@
 void V3::ProductionMethodGroupLoader::loadPMGroups(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/production_method_groups/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/production_method_groups"))
 	{
-		if (getExtension(fileName) == "txt")
+		if (fileName.extension() == ".txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

@@ -3,7 +3,7 @@
 #include "ParserHelpers.h"
 #include "PopulationSetupMapping.h"
 
-void mappers::PopulationSetupMapper::loadMappingRules(const std::string& filePath)
+void mappers::PopulationSetupMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Parsing population setup rules.";
 	registerKeys();

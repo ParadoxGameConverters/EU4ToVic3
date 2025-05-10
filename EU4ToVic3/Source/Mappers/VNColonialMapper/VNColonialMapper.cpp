@@ -2,7 +2,7 @@
 #include "CommonRegexes.h"
 #include "ParserHelpers.h"
 
-void mappers::VNColonialMapper::loadMappingRules(const std::string& fileName)
+void mappers::VNColonialMapper::loadMappingRules(const std::filesystem::path& fileName)
 {
 	registerKeys();
 	parseFile(fileName);

@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-void mappers::ExcludedTradeCompaniesMapper::loadMappingRules(const std::string& filePath)
+void mappers::ExcludedTradeCompaniesMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading Excluded Trade Company Rules.";
 	registerKeys();

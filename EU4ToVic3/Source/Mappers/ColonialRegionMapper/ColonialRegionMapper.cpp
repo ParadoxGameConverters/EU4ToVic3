@@ -4,7 +4,7 @@
 #include "Log.h"
 #include <ranges>
 
-void mappers::ColonialRegionMapper::loadMappingRules(const std::string& filePath)
+void mappers::ColonialRegionMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading colonial region definitions.";
 	registerKeys();

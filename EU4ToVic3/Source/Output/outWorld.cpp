@@ -154,14 +154,16 @@ void OUT::exportBookmark(const std::string& outputName, const Configuration& con
 void OUT::copyCustomFlags(const std::string& outputName)
 {
 	auto counter = 0;
-	if (!commonItems::DoesFolderExist("flags.tmp"))
+	if (!commonItems::DoesFolderExist(std::filesystem::path("flags.tmp")))
 	{
 		Log(LogLevel::Warning) << "Flag folder flags.tmp not found!";
 		return;
 	}
-	for (const auto& filename: commonItems::GetAllFilesInFolder("flags.tmp"))
+	for (const auto& filename: commonItems::GetAllFilesInFolder(std::filesystem::path("flags.tmp")))
 	{
-		if (commonItems::TryCopyFile("flags.tmp/" + filename, "output/" + outputName + "/gfx/coat_of_arms/textured_emblems/custom_export/" + filename))
+		if (std::filesystem::copy_file(std::filesystem::path("flags.tmp") / filename,
+				  std::filesystem::path("output") / outputName / "gfx/coat_of_arms/textured_emblems/custom_export" / filename,
+				  std::filesystem::copy_options::overwrite_existing))
 			++counter;
 	}
 	Log(LogLevel::Info) << "<< " << counter << " flags copied.";

@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-void mappers::CultureTraitMapper::loadMappingRules(const std::string& filePath)
+void mappers::CultureTraitMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Parsing culture trait mapping rules.";
 	registerKeys();

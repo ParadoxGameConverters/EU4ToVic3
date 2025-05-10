@@ -45,7 +45,7 @@ void V3::EconomyManager::loadCentralizedStates(const std::map<std::string, std::
 	Log(LogLevel::Info) << "<> Loaded " << centralizedCountries.size() << " Centralized Countries.";
 }
 
-void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem& modFS, const std::string& filePath)
+void V3::EconomyManager::loadMappersAndConfigs(const commonItems::ModFilesystem& modFS, const std::filesystem::path& filePath)
 {
 	// If anything else ends up needing these, pass them in from World instead of loading direct in Econ
 
@@ -958,12 +958,12 @@ std::map<std::string, double> V3::EconomyManager::calcInvestorFractions(const st
 	return investorWeights;
 }
 
-void V3::EconomyManager::loadTerrainModifierMatrices(const std::string& filePath)
+void V3::EconomyManager::loadTerrainModifierMatrices(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading Terrain Modifier Matrices.";
 
 	TerrainModifierLoader terrainModifierLoader;
-	terrainModifierLoader.loadTerrainModifiers(filePath + "configurables/economy/terrain_econ_modifiers.txt");
+	terrainModifierLoader.loadTerrainModifiers(filePath / "configurables/economy/terrain_econ_modifiers.txt");
 
 	stateTerrainModifiers = terrainModifierLoader.getTerrainStateModifiers();
 	buildingTerrainModifiers = terrainModifierLoader.getTerrainBuildingModifiers();
@@ -1005,34 +1005,34 @@ void V3::EconomyManager::loadBuildingInformation(const commonItems::ModFilesyste
 							  << PMs.size() << " PMs and " << PMGroups.size() << " PM groups.";
 }
 
-void V3::EconomyManager::loadBuildingMappings(const std::string& filePath)
+void V3::EconomyManager::loadBuildingMappings(const std::filesystem::path& filePath)
 {
-	buildingMapper.loadBuildingMappings(filePath + "configurables/economy/buildings_map.txt");
+	buildingMapper.loadBuildingMappings(filePath / "configurables/economy/buildings_map.txt");
 }
 
-void V3::EconomyManager::loadPMMappings(const std::string& filePath)
+void V3::EconomyManager::loadPMMappings(const std::filesystem::path& filePath)
 {
-	PMMapper.loadRules(filePath + "configurables/economy/production_method_rules.txt");
+	PMMapper.loadRules(filePath / "configurables/economy/production_method_rules.txt");
 }
 
-void V3::EconomyManager::loadEconDefines(const std::string& filePath)
+void V3::EconomyManager::loadEconDefines(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading economy defines.";
 
-	econDefines.loadEconDefines(filePath + "configurables/economy/econ_defines.txt");
+	econDefines.loadEconDefines(filePath / "configurables/economy/econ_defines.txt");
 
 	Log(LogLevel::Info) << "<> Economy defines loaded.";
 }
 
-void V3::EconomyManager::loadNationalBudgets(const std::string& filePath)
+void V3::EconomyManager::loadNationalBudgets(const std::filesystem::path& filePath)
 {
-	nationalBudgets.loadNationalBudget(filePath + "configurables/economy/national_budget.txt");
+	nationalBudgets.loadNationalBudget(filePath / "configurables/economy/national_budget.txt");
 	nationalBudgets.buildBuildingSectorMap();
 }
 
-void V3::EconomyManager::loadOwnerships(const std::string& filePath)
+void V3::EconomyManager::loadOwnerships(const std::filesystem::path& filePath)
 {
-	ownershipLoader.loadOwnership(filePath + "configurables/economy/ownership.txt");
+	ownershipLoader.loadOwnership(filePath / "configurables/economy/ownership.txt");
 }
 
 void V3::EconomyManager::loadTechMap(const commonItems::ModFilesystem& modFS)

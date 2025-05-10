@@ -3,7 +3,7 @@
 
 namespace
 {
-auto modFS = commonItems::ModFilesystem("TestFiles/eu4installation", {});
+auto modFS = commonItems::ModFilesystem(std::filesystem::path("TestFiles/eu4installation"), {});
 }
 
 TEST(EU4World_TradeCompanyLoaderTests, TradeCompanyProvincesCanBePinged)

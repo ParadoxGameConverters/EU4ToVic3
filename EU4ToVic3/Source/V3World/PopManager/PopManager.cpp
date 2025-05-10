@@ -511,7 +511,7 @@ int V3::PopManager::generatePopCountForShovedSubState(const std::shared_ptr<SubS
 	return static_cast<int>(round(subStateRatio * static_cast<double>(unassignedPopCount)));
 }
 
-void V3::PopManager::loadMinorityPopRules(const std::string& filePath)
+void V3::PopManager::loadMinorityPopRules(const std::filesystem::path& filePath)
 {
 	minorityPopMapper.loadMappingRules(filePath);
 }
@@ -557,7 +557,7 @@ std::map<std::string, V3::StatePops> V3::PopManager::injectReligionsIntoPops(con
 	return newVanillaPops;
 }
 
-void V3::PopManager::loadSlaveCultureRules(const std::string& filePath)
+void V3::PopManager::loadSlaveCultureRules(const std::filesystem::path& filePath)
 {
 	slaveCultureMapper.loadMappingRules(filePath);
 }
