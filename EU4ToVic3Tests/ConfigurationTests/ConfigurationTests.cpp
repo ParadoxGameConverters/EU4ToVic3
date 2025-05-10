@@ -56,7 +56,7 @@ TEST(ConfigurationTests, OutputNameNormalizesSetsFromSavegameName)
 	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
-	EXPECT_EQ("autosave", configuration.getOutputName());
+	EXPECT_EQ("autosave", configuration.getOutputName().string());
 }
 
 TEST(ConfigurationTests, OutputNameNormalizesItselfFromSavegameName)
@@ -68,7 +68,7 @@ TEST(ConfigurationTests, OutputNameNormalizesItselfFromSavegameName)
 	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
-	EXPECT_EQ("autosave___something", configuration.getOutputName());
+	EXPECT_EQ("autosave___something", configuration.getOutputName().string());
 }
 
 TEST(ConfigurationTests, OutputNameSetsFromOverrideName)
