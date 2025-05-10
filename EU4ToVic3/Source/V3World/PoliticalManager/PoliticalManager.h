@@ -58,19 +58,19 @@ class PoliticalManager
 
 	void initializeVanillaCountries(const commonItems::ModFilesystem& modFS, const commonItems::ModFilesystem& vanillaFS);
 	void loadCountryMapper(const std::shared_ptr<mappers::CountryMapper>& theCountryMapper);
-	void loadPopulationSetupMapperRules(const std::string& filePath);
-	void loadIdeaEffectMapperRules(const std::string& filePath);
-	void loadTechSetupMapperRules(const std::string& filePath);
-	void loadLawMapperRules(const std::string& filePath);
+	void loadPopulationSetupMapperRules(const std::filesystem::path& filePath);
+	void loadIdeaEffectMapperRules(const std::filesystem::path& filePath);
+	void loadTechSetupMapperRules(const std::filesystem::path& filePath);
+	void loadLawMapperRules(const std::filesystem::path& filePath);
 	void loadLawDefinitions(const commonItems::ModFilesystem& modFS);
-	void loadDiplomaticMapperRules(const std::string& filePath);
-	void loadCharacterTraitMapperRules(const std::string& filePath);
-	void loadColonialTagMapperRules(const std::string& filePath);
-	void loadCountryTierMapperRules(const std::string& filePath);
-	void loadIGIdeologiesMapperRules(const std::string& filePath);
+	void loadDiplomaticMapperRules(const std::filesystem::path& filePath);
+	void loadCharacterTraitMapperRules(const std::filesystem::path& filePath);
+	void loadColonialTagMapperRules(const std::filesystem::path& filePath);
+	void loadCountryTierMapperRules(const std::filesystem::path& filePath);
+	void loadIGIdeologiesMapperRules(const std::filesystem::path& filePath);
 	void loadMajorFormables(const std::string& filePath);
-	void loadAIStrategies(const std::string& filePath);
-	void loadAISecretGoals(const std::string& filePath);
+	void loadAIStrategies(const std::filesystem::path& filePath);
+	void loadAISecretGoals(const std::filesystem::path& filePath);
 	void importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries);
 	void generateDecentralizedCountries(const ClayManager& clayManager, const PopManager& popManager);
 	void convertAllCountries(const ClayManager& clayManager,

@@ -47,7 +47,7 @@ class ClayManager
 	void squashAllSubStates(const PoliticalManager& politicalManager);
 	void redistributeResourcesAndLandshares(int splitStatePrimeLandWeight);
 	void addSubState(const std::shared_ptr<SubState>& subState) { substates.emplace_back(subState); }
-	void loadAdjacencies(const std::string& filePath);
+	void loadAdjacencies(const std::filesystem::path& filePath);
 
 	[[nodiscard]] const auto& getStates() const { return states; }
 	[[nodiscard]] const auto& getSuperRegions() const { return superRegions; }
@@ -61,7 +61,7 @@ class ClayManager
 	[[nodiscard]] std::optional<std::string> getParentRegionName(const std::string& stateName) const;
 	[[nodiscard]] std::set<std::string> getStateNamesForRegion(const std::string& regionName) const;
 
-	void loadVNColonialRules(const std::string& fileName) { vnColonialMapper.loadMappingRules(fileName); }
+	void loadVNColonialRules(const std::filesystem::path& fileName) { vnColonialMapper.loadMappingRules(fileName); }
 	[[nodiscard]] const auto& getVNColonialMapper() const { return vnColonialMapper; }
 	[[nodiscard]] std::optional<std::string> getProvinceOwnerTag(const std::string& provinceID) const;
 	[[nodiscard]] std::set<std::string> getStateProvinceIDs(const std::string& stateName) const;

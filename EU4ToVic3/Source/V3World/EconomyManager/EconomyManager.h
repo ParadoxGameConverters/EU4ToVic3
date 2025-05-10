@@ -136,8 +136,8 @@ class EconomyManager
 	void loadTerrainModifierMatrices(const std::string& filePath = "");
 	void loadStateTraits(const commonItems::ModFilesystem& modFS);
 	void loadBuildingInformation(const commonItems::ModFilesystem& modFS);
-	void loadBuildingMappings(const std::string& filePath = "");
-	void loadPMMappings(const std::string& filePath = "");
+	void loadBuildingMappings(const std::filesystem::path& filePath = "");
+	void loadPMMappings(const std::filesystem::path& filePath = "");
 	void loadEconDefines(const std::string& filePath = "");
 	void loadNationalBudgets(const std::string& filePath = "");
 	void loadOwnerships(const std::string& filePath = "");

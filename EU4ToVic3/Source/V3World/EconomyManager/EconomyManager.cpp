@@ -1005,14 +1005,14 @@ void V3::EconomyManager::loadBuildingInformation(const commonItems::ModFilesyste
 							  << PMs.size() << " PMs and " << PMGroups.size() << " PM groups.";
 }
 
-void V3::EconomyManager::loadBuildingMappings(const std::string& filePath)
+void V3::EconomyManager::loadBuildingMappings(const std::filesystem::path& filePath)
 {
-	buildingMapper.loadBuildingMappings(filePath + "configurables/economy/buildings_map.txt");
+	buildingMapper.loadBuildingMappings(filePath / "configurables/economy/buildings_map.txt");
 }
 
-void V3::EconomyManager::loadPMMappings(const std::string& filePath)
+void V3::EconomyManager::loadPMMappings(const std::filesystem::path& filePath)
 {
-	PMMapper.loadRules(filePath + "configurables/economy/production_method_rules.txt");
+	PMMapper.loadRules(filePath / "configurables/economy/production_method_rules.txt");
 }
 
 void V3::EconomyManager::loadEconDefines(const std::string& filePath)

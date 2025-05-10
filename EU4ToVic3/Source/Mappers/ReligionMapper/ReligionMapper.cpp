@@ -59,7 +59,7 @@ void mappers::ReligionMapper::expandReligionMappings(const std::map<std::string,
 }
 
 void mappers::ReligionMapper::generateReligionDefinitions(const commonItems::ModFilesystem& modFS,
-	 const std::string& groupMapPath,
+	 const std::filesystem::path& groupMapPath,
 	 const std::map<std::string, EU4::Religion>& eu4Religions,
 	 const EU4::EU4LocalizationLoader& eu4Locs)
 {

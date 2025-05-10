@@ -29,7 +29,7 @@ class ReligionMapper: commonItems::parser
 
 	void expandReligionMappings(const std::map<std::string, EU4::Religion>& eu4Religions);
 	void generateReligionDefinitions(const commonItems::ModFilesystem& modFS,
-		 const std::string& groupMapPath,
+		 const std::filesystem::path& groupMapPath,
 		 const std::map<std::string, EU4::Religion>& eu4Religions,
 		 const EU4::EU4LocalizationLoader& eu4Locs);
 
