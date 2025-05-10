@@ -51,7 +51,7 @@
     <ClCompile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)lib;$(SolutionDir)commonItems\pch;../commonItems;../commonItems/external/googletest/googletest;../commonItems/external/googletest/googletest/include;../commonItems/external/googletest/googlemock;../commonItems/external/googletest/googlemock/include;../EU4ToVic3/Source;../EU4ToVic3/Source/EU4World/Loaders;../EU4ToVic3/Source/EU4World;../EU4ToVic3/Source/Mappers;../EU4ToVic3/Source/V3World;../EU4ToVic3/Source/Configuration;../commonItems/external/zip/src</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX20_U8PATH_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
