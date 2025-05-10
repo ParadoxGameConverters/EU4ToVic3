@@ -1096,7 +1096,7 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 
 	constexpr double size = 136344.0;
 
-	market.calcPopOrders(size,
+	market.calcPopOrders(static_cast<int>(size),
 		 {
 			  {"poors", 35904 / size},
 			  {"peasants", 90800 / size},

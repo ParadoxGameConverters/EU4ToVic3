@@ -180,7 +180,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "59 %";
 	clayManager.squashAllSubStates(politicalManager);
 	Log(LogLevel::Progress) << "60 %";
-	clayManager.redistributeResourcesAndLandshares(definesLoader.getSplitStatePrimeLandWeight());
+	clayManager.redistributeResourcesAndLandshares(static_cast<int>(definesLoader.getSplitStatePrimeLandWeight()));
 
 	Log(LogLevel::Progress) << "61 %";
 	cultureMapper.injectReligionsIntoCultureDefs(clayManager);
