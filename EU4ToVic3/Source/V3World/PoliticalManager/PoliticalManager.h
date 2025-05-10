@@ -68,7 +68,7 @@ class PoliticalManager
 	void loadColonialTagMapperRules(const std::filesystem::path& filePath);
 	void loadCountryTierMapperRules(const std::filesystem::path& filePath);
 	void loadIGIdeologiesMapperRules(const std::filesystem::path& filePath);
-	void loadMajorFormables(const std::string& filePath);
+	void loadMajorFormables(const std::filesystem::path& filePath);
 	void loadAIStrategies(const std::filesystem::path& filePath);
 	void loadAISecretGoals(const std::filesystem::path& filePath);
 	void importEU4Countries(const std::map<std::string, std::shared_ptr<EU4::Country>>& eu4Countries);

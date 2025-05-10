@@ -1249,7 +1249,7 @@ void V3::PoliticalManager::alterReleasablesReligion()
 	Log(LogLevel::Info) << "<> Updated religion for " << counter << " releasables.";
 }
 
-void V3::PoliticalManager::loadMajorFormables(const std::string& filePath)
+void V3::PoliticalManager::loadMajorFormables(const std::filesystem::path& filePath)
 {
 	majorFormablesLoader.loadMajorFormables(filePath);
 }

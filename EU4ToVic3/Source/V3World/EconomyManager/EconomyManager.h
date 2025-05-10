@@ -133,14 +133,14 @@ class EconomyManager
 		 std::map<std::string, double>& investorIOUs) const;
 	[[nodiscard]] std::map<std::string, std::map<std::string, double>> estimateInvestorBuildings(const Country& country) const;
 
-	void loadTerrainModifierMatrices(const std::string& filePath = "");
+	void loadTerrainModifierMatrices(const std::filesystem::path& filePath = "");
 	void loadStateTraits(const commonItems::ModFilesystem& modFS);
 	void loadBuildingInformation(const commonItems::ModFilesystem& modFS);
 	void loadBuildingMappings(const std::filesystem::path& filePath = "");
 	void loadPMMappings(const std::filesystem::path& filePath = "");
-	void loadEconDefines(const std::string& filePath = "");
-	void loadNationalBudgets(const std::string& filePath = "");
-	void loadOwnerships(const std::string& filePath = "");
+	void loadEconDefines(const std::filesystem::path& filePath = "");
+	void loadNationalBudgets(const std::filesystem::path& filePath = "");
+	void loadOwnerships(const std::filesystem::path& filePath = "");
 	void loadTechMap(const commonItems::ModFilesystem& modFS);
 	void loadDemand(const commonItems::ModFilesystem& modFS);
 	void loadPopTypes(const commonItems::ModFilesystem& modFS);
