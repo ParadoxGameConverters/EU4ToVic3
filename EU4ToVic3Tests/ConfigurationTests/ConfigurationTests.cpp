@@ -52,7 +52,11 @@ TEST(ConfigurationTests, OutputNameNormalizesSetsFromSavegameName)
 	std::stringstream configurationInput;
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-	configurationInput << "SaveGame = \"C:\\autosave.eu4\"\n";
+#ifdef _MSC_BUILD
+	configurationInput << "SaveGame = \"C:\\autosave - something.eu4\"\n";
+#else
+	configurationInput << "SaveGame = \"/autosave - something.eu4\"\n";
+#endif
 	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
@@ -64,7 +68,11 @@ TEST(ConfigurationTests, OutputNameNormalizesItselfFromSavegameName)
 	std::stringstream configurationInput;
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
+#ifdef _MSC_BUILD
 	configurationInput << "SaveGame = \"C:\\autosave - something.eu4\"\n";
+#else
+	configurationInput << "SaveGame = \"/autosave - something.eu4\"\n";
+#endif
 	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
