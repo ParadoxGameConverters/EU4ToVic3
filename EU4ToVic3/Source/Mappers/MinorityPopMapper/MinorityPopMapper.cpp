@@ -10,7 +10,7 @@ mappers::MinorityPopMapper::MinorityPopMapper(std::istream& theStream)
 	clearRegisteredKeywords();
 }
 
-void mappers::MinorityPopMapper::loadMappingRules(const std::string& filePath)
+void mappers::MinorityPopMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	registerKeys();
 	parseFile(filePath);

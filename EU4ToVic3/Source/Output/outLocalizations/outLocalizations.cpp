@@ -4,16 +4,16 @@
 #include <fstream>
 #include <ranges>
 
-void OUT::exportPowerBlocLocs(const std::string& outputName, const std::vector<V3::PowerBloc>& powerBlocs)
+void OUT::exportPowerBlocLocs(const std::filesystem::path& outputName, const std::vector<V3::PowerBloc>& powerBlocs)
 {
 	const std::set<std::string> knownVic3Localizations =
 		 {"braz_por", "english", "french", "german", "japanese", "korean", "polish", "russian", "simp_chinese", "spanish", "turkish"};
 
 	for (const auto& language: knownVic3Localizations)
 	{
-		std::ofstream output("output/" + outputName + "/localization/" + language + "/replace/converted_power_blocs_l_" + language + ".yml");
+		std::ofstream output("output" / outputName / "localization" / language / ("replace/converted_power_blocs_l_" + language + ".yml"));
 		if (!output.is_open())
-			throw std::runtime_error("output/" + outputName + "/localization/" + language + "/replace/converted_power_blocs_l_" + language + ".yml");
+			throw std::runtime_error("output/" + outputName.string() + "/localization/" + language + "/replace/converted_power_blocs_l_" + language + ".yml");
 
 		output << commonItems::utf8BOM << "l_" << language << ":\n";
 		for (const auto& bloc: powerBlocs)
@@ -25,7 +25,7 @@ void OUT::exportPowerBlocLocs(const std::string& outputName, const std::vector<V
 	}
 }
 
-void OUT::exportCountryNamesAndAdjectives(const std::string& outputName,
+void OUT::exportCountryNamesAndAdjectives(const std::filesystem::path& outputName,
 	 const std::map<std::string, std::shared_ptr<V3::Country>>& countries,
 	 const V3::LocalizationLoader& knownLocs)
 {
@@ -34,9 +34,9 @@ void OUT::exportCountryNamesAndAdjectives(const std::string& outputName,
 
 	for (const auto& language: knownVic3Localizations)
 	{
-		std::ofstream output("output/" + outputName + "/localization/" + language + "/replace/converted_countries_l_" + language + ".yml");
+		std::ofstream output("output" / outputName / "localization" / language / ("replace/converted_countries_l_" + language + ".yml"));
 		if (!output.is_open())
-			throw std::runtime_error("output/" + outputName + "/localization/" + language + "/replace/converted_countries_l_" + language + ".yml");
+			throw std::runtime_error("output/" + outputName.string() + "/localization/" + language + "/replace/converted_countries_l_" + language + ".yml");
 
 		output << commonItems::utf8BOM << "l_" << language << ":\n";
 		for (const auto& country: countries | std::views::values)
@@ -50,7 +50,7 @@ void OUT::exportCountryNamesAndAdjectives(const std::string& outputName,
 	}
 }
 
-void OUT::exportCharacterLocs(const std::string& outputName,
+void OUT::exportCharacterLocs(const std::filesystem::path& outputName,
 	 const std::map<std::string, std::shared_ptr<V3::Country>>& countries,
 	 const V3::LocalizationLoader& knownLocs)
 {
@@ -59,9 +59,9 @@ void OUT::exportCharacterLocs(const std::string& outputName,
 
 	for (const auto& language: knownVic3Localizations)
 	{
-		std::ofstream output("output/" + outputName + "/localization/" + language + "/replace/converted_characters_l_" + language + ".yml");
+		std::ofstream output("output" / outputName / "localization" / language / ("replace/converted_characters_l_" + language + ".yml"));
 		if (!output.is_open())
-			throw std::runtime_error("output/" + outputName + "/localization/" + language + "/replace/converted_characters_l_" + language + ".yml");
+			throw std::runtime_error("output/" + outputName.string() + "/localization/" + language + "/replace/converted_characters_l_" + language + ".yml");
 
 		std::set<std::string> exportedKeys;
 		output << commonItems::utf8BOM << "l_" << language << ":\n";
@@ -77,7 +77,7 @@ void OUT::exportCharacterLocs(const std::string& outputName,
 	}
 }
 
-void OUT::exportReligionLocs(const std::string& outputName,
+void OUT::exportReligionLocs(const std::filesystem::path& outputName,
 	 const std::map<std::string, mappers::ReligionDef>& religions,
 	 const V3::LocalizationLoader& knownLocs)
 {
@@ -86,9 +86,9 @@ void OUT::exportReligionLocs(const std::string& outputName,
 
 	for (const auto& language: knownVic3Localizations)
 	{
-		std::ofstream output("output/" + outputName + "/localization/" + language + "/replace/99_converted_religions_l_" + language + ".yml");
+		std::ofstream output("output" / outputName / "localization" / language / ("replace/99_converted_religions_l_" + language + ".yml"));
 		if (!output.is_open())
-			throw std::runtime_error("output/" + outputName + "/localization/" + language + "/replace/99_converted_religions_l_" + language + ".yml");
+			throw std::runtime_error("output/" + outputName.string() + "/localization/" + language + "/replace/99_converted_religions_l_" + language + ".yml");
 
 		output << commonItems::utf8BOM << "l_" << language << ":\n";
 		for (const auto& religion: religions | std::views::values)
@@ -105,19 +105,22 @@ void OUT::exportReligionLocs(const std::string& outputName,
 	}
 }
 
-void OUT::exportCultureLocs(const std::string& outputName, const std::map<std::string, mappers::CultureDef>& cultures, const V3::LocalizationLoader& knownLocs)
+void OUT::exportCultureLocs(const std::filesystem::path& outputName,
+	 const std::map<std::string, mappers::CultureDef>& cultures,
+	 const V3::LocalizationLoader& knownLocs)
 {
 	const std::set<std::string> knownVic3Localizations =
 		 {"braz_por", "english", "french", "german", "japanese", "korean", "polish", "russian", "simp_chinese", "spanish", "turkish"};
 
 	for (const auto& language: knownVic3Localizations)
 	{
-		std::ofstream output("output/" + outputName + "/localization/" + language + "/replace/99_converted_cultures_l_" + language + ".yml");
+		std::ofstream output("output" / outputName / "localization" / language / ("replace/99_converted_cultures_l_" + language + ".yml"));
 		if (!output.is_open())
-			throw std::runtime_error("output/" + outputName + "/localization/" + language + "/replace/99_converted_cultures_l_" + language + ".yml");
-		std::ofstream names("output/" + outputName + "/localization/" + language + "/replace/names/dw_converted_culture_names_l_" + language + ".yml");
+			throw std::runtime_error("output/" + outputName.string() + "/localization/" + language + "/replace/99_converted_cultures_l_" + language + ".yml");
+		std::ofstream names("output" / outputName / "localization" / language / ("replace/names/dw_converted_culture_names_l_" + language + ".yml"));
 		if (!names.is_open())
-			throw std::runtime_error("output/" + outputName + "/localization/" + language + "/replace/names/dw_converted_culture_names_l_" + language + ".yml");
+			throw std::runtime_error(
+				 "output/" + outputName.string() + "/localization/" + language + "/replace/names/dw_converted_culture_names_l_" + language + ".yml");
 
 		std::set<std::string> seenNames;
 

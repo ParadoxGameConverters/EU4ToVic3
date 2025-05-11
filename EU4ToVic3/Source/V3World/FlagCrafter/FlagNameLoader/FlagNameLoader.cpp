@@ -3,11 +3,11 @@
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
 
-void V3::FlagNameLoader::loadKnownFlags(const std::string& folderPath)
+void V3::FlagNameLoader::loadKnownFlags(const std::filesystem::path& folderPath)
 {
 	registerKeys();
 	for (const auto& filename: commonItems::GetAllFilesInFolder(folderPath))
-		parseFile(folderPath + "/" + filename);
+		parseFile(folderPath / filename);
 	clearRegisteredKeywords();
 }
 

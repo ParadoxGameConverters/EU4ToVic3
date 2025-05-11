@@ -10,9 +10,9 @@ void V3::PopLoader::loadPops(const commonItems::ModFilesystem& modFS, double inc
 {
 	populationMultiplier = incPopulationMultiplier;
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/pops/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/history/pops"))
 	{
-		if (getExtension(fileName) != "txt")
+		if (fileName.extension() != ".txt")
 			continue;
 		parseFile(fileName);
 	}

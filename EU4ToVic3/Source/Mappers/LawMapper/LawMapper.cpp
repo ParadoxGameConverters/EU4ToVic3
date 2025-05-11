@@ -35,7 +35,7 @@ std::vector<std::string> sortLaws(const std::map<std::string, std::pair<double, 
 } // namespace
 
 
-void mappers::LawMapper::loadMappingRules(const std::string& filePath)
+void mappers::LawMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading Law Mapping Rules.";
 	registerKeys();

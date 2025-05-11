@@ -8,9 +8,9 @@ namespace OUT
 {
 
 void exportWorld(const Configuration& configuration, const V3::World& world, const commonItems::ConverterVersion& converterVersion);
-void exportVersion(const std::string& outputName, const commonItems::ConverterVersion& converterVersion);
-void exportBookmark(const std::string& outputName, const Configuration& configuration, const DatingData& datingData);
-void copyCustomFlags(const std::string& outputName);
+void exportVersion(const std::filesystem::path& outputName, const commonItems::ConverterVersion& converterVersion);
+void exportBookmark(const std::filesystem::path& outputName, const Configuration& configuration, const DatingData& datingData);
+void copyCustomFlags(const std::filesystem::path& outputName);
 
 } // namespace OUT
 

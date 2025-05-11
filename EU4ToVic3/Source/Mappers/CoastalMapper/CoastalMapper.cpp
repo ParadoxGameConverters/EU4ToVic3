@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-void mappers::CoastalMapper::loadAdjacencies(const std::string& filePath)
+void mappers::CoastalMapper::loadAdjacencies(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading Physical Province Adjacencies.";
 	registerKeys();

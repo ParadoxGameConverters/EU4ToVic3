@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-void mappers::NameListMapper::loadMappingRules(const std::string& filePath)
+void mappers::NameListMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Parsing name list mapping rules.";
 	registerKeys();

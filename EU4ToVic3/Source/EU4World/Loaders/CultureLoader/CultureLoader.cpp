@@ -10,9 +10,9 @@ void EU4::CultureLoader::loadCultures(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
 
-	for (const auto& file: modFS.GetAllFilesInFolder("/common/cultures/"))
+	for (const auto& file: modFS.GetAllFilesInFolder("common/cultures"))
 	{
-		if (getExtension(file) != "txt")
+		if (file.extension() != ".txt")
 			continue;
 		parseFile(file);
 	}

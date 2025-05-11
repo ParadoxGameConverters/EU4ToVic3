@@ -19,7 +19,7 @@ TEST(EU4World_CommonCountryLoaderTests, colorsCanBeLoadedFromCommonCountries)
 	modLoader.loadMods(configuration.getEU4DocumentsPath(), mods);
 	mods = modLoader.getMods();
 
-	auto modFS = commonItems::ModFilesystem("TestFiles/eu4installation/", mods);
+	auto modFS = commonItems::ModFilesystem(std::filesystem::path("TestFiles/eu4installation"), mods);
 
 	EU4::CommonCountryLoader loader;
 	loader.loadCommonCountries(modFS);

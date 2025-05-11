@@ -44,11 +44,11 @@ void outStrategies(std::ostream& output, const std::map<std::string, std::shared
 }
 } // namespace
 
-void OUT::exportStrategies(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+void OUT::exportStrategies(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
 {
-	std::ofstream output("output/" + outputName + "/common/history/ai/99_converter_strategy.txt");
+	std::ofstream output("output" / outputName / "common/history/ai/99_converter_strategy.txt");
 	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName + "/common/history/ai/99_converter_strategy.txt");
+		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/ai/99_converter_strategy.txt");
 
 	output << commonItems::utf8BOM;
 	outStrategies(output, countries);

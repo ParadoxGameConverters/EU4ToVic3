@@ -8,9 +8,9 @@
 void V3::BuildingGroupLoader::loadBuildingGroups(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/building_groups/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/building_groups"))
 	{
-		if (getExtension(fileName) == "txt")
+		if (fileName.extension() == ".txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

@@ -4,7 +4,7 @@
 
 namespace OUT
 {
-void exportPops(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::State>>& states);
+void exportPops(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::State>>& states);
 
 } // namespace OUT
 
