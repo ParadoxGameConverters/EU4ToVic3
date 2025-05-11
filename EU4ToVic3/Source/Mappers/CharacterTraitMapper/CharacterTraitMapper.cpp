@@ -66,12 +66,12 @@ std::set<std::string> mappers::CharacterTraitMapper::getSkillTraits(const EU4::C
 	{
 		if (global.contains(eu4Character.leaderType))
 			traits.emplace(global.at(eu4Character.leaderType));
-		//clang-format off
+		// clang-format off
 		// clang-format can't be made to succeed here, seems to be a mismatch between msvc and the pipeline
 		else if (const auto& traitMatch = matchLeaderSkill(eu4Character.leaderType,
 						 std::vector<int>{eu4Character.fire, eu4Character.shock, eu4Character.maneuver, eu4Character.siege});
 			 traitMatch)
-			//clang-format on
+			// clang-format on
 			traits.emplace(*traitMatch);
 	}
 	// map ruler trait
