@@ -67,8 +67,7 @@ std::set<std::string> mappers::CharacterTraitMapper::getSkillTraits(const EU4::C
 		if (global.contains(eu4Character.leaderType))
 			traits.emplace(global.at(eu4Character.leaderType));
 		else if (const auto& traitMatch = matchLeaderSkill(eu4Character.leaderType,
-						 std::vector<int>{eu4Character.fire, eu4Character.shock, eu4Character.maneuver, eu4Character.siege});
-			 traitMatch)
+						 std::vector<int>{eu4Character.fire, eu4Character.shock, eu4Character.maneuver, eu4Character.siege}); traitMatch)
 			traits.emplace(*traitMatch);
 	}
 	// map ruler trait
