@@ -19,8 +19,9 @@ void V3::VanillaStateLoader::registerKeys()
 {
 	registerKeyword("STATES", [this](std::istream& theStream) {
 		auto entries = VanillaStateEntries(theStream).getStates();
-		entries.merge(stateEntries); // merging backwards to override older entries.
-		stateEntries.swap(entries);
+		for (const auto& [stateName, stateEntry]: entries)
+			if (!stateEntries.contains(stateName)) // mods have already overridden these later entries.
+				stateEntries.emplace(stateName, stateEntry);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

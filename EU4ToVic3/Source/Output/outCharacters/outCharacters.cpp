@@ -59,7 +59,8 @@ void OUT::exportCharacters(const std::filesystem::path& outputName, const std::m
 		if (country->getProcessedData().characters.empty() && country->getProcessedData().vanillaCharacterElements.empty())
 			continue;
 
-		std::ofstream output("output" / outputName / "common/history/characters/00_" / (tag + ".txt"));
+		const auto tagName = "00_" + tag + ".txt";
+		std::ofstream output("output" / outputName / "common/history/characters" / tagName);
 		if (!output.is_open())
 			throw std::runtime_error("Could not create " + outputName.string() + "/common/history/characters/00_" + tag + ".txt");
 
