@@ -8,7 +8,7 @@ class FlagNameLoader: commonItems::parser
 {
   public:
 	FlagNameLoader() = default;
-	void loadKnownFlags(const std::filesystem::path& folderPath);
+	void loadKnownFlags(const std::string& folderPath);
 
 	[[nodiscard]] const auto& getKnownFlags() const { return knownFlags; }
 

@@ -93,27 +93,27 @@ void V3::PoliticalManager::loadCountryMapper(const std::shared_ptr<mappers::Coun
 		countryMapper->registerKnownVanillaV3Tag(countryTag);
 }
 
-void V3::PoliticalManager::loadPopulationSetupMapperRules(const std::filesystem::path& filePath)
+void V3::PoliticalManager::loadPopulationSetupMapperRules(const std::string& filePath)
 {
 	populationSetupMapper.loadMappingRules(filePath);
 }
 
-void V3::PoliticalManager::loadIdeaEffectMapperRules(const std::filesystem::path& filePath)
+void V3::PoliticalManager::loadIdeaEffectMapperRules(const std::string& filePath)
 {
 	ideaEffectMapper.loadMappingRules(filePath);
 }
 
-void V3::PoliticalManager::loadTechSetupMapperRules(const std::filesystem::path& filePath)
+void V3::PoliticalManager::loadTechSetupMapperRules(const std::string& filePath)
 {
 	techSetupMapper.loadMappingRules(filePath);
 }
 
-void V3::PoliticalManager::loadCountryTierMapperRules(const std::filesystem::path& filePath)
+void V3::PoliticalManager::loadCountryTierMapperRules(const std::string& filePath)
 {
 	countryTierMapper.loadMappingRules(filePath);
 }
 
-void V3::PoliticalManager::loadLawMapperRules(const std::filesystem::path& filePath)
+void V3::PoliticalManager::loadLawMapperRules(const std::string& filePath)
 {
 	lawMapper.loadMappingRules(filePath);
 }
@@ -125,27 +125,27 @@ void V3::PoliticalManager::loadLawDefinitions(const commonItems::ModFilesystem& 
 	lawMapper.loadLawDefinitions(loader.getLaws());
 }
 
-void V3::PoliticalManager::loadDiplomaticMapperRules(const std::filesystem::path& filePath)
+void V3::PoliticalManager::loadDiplomaticMapperRules(const std::string& filePath)
 {
 	diplomaticMapper.loadMappingRules(filePath);
 }
 
-void V3::PoliticalManager::loadCharacterTraitMapperRules(const std::filesystem::path& filePath)
+void V3::PoliticalManager::loadCharacterTraitMapperRules(const std::string& filePath)
 {
 	characterTraitMapper.loadMappingRules(filePath);
 }
 
-void V3::PoliticalManager::loadColonialTagMapperRules(const std::filesystem::path& filePath)
+void V3::PoliticalManager::loadColonialTagMapperRules(const std::string& filePath)
 {
 	colonialTagMapper.loadMappingRules(filePath);
 }
 
-void V3::PoliticalManager::loadAIStrategies(const std::filesystem::path& filePath)
+void V3::PoliticalManager::loadAIStrategies(const std::string& filePath)
 {
 	aiStrategyMapper.loadMappingRules(filePath);
 }
 
-void V3::PoliticalManager::loadAISecretGoals(const std::filesystem::path& filePath)
+void V3::PoliticalManager::loadAISecretGoals(const std::string& filePath)
 {
 	aiSecretGoalMapper.loadMappingRules(filePath);
 }
@@ -1249,7 +1249,7 @@ void V3::PoliticalManager::alterReleasablesReligion()
 	Log(LogLevel::Info) << "<> Updated religion for " << counter << " releasables.";
 }
 
-void V3::PoliticalManager::loadMajorFormables(const std::filesystem::path& filePath)
+void V3::PoliticalManager::loadMajorFormables(const std::string& filePath)
 {
 	majorFormablesLoader.loadMajorFormables(filePath);
 }
@@ -1279,7 +1279,7 @@ void V3::PoliticalManager::alterMajorFormables()
 	Log(LogLevel::Info) << "<> Altered " << counter << " major formables.";
 }
 
-void V3::PoliticalManager::loadIGIdeologiesMapperRules(const std::filesystem::path& filePath)
+void V3::PoliticalManager::loadIGIdeologiesMapperRules(const std::string& filePath)
 {
 	igIdeologiesMapper.loadMappingRules(filePath);
 }

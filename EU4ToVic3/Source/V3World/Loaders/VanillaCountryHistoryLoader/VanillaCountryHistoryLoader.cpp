@@ -7,9 +7,9 @@
 void V3::VanillaCountryHistoryLoader::loadVanillaCountryHistories(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("common/history/countries"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/history/countries/"))
 	{
-		if (fileName.extension() == ".txt")
+		if (getExtension(fileName) == "txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

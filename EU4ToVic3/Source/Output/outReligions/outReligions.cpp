@@ -53,17 +53,17 @@ void outReligionModifierTypeDefs(std::ostream& output, const mappers::ReligionDe
 }
 } // namespace
 
-void OUT::exportReligions(const std::filesystem::path& outputName, const std::map<std::string, mappers::ReligionDef>& religions)
+void OUT::exportReligions(const std::string& outputName, const std::map<std::string, mappers::ReligionDef>& religions)
 {
-	std::ofstream outputReligion("output" / outputName / "common/religions/99_converted_religions.txt");
+	std::ofstream outputReligion("output/" + outputName + "/common/religions/99_converted_religions.txt");
 	if (!outputReligion.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/religions/99_converted_religions.txt");
-	std::ofstream outputReligionStatics("output" / outputName / "common/static_modifiers/99_converted_religions_static_modifiers.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/religions/99_converted_religions.txt");
+	std::ofstream outputReligionStatics("output/" + outputName + "/common/static_modifiers/99_converted_religions_static_modifiers.txt");
 	if (!outputReligionStatics.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/static_modifiers/99_converted_religions_static_modifiers.txt");
-	std::ofstream outputReligionModifierTypes("output" / outputName / "common/modifier_type_definitions/99_converted_religions_modifier_type_defs.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/static_modifiers/99_converted_religions_static_modifiers.txt");
+	std::ofstream outputReligionModifierTypes("output/" + outputName + "/common/modifier_type_definitions/99_converted_religions_modifier_type_defs.txt");
 	if (!outputReligionModifierTypes.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/modifier_type_definitions/99_converted_religions_modifier_type_defs.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/modifier_type_definitions/99_converted_religions_modifier_type_defs.txt");
 
 	outputReligion << commonItems::utf8BOM << "\n";
 	outputReligionStatics << commonItems::utf8BOM << "\n";

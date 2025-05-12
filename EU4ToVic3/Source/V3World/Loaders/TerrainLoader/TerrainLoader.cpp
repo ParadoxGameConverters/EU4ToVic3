@@ -7,7 +7,7 @@
 void V3::TerrainLoader::loadTerrains(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	parseFile(*modFS.GetActualFileLocation("map_data/province_terrains.txt"));
+	parseFile(*modFS.GetActualFileLocation("/map_data/province_terrains.txt"));
 	clearRegisteredKeywords();
 }
 

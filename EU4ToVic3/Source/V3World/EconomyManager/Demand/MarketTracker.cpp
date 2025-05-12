@@ -156,7 +156,7 @@ void V3::MarketTracker::integrateBuilding(const Building& building,
 
 		lostSubsistence += marketJobs.createJobs(urbanResources.getJobs(),
 			 subsistenceResources.getJobs(),
-			 static_cast<int>(p * urbanFrac),
+			 p * urbanFrac,
 			 defaultRatio,
 			 addedWorkingPopFraction,
 			 {},

@@ -77,7 +77,7 @@ void outPowerBloc(std::ostream& output, const V3::PowerBloc& bloc)
 
 } // namespace
 
-void OUT::exportDiplomacy(const std::filesystem::path& outputName, const V3::PoliticalManager& politicalManager)
+void OUT::exportDiplomacy(const std::string& outputName, const V3::PoliticalManager& politicalManager)
 {
 	exportPacts(outputName, politicalManager.getAgreements());
 	exportRelations(outputName, politicalManager.getCountries());
@@ -86,20 +86,20 @@ void OUT::exportDiplomacy(const std::filesystem::path& outputName, const V3::Pol
 	exportPowerBlocs(outputName, politicalManager.getPowerBlocs());
 }
 
-void OUT::exportPacts(const std::filesystem::path& outputName, const std::vector<V3::Agreement>& agreements)
+void OUT::exportPacts(const std::string& outputName, const std::vector<V3::Agreement>& agreements)
 {
-	std::ofstream defensivePacts("output" / outputName / "common/history/diplomacy/00_defensive_pacts.txt");
+	std::ofstream defensivePacts("output/" + outputName + "/common/history/diplomacy/00_defensive_pacts.txt");
 	if (!defensivePacts.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/diplomacy/00_defensive_pacts.txt");
-	std::ofstream subjects("output" / outputName / "common/history/diplomacy/00_subject_relationships.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/history/diplomacy/00_defensive_pacts.txt");
+	std::ofstream subjects("output/" + outputName + "/common/history/diplomacy/00_subject_relationships.txt");
 	if (!subjects.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/diplomacy/00_subject_relationships.txt");
-	std::ofstream trades("output" / outputName / "common/history/diplomacy/00_trade_agreement.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/history/diplomacy/00_subject_relationships.txt");
+	std::ofstream trades("output/" + outputName + "/common/history/diplomacy/00_trade_agreement.txt");
 	if (!trades.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/00_trade_agreement.txt");
-	std::ofstream rivals("output" / outputName / "common/history/diplomacy/00_additional_rivalries.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/history/00_trade_agreement.txt");
+	std::ofstream rivals("output/" + outputName + "/common/history/diplomacy/00_additional_rivalries.txt");
 	if (!rivals.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/diplomacy/00_additional_rivalries.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/history/diplomacy/00_additional_rivalries.txt");
 
 	defensivePacts << commonItems::utf8BOM << "DIPLOMACY = {\n";
 	subjects << commonItems::utf8BOM << "DIPLOMACY = {\n";
@@ -128,11 +128,11 @@ void OUT::exportPacts(const std::filesystem::path& outputName, const std::vector
 	rivals.close();
 }
 
-void OUT::exportRelations(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+void OUT::exportRelations(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
 {
-	std::ofstream relations("output" / outputName / "common/history/diplomacy/00_relations.txt");
+	std::ofstream relations("output/" + outputName + "/common/history/diplomacy/00_relations.txt");
 	if (!relations.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/diplomacy/00_relations.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/history/diplomacy/00_relations.txt");
 
 	relations << commonItems::utf8BOM << "DIPLOMACY = {\n";
 	for (const auto& country: countries | std::views::values)
@@ -143,11 +143,11 @@ void OUT::exportRelations(const std::filesystem::path& outputName, const std::ma
 	relations.close();
 }
 
-void OUT::exportRivals(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+void OUT::exportRivals(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
 {
-	std::ofstream rivals("output" / outputName / "common/history/diplomacy/00_rivalries.txt");
+	std::ofstream rivals("output/" + outputName + "/common/history/diplomacy/00_rivalries.txt");
 	if (!rivals.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/diplomacy/00_rivalries.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/history/diplomacy/00_rivalries.txt");
 
 	rivals << commonItems::utf8BOM << "DIPLOMACY = {\n";
 	for (const auto& country: countries | std::views::values)
@@ -158,11 +158,11 @@ void OUT::exportRivals(const std::filesystem::path& outputName, const std::map<s
 	rivals.close();
 }
 
-void OUT::exportTruces(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+void OUT::exportTruces(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
 {
-	std::ofstream truces("output" / outputName / "common/history/diplomacy/00_truces.txt");
+	std::ofstream truces("output/" + outputName + "/common/history/diplomacy/00_truces.txt");
 	if (!truces.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/diplomacy/00_truces.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/history/diplomacy/00_truces.txt");
 
 	truces << commonItems::utf8BOM << "DIPLOMACY = {\n";
 	for (const auto& country: countries | std::views::values)
@@ -173,11 +173,11 @@ void OUT::exportTruces(const std::filesystem::path& outputName, const std::map<s
 	truces.close();
 }
 
-void OUT::exportPowerBlocs(const std::filesystem::path& outputName, const std::vector<V3::PowerBloc>& powerBlocs)
+void OUT::exportPowerBlocs(const std::string& outputName, const std::vector<V3::PowerBloc>& powerBlocs)
 {
-	std::ofstream blocs("output" / outputName / "common/history/power_blocs/00_power_blocs.txt");
+	std::ofstream blocs("output/" + outputName + "/common/history/power_blocs/00_power_blocs.txt");
 	if (!blocs.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/diplomacy/00_power_blocs.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/history/diplomacy/00_power_blocs.txt");
 
 	blocs << commonItems::utf8BOM << "POWER_BLOCS = {\n";
 	for (const auto& bloc: powerBlocs)

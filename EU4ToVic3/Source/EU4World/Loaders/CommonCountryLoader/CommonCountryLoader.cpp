@@ -13,9 +13,9 @@ void EU4::CommonCountryLoader::loadCommonCountries(const commonItems::ModFilesys
 	registerKeys();
 
 	// scoop up all country definitions
-	for (const auto& file: modFS.GetAllFilesInFolder("common/country_tags"))
+	for (const auto& file: modFS.GetAllFilesInFolder("/common/country_tags/"))
 	{
-		if (file.extension() != ".txt")
+		if (getExtension(file) != "txt")
 			continue;
 		tagParser.parseFile(file);
 	}
@@ -23,7 +23,7 @@ void EU4::CommonCountryLoader::loadCommonCountries(const commonItems::ModFilesys
 	// look in each file for color.
 	for (const auto& [tag, filePath]: tagPaths)
 	{
-		auto path = modFS.GetActualFileLocation(std::filesystem::path("common") / filePath);
+		auto path = modFS.GetActualFileLocation("/common/" + filePath);
 		if (!path)
 		{
 			Log(LogLevel::Error) << "Where is this file: /common/" + filePath << "?";

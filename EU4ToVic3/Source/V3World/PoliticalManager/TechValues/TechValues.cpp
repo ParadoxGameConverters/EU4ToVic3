@@ -18,7 +18,7 @@ void V3::TechValues::gatherScores(const std::map<std::string, std::shared_ptr<Co
 	{
 		if (!isValidCountryForTechConversion(*country))
 			continue;
-		auto bonus = 0.0;
+		auto bonus = 0;
 		if (country->getProcessedData().westernized && country->getSourceCountry()->isGP())
 			bonus = 2.0;
 

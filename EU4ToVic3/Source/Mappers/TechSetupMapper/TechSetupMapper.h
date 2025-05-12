@@ -2,7 +2,6 @@
 #define TECH_SETUP_MAPPER_H
 #include "Parser.h"
 #include "TechSetupMapping.h"
-#include <filesystem>
 
 namespace mappers
 {
@@ -10,7 +9,7 @@ class TechSetupMapper: commonItems::parser
 {
   public:
 	TechSetupMapper() = default;
-	void loadMappingRules(const std::filesystem::path& filePath);
+	void loadMappingRules(const std::string& filePath);
 	void loadMappingRules(std::istream& theStream);
 
 	[[nodiscard]] std::set<std::string> getTechsForScoreTrack(const std::string& track, double score) const;

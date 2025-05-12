@@ -149,7 +149,7 @@ void mappers::CultureMapper::loadMappingRules(std::istream& theStream)
 	markNeoCultureOverrides();
 }
 
-void mappers::CultureMapper::loadMappingRules(const std::filesystem::path& fileName)
+void mappers::CultureMapper::loadMappingRules(const std::string& fileName)
 {
 	Log(LogLevel::Info) << "-> Parsing culture mapping rules.";
 	registerKeys();
@@ -164,7 +164,7 @@ void mappers::CultureMapper::loadColonialRules(std::istream& theStream)
 	colonialRegionMapper.loadMappingRules(theStream);
 }
 
-void mappers::CultureMapper::loadColonialRules(const std::filesystem::path& fileName)
+void mappers::CultureMapper::loadColonialRules(const std::string& fileName)
 {
 	colonialRegionMapper.loadMappingRules(fileName);
 }
@@ -174,7 +174,7 @@ void mappers::CultureMapper::loadWesternizationRules(std::istream& theStream)
 	westernizationMapper.loadMappingRules(theStream);
 }
 
-void mappers::CultureMapper::loadWesternizationRules(const std::filesystem::path& fileName)
+void mappers::CultureMapper::loadWesternizationRules(const std::string& fileName)
 {
 	westernizationMapper.loadMappingRules(fileName);
 }
@@ -184,7 +184,7 @@ void mappers::CultureMapper::loadNewEU4CultureRules(std::istream& theStream)
 	newEU4CultureMapper.loadMappingRules(theStream);
 }
 
-void mappers::CultureMapper::loadNewEU4CultureRules(const std::filesystem::path& fileName)
+void mappers::CultureMapper::loadNewEU4CultureRules(const std::string& fileName)
 {
 	newEU4CultureMapper.loadMappingRules(fileName);
 }
@@ -438,9 +438,9 @@ void mappers::CultureMapper::loadTraitDefinitions(const commonItems::ModFilesyst
 	v3TraitDefinitions = traitDefinitionLoader.getDefinitions();
 }
 
-void mappers::CultureMapper::generateCultureDefinitions(const std::filesystem::path& nameListsPath,
-	 const std::filesystem::path& nameListMapPath,
-	 const std::filesystem::path& cultureTraitsPath,
+void mappers::CultureMapper::generateCultureDefinitions(const std::string& nameListsPath,
+	 const std::string& nameListMapPath,
+	 const std::string& cultureTraitsPath,
 	 const V3::ClayManager& clayManager,
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader,

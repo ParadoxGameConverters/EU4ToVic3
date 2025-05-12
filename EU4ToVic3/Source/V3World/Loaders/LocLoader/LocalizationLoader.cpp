@@ -16,7 +16,7 @@ void V3::LocalizationLoader::scrapeLocalizations(const commonItems::ModFilesyste
 
 void V3::LocalizationLoader::scrapeLanguage(const std::string& language, const commonItems::ModFilesystem& modFS)
 {
-	const auto fileNames = modFS.GetAllFilesInFolderRecursive(std::filesystem::path("localization") / language);
+	const auto fileNames = modFS.GetAllFilesInFolderRecursive("localization/" + language + "/");
 	for (const auto& file: fileNames)
 	{
 		std::ifstream fileStream(file);

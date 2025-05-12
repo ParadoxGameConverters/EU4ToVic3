@@ -4,7 +4,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-void mappers::BuildingMapper::loadBuildingMappings(const std::filesystem::path& filePath)
+void mappers::BuildingMapper::loadBuildingMappings(const std::string& filePath)
 {
 	Log(LogLevel::Info) << "-> Parsing building mappings.";
 	registerKeys();

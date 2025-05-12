@@ -6,7 +6,7 @@
 #include "PoliticalManager/Country/Country.h"
 #include <ranges>
 
-void mappers::ColonialTagMapper::loadMappingRules(const std::filesystem::path& filePath)
+void mappers::ColonialTagMapper::loadMappingRules(const std::string& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading colonial tag mapping rules.";
 	registerKeys();

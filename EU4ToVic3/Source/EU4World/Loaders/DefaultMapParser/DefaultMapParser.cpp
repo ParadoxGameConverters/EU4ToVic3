@@ -9,7 +9,7 @@ void EU4::DefaultMapParser::loadDefaultMap(const commonItems::ModFilesystem& mod
 	// This is a case where mods take priority over definitions. If a mod has defs than we use those and ignore EU4 installation.
 	registerKeys();
 
-	const auto& file = modFS.GetActualFileLocation("map/default.map");
+	const auto& file = modFS.GetActualFileLocation("/map/default.map");
 	if (!file)
 		throw std::runtime_error("/map/default.map cannot be found!");
 

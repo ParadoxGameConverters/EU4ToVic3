@@ -9,7 +9,7 @@ class MajorFormablesLoader: commonItems::parser
 {
   public:
 	MajorFormablesLoader() = default;
-	void loadMajorFormables(const std::filesystem::path& filePath);
+	void loadMajorFormables(const std::string& filePath);
 
 	[[nodiscard]] const auto& getMajorFormables() const { return majorFormables; }
 	void setFormables(const std::map<std::string, MajorFormablesEntry>& theFormables) { majorFormables = theFormables; }

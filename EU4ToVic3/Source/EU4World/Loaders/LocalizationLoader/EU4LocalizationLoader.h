@@ -20,7 +20,7 @@ class EU4LocalizationLoader
 	[[nodiscard]] std::optional<std::string> getTextForKey(const std::string& key, const std::string& language) const;
 
   private:
-	void readFromFile(const std::filesystem::path& fileName);
+	void readFromFile(const std::string& fileName);
 	void readFromStream(std::istream& theStream);
 
 	[[nodiscard]] static std::optional<std::string> determineLanguageForFile(const std::string& text);

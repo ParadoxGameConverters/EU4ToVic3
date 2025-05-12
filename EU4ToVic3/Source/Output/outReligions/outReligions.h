@@ -4,7 +4,7 @@
 
 namespace OUT
 {
-void exportReligions(const std::filesystem::path& outputName, const std::map<std::string, mappers::ReligionDef>& religions);
+void exportReligions(const std::string& outputName, const std::map<std::string, mappers::ReligionDef>& religions);
 
 } // namespace OUT
 

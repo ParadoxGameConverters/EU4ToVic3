@@ -12,11 +12,11 @@ void EU4::ReligionLoader::loadReligions(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
 
-	for (const auto& fileName: modFS.GetAllFilesInFolder("common/religions"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/religions/"))
 	{
-		if (fileName.extension() != ".txt")
+		if (getExtension(fileName) != "txt")
 			continue;
-		auto theFileName = fileName.filename().string();
+		auto theFileName = trimPath(fileName);
 		// Watch out for our own special religions.
 		if (theFileName.starts_with("99_converted_"))
 		{

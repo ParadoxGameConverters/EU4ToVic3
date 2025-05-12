@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-void mappers::NameListLoader::loadNameLists(const std::filesystem::path& nameListPath)
+void mappers::NameListLoader::loadNameLists(const std::string& nameListPath)
 {
 	Log(LogLevel::Info) << "-> Loading name lists.";
 	registerKeys();

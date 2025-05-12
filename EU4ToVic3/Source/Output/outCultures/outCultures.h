@@ -4,7 +4,7 @@
 
 namespace OUT
 {
-void exportCultures(const std::filesystem::path& outputName, const std::map<std::string, mappers::CultureDef>& cultures);
+void exportCultures(const std::string& outputName, const std::map<std::string, mappers::CultureDef>& cultures);
 
 } // namespace OUT
 

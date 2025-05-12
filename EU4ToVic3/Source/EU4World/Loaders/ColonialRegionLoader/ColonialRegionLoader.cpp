@@ -5,16 +5,15 @@
 #include "Log.h"
 #include "OSCompatibilityLayer.h"
 #include "ParserHelpers.h"
-#include <filesystem>
 #include <ranges>
 
 void EU4::ColonialRegionLoader::loadColonialRegions(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
 
-	for (const auto& file: modFS.GetAllFilesInFolder("common/colonial_regions"))
+	for (const auto& file: modFS.GetAllFilesInFolder("/common/colonial_regions/"))
 	{
-		if (file.extension() != ".txt")
+		if (getExtension(file) != "txt")
 			continue;
 		parseFile(file);
 	}

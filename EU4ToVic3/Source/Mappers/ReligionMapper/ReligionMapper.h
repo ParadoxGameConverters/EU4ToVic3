@@ -3,7 +3,6 @@
 #include "ModLoader/ModFilesystem.h"
 #include "Parser.h"
 #include "ReligionMapper/ReligionDefinitionLoader/ReligionDef.h"
-#include <filesystem>
 #include <map>
 #include <optional>
 #include <string>
@@ -21,7 +20,7 @@ class ReligionMapper: commonItems::parser
 {
   public:
 	ReligionMapper() = default;
-	void loadMappingRules(const std::filesystem::path& filePath);
+	void loadMappingRules(const std::string& filePath);
 	void loadMappingRules(std::istream& theStream);
 
 	[[nodiscard]] std::optional<std::string> getV3Religion(const std::string& eu4Religion) const;
@@ -29,7 +28,7 @@ class ReligionMapper: commonItems::parser
 
 	void expandReligionMappings(const std::map<std::string, EU4::Religion>& eu4Religions);
 	void generateReligionDefinitions(const commonItems::ModFilesystem& modFS,
-		 const std::filesystem::path& groupMapPath,
+		 const std::string& groupMapPath,
 		 const std::map<std::string, EU4::Religion>& eu4Religions,
 		 const EU4::EU4LocalizationLoader& eu4Locs);
 

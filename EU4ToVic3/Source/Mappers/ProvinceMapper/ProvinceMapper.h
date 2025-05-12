@@ -2,7 +2,6 @@
 #define PROVINCE_MAPPER_H
 #include "Parser.h"
 #include "ProvinceMappingsVersion.h"
-#include <filesystem>
 #include <map>
 
 namespace mappers
@@ -11,7 +10,7 @@ class ProvinceMapper: commonItems::parser
 {
   public:
 	ProvinceMapper() = default;
-	void loadProvinceMappings(const std::filesystem::path& fileName);
+	void loadProvinceMappings(const std::string& fileName);
 
 	[[nodiscard]] std::vector<int> getEU4Provinces(const std::string& v3Province) const;
 	[[nodiscard]] std::vector<std::string> getV3Provinces(int eu4Province) const;

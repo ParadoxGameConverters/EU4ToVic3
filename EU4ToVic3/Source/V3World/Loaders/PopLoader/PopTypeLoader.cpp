@@ -3,9 +3,9 @@
 void V3::PopTypeLoader::loadPopTypes(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("common/pop_types"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/pop_types/"))
 	{
-		if (fileName.extension() != ".txt")
+		if (getExtension(fileName) != "txt")
 			continue;
 		parseFile(fileName);
 	}

@@ -2,7 +2,6 @@
 #define COLONIAL_TAG_MAPPER_H
 #include "ColonialTagMapping.h"
 #include "Parser.h"
-#include <filesystem>
 
 namespace V3
 {
@@ -14,7 +13,7 @@ class ColonialTagMapper: commonItems::parser
 {
   public:
 	ColonialTagMapper() = default;
-	void loadMappingRules(const std::filesystem::path& filePath);
+	void loadMappingRules(const std::string& filePath);
 
 	[[nodiscard]] std::optional<std::string> matchColonialTag(const V3::Country& country,
 		 const ColonialRegionMapper& colonialRegionMapper,

@@ -4,7 +4,7 @@
 
 void EU4::DefinitionScraper::loadDefinitions(const commonItems::ModFilesystem& modFS)
 {
-	const auto& file = modFS.GetActualFileLocation("map/definition.csv");
+	const auto& file = modFS.GetActualFileLocation("/map/definition.csv");
 	if (!file)
 		throw std::runtime_error("/map/definition.csv cannot be found!");
 
