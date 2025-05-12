@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-void mappers::CountryTierMapper::loadMappingRules(const std::filesystem::path& filePath)
+void mappers::CountryTierMapper::loadMappingRules(const std::string& filePath)
 {
 	Log(LogLevel::Info) << "-> Parsing country tier mapping rules.";
 	registerKeys();

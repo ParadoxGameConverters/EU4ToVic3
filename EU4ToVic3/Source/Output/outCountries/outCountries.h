@@ -5,11 +5,11 @@
 
 namespace OUT
 {
-void exportCommonCountries(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries);
-void exportHistoryCountries(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries);
-void exportHistoryPopulations(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries);
-void exportReleasables(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries);
-void exportMajorFormables(const std::filesystem::path& outputName, const std::map<std::string, V3::MajorFormablesEntry>& formables);
+void exportCommonCountries(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries);
+void exportHistoryCountries(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries);
+void exportHistoryPopulations(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries);
+void exportReleasables(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries);
+void exportMajorFormables(const std::string& outputName, const std::map<std::string, V3::MajorFormablesEntry>& formables);
 
 } // namespace OUT
 

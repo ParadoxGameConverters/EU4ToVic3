@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-void mappers::NewEU4CultureMapper::loadMappingRules(const std::filesystem::path& filePath)
+void mappers::NewEU4CultureMapper::loadMappingRules(const std::string& filePath)
 {
 	Log(LogLevel::Info) << "-> Parsing *_new EU4 culture mapping rules.";
 	registerKeys();

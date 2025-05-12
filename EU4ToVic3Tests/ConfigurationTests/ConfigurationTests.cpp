@@ -29,8 +29,8 @@ TEST(ConfigurationTests, InstallationPathsCanBeUpdatedRetrieved)
 	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
-	EXPECT_EQ(std::filesystem::path("TestFiles/eu4installation"), configuration.getEU4Path());
-	EXPECT_EQ(std::filesystem::path("TestFiles/vic3installation/game"), configuration.getVic3Path());
+	EXPECT_EQ("TestFiles/eu4installation", configuration.getEU4Path());
+	EXPECT_EQ("TestFiles/vic3installation/game/", configuration.getVic3Path());
 }
 
 TEST(ConfigurationTests, SaveAndDocumentsPathCanBeRetrieved)
@@ -43,8 +43,8 @@ TEST(ConfigurationTests, SaveAndDocumentsPathCanBeRetrieved)
 	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
-	EXPECT_EQ(std::filesystem::path("TestFiles"), configuration.getEU4DocumentsPath());
-	EXPECT_EQ(std::filesystem::path("C:\\autosave.eu4"), configuration.getEU4SaveGamePath());
+	EXPECT_EQ("TestFiles", configuration.getEU4DocumentsPath());
+	EXPECT_EQ("C:\\autosave.eu4", configuration.getEU4SaveGamePath());
 }
 
 TEST(ConfigurationTests, OutputNameNormalizesSetsFromSavegameName)
@@ -52,15 +52,11 @@ TEST(ConfigurationTests, OutputNameNormalizesSetsFromSavegameName)
 	std::stringstream configurationInput;
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-#ifdef _MSC_BUILD
 	configurationInput << "SaveGame = \"C:\\autosave.eu4\"\n";
-#else
-	configurationInput << "SaveGame = \"/autosave.eu4\"\n";
-#endif
 	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
-	EXPECT_EQ("autosave", configuration.getOutputName().string());
+	EXPECT_EQ("autosave", configuration.getOutputName());
 }
 
 TEST(ConfigurationTests, OutputNameNormalizesItselfFromSavegameName)
@@ -68,15 +64,11 @@ TEST(ConfigurationTests, OutputNameNormalizesItselfFromSavegameName)
 	std::stringstream configurationInput;
 	configurationInput << "EU4directory = \"TestFiles/eu4installation\"\n";
 	configurationInput << "Vic3directory = \"TestFiles/vic3installation\"\n";
-#ifdef _MSC_BUILD
 	configurationInput << "SaveGame = \"C:\\autosave - something.eu4\"\n";
-#else
-	configurationInput << "SaveGame = \"/autosave - something.eu4\"\n";
-#endif
 	const commonItems::ConverterVersion converterVersion;
 	const auto configuration = Configuration(configurationInput, converterVersion);
 
-	EXPECT_EQ("autosave___something", configuration.getOutputName().string());
+	EXPECT_EQ("autosave___something", configuration.getOutputName());
 }
 
 TEST(ConfigurationTests, OutputNameSetsFromOverrideName)

@@ -2,7 +2,6 @@
 #define COUNTRY_TIER_MAPPER_H
 #include "CountryTierMapping.h"
 #include "Parser.h"
-#include <filesystem>
 
 namespace mappers
 {
@@ -10,7 +9,7 @@ class CountryTierMapper: commonItems::parser
 {
   public:
 	CountryTierMapper() = default;
-	void loadMappingRules(const std::filesystem::path& filePath);
+	void loadMappingRules(const std::string& filePath);
 
 	[[nodiscard]] std::optional<std::string> matchCountryTier(int rank, size_t size, bool vn = false) const;
 

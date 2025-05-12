@@ -28,11 +28,11 @@ void outSecretGoals(std::ostream& output, const std::map<std::string, std::share
 }
 } // namespace
 
-void OUT::exportSecretGoals(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+void OUT::exportSecretGoals(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
 {
-	std::ofstream output("output" / outputName / "common/history/ai/99_converter_secret_goals.txt");
+	std::ofstream output("output/" + outputName + "/common/history/ai/99_converter_secret_goals.txt");
 	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/ai/99_converter_secret_goals.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/history/ai/99_converter_secret_goals.txt");
 
 	output << commonItems::utf8BOM;
 	outSecretGoals(output, countries);

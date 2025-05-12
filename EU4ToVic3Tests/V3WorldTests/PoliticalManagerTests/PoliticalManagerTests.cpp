@@ -19,8 +19,8 @@
 
 namespace
 {
-const auto modFS = commonItems::ModFilesystem(std::filesystem::path("TestFiles/vic3installation/game"), {});
-const auto eu4FS = commonItems::ModFilesystem(std::filesystem::path("TestFiles/eu4installation"), {});
+const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation/", {});
 
 std::tuple<V3::PoliticalManager, V3::PopManager, mappers::CultureMapper, mappers::ReligionMapper, V3::ClayManager, EU4::CultureLoader, EU4::ReligionLoader>
 prepMappers()

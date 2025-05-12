@@ -4,7 +4,7 @@
 #include "ParserHelpers.h"
 #include "SlaveCultureMapping.h"
 
-void mappers::SlaveCultureMapper::loadMappingRules(const std::filesystem::path& filePath)
+void mappers::SlaveCultureMapper::loadMappingRules(const std::string& filePath)
 {
 	Log(LogLevel::Info) << "-> Parsing Slave Culture Mapping Rules.";
 	registerKeys();

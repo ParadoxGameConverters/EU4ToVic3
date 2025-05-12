@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-void V3::FlagColorLoader::loadFlagColors(const std::filesystem::path& filePath)
+void V3::FlagColorLoader::loadFlagColors(const std::string& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading EU4 custom flag colors.";
 	registerKeys();

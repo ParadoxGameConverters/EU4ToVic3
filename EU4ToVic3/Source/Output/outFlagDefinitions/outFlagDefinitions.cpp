@@ -50,11 +50,11 @@ void outFlagDefinitions(std::ostream& output, const std::string& tag, const V3::
 }
 } // namespace
 
-void OUT::exportFlagDefinitions(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+void OUT::exportFlagDefinitions(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
 {
-	std::ofstream output("output" / outputName / "common/flag_definitions/99_converter_flag_definitions.txt");
+	std::ofstream output("output/" + outputName + "/common/flag_definitions/99_converter_flag_definitions.txt");
 	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/flag_definitions/99_converter_flag_definitions.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/flag_definitions/99_converter_flag_definitions.txt");
 	output << commonItems::utf8BOM << "\n";
 
 	for (const auto& [tag, country]: countries)

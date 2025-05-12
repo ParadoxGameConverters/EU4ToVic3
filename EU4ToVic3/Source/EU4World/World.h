@@ -47,10 +47,10 @@ class World: commonItems::parser
 		bool parsedMeta = false;
 		std::string metadata;
 		std::string gamestate;
-		std::filesystem::path path;
+		std::string path;
 	} saveGame;
 
-	std::filesystem::path EU4Path;
+	std::string EU4Path;
 	Mods mods;
 	commonItems::ModFilesystem modFS;
 

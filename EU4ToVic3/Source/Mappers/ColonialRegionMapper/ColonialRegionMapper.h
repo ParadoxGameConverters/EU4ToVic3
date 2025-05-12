@@ -2,7 +2,6 @@
 #define COLONIAL_REGION_MAPPER_H
 #include "ColonialRegionMapping.h"
 #include "Parser.h"
-#include <filesystem>
 
 namespace V3
 {
@@ -14,7 +13,7 @@ class ColonialRegionMapper: commonItems::parser
 {
   public:
 	ColonialRegionMapper() = default;
-	void loadMappingRules(const std::filesystem::path& filePath);
+	void loadMappingRules(const std::string& filePath);
 	void loadMappingRules(std::istream& theStream);
 
 	[[nodiscard]] const auto& getColonialRegions() const { return colonialRegions; }

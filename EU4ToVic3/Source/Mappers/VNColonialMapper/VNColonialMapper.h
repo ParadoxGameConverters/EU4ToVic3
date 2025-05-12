@@ -2,7 +2,6 @@
 #define VN_COLONIAL_MAPPER
 #include "Parser.h"
 #include "VNColonialMapping.h"
-#include <filesystem>
 #include <ranges>
 
 namespace mappers
@@ -13,7 +12,7 @@ class VNColonialMapper: commonItems::parser
 	VNColonialMapper() = default;
 
 	void loadMappingRules(std::istream& theStream);
-	void loadMappingRules(const std::filesystem::path& fileName);
+	void loadMappingRules(const std::string& fileName);
 
 	[[nodiscard]] const auto& getVNColonies() const { return VNColonies; }
 	[[nodiscard]] bool isStateVNColonial(const std::string& stateName) const;

@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-void V3::NationalBudgetLoader::loadNationalBudget(const std::filesystem::path& filePath)
+void V3::NationalBudgetLoader::loadNationalBudget(const std::string& filePath)
 {
 	registerKeys();
 	parseFile(filePath);

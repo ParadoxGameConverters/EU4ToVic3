@@ -50,7 +50,7 @@ void outCharacter(std::ostream& output, const V3::Character& character)
 }
 } // namespace
 
-void OUT::exportCharacters(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+void OUT::exportCharacters(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
 {
 	for (const auto& [tag, country]: countries)
 	{
@@ -59,9 +59,9 @@ void OUT::exportCharacters(const std::filesystem::path& outputName, const std::m
 		if (country->getProcessedData().characters.empty() && country->getProcessedData().vanillaCharacterElements.empty())
 			continue;
 
-		std::ofstream output("output" / outputName / "common/history/characters/00_" / (tag + ".txt"));
+		std::ofstream output("output/" + outputName + "/common/history/characters/00_" + tag + ".txt");
 		if (!output.is_open())
-			throw std::runtime_error("Could not create " + outputName.string() + "/common/history/characters/00_" + tag + ".txt");
+			throw std::runtime_error("Could not create " + outputName + "/common/history/characters/00_" + tag + ".txt");
 
 		output << commonItems::utf8BOM << "CHARACTERS = {\n";
 		output << "\tc:" << tag << " = {\n";

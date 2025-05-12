@@ -9,7 +9,7 @@ class FlagColorLoader: commonItems::parser
 {
   public:
 	FlagColorLoader() = default;
-	void loadFlagColors(const std::filesystem::path& filePath);
+	void loadFlagColors(const std::string& filePath);
 
 	[[nodiscard]] auto getNumFlagColors() const { return flagColorMapping.size(); }
 	[[nodiscard]] std::optional<commonItems::Color> getFlagColorByIndex(int index) const;

@@ -10,7 +10,7 @@ int main(const int argc, const char* argv[])
 		clearLog.close();
 
 		commonItems::ConverterVersion converterVersion;
-		converterVersion.loadVersion(std::filesystem::path("configurables/version.txt"));
+		converterVersion.loadVersion("configurables/version.txt");
 
 		Log(LogLevel::Info) << converterVersion;
 		if (argc >= 2)

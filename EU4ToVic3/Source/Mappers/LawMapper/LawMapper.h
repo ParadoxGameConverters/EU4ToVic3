@@ -3,7 +3,6 @@
 #include "LawMapping.h"
 #include "Loaders/LawLoader/Law.h"
 #include "Parser.h"
-#include <filesystem>
 
 namespace V3
 {
@@ -16,7 +15,7 @@ class LawMapper: commonItems::parser
 {
   public:
 	LawMapper() = default;
-	void loadMappingRules(const std::filesystem::path& filePath);
+	void loadMappingRules(const std::string& filePath);
 	void loadLawDefinitions(const std::map<std::string, V3::Law>& theLaws) { laws = theLaws; }
 
 	[[nodiscard]] const auto& getLawGroups() const { return lawGroups; }

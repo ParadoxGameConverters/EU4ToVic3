@@ -7,9 +7,9 @@
 void V3::StateModifierLoader::loadStateModifiers(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("common/state_traits"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/state_traits/"))
 	{
-		if (fileName.extension() == ".txt")
+		if (getExtension(fileName) == "txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();

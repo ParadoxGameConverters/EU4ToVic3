@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-void mappers::ReligionGroupMapper::loadMappingRules(const std::filesystem::path& filePath)
+void mappers::ReligionGroupMapper::loadMappingRules(const std::string& filePath)
 {
 	Log(LogLevel::Info) << "-> Parsing religion group mapping rules.";
 	registerKeys();

@@ -7,9 +7,9 @@ namespace fs = std::filesystem;
 
 void EU4::EU4LocalizationLoader::loadLocalizations(const commonItems::ModFilesystem& modFS)
 {
-	for (const auto& file: modFS.GetAllFilesInFolderRecursive("localisation"))
+	for (const auto& file: modFS.GetAllFilesInFolderRecursive("/localisation/"))
 	{
-		if (file.extension() != ".yml")
+		if (getExtension(file) != "yml")
 			continue;
 		readFromFile(file);
 	}
@@ -20,9 +20,9 @@ void EU4::EU4LocalizationLoader::loadLocalizations(std::istream& theStream)
 	readFromStream(theStream);
 }
 
-void EU4::EU4LocalizationLoader::readFromFile(const fs::path& fileName)
+void EU4::EU4LocalizationLoader::readFromFile(const std::string& fileName)
 {
-	std::ifstream locFile(fileName);
+	std::ifstream locFile(fs::u8path(fileName));
 	readFromStream(locFile);
 	locFile.close();
 }

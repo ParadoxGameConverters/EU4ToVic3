@@ -8,9 +8,9 @@ void mappers::TraitDefinitionLoader::loadDefinitions(const commonItems::ModFiles
 {
 	Log(LogLevel::Info) << "-> Loading discrimination trait definitions.";
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("common/discrimination_traits"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/discrimination_traits/"))
 	{
-		if (fileName.extension() != ".txt")
+		if (getExtension(fileName) != "txt")
 			continue;
 
 		parseFile(fileName);

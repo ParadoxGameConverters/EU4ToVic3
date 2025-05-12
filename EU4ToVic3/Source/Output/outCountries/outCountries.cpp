@@ -132,11 +132,11 @@ void outHistoryPopulations(std::ostream& output, const V3::Country& country)
 
 } // namespace
 
-void OUT::exportCommonCountries(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+void OUT::exportCommonCountries(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
 {
-	std::ofstream output("output" / outputName / "common/country_definitions/99_converted_countries.txt");
+	std::ofstream output("output/" + outputName + "/common/country_definitions/99_converted_countries.txt");
 	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/country_definitions/99_converted_countries.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/country_definitions/99_converted_countries.txt");
 
 	output << commonItems::utf8BOM;
 	for (const auto& country: countries | std::views::values)
@@ -144,11 +144,11 @@ void OUT::exportCommonCountries(const std::filesystem::path& outputName, const s
 	output.close();
 }
 
-void OUT::exportHistoryCountries(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+void OUT::exportHistoryCountries(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
 {
-	std::ofstream output("output" / outputName / "common/history/countries/99_converted_countries.txt");
+	std::ofstream output("output/" + outputName + "/common/history/countries/99_converted_countries.txt");
 	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/countries/99_converted_countries.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/history/countries/99_converted_countries.txt");
 
 	output << commonItems::utf8BOM << "COUNTRIES = {\n";
 	for (const auto& country: countries | std::views::values)
@@ -158,11 +158,11 @@ void OUT::exportHistoryCountries(const std::filesystem::path& outputName, const 
 	output.close();
 }
 
-void OUT::exportHistoryPopulations(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+void OUT::exportHistoryPopulations(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
 {
-	std::ofstream output("output" / outputName / "common/history/population/99_converted_countries.txt");
+	std::ofstream output("output/" + outputName + "/common/history/population/99_converted_countries.txt");
 	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/population/99_converted_countries.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/history/population/99_converted_countries.txt");
 
 	output << commonItems::utf8BOM << "POPULATION = {\n";
 	for (const auto& country: countries | std::views::values)
@@ -173,11 +173,11 @@ void OUT::exportHistoryPopulations(const std::filesystem::path& outputName, cons
 	output.close();
 }
 
-void OUT::exportReleasables(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+void OUT::exportReleasables(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
 {
-	std::ofstream output("output" / outputName / "common/country_creation/99_converted_releasables.txt");
+	std::ofstream output("output/" + outputName + "/common/country_creation/99_converted_releasables.txt");
 	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/country_creation/99_converted_releasables.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/country_creation/99_converted_releasables.txt");
 
 	output << commonItems::utf8BOM;
 	for (const auto& country: countries | std::views::values)
@@ -186,11 +186,11 @@ void OUT::exportReleasables(const std::filesystem::path& outputName, const std::
 	output.close();
 }
 
-void OUT::exportMajorFormables(const std::filesystem::path& outputName, const std::map<std::string, V3::MajorFormablesEntry>& formables)
+void OUT::exportMajorFormables(const std::string& outputName, const std::map<std::string, V3::MajorFormablesEntry>& formables)
 {
-	std::ofstream output("output" / outputName / "common/country_formation/00_major_formables.txt");
+	std::ofstream output("output/" + outputName + "/common/country_formation/00_major_formables.txt");
 	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/country_formation/00_major_formables.txt");
+		throw std::runtime_error("Could not create " + outputName + "/common/country_formation/00_major_formables.txt");
 
 	output << commonItems::utf8BOM;
 	for (const auto& [tag, formable]: formables)

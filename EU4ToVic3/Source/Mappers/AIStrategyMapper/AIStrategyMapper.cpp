@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 
-void mappers::AIStrategyMapper::loadMappingRules(const std::filesystem::path& filePath)
+void mappers::AIStrategyMapper::loadMappingRules(const std::string& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading AI Strategy mapping rules.";
 	registerKeys();

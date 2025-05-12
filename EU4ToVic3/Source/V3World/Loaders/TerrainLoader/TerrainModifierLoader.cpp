@@ -3,7 +3,7 @@
 #include "ParserHelpers.h"
 #include <Log.h>
 
-void V3::TerrainModifierLoader::loadTerrainModifiers(const std::filesystem::path& filePath)
+void V3::TerrainModifierLoader::loadTerrainModifiers(const std::string& filePath)
 {
 	registerKeys();
 	parseFile(filePath);

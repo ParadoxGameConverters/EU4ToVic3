@@ -29,8 +29,8 @@ class FlagCrafter
 
 	FlagCrafter() = default;
 
-	void loadAvailableFlags(const std::filesystem::path& blankModPath, const std::filesystem::path& vanillaPath);
-	void loadCustomColors(const std::filesystem::path& filePath);
+	void loadAvailableFlags(const std::string& blankModPath, const std::string& vanillaPath);
+	void loadCustomColors(const std::string& filePath);
 	void distributeAvailableFlags(const std::map<std::string, std::shared_ptr<Country>>& countries,
 		 const mappers::CountryMapper& countryMapper,
 		 const commonItems::ModFilesystem& eu4ModFS);
@@ -40,7 +40,7 @@ class FlagCrafter
   private:
 	[[nodiscard]] bool tryAssigningFlagViaValue(const std::shared_ptr<Country>& country, const std::string& value);
 	[[nodiscard]] bool tryAssigningEU4Flag(const std::shared_ptr<Country>& country, const commonItems::ModFilesystem& eu4ModFS);
-	void loadKnownFlags(const std::filesystem::path& blankModPath, const std::filesystem::path& vanillaPath);
+	void loadKnownFlags(const std::string& blankModPath, const std::string& vanillaPath);
 	void filterKnownFlags();
 	void craftCustomFlag(const std::shared_ptr<Country>& country);
 
@@ -48,9 +48,9 @@ class FlagCrafter
 	[[nodiscard]] static bool createCustomFlag(const commonItems::Color& c1,
 		 const commonItems::Color& c2,
 		 const commonItems::Color& c3,
-		 const std::filesystem::path& emblemPath,
-		 const std::filesystem::path& basePath,
-		 const std::filesystem::path& targetPath);
+		 const std::string& emblemPath,
+		 const std::string& basePath,
+		 const std::string& targetPath);
 
 	FlagColorLoader flagColorLoader;
 

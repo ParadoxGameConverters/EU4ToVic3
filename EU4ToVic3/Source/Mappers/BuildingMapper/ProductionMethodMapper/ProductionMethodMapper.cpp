@@ -11,7 +11,7 @@
 #include <numeric>
 #include <ranges>
 
-void mappers::ProductionMethodMapper::loadRules(const std::filesystem::path& filePath)
+void mappers::ProductionMethodMapper::loadRules(const std::string& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading PM rules.";
 	registerKeys();

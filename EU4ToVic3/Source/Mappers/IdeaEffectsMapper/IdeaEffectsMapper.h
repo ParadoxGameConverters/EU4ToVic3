@@ -2,7 +2,6 @@
 #define IDEA_EFFECTS_MAPPER_H
 #include "IdeaEffectsMapping.h"
 #include "Parser.h"
-#include <filesystem>
 
 namespace mappers
 {
@@ -22,7 +21,7 @@ class IdeaEffectsMapper: commonItems::parser
 {
   public:
 	IdeaEffectsMapper() = default;
-	void loadMappingRules(const std::filesystem::path& filePath);
+	void loadMappingRules(const std::string& filePath);
 	void loadMappingRules(std::istream& theStream);
 
 	[[nodiscard]] IdeaEffect getEffectForIdeas(const std::set<std::string>& ideas) const;

@@ -9,9 +9,9 @@ void V3::TechLoader::loadTechs(const commonItems::ModFilesystem& modFS)
 {
 	Log(LogLevel::Info) << "-> Loading Techs.";
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("common/technology/technologies"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/technology/technologies"))
 	{
-		if (fileName.extension() == ".txt")
+		if (getExtension(fileName) == "txt")
 			parseFile(fileName);
 	}
 	clearRegisteredKeywords();
