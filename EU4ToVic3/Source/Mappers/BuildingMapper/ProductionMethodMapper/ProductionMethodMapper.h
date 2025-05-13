@@ -2,6 +2,7 @@
 #define PRODUCTION_METHOD_MAPPER_H
 #include "Parser.h"
 #include "ProductionMethodMapping.h"
+#include <filesystem>
 
 namespace V3
 {
@@ -19,7 +20,7 @@ class ProductionMethodMapper: commonItems::parser
 {
   public:
 	ProductionMethodMapper() = default;
-	void loadRules(const std::string& filePath);
+	void loadRules(const std::filesystem::path& filePath);
 	void applyRules(const V3::Country& country,
 		 const std::map<std::string, V3::ProductionMethod>& PMs,
 		 const std::map<std::string, V3::ProductionMethodGroup>& PMGroups) const;

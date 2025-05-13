@@ -3,7 +3,7 @@
 #include "ParserHelpers.h"
 #include "WesternizationMapping.h"
 
-void mappers::WesternizationMapper::loadMappingRules(const std::string& filePath)
+void mappers::WesternizationMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Parsing westernization groups.";
 	registerKeys();

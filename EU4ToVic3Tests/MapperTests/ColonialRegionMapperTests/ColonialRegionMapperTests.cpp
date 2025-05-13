@@ -6,7 +6,7 @@ namespace
 {
 std::tuple<V3::ClayManager, mappers::ColonialRegionMapper> prepMappers()
 {
-	const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+	const auto modFS = commonItems::ModFilesystem(std::filesystem::path("TestFiles/vic3installation/game"), {});
 	V3::ClayManager clayManager;
 	clayManager.initializeVanillaStates(modFS);
 	clayManager.loadTerrainsIntoProvinces(modFS);

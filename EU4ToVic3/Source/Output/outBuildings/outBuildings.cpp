@@ -108,11 +108,11 @@ void outStateBuildings(std::ostream& output, const V3::State& state)
 }
 } // namespace
 
-void OUT::exportBuildings(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::State>>& states)
+void OUT::exportBuildings(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::State>>& states)
 {
-	std::ofstream output("output/" + outputName + "/common/history/buildings/99_converted_buildings.txt");
+	std::ofstream output("output" / outputName / "common/history/buildings/99_converted_buildings.txt");
 	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName + "/common/history/buildings/99_converted_buildings.txt");
+		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/buildings/99_converted_buildings.txt");
 
 	output << commonItems::utf8BOM << "BUILDINGS = {\n";
 	for (const auto& state: states | std::views::values)

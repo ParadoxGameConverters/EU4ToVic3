@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "MajorFormablesEntry.h"
 
-void V3::MajorFormablesLoader::loadMajorFormables(const std::string& filePath)
+void V3::MajorFormablesLoader::loadMajorFormables(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading Major formables.";
 	registerKeys();

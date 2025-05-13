@@ -3,9 +3,9 @@
 void V3::Vic3DefinesLoader::loadDefines(const commonItems::ModFilesystem& modFS)
 {
 	registerKeys();
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/defines/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/defines"))
 	{
-		if (getExtension(fileName) != "txt")
+		if (fileName.extension() != ".txt")
 			continue;
 		parseFile(fileName);
 	}

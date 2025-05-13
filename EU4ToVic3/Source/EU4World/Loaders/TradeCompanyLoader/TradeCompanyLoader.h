@@ -12,7 +12,7 @@ class TradeCompanyLoader: commonItems::parser
   public:
 	TradeCompanyLoader() = default;
 	void loadTradeCompanies(const commonItems::ModFilesystem& modFS);
-	void loadExcludedTradeCompanies(const std::string& filePath) { excludedTCMapper.loadMappingRules(filePath); }
+	void loadExcludedTradeCompanies(const std::filesystem::path& filePath) { excludedTCMapper.loadMappingRules(filePath); }
 
 	[[nodiscard]] bool isProvinceInTradeRegion(int province) const;
 	[[nodiscard]] std::optional<TradeCompany> getTCForProvince(int province) const;

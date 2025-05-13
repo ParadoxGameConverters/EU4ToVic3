@@ -48,11 +48,11 @@ void outStatePops(std::ostream& output, const V3::State& state)
 }
 } // namespace
 
-void OUT::exportPops(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::State>>& states)
+void OUT::exportPops(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::State>>& states)
 {
-	std::ofstream output("output/" + outputName + "/common/history/pops/99_converted_pops.txt");
+	std::ofstream output("output" / outputName / "common/history/pops/99_converted_pops.txt");
 	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName + "/common/history/pops/99_converted_pops.txt");
+		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/pops/99_converted_pops.txt");
 
 	output << commonItems::utf8BOM << "POPS = {\n";
 	for (const auto& state: states | std::views::values)

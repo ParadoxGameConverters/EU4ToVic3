@@ -46,11 +46,11 @@ void outCommonHistoryStates(std::ostream& output, const std::map<std::string, st
 }
 } // namespace
 
-void OUT::exportCommonHistoryStates(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::State>>& states)
+void OUT::exportCommonHistoryStates(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::State>>& states)
 {
-	std::ofstream output("output/" + outputName + "/common/history/states/99_converter_states.txt");
+	std::ofstream output("output" / outputName / "common/history/states/99_converter_states.txt");
 	if (!output.is_open())
-		throw std::runtime_error("Could not create " + outputName + "/common/history/states/99_converter_states.txt");
+		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/states/99_converter_states.txt");
 
 	output << commonItems::utf8BOM;
 	outCommonHistoryStates(output, states);

@@ -13,9 +13,9 @@ void EU4::RegionManager::loadRegions(const commonItems::ModFilesystem& modsFS)
 	const auto& areaFile = modsFS.GetActualFileLocation("map/area.txt");
 	if (!areaFile)
 		throw std::runtime_error("There is no map/area.txt!");
-	std::ifstream areaStream(fs::u8path(*areaFile));
+	std::ifstream areaStream(*areaFile);
 	if (!areaStream.is_open())
-		throw std::runtime_error("Could not open " + *areaFile + "!");
+		throw std::runtime_error("Could not open " + areaFile->string() + "!");
 	registerAreaKeys();
 	parseStream(areaStream);
 	clearRegisteredKeywords();
@@ -24,9 +24,9 @@ void EU4::RegionManager::loadRegions(const commonItems::ModFilesystem& modsFS)
 	const auto& sRegionFile = modsFS.GetActualFileLocation("map/superregion.txt");
 	if (!sRegionFile)
 		throw std::runtime_error("There is no map/superregion.txt!");
-	std::ifstream superRegionStream(fs::u8path(*sRegionFile));
+	std::ifstream superRegionStream(*sRegionFile);
 	if (!superRegionStream.is_open())
-		throw std::runtime_error("Could not open " + *sRegionFile + "!");
+		throw std::runtime_error("Could not open " + sRegionFile->string() + "!");
 	registerSuperRegionKeys();
 	parseStream(superRegionStream);
 	clearRegisteredKeywords();
@@ -35,9 +35,9 @@ void EU4::RegionManager::loadRegions(const commonItems::ModFilesystem& modsFS)
 	const auto& regionFile = modsFS.GetActualFileLocation("map/region.txt");
 	if (!regionFile)
 		throw std::runtime_error("There is no map/region.txt!");
-	std::ifstream regionStream(fs::u8path(*regionFile));
+	std::ifstream regionStream(*regionFile);
 	if (!regionStream.is_open())
-		throw std::runtime_error("Could not open " + *regionFile + "!");
+		throw std::runtime_error("Could not open " + regionFile->string() + "!");
 	registerRegionKeys();
 	parseStream(regionStream);
 	clearRegisteredKeywords();

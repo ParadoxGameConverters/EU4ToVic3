@@ -33,7 +33,7 @@ class World
 	[[nodiscard]] const auto& getVanillaLocalizations() const { return vanillaLocalizationLoader; }
 
   private:
-	std::string V3Path;
+	std::filesystem::path V3Path;
 	Configuration::ConfigBlock configBlock;
 	DatingData datingData;
 

@@ -15,7 +15,7 @@ class UnitTypeLoader
 	[[nodiscard]] std::optional<UnitType> getUnitTypeForRegimentTypeName(const std::string& regimentTypeName) const;
 
   private:
-	void addUnitFileToRegimentTypeMap(const std::string& directory, const std::string& filename);
+	void addUnitFileToRegimentTypeMap(const std::filesystem::path& directory, const std::filesystem::path& filename);
 
 	std::map<std::string, UnitType> unitTypeMap;
 };

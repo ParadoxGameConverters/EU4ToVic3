@@ -5,7 +5,7 @@
 #include "ParserHelpers.h"
 #include <iomanip>
 
-void mappers::CountryMapper::loadMappingRules(const std::string& filePath)
+void mappers::CountryMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Parsing country mapping rules.";
 	registerKeys();

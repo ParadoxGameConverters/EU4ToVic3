@@ -4,16 +4,16 @@
 #include <fstream>
 #include <ranges>
 
-void OUT::exportDiplomaticPlays(const std::string& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
+void OUT::exportDiplomaticPlays(const std::filesystem::path& outputName, const std::map<std::string, std::shared_ptr<V3::Country>>& countries)
 {
 	for (const auto& [tag, country]: countries)
 	{
 		if (country->getProcessedData().vanillaDiplomaticPlayElements.empty())
 			continue;
 
-		std::ofstream output("output/" + outputName + "/common/history/diplomatic_plays/00_" + tag + ".txt");
+		std::ofstream output("output" / outputName / "common/history/diplomatic_plays/00_" / (tag + ".txt"));
 		if (!output.is_open())
-			throw std::runtime_error("Could not create " + outputName + "/common/history/diplomatic_plays/00_" + tag + ".txt");
+			throw std::runtime_error("Could not create " + outputName.string() + "/common/history/diplomatic_plays/00_" + tag + ".txt");
 
 		output << commonItems::utf8BOM << "DIPLOMATIC_PLAYS = {\n";
 		output << "\tc:" << tag << " = {\n";

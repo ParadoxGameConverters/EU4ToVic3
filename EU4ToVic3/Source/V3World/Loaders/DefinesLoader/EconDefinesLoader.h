@@ -9,7 +9,7 @@ class EconDefinesLoader: commonItems::parser
   public:
 	EconDefinesLoader() = default;
 
-	void loadEconDefines(const std::string& filePath);
+	void loadEconDefines(const std::filesystem::path& filePath);
 	[[nodiscard]] const auto& getGlobalCP() const { return globalCP; }
 	[[nodiscard]] const auto& getVNGlobalCP() const { return VNGlobalCP; }
 	[[nodiscard]] const auto& getCentralizedPopRatio() const { return centralizedPopRatio; }
