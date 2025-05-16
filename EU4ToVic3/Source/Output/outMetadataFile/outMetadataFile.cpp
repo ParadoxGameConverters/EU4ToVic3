@@ -48,7 +48,7 @@ void OUT::exportMetadataFile(const std::filesystem::path& outputName)
 	std::ofstream output("output" / outputName / ".metadata/metadata.json");
 	if (!output.is_open())
 		throw std::runtime_error("Could not create " + outputName.string() + "/.metadata/metadata.json");
-	Log(LogLevel::Info) << "<< Writing to: output" / outputName / ".metadata/metadata.json";
+	Log(LogLevel::Info) << "<< Writing to: output" + outputName.string() + ".metadata/metadata.json";
 	outMetadataFile(output, outputName.string());
 	output.close();
 }

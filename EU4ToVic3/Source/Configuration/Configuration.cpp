@@ -39,19 +39,19 @@ void Configuration::registerKeys()
 
 	registerKeyword("SaveGame", [this](std::istream& theStream) {
 		EU4SaveGamePath = commonItems::getString(theStream);
-		Log(LogLevel::Info) << "EU4 savegame path: " << EU4SaveGamePath;
+		Log(LogLevel::Info) << "EU4 savegame path: " << EU4SaveGamePath.string();
 	});
 	registerKeyword("EU4directory", [this](std::istream& theStream) {
 		EU4Path = commonItems::getString(theStream);
-		Log(LogLevel::Info) << "EU4 path: " << EU4Path;
+		Log(LogLevel::Info) << "EU4 path: " << EU4Path.string();
 	});
 	registerKeyword("EU4DocumentsDirectory", [this](std::istream& theStream) {
 		EU4DocumentsPath = commonItems::getString(theStream);
-		Log(LogLevel::Info) << "EU4 documents path: " << EU4DocumentsPath;
+		Log(LogLevel::Info) << "EU4 documents path: " << EU4DocumentsPath.string();
 	});
 	registerKeyword("Vic3directory", [this](std::istream& theStream) {
 		Vic3Path = commonItems::getString(theStream);
-		Log(LogLevel::Info) << "Vic3 path: " << Vic3Path;
+		Log(LogLevel::Info) << "Vic3 path: " << Vic3Path.string();
 	});
 
 	// ------- options
@@ -118,7 +118,7 @@ void Configuration::registerKeys()
 	});
 	registerKeyword("output_name", [this](std::istream& theStream) {
 		outputName = commonItems::getString(theStream);
-		Log(LogLevel::Info) << "Output Name: " << outputName;
+		Log(LogLevel::Info) << "Output Name: " << outputName.string();
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
@@ -131,7 +131,7 @@ void Configuration::verifyEU4Path() const
 		throw std::runtime_error(EU4Path.string() + " does not contain Europa Universalis 4!");
 	if (!commonItems::DoesFileExist(EU4Path / "map/positions.txt"))
 		throw std::runtime_error(EU4Path.string() + " does not appear to be a valid EU4 install!");
-	Log(LogLevel::Info) << "\tEU4 install path is " << EU4Path;
+	Log(LogLevel::Info) << "\tEU4 install path is " << EU4Path.string();
 }
 
 void Configuration::verifyVic3Path()
@@ -145,7 +145,7 @@ void Configuration::verifyVic3Path()
 		throw std::runtime_error(Vic3Path.string() + " does not contain Victoria 3!");
 	if (!commonItems::DoesFileExist(Vic3Path / "game/map_data/provinces.png"))
 		throw std::runtime_error(Vic3Path.string() + " does not appear to be a valid Vic3 install!");
-	Log(LogLevel::Info) << "\tVic3 install path is " << Vic3Path;
+	Log(LogLevel::Info) << "\tVic3 install path is " << Vic3Path.string();
 	Vic3Path += "/game"; // We're adding "/game/" since all we ever need from now on is in that subdirectory.
 }
 

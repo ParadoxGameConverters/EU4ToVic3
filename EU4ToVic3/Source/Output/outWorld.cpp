@@ -38,7 +38,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	}
 	Log(LogLevel::Progress) << "81 %";
 
-	Log(LogLevel::Info) << "<< Copying Mod Template from blankMod/output to output/" << outputName;
+	Log(LogLevel::Info) << "<< Copying Mod Template from blankMod/output to output/" << outputName.string();
 	try
 	{
 		std::filesystem::copy("blankMod/output", "output" / outputName, std::filesystem::copy_options::recursive);
