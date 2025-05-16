@@ -11,7 +11,7 @@ void OUT::exportDiplomaticPlays(const std::filesystem::path& outputName, const s
 		if (country->getProcessedData().vanillaDiplomaticPlayElements.empty())
 			continue;
 
-		std::ofstream output("output" / outputName / "common/history/diplomatic_plays/00_" / (tag + ".txt"));
+		std::ofstream output("output" / outputName / "common/history/diplomatic_plays" / ("00_" + tag + ".txt"));
 		if (!output.is_open())
 			throw std::runtime_error("Could not create " + outputName.string() + "/common/history/diplomatic_plays/00_" + tag + ".txt");
 
