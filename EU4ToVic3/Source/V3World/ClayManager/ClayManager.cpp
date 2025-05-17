@@ -879,7 +879,7 @@ void V3::ClayManager::redistributeResourcesAndLandshares(const int splitStatePri
 	}
 }
 
-void V3::ClayManager::loadAdjacencies(const std::string& filePath)
+void V3::ClayManager::loadAdjacencies(const std::filesystem::path& filePath)
 {
 	coastalMapper.loadAdjacencies(filePath);
 }

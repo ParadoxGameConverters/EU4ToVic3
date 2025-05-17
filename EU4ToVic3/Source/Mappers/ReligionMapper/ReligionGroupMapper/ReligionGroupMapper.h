@@ -2,6 +2,7 @@
 #define RELIGION_GROUP_MAPPER_H
 #include "Parser.h"
 #include "ReligionGroupMapping.h"
+#include <filesystem>
 
 namespace mappers
 {
@@ -9,7 +10,7 @@ class ReligionGroupMapper: commonItems::parser
 {
   public:
 	ReligionGroupMapper() = default;
-	void loadMappingRules(const std::string& filePath);
+	void loadMappingRules(const std::filesystem::path& filePath);
 	void loadMappingRules(std::istream& theStream);
 
 	[[nodiscard]] std::optional<ReligionGroupMapping> getMappingForEU4ReligionGroup(const std::string& eu4ReligionGroup) const;

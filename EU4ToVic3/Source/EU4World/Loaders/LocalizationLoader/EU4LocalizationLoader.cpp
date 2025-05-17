@@ -7,11 +7,20 @@ namespace fs = std::filesystem;
 
 void EU4::EU4LocalizationLoader::loadLocalizations(const commonItems::ModFilesystem& modFS)
 {
-	for (const auto& file: modFS.GetAllFilesInFolderRecursive("/localisation/"))
+	// first read from all files in the main localization folder, but do not replace localizations
+	for (const auto& file: modFS.GetAllFilesInFolder("localisation"))
 	{
-		if (getExtension(file) != "yml")
+		if (file.extension() != ".yml")
 			continue;
 		readFromFile(file);
+	}
+
+	// next, read from all files in the replace folder to override existing localizations
+	for (const auto& file: modFS.GetAllFilesInFolder("localisation/replace"))
+	{
+		if (file.extension() != ".yml")
+			continue;
+		readFromFileWithReplace(file);
 	}
 }
 
@@ -20,12 +29,21 @@ void EU4::EU4LocalizationLoader::loadLocalizations(std::istream& theStream)
 	readFromStream(theStream);
 }
 
-void EU4::EU4LocalizationLoader::readFromFile(const std::string& fileName)
+void EU4::EU4LocalizationLoader::readFromFile(const fs::path& fileName)
 {
-	std::ifstream locFile(fs::u8path(fileName));
+	std::ifstream locFile(fileName);
 	readFromStream(locFile);
 	locFile.close();
 }
+
+
+void EU4::EU4LocalizationLoader::readFromFileWithReplace(const fs::path& fileName)
+{
+	std::ifstream locFile(fileName);
+	readFromStreamWithReplace(locFile);
+	locFile.close();
+}
+
 
 void EU4::EU4LocalizationLoader::readFromStream(std::istream& theStream)
 {
@@ -42,9 +60,36 @@ void EU4::EU4LocalizationLoader::readFromStream(std::istream& theStream)
 		const auto [key, value] = determineKeyLocalisationPair(line);
 		if (!key.empty() && !value.empty())
 		{
-			// We read the files in reverse, starting from mods. We don't want vanilla to override our locs.
-			if (localizations.contains(key) && localizations.at(key).contains(*language))
-				continue;
+			auto localization = localizations.find(key);
+			if (localization == localizations.end())
+			{
+				localizations[key][*language] = value;
+			}
+			else
+			{
+				// this will fail if the language already has this key
+				localization->second.emplace(*language, value);
+			}
+		}
+	}
+}
+
+
+void EU4::EU4LocalizationLoader::readFromStreamWithReplace(std::istream& theStream)
+{
+	std::string line;
+	std::getline(theStream, line); // First line is the language is like "l_english:"
+
+	const auto& language = determineLanguageForFile(removeUTF8BOM(line));
+	if (!language)
+		return;
+
+	while (!theStream.eof())
+	{
+		std::getline(theStream, line); // Subsequent lines are ' KEY: "Text"'
+		const auto [key, value] = determineKeyLocalisationPair(line);
+		if (!key.empty() && !value.empty())
+		{
 			localizations[key][*language] = value;
 		}
 	}

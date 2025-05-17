@@ -2,7 +2,7 @@
 #include "CommonRegexes.h"
 #include "Log.h"
 
-void mappers::TechSetupMapper::loadMappingRules(const std::string& filePath)
+void mappers::TechSetupMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
 	Log(LogLevel::Info) << "-> Loading Tech Setup Rules.";
 	registerKeys();

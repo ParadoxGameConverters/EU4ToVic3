@@ -7,7 +7,7 @@
 #include "PoliticalManager/Country/Country.h"
 #include "targa.h"
 
-void V3::FlagCrafter::loadAvailableFlags(const std::string& blankModPath, const std::string& vanillaPath)
+void V3::FlagCrafter::loadAvailableFlags(const std::filesystem::path& blankModPath, const std::filesystem::path& vanillaPath)
 {
 	Log(LogLevel::Info) << "-> Loading Available Flags.";
 
@@ -18,12 +18,12 @@ void V3::FlagCrafter::loadAvailableFlags(const std::string& blankModPath, const 
 							  << knownVanillaFlags.size() << " vanilla flagsets.";
 }
 
-void V3::FlagCrafter::loadCustomColors(const std::string& filePath)
+void V3::FlagCrafter::loadCustomColors(const std::filesystem::path& filePath)
 {
 	flagColorLoader.loadFlagColors(filePath);
 }
 
-void V3::FlagCrafter::loadKnownFlags(const std::string& blankModPath, const std::string& vanillaPath)
+void V3::FlagCrafter::loadKnownFlags(const std::filesystem::path& blankModPath, const std::filesystem::path& vanillaPath)
 {
 	FlagNameLoader flagNameLoader;
 	flagNameLoader.loadKnownFlags(blankModPath); // we're loading our COA DEFINITIONS, not flag definitions!
@@ -108,9 +108,9 @@ void V3::FlagCrafter::distributeAvailableFlags(const std::map<std::string, std::
 	Log(LogLevel::Info) << "-> Distributing Available Flags.";
 
 	// prep the battleground.
-	if (!commonItems::DeleteFolder("flags.tmp"))
+	if (std::filesystem::exists("flags.tmp") && std::filesystem::remove_all("flags.tmp") == static_cast<std::uintmax_t>(-1))
 		throw std::runtime_error("Could not delete flags.tmp folder!");
-	if (!commonItems::TryCreateFolder("flags.tmp"))
+	if (!std::filesystem::create_directory("flags.tmp"))
 		throw std::runtime_error("Could not create flags.tmp folder!");
 
 	auto flagCodeCounter = 0;
@@ -180,12 +180,12 @@ bool V3::FlagCrafter::tryAssigningEU4Flag(const std::shared_ptr<Country>& countr
 	const auto& eu4Tag = country->getSourceCountry()->getTag();
 
 	// These would be full-path files. Let's trim and match.
-	const auto& eu4Flags = eu4ModFS.GetAllFilesInFolder("gfx/flags/");
+	const auto& eu4Flags = eu4ModFS.GetAllFilesInFolder("gfx/flags");
 
-	std::string eu4FlagAbsolutePath;
+	std::filesystem::path eu4FlagAbsolutePath;
 	for (const auto& incomingEU4Flag: eu4Flags)
 	{
-		if (trimExtension(trimPath(incomingEU4Flag)) == eu4Tag)
+		if (incomingEU4Flag.stem() == eu4Tag)
 		{
 			eu4FlagAbsolutePath = incomingEU4Flag;
 			break;
@@ -196,7 +196,7 @@ bool V3::FlagCrafter::tryAssigningEU4Flag(const std::shared_ptr<Country>& countr
 		return false;
 
 	// Try and copy EU4 flag over to temp folder, rename to V3 tag.
-	if (!commonItems::TryCopyFile(eu4FlagAbsolutePath, "flags.tmp/" + country->getTag() + ".tga"))
+	if (!std::filesystem::copy_file(eu4FlagAbsolutePath, "flags.tmp/" + country->getTag() + ".tga", std::filesystem::copy_options::overwrite_existing))
 		return false;
 
 	// finally, add coa/flag record for the copied eu4 flag.
@@ -223,7 +223,7 @@ bool V3::FlagCrafter::tryAssigningFlagViaValue(const std::shared_ptr<Country>& c
 
 void V3::FlagCrafter::craftCustomFlag(const std::shared_ptr<Country>& country)
 {
-	std::string baseFlagFolder = "blankMod/output/gfx/coat_of_arms/textured_emblems/";
+	std::filesystem::path baseFlagFolder = "blankMod/output/gfx/coat_of_arms/textured_emblems";
 
 	const auto& v3Tag = country->getTag();
 	const auto& customColors = *country->getProcessedData().customColors;
@@ -259,8 +259,8 @@ void V3::FlagCrafter::craftCustomFlag(const std::shared_ptr<Country>& country)
 
 		const auto& suffix = flagFileSuffixes[i];
 		const auto suffixExtension = suffix + ".tga";
-		auto sourceEmblemPath = baseFlagFolder + "/eu4_custom_emblems/" + std::to_string(emblem) + suffixExtension;
-		auto sourceFlagPath = baseFlagFolder + "/eu4_custom_bases/" + baseFlagStr + ".tga";
+		auto sourceEmblemPath = baseFlagFolder / "eu4_custom_emblems" / (std::to_string(emblem) + suffixExtension);
+		auto sourceFlagPath = baseFlagFolder / "eu4_custom_bases" / (baseFlagStr + ".tga");
 
 		if (const auto flagFileFound = commonItems::DoesFileExist(sourceFlagPath) && commonItems::DoesFileExist(sourceEmblemPath); flagFileFound)
 		{
@@ -310,8 +310,8 @@ void V3::FlagCrafter::craftCustomFlag(const std::shared_ptr<Country>& country)
 		else
 		{
 			if (!commonItems::DoesFileExist(sourceFlagPath))
-				throw std::runtime_error("Could not find " + sourceFlagPath);
-			throw std::runtime_error("Could not find " + sourceEmblemPath);
+				throw std::runtime_error("Could not find " + sourceFlagPath.string());
+			throw std::runtime_error("Could not find " + sourceEmblemPath.string());
 		}
 	}
 }
@@ -319,14 +319,14 @@ void V3::FlagCrafter::craftCustomFlag(const std::shared_ptr<Country>& country)
 bool V3::FlagCrafter::createCustomFlag(const commonItems::Color& c1,
 	 const commonItems::Color& c2,
 	 const commonItems::Color& c3,
-	 const std::string& emblemPath,
-	 const std::string& basePath,
-	 const std::string& targetPath)
+	 const std::filesystem::path& emblemPath,
+	 const std::filesystem::path& basePath,
+	 const std::filesystem::path& targetPath)
 {
 	tga_image base;
 	tga_image emblem;
 
-	auto res = tga_read(&base, basePath.c_str());
+	auto res = tga_read(&base, basePath.string().c_str());
 	if (res)
 	{
 		Log(LogLevel::Error) << "Failed to create custom flag: could not open " << basePath;
@@ -334,7 +334,7 @@ bool V3::FlagCrafter::createCustomFlag(const commonItems::Color& c1,
 		return false;
 	}
 
-	res = tga_read(&emblem, emblemPath.c_str());
+	res = tga_read(&emblem, emblemPath.string().c_str());
 	if (res)
 	{
 		Log(LogLevel::Error) << "Failed to create custom flag: could not open " << emblemPath;
@@ -402,7 +402,7 @@ bool V3::FlagCrafter::createCustomFlag(const commonItems::Color& c1,
 		}
 	}
 
-	res = tga_write(targetPath.c_str(), &base);
+	res = tga_write(targetPath.string().c_str(), &base);
 	if (res)
 	{
 		Log(LogLevel::Error) << "Failed to create custom flag: could not write to " << targetPath;

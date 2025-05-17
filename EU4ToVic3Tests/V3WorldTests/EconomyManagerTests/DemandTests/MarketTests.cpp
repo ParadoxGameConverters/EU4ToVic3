@@ -5,7 +5,7 @@
 
 namespace
 {
-const auto modFS = commonItems::ModFilesystem("TestFiles/vic3installation/game/", {});
+const auto modFS = commonItems::ModFilesystem(std::filesystem::path("TestFiles/vic3installation/game"), {});
 }
 
 TEST(V3World_MarketTests, DefaultsDefaultToDefaults)
@@ -1096,7 +1096,7 @@ TEST(V3World_MarketTests, FormulaEstimatesCretianNeed)
 
 	constexpr double size = 136344.0;
 
-	market.calcPopOrders(size,
+	market.calcPopOrders(static_cast<int>(size),
 		 {
 			  {"poors", 35904 / size},
 			  {"peasants", 90800 / size},

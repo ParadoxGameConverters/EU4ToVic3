@@ -24,21 +24,29 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	const auto& knownLocs = world.getVanillaLocalizations();
 
 	Log(LogLevel::Info) << "---> Le Dump <---";
-	commonItems::TryCreateFolder("output");
+	if (!std::filesystem::exists("output"))
+		if (!std::filesystem::create_directory("output"))
+			Log(LogLevel::Error) << "Could not create directory: output - " << commonItems::GetLastErrorString();
 	Log(LogLevel::Progress) << "80 %";
 
 	// Delete old conversion
-	if (commonItems::DoesFolderExist("output/" + outputName))
+	if (commonItems::DoesFolderExist("output" / outputName))
 	{
 		Log(LogLevel::Info) << "<< Deleting existing mod folder.";
-		if (!commonItems::DeleteFolder("output/" + outputName))
-			throw std::runtime_error("Could not delete existing output/" + outputName + "! Please delete it manually and retry.");
+		if (std::filesystem::remove_all("output" / outputName) == static_cast<std::uintmax_t>(-1))
+			throw std::runtime_error("Could not delete existing output" + outputName.string() + "! Please delete it manually and retry.");
 	}
 	Log(LogLevel::Progress) << "81 %";
 
-	Log(LogLevel::Info) << "<< Copying Mod Template from blankMod/output to output/" << outputName;
-	if (!commonItems::CopyFolder("blankMod/output", "output/" + outputName))
+	Log(LogLevel::Info) << "<< Copying Mod Template from blankMod/output to output/" << outputName.string();
+	try
+	{
+		std::filesystem::copy("blankMod/output", "output" / outputName, std::filesystem::copy_options::recursive);
+	}
+	catch (...)
+	{
 		throw std::runtime_error("Error copying mod template! Is the output/ folder writable?");
+	}
 
 	if (configuration.configBlock.thirdOdyssey)
 	{
@@ -46,8 +54,14 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 		// if (!commonItems::TryCopyFile("configurables/third_odyssey/map_data/state_regions/05_north_america.txt",
 		//		  "output/" + outputName + "/map_data/state_regions/05_north_america.txt"))
 		//	throw std::runtime_error("Error copying TO map_data! Is the output/ folder writable?");
-		if (!commonItems::CopyFolder("configurables/third_odyssey/localization", "output/" + outputName + "/localization"))
+		try
+		{
+			std::filesystem::copy("configurables/third_odyssey/localization", "output" / outputName / "localization", std::filesystem::copy_options::recursive);
+		}
+		catch (...)
+		{
 			throw std::runtime_error("Error copying TO locs! Is the output/ folder writable?");
+		}
 		// if (!commonItems::CopyFolder("configurables/third_odyssey/gfx", "output/" + outputName + "/gfx"))
 		//	throw std::runtime_error("Error copying TO gfx! Is the output/ folder writable?");
 	}
@@ -131,37 +145,39 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	Log(LogLevel::Progress) << "99 %";
 }
 
-void OUT::exportVersion(const std::string& outputName, const commonItems::ConverterVersion& converterVersion)
+void OUT::exportVersion(const std::filesystem::path& outputName, const commonItems::ConverterVersion& converterVersion)
 {
-	std::ofstream output("output/" + outputName + "/eu4tovic3_version.txt");
+	std::ofstream output("output" / outputName / "eu4tovic3_version.txt");
 	if (!output.is_open())
 		throw std::runtime_error("Error writing version file! Is the output folder writable?");
 	output << converterVersion;
 	output.close();
 }
 
-void OUT::exportBookmark(const std::string& outputName, const Configuration& configuration, const DatingData& datingData)
+void OUT::exportBookmark(const std::filesystem::path& outputName, const Configuration& configuration, const DatingData& datingData)
 {
 	if (configuration.configBlock.startDate == Configuration::STARTDATE::Vanilla)
 		return;
-	std::ofstream output("output/" + outputName + "/common/defines/99_converter_defines.txt");
+	std::ofstream output("output" / outputName / "common/defines/99_converter_defines.txt");
 	if (!output.is_open())
 		throw std::runtime_error("Error writing defines file! Is the output folder writable?");
 	output << commonItems::utf8BOM << "NGame = { START_DATE = \"" << datingData.lastEU4Date << "\" }\n";
 	output.close();
 }
 
-void OUT::copyCustomFlags(const std::string& outputName)
+void OUT::copyCustomFlags(const std::filesystem::path& outputName)
 {
 	auto counter = 0;
-	if (!commonItems::DoesFolderExist("flags.tmp"))
+	if (!commonItems::DoesFolderExist(std::filesystem::path("flags.tmp")))
 	{
 		Log(LogLevel::Warning) << "Flag folder flags.tmp not found!";
 		return;
 	}
-	for (const auto& filename: commonItems::GetAllFilesInFolder("flags.tmp"))
+	for (const auto& filename: commonItems::GetAllFilesInFolder(std::filesystem::path("flags.tmp")))
 	{
-		if (commonItems::TryCopyFile("flags.tmp/" + filename, "output/" + outputName + "/gfx/coat_of_arms/textured_emblems/custom_export/" + filename))
+		if (std::filesystem::copy_file(std::filesystem::path("flags.tmp") / filename,
+				  std::filesystem::path("output") / outputName / "gfx/coat_of_arms/textured_emblems/custom_export" / filename,
+				  std::filesystem::copy_options::overwrite_existing))
 			++counter;
 	}
 	Log(LogLevel::Info) << "<< " << counter << " flags copied.";

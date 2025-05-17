@@ -7,18 +7,18 @@ namespace fs = std::filesystem;
 
 void V3::SuperRegionLoader::loadSuperRegions(const commonItems::ModFilesystem& modFS)
 {
-	for (const auto& fileName: modFS.GetAllFilesInFolder("/common/strategic_regions/"))
+	for (const auto& fileName: modFS.GetAllFilesInFolder("common/strategic_regions"))
 	{
-		if (getExtension(fileName) != "txt")
+		if (fileName.extension() != ".txt")
 			continue;
-		std::ifstream superRegionStream(fs::u8path(fileName));
+		std::ifstream superRegionStream(fileName);
 		if (!superRegionStream.is_open())
-			throw std::runtime_error("Could not open " + fileName + " !");
+			throw std::runtime_error("Could not open " + fileName.string() + " !");
 
 		const auto superRegion = std::make_shared<SuperRegion>();
-		const auto superRegionName = trimPath(trimExtension(fileName));
+		const auto superRegionName = fileName.stem();
 		superRegion->initializeSuperRegion(superRegionStream);
-		superRegion->setName(superRegionName);
-		superRegions.emplace(superRegionName, superRegion);
+		superRegion->setName(superRegionName.string());
+		superRegions.emplace(superRegionName.string(), superRegion);
 	}
 }

@@ -11,7 +11,7 @@ Configuration::Configuration(const commonItems::ConverterVersion& converterVersi
 {
 	Log(LogLevel::Info) << "Reading configuration file";
 	registerKeys();
-	parseFile("configuration.txt");
+	parseFile(std::filesystem::path("configuration.txt"));
 	clearRegisteredKeywords();
 	setOutputName();
 	verifyEU4Path();
@@ -39,19 +39,19 @@ void Configuration::registerKeys()
 
 	registerKeyword("SaveGame", [this](std::istream& theStream) {
 		EU4SaveGamePath = commonItems::getString(theStream);
-		Log(LogLevel::Info) << "EU4 savegame path: " << EU4SaveGamePath;
+		Log(LogLevel::Info) << "EU4 savegame path: " << EU4SaveGamePath.string();
 	});
 	registerKeyword("EU4directory", [this](std::istream& theStream) {
 		EU4Path = commonItems::getString(theStream);
-		Log(LogLevel::Info) << "EU4 path: " << EU4Path;
+		Log(LogLevel::Info) << "EU4 path: " << EU4Path.string();
 	});
 	registerKeyword("EU4DocumentsDirectory", [this](std::istream& theStream) {
 		EU4DocumentsPath = commonItems::getString(theStream);
-		Log(LogLevel::Info) << "EU4 documents path: " << EU4DocumentsPath;
+		Log(LogLevel::Info) << "EU4 documents path: " << EU4DocumentsPath.string();
 	});
 	registerKeyword("Vic3directory", [this](std::istream& theStream) {
 		Vic3Path = commonItems::getString(theStream);
-		Log(LogLevel::Info) << "Vic3 path: " << Vic3Path;
+		Log(LogLevel::Info) << "Vic3 path: " << Vic3Path.string();
 	});
 
 	// ------- options
@@ -118,7 +118,7 @@ void Configuration::registerKeys()
 	});
 	registerKeyword("output_name", [this](std::istream& theStream) {
 		outputName = commonItems::getString(theStream);
-		Log(LogLevel::Info) << "Output Name: " << outputName;
+		Log(LogLevel::Info) << "Output Name: " << outputName.string();
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
@@ -126,48 +126,51 @@ void Configuration::registerKeys()
 void Configuration::verifyEU4Path() const
 {
 	if (!commonItems::DoesFolderExist(EU4Path))
-		throw std::runtime_error("EU4 path " + EU4Path + " does not exist!");
-	if (!commonItems::DoesFileExist(EU4Path + "/eu4.exe") && !commonItems::DoesFileExist(EU4Path + "/eu4") &&
-		 !commonItems::DoesFolderExist(EU4Path + "/eu4.app"))
-		throw std::runtime_error(EU4Path + " does not contain Europa Universalis 4!");
-	if (!commonItems::DoesFileExist(EU4Path + "/map/positions.txt"))
-		throw std::runtime_error(EU4Path + " does not appear to be a valid EU4 install!");
-	Log(LogLevel::Info) << "\tEU4 install path is " << EU4Path;
+		throw std::runtime_error("EU4 path " + EU4Path.string() + " does not exist!");
+	if (!commonItems::DoesFileExist(EU4Path / "eu4.exe") && !commonItems::DoesFileExist(EU4Path / "eu4") && !commonItems::DoesFolderExist(EU4Path / "eu4.app"))
+		throw std::runtime_error(EU4Path.string() + " does not contain Europa Universalis 4!");
+	if (!commonItems::DoesFileExist(EU4Path / "map/positions.txt"))
+		throw std::runtime_error(EU4Path.string() + " does not appear to be a valid EU4 install!");
+	Log(LogLevel::Info) << "\tEU4 install path is " << EU4Path.string();
 }
 
 void Configuration::verifyVic3Path()
 {
 	if (!commonItems::DoesFolderExist(Vic3Path))
-		throw std::runtime_error("Vic3 path " + Vic3Path + " does not exist!");
+		throw std::runtime_error("Vic3 path " + Vic3Path.string() + " does not exist!");
 	// TODO: OSX and Linux paths are speculative
 	// TODO: As a matter of fact...
-	if (!commonItems::DoesFileExist(Vic3Path + "/binaries/victoria3.exe") && !commonItems::DoesFileExist(Vic3Path + "/Vic3game") &&
-		 !commonItems::DoesFileExist(Vic3Path + "/binaries/victoria3"))
-		throw std::runtime_error(Vic3Path + " does not contain Victoria 3!");
-	if (!commonItems::DoesFileExist(Vic3Path + "/game/map_data/provinces.png"))
-		throw std::runtime_error(Vic3Path + " does not appear to be a valid Vic3 install!");
-	Log(LogLevel::Info) << "\tVic3 install path is " << Vic3Path;
-	Vic3Path += "/game/"; // We're adding "/game/" since all we ever need from now on is in that subdirectory.
+	if (!commonItems::DoesFileExist(Vic3Path / "binaries/victoria3.exe") && !commonItems::DoesFileExist(Vic3Path / "Vic3game") &&
+		 !commonItems::DoesFileExist(Vic3Path / "binaries/victoria3"))
+		throw std::runtime_error(Vic3Path.string() + " does not contain Victoria 3!");
+	if (!commonItems::DoesFileExist(Vic3Path / "game/map_data/provinces.png"))
+		throw std::runtime_error(Vic3Path.string() + " does not appear to be a valid Vic3 install!");
+	Log(LogLevel::Info) << "\tVic3 install path is " << Vic3Path.string();
+	Vic3Path += "/game"; // We're adding "/game/" since all we ever need from now on is in that subdirectory.
 }
 
 void Configuration::setOutputName()
 {
+	std::string outputNameString;
 	if (outputName.empty())
 	{
-		outputName = trimPath(EU4SaveGamePath);
+		outputNameString = EU4SaveGamePath.filename().stem().string();
+	}
+	else
+	{
+		outputNameString = outputName.string();
 	}
 
-	outputName = trimExtension(outputName);
-	outputName = replaceCharacter(outputName, '-');
-	outputName = replaceCharacter(outputName, ' ');
+	outputNameString = replaceCharacter(outputNameString, '-');
+	outputNameString = replaceCharacter(outputNameString, ' ');
 
-	outputName = commonItems::normalizeUTF8Path(outputName);
-	Log(LogLevel::Info) << "Using output name " << outputName;
+	outputName = commonItems::normalizeUTF8Path(outputNameString);
+	Log(LogLevel::Info) << "Using output name " << outputName.string();
 }
 
 void Configuration::verifyEU4Version(const commonItems::ConverterVersion& converterVersion) const
 {
-	const auto EU4Version = GameVersion::extractVersionFromLauncher(EU4Path + "/launcher-settings.json");
+	const auto EU4Version = GameVersion::extractVersionFromLauncher(EU4Path / "launcher-settings.json");
 	if (!EU4Version)
 	{
 		Log(LogLevel::Error) << "EU4 version could not be determined, proceeding blind!";
@@ -192,7 +195,7 @@ void Configuration::verifyEU4Version(const commonItems::ConverterVersion& conver
 
 void Configuration::verifyVic3Version(const commonItems::ConverterVersion& converterVersion) const
 {
-	const auto V3Version = GameVersion::extractVersionFromLauncher(Vic3Path + "../launcher/launcher-settings.json");
+	const auto V3Version = GameVersion::extractVersionFromLauncher(Vic3Path / "../launcher/launcher-settings.json");
 	if (!V3Version)
 	{
 		Log(LogLevel::Error) << "Vic3 version could not be determined, proceeding blind!";

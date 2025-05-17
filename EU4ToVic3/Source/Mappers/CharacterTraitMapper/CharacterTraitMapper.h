@@ -2,6 +2,7 @@
 #define CHARACTER_TRAIT_MAPPER_H
 #include "Parser.h"
 #include "SkillMapping.h"
+#include <filesystem>
 
 namespace EU4
 {
@@ -13,7 +14,7 @@ class CharacterTraitMapper: commonItems::parser
 {
   public:
 	CharacterTraitMapper() = default;
-	void loadMappingRules(const std::string& filePath);
+	void loadMappingRules(const std::filesystem::path& filePath);
 
 	[[nodiscard]] std::optional<std::string> getPersonality(const std::string& eu4Personality) const;
 	[[nodiscard]] std::set<std::string> getSkillTraits(const EU4::Character& eu4Character) const;
