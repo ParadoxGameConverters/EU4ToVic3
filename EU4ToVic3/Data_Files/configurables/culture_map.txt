@@ -34,7 +34,9 @@
 
 @african_cultures = "eu4 = egyptian eu4 = carthaginian eu4group = kongo_group  eu4group = cushitic eu4group = african eu4group = southern_african eu4group = great_lakes_group eu4group = maghrebi eu4group = mande eu4group = sahelian eu4group = sudanese eu4group = west_african eu4group = punic_group"
 
-@spanish_cultures = "eu4 = castillian eu4 = mexican eu4 = platinean eu4 = leonese eu4 = aragonese eu4 = catalan eu4 = galician eu4 = andalucian eu4 = basque eu4 = mozarabic"
+@spanish_cultures = "eu4 = castillian eu4 = mexican eu4 = platinean eu4 = leonese eu4 = aragonese eu4 = catalan eu4 = andalucian eu4 = basque eu4 = mozarabic"
+@portuguese_cultures = "eu4 = galician eu4 = portugese eu4 = brazilian"
+
 ##Colonial
 @canada_colony = "region = region_canada region = STATE_SASKATCHEWAN region = STATE_ALBERTA region = STATE_BRITISH_COLUMBIA region = STATE_YUKON_TERRITORY region = STATE_ALASKA region = STATE_NEW_BRUNSWICK"
 @usa_north_colony = "region = region_new_england region = region_the_midwest region = STATE_NORTH_DAKOTA region = STATE_SOUTH_DAKOTA region = STATE_NEBRASKA"
@@ -176,6 +178,7 @@ link = { vic3 = francoprovencal eu4group = french region = STATE_WEST_SWITZERLAN
 link = { vic3 = francoprovencal eu4 = provencal eu4 = vivaroaupenc }
 link = { vic3 = occitan eu4 = occitain eu4 = occitain_UKS eu4 = aquitaine eu4 = aquitaine_UKS eu4 = gascon eu4 = gascon_UKS eu4 = acadian eu4 = auvergnat eu4 = limousin }
 link = { vic3 = franco_canadian eu4 = louisianans eu4 = quebecois neoculture_override = yes }
+link = { vic3 = cajun eu4 = louisianans neoculture_override = yes }
 # Dynamic generation for Outremer
 
 link = { vic3 = frankish eu4group = frankish_g }
@@ -214,7 +217,13 @@ link = { vic3 = slovene eu4 = carantanian eu4 = slovene eu4 = slovene_new eu4 = 
 
 #Lusophone - Afro-Brazilian, Brazilian, Portuguese(x)
 link = { vic3 = afro_brazilian @african_cultures region = region_brazil owner = POR }
-link = { vic3 = brazilian eu4 = portugese region = region_brazil }
+link = { vic3 = amazonic @portuguese_cultures region = STATE_ACRE region = STATE_PARA region = STATE_AMAZONAS region = region_gran_colombia } 
+link = { vic3 = nordestino @portuguese_cultures region = STATE_MARANHAO region = STATE_GOIAS region = STATE_BAHIA region = STATE_RIO_GRANDE_DO_NORTE region = STATE_CEARA region = STATE_PIAUI region = STATE_PERNAMBUCO region = STATE_PARAIBA }
+link = { vic3 = paulista @portuguese_cultures region = STATE_SAO_PAULO region = STATE_PARANA region = STATE_MATO_GROSSO region = region_andes }
+link = { vic3 = sulista @portuguese_cultures region = STATE_RIO_GRANDE_DO_SUL region = STATE_SANTA_CATARINA region = region_la_plata }
+link = { vic3 = brazilian @portuguese_cultures region = STATE_MINAS_GERAIS region = STATE_RIO_DE_JANEIRO }
+link = { vic3 = brazilian @portuguese_cultures region = region_brazil } # Fallback
+
 link = { vic3 = brazilian eu4 = brazilian neoculture_override = yes }
 
 
@@ -306,10 +315,10 @@ link = { vic3 = hazara eu4 = hazara }
 link = { vic3 = kazak eu4 = khazak }
 link = { vic3 = kurdish eu4 = kurdish eu4 = gorani }
 link = { vic3 = kirgiz eu4 = kirgiz eu4 = kirghiz eu4 = old_kirgiz }
-link = { vic3 = luri eu4 = luri }
+link = { vic3 = luri eu4 = luri eu4 = lurish }
 link = { vic3 = mazanderani eu4 = mazandarani }
 link = { vic3 = pashtun eu4 = east_persian eu4 = afghani eu4 = tabari eu4 = afghan eu4 = kushan eu4 = pashtun }
-link = { vic3 = persian eu4 = turco_iranian eu4 = al_iraqiya_arabic_PER eu4 = persian eu4 = saka eu4 = luri eu4 = khorasani eu4 = mazandarani eu4 = parthian eu4 = khuzi eu4 = lurish eu4 = qashqai }
+link = { vic3 = persian eu4 = turco_iranian eu4 = al_iraqiya_arabic_PER eu4 = persian eu4 = saka eu4 = khorasani eu4 = mazandarani eu4 = parthian eu4 = khuzi eu4 = qashqai }
 link = { vic3 = tajik eu4 = tajik eu4 = sogdian eu4 = tajihk eu4 = tajiks eu4 = khwarezmians }
 link = { vic3 = turkmen eu4 = turkmeni eu4 = mervi eu4 = hephthalite }
 link = { vic3 = uighur eu4 = uyghur eu4 = old_uyghur }
@@ -447,8 +456,9 @@ link = { vic3 = dayak eu4 = dayak }
 link = { vic3 = javan eu4 = javanese eu4 = sundanese eu4 = javan  }
 link = { vic3 = malay eu4 = malayan eu4 = indonesian }
 link = { vic3 = moluccan eu4 = sulawesi eu4 = moluccan eu4 = nusa_tenggara eu4 = bugis eu4 = bungku eu4 = chamorro eu4 = minahasa }
-link = { vic3 = sumatran eu4 = sumatran eu4 = acehenese eu4 = acehnese eu4 = minang eu4 = cham }
-
+link = { vic3 = sumatran eu4 = sumatran eu4 = acehenese eu4 = acehnese eu4 = minang }
+link = { vic3 = khmer eu4 = cham owner = KOH } # Bahnars
+# cham is dynamically generated
 
 # Thai - Thai, Lao, Shan and Zhuang
 link = { vic3 = lao eu4 = lao eu4 = laotian }
@@ -517,6 +527,7 @@ link = { vic3 = gujarati eu4 = gujarati eu4 = nagpuri eu4 = sambalpuri eu4 = sau
 link = { vic3 = hindustani eu4 = kanauji eu4 = vindhyan }
 link = { vic3 = bundeli eu4 = bundeli }
 link = { vic3 = kho eu4 = kashmiri region = STATE_PASHTUNISTAN }
+link = { vic3 = kho eu4 = peristani eu4 = burusho }
 link = { vic3 = kashmiri eu4 = kashmiri }
 link = { vic3 = oriya eu4 = oriya eu4 = garjati }
 link = { vic3 = pahari eu4 = pahari }
@@ -526,7 +537,6 @@ link = { vic3 = pathan eu4 = east_persian eu4 = afghani eu4 = tabari eu4 = afgha
 link = { vic3 = rajput eu4 = rajput eu4 = malvi eu4 = dhundari eu4 = harauti eu4 = marwari eu4 = meo eu4 = mewari eu4 = tomara eu4 = nimadi }
 link = { vic3 = sindi eu4 = sindhi eu4 = multani }
 link = { vic3 = sinhala eu4 = sinhala }
-#peristani and burusho are dynamically generated
 
 
 # Dravidian - Kannada, Malayam, Tamil and Telegu
@@ -630,7 +640,7 @@ link = { vic3 = kikuyu eu4 = bantu eu4 = kikuyu } # Bantu = Thagiicu
 link = { vic3 = luo eu4 = acholi } # South Sudan
 link = { vic3 = maasai eu4 = masaba } # Revise
 link = { vic3 = nuba eu4 = nuba }
-link = { vic3 = oromo eu4 = ethiopian eu4 = oromo }
+link = { vic3 = oromo eu4 = oromo eu4 = ethiopian }
 link = { vic3 = ruanda eu4 = rwandan } # Rwanda
 link = { vic3 = sidama eu4 = sidamo }
 link = { vic3 = somali eu4 = somali eu4 = harari }
