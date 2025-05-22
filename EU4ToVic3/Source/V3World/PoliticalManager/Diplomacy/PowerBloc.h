@@ -15,7 +15,12 @@ struct PowerBloc
 		 const std::optional<commonItems::Color>& _color,
 		 const date& _start_date):
 		 identity(std::move(_identity)),
-		 owner(std::move(_owner)), name(std::move(_name)), principle(std::move(_principle)), color(_color), members(std::move(_members)), start_date(_start_date)
+		 owner(std::move(_owner)),
+		 name(std::move(_name)),
+		 principle(std::move(_principle)),
+		 color(_color),
+		 members(std::move(_members)),
+		 start_date(_start_date)
 	{
 	}
 	std::string identity;

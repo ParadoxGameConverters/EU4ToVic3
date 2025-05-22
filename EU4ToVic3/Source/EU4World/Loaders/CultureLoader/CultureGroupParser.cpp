@@ -4,7 +4,8 @@
 #include <ranges>
 
 EU4::CultureGroupParser::CultureGroupParser(std::string theName, std::istream& theStream, std::set<std::string> theKnownCultures):
-	 cultureGroupName(std::move(theName)), knownCultures(std::move(theKnownCultures))
+	 cultureGroupName(std::move(theName)),
+	 knownCultures(std::move(theKnownCultures))
 {
 	registerKeys();
 	parseStream(theStream);
