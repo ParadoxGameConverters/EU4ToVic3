@@ -9,7 +9,9 @@ struct Religion
 {
 	Religion() = default;
 	Religion(std::string name, std::string group = {}, std::string trappings = {}):
-		 name(std::move(name)), group(std::move(group)), trappings(std::move(trappings))
+		 name(std::move(name)),
+		 group(std::move(group)),
+		 trappings(std::move(trappings))
 	{
 	}
 	bool operator==(const Religion& rhs) const { return name == rhs.name && group == rhs.group && trappings == rhs.trappings; }

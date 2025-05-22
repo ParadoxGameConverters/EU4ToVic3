@@ -9,7 +9,10 @@ class Pop
   public:
 	Pop() = default;
 	Pop(std::string culture, std::string religion, std::string type, int size):
-		 culture(std::move(culture)), religion(std::move(religion)), type(std::move(type)), size(size)
+		 culture(std::move(culture)),
+		 religion(std::move(religion)),
+		 type(std::move(type)),
+		 size(size)
 	{
 	}
 	bool operator==(const Pop& rhs) const { return culture == rhs.culture && religion == rhs.religion && type == rhs.type; }
