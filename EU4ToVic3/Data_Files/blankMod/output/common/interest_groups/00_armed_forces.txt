@@ -2747,6 +2747,10 @@
 		value = 5.0
 	}
 
+	executive_weight = {
+		value = 0.2
+	}
+
 	noble_chance = {
 		value = 0.5
 	}
@@ -2754,6 +2758,11 @@
 	female_commander_chance = {
 		### Converter ###
 		value = ig_female_general_chance
+	}
+
+	female_executive_chance = {
+		### Converter ###
+		value = ig_female_politician_chance_conversative
 	}
 
 	female_politician_chance = {
@@ -2771,5 +2780,11 @@
 	commander_leader_chance = {
 		value = 0.75
 		multiply = ig_commander_leader_chance_mult
+	}
+
+	# The chance that a executive belonging to this IG takes over leadership when it changes
+	# scope:character is the most popular executive in the IG
+	executive_leader_chance = {
+		value = 0.1
 	}
 }

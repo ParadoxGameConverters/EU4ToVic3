@@ -160,6 +160,18 @@ religious_party = {
 				}
 			}
 			triggered_desc = {
+				desc = party_hindu_mahasabha
+				trigger = {
+					ig:ig_devout = {
+						has_ideology = ideology:ideology_hindu_moralist
+					}
+					OR = {
+						c:BIC ?= this
+						c:BHT ?= this
+					}
+				}
+			}
+			triggered_desc = {
 				desc = party_religious
 				trigger = {
 					always = yes
@@ -178,24 +190,35 @@ religious_party = {
 		owner = {
 			country_has_voting_franchise = yes
 		}
-		OR = {
-	     	NOT = {
-	         	owner = {
-	         		has_variable = only_valid_party
-	         	}
-	        }
-	        owner.var:only_valid_party = {
-	        	is_party_type = religious_party
-	        }
-	    }
 	}
-	
+
 	# Root - IG considering joining
 	# scope:number - the number of IGs that would join this party before the root IG
 	join_weight = {
 		value = {
 			value = -5
 			desc = "base_value"
+		}
+		if = {
+			limit = {
+				owner = {
+					c:BIC ?= this
+					is_subject = yes
+					OR = {
+						has_modifier = modifier_india_crown_rule
+						has_modifier = modifier_india_company_rule
+						has_modifier = modifier_india_company_rule_upgraded
+					}
+				}
+				OR = {
+					is_interest_group_type = ig_industrialists
+					is_interest_group_type = ig_armed_forces
+				}
+			}
+			add = {
+				value = -100
+				desc = "india_colonial_government"
+			}
 		}
 		if = {
 			limit = {
@@ -309,7 +332,7 @@ religious_party = {
 				OR = {
 					has_ideology = ideology:ideology_anti_clerical
 					leader = {
-						has_ideology = ideology:ideology_atheist
+						has_ideology = ideology:ideology_nihilist
 					}
 				}
 			}
@@ -468,52 +491,6 @@ religious_party = {
 			add = {
 				value = -5
 				desc = "from_french_monarchist_rival"
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-	         	NOT = {
-			        owner.var:only_valid_party = {
-			        	is_party_type = religious_party
-			        }
-			    }
-			}
-			multiply = {
-				value = 0
-			}
-		}
-		if = {
-			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-				owner.var:only_valid_party = {
-		        	is_party_type = religious_party
-		        }
-	         	owner.ruler = {
-					this.interest_group = prev
-				}
-			}
-			add = {
-				value = 1000
-				desc = "from_only_legal_party"
-			}
-		}
-		else_if = {
-			limit = {
-				owner = {
-	         		has_variable = only_valid_party
-	         	}
-	         	 owner.var:only_valid_party = {
-		        	is_party_type = religious_party
-		        }
-			}
-			add = {
-				value = 3
-				desc = "from_only_legal_party"
 			}
 		}
 	}
