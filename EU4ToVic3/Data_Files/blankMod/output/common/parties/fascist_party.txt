@@ -273,6 +273,16 @@
 	available_for_interest_group = {
 		owner = {
 			country_has_voting_franchise = yes
+			any_interest_group = {
+				leader = {
+					OR = { # PB shouldn't instantly become fascist without fascism being relevant
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_integralist
+						has_ideology = ideology:ideology_corporatist_leader
+						has_ideology = ideology:ideology_ethno_nationalist
+					}
+				}
+			}
 		}
 	}
 	
@@ -291,6 +301,7 @@
 					OR = {
 						has_modifier = modifier_india_crown_rule
 						has_modifier = modifier_india_company_rule
+						has_modifier = modifier_india_company_rule_upgraded
 					}
 				}
 				OR = {
@@ -378,7 +389,7 @@
 						has_ideology = ideology:ideology_anarchist
 						has_ideology = ideology:ideology_social_democrat
 						has_ideology = ideology:ideology_radical
-						has_ideology = ideology:ideology_atheist
+						has_ideology = ideology:ideology_nihilist
 					}
 				}
 			}
@@ -391,7 +402,7 @@
 			limit = {
 				leader = {
 					OR = {
-						has_ideology = ideology:ideology_atheist
+						has_ideology = ideology:ideology_nihilist
 						has_ideology = ideology:ideology_feminist
 						has_ideology = ideology:ideology_reformer
 						has_ideology = ideology:ideology_abolitionist

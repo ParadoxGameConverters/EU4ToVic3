@@ -88,43 +88,48 @@ void OUT::exportDiplomacy(const std::filesystem::path& outputName, const V3::Pol
 
 void OUT::exportPacts(const std::filesystem::path& outputName, const std::vector<V3::Agreement>& agreements)
 {
-	std::ofstream defensivePacts("output" / outputName / "common/history/diplomacy/00_defensive_pacts.txt");
-	if (!defensivePacts.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/diplomacy/00_defensive_pacts.txt");
+	// std::ofstream defensivePacts("output" / outputName / "common/history/diplomacy/00_defensive_pacts.txt");
+	// if (!defensivePacts.is_open())
+	// 	throw std::runtime_error("Could not create " + outputName.string() + "/common/history/diplomacy/00_defensive_pacts.txt");
+
 	std::ofstream subjects("output" / outputName / "common/history/diplomacy/00_subject_relationships.txt");
 	if (!subjects.is_open())
 		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/diplomacy/00_subject_relationships.txt");
-	std::ofstream trades("output" / outputName / "common/history/diplomacy/00_trade_agreement.txt");
-	if (!trades.is_open())
-		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/00_trade_agreement.txt");
+
+	// std::ofstream trades("output" / outputName / "common/history/diplomacy/00_trade_agreement.txt");
+	// if (!trades.is_open())
+	//	throw std::runtime_error("Could not create " + outputName.string() + "/common/history/00_trade_agreement.txt");
+
 	std::ofstream rivals("output" / outputName / "common/history/diplomacy/00_additional_rivalries.txt");
 	if (!rivals.is_open())
 		throw std::runtime_error("Could not create " + outputName.string() + "/common/history/diplomacy/00_additional_rivalries.txt");
 
-	defensivePacts << commonItems::utf8BOM << "DIPLOMACY = {\n";
+	// defensivePacts << commonItems::utf8BOM << "DIPLOMACY = {\n";
 	subjects << commonItems::utf8BOM << "DIPLOMACY = {\n";
-	trades << commonItems::utf8BOM << "DIPLOMACY = {\n";
+	// trades << commonItems::utf8BOM << "DIPLOMACY = {\n";
 	rivals << commonItems::utf8BOM << "DIPLOMACY = {\n";
 
 	for (const auto& agreement: agreements)
 	{
 		if (agreement.type == "defensive_pact")
-			outAgreement(defensivePacts, agreement);
+			// outAgreement(defensivePacts, agreement);
+			continue;
 		else if (agreement.type == "trade_agreement")
-			outAgreement(trades, agreement);
+			//	outAgreement(trades, agreement);
+			continue;
 		else if (agreement.type == "rivalry") // VN-imported rivalries are agreements, not country-bound rivalries, so they end up here.
 			outAgreement(rivals, agreement);
 		else
 			outAgreement(subjects, agreement);
 	}
 
-	defensivePacts << "}\n";
+	// defensivePacts << "}\n";
 	subjects << "}\n";
-	trades << "}\n";
+	// trades << "}\n";
 	rivals << "}\n";
-	defensivePacts.close();
+	// defensivePacts.close();
 	subjects.close();
-	trades.close();
+	// trades.close();
 	rivals.close();
 }
 

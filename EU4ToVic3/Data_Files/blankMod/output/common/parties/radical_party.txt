@@ -307,6 +307,7 @@ radical_party = {
 					OR = {
 						has_modifier = modifier_india_crown_rule
 						has_modifier = modifier_india_company_rule
+						has_modifier = modifier_india_company_rule_upgraded
 					}
 				}
 				OR = {
@@ -353,7 +354,7 @@ radical_party = {
 				}
 			}
 			add = {
-				value = 5
+				value = 10
 				desc = "from_radical"
 			}
 		}
@@ -365,7 +366,7 @@ radical_party = {
 				}
 			}
 			add = {
-				value = 10
+				value = 15
 				desc = "from_powerful_radical"
 			}
 		}
@@ -442,11 +443,9 @@ radical_party = {
 					OR = {
 						has_ideology = ideology:ideology_feminist
 						has_ideology = ideology:ideology_abolitionist
-						has_ideology = ideology:ideology_pacifist
 						has_ideology = ideology:ideology_social_democrat
-						has_ideology = ideology:ideology_reformer
 						has_ideology = ideology:ideology_republican_leader
-						has_ideology = ideology:ideology_atheist
+						has_ideology = ideology:ideology_nihilist
 						has_ideology = ideology:ideology_humanitarian
 					}
 				}
@@ -459,11 +458,10 @@ radical_party = {
 		if = { # republican
 			limit = {
 				OR = {
-					has_ideology = ideology:ideology_republican
 					has_ideology = ideology:ideology_populist
 					leader = {
 						OR = {
-							has_ideology = ideology:ideology_atheist
+							has_ideology = ideology:ideology_nihilist
 							has_ideology = ideology:ideology_republican_leader
 							has_ideology = ideology:ideology_radical
 						}
@@ -513,7 +511,6 @@ radical_party = {
 					NOT = { has_law = law_type:law_universal_suffrage }
 				}
 				OR = {
-					has_ideology = ideology:ideology_republican
 					has_ideology = ideology:ideology_populist
 					leader = {
 						OR = {
@@ -638,15 +635,36 @@ radical_party = {
 		}
 		if = { # early Trade Unions
 			limit = {
+				scope:number >= 1 # If someone else is in this party first
 				is_interest_group_type = ig_trade_unions
-				is_powerful = no
 				NOT = {
 					has_ideology = ideology:ideology_socialist
 				}
+				owner = {
+					NOT = { has_law = law_type:law_universal_suffrage }
+				}
 			}
 			add = {
-				value = 10
 				desc = "from_early_trade_unions"
+				if = {
+					limit = {
+						owner = {
+							OR = {
+								has_law = law_type:law_landed_voting
+								has_law = law_type:law_wealth_voting
+							}
+						}
+					}
+					add = 10
+				}
+				if = {
+					limit = {
+						owner = {
+							has_law = law_type:law_census_voting
+						}
+					}
+					add = 5
+				}
 			}
 		}
 		if = {

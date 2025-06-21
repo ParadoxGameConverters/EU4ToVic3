@@ -140,7 +140,7 @@ commander_events.6 = {
 		scope:cheated_ig = {
 			add_modifier = {
 				name = covered_affair_modifier #disapprove
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 	}
@@ -160,7 +160,7 @@ commander_events.6 = {
 		scope:cheated_ig = {
 			add_modifier = {
 				name = punished_commander_modifier #approve
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 	}
@@ -176,13 +176,13 @@ commander_events.6 = {
 			add_trait = syphilis
 			add_modifier = {
 				name = punching_leader_modifier #popularity
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 		scope:seducer_commander = {
 			add_modifier = {
 				name = punched_commander_modifier #popularity bad
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 			remove_variable = seducer_commander_var
 			if = {
@@ -334,7 +334,7 @@ crime_events.11 = { #The Criminal was caught
 		default_option = yes
 		add_modifier = {
 			name = modifier_killer_caught
-			months = normal_modifier_time
+			days = normal_modifier_time
 		}
 		if = {
 			limit = {
@@ -345,7 +345,7 @@ crime_events.11 = { #The Criminal was caught
 				interest_group = {
 					add_modifier = {
 						name = serial_killer_ig
-						months = normal_modifier_time
+						days = normal_modifier_time
 					}
 				}
 			}
@@ -495,7 +495,7 @@ german_unification.3 = {
 		}
 		add_modifier = {
 			name = realpolitik
-			months = normal_modifier_time
+			days = normal_modifier_time
 		}
 	}
 	option = {
@@ -524,7 +524,7 @@ german_unification.3 = {
 		}
 		add_modifier = {
 			name = germany_aggressive_expansion
-			months = normal_modifier_time
+			days = normal_modifier_time
 		}
 	}
 }
@@ -593,7 +593,7 @@ marx_events.1 = {
 		ig:ig_trade_unions = {
 			add_modifier = {
 				name = modifier_supported_marx
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 		### Converter ###
@@ -787,7 +787,7 @@ marx_events.1 = {
 		ig:ig_trade_unions = {
 			add_modifier = {
 				name = modifier_promoted_marx
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 		### Converter ###
@@ -1031,7 +1031,7 @@ marx_events.1 = {
 		ig:ig_trade_unions = {
 			add_modifier = {
 				name = modifier_ditched_marx
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 		custom_tooltip = {
@@ -1371,13 +1371,13 @@ oscar_wilde_events.1 = {
 		ig:ig_intelligentsia = {
 			add_modifier = {
 				name = happy_arts_protected
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 		ig:ig_devout = {
 			add_modifier = {
 				name = unhappy_defended_homosexuality
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 	}
@@ -1387,12 +1387,12 @@ oscar_wilde_events.1 = {
 		ig:ig_petty_bourgeoisie = {
 			add_modifier = {
 				name = imprisoning_gentlemen
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 		add_modifier = {
 			name = upheld_ruling
-			months = normal_modifier_time
+			days = normal_modifier_time
 		}
 	}
 
@@ -1524,13 +1524,13 @@ prostitution.3 = {
 					}
 					add_modifier = {
 						name = coverup_discovered
-						months = 12
+						days = 12
 					}
 				}
 				scope:scandal_character = {
 					add_modifier = {
 						name = embroiled_in_scandal
-						months = 120
+						days = 120
 					}
 				}
 			}
@@ -1554,7 +1554,7 @@ prostitution.3 = {
 		scope:scandal_character = {
 			add_modifier = {
 				name = embroiled_in_scandal
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 	}
@@ -1633,7 +1633,7 @@ tibet_expedition_events.5 = { # The Great Trigonometrical Survey Goes North (Mou
 		scope:expedition_leader = {
 			add_modifier = {
 				name = sidelined_mountaineer
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 
@@ -1775,7 +1775,7 @@ colonial_administration_events.1 = {
 
 	duration = 3
 	
-	cooldown = { months = 3 }
+	cooldown = { days = 3 }
 
 	trigger = {
 	}
@@ -1829,7 +1829,7 @@ colonial_administration_events.1 = {
 			set_strategy = ai_strategy_colonial_extraction
 			add_modifier = {
 				name = resource_extraction_charter_modifier
-				months = very_long_modifier_time
+				days = very_long_modifier_time
 			}
 			ig:ig_industrialists = {
 				if = {
@@ -1861,7 +1861,7 @@ colonial_administration_events.1 = {
 			}
 			add_modifier = {
 				name = colonial_enterprise_modifier
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 		##Converter
@@ -1905,7 +1905,7 @@ colonial_administration_events.1 = {
 			set_strategy = ai_strategy_colonial_extraction
 			add_modifier = {
 				name = religious_missions_colonial_modifier
-				months = very_long_modifier_time
+				days = very_long_modifier_time
 			}
 			ig:ig_industrialists = {
 				if = {
@@ -1933,7 +1933,7 @@ colonial_administration_events.1 = {
 			}
 			add_modifier = {
 				name = civilizing_mission_modifier
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 	}
@@ -1961,7 +1961,7 @@ colonial_administration_events.1 = {
 			set_strategy = ai_strategy_colonial_extraction
 			add_modifier = {
 				name = settlement_campaigns_modifier
-				months = very_long_modifier_time
+				days = very_long_modifier_time
 			}
 		}
 		every_interest_group = {
@@ -1974,7 +1974,7 @@ colonial_administration_events.1 = {
 			}
 			add_modifier = {
 				name = settler_colonialism_modifier
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 	}
@@ -2018,7 +2018,7 @@ colonial_administration_events.1 = {
 			set_strategy = ai_strategy_colonial_extraction
 			add_modifier = {
 				name = resource_extraction_colony_modifier
-				months = very_long_modifier_time
+				days = very_long_modifier_time
 			}
 			ig:ig_industrialists = {
 				if = {
@@ -2050,7 +2050,7 @@ colonial_administration_events.1 = {
 			}
 			add_modifier = {
 				name = unbridled_profits_modifier
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 	}
