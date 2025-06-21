@@ -67,7 +67,7 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 	}
 	else
 	{
-	  // If not TO, let's not confuse things.
+		// If not TO, let's not confuse things.
 		std::filesystem::remove("output" / outputName / "common/scripted_effects/00_dynamic_state_names_third_odyssey.txt");
 	}
 
