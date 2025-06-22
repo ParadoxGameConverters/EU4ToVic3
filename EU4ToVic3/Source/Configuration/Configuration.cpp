@@ -11,7 +11,7 @@ Configuration::Configuration(const commonItems::ConverterVersion& converterVersi
 {
 	Log(LogLevel::Info) << "Reading configuration file";
 	registerKeys();
-	parseFile(std::filesystem::path("configuration.txt"));
+	parseFile("configuration.txt");
 	clearRegisteredKeywords();
 	setOutputName();
 	verifyEU4Path();

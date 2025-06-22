@@ -10,7 +10,7 @@ void mappers::SuperGroupMapper::loadSuperGroups()
 {
 	Log(LogLevel::Info) << "-> Parsing starting supergroups.";
 	registerKeys();
-	parseFile(std::filesystem::path("configurables/world_supergroups.txt"));
+	parseFile("configurables/world_supergroups.txt");
 	clearRegisteredKeywords();
 }
 
