@@ -5,7 +5,7 @@
 
 namespace
 {
-const auto eu4FS = commonItems::ModFilesystem(std::filesystem::path("TestFiles/eu4installation"), {});
+const auto eu4FS = commonItems::ModFilesystem("TestFiles/eu4installation", {});
 
 V3::Chunk prepChunk()
 {
