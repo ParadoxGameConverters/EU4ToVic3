@@ -65,6 +65,11 @@ void OUT::exportWorld(const Configuration& configuration, const V3::World& world
 		// if (!commonItems::CopyFolder("configurables/third_odyssey/gfx", "output/" + outputName + "/gfx"))
 		//	throw std::runtime_error("Error copying TO gfx! Is the output/ folder writable?");
 	}
+	else
+	{
+		// If not TO, let's not confuse things.
+		std::filesystem::remove("output" / outputName / "common/scripted_effects/00_dynamic_state_names_third_odyssey.txt");
+	}
 
 	Log(LogLevel::Progress) << "83 %";
 
