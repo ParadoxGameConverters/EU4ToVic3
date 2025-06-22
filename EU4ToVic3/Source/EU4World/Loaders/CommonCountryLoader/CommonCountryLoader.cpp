@@ -23,10 +23,10 @@ void EU4::CommonCountryLoader::loadCommonCountries(const commonItems::ModFilesys
 	// look in each file for color.
 	for (const auto& [tag, filePath]: tagPaths)
 	{
-		auto path = modFS.GetActualFileLocation(std::filesystem::path("common") / filePath);
+		auto path = modFS.GetActualFileLocation("common" / filePath);
 		if (!path)
 		{
-			Log(LogLevel::Error) << "Where is this file: /common/" + filePath << "?";
+			Log(LogLevel::Error) << "Where is this file: /common/" + filePath.string() << "?";
 			continue;
 		}
 		color.reset();

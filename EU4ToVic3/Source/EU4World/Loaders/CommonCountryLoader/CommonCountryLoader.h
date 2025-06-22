@@ -21,7 +21,7 @@ class CommonCountryLoader: commonItems::parser
 	parser tagParser;
 
 	std::map<std::string, commonItems::Color> countryColors;
-	std::map<std::string, std::string> tagPaths;
+	std::map<std::string, std::filesystem::path> tagPaths;
 	std::optional<commonItems::Color> color;
 };
 } // namespace EU4
