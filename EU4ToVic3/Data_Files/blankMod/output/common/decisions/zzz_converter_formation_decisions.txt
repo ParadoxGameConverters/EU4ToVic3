@@ -55,8 +55,8 @@ america_unite_usa = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -99,8 +99,8 @@ america_unite_gbr = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -163,8 +163,8 @@ california_unite_cal = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -207,8 +207,8 @@ california_unite_gbr = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -270,8 +270,8 @@ mexico_unite_mex = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -314,8 +314,8 @@ mexico_unite_gbr = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -377,8 +377,8 @@ colombia_unite_gco = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -421,8 +421,8 @@ colombia_unite_gbr = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -485,8 +485,8 @@ peru_unite_peu = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -529,8 +529,8 @@ peru_unite_gbr = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -592,8 +592,8 @@ brazil_unite_brz = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -636,8 +636,8 @@ brazil_unite_gbr = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -700,8 +700,8 @@ argentina_unite_arg = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -744,8 +744,8 @@ argentina_unite_gbr = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -808,8 +808,8 @@ cape_unite_saf = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -852,8 +852,8 @@ cape_unite_gbr = {
 
 	ai_chance = {
 		value = 0
-		modifier = {
-			has_technology_researched = pan-nationalism
+		if = {
+			limit = { has_technology_researched = pan-nationalism }
 			add = 100
 		}		
 	}
@@ -1519,8 +1519,8 @@ form_hudson_bay_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					OR = {
 						state_region = s:STATE_ALBERTA
@@ -1563,8 +1563,8 @@ form_newfoundland_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_NEWFOUNDLAND
 				}
@@ -1606,8 +1606,8 @@ form_nunavut_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					OR = {
 						state_region = s:STATE_NUNAVUT
@@ -1647,8 +1647,8 @@ form_ontario_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_ONTARIO
 				}
@@ -1684,8 +1684,8 @@ form_quebec_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				cu:french = { shares_non_heritage_trait_with_any_primary_culture = ROOT } #Francophone
 			}
 			add = 99
@@ -1719,8 +1719,8 @@ form_new_brunswick_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_NEW_BRUNSWICK
 				}
@@ -1756,8 +1756,8 @@ form_nova_scotia_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_NEW_BRUNSWICK
 				}
@@ -1812,8 +1812,8 @@ form_new_england_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					OR = {
 						state_region = s:STATE_MAINE
@@ -1859,8 +1859,8 @@ form_free_states_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				has_law = law_type:law_slavery_banned
 			}
 			add = 99
@@ -1897,8 +1897,8 @@ form_confederate_states_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				NOT = { has_law = law_type:law_slavery_banned }
 			}
 			add = 99
@@ -1944,8 +1944,8 @@ form_north_carolina_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_NORTH_CAROLINA
 				}
@@ -1991,8 +1991,8 @@ form_south_carolina_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_NORTH_CAROLINA
 				}
@@ -2054,8 +2054,8 @@ form_united_carolina_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					OR = {
 						state_region = s:STATE_NORTH_CAROLINA
@@ -2097,8 +2097,8 @@ form_georgia_usa_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_GEORGIA
 				}
@@ -2137,8 +2137,8 @@ form_florida_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_FLORIDA
 				}
@@ -2186,8 +2186,8 @@ form_michigan_dec = {
 	
 	ai_chance = {
 		value = 10
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_MICHIGAN
 				}
@@ -2232,8 +2232,8 @@ form_dakota_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					OR = {
 						state_region = s:STATE_NORTH_DAKOTA
@@ -2275,8 +2275,8 @@ form_louisiana_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				OR = {
 					cu:french = { shares_non_heritage_trait_with_any_primary_culture = ROOT } #Francophone
 					capital = {
@@ -2350,8 +2350,8 @@ form_oregon_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_OREGON
 				}
@@ -2387,8 +2387,8 @@ form_deseret_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				country_has_state_religion = rel:protestant
 			}
 			add = 99
@@ -2436,8 +2436,8 @@ form_cascadia_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					OR = {
 						state_region = s:STATE_ALASKA
@@ -2486,8 +2486,8 @@ form_columbia_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					OR = {
 						state_region = s:STATE_OREGON
@@ -2497,8 +2497,8 @@ form_columbia_dec = {
 			}
 			add = 49
 		}
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_BRITISH_COLUMBIA
 				}
@@ -2574,8 +2574,8 @@ form_rio_grande_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_RIO_GRANDE
 				}
@@ -2625,8 +2625,8 @@ form_yucatan_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					OR = {
 						state_region = s:STATE_YUCATAN
@@ -2672,8 +2672,8 @@ form_los_altos_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					OR = {
 						state_region = s:STATE_GUATEMALA
@@ -2936,8 +2936,8 @@ form_colombia_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					OR = {
 						state_region = s:STATE_CUNDINAMARCA
@@ -2979,8 +2979,8 @@ form_venezuela_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					OR = {
 						state_region = s:STATE_MIRANDA
@@ -3026,8 +3026,8 @@ form_ecuador_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_ECUADOR
 				}
@@ -3136,8 +3136,8 @@ form_chile_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					OR = {
 						state_region = s:STATE_ANTOFAGASTA
@@ -3186,8 +3186,8 @@ form_paraguay_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					OR = {
 						state_region = s:STATE_ALTO_PARAGUAY
@@ -3231,8 +3231,8 @@ form_uruguay_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_URUGUAY
 				}
@@ -3334,8 +3334,8 @@ form_amazonia_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_AMAZONAS
 				}
@@ -3376,8 +3376,8 @@ form_bahia_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_BAHIA
 				}
@@ -3413,8 +3413,8 @@ form_equator_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					OR = {
 						state_region = s:STATE_MARANHAO
@@ -3486,8 +3486,8 @@ form_minas_gerais_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_MINAS_GERAIS
 				}
@@ -3523,8 +3523,8 @@ form_paulistania_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_SAO_PAULO
 				}
@@ -3563,8 +3563,8 @@ form_piratini_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_RIO_GRANDE_DO_SUL
 				}
@@ -3603,8 +3603,8 @@ form_santa_catarina_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_SANTA_CATARINA
 				}
@@ -3850,8 +3850,8 @@ form_new_south_wales_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_NEW_SOUTH_WALES
 				}
@@ -3978,8 +3978,8 @@ form_western_australia_dec = {
 	
 	ai_chance = {
 		value = 1
-		modifier = {
-			trigger = {
+		if = {
+			limit = {
 				capital = {
 					state_region = s:STATE_WESTERN_AUSTRALIA
 				}
