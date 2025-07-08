@@ -8,7 +8,7 @@ namespace
 {
 void outAgreement(std::ostream& output, const V3::Agreement& agreement)
 {
-	output << "\tc:" << agreement.first << " = {\n";
+	output << "\tc:" << agreement.first << " ?= {\n";
 	output << "\t\tcreate_diplomatic_pact = {\n";
 	output << "\t\t\tcountry = c:" << agreement.second << "\n";
 	output << "\t\t\ttype = " << agreement.type << "\n";
@@ -16,7 +16,7 @@ void outAgreement(std::ostream& output, const V3::Agreement& agreement)
 	output << "\t}\n";
 	if (agreement.libertyDesire)
 	{
-		output << "\tc:" << agreement.second << " = {\n";
+		output << "\tc:" << agreement.second << " ?= {\n";
 		output << "\t\tadd_liberty_desire = " << *agreement.libertyDesire << "\n";
 		output << "\t}\n";
 	}
@@ -24,7 +24,7 @@ void outAgreement(std::ostream& output, const V3::Agreement& agreement)
 
 void outCountryRelations(std::ostream& output, const std::string& tag, const std::map<std::string, V3::Relation>& relations)
 {
-	output << "\tc:" << tag << " = {\n";
+	output << "\tc:" << tag << " ?= {\n";
 	for (const auto& [target, relation]: relations)
 		output << "\t\tset_relations = { country = c:" << target << " value = " << relation.getRelations() << " }\n";
 	output << "\t}\n";
@@ -32,7 +32,7 @@ void outCountryRelations(std::ostream& output, const std::string& tag, const std
 
 void outCountryRivals(std::ostream& output, const std::string& tag, const std::set<std::string>& rivals)
 {
-	output << "\tc:" << tag << " = {\n";
+	output << "\tc:" << tag << " ?= {\n";
 	for (const auto& rival: rivals)
 	{
 		output << "\t\tcreate_diplomatic_pact = {\n";
@@ -58,7 +58,7 @@ void outCountryTruces(std::ostream& output, const std::string& tag, const std::m
 
 void outPowerBloc(std::ostream& output, const V3::PowerBloc& bloc)
 {
-	output << "\tc:" << bloc.owner << " = {\n";
+	output << "\tc:" << bloc.owner << " ?= {\n";
 	output << "\t\tcreate_power_bloc = {\n";
 	output << "\t\t\tname = " << bloc.name << "\n";
 	if (bloc.color)
