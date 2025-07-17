@@ -31,4 +31,5 @@ void V3::PopNeed::registerKeys()
 		goodsFulfillment.emplace(goodsFulfillmentBuilder.good, goodsFulfillmentBuilder);
 		goodsFulfillmentBuilder = {};
 	});
+	IgnoreUnregisteredItems();
 }
