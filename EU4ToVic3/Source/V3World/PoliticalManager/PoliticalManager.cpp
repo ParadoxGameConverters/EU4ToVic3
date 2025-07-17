@@ -644,7 +644,7 @@ void V3::PoliticalManager::createPowerBlocs()
 	std::map<std::string, std::set<std::string>> ownerSubjects;
 	std::map<std::string, std::set<std::string>> mergedOwnerSubjects;
 	std::map<std::string, std::string> subjectOwner;
-	std::set<std::string> subjectTypes = {"dominion", "protectorate", "tributary", "personal_union", "puppet", "vassal"};
+	std::set<std::string> subjectTypes = {"dominion", "protectorate", "tributary", "personal_union", "puppet", "vassal", "power_bloc"};
 	std::map<std::string, date> blocStartDates;
 
 	for (const auto& agreement: agreements)

@@ -119,6 +119,8 @@ void OUT::exportPacts(const std::filesystem::path& outputName, const std::vector
 			continue;
 		else if (agreement.type == "rivalry") // VN-imported rivalries are agreements, not country-bound rivalries, so they end up here.
 			outAgreement(rivals, agreement);
+		else if (agreement.type == "power_bloc") // Not a Vicky treaty, used for bloc membership only.
+			continue;
 		else
 			outAgreement(subjects, agreement);
 	}
