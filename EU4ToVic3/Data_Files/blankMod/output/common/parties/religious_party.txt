@@ -9,20 +9,33 @@ religious_party = {
 			triggered_desc = {
 				desc = party_catholic_peoples_party
 				trigger = {
-					exists = c:AUS
-					THIS = c:AUS
+					OR = {																						### Converter
+						country_has_state_religion = rel:catholic
+						root.var:ancien_regime_religion ?= rel:catholic
+						root.var:tc_majority_religion ?= rel:catholic
+					}
+					uses_aus_ger_characters = yes
 				}
 			}
 			triggered_desc = {
 				desc = party_portuguese_catholic_centre
 				trigger = {
-					exists = c:POR
-					THIS = c:POR
+					OR = {																						### Converter
+						country_has_state_religion = rel:catholic
+						root.var:ancien_regime_religion ?= rel:catholic
+						root.var:tc_majority_religion ?= rel:catholic
+					}
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_portuguese_cultures target = this } }
 				}
 			}
 			triggered_desc = {
 				desc = party_catholic_right
 				trigger = {
+					OR = {																						### Converter
+						country_has_state_religion = rel:catholic
+						root.var:ancien_regime_religion ?= rel:catholic
+						root.var:tc_majority_religion ?= rel:catholic
+					}
 					exists = c:SWI
 					THIS = c:SWI
 				}
@@ -30,132 +43,168 @@ religious_party = {
 			triggered_desc = {
 				desc = party_anti_revolutionary_party
 				trigger = {
-					exists = c:NET
-					THIS = c:NET
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_dutch_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_learned_council
 				trigger = {
-					exists = c:PER
-					THIS = c:PER
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_persian_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_traditionalist_communion
 				trigger = {
-					exists = c:SPA
-					THIS = c:SPA
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_spanish_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_christian_peoples_party
 				trigger = {
-					exists = c:BEL
-					THIS = c:BEL
+					OR = {																									### Converter
+						root.religion = { has_discrimination_trait = christian }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = christian }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = christian }
+					}
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_wallonian_cultures target = this } }
 				}
 			}
 			triggered_desc = {
 				desc = party_clerical_party
 				trigger = {
-					exists = c:FRA
-					THIS = c:FRA
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_french_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_union_of_the_russian_people
 				trigger = {
-					exists = c:RUS
-					THIS = c:RUS
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_russian_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_know_nothing_party
 				trigger = {
-					OR = {
-						country_has_primary_culture = cu:yankee
-						country_has_primary_culture = cu:dixie
-					}
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_zentrum
 				trigger = {
-					AND = {
-						OR = {
-							country_has_primary_culture = cu:north_german
-							country_has_primary_culture = cu:south_german
-						}
+					OR = {																						### Converter
 						country_has_state_religion = rel:catholic
+						root.var:ancien_regime_religion ?= rel:catholic
+						root.var:tc_majority_religion ?= rel:catholic
+					}
+					any_primary_culture = {
+						OR = {
+							is_target_in_global_variable_list = { name = global_nor_ger_cultures target = this }
+							is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this }
+						}
 					}
 				}
 			}
 			triggered_desc = {
 				desc = party_conservative_catholics
 				trigger = {
-					OR = {
-						country_has_primary_culture = cu:north_italian
-						country_has_primary_culture = cu:south_italian
+					OR = {																						### Converter
+						country_has_state_religion = rel:catholic
+						root.var:ancien_regime_religion ?= rel:catholic
+						root.var:tc_majority_religion ?= rel:catholic
+					}
+					any_primary_culture = {
+						OR = {
+							is_target_in_global_variable_list = { name = global_nor_ita_cultures target = this }
+							is_target_in_global_variable_list = { name = global_sou_ita_cultures target = this }
+						}
 					}
 				}
 			}
 			triggered_desc = {
 				desc = party_moderate_venstre
 				trigger = {
-					country_has_primary_culture = cu:norwegian
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_norwegian_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_shinto
 				trigger = {
-					country_has_state_religion = rel:shinto
+					OR = {																									### Converter
+						country_has_state_religion = rel:shinto
+						root.var:ancien_regime_religion = rel:shinto
+						root.var:tc_majority_religion ?= rel:shinto
+					}
 				}
 			}
 			triggered_desc = {
 				desc = party_buddhist
 				trigger = {
-					root.religion = {
-						has_discrimination_trait = buddhist
+					OR = {																									### Converter
+						root.religion = { has_discrimination_trait = buddhist }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = buddhist }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = buddhist }
 					}
 				}
 			}
 			triggered_desc = {
 				desc = party_sikh
 				trigger = {
-					country_has_state_religion = rel:sikh
+					OR = {																									### Converter
+						country_has_state_religion = rel:sikh
+						root.var:ancien_regime_religion = rel:sikh
+						root.var:tc_majority_religion ?= rel:sikh
+					}
 				}
 			}
 			triggered_desc = {
 				desc = party_hindu
 				trigger = {
-					country_has_state_religion = rel:hindu
+					OR = {																									### Converter
+						country_has_state_religion = rel:hindu
+						root.var:ancien_regime_religion = rel:hindu
+						root.var:tc_majority_religion ?= rel:hindu
+						root.religion = { has_discrimination_trait = vedic }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = vedic }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = vedic }
+					}
 				}
 			}
 			triggered_desc = {
 				desc = party_jewish
 				trigger = {
-					country_has_state_religion = rel:jewish
+					OR = {																									### Converter
+						root.religion = { has_discrimination_trait = jewish }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = jewish }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = jewish }
+					}
 				}
 			}
 			triggered_desc = {
 				desc = party_muslim
 				trigger = {
-					root.religion = {
-						has_discrimination_trait = muslim
+					OR = {																									### Converter
+						root.religion = { has_discrimination_trait = muslim }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = muslim }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = muslim }
 					}
 				}
 			}
 			triggered_desc = {
 				desc = party_catholic
 				trigger = {
-					country_has_state_religion = rel:catholic
+					OR = {																						### Converter
+						country_has_state_religion = rel:catholic
+						root.var:ancien_regime_religion ?= rel:catholic
+						root.var:tc_majority_religion ?= rel:catholic
+					}
 				}
 			}
 			triggered_desc = {
 				desc = party_christian
 				trigger = {
-					root.religion = {
-						has_discrimination_trait = christian
+					OR = {																									### Converter
+						root.religion = { has_discrimination_trait = christian }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = christian }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = christian }
 					}
 				}
 			}
@@ -165,10 +214,13 @@ religious_party = {
 					ig:ig_devout = {
 						has_ideology = ideology:ideology_hindu_moralist
 					}
+					### Converter
+					country_is_in_india = yes
 					OR = {
-						c:BIC ?= this
-						c:BHT ?= this
+						is_old_world_trading_company = yes
+						is_subject = yes
 					}
+					### Converter
 				}
 			}
 			triggered_desc = {
@@ -202,7 +254,7 @@ religious_party = {
 		if = {
 			limit = {
 				owner = {
-					c:BIC ?= this
+					is_old_world_trading_company = yes		### Converter
 					is_subject = yes
 					OR = {
 						has_modifier = modifier_india_crown_rule
@@ -224,8 +276,12 @@ religious_party = {
 			limit = {
 				owner = {
 					country_is_in_south_america = yes
-					any_primary_culture = {
-						has_discrimination_trait = hispanophone
+					any_primary_culture = {		### Converter
+						OR = {
+							is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+							is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+							is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+						}
 					}
 				}
 			}
@@ -331,12 +387,13 @@ religious_party = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_anti_clerical
+					has_ideology = ideology:ideology_anti_clerical_pb		### Converter
 					leader = {
 						has_ideology = ideology:ideology_nihilist
 					}
 				}
 			}
-			add = {	
+			add = {
 				value = -15
 				desc = "from_antireligious"
 			}
@@ -402,7 +459,7 @@ religious_party = {
 				scope:number = 3
 			}
 			multiply = {
-				value = 0.25
+				value = 0.05
 				desc = "from_three_prior_members"
 			}
 		}
@@ -411,7 +468,7 @@ religious_party = {
 				scope:number > 3
 			}
 			multiply = {
-				value = 0.1
+				value = 0.0
 				desc = "from_more_than_three_prior_members"
 			}
 		}

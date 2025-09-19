@@ -9,50 +9,43 @@ agrarian_party = {
 			triggered_desc = {
 				desc = party_irish_national_land_league
 				trigger = {
-					exists = c:IRE
-					THIS = c:IRE
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_irish_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_independent_agriculture_party
 				trigger = {
-					exists = c:GBR
-					THIS = c:GBR
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_british_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_farmers_party
 				trigger = {
-					exists = c:NOR
-					THIS = c:NOR
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_norwegian_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_free_peoples_party
 				trigger = {
-					exists = c:DEN
-					THIS = c:DEN
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_danish_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_farmers_league
 				trigger = {
-					exists = c:SWE
-					THIS = c:SWE
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_swedish_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_peoples_party
 				trigger = {
-					exists = c:FIN
-					THIS = c:FIN
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_finnish_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_agrarian_and_farmer_party
 				trigger = {
-					exists = c:FRA
-					THIS = c:FRA
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_french_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
@@ -68,15 +61,13 @@ agrarian_party = {
 			triggered_desc = {
 				desc = party_landbund
 				trigger = {
-					exists = c:AUS
-					THIS = c:AUS
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_national_peasant_accord
 				trigger = {
-					exists = c:SER
-					THIS = c:SER
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_serbian_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
@@ -89,54 +80,54 @@ agrarian_party = {
 			triggered_desc = {
 				desc = party_national_farmer_party
 				trigger = {
-					exists = c:HUN
-					THIS = c:HUN
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_hungarian_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_peoples_party
 				trigger = {
-					exists = c:USA
-					THIS = c:USA
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_patrons_of_industry
 				trigger = {
-					country_has_primary_culture = cu:anglo_canadian
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_peasants_party
 				trigger = {
-					country_has_primary_culture = cu:romanian
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_romanian_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_peoples_party
 				trigger = {
-					country_has_primary_culture = cu:polish
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_polish_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_agrarian_league
 				trigger = {
-					OR = {
-						country_has_primary_culture = cu:north_german
-						country_has_primary_culture = cu:south_german
+					any_primary_culture = {		### Converter
+						OR = {
+							is_target_in_global_variable_list = { name = global_nor_ger_cultures target = this }
+							is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this }
+						}
 					}
 				}
 			}
 			triggered_desc = {
 				desc = party_justice_party
 				trigger = {
+					### Converter
+					country_is_in_india = yes
 					OR = {
-						c:BIC ?= this
-						AND = {
-							c:BHT ?= this
-							is_subject = yes
-						}
+						is_old_world_trading_company = yes
+						is_subject = yes
 					}
+					### Converter
 				}
 			}
 			triggered_desc = {
@@ -163,7 +154,7 @@ agrarian_party = {
 			}
 		}
 	}
-	
+
 	# Root - IG considering joining
 	# scope:number - the number of IGs that would join this party before the root IG
 	join_weight = {
@@ -174,7 +165,7 @@ agrarian_party = {
 		if = {
 			limit = {
 				owner = {
-					c:BIC ?= this
+					is_old_world_trading_company = yes		### Converter
 					is_subject = yes
 					OR = {
 						has_modifier = modifier_india_crown_rule
@@ -196,8 +187,12 @@ agrarian_party = {
 			limit = {
 				owner = {
 					country_is_in_south_america = yes
-					any_primary_culture = {
-						has_discrimination_trait = hispanophone
+					any_primary_culture = {		### Converter
+						OR = {
+							is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+							is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+							is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+						}
 					}
 				}
 			}
@@ -330,7 +325,7 @@ agrarian_party = {
 					has_ideology = ideology:ideology_particularist
 				}
 				owner = {
-					OR = {	
+					OR = {
 						has_law = law_type:law_local_police
 						has_law = law_type:law_militarized_police
 					}
@@ -523,7 +518,7 @@ agrarian_party = {
 				scope:number = 3
 			}
 			multiply = {
-				value = 0.25
+				value = 0.05
 				desc = "from_three_prior_members"
 			}
 		}
@@ -532,7 +527,7 @@ agrarian_party = {
 				scope:number > 3
 			}
 			multiply = {
-				value = 0.1
+				value = 0.0
 				desc = "from_more_than_three_prior_members"
 			}
 		}
