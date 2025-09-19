@@ -1,6 +1,5 @@
 ﻿namespace = historical_agitators
 
-#cooldowns handled by variables
 historical_agitators.1 = { #Vladimir Lenin
 	type = country_event
 	placement = root
@@ -77,7 +76,7 @@ historical_agitators.1 = { #Vladimir Lenin
 			interest_group = {
 				add_modifier = {
 					name = modifier_lenin_in_exile
-					days = normal_modifier_time
+					months = normal_modifier_time
 					is_decaying = yes
 				}
 			}
@@ -103,7 +102,7 @@ historical_agitators.1 = { #Vladimir Lenin
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_lenin_harassed_by_spies
-				days = normal_modifier_time
+				months = normal_modifier_time
 			}
 		}
 		capital = {
@@ -126,7 +125,7 @@ historical_agitators.1 = { #Vladimir Lenin
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_lenin_popularity
-				days = normal_modifier_time
+				months = normal_modifier_time
 				is_decaying = yes
 			}
 		}
@@ -188,7 +187,7 @@ historical_agitators.2 = { #Louis Delescluze
 								}
 							}
 						}
-					set_ideology = ideology:ideology_nihilist
+						set_ideology = ideology:ideology_radical
 					}
 				}
 			}
@@ -231,7 +230,7 @@ historical_agitators.2 = { #Louis Delescluze
 			interest_group = {
 				add_modifier = {
 					name = modifier_delescluze_in_exile
-					days = normal_modifier_time
+					months = normal_modifier_time
 					is_decaying = yes
 				}
 			}
@@ -307,7 +306,7 @@ historical_agitators.3 = { #Louis Blanqui
 								}
 							}
 						}
-					set_ideology = ideology:ideology_nihilist
+						set_ideology = ideology:ideology_radical
 					}
 				}
 			}
@@ -347,7 +346,7 @@ historical_agitators.3 = { #Louis Blanqui
 			interest_group = {
 				add_modifier = {
 					name = modifier_blanqui_in_exile
-					days = normal_modifier_time
+					months = normal_modifier_time
 					is_decaying = yes
 				}
 			}
@@ -364,7 +363,7 @@ historical_agitators.3 = { #Louis Blanqui
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_blanqui_is_free
-				days = normal_modifier_time
+				months = normal_modifier_time
 			}
 		}
 	}
@@ -444,7 +443,7 @@ historical_agitators.4 = { #Emmeline Pankhurst
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_pankhurst_negative_popularity
-				days = normal_modifier_time
+				months = normal_modifier_time
 			}
 		}
 	}
@@ -457,7 +456,7 @@ historical_agitators.4 = { #Emmeline Pankhurst
 		}
 		add_modifier = {
 			name = modifier_pankhurst_womens_rights_support
-			days = normal_modifier_time
+			months = normal_modifier_time
 		}
 	}
 	option = {
@@ -470,7 +469,7 @@ historical_agitators.4 = { #Emmeline Pankhurst
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_pankhurst_popularity
-				days = normal_modifier_time
+				months = normal_modifier_time
 			}
 		}
 	}
@@ -564,7 +563,7 @@ historical_agitators.5 = { #John Brown
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_john_brown_popularity
-				days = normal_modifier_time
+				months = normal_modifier_time
 			}
 		}
 	}
@@ -582,7 +581,7 @@ historical_agitators.5 = { #John Brown
 		scope:slaver_ig = {
 			add_modifier = {
 				name = modifier_slavers_upset_by_john_brown
-				days = normal_modifier_time
+				months = normal_modifier_time
 			}
 		}
 	}
@@ -748,7 +747,7 @@ historical_agitators.6 = { #Charles Maurras
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_maurras_popularity
-				days = normal_modifier_time
+				months = normal_modifier_time
 			}
 		}
 	}
@@ -761,7 +760,7 @@ historical_agitators.6 = { #Charles Maurras
 		}
 		add_modifier = {
 			name = modifier_maurras_antisemitism
-			days = normal_modifier_time
+			months = normal_modifier_time
 		}
 		capital = {
 			add_religion_standard_of_living_modifier = {
@@ -779,7 +778,7 @@ historical_agitators.6 = { #Charles Maurras
 		}
 		add_modifier = {
 			name = modifier_maurras_monarchism
-			days = normal_modifier_time
+			months = normal_modifier_time
 		}
 		if = {
 			limit = {
@@ -844,7 +843,7 @@ historical_agitators.7 = { #Giuseppe Mazzini
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_mazzini_popularity
-				days = normal_modifier_time
+				months = normal_modifier_time
 			}
 		}
 	}
@@ -852,7 +851,7 @@ historical_agitators.7 = { #Giuseppe Mazzini
 		name = historical_agitators.7.b
 		add_modifier = {
 			name = modifier_mazzini_democratism
-			days = normal_modifier_time
+			months = normal_modifier_time
 		}
 		add_radicals = {
 			value = small_radicals
@@ -885,6 +884,7 @@ historical_agitators.8 = { #Napoleon III
 		has_dlc_feature = voice_of_the_people_content
 		empty_agitator_slots >= 1
 		uses_fra_characters = yes		##Converter
+		always = no						##Converter, the whole 'Napoleon' thing is *very unlikey* to have happened in a converted game
 		game_date < 1870.1.1
 		OR = {
 			AND = {
@@ -951,13 +951,7 @@ historical_agitators.8 = { #Napoleon III
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_napoleonic_return
-				days = normal_modifier_time
-			}
-		}
-		scope:historic_agitator_scope.interest_group ?= {
-			add_modifier = {
-				name = modifier_napoleonic_return_ig
-				days = normal_modifier_time
+				months = normal_modifier_time
 			}
 		}
 	}
@@ -965,7 +959,7 @@ historical_agitators.8 = { #Napoleon III
 
 historical_agitators.9 = { #Norton
 	type = country_event
-	placement = scope:california_scope
+	placement = root
 
 	gui_window = event_window_1char_tabloid
 	left_icon = scope:historic_agitator_scope
@@ -998,11 +992,6 @@ historical_agitators.9 = { #Norton
 		game_date > 1860.1.1
 		game_date < 1880.1.1
 		NOT = { has_global_variable = emperor_norton_spawn }
-		##Converter
-		country_average_cultural_acceptance = {
-			target = global_var:gbr_culture
-			value >= acceptance_status_4
-		}
 	}
 
 	immediate = {
@@ -1011,7 +1000,7 @@ historical_agitators.9 = { #Norton
 		if = {
 			limit = { has_variable = rule_63_effect }
 			create_character = {
-				template = fem_usa_emperor_norton_character_template
+				template = fem_usa_joshua_norton_character_template
 				on_created = {
 					set_variable = emperor_norton_var		
 				}
@@ -1019,7 +1008,7 @@ historical_agitators.9 = { #Norton
 		}
 		else = {
 			create_character = {
-				template = usa_emperor_norton_character_template
+				template = usa_joshua_norton_character_template
 				on_created = {
 					set_variable = emperor_norton_var		
 				}
@@ -1035,17 +1024,10 @@ historical_agitators.9 = { #Norton
 		random_scope_state = {
 			limit = {
 				state_region = s:STATE_CALIFORNIA
-				is_incorporated = yes
 			}
 			save_scope_as = california_scope
 		}
 		set_global_variable = emperor_norton_spawn
-	}
-
-	cancellation_trigger = {
-		scope:historic_agitator_scope ?= {
-			is_character_alive = no
-		}
 	}
 
 	option = {
@@ -1054,7 +1036,7 @@ historical_agitators.9 = { #Norton
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_emperor_norton_popularity
-				days = very_long_modifier_time
+				months = very_long_modifier_time
 				is_decaying = yes
 			}
 		}
@@ -1144,7 +1126,7 @@ historical_agitators.10 = { #Kropotkin
 			interest_group = {
 				add_modifier = {
 					name = modifier_kropotkin_in_exile
-					days = normal_modifier_time
+					months = normal_modifier_time
 					is_decaying = yes
 				}
 			}
@@ -1269,7 +1251,7 @@ historical_agitators.11 = { #Bakunin
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_bakunin_exiled_properly
-				days = long_modifier_time
+				months = long_modifier_time
 			}
 			exile_character = yes
 		}
@@ -1305,14 +1287,9 @@ historical_agitators.12 = { #Trotsky
 	trigger = {
 		has_dlc_feature = voice_of_the_people_content
 		empty_agitator_slots >= 1
-		OR = {		##Converter
-			uses_rus_characters = yes
-			uses_ukr_characters = yes
-		}
+		uses_ukr_characters = yes						##Converter
 		any_scope_state = {
-			state_region = {
-				is_homeland = global_var:ukr_culture		##Converter
-			}
+			converter_is_ukrainian_homeland = yes		##Converter
 			turmoil > 0.25
 		}
 		game_date > 1898.1.1
@@ -1324,33 +1301,6 @@ historical_agitators.12 = { #Trotsky
 
 	immediate = {
 		##Converter
-		if = {
-			limit = {
-				any_scope_pop = { culture = cu:ashkenazi }
-			}
-			cu:ashkenazi = { save_scope_as = trotsky_culture }
-		}
-		else_if = {
-			limit = {
-				any_scope_pop = { culture = { has_discrimination_trait = jewish_group } }
-			}
-			random_scope_pop = {
-				limit = { culture = { has_discrimination_trait = jewish_group } }
-				culture = { save_scope_as = trotsky_culture }
-			}
-		}
-		else_if = {
-			limit = {
-				any_scope_pop = { religion = { has_discrimination_trait = jewish } }
-			}
-			random_scope_pop = {
-				limit = { religion = { has_discrimination_trait = jewish } }
-				culture = { save_scope_as = trotsky_culture }
-			}
-		}
-		else = {
-			cu:ashkenazi = { save_scope_as = trotsky_culture }
-		}
 		converter_rule_63_effect = yes
 		if = {
 			limit = { has_variable = rule_63_effect }
@@ -1379,9 +1329,7 @@ historical_agitators.12 = { #Trotsky
 		set_global_variable = trotsky_spawn
 		random_scope_state = {
 			limit = {
-				state_region = {
-					is_homeland = cu:ukrainian
-				}
+				converter_is_ukrainian_homeland = yes	##Converter
 				turmoil > 0.25
 			}
 			save_scope_as = trotsky_state
@@ -1394,7 +1342,7 @@ historical_agitators.12 = { #Trotsky
 		ig:ig_trade_unions = {
 			add_modifier = {
 				name = modifier_trotsky_in_exile
-				days = long_modifier_time
+				months = long_modifier_time
 				is_decaying = yes
 			}
 		}
@@ -1411,9 +1359,7 @@ historical_agitators.12 = { #Trotsky
 		}
 		random_scope_state = {
 			limit = {
-				state_region = {
-					is_homeland = cu:ukrainian
-				}
+				converter_is_ukrainian_homeland = yes	##Converter
 			}
 			add_radicals_in_state = {
 				value = medium_radicals
@@ -1517,9 +1463,7 @@ historical_agitators.13 = { #Dabrowski
 		}
 		every_scope_state = {
 			limit = {
-				state_region = {
-					is_homeland = cu:polish
-				}
+				converter_is_polish_homeland = yes	##Converter
 			}
 			add_radicals_in_state = {
 				value = small_radicals
@@ -1588,7 +1532,7 @@ historical_agitators.14 = { #Dickens
 		set_global_variable = dickens_spawn
 		random_country = {
 			limit = {
-				country_has_primary_culture = global_var:fra_culture		##Converter
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_french_cultures target = this } }		##Converter
 			}
 			save_scope_as = french_scope
 		}
@@ -1624,7 +1568,7 @@ historical_agitators.14 = { #Dickens
 		}
 		add_modifier = {
 			name = modifier_dickensian_reading_campaign
-			days = long_modifier_time
+			months = long_modifier_time
 		}
 		scope:historic_agitator_scope = {
 			add_modifier = {
@@ -1722,7 +1666,7 @@ historical_agitators.15 = { #Luxemburg
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_luxemburg_on_the_run
-				days = long_modifier_time
+				months = long_modifier_time
 			}
 		}
 	}
@@ -1813,7 +1757,7 @@ historical_agitators.16 = { #Sorel
 			interest_group = {
 				add_modifier = {
 					name = modifier_passionate_academic_ig
-					days = normal_modifier_time
+					months = normal_modifier_time
 					multiplier = 0.5
 				}
 			}
@@ -1858,11 +1802,11 @@ historical_agitators.17 = { #Boulanger
 	trigger = {
 		has_dlc_feature = voice_of_the_people_content
 		empty_agitator_slots >= 1
-		uses_fra_characters = yes		##Converter
+		uses_fra_characters = yes							##Converter
 		game_date > 1880.1.1
 		game_date < 1895.1.1
 		any_state = {
-			state_region = { is_homeland = global_var:fra_culture }		##Converter
+			converter_is_french_homeland = yes				##Converter
 			NOT = { owner = ROOT }
 		}
 		has_technology_researched = political_agitation
@@ -1899,9 +1843,9 @@ historical_agitators.17 = { #Boulanger
 		set_global_variable = boulanger_spawn
 		random_country = {
 			limit = {
-				uses_fra_characters = no		##Converter
+				uses_fra_characters = no					##Converter
 				any_state = {
-					state_region = { is_homeland = global_var:fra_culture }		##Converter
+					converter_is_french_homeland = yes		##Converter
 				}
 			}
 			save_scope_as = revenge_country
@@ -1966,7 +1910,7 @@ historical_agitators.17 = { #Boulanger
 		ig:ig_armed_forces = {
 			add_modifier = {
 				name = modifier_fired_boulanger
-				days = long_modifier_time
+				months = long_modifier_time
 			}
 		}
 		add_radicals = {
@@ -1999,7 +1943,7 @@ historical_agitators.18 = { #Lassalle
 	trigger = {
 		has_dlc_feature = voice_of_the_people_content
 		empty_agitator_slots >= 1
-		is_target_in_global_variable_list = { name = global_nor_ger_countries target = this }		##Converter
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_nor_ger_cultures target = this } }		##Converter
 		game_date > 1848.1.1
 		game_date < 1885.1.1
 		has_technology_researched = dialectics
@@ -2065,7 +2009,7 @@ historical_agitators.18 = { #Lassalle
 			interest_group = {
 				add_modifier ={
 					name = modifier_agent_of_the_sovereign_ig
-					days = normal_modifier_time
+					months = normal_modifier_time
 				}
 			}
 		}
@@ -2154,7 +2098,7 @@ historical_agitators.19 = { #Gama
 		}
 		add_modifier = {
 			name = modifier_abolitionist_advocacy
-			days = normal_modifier_time
+			months = normal_modifier_time
 			multiplier = 2
 		}
 	}
@@ -2172,7 +2116,7 @@ historical_agitators.19 = { #Gama
 		}
 		add_modifier = {
 			name = modifier_abolitionist_advocacy
-			days = normal_modifier_time
+			months = normal_modifier_time
 		}
 	}
 }
@@ -2332,15 +2276,7 @@ historical_agitators.21 = { #Sun
 			has_law = law_type:law_monarchy
 			has_law = law_type:law_theocracy
 		}
-		##Converter
-		NOT = {
-			is_target_in_global_variable_list = {
-				name = converter_unavailable_unique_characters
-				target = flag:converter_sun_yat_sen
-			}
-		}
-		uses_han_characters = yes
-		##Converter
+		uses_han_characters = yes				##Converter
 		game_date > 1888.1.1
 		game_date < 1925.1.1
 		any_scope_state = {
