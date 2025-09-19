@@ -2,10 +2,10 @@
 	first_name = Giuseppe
 	last_name = Garibaldi
 	historical = yes
-	culture = global_var:nor_ita_culture
+	culture = cu:north_italian
 	#religion = catholic # He hated the pope, but still identified as a Christian
 	interest_group = ig_trade_unions
-	is_agitator = yes 
+	is_agitator = yes
 	female = no
 	birth_date = 1807.7.4
 	dna = dna_giuseppe_garibaldi
@@ -16,6 +16,7 @@
 	}
 	on_created = {
 		set_global_variable = garibaldi_is_alive_global_var
+		converter_standard_template_effect = { TARGET = cu:north_italian }
 	}
 }
 
@@ -23,10 +24,11 @@ fem_garibaldi_character_template = {
 	first_name = Giuseppina
 	last_name = Garibaldi
 	historical = yes
-	culture = global_var:nor_ita_culture
+	culture = cu:north_italian
 	#religion = catholic # He hated the pope, but still identified as a Christian
 	interest_group = ig_trade_unions
-	is_agitator = yes 
+	is_agitator = yes
+	is_general = yes
 	female = yes
 	birth_date = 1807.7.4
 	dna = dna_giuseppe_garibaldi
@@ -37,6 +39,7 @@ fem_garibaldi_character_template = {
 	}
 	on_created = {
 		set_global_variable = garibaldi_is_alive_global_var
+		converter_standard_template_effect = { TARGET = cu:north_italian }
 	}
 }
 
@@ -44,7 +47,7 @@ canonic_wilde_character_template = {
 	first_name = Oscar
 	last_name = Wilde
 	historical = yes
-	culture = global_var:gbr_culture
+	culture = cu:british
 	female = no
 	dna = dna_oscar_wilde
 	interest_group = ig_intelligentsia
@@ -53,13 +56,16 @@ canonic_wilde_character_template = {
 	traits = {
 		romantic
 	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:british }
+	}
 }
 
 fem_canonic_wilde_character_template = {
 	first_name = Cara
 	last_name = Wilde
 	historical = yes
-	culture = global_var:gbr_culture
+	culture = cu:british
 	female = yes
 	dna = dna_oscar_wilde
 	interest_group = ig_intelligentsia
@@ -67,6 +73,9 @@ fem_canonic_wilde_character_template = {
 	religion = catholic
 	traits = {
 		romantic
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:british }
 	}
 }
 
@@ -104,7 +113,7 @@ canonic_dreyfus_character_template = {
 	first_name = Alfred
 	last_name = Dreyfus
 	historical = yes
-	culture = scope:dreyfus_culture			##Converter
+	culture = global_var:ashkenazi_culture
 	religion = jewish
 	female = no
 	interest_group = ig_armed_forces
@@ -124,7 +133,7 @@ fem_dreyfus_character_template = {
 	first_name = Winifred
 	last_name = Dreyfus
 	historical = yes
-	culture = scope:dreyfus_culture
+	culture = global_var:ashkenazi_culture
 	religion = jewish
 	female = yes
 	interest_group = ig_armed_forces
@@ -144,7 +153,7 @@ canonic_esterhazy_character_template = {
 	first_name = Ferdinand_Walsin
 	last_name = Esterhazy
 	historical = yes
-	culture = global_var:fra_culture
+	culture = cu:french
 	#religion = scope:root
 	female = no
 	interest_group = ig_armed_forces
@@ -157,6 +166,9 @@ canonic_esterhazy_character_template = {
 		basic_colonial_administrator
 		expensive_tastes
 		reckless
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
 	}
 }
 
@@ -164,7 +176,7 @@ fem_esterhazy_character_template = {
 	first_name = Marie-Anne
 	last_name = Esterhazy
 	historical = yes
-	culture = global_var:fra_culture
+	culture = cu:french
 	#religion = scope:root
 	female = yes
 	interest_group = ig_armed_forces
@@ -178,13 +190,16 @@ fem_esterhazy_character_template = {
 		expensive_tastes
 		reckless
 	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+	}
 }
 
 canonic_zola_character_template = {
 	first_name = Emile
 	last_name = Zola
 	historical = yes
-	culture = global_var:fra_culture
+	culture = cu:french
 	#religion = scope:root
 	female = no
 	ig_leader = yes
@@ -196,6 +211,9 @@ canonic_zola_character_template = {
 		persistent
 		meticulous
 		inspirational_orator
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
 	}
 }
 
@@ -203,7 +221,7 @@ fem_zola_character_template = {
 	first_name = Aemilia
 	last_name = Zola
 	historical = yes
-	culture = global_var:fra_culture
+	culture = cu:french
 	#religion = scope:root
 	female = yes
 	ig_leader = yes
@@ -216,43 +234,7 @@ fem_zola_character_template = {
 		meticulous
 		inspirational_orator
 	}
-}
-
-fra_auguste_comte_character_template = {
-	first_name = Auguste
-	last_name = Comte
-	historical = yes
-	birth_date = 1798.1.19
-	culture = global_var:fra_culture
-	religion = rel:atheist
-	is_agitator = yes
-	female = no
-	interest_group = ig_intelligentsia
-	ideology = ideology_positivist
-	#dna = 
-	traits = {
-		charismatic
-		sickly
-		erudite
-	}  
-}
-
-fem_fra_auguste_comte_character_template = {
-	first_name = Augusta
-	#first_name = Gussie
-	last_name = Comte
-	historical = yes
-	birth_date = 1798.1.19
-	culture = global_var:fra_culture
-	religion = rel:atheist
-	is_agitator = yes
-	female = yes
-	interest_group = ig_intelligentsia
-	ideology = ideology_positivist
-	#dna = 
-	traits = {
-		charismatic
-		sickly
-		erudite
-	}  
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+	}
 }

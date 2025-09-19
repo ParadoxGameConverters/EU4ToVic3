@@ -4,7 +4,6 @@ BOL_jose_maria_de_acha = { #José María Achá Valiente
     first_name = Jose_Maria
     last_name = de_Acha
     historical = yes
-    #culture = global_var:sou_andes_culture
 	culture = primary_culture
     female = no
     religion = rel:catholic
@@ -31,14 +30,14 @@ BOL_jose_maria_de_acha = { #José María Achá Valiente
         }
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_armed_forces    
-        }   
+            is_interest_group_type = ig_armed_forces
+        }
         earliest_usage_date = 1850.1.1
         latest_usage_date = 1870.1.1
         chance = 50
     }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_maria_de_acha
@@ -50,7 +49,6 @@ fem_BOL_jose_maria_de_acha = { #José María Achá Valiente
     first_name = Pepita_Maritza
     last_name = de_Acha
     historical = yes
-    #culture = global_var:sou_andes_culture
 	culture = primary_culture
     female = yes
     religion = rel:catholic
@@ -77,14 +75,14 @@ fem_BOL_jose_maria_de_acha = { #José María Achá Valiente
         }
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_armed_forces    
-        }   
+            is_interest_group_type = ig_armed_forces
+        }
         earliest_usage_date = 1850.1.1
         latest_usage_date = 1870.1.1
         chance = 50
     }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_maria_de_acha
@@ -98,7 +96,6 @@ BOL_jose_maria_linares = { #José María Rufino de Linares Lizarazu
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -127,13 +124,13 @@ BOL_jose_maria_linares = { #José María Rufino de Linares Lizarazu
 				is_interest_group_type = ig_intelligentsia
 				is_interest_group_type = ig_petty_bourgeoisie
 			}
-        }   
+        }
         earliest_usage_date = 1848.1.1
         latest_usage_date = 1862.1.1
         chance = 75
     }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_maria_linares
@@ -147,7 +144,6 @@ fem_BOL_jose_maria_linares = { #José María Rufino de Linares Lizarazu
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -176,13 +172,13 @@ fem_BOL_jose_maria_linares = { #José María Rufino de Linares Lizarazu
 				is_interest_group_type = ig_intelligentsia
 				is_interest_group_type = ig_petty_bourgeoisie
 			}
-        }   
+        }
         earliest_usage_date = 1848.1.1
         latest_usage_date = 1862.1.1
         chance = 75
     }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_maria_linares
@@ -194,7 +190,6 @@ BOL_casimiro_corral = { #Casimiro Corral
     first_name = Casimiro
     last_name = Corral
     historical = yes
-    #culture = global_var:sou_andes_culture
 	culture = primary_culture
     female = no
     religion = rel:catholic
@@ -220,14 +215,14 @@ BOL_casimiro_corral = { #Casimiro Corral
         }
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_petty_bourgeoisie    
-        }   
+            is_interest_group_type = ig_petty_bourgeoisie
+        }
         earliest_usage_date = 1860.1.1
         latest_usage_date = 1880.1.1
         chance = 50
     }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_casimiro_corral
@@ -239,7 +234,6 @@ fem_BOL_casimiro_corral = { #Casimiro Corral
     first_name = Cristina
     last_name = Corral
     historical = yes
-    #culture = global_var:sou_andes_culture
 	culture = primary_culture
     female = yes
     religion = rel:catholic
@@ -265,14 +259,14 @@ fem_BOL_casimiro_corral = { #Casimiro Corral
         }
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_petty_bourgeoisie    
-        }   
+            is_interest_group_type = ig_petty_bourgeoisie
+        }
         earliest_usage_date = 1860.1.1
         latest_usage_date = 1880.1.1
         chance = 50
     }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_casimiro_corral
@@ -284,7 +278,6 @@ BOL_tomas_frias = { #Tomás Frías Ametller
     first_name = Tomas
     last_name = Frias
     historical = yes
-    #culture = global_var:sou_andes_culture
 	culture = primary_culture
     female = no
     religion = rel:catholic
@@ -310,14 +303,14 @@ BOL_tomas_frias = { #Tomás Frías Ametller
         }
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_landowners    
-        }   
+            is_interest_group_type = ig_landowners
+        }
         earliest_usage_date = 1840.1.1
         latest_usage_date = 1884.1.1
         chance = 50
     }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_tomas_frias
@@ -329,7 +322,6 @@ fem_BOL_tomas_frias = { #Tomás Frías Ametller
     first_name = Tomasa
     last_name = Frias
     historical = yes
-    #culture = global_var:sou_andes_culture
 	culture = primary_culture
     female = yes
     religion = rel:catholic
@@ -355,14 +347,14 @@ fem_BOL_tomas_frias = { #Tomás Frías Ametller
         }
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_landowners    
-        }   
+            is_interest_group_type = ig_landowners
+        }
         earliest_usage_date = 1840.1.1
         latest_usage_date = 1884.1.1
         chance = 50
     }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_tomas_frias
@@ -374,7 +366,6 @@ BOL_aniceto_arce = { #Aniceto Arce
     first_name = Aniceto
     last_name = Arce
     historical = yes
-    #culture = global_var:sou_andes_culture
 	culture = primary_culture
     female = no
     religion = rel:catholic
@@ -401,14 +392,14 @@ BOL_aniceto_arce = { #Aniceto Arce
         }
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_industrialists    
-        }   
+            is_interest_group_type = ig_industrialists
+        }
         earliest_usage_date = 1865.1.1
         latest_usage_date = 1900.1.1
         chance = 50
     }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_aniceto_arce
@@ -420,7 +411,6 @@ fem_BOL_aniceto_arce = { #Aniceto Arce
     first_name = Amalia
     last_name = Arce
     historical = yes
-    #culture = global_var:sou_andes_culture
 	culture = primary_culture
     female = yes
     religion = rel:catholic
@@ -447,14 +437,14 @@ fem_BOL_aniceto_arce = { #Aniceto Arce
         }
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_industrialists    
-        }   
+            is_interest_group_type = ig_industrialists
+        }
         earliest_usage_date = 1865.1.1
         latest_usage_date = 1900.1.1
         chance = 50
     }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_aniceto_arce
@@ -466,7 +456,6 @@ BOL_ismael_montes = { #Ismael Montes Gamboa
     first_name = Ismael
     last_name = Montes
     historical = yes
-    #culture = global_var:sou_andes_culture
 	culture = primary_culture
     female = no
     religion = rel:catholic
@@ -492,14 +481,14 @@ BOL_ismael_montes = { #Ismael Montes Gamboa
         }
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_intelligentsia    
-        }   
+            is_interest_group_type = ig_intelligentsia
+        }
         earliest_usage_date = 1900.1.1
         latest_usage_date = 1933.1.1
         chance = 50
     }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_ismael_montes
@@ -511,7 +500,6 @@ fem_BOL_ismael_montes = { #Ismael Montes Gamboa
     first_name = Agar
     last_name = Montes
     historical = yes
-    #culture = global_var:sou_andes_culture
 	culture = primary_culture
     female = yes
     religion = rel:catholic
@@ -537,14 +525,14 @@ fem_BOL_ismael_montes = { #Ismael Montes Gamboa
         }
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_intelligentsia    
-        }   
+            is_interest_group_type = ig_intelligentsia
+        }
         earliest_usage_date = 1900.1.1
         latest_usage_date = 1933.1.1
         chance = 50
     }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_ismael_montes
@@ -558,7 +546,6 @@ BOL_severo_fernandez_alonso = { #Severo Fernández Alonso Caballero
 	historical = yes
 	ig_leader = yes
 	birth_date = 1849.8.15
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_industrialists
@@ -580,15 +567,15 @@ BOL_severo_fernandez_alonso = { #Severo Fernández Alonso Caballero
 		}
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_industrialists    
-        }   
+            is_interest_group_type = ig_industrialists
+        }
 		earliest_usage_date = 1885.1.1
-		latest_usage_date = 1910.1.1	
+		latest_usage_date = 1910.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_severo_fernandez_alonso
@@ -602,7 +589,6 @@ fem_BOL_severo_fernandez_alonso = { #Severo Fernández Alonso Caballero
 	historical = yes
 	ig_leader = yes
 	birth_date = 1849.8.15
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
     female = yes
 	religion = rel:catholic
@@ -625,15 +611,15 @@ fem_BOL_severo_fernandez_alonso = { #Severo Fernández Alonso Caballero
 		}
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_industrialists    
-        }   
+            is_interest_group_type = ig_industrialists
+        }
 		earliest_usage_date = 1885.1.1
-		latest_usage_date = 1910.1.1	
+		latest_usage_date = 1910.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_severo_fernandez_alonso
@@ -647,7 +633,6 @@ BOL_simon_iturri_patino = { #Simon Iturri Patiño
 	historical = yes
 	ig_leader = yes
 	birth_date = 1860.6.1
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_industrialists
@@ -669,15 +654,15 @@ BOL_simon_iturri_patino = { #Simon Iturri Patiño
 		}
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_industrialists    
-        }   
+            is_interest_group_type = ig_industrialists
+        }
 		earliest_usage_date = 1905.1.1
-		latest_usage_date = 1936.1.1	
+		latest_usage_date = 1936.1.1
 		chance = 100
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_simon_iturri_patino
@@ -691,7 +676,6 @@ fem_BOL_simon_iturri_patino = { #Simon Iturri Patiño
 	historical = yes
 	ig_leader = yes
 	birth_date = 1860.6.1
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	female = yes
 	religion = rel:catholic
@@ -714,15 +698,15 @@ fem_BOL_simon_iturri_patino = { #Simon Iturri Patiño
 		}
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_industrialists    
-        }   
+            is_interest_group_type = ig_industrialists
+        }
 		earliest_usage_date = 1905.1.1
-		latest_usage_date = 1936.1.1	
+		latest_usage_date = 1936.1.1
 		chance = 100
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_simon_iturri_patino
@@ -736,7 +720,6 @@ BOL_francisco_maria_del_granado = { #Francisco María del Granado y Capriles
 	historical = yes
 	ig_leader = yes
 	birth_date = 1835.8.18
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_devout
@@ -759,15 +742,15 @@ BOL_francisco_maria_del_granado = { #Francisco María del Granado y Capriles
 		}
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_devout    
-        }   
+            is_interest_group_type = ig_devout
+        }
 		earliest_usage_date = 1870.1.1
-		latest_usage_date = 1895.1.1	
+		latest_usage_date = 1895.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_francisco_maria_del_granado
@@ -781,7 +764,6 @@ fem_BOL_francisco_maria_del_granado = { #Francisco María del Granado y Capriles
 	historical = yes
 	ig_leader = yes
 	birth_date = 1835.8.18
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	female = yes
 	religion = rel:catholic
@@ -805,15 +787,15 @@ fem_BOL_francisco_maria_del_granado = { #Francisco María del Granado y Capriles
 		}
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_devout    
-        }   
+            is_interest_group_type = ig_devout
+        }
 		earliest_usage_date = 1870.1.1
-		latest_usage_date = 1895.1.1	
+		latest_usage_date = 1895.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_francisco_maria_del_granado
@@ -827,7 +809,7 @@ BOL_nicolas_armentia_y_ugarte = { #Nicolás Armentia y Ugarte
 	historical = yes
 	ig_leader = yes
 	birth_date = 1860.6.1
-	culture = global_var:spa_culture
+	culture = cu:spanish
 	religion = rel:catholic
 	interest_group = ig_devout
 	ideology = ideology_moderate
@@ -848,14 +830,15 @@ BOL_nicolas_armentia_y_ugarte = { #Nicolás Armentia y Ugarte
 		}
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_devout    
-        }   
+            is_interest_group_type = ig_devout
+        }
 		earliest_usage_date = 1900.1.1
-		latest_usage_date = 1910.1.1	
+		latest_usage_date = 1910.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:spanish }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nicolas_armentia_y_ugarte
@@ -869,7 +852,7 @@ fem_BOL_nicolas_armentia_y_ugarte = { #Nicolás Armentia y Ugarte
 	historical = yes
 	ig_leader = yes
 	birth_date = 1860.6.1
-	culture = global_var:spa_culture
+	culture = cu:spanish
 	female = yes
 	religion = rel:catholic
 	interest_group = ig_devout
@@ -891,14 +874,15 @@ fem_BOL_nicolas_armentia_y_ugarte = { #Nicolás Armentia y Ugarte
 		}
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_devout    
-        }   
+            is_interest_group_type = ig_devout
+        }
 		earliest_usage_date = 1900.1.1
-		latest_usage_date = 1910.1.1	
+		latest_usage_date = 1910.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:spanish }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nicolas_armentia_y_ugarte
@@ -912,7 +896,7 @@ BOL_bautista_saavedra_mallea = { #Bautista Saavedra Mallea
 	historical = yes
 	ig_leader = yes
 	birth_date = 1870.8.30
-	culture = global_var:spa_culture
+	culture = cu:spanish
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
 	ideology = ideology_reformer
@@ -933,14 +917,15 @@ BOL_bautista_saavedra_mallea = { #Bautista Saavedra Mallea
 		}
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_petty_bourgeoisie    
-        }   
+            is_interest_group_type = ig_petty_bourgeoisie
+        }
 		earliest_usage_date = 1915.1.1
-		latest_usage_date = 1936.1.1	
+		latest_usage_date = 1936.1.1
 		chance = 75
 	}
 	trait_generation = { }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:spanish }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_bautista_saavedra_mallea
@@ -954,7 +939,7 @@ fem_BOL_bautista_saavedra_mallea = { #Bautista Saavedra Mallea
 	historical = yes
 	ig_leader = yes
 	birth_date = 1870.8.30
-	culture = global_var:spa_culture
+	culture = cu:spanish
 	female = yes
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
@@ -976,14 +961,15 @@ fem_BOL_bautista_saavedra_mallea = { #Bautista Saavedra Mallea
 		}
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_petty_bourgeoisie    
-        }   
+            is_interest_group_type = ig_petty_bourgeoisie
+        }
 		earliest_usage_date = 1915.1.1
-		latest_usage_date = 1936.1.1	
+		latest_usage_date = 1936.1.1
 		chance = 75
 	}
 	trait_generation = { }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:spanish }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_bautista_saavedra_mallea
@@ -997,7 +983,7 @@ BOL_gabriel_gosalvez = { #Gabriel Gosálvez Tejada
 	historical = yes
 	ig_leader = yes
 	birth_date = 1870.8.30
-	culture = global_var:spa_culture
+	culture = cu:spanish
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
 	ideology = ideology_social_democrat
@@ -1018,14 +1004,15 @@ BOL_gabriel_gosalvez = { #Gabriel Gosálvez Tejada
 		}
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_intelligentsia    
+            is_interest_group_type = ig_intelligentsia
         }   
 		earliest_usage_date = 1928.1.1
-		latest_usage_date = 1936.1.1	
+		latest_usage_date = 1936.1.1
 		chance = 75
 	}
 	trait_generation = { }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:spanish }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_gabriel_gosalvez
@@ -1039,7 +1026,7 @@ fem_BOL_gabriel_gosalvez = { #Gabriel Gosálvez Tejada
 	historical = yes
 	ig_leader = yes
 	birth_date = 1870.8.30
-	culture = global_var:spa_culture
+	culture = cu:spanish
 	female = yes
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -1061,14 +1048,15 @@ fem_BOL_gabriel_gosalvez = { #Gabriel Gosálvez Tejada
 		}
         interest_group_trigger = {
             is_marginal = no
-            is_interest_group_type = ig_intelligentsia    
+            is_interest_group_type = ig_intelligentsia
         }   
 		earliest_usage_date = 1928.1.1
-		latest_usage_date = 1936.1.1	
+		latest_usage_date = 1936.1.1
 		chance = 75
 	}
 	trait_generation = { }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:spanish }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_gabriel_gosalvez
@@ -1082,7 +1070,7 @@ BOL_otto_philipp_braun = { #Otto Philipp Braun
 	historical = yes
 	is_general = yes
 	birth_date = 1798.12.13
-	culture = global_var:nor_ger_culture
+	culture = cu:north_german
 	interest_group = ig_armed_forces
 	ideology = ideology_moderate
 	traits = {
@@ -1102,11 +1090,12 @@ BOL_otto_philipp_braun = { #Otto Philipp Braun
 		}
 		role = general
 		earliest_usage_date = 1836.2.1
-		latest_usage_date = 1848.1.1	
+		latest_usage_date = 1848.1.1
 		chance = 100
 	}
 	trait_generation = { }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_otto_philipp_braun
@@ -1120,7 +1109,7 @@ fem_BOL_otto_philipp_braun = { #Otto Philipp Braun
 	historical = yes
 	is_general = yes
 	birth_date = 1798.12.13
-	culture = global_var:nor_ger_culture
+	culture = cu:north_german
 	female = yes
 	interest_group = ig_armed_forces
 	ideology = ideology_moderate
@@ -1141,11 +1130,12 @@ fem_BOL_otto_philipp_braun = { #Otto Philipp Braun
 		}
 		role = general
 		earliest_usage_date = 1836.2.1
-		latest_usage_date = 1848.1.1	
+		latest_usage_date = 1848.1.1
 		chance = 100
 	}
 	trait_generation = { }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_otto_philipp_braun
@@ -1159,7 +1149,6 @@ BOL_manuel_isidoro_belzu = { #Manuel Isidoro Belzu Humérez
 	historical = yes
 	is_general = yes
 	birth_date = 1808.4.4
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_armed_forces
@@ -1181,12 +1170,12 @@ BOL_manuel_isidoro_belzu = { #Manuel Isidoro Belzu Humérez
 		}
 		role = general
 		earliest_usage_date = 1848.1.1
-		latest_usage_date = 1865.1.1	
+		latest_usage_date = 1865.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_manuel_isidoro_belzu
@@ -1200,7 +1189,6 @@ fem_BOL_manuel_isidoro_belzu = { #Manuel Isidoro Belzu Humérez
 	historical = yes
 	is_general = yes
 	birth_date = 1808.4.4
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	female = yes
 	religion = rel:catholic
@@ -1223,12 +1211,12 @@ fem_BOL_manuel_isidoro_belzu = { #Manuel Isidoro Belzu Humérez
 		}
 		role = general
 		earliest_usage_date = 1848.1.1
-		latest_usage_date = 1865.1.1	
+		latest_usage_date = 1865.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_manuel_isidoro_belzu
@@ -1242,7 +1230,6 @@ BOL_mariano_melgarejo = { #Manuel Mariano Melgarejo Valencia
 	historical = yes
 	is_general = yes
 	birth_date = 1820.4.13
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_armed_forces
@@ -1266,12 +1253,12 @@ BOL_mariano_melgarejo = { #Manuel Mariano Melgarejo Valencia
 		}
 		role = general
 		earliest_usage_date = 1860.1.1
-		latest_usage_date = 1885.1.1	
+		latest_usage_date = 1885.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_mariano_melgarejo
@@ -1285,7 +1272,6 @@ fem_BOL_mariano_melgarejo = { #Manuel Mariano Melgarejo Valencia
 	historical = yes
 	is_general = yes
 	birth_date = 1820.4.13
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	female = yes
 	religion = rel:catholic
@@ -1310,12 +1296,12 @@ fem_BOL_mariano_melgarejo = { #Manuel Mariano Melgarejo Valencia
 		}
 		role = general
 		earliest_usage_date = 1860.1.1
-		latest_usage_date = 1885.1.1	
+		latest_usage_date = 1885.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_mariano_melgarejo
@@ -1329,7 +1315,6 @@ BOL_hilarion_daza_groselle = { #Hilarión Daza Groselle
 	historical = yes
 	is_general = yes
 	birth_date = 1840.1.14
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_armed_forces
@@ -1354,12 +1339,12 @@ BOL_hilarion_daza_groselle = { #Hilarión Daza Groselle
 		}
 		role = general
 		earliest_usage_date = 1870.1.1
-		latest_usage_date = 1894.1.1	
+		latest_usage_date = 1894.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_hilarion_daza_groselle
@@ -1373,7 +1358,6 @@ fem_BOL_hilarion_daza_groselle = { #Hilarión Daza Groselle
 	historical = yes
 	is_general = yes
 	birth_date = 1840.1.14
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	female = yes
 	religion = rel:catholic
@@ -1399,12 +1383,12 @@ fem_BOL_hilarion_daza_groselle = { #Hilarión Daza Groselle
 		}
 		role = general
 		earliest_usage_date = 1870.1.1
-		latest_usage_date = 1894.1.1	
+		latest_usage_date = 1894.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_hilarion_daza_groselle
@@ -1418,7 +1402,6 @@ BOL_eliodoro_camacho = { #Eliodoro Camacho Mesa
 	historical = yes
 	is_general = yes
 	birth_date = 1831.11.14
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -1441,12 +1424,12 @@ BOL_eliodoro_camacho = { #Eliodoro Camacho Mesa
 		}
 		role = general
 		earliest_usage_date = 1870.1.1
-		latest_usage_date = 1895.1.1	
+		latest_usage_date = 1895.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_eliodoro_camacho
@@ -1460,7 +1443,6 @@ fem_BOL_eliodoro_camacho = { #Eliodoro Camacho Mesa
 	historical = yes
 	is_general = yes
 	birth_date = 1831.11.14
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	female = yes
 	religion = rel:catholic
@@ -1484,12 +1466,12 @@ fem_BOL_eliodoro_camacho = { #Eliodoro Camacho Mesa
 		}
 		role = general
 		earliest_usage_date = 1870.1.1
-		latest_usage_date = 1895.1.1	
+		latest_usage_date = 1895.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_eliodoro_camacho
@@ -1503,7 +1485,6 @@ BOL_jose_manuel_pando = { #José Manuel Pando Solares
 	historical = yes
 	is_general = yes
 	birth_date = 1848.12.25
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_armed_forces
@@ -1525,12 +1506,12 @@ BOL_jose_manuel_pando = { #José Manuel Pando Solares
 		}
 		role = general
 		earliest_usage_date = 1880.1.1
-		latest_usage_date = 1910.1.1	
+		latest_usage_date = 1910.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_manuel_pando
@@ -1544,7 +1525,6 @@ fem_BOL_jose_manuel_pando = { #José Manuel Pando Solares
 	historical = yes
 	is_general = yes
 	birth_date = 1848.12.25
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	female = yes
 	religion = rel:catholic
@@ -1567,12 +1547,12 @@ fem_BOL_jose_manuel_pando = { #José Manuel Pando Solares
 		}
 		role = general
 		earliest_usage_date = 1880.1.1
-		latest_usage_date = 1910.1.1	
+		latest_usage_date = 1910.1.1
 		chance = 50
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_manuel_pando
@@ -1586,7 +1566,6 @@ BOL_narciso_campero = { #Narciso Campero Leyes
 	historical = yes
 	is_general = yes
 	birth_date = 1813.8.15
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_landowners
@@ -1608,12 +1587,12 @@ BOL_narciso_campero = { #Narciso Campero Leyes
 		}
 		role = general
 		earliest_usage_date = 1865.1.1
-		latest_usage_date = 1885.1.1	
+		latest_usage_date = 1885.1.1
 		chance = 75
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_narciso_campero
@@ -1627,7 +1606,6 @@ fem_BOL_narciso_campero = { #Narciso Campero Leyes
 	historical = yes
 	is_general = yes
 	birth_date = 1813.8.15
-	#culture = global_var:sou_andes_culture
 	culture = primary_culture
 	female = yes
 	religion = rel:catholic
@@ -1650,12 +1628,12 @@ fem_BOL_narciso_campero = { #Narciso Campero Leyes
 		}
 		role = general
 		earliest_usage_date = 1865.1.1
-		latest_usage_date = 1885.1.1	
+		latest_usage_date = 1885.1.1
 		chance = 75
 	}
 	trait_generation = { }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_narciso_campero
@@ -1668,8 +1646,7 @@ BOL_andres_ibanez_justiniano = { #Andrés Ibáñez Justiniano
 	last_name = Ibanez
 	historical = yes
 	female = no
-	is_agitator = yes 
-	#culture = global_var:sou_andes_culture
+	is_agitator = yes
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -1700,7 +1677,7 @@ BOL_andres_ibanez_justiniano = { #Andrés Ibáñez Justiniano
         chance = 100
     }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_andres_ibanez_justiniano
@@ -1713,8 +1690,7 @@ fem_BOL_andres_ibanez_justiniano = { #Andrés Ibáñez Justiniano
 	last_name = Ibanez
 	historical = yes
 	female = yes
-	is_agitator = yes 
-	#culture = global_var:sou_andes_culture
+	is_agitator = yes
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -1745,7 +1721,7 @@ fem_BOL_andres_ibanez_justiniano = { #Andrés Ibáñez Justiniano
         chance = 100
     }
 	on_created = {
-		converter_andean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_andres_ibanez_justiniano

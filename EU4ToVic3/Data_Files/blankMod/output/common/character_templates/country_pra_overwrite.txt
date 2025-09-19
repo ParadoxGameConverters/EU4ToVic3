@@ -7,7 +7,7 @@ PRA_Manuel_Lopes = {
 	birth_date = 1780.1.4
 	is_general = yes
 	female = no
-	commander_rank = default
+	commander_rank = 1
 	interest_group = ig_armed_forces
 	ideology = ideology_reformer
 	traits = {
@@ -24,7 +24,6 @@ PRA_Manuel_Lopes = {
 					target = flag:converter_manuel_lopes
 				}
 			}
-			#is_target_in_global_variable_list = { name = global_brazil_countries target = this }
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
 			any_scope_state = {
 				OR = {
@@ -35,12 +34,12 @@ PRA_Manuel_Lopes = {
 			}
 		}
 		role = general
-		earliest_usage_date = 1836.1.1 
-		latest_usage_date = 1850.1.1	
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.1.1
 		chance = 75
 	}
 	on_created = {
-		converter_brazilian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_brazilian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_manuel_lopes
@@ -55,7 +54,7 @@ fem_PRA_Manuel_Lopes = {
 	birth_date = 1780.1.4
 	is_general = yes
 	female = yes
-	commander_rank = default
+	commander_rank = 1
 	interest_group = ig_armed_forces
 	ideology = ideology_reformer
 	traits = {
@@ -72,7 +71,6 @@ fem_PRA_Manuel_Lopes = {
 					target = flag:converter_manuel_lopes
 				}
 			}
-			#is_target_in_global_variable_list = { name = global_brazil_countries target = this }
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
 			any_scope_state = {
 				OR = {
@@ -83,12 +81,12 @@ fem_PRA_Manuel_Lopes = {
 			}
 		}
 		role = general
-		earliest_usage_date = 1836.1.1 
-		latest_usage_date = 1850.1.1	
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.1.1
 		chance = 75
 	}
 	on_created = {
-		converter_brazilian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_brazilian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_manuel_lopes

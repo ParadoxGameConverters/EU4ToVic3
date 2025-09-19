@@ -2,9 +2,9 @@
 	first_name = Lalla_Fatma
 	last_name = N_Soumer
 	historical = yes
-	culture = global_var:ber_culture
+	culture = cu:berber
 	female = yes
-	religion = sunni
+	religion = rel:sunni
 	commander_rank = default
 	interest_group = ig_devout
 	ideology = ideology_theocrat
@@ -20,20 +20,21 @@
 			NOT = {
 				is_target_in_global_variable_list = {
 					name = converter_unavailable_unique_characters
-					target = flag:converter_nsoumer
+					target = flag:converter_general_nsoumer
 				}
 			}
 			uses_ber_characters = yes
 		}
 		role = general
-		earliest_usage_date = 1836.1.1
-		latest_usage_date = 1854.1.1	
+		earliest_usage_date = 1856.1.1
+		latest_usage_date = 1894.1.1
 		chance = 75
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:berber }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
-			target = flag:converter_nsoumer
+			target = flag:converter_general_nsoumer
 		}
 	}
 }
@@ -41,9 +42,9 @@ ald_general_mokrani = {
 	first_name = Sheikh_Mohamed
 	last_name = al-Mokrani
 	historical = yes
-	culture = global_var:ber_culture
+	culture = cu:berber
 	female = no
-	religion = sunni
+	religion = rel:sunni
 	commander_rank = default
 	interest_group = ig_landowners
 	ideology = ideology_traditionalist
@@ -59,20 +60,21 @@ ald_general_mokrani = {
 			NOT = {
 				is_target_in_global_variable_list = {
 					name = converter_unavailable_unique_characters
-					target = flag:converter_mokrani
+					target = flag:converter_general_mokrani
 				}
 			}
 			uses_ber_characters = yes
 		}
 		role = general
 		earliest_usage_date = 1836.1.1
-		latest_usage_date = 1854.1.1	
+		latest_usage_date = 1854.1.1
 		chance = 75
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:berber }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
-			target = flag:converter_mokrani
+			target = flag:converter_general_mokrani
 		}
 	}
 }
