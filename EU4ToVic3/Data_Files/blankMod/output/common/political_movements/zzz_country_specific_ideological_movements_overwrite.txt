@@ -1,0 +1,299 @@
+﻿movement_utilitarian = {
+	category = movement_category_ideological
+
+	ideology = ideology_utilitarian_movement
+	character_ideologies = {
+		ideology_utilitarian_leader
+	}
+
+	creation_trigger = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_utilitarian_cultures target = this } }			### Converter ###
+	}
+	creation_weight = {
+		value = 100
+	}
+	on_created = {
+		add_movement_enthusiasm_modifier = yes
+	}
+
+	character_support_trigger = {
+		OR = {
+			AND = {
+				culture = {
+					shares_heritage_trait_with_any_primary_culture = prev.owner			### Converter ###
+				}
+				has_reactionary_ideology = no
+				has_conservative_ideology = no
+				has_socialist_ideology = no
+			}
+			has_ideology = ideology:ideology_utilitarian_leader
+		}
+	}
+	character_support_weight = {
+		value = 200
+		if = {
+			limit = {
+				has_ideology = ideology:ideology_utilitarian_leader
+			}
+			multiply = {
+				value = 5
+			}
+		}
+	}
+
+	pop_support_trigger = {
+		OR = {
+			AND = {
+				owner = {
+					is_country_type = colonial
+				}
+				culture = {
+					shares_heritage_trait_with_any_primary_culture = prev.owner			### Converter ###
+				}
+			}
+			is_pop_type = bureaucrats
+			is_pop_type = capitalists
+			is_pop_type = engineers
+			is_pop_type = clerks
+			is_pop_type = officers
+			is_pop_type = academics
+		}
+		NOR = {
+			is_pop_type = laborers
+			is_pop_type = peasants
+			is_pop_type = slaves
+		}
+	}
+
+	pop_support_factors = {
+		movement_support_colonial_rule
+		movement_support_high_acceptance
+		movement_support_bureaucrats
+		movement_support_academics
+		movement_support_officers
+		movement_support_clerks
+	}
+
+	pop_support_weight = {
+		if = {
+			limit = {
+				exists = scope:political_movement
+				scope:political_movement ?= {
+					OR = {
+						is_being_suppressed = yes
+						is_being_bolstered = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					scope:political_movement = {
+						is_being_suppressed = yes
+					}
+				}
+				add = {
+					value = suppression_base_value
+					multiply = {
+						value = -0.5
+						add = owner.modifier:country_suppression_attraction_factor
+					}
+					desc = "concept_suppressed"
+				}
+			}
+			else = {
+				add = {
+					value = bolstering_base_value
+					multiply = {
+						value = 0.5
+						add = owner.modifier:country_bolster_attraction_factor
+					}
+					desc = "concept_bolstered"
+				}
+			}
+		}
+
+		add = {
+			value = 1
+			desc = "POP_BASE_SUPPORT"
+		}
+
+		if = {
+			limit = {
+				owner = {
+					is_country_type = colonial
+				}
+				culture = {
+					shares_heritage_trait_with_any_primary_culture = prev.owner			### Converter ###
+				}
+			}
+			add = {
+				desc = "colonial_rule"
+				value = 15
+				if = {
+					limit = {
+						is_pop_type = bureaucrats
+					}
+					multiply = 1.5
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				is_pop_type = bureaucrats
+			}
+			add = {
+				desc = "POP_BUREAUCRATS"
+				value = 9
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = academics
+			}
+			add = {
+				desc = "POP_ACADEMICS"
+				value = 6
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = capitalists
+			}
+			add = {
+				desc = "POP_CAPITALISTS"
+				value = 3
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = officers
+			}
+			add = {
+				desc = "POP_OFFICERS"
+				value = 3
+			}
+		}
+		else_if = {
+			limit = {
+				is_pop_type = clerks
+			}
+			add = {
+				desc = "POP_CLERKS"
+				value = 3
+			}
+		}
+
+		multiply = { # Illiterate pops participate at 1/10 the rate of fully literate pops
+			desc = "POP_LITERACY"
+			value = literacy_rate
+			add = 0.10
+		}
+
+		multiply = {
+			desc = "POP_ACCEPTANCE"
+			value = pop_acceptance
+			divide = 75
+		}
+	}
+
+	revolution = {
+		possible = {
+			political_movement_support >= 0.05
+		}
+
+		weight = {
+			value = 100
+		}
+
+		state_weight = {
+			value = 1
+			if = {
+				limit = {
+					OR = {
+					    any_scope_building = {
+							is_building_group = bg_bureaucracy
+							level >= 10
+					    }
+					}
+				}
+				multiply = 10
+			}
+			else_if = {
+				limit = {
+					OR = {
+					    any_scope_building = {
+							is_building_group = bg_bureaucracy
+							level >= 5
+					    }
+					}
+				}
+				multiply = 5
+			}
+			else = {
+				multiply = 0
+			}
+		}
+	}
+
+	secession = {
+		possible = {
+			political_movement_support >= 0.05
+			scope:clout <= 0
+		}
+
+		weight = {
+			value = 1000
+		}
+
+		state_weight = {
+			value = 1
+			if = {
+				limit = {
+					OR = {
+					    any_scope_building = {
+							is_building_group = bg_bureaucracy
+							level >= 10
+					    }
+					}
+				}
+				multiply = 10
+			}
+			else_if = {
+				limit = {
+					OR = {
+					    any_scope_building = {
+							is_building_group = bg_bureaucracy
+							level >= 5
+					    }
+					}
+				}
+				multiply = 5
+			}
+			else = {
+				multiply = 0
+			}
+		}
+	}
+
+	additional_radicalism_factors = {
+		owner = {
+			if = {
+				limit = { has_institution = institution_schools }
+
+				add = {
+					value = 3
+					subtract = "institution_investment_level(institution_schools)"
+					multiply = 0.05
+					desc = "INSTITUTION_FUNDING_LEVEL_schools"
+				}
+			}
+			else = {
+				add = {
+					value = 0.1
+					desc = "NO_INSTITUTION_schools"
+				}
+			}
+		}
+	}
+}
