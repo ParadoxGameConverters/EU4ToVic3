@@ -1,5 +1,6 @@
 ﻿# is_old_world_trading_company
-# is_tc_preferred_culture
+# is_tc_preferred_overlord_culture
+# is_tc_preferred_local_culture
 # is_potential_tc_subject
 
 is_old_world_trading_company = {
@@ -16,38 +17,34 @@ is_old_world_trading_company = {
 	}
 }
 
-is_tc_preferred_culture = {
-	trigger_if = {
-		limit = { country_has_primary_culture = $TARGET$ }
-		always = yes
+is_tc_preferred_overlord_culture = {
+	is_old_world_trading_company = yes
+	overlord = {
+		trigger_if = {
+			limit = { country_has_primary_culture = $TARGET$ }
+			always = yes
+		}
+		trigger_else = {
+			any_scope_state = {
+				state_region = { is_homeland = $TARGET$ }
+			}
+			culture_percent_country = {
+				target = $TARGET$
+				value >= 0.15
+			}
+			cultural_acceptance_base = {
+				target = $TARGET$
+				value >= acceptance_status_3
+			}
+		}
 	}
-	trigger_else = {
-		any_scope_state = {
-			state_region = { is_homeland = $TARGET$ }
-		}
-		culture_percent_country = {
-			target = $TARGET$
-			value >= 0.15
-		}
-		cultural_acceptance_base = {
-			target = $TARGET$
-			value >= acceptance_status_3
-		}
+}
+
+is_tc_preferred_local_culture = {
+	is_old_world_trading_company = yes
+	any_scope_state = {
+		state_region = { is_homeland = $TARGET$ }
 	}
-	#OR = {
-	#	country_has_primary_culture = $TARGET$
-	#	AND = {
-	#		any_scope_state = { is_homeland = $TARGET$ }
-	#		culture_percent_country = {
-	#			target = $TARGET$
-	#			value >= 0.15
-	#		}
-	#		cultural_acceptance_base = {
-	#			target = $TARGET$
-	#			value >= acceptance_status_3
-	#		}
-	#	}
-	#}
 }
 
 is_potential_tc_subject = {

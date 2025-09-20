@@ -5,7 +5,7 @@ PER_reza_pahlavi = {
 	first_name = Reza
 	last_name = Pahlavi
 	historical = yes
-	culture = global_var:reza_culture
+	culture = cu:mazanderani
 	interest_group = ig_armed_forces
 	ideology = ideology_authoritarian
 	ig_leader = yes
@@ -27,7 +27,7 @@ PER_reza_pahlavi = {
 					target = flag:converter_reza_pahlavi
 				}
 			}
-            uses_per_characters = yes
+            uses_maz_characters = yes
 		}
 		role = general
 		earliest_usage_date = 1915.1.1 # colonel
@@ -43,17 +43,18 @@ PER_reza_pahlavi = {
 					target = flag:converter_reza_pahlavi
 				}
 			}
-            uses_per_characters = yes
+            uses_maz_characters = yes
         }
         interest_group_trigger = {
             is_marginal = no
             is_interest_group_type = ig_armed_forces
-        }   
+        }
         earliest_usage_date = 1919.1.1 # Minister of War
         latest_usage_date = 1936.1.1
         chance = 75
     }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:mazanderani }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_reza_pahlavi
@@ -65,7 +66,7 @@ fem_PER_reza_pahlavi = {
 	last_name = Pahlavi
 	historical = yes
 	female = yes
-	culture = global_var:reza_culture
+	culture = cu:mazanderani
 	interest_group = ig_armed_forces
 	ideology = ideology_authoritarian
 	ig_leader = yes
@@ -87,7 +88,7 @@ fem_PER_reza_pahlavi = {
 					target = flag:converter_reza_pahlavi
 				}
 			}
-            uses_per_characters = yes
+            uses_maz_characters = yes
 		}
 		role = general
 		earliest_usage_date = 1915.1.1 # colonel
@@ -103,17 +104,18 @@ fem_PER_reza_pahlavi = {
 					target = flag:converter_reza_pahlavi
 				}
 			}
-            uses_per_characters = yes
+            uses_maz_characters = yes
         }
         interest_group_trigger = {
             is_marginal = no
             is_interest_group_type = ig_armed_forces
-        }   
+        }
         earliest_usage_date = 1919.1.1 # Minister of War
         latest_usage_date = 1936.1.1
         chance = 75
     }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:mazanderani }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_reza_pahlavi
@@ -127,7 +129,7 @@ PER_mirza_kuchik_khan = {
     first_name = Mirza_Kuchik
     last_name = Khan
     historical = yes
-    culture = global_var:per_culture
+    culture = cu:persian
     interest_group = ig_rural_folk # Petty Bourgeoisie is also a potentially valid descriptor of Mirza Kuchik's IG, but communism isn't a valid ideology for the PB
     ideology = ideology_communist
     ig_leader = yes
@@ -155,7 +157,7 @@ PER_mirza_kuchik_khan = {
         interest_group_trigger = {
             is_marginal = no
             is_interest_group_type = ig_rural_folk
-        }   
+        }
         earliest_usage_date = 1909.1.1
         latest_usage_date = 1936.1.1
         chance = 75
@@ -179,12 +181,13 @@ PER_mirza_kuchik_khan = {
                 is_interest_group_type = ig_rural_folk
                 is_interest_group_type = ig_armed_forces
             } 
-        }   
+        }
         earliest_usage_date = 1909.1.1
         latest_usage_date = 1936.1.1
         chance = 50
     }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:persian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_mirza_kuchik_khan
@@ -196,7 +199,7 @@ fem_PER_mirza_kuchik_khan = {
     last_name = Khan
     historical = yes
 	female = yes
-    culture = global_var:per_culture
+    culture = cu:persian
     interest_group = ig_rural_folk # Petty Bourgeoisie is also a potentially valid descriptor of Mirza Kuchik's IG, but communism isn't a valid ideology for the PB
     ideology = ideology_communist
     ig_leader = yes
@@ -224,7 +227,7 @@ fem_PER_mirza_kuchik_khan = {
         interest_group_trigger = {
             is_marginal = no
             is_interest_group_type = ig_rural_folk
-        }   
+        }
         earliest_usage_date = 1909.1.1
         latest_usage_date = 1936.1.1
         chance = 75
@@ -248,12 +251,13 @@ fem_PER_mirza_kuchik_khan = {
                 is_interest_group_type = ig_rural_folk
                 is_interest_group_type = ig_armed_forces
             } 
-        }   
+        }
         earliest_usage_date = 1909.1.1
         latest_usage_date = 1936.1.1
         chance = 50
     }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:persian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_mirza_kuchik_khan
@@ -266,7 +270,7 @@ PER_sattar_khan = {
     first_name = Sattar
     last_name = Khan
     historical = yes
-    culture = global_var:per_culture
+    culture = cu:persian
     interest_group = ig_petty_bourgeoisie
     ideology = ideology_radical
     ig_leader = yes
@@ -299,12 +303,13 @@ PER_sattar_khan = {
                 is_interest_group_type = ig_intelligentsia
                 is_interest_group_type = ig_rural_folk
             } 
-        }   
+        }
         earliest_usage_date = 1905.1.1
         latest_usage_date = 1936.1.1
         chance = 50
     }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:persian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_sattar_khan
@@ -316,7 +321,7 @@ fem_PER_sattar_khan = {
     last_name = Khan
     historical = yes
 	female = yes
-    culture = global_var:per_culture
+    culture = cu:persian
     interest_group = ig_petty_bourgeoisie
     ideology = ideology_radical
     ig_leader = yes
@@ -349,12 +354,13 @@ fem_PER_sattar_khan = {
                 is_interest_group_type = ig_intelligentsia
                 is_interest_group_type = ig_rural_folk
             } 
-        }   
+        }
         earliest_usage_date = 1905.1.1
         latest_usage_date = 1936.1.1
         chance = 50
     }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:persian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_sattar_khan

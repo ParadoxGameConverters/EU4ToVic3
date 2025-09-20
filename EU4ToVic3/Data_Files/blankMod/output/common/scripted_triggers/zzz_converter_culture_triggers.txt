@@ -1,0 +1,797 @@
+﻿# converter_has_target_list
+# converter_has_target_homeland
+# converter_is_french_homeland
+# converter_is_occitan_homeland
+# converter_is_wallonian_homeland
+# converter_is_dutch_homeland
+# converter_is_north_german_homeland
+# converter_is_south_german_homeland
+# converter_is_czech_homeland
+# converter_is_hungarian_homeland
+# converter_is_polish_homeland
+# converter_is_irish_homeland
+# converter_is_scottish_homeland
+# converter_is_british_homeland
+# converter_is_welsh_homeland
+# converter_is_norwegian_homeland
+# converter_is_danish_homeland
+# converter_is_swedish_homeland
+# converter_is_finnish_homeland
+# converter_is_russian_homeland
+# converter_is_ukrainian_homeland
+# converter_is_tatar_homeland
+# converter_is_north_italian_homeland
+# converter_is_south_italian_homeland
+# converter_is_catalan_homeland
+# converter_is_spanish_homeland
+# converter_is_portuguese_homeland
+# converter_is_greek_homeland
+# converter_is_romanian_homeland
+# converter_is_serbian_homeland
+# converter_is_croatian_homeland
+# converter_is_berber_homeland
+# converter_is_turkish_homeland
+# converter_is_armenian_homeland
+# converter_is_egyptian_homeland
+# converter_is_persian_homeland
+# converter_is_mazanderani_homeland
+# converter_is_afghan_homeland
+# converter_is_han_homeland
+# converter_is_mongol_homeland
+# converter_is_manchu_homeland
+# converter_is_japanese_homeland
+# converter_is_thai_homeland
+# converter_is_panjabi_homeland
+# converter_is_bengali_homeland
+# converter_is_bihari_homeland
+# converter_is_marathi_homeland
+# converter_is_gujarati_homeland
+# converter_is_kashmiri_homeland
+# converter_is_rajput_homeland
+# converter_is_tamil_homeland
+# converter_is_telegu_homeland
+
+converter_has_target_list = {
+	switch = {
+		trigger = scope:target_culture
+		cu:french = { is_target_in_global_variable_list = { name = global_french_cultures target = this } }
+		cu:occitan = { is_target_in_global_variable_list = { name = global_occitan_cultures target = this } }
+		cu:wallonian = { is_target_in_global_variable_list = { name = global_wallonian_cultures target = this } }
+		cu:dutch = { is_target_in_global_variable_list = { name = global_dutch_cultures target = this } }
+		cu:north_german = { is_target_in_global_variable_list = { name = global_nor_ger_cultures target = this } }
+		cu:south_german = { is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this } }
+		cu:czech = { is_target_in_global_variable_list = { name = global_czech_cultures target = this } }
+		cu:hungarian = { is_target_in_global_variable_list = { name = global_hungarian_cultures target = this } }
+		cu:polish = { is_target_in_global_variable_list = { name = global_polish_cultures target = this } }
+		cu:irish = { is_target_in_global_variable_list = { name = global_irish_cultures target = this } }
+		cu:scottish = { is_target_in_global_variable_list = { name = global_scottish_cultures target = this } }
+		cu:british = { is_target_in_global_variable_list = { name = global_british_cultures target = this } }
+		cu:welsh = { is_target_in_global_variable_list = { name = global_welsh_cultures target = this } }
+		cu:norwegian = { is_target_in_global_variable_list = { name = global_norwegian_cultures target = this } }
+		cu:danish = { is_target_in_global_variable_list = { name = global_danish_cultures target = this } }
+		cu:swedish = { is_target_in_global_variable_list = { name = global_swedish_cultures target = this } }
+		cu:finnish = { is_target_in_global_variable_list = { name = global_finnish_cultures target = this } }
+		cu:russian = { is_target_in_global_variable_list = { name = global_russian_cultures target = this } }
+		cu:ukrainian = { is_target_in_global_variable_list = { name = global_ukrainian_cultures target = this } }
+		cu:tatar = { is_target_in_global_variable_list = { name = global_tatar_cultures target = this } }
+		cu:north_italian = { is_target_in_global_variable_list = { name = global_nor_ita_cultures target = this } }
+		cu:south_italian = { is_target_in_global_variable_list = { name = global_sou_ita_cultures target = this } }
+		cu:catalan = { is_target_in_global_variable_list = { name = global_catalan_cultures target = this } }
+		cu:spanish = { is_target_in_global_variable_list = { name = global_spanish_cultures target = this } }
+		cu:portuguese = { is_target_in_global_variable_list = { name = global_portuguese_cultures target = this } }
+		cu:greek = { is_target_in_global_variable_list = { name = global_greek_cultures target = this } }
+		cu:romanian = { is_target_in_global_variable_list = { name = global_romanian_cultures target = this } }
+		cu:serb = { is_target_in_global_variable_list = { name = global_serbian_cultures target = this } }
+		cu:croat = { is_target_in_global_variable_list = { name = global_croatian_cultures target = this } }
+		cu:berber = { is_target_in_global_variable_list = { name = global_berber_cultures target = this } }
+		cu:turkish = { is_target_in_global_variable_list = { name = global_turkish_cultures target = this } }
+		cu:armenian = { is_target_in_global_variable_list = { name = global_armenian_cultures target = this } }
+		cu:misri = { is_target_in_global_variable_list = { name = global_egyptian_cultures target = this } }
+		cu:persian = { is_target_in_global_variable_list = { name = global_persian_cultures target = this } }
+		cu:mazanderani = { is_target_in_global_variable_list = { name = global_mazanderani_cultures target = this } }
+		cu:pashtun = { is_target_in_global_variable_list = { name = global_afghan_cultures target = this } }
+		cu:han = { is_target_in_global_variable_list = { name = global_han_cultures target = this } }
+		cu:mongol = { is_target_in_global_variable_list = { name = global_mongol_cultures target = this } }
+		cu:manchu = { is_target_in_global_variable_list = { name = global_manchu_cultures target = this } }
+		cu:japanese = { is_target_in_global_variable_list = { name = global_japanese_cultures target = this } }
+		cu:thai = { is_target_in_global_variable_list = { name = global_thai_cultures target = this } }
+		cu:panjabi = { is_target_in_global_variable_list = { name = global_panjabi_cultures target = this } }
+		cu:bengali = { is_target_in_global_variable_list = { name = global_bengali_cultures target = this } }
+		cu:bihari = { is_target_in_global_variable_list = { name = global_bihari_cultures target = this } }
+		cu:marathi = { is_target_in_global_variable_list = { name = global_marathi_cultures target = this } }
+		cu:gujarati = { is_target_in_global_variable_list = { name = global_gujarati_cultures target = this } }
+		cu:kashmiri = { is_target_in_global_variable_list = { name = global_kashmiri_cultures target = this } }
+		cu:rajput = { is_target_in_global_variable_list = { name = global_rajput_cultures target = this } }
+		cu:tamil = { is_target_in_global_variable_list = { name = global_tamil_cultures target = this } }
+		cu:telegu = { is_target_in_global_variable_list = { name = global_telegu_cultures target = this } }
+	}
+}
+
+converter_has_target_homeland = {
+	switch = {
+		trigger = scope:target_culture
+		cu:french = { converter_is_french_homeland = yes }
+		cu:occitan = { converter_is_occitan_homeland = yes }
+		cu:wallonian = { converter_is_wallonian_homeland = yes }
+		cu:dutch = { converter_is_dutch_homeland = yes }
+		cu:north_german = { converter_is_north_german_homeland = yes }
+		cu:south_german = { converter_is_south_german_homeland = yes }
+		cu:czech = { converter_is_czech_homeland = yes }
+		cu:hungarian = { converter_is_hungarian_homeland = yes }
+		cu:polish = { converter_is_polish_homeland = yes }
+		cu:irish = { converter_is_irish_homeland = yes }
+		cu:scottish = { converter_is_scottish_homeland = yes }
+		cu:british = { converter_is_british_homeland = yes }
+		cu:welsh = { converter_is_welsh_homeland = yes }
+		cu:norwegian = { converter_is_norwegian_homeland = yes }
+		cu:danish = { converter_is_danish_homeland = yes }
+		cu:swedish = { converter_is_swedish_homeland = yes }
+		cu:finnish = { converter_is_finnish_homeland = yes }
+		cu:russian = { converter_is_russian_homeland = yes }
+		cu:ukrainian = { converter_is_ukrainian_homeland = yes }
+		cu:tatar = { converter_is_tatar_homeland = yes }
+		cu:north_italian = { converter_is_north_italian_homeland = yes }
+		cu:south_italian = { converter_is_south_italian_homeland = yes }
+		cu:catalan = { converter_is_catalan_homeland = yes }
+		cu:spanish = { converter_is_spanish_homeland = yes }
+		cu:portuguese = { converter_is_portuguese_homeland = yes }
+		cu:greek = { converter_is_greek_homeland = yes }
+		cu:romanian = { converter_is_romanian_homeland = yes }
+		cu:serb = { converter_is_serbian_homeland = yes }
+		cu:croat = { converter_is_croatian_homeland = yes }
+		cu:berber = { converter_is_berber_homeland = yes }
+		cu:turkish = { converter_is_turkish_homeland = yes }
+		cu:armenian = { converter_is_armenian_homeland = yes }
+		cu:misri = { converter_is_egyptian_homeland = yes }
+		cu:persian = { converter_is_persian_homeland = yes }
+		cu:mazanderani = { converter_is_mazanderani_homeland = yes }
+		cu:pashtun = { converter_is_afghan_homeland = yes }
+		cu:han = { converter_is_han_homeland = yes }
+		cu:mongol = { converter_is_mongol_homeland = yes }
+		cu:manchu = { converter_is_manchu_homeland = yes }
+		cu:japanese = { converter_is_japanese_homeland = yes }
+		cu:thai = { converter_is_thai_homeland = yes }
+		cu:panjabi = { converter_is_panjabi_homeland = yes }
+		cu:bengali = { converter_is_bengali_homeland = yes }
+		cu:bihari = { converter_is_bihari_homeland = yes }
+		cu:marathi = { converter_is_marathi_homeland = yes }
+		cu:gujarati = { converter_is_gujarati_homeland = yes }
+		cu:kashmiri = { converter_is_kashmiri_homeland = yes }
+		cu:rajput = { converter_is_rajput_homeland = yes }
+		cu:tamil = { converter_is_tamil_homeland = yes }
+		cu:telegu = { converter_is_telegu_homeland = yes }
+	}
+}
+
+converter_is_french_homeland = {
+	OR = {
+		#state_region = s:STATE_PROVENCE
+		state_region = s:STATE_NORMANDY
+		state_region = s:STATE_SAVOY
+		#state_region = s:STATE_LANGUEDOC
+		#state_region = s:STATE_RHONE
+		state_region = s:STATE_FRENCH_LOW_COUNTRIES
+		state_region = s:STATE_PICARDY
+		#state_region = s:STATE_ALSACE_LORRAINE
+		state_region = s:STATE_POITOU
+		#state_region = s:STATE_GUYENNE
+		#state_region = s:STATE_AUVERGNE_LIMOUSIN
+		state_region = s:STATE_BRITTANY
+		state_region = s:STATE_BURGUNDY
+		state_region = s:STATE_CHAMPAGNE
+		state_region = s:STATE_FRANCHE_COMTE
+		state_region = s:STATE_LORRAINE
+		#state_region = s:STATE_AQUITAINE
+		state_region = s:STATE_MAINE_ANJOU
+		state_region = s:STATE_ORLEANS
+		state_region = s:STATE_ILE_DE_FRANCE
+	}
+}
+
+converter_is_occitan_homeland = {
+	OR = {
+		state_region = s:STATE_PROVENCE
+		state_region = s:STATE_LANGUEDOC
+		state_region = s:STATE_RHONE
+		state_region = s:STATE_GUYENNE
+		state_region = s:STATE_AUVERGNE_LIMOUSIN
+		state_region = s:STATE_AQUITAINE
+	}
+}
+
+converter_is_wallonian_homeland = {
+	state_region = s:STATE_WALLONIA
+}
+
+converter_is_dutch_homeland = {
+	OR = {
+		state_region = s:STATE_HOLLAND
+		state_region = s:STATE_FRIESLAND
+		state_region = s:STATE_GELRE
+	}
+}
+
+converter_is_north_german_homeland = {
+	OR = {
+		state_region = s:STATE_POMERANIA
+		state_region = s:STATE_ELBE
+		#state_region = s:STATE_POSEN
+		state_region = s:STATE_WESTPHALIA
+		state_region = s:STATE_ANHALT
+		#state_region = s:STATE_WEST_PRUSSIA
+		#state_region = s:STATE_EAST_PRUSSIA
+		state_region = s:STATE_RHINELAND
+		state_region = s:STATE_NORTH_RHINE
+		state_region = s:STATE_RUHR
+		#state_region = s:STATE_SILESIA
+		state_region = s:STATE_BRANDENBURG
+		#state_region = s:STATE_SCHLESWIG_HOLSTEIN
+		state_region = s:STATE_HANNOVER
+		state_region = s:STATE_SAXONY
+		state_region = s:STATE_BRUNSWICK
+		state_region = s:STATE_HESSE
+		state_region = s:STATE_MECKLENBURG
+	}
+}
+
+converter_is_south_german_homeland = {
+	OR = {
+		state_region = s:STATE_ALSACE_LORRAINE
+		#state_region = s:STATE_TRANSDANUBIA
+		#state_region = s:STATE_BOHEMIA
+		#state_region = s:STATE_MORAVIA
+		state_region = s:STATE_STYRIA
+		state_region = s:STATE_TYROL
+		state_region = s:STATE_AUSTRIA
+		#state_region = s:STATE_SOUTH_TYROL
+		#state_region = s:STATE_SLOVENIA
+		state_region = s:STATE_WURTTEMBERG
+		state_region = s:STATE_BADEN
+		state_region = s:STATE_BAVARIA
+		state_region = s:STATE_FRANCONIA
+	}
+}
+
+converter_is_czech_homeland = {
+	OR = {
+		state_region = s:STATE_BOHEMIA
+		state_region = s:STATE_MORAVIA
+	}
+}
+
+converter_is_hungarian_homeland = {
+	OR = {
+		#state_region = s:STATE_SOUTHERN_TRANSYLVANIA
+		#state_region = s:STATE_NORTHERN_TRANSYLVANIA
+		state_region = s:STATE_WEST_SLOVAKIA
+		state_region = s:STATE_EAST_SLOVAKIA
+		state_region = s:STATE_BEKES
+		state_region = s:STATE_TRANSDANUBIA
+		state_region = s:STATE_CENTRAL_HUNGARY
+		state_region = s:STATE_DELVIDEK
+		state_region = s:STATE_BANAT
+	}
+}
+
+converter_is_polish_homeland = {
+	OR = {
+		state_region = s:STATE_VILNIUS
+		state_region = s:STATE_WEST_GALICIA
+		state_region = s:STATE_EAST_GALICIA
+		state_region = s:STATE_POSEN
+		state_region = s:STATE_WEST_PRUSSIA
+		state_region = s:STATE_EAST_PRUSSIA
+		state_region = s:STATE_SILESIA
+		state_region = s:STATE_GREATER_POLAND
+		state_region = s:STATE_LESSER_POLAND
+		state_region = s:STATE_MAZOVIA
+	}
+}
+
+converter_is_irish_homeland = {
+	OR = {
+		state_region = s:STATE_ULSTER
+		state_region = s:STATE_MUNSTER
+		state_region = s:STATE_LEINSTER
+		state_region = s:STATE_CONNAUGHT
+	}
+}
+
+converter_is_scottish_homeland = {
+	OR = {
+		state_region = s:STATE_HIGHLANDS
+		state_region = s:STATE_LOWLANDS
+		#state_region = s:STATE_ULSTER
+	}
+}
+
+converter_is_british_homeland = {
+	OR = {
+		state_region = s:STATE_HOME_COUNTIES
+		state_region = s:STATE_LANCASHIRE
+		#state_region = s:STATE_WALES
+		state_region = s:STATE_YORKSHIRE
+		state_region = s:STATE_MIDLANDS
+		state_region = s:STATE_EAST_ANGLIA
+		state_region = s:STATE_WEST_COUNTRY
+		#state_region = s:STATE_ULSTER
+	}
+}
+
+converter_is_welsh_homeland = {
+	state_region = s:STATE_WALES
+}
+
+converter_is_norwegian_homeland = {
+	OR = {
+		state_region = s:STATE_WESTERN_NORWAY
+		state_region = s:STATE_NORTHERN_NORWAY
+		state_region = s:STATE_EASTERN_NORWAY
+	}
+}
+
+converter_is_danish_homeland = {
+	OR = {
+		state_region = s:STATE_JUTLAND
+		state_region = s:STATE_ZEALAND
+		state_region = s:STATE_SCHLESWIG_HOLSTEIN
+	}
+}
+
+converter_is_swedish_homeland = {
+	OR = {
+		state_region = s:STATE_GOTLAND
+		state_region = s:STATE_GOTALAND
+		state_region = s:STATE_SCANIA
+		state_region = s:STATE_NORRLAND
+		state_region = s:STATE_SVEALAND
+		#state_region = s:STATE_UUSIMAA
+		state_region = s:STATE_ALAND
+		#state_region = s:STATE_OSTROBOTHNIA
+		#state_region = s:STATE_OULU
+	}
+}
+
+converter_is_finnish_homeland = {
+	OR = {
+		state_region = s:STATE_UUSIMAA
+		state_region = s:STATE_EAST_KARELIA
+		state_region = s:STATE_OSTROBOTHNIA
+		state_region = s:STATE_KUOPIO
+		state_region = s:STATE_OULU
+		state_region = s:STATE_WEST_KARELIA
+		state_region = s:STATE_KOLA
+	}
+}
+
+converter_is_russian_homeland = {
+	OR = {
+		state_region = s:STATE_MINSK
+		#state_region = s:STATE_ROSTOV
+		state_region = s:STATE_INGRIA
+		state_region = s:STATE_NENETSIA
+		#state_region = s:STATE_EAST_KARELIA
+		#state_region = s:STATE_KOLA
+		state_region = s:STATE_ARKHANGELSK
+		state_region = s:STATE_TARTARIA
+		state_region = s:STATE_URAL
+		state_region = s:STATE_SAMARA
+		state_region = s:STATE_KAZAN
+		state_region = s:STATE_PERM
+		state_region = s:STATE_GALICH
+		state_region = s:STATE_NOVGOROD
+		state_region = s:STATE_MOSCOW
+		state_region = s:STATE_STAVROPOL
+		state_region = s:STATE_ASTRAKHAN
+		#state_region = s:STATE_CRIMEA
+		#state_region = s:STATE_KHARKOV
+		#state_region = s:STATE_KURSK
+		state_region = s:STATE_TVER
+		state_region = s:STATE_ORYOL
+		state_region = s:STATE_SMOLENSK
+		state_region = s:STATE_MOGILEV
+		state_region = s:STATE_BREST
+		#state_region = s:STATE_TAURIDA
+		#state_region = s:STATE_CHERNIHIV
+		state_region = s:STATE_TAMBOV
+		state_region = s:STATE_RYAZAN
+		state_region = s:STATE_VITEBSK
+		state_region = s:STATE_PSKOV
+		state_region = s:STATE_YAROSLAVL
+		state_region = s:STATE_NIZHNY_NOVGOROD
+		state_region = s:STATE_CHUVASHIA
+		state_region = s:STATE_VYATKA
+		state_region = s:STATE_UFA
+		state_region = s:STATE_CHELYABINSK
+	}
+}
+
+converter_is_ukrainian_homeland = {
+	OR = {
+		state_region = s:STATE_ROSTOV
+		#state_region = s:STATE_CRIMEA
+		state_region = s:STATE_KHARKOV
+		state_region = s:STATE_KURSK
+		state_region = s:STATE_CHERSON
+		#state_region = s:STATE_BESSARABIA
+		#state_region = s:STATE_EAST_GALICIA
+		state_region = s:STATE_VOLHYNIA
+		state_region = s:STATE_KIEV
+		state_region = s:STATE_TAURIDA
+		state_region = s:STATE_CHERNIHIV
+	}
+}
+
+converter_is_tatar_homeland = {
+	OR = {
+		state_region = s:STATE_TARTARIA
+		state_region = s:STATE_SAMARA
+		state_region = s:STATE_KAZAN
+		state_region = s:STATE_CRIMEA
+	}
+}
+
+converter_is_north_italian_homeland = {
+	OR = {
+		state_region = s:STATE_VENETIA
+		state_region = s:STATE_SAVOY
+		state_region = s:STATE_EMILIA
+		state_region = s:STATE_TUSCANY
+		state_region = s:STATE_ROMAGNA
+		#state_region = s:STATE_ISTRIA
+		state_region = s:STATE_LOMBARDY
+		state_region = s:STATE_SOUTH_TYROL
+		state_region = s:STATE_PIEDMONT
+	}
+}
+
+converter_is_south_italian_homeland = {
+	OR = {
+		state_region = s:STATE_SICILY
+		state_region = s:STATE_LAZIO
+		state_region = s:STATE_CAMPANIA
+		state_region = s:STATE_ABRUZZO
+		state_region = s:STATE_CALABRIA
+		state_region = s:STATE_APULIA
+		state_region = s:STATE_SARDINIA
+		state_region = s:STATE_UMBRIA
+	}
+}
+
+converter_is_catalan_homeland = {
+	OR = {
+		state_region = s:STATE_CATALONIA
+		state_region = s:STATE_BALEARES
+		state_region = s:STATE_VALENCIA
+	}
+}
+
+converter_is_spanish_homeland = {
+	OR = {
+		state_region = s:STATE_ANDALUSIA
+		state_region = s:STATE_GALICIA
+		state_region = s:STATE_ASTURIAS
+		state_region = s:STATE_CASTILE
+		state_region = s:STATE_ARAGON
+		state_region = s:STATE_NAVARRA
+		#state_region = s:STATE_CATALONIA
+		#state_region = s:STATE_BALEARES
+		state_region = s:STATE_CANARY_ISLANDS
+		state_region = s:STATE_GRANADA
+		state_region = s:STATE_BADAJOZ
+		#state_region = s:STATE_VALENCIA
+		state_region = s:STATE_TOLEDO
+	}
+}
+
+converter_is_portuguese_homeland = {
+	OR = {
+		state_region = s:STATE_BEIRA
+		state_region = s:STATE_ESTREMADURA
+		state_region = s:STATE_ALENTEJO
+		state_region = s:STATE_MADEIRA
+		state_region = s:STATE_CAPE_VERDE
+		state_region = s:STATE_AZORES
+	}
+}
+
+converter_is_greek_homeland = {
+	OR = {
+		#state_region = s:STATE_EASTERN_THRACE
+		state_region = s:STATE_IONIAN_ISLANDS
+		state_region = s:STATE_PELOPONNESE
+		state_region = s:STATE_ATTICA
+		state_region = s:STATE_SKOPIA
+		state_region = s:STATE_MACEDONIA
+		state_region = s:STATE_THESSALIA
+		#state_region = s:STATE_HUDAVENDIGAR
+		#state_region = s:STATE_AYDIN
+		state_region = s:STATE_WESTERN_THRACE
+		#state_region = s:STATE_TRABZON
+		state_region = s:STATE_CYPRUS
+		state_region = s:STATE_CRETE
+		state_region = s:STATE_WEST_AEGEAN_ISLANDS
+		state_region = s:STATE_EAST_AEGEAN_ISLANDS
+	}
+}
+
+converter_is_romanian_homeland = {
+	OR = {
+		state_region = s:STATE_DOBRUDJA
+		state_region = s:STATE_SOUTHERN_TRANSYLVANIA
+		state_region = s:STATE_NORTHERN_TRANSYLVANIA
+		state_region = s:STATE_MOLDAVIA
+		state_region = s:STATE_WALLACHIA
+		state_region = s:STATE_BESSARABIA
+		#state_region = s:STATE_BEKES
+		#state_region = s:STATE_BANAT
+	}
+}
+
+converter_is_serbian_homeland = {
+	OR = {
+		state_region = s:STATE_BOSNIA
+		state_region = s:STATE_MONTENEGRO
+		state_region = s:STATE_NORTHERN_SERBIA
+		state_region = s:STATE_SOUTHERN_SERBIA
+		#state_region = s:STATE_DALMATIA
+		#state_region = s:STATE_CROATIA
+		#state_region = s:STATE_SLAVONIA
+		state_region = s:STATE_DELVIDEK
+		#state_region = s:STATE_BANAT
+	}
+}
+
+converter_is_croatian_homeland = {
+	OR = {
+		#state_region = s:STATE_BOSNIA
+		state_region = s:STATE_DALMATIA
+		state_region = s:STATE_CROATIA
+		state_region = s:STATE_SLAVONIA
+		state_region = s:STATE_ISTRIA
+	}
+}
+
+converter_is_berber_homeland = {
+	OR = {
+		state_region = s:STATE_TUNISIA
+		state_region = s:STATE_WEST_SAHARA
+		state_region = s:STATE_MARRAKECH
+		state_region = s:STATE_FEZ
+		state_region = s:STATE_AL_RIF
+		state_region = s:STATE_INNER_MOROCCO
+		state_region = s:STATE_ORAN
+		state_region = s:STATE_SAHARA
+		state_region = s:STATE_EAST_SAHARA
+		state_region = s:STATE_ALGIERS
+		state_region = s:STATE_CONSTANTINE
+		state_region = s:STATE_TRIPOLI
+		state_region = s:STATE_LIBYAN_DESERT
+		state_region = s:STATE_MATRUH
+	}
+}
+
+converter_is_turkish_homeland = {
+	OR = {
+		#state_region = s:STATE_DOBRUDJA
+		state_region = s:STATE_EASTERN_THRACE
+		#state_region = s:STATE_SKOPIA
+		#state_region = s:STATE_MACEDONIA
+		#state_region = s:STATE_WESTERN_THRACE
+		#state_region = s:STATE_NORTHERN_THRACE
+		#state_region = s:STATE_BULGARIA
+		#state_region = s:STATE_ALEPPO
+		#state_region = s:STATE_MOSUL
+		#state_region = s:STATE_SOUTHERN_SERBIA
+		state_region = s:STATE_HUDAVENDIGAR
+		state_region = s:STATE_AYDIN
+		state_region = s:STATE_KONYA
+		state_region = s:STATE_KASTAMONU
+		#state_region = s:STATE_CYPRUS
+		#state_region = s:STATE_TRABZON
+		state_region = s:STATE_ERZURUM
+		#state_region = s:STATE_KARS
+		#state_region = s:STATE_CRETE
+		#state_region = s:STATE_EAST_AEGEAN_ISLANDS
+		state_region = s:STATE_ANKARA
+		state_region = s:STATE_DIYARBAKIR
+		state_region = s:STATE_ADANA
+	}
+}
+
+converter_is_armenian_homeland = {
+	OR = {
+		state_region = s:STATE_TABRIZ
+		state_region = s:STATE_URMIA
+		state_region = s:STATE_ARMENIA
+		state_region = s:STATE_AZERBAIJAN
+		state_region = s:STATE_ELIZAVETPOL
+		state_region = s:STATE_TRABZON
+		#state_region = s:STATE_ERZURUM
+		state_region = s:STATE_KARS
+		#state_region = s:STATE_DIYARBAKIR
+		#state_region = s:STATE_ADANA
+	}
+}
+
+converter_is_egyptian_homeland = {
+	OR = {
+		state_region = s:STATE_LOWER_EGYPT
+		state_region = s:STATE_UPPER_EGYPT
+		state_region = s:STATE_EGYPTIAN_DESERT
+		state_region = s:STATE_MIDDLE_EGYPT
+		state_region = s:STATE_MATRUH
+		state_region = s:STATE_SINAI
+	}
+}
+
+converter_is_persian_homeland = {
+	OR = {
+		state_region = s:STATE_LARISTAN
+		state_region = s:STATE_KERMAN
+		state_region = s:STATE_SISTAN
+		state_region = s:STATE_KHORASAN
+		state_region = s:STATE_KHUZESTAN
+		state_region = s:STATE_FARS
+		state_region = s:STATE_ISFAHAN
+		#state_region = s:STATE_MAZANDARAN
+		state_region = s:STATE_IRAKAJEMI
+		state_region = s:STATE_SEMNAN
+		#state_region = s:STATE_TABRIZ
+		#state_region = s:STATE_URMIA
+		state_region = s:STATE_PERSIAN_KURDISTAN
+		state_region = s:STATE_LURISTAN
+	}
+}
+
+converter_is_mazanderani_homeland = {
+	state_region = s:STATE_MAZANDARAN
+}
+
+converter_is_afghan_homeland = {
+	OR = {
+		state_region = s:STATE_BALUCHISTAN
+		state_region = s:STATE_KANDAHAR
+		state_region = s:STATE_KABUL
+		state_region = s:STATE_HERAT
+		state_region = s:STATE_NORTHERN_BALUCHISTAN
+		state_region = s:STATE_BALKH
+		state_region = s:STATE_QUETTA
+		state_region = s:STATE_CENTRAL_HIGHLANDS
+		state_region = s:STATE_PASHTUNISTAN
+	}
+}
+
+converter_is_han_homeland = {
+	OR = {
+		state_region = s:STATE_SHANDONG
+		state_region = s:STATE_SUZHOU
+		state_region = s:STATE_SICHUAN
+		state_region = s:STATE_YUNNAN
+		state_region = s:STATE_GUIZHOU
+		state_region = s:STATE_SHAOZHOU
+		state_region = s:STATE_GUANGXI
+		state_region = s:STATE_BEIJING
+		#state_region = s:STATE_SHENGJING
+		state_region = s:STATE_SHANXI
+		state_region = s:STATE_NINGXIA
+		#state_region = s:STATE_GANSU
+		#state_region = s:STATE_XIAN
+		state_region = s:STATE_CHONGQING
+		state_region = s:STATE_GUANGDONG
+		state_region = s:STATE_FUJIAN
+		state_region = s:STATE_ZHEJIANG
+		state_region = s:STATE_NANJING
+		state_region = s:STATE_JIANGSU
+		state_region = s:STATE_HENAN
+		state_region = s:STATE_ZHILI
+		state_region = s:STATE_JIANGXI
+		state_region = s:STATE_SOUTHERN_ANHUI
+		state_region = s:STATE_NORTHERN_ANHUI
+		state_region = s:STATE_WESTERN_HUBEI
+		state_region = s:STATE_EASTERN_HUBEI
+		state_region = s:STATE_HUNAN
+		state_region = s:STATE_FORMOSA
+	}
+}
+
+converter_is_mongol_homeland = {
+	OR = {
+		state_region = s:STATE_URGA
+		state_region = s:STATE_ULIASTAI
+		state_region = s:STATE_DZUNGARIA
+		state_region = s:STATE_ALXA
+		state_region = s:STATE_HINGGAN
+		state_region = s:STATE_GANSU
+		state_region = s:STATE_XIAN
+		state_region = s:STATE_QINGHAI
+		state_region = s:STATE_ALTAI
+	}
+}
+
+converter_is_manchu_homeland = {
+	OR = {
+		state_region = s:STATE_SHENGJING
+		state_region = s:STATE_OUTER_MANCHURIA
+		state_region = s:STATE_SOUTHERN_MANCHURIA
+		state_region = s:STATE_NORTHERN_MANCHURIA
+	}
+}
+
+converter_is_japanese_homeland = {
+	OR = {
+		state_region = s:STATE_HOKKAIDO
+		state_region = s:STATE_TOHOKU
+		state_region = s:STATE_KANTO
+		state_region = s:STATE_CHUBU
+		state_region = s:STATE_KANSAI
+		state_region = s:STATE_KYUSHU
+		state_region = s:STATE_RYUKYU_ISLANDS
+		state_region = s:STATE_CHUGOKU
+		state_region = s:STATE_SHIKOKU
+	}
+}
+
+converter_is_thai_homeland = {
+	OR = {
+		state_region = s:STATE_TENASSERIM
+		state_region = s:STATE_BANGKOK
+		state_region = s:STATE_CHIANG_MAI
+		state_region = s:STATE_NAKHON_RATCHASIMA
+	}
+}
+
+converter_is_panjabi_homeland = {
+	OR = {
+		state_region = s:STATE_PUNJAB
+		state_region = s:STATE_HILL_PUNJAB
+	}
+}
+
+converter_is_bengali_homeland = {
+	OR = {
+		state_region = s:STATE_EAST_BENGAL
+		state_region = s:STATE_WEST_BENGAL
+		state_region = s:STATE_ASSAM
+	}
+}
+
+converter_is_bihari_homeland = {
+	state_region = s:STATE_BIHAR
+}
+
+converter_is_marathi_homeland = {
+	OR = {
+		state_region = s:STATE_CENTRAL_PROVINCES
+		#state_region = s:STATE_HYDERABAD
+		state_region = s:STATE_MALWA
+		state_region = s:STATE_BOMBAY
+	}
+}
+
+converter_is_gujarati_homeland = {
+	state_region = s:STATE_GUJARAT
+}
+
+converter_is_kashmiri_homeland = {
+	state_region = s:STATE_KASHMIR
+}
+
+converter_is_rajput_homeland = {
+	state_region = s:STATE_RAJPUTANA
+}
+
+converter_is_tamil_homeland = {
+	OR = {
+		state_region = s:STATE_CEYLON
+		state_region = s:STATE_MADRAS
+	}
+}
+
+converter_is_telegu_homeland = {
+	OR = {
+		state_region = s:STATE_CIRCARS
+		state_region = s:STATE_HYDERABAD
+		state_region = s:STATE_KURNOOL
+	}
+}

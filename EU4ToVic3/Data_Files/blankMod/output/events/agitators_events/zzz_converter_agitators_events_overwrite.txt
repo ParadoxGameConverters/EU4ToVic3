@@ -23,7 +23,7 @@ dreyfus.1 = {
 
 	trigger = {
 		has_dlc_feature = voice_of_the_people_content
-		uses_fra_characters = yes		##Converter
+		uses_fra_characters = yes								###Converter
 		has_technology_researched = political_agitation
 		OR = {
 			OR = {
@@ -36,9 +36,7 @@ dreyfus.1 = {
 				}
 			}
 			any_state = {
-				state_region = { 
-					is_homeland = global_var:fra_culture		##Converter
-				}
+				converter_is_french_homeland = yes				###Converter
 				NOT = {
 					OR = {
 						state_region = s:STATE_SAVOY
@@ -62,13 +60,11 @@ dreyfus.1 = {
 		NOT = {
 			has_law = law_type:law_multicultural
 		}
-		NOT = { 
+		NOT = {
 			has_variable = dreyfus_convicted
 		}
 		any_scope_state = {
-        	state_region = { 
-        		is_homeland = global_var:fra_culture		##Converter
-        	}
+        	converter_is_french_homeland = yes					###Converter
         	any_scope_pop = {
         		religion = rel:jewish
         	}
@@ -82,39 +78,12 @@ dreyfus.1 = {
 	}
 
 	immediate = {
-		##Converter
-		if = {
-			limit = {
-				any_scope_pop = { culture = cu:ashkenazi }
-			}
-			cu:ashkenazi = { save_scope_as = dreyfus_culture }
-		}
-		else_if = {
-			limit = {
-				any_scope_pop = { culture = { has_discrimination_trait = jewish_group } }
-			}
-			random_scope_pop = {
-				limit = { culture = { has_discrimination_trait = jewish_group } }
-				culture = { save_scope_as = dreyfus_culture }
-			}
-		}
-		else_if = {
-			limit = {
-				any_scope_pop = { religion = { has_discrimination_trait = jewish } }
-			}
-			random_scope_pop = {
-				limit = { religion = { has_discrimination_trait = jewish } }
-				culture = { save_scope_as = dreyfus_culture }
-			}
-		}
-		else = {
-			cu:ashkenazi = { save_scope_as = dreyfus_culture }
-		}
+		###Converter
 		converter_rule_63_effect = yes
 		if = {
 			limit = { has_variable = rule_63_effect }
 			create_character = {
-				template = fem_dreyfus_character_template			
+				template = fem_canonic_dreyfus_character_template
 				save_scope_as = alfred_dreyfus_scope
 				on_created = {
 					place_character_in_void = 10000
@@ -124,7 +93,7 @@ dreyfus.1 = {
 		}
 		else = {
 			create_character = {
-				template = canonic_dreyfus_character_template			
+				template = canonic_dreyfus_character_template
 				save_scope_as = alfred_dreyfus_scope
 				on_created = {
 					place_character_in_void = 10000
@@ -132,7 +101,7 @@ dreyfus.1 = {
 				}
 			}
 		}
-		##Converter
+		###Converter
 		random_country = {
 			limit = {
 				has_diplomatic_pact = {
@@ -175,8 +144,8 @@ dreyfus.1 = {
 			name = anti_semitic_demonstrations
 			days = short_modifier_time
 		}
-		hidden_effect = { 
-			trigger_event = { id = dreyfus.2 years = 2 popup = yes } 
+		hidden_effect = {
+			trigger_event = { id = dreyfus.2 years = 2 popup = yes }
 		}
 		random_list = {
 			50 = {
@@ -208,8 +177,8 @@ dreyfus.1 = {
 			name = anti_semitic_demonstrations
 			days = short_modifier_time
 		}
-		hidden_effect = { 
-			trigger_event = { id = dreyfus.2 years = 2 popup = yes } 
+		hidden_effect = {
+			trigger_event = { id = dreyfus.2 years = 2 popup = yes }
 		}
 	}
 	option = {
@@ -241,8 +210,8 @@ dreyfus.1 = {
 			name = anti_semitic_demonstrations
 			days = short_modifier_time
 		}
-		hidden_effect = { 
-			trigger_event = { id = dreyfus.2 years = 2 popup = yes } 
+		hidden_effect = {
+			trigger_event = { id = dreyfus.2 years = 2 popup = yes }
 		}
 		custom_tooltip = {
 			text = dreyfus.1.tt_4
@@ -285,12 +254,12 @@ dreyfus.2 = {
 		ig:ig_armed_forces = {
 			save_scope_as = dreyfus_armed_forces_scope
 		}
-		##Converter
+		###Converter
 		converter_rule_63_effect = yes
 		if = {
 			limit = { has_variable = rule_63_effect }
 			create_character = {
-				template = fem_esterhazy_character_template			
+				template = fem_canonic_esterhazy_character_template
 				save_scope_as = ferdinand_esterhazy_scope
 				on_created = {
 					place_character_in_void = 10000
@@ -300,7 +269,7 @@ dreyfus.2 = {
 		}
 		else = {
 			create_character = {
-				template = canonic_esterhazy_character_template			
+				template = canonic_esterhazy_character_template
 				save_scope_as = ferdinand_esterhazy_scope
 				on_created = {
 					place_character_in_void = 10000
@@ -308,12 +277,12 @@ dreyfus.2 = {
 				}
 			}
 		}
-		##Converter
+		###Converter
 		random_country = {
 			limit = {
 				has_variable = dreyfus_rival_country_var
 			}
-			save_scope_as = dreyfus_rival_country_scope	
+			save_scope_as = dreyfus_rival_country_scope
 		}
 	}
 
@@ -412,12 +381,12 @@ dreyfus.3 = {
 			}
 		}
 		else = {
-			##Converter
+			###Converter
 			converter_rule_63_effect = yes
 			if = {
 				limit = { has_variable = rule_63_effect }
 				create_character = {
-					template = fem_zola_character_template			
+					template = fem_canonic_zola_character_template
 					save_scope_as = emile_zola_scope
 					on_created = {
 						set_variable = emile_zola_var
@@ -426,14 +395,14 @@ dreyfus.3 = {
 			}
 			else = {
 				create_character = {
-					template = canonic_zola_character_template			
+					template = canonic_zola_character_template
 					save_scope_as = emile_zola_scope
 					on_created = {
 						set_variable = emile_zola_var
 					}
 				}
 			}
-			##Converter
+			###Converter
 		}
 	}
 
@@ -500,7 +469,7 @@ paris_commune_pulse_events.4 = {
 	duration = 3
 
 	dlc = dlc004
-	
+
 	cooldown = { days = normal_modifier_time }
 
 	trigger = {
@@ -533,7 +502,7 @@ paris_commune_pulse_events.4 = {
 				limit = {
 					state_region = s:STATE_ILE_DE_FRANCE
 				}
-				save_scope_as = paris_scope		
+				save_scope_as = paris_scope
 			}
 		}
 
@@ -649,7 +618,7 @@ paris_commune_pulse_events.4 = {
 						days = short_modifier_time
 					}
 				}
-			}		
+			}
 		}
 	}
 	option = { # Men’s tempers get fiery in times like this.
@@ -760,7 +729,7 @@ paris_commune_pulse_events.4 = {
 						days = short_modifier_time
 					}
 				}
-			}		
+			}
 		}
 	}
 }
@@ -784,7 +753,7 @@ paris_commune_pulse_events.9 = {
 	duration = 3
 
 	dlc = dlc004
-	
+
 	cooldown = { days = normal_modifier_time }
 
 	trigger = {
@@ -808,7 +777,7 @@ paris_commune_pulse_events.9 = {
 				}
 				is_marginal = no
 			}
-		}	
+		}
 	}
 
 	immediate = {
@@ -818,7 +787,7 @@ paris_commune_pulse_events.9 = {
 				limit = {
 					state_region = s:STATE_ILE_DE_FRANCE
 				}
-				save_scope_as = paris_scope		
+				save_scope_as = paris_scope
 			}
 		}
 
@@ -939,7 +908,7 @@ paris_commune_pulse_events.9 = {
 						days = short_modifier_time
 					}
 				}
-			}	
+			}
 		}
 	}
 	option = { # Men’s urges are best contained in those walls.
@@ -1000,7 +969,7 @@ paris_commune_pulse_events.9 = {
 						days = short_modifier_time
 					}
 				}
-			}	
+			}
 		}
 	}
 
@@ -1020,7 +989,7 @@ paris_commune_pulse_events.9 = {
 			ig:ig_devout = {
 				add_modifier = {
 					name = fruit_of_the_loin_modifier
-					months = short_modifier_time
+					days = short_modifier_time
 				}
 			}
 		}

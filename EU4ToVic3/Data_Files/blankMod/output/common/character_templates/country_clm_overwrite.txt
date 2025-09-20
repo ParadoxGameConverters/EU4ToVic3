@@ -6,7 +6,6 @@ CLM_santiago_perez_manosalva = { # Santiago Pérez Manosalva
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -16,8 +15,8 @@ CLM_santiago_perez_manosalva = { # Santiago Pérez Manosalva
 		erudite
 		honorable
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -27,17 +26,17 @@ CLM_santiago_perez_manosalva = { # Santiago Pérez Manosalva
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1863.1.1
-        latest_usage_date = 1895.1.1
-        chance = 50
-    }
+		}
+		earliest_usage_date = 1863.1.1
+		latest_usage_date = 1895.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_santiago_perez_manosalva
@@ -51,7 +50,6 @@ fem_CLM_santiago_perez_manosalva = { # Santiago Pérez Manosalva
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -61,8 +59,8 @@ fem_CLM_santiago_perez_manosalva = { # Santiago Pérez Manosalva
 		erudite
 		honorable
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -72,17 +70,17 @@ fem_CLM_santiago_perez_manosalva = { # Santiago Pérez Manosalva
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1863.1.1
-        latest_usage_date = 1895.1.1
-        chance = 50
-    }
+		}
+		earliest_usage_date = 1863.1.1
+		latest_usage_date = 1895.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_santiago_perez_manosalva
@@ -96,7 +94,6 @@ CLM_julio_arboleda = { # Julio Federico Arboleda Pombo O'Donell
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_landowners
@@ -106,8 +103,8 @@ CLM_julio_arboleda = { # Julio Federico Arboleda Pombo O'Donell
 		romantic
 		literary
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -117,17 +114,17 @@ CLM_julio_arboleda = { # Julio Federico Arboleda Pombo O'Donell
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1843.1.1
-        latest_usage_date = 1875.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1843.1.1
+		latest_usage_date = 1875.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_julio_arboleda
@@ -141,7 +138,6 @@ fem_CLM_julio_arboleda = { # Julio Federico Arboleda Pombo O'Donell
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_landowners
@@ -151,8 +147,8 @@ fem_CLM_julio_arboleda = { # Julio Federico Arboleda Pombo O'Donell
 		romantic
 		literary
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -162,17 +158,17 @@ fem_CLM_julio_arboleda = { # Julio Federico Arboleda Pombo O'Donell
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1843.1.1
-        latest_usage_date = 1875.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1843.1.1
+		latest_usage_date = 1875.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_julio_arboleda
@@ -186,18 +182,17 @@ CLM_mariano_ospina_rodriguez = { # Mariano Ospina Rodríguez
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
-	interest_group = ig_landowners
+	interest_group = ig_petty_bourgeoisie
 	ideology = ideology_protectionist
 	birth_date = 1805.10.18
 	traits = {
 		brave
 		imperious
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -207,17 +202,17 @@ CLM_mariano_ospina_rodriguez = { # Mariano Ospina Rodríguez
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1850.1.1
-        latest_usage_date = 1870.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1870.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_mariano_ospina_rodriguez
@@ -231,18 +226,17 @@ fem_CLM_mariano_ospina_rodriguez = { # Mariano Ospina Rodríguez
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
-	interest_group = ig_landowners
+	interest_group = ig_petty_bourgeoisie
 	ideology = ideology_protectionist
 	birth_date = 1805.10.18
 	traits = {
 		brave
 		imperious
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -252,17 +246,17 @@ fem_CLM_mariano_ospina_rodriguez = { # Mariano Ospina Rodríguez
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1850.1.1
-        latest_usage_date = 1870.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1870.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_mariano_ospina_rodriguez
@@ -276,7 +270,6 @@ CLM_miguel_antonio_caro = { # Miguel Antonio Caro
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_landowners
@@ -286,8 +279,8 @@ CLM_miguel_antonio_caro = { # Miguel Antonio Caro
 		erudite
 		pious
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -297,17 +290,17 @@ CLM_miguel_antonio_caro = { # Miguel Antonio Caro
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1885.1.1
-        latest_usage_date = 1905.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1885.1.1
+		latest_usage_date = 1905.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_miguel_antonio_caro
@@ -321,7 +314,6 @@ fem_CLM_miguel_antonio_caro = { # Miguel Antonio Caro
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_landowners
@@ -331,8 +323,8 @@ fem_CLM_miguel_antonio_caro = { # Miguel Antonio Caro
 		erudite
 		pious
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -342,17 +334,17 @@ fem_CLM_miguel_antonio_caro = { # Miguel Antonio Caro
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1885.1.1
-        latest_usage_date = 1905.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1885.1.1
+		latest_usage_date = 1905.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_miguel_antonio_caro
@@ -366,7 +358,6 @@ CLM_rafael_nunez = { # Rafael Núñez
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
@@ -376,8 +367,8 @@ CLM_rafael_nunez = { # Rafael Núñez
 		basic_diplomat
 		literary
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -387,17 +378,17 @@ CLM_rafael_nunez = { # Rafael Núñez
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1875.1.1
-        latest_usage_date = 1895.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1875.1.1
+		latest_usage_date = 1895.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_rafael_nunez
@@ -411,7 +402,6 @@ fem_CLM_rafael_nunez = { # Rafael Núñez
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
@@ -421,8 +411,8 @@ fem_CLM_rafael_nunez = { # Rafael Núñez
 		basic_diplomat
 		literary
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -432,17 +422,17 @@ fem_CLM_rafael_nunez = { # Rafael Núñez
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1875.1.1
-        latest_usage_date = 1895.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1875.1.1
+		latest_usage_date = 1895.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_rafael_nunez
@@ -456,7 +446,6 @@ CLM_manuel_murillo = { # Manuel Murillo Toro
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -466,8 +455,8 @@ CLM_manuel_murillo = { # Manuel Murillo Toro
 		innovative
 		experienced_political_operator
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -477,17 +466,17 @@ CLM_manuel_murillo = { # Manuel Murillo Toro
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1845.1.1
-        latest_usage_date = 1875.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1845.1.1
+		latest_usage_date = 1875.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_manuel_murillo
@@ -501,7 +490,6 @@ fem_CLM_manuel_murillo = { # Manuel Murillo Toro
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -511,8 +499,8 @@ fem_CLM_manuel_murillo = { # Manuel Murillo Toro
 		innovative
 		experienced_political_operator
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -522,17 +510,17 @@ fem_CLM_manuel_murillo = { # Manuel Murillo Toro
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1845.1.1
-        latest_usage_date = 1875.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1845.1.1
+		latest_usage_date = 1875.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_manuel_murillo
@@ -546,7 +534,6 @@ CLM_rafaeal_uribe_uribe = { # Rafael Victor Zenón Uribe Uribe
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_landowners
@@ -556,8 +543,8 @@ CLM_rafaeal_uribe_uribe = { # Rafael Victor Zenón Uribe Uribe
 		erudite
 		scarred
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -567,17 +554,17 @@ CLM_rafaeal_uribe_uribe = { # Rafael Victor Zenón Uribe Uribe
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1915.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1915.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		if = {
 			limit = {
 				owner = {
@@ -599,7 +586,6 @@ fem_CLM_rafaeal_uribe_uribe = { # Rafael Victor Zenón Uribe Uribe
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_landowners
@@ -609,8 +595,8 @@ fem_CLM_rafaeal_uribe_uribe = { # Rafael Victor Zenón Uribe Uribe
 		erudite
 		scarred
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -620,17 +606,17 @@ fem_CLM_rafaeal_uribe_uribe = { # Rafael Victor Zenón Uribe Uribe
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1915.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1915.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		if = {
 			limit = {
 				owner = {
@@ -652,7 +638,6 @@ CLM_aristides_fernandez = { # Arístides Fernández
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_armed_forces
@@ -662,8 +647,8 @@ CLM_aristides_fernandez = { # Arístides Fernández
 		cruel # Mostly known for executing a lot of prisoners
 		wrathful
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -673,17 +658,17 @@ CLM_aristides_fernandez = { # Arístides Fernández
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_armed_forces
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_aristides_fernandez
@@ -697,7 +682,6 @@ fem_CLM_aristides_fernandez = { # Arístides Fernández
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_armed_forces
@@ -707,8 +691,8 @@ fem_CLM_aristides_fernandez = { # Arístides Fernández
 		cruel # Mostly known for executing a lot of prisoners
 		wrathful
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -718,17 +702,17 @@ fem_CLM_aristides_fernandez = { # Arístides Fernández
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_armed_forces
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_aristides_fernandez
@@ -751,8 +735,8 @@ CLM_victoriano_lorenzo = { # Victoriano Lorenzo Troya
 		brave
 		firebrand
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -765,14 +749,14 @@ CLM_victoriano_lorenzo = { # Victoriano Lorenzo Troya
 			any_scope_state = {
 				state_region = s:STATE_PANAMA
 			}
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_rural_folk
-        }   
-        earliest_usage_date = 1890.1.1
-        latest_usage_date = 1930.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1890.1.1
+		latest_usage_date = 1930.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
 		add_to_global_variable_list = {
@@ -797,8 +781,8 @@ fem_CLM_victoriano_lorenzo = { # Victoriano Lorenzo Troya
 		brave
 		firebrand
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -811,14 +795,14 @@ fem_CLM_victoriano_lorenzo = { # Victoriano Lorenzo Troya
 			any_scope_state = {
 				state_region = s:STATE_PANAMA
 			}
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_rural_folk
-        }   
-        earliest_usage_date = 1890.1.1
-        latest_usage_date = 1930.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1890.1.1
+		latest_usage_date = 1930.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
 		add_to_global_variable_list = {
@@ -834,7 +818,6 @@ CLM_carlos_eugenio = { # Carlos Eugenio Restrepo Restrepo
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_industrialists
@@ -845,8 +828,8 @@ CLM_carlos_eugenio = { # Carlos Eugenio Restrepo Restrepo
 		persistent
 		imperious
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -856,17 +839,17 @@ CLM_carlos_eugenio = { # Carlos Eugenio Restrepo Restrepo
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_industrialists
-        }   
-        earliest_usage_date = 1910.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_carlos_eugenio
@@ -880,7 +863,6 @@ fem_CLM_carlos_eugenio = { # Carlos Eugenio Restrepo Restrepo
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_industrialists
@@ -891,8 +873,8 @@ fem_CLM_carlos_eugenio = { # Carlos Eugenio Restrepo Restrepo
 		persistent
 		imperious
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -902,17 +884,17 @@ fem_CLM_carlos_eugenio = { # Carlos Eugenio Restrepo Restrepo
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_industrialists
-        }   
-        earliest_usage_date = 1910.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_carlos_eugenio
@@ -926,7 +908,6 @@ CLM_maria_cano = { # María de los Ángeles Cano Márquez
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_trade_unions
@@ -936,8 +917,8 @@ CLM_maria_cano = { # María de los Ángeles Cano Márquez
 		persistent
 		firebrand
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -947,17 +928,17 @@ CLM_maria_cano = { # María de los Ángeles Cano Márquez
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_trade_unions
-        }   
-        earliest_usage_date = 1925.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1925.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_maria_cano
@@ -971,7 +952,6 @@ fem_CLM_maria_cano = { # María de los Ángeles Cano Márquez
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_trade_unions
@@ -981,8 +961,8 @@ fem_CLM_maria_cano = { # María de los Ángeles Cano Márquez
 		persistent
 		firebrand
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -992,17 +972,17 @@ fem_CLM_maria_cano = { # María de los Ángeles Cano Márquez
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_trade_unions
-        }   
-        earliest_usage_date = 1925.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1925.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_maria_cano
@@ -1016,7 +996,6 @@ CLM_jose_camacho = { # José Camacho Carreño
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
@@ -1026,8 +1005,8 @@ CLM_jose_camacho = { # José Camacho Carreño
 		inspirational_orator
 		wrathful
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1037,17 +1016,17 @@ CLM_jose_camacho = { # José Camacho Carreño
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1930.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1930.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_camacho
@@ -1061,7 +1040,6 @@ fem_CLM_jose_camacho = { # José Camacho Carreño
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
@@ -1071,8 +1049,8 @@ fem_CLM_jose_camacho = { # José Camacho Carreño
 		inspirational_orator
 		wrathful
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1082,17 +1060,17 @@ fem_CLM_jose_camacho = { # José Camacho Carreño
 			}
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1930.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1930.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_camacho
@@ -1109,7 +1087,6 @@ CLM_jose_hilario_lopez = { # José Hilario López Valdés
 	commander_rank = default
 	interest_group = ig_intelligentsia
 	ideology = ideology_abolitionist
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1135,7 +1112,7 @@ CLM_jose_hilario_lopez = { # José Hilario López Valdés
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_hilario_lopez
@@ -1153,7 +1130,6 @@ fem_CLM_jose_hilario_lopez = { # José Hilario López Valdés
 	commander_rank = default
 	interest_group = ig_intelligentsia
 	ideology = ideology_abolitionist
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1179,7 +1155,7 @@ fem_CLM_jose_hilario_lopez = { # José Hilario López Valdés
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_hilario_lopez
@@ -1196,7 +1172,6 @@ CLM_jose_eusebio = { # José Eusebio Otálora
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_liberal_leader
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1222,7 +1197,7 @@ CLM_jose_eusebio = { # José Eusebio Otálora
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_eusebio
@@ -1240,7 +1215,6 @@ fem_CLM_jose_eusebio = { # José Eusebio Otálora
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_liberal_leader
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1266,7 +1240,7 @@ fem_CLM_jose_eusebio = { # José Eusebio Otálora
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_eusebio
@@ -1283,7 +1257,6 @@ CLM_jose_maria_campo = { # José María Campo Serrano
 	commander_rank = default
 	interest_group = ig_petty_bourgeoisie
 	ideology = ideology_moderate
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1309,7 +1282,7 @@ CLM_jose_maria_campo = { # José María Campo Serrano
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_maria_campo
@@ -1327,7 +1300,6 @@ fem_CLM_jose_maria_campo = { # José María Campo Serrano
 	commander_rank = default
 	interest_group = ig_petty_bourgeoisie
 	ideology = ideology_moderate
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1353,7 +1325,7 @@ fem_CLM_jose_maria_campo = { # José María Campo Serrano
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_maria_campo
@@ -1370,7 +1342,6 @@ CLM_santos_acosta = { # Manuel ​María de los Santos Acosta Castillo
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_radical
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1396,7 +1367,7 @@ CLM_santos_acosta = { # Manuel ​María de los Santos Acosta Castillo
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_santos_acosta
@@ -1414,7 +1385,6 @@ fem_CLM_santos_acosta = { # Manuel ​María de los Santos Acosta Castillo
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_radical
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1440,7 +1410,7 @@ fem_CLM_santos_acosta = { # Manuel ​María de los Santos Acosta Castillo
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_santos_acosta
@@ -1457,7 +1427,6 @@ CLM_ricardo_gaitan_obeso = { # Ricardo Gaitán Obeso
 	commander_rank = default
 	interest_group = ig_rural_folk
 	ideology = ideology_jingoist_leader
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1483,7 +1452,7 @@ CLM_ricardo_gaitan_obeso = { # Ricardo Gaitán Obeso
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_ricardo_gaitan_obeso
@@ -1501,7 +1470,6 @@ fem_CLM_ricardo_gaitan_obeso = { # Ricardo Gaitán Obeso
 	commander_rank = default
 	interest_group = ig_rural_folk
 	ideology = ideology_jingoist_leader
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1527,7 +1495,7 @@ fem_CLM_ricardo_gaitan_obeso = { # Ricardo Gaitán Obeso
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_ricardo_gaitan_obeso
@@ -1544,7 +1512,6 @@ CLM_guillermo_quintero_calderon = { # Guillermo Quintero Calderón
 	commander_rank = default
 	interest_group = ig_landowners
 	ideology = ideology_moderate
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1570,7 +1537,7 @@ CLM_guillermo_quintero_calderon = { # Guillermo Quintero Calderón
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_guillermo_quintero_calderon
@@ -1588,7 +1555,6 @@ fem_CLM_guillermo_quintero_calderon = { # Guillermo Quintero Calderón
 	commander_rank = default
 	interest_group = ig_landowners
 	ideology = ideology_moderate
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1614,7 +1580,7 @@ fem_CLM_guillermo_quintero_calderon = { # Guillermo Quintero Calderón
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_guillermo_quintero_calderon
@@ -1631,7 +1597,6 @@ CLM_alfredo_vasquez_cobo = { # Alfredo Vásquez Cobo
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_moderate
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1657,7 +1622,7 @@ CLM_alfredo_vasquez_cobo = { # Alfredo Vásquez Cobo
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alfredo_vasquez_cobo
@@ -1675,7 +1640,6 @@ fem_CLM_alfredo_vasquez_cobo = { # Alfredo Vásquez Cobo
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_moderate
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1701,7 +1665,7 @@ fem_CLM_alfredo_vasquez_cobo = { # Alfredo Vásquez Cobo
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alfredo_vasquez_cobo
@@ -1718,7 +1682,6 @@ CLM_avelino_rosas = { # Avelino Rosas
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_liberal_leader
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1745,7 +1708,7 @@ CLM_avelino_rosas = { # Avelino Rosas
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_avelino_rosas
@@ -1763,7 +1726,6 @@ fem_CLM_avelino_rosas = { # Avelino Rosas
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_liberal_leader
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1790,7 +1752,7 @@ fem_CLM_avelino_rosas = { # Avelino Rosas
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_avelino_rosas
@@ -1807,7 +1769,6 @@ CLM_jose_dolores_solano = { # José Dolores Solano
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_moderate
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1833,7 +1794,7 @@ CLM_jose_dolores_solano = { # José Dolores Solano
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_dolores_solano
@@ -1851,7 +1812,6 @@ fem_CLM_jose_dolores_solano = { # José Dolores Solano
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_moderate
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1877,7 +1837,7 @@ fem_CLM_jose_dolores_solano = { # José Dolores Solano
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_dolores_solano
@@ -1894,7 +1854,6 @@ CLM_jose_maria_melo = { # José María Melo
 	commander_rank = default
 	interest_group = ig_rural_folk
 	ideology = ideology_radical
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1920,7 +1879,7 @@ CLM_jose_maria_melo = { # José María Melo
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_maria_melo
@@ -1938,7 +1897,6 @@ fem_CLM_jose_maria_melo = { # José María Melo
 	commander_rank = default
 	interest_group = ig_rural_folk
 	ideology = ideology_radical
-	#culture = global_var:nor_andes_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1964,7 +1922,7 @@ fem_CLM_jose_maria_melo = { # José María Melo
 	}
 	trait_generation = { }
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_maria_melo
@@ -1977,8 +1935,7 @@ CLM_ambrosio_lopez_pinzon = { #Ambrosio López Pinzón
 	last_name = Lopez
 	historical = yes
 	female = no
-	is_agitator = yes 
-	#culture = global_var:nor_andes_culture
+	is_agitator = yes
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
@@ -1988,8 +1945,8 @@ CLM_ambrosio_lopez_pinzon = { #Ambrosio López Pinzón
 		inspirational_orator
 		reckless # Suspicious business
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -2000,15 +1957,15 @@ CLM_ambrosio_lopez_pinzon = { #Ambrosio López Pinzón
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
 		}
-        interest_group_trigger = {
+		interest_group_trigger = {
 			is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1845.1.1
-        latest_usage_date = 1865.1.1
-        chance = 50
-    }
+		}
+		earliest_usage_date = 1845.1.1
+		latest_usage_date = 1865.1.1
+		chance = 50
+	}
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_ambrosio_lopez_pinzon
@@ -2021,8 +1978,7 @@ fem_CLM_ambrosio_lopez_pinzon = { #Ambrosio López Pinzón
 	last_name = Lopez
 	historical = yes
 	female = yes
-	is_agitator = yes 
-	#culture = global_var:nor_andes_culture
+	is_agitator = yes
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
@@ -2032,8 +1988,8 @@ fem_CLM_ambrosio_lopez_pinzon = { #Ambrosio López Pinzón
 		inspirational_orator
 		reckless # Suspicious business
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -2044,15 +2000,15 @@ fem_CLM_ambrosio_lopez_pinzon = { #Ambrosio López Pinzón
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
 		}
-        interest_group_trigger = {
+		interest_group_trigger = {
 			is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1845.1.1
-        latest_usage_date = 1865.1.1
-        chance = 50
-    }
+		}
+		earliest_usage_date = 1845.1.1
+		latest_usage_date = 1865.1.1
+		chance = 50
+	}
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_ambrosio_lopez_pinzon
@@ -2065,8 +2021,7 @@ CLM_luis_tejada_cano = { #Luis Tejada Cano
 	last_name = Tejada
 	historical = yes
 	female = no
-	is_agitator = yes 
-	#culture = global_var:nor_andes_culture
+	is_agitator = yes
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -2077,8 +2032,8 @@ CLM_luis_tejada_cano = { #Luis Tejada Cano
 		innovative
 		romantic
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -2089,15 +2044,15 @@ CLM_luis_tejada_cano = { #Luis Tejada Cano
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
 		}
-        interest_group_trigger = {
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1917.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }
+		}
+		earliest_usage_date = 1917.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_luis_tejada_cano
@@ -2110,8 +2065,7 @@ fem_CLM_luis_tejada_cano = { #Luis Tejada Cano
 	last_name = Tejada
 	historical = yes
 	female = yes
-	is_agitator = yes 
-	#culture = global_var:nor_andes_culture
+	is_agitator = yes
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -2122,8 +2076,8 @@ fem_CLM_luis_tejada_cano = { #Luis Tejada Cano
 		innovative
 		romantic
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -2134,15 +2088,15 @@ fem_CLM_luis_tejada_cano = { #Luis Tejada Cano
 			uses_clm_characters = yes
 			has_dlc_feature = rp1_content
 		}
-        interest_group_trigger = {
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1917.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }
+		}
+		earliest_usage_date = 1917.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	on_created = {
-		converter_colombian_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_colombian_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_luis_tejada_cano

@@ -9,7 +9,13 @@
 is_matriarchal_country = {
 	OR = {
 		any_primary_culture = { has_discrimination_trait = matriarchal }
-		religion = { has_discrimination_trait = matriarchal }
+		trigger_if = {
+			limit = { has_law = law_type:law_state_atheism }
+			var:ancien_regime_religion ?= { has_discrimination_trait = matriarchal }
+		}
+		trigger_else = {
+			religion = { has_discrimination_trait = matriarchal }
+		}
 	}
 }
 
@@ -23,7 +29,13 @@ is_matriarchal_pop = {
 is_feminist_country = {
 	OR = {
 		any_primary_culture = { has_discrimination_trait = feminist }
-		religion = { has_discrimination_trait = feminist }
+		trigger_if = {
+			limit = { has_law = law_type:law_state_atheism }
+			var:ancien_regime_religion ?= { has_discrimination_trait = feminist }
+		}
+		trigger_else = {
+			religion = { has_discrimination_trait = feminist }
+		}
 	}
 }
 

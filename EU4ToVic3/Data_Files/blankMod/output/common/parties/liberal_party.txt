@@ -8,30 +8,26 @@ liberal_party = {
 			triggered_desc = {
 				desc = party_civilista_party
 				trigger = {
-					exists = c:PEU
-					THIS = c:PEU
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_national_civic_union
 				trigger = {
-					exists = c:ARG
-					THIS = c:ARG
+					uses_arg_characters = yes																							### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_whigs
 				trigger = {
-					exists = c:GBR
-					THIS = c:GBR
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_british_cultures target = this } }		### Converter
 					NOT = { has_law = law_type:law_free_trade }
 				}
 			}
 			triggered_desc = {
 				desc = party_republicans
 				trigger = {
-					exists = c:USA
-					THIS = c:USA
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }		### Converter
 					has_global_variable = american_civil_war
 				}
 			}
@@ -45,8 +41,7 @@ liberal_party = {
 			triggered_desc = {
 				desc = party_republican_party
 				trigger = {
-					exists = c:FRA
-					THIS = c:FRA
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_french_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
@@ -91,22 +86,19 @@ liberal_party = {
 			triggered_desc = {
 				desc = party_kadets_party
 				trigger = {
-					exists = c:RUS
-					THIS = c:RUS
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_russian_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_peoples_party
 				trigger = {
-					exists = c:SWE
-					THIS = c:SWE
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_swedish_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_liberal_union
 				trigger = {
-					exists = c:NET
-					THIS = c:NET
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_dutch_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
@@ -119,92 +111,83 @@ liberal_party = {
 			triggered_desc = {
 				desc = party_young_finnish_party
 				trigger = {
-					exists = c:FIN
-					THIS = c:FIN
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_finnish_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_constitutional_party
 				trigger = {
-					exists = c:AUS
-					THIS = c:AUS
+					uses_aus_ger_characters = yes																						### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_peoples_party
 				trigger = {
-					exists = c:CRO
-					THIS = c:CRO
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_croatian_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_society_for_progress
 				trigger = {
-					exists = c:PER
-					THIS = c:PER
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_persian_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_blue_party
 				trigger = {
-					exists = c:PRG
-					THIS = c:PRG
+					uses_prg_characters = yes																							### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_great_liberal_party
 				trigger = {
-					exists = c:VNZ
-					THIS = c:VNZ
+					uses_vnz_characters = yes																							### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_colorado_party
 				trigger = {
-					exists = c:URU
-					THIS = c:URU
+					uses_uru_characters = yes																							### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_empire_reform_association
 				trigger = {
-					exists = c:CHI
-					THIS = c:CHI
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_han_cultures target = this } }		### Converter
 					has_law = law_type:law_monarchy
 				}
 			}
 			triggered_desc = {
 				desc = party_freedom_and_accord_party
 				trigger = {
-					exists = c:TUR
-					THIS = c:TUR
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_turkish_cultures target = this } }		### Converter
 					has_law = law_type:law_monarchy
 				}
 			}
 			triggered_desc = {
 				desc = party_progressive_republican_party
 				trigger = {
-					exists = c:TUR
-					THIS = c:TUR
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_turkish_cultures target = this } }		### Converter
 					NOT = { has_law = law_type:law_monarchy }
 				}
 			}
 			triggered_desc = {
 				desc = party_constitutional_reform_party
 				trigger = {
-					exists = c:JAP
-					THIS = c:JAP
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_japanese_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_constitutional_party
 				trigger = {
-					exists = c:GRE
-					THIS = c:GRE
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_greek_cultures target = this } }		### Converter
 					has_law = law_type:law_monarchy
 					ruler = {
 						culture = {
-							has_discrimination_trait = german_speaking
+							OR = {																										### Converter
+								is_target_in_global_variable_list = { name = global_nor_ger_cultures target = this }
+								is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this }
+							}
 						}
 					}
 				}
@@ -212,39 +195,36 @@ liberal_party = {
 			triggered_desc = {
 				desc = party_neoteristikon_komma
 				trigger = {
-					exists = c:GRE
-					THIS = c:GRE
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_greek_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_the_left
 				trigger = {
-					OR = {
-						country_has_primary_culture = cu:north_italian
-						country_has_primary_culture = cu:south_italian
+					any_primary_culture = {		### Converter
+						OR = {
+							is_target_in_global_variable_list = { name = global_nor_ita_cultures target = this }
+							is_target_in_global_variable_list = { name = global_sou_ita_cultures target = this }
+						}
 					}
 				}
 			}
 			triggered_desc = {
 				desc = party_national_liberal_party
 				trigger = {
-					country_has_primary_culture = cu:romanian
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_romanian_cultures target = this } }		### Converter
 				}
 			}
 			triggered_desc = {
 				desc = party_whig_party
 				trigger = {
-					OR = {
-						AND = {
-							any_primary_culture = { is_target_in_global_variable_list = { name = global_dixie_cultures target = this } }		### Converter
-							NOT = {
-								exists = c:USA
-								THIS = c:USA
-							}
+					OR = {		### Converter
+						any_primary_culture = {
+							is_target_in_global_variable_list = { name = global_dixie_cultures target = this }
+							is_yankee_culture = no
 						}
 						AND = {
-							exists = c:USA
-							THIS = c:USA
+							any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
 							NOT = { has_global_variable = american_civil_war }
 						}
 					}
@@ -253,27 +233,33 @@ liberal_party = {
 			triggered_desc = {
 				desc = party_progress_party
 				trigger = {
-					OR = {
-						country_has_primary_culture = cu:north_german
-						country_has_primary_culture = cu:south_german
+					any_primary_culture = {		### Converter
+						OR = {
+							is_target_in_global_variable_list = { name = global_nor_ger_cultures target = this }
+							is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this }
+						}
 					}
 				}
 			}
 			triggered_desc = {
 				desc = party_progressive_party
 				trigger = {
-					OR = {
-						country_has_primary_culture = cu:spanish
-						country_has_primary_culture = cu:portuguese
+					any_primary_culture = {		### Converter
+						OR = {
+							is_target_in_global_variable_list = { name = global_spanish_cultures target = this }
+							is_target_in_global_variable_list = { name = global_portuguese_cultures target = this }
+						}
 					}
 				}
 			}
 			triggered_desc = {
 				desc = party_venstre
 				trigger = {
-					OR = {
-						country_has_primary_culture = cu:norwegian
-						country_has_primary_culture = cu:spanish
+					any_primary_culture = {		### Converter
+						OR = {
+							is_target_in_global_variable_list = { name = global_norwegian_cultures target = this }
+							is_target_in_global_variable_list = { name = global_danish_cultures target = this }
+						}
 					}
 				}
 			}
@@ -313,7 +299,7 @@ liberal_party = {
 			}
 		}
 	}
-	
+
 	# Root - IG considering joining
 	# scope:number - the number of IGs that would join this party before the root IG
 	join_weight = {
@@ -324,7 +310,7 @@ liberal_party = {
 		if = {
 			limit = {
 				owner = {
-					c:BIC ?= this
+					is_old_world_trading_company = yes		### Converter
 					is_subject = yes
 					OR = {
 						has_modifier = modifier_india_crown_rule
@@ -630,7 +616,7 @@ liberal_party = {
 					has_ideology = ideology:ideology_particularist
 				}
 				owner = {
-					OR = {	
+					OR = {
 						has_law = law_type:law_local_police
 						has_law = law_type:law_militarized_police
 					}
@@ -789,15 +775,15 @@ liberal_party = {
 		# Special weights for ACW
 		if = {
 			limit = {
-				owner = { 
+				owner = {
 					OR = {
-						has_journal_entry = je_acw_countdown 
+						has_journal_entry = je_acw_countdown
 						AND = { # JE not active yet at initialization
 							exists = c:USA
 							this = c:USA
-							year < 1837						
+							year < 1837
 						}
-					}				
+					}
 				}
 			}
 			if = {
@@ -805,17 +791,17 @@ liberal_party = {
 				add = {
 					value = -100
 					desc = "from_slaver_leader"
-				}					
-			}	
+				}
+			}
 			else_if = {
 				limit = { leader = { has_ideology = ideology:ideology_abolitionist } }
 				add = {
 					value = 100
 					desc = "from_abolitionist_leader"
-				}					
-			}				
-		}	
-		
+				}
+			}
+		}
+
 		if = {
 			limit = {
 				is_interest_group_type = ig_intelligentsia
@@ -851,7 +837,7 @@ liberal_party = {
 				scope:number = 3
 			}
 			multiply = {
-				value = 0.25
+				value = 0.05
 				desc = "from_three_prior_members"
 			}
 		}
@@ -860,7 +846,7 @@ liberal_party = {
 				scope:number > 3
 			}
 			multiply = {
-				value = 0.1
+				value = 0.0
 				desc = "from_more_than_three_prior_members"
 			}
 		}
@@ -959,13 +945,17 @@ liberal_party = {
 				value = -50
 				desc = "from_feijo_regency"
 			}
-		}	
+		}
 		if = {
 			limit = {
 				owner = {
 					country_is_in_south_america = yes
-					any_primary_culture = {
-						has_discrimination_trait = hispanophone
+					any_primary_culture = {		### Converter
+						OR = {
+							is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+							is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+							is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+						}
 					}
 				}
 				OR = {

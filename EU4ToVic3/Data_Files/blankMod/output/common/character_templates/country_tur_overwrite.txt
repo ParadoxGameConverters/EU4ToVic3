@@ -2,20 +2,110 @@
 
 # Ottoman Empire - TUR
 # Turkey & the Ottoman Empire - TUR
+tur_abdulhamid_ii_template = {
+	first_name = Abdul_Hamid
+	last_name = Osmanoglu
+	historical = yes
+	culture = cu:turkish
+	female = no
+	dna = dna_abdul_hamid_ii
+	ideology = ideology_authoritarian
+	interest_group = ig_landowners
+	birth_date = 1842.9.21
+	ruler = yes
+	traits = {
+		pious
+		persistent
+		basic_diplomat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_abdulhamid_ii_template
+				}
+			}
+			uses_tur_characters = yes
+			c:TUR = { has_law = law_type:law_monarchy }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1870.1.1
+		latest_usage_date = 1900.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:turkish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_abdulhamid_ii_template
+		}
+	}
+}
+
+fem_tur_abdulhamid_ii_template = {
+	first_name = Cemile_Sultan
+	last_name = Osmanoglu
+	historical = yes
+	culture = cu:turkish
+	female = yes
+	dna = dna_abdul_hamid_ii
+	ideology = ideology_authoritarian
+	interest_group = ig_landowners
+	birth_date = 1842.9.21
+	ruler = yes
+	traits = {
+		pious
+		persistent
+		basic_diplomat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_abdulhamid_ii_template
+				}
+			}
+			uses_tur_characters = yes
+			c:TUR = { has_law = law_type:law_monarchy }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1870.1.1
+		latest_usage_date = 1900.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:turkish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_abdulhamid_ii_template
+		}
+	}
+}
+
 tur_koca_mustafa_reshid_pasha = { # Damad (or Damat) Mehmed Asi Pasha, grand vizier in 1852-1853
 	first_name = Damad_Mehmed
 	last_name = Ali
 	historical = yes
-	culture = global_var:tur_culture
+	culture = cu:turkish
 	female = no
-    dna = dna_damat_mehmed_ali_pasha
-	religion = sunni
+	dna = dna_damat_mehmed_ali_pasha
+	religion = rel:sunni
 	ideology = ideology_reformer
 	interest_group = ig_intelligentsia
 	birth_date = 1813.1.1
 	traits = {
 		tactful
-	}   
+	}
 	interest_group_leader_usage = {
 		country_trigger = {
 			should_have_male_characters = yes
@@ -29,40 +119,42 @@ tur_koca_mustafa_reshid_pasha = { # Damad (or Damat) Mehmed Asi Pasha, grand viz
 		}
 		interest_group_trigger = {
 			is_marginal = no
-			is_interest_group_type = ig_intelligentsia   
-            NOR = {
+			is_interest_group_type = ig_intelligentsia 
+			NOR = {
 				has_variable = communist_ig_var
 				has_variable = chose_vanguardism
 				has_variable = chose_fascism
 				has_variable = chose_conservatism
 				has_variable = chose_ethno_nationalism
 			}
-		}   
+		}
 		earliest_usage_date = 1845.1.1
 		latest_usage_date = 1860.1.1
 		chance = 25
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:turkish }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_koca_mustafa_reshid_pasha
 		}
 	}
 }
+
 fem_tur_koca_mustafa_reshid_pasha = { # Damad (or Damat) Mehmed Asi Pasha, grand vizier in 1852-1853
 	first_name = Ayse
 	last_name = Ali
 	historical = yes
-	culture = global_var:tur_culture
+	culture = cu:turkish
 	female = yes
-    dna = dna_damat_mehmed_ali_pasha
-	religion = sunni
+	dna = dna_damat_mehmed_ali_pasha
+	religion = rel:sunni
 	ideology = ideology_reformer
 	interest_group = ig_intelligentsia
 	birth_date = 1813.1.1
 	traits = {
 		tactful
-	}   
+	}
 	interest_group_leader_usage = {
 		country_trigger = {
 			should_have_female_characters = yes
@@ -76,111 +168,26 @@ fem_tur_koca_mustafa_reshid_pasha = { # Damad (or Damat) Mehmed Asi Pasha, grand
 		}
 		interest_group_trigger = {
 			is_marginal = no
-			is_interest_group_type = ig_intelligentsia   
-            NOR = {
+			is_interest_group_type = ig_intelligentsia 
+			NOR = {
 				has_variable = communist_ig_var
 				has_variable = chose_vanguardism
 				has_variable = chose_fascism
 				has_variable = chose_conservatism
 				has_variable = chose_ethno_nationalism
 			}
-		}   
+		}
 		earliest_usage_date = 1845.1.1
 		latest_usage_date = 1860.1.1
 		chance = 25
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:turkish }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_koca_mustafa_reshid_pasha
 		}
 	}
-}
-tur_abdulhamid_ii_template = {
-    first_name = Abdul_Hamid
-    last_name = Osmanoglu
-    historical = yes
-    culture = global_var:tur_culture
-    female = no
-    dna = dna_abdul_hamid_ii
-    ideology = ideology_authoritarian
-    interest_group = ig_landowners
-    birth_date = 1842.9.21
-	ruler = yes
-    traits = {
-        pious
-        persistent
-        basic_diplomat
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
-			should_have_male_characters = yes
-			NOT = {
-				is_target_in_global_variable_list = {
-					name = converter_unavailable_unique_characters
-					target = flag:converter_abdulhamid_ii_template
-				}
-			}
-			uses_tur_characters = yes
-            c:TUR = { has_law = law_type:law_monarchy }
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_landowners
-        }
-        earliest_usage_date = 1870.1.1
-        latest_usage_date = 1900.1.1
-        chance = 50
-    }  
-	on_created = {
-		add_to_global_variable_list = {
-			name = converter_unavailable_unique_characters
-			target = flag:converter_abdulhamid_ii_template
-		}
-	} 
-}
-fem_tur_abdulhamid_ii_template = {
-    first_name = Cemile_Sultan
-    last_name = Osmanoglu
-    historical = yes
-    culture = global_var:tur_culture
-    female = yes
-    dna = dna_abdul_hamid_ii
-    ideology = ideology_authoritarian
-    interest_group = ig_landowners
-    birth_date = 1842.9.21
-	ruler = yes
-    traits = {
-        pious
-        persistent
-        basic_diplomat
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
-			should_have_female_characters = yes
-			NOT = {
-				is_target_in_global_variable_list = {
-					name = converter_unavailable_unique_characters
-					target = flag:converter_abdulhamid_ii_template
-				}
-			}
-			uses_tur_characters = yes
-            c:TUR = { has_law = law_type:law_monarchy }
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_landowners
-        }
-        earliest_usage_date = 1870.1.1
-        latest_usage_date = 1900.1.1
-        chance = 50
-    }  
-	on_created = {
-		add_to_global_variable_list = {
-			name = converter_unavailable_unique_characters
-			target = flag:converter_abdulhamid_ii_template
-		}
-	} 
 }
 
 ### commanders
@@ -188,9 +195,9 @@ tur_general_pasha = {
 	first_name = Mehmed_Naik
 	last_name = "Pasha"
 	historical = yes
-	culture = global_var:tur_culture
+	culture = cu:turkish
 	female = no
-	religion = sunni
+	religion = rel:sunni
 	commander_rank = default
 	interest_group = ig_landowners
 	birth_date = 1804.2.4 # Only birth year certain
@@ -211,10 +218,11 @@ tur_general_pasha = {
 		}
 		role = general
 		earliest_usage_date = 1836.1.1
-		latest_usage_date = 1880.1.1	
+		latest_usage_date = 1880.1.1
 		chance = 75
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:turkish }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_mehmed_naik_pasha
@@ -225,9 +233,9 @@ fem_tur_general_pasha = {
 	first_name = Fatma_Namika
 	last_name = "Pasha"
 	historical = yes
-	culture = global_var:tur_culture
+	culture = cu:turkish
 	female = yes
-	religion = sunni
+	religion = rel:sunni
 	commander_rank = default
 	interest_group = ig_landowners
 	birth_date = 1804.2.4 # Only birth year certain
@@ -248,10 +256,11 @@ fem_tur_general_pasha = {
 		}
 		role = general
 		earliest_usage_date = 1836.1.1
-		latest_usage_date = 1880.1.1	
+		latest_usage_date = 1880.1.1
 		chance = 75
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:turkish }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_mehmed_naik_pasha
@@ -262,9 +271,9 @@ tur_admiral_hobart = { # Augustus Charles Hobart-Hampden
 	first_name = Hobart
 	last_name = Pasha
 	historical = yes
-	culture = global_var:gbr_culture
+	culture = cu:british
 	female = no
-	religion = protestant
+	religion = rel:protestant
 	ideology = ideology_moderate
 	commander_rank = default
 	interest_group = ig_armed_forces
@@ -286,10 +295,11 @@ tur_admiral_hobart = { # Augustus Charles Hobart-Hampden
 		}
 		role = admiral
 		earliest_usage_date = 1862.2.5
-		latest_usage_date = 1880.1.1	
+		latest_usage_date = 1880.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:british }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_hobart_pasha
@@ -300,9 +310,9 @@ fem_tur_admiral_hobart = { # Augustus Charles Hobart-Hampden
 	first_name = Gussie
 	last_name = Pasha
 	historical = yes
-	culture = global_var:gbr_culture
+	culture = cu:british
 	female = yes
-	religion = protestant
+	religion = rel:protestant
 	ideology = ideology_moderate
 	commander_rank = default
 	interest_group = ig_armed_forces
@@ -324,10 +334,11 @@ fem_tur_admiral_hobart = { # Augustus Charles Hobart-Hampden
 		}
 		role = admiral
 		earliest_usage_date = 1862.2.5
-		latest_usage_date = 1880.1.1	
+		latest_usage_date = 1880.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:british }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_hobart_pasha
@@ -338,9 +349,9 @@ tur_general_mehmed_ali = { # Ludwig Karl Friedrich Detroit
 	first_name = Mehmed_Ali
 	last_name = Pasha
 	historical = yes
-	culture = global_var:nor_ger_culture
+	culture = cu:north_german
 	female = no
-	religion = sunni
+	religion = rel:sunni
 	ideology = ideology_traditionalist
 	commander_rank = default
 	interest_group = ig_armed_forces
@@ -362,10 +373,11 @@ tur_general_mehmed_ali = { # Ludwig Karl Friedrich Detroit
 		}
 		role = general
 		earliest_usage_date = 1865.1.1
-		latest_usage_date = 1888.1.1	
+		latest_usage_date = 1888.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_mehmed_ali_pasha
@@ -376,9 +388,9 @@ fem_tur_general_mehmed_ali = { # Ludwig Carl Friedrich Detroit
 	first_name = Ayse_Ali
 	last_name = Pasha
 	historical = yes
-	culture = global_var:nor_ger_culture
+	culture = cu:north_german
 	female = yes
-	religion = sunni
+	religion = rel:sunni
 	ideology = ideology_traditionalist
 	commander_rank = default
 	interest_group = ig_armed_forces
@@ -400,10 +412,11 @@ fem_tur_general_mehmed_ali = { # Ludwig Carl Friedrich Detroit
 		}
 		role = general
 		earliest_usage_date = 1865.1.1
-		latest_usage_date = 1888.1.1	
+		latest_usage_date = 1888.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_mehmed_ali_pasha
@@ -414,9 +427,9 @@ tur_general_osman_nuri = {
 	first_name = Osman_Nuri
 	last_name = Pasha
 	historical = yes
-	culture = global_var:tur_culture
+	culture = cu:turkish
 	female = no
-	religion = sunni
+	religion = rel:sunni
 	ideology = ideology_moderate
 	commander_rank = default
 	interest_group = ig_armed_forces
@@ -439,10 +452,11 @@ tur_general_osman_nuri = {
 		}
 		role = general
 		earliest_usage_date = 1861.1.1
-		latest_usage_date = 1900.1.1	
+		latest_usage_date = 1900.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:turkish }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_osman_nuri_pasha
@@ -453,9 +467,9 @@ fem_tur_general_osman_nuri = {
 	first_name = Ruqayya_Aysenur
 	last_name = Pasha
 	historical = yes
-	culture = global_var:tur_culture
+	culture = cu:turkish
 	female = yes
-	religion = sunni
+	religion = rel:sunni
 	ideology = ideology_moderate
 	commander_rank = default
 	interest_group = ig_armed_forces
@@ -478,10 +492,11 @@ fem_tur_general_osman_nuri = {
 		}
 		role = general
 		earliest_usage_date = 1861.1.1
-		latest_usage_date = 1900.1.1	
+		latest_usage_date = 1900.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:turkish }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_osman_nuri_pasha

@@ -2,6 +2,7 @@
 # converter_pious_landowner_ideology_effect
 # converter_jeffersonian_ideology_effect
 # converter_russian_patriarch_ideology_effect
+# converter_integralist_ideology_effect
 # converter_ig_ideologies_effect
 # converter_state_atheism_effect
 # converter_released_country_effect
@@ -13,6 +14,7 @@
 # make_colonial_subject
 # make_recognized_subject
 # converter_make_dominion
+# converter_karl_marx_effect
 
 converter_caudillismo_ideology_effect = {
 	if = {
@@ -202,6 +204,44 @@ converter_russian_patriarch_ideology_effect = {
 						name = global_russian_patriarch_cultures
 						target = this
 					}
+				}
+			}
+		}
+	}
+}
+
+converter_integralist_ideology_effect = {
+	every_primary_culture = {
+		if = {
+			limit = {
+				NOT = { is_target_in_global_variable_list = { name = global_integralist_cultures target = this } }
+			}
+			add_to_global_variable_list = {
+				name = global_integralist_cultures
+				target = this
+			}
+		}
+	}
+	while = {
+		limit = {
+			any_scope_pop = {
+				culture = {
+					shares_heritage_and_other_trait_with_any_primary_culture = prev.owner
+					NOT = { is_target_in_global_variable_list = { name = global_integralist_cultures target = this } }
+				}
+			}
+		}
+		random_scope_pop = {
+			limit = {
+				culture = {
+					shares_heritage_and_other_trait_with_any_primary_culture = prev.owner
+					NOT = { is_target_in_global_variable_list = { name = global_integralist_cultures target = this } }
+				}
+			}
+			culture = {
+				add_to_global_variable_list = {
+					name = global_integralist_cultures
+					target = this
 				}
 			}
 		}
@@ -803,7 +843,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 									value >= 0.05
 								}
 							}
-							global_var:dan_culture ?= this
+							is_target_in_global_variable_list = { name = global_danish_cultures target = this }
 							has_homeland = prev.state
 						}
 					}
@@ -814,7 +854,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 					country_has_state_religion = rel:protestant
 					religion = { has_discrimination_trait = proto_protestant }
 				}
-				country_has_primary_culture = global_var:dan_culture
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_danish_cultures target = this } }
 			}
 		}
 		ig:ig_devout = {
@@ -839,11 +879,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 									value >= 0.05
 								}
 							}
-							NOR = {
-								global_var:dan_culture ?= this
-								global_var:swe_culture ?= this
-							}
-							has_discrimination_trait = scandinavian_culture_group
+							is_target_in_global_variable_list = { name = global_norwegian_cultures target = this }
 							has_homeland = prev.state
 						}
 					}
@@ -854,12 +890,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 					country_has_state_religion = rel:protestant
 					religion = { has_discrimination_trait = proto_protestant }
 				}
-				#country_has_primary_culture = cu:norwegian
-				any_primary_culture = { has_discrimination_trait = scandinavian_culture_group }
-				NOR = {
-					country_has_primary_culture = global_var:dan_culture
-					country_has_primary_culture = global_var:swe_culture
-				}
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_norwegian_cultures target = this } }
 			}
 		}
 		ig:ig_devout = {
@@ -884,7 +915,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 									value >= 0.05
 								}
 							}
-							global_var:finn_culture ?= this
+							is_target_in_global_variable_list = { name = global_finnish_cultures target = this }
 							has_homeland = prev.state
 						}
 					}
@@ -895,7 +926,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 					country_has_state_religion = rel:protestant
 					religion = { has_discrimination_trait = proto_protestant }
 				}
-				country_has_primary_culture = global_var:finn_culture
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_finnish_cultures target = this } }
 			}
 		}
 		ig:ig_devout = {
@@ -920,7 +951,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 									value >= 0.05
 								}
 							}
-							global_var:swe_culture ?= this
+							is_target_in_global_variable_list = { name = global_swedish_cultures target = this }
 							has_homeland = prev.state
 						}
 					}
@@ -931,7 +962,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 					country_has_state_religion = rel:protestant
 					religion = { has_discrimination_trait = proto_protestant }
 				}
-				country_has_primary_culture = global_var:swe_culture
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_swedish_cultures target = this } }
 			}
 		}
 		ig:ig_devout = {
@@ -1771,22 +1802,14 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 									value >= 0.05
 								}
 							}
-							NOR = {
-								global_var:dan_culture ?= this
-								global_var:swe_culture ?= this
-							}
-							has_discrimination_trait = scandinavian_culture_group
+							is_target_in_global_variable_list = { name = global_norwegian_cultures target = this }
 							has_homeland = prev.state
 						}
 					}
 				}
 			}
 			trigger_else = {
-				any_primary_culture = { has_discrimination_trait = scandinavian_culture_group }
-				NOR = {
-					country_has_primary_culture = global_var:dan_culture
-					country_has_primary_culture = global_var:swe_culture
-				}
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_norwegian_cultures target = this } }
 			}
 			NOR = {		##Now you *do* have a powerful nobility
 				has_law = law_type:law_serfdom
@@ -2065,6 +2088,17 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 }
 
 converter_state_atheism_effect = {
+	if = {
+		limit = {
+			has_technology_researched = empiricism
+			NOT = { has_variable = zzz_converter_ar_religion_set }
+		}
+		set_variable = {
+			name = ancien_regime_religion
+			value = religion
+		}
+		set_variable = zzz_converter_ar_religion_set
+	}
 	every_primary_culture = {
 		if = {
 			limit = {
@@ -2323,10 +2357,6 @@ converter_released_country_effect = {
 		}
 	}
 	converter_ig_ideologies_effect = yes
-	trigger_event = {
-		id = zzz_cc_dynamic_characters.1
-		days = 1
-	}
 }
 
 converter_copy_ideologies_effect = {
@@ -2557,7 +2587,9 @@ converter_copy_ideologies_effect = {
 				country_has_state_religion = rel:protestant
 				religion = { has_discrimination_trait = proto_protestant }
 			}
-			civil_war_origin_country = { country_has_primary_culture = global_var:dan_culture }
+			civil_war_origin_country = { 
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_danish_cultures target = this } }
+			}
 		}
 		ig:ig_devout = {
 			set_interest_group_name = ig_church_of_denmark
@@ -2570,11 +2602,7 @@ converter_copy_ideologies_effect = {
 				religion = { has_discrimination_trait = proto_protestant }
 			}
 			civil_war_origin_country = {
-				any_primary_culture = { has_discrimination_trait = scandinavian_culture_group }
-				NOR = {
-					country_has_primary_culture = global_var:dan_culture
-					country_has_primary_culture = global_var:swe_culture
-				}
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_norwegian_cultures target = this } }
 			}
 		}
 		ig:ig_devout = {
@@ -2587,7 +2615,9 @@ converter_copy_ideologies_effect = {
 				country_has_state_religion = rel:protestant
 				religion = { has_discrimination_trait = proto_protestant }
 			}
-			civil_war_origin_country = { country_has_primary_culture = global_var:swe_culture }
+			civil_war_origin_country = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_swedish_cultures target = this } }
+			}
 		}
 		ig:ig_devout = {
 			set_interest_group_name = ig_church_of_sweden
@@ -3047,11 +3077,7 @@ converter_copy_ideologies_effect = {
 		limit = {
 			civil_war_origin_country = {
 				#country_has_primary_culture = cu:norwegian
-				any_primary_culture = { has_discrimination_trait = scandinavian_culture_group }
-				NOR = {
-					country_has_primary_culture = global_var:dan_culture
-					country_has_primary_culture = global_var:swe_culture
-				}
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_norwegian_cultures target = this } }
 				NOR = {		##Now you *do* have a powerful nobility
 					has_law = law_type:law_serfdom
 					has_law = law_type:law_hereditary_bureaucrats
@@ -3188,10 +3214,6 @@ converter_copy_ideologies_effect = {
 		}
 	}
 	## End Universal
-	trigger_event = {
-		id = zzz_cc_dynamic_characters.1
-		days = 1
-	}
 }
 
 converter_ig_traits_effect = {
@@ -3208,8 +3230,15 @@ converter_ig_traits_effect = {
 		}
 		else_if = {
 			limit = {
-				owner = { country_is_in_europe = yes }
-				global_var:fra_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+				owner = {
+					country_is_in_europe = yes
+					any_primary_culture = {
+						OR = {
+							is_target_in_global_variable_list = { name = global_french_cultures target = this }
+							is_target_in_global_variable_list = { name = global_occitan_cultures target = this }
+						}
+					}
+				}
 			}
 			set_ig_trait = ig_trait:ig_trait_materiel_waste
 			set_ig_trait = ig_trait:ig_trait_veteran_consultation
@@ -3475,11 +3504,13 @@ converter_ig_traits_effect = {
 		else_if = {
 			limit = {
 				owner = {
-					country_has_primary_culture = global_var:swe_culture
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_swedish_cultures target = this } }
 					capital = {
 						OR = {
 							region = sr:region_north_sea_coast
 							region = sr:region_baltic
+							region = sr:region_baltic_states
+							region = sr:region_finland
 						}
 					}
 				}
@@ -3498,8 +3529,13 @@ converter_ig_traits_effect = {
 							region = sr:region_occitania
 						}
 					}
+					any_primary_culture = {
+						OR = {
+							is_target_in_global_variable_list = { name = global_french_cultures target = this }
+							is_target_in_global_variable_list = { name = global_occitan_cultures target = this }
+						}
+					}
 				}
-				global_var:fra_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
 			}
 			set_ig_trait = ig_trait:ig_trait_tax_avoidance
 			set_ig_trait = ig_trait:ig_trait_engines_of_progress
@@ -3572,10 +3608,12 @@ converter_ig_traits_effect = {
 						has_law = law_type:law_peasant_levies
 						has_law = law_type:law_slave_trade
 					}
-				}
-				OR = {
-					global_var:rus_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
-					global_var:tur_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
+					any_primary_culture = {
+						OR = {
+							is_target_in_global_variable_list = { name = global_russian_cultures target = this }
+							is_target_in_global_variable_list = { name = global_turkish_cultures target = this }
+						}
+					}
 				}
 			}
 			set_ig_trait = ig_trait:ig_trait_crisis_of_identity
@@ -3592,8 +3630,13 @@ converter_ig_traits_effect = {
 							region = sr:region_occitania
 						}
 					}
+					any_primary_culture = {
+						OR = {
+							is_target_in_global_variable_list = { name = global_french_cultures target = this }
+							is_target_in_global_variable_list = { name = global_occitan_cultures target = this }
+						}
+					}
 				}
-				global_var:fra_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
 			}
 			set_ig_trait = ig_trait:ig_trait_social_criticism
 			set_ig_trait = ig_trait:ig_trait_avant_garde
@@ -3639,8 +3682,8 @@ converter_ig_traits_effect = {
 						has_law = law_type:law_tenant_farmers
 						has_law = law_type:law_peasant_levies
 					}
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_russian_cultures target = this } }
 				}
-				global_var:rus_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
 			}
 			set_ig_trait = ig_trait:ig_trait_profitable_estates
 			set_ig_trait = ig_trait:ig_trait_the_velvet_book
@@ -3674,8 +3717,8 @@ converter_ig_traits_effect = {
 						country_tier = hegemony
 					}
 					capital = { region = sr:region_south_germany }
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this } }
 				}
-				global_var:sou_ger_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
 			}
 			set_ig_trait = ig_trait:ig_trait_noble_privileges
 			set_ig_trait = ig_trait:ig_trait_family_ties
@@ -3713,7 +3756,9 @@ converter_ig_traits_effect = {
 		}
 		else_if = {
 			limit = {
-				global_var:singh_culture = { shares_heritage_trait_with_any_primary_culture = prev.owner }
+				owner = {
+					any_primary_culture = { has_discrimination_trait = south_asian_heritage }
+				}
 			}
 			set_interest_group_name = ig_zamindars
 			set_ig_trait = ig_trait:ig_trait_noble_privileges
@@ -3730,11 +3775,13 @@ converter_ig_traits_effect = {
 		if = {
 			limit = {
 				owner = {
-					country_has_primary_culture = global_var:swe_culture
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_swedish_cultures target = this } }
 					capital = {
 						OR = {
 							region = sr:region_north_sea_coast
 							region = sr:region_baltic
+							region = sr:region_baltic_states
+							region = sr:region_finland
 						}
 					}
 				}
@@ -3754,7 +3801,7 @@ converter_ig_traits_effect = {
 		else_if = {
 			limit = {
 				owner = {
-					country_has_primary_culture = global_var:urabi_culture
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_egyptian_cultures target = this } }
 					capital = { region = sr:region_nile_basin }
 				}
 			}
@@ -3772,8 +3819,13 @@ converter_ig_traits_effect = {
 							region = sr:region_occitania
 						}
 					}
+					any_primary_culture = {
+						OR = {
+							is_target_in_global_variable_list = { name = global_french_cultures target = this }
+							is_target_in_global_variable_list = { name = global_occitan_cultures target = this }
+						}
+					}
 				}
-				global_var:fra_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
 			}
 			set_ig_trait = ig_trait:ig_trait_xenophobia
 			set_ig_trait = ig_trait:ig_trait_haute_finance
@@ -3788,8 +3840,15 @@ converter_ig_traits_effect = {
 							region = sr:region_north_sea_coast
 						}
 					}
+					any_primary_culture = {
+						OR = {
+							is_target_in_global_variable_list = { name = global_irish_cultures target = this }
+							is_target_in_global_variable_list = { name = global_scottish_cultures target = this }
+							is_target_in_global_variable_list = { name = global_british_cultures target = this }
+							is_target_in_global_variable_list = { name = global_welsh_cultures target = this }
+						}
+					}
 				}
-				global_var:gbr_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
 			}
 			set_ig_trait = ig_trait:ig_trait_bah_humbug
 			set_ig_trait = ig_trait:ig_trait_civil_service
@@ -3841,8 +3900,8 @@ converter_ig_traits_effect = {
 						has_law = law_type:law_homesteading
 						has_law = law_type:law_collectivized_agriculture
 					}
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_russian_cultures target = this } }
 				}
-				global_var:rus_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
 			}
 			set_ig_trait = ig_trait:ig_trait_old_ways
 			set_ig_trait = ig_trait:ig_trait_honest_work
@@ -3851,7 +3910,7 @@ converter_ig_traits_effect = {
 		else_if = {
 			limit = {
 				owner = {
-					country_has_primary_culture = global_var:urabi_culture
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_egyptian_cultures target = this } }
 					capital = { region = sr:region_nile_basin }
 				}
 			}
@@ -3885,7 +3944,7 @@ converter_ig_traits_effect = {
 			limit = {
 				owner = {
 					any_primary_culture = {
-						shares_heritage_trait_with_any_primary_culture = global_var:singh_culture
+						has_discrimination_trait = south_asian_heritage
 						NOT = { has_discrimination_trait = himalayan }
 					}
 				}
@@ -3912,8 +3971,13 @@ converter_ig_traits_effect = {
 							region = sr:region_occitania
 						}
 					}
+					any_primary_culture = {
+						OR = {
+							is_target_in_global_variable_list = { name = global_french_cultures target = this }
+							is_target_in_global_variable_list = { name = global_occitan_cultures target = this }
+						}
+					}
 				}
-				global_var:fra_culture = { shares_heritage_and_other_trait_with_any_primary_culture = prev.owner }
 			}
 			set_ig_trait = ig_trait:ig_trait_work_to_rule
 			set_ig_trait = ig_trait:ig_trait_industrial_organizers
@@ -4043,5 +4107,323 @@ converter_make_dominion = {
 			}
 		}
 		change_subject_type = subject_type_dominion
+	}
+}
+
+converter_karl_marx_effect = {
+	random_list = {
+		95 = {
+			trigger = {
+				country_is_in_north_america = no
+				country_is_in_europe = no
+			}
+			if = {
+				limit = { is_matriarchal_country = yes }
+				create_character = {
+					is_agitator = yes
+					interest_group = ig_trade_unions
+					female = yes
+					ideology = ideology_communist
+					traits = {
+						direct
+						persistent
+					}
+					on_created = {
+						if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
+							}
+							add_character_role = politician
+							set_as_interest_group_leader = yes
+							remove_character_role = agitator
+						}
+						else_if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
+							}
+							exile_character_with_martyrdom = yes
+						}
+					}
+				}
+			}
+			else = {
+				create_character = {
+					is_agitator = yes
+					interest_group = ig_trade_unions
+					female = no
+					ideology = ideology_communist
+					traits = {
+						direct
+						persistent
+					}
+					on_created = {
+						if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
+							}
+							add_character_role = politician
+							set_as_interest_group_leader = yes
+							remove_character_role = agitator
+						}
+						else_if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
+							}
+							exile_character_with_martyrdom = yes
+						}
+					}
+				}
+			}
+		}
+		95 = {
+			trigger = {
+				OR = {
+					country_is_in_north_america = yes
+					country_is_in_europe = yes
+				}
+			}
+			if = {
+				limit = { is_matriarchal_country = yes }
+				create_character = {
+					template = fem_agitator_karl_marx
+					on_created = {
+						if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
+							}
+							add_character_role = politician
+							set_as_interest_group_leader = yes
+							remove_character_role = agitator
+						}
+						else_if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
+							}
+							exile_character_with_martyrdom = yes
+						}
+					}
+				}
+			}
+			else = {
+				create_character = {
+					template = agitator_karl_marx
+					on_created = {
+						if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
+							}
+							add_character_role = politician
+							set_as_interest_group_leader = yes
+							remove_character_role = agitator
+						}
+						else_if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
+							}
+							exile_character_with_martyrdom = yes
+						}
+					}
+				}
+			}
+		}
+		5 = {
+			modifier = {
+				if = {
+					limit = {
+						OR = {
+							ruler = {
+								has_ideology = ideology:ideology_feminist
+							}
+							ig:ig_trade_unions = {
+								leader = {
+									OR = {
+										has_ideology = ideology:ideology_feminist
+										is_female = yes
+									}
+								}
+							}
+						}
+					}
+					add = 10
+				}
+				if = {
+					limit = {
+						has_law = law_type:law_women_in_the_workplace
+					}
+					add = 5
+				}
+				if = {
+					limit = {
+						has_law = law_type:law_womens_suffrage
+					}
+					add = 5
+				}
+			}
+			if = { #Karla Marx
+				limit = { is_matriarchal_country = yes }
+				create_character = {
+					is_agitator = yes
+					interest_group = ig_trade_unions
+					female = no
+					ideology = ideology_communist
+					traits = {
+						direct
+						persistent
+					}
+					on_created = {
+						if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
+							}
+							add_character_role = politician
+							set_as_interest_group_leader = yes
+							remove_character_role = agitator
+						}
+						else_if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
+							}
+							exile_character_with_martyrdom = yes
+						}
+					}
+				}
+			}
+			else = {
+				create_character = {
+					is_agitator = yes
+					interest_group = ig_trade_unions
+					female = yes
+					ideology = ideology_communist
+					traits = {
+						direct
+						persistent
+					}
+					on_created = {
+						if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
+							}
+							add_character_role = politician
+							set_as_interest_group_leader = yes
+							remove_character_role = agitator
+						}
+						else_if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
+							}
+							exile_character_with_martyrdom = yes
+						}
+					}
+				}
+			}
+		}
+		5 = {
+			trigger = {
+				capital = { state_region = s:STATE_TEXAS }
+			}
+			if = {
+				limit = { is_matriarchal_country = yes }
+				create_character = {
+					template = fem_agitator_charlie_marx
+					on_created = {
+						random_list = {
+							50 = {
+								converter_colonial_template_effect = { TARGET = global_dixie_cultures }
+							}
+							50 = { }
+						}
+						if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
+							}
+							add_character_role = politician
+							set_as_interest_group_leader = yes
+							remove_character_role = agitator
+						}
+						else_if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
+							}
+							exile_character_with_martyrdom = yes
+						}
+					}
+				}
+			}
+			else = {
+				create_character = {
+					template = agitator_charlie_marx
+					on_created = {
+						random_list = {
+							50 = {
+								converter_colonial_template_effect = { TARGET = global_dixie_cultures }
+							}
+							50 = { }
+						}
+						if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
+							}
+							add_character_role = politician
+							set_as_interest_group_leader = yes
+							remove_character_role = agitator
+						}
+						else_if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
+							}
+							exile_character_with_martyrdom = yes
+						}
+					}
+				}
+			}
+		}
+		1 = {
+			trigger = {
+				capital = { state_region = s:STATE_TALINN }
+			}
+			if = {
+				limit = { is_matriarchal_country = yes }
+				create_character = {
+					template = fem_agitator_kras_masov
+					on_created = {
+						if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
+							}
+							add_character_role = politician
+							set_as_interest_group_leader = yes
+							remove_character_role = agitator
+						}
+						else_if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
+							}
+							exile_character_with_martyrdom = yes
+						}
+					}
+				}
+			}
+			else = {
+				create_character = {
+					template = agitator_kras_masov
+					on_created = {
+						if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
+							}
+							add_character_role = politician
+							set_as_interest_group_leader = yes
+							remove_character_role = agitator
+						}
+						else_if = {
+							limit = {
+								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
+							}
+							exile_character_with_martyrdom = yes
+						}
+					}
+				}
+			}
+		}
 	}
 }

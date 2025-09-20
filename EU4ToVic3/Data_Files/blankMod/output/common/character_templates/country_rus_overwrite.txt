@@ -8,9 +8,9 @@ rus_witte_character_template = {
 	first_name = Sergei
 	last_name = Witte
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = no
-	religion = orthodox
+	religion = rel:orthodox
 	ideology = ideology_reformer
 	interest_group = ig_industrialists
 	birth_date = 1849.6.29
@@ -18,7 +18,7 @@ rus_witte_character_template = {
 		experienced_political_operator
 		meticulous
 		innovative
-	}   
+	}
 	interest_group_leader_usage = {
 		country_trigger = {
 			should_have_male_characters = yes
@@ -33,19 +33,20 @@ rus_witte_character_template = {
 		interest_group_trigger = {
 			is_marginal = no
 			is_interest_group_type = ig_industrialists   
-            NOR = {
+			NOR = {
 				has_variable = communist_ig_var
 				has_variable = chose_vanguardism
 				has_variable = chose_fascism
 				has_variable = chose_conservatism
 				has_variable = chose_ethno_nationalism
 			}
-		}   
+		}
 		earliest_usage_date = 1879.1.1
 		latest_usage_date = 1915.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_witte
@@ -57,9 +58,9 @@ fem_rus_witte_character_template = {
 	first_name = Natalya
 	last_name = Witte
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = yes
-	religion = orthodox
+	religion = rel:orthodox
 	ideology = ideology_reformer
 	interest_group = ig_industrialists
 	birth_date = 1849.6.29
@@ -67,7 +68,7 @@ fem_rus_witte_character_template = {
 		experienced_political_operator
 		meticulous
 		innovative
-	}   
+	}
 	interest_group_leader_usage = {
 		country_trigger = {
 			should_have_female_characters = yes
@@ -82,19 +83,20 @@ fem_rus_witte_character_template = {
 		interest_group_trigger = {
 			is_marginal = no
 			is_interest_group_type = ig_industrialists   
-            NOR = {
+			NOR = {
 				has_variable = communist_ig_var
 				has_variable = chose_vanguardism
 				has_variable = chose_fascism
 				has_variable = chose_conservatism
 				has_variable = chose_ethno_nationalism
 			}
-		}   
+		}
 		earliest_usage_date = 1879.1.1
 		latest_usage_date = 1915.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_witte
@@ -103,22 +105,22 @@ fem_rus_witte_character_template = {
 }
 
 RUS_elena_pavlovna_romanova = {
-    first_name = Elena
-    last_name = Romanova
-    historical = yes
-    culture = global_var:sou_ger_culture
-    female = yes
-    dna = dna_elena_romanova
-    religion = orthodox
-    ideology = ideology_reformer
-    interest_group = ig_intelligentsia
-    birth_date = 1807.1.9
-    traits = {
-        erudite
-        ambitious
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Elena
+	last_name = Romanova
+	historical = yes
+	culture = cu:south_german
+	female = yes
+	dna = dna_elena_romanova
+	religion = rel:orthodox
+	ideology = ideology_reformer
+	interest_group = ig_intelligentsia
+	birth_date = 1807.1.9
+	traits = {
+		erudite
+		ambitious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -127,19 +129,20 @@ RUS_elena_pavlovna_romanova = {
 				}
 			}
 			uses_rus_characters = yes
-			ruler = { has_culture = global_var:sou_ger_culture }
-            has_law = law_type:law_monarchy
+			ruler.culture = { is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this } }
+			has_law = law_type:law_monarchy
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1845.1.1
-        latest_usage_date = 1865.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1845.1.1
+		latest_usage_date = 1865.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_elena_pavlovna_romanova
@@ -148,22 +151,22 @@ RUS_elena_pavlovna_romanova = {
 }
 
 masc_RUS_elena_pavlovna_romanova = {
-    first_name = Helios
-    last_name = Romanova
-    historical = yes
-    culture = global_var:sou_ger_culture
-    female = no
-    dna = dna_elena_romanova
-    religion = orthodox
-    ideology = ideology_reformer
-    interest_group = ig_intelligentsia
-    birth_date = 1807.1.9
-    traits = {
-        erudite
-        ambitious
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Helios
+	last_name = Romanova
+	historical = yes
+	culture = cu:south_german
+	female = no
+	dna = dna_elena_romanova
+	religion = rel:orthodox
+	ideology = ideology_reformer
+	interest_group = ig_intelligentsia
+	birth_date = 1807.1.9
+	traits = {
+		erudite
+		ambitious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -172,19 +175,20 @@ masc_RUS_elena_pavlovna_romanova = {
 				}
 			}
 			uses_rus_characters = yes
-			ruler = { has_culture = global_var:sou_ger_culture }
-            has_law = law_type:law_monarchy
+			ruler.culture = { is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this } }
+			has_law = law_type:law_monarchy
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1845.1.1
-        latest_usage_date = 1865.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1845.1.1
+		latest_usage_date = 1865.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_elena_pavlovna_romanova
@@ -193,23 +197,23 @@ masc_RUS_elena_pavlovna_romanova = {
 }
 
 RUS_konstantin_nikolayevich_romanov = {
-    first_name = Konstantin
-    last_name = Romanov
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    dna = dna_konstantin_romanov
-    ideology = ideology_market_liberal
-    interest_group = ig_landowners
-    birth_date = 1827.9.21
-    traits = {
-        wrathful
-        direct
-        experienced_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Konstantin
+	last_name = Romanov
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	dna = dna_konstantin_romanov
+	ideology = ideology_market_liberal
+	interest_group = ig_landowners
+	birth_date = 1827.9.21
+	traits = {
+		wrathful
+		direct
+		experienced_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -218,19 +222,20 @@ RUS_konstantin_nikolayevich_romanov = {
 				}
 			}
 			uses_rus_characters = yes
-			ruler = { has_culture = global_var:sou_ger_culture }
-            has_law = law_type:law_monarchy
+			ruler.culture = { is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this } }
+			has_law = law_type:law_monarchy
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_landowners 
-        }   
-        earliest_usage_date = 1853.1.1
-        latest_usage_date = 1870.1.1
-        chance = 100
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1853.1.1
+		latest_usage_date = 1870.1.1
+		chance = 100
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_konstantin_nikolayevich_romanov
@@ -239,23 +244,23 @@ RUS_konstantin_nikolayevich_romanov = {
 }
 
 fem_RUS_konstantin_nikolayevich_romanov = {
-    first_name = Konstantina
-    last_name = Romanov
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    dna = dna_konstantin_romanov
-    ideology = ideology_market_liberal
-    interest_group = ig_landowners
-    birth_date = 1827.9.21
-    traits = {
-        wrathful
-        direct
-        experienced_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Konstantina
+	last_name = Romanov
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	dna = dna_konstantin_romanov
+	ideology = ideology_market_liberal
+	interest_group = ig_landowners
+	birth_date = 1827.9.21
+	traits = {
+		wrathful
+		direct
+		experienced_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -264,19 +269,20 @@ fem_RUS_konstantin_nikolayevich_romanov = {
 				}
 			}
 			uses_rus_characters = yes
-			ruler = { has_culture = global_var:sou_ger_culture }
-            has_law = law_type:law_monarchy
+			ruler.culture = { is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this } }
+			has_law = law_type:law_monarchy
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_landowners 
-        }   
-        earliest_usage_date = 1853.1.1
-        latest_usage_date = 1870.1.1
-        chance = 100
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1853.1.1
+		latest_usage_date = 1870.1.1
+		chance = 100
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_konstantin_nikolayevich_romanov
@@ -285,22 +291,22 @@ fem_RUS_konstantin_nikolayevich_romanov = {
 }
 
 RUS_nikolai_alekseevich_milyutin = {
-    first_name = Nikolai
-    last_name = Milyutin
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_land_reformer
-    interest_group = ig_intelligentsia
-    birth_date = 1818.6.6
-    traits = {
-        persistent
-        ambitious
-        basic_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Nikolai
+	last_name = Milyutin
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_land_reformer
+	interest_group = ig_intelligentsia
+	birth_date = 1818.6.6
+	traits = {
+		persistent
+		ambitious
+		basic_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -310,16 +316,17 @@ RUS_nikolai_alekseevich_milyutin = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1855.1.1
-        latest_usage_date = 1870.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1855.1.1
+		latest_usage_date = 1870.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nikolai_alekseevich_milyutin
@@ -328,22 +335,22 @@ RUS_nikolai_alekseevich_milyutin = {
 }
 
 fem_RUS_nikolai_alekseevich_milyutin = {
-    first_name = Nikola
-    last_name = Milyutin
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_land_reformer
-    interest_group = ig_intelligentsia
-    birth_date = 1818.6.6
-    traits = {
-        persistent
-        ambitious
-        basic_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Nikola
+	last_name = Milyutin
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_land_reformer
+	interest_group = ig_intelligentsia
+	birth_date = 1818.6.6
+	traits = {
+		persistent
+		ambitious
+		basic_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -353,16 +360,17 @@ fem_RUS_nikolai_alekseevich_milyutin = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1855.1.1
-        latest_usage_date = 1870.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1855.1.1
+		latest_usage_date = 1870.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nikolai_alekseevich_milyutin
@@ -371,21 +379,21 @@ fem_RUS_nikolai_alekseevich_milyutin = {
 }
 
 RUS_egor_frantsevich_kankrin = {
-    first_name = Egor
-    last_name = Kankrin
-    historical = yes
-    culture = global_var:sou_ger_culture
-    female = no
-    religion = protestant
-    ideology = ideology_protectionist
-    interest_group = ig_landowners
-    birth_date = 1774.11.27
-    traits = {
-        master_bureaucrat
-        romantic
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Egor
+	last_name = Kankrin
+	historical = yes
+	culture = cu:south_german
+	female = no
+	religion = rel:protestant
+	ideology = ideology_protectionist
+	interest_group = ig_landowners
+	birth_date = 1774.11.27
+	traits = {
+		master_bureaucrat
+		romantic
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -395,16 +403,17 @@ RUS_egor_frantsevich_kankrin = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_landowners    
-        }   
-        earliest_usage_date = 1836.1.1
-        latest_usage_date = 1845.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1845.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_egor_frantsevich_kankrin
@@ -413,21 +422,21 @@ RUS_egor_frantsevich_kankrin = {
 }
 
 fem_RUS_egor_frantsevich_kankrin = {
-    first_name = Georgiana
-    last_name = Kankrin
-    historical = yes
-    culture = global_var:sou_ger_culture
-    female = yes
-    religion = protestant
-    ideology = ideology_protectionist
-    interest_group = ig_landowners
-    birth_date = 1774.11.27
-    traits = {
-        master_bureaucrat
-        romantic
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Georgiana
+	last_name = Kankrin
+	historical = yes
+	culture = cu:south_german
+	female = yes
+	religion = rel:protestant
+	ideology = ideology_protectionist
+	interest_group = ig_landowners
+	birth_date = 1774.11.27
+	traits = {
+		master_bureaucrat
+		romantic
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -437,16 +446,17 @@ fem_RUS_egor_frantsevich_kankrin = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_landowners    
-        }   
-        earliest_usage_date = 1836.1.1
-        latest_usage_date = 1845.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1845.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_egor_frantsevich_kankrin
@@ -455,21 +465,21 @@ fem_RUS_egor_frantsevich_kankrin = {
 }
 
 RUS_alexander_ageevich_abaza = {
-    first_name = Alexander
-    last_name = Abaza
-    historical = yes
-    culture = cu:romanian
-    female = no
-    religion = orthodox
-    ideology = ideology_protectionist
-    interest_group = ig_industrialists
-    birth_date = 1821.8.5
-    traits = {
-        expensive_tastes
-        innovative
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Alexander
+	last_name = Abaza
+	historical = yes
+	culture = cu:romanian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_protectionist
+	interest_group = ig_industrialists
+	birth_date = 1821.8.5
+	traits = {
+		expensive_tastes
+		innovative
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -479,18 +489,18 @@ RUS_alexander_ageevich_abaza = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-            NOT = {
-                has_law = law_type:law_ethnostate
-            }
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_industrialists
-        }   
-        earliest_usage_date = 1857.1.1
-        latest_usage_date = 1893.1.1
-        chance = 50
-    }
+			NOT = {
+				has_law = law_type:law_ethnostate
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_industrialists
+		}
+		earliest_usage_date = 1857.1.1
+		latest_usage_date = 1893.1.1
+		chance = 50
+	}
 	on_created = {
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
@@ -500,21 +510,21 @@ RUS_alexander_ageevich_abaza = {
 }
 
 fem_RUS_alexander_ageevich_abaza = {
-    first_name = Alexandra
-    last_name = Abaza
-    historical = yes
-    culture = cu:romanian
-    female = yes
-    religion = orthodox
-    ideology = ideology_protectionist
-    interest_group = ig_industrialists
-    birth_date = 1821.8.5
-    traits = {
-        expensive_tastes
-        innovative
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Alexandra
+	last_name = Abaza
+	historical = yes
+	culture = cu:romanian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_protectionist
+	interest_group = ig_industrialists
+	birth_date = 1821.8.5
+	traits = {
+		expensive_tastes
+		innovative
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -524,18 +534,18 @@ fem_RUS_alexander_ageevich_abaza = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-            NOT = {
-                has_law = law_type:law_ethnostate
-            }
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_industrialists
-        }   
-        earliest_usage_date = 1857.1.1
-        latest_usage_date = 1893.1.1
-        chance = 50
-    }
+			NOT = {
+				has_law = law_type:law_ethnostate
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_industrialists
+		}
+		earliest_usage_date = 1857.1.1
+		latest_usage_date = 1893.1.1
+		chance = 50
+	}
 	on_created = {
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
@@ -545,22 +555,22 @@ fem_RUS_alexander_ageevich_abaza = {
 }
 
 RUS_ivan_evseevich_popov-veniaminov = {
-    first_name = Ivan
-    last_name = Popov-Veniaminov
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_reformer
-    interest_group = ig_devout
-    birth_date = 1797.8.28
-    traits = {
-        explorer
-        basic_diplomat
-        pious
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Ivan
+	last_name = Popov-Veniaminov
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_reformer
+	interest_group = ig_devout
+	birth_date = 1797.8.28
+	traits = {
+		explorer
+		basic_diplomat
+		pious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -570,16 +580,17 @@ RUS_ivan_evseevich_popov-veniaminov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1865.1.1
-        latest_usage_date = 1880.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1865.1.1
+		latest_usage_date = 1880.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_ivan_evseevich_popov-veniaminov
@@ -588,22 +599,22 @@ RUS_ivan_evseevich_popov-veniaminov = {
 }
 
 fem_RUS_ivan_evseevich_popov-veniaminov = {
-    first_name = Zhanna
-    last_name = Popov-Veniaminov
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_reformer
-    interest_group = ig_devout
-    birth_date = 1797.8.28
-    traits = {
-        explorer
-        basic_diplomat
-        pious
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Zhanna
+	last_name = Popov-Veniaminov
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_reformer
+	interest_group = ig_devout
+	birth_date = 1797.8.28
+	traits = {
+		explorer
+		basic_diplomat
+		pious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -613,16 +624,17 @@ fem_RUS_ivan_evseevich_popov-veniaminov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1865.1.1
-        latest_usage_date = 1880.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1865.1.1
+		latest_usage_date = 1880.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_ivan_evseevich_popov-veniaminov
@@ -631,21 +643,21 @@ fem_RUS_ivan_evseevich_popov-veniaminov = {
 }
 
 RUS_nikolai_stepanovich_klementyevsky = {
-    first_name = Nikolai
-    last_name = Klementyevsky
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_moderate
-    interest_group = ig_devout
-    birth_date = 1787.11.26
-    traits = {
-        meticulous
-        reserved
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Nikolai
+	last_name = Klementyevsky
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_moderate
+	interest_group = ig_devout
+	birth_date = 1787.11.26
+	traits = {
+		meticulous
+		reserved
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -655,16 +667,17 @@ RUS_nikolai_stepanovich_klementyevsky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1844.1.1
-        latest_usage_date = 1856.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1844.1.1
+		latest_usage_date = 1856.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nikolai_stepanovich_klementyevsky
@@ -673,21 +686,21 @@ RUS_nikolai_stepanovich_klementyevsky = {
 }
 
 fem_RUS_nikolai_stepanovich_klementyevsky = {
-    first_name = Nikola
-    last_name = Klementyevsky
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_moderate
-    interest_group = ig_devout
-    birth_date = 1787.11.26
-    traits = {
-        meticulous
-        reserved
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Nikola
+	last_name = Klementyevsky
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_moderate
+	interest_group = ig_devout
+	birth_date = 1787.11.26
+	traits = {
+		meticulous
+		reserved
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -697,16 +710,17 @@ fem_RUS_nikolai_stepanovich_klementyevsky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1844.1.1
-        latest_usage_date = 1856.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1844.1.1
+		latest_usage_date = 1856.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nikolai_stepanovich_klementyevsky
@@ -715,21 +729,21 @@ fem_RUS_nikolai_stepanovich_klementyevsky = {
 }
 
 RUS_yakov_sergeevich_nikolsky = {
-    first_name = Yakov 
-    last_name = Nikolsky
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_traditionalist
-    interest_group = ig_devout
-    birth_date = 1799.10.12
-    traits = {
-        meticulous
-        pious
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Yakov
+	last_name = Nikolsky
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_traditionalist
+	interest_group = ig_devout
+	birth_date = 1799.10.12
+	traits = {
+		meticulous
+		pious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -739,16 +753,17 @@ RUS_yakov_sergeevich_nikolsky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1856.1.1
-        latest_usage_date = 1892.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1856.1.1
+		latest_usage_date = 1892.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_yakov_sergeevich_nikolsky
@@ -757,21 +772,21 @@ RUS_yakov_sergeevich_nikolsky = {
 }
 
 fem_RUS_yakov_sergeevich_nikolsky = {
-    first_name = Zaklina
-    last_name = Nikolsky
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_traditionalist
-    interest_group = ig_devout
-    birth_date = 1799.10.12
-    traits = {
-        meticulous
-        pious
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Zaklina
+	last_name = Nikolsky
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_traditionalist
+	interest_group = ig_devout
+	birth_date = 1799.10.12
+	traits = {
+		meticulous
+		pious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -781,16 +796,17 @@ fem_RUS_yakov_sergeevich_nikolsky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1856.1.1
-        latest_usage_date = 1892.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1856.1.1
+		latest_usage_date = 1892.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_yakov_sergeevich_nikolsky
@@ -799,21 +815,21 @@ fem_RUS_yakov_sergeevich_nikolsky = {
 }
 
 RUS_pavel_ivanovich_raev = {
-    first_name = Pavel 
-    last_name = Raev
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_moderate
-    interest_group = ig_devout
-    birth_date = 1827.6.2
-    traits = {
-        erudite
-        pious
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Pavel
+	last_name = Raev
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_moderate
+	interest_group = ig_devout
+	birth_date = 1827.6.2
+	traits = {
+		erudite
+		pious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -823,16 +839,17 @@ RUS_pavel_ivanovich_raev = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1880.1.1
-        latest_usage_date = 1900.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1880.1.1
+		latest_usage_date = 1900.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_pavel_ivanovich_raev
@@ -841,21 +858,21 @@ RUS_pavel_ivanovich_raev = {
 }
 
 fem_RUS_pavel_ivanovich_raev = {
-    first_name = Pavla
-    last_name = Raev
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_moderate
-    interest_group = ig_devout
-    birth_date = 1827.6.2
-    traits = {
-        erudite
-        pious
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Pavla
+	last_name = Raev
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_moderate
+	interest_group = ig_devout
+	birth_date = 1827.6.2
+	traits = {
+		erudite
+		pious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -865,16 +882,17 @@ fem_RUS_pavel_ivanovich_raev = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1880.1.1
-        latest_usage_date = 1900.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1880.1.1
+		latest_usage_date = 1900.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_pavel_ivanovich_raev
@@ -883,21 +901,21 @@ fem_RUS_pavel_ivanovich_raev = {
 }
 
 RUS_alexander_vasilyevich_vadkovsky = {
-    first_name = Alexander
-    last_name = Vadkovsky
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_reformer
-    interest_group = ig_devout
-    birth_date = 1846.8.15
-    traits = {
-        romantic
-        pious
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Alexander
+	last_name = Vadkovsky
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_reformer
+	interest_group = ig_devout
+	birth_date = 1846.8.15
+	traits = {
+		romantic
+		pious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -907,16 +925,17 @@ RUS_alexander_vasilyevich_vadkovsky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1898.1.1
-        latest_usage_date = 1912.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1898.1.1
+		latest_usage_date = 1912.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexander_vasilyevich_vadkovsky
@@ -925,21 +944,21 @@ RUS_alexander_vasilyevich_vadkovsky = {
 }
 
 fem_RUS_alexander_vasilyevich_vadkovsky = {
-    first_name = Alexandra
-    last_name = Vadkovsky
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_reformer
-    interest_group = ig_devout
-    birth_date = 1846.8.15
-    traits = {
-        romantic
-        pious
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Alexandra
+	last_name = Vadkovsky
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_reformer
+	interest_group = ig_devout
+	birth_date = 1846.8.15
+	traits = {
+		romantic
+		pious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -949,16 +968,17 @@ fem_RUS_alexander_vasilyevich_vadkovsky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1898.1.1
-        latest_usage_date = 1912.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1898.1.1
+		latest_usage_date = 1912.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexander_vasilyevich_vadkovsky
@@ -967,21 +987,21 @@ fem_RUS_alexander_vasilyevich_vadkovsky = {
 }
 
 RUS_vasily_nikiforovich_bogoyavlensky = {
-    first_name = Vasily
-    last_name = Bogoyavlensky
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_moderate
-    interest_group = ig_devout
-    birth_date = 1848.1.13
-    traits = {
-        pious
-        imperious
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Vasily
+	last_name = Bogoyavlensky
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_moderate
+	interest_group = ig_devout
+	birth_date = 1848.1.13
+	traits = {
+		pious
+		imperious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -991,16 +1011,17 @@ RUS_vasily_nikiforovich_bogoyavlensky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1905.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1905.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_vasily_nikiforovich_bogoyavlensky
@@ -1009,21 +1030,21 @@ RUS_vasily_nikiforovich_bogoyavlensky = {
 }
 
 fem_RUS_vasily_nikiforovich_bogoyavlensky = {
-    first_name = Vasilisa
-    last_name = Bogoyavlensky
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_moderate
-    interest_group = ig_devout
-    birth_date = 1848.1.13
-    traits = {
-        pious
-        imperious
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Vasilisa
+	last_name = Bogoyavlensky
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_moderate
+	interest_group = ig_devout
+	birth_date = 1848.1.13
+	traits = {
+		pious
+		imperious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1033,16 +1054,17 @@ fem_RUS_vasily_nikiforovich_bogoyavlensky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1905.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1905.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_vasily_nikiforovich_bogoyavlensky
@@ -1051,21 +1073,21 @@ fem_RUS_vasily_nikiforovich_bogoyavlensky = {
 }
 
 RUS_vasily_ivanovich_bellavin = {
-    first_name = Vasily
-    last_name = Bellavin
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_reformer
-    interest_group = ig_devout
-    birth_date = 1865.1.1
-    traits = {
-        charismatic
-        basic_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Vasily
+	last_name = Bellavin
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_reformer
+	interest_group = ig_devout
+	birth_date = 1865.1.1
+	traits = {
+		charismatic
+		basic_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1075,16 +1097,17 @@ RUS_vasily_ivanovich_bellavin = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1915.1.1
-        latest_usage_date = 1925.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1915.1.1
+		latest_usage_date = 1925.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_vasily_ivanovich_bellavin
@@ -1093,21 +1116,21 @@ RUS_vasily_ivanovich_bellavin = {
 }
 
 fem_RUS_vasily_ivanovich_bellavin = {
-    first_name = Vasilisa
-    last_name = Bellavin
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_reformer
-    interest_group = ig_devout
-    birth_date = 1865.1.1
-    traits = {
-        charismatic
-        basic_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Vasilisa
+	last_name = Bellavin
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_reformer
+	interest_group = ig_devout
+	birth_date = 1865.1.1
+	traits = {
+		charismatic
+		basic_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1117,16 +1140,17 @@ fem_RUS_vasily_ivanovich_bellavin = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1915.1.1
-        latest_usage_date = 1925.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1915.1.1
+		latest_usage_date = 1925.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_vasily_ivanovich_bellavin
@@ -1135,22 +1159,22 @@ fem_RUS_vasily_ivanovich_bellavin = {
 }
 
 RUS_alexey_pavlovich_khrapovitsky = {
-    first_name = Alexey
-    last_name = Khrapovitsky
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_traditionalist
-    interest_group = ig_devout
-    birth_date = 1863.3.29
-    traits = {
-        experienced_political_operator
-        bigoted
-        pious
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Alexey
+	last_name = Khrapovitsky
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_traditionalist
+	interest_group = ig_devout
+	birth_date = 1863.3.29
+	traits = {
+		experienced_political_operator
+		bigoted
+		pious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1160,16 +1184,17 @@ RUS_alexey_pavlovich_khrapovitsky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1920.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1920.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexey_pavlovich_khrapovitsky
@@ -1178,22 +1203,22 @@ RUS_alexey_pavlovich_khrapovitsky = {
 }
 
 fem_RUS_alexey_pavlovich_khrapovitsky = {
-    first_name = Alyosha
-    last_name = Khrapovitsky
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_traditionalist
-    interest_group = ig_devout
-    birth_date = 1863.3.29
-    traits = {
-        experienced_political_operator
-        bigoted
-        pious
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Alyosha
+	last_name = Khrapovitsky
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_traditionalist
+	interest_group = ig_devout
+	birth_date = 1863.3.29
+	traits = {
+		experienced_political_operator
+		bigoted
+		pious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1203,16 +1228,17 @@ fem_RUS_alexey_pavlovich_khrapovitsky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1920.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1920.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexey_pavlovich_khrapovitsky
@@ -1221,21 +1247,21 @@ fem_RUS_alexey_pavlovich_khrapovitsky = {
 }
 
 RUS_peter_fedorovich_polyansky = {
-    first_name = Peter
-    last_name = Polyansky
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_moderate
-    interest_group = ig_devout
-    birth_date = 1862.7.10
-    traits = {
-        pious
-        brave
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Peter
+	last_name = Polyansky
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_moderate
+	interest_group = ig_devout
+	birth_date = 1862.7.10
+	traits = {
+		pious
+		brave
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1245,16 +1271,17 @@ RUS_peter_fedorovich_polyansky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1923.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1923.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_peter_fedorovich_polyansky
@@ -1263,21 +1290,21 @@ RUS_peter_fedorovich_polyansky = {
 }
 
 fem_RUS_peter_fedorovich_polyansky = {
-    first_name = Petya
-    last_name = Polyansky
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_moderate
-    interest_group = ig_devout
-    birth_date = 1862.7.10
-    traits = {
-        pious
-        brave
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Petya
+	last_name = Polyansky
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_moderate
+	interest_group = ig_devout
+	birth_date = 1862.7.10
+	traits = {
+		pious
+		brave
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1287,16 +1314,17 @@ fem_RUS_peter_fedorovich_polyansky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1923.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1923.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_peter_fedorovich_polyansky
@@ -1305,21 +1333,21 @@ fem_RUS_peter_fedorovich_polyansky = {
 }
 
 RUS_nikolai_christianovich_bunge = {
-    first_name = Nikolai
-    last_name = Bunge 
-    historical = yes
-    culture = global_var:sou_ger_culture
-    female = no
-    religion = protestant
-    ideology = ideology_reformer
-    interest_group = ig_industrialists
-    birth_date = 1823.11.23
-    traits = {
-        experienced_political_operator
-        meticulous
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Nikolai
+	last_name = Bunge
+	historical = yes
+	culture = cu:south_german
+	female = no
+	religion = rel:protestant
+	ideology = ideology_reformer
+	interest_group = ig_industrialists
+	birth_date = 1823.11.23
+	traits = {
+		experienced_political_operator
+		meticulous
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1329,16 +1357,17 @@ RUS_nikolai_christianovich_bunge = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_industrialists
-        }   
-        earliest_usage_date = 1870.1.1
-        latest_usage_date = 1890.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_industrialists
+		}
+		earliest_usage_date = 1870.1.1
+		latest_usage_date = 1890.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nikolai_christianovich_bunge
@@ -1347,21 +1376,21 @@ RUS_nikolai_christianovich_bunge = {
 }
 
 fem_RUS_nikolai_christianovich_bunge = {
-    first_name = Nikola
-    last_name = Bunge 
-    historical = yes
-    culture = global_var:sou_ger_culture
-    female = yes
-    religion = protestant
-    ideology = ideology_reformer
-    interest_group = ig_industrialists
-    birth_date = 1823.11.23
-    traits = {
-        experienced_political_operator
-        meticulous
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Nikola
+	last_name = Bunge
+	historical = yes
+	culture = cu:south_german
+	female = yes
+	religion = rel:protestant
+	ideology = ideology_reformer
+	interest_group = ig_industrialists
+	birth_date = 1823.11.23
+	traits = {
+		experienced_political_operator
+		meticulous
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1371,16 +1400,17 @@ fem_RUS_nikolai_christianovich_bunge = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_industrialists
-        }   
-        earliest_usage_date = 1870.1.1
-        latest_usage_date = 1890.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_industrialists
+		}
+		earliest_usage_date = 1870.1.1
+		latest_usage_date = 1890.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nikolai_christianovich_bunge
@@ -1389,22 +1419,22 @@ fem_RUS_nikolai_christianovich_bunge = {
 }
 
 RUS_konstantin_petrovich_pobedonostsev = {
-    first_name = Konstantin
-    last_name = Pobedonostsev
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_authoritarian
-    interest_group = ig_landowners
-    birth_date = 1827.11.30
-    traits = {
-        bigoted
-        pious
-        direct
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Konstantin
+	last_name = Pobedonostsev
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_authoritarian
+	interest_group = ig_landowners
+	birth_date = 1827.11.30
+	traits = {
+		bigoted
+		pious
+		direct
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1414,16 +1444,17 @@ RUS_konstantin_petrovich_pobedonostsev = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1880.1.1
-        latest_usage_date = 1905.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1880.1.1
+		latest_usage_date = 1905.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_konstantin_petrovich_pobedonostsev
@@ -1432,22 +1463,22 @@ RUS_konstantin_petrovich_pobedonostsev = {
 }
 
 fem_RUS_konstantin_petrovich_pobedonostsev = {
-    first_name = Konstantina
-    last_name = Pobedonostsev
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_authoritarian
-    interest_group = ig_landowners
-    birth_date = 1827.11.30
-    traits = {
-        bigoted
-        pious
-        direct
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Konstantina
+	last_name = Pobedonostsev
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_authoritarian
+	interest_group = ig_landowners
+	birth_date = 1827.11.30
+	traits = {
+		bigoted
+		pious
+		direct
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1457,16 +1488,17 @@ fem_RUS_konstantin_petrovich_pobedonostsev = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1880.1.1
-        latest_usage_date = 1905.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1880.1.1
+		latest_usage_date = 1905.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_konstantin_petrovich_pobedonostsev
@@ -1475,21 +1507,21 @@ fem_RUS_konstantin_petrovich_pobedonostsev = {
 }
 
 RUS_pavel_nikolaevich_ignatiev = {
-    first_name = Pavel
-    last_name = Ignatiev
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_moderate
-    interest_group = ig_intelligentsia
-    birth_date = 1870.7.12
-    traits = {
-        erudite
-        basic_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Pavel
+	last_name = Ignatiev
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_moderate
+	interest_group = ig_intelligentsia
+	birth_date = 1870.7.12
+	traits = {
+		erudite
+		basic_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1499,16 +1531,17 @@ RUS_pavel_nikolaevich_ignatiev = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_pavel_nikolaevich_ignatiev
@@ -1517,21 +1550,21 @@ RUS_pavel_nikolaevich_ignatiev = {
 }
 
 fem_RUS_pavel_nikolaevich_ignatiev = {
-    first_name = Pavla
-    last_name = Ignatiev
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_moderate
-    interest_group = ig_intelligentsia
-    birth_date = 1870.7.12
-    traits = {
-        erudite
-        basic_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Pavla
+	last_name = Ignatiev
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_moderate
+	interest_group = ig_intelligentsia
+	birth_date = 1870.7.12
+	traits = {
+		erudite
+		basic_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1541,16 +1574,17 @@ fem_RUS_pavel_nikolaevich_ignatiev = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_pavel_nikolaevich_ignatiev
@@ -1559,21 +1593,21 @@ fem_RUS_pavel_nikolaevich_ignatiev = {
 }
 
 RUS_nikolai_dmitrievich_golitsyn = {
-    first_name = Nikolai
-    last_name = Golitsyn
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_liberal_leader
-    interest_group = ig_landowners
-    birth_date = 1850.4.12
-    traits = {
-        meticulous
-        experienced_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Nikolai
+	last_name = Golitsyn
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_liberal_leader
+	interest_group = ig_landowners
+	birth_date = 1850.4.12
+	traits = {
+		meticulous
+		experienced_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1583,16 +1617,17 @@ RUS_nikolai_dmitrievich_golitsyn = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1910.1.1
-        latest_usage_date = 1925.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1925.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nikolai_dmitrievich_golitsyn
@@ -1601,21 +1636,21 @@ RUS_nikolai_dmitrievich_golitsyn = {
 }
 
 fem_RUS_nikolai_dmitrievich_golitsyn = {
-    first_name = Nikola
-    last_name = Golitsyn
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_liberal_leader
-    interest_group = ig_landowners
-    birth_date = 1850.4.12
-    traits = {
-        meticulous
-        experienced_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Nikola
+	last_name = Golitsyn
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_liberal_leader
+	interest_group = ig_landowners
+	birth_date = 1850.4.12
+	traits = {
+		meticulous
+		experienced_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1625,16 +1660,17 @@ fem_RUS_nikolai_dmitrievich_golitsyn = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1910.1.1
-        latest_usage_date = 1925.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1925.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nikolai_dmitrievich_golitsyn
@@ -1643,23 +1679,23 @@ fem_RUS_nikolai_dmitrievich_golitsyn = {
 }
 
 RUS_pyotr_arkadyevich_stolypin = {
-    first_name = Pyotr
-    last_name = Stolypin
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    dna = dna_stolypin
-    ideology = ideology_market_liberal
-    interest_group = ig_landowners
-    birth_date = 1862.4.14
-    traits = {
-        master_bureaucrat
-        expert_political_operator
-        romantic
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Pyotr
+	last_name = Stolypin
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	dna = dna_stolypin
+	ideology = ideology_market_liberal
+	interest_group = ig_landowners
+	birth_date = 1862.4.14
+	traits = {
+		master_bureaucrat
+		expert_political_operator
+		romantic
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1669,16 +1705,17 @@ RUS_pyotr_arkadyevich_stolypin = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1926.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1926.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_pyotr_arkadyevich_stolypin
@@ -1687,23 +1724,23 @@ RUS_pyotr_arkadyevich_stolypin = {
 }
 
 fem_RUS_pyotr_arkadyevich_stolypin = {
-    first_name = Petya
-    last_name = Stolypin
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    dna = dna_stolypin
-    ideology = ideology_market_liberal
-    interest_group = ig_landowners
-    birth_date = 1862.4.14
-    traits = {
-        master_bureaucrat
-        expert_political_operator
-        romantic
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Petya
+	last_name = Stolypin
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	dna = dna_stolypin
+	ideology = ideology_market_liberal
+	interest_group = ig_landowners
+	birth_date = 1862.4.14
+	traits = {
+		master_bureaucrat
+		expert_political_operator
+		romantic
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1713,16 +1750,17 @@ fem_RUS_pyotr_arkadyevich_stolypin = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1926.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1926.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_pyotr_arkadyevich_stolypin
@@ -1731,22 +1769,22 @@ fem_RUS_pyotr_arkadyevich_stolypin = {
 }
 
 RUS_viktor_mikhailovich_chernov = {
-    first_name = Viktor
-    last_name = Chernov
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_radical
-    interest_group = ig_rural_folk
-    dna = dna_chernov
-    birth_date = 1873.12.7
-    traits = {
-        charismatic
-        persistent
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Viktor
+	last_name = Chernov
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_radical
+	interest_group = ig_rural_folk
+	dna = dna_chernov
+	birth_date = 1873.12.7
+	traits = {
+		charismatic
+		persistent
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1756,16 +1794,17 @@ RUS_viktor_mikhailovich_chernov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_rural_folk
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_viktor_mikhailovich_chernov
@@ -1774,22 +1813,22 @@ RUS_viktor_mikhailovich_chernov = {
 }
 
 fem_RUS_viktor_mikhailovich_chernov = {
-    first_name = Viktoriya
-    last_name = Chernov
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_radical
-    interest_group = ig_rural_folk
-    dna = dna_chernov
-    birth_date = 1873.12.7
-    traits = {
-        charismatic
-        persistent
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Viktoriya
+	last_name = Chernov
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_radical
+	interest_group = ig_rural_folk
+	dna = dna_chernov
+	birth_date = 1873.12.7
+	traits = {
+		charismatic
+		persistent
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1799,16 +1838,17 @@ fem_RUS_viktor_mikhailovich_chernov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_rural_folk
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_viktor_mikhailovich_chernov
@@ -1817,22 +1857,22 @@ fem_RUS_viktor_mikhailovich_chernov = {
 }
 
 RUS_nikolai_konstantinovich_rerikh = {
-    first_name = Nikolai
-    last_name = Rerikh
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = gelugpa
-    ideology = ideology_moderate
-    interest_group = ig_intelligentsia
-    birth_date = 1874.10.9
-    traits = {
-        explorer
-        basic_diplomat
-        erudite
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Nikolai
+	last_name = Rerikh
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = gelugpa
+	ideology = ideology_moderate
+	interest_group = ig_intelligentsia
+	birth_date = 1874.10.9
+	traits = {
+		explorer
+		basic_diplomat
+		erudite
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1842,21 +1882,22 @@ RUS_nikolai_konstantinovich_rerikh = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-            NOR = {
-                has_law = law_type:law_state_religion
-                has_law = law_type:law_state_atheism
-            }
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1906.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }
-    on_created = {
-        change_character_religion = rel:gelugpa # Only way to keep him from converting to the state religion
+			NOR = {
+				has_law = law_type:law_state_religion
+				has_law = law_type:law_state_atheism
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1906.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
+		change_character_religion = rel:gelugpa # Only way to keep him from converting to the state religion
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nikolai_konstantinovich_rerikh
@@ -1865,22 +1906,22 @@ RUS_nikolai_konstantinovich_rerikh = {
 }
 
 fem_RUS_nikolai_konstantinovich_rerikh = {
-    first_name = Nikola
-    last_name = Rerikh
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = gelugpa
-    ideology = ideology_moderate
-    interest_group = ig_intelligentsia
-    birth_date = 1874.10.9
-    traits = {
-        explorer
-        basic_diplomat
-        erudite
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Nikola
+	last_name = Rerikh
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = gelugpa
+	ideology = ideology_moderate
+	interest_group = ig_intelligentsia
+	birth_date = 1874.10.9
+	traits = {
+		explorer
+		basic_diplomat
+		erudite
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1890,21 +1931,22 @@ fem_RUS_nikolai_konstantinovich_rerikh = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-            NOR = {
-                has_law = law_type:law_state_religion
-                has_law = law_type:law_state_atheism
-            }
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1906.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }
-    on_created = {
-        change_character_religion = rel:gelugpa # Only way to keep him from converting to the state religion
+			NOR = {
+				has_law = law_type:law_state_religion
+				has_law = law_type:law_state_atheism
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1906.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
+		change_character_religion = rel:gelugpa # Only way to keep him from converting to the state religion
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nikolai_konstantinovich_rerikh
@@ -1913,23 +1955,23 @@ fem_RUS_nikolai_konstantinovich_rerikh = {
 }
 
 RUS_alexander_fyodorovich_kerensky = {
-    first_name = Alexander
-    last_name = Kerensky
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_social_democrat
-    dna = dna_kerensky
-    interest_group = ig_petty_bourgeoisie
-    birth_date = 1881.5.4
-    traits = {
-        arrogant
-        inspirational_orator
-        experienced_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Alexander
+	last_name = Kerensky
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_social_democrat
+	dna = dna_kerensky
+	interest_group = ig_petty_bourgeoisie
+	birth_date = 1881.5.4
+	traits = {
+		arrogant
+		inspirational_orator
+		experienced_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1939,17 +1981,18 @@ RUS_alexander_fyodorovich_kerensky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-            has_technology_researched = dialectics
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1912.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }
+			has_technology_researched = dialectics
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+		earliest_usage_date = 1912.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexander_fyodorovich_kerensky
@@ -1958,23 +2001,23 @@ RUS_alexander_fyodorovich_kerensky = {
 }
 
 fem_RUS_alexander_fyodorovich_kerensky = {
-    first_name = Alexandra
-    last_name = Kerensky
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_social_democrat
-    dna = dna_kerensky
-    interest_group = ig_petty_bourgeoisie
-    birth_date = 1881.5.4
-    traits = {
-        arrogant
-        inspirational_orator
-        experienced_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Alexandra
+	last_name = Kerensky
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_social_democrat
+	dna = dna_kerensky
+	interest_group = ig_petty_bourgeoisie
+	birth_date = 1881.5.4
+	traits = {
+		arrogant
+		inspirational_orator
+		experienced_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1984,17 +2027,18 @@ fem_RUS_alexander_fyodorovich_kerensky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-            has_technology_researched = dialectics
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1912.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }
+			has_technology_researched = dialectics
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+		earliest_usage_date = 1912.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexander_fyodorovich_kerensky
@@ -2003,21 +2047,21 @@ fem_RUS_alexander_fyodorovich_kerensky = {
 }
 
 RUS_pavel_nikolaevich_milyukov = {
-    first_name = Pavel
-    last_name = Milyukov
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_reformer
-    interest_group = ig_intelligentsia
-    birth_date = 1859.1.15
-    traits = {
-        experienced_diplomat
-        persistent
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Pavel
+	last_name = Milyukov
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_reformer
+	interest_group = ig_intelligentsia
+	birth_date = 1859.1.15
+	traits = {
+		experienced_diplomat
+		persistent
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -2027,16 +2071,17 @@ RUS_pavel_nikolaevich_milyukov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1930.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1930.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_pavel_nikolaevich_milyukov
@@ -2045,21 +2090,21 @@ RUS_pavel_nikolaevich_milyukov = {
 }
 
 fem_RUS_pavel_nikolaevich_milyukov = {
-    first_name = Pavla
-    last_name = Milyukov
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_reformer
-    interest_group = ig_intelligentsia
-    birth_date = 1859.1.15
-    traits = {
-        experienced_diplomat
-        persistent
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Pavla
+	last_name = Milyukov
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_reformer
+	interest_group = ig_intelligentsia
+	birth_date = 1859.1.15
+	traits = {
+		experienced_diplomat
+		persistent
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -2069,16 +2114,17 @@ fem_RUS_pavel_nikolaevich_milyukov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1930.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1930.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_pavel_nikolaevich_milyukov
@@ -2087,21 +2133,21 @@ fem_RUS_pavel_nikolaevich_milyukov = {
 }
 
 RUS_alexander_ivanovich_guchkov = {
-    first_name = Alexander
-    last_name = Guchkov
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_liberal_leader
-    interest_group = ig_petty_bourgeoisie
-    birth_date = 1862.10.26
-    traits = {
-        reckless
-        experienced_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Alexander
+	last_name = Guchkov
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_liberal_leader
+	interest_group = ig_petty_bourgeoisie
+	birth_date = 1862.10.26
+	traits = {
+		reckless
+		experienced_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -2111,16 +2157,17 @@ RUS_alexander_ivanovich_guchkov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1905.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+		earliest_usage_date = 1905.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexander_ivanovich_guchkov
@@ -2129,21 +2176,21 @@ RUS_alexander_ivanovich_guchkov = {
 }
 
 fem_RUS_alexander_ivanovich_guchkov = {
-    first_name = Alexandra
-    last_name = Guchkov
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_liberal_leader
-    interest_group = ig_petty_bourgeoisie
-    birth_date = 1862.10.26
-    traits = {
-        reckless
-        experienced_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Alexandra
+	last_name = Guchkov
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_liberal_leader
+	interest_group = ig_petty_bourgeoisie
+	birth_date = 1862.10.26
+	traits = {
+		reckless
+		experienced_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -2153,16 +2200,17 @@ fem_RUS_alexander_ivanovich_guchkov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1905.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+		earliest_usage_date = 1905.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexander_ivanovich_guchkov
@@ -2171,21 +2219,21 @@ fem_RUS_alexander_ivanovich_guchkov = {
 }
 
 RUS_alexander_ivanovich_konovalov = {
-    first_name = Alexander
-    last_name = Konovalov
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_corporatist_leader
-    interest_group = ig_industrialists
-    birth_date = 1875.9.29
-    traits = {
-        basic_political_operator
-        innovative
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Alexander
+	last_name = Konovalov
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_corporatist_leader
+	interest_group = ig_industrialists
+	birth_date = 1875.9.29
+	traits = {
+		basic_political_operator
+		innovative
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -2195,17 +2243,18 @@ RUS_alexander_ivanovich_konovalov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-            has_technology_researched = corporatism
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_industrialists
-        }   
-        earliest_usage_date = 1905.1.1
-        latest_usage_date = 1930.1.1
-        chance = 50
-    }
+			has_technology_researched = corporatism
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_industrialists
+		}
+		earliest_usage_date = 1905.1.1
+		latest_usage_date = 1930.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexander_ivanovich_konovalov
@@ -2214,21 +2263,21 @@ RUS_alexander_ivanovich_konovalov = {
 }
 
 fem_RUS_alexander_ivanovich_konovalov = {
-    first_name = Alexandra
-    last_name = Konovalov
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_corporatist_leader
-    interest_group = ig_industrialists
-    birth_date = 1875.9.29
-    traits = {
-        basic_political_operator
-        innovative
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Alexandra
+	last_name = Konovalov
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_corporatist_leader
+	interest_group = ig_industrialists
+	birth_date = 1875.9.29
+	traits = {
+		basic_political_operator
+		innovative
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -2238,17 +2287,18 @@ fem_RUS_alexander_ivanovich_konovalov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-            has_technology_researched = corporatism
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_industrialists
-        }   
-        earliest_usage_date = 1905.1.1
-        latest_usage_date = 1930.1.1
-        chance = 50
-    }
+			has_technology_researched = corporatism
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_industrialists
+		}
+		earliest_usage_date = 1905.1.1
+		latest_usage_date = 1930.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexander_ivanovich_konovalov
@@ -2257,20 +2307,20 @@ fem_RUS_alexander_ivanovich_konovalov = {
 }
 
 RUS_ivan_zakharovich_surikov = {
-    first_name = Ivan
-    last_name = Surikov
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    ideology = ideology_moderate
-    interest_group = ig_rural_folk
-    birth_date = 1841.4.6
-    traits = {
-        literary
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Ivan
+	last_name = Surikov
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	ideology = ideology_moderate
+	interest_group = ig_rural_folk
+	birth_date = 1841.4.6
+	traits = {
+		literary
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -2280,16 +2330,17 @@ RUS_ivan_zakharovich_surikov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_rural_folk
-        }   
-        earliest_usage_date = 1865.1.1
-        latest_usage_date = 1890.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1865.1.1
+		latest_usage_date = 1890.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_ivan_zakharovich_surikov
@@ -2298,20 +2349,20 @@ RUS_ivan_zakharovich_surikov = {
 }
 
 fem_RUS_ivan_zakharovich_surikov = {
-    first_name = Zhanna
-    last_name = Surikov
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    ideology = ideology_moderate
-    interest_group = ig_rural_folk
-    birth_date = 1841.4.6
-    traits = {
-        literary
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Zhanna
+	last_name = Surikov
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_moderate
+	interest_group = ig_rural_folk
+	birth_date = 1841.4.6
+	traits = {
+		literary
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -2321,16 +2372,17 @@ fem_RUS_ivan_zakharovich_surikov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_rural_folk
-        }   
-        earliest_usage_date = 1865.1.1
-        latest_usage_date = 1890.1.1
-        chance = 50
-    }
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1865.1.1
+		latest_usage_date = 1890.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_ivan_zakharovich_surikov
@@ -2339,23 +2391,23 @@ fem_RUS_ivan_zakharovich_surikov = {
 }
 
 RUS_georgi_valentinovich_plekhanov = {
-    first_name = Georgi
-    last_name = Plekhanov
-    historical = yes
-    dna = dna_plekhanov
-    culture = global_var:ttr_culture
-    female = no
-    religion = atheist
-    ideology = ideology_social_democrat
-    interest_group = ig_trade_unions
-    birth_date = 1856.12.11
-    traits = {
-        firebrand
-        cautious
-        literary
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Georgi
+	last_name = Plekhanov
+	historical = yes
+	dna = dna_plekhanov
+	culture = cu:tatar
+	female = no
+	religion = rel:atheist
+	ideology = ideology_social_democrat
+	interest_group = ig_trade_unions
+	birth_date = 1856.12.11
+	traits = {
+		firebrand
+		cautious
+		literary
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -2363,27 +2415,20 @@ RUS_georgi_valentinovich_plekhanov = {
 					target = flag:converter_georgi_valentinovich_plekhanov
 				}
 			}
-			any_scope_state = {
-				OR = {
-					state_region = s:STATE_TARTARIA
-					state_region = s:STATE_SAMARA
-					state_region = s:STATE_KAZAN
-					state_region = s:STATE_CRIMEA
-				}
-				state_region = { is_homeland = global_var:ttr_culture }
-			}
+			any_scope_state = { converter_is_tatar_homeland = yes }
 			has_dlc_feature = ep1_content
-            has_technology_researched = dialectics
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_trade_unions
-        }   
-        earliest_usage_date = 1877.1.1
-        latest_usage_date = 1918.1.1
-        chance = 50
-    }
+			has_technology_researched = dialectics
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_trade_unions
+		}
+		earliest_usage_date = 1877.1.1
+		latest_usage_date = 1918.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:tatar }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_georgi_valentinovich_plekhanov
@@ -2392,23 +2437,23 @@ RUS_georgi_valentinovich_plekhanov = {
 }
 
 fem_RUS_georgi_valentinovich_plekhanov = {
-    first_name = Gergina
-    last_name = Plekhanov
-    historical = yes
-    dna = dna_plekhanov
-    culture = global_var:ttr_culture
-    female = yes
-    religion = atheist
-    ideology = ideology_social_democrat
-    interest_group = ig_trade_unions
-    birth_date = 1856.12.11
-    traits = {
-        firebrand
-        cautious
-        literary
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	first_name = Gergina
+	last_name = Plekhanov
+	historical = yes
+	dna = dna_plekhanov
+	culture = cu:tatar
+	female = yes
+	religion = rel:atheist
+	ideology = ideology_social_democrat
+	interest_group = ig_trade_unions
+	birth_date = 1856.12.11
+	traits = {
+		firebrand
+		cautious
+		literary
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -2416,27 +2461,20 @@ fem_RUS_georgi_valentinovich_plekhanov = {
 					target = flag:converter_georgi_valentinovich_plekhanov
 				}
 			}
-			any_scope_state = {
-				OR = {
-					state_region = s:STATE_TARTARIA
-					state_region = s:STATE_SAMARA
-					state_region = s:STATE_KAZAN
-					state_region = s:STATE_CRIMEA
-				}
-				state_region = { is_homeland = global_var:ttr_culture }
-			}
+			any_scope_state = { converter_is_tatar_homeland = yes }
 			has_dlc_feature = ep1_content
-            has_technology_researched = dialectics
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_trade_unions
-        }   
-        earliest_usage_date = 1877.1.1
-        latest_usage_date = 1918.1.1
-        chance = 50
-    }
+			has_technology_researched = dialectics
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_trade_unions
+		}
+		earliest_usage_date = 1877.1.1
+		latest_usage_date = 1918.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:tatar }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_georgi_valentinovich_plekhanov
@@ -2452,7 +2490,7 @@ rus_general_chicherin = {
 	first_name = Pyotr
 	last_name = Chicherin
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = no
 	ideology = ideology_royalist
 	commander_rank = default
@@ -2474,10 +2512,11 @@ rus_general_chicherin = {
 		}
 		role = general
 		earliest_usage_date = 1836.1.1
-		latest_usage_date = 1848.1.1	
+		latest_usage_date = 1848.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_chicherin
@@ -2489,7 +2528,7 @@ fem_rus_general_chicherin = {
 	first_name = Petra
 	last_name = Chicherin
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = yes
 	ideology = ideology_royalist
 	commander_rank = default
@@ -2511,10 +2550,11 @@ fem_rus_general_chicherin = {
 		}
 		role = general
 		earliest_usage_date = 1836.1.1
-		latest_usage_date = 1848.1.1	
+		latest_usage_date = 1848.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_chicherin
@@ -2526,7 +2566,7 @@ rus_general_von_tottleben = {
 	first_name = Franz_Eduard
 	last_name = von_Tottleben
 	historical = yes
-	culture = global_var:nor_ger_culture
+	culture = cu:north_german
 	female = no
 	ideology = ideology_moderate
 	commander_rank = default
@@ -2551,10 +2591,11 @@ rus_general_von_tottleben = {
 		}
 		role = general
 		earliest_usage_date = 1850.1.1
-		latest_usage_date = 1884.1.1	
+		latest_usage_date = 1884.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_von_tottleben
@@ -2566,7 +2607,7 @@ fem_rus_general_von_tottleben = {
 	first_name = Ziska_Eduardine
 	last_name = von_Tottleben
 	historical = yes
-	culture = global_var:nor_ger_culture
+	culture = cu:north_german
 	female = yes
 	ideology = ideology_moderate
 	commander_rank = default
@@ -2591,10 +2632,11 @@ fem_rus_general_von_tottleben = {
 		}
 		role = general
 		earliest_usage_date = 1850.1.1
-		latest_usage_date = 1884.1.1	
+		latest_usage_date = 1884.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_von_tottleben
@@ -2606,7 +2648,7 @@ rus_general_von_rennenkampf = {
 	first_name = Paul
 	last_name = von_Rennenkampf
 	historical = yes
-	culture = global_var:nor_ger_culture
+	culture = cu:north_german
 	female = no
 	ideology = ideology_royalist
 	commander_rank = default
@@ -2631,10 +2673,11 @@ rus_general_von_rennenkampf = {
 		}
 		role = general
 		earliest_usage_date = 1884.1.1
-		latest_usage_date = 1920.1.1	
+		latest_usage_date = 1920.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_von_rennenkampf
@@ -2646,7 +2689,7 @@ fem_rus_general_von_rennenkampf = {
 	first_name = Paula
 	last_name = von_Rennenkampf
 	historical = yes
-	culture = global_var:nor_ger_culture
+	culture = cu:north_german
 	female = yes
 	ideology = ideology_royalist
 	commander_rank = default
@@ -2671,10 +2714,11 @@ fem_rus_general_von_rennenkampf = {
 		}
 		role = general
 		earliest_usage_date = 1884.1.1
-		latest_usage_date = 1920.1.1	
+		latest_usage_date = 1920.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_von_rennenkampf
@@ -2686,7 +2730,7 @@ rus_general_grand_duke_nicholas = {
 	first_name = Grand_Duke_Nicholas
 	last_name = Romanov
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = no
 	ideology = ideology_royalist
 	commander_rank = default
@@ -2711,10 +2755,11 @@ rus_general_grand_duke_nicholas = {
 		}
 		role = general
 		earliest_usage_date = 1884.1.1
-		latest_usage_date = 1920.1.1	
+		latest_usage_date = 1920.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_grand_duke_nicholas
@@ -2726,7 +2771,7 @@ fem_rus_general_grand_duke_nicholas = {
 	first_name = Grand_Duchess_Nikola
 	last_name = Romanov
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = yes
 	ideology = ideology_royalist
 	commander_rank = default
@@ -2751,10 +2796,11 @@ fem_rus_general_grand_duke_nicholas = {
 		}
 		role = general
 		earliest_usage_date = 1884.1.1
-		latest_usage_date = 1920.1.1	
+		latest_usage_date = 1920.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_grand_duke_nicholas
@@ -2766,7 +2812,7 @@ rus_general_brusilov = {
 	first_name = Aleksei
 	last_name = Brusilov
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = no
 	ideology = ideology_moderate # argued for the abdication of Tsar Nicholas II
 	commander_rank = default
@@ -2791,10 +2837,11 @@ rus_general_brusilov = {
 		}
 		role = general
 		earliest_usage_date = 1874.1.1
-		latest_usage_date = 1920.1.1	
+		latest_usage_date = 1920.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_brusilov
@@ -2806,7 +2853,7 @@ fem_rus_general_brusilov = {
 	first_name = Alexandra
 	last_name = Brusilov
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = yes
 	ideology = ideology_moderate # argued for the abdication of Tsar Nicholas II
 	commander_rank = default
@@ -2831,10 +2878,11 @@ fem_rus_general_brusilov = {
 		}
 		role = general
 		earliest_usage_date = 1874.1.1
-		latest_usage_date = 1920.1.1	
+		latest_usage_date = 1920.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_brusilov
@@ -2846,7 +2894,7 @@ rus_general_wrangel = {
 	first_name = Pyotr
 	last_name = Wrangel
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = no
 	ideology = ideology_royalist
 	commander_rank = default
@@ -2870,10 +2918,11 @@ rus_general_wrangel = {
 		}
 		role = general
 		earliest_usage_date = 1914.1.1
-		latest_usage_date = 1936.1.1	
+		latest_usage_date = 1936.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_wrangel
@@ -2885,7 +2934,7 @@ fem_rus_general_wrangel = {
 	first_name = Petra
 	last_name = Wrangel
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = yes
 	ideology = ideology_royalist
 	commander_rank = default
@@ -2909,10 +2958,11 @@ fem_rus_general_wrangel = {
 		}
 		role = general
 		earliest_usage_date = 1914.1.1
-		latest_usage_date = 1936.1.1	
+		latest_usage_date = 1936.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_wrangel
@@ -2924,7 +2974,7 @@ rus_general_skobelev = {
 	first_name = Mikhail
 	last_name = Skobelev
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = no
 	ideology = ideology_ethno_nationalist
 	commander_rank = default
@@ -2948,10 +2998,11 @@ rus_general_skobelev = {
 		}
 		role = general
 		earliest_usage_date = 1870.1.1
-		latest_usage_date = 1910.1.1	
+		latest_usage_date = 1910.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_skobelev
@@ -2963,7 +3014,7 @@ fem_rus_general_skobelev = {
 	first_name = Mihaila
 	last_name = Skobelev
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = yes
 	ideology = ideology_ethno_nationalist
 	commander_rank = default
@@ -2987,10 +3038,11 @@ fem_rus_general_skobelev = {
 		}
 		role = general
 		earliest_usage_date = 1870.1.1
-		latest_usage_date = 1910.1.1	
+		latest_usage_date = 1910.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_skobelev
@@ -2999,23 +3051,23 @@ fem_rus_general_skobelev = {
 }
 
 RUS_mikhail_tarielovich_loris-melikov = {
-    first_name = Mikhail
-    last_name = Loris-Melikov
-    historical = yes
-    culture = cu:armenian
-    female = no
-    religion = oriental_orthodox
-    ideology = ideology_reformer
-    dna = dna_loris_melikov 
-    interest_group = ig_armed_forces
-    birth_date = 1824.10.31
-    traits = {
-        charismatic
+	first_name = Mikhail
+	last_name = Loris-Melikov
+	historical = yes
+	culture = cu:armenian
+	female = no
+	religion = rel:oriental_orthodox
+	ideology = ideology_reformer
+	dna = dna_loris_melikov
+	interest_group = ig_armed_forces
+	birth_date = 1824.10.31
+	traits = {
+		charismatic
 		brave
 		experienced_offensive_planner
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3025,20 +3077,21 @@ RUS_mikhail_tarielovich_loris-melikov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-            NOT = { has_law = law_type:law_ethnostate }
-            any_scope_state = {
-                state_region = s:STATE_ARMENIA
-            }
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_armed_forces
-        }   
-        earliest_usage_date = 1860.1.1
-        latest_usage_date = 1885.1.1
-        chance = 50
-    }
+			NOT = { has_law = law_type:law_ethnostate }
+			any_scope_state = {
+				state_region = s:STATE_ARMENIA
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_armed_forces
+		}
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1885.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:armenian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_mikhail_tarielovich_loris-melikov
@@ -3047,23 +3100,23 @@ RUS_mikhail_tarielovich_loris-melikov = {
 }
 
 fem_RUS_mikhail_tarielovich_loris-melikov = {
-    first_name = Mihaila
-    last_name = Loris-Melikov
-    historical = yes
-    culture = cu:armenian
-    female = yes
-    religion = oriental_orthodox
-    ideology = ideology_reformer
-    dna = dna_loris_melikov 
-    interest_group = ig_armed_forces
-    birth_date = 1824.10.31
-    traits = {
-        charismatic
+	first_name = Mihaila
+	last_name = Loris-Melikov
+	historical = yes
+	culture = cu:armenian
+	female = yes
+	religion = rel:oriental_orthodox
+	ideology = ideology_reformer
+	dna = dna_loris_melikov
+	interest_group = ig_armed_forces
+	birth_date = 1824.10.31
+	traits = {
+		charismatic
 		brave
 		experienced_offensive_planner
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3073,20 +3126,21 @@ fem_RUS_mikhail_tarielovich_loris-melikov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-            NOT = { has_law = law_type:law_ethnostate }
-            any_scope_state = {
-                state_region = s:STATE_ARMENIA
-            }
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_armed_forces
-        }   
-        earliest_usage_date = 1860.1.1
-        latest_usage_date = 1885.1.1
-        chance = 50
-    }
+			NOT = { has_law = law_type:law_ethnostate }
+			any_scope_state = {
+				state_region = s:STATE_ARMENIA
+			}
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_armed_forces
+		}
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1885.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:armenian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_mikhail_tarielovich_loris-melikov
@@ -3095,23 +3149,23 @@ fem_RUS_mikhail_tarielovich_loris-melikov = {
 }
 
 RUS_sergei_alexandrovich_romanov = {
-    first_name = Sergei
-    last_name = Romanov
-    historical = yes
-    culture = global_var:rus_culture
-    female = no
-    religion = orthodox
-    dna = dna_sergei_romanov
-    ideology = ideology_ethno_nationalist
-    interest_group = ig_armed_forces
-    birth_date = 1857.5.11
-    traits = {
-        meticulous
+	first_name = Sergei
+	last_name = Romanov
+	historical = yes
+	culture = cu:russian
+	female = no
+	religion = rel:orthodox
+	dna = dna_sergei_romanov
+	ideology = ideology_ethno_nationalist
+	interest_group = ig_armed_forces
+	birth_date = 1857.5.11
+	traits = {
+		meticulous
 		imperious
 		basic_offensive_planner
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3121,18 +3175,19 @@ RUS_sergei_alexandrovich_romanov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-            has_law = law_type:law_monarchy
-            has_technology_researched = pan-nationalism
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_armed_forces
-        }   
-        earliest_usage_date = 1890.1.1
-        latest_usage_date = 1910.1.1
-        chance = 50
-    }
+			has_law = law_type:law_monarchy
+			has_technology_researched = pan-nationalism
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_armed_forces
+		}
+		earliest_usage_date = 1890.1.1
+		latest_usage_date = 1910.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_sergei_alexandrovich_romanov
@@ -3141,23 +3196,23 @@ RUS_sergei_alexandrovich_romanov = {
 }
 
 fem_RUS_sergei_alexandrovich_romanov = {
-    first_name = Natalya
-    last_name = Romanov
-    historical = yes
-    culture = global_var:rus_culture
-    female = yes
-    religion = orthodox
-    dna = dna_sergei_romanov
-    ideology = ideology_ethno_nationalist
-    interest_group = ig_armed_forces
-    birth_date = 1857.5.11
-    traits = {
-        meticulous
+	first_name = Natalya
+	last_name = Romanov
+	historical = yes
+	culture = cu:russian
+	female = yes
+	religion = rel:orthodox
+	dna = dna_sergei_romanov
+	ideology = ideology_ethno_nationalist
+	interest_group = ig_armed_forces
+	birth_date = 1857.5.11
+	traits = {
+		meticulous
 		imperious
 		basic_offensive_planner
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3167,18 +3222,19 @@ fem_RUS_sergei_alexandrovich_romanov = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-            has_law = law_type:law_monarchy
-            has_technology_researched = pan-nationalism
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_armed_forces
-        }   
-        earliest_usage_date = 1890.1.1
-        latest_usage_date = 1910.1.1
-        chance = 50
-    }
+			has_law = law_type:law_monarchy
+			has_technology_researched = pan-nationalism
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_armed_forces
+		}
+		earliest_usage_date = 1890.1.1
+		latest_usage_date = 1910.1.1
+		chance = 50
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_sergei_alexandrovich_romanov
@@ -3194,7 +3250,7 @@ rus_admiral_makarov = {
 	first_name = Stepan
 	last_name = Makarov
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = no
 	ideology = ideology_moderate
 	commander_rank = default
@@ -3222,6 +3278,7 @@ rus_admiral_makarov = {
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_makarov
@@ -3233,7 +3290,7 @@ fem_rus_admiral_makarov = {
 	first_name = Stefaniya
 	last_name = Makarov
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = yes
 	ideology = ideology_moderate
 	commander_rank = default
@@ -3261,6 +3318,7 @@ fem_rus_admiral_makarov = {
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_makarov
@@ -3272,7 +3330,7 @@ rus_admiral_nakhimov = {
 	first_name = Pavel
 	last_name = Nakhimov
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = no
 	ideology = ideology_moderate
 	commander_rank = default
@@ -3300,6 +3358,7 @@ rus_admiral_nakhimov = {
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nakhimov
@@ -3311,7 +3370,7 @@ fem_rus_admiral_nakhimov = {
 	first_name = Pavla
 	last_name = Nakhimov
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	female = yes
 	ideology = ideology_moderate
 	commander_rank = default
@@ -3339,6 +3398,7 @@ fem_rus_admiral_nakhimov = {
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nakhimov
@@ -3356,8 +3416,8 @@ RUS_nikolai_vasilyevich_tchaikovsky = {
 	historical = yes
 	female = no
 	is_agitator = yes
-	culture = global_var:rus_culture
-	religion = orthodox
+	culture = cu:russian
+	religion = rel:orthodox
 	interest_group = ig_rural_folk
 	ideology = ideology_radical
 	birth_date = 1851.1.7
@@ -3366,8 +3426,8 @@ RUS_nikolai_vasilyevich_tchaikovsky = {
 		experienced_diplomat
 		ambitious
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3377,15 +3437,16 @@ RUS_nikolai_vasilyevich_tchaikovsky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_rural_folk
-        }   
-        earliest_usage_date = 1872.1.1
-        latest_usage_date = 1917.1.1
-        chance = 100
-    }
+		}
+		earliest_usage_date = 1872.1.1
+		latest_usage_date = 1917.1.1
+		chance = 100
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nikolai_vasilyevich_tchaikovsky
@@ -3399,8 +3460,8 @@ fem_RUS_nikolai_vasilyevich_tchaikovsky = {
 	historical = yes
 	female = yes
 	is_agitator = yes
-	culture = global_var:rus_culture
-	religion = orthodox
+	culture = cu:russian
+	religion = rel:orthodox
 	interest_group = ig_rural_folk
 	ideology = ideology_radical
 	birth_date = 1851.1.7
@@ -3409,8 +3470,8 @@ fem_RUS_nikolai_vasilyevich_tchaikovsky = {
 		experienced_diplomat
 		ambitious
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3420,15 +3481,16 @@ fem_RUS_nikolai_vasilyevich_tchaikovsky = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_rural_folk
-        }   
-        earliest_usage_date = 1872.1.1
-        latest_usage_date = 1917.1.1
-        chance = 100
-    }
+		}
+		earliest_usage_date = 1872.1.1
+		latest_usage_date = 1917.1.1
+		chance = 100
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nikolai_vasilyevich_tchaikovsky
@@ -3442,19 +3504,19 @@ RUS_sergei_gennadievich_nechaev = {
 	historical = yes
 	female = no
 	is_agitator = yes
-	culture = global_var:rus_culture
-	religion = atheist
+	culture = cu:russian
+	religion = rel:atheist
 	interest_group = ig_intelligentsia
-    dna = dna_nechaev
-	ideology = ideology_atheist
+	dna = dna_nechaev
+	ideology = ideology_nihilist
 	birth_date = 1847.12.3
 	traits = {
 		direct
 		persistent
 		demagogue
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3464,15 +3526,16 @@ RUS_sergei_gennadievich_nechaev = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1868.1.1
-        latest_usage_date = 1880.1.1
-        chance = 100
-    }
+		}
+		earliest_usage_date = 1868.1.1
+		latest_usage_date = 1880.1.1
+		chance = 100
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_sergei_gennadievich_nechaev
@@ -3486,19 +3549,19 @@ fem_RUS_sergei_gennadievich_nechaev = {
 	historical = yes
 	female = yes
 	is_agitator = yes
-	culture = global_var:rus_culture
-	religion = atheist
+	culture = cu:russian
+	religion = rel:atheist
 	interest_group = ig_intelligentsia
-    dna = dna_nechaev
-	ideology = ideology_atheist
+	dna = dna_nechaev
+	ideology = ideology_nihilist
 	birth_date = 1847.12.3
 	traits = {
 		direct
 		persistent
 		demagogue
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3508,15 +3571,16 @@ fem_RUS_sergei_gennadievich_nechaev = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1868.1.1
-        latest_usage_date = 1880.1.1
-        chance = 100
-    }
+		}
+		earliest_usage_date = 1868.1.1
+		latest_usage_date = 1880.1.1
+		chance = 100
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_sergei_gennadievich_nechaev
@@ -3530,18 +3594,18 @@ RUS_alexey_alekseevich_borovoy = {
 	historical = yes
 	female = no
 	is_agitator = yes
-	culture = global_var:rus_culture
-	religion = atheist
+	culture = cu:russian
+	religion = rel:atheist
 	interest_group = ig_intelligentsia
-	ideology = ideology_atheist
+	ideology = ideology_nihilist
 	birth_date = 1875.11.11
 	traits = {
 		erudite
 		brave
 		inspirational_orator
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3551,15 +3615,16 @@ RUS_alexey_alekseevich_borovoy = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1936.1.1
-        chance = 100
-    }
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1936.1.1
+		chance = 100
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexey_alekseevich_borovoy
@@ -3573,18 +3638,18 @@ fem_RUS_alexey_alekseevich_borovoy = {
 	historical = yes
 	female = yes
 	is_agitator = yes
-	culture = global_var:rus_culture
-	religion = atheist
+	culture = cu:russian
+	religion = rel:atheist
 	interest_group = ig_intelligentsia
-	ideology = ideology_atheist
+	ideology = ideology_nihilist
 	birth_date = 1875.11.11
 	traits = {
 		erudite
 		brave
 		inspirational_orator
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3594,15 +3659,16 @@ fem_RUS_alexey_alekseevich_borovoy = {
 			}
 			uses_rus_characters = yes
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1936.1.1
-        chance = 100
-    }
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1936.1.1
+		chance = 100
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexey_alekseevich_borovoy
@@ -3616,8 +3682,8 @@ RUS_alexey_aleksandrovich_solonovich = {
 	historical = yes
 	female = no
 	is_agitator = yes
-	culture = global_var:rus_culture
-	religion = animist
+	culture = cu:russian
+	religion = rel:animist
 	interest_group = ig_intelligentsia
 	ideology = ideology_anarchist
 	birth_date = 1887.10.23
@@ -3625,8 +3691,8 @@ RUS_alexey_aleksandrovich_solonovich = {
 		literary
 		inspirational_orator
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3635,17 +3701,18 @@ RUS_alexey_aleksandrovich_solonovich = {
 				}
 			}
 			uses_rus_characters = yes
-            has_technology_researched = anarchism
+			has_technology_researched = anarchism
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1910.1.1
-        latest_usage_date = 1936.1.1
-        chance = 100
-    }
+		}
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1936.1.1
+		chance = 100
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexey_aleksandrovich_solonovich
@@ -3659,8 +3726,8 @@ fem_RUS_alexey_aleksandrovich_solonovich = {
 	historical = yes
 	female = yes
 	is_agitator = yes
-	culture = global_var:rus_culture
-	religion = animist
+	culture = cu:russian
+	religion = rel:animist
 	interest_group = ig_intelligentsia
 	ideology = ideology_anarchist
 	birth_date = 1887.10.23
@@ -3668,8 +3735,8 @@ fem_RUS_alexey_aleksandrovich_solonovich = {
 		literary
 		inspirational_orator
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3678,17 +3745,18 @@ fem_RUS_alexey_aleksandrovich_solonovich = {
 				}
 			}
 			uses_rus_characters = yes
-            has_technology_researched = anarchism
+			has_technology_researched = anarchism
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1910.1.1
-        latest_usage_date = 1936.1.1
-        chance = 100
-    }
+		}
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1936.1.1
+		chance = 100
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexey_aleksandrovich_solonovich
@@ -3702,8 +3770,8 @@ RUS_olha_illivna_taratuta = {
 	historical = yes
 	female = yes
 	is_agitator = yes
-	culture = global_var:ukr_culture
-	religion = atheist
+	culture = cu:ukrainian
+	religion = rel:atheist
 	interest_group = ig_trade_unions
 	ideology = ideology_anarchist
 	birth_date = 1876.1.21
@@ -3711,8 +3779,8 @@ RUS_olha_illivna_taratuta = {
 		brave
 		ambitious
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3720,21 +3788,19 @@ RUS_olha_illivna_taratuta = {
 					target = flag:converter_olha_illivna_taratuta
 				}
 			}
-			OR = {
-				uses_rus_characters = yes
-				uses_ukr_characters = yes
-			}
-            has_technology_researched = anarchism
+			uses_ukr_characters = yes
+			has_technology_researched = anarchism
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_trade_unions
-        }   
-        earliest_usage_date = 1898.1.1
-        latest_usage_date = 1930.1.1
-        chance = 100
-    }
+		}
+		earliest_usage_date = 1898.1.1
+		latest_usage_date = 1930.1.1
+		chance = 100
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:ukrainian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_olha_illivna_taratuta
@@ -3748,8 +3814,8 @@ masc_RUS_olha_illivna_taratuta = {
 	historical = yes
 	female = no
 	is_agitator = yes
-	culture = global_var:ukr_culture
-	religion = atheist
+	culture = cu:ukrainian
+	religion = rel:atheist
 	interest_group = ig_trade_unions
 	ideology = ideology_anarchist
 	birth_date = 1876.1.21
@@ -3757,8 +3823,8 @@ masc_RUS_olha_illivna_taratuta = {
 		brave
 		ambitious
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3766,21 +3832,19 @@ masc_RUS_olha_illivna_taratuta = {
 					target = flag:converter_olha_illivna_taratuta
 				}
 			}
-			OR = {
-				uses_rus_characters = yes
-				uses_ukr_characters = yes
-			}
-            has_technology_researched = anarchism
+			uses_ukr_characters = yes
+			has_technology_researched = anarchism
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_trade_unions
-        }   
-        earliest_usage_date = 1898.1.1
-        latest_usage_date = 1930.1.1
-        chance = 100
-    }
+		}
+		earliest_usage_date = 1898.1.1
+		latest_usage_date = 1930.1.1
+		chance = 100
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:ukrainian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_olha_illivna_taratuta
@@ -3794,19 +3858,19 @@ RUS_alexandra_mikhailovna_kollontai = {
 	historical = yes
 	female = yes
 	is_agitator = yes
-    dna = dna_kollontai
-	culture = global_var:rus_culture
-	religion = atheist
+	dna = dna_kollontai
+	culture = cu:russian
+	religion = rel:atheist
 	interest_group = ig_trade_unions
 	ideology = ideology_humanitarian
 	birth_date = 1872.3.31
 	traits = {
-		reckless # I admire her, but there's really no other word for her handing Lenin an opposition pamphlet. # I admire her as well 
+		reckless # I admire her, but there's really no other word for her handing Lenin an opposition pamphlet. # I admire her as well
 		firebrand # Was known for her fiery speeches in party congresses.
 		basic_diplomat # Her historical diplomatic career, and her international anti-war advocacy.
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3815,17 +3879,18 @@ RUS_alexandra_mikhailovna_kollontai = {
 				}
 			}
 			uses_rus_characters = yes
-            has_technology_researched = feminism
+			has_technology_researched = feminism
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_trade_unions
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1936.1.1
-        chance = 100
-    }
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1936.1.1
+		chance = 100
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexandra_mikhailovna_kollontai
@@ -3839,19 +3904,19 @@ masc_RUS_alexandra_mikhailovna_kollontai = {
 	historical = yes
 	female = no
 	is_agitator = yes
-    dna = dna_kollontai
-	culture = global_var:rus_culture
-	religion = atheist
+	dna = dna_kollontai
+	culture = cu:russian
+	religion = rel:atheist
 	interest_group = ig_trade_unions
 	ideology = ideology_humanitarian
 	birth_date = 1872.3.31
 	traits = {
-		reckless # I admire her, but there's really no other word for her handing Lenin an opposition pamphlet. # I admire her as well 
+		reckless # I admire her, but there's really no other word for her handing Lenin an opposition pamphlet. # I admire her as well
 		firebrand # Was known for her fiery speeches in party congresses.
 		basic_diplomat # Her historical diplomatic career, and her international anti-war advocacy.
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -3860,17 +3925,18 @@ masc_RUS_alexandra_mikhailovna_kollontai = {
 				}
 			}
 			uses_rus_characters = yes
-            has_technology_researched = feminism
+			has_technology_researched = feminism
 			has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_trade_unions
-        }   
-        earliest_usage_date = 1900.1.1
-        latest_usage_date = 1936.1.1
-        chance = 100
-    }
+		}
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1936.1.1
+		chance = 100
+	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_alexandra_mikhailovna_kollontai
@@ -3882,7 +3948,7 @@ agitator_aleksei_aladin = { # Aleksei Feodorovich Aladin
 	first_name = Aleksei
 	last_name = Aladin
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	religion = rel:orthodox
 	female = no
 	interest_group = ig_rural_folk
@@ -3908,12 +3974,13 @@ agitator_aleksei_aladin = { # Aleksei Feodorovich Aladin
 		interest_group_trigger = {
 			is_marginal = no
 			is_interest_group_type = ig_rural_folk
-		}   
+		}
 		earliest_usage_date = 1892.1.1
 		latest_usage_date = 1927.7.30
 		chance = 25
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_aleksei_aladin
@@ -3925,7 +3992,7 @@ fem_agitator_aleksei_aladin = { # Aleksei Feodorovich Aladin
 	first_name = Alexandra
 	last_name = Aladin
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	religion = rel:orthodox
 	female = yes
 	interest_group = ig_rural_folk
@@ -3951,12 +4018,13 @@ fem_agitator_aleksei_aladin = { # Aleksei Feodorovich Aladin
 		interest_group_trigger = {
 			is_marginal = no
 			is_interest_group_type = ig_rural_folk
-		}   
+		}
 		earliest_usage_date = 1892.1.1
 		latest_usage_date = 1927.7.30
 		chance = 25
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_aleksei_aladin
@@ -3968,7 +4036,7 @@ agitator_nestor_makhno = {
 	first_name = Nestor
 	last_name = Makhno
 	historical = yes
-	culture = global_var:ukr_culture
+	culture = cu:ukrainian
 	religion = rel:atheist
 	female = no
 	interest_group = ig_rural_folk
@@ -3990,23 +4058,21 @@ agitator_nestor_makhno = {
 					target = flag:converter_nestor_makhno
 				}
 			}
-			OR = {
-				uses_rus_characters = yes
-				uses_ukr_characters = yes
-			}
+			uses_ukr_characters = yes
 		}
 		interest_group_trigger = {
 			is_marginal = no
 			OR = {
 				is_interest_group_type = ig_trade_unions
 				is_interest_group_type = ig_rural_folk
-			} 
-		}   
+			}
+		}
 		earliest_usage_date = 1910.1.1
 		latest_usage_date = 1935.12.31
 		chance = 75
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:ukrainian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nestor_makhno
@@ -4018,7 +4084,7 @@ fem_agitator_nestor_makhno = {
 	first_name = Eurydice
 	last_name = Makhno
 	historical = yes
-	culture = global_var:ukr_culture
+	culture = cu:ukrainian
 	religion = rel:atheist
 	female = yes
 	interest_group = ig_rural_folk
@@ -4040,23 +4106,21 @@ fem_agitator_nestor_makhno = {
 					target = flag:converter_nestor_makhno
 				}
 			}
-			OR = {
-				uses_rus_characters = yes
-				uses_ukr_characters = yes
-			}
+			uses_ukr_characters = yes
 		}
 		interest_group_trigger = {
 			is_marginal = no
 			OR = {
 				is_interest_group_type = ig_trade_unions
 				is_interest_group_type = ig_rural_folk
-			} 
-		}   
+			}
+		}
 		earliest_usage_date = 1910.1.1
 		latest_usage_date = 1935.12.31
 		chance = 75
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:ukrainian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_nestor_makhno
@@ -4068,15 +4132,15 @@ agitator_dmitry_ivanovich_pisarev = {
 	first_name = Dmitry
 	last_name = Pisarev
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	religion = rel:atheist
 	female = no
 	interest_group = ig_intelligentsia
-	ideology = ideology_atheist
+	ideology = ideology_nihilist
 	birth_date = 1840.10.14 # October 2nd in the Old Style calendar
 	dna = dna_pisarev
 	traits = {
-		psychological_affliction 
+		psychological_affliction
 		literary
 		inspirational_orator
 	}
@@ -4090,23 +4154,21 @@ agitator_dmitry_ivanovich_pisarev = {
 					target = flag:converter_dmitry_ivanovich_pisarev
 				}
 			}
-			OR = {
-				uses_rus_characters = yes
-				uses_ukr_characters = yes
-			}
+			uses_ukr_characters = yes
 		}
 		interest_group_trigger = {
 			is_marginal = no
 			OR = {
 				is_interest_group_type = ig_intelligentsia
 				is_interest_group_type = ig_trade_unions
-			} 
-		}   
+			}
+		}
 		earliest_usage_date = 1858.1.1
 		latest_usage_date = 1868.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_dmitry_ivanovich_pisarev
@@ -4118,15 +4180,15 @@ fem_agitator_dmitry_ivanovich_pisarev = {
 	first_name = Dmitrya
 	last_name = Pisarev
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	religion = rel:atheist
 	female = yes
 	interest_group = ig_intelligentsia
-	ideology = ideology_atheist
+	ideology = ideology_nihilist
 	birth_date = 1840.10.14 # October 2nd in the Old Style calendar
 	dna = dna_pisarev
 	traits = {
-		psychological_affliction 
+		psychological_affliction
 		literary
 		inspirational_orator
 	}
@@ -4140,23 +4202,21 @@ fem_agitator_dmitry_ivanovich_pisarev = {
 					target = flag:converter_dmitry_ivanovich_pisarev
 				}
 			}
-			OR = {
-				uses_rus_characters = yes
-				uses_ukr_characters = yes
-			}
+			uses_ukr_characters = yes
 		}
 		interest_group_trigger = {
 			is_marginal = no
 			OR = {
 				is_interest_group_type = ig_intelligentsia
 				is_interest_group_type = ig_trade_unions
-			} 
-		}   
+			}
+		}
 		earliest_usage_date = 1858.1.1
 		latest_usage_date = 1868.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_dmitry_ivanovich_pisarev
@@ -4168,7 +4228,7 @@ agitator_maxim_gorky = { # The Maximum Gorky
 	first_name = Maxim
 	last_name = Gorky
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	religion = rel:orthodox
 	female = no
 	interest_group = ig_intelligentsia
@@ -4200,6 +4260,7 @@ agitator_maxim_gorky = { # The Maximum Gorky
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_maxim_gorky
@@ -4211,7 +4272,7 @@ fem_agitator_maxim_gorky = { # The Maximum Gorky
 	first_name = Maxima
 	last_name = Gorky
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	religion = rel:orthodox
 	female = yes
 	interest_group = ig_intelligentsia
@@ -4243,6 +4304,7 @@ fem_agitator_maxim_gorky = { # The Maximum Gorky
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_maxim_gorky
@@ -4251,10 +4313,10 @@ fem_agitator_maxim_gorky = { # The Maximum Gorky
 }
 
 rus_leon_trotsky_character_template = { # Generated by event
-    first_name = Leon_2
+	first_name = Leon_2
 	last_name = Trotsky
 	historical = yes
-	culture = scope:trotsky_culture
+	culture = global_var:ashkenazi_culture
 	religion = rel:atheist
 	female = no
 	is_agitator = yes
@@ -4273,7 +4335,7 @@ fem_rus_leon_trotsky_character_template = {
 	first_name = Leonie
 	last_name = Trotsky
 	historical = yes
-	culture = scope:trotsky_culture
+	culture = global_var:ashkenazi_culture
 	religion = rel:atheist
 	female = yes
 	is_agitator = yes
@@ -4292,7 +4354,7 @@ rus_jaroslaw_dabrowski_character_template = { # Generatd by event
 	first_name = Jaroslaw
 	last_name = Dabrowski
 	historical = yes
-	culture = global_var:pol_culture
+	culture = cu:polish
 	#religion = scope:dabrowski_religion
 	female = no
 	is_agitator = yes
@@ -4304,6 +4366,9 @@ rus_jaroslaw_dabrowski_character_template = { # Generatd by event
 		persistent
 		brave
 		mountain_commander
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:polish }
 	}
 }
 
@@ -4311,7 +4376,7 @@ fem_rus_jaroslaw_dabrowski_character_template = {
 	first_name = Jaroslawa
 	last_name = Dabrowski
 	historical = yes
-	culture = global_var:pol_culture
+	culture = cu:polish
 	#religion = scope:dabrowski_religion
 	female = yes
 	is_agitator = yes
@@ -4324,13 +4389,16 @@ fem_rus_jaroslaw_dabrowski_character_template = {
 		brave
 		mountain_commander
 	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:polish }
+	}
 }
 
 rus_mikhail_bakunin_character_template = { # Generated by event
 	first_name = Mikhail
 	last_name = Bakunin
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	religion = rel:atheist
 	female = no
 	is_agitator = yes
@@ -4342,6 +4410,9 @@ rus_mikhail_bakunin_character_template = { # Generated by event
 		firebrand
 		persistent
 		bigoted
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 	}
 }
 
@@ -4349,7 +4420,7 @@ fem_rus_mikhail_bakunin_character_template = {
 	first_name = Mihaila
 	last_name = Bakunin
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	religion = rel:atheist
 	female = yes
 	is_agitator = yes
@@ -4362,13 +4433,16 @@ fem_rus_mikhail_bakunin_character_template = {
 		persistent
 		bigoted
 	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
+	}
 }
 
 rus_pyotr_kropotkin_character_template = { # Generated by event
 	first_name = Pyotr
 	last_name = Kropotkin
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	religion = rel:atheist
 	female = no
 	is_agitator = yes
@@ -4380,13 +4454,16 @@ rus_pyotr_kropotkin_character_template = { # Generated by event
 		direct
 		inspirational_orator
 	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
+	}
 }
 
 fem_rus_pyotr_kropotkin_character_template = {
 	first_name = Petra
 	last_name = Kropotkin
 	historical = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	religion = rel:atheist
 	female = yes
 	is_agitator = yes
@@ -4397,6 +4474,9 @@ fem_rus_pyotr_kropotkin_character_template = {
 	traits = {
 		direct
 		inspirational_orator
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 	}
 }
 
@@ -4407,7 +4487,7 @@ rus_lenin_character_template = { # Generated by event
 	birth_date = 1870.4.22
 	is_agitator = yes
 	female = no
-	culture = global_var:rus_culture
+	culture = cu:russian
 	religion = rel:atheist
 	interest_group = ig_trade_unions
 	ideology = ideology_vanguardist
@@ -4416,6 +4496,9 @@ rus_lenin_character_template = { # Generated by event
 		firebrand
 		charismatic
 		reckless
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
 	}
 }
 
@@ -4426,7 +4509,7 @@ fem_rus_lenin_character_template = {
 	birth_date = 1870.4.22
 	is_agitator = yes
 	female = yes
-	culture = global_var:rus_culture
+	culture = cu:russian
 	religion = rel:atheist
 	interest_group = ig_trade_unions
 	ideology = ideology_vanguardist
@@ -4435,5 +4518,93 @@ fem_rus_lenin_character_template = {
 		firebrand
 		charismatic
 		reckless
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
+	}
+}
+
+### Executives
+
+RUS_nikolay_putilov = { # Nikolay Putilov, Putilov Works
+	first_name = Nikolay
+	last_name = Putilov
+	historical = yes
+	birth_date = 1820.1.1 # Approximate, born in 1820
+	dna = dna_nikolay_putilov
+	culture = cu:russian
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+	traits = {
+		basic_naval_commander
+		engineer
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_nikolay_putilov
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_putilov_company
+		}
+		earliest_usage_date = 1857.1.1
+		latest_usage_date = 1880.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_nikolay_putilov
+		}
+	}
+}
+
+fem_RUS_nikolay_putilov = { # Nikolay Putilov, Putilov Works
+	first_name = Nikol
+	last_name = Putilov
+	female = yes
+	historical = yes
+	birth_date = 1820.1.1 # Approximate, born in 1820
+	dna = dna_nikolay_putilov
+	culture = cu:russian
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+	traits = {
+		basic_naval_commander
+		engineer
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_nikolay_putilov
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_putilov_company
+		}
+		earliest_usage_date = 1857.1.1
+		latest_usage_date = 1880.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:russian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_nikolay_putilov
+		}
 	}
 }

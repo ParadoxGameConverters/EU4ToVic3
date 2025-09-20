@@ -4,9 +4,11 @@
 	group = je_group_historical_content
 
 	is_shown_when_inactive = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }			##Converter
-		capital = { zzz_converter_state_is_in_canada = yes }										##Converter
-		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_CAN } }		##Converter
+		###Converter###
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+		capital = { zzz_converter_state_is_in_canada = yes }
+		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_CAN } }
+		###Converter###
 		is_subject = yes
 	}
 
@@ -68,14 +70,18 @@ je_canada_gbr = {
 
 	is_shown_when_inactive = {
 		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
-			capital = { zzz_converter_state_is_in_canada = yes }									##Converter
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_canada = yes }
+			###Converter###
 			count >= 2
 		}
-		NOT = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
-			capital = { zzz_converter_state_is_in_canada = yes }									##Converter
-			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_CAN }			##Converter
+		NOR = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_canada = yes }
+			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_CAN }
+			###Converter###
 		}
 	}
 
@@ -136,9 +142,11 @@ je_australia_aus = {
 	group = je_group_historical_content
 
 	is_shown_when_inactive = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
-		capital = { zzz_converter_state_is_in_australia = yes }										##Converter
-		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_AST } }			##Converter
+		###Converter###
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }
+		capital = { zzz_converter_state_is_in_australia = yes }
+		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_AST } }
+		###Converter###
 		is_subject = yes
 	}
 
@@ -179,16 +187,18 @@ je_australia_gbr = {
 
 	is_shown_when_inactive = {
 		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
-			capital = { zzz_converter_state_is_in_australia = yes }										##Converter
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_australia = yes }
+			###Converter###
 			count >= 2
 		}
-		NOT = {
-			OR = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
-				capital = { zzz_converter_state_is_in_australia = yes }										##Converter
-				is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_AST }				##Converter
-			}
+		NOR = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }
+			capital = { zzz_converter_state_is_in_australia = yes }
+			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_AST }
+			###Converter###
 		}
 	}
 

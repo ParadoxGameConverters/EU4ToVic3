@@ -31,9 +31,9 @@ positivism.1 = {
 			state_region = s:STATE_ILE_DE_FRANCE
 		}
 	}
-	
+
 	immediate = {
-		##Converter
+		### Converter
 		converter_rule_63_effect = yes
 		if = {
 			limit = { has_variable = rule_63_effect }
@@ -54,7 +54,7 @@ positivism.1 = {
 				}
 			}
 		}
-		##Converter
+		### Converter
 		random_character_in_void = {
 			limit = {
 				has_variable = auguste_comte_var
@@ -69,9 +69,9 @@ positivism.1 = {
 		}
 		set_global_variable = positivism_invented
 	}
-	
+
 	option = {
-		name = positivism.1.a 
+		name = positivism.1.a
 		default_option = yes
 		scope:comte_scope.interest_group = {
 			add_modifier = {

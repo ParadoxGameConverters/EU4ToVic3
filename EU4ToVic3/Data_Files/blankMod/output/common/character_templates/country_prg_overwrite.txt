@@ -8,7 +8,6 @@ PRG_juan_bautista_gill = { # Juan Bautista Gill y García del Barrio
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_landowners
@@ -18,8 +17,8 @@ PRG_juan_bautista_gill = { # Juan Bautista Gill y García del Barrio
 		experienced_political_operator
 		expensive_tastes
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -29,17 +28,17 @@ PRG_juan_bautista_gill = { # Juan Bautista Gill y García del Barrio
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1868.1.1
-        latest_usage_date = 1880.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1868.1.1
+		latest_usage_date = 1880.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_juan_bautista_gill
@@ -53,7 +52,6 @@ fem_PRG_juan_bautista_gill = { # Juan Bautista Gill y García del Barrio
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_landowners
@@ -63,8 +61,8 @@ fem_PRG_juan_bautista_gill = { # Juan Bautista Gill y García del Barrio
 		experienced_political_operator
 		expensive_tastes
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -74,17 +72,17 @@ fem_PRG_juan_bautista_gill = { # Juan Bautista Gill y García del Barrio
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_landowners
-        }   
-        earliest_usage_date = 1868.1.1
-        latest_usage_date = 1880.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1868.1.1
+		latest_usage_date = 1880.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_juan_bautista_gill
@@ -98,7 +96,6 @@ PRG_arsenio_lopez_decoud = { # Arsenio López Decoud
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
@@ -108,8 +105,8 @@ PRG_arsenio_lopez_decoud = { # Arsenio López Decoud
 		inspirational_orator
 		basic_diplomat
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -119,17 +116,17 @@ PRG_arsenio_lopez_decoud = { # Arsenio López Decoud
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1905.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1905.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_arsenio_lopez_decoud
@@ -143,7 +140,6 @@ fem_PRG_arsenio_lopez_decoud = { # Arsenio López Decoud
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
@@ -153,8 +149,8 @@ fem_PRG_arsenio_lopez_decoud = { # Arsenio López Decoud
 		inspirational_orator
 		basic_diplomat
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -164,17 +160,17 @@ fem_PRG_arsenio_lopez_decoud = { # Arsenio López Decoud
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1905.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1905.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_arsenio_lopez_decoud
@@ -188,7 +184,6 @@ PRG_pedro_pablo_pena = { # Pedro Pablo Peña Cañete
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -198,8 +193,8 @@ PRG_pedro_pablo_pena = { # Pedro Pablo Peña Cañete
 		erudite
 		experienced_diplomat
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -209,17 +204,17 @@ PRG_pedro_pablo_pena = { # Pedro Pablo Peña Cañete
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1910.1.1
-        latest_usage_date = 1925.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1925.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_pedro_pablo_pena
@@ -233,7 +228,6 @@ fem_PRG_pedro_pablo_pena = { # Pedro Pablo Peña Cañete
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -243,8 +237,8 @@ fem_PRG_pedro_pablo_pena = { # Pedro Pablo Peña Cañete
 		erudite
 		experienced_diplomat
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -254,17 +248,17 @@ fem_PRG_pedro_pablo_pena = { # Pedro Pablo Peña Cañete
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1910.1.1
-        latest_usage_date = 1925.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1925.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_pedro_pablo_pena
@@ -278,7 +272,6 @@ PRG_candido_bareiro = { # Cándido Pastor Bareiro Caballero
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
@@ -288,8 +281,8 @@ PRG_candido_bareiro = { # Cándido Pastor Bareiro Caballero
 		reckless
 		innovative
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -299,17 +292,17 @@ PRG_candido_bareiro = { # Cándido Pastor Bareiro Caballero
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1865.1.1
-        latest_usage_date = 1880.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1865.1.1
+		latest_usage_date = 1880.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_candido_bareiro
@@ -323,7 +316,6 @@ fem_PRG_candido_bareiro = { # Cándido Pastor Bareiro Caballero
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
@@ -333,8 +325,8 @@ fem_PRG_candido_bareiro = { # Cándido Pastor Bareiro Caballero
 		reckless
 		innovative
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -344,17 +336,17 @@ fem_PRG_candido_bareiro = { # Cándido Pastor Bareiro Caballero
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1865.1.1
-        latest_usage_date = 1880.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1865.1.1
+		latest_usage_date = 1880.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_candido_bareiro
@@ -364,11 +356,10 @@ fem_PRG_candido_bareiro = { # Cándido Pastor Bareiro Caballero
 
 PRG_pedro_taboada_zarza = { # Pedro Antonio Taboada Zarza
 	first_name = Pedro_Antonio
-	last_name = Zarza 
+	last_name = Zarza
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
@@ -378,8 +369,8 @@ PRG_pedro_taboada_zarza = { # Pedro Antonio Taboada Zarza
 		inspirational_orator
 		basic_political_operator
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -389,17 +380,17 @@ PRG_pedro_taboada_zarza = { # Pedro Antonio Taboada Zarza
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1885.1.1
-        latest_usage_date = 1900.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1885.1.1
+		latest_usage_date = 1900.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_pedro_taboada_zarza
@@ -409,11 +400,10 @@ PRG_pedro_taboada_zarza = { # Pedro Antonio Taboada Zarza
 
 fem_PRG_pedro_taboada_zarza = { # Pedro Antonio Taboada Zarza
 	first_name = Petra_Antonia
-	last_name = Zarza 
+	last_name = Zarza
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_petty_bourgeoisie
@@ -423,8 +413,8 @@ fem_PRG_pedro_taboada_zarza = { # Pedro Antonio Taboada Zarza
 		inspirational_orator
 		basic_political_operator
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -434,17 +424,17 @@ fem_PRG_pedro_taboada_zarza = { # Pedro Antonio Taboada Zarza
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_petty_bourgeoisie
-        }   
-        earliest_usage_date = 1885.1.1
-        latest_usage_date = 1900.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1885.1.1
+		latest_usage_date = 1900.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_pedro_taboada_zarza
@@ -458,18 +448,17 @@ PRG_cecilio_baez = { # Cecilio Báez González
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
 	ideology = ideology_reformer
-	birth_date = 1862.1.1 
+	birth_date = 1862.1.1
 	traits = {
 		erudite
 		basic_diplomat
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -479,17 +468,17 @@ PRG_cecilio_baez = { # Cecilio Báez González
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1890.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1890.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_cecilio_baez
@@ -503,18 +492,17 @@ fem_PRG_cecilio_baez = { # Cecilio Báez González
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
 	ideology = ideology_reformer
-	birth_date = 1862.1.1 
+	birth_date = 1862.1.1
 	traits = {
 		erudite
 		basic_diplomat
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -524,17 +512,17 @@ fem_PRG_cecilio_baez = { # Cecilio Báez González
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1890.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1890.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_cecilio_baez
@@ -548,7 +536,6 @@ PRG_rufino_recalde_milesi = { # Rufino Recalde Milesi
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_trade_unions 
@@ -558,8 +545,8 @@ PRG_rufino_recalde_milesi = { # Rufino Recalde Milesi
 		innovative
 		inspirational_orator
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -569,17 +556,17 @@ PRG_rufino_recalde_milesi = { # Rufino Recalde Milesi
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_trade_unions
-        }   
-        earliest_usage_date = 1906.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1906.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_rufino_recalde_milesi
@@ -593,7 +580,6 @@ fem_PRG_rufino_recalde_milesi = { # Rufino Recalde Milesi
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_trade_unions 
@@ -603,8 +589,8 @@ fem_PRG_rufino_recalde_milesi = { # Rufino Recalde Milesi
 		innovative
 		inspirational_orator
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -614,17 +600,17 @@ fem_PRG_rufino_recalde_milesi = { # Rufino Recalde Milesi
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_trade_unions
-        }   
-        earliest_usage_date = 1906.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1906.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_rufino_recalde_milesi
@@ -638,7 +624,6 @@ PRG_manuel_ferreira_sosa = { # Manuel Ferreira Sosa
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_industrialists
@@ -647,8 +632,8 @@ PRG_manuel_ferreira_sosa = { # Manuel Ferreira Sosa
 	traits = {
 		ambitious
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -658,17 +643,17 @@ PRG_manuel_ferreira_sosa = { # Manuel Ferreira Sosa
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_industrialists
-        }   
-        earliest_usage_date = 1930.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1930.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_manuel_ferreira_sosa
@@ -682,7 +667,6 @@ fem_PRG_manuel_ferreira_sosa = { # Manuel Ferreira Sosa
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_industrialists
@@ -691,8 +675,8 @@ fem_PRG_manuel_ferreira_sosa = { # Manuel Ferreira Sosa
 	traits = {
 		ambitious
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -702,17 +686,17 @@ fem_PRG_manuel_ferreira_sosa = { # Manuel Ferreira Sosa
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_industrialists
-        }   
-        earliest_usage_date = 1930.1.1
-        latest_usage_date = 1936.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1930.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_manuel_ferreira_sosa
@@ -726,7 +710,7 @@ PRG_jacobo_friedmann = { # Jacobo Friedmann
 	historical = yes
 	female = no
 	ig_leader = yes
-	culture = global_var:hun_culture
+	culture = cu:hungarian
 	religion = rel:jewish
 	interest_group = ig_industrialists
 	ideology = ideology_moderate
@@ -735,8 +719,8 @@ PRG_jacobo_friedmann = { # Jacobo Friedmann
 		persistent
 		innovative
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -752,16 +736,17 @@ PRG_jacobo_friedmann = { # Jacobo Friedmann
 				has_law = law_type:law_ethnostate
 				has_law = law_type:law_state_religion
 			}
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_industrialists
-        }   
-        earliest_usage_date = 1910.1.1
-        latest_usage_date = 1930.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1930.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:hungarian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jacobo_friedmann
@@ -775,7 +760,7 @@ fem_PRG_jacobo_friedmann = { # Jacobo Friedmann
 	historical = yes
 	female = yes
 	ig_leader = yes
-	culture = global_var:hun_culture
+	culture = cu:hungarian
 	religion = rel:jewish
 	interest_group = ig_industrialists
 	ideology = ideology_moderate
@@ -784,8 +769,8 @@ fem_PRG_jacobo_friedmann = { # Jacobo Friedmann
 		persistent
 		innovative
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -801,16 +786,17 @@ fem_PRG_jacobo_friedmann = { # Jacobo Friedmann
 				has_law = law_type:law_ethnostate
 				has_law = law_type:law_state_religion
 			}
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_industrialists
-        }   
-        earliest_usage_date = 1910.1.1
-        latest_usage_date = 1930.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1910.1.1
+		latest_usage_date = 1930.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:hungarian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jacobo_friedmann
@@ -824,7 +810,6 @@ PRG_juan_sinforiano = { # Juan Sinforiano Bogarín González
 	historical = yes
 	female = no
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_devout
@@ -834,8 +819,8 @@ PRG_juan_sinforiano = { # Juan Sinforiano Bogarín González
 		pious
 		persistent
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -845,17 +830,17 @@ PRG_juan_sinforiano = { # Juan Sinforiano Bogarín González
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1895.1.1
-        latest_usage_date = 1930.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1895.1.1
+		latest_usage_date = 1930.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_juan_sinforiano
@@ -869,7 +854,6 @@ fem_PRG_juan_sinforiano = { # Juan Sinforiano Bogarín González
 	historical = yes
 	female = yes
 	ig_leader = yes
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_devout
@@ -879,8 +863,8 @@ fem_PRG_juan_sinforiano = { # Juan Sinforiano Bogarín González
 		pious
 		persistent
 	}
-    interest_group_leader_usage = {
-        country_trigger = {
+	interest_group_leader_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -890,17 +874,17 @@ fem_PRG_juan_sinforiano = { # Juan Sinforiano Bogarín González
 			}
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
-        }
-        interest_group_trigger = {
+		}
+		interest_group_trigger = {
 			is_interest_group_type = ig_devout
-        }   
-        earliest_usage_date = 1895.1.1
-        latest_usage_date = 1930.1.1
-        chance = 50
-    }   
+		}
+		earliest_usage_date = 1895.1.1
+		latest_usage_date = 1930.1.1
+		chance = 50
+	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_juan_sinforiano
@@ -917,7 +901,6 @@ PRG_bernardino_caballero = { # Bernardino Caballero de Añazco Melgarejo y Genes
 	commander_rank = default
 	interest_group = ig_landowners
 	ideology = ideology_moderate
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -944,7 +927,7 @@ PRG_bernardino_caballero = { # Bernardino Caballero de Añazco Melgarejo y Genes
 	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_bernardino_caballero
@@ -962,7 +945,6 @@ fem_PRG_bernardino_caballero = { # Bernardino Caballero de Añazco Melgarejo y G
 	commander_rank = default
 	interest_group = ig_landowners
 	ideology = ideology_moderate
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -989,7 +971,7 @@ fem_PRG_bernardino_caballero = { # Bernardino Caballero de Añazco Melgarejo y G
 	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_bernardino_caballero
@@ -1006,7 +988,6 @@ PRG_patricio_escobar = { # Patricio Escobar Cáceres
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_liberal_leader
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1032,7 +1013,7 @@ PRG_patricio_escobar = { # Patricio Escobar Cáceres
 	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_patricio_escobar
@@ -1050,7 +1031,6 @@ fem_PRG_patricio_escobar = { # Patricio Escobar Cáceres
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_liberal_leader
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1076,7 +1056,7 @@ fem_PRG_patricio_escobar = { # Patricio Escobar Cáceres
 	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_patricio_escobar
@@ -1093,7 +1073,6 @@ PRG_jose_maria_bruguez = { # José María Bruguez
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_moderate
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1120,7 +1099,7 @@ PRG_jose_maria_bruguez = { # José María Bruguez
 	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_maria_bruguez
@@ -1138,7 +1117,6 @@ fem_PRG_jose_maria_bruguez = { # José María Bruguez
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_moderate
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1165,7 +1143,7 @@ fem_PRG_jose_maria_bruguez = { # José María Bruguez
 	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_maria_bruguez
@@ -1182,7 +1160,6 @@ PRG_jose_felix_estigarribia = { # José Félix Estigarribia Insaurralde
 	commander_rank = default
 	interest_group = ig_rural_folk
 	ideology = ideology_authoritarian
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1209,7 +1186,7 @@ PRG_jose_felix_estigarribia = { # José Félix Estigarribia Insaurralde
 	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_felix_estigarribia
@@ -1227,7 +1204,6 @@ fem_PRG_jose_felix_estigarribia = { # José Félix Estigarribia Insaurralde
 	commander_rank = default
 	interest_group = ig_rural_folk
 	ideology = ideology_authoritarian
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1254,7 +1230,7 @@ fem_PRG_jose_felix_estigarribia = { # José Félix Estigarribia Insaurralde
 	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_felix_estigarribia
@@ -1271,7 +1247,6 @@ PRG_rafael_franco = { # Rafael de la Cruz Franco Ojeda
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_social_democrat
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1298,7 +1273,7 @@ PRG_rafael_franco = { # Rafael de la Cruz Franco Ojeda
 	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_rafael_franco
@@ -1316,7 +1291,6 @@ fem_PRG_rafael_franco = { # Rafael de la Cruz Franco Ojeda
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_social_democrat
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1343,7 +1317,7 @@ fem_PRG_rafael_franco = { # Rafael de la Cruz Franco Ojeda
 	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_rafael_franco
@@ -1360,7 +1334,6 @@ PRG_jose_eduvigis_diaz = { # José Eduvigis Díaz Vera y Aragón
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_jingoist_leader
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1387,7 +1360,7 @@ PRG_jose_eduvigis_diaz = { # José Eduvigis Díaz Vera y Aragón
 	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_eduvigis_diaz
@@ -1405,7 +1378,6 @@ fem_PRG_jose_eduvigis_diaz = { # José Eduvigis Díaz Vera y Aragón
 	commander_rank = default
 	interest_group = ig_armed_forces
 	ideology = ideology_jingoist_leader
-	#culture = global_var:la_plata_culture
 	culture = primary_culture
 	religion = rel:catholic
 	traits = {
@@ -1432,7 +1404,7 @@ fem_PRG_jose_eduvigis_diaz = { # José Eduvigis Díaz Vera y Aragón
 	}
 	trait_generation = { }
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_jose_eduvigis_diaz
@@ -1445,8 +1417,7 @@ PRG_juan_silvano_godoi = { #Juan Silvano Godoi Echagüe
 	last_name = Godoi
 	historical = yes
 	female = no
-	is_agitator = yes 
-	#culture = global_var:la_plata_culture
+	is_agitator = yes
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -1457,8 +1428,8 @@ PRG_juan_silvano_godoi = { #Juan Silvano Godoi Echagüe
 		brave
 		literary
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1471,13 +1442,13 @@ PRG_juan_silvano_godoi = { #Juan Silvano Godoi Echagüe
 		}
 		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-		}   
+		}
 		earliest_usage_date = 1875.1.1
 		latest_usage_date = 1895.1.1
 		chance = 50
-    }
+	}
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_juan_silvano_godoi
@@ -1490,8 +1461,7 @@ fem_PRG_juan_silvano_godoi = { #Juan Silvano Godoi Echagüe
 	last_name = Godoi
 	historical = yes
 	female = yes
-	is_agitator = yes 
-	#culture = global_var:la_plata_culture
+	is_agitator = yes
 	culture = primary_culture
 	religion = rel:catholic
 	interest_group = ig_intelligentsia
@@ -1502,8 +1472,8 @@ fem_PRG_juan_silvano_godoi = { #Juan Silvano Godoi Echagüe
 		brave
 		literary
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1516,13 +1486,13 @@ fem_PRG_juan_silvano_godoi = { #Juan Silvano Godoi Echagüe
 		}
 		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-		}   
+		}
 		earliest_usage_date = 1875.1.1
 		latest_usage_date = 1895.1.1
 		chance = 50
-    }
+	}
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_juan_silvano_godoi
@@ -1535,8 +1505,7 @@ PRG_rafael_barrett = { #Rafael Ángel Jorge Julián Barrett y Álvarez de Toledo
 	last_name = Barrett
 	historical = yes
 	female = no
-	is_agitator = yes 
-	#culture = global_var:la_plata_culture
+	is_agitator = yes
 	culture = primary_culture
 	religion = rel:atheist
 	interest_group = ig_intelligentsia
@@ -1547,8 +1516,8 @@ PRG_rafael_barrett = { #Rafael Ángel Jorge Julián Barrett y Álvarez de Toledo
 		sickly
 		firebrand
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1559,15 +1528,15 @@ PRG_rafael_barrett = { #Rafael Ángel Jorge Julián Barrett y Álvarez de Toledo
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
 		}
-        interest_group_trigger = {
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1908.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }
+		}
+		earliest_usage_date = 1908.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_rafael_barrett
@@ -1580,8 +1549,7 @@ fem_PRG_rafael_barrett = { #Rafael Ángel Jorge Julián Barrett y Álvarez de To
 	last_name = Barrett
 	historical = yes
 	female = yes
-	is_agitator = yes 
-	#culture = global_var:la_plata_culture
+	is_agitator = yes
 	culture = primary_culture
 	religion = rel:atheist
 	interest_group = ig_intelligentsia
@@ -1592,8 +1560,8 @@ fem_PRG_rafael_barrett = { #Rafael Ángel Jorge Julián Barrett y Álvarez de To
 		sickly
 		firebrand
 	}
-    agitator_usage = {
-        country_trigger = {
+	agitator_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -1604,15 +1572,15 @@ fem_PRG_rafael_barrett = { #Rafael Ángel Jorge Julián Barrett y Álvarez de To
 			uses_peu_characters = yes
 			has_dlc_feature = rp1_content
 		}
-        interest_group_trigger = {
+		interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
-        }   
-        earliest_usage_date = 1908.1.1
-        latest_usage_date = 1920.1.1
-        chance = 50
-    }
+		}
+		earliest_usage_date = 1908.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
 	on_created = {
-		converter_platinean_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_rafael_barrett

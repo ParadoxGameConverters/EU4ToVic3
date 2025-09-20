@@ -2,16 +2,16 @@
 	first_name = Paula
 	last_name = Kruger
 	historical = yes
-	#culture = global_var:kruger_culture
 	culture = cu:boer
 	female = yes
-	religion = protestant
+	dna = dna_paul_kruger
+	religion = rel:protestant
 	ideology = ideology_traditionalist
 	interest_group = ig_rural_folk
 	birth_date = 1825.10.10
 	traits = {
 		pious
-	}   
+	}
 	interest_group_leader_usage = {
 		country_trigger = {
 			should_have_female_characters = yes
@@ -21,19 +21,7 @@
 					target = flag:converter_kruger
 				}
 			}
-			is_settler_colonial_country = yes
-			trigger_if = {
-				limit = {
-					exists = c:TRN
-					#is_target_in_global_variable_list = { name = global_kruger_countries target = c:TRN }
-					c:TRN = { any_primary_culture = { is_target_in_global_variable_list = { name = global_dixie_cultures target = this } } }
-				}
-				this = c:TRN
-			}
-			trigger_else = {
-				#is_target_in_global_variable_list = { name = global_kruger_countries target = this }
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_dixie_cultures target = this } }
-			}
+			uses_saf_characters = yes
 		}
 		interest_group_trigger = {
 			is_marginal = no
@@ -42,7 +30,7 @@
 				is_interest_group_type = ig_landowners
 				is_interest_group_type = ig_petty_bourgeoisie
 			}
-            NOR = {
+			NOR = {
 				has_variable = communist_ig_var
 				has_variable = chose_vanguardism
 				has_variable = chose_fascism
@@ -54,7 +42,7 @@
 		chance = 50
 	}
 	on_created = {
-		converter_cape_template_effect = yes
+		converter_colonial_template_effect = { TARGET = global_cape_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_kruger
@@ -68,16 +56,16 @@ fem_mex_juarez_character_template = {
 	historical = yes
 	culture = cu:zapotec
 	female = yes
-	religion = catholic
+	religion = rel:catholic
 	ideology = ideology_market_liberal
 	interest_group = ig_intelligentsia
 	birth_date = 1806.3.21
-    dna = dna_benito_juarez
+	dna = dna_benito_juarez
 	traits = {
 		experienced_political_operator
 		direct
 		persistent
-	}   
+	}
 	interest_group_leader_usage = {
 		country_trigger = {
 			should_have_female_characters = yes
@@ -100,14 +88,14 @@ fem_mex_juarez_character_template = {
 				is_interest_group_type = ig_intelligentsia
 				is_interest_group_type = ig_rural_folk
 			}
-            NOR = {
+			NOR = {
 				has_variable = communist_ig_var
 				has_variable = chose_vanguardism
 				has_variable = chose_fascism
 				has_variable = chose_conservatism
 				has_variable = chose_ethno_nationalism
 			}
-		}   
+		}
 		earliest_usage_date = 1836.1.1
 		latest_usage_date = 1872.1.1
 		chance = 75
@@ -119,183 +107,15 @@ fem_mex_juarez_character_template = {
 		}
 	}
 }
-# China - CHI
-fem_chi_sun_character_template = { # Sun Yat-sen
-	first_name = Wen
-	last_name = Sun
-	historical = yes
-	culture = global_var:han_culture
-	female = yes
-	religion = global_var:yat_sen_religion			# Converted to Christianity in the 80s.
-	ideology = ideology_republican_leader
-	interest_group = ig_intelligentsia
-	birth_date = 1866.11.12
-	traits = {
-		ambitious
-		persistent
-		inspirational_orator
-	}   
-	interest_group_leader_usage = {
-		country_trigger = {
-			should_have_female_characters = yes
-			NOT = {
-				is_target_in_global_variable_list = {
-					name = converter_unavailable_unique_characters
-					target = flag:converter_sun_yat_sen
-				}
-			}
-			uses_han_characters = yes
-		}
-		interest_group_trigger = {
-			is_marginal = no
-			OR = {
-				is_interest_group_type = ig_intelligentsia
-				is_interest_group_type = ig_trade_unions
-				is_interest_group_type = ig_petty_bourgeoisie
-			}
-            NOR = {
-				has_variable = communist_ig_var
-				has_variable = chose_vanguardism
-				has_variable = chose_fascism
-				has_variable = chose_conservatism
-				has_variable = chose_ethno_nationalism
-			}
-		}
-		earliest_usage_date = 1888.1.1
-		latest_usage_date = 1925.1.1
-		chance = 50
-	}
-	on_created = {
-		add_to_global_variable_list = {
-			name = converter_unavailable_unique_characters
-			target = flag:converter_sun_yat_sen
-		}
-	}
-}
-fem_chi_gong_character_template = {
-	first_name = Yixin
-	last_name = Aisin_Gioro
-	historical = yes
-	culture = global_var:manchu_culture
-	female = yes
-	ideology = ideology_royalist
-	interest_group = ig_landowners
-	birth_date = 1833.1.11
-	traits = {
-		experienced_diplomat
-		expensive_tastes
-	}   
-	interest_group_leader_usage = {
-		country_trigger = {
-			should_have_female_characters = yes
-			NOT = {
-				is_target_in_global_variable_list = {
-					name = converter_unavailable_unique_characters
-					target = flag:converter_prince_gong
-				}
-			}
-			trigger_if = {
-				limit = {
-					exists = c:CHI
-					is_target_in_global_variable_list = { name = global_manchu_countries target = c:CHI }
-				}
-				this = c:CHI
-			}
-			trigger_else = {
-				is_target_in_global_variable_list = { name = global_manchu_countries target = this }
-			}
-			has_law = law_type:law_monarchy
-		}
-		interest_group_trigger = {
-			is_marginal = no
-			is_interest_group_type = ig_landowners
-            NOR = {
-				has_variable = communist_ig_var
-				has_variable = chose_vanguardism
-				has_variable = chose_fascism
-				has_variable = chose_conservatism
-				has_variable = chose_ethno_nationalism
-			}
-		}
-		earliest_usage_date = 1853.1.1
-		latest_usage_date = 1898.1.1
-		chance = 50
-	}
-	on_created = {
-		add_to_global_variable_list = {
-			name = converter_unavailable_unique_characters
-			target = flag:converter_prince_gong
-		}
-	}
-}
-masc_chi_cixi_template = {
-    first_name = Xiang
-    last_name = Yehe_Nara
-    historical = yes
-    culture = global_var:manchu_culture
-    female = no
-    ideology = ideology_royalist
-    interest_group = ig_landowners
-    birth_date = 1835.11.29
-    dna = dna_empress_dowager_cixi
-    traits = {
-       ambitious
-       reckless
-       experienced_political_operator
-    }   
-    interest_group_leader_usage = {
-        country_trigger = {
-			should_have_female_characters = yes
-			NOT = {
-				is_target_in_global_variable_list = {
-					name = converter_unavailable_unique_characters
-					target = flag:converter_cixi_template
-				}
-			}
-			trigger_if = {
-				limit = {
-					exists = c:CHI
-					is_target_in_global_variable_list = { name = global_manchu_countries target = c:CHI }
-				}
-				this = c:CHI
-			}
-			trigger_else = {
-				is_target_in_global_variable_list = { name = global_manchu_countries target = this }
-			}
-            c:CHI = { has_law = law_type:law_monarchy }
-            has_dlc_feature = ep1_content
-        }
-        interest_group_trigger = {
-            is_marginal = no
-            is_interest_group_type = ig_landowners
-            NOR = {
-                has_variable = communist_ig_var
-                has_variable = chose_vanguardism
-                has_variable = chose_fascism
-                has_variable = chose_conservatism
-                has_variable = chose_ethno_nationalism
-            }
-        }
-        earliest_usage_date = 1852.6.26 # the day she entered the Forbidden City
-        latest_usage_date = 1898.1.1
-        chance = 50
-    }  
-	on_created = {
-		add_to_global_variable_list = {
-			name = converter_unavailable_unique_characters
-			target = flag:converter_cixi_template
-		}
-	} 
-}
 
 # France - FRA
 fem_fra_clemenceau_character_template = {
 	first_name = Georgette
 	last_name = Clemenceau
 	historical = yes
-	culture = global_var:fra_culture
+	culture = cu:french
 	female = yes
-	religion = catholic
+	religion = rel:catholic
 	ideology = ideology_radical
 	interest_group = ig_intelligentsia
 	dna = dna_georges_clemenceau
@@ -304,7 +124,7 @@ fem_fra_clemenceau_character_template = {
 		experienced_political_operator
 		persistent
 		direct
-	}   
+	}
 	interest_group_leader_usage = {
 		country_trigger = {
 			should_have_female_characters = yes
@@ -320,19 +140,20 @@ fem_fra_clemenceau_character_template = {
 		interest_group_trigger = {
 			is_marginal = no
 			is_interest_group_type = ig_intelligentsia   
-            NOR = {
+			NOR = {
 				has_variable = communist_ig_var
 				has_variable = chose_vanguardism
 				has_variable = chose_fascism
 				has_variable = chose_conservatism
 				has_variable = chose_ethno_nationalism
 			}
-		}   
+		}
 		earliest_usage_date = 1871.1.1
 		latest_usage_date = 1929.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_clemenceau
@@ -344,9 +165,9 @@ fem_frm_grimm_character_template = {
 	first_name = Elma
 	last_name = Grimm
 	historical = yes
-	culture = global_var:nor_ger_culture
+	culture = cu:north_german
 	female = yes
-	religion = protestant
+	religion = rel:protestant
 	ideology = ideology_reformer
 	interest_group = ig_intelligentsia
 	birth_date = 1786.2.24
@@ -355,7 +176,7 @@ fem_frm_grimm_character_template = {
 		basic_political_operator
 		erudite
 		literary
-	}   
+	}
 	interest_group_leader_usage = {
 		country_trigger = {
 			should_have_female_characters = yes
@@ -365,24 +186,25 @@ fem_frm_grimm_character_template = {
 					target = flag:converter_grimm
 				}
 			}
-			is_target_in_global_variable_list = { name = global_nor_ger_countries target = this }		##She spawns for enough vanilla countries, no need to tag restrict
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_nor_ger_cultures target = this } }		##She spawns for enough vanilla countries, no need to tag restrict
 		}
 		interest_group_trigger = {
 			is_marginal = no
 			is_interest_group_type = ig_intelligentsia   
-            NOR = {
+			NOR = {
 				has_variable = communist_ig_var
 				has_variable = chose_vanguardism
 				has_variable = chose_fascism
 				has_variable = chose_conservatism
 				has_variable = chose_ethno_nationalism
 			}
-		}   
+		}
 		earliest_usage_date = 1836.1.1
 		latest_usage_date = 1850.1.1
 		chance = 20
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_grimm
@@ -394,11 +216,11 @@ fem_nor_thrane_template = {
 	first_name = Marcia
 	last_name = Thrane
 	historical = yes
-	culture = global_var:nor_culture
+	culture = cu:norwegian
 	female = yes
 	birth_date = 1817.10.14
 	ig_leader = yes
-    dna = dna_marcus_thrane 
+	dna = dna_marcus_thrane
 	interest_group = ig_trade_unions
 	ideology = ideology_radical
 	traits = {
@@ -420,12 +242,13 @@ fem_nor_thrane_template = {
 		interest_group_trigger = {
 			is_marginal = no
 			is_interest_group_type = ig_trade_unions
-		}   
+		}
 		earliest_usage_date = 1848.1.1
 		latest_usage_date = 1890.1.1	
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:norwegian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_marcus_thrane
@@ -437,9 +260,9 @@ fem_pru_bismarck_character_template = {
 	first_name = Uta
 	last_name = von_Bismarck
 	historical = yes
-	culture = global_var:nor_ger_culture
+	culture = cu:north_german
 	female = yes
-	religion = protestant
+	religion = rel:protestant
 	ideology = ideology_royalist
 	interest_group = ig_landowners
 	birth_date = 1815.4.1
@@ -447,14 +270,14 @@ fem_pru_bismarck_character_template = {
 		experienced_political_operator
 		masterful_diplomat
 		direct
-	}   
+	}
 	interest_group_leader_usage = {
 		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
 					name = converter_unavailable_unique_characters
-					target = flag:converter_bismarck
+					target = flag:converter_otto_von_bismarck
 				}
 			}
 			uses_pru_ger_characters = yes
@@ -466,22 +289,23 @@ fem_pru_bismarck_character_template = {
 		interest_group_trigger = {
 			is_marginal = no
 			is_interest_group_type = ig_landowners   
-            NOR = {
+			NOR = {
 				has_variable = communist_ig_var
 				has_variable = chose_vanguardism
 				has_variable = chose_fascism
 				has_variable = chose_conservatism
 				has_variable = chose_ethno_nationalism
 			}
-		}   
+		}
 		earliest_usage_date = 1847.1.1
 		latest_usage_date = 1884.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
-			target = flag:converter_bismarck
+			target = flag:converter_otto_von_bismarck
 		}
 	}
 }
@@ -490,18 +314,18 @@ fem_sar_benso_character_template = { # The Count of Cavour
 	first_name = Camilla
 	last_name = Benso
 	historical = yes
-	culture = global_var:nor_ita_culture
+	culture = cu:north_italian
 	female = yes
-	religion = catholic
-    dna = dna_count_of_cavour
-    ideology = ideology_reformer
+	religion = rel:catholic
+	dna = dna_count_of_cavour
+	ideology = ideology_reformer
 	interest_group = ig_industrialists
 	birth_date = 1810.8.10
 	traits = {
 		experienced_political_operator
 		meticulous
 		innovative
-	}   
+	}
 	interest_group_leader_usage = {
 		country_trigger = {
 			should_have_female_characters = yes
@@ -516,19 +340,20 @@ fem_sar_benso_character_template = { # The Count of Cavour
 		interest_group_trigger = {
 			is_marginal = no
 			is_interest_group_type = ig_industrialists   
-            NOR = {
+			NOR = {
 				has_variable = communist_ig_var
 				has_variable = chose_vanguardism
 				has_variable = chose_fascism
 				has_variable = chose_conservatism
 				has_variable = chose_ethno_nationalism
 			}
-		}   
+		}
 		earliest_usage_date = 1850.1.1
 		latest_usage_date = 1862.1.1
 		chance = 50
 	}
 	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_italian }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
 			target = flag:converter_count_of_cavour
