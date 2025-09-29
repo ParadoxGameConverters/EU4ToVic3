@@ -278,6 +278,15 @@ void V3::Country::registerKeys()
 	registerKeyword("color", [this](std::istream& theStream) {
 		vanillaData->color = commonItems::Color::Factory().getColor(theStream);
 	});
+	registerKeyword("primary_unit_color", [this](std::istream& theStream) {
+		vanillaData->primaryUnitColor = commonItems::Color::Factory().getColor(theStream);
+	});
+	registerKeyword("secondary_unit_color", [this](std::istream& theStream) {
+		vanillaData->secondaryUnitColor = commonItems::Color::Factory().getColor(theStream);
+	});
+	registerKeyword("tertiary_unit_color", [this](std::istream& theStream) {
+		vanillaData->tertiaryUnitColor = commonItems::Color::Factory().getColor(theStream);
+	});
 	registerKeyword("is_named_from_capital", [this](const std::string& unused, std::istream& theStream) {
 		commonItems::ignoreItem(unused, theStream);
 		vanillaData->is_named_from_capital = true;
@@ -318,6 +327,18 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	if (vanillaData && vanillaData->color)
 	{
 		processedData.color = vanillaData->color;
+	}
+	if (vanillaData && vanillaData->primaryUnitColor)
+	{
+		processedData.primaryUnitColor = vanillaData->primaryUnitColor;
+	}
+	if (vanillaData && vanillaData->secondaryUnitColor)
+	{
+		processedData.secondaryUnitColor = vanillaData->secondaryUnitColor;
+	}
+	if (vanillaData && vanillaData->tertiaryUnitColor)
+	{
+		processedData.tertiaryUnitColor = vanillaData->tertiaryUnitColor;
 	}
 	else if (sourceCountry->getNationalColors().getMapColor())
 	{
