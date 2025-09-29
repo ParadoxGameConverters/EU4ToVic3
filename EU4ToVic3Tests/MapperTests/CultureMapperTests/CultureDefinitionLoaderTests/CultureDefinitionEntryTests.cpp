@@ -10,7 +10,9 @@ TEST(Mappers_CultureDefinitionEntryTests, DefaultsDefaultToDefaults)
 	EXPECT_TRUE(entry.getCultureDef().name.empty());
 	EXPECT_FALSE(entry.getCultureDef().color);
 	EXPECT_TRUE(entry.getCultureDef().religion.empty());
-	EXPECT_TRUE(entry.getCultureDef().traits.empty());
+	EXPECT_TRUE(entry.getCultureDef().language.empty());
+	EXPECT_TRUE(entry.getCultureDef().heritage.empty());
+	EXPECT_TRUE(entry.getCultureDef().traditions.empty());
 	EXPECT_TRUE(entry.getCultureDef().maleCommonFirstNames.empty());
 	EXPECT_TRUE(entry.getCultureDef().femaleCommonFirstNames.empty());
 	EXPECT_TRUE(entry.getCultureDef().nobleLastNames.empty());
@@ -29,7 +31,9 @@ TEST(Mappers_CultureDefinitionEntryTests, EntryCanBeLoaded)
 	std::stringstream input;
 	input << "color = rgb{ 1 2 3 }\n";
 	input << "religion = religion_1\n";
-	input << "traits = { testtrait1 }\n";
+	input << "heritage = \n";
+	input << "language = testlanguage\n";
+	input << "traditions = { testtrait1 }\n";
 	input << "obsessions = { obsession_1 }\n";
 	input << "male_common_first_names= { mcfn1 mcfn2 }\n";
 	input << "female_common_first_names = { fcfn1 fcfn2 }\n";
@@ -46,7 +50,10 @@ TEST(Mappers_CultureDefinitionEntryTests, EntryCanBeLoaded)
 
 	EXPECT_TRUE(entry.getCultureDef().name.empty());
 	EXPECT_EQ(commonItems::Color(std::array{1, 2, 3}), *entry.getCultureDef().color);
-	EXPECT_THAT(entry.getCultureDef().traits, testing::UnorderedElementsAre("testtrait1"));
+	EXPECT_EQ("religion_1", entry.getCultureDef().religion);
+	EXPECT_EQ("testheritage", entry.getCultureDef().heritage);
+	EXPECT_EQ("testlanguage", entry.getCultureDef().language);
+	EXPECT_THAT(entry.getCultureDef().traditions, testing::UnorderedElementsAre("testtrait1"));
 	EXPECT_THAT(entry.getCultureDef().obsessions, testing::UnorderedElementsAre("obsession_1"));
 	EXPECT_THAT(entry.getCultureDef().maleCommonFirstNames, testing::UnorderedElementsAre("mcfn1", "mcfn2"));
 	EXPECT_THAT(entry.getCultureDef().femaleCommonFirstNames, testing::UnorderedElementsAre("fcfn1", "fcfn2"));

@@ -12,11 +12,15 @@ void outCulture(std::ostream& output, const mappers::CultureDef& culture)
 		output << "\tcolor " << *culture.color << "\n";
 	if (!culture.religion.empty())
 		output << "\treligion = \"" << culture.religion << "\"\n";
-	if (!culture.traits.empty())
+	if (!culture.language.empty())
+		output << "\tlanguage = \"" << culture.language << "\"\n";
+	if (!culture.heritage.empty())
+		output << "\theritage = \"" << culture.heritage << "\"\n";
+	if (!culture.traditions.empty())
 	{
-		output << "\ttraits = { ";
-		for (const auto& trait: culture.traits)
-			output << trait << " ";
+		output << "\ttraditions = { ";
+		for (const auto& tradition: culture.traditions)
+			output << tradition << " ";
 		output << "}\n";
 	}
 	if (!culture.maleCommonFirstNames.empty())
