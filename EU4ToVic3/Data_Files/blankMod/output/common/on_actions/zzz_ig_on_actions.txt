@@ -129,13 +129,13 @@ converter_game_started_after_lobby = {
 					any_primary_culture = {
 						trigger_if = {
 							limit = { prev.capital = { zzz_converter_state_is_in_australia = yes } }
-							has_discrimination_trait = indigenous_oceanic_heritage
+							has_discrimination_trait_group = heritage_group_indigenous_oceanic
 						}
 						trigger_else_if = {
 							limit = { prev.capital = { region = sr:region_southern_africa } }
-							has_discrimination_trait = african_heritage
+							has_discrimination_trait_group = heritage_group_african
 						}
-						trigger_else = { has_discrimination_trait = indigenous_american_heritage }
+						trigger_else = { has_discrimination_trait_group = heritage_group_indigenous_american }
 						trigger_if = {
 							limit = {
 								prev.capital = { zzz_converter_state_is_in_canada = yes }
@@ -221,13 +221,13 @@ converter_game_started_after_lobby = {
 					limit = {
 						trigger_if = {
 							limit = { prev.capital = { zzz_converter_state_is_in_australia = yes } }
-							has_discrimination_trait = indigenous_oceanic_heritage
+							has_discrimination_trait_group = heritage_group_indigenous_oceanic
 						}
 						trigger_else_if = {
 							limit = { prev.capital = { region = sr:region_southern_africa } }
-							has_discrimination_trait = african_heritage
+							has_discrimination_trait_group = heritage_group_african
 						}
-						trigger_else = { has_discrimination_trait = indigenous_american_heritage }
+						trigger_else = { has_discrimination_trait_group = heritage_group_indigenous_american }
 						trigger_if = {
 							limit = {
 								prev.capital = { zzz_converter_state_is_in_canada = yes }

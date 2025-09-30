@@ -119,7 +119,7 @@ coat_of_arms_template_lists = {
 				exists = scope:target
 				scope:target ?= {
 					any_primary_culture = {
-						has_discrimination_trait = christian
+						has_discrimination_trait = heritage_christian
 					}
 				}
 			}					
@@ -136,10 +136,10 @@ coat_of_arms_template_lists = {
 				exists = scope:target
 				scope:target ?= {
 					any_primary_culture = {
-						has_discrimination_trait = european_heritage
+						has_discrimination_trait_group = heritage_group_european
 					}
 					religion = {
-						has_discrimination_trait = christian
+						has_discrimination_trait = heritage_christian
 					}
 				}
 			}					
@@ -175,7 +175,7 @@ coat_of_arms_template_lists = {
 				exists = scope:target
 				scope:target ?= {
 					religion ?= {
-						has_discrimination_trait = christian
+						has_discrimination_trait = heritage_christian
 					}				
 					OR = {
 					 	coa_def_italian_trigger = yes
@@ -351,8 +351,8 @@ coat_of_arms_template_lists = {
 			trigger = { 
 				any_primary_culture = {
 					OR = {				
-						has_discrimination_trait = european_heritage
-						has_discrimination_trait = central_asian_heritage
+						has_discrimination_trait_group = heritage_group_european
+						has_discrimination_trait_group = heritage_group_central_asian
 					}
 				}
 			}
@@ -367,9 +367,9 @@ coat_of_arms_template_lists = {
 			trigger = { 
 				any_primary_culture = {
 					OR = {
-						has_discrimination_trait = south_asian_heritage
-						has_discrimination_trait = southeast_asian_heritage
-						has_discrimination_trait = east_asian_heritage
+						has_discrimination_trait_group = heritage_group_south_asian
+						has_discrimination_trait_group = heritage_group_southeast_asian
+						has_discrimination_trait_group = heritage_group_east_asian
 					}
 				}
 			}

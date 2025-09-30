@@ -62,9 +62,9 @@ religious_party = {
 				desc = party_christian_peoples_party
 				trigger = {
 					OR = {																									### Converter
-						root.religion = { has_discrimination_trait = christian }
-						root.var:ancien_regime_religion ?= { has_discrimination_trait = christian }
-						root.var:tc_majority_religion ?= { has_discrimination_trait = christian }
+						root.religion = { has_discrimination_trait = heritage_christian }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = heritage_christian }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = heritage_christian }
 					}
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_wallonian_cultures target = this } }
 				}
@@ -139,9 +139,9 @@ religious_party = {
 				desc = party_buddhist
 				trigger = {
 					OR = {																									### Converter
-						root.religion = { has_discrimination_trait = buddhist }
-						root.var:ancien_regime_religion ?= { has_discrimination_trait = buddhist }
-						root.var:tc_majority_religion ?= { has_discrimination_trait = buddhist }
+						root.religion = { has_discrimination_trait = heritage_dharmic }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = heritage_dharmic }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = heritage_dharmic }
 					}
 				}
 			}
@@ -162,9 +162,9 @@ religious_party = {
 						country_has_state_religion = rel:hindu
 						root.var:ancien_regime_religion = rel:hindu
 						root.var:tc_majority_religion ?= rel:hindu
-						root.religion = { has_discrimination_trait = vedic }
-						root.var:ancien_regime_religion ?= { has_discrimination_trait = vedic }
-						root.var:tc_majority_religion ?= { has_discrimination_trait = vedic }
+						root.religion = { has_discrimination_trait = heritage_vedic }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = heritage_vedic }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = heritage_vedic }
 					}
 				}
 			}
@@ -172,9 +172,9 @@ religious_party = {
 				desc = party_jewish
 				trigger = {
 					OR = {																									### Converter
-						root.religion = { has_discrimination_trait = jewish }
-						root.var:ancien_regime_religion ?= { has_discrimination_trait = jewish }
-						root.var:tc_majority_religion ?= { has_discrimination_trait = jewish }
+						root.religion = { has_discrimination_trait = heritage_jewish }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = heritage_jewish }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = heritage_jewish }
 					}
 				}
 			}
@@ -182,9 +182,9 @@ religious_party = {
 				desc = party_muslim
 				trigger = {
 					OR = {																									### Converter
-						root.religion = { has_discrimination_trait = muslim }
-						root.var:ancien_regime_religion ?= { has_discrimination_trait = muslim }
-						root.var:tc_majority_religion ?= { has_discrimination_trait = muslim }
+						root.religion = { has_discrimination_trait = heritage_islamic }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = heritage_islamic }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = heritage_islamic }
 					}
 				}
 			}
@@ -202,9 +202,9 @@ religious_party = {
 				desc = party_christian
 				trigger = {
 					OR = {																									### Converter
-						root.religion = { has_discrimination_trait = christian }
-						root.var:ancien_regime_religion ?= { has_discrimination_trait = christian }
-						root.var:tc_majority_religion ?= { has_discrimination_trait = christian }
+						root.religion = { has_discrimination_trait = heritage_christian }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = heritage_christian }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = heritage_christian }
 					}
 				}
 			}
