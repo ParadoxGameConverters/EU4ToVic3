@@ -4013,7 +4013,7 @@ converter_decentralized_subjects_effect = {
 	}
 }
 
-convert_subject_type = {
+convert_subject_type = { #prevents subject relations from breaking on start, used in on_game_start
 	if = {
 		limit = { overlord = { is_country_type = unrecognized } }
 		make_subject_of_unrecognized = yes
@@ -4021,6 +4021,14 @@ convert_subject_type = {
 	else_if = {
 		limit = { is_country_type = colonial }
 		make_colonial_subject = yes
+	}
+	else_if = {
+		limit = {
+			is_country_type = company
+			NOT = { is_subject_type = subject_type_chartered_company } #only valid type for company countries, currently
+		}
+		set_variable = converter_made_into_chartered_company
+		change_subject_type = subject_type_chartered_company
 	}
 	else = {
 		make_recognized_subject = yes
@@ -4036,6 +4044,10 @@ make_subject_of_unrecognized = {
 				is_subject_type = subject_type_chartered_company
 			}
 		}
+		if = {
+			limit = { is_country_type = company } # company countries can't be anything except chartered companies
+			set_country_type = colonial
+		}
 		set_variable = converter_made_into_tributary
 		change_subject_type = subject_type_tributary
 	}
@@ -4044,6 +4056,7 @@ make_subject_of_unrecognized = {
 			OR = {
 				is_subject_type = subject_type_colony
 				is_subject_type = subject_type_puppet
+				is_subject_type = subject_type_crown_land
 			}
 		}
 		set_variable = converter_made_into_vassal
@@ -4067,6 +4080,7 @@ make_colonial_subject = {
 			OR = {
 				is_subject_type = subject_type_vassal
 				is_subject_type = subject_type_puppet
+				is_subject_type = subject_type_crown_land
 			}
 		}
 		set_variable = converter_made_into_colony
@@ -4096,11 +4110,22 @@ make_recognized_subject = {
 		set_variable = converter_made_into_puppet
 		change_subject_type = subject_type_puppet
 	}
+	else_if = {
+		limit = {
+			is_subject_type = subject_type_crown_land
+			overlord = {
+				NOT = { has_law_or_variant = law_type:law_monarchy }
+			}
+		}
+		set_variable = converter_made_into_puppet
+		change_subject_type = subject_type_puppet
+	}
 }
 
 converter_make_dominion = {
 	if = {
 		limit = {
+			is_country_type = colonial
 			NOR = {
 				is_subject_type = subject_type_dominion
 				is_subject_type = subject_type_personal_union

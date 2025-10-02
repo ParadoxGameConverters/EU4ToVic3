@@ -9,6 +9,13 @@ on_game_started = {
 
 converter_game_started = {
 	effect = {
+		converter_historical_leader_cultures_effect = yes
+		converter_colonial_confederation_cultures_effect = yes
+		converter_other_starting_cultural_effects = yes
+		every_country = {
+			limit = { is_subject = yes }
+			convert_subject_type = yes
+		}
 		every_country = {
 			if = {
 				limit = {
