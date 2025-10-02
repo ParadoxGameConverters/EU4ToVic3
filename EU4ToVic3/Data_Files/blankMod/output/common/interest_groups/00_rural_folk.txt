@@ -62,9 +62,9 @@
 		#				OR = {
 		#					c:BIC ?= this
 		#					any_primary_culture = {
-		#						has_discrimination_trait = south_asian_heritage
+		#						has_discrimination_trait_group = heritage_group_south_asian
 		#						NOT = {
-		#							has_discrimination_trait = himalayan
+		#							has_discrimination_trait = tradition_himalayan
 		#						}
 		#					}
 		#				}
@@ -139,9 +139,9 @@
 		#		OR = {
 		#			c:BIC ?= this
 		#			any_primary_culture = {
-		#				has_discrimination_trait = south_asian_heritage
+		#				has_discrimination_trait_group = heritage_group_south_asian
 		#				NOT = {
-		#					has_discrimination_trait = himalayan
+		#					has_discrimination_trait = tradition_himalayan
 		#				}
 		#			}
 		#		}
@@ -154,8 +154,8 @@
 		#else_if = {
 		#	limit = {
 		#		any_primary_culture = {
-		#			has_discrimination_trait = south_asian_heritage
-		#			has_discrimination_trait = himalayan
+		#			has_discrimination_trait_group = heritage_group_south_asian
+		#			has_discrimination_trait = tradition_himalayan
 		#		}
 		#	}
 		#	ig:ig_rural_folk = {
