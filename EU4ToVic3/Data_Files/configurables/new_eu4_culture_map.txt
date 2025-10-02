@@ -5,39 +5,41 @@
 #
 # When no provinces of polish_new are found in the save, such swap will not occur. Same goes for everything else listed below.
 #
-# culture = xxx			eu4 cultures to check the presence of
-# addtrait = xxx		traits to be added to mapped culture if target is found
-# removetrait = xxx		traits to be remove from mapped culture if target is found
+# culture = xxx				eu4 cultures to check the presence of
+# addtradition = xxx		tradition traits to be added to mapped culture if target is found
+# replaceheritage = xxx		heritage trait to be added to mapped culture if target is found
+# replacelanguage = xxx		language trait to be added to mapped culture if target is found
+# removetradition = xxx		tradition traits to be remove from mapped culture if target is found
 
 
-link = { culture = anglois addtrait = language_francophone }
-link = { culture = polish_new culture = schlesian_new addtrait = heritage_east_slavic addtrait = language_east_slavic removetrait = heritage_west_slavic removetrait = language_west_slavic }
-link = { culture = czech_new addtrait = heritage_east_slavic addtrait = language_east_slavic removetrait = heritage_west_slavic removetrait = language_west_slavic }
-link = { culture = slovak_new addtrait = heritage_east_slavic addtrait = language_east_slavic removetrait = heritage_west_slavic removetrait = language_west_slavic }
-link = { culture = sorbian_new addtrait = heritage_east_slavic addtrait = language_east_slavic removetrait = heritage_west_slavic removetrait = language_west_slavic }
-link = { culture = croatian_new addtrait = heritage_east_slavic addtrait = language_east_slavic removetrait = heritage_west_slavic removetrait = language_west_slavic }
-link = { culture = serbian_new addtrait = heritage_east_slavic addtrait = language_east_slavic removetrait = heritage_south_slavic removetrait = heritage_south_slavic }
-link = { culture = slovene_new addtrait = heritage_east_slavic addtrait = language_east_slavic removetrait = heritage_south_slavic removetrait = heritage_south_slavic }
-link = { culture = bulgarian_new addtrait = heritage_east_slavic addtrait = language_east_slavic removetrait = heritage_south_slavic removetrait = heritage_south_slavic }
-link = { culture = bosnian_new addtrait = heritage_east_slavic addtrait = language_east_slavic removetrait = heritage_south_slavic removetrait = heritage_south_slavic }
+link = { culture = anglois replacelanguage = language_francophone }
+link = { culture = polish_new culture = schlesian_new replaceheritage = heritage_east_slavic replacelanguage = language_east_slavic removetrait = heritage_west_slavic removetrait = language_west_slavic }
+link = { culture = czech_new replaceheritage = heritage_east_slavic replacelanguage = language_east_slavic removetrait = heritage_west_slavic removetrait = language_west_slavic }
+link = { culture = slovak_new replaceheritage = heritage_east_slavic replacelanguage = language_east_slavic removetrait = heritage_west_slavic removetrait = language_west_slavic }
+link = { culture = sorbian_new replaceheritage = heritage_east_slavic replacelanguage = language_east_slavic removetrait = heritage_west_slavic removetrait = language_west_slavic }
+link = { culture = croatian_new replaceheritage = heritage_east_slavic replacelanguage = language_east_slavic removetrait = heritage_west_slavic removetrait = language_west_slavic }
+link = { culture = serbian_new replaceheritage = heritage_east_slavic replacelanguage = language_east_slavic removetrait = heritage_south_slavic removetrait = heritage_south_slavic }
+link = { culture = slovene_new replaceheritage = heritage_east_slavic replacelanguage = language_east_slavic removetrait = heritage_south_slavic removetrait = heritage_south_slavic }
+link = { culture = bulgarian_new replaceheritage = heritage_east_slavic replacelanguage = language_east_slavic removetrait = heritage_south_slavic removetrait = heritage_south_slavic }
+link = { culture = bosnian_new replaceheritage = heritage_east_slavic replacelanguage = language_east_slavic removetrait = heritage_south_slavic removetrait = heritage_south_slavic }
 link = { culture = georgian_new addtrait = greek_culture }
-link = { culture = vietnamese_new addtrait = language_khmeric addtrait = east_asian_heritage removetrait = southeast_asian_heritage }	
-link = { culture = korean_new addtrait = tradition_sinosphere }
-link = { culture = tibetan_new addtrait = tradition_sinosphere }
-link = { culture = altaic_new addtrait = tradition_sinosphere }
-link = { culture = zhuang_new addtrait = tradition_sinosphere }
-link = { culture = manchu culture = jurchen addtrait = heritage_manchu add_trait = language_jurchenic removetrait = tradition_sinosphere }
+link = { culture = vietnamese_new replacelanguage = language_khmeric addtrait = east_asian_heritage removetrait = southeast_asian_heritage }	
+link = { culture = korean_new addtradition = tradition_sinosphere }
+link = { culture = tibetan_new addtradition = tradition_sinosphere }
+link = { culture = altaic_new addtradition = tradition_sinosphere }
+link = { culture = zhuang_new addtradition = tradition_sinosphere }
+link = { culture = manchu culture = jurchen replaceheritage = heritage_manchu replacelanguage = language_jurchenic removetradition = tradition_sinosphere }
 
 
 #Europa Expanded cultures
 
-link = { culture = cosmopolitan_french_UKS culture = normand_UKS culture = burgundian_UKS addtrait = anglophone }
-link = { culture = occitain_UKS culture = aquitaine_UKS culture = gascon_UKS addtrait = anglophone }
-link = { culture = wallonian_UKS addtrait = anglophone }
-link = { culture = breton_UKS addtrait = anglophone }
-link = { culture = dagestani_PER addtrait = iranian_turanian_culture_group }
-link = { culture = czechBOH addtrait = german_speaking }
-link = { culture = polishBOH culture = schlesianBOH addtrait = german_speaking }
-link = { culture = sorbianBOH addtrait = german_speaking }
+link = { culture = cosmopolitan_french_UKS culture = normand_UKS culture = burgundian_UKS replacelanguage = language_anglophone }
+link = { culture = occitain_UKS culture = aquitaine_UKS culture = gascon_UKS replacelanguage = language_anglophone }
+link = { culture = wallonian_UKS replacelanguage = language_anglophone }
+link = { culture = breton_UKS replacelanguage = language_anglophone }
+link = { culture = dagestani_PER addtradition = tradition_persianate }
+link = { culture = czechBOH replacelanguage = language_germanophone }
+link = { culture = polishBOH culture = schlesianBOH replacelanguage = language_germanophone }
+link = { culture = sorbianBOH replacelanguage = language_germanophone }
 
-link = { culture = sicilian_arabic culture = siculo_arabic addtrait = arab_speaking }
+link = { culture = sicilian_arabic culture = siculo_arabic replacelanguage = language_arabic }
