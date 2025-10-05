@@ -5,25 +5,28 @@
 # AGREEMENT TYPES:
 # DO NOT ALTER LEFT SIDE, ONLY RIGHT!
 # Single-sided agreements
-dominion = { EE_CLT_Celtic_Dominion EE_CLT_Gaulois_subject core_eyalet dominion dominion_tc autonomous_dominion autonomous_dominion_tc administrative_region medieval_vassal nhs_imperial_associate }
-
-protectorate = { trade_protectorate protectorate trade_outpost native_reserve cultural_sphere_of_influence_subject to_imperial_protectorate}
 
 # Defensive pacts are gone as of 1.9
 #defensive_pact = { guarantee }
 
 tributary = { EE_granadan_tributary tributary_state timar ME_TIM_trib_state imperial_tributary_state nahuatl_tributary to_confederation_subject }
 
+vassal = { EE_Minor_IRI_Mor_Tuath dutch_vassal vassal client_vassal daimyo_vassal cossack_vassal prussian_congress_vassal prussian_vassal brotherly_order QAR_baghdad_vassal canton roman_client_kingdom voivodeship fief_subject nahuatl_vassal peasant_vassal pirate_brotherhood_vassal muslim_tributary_vassal mandala_trade_vassal integrated_tribe_subject dutch_province_subject revolution_subject persian_satrapy iqta_vassal palatinate_vassal stato_da_mar_vassal exarchate_subject hereditary_pronoia_subject_type incorporated_vassal soyurghal_subject_type elysian_subject elysian_subject_varangian }
+
 personal_union = { LUX_personal_union dutch_personal_union carolingian_brother_union personal_union permanent_union ME_personal_union ME_personal_union_cheap ME_Austrian_personal_union salic_personal_union sister_republic integrated_personal_union brother_kingdom real_union_subject pronoia_subject_type theodoro_personal_union mongol_brother_realm }
 
-puppet = { client_march ME_crusader_march EE_FRA_fief ME_personal_union_with_25_FL march appanage pronoyalet eyalet french_hre_subject puppet_state crusader_state_vassal naval_march papal_sanctuary_subject imperial_feud_subject pagan_chiefdom defensive_march agricultural_march religious_march  }
+crown_land = { }
 
-vassal = { EE_Minor_IRI_Mor_Tuath dutch_vassal vassal client_vassal daimyo_vassal cossack_vassal prussian_congress_vassal prussian_vassal brotherly_order QAR_baghdad_vassal canton roman_client_kingdom voivodeship fief_subject nahuatl_vassal peasant_vassal pirate_brotherhood_vassal muslim_tributary_vassal mandala_trade_vassal integrated_tribe_subject dutch_province_subject revolution_subject persian_satrapy iqta_vassal palatinate_vassal stato_da_mar_vassal exarchate_subject hereditary_pronoia_subject_type incorporated_vassal soyurghal_subject_type elysian_subject elysian_subject_varangian }
+protectorate = { trade_protectorate protectorate trade_outpost native_reserve cultural_sphere_of_influence_subject to_imperial_protectorate}
+
+puppet = { client_march ME_crusader_march EE_FRA_fief ME_personal_union_with_25_FL march appanage pronoyalet eyalet french_hre_subject puppet_state crusader_state_vassal naval_march papal_sanctuary_subject imperial_feud_subject pagan_chiefdom defensive_march agricultural_march religious_march  }
 
 # Trade agreements are gone as of 1.9
 #trade_agreement = { steer_trade transfer_trade_power }
 
 colony = { self_governing_colony colony viking_settlement annexable_colony european_colony to_elysian_governor crown_colony }
+
+dominion = { EE_CLT_Celtic_Dominion EE_CLT_Gaulois_subject core_eyalet dominion dominion_tc autonomous_dominion autonomous_dominion_tc administrative_region medieval_vassal nhs_imperial_associate }
 
 chartered_company = { private_enterprise commercial_enterprise banking_family_subject dutch_commercial_enterprise }
 
@@ -32,10 +35,23 @@ chartered_company = { private_enterprise commercial_enterprise banking_family_su
 power_bloc = { }
 
 # Double-sided agreements
-double_defensive_pact = { alliance }
+# Alliances are gone as of 1.9
+#double_defensive_pact = { alliance }
 
 # RELATIONSHIP BOOSTS:
 # You can alter both left and right side. Can also make left negative.
 10 = { private_enterprise self_governing_colony colony tributary_state client_march march crown_colony vassal client_vassal daimyo_vassal core_eyalet commercial_enterprise trade_protectorate appanage eyalet }
 25 = { royal_marriage guarantee personal_union steer_trade transfer_trade_power }
 50 = { alliance }
+
+#Treaty stuff needs working out?
+# Treaties have defensive pacts, alliances, guarantees, support independence, trade privileges, and some more
+
+# treaty articles
+# alliance = { alliance }
+# ?defensive_pact = { guarantee }
+# ?guarantee_independence = { guarantee }
+# support_independence = { support_independence }
+# money_transfer = {  }
+# military_access = { military_access }
+# trade_privilege = { steer_trade transfer_trade_power }
