@@ -46,6 +46,12 @@ void outCommonCountry(std::ostream& output, const V3::Country& country)
 
 	if (country.getProcessedData().color)
 		output << "\tcolor " << *country.getProcessedData().color << "\n";
+	if (country.getProcessedData().primaryUnitColor)
+		output << "\tprimary_unit_color " << *country.getProcessedData().primaryUnitColor << "\n";
+	if (country.getProcessedData().secondaryUnitColor)
+		output << "\tsecondary_unit_color " << *country.getProcessedData().color << "\n";
+	if (country.getProcessedData().tertiaryUnitColor)
+		output << "\ttertiary_unit_color " << *country.getProcessedData().color << "\n";
 	if (!country.getProcessedData().type.empty())
 		output << "\tcountry_type = " << country.getProcessedData().type << "\n";
 	if (!country.getProcessedData().tier.empty())

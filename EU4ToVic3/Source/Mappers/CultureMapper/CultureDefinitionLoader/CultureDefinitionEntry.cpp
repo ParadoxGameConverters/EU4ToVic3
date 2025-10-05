@@ -37,9 +37,15 @@ void mappers::CultureDefinitionEntry::registerkeys()
 	registerKeyword("religion", [this](std::istream& theStream) {
 		cultureDef.religion = commonItems::getString(theStream);
 	});
-	registerKeyword("traits", [this](std::istream& theStream) {
-		for (const auto& trait: commonItems::getStrings(theStream))
-			cultureDef.traits.emplace(trait);
+	registerKeyword("language", [this](std::istream& theStream) {
+		cultureDef.language = commonItems::getString(theStream);
+	});
+	registerKeyword("heritage", [this](std::istream& theStream) {
+		cultureDef.heritage = commonItems::getString(theStream);
+	});
+	registerKeyword("traditions", [this](std::istream& theStream) {
+		for (const auto& tradition: commonItems::getStrings(theStream))
+			cultureDef.traditions.emplace(tradition);
 	});
 	registerKeyword("obsessions", [this](std::istream& theStream) {
 		for (const auto& obsession: commonItems::getStrings(theStream))

@@ -48,6 +48,9 @@ struct VanillaCommonCountryData
 	std::string religion;
 	std::string capitalStateName;
 	std::optional<commonItems::Color> color;
+	std::optional<commonItems::Color> primaryUnitColor;
+	std::optional<commonItems::Color> secondaryUnitColor;
+	std::optional<commonItems::Color> tertiaryUnitColor;
 	bool is_named_from_capital = false;
 };
 
@@ -77,6 +80,9 @@ struct ProcessedData
 	std::string religion;
 	std::string capitalStateName;
 	std::optional<commonItems::Color> color;
+	std::optional<commonItems::Color> primaryUnitColor;
+	std::optional<commonItems::Color> secondaryUnitColor;
+	std::optional<commonItems::Color> tertiaryUnitColor;
 	bool is_named_from_capital = false;
 	std::set<std::string> effects;
 	std::set<std::string> populationEffects;
