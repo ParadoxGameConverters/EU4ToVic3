@@ -90,9 +90,9 @@ language_accepted = {
 			}
 		}
 		AND = {
-			culture = { has_discrimination_trait = anglophone }
+			culture = { has_discrimination_trait = language_anglophone }
 			owner = {
-				any_primary_culture = { has_discrimination_trait = anglophone }
+				any_primary_culture = { has_discrimination_trait = language_anglophone }
 			}
 		}
 		AND = {
@@ -144,9 +144,9 @@ language_accepted = {
 			}
 		}
 		AND = {
-			culture = { has_discrimination_trait = korean_language }
+			culture = { has_discrimination_trait = language_korean }
 			owner = {
-				any_primary_culture = { has_discrimination_trait = korean_language }
+				any_primary_culture = { has_discrimination_trait = language_korean }
 			}
 		}
 		AND = {
@@ -660,17 +660,17 @@ uses_eng_gbr_characters = {
 uses_colonial_bic_characters = {
 	is_old_world_trading_company = yes
 	country_is_in_india = yes
-	NOT = { any_primary_culture = { has_discrimination_trait = south_asian_heritage } }
+	NOT = { any_primary_culture = { has_discrimination_trait_group = heritage_group_south_asian } }
 }
 
 uses_local_bic_characters = {
 	country_is_in_india = yes
 	trigger_if = {
 		limit = { is_old_world_trading_company = yes }
-		NOT = { any_primary_culture = { has_discrimination_trait = south_asian_heritage } }
+		NOT = { any_primary_culture = { has_discrimination_trait_group = heritage_group_south_asian } }
 	}
 	trigger_else = {
-		any_primary_culture = { has_discrimination_trait = south_asian_heritage }
+		any_primary_culture = { has_discrimination_trait_group = heritage_group_south_asian }
 	}
 }
 

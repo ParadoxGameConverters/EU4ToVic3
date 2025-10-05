@@ -315,21 +315,21 @@ is_settler_colonial_country = {
 				country_is_in_south_america = yes
 			}
 		}
-		any_primary_culture = { NOT = { has_discrimination_trait = indigenous_american_heritage } }
+		any_primary_culture = { NOT = { has_discrimination_trait_group = heritage_group_indigenous_american } }
 	}
 	trigger_else_if = {
 		limit = {
 			exists = capital
 			capital = { region = sr:region_oceania }
 		}
-		any_primary_culture = { NOT = { has_discrimination_trait = indigenous_oceanic_heritage } }
+		any_primary_culture = { NOT = { has_discrimination_trait_group = heritage_group_indigenous_oceanic } }
 	}
 	trigger_else_if = {
 		limit = { country_is_in_africa = yes }
 		any_primary_culture = {
 			NOR = {
-				has_discrimination_trait = african_heritage
-				has_discrimination_trait = middle_eastern_heritage
+				has_discrimination_trait_group = heritage_group_african
+				has_discrimination_trait_group = heritage_group_middle_eastern
 			}
 		}
 	}
@@ -345,22 +345,22 @@ is_colonized_country = {
 				country_is_in_south_america = yes
 			}
 		}
-		any_primary_culture = { has_discrimination_trait = indigenous_american_heritage }
+		any_primary_culture = { has_discrimination_trait_group = heritage_group_indigenous_american }
 	}
 	trigger_else_if = {
 		limit = {
 			exists = capital
 			capital = { region = sr:region_oceania }
 		}
-		any_primary_culture = { has_discrimination_trait = indigenous_oceanic_heritage }
+		any_primary_culture = { has_discrimination_trait_group = heritage_group_indigenous_oceanic }
 	}
 	trigger_else_if = {
 		limit = { country_is_in_east_asia = yes }
-		any_primary_culture = { has_discrimination_trait = north_asian_heritage }
+		any_primary_culture = { has_discrimination_trait_group = heritage_group_north_asian }
 	}
 	trigger_else_if = {
 		limit = { country_is_in_africa = yes }
-		any_primary_culture = { has_discrimination_trait = african_heritage }
+		any_primary_culture = { has_discrimination_trait_group = heritage_group_african }
 	}
 	trigger_else = { always = no }
 }

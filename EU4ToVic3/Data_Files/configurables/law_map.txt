@@ -170,6 +170,7 @@ lawgroup_distribution_of_power = {
 #SLAVERY
 #law_slavery_banned 100
 #law_legacy_slavery 50 *law_slave_trade
+#law_colonial_slavery 50 *has unincorporated states
 #law_debt_slavery 0 !law_multicultural
 #law_slave_trade 0 !law_cultural_exclusion !law_multicultural
 lawgroup_slavery = {
@@ -183,6 +184,11 @@ lawgroup_slavery = {
 		forms = { monarchy republic }
 		ideas = { economic_ideas naval_ideas }
 		reforms = {}
+	}
+	law_colonial_slavery = {
+		forms = { }
+		ideas = { }
+		reforms = { }
 	}
 	law_debt_slavery = {
 		forms = { }
@@ -765,5 +771,29 @@ lawgroup_welfare = {
 		forms = { monarchy tribal native republic theocracy }
 		ideas = { offensive_ideas quantity_ideas naval_ideas }
 		reforms = { dyanstic_administration_reform equality_principle_reform }
+	}
+}
+
+#LABOR ASSOCIATIONS:
+#law_corporatized_unions 25 NO *T=corporatism T3
+#law_right_to_associate 50 NO
+#law_anti_strike_laws 25
+#law_combination_acts 0
+#law_guild_system -50 !law_laissez_faire
+lawgroup_labor_associations = {
+	law_anti_strike_laws = {
+		forms = { }
+		ideas = { }
+		reforms = { }
+	}
+	law_combination_acts = {
+		forms = { }
+		ideas = { }
+		reforms = { }
+	}
+	law_guild_system = {
+		forms = { }
+		ideas = { }
+		reforms = { }
 	}
 }
