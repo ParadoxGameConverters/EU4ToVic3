@@ -95,8 +95,9 @@ class CultureMapper: commonItems::parser
 	[[nodiscard]] int getLiteracyScoreForCulture(const std::string& cultureName) const;
 	[[nodiscard]] int getIndustryScoreForCulture(const std::string& cultureName) const;
 
-	[[nodiscard]] std::optional<bool> doCulturesShareHeritageTrait(const std::string& cultureA, const std::string& cultureB) const;
-	[[nodiscard]] std::optional<bool> doCulturesShareNonHeritageTrait(const std::string& cultureA, const std::string& cultureB) const;
+	[[nodiscard]] std::optional<bool> doCulturesShareHeritage(const std::string& cultureA, const std::string& cultureB) const;
+	[[nodiscard]] std::optional<bool> doCulturesShareLanguage(const std::string& cultureA, const std::string& cultureB) const;
+	[[nodiscard]] std::optional<bool> doCulturesShareTradition(const std::string& cultureA, const std::string& cultureB) const;
 
 	void alterNewEU4CultureDefinitions(const std::map<int, std::shared_ptr<EU4::Province>>& provinces);
 	[[nodiscard]] bool isCultureNeoCulturallyOverridden(const std::string& culture) const;

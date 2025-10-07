@@ -7,6 +7,7 @@
 
 namespace mappers
 {
+struct CultureDef;
 class WesternizationMapper: commonItems::parser
 {
   public:
@@ -14,9 +15,9 @@ class WesternizationMapper: commonItems::parser
 	void loadMappingRules(const std::filesystem::path& filePath);
 	void loadMappingRules(std::istream& theStream);
 
-	[[nodiscard]] int getWesternizationForTraits(const std::set<std::string>& traits) const;
-	[[nodiscard]] int getLiteracyForTraits(const std::set<std::string>& traits) const;
-	[[nodiscard]] int getIndustryForTraits(const std::set<std::string>& traits) const;
+	[[nodiscard]] int getWesternizationForCulture(const CultureDef& culture) const;
+	[[nodiscard]] int getLiteracyForCulture(const CultureDef& culture) const;
+	[[nodiscard]] int getIndustryForCulture(const CultureDef& culture) const;
 
   private:
 	void registerKeys();

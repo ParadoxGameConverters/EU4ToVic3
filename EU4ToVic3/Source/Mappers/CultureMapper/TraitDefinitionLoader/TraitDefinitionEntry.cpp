@@ -10,8 +10,8 @@ mappers::TraitDefinitionEntry::TraitDefinitionEntry(std::istream& theStream)
 
 void mappers::TraitDefinitionEntry::registerkeys()
 {
-	registerKeyword("heritage", [this](std::istream& theStream) {
-		traitDef.isHeritageTrait = commonItems::getString(theStream) == "yes";
+	registerKeyword("tradition", [this](std::istream& theStream) {
+		traitDef.isTradition = commonItems::getString(theStream) == "yes";
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }

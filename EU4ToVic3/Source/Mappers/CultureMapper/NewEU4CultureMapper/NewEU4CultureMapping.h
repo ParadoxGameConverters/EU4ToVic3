@@ -10,15 +10,19 @@ class NewEU4CultureMapping: commonItems::parser
 	explicit NewEU4CultureMapping(std::istream& theStream);
 
 	[[nodiscard]] const auto& getCultures() const { return cultures; }
-	[[nodiscard]] const auto& getRemoveTraits() const { return removeTraits; }
-	[[nodiscard]] const auto& getAddTraits() const { return addTraits; }
+	[[nodiscard]] const auto& getRemoveTraditions() const { return removeTraditions; }
+	[[nodiscard]] const auto& getAddTraditions() const { return addTraditions; }
+	[[nodiscard]] const auto& getReplaceLanguage() const { return replaceLanguage; }
+	[[nodiscard]] const auto& getReplaceHeritage() const { return replaceHeritage; }
 
   private:
 	void registerkeys();
 
 	std::set<std::string> cultures;
-	std::set<std::string> removeTraits;
-	std::set<std::string> addTraits;
+	std::set<std::string> removeTraditions;
+	std::set<std::string> addTraditions;
+	std::optional<std::string> replaceLanguage;
+	std::optional<std::string> replaceHeritage;
 };
 } // namespace mappers
 

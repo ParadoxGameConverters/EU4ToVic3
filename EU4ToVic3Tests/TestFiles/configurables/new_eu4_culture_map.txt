@@ -1,14 +1,16 @@
-# This file primarily focuses on iffy eu4 mechanic of culture-swapping entire cultures into new cultue groups.
-# Example: When Russia unites all slavic countries, game swaps every culture with a "xy_new" variant culture - which we map to regular
+# This file primarily focuses on iffy eu4 mechanic of culture-swapping entire cultures into new culture groups.
+# Example: When Russia unites all slavic countries, game swaps every slavic culture with a "xy_new" variant culture - which we map to regular
 # cultures anyway (Polish remains Polish), however we do need to edit the traits of the Polish culture to reflect this trait,
-# thus it stops being western slavic and becomes eastern slavic.
+# thus it stops being western slavic and becomes eastern/general slavic.
 #
 # When no provinces of polish_new are found in the save, such swap will not occur. Same goes for everything else listed below.
 #
-# culture = xxx			eu4 cultures to check the presence of
-# addtrait = xxx		traits to be added to mapped culture if target is found
-# removetrait = xxx		traits to be remove from mapped culture if target is found
+# culture = xxx				eu4 cultures to check the presence of
+# addtradition = xxx		tradition traits to be added to mapped culture if target is found
+# removetradition = xxx		tradition traits to be remove from mapped culture if target is found
+# replaceheritage = xxx		heritage trait to be set to mapped culture if target is found
+# replacelanguage = xxx		language trait to be set to mapped culture if target is found
 
 
 # Testing
-link = { culture = culture3 addtrait = testaddedtrait removetrait = testtrait2 }
+link = { culture = culture3 addradition = testaddedtrait removetradition = testtrait2 replacelanguage = new_language replaceheritage = new_heritage }

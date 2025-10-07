@@ -6,7 +6,7 @@ namespace mappers
 struct TraitDef
 {
 	std::string name;
-	bool isHeritageTrait = false;
+	bool isTradition = false;
 };
 } // namespace mappers
 

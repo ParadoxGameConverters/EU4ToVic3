@@ -11,7 +11,9 @@ class CultureTraitMapping: commonItems::parser
 
 	[[nodiscard]] const auto& getCulture() const { return culture; }
 	[[nodiscard]] const auto& getCultureGroup() const { return cultureGroup; }
-	[[nodiscard]] const auto& getTraits() const { return traits; }
+	[[nodiscard]] const auto& getTraditions() const { return traditions; }
+	[[nodiscard]] const auto& getHeritage() const { return heritage; }
+	[[nodiscard]] const auto& getLanguage() const { return language; }
 	[[nodiscard]] const auto& getEthnicity() const { return ethnicity; }
 	[[nodiscard]] const auto& getGraphics() const { return graphics; }
 
@@ -20,7 +22,9 @@ class CultureTraitMapping: commonItems::parser
 
 	std::string culture;
 	std::string cultureGroup;
-	std::set<std::string> traits;
+	std::set<std::string> traditions;
+	std::string heritage;
+	std::string language;
 	std::string ethnicity;
 	std::string graphics;
 };

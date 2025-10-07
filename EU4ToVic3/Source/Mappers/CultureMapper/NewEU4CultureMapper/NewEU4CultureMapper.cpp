@@ -32,26 +32,50 @@ void mappers::NewEU4CultureMapper::registerKeys()
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 }
 
-std::set<std::string> mappers::NewEU4CultureMapper::getAddTraitsForCulture(const std::string& eu4Culture) const
+std::set<std::string> mappers::NewEU4CultureMapper::getAddTraditionsForCulture(const std::string& eu4Culture) const
 {
 	if (eu4Culture.empty())
 		return std::set<std::string>{};
 
 	for (const auto& mapping: mappings)
 		if (mapping.getCultures().contains(eu4Culture))
-			return mapping.getAddTraits();
+			return mapping.getAddTraditions();
 
 	return std::set<std::string>{};
 }
 
-std::set<std::string> mappers::NewEU4CultureMapper::getRemoveTraitsForCulture(const std::string& eu4Culture) const
+std::set<std::string> mappers::NewEU4CultureMapper::getRemoveTraditionsForCulture(const std::string& eu4Culture) const
 {
 	if (eu4Culture.empty())
 		return std::set<std::string>{};
 
 	for (const auto& mapping: mappings)
 		if (mapping.getCultures().contains(eu4Culture))
-			return mapping.getRemoveTraits();
+			return mapping.getRemoveTraditions();
 
 	return std::set<std::string>{};
+}
+
+std::optional<std::string> mappers::NewEU4CultureMapper::getReplaceLanguageForCulture(const std::string& eu4Culture) const
+{
+	if (eu4Culture.empty())
+		return std::optional<std::string>{};
+
+	for (const auto& mapping: mappings)
+		if (mapping.getCultures().contains(eu4Culture))
+			return mapping.getReplaceLanguage();
+
+	return std::optional<std::string>{};
+}
+
+std::optional<std::string> mappers::NewEU4CultureMapper::getReplaceHeritageForCulture(const std::string& eu4Culture) const
+{
+	if (eu4Culture.empty())
+		return std::optional<std::string>{};
+
+	for (const auto& mapping: mappings)
+		if (mapping.getCultures().contains(eu4Culture))
+			return mapping.getReplaceHeritage();
+
+	return std::optional<std::string>{};
 }
