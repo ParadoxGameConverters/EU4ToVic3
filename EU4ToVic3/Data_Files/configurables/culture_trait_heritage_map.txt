@@ -1,301 +1,127 @@
-# This file is used when generating culture definitions for any culture NOT already defined. 
+# This file is used when generating heritage definitions for any culture NOT already defined. 
 # This means wen importing flemish (already defined) we won't create a new def, but when importing
 #    dynamic-flemish-russian-culture-num3, we will be using both flemish and east_slavic entries.
 # Relevant to this is also name_list_map.txt which graps appropriate namelist for the culture being defines.
 #
 # Example usage:
-# link = { eu4 = A trait = B ethnicity = C } -> list individual cultures BEFORE group fallbacks!
-# link = { eu4group = X trait = Y ethnicity = Z }
-# There can be as many traits as needed and they are also optional
-# There must be either a SINGLE culture or SINGLE culture_group
-# There must be a SINGLE ethnicity
+# link = { trait = X_heritage ethnicity = ethnicA graphics = graphicType eu4 = culture1 eu4group = culturegroup1 } -> list individual cultures BEFORE group fallbacks!
+# There can be as many cultures and groups as needed
+# There must be a SINGLE heritage
 
+#Mapping Order: The converter first searches for EU4 cultures, THEN if, and only if, it cannot find a matching EU4 culture, does it map by EU4 Culture Group
+#This means that you do NOT need to order the EU4 cultures so that they appear before EU4 Culture Groups, since the cultures will always map before the mapper starts looking for culture groups.
 
-# Example usage: link = { trait = X_language eu4 = culture1 eu4group = culturegroup1 }
-##Languages
 #Vanilla EU4 Cultures
-link = { trait = language_aboriginal eu4group = aboriginal_australian }
-link = { trait = language_adyghe eu4 = circassian }
-link = { trait = language_afar eu4 = afar }
-link = { trait = language_ainu eu4 = ainu }
-link = { trait = language_akan eu4 = aka }
-link = { trait = language_algonquian eu4 = algonquin eu4group = central_algonquian eu4group = eastern_algonquian eu4group = plains_algonquian }
-link = { trait = language_albanian eu4 = albanian }
-link = { trait = language_amazonian eu4group = je }
-link = { trait = language_amharic eu4 = amhara }
-link = { trait = language_anglophone eu4 = english eu4 = american eu4 = scottish }
-link = { trait = language_apachean eu4group = apachean }
-link = { trait = language_arabic eu4group = turko_semitic eu4group = maghrebi }
-link = { trait = language_aramaic eu4 = aramaic }
-link = { trait = language_armenian eu4 = armenian }
-#link = { trait = language_arpitan eu4 = ??? }
-link = { trait = language_athabaskan eu4 = athabascan }
-link = { trait = language_avaric eu4 = dagestani }
-link = { trait = language_aymaran eu4 = aimara }
-link = { trait = language_baltic eu4 = livonian eu4 = pruthenian eu4group = baltic }
-link = { trait = language_baluchi eu4 = baluchi }
-link = { trait = language_basque eu4group = basque }
-#link = { trait = language_batak eu4group = ??? }
-link = { trait = language_beja eu4 = beja }
-link = { trait = language_berber eu4 = berber eu4 = tuareg }
-#link = { trait = language_beti eu4 = ??? }
-link = { trait = language_brythonic eu4 = breton eu4 = welsh }
-link = { trait = language_bulgarian eu4 = bulgarian eu4 = bulgarian_new }
-link = { trait = language_burmic eu4 = burmese eu4group = burman }
-link = { trait = language_buryat eu4 = buryat }
-link = { trait = language_caddoan eu4group = caddoan }
-#link = { trait = language_cariban eu4group = ??? } # Hispanicized
-link = { trait = language_cham eu4 = cham }
-link = { trait = language_cherokee eu4 = cherokee }
-link = { trait = language_chonan eu4group = araucanian }
-link = { trait = language_cree eu4 = cree eu4 = plains_cree }
-link = { trait = language_creek eu4group = muskogean }
-#link = { trait = language_creole eu4group = ??? }
-link = { trait = language_dardic eu4 = kashmiri }
-#link = { trait = language_dayak eu4group = ??? }
-link = { trait = language_dinka eu4group = sudanese }
-link = { trait = language_dutch eu4 = dutch eu4 = flemish eu4 = frisian }
-link = { trait = language_east_slavic eu4group = east_slavic eu4group = slavic }
-link = { trait = language_eastern_hindi eu4 = assamese }
-link = { trait = language_eastern_romance eu4group = carpathian }
-#link = { trait = language_edo eu4group = ??? } # Language of Benin, but the culture of Benin is Yoruba, another language
-link = { trait = language_equatorial_bantu eu4 = sawabantu }
-link = { trait = language_eskimoan eu4 = inuit eu4group = eskaleut }
-link = { trait = language_ewenic eu4group = evenks }
-link = { trait = language_finnic eu4 = estonian eu4 = finnish eu4 = ingrian eu4 = karelian }
-link = { trait = language_fluvial_bantu eu4group = kongo_group }
-#link = { trait = language_formosan eu4group = ??? }
-link = { trait = language_francophone eu4group = french }
-link = { trait = language_fulani eu4 = fulani }
-link = { trait = language_fur eu4 = tunjur }
-link = { trait = language_gaelic eu4group = gaelic }
-link = { trait = language_galla eu4 = oromo }
-link = { trait = language_gbe eu4 = fon }
-link = { trait = language_georgian eu4 = georgian eu4 = georgian_new }
-link = { trait = language_germanophone eu4group = germanic }
-link = { trait = language_greek eu4 = spartan eu4 = athenian eu4group = byzantine }
-link = { trait = language_guajiro eu4 = guajiro }
-link = { trait = language_guarani eu4 = guarani }
-link = { trait = language_hakka eu4 = hakka }
-link = { trait = language_hausa eu4 = hausa }
-link = { trait = language_hindustani eu4group = hindusthani }
-link = { trait = language_hispanophone eu4group = iberian }
-link = { trait = language_hmong eu4 = miao }
-#link = { trait = language_hokan eu4group = ??? } Most of the area that's Hokan in VIC3 is Penutian in EU4, but the groups are not actually related
-link = { trait = language_hopi eu4 = pueblo }
-link = { trait = language_hungarian eu4 = hungarian }
-#link = { trait = language_ibibio eu4group = ??? }
-#link = { trait = language_igbo eu4group = ??? }
-link = { trait = language_iroquoian eu4 = iroquois eu4group = iroquoian }
-link = { trait = language_italian eu4group = latin }
-link = { trait = language_japanese eu4group = japanese_g }
-link = { trait = language_jurchenic eu4 = manchu eu4 = manchu_new }
-link = { trait = language_kachinic eu4 = kachin }
-link = { trait = language_kanuri eu4 = kanuri }
-link = { trait = language_karenic eu4 = karen }
-link = { trait = language_karluk eu4 = uzbehk eu4 = uyghur }
-#link = { trait = language_kavango eu4group = ??? }
-link = { trait = language_khmeric eu4 = khmer }
-#link = { trait = language_khmuic eu4group = ??? }
-link = { trait = language_khoisan eu4 = khoisan }
-link = { trait = language_kikuyu eu4 = bantu } # EU4 Bantu = Thagiicu
-link = { trait = language_kipchak eu4 = khazak eu4 = kirgiz eu4group = tartar }
-#link = { trait = language_kissi eu4group = ??? }
-link = { trait = language_kongo eu4 = kongolese }
-#link = { trait = language_kordofanian eu4group = ??? }
-link = { trait = language_korean eu4 = korean eu4 = korean_new eu4group = korean_g }
-#link = { trait = language_kru eu4group = ??? }
-link = { trait = language_kurdish eu4 = kurdish }
-link = { trait = language_lacustrine_bantu eu4group = african } #EU4 African = Eastern Bantu Groups
-#link = { trait = language_ladino eu4group = ??? }
-link = { trait = language_francophone eu4group = french }
-link = { trait = language_laotian eu4 = lao }
-link = { trait = language_luba eu4 = luba }
-link = { trait = language_lunda eu4 = lunda }
-link = { trait = language_luo eu4 = acholi }
-link = { trait = language_lusophone eu4 = portugese eu4 = brazilian }
-link = { trait = language_maa eu4 = masaba }
-link = { trait = language_magadhan eu4group = eastern_aryan }
-link = { trait = language_makua eu4 = makua }
-link = { trait = language_malagasy eu4 = madagascan eu4 = madagasque }
-link = { trait = language_malay eu4group = malay }
-link = { trait = language_mandarin eu4group = east_asian }
-link = { trait = language_mande eu4 = mali }
-link = { trait = language_manding eu4group = mande }
-#link = { trait = language_mari eu4group = ??? }
-link = { trait = language_mayan eu4group = maya }
-link = { trait = language_meitei eu4 = chin }
-link = { trait = language_melanesian eu4 = melanesian }
-#link = { trait = language_metis eu4group = ??? }
-#link = { trait = language_micronesian eu4group = ??? }
-link = { trait = language_min eu4 = chimin }
-link = { trait = language_miskito eu4 = miskito }
-link = { trait = language_mixtecan eu4 = mixtec }
-#link = { trait = language_mizo eu4group = ??? }
-link = { trait = language_moluccan eu4 = moluccan }
-link = { trait = language_mongo eu4 = kuba }
-link = { trait = language_mongolian eu4 = altaic_new eu4 = mongolian eu4group = altaic }
-link = { trait = language_monic eu4 = mon }
-#link = { trait = language_mordvinic eu4group = ??? }
-link = { trait = language_mossi eu4 = mossi }
-link = { trait = language_muiscan eu4 = muisca }
-#link = { trait = language_métis eu4group = ??? }
-#link = { trait = language_naga eu4group = ??? }
-link = { trait = language_nahuan eu4group = central_american }
-link = { trait = language_nguni eu4 = nguni }
-#link = { trait = language_nilotic eu4group = ??? }
-link = { trait = language_northwestern_indic eu4 = panjabi eu4 = sindhi }
-#link = { trait = language_nuer eu4group = ??? }
-link = { trait = language_numic eu4 = shoshone }
-#link = { trait = language_nyamwezi eu4group = ??? }
-link = { trait = language_nyasa eu4 = nyasa }
-link = { trait = language_occitano_romance eu4 = occitain eu4 = catalan }
-#link = { trait = language_oghuric eu4 = ??? }
-link = { trait = language_oghuz eu4 = turkish eu4 = azerbaijani eu4 = turkmeni }
-link = { trait = language_pahari eu4 = nepali eu4 = pahari }
-#link = { trait = language_patois eu4 = ??? }
-link = { trait = language_pashto eu4 = afghani }
-#link = { trait = language_permic eu4 = ??? }
-link = { trait = language_scythian eu4 = scythian eu4group = scythian_group eu4 = saka } #Non-vanilla culture up here to prevent getting mapped to Persian
-link = { trait = language_sogdian eu4 = sogdian } #Non-vanilla culture up here to prevent getting mapped to Persian
-link = { trait = language_tocharian eu4 = tocharian } #Non-vanilla culture up here to prevent getting mapped to Persian
-link = { trait = language_elamite eu4 = elamite } #Non-vanilla culture up here to prevent getting mapped to Persian
-link = { trait = language_persian eu4 = parsi eu4 = persian eu4group = iranian }
-link = { trait = language_philippinic eu4 = filipino }
-link = { trait = language_piman eu4 = piman eu4 = yaqui }
-link = { trait = language_polynesian eu4 = polynesian eu4 = maori }
-link = { trait = language_quechuan eu4group = andean_group }
-#link = { trait = language_sahaptian eu4 = ??? }
-link = { trait = language_salish eu4 = salish }
-link = { trait = language_sami eu4 = sapmi }
-#link = { trait = language_sara eu4 = ??? }
-link = { trait = language_scandinavian eu4 = scanian eu4group = scandinavian }
-#link = { trait = language_senufo eu4 = ??? }
-link = { trait = language_shan eu4 = shan }
-link = { trait = language_shona eu4 = shona }
-link = { trait = language_siamese eu4group = thai_group }
-link = { trait = language_siberian eu4 = yakut }
-link = { trait = language_sidama eu4 = sidamo }
-link = { trait = language_siouan eu4group = siouan }
-link = { trait = language_slovene eu4 = slovene }
-link = { trait = language_somali eu4 = somali }
-link = { trait = language_songhai eu4 = songhai }
-#link = { trait = language_sotho eu4 = ??? }
-link = { trait = language_south_central eu4 = gondi eu4 = telegu }
-link = { trait = language_south_slavic eu4 = croatian_new eu4 = serbian_new eu4 = slovene_new eu4 = bosnian_new eu4 = bulgarian_new eu4_group = south_slavic }
-link = { trait = language_southern_indic eu4 = marathi eu4 = sinhala }
-link = { trait = language_swahili eu4 = swahili }
-link = { trait = language_tabari eu4 = mazandarani }
-link = { trait = language_takama eu4 = takama }
-link = { trait = language_tamil_tulu eu4 = tamil eu4group = dravidian }
-link = { trait = language_tarascan eu4 = purepecha }
-#link = { trait = language_tebu eu4 = ??? }
-link = { trait = language_tibetan eu4 = tibetan eu4 = tibetan_new eu4group = tibetan_group }
-link = { trait = language_tigrinya eu4 = tigray }
-link = { trait = language_tiv eu4 = jukun }
-link = { trait = language_tonga eu4 = takama }
-link = { trait = language_tupi eu4 = tupinamba eu4_group = je_tupi }
-link = { trait = language_takama eu4 = takama }
-link = { trait = language_ugric eu4group = finno_ugric }
-#link = { trait = language_umbundu eu4 = ??? }
-#link = { trait = language_vainakh eu4 = ??? }
-link = { trait = language_vietic eu4 = vietnamese eu4 = vietnamese_new }
-link = { trait = language_west_slavic eu4 = czech_new eu4 = polish_new eu4 = schlesian_new eu4 = sorbian_new eu4 = slovak_new eu4group = west_slavic }
-link = { trait = language_western_indic eu4 = gujarati eu4 = rajput }
-link = { trait = language_wolof eu4 = senegambian }
-link = { trait = language_yao eu4 = bilala }
-link = { trait = language_yi eu4 = yi }
-#link = { trait = language_yiddish eu4 = ??? }
-link = { trait = language_yoruba eu4 = yorumba } #Yorumba localizes to Yoruba
-link = { trait = language_yue eu4 = cantonese }
-#link = { trait = language_zande eu4 = ??? }
-link = { trait = language_zapotecan eu4 = zapotek eu4group = otomanguean }
-link = { trait = language_zhuang eu4 = zhuang eu4 = zhuang_new }
+link = { trait = heritage_abyssinian ethnicity = east_african graphics = african eu4 = beja eu4group = cushitic }
+#link = { trait = heritage_afghan ethnicity = indian graphics = south_asian eu4 = afghani } #Afghan culture has Iranian heritage in vanilla VIC3
+#link = { trait = heritage_african_diaspora ethnicity = african_diaspora graphics = african eu4 = ??? }
+#link = { trait = heritage_african_settler ethnicity = caucasian graphics = european eu4 = ??? }
+link = { trait = heritage_afro_arab ethnicity = african graphics = african eu4 = nubian }
+link = { trait = heritage_ainu ethnicity = asian graphics = east_asian eu4 = ainu }
+link = { trait = heritage_albanian ethnicity = slavic graphics = balkan eu4 = albanian }
+link = { trait = heritage_amazonian ethnicity = native_american graphics = decentralised_americas eu4group = je }
+link = { trait = heritage_anatolian ethnicity = arab graphics = arabic eu4 = turkish eu4 = azerbaijani eu4 = turco_iranian }
+link = { trait = heritage_andean ethnicity = native_american graphics = decentralised_americas eu4group = andean_group eu4group = chibchan }
+link = { trait = heritage_arab ethnicity = arab graphics = arabic eu4group = maghrebi eu4group = turko_semitic }
+link = { trait = heritage_armenian ethnicity = slavic graphics = european eu4 = armenian }
+#link = { trait = heritage_ashkenazi ethnicity = caucasian graphics = european eu4 = ??? }
+link = { trait = heritage_assamese ethnicity = indian graphics = south_asian eu4 = assamese }
+link = { trait = heritage_atlantic ethnicity = native_american graphics = decentralised_americas eu4 = tupinamba eu4_group = je_tupi }
+link = { trait = heritage_australian ethnicity = polynesian graphics = polynesian eu4group = aboriginal_australian }
+link = { trait = heritage_baltic ethnicity = slavic graphics = european eu4 = livonian eu4 = pruthenian eu4group = baltic }
+#link = { trait = heritage_baluchi ethnicity = indian graphics = south_asian eu4 = baluchi } #Baluchi culture has Iranian heritage in vanilla VIC3
+link = { trait = heritage_berber ethnicity = arab graphics = african eu4 = berber eu4 = tuareg } #Berbers are Arab/Arabic and Tuareg are African/African, so I split the difference 
+link = { trait = heritage_british ethnicity = caucasian graphics = european eu4group = british eu4group = gaelic }
+link = { trait = heritage_burmese ethnicity = asian graphics = east_asian eu4 = mon eu4group = burman }
+link = { trait = heritage_californian_indian ethnicity = native_american graphics = decentralised_americas eu4group = penutian }
+link = { trait = heritage_cambodian ethnicity = south_east_asian graphics = asian eu4 = khmer }
+link = { trait = heritage_caribbean ethnicity = native_american graphics = decentralised_americas eu4 = miskito eu4group = carribean }
+link = { trait = heritage_carnatic ethnicity = indian graphics = south_asian eu4 = tamil eu4 = malayalam }
+#link = { trait = heritage_caucasian ethnicity = caucasian graphics = european eu4 = ??? } #Unused in vanilla VIC3
+link = { trait = heritage_central ethnicity = indian graphics = south_asian eu4 = vindhyan eu4group = central_indic }
+link = { trait = heritage_circumpolar ethnicity = circumpolar graphics = east_asian eu4group = eskaleut eu4group = na_dene }
+link = { trait = heritage_congolese ethnicity = central_african graphics = african eu4group = kongo_group }
+link = { trait = heritage_darfurian ethnicity = african graphics = african eu4 = tunjur }
+link = { trait = heritage_deccani ethnicity = indian graphics = south_asian eu4 = kannada eu4 = marathi eu4 = telegu }
+link = { trait = heritage_east_african ethnicity = polynesian graphics = polynesian eu4 = madagascan eu4 = madagasque }
+link = { trait = heritage_east_slavic ethnicity = slavic graphics = european eu4 = russian_new eu4 = novgorodian_new eu4 = ryazanian_new eu4 = byelorussian_new eu4 = ruthenian_new eu4group = east_slavic }
+link = { trait = heritage_eastern_bantu ethnicity = african graphics = african eu4 = makua eu4 = nyasa u4 = yao eu4group = african eu4group = great_lakes_group }
+link = { trait = heritage_eastern_highlands ethnicity = indian graphics = south_asian eu4 = chin }
+link = { trait = heritage_eastern_woodlands_indian ethnicity = native_american graphics = decentralised_americas eu4 = piman eu4 = yaqui eu4group = central_algonquian eu4group = eastern_algonquian eu4group = iroquoian } #I could not begin to tell you why PDX put Oodham as Eastern Woodland... but they sure did do that.
+#link = { trait = heritage_formosan ethnicity = polynesian graphics = polynesian eu4 = ??? }
+link = { trait = heritage_gallic ethnicity = caucasian graphics = french eu4group = french }
+link = { trait = heritage_gangetic ethnicity = indian graphics = south_asian eu4 = bengali eu4 = bihari eu4 = oriya eu4group = hindusthani }
+link = { trait = heritage_georgian ethnicity = slavic graphics = european eu4 = georgian eu4 = georgian_new }
+link = { trait = heritage_germanic ethnicity = caucasian graphics = european eu4group = germanic }
+link = { trait = heritage_great_basin_indian ethnicity = native_american graphics = decentralised_americas eu4 = shoshone }
+link = { trait = heritage_greek ethnicity = slavic graphics = balkan eu4group = byzantine }
+link = { trait = heritage_guarani ethnicity = native_american graphics = decentralised_americas eu4 = guarani }
+link = { trait = heritage_guinean ethnicity = african graphics = african eu4 = jukun eu4group = west_african }
+link = { trait = heritage_gujarati ethnicity = indian graphics = south_asian eu4 = gujarati eu4 = saurashtri }
+link = { trait = heritage_han ethnicity = asian graphics = east_asian eu4 = cantonese eu4 = chihan eu4 = chimin eu4 = gan eu4 = jianghuai eu4 = jin eu4 = hakka eu4 = hubei eu4 = shandong_culture eu4 = sichuanese eu4 = xiang eu4 = xibei eu4 = wu eu4 = zhongyuan }
+#link = { trait = heritage_hazaran ethnicity = central_asian graphics = east_asian eu4 = ??? }
+link = { trait = heritage_himalayan ethnicity = asian graphics = east_asian eu4 = nepali eu4 = pahari }
+link = { trait = heritage_iberian ethnicity = caucasian graphics = european eu4group = iberian }
+link = { trait = heritage_indusine ethnicity = indian graphics = south_asian eu4 = panjabi eu4 = sindhi }
+link = { trait = heritage_insular ethnicity = indian graphics = south_asian eu4 = sinhala }
+link = { trait = heritage_insulindian ethnicity = south_east_asian graphics = east_asian eu4group = malay }
+link = { trait = heritage_iranian ethnicity = arab graphics = arabic eu4group = iranian }
+link = { trait = heritage_italic ethnicity = caucasian graphics = european eu4group = latin }
+link = { trait = heritage_japanese ethnicity = asian graphics = east_asian eu4group = japanese_g }
+link = { trait = heritage_kashmiri ethnicity = indian graphics = south_asian eu4 = kashmiri }
+#link = { trait = heritage_khmu ethnicity = asian graphics = east_asian eu4 = ??? }
+link = { trait = heritage_khoisan ethnicity = african graphics = african eu4 = khoisan }
+link = { trait = heritage_kipchak ethnicity = central_asian graphics = east_asian eu4 = khazak eu4 = kirgiz }
+link = { trait = heritage_korean ethnicity = asian graphics = east_asian eu4 = korean_new eu4group = korean_g }
+#link = { trait = heritage_kordofanian ethnicity = east_african graphics = african eu4 = ??? }
+#link = { trait = heritage_kurdish ethnicity = arab graphics = arabic eu4 = ??? } #Kurdish culture has Iranian heritage in vanilla VIC3
+link = { trait = heritage_latin_american_settler ethnicity = south_american graphics = european eu4 = brazilian eu4 = mexican eu4 = platinean }
+link = { trait = heritage_magyar ethnicity = slavic graphics = balkan eu4 = hungarian }
+link = { trait = heritage_manchu ethnicity = asian graphics = east_asian eu4 = manchu eu4 = manchu_new }
+link = { trait = heritage_melanesian ethnicity = polynesian graphics = polynesian eu4 = melanesian eu4 = papuan }
+link = { trait = heritage_mesoamerican ethnicity = native_american graphics = decentralised_americas eu4group = aridoamerican eu4group = central_american eu4group = maya eu4group = otomanguean }
+link = { trait = heritage_miao ethnicity = asian graphics = east_asian eu4 = miao }
+#link = { trait = heritage_micronesian ethnicity = polynesian graphics = polynesian eu4 = ??? }
+link = { trait = heritage_mongolian ethnicity = central_asian graphics = east_asian eu4 = altaic_new eu4 = buryat eu4group = altaic }
+link = { trait = heritage_netherlandish ethnicity = caucasian graphics = european eu4 = dutch eu4 = flemish eu4 = wallonian }
+link = { trait = heritage_nilotic ethnicity = african graphics = african eu4 = acholi eu4 = funj eu4 = masaba eu4group = sudanese }
+link = { trait = heritage_nordic ethnicity = caucasian graphics = european eu4group = scandinavian }
+link = { trait = heritage_north_american_settler ethnicity = caucasian graphics = european eu4 = american eu4 = louisianans eu4 = quebecois }
+link = { trait = heritage_north_caucasian ethnicity = north_caucasian graphics = european eu4 = circassian eu4 = dagestani }
+link = { trait = heritage_northwest_coast_indian ethnicity = native_american graphics = decentralised_americas eu4 = salish eu4 = haida eu4 = aleutian }
+#link = { trait = heritage_oceanic_settler ethnicity = caucasian graphics = european eu4 = ??? } #Unused in vanilla VIC3
+link = { trait = heritage_patagonian ethnicity = native_american graphics = decentralised_americas eu4group = araucanian }
+#link = { trait = heritage_persian ethnicity = arab graphics = arabic eu4 = ??? } #Unused in vanilla VIC3
+link = { trait = heritage_plains_indian ethnicity = native_american graphics = decentralised_americas eu4group = apachean eu4group = caddoan eu4group = siouan }
+#link = { trait = heritage_plateau_indian ethnicity = native_american graphics = decentralised_americas eu4 = ??? }
+link = { trait = heritage_polynesian ethnicity = polynesian graphics = polynesian eu4group = pacific }
+link = { trait = heritage_rajasthani ethnicity = indian graphics = south_indian eu4 = rajput eu4 = malvi }
+link = { trait = heritage_romanian ethnicity = slavic graphics = balkan eu4group = carpathian }
+link = { trait = heritage_sahelian ethnicity = african graphics = african eu4group = mande eu4group = sahelian }
+link = { trait = heritage_sami ethnicity = caucasian graphics = european eu4 = sapmi }
+#link = { trait = heritage_sephardic ethnicity = caucasian graphics = european eu4 = ??? }
+link = { trait = heritage_siberian ethnicity = circumpolar graphics = east_asian eu4 = siberian eu4group = evenks eu4group = finno_ugric eu4group = kamchatkan_g }
+link = { trait = heritage_somali ethnicity = east_african graphics = african eu4 = somali eu4 = harari }
+link = { trait = heritage_south_slavic ethnicity = slavic graphics = balkan eu4 = croatian_new eu4 = serbian_new eu4 = slovene_new eu4 = bosnian_new eu4 = bulgarian_new eu4group = south_slavic }
+#link = { trait = heritage_southeast_indian ethnicity = indian graphics = south_east_asian eu4 = ??? } #Unused in vanilla VIC3
+link = { trait = heritage_southern_bantu ethnicity = african graphics = african eu4 = beja eu4group = southern_african }
+link = { trait = heritage_southwest_bantu ethnicity = african graphics = african eu4 = mbundu }
+link = { trait = heritage_southwest_indian ethnicity = native_american graphics = decentralised_americas eu4 = navajo eu4group = sonoran }
+link = { trait = heritage_subarctic_indian ethnicity = native_american graphics = decentralised_americas eu4 = cherokee eu4 = cree eu4 = plains_cree eu4 = dakota eu4group = muskogean }
+#link = { trait = heritage_syriac ethnicity = arab graphics = arabic eu4 = ??? }
+link = { trait = heritage_tai ethnicity = asian graphics = east_asian eu4group = thai_group }
+#link = { trait = heritage_tajik ethnicity = central_asian graphics = east_asian eu4 = ??? } #Tajik culture has Iranian heritage in vanilla VIC3
+link = { trait = heritage_tatar ethnicity = central_asian graphics = arab eu4 = beja eu4group = tartar }
+link = { trait = heritage_tibetan ethnicity = asian graphics = east_asian eu4 = tibetan_new eu4group = tibetan_group }
+link = { trait = heritage_turkmen ethnicity = arab graphics = east_asian eu4 = turkmeni }
+link = { trait = heritage_uighur ethnicity = central_asian graphics = east_asian eu4 = uyghur }
+link = { trait = heritage_uzbek ethnicity = central_asian graphics = east_asian eu4 = uzbehk }
+link = { trait = heritage_vietnamese ethnicity = asian graphics = east_asian eu4 = vietnamese_new eu4 = vietnamese }
+link = { trait = heritage_volga_uralic ethnicity = central_asian graphics = east_asian eu4 = ingrian }
+link = { trait = heritage_west_slavic ethnicity = slavic graphics = european eu4 = slovak_new eu4 = czech_new eu4 = polish_new eu4 = schlesian_new eu4 = sorbian_new eu4group = west_slavic }
+link = { trait = heritage_yi ethnicity = asian graphics = east_asian eu4 = bai eu4 = yi }
+link = { trait = heritage_zhuang ethnicity = asian graphics = east_asian eu4 = zhuang eu4 = zhuang_new }
 
-#Converter Cultures
-link = { trait = language_adyghe eu4group = abkhazian_group }
-link = { trait = language_albanian eu4 = shqiperi eu4 = arbereshe eu4group = albanian_g eu4group = western_balkan }
-link = { trait = language_aramaic eu4group = chaldean eu4group = mesopotamian_group }
-link = { trait = language_armenian eu4group = armenian_group }
-link = { trait = language_avaric eu4group = dagestani_group }
-link = { trait = language_basque eu4group = basque_group }
-link = { trait = language_dutch eu4group = dutch_group }
-link = { trait = language_eastern_romance eu4 = aromanian eu4 = olbian eu4group = eastern_balkan eu4group = vlach }
-link = { trait = language_greek eu4 = romaic eu4 = elysian eu4 = elyric eu4 = elysameric eu4 = cretan_e eu4 = eleutheroi eu4 = borealian eu4 = hyperborealian eu4 = hesperidian eu4 = kykladian eu4 = lakonian eu4 = shqipproi eu4 = varangian_e eu4 = arkadian eu4group = spartakian_group }
-link = { trait = language_germanophone eu4group = barbaro_germanic }
-link = { trait = language_hindustani eu4group = dom_group }
-link = { trait = language_hungarian eu4group = magyar }
-link = { trait = language_italian eu4 = friulan eu4group = northern_romance }
-link = { trait = language_lusophone eu4group = portugese_moroccan_macaronesia }
-link = { trait = language_mongolian eu4group = mongolic }
-link = { trait = language_oghuz eu4group = oghuz }
-link = { trait = language_persian eu4_group = iranian_tribal }
-link = { trait = language_philippinic eu4group = filipino_group }
-link = { trait = language_scandinavian eu4group = norse_g }
-link = { trait = language_ugric eu4group = ugric }
-
-#Converter Languages
-link = { trait = language_brythonic eu4 = arvorigeg eu4 = dramor }
-link = { trait = language_coptophone eu4 = coptic eu4 = per_sheklesh eu4 = niwt_ipt }
-link = { trait = language_thracian eu4 = thracian }
-link = { trait = language_dacian eu4group = dacian_group }
-link = { trait = language_etruscan eu4group = tyrrhenian eu4 = etrurian eu4group = eastern_etrurian eu4group = western_etrurian eu4group = northern_etrurian }
-link = { trait = language_nuragic eu4 = nuragic }
-link = { trait = language_iberic eu4 = oldspain eu4 = iberic } #oldspain mixes iberic and turdetanian, set to iberic for now
-link = { trait = language_turdetanian eu4 = turdetanian }
-link = { trait = language_gaulish eu4group = gallic_group }
-link = { trait = language_galatian eu4 = galatian_celtic eu4 = plashurii }
-link = { trait = language_celtiberian eu4group = celtiberian_g }
-link = { trait = language_noric eu4 = ghasettian eu4 = betwani } #Noric is manually defined
-link = { trait = language_belgae eu4 = atrebatian } #Belgian is manually defined
-link = { trait = language_lusitanian eu4 = lusitanian }
-link = { trait = language_gutian eu4 = gutian }
-link = { trait = language_hattic eu4group = hatti_group }
-link = { trait = language_hebrew eu4group = israelite eu4group = israeli_group }
-link = { trait = language_phrygian eu4 = phrygian }
-link = { trait = language_luwian eu4 = luwian eu4 = lycian eu4 = isaurian }
-link = { trait = language_paphlagonian eu4 = paphlagonian }
-link = { trait = language_cilician eu4 = cilician }
-link = { trait = language_lydian eu4 = lydian }
-link = { trait = language_trojan eu4 = trojan }
-link = { trait = language_kizzuwatnan eu4 = kizzuwatnan }
-link = { trait = language_hittite eu4group = hittite_group eu4group = old_anatolian_group }
-link = { trait = language_hurrian eu4group = hurrian_group }
-link = { trait = language_illevionophone eu4g = vandal eu4group = gothic_group }
-link = { trait = language_ingaevophone eu4 = anglosaxon eu4 = anglo_saxon eu4 = northumbrian eu4 = mercian eu4 = wessexian eu4 = essexian eu4 = east_anglian eu4 = ecgfrithian eu4 = northerner }
-link = { trait = language_irminophone eu4 = suebi eu4group = old_lombard_g }
-link = { trait = language_istvaeonophone eu4group = frankish_g }
-link = { trait = language_indo_germanic eu4 = indo_germanic }
-link = { trait = language_old_ligurian eu4 = old_ligurian }
-link = { trait = language_romano_british eu4 = romano_british eu4 = britannian eu4 = cambrian }
-link = { trait = language_romano_germanic eu4 = laessin eu4 = theodisc eu4 = hyperborean }
-link = { trait = language_romano_slavic eu4 = tracki eu4 = alzzecio eu4 = wenedyk eu4 = rhogian }
-link = { trait = language_afro_romance eu4group = afro_romance_group eu4 = salinatorian eu4 = african_romance eu4 = aegyptian eu4 = eifrican eu4 = antonian eu4 = nilan }
-link = { trait = language_palmyrene eu4 = palmyrene }
-link = { trait = language_oriental_romance eu4group = oriental_romance eu4 = arabus eu4 = romano_persian eu4 = bazramani }
-link = { trait = language_indo_roman eu4 = romanoindian }
-link = { trait = language_latinophone eu4 = roman eu4group = roman_group eu4group = latin }
-link = { trait = language_cycladic eu4 = cycladic }
-link = { trait = language_pelasgian eu4 = pelasgian }
-link = { trait = language_minoan eu4group = pre_greek_group }
-link = { trait = language_ugaritic eu4 = ugaritic }
-link = { trait = language_alasiyan eu4 = alasiyan }
-link = { trait = language_phoeniciophone eu4 = phoenician eu4 = punic eu4group = punic_group eu4group = old_mashriqi }
-link = { trait = language_rhaetic eu4group = rhaetic eu4_group = pre_indo_european_group }
-link = { trait = language_neo_mitanni eu4 = neo_mitanni }
-link = { trait = language_atlanto_slavic eu4group = atlanto_slavic }
-
-link = { trait = language_latinophone = eu4group = lost_cultures_group } #Fallback for any unmapped EU4 Lost Cultures
-
-link = { trait = language_equine eu4group = equine_group }
-link = { trait = language_feline eu4group = cat_group }
-link = { trait = language_ursine eu4 = polar_bear eu4 = jan_mayanese eu4group = bear_group }
-link = { trait = language_erinaceous eu4group = hedgehog_group }
-link = { trait = language_anatidine eu4group = duck_group }
-link = { trait = language_canine eu4group = dog_group }
-link = { trait = language_elephantine eu4group = elephant_group }
-link = { trait = language_draconic eu4group = dragon_group }
-link = { trait = language_ailurine eu4group = red_panda_group }
 
 #OLD Converter Languages
 link = { eu4 = coptic trait = african_heritage trait = coptophone ethnicity = arab graphics = arabic }
