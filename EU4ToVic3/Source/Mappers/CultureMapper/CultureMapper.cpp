@@ -448,7 +448,9 @@ void mappers::CultureMapper::loadTraitDefinitions(const commonItems::ModFilesyst
 
 void mappers::CultureMapper::generateCultureDefinitions(const std::filesystem::path& nameListsPath,
 	 const std::filesystem::path& nameListMapPath,
-	 const std::filesystem::path& cultureTraitsPath,
+	 const std::filesystem::path& cultureHeritagesPath,
+	 const std::filesystem::path& cultureLanguagesPath,
+	 const std::filesystem::path& cultureTraditionsPath,
 	 const V3::ClayManager& clayManager,
 	 const EU4::CultureLoader& cultureLoader,
 	 const EU4::ReligionLoader& religionLoader,
@@ -461,7 +463,7 @@ void mappers::CultureMapper::generateCultureDefinitions(const std::filesystem::p
 	NameListMapper nameListMapper;
 	nameListMapper.loadMappingRules(nameListMapPath);
 	CultureTraitMapper cultureTraitMapper;
-	cultureTraitMapper.loadMappingRules(cultureTraitsPath);
+	cultureTraitMapper.loadMappingRules(cultureHeritagesPath, cultureLanguagesPath, cultureTraditionsPath);
 
 	// shove existing vanilla defs into the bin.
 	const auto& defCount = v3CultureDefinitions.size();

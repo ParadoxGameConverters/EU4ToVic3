@@ -7,6 +7,7 @@ namespace mappers
 class CultureTraitMapping: commonItems::parser
 {
   public:
+	CultureTraitMapping() = default;
 	explicit CultureTraitMapping(std::istream& theStream);
 
 	[[nodiscard]] const auto& getCulture() const { return culture; }
@@ -16,6 +17,9 @@ class CultureTraitMapping: commonItems::parser
 	[[nodiscard]] const auto& getLanguage() const { return language; }
 	[[nodiscard]] const auto& getEthnicity() const { return ethnicity; }
 	[[nodiscard]] const auto& getGraphics() const { return graphics; }
+
+	void setLanguage(const std::string& theLanguage) { language = theLanguage; }
+	void setTraditions(const std::set<std::string>& theTraditions) { traditions = theTraditions; }
 
   private:
 	void registerkeys();

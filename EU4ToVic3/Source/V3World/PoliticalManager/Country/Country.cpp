@@ -1172,8 +1172,8 @@ bool V3::Country::isCultureDiscriminated(const std::string& culture, const mappe
 	{
 		for (const auto& primaryCulture: processedData.cultures)
 		{
-			if (cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) &&
-				 cultureMapper.doCulturesShareNonHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareNonHeritageTrait(primaryCulture, culture))
+			if (cultureMapper.doCulturesShareHeritage(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritage(primaryCulture, culture) &&
+				 cultureMapper.doCulturesShareLanguage(primaryCulture, culture) && *cultureMapper.doCulturesShareLanguage(primaryCulture, culture))
 				return false;
 		}
 	}
@@ -1182,7 +1182,7 @@ bool V3::Country::isCultureDiscriminated(const std::string& culture, const mappe
 	{
 		for (const auto& primaryCulture: processedData.cultures)
 		{
-			if (cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture))
+			if (cultureMapper.doCulturesShareHeritage(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritage(primaryCulture, culture))
 				return false;
 		}
 	}
@@ -1191,8 +1191,8 @@ bool V3::Country::isCultureDiscriminated(const std::string& culture, const mappe
 	{
 		for (const auto& primaryCulture: processedData.cultures)
 		{
-			if (cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) ||
-				 cultureMapper.doCulturesShareNonHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareNonHeritageTrait(primaryCulture, culture))
+			if (cultureMapper.doCulturesShareHeritage(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritage(primaryCulture, culture) ||
+				 cultureMapper.doCulturesShareLanguage(primaryCulture, culture) && *cultureMapper.doCulturesShareLanguage(primaryCulture, culture))
 			{
 				return false;
 			}
