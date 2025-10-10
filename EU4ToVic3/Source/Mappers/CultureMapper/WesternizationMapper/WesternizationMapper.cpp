@@ -1,4 +1,5 @@
 #include "WesternizationMapper.h"
+#include "CultureMapper/CultureDefinitionLoader/CultureDef.h"
 #include "Log.h"
 #include "ParserHelpers.h"
 #include "WesternizationMapping.h"
@@ -32,50 +33,89 @@ void mappers::WesternizationMapper::registerKeys()
 	});
 }
 
-int mappers::WesternizationMapper::getWesternizationForTraits(const std::set<std::string>& traits) const
+int mappers::WesternizationMapper::getWesternizationForCulture(const CultureDef& culture) const
 {
 	auto maxLevel = 0;
-	for (const auto& trait: traits)
-		if (westernizations.contains(trait))
+	bool foundCulture = false;
+	for (const auto& tradition: culture.traditions)
+	{
+		if (westernizations.contains(tradition))
 		{
-			if (westernizations.at(trait) > maxLevel)
-				maxLevel = westernizations.at(trait);
+			maxLevel = std::max(maxLevel, westernizations.at(tradition));
+			foundCulture = true;
 		}
-		else
-		{
-			Log(LogLevel::Warning) << "Trait " << trait << " has no westernization.txt link!";
-		}
+	}
+	if (westernizations.contains(culture.language))
+	{
+		maxLevel = std::max(maxLevel, westernizations.at(culture.language));
+		foundCulture = true;
+	}
+	if (westernizations.contains(culture.heritage))
+	{
+		maxLevel = std::max(maxLevel, westernizations.at(culture.heritage));
+		foundCulture = true;
+	}
+	if (!foundCulture)
+	{
+		Log(LogLevel::Warning) << "Culture " << culture.name << " has no westernization.txt traits linked!";
+	}
 	return maxLevel;
 }
 
-int mappers::WesternizationMapper::getIndustryForTraits(const std::set<std::string>& traits) const
+int mappers::WesternizationMapper::getIndustryForCulture(const CultureDef& culture) const
 {
 	auto maxLevel = 0;
-	for (const auto& trait: traits)
-		if (industries.contains(trait))
+	bool foundCulture = false;
+	for (const auto& tradition: culture.traditions)
+	{
+		if (industries.contains(tradition))
 		{
-			if (industries.at(trait) > maxLevel)
-				maxLevel = industries.at(trait);
+			maxLevel = std::max(maxLevel, industries.at(tradition));
+			foundCulture = true;
 		}
-		else
-		{
-			Log(LogLevel::Warning) << "Trait " << trait << " has no westernization.txt link!";
-		}
+	}
+	if (industries.contains(culture.language))
+	{
+		maxLevel = std::max(maxLevel, industries.at(culture.language));
+		foundCulture = true;
+	}
+	if (industries.contains(culture.heritage))
+	{
+		maxLevel = std::max(maxLevel, industries.at(culture.heritage));
+		foundCulture = true;
+	}
+	if (!foundCulture)
+	{
+		Log(LogLevel::Warning) << "Culture " << culture.name << " has no westernization.txt traits linked!";
+	}
 	return maxLevel;
 }
 
-int mappers::WesternizationMapper::getLiteracyForTraits(const std::set<std::string>& traits) const
+int mappers::WesternizationMapper::getLiteracyForCulture(const CultureDef& culture) const
 {
 	auto maxLevel = 0;
-	for (const auto& trait: traits)
-		if (literacies.contains(trait))
+	bool foundCulture = false;
+	for (const auto& tradition: culture.traditions)
+	{
+		if (literacies.contains(tradition))
 		{
-			if (literacies.at(trait) > maxLevel)
-				maxLevel = literacies.at(trait);
+			maxLevel = std::max(maxLevel, literacies.at(tradition));
+			foundCulture = true;
 		}
-		else
-		{
-			Log(LogLevel::Warning) << "Trait " << trait << " has no westernization.txt link!";
-		}
+	}
+	if (literacies.contains(culture.language))
+	{
+		maxLevel = std::max(maxLevel, literacies.at(culture.language));
+		foundCulture = true;
+	}
+	if (literacies.contains(culture.heritage))
+	{
+		maxLevel = std::max(maxLevel, literacies.at(culture.heritage));
+		foundCulture = true;
+	}
+	if (!foundCulture)
+	{
+		Log(LogLevel::Warning) << "Culture " << culture.name << " has no westernization.txt traits linked!";
+	}
 	return maxLevel;
 }

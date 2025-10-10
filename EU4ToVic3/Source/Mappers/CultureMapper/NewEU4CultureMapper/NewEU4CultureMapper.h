@@ -13,8 +13,10 @@ class NewEU4CultureMapper: commonItems::parser
 	void loadMappingRules(const std::filesystem::path& filePath);
 	void loadMappingRules(std::istream& theStream);
 
-	[[nodiscard]] std::set<std::string> getRemoveTraitsForCulture(const std::string& eu4Culture) const;
-	[[nodiscard]] std::set<std::string> getAddTraitsForCulture(const std::string& eu4Culture) const;
+	[[nodiscard]] std::set<std::string> getRemoveTraditionsForCulture(const std::string& eu4Culture) const;
+	[[nodiscard]] std::set<std::string> getAddTraditionsForCulture(const std::string& eu4Culture) const;
+	[[nodiscard]] std::optional<std::string> getReplaceLanguageForCulture(const std::string& eu4Culture) const;
+	[[nodiscard]] std::optional<std::string> getReplaceHeritageForCulture(const std::string& eu4Culture) const;
 	[[nodiscard]] bool isInterestingCulture(const std::string& eu4Culture) const { return interestingCultures.contains(eu4Culture); }
 
   private:

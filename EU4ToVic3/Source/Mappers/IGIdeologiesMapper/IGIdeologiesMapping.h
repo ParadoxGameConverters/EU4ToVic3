@@ -37,7 +37,9 @@ class IGIdeologiesMapping: commonItems::parser
 		 const ReligionMapper& religionMapper,
 		 const V3::ClayManager& clayManager) const;
 
-	std::set<std::string> cultureTraits;
+	std::set<std::string> heritageTraits;
+	std::set<std::string> languageTraits;
+	std::set<std::string> traditionTraits;
 	std::set<std::string> religionTraits;
 	std::set<std::string> eu4Religions;
 	std::set<std::string> eu4Govs;
