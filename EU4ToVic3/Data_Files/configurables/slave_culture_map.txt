@@ -1,14 +1,12 @@
 ## Slave generation
 # For countries whose primary culture has a listed Vic3 master culture trait, all slaves in it will be re-assigned another culture
 # Usage:
-# link = { master = [culture trait] slave = [culture] }
+# link = { slave = [culture] masterLanguage = [language] (AND/OR)masterHeritage = [heritage] }
+# Mapping searches for the language first, then the heritage if no language is matched.
 # If a master culture has no slave culture defined, slaves will be of the same culture as master ones
 # The calculation is done BEFORE colonial culture dynamic generation
 
-link = { master = language_anglophone slave = afro_american }
-link = { master = heritage_british slave = afro_american }
-#link = { master = anglophone master = slave = afro_caribbean }
-link = { master = language_lusophone slave = afro_brazilian } # portugese
-link = { master = language_hispanophone slave = afro_caribeno } # spanish
-link = { master = language_francophone slave = afro_antillean } # french, belgians etc
-link = { master = heritage_gallic slave = afro_antillean } # french, belgians etc
+link = { slave = afro_american masterHeritage = heritage_british } #British
+link = { slave = afro_brazilian masterLanguage = language_lusophone } # Portugese
+link = { slave = afro_caribeno masterLanguage = language_hispanophone masterHeritage = heritage_iberian } # Spanish
+link = { slave = afro_antillean masterLanguage = language_francophone masterHeritage = heritage_gallic } # French, Belgians etc
