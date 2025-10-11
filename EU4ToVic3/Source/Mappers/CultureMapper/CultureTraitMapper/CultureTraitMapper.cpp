@@ -98,7 +98,7 @@ std::optional<mappers::CultureTraitMapping> mappers::CultureTraitMapper::getTrai
 	}
 	if (!match)
 	{
-		for (const auto& mapping: heritageMappings)
+		for (const auto& mapping: languageMappings)
 		{
 			if (!eu4CultureGroup.empty() && mapping.getCultureGroup() == eu4CultureGroup)
 			{

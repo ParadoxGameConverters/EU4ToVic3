@@ -47,7 +47,7 @@ TEST(Mappers_IGIdeologiesMappingTests, LinkCanAlterMods)
 	mappers::CultureMapper culMapper;
 	mappers::CultureDef def;
 	def.name = "japanese";
-	def.traits.emplace("yamato");
+	def.heritage = "yamato";
 	culMapper.setV3CultureDefinitions({std::pair("japanese", def)});
 
 	// match
@@ -83,7 +83,7 @@ TEST(Mappers_IGIdeologiesMappingTests, LinkCanNullifyExistingMods)
 	mappers::CultureMapper culMapper;
 	mappers::CultureDef def;
 	def.name = "japanese";
-	def.traits.emplace("yamato");
+	def.heritage = "yamato";
 	culMapper.setV3CultureDefinitions({std::pair("japanese", def)});
 
 	// match
