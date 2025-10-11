@@ -10,8 +10,8 @@ class CultureTraitMapping: commonItems::parser
 	CultureTraitMapping() = default;
 	explicit CultureTraitMapping(std::istream& theStream);
 
-	[[nodiscard]] const auto& getCulture() const { return culture; }
-	[[nodiscard]] const auto& getCultureGroup() const { return cultureGroup; }
+	[[nodiscard]] const auto& getCultures() const { return cultures; }
+	[[nodiscard]] const auto& getCultureGroups() const { return cultureGroups; }
 	[[nodiscard]] const auto& getTraditions() const { return traditions; }
 	[[nodiscard]] const auto& getHeritage() const { return heritage; }
 	[[nodiscard]] const auto& getLanguage() const { return language; }
@@ -24,8 +24,8 @@ class CultureTraitMapping: commonItems::parser
   private:
 	void registerkeys();
 
-	std::string culture;
-	std::string cultureGroup;
+	std::set<std::string> cultures;
+	std::set<std::string> cultureGroups;
 	std::set<std::string> traditions;
 	std::string heritage;
 	std::string language;

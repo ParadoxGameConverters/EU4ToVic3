@@ -638,7 +638,7 @@ mappers::CultureDef mappers::CultureMapper::generateCultureDefinition(const V3::
 		const auto& groupName = sourceCultureGroup->getName();
 		if (const auto& traitsblock = cultureTraitMapper.getTraitsForCulture(sourceCultureName, groupName); !traitsblock)
 		{
-			Log(LogLevel::Warning) << "EU4 culture " << sourceCultureName << " has no mapped traits! Rectify!";
+			Log(LogLevel::Warning) << "EU4 culture " << sourceCultureName << " (group: " << groupName << ") has no mapped traits! Rectify!";
 		}
 		else
 		{

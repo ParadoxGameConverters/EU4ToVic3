@@ -64,7 +64,7 @@ std::optional<mappers::CultureTraitMapping> mappers::CultureTraitMapper::getTrai
 	bool match = false;
 	for (const auto& mapping: heritageMappings)
 	{
-		if (!eu4Culture.empty() && mapping.getCulture() == eu4Culture)
+		if (!eu4Culture.empty() && mapping.getCultures().contains(eu4Culture))
 		{
 			match = true;
 			toReturn = mapping;
@@ -74,7 +74,7 @@ std::optional<mappers::CultureTraitMapping> mappers::CultureTraitMapper::getTrai
 	{
 		for (const auto& mapping: heritageMappings)
 		{
-			if (!eu4CultureGroup.empty() && mapping.getCultureGroup() == eu4CultureGroup)
+			if (!eu4CultureGroup.empty() && mapping.getCultureGroups().contains(eu4CultureGroup))
 			{
 				match = true;
 				toReturn = mapping;
@@ -83,14 +83,16 @@ std::optional<mappers::CultureTraitMapping> mappers::CultureTraitMapper::getTrai
 	}
 
 	if (!match)
+	{
 		return std::nullopt; // We found nothing, bail.
+	}
 
 	// We found something, let's fill up the language and traditions (if any).
 
 	match = false;
 	for (const auto& mapping: languageMappings)
 	{
-		if (!eu4Culture.empty() && mapping.getCulture() == eu4Culture)
+		if (!eu4Culture.empty() && mapping.getCultures().contains(eu4Culture))
 		{
 			match = true;
 			toReturn.setLanguage(mapping.getLanguage());
@@ -100,7 +102,7 @@ std::optional<mappers::CultureTraitMapping> mappers::CultureTraitMapper::getTrai
 	{
 		for (const auto& mapping: languageMappings)
 		{
-			if (!eu4CultureGroup.empty() && mapping.getCultureGroup() == eu4CultureGroup)
+			if (!eu4CultureGroup.empty() && mapping.getCultureGroups().contains(eu4CultureGroup))
 			{
 				match = true;
 				toReturn.setLanguage(mapping.getLanguage());
@@ -117,7 +119,7 @@ std::optional<mappers::CultureTraitMapping> mappers::CultureTraitMapper::getTrai
 	match = false;
 	for (const auto& mapping: traditionMappings)
 	{
-		if (!eu4Culture.empty() && mapping.getCulture() == eu4Culture)
+		if (!eu4Culture.empty() && mapping.getCultures().contains(eu4Culture))
 		{
 			match = true;
 			toReturn.setTraditions(mapping.getTraditions());
@@ -127,7 +129,7 @@ std::optional<mappers::CultureTraitMapping> mappers::CultureTraitMapper::getTrai
 	{
 		for (const auto& mapping: traditionMappings)
 		{
-			if (!eu4CultureGroup.empty() && mapping.getCultureGroup() == eu4CultureGroup)
+			if (!eu4CultureGroup.empty() && mapping.getCultureGroups().contains(eu4CultureGroup))
 			{
 				toReturn.setTraditions(mapping.getTraditions());
 			}
