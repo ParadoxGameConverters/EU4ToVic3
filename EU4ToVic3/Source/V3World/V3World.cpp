@@ -149,7 +149,9 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	Log(LogLevel::Progress) << "55 %";
 	cultureMapper.generateCultureDefinitions("configurables/name_lists.txt",
 		 "configurables/name_list_map.txt",
-		 "configurables/culture_trait_map.txt",
+		 "configurables/culture_trait_heritage_map.txt",
+		 "configurables/culture_trait_language_map.txt",
+		 "configurables/culture_trait_tradition_map.txt",
 		 clayManager,
 		 sourceWorld.getCultureLoader(),
 		 sourceWorld.getReligionLoader(),

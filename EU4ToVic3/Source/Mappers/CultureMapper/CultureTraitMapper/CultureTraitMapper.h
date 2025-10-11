@@ -10,15 +10,21 @@ class CultureTraitMapper: commonItems::parser
 {
   public:
 	CultureTraitMapper() = default;
-	void loadMappingRules(const std::filesystem::path& filePath);
-	void loadMappingRules(std::istream& theStream);
+	void loadMappingRules(const std::filesystem::path& heritageFilePath,
+		 const std::filesystem::path& languageFilePath,
+		 const std::filesystem::path& traditionFilePath);
+	void loadMappingRules(std::istream& heritageStream, std::istream& languageStream, std::istream& traditionStream);
 
 	[[nodiscard]] std::optional<CultureTraitMapping> getTraitsForCulture(const std::string& eu4Culture, const std::string& eu4CultureGroup) const;
 
   private:
-	void registerKeys();
+	void registerHeritageKeys();
+	void registerLanguageKeys();
+	void registerTraditionKeys();
 
-	std::vector<CultureTraitMapping> mappings;
+	std::vector<CultureTraitMapping> heritageMappings;
+	std::vector<CultureTraitMapping> languageMappings;
+	std::vector<CultureTraitMapping> traditionMappings;
 };
 } // namespace mappers
 

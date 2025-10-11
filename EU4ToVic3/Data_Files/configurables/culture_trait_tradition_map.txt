@@ -4,38 +4,37 @@
 # Relevant to this is also name_list_map.txt which graps appropriate namelist for the culture being defines.
 #
 # Example usage:
-# link = { trait = tradition_example eu4 = culture1 eu4group = culturegroup1 } -> list individual cultures BEFORE group fallbacks!
-# There can be as many cultures and groups as needed
-# There must be a SINGLE tradition
+# link = { tradition = tradition_example eu4 = culture1 eu4group = culturegroup1 } -> list individual cultures BEFORE group fallbacks!
+# There can be as many traditions, cultures and groups as needed
 
 #Mapping Order: The converter first searches for EU4 cultures, THEN if, and only if, it cannot find a matching EU4 culture, does it map by EU4 Culture Group
 #This means that you do NOT need to order the EU4 cultures so that they appear before EU4 Culture Groups, since the cultures will always map before the mapper starts looking for culture groups.
 
 #Vanilla EU4 Cultures
-link = { trait = tradition_caucasian eu4 = azerbaijani eu4group = caucasian }
-#link = { trait = tradition_danubian eu4 = ??? } #Unused in vanilla VIC3
-link = { trait = tradition_helvetic eu4 = swiss }
-link = { trait = tradition_himalayan eu4 = nepali eu4 = tibetan }
-link = { trait = tradition_persianate eu4 = turkmeni eu4 = uzbehk eu4group = iranian }
-link = { trait = tradition_rumelian eu4 = albanian eu4 = bosnian eu4 = turkish }
-link = { trait = tradition_russosphere eu4_group = east_slavic eu4group = slavic eu4group = tartar }
-link = { trait = tradition_sinosphere eu4 = bai eu4 = chahar eu4 = manchu eu4 = miao eu4 = vietnamese eu4 = yi eu4 = zhuang eu4group = east_asian eu4group = korean_g }
-link = { trait = tradition_israelite eu4 = hebrew }
+link = { tradition = tradition_caucasian eu4 = azerbaijani eu4group = caucasian }
+#link = { tradition = tradition_danubian eu4 = ??? } #Unused in vanilla VIC3
+link = { tradition = tradition_helvetic eu4 = swiss }
+link = { tradition = tradition_himalayan eu4 = nepali eu4 = tibetan }
+link = { tradition = tradition_persianate eu4 = turkmeni eu4 = uzbehk eu4group = iranian }
+link = { tradition = tradition_rumelian eu4 = albanian eu4 = bosnian eu4 = turkish }
+link = { tradition = tradition_russosphere eu4_group = east_slavic eu4group = slavic eu4group = tartar }
+link = { tradition = tradition_sinosphere eu4 = bai eu4 = chahar eu4 = manchu eu4 = miao eu4 = vietnamese eu4 = yi eu4 = zhuang eu4group = east_asian eu4group = korean_g }
+link = { tradition = tradition_israelite eu4 = hebrew }
 
 
 #Converter Cultures
-link = { trait = tradition_caucasian eu4group = abkhazian_group eu4group = armenian_group eu4group = dagestani_group }
-#link = { trait = tradition_danubian eu4 = ??? } #Unused in vanilla VIC3
-link = { trait = tradition_helvetic eu4 = provencal eu4 = vivaroaupenc }
-link = { trait = tradition_himalayan eu4 = tocharian }
-link = { trait = tradition_persianate eu4 = bazramani eu4 = elamite eu4 = sogdian eu4_group = iranian_tribal }
-link = { trait = tradition_rumelian eu4 = shqiperi eu4 = arbereshe eu4group = albanian_g eu4group = western_balkan }
-link = { trait = tradition_russosphere eu4 = old_slavic eu4 = pomor eu4 = wenedyk }
-link = { trait = tradition_sinosphere eu4 = bai eu4 = chahar eu4 = manchu eu4 = miao eu4 = vietnamese eu4 = yi eu4 = zhuang eu4group = east_asian eu4group = korean_g }
-link = { trait = tradition_israelite eu4group = israelite eu4group = israeli_group }
+link = { tradition = tradition_caucasian eu4group = abkhazian_group eu4group = armenian_group eu4group = dagestani_group }
+#link = { tradition = tradition_danubian eu4 = ??? } #Unused in vanilla VIC3
+link = { tradition = tradition_helvetic eu4 = provencal eu4 = vivaroaupenc }
+link = { tradition = tradition_himalayan eu4 = tocharian }
+link = { tradition = tradition_persianate eu4 = bazramani eu4 = elamite eu4 = sogdian eu4_group = iranian_tribal }
+link = { tradition = tradition_rumelian eu4 = shqiperi eu4 = arbereshe eu4group = albanian_g eu4group = western_balkan }
+link = { tradition = tradition_russosphere eu4 = old_slavic eu4 = pomor eu4 = wenedyk }
+link = { tradition = tradition_sinosphere eu4 = bai eu4 = chahar eu4 = manchu eu4 = miao eu4 = vietnamese eu4 = yi eu4 = zhuang eu4group = east_asian eu4group = korean_g }
+link = { tradition = tradition_israelite eu4group = israelite eu4group = israeli_group }
 
 
 #Converter Traditions
-link = { trait = tradition_oviparity eu4group = dragon_group eu4group = duck_group }
-link = { trait = tradition_vivaparity eu4 = jan_mayanese eu4 = polar_bear eu4group = bear_group eu4group = cat_group eu4group = dog_group eu4group = elephant_group eu4group = equine_group eu4group = hedgehog_group eu4group = red_panda_group }
+link = { tradition = tradition_oviparity eu4group = dragon_group eu4group = duck_group }
+link = { tradition = tradition_vivaparity eu4 = jan_mayanese eu4 = polar_bear eu4group = bear_group eu4group = cat_group eu4group = dog_group eu4group = elephant_group eu4group = equine_group eu4group = hedgehog_group eu4group = red_panda_group }
 

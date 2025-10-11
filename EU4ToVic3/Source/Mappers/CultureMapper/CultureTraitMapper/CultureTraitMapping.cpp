@@ -12,10 +12,10 @@ mappers::CultureTraitMapping::CultureTraitMapping(std::istream& theStream)
 void mappers::CultureTraitMapping::registerkeys()
 {
 	registerKeyword("eu4", [this](std::istream& theStream) {
-		culture = commonItems::getString(theStream);
+		cultures.emplace(commonItems::getString(theStream));
 	});
 	registerKeyword("eu4group", [this](std::istream& theStream) {
-		cultureGroup = commonItems::getString(theStream);
+		cultureGroups.emplace(commonItems::getString(theStream));
 	});
 	registerKeyword("tradition", [this](std::istream& theStream) {
 		traditions.emplace(commonItems::getString(theStream));

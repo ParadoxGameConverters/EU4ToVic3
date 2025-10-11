@@ -10,13 +10,15 @@ class SlaveCultureMapping: commonItems::parser
 	SlaveCultureMapping() = default;
 	explicit SlaveCultureMapping(std::istream& theStream);
 
-	[[nodiscard]] const auto& getMasterTrait() const { return masterTrait; }
+	[[nodiscard]] const auto& getMasterHeritage() const { return masterHeritage; }
+	[[nodiscard]] const auto& getMasterLanguage() const { return masterLanguage; }
 	[[nodiscard]] const auto& getSlaveCulture() const { return slaveCulture; }
 
   private:
 	void registerKeys();
 
-	std::string masterTrait;
+	std::optional<std::string> masterHeritage;
+	std::optional<std::string> masterLanguage;
 	std::string slaveCulture;
 };
 } // namespace mappers

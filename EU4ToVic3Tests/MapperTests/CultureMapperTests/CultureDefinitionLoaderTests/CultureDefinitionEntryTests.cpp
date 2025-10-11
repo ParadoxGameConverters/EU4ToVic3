@@ -31,7 +31,7 @@ TEST(Mappers_CultureDefinitionEntryTests, EntryCanBeLoaded)
 	std::stringstream input;
 	input << "color = rgb{ 1 2 3 }\n";
 	input << "religion = religion_1\n";
-	input << "heritage = \n";
+	input << "heritage = testheritage\n";
 	input << "language = testlanguage\n";
 	input << "traditions = { testtrait1 }\n";
 	input << "obsessions = { obsession_1 }\n";
