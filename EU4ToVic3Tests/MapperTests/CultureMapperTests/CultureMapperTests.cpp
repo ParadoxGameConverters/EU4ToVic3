@@ -329,7 +329,7 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeAlteredInPostProcessing)
 	EXPECT_EQ("vculture2", def1.name);
 	EXPECT_EQ("new_heritage", def1.heritage);
 	EXPECT_EQ("new_language", def1.language);
-	EXPECT_THAT(def1.traditions, testing::UnorderedElementsAre( "testaddedtrait")); // testtrait2 trait is gone.
+	EXPECT_THAT(def1.traditions, testing::UnorderedElementsAre("testaddedtrait")); // testtrait2 trait is gone.
 }
 
 TEST(Mappers_CultureMapperTests, cultureDefsLinksDynamicsToRelatedCultures)
