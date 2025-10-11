@@ -224,7 +224,9 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
 	culMapper.loadCultureDefinitions(modFS);
 	culMapper.generateCultureDefinitions("TestFiles/configurables/name_lists.txt",
 		 "TestFiles/configurables/name_list_map.txt",
-		 "TestFiles/configurables/culture_trait_map.txt",
+		 "TestFiles/configurables/culture_trait_heritage_map.txt",
+		 "TestFiles/configurables/culture_trait_language_map.txt",
+		 "TestFiles/configurables/culture_trait_tradition_map.txt",
 		 clayManager,
 		 cultureLoader,
 		 religionLoader,
@@ -249,7 +251,7 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
 	EXPECT_EQ("culture5", def1.name);
 	ASSERT_TRUE(def1.color);
 	EXPECT_EQ("= rgb { 112 254 237 }", (*def1.color).outputRgb());
-	EXPECT_THAT(def1.traits, testing::UnorderedElementsAre("testtrait2"));
+	EXPECT_EQ("testtrait2", def1.heritage);
 	EXPECT_THAT(def1.maleCommonFirstNames, testing::UnorderedElementsAre("male3", "male4"));
 	EXPECT_THAT(def1.femaleCommonFirstNames, testing::UnorderedElementsAre("female3", "female4"));
 	EXPECT_THAT(def1.nobleLastNames, testing::UnorderedElementsAre("dyn3", "dyn4"));
@@ -268,7 +270,7 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeGenerated)
 	EXPECT_EQ("unmapped_culture", def2.name);
 	ASSERT_TRUE(def2.color);
 	EXPECT_EQ("= rgb { 254 61 136 }", (*def2.color).outputRgb());
-	EXPECT_TRUE(def2.traits.empty());
+	EXPECT_TRUE(def2.heritage.empty());
 	EXPECT_TRUE(def2.maleCommonFirstNames.empty());
 	EXPECT_TRUE(def2.femaleCommonFirstNames.empty());
 	EXPECT_TRUE(def2.nobleLastNames.empty());
@@ -305,7 +307,9 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeAlteredInPostProcessing)
 	culMapper.loadCultureDefinitions(modFS);
 	culMapper.generateCultureDefinitions("TestFiles/configurables/name_lists.txt",
 		 "TestFiles/configurables/name_list_map.txt",
-		 "TestFiles/configurables/culture_trait_map.txt",
+		 "TestFiles/configurables/culture_trait_heritage_map.txt",
+		 "TestFiles/configurables/culture_trait_language_map.txt",
+		 "TestFiles/configurables/culture_trait_tradition_map.txt",
 		 clayManager,
 		 cultureLoader,
 		 religionLoader,
@@ -323,8 +327,9 @@ TEST(Mappers_CultureMapperTests, cultureDefsCanBeAlteredInPostProcessing)
 
 	const auto& def1 = culMapper.getV3CultureDefinitions().at("vculture2");
 	EXPECT_EQ("vculture2", def1.name);
-	EXPECT_THAT(def1.traits,
-		 testing::UnorderedElementsAre("heritage_trait_2", "nonheritage_trait_1", "nonheritage_trait_2", "testaddedtrait")); // testtrait2 trait is gone.
+	EXPECT_EQ("new_heritage", def1.heritage);
+	EXPECT_EQ("new_language", def1.language);
+	EXPECT_THAT(def1.traditions, testing::UnorderedElementsAre("testaddedtrait")); // testtrait2 trait is gone.
 }
 
 TEST(Mappers_CultureMapperTests, cultureDefsLinksDynamicsToRelatedCultures)
@@ -349,7 +354,9 @@ TEST(Mappers_CultureMapperTests, cultureDefsLinksDynamicsToRelatedCultures)
 	culMapper.loadCultureDefinitions(modFS);
 	culMapper.generateCultureDefinitions("TestFiles/configurables/name_lists.txt",
 		 "TestFiles/configurables/name_list_map.txt",
-		 "TestFiles/configurables/culture_trait_map.txt",
+		 "TestFiles/configurables/culture_trait_heritage_map.txt",
+		 "TestFiles/configurables/culture_trait_language_map.txt",
+		 "TestFiles/configurables/culture_trait_tradition_map.txt",
 		 clayManager,
 		 cultureLoader,
 		 religionLoader,
@@ -369,10 +376,10 @@ TEST(Mappers_CultureMapperTests, cultureMapperCanCompareCulturalTraits)
 	culMapper.loadCultureDefinitions(modFS);
 	culMapper.loadTraitDefinitions(modFS);
 
-	ASSERT_TRUE(culMapper.doCulturesShareHeritageTrait("vculture1", "vculture2"));
-	EXPECT_FALSE(*culMapper.doCulturesShareHeritageTrait("vculture1", "vculture2"));
-	ASSERT_TRUE(culMapper.doCulturesShareNonHeritageTrait("vculture1", "vculture2"));
-	EXPECT_TRUE(*culMapper.doCulturesShareNonHeritageTrait("vculture1", "vculture2"));
+	ASSERT_TRUE(culMapper.doCulturesShareHeritage("vculture1", "vculture2"));
+	EXPECT_FALSE(*culMapper.doCulturesShareHeritage("vculture1", "vculture2"));
+	ASSERT_TRUE(culMapper.doCulturesShareLanguage("vculture1", "vculture2"));
+	EXPECT_FALSE(*culMapper.doCulturesShareLanguage("vculture1", "vculture2"));
 }
 
 TEST(Mappers_CultureMapperTests, cultureMapperDoesNotCompareBrokenCulturalTraits)
@@ -381,6 +388,6 @@ TEST(Mappers_CultureMapperTests, cultureMapperDoesNotCompareBrokenCulturalTraits
 	culMapper.loadCultureDefinitions(modFS);
 	culMapper.loadTraitDefinitions(modFS);
 
-	EXPECT_EQ(std::nullopt, culMapper.doCulturesShareHeritageTrait("vculture1", "nonsense"));
-	EXPECT_EQ(std::nullopt, culMapper.doCulturesShareNonHeritageTrait("vculture1", "nonsense"));
+	EXPECT_EQ(std::nullopt, culMapper.doCulturesShareHeritage("vculture1", "nonsense"));
+	EXPECT_EQ(std::nullopt, culMapper.doCulturesShareHeritage("vculture1", "nonsense"));
 }

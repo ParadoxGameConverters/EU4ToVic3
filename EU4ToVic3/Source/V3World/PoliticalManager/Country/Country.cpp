@@ -340,11 +340,11 @@ void V3::Country::convertFromEU4Country(const ClayManager& clayManager,
 	{
 		processedData.tertiaryUnitColor = vanillaData->tertiaryUnitColor;
 	}
-	else if (sourceCountry->getNationalColors().getMapColor())
+	if (!processedData.color && sourceCountry->getNationalColors().getMapColor())
 	{
 		processedData.color = sourceCountry->getNationalColors().getMapColor();
 	}
-	// If nothing... well... Game will assign something.
+	// Else if nothing... well... Game will assign something.
 
 	// Maybe we're a colonial nation? In that case our colors will be within 1-2 of the overlord. We neeed to fluctuate.
 	if (!sourceCountry->getOverLord().empty() && sourceCountry->isColony())
@@ -1172,8 +1172,8 @@ bool V3::Country::isCultureDiscriminated(const std::string& culture, const mappe
 	{
 		for (const auto& primaryCulture: processedData.cultures)
 		{
-			if (cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) &&
-				 cultureMapper.doCulturesShareNonHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareNonHeritageTrait(primaryCulture, culture))
+			if (cultureMapper.doCulturesShareHeritage(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritage(primaryCulture, culture) &&
+				 cultureMapper.doCulturesShareLanguage(primaryCulture, culture) && *cultureMapper.doCulturesShareLanguage(primaryCulture, culture))
 				return false;
 		}
 	}
@@ -1182,7 +1182,7 @@ bool V3::Country::isCultureDiscriminated(const std::string& culture, const mappe
 	{
 		for (const auto& primaryCulture: processedData.cultures)
 		{
-			if (cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture))
+			if (cultureMapper.doCulturesShareHeritage(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritage(primaryCulture, culture))
 				return false;
 		}
 	}
@@ -1191,8 +1191,8 @@ bool V3::Country::isCultureDiscriminated(const std::string& culture, const mappe
 	{
 		for (const auto& primaryCulture: processedData.cultures)
 		{
-			if (cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritageTrait(primaryCulture, culture) ||
-				 cultureMapper.doCulturesShareNonHeritageTrait(primaryCulture, culture) && *cultureMapper.doCulturesShareNonHeritageTrait(primaryCulture, culture))
+			if (cultureMapper.doCulturesShareHeritage(primaryCulture, culture) && *cultureMapper.doCulturesShareHeritage(primaryCulture, culture) ||
+				 cultureMapper.doCulturesShareLanguage(primaryCulture, culture) && *cultureMapper.doCulturesShareLanguage(primaryCulture, culture))
 			{
 				return false;
 			}
