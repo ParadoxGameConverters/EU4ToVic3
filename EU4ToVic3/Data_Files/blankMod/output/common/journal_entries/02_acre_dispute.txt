@@ -1,0 +1,34 @@
+﻿je_acre_dispute = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	group = je_group_historical_content
+
+	is_shown_in_lobby = {
+		has_dlc_feature = rp1_content #Colossus of the South
+		c:BOL ?= THIS
+	}
+
+	immediate = {
+		s:STATE_ACRE = {
+			random_scope_state = {
+				save_scope_as = acre_state
+			}
+		}
+	}
+
+	complete = {
+		country_or_subject_owns_entire_state_region = STATE_ACRE
+	}
+
+	on_complete = {
+		trigger_event = { id = acre_dispute.3 popup = yes }
+	}
+
+	timeout = 1825
+
+	on_timeout = {
+		trigger_event = { id = acre_dispute.4 popup = yes }
+	}
+
+	should_be_pinned_by_default = yes
+}

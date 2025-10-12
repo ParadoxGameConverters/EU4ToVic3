@@ -2,7 +2,7 @@
 paraguay.11 = {
 	type = country_event
 	placement = scope:paraguay_scope.capital
-	
+
 	title = paraguay.11.t
 	desc = paraguay.11.d
 	flavor = paraguay.11.f
@@ -14,11 +14,11 @@ paraguay.11 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
-	
+
 	duration = 3
 
-	#dlc = dlc008
-	
+	dlc = dlc008
+
 	trigger = {
 		exists = c:PRG
 		NOR = {
@@ -97,7 +97,7 @@ paraguay.11 = {
 			}
 		}
 	}
-	option = { 
+	option = {
 		name = paraguay.11.a
 		default_option = yes
 		add_journal_entry = { type = je_paraguayan_war }

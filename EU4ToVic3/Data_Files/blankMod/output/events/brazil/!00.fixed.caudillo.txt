@@ -1,0 +1,110 @@
+﻿namespace = caudillo
+
+# Age of Caudillo startup event
+caudillo.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = caudillo.1.t
+	desc = caudillo.1.d
+	flavor = caudillo.1.f
+
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/ig_icons/armed_forces.dds"
+
+	duration = 3
+
+	trigger = {
+		# triggered by generic monthly pulse
+		NOT = { has_variable = caudillo_var }
+		ig:ig_armed_forces ?= {
+			has_ideology = ideology:ideology_caudillismo
+		}
+		any_scope_character = {
+			has_role = general
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = caudillo_var
+			value = 0
+		}
+		set_variable = {
+			name = caudillo_next
+			value = 0
+		}
+		capital = {
+			save_scope_as = capital_scope
+		}
+		set_global_variable = { # ensures military presidents aren't replaced super early
+			name = continuismo_start_var
+			days = long_modifier_time
+		}
+		ig:ig_armed_forces ?= {
+			save_scope_as = army_scope
+		}
+		random_scope_character = {
+			limit = {
+				has_role = general
+			}
+			save_scope_as = general_scope
+		}
+		if = {
+			limit = {
+				ruler = {
+					interest_group = {
+						is_interest_group_type = ig_armed_forces
+					}
+				}
+			}
+			ruler = {
+				save_scope_as = powerful_caudillo
+			}
+		}
+		else = {
+			ig:ig_armed_forces ?= {
+				leader = {
+					save_scope_as = powerful_caudillo
+				}
+			}
+		}
+	}
+	option = {
+		name = caudillo.1.a
+		default_option = yes
+		add_journal_entry = { type = je_caudillo }
+		if = { # This was less of an issue in Chile
+			limit = {
+				c:CLH ?= this
+			}
+			change_variable = {
+				name = caudillo_var
+				add = 400
+			}
+		}
+		else = {
+			change_variable = {
+				name = caudillo_var
+				add = 600
+			}
+		}
+		if = { # Starts the Francia JE
+			limit = {
+				c:PRG ?= this
+				NOR = {
+					has_journal_entry = je_francocracia
+					has_variable = death_of_francia_var
+					year > 1836
+				}
+				has_dlc_feature = rp1_content
+			}
+			add_journal_entry = { type = je_francocracia }
+		}
+	}
+}

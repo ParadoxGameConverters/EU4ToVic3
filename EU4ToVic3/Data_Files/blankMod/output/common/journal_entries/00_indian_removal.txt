@@ -1,0 +1,73 @@
+﻿je_indian_removal = {
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	group = je_group_usa_manifest_destiny
+
+	is_shown_in_lobby = {
+		c:USA ?= THIS
+	}
+
+	on_monthly_pulse = {
+		random_events = {
+			20 = 0
+			2 = native_resettlement.2 # john ross. Fires once because very specific.
+			2 = native_resettlement.3 # Preparing for resettlement, repeats.
+			1 = native_resettlement.4 # Trail of Tears, requires native_resettlement.3 to have fired at least once.
+		}
+	}
+
+	complete = {
+		OR = {
+			has_law_or_variant = law_type:law_no_colonial_affairs
+			cultural_acceptance_base = { target = cu:cherokee value >= acceptance_status_4 }
+			custom_tooltip = {
+				text = indian_removal_fail_tt
+				NOT = {
+					any_scope_state = {
+						any_scope_pop = {
+							culture = cu:cherokee
+						}
+					}
+				}
+			}
+		}
+	}
+
+	on_complete = {
+		custom_tooltip = {
+			text = indian_removal_end
+			if = {
+				limit = {
+					NOT = {
+						any_scope_pop = {
+							culture = cu:cherokee
+						}
+					}
+				}
+				trigger_event = { id = native_resettlement.5 }
+			}
+			else = {
+				trigger_event = { id = native_resettlement.6 }
+			}
+		}
+	}
+
+	invalid = {
+		OR = {
+			NOT = { owns_entire_state_region = STATE_GEORGIA }
+			NOT = {
+				AND = {
+					exists = c:SEQ
+					exists = c:USA
+					c:SEQ = { is_subject_of = c:USA }
+				}
+			}
+		}
+	}
+
+	weight = 200
+
+	should_be_pinned_by_default = yes
+
+	transferable = no
+}

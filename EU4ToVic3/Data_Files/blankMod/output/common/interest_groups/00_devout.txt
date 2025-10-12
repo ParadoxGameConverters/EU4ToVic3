@@ -363,7 +363,7 @@
 					country_has_primary_culture = cu:russian
 					country_has_primary_culture = cu:byelorussian
 					country_has_primary_culture = cu:ukrainian
-					ROOT ?= c:MON
+					c:MON ?= this
 				}
 			}
 			ig:ig_devout ?= {
@@ -374,7 +374,7 @@
 		}
 		else_if = {
 			limit = {
-				ROOT ?= c:MON
+				c:MON ?= this
 				country_has_state_religion = rel:orthodox
 			}
 			ig:ig_devout ?= {
@@ -758,10 +758,10 @@
 		if = {
 			limit = {
 				OR = {
-					owner.religion = rel:sunni
-					owner.religion = rel:shiite
-					owner.religion = rel:ibadi
-					owner.religion = rel:theravada
+					owner.religion ?= rel:sunni
+					owner.religion ?= rel:shiite
+					owner.religion ?= rel:ibadi
+					owner.religion ?= rel:theravada
 				}
 			}
 			multiply = 2

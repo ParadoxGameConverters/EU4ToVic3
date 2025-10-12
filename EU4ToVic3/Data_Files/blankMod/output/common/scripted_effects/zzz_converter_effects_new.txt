@@ -1322,7 +1322,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 								}
 							}
 							OR = {
-								has_discrimination_trait = north_american_group
+								has_discrimination_trait_group = heritage_group_indigenous_american
 								has_discrimination_trait_group = heritage_group_north_asian
 								has_discrimination_trait_group = heritage_group_central_asian
 							}
@@ -1334,7 +1334,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 			trigger_else = {
 				religion = { has_discrimination_trait = heritage_indigenous }
 				OR = {
-					any_primary_culture = { has_discrimination_trait = north_american_group }
+					any_primary_culture = { has_discrimination_trait_group = heritage_group_indigenous_american }
 					any_primary_culture = { has_discrimination_trait_group = heritage_group_north_asian }
 					any_primary_culture = { has_discrimination_trait_group = heritage_group_central_asian }
 				}
@@ -1489,7 +1489,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 			add_ideology = ideology_corporatist
 		}
 	}
-	converter_ig_devout_feminism_matriarchy_effect = yes
+	#converter_ig_devout_feminism_matriarchy_effect = yes
 	## End Devout
 	## Start Landowners
 	if = {		# Squattocracy
@@ -1919,7 +1919,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 			}
 		}
 	}
-	converter_ig_landowners_feminism_matriarchy_effect = yes
+	#converter_ig_landowners_feminism_matriarchy_effect = yes
 	## End Landowners
 	## Start Petite Bourgeoisie
 	if = {		# India & other trading companies
@@ -2849,7 +2849,7 @@ converter_copy_ideologies_effect = {
 			religion = { has_discrimination_trait = heritage_indigenous }
 			civil_war_origin_country = {
 				OR = {
-					any_primary_culture = { has_discrimination_trait = north_american_group }
+					any_primary_culture = { has_discrimination_trait_group = heritage_group_indigenous_american }
 					any_primary_culture = { has_discrimination_trait_group = heritage_group_north_asian }
 					any_primary_culture = { has_discrimination_trait_group = heritage_group_central_asian }
 				}
@@ -2944,7 +2944,7 @@ converter_copy_ideologies_effect = {
 			add_ideology = ideology_corporatist
 		}
 	}
-	converter_ig_devout_feminism_matriarchy_effect = yes
+	#converter_ig_devout_feminism_matriarchy_effect = yes
 	## End Devout
 	## Start Landowners
 	if = {		# Squattocracy
@@ -3138,7 +3138,7 @@ converter_copy_ideologies_effect = {
 			set_interest_group_name = ig_southern_planters
 		}
 	}
-	converter_ig_landowners_feminism_matriarchy_effect = yes
+	#converter_ig_landowners_feminism_matriarchy_effect = yes
 	## End Landowners
 	## Start Petite Bourgeoisie
 	if = {
@@ -4155,323 +4155,5 @@ converter_make_dominion = {
 			}
 		}
 		change_subject_type = subject_type_dominion
-	}
-}
-
-converter_karl_marx_effect = {
-	random_list = {
-		95 = {
-			trigger = {
-				country_is_in_north_america = no
-				country_is_in_europe = no
-			}
-			if = {
-				limit = { is_matriarchal_country = yes }
-				create_character = {
-					is_agitator = yes
-					interest_group = ig_trade_unions
-					female = yes
-					ideology = ideology_communist
-					traits = {
-						direct
-						persistent
-					}
-					on_created = {
-						if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
-							}
-							add_character_role = politician
-							set_as_interest_group_leader = yes
-							remove_character_role = agitator
-						}
-						else_if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
-							}
-							exile_character_with_martyrdom = yes
-						}
-					}
-				}
-			}
-			else = {
-				create_character = {
-					is_agitator = yes
-					interest_group = ig_trade_unions
-					female = no
-					ideology = ideology_communist
-					traits = {
-						direct
-						persistent
-					}
-					on_created = {
-						if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
-							}
-							add_character_role = politician
-							set_as_interest_group_leader = yes
-							remove_character_role = agitator
-						}
-						else_if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
-							}
-							exile_character_with_martyrdom = yes
-						}
-					}
-				}
-			}
-		}
-		95 = {
-			trigger = {
-				OR = {
-					country_is_in_north_america = yes
-					country_is_in_europe = yes
-				}
-			}
-			if = {
-				limit = { is_matriarchal_country = yes }
-				create_character = {
-					template = fem_agitator_karl_marx
-					on_created = {
-						if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
-							}
-							add_character_role = politician
-							set_as_interest_group_leader = yes
-							remove_character_role = agitator
-						}
-						else_if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
-							}
-							exile_character_with_martyrdom = yes
-						}
-					}
-				}
-			}
-			else = {
-				create_character = {
-					template = agitator_karl_marx
-					on_created = {
-						if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
-							}
-							add_character_role = politician
-							set_as_interest_group_leader = yes
-							remove_character_role = agitator
-						}
-						else_if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
-							}
-							exile_character_with_martyrdom = yes
-						}
-					}
-				}
-			}
-		}
-		5 = {
-			modifier = {
-				if = {
-					limit = {
-						OR = {
-							ruler = {
-								has_ideology = ideology:ideology_feminist
-							}
-							ig:ig_trade_unions = {
-								leader = {
-									OR = {
-										has_ideology = ideology:ideology_feminist
-										is_female = yes
-									}
-								}
-							}
-						}
-					}
-					add = 10
-				}
-				if = {
-					limit = {
-						has_law = law_type:law_women_in_the_workplace
-					}
-					add = 5
-				}
-				if = {
-					limit = {
-						has_law = law_type:law_womens_suffrage
-					}
-					add = 5
-				}
-			}
-			if = { #Karla Marx
-				limit = { is_matriarchal_country = yes }
-				create_character = {
-					is_agitator = yes
-					interest_group = ig_trade_unions
-					female = no
-					ideology = ideology_communist
-					traits = {
-						direct
-						persistent
-					}
-					on_created = {
-						if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
-							}
-							add_character_role = politician
-							set_as_interest_group_leader = yes
-							remove_character_role = agitator
-						}
-						else_if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
-							}
-							exile_character_with_martyrdom = yes
-						}
-					}
-				}
-			}
-			else = {
-				create_character = {
-					is_agitator = yes
-					interest_group = ig_trade_unions
-					female = yes
-					ideology = ideology_communist
-					traits = {
-						direct
-						persistent
-					}
-					on_created = {
-						if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
-							}
-							add_character_role = politician
-							set_as_interest_group_leader = yes
-							remove_character_role = agitator
-						}
-						else_if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
-							}
-							exile_character_with_martyrdom = yes
-						}
-					}
-				}
-			}
-		}
-		5 = {
-			trigger = {
-				capital = { state_region = s:STATE_TEXAS }
-			}
-			if = {
-				limit = { is_matriarchal_country = yes }
-				create_character = {
-					template = fem_agitator_charlie_marx
-					on_created = {
-						random_list = {
-							50 = {
-								converter_colonial_template_effect = { TARGET = global_dixie_cultures }
-							}
-							50 = { }
-						}
-						if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
-							}
-							add_character_role = politician
-							set_as_interest_group_leader = yes
-							remove_character_role = agitator
-						}
-						else_if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
-							}
-							exile_character_with_martyrdom = yes
-						}
-					}
-				}
-			}
-			else = {
-				create_character = {
-					template = agitator_charlie_marx
-					on_created = {
-						random_list = {
-							50 = {
-								converter_colonial_template_effect = { TARGET = global_dixie_cultures }
-							}
-							50 = { }
-						}
-						if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
-							}
-							add_character_role = politician
-							set_as_interest_group_leader = yes
-							remove_character_role = agitator
-						}
-						else_if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
-							}
-							exile_character_with_martyrdom = yes
-						}
-					}
-				}
-			}
-		}
-		1 = {
-			trigger = {
-				capital = { state_region = s:STATE_TALINN }
-			}
-			if = {
-				limit = { is_matriarchal_country = yes }
-				create_character = {
-					template = fem_agitator_kras_masov
-					on_created = {
-						if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
-							}
-							add_character_role = politician
-							set_as_interest_group_leader = yes
-							remove_character_role = agitator
-						}
-						else_if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
-							}
-							exile_character_with_martyrdom = yes
-						}
-					}
-				}
-			}
-			else = {
-				create_character = {
-					template = agitator_kras_masov
-					on_created = {
-						if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_promoted_marx }
-							}
-							add_character_role = politician
-							set_as_interest_group_leader = yes
-							remove_character_role = agitator
-						}
-						else_if = {
-							limit = {
-								root.ig:ig_trade_unions = { has_modifier = modifier_ditched_marx }
-							}
-							exile_character_with_martyrdom = yes
-						}
-					}
-				}
-			}
-		}
 	}
 }

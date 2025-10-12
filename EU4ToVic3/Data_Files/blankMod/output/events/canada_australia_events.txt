@@ -544,14 +544,14 @@ can_aus.7 = {
 			limit = {
 				has_game_rule = converter_native_incorporation_access_addition
 				any_primary_culture = {
-					has_discrimination_trait = indigenous_oceanic_heritage
+					has_discrimination_trait_group = heritage_group_indigenous_oceanic
 					is_target_in_global_variable_list = { name = global_australian_cultures target = this }
 					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				}
 			}
 			every_primary_culture = {
 				limit = {
-					has_discrimination_trait = indigenous_oceanic_heritage
+					has_discrimination_trait_group = heritage_group_indigenous_oceanic
 					is_target_in_global_variable_list = { name = global_australian_cultures target = this }
 					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				}
@@ -679,14 +679,14 @@ can_aus.8 = {
 				limit = {
 					has_game_rule = converter_native_incorporation_access_addition
 					any_primary_culture = {
-						has_discrimination_trait = indigenous_oceanic_heritage
+						has_discrimination_trait_group = heritage_group_indigenous_oceanic
 						is_target_in_global_variable_list = { name = global_australian_cultures target = this }
 						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 					}
 				}
 				every_primary_culture = {
 					limit = {
-						has_discrimination_trait = indigenous_oceanic_heritage
+						has_discrimination_trait_group = heritage_group_indigenous_oceanic
 						is_target_in_global_variable_list = { name = global_australian_cultures target = this }
 						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 					}

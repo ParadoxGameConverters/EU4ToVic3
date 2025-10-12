@@ -1,0 +1,448 @@
+﻿je_acw_countdown = {
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	group = je_group_usa_american_civil_war
+
+	immediate = {
+		set_variable = {
+			name = acw_progress_var
+			value = 0
+		}
+	}
+
+	complete = {
+		scope:journal_entry = {
+			is_goal_complete = yes
+		}
+		has_law_or_variant = law_type:law_slavery_banned
+	}
+
+	on_complete = {
+		set_variable = je_acw_countdown_complete
+		remove_modifier = missouri_compromise
+		trigger_event = { id = slavery_law_events.7 days = 0 popup = yes }
+	}
+
+	fail = {
+		OR = {
+			has_civil_war_from_movement_type = movement_type:movement_pro_slavery
+			has_civil_war_from_movement_type = movement_type:movement_anti_slavery
+		}
+	}
+
+	on_fail = {
+		if = {
+			limit = {
+				has_civil_war_from_movement_type = movement_type:movement_pro_slavery
+			}
+			set_variable = csa_will_spawn_var
+		}
+		custom_tooltip = {
+			text = acw_will_happen_tt
+			trigger_event = { id = acw_je_events.1 }
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					has_law_or_variant = law_type:law_slavery_banned
+				}
+				change_variable = {
+					name = acw_progress_var
+					add = 1
+				}
+			}
+		}
+		random_events = {
+			# American Civil War buildup
+			200 = 0
+			10 = acw_events.1 # The Abolitionist's Martyrdom
+			10 = acw_events.3 # The Wilmot Proviso
+		}
+	}
+	on_yearly_pulse = {
+		random_events = {
+			40 = 0
+			20 = acw_events.2 # The Fugitive Slave
+			20 = acw_events.5 # Bleeding Kansas
+			20 = acw_events.6 # The Caning of Charles Sumner
+		}
+	}
+
+	current_value = {
+		value = root.var:acw_progress_var
+	}
+
+	goal_add_value = {
+		value = 120
+	}
+
+	progressbar = yes
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+je_acw_war = {
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	group = je_group_usa_american_civil_war
+
+	is_shown_in_lobby = {
+		c:USA ?= THIS
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = acw_war_tt_complete
+			scope:target = { is_country_alive = no }
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = acw_je_events.2 }
+		if = {
+			limit = {
+				has_variable = csa_will_spawn_var
+			}
+			ruler = {
+				set_variable = abraham_lincoln
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+		events = {
+			acw_je_events.4
+		}
+	}
+
+	should_be_pinned_by_default = yes
+
+	can_revolution_inherit = no
+
+	# acw_events.7 fires for the FSA or CSA, but requires the je_acw_war journal to be active
+	# acw_events.8 fires for the USA, FSA or CSA, but requires the je_acw_war journal to be active
+}
+
+je_acw_reconstruction = {
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	group = je_group_usa_american_civil_war
+
+	complete = {
+		scope:journal_entry = {
+			is_goal_complete = yes
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = acw_je_events.3 }
+		hidden_effect = { # sanity check just in case something somehow falls through the cracks
+			every_scope_state = {
+				limit = { has_modifier = unreconstructed_state }
+				remove_modifier = unreconstructed_state
+			}
+		}
+	}
+
+	current_value = {
+		value = var:reconstruction_var
+	}
+
+	goal_add_value = {
+		add = 3
+	}
+
+	timeout = 4380
+
+	should_be_pinned_by_default = yes
+
+	on_timeout = {
+		trigger_event = { id = acw_je_events.3 }
+	}
+}
+
+je_acw_reincorporate = {
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	group = je_group_usa_american_civil_war
+
+	immediate = {
+		every_scope_state = {
+			limit = {
+				state_region = {
+					is_homeland = cu:dixie
+				}
+				culture_percent_state = {
+					target = cu:dixie
+					value > 0
+				}
+			}
+			root = {
+				add_to_variable_list = {
+					name = acw_dixie_states
+					target = prev
+				}
+			}
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = "ACW_REINCORPORATE_TT"
+
+			any_scope_state = {
+				filter = {
+					state_region = {
+						is_homeland = cu:dixie
+					}
+					culture_percent_state = {
+						target = cu:dixie
+						value > 0
+					}
+				}
+				count = all
+				is_incorporated = yes
+				loyalist_fraction = {
+					value >= acw_reincorporate_dixie_loyalist_min # defined in event_values
+					culture = cu:dixie
+				}
+			}
+		}
+	}
+
+	on_complete = {
+		clear_variable_list = acw_dixie_states
+		custom_tooltip = {
+			text = dont_lose_dixie_culture
+			set_variable = acw_keep_dixie
+		}
+		custom_tooltip = {
+			text = reconstruction_progress
+			change_variable = {
+				name = reconstruction_var
+				add = 1
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+		random_events = {
+			180 = 0
+			20 = acw_followup_events.6
+			20 = acw_followup_events.7
+			20 = acw_followup_events.8
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			clear_variable_list = acw_dixie_states
+			if = {
+				limit = {
+					any_scope_state = {
+						state_region = {
+							is_homeland = cu:dixie
+						}
+						culture_percent_state = {
+							target = cu:dixie
+							value > 0
+						}
+					}
+				}
+				every_scope_state = {
+					limit = {
+						state_region = {
+							is_homeland = cu:dixie
+						}
+						culture_percent_state = {
+							target = cu:dixie
+							value > 0
+						}
+					}
+					root = {
+						add_to_variable_list = {
+							name = acw_dixie_states
+							target = prev
+						}
+					}
+				}
+			}
+		}
+	}
+
+	invalid = {
+		NOT = {
+			any_scope_state = {
+				state_region = {
+					is_homeland = cu:dixie
+				}
+			}
+		}
+	}
+
+	on_invalid = {
+		clear_variable_list = acw_dixie_states
+	}
+
+	timeout = 4380
+
+	on_timeout = {
+		clear_variable_list = acw_dixie_states
+	}
+
+	should_be_pinned_by_default = yes
+}
+
+je_acw_equality = {
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	group = je_group_usa_american_civil_war
+
+	is_shown_in_lobby = {
+		c:USA ?= THIS
+	}
+
+	complete = {
+		cultural_acceptance_base = {
+			target = cu:afro_american
+			value >= 60
+		}
+	}
+
+	on_complete = {
+		custom_tooltip = {
+			text = acw_african_american_culture
+			set_variable = acw_gain_african_american
+		}
+		custom_tooltip = {
+			text = reconstruction_progress
+			change_variable = {
+				name = reconstruction_var
+				add = 1
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+		random_events = {
+			180 = 0
+			20 = acw_followup_events.4 # Forty Acres and a Mule
+			20 = acw_followup_events.5 # Supremacist Violence
+			20 = acw_followup_events.6 # Redeemers
+		}
+	}
+
+	timeout = 4380
+
+	invalid = {
+		NOT = {
+			any_scope_state = {
+				state_region = {
+					is_homeland = cu:afro_american
+				}
+			}
+		}
+	}
+
+	should_be_pinned_by_default = yes
+}
+
+je_acw_wild_wild_west = {
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	group = je_group_usa_american_civil_war
+
+	complete = {
+		scope:journal_entry = {
+			is_goal_complete = yes
+		}
+		NOT = {
+			any_scope_state = {
+				state_region = {
+					OR = {
+						is_homeland = cu:dixie
+						is_homeland = cu:yankee
+					}
+				}
+				devastation > 0.1
+				turmoil > 0.1
+			}
+		}
+	}
+
+	on_complete = {
+		custom_tooltip = {
+			text = acw_no_outlaw_crisis
+		}
+		custom_tooltip = {
+			text = reconstruction_progress
+			change_variable = {
+				name = reconstruction_var
+				add = 1
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+		random_events = {
+			100 = 0
+			10 = crime_events.1 # train robbery
+			10 = wild_west.1 # bank robberies
+			10 = wild_west.2 # Raids on the Iron Horse
+			10 = wild_west.3 # Gunfight at the Corral
+		}
+		effect = {
+			if = {
+				limit = {
+					NOT = {
+						any_scope_state = {
+							state_region = {
+								OR = {
+									is_homeland = cu:dixie
+									is_homeland = cu:yankee
+								}
+							}
+							devastation > 0.1
+							turmoil > 0.1
+						}
+					}
+				}
+				change_variable = {
+					name = je_acw_wild_west_var
+					add = 1
+				}
+			}
+		}
+	}
+
+	invalid = {
+		NOT = {
+			any_scope_state = {
+				state_region = {
+					OR = {
+						is_homeland = cu:dixie
+						is_homeland = cu:yankee
+					}
+				}
+			}
+		}
+	}
+
+	current_value = {
+		value = var:je_acw_wild_west_var
+	}
+
+	goal_add_value = {
+		add = 60
+	}
+
+	progressbar = yes
+
+	timeout = 4380
+	should_be_pinned_by_default = yes
+}
