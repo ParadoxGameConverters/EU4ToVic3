@@ -12,7 +12,7 @@ mappers::ReligionGroupMapping::ReligionGroupMapping(std::istream& theStream)
 void mappers::ReligionGroupMapping::registerkeys()
 {
 	registerKeyword("vic3", [this](std::istream& theStream) {
-		trait = commonItems::getString(theStream);
+		heritage = commonItems::getString(theStream);
 	});
 	registerKeyword("eu4", [this](std::istream& theStream) {
 		eu4groups.emplace(commonItems::getString(theStream));

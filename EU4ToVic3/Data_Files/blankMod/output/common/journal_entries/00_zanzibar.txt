@@ -1,0 +1,328 @@
+﻿je_splitting_oman = {
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	group = je_group_historical_content
+
+	is_shown_in_lobby = {
+		c:OMA ?= THIS
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = said_bin_sultan_al_said_dies
+			ruler = {
+				NOT = { has_variable = is_said_bin_sultan }
+			}
+			has_law_or_variant = law_type:law_monarchy
+		}
+	}
+
+	on_complete = {
+		custom_tooltip = omani_realm_splits
+		if = {
+			limit = {
+				exists = c:OMA
+				c:OMA = ROOT
+			}
+			trigger_event = { id = zanzibar.1 }
+		}
+	}
+
+	# no monthly pulse to kill the sultan.
+
+	invalid = {
+		OR = {
+			NOT = { exists = c:OMA }
+			NOT = { has_law_or_variant = law_type:law_monarchy }
+			exists = c:ZAN
+		}
+	}
+
+	weight = 10
+
+	should_be_pinned_by_default = yes
+}
+
+# Simba wa Zanzibar
+je_lion_of_the_zanj = {
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	group = je_group_historical_content
+
+	immediate = {
+		s:STATE_RIFT_VALLEY = {
+			save_scope_as = rift_valley_region
+		}
+		s:STATE_TANGANYIKA = {
+			save_scope_as = tanganyika_region
+		}
+		s:STATE_KENYA = {
+			save_scope_as = kenya_region
+		}
+		s:STATE_ZANZIBAR = {
+			save_scope_as = zanzibar_region
+		}
+		s:STATE_LINDI = {
+			save_scope_as = lindi_region
+		}
+
+		cu:swahili = {
+			save_scope_as = swahili_scope
+		}
+
+		cu:bedouin = {
+			save_scope_as = omani_scope
+		}
+	}
+
+	complete = {
+		OR = {
+			is_country_type = recognized
+			AND = {
+				owns_entire_state_region = STATE_RIFT_VALLEY
+				owns_entire_state_region = STATE_TANGANYIKA
+				owns_entire_state_region = STATE_KENYA
+				owns_entire_state_region = STATE_ZANZIBAR
+				owns_entire_state_region = STATE_LINDI
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = zanzibar.4 }
+
+		custom_tooltip = {
+			text = je_lion_of_the_zanj_claims
+
+			if = {
+				limit = { NOT = { owns_entire_state_region = STATE_RIFT_VALLEY } }
+				s:STATE_RIFT_VALLEY = {
+					add_claim = ROOT
+				}
+			}
+			if = {
+				limit = { NOT = { owns_entire_state_region = STATE_TANGANYIKA } }
+				s:STATE_TANGANYIKA = {
+					add_claim = ROOT
+				}
+			}
+			if = {
+				limit = { NOT = { owns_entire_state_region = STATE_KENYA } }
+				s:STATE_KENYA = {
+					add_claim = ROOT
+				}
+			}
+			if = {
+				limit = { NOT = { owns_entire_state_region = STATE_ZANZIBAR } }
+				s:STATE_ZANZIBAR = {
+					add_claim = ROOT
+				}
+			}
+			if = {
+				limit = { NOT = { owns_entire_state_region = STATE_LINDI } }
+				s:STATE_LINDI = {
+					add_claim = ROOT
+				}
+			}
+		}
+
+
+		if = {
+			limit = {
+				any_primary_culture = { cu:bedouin = this }
+			}
+			custom_tooltip = {
+				text = je_lion_of_the_zanj_homelands_bedouin
+				if = {
+					limit = {
+						owns_entire_state_region = STATE_RIFT_VALLEY
+						owns_entire_state_region = STATE_TANGANYIKA
+						owns_entire_state_region = STATE_KENYA
+						owns_entire_state_region = STATE_ZANZIBAR
+						owns_entire_state_region = STATE_LINDI
+					}
+					s:STATE_ZANZIBAR = {
+						add_homeland = cu:bedouin
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				any_primary_culture = { cu:swahili = this }
+			}
+			custom_tooltip = {
+				text = je_lion_of_the_zanj_homelands_swahili
+				if = {
+					limit = {
+						owns_entire_state_region = STATE_RIFT_VALLEY
+						owns_entire_state_region = STATE_TANGANYIKA
+						owns_entire_state_region = STATE_KENYA
+						owns_entire_state_region = STATE_ZANZIBAR
+						owns_entire_state_region = STATE_LINDI
+					}
+					s:STATE_RIFT_VALLEY = {
+						add_homeland = cu:swahili
+					}
+					s:STATE_TANGANYIKA = {
+						add_homeland = cu:swahili
+					}
+					s:STATE_LINDI = {
+						add_homeland = cu:swahili
+					}
+				}
+			}
+		}
+	}
+
+	# Fails if Zanzibar is a subject, or if a non-African country manages to establish a foothold in Zanzibar's quote-unquote core territories (roughly Kenya & Tanzania)
+    fail = {
+    	OR = {
+    		is_subject = yes
+    		custom_tooltip = {
+    			text = je_lion_of_the_zanj_fail
+
+		        any_neighbouring_state = {
+					OR = {
+						state_region = s:STATE_KENYA
+						state_region = s:STATE_RIFT_VALLEY
+						state_region = s:STATE_ZANZIBAR
+						state_region = s:STATE_TANGANYIKA
+						state_region = s:STATE_LINDI
+					}
+					OR = {
+		    			owner = {
+		    				country_is_in_africa = no
+		    				NOT = { is_diplomatic_play_enemy_of = ROOT }
+		    			}
+		    			owner = {
+		    				is_subject = yes
+		    				top_overlord = {
+		    					country_is_in_africa = no
+		    					NOT = { is_diplomatic_play_enemy_of = ROOT }
+		    				}
+		    			}
+					}
+		    	}
+		    }
+        }
+    }
+
+	on_fail = {
+
+		show_as_tooltip = {
+			trigger_event = { id = zanzibar.3 } # it's actually triggered by event zanzibar.2
+		}
+
+		every_scope_state = {
+			limit = {
+				is_capital = no
+			}
+			custom_tooltip = {
+				text = je_lion_of_the_zanj_loss_of_territory
+			}
+		}
+
+		hidden_effect = {
+
+			# Collapse of Zanzibar event triggers for Zanzibar's top liege if subject failstate is triggered
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				top_overlord = { trigger_event = { id = zanzibar.2 } }
+			}
+
+			# Collapse of Zanzibar event triggers for colonizer that successfully intruded on Zanzibar's 'natural sphere' if territorial integrity failstate is triggered
+			else_if = {
+				limit = {
+			        any_neighbouring_state = {
+						OR = {
+							state_region = s:STATE_KENYA
+							state_region = s:STATE_RIFT_VALLEY
+							state_region = s:STATE_ZANZIBAR
+							state_region = s:STATE_TANGANYIKA
+							state_region = s:STATE_LINDI
+						}
+						OR = {
+							owner = {
+			    				country_is_in_africa = no
+			    			}
+			    			owner = {
+			    				is_subject = yes
+			    				top_overlord = {
+			    					country_is_in_africa = no
+			    				}
+			    			}
+						}
+					}
+	    		}
+
+		    	random_neighbouring_state = {
+		    		limit = {
+						OR = {
+							state_region = s:STATE_KENYA
+							state_region = s:STATE_RIFT_VALLEY
+							state_region = s:STATE_ZANZIBAR
+							state_region = s:STATE_TANGANYIKA
+							state_region = s:STATE_LINDI
+						}
+						OR = {
+							owner = {
+			    				country_is_in_africa = no
+			    			}
+			    			owner = {
+			    				is_subject = yes
+			    				top_overlord = {
+			    					country_is_in_africa = no
+			    				}
+			    			}
+						}
+		    		}
+    				if = {
+    					limit = {
+    						owner = { country_is_in_africa = no }
+    					}
+    					owner = { trigger_event = { id = zanzibar.2 } }
+    				}
+    				else_if = {
+    					limit = {
+    						owner = {
+    							NOT = { is_diplomatic_play_enemy_of = ROOT }
+		        				AND = {
+			        				is_subject = yes
+			        				top_overlord = {
+			        					country_is_in_africa = no
+			        					NOT = { is_diplomatic_play_enemy_of = ROOT }
+			        				}
+		        				}
+		        			}
+    					}
+    					owner = {
+    						top_overlord = { trigger_event = { id = zanzibar.2 } }
+    					}
+    				}
+		    	}
+		    }
+	    }
+    }
+
+	invalid = {
+		c:ZAN ?= {
+			country_is_in_africa = no
+		}
+	}
+
+	on_yearly_pulse = {
+		random_events = {
+			chance_of_no_event = 80
+
+			20 = zanzibar.5 # tippu tip
+		}
+	}
+
+	weight = 10
+
+	should_be_pinned_by_default = yes
+}

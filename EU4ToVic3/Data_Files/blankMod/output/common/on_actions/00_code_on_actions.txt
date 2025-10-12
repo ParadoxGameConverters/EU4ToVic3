@@ -1,0 +1,6804 @@
+﻿# For on_actions launched by the code itself.
+
+# Fires when bookmark initialization is complete but players are still in the lobby
+# At this point we do not know who the players are
+# No root scope set
+on_game_started = {
+	effect = {
+		# Memento Mori
+		every_country = {
+			every_interest_group = {
+				leader = {
+					if = {
+						limit = {
+							NOT = {
+								has_variable = memento_mori_immunity
+							}
+						}
+						set_variable = {
+							name = memento_mori_immunity
+							years = 5
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+# Fires after everyone enters the game from the lobby for the first time for each campaign
+# At this point we DO know who the players are
+# No root scope set
+on_game_started_after_lobby = {
+	effect = {
+		# Game Rule: No Dynamic Naming
+		if = {
+			limit = {
+				has_game_rule = no_dynamic_naming
+			}
+			every_state = {
+				reset_state_name = yes
+			    reset_hub_names = yes
+			}
+		}
+		# The Ripper
+		every_country = {
+			if = {
+				limit = {
+					is_player = yes
+				}
+				random = {
+					chance = 10
+
+					set_variable = var_jack_ripper_possible
+				}
+			}
+		}
+	}
+}
+
+# No root scope set
+on_monthly_pulse = {
+	effect = {
+		every_character_in_exile_pool = {
+			limit = {
+				popularity <= -100
+			}
+			kill_character = yes
+		}
+
+		every_character_in_jail = { # Music too loud? Right to jail. Right away. Driving too fast? Jail. Slow? Jail. You undercook fish? Believe it or not, jail.
+			save_scope_as = prisoner_scope
+			change_variable = { name = prison_time_var subtract = 1 }
+			if = {
+				limit = {
+					NOT = {
+						exists = var:prison_country
+					}
+				}
+				kill_character = yes
+			}
+			else_if = {
+				limit = {
+					exists = var:prison_country
+					var:prison_time_var <= 0
+				}
+				free_character_from_void = yes
+				owner ?= {
+					post_notification = prisoner_out_of_jail
+				}
+				remove_variable = prison_country
+				remove_variable = prison_time_var
+			}
+		}
+
+		if = {
+			limit = {
+				year < 1930
+				NOT = { has_global_variable = germany_formed }
+				c:GER ?= { is_country_alive = yes }
+			}
+			set_global_variable = germany_formed
+		}
+
+		# USA gets a positive/negative modifier depending on whether their capital is in Washington DC
+		c:USA ?= {
+			if = {
+				limit = {
+					NOT = { capital.state_region = s:STATE_DISTRICT_OF_COLUMBIA }
+					NOT = { has_modifier = usa_capital_relocated }
+				}
+
+				add_modifier = usa_capital_relocated
+				remove_modifier = usa_capital_intact
+			}
+			else_if = {
+				limit = {
+					capital.state_region = s:STATE_DISTRICT_OF_COLUMBIA
+					NOT = { has_modifier = usa_capital_intact }
+				}
+
+				remove_modifier = usa_capital_relocated
+				add_modifier = usa_capital_intact
+			}
+		}
+
+		# Used to keep track of Council Republics for the purpose of the Red Scare.
+		# Our thanks to Brute for reporting this.
+		clear_global_variable_list = aes_country_list
+		every_country = {
+			limit = {
+				has_law_or_variant = law_type:law_council_republic
+				country_rank > rank_value:minor_power
+			}
+			add_to_global_variable_list = {
+				name = aes_country_list
+				target = THIS
+			}
+		}
+
+		clear_global_variable_list = german_confederation_country_list
+		every_country = {
+			limit = {
+				OR = {
+					country_has_primary_culture = cu:south_german
+					country_has_primary_culture = cu:north_german
+				}
+				capital = {
+					state_is_in_german_confederation = yes
+				}
+			}
+			add_to_global_variable_list = {
+				name = german_confederation_country_list
+				target = THIS
+			}
+		}
+
+		### Potato Famine
+		if = {
+			limit = {
+				NOT = { has_global_variable = hungry_forties_happened }
+				any_state = {
+					state_is_in_europe = yes
+					state_region = {
+						has_harvest_condition = disease_outbreak
+					}
+					count >= 10
+				}
+			}
+			set_global_variable = hungry_forties_happened
+			set_global_variable = { name = hungry_forties_var days = 1095 }
+		}
+
+		# Gründerzeit JE - has to happen here in order to not kill performance
+		if = {
+			limit = {
+				has_dlc_feature = ip3_content
+				has_global_variable_list = german_confederation_country_list
+			}
+			if = {
+				limit = {
+					has_dlc_feature = ip3_content
+					NOT = {
+						has_global_variable = grunderzeit_possible_global_var
+					}
+					any_in_global_list = {
+						variable = german_confederation_country_list
+						has_technology_researched = mutual_funds
+						any_scope_building = {
+							is_building_type = building_railway
+						}
+						percent >= 0.75
+					}
+				}
+				set_global_variable = grunderzeit_possible_global_var
+			}
+			else_if = { # If the Gründerzeit has not begun, calculate the percent of German countries which meet its requirements
+				limit = {
+					has_dlc_feature = ip3_content
+					NOT = {
+						has_global_variable = grunderzeit_possible_global_var
+					}
+				}
+				set_global_variable = { name = grunderzeit_german_countries value = 0 }
+				set_global_variable = { name = grunderzeit_countries_percent value = 0 }
+				every_in_global_list = {
+					variable = german_confederation_country_list
+					change_global_variable = { name = grunderzeit_german_countries add = 1 }
+					if = {
+						limit = {
+							has_technology_researched = mutual_funds
+							any_scope_building = {
+								is_building_type = building_railway
+							}
+						}
+						change_global_variable = { name = grunderzeit_countries_percent add = 1 }
+					}
+				}
+				if = {
+					limit = {
+						global_var:grunderzeit_german_countries != 0
+					}
+					change_global_variable = {
+						name = grunderzeit_countries_percent
+						divide = global_var:grunderzeit_german_countries
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_dlc_feature = ip3_content
+					OR = { # If the Gründerzeit is either ongoing or over, clear these variables.
+						has_global_variable = grunderzeit_ongoing_global_var
+						has_global_variable = grunderzeit_happened_global_var
+					}
+					has_global_variable = grunderzeit_countries_percent
+					has_global_variable = grunderzeit_german_countries
+				}
+				remove_global_variable = grunderzeit_countries_percent
+				remove_global_variable = grunderzeit_german_countries
+			}
+		}
+
+		if = {
+			limit = {
+				exists = global_var:krakatoa_temperature_drop
+				exists = global_var:krakatoa_temperature_recovery_rate
+			}
+			change_global_variable = {
+				name = krakatoa_temperature_drop
+				subtract = {
+					value = global_var:krakatoa_temperature_recovery_rate
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				NAND = {
+					exists = c:MON
+					has_global_variable = montenegro_defeat_var
+				}
+			}
+			sr:region_balkans = {
+				every_scope_state = {
+					limit = {
+						has_modifier = raid_target
+					}
+					remove_modifier = raid_target
+				}
+			}
+			set_global_variable = montenegro_defeat_var
+		}
+	}
+}
+
+on_yearly_pulse = {
+}
+
+# Root = Country
+on_monthly_pulse_country = {
+	events = {
+		communism.8 # Red Army
+		opium_wars.1
+		native_resettlement.1
+		meiji.13
+		bic_breakup.1
+		dreyfus.1
+		dei_breakup.1
+		alk_breakup.1
+		poland_events.3 # Polish Unification
+		colonial_administration_events.2 # African Colony Radicals
+		caudillo.1
+		sa_migration.5
+		amazonas.1 # Taming Amazonia
+		paraguay.11 # Paraguay War
+		acw_events.9 # CSA victory event
+		persia_events.5 # Persian slave liberation event
+		treaty_of_london_events.1 # Treaty of London initiation event
+
+		# Exile Agitators Events
+		yeet_agitator_events.1
+		yeet_agitator_events.2
+		yeet_agitator_events.3
+
+		# Comte
+		positivism.1
+
+		# Milyutin
+		caucasuswar.5
+
+		# Phool Walon Ki Sair
+		india_events.8
+
+		# Princely State Creation
+		princely_state_creation.1
+		princely_state_creation.2
+		princely_state_creation.3
+		princely_state_creation.4
+		princely_state_creation.5
+
+		# Set Hierarchy Events
+		set_hierarchy_event.1 # Sets British Indian Caste System
+		set_hierarchy_event.2 # Replaces British Indian Caste System with Default
+
+		# Hungary Events
+		hungary_events.11 # Franz Joseph revokes the April Laws
+		hungary_events.13 # Crown of St. Stephen
+
+		# Austria Events
+		eastern_question_austria.1
+	}
+
+	effect = {
+		trigger_event = { id = unable_to_enact.1 }
+
+		if = {
+			limit = {
+				has_dlc_feature = ip3_content
+				c:TUR ?= this
+				ruler ?= {
+					has_template = tur_abdulaziz_osmanoglu_template
+				}
+				game_date >= 1875.1.1
+				c:TUR ?= {
+					ig:ig_intelligentsia ?= {
+						ig_approval <= -5
+					}
+					ig:ig_armed_forces ?= {
+						ig_approval < 0
+					}
+					legitimacy < 65
+				}
+			}
+			trigger_event = ottoman_monarchs.1
+		}
+		if = {
+			limit = {
+				has_dlc_feature = ip3_content
+				ruler ?= {
+					has_template = tur_murad_v_osmanoglu_template
+				}
+				game_date >= 1876.1.1
+				has_variable = sultan_aziz_coup_happened
+			}
+			trigger_event = ottoman_monarchs.2
+		}
+		if = {
+			limit = {
+				c:TUR ?= this
+				ruler ?= {
+					has_template = tur_abdulmecid_osmanoglu_template
+					NOT = {
+						has_trait = tuberculosis
+					}
+				}
+				game_date >= 1858.1.1
+			}
+			ruler ?= { # Roll the cosmic tuberculosis shaped dice
+				random = {
+					chance = 20
+
+					add_trait = tuberculosis
+				}
+			}
+		}
+
+		if = { # Springtime of the Peoples
+			limit = {
+				NOT = { has_global_variable = peoples_springtime_happening }
+				NOT = { has_global_variable = peoples_springtime_happened }
+				country_is_in_europe = yes
+				has_technology_researched = egalitarianism
+				country_rank >= rank_value:major_power
+				OR = {
+					any_political_movement = {
+						OR = {
+							movement_is_liberal = yes
+							movement_is_socialist = yes
+						}
+						is_insurrectionary = yes
+					}
+					AND = {
+						c:FRA ?= this
+						has_variable = france_had_revolution
+					}
+				}
+			}
+			save_scope_as = revolutionary_country
+			set_global_variable = {
+				name = peoples_springtime_happening
+			}
+			set_global_variable = {
+				name = peoples_springtime_recent
+				days = normal_modifier_time
+			}
+			every_country = {
+				limit = {
+					country_is_in_europe = yes
+					has_technology_researched = egalitarianism
+				}
+				trigger_event = { id = peoples_springtime.1 }
+			}
+		}
+
+		if = {
+			limit = {
+				has_global_variable = peoples_springtime_happening
+				NOT = {
+					has_global_variable = peoples_springtime_recent
+				}
+			}
+			every_country = {
+				limit = {
+					country_is_in_europe = yes
+				}
+				trigger_event = { id = peoples_springtime.6 }
+			}
+			remove_global_variable = peoples_springtime_happening
+			set_global_variable = peoples_springtime_happened
+		}
+
+		# British Monarchy
+		if = {
+			limit = {
+				c:GBR ?= this
+				game_date >= 1841.11.09
+				ruler ?= {
+					has_template = gbr_queen_victoria_template
+				}
+				NOT = {
+					has_variable = edward_vii_heir_var
+				}
+			}
+			create_character = {
+				template = gbr_albert_edward_template
+				heir = yes
+			}
+			set_variable = edward_vii_heir_var
+		}
+		if = {
+			limit = {
+				c:GBR ?= this
+				game_date >= 1865.06.03
+				ruler ?= {
+					has_template = gbr_albert_edward_template
+				}
+				NOT = {
+					exists = heir
+				}
+				NOT = {
+					has_variable = george_v_heir_var
+				}
+			}
+			create_character = {
+				template = gbr_george_v_template
+				heir = yes
+			}
+			set_variable = george_v_heir_var
+		}
+		if = {
+			limit = {
+				c:GBR ?= this
+				game_date >= 1910.5.06
+				ruler ?= {
+					has_template = gbr_albert_edward_template
+				}
+				heir ?= {
+					has_template = gbr_george_v_template
+				}
+				NOT = {
+					has_variable = george_v_ruler_var
+				}
+			}
+			trigger_event = { id = britain_monarchy.1 popup = yes }
+		}
+
+		# Napoleon IV
+		if = {
+			limit = {
+				c:FRA ?= this
+				game_date > 1856.3.16
+				ruler ?= {
+					has_template = fra_napoleon_iii_character_template
+				}
+				trigger_if = {
+					limit = {
+						exists = heir
+					}
+					NOT = {
+						heir ?= {
+							has_template = FRA_napoleon_eugene_louis_bonaparte
+						}
+					}
+				}
+				NOT = {
+					has_variable = napoleon_iv_heir_var
+				}
+			}
+			create_character = {
+				template = FRA_napoleon_eugene_louis_bonaparte
+			}
+			set_variable = napoleon_iv_heir_var
+		}
+
+ 		#Montenegro ruler dies of Tuberculosis
+		if = {
+			limit = {
+				c:MON ?= THIS
+				NOT = {
+					has_variable = mon_state_formation_6_fired
+				}
+				game_date >= 1851.10.19
+				ruler ?= {
+					has_template = mon_petar_II_petrovic_njegos
+					has_trait = tuberculosis
+					is_immortal = no
+					NOT = {
+						has_variable = is_away
+					}
+				}
+				heir ?= {
+					has_template = mon_danilo_petrovic_njegos
+				}
+			}
+			c:MON ?= {
+				set_variable = petar_died_tuberculosis
+			}
+			trigger_event = { id = mon_state_formation.6 popup = yes }
+		}
+
+		if = { #mon defeats c:TUR
+			limit = {
+				c:MON ?= THIS
+				NOT = {
+					exists = c:TUR
+				}
+			}
+			trigger_event = { id = mon_state_formation.19 popup = yes }
+		}
+
+		if = { #mon becomes kingdom
+			limit = {
+				c:MON ?= THIS
+				NOT = {
+					has_variable = mon_state_formation_20_fired
+					is_subject = yes
+				}
+				game_date >= 1910.08.27 #historical date
+			}
+			trigger_event = { id = mon_state_formation.20 popup = yes }
+		}
+
+
+		#Montenegro ruler assassinated
+		if = {
+			limit = {
+				c:MON ?= THIS
+				NOT = {
+					has_variable = mon_state_formation_10_fired
+				}
+				game_date >= 1860.08.13
+				ruler ?= {
+					has_template = mon_danilo_petrovic_njegos
+					NOT = {
+						has_variable = is_away
+					}
+				}
+				OR = {
+					any_interest_group = {
+						ig_approval < -2
+					}
+					c:AUS ?= {
+						relations:root < 0
+					}
+				}
+			}
+			trigger_event = { id = mon_state_formation.10 popup = yes }
+		}
+
+		if = {
+			limit = {
+				c:MON ?= THIS
+				NOT = {
+					has_variable = mon_state_formation_13_fired
+				}
+				any_scope_state = {
+					has_active_building = building_arms_industry
+				}
+			}
+			trigger_event = {
+				id = mon_state_formation.13
+				popup = yes
+			}
+		}
+
+		# Sweden Monarchy event
+		if = {
+			limit = {
+				c:SWE ?= this
+				game_date >= 1859.6.29
+				ruler ?= {
+					has_template = swe_oscar_bernadotte_template
+				}
+				heir ?= {
+					has_template = swe_charles_bernadotte_template
+				}
+			}
+			trigger_event = { id = sweden_monarchy.2 popup = yes }
+		}
+		if = {
+			limit = {
+				c:SWE ?= this
+				game_date >= 1859.6.29
+				NOT = {
+					ruler ?= {
+						has_template = swe_oscar_bernadotte_template
+					}
+					has_variable = charles_xv_ruler_var
+				}
+			}
+			set_variable = charles_xv_ruler_var
+			create_character = {
+				template = swe_oscar_ii_bernadotte_template
+				heir = yes
+				is_admiral = yes
+			}
+		}
+		if = {
+			limit = {
+				any_scope_character = {
+					has_template = swe_charles_bernadotte_template
+				}
+			}
+			random_scope_character = {
+				limit = {
+					has_template = swe_charles_bernadotte_template
+				}
+				add_trait = cancer
+			}
+		}
+		if = {
+			limit = {
+		    	c:SWE ?= this
+		    	game_date >= 1872.9.29
+		    	any_scope_character = {
+		    		is_ruler = yes
+		    		has_template = swe_charles_bernadotte_template
+		    	}
+		    	any_scope_character = {
+		    		is_heir = yes
+		    		has_template = swe_oscar_ii_bernadotte_template
+		    	}
+		    }
+			trigger_event = { id = sweden_monarchy.3 popup = yes }
+		}
+
+    	if = {
+    		limit = {
+		    	c:SWE ?= this
+		    	game_date >= 1872.9.29
+		    	any_scope_character = {
+		       		is_ruler = yes
+		       		has_template = swe_oscar_ii_bernadotte_template
+		    	}
+		    	NOT = {
+		       		has_variable = oscar_ii_ruler_var
+		    	}
+		    }
+			create_character = {
+				template = swe_gustaf_v_bernadotte_template
+				heir = yes
+			}
+			set_variable = oscar_ii_ruler_var
+    	}
+    	# for Greek Nationalism
+  		if = { # if the relevant country doesn't have the variable already, set it
+			limit = {
+				OR = {
+					c:GRE ?= this
+					has_journal_entry = je_greek_nationalism
+					any_scope_state = {
+						is_greek_homeland = yes
+					}
+				}
+				NOR = {
+					has_variable = je_greek_nationalism_complete
+					has_variable = greek_homeland_states_owned_var
+				}
+			}
+			set_variable = { name = greek_homeland_states_owned_var value = 0 }
+		}
+		if = { # so that the variable re-counts correct number of states owned each time
+			limit = {
+				has_variable = greek_homeland_states_owned_var
+			}
+			ROOT = {
+	    		set_variable = { name = greek_homeland_states_owned_var value = 0 }
+	    	}
+    	}
+		if = { # counts how many relevant states are owned
+			limit = {
+				has_variable = greek_homeland_states_owned_var
+			}
+			every_scope_state = {
+		        limit = {
+		           is_greek_homeland = yes
+		        }
+		    	ROOT = {
+		    		change_variable = { name = greek_homeland_states_owned_var add = 1 }
+		    	}
+		    }
+		}
+		if = { # if the relevant country doesn't have the variable already, set it
+			limit = {
+				has_journal_entry = je_greek_nationalism
+				NOR = {
+					has_variable = je_greek_nationalism_complete
+					has_variable = byzantium_states_owned_var
+				}
+			}
+			set_variable = { name = byzantium_states_owned_var value = 0 }
+		}
+		if = { # so that the variable re-counts correct number of states owned each time
+			limit = {
+				has_variable = byzantium_states_owned_var
+			}
+			ROOT = {
+				set_variable = { name = byzantium_states_owned_var value = 0 }
+	    	}
+		}
+		if = { # counts how many relevant states are owned
+			limit = {
+				has_variable = byzantium_states_owned_var
+			}
+			every_scope_state = {
+		        limit = {
+		           is_byzantium_state_region = yes
+		        }
+		        ROOT = {
+					change_variable = { name = byzantium_states_owned_var add = 1 }
+		        }
+		    }
+		}
+		if = {
+			limit = {
+				c:GBR ?= this
+				game_date >= 1850.1.1
+				NOT = {
+				has_variable = nightingale_var
+				}
+			}
+			create_character = {
+				template = GBR_florence_nightingale
+				on_created = {
+					if = {
+						limit = { is_in_exile_pool = no }
+						exile_character = yes
+					}
+				}
+			}
+			set_variable = nightingale_var
+		}
+
+		# Japan
+		if = {
+			limit = {
+				c:JAP ?= this
+				has_variable = meiji_restoration_complete
+				has_law_or_variant = law_type:law_monarchy
+			}
+			if = {
+				limit = {
+					year >= 1852
+					NOT = { has_variable = heir_meiji_spawned }
+					ruler ?= {
+						has_template = JAP_komei_yamato
+					}
+					NOT = { exists = heir }
+				}
+				create_character = {
+					template = JAP_meiji_yamato
+				}
+				set_variable = heir_meiji_spawned
+			}
+			else_if = {
+				limit = {
+					year >= 1879
+					NOT = { has_variable = heir_taisho_spawned }
+					ruler ?= {
+						has_template = JAP_meiji_yamato
+					}
+					NOT = { exists = heir }
+				}
+				create_character = {
+					template = JAP_taisho_yamato
+				}
+				set_variable = heir_taisho_spawned
+			}
+			else_if = {
+				limit = {
+					year >= 1901
+					NOT = { has_variable = heir_showa_spawned }
+					ruler ?= {
+						has_template = JAP_taisho_yamato
+					}
+					NOT = { exists = heir }
+				}
+				create_character = {
+					template = JAP_showa_yamato
+				}
+				set_variable = heir_showa_spawned
+			}
+		}
+
+		### This is how we give objectives to AI countries
+		if = {
+			limit = {
+				has_journal_entry = je_great_game_control
+				has_dlc_feature = ep1_content
+				is_player = no
+			}
+			if = {
+				limit = {
+					c:RUS ?= this
+				}
+				### Generic Objectives
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_tibet_expedition_ai_var
+						}
+						has_variable = tibet_has_started
+						NOT = { has_global_variable = tibet_expedition_completed }
+						has_interest_marker_in_region = region_himalayas
+					}
+					set_variable = je_tibet_expedition_ai_var
+					add_journal_entry = {
+						type = je_tibet_expedition
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_consolidate_afghanistan_objective_ai_var
+						}
+						has_interest_marker_in_region = region_persia
+						exists = c:AFG
+					}
+					set_variable = je_consolidate_afghanistan_objective_ai_var
+					add_journal_entry = {
+						type = je_consolidate_afghanistan_objective
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_maintain_afghan_protectorate_ai_var
+						}
+						NOT = {
+							has_global_variable = gg_afghanistan_protectorate_done
+						}
+						has_interest_marker_in_region = region_persia
+					}
+					set_variable = je_maintain_afghan_protectorate_ai_var
+					add_journal_entry = {
+						type = je_maintain_afghan_protectorate
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_secure_influence_over_persia_ai_var
+						}
+						has_interest_marker_in_region = region_persia
+					}
+					set_variable = je_secure_influence_over_persia_ai_var
+					add_journal_entry = {
+						type = je_secure_influence_over_persia
+					}
+				}
+
+				### Specific Objectives
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_secure_persian_border_ai_var
+						}
+						exists = c:CIR
+					}
+					set_variable = je_secure_persian_border_ai_var
+					add_journal_entry = {
+						type = je_secure_persian_border
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_pacify_kazakh_steppes_ai_var
+						}
+						has_journal_entry = je_pacify_the_steppes
+					}
+					set_variable = je_pacify_kazakh_steppes_ai_var
+					add_journal_entry = {
+						type = je_pacify_kazakh_steppes
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_codify_chinese_border_ai_var
+						}
+						has_technology_researched = nationalism
+					}
+					set_variable = je_codify_chinese_border_ai_var
+					add_journal_entry = {
+						type = je_codify_chinese_border
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_consolidate_central_asia_ai_var
+						}
+						has_technology_researched = nationalism
+					}
+					set_variable = je_consolidate_central_asia_ai_var
+					add_journal_entry = {
+						type = je_consolidate_central_asia
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_chinese_concessions_ai_var
+						}
+						has_technology_researched = railways
+						any_scope_state = {
+							OR = {
+								state_region = s:STATE_OUTER_MANCHURIA
+								state_region = s:STATE_AMUR
+							}
+							is_incorporated = yes
+						}
+					}
+					set_variable = je_chinese_concessions_ai_var
+					add_journal_entry = {
+						type = je_chinese_concessions
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_acquire_korean_protectorate_ai_var
+						}
+						any_neighbouring_state = {
+							owner = c:KOR
+							is_incorporated = yes
+						}
+						c:KOR ?= {
+							is_country_type = unrecognized
+						}
+					}
+					set_variable = je_acquire_korean_protectorate_ai_var
+					add_journal_entry = {
+						type = je_acquire_korean_protectorate
+					}
+				}
+			}
+
+			if = {
+				limit = {
+					c:GBR ?= this
+					has_journal_entry = je_great_game_control
+				}
+				### Generic Objectives
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_tibet_expedition_ai_var
+						}
+						has_variable = tibet_has_started
+						NOT = { has_global_variable = tibet_expedition_completed }
+						has_interest_marker_in_region = region_himalayas
+					}
+					set_variable = je_tibet_expedition_ai_var
+					add_journal_entry = {
+						type = je_tibet_expedition
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_consolidate_afghanistan_objective_ai_var
+						}
+						has_interest_marker_in_region = region_persia
+						exists = c:AFG
+					}
+					set_variable = je_consolidate_afghanistan_objective_ai_var
+					add_journal_entry = {
+						type = je_consolidate_afghanistan_objective
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_maintain_afghan_protectorate_ai_var
+						}
+						NOT = {
+							has_global_variable = gg_afghanistan_protectorate_done
+						}
+						has_interest_marker_in_region = region_persia
+					}
+					set_variable = je_maintain_afghan_protectorate_ai_var
+					add_journal_entry = {
+						type = je_maintain_afghan_protectorate
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_secure_influence_over_persia_ai_var
+						}
+						has_interest_marker_in_region = region_persia
+					}
+					set_variable = je_secure_influence_over_persia_ai_var
+					add_journal_entry = {
+						type = je_secure_influence_over_persia
+					}
+				}
+				### Specific Objectives
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_disrupt_russian_caucasus_ai_var
+						}
+						exists = c:CIR
+					}
+					set_variable = je_disrupt_russian_caucasus_ai_var
+					add_journal_entry = {
+						type = je_disrupt_russian_caucasus
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_counter_russian_pacific_influence_ai_var
+						}
+						c:RUS ?= {
+							any_scope_state = {
+								region = sr:region_manchuria
+								OR = {
+									any_scope_building = {
+										is_building_type = building_port
+										level >= 5
+									}
+									any_scope_building = {
+										is_building_type = building_naval_base
+										level >= 15
+									}
+								}
+							}
+						}
+					}
+					set_variable = je_counter_russian_pacific_influence_ai_var
+					add_journal_entry = {
+						type = je_counter_russian_pacific_influence
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_consolidate_british_india_ai_var
+						}
+						c:BIC ?= {
+							is_subject_of = c:GBR
+						}
+					}
+					set_variable = je_consolidate_british_india_ai_var
+					add_journal_entry = {
+						type = je_consolidate_british_india
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_pamir_expedition_objective_ai_var
+						}
+						c:RUS ?= {
+							OR = {
+								any_scope_state = {
+									state_region = s:STATE_TAJIKISTAN
+								}
+								any_subject_or_below = {
+									any_scope_state = {
+										state_region = s:STATE_TAJIKISTAN
+									}
+								}
+							}
+						}
+						NOT = {
+							has_variable = dismissed_pamir_expedition
+						}
+					}
+					set_variable = je_pamir_expedition_objective_ai_var
+					add_journal_entry = {
+						type = je_pamir_expedition_objective
+					}
+				}
+			}
+
+			if = {
+				limit = {
+					is_afghan_nation = yes
+					has_journal_entry = je_great_game_control
+				}
+				### Generic Objectives
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_achieve_sovereignty_ai_var
+						}
+						is_country_type = unrecognized
+					}
+					set_variable = je_achieve_sovereignty_ai_var
+					add_journal_entry = {
+						type = je_achieve_sovereignty
+					}
+				}
+				### Specific Objectives
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_unify_afghanistan_objective_ai_var
+						}
+					}
+					set_variable = je_unify_afghanistan_objective_ai_var
+					add_journal_entry = {
+						type = je_unify_afghanistan_objective
+					}
+				}
+			}
+
+			if = {
+				limit = {
+					c:PER ?= this
+					has_journal_entry = je_great_game_control
+				}
+				### Generic Objectives
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_achieve_sovereignty_ai_var
+						}
+						is_country_type = unrecognized
+					}
+					set_variable = je_achieve_sovereignty_ai_var
+					add_journal_entry = {
+						type = je_achieve_sovereignty
+					}
+				}
+				### Specific Objectives
+				if = {
+					limit = {
+						NOT = {
+							has_variable = je_consolidate_persia_ai_var
+						}
+					}
+					set_variable = je_consolidate_persia_ai_var
+					add_journal_entry = {
+						type = je_consolidate_persia
+					}
+				}
+			}
+		}
+
+		# TODO: Move these to tag-specific pulses
+		if = {
+			limit = {
+				c:FRA ?= this
+				c:FRA ?= {
+					OR = {
+						has_modifier = modifier_haitian_independence_payments_1
+						has_modifier = modifier_haitian_independence_payments_2
+						has_modifier = modifier_haitian_independence_payments_3
+						has_modifier = modifier_haitian_independence_payments_4
+					}
+				}
+				NOT = { exists = c:HAI }
+			}
+			c:FRA = {
+				if = {
+					limit = {
+						has_modifier = modifier_haitian_independence_payments_1
+					}
+					remove_modifier = modifier_haitian_independence_payments_1
+				}
+				if = {
+					limit = {
+						has_modifier = modifier_haitian_independence_payments_2
+					}
+					remove_modifier = modifier_haitian_independence_payments_2
+				}
+				if = {
+					limit = {
+						has_modifier = modifier_haitian_independence_payments_3
+					}
+					remove_modifier = modifier_haitian_independence_payments_3
+				}
+				if = {
+					limit = {
+						has_modifier = modifier_haitian_independence_payments_4
+					}
+					remove_modifier = modifier_haitian_independence_payments_4
+				}
+			}
+		}
+		if = { # Removes the Berar lease modifier if no longer relevant
+			limit = {
+				c:BIC ?= this
+				c:BIC ?= {
+					has_modifier = lease_of_berar_costs
+				}
+				OR = {
+					NOT = { exists = c:HYD }
+					c:BIC ?= {
+						has_war_with = c:HYD
+					}
+					c:BIC = {
+						NOT = {
+							any_scope_state = {
+								state_region = s:STATE_CENTRAL_PROVINCES
+							}
+						}
+					}
+				}
+			}
+			c:BIC ?= {
+				remove_modifier = lease_of_berar_costs
+			}
+			c:HYD ?= {
+				remove_modifier = lease_of_berar_income
+			}
+		}
+		if = { #Exists to make sure independent Perus get this ASAP.
+			limit = {
+				OR = {
+					c:NPU ?= this
+					c:SPU ?= this
+				}
+				is_subject = no
+				NOT = {
+					has_variable = peru_has_claims
+				}
+				OR = {
+					AND = { #SPU is either dead or a puppet, will not fire if it is independent.
+						c:NPU ?= this
+						OR = {
+							NOT = {
+								exists = c:SPU
+							}
+							c:SPU ?= { is_subject = yes }
+						}
+					}
+					AND = {
+						c:SPU ?= this
+						OR = {
+							NOT = {
+								exists = c:SPU
+							}
+							c:NPU ?= { is_subject = yes }
+						}
+					}
+				}
+			}
+			trigger_event = { id = peru_bolivia_events.8 days = 0 popup = yes }
+		}
+
+
+		if = {
+			limit = {
+				NOT = {
+					has_variable = cant_touch_this_achievement_possible
+				}
+				any_country = {
+					NOT = {
+					   THIS = ROOT
+					}
+					ROOT = {
+						"gdp_ownership_ratio(prev)" > 0.10
+					}
+			    }
+			}
+			set_variable = cant_touch_this_achievement_possible
+		}
+
+		if = {
+			limit = {
+				is_country_type = colonial # The colonial country type, for now, is only used for colonies whilst they are subjects of another power
+				is_subject = no
+			}
+			set_country_type = recognized
+		}
+
+		if = { # Creates Petrograd
+			limit = {
+				country_has_primary_culture = cu:russian
+				has_technology_researched = nationalism
+				NOT = { has_law_or_variant = law_type:law_council_republic }
+
+				OR = {
+					any_rival_country = {
+						any_primary_culture = {
+							has_discrimination_trait = heritage_germanic
+						}
+					}
+					any_rivaling_country = {
+						any_primary_culture = {
+							has_discrimination_trait = heritage_germanic
+						}
+					}
+				}
+				any_scope_state = {
+					state_region = s:STATE_INGRIA
+				}
+				NOT = {
+					has_variable = petrograd_var
+				}
+			}
+			set_variable = petrograd_var
+			random_scope_state = {
+				limit = {
+					state_region = s:STATE_INGRIA
+				}
+				if = {
+					limit = {
+						has_global_variable = lenin_spawn
+
+						owner = {
+							country_has_primary_culture = cu:russian
+							has_law_or_variant = law_type:law_council_republic
+						}
+					}
+
+			        set_hub_name = {
+			            type = city
+			            name = HUB_NAME_STATE_INGRIA_city_russian_sov # St. Petersburg only becomes Leningrad if Lenin has been around to be a namesake
+			        }
+				}
+			}
+		}
+
+		# for Venice, Vidi, Vici Achievement
+		if = {
+			limit = {
+				is_player = yes
+				AND = {
+					c:VEN ?= THIS
+					NOT = { has_variable = venice_vidi_vici_achievement_happened }
+					any_scope_building = {
+						is_building_type = building_trade_center
+					}
+				}
+			}
+			set_variable = { name = ven_trade_center_count_var value = "root.country_has_building_group_levels(bg_trade)" } # sets ven_trade_center_count_var value to the total building levels of trade centers in the country
+		}
+		if = { # checks if ven_trade_center_count_var is higher than the total building levels of trade centers in the country
+			limit = {
+				is_player = yes
+				exists = c:VEN
+				c:VEN ?= {
+					has_variable = ven_trade_center_count_var
+				}
+				NOT = {
+					any_country = {
+						country_has_building_group_levels = {
+							type = bg_trade
+							value > root.var:ven_trade_center_count_var
+						}
+					}
+				}
+			}
+			c:VEN ?= {
+				set_variable = venice_vidi_vici_achievement_happened
+				remove_variable = ven_trade_center_count_var
+			}
+		}
+		# for Swiss Bank Account Achievement
+		if = {
+			limit = {
+				is_player = yes
+				c:SWI ?= THIS
+				NOT = {
+					has_variable = swiss_bank_account_happened
+				}
+				any_scope_treaty = {
+					any_scope_article = {
+						has_type = money_transfer
+					}
+				}
+			}
+			ROOT = {
+				set_variable = { name = swiss_bank_account_var value = 0 }
+				change_variable = {
+					name = swiss_bank_account_var
+					add = {
+						value = gdp
+						divide = 10
+					}
+				}
+	   		}
+	   		if = {
+				limit = {
+					transfer_money_gross_income >= root.var:swiss_bank_account_var
+				}
+				set_variable = swiss_bank_account_happened
+			}
+		}
+		# for All Quiet on the Western Front Achievement
+		if = {
+			limit = {
+				is_player = yes
+				NOT = {
+					has_variable = all_quiet_on_the_western_front_happened
+				}
+				is_at_war = yes
+				any_scope_war = {
+					any_scope_front = {
+						num_front_casualties = {
+							target = root
+							value > 1000000
+						}
+					}
+				}
+			}
+			set_variable = all_quiet_on_the_western_front_happened
+		}
+		# for It's a Blockade! Achievement
+		if = {
+			limit = {
+				is_player = yes
+				NOT = { has_variable = its_a_blockade_happened }
+				any_enemy_in_diplo_play = {
+					any_scope_state = {
+						is_blockaded_by = ROOT
+						is_world_market_hub = yes
+					    num_world_market_hub_trade_center_levels >= 100
+						blockade_level >= 1
+					}
+				}
+			}
+			set_variable = its_a_blockade_happened
+		}
+	}
+	on_actions = { # delay ensures events won't fire simultaneously
+		coup_monthly_events
+		delay = { days = 4 }
+		garibaldi_monthly_events
+		delay = { days = 7 }
+		fund_lobbies_monthly_events
+		spooky_halloween_events
+		delay = { days = 7 }
+		tech_monthly_events
+	}
+}
+
+on_yearly_pulse_country = {
+	events = {
+		utopian.2
+		austria_events.40
+	}
+	effect = {
+		# Countries have a chance to change their mind about who they want to support in Egypt vs Ottomans conflicts
+		if = {
+			limit = {
+				has_variable = veiled_protectorate_support_ottomans
+			}
+
+			random_list = {
+				95 = {}
+				3 = {
+					remove_variable = veiled_protectorate_support_ottomans
+				}
+				2 = {
+					remove_variable = veiled_protectorate_support_ottomans
+					set_variable = veiled_protectorate_support_egypt
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = veiled_protectorate_support_egypt
+			}
+
+			random_list = {
+				95 = {}
+				3 = {
+					remove_variable = veiled_protectorate_support_egypt
+				}
+				2 = {
+					remove_variable = veiled_protectorate_support_egypt
+					set_variable = veiled_protectorate_support_ottomans
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				NOR = {
+					has_journal_entry = je_sick_man_main # Ottomans have enough required reforms to worry about
+					has_journal_entry = je_meiji_restoration # Ditto for Japan
+					has_variable = gov_petition_fired
+					has_variable = gov_petition_cooldown
+					has_modifier = modifier_successfully_met_petition_legitimacy
+					any_interest_group = {
+						has_modifier = modifier_failed_to_meet_petition
+					}
+					has_journal_entry = je_government_petition
+					is_revolutionary = yes
+					is_secessionist = yes
+				}
+				ig_desires_laws_for_petition = yes
+			}
+			if = {
+				limit = {
+					has_variable = gov_petition_coin_toss
+				}
+				random_list = {
+					1 = {
+						trigger = {
+							any_interest_group = {
+								is_in_government = yes
+								is_marginal = no
+								any_preferred_law = {
+									law_is_valid_for_ig_petition = yes
+								}
+							}
+						}
+						set_variable = { name = gov_petition_cooldown years = 10 }
+						set_variable = { name = gov_petition_fired months = 3 }
+						trigger_event = { id = government_petition_events.1 }
+					}
+					1 = {
+
+					}
+				}
+				remove_variable = gov_petition_coin_toss
+			}
+			else = {
+				random_list = {
+					1 = {
+						trigger = {
+							any_interest_group = {
+								is_in_government = yes
+								is_marginal = no
+								any_preferred_law = {
+									law_is_valid_for_ig_petition = yes
+								}
+							}
+						}
+						set_variable = { name = gov_petition_cooldown years = 10 }
+						set_variable = { name = gov_petition_fired months = 3 }
+						trigger_event = { id = government_petition_events.1 }
+					}
+					9 = {
+
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				ROOT = {
+					is_player = yes
+					has_dlc_feature = voice_of_the_people_content
+					empty_agitator_slots >= 1
+					OR = {
+						c:USA ?= this
+						trigger_if = {
+							limit = {
+								exists = c:CAL
+							}
+							c:CAL ?= this
+						}
+					}
+					any_scope_state = {
+						state_region = s:STATE_CALIFORNIA
+						is_incorporated = yes
+					}
+					game_date > 1860.1.1
+					game_date < 1880.1.1
+				}
+				NOT = { has_global_variable = emperor_norton_spawn }
+			}
+			trigger_event = { id = historical_agitators.9 }
+		}
+
+		# Achievement: For Twelve Years You Have Been Asking
+		if = {
+			limit = {
+				any_scope_building = {
+					NOR = {
+						is_building_group = bg_government
+						is_building_group = bg_construction
+						is_building_group = bg_military
+						is_building_group = bg_urban_facilities
+						is_building_group = bg_canals
+						is_building_group = bg_monuments_hidden
+						is_building_group = bg_service
+					}
+					level > 0
+					private_ownership_fraction = 1
+				}
+				NOT = {
+					has_variable = achievement_for_twelve_years_you_have_been_asking_timed
+					has_variable = achievement_for_twelve_years_you_have_been_asking
+				}
+			}
+			set_variable = {
+				name = achievement_for_twelve_years_you_have_been_asking_timed
+				years = 12
+			}
+			set_variable = {
+				name = achievement_for_twelve_years_you_have_been_asking
+			}
+		}
+		else_if = {
+			limit = {
+				any_scope_building = {
+					NOR = {
+						is_building_group = bg_government
+						is_building_group = bg_construction
+						is_building_group = bg_military
+						is_building_group = bg_urban_facilities
+						is_building_group = bg_canals
+						is_building_group = bg_monuments_hidden
+						is_building_group = bg_service
+					}
+					level > 0
+					private_ownership_fraction < 1
+				}
+				OR = {
+					has_variable = achievement_for_twelve_years_you_have_been_asking_timed
+					has_variable = achievement_for_twelve_years_you_have_been_asking
+				}
+			}
+			# RESET THE CLOCK
+
+			remove_variable = achievement_for_twelve_years_you_have_been_asking
+			remove_variable = achievement_for_twelve_years_you_have_been_asking_timed
+		}
+
+		# Achievement: Can't Touch This
+		if = {
+			limit = {
+				any_scope_building = {
+					level > 0
+					private_ownership_fraction = 0
+				}
+				NOT = {
+					has_variable = achievement_cant_touch_this_timed
+					has_variable = achievement_cant_touch_this
+				}
+			}
+			set_variable = {
+				name = achievement_cant_touch_this_timed
+				years = 12
+			}
+			set_variable = {
+				name = achievement_cant_touch_this
+			}
+		}
+		else_if = {
+			limit = {
+				any_scope_building = {
+					level > 0
+					private_ownership_fraction > 0
+					NOR = {
+						is_building_group = bg_subsistence_ranching
+						is_building_group = bg_subsistence_agriculture
+						is_building_group = bg_gold_fields
+					}
+				}
+				OR = {
+					has_variable = achievement_cant_touch_this_timed
+					has_variable = achievement_cant_touch_this
+				}
+			}
+			# RESET THE CLOCK
+
+			remove_variable = achievement_cant_touch_this
+			remove_variable = achievement_cant_touch_this_timed
+		}
+	}
+	on_actions = { # delay ensures events won't fire simultaneously
+		on_memento_mori # IG leader death
+		kamehameha_coin_toss
+		on_yearly_events
+		ep1_misc_yearly_events
+		delay = { days = 1 }
+		russian_monarchy_yearly_events
+		delay = { days = 1 }
+		austrian_monarchy_yearly_events
+		delay = { days = 2 }
+		bp1_misc_yearly_events
+		delay = { days = 3 }
+		indochina_yearly_events
+		ip2_misc_yearly_events
+		delay = { days = 5 }
+		exiles_yearly_events
+		delay = { days = 8 }
+		historical_agitators_yearly_events
+		famine_yearly_events
+		delay = { days = 13 }
+		slavery_abolition_yearly_events
+		delay = { days = 21 }
+		lobby_yearly_events
+		delay = { days = 34 }
+		krakatoa_yearly_events
+		delay = { days = 55 }
+		tunguska_yearly_events
+		delay = { days = 89 }
+		british_dictate_yearly_events
+	}
+}
+
+on_half_yearly_pulse_country = {
+	on_actions = { # delay ensures events won't fire simultaneously
+		on_half_yearly_events
+		delay = { days = 4 }
+		silkworm_half_yearly_events
+		delay = { days = 14 }
+		korea_half_yearly_events
+		delay = { days = 17 }
+		lobbies_proposals_half_yearly_events
+		delay = { days = 20 }
+		movement_half_yearly_events
+		#No delay
+		montenegro_half_yearly_events
+		delay = { days = 25 }
+	}
+
+	effect = {
+		if = {
+			limit = {
+				has_variable = recently_traded_states_counter
+			}
+			if = {
+				limit = {
+					var:recently_traded_states_counter > 1
+				}
+				change_variable = {
+					name = recently_traded_states_counter
+					subtract = 1
+				}
+			}
+			else = {
+				remove_variable = recently_traded_states_counter
+			}
+		}
+	}
+}
+
+on_five_year_pulse_country = {
+	events = {
+		generals.1
+	}
+}
+
+
+on_decade_pulse_country = {
+	random_events = {
+		chance_to_happen = 5
+		1 = plague.1
+	}
+}
+
+# Only fires for countries with Elections enabled
+on_monthly_pulse_country_elections = {
+	on_actions = {
+		elections_monthly_events
+	}
+}
+
+on_half_yearly_pulse_country_elections = { }
+on_yearly_pulse_country_elections = { }
+on_five_year_pulse_country_elections = {}
+on_decade_pulse_country_elections = {}
+
+# Root = Character
+on_monthly_pulse_character = {
+	effect = {
+		if = {
+			limit = {
+				AND = {
+					has_trait = trait_child
+					age >= define:NCharacters|ADULT_AGE
+				}
+			}
+			remove_trait = trait_child
+			add_random_trait = personality
+		}
+		if = {
+			limit = {
+				has_ideology = ideology:ideology_traditionalist_minoritarian
+				owner.religion ?= religion
+			}
+			set_ideology = ideology:ideology_traditionalist
+		}
+		else_if = {
+			limit = {
+				has_ideology = ideology:ideology_traditionalist
+				NOT = {
+					owner.religion ?= religion
+				}
+			}
+			set_ideology = ideology:ideology_traditionalist_minoritarian
+		}
+	}
+}
+on_yearly_pulse_character = {
+	on_actions = {
+		on_wounded
+	}
+}
+on_half_yearly_pulse_character = {}
+on_five_year_pulse_character = {}
+on_decade_pulse_character = {}
+
+# Root = State
+on_monthly_pulse_state = {
+	random_events = {
+	}
+	effect = {
+		if = {
+			limit = {
+				state_region = {
+					has_harvest_condition = disease_outbreak
+					NOT = { has_variable = had_disease_outbreak_recently }
+				}
+			}
+			state_region = {
+				set_variable = { name = had_disease_outbreak_recently days = 365 }
+			}
+		}
+	}
+}
+
+on_half_yearly_pulse_state = {
+	random_events = {
+		delay = { days = 23 }
+		1 = paralegal_discrimination.1
+	}
+}
+
+on_yearly_pulse_state = {
+	random_events = {
+		chance_to_happen = 20
+		10 = oil_rush.3
+		10 = oil_rush.4
+		10 = goldrush.5
+	}
+	on_actions = {
+	}
+}
+on_five_year_pulse_state = {}
+on_decade_pulse_state = {}
+
+# Root = attacker or defender country
+# scope:enemy_country = enemy of root
+# scope:battle = battle
+# scope:attacker = attacking commander
+# scope:defender = defending commander
+# scope:state = location state
+on_battle_started = {
+	effect = {
+
+	}
+}
+
+# Root = attacker or defender country
+# scope:enemy_country = enemy of root
+# scope:battle = battle
+# scope:attacker = attacking commander
+# scope:defender = defending commander
+# scope:state = location state
+on_battle_ended = {}
+
+# Root = attacker or defender country
+# scope:enemy_country = enemy of root
+# scope:battle = battle
+# scope:attacker = attacking commander
+# scope:defender = defending commander
+# scope:state = location state
+on_battle_won = {
+	events = {
+		texan_war_of_independence.3
+
+	}
+	random_events = {
+		chance_to_happen = 20
+		20 = culture_brazil.1
+	}
+}
+
+# Root = attacker or defender country
+# scope:enemy_country = enemy of root
+# scope:battle = battle
+# scope:attacker = attacking commander
+# scope:defender = defending commander
+# scope:state = location state
+on_battle_lost = {}
+
+# Root = Building
+on_building_built = {
+}
+
+# Root = Building
+on_start_expanding_building = {
+}
+
+# Root = Building
+on_building_expanded = {
+}
+
+# Does not appear
+on_deactivate_link = {
+}
+
+# Root = From Market
+# scope:market = Market merging into
+# scope:trade_center = Trade Center state of root
+on_merge_markets = {
+}
+
+# Root = State having the link retargeted
+on_retarget_link = {
+}
+
+# Root = The newly created market
+on_create_market = {
+}
+
+# Root = The applicable country
+# scope:technology = The technology type they started to research
+on_research_technology_started = {
+	effect = {
+		if = {
+			limit = {
+				has_journal_entry = je_tutorial_research_technology
+			}
+			je:je_tutorial_research_technology = {
+				set_target_technology = scope:technology
+			}
+			set_variable = tut_began_new_research
+		}
+	}
+}
+
+# Root = The applicable country
+# scope:technology = The technology type they just acquired
+on_acquired_technology = {
+	effect = {
+		if = {
+			limit = {
+				has_variable = grand_exhibition_points_change
+			}
+			change_variable = {
+				name = grand_exhibition_points_change
+				add = 3
+			}
+		}
+		if = {
+			limit = {
+				has_game_started = yes
+			}
+			post_notification = acquired_technology_notification
+		}
+		if = {
+			limit = {
+				is_player = yes
+				has_technology_researched = pumpjacks
+				NOT = { has_variable = first_oil_discovered }
+			}
+			set_variable = first_oil_discovered
+			if = {
+				limit = {
+					any_scope_state = {
+						has_potential_resource = bg_oil_extraction
+					}
+				}
+				random_scope_state = {
+					limit = {
+						has_potential_resource = bg_oil_extraction
+					}
+					force_resource_discovery = bg_oil_extraction
+				}
+			}
+			else_if = {
+				limit = {
+					any_country = {
+						has_overlapping_interests = ROOT
+						any_scope_state = {
+							has_potential_resource = bg_oil_extraction
+						}
+					}
+				}
+				random_country = {
+					limit = {
+						has_overlapping_interests = ROOT
+						any_scope_state = {
+							has_potential_resource = bg_oil_extraction
+						}
+					}
+					random_scope_state = {
+						limit = {
+							has_potential_resource = bg_oil_extraction
+						}
+						force_resource_discovery = bg_oil_extraction
+					}
+				}
+			}
+			else = {
+				random_state = {
+					limit = {
+						has_potential_resource = bg_oil_extraction
+					}
+					force_resource_discovery = bg_oil_extraction
+				}
+			}
+		}
+	}
+
+	events = {
+		historical_events.1
+		marx_events.1
+	}
+}
+
+# Root = The applicable country
+# scope:technology = The technology type that has started to spread to them
+on_spreading_technology = {
+	effect = {
+		post_notification = spreading_technology_notification
+	}
+}
+
+# Fires when a diplomatic play is started
+# root = The diplomatic play that has been started
+# scope:initiator = Initiator of the play
+# scope:target = Target of the play
+on_diplomatic_play_started = {
+	effect = {
+		if = {
+			limit = { is_diplomatic_play_type = dp_unify_germany }
+			every_country = {
+				limit = {
+					is_supporting_unification_candidate = { who = scope:initiator country_formation = GER }
+				}
+				scope:initiator = { annex = prev }
+			}
+		}
+		if = {
+			limit = { is_diplomatic_play_type = dp_unify_italy }
+			every_country = {
+				limit = {
+					is_supporting_unification_candidate = { who = scope:initiator country_formation = ITA }
+				}
+
+				scope:initiator = { annex = prev }
+			}
+		}
+		if = {
+			limit = { is_diplomatic_play_type = dp_unify_scandinavia }
+			every_country = {
+				limit = {
+					is_supporting_unification_candidate = { who = scope:initiator country_formation = SCA }
+				}
+
+				scope:initiator = { annex = prev }
+			}
+		}
+		if = {
+			limit = {
+				is_diplomatic_play_type = dp_annex_subject
+				scope:initiator = {
+					has_variable = selected_federal_solution_var
+				}
+				scope:target ?= {
+					has_variable = indian_federation_member
+				}
+			}
+			scope:initiator = {
+				add_radicals = {
+					religion = rel:shiite
+					value = very_large_radicals
+				}
+				add_radicals = {
+					religion = rel:sunni
+					value = very_large_radicals
+				}
+				every_subject_or_below = {
+					limit = {
+						has_variable = indian_federation_member
+					}
+					change_relations = { country = root value = -50 }
+				}
+			}
+		}
+	}
+}
+
+# Root = Character
+on_character_creation = {
+	effect = {
+		if = {
+			limit = {
+				NOT = { has_variable = memento_mori_immunity }
+			}
+			set_variable = {
+				name = memento_mori_immunity
+				years = 10
+			}
+		}
+		if = {
+			limit = {
+				has_ideology = ideology:ideology_traditionalist_minoritarian
+				owner.religion ?= religion
+			}
+			set_ideology = ideology:ideology_traditionalist
+		}
+		else_if = {
+			limit = {
+				has_ideology = ideology:ideology_traditionalist
+				NOT = {
+					owner.religion ?= religion
+				}
+			}
+			set_ideology = ideology:ideology_traditionalist_minoritarian
+		}
+		if = {
+			limit = {
+				has_ideology = ideology:ideology_nihilist
+		}
+			change_character_religion = rel:atheist
+		}
+		if = {
+			limit = {
+				has_template = aus_klemens_von_metternich
+			}
+		}
+	}
+}
+
+# Root = Character
+on_character_death = {
+	effect = {
+		if = {
+			limit = {
+				has_role = politician
+
+				# Check that the character's country has a non-primary culture homeland or cultural community for a culture that is accepted by the country
+				accepted_cultural_minority_check_character_scope = yes
+
+				# cultural trends do not impact the monarchy's line of succession
+				is_heir = no
+				NAND = {
+					is_ruler = yes
+					owner ?= {
+						has_law_or_variant = law_type:law_monarchy
+					}
+				}
+
+  				## the IG must be at least okay with the status quo regarding cultures in order to potentially accept a minority culture character as a leader, and not want to move things back
+  				OR = {
+  					AND = {
+  						ROOT.owner = { has_law_or_variant = law_type:law_national_supremacy }
+  						NOT = {
+							interest_group = {
+								law_stance = {
+									law = law_type:law_ethnostate
+									value >= approve
+								}
+			  				}
+		  				}
+	  				}
+  					AND = {
+  						ROOT.owner = { has_law_or_variant = law_type:law_racial_segregation }
+  						NOT = {
+							interest_group = {
+								law_stance = {
+									law = law_type:law_national_supremacy
+									value >= approve
+								}
+			  				}
+			  			}
+	  				}
+  					AND = {
+  						ROOT.owner = { has_law_or_variant = law_type:law_subjecthood }
+  						NOT = {
+							interest_group = {
+								law_stance = {
+									law = law_type:law_national_supremacy
+									value >= approve
+								}
+			  				}
+			  			}
+	  				}
+  					AND = {
+  						ROOT.owner = { has_law_or_variant = law_type:law_cultural_exclusion }
+  						NOT = {
+							interest_group = {
+								law_stance = {
+									law = law_type:law_racial_segregation
+									value >= approve
+								}
+			  				}
+			  			}
+	  				}
+  					AND = {
+  						ROOT.owner = { has_law_or_variant = law_type:law_multicultural }
+  						NOT = {
+							interest_group = {
+								law_stance = {
+									law = law_type:law_cultural_exclusion
+									value >= approve
+								}
+			  				}
+			  			}
+	  				}
+  				}
+			}
+
+			# If the country and the IG support women's rights, do combinations of woman and/or minority culture for character generation
+			if = {
+				limit = {
+					owner ?= {
+						has_law_or_variant = law_type:law_womens_suffrage
+					}
+					interest_group = {
+						law_stance = {
+							law = law_type:law_womens_suffrage
+							value >= approve
+						}
+	  				}
+				}
+
+				# 40/10/20/5 chance of primary culture man/woman as leader or of accepted minority culture man/woman as leader
+				random_list = {
+					40 = {
+						# Nothing special happens. Regular guy spawns as new leader.
+					}
+					10 = {
+						owner ?= {
+							accepted_cultural_minority_selector_owner_scope_save_scope_as_minority_culture = yes
+							if = {
+								limit = {
+									exists = scope:minority_culture
+								}
+								create_character = {
+									ig_leader = yes
+									culture = scope:minority_culture
+									interest_group = ROOT.interest_group
+								}
+							}
+						}
+					}
+					20 = {
+						owner ?= {
+							create_character = {
+								ig_leader = yes
+								female = yes
+								interest_group = ROOT.interest_group
+							}
+						}
+					}
+					5 = {
+						owner ?= {
+							accepted_cultural_minority_selector_owner_scope_save_scope_as_minority_culture = yes
+							if = {
+								limit = {
+									exists = scope:minority_culture
+								}
+								create_character = {
+									ig_leader = yes
+									female = yes
+									culture = scope:minority_culture
+									interest_group = ROOT.interest_group
+								}
+							}
+						}
+					}
+				}
+			}
+			else = {
+				# 75/25 chance of primary culture leader spawning or of minority culture leader spawning
+				random_list = {
+					75 = {
+						# regular guy spawns as usual
+					}
+					25 = {
+						owner ?= {
+							accepted_cultural_minority_selector_owner_scope_save_scope_as_minority_culture = yes
+							if = {
+								limit = {
+									exists = scope:minority_culture
+								}
+								create_character = {
+									ig_leader = yes
+									culture = scope:minority_culture
+									interest_group = ROOT.interest_group
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		#JE about Hawaii triggered by an event
+		if = {
+			limit = {
+				is_ruler = yes
+				has_template = HAW_kamehameha_iii
+				exists = c:HAW
+				owner = c:HAW
+				owner = {
+					has_law_or_variant = law_type:law_monarchy
+					NOT = { has_variable = death_of_kamehameha }
+					NOT = { has_global_variable = gp_hawaii_interest }
+				}
+			}
+			owner = {
+				set_variable = death_of_kamehameha
+				add_journal_entry = { type = je_hawaii }
+			}
+		}
+
+		if = {
+			limit = {
+				has_variable = expedition_leader_var
+				owner = {
+					NOT = { has_variable = tibet_expedition_progress_var }
+				}
+			}
+			owner = {
+				trigger_event = expedition_events.110
+			}
+		}
+
+		### Force-generating French monarchs of the correct dynasty if something goes wrong
+		if = {
+			limit = {
+				is_ruler = yes
+				owner = {
+					has_law_or_variant = law_type:law_monarchy
+					NOT = {
+						any_scope_character = {
+							is_heir = yes
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_variable = legitimist_leader
+				}
+				owner = {
+					create_character = {
+						template = dynamic_legitimist_ruler_template
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_variable = orleanist_leader
+				}
+				owner = {
+					create_character = {
+						template = dynamic_orleanist_ruler_template
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_variable = bonapartist_leader
+				}
+				owner = {
+					create_character = {
+						template = dynamic_bonapartist_ruler_template
+					}
+				}
+			}
+		}
+		### Garibaldi exist check
+		if = {
+			limit = {
+				has_template = garibaldi_character_template
+			}
+			remove_global_variable = garibaldi_is_alive_global_var
+		}
+		### Caudillo Kingmaker
+		if = {
+			limit = {
+				NOT = { has_variable = caudillo_kingmaker }
+				has_role = politician
+				interest_group = {
+					is_interest_group_type = ig_armed_forces
+					is_marginal = no
+				}
+				owner = {
+					in_election_campaign = no
+					country_has_voting_franchise = yes
+					OR = {
+						has_journal_entry = je_caudillo
+						has_modifier = age_of_caudillos_modifier
+					}
+				}
+			}
+			owner = {
+				trigger_event = { id = caudillo.5 days = 1 }
+			}
+		}
+
+		if = { # Override to make the ruler of British India always an Industrialist
+			limit = {
+				is_ruler = yes
+				c:BIC ?= owner
+			}
+			owner = {
+				ig:ig_industrialists = {
+					leader = {
+						set_character_as_ruler = yes
+					}
+				}
+				generate_new_eic_government_leader = yes
+			}
+		}
+		# Ethiopian emperor succession pre-unification
+		if = {
+			limit = {
+				is_ruler = yes
+				owner ?= {
+					has_law_or_variant = law_type:law_monarchy
+					any_scope_character = {
+						is_heir = yes
+					}
+				}
+				has_variable = ethiopian_emperor
+			}
+			owner ?= {
+				random_scope_character = {
+					limit = {
+						is_heir = yes
+					}
+					set_variable = ethiopian_emperor
+				}
+			}
+			# non-ETH rulers in the ethiopian_emperor succession will continue to style themselves 'Emperor' even if another tag forms ETH. This is fine! The other tag is obviously an upstart, and we've created two competing claims for the title. This is what wwe in the biz call 'dynamic storytelling'.
+		}
+
+		if = {
+			limit = {
+				owner = {
+					c:MON ?= this
+					heir ?= {
+						has_template = mon_danilo_petrovic_njegos
+					}
+				}
+				is_ruler = yes
+				has_template = mon_petar_II_petrovic_njegos
+			}
+			trigger_event = { id = mon_state_formation.6 popup = yes }
+		}
+
+		if = { # In case Milan dies really quickly
+			limit = {
+				has_template = SER_milan_obrenovic
+				owner ?= {
+					c:SER ?= this
+					ruler ?= {
+						has_template = SER_milos_obrenovic
+					}
+				}
+			}
+			owner ?= {
+				create_character = {
+					template = SER_mihailo_obrenovic
+				}
+			}
+		}
+	}
+}
+
+# Root = Character
+on_new_interest_group_leader = {
+
+}
+
+# Root = Character
+on_new_ruler = {
+	effect = {
+		if = {
+			limit = {
+				owner = {
+					NOT = {
+						has_variable = hide_ruler_change_notification
+					}
+				}
+			}
+			post_notification = new_ruler
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law_or_variant = law_type:law_theocracy
+				}
+				NOT = { religion = owner.religion }
+			}
+			change_character_religion = owner.religion
+		}
+		if = {
+			limit = {
+				owner = {
+					c:PAN ?= this
+					has_journal_entry = je_sikh_sovereignty
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_variable = sikh_maharaja_enthroned
+					}
+				}
+				owner = {
+					je:je_sikh_sovereignty = {
+						set_bar_progress = { value = 0 name = sikh_empire_progress_bar }
+					}
+				}
+				set_variable = sikh_maharaja_enthroned
+				owner = {
+					change_variable = { name = sikh_dead_maharajas_var add = 1 }
+				}
+			}
+		}
+		if = { # Override to make the ruler of British India always an Industrialist
+			limit = {
+				is_ruler = yes
+				c:BIC ?= owner
+				NOT = {
+					is_interest_group_type = ig_industrialists
+				}
+			}
+			owner = {
+				ig:ig_industrialists = {
+					leader = {
+						set_character_as_ruler = yes
+					}
+				}
+				generate_new_eic_government_leader = yes
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					c:ZAN ?= this
+					any_primary_culture = {
+						cu:bedouin = this
+					}
+				}
+				culture = {
+					NOT = { cu:bedouin = this }
+				}
+				NOT = {
+					has_global_variable = decided_future_of_zanzibar
+				}
+			}
+			owner = {
+				trigger_event = { id = zanzibar.6 popup = yes }
+			}
+		}
+		### Russian Monarchs
+		if = {
+			limit = {
+				owner = {
+					c:RUS ?= this
+					has_law_or_variant = law_type:law_monarchy
+				}
+				is_ruler = yes
+			}
+			russia_ruler_succession_chain_effect = yes
+		}
+		### Swedish Monarchs
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						c:SWE ?= this
+						was_formed_from = SWE
+					}
+					has_law_or_variant = law_type:law_monarchy
+				}
+				is_ruler = yes
+			}
+			sweden_ruler_succession_chain_effect = yes
+		}
+		### Austrian Monarchs
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						c:AUS ?= this
+						was_formed_from = AUS
+					}
+					has_law_or_variant = law_type:law_monarchy
+				}
+				is_ruler = yes
+			}
+			austria_ruler_succession_chain_effect = yes
+		}
+		### Serbian Monarchs
+		if = {
+			limit = {
+				owner ?= {
+					OR = {
+						c:SER ?= this
+						was_formed_from = SER
+					}
+					has_law_or_variant = law_type:law_monarchy
+				}
+				is_ruler = yes
+			}
+			serbia_ruler_succession_chain_effect = yes
+		}
+		### Ottoman Monarchs
+		if = {
+			limit = {
+				owner ?= {
+					c:TUR ?= this
+					has_law_or_variant = law_type:law_monarchy
+				}
+				is_ruler = yes
+			}
+			ottoman_ruler_succession_chain_effect = yes
+		}
+		### French Monarchs
+		if = {
+			limit = {
+				owner ?= {
+					c:FRA ?= this
+					has_law_or_variant = law_type:law_monarchy
+				}
+				is_ruler = yes
+			}
+			french_ruler_succession_chain_effect = yes
+		}
+	}
+}
+
+# Root = Country
+on_country_default = {
+	effect = {
+		add_modifier = country_default
+
+		this = {
+			save_scope_as = in_default_country
+		}
+
+		every_cobelligerent_in_war = {
+			post_notification = cobelligerent_in_default_notification
+		}
+
+		every_enemy_in_war = {
+			post_notification = enemy_in_default_notification
+		}
+	}
+}
+
+# Root = Country
+on_country_no_longer_default = {
+	effect = {
+		remove_modifier = country_default
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_action = {
+	effect = {
+		post_notification = diplomatic_action_notification
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_proposal = {
+	effect = {
+		post_proposal = proposal_diplomatic_action
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_proposal_accepted = {
+	effect = {
+		post_notification = diplomatic_proposal_accepted
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_proposal_owe_obligation = {
+	effect = {
+		post_proposal = proposal_diplomatic_action_owe_obligation
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_proposal_call_in_obligation = {
+	effect = {
+		post_proposal = proposal_diplomatic_action_call_in_obligation
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_proposal_declined = {
+	effect = {
+		post_notification = diplomatic_proposal_declined
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_action_break = {
+	effect = {
+		post_notification = diplomatic_action_break_notification
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_proposal_break = {
+	effect = {
+		post_proposal = proposal_break_pact
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_proposal_break_accepted = {
+	effect = {
+		post_notification = diplomatic_proposal_break_accepted
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_proposal_break_owe_obligation = {
+	effect = {
+		post_proposal = proposal_break_pact_owe_obligation
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_proposal_break_call_in_obligation = {
+	effect = {
+		post_proposal = proposal_break_pact_call_in_obligation
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_proposal_break_declined = {
+	effect = {
+		post_notification = diplomatic_proposal_break_declined
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_action_third_party = {
+	effect = {
+		post_notification = diplomatic_proposal_third_party_notification
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_action_third_party_accepted = {
+	effect = {
+		post_notification = diplomatic_proposal_third_party_accepted
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_action_third_party_declined = {
+	effect = {
+		post_notification = diplomatic_proposal_third_party_declined
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_action_third_party_break = {
+	effect = {
+		post_notification = diplomatic_proposal_third_party_break_notification
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_action_third_party_break_accepted = {
+	effect = {
+		post_notification = diplomatic_proposal_third_party_break_accepted
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_action_third_party_break_declined = {
+	effect = {
+		post_notification = diplomatic_proposal_third_party_break_declined
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_action_overlord_decrease_autonomy = {
+	effect = {
+		post_notification = diplomatic_action_overlord_decrease_autonomy_notification
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_action_overlord_increase_autonomy = {
+	effect = {
+		post_notification = diplomatic_action_overlord_increase_autonomy_notification
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomatic_action_subject_increase_own_autonomy = {
+	effect = {
+		post_notification = diplomatic_action_subject_increase_own_autonomy_notification
+	}
+}
+
+# Root = Diplomatic Action
+on_diplomats_expelled = {
+	effect = {
+		if = {
+			limit = {
+				scope:initiator = {
+					has_variable = we_are_not_amused_ach_possible
+				}
+				scope:target ?= {
+					c:FRA ?= this
+					"relations(scope:initiator)" >= -10 #Why? Because the on_action fires after the opinion malus from expel diplomats occurs.
+				}
+			}
+			scope:initiator = {
+				set_variable = achievement_we_are_not_amused
+			}
+		}
+	}
+}
+
+# Root = Diplomatic Pact
+on_diplomatic_pact_auto_break = {
+	effect = {
+		post_notification = diplomatic_pact_auto_break_notification
+	}
+}
+
+# Root = Diplomatic Pact
+on_diplomatic_pact_third_party_auto_break = {
+	effect = {
+		post_notification = diplomatic_pact_third_party_auto_break_notification
+	}
+}
+
+# Root = Treaty
+on_treaty_proposed = {
+	effect = {
+		post_proposal = proposal_treaty
+	}
+}
+
+# Root = Treaty
+on_treaty_proposal_declined = {
+	effect = {
+		post_notification = treaty_proposal_declined
+	}
+}
+
+# Root = Treaty
+on_treaty_entered_into_force = {
+	effect = {
+		post_notification = treaty_entered_into_force
+		if = { #add balkan war allies to the list
+			limit = {
+				OR = {
+					#balkan ally
+					OR = {
+						root.first_country = {
+							has_journal_entry = je_the_balkan_league
+						}
+						root.second_country = {
+							has_journal_entry = je_the_balkan_league
+						}
+					}
+					any_scope_article = {
+						OR = {
+							has_type = alliance
+							has_type = support_independence
+						}
+					}
+					#Ottoman ally during balkan war
+					any_country = {
+						has_journal_entry = je_the_balkan_league
+					}
+					OR = {
+						root.first_country = {
+							c:TUR ?= this
+						}
+						root.second_country = {
+							c:TUR ?= this
+						}
+					}
+					any_scope_article = {
+						OR = {
+							has_type = alliance
+							has_type = defensive_pact
+						}
+					}
+				}
+			}
+			generate_balkan_league_side_list = yes
+			generate_ottoman_side_list = yes
+		}
+	}
+}
+
+# Root = Treaty
+# Fires in addition to on_treaty_entered_into_force for treaties enforced by plays, etc
+on_treaty_enforced = {
+	effect = {
+		root.first_country = {
+			create_diplomatic_catalyst = {
+				type = catalyst_treaty_enforced
+				target = root.second_country
+			}
+		}
+	}
+}
+
+# Root = Treaty
+# scope:withdrawing_country = Withdrawing Country
+# scope:non_withdrawing_country = Non-Withdrawing Country
+# Fires when the binding period is not active
+on_country_withdrawn_from_treaty = {
+	effect = {
+		post_notification = country_withdrawn_from_treaty
+		if = { #remove balkan war allies from the list
+			limit = {
+				OR = {
+					scope:withdrawing_country = {
+						has_journal_entry = je_the_balkan_league
+					}
+					scope:non_withdrawing_country= {
+						has_journal_entry = je_the_balkan_league
+					}
+				}
+				any_scope_article = {
+					OR = {
+						has_type = alliance
+						has_type = support_independence
+					}
+				}
+			}
+			generate_balkan_league_side_list = yes
+			generate_ottoman_side_list = yes
+		}
+	}
+}
+
+# Root = Treaty
+# scope:withdrawing_country = Withdrawing Country
+# scope:non_withdrawing_country = Non-Withdrawing Country
+# Fires instead of on_country_withdrawn_from_treaty when the binding period is still active
+on_country_broke_treaty = {
+	effect = {
+		post_notification = country_broke_treaty
+
+		scope:withdrawing_country = {
+			create_diplomatic_catalyst = {
+				type = catalyst_treaty_broken
+				target = scope:non_withdrawing_country
+			}
+
+			add_modifier = {
+				name = modifier_untrustworthy_country
+				days = long_modifier_time
+				multiplier = {
+					value = 1
+					add = {
+						root = {
+							every_scope_article = {
+								if = {
+									limit = {
+										OR = {
+											has_type = alliance
+											has_type = state_transfer
+										}
+									}
+									add = 5
+								}
+								else_if = {
+									limit = {
+										OR = {
+											has_type = defensive_pact
+											has_type = treaty_port
+										}
+									}
+									add = 3
+								}
+								else_if = {
+									limit = {
+										OR = {
+											has_type = guarantee_independence
+											has_type = support_independence
+										}
+									}
+									add = 2
+								}
+							}
+						}
+					}
+					max = 20
+				}
+			}
+		}
+		if = { #remove balkan war allies from the list
+			limit = {
+				OR = {
+					scope:withdrawing_country = {
+						has_journal_entry = je_the_balkan_league
+					}
+					scope:non_withdrawing_country= {
+						has_journal_entry = je_the_balkan_league
+					}
+				}
+				any_scope_article = {
+					OR = {
+						has_type = alliance
+						has_type = support_independence
+					}
+				}
+			}
+			generate_balkan_league_side_list = yes
+			generate_ottoman_side_list = yes
+		}
+	}
+}
+
+# Root = Treaty
+on_treaty_dissolved = {
+	effect = {
+		post_notification = treaty_dissolved
+	}
+}
+
+# Root = Treaty
+# scope:article = Treaty Article
+on_treaty_article_removed = {
+	effect = {
+		post_notification = treaty_article_removed
+	}
+}
+
+# Root = Releasing Country
+# scope:target = Released Country
+on_country_released_as_independent = {
+	effect = {
+		scope:target = {
+			set_variable = { name = newly_released_country days = 90 } # Used for the Trialist Manifesto
+		}
+		if = {
+			limit = {
+				has_dlc_feature = ip3_content
+				c:BUL ?= scope:target
+			}
+			scope:target = {
+				add_journal_entry = {
+					type = je_prussia_of_the_balkans
+				}
+				trigger_event = {
+					id = bulgaria_events.2
+					popup = yes
+					days = 7
+				}
+			}
+			if = { # Why? So Russia always gets the option to play as Bulgaria, regardless of whether they have this JE
+				limit = {
+					c:RUS ?= {
+						NOT = {
+							has_journal_entry = je_eastern_question_russia
+						}
+					}
+				}
+				c:RUS ?= {
+					trigger_event = {
+						id = eastern_question_russia.1
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				c:YUG ?= scope:target
+			}
+			scope:target = {
+				remove_primary_culture = cu:bulgarian
+			}
+		}
+
+		if = {
+			limit = {
+				c:NEN ?= scope:target
+			}
+			scope:target ?= {
+				create_character = {
+					ig_leader = yes
+					interest_group = ig_rural_folk
+					ideology = ideology_luddite
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:target ?= {
+					country_has_primary_culture = cu:ashkenazi
+				}
+				NOT = {
+					s:STATE_PALESTINE = {
+						is_homeland = cu:ashkenazi
+					}
+				}
+			}
+			s:STATE_PALESTINE = {
+				add_homeland = cu:sephardic
+				add_homeland = cu:ashkenazi
+			}
+		}
+		if = {
+			limit = {
+				scope:target ?= {
+					OR = {
+						country_has_primary_culture = cu:afro_caribbean
+						country_has_primary_culture = cu:afro_antillean
+						country_has_primary_culture = cu:afro_american
+						country_has_primary_culture = cu:afro_caribeno
+						country_has_primary_culture = cu:afro_brazilian
+					}
+					OR = {
+						has_law_or_variant = law_type:law_legacy_slavery
+                        has_law_or_variant = law_type:law_colonial_slavery
+						has_law_or_variant = law_type:law_slave_trade
+					}
+				}
+			}
+			scope:target ?= {
+				trigger_event = { id = slave_revolt_events.1 days = 0 }
+			}
+		}
+	}
+}
+
+# Root = Releasing Country
+# scope:target = Released Country
+on_country_released_as_own_subject = {
+	effect = {
+		scope:target = {
+			set_variable = { name = newly_released_country days = 90 } # Used for the Trialist Manifesto at the moment
+		}
+		if = {
+			limit = {
+				c:NEN ?= scope:target
+			}
+			scope:target ?= {
+				create_character = {
+					ig_leader = yes
+					interest_group = ig_rural_folk
+					ideology = ideology_luddite
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:target ?= {
+					country_has_primary_culture = cu:ashkenazi
+				}
+				NOT = {
+					s:STATE_PALESTINE = {
+						is_homeland = cu:ashkenazi
+					}
+				}
+			}
+			s:STATE_PALESTINE = {
+				add_homeland = cu:sephardic
+				add_homeland = cu:ashkenazi
+			}
+		}
+		if = {
+			limit = {
+				c:AUS ?= ROOT
+				has_law = law_type:law_monarchy
+				scope:target ?= {
+					country_is_in_europe = yes
+				}
+			}
+			scope:target ?= {
+				change_subject_type = subject_type_crown_land
+			}
+		}
+
+		if = {
+			limit = {
+				c:YUG ?= scope:target
+			}
+			scope:target = {
+				remove_primary_culture = cu:bulgarian
+			}
+		}
+	}
+}
+
+# Root = Releasing Country
+# scope:target = Released Country
+on_country_released_as_company_subject = {
+	effect = {
+		scope:target = {
+			set_variable = { name = newly_released_country days = 90 } # Used for the Trialist Manifesto at the moment
+		}
+		activate_law = law_type:law_presidential_republic
+		activate_law = law_type:law_oligarchy
+		activate_law = law_type:law_racial_segregation
+		activate_law = law_type:law_extraction_economy
+		activate_law = law_type:law_colonial_exploitation
+		activate_law = law_type:law_no_schools
+		activate_law = law_type:law_no_health_system
+		activate_law = law_type:law_censorship
+		activate_law = law_type:law_no_workers_rights
+		activate_law = law_type:law_child_labor_allowed
+		activate_law = law_type:law_no_social_security
+		activate_law = law_type:law_migration_controls
+		add_modifier = {
+			name = colonial_administration
+		}
+	}
+}
+
+# Root = Releasing Country
+# scope:target = Released Country
+on_country_released_as_overlord_subject = {
+	effect = {
+		scope:target = {
+			set_variable = { name = newly_released_country days = 90 } # Used for the Trialist Manifesto at the moment
+		}
+		if = {
+			limit = {
+				scope:target ?= {
+					country_has_primary_culture = cu:ashkenazi
+				}
+				NOT = {
+					s:STATE_PALESTINE = {
+						is_homeland = cu:ashkenazi
+					}
+				}
+			}
+			s:STATE_PALESTINE = {
+				add_homeland = cu:sephardic
+				add_homeland = cu:ashkenazi
+			}
+		}
+	}
+}
+
+# Root = Country
+on_country_formed = {
+	effect = {
+		if = {
+			limit = {
+				c:LAO ?= ROOT
+			}
+			trigger_event = { id = formation.1 popup = yes }
+		}
+        else_if = {
+			limit = {
+				c:PLT ?= THIS
+				was_formed_from = PRG
+				has_variable = patino_paraguay_var
+			}
+			add_primary_culture = cu:guarani
+		}
+		else_if = {
+			limit = {
+				c:UBD ?= ROOT
+			}
+			trigger_event = { id = formation.2 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:BYZ ?= ROOT
+			}
+			trigger_event = { id = formation.3 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:IBE ?= ROOT
+			}
+			trigger_event = { id = formation.5 popup = yes }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					c:BRZ ?= ROOT
+					c:USA ?= ROOT
+					c:SAF ?= ROOT
+				}
+			}
+			trigger_event = { id = formation.6 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:KUK ?= ROOT
+			}
+			trigger_event = { id = formation.7 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:ARA ?= ROOT
+			}
+			trigger_event = { id = formation.8 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:YUG ?= ROOT
+			}
+			trigger_event = { id = formation.9 popup = yes }
+
+			if = {
+				limit = {
+					NOT = { was_formed_from = BUL }
+				}
+				remove_primary_culture = cu:bulgarian
+			}
+		}
+		else_if = {
+			limit = {
+				c:SCA ?= ROOT
+			}
+			trigger_event = { id = formation.10 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:MAL ?= ROOT
+			}
+			trigger_event = { id = formation.11 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:TRH ?= ROOT
+			}
+			trigger_event = { id = formation.12 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:IDN ?= ROOT
+			}
+			trigger_event = { id = formation.13 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:BHT ?= ROOT
+			}
+			trigger_event = { id = formation.14 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:YEM ?= ROOT
+			}
+			trigger_event = { id = formation.15 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:KAZ ?= ROOT
+			}
+			trigger_event = { id = formation.16 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:HRE ?= ROOT
+			}
+			trigger_event = { id = formation.18 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:UNL ?= ROOT
+			}
+			trigger_event = { id = formation.19 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:RHN ?= ROOT
+			}
+			trigger_event = { id = formation.20 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:CLI ?= ROOT
+			}
+			trigger_event = { id = formation.21 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:GER ?= ROOT
+			}
+			trigger_event = { id = german_unification.4 popup = yes }
+			if = {
+				limit = {
+					any_scope_state = {
+						state_region = {
+							OR = {
+								is_homeland = cu:hungarian
+								is_homeland = cu:romanian
+								AND = {
+									is_homeland = cu:croat
+									NOT = {
+										s:STATE_ISTRIA ?= this
+									}
+								}
+								AND = {
+									is_homeland = cu:north_italian
+									NOR = {
+										s:STATE_ISTRIA ?= this
+										s:STATE_SOUTH_TYROL ?= this
+									}
+								}
+							}
+						}
+					}
+				}
+				trigger_event = { id = austria_germany.1 days = 7 popup = yes }
+			}
+		}
+		else_if = {
+			limit = {
+				c:ITA ?= ROOT
+			}
+			trigger_event = { id = italian_unification.1 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:AFG ?= ROOT
+				has_journal_entry = je_unify_afghanistan
+			}
+			if = {
+				limit = {
+					was_formed_from = KUN
+				}
+				add_primary_culture = cu:uzbek
+			}
+			if = {
+				limit = {
+					was_formed_from = MAI
+				}
+				add_primary_culture = cu:uzbek
+				add_primary_culture = cu:turkmen
+			}
+			if = {
+				limit = {
+					was_formed_from = KAF
+				}
+				add_primary_culture = cu:kho
+			}
+			trigger_event = { id = gg_afghanistan.4 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:FSA ?= ROOT
+			}
+			trigger_event = { id = fsa_events.1 popup = yes }
+		}
+		else_if = {
+			limit = {
+				c:GAL ?= ROOT
+			}
+			trigger_event = { id = galicia_formation.1 popup = yes }
+		}
+		else = {
+			trigger_event = { id = formation.17 popup = yes }
+		}
+
+		if = {
+			limit = {
+				c:CHI ?= this
+				has_journal_entry = je_reunify_china
+			}
+			set_global_variable = { name = chinese_central_government value = ROOT }
+		}
+	}
+}
+
+# Root = State
+on_migration_target_created = {
+	effect = {
+		post_notification = migration_target_created
+	}
+}
+
+# Root = State
+on_migration_target_created_other = {
+	effect = {
+		post_notification = migration_target_created_other
+	}
+}
+
+# Root = State
+on_resource_discovered = {
+	#Notification seems to fire from code.
+	events = {
+		goldrush.1
+		goldrush.6
+		oil_rush.1
+		oil_rush.6
+		rubber_events.1
+		rubber_events.2
+	}
+}
+
+# Root = State
+on_resource_depleted = {
+	effect = {
+		state_region = {
+			post_notification = resource_depleted
+		}
+	}
+	events = {
+		goldrush.2
+		goldrush.7
+	}
+}
+
+# Root = Country
+on_peace_agreement_signed_war_leader = {
+	effect = {
+		post_notification = peace_agreement_signed_war_leader
+	}
+}
+
+# Root = Country
+on_peace_agreement_signed_war_participant = {
+	effect = {
+		post_notification = peace_agreement_signed_war_participant
+	}
+}
+
+# Root = Country
+on_peace_agreement_signed_non_participant = {
+	effect = {
+		post_notification = peace_agreement_signed_non_participant
+	}
+}
+
+# Root = Country
+on_capitulation = {
+	effect = {
+		set_variable = {
+            name = recently_lost_war
+            days = 1825
+            value = yes
+        }
+	}
+}
+
+# Root = Country
+on_self_capitulated_notification = {
+	effect = {
+		post_notification = self_capitulated
+		set_variable = {
+			name = recent_capitulation
+			days = short_modifier_time
+		}
+	}
+}
+
+# Root = Country
+on_enemy_capitulated_notification = {
+	effect = {
+		post_notification = enemy_capitulated
+	}
+}
+
+# Root = Country
+on_ally_capitulated_notification = {
+	effect = {
+		post_notification = ally_capitulated
+	}
+}
+
+# Root = Formation
+on_mobilized_army = {
+	effect = {
+	}
+}
+
+# Root = Formation
+on_demobilized_army = {
+	effect = {
+	}
+}
+
+# Root = Character
+on_mobilized_general = {
+}
+
+# Root = Character
+on_demobilized_general = {
+}
+
+# Root = Diplomatic Play
+on_diplo_play_start = {
+	effect = {
+		post_notification = diplo_play_start_notification
+	}
+}
+
+# Root = Diplomatic Play
+on_diplo_play_start_third_party = {
+	effect = {
+		post_notification = diplo_play_start_third_party_notification
+	}
+}
+
+# Root = Diplomatic Play
+on_diplo_play_back_down = {
+	effect = {
+		post_notification = diplo_play_back_down_notification
+		if = {
+			limit = {
+				scope:notification_target = {
+					is_player = yes
+				}
+				scope:actor = {
+					is_player = no
+				}
+			}
+			set_global_variable = achievement_mightier_than_the_sword
+		}
+		if = { # if a BL member backs down from war, fail the JE.
+			limit = {
+				root = {
+				is_diplomatic_play_type = dp_balkan_war
+				}
+				scope:actor = {
+				has_journal_entry = je_the_balkan_league
+				}
+			}
+			scope:actor = {
+				set_variable = bp_member_backs_down
+			}
+		}
+	}
+}
+
+# Root = Diplomatic Play
+on_diplo_play_back_down_involved = {
+	effect = {
+		post_notification = diplo_play_back_down_involved_notification
+	}
+}
+
+# Root = Diplomatic Play
+on_diplo_play_join_side = {
+	effect = {
+		post_notification = diplo_play_join_side_notification
+	}
+}
+
+# Root = Diplomatic Play
+on_diplo_play_abandon_side = {
+	effect = {
+		post_notification = diplo_play_abandon_side_notification
+	}
+}
+
+# Root = Diplomatic Play
+on_diplo_play_war_start = {
+	effect = {
+		post_notification = diplo_play_war_start_notification
+		post_notification = diplo_play_war_start_third_party_notification
+	}
+}
+
+# Root = Diplomatic Play
+on_diplo_play_subject_released = {
+	effect = {
+		post_notification = diplo_play_subject_released_notification
+	}
+}
+
+# Root = Diplomatic Play
+on_diplo_play_subject_released_overlord = {
+	effect = {
+		post_notification = diplo_play_subject_released_overlord_notification
+	}
+}
+
+# Root = Diplomatic Play
+# country = Country switched to
+# previous = Country switched from
+on_diplo_play_switch_sides = {
+	effect = {
+		set_global_variable = achievement_revo_needed
+	}
+}
+
+# Root = Diplomatic Play
+on_diplo_play_declare_neutrality = {
+	effect = {
+		post_notification = diplo_play_declare_neutrality_notification
+	}
+}
+
+
+# Root = Diplomatic Play
+on_sway_offer = {
+	effect = {
+		post_proposal = proposal_sway_offer
+	}
+}
+
+# Root = Diplomatic Play
+on_reverse_sway_offer = {
+	effect = {
+		post_proposal = proposal_reverse_sway_offer
+	}
+}
+
+# Root = Diplomatic Play
+on_sway_offer_accepted = {
+	effect = {
+		post_notification = sway_offer_accepted
+	}
+}
+
+# Root = Diplomatic Play
+on_reverse_sway_offer_accepted = {
+	effect = {
+		post_notification = reverse_sway_offer_accepted
+	}
+}
+
+# Root = Diplomatic Play
+on_country_swayed = {
+	effect = {
+		post_notification = country_swayed
+	}
+}
+
+# Root = Diplomatic Play
+on_sway_offer_rejected = {
+	effect = {
+		post_notification = sway_offer_rejected
+	}
+}
+
+# Root = Diplomatic Play
+on_reverse_sway_offer_rejected = {
+	effect = {
+		post_notification = reverse_sway_offer_rejected
+	}
+}
+
+# Root = Diplomatic Demand
+on_diplomatic_demand = {
+	effect = {
+		post_proposal = proposal_diplomatic_demand
+	}
+}
+
+# Root = Diplomatic Demand
+on_diplomatic_demand_accepted = {
+	effect = {
+		post_notification = diplomatic_demand_accepted
+	}
+}
+
+# Root = Diplomatic Demand
+on_diplomatic_demand_rejected = {
+	effect = {
+		post_notification = diplomatic_demand_rejected
+	}
+}
+
+# Root = Building
+on_production_method_changed = {
+	effect = {
+		owner = {
+			if = {
+				limit = {
+					has_journal_entry = je_tutorial_change_production_method
+					je:je_tutorial_change_production_method.target = root
+				}
+				set_variable = has_changed_production_method
+			}
+		}
+	}
+}
+
+# Root = owner Country of the Law
+# Executed when enactment of any law begins
+on_law_enactment_started = {
+	effect = {
+		#Montenegro events
+		if = {
+			limit = {
+				c:MON ?= THIS
+			}
+			if = {
+				limit = {
+					has_variable = danilo_dresses_like_a_prince
+					is_enacting_law = law_type:law_monarchy
+				}
+				trigger_event = {
+					ID = mon_state_formation.7
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						is_enacting_law = law_type:law_consumption_based_taxation
+						is_enacting_law = law_type:law_land_based_taxation
+						is_enacting_law = law_type:law_per_capita_based_taxation
+						is_enacting_law = law_type:law_proportional_taxation
+						is_enacting_law = law_type:law_graduated_taxation
+					}
+				}
+				trigger_event = {
+					ID = mon_state_formation.12
+				}
+			}
+		}
+		#Abolishing Monarchy
+		if = {
+			limit = {
+				has_law_or_variant = law_type:law_monarchy
+				OR = {
+					is_enacting_law = law_type:law_presidential_republic
+					is_enacting_law = law_type:law_parliamentary_republic
+					is_enacting_law = law_type:law_council_republic
+				}
+			}
+			set_variable = {
+				name = abolishing_monarchy_var
+				value = 0
+			}
+			add_journal_entry = { type =  je_abolish_monarchy }
+		}
+	}
+}
+
+# Root = owner Country of the Law
+# Executed when the end of a checkpoint is reached and the result is success
+on_law_checkpoint_success = {
+	effect = {
+		add_enactment_phase = 1
+		if = {
+			limit = {
+				enacting_any_law = yes
+			}
+			trigger_event = { id = law_notification.4 days = 0 }
+		}
+	}
+}
+
+# Root = owner Country of the Law
+# Executed when the end of a checkpoint is reached and the result is advance
+on_law_checkpoint_advance = {
+	random_events = {
+		10 = laws.1
+		10 = children_rights_events.1
+		10 = free_speech_laws.1
+		10 = free_speech_laws.2
+		10 = labor_rights.1
+		10 = labor_rights.4
+		10 = children_rights_events.4
+		10 = welfare_laws.1
+		10 = welfare_laws.4
+		10 = welfare_laws.8
+		10 = migration_laws.1
+		10 = migration_laws.4
+		10 = bureaucracy.2
+		10 = colonization.1
+		10 = colonization.3
+		10 = rights_of_women_laws.1
+		10 = rights_of_women_laws.2
+		10 = internal_security_events.2
+		10 = slavery_law_events.1
+		10 = slavery_law_events.4
+		10 = laws_police.1
+		10 = anarchy.3
+		10 = tax.2
+		10 = tax.5
+		10 = theocracy.1
+		10 = citizenship_laws.1
+		10 = citizenship_laws.4
+		100 = 1848.1
+		100 = 1848.3
+		10 = education_laws.1
+		10 = education_laws.4
+		10 = distribution_of_power_laws.1
+		10 = council_republic_law_events.1
+		10 = distribution_of_power_laws.4
+		10 = monarchy_law_events.1
+		10 = monarchy_law_events.2
+		10 = economy_laws.1
+		10 = economy_laws.4
+		10 = meiji.4
+		10 = meiji.5
+		10 = meiji.6
+		10 = conscription_laws.1
+		10 = republic_laws.1
+		10 = internal_security_events.4
+		10 = healthcare_laws.1
+		10 = healthcare_laws.4
+		10 = anti_state_religion.1
+		10 = distribution_of_power_laws.7
+		10 = distribution_of_power_laws.10
+		10 = rights_of_women_laws.5
+		10 = agitators_law_events.3
+		10 = agitators_law_events.11
+		10 = agitators_law_events.12
+		10 = agitators_law_events.14
+		10 = agitators_law_events.15
+		10 = agitators_law_events.17
+		10 = agitators_law_events.21
+		10 = agitators_law_events.22
+		10 = agitators_law_events.23
+		10 = agitators_law_events.24
+		10 = agitators_law_events.25
+		10 = agitators_law_events.26
+		10 = agitators_law_events.27
+		10 = agitators_law_events.28
+		10 = agitators_law_events.29
+		10 = agitators_law_events.30
+		10 = state_atheism.2
+		10 = state_atheism.6
+		2 = generic_laws.1
+		2 = generic_laws.4
+		2 = generic_laws.7
+		2 = generic_laws.10
+		2 = ig_petitions.4 #Devout want State Religion
+		2 = ig_petitions.7 #Intelligentsia want free speech
+		2 = ig_petitions.19 #Armed forces want conscription
+		2 = ig_petitions.22 #Petite-Bourgeoisie want Restricted Citizenship
+		1 = law_notification.1
+		10 = single_party_state.1
+		5 = single_party_state.6
+		5 = single_party_state.7
+		10 = land_ownership_law_events.2
+		10 = land_ownership_law_events.5
+		10 = land_ownership_law_events.8
+		10 = luddite_law_events.1
+		10 = luddite_law_events.4
+		10 = agitator_legal_events.21
+		10 = agitator_legal_events.22
+		10 = agitator_legal_events.23
+		10 = agitator_legal_events.24
+		10 = agitator_legal_events.25
+		10 = agitator_legal_events.26
+		10 = agitator_legal_events.27
+		10 = agitator_legal_events.28
+		10 = agitator_legal_events.29
+		10 = agitator_legal_events.30
+		10 = land_ownership_law_events.13
+		10 = land_ownership_law_events.16
+		10 = technocracy.2
+		100 = nihilism.13
+		10 = corporate_state.1
+		10 = corporate_state.4
+		50 = utilitarian.8
+		10 = labour_associations_events.2
+		10 = labour_associations_events.8
+		10 = labour_associations_events.9
+		10 = subjecthood_events.3
+		10 = subjecthood_events.4
+	}
+}
+
+# Root = owner Country of the Law
+# Executed when the end of a checkpoint is reached and the result is debate
+on_law_checkpoint_debate = {
+	random_events = {
+		10 = children_rights_events.2
+		10 = free_speech_laws.5
+		10 = labor_rights.2
+		10 = labor_rights.5
+		10 = children_rights_events.6
+		10 = welfare_laws.2
+		10 = welfare_laws.5
+		10 = welfare_laws.9
+		10 = migration_laws.2
+		10 = migration_laws.5
+		10 = bureaucracy.3
+		10 = colonization.1
+		10 = free_speech_laws.5
+		10 = free_speech_laws.6
+		10 = internal_security_events.3
+		10 = slavery_law_events.2
+		10 = slavery_law_events.5
+		10 = laws_police.2
+		10 = anarchy.2
+		10 = tax.3
+		10 = tax.6
+		10 = theocracy.2
+		10 = citizenship_laws.2
+		10 = citizenship_laws.5
+		10 = education_laws.2
+		10 = education_laws.5
+		100 = 1848.1
+		100 = 1848.3
+		10 = distribution_of_power_laws.2
+		10 = council_republic_law_events.2
+		10 = distribution_of_power_laws.5
+		10 = monarchy_law_events.3
+		10 = economy_laws.2
+		10 = economy_laws.5
+		10 = isolation.2
+		10 = conscription_laws.2
+		10 = republic_laws.2
+		10 = internal_security_events.5
+		10 = healthcare_laws.2
+		10 = healthcare_laws.5
+		10 = anti_state_religion.2
+		10 = colonization.4
+		10 = distribution_of_power_laws.8
+		10 = distribution_of_power_laws.11
+		10 = rights_of_women_laws.4
+		10 = rights_of_women_laws.7
+		10 = law_events.1
+		10 = agitators_law_events.1
+		10 = agitators_law_events.2
+		10 = agitators_law_events.5
+		10 = agitators_law_events.8
+		10 = agitators_law_events.9
+		10 = agitators_law_events.10
+		10 = agitators_law_events.13
+		10 = agitators_law_events.18
+		10 = agitators_law_events.20
+		10 = state_atheism.1
+		10 = state_atheism.5
+		2 = generic_laws.3
+		2 = generic_laws.6
+		2 = generic_laws.9
+		2 = generic_laws.12
+		10 = ig_petitions.1 #Landowners want to reverse Suffrage
+		10 = ig_petitions.10 #Rural folk want no conscription
+		10 = ig_petitions.13 #Trade Unions want compulsory primary school
+		20 = ig_petitions.16 #Industrialists want no graduated taxes
+		1 = law_notification.2
+		10 = single_party_state.2
+		10 = land_ownership_law_events.1
+		10 = land_ownership_law_events.4
+		10 = land_ownership_law_events.7
+		10 = luddite_law_events.2
+		10 = luddite_law_events.5
+		10 = agitators_law_events.11
+		10 = agitators_law_events.12
+		10 = agitators_law_events.13
+		10 = agitators_law_events.14
+		10 = agitators_law_events.15
+		10 = agitators_law_events.16
+		10 = agitators_law_events.17
+		10 = agitators_law_events.18
+		10 = agitators_law_events.19
+		10 = agitators_law_events.20
+		10 = land_ownership_law_events.12
+		10 = land_ownership_law_events.15
+		10 = agitator_legal_events.11
+		10 = agitator_legal_events.12
+		10 = agitator_legal_events.13
+		10 = agitator_legal_events.14
+		10 = agitator_legal_events.15
+		10 = agitator_legal_events.16
+		10 = agitator_legal_events.17
+		10 = agitator_legal_events.18
+		10 = agitator_legal_events.19
+		10 = agitator_legal_events.20
+		10 = technocracy.3
+		10 = corporate_state.2
+		10 = corporate_state.5
+		10 = labour_associations_events.3
+		10 = labour_associations_events.6
+		10 = labour_associations_events.7
+		10 = subjecthood_events.2
+	}
+	events = {
+		tanzimat_events.1
+		tanzimat_events.2
+		tanzimat_events.4
+		tanzimat_events.10
+	}
+}
+
+# Root = owner Country of the Law
+# Executed when the end of a checkpoint is reached and the result is stall
+on_law_checkpoint_stall = {
+	random_events = {
+		10 = children_rights_events.3
+		10 = free_speech_laws.3
+		10 = free_speech_laws.4
+		10 = labor_rights.3
+		10 = labor_rights.6
+		10 = children_rights_events.5
+		10 = welfare_laws.3
+		10 = welfare_laws.6
+		10 = welfare_laws.10
+		10 = migration_laws.3
+		10 = migration_laws.6
+		10 = bureaucracy.1
+		10 = colonization.1
+		10 = colonization.2
+		10 = rights_of_women_laws.3
+		10 = internal_security_events.1
+		10 = slavery_law_events.3
+		10 = slavery_law_events.6
+		10 = laws_police.3
+		10 = anarchy.1
+		10 = tax.1
+		10 = tax.4
+		10 = theocracy.3
+		10 = citizenship_laws.3
+		10 = citizenship_laws.6
+		10 = education_laws.3
+		10 = education_laws.6
+		100 = 1848.1
+		100 = 1848.3
+		10 = distribution_of_power_laws.3
+		10 = council_republic_law_events.3
+		10 = distribution_of_power_laws.6
+		10 = monarchy_law_events.4
+		10 = economy_laws.3
+		10 = economy_laws.6
+		10 = isolation.1
+		10 = conscription_laws.3
+		10 = republic_laws.3
+		10 = internal_security_events.6
+		10 = healthcare_laws.3
+		10 = healthcare_laws.6
+		10 = anti_state_religion.3
+		10 = distribution_of_power_laws.9
+		10 = distribution_of_power_laws.12
+		10 = rights_of_women_laws.6
+		10 = agitators_law_events.4
+		10 = agitators_law_events.6
+		10 = agitators_law_events.7
+		10 = agitators_law_events.16
+		10 = agitators_law_events.19
+		10 = state_atheism.3
+		10 = state_atheism.4
+		10 = exiles_more_events.2
+		2 = generic_laws.2
+		2 = generic_laws.5
+		2 = generic_laws.8
+		2 = generic_laws.11
+		1 = law_notification.3
+		10 = single_party_state.3
+		50 = single_party_state.4
+		50 = single_party_state.5
+		10 = land_ownership_law_events.3
+		10 = land_ownership_law_events.6
+		10 = land_ownership_law_events.9
+		10 = luddite_law_events.3
+		10 = luddite_law_events.6
+		10 = agitators_law_events.1
+		10 = agitators_law_events.2
+		10 = agitators_law_events.4
+		10 = agitators_law_events.5
+		10 = agitators_law_events.6
+		10 = agitators_law_events.7
+		10 = agitators_law_events.8
+		10 = agitators_law_events.9
+		10 = agitators_law_events.10
+		10 = land_ownership_law_events.10
+		10 = land_ownership_law_events.11
+		10 = land_ownership_law_events.14
+		10 = land_ownership_law_events.17
+		10 = land_ownership_law_events.18
+		10 = agitator_legal_events.1
+		10 = agitator_legal_events.2
+		10 = agitator_legal_events.3
+		10 = agitator_legal_events.4
+		10 = agitator_legal_events.5
+		10 = agitator_legal_events.6
+		10 = agitator_legal_events.7
+		10 = agitator_legal_events.8
+		10 = agitator_legal_events.9
+		10 = agitator_legal_events.10
+		10 = technocracy.1
+		10 = corporate_state.3
+		10 = corporate_state.6
+		10 = labour_associations_events.1
+		10 = labour_associations_events.4
+		10 = labour_associations_events.5
+		10 = subjecthood_events.1
+		10 = subjecthood_events.5
+	}
+}
+
+# Root = owner Country of the Law
+# Executed when an enacting law is passed by reaching the final enactment phase
+#
+# NOTE: at the point in time when this on-action is triggered, the law
+# is still considered being enacted, therefore the `currently_enacting_law` link
+# will work as expected, even though the enactment is _just_ about to end
+on_law_enactment_pass = {
+	effect = {
+		if = {
+			limit = {
+				c:MON ?= this
+				OR = {
+					ROOT.currently_enacting_law.type ?= law_type:law_religious_schools
+					ROOT.currently_enacting_law.type ?= law_type:law_public_schools
+					ROOT.currently_enacting_law.type ?= law_type:law_private_schools
+				}
+			}
+			trigger_event = {
+				id = mon_state_formation.11
+				days = 1
+			}
+		}
+		if = {
+			limit = {
+				is_player = yes
+				NOT = { has_variable = achievement_vox_populi_var }
+				any_political_movement = {
+					law_stance = {
+						law = root.currently_enacting_law.type
+						value > neutral
+					}
+					any_supporting_character = {
+						has_role = agitator
+					}
+				}
+			}
+			set_variable = achievement_vox_populi_var
+		}
+		if = {
+			limit = {
+				is_player = yes
+				NOT = {
+					has_variable = achievement_amish_paradise_var
+				}
+				is_enacting_law = law_type:law_industry_banned
+				year < 1846
+			}
+			set_variable = achievement_amish_paradise_var
+		}
+		if = {
+			limit = {
+				has_journal_entry = je_pedro_republic
+				is_enacting_law = law_type:law_presidential_republic
+			}
+			set_variable = { name = hide_ruler_change_notification days = 3 }
+			ruler = { place_character_in_void = 6 }
+			trigger_event = { id = pedro.10 popup = yes days = 1 }
+		}
+		if = {
+			limit = {
+				has_modifier = brazil_slaving_pariah_modifier
+				has_law_or_variant = law_type:law_slave_trade
+				OR = {
+					is_enacting_law = law_type:law_debt_slavery
+					is_enacting_law = law_type:law_legacy_slavery
+					is_enacting_law = law_type:law_colonial_slavery
+					is_enacting_law = law_type:law_slavery_banned
+				}
+			}
+			remove_modifier = brazil_slaving_pariah_modifier
+		}
+		if = {
+			limit = {
+				OR = {
+					has_modifier = unrestricted_slave_trade_modifier
+					has_modifier = restricted_slave_trade_modifier
+					has_modifier = slave_shipments_intercepted_small
+					has_modifier = slave_shipments_intercepted_large
+				}
+				has_law_or_variant = law_type:law_slave_trade
+				OR = {
+					is_enacting_law = law_type:law_debt_slavery
+					is_enacting_law = law_type:law_legacy_slavery
+					is_enacting_law = law_type:law_colonial_slavery
+				}
+			}
+			if = {
+				limit = {
+					has_modifier = unrestricted_slave_trade_modifier
+				}
+				remove_modifier = unrestricted_slave_trade_modifier
+			}
+			if = {
+				limit = {
+					has_modifier = restricted_slave_trade_modifier
+				}
+				remove_modifier = restricted_slave_trade_modifier
+			}
+			if = {
+				limit = {
+					has_modifier = slave_shipments_intercepted_small
+				}
+				remove_modifier = slave_shipments_intercepted_small
+			}
+			if = {
+				limit = {
+					has_modifier = slave_shipments_intercepted_large
+				}
+				remove_modifier = slave_shipments_intercepted_large
+			}
+			if = {
+				limit = {
+					has_variable = var_slave_trade_suppression_var
+				}
+				remove_variable = var_slave_trade_suppression_var
+			}
+		}
+		if = {
+			limit = {
+				c:CHI ?= {
+					has_modifier = opium_ban_authority
+					is_enacting_law = law_type:law_free_trade
+				}
+			}
+			remove_modifier = opium_ban_authority
+		}
+	}
+}
+
+# Root = owner Country of the Law
+# Executed when enactment fails by accumulating too many setbacks
+#
+# NOTE: at the point in time when this on-action is triggered, the law
+# is still considered being enacted, therefore the `currently_enacting_law` link
+# will work as expected, even though the enactment is _just_ about to end
+on_law_enactment_fail = {
+	effect = {
+		post_notification = enactment_failed
+	}
+}
+
+# Root = owner Country of the Law
+# executed when enactment stops for any reason. Could be because the law has
+# been enacted, or because the enactment has been stopped by the player.
+#
+# NOTE: at the point in time when this on-action is triggered, the law
+# is still considered being enacted, therefore the `currently_enacting_law` link
+# will work as expected, even though the enactment is _just_ about to end
+on_law_enactment_ended = {
+}
+
+# Root owner Country of the Law
+# executed when the law is activated for any reason. It's usually because it
+# has been enacted, but script can activate laws directly without going through
+# the enactment process. Normally, it's immediately preceded by
+# on_law_enactment_ended, but if a law is directly set by script, thus
+# bypassing the enactment process, this will execute while
+# on_law_enactment_ended will not
+#
+# NOTE: unlike the other on_law_<something> on-actions, at the point in time
+# when this is triggered the law that was enacted is no longer considered being
+# enacted. Therefore using the `currently_enacting_law` link will return the
+# null law
+on_law_activated = {
+	effect = {
+		if = {
+			limit = {
+				c:BRZ ?= {
+					has_journal_entry = je_matter_of_slavery
+					OR = {
+						has_modifier = unrestricted_slave_trade_modifier
+						has_modifier = restricted_slave_trade_modifier
+						has_modifier = slave_shipments_intercepted_small
+						has_modifier = slave_shipments_intercepted_large
+					}
+					OR = {
+						has_law_or_variant = law_type:law_debt_slavery
+						has_law_or_variant = law_type:law_legacy_slavery
+						has_law_or_variant = law_type:law_colonial_slavery
+					}
+				}
+			}
+			c:BRZ ?= {
+				if = {
+					limit = {
+						has_modifier = unrestricted_slave_trade_modifier
+					}
+					remove_modifier = unrestricted_slave_trade_modifier
+				}
+				if = {
+					limit = {
+						has_modifier = restricted_slave_trade_modifier
+					}
+					remove_modifier = restricted_slave_trade_modifier
+				}
+				if = {
+					limit = {
+						has_modifier = slave_shipments_intercepted_small
+					}
+					remove_modifier = slave_shipments_intercepted_small
+				}
+				if = {
+					limit = {
+						has_modifier = slave_shipments_intercepted_large
+					}
+					remove_modifier = slave_shipments_intercepted_large
+				}
+				if = {
+					limit = {
+						has_variable = var_slave_trade_suppression_var
+					}
+					remove_variable = var_slave_trade_suppression_var
+				}
+			}
+		}
+		if = {
+			limit = {
+				c:BRZ ?= {
+					has_journal_entry = je_matter_of_slavery
+					OR = {
+						has_law_or_variant = law_type:law_debt_slavery
+						has_law_or_variant = law_type:law_legacy_slavery
+						has_law_or_variant = law_type:law_colonial_slavery
+					}
+					any_interest_group = {
+						has_modifier = restricted_slave_trade_ig_modifier
+					}
+				}
+			}
+			c:BRZ ?= {
+				every_interest_group = {
+					limit = {
+						has_modifier = restricted_slave_trade_ig_modifier
+					}
+					remove_modifier = restricted_slave_trade_ig_modifier
+				}
+			}
+		}
+	}
+}
+
+# Root = Institution
+on_investment_increased = {
+	effect = {
+		post_notification = institution_investment_increased
+	}
+}
+
+# Root = Institution
+on_investment_decreased = {
+	effect = {
+		post_notification = institution_investment_decreased
+	}
+}
+
+# Root = Country
+# scope:target = Uprising country
+on_revolution_start = {
+	effect = {
+		scope:target ?= {
+			if = {
+				limit = {
+					has_law_or_variant = law_type:law_single_party_state
+				}
+				handle_revolutionary_sps = yes
+			}
+		}
+		if = {
+			limit = {
+				has_law_or_variant = law_type:law_monarchy
+				scope:target ?= {
+					NOT = {
+						has_law_or_variant = law_type:law_monarchy
+					}
+				}
+			}
+			set_variable = anti_monarchist_revolution
+		}
+		if = {
+			limit = {
+				has_journal_entry = je_warlord_china
+				NOT = { has_variable = china_warlord_explosion_revolution }
+			}
+			chi_remove_1_fragile_unity = yes
+			set_variable = china_warlord_explosion_revolution
+		}
+		if = {
+			limit = {
+				OR = {
+					has_journal_entry = je_meiji_restoration
+					has_inactive_journal_entry = je_meiji_restoration
+				}
+				scope:target ?= {
+					ig:ig_landowners ?= {
+						is_in_government = yes
+					}
+				}
+			}
+			set_variable = anti_shogunate_civil_war
+		}
+		if = {
+			limit = {
+				has_journal_entry = je_the_paris_commune_france
+			}
+			c:FRA = {
+				trigger_event = { id = paris_commune.4 popup = yes }
+			}
+			random_scope_state = {
+				limit = {
+					state_region = s:STATE_ILE_DE_FRANCE
+				}
+				set_state_owner = c:PRC
+			}
+			c:PRC = {
+				annex = scope:target
+				create_diplomatic_play = {
+					type = dp_revolution
+					target_state = c:FRA.capital
+					annex_as_civil_war = yes
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_dlc_feature = voice_of_the_people_content
+				c:KRA ?= root
+				c:AUS ?= {
+					any_subject_or_below = {
+						c:KRA ?= this
+					}
+				}
+			}
+			c:AUS = {
+				trigger_event = { id = krakow.1 days = 3 popup = yes }
+			}
+		}
+		if = {
+			limit = {
+				has_dlc_feature = voice_of_the_people_content
+				c:FRA ?= ROOT
+			}
+			if = {
+				limit = {
+					scope:target ?= {
+						is_secessionist = no
+						has_law_or_variant = law_type:law_monarchy
+						any_interest_group = {
+							is_in_government = yes
+							is_strongest_ig_in_government = yes
+							leader = {
+								has_ideology = ideology:ideology_orleanist
+							}
+						}
+					}
+				}
+				scope:target ?= {
+					if = {
+						limit = {
+							has_variable = bonapartist_restoration_var
+						}
+						remove_variable = bonapartist_restoration_var
+					}
+					if = {
+						limit = {
+							has_variable = legitimist_restoration_var
+						}
+						remove_variable = legitimist_restoration_var
+					}
+					set_variable = { name = orleanist_restoration_var }
+					if = {
+						limit = {
+							ROOT.ruler = {
+								has_ideology = ideology:ideology_orleanist
+							}
+						}
+						create_character = {
+							template = dynamic_orleanist_ruler_template
+						}
+					}
+					else = {
+						generate_french_monarch = yes
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					scope:target ?= {
+						is_secessionist = no
+						has_law_or_variant = law_type:law_monarchy
+						any_interest_group = {
+							is_in_government = yes
+							is_strongest_ig_in_government = yes
+							leader = {
+								has_ideology = ideology:ideology_legitimist
+							}
+						}
+					}
+				}
+				scope:target ?= {
+					if = {
+						limit = {
+							has_variable = bonapartist_restoration_var
+						}
+						remove_variable = bonapartist_restoration_var
+					}
+					if = {
+						limit = {
+							has_variable = orleanist_restoration_var
+						}
+						remove_variable = orleanist_restoration_var
+					}
+					set_variable = { name = legitimist_restoration_var }
+					if = {
+						limit = {
+							ROOT.ruler = {
+								has_ideology = ideology:ideology_legitimist
+							}
+						}
+						create_character = {
+							template = dynamic_legitimist_ruler_template
+						}
+					}
+					else = {
+						generate_french_monarch = yes
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					scope:target ?= {
+						is_secessionist = no
+						has_law_or_variant = law_type:law_monarchy
+						any_interest_group = {
+							is_in_government = yes
+							is_strongest_ig_in_government = yes
+							leader = {
+								has_ideology = ideology:ideology_bonapartist
+							}
+						}
+					}
+				}
+				scope:target ?= {
+					if = {
+						limit = {
+							has_variable = orleanist_restoration_var
+						}
+						remove_variable = orleanist_restoration_var
+					}
+					if = {
+						limit = {
+							has_variable = legitimist_restoration_var
+						}
+						remove_variable = legitimist_restoration_var
+					}
+					set_variable = { name = bonapartist_restoration_var }
+					if = {
+						limit = {
+							ROOT.ruler = {
+								has_ideology = ideology:ideology_bonapartist
+							}
+						}
+						create_character = {
+							template = dynamic_bonapartist_ruler_template
+						}
+					}
+					else = {
+						generate_french_monarch = yes
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_dlc_feature = ep1_content
+				c:KOR ?= ROOT
+				c:JAP ?= {
+					NOT = {
+						has_law_or_variant = law_type:law_isolationism
+					}
+					has_interest_marker_in_region = region_manchuria
+					has_technology_researched = electric_telegraph
+				}
+				any_country = {
+					OR = {
+						country_has_primary_culture = cu:han
+						country_has_primary_culture = cu:manchu
+					}
+					any_subject_or_below = {
+						c:KOR = this
+					}
+					has_technology_researched = electric_telegraph
+				}
+			}
+			c:JAP = {
+				trigger_event = { id = gg_korea.7 popup = yes }
+			}
+			random_country = {
+				limit = {
+					OR = {
+						country_has_primary_culture = cu:han
+						country_has_primary_culture = cu:manchu
+					}
+					any_subject_or_below = {
+						c:KOR = this
+					}
+				}
+				trigger_event = { id = gg_korea.7 popup = yes }
+			}
+		}
+		### Movement type variable setting
+		ROOT = {
+			random_civil_war = {
+				limit = {
+					is_civil_war_type = revolution
+				}
+				scope:target ?= {
+					set_variable = { name = civil_war_type_var value = prev.political_movement.type }
+				}
+			}
+		}
+		if = { # Script hack for Indian revolutions
+			limit = {
+				c:BIC ?= ROOT
+				ROOT = {
+					any_civil_war = {
+						is_civil_war_type = revolution
+						political_movement ?= {
+							NOR = {
+								is_political_movement_type = movement_religious_majority
+								is_political_movement_type = movement_cultural_majority
+								is_political_movement_type = movement_utilitarian
+								culture ?= {
+									has_discrimination_trait_group = heritage_group_european
+								}
+							}
+						}
+					}
+				}
+			}
+			scope:target ?= {
+				change_tag = BHT
+				remove_primary_culture = cu:british
+				grant_indian_cultures = yes
+				if = {
+					limit = {
+						NOT = {
+							has_law_or_variant = law_type:law_state_atheism
+						}
+					}
+					if = {
+						limit = {
+							religion_percent_country = {
+								target = rel:hindu
+								value >= 0.5
+							}
+						}
+						set_state_religion = rel:hindu
+					}
+					else_if = {
+						limit = {
+							religion_percent_country = {
+								target = rel:sunni
+								value >= 0.5
+							}
+						}
+						set_state_religion = rel:sunni
+					}
+					else = {
+						set_state_religion = rel:hindu
+					}
+				}
+				india_independence_ig_effects = yes
+				if = {
+					limit = {
+						has_modifier = modifier_india_crown_rule
+					}
+					remove_modifier = modifier_india_crown_rule
+				}
+				if = {
+					limit = {
+						has_modifier = modifier_india_company_rule
+					}
+					remove_modifier = modifier_india_company_rule
+				}
+				if = {
+					limit = {
+						has_modifier = modifier_india_company_rule_upgraded
+					}
+					remove_modifier = modifier_india_company_rule_upgraded
+				}
+				if = {
+					limit = {
+						has_modifier = modifier_indian_imperial_police
+					}
+					remove_modifier = modifier_indian_imperial_police
+				}
+				recalculate_pop_ig_support = yes
+				every_scope_character = {
+					limit = {
+						OR = {
+							culture = cu:british
+							culture = cu:scottish
+							culture = cu:irish
+						}
+						is_immortal = no
+					}
+					kill_character = yes
+				}
+			}
+		}
+	}
+}
+
+# Root = Country
+# scope:target = Uprising country
+on_revolution_end = {
+	effect = {
+
+	}
+}
+
+# Root = Country
+# scope:target = Uprising country
+on_secession_start = {
+	effect = {
+		if = {
+			limit = {
+				has_journal_entry = je_warlord_china
+				NOT = { has_variable = china_warlord_explosion_revolution }
+			}
+			chi_remove_1_fragile_unity = yes
+			set_variable = china_warlord_explosion_revolution
+		}
+		if = {
+			limit = {
+				NOT = {
+					exists = c:RSM
+				}
+				scope:target ?= {
+					OR = {
+						country_has_primary_culture = cu:north_italian
+						country_has_primary_culture = cu:south_italian
+					}
+				}
+				ROOT = {
+					NOR = {
+						country_has_primary_culture = cu:north_italian
+						country_has_primary_culture = cu:south_italian
+					}
+				}
+				any_country = {
+					has_journal_entry = je_risorgimento
+				}
+			}
+			root = {
+				trigger_event = { id = italian_unification.7 days = 3 }
+			}
+		}
+		if = {
+			limit = {
+				NOR = {
+			        c:POL ?= this
+			        c:KRA ?= this
+			        AND = {
+			            c:GAL ?= this
+			            ruler = {
+			                culture = cu:polish
+			            }
+			        }
+				}
+				scope:target ?= {
+					OR = {
+			            c:POL ?= this
+			            c:KRA ?= this
+			            AND = {
+			                c:GAL ?= this
+			                ruler = {
+			                    culture = cu:polish
+			                }
+			            }
+			        }
+				}
+				OR = {
+					c:POL ?= {
+						NOT = {
+							this = scope:target
+						}
+					}
+					c:KRA ?= {
+						NOT = {
+							this = scope:target
+						}
+					}
+					c:GAL ?= {
+						NOT = {
+							this = scope:target
+						}
+					}
+				}
+			}
+			scope:target ?= {
+				set_variable = {
+					name = polish_rebel_country_var
+					days = short_modifier_time
+				}
+			}
+			set_variable = {
+				name = polish_rebel_country_enemy_var
+				days = short_modifier_time
+			}
+			every_country = {
+				limit = {
+					OR = {
+						c:POL ?= this
+						c:KRA ?= this
+			            AND = {
+			                c:GAL ?= this
+			                ruler = {
+			                    culture = cu:polish
+			                }
+			            }
+					}
+					NOT = {
+						this = scope:target
+					}
+
+				}
+				trigger_event = { id = poland_events.5 days = 7 popup = yes }
+			}
+		}
+		if = { # Script hack for Indian secessions
+			limit = {
+				c:BIC ?= ROOT
+			}
+			scope:target ?= {
+				remove_primary_culture = cu:british
+				grant_indian_regional_cultures = yes
+				if = {
+					limit = {
+						NOT = {
+							has_law_or_variant = law_type:law_state_atheism
+						}
+					}
+					if = {
+						limit = {
+							religion_percent_country = {
+								target = rel:hindu
+								value >= 0.5
+							}
+						}
+						set_state_religion = rel:hindu
+					}
+					else_if = {
+						limit = {
+							religion_percent_country = {
+								target = rel:sunni
+								value >= 0.5
+							}
+						}
+						set_state_religion = rel:sunni
+					}
+					else = {
+						set_state_religion = rel:hindu
+					}
+				}
+				india_independence_ig_effects = yes
+				if = {
+					limit = {
+						has_modifier = modifier_india_crown_rule
+					}
+					remove_modifier = modifier_india_crown_rule
+				}
+				if = {
+					limit = {
+						has_modifier = modifier_india_company_rule
+					}
+					remove_modifier = modifier_india_company_rule
+				}
+				if = {
+					limit = {
+						has_modifier = modifier_india_company_rule_upgraded
+					}
+					remove_modifier = modifier_india_company_rule_upgraded
+				}
+				if = {
+					limit = {
+						has_modifier = modifier_indian_imperial_police
+					}
+					remove_modifier = modifier_indian_imperial_police
+				}
+				recalculate_pop_ig_support = yes
+				every_scope_character = {
+					limit = {
+						OR = {
+							culture = cu:british
+							culture = cu:scottish
+							culture = cu:irish
+						}
+						is_immortal = no
+					}
+					kill_character = yes
+				}
+			}
+		}
+	}
+}
+
+# Root = Country
+# scope:target = Uprising country
+on_secession_end = {
+	effect = {
+		# successions trigger an infamy raising event the first time. Event triggers ensure event only fires once.
+		scope:target = {
+			save_scope_as = rebel_nation
+			random_primary_culture = {
+				save_scope_as = rebel_culture
+			}
+			capital.state_region = { # Why? Because scope:former_rebel_capital is owned by a dead country at this point.
+				save_scope_as = former_rebel_capital
+			}
+		}
+		trigger_event = {
+			id = bulgaria_events.3
+			days = 1
+			popup = yes
+		}
+		add_to_variable_list = { name = failed_uprisings_culture_list target = scope:rebel_culture years = 20 }
+	}
+}
+
+# Root = Country
+# This action is triggered after `on_revolution_end`
+on_civil_war_won = {
+	effect = {
+		if = {
+			limit = {
+				has_global_variable = achievement_revo_needed
+			}
+			set_global_variable = achievement_revolutionary
+		}
+		if = {
+			limit = {
+				has_journal_entry = je_meiji_restoration
+				has_variable = anti_shogunate_civil_war
+				has_variable = shogunate_var
+			}
+			change_variable = {
+				name = shogunate_var
+				add = 120
+			}
+			remove_variable = anti_shogunate_civil_war
+		}
+		if = {
+			limit = {
+				has_variable = anti_monarchist_revolution
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_law_or_variant = law_type:law_monarchy
+					}
+				}
+				set_variable = {
+					name = abolishing_monarchy_var
+					value = 0
+				}
+				add_journal_entry = { type = je_abolish_monarchy }
+			}
+			remove_variable = anti_monarchist_revolution
+		}
+
+		##### FRENCH MONARCHISTS WHEN A CIVIL WAR IS WON #####
+
+		### Orleanists
+		if = {
+			limit = {
+				c:FRA ?= this
+				has_law_or_variant = law_type:law_monarchy
+				any_interest_group = {
+					is_in_government = yes
+					is_strongest_ig_in_government = yes
+					leader = {
+						has_ideology = ideology:ideology_orleanist
+					}
+				}
+				NOT = { has_variable = one_true_french_dynasty }
+			}
+
+			### Reset AI to support Orleanists. Players can continue to support any dynasty they like ###
+			if = {
+				limit = {
+					is_player = no
+					has_variable = supporting_bonapartist_var
+				}
+				remove_variable = supporting_bonapartist_var
+			}
+			if = {
+				limit = {
+					is_player = no
+					has_variable = supporting_legitimist_var
+				}
+				remove_variable = supporting_legitimist_var
+			}
+			if = {
+				limit = {
+					is_player = no
+					NOT = { has_variable = supporting_orleanist_var }
+				}
+				set_variable = {
+					name = supporting_orleanist_var
+				}
+			}
+			###
+
+			# Generate an Orleanist monarch if somehow there's not an Orleanist in charge and it's either the AI, or the player has set a restoration variable and something's just gotten buggy.
+			# If France is controlled by a player and a dynasty other than the Orleanists has been restored to the throne, nothing in this section applies.
+			if = {
+				limit = {
+					any_scope_character = {
+						is_ruler = yes
+						NOT = { has_variable = orleanist_leader }
+					}
+					OR = {
+						is_player = no
+						AND = {
+							is_player = yes
+							has_variable = orleanist_restoration_var
+						}
+					}
+				}
+				generate_french_monarch = yes
+				if = {
+					limit = {
+						has_variable = bonapartist_restoration_var
+					}
+					remove_variable = bonapartist_restoration_var
+				}
+				if = {
+					limit = {
+						has_variable = legitimist_restoration_var
+					}
+					remove_variable = legitimist_restoration_var
+				}
+				if = {
+					limit = {
+						NOT = { has_variable = orleanist_restoration_var }
+					}
+					set_variable = orleanist_restoration_var
+				}
+			}
+			###
+
+			# If France somehow doesn't have the monarchist JEs, it (re)gains them
+			if = {
+				limit = {
+					NOT = { has_journal_entry = je_divided_monarchists }
+					has_dlc_feature = voice_of_the_people_content
+				}
+				if = {
+					limit = {
+						has_variable = fra_divided_monarchists_freeze
+					}
+					remove_variable = fra_divided_monarchists_freeze
+				}
+				add_journal_entry = {
+					type = je_divided_monarchists
+				}
+			}
+
+			if = {
+				limit = {
+					has_variable = orleanist_restoration_var
+					NOT = { has_journal_entry = je_cement_the_rightful_dynasty }
+					has_dlc_feature = voice_of_the_people_content
+				}
+				add_journal_entry = {
+					type = je_cement_the_rightful_dynasty
+				}
+			}
+		}
+
+		### Bonapartists
+		else_if = {
+			limit = {
+				c:FRA ?= this
+				has_law_or_variant = law_type:law_monarchy
+				any_interest_group = {
+					is_in_government = yes
+					is_strongest_ig_in_government = yes
+					leader = {
+						has_ideology = ideology:ideology_bonapartist
+					}
+				}
+				NOT = { has_variable = one_true_french_dynasty }
+			}
+
+			### Reset AI to support Bonapartists. Players can continue to support any dynasty they like ###
+			if = {
+				limit = {
+					is_player = no
+					has_variable = supporting_orleanist_var
+				}
+				remove_variable = supporting_orleanist_var
+			}
+			if = {
+				limit = {
+					is_player = no
+					has_variable = supporting_legitimist_var
+				}
+				remove_variable = supporting_legitimist_var
+			}
+			if = {
+				limit = {
+					is_player = no
+					NOT = { has_variable = supporting_bonapartist_var }
+				}
+				set_variable = {
+					name = supporting_bonapartist_var
+				}
+			}
+			###
+
+			# Generate a Bonapartist monarch if somehow there's not an Bonapartist in charge and it's either the AI, or the player has set a restoration variable and something's just gotten buggy.
+			# If France is controlled by a player and a dynasty other than the glorious house of Bonaparte has been restored to the throne, nothing in this section applies.
+			if = {
+				limit = {
+					any_scope_character = {
+						is_ruler = yes
+						NOT = { has_variable = bonapartist_leader }
+					}
+					OR = {
+						is_player = no
+						AND = {
+							is_player = yes
+							has_variable = bonapartist_restoration_var
+						}
+					}
+				}
+				generate_french_monarch = yes
+				if = {
+					limit = {
+						has_variable = orleanist_restoration_var
+					}
+					remove_variable = orleanist_restoration_var
+				}
+				if = {
+					limit = {
+						has_variable = legitimist_restoration_var
+					}
+					remove_variable = legitimist_restoration_var
+				}
+				if = {
+					limit = {
+						NOT = { has_variable = bonapartist_restoration_var }
+					}
+					set_variable = bonapartist_restoration_var
+				}
+			}
+			###
+
+			# If France somehow doesn't have the monarchist JEs, it (re)gains them
+			if = {
+				limit = {
+					NOT = { has_journal_entry = je_divided_monarchists }
+					has_dlc_feature = voice_of_the_people_content
+				}
+				if = {
+					limit = {
+						has_variable = fra_divided_monarchists_freeze
+					}
+					remove_variable = fra_divided_monarchists_freeze
+				}
+				add_journal_entry = {
+					type = je_divided_monarchists
+				}
+			}
+
+			if = {
+				limit = {
+					has_variable = bonapartist_restoration_var
+					NOT = { has_journal_entry = je_cement_the_rightful_dynasty }
+					has_dlc_feature = voice_of_the_people_content
+				}
+				add_journal_entry = {
+					type = je_cement_the_rightful_dynasty
+				}
+			}
+		}
+
+		### Legitimists
+		else_if = {
+			limit = {
+				c:FRA ?= this
+				has_law_or_variant = law_type:law_monarchy
+				any_interest_group = {
+					is_in_government = yes
+					is_strongest_ig_in_government = yes
+					leader = {
+						has_ideology = ideology:ideology_legitimist
+					}
+				}
+				NOT = { has_variable = one_true_french_dynasty }
+			}
+
+			### Reset AI to support Legitimists. Players can continue to support any dynasty they like ###
+			if = {
+				limit = {
+					is_player = no
+					has_variable = supporting_bonapartist_var
+				}
+				remove_variable = supporting_bonapartist_var
+			}
+			if = {
+				limit = {
+					is_player = no
+					has_variable = supporting_orleanist_var
+				}
+				remove_variable = supporting_orleanist_var
+			}
+			if = {
+				limit = {
+					is_player = no
+					NOT = { has_variable = supporting_legitimist_var }
+				}
+				set_variable = {
+					name = supporting_legitimist_var
+				}
+			}
+			###
+
+			# Generate a Legitimist monarch if somehow there's not an Legitimist in charge and it's either the AI, or the player has set a restoration variable and something's just gotten buggy.
+			# If France is controlled by a player and a dynasty other than the house of Bourbon has been restored to the throne, nothing in this section applies.
+			if = {
+				limit = {
+					any_scope_character = {
+						is_ruler = yes
+						NOT = { has_variable = legitimist_leader }
+					}
+					OR = {
+						is_player = no
+						AND = {
+							is_player = yes
+							has_variable = legitimist_restoration_var
+						}
+					}
+				}
+				generate_french_monarch = yes
+				if = {
+					limit = {
+						has_variable = orleanist_restoration_var
+					}
+					remove_variable = orleanist_restoration_var
+				}
+				if = {
+					limit = {
+						has_variable = bonapartist_restoration_var
+					}
+					remove_variable = bonapartist_restoration_var
+				}
+				if = {
+					limit = {
+						NOT = { has_variable = legitimist_restoration_var }
+					}
+					set_variable = legitimist_restoration_var
+				}
+			}
+			###
+
+			# If France somehow doesn't have the monarchist JEs, it (re)gains them
+			if = {
+				limit = {
+					NOT = { has_journal_entry = je_divided_monarchists }
+					has_dlc_feature = voice_of_the_people_content
+				}
+				if = {
+					limit = {
+						has_variable = fra_divided_monarchists_freeze
+					}
+					remove_variable = fra_divided_monarchists_freeze
+				}
+				add_journal_entry = {
+					type = je_divided_monarchists
+				}
+			}
+
+			if = {
+				limit = {
+					has_variable = legitimist_restoration_var
+					NOT = { has_journal_entry = je_cement_the_rightful_dynasty }
+					has_dlc_feature = voice_of_the_people_content
+				}
+				add_journal_entry = {
+					type = je_cement_the_rightful_dynasty
+				}
+			}
+		}
+
+		### Garbage collection
+		if = {
+			limit = {
+				has_variable = civil_war_type_var
+			}
+			remove_variable = civil_war_type_var
+		}
+	}
+}
+
+on_revolution_checkpoint_reached = {
+	effect = {
+	}
+	random_events = { #all these now have cooldowns of 50 years, you normally only get around 5-8 per revolution.
+		150 = 0
+		20 = ig_revolutions.1
+		20 = ig_revolutions.2
+		20 = ig_revolutions.3
+		20 = ig_revolutions.4
+		20 = ig_revolutions.5
+		20 = ig_revolutions.6
+		20 = ig_revolutions.7
+		20 = ig_revolutions.8
+		20 = ig_revolutions.9
+		10 = revolution_pulse_events.1
+		10 = revolution_pulse_events.2
+		10 = revolution_pulse_events.3
+		10 = revolution_pulse_events.4
+		10 = revolution_pulse_events.5
+		10 = revolution_pulse_events.6
+		10 = revolution_pulse_events.7
+		10 = revolution_pulse_events.8
+		10 = revolution_pulse_events.9
+		10 = revolution_pulse_events.10
+		10 = revolution_pulse_events.11
+		10 = revolution_pulse_events.12
+		10 = revolution_pulse_events.13
+		50 = revolution_pulse_events.14 #these have tighter conditions
+		50 = revolution_pulse_events.15
+		50 = revolution_pulse_events.16
+		50 = revolution_pulse_events.17
+		50 = revolution_pulse_events.18
+		50 = revolution_pulse_events.19
+		50 = revolution_pulse_events.20
+		10 = revolution_pulse_events.21
+		10 = revolution_pulse_events.22
+		10 = revolution_pulse_events.23
+		10 = revolution_pulse_events.24
+		10 = revolution_pulse_events.25
+		10 = revolution_pulse_events.26
+		10 = revolution_pulse_events.27
+		10 = revolution_pulse_events.28
+		10 = revolution_pulse_events.29
+		10 = revolution_pulse_events.30
+		10 = revolution_pulse_events.31
+		10 = revolution_pulse_events.32
+		10 = revolution_pulse_events.33
+		10 = revolution_pulse_events.34
+		10 = revolution_pulse_events.35
+		10 = revolution_pulse_events.36
+		10 = revolution_pulse_events.37
+		10 = revolution_pulse_events.38
+		10 = revolution_pulse_events.39
+		10 = revolution_pulse_events.40
+		10 = revolution_pulse1_events.1
+		10 = revolution_pulse1_events.2
+		10 = revolution_pulse1_events.3
+		10 = revolution_pulse1_events.4
+		10 = revolution_pulse1_events.5
+		10 = revolution_pulse1_events.6
+		10 = revolution_pulse1_events.7
+		10 = revolution_pulse1_events.8
+		10 = revolution_pulse1_events.9
+		10 = revolution_pulse1_events.10
+		10 = revolution_pulse1_events.11
+		10 = revolution_pulse1_events.12
+		10 = revolution_pulse1_events.15
+		10 = revolution_pulse1_events.16
+		10 = revolution_pulse1_events.17
+		10 = revolution_pulse1_events.18
+		10 = revolution_pulse1_events.19
+		10 = revolution_pulse2_events.1
+		10 = revolution_pulse2_events.2
+		10 = revolution_pulse2_events.3
+		10 = revolution_pulse2_events.4
+		10 = revolution_pulse2_events.5
+		10 = revolution_pulse2_events.7
+		10 = revolution_pulse2_events.9
+		10 = revolution_pulse2_events.10
+	}
+}
+
+on_secession_checkpoint_reached = {
+	effect = {
+	}
+	random_events = {
+		# Secession events and recycled revolution events
+		30 = 0
+		5 = secession_events.1
+		5 = secession_events.2
+		5 = secession_events.3
+		5 = secession_events.4
+		5 = secession_events.5
+		5 = secession_events.6
+		5 = secession_events.7
+		5 = secession_events.8
+		5 = secession_events.9
+		5 = revolution_pulse_events.9
+		5 = revolution_pulse_events.30
+		5 = revolution_pulse1_events.2
+		5 = revolution_pulse1_events.6
+		5 = revolution_pulse1_events.11
+		5 = revolution_pulse1_events.12
+		5 = revolution_pulse1_events.15
+		5 = revolution_pulse1_events.16
+		5 = revolution_pulse1_events.17
+		5 = revolution_pulse1_events.18
+		5 = revolution_pulse1_events.19
+		5 = revolution_pulse2_events.5
+	}
+}
+
+# Root = Political Movement
+on_political_movement_supported_law_cancelled = {
+	effect = {
+		add_modifier = {
+			name = supported_law_cancelled
+			months = 120
+		}
+	}
+}
+
+# Root = Country
+# scope:target = the country the wargoal was enforced against
+# scope:diplomatic_play = the relevant diplomatic play
+# scope:wargoal_impact = the impact of the wargoal enforced
+on_wargoal_enforced = {
+	effect = {
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						has_journal_entry = je_anti_lobby_demand
+						var:anti_lobby_demand_target ?= scope:target
+					}
+					AND = {
+						has_journal_entry = je_pro_lobby_demand
+						var:pro_lobby_demand_target ?= scope:target
+					}
+				}
+			}
+			set_variable = { name = enforced_wargoal_on_enemy days = 90 }
+		}
+		set_variable = {
+            name = recently_won_war
+            days = 1825
+            value = yes
+        }
+
+		### Narrative war-end events
+        if = { # Paris Commune - Commune victory event
+        	limit = {
+        		c:PRC ?= root
+        		NOT = {
+        			exists = c:FRA
+        		}
+        	}
+        	c:PRC = {
+				set_immune_to_revolutions = no
+				change_tag = FRA
+				every_scope_state = {
+					limit = {
+						state_region = {
+							is_homeland = cu:french
+						}
+					}
+					set_state_type = incorporated
+				}
+        	}
+        }
+		if = { # Paris Commune - France victory event
+			limit = {
+				c:FRA ?= root
+				NOT = {
+					exists = c:PRC
+				}
+			}
+			if = {
+				limit = {
+					c:FRA = {
+						is_immune_to_revolutions = yes
+					}
+				}
+				set_immune_to_revolutions = no
+			}
+		}
+        if = { # Ragamuffin War - Piratini victory event
+        	limit = {
+        		owner = {
+	        		c:PNI ?= this
+	        		has_variable = ragamuffin_nation_var
+	        		NOT = { has_variable = won_ragamuffin_war_var }
+					owns_entire_state_region = STATE_RIO_GRANDE_DO_SUL
+					owns_entire_state_region = STATE_SANTA_CATARINA
+				}
+        	}
+        	owner = {
+        		set_variable = won_ragamuffin_war_var
+        		trigger_event = { id = brazilian_minors.1 days = 0 popup = yes }
+        	}
+        }
+        if = { # Ragamuffin War - Brazilian victory over Grao-Para
+        	limit = {
+        		owner = {
+        			game_date < 1850.1.1 # Just in case.
+        			NOT = {
+        				has_variable = cabanagem_defeat_var
+        				exists = c:PRA
+        			}
+	        		c:BRZ ?= this
+					owns_entire_state_region = STATE_PARA
+					any_scope_state = { state_region = s:STATE_AMAZONAS }
+				}
+        	}
+        	owner = {
+        		set_variable = cabanagem_defeat_var
+        		trigger_event = { id = brazilian_minors.2 days = 0 popup = yes }
+        	}
+        }
+        if = { # Ragamuffin War - Brazilian victory over Piratini
+        	limit = {
+        		owner = {
+        			game_date < 1850.1.1 # Just in case.
+        			NOT = {
+        				has_variable = ragamuffin_defeat_var
+        				exists = c:PNI
+        			}
+	        		c:BRZ ?= this
+					owns_entire_state_region = STATE_RIO_GRANDE_DO_SUL
+				}
+        	}
+        	owner = {
+        		set_variable = ragamuffin_defeat_var
+        		trigger_event = { id = brazilian_minors.3 days = 0 popup = yes }
+        	}
+        }
+
+        if = { # recently crushed a secession
+			limit = {
+				scope:diplomatic_play ?= {
+					is_diplomatic_play_type = dp_secession
+				}
+			}
+			ROOT ?= {
+				set_variable = {
+					name = crushed_secession
+					days = 90
+				}
+			}
+		}
+
+		if = { # Ottoman recently crushed a secession
+			limit = {
+				AND = {
+					c:TUR ?= this
+					has_journal_entry = je_great_eastern_crisis
+					scope:diplomatic_play = {
+						is_diplomatic_play_type = dp_secession
+					}
+				}
+			}
+			ROOT ?= {
+				set_variable = {
+					name = ottoman_crushed_secession
+					days = 365
+				}
+			}
+		}
+
+		if = { # Balkan Wars - Ottoman Empire loses
+			limit = {
+				ROOT = {
+					NOT = {
+						has_variable = lost_balkan_wars
+					}
+					scope:target ?= {
+						c:TUR ?= this
+					}
+					scope:diplomatic_play = {
+						is_diplomatic_play_type = dp_balkan_war
+					}
+				}
+			}
+			scope:target ?= {
+				trigger_event = { id = balkan_wars.13 popup = yes }
+				set_variable = {
+					name = lost_balkan_wars
+					days = 30
+				}
+			}
+			scope:diplomatic_play = {
+				if = {
+					limit = {
+						NOT = {
+							any_scope_initiator_ally = {
+								country_rank >= rank_value:great_power
+							}
+						}
+					}
+					every_scope_play_involved = {
+						limit = {
+							has_journal_entry = je_the_balkan_league
+						}
+						set_variable = balkan_league_fought_alone_var
+					}
+				}
+			}
+		}
+
+		if = { # Balkan Wars - BL loses
+			limit = {
+				ROOT = {
+					scope:target ?= {
+						has_journal_entry = je_the_balkan_league
+					}
+					scope:diplomatic_play = {
+						is_diplomatic_play_type = dp_balkan_war
+					}
+				}
+			}
+			scope:target ?= {
+				set_variable = {
+					name = lost_balkan_wars
+					days = 30
+				}
+			}
+		}
+        if = { # Persia - Loss of Herat
+        	limit = {
+        		owner = {
+	        		c:PER ?= this
+					NOT = {
+						any_scope_state = {
+							state_region = s:STATE_HERAT
+						}
+					}
+					has_modifier = modifier_herat_inspiration
+				}
+        	}
+        	owner = {
+        		remove_modifier = modifier_herat_inspiration
+        	}
+        }
+        if = { # India - Capture of the Koh-i-Noor
+        	limit = {
+        		owner = {
+        			NOT = {
+        				has_variable = punjab_captured
+        			}
+	        		c:BIC ?= this
+					is_subject = yes
+					country_or_subject_owns_entire_state_region = STATE_PUNJAB
+				}
+        	}
+        	owner = {
+        		set_variable = punjab_captured
+        		trigger_event = { id = india_events.3 days = 7 popup = yes }
+        	}
+        }
+
+		### Earning Recognition functions
+		if = {
+			limit = {
+				scope:target ?= {
+					has_journal_entry = je_earn_recognition
+				}
+			}
+			scope:target ?= {
+				set_variable = {
+					name = temp_wargoal_impact
+					value = {
+						value = scope:wargoal_impact
+						multiply = -4
+					}
+				}
+				if = {
+					limit = {
+						has_variable = temp_wargoal_impact
+					}
+					je:je_earn_recognition ?= {
+						add_progress = { value = owner.var:temp_wargoal_impact name = earn_recognition_progress_bar }
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_journal_entry = je_earn_recognition
+				}
+				scope:target ?= {
+					OR = {
+						is_country_type = recognized
+						is_country_type = colonial
+					}
+					country_rank >= rank_value:major_power
+				}
+			}
+			owner = {
+				set_variable = {
+					name = temp_wargoal_impact
+					value = {
+						value = scope:wargoal_impact
+						multiply = 4
+					}
+				}
+				if = {
+					limit = {
+						has_variable = temp_wargoal_impact
+					}
+					je:je_earn_recognition ?= {
+						add_progress = { value = owner.var:temp_wargoal_impact name = earn_recognition_progress_bar }
+					}
+				}
+			}
+		}
+
+		if = { # Enforcing Trialist Manifesto
+			limit = {
+				c:AUS ?= owner
+				scope:target ?= {
+					c:HUN ?= this
+					NOT = {
+						has_variable = forced_trialist_manifesto
+					}
+				}
+				scope:diplomatic_play = {
+					is_diplomatic_play_type = dp_enforce_trialist_manifesto
+				}
+			}
+			owner = {
+				trigger_event = { id = austria_trialism.3 days = 1 popup = yes }
+			}
+			scope:target = {
+				set_variable = { name = forced_trialist_manifesto years = 1 }
+			}
+		}
+
+		### Austrian Neo-Absolutism JE
+		if = {
+			limit = {
+				scope:target ?= {
+					has_journal_entry = je_austrian_neo_absolutism
+				}
+			}
+			scope:target ?= {
+				set_variable = {
+					name = temp_wargoal_impact
+					value = {
+						value = scope:wargoal_impact
+						multiply = 4
+					}
+				}
+				if = {
+					limit = {
+						has_variable = temp_wargoal_impact
+					}
+					je:je_austrian_neo_absolutism ?= {
+						add_progress = { value = owner.var:temp_wargoal_impact name = austrian_neo_absolutism_constitutional_pressure_progress_bar }
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_journal_entry = je_austrian_neo_absolutism
+				}
+				scope:target ?= {
+					OR = {
+						is_country_type = recognized
+						is_country_type = colonial
+					}
+					country_rank >= rank_value:great_power
+				}
+			}
+			owner = {
+				set_variable = {
+					name = temp_wargoal_impact
+					value = {
+						value = scope:wargoal_impact
+						multiply = -4
+					}
+				}
+				if = {
+					limit = {
+						has_variable = temp_wargoal_impact
+					}
+					je:je_austrian_neo_absolutism ?= {
+						add_progress = { value = owner.var:temp_wargoal_impact name = austrian_neo_absolutism_constitutional_pressure_progress_bar }
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				owner ?= {
+					has_journal_entry = je_austrian_neo_absolutism
+				}
+				scope:target ?= {
+					c:PRU ?= this
+				}
+			}
+			owner = {
+				set_variable = has_enforced_wargoal_on_prussia_var
+			}
+		}
+		if = {
+			limit = {
+				owner ?= {
+					has_journal_entry = je_austrian_neo_absolutism
+				}
+				scope:target ?= {
+					c:GER ?= this
+				}
+			}
+			owner = {
+				set_variable = has_enforced_wargoal_on_germany_var
+			}
+		}
+	}
+}
+
+# Root = Interest Group
+on_ig_resigned_government = {
+	effect = {
+		post_notification = ig_resigned_government
+		if = {
+			limit = {
+				owner = {
+					has_journal_entry = je_coup
+				}
+			}
+			root = {
+				set_variable = resigned_from_gov_coup
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law_or_variant = law_type:law_single_party_state
+					any_active_party = {
+						any_member = {
+							is_in_government = no
+							is_insurrectionary = yes
+						}
+					}
+				}
+			}
+			owner = {
+				trigger_event = { id = government_collapse.1 popup = yes }
+			}
+		}
+	}
+}
+
+# Root = Culture
+on_new_culture_obsession = {
+	effect = {
+		post_notification = new_culture_obsession
+	}
+}
+
+# Root = Country
+on_rank_changed = {
+	effect = {
+		post_notification = rank_changed_notification
+	}
+}
+
+# Root = Country (that owns a state in the state region)
+# scope:actor = Claimant country
+# scope:region = State Region
+on_claim_added = {
+	effect = {
+		post_notification = claim_added_notification
+	}
+}
+
+# Root = Country (in which the company is established)
+# scope:company = The company that was established
+on_company_established = {
+	effect = {
+	}
+}
+
+# Root = Country (in which the company was disbanded)
+# scope:company = The company that was disbanded
+on_company_disbanded = {
+	effect = {
+	}
+}
+
+# Root = Character
+on_heir_born = {
+	effect = {
+		post_notification = heir_born_notification
+		if = {
+			limit = {
+				owner = {
+					c:FRA ?= this
+				}
+			}
+			if = {
+				limit = {
+					owner.ruler ?= {
+						has_variable = orleanist_leader
+					}
+				}
+				owner = {
+					heir ?= {
+						set_variable = { name = orleanist_leader }
+						set_ideology = ideology:ideology_orleanist
+					}
+				}
+			}
+			if = {
+				limit = {
+					owner.ruler ?= {
+						has_variable = legitimist_leader
+					}
+				}
+				owner = {
+					heir ?= {
+						set_variable = { name = legitimist_leader }
+						set_ideology = ideology:ideology_legitimist
+					}
+				}
+			}
+			if = {
+				limit = {
+					owner.ruler ?= {
+						has_variable = bonapartist_leader
+					}
+				}
+				owner = {
+					heir ?= {
+						set_variable = { name = bonapartist_leader }
+						set_ideology = ideology:ideology_bonapartist
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					c:SER ?= this
+				}
+			}
+			if = {
+				limit = {
+					owner.ruler ?= {
+						has_variable = house_obrenovic
+					}
+				}
+				owner.heir ?= {
+					set_variable = house_obrenovic
+				}
+			}
+			else_if = {
+				limit = {
+					owner.ruler ?= {
+						has_variable = house_karadordevic
+					}
+				}
+				owner.heir ?= {
+					set_variable = house_karadordevic
+				}
+			}
+		}
+	}
+}
+
+# Root = Home Country
+# scope:target = Secession country
+on_secession_country_helped_by_home_country = {
+	effect = {
+		annex = scope:target
+	}
+}
+
+# Root = Home Country
+# scope:target = Secession country
+on_secession_country_not_helped_by_home_country = {
+	effect = {
+		trigger_event = { id = civil_war_events.1 days = 0 }
+	}
+}
+
+# Root = Diplomatic Play
+# scope:actor = War Goal Owner
+on_wargoal_added = {
+	effect = {
+		post_notification = wargoal_added
+	}
+}
+
+# Root = Diplomatic Play
+# scope:actor = War Goal Owner
+on_wargoal_removed = {
+	effect = {
+		post_notification = wargoal_removed
+	}
+}
+
+# Root = Diplomatic Play
+# scope:actor = Initiator country
+# scope:target = Target country
+on_war_end = {
+	effect = {
+		scope:actor = {
+			set_variable = {
+		        name = recently_had_war
+		        days = 1825
+		        value = yes
+		    }
+		    #set_variable = { #Available to use whenever needed
+		    #	name = most_recent_war_opponent
+		    #	value = scope:target
+		    #}
+		}
+		scope:target ?= {
+			set_variable = {
+		        name = recently_had_war
+		        days = 1825
+		        value = yes
+		    }
+		    #set_variable = {
+		    #	name = most_recent_war_opponent
+		    #	value = scope:actor
+		    #}
+		}
+	}
+}
+
+# Root = journal entry
+on_journal_entry_activated = {
+	effect = {
+		post_notification = journal_entry_activated
+	}
+}
+
+# Root = journal entry
+on_journal_entry_deactivated = {
+	effect = {
+		post_notification = journal_entry_deactivated
+	}
+}
+
+# Root = journal entry
+on_journal_entry_completed = {
+	effect = {
+		post_notification = journal_entry_completed
+	}
+}
+
+# Root = journal entry
+on_journal_entry_failed = {
+}
+
+# Root = country
+on_native_uprising = {
+	effect = {
+		post_notification = native_uprising_notification
+	}
+}
+
+# Root = country
+# scope:area = harvest condition area
+# scope:state = affected state with the highest intensity
+# scope:duration = duration of the harvest condition in days
+# scope:num_states = the number of affected states in the country
+# scope:intensity = the highest intensity of the affected states
+on_harvest_condition_started_in_country = {
+	effect = {
+		if = {
+			limit = {
+				scope:intensity > 3
+			}
+			post_notification = harvest_condition_started_in_country_important
+		}
+		else = {
+			post_notification = harvest_condition_started_in_country
+		}
+	}
+}
+
+# Root = state
+on_state_incorporation = {
+	effect = {
+
+	}
+}
+on_state_owner_change = {
+	effect = {
+		evaluate_and_assign_state_hub_dynamic_names = yes # All dynamic naming is handled by this scripted effect
+
+		if = {
+			limit = {
+				owner = {
+					has_variable = bul_pursued_bulgarian_empire
+					c:BUL ?= this
+				}
+				state_region = {
+					NOT = {
+						is_homeland = cu:bulgarian
+					}
+					OR = {
+						this = s:STATE_MACEDONIA
+						this = s:STATE_EASTERN_SERBIA
+						this = s:STATE_EASTERN_THRACE
+					}
+				}
+			}
+			state_region = {
+				add_homeland = cu:bulgarian
+			}
+		}
+	}
+}
+on_state_created = {
+	effect = {
+		evaluate_and_assign_state_hub_dynamic_names = yes # All dynamic naming is handled by this scripted effect
+
+		if = {
+			limit = {
+				owner = {
+					has_variable = bul_pursued_bulgarian_empire
+					c:BUL ?= this
+				}
+				state_region = {
+					NOT = {
+						is_homeland = cu:bulgarian
+					}
+					OR = {
+						this = s:STATE_MACEDONIA
+						this = s:STATE_EASTERN_SERBIA
+						this = s:STATE_EASTERN_THRACE
+					}
+				}
+			}
+			state_region = {
+				add_homeland = cu:bulgarian
+			}
+		}
+	}
+}
+
+# Root = political movement
+on_political_movement_formed = {
+	effect = {
+		owner = {
+			save_scope_as = movement_country
+		}
+		if = {
+			limit = {
+				NOT = { # Movements spawned by agitators should use the default notification
+					any_supporting_character = {
+						exists = this
+					}
+				}
+				any_neighbouring_country_has_same_movement_type_as_root = yes
+			}
+			owner = {
+				random_neighbouring_state = {
+					limit = {
+						owner = {
+							prestige > ROOT.owner.prestige # ROOT.owner.prestige refers to the prestige of the country for whom the movement was just formed
+							any_political_movement = {
+								type = ROOT.type
+							}
+						}
+					}
+					owner = {
+						save_scope_as = movement_spread_country
+					}
+				}
+			}
+			random_list = {
+				1 = {
+					modifier = { # Chance of spreading from another country scales with the power differential
+						value = scope:movement_spread_country.prestige
+						if = {
+							limit = {
+								ROOT.owner.prestige > 0
+							}
+							divide = ROOT.owner.prestige
+						}
+					}
+					post_notification = political_movement_spread_from_country
+				}
+				1 = {
+					post_notification = political_movement_formed
+				}
+			}
+		}
+		else = {
+			post_notification = political_movement_formed
+		}
+	}
+}
+
+# Root = political movement
+on_political_movement_disbanded = {
+	effect = {
+		post_notification = political_movement_disbanded
+	}
+}
+
+# Root = Colony state
+on_colony_created = {
+	effect = {
+		owner = {
+			if = {
+				limit = {
+					has_journal_entry = je_tutorial_colonize_state
+				}
+				root = {
+					set_variable = {
+						name = tut_colony_target
+					}
+				}
+			}
+		}
+	}
+}
+
+# Root = Strategic Region
+# scope:actor = Aggressor country
+# scope:target = Target country
+on_diplomatic_incident = {
+	effect = {
+
+	}
+}
+
+# Root = Objective
+on_sub_objective_completed = {
+}
+
+# Root = Objective
+on_sub_objective_failed = {
+}
+
+# Root = Objective
+on_objective_completed = {
+	effect = {
+		debug_log = "Objective completed"
+	}
+}
+
+# Root = Country
+# scope:target = Party created
+on_party_created = {
+	effect = {
+		debug_log = "[SCOPE.sParty('target').GetNameNoFormatting] Created"
+	}
+}
+
+# Root = Country
+# scope:target = Party disbanded
+on_party_disbanded = {
+	effect = {
+		debug_log = "[SCOPE.sParty('target').GetNameNoFormatting] Disbanded"
+	}
+}
+
+# Root = Country
+on_election_campaign_start = {
+	effect = {
+		debug_log = "Election Campaign Started"
+	}
+}
+
+# Root = Country
+on_election_campaign_end = {
+	effect = {
+		debug_log = "Election Campaign Ended"
+		if = {
+			limit = {
+				c:BRZ ?= this
+			}
+			set_variable = { name = brz_election_done months = 3 }
+		}
+	}
+}
+
+# Root = Country
+on_government_reformed = {
+	effect = {
+		# Government Petition
+		set_variable = gov_petition_coin_toss
+	}
+}
+
+# Root = Country
+on_obligation_owed_by_us_expired = {
+	effect = {
+		post_notification = obligation_owed_by_us_expired
+	}
+}
+
+# Root = Country
+on_obligation_owed_to_us_expired = {
+	effect = {
+		post_notification = obligation_owed_to_us_expired
+	}
+}
+
+# Root = Country
+on_start_supporting_unification = {
+	effect = {
+		post_notification = start_supporting_unification
+	}
+}
+
+# Root = Country
+on_unification_candidate_added = {
+	effect = {
+		post_notification = unification_candidate_added
+	}
+}
+
+# Root = Country
+on_unification_candidate_removed = {
+	effect = {
+		post_notification = unification_candidate_removed
+	}
+}
+
+# Root = Country
+on_stop_supporting_unification = {
+	effect = {
+		post_notification = stop_supporting_unification
+	}
+}
+
+# Root = Country
+# scope:region - the sea region where the raid happened
+on_enemy_convoys_raided = {
+	effect = {
+		post_notification = enemy_convoys_raided
+	}
+}
+
+# Root = Country
+# scope:region - the sea region where the raid happened
+on_our_convoys_raided = {
+	effect = {
+		post_notification = our_convoys_raided
+	}
+}
+
+# Root = Country
+on_repudiate_obligation = {
+	effect = {
+		scope:target_country = {
+			change_relations = { country = root value = -50 }
+			hidden_effect = {
+				random_list = {
+					50 = {
+						if = {
+							limit = {
+								country_rank > root.country_rank
+							}
+							set_secret_goal = {
+								country = root
+								secret_goal = dominate
+							}
+						}
+						else = {
+							set_secret_goal = {
+								country = root
+								secret_goal = antagonize
+							}
+						}
+					}
+					50 = {}
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { this = scope:target_country }
+				root = { owes_obligation_to = prev }
+			}
+			change_relations = { country = root value = -30 }
+			hidden_effect = {
+				random_list = {
+					25 = {
+						if = {
+							limit = {
+								country_rank > root.country_rank
+							}
+							set_secret_goal = {
+								country = root
+								secret_goal = dominate
+							}
+						}
+						else = {
+							set_secret_goal = {
+								country = root
+								secret_goal = antagonize
+							}
+						}
+					}
+					75 = {}
+				}
+			}
+		}
+		hidden_effect = { # Should not stack the modifier
+			if = {
+				limit = { has_modifier = repudiated_obligation }
+				remove_modifier = repudiated_obligation
+			}
+		}
+		add_modifier = {
+			name = repudiated_obligation
+			days = normal_modifier_time
+			is_decaying = yes
+		}
+	}
+}
+
+# Root = Character
+on_character_recruitment = {
+	effect = {
+		owner = {
+			if = {
+				limit = {
+					has_journal_entry = je_tutorial_recruit_promote_commander
+				}
+				je:je_tutorial_recruit_promote_commander = {
+					set_variable = {
+						name = tut_commander_target
+						value = root
+					}
+					set_variable = {
+						name = tut_commander_target_initial_rank
+						value = root.commander_rank
+					}
+				}
+			}
+		}
+	}
+}
+
+# Root = country
+on_become_subject = {
+	effect = {
+		every_scope_state = {
+			evaluate_and_assign_state_hub_dynamic_names = yes # All dynamic naming is handled by this scripted effect
+		}
+	}
+}
+
+# Root = country
+on_become_independent = {
+	effect = {
+		every_scope_state = {
+			evaluate_and_assign_state_hub_dynamic_names = yes # All dynamic naming is handled by this scripted effect
+		}
+		if = {
+			limit = {
+				c:BCE ?= this
+				country_has_primary_culture = cu:british
+			}
+			change_tag = CEY
+			add_primary_culture = cu:sinhala
+			remove_primary_culture = cu:british
+			if = {
+				limit = {
+					NOT = {
+						has_law_or_variant = law_type:law_state_atheism
+					}
+				}
+				set_state_religion = rel:theravada
+				ig:ig_devout ?= {
+					set_interest_group_name = ig_theravada_monks
+					remove_ideology = ideology_moralist
+					add_ideology = ideology_buddhist_moralist
+				}
+			}
+			recalculate_pop_ig_support = yes
+			every_scope_character = {
+				limit = {
+					OR = {
+						culture = cu:british
+						culture = cu:scottish
+						culture = cu:irish
+					}
+					is_immortal = no
+				}
+				kill_character = yes
+			}
+		}
+		if = {
+			limit = {
+				c:BUL ?= this
+			}
+			trigger_event = {
+				id = bulgaria_events.2
+				popup = yes
+				days = 7
+			}
+		}
+	}
+}
+
+# This on-action is triggered in cases where there is no overriding on_impose effect on a law type. In case an on_impose effect exists on the law type, this will NOT be executed.
+# Root = country being imposed upon
+# scope:initiator = country doing the imposition
+# scope:law = law being imposed
+on_impose_law = {
+	effect = {
+		add_modifier = {
+			name = impose_law_cooldown
+			multiplier = 365
+			days = 365
+			is_decaying = yes
+		}
+		scope:law = {
+			save_scope_as = foreign_imposition_law
+		}
+		save_scope_as = country_imposed_upon
+		scope:initiator = {
+			post_notification = imposition_demand_sent
+			save_scope_as = foreign_imposition_country
+		}
+		if = {
+			limit = {
+				c:BIC ?= this
+				is_subject = yes
+				has_dlc_feature = ip2_content
+			}
+			trigger_event = { id = british_dictates.3 days = 0 popup = yes }
+		}
+		else = {
+			trigger_event = { id = law_imposition_events.1 days = 0 popup = yes }
+		}
+	}
+}
+
+# This on-action is triggered every time a Power Bloc's Power Struggle starts.
+# Root = Country that started the Power Struggle (other interesting scopes, such as Power Bloc leader, can be inferred from root)
+on_power_bloc_struggle_started = {
+	effect = {
+		if = {
+			limit = {
+				is_player = yes
+			}
+			set_variable = achievement_im_the_captain_now_challanger_var
+		}
+	}
+}
+
+# This on-action is triggered every time a Power Bloc's Power Struggle concludes (after the changes in leadership have been made).
+# Root = Power Bloc whose leadership position is being fought over
+# scope:successful_contender = country that won the Power Struggle
+# scope:failed_contender = country that lost the Power Struggle
+on_power_bloc_struggle_ended = {
+	effect = {
+		if = {
+			limit = {
+				scope:successful_contender ?= {
+					has_variable = achievement_im_the_captain_now_challanger_var
+					is_player = yes
+					NOT = { has_variable = achievement_im_the_captain_now }
+				}
+			}
+			scope:successful_contender = {
+				set_variable = achievement_im_the_captain_now
+			}
+		}
+		if = {
+			limit = {
+				scope:successful_contender ?= {
+					has_variable = achievement_im_the_captain_now_challanger_var
+				}
+			}
+			scope:successful_contender = {
+				remove_variable = achievement_im_the_captain_now_challanger_var
+			}
+		}
+		if = {
+			limit = {
+				scope:failed_contender ?= {
+					has_variable = achievement_im_the_captain_now_challanger_var
+				}
+			}
+			scope:failed_contender = {
+				remove_variable = achievement_im_the_captain_now_challanger_var
+			}
+		}
+	}
+}
+
+# Root = Military Formation
+# scope:front = front we were going to
+# scope:target = current target travel location - HQ or Province (Sea Node)
+on_travel_to_front_cancelled = {
+	effect = {
+		post_notification = formation_travel_to_front_cancelled
+	}
+}
+
+# Root = Military Formation
+# scope:hq = HQ we were going to
+# scope:target = current target travel location - HQ or Province (Sea Node)
+on_travel_station_in_hq_cancelled = {
+	effect = {
+		post_notification = formation_travel_station_in_hq_cancelled
+	}
+}
+
+# Root = Military Formation
+# scope:province = Sea Node we were going to
+# scope:target = current target travel location - HQ or Province (Sea Node)
+on_travel_deploy_to_sea_node_cancelled  = {
+	effect = {
+		post_notification = formation_travel_deploy_to_sea_node_cancelled
+	}
+}
+
+# Root = Military Formation
+# scope:formation = Formation we were tracking
+# scope:target = current target travel location - HQ or Province (Sea Node)
+on_travel_track_formation_cancelled = {
+	effect = {
+		post_notification = formation_travel_track_formation_cancelled
+	}
+}
+
+# Root = Military Formation
+on_military_formation_created = {
+	effect = {
+		if = {
+			limit = {
+				owner = {
+					has_journal_entry = je_tutorial_create_formation
+				}
+			}
+			owner = {
+				remove_variable = formation_tutorial_ongoing
+			}
+		}
+	}
+}
+
+# Root = Culture
+# scope:region = state region where the awakening started
+# scope:culture = culture that had an awakening
+on_national_awakening_started = {
+	effect = {
+		scope:region = {
+			every_scope_interest_marker = {
+				owner = {
+					post_notification = national_awakening_started
+					if = {
+						limit = {
+							country_can_have_cultural_minority_movement_of_culture = yes
+						}
+						create_political_movement = {
+							type = movement_cultural_minority
+							culture = scope:culture
+						}
+					}
+				}
+			}
+		}
+	}
+}

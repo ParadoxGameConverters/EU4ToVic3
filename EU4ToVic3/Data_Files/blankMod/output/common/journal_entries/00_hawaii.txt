@@ -1,0 +1,127 @@
+﻿je_hawaii = { #JE for Hawaii to stave off annxation
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_historical_content
+
+	is_shown_when_inactive = {
+		c:HAW ?= this
+	}
+
+	possible = {
+		hidden_trigger = {
+			has_variable = death_of_kamehameha
+		}
+	}
+
+	immediate = {
+		trigger_event = hawaii_events.1
+	}
+
+	is_shown_in_lobby = {
+		c:HAW ?= THIS
+	}
+
+
+	complete = {
+		OR = {
+			is_country_type = recognized
+			AND = {
+				GDP >= 1000000
+				navy_size >= 25
+				literacy_rate >= 0.8
+				NOT = { has_law = law_type:law_traditionalism }
+				NOT = { has_law = law_type:law_no_police }
+				NOT = { has_law = law_type:law_land_based_taxation }
+				NOT = { has_law = law_type:law_peasant_levies }
+				NOT = { has_law = law_type:law_no_home_affairs }
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = {
+			id = hawaii_events.2
+		}
+		if = {
+			limit = {
+				NOT = {
+					is_country_type = recognized
+				}
+			}
+			set_country_type = recognized
+		}
+	}
+
+	fail = {
+		is_subject = yes
+	}
+
+	on_fail = {
+		trigger_event = {
+			id = hawaii_events.3
+		}
+	}
+
+	on_timeout = {
+		trigger_event = {
+			id = hawaii_events.3
+		}
+	}
+
+	timeout = very_long_modifier_time
+
+	should_be_pinned_by_default = yes
+}
+
+je_hawaiian_interest = { #JE for GPs so that they can see the situation is ongoing
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	group = je_group_historical_content
+
+	scripted_button = interest_in_hawaii_button
+
+	is_shown_when_inactive = {
+		has_global_variable = gp_hawaii_interest
+		country_rank = rank_value:great_power
+	}
+
+	possible = {
+		has_interest_marker_in_region = region_oceania
+		country_rank = rank_value:great_power
+	}
+
+	is_progressing = {
+		custom_tooltip = {
+			text = influence_hawaii_tt
+			has_modifier = influence_over_hawaii
+		}
+	}
+
+	complete = {
+		OR = {
+			c:HAW ?= {
+				is_subject_of = ROOT
+			}
+			owns_entire_state_region = STATE_HAWAIIAN_ISLANDS
+			custom_tooltip = {
+				text = invalid_influence_hawaii_tt
+				NOT = { has_global_variable = gp_hawaii_interest }
+			}
+		}
+	}
+
+	invalid = {
+		OR = {
+			custom_tooltip = {
+				text = invalid_influence_hawaii_tt
+				NOT = { has_global_variable = gp_hawaii_interest }
+			}
+			c:HAW ?= {
+				is_country_alive = no
+			}
+		}
+	}
+	should_be_pinned_by_default = yes
+
+	timeout = very_long_modifier_time
+}

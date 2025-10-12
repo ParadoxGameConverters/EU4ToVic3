@@ -1,0 +1,201 @@
+﻿je_consolidate_colonial_rule = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	group = je_group_british_india
+
+	is_shown_in_lobby = {
+		c:BIC ?= THIS
+	}
+
+	immediate = {
+		ig:ig_industrialists = {
+			save_scope_as = industrialists_ig
+		}
+	}
+
+	complete = {
+		any_state = {
+			filter = {
+				OR = {
+					state_region = s:STATE_PUNJAB
+					state_region = s:STATE_HILL_PUNJAB
+					state_region = s:STATE_SINDH
+					state_region = s:STATE_PASHTUNISTAN
+					state_region = s:STATE_QUETTA
+					state_region = s:STATE_KASHMIR
+					state_region = s:STATE_BALUCHISTAN
+					state_region = s:STATE_MANDALAY
+					state_region = s:STATE_KACHIN
+					state_region = s:STATE_SHAN_STATES
+					state_region = s:STATE_PEGU
+				}
+			}
+			OR = {
+				owner = ROOT
+				owner = {
+					is_subject_of = ROOT
+				}
+				trigger_if = {
+					limit = {
+						exists = ROOT.top_overlord
+					}
+					OR = {
+						owner = ROOT.top_overlord
+						owner = {
+							is_subject_of = ROOT.top_overlord
+						}
+					}
+				}
+			}
+			percent >= 0.80
+		}
+		scope:journal_entry = {
+			is_goal_complete = yes
+		}
+		highest_secession_progress < 0.5
+	}
+
+	on_complete = {
+		trigger_event = { id = east_indies.1 }
+		set_variable = consolidated_colonial_rule
+	}
+
+    event_outcome_completed_desc = {
+        first_valid = {
+            triggered_desc = {
+                desc = event_effects_east_indies.1_tt
+            }
+        }
+    }
+
+	fail = {
+		OR = {
+			NOT = {
+				exists = c:GBR
+			}
+			trigger_if = {
+				limit = {
+					exists = c:GBR
+				}
+				NOT = {
+					is_subject_of = c:GBR
+				}
+			}
+			is_subject_type = subject_type_colony
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					highest_secession_progress < 0.3
+				}
+				change_variable = {
+					name = east_indies_revolt_var
+					add = 1
+				}
+				clamp_variable = { name = east_indies_revolt_var max = 120 min = 0 }
+			}
+		}
+	}
+
+	invalid = {
+		has_variable = bic_collapse_var
+	}
+
+	current_value = {
+		value = root.var:east_indies_revolt_var
+	}
+
+	goal_add_value = {
+		add = 120
+	}
+
+	should_be_pinned_by_default = yes
+
+	weight = 100
+}
+
+je_reform_indies = {
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	group = je_group_internal_affairs
+
+	is_shown_when_inactive = {
+		AND = {
+			exists = c:DEI
+			c:DEI = THIS
+		}
+	}
+
+	possible = {
+		OR = {
+			has_law_or_variant = law_type:law_free_trade
+			has_law_or_variant = law_type:law_mercantilism
+			NOT = { has_law_or_variant = law_type:law_land_based_taxation }
+			NOT = { has_law_or_variant = law_type:law_serfdom }
+		}
+	}
+
+	complete = {
+		scope:journal_entry = {
+			is_goal_complete = yes
+		}
+		OR = {
+			has_law_or_variant = law_type:law_free_trade
+			has_law_or_variant = law_type:law_mercantilism
+		}
+		NOT = { has_law_or_variant = law_type:law_land_based_taxation }
+		NOT = { has_law_or_variant = law_type:law_serfdom }
+		has_law_or_variant = law_type:law_slavery_banned
+	}
+
+	on_complete = {
+		trigger_event = { id = east_indies.2 }
+		show_as_tooltip = {
+			add_journal_entry = {
+				type = je_ethical_policy
+			}
+		}
+	}
+
+	invalid = {
+		has_variable = bic_collapse_var
+	}
+
+
+	current_value = {
+		value = root.gdp
+	}
+
+	goal_add_value = {
+		value = root.gdp
+		multiply = 0.5
+	}
+
+	progressbar = yes
+
+	weight = 100
+}
+
+je_ethical_policy = {
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	group = je_group_internal_affairs
+
+	complete = {
+		literacy_rate > 0.5
+		root.average_sol > 15
+	}
+
+	on_complete = {
+		trigger_event = { id = east_indies.3 }
+	}
+
+	invalid = {
+		has_variable = bic_collapse_var
+	}
+
+	weight = 100
+}

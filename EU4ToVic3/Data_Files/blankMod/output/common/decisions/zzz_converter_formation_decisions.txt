@@ -1718,7 +1718,7 @@ form_quebec_dec = {
 		value = 1
 		if = {
 			limit = {
-				cu:french = { shares_non_heritage_trait_with_any_primary_culture = ROOT } #Francophone
+				cu:french = { shares_language_trait_with_any_primary_culture = ROOT } #Francophone
 			}
 			add = 99
 		}
@@ -2310,7 +2310,7 @@ form_louisiana_dec = {
 		if = {
 			limit = {
 				OR = {
-					cu:french = { shares_non_heritage_trait_with_any_primary_culture = ROOT } #Francophone
+					cu:french = { shares_language_trait_with_any_primary_culture = ROOT } #Francophone
 					capital = {
 						state_region = s:STATE_LOUISIANA
 					}
