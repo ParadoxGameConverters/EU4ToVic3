@@ -152,7 +152,7 @@ bool mappers::IGIdeologiesMapping::matchCountry(const V3::Country& country,
 		bool match = false;
 		const auto& religion = country.getProcessedData().religion;
 		for (const auto& trait: religionTraits)
-			if (religionMapper.getV3ReligionDefinitions().contains(religion) && religionMapper.getV3ReligionDefinitions().at(religion).traits.contains(trait))
+			if (religionMapper.getV3ReligionDefinitions().contains(religion) && religionMapper.getV3ReligionDefinitions().at(religion).heritage == trait)
 				match = true;
 		if (!match)
 			return false;

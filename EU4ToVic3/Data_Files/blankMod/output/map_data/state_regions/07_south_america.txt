@@ -52,7 +52,7 @@ STATE_GUAYANA = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
     naval_exit_id = 3062
 }
@@ -81,7 +81,7 @@ STATE_ZULIA = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 60
+        undiscovered_amount = 100
     }
     naval_exit_id = 3025
 }
@@ -107,7 +107,7 @@ STATE_MIRANDA = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 60
+        undiscovered_amount = 100
     }
     naval_exit_id = 3025
 }
@@ -135,7 +135,7 @@ STATE_BOLIVAR = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 30
+        undiscovered_amount = 50
     }
     naval_exit_id = 3025
 }
@@ -159,8 +159,12 @@ STATE_ANTIOQUIA = {
         bg_fishing = 8
     }
     resource = {
+        type = "bg_rubber"
+        undiscovered_amount = 8
+    }
+    resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
     naval_exit_id = 3025
 }
@@ -224,6 +228,10 @@ STATE_CAUCA = {
         bg_fishing = 6
         bg_whaling = 2
     }
+    resource = {
+        type = "bg_rubber"
+        undiscovered_amount = 6
+    }
     naval_exit_id = 3155
 }
 
@@ -237,7 +245,7 @@ STATE_PASTAZA = {
     mine = "x6675F2"
     wood = "xF479D2"
     arable_land = 30
-    arable_resources = { "bg_maize_farms" "bg_livestock_ranches" "bg_coffee_plantations" "bg_dye_plantations" "bg_sugar_plantations" }
+    arable_resources = { "bg_maize_farms" "bg_livestock_ranches" "bg_coffee_plantations" "bg_dye_plantations" "bg_sugar_plantations" "bg_banana_plantations" "bg_tobacco_plantations" }
     capped_resources = {
         bg_coal_mining = 28
         bg_logging = 25
@@ -249,7 +257,7 @@ STATE_PASTAZA = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
 }
 
@@ -320,7 +328,7 @@ STATE_SANTA_CRUZ = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 30
+        undiscovered_amount = 50
     }
 }
 
@@ -344,7 +352,7 @@ STATE_LA_PAZ = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 30
+        undiscovered_amount = 50
     }
 }
 
@@ -391,7 +399,7 @@ STATE_CAJAMARCA = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
     naval_exit_id = 3024
 }
@@ -466,14 +474,14 @@ STATE_URUGUAY = {
     id = 370
     subsistence_building = "building_subsistence_farms"
     provinces = { "x02C6DE" "x061EE6" "x08CCA6" "x104529" "x139DC8" "x302DDA" "x3588C8" "x3AF263" "x3D3A57" "x3EA75C" "x3F05CB" "x449F06" "x44A7CD" "x466506" "x46C43D" "x490187" "x4934E2" "x49D0F9" "x4E1442" "x65E74D" "x754BF8" "x7764E0" "x7AADBF" "x8136C4" "x9C6453" "xA282BC" "xA46ED2" "xA7EB2E" "xABC305" "xC2A28B" "xC53004" "xC707C7" "xCB8D8C" "xD45E0C" "xD5325F" "xD8A185" "xD8A44F" "xDD1206" "xE25670" "xE2BE85" "xE2D434" "xE69F06" "xEE9484" "xFEBAD0" }
-    traits = { "state_trait_uruguay_river" "state_trait_pampas" }
+    traits = { "state_trait_uruguay_river" "state_trait_pampas" "state_trait_natural_harbors" }
     city = "x302DDA"
     port = "xA46ED2"
     farm = "xEE9484"
     mine = "x061EE6"
     wood = "xD5325F"
     arable_land = 100
-    arable_resources = { "bg_maize_farms" "bg_livestock_ranches" "bg_coffee_plantations" "bg_tobacco_plantations" "bg_vineyard_plantations" }
+    arable_resources = { "bg_maize_farms" "bg_livestock_ranches" "bg_vineyard_plantations" }
     capped_resources = {
         bg_logging = 9
         bg_fishing = 6
@@ -481,7 +489,7 @@ STATE_URUGUAY = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
     naval_exit_id = 3065
 }
@@ -521,7 +529,7 @@ STATE_ALTO_PARAGUAY = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
 }
 
@@ -542,7 +550,7 @@ STATE_BAJO_PARAGUAY = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
 }
 
@@ -550,7 +558,7 @@ STATE_BUENOS_AIRES = {
     id = 374
     subsistence_building = "building_subsistence_pastures"
     provinces = { "x0078F4" "x01BF3A" "x039D7B" "x04DB73" "x107756" "x186D61" "x1B3858" "x1B3D7D" "x1BC602" "x21A4C8" "x257F09" "x264684" "x273D46" "x2A263C" "x2A2DF9" "x2C2F3C" "x2D3E46" "x2F8EEF" "x318050" "x31C090" "x35D461" "x362CB9" "x365A5B" "x3724A0" "x393FDF" "x3BEB2E" "x438067" "x43859F" "x43966D" "x4BA895" "x4BFE37" "x500F71" "x522FE7" "x593C7C" "x5B6292" "x672B93" "x693145" "x6D6334" "x722D2B" "x76B3DE" "x7E59EB" "x822397" "x85E56B" "x882F94" "x8D241F" "x90F2A4" "x9371C9" "x94B28A" "x996A84" "x9BF036" "x9FC353" "xA1C031" "xA427EB" "xAA6512" "xAB8E24" "xAF5FC7" "xB04111" "xB04190" "xB07F50" "xB0C090" "xB1EAC9" "xB41CB3" "xB42CFD" "xB67755" "xBC83B9" "xBE17B4" "xBE8BB1" "xC8D04B" "xCA746C" "xD254DD" "xD36F75" "xD4A781" "xD51453" "xD60BE9" "xDAC4ED" "xDF0343" "xEBCAEF" "xF00190" "xF10B85" "xF1F9BA" "xF74125" }
-    traits = { "state_trait_pampas" }
+    traits = { "state_trait_pampas" "state_trait_natural_harbors" }
     city = "x365A5B"
     port = "x672B93"
     farm = "x882F94"
@@ -584,7 +592,7 @@ STATE_PATAGONIA = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
     naval_exit_id = 3066
 }
@@ -641,7 +649,7 @@ STATE_SANTA_FE = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
     naval_exit_id = 3065
 }
@@ -662,7 +670,7 @@ STATE_CORRIENTES = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
 }
 
@@ -773,7 +781,7 @@ STATE_ARAUCANIA = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
     naval_exit_id = 3151
 }
@@ -783,6 +791,7 @@ STATE_SOUTH_ATLANTIC_ISLANDS = {
     subsistence_building = "building_subsistence_pastures"
     provinces = { "x0CB556" "x3020D0" "x5E9DB3" "x9EF337" "xB0BDDF" "xB5100C" "xB5760C" }
     impassable = { }
+    center_province = "x3020D0"
     traits = { "state_trait_antarctic_whaling" }
     city = "x3020D0"
     port = "x9EF337"
@@ -822,7 +831,7 @@ STATE_PARA = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
     naval_exit_id = 3062
 }
@@ -871,7 +880,7 @@ STATE_AMAZONAS = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
 }
 
@@ -905,7 +914,7 @@ STATE_GOIAS = {
     mine = "x68CC1F"
     wood = "xF01E32"
     arable_land = 40
-    arable_resources = { "bg_rice_farms" "bg_livestock_ranches" "bg_tobacco_plantations" "bg_sugar_plantations" "bg_banana_plantations" }
+    arable_resources = { "bg_rice_farms" "bg_livestock_ranches" "bg_tobacco_plantations" "bg_sugar_plantations" "bg_banana_plantations" "bg_coffee_plantations" }
     capped_resources = {
         bg_logging = 16
         bg_fishing = 7
@@ -937,7 +946,7 @@ STATE_MATO_GROSSO = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
 }
 
@@ -962,7 +971,7 @@ STATE_RIO_GRANDE_DO_SUL = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
     naval_exit_id = 3064
 }
@@ -1031,7 +1040,7 @@ STATE_SAO_PAULO = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
     naval_exit_id = 3064
 }
@@ -1063,7 +1072,7 @@ STATE_MINAS_GERAIS = {
     }
     resource = {
         type = "bg_oil_extraction"
-        undiscovered_amount = 5
+        undiscovered_amount = 20
     }
 }
 

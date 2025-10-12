@@ -971,8 +971,7 @@ void V3::Country::calculateBaseLiteracy(const mappers::ReligionMapper& religionM
 	if (religionMapper.getV3ReligionDefinitions().contains(processedData.religion))
 	{
 		const auto& religion = religionMapper.getV3ReligionDefinitions().at(processedData.religion);
-		const auto& traits = religion.traits;
-		if (religion.name == "protestant" || traits.contains("eastern"))
+		if (religion.name == "protestant" || religion.heritage == "heritage_group_eastern")
 			literacy += 0.1;
 	}
 

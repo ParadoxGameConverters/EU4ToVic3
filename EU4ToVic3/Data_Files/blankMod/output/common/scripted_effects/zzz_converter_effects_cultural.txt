@@ -2854,16 +2854,16 @@ converter_other_starting_cultural_effects = {
 		limit = {
 			any_country = {
 				country_is_in_europe = yes
-				any_primary_culture = { has_discrimination_trait = heritage_jewish_group }
+				any_primary_culture = { has_discrimination_trait = heritage_ashkenazi }
 			}
 		}
 		random_country = {
 			limit = {
 				country_is_in_north_america = yes
-				any_primary_culture = { has_discrimination_trait = heritage_jewish_group }
+				any_primary_culture = { has_discrimination_trait = heritage_ashkenazi }
 			}
 			random_primary_culture = {
-				limit = { has_discrimination_trait = heritage_jewish_group }
+				limit = { has_discrimination_trait = heritage_ashkenazi }
 				set_global_variable = {
 					name = ashkenazi_culture
 					value = this
@@ -2878,7 +2878,7 @@ converter_other_starting_cultural_effects = {
 				any_scope_state = {
 					state_is_in_europe = yes
 					any_scope_pop = {
-						culture = { has_discrimination_trait = heritage_jewish_group }
+						culture = { has_discrimination_trait = heritage_ashkenazi }
 					}
 				}
 			}
@@ -2889,7 +2889,7 @@ converter_other_starting_cultural_effects = {
 				any_scope_state = {
 					state_is_in_europe = yes
 					any_scope_pop = {
-						culture = { has_discrimination_trait = heritage_jewish_group }
+						culture = { has_discrimination_trait = heritage_ashkenazi }
 					}
 				}
 			}
@@ -2897,12 +2897,12 @@ converter_other_starting_cultural_effects = {
 				limit = {
 					state_is_in_europe = yes
 					any_scope_pop = {
-						culture = { has_discrimination_trait = heritage_jewish_group }
+						culture = { has_discrimination_trait = heritage_ashkenazi }
 					}
 				}
 				random_scope_pop = {
 					limit = {
-						culture = { has_discrimination_trait = heritage_jewish_group }
+						culture = { has_discrimination_trait = heritage_ashkenazi }
 					}
 					culture = {
 						set_global_variable = {
@@ -3117,7 +3117,7 @@ converter_primary_cultures_effect = {
 			limit = {
 				pop_has_primary_culture = no
 				culture = {
-					shares_non_heritage_trait_with_any_primary_culture = prev.owner
+					shares_language_trait_with_any_primary_culture = prev.owner
 					has_homeland = prev.state
 					prev.owner = {
 						culture_percent_country = {
@@ -3201,7 +3201,8 @@ converter_primary_cultures_effect = {
 			limit = {
 				pop_has_primary_culture = no
 				culture = {
-					shares_heritage_and_other_trait_with_any_primary_culture = prev.owner
+					shares_heritage_trait_with_any_primary_culture = prev.owner
+					shares_language_trait_with_any_primary_culture = prev.owner
 					has_homeland = prev.state
 					prev.owner = {
 						culture_percent_country = {

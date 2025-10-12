@@ -395,7 +395,25 @@
 			}
 		}
 	}
-	s:STATE_SILESIA = {
+	s:STATE_LOWER_SILESIA = {
+		region_state:S18 = { #Silesia
+			create_pop = {
+				culture = ashkenazi
+				size = 8000
+			}
+			create_pop = {
+				culture = czech
+				religion = animist
+				size = 2500
+			}
+			create_pop = {
+				culture = polish
+				religion = animist
+				size = 1100000
+			}
+		}
+	}
+	s:STATE_UPPER_SILESIA = {
 		region_state:KRA = { #Krakow
 			create_pop = {
 				culture = ashkenazi
@@ -415,17 +433,17 @@
 		region_state:S18 = { #Silesia
 			create_pop = {
 				culture = ashkenazi
-				size = 16000
+				size = 8000
 			}
 			create_pop = {
 				culture = czech
 				religion = animist
-				size = 5000
+				size = 2500
 			}
 			create_pop = {
 				culture = polish
 				religion = animist
-				size = 2200000
+				size = 1100000
 			}
 		}
 	}
@@ -806,7 +824,7 @@
 			}
 		}
 	}
-	s:STATE_WEST_SLOVAKIA = {
+	s:STATE_SLOVAKIA = {
 		region_state:A15 = { #Avaria
 			create_pop = {
 				culture = avar
@@ -849,10 +867,6 @@
 				religion = animist
 				size = 8000
 			}
-		}
-	}
-	s:STATE_EAST_SLOVAKIA = {
-		region_state:SLV = { #Nitra
 			create_pop = {
 				culture = ashkenazi
 				size = 40400

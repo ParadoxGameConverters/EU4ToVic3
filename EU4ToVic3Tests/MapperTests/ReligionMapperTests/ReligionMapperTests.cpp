@@ -65,7 +65,7 @@ TEST(Mappers_ReligionMapperTests, ReligiousDefsCanBeGenerated)
 	const auto& religion2 = mapper.getV3ReligionDefinitions().at("religion_2");
 	EXPECT_EQ("religion_2", religion2.name);
 	EXPECT_EQ("gfx/interface/icons/religion_icons/religion_2.dds", religion2.texture);
-	EXPECT_THAT(religion2.traits, testing::UnorderedElementsAre("religiontrait_2"));
+	EXPECT_EQ("religiontrait_2", religion2.heritage);
 	EXPECT_EQ(commonItems::Color(std::array{4, 5, 6}), *religion2.color);
 	EXPECT_TRUE(religion2.taboos.empty());
 	EXPECT_TRUE(religion2.locBlock.empty()); // no locs since this is a preset def!
@@ -76,7 +76,7 @@ TEST(Mappers_ReligionMapperTests, ReligiousDefsCanBeGenerated)
 	EXPECT_EQ("converted_dynamic_faith_107", dyn7.name);
 	// link = { vic3 = religion_1 eu4 = shamanism }
 	EXPECT_EQ("gfx/interface/icons/religion_icons/religion_1.dds", dyn7.texture); // from shamanism trappings.
-	EXPECT_THAT(dyn7.traits, testing::UnorderedElementsAre("religiontrait_3"));	// from group
+	EXPECT_EQ("religiontrait_3", dyn7.heritage);												// from group
 	EXPECT_EQ(commonItems::Color(std::array{135, 55, 140}), *dyn7.color);			// from eu4 defs
 	EXPECT_THAT(dyn7.taboos, testing::UnorderedElementsAre("liquor", "wine"));		// from group
 	EXPECT_EQ("The Religion 107", dyn7.locBlock.at("english"));

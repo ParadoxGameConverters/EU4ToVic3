@@ -125,7 +125,7 @@ mappers::ReligionDef mappers::ReligionMapper::generateReligionDefinition(const s
 	// can we match a group?
 	if (const auto& groupMatch = religionGroupMapper.getMappingForEU4ReligionGroup(eu4Religion.group))
 	{
-		religionDef.traits.emplace(groupMatch->getTrait());
+		religionDef.heritage = groupMatch->getHeritage();
 		religionDef.taboos = groupMatch->getTaboos();
 		icon = groupMatch->getIcon();
 	}

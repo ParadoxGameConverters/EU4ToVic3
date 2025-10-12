@@ -1,0 +1,5297 @@
+﻿ig_devout = {
+	color = hsv{ 0.50 0.30 0.67 }
+	texture = "gfx/interface/icons/ig_icons/devout.dds"
+	layer = "revolution_dynamic_devout"
+	index = 1
+
+	ideologies = {
+		ideology_pious
+		ideology_moralist
+		ideology_patriarchal
+	}
+
+	character_ideologies = {
+		ideology_moderate
+		ideology_traditionalist
+		ideology_legitimist
+	}
+
+	enable = {
+		always = yes
+	}
+
+	# Deprecated; use on_enable effect to assign traits instead
+	traits = {
+		ig_trait_be_fruitful_and_multiply
+		ig_trait_divine_right
+		ig_trait_pious_fiction
+	}
+
+	on_enable = {
+		#ig:ig_devout = {		### Converter; commenting out instead of deleting so it's easier to see any future changes
+		#	if = {
+		#		limit = {
+		#			owner = {
+		#				country_has_state_religion = rel:protestant
+		#				NOT = {
+		#					c:BIC ?= this
+		#				}
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_divine_right
+		#		set_ig_trait = ig_trait:ig_trait_work_ethic
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = {
+		#				OR = {
+		#					country_has_state_religion = rel:hindu
+		#					country_has_state_religion = rel:mahayana
+		#					country_has_state_religion = rel:theravada
+		#					country_has_state_religion = rel:confucian
+		#				}
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_divine_right
+		#		set_ig_trait = ig_trait:ig_trait_asceticism
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = {
+		#				country_has_state_religion = rel:sikh
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_rehat
+		#		set_ig_trait = ig_trait:ig_trait_kar_seva
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = {
+		#				country_has_state_religion = rel:gelugpa
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_divine_right
+		#		set_ig_trait = ig_trait:ig_trait_temporal_mandate
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = {
+		#				country_has_state_religion = rel:jewish
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_traditsye
+		#		set_ig_trait = ig_trait:ig_trait_yeshivot
+		#		set_ig_trait = ig_trait:ig_trait_the_best_revenge
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = {
+		#				country_has_state_religion = rel:shinto
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_haibutsu_kishaku
+		#		set_ig_trait = ig_trait:ig_trait_secular_shrine_theory
+		#		set_ig_trait = ig_trait:ig_trait_heavenly_sovereign
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = {
+		#				OR = {
+		#					country_has_state_religion = rel:sunni
+		#					country_has_state_religion = rel:shiite
+		#				}
+		#				NOT = { c:TUR ?= this }
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_sharia
+		#		set_ig_trait = ig_trait:ig_trait_da_wat
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = { c:TUR ?= this }
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_mecelle
+		#		set_ig_trait = ig_trait:ig_trait_da_wat
+		#	}
+		#	else_if = {
+		#		limit = {
+		#			owner = {
+		#				c:BIC ?= this
+		#			}
+		#		}
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_divine_right
+		#		set_ig_trait = ig_trait:ig_trait_asceticism
+		#	}
+		#	else = {
+		#		set_ig_trait = ig_trait:ig_trait_pious_fiction
+		#		set_ig_trait = ig_trait:ig_trait_divine_right
+		#		set_ig_trait = ig_trait:ig_trait_be_fruitful_and_multiply
+		#	}
+		#}
+		#
+		#### Specific
+		#
+		## Buddhist Monks (Japan)
+		#if = {
+		#	limit = {
+		#		country_has_state_religion = rel:mahayana
+		#		country_has_primary_culture = cu:japanese
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_buddhist_monks
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_buddhist_moralist
+		#	}
+		#}
+		## Shinto Monks (Japan)
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:shinto
+		#		country_has_primary_culture = cu:japanese
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_shinto_monks
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_shinto_moralist
+		#	}
+		#}
+		## Christian Missionaries (Hawaii)
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:protestant
+		#		country_has_primary_culture = cu:hawaiian
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_christian_missionaries
+		#		add_ideology = ideology_laissez_faire
+		#	}
+		#}
+		## Anglicans
+		#if = {
+		#	limit = {
+		#		country_has_state_religion = rel:protestant
+		#		OR = {
+		#			country_has_primary_culture = cu:maori
+		#			country_has_primary_culture = cu:australian
+		#			country_has_primary_culture = cu:anglo_canadian
+		#			country_has_primary_culture = cu:british
+		#			country_has_primary_culture = cu:irish
+		#			c:NRU ?= this
+		#		}
+		#		NOT = {
+		#			c:BIC ?= this
+		#		}
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_anglican_church
+		#	}
+		#}
+		## Russian Orthodox Church
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:orthodox
+		#		OR = {
+		#			country_has_primary_culture = cu:russian
+		#			country_has_primary_culture = cu:byelorussian
+		#			country_has_primary_culture = cu:ukrainian
+		#		}
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_orthodox_church
+		#		remove_ideology = ideology_patriarchal
+		#		add_ideology = ideology_russian_patriarch
+		#	}
+		#}
+		## Church of Denmark
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:protestant
+		#		country_has_primary_culture = cu:danish
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_church_of_denmark
+		#	}
+		#}
+		## Church of Norway
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:protestant
+		#		country_has_primary_culture = cu:norwegian
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_church_of_norway
+		#	}
+		#}
+		## Church of Finland
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:protestant
+		#		country_has_primary_culture = cu:finnish
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_church_of_finland
+		#	}
+		#}
+		## Church of Sweden
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:protestant
+		#		country_has_primary_culture = cu:swedish
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_church_of_sweden
+		#	}
+		#}
+		## Confucian Scholars
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:confucian
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_confucian
+		#		remove_ideology = ideology_pious
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_confucian
+		#	}
+		#}
+		## Evangelicals
+		#else_if = {
+		#	limit = {
+		#		country_has_state_religion = rel:protestant
+		#		OR = {
+		#			country_has_primary_culture = cu:yankee
+		#			country_has_primary_culture = cu:dixie
+		#			country_has_primary_culture = cu:afro_american
+		#			country_has_primary_culture = cu:cherokee
+		#		}
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_evangelicals
+		#	}
+		#}
+		## Roman Curia
+		#else_if = {
+		#	limit = {
+		#		c:PAP ?= this
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_roman_curia
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_papal_moralist
+		#	}
+		#}
+		#
+		#
+		#### Generic
+		#
+		## Catholic Church
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:catholic }
+		#	ig:ig_devout = { 
+		#		set_interest_group_name = ig_catholic_church 
+		#	}
+		#}
+		## Evangelical Church
+		#else_if = {
+		#	limit = { 
+		#		country_has_state_religion = rel:protestant 
+		#		NOT = {
+		#			c:BIC ?= this
+		#		}
+		#	}
+		#	ig:ig_devout = { 
+		#		set_interest_group_name = ig_evangelical_church
+		#	}
+		#}
+		## Sunni Ulema
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:sunni }
+		#	ig:ig_devout = { 
+		#		set_interest_group_name = ig_sunni_madrasahs
+		#	}
+		#}
+		## Shi'a Ulema
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:shiite }
+		#	ig:ig_devout = { 
+		#		set_interest_group_name = ig_shia_madrasahs
+		#	}
+		#}
+		## Oriental Orthodox Church
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:oriental_orthodox }
+		#	ig:ig_devout = { 
+		#		set_interest_group_name = ig_oriental_orthodox_church
+		#		remove_ideology = ideology_patriarchal
+		#		add_ideology = ideology_oriental_orthodox_patriarch
+		#	}
+		#}
+		## Orthodox Church
+		#else_if = {
+		#	limit = { 
+		#		country_has_state_religion = rel:orthodox
+		#		NOR = {
+		#			country_has_primary_culture = cu:russian
+		#			country_has_primary_culture = cu:byelorussian
+		#			country_has_primary_culture = cu:ukrainian
+		#		}
+		#	}
+		#	ig:ig_devout = { 
+		#		set_interest_group_name = ig_orthodox_church
+		#		remove_ideology = ideology_patriarchal
+		#		add_ideology = ideology_orthodox_patriarch
+		#	}
+		#}
+		## Hindu Priesthood
+		#else_if = {
+		#	limit = { 
+		#		OR = {
+		#			country_has_state_religion = rel:hindu 
+		#			c:BIC ?= this
+		#		}
+		#	}
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_hindu_priesthood
+		#		if = {
+		#			limit = {
+		#				owner = {
+		#					c:BIC ?= this
+		#				}
+		#			}
+		#			remove_ideology = ideology_moralist
+		#			add_ideology = ideology_hindu_moralist_british_india
+		#		}
+		#		else = {
+		#			remove_ideology = ideology_moralist
+		#			add_ideology = ideology_hindu_moralist
+		#		}
+		#	}
+		#}
+		## Vajrayana Monks
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:gelugpa }
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_vajrayana_monks
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_buddhist_moralist
+		#	}
+		#}
+		## Vajrayana Monks
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:theravada }
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_theravada_monks
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_buddhist_moralist
+		#	}
+		#}
+		## Mahayana Monks
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:mahayana }
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_mahayana_monks
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_buddhist_moralist
+		#	}
+		#}
+		## Sikh Granthis
+		#else_if = {
+		#	limit = { country_has_state_religion = rel:sikh }
+		#	ig:ig_devout = {
+		#		set_interest_group_name = ig_granthis
+		#		remove_ideology = ideology_moralist
+		#		add_ideology = ideology_sikh_moralist
+		#	}
+		#}
+		#
+		#### Corporatism
+		#if = {
+		#	limit = {
+		#		has_technology_researched = corporatism
+		#	}
+		#	ig:ig_devout = {
+		#		remove_ideology = ideology_pious
+		#		add_ideology = ideology_corporatist
+		#	}
+		#}
+	}
+	on_disable = {}
+
+	priority_cultures = { #Country scope
+		#rule = {
+		#	trigger = {
+		#		c:BIC ?= this
+		#		any_primary_culture = { 
+		#			cu:british = this
+		#		}
+		#	}
+		#	cultures = {
+		#		assamese avadhi baluchi bengali bihari gujarati kannada malayalam marathi oriya panjabi pathan rajput sindi tamil telegu hindustani bundeli pahari gondi bageli chhattisgarhi deccani
+		#	}
+		#}
+		### Converter ###
+		##Trade Companies, Native Religion
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:north_german }
+			}
+			cultures = { north_german }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:south_german }
+			}
+			cultures = { south_german }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:ashkenazi }
+			}
+			cultures = { ashkenazi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:dutch }
+			}
+			cultures = { dutch }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:flemish }
+			}
+			cultures = { flemish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:wallonian }
+			}
+			cultures = { wallonian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:boer }
+			}
+			cultures = { boer }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:alemannic }
+			}
+			cultures = { alemannic }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:swedish }
+			}
+			cultures = { swedish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:danish }
+			}
+			cultures = { danish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:norwegian }
+			}
+			cultures = { norwegian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:icelandic }
+			}
+			cultures = { icelandic }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:finnish }
+			}
+			cultures = { finnish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:sami }
+			}
+			cultures = { sami }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:british }
+			}
+			cultures = { british }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:irish }
+			}
+			cultures = { irish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:australian }
+			}
+			cultures = { australian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:north_italian }
+			}
+			cultures = { north_italian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:south_italian }
+			}
+			cultures = { south_italian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:maltese }
+			}
+			cultures = { maltese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:basque }
+			}
+			cultures = { basque }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:spanish }
+			}
+			cultures = { spanish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:catalan }
+			}
+			cultures = { catalan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:portuguese }
+			}
+			cultures = { portuguese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:french }
+			}
+			cultures = { french }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:occitan }
+			}
+			cultures = { occitan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:breton }
+			}
+			cultures = { breton }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:croat }
+			}
+			cultures = { croat }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:serb }
+			}
+			cultures = { serb }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:bulgarian }
+			}
+			cultures = { bulgarian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:albanian }
+			}
+			cultures = { albanian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:slovene }
+			}
+			cultures = { slovene }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:bosniak }
+			}
+			cultures = { bosniak }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:romanian }
+			}
+			cultures = { romanian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:hungarian }
+			}
+			cultures = { hungarian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:polish }
+			}
+			cultures = { polish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:lithuanian }
+			}
+			cultures = { lithuanian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:czech }
+			}
+			cultures = { czech }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:slovak }
+			}
+			cultures = { slovak }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:russian }
+			}
+			cultures = { russian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:byelorussian }
+			}
+			cultures = { byelorussian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:ukrainian }
+			}
+			cultures = { ukrainian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:ugrian }
+			}
+			cultures = { ugrian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:latvian }
+			}
+			cultures = { latvian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:estonian }
+			}
+			cultures = { estonian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:greek }
+			}
+			cultures = { greek }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:georgian }
+			}
+			cultures = { georgian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:armenian }
+			}
+			cultures = { armenian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:sephardic }
+			}
+			cultures = { sephardic }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:turkish }
+			}
+			cultures = { turkish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:azerbaijani }
+			}
+			cultures = { azerbaijani }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:north_caucasian }
+			}
+			cultures = { north_caucasian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:maghrebi }
+			}
+			cultures = { maghrebi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:misri }
+			}
+			cultures = { misri }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:mashriqi }
+			}
+			cultures = { mashriqi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:bedouin }
+			}
+			cultures = { bedouin }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:berber }
+			}
+			cultures = { berber }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:persian }
+			}
+			cultures = { persian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:uzbek }
+			}
+			cultures = { uzbek }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:kazak }
+			}
+			cultures = { kazak }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:kirgiz }
+			}
+			cultures = { kirgiz }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:tajik }
+			}
+			cultures = { tajik }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:uighur }
+			}
+			cultures = { uighur }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:pashtun }
+			}
+			cultures = { pashtun }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:baluchi }
+			}
+			cultures = { baluchi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:hazara }
+			}
+			cultures = { hazara }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:turkmen }
+			}
+			cultures = { turkmen }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:kurdish }
+			}
+			cultures = { kurdish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:tatar }
+			}
+			cultures = { tatar }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:mongol }
+			}
+			cultures = { mongol }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:kalmyk }
+			}
+			cultures = { kalmyk }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:siberian }
+			}
+			cultures = { siberian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:yakut }
+			}
+			cultures = { yakut }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:tibetan }
+			}
+			cultures = { tibetan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:assamese }
+			}
+			cultures = { assamese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:bihari }
+			}
+			cultures = { bihari }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:manipuri }
+			}
+			cultures = { manipuri }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:nepali }
+			}
+			cultures = { nepali }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:oriya }
+			}
+			cultures = { oriya }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:sinhala }
+			}
+			cultures = { sinhala }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:avadhi }
+			}
+			cultures = { avadhi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:panjabi }
+			}
+			cultures = { panjabi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:kashmiri }
+			}
+			cultures = { kashmiri }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:sindi }
+			}
+			cultures = { sindi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:rajput }
+			}
+			cultures = { rajput }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:kannada }
+			}
+			cultures = { kannada }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:malayalam }
+			}
+			cultures = { malayalam }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:telegu }
+			}
+			cultures = { telegu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:vietnamese }
+			}
+			cultures = { vietnamese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:khmer }
+			}
+			cultures = { khmer }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:batak }
+			}
+			cultures = { batak }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:dayak }
+			}
+			cultures = { dayak }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:malagasy }
+			}
+			cultures = { malagasy }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:filipino }
+			}
+			cultures = { filipino }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:moro }
+			}
+			cultures = { moro }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:javan }
+			}
+			cultures = { javan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:moluccan }
+			}
+			cultures = { moluccan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:thai }
+			}
+			cultures = { thai }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:mon }
+			}
+			cultures = { mon }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:khmu }
+			}
+			cultures = { khmu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:lao }
+			}
+			cultures = { lao }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:shan }
+			}
+			cultures = { shan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:burmese }
+			}
+			cultures = { burmese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:kachin }
+			}
+			cultures = { kachin }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:karen }
+			}
+			cultures = { karen }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:japanese }
+			}
+			cultures = { japanese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:manchu }
+			}
+			cultures = { manchu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:han }
+			}
+			cultures = { han }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:korean }
+			}
+			cultures = { korean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:ainu }
+			}
+			cultures = { ainu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:hakka }
+			}
+			cultures = { hakka }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:miao }
+			}
+			cultures = { miao }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:min }
+			}
+			cultures = { min }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:zhuang }
+			}
+			cultures = { zhuang }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:yi }
+			}
+			cultures = { yi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:yue }
+			}
+			cultures = { yue }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:polynesian }
+			}
+			cultures = { polynesian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:hawaiian }
+			}
+			cultures = { hawaiian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:melanesian }
+			}
+			cultures = { melanesian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:micronesian }
+			}
+			cultures = { micronesian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:maori }
+			}
+			cultures = { maori }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:yuanzhumin }
+			}
+			cultures = { yuanzhumin }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:aborigine }
+			}
+			cultures = { aborigine }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:zapotec }
+			}
+			cultures = { zapotec }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:mayan }
+			}
+			cultures = { mayan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:nahua }
+			}
+			cultures = { nahua }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:tarascan }
+			}
+			cultures = { tarascan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:quechua }
+			}
+			cultures = { quechua }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:guarani }
+			}
+			cultures = { guarani }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:aimara }
+			}
+			cultures = { aimara }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:amazonian }
+			}
+			cultures = { amazonian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:patagonian }
+			}
+			cultures = { patagonian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:guajiro }
+			}
+			cultures = { guajiro }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:tupinamba }
+			}
+			cultures = { tupinamba }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:metis }
+			}
+			cultures = { metis }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:dakota }
+			}
+			cultures = { dakota }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:cherokee }
+			}
+			cultures = { cherokee }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:muskogean }
+			}
+			cultures = { muskogean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:pueblo }
+			}
+			cultures = { pueblo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:inuit }
+			}
+			cultures = { inuit }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:cree }
+			}
+			cultures = { cree }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:navajo }
+			}
+			cultures = { navajo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:athabaskan }
+			}
+			cultures = { athabaskan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:salish }
+			}
+			cultures = { salish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:nez_perce }
+			}
+			cultures = { nez_perce }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:siouan }
+			}
+			cultures = { siouan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:comanche }
+			}
+			cultures = { comanche }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:algonquian }
+			}
+			cultures = { algonquian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:iroquoian }
+			}
+			cultures = { iroquoian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:caddoan }
+			}
+			cultures = { caddoan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:paiute }
+			}
+			cultures = { paiute }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:hokan }
+			}
+			cultures = { hokan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:apache }
+			}
+			cultures = { apache }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:oodham }
+			}
+			cultures = { oodham }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:mixtec }
+			}
+			cultures = { mixtec }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:muisca }
+			}
+			cultures = { muisca }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:miskito }
+			}
+			cultures = { miskito }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:cariban }
+			}
+			cultures = { cariban }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:yankee }
+			}
+			cultures = { yankee }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:dixie }
+			}
+			cultures = { dixie }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:mexican }
+			}
+			cultures = { mexican }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:central_american }
+			}
+			cultures = { central_american }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:caribeno }
+			}
+			cultures = { caribeno }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:north_andean }
+			}
+			cultures = { north_andean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:south_andean }
+			}
+			cultures = { south_andean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:platinean }
+			}
+			cultures = { platinean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:brazilian }
+			}
+			cultures = { brazilian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:afro_american }
+			}
+			cultures = { afro_american }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:afro_caribbean }
+			}
+			cultures = { afro_caribbean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:afro_caribeno }
+			}
+			cultures = { afro_caribeno }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:afro_brazilian }
+			}
+			cultures = { afro_brazilian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:afro_antillean }
+			}
+			cultures = { afro_antillean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:akan }
+			}
+			cultures = { akan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:bambara }
+			}
+			cultures = { bambara }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:bassa }
+			}
+			cultures = { bassa }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:dyula }
+			}
+			cultures = { dyula }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:edo }
+			}
+			cultures = { edo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:ewe }
+			}
+			cultures = { ewe }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:fon }
+			}
+			cultures = { fon }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:fulbe }
+			}
+			cultures = { fulbe }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:haratin }
+			}
+			cultures = { haratin }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:hausa }
+			}
+			cultures = { hausa }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:ibibio }
+			}
+			cultures = { ibibio }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:ibo }
+			}
+			cultures = { ibo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:kissi }
+			}
+			cultures = { kissi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:kru }
+			}
+			cultures = { kru }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:mande }
+			}
+			cultures = { mande }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:bidan }
+			}
+			cultures = { bidan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:mossi }
+			}
+			cultures = { mossi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:senufo }
+			}
+			cultures = { senufo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:songhai }
+			}
+			cultures = { songhai }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:tiv }
+			}
+			cultures = { tiv }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:tuareg }
+			}
+			cultures = { tuareg }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:wolof }
+			}
+			cultures = { wolof }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:yoruba }
+			}
+			cultures = { yoruba }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:bakongo }
+			}
+			cultures = { bakongo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:baguirmi }
+			}
+			cultures = { baguirmi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:fang }
+			}
+			cultures = { fang }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:kanuri }
+			}
+			cultures = { kanuri }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:luba }
+			}
+			cultures = { luba }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:lunda }
+			}
+			cultures = { lunda }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:mongo }
+			}
+			cultures = { mongo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:sara }
+			}
+			cultures = { sara }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:teda }
+			}
+			cultures = { teda }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:equatorial_bantu }
+			}
+			cultures = { equatorial_bantu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:fluvian_bantu }
+			}
+			cultures = { fluvian_bantu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:nilotic }
+			}
+			cultures = { nilotic }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:amhara }
+			}
+			cultures = { amhara }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:afar }
+			}
+			cultures = { afar }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:azande }
+			}
+			cultures = { azande }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:baganda }
+			}
+			cultures = { baganda }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:beja }
+			}
+			cultures = { beja }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:dinka }
+			}
+			cultures = { dinka }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:fur }
+			}
+			cultures = { fur }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:kikuyu }
+			}
+			cultures = { kikuyu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:luo }
+			}
+			cultures = { luo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:maasai }
+			}
+			cultures = { maasai }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:nuer }
+			}
+			cultures = { nuer }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:nuba }
+			}
+			cultures = { nuba }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:oromo }
+			}
+			cultures = { oromo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:ruanda }
+			}
+			cultures = { ruanda }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:rundi }
+			}
+			cultures = { rundi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:sidama }
+			}
+			cultures = { sidama }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:somali }
+			}
+			cultures = { somali }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:sudanese }
+			}
+			cultures = { sudanese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:sukuma }
+			}
+			cultures = { sukuma }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:swahili }
+			}
+			cultures = { swahili }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:tigray }
+			}
+			cultures = { tigray }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:unyamwezi }
+			}
+			cultures = { unyamwezi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:lacustrine_bantu }
+			}
+			cultures = { lacustrine_bantu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:chewa }
+			}
+			cultures = { chewa }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:herero }
+			}
+			cultures = { herero }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:khoisan }
+			}
+			cultures = { khoisan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:lomwe }
+			}
+			cultures = { lomwe }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:makua }
+			}
+			cultures = { makua }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:nguni }
+			}
+			cultures = { nguni }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:ovimbundu }
+			}
+			cultures = { ovimbundu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:sena }
+			}
+			cultures = { sena }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:shona }
+			}
+			cultures = { shona }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:sotho }
+			}
+			cultures = { sotho }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:tonga }
+			}
+			cultures = { tonga }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:tswana }
+			}
+			cultures = { tswana }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:xhosa }
+			}
+			cultures = { xhosa }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:yao }
+			}
+			cultures = { yao }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:zulu }
+			}
+			cultures = { zulu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:kavango_bantu }
+			}
+			cultures = { kavango_bantu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:anglo_canadian }
+			}
+			cultures = { anglo_canadian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:franco_canadian }
+			}
+			cultures = { franco_canadian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:sorb }
+			}
+			cultures = { sorb }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:tuvan }
+			}
+			cultures = { tuvan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:corsican }
+			}
+			cultures = { corsican }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:yemenite }
+			}
+			cultures = { yemenite }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:szekely }
+			}
+			cultures = { szekely }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:hindustani }
+			}
+			cultures = { hindustani }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:lushai }
+			}
+			cultures = { lushai }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:bundeli }
+			}
+			cultures = { bundeli }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:pahari }
+			}
+			cultures = { pahari }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:gondi }
+			}
+			cultures = { gondi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:bageli }
+			}
+			cultures = { bageli }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:chhattisgarhi }
+			}
+			cultures = { chhattisgarhi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:naga }
+			}
+			cultures = { naga }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:deccani }
+			}
+			cultures = { deccani }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:gujarati }
+			}
+			cultures = { gujarati }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:tamil }
+			}
+			cultures = { tamil }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:bengali }
+			}
+			cultures = { bengali }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:marathi }
+			}
+			cultures = { marathi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:pathan }
+			}
+			cultures = { pathan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:welsh }
+			}
+			cultures = { welsh }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:scottish }
+			}
+			cultures = { scottish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:galician }
+			}
+			cultures = { galician }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:malay }
+			}
+			cultures = { malay }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:bornean }
+			}
+			cultures = { bornean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:sumatran }
+			}
+			cultures = { sumatran }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:balinese }
+			}
+			cultures = { balinese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:cajun }
+			}
+			cultures = { cajun }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:assyrian }
+			}
+			cultures = { assyrian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:circassian }
+			}
+			cultures = { circassian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:francoprovencal }
+			}
+			cultures = { francoprovencal }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:chechen }
+			}
+			cultures = { chechen }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:karelian }
+			}
+			cultures = { karelian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:bashkir }
+			}
+			cultures = { bashkir }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:buryat }
+			}
+			cultures = { buryat }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:mordvin }
+			}
+			cultures = { mordvin }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:chuvash }
+			}
+			cultures = { chuvash }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:mari }
+			}
+			cultures = { mari }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:udmurt }
+			}
+			cultures = { udmurt }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:mazanderani }
+			}
+			cultures = { mazanderani }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:luri }
+			}
+			cultures = { luri }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:kho }
+			}
+			cultures = { kho }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:alan }
+			}
+			cultures = { alan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:alpine }
+			}
+			cultures = { alpine }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:andalucian }
+			}
+			cultures = { andalucian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:anglo_saxon }
+			}
+			cultures = { anglo_saxon }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:aromanian }
+			}
+			cultures = { aromanian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:belgian }
+			}
+			cultures = { belgian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:carthaginian }
+			}
+			cultures = { carthaginian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:celtiberian }
+			}
+			cultures = { celtiberian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:charruan }
+			}
+			cultures = { charruan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:coptic }
+			}
+			cultures = { coptic }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:dacian }
+			}
+			cultures = { dacian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:frankish }
+			}
+			cultures = { frankish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:gaelic }
+			}
+			cultures = { gaelic }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:gaulish }
+			}
+			cultures = { gaulish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:gondi }
+			}
+			cultures = { gondi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:israeli }
+			}
+			cultures = { israeli }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:je }
+			}
+			cultures = { je }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:kamarupan }
+			}
+			cultures = { kamarupan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:old_lombard }
+			}
+			cultures = { old_lombard }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:macedonian }
+			}
+			cultures = { macedonian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:maranon }
+			}
+			cultures = { maranon }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:matacoan }
+			}
+			cultures = { matacoan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:noric }
+			}
+			cultures = { noric }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:otomanguean }
+			}
+			cultures = { otomanguean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:parsi }
+			}
+			cultures = { parsi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:penutian }
+			}
+			cultures = { penutian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:pruthenian }
+			}
+			cultures = { pruthenian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:sarmatian }
+			}
+			cultures = { sarmatian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:scythian }
+			}
+			cultures = { scythian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:thracian }
+			}
+			cultures = { thracian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_tc_religion_set
+				is_tc_preferred_local_culture = { TARGET = cu:weder_german }
+			}
+			cultures = { weder_german }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_local_culture = { TARGET = cu:sumerian }
+			}
+			cultures = { sumerian }
+		}
+		##Trade Companies, Native Religion
+		##Trade Companies, Colonial Religion
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:north_german }
+			}
+			cultures = { north_german }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:south_german }
+			}
+			cultures = { south_german }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:ashkenazi }
+			}
+			cultures = { ashkenazi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:dutch }
+			}
+			cultures = { dutch }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:flemish }
+			}
+			cultures = { flemish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:wallonian }
+			}
+			cultures = { wallonian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:boer }
+			}
+			cultures = { boer }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:alemannic }
+			}
+			cultures = { alemannic }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:swedish }
+			}
+			cultures = { swedish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:danish }
+			}
+			cultures = { danish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:norwegian }
+			}
+			cultures = { norwegian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:icelandic }
+			}
+			cultures = { icelandic }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:finnish }
+			}
+			cultures = { finnish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:sami }
+			}
+			cultures = { sami }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:british }
+			}
+			cultures = { british }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:irish }
+			}
+			cultures = { irish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:australian }
+			}
+			cultures = { australian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:north_italian }
+			}
+			cultures = { north_italian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:south_italian }
+			}
+			cultures = { south_italian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:maltese }
+			}
+			cultures = { maltese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:basque }
+			}
+			cultures = { basque }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:spanish }
+			}
+			cultures = { spanish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:catalan }
+			}
+			cultures = { catalan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:portuguese }
+			}
+			cultures = { portuguese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:french }
+			}
+			cultures = { french }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:occitan }
+			}
+			cultures = { occitan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:breton }
+			}
+			cultures = { breton }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:croat }
+			}
+			cultures = { croat }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:serb }
+			}
+			cultures = { serb }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:bulgarian }
+			}
+			cultures = { bulgarian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:albanian }
+			}
+			cultures = { albanian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:slovene }
+			}
+			cultures = { slovene }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:bosniak }
+			}
+			cultures = { bosniak }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:romanian }
+			}
+			cultures = { romanian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:hungarian }
+			}
+			cultures = { hungarian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:polish }
+			}
+			cultures = { polish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:lithuanian }
+			}
+			cultures = { lithuanian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:czech }
+			}
+			cultures = { czech }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:slovak }
+			}
+			cultures = { slovak }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:russian }
+			}
+			cultures = { russian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:byelorussian }
+			}
+			cultures = { byelorussian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:ukrainian }
+			}
+			cultures = { ukrainian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:ugrian }
+			}
+			cultures = { ugrian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:latvian }
+			}
+			cultures = { latvian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:estonian }
+			}
+			cultures = { estonian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:greek }
+			}
+			cultures = { greek }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:georgian }
+			}
+			cultures = { georgian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:armenian }
+			}
+			cultures = { armenian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:sephardic }
+			}
+			cultures = { sephardic }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:turkish }
+			}
+			cultures = { turkish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:azerbaijani }
+			}
+			cultures = { azerbaijani }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:north_caucasian }
+			}
+			cultures = { north_caucasian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:maghrebi }
+			}
+			cultures = { maghrebi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:misri }
+			}
+			cultures = { misri }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:mashriqi }
+			}
+			cultures = { mashriqi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:bedouin }
+			}
+			cultures = { bedouin }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:berber }
+			}
+			cultures = { berber }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:persian }
+			}
+			cultures = { persian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:uzbek }
+			}
+			cultures = { uzbek }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:kazak }
+			}
+			cultures = { kazak }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:kirgiz }
+			}
+			cultures = { kirgiz }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:tajik }
+			}
+			cultures = { tajik }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:uighur }
+			}
+			cultures = { uighur }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:pashtun }
+			}
+			cultures = { pashtun }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:baluchi }
+			}
+			cultures = { baluchi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:hazara }
+			}
+			cultures = { hazara }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:turkmen }
+			}
+			cultures = { turkmen }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:kurdish }
+			}
+			cultures = { kurdish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:tatar }
+			}
+			cultures = { tatar }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:mongol }
+			}
+			cultures = { mongol }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:kalmyk }
+			}
+			cultures = { kalmyk }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:siberian }
+			}
+			cultures = { siberian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:yakut }
+			}
+			cultures = { yakut }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:tibetan }
+			}
+			cultures = { tibetan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:assamese }
+			}
+			cultures = { assamese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:bihari }
+			}
+			cultures = { bihari }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:manipuri }
+			}
+			cultures = { manipuri }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:nepali }
+			}
+			cultures = { nepali }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:oriya }
+			}
+			cultures = { oriya }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:sinhala }
+			}
+			cultures = { sinhala }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:avadhi }
+			}
+			cultures = { avadhi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:panjabi }
+			}
+			cultures = { panjabi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:kashmiri }
+			}
+			cultures = { kashmiri }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:sindi }
+			}
+			cultures = { sindi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:rajput }
+			}
+			cultures = { rajput }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:kannada }
+			}
+			cultures = { kannada }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:malayalam }
+			}
+			cultures = { malayalam }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:telegu }
+			}
+			cultures = { telegu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:vietnamese }
+			}
+			cultures = { vietnamese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:khmer }
+			}
+			cultures = { khmer }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:batak }
+			}
+			cultures = { batak }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:dayak }
+			}
+			cultures = { dayak }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:malagasy }
+			}
+			cultures = { malagasy }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:filipino }
+			}
+			cultures = { filipino }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:moro }
+			}
+			cultures = { moro }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:javan }
+			}
+			cultures = { javan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:moluccan }
+			}
+			cultures = { moluccan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:thai }
+			}
+			cultures = { thai }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:mon }
+			}
+			cultures = { mon }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:khmu }
+			}
+			cultures = { khmu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:lao }
+			}
+			cultures = { lao }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:shan }
+			}
+			cultures = { shan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:burmese }
+			}
+			cultures = { burmese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:kachin }
+			}
+			cultures = { kachin }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:karen }
+			}
+			cultures = { karen }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:japanese }
+			}
+			cultures = { japanese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:manchu }
+			}
+			cultures = { manchu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:han }
+			}
+			cultures = { han }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:korean }
+			}
+			cultures = { korean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:ainu }
+			}
+			cultures = { ainu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:hakka }
+			}
+			cultures = { hakka }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:miao }
+			}
+			cultures = { miao }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:min }
+			}
+			cultures = { min }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:zhuang }
+			}
+			cultures = { zhuang }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:yi }
+			}
+			cultures = { yi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:yue }
+			}
+			cultures = { yue }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:polynesian }
+			}
+			cultures = { polynesian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:hawaiian }
+			}
+			cultures = { hawaiian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:melanesian }
+			}
+			cultures = { melanesian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:micronesian }
+			}
+			cultures = { micronesian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:maori }
+			}
+			cultures = { maori }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:yuanzhumin }
+			}
+			cultures = { yuanzhumin }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:aborigine }
+			}
+			cultures = { aborigine }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:zapotec }
+			}
+			cultures = { zapotec }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:mayan }
+			}
+			cultures = { mayan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:nahua }
+			}
+			cultures = { nahua }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:tarascan }
+			}
+			cultures = { tarascan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:quechua }
+			}
+			cultures = { quechua }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:guarani }
+			}
+			cultures = { guarani }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:aimara }
+			}
+			cultures = { aimara }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:amazonian }
+			}
+			cultures = { amazonian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:patagonian }
+			}
+			cultures = { patagonian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:guajiro }
+			}
+			cultures = { guajiro }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:tupinamba }
+			}
+			cultures = { tupinamba }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:metis }
+			}
+			cultures = { metis }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:dakota }
+			}
+			cultures = { dakota }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:cherokee }
+			}
+			cultures = { cherokee }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:muskogean }
+			}
+			cultures = { muskogean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:pueblo }
+			}
+			cultures = { pueblo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:inuit }
+			}
+			cultures = { inuit }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:cree }
+			}
+			cultures = { cree }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:navajo }
+			}
+			cultures = { navajo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:athabaskan }
+			}
+			cultures = { athabaskan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:salish }
+			}
+			cultures = { salish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:nez_perce }
+			}
+			cultures = { nez_perce }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:siouan }
+			}
+			cultures = { siouan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:comanche }
+			}
+			cultures = { comanche }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:algonquian }
+			}
+			cultures = { algonquian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:iroquoian }
+			}
+			cultures = { iroquoian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:caddoan }
+			}
+			cultures = { caddoan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:paiute }
+			}
+			cultures = { paiute }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:hokan }
+			}
+			cultures = { hokan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:apache }
+			}
+			cultures = { apache }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:oodham }
+			}
+			cultures = { oodham }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:mixtec }
+			}
+			cultures = { mixtec }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:muisca }
+			}
+			cultures = { muisca }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:miskito }
+			}
+			cultures = { miskito }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:cariban }
+			}
+			cultures = { cariban }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:yankee }
+			}
+			cultures = { yankee }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:dixie }
+			}
+			cultures = { dixie }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:mexican }
+			}
+			cultures = { mexican }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:central_american }
+			}
+			cultures = { central_american }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:caribeno }
+			}
+			cultures = { caribeno }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:north_andean }
+			}
+			cultures = { north_andean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:south_andean }
+			}
+			cultures = { south_andean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:platinean }
+			}
+			cultures = { platinean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:brazilian }
+			}
+			cultures = { brazilian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:afro_american }
+			}
+			cultures = { afro_american }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:afro_caribbean }
+			}
+			cultures = { afro_caribbean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:afro_caribeno }
+			}
+			cultures = { afro_caribeno }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:afro_brazilian }
+			}
+			cultures = { afro_brazilian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:afro_antillean }
+			}
+			cultures = { afro_antillean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:akan }
+			}
+			cultures = { akan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:bambara }
+			}
+			cultures = { bambara }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:bassa }
+			}
+			cultures = { bassa }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:dyula }
+			}
+			cultures = { dyula }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:edo }
+			}
+			cultures = { edo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:ewe }
+			}
+			cultures = { ewe }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:fon }
+			}
+			cultures = { fon }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:fulbe }
+			}
+			cultures = { fulbe }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:haratin }
+			}
+			cultures = { haratin }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:hausa }
+			}
+			cultures = { hausa }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:ibibio }
+			}
+			cultures = { ibibio }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:ibo }
+			}
+			cultures = { ibo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:kissi }
+			}
+			cultures = { kissi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:kru }
+			}
+			cultures = { kru }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:mande }
+			}
+			cultures = { mande }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:bidan }
+			}
+			cultures = { bidan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:mossi }
+			}
+			cultures = { mossi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:senufo }
+			}
+			cultures = { senufo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:songhai }
+			}
+			cultures = { songhai }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:tiv }
+			}
+			cultures = { tiv }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:tuareg }
+			}
+			cultures = { tuareg }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:wolof }
+			}
+			cultures = { wolof }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:yoruba }
+			}
+			cultures = { yoruba }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:bakongo }
+			}
+			cultures = { bakongo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:baguirmi }
+			}
+			cultures = { baguirmi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:fang }
+			}
+			cultures = { fang }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:kanuri }
+			}
+			cultures = { kanuri }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:luba }
+			}
+			cultures = { luba }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:lunda }
+			}
+			cultures = { lunda }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:mongo }
+			}
+			cultures = { mongo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:sara }
+			}
+			cultures = { sara }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:teda }
+			}
+			cultures = { teda }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:equatorial_bantu }
+			}
+			cultures = { equatorial_bantu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:fluvian_bantu }
+			}
+			cultures = { fluvian_bantu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:nilotic }
+			}
+			cultures = { nilotic }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:amhara }
+			}
+			cultures = { amhara }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:afar }
+			}
+			cultures = { afar }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:azande }
+			}
+			cultures = { azande }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:baganda }
+			}
+			cultures = { baganda }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:beja }
+			}
+			cultures = { beja }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:dinka }
+			}
+			cultures = { dinka }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:fur }
+			}
+			cultures = { fur }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:kikuyu }
+			}
+			cultures = { kikuyu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:luo }
+			}
+			cultures = { luo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:maasai }
+			}
+			cultures = { maasai }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:nuer }
+			}
+			cultures = { nuer }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:nuba }
+			}
+			cultures = { nuba }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:oromo }
+			}
+			cultures = { oromo }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:ruanda }
+			}
+			cultures = { ruanda }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:rundi }
+			}
+			cultures = { rundi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:sidama }
+			}
+			cultures = { sidama }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:somali }
+			}
+			cultures = { somali }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:sudanese }
+			}
+			cultures = { sudanese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:sukuma }
+			}
+			cultures = { sukuma }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:swahili }
+			}
+			cultures = { swahili }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:tigray }
+			}
+			cultures = { tigray }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:unyamwezi }
+			}
+			cultures = { unyamwezi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:lacustrine_bantu }
+			}
+			cultures = { lacustrine_bantu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:chewa }
+			}
+			cultures = { chewa }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:herero }
+			}
+			cultures = { herero }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:khoisan }
+			}
+			cultures = { khoisan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:lomwe }
+			}
+			cultures = { lomwe }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:makua }
+			}
+			cultures = { makua }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:nguni }
+			}
+			cultures = { nguni }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:ovimbundu }
+			}
+			cultures = { ovimbundu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:sena }
+			}
+			cultures = { sena }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:shona }
+			}
+			cultures = { shona }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:sotho }
+			}
+			cultures = { sotho }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:tonga }
+			}
+			cultures = { tonga }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:tswana }
+			}
+			cultures = { tswana }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:xhosa }
+			}
+			cultures = { xhosa }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:yao }
+			}
+			cultures = { yao }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:zulu }
+			}
+			cultures = { zulu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:kavango_bantu }
+			}
+			cultures = { kavango_bantu }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:anglo_canadian }
+			}
+			cultures = { anglo_canadian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:franco_canadian }
+			}
+			cultures = { franco_canadian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:sorb }
+			}
+			cultures = { sorb }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:tuvan }
+			}
+			cultures = { tuvan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:corsican }
+			}
+			cultures = { corsican }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:yemenite }
+			}
+			cultures = { yemenite }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:szekely }
+			}
+			cultures = { szekely }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:hindustani }
+			}
+			cultures = { hindustani }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:lushai }
+			}
+			cultures = { lushai }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:bundeli }
+			}
+			cultures = { bundeli }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:pahari }
+			}
+			cultures = { pahari }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:gondi }
+			}
+			cultures = { gondi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:bageli }
+			}
+			cultures = { bageli }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:chhattisgarhi }
+			}
+			cultures = { chhattisgarhi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:naga }
+			}
+			cultures = { naga }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:deccani }
+			}
+			cultures = { deccani }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:gujarati }
+			}
+			cultures = { gujarati }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:tamil }
+			}
+			cultures = { tamil }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:bengali }
+			}
+			cultures = { bengali }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:marathi }
+			}
+			cultures = { marathi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:pathan }
+			}
+			cultures = { pathan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:welsh }
+			}
+			cultures = { welsh }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:scottish }
+			}
+			cultures = { scottish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:galician }
+			}
+			cultures = { galician }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:malay }
+			}
+			cultures = { malay }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:bornean }
+			}
+			cultures = { bornean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:sumatran }
+			}
+			cultures = { sumatran }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:balinese }
+			}
+			cultures = { balinese }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:cajun }
+			}
+			cultures = { cajun }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:assyrian }
+			}
+			cultures = { assyrian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:circassian }
+			}
+			cultures = { circassian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:francoprovencal }
+			}
+			cultures = { francoprovencal }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:chechen }
+			}
+			cultures = { chechen }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:karelian }
+			}
+			cultures = { karelian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:bashkir }
+			}
+			cultures = { bashkir }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:buryat }
+			}
+			cultures = { buryat }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:mordvin }
+			}
+			cultures = { mordvin }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:chuvash }
+			}
+			cultures = { chuvash }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:mari }
+			}
+			cultures = { mari }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:udmurt }
+			}
+			cultures = { udmurt }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:mazanderani }
+			}
+			cultures = { mazanderani }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:luri }
+			}
+			cultures = { luri }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:kho }
+			}
+			cultures = { kho }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:alan }
+			}
+			cultures = { alan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:alpine }
+			}
+			cultures = { alpine }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:andalucian }
+			}
+			cultures = { andalucian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:anglo_saxon }
+			}
+			cultures = { anglo_saxon }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:aromanian }
+			}
+			cultures = { aromanian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:belgian }
+			}
+			cultures = { belgian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:carthaginian }
+			}
+			cultures = { carthaginian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:celtiberian }
+			}
+			cultures = { celtiberian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:charruan }
+			}
+			cultures = { charruan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:coptic }
+			}
+			cultures = { coptic }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:dacian }
+			}
+			cultures = { dacian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:frankish }
+			}
+			cultures = { frankish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:gaelic }
+			}
+			cultures = { gaelic }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:gaulish }
+			}
+			cultures = { gaulish }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:gondi }
+			}
+			cultures = { gondi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:israeli }
+			}
+			cultures = { israeli }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:je }
+			}
+			cultures = { je }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:kamarupan }
+			}
+			cultures = { kamarupan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:old_lombard }
+			}
+			cultures = { old_lombard }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:macedonian }
+			}
+			cultures = { macedonian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:maranon }
+			}
+			cultures = { maranon }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:matacoan }
+			}
+			cultures = { matacoan }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:noric }
+			}
+			cultures = { noric }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:otomanguean }
+			}
+			cultures = { otomanguean }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:parsi }
+			}
+			cultures = { parsi }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:penutian }
+			}
+			cultures = { penutian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:pruthenian }
+			}
+			cultures = { pruthenian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:sarmatian }
+			}
+			cultures = { sarmatian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:scythian }
+			}
+			cultures = { scythian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:thracian }
+			}
+			cultures = { thracian }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:weder_german }
+			}
+			cultures = { weder_german }
+		}
+		rule = {
+			trigger = {
+				has_variable = zzz_converter_no_tc_religion
+				is_tc_preferred_overlord_culture = { TARGET = cu:sumerian }
+			}
+			cultures = { sumerian }
+		}
+		##Trade Companies, Colonial Religion
+		### Converter ###
+	}
+
+	on_character_ig_membership = {
+		if = {
+			limit = {
+				owner = {		### Converter ###
+					has_variable = zzz_converter_tc_religion_set
+					is_old_world_trading_company = yes
+				}
+			}
+			change_character_religion = scope:interest_group.owner.var:tc_majority_religion
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					owner = {
+						has_law = law_type:law_state_atheism
+					}
+				}
+			}
+			change_character_religion = scope:interest_group.owner.religion
+		}
+		else = {
+			change_character_religion = scope:interest_group.owner.country_definition.religion
+		}
+	}
+
+
+	pop_potential = {
+		OR = {
+			has_state_religion = yes
+			### Converter ###
+			custom_tooltip = {		##Trade Companies
+				text = has_tc_majority_religion_tt
+				AND = {
+					owner = {
+						has_variable = zzz_converter_tc_religion_set
+						is_old_world_trading_company = yes
+					}
+					this = {
+						religion = { prev.owner.var:tc_majority_religion ?= this }
+					}
+				}
+			}
+			custom_tooltip = {		##State Atheism
+				text = has_ancien_regime_religion_tt
+				AND = {
+					owner = {
+						has_law = law_type:law_state_atheism
+						is_old_world_trading_company = no
+					}
+					this = {
+						religion = { prev.owner.var:ancien_regime_religion ?= this }
+					}
+				}
+			}
+			### Converter ###
+		}
+		NOT = {
+			has_pop_religion = atheist
+		}
+	}
+
+	pop_weight = {
+		add = {
+			desc = "POP_BASE_ATTRACTION"
+			value = 25
+		}
+
+		add = {
+			desc = "POP_CLERGYMEN"
+			if = {
+				limit = {
+					is_pop_type = clergymen
+				}
+				value = 250
+			}
+		}
+
+		add = {
+			desc = "POP_PEASANTS"
+			if = {
+				limit = {
+					is_pop_type = peasants
+				}
+				value = 100
+			}
+		}
+
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_state_atheism
+				}
+			}
+			multiply = {
+				desc = "STATE_ATHEISM_LAW"
+				value = 0.1
+			}
+		}
+
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_state_religion
+				}
+			}
+			multiply = {
+				desc = "STATE_RELIGION_LAW"
+				value = 1.5
+			}
+		}
+
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_freedom_of_conscience
+				}
+			}
+			multiply = {
+				desc = "FREEDOM_OF_CONSCIENCE_LAW"
+				value = 1.25
+			}
+		}
+
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_religious_schools
+				}
+			}
+			multiply = {
+				desc = "RELIGIOUS_SCHOOLS_LAW"
+				value = owner.institution:institution_schools.investment
+				divide = 5
+				add = 1
+			}
+		}
+
+		if = {
+			limit = {
+				owner = {
+					has_technology_researched = corporatism
+					NOT = {
+						has_law = law_type:law_total_separation
+						has_law = law_type:law_state_atheism
+					}
+				}
+			}
+			multiply = {
+				desc = "CORPORATISM_TECH"
+				value = 1.25
+			}
+		}
+
+		add = {
+			desc = "POP_LITERACY"
+			this = {
+				value = literacy_rate
+				multiply = -20
+			}
+		}
+
+		multiply = {
+			desc = "LEADER_POPULARITY"
+			scope:interest_group = {
+				leader ?= {
+					value = popularity
+					multiply = 0.0025
+					add = 1
+					max = 1.25
+					min = 0.75
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = {
+				desc = "IN_GOVERNMENT_ATTRACTION"
+				value = 1
+				add = scope:interest_group.modifier:interest_group_in_government_attraction_mult
+				min = 0
+			}
+		}
+
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = yes
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_LOYALISTS"
+				value = pop_loyalist_fraction
+				divide = 4
+				add = 1
+			}
+		}
+		if = {
+			limit = {
+				scope:interest_group = {
+					is_in_government = no
+				}
+			}
+			multiply = { # Multiplied by 1.25x max
+				desc = "POP_RADICALS"
+				value = pop_radical_fraction
+				divide = 4
+				add = 1
+			}
+		}
+	}
+
+	monarch_weight = {
+		value = 1.0
+		# Monarch is not likely to adopt a marginal IG
+		if = {
+			limit = {
+				is_marginal = yes
+			}
+			multiply = {
+				value = 0.1
+			}
+		}
+		# Monarch is more likely to adopt a Powerful IG
+		if = {
+			limit = {
+				is_powerful = yes
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		# More likely with State Religion
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_state_religion
+				}
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		# Less likely without State Religion
+		if = {
+			limit = {
+				owner = {
+					NOT = { has_law = law_type:law_state_religion }
+				}
+			}
+			multiply = {
+				value = 0.25
+			}
+		}
+		# Basically impossible with State Atheism
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_state_atheism
+				}
+			}
+			multiply = {
+				value = 0
+			}
+		}
+		# Muslims and Theravada more likely to adopt Devout
+		if = {
+			limit = {
+				OR = {
+					owner.religion = { has_discrimination_trait = heritage_islamic }		### Converter ###
+					owner.religion = rel:theravada
+				}
+			}
+			multiply = 2
+		}
+	}
+
+	agitator_weight = {
+		# Agitators more likely to come from populist IG's rather than elitist
+		value = 0.5
+		# Agitators will never be part of a marginalized IG
+		if = {
+			limit = {
+				owner.ig:ig_devout = {
+					is_marginal = yes
+				}
+			}
+			multiply = {
+				value = 0
+			}
+		}
+	}
+
+	commander_weight = {
+		value = 1.0
+	}
+
+	executive_weight = {
+		value = 1.0
+
+		# The company owning BIC should not get non-industrialist executives
+		if = {
+			limit = {
+				exists = scope:company
+				exists = c:BIC
+				c:BIC = {
+					exists = owning_company
+					owning_company = scope:company
+				}
+			}
+			multiply = {
+				value = 0
+			}
+		}
+	}
+
+	noble_chance = {
+		value = 0.5
+	}
+
+	female_commander_chance = {
+		### Converter ###
+		value = ig_female_general_chance
+	}
+
+	female_executive_chance = {
+		### Converter ###
+		value = ig_female_general_chance
+	}
+
+	female_politician_chance = {
+		### Converter ###
+		value = ig_female_politician_chance_conversative
+	}
+
+	female_agitator_chance = {
+		### Converter ###
+		value = ig_female_agitator_chance_conversative
+	}
+
+	# The chance that a commander belonging to this IG takes over leadership when it changes
+	# scope:character is the most popular commander in the IG
+	commander_leader_chance = {
+		value = 0.25
+		multiply = ig_commander_leader_chance_mult
+	}
+
+	# The chance that a executive belonging to this IG takes over leadership when it changes
+	# scope:character is the most popular executive in the IG
+	executive_leader_chance = {
+		value = 0.25
+	}
+}

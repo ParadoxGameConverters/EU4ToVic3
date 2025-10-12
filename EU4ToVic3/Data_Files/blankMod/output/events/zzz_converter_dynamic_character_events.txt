@@ -31,13 +31,13 @@ zzz_cc_dynamic_characters.1 = {
 				every_subject_or_below = {
 					limit = {
 						any_primary_culture = {
-							shares_non_heritage_trait_with_any_primary_culture = root.overlord
+							shares_language_trait_with_any_primary_culture = root.overlord
 							NOT = { is_target_in_global_variable_list = { name = global_utilitarian_cultures target = this } }
 						}
 					}
 					every_primary_culture = {
 						limit = {
-							shares_non_heritage_trait_with_any_primary_culture = root.overlord
+							shares_language_trait_with_any_primary_culture = root.overlord
 							NOT = { is_target_in_global_variable_list = { name = global_utilitarian_cultures target = this } }
 						}
 						add_to_global_variable_list = {
@@ -59,7 +59,7 @@ zzz_cc_dynamic_characters.1 = {
 						var:ancien_regime_religion ?= rel:catholic
 					}
 					any_primary_culture = {
-						shares_non_heritage_trait_with_any_primary_culture = root
+						shares_language_trait_with_any_primary_culture = root
 						NOT = { is_target_in_global_variable_list = { name = global_integralist_cultures target = this } }
 					}
 					country_is_in_north_america = no

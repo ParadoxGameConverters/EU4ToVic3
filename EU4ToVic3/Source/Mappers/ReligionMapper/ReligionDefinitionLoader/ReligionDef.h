@@ -9,7 +9,7 @@ struct ReligionDef
 {
 	std::string name;
 	std::string texture;
-	std::set<std::string> traits;
+	std::string heritage;
 	std::optional<commonItems::Color> color;
 	std::set<std::string> taboos;
 
