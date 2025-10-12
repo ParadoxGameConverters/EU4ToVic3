@@ -11,8 +11,11 @@ mappers::SlaveCultureMapping::SlaveCultureMapping(std::istream& theStream)
 
 void mappers::SlaveCultureMapping::registerKeys()
 {
-	registerKeyword("master", [this](std::istream& theStream) {
-		masterTrait = commonItems::getString(theStream);
+	registerKeyword("masterHeritage", [this](std::istream& theStream) {
+		masterHeritage = commonItems::getString(theStream);
+	});
+	registerKeyword("masterLanguage", [this](std::istream& theStream) {
+		masterLanguage = commonItems::getString(theStream);
 	});
 	registerKeyword("slave", [this](std::istream& theStream) {
 		slaveCulture = commonItems::getString(theStream);

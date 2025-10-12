@@ -13,7 +13,7 @@ class TraitDefinitionEntry: commonItems::parser
 	[[nodiscard]] const auto& getTraitDef() const { return traitDef; }
 
   private:
-	void registerkeys();
+	void registerKeys();
 
 	TraitDef traitDef;
 };

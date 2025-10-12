@@ -16,7 +16,8 @@ class SlaveCultureMapper: commonItems::parser
   private:
 	void registerKeys();
 
-	std::map<std::string, std::string> masterTraitToSlaveCultureMap;
+	std::map<std::string, std::string> masterHeritageToSlaveCultureMap;
+	std::map<std::string, std::string> masterLanguageToSlaveCultureMap;
 };
 } // namespace mappers
 
