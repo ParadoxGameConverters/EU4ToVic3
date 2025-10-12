@@ -95,11 +95,45 @@ void outCultureStaticModifiers(std::ostream& output, const mappers::CultureDef& 
 	output << "\ticon = \"gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds\"\n";
 	output << "\tstate_" << culture.name << "_standard_of_living_add = 1\n";
 	output << "}\n\n";
+
+	output << culture.name << "_cultural_acceptance_modifier_positive = {\n";
+	output << "\ticon = \"gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds\"\n";
+	output << "\tcountry_" << culture.name << "_cultural_acceptance_add = 1\n";
+	output << "}\n";
+	output << culture.name << "_cultural_acceptance_modifier_negative = {\n";
+	output << "\ticon = \"gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds\"\n";
+	output << "\tcountry_" << culture.name << "_cultural_acceptance_add = 1\n";
+	output << "}\n\n";
+
+	output << culture.name << "_fervor_target_modifier_positive = {\n";
+	output << "\ticon = \"gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds\"\n";
+	output << "\tcountry_fervor_target_" << culture.name << "_add = 1\n";
+	output << "}\n";
+	output << culture.name << "_fervor_target_modifier_negative = {\n";
+	output << "\ticon = \"gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds\"\n";
+	output << "\tcountry_fervor_target_" << culture.name << "_add = 1\n";
+	output << "}\n\n";
 }
 
 void outCultureModifierTypeDefs(std::ostream& output, const mappers::CultureDef& culture)
 {
 	output << "state_" << culture.name << "_standard_of_living_add = {\n";
+	output << "\tdecimals=1\n";
+	output << "\tcolor=good\n";
+	output << "\tgame_data={\n";
+	output << "\t\tai_value=0\n";
+	output << "\t}\n";
+	output << "}\n\n";
+
+	output << "country_" << culture.name << "_cultural_acceptance_add = {\n";
+	output << "\tdecimals=1\n";
+	output << "\tcolor=good\n";
+	output << "\tgame_data={\n";
+	output << "\t\tai_value=0\n";
+	output << "\t}\n";
+	output << "}\n\n";
+
+	output << "country_fervor_target_" << culture.name << "_add = {\n";
 	output << "\tdecimals=1\n";
 	output << "\tcolor=good\n";
 	output << "\tgame_data={\n";

@@ -9,14 +9,9 @@ void outReligion(std::ostream& output, const mappers::ReligionDef& religion)
 {
 	output << religion.name << " = {\n";
 	if (!religion.texture.empty())
-		output << "\ttexture = \"" << religion.texture << "\"\n";
-	if (!religion.traits.empty())
-	{
-		output << "\ttraits = { ";
-		for (const auto& trait: religion.traits)
-			output << trait << " ";
-		output << "}\n";
-	}
+		output << "\ticon = \"" << religion.texture << "\"\n";
+	if (!religion.heritage.empty())
+		output << "\theritage = \"" << religion.heritage << "\"\n";
 	if (religion.color)
 		output << "\tcolor " << *religion.color << "\n";
 	if (!religion.taboos.empty())

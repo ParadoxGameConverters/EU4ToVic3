@@ -17,8 +17,9 @@ converter_BRZ_je_on_actions = {
 						has_modifier = slave_shipments_intercepted_large
 					}
 					OR = {
-						has_law = law_type:law_debt_slavery
-						has_law = law_type:law_legacy_slavery
+						has_law_or_variant = law_type:law_debt_slavery
+						has_law_or_variant = law_type:law_legacy_slavery
+						has_law_or_variant = law_type:law_colonial_slavery
 					}
 				}
 			}
@@ -60,8 +61,9 @@ converter_BRZ_je_on_actions = {
 				c:BRZ ?= {
 					has_journal_entry = je_matter_of_slavery
 					OR = {
-						has_law = law_type:law_debt_slavery
-						has_law = law_type:law_legacy_slavery
+						has_law_or_variant = law_type:law_debt_slavery
+						has_law_or_variant = law_type:law_legacy_slavery
+						has_law_or_variant = law_type:law_colonial_slavery
 					}
 					any_interest_group = {
 						has_modifier = restricted_slave_trade_ig_modifier
