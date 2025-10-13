@@ -77,8 +77,9 @@ link = { vic3 = polish eu4 = polishBOH eu4 = schlesianBOH }
 link = { vic3 = sorb eu4 = sorbianBOH }
 
 link = { vic3 = south_german eu4group = germanic region = region_south_germany region = region_balkans region = region_italy region = region_danubia region = region_occitania region = region_iberia region = STATE_RHINELAND region = STATE_ALSACE_LORRAINE region = STATE_FRANCHE_COMTE }
-link = { vic3 = north_german eu4group = germanic region = region_north_germany region = region_poland region = region_france region = region_england region = region_north_sea_coast region = region_rhine  }
-link = { vic3 = east_german eu4group = germanic region = region_baltic_states }
+link = { vic3 = north_german eu4group = germanic region = region_north_germany region = region_poland region = region_france region = region_england region = region_north_sea_coast region = region_rhine region = region_baltic }
+#region_baltic=Scandinavia, region_baltic_states=Livonia
+link = { vic3 = east_german eu4group = germanic region = region_baltic_states region = region_belarus region = region_dnieper region = region_russia region = region_acrtic_russia region = region_finland region = region_urals region = region_caucasus region = region_central_asia }
 link = { vic3 = weder_german eu4group = germanic } # Fallback
 
 
@@ -126,8 +127,8 @@ link = { vic3 = noric eu4group = scordiscian_g }
 ##Added - Lombard
 link = { vic3 = corsican eu4 = corsican } #Must come before N/S Italian
 link = { vic3 = maltese eu4 = maltese } #Must come before N/S Italian
-link = { vic3 = north_italian eu4group = latin @north_italy_area region = STATE_SLOVENIA region = STATE_CROATIA region = STATE_SLAVONIA region = STATE_DALMATIA region = STATE_BOSNIA region = STATE_BULGARIA region = STATE_SOUTHERN_SERBIA region = STATE_NORTHERN_SERBIA region = region_occitania region = region_south_germany region = region_france region = region_rhine region = region_danubia region = region_poland region = region_north_germany region = region_england region = region_north_sea_coast }
-link = { vic3 = south_italian eu4group = latin @south_italy_area region = STATE_MONTENEGRO region = STATE_ALBANIA region = STATE_SKOPIA region = STATE_NORTHERN_THRACE region = STATE_PELOPONNESE region = STATE_IONIAN_ISLANDS region = STATE_ATTICA region = STATE_THESSALIA region = STATE_MACEDONIA region = STATE_WESTERN_THRACE region = STATE_CRETE region = STATE_WEST_AEGEAN_ISLANDS region = STATE_EASTERN_THRACE region = region_iberia }
+link = { vic3 = north_italian eu4group = latin @north_italy_area region = STATE_SLOVENIA region = STATE_CROATIA region = STATE_SLAVONIA region = STATE_DALMATIA region = STATE_BOSNIA region = STATE_BULGARIA region = STATE_EASTERN_SERBIA region = STATE_WESTERN_SERBIA region = region_occitania region = region_south_germany region = region_france region = region_rhine region = region_danubia region = region_poland region = region_north_germany region = region_england region = region_north_sea_coast }
+link = { vic3 = south_italian eu4group = latin @south_italy_area region = STATE_MONTENEGRO region = STATE_ALBANIA region = STATE_KOSOVO region = STATE_SKOPIA region = STATE_NORTHERN_THRACE region = STATE_PELOPONNESE region = STATE_IONIAN_ISLANDS region = STATE_ATTICA region = STATE_THESSALIA region = STATE_MACEDONIA region = STATE_WESTERN_THRACE region = STATE_CRETE region = STATE_WEST_AEGEAN_ISLANDS region = STATE_EASTERN_THRACE region = region_iberia }
 
 link = { vic3 = old_lombard eu4group = old_lombard_g }
 link = { vic3 = maltese eu4 = siculo_arabic eu4 = sicilian_arabic } #Maltese are descendants of Siculo-Arabs
@@ -206,7 +207,7 @@ link = { vic3 = pruthenian eu4 = pruthenian eu4 = old_prussian }
 # Jugoslav (South Slavic) - Bosniak, Bulgarian, Croatian, Serbian and Slovene
 ##Added - Macedonian
 link = { vic3 = bosniak eu4 = croatian eu4 = croatian_new eu4 = serbian eu4 = serbian_new religion = muslim }
-link = { vic3 = macedonian eu4 = sclavenian eu4 = bulgarian eu4 = bulgarian_new region = STATE_SLOVENIA region = STATE_CROATIA region = STATE_SLAVONIA region = STATE_DALMATIA region = STATE_BOSNIA region = STATE_NORTHERN_SERBIA region = STATE_SOUTHERN_SERBIA region = STATE_ALBANIA region = STATE_SKOPIA region = STATE_MONTENEGRO }
+link = { vic3 = macedonian eu4 = sclavenian eu4 = bulgarian eu4 = bulgarian_new region = STATE_SLOVENIA region = STATE_CROATIA region = STATE_SLAVONIA region = STATE_DALMATIA region = STATE_BOSNIA region = STATE_EASTERN_SERBIA region = STATE_WESTERN_SERBIA region = STATE_KOSOVO region = STATE_ALBANIA region = STATE_SKOPIA region = STATE_MONTENEGRO }
 link = { vic3 = macedonian eu4 = sclavenian eu4 = bulgarian eu4 = bulgarian_new eu4 = serbian eu4 = serbian_new eu4 = montenegrin region = STATE_MACEDONIA region = STATE_THESSALIA region = STATE_ATTICA region = STATE_CRETE region = STATE_WEST_AEGEAN_ISLANDS }
 
 link = { vic3 = bosniak eu4 = bosnian eu4 = bosnian_new eu4 = bosniak }
