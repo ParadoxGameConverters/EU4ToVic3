@@ -923,14 +923,7 @@
 			}
 		}
 	}
-	s:STATE_NORTHERN_SERBIA = {
-		region_state:BUL = { #Bulgaria
-			create_pop = {
-				culture = romanian
-				religion = animist
-				size = 409604
-			}
-		}
+	s:STATE_WESTERN_SERBIA = {
 		region_state:SER = { #Serbia
 			create_pop = {
 				culture = serb
@@ -939,7 +932,7 @@
 			}
 		}
 	}
-	s:STATE_SOUTHERN_SERBIA = {
+	s:STATE_EASTERN_SERBIA = {
 		region_state:BUL = { #Bulgaria
 			create_pop = {
 				culture = bulgarian
@@ -950,6 +943,11 @@
 				culture = romanian
 				religion = orthodox
 				size = 100000
+			}
+			create_pop = {
+				culture = romanian
+				religion = animist
+				size = 409604
 			}
 		}
 		region_state:SER = { #Serbia
@@ -971,6 +969,15 @@
 				culture = albanian
 				religion = animist
 				size = 192596
+			}
+		}
+	}
+	s:STATE_KOSOVO = {
+		region_state:SER = { #Serbia
+			create_pop = {
+				culture = serb
+				religion = animist
+				size = 409604
 			}
 		}
 	}
