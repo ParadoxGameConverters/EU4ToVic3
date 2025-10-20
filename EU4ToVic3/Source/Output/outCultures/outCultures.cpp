@@ -183,4 +183,10 @@ void OUT::exportCultures(const std::filesystem::path& outputName, const std::map
 		std::filesystem::copy_file("configurables/decentralized_world/common/discrimination_traits" / file,
 			 "output" / outputName / "common/discrimination_traits" / file,
 			 std::filesystem::copy_options::overwrite_existing);
+
+	auto groupFiles = commonItems::GetAllFilesInFolder("configurables/decentralized_world/common/discrimination_trait_groups");
+	for (const auto& file: groupFiles)
+		std::filesystem::copy_file("configurables/decentralized_world/common/discrimination_trait_groups" / file,
+			 "output" / outputName / "common/discrimination_trait_groups" / file,
+			 std::filesystem::copy_options::overwrite_existing);
 }
