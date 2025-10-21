@@ -1,0 +1,22 @@
+﻿CULTURES = {
+	### Initialising baseline 5 fervour for every culture in the world
+	every_country = { # "every_culture" is not a thing
+		limit = {
+			NOT = {
+				any_scope_culture = {
+					culture_current_fervor > 0
+					count = all
+				}
+			}
+		}
+		every_scope_culture = { # This is more efficient than it looks, and less efficient than I'd like it to be.
+			limit = {
+				culture_current_fervor < 5
+			}
+			set_fervor = 5
+		}
+	}
+
+	### Overriding the baseline values
+	# Future feature from *shrug*
+}

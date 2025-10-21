@@ -1,0 +1,81 @@
+﻿je_brazilian_nation_building = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	group = je_group_brazil
+
+	is_shown_in_lobby = {
+		has_dlc_feature = rp1_content #Colossus of the South
+		always = no
+		#c:BRZ ?= THIS
+	}
+
+	immediate = {
+		cu:brazilian = {
+			save_scope_as = brazilian_culture
+		}
+		cu:paulista = {
+			save_scope_as = paulista_culture
+		}
+		cu:sulista = {
+			save_scope_as = sulista_culture
+		}
+		cu:nordestino = {
+			save_scope_as = nordestino_culture
+		}
+		cu:amazonic = {
+			save_scope_as = amazonic_culture
+		}
+	}
+
+	complete = {
+		cu:brazilian.culture_current_fervor >= 75
+		has_technology_researched = nationalism
+		custom_tooltip = {
+			text = je_brazilian_nation_building_integrate_nordestino_complete_tt
+			has_variable = nordestinos_integrated
+		}
+		custom_tooltip = {
+			text = je_brazilian_nation_building_integrate_sulista_complete_tt
+			has_variable = sulistas_integrated
+		}
+		custom_tooltip = {
+			text = je_brazilian_nation_building_integrate_paulista_complete_tt
+			has_variable = paulistas_integrated
+		}
+		custom_tooltip = {
+			text = je_brazilian_nation_building_integrate_amazonic_complete_tt
+			has_variable = amazonics_integrated
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = culture_brazil.2 popup = yes }
+		show_as_tooltip = {
+			add_modifier = {
+				name = brz_brasil_brasileiro
+				days = long_modifier_time
+			}
+		}
+		if = {
+			limit = {
+				has_journal_entry = je_pedro_brazil
+			}
+			add_pedropoint_effect = yes
+		}
+	}
+
+	timeout = 18262
+
+	on_timeout = {
+		trigger_event = { id = culture_brazil.7 popup = yes }
+	}
+
+	scripted_button = je_brazilian_nation_building_integrate_nordestino
+	scripted_button = je_brazilian_nation_building_integrate_sulista
+	scripted_button = je_brazilian_nation_building_integrate_paulista
+	scripted_button = je_brazilian_nation_building_integrate_amazonic
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}

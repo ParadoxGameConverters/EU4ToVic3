@@ -1,0 +1,506 @@
+﻿je_sick_man_main = {
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	group = je_group_tanzimat
+
+	is_shown_in_lobby = {
+		always = no
+		#c:TUR = THIS
+    }
+
+	complete = {
+		scope:journal_entry = {
+			is_goal_complete = yes
+		}
+	}
+
+	on_complete = {
+		remove_modifier = sick_man_of_europe
+		trigger_event = {
+			id = sick_man.2
+		}
+	}
+
+	timeout = 10950
+
+	on_timeout = {
+		remove_modifier = sick_man_of_europe
+		add_modifier = {
+			name = dead_man_of_europe
+			days = very_long_modifier_time
+			is_decaying = yes
+		}
+		trigger_event = {
+			id = sick_man.3
+		}
+		if = {
+			limit = {
+	       		is_in_power_bloc = yes
+	        	is_power_bloc_leader = yes
+			}
+			custom_tooltip = sick_man_of_europe_lose_power_bloc
+		}
+		custom_tooltip = {
+			text = je_sick_man_main_failure_movements_tt
+			set_variable = {
+				name = failed_tanzimat
+				years = 20
+			}
+		}
+		if = {
+			limit = {
+				has_dlc_feature = ip3_content
+			}
+			custom_tooltip = {
+				text = eastern_crisis_consequence_tt
+				set_variable = failed_sick_man_main
+			}
+		}
+		if = { #failure immediately triggers eastern_crisis
+			limit = {
+				c:TUR ?= this
+				has_dlc_feature = ip3_content
+				NOT = {
+					has_variable = eastern_crisis_happened
+				}
+			}
+			add_journal_entry = {
+				type = je_great_eastern_crisis
+			}
+		}
+		cu:albanian = {
+			remove_tradition_trait = tradition_rumelian
+		}
+		cu:bosniak = {
+			remove_tradition_trait = tradition_rumelian
+		}
+		cu:sephardic = {
+			remove_tradition_trait = tradition_rumelian
+		}
+	}
+
+	current_value = {
+		value = var:sick_man_var
+	}
+
+	goal_add_value = {
+		add = 4
+	}
+
+	progressbar = yes
+
+	weight = 10000
+
+	should_be_pinned_by_default = yes
+}
+
+je_sick_man_syria = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	group = je_group_tanzimat
+
+	complete = {
+		owns_entire_state_region = STATE_ALEPPO
+		owns_entire_state_region = STATE_SYRIA
+		owns_entire_state_region = STATE_LEBANON
+		owns_entire_state_region = STATE_PALESTINE
+		owns_entire_state_region = STATE_TRANSJORDAN
+		owns_entire_state_region = STATE_ADANA
+	}
+
+	modifiers_while_active = {
+		modifier_syrian_ambitions
+	}
+
+	on_complete = {
+		custom_tooltip = je_sick_man_advance
+		change_variable = {
+			name = sick_man_var
+			add = 1
+		}
+		set_variable = completed_syria_je
+		s:STATE_SINAI = {
+			add_claim = ROOT
+		}
+		s:STATE_UPPER_EGYPT = {
+			add_claim = ROOT
+		}
+		s:STATE_MIDDLE_EGYPT = {
+			add_claim = ROOT
+		}
+		s:STATE_LOWER_EGYPT = {
+			add_claim = ROOT
+		}
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						exists = c:EGY
+						c:EGY = {
+							is_subject_of = ROOT
+						}
+					}
+					AND = {
+						owns_entire_state_region = STATE_SINAI
+						owns_entire_state_region = STATE_UPPER_EGYPT
+						owns_entire_state_region = STATE_MIDDLE_EGYPT
+						owns_entire_state_region = STATE_LOWER_EGYPT
+					}
+				}
+			}
+			change_variable = {
+				name = sick_man_var
+				add = 1
+			}
+		}
+		else = {
+			add_journal_entry = {
+				type = je_sick_man_egypt
+			}
+		}
+		custom_tooltip = sickman_syria_egypt
+	}
+
+	invalid = {
+		custom_tooltip = {
+			text = finished_sick_man_tt
+			has_variable = sick_man_complete
+		}
+	}
+
+	on_weekly_pulse = {
+		events = {
+			egyptian_crisis_events.1
+		}
+	}
+
+	transferable = no
+
+	weight = 5000
+
+	should_be_pinned_by_default = yes
+}
+
+je_sick_man_egypt = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	group = je_group_tanzimat
+
+	complete = {
+		OR = {
+			AND = {
+				exists = c:EGY
+				c:EGY = {
+					is_subject_of = ROOT
+				}
+			}
+			AND = {
+				owns_entire_state_region = STATE_SINAI
+				owns_entire_state_region = STATE_UPPER_EGYPT
+				owns_entire_state_region = STATE_MIDDLE_EGYPT
+				owns_entire_state_region = STATE_LOWER_EGYPT
+			}
+		}
+	}
+
+	on_complete = {
+		custom_tooltip = je_sick_man_advance
+		change_variable = {
+			name = sick_man_var
+			add = 1
+		}
+	}
+
+	invalid = {
+		custom_tooltip = {
+			text = finished_sick_man_tt
+			has_variable = sick_man_complete
+		}
+	}
+
+	transferable = no
+
+	weight = 5000
+
+	should_be_pinned_by_default = yes
+}
+
+je_sick_man_economy = {
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	group = je_group_tanzimat
+
+	complete = {
+		in_default = no
+		any_scope_state = {
+			is_incorporated = yes
+			has_building = building_urban_center
+			percent >= 0.75
+		}
+	}
+
+	on_complete = {
+		set_variable = completed_sick_man_economy_je
+		custom_tooltip = je_sick_man_advance
+		change_variable = {
+			name = sick_man_var
+			add = 1
+		}
+	}
+
+	invalid = {
+		custom_tooltip = {
+			text = finished_sick_man_tt
+			has_variable = sick_man_complete
+		}
+	}
+
+	transferable = no
+
+	weight = 5000
+	should_be_pinned_by_default = yes
+}
+
+# Literacy and Universities
+je_sick_man_education = {
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	group = je_group_tanzimat
+
+	complete = {
+		any_scope_building = {
+			is_building_type = building_university
+			occupancy > 0.9
+			level >= 5
+		}
+		scope:journal_entry = {
+			is_goal_complete = yes
+		}
+	}
+
+	on_complete = {
+		set_variable = completed_sick_man_education_je
+		custom_tooltip = je_sick_man_advance
+		change_variable = {
+			name = sick_man_var
+			add = 1
+		}
+	}
+
+	current_value = {
+		value = root.literacy_rate
+	}
+
+	goal_add_value = {
+		add = 0.2
+	}
+
+	invalid = {
+		custom_tooltip = {
+			text = finished_sick_man_tt
+			has_variable = sick_man_complete
+		}
+	}
+
+	transferable = no
+
+	weight = 5000
+
+	should_be_pinned_by_default = yes
+
+	progressbar = yes
+}
+
+# Nationalism
+je_sick_man_separatism = {
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	group = je_group_tanzimat
+
+	complete = {
+		scope:journal_entry = {
+			is_goal_complete = yes
+		}
+		highest_secession_progress < 0.5
+	}
+
+	on_complete = {
+		set_variable = completed_separatism_sick_man_je
+		custom_tooltip = je_sick_man_advance
+		change_variable = {
+			name = sick_man_var
+			add = 1
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					highest_secession_progress < 0.5
+				}
+				change_variable = {
+					name = sick_man_separatist_var
+					add = 1
+				}
+			}
+		}
+		random_events = {
+			100 = 0
+			10 = tanzimat_events.5 # Paranoia Event
+		}
+	}
+
+	fail = {
+		highest_secession_progress > 0.5
+	}
+
+	on_fail = {
+		set_variable = failed_sick_man_separatism
+		if = { #failure immediately triggers eastern_crisis
+			limit = {
+				c:TUR ?= this
+				has_dlc_feature = ip3_content
+				NOT = {
+					has_variable = eastern_crisis_happened
+				}
+			}
+			add_journal_entry = {
+				type = je_great_eastern_crisis
+			}
+		}
+	}
+
+	current_value = {
+		value = var:sick_man_separatist_var
+	}
+
+	goal_add_value = {
+		add = 180
+	}
+
+	invalid = {
+		custom_tooltip = {
+			text = finished_sick_man_tt
+			has_variable = sick_man_complete
+		}
+	}
+
+	transferable = no
+
+	weight = 5000
+
+	should_be_pinned_by_default = yes
+
+	progressbar = yes
+}
+
+# Army Reform
+je_sick_man_army = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	group = je_group_tanzimat
+
+	complete = {
+		army_size >= 100
+		has_technology_researched = napoleonic_warfare
+		any_scope_building = {
+			filter = {
+				is_building_type = building_barracks
+			}
+			NOR = {
+				building_has_goods_shortage = yes
+				has_active_production_method = pm_no_organization
+			}
+			percent = 1
+		}
+		NOT = {
+			any_military_formation = {
+				filter = {
+					is_army = yes
+				}
+				any_combat_unit = {
+					has_unit_type = unit_type:combat_unit_type_irregular_infantry
+				}
+				percent >= 0.25
+			}
+		}
+	}
+
+	on_complete = {
+		set_variable = completed_sick_man_army_je
+		custom_tooltip = je_sick_man_advance
+		change_variable = {
+			name = sick_man_var
+			add = 1
+		}
+	}
+
+	on_monthly_pulse = {
+		events = {
+			tanzimat_events.10 # Tanzimat Draft Question
+		}
+	}
+
+	invalid = {
+		custom_tooltip = {
+			text = finished_sick_man_tt
+			has_variable = sick_man_complete
+		}
+	}
+
+	transferable = no
+
+	should_be_pinned_by_default = yes
+
+	weight = 5000
+}
+
+
+# Bureaucractic Reform
+je_sick_man_bureaucracy = {
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	group = je_group_tanzimat
+
+	complete = {
+		NOR = {
+			has_law_or_variant = law_type:law_hereditary_bureaucrats
+			has_law_or_variant = law_type:law_land_based_taxation
+			has_law_or_variant = law_type:law_consumption_based_taxation
+		}
+		bureaucracy >= 0
+		approaching_bureaucracy_shortage = no
+	}
+
+	on_complete = {
+		set_variable = completed_sick_man_bureaucracy_je
+		custom_tooltip = je_sick_man_advance
+		change_variable = {
+			name = sick_man_var
+			add = 1
+		}
+		remove_modifier = outmoded_bureaucracy
+	}
+
+	on_monthly_pulse = {
+		random_events = {
+			100 = 0
+			10 = tanzimat_events.9 # Land registration resisted
+		}
+	}
+
+	invalid = {
+		custom_tooltip = {
+			text = finished_sick_man_tt
+			has_variable = sick_man_complete
+		}
+	}
+
+	transferable = no
+
+	weight = 5000
+
+	should_be_pinned_by_default = yes
+}
+
