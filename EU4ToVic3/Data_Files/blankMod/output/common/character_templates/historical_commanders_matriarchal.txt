@@ -1,0 +1,2819 @@
+﻿masc_ald_general_nsoumer = {
+	first_name = Sayyid_Mohamed
+	last_name = N_Soumer
+	historical = yes
+	culture = cu:berber
+	female = no
+	religion = rel:sunni
+	commander_rank = default
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+	birth_date = 1830.8.21 # estimate
+	traits = {
+		brave
+		charismatic
+		stalwart_defender
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_nsoumer
+				}
+			}
+			uses_ber_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1856.1.1
+		latest_usage_date = 1894.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:berber }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_nsoumer
+		}
+		fix_variable_error = { variable = converter_general_nsoumer }
+	}
+}
+fem_ald_general_mokrani = {
+	first_name = Shaykhah_Fatma
+	last_name = al-Mokrani
+	historical = yes
+	culture = cu:berber
+	female = yes
+	religion = rel:sunni
+	commander_rank = default
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	birth_date = 1815.3.7 # only year known
+	traits = {
+		brave
+		popular_commander
+		experienced_offensive_planner
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_mokrani
+				}
+			}
+			uses_ber_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1854.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:berber }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_mokrani
+		}
+		fix_variable_error = { variable = converter_general_mokrani }
+	}
+}
+
+# Austria - AUS
+fem_aus_admiral_tegetthoff = {
+	first_name = Elma
+	last_name = von_Tegetthoff
+	historical = yes
+	culture = cu:south_german
+	female = yes
+	ideology = ideology_reformer
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1827.12.23
+	traits = {
+		expert_naval_commander
+		direct
+		innovative
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_tegetthoff
+				}
+			}
+			uses_aus_ger_characters = yes
+			owns_entire_state_region = STATE_AUSTRIA
+		}
+		role = admiral
+		earliest_usage_date = 1854.1.1
+		latest_usage_date = 1880.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_tegetthoff
+		}
+		fix_variable_error = { variable = converter_tegetthoff }
+	}
+}
+fem_aus_admiral_archduke_friedrich = {
+	first_name = Archduchess_Fritzi
+	last_name = von_Habsburg_Lothringen
+	historical = yes
+	culture = cu:south_german
+	female = yes
+	ideology = ideology_reformer
+	commander_rank = default
+	dna = dna_archduke_friedrich
+	interest_group = ig_armed_forces
+	birth_date = 1821.5.14
+	traits = {
+		basic_naval_commander
+		brave
+		meticulous
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_archduke_friedrich
+				}
+			}
+			uses_aus_ger_characters = yes
+			ruler.culture = {
+				OR = {
+					is_target_in_global_variable_list = { name = global_nor_ger_cultures target = this }
+					is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this }
+				}
+			}
+			has_law = law_type:law_monarchy
+			owns_entire_state_region = STATE_AUSTRIA
+		}
+		role = admiral
+		earliest_usage_date = 1840.1.1
+		latest_usage_date = 1870.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_archduke_friedrich
+		}
+		fix_variable_error = { variable = converter_archduke_friedrich }
+	}
+}
+fem_aus_general_von_windisch_gratz = {
+	first_name = Winifred
+	last_name = von_Windisch_Gratz
+	historical = yes
+	culture = cu:south_german
+	female = yes
+	ideology = ideology_traditionalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1787.5.11
+	traits = {
+		cautious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_windisch_gratz
+				}
+			}
+			uses_aus_ger_characters = yes
+			owns_entire_state_region = STATE_AUSTRIA
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_windisch_gratz
+		}
+		fix_variable_error = { variable = converter_von_windisch_gratz }
+	}
+}
+fem_aus_general_von_hotzendorf = {
+	first_name = Ziska_Kuno
+	last_name = von_Hotzendorf
+	historical = yes
+	culture = cu:south_german
+	female = yes
+	ideology = ideology_traditionalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1852.11.11
+	traits = {
+		basic_offensive_planner
+		arrogant
+		reckless
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_hotzendorf
+				}
+			}
+			uses_aus_ger_characters = yes
+			owns_entire_state_region = STATE_AUSTRIA
+		}
+		role = general
+		earliest_usage_date = 1876.1.1
+		latest_usage_date = 1925.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_hotzendorf
+		}
+		fix_variable_error = { variable = converter_von_hotzendorf }
+	}
+}
+fem_aus_general_boroevic = {
+	first_name = Svetlozara
+	last_name = BoroeviC
+	historical = yes
+	culture = cu:south_german
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	dna = dna_svetozar_boroevic
+	interest_group = ig_armed_forces
+	birth_date = 1856.12.13
+	traits = {
+		expert_defensive_strategist
+		experienced_offensive_planner
+		popular_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_boroevic
+				}
+			}
+			OR = {
+				uses_aus_ger_characters = yes
+				uses_cro_characters = yes
+			}
+			owns_entire_state_region = STATE_CROATIA
+		}
+		role = general
+		earliest_usage_date = 1896.1.1
+		latest_usage_date = 1927.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_boroevic
+		}
+		fix_variable_error = { variable = converter_boroevic }
+	}
+}
+fem_aus_general_von_benedek = {
+	first_name = Lulu
+	last_name = von_Benedek
+	historical = yes
+	culture = cu:south_german
+	female = yes
+	ideology = ideology_traditionalist
+	commander_rank = default
+	dna = dna_ludwig_von_benedek
+	interest_group = ig_armed_forces
+	birth_date = 1804.7.14
+	traits = {
+		basic_offensive_planner
+		stalwart_defender
+		traditionalist_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_benedek
+				}
+			}
+			uses_aus_ger_characters = yes
+			owns_entire_state_region = STATE_STYRIA
+		}
+		role = general
+		earliest_usage_date = 1840.1.1
+		latest_usage_date = 1880.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_benedek
+		}
+		fix_variable_error = { variable = converter_von_benedek }
+	}
+}
+fem_aus_general_von_habsburg_lothringen = {
+	first_name = Archduchess_Bertina
+	last_name = von_Habsburg_Lothringen
+	historical = yes
+	culture = cu:south_german
+	female = yes
+	ideology = ideology_traditionalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1817.8.3
+	traits = {
+		cautious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_von_habsburg_lothringen
+				}
+			}
+			uses_aus_ger_characters = yes
+			ruler.culture = {
+				OR = {
+					is_target_in_global_variable_list = { name = global_nor_ger_cultures target = this }
+					is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this }
+				}
+			}
+			has_law = law_type:law_monarchy
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1869.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_von_habsburg_lothringen
+		}
+		fix_variable_error = { variable = converter_general_von_habsburg_lothringen }
+	}
+}
+# Bavaria - BAV
+fem_bav_general_von_wittelsbach = {
+	first_name = Princess_Karola_Teodora
+	last_name = von_Wittelsbach
+	historical = yes
+	dna = dna_prince_karl_theodor
+	culture = cu:south_german
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1795.7.7
+	traits = {
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_wittelsbach
+				}
+			}
+			uses_bav_ger_characters = yes
+			has_law = law_type:law_monarchy
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1866.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_wittelsbach
+		}
+		fix_variable_error = { variable = converter_von_wittelsbach }
+	}
+}
+fem_bav_general_von_der_tann = {
+	first_name = Lulu
+	last_name = von_der_Tann
+	historical = yes
+	culture = cu:south_german
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1815.6.18
+	traits = {
+		experienced_offensive_planner
+		surveyor
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_der_tann
+				}
+			}
+			uses_bav_ger_characters = yes
+			owns_entire_state_region = STATE_BAVARIA
+		}
+		role = general
+		earliest_usage_date = 1848.1.1
+		latest_usage_date = 1880.1.1
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_der_tann
+		}
+		fix_variable_error = { variable = converter_von_der_tann }
+	}
+}
+# Belgium - BEL
+fem_bel_general_prisse = {
+	first_name = Bertina_Floortje_Josepha
+	last_name = Prisse
+	historical = yes
+	culture = cu:wallonian
+	female = yes
+	religion = rel:catholic
+	ideology = ideology_reformer
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1788.6.24
+	traits = {
+		surveyor
+		basic_diplomat
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_prisse
+				}
+			}
+			uses_bel_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1855.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:wallonian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_prisse
+		}
+		fix_variable_error = { variable = converter_prisse }
+	}
+}
+# Denmark - DEN
+fem_den_general_rye = {
+	first_name = Oline
+	last_name = Rye
+	historical = yes
+	culture = cu:norwegian
+	female = yes
+	religion = rel:protestant
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1791.11.16
+	traits = {
+		brave
+		reckless
+		basic_offensive_planner
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_rye
+				}
+			}
+			OR = {
+				uses_den_characters = yes
+				uses_nor_characters = yes
+			}
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1855.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:norwegian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_rye
+		}
+		fix_variable_error = { variable = converter_rye }
+	}
+}
+fem_den_admiral_suenson = {
+	first_name = Dorte
+	last_name = Suenson
+	historical = yes
+	culture = cu:danish
+	female = yes
+	religion = rel:protestant
+	dna = dna_edouard_suenson
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1805.4.13
+	traits = {
+		experienced_convoy_raider
+		cautious
+		persistent
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_suenson
+				}
+			}
+			uses_den_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1842.1.1
+		latest_usage_date = 1870.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:danish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_suenson
+		}
+		fix_variable_error = { variable = converter_suenson }
+	}
+}
+# France - FRA
+fem_fra_admiral_courbet = {
+	first_name = Amadea
+	last_name = Courbet
+	historical = yes
+	culture = cu:french
+	female = yes
+	religion = rel:catholic
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1788.6.24
+	traits = {
+		expert_naval_commander
+		cautious
+		meticulous
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_courbet
+				}
+			}
+			uses_fra_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1855.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_courbet
+		}
+		fix_variable_error = { variable = converter_courbet }
+	}
+}
+fem_fra_admiral_lespes = {
+	first_name = Sebastienne
+	last_name = Lespes
+	historical = yes
+	culture = cu:occitan
+	female = yes
+	religion = rel:catholic
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1828.4.13
+	traits = {
+		basic_naval_commander
+		cautious
+		reserved
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_lespes
+				}
+			}
+			uses_occ_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1895.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:occitan }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_lespes
+		}
+		fix_variable_error = { variable = converter_lespes }
+	}
+}
+fem_fra_admiral_boue_de_lapeyrere = {
+	first_name = Augustine
+	last_name = Boue_de_Lapeyrere
+	historical = yes
+	culture = cu:occitan
+	female = no
+	dna = dna_augustin_boue_de_lapeyere
+	religion = rel:catholic
+	ideology = ideology_reformer
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1852.1.18
+	traits = {
+		experienced_naval_commander
+		innovative
+		dockyard_master
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_boue_de_lapeyrere
+				}
+			}
+			uses_occ_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1883.1.1
+		latest_usage_date = 1916.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:occitan }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_boue_de_lapeyrere
+		}
+		fix_variable_error = { variable = converter_boue_de_lapeyrere }
+	}
+}
+fem_fra_admiral_jaureguiberry = {
+	first_name = Bernadette
+	last_name = Jaureguiberry
+	historical = yes
+	culture = cu:occitan
+	female = yes
+	religion = rel:catholic
+	dna = dna_bernard_jaureguiberry
+	ideology = ideology_reformer
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1815.1.18
+	traits = {
+		experienced_naval_commander
+		brave
+		dockyard_master
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jaureguiberry
+				}
+			}
+			uses_occ_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1845.1.1
+		latest_usage_date = 1887.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:occitan }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jaureguiberry
+		}
+		fix_variable_error = { variable = converter_jaureguiberry }
+	}
+}
+
+fem_fra_general_foch = {
+	first_name = Fenne
+	last_name = Foch
+	historical = yes
+	culture = cu:french
+	female = yes
+	religion = rel:catholic
+	ideology = ideology_reformer
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1851.8.2
+	traits = {
+		persistent
+		experienced_offensive_planner
+		popular_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_foch
+				}
+			}
+			uses_fra_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1879.1.1
+		latest_usage_date = 1927.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_foch
+		}
+		fix_variable_error = { variable = converter_foch }
+	}
+}
+fem_fra_general_macmahon = {
+	first_name = Patrizia
+	last_name = de_MacMahon
+	historical = yes
+	culture = cu:french
+	female = yes
+	religion = rel:catholic
+	ideology = ideology_legitimist
+	commander_rank = default
+	interest_group = ig_devout
+	birth_date = 1808.6.13
+	traits = {
+		popular_commander
+		experienced_offensive_planner
+		reckless
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_macmahon
+				}
+			}
+			uses_fra_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1848.1.1
+		latest_usage_date = 1884.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_macmahon
+		}
+		fix_variable_error = { variable = converter_macmahon }
+	}
+}
+fem_fra_general_bazaine = {
+	first_name = Fran_Coise-Thetis
+	last_name = Bazaine
+	historical = yes
+	culture = cu:french
+	female = yes
+	religion = rel:catholic
+	ideology = ideology_bonapartist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1808.6.13
+	traits = {
+		brave
+		direct
+		experienced_offensive_planner
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_bazaine
+				}
+			}
+			uses_fra_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1848.1.1
+		latest_usage_date = 1884.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_bazaine
+		}
+		fix_variable_error = { variable = converter_bazaine }
+	}
+}
+fem_fra_general_de_saint_arnaud = {
+	first_name = Jacqueline_Lereine
+	last_name = de_Saint-Arnaud
+	historical = yes
+	culture = cu:french
+	female = yes
+	religion = rel:catholic
+	ideology = ideology_bonapartist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1798.8.20
+	traits = {
+		basic_offensive_planner
+		cruel
+		pillager
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_de_saint_arnaud
+				}
+			}
+			uses_fra_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1854.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_de_saint_arnaud
+		}
+		fix_variable_error = { variable = converter_de_saint_arnaud }
+	}
+}
+fem_fra_general_changarnier = {
+	first_name = Coline
+	last_name = Changarnier
+	historical = yes
+	culture = cu:french
+	female = yes
+	religion = rel:catholic
+	ideology = ideology_legitimist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1793.4.26
+	traits = {
+		experienced_offensive_planner
+		basic_political_operator
+		reckless
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_changarnier
+				}
+			}
+			uses_fra_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1870.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_changarnier
+		}
+		fix_variable_error = { variable = converter_changarnier }
+	}
+}
+fem_fra_general_dorleans = {
+	first_name = Henriette
+	last_name = d_Orleans
+	historical = yes
+	culture = cu:french
+	female = yes
+	religion = rel:catholic
+	ideology = ideology_orleanist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1822.1.16
+	on_created = {
+		set_variable = {
+			name = orleanist_leader
+		}
+	}
+	traits = {
+		experienced_colonial_administrator
+		basic_offensive_planner
+		expensive_tastes
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_dorleans
+				}
+			}
+			uses_fra_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1847.1.1
+		latest_usage_date = 1886.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_dorleans
+		}
+		fix_variable_error = { variable = converter_dorleans }
+	}
+}
+
+# Greece - GRE
+fem_gre_general_kolokotronis = {
+	first_name = Yianna
+	last_name = Kolokotronis
+	historical = yes
+	culture = cu:greek
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1805.6.28 # approximate birth date
+	traits = {
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_kolokotronis
+				}
+			}
+			uses_gre_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1865.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:greek }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_kolokotronis
+		}
+		fix_variable_error = { variable = converter_kolokotronis }
+	}
+}
+fem_gre_general_kallergis = {
+	first_name = Demetria
+	last_name = Kallergis
+	historical = yes
+	culture = cu:greek
+	female = yes
+	religion = rel:orthodox
+	ideology = ideology_traditionalist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1805.6.28 # approximate birth date
+	traits = {
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_kallergis
+				}
+			}
+			uses_gre_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1865.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:greek }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_kallergis
+		}
+		fix_variable_error = { variable = converter_kallergis }
+	}
+}
+# Montenegro - MON
+fem_mon_general_petrovic_njegos = {
+	first_name = Mira
+	last_name = Petrovic_Njegos
+	historical = yes
+	culture = cu:serb
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1820.8.19
+	traits = {
+		romantic
+		stalwart_defender
+		basic_offensive_planner
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_petrovic_njegos
+				}
+			}
+			uses_mon_ser_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1880.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:serb }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_petrovic_njegos
+		}
+		fix_variable_error = { variable = converter_petrovic_njegos }
+	}
+}
+# Netherlands - NET
+fem_net_admiral_rijk = {
+	first_name = Julie
+	last_name = Rijk
+	historical = yes
+	culture = cu:dutch
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1787.1.1
+	traits = {
+		experienced_naval_commander
+		innovative
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_rijk
+				}
+			}
+			uses_dut_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:dutch }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_rijk
+		}
+		fix_variable_error = { variable = converter_rijk }
+	}
+}
+fem_net_general_de_kock = {
+	first_name = Hendrikje_Larunde
+	last_name = de_Kock
+	historical = yes
+	culture = cu:dutch
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1779.5.25
+	traits = {
+		forest_commander
+		ambitious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_de_kock
+				}
+			}
+			uses_dut_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1865.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:dutch }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_de_kock
+		}
+		fix_variable_error = { variable = converter_de_kock }
+	}
+}
+fem_net_general_michiels = {
+	first_name = Andrea_Victoria
+	last_name = Michiels
+	historical = yes
+	culture = cu:dutch
+	female = yes
+	ideology = ideology_jingoist_leader
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1797.5.30
+	traits = {
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_michiels
+				}
+			}
+			uses_dut_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1865.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:dutch }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_michiels
+		}
+		fix_variable_error = { variable = converter_michiels }
+	}
+}
+fem_net_general_list = {
+	first_name = Fritzi_Carlijn
+	last_name = List
+	historical = yes
+	culture = cu:dutch
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1784.2.5
+	traits = {
+		basic_artillery_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_list
+				}
+			}
+			uses_dut_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:dutch }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_list
+		}
+		fix_variable_error = { variable = converter_general_list }
+	}
+}
+# Portugal - POR
+fem_por_general_de_mesquita = {
+	first_name = Vicenta_Nicolasa
+	last_name = de_Mesquita
+	historical = yes
+	culture = cu:portuguese
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1818.7.9
+	traits = {
+		brave
+		wrathful
+		psychological_affliction
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_de_mesquita
+				}
+			}
+			uses_por_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1873.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:portuguese }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_de_mesquita
+		}
+		fix_variable_error = { variable = converter_de_mesquita }
+	}
+}
+# Prussia - PRU
+fem_pru_admiral_von_tirpitz = {
+	first_name = Winifred
+	last_name = von_Tirpitz
+	historical = yes
+	culture = cu:north_german
+	female = yes
+	dna = dna_alfred_von_tirpitz
+	ideology = ideology_ethno_nationalist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1849.3.19
+	traits = {
+		ambitious
+		dockyard_master
+		convoy_raider_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_tirpitz
+				}
+			}
+			uses_pru_ger_characters = yes
+			owns_entire_state_region = STATE_BRANDENBURG
+		}
+		role = admiral
+		earliest_usage_date = 1875.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_tirpitz
+		}
+		fix_variable_error = { variable = converter_von_tirpitz }
+	}
+}
+fem_pru_admiral_von_spee = {
+	first_name = Maximiliane
+	last_name = von_Spee
+	historical = yes
+	culture = cu:north_german
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	dna = dna_maximillian_von_spee
+	interest_group = ig_armed_forces
+	birth_date = 1861.6.22
+	traits = {
+		experienced_convoy_raider
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_spee
+				}
+			}
+			uses_pru_ger_characters = yes
+			owns_entire_state_region = STATE_RHINELAND
+		}
+		role = admiral
+		earliest_usage_date = 1900.1.1
+		latest_usage_date = 1926.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_spee
+		}
+		fix_variable_error = { variable = converter_von_spee }
+	}
+}
+fem_pru_admiral_von_hohenzollern = {
+	first_name = Princess_Heinrike
+	last_name = von_Hohenzollern
+	historical = yes
+	culture = cu:north_german
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1811.10.29
+	traits = {
+		basic_naval_commander
+		dockyard_master
+		innovative
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_hohenzollern
+				}
+			}
+			uses_pru_ger_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1848.1.1
+		latest_usage_date = 1870.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_hohenzollern
+		}
+		fix_variable_error = { variable = converter_von_hohenzollern }
+	}
+}
+fem_pru_general_zu_dohna_schlobitten = {
+	first_name = Karola_Fritzi
+	last_name = zu_Dohna_Schlobitten
+	historical = yes
+	culture = cu:north_german
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	dna = dna_karl_friedrich_emil_zu_dohna_schlobitten
+	interest_group = ig_landowners
+	birth_date = 1784.4.4
+	traits = {
+		tactful
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_zu_dohna_schlobitten
+				}
+			}
+			uses_pru_ger_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1854.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_zu_dohna_schlobitten
+		}
+		fix_variable_error = { variable = converter_zu_dohna_schlobitten }
+	}
+}
+fem_pru_general_von_moltke = { # Moltke the Younger
+	first_name = Elma
+	last_name = von_Moltke
+	historical = yes
+	culture = cu:north_german
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1848.5.25
+	traits = {
+		experienced_offensive_planner
+		reserved
+		resupply_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_moltke
+				}
+			}
+			uses_pru_ger_characters = yes
+			owns_entire_state_region = STATE_MECKLENBURG
+		}
+		role = general
+		earliest_usage_date = 1880.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_moltke
+		}
+		fix_variable_error = { variable = converter_von_moltke }
+	}
+}
+fem_pru_general_von_roon = {
+	first_name = Bertina
+	last_name = von_Roon
+	historical = yes
+	culture = cu:north_german
+	female = yes
+	dna = dna_albrecht_von_roon
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1803.4.3
+	traits = {
+		meticulous
+		innovative
+		resupply_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_roon
+				}
+			}
+			uses_pru_ger_characters = yes
+			owns_entire_state_region = STATE_POMERANIA
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1879.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_roon
+		}
+		fix_variable_error = { variable = converter_von_roon }
+	}
+}
+fem_pru_general_prince_friedrich_karl = {
+	first_name = Princess_Fritzi_Karola
+	last_name = von_Hohenzollern
+	historical = yes
+	culture = cu:north_german
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1828.3.20
+	traits = {
+		experienced_offensive_planner
+		innovative
+		surveyor
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_prince_friedrich_karl
+				}
+			}
+			uses_pru_ger_characters = yes
+			has_law = law_type:law_monarchy
+			owns_entire_state_region = STATE_POMERANIA
+		}
+		role = general
+		earliest_usage_date = 1851.1.1
+		latest_usage_date = 1890.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_prince_friedrich_karl
+		}
+		fix_variable_error = { variable = converter_prince_friedrich_karl }
+	}
+}
+fem_pru_general_von_goeben = {
+	first_name = Auguste_Karola
+	last_name = von_Goeben
+	historical = yes
+	culture = cu:north_german
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	dna = dna_august_karl_von_goeben
+	interest_group = ig_armed_forces
+	birth_date = 1816.12.10
+	traits = {
+		experienced_offensive_planner
+		persistent
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_goeben
+				}
+			}
+			uses_pru_ger_characters = yes
+			owns_entire_state_region = STATE_POMERANIA
+		}
+		role = general
+		earliest_usage_date = 1848.1.1
+		latest_usage_date = 1880.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_goeben
+		}
+		fix_variable_error = { variable = converter_von_goeben }
+	}
+}
+fem_pru_general_von_hindenburg = {
+	first_name = Paula
+	last_name = von_Hindenburg
+	historical = yes
+	culture = cu:north_german
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1847.8.2
+	traits = {
+		experienced_offensive_planner
+		expert_defensive_strategist
+		persistent
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_hindenburg
+				}
+			}
+			uses_pru_ger_characters = yes
+			owns_entire_state_region = STATE_POSEN
+		}
+		role = general
+		earliest_usage_date = 1885.1.1
+		latest_usage_date = 1936.1.1
+		chance = 90
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_hindenburg
+		}
+		fix_variable_error = { variable = converter_von_hindenburg }
+	}
+}
+fem_pru_general_ludendorff = {
+	first_name = Erika
+	last_name = Ludendorff
+	historical = yes
+	culture = cu:north_german
+	female = yes
+	ideology = ideology_ethno_nationalist
+	commander_rank = default
+	dna = dna_erich_ludendorff
+	interest_group = ig_armed_forces
+	birth_date = 1865.4.9
+	traits = {
+		expert_offensive_planner
+		resupply_commander
+		surveyor
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ludendorff
+				}
+			}
+			uses_pru_ger_characters = yes
+			owns_entire_state_region = STATE_POSEN
+		}
+		role = general
+		earliest_usage_date = 1894.1.1
+		latest_usage_date = 1936.1.1
+		chance = 90
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ludendorff
+		}
+		fix_variable_error = { variable = converter_ludendorff }
+	}
+}
+# Sardinia-Piedmont - SAR
+fem_sar_admiral_pellion_di_persano = {
+	first_name = Carola
+	last_name = Pellion_di_Persano
+	historical = yes
+	culture = cu:north_italian
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1806.3.11
+	traits = {
+		basic_naval_commander
+		basic_diplomat
+		reckless
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pellion_di_persano
+				}
+			}
+			uses_nor_ita_characters = yes
+			owns_entire_state_region = STATE_PIEDMONT
+		}
+		role = admiral
+		earliest_usage_date = 1849.1.1
+		latest_usage_date = 1870.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_italian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pellion_di_persano
+		}
+		fix_variable_error = { variable = converter_pellion_di_persano }
+	}
+}
+fem_sar_general_de_sonnaz = {
+	first_name = Andromache
+	last_name = de_Sonnaz
+	historical = yes
+	culture = cu:north_italian
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1787.1.3
+	traits = {
+		reckless
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_de_sonnaz
+				}
+			}
+			uses_nor_ita_characters = yes
+			owns_entire_state_region = STATE_PIEDMONT
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_italian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_de_sonnaz
+		}
+		fix_variable_error = { variable = converter_de_sonnaz }
+	}
+}
+fem_sar_general_la_marmora = {
+	first_name = Alfonsina
+	last_name = Ferrero_la_Marmora
+	historical = yes
+	culture = cu:north_italian
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1804.11.18
+	traits = {
+		basic_offensive_planner
+		basic_diplomat
+		reckless
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_la_marmora
+				}
+			}
+			uses_nor_ita_characters = yes
+			owns_entire_state_region = STATE_PIEDMONT
+		}
+		role = general
+		earliest_usage_date = 1848.1.1
+		latest_usage_date = 1875.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_italian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_la_marmora
+		}
+		fix_variable_error = { variable = converter_la_marmora }
+	}
+}
+fem_sar_general_bava = {
+	first_name = Eusebia
+	last_name = Bava
+	historical = yes
+	culture = cu:north_italian
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1790.8.9
+	traits = {
+		surveyor
+		cautious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_bava
+				}
+			}
+			uses_nor_ita_characters = yes
+			owns_entire_state_region = STATE_PIEDMONT
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_italian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_bava
+		}
+		fix_variable_error = { variable = converter_bava }
+	}
+}
+fem_sar_general_cadorna = {
+	first_name = Daisy
+	last_name = Cadorna
+	historical = yes
+	culture = cu:north_italian
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1850.9.4
+	traits = {
+		reckless
+		arrogant
+		imperious
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_cadorna
+				}
+			}
+			uses_nor_ita_characters = yes
+			owns_entire_state_region = STATE_PIEDMONT
+		}
+		role = general
+		earliest_usage_date = 1890.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_italian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_cadorna
+		}
+		fix_variable_error = { variable = converter_cadorna }
+	}
+}
+fem_sar_general_chiodo = {
+	first_name = Dina
+	last_name = Chiodo
+	historical = yes
+	culture = cu:north_italian
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1791.4.16
+	traits = {
+		trench_rat
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_chiodo
+				}
+			}
+			uses_nor_ita_characters = yes
+			owns_entire_state_region = STATE_PIEDMONT
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_italian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_chiodo
+		}
+		fix_variable_error = { variable = converter_chiodo }
+	}
+}
+# Saxony - SAX
+fem_sax_general_von_hausen = {
+	first_name = Maxi
+	last_name = von_Hausen
+	historical = yes
+	culture = cu:north_german
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1846.12.17
+	traits = {
+		pillager
+		cruel
+		surveyor
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_von_hausen
+				}
+			}
+			uses_sax_ger_characters = yes
+			owns_entire_state_region = STATE_SAXONY
+		}
+		role = general
+		earliest_usage_date = 1875.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_von_hausen
+		}
+		fix_variable_error = { variable = converter_von_hausen }
+	}
+}
+# Two Sicilies - SIC
+fem_sic_general_diaz = {
+	first_name = Armanda
+	last_name = Diaz
+	historical = yes
+	culture = cu:south_italian
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1861.12.5
+	traits = {
+		experienced_offensive_planner
+		basic_artillery_commander
+		meticulous
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_armando_diaz
+				}
+			}
+			uses_sou_ita_characters = yes
+			owns_entire_state_region = STATE_CAMPANIA
+		}
+		role = general
+		earliest_usage_date = 1899.1.1
+		latest_usage_date = 1921.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_italian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_armando_diaz
+		}
+		fix_variable_error = { variable = converter_armando_diaz }
+	}
+}
+
+# Brazil - BRZ
+fem_brz_admiral_inacio = {
+	historical = yes
+	first_name = Joaquima_Pepita
+	last_name = Inacio
+	historical = yes
+	culture = cu:brazilian
+	female = yes
+	religion = rel:catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_royalist
+	birth_date = 1808.8.1
+	dna = dna_joaquim_jose_inacio
+	traits = {
+		brave
+		pious
+		experienced_naval_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_inacio
+				}
+			}
+			uses_brazil_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1870.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_brazilian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_inacio
+		}
+		fix_variable_error = { variable = converter_inacio }
+	}
+}
+fem_brz_admiral_tamandare = {
+	historical = yes
+	first_name = Joaquima_Marquita
+	last_name = Lisboa # Marquis of Tamandaré
+	historical = yes
+	culture = cu:brazilian
+	female = yes
+	religion = rel:catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_royalist
+	birth_date = 1807.12.13
+	dna = dna_joaquim_marques_lisboa
+	traits = {
+		brave
+		experienced_naval_commander
+		dockyard_master
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_tamandare
+				}
+			}
+			uses_brazil_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1847.1.1
+		latest_usage_date = 1870.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_brazilian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_tamandare
+		}
+		fix_variable_error = { variable = converter_tamandare }
+	}
+}
+fem_brz_general_alves_de_lima_e_silva = {
+	first_name = Luisa_2
+	last_name = Alves_de_Lima_e_Silva
+	historical = yes
+	culture = cu:brazilian
+	female = yes
+	religion = rel:catholic
+	commander_rank = default
+	interest_group = ig_landowners
+	ideology = ideology_royalist
+	birth_date = 1803.8.25
+	dna = dna_alves_de_lima_e_silva
+	traits = {
+		surveyor
+		charismatic
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_alves_de_lima_e_silva
+				}
+			}
+			uses_brazil_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1870.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_brazilian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_alves_de_lima_e_silva
+		}
+		fix_variable_error = { variable = converter_alves_de_lima_e_silva }
+	}
+}
+# Chile - CHL
+fem_chl_admiral_prat = {
+	first_name = Morgana
+	last_name = Prat
+	historical = yes
+	culture = cu:south_andean
+	female = yes
+	religion = rel:catholic
+	commander_rank = default
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_reformer
+	birth_date = 1848.4.3
+	dna = dna_prat
+	traits = {
+		brave
+		innovative
+		experienced_naval_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_admiral_prat
+				}
+			}
+			uses_chl_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1872.1.1
+		latest_usage_date = 1890.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_admiral_prat
+		}
+		fix_variable_error = { variable = converter_admiral_prat }
+	}
+}
+# Mexico - MEX
+fem_mex_general_diaz = {
+	first_name = Porphyria
+	last_name = DIaz
+	historical = yes
+	culture = cu:mexican
+	female = yes
+	religion = rel:catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_reformer
+	birth_date = 1830.9.15
+	dna = dna_porfirio_diaz
+	traits = {
+		ambitious
+		basic_defensive_strategist
+		cruel
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_porfirio_diaz
+				}
+			}
+			uses_mexico_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1890.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_mexican_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_porfirio_diaz
+		}
+		fix_variable_error = { variable = converter_porfirio_diaz }
+	}
+}
+fem_mex_general_zaragoza = {
+	first_name = Ignacia
+	last_name = Zaragoza
+	historical = yes
+	culture = cu:mexican
+	female = yes
+	religion = rel:catholic
+	commander_rank = default
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_radical
+	birth_date = 1829.3.24
+	dna = dna_ignacio_zaragoza
+	traits = {
+		stalwart_defender
+		direct
+		celebrity_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_zaragoza
+				}
+			}
+			uses_mexico_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1856.1.1
+		latest_usage_date = 1880.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_mexican_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_zaragoza
+		}
+		fix_variable_error = { variable = converter_zaragoza }
+	}
+}
+# Paraguay - PRG
+prg_general_aquino = {
+	first_name = Ysabel
+	last_name = Aquino
+	historical = yes
+	culture = cu:platinean
+	female = yes
+	religion = rel:catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1825.2.5 # Only year known
+	traits = {
+		engineer
+		trench_rat
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_elizardo_aquino
+				}
+			}
+			uses_prg_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1855.1.1
+		latest_usage_date = 1880.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_elizardo_aquino
+		}
+		fix_variable_error = { variable = converter_elizardo_aquino }
+	}
+}
+
+prg_general_bruguez = {
+	first_name = Jose_Maria
+	last_name = Bruguez
+	historical = yes
+	culture = cu:platinean
+	female = yes
+	religion = rel:catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1827.6.7 # Only year known
+	traits = {
+		meticulous
+		experienced_artillery_commander
+		stalwart_defender
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jose_maria_bruguez
+				}
+			}
+			uses_prg_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1858.1.1
+		latest_usage_date = 1880.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jose_maria_bruguez
+		}
+		fix_variable_error = { variable = converter_jose_maria_bruguez }
+	}
+}
+
+prg_general_caballero = {
+	first_name = Bernardina
+	last_name = Caballero
+	historical = yes
+	culture = cu:platinean
+	female = yes
+	religion = rel:catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1839.5.20
+	traits = {
+		experienced_political_operator
+		experienced_offensive_planner
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_bernardino_caballero
+				}
+			}
+			uses_prg_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1863.1.1
+		latest_usage_date = 1890.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_bernardino_caballero
+		}
+		fix_variable_error = { variable = converter_bernardino_caballero }
+	}
+}
+
+prg_general_diaz = {
+	first_name = Pepita_Hedwig
+	last_name = DI_az
+	historical = yes
+	culture = cu:platinean
+	female = yes
+	religion = rel:catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1833.10.17
+	traits = {
+		experienced_defensive_strategist
+		trench_rat
+		brave
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jose_eduvigis_diaz
+				}
+			}
+			uses_prg_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1880.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jose_eduvigis_diaz
+		}
+		fix_variable_error = { variable = converter_jose_eduvigis_diaz }
+	}
+}
+
+prg_admiral_meza = {
+	first_name = Petra_Ignacia
+	last_name = Meza
+	historical = yes
+	culture = cu:platinean
+	female = yes
+	religion = rel:catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	birth_date = 1813.2.2 # only year known
+	traits = {
+		experienced_naval_commander
+		brave
+		reckless
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pedro_ignacio_meza
+				}
+			}
+			uses_prg_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1854.1.1
+		latest_usage_date = 1875.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_platinean_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pedro_ignacio_meza
+		}
+		fix_variable_error = { variable = converter_pedro_ignacio_meza }
+	}
+}
+# Peru - PEU
+fem_peu_admiral_grau = {
+	first_name = Miguela
+	last_name = Grau_Seminario
+	historical = yes
+	culture = cu:south_andean
+	female = yes
+	religion = rel:catholic
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_reformer
+	birth_date = 1834.7.27
+	dna = dna_miguel_grau_seminario
+	traits = {
+		brave
+		romantic
+		experienced_naval_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_grau_seminario
+				}
+			}
+			uses_peu_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1865.1.1
+		latest_usage_date = 1890.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_andean_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_grau_seminario
+		}
+		fix_variable_error = { variable = converter_grau_seminario }
+	}
+}
+
+# Afghanistan - AFG
+fem_afg_general_mohammed = {
+	first_name = Yar
+	last_name = Fatma
+	historical = yes
+	culture = cu:pashtun
+	female = yes
+	religion = rel:sunni
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1800.1.1# Uncertain birth date
+	traits = {
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_afg_general_mohammed
+				}
+			}
+			uses_afg_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1865.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:pashtun }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_afg_general_mohammed
+		}
+		fix_variable_error = { variable = converter_afg_general_mohammed }
+	}
+}
+# Japan - JAP
+fem_jap_admiral_togo = {
+	first_name = Tetsu
+	last_name = Togo
+	historical = yes
+	culture = cu:japanese
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1848.1.27
+	traits = {
+		expert_naval_commander
+		direct
+		meticulous
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_admiral_togo
+				}
+			}
+			uses_japanese_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1883.2.5
+		latest_usage_date = 1913.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:japanese }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_admiral_togo
+		}
+		fix_variable_error = { variable = converter_admiral_togo }
+	}
+}
+fem_jap_general_gentaro = {
+	first_name = Hisako
+	last_name = Kodama
+	historical = yes
+	culture = cu:japanese
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1852.3.16
+	traits = {
+		experienced_offensive_planner
+		experienced_colonial_administrator
+		innovative
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_gentaro
+				}
+			}
+			uses_japanese_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1889.1.1
+		latest_usage_date = 1906.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:japanese }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_gentaro
+		}
+		fix_variable_error = { variable = converter_general_gentaro }
+	}
+}
+fem_jap_general_oyama = {
+	first_name = Sutematsu
+	last_name = Oyama
+	historical = yes
+	culture = cu:japanese
+	female = yes
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1842.11.12
+	traits = {
+		experienced_offensive_planner
+		trench_rat
+		reserved
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_oyama
+				}
+			}
+			uses_japanese_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1889.1.1
+		latest_usage_date = 1906.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:japanese }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_oyama
+		}
+		fix_variable_error = { variable = converter_general_oyama }
+	}
+}
+
+# Gwalior - GWA
+fem_gwa_general_tope = {
+	first_name = Sita
+	last_name = Tope
+	historical = yes
+	dna = dna_tatya_tope
+	culture = cu:marathi
+	female = yes
+	religion = rel:hindu
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1814.2.16
+	traits = {
+		persistent
+		forest_commander
+		war_criminal
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_local_bic_characters = yes
+			any_scope_state = { converter_is_marathi_homeland = yes }
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_tope
+				}
+			}
+			has_dlc_feature = ip2_content
+		}
+		role = general
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1870.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:marathi }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_tope
+		}
+		fix_variable_error = { variable = converter_general_tope }
+	}
+}
+
+# Jhansi - JHN
+fem_jhn_rani_of_jhansi = {
+	first_name = Lakshmeshwar
+	last_name = Newalkar
+	dna = dna_rani_lakshmibai
+	historical = yes
+	culture = cu:marathi
+	female = no
+	religion = rel:hindu
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_traditionalist
+	birth_date = 1828.11.19
+	traits = {
+		cruel
+		imposing
+		celebrity_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_local_bic_characters = yes
+			is_old_world_trading_company = no
+			any_scope_state = { converter_is_marathi_homeland = yes }
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_rani_of_jhansi
+				}
+			}
+			has_dlc_feature = ip2_content
+		}
+		role = general
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1875.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:marathi }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_rani_of_jhansi
+		}
+		fix_variable_error = { variable = converter_rani_of_jhansi }
+	}
+}

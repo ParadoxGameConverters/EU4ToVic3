@@ -1,43 +1,62 @@
 ﻿GER = {
 	use_culture_states = yes
-	
+
 	is_major_formation = yes
-	
+
 	unification_play = dp_unify_germany
 	leadership_play = dp_leadership_germany
 
-	required_states_fraction = 0.75
-	
+	required_states_fraction = 0.73
+
 	ai_will_do = { has_technology_researched = nationalism }
 
 	possible = {
+		#GER_formation_possible = yes
 		OR = {
-			country_has_primary_culture = cu:north_german
-			country_has_primary_culture = cu:south_german
-			country_has_primary_culture = cu:weder_german
-		}	
-		any_country = {
-			OR = {
-				country_has_primary_culture = cu:north_german
-				country_has_primary_culture = cu:south_german
-				country_has_primary_culture = cu:weder_german
-			}			
-			has_technology_researched = nationalism
+			has_technology_researched = pan-nationalism
+			custom_tooltip = {
+				text = je_german_unification_idea_trigger_desc
+				has_variable = je_german_unification_idea
+			}
 		}
 		custom_tooltip = {
 			text = no_confederation_of_the_rhine_tt
 			NOT = {
 				exists = c:RHN
 			}
-		}	
+		}
+		custom_tooltip = {
+			text = no_dual_or_triple_monarchy_tt
+			NOR = {
+				has_government_type = gov_dual_monarchy
+				has_government_type = gov_triple_monarchy
+			}
+		}
+		NOT = {
+			c:KUK ?= this
+		}
+	}
+
+	max_num_formation_candidates = 3
+	can_be_formation_candidate = {
+		#GER_formation_candidate_possible = yes
+		country_rank >= rank_value:major_power
+	}
+
+	can_be_unification_target = {
+		#GER_formation_target_possible = yes
+		NOR = {
+			has_government_type = gov_dual_monarchy
+			has_government_type = gov_triple_monarchy
+		}
 	}
 }
 
 ITA = {
 	use_culture_states = yes
-	
+
 	is_major_formation = yes
-	
+
 	unification_play = dp_unify_italy
 	leadership_play = dp_leadership_italy
 
@@ -45,68 +64,120 @@ ITA = {
 
 	ai_will_do = { has_technology_researched = nationalism }
 
+	potential = {
+		#ITA_formation_potential = yes
+		NOR = {
+			c:AUS ?= this
+			c:KUK ?= this
+			c:HRE ?= this
+		}
+	}
+
 	possible = {
+		#ITA_formation_possible = yes
 		OR = {
 			country_has_primary_culture = cu:north_italian
 			country_has_primary_culture = cu:south_italian
 		}
+		is_country_type = recognized
+		NOR = {
+			c:AUS ?= this
+			c:KUK ?= this
+			c:HRE ?= this
+		}
+	}
+
+	max_num_formation_candidates = 3
+	can_be_formation_candidate = {
+		#ITA_formation_candidate_possible = yes
+		country_rank >= rank_value:minor_power
+		NOR = {
+			c:AUS ?= this
+			c:KUK ?= this
+			c:HRE ?= this
+		}
+		is_country_type = recognized
 		any_country = {
 			filter = {
 				OR = {
 					country_has_primary_culture = cu:north_italian
-					country_has_primary_culture = cu:south_italian				
+					country_has_primary_culture = cu:south_italian
 				}
 			}
-			has_technology_researched = nationalism	
+			has_technology_researched = nationalism
 			percent = 1
+		}
+	}
+
+	can_be_unification_target = {
+		#ITA_formation_target_possible = yes
+		NAND = { # United States of Greater Austria
+			country_has_primary_culture = cu:north_italian
+			OR = {
+				has_journal_entry = je_danubian_federation
+				c:KUK ?= this
+		  	  	c:HRE ?= this
+			}
 		}
 	}
 }
 
 SCA = {
 	use_culture_states = yes
-	
+
 	is_major_formation = yes
-	
+
 	unification_play = dp_unify_scandinavia
 	leadership_play = dp_leadership_scandinavia
 
 	required_states_fraction = 0.7
-	
+
 	ai_will_do = { always = yes }
 
 	possible = {
+		#SCA_formation_possible = yes
 		OR = {
 			country_has_primary_culture = cu:swedish
 			country_has_primary_culture = cu:danish
 			country_has_primary_culture = cu:norwegian
 			country_has_primary_culture = cu:icelandic
-		}	
+		}
+	}
+
+	max_num_formation_candidates = 1
+	can_be_formation_candidate = {
+		#SCA_formation_candidate_possible = yes
+		country_rank >= rank_value:minor_power
 		any_country = {
-			OR = {
-				country_has_primary_culture = cu:swedish
-				country_has_primary_culture = cu:danish
-				country_has_primary_culture = cu:norwegian
-				country_has_primary_culture = cu:icelandic
-			}		
+			filter = {
+				OR = {
+					country_has_primary_culture = cu:swedish
+					country_has_primary_culture = cu:danish
+					country_has_primary_culture = cu:norwegian
+					country_has_primary_culture = cu:icelandic
+				}
+			}
 			has_technology_researched = pan-nationalism
+			percent = 1
 		}
 	}
 }
 
 FND = {
 	use_culture_states = yes
-	
+
 	is_major_formation = yes
-	
+
 	unification_play = dp_unify_andes
 	leadership_play = dp_leadership_andes
 
 	required_states_fraction = 0.8
-	
+
 	ai_will_do = { always = yes }
 
 	possible = {
+		#FND_formation_possible = yes
+		has_journal_entry = je_andean_federation
 		OR = {
 			country_has_primary_culture = cu:north_andean
 			country_has_primary_culture = cu:south_andean
@@ -130,34 +201,122 @@ FND = {
 				exists = cu:chilean
 				country_has_primary_culture = cu:chilean
 			}
-		}	
-		has_journal_entry = je_andean_federation
-		any_country = {
+		}
+	}
+
+	max_num_formation_candidates = 3
+	can_be_formation_candidate = {
+		#FND_formation_candidate_possible = yes
+		country_rank >= rank_value:major_power
+	}
+}
+
+YUG = {
+	states = {
+		STATE_WESTERN_SERBIA
+		STATE_EASTERN_SERBIA
+		STATE_KOSOVO
+		STATE_SKOPIA
+		STATE_DELVIDEK
+		STATE_MONTENEGRO
+		STATE_BOSNIA
+		STATE_SLAVONIA
+		STATE_DALMATIA
+		STATE_CROATIA
+		STATE_SLOVENIA
+		STATE_ISTRIA
+	}
+
+	is_major_formation = yes
+
+	unification_play = dp_unify_yugoslavia
+	leadership_play = dp_leadership_yugoslavia
+
+	required_states_fraction = 0.75
+
+	ai_will_do = { always = yes }
+	
+	potential = {
+		#YUG_formation_potential = yes
+		NOR = {
+			c:AUS ?= this
+			c:KUK ?= this
+		}
+		trigger_if = {
+			limit = {
+				c:BUL ?= this
+			}
+			has_variable = bul_pursued_greater_yugoslavism
+		}
+		trigger_else = {
+			always = yes
+		}
+	}
+
+	possible = {
+		#YUG_formation_possible = yes
+		NOR = { # Not Danubian State or HRE
+			c:AUS ?= this
+			c:KUK ?= this
+			c:HRE ?= this
+		}
+		has_technology_researched = pan-nationalism
+		trigger_if = {
+			limit = {
+				c:BUL ?= this
+			}
+			custom_tooltip = {
+				text = bulgaria_pursued_greater_yugoslavism_tt
+				has_variable = bul_pursued_greater_yugoslavism
+			}
+		}
+	}
+
+	max_num_formation_candidates = 3 # For the odd Croatia, Serbia and Bulgaria FFA
+	can_be_formation_candidate = {
+		#YUG_formation_candidate_possible = yes
+		country_rank >= rank_value:major_power
+		NOR = { # Not Danubian State or HRE
+			c:AUS ?= this
+			c:KUK ?= this
+			c:HRE ?= this
+		}
+		trigger_if = {
+			limit = {
+				c:BUL ?= this
+			}
+			custom_tooltip = {
+				text = bulgaria_pursued_greater_yugoslavism_tt
+				has_variable = bul_pursued_greater_yugoslavism
+			}
+		}
+	}
+
+	can_be_unification_target = {
+		#YUG_formation_target_possible = yes
+		NAND = { # United States of Greater Austria
 			OR = {
-				country_has_primary_culture = cu:north_andean
-				country_has_primary_culture = cu:south_andean
-				AND = {
-					exists = cu:venezuelan
-					country_has_primary_culture = cu:venezuelan
-				}
-				AND = {
-					exists = cu:ecuadorian
-					country_has_primary_culture = cu:ecuadorian
-				}
-				AND = {
-					exists = cu:bolivian
-					country_has_primary_culture = cu:bolivian
-				}
-				AND = {
-					exists = cu:peruvian
-					country_has_primary_culture = cu:peruvian
-				}
-				AND = {
-					exists = cu:chilean
-					country_has_primary_culture = cu:chilean
-				}
-			}	
-			has_technology_researched = pan-nationalism	
+				country_has_primary_culture = cu:slovene
+				country_has_primary_culture = cu:croat
+				country_has_primary_culture = cu:serb
+			}
+			OR = {  # Not Danubian State or HRE
+				has_journal_entry = je_danubian_federation
+				c:KUK ?= this
+				c:HRE ?= this
+			}
+		}
+		trigger_if = {
+			limit = {
+				c:BUL ?= this
+			}
+			custom_tooltip = {
+				text = bulgaria_pursued_greater_yugoslavism_tt
+				has_variable = bul_pursued_greater_yugoslavism
+			}
+		}
+		trigger_else = {
+			always = yes
 		}
 	}
 }

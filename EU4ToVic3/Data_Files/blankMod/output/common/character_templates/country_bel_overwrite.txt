@@ -1,0 +1,92 @@
+﻿### Belgium character template file ###
+
+# Belgium - BEL
+
+# Executives
+
+BEL_John_Cockerill = {
+    # John Cockerill
+    first_name = "John"
+    last_name = "Cockerill"
+    historical = yes
+    dna = dna_john_cockerill
+    culture = cu:british
+    birth_date = 1790.8.3
+    interest_group = ig_industrialists
+    ideology = ideology_moderate
+    traits = {
+        ambitious
+        basic_political_operator
+        basic_entrepreneur
+    }
+    executive_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_John_Cockerill
+				}
+			}
+            has_dlc_feature = mp1_content
+        }
+        company_trigger = {
+            is_company_type = company_type:company_john_cockerill
+        }
+        earliest_usage_date = 1836.1.1
+        latest_usage_date = 1840.12.27
+        chance = 100
+    }
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:british }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_John_Cockerill
+		}
+		fix_variable_error = { variable = converter_John_Cockerill }
+	}
+}
+
+fem_BEL_John_Cockerill = {
+    # John Cockerill
+    first_name = "Jane"
+    last_name = "Cockerill"
+    historical = yes
+    dna = dna_john_cockerill
+    culture = cu:british
+    birth_date = 1790.8.3
+    interest_group = ig_industrialists
+	female = yes
+    ideology = ideology_moderate
+    traits = {
+        ambitious
+        basic_political_operator
+        basic_entrepreneur
+    }
+    executive_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_John_Cockerill
+				}
+			}
+            has_dlc_feature = mp1_content
+        }
+        company_trigger = {
+            is_company_type = company_type:company_john_cockerill
+        }
+        earliest_usage_date = 1836.1.1
+        latest_usage_date = 1840.12.27
+        chance = 100
+    }
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:british }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_John_Cockerill
+		}
+		fix_variable_error = { variable = converter_John_Cockerill }
+	}
+}

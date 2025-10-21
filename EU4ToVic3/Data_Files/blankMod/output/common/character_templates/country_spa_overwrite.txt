@@ -1,0 +1,93 @@
+﻿### Spain character template file ###
+
+# Spain - SPA
+# Cuba - CUB
+
+# Spain
+
+### Executives
+
+SPA_pedro_duro = { # Pedro Duro, Duro y Compania
+	first_name = Pedro
+	last_name = Duro
+	historical = yes
+	birth_date = 1810.12.5
+	dna = dna_pedro_duro
+	culture = cu:spanish
+	interest_group = ig_industrialists
+	ideology = ideology_reformer
+	traits = {
+		ambitious
+		reckless
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pedro_duro
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_duro_y_compania
+		}
+		earliest_usage_date = 1857.1.1
+		latest_usage_date = 1886.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:spanish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pedro_duro
+		}
+		fix_variable_error = { variable = converter_pedro_duro }
+	}
+}
+
+fem_SPA_pedro_duro = { # Pedro Duro, Duro y Compania
+	first_name = Petra
+	last_name = Duro
+	historical = yes
+	birth_date = 1810.12.5
+	dna = dna_pedro_duro
+	culture = cu:spanish
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_reformer
+	traits = {
+		ambitious
+		reckless
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_pedro_duro
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_duro_y_compania
+		}
+		earliest_usage_date = 1857.1.1
+		latest_usage_date = 1886.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:spanish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_pedro_duro
+		}
+		fix_variable_error = { variable = converter_pedro_duro }
+	}
+}

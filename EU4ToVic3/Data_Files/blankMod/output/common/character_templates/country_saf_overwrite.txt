@@ -1,0 +1,97 @@
+﻿### Sooth Efrika character template file ###
+
+# Oranje - ORA
+# South Africa - SAF
+# Transvaal - TRN
+# Zulu - ZUL
+
+# South Africa
+SAF_cecil_rhodes = {
+	# Cecil Rhodes
+	first_name = "Cecil"
+	last_name = "Rhodes"
+	historical = yes
+	culture = cu:british
+	noble = yes
+	birth_date = 1853.07.05
+	dna = dna_cecil_rhodes
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+	ig_leader = yes
+	traits = {
+		literary
+		ambitious
+		experienced_colonial_administrator
+	}
+	executive_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_cecil_rhodes
+				}
+			}
+            has_dlc_feature = mp1_content
+        }
+        company_trigger = {
+            is_company_type = company_type:company_de_beers
+        }
+        earliest_usage_date = 1888.1.1
+        latest_usage_date = 1902.03.26
+        chance = 100
+    }
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_cape_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_cecil_rhodes
+		}
+		fix_variable_error = { variable = converter_cecil_rhodes }
+	}
+}
+fem_SAF_cecil_rhodes = {
+	# Cecil Rhodes
+	first_name = "Cecelia"
+	last_name = "Rhodes"
+	historical = yes
+	culture = cu:british
+	noble = yes
+	birth_date = 1853.07.05
+	dna = dna_cecil_rhodes
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_moderate
+	ig_leader = yes
+	traits = {
+		literary
+		ambitious
+		experienced_colonial_administrator
+	}
+	executive_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_cecil_rhodes
+				}
+			}
+            has_dlc_feature = mp1_content
+        }
+        company_trigger = {
+            is_company_type = company_type:company_de_beers
+        }
+        earliest_usage_date = 1888.1.1
+        latest_usage_date = 1902.03.26
+        chance = 100
+    }
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_cape_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_cecil_rhodes
+		}
+		fix_variable_error = { variable = converter_cecil_rhodes }
+	}
+}

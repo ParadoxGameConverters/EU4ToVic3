@@ -1,0 +1,403 @@
+﻿### France character template file ###
+
+### BP1
+
+fra_auguste_comte_character_template = {
+	first_name = Auguste
+	last_name = Comte
+	historical = yes
+	birth_date = 1798.1.19
+	culture = cu:french
+	religion = rel:atheist
+	is_agitator = yes
+	female = no
+	interest_group = ig_intelligentsia
+	ideology = ideology_positivist
+	#dna =
+	traits = {
+		charismatic
+		sickly
+		erudite
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_auguste_comte
+		}
+		fix_variable_error = { variable = converter_auguste_comte }
+	}
+}
+
+fem_fra_auguste_comte_character_template = {
+	first_name = Augusta
+	last_name = Comte
+	historical = yes
+	birth_date = 1798.1.19
+	culture = cu:french
+	religion = rel:atheist
+	is_agitator = yes
+	female = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_positivist
+	#dna =
+	traits = {
+		charismatic
+		sickly
+		erudite
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_auguste_comte
+		}
+		fix_variable_error = { variable = converter_auguste_comte }
+	}
+}
+
+### Executives
+
+FRA_eugene_schneider = { # Eugène Schneider, Schneider et Cie
+	first_name = Eugene
+	last_name = Schneider
+	historical = yes
+	birth_date = 1805.3.29
+	dna = dna_eugene_schneider
+	culture = cu:french
+	interest_group = ig_industrialists
+	ideology = ideology_protectionist
+	traits = {
+		meticulous
+		experienced_political_operator
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_eugene_schneider
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_schneider_creusot
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1875.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_eugene_schneider
+		}
+		fix_variable_error = { variable = converter_eugene_schneider }
+	}
+}
+
+fem_FRA_eugene_schneider = { # Eugène Schneider, Schneider et Cie
+	first_name = EugE_nie
+	last_name = Schneider
+	historical = yes
+	birth_date = 1805.3.29
+	dna = dna_eugene_schneider
+	culture = cu:french
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_protectionist
+	traits = {
+		meticulous
+		experienced_political_operator
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_eugene_schneider
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_schneider_creusot
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1875.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_eugene_schneider
+		}
+		fix_variable_error = { variable = converter_eugene_schneider }
+	}
+}
+
+FRA_ferdinand_de_lesseps = { # Ferdinand de Lesseps, Suez or Panama Canal Company
+	first_name = Ferdinand
+	last_name = de_Lesseps
+	historical = yes
+	birth_date = 1805.11.19
+	dna = dna_ferdinand_de_lesseps
+	culture = cu:french
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+	traits = {
+		direct
+		basic_diplomat
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ferdinand_de_lesseps
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_suez_company
+		}
+		earliest_usage_date = 1854.1.1
+		latest_usage_date = 1880.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ferdinand_de_lesseps
+		}
+		fix_variable_error = { variable = converter_ferdinand_de_lesseps }
+	}
+}
+
+fem_FRA_ferdinand_de_lesseps = { # Ferdinand de Lesseps, Suez or Panama Canal Company
+	first_name = Fernande
+	last_name = de_Lesseps
+	historical = yes
+	birth_date = 1805.11.19
+	dna = dna_ferdinand_de_lesseps
+	culture = cu:french
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_moderate
+	traits = {
+		direct
+		basic_diplomat
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ferdinand_de_lesseps
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_suez_company
+		}
+		earliest_usage_date = 1854.1.1
+		latest_usage_date = 1880.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ferdinand_de_lesseps
+		}
+		fix_variable_error = { variable = converter_ferdinand_de_lesseps }
+	}
+}
+
+FRA_jean_dollfus = { # Jean Dollfus, Dollfus-Mieg et Cie.
+	first_name = Jean
+	last_name = Dollfus
+	historical = yes
+	birth_date = 1800.9.25
+	dna = dna_jean_dollfus
+	culture = cu:french
+	interest_group = ig_industrialists
+	ideology = ideology_market_liberal
+	religion = rel:protestant
+	traits = {
+		direct
+		ambitious
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jean_dollfus
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_dmc
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1887.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jean_dollfus
+		}
+		fix_variable_error = { variable = converter_jean_dollfus }
+	}
+}
+
+fem_FRA_jean_dollfus = { # Jean Dollfus, Dollfus-Mieg et Cie.
+	first_name = Jeanne
+	last_name = Dollfus
+	historical = yes
+	birth_date = 1800.9.25
+	dna = dna_jean_dollfus
+	culture = cu:french
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_market_liberal
+	religion = rel:protestant
+	traits = {
+		direct
+		ambitious
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jean_dollfus
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_dmc
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1887.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jean_dollfus
+		}
+		fix_variable_error = { variable = converter_jean_dollfus }
+	}
+}
+
+FRA_charles_frederick_worth = { # Charles Frederick Worth, Maison Worth
+	first_name = Charles-Frederick
+	last_name = Worth
+	historical = yes
+	birth_date = 1825.10.13
+	dna = dna_charles_frederick_worth
+	culture = cu:british
+	interest_group = ig_industrialists
+	ideology = ideology_market_liberal
+	religion = rel:protestant
+	traits = {
+		innovative
+		ambitious
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_charles_frederick_worth
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_maison_worth
+		}
+		earliest_usage_date = 1858.1.1
+		latest_usage_date = 1895.3.10
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:british }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_charles_frederick_worth
+		}
+		fix_variable_error = { variable = converter_charles_frederick_worth }
+	}
+}
+
+fem_FRA_charles_frederick_worth = { # Charles Frederick Worth, Maison Worth
+	first_name = Charleigh-Rica
+	last_name = Worth
+	historical = yes
+	birth_date = 1825.10.13
+	dna = dna_charles_frederick_worth
+	culture = cu:british
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_market_liberal
+	religion = rel:protestant
+	traits = {
+		innovative
+		ambitious
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_charles_frederick_worth
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_maison_worth
+		}
+		earliest_usage_date = 1858.1.1
+		latest_usage_date = 1895.3.10
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:british }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_charles_frederick_worth
+		}
+		fix_variable_error = { variable = converter_charles_frederick_worth }
+	}
+}

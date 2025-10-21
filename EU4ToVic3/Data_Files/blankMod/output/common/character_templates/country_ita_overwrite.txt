@@ -1,0 +1,174 @@
+﻿### Italy character template file ###
+### A mere geographic expression
+
+### Executives
+
+ITA_giovanni_agnelli = { # Giovanni Agnelli, Fiat
+	first_name = Giovanni
+	last_name = Agnelli
+	historical = yes
+	birth_date = 1866.8.13
+	dna = dna_giovanni_agnelli
+	culture = cu:north_italian
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+	traits = {
+		ambitious
+		engineer
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_giovanni_agnelli
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_fiat
+		}
+		earliest_usage_date = 1899.1.1
+		latest_usage_date = 1936.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_italian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_giovanni_agnelli
+		}
+		fix_variable_error = { variable = converter_giovanni_agnelli }
+	}
+}
+
+fem_ITA_giovanni_agnelli = { # Giovanni Agnelli, Fiat
+	first_name = Giovanna
+	last_name = Agnelli
+	historical = yes
+	birth_date = 1866.8.13
+	dna = dna_giovanni_agnelli
+	culture = cu:north_italian
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_moderate
+	traits = {
+		ambitious
+		engineer
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_giovanni_agnelli
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_fiat
+		}
+		earliest_usage_date = 1899.1.1
+		latest_usage_date = 1936.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_italian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_giovanni_agnelli
+		}
+		fix_variable_error = { variable = converter_giovanni_agnelli }
+	}
+}
+
+ITA_giovanni_ansaldo = { # Giovanni Ansaldo, Ansaldo and Co.
+	first_name = Giovanni
+	last_name = Ansaldo
+	historical = yes
+	birth_date = 1815.1.1 # Approximate, was born in 1815
+	dna = dna_giovanni_ansaldo
+	culture = cu:north_italian
+	interest_group = ig_intelligentsia
+	ideology = ideology_modernizer_leader
+	traits = {
+		engineer
+		literary
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_giovanni_ansaldo
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_ansaldo
+		}
+		earliest_usage_date = 1852.1.1
+		latest_usage_date = 1859.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_italian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_giovanni_ansaldo
+		}
+		fix_variable_error = { variable = converter_giovanni_ansaldo }
+	}
+}
+
+fem_ITA_giovanni_ansaldo = { # Giovanni Ansaldo, Ansaldo and Co.
+	first_name = Giovanna
+	last_name = Ansaldo
+	historical = yes
+	birth_date = 1815.1.1 # Approximate, was born in 1815
+	dna = dna_giovanni_ansaldo
+	culture = cu:north_italian
+	interest_group = ig_intelligentsia
+	female = yes
+	ideology = ideology_modernizer_leader
+	traits = {
+		engineer
+		literary
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_giovanni_ansaldo
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_ansaldo
+		}
+		earliest_usage_date = 1852.1.1
+		latest_usage_date = 1859.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_italian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_giovanni_ansaldo
+		}
+		fix_variable_error = { variable = converter_giovanni_ansaldo }
+	}
+}

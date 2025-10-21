@@ -79,32 +79,9 @@ caudillo.1 = {
 		name = caudillo.1.a
 		default_option = yes
 		add_journal_entry = { type = je_caudillo }
-		if = { # This was less of an issue in Chile
-			limit = {
-				c:CLH ?= this
-			}
-			change_variable = {
-				name = caudillo_var
-				add = 400
-			}
-		}
-		else = {
-			change_variable = {
-				name = caudillo_var
-				add = 600
-			}
-		}
-		if = { # Starts the Francia JE
-			limit = {
-				c:PRG ?= this
-				NOR = {
-					has_journal_entry = je_francocracia
-					has_variable = death_of_francia_var
-					year > 1836
-				}
-				has_dlc_feature = rp1_content
-			}
-			add_journal_entry = { type = je_francocracia }
+		change_variable = {
+			name = caudillo_var
+			add = 600
 		}
 	}
 }

@@ -1,0 +1,79 @@
+﻿# fix_variable_error
+# Stops error log entries for "unused" variables
+# use as:
+### fix_variable_error = { variable = variable_name }
+
+fix_variable_error = {
+	if = {
+		limit = { has_variable = $variable$ var:$variable$ = flag:$variable$ exists = scope:$variable$ scope:$variable$ = flag:$variable$ }
+		set_variable = { name = $variable$ value = flag:$variable$ } flag:$variable$ = { save_scope_as = $variable$ }
+	}
+}
+
+fix_orphaned_variables = {
+	random_country = {
+		fix_variable_error = { variable = hawduqo_var }
+		fix_variable_error = { variable = death_of_kamehameha }
+		fix_variable_error = { variable = zzz_converter_no_tc_religion }
+		fix_variable_error = { variable = heir_showa_spawned }
+		fix_variable_error = { variable = oscar_ii_ruler_var }
+		fix_variable_error = { variable = ranavalona }
+		fix_variable_error = { variable = starting_ethiopian_emperor }
+		fix_variable_error = { variable = paraguay_war_victory_achievement }
+		fix_variable_error = { variable = stamped_out_monarchy_var }
+		fix_variable_error = { variable = fra_republic_counter }
+		fix_variable_error = { variable = hungary_achievement }
+		fix_variable_error = { variable = completed_natural_borders_je }
+		fix_variable_error = { variable = achievement_teamkiller_var }
+		fix_variable_error = { variable = exile_to_ruler_var }
+		fix_variable_error = { variable = george_v_ruler_var }
+		fix_variable_error = { variable = peru_bolivia_var }
+		fix_variable_error = { variable = is_santa_anna }
+		fix_variable_error = { variable = achievement_revo_needed }
+		fix_variable_error = { variable = yat_sen_religion }
+		fix_variable_error = { variable = lingering_plc_resistance }
+		fix_variable_error = { variable = heir_taisho_spawned }
+		fix_variable_error = { variable = meiji_reforms_complete_var }
+		fix_variable_error = { variable = algeria_ait_abbas_var }
+		fix_variable_error = { variable = edward_vii_heir_var }
+		fix_variable_error = { variable = charles_xv_ruler_var }
+		fix_variable_error = { variable = hermit_kingdom_achievement }
+		fix_variable_error = { variable = ashkenazi_culture }
+		fix_variable_error = { variable = monroe_doctrine }
+		fix_variable_error = { variable = converter_made_into_colony }
+		fix_variable_error = { variable = algeria_touggourt_var }
+		fix_variable_error = { variable = mazzini_var }
+		fix_variable_error = { variable = honor_and_life_achievement }
+		fix_variable_error = { variable = sultan_aziz_coup_happened }
+		fix_variable_error = { variable = algeria_constantine_var }
+		fix_variable_error = { variable = converter_made_into_protectorate }
+		fix_variable_error = { variable = je_amazonas_complete_variable }
+		fix_variable_error = { variable = mon_state_formation_10_fired }
+		fix_variable_error = { variable = converter_made_into_dominion }
+		fix_variable_error = { variable = veiled_protectorate_support_egypt }
+		fix_variable_error = { variable = converter_made_into_tributary }
+		fix_variable_error = { variable = china_warlord_explosion }
+		fix_variable_error = { variable = first_flight_achievement_check }
+		fix_variable_error = { variable = achievement_danubian_federation }
+		fix_variable_error = { variable = balkan_league_member }
+		fix_variable_error = { variable = free_nation_name_var }
+		fix_variable_error = { variable = achievement_great_game_no_re }
+		fix_variable_error = { variable = estado_novo_achievement }
+		fix_variable_error = { variable = converter_made_into_vassal }
+		fix_variable_error = { variable = algeria_mascara_var }
+		fix_variable_error = { variable = achievement_mightier_than_the_sword }
+		fix_variable_error = { variable = completed_mughal_hindustan_je }
+		fix_variable_error = { variable = converter_made_into_chartered_company }
+		fix_variable_error = { variable = je_german_unification_idea }
+		fix_variable_error = { variable = paris_commune_crushed_var }
+		fix_variable_error = { variable = iranzamin_achievement }
+		fix_variable_error = { variable = heir_meiji_spawned }
+		fix_variable_error = { variable = petar_died_tuberculosis }
+		fix_variable_error = { variable = completed_sikh_sovereignty_je }
+		fix_variable_error = { variable = ismail_var }
+		fix_variable_error = { variable = converter_made_into_puppet }
+		fix_variable_error = { variable = achievement_military_junta_var }
+		fix_variable_error = { variable = john_frost_var }
+		fix_variable_error = { variable = francocracia_paraguay_var }
+	}
+}

@@ -1,0 +1,842 @@
+﻿### China - CHI character template file ###
+
+### Historical Leaders
+chi_gong_character_template = {
+    first_name = Prince_Gong
+    last_name = Aisin_Gioro
+    historical = yes
+    culture = cu:manchu
+    female = no
+    ideology = ideology_royalist
+    interest_group = ig_landowners
+    birth_date = 1833.1.11
+    traits = {
+        experienced_diplomat
+        expensive_tastes
+    }
+    interest_group_leader_usage = {
+        country_trigger = {
+            uses_manchu_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_prince_gong
+				}
+			}
+			ruler.culture = { is_target_in_global_variable_list = { name = global_manchu_cultures target = this } }
+            has_law = law_type:law_monarchy
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_landowners
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+        }
+        earliest_usage_date = 1853.1.1
+        latest_usage_date = 1898.1.1
+        chance = 50
+    }
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:manchu }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_prince_gong
+		}
+		fix_variable_error = { variable = converter_prince_gong }
+	}
+}
+fem_chi_gong_character_template = {
+    first_name = Yixin
+    last_name = Aisin_Gioro
+    historical = yes
+    culture = cu:manchu
+    female = yes
+    ideology = ideology_royalist
+    interest_group = ig_landowners
+    birth_date = 1833.1.11
+    traits = {
+        experienced_diplomat
+        expensive_tastes
+    }
+    interest_group_leader_usage = {
+        country_trigger = {
+            uses_manchu_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_prince_gong
+				}
+			}
+			ruler.culture = { is_target_in_global_variable_list = { name = global_manchu_cultures target = this } }
+            has_law = law_type:law_monarchy
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_landowners
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+        }
+        earliest_usage_date = 1853.1.1
+        latest_usage_date = 1898.1.1
+        chance = 50
+    }
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:manchu }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_prince_gong
+		}
+		fix_variable_error = { variable = converter_prince_gong }
+	}
+}
+chi_cixi_template = {
+    first_name = Cixi
+    last_name = Yehe_Nara
+    historical = yes
+    culture = cu:manchu
+    female = yes
+    ideology = ideology_royalist
+    interest_group = ig_landowners
+    birth_date = 1835.11.29
+    dna = dna_empress_dowager_cixi
+    traits = {
+       ambitious
+       reckless
+       experienced_political_operator
+    }
+    interest_group_leader_usage = {
+        country_trigger = {
+            uses_manchu_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_cixi
+				}
+			}
+			ruler.culture = { is_target_in_global_variable_list = { name = global_manchu_cultures target = this } }
+            has_law = law_type:law_monarchy
+            has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_landowners
+            NOR = {
+                has_variable = communist_ig_var
+                has_variable = chose_vanguardism
+                has_variable = chose_fascism
+                has_variable = chose_conservatism
+                has_variable = chose_ethno_nationalism
+            }
+        }
+        earliest_usage_date = 1852.6.26 # the day she entered the Forbidden City
+        latest_usage_date = 1898.1.1
+        chance = 50
+    }
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:manchu }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_cixi
+		}
+		fix_variable_error = { variable = converter_cixi }
+	}
+}
+fem_chi_cixi_template = {
+    first_name = Xiang
+    last_name = Yehe_Nara
+    historical = yes
+    culture = cu:manchu
+    female = no
+    ideology = ideology_royalist
+    interest_group = ig_landowners
+    birth_date = 1835.11.29
+    dna = dna_empress_dowager_cixi
+    traits = {
+       ambitious
+       reckless
+       experienced_political_operator
+    }
+    interest_group_leader_usage = {
+        country_trigger = {
+            uses_manchu_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_cixi
+				}
+			}
+			ruler.culture = { is_target_in_global_variable_list = { name = global_manchu_cultures target = this } }
+            has_law = law_type:law_monarchy
+            has_dlc_feature = ep1_content
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            is_interest_group_type = ig_landowners
+            NOR = {
+                has_variable = communist_ig_var
+                has_variable = chose_vanguardism
+                has_variable = chose_fascism
+                has_variable = chose_conservatism
+                has_variable = chose_ethno_nationalism
+            }
+        }
+        earliest_usage_date = 1852.6.26 # the day she entered the Forbidden City
+        latest_usage_date = 1898.1.1
+        chance = 50
+    }
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:manchu }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_cixi
+		}
+		fix_variable_error = { variable = converter_cixi }
+	}
+}
+
+### Commanders
+chi_admiral_ding_ruchang = {
+	first_name = Ruchang
+	last_name = Ding
+	historical = yes
+	culture = cu:han
+	female = no
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1836.11.18
+	traits = {
+		basic_naval_commander
+		dockyard_master
+		direct
+	}
+	commander_usage = {
+		country_trigger = {
+            uses_han_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ding_ruchang
+				}
+			}
+		}
+		role = admiral
+		earliest_usage_date = 1875.2.5
+		latest_usage_date = 1905.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:han }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ding_ruchang
+		}
+		fix_variable_error = { variable = converter_ding_ruchang }
+	}
+}
+fem_chi_admiral_ding_ruchang = {
+	first_name = Rong
+	last_name = Ding
+	historical = yes
+	culture = cu:han
+	female = yes
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1836.11.18
+	traits = {
+		basic_naval_commander
+		dockyard_master
+		direct
+	}
+	commander_usage = {
+		country_trigger = {
+            uses_han_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ding_ruchang
+				}
+			}
+		}
+		role = admiral
+		earliest_usage_date = 1875.2.5
+		latest_usage_date = 1905.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:han }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ding_ruchang
+		}
+		fix_variable_error = { variable = converter_ding_ruchang }
+	}
+}
+chi_admiral_sa_chenbing = {
+	first_name = Chenbing
+	last_name = Sa
+	historical = yes
+	culture = cu:han
+	female = no
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1859.4.30
+	traits = {
+		basic_naval_commander
+		innovative
+		cautious
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_han_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sa_chenbing
+				}
+			}
+		}
+		role = admiral
+		earliest_usage_date = 1892.2.5
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:han }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sa_chenbing
+		}
+		fix_variable_error = { variable = converter_sa_chenbing }
+	}
+}
+fem_chi_admiral_sa_chenbing = {
+	first_name = Zhenbing
+	last_name = Sa
+	historical = yes
+	culture = cu:han
+	female = no
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1859.4.30
+	traits = {
+		basic_naval_commander
+		innovative
+		cautious
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_han_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sa_chenbing
+				}
+			}
+		}
+		role = admiral
+		earliest_usage_date = 1892.2.5
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:han }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sa_chenbing
+		}
+		fix_variable_error = { variable = converter_sa_chenbing }
+	}
+}
+chi_general_yuan_shikai = {
+	first_name = Shikai
+	last_name = Yuan
+	historical = yes
+	culture = cu:han
+	female = no
+	ideology = ideology_reformer
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1859.9.16
+	traits = {
+		ambitious
+		persistent
+		# army reformer, but insignificant field commander
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_han_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_yuan_shikai
+				}
+			}
+		}
+		role = general
+		earliest_usage_date = 1885.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:han }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_yuan_shikai
+		}
+		fix_variable_error = { variable = converter_yuan_shikai }
+	}
+}
+fem_chi_general_yuan_shikai = {
+	first_name = Jin
+	last_name = Yuan
+	historical = yes
+	culture = cu:han
+	female = yes
+	ideology = ideology_reformer
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1859.9.16
+	traits = {
+		ambitious
+		persistent
+		# army reformer, but insignificant field commander
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_han_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_yuan_shikai
+				}
+			}
+		}
+		role = general
+		earliest_usage_date = 1885.1.1
+		latest_usage_date = 1920.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:han }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_yuan_shikai
+		}
+		fix_variable_error = { variable = converter_yuan_shikai }
+	}
+}
+chi_general_zeng_guofan = {
+	first_name = Guofan
+	last_name = Zeng
+	historical = yes
+	culture = cu:han
+	female = no
+	ideology = ideology_traditionalist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1811.11.26
+	traits = {
+		plains_commander
+		pious
+		pillager
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_han_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_zeng_guofan
+				}
+			}
+		}
+		role = general
+		earliest_usage_date = 1851.1.1
+		latest_usage_date = 1870.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:han }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_zeng_guofan
+		}
+		fix_variable_error = { variable = converter_zeng_guofan }
+	}
+}
+fem_chi_general_zeng_guofan = {
+	first_name = Yiyong
+	last_name = Zeng
+	historical = yes
+	culture = cu:han
+	female = yes
+	ideology = ideology_traditionalist
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1811.11.26
+	traits = {
+		plains_commander
+		pious
+		pillager
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_han_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_zeng_guofan
+				}
+			}
+		}
+		role = general
+		earliest_usage_date = 1851.1.1
+		latest_usage_date = 1870.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:han }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_zeng_guofan
+		}
+		fix_variable_error = { variable = converter_zeng_guofan }
+	}
+}
+chi_general_sengge_rinchen = {
+	first_name = Sengge_Rinchen
+	last_name = Borjigin
+	historical = yes
+	culture = cu:mongol
+	female = no
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1811.2.26
+	traits = {
+		stalwart_defender
+		experienced_artillery_commander
+		meticulous
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_mongol_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sengge_rinchen
+				}
+			}
+			has_law = law_type:law_monarchy
+			owns_entire_state_region = STATE_HINGGAN
+		}
+		role = general
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1873.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:mongol }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sengge_rinchen
+		}
+		fix_variable_error = { variable = converter_sengge_rinchen }
+	}
+}
+fem_chi_general_sengge_rinchen = {
+	first_name = Hoelun_Borte
+	last_name = Borjigin
+	historical = yes
+	culture = cu:mongol
+	female = fe
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1811.2.26
+	traits = {
+		stalwart_defender
+		experienced_artillery_commander
+		meticulous
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_mongol_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sengge_rinchen
+				}
+			}
+			has_law = law_type:law_monarchy
+			owns_entire_state_region = STATE_HINGGAN
+		}
+		role = general
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1873.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:mongol }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sengge_rinchen
+		}
+		fix_variable_error = { variable = converter_sengge_rinchen }
+	}
+}
+
+### Agitators
+
+chi_sun_yat_sen_character_template = {
+    first_name = Sun
+	last_name = Yat_Sen
+	historical = yes
+	culture = cu:han
+	religion = global_var:yat_sen_religion
+	female = no
+    is_agitator = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_republican_leader
+	birth_date = 1866.11.12
+	dna = dna_sun_yat_sen
+	traits = {
+		erudite
+        persistent
+        ambitious
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:han }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sun_yat_sen
+		}
+		fix_variable_error = { variable = converter_sun_yat_sen }
+	}
+}
+fem_chi_sun_yat_sen_character_template = {
+    first_name = Sun
+	last_name = Yat_Sen
+	historical = yes
+	culture = cu:han
+	religion = global_var:yat_sen_religion
+	female = yes
+    is_agitator = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_republican_leader
+	birth_date = 1866.11.12
+	dna = dna_sun_yat_sen
+	traits = {
+		erudite
+        persistent
+        ambitious
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:han }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sun_yat_sen
+		}
+		fix_variable_error = { variable = converter_sun_yat_sen }
+	}
+}
+
+### Executives
+
+CHI_zhou_xuexi = { #Zhou Xuexi, Kaiping Mines
+    first_name = Xuexi
+    last_name = Zhou
+    historical = yes
+    culture = cu:han
+    birth_date = 1866.1.12
+    dna = dna_zhou_xuexi
+    interest_group = ig_industrialists
+    ideology = ideology_moderate
+    traits = {
+        basic_entrepreneur
+        erudite
+        basic_political_operator
+    }
+    executive_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_zhou_xuexi
+				}
+			}
+			has_dlc_feature = mp1_content
+        }
+        company_trigger = {
+			is_company_type = company_type:company_kaiping_mining
+        }
+	    earliest_usage_date = 1901.1.1
+	    latest_usage_date = 1936.1.1
+        chance = 100
+    }
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:han }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_zhou_xuexi
+		}
+		fix_variable_error = { variable = converter_zhou_xuexi }
+	}
+}
+
+fem_CHI_zhou_xuexi = { #Zhou Xuexi, Kaiping Mines
+    first_name = Xuexi
+    last_name = Zhou
+    historical = yes
+    culture = cu:han
+    birth_date = 1866.1.12
+    dna = dna_zhou_xuexi
+    interest_group = ig_industrialists
+	female = yes
+    ideology = ideology_moderate
+    traits = {
+        basic_entrepreneur
+        erudite
+        basic_political_operator
+    }
+    executive_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_zhou_xuexi
+				}
+			}
+			has_dlc_feature = mp1_content
+        }
+        company_trigger = {
+			is_company_type = company_type:company_kaiping_mining
+        }
+	    earliest_usage_date = 1901.1.1
+	    latest_usage_date = 1936.1.1
+        chance = 100
+    }
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:han }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_zhou_xuexi
+		}
+		fix_variable_error = { variable = converter_zhou_xuexi }
+	}
+}
+
+CHI_shen_baozhen = { #Shen Baozhen, Foochow Arsenal
+    first_name = Baozhen
+    last_name = Shen
+    historical = yes
+    culture = cu:han
+    birth_date = 1820.4.9
+    dna = dna_shen_baozhen
+    interest_group = ig_armed_forces
+    ideology = ideology_modernizer_leader
+    traits = {
+        literary
+        basic_entrepreneur
+        experienced_political_operator
+    }
+    executive_usage = {
+        country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_shen_baozhen
+				}
+			}
+			has_dlc_feature = mp1_content
+        }
+        company_trigger = {
+			is_company_type = company_type:company_foochow_arsenal
+        }
+	    earliest_usage_date = 1866.1.1
+	    latest_usage_date = 1879.1.1
+        chance = 100
+    }
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:han }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_shen_baozhen
+		}
+		fix_variable_error = { variable = converter_shen_baozhen }
+	}
+}
+
+fem_CHI_shen_baozhen = { #Shen Baozhen, Foochow Arsenal
+    first_name = Baozhen
+    last_name = Shen
+    historical = yes
+    culture = cu:han
+    birth_date = 1820.4.9
+    dna = dna_shen_baozhen
+    interest_group = ig_armed_forces
+	female = yes
+    ideology = ideology_modernizer_leader
+    traits = {
+        literary
+        basic_entrepreneur
+        experienced_political_operator
+    }
+    executive_usage = {
+        country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_shen_baozhen
+				}
+			}
+			has_dlc_feature = mp1_content
+        }
+        company_trigger = {
+			is_company_type = company_type:company_foochow_arsenal
+        }
+	    earliest_usage_date = 1866.1.1
+	    latest_usage_date = 1879.1.1
+        chance = 100
+    }
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:han }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_shen_baozhen
+		}
+		fix_variable_error = { variable = converter_shen_baozhen }
+	}
+}

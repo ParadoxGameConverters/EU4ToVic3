@@ -1,0 +1,35 @@
+﻿# This is executed last among all history
+GLOBAL = {
+	every_country = {
+		limit = {
+			OR = {
+				government_transfer_of_power = presidential_elective
+				government_transfer_of_power = parliamentary_elective
+			}
+		}
+		if = {
+			limit = {
+				government_transfer_of_power = presidential_elective
+				ruler ?= {
+					interest_group.leader != THIS
+				}
+			}
+			ruler ?= { set_as_interest_group_leader = yes }
+		}
+		if = {
+			limit = {
+				government_transfer_of_power = parliamentary_elective
+				ruler.interest_group ?= {
+					is_strongest_ig_in_government = no
+				}
+			}
+			random_interest_group = {
+				limit = {
+					is_in_government = yes
+					is_strongest_ig_in_government = yes
+				}
+				leader ?= { set_character_as_ruler = yes }
+			}
+		}
+	}
+}

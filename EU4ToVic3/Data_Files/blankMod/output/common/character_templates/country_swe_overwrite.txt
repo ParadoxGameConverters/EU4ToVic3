@@ -1,0 +1,343 @@
+﻿### Sweden character template file ###
+
+### Generals
+
+swe_gustaf_peyron = {
+	is_general = yes
+	first_name = Gustaf
+	last_name = Peyron
+	historical = yes
+	birth_date = 1828.1.5
+	culture = cu:swedish #born in Nyköping
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	traits = {
+		imperious
+		meticulous
+		charismatic
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_swe_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_gustaf_peyron
+				}
+			}
+		}
+		role = general
+		earliest_usage_date = 1845.1.1
+		latest_usage_date = 1915.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:swedish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_gustaf_peyron
+		}
+		fix_variable_error = { variable = converter_gustaf_peyron }
+	}
+}
+
+fem_swe_gustaf_peyron = {
+	is_general = yes
+	first_name = Gustava
+	last_name = Peyron
+	historical = yes
+	birth_date = 1828.1.5
+	culture = cu:swedish #born in Nyköping
+	female = yes
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+	traits = {
+		imperious
+		meticulous
+		charismatic
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_swe_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_gustaf_peyron
+				}
+			}
+		}
+		role = general
+		earliest_usage_date = 1845.1.1
+		latest_usage_date = 1915.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:swedish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_gustaf_peyron
+		}
+		fix_variable_error = { variable = converter_gustaf_peyron }
+	}
+}
+
+### Executives
+
+swe_lars_magnus_ericsson = {
+	# Lars Magnus Ericsson, founder of Ericsson 1876
+	first_name = Lars_Magnus
+	last_name = Ericsson
+	historical = yes
+	birth_date = 1846.5.5
+	dna = dna_lars_margnus_ericsson
+	culture = cu:swedish
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+	traits = {
+		direct
+		meticulous
+		cautious
+	}
+	executive_usage = {
+		country_trigger = {
+			uses_swe_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_lars_magnus_ericsson
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_ericsson
+		}
+		earliest_usage_date = 1876.1.1
+		latest_usage_date = 1900.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:swedish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_lars_magnus_ericsson
+		}
+		fix_variable_error = { variable = converter_lars_magnus_ericsson }
+	}
+}
+
+fem_swe_lars_magnus_ericsson = {
+	# Lars Magnus Ericsson, founder of Ericsson 1876
+	first_name = Laura_Irma
+	last_name = Ericsdotter
+	historical = yes
+	birth_date = 1846.5.5
+	dna = dna_lars_margnus_ericsson
+	culture = cu:swedish
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_moderate
+	traits = {
+		direct
+		meticulous
+		cautious
+	}
+	executive_usage = {
+		country_trigger = {
+			uses_swe_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_lars_magnus_ericsson
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_ericsson
+		}
+		earliest_usage_date = 1876.1.1
+		latest_usage_date = 1900.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:swedish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_lars_magnus_ericsson
+		}
+		fix_variable_error = { variable = converter_lars_magnus_ericsson }
+	}
+}
+
+SWE_ludvig_nobel = { # Ludvig Nobel, Russia, Branobel
+	first_name = Ludvig
+	last_name = Nobel
+	historical = yes
+	birth_date = 1831.7.27
+	dna = dna_ludvig_nobel
+	culture = cu:swedish
+	interest_group = ig_industrialists
+	ideology = ideology_modernizer_leader
+	traits = {
+		engineer
+		innovative
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ludvig_nobel
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_branobel
+		}
+		earliest_usage_date = 1879.1.1
+		latest_usage_date = 1888.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:swedish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ludvig_nobel
+		}
+		fix_variable_error = { variable = converter_ludvig_nobel }
+	}
+}
+
+fem_SWE_ludvig_nobel = { # Ludvig Nobel, Russia, Branobel
+	first_name = Lovisa
+	last_name = Nobel
+	historical = yes
+	birth_date = 1831.7.27
+	dna = dna_ludvig_nobel
+	culture = cu:swedish
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_modernizer_leader
+	traits = {
+		engineer
+		innovative
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ludvig_nobel
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_branobel
+		}
+		earliest_usage_date = 1879.1.1
+		latest_usage_date = 1888.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:swedish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ludvig_nobel
+		}
+		fix_variable_error = { variable = converter_ludvig_nobel }
+	}
+}
+
+SWE_fredrik_wester = { # Fredrik Wester, John Paradox & Company
+	first_name = Fredrik
+	last_name = Wester
+	age = 36
+	culture = cu:swedish
+	dna = dna_fredrik_wester
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+	traits = {
+		aesthete
+		innovative
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_fredrik_wester
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_paradox
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 2025.01.01
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:swedish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_fredrik_wester
+		}
+		fix_variable_error = { variable = converter_fredrik_wester }
+	}
+}
+
+fem_SWE_fredrik_wester = { # Fredrik Wester, John Paradox & Company
+	first_name = Rika
+	last_name = Wester
+	age = 36
+	culture = cu:swedish
+	dna = dna_fredrik_wester
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_moderate
+	traits = {
+		aesthete
+		innovative
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_fredrik_wester
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_paradox
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 2025.01.01
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:swedish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_fredrik_wester
+		}
+		fix_variable_error = { variable = converter_fredrik_wester }
+	}
+}

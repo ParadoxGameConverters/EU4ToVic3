@@ -1,0 +1,53 @@
+﻿# Transvaal - TRN
+TRN_paul_kruger_template = { # Paul Kruger
+	first_name = Paul
+	last_name = Kruger
+	historical = yes
+	culture = cu:boer
+	female = no
+	dna = dna_paul_kruger
+	religion = rel:protestant
+	ideology = ideology_traditionalist
+	interest_group = ig_rural_folk
+	birth_date = 1825.10.10
+	traits = {
+		pious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_kruger
+				}
+			}
+			uses_saf_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_rural_folk
+				is_interest_group_type = ig_landowners
+				is_interest_group_type = ig_petty_bourgeoisie
+			}
+            NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_ethno_nationalism
+			}
+		}
+		earliest_usage_date = 1852.1.1
+		latest_usage_date = 1899.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_cape_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_kruger
+		}
+		fix_variable_error = { variable = converter_kruger }
+	}
+}

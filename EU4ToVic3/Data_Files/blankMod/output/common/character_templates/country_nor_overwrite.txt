@@ -1,0 +1,173 @@
+﻿### Norway - NOR character template file ###
+
+### Executives
+
+NOR_peter_steenstrup = { # Peter Severin Steenstrup, Akers mekaniske verksted
+	first_name = Peter
+	last_name = Steenstrup
+	historical = yes
+	birth_date = 1807.11.29
+	dna = dna_peter_severin_steenstrup
+	culture = cu:norwegian
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+	traits = {
+		basic_naval_commander
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_peter_steenstrup
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_aker_mek
+		}
+		earliest_usage_date = 1841.1.1
+		latest_usage_date = 1863.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:norwegian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_peter_steenstrup
+		}
+		fix_variable_error = { variable = converter_peter_steenstrup }
+	}
+}
+
+fem_NOR_peter_steenstrup = { # Peter Severin Steenstrup, Akers mekaniske verksted
+	first_name = Petra
+	last_name = Steenstrup
+	historical = yes
+	birth_date = 1807.11.29
+	dna = dna_peter_severin_steenstrup
+	culture = cu:norwegian
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_moderate
+	traits = {
+		basic_naval_commander
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_peter_steenstrup
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_aker_mek
+		}
+		earliest_usage_date = 1841.1.1
+		latest_usage_date = 1863.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:norwegian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_peter_steenstrup
+		}
+		fix_variable_error = { variable = converter_peter_steenstrup }
+	}
+}
+
+NOR_sam_eyde = { # Sam Eyde, Norsk Hydroelektrisk Kvælstofaktieselskap
+	first_name = Sam
+	last_name = Eyde
+	historical = yes
+	birth_date = 1866.10.29
+	dna = dna_sam_eyde
+	culture = cu:norwegian
+	interest_group = ig_industrialists
+	ig_leader = yes
+	ideology = ideology_moderate
+	traits = {
+		engineer
+		innovative
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sam_eyde
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_norsk_hydro
+		}
+		earliest_usage_date = 1897.1.1
+		latest_usage_date = 1925.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:norwegian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sam_eyde
+		}
+		fix_variable_error = { variable = converter_sam_eyde }
+	}
+}
+
+fem_NOR_sam_eyde = { # Sam Eyde, Norsk Hydroelektrisk Kvælstofaktieselskap
+	first_name = Sam
+	last_name = Eyde
+	historical = yes
+	birth_date = 1866.10.29
+	dna = dna_sam_eyde
+	culture = cu:norwegian
+	interest_group = ig_industrialists
+	female = yes
+	ig_leader = yes
+	ideology = ideology_moderate
+	traits = {
+		engineer
+		innovative
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_sam_eyde
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_norsk_hydro
+		}
+		earliest_usage_date = 1897.1.1
+		latest_usage_date = 1925.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:norwegian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_sam_eyde
+		}
+		fix_variable_error = { variable = converter_sam_eyde }
+	}
+}

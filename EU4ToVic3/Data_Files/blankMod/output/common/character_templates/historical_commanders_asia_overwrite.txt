@@ -1,0 +1,252 @@
+﻿# Afghanistan - AFG
+afg_general_mohammed = {
+	first_name = Yar
+	last_name = Mohammed
+	historical = yes
+	culture = cu:pashtun
+	female = no
+	religion = rel:sunni
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1800.1.1 # Uncertain birth date
+	traits = {
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_afg_general_mohammed
+				}
+			}
+			uses_afg_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1865.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:pashtun }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_afg_general_mohammed
+		}
+		fix_variable_error = { variable = converter_afg_general_mohammed }
+	}
+}
+
+# Japan - JAP
+jap_admiral_togo = {
+	first_name = Heihachiro
+	last_name = Togo
+	historical = yes
+	culture = cu:japanese
+	female = no
+	ideology = ideology_moderate
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1848.1.27
+	traits = {
+		expert_naval_commander
+		direct
+		meticulous
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_admiral_togo
+				}
+			}
+			uses_japanese_characters = yes
+		}
+		role = admiral
+		earliest_usage_date = 1883.2.5
+		latest_usage_date = 1913.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:japanese }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_admiral_togo
+		}
+		fix_variable_error = { variable = converter_admiral_togo }
+	}
+}
+jap_general_gentaro = {
+	first_name = Gentaro
+	last_name = Kodama
+	historical = yes
+	culture = cu:japanese
+	female = no
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1852.3.16
+	traits = {
+		experienced_offensive_planner
+		experienced_colonial_administrator
+		innovative
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_gentaro
+				}
+			}
+			uses_japanese_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1889.1.1
+		latest_usage_date = 1906.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:japanese }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_gentaro
+		}
+		fix_variable_error = { variable = converter_general_gentaro }
+	}
+}
+jap_general_oyama = {
+	first_name = Iwao
+	last_name = Oyama
+	historical = yes
+	culture = cu:japanese
+	female = no
+	ideology = ideology_royalist
+	commander_rank = default
+	interest_group = ig_landowners
+	birth_date = 1842.11.12
+	traits = {
+		experienced_offensive_planner
+		trench_rat
+		reserved
+	}
+	commander_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_oyama
+				}
+			}
+			uses_japanese_characters = yes
+		}
+		role = general
+		earliest_usage_date = 1889.1.1
+		latest_usage_date = 1906.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:japanese }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_oyama
+		}
+		fix_variable_error = { variable = converter_general_oyama }
+	}
+}
+
+# Gwalior - GWA
+gwa_general_tope = {
+	first_name = Tatya
+	last_name = Tope
+	historical = yes
+	dna = dna_tatya_tope
+	culture = cu:marathi
+	female = no
+	religion = rel:hindu
+	commander_rank = default
+	interest_group = ig_armed_forces
+	birth_date = 1814.2.16
+	traits = {
+		persistent
+		forest_commander
+		war_criminal
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_local_bic_characters = yes
+			any_scope_state = { converter_is_marathi_homeland = yes }
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_tope
+				}
+			}
+			has_dlc_feature = ip2_content
+		}
+		role = general
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1870.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:marathi }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_tope
+		}
+		fix_variable_error = { variable = converter_general_tope }
+	}
+}
+
+# Jhansi - JHN
+jhn_rani_of_jhansi = {
+	first_name = Lakshmibai
+	last_name = Newalkar
+	dna = dna_rani_lakshmibai
+	historical = yes
+	culture = cu:marathi
+	female = yes
+	religion = rel:hindu
+	commander_rank = default
+	interest_group = ig_armed_forces
+	ideology = ideology_traditionalist
+	birth_date = 1828.11.19
+	traits = {
+		cruel
+		imposing
+		celebrity_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_local_bic_characters = yes
+			is_old_world_trading_company = no
+			any_scope_state = { converter_is_marathi_homeland = yes }
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_rani_of_jhansi
+				}
+			}
+			has_dlc_feature = ip2_content
+		}
+		role = general
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1875.1.1
+		chance = 75
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:marathi }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_rani_of_jhansi
+		}
+		fix_variable_error = { variable = converter_rani_of_jhansi }
+	}
+}

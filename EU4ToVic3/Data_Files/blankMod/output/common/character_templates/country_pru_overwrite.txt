@@ -1,0 +1,221 @@
+﻿### Prussia character template file ###
+
+# Prussia - PRU
+
+PRU_otto_von_bismarck = {
+	first_name = Otto
+	last_name = von_Bismarck
+	historical = yes
+	ig_leader = yes
+	interest_group = ig_landowners
+	female = no
+	birth_date = 1815.4.1
+	dna = dna_otto_von_bismarck
+	ideology = ideology_royalist
+	traits = {
+		direct
+		cautious
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_otto_von_bismarck
+		}
+		fix_variable_error = { variable = converter_otto_von_bismarck }
+	}
+}
+
+fem_PRU_otto_von_bismarck = {
+	first_name = Uta
+	last_name = von_Bismarck
+	historical = yes
+	ig_leader = yes
+	interest_group = ig_landowners
+	female = yes
+	birth_date = 1815.4.1
+	dna = dna_otto_von_bismarck
+	ideology = ideology_royalist
+	traits = {
+		direct
+		cautious
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_otto_von_bismarck
+		}
+		fix_variable_error = { variable = converter_otto_von_bismarck }
+	}
+}
+
+### Executives
+
+PRU_alfred_krupp = { # Alfred Krupp, Fried. Krupp AG
+	first_name = Alfred
+	last_name = Krupp
+	historical = yes
+	birth_date = 1812.4.26
+	dna = dna_alfred_krupp
+	culture = cu:north_german
+	interest_group = ig_industrialists
+	ideology = ideology_authoritarian
+	traits = {
+		bigoted
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_alfred_krupp
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_krupp
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1887.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_alfred_krupp
+		}
+		fix_variable_error = { variable = converter_alfred_krupp }
+	}
+}
+
+fem_PRU_alfred_krupp = { # Alfred Krupp, Fried. Krupp AG
+	first_name = Alfreda
+	last_name = Krupp
+	historical = yes
+	birth_date = 1812.4.26
+	dna = dna_alfred_krupp
+	culture = cu:north_german
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_authoritarian
+	traits = {
+		bigoted
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_alfred_krupp
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_krupp
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1887.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_alfred_krupp
+		}
+		fix_variable_error = { variable = converter_alfred_krupp }
+	}
+}
+
+PRU_werner_von_siemens = { # Werner von Siemens, Siemens and Halske
+	first_name = Werner
+	last_name = von_Siemens
+	historical = yes
+	birth_date = 1816.12.13
+	dna = dna_werner_von_siemens
+	culture = cu:north_german
+	interest_group = ig_industrialists
+	ideology = ideology_modernizer_leader
+	traits = {
+		engineer
+		innovative
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_werner_von_siemens
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_siemens_and_halske
+		}
+		earliest_usage_date = 1847.1.1
+		latest_usage_date = 1892.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_werner_von_siemens
+		}
+		fix_variable_error = { variable = converter_werner_von_siemens }
+	}
+}
+
+fem_PRU_werner_von_siemens = { # Werner von Siemens, Siemens and Halske
+	first_name = Herlinde
+	last_name = von_Siemens
+	historical = yes
+	birth_date = 1816.12.13
+	dna = dna_werner_von_siemens
+	culture = cu:north_german
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_modernizer_leader
+	traits = {
+		engineer
+		innovative
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_werner_von_siemens
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_siemens_and_halske
+		}
+		earliest_usage_date = 1847.1.1
+		latest_usage_date = 1892.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:north_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_werner_von_siemens
+		}
+		fix_variable_error = { variable = converter_werner_von_siemens }
+	}
+}

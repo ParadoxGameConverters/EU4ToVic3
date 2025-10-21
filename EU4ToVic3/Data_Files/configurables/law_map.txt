@@ -27,7 +27,7 @@
 
 #GOVERNANCE:
 #law_council_republic 200 NO
-#law_parliamentary_republic 100 *T=democracy T3
+#law_parliamentary_republic 100 *T=democracy !law_autocracy T3
 #law_presidential_republic 100 *T=democracy T3
 #law_monarchy * !law_anarchy
 #law_theocracy -50 !law_total_separation
@@ -52,6 +52,7 @@ lawgroup_governance_principles = {
 			pirate_king_reform absolute_president_reform strengthen_executive_powers_reform
 			president_for_life_reform government_for_people_reform millenarian_theocracy_reform	
 			republican_authoritarianism_reform aristocratic_values_reform roman_republic_government
+			# parliamentary republic cannot go with autocracy 
 		}
 	}
 	law_monarchy = {
@@ -143,6 +144,8 @@ lawgroup_distribution_of_power = {
 			empower_buddhist_temples_reform secure_clergy_power_reform admiralty_regime_reform
 			japanese_divine_empire dutch_republic fifth_monarchists_reform namestnik_reform
 			arabic_plutocracy_reform merchant_representation_reform orangist_stadholders_reform
+			# autocracy is incompatible with parliamentary republic
+			protectorate_parliament_reform
 		}
 	}
 	law_autocracy = {
@@ -151,7 +154,7 @@ lawgroup_distribution_of_power = {
 		reforms = { blackmail_nobility_reform legion_of_honor_reform limit_imperial_court_reform 
 			royal_decree_reform imperial_decree_reform machiavellianistic_rule_reform letat_cest_moi_reform
 			deified_monarchy_reform  political_absolutism_reform emperor_of_the_revolution_reform 
-			enlightened_monarchy_reform protectorate_parliament_reform
+			enlightened_monarchy_reform
 			presidential_despot_reform military_dictatorship_reform devotee_to_the_people_reform
 			consolidate_power_in_doge_reform consolidate_power_to_the_ruler_reform pirate_king_reform
 			absolute_president_reform dynastic_rulership_reform president_for_life_reform
@@ -380,7 +383,7 @@ lawgroup_labor_rights = {
 
 #ECONOMICSYSTEM:
 #law_command_economy NO
-#law_laissez_faire 100  !law_serfdom !law_isolationism *T=international_trade T3
+#law_laissez_faire 100 !law_guild_system !law_serfdom !law_isolationism *T=international_trade T3
 #law_interventionism 50 !law_serfdom *T=manufacturies
 #law_agrarianism 0 *T=romanticism
 #law_traditionalism -50 !law_per_capita_based_taxation !law_proportional_taxation !law_graduated_taxation
@@ -516,7 +519,7 @@ lawgroup_army_model = {
 #SCHOOLS:
 #law_public_schools 50 *T=empiricism  !law_state_religion !law_serfdom T2
 #law_private_schools 25 *T=academia !law_state_religion T3
-#law_religious_schools 25 !law_total_separation !law_serfdom *T=rationalism T3
+#law_religious_schools 25 !law_total_separation !law_state_atheism !law_serfdom *T=rationalism T3
 #law_no_schools 0 !law_compulsory_primary_school
 lawgroup_education_system = {
 	law_public_schools = {
@@ -783,8 +786,11 @@ lawgroup_welfare = {
 lawgroup_labor_associations = {
 	law_anti_strike_laws = {
 		forms = { }
-		ideas = { }
-		reforms = { }
+		ideas = { trade_ideas }
+		reforms = { merchants_reform liberte_reform empowered_quartermasters_reform open_naval_services_reform 
+			master_smugglers_reform pious_merchants_reform priestly_autonomy_reform lockean_proviso_reform
+			embrace_the_economic_theory_reform commercial_trade_empire_reform diwan_al_khass_reform
+			modern_economics_reform }
 	}
 	law_combination_acts = {
 		forms = { }

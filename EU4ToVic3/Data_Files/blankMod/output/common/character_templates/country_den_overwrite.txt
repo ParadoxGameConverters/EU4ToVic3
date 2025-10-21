@@ -1,0 +1,183 @@
+﻿### Denmark character template file ###
+
+# Denmark - DEN
+# Schleswig - SCH
+# Holstein - HOL
+
+# Denmark
+
+### Executives
+
+DEN_arnold_peter_moller = {
+	# Arnold Peter Møller, founder of A.P. Moller-Maersk Group 1904
+	first_name = Arnold_Peter
+	last_name = M_Oller
+	historical = yes
+	culture = cu:danish
+	birth_date = 1876.10.2
+	dna = dna_arnold_peter_moller
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+	traits = {
+		dockyard_master
+		innovative
+		direct
+	}
+	executive_usage = {
+		country_trigger = {
+			uses_den_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_arnold_peter_moller
+				}
+			}
+            has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_ap_moller
+		}
+		earliest_usage_date = 1904.1.1
+		latest_usage_date = 1941.8.13
+		chance = 100
+    }
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:danish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_arnold_peter_moller
+		}
+		fix_variable_error = { variable = converter_arnold_peter_moller }
+	}
+}
+
+DEN_arnold_peter_moller = {
+	# Arnold Peter Møller, founder of A.P. Moller-Maersk Group 1904
+	first_name = Solvej_Petra
+	last_name = M_Oller
+	historical = yes
+	culture = cu:danish
+	birth_date = 1876.10.2
+	dna = dna_arnold_peter_moller
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_moderate
+	traits = {
+		dockyard_master
+		innovative
+		direct
+	}
+	executive_usage = {
+		country_trigger = {
+			uses_den_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_arnold_peter_moller
+				}
+			}
+            has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_ap_moller
+		}
+		earliest_usage_date = 1904.1.1
+		latest_usage_date = 1941.8.13
+		chance = 100
+    }
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:danish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_arnold_peter_moller
+		}
+		fix_variable_error = { variable = converter_arnold_peter_moller }
+	}
+}
+
+DEN_christian_hansen = { # Christian Ditlev Ammentorp Hansen, Chr. Hansens
+    first_name = Christian
+    last_name = Hansen
+    historical = yes
+    culture = cu:danish
+    birth_date = 1843.2.25
+    dna = dna_christian_d_a_hansen
+    interest_group = ig_industrialists
+    ideology = ideology_moderate
+    traits = {
+        innovative
+        erudite
+        basic_entrepreneur
+    }
+    executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_christian_hansen
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_chr_hansens
+		}
+		earliest_usage_date = 1870.1.1
+		latest_usage_date = 1916.1.1
+		chance = 100
+    }
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:danish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_christian_hansen
+		}
+		fix_variable_error = { variable = converter_christian_hansen }
+	}
+}
+
+fem_DEN_christian_hansen = { # Christian Ditlev Ammentorp Hansen, Chr. Hansens
+    first_name = Kristina
+    last_name = Hansen
+    historical = yes
+    culture = cu:danish
+    birth_date = 1843.2.25
+    dna = dna_christian_d_a_hansen
+    interest_group = ig_industrialists
+	female = yes
+    ideology = ideology_moderate
+    traits = {
+        innovative
+        erudite
+        basic_entrepreneur
+    }
+    executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_christian_hansen
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_chr_hansens
+		}
+		earliest_usage_date = 1870.1.1
+		latest_usage_date = 1916.1.1
+		chance = 100
+    }
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:danish }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_christian_hansen
+		}
+		fix_variable_error = { variable = converter_christian_hansen }
+	}
+}

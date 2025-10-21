@@ -1,0 +1,86 @@
+﻿### Hungary - HUN character template file ###
+
+### Executives
+
+HUN_manfred_weiss = { # Manfred Weiss, Manfred Weiss etc.
+	first_name = Manfred
+	last_name = Weiss
+	historical = yes
+	birth_date = 1857.4.11
+	dna = dna_manfred_weiss
+	culture = cu:hungarian
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+	traits = {
+		ambitious
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_manfred_weiss
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_manfred_weiss
+		}
+		earliest_usage_date = 1882.1.1
+		latest_usage_date = 1922.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:hungarian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_manfred_weiss
+		}
+		fix_variable_error = { variable = converter_manfred_weiss }
+	}
+}
+
+fem_HUN_manfred_weiss = { # Manfred Weiss, Manfred Weiss etc.
+	first_name = IrE_n
+	last_name = Weiss
+	historical = yes
+	birth_date = 1857.4.11
+	dna = dna_manfred_weiss
+	culture = cu:hungarian
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_moderate
+	traits = {
+		ambitious
+		basic_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_manfred_weiss
+				}
+			}
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_manfred_weiss
+		}
+		earliest_usage_date = 1882.1.1
+		latest_usage_date = 1922.1.1
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:hungarian }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_manfred_weiss
+		}
+		fix_variable_error = { variable = converter_manfred_weiss }
+	}
+}
