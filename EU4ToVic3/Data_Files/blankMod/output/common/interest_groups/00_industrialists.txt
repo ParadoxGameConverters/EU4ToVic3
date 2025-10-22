@@ -2067,7 +2067,7 @@
 				OR = {
 					custom_tooltip = {
 						text = has_tc_overlord_heritage_tt
-						this.culture = { shares_heritage_trait_with_any_primary_culture = prev.owner }
+						this.culture = { shares_heritage_trait_group_with_any_primary_culture = prev.owner }
 					}
 					is_pop_type = bureaucrats
 					is_pop_type = clerks
@@ -2120,7 +2120,7 @@
 		if = {		### Converter ###
 			limit = {
 				owner = { is_old_world_trading_company = yes }
-				this.culture = { shares_heritage_trait_with_any_primary_culture = prev.owner }
+				this.culture = { shares_heritage_trait_group_with_any_primary_culture = prev.owner }
 				OR = {
 					strata = upper
 					strata = middle
@@ -2142,7 +2142,7 @@
 			if = {
 				limit = {
 					this.culture = {
-						NOT = { shares_heritage_trait_with_any_primary_culture = prev.owner }
+						NOT = { shares_heritage_trait_group_with_any_primary_culture = prev.owner }
 					}
 					OR = {
 						is_pop_type = bureaucrats
@@ -2157,7 +2157,7 @@
 			else_if = {
 				limit = {
 					this.culture = {
-						NOT = { shares_heritage_trait_with_any_primary_culture = prev.owner }
+						NOT = { shares_heritage_trait_group_with_any_primary_culture = prev.owner }
 					}
 					NOR = {
 						is_pop_type = bureaucrats
