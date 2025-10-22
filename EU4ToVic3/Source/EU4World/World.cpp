@@ -134,9 +134,18 @@ void EU4::World::registerKeys(const std::shared_ptr<Configuration>& theConfigura
 	});
 	registerKeyword("date", [this](std::istream& theStream) {
 		if (saveGame.parsedMeta)
+		{
 			commonItems::ignoreItem("unused", theStream);
+		}
 		else
+		{
 			datingData.lastEU4Date = date(commonItems::getString(theStream));
+			if (datingData.lastEU4Date > datingData.hardEndingDate)
+			{
+				datingData.lastEU4Date = datingData.hardEndingDate;
+				Log(LogLevel::Notice) << "EU4 ending date is beyond 1836.1.1! Resetting to 1836.1.1.";
+			}
+		}
 	});
 	registerKeyword("start_date", [this](std::istream& theStream) {
 		datingData.startEU4Date = date(commonItems::getString(theStream));
