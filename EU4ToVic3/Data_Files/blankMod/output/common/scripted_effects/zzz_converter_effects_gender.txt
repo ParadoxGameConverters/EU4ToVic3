@@ -15,16 +15,16 @@ converter_ig_devout_feminism_matriarchy_effect = {
 							value >= 0.05
 						}
 					}
-					has_discrimination_trait = feminist
+					has_discrimination_trait = tradition_feminist
 					has_homeland = prev.state
 				}
 			}
 			trigger_if = {
 				limit = { has_variable = zzz_converter_tc_religion_set }
-				NOT = { var:tc_majority_religion = { has_discrimination_trait = feminist } }
+				NOT = { var:tc_majority_religion = { has_discrimination_trait = tradition_feminist } }
 			}
 			trigger_else = {
-				NOT = { religion = { has_discrimination_trait = feminist } }
+				NOT = { religion = { has_discrimination_trait = tradition_feminist } }
 			}
 		}
 		ig:ig_devout = {
@@ -52,10 +52,10 @@ converter_ig_devout_feminism_matriarchy_effect = {
 			is_old_world_trading_company = yes
 			trigger_if = {
 				limit = { has_variable = zzz_converter_tc_religion_set }
-				var:tc_majority_religion = { has_discrimination_trait = feminist }
+				var:tc_majority_religion = { has_discrimination_trait = tradition_feminist }
 			}
 			trigger_else = {
-				religion = { has_discrimination_trait = feminist }
+				religion = { has_discrimination_trait = tradition_feminist }
 			}
 		}
 		ig:ig_devout = {
@@ -80,8 +80,8 @@ converter_ig_devout_feminism_matriarchy_effect = {
 	}
 	else_if = {		# Cultural Gender Equality, not TC
 		limit = {
-			any_primary_culture = { has_discrimination_trait = feminist }
-			NOT = { religion = { has_discrimination_trait = feminist } }
+			any_primary_culture = { has_discrimination_trait = tradition_feminist }
+			NOT = { religion = { has_discrimination_trait = tradition_feminist } }
 		}
 		ig:ig_devout = {
 			if = {
@@ -105,7 +105,7 @@ converter_ig_devout_feminism_matriarchy_effect = {
 	}
 	else_if = {		# Religious Gender Equality, not TC
 		limit = {
-			religion = { has_discrimination_trait = feminist }
+			religion = { has_discrimination_trait = tradition_feminist }
 		}
 		ig:ig_devout = {
 			if = {
@@ -135,10 +135,10 @@ converter_ig_landowners_feminism_matriarchy_effect = {
 			is_old_world_trading_company = yes
 			trigger_if = {
 				limit = { has_variable = zzz_converter_tc_religion_set }
-				var:tc_majority_religion = { has_discrimination_trait = feminist }
+				var:tc_majority_religion = { has_discrimination_trait = tradition_feminist }
 			}
 			trigger_else = {
-				religion = { has_discrimination_trait = feminist }
+				religion = { has_discrimination_trait = tradition_feminist }
 			}
 			NOT = {
 				any_scope_pop = {
@@ -150,7 +150,7 @@ converter_ig_landowners_feminism_matriarchy_effect = {
 								value >= 0.05
 							}
 						}
-						has_discrimination_trait = feminist
+						has_discrimination_trait = tradition_feminist
 						has_homeland = prev.state
 					}
 				}
@@ -173,7 +173,7 @@ converter_ig_landowners_feminism_matriarchy_effect = {
 							value >= 0.05
 						}
 					}
-					has_discrimination_trait = feminist
+					has_discrimination_trait = tradition_feminist
 					has_homeland = prev.state
 				}
 			}
@@ -185,8 +185,8 @@ converter_ig_landowners_feminism_matriarchy_effect = {
 	}
 	else_if = {		# Religious Gender Equality, not TC
 		limit = {
-			religion = { has_discrimination_trait = feminist }
-			NOT = { any_primary_culture = { has_discrimination_trait = feminist } }
+			religion = { has_discrimination_trait = tradition_feminist }
+			NOT = { any_primary_culture = { has_discrimination_trait = tradition_feminist } }
 		}
 		ig:ig_landowners = {
 			remove_ideology = ideology_patriarchal
@@ -195,7 +195,7 @@ converter_ig_landowners_feminism_matriarchy_effect = {
 	}
 	else_if = {		# Cultural Gender Equality, not TC
 		limit = {
-			any_primary_culture = { has_discrimination_trait = feminist }
+			any_primary_culture = { has_discrimination_trait = tradition_feminist }
 		}
 		ig:ig_landowners = {
 			remove_ideology = ideology_patriarchal
