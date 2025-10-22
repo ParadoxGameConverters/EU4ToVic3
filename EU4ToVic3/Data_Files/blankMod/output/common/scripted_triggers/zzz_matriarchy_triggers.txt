@@ -8,41 +8,41 @@
 
 is_matriarchal_country = {
 	OR = {
-		any_primary_culture = { has_discrimination_trait = matriarchal }
+		any_primary_culture = { has_discrimination_trait = tradition_matriarchal }
 		trigger_if = {
 			limit = { has_law = law_type:law_state_atheism }
-			var:ancien_regime_religion ?= { has_discrimination_trait = matriarchal }
+			var:ancien_regime_religion ?= { has_discrimination_trait = tradition_matriarchal }
 		}
 		trigger_else = {
-			religion = { has_discrimination_trait = matriarchal }
+			religion = { has_discrimination_trait = tradition_matriarchal }
 		}
 	}
 }
 
 is_matriarchal_pop = {
 	OR = {
-		culture = { has_discrimination_trait = matriarchal }
-		religion = { has_discrimination_trait = matriarchal }
+		culture = { has_discrimination_trait = tradition_matriarchal }
+		religion = { has_discrimination_trait = tradition_matriarchal }
 	}
 }
 
 is_feminist_country = {
 	OR = {
-		any_primary_culture = { has_discrimination_trait = feminist }
+		any_primary_culture = { has_discrimination_trait = tradition_feminist }
 		trigger_if = {
 			limit = { has_law = law_type:law_state_atheism }
-			var:ancien_regime_religion ?= { has_discrimination_trait = feminist }
+			var:ancien_regime_religion ?= { has_discrimination_trait = tradition_feminist }
 		}
 		trigger_else = {
-			religion = { has_discrimination_trait = feminist }
+			religion = { has_discrimination_trait = tradition_feminist }
 		}
 	}
 }
 
 is_feminist_pop = {
 	OR = {
-		culture = { has_discrimination_trait = feminist }
-		religion = { has_discrimination_trait = feminist }
+		culture = { has_discrimination_trait = tradition_feminist }
+		religion = { has_discrimination_trait = tradition_feminist }
 	}
 }
 
