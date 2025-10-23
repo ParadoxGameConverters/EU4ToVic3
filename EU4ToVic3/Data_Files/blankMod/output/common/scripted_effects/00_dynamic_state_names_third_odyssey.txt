@@ -1,4 +1,638 @@
-﻿TO_STATE_MAINE_state_name_assign = {
+﻿## Regions
+converter_evaluate_and_assign_state_hub_dynamic_names = {
+	if = {
+		limit = {
+			has_game_rule = no_dynamic_naming
+		}
+		reset_state_name = yes
+		reset_hub_names = yes
+	}
+	else_if = {
+		limit = {
+			owner = {
+				any_primary_culture = {
+					OR = {
+						TO_elysian_cultures = yes
+						TO_norse_cultures = yes
+					}
+				}
+			}
+		}
+		TO_assign_state_hub_dynamic_names = yes
+	}
+	else = {
+		evaluate_and_assign_state_hub_dynamic_names = yes
+	}
+}
+
+TO_assign_state_hub_dynamic_names = {
+	if = { # Canada Region
+		limit = { region = sr:region_canada }
+		TO_assign_state_name_region_canada = yes
+	}
+	if = { # Caribbean Region
+		limit = { region = sr:region_caribbean }
+		TO_assign_state_name_region_caribbean = yes
+	}
+	if = { # Central America Region
+		limit = { region = sr:region_central_america }
+		TO_assign_state_name_region_central_america = yes
+	}
+	if = { # Dixie Region
+		limit = { region = sr:region_dixie }
+		TO_assign_state_name_region_dixie = yes
+	}
+	if = { # Great Plains Region
+		limit = { region = sr:region_great_plains }
+		TO_assign_state_name_region_great_plains = yes
+	}
+	if = { # Mexico Region
+		limit = { region = sr:region_mexico }
+		TO_assign_state_name_region_mexico = yes
+	}
+	if = { # New England Region
+		limit = { region = sr:region_new_england }
+		TO_assign_state_name_region_new_england = yes
+	}
+	if = { # Pacific Coast Region
+		limit = { region = sr:region_pacific_coast }
+		TO_assign_state_name_region_pacific_coast = yes
+	}
+	if = { # The Midwest Region
+		limit = { region = sr:region_the_midwest }
+		TO_assign_state_name_region_the_midwest = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_HAWAIIAN_ISLANDS ?= this }
+		}
+		TO_STATE_HAWAIIAN_ISLANDS_state_name_assign = yes
+	}
+}
+
+TO_assign_state_name_region_canada = {
+	if = {
+		limit = {
+			state_region = { s:STATE_MANITOBA ?= this }
+		}
+		TO_STATE_MANITOBA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_NEWFOUNDLAND ?= this }
+		}
+		TO_STATE_NEWFOUNDLAND_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_NORTHWEST_TERRITORIES ?= this }
+		}
+		TO_STATE_NORTHWEST_TERRITORIES_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_NUNAVUT ?= this }
+		}
+		TO_STATE_NUNAVUT_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_ONTARIO ?= this }
+		}
+		TO_STATE_ONTARIO_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_QUEBEC ?= this }
+		}
+		TO_STATE_QUEBEC_state_name_assign = yes
+	}
+}
+
+TO_assign_state_name_region_caribbean = {
+	if = {
+		limit = {
+			state_region = { s:STATE_BAHAMAS ?= this }
+		}
+		TO_STATE_BAHAMAS_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_CUBA ?= this }
+		}
+		TO_STATE_CUBA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_HAITI ?= this }
+		}
+		TO_STATE_HAITI_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_JAMAICA ?= this }
+		}
+		TO_STATE_JAMAICA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_PUERTO_RICO ?= this }
+		}
+		TO_STATE_PUERTO_RICO_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_SANTO_DOMINGO ?= this }
+		}
+		TO_STATE_SANTO_DOMINGO_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_WEST_INDIES ?= this }
+		}
+		TO_STATE_WEST_INDIES_state_name_assign = yes
+	}
+}
+
+TO_assign_state_name_region_central_america = {
+	if = {
+		limit = {
+			state_region = { s:STATE_CHIAPAS ?= this }
+		}
+		TO_STATE_CHIAPAS_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_COSTA_RICA ?= this }
+		}
+		TO_STATE_COSTA_RICA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_GUATEMALA ?= this }
+		}
+		TO_STATE_GUATEMALA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_HONDURAS ?= this }
+		}
+		TO_STATE_HONDURAS_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_NICARAGUA ?= this }
+		}
+		TO_STATE_NICARAGUA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_PANAMA ?= this }
+		}
+		TO_STATE_PANAMA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_SAN_SALVADOR ?= this }
+		}
+		TO_STATE_SAN_SALVADOR_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_YUCATAN ?= this }
+		}
+		TO_STATE_YUCATAN_state_name_assign = yes
+	}
+}
+
+TO_assign_state_name_region_dixie = {
+	if = {
+		limit = {
+			state_region = { s:STATE_ALABAMA ?= this }
+		}
+		TO_STATE_ALABAMA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_ARKANSAS ?= this }
+		}
+		TO_STATE_ARKANSAS_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_DELAWARE ?= this }
+		}
+		TO_STATE_DELAWARE_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_DISTRICT_OF_COLUMBIA ?= this }
+		}
+		TO_STATE_DISTRICT_OF_COLUMBIA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_FLORIDA ?= this }
+		}
+		TO_STATE_FLORIDA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_GEORGIA ?= this }
+		}
+		TO_STATE_GEORGIA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_LOUISIANA ?= this }
+		}
+		TO_STATE_LOUISIANA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_MARYLAND ?= this }
+		}
+		TO_STATE_MARYLAND_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_MISSISSIPPI ?= this }
+		}
+		TO_STATE_MISSISSIPPI_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_NORTH_CAROLINA ?= this }
+		}
+		TO_STATE_NORTH_CAROLINA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_OKLAHOMA ?= this }
+		}
+		TO_STATE_OKLAHOMA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_SOUTH_CAROLINA ?= this }
+		}
+		TO_STATE_SOUTH_CAROLINA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_TEXAS ?= this }
+		}
+		TO_STATE_TEXAS_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_VIRGINIA ?= this }
+		}
+		TO_STATE_VIRGINIA_state_name_assign = yes
+	}
+}
+
+TO_assign_state_name_region_great_plains = {
+	if = {
+		limit = {
+			state_region = { s:STATE_ALBERTA ?= this }
+		}
+		TO_STATE_ALBERTA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_COLORADO ?= this }
+		}
+		TO_STATE_COLORADO_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_KANSAS ?= this }
+		}
+		TO_STATE_KANSAS_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_MONTANA ?= this }
+		}
+		TO_STATE_MONTANA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_NEBRASKA ?= this }
+		}
+		TO_STATE_NEBRASKA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_NEW_MEXICO ?= this }
+		}
+		TO_STATE_NEW_MEXICO_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_NORTH_DAKOTA ?= this }
+		}
+		TO_STATE_NORTH_DAKOTA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_SASKATCHEWAN ?= this }
+		}
+		TO_STATE_SASKATCHEWAN_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_SOUTH_DAKOTA ?= this }
+		}
+		TO_STATE_SOUTH_DAKOTA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_WYOMING ?= this }
+		}
+		TO_STATE_WYOMING_state_name_assign = yes
+	}
+}
+
+TO_assign_state_name_region_mexico = {
+	if = {
+		limit = {
+			state_region = { s:STATE_BAJIO ?= this }
+		}
+		TO_STATE_BAJIO_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_CHIHUAHUA ?= this }
+		}
+		TO_STATE_CHIHUAHUA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_GUERRERO ?= this }
+		}
+		TO_STATE_GUERRERO_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_JALISCO ?= this }
+		}
+		TO_STATE_JALISCO_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_MEXICO ?= this }
+		}
+		TO_STATE_MEXICO_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_OAXACA ?= this }
+		}
+		TO_STATE_OAXACA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_RIO_GRANDE ?= this }
+		}
+		TO_STATE_RIO_GRANDE_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_SINALOA ?= this }
+		}
+		TO_STATE_SINALOA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_SONORA ?= this }
+		}
+		TO_STATE_SONORA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_VERACRUZ ?= this }
+		}
+		TO_STATE_VERACRUZ_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_ZACATECAS ?= this }
+		}
+		TO_STATE_ZACATECAS_state_name_assign = yes
+	}
+}
+
+TO_assign_state_name_region_new_england = {
+	if = {
+		limit = {
+			state_region = { s:STATE_BERMUDA ?= this }
+		}
+		TO_STATE_BERMUDA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_CONNECTICUT ?= this }
+		}
+		TO_STATE_CONNECTICUT_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_MAINE ?= this }
+		}
+		TO_STATE_MAINE_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_NEW_BRUNSWICK ?= this }
+		}
+		TO_STATE_NEW_BRUNSWICK_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_MASSACHUSETTS ?= this }
+		}
+		TO_STATE_MASSACHUSETTS_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_NEW_HAMPSHIRE ?= this }
+		}
+		TO_STATE_NEW_HAMPSHIRE_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_NEW_JERSEY ?= this }
+		}
+		TO_STATE_NEW_JERSEY_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_NEW_YORK ?= this }
+		}
+		TO_STATE_NEW_YORK_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_PENNSYLVANIA ?= this }
+		}
+		TO_STATE_PENNSYLVANIA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_RHODE_ISLAND ?= this }
+		}
+		TO_STATE_RHODE_ISLAND_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_VERMONT ?= this }
+		}
+		TO_STATE_VERMONT_state_name_assign = yes
+	}
+}
+
+TO_assign_state_name_region_pacific_coast = {
+	if = {
+		limit = {
+			state_region = { s:STATE_ALASKA ?= this }
+		}
+		TO_STATE_ALASKA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_ARIZONA ?= this }
+		}
+		TO_STATE_ARIZONA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_BAJA_CALIFORNIA ?= this }
+		}
+		TO_STATE_BAJA_CALIFORNIA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_CALIFORNIA ?= this }
+		}
+		TO_STATE_CALIFORNIA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_IDAHO ?= this }
+		}
+		TO_STATE_IDAHO_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_NEVADA ?= this }
+		}
+		TO_STATE_NEVADA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_BRITISH_COLUMBIA ?= this }
+		}
+		TO_STATE_BRITISH_COLUMBIA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_OREGON ?= this }
+		}
+		TO_STATE_OREGON_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_WASHINGTON ?= this }
+		}
+		TO_STATE_WASHINGTON_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_UTAH ?= this }
+		}
+		TO_STATE_UTAH_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_YUKON_TERRITORY ?= this }
+		}
+		TO_STATE_YUKON_TERRITORY_state_name_assign = yes
+	}
+}
+
+TO_assign_state_name_region_the_midwest = {
+	if = {
+		limit = {
+			state_region = { s:STATE_ILLINOIS ?= this }
+		}
+		TO_STATE_ILLINOIS_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_INDIANA ?= this }
+		}
+		TO_STATE_INDIANA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_IOWA ?= this }
+		}
+		TO_STATE_IOWA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_KENTUCKY ?= this }
+		}
+		TO_STATE_KENTUCKY_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_MICHIGAN ?= this }
+		}
+		TO_STATE_MICHIGAN_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_MINNESOTA ?= this }
+		}
+		TO_STATE_MINNESOTA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_MISSOURI ?= this }
+		}
+		TO_STATE_MISSOURI_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_OHIO ?= this }
+		}
+		TO_STATE_OHIO_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_TENNESSEE ?= this }
+		}
+		TO_STATE_TENNESSEE_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_WEST_VIRGINIA ?= this }
+		}
+		TO_STATE_WEST_VIRGINIA_state_name_assign = yes
+	}
+	if = {
+		limit = {
+			state_region = { s:STATE_WISCONSIN ?= this }
+		}
+		TO_STATE_WISCONSIN_state_name_assign = yes
+	}
+}
+
+## Individual states
+TO_STATE_MAINE_state_name_assign = {
 	if = {
 		limit = {
 			owner = { TO_is_elysian_primary = yes }
@@ -215,6 +849,21 @@ TO_STATE_ALABAMA_state_name_assign = {
 		}
 
 		set_state_name = STATE_ALABAMA_NORSE
+		set_hub_names = norse
+	}
+	else = { # By putting an else at the end that resets the names we ensure that the names are switched back to their defaults if anyone else takes the states
+		reset_state_name = yes
+		reset_hub_names = yes
+	}
+}
+
+TO_STATE_ARIZONA_state_name_assign = {
+	if = {
+		limit = {
+			owner = { TO_is_norse_primary = yes }
+		}
+
+		set_state_name = STATE_ARIZONA_NORSE
 		set_hub_names = norse
 	}
 	else = { # By putting an else at the end that resets the names we ensure that the names are switched back to their defaults if anyone else takes the states
@@ -1025,6 +1674,21 @@ TO_STATE_BERMUDA_state_name_assign = {
 		}
 
 		set_state_name = STATE_BERMUDA_NORSE
+		set_hub_names = norse
+	}
+	else = { # By putting an else at the end that resets the names we ensure that the names are switched back to their defaults if anyone else takes the states
+		reset_state_name = yes
+		reset_hub_names = yes
+	}
+}
+
+TO_STATE_BAJA_CALIFORNIA_state_name_assign = {
+	if = {
+		limit = {
+			owner = { TO_is_norse_primary = yes }
+		}
+
+		set_state_name = STATE_BAJA_CALIFORNIA_NORSE
 		set_hub_names = norse
 	}
 	else = { # By putting an else at the end that resets the names we ensure that the names are switched back to their defaults if anyone else takes the states

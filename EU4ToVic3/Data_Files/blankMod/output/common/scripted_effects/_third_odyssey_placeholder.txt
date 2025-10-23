@@ -1,0 +1,14 @@
+﻿# converter_evaluate_and_assign_state_hub_dynamic_names
+# Overwritten by 00_dynamic_state_names_third_odyssey.txt if present
+converter_evaluate_and_assign_state_hub_dynamic_names = {
+	if = {
+		limit = {
+			has_game_rule = no_dynamic_naming
+		}
+		reset_state_name = yes
+		reset_hub_names = yes
+	}
+	else = {
+		evaluate_and_assign_state_hub_dynamic_names = yes
+	}
+}
