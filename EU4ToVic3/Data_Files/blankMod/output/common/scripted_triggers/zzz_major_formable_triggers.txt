@@ -1,0 +1,56 @@
+﻿GER_formation_possible = {
+	OR = {
+		has_technology_researched = pan-nationalism
+		custom_tooltip = {
+			text = je_german_unification_idea_trigger_desc
+			has_variable = je_german_unification_idea
+		}
+	}
+	custom_tooltip = {
+		text = no_confederation_of_the_rhine_tt
+		NOT = {
+			exists = c:RHN
+		}
+	}
+	custom_tooltip = {
+		text = no_dual_or_triple_monarchy_tt
+		NOR = {
+			has_government_type = gov_dual_monarchy
+			has_government_type = gov_triple_monarchy
+		}
+	}
+	NOT = {
+		c:KUK ?= this
+	}
+}
+ITA_formation_possible = {
+	is_country_type = recognized
+	NOR = {
+		c:AUS ?= this
+		c:KUK ?= this
+		c:HRE ?= this
+	}
+}
+SCA_formation_possible = {
+	always = yes
+}
+FND_formation_possible = {
+	has_journal_entry = je_andean_federation
+}
+YUG_formation_possible = {
+	NOR = { # Not Danubian State or HRE
+		c:AUS ?= this
+		c:KUK ?= this
+		c:HRE ?= this
+	}
+	has_technology_researched = pan-nationalism
+	trigger_if = {
+		limit = {
+			c:BUL ?= this
+		}
+		custom_tooltip = {
+			text = bulgaria_pursued_greater_yugoslavism_tt
+			has_variable = bul_pursued_greater_yugoslavism
+		}
+	}
+}

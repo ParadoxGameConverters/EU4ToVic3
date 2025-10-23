@@ -1551,9 +1551,9 @@
 		}
 		rule = {
 			trigger = {
-				is_tc_preferred_local_culture = { TARGET = cu:unyamwezi }
+				is_tc_preferred_local_culture = { TARGET = cu:nyamwezi }
 			}
-			cultures = { unyamwezi }
+			cultures = { nyamwezi }
 		}
 		rule = {
 			trigger = {
@@ -2211,7 +2211,7 @@
 			}
 			if = {
 				limit = {
-					this.culture = { shares_heritage_trait_with_any_primary_culture = prev.owner }
+					this.culture = { shares_heritage_trait_group_with_any_primary_culture = prev.owner }
 				}
 				multiply = {
 					desc = "POP_INDIA_COLONIAL_RULE"

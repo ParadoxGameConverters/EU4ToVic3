@@ -171,7 +171,7 @@ converter_russian_patriarch_ideology_effect = {
 							shares_language_trait_with_any_primary_culture = prev.owner
 						}
 						trigger_else = { 
-							shares_heritage_trait_with_any_primary_culture = prev.owner
+							shares_heritage_trait_group_with_any_primary_culture = prev.owner
 							shares_language_trait_with_any_primary_culture = prev.owner
 						}
 						NOR = {
@@ -196,7 +196,7 @@ converter_russian_patriarch_ideology_effect = {
 							shares_language_trait_with_any_primary_culture = prev.owner
 						}
 						trigger_else = { 
-							shares_heritage_trait_with_any_primary_culture = prev.owner
+							shares_heritage_trait_group_with_any_primary_culture = prev.owner
 							shares_language_trait_with_any_primary_culture = prev.owner
 						}
 						NOR = {
@@ -232,7 +232,7 @@ converter_integralist_ideology_effect = {
 		limit = {
 			any_scope_pop = {
 				culture = {
-					shares_heritage_trait_with_any_primary_culture = prev.owner
+					shares_heritage_trait_group_with_any_primary_culture = prev.owner
 					shares_language_trait_with_any_primary_culture = prev.owner
 					NOT = { is_target_in_global_variable_list = { name = global_integralist_cultures target = this } }
 				}
@@ -241,7 +241,7 @@ converter_integralist_ideology_effect = {
 		random_scope_pop = {
 			limit = {
 				culture = {
-					shares_heritage_trait_with_any_primary_culture = prev.owner
+					shares_heritage_trait_group_with_any_primary_culture = prev.owner
 					shares_language_trait_with_any_primary_culture = prev.owner
 					NOT = { is_target_in_global_variable_list = { name = global_integralist_cultures target = this } }
 				}
@@ -2203,7 +2203,7 @@ converter_state_atheism_effect = {
 							shares_language_trait_with_any_primary_culture = prev.owner
 						}
 						trigger_else = { 
-							shares_heritage_trait_with_any_primary_culture = prev.owner
+							shares_heritage_trait_group_with_any_primary_culture = prev.owner
 							shares_language_trait_with_any_primary_culture = prev.owner
 						}
 						NOR = {
@@ -2228,7 +2228,7 @@ converter_state_atheism_effect = {
 							shares_language_trait_with_any_primary_culture = prev.owner
 						}
 						trigger_else = { 
-							shares_heritage_trait_with_any_primary_culture = prev.owner
+							shares_heritage_trait_group_with_any_primary_culture = prev.owner
 							shares_language_trait_with_any_primary_culture = prev.owner
 						}
 						NOR = {
@@ -2276,7 +2276,7 @@ converter_released_country_effect = {
 					shares_language_trait_with_any_primary_culture = root
 				}
 				trigger_else = { 
-					shares_heritage_trait_with_any_primary_culture = prev.owner
+					shares_heritage_trait_group_with_any_primary_culture = prev.owner
 					shares_language_trait_with_any_primary_culture = prev.owner
 				}
 			}
@@ -2319,7 +2319,7 @@ converter_released_country_effect = {
 					shares_language_trait_with_any_primary_culture = root
 				}
 				trigger_else = { 
-					shares_heritage_trait_with_any_primary_culture = prev.owner
+					shares_heritage_trait_group_with_any_primary_culture = prev.owner
 					shares_language_trait_with_any_primary_culture = prev.owner
 				}
 			}
@@ -2353,7 +2353,7 @@ converter_released_country_effect = {
 					shares_language_trait_with_any_primary_culture = root
 				}
 				trigger_else = { 
-					shares_heritage_trait_with_any_primary_culture = prev.owner
+					shares_heritage_trait_group_with_any_primary_culture = prev.owner
 					shares_language_trait_with_any_primary_culture = prev.owner
 				}
 			}

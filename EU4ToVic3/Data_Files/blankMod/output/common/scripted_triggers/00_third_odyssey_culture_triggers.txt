@@ -1,0 +1,39 @@
+﻿TO_elysian_cultures = {
+	OR = {
+		cu:romaic ?= this
+		cu:elysian ?= this
+		cu:elyric ?= this
+		cu:elysameric ?= this
+		cu:cretan ?= this
+		cu:eleutheroi ?= this
+		cu:borealian ?= this
+		cu:hyperborealian ?= this
+		cu:hesperidian ?= this
+		cu:kykladian ?= this
+		cu:shqipproi ?= this
+		cu:arkadian ?= this
+		cu:lakonian ?= this
+	}
+}
+
+TO_norse_cultures = {
+	OR = {
+		cu:norse_g ?= this
+		cu:varangian_e ?= this
+	}
+}
+
+TO_is_elysian_primary = {
+	any_primary_culture = {
+		TO_elysian_cultures = yes
+		TO_norse_cultures = no
+	}
+}
+
+TO_is_norse_primary = {
+	any_primary_culture = {
+		TO_elysian_cultures = no
+		TO_norse_cultures = yes
+	}
+}
+

@@ -11,29 +11,9 @@
 	ai_will_do = { has_technology_researched = nationalism }
 
 	possible = {
-		#GER_formation_possible = yes
-		OR = {
-			has_technology_researched = pan-nationalism
-			custom_tooltip = {
-				text = je_german_unification_idea_trigger_desc
-				has_variable = je_german_unification_idea
-			}
-		}
-		custom_tooltip = {
-			text = no_confederation_of_the_rhine_tt
-			NOT = {
-				exists = c:RHN
-			}
-		}
-		custom_tooltip = {
-			text = no_dual_or_triple_monarchy_tt
-			NOR = {
-				has_government_type = gov_dual_monarchy
-				has_government_type = gov_triple_monarchy
-			}
-		}
-		NOT = {
-			c:KUK ?= this
+		GER_formation_possible = yes
+		any_country = {
+			has_technology_researched = nationalism
 		}
 	}
 
@@ -74,16 +54,9 @@ ITA = {
 	}
 
 	possible = {
-		#ITA_formation_possible = yes
-		OR = {
-			country_has_primary_culture = cu:north_italian
-			country_has_primary_culture = cu:south_italian
-		}
-		is_country_type = recognized
-		NOR = {
-			c:AUS ?= this
-			c:KUK ?= this
-			c:HRE ?= this
+		ITA_formation_possible = yes
+		any_country = {
+			has_technology_researched = nationalism
 		}
 	}
 
@@ -135,12 +108,9 @@ SCA = {
 	ai_will_do = { always = yes }
 
 	possible = {
-		#SCA_formation_possible = yes
-		OR = {
-			country_has_primary_culture = cu:swedish
-			country_has_primary_culture = cu:danish
-			country_has_primary_culture = cu:norwegian
-			country_has_primary_culture = cu:icelandic
+		SCA_formation_possible = yes
+		any_country = {
+			has_technology_researched = pan-nationalism
 		}
 	}
 
@@ -176,31 +146,9 @@ FND = {
 	ai_will_do = { always = yes }
 
 	possible = {
-		#FND_formation_possible = yes
-		has_journal_entry = je_andean_federation
-		OR = {
-			country_has_primary_culture = cu:north_andean
-			country_has_primary_culture = cu:south_andean
-			AND = {
-				exists = cu:venezuelan
-				country_has_primary_culture = cu:venezuelan
-			}
-			AND = {
-				exists = cu:ecuadorian
-				country_has_primary_culture = cu:ecuadorian
-			}
-			AND = {
-				exists = cu:bolivian
-				country_has_primary_culture = cu:bolivian
-			}
-			AND = {
-				exists = cu:peruvian
-				country_has_primary_culture = cu:peruvian
-			}
-			AND = {
-				exists = cu:chilean
-				country_has_primary_culture = cu:chilean
-			}
+		FND_formation_possible = yes
+		any_country = {
+			has_technology_researched = pan-nationalism
 		}
 	}
 
@@ -235,7 +183,7 @@ YUG = {
 	required_states_fraction = 0.75
 
 	ai_will_do = { always = yes }
-	
+
 	potential = {
 		#YUG_formation_potential = yes
 		NOR = {
@@ -254,21 +202,9 @@ YUG = {
 	}
 
 	possible = {
-		#YUG_formation_possible = yes
-		NOR = { # Not Danubian State or HRE
-			c:AUS ?= this
-			c:KUK ?= this
-			c:HRE ?= this
-		}
-		has_technology_researched = pan-nationalism
-		trigger_if = {
-			limit = {
-				c:BUL ?= this
-			}
-			custom_tooltip = {
-				text = bulgaria_pursued_greater_yugoslavism_tt
-				has_variable = bul_pursued_greater_yugoslavism
-			}
+		YUG_formation_possible = yes
+		any_country = {
+			has_technology_researched = pan-nationalism
 		}
 	}
 

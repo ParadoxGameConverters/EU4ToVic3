@@ -1,0 +1,39 @@
+﻿# fra_handle_republic_monarch_assignment
+# STATE_BRITISH_COLUMBIA_state_name_assign
+
+fra_handle_republic_monarch_assignment = {
+	#null op
+}
+
+STATE_BRITISH_COLUMBIA_state_name_assign = { # More likely that British Columbia gets its name from conclusion of Oregon JE, but this serves as a one-off fallback
+	if = {
+		limit = {
+			owner = {
+				OR = {
+					c:GBR ?= this
+                    AND = {
+                        exists = c:GBR
+                        exists = top_overlord
+                        top_overlord = c:GBR
+                    }
+					any_primary_culture = {
+						OR = {
+							cu:anglo_canadian = this
+							cu:franco_canadian = this
+						}
+					}
+				}
+			}
+			s:STATE_WASHINGTON = {
+				any_scope_state = {
+					owner = {
+						c:USA ?= this
+					}
+				}
+			}
+		}
+
+        set_state_name = STATE_BRITISH_COLUMBIA_british
+	}
+	# no name reversion effect in an else statement. If the state becomes British Columbia, it stays British Columbia.
+}

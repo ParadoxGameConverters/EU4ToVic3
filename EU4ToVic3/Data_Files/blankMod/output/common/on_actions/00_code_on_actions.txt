@@ -4320,7 +4320,7 @@ on_state_incorporation = {
 }
 on_state_owner_change = {
 	effect = {
-		evaluate_and_assign_state_hub_dynamic_names = yes # All dynamic naming is handled by this scripted effect
+		converter_evaluate_and_assign_state_hub_dynamic_names = yes # All dynamic naming is handled by this scripted effect
 
 		if = {
 			limit = {
@@ -4347,7 +4347,7 @@ on_state_owner_change = {
 }
 on_state_created = {
 	effect = {
-		evaluate_and_assign_state_hub_dynamic_names = yes # All dynamic naming is handled by this scripted effect
+		converter_evaluate_and_assign_state_hub_dynamic_names = yes # All dynamic naming is handled by this scripted effect
 
 		if = {
 			limit = {
@@ -4676,7 +4676,7 @@ on_character_recruitment = {
 on_become_subject = {
 	effect = {
 		every_scope_state = {
-			evaluate_and_assign_state_hub_dynamic_names = yes # All dynamic naming is handled by this scripted effect
+			converter_evaluate_and_assign_state_hub_dynamic_names = yes # All dynamic naming is handled by this scripted effect
 		}
 	}
 }
@@ -4685,7 +4685,7 @@ on_become_subject = {
 on_become_independent = {
 	effect = {
 		every_scope_state = {
-			evaluate_and_assign_state_hub_dynamic_names = yes # All dynamic naming is handled by this scripted effect
+			converter_evaluate_and_assign_state_hub_dynamic_names = yes # All dynamic naming is handled by this scripted effect
 		}
 		if = {
 			limit = {

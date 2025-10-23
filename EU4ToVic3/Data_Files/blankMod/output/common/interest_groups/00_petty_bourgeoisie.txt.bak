@@ -1505,9 +1505,9 @@
 		}
 		rule = {
 			trigger = {
-				is_tc_preferred_local_culture = { TARGET = cu:unyamwezi }
+				is_tc_preferred_local_culture = { TARGET = cu:nyamwezi }
 			}
-			cultures = { unyamwezi }
+			cultures = { nyamwezi }
 		}
 		rule = {
 			trigger = {
@@ -2072,12 +2072,12 @@
 			this.culture = {
 				OR = {
 					AND = {
-						shares_heritage_trait_with_any_primary_culture = prev.owner
-						shares_non_heritage_trait_with_any_primary_culture = prev.owner
+						shares_heritage_trait_group_with_any_primary_culture = prev.owner
+						shares_language_trait_group_with_any_primary_culture = prev.owner
 					}
 					AND = {
 						prev.owner = { is_old_world_trading_company = yes }
-						NOT = { shares_heritage_trait_with_any_primary_culture = prev.owner }
+						NOT = { shares_heritage_trait_group_with_any_primary_culture = prev.owner }
 					}
 				}
 			}
@@ -2226,7 +2226,7 @@
 		if = {		### Converter ###
 			limit = {
 				owner = { is_old_world_trading_company = yes }
-				this.culture = { shares_heritage_trait_with_any_primary_culture = prev.owner }
+				this.culture = { shares_heritage_trait_group_with_any_primary_culture = prev.owner }
 			}
 			multiply = {
 				desc = "POP_INDIA_COLONIAL_RULE"
@@ -2238,7 +2238,7 @@
 			limit = {
 				owner = { is_old_world_trading_company = yes }
 				this.culture = {
-					NOT = { shares_heritage_trait_with_any_primary_culture = prev.owner }
+					NOT = { shares_heritage_trait_group_with_any_primary_culture = prev.owner }
 				}
 				OR = {
 					is_pop_type = capitalists

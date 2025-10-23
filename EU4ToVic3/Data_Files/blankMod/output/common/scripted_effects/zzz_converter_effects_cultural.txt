@@ -3201,7 +3201,7 @@ converter_primary_cultures_effect = {
 			limit = {
 				pop_has_primary_culture = no
 				culture = {
-					shares_heritage_trait_with_any_primary_culture = prev.owner
+					shares_heritage_trait_group_with_any_primary_culture = prev.owner
 					shares_language_trait_with_any_primary_culture = prev.owner
 					has_homeland = prev.state
 					prev.owner = {
@@ -3279,10 +3279,10 @@ converter_primary_cultures_effect = {
 						OR = {
 							has_discrimination_trait_group = heritage_group_african
 							has_discrimination_trait_group = heritage_group_middle_eastern
-							shares_heritage_trait_with_any_primary_culture = prev.owner
+							shares_heritage_trait_group_with_any_primary_culture = prev.owner
 						}
 					}
-					trigger_else = { shares_heritage_trait_with_any_primary_culture = prev.owner }
+					trigger_else = { shares_heritage_trait_group_with_any_primary_culture = prev.owner }
 					prev.owner = {
 						culture_percent_country = {
 							target = prev
@@ -3312,10 +3312,10 @@ converter_primary_cultures_effect = {
 						OR = {
 							has_discrimination_trait_group = heritage_group_african
 							has_discrimination_trait_group = heritage_group_middle_eastern
-							shares_heritage_trait_with_any_primary_culture = prev.owner
+							shares_heritage_trait_group_with_any_primary_culture = prev.owner
 						}
 					}
-					trigger_else = { shares_heritage_trait_with_any_primary_culture = prev.owner }
+					trigger_else = { shares_heritage_trait_group_with_any_primary_culture = prev.owner }
 					prev.owner = {
 						culture_percent_country = {
 							target = prev
