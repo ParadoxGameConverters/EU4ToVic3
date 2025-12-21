@@ -1525,16 +1525,30 @@ STATES = {
 		add_homeland = cu:taino
 		add_homeland = cu:waroid
 	}
-	s:STATE_CUBA = {
-		create_state = {
-			country = c:C06
-			owned_provinces = { xA70607 xFE4123 x58C211 x20EFEA xC464AE x9957D8 xEBE1C7 xD810EC x519343 x152D1C x0DA38C x30B001 xB48FF1 xE70FA4 x69C041 }
-		}
+	s:STATE_WESTERN_CUBA = {
 		create_state = {
 			country = c:G04
-			owned_provinces = { xB325C7 x61FC10 xFCDEED xDCAB5D xF3F2C9 xC3EB7D x4DD008 }
+			owned_provinces = { x4DD008 x61FC10 xB325C7 xDCAB5D xF3F2C9 xFCDEED }
+
 		}
-		
+		add_homeland = cu:caribeno
+		add_homeland = cu:taino
+		add_homeland = cu:waroid
+	}
+	s:STATE_EASTERN_CUBA = {
+		create_state = {
+			country = c:C06
+			owned_provinces = { x0DA38C x30B001 x519343 x69C041 xB48FF1 xE70FA4 }
+		}
+		add_homeland = cu:caribeno
+		add_homeland = cu:taino
+		add_homeland = cu:waroid
+	}
+	s:STATE_CENTRAL_CUBA = {
+		create_state = {
+			country = c:C06
+			owned_provinces = { x152D1C x20EFEA x58C211 x9957D8 xA70607 xC3EB7D xC464AE xD810EC xEBE1C7 xFE4123 }
+		}
 		add_homeland = cu:caribeno
 		add_homeland = cu:taino
 		add_homeland = cu:waroid
@@ -1763,22 +1777,30 @@ STATES = {
 	s:STATE_ASTURIAS = {
 		create_state = {
 			country = c:CAS #Asturias (Castile)
-			owned_provinces = { x0F84B8 x3E77F9 x5060C0 x525202 xA1037C xBF2564 xF0A000 }
+			owned_provinces = { x0F84B8 x3E77F9 x5060C0 x525202 }
 		}
 		
 		add_homeland = cu:spanish
 		add_homeland = cu:visigothic
 	}
-	s:STATE_CASTILE = {
+	s:STATE_OLD_CASTILE = {
 		create_state = {
 			country = c:CAS #Asturias (Castile)
-			owned_provinces = { x10C4E5 x4D18FC x0543B8 x70F50D xD30171 xB1C098 x38C557 x906201 }
+			owned_provinces = { x0543B8 x10C4E5 x4D18FC xA1037C xAC1425 xBF2564 xF0A000 }
 		}
 		create_state = {
 			country = c:ANL #Umayyad (Andalusia)
-			owned_provinces = { x590C75 x702000 xB02000 xB3BC6E x2C00C8 x0D5242 x22193A xC3ED38 x3A3528 xF44AAA xCA2220 xD7A4DE xF02000 xDC8B19 x70A000 x5DB702 xD060C0 x50E0C0 x24A9D6 }
+			owned_provinces = { x590C75 x702000 x22193A xC3ED38 x3A3528 xF44AAA xCA2220 xD7A4DE xF02000 xDC8B19 x70A000 x5DB702 xD060C0 x50E0C0 x24A9D6 }
 		}
 		
+		add_homeland = cu:spanish
+		add_homeland = cu:visigothic
+	}
+	s:STATE_LEON = {
+		create_state = {
+			country = c:ANL
+			owned_provinces = { x0D5242 x2C00C8 x38C557 x70F50D x906201 xB02000 xB1C098 xB3BC6E xD060C0 xD30171 }
+		}
 		add_homeland = cu:spanish
 		add_homeland = cu:visigothic
 	}
@@ -1791,7 +1813,7 @@ STATES = {
 		add_homeland = cu:spanish
 		add_homeland = cu:visigothic
 	}
-	s:STATE_NAVARRA = {
+	s:STATE_BASQUE_COUNTRY = {
 		create_state = {
 			country = c:ANL #Umayyads (Andalusia)
 			owned_provinces = { x10E0C0 xABE0B3 xAC1425 x9EC9B8 xCB3245 }
@@ -1815,7 +1837,7 @@ STATES = {
 		add_homeland = cu:spanish
 		add_homeland = cu:visigothic
 	}
-	s:STATE_BALEARES = {
+	s:STATE_BALEARIC_ISLANDS = {
 		create_state = {
 			country = c:BYZ # Byzantium
 			owned_provinces = { x7D3FD7 x60F080 }
@@ -2340,7 +2362,7 @@ STATES = {
 		add_homeland = cu:dyula
 		add_homeland = cu:kissi
 	}
-	s:STATE_GHANA = {
+	s:STATE_GOLD_COAST = {
 		create_state = {
 			country = c:ASH
 			owned_provinces = { x6C8064 x8504E6 x1472E7 xDE4D17 xB99E19 x4B8CBE x111F0C xBC1F14 xE63565 x61C0D0 x6A6B14 xB9D107 xDBB653 x14F486 x364DF5 x6B5943 x6C9759 xA624EE x589734 x6FFF10 xE0C0D0 xE9F5E6 x801552 xE0CF6C x946D4E x76AA0B xE797D7 xFBC3B8 xE80D2D xAAFDFC xD14671 x925167 xD845A1 x15B10C x961786 xEC0AF9 xF02A4B xC2E0C0 }
@@ -4799,9 +4821,19 @@ STATES = {
 	s:STATE_BEIRA = {
 		create_state = {
 			country = c:ANL #Umayyad (Andalusia)
-			owned_provinces = { xD0A000 xA64B2E x641376 x37ADD8 x0EF845 xD0E0C0 x9238AD xE415AF x3020A3 xF92B7F xE24C15 }
+			owned_provinces = { x9238AD xE415AF x3020A3 xF92B7F xE24C15 }
 		}
 		
+		add_homeland = cu:portuguese
+		add_homeland = cu:suebi
+		add_homeland = cu:visigothic
+	}
+	s:STATE_ENTRE_DOURO_E_MINHO = {
+		create_state = {
+			country = c:ANL
+			owned_provinces = { x0EF845 x37ADD8 x641376 xA64B2E xD0A000 xD0E0C0 }
+		}
+
 		add_homeland = cu:portuguese
 		add_homeland = cu:suebi
 		add_homeland = cu:visigothic
@@ -4879,7 +4911,7 @@ STATES = {
 		add_homeland = cu:berber
 		add_homeland = cu:spanish
 	}
-	s:STATE_GRANADA = {
+	s:STATE_UPPER_ANDALUSIA = {
 		create_state = {
 			country = c:ANL #Umayyad (Andalusia)
 			owned_provinces = { xBC6ED3 x099199 xA0B040 x27E575 x2030C0 xEE7F54 x20B040 x0010A0 x0362A1 x203DB5 xF50658 xEB9217 x07E82B }
@@ -4888,7 +4920,7 @@ STATES = {
 		add_homeland = cu:spanish
 		add_homeland = cu:visigothic
 	}
-	s:STATE_BADAJOZ = {
+	s:STATE_EXTREMADURA = {
 		create_state = {
 			country = c:ANL #Umayyad (Andalusia)
 			owned_provinces = { xB4471A x679A01 x009020 x97FBA4 x342BE6 x506000 xC694C3 xF19B02 x7500D4 x30A000 x4A8E78 xE47DCF }
@@ -4899,17 +4931,26 @@ STATES = {
 	s:STATE_VALENCIA = {
 		create_state = {
 			country = c:ANL #Umayyad (Andalusia)
-			owned_provinces = { x721583 xCAC27C x99E5CE x8FDF80 xD06040 xDFEF80 x25DD5C xB03776 x71158B x626878 xE0BED4 x6549AD xA03040 x134657 }
+			owned_provinces = { x721583 xCAC27C x99E5CE x8FDF80 xD06040 xDFEF80 x25DD5C }
 		}
 		add_homeland = cu:catalan
 		add_homeland = cu:spanish
 		add_homeland = cu:visigothic
 	}
-	s:STATE_TOLEDO = {
+	s:STATE_NEW_CASTILLE = {
 		create_state = {
 			country = c:ANL #Umayyad (Andalusia)
 			owned_provinces = { x302080 x2B550F xB0A080 xB5194A xF841E6 xB0A000 xF693FD x92DDDA x89CA9E xCAA3E1 xDCD24C x41C3FC x73D6A9 x093A56 xB02080 xF44640 x88CEE5 x8010A0 xA1BEC2 }
 		}
+		add_homeland = cu:spanish
+		add_homeland = cu:visigothic
+	}
+	s:STATE_MURCIA = {
+		create_state = {
+			country = c:ANL
+			owned_provinces = { x134657 x626878 x6549AD x71158B xA03040 xB03776 xE0BED4 xB02080 }
+		}
+		add_homeland = cu:catalan
 		add_homeland = cu:spanish
 		add_homeland = cu:visigothic
 	}
@@ -6683,10 +6724,6 @@ STATES = {
 			}
 		}
 		
-		add_homeland = cu:fulbe
-		add_homeland = cu:wolof
-	}
-	s:STATE_GAMBIA = {
 		create_state = {
 			country = c:SRR
 			owned_provinces = { 
@@ -6706,6 +6743,8 @@ STATES = {
 			}
 		}
 		
+		add_homeland = cu:fulbe
+		add_homeland = cu:wolof
 		add_homeland = cu:mande
 		add_homeland = cu:akan
 		add_homeland = cu:bambara

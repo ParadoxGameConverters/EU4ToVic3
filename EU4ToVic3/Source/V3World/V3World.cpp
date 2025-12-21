@@ -24,6 +24,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 
 	Log(LogLevel::Progress) << "45 %";
 	Log(LogLevel::Info) << "* Soaking up the shine *";
+	primeLaFabricaDeColor(configuration);
 	clayManager.loadAdjacencies("configurables/province_adjacencies.txt");
 	if (configBlock.thirdOdyssey)
 	{
@@ -243,4 +244,16 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	economyManager.setPMs();
 
 	Log(LogLevel::Info) << "*** Goodbye, Vicky 3, and godspeed. ***";
+}
+
+void V3::World::primeLaFabricaDeColor(const Configuration& configuration)
+{
+	Log(LogLevel::Info) << "-> Loading colors.";
+	for (const auto& file: commonItems::GetAllFilesInFolder(configuration.getVic3Path() / "common/named_colors"))
+	{
+		if (file.extension() != ".txt")
+			continue;
+		namedColors.loadColors(configuration.getVic3Path() / "common/named_colors" / file);
+	}
+	Log(LogLevel::Info) << "<> Loaded " << laFabricaDeColor.getRegisteredColors().size() << " colors.";
 }

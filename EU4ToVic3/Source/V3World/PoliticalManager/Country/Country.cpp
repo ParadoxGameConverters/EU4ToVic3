@@ -276,16 +276,16 @@ void V3::Country::registerKeys()
 		vanillaData->capitalStateName = commonItems::getString(theStream);
 	});
 	registerKeyword("color", [this](std::istream& theStream) {
-		vanillaData->color = commonItems::Color::Factory().getColor(theStream);
+		vanillaData->color = laFabricaDeColor.getColor(theStream);
 	});
 	registerKeyword("primary_unit_color", [this](std::istream& theStream) {
-		vanillaData->primaryUnitColor = commonItems::Color::Factory().getColor(theStream);
+		vanillaData->primaryUnitColor = laFabricaDeColor.getColor(theStream);
 	});
 	registerKeyword("secondary_unit_color", [this](std::istream& theStream) {
-		vanillaData->secondaryUnitColor = commonItems::Color::Factory().getColor(theStream);
+		vanillaData->secondaryUnitColor = laFabricaDeColor.getColor(theStream);
 	});
 	registerKeyword("tertiary_unit_color", [this](std::istream& theStream) {
-		vanillaData->tertiaryUnitColor = commonItems::Color::Factory().getColor(theStream);
+		vanillaData->tertiaryUnitColor = laFabricaDeColor.getColor(theStream);
 	});
 	registerKeyword("is_named_from_capital", [this](const std::string& unused, std::istream& theStream) {
 		commonItems::ignoreItem(unused, theStream);
