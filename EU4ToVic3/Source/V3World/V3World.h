@@ -8,6 +8,7 @@
 #include "FlagCrafter/FlagCrafter.h"
 #include "Loaders/DefinesLoader/Vic3DefinesLoader.h"
 #include "Loaders/LocLoader/LocalizationLoader.h"
+#include "NamedColors/NamedColors.h"
 #include "PoliticalManager/PoliticalManager.h"
 #include "PopManager/PopManager.h"
 #include "ProvinceMapper/ProvinceMapper.h"
@@ -33,6 +34,8 @@ class World
 	[[nodiscard]] const auto& getVanillaLocalizations() const { return vanillaLocalizationLoader; }
 
   private:
+	void primeLaFabricaDeColor(const Configuration& configuration);
+
 	std::filesystem::path V3Path;
 	Configuration::ConfigBlock configBlock;
 	DatingData datingData;
@@ -48,6 +51,7 @@ class World
 	mappers::ProvinceMapper provinceMapper;
 	mappers::ReligionMapper religionMapper;
 	mappers::CultureMapper cultureMapper;
+	mappers::NamedColors namedColors;
 	std::shared_ptr<mappers::CountryMapper> countryMapper;
 	FlagCrafter flagCrafter;
 };

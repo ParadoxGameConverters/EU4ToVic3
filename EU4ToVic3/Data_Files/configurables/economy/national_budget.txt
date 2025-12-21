@@ -51,7 +51,7 @@ infrastructure = {
 military = {
 	weight = 12
 
-	building_barracks
+	building_barrack
 
 	multiply = {
 		value = 0.1
@@ -70,13 +70,14 @@ naval = {
 }
 
 farming = {
-	weight = 40 # This is not a mistake. It's just unfortunate.
+	weight = 20 # This is not a mistake. It's just unfortunate.
 
 	building_rye_farm
 	building_rice_farm
 	building_wheat_farm
 	building_maize_farm
 	building_millet_farm
+	building_vineyard
 }
 
 farming_livestock = {
@@ -162,13 +163,13 @@ shipwrights = {
 	industrial = yes
 
 	building_shipyards
-	building_military_shipyards
+	building_military_shipyard
 }
 
 paper_industry = {
 	weight = 8
 
-	building_paper_mills
+	building_paper_mill
 
 	add = {
 		value = 7
@@ -184,8 +185,8 @@ paper_industry = {
 light_industry = {
 	weight = 16
 
-	building_textile_mills
-	building_furniture_manufacturies
+	building_textile_mill
+	building_furniture_manufactory
 	building_glassworks
 	
 
@@ -202,8 +203,8 @@ western_industry = {
 	weight = 10
 
 	building_food_industry
-	building_chemical_plants
-	building_steel_mills
+	building_chemical_plant
+	building_steel_mill
 
 	# No effect if no EuroCentrism
 	add= {
@@ -218,7 +219,7 @@ western_industry = {
 
 tooling_industry = {
 
-	building_tooling_workshops
+	building_tooling_workshop
 
 	add = {
 		value = 5
@@ -259,8 +260,8 @@ military_industry = {
 	weight = 0
 
 	building_arms_industry
-	building_artillery_foundries
-	building_munition_plants
+	building_artillery_foundry
+	building_munition_plant
 
 	add = {
 		value = 4

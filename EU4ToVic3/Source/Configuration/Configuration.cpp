@@ -7,6 +7,8 @@
 #include "ParserHelpers.h"
 #include <fstream>
 
+auto laFabricaDeColor = commonItems::Color::Factory();
+
 Configuration::Configuration(const commonItems::ConverterVersion& converterVersion)
 {
 	Log(LogLevel::Info) << "Reading configuration file";

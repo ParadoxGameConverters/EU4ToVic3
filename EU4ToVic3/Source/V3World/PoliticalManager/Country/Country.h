@@ -17,6 +17,8 @@
 #include <memory>
 #include <string>
 
+extern commonItems::Color::Factory laFabricaDeColor;
+
 namespace EU4
 {
 class Country;
