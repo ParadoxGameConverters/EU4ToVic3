@@ -1,0 +1,176 @@
+﻿# converter_has_shinto_faith
+# converter_tc_has_shinto_faith
+# converter_has_confucian_faith
+# converter_tc_has_confucian_faith
+# converter_has_hindu_faith
+# converter_tc_has_hindu_faith
+# converter_has_protestant_faith
+# converter_tc_has_protestant_faith
+# converter_has_orthodox_faith
+# converter_tc_has_orthodox_faith
+# converter_has_coptic_faith
+# converter_tc_has_coptic_faith
+# converter_has_sunni_faith
+# converter_tc_has_sunni_faith
+# converter_has_shiite_faith
+# converter_tc_has_shiite_faith
+# converter_has_ibadi_faith
+# converter_tc_has_ibadi_faith
+
+converter_has_shinto_faith = {
+	OR = {
+		country_has_state_religion = rel:shinto
+		religion = { is_target_in_global_variable_list = { name = global_shinto_branch_religions target = this } }
+	}
+}
+
+converter_tc_has_shinto_faith = {
+	OR = {
+		var:tc_majority_religion = rel:shinto
+		var:tc_majority_religion = { is_target_in_global_variable_list = { name = global_shinto_branch_religions target = this } }
+	}
+}
+
+converter_has_confucian_faith = {
+	OR = {
+		country_has_state_religion = rel:confucian
+		religion = { has_discrimination_trait = heritage_taoic }
+		religion = { is_target_in_global_variable_list = { name = global_confucian_branch_religions target = this } }
+	}
+}
+
+converter_tc_has_confucian_faith = {
+	OR = {
+		var:tc_majority_religion = rel:confucian
+		var:tc_majority_religion = { has_discrimination_trait = heritage_taoic }
+		var:tc_majority_religion = { is_target_in_global_variable_list = { name = global_confucian_branch_religions target = this } }
+	}
+}
+
+converter_has_hindu_faith = {
+	OR = {
+		country_has_state_religion = rel:hindu
+		country_has_state_religion = rel:khurmazta
+		religion = { is_target_in_global_variable_list = { name = global_hindu_branch_religions target = this } }
+	}
+}
+
+converter_tc_has_hindu_faith = {
+	OR = {
+		var:tc_majority_religion = rel:hindu
+		var:tc_majority_religion = rel:khurmazta
+		var:tc_majority_religion = { is_target_in_global_variable_list = { name = global_hindu_branch_religions target = this } }
+	}
+}
+
+converter_has_protestant_faith = {
+	OR = {
+		country_has_state_religion = rel:protestant
+		country_has_state_religion = rel:waldensian
+		country_has_state_religion = rel:lollard
+		religion = { is_target_in_global_variable_list = { name = global_protestant_religions target = this } }
+	}
+}
+
+converter_tc_has_protestant_faith = {
+	OR = {
+		var:tc_majority_religion = rel:protestant
+		var:tc_majority_religion = rel:waldensian
+		var:tc_majority_religion = rel:lollard
+		var:tc_majority_religion = { is_target_in_global_variable_list = { name = global_protestant_religions target = this } }
+	}
+}
+
+converter_has_orthodox_faith = {
+	OR = {
+		country_has_state_religion = rel:orthodox
+		country_has_state_religion = rel:iconoclast
+		country_has_state_religion = rel:bogomilist
+		country_has_state_religion = rel:monothelite
+		country_has_state_religion = rel:paulician
+		religion = { is_target_in_global_variable_list = { name = global_orthodox_branch_religions target = this } }
+	}
+}
+
+converter_tc_has_orthodox_faith = {
+	OR = {
+		var:tc_majority_religion = rel:orthodox
+		var:tc_majority_religion = rel:iconoclast
+		var:tc_majority_religion = rel:bogomilist
+		var:tc_majority_religion = rel:monothelite
+		var:tc_majority_religion = rel:paulician
+		var:tc_majority_religion = { is_target_in_global_variable_list = { name = global_orthodox_branch_religions target = this } }
+	}
+}
+
+converter_has_coptic_faith = {
+	OR = {
+		country_has_state_religion = rel:oriental_orthodox
+		country_has_state_religion = rel:monophysite
+		religion = { is_target_in_global_variable_list = { name = global_coptic_branch_religions target = this } }
+	}
+}
+
+converter_tc_has_coptic_faith = {
+	OR = {
+		var:tc_majority_religion = rel:oriental_orthodox
+		var:tc_majority_religion = rel:monophysite
+		var:tc_majority_religion = { is_target_in_global_variable_list = { name = global_coptic_branch_religions target = this } }
+	}
+}
+
+converter_has_sunni_faith = {
+	OR = {
+		country_has_state_religion = rel:sunni
+		country_has_state_religion = rel:mutazila
+		country_has_state_religion = rel:zikri
+		country_has_state_religion = rel:masmudi
+		religion = { is_target_in_global_variable_list = { name = global_sunni_branch_religions target = this } }
+	}
+}
+
+converter_tc_has_sunni_faith = {
+	OR = {
+		var:tc_majority_religion = rel:sunni
+		var:tc_majority_religion = rel:mutazila
+		var:tc_majority_religion = rel:zikri
+		var:tc_majority_religion = rel:masmudi
+		var:tc_majority_religion = { is_target_in_global_variable_list = { name = global_sunni_branch_religions target = this } }
+	}
+}
+
+converter_has_shiite_faith = {
+	OR = {
+		country_has_state_religion = rel:shiite
+		country_has_state_religion = rel:quranist
+		country_has_state_religion = rel:alawite
+		country_has_state_religion = rel:qarmatian
+		religion = { is_target_in_global_variable_list = { name = global_shiite_branch_religions target = this } }
+	}
+}
+
+converter_tc_has_shiite_faith = {
+	OR = {
+		var:tc_majority_religion = rel:shiite
+		var:tc_majority_religion = rel:quranist
+		var:tc_majority_religion = rel:alawite
+		var:tc_majority_religion = rel:qarmatian
+		var:tc_majority_religion = { is_target_in_global_variable_list = { name = global_shiite_branch_religions target = this } }
+	}
+}
+
+converter_has_ibadi_faith = {
+	OR = {
+		country_has_state_religion = rel:ibadi
+		country_has_state_religion = rel:kharijite
+		religion = { is_target_in_global_variable_list = { name = global_shiite_branch_religions target = this } }
+	}
+}
+
+converter_tc_has_ibadi_faith = {
+	OR = {
+		var:tc_majority_religion = rel:ibadi
+		var:tc_majority_religion = rel:kharijite
+		var:tc_majority_religion = { is_target_in_global_variable_list = { name = global_shiite_branch_religions target = this } }
+	}
+}

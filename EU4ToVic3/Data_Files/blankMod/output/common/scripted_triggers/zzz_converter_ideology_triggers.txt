@@ -10,7 +10,7 @@
 # ideology_humanitarian_royalist_valid_trigger
 # ideology_utilitarian_leader_valid_trigger
 
-ideology_traditionalist_valid_trigger = {
+REPLACE:ideology_traditionalist_valid_trigger = {
 	OR = {
 		is_interest_group_type = ig_rural_folk
 		is_interest_group_type = ig_trade_unions
@@ -34,7 +34,7 @@ ideology_traditionalist_valid_trigger = {
 	}
 }
 
-ideology_traditionalist_minoritarian_valid_trigger = {
+REPLACE:ideology_traditionalist_minoritarian_valid_trigger = {
 	OR = {
 		is_interest_group_type = ig_rural_folk
 		is_interest_group_type = ig_trade_unions
@@ -54,7 +54,7 @@ ideology_traditionalist_minoritarian_valid_trigger = {
 	}
 }
 
-ideology_slaver_valid_trigger = {
+REPLACE:ideology_slaver_valid_trigger = {
 	OR = {
 		is_interest_group_type = ig_landowners
 		is_interest_group_type = ig_devout
@@ -70,7 +70,7 @@ ideology_slaver_valid_trigger = {
 	}
 }
 
-ideology_feminist_valid_trigger = {
+REPLACE:ideology_feminist_valid_trigger = {
 	OR = {
 		is_interest_group_type = ig_rural_folk
 		is_interest_group_type = ig_intelligentsia
@@ -87,7 +87,7 @@ ideology_feminist_valid_trigger = {
 	}
 }
 
-ideology_vanguardist_scripted_trigger = {
+REPLACE:ideology_vanguardist_valid_trigger = {
 	OR = {
 		is_interest_group_type = ig_rural_folk
 		is_interest_group_type = ig_intelligentsia
@@ -97,16 +97,14 @@ ideology_vanguardist_scripted_trigger = {
 		#Vanguardists have no opinion on religion, for some reason, so commie religions can support them
 		trigger_if = {
 			limit = {
-				owner = {
-					religion = { has_discrimination_trait = egalitarian }
-				}
+				owner.religion is_target_in_global_variable_list = { name = global_egalitarian_religions target = this }
 			}
 			is_interest_group_type = ig_devout
 		}
 	}
 }
 
-ideology_anarchist_valid_trigger = {
+REPLACE:ideology_anarchist_valid_trigger = {
 	OR = {
 		is_interest_group_type = ig_rural_folk
 		is_interest_group_type = ig_intelligentsia
@@ -115,16 +113,14 @@ ideology_anarchist_valid_trigger = {
 		#Anarchists have no opinion on religion, so commie religions can support them
 		trigger_if = {
 			limit = {
-				owner = {
-					religion = { has_discrimination_trait = egalitarian }
-				}
+				owner.religion is_target_in_global_variable_list = { name = global_egalitarian_religions target = this }
 			}
 			is_interest_group_type = ig_devout
 		}
 	}
 }
 
-ideology_ethno_nationalist_valid_trigger = {
+REPLACE:ideology_ethno_nationalist_valid_trigger = {
 	trigger_if = {
 		limit = {
 			owner = { is_old_world_trading_company = yes }		### Converter ###
@@ -140,7 +136,7 @@ ideology_ethno_nationalist_valid_trigger = {
 	}
 }
 
-ideology_theocrat_valid_trigger = {
+REPLACE:ideology_theocrat_valid_trigger = {
 	OR = {
 		owner = {
 			has_law = law_type:law_theocracy
@@ -162,7 +158,7 @@ ideology_theocrat_valid_trigger = {
 	}
 }
 
-ideology_humanitarian_valid_trigger = {
+REPLACE:ideology_humanitarian_valid_trigger = {
 	OR = {
 		is_interest_group_type = ig_intelligentsia
 		is_interest_group_type = ig_trade_unions
@@ -170,19 +166,14 @@ ideology_humanitarian_valid_trigger = {
 		#Medieval hippies
 		trigger_if = {
 			limit = {
-				owner.religion = {
-					OR = {
-						has_discrimination_trait = egalitarian
-						has_discrimination_trait = tolerant
-					}
-				}
+				owner.religion is_target_in_global_variable_list = { name = global_egalitarian_religions target = this }
 			}
 			is_interest_group_type = ig_devout
 		}
 	}
 }
 
-ideology_humanitarian_royalist_valid_trigger = {
+REPLACE:ideology_humanitarian_royalist_valid_trigger = {
 	OR = {
 		is_interest_group_type = ig_intelligentsia
 		is_interest_group_type = ig_trade_unions
@@ -190,19 +181,14 @@ ideology_humanitarian_royalist_valid_trigger = {
 		#Medieval hippies
 		trigger_if = {
 			limit = {
-				owner.religion = {
-					OR = {
-						has_discrimination_trait = egalitarian
-						has_discrimination_trait = tolerant
-					}
-				}
+				owner.religion is_target_in_global_variable_list = { name = global_egalitarian_religions target = this }
 			}
 			is_interest_group_type = ig_devout
 		}
 	}
 }
 
-ideology_utilitarian_leader_valid_trigger = {
+REPLACE:ideology_utilitarian_leader_valid_trigger = {
 	OR = {
 		is_interest_group_type = ig_industrialists # "The ethics of bourgeois bookkeeping" - Leon Trotsky
 		is_interest_group_type = ig_intelligentsia
