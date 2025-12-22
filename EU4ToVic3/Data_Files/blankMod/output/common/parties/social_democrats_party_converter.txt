@@ -1,0 +1,735 @@
+﻿# Social democrats extremely attracted to this ideology
+# Attracts weak leftists and liberals
+# Available for Trade Unions pre-Socialism
+
+REPLACE:social_democrat_party = {
+	color = { 241 24 138 }
+	name = {
+		first_valid = {
+			triggered_desc = {
+				desc = party_diggers
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_british_cultures target = this } }		### Converter
+					NOT = { has_technology_researched = socialism }
+				}
+			}
+			triggered_desc = {
+				desc = party_labour_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_british_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_psoe
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_spanish_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_labour_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_irish_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_portuguese_socialist_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_portuguese_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_ftsf
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_french_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_menshevik_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_russian_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_finnish_labor_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_finnish_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_belgian_workers_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_wallonian_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_sdapo
+				trigger = {
+					uses_aus_ger_characters = yes																						### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_brsdp
+				trigger = {
+					exists = c:BUL
+					c:BUL ?= THIS
+				}
+			}
+			triggered_desc = {
+				desc = party_mszdp
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_hungarian_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_social_democratic_workers_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_dutch_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_common_peoples_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_japanese_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_democrat_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_persian_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_socialist_workers_federation
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_turkish_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_laborist_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_confederate_socialist_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_dixie_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_seke
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_greek_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_labor_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_norwegian_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_socialist_labor_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_labor_party
+				trigger = {
+					country_has_primary_culture = cu:franco_canadian
+				}
+			}
+			triggered_desc = {
+				desc = party_social_democratic_workers_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_romanian_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_spd
+				trigger = {
+					any_primary_culture = {		### Converter
+						OR = {
+							is_target_in_global_variable_list = { name = global_nor_ger_cultures target = this }
+							is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this }
+						}
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_psi
+				trigger = {
+					any_primary_culture = {		### Converter
+						OR = {
+							is_target_in_global_variable_list = { name = global_nor_ita_cultures target = this }
+							is_target_in_global_variable_list = { name = global_sou_ita_cultures target = this }
+						}
+					}
+					NOR = {
+						c:AUS ?= this
+						c:KUK ?= this
+						c:HRE ?= this
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_socialist_party_of_america
+				trigger = {
+					any_primary_culture = { is_yankee_culture = yes }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_anl
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_inc
+				trigger = {
+					is_in_geographic_region = geographic_region_india																		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_social_democrats
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+
+	icon = {
+		default = "/gfx/interface/icons/political_parties/social_democrats.dds"
+	}
+	unlocking_technologies = {
+		labor_movement
+	}
+	# THIS IS RUN ONLY ONCE AT GAME START
+	valid_for_country = {
+		always = yes
+	}
+	available_for_interest_group = {
+		owner = {
+			country_has_voting_franchise = yes
+			OR = {
+				any_interest_group = {
+					ig_counts_as_marginal = no
+					leader ?= {
+						has_ideology = ideology:ideology_social_democrat
+					}
+				}
+				ig:ig_trade_unions ?= {
+					ig_counts_as_marginal = no
+				}
+			}
+		}
+		NOT = { # these ig's are inherently anti-worker
+			is_interest_group_type = ig_landowners
+			is_interest_group_type = ig_industrialists
+		}
+		leader ?= { # fascists and conservatives hate social democracy
+			NOT = {
+				has_ideology = ideology:ideology_fascist
+				has_ideology = ideology:ideology_integralist
+				has_ideology = ideology:ideology_ethno_nationalist
+				has_ideology = ideology:ideology_traditionalist
+				has_ideology = ideology:ideology_carlist
+				has_ideology = ideology:ideology_royalist
+				has_ideology = ideology:ideology_orleanist
+				has_ideology = ideology:ideology_bonapartist
+				has_ideology = ideology:ideology_legitimist
+				has_ideology = ideology:ideology_theocrat
+			}
+		}
+	}
+
+	# Root - IG considering joining
+	# scope:number - the number of IGs that would join this party before the root IG
+	join_weight = {
+		value = {
+			value = -5
+			desc = "base_value"
+		}
+		if = {
+			limit = {
+				owner = {
+					is_old_world_trading_company = yes		### Converter
+					is_subject = yes
+					OR = {
+						has_modifier = modifier_india_crown_rule
+						has_modifier = modifier_india_company_rule
+						has_modifier = modifier_india_company_rule_upgraded
+					}
+				}
+				OR = {
+					is_interest_group_type = ig_industrialists
+					is_interest_group_type = ig_armed_forces
+				}
+			}
+			add = {
+				value = -100
+				desc = "india_colonial_government"
+			}
+		}
+		if = { # social democrats love social democracy
+			limit = {
+				leader ?= {
+					has_ideology = ideology:ideology_social_democrat
+				}
+			}
+			add = {
+				value = 5
+				desc = from_social_democrat
+			}
+		}
+		if = { # powerful social democrats love social democracy
+			limit = {
+				is_powerful = yes
+				leader ?= {
+					has_ideology = ideology:ideology_social_democrat
+				}
+			}
+			add = {
+				value = 5
+				desc = from_social_democrat_powerful
+			}
+		}
+		if = { # social democrats will fall in line behind stronger leftists
+			limit = {
+				leader ?= {
+					has_ideology = ideology:ideology_social_democrat
+				}
+				is_powerful = no
+				owner = {
+					any_interest_group = {
+						is_powerful = yes
+						leader ?= {
+							OR = {
+								has_ideology = ideology:ideology_communist
+								has_ideology = ideology:ideology_vanguardist
+								has_ideology = ideology:ideology_anarchist
+							}
+						}
+					}
+				}
+			}
+			add = {
+				value = -5
+				desc = from_powerful_communists
+			}
+		}
+		if = { # weak leftists will fall in line behind social democrats pre-revolution
+			limit = {
+				is_powerful = no
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_communist
+						has_ideology = ideology:ideology_vanguardist
+						has_ideology = ideology:ideology_anarchist
+					}
+				}
+				owner = {
+					NOT = { has_law_or_variant = law_type:law_council_republic }
+					any_interest_group = {
+						is_powerful = yes
+						leader ?= {
+							has_ideology = ideology:ideology_social_democrat
+						}
+					}
+				}
+			}
+			add = 6
+			desc = from_weak_communists
+		}
+		# weak liberals might fall in line behind strong social democrats
+		if = {
+			limit = {
+				is_powerful = no
+				OR = {
+					has_ideology = ideology:ideology_liberal
+					has_ideology = ideology:ideology_liberal_modern
+				}
+				owner = {
+					any_interest_group = {
+						is_powerful = yes
+						leader ?= {
+							has_ideology = ideology:ideology_social_democrat
+						}
+					}
+				}
+			}
+			add = {
+				value = 5
+				desc = from_weak_liberals
+			}
+		}
+		if = { # various progressives are inclined towards social democracy
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_feminist
+						has_ideology = ideology:ideology_abolitionist
+						has_ideology = ideology:ideology_pacifist
+						has_ideology = ideology:ideology_radical
+						has_ideology = ideology:ideology_reformer
+						has_ideology = ideology:ideology_republican_leader
+						has_ideology = ideology:ideology_nihilist
+						has_ideology = ideology:ideology_humanitarian
+						has_ideology = ideology:ideology_humanitarian_royalist
+					}
+				}
+			}
+			add = {
+				value = 5
+				desc = from_progressivism_sd
+			}
+		}
+		# market liberals not very inclined to join social democrats
+		if = {
+			limit = {
+				leader ?= {
+					has_ideology = ideology:ideology_market_liberal
+				}
+			}
+			add = {
+				value = -5
+				desc = from_marked_liberal_sd
+			}
+		}
+		if = { # generic powerful trade unions party
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				is_powerful = yes
+				leader ?= {
+					NOR = {
+						has_ideology = ideology:ideology_communist
+						has_ideology = ideology:ideology_vanguardist
+						has_ideology = ideology:ideology_anarchist
+					}
+				}
+			}
+			add = {
+				value = 5
+				desc = from_powerful_unions
+			}
+		}
+		if = { # anti-censorship
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_liberal
+					has_ideology = ideology:ideology_liberal_modern
+					has_ideology = ideology:ideology_egalitarian
+					has_ideology = ideology:ideology_egalitarian_modern
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_humanitarian
+							has_ideology = ideology:ideology_humanitarian_royalist
+						}
+					}
+				}
+				owner = {
+					has_law_or_variant = law_type:law_outlawed_dissent
+				}
+			}
+			add = {
+				value = 3
+				desc = from_outlawed_dissent
+			}
+		}
+		if = { # against land-based taxation
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_meritocratic
+					has_ideology = ideology:ideology_agrarian
+					has_ideology = ideology:ideology_cartist
+					leader ?= {
+						has_ideology = ideology:ideology_social_democrat
+					}
+				}
+				owner = {
+					has_law_or_variant = law_type:law_land_based_taxation
+				}
+			}
+			add = {
+				value = 3
+				desc = "from_land_tax"
+			}
+		}
+		if = { # loyalists will join in when their issues are relevant
+			limit = {
+				has_ideology = ideology:ideology_loyalist
+				owner = {
+					has_law_or_variant = law_type:law_consumption_based_taxation
+				}
+			}
+			add = {
+				value = 3
+				desc = "from_loyalist"
+			}
+		}
+		if = { # republican
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_republican
+					has_ideology = ideology:ideology_populist
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_nihilist
+							has_ideology = ideology:ideology_republican_leader
+							has_ideology = ideology:ideology_radical
+						}
+					}
+				}
+				owner = {
+					OR = {
+						has_law_or_variant = law_type:law_monarchy
+						has_law_or_variant = law_type:law_theocracy
+					}
+				}
+			}
+			add = {
+				value = 3
+				desc = "from_republican"
+			}
+		}
+		if = { # against illiteracy and religious education
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_individualist
+					has_ideology = ideology:ideology_proletarian
+				}
+				owner = {
+					OR = {
+						has_law_or_variant = law_type:law_religious_schools
+						has_law_or_variant = law_type:law_no_schools
+					}
+				}
+			}
+			add = {
+				value = 3
+				desc = "from_no_or_religious_schools"
+			}
+		}
+		if = { # against free trade - peasant/socialist alliance
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_proletarian
+					has_ideology = ideology:ideology_agrarian
+					has_ideology = ideology:ideology_paternalistic
+					has_ideology = ideology:ideology_magnatial
+					has_ideology = ideology:ideology_carlist_ig
+				}
+				owner = {
+					has_law_or_variant = law_type:law_free_trade
+				}
+				NOT = {
+					leader ?= {
+						has_ideology = ideology:ideology_market_liberal
+					}
+				}
+			}
+			add = {
+				value = 3
+				desc = "from_anti_free_trade"
+			}
+		}
+		if = { # against laissez-faire - peasant/socialist alliance
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_proletarian
+					has_ideology = ideology:ideology_agrarian
+					leader ?= {
+						has_ideology = ideology:ideology_protectionist
+					}
+				}
+				owner = {
+					has_law_or_variant = law_type:law_laissez_faire
+				}
+				NOT = {
+					leader ?= {
+						has_ideology = ideology:ideology_market_liberal
+					}
+				}
+			}
+			add = {
+				value = 3
+				desc = "from_anti_laissez_faire"
+			}
+		}
+		if = { # loyalist-proletarian alliance for tax reform
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_proletarian
+					leader ?= {
+						has_ideology = ideology:ideology_social_democrat
+					}
+					AND = {
+						has_ideology = ideology:ideology_loyalist
+						owner = {
+							NOR = {
+								has_law_or_variant = law_type:law_proportional_taxation
+								has_law_or_variant = law_type:law_per_capita_based_taxation
+							}
+						}
+					}
+				}
+				owner = {
+					NOT = {
+						has_law_or_variant = law_type:law_graduated_taxation
+					}
+				}
+			}
+			add = {
+				value = 3
+				desc = "from_no_graduated_taxation"
+			}
+		}
+		if = { # anti-serfdom
+			limit = {
+				owner = {
+					has_law_or_variant = law_type:law_serfdom
+				}
+				OR = {
+					has_ideology = ideology:ideology_egalitarian
+					has_ideology = ideology:ideology_egalitarian_modern
+					has_ideology = ideology:ideology_anti_slavery
+					has_ideology = ideology:ideology_laissez_faire
+					has_ideology = ideology:ideology_particularist
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_abolitionist
+							has_ideology = ideology:ideology_social_democrat
+							has_ideology = ideology:ideology_communist
+							has_ideology = ideology:ideology_vanguardist
+						}
+					}
+				}
+			}
+			add = {
+				value = 5
+				desc = "from_serfdom"
+			}
+		}
+		if = { # general anti-slavery
+			limit = {
+				owner = {
+					OR = {
+						has_law_or_variant = law_type:law_legacy_slavery
+						has_law_or_variant = law_type:law_slave_trade
+						has_law_or_variant = law_type:law_colonial_slavery
+					}
+				}
+				OR = {
+					has_ideology = ideology:ideology_anti_slavery
+					leader ?= {
+						has_ideology = ideology:ideology_abolitionist
+					}
+				}
+			}
+			add = {
+				value = 5
+				desc = "from_slavery"
+			}
+		}
+		if = { # early Trade Unions
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				is_powerful = no
+				NOT = {
+					has_ideology = ideology:ideology_socialist
+				}
+			}
+			add = {
+				value = -3
+				desc = "from_early_trade_unions"
+			}
+		}
+		if = { # against free trade
+			limit = {
+				owner = {
+					has_law_or_variant = law_type:law_free_trade
+				}
+				OR = {
+					has_ideology = ideology:ideology_socialist
+					has_ideology = ideology:ideology_isolationist
+				}
+			}
+			add = {
+				value = 3
+				desc = "from_free_trade"
+			}
+		}
+		if = { # against l-f
+			limit = {
+				owner = {
+					has_law_or_variant = law_type:law_laissez_faire
+				}
+				OR = {
+					has_ideology = ideology:ideology_agrarian
+					has_ideology = ideology:ideology_socialist
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_vanguardist
+							has_ideology = ideology:ideology_protectionist
+							has_ideology = ideology:ideology_luddite
+						}
+					}
+				}
+			}
+			add = {
+				value = 3
+				desc = "from_anti_laissez_faire"
+			}
+		}
+		if = {
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				is_powerful = yes
+			}
+			multiply = {
+				value = 2
+				desc = "from_archetype_party"
+			}
+		}
+		if = {
+			limit = {
+				scope:number = 1
+				is_powerful = no
+				ig_counts_as_marginal = no
+			}
+			multiply = {
+				value = 2
+				desc = "from_influential_supporting_member"
+			}
+		}
+		else_if = {
+			limit = {
+				scope:number = 2
+			}
+			multiply = {
+				value = 0.5
+				desc = "from_two_prior_members"
+			}
+		}
+		else_if = {
+			limit = {
+				scope:number = 3
+			}
+			multiply = {
+				value = 0.05
+				desc = "from_three_prior_members"
+			}
+		}
+		else_if = {
+			limit = {
+				scope:number > 3
+			}
+			multiply = {
+				value = 0.0
+				desc = "from_more_than_three_prior_members"
+			}
+		}
+	}
+}

@@ -1,0 +1,618 @@
+﻿# Fallback party for Devout
+# When devout are powerful, other religious IG's might join
+
+REPLACE:religious_party = {
+	color = { 100 100 100 }
+	name = {
+		first_valid = {
+			triggered_desc = {
+				desc = party_fatherland_front
+				trigger = {
+					uses_aus_ger_characters = yes																						### Converter
+					any_interest_group = {
+						is_in_government = yes
+						party ?= {
+							is_party_type = religious_party
+						}
+					}
+					has_law_or_variant = law_type:law_single_party_state
+					has_variable = fatherland_front_var
+				}
+			}
+			triggered_desc = {
+				desc = party_catholic_peoples_party
+				trigger = {
+					OR = {																						### Converter
+						country_has_state_religion = rel:catholic
+						root.var:ancien_regime_religion ?= rel:catholic
+						root.var:tc_majority_religion ?= rel:catholic
+					}
+					uses_aus_ger_characters = yes
+					NAND = {
+						any_interest_group = {
+							is_in_government = yes
+							party ?= {
+								is_party_type = fascist_party
+							}
+						}
+						has_law_or_variant = law_type:law_single_party_state
+						has_variable = fatherland_front_var
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_nationalist_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_portuguese_cultures target = this } }	### Converter
+					has_law = law_type:law_monarchy
+					NOT = {
+						has_technology_researched = corporatism
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_portuguese_catholic_centre
+				trigger = {
+					OR = {																						### Converter
+						country_has_state_religion = rel:catholic
+						root.var:ancien_regime_religion ?= rel:catholic
+						root.var:tc_majority_religion ?= rel:catholic
+					}
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_portuguese_cultures target = this } }
+					NOR = {
+						has_law = law_type:law_monarchy
+						has_law = law_type:law_theocracy
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_catholic_right
+				trigger = {
+					OR = {																						### Converter
+						country_has_state_religion = rel:catholic
+						root.var:ancien_regime_religion ?= rel:catholic
+						root.var:tc_majority_religion ?= rel:catholic
+					}
+					exists = c:SWI
+					c:SWI ?= THIS
+				}
+			}
+			triggered_desc = {
+				desc = party_anti_revolutionary_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_dutch_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_learned_council
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_persian_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_traditionalist_communion
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_spanish_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_christian_peoples_party
+				trigger = {
+					OR = {																									### Converter
+						root.religion = { has_discrimination_trait = heritage_christian }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = heritage_christian }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = heritage_christian }
+					}
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_wallonian_cultures target = this } }
+				}
+			}
+			triggered_desc = {
+				desc = party_clerical_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_french_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_union_of_the_russian_people
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_russian_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_know_nothing_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_zentrum
+				trigger = {
+					OR = {																						### Converter
+						country_has_state_religion = rel:catholic
+						root.var:ancien_regime_religion ?= rel:catholic
+						root.var:tc_majority_religion ?= rel:catholic
+					}
+					any_primary_culture = {
+						OR = {
+							is_target_in_global_variable_list = { name = global_nor_ger_cultures target = this }
+							is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this }
+						}
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_conservative_catholics
+				trigger = {
+					OR = {																						### Converter
+						country_has_state_religion = rel:catholic
+						root.var:ancien_regime_religion ?= rel:catholic
+						root.var:tc_majority_religion ?= rel:catholic
+					}
+					any_primary_culture = {
+						OR = {
+							is_target_in_global_variable_list = { name = global_nor_ita_cultures target = this }
+							is_target_in_global_variable_list = { name = global_sou_ita_cultures target = this }
+						}
+					}
+					NOR = {
+						c:AUS ?= this
+						c:KUK ?= this
+						c:HRE ?= this
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_moderate_venstre
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_norwegian_cultures target = this } }		### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_shinto
+				trigger = {
+					OR = {																									### Converter
+						country_has_state_religion = rel:shinto
+						root.var:ancien_regime_religion = rel:shinto
+						root.var:tc_majority_religion ?= rel:shinto
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_buddhist
+				trigger = {
+					OR = {																									### Converter
+						root.religion = { has_discrimination_trait = heritage_dharmic }										##This is weird, since parties take the 1st available name we'll never see the hindu party...
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = heritage_dharmic }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = heritage_dharmic }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_sikh
+				trigger = {
+					OR = {																									### Converter
+						country_has_state_religion = rel:sikh
+						root.var:ancien_regime_religion = rel:sikh
+						root.var:tc_majority_religion ?= rel:sikh
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_hindu
+				trigger = {
+					OR = {																									### Converter
+						country_has_state_religion = rel:hindu
+						root.var:ancien_regime_religion = rel:hindu
+						root.var:tc_majority_religion ?= rel:hindu
+						root.religion = { has_variable = converter_is_hindu_faith }
+						root.var:ancien_regime_religion ?= { has_variable = converter_is_hindu_faith }
+						root.var:tc_majority_religion ?= { has_variable = converter_is_hindu_faith }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_jewish
+				trigger = {
+					OR = {																									### Converter
+						root.religion = { has_discrimination_trait = heritage_jewish }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = heritage_jewish }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = heritage_jewish }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_muslim
+				trigger = {
+					OR = {																									### Converter
+						root.religion = { has_discrimination_trait = heritage_islamic }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = heritage_islamic }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = heritage_islamic }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_catholic
+				trigger = {
+					OR = {																						### Converter
+						country_has_state_religion = rel:catholic
+						root.var:ancien_regime_religion ?= rel:catholic
+						root.var:tc_majority_religion ?= rel:catholic
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_christian
+				trigger = {
+					OR = {																									### Converter
+						root.religion = { has_discrimination_trait = heritage_christian }
+						root.var:ancien_regime_religion ?= { has_discrimination_trait = heritage_christian }
+						root.var:tc_majority_religion ?= { has_discrimination_trait = heritage_christian }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_hindu_mahasabha
+				trigger = {
+					ig:ig_devout ?= {
+						has_ideology = ideology:ideology_hindu_moralist
+					}
+					### Converter
+					is_in_geographic_region = geographic_region_india
+					OR = {
+						is_old_world_trading_company = yes
+						is_subject = yes
+					}
+					### Converter
+				}
+			}
+			triggered_desc = {
+				desc = party_religious
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+	icon = {
+		default = "/gfx/interface/icons/political_parties/religious.dds"
+	}
+	# THIS IS RUN ONLY ONCE AT GAME START
+	valid_for_country = {
+		always = yes
+	}
+	available_for_interest_group = {
+		owner = {
+			country_has_voting_franchise = yes
+		}
+	}
+
+	# Root - IG considering joining
+	# scope:number - the number of IGs that would join this party before the root IG
+	join_weight = {
+		value = {
+			value = -5
+			desc = "base_value"
+		}
+		if = {
+			limit = {
+				owner = {
+					is_old_world_trading_company = yes		### Converter
+					is_subject = yes
+					OR = {
+						has_modifier = modifier_india_crown_rule
+						has_modifier = modifier_india_company_rule
+						has_modifier = modifier_india_company_rule_upgraded
+					}
+				}
+				OR = {
+					is_interest_group_type = ig_industrialists
+					is_interest_group_type = ig_armed_forces
+				}
+			}
+			add = {
+				value = -100
+				desc = "india_colonial_government"
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					is_in_geographic_region = geographic_region_south_america
+					any_primary_culture = {		### Converter
+						OR = {
+							is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+							is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+							is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+						}
+					}
+				}
+			}
+			add = {
+				value = -10
+				desc = "south_america_two_party_system"
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					is_in_geographic_region = geographic_region_north_america
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }		### Converter
+					has_law_or_variant = law_type:law_presidential_republic
+				}
+			}
+			add = {
+				value = -10
+				desc = "usa_two_party_system"
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					any_interest_group = {
+						is_interest_group_type = ig_landowners
+						ig_counts_as_marginal = no
+					}
+					NOT = {
+						has_technology_researched = corporatism
+					}
+				}
+			}
+			add = {
+				value = -5
+				desc = "from_relevant_landowners"
+			}
+		}
+		if = {
+			limit = {
+				is_interest_group_type = ig_devout
+				owner = {
+					has_law_or_variant = law_type:law_theocracy
+				}
+			}
+			add = {
+				value = 5
+				desc = "from_theocracy"
+			}
+		}
+		if = { # nobody will join if the devout don't join
+			limit = {
+				NOT = { is_interest_group_type = ig_devout }
+				OR = {
+					NOT = { exists = owner.py:religious_party }
+					AND = {
+						exists = owner.py:religious_party
+						owner = {
+							ig:ig_devout ?= {
+								NOT = { is_member_of_party = owner.py:religious_party }
+							}
+						}
+					}
+				}
+			}
+			add = {
+				value = -20
+				desc = "from_no_devout_in_party" # this should probably never actually display in game because the party won't exist
+			}
+		}
+		if = { # a party for powerful religious people
+			limit = {
+				is_interest_group_type = ig_devout
+				is_powerful = yes
+			}
+			add = {
+				value = 10
+				desc = "from_powerful_devout"
+			}
+		}
+		if = { # religiously inclined people might join if devout are powerful
+			limit = {
+				is_powerful = no
+				owner = {
+					ig:ig_devout ?= {
+						is_powerful = yes
+					}
+				}
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_traditionalist
+						has_ideology = ideology:ideology_carlist
+						has_ideology = ideology:ideology_theocrat
+						has_ideology = ideology:ideology_corporatist_leader
+					}
+				}
+			}
+			add = {
+				value = 10
+				desc = "from_powerful_devout_other"
+			}
+		}
+		if = { # antireligious characters and IG's will never join
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_anti_clerical
+					has_ideology = ideology:ideology_anti_clerical_pb		### Converter
+					leader ?= {
+						has_ideology = ideology:ideology_nihilist
+					}
+				}
+			}
+			add = {
+				value = -15
+				desc = "from_antireligious"
+			}
+		}
+		if = { # Corporatism
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_corporatist
+					leader ?= {
+						has_ideology = ideology:ideology_corporatist_leader
+					}
+				}
+				NOT = {
+					c:AUS ?= owner
+				}
+			}
+			add = {
+				value = 10
+				desc = "from_corporatism"
+			}
+		}
+		if = { # patriarchs more likely to join conservatives with women's suffrage
+			limit = {
+				has_ideology = ideology:ideology_patriarchal
+				owner = {
+					has_law_or_variant = law_type:law_womens_suffrage
+				}
+			}
+			add = {
+				value = 3
+				desc = "from_patriarchy"
+			}
+		}
+		if = { # Carlists and Miguelists were against participating in electoral politics for a good while
+			limit = {
+				NOT = { owner = { has_technology_researched = political_agitation } }
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_carlist
+						has_ideology = ideology:ideology_miguelist
+					}
+				}
+			}
+			add = {
+				value = -20
+				desc = "from_traditionalist_monarchism"
+			}
+		}
+		if = {
+			limit = {
+				is_interest_group_type = ig_devout
+				is_powerful = yes
+				NOT = {
+					c:AUS ?= owner
+				}
+			}
+			multiply = {
+				value = 2
+				desc = "from_archetype_party"
+			}
+		}
+		if = {
+			limit = {
+				scope:number = 1
+				is_powerful = no
+				ig_counts_as_marginal = no
+			}
+			multiply = {
+				value = 2
+				desc = "from_influential_supporting_member"
+			}
+		}
+		else_if = {
+			limit = {
+				scope:number = 2
+			}
+			multiply = {
+				value = 0.5
+				desc = "from_two_prior_members"
+			}
+		}
+		else_if = {
+			limit = {
+				scope:number = 3
+			}
+			multiply = {
+				value = 0.05
+				desc = "from_three_prior_members"
+			}
+		}
+		else_if = {
+			limit = {
+				scope:number > 3
+			}
+			multiply = {
+				value = 0.0
+				desc = "from_more_than_three_prior_members"
+			}
+		}
+		if = { # anti-orleanist
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_bonapartist
+						has_ideology = ideology:ideology_legitimist
+					}
+				}
+				owner = {
+					any_interest_group = {
+						has_party = yes
+						party = {
+							is_party_type = religious_party
+						}
+						is_powerful = yes
+						leader ?= {
+							has_ideology = ideology:ideology_orleanist
+						}
+					}
+				}
+			}
+			add = {
+				value = -5
+				desc = "from_french_monarchist_rival"
+			}
+		}
+		if = { # anti-legitimist
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_bonapartist
+						has_ideology = ideology:ideology_orleanist
+					}
+				}
+				owner = {
+					any_interest_group = {
+						has_party = yes
+						party = {
+							is_party_type = religious_party
+						}
+						is_powerful = yes
+						leader ?= {
+							has_ideology = ideology:ideology_legitimist
+						}
+					}
+				}
+			}
+			add = {
+				value = -5
+				desc = "from_french_monarchist_rival"
+			}
+		}
+		if = { # anti-bonapartist
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_legitimist
+						has_ideology = ideology:ideology_orleanist
+					}
+				}
+				owner = {
+					any_interest_group = {
+						has_party = yes
+						party = {
+							is_party_type = religious_party
+						}
+						is_powerful = yes
+						leader ?= {
+							has_ideology = ideology:ideology_bonapartist
+						}
+					}
+				}
+			}
+			add = {
+				value = -5
+				desc = "from_french_monarchist_rival"
+			}
+		}
+	}
+}
