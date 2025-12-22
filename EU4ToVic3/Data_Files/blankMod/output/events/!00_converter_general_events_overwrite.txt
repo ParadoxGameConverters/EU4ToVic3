@@ -1,4 +1,4 @@
-﻿namespace = commander_events
+namespace = commander_events
 namespace = communism
 namespace = crime_events
 namespace = german_unification
@@ -56,7 +56,7 @@ commander_events.6 = {
 			}
 		}
 		any_interest_group = {
-			is_marginal = no
+			ig_counts_as_marginal = no
 			leader = {
 				NOT = { has_trait = syphilis }
 				is_oppressed_gender = no		### Converter
@@ -94,7 +94,7 @@ commander_events.6 = {
 		}
 		random_interest_group = {
 			limit = {
-				is_marginal = no
+				ig_counts_as_marginal = no
 				leader = {
 					NOT = {
 						has_trait = syphilis
@@ -114,7 +114,7 @@ commander_events.6 = {
 		NOR = {
 			exists = scope:seducer_commander
 			exists = scope:cheated_leader
-			scope:cheated_ig = { is_marginal = yes }
+			scope:cheated_ig = { ig_counts_as_marginal = yes }
 		}
 	}
 
@@ -216,9 +216,9 @@ communism.8 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 
 	trigger = {
-		has_law = law_type:law_council_republic
+		has_law_or_variant = law_type:law_council_republic
 		NOT = {	has_variable = red_army_var }
-		ig:ig_armed_forces = {
+		ig:ig_armed_forces ?= {
 			leader = {
 				OR = {
 					has_ideology = ideology:ideology_communist
@@ -229,7 +229,7 @@ communism.8 = {
 	}
 
 	immediate = {
-		ig:ig_armed_forces = {
+		ig:ig_armed_forces ?= {
 			save_scope_as = red_army_ig
 			leader = {
 				save_scope_as = red_army_general
@@ -240,7 +240,7 @@ communism.8 = {
 
 	option = {
 		name = communism.8.a
-		ig:ig_armed_forces = {
+		ig:ig_armed_forces ?= {
 			custom_tooltip = red_army_tt
 			hidden_effect = {
 				set_interest_group_name = ig_red_army
@@ -298,7 +298,7 @@ crime_events.11 = { #The Criminal was caught
 			is_oppressed_gender = no		### Converter
 			is_immortal = no
 			interest_group = {
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 			age > 18
 		}
@@ -311,7 +311,7 @@ crime_events.11 = { #The Criminal was caught
 				is_oppressed_gender = no		### Converter
 				is_immortal = no
 				interest_group = {
-					is_marginal = no
+					ig_counts_as_marginal = no
 				}
 				age > 18
 			}
@@ -363,7 +363,7 @@ crime_events.11 = { #The Criminal was caught
 		set_variable = serial_killer_caught
 		if = {
 			limit = {
-				has_law = law_type:law_outlawed_dissent
+				has_law_or_variant = law_type:law_outlawed_dissent
 			}
 			scope:important_killer = { # small popularity hit
 				add_modifier = {
@@ -373,7 +373,7 @@ crime_events.11 = { #The Criminal was caught
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_censorship
+				has_law_or_variant = law_type:law_censorship
 			}
 			scope:important_killer = { # moderate popularity hit
 				add_modifier = {
@@ -411,36 +411,16 @@ german_unification.3 = {
 
 	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
 
+	cooldown = { days = never_fire_again_modifier_time }
+
 	duration = 3
 
 	trigger = {
-		NOT = { has_global_variable = bismarck_variable }
-		ig:ig_landowners = {
-			is_powerful = yes
-			is_in_government = yes
-		}
-		is_unification_candidate = GER
-		has_technology_researched = nationalism
-		game_date > 1846.1.1
-		game_date < 1898.1.1
+		# triggered by character spawn
 	}
 
 	immediate = {
-		set_global_variable = bismarck_variable
-		### Converter ###
-		if = {
-			limit = { is_matriarchal_country = yes }
-			create_character = {
-				template = fem_PRU_otto_von_bismarck
-			}
-		}
-		else = {
-			create_character = {
-				template = PRU_otto_von_bismarck
-			}
-		}
-		### Converter ###
-		ig:ig_landowners = {
+		ig:ig_landowners ?= {
 			save_scope_as = junkers
 			leader = {
 				save_scope_as = bismarck_scope
@@ -452,27 +432,57 @@ german_unification.3 = {
 		name = german_unification.3.a
 		default_option = yes
 		show_as_tooltip = {
-			create_character = {
-				template = PRU_otto_von_bismarck
+			### Converter ###
+			if = {
+				limit = { is_matriarchal_country = yes }
+				create_character = {
+					template = fem_PRU_otto_von_bismarck
+				}
 			}
+			else = {
+				create_character = {
+					template = PRU_otto_von_bismarck
+				}
+			}
+			### Converter ###
 		}
 		scope:bismarck_scope = {
 			add_modifier = {
 				name = bismarck_popular
 			}
+			if = {
+				limit = {
+					has_variable = memento_mori_immunity
+				}
+				remove_variable = memento_mori_immunity
+			}
+			set_variable = { name = memento_mori_immunity years = 30 }
 		}
 		add_modifier = {
 			name = realpolitik
-			days = normal_modifier_time
+			days = long_modifier_time
+		}
+
+		ai_chance = {
+			base = 95
 		}
 	}
 	option = {
 		name = german_unification.3.b
-		default_option = yes
 		show_as_tooltip = {
-			create_character = {
-				template = PRU_otto_von_bismarck
+			### Converter ###
+			if = {
+				limit = { is_matriarchal_country = yes }
+				create_character = {
+					template = fem_PRU_otto_von_bismarck
+				}
 			}
+			else = {
+				create_character = {
+					template = PRU_otto_von_bismarck
+				}
+			}
+			### Converter ###
 		}
 		scope:bismarck_scope = {
 			add_modifier = {
@@ -481,7 +491,11 @@ german_unification.3 = {
 		}
 		add_modifier = {
 			name = germany_aggressive_expansion
-			days = normal_modifier_time
+			days = long_modifier_time
+		}
+
+		ai_chance = {
+			base = 5
 		}
 	}
 }
@@ -519,29 +533,29 @@ marx_events.1 = {
 	option = { #support socialism not marx
 		name = marx_events.1.a
 		default_option = yes
-		ig:ig_trade_unions = {
+		ig:ig_trade_unions ?= {
 			add_modifier = {
 				name = modifier_supported_marx
 				days = normal_modifier_time
 			}
 		}
-		converter_karl_marx_effect = yes			### Converter
+		converter_karl_marx_effect_1 = yes			### Converter
 	}
 
 	option = { #promote him / marxista porque me va la marxa
 		name = marx_events.1.b
-		ig:ig_trade_unions = {
+		ig:ig_trade_unions ?= {
 			add_modifier = {
 				name = modifier_promoted_marx
 				days = normal_modifier_time
 			}
 		}
-		converter_karl_marx_effect = yes			### Converter
+		converter_karl_marx_effect_1 = yes			### Converter
 	}
 
 	option = { #get rid of this man
 		name = marx_events.1.c
-		ig:ig_trade_unions = {
+		ig:ig_trade_unions ?= {
 			add_modifier = {
 				name = modifier_ditched_marx
 				days = normal_modifier_time
@@ -549,7 +563,7 @@ marx_events.1 = {
 		}
 		custom_tooltip = {
 			text = exile_communist_agitator_tt
-			converter_karl_marx_effect = yes		### Converter
+			converter_karl_marx_effect_1 = yes			### Converter
 		}
 	}
 }
@@ -581,9 +595,9 @@ oscar_wilde_events.1 = {
 	minor_left_icon = scope:oscar_wilde
 
 	trigger = {
-		country_is_in_europe = yes
-		ig:ig_intelligentsia = {
-			is_marginal = no
+		is_in_geographic_region = geographic_region_europe
+		ig:ig_intelligentsia ?= {
+			ig_counts_as_marginal = no
 		}
 		game_date >= 1880
 		NOT = { has_variable = oscar_wilde_var }
@@ -666,13 +680,13 @@ oscar_wilde_events.1 = {
 		default_option = yes
 		name = oscar_wilde_events.1.a
 		custom_tooltip = oscar_wilde_tt
-		ig:ig_intelligentsia = {
+		ig:ig_intelligentsia ?= {
 			add_modifier = {
 				name = happy_arts_protected
 				days = normal_modifier_time
 			}
 		}
-		ig:ig_devout = {
+		ig:ig_devout ?= {
 			add_modifier = {
 				name = unhappy_defended_homosexuality
 				days = normal_modifier_time
@@ -682,7 +696,7 @@ oscar_wilde_events.1 = {
 
 	option = {
 		name = oscar_wilde_events.1.b
-		ig:ig_petty_bourgeoisie = {
+		ig:ig_petty_bourgeoisie ?= {
 			add_modifier = {
 				name = imprisoning_gentlemen
 				days = normal_modifier_time
@@ -737,7 +751,7 @@ prostitution.3 = {
 			institution = institution_police
 			value = 3
 		}
-		NOT = { has_law = law_type:law_outlawed_dissent }
+		NOT = { has_law_or_variant = law_type:law_outlawed_dissent }
 		any_interest_group = {
 			is_in_government = yes
 			OR = {
@@ -813,14 +827,14 @@ prostitution.3 = {
 				modifier = {
 					if = {
 						limit = {
-							has_law = law_type:law_protected_speech
+							has_law_or_variant = law_type:law_protected_speech
 						}
 						add = 25
 					}
 				}
 				if = {
 					limit = {
-						NOT = { has_law = law_type:law_censorship }
+						NOT = { has_law_or_variant = law_type:law_censorship }
 					}
 					add_modifier = {
 						name = coverup_discovered
@@ -838,7 +852,7 @@ prostitution.3 = {
 				modifier = {
 					if = {
 						limit = {
-							has_law = law_type:law_censorship
+							has_law_or_variant = law_type:law_censorship
 						}
 						add = 25
 					}
@@ -945,8 +959,8 @@ tibet_expedition_events.5 = { # The Great Trigonometrical Survey Goes North (Mou
 		name = tibet_expedition_events.5.b
 		trigger = {
 			OR = {
-				c:GBR ?= this
-				c:BIC ?= this
+				uses_gbr_characters = yes				### Converter
+				uses_colonial_bic_characters = yes		### Converter
 			}
 			NOT = { has_global_variable = andrew_scott_waugh_is_real_and_my_friend }
 			game_date < 1870.1.1
@@ -985,7 +999,10 @@ tibet_expedition_events.5 = { # The Great Trigonometrical Survey Goes North (Mou
 	option = {
 		name = tibet_expedition_events.5.c
 		trigger = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_british_cultures target = this } }		### Converter
+			OR = {
+				uses_gbr_characters = yes				### Converter
+				uses_colonial_bic_characters = yes		### Converter
+			}
 			NOT = { has_global_variable = charles_granville_bruce_is_real_and_my_friend }
 			game_date > 1892.1.1 # First expedition to Mongolia and the Karakoram mountain range
 		}
@@ -1120,9 +1137,15 @@ colonial_administration_events.1 = {
 		custom_tooltip = {
 			text = colonial_administration_events.1_tt_1
 			scope:newly_formed_colonial_nation_scope = {
-				activate_law = law_type:law_presidential_republic
+				activate_law = law_type:law_colonial_administration
 				activate_law = law_type:law_oligarchy
-				activate_law = law_type:law_racial_segregation
+				activate_law = law_type:law_subjecthood
+				active_law:lawgroup_citizenship ?= { # Subjecthood
+					add_amendment = {
+						type = amendment_racialized_subjecthood
+						sponsor = PREV.ig:ig_armed_forces
+					}
+				}
 				activate_law = law_type:law_extraction_economy
 				activate_law = law_type:law_colonial_exploitation
 				activate_law = law_type:law_no_schools
@@ -1140,7 +1163,7 @@ colonial_administration_events.1 = {
 				name = resource_extraction_charter_modifier
 				days = very_long_modifier_time
 			}
-			ig:ig_industrialists = {
+			ig:ig_industrialists ?= {
 				if = {
 					limit = {
 						has_ideology = ideology:ideology_laissez_faire
@@ -1166,7 +1189,7 @@ colonial_administration_events.1 = {
 						value > neutral
 					}
 				}
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 			add_modifier = {
 				name = colonial_enterprise_modifier
@@ -1188,16 +1211,22 @@ colonial_administration_events.1 = {
 		highlighted_option = yes
 		trigger = {
 			OR = {
-				has_law = law_type:law_state_religion
-				has_law = law_type:law_freedom_of_conscience
+				has_law_or_variant = law_type:law_state_religion
+				has_law_or_variant = law_type:law_freedom_of_conscience
 			}
 		}
 		custom_tooltip = {
 			text = colonial_administration_events.1_tt_2
 			scope:newly_formed_colonial_nation_scope = {
-				activate_law = law_type:law_presidential_republic
+				activate_law = law_type:law_colonial_administration
 				activate_law = law_type:law_oligarchy
-				activate_law = law_type:law_racial_segregation
+				activate_law = law_type:law_subjecthood
+				active_law:lawgroup_citizenship ?= { # Subjecthood
+					add_amendment = {
+						type = amendment_racialized_subjecthood
+						sponsor = PREV.ig:ig_armed_forces
+					}
+				}
 				activate_law = law_type:law_extraction_economy
 				activate_law = law_type:law_colonial_exploitation
 				activate_law = law_type:law_state_religion
@@ -1216,7 +1245,7 @@ colonial_administration_events.1 = {
 				name = religious_missions_colonial_modifier
 				days = very_long_modifier_time
 			}
-			ig:ig_industrialists = {
+			ig:ig_industrialists ?= {
 				if = {
 					limit = {
 						has_ideology = ideology:ideology_laissez_faire
@@ -1238,7 +1267,7 @@ colonial_administration_events.1 = {
 						value > neutral
 					}
 				}
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 			add_modifier = {
 				name = civilizing_mission_modifier
@@ -1252,9 +1281,15 @@ colonial_administration_events.1 = {
 		custom_tooltip = {
 			text = colonial_administration_events.1_tt_3
 			scope:newly_formed_colonial_nation_scope = {
-				activate_law = law_type:law_presidential_republic
+				activate_law = law_type:law_colonial_administration
 				activate_law = law_type:law_oligarchy
-				activate_law = law_type:law_racial_segregation
+				activate_law = law_type:law_subjecthood
+				active_law:lawgroup_citizenship ?= { # Subjecthood
+					add_amendment = {
+						type = amendment_racialized_subjecthood
+						sponsor = PREV.ig:ig_armed_forces
+					}
+				}
 				activate_law = law_type:law_agrarianism
 				activate_law = law_type:law_colonial_resettlement
 				activate_law = law_type:law_no_schools
@@ -1279,7 +1314,7 @@ colonial_administration_events.1 = {
 					law = law_type:law_colonial_resettlement
 					value > neutral
 				}
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 			add_modifier = {
 				name = settler_colonialism_modifier
@@ -1292,9 +1327,9 @@ colonial_administration_events.1 = {
 		highlighted_option = yes
 		trigger = {
 			OR = {
-				has_law = law_type:law_no_workers_rights
+				has_law_or_variant = law_type:law_no_workers_rights
 				NOT = {
-					has_law = law_type:law_slavery_banned
+					has_law_or_variant = law_type:law_slavery_banned
 				}
 				ruler = {
 					OR = {
@@ -1308,9 +1343,15 @@ colonial_administration_events.1 = {
 		custom_tooltip = {
 			text = colonial_administration_events.1_tt_4
 			scope:newly_formed_colonial_nation_scope = {
-				activate_law = law_type:law_presidential_republic
+				activate_law = law_type:law_colonial_administration
 				activate_law = law_type:law_autocracy
-				activate_law = law_type:law_racial_segregation
+				activate_law = law_type:law_subjecthood
+				active_law:lawgroup_citizenship ?= { # Subjecthood
+					add_amendment = {
+						type = amendment_racialized_subjecthood
+						sponsor = PREV.ig:ig_armed_forces
+					}
+				}
 				activate_law = law_type:law_extraction_economy
 				activate_law = law_type:law_colonial_exploitation
 				activate_law = law_type:law_no_schools
@@ -1329,7 +1370,7 @@ colonial_administration_events.1 = {
 				name = resource_extraction_colony_modifier
 				days = very_long_modifier_time
 			}
-			ig:ig_industrialists = {
+			ig:ig_industrialists ?= {
 				if = {
 					limit = {
 						has_ideology = ideology:ideology_laissez_faire
@@ -1355,7 +1396,7 @@ colonial_administration_events.1 = {
 						value > neutral
 					}
 				}
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 			add_modifier = {
 				name = unbridled_profits_modifier
