@@ -1,7 +1,7 @@
 ﻿# converter_historical_leader_cultures_effect
 # converter_colonial_confederation_cultures_effect
 # converter_other_starting_cultural_effects
-# converter_after_lobby_cultural_effects
+# converter_cultural_traditions_effect
 # converter_primary_cultures_effect
 # converter_standard_template_effect
 # converter_colonial_template_effect
@@ -1918,24 +1918,72 @@ converter_colonial_confederation_cultures_effect = {
 		if = {
 			limit = {
 				any_scope_state = {
-					state_is_in_americas = yes
+					is_in_geographic_region = geographic_region_americas
 					any_scope_pop = {
 						culture = {
 							has_discrimination_trait_group = heritage_group_african
-							NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-							#has_homeland = prev.state		#This is causing problems, and since the converter doesn't add immigrant pops...
+							NOR = {
+								is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this }
+								has_discrimination_trait_group = language_group_kwa
+								has_discrimination_trait_group = language_group_mande
+								has_discrimination_trait_group = language_group_kru
+								has_discrimination_trait_group = language_group_volta_niger
+								has_discrimination_trait_group = language_group_senegambian
+								has_discrimination_trait_group = language_group_chadic
+								has_discrimination_trait_group = language_group_benue_congo
+								has_discrimination_trait_group = language_group_mal
+								has_discrimination_trait_group = language_group_gur
+								has_discrimination_trait_group = language_group_senufic
+								has_discrimination_trait_group = language_group_songhai
+								has_discrimination_trait_group = language_group_bantu
+								has_discrimination_trait_group = language_group_central_sudanic
+								has_discrimination_trait_group = language_group_saharan
+								has_discrimination_trait_group = language_group_nilotic
+								has_discrimination_trait = language_amharic
+								has_discrimination_trait_group = language_group_kushitic
+								has_discrimination_trait_group = language_group_ubangian
+								has_discrimination_trait_group = language_group_furan
+								has_discrimination_trait_group = language_group_kordofanian
+								has_discrimination_trait = language_tigrinya
+								has_discrimination_trait_group = language_group_khoisan
+							}
+							has_homeland = prev.state
 						}
 					}
 				}
 			}
 			every_scope_state = {
 				limit = {
-					state_is_in_americas = yes
+					is_in_geographic_region = geographic_region_americas
 					any_scope_pop = {
 						culture = {
 							has_discrimination_trait_group = heritage_group_african
-							NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-							#has_homeland = prev.state		#This is causing problems, and since the converter doesn't add immigrant pops...
+							NOR = {
+								is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this }
+								has_discrimination_trait_group = language_group_kwa
+								has_discrimination_trait_group = language_group_mande
+								has_discrimination_trait_group = language_group_kru
+								has_discrimination_trait_group = language_group_volta_niger
+								has_discrimination_trait_group = language_group_senegambian
+								has_discrimination_trait_group = language_group_chadic
+								has_discrimination_trait_group = language_group_benue_congo
+								has_discrimination_trait_group = language_group_mal
+								has_discrimination_trait_group = language_group_gur
+								has_discrimination_trait_group = language_group_senufic
+								has_discrimination_trait_group = language_group_songhai
+								has_discrimination_trait_group = language_group_bantu
+								has_discrimination_trait_group = language_group_central_sudanic
+								has_discrimination_trait_group = language_group_saharan
+								has_discrimination_trait_group = language_group_nilotic
+								has_discrimination_trait = language_amharic
+								has_discrimination_trait_group = language_group_kushitic
+								has_discrimination_trait_group = language_group_ubangian
+								has_discrimination_trait_group = language_group_furan
+								has_discrimination_trait_group = language_group_kordofanian
+								has_discrimination_trait = language_tigrinya
+								has_discrimination_trait_group = language_group_khoisan
+							}
+							has_homeland = prev.state
 						}
 					}
 				}
@@ -1943,8 +1991,32 @@ converter_colonial_confederation_cultures_effect = {
 					limit = {
 						culture = {
 							has_discrimination_trait_group = heritage_group_african
-							NOT = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
-							#has_homeland = prev.state		#This is causing problems, and since the converter doesn't add immigrant pops...
+							NOR = {
+								is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this }
+								has_discrimination_trait_group = language_group_kwa
+								has_discrimination_trait_group = language_group_mande
+								has_discrimination_trait_group = language_group_kru
+								has_discrimination_trait_group = language_group_volta_niger
+								has_discrimination_trait_group = language_group_senegambian
+								has_discrimination_trait_group = language_group_chadic
+								has_discrimination_trait_group = language_group_benue_congo
+								has_discrimination_trait_group = language_group_mal
+								has_discrimination_trait_group = language_group_gur
+								has_discrimination_trait_group = language_group_senufic
+								has_discrimination_trait_group = language_group_songhai
+								has_discrimination_trait_group = language_group_bantu
+								has_discrimination_trait_group = language_group_central_sudanic
+								has_discrimination_trait_group = language_group_saharan
+								has_discrimination_trait_group = language_group_nilotic
+								has_discrimination_trait = language_amharic
+								has_discrimination_trait_group = language_group_kushitic
+								has_discrimination_trait_group = language_group_ubangian
+								has_discrimination_trait_group = language_group_furan
+								has_discrimination_trait_group = language_group_kordofanian
+								has_discrimination_trait = language_tigrinya
+								has_discrimination_trait_group = language_group_khoisan
+							}
+							has_homeland = prev.state
 						}
 					}
 					culture = {
@@ -1959,7 +2031,117 @@ converter_colonial_confederation_cultures_effect = {
 		if = {
 			limit = {
 				any_scope_state = {
-					zzz_converter_state_is_in_canada = yes
+					is_in_geographic_region = geographic_region_americas
+					any_scope_pop = {
+						culture = {
+							has_discrimination_trait_group = heritage_group_indigenous_american
+							NOR = {
+								is_target_in_global_variable_list = { name = global_metis_cultures target = this }
+								has_discrimination_trait_group = language_group_oto_manguean
+								has_discrimination_trait_group = language_group_mayan
+								has_discrimination_trait_group = language_group_uto_aztecan
+								has_discrimination_trait_group = language_group_tarascan
+								has_discrimination_trait_group = language_group_tupian
+								has_discrimination_trait_group = language_group_aymaran
+								has_discrimination_trait_group = language_group_chonan
+								has_discrimination_trait_group = language_group_arawakan
+								has_discrimination_trait_group = language_group_siouan
+								has_discrimination_trait_group = language_group_iroquoian
+								has_discrimination_trait_group = language_group_muskogean
+								has_discrimination_trait_group = language_group_eskaleut
+								has_discrimination_trait_group = language_group_algic
+								has_discrimination_trait_group = language_group_na_dene
+								has_discrimination_trait_group = language_group_salishan
+								has_discrimination_trait_group = language_group_penutian
+								has_discrimination_trait_group = language_group_caddoan
+								has_discrimination_trait_group = language_group_hokan
+								has_discrimination_trait_group = language_group_chibchan
+								has_discrimination_trait_group = language_group_misumalpan
+								has_discrimination_trait_group = language_group_cariban
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+			}
+			every_scope_state = {
+				limit = {
+					is_in_geographic_region = geographic_region_americas
+					any_scope_pop = {
+						culture = {
+							has_discrimination_trait_group = heritage_group_indigenous_american
+							NOR = {
+								is_target_in_global_variable_list = { name = global_metis_cultures target = this }
+								has_discrimination_trait_group = language_group_oto_manguean
+								has_discrimination_trait_group = language_group_mayan
+								has_discrimination_trait_group = language_group_uto_aztecan
+								has_discrimination_trait_group = language_group_tarascan
+								has_discrimination_trait_group = language_group_tupian
+								has_discrimination_trait_group = language_group_aymaran
+								has_discrimination_trait_group = language_group_chonan
+								has_discrimination_trait_group = language_group_arawakan
+								has_discrimination_trait_group = language_group_siouan
+								has_discrimination_trait_group = language_group_iroquoian
+								has_discrimination_trait_group = language_group_muskogean
+								has_discrimination_trait_group = language_group_eskaleut
+								has_discrimination_trait_group = language_group_algic
+								has_discrimination_trait_group = language_group_na_dene
+								has_discrimination_trait_group = language_group_salishan
+								has_discrimination_trait_group = language_group_penutian
+								has_discrimination_trait_group = language_group_caddoan
+								has_discrimination_trait_group = language_group_hokan
+								has_discrimination_trait_group = language_group_chibchan
+								has_discrimination_trait_group = language_group_misumalpan
+								has_discrimination_trait_group = language_group_cariban
+							}
+							has_homeland = prev.state
+						}
+					}
+				}
+				every_scope_pop = {
+					limit = {
+						culture = {
+							has_discrimination_trait_group = heritage_group_indigenous_american
+							NOR = {
+								is_target_in_global_variable_list = { name = global_metis_cultures target = this }
+								has_discrimination_trait_group = language_group_oto_manguean
+								has_discrimination_trait_group = language_group_mayan
+								has_discrimination_trait_group = language_group_uto_aztecan
+								has_discrimination_trait_group = language_group_tarascan
+								has_discrimination_trait_group = language_group_tupian
+								has_discrimination_trait_group = language_group_aymaran
+								has_discrimination_trait_group = language_group_chonan
+								has_discrimination_trait_group = language_group_arawakan
+								has_discrimination_trait_group = language_group_siouan
+								has_discrimination_trait_group = language_group_iroquoian
+								has_discrimination_trait_group = language_group_muskogean
+								has_discrimination_trait_group = language_group_eskaleut
+								has_discrimination_trait_group = language_group_algic
+								has_discrimination_trait_group = language_group_na_dene
+								has_discrimination_trait_group = language_group_salishan
+								has_discrimination_trait_group = language_group_penutian
+								has_discrimination_trait_group = language_group_caddoan
+								has_discrimination_trait_group = language_group_hokan
+								has_discrimination_trait_group = language_group_chibchan
+								has_discrimination_trait_group = language_group_misumalpan
+								has_discrimination_trait_group = language_group_cariban
+							}
+							has_homeland = prev.state
+						}
+					}
+					culture = {
+						add_to_global_variable_list = {
+							name = global_metis_cultures
+							target = this
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					is_in_geographic_region = geographic_region_converter_colonial_canada
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -1973,7 +2155,7 @@ converter_colonial_confederation_cultures_effect = {
 			}
 			every_scope_state = {
 				limit = {
-					zzz_converter_state_is_in_canada = yes
+					is_in_geographic_region = geographic_region_converter_colonial_canada
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2006,7 +2188,7 @@ converter_colonial_confederation_cultures_effect = {
 		if = {
 			limit = {
 				any_scope_state = {
-					zzz_converter_state_is_in_america = yes
+					is_in_geographic_region = geographic_region_converter_colonial_america
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2020,7 +2202,7 @@ converter_colonial_confederation_cultures_effect = {
 			}
 			every_scope_state = {
 				limit = {
-					zzz_converter_state_is_in_america = yes
+					is_in_geographic_region = geographic_region_converter_colonial_america
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2054,7 +2236,10 @@ converter_colonial_confederation_cultures_effect = {
 			limit = {
 				any_scope_state = {
 					region = sr:region_new_england
-					NOT = { state_region = s:STATE_NEW_BRUNSWICK }
+					NOR = {
+						state_region = s:STATE_NEW_BRUNSWICK
+						state_region = s:STATE_BERMUDA
+					}
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2069,7 +2254,10 @@ converter_colonial_confederation_cultures_effect = {
 			every_scope_state = {
 				limit = {
 					region = sr:region_new_england
-					NOT = { state_region = s:STATE_NEW_BRUNSWICK }
+					NOR = {
+						state_region = s:STATE_NEW_BRUNSWICK
+						state_region = s:STATE_BERMUDA
+					}
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2199,7 +2387,7 @@ converter_colonial_confederation_cultures_effect = {
 		if = {
 			limit = {
 				any_scope_state = {
-					zzz_converter_state_is_in_california = yes
+					is_in_geographic_region = geographic_region_converter_colonial_california
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2213,7 +2401,7 @@ converter_colonial_confederation_cultures_effect = {
 			}
 			every_scope_state = {
 				limit = {
-					zzz_converter_state_is_in_california = yes
+					is_in_geographic_region = geographic_region_converter_colonial_california
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2246,7 +2434,7 @@ converter_colonial_confederation_cultures_effect = {
 		if = {
 			limit = {
 				any_scope_state = {
-					zzz_converter_state_is_in_mexico = yes
+					is_in_geographic_region = geographic_region_converter_colonial_mexico
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2260,7 +2448,7 @@ converter_colonial_confederation_cultures_effect = {
 			}
 			every_scope_state = {
 				limit = {
-					zzz_converter_state_is_in_mexico = yes
+					is_in_geographic_region = geographic_region_converter_colonial_mexico
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2293,7 +2481,7 @@ converter_colonial_confederation_cultures_effect = {
 		if = {
 			limit = {
 				any_scope_state = {
-					zzz_converter_state_is_in_caribbean = yes
+					is_in_geographic_region = geographic_region_converter_colonial_caribbean
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2307,7 +2495,7 @@ converter_colonial_confederation_cultures_effect = {
 			}
 			every_scope_state = {
 				limit = {
-					zzz_converter_state_is_in_caribbean = yes
+					is_in_geographic_region = geographic_region_converter_colonial_caribbean
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2340,7 +2528,7 @@ converter_colonial_confederation_cultures_effect = {
 		if = {
 			limit = {
 				any_scope_state = {
-					zzz_converter_state_is_in_gran_colombia = yes
+					is_in_geographic_region = geographic_region_converter_colonial_gran_colombia
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2354,7 +2542,7 @@ converter_colonial_confederation_cultures_effect = {
 			}
 			every_scope_state = {
 				limit = {
-					zzz_converter_state_is_in_gran_colombia = yes
+					is_in_geographic_region = geographic_region_converter_colonial_gran_colombia
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2434,7 +2622,7 @@ converter_colonial_confederation_cultures_effect = {
 		if = {
 			limit = {
 				any_scope_state = {
-					zzz_converter_state_is_in_argentina = yes
+					is_in_geographic_region = geographic_region_converter_colonial_argentina
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2448,7 +2636,7 @@ converter_colonial_confederation_cultures_effect = {
 			}
 			every_scope_state = {
 				limit = {
-					zzz_converter_state_is_in_argentina = yes
+					is_in_geographic_region = geographic_region_converter_colonial_argentina
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2528,7 +2716,7 @@ converter_colonial_confederation_cultures_effect = {
 		if = {
 			limit = {
 				any_scope_state = {
-					zzz_converter_state_is_in_australia = yes
+					is_in_geographic_region = geographic_region_converter_colonial_australia
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2542,7 +2730,7 @@ converter_colonial_confederation_cultures_effect = {
 			}
 			every_scope_state = {
 				limit = {
-					zzz_converter_state_is_in_australia = yes
+					is_in_geographic_region = geographic_region_converter_colonial_australia
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2575,7 +2763,7 @@ converter_colonial_confederation_cultures_effect = {
 		if = {
 			limit = {
 				any_scope_state = {
-					region = sr:region_southern_africa
+					is_in_geographic_region = geographic_region_south_africa
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2589,7 +2777,7 @@ converter_colonial_confederation_cultures_effect = {
 			}
 			every_scope_state = {
 				limit = {
-					region = sr:region_southern_africa
+					is_in_geographic_region = geographic_region_south_africa
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2704,7 +2892,7 @@ converter_colonial_confederation_cultures_effect = {
 					is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
 					is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
 					is_target_in_global_variable_list = { name = global_australian_cultures target = this }
-					is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+					#is_target_in_global_variable_list = { name = global_cape_cultures target = this }
 				}
 				NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 			}
@@ -2722,7 +2910,7 @@ converter_colonial_confederation_cultures_effect = {
 					is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
 					is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
 					is_target_in_global_variable_list = { name = global_australian_cultures target = this }
-					is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+					#is_target_in_global_variable_list = { name = global_cape_cultures target = this }
 				}
 				NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 			}
@@ -2735,201 +2923,15 @@ converter_colonial_confederation_cultures_effect = {
 }
 
 converter_other_starting_cultural_effects = {
-	if = {
-		limit = {
-			any_country = {
-				country_is_in_north_america = yes
-				country_has_state_religion = rel:protestant
-			}
-		}
-		rel:protestant = {
-			set_global_variable = {
-				name = yat_sen_religion
-				value = this
-			}
-		}
-	}
-	else_if = {
-		limit = {
-			any_country = {
-				country_is_in_north_america = yes
-				religion = { has_discrimination_trait = heritage_christian }
-			}
-		}
-		random_country = {
-			limit = {
-				country_is_in_north_america = yes
-				religion = { has_discrimination_trait = heritage_christian }
-			}
-			religion = {
-				set_global_variable = {
-					name = yat_sen_religion
-					value = this
-				}
-			}
-		}
-	}
-	else_if = {
-		limit = {
-			any_country = {
-				country_is_in_north_america = yes
-				religion = {
-					NOR = {
-						has_discrimination_trait_group = heritage_group_eastern
-						has_discrimination_trait = heritage_indigenous
-					}
-				}
-			}
-		}
-		random_country = {
-			limit = {
-				country_is_in_north_america = yes
-				religion = {
-					NOR = {
-						has_discrimination_trait_group = heritage_group_eastern
-						has_discrimination_trait = heritage_indigenous
-					}
-				}
-			}
-			religion = {
-				set_global_variable = {
-					name = yat_sen_religion
-					value = this
-				}
-			}
-		}
-	}
-	else_if = {
-		limit = {
-			any_country = {
-				country_is_in_east_asia = yes
-				any_scope_pop = {
-					culture = { is_target_in_global_variable_list = { name = global_han_cultures target = this } }
-				}
-			}
-		}
-		random_country = {
-			limit = {
-				country_is_in_east_asia = yes
-				any_scope_pop = {
-					culture = { is_target_in_global_variable_list = { name = global_han_cultures target = this } }
-				}
-			}
-			random_scope_pop = {
-				limit = {
-					culture = { is_target_in_global_variable_list = { name = global_han_cultures target = this } }
-				}
-				religion = {
-					set_global_variable = {
-						name = yat_sen_religion
-						value = this
-					}
-				}
-			}
-		}
-	}
-	else = {
-		rel:protestant = {
-			set_global_variable = {
-				name = yat_sen_religion
-				value = this
-			}
-		}
-	}
-	if = {
-		limit = {
-			any_country = {
-				country_is_in_europe = yes
-				country_has_primary_culture = cu:ashkenazi
-			}
-		}
-		cu:ashkenazi = {
-			set_global_variable = {
-				name = ashkenazi_culture
-				value = this
-			}
-		}
-	}
-	else_if = {
-		limit = {
-			any_country = {
-				country_is_in_europe = yes
-				any_primary_culture = { has_discrimination_trait = heritage_ashkenazi }
-			}
-		}
-		random_country = {
-			limit = {
-				country_is_in_north_america = yes
-				any_primary_culture = { has_discrimination_trait = heritage_ashkenazi }
-			}
-			random_primary_culture = {
-				limit = { has_discrimination_trait = heritage_ashkenazi }
-				set_global_variable = {
-					name = ashkenazi_culture
-					value = this
-				}
-			}
-		}
-	}
-	else_if = {
-		limit = {
-			any_country = {
-				country_is_in_europe = yes
-				any_scope_state = {
-					state_is_in_europe = yes
-					any_scope_pop = {
-						culture = { has_discrimination_trait = heritage_ashkenazi }
-					}
-				}
-			}
-		}
-		random_country = {
-			limit = {
-				country_is_in_europe = yes
-				any_scope_state = {
-					state_is_in_europe = yes
-					any_scope_pop = {
-						culture = { has_discrimination_trait = heritage_ashkenazi }
-					}
-				}
-			}
-			random_scope_state = {
-				limit = {
-					state_is_in_europe = yes
-					any_scope_pop = {
-						culture = { has_discrimination_trait = heritage_ashkenazi }
-					}
-				}
-				random_scope_pop = {
-					limit = {
-						culture = { has_discrimination_trait = heritage_ashkenazi }
-					}
-					culture = {
-						set_global_variable = {
-							name = ashkenazi_culture
-							value = this
-						}
-					}
-				}
-			}
-		}
-	}
-	else = {
-		cu:ashkenazi = {
-			set_global_variable = {
-				name = ashkenazi_culture
-				value = this
-			}
-		}
-	}
 	every_country = {
+		converter_cultural_traditions_effect = yes
 		if = {
 			limit = {
 				OR = {
 					ig:ig_landowners = { has_ideology = ideology:ideology_scholar_paternalistic }
-					country_is_in_china = yes
+					is_in_geographic_region = geographic_region_china
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_han_cultures target = this } }
-					any_primary_culture = { has_discrimination_trait = heritage_han }
+					any_primary_culture = { has_discrimination_trait_group = language_group_sinitic }
 					any_primary_culture = { has_discrimination_trait = tradition_sinosphere }
 				}
 				NOT = { has_technology_researched = sericulture }
@@ -2978,19 +2980,19 @@ converter_other_starting_cultural_effects = {
 				activate_law = law_type:law_professional_army
 				activate_law = law_type:law_extraction_economy
 				if = {
-					limit = { has_law = law_type:law_homesteading }
+					limit = { has_law_or_variant = law_type:law_homesteading }
 					activate_law = law_type:law_tenant_farmers
 				}
 				if = {
-					limit = { has_law = law_type:law_public_schools }
+					limit = { has_law_or_variant = law_type:law_public_schools }
 					activate_law = law_type:law_private_schools
 				}
 				else_if = {
 					limit = {
-						has_law = law_type:law_religious_schools
+						has_law_or_variant = law_type:law_religious_schools
 						OR = {
-							has_law = law_type:law_total_separation
-							has_law = law_type:law_state_atheism
+							has_law_or_variant = law_type:law_total_separation
+							has_law_or_variant = law_type:law_state_atheism
 						}
 					}
 					activate_law = law_type:law_private_schools
@@ -3009,12 +3011,7 @@ converter_other_starting_cultural_effects = {
 			converter_caudillismo_ideology_effect = yes
 		}
 		if = {
-			limit = {
-				OR = {
-					country_has_state_religion = rel:orthodox
-					religion = { has_discrimination_trait = orthodoxy }
-				}
-			}
+			limit = { converter_has_orthodox_faith = yes }
 			converter_russian_patriarch_ideology_effect = yes
 		}
 		if = {
@@ -3046,9 +3043,9 @@ converter_other_starting_cultural_effects = {
 			if = {
 				limit = {
 					OR = {
-						has_law = law_type:law_monarchy
-						has_law = law_type:law_theocracy
-						has_law = law_type:law_chiefdom
+						has_law_or_variant = law_type:law_monarchy
+						has_law_or_variant = law_type:law_theocracy
+						has_law_or_variant = law_type:law_chiefdom
 					}
 				}
 				set_local_variable = converter_intelligentsia_has_immortal_constitutionalism
@@ -3056,6 +3053,538 @@ converter_other_starting_cultural_effects = {
 					remove_ideology = ideology_republican
 					add_ideology = ideology_constitutionalist
 				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+				is_in_geographic_region = geographic_region_north_america
+				converter_has_protestant_faith = yes
+			}
+		}
+		random_country = {
+			limit = {
+				is_in_geographic_region = geographic_region_north_america
+				converter_has_protestant_faith = yes
+			}
+			religion = {
+				set_global_variable = {
+					name = yat_sen_religion
+					value = this
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			any_country = {
+				is_in_geographic_region = geographic_region_north_america
+				religion = { has_discrimination_trait = heritage_christian }
+			}
+		}
+		random_country = {
+			limit = {
+				is_in_geographic_region = geographic_region_north_america
+				religion = { has_discrimination_trait = heritage_christian }
+			}
+			religion = {
+				set_global_variable = {
+					name = yat_sen_religion
+					value = this
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			any_country = {
+				is_in_geographic_region = geographic_region_north_america
+				religion = {
+					NOR = {
+						has_discrimination_trait_group = heritage_group_eastern
+						has_discrimination_trait = heritage_indigenous
+					}
+				}
+			}
+		}
+		random_country = {
+			limit = {
+				is_in_geographic_region = geographic_region_north_america
+				religion = {
+					NOR = {
+						has_discrimination_trait_group = heritage_group_eastern
+						has_discrimination_trait = heritage_indigenous
+					}
+				}
+			}
+			religion = {
+				set_global_variable = {
+					name = yat_sen_religion
+					value = this
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			any_country = {
+				is_in_geographic_region = geographic_region_east_asia
+				any_scope_pop = {
+					culture = { is_target_in_global_variable_list = { name = global_han_cultures target = this } }
+				}
+			}
+		}
+		random_country = {
+			limit = {
+				is_in_geographic_region = geographic_region_east_asia
+				any_scope_pop = {
+					culture = { is_target_in_global_variable_list = { name = global_han_cultures target = this } }
+				}
+			}
+			random_scope_pop = {
+				limit = {
+					culture = { is_target_in_global_variable_list = { name = global_han_cultures target = this } }
+				}
+				religion = {
+					set_global_variable = {
+						name = yat_sen_religion
+						value = this
+					}
+				}
+			}
+		}
+	}
+	else = {
+		rel:protestant = {
+			set_global_variable = {
+				name = yat_sen_religion
+				value = this
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+				is_in_geographic_region = geographic_region_europe
+				country_has_primary_culture = cu:ashkenazi
+			}
+		}
+		cu:ashkenazi = {
+			set_global_variable = {
+				name = ashkenazi_culture
+				value = this
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			any_country = {
+				is_in_geographic_region = geographic_region_europe
+				any_primary_culture = {
+					OR = {
+						has_discrimination_trait = heritage_ashkenazi
+						has_discrimination_trait = tradition_israelite
+					}
+				}
+			}
+		}
+		random_country = {
+			limit = {
+				is_in_geographic_region = geographic_region_europe
+				any_primary_culture = {
+					OR = {
+						has_discrimination_trait = heritage_ashkenazi
+						has_discrimination_trait = tradition_israelite
+					}
+				}
+			}
+			random_primary_culture = {
+				limit = {
+					OR = {
+						has_discrimination_trait = heritage_ashkenazi
+						has_discrimination_trait = tradition_israelite
+					}
+				}
+				set_global_variable = {
+					name = ashkenazi_culture
+					value = this
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			any_country = {
+				is_in_geographic_region = geographic_region_europe
+				any_scope_state = {
+					is_in_geographic_region = geographic_region_europe
+					any_scope_pop = {
+						culture = {
+							OR = {
+								has_discrimination_trait = heritage_ashkenazi
+								has_discrimination_trait = tradition_israelite
+							}
+						}
+					}
+				}
+			}
+		}
+		random_country = {
+			limit = {
+				is_in_geographic_region = geographic_region_europe
+				any_scope_state = {
+					is_in_geographic_region = geographic_region_europe
+					any_scope_pop = {
+						culture = {
+							OR = {
+								has_discrimination_trait = heritage_ashkenazi
+								has_discrimination_trait = tradition_israelite
+							}
+						}
+					}
+				}
+			}
+			random_scope_state = {
+				limit = {
+					is_in_geographic_region = geographic_region_europe
+					any_scope_pop = {
+						culture = {
+							OR = {
+								has_discrimination_trait = heritage_ashkenazi
+								has_discrimination_trait = tradition_israelite
+							}
+						}
+					}
+				}
+				random_scope_pop = {
+					limit = {
+						culture = {
+							OR = {
+								has_discrimination_trait = heritage_ashkenazi
+								has_discrimination_trait = tradition_israelite
+							}
+						}
+					}
+					culture = {
+						set_global_variable = {
+							name = ashkenazi_culture
+							value = this
+						}
+					}
+				}
+			}
+		}
+	}
+	else = {
+		cu:ashkenazi = {
+			set_global_variable = {
+				name = ashkenazi_culture
+				value = this
+			}
+		}
+	}
+}
+
+converter_cultural_traditions_effect = {
+	every_scope_state = {
+		if = {
+			limit = { is_in_geographic_region = geographic_region_converter_caucasus }
+			every_scope_pop = {
+				limit = {
+					culture = {
+						has_homeland = prev.state
+						NOT = { has_discrimination_trait = tradition_caucasian }
+					}
+				}
+				culture = { add_tradition_trait = tradition_caucasian }
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					state_region = s:STATE_EAST_SWITZERLAND
+					state_region = s:STATE_WEST_SWITZERLAND
+				}
+			}
+			every_scope_pop = {
+				limit = {
+					culture = {
+						has_homeland = prev.state
+						NOT = { has_discrimination_trait = tradition_helvetic }
+					}
+				}
+				culture = { add_tradition_trait = tradition_helvetic }
+			}
+		}
+		if = {
+			limit = { region = sr:region_himalayas }
+			every_scope_pop = {
+				limit = {
+					culture = {
+						has_homeland = prev.state
+						NOT = { has_discrimination_trait = tradition_himalayan }
+					}
+				}
+				culture = { add_tradition_trait = tradition_himalayan }
+			}
+		}
+		if = {
+			limit = { region = sr:region_persia }
+			every_scope_pop = {
+				limit = {
+					culture = {
+						has_homeland = prev.state
+						NOT = { has_discrimination_trait = tradition_persianate }
+					}
+				}
+				culture = { add_tradition_trait = tradition_persianate }
+			}
+		}
+	}
+	if = {
+		limit = {
+			trigger_if = {
+				limit = { c:PER ?= this }
+				always = yes
+			}
+			trigger_else = {
+				any_overlord_or_above = { c:PER ?= this }
+				capital = {
+					OR = {
+						region = sr:region_anatolia
+						region = sr:region_arabic
+						region = sr:region_persia
+						region = sr:region_central_asia
+						region = sr:region_caucasus
+						region = sr:region_punjab
+						region = sr:region_bombay
+						region = sr:region_himalayas
+					}
+				}
+			}
+		}
+		every_scope_state = {
+			limit = {
+				OR = {
+					region = sr:region_anatolia
+					region = sr:region_arabic
+					region = sr:region_persia
+					region = sr:region_central_asia
+					region = sr:region_caucasus
+					region = sr:region_punjab
+					region = sr:region_bombay
+					region = sr:region_himalayas
+				}
+				religion_percent_state = {
+					target = c:PER.religion
+					value >= 0.65
+				}
+			}
+			every_scope_pop = {
+				limit = {
+					culture = {
+						has_homeland = prev.state
+						NOT = { has_discrimination_trait = tradition_persianate }
+					}
+				}
+				culture = { add_tradition_trait = tradition_persianate }
+			}
+		}
+	}
+	if = {
+		limit = {
+			capital = {
+				OR = {
+					region = sr:region_anatolia
+					region = sr:region_italy
+					region = sr:region_balkans
+					region = sr:region_danubia
+				}
+			}
+			religion = { has_discrimination_trait = heritage_islamic }
+			is_subject = no
+			OR = {
+				country_tier = empire
+				country_tier = hegemony
+			}
+		}
+		save_temporary_scope_as = temp_ottomans_scope
+		every_scope_state = {
+			limit = {
+				OR = {
+					region = sr:region_anatolia
+					region = sr:region_italy
+					region = sr:region_balkans
+					region = sr:region_danubia
+				}
+				religion_percent_state = {
+					target = scope:temp_ottomans_scope.religion
+					value >= 0.5
+				}
+			}
+			every_scope_pop = {
+				limit = {
+					culture = {
+						has_homeland = prev.state
+						NOT = { has_discrimination_trait = tradition_rumelian }
+					}
+				}
+				culture = { add_tradition_trait = tradition_rumelian }
+			}
+		}
+		every_subject_or_below = {
+			limit = {
+				capital = {
+					OR = {
+						region = sr:region_anatolia
+						region = sr:region_italy
+						region = sr:region_balkans
+						region = sr:region_danubia
+					}
+				}
+				religion = { has_discrimination_trait = heritage_islamic }
+			}
+			every_scope_state = {
+				limit = {
+					OR = {
+						region = sr:region_anatolia
+						region = sr:region_italy
+						region = sr:region_balkans
+						region = sr:region_danubia
+					}
+					religion_percent_state = {
+						target = scope:temp_ottomans_scope.religion
+						value >= 0.5
+					}
+				}
+				every_scope_pop = {
+					limit = {
+						culture = {
+							has_homeland = prev.state
+							NOT = { has_discrimination_trait = tradition_rumelian }
+						}
+					}
+					culture = { add_tradition_trait = tradition_rumelian }
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			trigger_if = {
+				limit = { c:RUS ?= this }
+				always = yes
+			}
+			trigger_else = {
+				any_overlord_or_above = { c:RUS ?= this }
+				capital = {
+					OR = {
+						region = sr:region_russia
+						region = sr:region_dnieper
+						region = sr:region_belarus
+						region = sr:region_arctic_russia
+						region = sr:region_urals
+					}
+				}
+			}
+		}
+		every_scope_state = {
+			limit = {
+				OR = {
+					region = sr:region_russia
+					region = sr:region_dnieper
+					region = sr:region_belarus
+					region = sr:region_arctic_russia
+					region = sr:region_urals
+				}
+			}
+			every_scope_pop = {
+				limit = {
+					culture = {
+						has_homeland = prev.state
+						NOT = { has_discrimination_trait = tradition_russosphere }
+					}
+				}
+				culture = { add_tradition_trait = tradition_russosphere }
+			}
+		}
+	}
+	if = {
+		limit = {
+			trigger_if = {
+				limit = {
+					ig:ig_landowners = { has_ideology = ideology:ideology_scholar_paternalistic }
+				}
+				always = yes
+			}
+			trigger_else = {
+				any_overlord_or_above = {
+					ig:ig_landowners = { has_ideology = ideology:ideology_scholar_paternalistic }
+				}
+				capital = {
+					OR = {
+						region = sr:region_indochina
+						region = sr:region_indonesia
+						region = sr:region_south_china
+						region = sr:region_north_china
+						region = sr:region_manchuria
+						region = sr:region_japan
+						region = sr:region_east_siberia
+						region = sr:region_central_asia
+						region = sr:region_himalayas
+					}
+				}
+			}
+		}
+		every_scope_state = {
+			limit = {
+				OR = {
+					region = sr:region_indochina
+					region = sr:region_indonesia
+					region = sr:region_south_china
+					region = sr:region_north_china
+					region = sr:region_manchuria
+					region = sr:region_japan
+					region = sr:region_east_siberia
+					region = sr:region_central_asia
+					region = sr:region_himalayas
+				}
+			}
+			every_scope_pop = {
+				limit = {
+					culture = {
+						has_homeland = prev.state
+						NOT = { has_discrimination_trait = tradition_sinosphere }
+					}
+				}
+				culture = { add_tradition_trait = tradition_sinosphere }
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_primary_culture = { has_discrimination_trait = tradition_cuneiform }
+		}
+		every_scope_state = {
+			limit = {
+				OR = {
+					region = sr:region_anatolia
+					region = sr:region_arabic
+					region = sr:region_persia
+					region = sr:region_nile_basin
+					region = sr:region_ethiopia
+				}
+			}
+			every_scope_pop = {
+				limit = {
+					has_state_religion = yes
+					culture = {
+						has_homeland = prev.state
+						NOT = { has_discrimination_trait = tradition_cuneiform }
+					}
+				}
+				culture = { add_tradition_trait = tradition_cuneiform }
 			}
 		}
 	}
@@ -3108,8 +3637,8 @@ converter_primary_cultures_effect = {
 				##If only we could reference flags, would love to get Malaya & Rum in this list
 			}
 			NOR = {		##Go with this for now; old trigger doesn't work anymore
-				has_law = law_type:law_outlawed_dissent
-				has_law = law_type:law_censorship
+				has_law_or_variant = law_type:law_outlawed_dissent
+				has_law_or_variant = law_type:law_censorship
 			}
 			is_old_world_trading_company = no
 		}
@@ -3117,7 +3646,11 @@ converter_primary_cultures_effect = {
 			limit = {
 				pop_has_primary_culture = no
 				culture = {
-					shares_language_trait_with_any_primary_culture = prev.owner
+					trigger_if = {
+						limit = { shares_heritage_trait_group_with_any_primary_culture = prev.owner }
+						shares_language_trait_with_any_primary_culture = prev.owner
+					}
+					trigger_else = { shares_language_trait_group_with_any_primary_culture = prev.owner }
 					has_homeland = prev.state
 					prev.owner = {
 						culture_percent_country = {
@@ -3202,7 +3735,7 @@ converter_primary_cultures_effect = {
 				pop_has_primary_culture = no
 				culture = {
 					shares_heritage_trait_group_with_any_primary_culture = prev.owner
-					shares_language_trait_with_any_primary_culture = prev.owner
+					shares_language_trait_group_with_any_primary_culture = prev.owner
 					has_homeland = prev.state
 					prev.owner = {
 						culture_percent_country = {
@@ -3267,7 +3800,7 @@ converter_primary_cultures_effect = {
 					trigger_if = {		##B/c Darfur has both Bedouin & Fur as primaries
 						limit = {
 							prev.owner = {
-								country_is_in_africa = yes
+								is_in_geographic_region = geographic_region_africa
 								any_primary_culture = {
 									OR = {
 										has_discrimination_trait_group = heritage_group_african
@@ -3300,7 +3833,7 @@ converter_primary_cultures_effect = {
 					trigger_if = {
 						limit = {
 							prev.owner = {
-								country_is_in_africa = yes
+								is_in_geographic_region = geographic_region_africa
 								any_primary_culture = {
 									OR = {
 										has_discrimination_trait_group = heritage_group_african
@@ -3434,9 +3967,9 @@ converter_primary_cultures_effect = {
 	}
 	if = {
 		limit = {		##Small Native American countries will gain African Diaspora cultures as primary if they're large enough
-			capital = { state_is_in_americas = yes }
+			is_in_geographic_region = geographic_region_americas
 			any_primary_culture = { has_discrimination_trait_group = heritage_group_indigenous_american }
-			NOT = { has_law = law_type:law_slave_trade }
+			NOT = { has_law_or_variant = law_type:law_slave_trade }
 			OR = {
 				country_tier = kingdom
 				country_tier = grand_principality
@@ -3512,8 +4045,7 @@ converter_primary_cultures_effect = {
 					region = sr:region_italy
 				}
 				OR = {
-					state_is_in_europe = yes
-					region = sr:region_north_sea_coast
+					is_in_geographic_region = geographic_region_europe
 					region = sr:region_arctic_russia
 					region = sr:region_urals
 					region = sr:region_anatolia
@@ -3741,7 +4273,7 @@ converter_primary_cultures_effect = {
 		}
 		every_scope_state = {		##This is probably going to hurt a lot
 			limit = {
-				state_is_in_china = yes
+				is_in_geographic_region = geographic_region_china
 				is_incorporated = no
 				is_treaty_port = no
 			}
@@ -4111,5 +4643,4 @@ converter_trade_company_template_effect = {
 		}
 		change_character_culture = scope:template_culture
 	}
-
 }

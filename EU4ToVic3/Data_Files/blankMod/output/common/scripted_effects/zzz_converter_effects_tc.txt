@@ -192,16 +192,16 @@ converter_transfer_trading_company_subjects_effect = {
 		}
 		else_if = {
 			limit = {
-				scope:eu4_trade_company = { country_is_in_india = yes }
+				scope:eu4_trade_company = { is_in_geographic_region = geographic_region_india }
 				any_direct_subject = {
 					is_potential_tc_subject = yes
-					country_is_in_india = yes
+					is_in_geographic_region = geographic_region_india
 				}
 			}
 			every_direct_subject = {
 				limit = {
 					is_potential_tc_subject = yes
-					country_is_in_india = yes
+					is_in_geographic_region = geographic_region_india
 				}
 				if = {
 					limit = { is_subject_type = subject_type_puppet }
@@ -226,16 +226,16 @@ converter_transfer_trading_company_subjects_effect = {
 		}
 		else_if = {
 			limit = {
-				scope:eu4_trade_company = { country_is_in_southeast_asia = yes }
+				scope:eu4_trade_company = { is_in_geographic_region = geographic_region_south_east_asia }
 				any_direct_subject = {
 					is_potential_tc_subject = yes
-					country_is_in_southeast_asia = yes
+					is_in_geographic_region = geographic_region_south_east_asia
 				}
 			}
 			every_direct_subject = {
 				limit = {
 					is_potential_tc_subject = yes
-					country_is_in_southeast_asia = yes
+					is_in_geographic_region = geographic_region_south_east_asia
 				}
 				if = {
 					limit = { is_subject_type = subject_type_puppet }
@@ -260,16 +260,16 @@ converter_transfer_trading_company_subjects_effect = {
 		}
 		else_if = {
 			limit = {
-				scope:eu4_trade_company = { country_is_in_china = yes }
+				scope:eu4_trade_company = { is_in_geographic_region = geographic_region_china }
 				any_direct_subject = {
 					is_potential_tc_subject = yes
-					country_is_in_china = yes
+					is_in_geographic_region = geographic_region_china
 				}
 			}
 			every_direct_subject = {
 				limit = {
 					is_potential_tc_subject = yes
-					country_is_in_china = yes
+					is_in_geographic_region = geographic_region_china
 				}
 				if = {
 					limit = { is_subject_type = subject_type_puppet }
