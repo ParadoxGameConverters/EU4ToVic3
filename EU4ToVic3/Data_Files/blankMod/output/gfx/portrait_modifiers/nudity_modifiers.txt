@@ -1,0 +1,18 @@
+﻿INJECT:clothes = {
+    no_clothes = {
+        weight = {
+            modifier = {	###Converter
+                add = 25000
+                should_be_naked_character_trigger = yes
+            }
+        }
+    }
+    default_clothes = {
+        weight = {
+            modifier = {	###Converter
+                add = -1
+                should_be_naked_character_trigger = yes
+            }
+        }
+    }
+}
