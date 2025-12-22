@@ -2,60 +2,60 @@
 
 # Austria - AUS
 
-AUS_sigmund_freud = {
-    first_name = Sigismund_Schlomo
-    last_name = Freud
-    historical = yes
-    is_agitator = yes
-    interest_group = ig_intelligentsia
-    female = no
-    dna = dna_sigmund_freud
-    religion = rel:jewish
-    culture = global_var:ashkenazi_culture
-    ideology = ideology_nihilist
-    traits = {
-        ambitious
-        charismatic
-        cocaine_addiction
-    }
+REPLACE:aus_sigmund_freud = {
+	first_name = Sigismund_Schlomo
+	last_name = Freud
+	historical = yes
+	is_agitator = yes
+	interest_group = ig_intelligentsia
+	female = no
+	dna = dna_sigmund_freud
+	religion = rel:jewish
+	culture = global_var:ashkenazi_culture
+	ideology = ideology_nihilist
+	traits = {
+		ambitious
+		charismatic
+		cocaine_addiction
+	}
 }
 
-fem_AUS_sigmund_freud = {
-    first_name = Sieglinde_Bathsheba
-    last_name = Freud
-    historical = yes
-    is_agitator = yes
-    interest_group = ig_intelligentsia
-    female = yes
-    dna = dna_sigmund_freud
-    religion = rel:jewish
-    culture = global_var:ashkenazi_culture
-    ideology = ideology_nihilist
-    traits = {
-        ambitious
-        charismatic
-        cocaine_addiction
-    }
+fem_aus_sigmund_freud = {
+	first_name = Sieglinde_Bathsheba
+	last_name = Freud
+	historical = yes
+	is_agitator = yes
+	interest_group = ig_intelligentsia
+	female = yes
+	dna = dna_sigmund_freud
+	religion = rel:jewish
+	culture = global_var:ashkenazi_culture
+	ideology = ideology_nihilist
+	traits = {
+		ambitious
+		charismatic
+		cocaine_addiction
+	}
 }
 
 ### Executives
 
-AUS_emil_von_skoda = { # Emil von Škoda, Czechia, Škoda Works
-    first_name = Emil
-    last_name = von_Skoda
-    historical = yes
-    culture = cu:czech
-    birth_date = 1839.11.18
-    dna = dna_emil_von_skoda
-    interest_group = ig_industrialists
-    ideology = ideology_moderate
-    traits = {
-        innovative
-        basic_entrepreneur
-        engineer
-    }
-    executive_usage = {
-        country_trigger = {
+REPLACE:AUS_emil_von_skoda = { # Emil von Škoda, Czechia, Škoda Works
+	first_name = Emil
+	last_name = von_Skoda
+	historical = yes
+	culture = cu:czech
+	birth_date = 1839.11.18
+	dna = dna_emil_von_skoda
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+	traits = {
+		innovative
+		basic_entrepreneur
+		engineer
+	}
+	executive_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -63,15 +63,15 @@ AUS_emil_von_skoda = { # Emil von Škoda, Czechia, Škoda Works
 					target = flag:converter_emil_von_skoda
 				}
 			}
-            has_dlc_feature = mp1_content
-        }
-        company_trigger = {
-            is_company_type = company_type:company_skoda
-        }
-        earliest_usage_date = 1869.1.1
-        latest_usage_date = 1900.1.1
-        chance = 100
-    }
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_skoda
+		}
+		earliest_usage_date = 1869.1.1
+		latest_usage_date = 1900.1.1
+		chance = 100
+	}
 	on_created = {
 		converter_standard_template_effect = { TARGET = cu:czech }
 		add_to_global_variable_list = {
@@ -83,22 +83,22 @@ AUS_emil_von_skoda = { # Emil von Škoda, Czechia, Škoda Works
 }
 
 fem_AUS_emil_von_skoda = { # Emil von Škoda, Czechia, Škoda Works
-    first_name = Emilie
-    last_name = von_Skoda
-    historical = yes
-    culture = cu:czech
-    birth_date = 1839.11.18
-    dna = dna_emil_von_skoda
-    interest_group = ig_industrialists
-    female = yes
-    ideology = ideology_moderate
-    traits = {
-        innovative
-        basic_entrepreneur
-        engineer
-    }
-    executive_usage = {
-        country_trigger = {
+	first_name = Emilie
+	last_name = von_Skoda
+	historical = yes
+	culture = cu:czech
+	birth_date = 1839.11.18
+	dna = dna_emil_von_skoda
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_moderate
+	traits = {
+		innovative
+		basic_entrepreneur
+		engineer
+	}
+	executive_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -106,15 +106,15 @@ fem_AUS_emil_von_skoda = { # Emil von Škoda, Czechia, Škoda Works
 					target = flag:converter_emil_von_skoda
 				}
 			}
-            has_dlc_feature = mp1_content
-        }
-        company_trigger = {
-            is_company_type = company_type:company_skoda
-        }
-        earliest_usage_date = 1869.1.1
-        latest_usage_date = 1900.1.1
-        chance = 100
-    }
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_skoda
+		}
+		earliest_usage_date = 1869.1.1
+		latest_usage_date = 1900.1.1
+		chance = 100
+	}
 	on_created = {
 		converter_standard_template_effect = { TARGET = cu:czech }
 		add_to_global_variable_list = {
@@ -125,22 +125,22 @@ fem_AUS_emil_von_skoda = { # Emil von Škoda, Czechia, Škoda Works
 	}
 }
 
-AUS_michael_thonet = { # Michael Thonet, Gebrüder Thonet
-    first_name = Michael
-    last_name = Thonet
-    historical = yes
-    culture = cu:north_german
-    birth_date = 1796.07.02
-    dna = dna_michael_thonet
-    interest_group = ig_industrialists
-    ideology = ideology_moderate
-    traits = {
-        innovative
-        basic_entrepreneur
-        engineer
-    }
-    executive_usage = {
-        country_trigger = {
+REPLACE:AUS_michael_thonet = { # Michael Thonet, Gebrüder Thonet
+	first_name = Michael
+	last_name = Thonet
+	historical = yes
+	culture = cu:north_german
+	birth_date = 1796.07.02
+	dna = dna_michael_thonet
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+	traits = {
+		innovative
+		basic_entrepreneur
+		engineer
+	}
+	executive_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -148,15 +148,15 @@ AUS_michael_thonet = { # Michael Thonet, Gebrüder Thonet
 					target = flag:converter_michael_thonet
 				}
 			}
-            has_dlc_feature = mp1_content
-        }
-        company_trigger = {
-            is_company_type = company_type:company_gebruder_thonet
-        }
-        earliest_usage_date = 1849.1.1
-        latest_usage_date = 1871.1.1
-        chance = 100
-    }
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_gebruder_thonet
+		}
+		earliest_usage_date = 1849.1.1
+		latest_usage_date = 1871.1.1
+		chance = 100
+	}
 	on_created = {
 		converter_standard_template_effect = { TARGET = cu:north_german }
 		add_to_global_variable_list = {
@@ -168,22 +168,22 @@ AUS_michael_thonet = { # Michael Thonet, Gebrüder Thonet
 }
 
 fem_AUS_michael_thonet = { # Michael Thonet, Gebrüder Thonet
-    first_name = Michaela
-    last_name = Thonet
-    historical = yes
-    culture = cu:north_german
-    birth_date = 1796.07.02
-    dna = dna_michael_thonet
-    interest_group = ig_industrialists
-    female = yes
-    ideology = ideology_moderate
-    traits = {
-        innovative
-        basic_entrepreneur
-        engineer
-    }
-    executive_usage = {
-        country_trigger = {
+	first_name = Michaela
+	last_name = Thonet
+	historical = yes
+	culture = cu:north_german
+	birth_date = 1796.07.02
+	dna = dna_michael_thonet
+	interest_group = ig_industrialists
+	female = yes
+	ideology = ideology_moderate
+	traits = {
+		innovative
+		basic_entrepreneur
+		engineer
+	}
+	executive_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -191,15 +191,15 @@ fem_AUS_michael_thonet = { # Michael Thonet, Gebrüder Thonet
 					target = flag:converter_michael_thonet
 				}
 			}
-            has_dlc_feature = mp1_content
-        }
-        company_trigger = {
-            is_company_type = company_type:company_gebruder_thonet
-        }
-        earliest_usage_date = 1849.1.1
-        latest_usage_date = 1871.1.1
-        chance = 100
-    }
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_gebruder_thonet
+		}
+		earliest_usage_date = 1849.1.1
+		latest_usage_date = 1871.1.1
+		chance = 100
+	}
 	on_created = {
 		converter_standard_template_effect = { TARGET = cu:north_german }
 		add_to_global_variable_list = {
@@ -207,5 +207,2386 @@ fem_AUS_michael_thonet = { # Michael Thonet, Gebrüder Thonet
 			target = flag:converter_michael_thonet
 		}
 		fix_variable_error = { variable = converter_michael_thonet }
+	}
+}
+
+REPLACE:AUS_karl_wittgenstein = { # Karl Wittgenstein, Steel monopoly
+	first_name = Karl
+	last_name = Wittgenstein
+	historical = yes
+	culture = cu:south_german
+	birth_date = 1847.4.8
+	ig_leader = yes
+	interest_group = ig_industrialists
+	ideology = ideology_market_liberal
+	traits = {
+		ambitious
+		persistent
+		expert_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_karl_wittgenstein
+				}
+			}
+			has_dlc_feature = ip3_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_oesterreichisch_alpine_montangesellschaft
+		}
+		earliest_usage_date = 1870.1.1
+		latest_usage_date = 1898.12.31
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_karl_wittgenstein
+		}
+		fix_variable_error = { variable = converter_karl_wittgenstein }
+	}
+}
+
+fem_AUS_karl_wittgenstein = { # Karl Wittgenstein, Steel monopoly
+	first_name = Karola
+	last_name = Wittgenstein
+	historical = yes
+	culture = cu:south_german
+	female = yes
+	birth_date = 1847.4.8
+	ig_leader = yes
+	interest_group = ig_industrialists
+	ideology = ideology_market_liberal
+	traits = {
+		ambitious
+		persistent
+		expert_entrepreneur
+	}
+	executive_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_karl_wittgenstein
+				}
+			}
+			has_dlc_feature = ip3_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_oesterreichisch_alpine_montangesellschaft
+		}
+		earliest_usage_date = 1870.1.1
+		latest_usage_date = 1898.12.31
+		chance = 100
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_karl_wittgenstein
+		}
+		fix_variable_error = { variable = converter_karl_wittgenstein }
+	}
+}
+
+# Generated IG Leaders
+# ARMED FORCES
+REPLACE:AUS_charles_lawrence = { #  Austrian field marshal, the third son of Emperor Leopold II and his wife, Maria Luisa of Spain. Achieved respect both as a commander and as a reformer of the Austrian army.
+	first_name = Charles
+	last_name = Lawrence
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1771.9.5
+	ig_leader = yes
+	interest_group = ig_armed_forces
+	ideology = ideology_authoritarian
+	traits = {
+		persistent
+		tactful
+		expert_offensive_planner
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_charles_lawrence
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_armed_forces
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1847.4.30
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_charles_lawrence
+		}
+		fix_variable_error = { variable = converter_charles_lawrence }
+	}
+}
+
+fem_AUS_charles_lawrence = { #  Austrian field marshal, the third son of Emperor Leopold II and his wife, Maria Luisa of Spain. Achieved respect both as a commander and as a reformer of the Austrian army.
+	first_name = Karoline
+	last_name = Lawrence
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1771.9.5
+	ig_leader = yes
+	interest_group = ig_armed_forces
+	ideology = ideology_authoritarian
+	traits = {
+		persistent
+		tactful
+		expert_offensive_planner
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_charles_lawrence
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_armed_forces
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1847.4.30
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_charles_lawrence
+		}
+		fix_variable_error = { variable = converter_charles_lawrence }
+	}
+}
+
+# DEVOUT
+REPLACE:AUS_friedrich_schwarzenberg = { # Friedrich Prince zu Schwarzenberg, Cardinal of the Holy Roman Church, Archbishop of Prague
+	first_name = Friedrich
+	last_name = Schwarzenberg
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1809.4.6
+	ig_leader = yes
+	interest_group = ig_devout
+	ideology = ideology_royalist
+	traits = {
+		pious
+		erudite
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_friedrich_schwarzenberg
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1850.8.15
+		latest_usage_date = 1885.3.27
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_friedrich_schwarzenberg
+		}
+		fix_variable_error = { variable = converter_friedrich_schwarzenberg }
+	}
+}
+
+fem_AUS_friedrich_schwarzenberg = { # Friedrich Prince zu Schwarzenberg, Cardinal of the Holy Roman Church, Archbishop of Prague
+	first_name = Fritzi
+	last_name = Schwarzenberg
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1809.4.6
+	ig_leader = yes
+	interest_group = ig_devout
+	ideology = ideology_royalist
+	traits = {
+		pious
+		erudite
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_friedrich_schwarzenberg
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1850.8.15
+		latest_usage_date = 1885.3.27
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_friedrich_schwarzenberg
+		}
+		fix_variable_error = { variable = converter_friedrich_schwarzenberg }
+	}
+}
+
+REPLACE:AUS_anton_josef_gruscha = { # Anton Josef Gruscha, Cardinal, Archbishop of Vienna
+	first_name = Anton_Josef
+	last_name = Gruscha
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1820.11.3
+	ig_leader = yes
+	interest_group = ig_devout
+	ideology = ideology_traditionalist
+	traits = {
+		pious
+		charismatic
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_anton_josef_gruscha
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1873.5.4
+		latest_usage_date = 1911.8.5
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_anton_josef_gruscha
+		}
+		fix_variable_error = { variable = converter_anton_josef_gruscha }
+	}
+}
+
+fem_AUS_anton_josef_gruscha = { # Anton Josef Gruscha, Cardinal, Archbishop of Vienna
+	first_name = Teuna_Josepha
+	last_name = Gruscha
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1820.11.3
+	ig_leader = yes
+	interest_group = ig_devout
+	ideology = ideology_traditionalist
+	traits = {
+		pious
+		charismatic
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_anton_josef_gruscha
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1873.5.4
+		latest_usage_date = 1911.8.5
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_anton_josef_gruscha
+		}
+		fix_variable_error = { variable = converter_anton_josef_gruscha }
+	}
+}
+
+REPLACE:AUS_theodor_innitzer = { # Theodor Innitzer, Cardinal, Archbishop of Vienna
+	first_name = Theodor
+	last_name = Innitzer
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1875.12.25
+	ig_leader = yes
+	interest_group = ig_devout
+	ideology = ideology_authoritarian
+	traits = {
+		pious
+		charismatic
+		experienced_diplomat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_theodor_innitzer
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1902.7.25
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_theodor_innitzer
+		}
+		fix_variable_error = { variable = converter_theodor_innitzer }
+	}
+}
+
+fem_AUS_theodor_innitzer = { # Theodor Innitzer, Cardinal, Archbishop of Vienna
+	first_name = Theodosia
+	last_name = Innitzer
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1875.12.25
+	ig_leader = yes
+	interest_group = ig_devout
+	ideology = ideology_authoritarian
+	traits = {
+		pious
+		charismatic
+		experienced_diplomat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_theodor_innitzer
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1902.7.25
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_theodor_innitzer
+		}
+		fix_variable_error = { variable = converter_theodor_innitzer }
+	}
+}
+
+# INDUSTRIALISTS
+
+REPLACE:AUS_freidrich_schey_von_koromla = { # Friedrich Schey von Koromla, Banker
+	first_name = Friedrich_Schey
+	last_name = von_Koromla
+	historical = yes
+	culture = global_var:ashkenazi_culture
+	religion = rel:jewish
+	birth_date = 1815.3.5
+	ig_leader = yes
+	interest_group = ig_industrialists
+	ideology = ideology_market_liberal
+	traits = {
+		charismatic
+		meticulous
+		experienced_entrepreneur
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_freidrich_schey_von_koromla
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_industrialists
+		}
+		earliest_usage_date = 1842.1.1
+		latest_usage_date = 1881.7.15
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_freidrich_schey_von_koromla
+		}
+		fix_variable_error = { variable = converter_freidrich_schey_von_koromla }
+	}
+}
+
+fem_AUS_freidrich_schey_von_koromla = { # Friedrich Schey von Koromla, Banker
+	first_name = Fritzi_Schey
+	last_name = von_Koromla
+	historical = yes
+	culture = global_var:ashkenazi_culture
+	religion = rel:jewish
+	female = yes
+	birth_date = 1815.3.5
+	ig_leader = yes
+	interest_group = ig_industrialists
+	ideology = ideology_market_liberal
+	traits = {
+		charismatic
+		meticulous
+		experienced_entrepreneur
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_freidrich_schey_von_koromla
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_industrialists
+		}
+		earliest_usage_date = 1842.1.1
+		latest_usage_date = 1881.7.15
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_freidrich_schey_von_koromla
+		}
+		fix_variable_error = { variable = converter_freidrich_schey_von_koromla }
+	}
+}
+
+REPLACE:AUS_anselm_salomon_von_rothschild = { # Anselm Salomon von Rothschild, Banker
+	first_name = Anselm_Salomon
+	last_name = von_Rothschild
+	historical = yes
+	culture = global_var:ashkenazi_culture
+	religion = rel:jewish
+	birth_date = 1803.1.29
+	ig_leader = yes
+	interest_group = ig_industrialists
+	ideology = ideology_market_liberal
+	traits = {
+		charismatic
+		meticulous
+		experienced_entrepreneur
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_anselm_salomon_von_rothschild
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_industrialists
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1874.7.27
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_anselm_salomon_von_rothschild
+		}
+		fix_variable_error = { variable = converter_anselm_salomon_von_rothschild }
+	}
+}
+
+fem_AUS_anselm_salomon_von_rothschild = { # Anselm Salomon von Rothschild, Banker
+	first_name = Elma_Bathsheba
+	last_name = von_Rothschild
+	historical = yes
+	culture = global_var:ashkenazi_culture
+	religion = rel:jewish
+	female = yes
+	birth_date = 1803.1.29
+	ig_leader = yes
+	interest_group = ig_industrialists
+	ideology = ideology_market_liberal
+	traits = {
+		charismatic
+		meticulous
+		experienced_entrepreneur
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_anselm_salomon_von_rothschild
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_industrialists
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1874.7.27
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_anselm_salomon_von_rothschild
+		}
+		fix_variable_error = { variable = converter_anselm_salomon_von_rothschild }
+	}
+}
+
+REPLACE:AUS_camillo_castiglioni = { # Camillo Castiglioni, Financier and Banker
+	first_name = Camillo
+	last_name = Castiglioni
+	historical = yes
+	culture = global_var:ashkenazi_culture
+	religion = rel:jewish
+	birth_date = 1879.10.22
+	ig_leader = yes
+	interest_group = ig_industrialists
+	ideology = ideology_market_liberal
+	traits = {
+		ambitious
+		reckless
+		expert_entrepreneur
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_camillo_castiglioni
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_industrialists
+		}
+		earliest_usage_date = 1904.1.1
+		latest_usage_date = 1933.12.31
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_camillo_castiglioni
+		}
+		fix_variable_error = { variable = converter_camillo_castiglioni }
+	}
+}
+
+fem_AUS_camillo_castiglioni = { # Camillo Castiglioni, Financier and Banker
+	first_name = Camilla
+	last_name = Castiglioni
+	historical = yes
+	culture = global_var:ashkenazi_culture
+	religion = rel:jewish
+	female = yes
+	birth_date = 1879.10.22
+	ig_leader = yes
+	interest_group = ig_industrialists
+	ideology = ideology_market_liberal
+	traits = {
+		ambitious
+		reckless
+		expert_entrepreneur
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_camillo_castiglioni
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_industrialists
+		}
+		earliest_usage_date = 1904.1.1
+		latest_usage_date = 1933.12.31
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_camillo_castiglioni
+		}
+		fix_variable_error = { variable = converter_camillo_castiglioni }
+	}
+}
+
+# INTELLIGENTSIA
+REPLACE:AUS_ernst_mach = { # Ernst Waldfried Josef Wenzel Mach, physicist and philosopher
+	first_name = Ernst
+	last_name = Mach
+	historical = yes
+	culture = cu:south_german
+	birth_date = 1838.2.18
+	ig_leader = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_positivist
+	traits = {
+		ambitious
+		literary
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ernst_mach
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1916.2.19
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ernst_mach
+		}
+		fix_variable_error = { variable = converter_ernst_mach }
+	}
+}
+
+fem_AUS_ernst_mach = { # Ernst Waldfried Josef Wenzel Mach, physicist and philosopher
+	first_name = Erna
+	last_name = Mach
+	historical = yes
+	culture = cu:south_german
+	female = yes
+	birth_date = 1838.2.18
+	ig_leader = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_positivist
+	traits = {
+		ambitious
+		literary
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ernst_mach
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1916.2.19
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ernst_mach
+		}
+		fix_variable_error = { variable = converter_ernst_mach }
+	}
+}
+
+REPLACE:AUS_ludwig_boltzmann = { # Ludwig Eduard Boltzmann,  mathematician and theoretical physicist
+	first_name = Ludwig
+	last_name = Boltzmann
+	historical = yes
+	culture = cu:south_german
+	birth_date = 1844.2.20
+	ig_leader = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_positivist
+	traits = {
+		meticulous
+		erudite
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ludwig_boltzmann
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1869.1.1
+		latest_usage_date = 1906.9.5
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ludwig_boltzmann
+		}
+		fix_variable_error = { variable = converter_ludwig_boltzmann }
+	}
+}
+
+fem_AUS_ludwig_boltzmann = { # Ludwig Eduard Boltzmann,  mathematician and theoretical physicist
+	first_name = Hedwig
+	last_name = Boltzmann
+	historical = yes
+	culture = cu:south_german
+	female = yes
+	birth_date = 1844.2.20
+	ig_leader = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_positivist
+	traits = {
+		meticulous
+		erudite
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_ludwig_boltzmann
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1869.1.1
+		latest_usage_date = 1906.9.5
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_ludwig_boltzmann
+		}
+		fix_variable_error = { variable = converter_ludwig_boltzmann }
+	}
+}
+
+REPLACE:AUS_karl_kraus = { # Karl Kraus, satirist, essayist, aphorist, playwright and poet
+	first_name = Karl
+	last_name = Kraus
+	historical = yes
+	culture = global_var:ashkenazi_culture
+	religion = rel:jewish
+	birth_date = 1874.4.28
+	ig_leader = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_positivist
+	traits = {
+		persistent
+		brave
+		literary
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_karl_kraus
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1899.1.1
+		latest_usage_date = 1936.6.12
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_karl_kraus
+		}
+		fix_variable_error = { variable = converter_karl_kraus }
+	}
+}
+
+fem_AUS_karl_kraus = { # Karl Kraus, satirist, essayist, aphorist, playwright and poet
+	first_name = Karola
+	last_name = Kraus
+	historical = yes
+	culture = global_var:ashkenazi_culture
+	religion = rel:jewish
+	female = yes
+	birth_date = 1874.4.28
+	ig_leader = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_positivist
+	traits = {
+		persistent
+		brave
+		literary
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_karl_kraus
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1899.1.1
+		latest_usage_date = 1936.6.12
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_karl_kraus
+		}
+		fix_variable_error = { variable = converter_karl_kraus }
+	}
+}
+
+# LANDOWNERS
+REPLACE:AUS_felix_von_schwarzenberg = { # Felix Ludwig Johann Friedrich, Prince of Schwarzenberg, Bohemian nobleman and an Austrian statesman
+	first_name = Felix_2
+	last_name = von_Schwarzenberg
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1800.10.2
+	ig_leader = yes
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	traits = {
+		direct
+		imperious
+		experienced_diplomat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_felix_von_schwarzenberg
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1852.4.5
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_felix_von_schwarzenberg
+		}
+		fix_variable_error = { variable = converter_felix_von_schwarzenberg }
+	}
+}
+
+fem_AUS_felix_von_schwarzenberg = { # Felix Ludwig Johann Friedrich, Prince of Schwarzenberg, Bohemian nobleman and an Austrian statesman
+	first_name = Felicie
+	last_name = von_Schwarzenberg
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1800.10.2
+	ig_leader = yes
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	traits = {
+		direct
+		imperious
+		experienced_diplomat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_felix_von_schwarzenberg
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1852.4.5
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_felix_von_schwarzenberg
+		}
+		fix_variable_error = { variable = converter_felix_von_schwarzenberg }
+	}
+}
+
+REPLACE:AUS_eduard_taaffe = { # Eduard Franz Joseph Graf von Taaffe, 11th Viscount Taaffe, Austrian statesman, who served for two terms as Minister-President of Cisleithania
+	first_name = Eduard
+	last_name = Taaffe
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1833.2.24
+	ig_leader = yes
+	interest_group = ig_landowners
+	ideology = ideology_integralist
+	traits = {
+		tactful
+		masterful_diplomat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_eduard_taaffe
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1867.1.1
+		latest_usage_date = 1893.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_eduard_taaffe
+		}
+		fix_variable_error = { variable = converter_eduard_taaffe }
+	}
+}
+
+fem_AUS_eduard_taaffe = { # Eduard Franz Joseph Graf von Taaffe, 11th Viscount Taaffe, Austrian statesman, who served for two terms as Minister-President of Cisleithania
+	first_name = Edwardine
+	last_name = Taaffe
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1833.2.24
+	ig_leader = yes
+	interest_group = ig_landowners
+	ideology = ideology_integralist
+	traits = {
+		tactful
+		masterful_diplomat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_eduard_taaffe
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1867.1.1
+		latest_usage_date = 1893.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_eduard_taaffe
+		}
+		fix_variable_error = { variable = converter_eduard_taaffe }
+	}
+}
+
+REPLACE:AUS_heinrich_clam_martinic = { # Heinrich Karl Maria Graf von Clam-Martinic, Austrian statesman
+	first_name = Heinrich
+	last_name = Clam_Martinic
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1863.1.1
+	ig_leader = yes
+	interest_group = ig_landowners
+	ideology = ideology_royalist
+	traits = {
+		cautious
+		imperious
+		experienced_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_heinrich_clam_martinic
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1886.1.1
+		latest_usage_date = 1932.3.7
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_heinrich_clam_martinic
+		}
+		fix_variable_error = { variable = converter_heinrich_clam_martinic }
+	}
+}
+
+fem_AUS_heinrich_clam_martinic = { # Heinrich Karl Maria Graf von Clam-Martinic, Austrian statesman
+	first_name = Heinrike
+	last_name = Clam_Martinic
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1863.1.1
+	ig_leader = yes
+	interest_group = ig_landowners
+	ideology = ideology_royalist
+	traits = {
+		cautious
+		imperious
+		experienced_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_heinrich_clam_martinic
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1886.1.1
+		latest_usage_date = 1932.3.7
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_heinrich_clam_martinic
+		}
+		fix_variable_error = { variable = converter_heinrich_clam_martinic }
+	}
+}
+
+# PETITE BOURGEOISIE
+REPLACE:AUS_baron_alexander_von_bach = { # Baron Alexander von Bach, Austrian politician
+	first_name = Alexander
+	last_name = von_Bach
+	historical = yes
+	dna = dna_baron_alexander_von_bach
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1813.1.4
+	ig_leader = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_authoritarian
+	traits = {
+		master_bureaucrat
+		ambitious
+		experienced_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_baron_alexander_von_bach
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+		earliest_usage_date = 1849.7.28
+		latest_usage_date = 1893.1.1
+		chance = 60
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_baron_alexander_von_bach
+		}
+		fix_variable_error = { variable = converter_baron_alexander_von_bach }
+	}
+}
+
+fem_AUS_baron_alexander_von_bach = { # Baron Alexander von Bach, Austrian politician
+	first_name = Alexandra
+	last_name = von_Bach
+	historical = yes
+	dna = dna_baron_alexander_von_bach
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1813.1.4
+	ig_leader = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_authoritarian
+	traits = {
+		master_bureaucrat
+		ambitious
+		experienced_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_baron_alexander_von_bach
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+		earliest_usage_date = 1849.7.28
+		latest_usage_date = 1893.1.1
+		chance = 60
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_baron_alexander_von_bach
+		}
+		fix_variable_error = { variable = converter_baron_alexander_von_bach }
+	}
+}
+
+REPLACE:AUS_franz_schuselka = { # Franz Schuselka, Austrian politician and writer
+	first_name = Franz
+	last_name = Schuselka
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1811.8.15
+	ig_leader = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_reformer
+	traits = {
+		persistent
+		ambitious
+		inspirational_orator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_franz_schuselka
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+		earliest_usage_date = 1848.1.1
+		latest_usage_date = 1886.9.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_franz_schuselka
+		}
+		fix_variable_error = { variable = converter_franz_schuselka }
+	}
+}
+
+fem_AUS_franz_schuselka = { # Franz Schuselka, Austrian politician and writer
+	first_name = Ziska
+	last_name = Schuselka
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1811.8.15
+	ig_leader = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_reformer
+	traits = {
+		persistent
+		ambitious
+		inspirational_orator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_franz_schuselka
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+		earliest_usage_date = 1848.1.1
+		latest_usage_date = 1886.9.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_franz_schuselka
+		}
+		fix_variable_error = { variable = converter_franz_schuselka }
+	}
+}
+
+REPLACE:AUS_anton_von_schmerling = { # Anton von Schmerling, Austrian statesman
+	first_name = Anton
+	last_name = von_Schmerling
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1805.8.23
+	ig_leader = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_social_democrat
+	traits = {
+		cautious
+		experienced_diplomat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_anton_von_schmerling
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1849.1.1
+		chance = 40
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_anton_von_schmerling
+		}
+		fix_variable_error = { variable = converter_anton_von_schmerling }
+	}
+}
+
+fem_AUS_anton_von_schmerling = { # Anton von Schmerling, Austrian statesman
+	first_name = Teuna
+	last_name = von_Schmerling
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1805.8.23
+	ig_leader = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_social_democrat
+	traits = {
+		cautious
+		experienced_diplomat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_anton_von_schmerling
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1849.1.1
+		chance = 40
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_anton_von_schmerling
+		}
+		fix_variable_error = { variable = converter_anton_von_schmerling }
+	}
+}
+
+REPLACE:AUS_karl_lueger = { # Karl Lueger, Austrian lawyer and politician who served as Mayor of Vienna from 1897 until his death in 1910
+	first_name = Karl
+	last_name = Lueger
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1844.10.24
+	ig_leader = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_traditionalist
+	traits = {
+		direct
+		ambitious
+		demagogue
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_karl_lueger
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+		earliest_usage_date = 1875.1.1
+		latest_usage_date = 1910.3.10
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_karl_lueger
+		}
+		fix_variable_error = { variable = converter_karl_lueger }
+	}
+}
+
+fem_AUS_karl_lueger = { # Karl Lueger, Austrian lawyer and politician who served as Mayor of Vienna from 1897 until his death in 1910
+	first_name = Karola
+	last_name = Lueger
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1844.10.24
+	ig_leader = yes
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_traditionalist
+	traits = {
+		direct
+		ambitious
+		demagogue
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_karl_lueger
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+		earliest_usage_date = 1875.1.1
+		latest_usage_date = 1910.3.10
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_karl_lueger
+		}
+		fix_variable_error = { variable = converter_karl_lueger }
+	}
+}
+
+# RURAL FOLK
+REPLACE:AUS_josef_schoffel = { # Josef Schöffel, Austrian journalist, politician, homeland and nature conservationist
+	first_name = Josef
+	last_name = Schoffel
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1832.7.29
+	ig_leader = yes
+	interest_group = ig_rural_folk
+	ideology = ideology_land_reformer
+	traits = {
+		brave
+		persistent
+		inspirational_orator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_josef_schoffel
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1910.2.7
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_josef_schoffel
+		}
+		fix_variable_error = { variable = converter_josef_schoffel }
+	}
+}
+
+fem_AUS_josef_schoffel = { # Josef Schöffel, Austrian journalist, politician, homeland and nature conservationist
+	first_name = Josepha
+	last_name = Schoffel
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1832.7.29
+	ig_leader = yes
+	interest_group = ig_rural_folk
+	ideology = ideology_land_reformer
+	traits = {
+		brave
+		persistent
+		inspirational_orator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_josef_schoffel
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1860.1.1
+		latest_usage_date = 1910.2.7
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_josef_schoffel
+		}
+		fix_variable_error = { variable = converter_josef_schoffel }
+	}
+}
+
+REPLACE:AUS_leopold_kunschak = { # Leopold Kunschak, politician
+	first_name = Leopold
+	last_name = Schoffel
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1871.11.11
+	ig_leader = yes
+	interest_group = ig_rural_folk
+	ideology = ideology_conservative
+	traits = {
+		tactful
+		cautious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_leopold_kunschak
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1896.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_leopold_kunschak
+		}
+		fix_variable_error = { variable = converter_leopold_kunschak }
+	}
+}
+
+fem_AUS_leopold_kunschak = { # Leopold Kunschak, politician
+	first_name = Leopoldine
+	last_name = Schoffel
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1871.11.11
+	ig_leader = yes
+	interest_group = ig_rural_folk
+	ideology = ideology_conservative
+	traits = {
+		tactful
+		cautious
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_leopold_kunschak
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1896.1.1
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_leopold_kunschak
+		}
+		fix_variable_error = { variable = converter_leopold_kunschak }
+	}
+}
+
+REPLACE:AUS_karl_freiherr_von_vogelsang = { # Karl Freiherr von Vogelsang, a journalist, politician and Catholic social reformer, was one of the mentors of the Christian Social movement in Austria-Hungary
+	first_name = Karl_Freiherr
+	last_name = von_Vogelsang
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1818.9.3
+	ig_leader = yes
+	interest_group = ig_rural_folk
+	ideology = ideology_traditionalist
+	traits = {
+		ambitious
+		direct
+		experienced_diplomat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_karl_freiherr_von_vogelsang
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1990.11.8
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_karl_freiherr_von_vogelsang
+		}
+		fix_variable_error = { variable = converter_karl_freiherr_von_vogelsang }
+	}
+}
+
+fem_AUS_karl_freiherr_von_vogelsang = { # Karl Freiherr von Vogelsang, a journalist, politician and Catholic social reformer, was one of the mentors of the Christian Social movement in Austria-Hungary
+	first_name = Karla_Freifrau
+	last_name = von_Vogelsang
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1818.9.3
+	ig_leader = yes
+	interest_group = ig_rural_folk
+	ideology = ideology_traditionalist
+	traits = {
+		ambitious
+		direct
+		experienced_diplomat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_karl_freiherr_von_vogelsang
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1990.11.8
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_karl_freiherr_von_vogelsang
+		}
+		fix_variable_error = { variable = converter_karl_freiherr_von_vogelsang }
+	}
+}
+
+# TRADE UNION
+REPLACE:AUS_victor_adler = { # Victor Adler, Austrian politician, a leader of the labour movement and founder of the Social Democratic Workers' Party (SDAP)
+	first_name = Victor
+	last_name = Adler
+	historical = yes
+	culture = global_var:ashkenazi_culture
+	religion = rel:jewish
+	birth_date = 1852.6.24
+	ig_leader = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_social_democrat
+	traits = {
+		charismatic
+		tactful
+		inspirational_orator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_victor_adler
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_trade_unions
+		}
+		earliest_usage_date = 1886.1.1
+		latest_usage_date = 1918.11.11
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_victor_adler
+		}
+		fix_variable_error = { variable = converter_victor_adler }
+	}
+}
+
+fem_AUS_victor_adler = { # Victor Adler, Austrian politician, a leader of the labour movement and founder of the Social Democratic Workers' Party (SDAP)
+	first_name = Viktoria
+	last_name = Adler
+	historical = yes
+	culture = global_var:ashkenazi_culture
+	religion = rel:jewish
+	female = yes
+	birth_date = 1852.6.24
+	ig_leader = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_social_democrat
+	traits = {
+		charismatic
+		tactful
+		inspirational_orator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_victor_adler
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_trade_unions
+		}
+		earliest_usage_date = 1886.1.1
+		latest_usage_date = 1918.11.11
+		chance = 50
+	}
+	on_created = {
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_victor_adler
+		}
+		fix_variable_error = { variable = converter_victor_adler }
+	}
+}
+
+REPLACE:AUS_andreas_scheu = { # Andreas Scheu, Austrian socialist activist
+	first_name = Andreas
+	last_name = Scheu
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1844.1.27
+	ig_leader = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_utopian
+	traits = {
+		brave
+		ruthless
+		experienced_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_andreas_scheu
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_trade_unions
+		}
+		earliest_usage_date = 1866.1.1
+		latest_usage_date = 1884.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_andreas_scheu
+		}
+		fix_variable_error = { variable = converter_andreas_scheu }
+	}
+}
+
+fem_AUS_andreas_scheu = { # Andreas Scheu, Austrian socialist activist
+	first_name = Andrea
+	last_name = Scheu
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1844.1.27
+	ig_leader = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_utopian
+	traits = {
+		brave
+		ruthless
+		experienced_political_operator
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_andreas_scheu
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_trade_unions
+		}
+		earliest_usage_date = 1866.1.1
+		latest_usage_date = 1884.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_andreas_scheu
+		}
+		fix_variable_error = { variable = converter_andreas_scheu }
+	}
+}
+
+REPLACE:AUS_heinrich_oberwinder = { # Heinrich Oberwinder, Pioneer of the Austrian workers´ movement, journalist. 1867 co-founder of the Gumpendorf workers´ educational association, a forerunner of the Austrian Socialist Party, SPÖ
+	first_name = Heinrich
+	last_name = Oberwinder
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	birth_date = 1845.3.14
+	ig_leader = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_social_democrat
+	traits = {
+		cautious
+		meticulous
+		experienced_diplomat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_heinrich_oberwinder
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_trade_unions
+		}
+		earliest_usage_date = 1867.1.1
+		latest_usage_date = 1878.12.31
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_heinrich_oberwinder
+		}
+		fix_variable_error = { variable = converter_heinrich_oberwinder }
+	}
+}
+
+fem_AUS_heinrich_oberwinder = { # Heinrich Oberwinder, Pioneer of the Austrian workers´ movement, journalist. 1867 co-founder of the Gumpendorf workers´ educational association, a forerunner of the Austrian Socialist Party, SPÖ
+	first_name = Heinrike
+	last_name = Oberwinder
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	female = yes
+	birth_date = 1845.3.14
+	ig_leader = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_social_democrat
+	traits = {
+		cautious
+		meticulous
+		experienced_diplomat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_heinrich_oberwinder
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_trade_unions
+		}
+		earliest_usage_date = 1867.1.1
+		latest_usage_date = 1878.12.31
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_heinrich_oberwinder
+		}
+		fix_variable_error = { variable = converter_heinrich_oberwinder }
+	}
+}
+
+# AGITATORS
+REPLACE:AUS_josef_peukert = { # Josef Peukert
+	first_name = Josef
+	last_name = Peukert
+	historical = yes
+	is_agitator = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	interest_group = ig_trade_unions
+	ideology = ideology_anarchist
+	birth_date = 1855.1.22
+	traits = {
+		reckless
+		wrathful
+		firebrand
+	}
+	agitator_usage = {
+		country_trigger = {
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_josef_peukert
+				}
+			}
+			has_dlc_feature = ip3_content
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_trade_unions
+		}
+		earliest_usage_date = 1880.1.1
+		latest_usage_date = 1910.3.3
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_josef_peukert
+		}
+		fix_variable_error = { variable = converter_josef_peukert }
+	}
+}
+
+fem_AUS_josef_peukert = { # Josef Peukert
+	first_name = Josepha
+	last_name = Peukert
+	historical = yes
+	is_agitator = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	interest_group = ig_trade_unions
+	ideology = ideology_anarchist
+	female = yes
+	birth_date = 1855.1.22
+	traits = {
+		reckless
+		wrathful
+		firebrand
+	}
+	agitator_usage = {
+		country_trigger = {
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_josef_peukert
+				}
+			}
+			has_dlc_feature = ip3_content
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_trade_unions
+		}
+		earliest_usage_date = 1880.1.1
+		latest_usage_date = 1910.3.3
+		chance = 50
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_josef_peukert
+		}
+		fix_variable_error = { variable = converter_josef_peukert }
+	}
+}
+
+
+# GENERALS
+REPLACE:AUS_general_albrecht_dominik = { # One of the chief military advisors of Emperor Francis Joseph I, As Inspector General for 36 years, he was an old-fashioned bureaucrat who largely controlled the Austro-Hungarian Army and delayed modernization
+	first_name = Albrecht
+	last_name = Dominik
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	ideology = ideology_royalist
+	interest_group = ig_armed_forces
+	birth_date = 1817.8.3
+	commander_rank = commander_rank_2
+	is_general = yes
+	traits = {
+		compliant
+		persistent
+		basic_defensive_strategist
+	}
+	commander_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_albrecht_dominik
+				}
+			}
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1895.2.18
+		chance = 75
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_albrecht_dominik
+		}
+		fix_variable_error = { variable = converter_general_albrecht_dominik }
+	}
+}
+
+fem_AUS_general_albrecht_dominik = { # One of the chief military advisors of Emperor Francis Joseph I, As Inspector General for 36 years, he was an old-fashioned bureaucrat who largely controlled the Austro-Hungarian Army and delayed modernization
+	first_name = Bertina
+	last_name = Dominik
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	ideology = ideology_royalist
+	interest_group = ig_armed_forces
+	female = yes
+	birth_date = 1817.8.3
+	commander_rank = commander_rank_2
+	is_general = yes
+	traits = {
+		compliant
+		persistent
+		basic_defensive_strategist
+	}
+	commander_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_general_albrecht_dominik
+				}
+			}
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1895.2.18
+		chance = 75
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_general_albrecht_dominik
+		}
+		fix_variable_error = { variable = converter_general_albrecht_dominik }
+	}
+}
+
+# ADMIRALS
+REPLACE:AUS_admiral_anton_haus = { # Austrian naval officer
+	first_name = Anton
+	last_name = Haus
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	ideology = ideology_authoritarian
+	interest_group = ig_armed_forces
+	birth_date = 1851.6.13
+	commander_rank = commander_rank_2
+	is_admiral = yes
+	traits = {
+		reserved
+		experienced_naval_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_admiral_anton_haus
+				}
+			}
+		}
+		role = admiral
+		earliest_usage_date = 1869.1.1
+		latest_usage_date = 1917.2.2
+		chance = 75
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_admiral_anton_haus
+		}
+		fix_variable_error = { variable = converter_admiral_anton_haus }
+	}
+}
+
+fem_AUS_admiral_anton_haus = { # Austrian naval officer
+	first_name = Teuna
+	last_name = Haus
+	historical = yes
+	culture = cu:south_german
+	religion = rel:catholic
+	ideology = ideology_authoritarian
+	interest_group = ig_armed_forces
+	female = yes
+	birth_date = 1851.6.13
+	commander_rank = commander_rank_2
+	is_admiral = yes
+	traits = {
+		reserved
+		experienced_naval_commander
+	}
+	commander_usage = {
+		country_trigger = {
+			has_dlc_feature = ip3_content
+			uses_aus_ger_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_admiral_anton_haus
+				}
+			}
+		}
+		role = admiral
+		earliest_usage_date = 1869.1.1
+		latest_usage_date = 1917.2.2
+		chance = 75
+	}
+	on_created = {
+		converter_standard_template_effect = { TARGET = cu:south_german }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_admiral_anton_haus
+		}
+		fix_variable_error = { variable = converter_admiral_anton_haus }
 	}
 }

@@ -2,7 +2,7 @@
 # USA - United States of America
 
 # United States - USA
-usa_lincoln_character_template = {
+REPLACE:usa_lincoln_character_template = {
 	first_name = Abraham
 	last_name = Lincoln
 	historical = yes
@@ -110,14 +110,14 @@ fem_usa_lincoln_character_template = {
 		fix_variable_error = { variable = converter_lincoln }
 	}
 }
-usa_roosevelt_character_template = {
+REPLACE:usa_roosevelt_character_template = {
 	first_name = Theodore
 	last_name = Roosevelt
 	historical = yes
 	culture = cu:yankee
 	female = no
 	religion = rel:protestant
-    ig_leader = yes
+	ig_leader = yes
 	ideology = ideology_reformer
 	interest_group = ig_industrialists
 	birth_date = 1858.8.28
@@ -173,7 +173,7 @@ fem_usa_roosevelt_character_template = {
 	culture = cu:yankee
 	female = yes
 	religion = rel:protestant
-    ig_leader = yes
+	ig_leader = yes
 	ideology = ideology_reformer
 	interest_group = ig_industrialists
 	birth_date = 1858.8.28
@@ -222,14 +222,14 @@ fem_usa_roosevelt_character_template = {
 		fix_variable_error = { variable = converter_roosevelt }
 	}
 }
-usa_jp_morgan_character_template = {
+REPLACE:usa_jp_morgan_character_template = {
 	first_name = John_Pierpont
 	last_name = Morgan
 	historical = yes
 	culture = cu:yankee
 	female = no
 	religion = rel:protestant
-    ig_leader = yes
+	ig_leader = yes
 	ideology = ideology_moderate
 	interest_group = ig_industrialists
 	birth_date = 1835.11.25
@@ -273,7 +273,7 @@ fem_usa_jp_morgan_character_template = {
 	culture = cu:yankee
 	female = yes
 	religion = rel:protestant
-    ig_leader = yes
+	ig_leader = yes
 	ideology = ideology_moderate
 	interest_group = ig_industrialists
 	birth_date = 1835.11.25
@@ -310,7 +310,7 @@ fem_usa_jp_morgan_character_template = {
 		fix_variable_error = { variable = converter_jp_morgan }
 	}
 }
-usa_thomas_edison_character_template = {
+REPLACE:usa_thomas_edison_character_template = {
 	first_name = Thomas
 	last_name = Edison
 	historical = yes
@@ -326,8 +326,8 @@ usa_thomas_edison_character_template = {
 		engineer
 		imperious
 	}
-    executive_usage = {
-    	country_trigger = {
+	executive_usage = {
+		country_trigger = {
 			should_have_male_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -336,15 +336,15 @@ usa_thomas_edison_character_template = {
 				}
 			}
 			uses_midwest_yankee_characters = yes
-            has_dlc_feature = mp1_content
+			has_dlc_feature = mp1_content
 		}
 		company_trigger = {
 			is_company_type = company_type:company_general_electric
 		}
-        earliest_usage_date = 1878.1.1
-        latest_usage_date = 1930.1.1
+		earliest_usage_date = 1878.1.1
+		latest_usage_date = 1930.1.1
 		chance = 100
-    }
+	}
 	interest_group_leader_usage = {
 		country_trigger = {
 			should_have_male_characters = yes
@@ -372,7 +372,7 @@ usa_thomas_edison_character_template = {
 				owner = {
 					has_technology_researched = feminism
 					NOT = {
-						has_law = law_type:law_womens_suffrage
+						has_law_or_variant = law_type:law_womens_suffrage
 					}
 				}
 			}
@@ -401,8 +401,8 @@ fem_usa_thomas_edison_character_template = {
 		engineer
 		imperious
 	}
-    executive_usage = {
-    	country_trigger = {
+	executive_usage = {
+		country_trigger = {
 			should_have_female_characters = yes
 			NOT = {
 				is_target_in_global_variable_list = {
@@ -411,15 +411,15 @@ fem_usa_thomas_edison_character_template = {
 				}
 			}
 			uses_midwest_yankee_characters = yes
-            has_dlc_feature = mp1_content
+			has_dlc_feature = mp1_content
 		}
 		company_trigger = {
 			is_company_type = company_type:company_general_electric
 		}
-        earliest_usage_date = 1878.1.1
-        latest_usage_date = 1930.1.1
+		earliest_usage_date = 1878.1.1
+		latest_usage_date = 1930.1.1
 		chance = 100
-    }
+	}
 	interest_group_leader_usage = {
 		country_trigger = {
 			should_have_female_characters = yes
@@ -447,7 +447,7 @@ fem_usa_thomas_edison_character_template = {
 				owner = {
 					has_technology_researched = feminism
 					NOT = {
-						has_law = law_type:law_womens_suffrage
+						has_law_or_variant = law_type:law_womens_suffrage
 					}
 				}
 			}
@@ -461,7 +461,7 @@ fem_usa_thomas_edison_character_template = {
 	}
 }
 
-uom_mkc = {
+REPLACE:uom_mkc = {
 	first_name = "Michael"
 	last_name = "Kundak"
 	historical = yes
@@ -501,7 +501,7 @@ uom_mkc = {
 			limit = {
 				owner = {
 					NOT = {
-						has_law = law_type:law_slavery_banned
+						has_law_or_variant = law_type:law_slavery_banned
 					}
 				}
 			}
@@ -512,8 +512,8 @@ uom_mkc = {
 				owner = {
 					has_technology_researched = socialism
 					OR = {
-						has_law = law_type:law_no_workers_rights
-						NOT = { has_law = law_type:law_universal_suffrage }
+						has_law_or_variant = law_type:law_no_workers_rights
+						NOT = { has_law_or_variant = law_type:law_universal_suffrage }
 					}
 				}
 			}
@@ -569,7 +569,7 @@ fem_uom_mkc = {
 			limit = {
 				owner = {
 					NOT = {
-						has_law = law_type:law_slavery_banned
+						has_law_or_variant = law_type:law_slavery_banned
 					}
 				}
 			}
@@ -580,8 +580,8 @@ fem_uom_mkc = {
 				owner = {
 					has_technology_researched = socialism
 					OR = {
-						has_law = law_type:law_no_workers_rights
-						NOT = { has_law = law_type:law_universal_suffrage }
+						has_law_or_variant = law_type:law_no_workers_rights
+						NOT = { has_law_or_variant = law_type:law_universal_suffrage }
 					}
 				}
 			}
@@ -598,7 +598,7 @@ fem_uom_mkc = {
 	}
 }
 
-usa_mark_twain_character_template = { #Mark Twain
+REPLACE:usa_mark_twain_character_template = { #Mark Twain
 	first_name = Samuel
 	last_name = Clemens
 	historical = yes
@@ -641,7 +641,7 @@ usa_mark_twain_character_template = { #Mark Twain
 			limit = {
 				owner = {
 					NOT = {
-						has_law = law_type:law_slavery_banned
+						has_law_or_variant = law_type:law_slavery_banned
 					}
 				}
 			}
@@ -662,7 +662,7 @@ usa_mark_twain_character_template = { #Mark Twain
 				owner = {
 					has_technology_researched = feminism
 					NOT = {
-						has_law = law_type:law_womens_suffrage
+						has_law_or_variant = law_type:law_womens_suffrage
 					}
 				}
 			}
@@ -721,7 +721,7 @@ fem_usa_mark_twain_character_template = { #Mark Twain
 			limit = {
 				owner = {
 					NOT = {
-						has_law = law_type:law_slavery_banned
+						has_law_or_variant = law_type:law_slavery_banned
 					}
 				}
 			}
@@ -742,7 +742,7 @@ fem_usa_mark_twain_character_template = { #Mark Twain
 				owner = {
 					has_technology_researched = feminism
 					NOT = {
-						has_law = law_type:law_womens_suffrage
+						has_law_or_variant = law_type:law_womens_suffrage
 					}
 				}
 			}
@@ -759,9 +759,369 @@ fem_usa_mark_twain_character_template = { #Mark Twain
 	}
 }
 
+REPLACE:usa_henry_ford = {
+	first_name = Henry
+	last_name = Ford
+	historical = yes
+	culture = cu:yankee
+	female = no
+	religion = protestant
+	ideology = ideology_ethno_nationalist
+	interest_group = ig_industrialists
+	birth_date = 1863.7.30
+	dna = dna_henry_ford
+	traits = {
+		bigoted
+		ambitious
+		imperious
+		engineer
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_henry_ford
+				}
+			}
+			uses_midwest_yankee_characters = yes
+			has_company = company_type:company_ford_motor
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_industrialists
+			NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+			}
+		}
+		earliest_usage_date = 1896.6.4 # Ford Quadricycle runs
+		latest_usage_date = 1936.1.1
+		chance = 25
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_henry_ford
+				}
+			}
+			uses_midwest_yankee_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_industrialists
+		}
+		earliest_usage_date = 1908.8.12 # first production Model T
+		latest_usage_date = 1935.12.31
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_mw_yankee_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_henry_ford
+		}
+		fix_variable_error = { variable = converter_henry_ford }
+	}
+}
+fem_usa_henry_ford = {
+	first_name = Harriet
+	last_name = Ford
+	historical = yes
+	culture = cu:yankee
+	female = yes
+	religion = protestant
+	ideology = ideology_ethno_nationalist
+	interest_group = ig_industrialists
+	birth_date = 1863.7.30
+	dna = dna_henry_ford
+	traits = {
+		bigoted
+		ambitious
+		imperious
+		engineer
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_henry_ford
+				}
+			}
+			uses_midwest_yankee_characters = yes
+			has_company = company_type:company_ford_motor
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_industrialists
+			NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+			}
+		}
+		earliest_usage_date = 1896.6.4 # Ford Quadricycle runs
+		latest_usage_date = 1936.1.1
+		chance = 25
+	}
+	agitator_usage = {
+		country_trigger = {
+			has_dlc_feature = voice_of_the_people_content
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_henry_ford
+				}
+			}
+			uses_midwest_yankee_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			is_interest_group_type = ig_industrialists
+		}
+		earliest_usage_date = 1908.8.12 # first production Model T
+		latest_usage_date = 1935.12.31
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_mw_yankee_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_henry_ford
+		}
+		fix_variable_error = { variable = converter_henry_ford }
+	}
+}
+
+REPLACE:csa_jefferson_davis_template = {
+	first_name = Jefferson
+	last_name = Davis
+	historical = yes
+	culture = cu:dixie
+	female = no
+	religion = protestant
+	ideology = ideology_slaver
+	interest_group = ig_armed_forces
+	birth_date = 1808.6.3
+	traits = {
+		celebrity_commander
+		explorer
+		brave
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jefferson_davis
+				}
+			}
+			uses_dixie_traitor_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_armed_forces
+				is_interest_group_type = ig_landowners
+			}
+			NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}
+		earliest_usage_date = 1845.12.8 # elected representative of Mississippi
+		latest_usage_date = 1867.5.13 # released from prison
+		chance = 50
+	}
+	on_created = {
+		set_variable = {
+			name = historical_csa
+		}
+		converter_colonial_template_effect = { TARGET = global_dixie_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jefferson_davis
+		}
+		fix_variable_error = { variable = converter_jefferson_davis }
+	}
+}
+fem_csa_jefferson_davis_template = {
+	first_name = Sally
+	last_name = Davis
+	historical = yes
+	culture = cu:dixie
+	female = yes
+	religion = protestant
+	ideology = ideology_slaver
+	interest_group = ig_armed_forces
+	birth_date = 1808.6.3
+	traits = {
+		celebrity_commander
+		explorer
+		brave
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_jefferson_davis
+				}
+			}
+			uses_dixie_traitor_characters = yes
+		}
+		interest_group_trigger = {
+			is_marginal = no
+			OR = {
+				is_interest_group_type = ig_armed_forces
+				is_interest_group_type = ig_landowners
+			}
+			NOR = {
+				has_variable = communist_ig_var
+				has_variable = chose_vanguardism
+				has_variable = chose_fascism
+				has_variable = chose_conservatism
+				has_variable = chose_ethno_nationalism
+			}
+		}
+		earliest_usage_date = 1845.12.8 # elected representative of Mississippi
+		latest_usage_date = 1867.5.13 # released from prison
+		chance = 50
+	}
+	on_created = {
+		set_variable = {
+			name = historical_csa
+		}
+		converter_colonial_template_effect = { TARGET = global_dixie_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_jefferson_davis
+		}
+		fix_variable_error = { variable = converter_jefferson_davis }
+	}
+}
+
+# Cristobal Aguilar, last Hispanic mayor of Los Angeles until the election of Antonio Villaraigosa over a century later
+# Can appear for any country that owns and has incorporated California (so, mostly likely MEX or USA) and isn't horrible against Californios
+# responsible for the creation of Pershing Square (then called La Plaza Abaja) and maintaining public control of LA's growing waterworks system
+REPLACE:usa_cristobal_aguilar = {
+	first_name = "Cristobal_2"
+	last_name = "Aguilar"
+	historical = yes
+	culture = cu:mexican # Californio
+	female = no
+	religion = rel:catholic
+	ig_leader = yes
+	ideology = ideology_moderate
+	interest_group = ig_petty_bourgeoisie # Was part of the one of wealthiest landowner families in California at one point, but also he was a mayor and mayors are peak PB, right?
+	birth_date = 1814.7.5 # Wikipedia says 1816 with no specific birthdate and no citation, but findagrave lists 5 Jul 1814 and it looks like that was done by a guy who actually read the records of the Old Calvary Cemetery where Aguilar was buried, so I'm going with that
+	traits = {
+		innovative
+		meticulous
+		master_bureaucrat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_cristobal_aguilar
+				}
+			}
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_CALIFORNIA
+			}
+
+			#country_average_cultural_acceptance = {		##Ignoring this because we have no way of knowing what Mexican cultures will exist
+			#	target = cu:mexican
+			#	value >= acceptance_status_4 # Mexico should always pass this check. USA... sometimes.
+			#}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+		earliest_usage_date = 1850.7.3 # Beginning of first term as City Council member after American annexation of California
+		latest_usage_date = 1873.12.31 # Beginning of last elected role, served until 1878. Died April 11th, 1886
+		chance = 10 # small chance
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_mexican_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_cristobal_aguilar
+		}
+		fix_variable_error = { variable = converter_cristobal_aguilar }
+	}
+}
+fem_usa_cristobal_aguilar = {
+	first_name = "Cristina"
+	last_name = "Aguilar"
+	historical = yes
+	culture = cu:mexican # Californio
+	female = yes
+	religion = rel:catholic
+	ig_leader = yes
+	ideology = ideology_moderate
+	interest_group = ig_petty_bourgeoisie # Was part of the one of wealthiest landowner families in California at one point, but also he was a mayor and mayors are peak PB, right?
+	birth_date = 1814.7.5 # Wikipedia says 1816 with no specific birthdate and no citation, but findagrave lists 5 Jul 1814 and it looks like that was done by a guy who actually read the records of the Old Calvary Cemetery where Aguilar was buried, so I'm going with that
+	traits = {
+		innovative
+		meticulous
+		master_bureaucrat
+	}
+	interest_group_leader_usage = {
+		country_trigger = {
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_cristobal_aguilar
+				}
+			}
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_CALIFORNIA
+			}
+
+			#country_average_cultural_acceptance = {		##Ignoring this because we have no way of knowing what Mexican cultures will exist
+			#	target = cu:mexican
+			#	value >= acceptance_status_4 # Mexico should always pass this check. USA... sometimes.
+			#}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_petty_bourgeoisie
+		}
+		earliest_usage_date = 1850.7.3 # Beginning of first term as City Council member after American annexation of California
+		latest_usage_date = 1873.12.31 # Beginning of last elected role, served until 1878. Died April 11th, 1886
+		chance = 10 # small chance
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_mexican_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_cristobal_aguilar
+		}
+		fix_variable_error = { variable = converter_cristobal_aguilar }
+	}
+}
+
 ## Commanders ##
 
-usa_general_jesup = {
+REPLACE:usa_general_jesup = {
 	first_name = Thomas
 	last_name = Jesup
 	historical = yes
@@ -837,7 +1197,7 @@ fem_usa_general_jesup = {
 		fix_variable_error = { variable = converter_jesup }
 	}
 }
-usa_admiral_shubrick = {
+REPLACE:usa_admiral_shubrick = {
 	first_name = William
 	last_name = Shubrick
 	historical = yes
@@ -913,7 +1273,7 @@ fem_usa_admiral_shubrick = {
 		fix_variable_error = { variable = converter_shubrick }
 	}
 }
-usa_admiral_dewey = {
+REPLACE:usa_admiral_dewey = {
 	first_name = George
 	last_name = Dewey
 	historical = yes
@@ -997,11 +1357,11 @@ fem_usa_admiral_dewey = {
 		fix_variable_error = { variable = converter_dewey }
 	}
 }
-usa_admiral_farragut = {
+REPLACE:usa_admiral_farragut = {
 	first_name = David
 	last_name = Farragut
 	historical = yes
-	culture = cu:dixie # NB Southern Unionist, regarded seccessionists as traitors
+	culture = cu:dixie # NB Southern Unionist, regarded secessionists as traitors
 	female = no
 	religion = rel:protestant
 	ideology = ideology_moderate
@@ -1043,7 +1403,7 @@ fem_usa_admiral_farragut = {
 	first_name = Bethsabee
 	last_name = Farragut
 	historical = yes
-	culture = cu:dixie # NB Southern Unionist, regarded seccessionists as traitors
+	culture = cu:dixie # NB Southern Unionist, regarded secessionists as traitors
 	female = yes
 	religion = rel:protestant
 	ideology = ideology_moderate
@@ -1081,7 +1441,7 @@ fem_usa_admiral_farragut = {
 		fix_variable_error = { variable = converter_farragut }
 	}
 }
-usa_admiral_perry = {
+REPLACE:usa_admiral_perry = {
 	first_name = Matthew
 	last_name = Perry
 	historical = yes
@@ -1167,7 +1527,7 @@ fem_usa_admiral_perry = {
 }
 
 
-usa_admiral_buchanan = {
+REPLACE:usa_admiral_buchanan = {
 	first_name = Franklin
 	last_name = Buchanan
 	historical = yes
@@ -1201,6 +1561,9 @@ usa_admiral_buchanan = {
 		chance = 50
 	}
 	on_created = {
+		set_variable = {
+			name = historical_csa
+		}
 		converter_colonial_template_effect = { TARGET = global_dixie_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
@@ -1243,6 +1606,9 @@ fem_usa_admiral_buchanan = {
 		chance = 50
 	}
 	on_created = {
+		set_variable = {
+			name = historical_csa
+		}
 		converter_colonial_template_effect = { TARGET = global_dixie_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
@@ -1251,7 +1617,7 @@ fem_usa_admiral_buchanan = {
 		fix_variable_error = { variable = converter_buchanan }
 	}
 }
-usa_general_lee = {
+REPLACE:usa_general_lee = {
 	first_name = Robert_E
 	last_name = Lee
 	historical = yes
@@ -1285,6 +1651,9 @@ usa_general_lee = {
 		chance = 50
 	}
 	on_created = {
+		set_variable = {
+			name = historical_csa
+		}
 		converter_colonial_template_effect = { TARGET = global_dixie_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
@@ -1327,6 +1696,9 @@ fem_usa_general_lee = {
 		chance = 50
 	}
 	on_created = {
+		set_variable = {
+			name = historical_csa
+		}
 		converter_colonial_template_effect = { TARGET = global_dixie_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
@@ -1335,7 +1707,7 @@ fem_usa_general_lee = {
 		fix_variable_error = { variable = converter_robert_e_lee }
 	}
 }
-usa_general_jackson = {
+REPLACE:usa_general_jackson = {
 	first_name = Thomas
 	last_name = Jackson
 	historical = yes
@@ -1369,6 +1741,9 @@ usa_general_jackson = {
 		chance = 50
 	}
 	on_created = {
+		set_variable = {
+			name = historical_csa
+		}
 		converter_colonial_template_effect = { TARGET = global_dixie_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
@@ -1411,6 +1786,9 @@ fem_usa_general_jackson = {
 		chance = 50
 	}
 	on_created = {
+		set_variable = {
+			name = historical_csa
+		}
 		converter_colonial_template_effect = { TARGET = global_dixie_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
@@ -1419,7 +1797,7 @@ fem_usa_general_jackson = {
 		fix_variable_error = { variable = converter_stonewall_jackson }
 	}
 }
-usa_general_longstreet = {
+REPLACE:usa_general_longstreet = {
 	first_name = James
 	last_name = Longstreet
 	historical = yes
@@ -1453,6 +1831,9 @@ usa_general_longstreet = {
 		chance = 50
 	}
 	on_created = {
+		set_variable = {
+			name = historical_csa
+		}
 		converter_colonial_template_effect = { TARGET = global_dixie_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
@@ -1495,6 +1876,9 @@ fem_usa_general_longstreet = {
 		chance = 50
 	}
 	on_created = {
+		set_variable = {
+			name = historical_csa
+		}
 		converter_colonial_template_effect = { TARGET = global_dixie_cultures }
 		add_to_global_variable_list = {
 			name = converter_unavailable_unique_characters
@@ -1504,7 +1888,7 @@ fem_usa_general_longstreet = {
 	}
 }
 
-usa_general_sherman = {
+REPLACE:usa_general_sherman = {
 	first_name = William_Tecumseh
 	last_name = Sherman
 	historical = yes
@@ -1589,7 +1973,7 @@ fem_usa_general_sherman = {
 	}
 }
 
-usa_general_chaffee = {
+REPLACE:usa_general_chaffee = {
 	first_name = Adna
 	last_name = Chaffee
 	historical = yes
@@ -1671,7 +2055,7 @@ fem_usa_general_chaffee = {
 		fix_variable_error = { variable = converter_general_chaffee }
 	}
 }
-usa_general_grant = {
+REPLACE:usa_general_grant = {
 	first_name = Ulysses
 	last_name = Grant
 	historical = yes
@@ -1756,7 +2140,7 @@ fem_usa_general_grant = {
 	}
 }
 
-usa_general_pershing = {
+REPLACE:usa_general_pershing = {
 	first_name = John
 	last_name = Pershing
 	historical = yes
@@ -1840,7 +2224,7 @@ fem_usa_general_pershing = {
 		fix_variable_error = { variable = converter_pershing }
 	}
 }
-usa_general_sheridan = {
+REPLACE:usa_general_sheridan = {
 	first_name = Philip
 	last_name = Sheridan
 	historical = yes
@@ -1927,7 +2311,7 @@ fem_usa_general_sheridan = {
 
 ### Executives
 
-USA_william_cramp = { # William Cramp, William Cramp and Sons
+REPLACE:USA_william_cramp = { # William Cramp, William Cramp and Sons
 	first_name = William
 	last_name = Cramp
 	historical = yes
@@ -2012,7 +2396,7 @@ fem_USA_william_cramp = { # William Cramp, William Cramp and Sons
 	}
 }
 
-usa_rockefeller_character_template = {
+REPLACE:usa_rockefeller_character_template = {
 	first_name = John
 	last_name = Rockefeller
 	historical = yes
@@ -2102,7 +2486,7 @@ fem_usa_rockefeller_character_template = {
 	}
 }
 
-usa_carnegie_character_template = {
+REPLACE:usa_carnegie_character_template = {
 	first_name = Andrew
 	last_name = Carnegie
 	historical = yes
@@ -2192,7 +2576,7 @@ fem_usa_carnegie_character_template = {
 	}
 }
 
-usa_samuel_colt = {
+REPLACE:usa_samuel_colt = {
 	first_name = Samuel
 	last_name = Colt
 	historical = yes
@@ -2282,7 +2666,7 @@ fem_usa_samuel_colt = {
 	}
 }
 
-usa_robert_e_lee_wilson = {
+REPLACE:usa_robert_e_lee_wilson = {
 	first_name = Robert_E.Lee
 	last_name = Wilson
 	historical = yes

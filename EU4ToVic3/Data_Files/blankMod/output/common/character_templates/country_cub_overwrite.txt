@@ -1,0 +1,277 @@
+﻿### Cuba character template file ###
+
+# Cuba
+
+REPLACE:CUB_antonio_maceo = {
+	first_name = Antonio
+	last_name = Maceo
+	historical = yes
+	dna = dna_antonio_maceo
+	culture = cu:afro_caribeno
+	noble = no
+	commander_rank = default
+	religion = rel:catholic
+	birth_date = 1845.6.14
+	interest_group = ig_rural_folk
+	ideology = ideology_sovereignist_leader
+	traits = {
+		persistent
+		brave
+		honorable
+		social_bandit
+	}
+	agitator_usage = {
+		country_trigger = {
+			uses_cuba_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_antonio_maceo
+				}
+			}
+			has_dlc_feature = ip4_content
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1868.10.10 # start of the Ten Years' War
+		latest_usage_date = 1895.1.1
+		chance = 50
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_cuba_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_antonio_maceo
+				}
+			}
+			OR = {
+				is_subject = no
+				AND = {
+					is_subject = yes
+					liberty_desire > 50
+				}
+			}
+			has_dlc_feature = ip4_content
+		}
+		role = general
+		earliest_usage_date = 1874.1.1
+		latest_usage_date = 1895.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_african_diaspora_template_effect = { TARGET = global_caribbean_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_antonio_maceo
+		}
+		fix_variable_error = { variable = converter_antonio_maceo }
+		if = {
+			limit = {
+				home_country ?= {
+					is_subject = no
+				}
+			}
+			set_ideology = ideology:ideology_radical # Dios, la Razón y la Virtud
+		}
+	}
+}
+
+fem_CUB_antonio_maceo = {
+	first_name = Antonia
+	last_name = Maceo
+	historical = yes
+	female = yes
+	dna = dna_antonio_maceo
+	culture = cu:afro_caribeno
+	noble = no
+	commander_rank = default
+	religion = rel:catholic
+	birth_date = 1845.6.14
+	interest_group = ig_rural_folk
+	ideology = ideology_sovereignist_leader
+	traits = {
+		persistent
+		brave
+		honorable
+		social_bandit
+	}
+	agitator_usage = {
+		country_trigger = {
+			uses_cuba_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_antonio_maceo
+				}
+			}
+			has_dlc_feature = ip4_content
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1868.10.10 # start of the Ten Years' War
+		latest_usage_date = 1895.1.1
+		chance = 50
+	}
+	commander_usage = {
+		country_trigger = {
+			uses_cuba_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_antonio_maceo
+				}
+			}
+			OR = {
+				is_subject = no
+				AND = {
+					is_subject = yes
+					liberty_desire > 50
+				}
+			}
+			has_dlc_feature = ip4_content
+		}
+		role = general
+		earliest_usage_date = 1874.1.1
+		latest_usage_date = 1895.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_african_diaspora_template_effect = { TARGET = global_caribbean_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_antonio_maceo
+		}
+		fix_variable_error = { variable = converter_antonio_maceo }
+		if = {
+			limit = {
+				home_country ?= {
+					is_subject = no
+				}
+			}
+			set_ideology = ideology:ideology_radical # Dios, la Razón y la Virtud
+		}
+	}
+}
+
+REPLACE:CUB_maximo_gomez = {
+	first_name = Maximo
+	last_name = Gomez
+	historical = yes
+	dna = dna_maximo_gomez
+	culture = cu:caribeno
+	noble = no
+	commander_rank = default
+	religion = rel:catholic
+	birth_date = 1836.11.18
+	interest_group = ig_armed_forces
+	ideology = ideology_liberal_leader
+	traits = {
+		ruthless
+		tactful
+		persistent
+		pillager
+	}
+	commander_usage = {
+		country_trigger = {
+			OR = {
+				AND = {
+					uses_cuba_characters = yes
+					OR = {
+						is_subject = no
+						AND = {
+							is_subject = yes
+							liberty_desire > 50
+						}
+					}
+				}
+				uses_dominican_characters = yes
+			}
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_maximo_gomez
+				}
+			}
+			has_dlc_feature = ip4_content
+		}
+		role = general
+		earliest_usage_date = 1864.1.1
+		latest_usage_date = 1895.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_caribbean_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_maximo_gomez
+		}
+		fix_variable_error = { variable = converter_maximo_gomez }
+	}
+}
+
+fem_CUB_maximo_gomez = {
+	first_name = Maxima
+	last_name = Gomez
+	historical = yes
+	female = yes
+	dna = dna_maximo_gomez
+	culture = cu:caribeno
+	noble = no
+	commander_rank = default
+	religion = rel:catholic
+	birth_date = 1836.11.18
+	interest_group = ig_armed_forces
+	ideology = ideology_liberal_leader
+	traits = {
+		ruthless
+		tactful
+		persistent
+		pillager
+	}
+	commander_usage = {
+		country_trigger = {
+			OR = {
+				AND = {
+					uses_cuba_characters = yes
+					OR = {
+						is_subject = no
+						AND = {
+							is_subject = yes
+							liberty_desire > 50
+						}
+					}
+				}
+				uses_dominican_characters = yes
+			}
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_maximo_gomez
+				}
+			}
+			has_dlc_feature = ip4_content
+		}
+		role = general
+		earliest_usage_date = 1864.1.1
+		latest_usage_date = 1895.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_caribbean_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_maximo_gomez
+		}
+		fix_variable_error = { variable = converter_maximo_gomez }
+	}
+}

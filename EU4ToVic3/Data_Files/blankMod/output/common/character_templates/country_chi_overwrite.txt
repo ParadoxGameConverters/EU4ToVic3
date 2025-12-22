@@ -1,7 +1,7 @@
 ﻿### China - CHI character template file ###
 
 ### Historical Leaders
-chi_gong_character_template = {
+REPLACE:chi_gong_character_template = {
     first_name = Prince_Gong
     last_name = Aisin_Gioro
     historical = yes
@@ -25,10 +25,10 @@ chi_gong_character_template = {
 				}
 			}
 			ruler.culture = { is_target_in_global_variable_list = { name = global_manchu_cultures target = this } }
-            has_law = law_type:law_monarchy
+            has_law_or_variant = law_type:law_monarchy
         }
         interest_group_trigger = {
-            is_marginal = no
+            ig_counts_as_marginal = no
             is_interest_group_type = ig_landowners
             NOR = {
 				has_variable = communist_ig_var
@@ -75,10 +75,10 @@ fem_chi_gong_character_template = {
 				}
 			}
 			ruler.culture = { is_target_in_global_variable_list = { name = global_manchu_cultures target = this } }
-            has_law = law_type:law_monarchy
+            has_law_or_variant = law_type:law_monarchy
         }
         interest_group_trigger = {
-            is_marginal = no
+            ig_counts_as_marginal = no
             is_interest_group_type = ig_landowners
             NOR = {
 				has_variable = communist_ig_var
@@ -101,7 +101,7 @@ fem_chi_gong_character_template = {
 		fix_variable_error = { variable = converter_prince_gong }
 	}
 }
-chi_cixi_template = {
+REPLACE:chi_cixi_template = {
     first_name = Cixi
     last_name = Yehe_Nara
     historical = yes
@@ -127,11 +127,11 @@ chi_cixi_template = {
 				}
 			}
 			ruler.culture = { is_target_in_global_variable_list = { name = global_manchu_cultures target = this } }
-            has_law = law_type:law_monarchy
+            has_law_or_variant = law_type:law_monarchy
             has_dlc_feature = ep1_content
         }
         interest_group_trigger = {
-            is_marginal = no
+            ig_counts_as_marginal = no
             is_interest_group_type = ig_landowners
             NOR = {
                 has_variable = communist_ig_var
@@ -180,11 +180,11 @@ fem_chi_cixi_template = {
 				}
 			}
 			ruler.culture = { is_target_in_global_variable_list = { name = global_manchu_cultures target = this } }
-            has_law = law_type:law_monarchy
+            has_law_or_variant = law_type:law_monarchy
             has_dlc_feature = ep1_content
         }
         interest_group_trigger = {
-            is_marginal = no
+            ig_counts_as_marginal = no
             is_interest_group_type = ig_landowners
             NOR = {
                 has_variable = communist_ig_var
@@ -209,7 +209,7 @@ fem_chi_cixi_template = {
 }
 
 ### Commanders
-chi_admiral_ding_ruchang = {
+REPLACE:chi_admiral_ding_ruchang = {
 	first_name = Ruchang
 	last_name = Ding
 	historical = yes
@@ -289,7 +289,7 @@ fem_chi_admiral_ding_ruchang = {
 		fix_variable_error = { variable = converter_ding_ruchang }
 	}
 }
-chi_admiral_sa_chenbing = {
+REPLACE:chi_admiral_sa_chenbing = {
 	first_name = Chenbing
 	last_name = Sa
 	historical = yes
@@ -369,7 +369,7 @@ fem_chi_admiral_sa_chenbing = {
 		fix_variable_error = { variable = converter_sa_chenbing }
 	}
 }
-chi_general_yuan_shikai = {
+REPLACE:chi_general_yuan_shikai = {
 	first_name = Shikai
 	last_name = Yuan
 	historical = yes
@@ -449,7 +449,7 @@ fem_chi_general_yuan_shikai = {
 		fix_variable_error = { variable = converter_yuan_shikai }
 	}
 }
-chi_general_zeng_guofan = {
+REPLACE:chi_general_zeng_guofan = {
 	first_name = Guofan
 	last_name = Zeng
 	historical = yes
@@ -529,7 +529,7 @@ fem_chi_general_zeng_guofan = {
 		fix_variable_error = { variable = converter_zeng_guofan }
 	}
 }
-chi_general_sengge_rinchen = {
+REPLACE:chi_general_sengge_rinchen = {
 	first_name = Sengge_Rinchen
 	last_name = Borjigin
 	historical = yes
@@ -554,7 +554,7 @@ chi_general_sengge_rinchen = {
 					target = flag:converter_sengge_rinchen
 				}
 			}
-			has_law = law_type:law_monarchy
+			has_law_or_variant = law_type:law_monarchy
 			owns_entire_state_region = STATE_HINGGAN
 		}
 		role = general
@@ -596,7 +596,7 @@ fem_chi_general_sengge_rinchen = {
 					target = flag:converter_sengge_rinchen
 				}
 			}
-			has_law = law_type:law_monarchy
+			has_law_or_variant = law_type:law_monarchy
 			owns_entire_state_region = STATE_HINGGAN
 		}
 		role = general
@@ -616,7 +616,7 @@ fem_chi_general_sengge_rinchen = {
 
 ### Agitators
 
-chi_sun_yat_sen_character_template = {
+REPLACE:chi_sun_yat_sen_character_template = {
     first_name = Sun
 	last_name = Yat_Sen
 	historical = yes
@@ -671,7 +671,7 @@ fem_chi_sun_yat_sen_character_template = {
 
 ### Executives
 
-CHI_zhou_xuexi = { #Zhou Xuexi, Kaiping Mines
+REPLACE:CHI_zhou_xuexi = { #Zhou Xuexi, Kaiping Mines
     first_name = Xuexi
     last_name = Zhou
     historical = yes
@@ -756,7 +756,7 @@ fem_CHI_zhou_xuexi = { #Zhou Xuexi, Kaiping Mines
 	}
 }
 
-CHI_shen_baozhen = { #Shen Baozhen, Foochow Arsenal
+REPLACE:CHI_shen_baozhen = { #Shen Baozhen, Foochow Arsenal
     first_name = Baozhen
     last_name = Shen
     historical = yes
