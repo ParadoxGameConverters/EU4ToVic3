@@ -1,901 +1,8 @@
-﻿### Confederations of Subjects
-america_unite_usa = {
-	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-		capital = { zzz_converter_state_is_in_america = yes }
-		is_subject = yes
-		any_neighbouring_state = {
-			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { zzz_converter_state_is_in_america = yes }
-				is_subject = yes
-				NOT = { THIS = ROOT }
-				top_overlord = {
-					THIS = root.top_overlord
-				}
-			}
-		}
-	}
-
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		top_overlord = {
-			relations:root >= relations_threshold:amicable
-		}
-		NOT = { has_modifier = america_test_modifier }
-		custom_tooltip = {
-			text = unite_america_je_usa_tt
-			any_neighbouring_state = {
-				owner = {
-					is_ai = yes
-					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-					capital = { zzz_converter_state_is_in_america = yes }
-					is_subject = yes
-					NOT = { THIS = ROOT }
-					top_overlord = {
-						THIS = root.top_overlord
-					}
-					this.gdp < root.gdp
-				}
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_america_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.1 popup = yes }
-		}
-		add_modifier = {
-			name = america_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-america_unite_gbr = {
-	is_shown = {
-		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-			capital = { zzz_converter_state_is_in_america = yes }
-			is_ai = yes
-			count >= 2
-		}
-	}
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		NOT = { has_modifier = america_test_modifier }
-		custom_tooltip = {
-			text = gbr_usa_relations_tt
-			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { zzz_converter_state_is_in_america = yes }
-				is_ai = yes
-				relations:root >= relations_threshold:amicable
-				count >= 2
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_america_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.2 popup = yes }
-		}
-		add_modifier = {
-			name = america_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-california_unite_cal = {
-	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
-		capital = { zzz_converter_state_is_in_california = yes }
-		is_subject = yes
-		any_neighbouring_state = {
-			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { zzz_converter_state_is_in_california = yes }
-				is_ai = yes
-				is_subject = yes
-				NOT = { THIS = ROOT }
-				top_overlord = {
-					THIS = root.top_overlord
-				}
-			}
-		}
-	}
-
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		top_overlord = {
-			relations:root >= relations_threshold:amicable
-		}
-		NOT = { has_modifier = california_test_modifier }
-		custom_tooltip = {
-			text = unite_california_je_cal_tt
-			any_neighbouring_state = {
-				owner = {
-					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-					capital = { zzz_converter_state_is_in_california = yes }
-					is_ai = yes
-					is_subject = yes
-					NOT = { THIS = ROOT }
-					top_overlord = {
-						THIS = root.top_overlord
-					}
-					this.gdp < root.gdp
-				}
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_california_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.3 popup = yes }
-		}
-		add_modifier = {
-			name = california_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-california_unite_gbr = {
-	is_shown = {
-		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-			capital = { zzz_converter_state_is_in_california = yes }
-			is_ai = yes
-			count >= 2
-		}
-	}
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		NOT = { has_modifier = california_test_modifier }
-		custom_tooltip = {
-			text = gbr_cal_relations_tt
-			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { zzz_converter_state_is_in_california = yes }
-				is_ai = yes
-				relations:root >= relations_threshold:amicable
-				count >= 2
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_california_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.4 popup = yes }
-		}
-		add_modifier = {
-			name = california_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-mexico_unite_mex = {
-	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-		capital = { zzz_converter_state_is_in_mexico = yes }
-		is_subject = yes
-		any_neighbouring_state = {
-			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { zzz_converter_state_is_in_mexico = yes }
-				is_subject = yes
-				NOT = { THIS = ROOT }
-				top_overlord = {
-					THIS = root.top_overlord
-				}
-			}
-		}
-	}
-
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		top_overlord = {
-			relations:root >= relations_threshold:amicable
-		}
-		NOT = { has_modifier = mexico_test_modifier }
-		custom_tooltip = {
-			text = unite_mexico_je_mex_tt
-			any_neighbouring_state = {
-				owner = {
-					is_ai = yes
-					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-					capital = { zzz_converter_state_is_in_mexico = yes }
-					is_subject = yes
-					NOT = { THIS = ROOT }
-					top_overlord = {
-						THIS = root.top_overlord
-					}
-					this.gdp < root.gdp
-				}
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_mexico_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.9 popup = yes }
-		}
-		add_modifier = {
-			name = mexico_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-mexico_unite_gbr = {
-	is_shown = {
-		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-			capital = { zzz_converter_state_is_in_mexico = yes }
-			is_ai = yes
-			count >= 2
-		}
-	}
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		NOT = { has_modifier = mexico_test_modifier }
-		custom_tooltip = {
-			text = gbr_mex_relations_tt
-			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { zzz_converter_state_is_in_mexico = yes }
-				is_ai = yes
-				relations:root >= relations_threshold:amicable
-				count >= 2
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_mexico_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.10 popup = yes }
-		}
-		add_modifier = {
-			name = mexico_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-colombia_unite_gco = {
-	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-		capital = { zzz_converter_state_is_in_gran_colombia = yes }
-		is_subject = yes
-		any_neighbouring_state = {
-			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { zzz_converter_state_is_in_gran_colombia = yes }
-				is_subject = yes
-				NOT = { THIS = ROOT }
-				top_overlord = {
-					THIS = root.top_overlord
-				}
-			}
-		}
-	}
-
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		top_overlord = {
-			relations:root >= relations_threshold:amicable
-		}
-		NOT = { has_modifier = colombia_test_modifier }
-		custom_tooltip = {
-			text = unite_colombia_je_gco_tt
-			any_neighbouring_state = {
-				owner = {
-					is_ai = yes
-					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-					capital = { zzz_converter_state_is_in_gran_colombia = yes }
-					is_subject = yes
-					NOT = { THIS = ROOT }
-					top_overlord = {
-						THIS = root.top_overlord
-					}
-					this.gdp < root.gdp
-				}
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_colombia_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.11 popup = yes }
-		}
-		add_modifier = {
-			name = colombia_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-colombia_unite_gbr = {
-	is_shown = {
-		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-			capital = { zzz_converter_state_is_in_gran_colombia = yes }
-			is_ai = yes
-			count >= 2
-		}
-	}
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		NOT = { has_modifier = colombia_test_modifier }
-		custom_tooltip = {
-			text = gbr_gco_relations_tt
-			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { zzz_converter_state_is_in_gran_colombia = yes }
-				is_ai = yes
-				relations:root >= relations_threshold:amicable
-				count >= 2
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_colombia_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.12 popup = yes }
-		}
-		add_modifier = {
-			name = colombia_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-peru_unite_peu = {
-	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-		capital = { region = sr:region_andes }
-		is_subject = yes
-		any_neighbouring_state = {
-			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { region = sr:region_andes }
-				is_ai = yes
-				is_subject = yes
-				NOT = { THIS = ROOT }
-				top_overlord = {
-					THIS = root.top_overlord
-				}
-			}
-		}
-	}
-
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		top_overlord = {
-			relations:root >= relations_threshold:amicable
-		}
-		NOT = { has_modifier = peru_test_modifier }
-		custom_tooltip = {
-			text = unite_peru_je_peu_tt
-			any_neighbouring_state = {
-				owner = {
-					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-					capital = { region = sr:region_andes }
-					is_ai = yes
-					is_subject = yes
-					NOT = { THIS = ROOT }
-					top_overlord = {
-						THIS = root.top_overlord
-					}
-					this.gdp < root.gdp
-				}
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_peru_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.17 popup = yes }
-		}
-		add_modifier = {
-			name = peru_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-peru_unite_gbr = {
-	is_shown = {
-		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-			capital = { region = sr:region_andes }
-			is_ai = yes
-			count >= 2
-		}
-	}
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		NOT = { has_modifier = peru_test_modifier }
-		custom_tooltip = {
-			text = gbr_peu_relations_tt
-			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { region = sr:region_andes }
-				is_ai = yes
-				relations:root >= relations_threshold:amicable
-				count >= 2
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_peru_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.18 popup = yes }
-		}
-		add_modifier = {
-			name = peru_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-brazil_unite_brz = {
-	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-		capital = { region = sr:region_brazil }
-		is_subject = yes
-		any_neighbouring_state = {
-			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { region = sr:region_brazil }
-				is_subject = yes
-				NOT = { THIS = ROOT }
-				top_overlord = {
-					THIS = root.top_overlord
-				}
-			}
-		}
-	}
-
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		top_overlord = {
-			relations:root >= relations_threshold:amicable
-		}
-		NOT = { has_modifier = brazil_test_modifier }
-		custom_tooltip = {
-			text = unite_brazil_je_brz_tt
-			any_neighbouring_state = {
-				owner = {
-					is_ai = yes
-					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-					capital = { region = sr:region_brazil }
-					is_subject = yes
-					NOT = { THIS = ROOT }
-					top_overlord = {
-						THIS = root.top_overlord
-					}
-					this.gdp < root.gdp
-				}
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_brazil_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.19 popup = yes }
-		}
-		add_modifier = {
-			name = brazil_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-brazil_unite_gbr = {
-	is_shown = {
-		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-			capital = { region = sr:region_brazil }
-			is_ai = yes
-			count >= 2
-		}
-	}
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		NOT = { has_modifier = brazil_test_modifier }
-		custom_tooltip = {
-			text = gbr_brz_relations_tt
-			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { region = sr:region_brazil }
-				is_ai = yes
-				relations:root >= relations_threshold:amicable
-				count >= 2
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_brazil_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.20 popup = yes }
-		}
-		add_modifier = {
-			name = brazil_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-argentina_unite_arg = {
-	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-		capital = { zzz_converter_state_is_in_argentina = yes }
-		is_subject = yes
-		any_neighbouring_state = {
-			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { zzz_converter_state_is_in_argentina = yes }
-				is_ai = yes
-				is_subject = yes
-				NOT = { THIS = ROOT }
-				top_overlord = {
-					THIS = root.top_overlord
-				}
-			}
-		}
-	}
-
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		top_overlord = {
-			relations:root >= relations_threshold:amicable
-		}
-		NOT = { has_modifier = argentina_test_modifier }
-		custom_tooltip = {
-			text = unite_argentina_je_arg_tt
-			any_neighbouring_state = {
-				owner = {
-					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-					capital = { zzz_converter_state_is_in_argentina = yes }
-					is_ai = yes
-					is_subject = yes
-					NOT = { THIS = ROOT }
-					top_overlord = {
-						THIS = root.top_overlord
-					}
-					this.gdp < root.gdp
-				}
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_argentina_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.25 popup = yes }
-		}
-		add_modifier = {
-			name = argentina_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-argentina_unite_gbr = {
-	is_shown = {
-		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-			capital = { zzz_converter_state_is_in_argentina = yes }
-			is_ai = yes
-			count >= 2
-		}
-	}
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		NOT = { has_modifier = argentina_test_modifier }
-		custom_tooltip = {
-			text = gbr_arg_relations_tt
-			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { zzz_converter_state_is_in_argentina = yes }
-				is_ai = yes
-				relations:root >= relations_threshold:amicable
-				count >= 2
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_argentina_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.26 popup = yes }
-		}
-		add_modifier = {
-			name = argentina_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-cape_unite_saf = {
-	is_shown = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-		capital = { region = sr:region_southern_africa }
-		is_subject = yes
-		any_neighbouring_state = {
-			owner = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { region = sr:region_southern_africa }
-				is_ai = yes
-				is_subject = yes
-				NOT = { THIS = ROOT }
-				top_overlord = {
-					THIS = root.top_overlord
-				}
-			}
-		}
-	}
-
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		top_overlord = {
-			relations:root >= relations_threshold:amicable
-		}
-		NOT = { has_modifier = cape_test_modifier }
-		custom_tooltip = {
-			text = unite_cape_je_saf_tt
-			any_neighbouring_state = {
-				owner = {
-					relations:root >= relations_threshold:amicable
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-					capital = { region = sr:region_southern_africa }
-					is_ai = yes
-					is_subject = yes
-					NOT = { THIS = ROOT }
-					top_overlord = {
-						THIS = root.top_overlord
-					}
-					this.gdp < root.gdp
-				}
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_cape_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.27 popup = yes }
-		}
-		add_modifier = {
-			name = cape_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-cape_unite_gbr = {
-	is_shown = {
-		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-			capital = { region = sr:region_southern_africa }
-			is_ai = yes
-			count >= 2
-		}
-	}
-	possible = {
-		is_at_war = no
-		has_technology_researched = nationalism
-		NOT = { has_modifier = cape_test_modifier }
-		custom_tooltip = {
-			text = gbr_saf_relations_tt
-			any_subject_or_below = {
-				any_primary_culture = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
-				capital = { region = sr:region_southern_africa }
-				is_ai = yes
-				relations:root >= relations_threshold:amicable
-				count >= 2
-			}
-		}
-	}
-	when_taken = {
-		custom_tooltip = unite_cape_tt
-		hidden_effect = {
-			trigger_event = { id = zzz_cc_confederation.28 popup = yes }
-		}
-		add_modifier = {
-			name = cape_test_modifier
-			months = short_modifier_time
-		}
-	}
-
-	ai_chance = {
-		value = 0
-		if = {
-			limit = {
-				has_technology_researched = pan-nationalism
-			}
-			add = 100
-		}
-	}
-}
-
-### Independent Formation of Cultural Union
+﻿### Independent Formation of Cultural Union
 converter_form_canada = {		##Since you can't change country definitions during gameplay, for some reason
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
-		capital = { zzz_converter_state_is_in_canada = yes }
+		is_in_geographic_region = geographic_region_converter_colonial_canada
 		NOT = { exists = c:CAN }
 		is_subject = no
 	}
@@ -931,7 +38,7 @@ converter_form_canada = {		##Since you can't change country definitions during g
 					c:CAN = { remove_primary_culture = prev }
 				}
 				every_scope_state = {
-					limit = { zzz_converter_state_is_in_canada = yes }
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_canada }
 					every_scope_pop = {
 						limit = {
 							culture = {
@@ -954,7 +61,7 @@ converter_form_canada = {		##Since you can't change country definitions during g
 converter_form_america = {		##Since you can't change country definitions during gameplay, for some reason
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
-		capital = { zzz_converter_state_is_in_america = yes }
+		is_in_geographic_region = geographic_region_converter_colonial_america
 		NOT = { exists = c:USA }
 		is_subject = no
 	}
@@ -1013,7 +120,7 @@ converter_form_america = {		##Since you can't change country definitions during 
 					c:USA = { remove_primary_culture = prev }
 				}
 				every_scope_state = {
-					limit = { zzz_converter_state_is_in_america = yes }
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_america }
 					every_scope_pop = {
 						limit = {
 							culture = {
@@ -1036,7 +143,7 @@ converter_form_america = {		##Since you can't change country definitions during 
 converter_form_california = {		##Since you can't change country definitions during gameplay, for some reason
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
-		capital = { zzz_converter_state_is_in_california = yes }
+		is_in_geographic_region = geographic_region_converter_colonial_california
 		NOT = { exists = c:CAL }
 		is_subject = no
 	}
@@ -1045,7 +152,7 @@ converter_form_california = {		##Since you can't change country definitions duri
 		is_at_war = no
 		has_technology_researched = nationalism
 		calc_true_if = {
-			amount >= 12
+			amount >= 10
 			owns_entire_state_region = STATE_WASHINGTON
 			owns_entire_state_region = STATE_OREGON
 			owns_entire_state_region = STATE_IDAHO
@@ -1059,8 +166,6 @@ converter_form_california = {		##Since you can't change country definitions duri
 			owns_entire_state_region = STATE_COLORADO
 			owns_entire_state_region = STATE_NEBRASKA
 			owns_entire_state_region = STATE_KANSAS
-            owns_entire_state_region = STATE_OKLAHOMA
-            owns_entire_state_region = STATE_TEXAS
 		}
 	}
 	when_taken = {
@@ -1076,7 +181,7 @@ converter_form_california = {		##Since you can't change country definitions duri
 					c:CAL = { remove_primary_culture = prev }
 				}
 				every_scope_state = {
-					limit = { zzz_converter_state_is_in_california = yes }
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_california }
 					every_scope_pop = {
 						limit = {
 							culture = {
@@ -1099,7 +204,7 @@ converter_form_california = {		##Since you can't change country definitions duri
 converter_form_mexico = {		##Since you can't change country definitions during gameplay, for some reason
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
-		capital = { zzz_converter_state_is_in_mexico = yes }
+		is_in_geographic_region = geographic_region_converter_colonial_mexico
 		NOT = { exists = c:MEX }
 		is_subject = no
 	}
@@ -1144,7 +249,7 @@ converter_form_mexico = {		##Since you can't change country definitions during g
 					c:MEX = { remove_primary_culture = prev }
 				}
 				every_scope_state = {
-					limit = { zzz_converter_state_is_in_mexico = yes }
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_mexico }
 					every_scope_pop = {
 						limit = {
 							culture = {
@@ -1167,7 +272,7 @@ converter_form_mexico = {		##Since you can't change country definitions during g
 converter_form_colombia = {		##Since you can't change country definitions during gameplay, for some reason
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
-		capital = { zzz_converter_state_is_in_gran_colombia = yes }
+		is_in_geographic_region = geographic_region_converter_colonial_gran_colombia
 		NOT = { exists = c:GCO }
 		is_subject = no
 	}
@@ -1201,7 +306,7 @@ converter_form_colombia = {		##Since you can't change country definitions during
 					c:GCO = { remove_primary_culture = prev }
 				}
 				every_scope_state = {
-					limit = { zzz_converter_state_is_in_gran_colombia = yes }
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_gran_colombia }
 					every_scope_pop = {
 						limit = {
 							culture = {
@@ -1351,7 +456,7 @@ converter_form_brazil = {		##Since you can't change country definitions during g
 converter_form_argentina = {		##Since you can't change country definitions during gameplay, for some reason
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
-		capital = { zzz_converter_state_is_in_argentina = yes }
+		is_in_geographic_region = geographic_region_converter_colonial_argentina
 		NOT = { exists = c:ARG }
 		is_subject = no
 	}
@@ -1389,7 +494,7 @@ converter_form_argentina = {		##Since you can't change country definitions durin
 					c:ARG = { remove_primary_culture = prev }
 				}
 				every_scope_state = {
-					limit = { zzz_converter_state_is_in_argentina = yes }
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_argentina }
 					every_scope_pop = {
 						limit = {
 							culture = {
@@ -1412,7 +517,7 @@ converter_form_argentina = {		##Since you can't change country definitions durin
 converter_form_australia = {		##Since you can't change country definitions during gameplay, for some reason
 	is_shown = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }
-		capital = { zzz_converter_state_is_in_australia = yes }
+		is_in_geographic_region = geographic_region_converter_colonial_australia
 		NOT = { exists = c:AST }
 		is_subject = no
 	}
@@ -1446,7 +551,7 @@ converter_form_australia = {		##Since you can't change country definitions durin
 					c:AST = { remove_primary_culture = prev }
 				}
 				every_scope_state = {
-					limit = { zzz_converter_state_is_in_australia = yes }
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_australia }
 					every_scope_pop = {
 						limit = {
 							culture = {
@@ -1528,9 +633,7 @@ form_hudson_bay_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			zzz_converter_state_is_in_canada = yes
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_canada
 		NOT = { exists = c:HBC }
 		
 		#For converter-generated tags only
@@ -1572,9 +675,7 @@ form_newfoundland_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			zzz_converter_state_is_in_canada = yes
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_canada
 		NOT = { exists = c:NEW }
 		
 		#For converter-generated tags only
@@ -1656,9 +757,7 @@ form_ontario_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			zzz_converter_state_is_in_canada = yes
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_canada
 		NOT = { exists = c:ONT }
 		
 		#For converter-generated tags only
@@ -1693,9 +792,7 @@ form_quebec_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			zzz_converter_state_is_in_canada = yes
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_canada
 		NOT = { exists = c:QUE }
 		
 		#For converter-generated tags only
@@ -1728,9 +825,7 @@ form_new_brunswick_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			zzz_converter_state_is_in_canada = yes
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_canada
 		NOT = { exists = c:NBS }
 		
 		#For converter-generated tags only
@@ -1765,9 +860,7 @@ form_nova_scotia_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			zzz_converter_state_is_in_canada = yes
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_canada
 		NOT = { exists = c:NVS }
 		
 		#For converter-generated tags only
@@ -1865,12 +958,7 @@ form_free_states_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			OR = {
-				zzz_converter_state_is_in_america = yes
-				zzz_converter_state_is_in_california = yes
-			}
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_48
 		NOT = { exists = c:FSA }
 		
 		#For converter-generated tags only
@@ -1903,12 +991,7 @@ form_confederate_states_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			OR = {
-				zzz_converter_state_is_in_america = yes
-				zzz_converter_state_is_in_california = yes
-			}
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_48
 		NOT = { exists = c:CSA }
 		
 		#For converter-generated tags only
@@ -1941,11 +1024,8 @@ form_north_carolina_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
+		is_in_geographic_region = geographic_region_converter_colonial_48
 		capital = {
-			OR = {
-				zzz_converter_state_is_in_america = yes
-				zzz_converter_state_is_in_california = yes
-			}
 			#States south of North Carolina
 			NOT = { state_region = s:STATE_SOUTH_CAROLINA }
 			NOT = { state_region = s:STATE_GEORGIA }
@@ -1990,6 +1070,7 @@ form_south_carolina_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
+		is_in_geographic_region = geographic_region_converter_colonial_48
 		capital = {
 			OR = {
 				#States south of North Carolina
@@ -2041,12 +1122,7 @@ form_united_carolina_dec = {
 			c:SCR ?= ROOT
 		}
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			OR = {
-				zzz_converter_state_is_in_america = yes
-				zzz_converter_state_is_in_california = yes
-			}
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_48
 		NOT = { exists = c:CLI }
 		
 		#For converter-generated tags only
@@ -2103,12 +1179,7 @@ form_georgia_usa_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			OR = {
-				zzz_converter_state_is_in_america = yes
-				zzz_converter_state_is_in_california = yes
-			}
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_48
 		NOT = { exists = c:GRG }
 		
 		#For converter-generated tags only
@@ -2143,12 +1214,7 @@ form_florida_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			OR = {
-				zzz_converter_state_is_in_america = yes
-				zzz_converter_state_is_in_california = yes
-			}
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_48
 		NOT = { exists = c:FLR }
 		
 		#For converter-generated tags only
@@ -2281,12 +1347,7 @@ form_louisiana_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			OR = {
-				zzz_converter_state_is_in_america = yes
-				zzz_converter_state_is_in_california = yes
-			}
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_48
 		NOT = { exists = c:LOU }
 		
 		#For converter-generated tags only
@@ -2359,9 +1420,7 @@ form_oregon_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			zzz_converter_state_is_in_california = yes
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_california
 		NOT = { exists = c:ORG }
 		
 		#For converter-generated tags only
@@ -2396,9 +1455,7 @@ form_deseret_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			zzz_converter_state_is_in_california = yes
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_california
 		NOT = { exists = c:DES }
 		
 		#For converter-generated tags only
@@ -2545,11 +1602,9 @@ form_texas_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			OR = {
-				zzz_converter_state_is_in_california = yes #Please let a Texan never review this
-				state_region = s:STATE_RIO_GRANDE
-			}
+		OR = {
+			is_in_geographic_region = geographic_region_converter_colonial_48
+			capital = { state_region = s:STATE_RIO_GRANDE }
 		}
 		NOT = { exists = c:TEX }
 		
@@ -2578,13 +1633,11 @@ form_rio_grande_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			OR = {
-				zzz_converter_state_is_in_mexico = yes
-				state_region = s:STATE_TEXAS
-				state_region = s:STATE_NEW_MEXICO
-				state_region = s:STATE_COLORADO
-			}
+		OR = {
+			is_in_geographic_region = geographic_region_central_america
+			capital = { state_region = s:STATE_TEXAS }
+			capital = { state_region = s:STATE_NEW_MEXICO }
+			capital = { state_region = s:STATE_COLORADO }
 		}
 		NOT = { exists = c:RIO }
 		
@@ -2620,9 +1673,7 @@ form_yucatan_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			zzz_converter_state_is_in_mexico = yes
-		}
+		is_in_geographic_region = geographic_region_central_america
 		NOT = { exists = c:YUC }
 		
 		#For converter-generated tags only
@@ -2866,12 +1917,7 @@ form_usca_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			OR = {
-				zzz_converter_state_is_in_mexico = yes
-				state_region = s:STATE_PANAMA
-			}
-		}
+		is_in_geographic_region = geographic_region_central_america
 		NOT = { exists = c:UCA }
 		
 		#Can be formed by other Central American countries
@@ -2942,9 +1988,7 @@ form_colombia_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			zzz_converter_state_is_in_gran_colombia = yes
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_gran_colombia
 		NOT = { exists = c:CLM }
 		
 		#For converter-generated tags only
@@ -2988,9 +2032,7 @@ form_venezuela_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			zzz_converter_state_is_in_gran_colombia = yes
-		}
+		is_in_geographic_region = geographic_region_converter_colonial_gran_colombia
 		NOT = { exists = c:VNZ }
 		
 		#For converter-generated tags only
@@ -3141,12 +2183,10 @@ form_chile_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			OR = {
-				zzz_converter_state_is_in_argentina = yes
-				state_region = s:STATE_ANTOFAGASTA
-				state_region = s:STATE_TARAPACA
-			}
+		OR = {
+			is_in_geographic_region = geographic_region_converter_colonial_argentina
+			capital = { state_region = s:STATE_ANTOFAGASTA }
+			capital = { state_region = s:STATE_TARAPACA }
 		}
 		NOT = { exists = c:CHL }
 		
@@ -3277,12 +2317,10 @@ form_rio_de_la_plata_dec = {
 	is_shown = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
-		capital = {
-			OR = {
-				zzz_converter_state_is_in_argentina = yes
-				state_region = s:STATE_JUJUY
-				state_region = s:STATE_URUGUAY
-			}
+		OR = {
+			is_in_geographic_region = geographic_region_converter_colonial_argentina
+			capital = { state_region = s:STATE_JUJUY }
+			capital = { state_region = s:STATE_URUGUAY }
 		}
 		NOT = { exists = c:PLT }
 		
