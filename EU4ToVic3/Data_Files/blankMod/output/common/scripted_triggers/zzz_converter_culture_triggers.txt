@@ -223,6 +223,7 @@ converter_is_north_german_homeland = {
 		state_region = s:STATE_RHINELAND
 		state_region = s:STATE_NORTH_RHINE
 		state_region = s:STATE_RUHR
+		#state_region = s:STATE_UPPER_SILESIA
 		state_region = s:STATE_BRANDENBURG
 		#state_region = s:STATE_SCHLESWIG_HOLSTEIN
 		state_region = s:STATE_HANNOVER
@@ -263,6 +264,7 @@ converter_is_hungarian_homeland = {
 		#state_region = s:STATE_SOUTHERN_TRANSYLVANIA
 		#state_region = s:STATE_NORTHERN_TRANSYLVANIA
 		state_region = s:STATE_SLOVAKIA
+		state_region = s:STATE_RUTHENIA
 		state_region = s:STATE_BEKES
 		state_region = s:STATE_TRANSDANUBIA
 		state_region = s:STATE_CENTRAL_HUNGARY
@@ -279,7 +281,6 @@ converter_is_polish_homeland = {
 		state_region = s:STATE_POSEN
 		state_region = s:STATE_WEST_PRUSSIA
 		state_region = s:STATE_EAST_PRUSSIA
-		state_region = s:STATE_LOWER_SILESIA
 		state_region = s:STATE_UPPER_SILESIA
 		state_region = s:STATE_GREATER_POLAND
 		state_region = s:STATE_LESSER_POLAND
@@ -460,26 +461,28 @@ converter_is_south_italian_homeland = {
 converter_is_catalan_homeland = {
 	OR = {
 		state_region = s:STATE_CATALONIA
-		state_region = s:STATE_BALEARES
+		state_region = s:STATE_BALEARIC_ISLANDS
 		state_region = s:STATE_VALENCIA
 	}
 }
 
 converter_is_spanish_homeland = {
 	OR = {
-		state_region = s:STATE_ANDALUSIA
+		state_region = s:STATE_LOWER_ANDALUSIA
 		state_region = s:STATE_GALICIA
 		state_region = s:STATE_ASTURIAS
-		state_region = s:STATE_CASTILE
+		state_region = s:STATE_OLD_CASTILE
 		state_region = s:STATE_ARAGON
-		state_region = s:STATE_NAVARRA
+		state_region = s:STATE_BASQUE_COUNTRY
 		#state_region = s:STATE_CATALONIA
-		#state_region = s:STATE_BALEARES
+		#state_region = s:STATE_BALEARIC_ISLANDS
 		state_region = s:STATE_CANARY_ISLANDS
-		state_region = s:STATE_GRANADA
-		state_region = s:STATE_BADAJOZ
+		state_region = s:STATE_UPPER_ANDALUSIA
+		state_region = s:STATE_EXTREMADURA
 		#state_region = s:STATE_VALENCIA
-		state_region = s:STATE_TOLEDO
+		state_region = s:STATE_NEW_CASTILE
+		state_region = s:STATE_MURCIA
+		state_region = s:STATE_LEON
 	}
 }
 
@@ -489,8 +492,8 @@ converter_is_portuguese_homeland = {
 		state_region = s:STATE_ESTREMADURA
 		state_region = s:STATE_ALENTEJO
 		state_region = s:STATE_MADEIRA
-		state_region = s:STATE_CAPE_VERDE
 		state_region = s:STATE_AZORES
+		state_region = s:STATE_ENTRE_DOURO_E_MINHO
 	}
 }
 
@@ -531,8 +534,9 @@ converter_is_serbian_homeland = {
 	OR = {
 		state_region = s:STATE_BOSNIA
 		state_region = s:STATE_MONTENEGRO
-		state_region = s:STATE_EASTERN_SERBIA
 		state_region = s:STATE_WESTERN_SERBIA
+		state_region = s:STATE_EASTERN_SERBIA
+		state_region = s:STATE_KOSOVO
 		#state_region = s:STATE_DALMATIA
 		#state_region = s:STATE_CROATIA
 		#state_region = s:STATE_SLAVONIA

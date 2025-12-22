@@ -1,5 +1,6 @@
 ﻿namespace = historical_agitators
 
+#cooldowns handled by variables
 historical_agitators.1 = { #Vladimir Lenin
 	type = country_event
 	placement = root
@@ -24,14 +25,14 @@ historical_agitators.1 = { #Vladimir Lenin
 		has_dlc_feature = voice_of_the_people_content
 		empty_agitator_slots >= 1
 		uses_rus_characters = yes		##Converter
-		ig:ig_trade_unions = {
-			is_marginal = no
-			ig_approval < 0	
+		ig:ig_trade_unions ?= {
+			ig_counts_as_marginal = no
+			ig_approval < 0
 		}
 		game_date > 1890.1.1
 		has_technology_researched = political_agitation
 		NOT = {
-			has_law = law_type:law_council_republic
+			has_law_or_variant = law_type:law_council_republic
 		}
 		NOT = { has_global_variable = lenin_spawn }
 	}
@@ -76,7 +77,7 @@ historical_agitators.1 = { #Vladimir Lenin
 			interest_group = {
 				add_modifier = {
 					name = modifier_lenin_in_exile
-					months = normal_modifier_time
+					days = normal_modifier_time
 					is_decaying = yes
 				}
 			}
@@ -87,8 +88,8 @@ historical_agitators.1 = { #Vladimir Lenin
 		name = historical_agitators.1.b
 		trigger = {
 			OR = {
-				has_law = law_type:law_national_guard
-				has_law = law_type:law_secret_police
+				has_law_or_variant = law_type:law_national_guard
+				has_law_or_variant = law_type:law_secret_police
 			}
 		}
 		ai_chance = {
@@ -102,7 +103,7 @@ historical_agitators.1 = { #Vladimir Lenin
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_lenin_harassed_by_spies
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 		capital = {
@@ -161,7 +162,7 @@ historical_agitators.2 = { #Louis Delescluze
 		game_date > 1840.1.1
 		game_date < 1880.1.1
 		NOT = {
-			has_law = law_type:law_council_republic
+			has_law_or_variant = law_type:law_council_republic
 		}
 		NOT = { has_global_variable = delescluze_spawn }
 	}
@@ -183,7 +184,7 @@ historical_agitators.2 = { #Louis Delescluze
 								}
 							}
 						}
-						set_ideology = ideology:ideology_radical
+						set_ideology = ideology:ideology_nihilist
 					}
 				}
 			}
@@ -201,7 +202,7 @@ historical_agitators.2 = { #Louis Delescluze
 								}
 							}
 						}
-						set_ideology = ideology:ideology_radical
+						set_ideology = ideology:ideology_nihilist
 					}
 				}
 			}
@@ -226,7 +227,7 @@ historical_agitators.2 = { #Louis Delescluze
 			interest_group = {
 				add_modifier = {
 					name = modifier_delescluze_in_exile
-					months = normal_modifier_time
+					days = normal_modifier_time
 					is_decaying = yes
 				}
 			}
@@ -280,7 +281,7 @@ historical_agitators.3 = { #Louis Blanqui
 		game_date < 1880.1.1
 		has_technology_researched = egalitarianism
 		NOT = {
-			has_law = law_type:law_council_republic
+			has_law_or_variant = law_type:law_council_republic
 		}
 		NOT = { has_global_variable = blanqui_spawn }
 	}
@@ -302,7 +303,7 @@ historical_agitators.3 = { #Louis Blanqui
 								}
 							}
 						}
-						set_ideology = ideology:ideology_radical
+						set_ideology = ideology:ideology_nihilist
 					}
 				}
 			}
@@ -320,7 +321,7 @@ historical_agitators.3 = { #Louis Blanqui
 								}
 							}
 						}
-						set_ideology = ideology:ideology_radical
+						set_ideology = ideology:ideology_nihilist
 					}
 				}
 			}
@@ -342,7 +343,7 @@ historical_agitators.3 = { #Louis Blanqui
 			interest_group = {
 				add_modifier = {
 					name = modifier_blanqui_in_exile
-					months = normal_modifier_time
+					days = normal_modifier_time
 					is_decaying = yes
 				}
 			}
@@ -386,12 +387,12 @@ historical_agitators.4 = { #Emmeline Pankhurst
 		has_dlc_feature = voice_of_the_people_content
 		empty_agitator_slots >= 1
 		uses_gbr_characters = yes		##Converter
-		country_is_in_europe = yes
+		is_in_geographic_region = geographic_region_europe
 		game_date > 1880.1.1
 		game_date < 1928.1.1
 		has_technology_researched = feminism
 		NOT = {
-			has_law = law_type:law_womens_suffrage
+			has_law_or_variant = law_type:law_womens_suffrage
 		}
 		NOT = { has_global_variable = pankhurst_spawn }
 	}
@@ -436,7 +437,7 @@ historical_agitators.4 = { #Emmeline Pankhurst
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_pankhurst_negative_popularity
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 	}
@@ -449,7 +450,7 @@ historical_agitators.4 = { #Emmeline Pankhurst
 		}
 		add_modifier = {
 			name = modifier_pankhurst_womens_rights_support
-			months = normal_modifier_time
+			days = normal_modifier_time
 		}
 	}
 	option = {
@@ -462,7 +463,7 @@ historical_agitators.4 = { #Emmeline Pankhurst
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_pankhurst_popularity
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 	}
@@ -496,12 +497,14 @@ historical_agitators.5 = { #John Brown
 		game_date > 1840.1.1
 		game_date < 1870.1.1
 		OR = {
-			has_variable = fugitive_slave_var
+			active_law:lawgroup_slavery ?= {
+				has_amendment = amendment_type:amendment_american_fugitive_slaves_act
+			}
 			has_variable = USA_wilmot_proviso
 			has_variable = bleeding_kansas_happened
 		}
 		NOT = {
-			has_law = law_type:law_slavery_banned
+			has_law_or_variant = law_type:law_slavery_banned
 		}
 		NOT = { has_global_variable = jbrown_spawn }
 	}
@@ -571,7 +574,7 @@ historical_agitators.5 = { #John Brown
 		scope:slaver_ig = {
 			add_modifier = {
 				name = modifier_slavers_upset_by_john_brown
-				months = normal_modifier_time
+				days = normal_modifier_time
 			}
 		}
 	}
@@ -665,7 +668,7 @@ historical_agitators.6 = { #Charles Maurras
 					else_if = {
 						limit = {
 							owner = {
-								has_law = law_type:law_monarchy
+								has_law_or_variant = law_type:law_monarchy
 							}
 						}
 						set_ideology = ideology:ideology_fascist
@@ -692,7 +695,7 @@ historical_agitators.6 = { #Charles Maurras
 					else_if = {
 						limit = {
 							owner = {
-								has_law = law_type:law_monarchy
+								has_law_or_variant = law_type:law_monarchy
 							}
 						}
 						set_ideology = ideology:ideology_fascist
@@ -710,7 +713,7 @@ historical_agitators.6 = { #Charles Maurras
 			}
 			save_scope_as = historic_agitator_scope
 		}
-		set_global_variable = maurras_spawn	
+		set_global_variable = maurras_spawn
 		if = {
 			limit = {
 				any_character_in_void = {
@@ -747,7 +750,7 @@ historical_agitators.6 = { #Charles Maurras
 		}
 		add_modifier = {
 			name = modifier_maurras_antisemitism
-			months = normal_modifier_time
+			days = normal_modifier_time
 		}
 		capital = {
 			add_religion_standard_of_living_modifier = {
@@ -765,11 +768,11 @@ historical_agitators.6 = { #Charles Maurras
 		}
 		add_modifier = {
 			name = modifier_maurras_monarchism
-			months = normal_modifier_time
+			days = normal_modifier_time
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_monarchy
+				has_law_or_variant = law_type:law_monarchy
 			}
 			add_loyalists = {
 				value = medium_radicals
@@ -835,7 +838,7 @@ historical_agitators.7 = { #Giuseppe Mazzini
 		name = historical_agitators.7.b
 		add_modifier = {
 			name = modifier_mazzini_democratism
-			months = normal_modifier_time
+			days = normal_modifier_time
 		}
 		add_radicals = {
 			value = small_radicals
@@ -873,8 +876,8 @@ historical_agitators.8 = { #Napoleon III
 		OR = {
 			AND = {
 				has_journal_entry = je_divided_monarchists
-				je:je_divided_monarchists = { 
-					"scripted_bar_progress(divided_monarchists_bonapartist_progress_bar)" > 100 
+				je:je_divided_monarchists = {
+					"scripted_bar_progress(divided_monarchists_bonapartist_progress_bar)" > 100
 				}
 			}
 			NOT = {
@@ -889,9 +892,9 @@ historical_agitators.8 = { #Napoleon III
 			template = fra_napoleon_iii_character_template
 			on_created = {
 				set_variable = {
-					name = bonapartist_leader
-				}		
-				set_variable = napoleon_iii_var		
+					name = house_bonaparte
+				}
+				set_variable = napoleon_iii_var
 			}
 		}
 		random_scope_character = {
@@ -940,7 +943,7 @@ historical_agitators.8 = { #Napoleon III
 
 historical_agitators.9 = { #Norton
 	type = country_event
-	placement = root
+	placement = scope:california_scope
 
 	gui_window = event_window_1char_tabloid
 	left_icon = scope:historic_agitator_scope
@@ -983,7 +986,7 @@ historical_agitators.9 = { #Norton
 			create_character = {
 				template = fem_usa_joshua_norton_character_template
 				on_created = {
-					set_variable = emperor_norton_var		
+					set_variable = emperor_norton_var
 				}
 			}
 		}
@@ -991,7 +994,7 @@ historical_agitators.9 = { #Norton
 			create_character = {
 				template = usa_joshua_norton_character_template
 				on_created = {
-					set_variable = emperor_norton_var		
+					set_variable = emperor_norton_var
 				}
 			}
 		}
@@ -1005,10 +1008,17 @@ historical_agitators.9 = { #Norton
 		random_scope_state = {
 			limit = {
 				state_region = s:STATE_CALIFORNIA
+				is_incorporated = yes
 			}
 			save_scope_as = california_scope
 		}
 		set_global_variable = emperor_norton_spawn
+	}
+
+	cancellation_trigger = {
+		scope:historic_agitator_scope ?= {
+			is_character_alive = no
+		}
 	}
 
 	option = {
@@ -1055,15 +1065,15 @@ historical_agitators.10 = { #Kropotkin
 		has_dlc_feature = voice_of_the_people_content
 		empty_agitator_slots >= 1
 		uses_rus_characters = yes		##Converter
-		ig:ig_trade_unions = {
-			is_marginal = no
-			ig_approval < 0	
+		ig:ig_trade_unions ?= {
+			ig_counts_as_marginal = no
+			ig_approval < 0
 		}
 		game_date > 1872.1.1
 		game_date < 1917.1.1
 		has_technology_researched = anarchism
 		NOT = { has_global_variable = kropotkin_spawn }
-		NOT = { has_law = law_type:law_council_republic }
+		NOT = { has_law_or_variant = law_type:law_council_republic }
 	}
 
 	immediate = {
@@ -1074,7 +1084,7 @@ historical_agitators.10 = { #Kropotkin
 			create_character = {
 				template = fem_rus_pyotr_kropotkin_character_template
 				on_created = {
-					set_variable = kropotkin_var		
+					set_variable = kropotkin_var
 				}
 			}
 		}
@@ -1082,7 +1092,7 @@ historical_agitators.10 = { #Kropotkin
 			create_character = {
 				template = rus_pyotr_kropotkin_character_template
 				on_created = {
-					set_variable = kropotkin_var		
+					set_variable = kropotkin_var
 				}
 			}
 		}
@@ -1103,7 +1113,7 @@ historical_agitators.10 = { #Kropotkin
 			interest_group = {
 				add_modifier = {
 					name = modifier_kropotkin_in_exile
-					months = normal_modifier_time
+					days = normal_modifier_time
 					is_decaying = yes
 				}
 			}
@@ -1139,6 +1149,8 @@ historical_agitators.10 = { #Kropotkin
 				region = sr:region_west_siberia
 			}
 			order_by = state_population
+			position = 0
+			check_range_bounds = no
 			add_radicals_in_state = {
 				value = medium_radicals
 				pop_type = laborers
@@ -1149,6 +1161,8 @@ historical_agitators.10 = { #Kropotkin
 				region = sr:region_east_siberia
 			}
 			order_by = state_population
+			position = 0
+			check_range_bounds = no
 			add_radicals_in_state = {
 				value = medium_radicals
 				pop_type = laborers
@@ -1181,15 +1195,15 @@ historical_agitators.11 = { #Bakunin
 		has_dlc_feature = voice_of_the_people_content
 		empty_agitator_slots >= 1
 		uses_rus_characters = yes		##Converter
-		ig:ig_trade_unions = {
-			is_marginal = no
-			ig_approval < 0	
+		ig:ig_trade_unions ?= {
+			ig_counts_as_marginal = no
+			ig_approval < 0
 		}
 		game_date > 1863.1.1
 		game_date < 1880.1.1
 		has_technology_researched = anarchism
 		NOT = { has_global_variable = bakunin_spawn }
-		NOT = { has_law = law_type:law_council_republic }
+		NOT = { has_law_or_variant = law_type:law_council_republic }
 	}
 
 	immediate = {
@@ -1200,7 +1214,7 @@ historical_agitators.11 = { #Bakunin
 			create_character = {
 				template = fem_rus_mikhail_bakunin_character_template
 				on_created = {
-					set_variable = bakunin_var		
+					set_variable = bakunin_var
 				}
 			}
 		}
@@ -1208,7 +1222,7 @@ historical_agitators.11 = { #Bakunin
 			create_character = {
 				template = rus_mikhail_bakunin_character_template
 				on_created = {
-					set_variable = bakunin_var		
+					set_variable = bakunin_var
 				}
 			}
 		}
@@ -1228,7 +1242,7 @@ historical_agitators.11 = { #Bakunin
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_bakunin_exiled_properly
-				months = long_modifier_time
+				days = long_modifier_time
 			}
 			exile_character = yes
 		}
@@ -1273,7 +1287,7 @@ historical_agitators.12 = { #Trotsky
 		game_date < 1917.1.1
 		has_technology_researched = political_agitation
 		NOT = { has_global_variable = trotsky_spawn }
-		NOT = { has_law = law_type:law_council_republic }
+		NOT = { has_law_or_variant = law_type:law_council_republic }
 	}
 
 	immediate = {
@@ -1284,7 +1298,7 @@ historical_agitators.12 = { #Trotsky
 			create_character = {
 				template = fem_rus_leon_trotsky_character_template
 				on_created = {
-					set_variable = trotsky_var		
+					set_variable = trotsky_var
 				}
 			}
 		}
@@ -1292,7 +1306,7 @@ historical_agitators.12 = { #Trotsky
 			create_character = {
 				template = rus_leon_trotsky_character_template
 				on_created = {
-					set_variable = trotsky_var		
+					set_variable = trotsky_var
 				}
 			}
 		}
@@ -1316,10 +1330,10 @@ historical_agitators.12 = { #Trotsky
 	option = {
 		name = historical_agitators.12.a
 		default_option = yes
-		ig:ig_trade_unions = {
+		ig:ig_trade_unions ?= {
 			add_modifier = {
 				name = modifier_trotsky_in_exile
-				months = long_modifier_time
+				days = long_modifier_time
 				is_decaying = yes
 			}
 		}
@@ -1375,7 +1389,7 @@ historical_agitators.13 = { #Dabrowski
 		game_date > 1862.1.1
 		game_date < 1896.1.1
 		NOT = { has_global_variable = dabrowski_spawn }
-		NOT = { has_law = law_type:law_council_republic }
+		NOT = { has_law_or_variant = law_type:law_council_republic }
 	}
 
 	immediate = {
@@ -1386,7 +1400,7 @@ historical_agitators.13 = { #Dabrowski
 			create_character = {
 				template = fem_rus_jaroslaw_dabrowski_character_template
 				on_created = {
-					set_variable = dabrowski_var		
+					set_variable = dabrowski_var
 				}
 			}
 		}
@@ -1394,7 +1408,7 @@ historical_agitators.13 = { #Dabrowski
 			create_character = {
 				template = rus_jaroslaw_dabrowski_character_template
 				on_created = {
-					set_variable = dabrowski_var		
+					set_variable = dabrowski_var
 				}
 			}
 		}
@@ -1422,7 +1436,7 @@ historical_agitators.13 = { #Dabrowski
 				kill_character = yes
 			}
 		}
-		
+
 	}
 	option = {
 		name = historical_agitators.13.b
@@ -1474,7 +1488,7 @@ historical_agitators.14 = { #Dickens
 		has_dlc_feature = voice_of_the_people_content
 		empty_agitator_slots >= 1
 		uses_gbr_characters = yes		##Converter
-		country_is_in_europe = yes
+		is_in_geographic_region = geographic_region_europe
 		game_date < 1870.1.1
 		NOT = { has_global_variable = dickens_spawn }
 	}
@@ -1487,7 +1501,7 @@ historical_agitators.14 = { #Dickens
 			create_character = {
 				template = fem_gbr_charles_dickens_character_template
 				on_created = {
-					set_variable = dickens_var		
+					set_variable = dickens_var
 				}
 			}
 		}
@@ -1495,7 +1509,7 @@ historical_agitators.14 = { #Dickens
 			create_character = {
 				template = gbr_charles_dickens_character_template
 				on_created = {
-					set_variable = dickens_var		
+					set_variable = dickens_var
 				}
 			}
 		}
@@ -1545,7 +1559,7 @@ historical_agitators.14 = { #Dickens
 		}
 		add_modifier = {
 			name = modifier_dickensian_reading_campaign
-			months = long_modifier_time
+			days = long_modifier_time
 		}
 		scope:historic_agitator_scope = {
 			add_modifier = {
@@ -1584,7 +1598,7 @@ historical_agitators.15 = { #Luxemburg
 		game_date > 1889.1.1
 		has_technology_researched = socialism
 		NOT = { has_global_variable = luxemburg_spawn }
-		NOT = { has_law = law_type:law_council_republic }
+		NOT = { has_law_or_variant = law_type:law_council_republic }
 	}
 
 	immediate = {
@@ -1595,7 +1609,7 @@ historical_agitators.15 = { #Luxemburg
 			create_character = {
 				template = masc_pol_rosa_luxemburg_character_template
 				on_created = {
-					set_variable = luxemburg_var		
+					set_variable = luxemburg_var
 				}
 			}
 		}
@@ -1603,7 +1617,7 @@ historical_agitators.15 = { #Luxemburg
 			create_character = {
 				template = pol_rosa_luxemburg_character_template
 				on_created = {
-					set_variable = luxemburg_var		
+					set_variable = luxemburg_var
 				}
 			}
 		}
@@ -1641,7 +1655,7 @@ historical_agitators.15 = { #Luxemburg
 		scope:historic_agitator_scope = {
 			add_modifier = {
 				name = modifier_luxemburg_on_the_run
-				months = long_modifier_time
+				days = long_modifier_time
 			}
 		}
 	}
@@ -1685,7 +1699,7 @@ historical_agitators.16 = { #Sorel
 			create_character = {
 				template = fem_fra_georges_sorel_character_template
 				on_created = {
-					set_variable = sorel_var		
+					set_variable = sorel_var
 				}
 			}
 		}
@@ -1693,7 +1707,7 @@ historical_agitators.16 = { #Sorel
 			create_character = {
 				template = fra_georges_sorel_character_template
 				on_created = {
-					set_variable = sorel_var		
+					set_variable = sorel_var
 				}
 			}
 		}
@@ -1727,7 +1741,7 @@ historical_agitators.16 = { #Sorel
 			interest_group = {
 				add_modifier = {
 					name = modifier_passionate_academic_ig
-					months = normal_modifier_time
+					days = normal_modifier_time
 					multiplier = 0.5
 				}
 			}
@@ -1791,7 +1805,7 @@ historical_agitators.17 = { #Boulanger
 			create_character = {
 				template = fem_fra_georges_boulanger_character_template
 				on_created = {
-					set_variable = boulanger_var	
+					set_variable = boulanger_var
 				}
 			}
 		}
@@ -1799,7 +1813,7 @@ historical_agitators.17 = { #Boulanger
 			create_character = {
 				template = fra_georges_boulanger_character_template
 				on_created = {
-					set_variable = boulanger_var	
+					set_variable = boulanger_var
 				}
 			}
 		}
@@ -1865,7 +1879,7 @@ historical_agitators.17 = { #Boulanger
 			base = 25
 			modifier = {
 				trigger = {
-					ig:ig_armed_forces = {
+					ig:ig_armed_forces ?= {
 						ig_approval < -5
 					}
 				}
@@ -1877,10 +1891,10 @@ historical_agitators.17 = { #Boulanger
 				template = fra_georges_boulanger_character_template
 			}
 		}
-		ig:ig_armed_forces = {
+		ig:ig_armed_forces ?= {
 			add_modifier = {
 				name = modifier_fired_boulanger
-				months = long_modifier_time
+				days = long_modifier_time
 			}
 		}
 		add_radicals = {
@@ -1918,7 +1932,7 @@ historical_agitators.18 = { #Lassalle
 		game_date < 1885.1.1
 		has_technology_researched = dialectics
 		NOT = { has_global_variable = lassalle_spawn }
-		NOT = { has_law = law_type:law_council_republic }
+		NOT = { has_law_or_variant = law_type:law_council_republic }
 	}
 
 	immediate = {
@@ -1929,7 +1943,7 @@ historical_agitators.18 = { #Lassalle
 			create_character = {
 				template = fem_pru_ferdinand_lassalle_character_template
 				on_created = {
-					set_variable = lassalle_var		
+					set_variable = lassalle_var
 				}
 			}
 		}
@@ -1937,7 +1951,7 @@ historical_agitators.18 = { #Lassalle
 			create_character = {
 				template = pru_ferdinand_lassalle_character_template
 				on_created = {
-					set_variable = lassalle_var		
+					set_variable = lassalle_var
 				}
 			}
 		}
@@ -1951,6 +1965,12 @@ historical_agitators.18 = { #Lassalle
 		set_global_variable = lassalle_spawn
 	}
 
+	cancellation_trigger = {
+		NOT = {
+			exists = scope:historic_agitator_scope
+		}
+	}
+
 	option = {
 		name = historical_agitators.18.a
 		default_option = yes
@@ -1959,7 +1979,7 @@ historical_agitators.18 = { #Lassalle
 				template = pru_ferdinand_lassalle_character_template
 			}
 		}
-		scope:historic_agitator_scope = {
+		scope:historic_agitator_scope ?= {
 			add_trait = special_character_agent_of_the_sovereign
 		}
 	}
@@ -1970,12 +1990,12 @@ historical_agitators.18 = { #Lassalle
 				template = pru_ferdinand_lassalle_character_template
 			}
 		}
-		scope:historic_agitator_scope = {
+		scope:historic_agitator_scope ?= {
 			add_trait = special_character_agent_of_the_sovereign
 			interest_group = {
 				add_modifier ={
 					name = modifier_agent_of_the_sovereign_ig
-					months = normal_modifier_time
+					days = normal_modifier_time
 				}
 			}
 		}
@@ -2009,7 +2029,7 @@ historical_agitators.19 = { #Gama
 		game_date > 1865.1.1
 		game_date < 1880.1.1
 		NOT = {
-			has_law = law_type:law_slavery_banned
+			has_law_or_variant = law_type:law_slavery_banned
 		}
 		NOT = { has_global_variable = gama_spawn }
 	}
@@ -2022,7 +2042,7 @@ historical_agitators.19 = { #Gama
 			create_character = {
 				template = fem_brz_luis_gama_character_template
 				on_created = {
-					set_variable = gama_var		
+					set_variable = gama_var
 				}
 			}
 		}
@@ -2030,7 +2050,7 @@ historical_agitators.19 = { #Gama
 			create_character = {
 				template = brz_luis_gama_character_template
 				on_created = {
-					set_variable = gama_var		
+					set_variable = gama_var
 				}
 			}
 		}
@@ -2061,7 +2081,7 @@ historical_agitators.19 = { #Gama
 		}
 		add_modifier = {
 			name = modifier_abolitionist_advocacy
-			months = normal_modifier_time
+			days = normal_modifier_time
 			multiplier = 2
 		}
 	}
@@ -2077,7 +2097,7 @@ historical_agitators.19 = { #Gama
 		}
 		add_modifier = {
 			name = modifier_abolitionist_advocacy
-			months = normal_modifier_time
+			days = normal_modifier_time
 		}
 	}
 }
@@ -2113,7 +2133,7 @@ historical_agitators.20 = { #Hugo
 					law = law_type:law_autocracy
 					value > neutral
 				}
-				AND = {	
+				AND = {
 					law_stance = {
 						law = law_type:law_autocracy
 						value > strongly_approve # Equals 'count'
@@ -2144,7 +2164,7 @@ historical_agitators.20 = { #Hugo
 			create_character = {
 				template = fem_fra_victor_hugo_character_template
 				on_created = {
-					set_variable = victor_hugo_var		
+					set_variable = victor_hugo_var
 				}
 			}
 		}
@@ -2152,7 +2172,7 @@ historical_agitators.20 = { #Hugo
 			create_character = {
 				template = fra_victor_hugo_character_template
 				on_created = {
-					set_variable = victor_hugo_var		
+					set_variable = victor_hugo_var
 				}
 			}
 		}
@@ -2234,8 +2254,8 @@ historical_agitators.21 = { #Sun
 		has_dlc_feature = voice_of_the_people_content
 		empty_agitator_slots >= 1
 		OR = {
-			has_law = law_type:law_monarchy
-			has_law = law_type:law_theocracy
+			has_law_or_variant = law_type:law_monarchy
+			has_law_or_variant = law_type:law_theocracy
 		}
 		uses_han_characters = yes				##Converter
 		game_date > 1888.1.1
@@ -2256,7 +2276,7 @@ historical_agitators.21 = { #Sun
 			create_character = {
 				template = fem_chi_sun_yat_sen_character_template
 				on_created = {
-					set_variable = sun_yat_sen_var		
+					set_variable = sun_yat_sen_var
 				}
 			}
 		}
@@ -2264,7 +2284,7 @@ historical_agitators.21 = { #Sun
 			create_character = {
 				template = chi_sun_yat_sen_character_template
 				on_created = {
-					set_variable = sun_yat_sen_var		
+					set_variable = sun_yat_sen_var
 				}
 			}
 		}
@@ -2334,8 +2354,8 @@ historical_agitators.22 = { #John Frost
 	trigger = {
 		has_dlc_feature = voice_of_the_people_content
 		NOR = {
-			has_law = law_type:law_universal_suffrage
-			has_law = law_type:law_census_voting
+			has_law_or_variant = law_type:law_universal_suffrage
+			has_law_or_variant = law_type:law_census_voting
 		}
 		uses_gbr_characters = yes		##Converter
 		any_scope_state = {

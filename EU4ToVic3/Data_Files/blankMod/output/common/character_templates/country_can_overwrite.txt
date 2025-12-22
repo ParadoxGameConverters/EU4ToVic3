@@ -1,0 +1,1458 @@
+﻿### Canada character template file ###
+
+### Generated Interest Group leaders
+
+# John A. Macdonald, first Prime Minister of Canada post-confederation
+REPLACE:can_john_macdonald = {
+	first_name = "John"
+	last_name = "Macdonald"
+	historical = yes
+	ig_leader = yes
+	culture = cu:anglo_canadian
+	religion = rel:protestant
+	birth_date = 1815.1.10
+
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_protectionist
+
+	traits = {
+		charismatic
+		tactful
+		ambitious
+		experienced_political_operator
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_ONTARIO
+			}
+			uses_canada_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_macdonald
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			OR = {
+			   	is_interest_group_type = ig_petty_bourgeoisie
+			   	is_interest_group_type = ig_industrialists
+			}
+		}
+		earliest_usage_date = 1844.10.15 # first elected MP for Kingston in the Province of Canada
+		latest_usage_date = 1887.2.22 # the 1887 Canadian General Election wasn't even his last election, but Macdonald was 72 and he should not be /appearing/ for the first time at age 72
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_macdonald
+		}
+		fix_variable_error = { variable = converter_john_macdonald }
+	}
+}
+
+fem_can_john_macdonald = {
+	first_name = "Jane"
+	last_name = "Macdonald"
+	historical = yes
+	female = yes
+	ig_leader = yes
+	culture = cu:anglo_canadian
+	religion = rel:protestant
+	birth_date = 1815.1.10
+
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_protectionist
+
+	traits = {
+		charismatic
+		tactful
+		ambitious
+		experienced_political_operator
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_ONTARIO
+			}
+			uses_canada_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_john_macdonald
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			OR = {
+			   	is_interest_group_type = ig_petty_bourgeoisie
+			   	is_interest_group_type = ig_industrialists
+			}
+		}
+		earliest_usage_date = 1844.10.15 # first elected MP for Kingston in the Province of Canada
+		latest_usage_date = 1887.2.22 # the 1887 Canadian General Election wasn't even his last election, but Macdonald was 72 and he should not be /appearing/ for the first time at age 72
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_john_macdonald
+		}
+		fix_variable_error = { variable = converter_john_macdonald }
+	}
+}
+
+# Sir George-Étienne Cartier, co-premier, a Father of the Confederation, named George rather than Georges because he's named after King George III
+REPLACE:can_george_etienne_cartier = {
+	first_name = "George-Etienne"
+	last_name = "Cartier"
+	historical = yes
+	ig_leader = yes
+	culture = cu:franco_canadian
+	religion = rel:catholic
+	birth_date = 1814.9.6 # died 1873.5.20
+
+	interest_group = ig_industrialists
+	ideology = ideology_protectionist
+
+	traits = {
+		tactful
+		cautious
+		expert_political_operator # Kingpin of the Confederation
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_QUEBEC
+			}
+			uses_canada_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_george_etienne_cartier
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_landowners
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_industrialists
+			}
+		}
+		earliest_usage_date = 1848.1.18 # elected to the 3rd Parliament of the Province of Canada in January 1848
+		latest_usage_date = 1867.9.20 # last electoral victory, as MP for Montreal East following confederation
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_george_etienne_cartier
+		}
+		fix_variable_error = { variable = converter_george_etienne_cartier }
+	}
+}
+
+fem_can_george_etienne_cartier = {
+	first_name = "Georgette-E_tiennette"
+	last_name = "Cartier"
+	historical = yes
+	female = yes
+	ig_leader = yes
+	culture = cu:franco_canadian
+	religion = rel:catholic
+	birth_date = 1814.9.6 # died 1873.5.20
+
+	interest_group = ig_industrialists
+	ideology = ideology_protectionist
+
+	traits = {
+		tactful
+		cautious
+		expert_political_operator # Kingpin of the Confederation
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_QUEBEC
+			}
+			uses_canada_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_george_etienne_cartier
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_landowners
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_industrialists
+			}
+		}
+		earliest_usage_date = 1848.1.18 # elected to the 3rd Parliament of the Province of Canada in January 1848
+		latest_usage_date = 1867.9.20 # last electoral victory, as MP for Montreal East following confederation
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_george_etienne_cartier
+		}
+		fix_variable_error = { variable = converter_george_etienne_cartier }
+	}
+}
+
+# George Brown, Reform leader and one of the Fathers of the Confederation
+REPLACE:can_george_brown = {
+	first_name = "George"
+	last_name = "Brown"
+	historical = yes
+	ig_leader = yes
+	culture = cu:scottish
+	religion = rel:protestant
+	birth_date = 1818.11.29 # died May 9th, 1880, a month after being shot in the thigh
+
+	interest_group = ig_intelligentsia
+	ideology = ideology_market_liberal
+
+	traits = {
+		tactful
+		sickly
+		persistent
+		literary # was also a newspaper publisher
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_ONTARIO
+			}
+			uses_canada_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_george_brown
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			OR = {
+			   	is_interest_group_type = ig_petty_bourgeoisie
+			   	is_interest_group_type = ig_intelligentsia
+			}
+		}
+		earliest_usage_date = 1854.1.1 # became MP for Lambton in 1854
+		latest_usage_date = 1874.1.1 # appointed to the Canadian senate
+		chance = 25
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_george_brown
+		}
+		fix_variable_error = { variable = converter_george_brown }
+	}
+}
+
+fem_can_george_brown = {
+	first_name = "Georgina"
+	last_name = "Brown"
+	historical = yes
+	female = yes
+	ig_leader = yes
+	culture = cu:scottish
+	religion = rel:protestant
+	birth_date = 1818.11.29 # died May 9th, 1880, a month after being shot in the thigh
+
+	interest_group = ig_intelligentsia
+	ideology = ideology_market_liberal
+
+	traits = {
+		tactful
+		sickly
+		persistent
+		literary # was also a newspaper publisher
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_ONTARIO
+			}
+			uses_canada_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_george_brown
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			OR = {
+			   	is_interest_group_type = ig_petty_bourgeoisie
+			   	is_interest_group_type = ig_intelligentsia
+			}
+		}
+		earliest_usage_date = 1854.1.1 # became MP for Lambton in 1854
+		latest_usage_date = 1874.1.1 # appointed to the Canadian senate
+		chance = 25
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_george_brown
+		}
+		fix_variable_error = { variable = converter_george_brown }
+	}
+}
+
+# Sir Allan Napier MacNab, joint Premier of Lower Canada from 1854 to 1856
+REPLACE:can_allan_macnab = {
+	first_name = "Allan"
+	last_name = "MacNab"
+	historical = yes
+	ig_leader = yes
+	culture = cu:anglo_canadian
+	religion = rel:protestant
+	birth_date = 1798.2.19 # died 1862.8.8
+
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+
+	traits = {
+		grifter
+		persistent
+		direct
+		experienced_political_operator
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_ONTARIO
+			}
+			uses_canada_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_allan_macnab
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1838.1.1 # Knighted in 1838, was already serving in Upper Panada's parliament since 1830
+		latest_usage_date = 1854.9.11 # beginning of term as Joint Premier of the Province of Canada
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_allan_macnab
+		}
+		fix_variable_error = { variable = converter_allan_macnab }
+	}
+}
+
+fem_can_allan_macnab = {
+	first_name = "Alannah"
+	last_name = "MacNab"
+	historical = yes
+	female = yes
+	ig_leader = yes
+	culture = cu:anglo_canadian
+	religion = rel:protestant
+	birth_date = 1798.2.19 # died 1862.8.8
+
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+
+	traits = {
+		grifter
+		persistent
+		direct
+		experienced_political_operator
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_ONTARIO
+			}
+			uses_canada_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_allan_macnab
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1838.1.1 # Knighted in 1838, was already serving in Upper Panada's parliament since 1830
+		latest_usage_date = 1854.9.11 # beginning of term as Joint Premier of the Province of Canada
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_allan_macnab
+		}
+		fix_variable_error = { variable = converter_allan_macnab }
+	}
+}
+
+# Augustin-Norbert Morin, joint premier of Canada from 1851 to 1855
+REPLACE:can_augustin-norbert_morin = {
+	first_name = "Augustin-Norbert"
+	last_name = "Morin"
+	historical = yes
+	ig_leader = yes
+	culture = cu:franco_canadian
+	religion = rel:catholic
+	birth_date = 1803.10.13 # died 1865.7.27
+
+	interest_group = ig_intelligentsia
+	ideology = ideology_liberal_leader
+
+	traits = {
+		persistent
+		imposing
+		cautious
+		erudite
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_QUEBEC
+			}
+			uses_canada_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_augustin-norbert_morin
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_rural_folk
+			}
+		}
+		earliest_usage_date = 1841.2.10 # 1st Parliament of the Province of Canada
+		latest_usage_date = 1855.1.27 # Beginning of second term as Joint Premier of the Province of Canada
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_augustin-norbert_morin
+		}
+		fix_variable_error = { variable = converter_augustin-norbert_morin }
+	}
+}
+
+fem_can_augustin-norbert_morin = {
+	first_name = "Augustine-Claire"
+	last_name = "Morin"
+	historical = yes
+	female = yes
+	ig_leader = yes
+	culture = cu:franco_canadian
+	religion = rel:catholic
+	birth_date = 1803.10.13 # died 1865.7.27
+
+	interest_group = ig_intelligentsia
+	ideology = ideology_liberal_leader
+
+	traits = {
+		persistent
+		imposing
+		cautious
+		erudite
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_QUEBEC
+			}
+			uses_canada_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_augustin-norbert_morin
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_rural_folk
+			}
+		}
+		earliest_usage_date = 1841.2.10 # 1st Parliament of the Province of Canada
+		latest_usage_date = 1855.1.27 # Beginning of second term as Joint Premier of the Province of Canada
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_augustin-norbert_morin
+		}
+		fix_variable_error = { variable = converter_augustin-norbert_morin }
+	}
+}
+
+# Alexandre-Antonin Taché, Catholic missionary, archbishop. Participant in the First Vatican Council. Called on as a mediator by the Canadian government on several occasions
+REPLACE:can_alexandre-antonin_tache = {
+	first_name = "Alexandre-Antonin"
+	last_name = "Tache"
+	historical = yes
+	ig_leader = yes
+	culture= cu:franco_canadian
+	religion = rel:catholic
+	birth_date = 1823.7.23 # died June 22nd, 1894
+
+	interest_group = ig_devout
+	ideology = ideology_humanitarian
+
+	traits = {
+		honorable
+		tactful
+		pious
+		basic_diplomat
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				state_region = s:STATE_MANITOBA
+			}
+			uses_canada_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_alexandre-antonin_tache
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			OR = {
+				AND = {
+					owner = { country_has_state_religion = rel:catholic }
+			   		is_interest_group_type = ig_devout
+			   	}
+				AND = {
+					owner = { NOT = { country_has_state_religion = rel:catholic } }
+					is_interest_group_type = ig_rural_folk
+				}
+			}
+		}
+		earliest_usage_date = 1853.6.7 # becomes Bishop of St. Boniface
+		latest_usage_date = 1879.1.1 # Health begins to decline
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_alexandre-antonin_tache
+		}
+		fix_variable_error = { variable = converter_alexandre-antonin_tache }
+	}
+}
+
+fem_can_alexandre-antonin_tache = {
+	first_name = "Alexandrie-Antonine"
+	last_name = "Tache"
+	historical = yes
+	female = yes
+	ig_leader = yes
+	culture= cu:franco_canadian
+	religion = rel:catholic
+	birth_date = 1823.7.23 # died June 22nd, 1894
+
+	interest_group = ig_devout
+	ideology = ideology_humanitarian
+
+	traits = {
+		honorable
+		tactful
+		pious
+		basic_diplomat
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				state_region = s:STATE_MANITOBA
+			}
+			uses_canada_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_alexandre-antonin_tache
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			OR = {
+				AND = {
+					owner = { country_has_state_religion = rel:catholic }
+			   		is_interest_group_type = ig_devout
+			   	}
+				AND = {
+					owner = { NOT = { country_has_state_religion = rel:catholic } }
+					is_interest_group_type = ig_rural_folk
+				}
+			}
+		}
+		earliest_usage_date = 1853.6.7 # becomes Bishop of St. Boniface
+		latest_usage_date = 1879.1.1 # Health begins to decline
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_alexandre-antonin_tache
+		}
+		fix_variable_error = { variable = converter_alexandre-antonin_tache }
+	}
+}
+
+# Sir Adams George Archibald, Nova Scotian Father of the Confederation, MP and Lt. Gov of Nova Scotia before becoming first Lt. Gov of Manitoba
+REPLACE:can_adams_george_archibald = {
+	first_name = "Adams_George"
+	last_name = "Archibald"
+	historical = yes
+	ig_leader = yes
+	culture = cu:anglo_canadian
+	religion = rel:protestant
+	birth_date = 1814.5.3 # died 1892.12.14
+
+	interest_group = ig_industrialists
+	ideology = ideology_market_liberal
+
+	traits = {
+		arrogant
+		imperious
+		persistent
+		basic_political_operator
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			OR = {
+				any_scope_state = {
+					is_incorporated = yes
+					state_region = s:STATE_NEW_BRUNSWICK
+				}
+				any_scope_state = {
+					state_region = s:STATE_MANITOBA
+				}
+			}
+			uses_canada_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_adams_george_archibald
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_landowners
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_industrialists
+			}
+		}
+		earliest_usage_date = 1851.1.1 # first elected to the Nova Scotia parliament in 1851
+		latest_usage_date = 1867.9.20 # last electoral victory, as MP for Montreal East following confederation
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_adams_george_archibald
+		}
+		fix_variable_error = { variable = converter_adams_george_archibald }
+	}
+}
+
+fem_can_adams_george_archibald = {
+	first_name = "E_ve_Georgina"
+	last_name = "Archibald"
+	historical = yes
+	female = yes
+	ig_leader = yes
+	culture = cu:anglo_canadian
+	religion = rel:protestant
+	birth_date = 1814.5.3 # died 1892.12.14
+
+	interest_group = ig_industrialists
+	ideology = ideology_market_liberal
+
+	traits = {
+		arrogant
+		imperious
+		persistent
+		basic_political_operator
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			OR = {
+				any_scope_state = {
+					is_incorporated = yes
+					state_region = s:STATE_NEW_BRUNSWICK
+				}
+				any_scope_state = {
+					state_region = s:STATE_MANITOBA
+				}
+			}
+			uses_canada_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_adams_george_archibald
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_landowners
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_industrialists
+			}
+		}
+		earliest_usage_date = 1851.1.1 # first elected to the Nova Scotia parliament in 1851
+		latest_usage_date = 1867.9.20 # last electoral victory, as MP for Montreal East following confederation
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_adams_george_archibald
+		}
+		fix_variable_error = { variable = converter_adams_george_archibald }
+	}
+}
+
+# Sir Henri Charles Wilfrid Laurier, PM of Canada 1896-1911
+REPLACE:can_wilfrid_laurier = {
+	first_name = "Wilfrid"
+	last_name = "Laurier"
+	historical = yes
+	ig_leader = yes
+	culture = cu:franco_canadian
+	religion = rel:catholic
+	birth_date = 1841.11.20 # died 1919.2.17
+
+	interest_group = ig_intelligentsia
+	ideology = ideology_market_liberal
+
+	traits = {
+		charismatic
+		imperious
+		tactful
+		demagogue
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_QUEBEC
+			}
+			uses_canada_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_wilfrid_laurier
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+			}
+		}
+		earliest_usage_date = 1874.1.22 # elected MP in the 1874 federal election
+		latest_usage_date = 1908.10.26 # last win as incumbent PM in the 1908 federal election
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_wilfrid_laurier
+		}
+		fix_variable_error = { variable = converter_wilfrid_laurier }
+	}
+}
+
+fem_can_wilfrid_laurier = {
+	first_name = "Wilfreda"
+	last_name = "Laurier"
+	historical = yes
+	female = yes
+	ig_leader = yes
+	culture = cu:franco_canadian
+	religion = rel:catholic
+	birth_date = 1841.11.20 # died 1919.2.17
+
+	interest_group = ig_intelligentsia
+	ideology = ideology_market_liberal
+
+	traits = {
+		charismatic
+		imperious
+		tactful
+		demagogue
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_QUEBEC
+			}
+			uses_canada_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_wilfrid_laurier
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+			}
+		}
+		earliest_usage_date = 1874.1.22 # elected MP in the 1874 federal election
+		latest_usage_date = 1908.10.26 # last win as incumbent PM in the 1908 federal election
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_wilfrid_laurier
+		}
+		fix_variable_error = { variable = converter_wilfrid_laurier }
+	}
+}
+
+# Sir Robert Laird Borden, PM of Canada during WWI
+REPLACE:can_robert_borden = {
+	first_name = "Robert"
+	last_name = "Borden"
+	historical = yes
+	ig_leader = yes
+	culture = cu:anglo_canadian
+	religion = rel:protestant
+	birth_date = 1854.6.26 # died 1937.6.10
+
+	interest_group = ig_intelligentsia
+	ideology = ideology_protectionist
+
+	traits = {
+		ambitious
+		imperious
+		imposing
+		experienced_diplomat
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_NEW_BRUNSWICK
+			}
+			uses_canada_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_robert_borden
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_landowners
+			}
+		}
+		earliest_usage_date = 1896.6.23 # elected as MP in the 1896 federal election, became leader of the Conservative Party 1901.2.6
+		latest_usage_date = 1917.12.17 # won as incumbent in the 1917 federal election
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_robert_borden
+		}
+		fix_variable_error = { variable = converter_robert_borden }
+	}
+}
+
+fem_can_robert_borden = {
+	first_name = "Robynne"
+	last_name = "Borden"
+	historical = yes
+	female = yes
+	ig_leader = yes
+	culture = cu:anglo_canadian
+	religion = rel:protestant
+	birth_date = 1854.6.26 # died 1937.6.10
+
+	interest_group = ig_intelligentsia
+	ideology = ideology_protectionist
+
+	traits = {
+		ambitious
+		imperious
+		imposing
+		experienced_diplomat
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_NEW_BRUNSWICK
+			}
+			uses_canada_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_robert_borden
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			OR = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_landowners
+			}
+		}
+		earliest_usage_date = 1896.6.23 # elected as MP in the 1896 federal election, became leader of the Conservative Party 1901.2.6
+		latest_usage_date = 1917.12.17 # won as incumbent in the 1917 federal election
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_robert_borden
+		}
+		fix_variable_error = { variable = converter_robert_borden }
+	}
+}
+
+# Joseph-Napoléon-Henri Bourassa, French-Canadian nationalist but not a Quebecois separatist
+REPLACE:can_henri_bourassa = {
+	first_name = "Henri"
+	last_name = "Bourassa"
+	historical = yes
+	female = no
+	birth_date = 1868.9.11 # died 1952.8.31. My /parents/ were alive when a figure from V3's timeframe died.
+	culture = cu:franco_canadian
+	religion = rel:catholic
+	interest_group = ig_rural_folk
+	ideology = ideology_radical
+	traits = {
+		reckless
+		imperious
+		ambitious
+		inspirational_orator
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_QUEBEC
+			}
+			uses_canada_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_henri_bourassa
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1896.6.23 # elected as MP in the 1896 federal election
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
+	agitator_usage = {
+		country_trigger = {
+			any_primary_culture = {
+				NOT = { cu:franco_canadian = this }
+			}
+			any_scope_state = {
+				state_region = s:STATE_QUEBEC
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1899.10.18 # resigned from parliament in October of 1899 in protest of Canadian involvement in the Boer War, then reelected in by-election in 1900
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_henri_bourassa
+		}
+		fix_variable_error = { variable = converter_henri_bourassa }
+	}
+}
+
+fem_can_henri_bourassa = {
+	first_name = "Henriette"
+	last_name = "Bourassa"
+	historical = yes
+	female = yes
+	birth_date = 1868.9.11 # died 1952.8.31. My /parents/ were alive when a figure from V3's timeframe died.
+	culture = cu:franco_canadian
+	religion = rel:catholic
+	interest_group = ig_rural_folk
+	ideology = ideology_radical
+	traits = {
+		reckless
+		imperious
+		ambitious
+		inspirational_orator
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				state_region = s:STATE_QUEBEC
+			}
+			uses_canada_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_henri_bourassa
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1896.6.23 # elected as MP in the 1896 federal election
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
+	agitator_usage = {
+		country_trigger = {
+			any_primary_culture = {
+				NOT = { cu:franco_canadian = this }
+			}
+			any_scope_state = {
+				state_region = s:STATE_QUEBEC
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1899.10.18 # resigned from parliament in October of 1899 in protest of Canadian involvement in the Boer War, then reelected in by-election in 1900
+		latest_usage_date = 1936.1.1
+		chance = 50
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_henri_bourassa
+		}
+		fix_variable_error = { variable = converter_henri_bourassa }
+	}
+}
+
+# J. S. Woodsworth, Methodist minister, Social Gospel proponent, founder of the Co-operative Commonwealth Federation (predecessor to the NDP)
+REPLACE:can_j_s_woodsworth = {
+	first_name = "James_Shaver"
+	last_name = "Woodsworth"
+	historical = yes
+	ig_leader = yes
+	culture = cu:anglo_canadian
+	religion = rel:protestant
+	birth_date = 1874.7.29 # died 1942.3.21
+
+	interest_group = ig_devout
+	ideology = ideology_social_democrat
+
+	traits = {
+		pious
+		persistent
+		honorable
+		inspirational_orator
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				OR = {
+					state_region = s:STATE_MANITOBA
+					state_region = s:STATE_ONTARIO
+				}
+			}
+			uses_canada_characters = yes
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_j_s_woodsworth
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1919.5.15 # Winnipeg General Strike
+		latest_usage_date = 1936.1.1 # served as an MP until his death in 1942
+		chance = 50
+	}
+	agitator_usage = {
+		country_trigger = {
+			any_scope_state = {
+				is_incorporated = yes
+				OR = {
+					state_region = s:STATE_MANITOBA
+					state_region = s:STATE_ONTARIO
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1919.5.15 # Winnipeg General Strike
+		latest_usage_date = 1936.1.1
+		chance = 25
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_j_s_woodsworth
+		}
+		fix_variable_error = { variable = converter_j_s_woodsworth }
+	}
+}
+
+fem_can_j_s_woodsworth = {
+	first_name = "Jesse_Shaver"
+	last_name = "Woodsworth"
+	historical = yes
+	female = yes
+	ig_leader = yes
+	culture = cu:anglo_canadian
+	religion = rel:protestant
+	birth_date = 1874.7.29 # died 1942.3.21
+
+	interest_group = ig_devout
+	ideology = ideology_social_democrat
+
+	traits = {
+		pious
+		persistent
+		honorable
+		inspirational_orator
+	}
+
+	interest_group_leader_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				is_incorporated = yes
+				OR = {
+					state_region = s:STATE_MANITOBA
+					state_region = s:STATE_ONTARIO
+				}
+			}
+			uses_canada_characters = yes
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_j_s_woodsworth
+				}
+			}
+
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1919.5.15 # Winnipeg General Strike
+		latest_usage_date = 1936.1.1 # served as an MP until his death in 1942
+		chance = 50
+	}
+	agitator_usage = {
+		country_trigger = {
+			any_scope_state = {
+				is_incorporated = yes
+				OR = {
+					state_region = s:STATE_MANITOBA
+					state_region = s:STATE_ONTARIO
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1919.5.15 # Winnipeg General Strike
+		latest_usage_date = 1936.1.1
+		chance = 25
+	}
+	on_created = {
+		converter_colonial_template_effect = { TARGET = global_canadian_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_j_s_woodsworth
+		}
+		fix_variable_error = { variable = converter_j_s_woodsworth }
+	}
+}
+
+### Agitators
+
+REPLACE:can_louis_riel = {
+	first_name = "Louis"
+	last_name = "Riel"
+	historical = yes
+	female = no
+	birth_date = 1844.10.22 # died 1885.11.16
+	culture = cu:metis
+	religion = rel:catholic
+	interest_group = ig_rural_folk
+	ideology = ideology_sovereignist_leader
+	traits = {
+		imperious
+		reckless
+		charismatic
+		firebrand
+	}
+	agitator_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				state_region = s:STATE_MANITOBA
+			}
+			should_have_male_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_louis_riel
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1868.7.26 # arrival at Red River settlement
+		latest_usage_date = 1885.5.15 # Surrender to Canadian forces after the Battle of Batoche
+		chance = 50
+	}
+	on_created = {
+		# If Louis Riel appears in a world where a Metis nation-state already exists, he will switch for a sovereignist ideology to an ethno-nationalist one
+		if = {
+			limit = {
+				home_country ?= {
+					country_has_primary_culture = root.culture
+				}
+			}
+			set_ideology = ideology:ideology_ethno_nationalist
+		}
+		converter_colonial_template_effect = { TARGET = global_metis_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_louis_riel
+		}
+		fix_variable_error = { variable = converter_louis_riel }
+	}
+}
+
+fem_can_louis_riel = {
+	first_name = "Louise"
+	last_name = "Riel"
+	historical = yes
+	female = yes
+	birth_date = 1844.10.22 # died 1885.11.16
+	culture = cu:metis
+	religion = rel:catholic
+	interest_group = ig_rural_folk
+	ideology = ideology_sovereignist_leader
+	traits = {
+		imperious
+		reckless
+		charismatic
+		firebrand
+	}
+	agitator_usage = {
+		country_trigger = {
+			NOT = { is_country_type = decentralized }
+			any_scope_state = {
+				state_region = s:STATE_MANITOBA
+			}
+			should_have_female_characters = yes
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = converter_unavailable_unique_characters
+					target = flag:converter_louis_riel
+				}
+			}
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1868.7.26 # arrival at Red River settlement
+		latest_usage_date = 1885.5.15 # Surrender to Canadian forces after the Battle of Batoche
+		chance = 50
+	}
+	on_created = {
+		# If Louis Riel appears in a world where a Metis nation-state already exists, he will switch for a sovereignist ideology to an ethno-nationalist one
+		if = {
+			limit = {
+				home_country ?= {
+					country_has_primary_culture = root.culture
+				}
+			}
+			set_ideology = ideology:ideology_ethno_nationalist
+		}
+		converter_colonial_template_effect = { TARGET = global_metis_cultures }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_louis_riel
+		}
+		fix_variable_error = { variable = converter_louis_riel }
+	}
+}

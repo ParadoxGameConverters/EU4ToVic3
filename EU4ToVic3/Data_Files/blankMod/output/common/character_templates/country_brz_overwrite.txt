@@ -1,6 +1,6 @@
 ﻿### Brazil character template file ###
 
-BRZ_benjamin_constant = { #Benjamin Constant
+REPLACE:BRZ_benjamin_constant = { #Benjamin Constant
 	first_name = Benjamin
 	last_name = Constant
 	historical = yes
@@ -28,7 +28,7 @@ BRZ_benjamin_constant = { #Benjamin Constant
 			has_dlc_feature = rp1_content
         }
         interest_group_trigger = {
-            is_marginal = no
+            ig_counts_as_marginal = no
 			is_interest_group_type = ig_armed_forces
         }
         earliest_usage_date = 1875.1.1
@@ -73,7 +73,7 @@ fem_BRZ_benjamin_constant = { #Benjamin Constant
 			has_dlc_feature = rp1_content
         }
         interest_group_trigger = {
-            is_marginal = no
+            ig_counts_as_marginal = no
 			is_interest_group_type = ig_armed_forces
         }
         earliest_usage_date = 1875.1.1
@@ -90,7 +90,7 @@ fem_BRZ_benjamin_constant = { #Benjamin Constant
 	}
 }
 
-BRZ_ruy_barbosa = { #Ruy Barbosa de Oliveira
+REPLACE:BRZ_ruy_barbosa = { #Ruy Barbosa de Oliveira
 	first_name = Ruy
 	last_name = Barbosa
 	historical = yes
@@ -115,12 +115,11 @@ BRZ_ruy_barbosa = { #Ruy Barbosa de Oliveira
 					target = flag:converter_ruy_barbosa
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
         interest_group_trigger = {
-            is_marginal = no
+            ig_counts_as_marginal = no
 			is_interest_group_type = ig_intelligentsia
         }
         earliest_usage_date = 1881.1.1
@@ -162,12 +161,11 @@ fem_BRZ_ruy_barbosa = { #Ruy Barbosa de Oliveira
 					target = flag:converter_ruy_barbosa
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
         interest_group_trigger = {
-            is_marginal = no
+            ig_counts_as_marginal = no
 			is_interest_group_type = ig_intelligentsia
         }
         earliest_usage_date = 1881.1.1
@@ -184,7 +182,7 @@ fem_BRZ_ruy_barbosa = { #Ruy Barbosa de Oliveira
 	}
 }
 
-BRZ_prudente_de_morais = { #Prudente José de Morais Barros
+REPLACE:BRZ_prudente_de_morais = { #Prudente José de Morais Barros
 	first_name = Prudente
 	last_name = de_Morais_Barros
 	historical = yes
@@ -208,12 +206,11 @@ BRZ_prudente_de_morais = { #Prudente José de Morais Barros
 					target = flag:converter_prudente_de_morais
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
         interest_group_trigger = {
-            is_marginal = no
+            ig_counts_as_marginal = no
 			is_interest_group_type = ig_landowners
         }
         earliest_usage_date = 1873.1.1
@@ -254,12 +251,11 @@ fem_BRZ_prudente_de_morais = { #Prudente José de Morais Barros
 					target = flag:converter_prudente_de_morais
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
         interest_group_trigger = {
-            is_marginal = no
+            ig_counts_as_marginal = no
 			is_interest_group_type = ig_landowners
         }
         earliest_usage_date = 1873.1.1
@@ -276,7 +272,7 @@ fem_BRZ_prudente_de_morais = { #Prudente José de Morais Barros
 	}
 }
 
-BRZ_quintino_bocaiuva = { #Quintino Antônio Ferreira de Sousa Bocaiuva
+REPLACE:BRZ_quintino_bocaiuva = { #Quintino Antônio Ferreira de Sousa Bocaiuva
 	first_name = Quintino
 	last_name = BocaiU_va
 	historical = yes
@@ -300,7 +296,6 @@ BRZ_quintino_bocaiuva = { #Quintino Antônio Ferreira de Sousa Bocaiuva
 					target = flag:converter_quintino_bocaiuva
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
@@ -345,7 +340,6 @@ fem_BRZ_quintino_bocaiuva = { #Quintino Antônio Ferreira de Sousa Bocaiuva
 					target = flag:converter_quintino_bocaiuva
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
@@ -366,7 +360,7 @@ fem_BRZ_quintino_bocaiuva = { #Quintino Antônio Ferreira de Sousa Bocaiuva
 	}
 }
 
-BRZ_campos_sales = { #Manoel Ferraz de Campos Salles
+REPLACE:BRZ_campos_sales = { #Manoel Ferraz de Campos Salles
 	first_name = Manoel_Ferraz
 	last_name = de_Campos_Salles
 	historical = yes
@@ -390,12 +384,11 @@ BRZ_campos_sales = { #Manoel Ferraz de Campos Salles
 					target = flag:converter_campos_sales
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
 			NOR = {
-				has_law = law_type:law_monarchy
-				has_law = law_type:law_theocracy
+				has_law_or_variant = law_type:law_monarchy
+				has_law_or_variant = law_type:law_theocracy
 			}
         }
         interest_group_trigger = {
@@ -439,12 +432,11 @@ fem_BRZ_campos_sales = { #Manoel Ferraz de Campos Salles
 					target = flag:converter_campos_sales
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
 			NOR = {
-				has_law = law_type:law_monarchy
-				has_law = law_type:law_theocracy
+				has_law_or_variant = law_type:law_monarchy
+				has_law_or_variant = law_type:law_theocracy
 			}
         }
         interest_group_trigger = {
@@ -464,7 +456,7 @@ fem_BRZ_campos_sales = { #Manoel Ferraz de Campos Salles
 	}
 }
 
-BRZ_euclides_da_cunha = { #Euclydes Rodrigues Pimenta da Cunha
+REPLACE:BRZ_euclides_da_cunha = { #Euclydes Rodrigues Pimenta da Cunha
 	first_name = Euclides
 	last_name = da_Cunha
 	historical = yes
@@ -489,12 +481,11 @@ BRZ_euclides_da_cunha = { #Euclydes Rodrigues Pimenta da Cunha
 					target = flag:converter_euclides_da_cunha
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
 			NOR = {
-				has_law = law_type:law_monarchy
-				has_law = law_type:law_theocracy
+				has_law_or_variant = law_type:law_monarchy
+				has_law_or_variant = law_type:law_theocracy
 			}
         }
         interest_group_trigger = {
@@ -539,12 +530,11 @@ fem_BRZ_euclides_da_cunha = { #Euclydes Rodrigues Pimenta da Cunha
 					target = flag:converter_euclides_da_cunha
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
 			NOR = {
-				has_law = law_type:law_monarchy
-				has_law = law_type:law_theocracy
+				has_law_or_variant = law_type:law_monarchy
+				has_law_or_variant = law_type:law_theocracy
 			}
         }
         interest_group_trigger = {
@@ -564,7 +554,7 @@ fem_BRZ_euclides_da_cunha = { #Euclydes Rodrigues Pimenta da Cunha
 	}
 }
 
-BRZ_francisco_escobar = { #Francisco Escobar
+REPLACE:BRZ_francisco_escobar = { #Francisco Escobar
 	first_name = Francisco
 	last_name = Escobar
 	historical = yes
@@ -588,7 +578,6 @@ BRZ_francisco_escobar = { #Francisco Escobar
 					target = flag:converter_francisco_escobar
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
@@ -641,7 +630,6 @@ fem_BRZ_francisco_escobar = { #Francisco Escobar
 					target = flag:converter_francisco_escobar
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
@@ -670,7 +658,7 @@ fem_BRZ_francisco_escobar = { #Francisco Escobar
 	}
 }
 
-BRZ_joaquim_nabuco = { #Joaquim Aurélio Barreto Nabuco de Araújo
+REPLACE:BRZ_joaquim_nabuco = { #Joaquim Aurélio Barreto Nabuco de Araújo
 	first_name = Joaquim
 	last_name = Nabuco
 	historical = yes
@@ -694,10 +682,9 @@ BRZ_joaquim_nabuco = { #Joaquim Aurélio Barreto Nabuco de Araújo
 					target = flag:converter_joaquim_nabuco
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
-			has_law = law_type:law_monarchy
+			has_law_or_variant = law_type:law_monarchy
         }
         interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
@@ -740,10 +727,9 @@ fem_BRZ_joaquim_nabuco = { #Joaquim Aurélio Barreto Nabuco de Araújo
 					target = flag:converter_joaquim_nabuco
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
-			has_law = law_type:law_monarchy
+			has_law_or_variant = law_type:law_monarchy
         }
         interest_group_trigger = {
 			is_interest_group_type = ig_intelligentsia
@@ -762,7 +748,7 @@ fem_BRZ_joaquim_nabuco = { #Joaquim Aurélio Barreto Nabuco de Araújo
 	}
 }
 
-BRZ_julio_de_castilhos = { #Júlio Prates de Castilhos
+REPLACE:BRZ_julio_de_castilhos = { #Júlio Prates de Castilhos
 	first_name = Julio
 	last_name = de_Castilhos
 	historical = yes
@@ -787,7 +773,6 @@ BRZ_julio_de_castilhos = { #Júlio Prates de Castilhos
 					target = flag:converter_julio_de_castilhos
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
 			has_variable = positivism_happened
@@ -834,7 +819,6 @@ fem_BRZ_julio_de_castilhos = { #Júlio Prates de Castilhos
 					target = flag:converter_julio_de_castilhos
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
 			has_variable = positivism_happened
@@ -856,7 +840,7 @@ fem_BRZ_julio_de_castilhos = { #Júlio Prates de Castilhos
 	}
 }
 
-BRZ_rodriguez_alves = { #Francisco de Paula Rodrigues Alves
+REPLACE:BRZ_rodriguez_alves = { #Francisco de Paula Rodrigues Alves
 	first_name = Rodrigues
 	last_name = Alves
 	historical = yes
@@ -880,7 +864,6 @@ BRZ_rodriguez_alves = { #Francisco de Paula Rodrigues Alves
 					target = flag:converter_rodriguez_alves
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
@@ -925,7 +908,6 @@ fem_BRZ_rodriguez_alves = { #Francisco de Paula Rodrigues Alves
 					target = flag:converter_rodriguez_alves
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
@@ -946,7 +928,7 @@ fem_BRZ_rodriguez_alves = { #Francisco de Paula Rodrigues Alves
 	}
 }
 
-BRZ_epitacio_pessoa = { #Epitácio Lindolfo da Silva Pessoa
+REPLACE:BRZ_epitacio_pessoa = { #Epitácio Lindolfo da Silva Pessoa
 	first_name = Epitacio
 	last_name = Pessoa
 	historical = yes
@@ -970,7 +952,6 @@ BRZ_epitacio_pessoa = { #Epitácio Lindolfo da Silva Pessoa
 					target = flag:converter_epitacio_pessoa
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
@@ -1015,7 +996,6 @@ fem_BRZ_epitacio_pessoa = { #Epitácio Lindolfo da Silva Pessoa
 					target = flag:converter_epitacio_pessoa
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
@@ -1036,7 +1016,7 @@ fem_BRZ_epitacio_pessoa = { #Epitácio Lindolfo da Silva Pessoa
 	}
 }
 
-BRZ_astrojildo_pereira = { # Astrojildo Pereira Duarte Silva 
+REPLACE:BRZ_astrojildo_pereira = { # Astrojildo Pereira Duarte Silva 
 	first_name = Astrojildo
 	last_name = Pereira
 	historical = yes
@@ -1061,7 +1041,6 @@ BRZ_astrojildo_pereira = { # Astrojildo Pereira Duarte Silva
 					target = flag:converter_astrojildo_pereira
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
@@ -1078,9 +1057,9 @@ BRZ_astrojildo_pereira = { # Astrojildo Pereira Duarte Silva
 			limit = {
 				any_country = {
 					country_rank >= rank_value:major_power
-					has_law = law_type:law_council_republic
+					has_law_or_variant = law_type:law_council_republic
 					NOT = {
-						has_law = law_type:law_anarchy
+						has_law_or_variant = law_type:law_anarchy
 					}
 				}
 			}
@@ -1119,7 +1098,6 @@ fem_BRZ_astrojildo_pereira = { # Astrojildo Pereira Duarte Silva
 					target = flag:converter_astrojildo_pereira
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
@@ -1136,9 +1114,9 @@ fem_BRZ_astrojildo_pereira = { # Astrojildo Pereira Duarte Silva
 			limit = {
 				any_country = {
 					country_rank >= rank_value:major_power
-					has_law = law_type:law_council_republic
+					has_law_or_variant = law_type:law_council_republic
 					NOT = {
-						has_law = law_type:law_anarchy
+						has_law_or_variant = law_type:law_anarchy
 					}
 				}
 			}
@@ -1152,7 +1130,7 @@ fem_BRZ_astrojildo_pereira = { # Astrojildo Pereira Duarte Silva
 	}
 }
 
-BRZ_irineu_evangelista_de_sousa = { #Irineu Evangelista de Sousa
+REPLACE:BRZ_irineu_evangelista_de_sousa = { #Irineu Evangelista de Sousa
 	first_name = Irineu_Evangelista
 	last_name = de_Sousa
 	historical = yes
@@ -1178,7 +1156,6 @@ BRZ_irineu_evangelista_de_sousa = { #Irineu Evangelista de Sousa
 					target = flag:converter_irineu_evangelista_de_sousa
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
@@ -1236,7 +1213,6 @@ fem_BRZ_irineu_evangelista_de_sousa = { #Irineu Evangelista de Sousa
 					target = flag:converter_irineu_evangelista_de_sousa
 				}
 			}
-
             uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
         }
@@ -1268,7 +1244,7 @@ fem_BRZ_irineu_evangelista_de_sousa = { #Irineu Evangelista de Sousa
 	}
 }
 
-BRZ_antonio_conselheiro = { # Antônio Conselheiro
+REPLACE:BRZ_antonio_conselheiro = { # Antônio Conselheiro
 	first_name = Antonio_3
 	last_name = Mendes_Maciel
 	historical = yes		##Pretty sure that the brazilian subcultures aren't in the converter
@@ -1295,8 +1271,8 @@ BRZ_antonio_conselheiro = { # Antônio Conselheiro
 			}
 
 			NOR = { 
-				has_law = law_type:law_homesteading 
-				has_law = law_type:law_collectivized_agriculture
+				has_law_or_variant = law_type:law_homesteading 
+				has_law_or_variant = law_type:law_collectivized_agriculture
 			}
 			uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
@@ -1345,8 +1321,8 @@ fem_BRZ_antonio_conselheiro = { # Antônio Conselheiro (Antônia)
 			}
 
 			NOR = { 
-				has_law = law_type:law_homesteading 
-				has_law = law_type:law_collectivized_agriculture
+				has_law_or_variant = law_type:law_homesteading 
+				has_law_or_variant = law_type:law_collectivized_agriculture
 			}
 			uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
@@ -1368,7 +1344,7 @@ fem_BRZ_antonio_conselheiro = { # Antônio Conselheiro (Antônia)
 	}
 }
 
-BRZ_jose_oiticica = { # José Oiticica
+REPLACE:BRZ_jose_oiticica = { # José Oiticica
 	first_name = JosE_
 	last_name = Oiticica
 	historical = yes
@@ -1394,8 +1370,8 @@ BRZ_jose_oiticica = { # José Oiticica
 			}
 
 			NOT = { 
-				has_law = law_type:law_anarchy 
-				has_law = law_type:law_council_republic
+				has_law_or_variant = law_type:law_anarchy 
+				has_law_or_variant = law_type:law_council_republic
 			}
 			uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
@@ -1443,8 +1419,8 @@ fem_BRZ_jose_oiticica = { # José Oiticica
 			}
 
 			NOT = { 
-				has_law = law_type:law_anarchy 
-				has_law = law_type:law_council_republic
+				has_law_or_variant = law_type:law_anarchy 
+				has_law_or_variant = law_type:law_council_republic
 			}
 			uses_brazil_characters = yes
 			has_dlc_feature = rp1_content
@@ -1466,7 +1442,7 @@ fem_BRZ_jose_oiticica = { # José Oiticica
 	}
 }
 
-BRZ_deodoro_da_fonseca = { #Deodoro da Fonseca
+REPLACE:BRZ_deodoro_da_fonseca = { #Deodoro da Fonseca
 	first_name = Deodoro
 	last_name = da_Fonseca
 	historical = yes
@@ -1558,7 +1534,7 @@ fem_BRZ_deodoro_da_fonseca = { #Deodoro da Fonseca
 	}
 }
 
-BRZ_floriano_peixoto = { #Floriano Vieira Peixoto
+REPLACE:BRZ_floriano_peixoto = { #Floriano Vieira Peixoto
 	first_name = Floriano
 	last_name = Peixoto
 	historical = yes
@@ -1648,7 +1624,7 @@ fem_BRZ_floriano_peixoto = { #Floriano Vieira Peixoto
 	}
 }
 
-BRZ_manuel_marques_de_sousa = { #Manuel Marques de Sousa
+REPLACE:BRZ_manuel_marques_de_sousa = { #Manuel Marques de Sousa
 	first_name = Manuel
 	last_name = Marques_de_Sousa
 	historical = yes
@@ -1738,7 +1714,7 @@ fem_BRZ_manuel_marques_de_sousa = { #Manuel Marques de Sousa
 	}
 }
 
-BRZ_joaquim_marques_lisboa = { #Joaquim Marques Lisboa
+REPLACE:BRZ_joaquim_marques_lisboa = { #Joaquim Marques Lisboa
 	first_name = Joaquim
 	last_name = Marques_Lisboa
 	historical = yes
@@ -1765,7 +1741,7 @@ BRZ_joaquim_marques_lisboa = { #Joaquim Marques Lisboa
 			}
 
 			uses_brazil_characters = yes
-			has_law = law_type:law_monarchy
+			has_law_or_variant = law_type:law_monarchy
 			has_dlc_feature = rp1_content
 		}
 		role = admiral
@@ -1810,7 +1786,7 @@ fem_BRZ_joaquim_marques_lisboa = { #Joaquim Marques Lisboa
 			}
 
 			uses_brazil_characters = yes
-			has_law = law_type:law_monarchy
+			has_law_or_variant = law_type:law_monarchy
 			has_dlc_feature = rp1_content
 		}
 		role = admiral
@@ -1828,7 +1804,7 @@ fem_BRZ_joaquim_marques_lisboa = { #Joaquim Marques Lisboa
 	}
 }
 
-BRZ_francisco_barroso_da_silva = { #Francisco Manuel Barroso da Silva
+REPLACE:BRZ_francisco_barroso_da_silva = { #Francisco Manuel Barroso da Silva
 	first_name = Francisco
 	last_name = Barroso_da_Silva
 	historical = yes
@@ -1916,7 +1892,7 @@ fem_BRZ_francisco_barroso_da_silva = { #Francisco Manuel Barroso da Silva
 	}
 }
 
-BRZ_manuel_luis_osorio = { #Manuel Luís Osório
+REPLACE:BRZ_manuel_luis_osorio = { #Manuel Luís Osório
 	first_name = Manuel
 	last_name = LuI_s_Osorio
 	historical = yes
@@ -2004,7 +1980,7 @@ fem_BRZ_manuel_luis_osorio = { #Manuel Luís Osório
 	}
 }
 
-BRZ_joaquim_jose_inacio = { #Joaquim José Inácio
+REPLACE:BRZ_joaquim_jose_inacio = { #Joaquim José Inácio
 	first_name = Joaquim
 	last_name = Inacio
 	historical = yes
@@ -2096,7 +2072,7 @@ fem_BRZ_joaquim_jose_inacio = { #Joaquim José Inácio
 	}
 }
 
-BRZ_custodio_de_melo = { #Custodio de Melo
+REPLACE:BRZ_custodio_de_melo = { #Custodio de Melo
 	first_name = Custodio
 	last_name = de_Melo
 	historical = yes
@@ -2186,7 +2162,7 @@ fem_BRZ_custodio_de_melo = { #Custodio de Melo
 	}
 }
 
-BRZ_hermes_da_fonseca = { #Hermes da Fonseca
+REPLACE:BRZ_hermes_da_fonseca = { #Hermes da Fonseca
 	first_name = Hermes
 	last_name = da_Fonseca
 	historical = yes

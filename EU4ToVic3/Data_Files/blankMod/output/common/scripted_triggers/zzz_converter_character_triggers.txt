@@ -1,12 +1,14 @@
-﻿# language_accepted
-# uses_integralist_ideology
+﻿# uses_integralist_ideology
 # uses_new_england_yankee_characters
 # uses_midwest_yankee_characters
 # is_yankee_culture
 # uses_dixie_characters
 # uses_dixie_traitor_characters
 # uses_afro_amer_characters
+# uses_canada_characters
 # uses_mexico_characters
+# uses_cuba_characters
+# uses_dominican_characters
 # uses_brazil_characters
 # uses_afro_braz_characters
 # uses_fra_characters
@@ -68,132 +70,6 @@
 # uses_pol_characters
 # uses_cro_characters
 # uses_mon_ser_characters
-
-language_accepted = {
-	OR = {
-		AND = {
-			culture = { has_discrimination_trait = francophone }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = francophone }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = hispanophone }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = hispanophone }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = lusophone }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = lusophone }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = language_anglophone }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = language_anglophone }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = german_speaking }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = german_speaking }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = italophone }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = italophone }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = arab_speaking }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = arab_speaking }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = albanian_language }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = albanian_language }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = mongol_language }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = mongol_language }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = khmer_language }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = khmer_language }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = malagasy_language }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = malagasy_language }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = burmese_language }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = burmese_language }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = language_korean }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = language_korean }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = ainu_language }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = ainu_language }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = hmong_mien_language }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = hmong_mien_language }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = tibetan_language }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = tibetan_language }
-			}
-		}
-		##Converter
-		AND = {
-			culture = { has_discrimination_trait = latinophone }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = latinophone }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = phoeniciophone }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = phoeniciophone }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = oviparity }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = oviparity }
-			}
-		}
-		AND = {
-			culture = { has_discrimination_trait = vivaparity }
-			owner = {
-				any_primary_culture = { has_discrimination_trait = vivaparity }
-			}
-		}
-	}
-}
 
 uses_integralist_ideology = {
 	any_primary_culture = {
@@ -296,7 +172,6 @@ uses_afro_amer_characters = {
 	}
 	trigger_else = {
 		any_scope_state = {
-			#region = sr:region_dixie
 			any_scope_pop = {
 				culture = {
 					is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this }
@@ -305,6 +180,20 @@ uses_afro_amer_characters = {
 				}
 			}
 		}
+	}
+}
+
+uses_canada_characters = {
+	is_settler_colonial_country = yes
+	trigger_if = {
+		limit = {
+			exists = c:CAN
+			c:CAN = { any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } } }
+		}
+		this = c:CAN
+	}
+	trigger_else = {
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
 	}
 }
 
@@ -319,6 +208,24 @@ uses_mexico_characters = {
 	}
 	trigger_else = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+	}
+}
+
+uses_cuba_characters = {
+	is_settler_colonial_country = yes
+	any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+	OR = {
+		any_scope_state = { state_region = s:STATE_WESTERN_CUBA }
+		any_scope_state = { state_region = s:STATE_CENTRAL_CUBA }
+		any_scope_state = { state_region = s:STATE_EASTERN_CUBA }
+	}
+}
+
+uses_dominican_characters = {
+	is_settler_colonial_country = yes
+	any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+	any_scope_state = {
+		state_region = s:STATE_SANTO_DOMINGO
 	}
 }
 
@@ -347,7 +254,6 @@ uses_afro_braz_characters = {
 	}
 	trigger_else = {
 		any_scope_state = {
-			#region = sr:region_brazil
 			any_scope_pop = {
 				culture = {
 					is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this }
@@ -659,12 +565,12 @@ uses_eng_gbr_characters = {
 
 uses_colonial_bic_characters = {
 	is_old_world_trading_company = yes
-	country_is_in_india = yes
+	is_in_geographic_region = geographic_region_india
 	NOT = { any_primary_culture = { has_discrimination_trait_group = heritage_group_south_asian } }
 }
 
 uses_local_bic_characters = {
-	country_is_in_india = yes
+	is_in_geographic_region = geographic_region_india
 	trigger_if = {
 		limit = { is_old_world_trading_company = yes }
 		NOT = { any_primary_culture = { has_discrimination_trait_group = heritage_group_south_asian } }
@@ -927,7 +833,7 @@ uses_ber_characters = {
 		}
 	}
 	any_country = {
-		country_is_in_africa = no
+		is_not_in_geographic_region = geographic_region_africa
 		any_scope_state = {
 			OR = {
 				state_region = s:STATE_ORAN

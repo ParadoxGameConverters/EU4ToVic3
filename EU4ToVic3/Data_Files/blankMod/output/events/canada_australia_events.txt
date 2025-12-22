@@ -29,7 +29,7 @@ can_aus.1 = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
-					capital = { zzz_converter_state_is_in_canada = yes }								##Converter
+					is_in_geographic_region = geographic_region_converter_colonial_canada												##Converter
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -92,7 +92,7 @@ can_aus.2 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
-				capital = { zzz_converter_state_is_in_canada = yes }									##Converter
+				is_in_geographic_region = geographic_region_converter_colonial_canada												##Converter
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 			}
@@ -101,7 +101,7 @@ can_aus.2 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
-				capital = { zzz_converter_state_is_in_canada = yes }									##Converter
+				is_in_geographic_region = geographic_region_converter_colonial_canada												##Converter
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 				NOT = {
@@ -182,7 +182,7 @@ can_aus.3 = {
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
-					capital = { zzz_converter_state_is_in_australia = yes }										##Converter
+					is_in_geographic_region = geographic_region_converter_colonial_australia												##Converter
 					is_subject = yes
 					NOT = { THIS = ROOT }
 					top_overlord = {
@@ -237,7 +237,7 @@ can_aus.4 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
-				capital = { zzz_converter_state_is_in_australia = yes }										##Converter
+				is_in_geographic_region = geographic_region_converter_colonial_australia												##Converter
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
 			}
@@ -246,7 +246,7 @@ can_aus.4 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
-				capital = { zzz_converter_state_is_in_australia = yes }										##Converter
+				is_in_geographic_region = geographic_region_converter_colonial_australia												##Converter
 				relations:root >= relations_threshold:amicable
 				NOT = {
 					scope:canada_scope_1 = THIS
@@ -347,12 +347,12 @@ can_aus.5 = {
 		if = {
 			limit = {
 				top_overlord = {
-					any_scope_state = { zzz_converter_state_is_in_canada = yes }
+					any_scope_state = { is_in_geographic_region = geographic_region_converter_colonial_canada }
 				}
 			}
 			top_overlord = {
 				every_scope_state = {
-					limit = { zzz_converter_state_is_in_canada = yes }
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_canada }
 					set_state_owner = root
 				}
 			}
@@ -371,7 +371,7 @@ can_aus.5 = {
 				c:CAN = { remove_primary_culture = prev }
 			}
 			every_scope_state = {
-				limit = { zzz_converter_state_is_in_canada = yes }
+				limit = { is_in_geographic_region = geographic_region_converter_colonial_canada }
 				every_scope_pop = {
 					limit = {
 						culture = {
@@ -415,7 +415,7 @@ can_aus.6 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
-				capital = { zzz_converter_state_is_in_canada = yes }										##Converter
+				is_in_geographic_region = geographic_region_converter_colonial_canada												##Converter
 				any_scope_state = {
 					OR = {
 						state_region = s:STATE_ONTARIO
@@ -441,14 +441,14 @@ can_aus.6 = {
 				limit = {
 					has_game_rule = converter_native_incorporation_access_addition
 					any_primary_culture = {
-					has_discrimination_trait_group = heritage_group_indigenous_american
+						has_discrimination_trait_group = heritage_group_indigenous_american
 						is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
 						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 					}
 				}
 				every_primary_culture = {
 					limit = {
-					has_discrimination_trait_group = heritage_group_indigenous_american
+						has_discrimination_trait_group = heritage_group_indigenous_american
 						is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
 						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 					}
@@ -491,7 +491,7 @@ can_aus.6 = {
 					c:CAN = { remove_primary_culture = prev }
 				}
 				every_scope_state = {
-					limit = { zzz_converter_state_is_in_canada = yes }
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_canada }
 					every_scope_pop = {
 						limit = {
 							culture = {
@@ -584,12 +584,12 @@ can_aus.7 = {
 		if = {
 			limit = {
 				top_overlord = {
-					any_scope_state = { zzz_converter_state_is_in_australia = yes }
+					any_scope_state = { is_in_geographic_region = geographic_region_converter_colonial_australia }
 				}
 			}
 			top_overlord = {
 				every_scope_state = {
-					limit = { zzz_converter_state_is_in_australia = yes }
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_australia }
 					set_state_owner = root
 				}
 			}
@@ -608,7 +608,7 @@ can_aus.7 = {
 				c:AST = { remove_primary_culture = prev }
 			}
 			every_scope_state = {
-				limit = { zzz_converter_state_is_in_australia = yes }
+				limit = { is_in_geographic_region = geographic_region_converter_colonial_australia }
 				every_scope_pop = {
 					limit = {
 						culture = {
@@ -652,7 +652,7 @@ can_aus.8 = {
 		random_subject_or_below = {
 			limit = {
 				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
-				capital = { zzz_converter_state_is_in_australia = yes }										##Converter
+				is_in_geographic_region = geographic_region_converter_colonial_australia												##Converter
 				any_scope_state = {
 					OR = {
 						state_region = s:STATE_NEW_SOUTH_WALES
@@ -729,7 +729,7 @@ can_aus.8 = {
 					c:AST = { remove_primary_culture = prev }
 				}
 				every_scope_state = {
-					limit = { zzz_converter_state_is_in_australia = yes }
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_australia }
 					every_scope_pop = {
 						limit = {
 							culture = {

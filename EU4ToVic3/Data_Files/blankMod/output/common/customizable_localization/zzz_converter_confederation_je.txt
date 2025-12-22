@@ -1,0 +1,143 @@
+﻿REPLACE:unite_can_description = {
+	type = country
+	text = {
+		trigger = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+			is_in_geographic_region = geographic_region_converter_colonial_canada
+			###Converter###
+		}
+		localization_key = canada_unite_can_desc
+	}
+	text = {
+		localization_key = canada_unite_gbr_desc
+	}
+}
+
+REPLACE:unite_aus_description = {
+	type = country
+	text = {
+		trigger = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }
+			is_in_geographic_region = geographic_region_converter_colonial_canada
+			###Converter###
+		}
+		localization_key = australia_unite_aus_desc
+	}
+	text = {
+		localization_key = australia_unite_gbr_desc
+	}
+}
+
+unite_usa_description = {
+	type = country
+	text = {
+		trigger = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+			is_in_geographic_region = geographic_region_converter_colonial_america
+			###Converter###
+		}
+		localization_key = america_unite_usa_desc
+	}
+	text = {
+		localization_key = america_unite_gbr_desc
+	}
+}
+
+unite_cal_description = {
+	type = country
+	text = {
+		trigger = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+			is_in_geographic_region = geographic_region_converter_colonial_california
+			###Converter###
+		}
+		localization_key = california_unite_cal_desc
+	}
+	text = {
+		localization_key = california_unite_gbr_desc
+	}
+}
+
+unite_mex_description = {
+	type = country
+	text = {
+		trigger = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+			is_in_geographic_region = geographic_region_converter_colonial_mexico
+			###Converter###
+		}
+		localization_key = mexico_unite_mex_desc
+	}
+	text = {
+		localization_key = mexico_unite_gbr_desc
+	}
+}
+
+unite_gco_description = {
+	type = country
+	text = {
+		trigger = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+			is_in_geographic_region = geographic_region_converter_colonial_gran_colombia
+			###Converter###
+		}
+		localization_key = colombia_unite_gco_desc
+	}
+	text = {
+		localization_key = colombia_unite_gbr_desc
+	}
+}
+
+unite_peu_description = {
+	type = country
+	text = {
+		trigger = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+			capital = { region = sr:region_andes }
+			###Converter###
+		}
+		localization_key = peru_unite_peu_desc
+	}
+	text = {
+		localization_key = peru_unite_gbr_desc
+	}
+}
+
+unite_brz_description = {
+	type = country
+	text = {
+		trigger = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+			capital = { region = sr:region_brazil }
+			###Converter###
+		}
+		localization_key = brazil_unite_brz_desc
+	}
+	text = {
+		localization_key = brazil_unite_gbr_desc
+	}
+}
+
+unite_arg_description = {
+	type = country
+	text = {
+		trigger = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+			is_in_geographic_region = geographic_region_converter_colonial_argentina
+			###Converter###
+		}
+		localization_key = argentina_unite_arg_desc
+	}
+	text = {
+		localization_key = argentina_unite_gbr_desc
+	}
+}

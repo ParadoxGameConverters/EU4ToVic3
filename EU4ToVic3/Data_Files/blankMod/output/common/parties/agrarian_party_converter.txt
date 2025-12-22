@@ -2,7 +2,7 @@
 # Occasionally used for an anti-serfdom alliance
 # More popular in Nordic countries
 
-agrarian_party = {
+REPLACE:agrarian_party = {
 	color = { 64 173 59 }
 	name = {
 		first_valid = {
@@ -53,15 +53,39 @@ agrarian_party = {
 				trigger = {
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }		### Converter
 					OR = {
-						has_law = law_type:law_presidential_republic
-						has_law = law_type:law_parliamentary_republic
+						has_law_or_variant = law_type:law_presidential_republic
+						has_law_or_variant = law_type:law_parliamentary_republic
 					}
+				}
+			}
+			triggered_desc = {
+				desc = party_fatherland_front
+				trigger = {
+					uses_aus_ger_characters = yes
+					any_interest_group = {
+						is_in_government = yes
+						party ?= {
+							is_party_type = agrarian_party
+						}
+					}
+					has_law_or_variant = law_type:law_single_party_state
+					has_variable = fatherland_front_var
 				}
 			}
 			triggered_desc = {
 				desc = party_landbund
 				trigger = {
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		### Converter
+					uses_aus_ger_characters = yes
+					NAND = {
+						any_interest_group = {
+							is_in_government = yes
+							party ?= {
+								is_party_type = fascist_party
+							}
+						}
+						has_law_or_variant = law_type:law_single_party_state
+						has_variable = fatherland_front_var
+					}
 				}
 			}
 			triggered_desc = {
@@ -74,7 +98,7 @@ agrarian_party = {
 				desc = party_agrarian_national_union
 				trigger = {
 					exists = c:BUL
-					THIS = c:BUL
+					c:BUL ?= THIS
 				}
 			}
 			triggered_desc = {
@@ -122,7 +146,7 @@ agrarian_party = {
 				desc = party_justice_party
 				trigger = {
 					### Converter
-					country_is_in_india = yes
+					is_in_geographic_region = geographic_region_india
 					OR = {
 						is_old_world_trading_company = yes
 						is_subject = yes
@@ -149,8 +173,8 @@ agrarian_party = {
 	available_for_interest_group = {
 		owner = {
 			country_has_voting_franchise = yes
-			ig:ig_rural_folk = {
-				is_marginal = no
+			ig:ig_rural_folk ?= {
+				ig_counts_as_marginal = no
 			}
 		}
 	}
@@ -186,7 +210,7 @@ agrarian_party = {
 		if = {
 			limit = {
 				owner = {
-					country_is_in_south_america = yes
+					is_in_geographic_region = geographic_region_south_america
 					any_primary_culture = {		### Converter
 						OR = {
 							is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
@@ -204,9 +228,9 @@ agrarian_party = {
 		if = {
 			limit = {
 				owner = {
-					country_is_in_north_america = yes
+					is_in_geographic_region = geographic_region_north_america
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }		### Converter
-					has_law = law_type:law_presidential_republic
+					has_law_or_variant = law_type:law_presidential_republic
 				}
 			}
 			add = {
@@ -228,7 +252,7 @@ agrarian_party = {
 			limit = {
 				is_powerful = no
 				owner = {
-					has_law = law_type:law_serfdom
+					has_law_or_variant = law_type:law_serfdom
 				}
 				law_stance = {
 					law = law_type:law_serfdom
@@ -259,11 +283,11 @@ agrarian_party = {
 		}
 		if = { # pacifist anti-colonial alliance
 			limit = {
-				leader = {
+				leader ?= {
 					has_ideology = ideology:ideology_pacifist
 				}
 				owner = {
-					NOT = { has_law = law_type:law_no_colonial_affairs }
+					NOT = { has_law_or_variant = law_type:law_no_colonial_affairs }
 				}
 			}
 			add = {
@@ -279,7 +303,7 @@ agrarian_party = {
 					has_ideology = ideology:ideology_reactionary
 				}
 				owner = {
-					has_law = law_type:law_no_migration_controls
+					has_law_or_variant = law_type:law_no_migration_controls
 				}
 			}
 			add = {
@@ -291,7 +315,7 @@ agrarian_party = {
 			limit = {
 				is_interest_group_type = ig_rural_folk
 				owner = {
-					NOT = { has_law = law_type:law_universal_suffrage }
+					NOT = { has_law_or_variant = law_type:law_universal_suffrage }
 				}
 			}
 			add = {
@@ -300,8 +324,8 @@ agrarian_party = {
 					limit = {
 						owner = {
 							OR = {
-								has_law = law_type:law_landed_voting
-								has_law = law_type:law_wealth_voting
+								has_law_or_variant = law_type:law_landed_voting
+								has_law_or_variant = law_type:law_wealth_voting
 							}
 						}
 					}
@@ -310,7 +334,7 @@ agrarian_party = {
 				if = {
 					limit = {
 						owner = {
-							has_law = law_type:law_census_voting
+							has_law_or_variant = law_type:law_census_voting
 						}
 					}
 					add = -5
@@ -326,8 +350,8 @@ agrarian_party = {
 				}
 				owner = {
 					OR = {
-						has_law = law_type:law_local_police
-						has_law = law_type:law_militarized_police
+						has_law_or_variant = law_type:law_local_police
+						has_law_or_variant = law_type:law_militarized_police
 					}
 				}
 			}
@@ -340,13 +364,14 @@ agrarian_party = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_meritocratic
+					has_ideology = ideology:ideology_cartist
 					has_ideology = ideology:ideology_agrarian
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_social_democrat
 					}
 				}
 				owner = {
-					has_law = law_type:law_land_based_taxation
+					has_law_or_variant = law_type:law_land_based_taxation
 				}
 			}
 			add = {
@@ -363,10 +388,10 @@ agrarian_party = {
 					has_ideology = ideology:ideology_magnatial
 				}
 				owner = {
-					has_law = law_type:law_free_trade
+					has_law_or_variant = law_type:law_free_trade
 				}
 				NOT = {
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_market_liberal
 					}
 				}
@@ -381,15 +406,15 @@ agrarian_party = {
 				OR = {
 					has_ideology = ideology:ideology_proletarian
 					has_ideology = ideology:ideology_agrarian
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_protectionist
 					}
 				}
 				owner = {
-					has_law = law_type:law_laissez_faire
+					has_law_or_variant = law_type:law_laissez_faire
 				}
 				NOT = {
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_market_liberal
 					}
 				}
@@ -405,7 +430,7 @@ agrarian_party = {
 					has_ideology = ideology:ideology_jingoist
 					has_ideology = ideology:ideology_particularist
 					has_ideology = ideology:ideology_sikh_moralist
-					leader = {
+					leader ?= {
 						OR = {
 							has_ideology = ideology:ideology_fascist
 							has_ideology = ideology:ideology_anarchist
@@ -415,7 +440,7 @@ agrarian_party = {
 					}
 				}
 				owner = {
-					has_law = law_type:law_peasant_levies
+					has_law_or_variant = law_type:law_peasant_levies
 				}
 			}
 			add = {
@@ -426,7 +451,7 @@ agrarian_party = {
 		if = { # anti-serfdom
 			limit = {
 				owner = {
-					has_law = law_type:law_serfdom
+					has_law_or_variant = law_type:law_serfdom
 				}
 				OR = {
 					has_ideology = ideology:ideology_egalitarian
@@ -434,10 +459,13 @@ agrarian_party = {
 					has_ideology = ideology:ideology_anti_slavery
 					has_ideology = ideology:ideology_laissez_faire
 					has_ideology = ideology:ideology_particularist
-					leader = {
-						has_ideology = ideology:ideology_abolitionist
-						has_ideology = ideology:ideology_social_democrat
-						has_ideology = ideology:ideology_communist
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_abolitionist
+							has_ideology = ideology:ideology_social_democrat
+							has_ideology = ideology:ideology_communist
+							has_ideology = ideology:ideology_vanguardist
+						}
 					}
 				}
 			}
@@ -449,11 +477,11 @@ agrarian_party = {
 		if = { # opposition to debt slavery
 			limit = {
 				owner = {
-					has_law = law_type:law_debt_slavery
+					has_law_or_variant = law_type:law_debt_slavery
 				}
 				OR = {
 					has_ideology = ideology:ideology_anti_slavery
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_abolitionist
 					}
 				}
@@ -471,7 +499,7 @@ agrarian_party = {
 					AND = {
 						exists = owner.py:agrarian_party
 						owner = {
-							ig:ig_rural_folk = {
+							ig:ig_rural_folk ?= {
 								NOT = { is_member_of_party = owner.py:agrarian_party }
 							}
 						}
@@ -481,6 +509,21 @@ agrarian_party = {
 			add = {
 				value = -20
 				desc = "from_no_rural_folk_in_party" # this should probably never actually display in game because the party won't exist
+			}
+		}
+		if = { # Carlists and Miguelists were against participating in electoral politics for a good while
+			limit = {
+				NOT = { owner = { has_technology_researched = political_agitation } }
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_carlist
+						has_ideology = ideology:ideology_miguelist
+					}
+				}
+			}
+			add = {
+				value = -20
+				desc = "from_traditionalist_monarchism"
 			}
 		}
 		if = {
@@ -497,7 +540,7 @@ agrarian_party = {
 			limit = {
 				scope:number = 1
 				is_powerful = no
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 			multiply = {
 				value = 2

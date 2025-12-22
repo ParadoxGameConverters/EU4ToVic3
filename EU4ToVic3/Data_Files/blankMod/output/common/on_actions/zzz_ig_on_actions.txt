@@ -61,7 +61,7 @@ converter_country_released_as_independent_on_actions = {
 	effect = {
 		if = {		## Future-proofing for when slave pop generation happens
 			limit = {
-				scope:target = {
+				scope:target ?= {
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_african_diaspora_cultures target = this } }
 					NOR = {
 						country_has_primary_culture = cu:afro_caribbean
@@ -71,12 +71,12 @@ converter_country_released_as_independent_on_actions = {
 						country_has_primary_culture = cu:afro_brazilian
 					}
 					OR = {
-						has_law = law_type:law_legacy_slavery
-						has_law = law_type:law_slave_trade
+						has_law_or_variant = law_type:law_legacy_slavery
+						has_law_or_variant = law_type:law_slave_trade
 					}
 				}
 			}
-			scope:target = {
+			scope:target ?= {
 				trigger_event = { id = slave_revolt_events.1 days = 0 }
 			}
 		}
@@ -85,7 +85,7 @@ converter_country_released_as_independent_on_actions = {
 
 converter_country_released_on_actions = {
 	effect = {
-		scope:target = { converter_released_country_effect = yes }
+		scope:target ?= { converter_released_country_effect = yes }
 	}
 }
 
@@ -128,7 +128,7 @@ on_revolution_start = {
 
 converter_revolution_start_on_actions = {
 	effect = {
-		scope:target = { converter_copy_ideologies_effect = yes }
+		scope:target ?= { converter_copy_ideologies_effect = yes }
 	}
 }
 
@@ -150,7 +150,7 @@ on_secession_end = {
 
 converter_secession_end_on_actions = {
 	effect = {
-		scope:target = {		## Add independent colonial primary cultures to list if they aren't already on it
+		scope:target ?= {		## Add independent colonial primary cultures to list if they aren't already on it
 			every_primary_culture = {
 				limit = {
 					OR = {
@@ -164,7 +164,7 @@ converter_secession_end_on_actions = {
 						is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
 						is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
 						is_target_in_global_variable_list = { name = global_australian_cultures target = this }
-						is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+						#is_target_in_global_variable_list = { name = global_cape_cultures target = this }
 					}
 					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
 				}

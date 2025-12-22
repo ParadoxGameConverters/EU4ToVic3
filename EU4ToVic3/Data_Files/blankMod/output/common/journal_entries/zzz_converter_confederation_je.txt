@@ -1,11 +1,278 @@
-﻿je_america_usa = {
+﻿REPLACE:je_canada_can = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_historical_content
+
+	is_shown_when_inactive = {
+		###Converter###
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+		is_in_geographic_region = geographic_region_converter_colonial_canada
+		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_CAN } }
+		###Converter###
+		is_subject = yes
+	}
+
+	is_shown_in_lobby = {
+		###Converter###
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+		is_in_geographic_region = geographic_region_converter_colonial_canada
+		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_CAN } }
+		###Converter###
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	scripted_button = je_canada_unite_can_button
+
+	complete = {
+		calc_true_if = {
+			amount >= 9
+			owns_entire_state_region = STATE_ONTARIO
+			owns_entire_state_region = STATE_NEW_BRUNSWICK
+			owns_entire_state_region = STATE_QUEBEC
+			owns_entire_state_region = STATE_NEWFOUNDLAND
+			owns_entire_state_region = STATE_ALBERTA
+			owns_entire_state_region = STATE_BRITISH_COLUMBIA
+			owns_entire_state_region = STATE_SASKATCHEWAN
+			owns_entire_state_region = STATE_MANITOBA
+			owns_entire_state_region = STATE_YUKON_TERRITORY
+			owns_entire_state_region = STATE_NORTHWEST_TERRITORIES
+			owns_entire_state_region = STATE_NUNAVUT
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = can_aus.5 }
+		hidden_effect = {
+			if = {
+				limit = {
+					any_scope_state = {
+						state_region = s:STATE_ONTARIO
+					}
+				}
+			}
+			s:STATE_ONTARIO = {
+				random_scope_state = {
+			        set_hub_name = {
+			            type = city
+			            name = HUB_NAME_STATE_ONTARIO_city_ottawa
+			        }
+				}
+			}
+		}
+	}
+
+	invalid = {
+		is_subject = no
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+REPLACE:je_canada_gbr = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_historical_content
+
+	is_shown_in_lobby = {
+		any_subject_or_below = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+			is_in_geographic_region = geographic_region_converter_colonial_canada
+			###Converter###
+			count >= 2
+		}
+		NOR = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+			is_in_geographic_region = geographic_region_converter_colonial_canada
+			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_CAN }
+			###Converter###
+		}
+	}
+
+	is_shown_when_inactive = {
+		any_subject_or_below = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+			is_in_geographic_region = geographic_region_converter_colonial_canada
+			###Converter###
+			count >= 2
+		}
+		NOR = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }
+			is_in_geographic_region = geographic_region_converter_colonial_canada
+			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_CAN }
+			###Converter###
+		}
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	scripted_button = je_canada_unite_can_button
+
+	complete = {
+		any_subject_or_below = {
+			calc_true_if = {
+				amount >= 9
+				owns_entire_state_region = STATE_ONTARIO
+				owns_entire_state_region = STATE_NEW_BRUNSWICK
+				owns_entire_state_region = STATE_QUEBEC
+				owns_entire_state_region = STATE_NEWFOUNDLAND
+				owns_entire_state_region = STATE_ALBERTA
+				owns_entire_state_region = STATE_BRITISH_COLUMBIA
+				owns_entire_state_region = STATE_SASKATCHEWAN
+				owns_entire_state_region = STATE_MANITOBA
+				owns_entire_state_region = STATE_YUKON_TERRITORY
+				owns_entire_state_region = STATE_NORTHWEST_TERRITORIES
+				owns_entire_state_region = STATE_NUNAVUT
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = can_aus.6 }
+		hidden_effect = {
+			if = {
+				limit = {
+					any_subject_or_below = {
+						any_scope_state = {
+							state_region = s:STATE_ONTARIO
+						}
+					}
+				}
+			}
+			s:STATE_ONTARIO = {
+				random_scope_state = {
+			        set_hub_name = {
+			            type = city
+			            name = HUB_NAME_STATE_ONTARIO_city_ottawa
+			        }
+				}
+			}
+		}
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+REPLACE:je_australia_aus = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_historical_content
+
+	is_shown_when_inactive = {
+		###Converter###
+		any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }
+		is_in_geographic_region = geographic_region_converter_colonial_australia
+		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_AST } }
+		###Converter###
+		is_subject = yes
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	scripted_button = je_australia_unite_aus_button
+
+	complete = {
+		calc_true_if = {
+			amount >= 7
+			owns_entire_state_region = STATE_NEW_SOUTH_WALES
+			owns_entire_state_region = STATE_VICTORIA
+			owns_entire_state_region = STATE_TASMANIA
+			owns_entire_state_region = STATE_QUEENSLAND
+			owns_entire_state_region = STATE_SOUTH_AUSTRALIA
+			owns_entire_state_region = STATE_WESTERN_AUSTRALIA
+			owns_entire_state_region = STATE_NORTHERN_TERRITORY
+			owns_entire_state_region = STATE_NORTH_ISLAND
+			owns_entire_state_region = STATE_SOUTH_ISLAND
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = can_aus.7 }
+	}
+
+	invalid = {
+		is_subject = no
+	}
+
+	should_be_pinned_by_default = yes
+}
+
+REPLACE:je_australia_gbr = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_historical_content
+
+	is_shown_when_inactive = {
+		any_subject_or_below = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }
+			is_in_geographic_region = geographic_region_converter_colonial_australia
+			###Converter###
+			count >= 2
+		}
+		NOR = {
+			###Converter###
+			any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }
+			is_in_geographic_region = geographic_region_converter_colonial_australia
+			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_AST }
+			###Converter###
+		}
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+	}
+
+	scripted_button = je_australia_unite_aus_button
+
+	complete = {
+		any_subject_or_below = {
+			calc_true_if = {
+				amount >= 7
+				owns_entire_state_region = STATE_NEW_SOUTH_WALES
+				owns_entire_state_region = STATE_VICTORIA
+				owns_entire_state_region = STATE_TASMANIA
+				owns_entire_state_region = STATE_QUEENSLAND
+				owns_entire_state_region = STATE_SOUTH_AUSTRALIA
+				owns_entire_state_region = STATE_WESTERN_AUSTRALIA
+				owns_entire_state_region = STATE_NORTHERN_TERRITORY
+				owns_entire_state_region = STATE_NORTH_ISLAND
+				owns_entire_state_region = STATE_SOUTH_ISLAND
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = can_aus.8 }
+	}
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+je_america_usa = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
 	group = je_group_converter_historical_content
 
 	is_shown_when_inactive = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
-		capital = { zzz_converter_state_is_in_america = yes }
+		is_in_geographic_region = geographic_region_converter_colonial_america
 		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_USA } }
 		is_subject = yes
 	}
@@ -13,6 +280,8 @@
 	possible = {
 		has_technology_researched = nationalism
 	}
+
+	scripted_button = je_america_unite_usa_button
 
 	complete = {
 		calc_true_if = {
@@ -75,12 +344,12 @@ je_america_gbr = {
 	is_shown_when_inactive = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
-			capital = { zzz_converter_state_is_in_america = yes }
+			is_in_geographic_region = geographic_region_converter_colonial_america
 			count >= 2
 		}
 		NOT = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
-			capital = { zzz_converter_state_is_in_america = yes }
+			is_in_geographic_region = geographic_region_converter_colonial_america
 			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_USA }
 		}
 	}
@@ -88,6 +357,8 @@ je_america_gbr = {
 	possible = {
 		has_technology_researched = nationalism
 	}
+
+	scripted_button = je_america_unite_usa_button
 
 	complete = {
 		any_subject_or_below = {
@@ -147,7 +418,7 @@ je_california_cal = {
 
 	is_shown_when_inactive = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
-		capital = { zzz_converter_state_is_in_california = yes }
+		is_in_geographic_region = geographic_region_converter_colonial_california
 		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_CAL } }
 		is_subject = yes
 	}
@@ -155,6 +426,8 @@ je_california_cal = {
 	possible = {
 		has_technology_researched = nationalism
 	}
+
+	scripted_button = je_california_unite_cal_button
 
 	complete = {
 		calc_true_if = {
@@ -196,12 +469,12 @@ je_california_gbr = {
 	is_shown_when_inactive = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
-			capital = { zzz_converter_state_is_in_california = yes }
+			is_in_geographic_region = geographic_region_converter_colonial_california
 			count >= 2
 		}
 		NOT = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
-			capital = { zzz_converter_state_is_in_california = yes }
+			is_in_geographic_region = geographic_region_converter_colonial_california
 			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_CAL }
 		}
 	}
@@ -209,6 +482,8 @@ je_california_gbr = {
 	possible = {
 		has_technology_researched = nationalism
 	}
+
+	scripted_button = je_california_unite_cal_button
 
 	complete = {
 		any_subject_or_below = {
@@ -249,7 +524,7 @@ je_mexico_mex = {
 
 	is_shown_when_inactive = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
-		capital = { zzz_converter_state_is_in_mexico = yes }
+		is_in_geographic_region = geographic_region_converter_colonial_mexico
 		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_MEX } }
 		is_subject = yes
 	}
@@ -257,6 +532,8 @@ je_mexico_mex = {
 	possible = {
 		has_technology_researched = nationalism
 	}
+
+	scripted_button = je_mexico_unite_mex_button
 
 	complete = {
 		calc_true_if = {
@@ -305,12 +582,12 @@ je_mexico_gbr = {
 	is_shown_when_inactive = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
-			capital = { zzz_converter_state_is_in_mexico = yes }
+			is_in_geographic_region = geographic_region_converter_colonial_mexico
 			count >= 2
 		}
 		NOT = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
-			capital = { zzz_converter_state_is_in_mexico = yes }
+			is_in_geographic_region = geographic_region_converter_colonial_mexico
 			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_MEX }
 		}
 	}
@@ -318,6 +595,8 @@ je_mexico_gbr = {
 	possible = {
 		has_technology_researched = nationalism
 	}
+
+	scripted_button = je_mexico_unite_mex_button
 
 	complete = {
 		any_subject_or_below = {
@@ -363,7 +642,7 @@ je_colombia_gco = {
 
 	is_shown_when_inactive = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
-		capital = { zzz_converter_state_is_in_gran_colombia = yes }
+		is_in_geographic_region = geographic_region_converter_colonial_gran_colombia
 		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_GCO } }
 		is_subject = yes
 	}
@@ -371,6 +650,8 @@ je_colombia_gco = {
 	possible = {
 		has_technology_researched = nationalism
 	}
+
+	scripted_button = je_colombia_unite_gco_button
 
 	complete = {
 		calc_true_if = {
@@ -406,12 +687,12 @@ je_colombia_gbr = {
 	is_shown_when_inactive = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
-			capital = { zzz_converter_state_is_in_gran_colombia = yes }
+			is_in_geographic_region = geographic_region_converter_colonial_gran_colombia
 			count >= 2
 		}
 		NOT = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
-			capital = { zzz_converter_state_is_in_gran_colombia = yes }
+			is_in_geographic_region = geographic_region_converter_colonial_gran_colombia
 			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_GCO }
 		}
 	}
@@ -419,6 +700,8 @@ je_colombia_gbr = {
 	possible = {
 		has_technology_researched = nationalism
 	}
+
+	scripted_button = je_colombia_unite_gco_button
 
 	complete = {
 		any_subject_or_below = {
@@ -461,6 +744,8 @@ je_peru_peu = {
 	possible = {
 		has_technology_researched = nationalism
 	}
+
+	scripted_button = je_peru_unite_peu_button
 
 	complete = {
 		calc_true_if = {
@@ -516,6 +801,8 @@ je_peru_gbr = {
 		has_technology_researched = nationalism
 	}
 
+	scripted_button = je_peru_unite_peu_button
+
 	complete = {
 		any_subject_or_below = {
 			calc_true_if = {
@@ -561,6 +848,8 @@ je_brazil_brz = {
 	possible = {
 		has_technology_researched = nationalism
 	}
+
+	scripted_button = je_brazil_unite_brz_button
 
 	complete = {
 		calc_true_if = {
@@ -619,6 +908,8 @@ je_brazil_gbr = {
 		has_technology_researched = nationalism
 	}
 
+	scripted_button = je_brazil_unite_brz_button
+
 	complete = {
 		any_subject_or_below = {
 			calc_true_if = {
@@ -661,7 +952,7 @@ je_argentina_arg = {
 
 	is_shown_when_inactive = {
 		any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
-		capital = { zzz_converter_state_is_in_argentina = yes }
+		is_in_geographic_region = geographic_region_converter_colonial_argentina
 		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_ARG } }
 		is_subject = yes
 	}
@@ -669,6 +960,8 @@ je_argentina_arg = {
 	possible = {
 		has_technology_researched = nationalism
 	}
+
+	scripted_button = je_argentina_unite_arg_button
 
 	complete = {
 		calc_true_if = {
@@ -710,12 +1003,12 @@ je_argentina_gbr = {
 	is_shown_when_inactive = {
 		any_subject_or_below = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
-			capital = { zzz_converter_state_is_in_argentina = yes }
+			is_in_geographic_region = geographic_region_converter_colonial_argentina
 			count >= 2
 		}
 		NOT = {
 			any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
-			capital = { zzz_converter_state_is_in_argentina = yes }
+			is_in_geographic_region = geographic_region_converter_colonial_argentina
 			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_ARG }
 		}
 	}
@@ -723,6 +1016,8 @@ je_argentina_gbr = {
 	possible = {
 		has_technology_researched = nationalism
 	}
+
+	scripted_button = je_argentina_unite_arg_button
 
 	complete = {
 		any_subject_or_below = {
@@ -754,88 +1049,92 @@ je_argentina_gbr = {
 	should_be_pinned_by_default = yes
 }
 
-je_cape_saf = {
-	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
-
-	group = je_group_converter_historical_content
-
-	is_shown_when_inactive = {
-		any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
-		capital = { region = sr:region_southern_africa }
-		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_SAF } }
-		is_subject = yes
-	}
-
-	possible = {
-		has_technology_researched = nationalism
-	}
-
-	complete = {
-		calc_true_if = {
-			amount >= 5
-			owns_entire_state_region = STATE_CAPE_COLONY
-			owns_entire_state_region = STATE_NORTHERN_CAPE
-			owns_entire_state_region = STATE_EASTERN_CAPE
-			owns_entire_state_region = STATE_ZULULAND
-			owns_entire_state_region = STATE_VRYSTAAT
-			owns_entire_state_region = STATE_TRANSVAAL
-			owns_entire_state_region = STATE_LOURENCO_MARQUES
-		}
-	}
-
-	on_complete = {
-		trigger_event = { id = zzz_cc_confederation.31 }
-	}
-
-	invalid = {
-		is_subject = no
-	}
-
-	should_be_pinned_by_default = yes
-}
-
-je_cape_gbr = {
-	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
-
-	group = je_group_converter_historical_content
-
-	is_shown_when_inactive = {
-		any_subject_or_below = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
-			capital = { region = sr:region_southern_africa }
-			count >= 2
-		}
-		NOT = {
-			any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
-			capital = { region = sr:region_southern_africa }
-			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_SAF }
-		}
-	}
-
-	possible = {
-		has_technology_researched = nationalism
-	}
-
-	complete = {
-		any_subject_or_below = {
-			calc_true_if = {
-				amount >= 5
-				owns_entire_state_region = STATE_CAPE_COLONY
-				owns_entire_state_region = STATE_NORTHERN_CAPE
-				owns_entire_state_region = STATE_EASTERN_CAPE
-				owns_entire_state_region = STATE_ZULULAND
-				owns_entire_state_region = STATE_VRYSTAAT
-				owns_entire_state_region = STATE_TRANSVAAL
-				owns_entire_state_region = STATE_LOURENCO_MARQUES
-			}
-		}
-	}
-
-	on_complete = {
-		trigger_event = { id = zzz_cc_confederation.32 }
-	}
-
-	weight = 100
-
-	should_be_pinned_by_default = yes
-}
+#je_cape_saf = {
+#	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+#
+#	group = je_group_converter_historical_content
+#
+#	is_shown_when_inactive = {
+#		any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+#		capital = { region = sr:region_southern_africa }
+#		NOT = { is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_SAF } }
+#		is_subject = yes
+#	}
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#
+#	scripted_button = je_cape_unite_saf_button
+#
+#	complete = {
+#		calc_true_if = {
+#			amount >= 5
+#			owns_entire_state_region = STATE_CAPE_COLONY
+#			owns_entire_state_region = STATE_NORTHERN_CAPE
+#			owns_entire_state_region = STATE_EASTERN_CAPE
+#			owns_entire_state_region = STATE_ZULULAND
+#			owns_entire_state_region = STATE_VRYSTAAT
+#			owns_entire_state_region = STATE_TRANSVAAL
+#			owns_entire_state_region = STATE_LOURENCO_MARQUES
+#		}
+#	}
+#
+#	on_complete = {
+#		trigger_event = { id = zzz_cc_confederation.31 }
+#	}
+#
+#	invalid = {
+#		is_subject = no
+#	}
+#
+#	should_be_pinned_by_default = yes
+#}
+#
+#je_cape_gbr = {
+#	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+#
+#	group = je_group_converter_historical_content
+#
+#	is_shown_when_inactive = {
+#		any_subject_or_below = {
+#			any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+#			capital = { region = sr:region_southern_africa }
+#			count >= 2
+#		}
+#		NOT = {
+#			any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+#			capital = { region = sr:region_southern_africa }
+#			is_target_in_global_variable_list = { name = global_unavailable_converter_confederations target = flag:converter_SAF }
+#		}
+#	}
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#
+#	scripted_button = je_cape_unite_saf_button
+#
+#	complete = {
+#		any_subject_or_below = {
+#			calc_true_if = {
+#				amount >= 5
+#				owns_entire_state_region = STATE_CAPE_COLONY
+#				owns_entire_state_region = STATE_NORTHERN_CAPE
+#				owns_entire_state_region = STATE_EASTERN_CAPE
+#				owns_entire_state_region = STATE_ZULULAND
+#				owns_entire_state_region = STATE_VRYSTAAT
+#				owns_entire_state_region = STATE_TRANSVAAL
+#				owns_entire_state_region = STATE_LOURENCO_MARQUES
+#			}
+#		}
+#	}
+#
+#	on_complete = {
+#		trigger_event = { id = zzz_cc_confederation.32 }
+#	}
+#
+#	weight = 100
+#
+#	should_be_pinned_by_default = yes
+#}

@@ -11,9 +11,7 @@ is_old_world_trading_company = {
 			is_subject_type = subject_type_chartered_company
 			has_variable = converter_was_old_world_trading_company
 		}
-		country_is_in_north_america = no
-		country_is_in_central_america = no
-		country_is_in_south_america = no
+		NOT = { is_in_geographic_region = geographic_region_americas }
 	}
 }
 

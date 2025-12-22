@@ -1,11 +1,24 @@
 ﻿# Fallback party for Devout
 # When devout are powerful, other religious IG's might join
 
-religious_party = {
+REPLACE:religious_party = {
 	color = { 100 100 100 }
 	name = {
 		first_valid = {
-
+			triggered_desc = {
+				desc = party_fatherland_front
+				trigger = {
+					uses_aus_ger_characters = yes																						### Converter
+					any_interest_group = {
+						is_in_government = yes
+						party ?= {
+							is_party_type = religious_party
+						}
+					}
+					has_law_or_variant = law_type:law_single_party_state
+					has_variable = fatherland_front_var
+				}
+			}
 			triggered_desc = {
 				desc = party_catholic_peoples_party
 				trigger = {
@@ -15,6 +28,26 @@ religious_party = {
 						root.var:tc_majority_religion ?= rel:catholic
 					}
 					uses_aus_ger_characters = yes
+					NAND = {
+						any_interest_group = {
+							is_in_government = yes
+							party ?= {
+								is_party_type = fascist_party
+							}
+						}
+						has_law_or_variant = law_type:law_single_party_state
+						has_variable = fatherland_front_var
+					}
+				}
+			}
+			triggered_desc = {
+				desc = party_nationalist_party
+				trigger = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_portuguese_cultures target = this } }	### Converter
+					has_law = law_type:law_monarchy
+					NOT = {
+						has_technology_researched = corporatism
+					}
 				}
 			}
 			triggered_desc = {
@@ -26,6 +59,10 @@ religious_party = {
 						root.var:tc_majority_religion ?= rel:catholic
 					}
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_portuguese_cultures target = this } }
+					NOR = {
+						has_law = law_type:law_monarchy
+						has_law = law_type:law_theocracy
+					}
 				}
 			}
 			triggered_desc = {
@@ -37,7 +74,7 @@ religious_party = {
 						root.var:tc_majority_religion ?= rel:catholic
 					}
 					exists = c:SWI
-					THIS = c:SWI
+					c:SWI ?= THIS
 				}
 			}
 			triggered_desc = {
@@ -117,6 +154,11 @@ religious_party = {
 							is_target_in_global_variable_list = { name = global_sou_ita_cultures target = this }
 						}
 					}
+					NOR = {
+						c:AUS ?= this
+						c:KUK ?= this
+						c:HRE ?= this
+					}
 				}
 			}
 			triggered_desc = {
@@ -139,7 +181,7 @@ religious_party = {
 				desc = party_buddhist
 				trigger = {
 					OR = {																									### Converter
-						root.religion = { has_discrimination_trait = heritage_dharmic }
+						root.religion = { has_discrimination_trait = heritage_dharmic }										##This is weird, since parties take the 1st available name we'll never see the hindu party...
 						root.var:ancien_regime_religion ?= { has_discrimination_trait = heritage_dharmic }
 						root.var:tc_majority_religion ?= { has_discrimination_trait = heritage_dharmic }
 					}
@@ -162,9 +204,9 @@ religious_party = {
 						country_has_state_religion = rel:hindu
 						root.var:ancien_regime_religion = rel:hindu
 						root.var:tc_majority_religion ?= rel:hindu
-						root.religion = { has_discrimination_trait = heritage_vedic }
-						root.var:ancien_regime_religion ?= { has_discrimination_trait = heritage_vedic }
-						root.var:tc_majority_religion ?= { has_discrimination_trait = heritage_vedic }
+						root.religion = { has_variable = converter_is_hindu_faith }
+						root.var:ancien_regime_religion ?= { has_variable = converter_is_hindu_faith }
+						root.var:tc_majority_religion ?= { has_variable = converter_is_hindu_faith }
 					}
 				}
 			}
@@ -211,11 +253,11 @@ religious_party = {
 			triggered_desc = {
 				desc = party_hindu_mahasabha
 				trigger = {
-					ig:ig_devout = {
+					ig:ig_devout ?= {
 						has_ideology = ideology:ideology_hindu_moralist
 					}
 					### Converter
-					country_is_in_india = yes
+					is_in_geographic_region = geographic_region_india
 					OR = {
 						is_old_world_trading_company = yes
 						is_subject = yes
@@ -275,7 +317,7 @@ religious_party = {
 		if = {
 			limit = {
 				owner = {
-					country_is_in_south_america = yes
+					is_in_geographic_region = geographic_region_south_america
 					any_primary_culture = {		### Converter
 						OR = {
 							is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
@@ -293,9 +335,9 @@ religious_party = {
 		if = {
 			limit = {
 				owner = {
-					country_is_in_north_america = yes
+					is_in_geographic_region = geographic_region_north_america
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }		### Converter
-					has_law = law_type:law_presidential_republic
+					has_law_or_variant = law_type:law_presidential_republic
 				}
 			}
 			add = {
@@ -308,7 +350,7 @@ religious_party = {
 				owner = {
 					any_interest_group = {
 						is_interest_group_type = ig_landowners
-						is_marginal = no
+						ig_counts_as_marginal = no
 					}
 					NOT = {
 						has_technology_researched = corporatism
@@ -324,7 +366,7 @@ religious_party = {
 			limit = {
 				is_interest_group_type = ig_devout
 				owner = {
-					has_law = law_type:law_theocracy
+					has_law_or_variant = law_type:law_theocracy
 				}
 			}
 			add = {
@@ -340,7 +382,7 @@ religious_party = {
 					AND = {
 						exists = owner.py:religious_party
 						owner = {
-							ig:ig_devout = {
+							ig:ig_devout ?= {
 								NOT = { is_member_of_party = owner.py:religious_party }
 							}
 						}
@@ -366,13 +408,14 @@ religious_party = {
 			limit = {
 				is_powerful = no
 				owner = {
-					ig:ig_devout = {
+					ig:ig_devout ?= {
 						is_powerful = yes
 					}
 				}
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_traditionalist
+						has_ideology = ideology:ideology_carlist
 						has_ideology = ideology:ideology_theocrat
 						has_ideology = ideology:ideology_corporatist_leader
 					}
@@ -388,7 +431,7 @@ religious_party = {
 				OR = {
 					has_ideology = ideology:ideology_anti_clerical
 					has_ideology = ideology:ideology_anti_clerical_pb		### Converter
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_nihilist
 					}
 				}
@@ -402,9 +445,12 @@ religious_party = {
 			limit = {
 				OR = {
 					has_ideology = ideology:ideology_corporatist
-					leader = {
+					leader ?= {
 						has_ideology = ideology:ideology_corporatist_leader
 					}
+				}
+				NOT = {
+					c:AUS ?= owner
 				}
 			}
 			add = {
@@ -416,7 +462,7 @@ religious_party = {
 			limit = {
 				has_ideology = ideology:ideology_patriarchal
 				owner = {
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 			}
 			add = {
@@ -424,10 +470,28 @@ religious_party = {
 				desc = "from_patriarchy"
 			}
 		}
+		if = { # Carlists and Miguelists were against participating in electoral politics for a good while
+			limit = {
+				NOT = { owner = { has_technology_researched = political_agitation } }
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_carlist
+						has_ideology = ideology:ideology_miguelist
+					}
+				}
+			}
+			add = {
+				value = -20
+				desc = "from_traditionalist_monarchism"
+			}
+		}
 		if = {
 			limit = {
 				is_interest_group_type = ig_devout
 				is_powerful = yes
+				NOT = {
+					c:AUS ?= owner
+				}
 			}
 			multiply = {
 				value = 2
@@ -438,7 +502,7 @@ religious_party = {
 			limit = {
 				scope:number = 1
 				is_powerful = no
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 			multiply = {
 				value = 2
@@ -474,7 +538,7 @@ religious_party = {
 		}
 		if = { # anti-orleanist
 			limit = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_bonapartist
 						has_ideology = ideology:ideology_legitimist
@@ -487,7 +551,7 @@ religious_party = {
 							is_party_type = religious_party
 						}
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_orleanist
 						}
 					}
@@ -500,7 +564,7 @@ religious_party = {
 		}
 		if = { # anti-legitimist
 			limit = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_bonapartist
 						has_ideology = ideology:ideology_orleanist
@@ -513,7 +577,7 @@ religious_party = {
 							is_party_type = religious_party
 						}
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_legitimist
 						}
 					}
@@ -526,7 +590,7 @@ religious_party = {
 		}
 		if = { # anti-bonapartist
 			limit = {
-				leader = {
+				leader ?= {
 					OR = {
 						has_ideology = ideology:ideology_legitimist
 						has_ideology = ideology:ideology_orleanist
@@ -539,7 +603,7 @@ religious_party = {
 							is_party_type = religious_party
 						}
 						is_powerful = yes
-						leader = {
+						leader ?= {
 							has_ideology = ideology:ideology_bonapartist
 						}
 					}

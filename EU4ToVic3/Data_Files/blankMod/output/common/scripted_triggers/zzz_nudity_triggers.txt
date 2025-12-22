@@ -1,25 +1,25 @@
 ﻿#should_be_naked_trigger
 #should_be_naked_character_trigger
 
-should_be_naked_trigger = {
+REPLACE:should_be_naked_trigger = {
 	exists = scope:pop
 	scope:pop = {
 		trigger_if = {
 			limit = {
-				religion = { has_discrimination_trait = nudist }
+				religion = { is_target_in_global_variable_list = { name = global_popular_nudist_religions target = this } }
 			}
 			NOT = { is_pop_type = academics }
 		}
 		trigger_else_if = {
 			limit = { is_pop_type = clergymen }
-			religion = { has_discrimination_trait = nudist_clerical }
+			religion = { is_target_in_global_variable_list = { name = global_clerical_nudist_religions target = this } }
 		}
 		trigger_else_if = {
 			limit = { is_pop_type = officers }
-			religion = { has_discrimination_trait = nudist_clerical }
+			religion = { is_target_in_global_variable_list = { name = global_clerical_nudist_religions target = this } }
 			has_state_religion = yes
 			owner = {
-				ig:ig_armed_forces = {
+				ig:ig_armed_forces ?= {
 					OR = {
 						has_ideology = ideology:ideology_pious
 						has_ideology = ideology:ideology_corporatist
@@ -54,28 +54,28 @@ should_be_naked_character_trigger = {
 		}
 		trigger_if = {
 			limit = {
-				religion = { has_discrimination_trait = nudist }
+				religion = { is_target_in_global_variable_list = { name = global_popular_nudist_religions target = this } }
 			}
 			NOT = { is_interest_group_type = ig_intelligentsia }
 		}
 		trigger_else_if = {
 			limit = {
-				religion = { has_discrimination_trait = nudist_clerical }
+				religion = { is_target_in_global_variable_list = { name = global_clerical_nudist_religions target = this } }
 			}
 			OR = {
 				has_ideology = ideology:ideology_theocrat
 				is_interest_group_type = ig_devout
 				trigger_if = {
 					limit = {
-						owner = { has_law = law_type:law_theocracy }
+						owner = { has_law_or_variant = law_type:law_theocracy }
 					}
 					is_ruler = yes
 				}
 				trigger_if = {
 					limit = {
 						owner = {
-							religion = { has_discrimination_trait = nudist_clerical }
-							ig:ig_armed_forces = {
+							religion = { is_target_in_global_variable_list = { name = global_clerical_nudist_religions target = this } }
+							ig:ig_armed_forces ?= {
 								OR = {
 									has_ideology = ideology:ideology_pious
 									has_ideology = ideology:ideology_corporatist
