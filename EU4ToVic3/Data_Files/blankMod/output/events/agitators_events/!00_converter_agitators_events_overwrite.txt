@@ -1,4 +1,4 @@
-﻿namespace = dreyfus
+namespace = dreyfus
 namespace = paris_commune_pulse_events
 
 # Dreyfus conviction event
@@ -54,11 +54,11 @@ dreyfus.1 = {
 				}
 			}
 		}
-		ig:ig_armed_forces = {
-			is_marginal = no
+		ig:ig_armed_forces ?= {
+			ig_counts_as_marginal = no
 		}
 		NOT = {
-			has_law = law_type:law_multicultural
+			has_law_or_variant = law_type:law_multicultural
 		}
 		NOT = {
 			has_variable = dreyfus_convicted
@@ -112,7 +112,7 @@ dreyfus.1 = {
 			save_scope_as = dreyfus_rival_country_scope
 			set_variable = dreyfus_rival_country_var
 		}
-		ig:ig_armed_forces = {
+		ig:ig_armed_forces ?= {
 			save_scope_as = dreyfus_armed_forces_scope
 		}
 		set_variable = dreyfus_convicted
@@ -129,7 +129,7 @@ dreyfus.1 = {
 		custom_tooltip = {
 			text = dreyfus.1.tt_1
 		}
-		ig:ig_armed_forces = {
+		ig:ig_armed_forces ?= {
 			add_modifier = {
 				name = army_honor_defended
 				days = normal_modifier_time
@@ -163,7 +163,7 @@ dreyfus.1 = {
 		custom_tooltip = {
 			text = dreyfus.1.tt_2
 		}
-		ig:ig_armed_forces = {
+		ig:ig_armed_forces ?= {
 			add_modifier = {
 				name = army_honor_defended
 				days = normal_modifier_time
@@ -185,7 +185,7 @@ dreyfus.1 = {
 		name = dreyfus.1.c
 		highlighted_option = yes
 		trigger = {
-			ig:ig_armed_forces = {
+			ig:ig_armed_forces ?= {
 				is_in_government = no
 			}
 			institution_investment_level = {
@@ -196,7 +196,7 @@ dreyfus.1 = {
 		custom_tooltip = {
 			text = dreyfus.1.tt_3
 		}
-		ig:ig_armed_forces = {
+		ig:ig_armed_forces ?= {
 			add_modifier = {
 				name = dreyfus_subject_of_inquiry
 				days = normal_modifier_time
@@ -251,7 +251,7 @@ dreyfus.2 = {
 			}
 			save_scope_as = alfred_dreyfus_scope
 		}
-		ig:ig_armed_forces = {
+		ig:ig_armed_forces ?= {
 			save_scope_as = dreyfus_armed_forces_scope
 		}
 		###Converter
@@ -292,11 +292,11 @@ dreyfus.2 = {
 		trigger_event = { id = dreyfus.3 days = 7 popup = yes }
 		if = {
 			limit = {
-				ig:ig_armed_forces = {
+				ig:ig_armed_forces ?= {
 					has_modifier = army_honor_defended
 				}
 			}
-			ig:ig_armed_forces = {
+			ig:ig_armed_forces ?= {
 				remove_modifier = army_honor_defended
 			}
 		}
@@ -306,15 +306,15 @@ dreyfus.2 = {
 		trigger_event = { id = dreyfus.3 days = 7 popup = yes }
 		if = {
 			limit = {
-				ig:ig_armed_forces = {
+				ig:ig_armed_forces ?= {
 					has_modifier = dreyfus_autonomous_army
 				}
 			}
-			ig:ig_armed_forces = {
+			ig:ig_armed_forces ?= {
 				remove_modifier = dreyfus_autonomous_army
 			}
 		}
-		ig:ig_armed_forces = {
+		ig:ig_armed_forces ?= {
 			add_modifier = {
 				name = dreyfus_wavering_army
 				days = normal_modifier_time
@@ -354,7 +354,7 @@ dreyfus.3 = {
 			}
 			save_scope_as = alfred_dreyfus_scope
 		}
-		ig:ig_armed_forces = {
+		ig:ig_armed_forces ?= {
 			leader = {
 				save_scope_as = dreyfus_armed_forces_leader_scope
 			}
@@ -363,14 +363,14 @@ dreyfus.3 = {
 		if = {
 			limit = {
 				any_interest_group = {
-					is_marginal = yes
+					ig_counts_as_marginal = yes
 					is_in_government = yes
 					ig_is_dreyfusard = yes
 				}
 			}
 			random_interest_group = {
 				limit = {
-					is_marginal = no
+					ig_counts_as_marginal = no
 					is_in_government = no
 					ig_is_dreyfusard = yes
 				}
@@ -474,7 +474,7 @@ paris_commune_pulse_events.4 = {
 
 	trigger = {
 		has_variable = paris_commune_prc_perspective
-		c:PRC = {
+		c:PRC ?= {
 			any_interest_group = {
 				leader = {
 					OR = {
@@ -496,7 +496,7 @@ paris_commune_pulse_events.4 = {
 	}
 
 	immediate = {
-		c:PRC = {
+		c:PRC ?= {
 			save_scope_as = paris_commune_nation_scope
 			random_scope_state = {
 				limit = {
@@ -539,7 +539,7 @@ paris_commune_pulse_events.4 = {
 							}
 						}
 					}
-					is_marginal = no
+					ig_counts_as_marginal = no
 				}
 			}
 			every_interest_group = {
@@ -559,7 +559,7 @@ paris_commune_pulse_events.4 = {
 							}
 						}
 					}
-					is_marginal = no
+					ig_counts_as_marginal = no
 				}
 				leader = {
 					add_modifier = {
@@ -569,7 +569,7 @@ paris_commune_pulse_events.4 = {
 				}
 			}
 		}
-		c:PRC = {
+		c:PRC ?= {
 			if = {
 				limit = {
 					any_interest_group = {
@@ -588,7 +588,7 @@ paris_commune_pulse_events.4 = {
 								}
 							}
 						}
-						is_marginal = no
+						ig_counts_as_marginal = no
 					}
 				}
 				custom_tooltip = {
@@ -611,7 +611,7 @@ paris_commune_pulse_events.4 = {
 								}
 							}
 						}
-						is_marginal = no
+						ig_counts_as_marginal = no
 					}
 					add_modifier = {
 						name = rallying_cries_ignored_modifier
@@ -635,7 +635,7 @@ paris_commune_pulse_events.4 = {
 		}
 		if = {
 			limit = {
-				c:PRC = {
+				c:PRC ?= {
 					any_interest_group = {
 						leader = {
 							OR = {
@@ -649,7 +649,7 @@ paris_commune_pulse_events.4 = {
 			custom_tooltip = {
 				text = communard_effects_header_tt
 			}
-			c:PRC = {
+			c:PRC ?= {
 				every_interest_group = {
 					limit = {
 						leader = {
@@ -658,7 +658,7 @@ paris_commune_pulse_events.4 = {
 								has_ideology = ideology:ideology_authoritarian
 							}
 						}
-						is_marginal = no
+						ig_counts_as_marginal = no
 					}
 					add_modifier = {
 						name = cries_of_havoc_modifier
@@ -680,7 +680,7 @@ paris_commune_pulse_events.4 = {
 		s:STATE_ILE_DE_FRANCE = {
 			add_devastation = 10
 		}
-		c:PRC = {
+		c:PRC ?= {
 			if = {
 				limit = {
 					any_interest_group = {
@@ -699,7 +699,7 @@ paris_commune_pulse_events.4 = {
 								}
 							}
 						}
-						is_marginal = no
+						ig_counts_as_marginal = no
 					}
 				}
 				custom_tooltip = {
@@ -722,7 +722,7 @@ paris_commune_pulse_events.4 = {
 								}
 							}
 						}
-						is_marginal = no
+						ig_counts_as_marginal = no
 					}
 					add_modifier = {
 						name = cries_of_havoc_modifier
@@ -758,7 +758,7 @@ paris_commune_pulse_events.9 = {
 
 	trigger = {
 		has_variable = paris_commune_prc_perspective
-		c:PRC = {
+		c:PRC ?= {
 			any_interest_group = {
 				leader = {
 					OR = {
@@ -775,13 +775,13 @@ paris_commune_pulse_events.9 = {
 						}
 					}
 				}
-				is_marginal = no
+				ig_counts_as_marginal = no
 			}
 		}
 	}
 
 	immediate = {
-		c:PRC = {
+		c:PRC ?= {
 			save_scope_as = paris_commune_nation_scope
 			random_scope_state = {
 				limit = {
@@ -791,7 +791,7 @@ paris_commune_pulse_events.9 = {
 			}
 		}
 
-		c:PRC = {
+		c:PRC ?= {
 			random_interest_group = {
 				limit = {
 					leader = {
@@ -809,7 +809,7 @@ paris_commune_pulse_events.9 = {
 							}
 						}
 					}
-					is_marginal = no
+					ig_counts_as_marginal = no
 				}
 				save_scope_as = paris_feminist_ig_scope
 			}
@@ -820,7 +820,7 @@ paris_commune_pulse_events.9 = {
 			}
 			save_scope_as = france_feminist_ig_scope
 		}
-		c:FRA = {
+		c:FRA ?= {
 			save_scope_as = france_scope
 		}
 	}
@@ -859,7 +859,7 @@ paris_commune_pulse_events.9 = {
 				}
 			}
 		}
-		c:PRC = {
+		c:PRC ?= {
 			if = {
 				limit = {
 					any_interest_group = {
@@ -878,7 +878,7 @@ paris_commune_pulse_events.9 = {
 								}
 							}
 						}
-						is_marginal = no
+						ig_counts_as_marginal = no
 					}
 				}
 				custom_tooltip = {
@@ -901,7 +901,7 @@ paris_commune_pulse_events.9 = {
 								}
 							}
 						}
-						is_marginal = no
+						ig_counts_as_marginal = no
 					}
 					add_modifier = {
 						name = assertion_of_rights_modifier
@@ -920,7 +920,7 @@ paris_commune_pulse_events.9 = {
 	            add = -5
 	        }
 		}
-		c:PRC = {
+		c:PRC ?= {
 			if = {
 				limit = {
 					any_interest_group = {
@@ -939,7 +939,7 @@ paris_commune_pulse_events.9 = {
 								}
 							}
 						}
-						is_marginal = no
+						ig_counts_as_marginal = no
 					}
 				}
 				custom_tooltip = {
@@ -962,7 +962,7 @@ paris_commune_pulse_events.9 = {
 								}
 							}
 						}
-						is_marginal = no
+						ig_counts_as_marginal = no
 					}
 					add_modifier = {
 						name = lingering_male_gaze_modifier
@@ -985,8 +985,8 @@ paris_commune_pulse_events.9 = {
 		custom_tooltip = {
 			text = communard_effects_header_tt
 		}
-		c:PRC = {
-			ig:ig_devout = {
+		c:PRC ?= {
+			ig:ig_devout ?= {
 				add_modifier = {
 					name = fruit_of_the_loin_modifier
 					days = short_modifier_time
