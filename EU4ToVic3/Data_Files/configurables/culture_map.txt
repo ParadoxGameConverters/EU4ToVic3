@@ -30,7 +30,7 @@
 @south_italy_area = "region = STATE_CAMPANIA region = STATE_CALABRIA region = STATE_SICILY region = STATE_SARDINIA region = STATE_MALTA region = STATE_CORSICA region = STATE_APULIA region = STATE_ABRUZZO"
 @italian_cultures = "eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnolc eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano"
 
-@benelux_cultures = "eu4 = dutch eu4 = afrikaner eu4 = frisian eu4 = batavian eu4 = tasmanian eu4 = flemish eu4 = brabantian eu4 = wallonian eu4 = wallonian_UKS"
+@benelux_cultures = "eu4 = dutch eu4 = afrikaner eu4 = frisian eu4 = batavian eu4 = tasmanian eu4 = flemish eu4 = brabantian"
 
 @african_cultures = "eu4 = egyptian eu4 = carthaginian eu4group = kongo_group  eu4group = cushitic eu4group = african eu4group = southern_african eu4group = great_lakes_group eu4group = maghrebi eu4group = mande eu4group = sahelian eu4group = sudanese eu4group = west_african eu4group = punic_group"
 
@@ -57,13 +57,13 @@ link = { vic3 = sephardic eu4 = sephardi eu4 = sephardic eu4 = hebrew eu4 = mizr
 
 # Dynamic generation for Knaanic, Magogic, Yevanic, Misrayim, Zarphatic, Laaz, Kaifeng
 
-# Low Countries - Dutch, Flemish, Wallonian and Boer
+# Low Countries - Dutch, Flemish, Wallonian(x), Boer, Griqua
+link = { vic3 = griqua eu4 = khoisan religion_group = christian owner = NET } # Giving this the Vic2 Métis treatment, non-Bantu Africans in South Africa are only represented by 1 culture in EU4 though
 link = { vic3 = boer @benelux_cultures region = african_strategic_regions }
-
 link = { vic3 = boer eu4 = afrikaner }
+link = { vic3 = afro_caribbean @african_cultures region = STATE_GUYANA owner = NET } # This is what is used for Black Surinamians in-game
 link = { vic3 = dutch eu4 = dutch eu4 = frisian eu4 = batavian eu4 = tasmanian }
 link = { vic3 = flemish eu4 = flemish eu4 = brabantian }
-link = { vic3 = wallonian eu4 = wallonian eu4 = wallonian_UKS }
 
 
 # German Speaking - North German, South German and Swiss
@@ -159,6 +159,10 @@ link = { vic3 = mexican eu4 = mexican }
 
 # Iberian - Basque, Catalan, Galician, Portuguese, Spanish
 ##Added - Andalucian
+##Mapping Aragonese to Spanish if Spain has formed
+link = { vic3 = spanish eu4 = castillian eu4 = aragonese owner = SPA }
+
+## Mapping when Spanish hasn't formed
 link = { vic3 = andalucian eu4 = andalucian eu4 = mozarabic }
 link = { vic3 = basque eu4 = basque }
 link = { vic3 = aragonese eu4 = aragonese }
@@ -169,12 +173,13 @@ link = { vic3 = portuguese eu4 = portugese }
 link = { vic3 = spanish eu4 = castillian }
 
 
-# Francophone - Afro-Antillean, Breton, Cajun, Corsican(x), Franco-Canadian, French, Metis(x), Occitan, Swiss(x), Wallonian(x)
+# Francophone - Afro-Antillean, Breton, Cajun, Corsican(x), Franco-Canadian, French, Metis(x), Occitan, Swiss(x), Wallonian
 ##Added - Frankish
 link = { vic3 = afro_antillean @african_cultures region = region_caribbean owner = FRA owner = BRI }
-link = { vic3 = franco_canadian eu4group = french @canada_colony @usa_north_colony @usa_western_colony }
-link = { vic3 = cajun eu4group = french @usa_south_colony region = region_mexico region = region_central_america }
+link = { vic3 = franco_canadian eu4group = french eu4 = wallonian eu4 = wallonian_UKS @canada_colony @usa_north_colony @usa_western_colony }
+link = { vic3 = cajun eu4group = french eu4 = wallonian eu4 = wallonian_UKS @usa_south_colony region = region_mexico region = region_central_america }
 
+link = { vic3 = wallonian eu4 = wallonian eu4 = wallonian_UKS }
 link = { vic3 = breton eu4 = breton eu4 = breton_celtic eu4 = breton_UKS eu4 = celtic_breton }
 link = { vic3 = frankish eu4 = old_frankish }
 link = { vic3 = french eu4 = cosmopolitan_french eu4 = cosmopolitan_french_UKS eu4 = normand eu4 = normand_UKS eu4 = burgundian eu4 = burgundian_UKS eu4 = poitou eu4 = angevin eu4 = arpitan eu4 = bourguignon eu4 = creole eu4 = francien eu4 = javanaise eu4 = lorrain eu4 = poitevin eu4 = picard }
@@ -370,7 +375,7 @@ link = { vic3 = nahua eu4group = central_american } #Fallback
 
 
 #North American - Metis, Dakota, Cherokee, Muskogean, Pueblo, Inuit, Cree, Navajo, Athabaskan, Salish, Nez Perce, Siouan, Comanche, Alqonquin, Iroquoian, Caddoan, Paiute, Hokan, Apache and Oodham
-link = { vic3 = metis eu4group = eskaleut eu4group = central_algonquian eu4group = plains_algonquian eu4group = eastern_algonquian eu4group = iroquoian eu4group = caddoan eu4group = muskogean eu4group = na_dene eu4group = penutian religion_group = christian }
+link = { vic3 = metis eu4 = cree eu4 = plains_cree region = STATE_ALBERTA region = STATE_SASKATCHEWAN region = STATE_MANITOBA religion = catholic } # Restricted to Canadian Prarie, if possible revise to limit to being owned by only Romance-speaking countries
 
 link = { vic3 = athabaskan eu4 = hayda eu4 = hoopa eu4 = tanaina eu4 = tlingit eu4 = chilcotin }
 link = { vic3 = algonquian eu4 = lenape eu4 = odawa eu4 = ojibwa eu4 = potawatomi eu4 = miqmaq }
@@ -381,18 +386,18 @@ link = { vic3 = cree eu4 = cree eu4 = plains_cree }
 link = { vic3 = comanche eu4 = comanche }
 link = { vic3 = dakota eu4 = dakota }
 #link = { vic3 = hokan ??? } Most of the area that's Hokan in VIC3 is Penutian in EU4, but the groups are not actually related
-link = { vic3 = muskogean eu4 = creek eu4 = chickasaw eu4 = yamasee eu4 = yoron eu4 = natchez eu4 = seminole eu4 = yuchi eu4 = catawba eu4 = woccon } #Catawba and Woccon are here due to proximity and Catawba is in the same culture-group as many others in EU4
+link = { vic3 = muskogean eu4 = creek eu4 = chickasaw eu4 = yamasee eu4 = yoron eu4 = natchez eu4 = seminole eu4 = yuchi } 
 link = { vic3 = navajo eu4 = navajo }
 link = { vic3 = nez_perce eu4 = sahaptian }
 link = { vic3 = penutian eu4 = chinook eu4 = yokut eu4 = yokuts eu4 = tsimishian eu4 = wintuan }
 link = { vic3 = inuit eu4 = aleutian eu4 = inuit eu4 = yupik }
-link = { vic3 = iroquoian eu4 = iroquis eu4 = tuscarora eu4 = neutral eu4 = mingwe eu4 = erielhonan }
+link = { vic3 = iroquoian eu4 = iroquis eu4 = tuscarora eu4 = neutral eu4 = mingwe eu4 = erielhonan } # What's "neutral"?
 link = { vic3 = oodham eu4 = piman eu4 = pima eu4 = cahuila eu4 = hopi eu4 = mayo eu4 = tarachatitian eu4 = tarahumaran eu4 = yaqui eu4 = cuitlatec }
 link = { vic3 = paiute eu4 = shoshone eu4 = ute }
 link = { vic3 = pueblo eu4 = pueblo eu4 = kiowa }
 link = { vic3 = salish eu4 = salish eu4 = kalispel eu4 = shuswap }
-link = { vic3 = siouan eu4 = nakota eu4 = chiwere eu4 = osage eu4 = osagee eu4 = kanza eu4 = lakota eu4 = missouri eu4 = winnebago }
-## Miwok is dynamically generated
+link = { vic3 = siouan eu4 = nakota eu4 = chiwere eu4 = osage eu4 = osagee eu4 = kanza eu4 = lakota eu4 = missouri eu4 = winnebago eu4 = catawba eu4 = woccon }
+## Miwok is dynamically generated, might be worth looking to see if Yokuts can be split to this
 
 ##Fallbacks
 link = { vic3 = algonquian eu4group = plains_algonquian eu4group = central_algonquian eu4group = eastern_algonquian }
@@ -447,26 +452,43 @@ link = { vic3 = miao eu4 = miao }
 # Mon-Khmer - Khmer, Mon, Khmu
 link = { vic3 = khmer eu4 = khmer eu4 = degar }
 link = { vic3 = khmu eu4 = lao region = STATE_LAOS religion = animist }
-link = { vic3 = khmu eu4 = khmer region = STATE_LAOS  }
+link = { vic3 = khmu eu4 = khmer region = STATE_LAOS }
 link = { vic3 = khmu eu4 = khmu }
 link = { vic3 = khmu eu4 = palaungic } # CK3ToEU4
 link = { vic3 = mon eu4 = mon eu4 = monic }
 
-# Malay - Malay, Bornean, Sumatran, Balinese, Batak, Dayak, Filipino, Moro, Javan, Moluccan
-link = { vic3 = moro eu4 = filipino u4 = cebuano eu4 = maguindanao eu4 = philipino eu4 = tagalog eu4 = tausug religion_group = muslim }
+# Filipino - Tagalog, Ilocano, Visayan, Lumad, Filipino Mestizo
+## Modded cultures
+link = { vic3 = moro eu4 = tausug }
+link = { vic3 = moro eu4 = cebuano eu4 = maguindanao eu4 = philipino eu4 = tagalog religion_group = muslim }
+link = { vic3 = lumad eu4 = maguindanao }
+link = { vic3 = visayan eu4 = cebuano }
+link = { vic3 = tagalog eu4 = eu4 = philipino eu4 = tagalog }
 
+## Vanilla split
+link = { vic3 = moro eu4 = filipino religion_group = muslim }
+link = { vic3 = filipino_mestizo eu4 = filipino religion_group = christian owner = SPA }
+link = { vic3 = lumad eu4 = filipino region = STATE_MINDANAO religion = animist }
+link = { vic3 = visayan eu4 = filipino region = STATE_VISAYAS }
+link = { vic3 = ilocano eu4 = filipino region = STATE_LUZON religion = animist }
+link = { vic3 = tagalog eu4 = filipino region = STATE_LUZON }
+link = { vic3 = tagalog eu4 = filipino } # Fallback
+
+# Filipino and Pilipino should not be mapped to, these should only be created if the Philippines form. 
+
+# Malay - Malay, Bornean, Sumatran, Balinese, Batak, Dayak, Javan, Moluccan
+link = { vic3 = balinese eu4 = javanese eu4 = nusa_tenggara owner = BAL } # To account for both vanilla and ET
 link = { vic3 = balinese eu4 = balinese }
 link = { vic3 = batak eu4 = batak }
 link = { vic3 = bornean eu4 = bornean eu4 = banjar }
 link = { vic3 = dayak eu4 = dayak }
-link = { vic3 = javan eu4 = javanese eu4 = sundanese eu4 = javan  }
+link = { vic3 = javan eu4 = javanese eu4 = sundanese eu4 = javan }
 link = { vic3 = malay eu4 = malayan eu4 = indonesian }
-link = { vic3 = moluccan eu4 = sulawesi eu4 = moluccan eu4 = nusa_tenggara eu4 = bugis eu4 = bungku eu4 = chamorro eu4 = minahasa }
+link = { vic3 = moluccan eu4 = sulawesi eu4 = moluccan eu4 = bugis eu4 = bungku eu4 = chamorro eu4 = minahasa }
 link = { vic3 = sumatran eu4 = sumatran eu4 = acehenese eu4 = acehnese eu4 = minang }
 
 link = { vic3 = khmer eu4 = cham owner = KOH } # Bahnars
 link = { vic3 = champa eu4 = cham }
-# cham is dynamically generated
 
 # Thai - Thai, Lao, Shan and Zhuang
 link = { vic3 = lao eu4 = lao eu4 = laotian }
@@ -487,7 +509,7 @@ link = { vic3 = naga eu4 = naga }
 link = { vic3 = kachin eu4 = kachin }
 link = { vic3 = karen eu4 = karen }
 link = { vic3 = lushai eu4 = lushai }
-link = { vic3 = lushai eu4 = burmese region = STATE_ARAKAN }
+link = { vic3 = lushai eu4 = burmese region = STATE_ARAKAN region = STATE_MANDALAY region = STATE_ASSAM religion = animist }
 link = { vic3 = burmese eu4group = burman }
 
 
@@ -508,7 +530,7 @@ link = { vic3 = maori eu4 = maori }
 link = { vic3 = melanesian eu4 = melanesian eu4 = papuan eu4 = halmahera }
 link = { vic3 = micronesian eu4 = micronesian }
 link = { vic3 = yuanzhumin eu4 = taiwanese eu4 = formosan eu4 = minyue }
-link = { vic3 = polynesian eu4 = polynesian  }
+link = { vic3 = polynesian eu4 = polynesian }
 
 link = { vic3 = aborigine eu4group = aboriginal_australian }
 
@@ -557,14 +579,14 @@ link = { vic3 = telegu eu4 = telegu }
 #brahui are dynamically generated
 
 
-# West African - Akan, Bambara, Bassa, Dyula, Edo, Ewe, Fon, Fulbe, Haratin, Hausa, Ibibio, Ibo, Kissi, Kru, Mande, Bidan, Mossi, Senufo, Songhai, Tiv, Tuareg, Wolof and Yoruba
+# West African - Akan, Bambara, Bassa, Dyula, Edo, Ewe, Fon, Fulbe, Haratin, Hausa, Ibibio, Ibo, Kissi, Kru, Mande, Bidan, Mossi, Senufo, Songhai, Tiv, Tuareg, Tubu(x), Wolof and Yoruba
 link = { vic3 = edo eu4 = yorumba region = STATE_BENIN }
 #link = { vic3 = ewe eu4 = fon region = STATE_TOGO } #Too small and specific for state-based action
 link = { vic3 = haratin eu4 = senegambian eu4 = fulani region = STATE_MAURITANIA region = STATE_INNER_MAURITANIA } #Mauritanian West Africans
 link = { vic3 = kissi eu4 = senegambian region = STATE_SIERRA_LEONE }
 link = { vic3 = ibibio eu4 = nupe eu4 = igbo region = STATE_SOUTH_CAMEROON }
 link = { vic3 = ibo eu4 = yorumba region = STATE_NIGER_DELTA }
-link = { vic3 = bidan eu4 = tuareg region = STATE_MAURITANIA region = STATE_INNER_MAURITANIA } #Mauritanian Tuaregs
+link = { vic3 = bidan eu4 = tuareg region = STATE_MAURITANIA region = STATE_INNER_MAURITANIA region = STATE_WEST_SAHARA } #Mauritanian Tuaregs
 link = { vic3 = senufo eu4 = dyola region = STATE_IVORY_COAST } #Order matters, keep this above kru
 link = { vic3 = kru eu4 = senegambian eu4 = dyola region = STATE_LIBERIA region = STATE_IVORY_COAST }
 
@@ -585,6 +607,7 @@ link = { vic3 = tuareg eu4 = tuareg }
 link = { vic3 = wolof eu4 = senegambian eu4 = jolof }
 link = { vic3 = yoruba eu4 = yorumba }
 
+## Tubu should probably only spawn via DW
 
 #Central African - Bakongo, Baguirmi, Fang, Kanuri, Luba, Lunda, Mongo, Sara, Teda, Equatorial Bantu, Fluvial Bantu
 link = { vic3 = fang eu4 = yorumba region = STATE_SOUTH_CAMEROON region = STATE_NORTH_ANGOLA }
@@ -633,8 +656,9 @@ link = { vic3 = malagasy eu4 = madagasque eu4 = madagascan eu4 = vazimba eu4 = v
 ##Added - Coptic
 link = { vic3 = azande eu4group = sudanese region = STATE_CONGO_ORIENTALE } # South Sudan, pretty much entirely out of scope
 link = { vic3 = coptic eu4 = coptic eu4 = old_egyptian eu4 = old_egyptian_mod eu4 = coptic_culture }
-link = { vic3 = nuer eu4 = nubian region = STATE_EQUATORIA} # South Sudan
-link = { vic3 = dinka eu4group = sudanese region = STATE_EQUATORIA } # Anuaks
+link = { vic3 = nuer eu4 = nubian region = STATE_EQUATORIA } # South Sudan
+link = { vic3 = dinka eu4group = sudanese region = STATE_EQUATORIA } 
+link = { vic3 = luo eu4group = sudanese region = STATE_AMHARA } # Anuaks
 link = { vic3 = rundi eu4 = rwandan owner = BRD } # Burundi
 link = { vic3 = sukuma eu4 = takama region = STATE_RIFT_VALLEY } #Technically Sukuma are the northern branch of the Nyamwezi group. Since Unyamwezi are already mapped, I just put them here as a "northern" option
 
@@ -715,3 +739,6 @@ link = { vic3 = scythian eu4group = scythian_group }
 
 # noculture
 link = { vic3 = noculture eu4 = noculture }
+
+# The dead
+link = { vic3 = promethean eu4 = zombiec eu4 = zombie }
