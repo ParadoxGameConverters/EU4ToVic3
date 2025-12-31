@@ -29,6 +29,7 @@
 #law_council_republic 200 NO
 #law_parliamentary_republic 100 *T=democracy !law_autocracy T3
 #law_presidential_republic 100 *T=democracy T3
+#law_colonial_administration *Is a company or colonial type country !law_anarchy
 #law_monarchy * !law_anarchy
 #law_theocracy -50 !law_total_separation
 #law_chiefdom -100 *DECENTRALIZED
@@ -55,6 +56,11 @@ lawgroup_governance_principles = {
 			# parliamentary republic cannot go with autocracy 
 		}
 	}
+	law_colonial_administration = {
+		forms = {}
+		ideas = {}
+		reforms = {}
+	}
 	law_monarchy = {
 		forms = { monarchy tribal native }
 		ideas = {}
@@ -76,6 +82,7 @@ lawgroup_governance_principles = {
 
 #DISTRIBUTIONPOWER:
 #law_anarchy 200 NO
+#law_single_part_state NO
 #law_universal_suffrage NO
 #law_census_voting 50 *T=democracy !law_chiefdom T3
 #law_wealth_voting 0 *T=democracy !law_chiefdom T3
@@ -172,9 +179,9 @@ lawgroup_distribution_of_power = {
 
 #SLAVERY
 #law_slavery_banned 100
-#law_legacy_slavery 50 *law_slave_trade
-#law_colonial_slavery 50 *has unincorporated states
-#law_debt_slavery 0 !law_multicultural
+#law_legacy_slavery 0 *law_slave_trade
+#law_colonial_slavery -50 *has unincorporated states
+#law_debt_slavery -50 !law_multicultural
 #law_slave_trade 0 !law_cultural_exclusion !law_multicultural
 lawgroup_slavery = {
 	law_slavery_banned = {
@@ -210,6 +217,7 @@ lawgroup_slavery = {
 #law_cultural_exclusion 25  *law_slavery_banned *law_debt_slavery
 #law_racial_segregation 25
 #law_national_supremacy -25
+#law_subjecthood -25 *law_monarchy *law_theocracy *law_chiefdom *law_colonial_administration
 #law_ethnostate -75 NO
 lawgroup_citizenship = {
 	law_multicultural = {
@@ -220,12 +228,11 @@ lawgroup_citizenship = {
 	law_cultural_exclusion = {
 		forms = {}
 		ideas = { plutocracy_ideas horde_gov_ideas }
-		reforms = { austrian_dual_monarchy livonian_enlightened_monarchy two_treatises_reform 
+		reforms = { livonian_enlightened_monarchy two_treatises_reform 
 			enlightened_monarchy_reform revolutionary_republic_reform junior_revolutionary_republic_reform
 			peasants_republic american_republic federal_republic egalite_reform moral_principle_reform
 			enlightened_principle_reform revolutionary_principle_reform papacy_reform balanced_mission_reform
 			belief_and_unity_reform cultural_safe_haven_reform many_fingers_of_god_reform german_cultural_disunity_reform
-			imperial_hungarian_government
 		}
 	}
 	law_racial_segregation = {
@@ -234,8 +241,7 @@ lawgroup_citizenship = {
 		reforms = { legislative_assembly_reform cultural_administration_reform attorney_general_reform 
 			political_principle_reform internal_mission_reform mission_to_protect_reform
 			harmonization_of_cultures_reform taxation_of_the_foreigners_reform penal_colonies_reform
-			standardized_millets_reform strengthened_parliament_reform millennialistic_theocracy_reform
-			german_franconian_reform german_swabian_reform
+			strengthened_parliament_reform millennialistic_theocracy_reform	german_franconian_reform german_swabian_reform
 		}
 	}
 	law_national_supremacy = {
@@ -249,11 +255,16 @@ lawgroup_citizenship = {
 			all_under_tengri_reform japanese_divine_empire fifth_monarchists_reform
 		}
 	}
+	law_subjecthood = {
+		forms = { }
+		ideas = { }
+		reforms = { austrian_dual_monarchy imperial_hungarian_government standardized_millets_reform }
+	}
 }
 
 #COLONIAL AFFAIRS:
-#law_frontier_colonization 25 *T=colonization
-#law_colonial_resettlement 25 *T=colonization
+#law_frontier_colonization 0 *T=colonization
+#law_colonial_resettlement 0 *T=colonization
 #law_no_colonial_affairs 0
 #law_colonial_exploitation -25 *T=colonization
 lawgroup_colonization = {
@@ -280,10 +291,10 @@ lawgroup_colonization = {
 }
 
 #CHURCHSTATE:
+#law_state_atheism 100
 #law_total_separation 50 !law_theocracy !law_state_atheism
 #law_freedom_of_conscience 0 !law_theocracy !law_state_atheism
 #law_state_religion -50 !law_state_atheism
-#law_state_atheism -100
 lawgroup_church_and_state = {
 	# !THEOCRACY
 	law_total_separation = {
@@ -337,7 +348,7 @@ lawgroup_church_and_state = {
 
 #LAND_REFORM
 #law_collectivized_agriculture NO
-#law_homesteading 25 
+#law_homesteading 50
 #law_commercialized_agriculture NO
 #law_tenant_farmers 0
 #law_serfdom -50 !law_interventionism !law_laissez_faire !law_command_economy
@@ -383,10 +394,11 @@ lawgroup_labor_rights = {
 
 #ECONOMICSYSTEM:
 #law_command_economy NO
-#law_laissez_faire 100 !law_guild_system !law_serfdom !law_isolationism *T=international_trade T3
-#law_interventionism 50 !law_serfdom *T=manufacturies
+#law_laissez_faire 25 !law_guild_system !law_serfdom !law_isolationism *T=international_trade T3
+#law_interventionism 25 !law_serfdom *T=manufacturies
 #law_agrarianism 0 *T=romanticism
 #law_traditionalism -50 !law_per_capita_based_taxation !law_proportional_taxation !law_graduated_taxation
+#law_extraction_economy -50 !law_anarchy *T=colonization
 #law_industry_banned NO
 lawgroup_economic_system = {
 	law_laissez_faire = {
@@ -519,8 +531,8 @@ lawgroup_army_model = {
 #SCHOOLS:
 #law_public_schools 50 *T=empiricism  !law_state_religion !law_serfdom T2
 #law_private_schools 25 *T=academia !law_state_religion T3
-#law_religious_schools 25 !law_total_separation !law_state_atheism !law_serfdom *T=rationalism T3
-#law_no_schools 0 !law_compulsory_primary_school
+#law_religious_schools 0 !law_total_separation !law_state_atheism !law_serfdom *T=rationalism T3
+#law_no_schools -25 !law_compulsory_primary_school
 lawgroup_education_system = {
 	law_public_schools = {
 		forms = { republic }
@@ -571,9 +583,9 @@ lawgroup_free_speech = {
 
 #HEALTH:
 #law_public_health_insurance 100 NO
-#law_private_health_insurance 75 NO
-#law_charitable_health_system 50 *T=medical_degrees T3
-#law_no_health_system 0
+#law_private_health_insurance 50 NO
+#law_charitable_health_system 0 *T=medical_degrees T3
+#law_no_health_system -25
 lawgroup_health_system = {
 	law_charitable_health_system = {
 		forms = {}
@@ -590,7 +602,7 @@ lawgroup_health_system = {
 #INTERNAL:
 #law_guaranteed_liberties 100 NO
 #law_national_guard 25 *T=law_enforcement T3
-#law_secret_police 0 NO
+#law_secret_police -25 NO
 #law_no_home_affairs 0 
 lawgroup_internal_security = {
 	law_national_guard = {
@@ -636,9 +648,9 @@ lawgroup_migration = {
 }
 
 #POLICE:
-#law_dedicated_police 100 *T=law_enforcement T3
-#law_militarized_police 75 NO
-#law_local_police 50 *T=tech_bureaucracy T3
+#law_dedicated_police 25 *T=law_enforcement T3
+#law_militarized_police -100 NO
+#law_local_police -50 *T=tech_bureaucracy T3
 #law_no_police 0
 lawgroup_policing = {
 	law_dedicated_police = {
@@ -778,7 +790,7 @@ lawgroup_welfare = {
 }
 
 #LABOR ASSOCIATIONS:
-#law_corporatized_unions 25 NO *T=corporatism T3
+#law_corporatized_unions 0 NO *T=corporatism T3
 #law_right_to_associate 50 NO
 #law_anti_strike_laws 25
 #law_combination_acts 0
