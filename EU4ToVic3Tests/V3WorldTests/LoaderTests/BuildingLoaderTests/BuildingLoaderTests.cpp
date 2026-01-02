@@ -23,11 +23,11 @@ TEST(V3World_BuildingLoaderTests, BuildingLoaderCanLoadBuildings)
 	EXPECT_THAT(buildings.at("building_food_industry").getPMGroups(),
 		 testing::UnorderedElementsAre("pmg_food", "pmg_canning", "pmg_distillery", "pmg_automation", "pmg_ownership"));
 
-	EXPECT_EQ(239, buildings.at("building_textile_mills").getConstructionCost());
-	EXPECT_THAT(buildings.at("building_textile_mills").getPMGroups(),
+	EXPECT_EQ(239, buildings.at("building_textile_mill").getConstructionCost());
+	EXPECT_THAT(buildings.at("building_textile_mill").getPMGroups(),
 		 testing::UnorderedElementsAre("pmg_textile", "pmg_luxury", "pmg_automation", "pmg_ownership"));
 
-	EXPECT_EQ(50, buildings.at("building_furniture_manufacturies").getConstructionCost());
-	EXPECT_THAT(buildings.at("building_furniture_manufacturies").getPMGroups(),
+	EXPECT_EQ(50, buildings.at("building_furniture_manufactory").getConstructionCost());
+	EXPECT_THAT(buildings.at("building_furniture_manufactory").getPMGroups(),
 		 testing::UnorderedElementsAre("pmg_furniture", "pmg_luxury", "pmg_automation", "pmg_ownership"));
 }

@@ -23,11 +23,11 @@ TEST(V3World_StateTests, stateSubsistenceBuildingLoads)
 {
 	std::stringstream input;
 	input << "id = 3002\n";
-	input << "subsistence_building = building_subsistence_farms\n ";
+	input << "subsistence_building = building_subsistence_farm\n ";
 	V3::State state;
 	state.loadState(input);
 
-	EXPECT_EQ(state.getSubsistenceBuilding(), "building_subsistence_farms");
+	EXPECT_EQ(state.getSubsistenceBuilding(), "building_subsistence_farm");
 }
 
 TEST(V3World_StateTests, stateCanInitializeProvinces)

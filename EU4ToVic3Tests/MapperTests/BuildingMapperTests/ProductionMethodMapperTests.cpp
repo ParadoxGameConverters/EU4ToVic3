@@ -51,7 +51,7 @@ const std::set<std::string> lumberPmgs = {"pmg_base_building_logging_camp",
 
 const std::set<std::string> subsistencePmgs = {"pmg_base_building_subsistence_farm",
 	 "pmg_home_workshops_building_subsistence_farm",
-	 "pmg_serfdom_building_subsistence_farms"};
+	 "pmg_serfdom_building_subsistence_farm"};
 } // namespace
 
 TEST(Mappers_ProductionMethodMapperTests, RulesCanBeLoaded)
@@ -309,7 +309,7 @@ TEST(Mappers_ProductionMethodMapperTests, EstimatesWalkPMListLawMethod)
 	EXPECT_THAT(homesteadPMEstimates, testing::Contains(testing::Pair("pmg_serfdom_building_subsistence_farm", std::make_tuple(2, 1.0))));
 
 	/*
-	 * pmg_serfdom_building_subsistence_farms  = {
+	 * pmg_serfdom_building_subsistence_farm  = {
 	 *	production_methods = {
 	 *		pm_serfdom_no
 	 *		pm_serfdom // countrySerfdom
