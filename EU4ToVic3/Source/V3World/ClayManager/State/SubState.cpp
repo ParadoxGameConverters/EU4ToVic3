@@ -466,7 +466,8 @@ int V3::SubState::getRGOCapacity(const Building& building) const
 {
 	/*
 	 NOTE: prior to 1.12 we had to deal with a hierarchy of building groups. Nowadays the buildings are listed directly if allowed in a state.
-	 Resources are stored in SubState, already calculated from State and landshare. Also, we already manually assigned arable_land as "bg_agriculture" capped resource in all substates.
+	 Resources are stored in SubState, already calculated from State and landshare. Also, we already manually assigned arable_land as "bg_agriculture" capped
+	 resource in all substates.
 
 	 arable_land = 120
 	 arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_cotton_plantation" }
