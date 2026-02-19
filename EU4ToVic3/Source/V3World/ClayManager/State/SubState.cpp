@@ -428,7 +428,7 @@ int V3::SubState::getBuildingCapacity(const Building& building,
 
 	if (const auto& isCapped = buildingGroups.tryGetIsCapped(building.getBuildingGroup()); isCapped && isCapped.value())
 	{
-		return getRGOCapacity(building, buildingGroups);
+		return getRGOCapacity(building);
 	}
 
 	return INT_MAX;
@@ -459,44 +459,35 @@ bool V3::SubState::hasCapacity(const Building& building,
 		return true;
 	}
 	// Then check building group cap.
-	return getRGOCapacity(building, buildingGroups) > 0;
+	return getRGOCapacity(building) > 0;
 }
 
-int V3::SubState::getRGOCapacity(const Building& building, const BuildingGroups& buildingGroups) const
+int V3::SubState::getRGOCapacity(const Building& building) const
 {
 	/*
-	 NOTE: arable_land is stored in resources as bg_agriculture = #
-	 All arable_resources have bg_agriculture as a parent group eventually, even if not directly.
-	 Resources is stored in SubState, already calculated from State and landshare.
-
+	 NOTE: prior to 1.12 we had to deal with a hierarchy of building groups. Nowadays the buildings are listed directly if allowed in a state.
+	 Resources are stored in SubState, already calculated from State and landshare. Also, we already manually assigned arable_land as "bg_agriculture" capped resource in all substates.
 
 	 arable_land = 120
-	 arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" "bg_cotton_plantations" }
+	 arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_cotton_plantation" }
 	 capped_resources = {
-		  bg_sulfur_mining = 20
-		  bg_logging = 2
-		  bg_fishing = 6
+		building_coal_mine = 10
+		building_lead_mine = 27
+		building_iron_mine = 10
+		building_fishing_wharf = 7
 	 }
 	 */
 
-	// A building uses the capacity of their building group if that capacity exists,
-	// otherwise they use the capacity of the parent of their building group.
-	// If their building group's parent doesn't have capacity keep checking up the
-	// chain until a capacity is found or no more parents exist.
-
-	auto buildingGroupName = building.getBuildingGroup();
-	auto buildingGroup = buildingGroups.getBuildingGroupMap().at(buildingGroupName);
-
 	const std::set<std::string> stateArables = {homeState->getArableResources().begin(), homeState->getArableResources().end()};
 
-	// Is this a mineral-type resource?
-	if (resources.contains(buildingGroupName))
+	// Is this a mineral-type, or agroculturally capped resource?
+	if (resources.contains(building.getName()))
 	{
-		return resources.at(buildingGroupName);
+		return resources.at(building.getName());
 	}
 
 	// Maybe an arable one?
-	if (stateArables.contains(buildingGroupName))
+	if (stateArables.contains(building.getName()))
 	{
 		if (resources.contains("bg_agriculture"))
 			return resources.at("bg_agriculture");
@@ -504,15 +495,6 @@ int V3::SubState::getRGOCapacity(const Building& building, const BuildingGroups&
 			return 0;
 	}
 
-	while (buildingGroup->getParentName())
-	{
-		buildingGroupName = *buildingGroup->getParentName();
-		buildingGroup = buildingGroups.getBuildingGroupMap().at(buildingGroupName);
-		if (resources.contains(buildingGroupName))
-		{
-			return resources.at(buildingGroupName);
-		}
-	}
 	return 0;
 }
 
@@ -547,10 +529,10 @@ bool V3::SubState::hasRGO(const Building& building, const BuildingGroups& buildi
 	if (const auto& isCapped = buildingGroups.tryGetIsCapped(building.getBuildingGroup()); (isCapped && !isCapped.value()) || !isCapped)
 		return true;
 
-	if (const auto& arables = homeState->getArableResources(); std::ranges::find(arables, building.getBuildingGroup()) != arables.end())
+	if (const auto& arables = homeState->getArableResources(); std::ranges::find(arables, building.getName()) != arables.end())
 		return true;
 
-	return homeState->getCappedResources().contains(building.getBuildingGroup());
+	return homeState->getCappedResources().contains(building.getName());
 }
 
 double V3::SubState::calcBuildingWeight(const Building& building,

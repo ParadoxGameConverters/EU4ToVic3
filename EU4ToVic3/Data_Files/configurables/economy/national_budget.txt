@@ -49,7 +49,7 @@ infrastructure = {
 }
 
 military = {
-	weight = 12
+	weight = 8
 
 	building_barrack
 
@@ -70,24 +70,24 @@ naval = {
 }
 
 farming = {
-	weight = 20 # This is not a mistake. It's just unfortunate.
+	weight = 30 # This is not a mistake. It's just unfortunate.
 
 	building_rye_farm
-	building_rice_farm
 	building_wheat_farm
+	building_rice_farm
 	building_maize_farm
 	building_millet_farm
 	building_vineyard
 }
 
 farming_livestock = {
-	weight = 10
+	weight = 15
 
 	building_livestock_ranch
 }
 
 extraction = {
-	weight = 5
+	weight = 6
 
 	building_logging_camp
 	building_fishing_wharf
@@ -138,7 +138,6 @@ plantation = {
 	building_sugar_plantation
 	building_banana_plantation
 	building_silk_plantation
-	building_vineyard_plantation
 
 	multiply = {
 		value = 1.5
@@ -220,6 +219,8 @@ western_industry = {
 tooling_industry = {
 
 	building_tooling_workshop
+
+	weight = 2
 
 	add = {
 		value = 5

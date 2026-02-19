@@ -191,7 +191,7 @@ class SubState
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::map<std::string, Tech>& techMap,
 		 const std::map<std::string, StateModifier>& traitMap) const;
-	[[nodiscard]] int getRGOCapacity(const Building& building, const BuildingGroups& buildingGroups) const;
+	[[nodiscard]] int getRGOCapacity(const Building& building) const;
 	[[nodiscard]] int getGovCapacity(const std::string& building, // barracks, ports things that have max capacities based on laws/tech/traits
 		 const std::map<std::string, Law>& lawsMap,
 		 const std::map<std::string, Tech>& techMap,
