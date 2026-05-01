@@ -57,7 +57,7 @@ jobs:
        
     - name: "Upload binaries to release"
       if: ${{ github.event_name == 'push' }}
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ steps.previoustag.outputs.tag }}
         token: ${{ secrets.API_TOKEN_GITHUB }}
@@ -67,7 +67,7 @@ jobs:
  
     - name: "Upload binaries to archive"
       if: ${{ github.event_name == 'push' }}
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: windows_development_build
         token: ${{ secrets.API_TOKEN_GITHUB }}
