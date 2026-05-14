@@ -7,26 +7,30 @@
 
 canada_colony = {
 	#override for new brunswick which is nominally in new_england under USA.
-	region = region_canada region = STATE_ALASKA region = STATE_YUKON_TERRITORY region = STATE_BRITISH_COLUMBIA region = STATE_ALBERTA region = STATE_SASKATCHEWAN region = STATE_NEW_BRUNSWICK 
+	region = STATE_NORTHWEST_TERRITORIES region = STATE_NUNAVUT region = STATE_ONTARIO region = STATE_QUEBEC region = STATE_NEWFOUNDLAND region = STATE_MANITOBA
+	region = STATE_ALASKA region = STATE_YUKON_TERRITORY region = STATE_BRITISH_COLUMBIA region = STATE_ALBERTA region = STATE_SASKATCHEWAN region = STATE_NEW_BRUNSWICK 
 	alone_name = "Canadian"
 	split_name = "$PARENT$-Canadian"
 }
 usa_north_colony = {
-	region = region_new_england region = STATE_CALIFORNIA region = STATE_WASHINGTON region = STATE_OREGON region = STATE_IDAHO
+	region = STATE_CALIFORNIA region = STATE_WASHINGTON region = STATE_OREGON region = STATE_IDAHO
 	region = STATE_NEVADA region = STATE_UTAH region = STATE_MONTANA region = STATE_WYOMING region = STATE_COLORADO region = STATE_NORTH_DAKOTA
-	region = STATE_SOUTH_DAKOTA region = STATE_NEBRASKA region = STATE_KANSAS region = region_the_midwest region = STATE_DISTRICT_OF_COLUMBIA
-	region = STATE_MARYLAND region = STATE_DELAWARE
+	region = STATE_SOUTH_DAKOTA region = STATE_NEBRASKA region = STATE_KANSAS 
+	region = STATE_MINNESOTA region = STATE_WISCONSIN region = STATE_IOWA region = STATE_MISSOURI region = STATE_MICHIGAN region = STATE_INDIANA region = STATE_ILLINOIS region = STATE_OHIO region = STATE_KENTUCKY region = STATE_TENNESSEE 
+	region = STATE_DISTRICT_OF_COLUMBIA
+	region = STATE_MARYLAND region = STATE_DELAWARE region = STATE_MAINE region = STATE_MASSACHUSETTS region = STATE_CONNECTICUT region = STATE_RHODE_ISLAND region = STATE_VERMONT region = STATE_NEW_HAMPSHIRE region = STATE_BERMUDA
+	region = STATE_PENNSYLVANIA region = STATE_NEW_YORK region = STATE_NEW_JERSEY
 	alone_name = "Appalachian"
 	split_name = "$PARENT$-American"
 }
 usa_south_colony = {
 	region = STATE_MISSISSIPPI region = STATE_ALABAMA region = STATE_FLORIDA region = STATE_GEORGIA region = STATE_SOUTH_CAROLINA
-	region = STATE_NORTH_CAROLINA region = STATE_VIRGINIA region = STATE_LOUISIANA region = STATE_ARKANSAS
+	region = STATE_NORTH_CAROLINA region = STATE_VIRGINIA region = STATE_WEST_VIRGINIA region = STATE_LOUISIANA region = STATE_ARKANSAS
 	alone_name = "Floridian"
 	split_name = "$PARENT$-Floridian"
 }
 australia_colony = {
-	region = region_oceania
+	region = STATE_NEW_SOUTH_WALES region = STATE_VICTORIA region = STATE_QUEENSLAND region = STATE_SOUTH_AUSTRALIA region = STATE_WESTERN_AUSTRALIA region = STATE_NORTHERN_TERRITORY region = STATE_NORTH_ISLAND region = STATE_SOUTH_ISLAND region = STATE_HAWAIIAN_ISLANDS region = STATE_EAST_MICRONESIA region = STATE_WEST_MICRONESIA region = STATE_SOLOMON_ISLANDS region = STATE_FIJI region = STATE_VANUATU region = STATE_KANAK region = STATE_BOUGAINVILLE region = STATE_NAURU region = STATE_TAHITI region = STATE_TONGA region = STATE_TASMANIA
 	alone_name = "Australian"
 	split_name = "$PARENT$-Australian"
 }
@@ -36,44 +40,43 @@ texas_colony = {
 	split_name = "$PARENT$-Texan"
 }
 mexico_colony = {
-	region = STATE_BAJA_CALIFORNIA region = region_mexico
+	region = STATE_BAJA_CALIFORNIA region = STATE_JALISCO region = STATE_ZACATECAS region = STATE_GUERRERO region = STATE_MEXICO region = STATE_CHIHUAHUA region = STATE_DURANGO region = STATE_RIO_GRANDE region = STATE_SONORA region = STATE_VERACRUZ region = STATE_SINALOA region = STATE_BAJIO region = STATE_OAXACA
 	alone_name = "Mexican"
 	split_name = "$PARENT$-Mexican" 
 }
 brazil_colony = {
-	region = region_brazil
+	region = STATE_PARANA region = STATE_SAO_PAULO region = STATE_RIO_DE_JANEIRO region = STATE_URUGUAY region = STATE_RIO_GRANDE_DO_SUL region = STATE_MATO_GROSSO region = STATE_MINAS_GERAIS region = STATE_BAHIA region = STATE_PERNAMBUCO region = STATE_RIO_GRANDE_DO_NORTE region = STATE_MARANHAO region = STATE_GOIAS region = STATE_CEARA region = STATE_PIAUI region = STATE_PARAIBA region = STATE_SANTA_CATARINA region = STATE_PARA region = STATE_AMAZONAS
 	alone_name = "Brazilian"
 	split_name = "$PARENT$-Brazilian"
 }
 colombia_colony = {
-	region = region_gran_colombia
+	region = STATE_BOLIVAR region = STATE_GUAYANA region = STATE_MIRANDA region = STATE_ANTIOQUIA region = STATE_ZULIA region = STATE_GUAVIARE region = STATE_CAUCA region = STATE_CUNDINAMARCA
 	alone_name = "North Andean"
 	split_name = "$PARENT$-Colombian"
 }
 peru_colony = {
-	region = region_andes
+	region = STATE_LIMA region = STATE_ICA region = STATE_CAJAMARCA region = STATE_AREQUIPA region = STATE_SANTA_CRUZ region = STATE_LA_PAZ region = STATE_ECUADOR region = STATE_JUJUY region = STATE_PASTAZA region = STATE_TARAPACA region = STATE_ANTOFAGASTA region = STATE_ACRE region = STATE_POTOSI
 	alone_name = "South Andean"
 	split_name = "$PARENT$-Peruvian"
 }
 argentine_colony = {
-	region = region_la_plata
+	region = STATE_RIO_NEGRO region = STATE_LA_PAMPA region = STATE_SANTA_FE region = STATE_CORRIENTES region = STATE_TUCUMAN region = STATE_CHACO region = STATE_BUENOS_AIRES region = STATE_ALTO_PARAGUAY region = STATE_BAJO_PARAGUAY region = STATE_SOUTH_ATLANTIC_ISLANDS region = STATE_LOS_RIOS region = STATE_ARAUCANIA region = STATE_PATAGONIA region = STATE_SANTIAGO
 	alone_name = "Platinean"
 	split_name = "$PARENT$-Platinean"
 }
 africa_colony = {
-	region = region_nile_basin region = region_ethiopia region = region_north_africa region = region_senegal 
-	region = region_niger region = region_congo region = region_southern_africa region = region_zanj 
+	region = african_strategic_regions
 	region = STATE_CAPE_VERDE
 	alone_name = "Neo-African"
 	split_name = "$PARENT$-African"
 }
 caribbean_colony = {
-	region = region_caribbean
+	region = STATE_WESTERN_CUBA region = STATE_JAMAICA region = STATE_HAITI region = STATE_SANTO_DOMINGO region = STATE_WEST_INDIES region = STATE_BAHAMAS region = STATE_PUERTO_RICO region = STATE_EASTERN_CUBA region = STATE_CENTRAL_CUBA
 	alone_name = "West Indian"
 	split_name = "$PARENT$-Caraibic"
 }
 central_america_colony = {
-	region = region_central_america
+	region = STATE_HONDURAS region = STATE_NICARAGUA region = STATE_COSTA_RICA region = STATE_PANAMA region = STATE_SAN_SALVADOR region = STATE_YUCATAN region = STATE_CHIAPAS region = STATE_GUATEMALA
 	alone_name = "Central American"
 	split_name = "$PARENT$-Centroamerican"
 }
