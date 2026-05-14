@@ -10,8 +10,12 @@ void outReligion(std::ostream& output, const mappers::ReligionDef& religion)
 	output << religion.name << " = {\n";
 	if (!religion.texture.empty())
 		output << "\ticon = \"" << religion.texture << "\"\n";
+	else // Hardcoding *something*
+		output << "\ticon = \"gfx/interface/icons/religion_icons/pagan.dds\"\n";
 	if (!religion.heritage.empty())
 		output << "\theritage = \"" << religion.heritage << "\"\n";
+	else // Hardcoding *something*
+		output << "\theritage = \"heritage_indigenous\"\n";
 	if (religion.color)
 		output << "\tcolor " << *religion.color << "\n";
 	if (!religion.taboos.empty())

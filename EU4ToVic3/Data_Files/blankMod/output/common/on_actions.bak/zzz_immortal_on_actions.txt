@@ -1,0 +1,77 @@
+﻿# Root = Character
+on_character_death = {
+	on_actions = {
+		converter_dead_immortal_on_actions
+	}
+}
+
+converter_dead_immortal_on_actions = {
+	effect = {
+		if = {
+			limit = {
+				has_trait = converter_immortal
+				owner = { has_variable = converter_has_immortal_ruler }
+			}
+			save_scope_as = not_so_immortal
+			if = {
+				limit = { is_ruler = yes }
+				owner = {
+					trigger_event = { id = zzz_cc_politics.2 popup = yes }
+				}
+			}
+			else = {
+				owner = {
+					trigger_event = { id = zzz_cc_politics.3 popup = yes }
+				}
+			}
+		}
+	}
+}
+
+on_new_ruler = {
+	on_actions = {
+		converter_deposed_immortal_on_actions
+	}
+}
+
+converter_deposed_immortal_on_actions = {
+	effect = {
+		if = {
+			limit = {
+				is_ruler = yes
+				NOT = { has_trait = converter_immortal }
+				owner = {
+					has_variable = converter_has_immortal_ruler
+					NOT = { has_variable = converter_made_immortal_republic }
+					any_scope_character = { has_trait = converter_immortal }
+				}
+			}
+			owner = {
+				trigger_event = { id = zzz_cc_politics.4 popup = yes }
+			}
+		}
+	}
+}
+
+on_law_enactment_pass = {
+	on_actions = {
+		converter_immortal_republic_on_actions
+	}
+}
+
+converter_immortal_republic_on_actions = {
+	effect = {
+		if = {
+			limit = {
+				has_variable = converter_has_immortal_ruler
+				OR = {
+					is_enacting_law = law_type:law_presidential_republic
+					is_enacting_law = law_type:law_parliamentary_republic
+					is_enacting_law = law_type:law_council_republic
+				}
+			}
+			set_local_variable = converter_made_immortal_republic
+			trigger_event = { id = zzz_cc_politics.4 days = 1 popup = yes }
+		}
+	}
+}
