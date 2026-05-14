@@ -1,0 +1,633 @@
+﻿# converter_is_converter_confederation_culture
+# converter_should_add_confederation_cultures
+# converter_shares_colonial_region_with_capital
+# converter_culture_is_in_capital_list
+# is_settler_colonial_country
+# is_colonized_country
+# zzz_is_non_major_new_world_tag
+# zzz_is_major_new_world_tag
+# converter_has_indigenous_american_language
+# converter_has_indigenous_african_language
+
+converter_is_converter_confederation_culture = {
+	trigger_if = {
+		limit = {
+			prev.owner = {
+				has_law_or_variant = law_type:law_multicultural
+				has_law_or_variant = law_type:law_slavery_banned
+			}
+		}
+		always = yes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner = {
+				has_law_or_variant = law_type:law_cultural_exclusion
+				has_law_or_variant = law_type:law_slavery_banned
+			}
+		}
+		OR = {
+			shares_language_trait_group_with_any_primary_culture = prev.owner
+			shares_heritage_trait_group_with_any_primary_culture = prev.owner
+			shares_tradition_trait_with_any_primary_culture = prev.owner
+		}
+	}
+	trigger_else = { shares_heritage_trait_group_with_any_primary_culture = prev.owner }
+}
+
+converter_should_add_confederation_cultures = {
+	trigger_if = {
+		limit = { is_subject = yes }
+		OR = {
+			top_overlord = {
+				OR = {
+					is_in_geographic_region = geographic_region_americas
+					is_in_geographic_region = geographic_region_converter_colonial_oceania
+				}
+			}
+			c:CAN ?= this
+			c:USA ?= this
+			c:CAL ?= this
+			c:MEX ?= this
+			c:GCO ?= this
+			c:PEU ?= this
+			c:BRZ ?= this
+			c:ARG ?= this
+			c:AST ?= this
+			c:SAF ?= this
+		}
+	}
+	trigger_else = { always = yes }
+}
+
+converter_shares_colonial_region_with_capital = {
+	trigger_if = {
+		limit = {
+			prev.capital = { is_in_geographic_region = geographic_region_converter_colonial_canada }
+		}
+		is_in_geographic_region = geographic_region_converter_colonial_canada
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { is_in_geographic_region = geographic_region_converter_colonial_america }
+		}
+		is_in_geographic_region = geographic_region_converter_colonial_america
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { is_in_geographic_region = geographic_region_converter_colonial_california }
+		}
+		is_in_geographic_region = geographic_region_converter_colonial_california
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { is_in_geographic_region = geographic_region_converter_colonial_mexico }
+		}
+		is_in_geographic_region = geographic_region_converter_colonial_mexico
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { is_in_geographic_region = geographic_region_converter_colonial_caribbean }
+		}
+		is_in_geographic_region = geographic_region_converter_colonial_caribbean
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { is_in_geographic_region = geographic_region_converter_colonial_gran_colombia }
+		}
+		is_in_geographic_region = geographic_region_converter_colonial_gran_colombia
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { region = sr:region_andes }
+		}
+		region = sr:region_andes
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { region = sr:region_brazil }
+		}
+		region = sr:region_brazil
+	}
+	trigger_else_if = {
+		limit = {
+			prev.capital = { is_in_geographic_region = geographic_region_converter_colonial_argentina }
+		}
+		is_in_geographic_region = geographic_region_converter_colonial_argentina
+	}
+	trigger_else = {
+		prev.capital = { is_in_geographic_region = geographic_region_converter_colonial_australia }
+		is_in_geographic_region = geographic_region_converter_colonial_australia
+	}
+	#trigger_else_if = {
+	#	limit = {
+	#		prev.capital = { is_in_geographic_region = geographic_region_converter_colonial_australia }
+	#	}
+	#	is_in_geographic_region = geographic_region_converter_colonial_australia
+	#}
+	#trigger_else = {
+	#	prev.capital = { region = sr:region_southern_africa }
+	#	region = sr:region_southern_africa
+	#}
+}
+
+converter_culture_is_in_capital_list = {
+	trigger_if = {
+		limit = {
+			prev.owner.capital = { is_in_geographic_region = geographic_region_converter_colonial_canada }
+		}
+		is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { is_in_geographic_region = geographic_region_converter_colonial_america }
+		}
+		is_target_in_global_variable_list = { name = global_american_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { is_in_geographic_region = geographic_region_converter_colonial_california }
+		}
+		is_target_in_global_variable_list = { name = global_californian_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { is_in_geographic_region = geographic_region_converter_colonial_mexico }
+		}
+		is_target_in_global_variable_list = { name = global_mexican_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { is_in_geographic_region = geographic_region_converter_colonial_caribbean }
+		}
+		is_target_in_global_variable_list = { name = global_caribbean_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { is_in_geographic_region = geographic_region_converter_colonial_gran_colombia }
+		}
+		is_target_in_global_variable_list = { name = global_colombian_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { region = sr:region_andes }
+		}
+		is_target_in_global_variable_list = { name = global_andean_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { region = sr:region_brazil }
+		}
+		is_target_in_global_variable_list = { name = global_brazilian_cultures target = this }
+	}
+	trigger_else_if = {
+		limit = {
+			prev.owner.capital = { is_in_geographic_region = geographic_region_converter_colonial_argentina }
+		}
+		is_target_in_global_variable_list = { name = global_platinean_cultures target = this }
+	}
+	trigger_else = {
+		prev.owner.capital = { is_in_geographic_region = geographic_region_converter_colonial_australia }
+		is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+	}
+	#trigger_else_if = {
+	#	limit = {
+	#		prev.owner.capital = { is_in_geographic_region = geographic_region_converter_colonial_australia }
+	#	}
+	#	is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+	#}
+	#trigger_else = {
+	#	prev.owner.capital = { region = sr:region_southern_africa }
+	#	is_target_in_global_variable_list = { name = global_cape_cultures target = this }
+	#}
+}
+
+is_settler_colonial_country = {
+	trigger_if = {
+		limit = { is_in_geographic_region = geographic_region_americas }
+		any_primary_culture = { NOT = { has_discrimination_trait_group = heritage_group_indigenous_american } }
+	}
+	trigger_else_if = {
+		limit = { is_in_geographic_region = geographic_region_converter_colonial_oceania }
+		any_primary_culture = { NOT = { has_discrimination_trait_group = heritage_group_indigenous_oceanic } }
+	}
+	trigger_else_if = {
+		limit = { is_in_geographic_region = geographic_region_africa }
+		any_primary_culture = {
+			NOR = {
+				has_discrimination_trait_group = heritage_group_african
+				has_discrimination_trait_group = heritage_group_middle_eastern
+			}
+		}
+	}
+	trigger_else = { always = no }
+}
+
+is_colonized_country = {
+	trigger_if = {
+		limit = { is_in_geographic_region = geographic_region_americas }
+		any_primary_culture = { has_discrimination_trait_group = heritage_group_indigenous_american }
+	}
+	trigger_else_if = {
+		limit = { is_in_geographic_region = geographic_region_converter_colonial_oceania }
+		any_primary_culture = { has_discrimination_trait_group = heritage_group_indigenous_oceanic }
+	}
+	trigger_else_if = {
+		limit = { is_in_geographic_region = geographic_region_east_asia }
+		any_primary_culture = { has_discrimination_trait_group = heritage_group_north_asian }
+	}
+	trigger_else_if = {
+		limit = { is_in_geographic_region = geographic_region_africa }
+		any_primary_culture = { has_discrimination_trait_group = heritage_group_african }
+	}
+	trigger_else = { always = no }
+}
+
+zzz_is_non_major_new_world_tag = {
+	OR = {
+		#AND = {
+		#	exists = c:CAN = ROOT #MAJOR
+		#	c:CAN = ROOT
+		#}
+		AND = {
+			exists = c:HBC
+			c:HBC = ROOT
+		}
+		AND = {
+			exists = c:NEW
+			c:NEW = ROOT
+		}
+		AND = {
+			exists = c:NNV
+			c:NNV = ROOT
+		}
+		AND = {
+			exists = c:ONT
+			c:ONT = ROOT
+		}
+		AND = {
+			exists = c:QUE
+			c:QUE = ROOT
+		}
+		AND = {
+			exists = c:NBS
+			c:NBS = ROOT
+		}
+		AND = {
+			exists = c:NVS
+			c:NVS = ROOT
+		}
+		
+		AND = {
+			exists = c:NEN
+			c:NEN = ROOT
+		}
+		AND = {
+			exists = c:FSA
+			c:FSA = ROOT
+		}
+		#AND = {
+		#	exists = c:USA #MAJOR
+		#	c:USA = ROOT
+		#}
+		AND = {
+			exists = c:CSA
+			c:CSA = ROOT
+		}
+		AND = {
+			exists = c:NCR
+			c:NCR = ROOT
+		}
+		AND = {
+			exists = c:SCR
+			c:SCR = ROOT
+		}
+		AND = {
+			exists = c:CLI
+			c:CLI = ROOT
+		}
+		AND = {
+			exists = c:GRG
+			c:GRG = ROOT
+		}
+		AND = {
+			exists = c:FLR
+			c:FLR = ROOT
+		}
+		
+		AND = {
+			exists = c:UOM
+			c:UOM = ROOT
+		}
+		AND = {
+			exists = c:DKT
+			c:DKT = ROOT
+		}
+		AND = {
+			exists = c:LOU
+			c:LOU = ROOT
+		}
+		
+		AND = {
+			exists = c:CAL
+			c:CAL = ROOT
+		}
+		AND = {
+			exists = c:ORG
+			c:ORG = ROOT
+		}
+		AND = {
+			exists = c:DES
+			c:DES = ROOT
+		}
+		
+		AND = {
+			exists = c:CSC
+			c:CSC = ROOT
+		}
+		AND = {
+			exists = c:COL
+			c:COL = ROOT
+		}
+		
+		AND = {
+			exists = c:TEX
+			c:TEX = ROOT
+		}
+		AND = {
+			exists = c:RIO
+			c:RIO = ROOT
+		}
+		AND = {
+			exists = c:YUC
+			c:YUC = ROOT
+		}
+		#AND = {
+		#	exists = c:MEX #MAJOR
+		#	c:MEX = ROOT
+		#}
+		AND = {
+			exists = c:ALT
+			c:ALT = ROOT
+		}
+		AND = {
+			exists = c:GUA
+			c:GUA = ROOT
+		}
+		AND = {
+			exists = c:HON
+			c:HON = ROOT
+		}
+		AND = {
+			exists = c:ELS
+			c:ELS = ROOT
+		}
+		AND = {
+			exists = c:NIC
+			c:NIC = ROOT
+		}
+		AND = {
+			exists = c:COS
+			c:COS = ROOT
+		}
+		#AND = {
+		#	exists = c:UCA #MAJOR
+		#	c:UCA = ROOT
+		#}
+		
+		AND = {
+			exists = c:PNM
+			c:PNM = ROOT
+		}
+		AND = {
+			exists = c:CLM
+			c:CLM = ROOT
+		}
+		AND = {
+			exists = c:VNZ
+			c:VNZ = ROOT
+		}
+		AND = {
+			exists = c:ECU
+			c:ECU = ROOT
+		}
+		#AND = {
+		#	exists = c:GCO
+		#	c:GCO = ROOT
+		#}
+		AND = {
+			exists = c:NPU
+			c:NPU = ROOT
+		}
+		AND = {
+			exists = c:PEU
+			c:PEU = ROOT
+		}
+		AND = {
+			exists = c:BOL
+			c:BOL = ROOT
+		}
+		
+		AND = {
+			exists = c:CHL
+			c:CHL = ROOT
+		}
+		AND = {
+			exists = c:ARG
+			c:ARG = ROOT
+		}
+		AND = {
+			exists = c:PRG
+			c:PRG = ROOT
+		}
+		AND = {
+			exists = c:URU
+			c:URU = ROOT
+		}
+		#AND = {
+		#	exists = c:PLT #MAJOR
+		#	c:PLT = ROOT
+		#}
+		
+		AND = {
+			exists = c:AMZ
+			c:AMZ = ROOT
+		}
+		AND = {
+			exists = c:BHI
+			c:BHI = ROOT
+		}
+		AND = {
+			exists = c:EQT
+			c:EQT = ROOT
+		}
+		AND = {
+			exists = c:PRA
+			c:PRA = ROOT
+		}
+		AND = {
+			exists = c:MNG
+			c:MNG = ROOT
+		}
+		AND = {
+			exists = c:PAU
+			c:PAU = ROOT
+		}
+		AND = {
+			exists = c:PNI
+			c:PNI = ROOT
+		}
+		AND = {
+			exists = c:CTR
+			c:CTR = ROOT
+		}
+		#AND = {
+		#	exists = c:BRZ #MAJOR
+		#	c:BRZ = ROOT
+		#}
+		
+		AND = {
+			exists = c:BAH
+			c:BAH = ROOT
+		}
+		AND = {
+			exists = c:CUB
+			c:CUB = ROOT
+		}
+		AND = {
+			exists = c:HAI
+			c:HAI = ROOT
+		}
+		AND = {
+			exists = c:JAM
+			c:JAM = ROOT
+		}
+		AND = {
+			exists = c:PCO
+			c:PCO = ROOT
+		}
+		AND = {
+			exists = c:DOM
+			c:DOM = ROOT
+		}
+		AND = {
+			exists = c:WIN
+			c:WIN = ROOT
+		}
+		
+		#AND = {
+		#	exists = c:AST #MAJOR
+		#	c:AST = ROOT
+		#}
+		AND = {
+			exists = c:NSW
+			c:NSW = ROOT
+		}
+		AND = {
+			exists = c:NZL
+			c:NZL = ROOT
+		}
+		AND = {
+			exists = c:SAS
+			c:SAS = ROOT
+		}
+		AND = {
+			exists = c:TAS
+			c:TAS = ROOT
+		}
+		AND = {
+			exists = c:WAS
+			c:WAS = ROOT
+		}
+	}
+}
+
+zzz_is_major_new_world_tag = {
+	OR = {
+		AND = {
+			exists = c:CAN
+			c:CAN = ROOT
+		}
+		AND = {
+			exists = c:USA
+			c:USA = ROOT
+		}
+		AND = {
+			exists = c:MEX
+			c:MEX = ROOT
+		}
+		AND = {
+			exists = c:UCA
+			c:UCA = ROOT
+		}
+		AND = {
+			exists = c:GCO
+			c:GCO = ROOT
+		}
+		AND = {
+			exists = c:PLT
+			c:PLT = ROOT
+		}
+		AND = {
+			exists = c:BRZ
+			c:BRZ = ROOT
+		}
+		AND = {
+			exists = c:AST
+			c:AST = ROOT
+		}
+	}
+}
+
+converter_has_indigenous_american_language = {
+	OR = {
+		has_discrimination_trait_group = language_group_oto_manguean
+		has_discrimination_trait_group = language_group_mayan
+		has_discrimination_trait_group = language_group_uto_aztecan
+		has_discrimination_trait_group = language_group_tarascan
+		has_discrimination_trait_group = language_group_tupian
+		has_discrimination_trait_group = language_group_aymaran
+		has_discrimination_trait_group = language_group_chonan
+		has_discrimination_trait_group = language_group_arawakan
+		has_discrimination_trait_group = language_group_siouan
+		has_discrimination_trait_group = language_group_iroquoian
+		has_discrimination_trait_group = language_group_muskogean
+		has_discrimination_trait_group = language_group_eskaleut
+		has_discrimination_trait_group = language_group_algic
+		has_discrimination_trait_group = language_group_na_dene
+		has_discrimination_trait_group = language_group_salishan
+		has_discrimination_trait_group = language_group_penutian
+		has_discrimination_trait_group = language_group_caddoan
+		has_discrimination_trait_group = language_group_hokan
+		has_discrimination_trait_group = language_group_chibchan
+		has_discrimination_trait_group = language_group_misumalpan
+		has_discrimination_trait_group = language_group_cariban
+	}
+}
+
+converter_has_indigenous_african_language = {
+	OR = {
+		has_discrimination_trait_group = language_group_kwa
+		has_discrimination_trait_group = language_group_mande
+		has_discrimination_trait_group = language_group_kru
+		has_discrimination_trait_group = language_group_volta_niger
+		has_discrimination_trait_group = language_group_senegambian
+		has_discrimination_trait_group = language_group_chadic
+		has_discrimination_trait_group = language_group_benue_congo
+		has_discrimination_trait_group = language_group_mal
+		has_discrimination_trait_group = language_group_gur
+		has_discrimination_trait_group = language_group_senufic
+		has_discrimination_trait_group = language_group_songhai
+		has_discrimination_trait_group = language_group_bantu
+		has_discrimination_trait_group = language_group_central_sudanic
+		has_discrimination_trait_group = language_group_saharan
+		has_discrimination_trait_group = language_group_nilotic
+		has_discrimination_trait = language_amharic
+		has_discrimination_trait_group = language_group_kushitic
+		has_discrimination_trait_group = language_group_ubangian
+		has_discrimination_trait_group = language_group_furan
+		has_discrimination_trait_group = language_group_kordofanian
+		has_discrimination_trait = language_tigrinya
+		has_discrimination_trait_group = language_group_khoisan
+	}
+}
