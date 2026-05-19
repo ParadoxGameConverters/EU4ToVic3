@@ -8,7 +8,7 @@ namespace
 {
 void outMajorFormable(std::ostream& output, const std::string& tag, const V3::MajorFormablesEntry& formable)
 {
-	output << tag << " ?= {\n";
+	output << "REPLACE_OR_CREATE:" << tag << " ?= {\n";
 	for (const auto& stanza: formable.getStanzas())
 		output << "\t" << stanza << "\n";
 	output << "\tpossible = {\n";
@@ -31,7 +31,7 @@ void outMajorFormable(std::ostream& output, const std::string& tag, const V3::Ma
 
 void outReleasableCountry(std::ostream& output, const V3::Country& country)
 {
-	output << country.getTag() << " ?= {\n";
+	output << "REPLACE_OR_CREATE:" << country.getTag() << " ?= {\n";
 	output << "\tprovinces = { ";
 	for (const auto& province: country.getUnownedProvinces())
 		output << province << " ";
@@ -42,7 +42,7 @@ void outReleasableCountry(std::ostream& output, const V3::Country& country)
 
 void outCommonCountry(std::ostream& output, const V3::Country& country)
 {
-	output << country.getTag() << " ?= {\n";
+	output << "REPLACE_OR_CREATE:" << country.getTag() << " ?= {\n";
 
 	if (country.getProcessedData().color)
 		output << "\tcolor " << *country.getProcessedData().color << "\n";

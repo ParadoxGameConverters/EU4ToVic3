@@ -1142,7 +1142,10 @@ bool V3::PoliticalManager::isVanillaCountryAndLanded(const std::string& tag) con
 	return true;
 }
 
-void V3::PoliticalManager::injectDynamicCulturesIntoFormables(const mappers::CultureMapper& cultureMapper)
+void V3::PoliticalManager::injectDynamicCulturesIntoFormables(mappers::CultureMapper& cultureMapper,
+	 const ClayManager& clayManager,
+	 const EU4::CultureLoader& cultureLoader,
+	 const EU4::ReligionLoader& religionLoader)
 {
 	Log(LogLevel::Info) << "-> Injecting dynamic cultures into formables.";
 	auto counter = 0;
@@ -1163,7 +1166,15 @@ void V3::PoliticalManager::injectDynamicCulturesIntoFormables(const mappers::Cul
 		{
 			if (!related.contains(culture))
 				continue;
-			data.cultures.insert(related.at(culture).begin(), related.at(culture).end());
+			for (const auto& relatedCulture: related.at(culture))
+			{
+				// We need its Vic3 equivalent, related stuff are eu4.
+				const auto& cultureMatch = cultureMapper.cultureMatch(clayManager, cultureLoader, religionLoader, relatedCulture, "", "", "", false, false);
+				if (cultureMatch)
+				{
+					data.cultures.insert(*cultureMatch);
+				}
+			}
 			updated = true;
 		}
 		if (updated)
