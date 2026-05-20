@@ -1075,6 +1075,8 @@ void V3::Country::convertCharacters(const mappers::CharacterTraitMapper& charact
 				character.interestGroup = *processedData.ideaEffect.rulingInterestGroups.begin();
 			}
 		}
+		if (character.ruler && deleteRuler)
+			continue; // skip rulers for PUs.
 
 		processedData.characters.emplace_back(character);
 	}

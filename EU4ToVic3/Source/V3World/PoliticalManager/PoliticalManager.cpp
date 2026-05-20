@@ -630,6 +630,12 @@ void V3::PoliticalManager::convertDiplomacy(const std::vector<EU4::EU4Agreement>
 		{
 			agreements.push_back(newAgreement);
 		}
+
+		// PU fix - having same fellow in a PU leads to a CTD, so file a flag to delete ruler in PUs.
+		if (newAgreement.type == "personal_union")
+		{
+			country2->second->setDeleteRulerFlag();
+		}
 	}
 	Log(LogLevel::Info) << "<> Transcribed " << agreements.size() << " agreements.";
 }
