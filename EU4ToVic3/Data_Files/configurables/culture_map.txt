@@ -13,7 +13,7 @@
 ## OWNER: link = { vic3 = v3culture eu4group = eu4culturegroup owner = TAG }
 ## List as many as needed. Use VIC3 tags.
 #
-# Multiples of all except vic3 are allowed. You can mix and match, ie. "region = region_new_england region = STATE_BERMUDA" will catch all of New England + Bermuda.
+# Multiples of all except vic3 are allowed. You can mix and match, ie. "region = region_new_england region = STATE_BERMUDA"will catch all of New England + Bermuda.
 #
 ## DO NOT have separate colonial cultures, they will be auto-generated anyway!
 # Exception: EU4's colonial cultures which must have own straight mapping with "neoculture_override = yes".
@@ -30,6 +30,44 @@
 @south_italy_area = "region = STATE_CAMPANIA region = STATE_CALABRIA region = STATE_SICILY region = STATE_SARDINIA region = STATE_MALTA region = STATE_CORSICA region = STATE_APULIA region = STATE_ABRUZZO"
 @italian_cultures = "eu4 = dalmatian eu4 = old_lombard eu4 = tuscian eu4 = spoletan eu4 = beneventine eu4 = salernian eu4 = veronese eu4 = lombard eu4 = umbrian eu4 = piedmontese eu4 = ligurian eu4 = romagnan eu4 = tuscan eu4 = venetian eu4 = italian eu4 = dalmatian eu4 = emilian eu4 = friulian eu4 = romagnolc eu4 = neapolitan eu4 = sardinian eu4 = sicilian eu4 = corsican eu4 = c_latin eu4 = maltese eu4 = africano eu4 = americano eu4 = asiatico eu4 = australiano"
 
+#old strat regions
+## Americas
+@region_caribbean = "region = STATE_WESTERN_CUBA region = STATE_JAMAICA region = STATE_HAITI region = STATE_SANTO_DOMINGO region = STATE_WEST_INDIES region = STATE_BAHAMAS region = STATE_PUERTO_RICO region = STATE_EASTERN_CUBA region = STATE_CENTRAL_CUBA"
+@region_central_america = "region = STATE_HONDURAS region = STATE_NICARAGUA region = STATE_COSTA_RICA region = STATE_PANAMA region = STATE_SAN_SALVADOR region = STATE_YUCATAN region = STATE_CHIAPAS region = STATE_GUATEMALA"
+@region_dixie = "region = STATE_MISSISSIPPI region = STATE_ALABAMA region = STATE_FLORIDA region = STATE_GEORGIA region = STATE_SOUTH_CAROLINA region = STATE_NORTH_CAROLINA region = STATE_VIRGINIA region = STATE_DISTRICT_OF_COLUMBIA region = STATE_MARYLAND region = STATE_DELAWARE region = STATE_LOUISIANA region = STATE_ARKANSAS region = STATE_TEXAS region = STATE_OKLAHOMA"
+@region_mexico = "region = STATE_JALISCO region = STATE_ZACATECAS region = STATE_GUERRERO region = STATE_MEXICO region = STATE_CHIHUAHUA region = STATE_DURANGO region = STATE_RIO_GRANDE region = STATE_SONORA region = STATE_VERACRUZ region = STATE_SINALOA region = STATE_BAJIO region = STATE_OAXACA"
+@region_new_england = "region = STATE_MASSACHUSETTS region = STATE_MAINE region = STATE_CONNECTICUT region = STATE_RHODE_ISLAND region = STATE_VERMONT region = STATE_NEW_HAMPSHIRE region = STATE_NEW_BRUNSWICK region = STATE_BERMUDA region = STATE_PENNSYLVANIA region = STATE_NEW_YORK region = STATE_NEW_JERSEY"
+@region_the_midwest = "region = STATE_MINNESOTA region = STATE_WISCONSIN region = STATE_IOWA region = STATE_MISSOURI region = STATE_MICHIGAN region = STATE_INDIANA region = STATE_ILLINOIS region = STATE_WEST_VIRGINIA region = STATE_OHIO region = STATE_KENTUCKY region = STATE_TENNESSEE"
+
+## Europe
+@region_arctic_russia = "region = STATE_GALICH region = STATE_ARKHANGELSK region = STATE_NENETSIA"
+@region_balkans = "region = STATE_SLOVENIA region = STATE_CROATIA region = STATE_SLAVONIA region = STATE_DALMATIA region = STATE_BOSNIA region = STATE_MONTENEGRO region = STATE_ALBANIA region = STATE_SKOPIA region = STATE_KOSOVO region = STATE_NORTHERN_THRACE region = STATE_BULGARIA region = STATE_EASTERN_SERBIA region = STATE_WESTERN_SERBIA region = STATE_PELOPONNESE region = STATE_IONIAN_ISLANDS region = STATE_ATTICA region = STATE_THESSALIA region = STATE_MACEDONIA region = STATE_WESTERN_THRACE region = STATE_CRETE region = STATE_WEST_AEGEAN_ISLANDS"
+@region_baltic = "region = STATE_NORRLAND region = STATE_JUTLAND region = STATE_ZEALAND region = STATE_GOTALAND region = STATE_GOTLAND region = STATE_SCANIA region = STATE_SVEALAND region = STATE_EASTERN_NORWAY region = STATE_WESTERN_NORWAY region = STATE_NORTHERN_NORWAY"
+@region_baltic_states = "region = STATE_VILNIUS region = STATE_COURLAND region = STATE_TARTU region = STATE_KAUNAS region = STATE_RIGA region = STATE_TALINN"
+@region_belarus = "region = STATE_VITEBSK region = STATE_BREST region = STATE_MINSK region = STATE_MOGILEV"
+@region_danubia = "region = STATE_TRANSDANUBIA region = STATE_CENTRAL_HUNGARY region = STATE_SLOVAKIA region = STATE_RUTHENIA region = STATE_BUKOVINA region = STATE_DELVIDEK region = STATE_BEKES region = STATE_BANAT region = STATE_DOBRUDJA region = STATE_WALLACHIA region = STATE_SOUTHERN_TRANSYLVANIA region = STATE_MOLDAVIA region = STATE_BESSARABIA region = STATE_NORTHERN_TRANSYLVANIA"
+@region_dnieper = "region = STATE_CRIMEA region = STATE_CHERSON region = STATE_KHARKOV region = STATE_KIEV region = STATE_TAURIDA region = STATE_VOLHYNIA region = STATE_CHERNIHIV"
+@region_england = "region = STATE_WALES region = STATE_MIDLANDS region = STATE_EAST_ANGLIA region = STATE_WEST_COUNTRY region = STATE_HOME_COUNTIES region = STATE_YORKSHIRE region = STATE_LANCASHIRE"
+@region_finland = "region = STATE_OSTROBOTHNIA region = STATE_UUSIMAA region = STATE_ALAND region = STATE_WEST_KARELIA region = STATE_KUOPIO region = STATE_OULU region = STATE_KOLA region = STATE_EAST_KARELIA"
+@region_france = "region = STATE_CHAMPAGNE region = STATE_ILE_DE_FRANCE region = STATE_ORLEANS region = STATE_FRENCH_LOW_COUNTRIES region = STATE_BRITTANY region = STATE_NORMANDY region = STATE_PICARDY region = STATE_MAINE_ANJOU region = STATE_BURGUNDY region = STATE_POITOU region = STATE_FRANCHE_COMTE region = STATE_LORRAINE"
+@region_iberia = "region = STATE_CATALONIA region = STATE_OLD_CASTILE region = STATE_BALEARIC_ISLANDS region = STATE_ARAGON region = STATE_BASQUE_COUNTRY region = STATE_GALICIA region = STATE_ASTURIAS region = STATE_BEIRA region = STATE_LOWER_ANDALUSIA region = STATE_ALENTEJO region = STATE_EXTREMADURA region = STATE_NEW_CASTILE region = STATE_UPPER_ANDALUSIA region = STATE_VALENCIA region = STATE_ESTREMADURA region = STATE_CAPE_VERDE region = STATE_CANARY_ISLANDS region = STATE_AZORES region = STATE_MADEIRA region = STATE_MURCIA region = STATE_LEON region = STATE_ENTRE_DOURO_E_MINHO"
+@region_italy = "region = STATE_PIEDMONT region = STATE_EMILIA region = STATE_TUSCANY region = STATE_LAZIO region = STATE_CAMPANIA region = STATE_CALABRIA region = STATE_SICILY region = STATE_SARDINIA region = STATE_MALTA region = STATE_CORSICA region = STATE_UMBRIA region = STATE_APULIA region = STATE_ABRUZZO region = STATE_ROMAGNA region = STATE_VENETIA region = STATE_ISTRIA region = STATE_LOMBARDY region = STATE_SOUTH_TYROL"
+@region_north_germany = "region = STATE_HIGHLANDS region = STATE_LOWLANDS region = STATE_ICELAND region = STATE_GREENLAND region = STATE_ULSTER region = STATE_LEINSTER region = STATE_CONNAUGHT region = STATE_MUNSTER"
+@region_north_sea_coast = "region = STATE_HESSE region = STATE_HANNOVER region = STATE_BRUNSWICK region = STATE_ELBE region = STATE_SCHLESWIG_HOLSTEIN region = STATE_POMERANIA region = STATE_MECKLENBURG region = STATE_BRANDENBURG region = STATE_ANHALT region = STATE_SAXONY region = STATE_LOWER_SILESIA"
+@region_occitania = "region = STATE_PROVENCE region = STATE_GUYENNE region = STATE_LANGUEDOC region = STATE_AQUITAINE region = STATE_RHONE region = STATE_SAVOY region = STATE_AUVERGNE_LIMOUSIN"
+@region_poland = "region = STATE_POSEN region = STATE_GREATER_POLAND region = STATE_LESSER_POLAND region = STATE_MAZOVIA region = STATE_WEST_GALICIA region = STATE_EAST_GALICIA region = STATE_UPPER_SILESIA region = STATE_WEST_PRUSSIA region = STATE_EAST_PRUSSIA"
+@region_rhine = "region = STATE_FLANDERS region = STATE_HOLLAND region = STATE_WALLONIA region = STATE_GELRE region = STATE_ALSACE_LORRAINE region = STATE_RHINELAND region = STATE_NORTH_RHINE region = STATE_FRIESLAND region = STATE_WESTPHALIA region = STATE_RUHR"
+@region_russia = "region = STATE_INGRIA region = STATE_KURSK region = STATE_NOVGOROD region = STATE_TVER region = STATE_MOSCOW region = STATE_SMOLENSK region = STATE_ORYOL region = STATE_PSKOV region = STATE_YAROSLAVL region = STATE_RYAZAN region = STATE_TAMBOV region = STATE_NIZHNY_NOVGOROD region = STATE_TARTARIA region = STATE_CHUVASHIA"
+@region_south_germany = "region = STATE_FRANCONIA region = STATE_BOHEMIA region = STATE_MORAVIA region = STATE_BAVARIA region = STATE_WURTTEMBERG region = STATE_STYRIA region = STATE_TYROL region = STATE_AUSTRIA region = STATE_WEST_SWITZERLAND region = STATE_BADEN region = STATE_EAST_SWITZERLAND"
+@region_urals = "region = STATE_UFA region = STATE_PERM region = STATE_URAL region = STATE_CHELYABINSK region = STATE_VYATKA region = STATE_KAZAN region = STATE_SAMARA"
+
+## Mid-east/central Asia
+@region_anatolia = "region = STATE_EASTERN_THRACE region = STATE_HUDAVENDIGAR region = STATE_AYDIN region = STATE_KONYA region = STATE_ANKARA region = STATE_ADANA region = STATE_KASTAMONU region = STATE_CYPRUS region = STATE_DIYARBAKIR region = STATE_TRABZON region = STATE_EAST_AEGEAN_ISLANDS region = STATE_ERZURUM"
+@region_caucasus = "region = STATE_ARMENIA region = STATE_AZERBAIJAN region = STATE_DAGESTAN region = STATE_KUBAN region = STATE_STAVROPOL region = STATE_GREATER_CAUCASUS region = STATE_ROSTOV region = STATE_ASTRAKHAN region = STATE_KARS region = STATE_KALMYKIA region = STATE_NORTH_CAUCASUS region = STATE_ELIZAVETPOL"
+@region_central_asia = "region = STATE_UZBEKIA region = STATE_KHIVA region = STATE_TAJIKISTAN region = STATE_KIRGHIZIA region = STATE_TURKMENIA region = STATE_SEMIRECHE region = STATE_AKMOLINSK region = STATE_AKTOBE region = STATE_SYRDARYA region = STATE_FERGANA region = STATE_MERZ region = STATE_DZUNGARIA region = STATE_TIANSHAN region = STATE_URALSK region = STATE_JETISY"
+@region_persia = " region = STATE_KHORASAN region = STATE_ISFAHAN region = STATE_MAZANDARAN region = STATE_IRAKAJEMI region = STATE_LARISTAN region = STATE_FARS region = STATE_SISTAN region = STATE_KHUZESTAN region = STATE_TABRIZ region = STATE_URMIA region = STATE_PERSIAN_KURDISTAN region = STATE_LURISTAN region = STATE_KANDAHAR region = STATE_KABUL region = STATE_PASHTUNISTAN region = STATE_NORTHERN_BALUCHISTAN region = STATE_CENTRAL_HIGHLANDS region = STATE_QUETTA region = STATE_BALKH region = STATE_HERAT region = STATE_KERMAN region = STATE_SEMNAN"
+
+#cultures
 @benelux_cultures = "eu4 = dutch eu4 = afrikaner eu4 = frisian eu4 = batavian eu4 = tasmanian eu4 = flemish eu4 = brabantian"
 
 @african_cultures = "eu4 = egyptian eu4 = carthaginian eu4group = kongo_group  eu4group = cushitic eu4group = african eu4group = southern_african eu4group = great_lakes_group eu4group = maghrebi eu4group = mande eu4group = sahelian eu4group = sudanese eu4group = west_african eu4group = punic_group"
@@ -38,13 +76,14 @@
 @portuguese_cultures = "eu4 = galician eu4 = portugese eu4 = brazilian"
 
 ##Colonial
-@canada_colony = "region = region_canada region = STATE_SASKATCHEWAN region = STATE_ALBERTA region = STATE_BRITISH_COLUMBIA region = STATE_YUKON_TERRITORY region = STATE_ALASKA region = STATE_NEW_BRUNSWICK"
-@usa_north_colony = "region = region_new_england region = region_the_midwest region = STATE_NORTH_DAKOTA region = STATE_SOUTH_DAKOTA region = STATE_NEBRASKA"
-@usa_south_colony = "region = region_dixie region = STATE_KANSAS region = STATE_NEW_MEXICO state = STATE_MONTANA state = STATE_WYOMING state = STATE_COLORADO region = STATE_ARIZONA"
+@canada_colony = " region = STATE_NORTHWEST_TERRITORIES region = STATE_NUNAVUT region = STATE_ONTARIO region = STATE_QUEBEC region = STATE_NEWFOUNDLAND region = STATE_MANITOBA region = STATE_SASKATCHEWAN region = STATE_ALBERTA region = STATE_BRITISH_COLUMBIA region = STATE_YUKON_TERRITORY region = STATE_ALASKA region = STATE_NEW_BRUNSWICK"
+@usa_north_colony = "region = STATE_MASSACHUSETTS region = STATE_MAINE region = STATE_CONNECTICUT region = STATE_RHODE_ISLAND region = STATE_VERMONT region = STATE_NEW_HAMPSHIRE region = STATE_NEW_BRUNSWICK region = STATE_BERMUDA region = STATE_PENNSYLVANIA region = STATE_NEW_YORK region = STATE_NEW_JERSEY region = STATE_MINNESOTA region = STATE_WISCONSIN region = STATE_IOWA region = STATE_MISSOURI region = STATE_MICHIGAN region = STATE_INDIANA region = STATE_ILLINOIS region = STATE_WEST_VIRGINIA region = STATE_OHIO region = STATE_KENTUCKY region = STATE_TENNESSEE region = STATE_NORTH_DAKOTA region = STATE_SOUTH_DAKOTA region = STATE_NEBRASKA"
+@usa_south_colony = "region = STATE_MISSISSIPPI region = STATE_ALABAMA region = STATE_FLORIDA region = STATE_GEORGIA region = STATE_SOUTH_CAROLINA region = STATE_NORTH_CAROLINA region = STATE_VIRGINIA region = STATE_DISTRICT_OF_COLUMBIA region = STATE_MARYLAND region = STATE_DELAWARE region = STATE_LOUISIANA region = STATE_ARKANSAS region = STATE_TEXAS region = STATE_OKLAHOMA region = STATE_KANSAS region = STATE_NEW_MEXICO state = STATE_MONTANA state = STATE_WYOMING state = STATE_COLORADO region = STATE_ARIZONA"
 @usa_western_colony = "region = STATE_CALIFORNIA region = STATE_BAJA_CALIFORNIA region = STATE_WASHINGTON region = STATE_OREGON region = STATE_IDAHO region = STATE_NEVADA region = STATE_UTAH"
 #@texas_colony, No more Texan culture in VIC3
 
 @australia_colony = "region = region_oceania region = STATE_WESTERN_NEW_GUINEA region = STATE_EASTERN_NEW_GUINEA"
+
 
 # Jewish - Ashkenazi and Sephardim
 ##Added - Israeli
@@ -76,10 +115,10 @@ link = { vic3 = czech eu4 = czechBOH }
 link = { vic3 = polish eu4 = polishBOH eu4 = schlesianBOH }
 link = { vic3 = sorb eu4 = sorbianBOH }
 
-link = { vic3 = south_german eu4group = germanic region = region_south_germany region = region_balkans region = region_italy region = region_danubia region = region_occitania region = region_iberia region = STATE_RHINELAND region = STATE_ALSACE_LORRAINE region = STATE_FRANCHE_COMTE }
-link = { vic3 = north_german eu4group = germanic region = region_north_germany region = region_poland region = region_france region = region_england region = region_north_sea_coast region = region_rhine region = region_baltic }
+link = { vic3 = south_german eu4group = germanic @region_south_germany @region_balkans @region_italy @region_danubia @region_occitania @region_iberia region = STATE_RHINELAND region = STATE_ALSACE_LORRAINE region = STATE_FRANCHE_COMTE }
+link = { vic3 = north_german eu4group = germanic @region_north_germany @region_poland @region_france @region_england @region_north_sea_coast @region_rhine @region_baltic }
 #region_baltic=Scandinavia, region_baltic_states=Livonia
-link = { vic3 = east_german eu4group = germanic region = region_baltic_states region = region_belarus region = region_dnieper region = region_russia region = region_acrtic_russia region = region_finland region = region_urals region = region_caucasus region = region_central_asia }
+link = { vic3 = east_german eu4group = germanic @region_baltic_states @region_belarus @region_dnieper @region_russia @region_arctic_russia @region_finland @region_urals @region_caucasus @region_central_asia }
 link = { vic3 = weder_german eu4group = germanic } # Fallback
 
 
@@ -93,12 +132,12 @@ link = { vic3 = icelandic eu4 = icelandic }
 
 # Anglophone -  Afro-American, Afro-Caribbean, Anglo-Canadian, Australian, Dixie, English, Scottish, Welsh, Yankee
 ## Added - Anglo-Saxon
-link = { vic3 = afro_caribbean @african_cultures region = region_caribbean owner = ENG } #Must come before Afro-American
+link = { vic3 = afro_caribbean @african_cultures @region_caribbean owner = ENG } #Must come before Afro-American
 link = { vic3 = afro_american @african_cultures region = north_america_strategic_regions owner = ENG }
 link = { vic3 = anglo_canadian eu4group = british @canada_colony }
 link = { vic3 = australian eu4group = british @australia_colony }
 link = { vic3 = dixie eu4group = british @usa_south_colony  }
-link = { vic3 = dixie eu4group = british region = region_mexico region = region_central_america region = region_caribbean owner = USA } #Golden Circle
+link = { vic3 = dixie eu4group = british @region_mexico @region_central_america @region_caribbean owner = USA } #Golden Circle
 link = { vic3 = yankee eu4group = british @usa_north_colony @usa_western_colony }
 link = { vic3 = yankee eu4 = american neoculture_override = yes }
 
@@ -127,17 +166,17 @@ link = { vic3 = noric eu4group = scordiscian_g }
 ##Added - Lombard
 link = { vic3 = corsican eu4 = corsican } #Must come before N/S Italian
 link = { vic3 = maltese eu4 = maltese } #Must come before N/S Italian
-link = { vic3 = north_italian eu4group = latin @north_italy_area region = STATE_SLOVENIA region = STATE_CROATIA region = STATE_SLAVONIA region = STATE_DALMATIA region = STATE_BOSNIA region = STATE_BULGARIA region = STATE_EASTERN_SERBIA region = STATE_WESTERN_SERBIA region = region_occitania region = region_south_germany region = region_france region = region_rhine region = region_danubia region = region_poland region = region_north_germany region = region_england region = region_north_sea_coast }
-link = { vic3 = south_italian eu4group = latin @south_italy_area region = STATE_MONTENEGRO region = STATE_ALBANIA region = STATE_KOSOVO region = STATE_SKOPIA region = STATE_NORTHERN_THRACE region = STATE_PELOPONNESE region = STATE_IONIAN_ISLANDS region = STATE_ATTICA region = STATE_THESSALIA region = STATE_MACEDONIA region = STATE_WESTERN_THRACE region = STATE_CRETE region = STATE_WEST_AEGEAN_ISLANDS region = STATE_EASTERN_THRACE region = region_iberia }
+link = { vic3 = north_italian eu4group = latin @north_italy_area region = STATE_SLOVENIA region = STATE_CROATIA region = STATE_SLAVONIA region = STATE_DALMATIA region = STATE_BOSNIA region = STATE_BULGARIA region = STATE_EASTERN_SERBIA region = STATE_WESTERN_SERBIA @region_occitania @region_south_germany @region_france @region_rhine @region_danubia @region_poland @region_north_germany @region_england @region_north_sea_coast }
+link = { vic3 = south_italian eu4group = latin @south_italy_area region = STATE_MONTENEGRO region = STATE_ALBANIA region = STATE_KOSOVO region = STATE_SKOPIA region = STATE_NORTHERN_THRACE region = STATE_PELOPONNESE region = STATE_IONIAN_ISLANDS region = STATE_ATTICA region = STATE_THESSALIA region = STATE_MACEDONIA region = STATE_WESTERN_THRACE region = STATE_CRETE region = STATE_WEST_AEGEAN_ISLANDS region = STATE_EASTERN_THRACE @region_iberia }
 
 link = { vic3 = old_lombard eu4group = old_lombard_g }
 link = { vic3 = maltese eu4 = siculo_arabic eu4 = sicilian_arabic } #Maltese are descendants of Siculo-Arabs
 
 #Hispanophone - Afro-Caribeno, Caribeno, Central American, Mexican, North Andean, Platinean, South Andean, Spanish(x), 
-link = { vic3 = afro_caribeno @african_cultures region = region_caribbean owner = CAS owner = SPA }
-link = { vic3 = caribeno @spanish_cultures region = region_caribbean }
-link = { vic3 = central_american @spanish_cultures region = region_central_america }
-link = { vic3 = mexican @spanish_cultures region = region_mexico }
+link = { vic3 = afro_caribeno @african_cultures @region_caribbean owner = CAS owner = SPA }
+link = { vic3 = caribeno @spanish_cultures @region_caribbean }
+link = { vic3 = central_american @spanish_cultures @region_central_america }
+link = { vic3 = mexican @spanish_cultures @region_mexico }
 link = { vic3 = mexican eu4 = mexican neoculture_override = yes }
 ### PDX created the following cultures for when their respective countries gain independence. 
 # We should not map to them at the start.
@@ -175,9 +214,9 @@ link = { vic3 = spanish eu4 = castillian }
 
 # Francophone - Afro-Antillean, Breton, Cajun, Corsican(x), Franco-Canadian, French, Metis(x), Occitan, Swiss(x), Wallonian
 ##Added - Frankish
-link = { vic3 = afro_antillean @african_cultures region = region_caribbean owner = FRA owner = BRI }
+link = { vic3 = afro_antillean @african_cultures @region_caribbean owner = FRA owner = BRI }
 link = { vic3 = franco_canadian eu4group = french eu4 = wallonian eu4 = wallonian_UKS @canada_colony @usa_north_colony @usa_western_colony }
-link = { vic3 = cajun eu4group = french eu4 = wallonian eu4 = wallonian_UKS @usa_south_colony region = region_mexico region = region_central_america }
+link = { vic3 = cajun eu4group = french eu4 = wallonian eu4 = wallonian_UKS @usa_south_colony @region_mexico @region_central_america }
 
 link = { vic3 = wallonian eu4 = wallonian eu4 = wallonian_UKS }
 link = { vic3 = breton eu4 = breton eu4 = breton_celtic eu4 = breton_UKS eu4 = celtic_breton }
@@ -228,7 +267,7 @@ link = { vic3 = slovene eu4 = carantanian eu4 = slovene eu4 = slovene_new eu4 = 
 link = { vic3 = afro_brazilian @african_cultures region = region_brazil owner = POR }
 link = { vic3 = amazonic @portuguese_cultures region = STATE_ACRE region = STATE_PARA region = STATE_AMAZONAS region = region_gran_colombia } 
 link = { vic3 = nordestino @portuguese_cultures region = STATE_MARANHAO region = STATE_GOIAS region = STATE_BAHIA region = STATE_RIO_GRANDE_DO_NORTE region = STATE_CEARA region = STATE_PIAUI region = STATE_PERNAMBUCO region = STATE_PARAIBA }
-link = { vic3 = paulista @portuguese_cultures region = STATE_SAO_PAULO region = STATE_PARANA region = STATE_MATO_GROSSO region = region_andes }
+link = { vic3 = paulista @portuguese_cultures region = STATE_SAO_PAULO region = STATE_PARANA region = STATE_MATO_GROSSO @region_andes }
 link = { vic3 = sulista @portuguese_cultures region = STATE_RIO_GRANDE_DO_SUL region = STATE_SANTA_CATARINA region = region_la_plata }
 link = { vic3 = brazilian @portuguese_cultures region = STATE_MINAS_GERAIS region = STATE_RIO_DE_JANEIRO }
 link = { vic3 = brazilian @portuguese_cultures region = region_brazil } # Fallback
@@ -254,7 +293,7 @@ link = { vic3 = russian eu4group = east_slavic owner = RUS } #Keep last
 
 #Romanian - Romanian
 ##Added - Aromanian
-link = { vic3 = aromanian eu4 = moldovan eu4 = romanian eu4 = transylvanian eu4 = moldovian eu4 = vlach region = region_balkans }
+link = { vic3 = aromanian eu4 = moldovan eu4 = romanian eu4 = transylvanian eu4 = moldovian eu4 = vlach @region_balkans }
 link = { vic3 = aromanian eu4 = aromanian }
 
 link = { vic3 = romanian eu4 = moldovan eu4 = romanian eu4 = transylvanian eu4 = moldovian eu4 = vlach }
@@ -317,8 +356,8 @@ link = { vic3 = yemenite eu4 = yemeni eu4 = yemeni_culture eu4 = yemenite eu4 = 
 
 
 # Iranian-Turanian - Baluchi, Hazara, Kazakh, Kurdish, Kyrgyz, Luri, Mazanderani, Pashtun, Persian, Tajik, Turkmen, Uighur and Uzbek
-link = { vic3 = hazara eu4 = mongol region = region_persia religion_group = muslim } #Moghols
-link = { vic3 = tajik eu4 = persian region = region_central_asia }
+link = { vic3 = hazara eu4 = mongol @region_persia religion_group = muslim } #Moghols
+link = { vic3 = tajik eu4 = persian @region_central_asia }
 
 link = { vic3 = baluchi eu4 = baluchi eu4 = baloch }
 link = { vic3 = hazara eu4 = hazara }
@@ -338,7 +377,7 @@ link = { vic3 = uzbek eu4 = chorasmian eu4 = uzbek eu4 = uzbehk eu4 = karluk }
 
 
 # Mongolian - Mongol, Kalmyk and Tuvan
-link = { vic3 = kalmyk eu4group = altaic region = region_anatolia region = region_caucasus region = region_dnieper region = region_belarus region = region_arctic_russia region = region_russia region = STATE_INGRIA }
+link = { vic3 = kalmyk eu4group = altaic @region_anatolia @region_caucasus @region_dnieper @region_belarus @region_arctic_russia @region_russia region = STATE_INGRIA }
 link = { vic3 = tuvan eu4group = altaic region = STATE_TUVA }
 
 link = { vic3 = mongol eu4 = mongol eu4 = chahar eu4 = khalkha eu4 = oirats eu4 = khitan eu4 = yuan_culture eu4 = khalkas eu4 = khamnigan eu4 = khorchin eu4 = tumed eu4 = altaic_new eu4 = chaghatai }
@@ -407,7 +446,7 @@ link = { vic3 = iroquoian eu4group = iroquoian }
 
 # South American - Quechua, Guarani, Aimara, Amazonian, Patagonian, Guajiro, Tupinamba, Muisca and Cariban
 ##Added - Araucanian, Charruan, Chacoan
-link = { vic3 = taino eu4group = carribean region = region_caribbean } # (Taino)
+link = { vic3 = taino eu4group = carribean @region_caribbean } # (Taino)
 link = { vic3 = guajiro eu4 = arawak region = STATE_ZULIA region = STATE_ANTIOQUIA }
 
 link = { vic3 = aimara eu4 = aimara eu4 = diaguita eu4 = chiribaya }
@@ -565,7 +604,7 @@ link = { vic3 = oriya eu4 = oriya eu4 = garjati }
 link = { vic3 = pahari eu4 = pahari }
 link = { vic3 = panjabi eu4 = panjabi eu4 = urdu eu4 = dakani eu4 = jati }
 link = { vic3 = parsi eu4 = parsi }
-link = { vic3 = pathan eu4 = east_persian eu4 = afghani eu4 = tabari eu4 = afghan eu4 = kushan eu4 = pashtun region = region_punjab region = region_bombay region = region_bengal region = region_madras region = region_central_india region = STATE_HIMALAYAS region = STATE_EASTERN_HIMALAYAS  }
+link = { vic3 = pathan eu4 = east_persian eu4 = afghani eu4 = tabari eu4 = afghan eu4 = kushan eu4 = pashtun region = region_south_india region = region_north_india region = STATE_BALUCHISTAN region = STATE_HIMALAYAS region = STATE_EASTERN_HIMALAYAS  }
 link = { vic3 = rajput eu4 = rajput eu4 = malvi eu4 = dhundari eu4 = harauti eu4 = marwari eu4 = meo eu4 = mewari eu4 = tomara eu4 = nimadi }
 link = { vic3 = sindi eu4 = sindhi eu4 = multani }
 link = { vic3 = sinhala eu4 = sinhala }
@@ -613,7 +652,7 @@ link = { vic3 = yoruba eu4 = yorumba }
 
 #Central African - Bakongo, Baguirmi, Fang, Kanuri, Luba, Lunda, Mongo, Sara, Teda, Equatorial Bantu, Fluvial Bantu
 link = { vic3 = fang eu4 = yorumba region = STATE_SOUTH_CAMEROON region = STATE_NORTH_ANGOLA }
-link = { vic3 = sara eu4group = sudanese region = region_niger region = region_congo }
+link = { vic3 = sara eu4group = sudanese region = region_equatorial_africa }
 link = { vic3 = teda eu4group = sahelian region = STATE_CHAD region = STATE_NIGER region = STATE_LIBYAN_DESERT region = STATE_TRIPOLI region = STATE_LIBYA }
 
 link = { vic3 = bakongo eu4 = kongolese eu4 = bakongo }
@@ -662,7 +701,7 @@ link = { vic3 = nuer eu4 = nubian region = STATE_EQUATORIA } # South Sudan
 link = { vic3 = dinka eu4group = sudanese region = STATE_EQUATORIA } 
 link = { vic3 = luo eu4group = sudanese region = STATE_AMHARA } # Anuaks
 link = { vic3 = rundi eu4 = rwandan owner = BRD } # Burundi
-link = { vic3 = sukuma eu4 = takama region = STATE_RIFT_VALLEY } #Technically Sukuma are the northern branch of the Nyamwezi group. Since Unyamwezi are already mapped, I just put them here as a "northern" option
+link = { vic3 = sukuma eu4 = takama region = STATE_RIFT_VALLEY } #Technically Sukuma are the northern branch of the Nyamwezi group. Since Unyamwezi are already mapped, I just put them here as a "northern"option
 
 link = { vic3 = amhara eu4 = amhara eu4 = habshi }
 link = { vic3 = afar eu4 = afar }
