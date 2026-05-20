@@ -7,11 +7,15 @@ namespace
 {
 void outReligion(std::ostream& output, const mappers::ReligionDef& religion)
 {
-	output << religion.name << " = {\n";
+	output << "REPLACE_OR_CREATE:" << religion.name << " = {\n";
 	if (!religion.texture.empty())
 		output << "\ticon = \"" << religion.texture << "\"\n";
+	else // Hardcoding *something*
+		output << "\ticon = \"gfx/interface/icons/religion_icons/pagan.dds\"\n";
 	if (!religion.heritage.empty())
 		output << "\theritage = \"" << religion.heritage << "\"\n";
+	else // Hardcoding *something*
+		output << "\theritage = \"heritage_indigenous\"\n";
 	if (religion.color)
 		output << "\tcolor " << *religion.color << "\n";
 	if (!religion.taboos.empty())
@@ -26,11 +30,11 @@ void outReligion(std::ostream& output, const mappers::ReligionDef& religion)
 
 void outReligionStaticModifiers(std::ostream& output, const mappers::ReligionDef& religion)
 {
-	output << religion.name << "_standard_of_living_modifier_positive = {\n";
+	output << "REPLACE_OR_CREATE:" << religion.name << "_standard_of_living_modifier_positive = {\n";
 	output << "\ticon = \"gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds\"\n";
 	output << "\tstate_" << religion.name << "_standard_of_living_add = 1\n";
 	output << "}\n";
-	output << religion.name << "_standard_of_living_modifier_negative = {\n";
+	output << "REPLACE_OR_CREATE:" << religion.name << "_standard_of_living_modifier_negative = {\n";
 	output << "\ticon = \"gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds\"\n";
 	output << "\tstate_" << religion.name << "_standard_of_living_add = 1\n";
 	output << "}\n\n";
@@ -38,7 +42,7 @@ void outReligionStaticModifiers(std::ostream& output, const mappers::ReligionDef
 
 void outReligionModifierTypeDefs(std::ostream& output, const mappers::ReligionDef& religion)
 {
-	output << "state_" << religion.name << "_standard_of_living_add = {\n";
+	output << "REPLACE_OR_CREATE:state_" << religion.name << "_standard_of_living_add = {\n";
 	output << "\tdecimals=1\n";
 	output << "\tcolor=good\n";
 	output << "\tgame_data={\n";

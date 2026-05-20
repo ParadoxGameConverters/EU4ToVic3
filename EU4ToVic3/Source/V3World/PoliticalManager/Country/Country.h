@@ -223,6 +223,7 @@ class Country: commonItems::parser
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader,
 		 const date& conversionDate);
+	void setDeleteRulerFlag() { deleteRuler = true; }
 
 	void setFlags(const std::map<FlagCrafter::FLAGTYPE, std::string>& flags) { processedData.flags = flags; }
 	void addFlag(const FlagCrafter::FLAGTYPE flagType, const std::string& flag) { processedData.flags.emplace(flagType, flag); }
@@ -287,6 +288,7 @@ class Country: commonItems::parser
 	ProcessedData processedData;
 	UnprocessedData unprocessedData;
 	bool dynamicCountry = false;
+	bool deleteRuler = false; // Don't convert rulers in PUs due to CTDs.
 
 	std::shared_ptr<EU4::Country> sourceCountry;
 	std::vector<std::shared_ptr<SubState>> subStates;

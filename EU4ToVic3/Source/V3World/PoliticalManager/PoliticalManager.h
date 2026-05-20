@@ -111,7 +111,10 @@ class PoliticalManager
 		 const mappers::ReligionMapper& religionMapper,
 		 const EU4::CultureLoader& cultureLoader,
 		 const EU4::ReligionLoader& religionLoader);
-	void injectDynamicCulturesIntoFormables(const mappers::CultureMapper& cultureMapper);
+	void injectDynamicCulturesIntoFormables(mappers::CultureMapper& cultureMapper,
+		 const ClayManager& clayManager,
+		 const EU4::CultureLoader& cultureLoader,
+		 const EU4::ReligionLoader& religionLoader);
 	void expandReleasablesFootprint(const ClayManager& clayManager);
 	void alterReleasablesReligion();
 	void alterMajorFormables();

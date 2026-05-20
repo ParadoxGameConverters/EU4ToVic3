@@ -1,0 +1,870 @@
+﻿### Confederations of Subjects
+REPLACE:je_canada_unite_can_button = {
+	name = "je_canada_unite_can_button"
+	desc = "je_canada_unite_can_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = canada_test_modifier }
+		trigger_if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+				is_in_geographic_region = geographic_region_converter_colonial_canada												##Converter
+			}
+			top_overlord ?= {
+				relations:root >= relations_threshold:amicable
+			}
+			custom_tooltip = {
+				text = unite_canada_je_can_tt
+				any_neighbouring_state = {
+					owner = {
+						is_ai = yes
+						relations:root >= relations_threshold:amicable
+						any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+						is_in_geographic_region = geographic_region_converter_colonial_canada												##Converter
+						is_subject = yes
+						NOT = { THIS = ROOT }
+						top_overlord = {
+							THIS = root.top_overlord
+						}
+						this.gdp < root.gdp
+					}
+				}
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = gbr_can_relations_tt
+				any_subject_or_below = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+					is_in_geographic_region = geographic_region_converter_colonial_canada												##Converter
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					count >= 2
+				}
+			}
+		}
+	}
+
+	cooldown = { days = short_modifier_time }
+
+	effect = {
+		custom_tooltip = unite_canada_tt
+		if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+				is_in_geographic_region = geographic_region_converter_colonial_canada												##Converter
+			}
+			hidden_effect = {
+				trigger_event = { id = can_aus.1 popup = yes }
+			}
+		}
+		else = {
+			hidden_effect = {
+				trigger_event = { id = can_aus.2 popup = yes }
+			}
+		}
+		add_modifier = {
+			name = canada_test_modifier
+			days = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_technology_researched = pan-nationalism
+			}
+			add = 100
+		}
+	}
+}
+
+REPLACE:je_australia_unite_aus_button = {
+	name = "je_australia_unite_aus_button"
+	desc = "je_australia_unite_aus_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = australia_test_modifier }
+		trigger_if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+				is_in_geographic_region = geographic_region_converter_colonial_australia												##Converter
+			}
+			top_overlord ?= {
+				relations:root >= relations_threshold:amicable
+			}
+			custom_tooltip = {
+				text = unite_australia_je_aus_tt
+				any_neighbouring_state = {
+					owner = {
+						is_ai = yes
+						relations:root >= relations_threshold:amicable
+						any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+						is_in_geographic_region = geographic_region_converter_colonial_australia												##Converter
+						is_subject = yes
+						NOT = { THIS = ROOT }
+						top_overlord = {
+							THIS = root.top_overlord
+						}
+						this.gdp < root.gdp
+					}
+				}
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = gbr_aus_relations_tt
+				any_subject_or_below = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+					is_in_geographic_region = geographic_region_converter_colonial_australia												##Converter
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					count >= 2
+				}
+			}
+		}
+	}
+
+	cooldown = { days = short_modifier_time }
+
+	effect = {
+		custom_tooltip = unite_australia_tt
+		if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+				is_in_geographic_region = geographic_region_converter_colonial_australia												##Converter
+			}
+			hidden_effect = {
+				trigger_event = { id = can_aus.3 popup = yes }
+			}
+		}
+		else = {
+			hidden_effect = {
+				trigger_event = { id = can_aus.4 popup = yes }
+			}
+		}
+		add_modifier = {
+			name = australia_test_modifier
+			days = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_technology_researched = pan-nationalism
+			}
+			add = 100
+		}
+	}
+}
+
+je_america_unite_usa_button = {
+	name = "je_america_unite_usa_button"
+	desc = "je_america_unite_usa_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = america_test_modifier }
+		trigger_if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+				is_in_geographic_region = geographic_region_converter_colonial_america
+			}
+			top_overlord ?= {
+				relations:root >= relations_threshold:amicable
+			}
+			custom_tooltip = {
+				text = unite_america_je_usa_tt
+				any_neighbouring_state = {
+					owner = {
+						is_ai = yes
+						relations:root >= relations_threshold:amicable
+						any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+						is_in_geographic_region = geographic_region_converter_colonial_america
+						is_subject = yes
+						NOT = { THIS = ROOT }
+						top_overlord = {
+							THIS = root.top_overlord
+						}
+						this.gdp < root.gdp
+					}
+				}
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = gbr_usa_relations_tt
+				any_subject_or_below = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+					is_in_geographic_region = geographic_region_converter_colonial_america
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					count >= 2
+				}
+			}
+		}
+	}
+
+	cooldown = { days = short_modifier_time }
+
+	effect = {
+		custom_tooltip = unite_america_tt
+		if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_american_cultures target = this } }
+				is_in_geographic_region = geographic_region_converter_colonial_america
+			}
+			hidden_effect = {
+				trigger_event = { id = zzz_cc_confederation.1 popup = yes }
+			}
+		}
+		else = {
+			hidden_effect = {
+				trigger_event = { id = zzz_cc_confederation.2 popup = yes }
+			}
+		}
+		add_modifier = {
+			name = america_test_modifier
+			days = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_technology_researched = pan-nationalism
+			}
+			add = 100
+		}
+	}
+}
+
+je_california_unite_cal_button = {
+	name = "je_california_unite_cal_button"
+	desc = "je_california_unite_cal_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = california_test_modifier }
+		trigger_if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+				is_in_geographic_region = geographic_region_converter_colonial_california
+			}
+			top_overlord ?= {
+				relations:root >= relations_threshold:amicable
+			}
+			custom_tooltip = {
+				text = unite_california_je_cal_tt
+				any_neighbouring_state = {
+					owner = {
+						is_ai = yes
+						relations:root >= relations_threshold:amicable
+						any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+						is_in_geographic_region = geographic_region_converter_colonial_california
+						is_subject = yes
+						NOT = { THIS = ROOT }
+						top_overlord = {
+							THIS = root.top_overlord
+						}
+						this.gdp < root.gdp
+					}
+				}
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = gbr_cal_relations_tt
+				any_subject_or_below = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+					is_in_geographic_region = geographic_region_converter_colonial_california
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					count >= 2
+				}
+			}
+		}
+	}
+
+	cooldown = { days = short_modifier_time }
+
+	effect = {
+		custom_tooltip = unite_california_tt
+		if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_californian_cultures target = this } }
+				is_in_geographic_region = geographic_region_converter_colonial_california
+			}
+			hidden_effect = {
+				trigger_event = { id = zzz_cc_confederation.3 popup = yes }
+			}
+		}
+		else = {
+			hidden_effect = {
+				trigger_event = { id = zzz_cc_confederation.4 popup = yes }
+			}
+		}
+		add_modifier = {
+			name = california_test_modifier
+			days = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_technology_researched = pan-nationalism
+			}
+			add = 100
+		}
+	}
+}
+
+je_mexico_unite_mex_button = {
+	name = "je_mexico_unite_mex_button"
+	desc = "je_mexico_unite_mex_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = mexico_test_modifier }
+		trigger_if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+				is_in_geographic_region = geographic_region_converter_colonial_mexico
+			}
+			top_overlord ?= {
+				relations:root >= relations_threshold:amicable
+			}
+			custom_tooltip = {
+				text = unite_mexico_je_mex_tt
+				any_neighbouring_state = {
+					owner = {
+						is_ai = yes
+						relations:root >= relations_threshold:amicable
+						any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+						is_in_geographic_region = geographic_region_converter_colonial_mexico
+						is_subject = yes
+						NOT = { THIS = ROOT }
+						top_overlord = {
+							THIS = root.top_overlord
+						}
+						this.gdp < root.gdp
+					}
+				}
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = gbr_mex_relations_tt
+				any_subject_or_below = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+					is_in_geographic_region = geographic_region_converter_colonial_mexico
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					count >= 2
+				}
+			}
+		}
+	}
+
+	cooldown = { days = short_modifier_time }
+
+	effect = {
+		custom_tooltip = unite_mexico_tt
+		if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_mexican_cultures target = this } }
+				is_in_geographic_region = geographic_region_converter_colonial_mexico
+			}
+			hidden_effect = {
+				trigger_event = { id = zzz_cc_confederation.9 popup = yes }
+			}
+		}
+		else = {
+			hidden_effect = {
+				trigger_event = { id = zzz_cc_confederation.10 popup = yes }
+			}
+		}
+		add_modifier = {
+			name = mexico_test_modifier
+			days = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_technology_researched = pan-nationalism
+			}
+			add = 100
+		}
+	}
+}
+
+je_colombia_unite_gco_button = {
+	name = "je_colombia_unite_gco_button"
+	desc = "je_colombia_unite_gco_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = colombia_test_modifier }
+		trigger_if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+				is_in_geographic_region = geographic_region_converter_colonial_gran_colombia
+			}
+			top_overlord ?= {
+				relations:root >= relations_threshold:amicable
+			}
+			custom_tooltip = {
+				text = unite_colombia_je_gco_tt
+				any_neighbouring_state = {
+					owner = {
+						is_ai = yes
+						relations:root >= relations_threshold:amicable
+						any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+						is_in_geographic_region = geographic_region_converter_colonial_gran_colombia
+						is_subject = yes
+						NOT = { THIS = ROOT }
+						top_overlord = {
+							THIS = root.top_overlord
+						}
+						this.gdp < root.gdp
+					}
+				}
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = gbr_gco_relations_tt
+				any_subject_or_below = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+					is_in_geographic_region = geographic_region_converter_colonial_gran_colombia
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					count >= 2
+				}
+			}
+		}
+	}
+
+	cooldown = { days = short_modifier_time }
+
+	effect = {
+		custom_tooltip = unite_colombia_tt
+		if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_colombian_cultures target = this } }
+				is_in_geographic_region = geographic_region_converter_colonial_gran_colombia
+			}
+			hidden_effect = {
+				trigger_event = { id = zzz_cc_confederation.11 popup = yes }
+			}
+		}
+		else = {
+			hidden_effect = {
+				trigger_event = { id = zzz_cc_confederation.12 popup = yes }
+			}
+		}
+		add_modifier = {
+			name = colombia_test_modifier
+			days = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_technology_researched = pan-nationalism
+			}
+			add = 100
+		}
+	}
+}
+
+je_peru_unite_peu_button = {
+	name = "je_peru_unite_peu_button"
+	desc = "je_peru_unite_peu_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = peru_test_modifier }
+		trigger_if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+				capital = { region = sr:region_andes }
+			}
+			top_overlord ?= {
+				relations:root >= relations_threshold:amicable
+			}
+			custom_tooltip = {
+				text = unite_peru_je_peu_tt
+				any_neighbouring_state = {
+					owner = {
+						is_ai = yes
+						relations:root >= relations_threshold:amicable
+						any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+						capital = { region = sr:region_andes }
+						is_subject = yes
+						NOT = { THIS = ROOT }
+						top_overlord = {
+							THIS = root.top_overlord
+						}
+						this.gdp < root.gdp
+					}
+				}
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = gbr_peu_relations_tt
+				any_subject_or_below = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+					capital = { region = sr:region_andes }
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					count >= 2
+				}
+			}
+		}
+	}
+
+	cooldown = { days = short_modifier_time }
+
+	effect = {
+		custom_tooltip = unite_peru_tt
+		if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_andean_cultures target = this } }
+				capital = { region = sr:region_andes }
+			}
+			hidden_effect = {
+				trigger_event = { id = zzz_cc_confederation.17 popup = yes }
+			}
+		}
+		else = {
+			hidden_effect = {
+				trigger_event = { id = zzz_cc_confederation.18 popup = yes }
+			}
+		}
+		add_modifier = {
+			name = peru_test_modifier
+			days = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_technology_researched = pan-nationalism
+			}
+			add = 100
+		}
+	}
+}
+
+je_brazil_unite_brz_button = {
+	name = "je_brazil_unite_brz_button"
+	desc = "je_brazil_unite_brz_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = brazil_test_modifier }
+		trigger_if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+				capital = { region = sr:region_brazil }
+			}
+			top_overlord ?= {
+				relations:root >= relations_threshold:amicable
+			}
+			custom_tooltip = {
+				text = unite_brazil_je_brz_tt
+				any_neighbouring_state = {
+					owner = {
+						is_ai = yes
+						relations:root >= relations_threshold:amicable
+						any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+						capital = { region = sr:region_brazil }
+						is_subject = yes
+						NOT = { THIS = ROOT }
+						top_overlord = {
+							THIS = root.top_overlord
+						}
+						this.gdp < root.gdp
+					}
+				}
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = gbr_brz_relations_tt
+				any_subject_or_below = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+					capital = { region = sr:region_brazil }
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					count >= 2
+				}
+			}
+		}
+	}
+
+	cooldown = { days = short_modifier_time }
+
+	effect = {
+		custom_tooltip = unite_brazil_tt
+		if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_brazilian_cultures target = this } }
+				capital = { region = sr:region_brazil }
+			}
+			hidden_effect = {
+				trigger_event = { id = zzz_cc_confederation.19 popup = yes }
+			}
+		}
+		else = {
+			hidden_effect = {
+				trigger_event = { id = zzz_cc_confederation.20 popup = yes }
+			}
+		}
+		add_modifier = {
+			name = brazil_test_modifier
+			days = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_technology_researched = pan-nationalism
+			}
+			add = 100
+		}
+	}
+}
+
+je_argentina_unite_arg_button = {
+	name = "je_argentina_unite_arg_button"
+	desc = "je_argentina_unite_arg_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		NOT = { has_modifier = argentina_test_modifier }
+		trigger_if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+				is_in_geographic_region = geographic_region_converter_colonial_argentina
+			}
+			top_overlord ?= {
+				relations:root >= relations_threshold:amicable
+			}
+			custom_tooltip = {
+				text = unite_argentina_je_arg_tt
+				any_neighbouring_state = {
+					owner = {
+						is_ai = yes
+						relations:root >= relations_threshold:amicable
+						any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+						is_in_geographic_region = geographic_region_converter_colonial_argentina
+						is_subject = yes
+						NOT = { THIS = ROOT }
+						top_overlord = {
+							THIS = root.top_overlord
+						}
+						this.gdp < root.gdp
+					}
+				}
+			}
+		}
+		trigger_else = {
+			custom_tooltip = {
+				text = gbr_arg_relations_tt
+				any_subject_or_below = {
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+					is_in_geographic_region = geographic_region_converter_colonial_argentina
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					count >= 2
+				}
+			}
+		}
+	}
+
+	cooldown = { days = short_modifier_time }
+
+	effect = {
+		custom_tooltip = unite_argentina_tt
+		if = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_platinean_cultures target = this } }
+				is_in_geographic_region = geographic_region_converter_colonial_argentina
+			}
+			hidden_effect = {
+				trigger_event = { id = zzz_cc_confederation.25 popup = yes }
+			}
+		}
+		else = {
+			hidden_effect = {
+				trigger_event = { id = zzz_cc_confederation.26 popup = yes }
+			}
+		}
+		add_modifier = {
+			name = argentina_test_modifier
+			days = short_modifier_time
+		}
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_technology_researched = pan-nationalism
+			}
+			add = 100
+		}
+	}
+}
+
+#je_cape_unite_saf_button = {
+#	name = "je_cape_unite_saf_button"
+#	desc = "je_cape_unite_saf_button_desc"
+#
+#	visible = {
+#		always = yes
+#	}
+#
+#	possible = {
+#		is_at_war = no
+#		has_technology_researched = nationalism
+#		NOT = { has_modifier = cape_test_modifier }
+#		trigger_if = {
+#			limit = {
+#				any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+#				is_in_geographic_region = geographic_region_south_africa
+#			}
+#			top_overlord ?= {
+#				relations:root >= relations_threshold:amicable
+#			}
+#			custom_tooltip = {
+#				text = unite_cape_je_saf_tt
+#				any_neighbouring_state = {
+#					owner = {
+#						is_ai = yes
+#						relations:root >= relations_threshold:amicable
+#						any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+#						is_in_geographic_region = geographic_region_south_africa
+#						is_subject = yes
+#						NOT = { THIS = ROOT }
+#						top_overlord = {
+#							THIS = root.top_overlord
+#						}
+#						this.gdp < root.gdp
+#					}
+#				}
+#			}
+#		}
+#		trigger_else = {
+#			custom_tooltip = {
+#				text = gbr_saf_relations_tt
+#				any_subject_or_below = {
+#					any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+#					is_in_geographic_region = geographic_region_south_africa
+#					is_ai = yes
+#					relations:root >= relations_threshold:amicable
+#					count >= 2
+#				}
+#			}
+#		}
+#	}
+#
+#	cooldown = { days = short_modifier_time }
+#
+#	effect = {
+#		custom_tooltip = unite_cape_tt
+#		if = {
+#			limit = {
+#				any_primary_culture = { is_target_in_global_variable_list = { name = global_cape_cultures target = this } }
+#				is_in_geographic_region = geographic_region_south_africa
+#			}
+#			hidden_effect = {
+#				trigger_event = { id = zzz_cc_confederation.27 popup = yes }
+#			}
+#		}
+#		else = {
+#			hidden_effect = {
+#				trigger_event = { id = zzz_cc_confederation.28 popup = yes }
+#			}
+#		}
+#		add_modifier = {
+#			name = cape_test_modifier
+#			days = short_modifier_time
+#		}
+#	}
+#
+#	ai_chance = {
+#		value = 0
+#		if = {
+#			limit = {
+#				has_technology_researched = pan-nationalism
+#			}
+#			add = 100
+#		}
+#	}
+#}

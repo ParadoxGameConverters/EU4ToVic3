@@ -1,0 +1,287 @@
+﻿namespace = zzz_cc_politics
+
+# Holy Order Secularization
+zzz_cc_politics.1 = {
+	type = country_event
+	placement = root
+	title = zzz_cc_politics.1.t
+	desc = zzz_cc_politics.1.d
+	flavor = zzz_cc_politics.1.f
+
+	duration = 3
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
+	trigger = {
+		OR = {
+			NOT = {	has_law = law_type:law_theocracy }
+			has_law = law_type:law_total_separation
+			has_law = law_type:law_state_atheism
+		}
+		ig:ig_armed_forces = {
+			OR = {
+				has_ideology = ideology:ideology_pious
+				has_ideology = ideology:ideology_corporatist
+			}
+			leader = {
+				NOR = {
+					has_ideology = ideology:ideology_theocrat
+					has_ideology = ideology:ideology_traditionalist
+					has_ideology = ideology:ideology_corporatist_leader
+				}
+			}
+		}
+		ig:ig_devout = { has_ideology = ideology:ideology_jingoist }
+	}
+
+	immediate = {
+		ig:ig_armed_forces = {
+			save_scope_as = teutonic_knights_ig
+			leader = {
+				save_scope_as = albert_of_prussia
+			}
+		}
+		ig:ig_devout = {
+			save_scope_as = catholic_church_ig
+			leader = {
+				save_scope_as = adrian_vi
+			}
+		}
+	}
+
+	option = {
+		name = zzz_cc_politics.1.a
+		default_option = yes
+		ig:ig_armed_forces = {
+			if = {
+				limit = { has_ideology = ideology:ideology_pious }
+				remove_ideology = ideology_pious
+			}
+			else = { remove_ideology = ideology_corporatist }
+		}
+		ig:ig_devout = {
+			remove_ideology = ideology_jingoist
+			if = {
+				limit = {
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_theocrat
+							has_ideology = ideology:ideology_traditionalist
+							has_ideology = ideology:ideology_corporatist_leader
+							has_ideology = ideology:ideology_jingoist_leader
+						}
+					}
+				}
+			}
+			add_modifier = {
+				name = ig_power_challenged
+				days = normal_modifier_time
+			}
+		}
+	}
+}
+
+# Death of a Reigning Immortal
+zzz_cc_politics.2 = {
+	type = country_event
+	placement = root
+	title = zzz_cc_politics.2.t
+	desc = zzz_cc_politics.2.d
+	flavor = zzz_cc_politics.2.f
+
+	duration = 3
+
+	gui_window = event_window_1char_tabloid
+
+	left_icon = scope:not_so_immortal
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	trigger = {
+		has_variable = converter_has_immortal_ruler
+	}
+
+	immediate = {
+		remove_variable = converter_has_immortal_ruler
+	}
+
+	option = {
+		name = zzz_cc_politics.2.a
+		default_option = yes
+		if = {
+			limit = { has_variable = converter_intelligentsia_has_immortal_constitutionalism }
+			remove_variable = converter_intelligentsia_has_immortal_constitutionalism
+			ig:ig_intelligentsia = {
+				remove_ideology = ideology_constitutionalist
+				add_ideology = ideology_republican
+			}
+		}
+		add_modifier = {
+			name = converter_dead_immortal
+			days = very_long_modifier_time
+			is_decaying = yes
+		}
+	}
+}
+
+# Death of a Non-Reigning Immortal
+zzz_cc_politics.3 = {
+	type = country_event
+	placement = root
+	title = zzz_cc_politics.2.t
+	desc = zzz_cc_politics.3.d
+	flavor = zzz_cc_politics.2.f
+
+	duration = 3
+
+	gui_window = event_window_1char_tabloid
+
+	left_icon = scope:not_so_immortal
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	trigger = {
+		has_variable = converter_has_immortal_ruler
+	}
+
+	immediate = {
+		remove_variable = converter_has_immortal_ruler
+	}
+
+	option = {
+		name = zzz_cc_politics.3.a
+		default_option = yes
+		if = {
+			limit = { has_variable = converter_intelligentsia_has_immortal_constitutionalism }
+			remove_variable = converter_intelligentsia_has_immortal_constitutionalism
+			ig:ig_intelligentsia = {
+				remove_ideology = ideology_constitutionalist
+				add_ideology = ideology_republican
+			}
+		}
+	}
+}
+
+# Immortal Deposed
+zzz_cc_politics.4 = {
+	type = country_event
+	placement = root
+	#title = zzz_cc_politics.4.t
+	title = {
+		triggered_desc = {
+			desc = zzz_cc_politics.4.t1
+			trigger = { has_variable = converter_made_immortal_republic }
+		}
+		triggered_desc = {
+			desc = zzz_cc_politics.4.t2
+			trigger = {
+				NOT = { has_variable = converter_made_immortal_republic }
+			}
+		}
+	}
+	desc = {
+		triggered_desc = {
+			desc = zzz_cc_politics.4.d1
+			trigger = { has_variable = converter_made_immortal_republic }
+		}
+		triggered_desc = {
+			desc = zzz_cc_politics.4.d2
+			trigger = {
+				NOT = { has_variable = converter_made_immortal_republic }
+			}
+		}
+	}
+	flavor = zzz_cc_politics.4.f
+
+	duration = 3
+
+	gui_window = event_window_1char_tabloid
+
+	left_icon = ruler
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	trigger = {
+		has_variable = converter_has_immortal_ruler
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				any_scope_character = { has_trait = converter_immortal }
+			}
+			random_scope_character = {
+				limit = { has_trait = converter_immortal }
+				save_scope_as = not_so_immortal
+			}
+		}
+	}
+
+	after = {
+		#if = {
+		#	limit = { has_variable = converter_made_immortal_republic }
+		#	remove_variable = converter_made_immortal_republic
+		#}
+	}
+
+	option = {		##Accept it
+		name = zzz_cc_politics.4.a
+		default_option = yes
+		remove_variable = converter_has_immortal_ruler
+		if = {
+			limit = {
+				NOT = { has_variable = converter_made_immortal_republic }
+			}
+			add_modifier = {
+				name = converter_deposed_immortal
+				days = very_long_modifier_time
+				is_decaying = yes
+			}
+		}
+	}
+
+	option = {		##They've been through worse than this...
+		name = zzz_cc_politics.4.b
+		default_option = yes
+		trigger = {
+			any_scope_character = { has_trait = converter_immortal }
+		}
+		random_scope_character = {
+			limit = { has_trait = converter_immortal }
+			add_modifier = {
+				name = garibaldi_popularity
+				days = stupidly_long_modifier_time
+				is_decaying = yes
+			}
+			interest_group = {
+				add_modifier = {
+					name = empowered_by_monarchists
+					days = very_long_modifier_time
+					is_decaying = yes
+				}
+			}
+		}
+		if = {
+			limit = { has_variable = converter_intelligentsia_has_immortal_constitutionalism }
+			ig:ig_intelligentsia = {
+				remove_ideology = ideology_republican
+				add_ideology = ideology_constitutionalist
+			}
+		}
+	}
+}

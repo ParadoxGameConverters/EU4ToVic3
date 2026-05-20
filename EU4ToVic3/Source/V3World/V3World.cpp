@@ -205,7 +205,7 @@ V3::World::World(const Configuration& configuration, const EU4::World& sourceWor
 	flagCrafter.distributeAvailableFlags(politicalManager.getCountries(), *countryMapper, sourceWorld.getEU4ModFS());
 
 	Log(LogLevel::Progress) << "65 %";
-	politicalManager.injectDynamicCulturesIntoFormables(cultureMapper);
+	politicalManager.injectDynamicCulturesIntoFormables(cultureMapper, clayManager, sourceWorld.getCultureLoader(), sourceWorld.getReligionLoader());
 	Log(LogLevel::Progress) << "66 %";
 	politicalManager.expandReleasablesFootprint(clayManager);
 	politicalManager.alterReleasablesReligion();
