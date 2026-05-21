@@ -1,4 +1,4 @@
-﻿namespace = historical_agitators
+namespace = historical_agitators
 
 #cooldowns handled by variables
 historical_agitators.1 = { #Vladimir Lenin
@@ -44,26 +44,16 @@ historical_agitators.1 = { #Vladimir Lenin
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = fem_rus_lenin_character_template
-				on_created = {
-					set_variable = lenin_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = rus_lenin_character_template
-				on_created = {
-					set_variable = lenin_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = lenin_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = lenin_spawn
 	}
 
@@ -74,7 +64,7 @@ historical_agitators.1 = { #Vladimir Lenin
 			base = 20
 		}
 		scope:historic_agitator_scope = {
-			interest_group = {
+			interest_group ?= {
 				add_modifier = {
 					name = modifier_lenin_in_exile
 					days = normal_modifier_time
@@ -175,7 +165,6 @@ historical_agitators.2 = { #Louis Delescluze
 			create_character = {
 				template = fem_fra_delescluze_character_template
 				on_created = {
-					set_variable = delescluze_var
 					if = {
 						limit = {
 							owner = {
@@ -187,13 +176,13 @@ historical_agitators.2 = { #Louis Delescluze
 						set_ideology = ideology:ideology_nihilist
 					}
 				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = fra_delescluze_character_template
 				on_created = {
-					set_variable = delescluze_var
 					if = {
 						limit = {
 							owner = {
@@ -205,15 +194,10 @@ historical_agitators.2 = { #Louis Delescluze
 						set_ideology = ideology:ideology_nihilist
 					}
 				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = delescluze_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = delescluze_spawn
 	}
 
@@ -224,7 +208,7 @@ historical_agitators.2 = { #Louis Delescluze
 			base = 20
 		}
 		scope:historic_agitator_scope = {
-			interest_group = {
+			interest_group ?= {
 				add_modifier = {
 					name = modifier_delescluze_in_exile
 					days = normal_modifier_time
@@ -294,7 +278,6 @@ historical_agitators.3 = { #Louis Blanqui
 			create_character = {
 				template = fem_fra_blanqui_character_template
 				on_created = {
-					set_variable = blanqui_var
 					if = {
 						limit = {
 							owner = {
@@ -306,13 +289,13 @@ historical_agitators.3 = { #Louis Blanqui
 						set_ideology = ideology:ideology_nihilist
 					}
 				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = fra_blanqui_character_template
 				on_created = {
-					set_variable = blanqui_var
 					if = {
 						limit = {
 							owner = {
@@ -324,15 +307,10 @@ historical_agitators.3 = { #Louis Blanqui
 						set_ideology = ideology:ideology_nihilist
 					}
 				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = blanqui_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = blanqui_spawn
 	}
 
@@ -340,7 +318,7 @@ historical_agitators.3 = { #Louis Blanqui
 		name = historical_agitators.3.a
 		default_option = yes
 		scope:historic_agitator_scope = {
-			interest_group = {
+			interest_group ?= {
 				add_modifier = {
 					name = modifier_blanqui_in_exile
 					days = normal_modifier_time
@@ -403,26 +381,16 @@ historical_agitators.4 = { #Emmeline Pankhurst
 			limit = { is_matriarchal_country = yes }
 			create_character = {
 				template = masc_gbr_pankhurst_character_template
-				on_created = {
-					set_variable = pankhurst_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = gbr_pankhurst_character_template
-				on_created = {
-					set_variable = pankhurst_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = pankhurst_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = pankhurst_spawn
 	}
 
@@ -516,26 +484,16 @@ historical_agitators.5 = { #John Brown
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = fem_usa_john_brown_character_template
-				on_created = {
-					set_variable = john_brown_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = usa_john_brown_character_template
-				on_created = {
-					set_variable = john_brown_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = john_brown_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		random_interest_group = {
 			limit = {
 				law_stance = {
@@ -656,7 +614,6 @@ historical_agitators.6 = { #Charles Maurras
 			create_character = {
 				template = fem_fra_maurras_character_template
 				on_created = {
-					set_variable = maurras_var
 					if = {
 						limit = {
 							owner = {
@@ -665,25 +622,14 @@ historical_agitators.6 = { #Charles Maurras
 						}
 						set_ideology = ideology:ideology_legitimist
 					}
-					else_if = {
-						limit = {
-							owner = {
-								has_law_or_variant = law_type:law_monarchy
-							}
-						}
-						set_ideology = ideology:ideology_fascist
-					}
-					else = {
-						set_ideology = ideology:ideology_traditionalist
-					}
 				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = fra_maurras_character_template
 				on_created = {
-					set_variable = maurras_var
 					if = {
 						limit = {
 							owner = {
@@ -692,27 +638,11 @@ historical_agitators.6 = { #Charles Maurras
 						}
 						set_ideology = ideology:ideology_legitimist
 					}
-					else_if = {
-						limit = {
-							owner = {
-								has_law_or_variant = law_type:law_monarchy
-							}
-						}
-						set_ideology = ideology:ideology_fascist
-					}
-					else = {
-						set_ideology = ideology:ideology_traditionalist
-					}
 				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = maurras_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = maurras_spawn
 		if = {
 			limit = {
@@ -890,17 +820,6 @@ historical_agitators.8 = { #Napoleon III
 	immediate = {
 		create_character = {
 			template = fra_napoleon_iii_character_template
-			on_created = {
-				set_variable = {
-					name = house_bonaparte
-				}
-				set_variable = napoleon_iii_var
-			}
-		}
-		random_scope_character = {
-			limit = {
-				has_variable = napoleon_iii_var
-			}
 			save_scope_as = historic_agitator_scope
 		}
 		set_global_variable = napoleon_iii_spawn
@@ -985,26 +904,16 @@ historical_agitators.9 = { #Norton
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = fem_usa_joshua_norton_character_template
-				on_created = {
-					set_variable = emperor_norton_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = usa_joshua_norton_character_template
-				on_created = {
-					set_variable = emperor_norton_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = emperor_norton_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		random_scope_state = {
 			limit = {
 				state_region = s:STATE_CALIFORNIA
@@ -1083,26 +992,16 @@ historical_agitators.10 = { #Kropotkin
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = fem_rus_pyotr_kropotkin_character_template
-				on_created = {
-					set_variable = kropotkin_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = rus_pyotr_kropotkin_character_template
-				on_created = {
-					set_variable = kropotkin_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = kropotkin_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = kropotkin_spawn
 	}
 
@@ -1110,7 +1009,7 @@ historical_agitators.10 = { #Kropotkin
 		name = historical_agitators.10.a
 		default_option = yes
 		scope:historic_agitator_scope = {
-			interest_group = {
+			interest_group ?= {
 				add_modifier = {
 					name = modifier_kropotkin_in_exile
 					days = normal_modifier_time
@@ -1146,7 +1045,7 @@ historical_agitators.10 = { #Kropotkin
 		}
 		ordered_scope_state = {
 			limit = {
-				region = sr:region_west_siberia
+				region = sr:region_siberia
 			}
 			order_by = state_population
 			position = 0
@@ -1158,7 +1057,7 @@ historical_agitators.10 = { #Kropotkin
 		}
 		ordered_scope_state = {
 			limit = {
-				region = sr:region_east_siberia
+				region = sr:region_northeast_asia
 			}
 			order_by = state_population
 			position = 0
@@ -1213,26 +1112,16 @@ historical_agitators.11 = { #Bakunin
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = fem_rus_mikhail_bakunin_character_template
-				on_created = {
-					set_variable = bakunin_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = rus_mikhail_bakunin_character_template
-				on_created = {
-					set_variable = bakunin_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = bakunin_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = bakunin_spawn
 	}
 
@@ -1244,13 +1133,13 @@ historical_agitators.11 = { #Bakunin
 				name = modifier_bakunin_exiled_properly
 				days = long_modifier_time
 			}
-			exile_character = yes
+			exile_character_with_role_cleanup = yes
 		}
 	}
 	option = {
 		name = historical_agitators.11.b
 		scope:historic_agitator_scope = {
-			exile_character = yes
+			exile_character_with_role_cleanup = yes
 		}
 	}
 }
@@ -1297,26 +1186,16 @@ historical_agitators.12 = { #Trotsky
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = fem_rus_leon_trotsky_character_template
-				on_created = {
-					set_variable = trotsky_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = rus_leon_trotsky_character_template
-				on_created = {
-					set_variable = trotsky_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = trotsky_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = trotsky_spawn
 		random_scope_state = {
 			limit = {
@@ -1399,26 +1278,16 @@ historical_agitators.13 = { #Dabrowski
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = fem_rus_jaroslaw_dabrowski_character_template
-				on_created = {
-					set_variable = dabrowski_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = rus_jaroslaw_dabrowski_character_template
-				on_created = {
-					set_variable = dabrowski_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = dabrowski_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = dabrowski_spawn
 		random_scope_state = {
 			limit = {
@@ -1433,7 +1302,7 @@ historical_agitators.13 = { #Dabrowski
 		custom_tooltip = {
 			text = jaroslaw_in_prison_tt
 			scope:historic_agitator_scope = {
-				kill_character = yes
+				retire_character = yes
 			}
 		}
 
@@ -1500,26 +1369,16 @@ historical_agitators.14 = { #Dickens
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = fem_gbr_charles_dickens_character_template
-				on_created = {
-					set_variable = dickens_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = gbr_charles_dickens_character_template
-				on_created = {
-					set_variable = dickens_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = dickens_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = dickens_spawn
 		random_country = {
 			limit = {
@@ -1608,26 +1467,16 @@ historical_agitators.15 = { #Luxemburg
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = masc_pol_rosa_luxemburg_character_template
-				on_created = {
-					set_variable = luxemburg_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = pol_rosa_luxemburg_character_template
-				on_created = {
-					set_variable = luxemburg_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = luxemburg_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = luxemburg_spawn
 		random_scope_state = {
 			limit = {
@@ -1698,26 +1547,16 @@ historical_agitators.16 = { #Sorel
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = fem_fra_georges_sorel_character_template
-				on_created = {
-					set_variable = sorel_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = fra_georges_sorel_character_template
-				on_created = {
-					set_variable = sorel_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = sorel_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = sorel_spawn
 	}
 
@@ -1738,7 +1577,7 @@ historical_agitators.16 = { #Sorel
 		}
 		scope:historic_agitator_scope = {
 			add_trait = special_character_passionate_academic
-			interest_group = {
+			interest_group ?= {
 				add_modifier = {
 					name = modifier_passionate_academic_ig
 					days = normal_modifier_time
@@ -1789,9 +1628,8 @@ historical_agitators.17 = { #Boulanger
 		uses_fra_characters = yes							##Converter
 		game_date > 1880.1.1
 		game_date < 1895.1.1
-		any_state = {
-			converter_is_french_homeland = yes				##Converter
-			NOT = { owner = ROOT }
+		any_state_in_france = {
+			owner = { uses_fra_characters = no }			##Converter
 		}
 		has_technology_researched = political_agitation
 		NOT = { has_global_variable = boulanger_spawn }
@@ -1804,35 +1642,24 @@ historical_agitators.17 = { #Boulanger
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = fem_fra_georges_boulanger_character_template
-				on_created = {
-					set_variable = boulanger_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = fra_georges_boulanger_character_template
-				on_created = {
-					set_variable = boulanger_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = boulanger_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = boulanger_spawn
-		random_country = {
+		random_state_in_france = {
 			limit = {
-				uses_fra_characters = no					##Converter
-				any_state = {
-					converter_is_french_homeland = yes		##Converter
-				}
+				owner = { uses_fra_characters = no }
 			}
-			save_scope_as = revenge_country
+			owner = {
+				save_scope_as = revenge_country
+			}
 		}
 	}
 
@@ -1942,26 +1769,16 @@ historical_agitators.18 = { #Lassalle
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = fem_pru_ferdinand_lassalle_character_template
-				on_created = {
-					set_variable = lassalle_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = pru_ferdinand_lassalle_character_template
-				on_created = {
-					set_variable = lassalle_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = lassalle_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = lassalle_spawn
 	}
 
@@ -1992,7 +1809,7 @@ historical_agitators.18 = { #Lassalle
 		}
 		scope:historic_agitator_scope ?= {
 			add_trait = special_character_agent_of_the_sovereign
-			interest_group = {
+			interest_group ?= {
 				add_modifier ={
 					name = modifier_agent_of_the_sovereign_ig
 					days = normal_modifier_time
@@ -2041,26 +1858,16 @@ historical_agitators.19 = { #Gama
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = fem_brz_luis_gama_character_template
-				on_created = {
-					set_variable = gama_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = brz_luis_gama_character_template
-				on_created = {
-					set_variable = gama_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = gama_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = gama_spawn
 	}
 
@@ -2138,7 +1945,7 @@ historical_agitators.20 = { #Hugo
 						law = law_type:law_autocracy
 						value > strongly_approve # Equals 'count'
 					}
-					interest_group = {
+					interest_group ?= {
 						law_stance = {
 							law = law_type:law_autocracy
 							value > neutral
@@ -2163,26 +1970,16 @@ historical_agitators.20 = { #Hugo
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = fem_fra_victor_hugo_character_template
-				on_created = {
-					set_variable = victor_hugo_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = fra_victor_hugo_character_template
-				on_created = {
-					set_variable = victor_hugo_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = victor_hugo_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		set_global_variable = victor_hugo_spawn
 		ruler = {
 			save_scope_as = ruler_scope
@@ -2193,7 +1990,7 @@ historical_agitators.20 = { #Hugo
 		name = historical_agitators.20.a
 		default_option = yes
 		scope:historic_agitator_scope = {
-			exile_character = yes
+			exile_character_with_role_cleanup = yes
 		}
 		add_radicals = {
 			value = medium_radicals
@@ -2216,7 +2013,7 @@ historical_agitators.20 = { #Hugo
 		name = historical_agitators.20.c
 		hidden_effect = {
 			scope:historic_agitator_scope = {
-				kill_character = yes
+				retire_character = yes
 			}
 		}
 		custom_tooltip = imprison_hugo_tt
@@ -2275,26 +2072,16 @@ historical_agitators.21 = { #Sun
 			limit = { has_variable = rule_63_effect }
 			create_character = {
 				template = fem_chi_sun_yat_sen_character_template
-				on_created = {
-					set_variable = sun_yat_sen_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		else = {
 			create_character = {
 				template = chi_sun_yat_sen_character_template
-				on_created = {
-					set_variable = sun_yat_sen_var
-				}
+				save_scope_as = historic_agitator_scope
 			}
 		}
 		##Converter
-		random_scope_character = {
-			limit = {
-				has_variable = sun_yat_sen_var
-			}
-			save_scope_as = historic_agitator_scope
-		}
 		ruler = {
 			save_scope_as = monarch_scope
 		}
