@@ -34,9 +34,10 @@ commander_events.6 = {
 	trigger = {
 		NOT = { has_variable = psychological_warfare_var }
 		any_scope_character = {
-			is_ruler = no
+			is_ruler_of_own_country = no
+			character_is_valid_for_events = yes
 			is_busy = no
-			has_role = general
+			has_role_of_type = general
 			is_immortal = no
 			OR = {
 				has_trait = romantic
@@ -68,8 +69,9 @@ commander_events.6 = {
 		set_variable = psychological_warfare_var
 		random_scope_character = {
 			limit = {
-				is_ruler = no
-				has_role = general
+				is_ruler_of_own_country = no
+				character_is_valid_for_events = yes
+				has_role_of_type = general
 				is_busy = no
 				is_immortal = no
 				OR = {
@@ -154,7 +156,7 @@ commander_events.6 = {
 		custom_tooltip = commander_events.6.b.tt
 		hidden_effect = {
 			scope:seducer_commander = {
-				kill_character = yes
+				retire_character = yes
 				remove_variable = seducer_commander_var
 			}
 		}
@@ -294,10 +296,11 @@ crime_events.11 = { #The Criminal was caught
 	trigger = {
 		# triggered by je_serial_killer pulse
 		any_scope_character = {
-			is_ruler = no
+			is_ruler_of_own_country = no
+			character_is_valid_for_events = yes
 			is_oppressed_gender = no		### Converter
 			is_immortal = no
-			interest_group = {
+			interest_group ?= {
 				ig_counts_as_marginal = no
 			}
 			age > 18
@@ -307,10 +310,11 @@ crime_events.11 = { #The Criminal was caught
 	immediate = {
 		random_scope_character = {
 			limit = {
-				is_ruler = no
+				is_ruler_of_own_country = no
+				character_is_valid_for_events = yes
 				is_oppressed_gender = no		### Converter
 				is_immortal = no
-				interest_group = {
+				interest_group ?= {
 					ig_counts_as_marginal = no
 				}
 				age > 18
@@ -344,8 +348,8 @@ crime_events.11 = { #The Criminal was caught
 				has_variable = important_killer_var
 			}
 			scope:important_killer = {
-				kill_character = yes
-				interest_group = {
+				retire_character = yes
+				interest_group ?= {
 					add_modifier = {
 						name = serial_killer_ig
 						days = normal_modifier_time
@@ -450,13 +454,10 @@ german_unification.3 = {
 			add_modifier = {
 				name = bismarck_popular
 			}
-			if = {
-				limit = {
-					has_variable = memento_mori_immunity
-				}
-				remove_variable = memento_mori_immunity
+			set_career_length = {
+				years = 30
+				random_range = { 1.0 1.5 } # 30-45 years
 			}
-			set_variable = { name = memento_mori_immunity years = 30 }
 		}
 		add_modifier = {
 			name = realpolitik
@@ -610,26 +611,22 @@ oscar_wilde_events.1 = {
 
 		if = {
 			limit = {
-				capital.region = sr:region_england
+				capital = {
+					is_in_geographic_region = geographic_region_england_old
+				}
 			}
 			### Converter ###
 			if = {
 				limit = { has_variable = rule_63_effect }
 				create_character = {
 					template = fem_canonic_wilde_character_template
-					on_created = {
-						set_variable = wilde_var
-						place_character_in_void = 6
-					}
+					save_scope_as = oscar_wilde
 				}
 			}
 			else = {
 				create_character = {
 					template = canonic_wilde_character_template
-					on_created = {
-						set_variable = wilde_var
-						place_character_in_void = 6
-					}
+					save_scope_as = oscar_wilde
 				}
 			}
 			### Converter ###
@@ -640,29 +637,16 @@ oscar_wilde_events.1 = {
 				limit = { has_variable = rule_63_effect }
 				create_character = {
 					template = fem_dynamic_wilde_character_template
-					on_created = {
-						set_variable = wilde_var
-						place_character_in_void = 6
-					}
+					save_scope_as = oscar_wilde
 				}
 			}
 			else = {
 				create_character = {
 					template = dynamic_wilde_character_template
-					on_created = {
-						set_variable = wilde_var
-						place_character_in_void = 6
-					}
+					save_scope_as = oscar_wilde
 				}
 			}
 			### Converter ###
-		}
-
-		random_character_in_void = {
-			limit = {
-				has_variable = wilde_var
-			}
-			save_scope_as = oscar_wilde
 		}
 
 		if = {
@@ -705,6 +689,9 @@ oscar_wilde_events.1 = {
 		add_modifier = {
 			name = upheld_ruling
 			days = normal_modifier_time
+		}
+		scope:oscar_wilde ?= {
+			retire_character = yes
 		}
 	}
 
@@ -813,7 +800,7 @@ prostitution.3 = {
 		custom_tooltip = prostitution.3.a.tt
 		hidden_effect = {
 			scope:scandal_character = {
-				kill_character = {
+				retire_character = {
 					hidden = yes
 				}
 			}
