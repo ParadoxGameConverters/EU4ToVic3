@@ -1,4 +1,4 @@
-﻿namespace = suffragist_events
+namespace = suffragist_events
 
 # Suffragist Protest
 suffragist_events.1 = {
@@ -25,8 +25,8 @@ suffragist_events.1 = {
 		NOT = { has_variable = suffrage_cooldown } #shared cooldown
 		any_scope_character = {
 			OR = {
-				has_role = politician
-				has_role = agitator
+				has_role_of_type = politician
+				has_role_of_type = agitator
 			}
 			has_ideology = ideology:ideology_feminist
 		}
@@ -55,8 +55,8 @@ suffragist_events.1 = {
 		random_scope_character = {
 			limit = {
 				OR = {
-					has_role = politician
-					has_role = agitator
+					has_role_of_type = politician
+					has_role_of_type = agitator
 				}
 				has_ideology = ideology:ideology_feminist
 			}
@@ -119,8 +119,8 @@ suffragist_events.2 = {
 		NOT = { has_variable = suffrage_cooldown }
 		any_scope_character = {
 			OR = {
-				has_role = politician
-				has_role = agitator
+				has_role_of_type = politician
+				has_role_of_type = agitator
 			}
 			is_oppressed_gender = yes			### Converter
 			has_ideology = ideology:ideology_feminist
@@ -169,8 +169,8 @@ suffragist_events.2 = {
 		random_scope_character = {
 			limit = {
 				OR = {
-					has_role = politician
-					has_role = agitator
+					has_role_of_type = politician
+					has_role_of_type = agitator
 				}
 				has_ideology = ideology:ideology_feminist
 				is_oppressed_gender = yes			### Converter
@@ -200,7 +200,7 @@ suffragist_events.2 = {
 				days = normal_modifier_time
 			}
 		}
-		scope:anti_feminist_leader.interest_group = {
+		scope:anti_feminist_leader.interest_group ?= {
 			add_modifier = {
 				name = suffragist_speech
 				days = normal_modifier_time
@@ -218,7 +218,7 @@ suffragist_events.2 = {
 				days = normal_modifier_time
 			}
 		}
-		scope:anti_feminist_leader.interest_group = {
+		scope:anti_feminist_leader.interest_group ?= {
 			add_modifier = {
 				name = dismissed_suffragists
 				multiplier = -1
@@ -254,8 +254,8 @@ suffragist_events.3 = {
 		any_interest_group = {
 			any_scope_character = {
 				OR = {
-					has_role = politician
-					has_role = agitator
+					has_role_of_type = politician
+					has_role_of_type = agitator
 				}
 				has_ideology = ideology:ideology_feminist
 			}
@@ -306,11 +306,11 @@ suffragist_events.3 = {
 		random_scope_character = {
 			limit = {
 				OR = {
-					has_role = politician
-					has_role = agitator
+					has_role_of_type = politician
+					has_role_of_type = agitator
 				}
 				has_ideology = ideology:ideology_feminist
-				interest_group = {
+				interest_group ?= {
 					ig_approval <= unhappy
 				}
 			}
@@ -334,7 +334,7 @@ suffragist_events.3 = {
 	option = {
 		name = suffragist_events.3.a
 		custom_tooltip = suffragist_events.3.a.tt
-		scope:militant_suffragist_leader.interest_group = {
+		scope:militant_suffragist_leader.interest_group ?= {
 			add_modifier = {
 				name = leader_imprisoned
 				years = 3
@@ -345,7 +345,7 @@ suffragist_events.3 = {
 	option = {
 		name = suffragist_events.3.b
 		default_option = yes
-		scope:anti_feminist_leader.interest_group = {
+		scope:anti_feminist_leader.interest_group ?= {
 			add_modifier = {
 				name = suffragist_leader_not_arrested
 				days = normal_modifier_time
@@ -380,8 +380,8 @@ suffragist_events.4 = {
 		any_interest_group = {
 			any_scope_character = {
 				OR = {
-					has_role = politician
-					has_role = agitator
+					has_role_of_type = politician
+					has_role_of_type = agitator
 				}
 				has_ideology = ideology:ideology_feminist
 			}
@@ -414,8 +414,8 @@ suffragist_events.4 = {
 			limit = {
 				any_scope_character = {
 					OR = {
-						has_role = politician
-						has_role = agitator
+						has_role_of_type = politician
+						has_role_of_type = agitator
 					}
 					has_ideology = ideology:ideology_feminist
 				}
@@ -434,7 +434,7 @@ suffragist_events.4 = {
 				days = normal_modifier_time
 			}
 		}
-		ruler.interest_group = {
+		ruler.interest_group ?= {
 			add_modifier = {
 				name = blamed_for_protester_death
 				days = normal_modifier_time
@@ -451,7 +451,7 @@ suffragist_events.4 = {
 				days = normal_modifier_time
 			}
 		}
-		ruler.interest_group = {
+		ruler.interest_group ?= {
 			add_modifier = {
 				name = absolved_of_responsibility
 				days = normal_modifier_time
@@ -486,8 +486,8 @@ suffragist_events.5 = {
 		any_interest_group = {
 			any_scope_character = {
 				OR = {
-					has_role = politician
-					has_role = agitator
+					has_role_of_type = politician
+					has_role_of_type = agitator
 				}
 				has_ideology = ideology:ideology_feminist
 			}
@@ -529,8 +529,8 @@ suffragist_events.5 = {
 					any_interest_group = {
 						any_scope_character = {
 							OR = {
-								has_role = politician
-								has_role = agitator
+								has_role_of_type = politician
+								has_role_of_type = agitator
 							}
 							has_ideology = ideology:ideology_feminist
 						}
@@ -544,8 +544,8 @@ suffragist_events.5 = {
 			limit = {
 				any_scope_character = {
 					OR = {
-						has_role = politician
-						has_role = agitator
+						has_role_of_type = politician
+						has_role_of_type = agitator
 					}
 					has_ideology = ideology:ideology_feminist
 				}
@@ -620,8 +620,8 @@ suffragist_events.6 = {
 			limit = {
 				any_scope_character = {
 					OR = {
-						has_role = politician
-						has_role = agitator
+						has_role_of_type = politician
+						has_role_of_type = agitator
 					}
 					has_ideology = ideology:ideology_feminist
 				}
@@ -677,8 +677,8 @@ suffragist_events.7 = {
 		ig:ig_intelligentsia ?= {
 			any_scope_character = {
 				OR = {
-					has_role = politician
-					has_role = agitator
+					has_role_of_type = politician
+					has_role_of_type = agitator
 				}
 				has_ideology = ideology:ideology_feminist
 			}
@@ -711,8 +711,8 @@ suffragist_events.7 = {
 			random_scope_character = {
 				limit = {
 					OR = {
-						has_role = politician
-						has_role = agitator
+						has_role_of_type = politician
+						has_role_of_type = agitator
 					}
 					has_ideology = ideology:ideology_feminist
 				}
