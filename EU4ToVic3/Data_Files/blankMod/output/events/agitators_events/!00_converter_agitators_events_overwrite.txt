@@ -35,8 +35,7 @@ dreyfus.1 = {
 					}
 				}
 			}
-			any_state = {
-				converter_is_french_homeland = yes				###Converter
+			any_state_in_france = {
 				NOT = {
 					OR = {
 						state_region = s:STATE_SAVOY
@@ -839,7 +838,7 @@ paris_commune_pulse_events.9 = {
 			limit = {
 				NOT = {
 					any_scope_character = {
-						has_role = agitator
+						has_role_of_type = agitator
 						has_ideology = ideology:ideology_feminist
 					}
 				}
