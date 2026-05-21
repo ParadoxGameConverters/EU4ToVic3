@@ -1,4 +1,4 @@
-﻿# is_matriarchal_country
+# is_matriarchal_country
 # is_matriarchal_pop
 # is_feminist_country
 # is_feminist_pop
@@ -10,11 +10,11 @@ is_matriarchal_country = {
 	OR = {
 		any_primary_culture = { has_discrimination_trait = tradition_matriarchal }
 		trigger_if = {
-			limit = { has_law = law_type:law_state_atheism }
-			var:ancien_regime_religion ?= { has_discrimination_trait = tradition_matriarchal }
+			limit = { has_law_or_variant = law_type:law_state_atheism }
+			var:ancien_regime_religion ?= { is_target_in_global_variable_list = { name = global_matriarchal_religions target = this } }
 		}
 		trigger_else = {
-			religion = { has_discrimination_trait = tradition_matriarchal }
+			religion = { is_target_in_global_variable_list = { name = global_matriarchal_religions target = this } }
 		}
 	}
 }
@@ -22,7 +22,7 @@ is_matriarchal_country = {
 is_matriarchal_pop = {
 	OR = {
 		culture = { has_discrimination_trait = tradition_matriarchal }
-		religion = { has_discrimination_trait = tradition_matriarchal }
+		religion = { is_target_in_global_variable_list = { name = global_matriarchal_religions target = this } }
 	}
 }
 
@@ -30,11 +30,11 @@ is_feminist_country = {
 	OR = {
 		any_primary_culture = { has_discrimination_trait = tradition_feminist }
 		trigger_if = {
-			limit = { has_law = law_type:law_state_atheism }
-			var:ancien_regime_religion ?= { has_discrimination_trait = tradition_feminist }
+			limit = { has_law_or_variant = law_type:law_state_atheism }
+			var:ancien_regime_religion ?= { is_target_in_global_variable_list = { name = global_feminist_religions target = this } }
 		}
 		trigger_else = {
-			religion = { has_discrimination_trait = tradition_feminist }
+			religion = { is_target_in_global_variable_list = { name = global_feminist_religions target = this } }
 		}
 	}
 }
@@ -42,7 +42,7 @@ is_feminist_country = {
 is_feminist_pop = {
 	OR = {
 		culture = { has_discrimination_trait = tradition_feminist }
-		religion = { has_discrimination_trait = tradition_feminist }
+		religion = { is_target_in_global_variable_list = { name = global_feminist_religions target = this } }
 	}
 }
 
