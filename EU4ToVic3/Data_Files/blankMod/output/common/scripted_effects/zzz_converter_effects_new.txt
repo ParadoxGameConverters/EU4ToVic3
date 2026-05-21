@@ -1,4 +1,4 @@
-﻿# converter_caudillismo_ideology_effect
+# converter_caudillismo_ideology_effect
 # converter_pious_landowner_ideology_effect
 # converter_jeffersonian_ideology_effect
 # converter_russian_patriarch_ideology_effect
@@ -1498,12 +1498,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 				}
 			}
 			exists = capital
-			capital = {
-				OR = {
-					region = sr:region_england
-					region = sr:region_north_sea_coast
-				}
-			}
+			capital = { converter_is_in_british_isles = yes }
 		}
 		ig:ig_landowners = { 
 			set_interest_group_name = ig_landed_gentry
@@ -1718,7 +1713,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 			is_settler_colonial_country = yes
 			coa_republic_trigger = yes
 			is_in_geographic_region = geographic_region_north_america
-			any_scope_state = { region = sr:region_dixie }
+			any_scope_state = { converter_is_in_dixie = yes }
 		}
 		ig:ig_landowners = {
 			set_interest_group_name = ig_southern_planters
@@ -1728,8 +1723,8 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 				aggressive_diplomatic_plays_permitted = yes
 				has_law_or_variant = law_type:law_legacy_slavery
 				OR = {
-					any_scope_state = { region = sr:region_new_england }
-					any_scope_state = { region = sr:region_the_midwest }
+					any_scope_state = { converter_is_in_new_england = yes }
+					any_scope_state = { converter_is_in_midwest = yes }
 				}
 				NOR = {
 					has_journal_entry = je_acw_countdown
@@ -1758,12 +1753,7 @@ converter_ig_ideologies_effect = {		##Not ideal but probably better than ig_ideo
 		limit = {
 			any_primary_culture = { has_discrimination_trait_group = heritage_group_middle_eastern }
 			NOT = { any_primary_culture = { has_discrimination_trait_group = heritage_group_african } }
-			capital = {
-				OR = {
-					region = sr:region_zanj
-					region = sr:region_ethiopia
-				}
-			}
+			capital = { region = sr:region_east_africa }
 		}
 		ig:ig_landowners ?= {
 			set_interest_group_name = ig_wamanga
@@ -2887,12 +2877,7 @@ converter_copy_ideologies_effect = {
 		limit = {
 			civil_war_origin_country = {
 				exists = capital
-				capital = {
-					OR = {
-						region = sr:region_england
-						region = sr:region_north_sea_coast
-					}
-				}
+				capital = { converter_is_in_british_isles = yes }
 				OR = {
 					any_primary_culture = { has_discrimination_trait = language_anglophone }
 					any_primary_culture = { has_discrimination_trait_group = language_group_celtic }
@@ -2972,7 +2957,7 @@ converter_copy_ideologies_effect = {
 				is_settler_colonial_country = yes
 				coa_republic_trigger = yes
 				is_in_geographic_region = geographic_region_north_america
-				any_scope_state = { region = sr:region_dixie }
+				any_scope_state = { converter_is_in_dixie = yes }
 			}
 		}
 		ig:ig_landowners = {
@@ -3093,7 +3078,7 @@ converter_ig_traits_effect = {
 		else_if = {
 			limit = {
 				owner = {
-					is_in_geographic_region = geographic_region_europe
+					capital = { is_in_geographic_region = geographic_region_france }
 					any_primary_culture = {
 						OR = {
 							is_target_in_global_variable_list = { name = global_french_cultures target = this }
@@ -3178,12 +3163,7 @@ converter_ig_traits_effect = {
 				owner = {
 					any_primary_culture = { has_discrimination_trait_group = heritage_group_middle_eastern }
 					NOT = { any_primary_culture = { has_discrimination_trait_group = heritage_group_african } }
-					capital = {
-						OR = {
-							region = sr:region_zanj
-							region = sr:region_ethiopia
-						}
-					}
+					capital = { region = sr:region_east_africa }
 				}
 			}
 			set_ig_trait = ig_trait:ig_trait_divided_ranks
@@ -3373,15 +3353,8 @@ converter_ig_traits_effect = {
 		else_if = {
 			limit = {
 				owner = {
+					capital = { region = sr:region_northern_europe }
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_swedish_cultures target = this } }
-					capital = {
-						OR = {
-							region = sr:region_north_sea_coast
-							region = sr:region_baltic
-							region = sr:region_baltic_states
-							region = sr:region_finland
-						}
-					}
 				}
 			}
 			set_ig_trait = ig_trait:ig_trait_tax_avoidance
@@ -3392,12 +3365,7 @@ converter_ig_traits_effect = {
 			limit = {
 				has_dlc_feature = voice_of_the_people_content
 				owner = {
-					capital = {
-						OR = {
-							region = sr:region_france
-							region = sr:region_occitania
-						}
-					}
+					capital = { is_in_geographic_region = geographic_region_france }
 					any_primary_culture = {
 						OR = {
 							is_target_in_global_variable_list = { name = global_french_cultures target = this }
@@ -3493,12 +3461,7 @@ converter_ig_traits_effect = {
 			limit = {
 				has_dlc_feature = voice_of_the_people_content
 				owner = {
-					capital = {
-						OR = {
-							region = sr:region_france
-							region = sr:region_occitania
-						}
-					}
+					capital = { is_in_geographic_region = geographic_region_france }
 					any_primary_culture = {
 						OR = {
 							is_target_in_global_variable_list = { name = global_french_cultures target = this }
@@ -3585,7 +3548,15 @@ converter_ig_traits_effect = {
 						country_tier = empire
 						country_tier = hegemony
 					}
-					capital = { region = sr:region_south_germany }
+					capital = {
+						OR = {
+							converter_is_south_german_homeland = yes
+							converter_is_czech_homeland = yes
+							converter_is_hungarian_homeland = yes
+							state_region = s:STATE_SOUTH_TYROL
+							state_region = s:STATE_SLOVENIA
+						}
+					}
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_sou_ger_cultures target = this } }
 				}
 			}
@@ -3644,15 +3615,8 @@ converter_ig_traits_effect = {
 		if = {
 			limit = {
 				owner = {
+					capital = { region = sr:region_northern_europe }
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_swedish_cultures target = this } }
-					capital = {
-						OR = {
-							region = sr:region_north_sea_coast
-							region = sr:region_baltic
-							region = sr:region_baltic_states
-							region = sr:region_finland
-						}
-					}
 				}
 			}
 			set_ig_trait = ig_trait:ig_trait_xenophobia
@@ -3670,8 +3634,8 @@ converter_ig_traits_effect = {
 		else_if = {
 			limit = {
 				owner = {
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_egyptian_cultures target = this } }
 					capital = { region = sr:region_nile_basin }
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_egyptian_cultures target = this } }
 				}
 			}
 			set_ig_trait = ig_trait:ig_trait_xenophobia
@@ -3682,12 +3646,7 @@ converter_ig_traits_effect = {
 			limit = {
 				has_dlc_feature = voice_of_the_people_content
 				owner = {
-					capital = {
-						OR = {
-							region = sr:region_france
-							region = sr:region_occitania
-						}
-					}
+					capital = { is_in_geographic_region = geographic_region_france }
 					any_primary_culture = {
 						OR = {
 							is_target_in_global_variable_list = { name = global_french_cultures target = this }
@@ -3703,12 +3662,7 @@ converter_ig_traits_effect = {
 		else_if = {
 			limit = {
 				owner = {
-					capital = {
-						OR = {
-							region = sr:region_england
-							region = sr:region_north_sea_coast
-						}
-					}
+					capital = { converter_is_in_british_isles = yes }
 					any_primary_culture = {
 						OR = {
 							is_target_in_global_variable_list = { name = global_irish_cultures target = this }
@@ -3766,7 +3720,7 @@ converter_ig_traits_effect = {
 						has_law_or_variant = law_type:law_agrarianism
 						has_law_or_variant = law_type:law_serfdom
 						has_law_or_variant = law_type:law_tenant_farmers
-						has_law_or_variant = law_type:law_homesteading
+						has_law_or_variant = law_type:law_peasant_proprietorship
 						has_law_or_variant = law_type:law_collectivized_agriculture
 					}
 					any_primary_culture = { is_target_in_global_variable_list = { name = global_russian_cultures target = this } }
@@ -3779,8 +3733,8 @@ converter_ig_traits_effect = {
 		else_if = {
 			limit = {
 				owner = {
-					any_primary_culture = { is_target_in_global_variable_list = { name = global_egyptian_cultures target = this } }
 					capital = { region = sr:region_nile_basin }
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_egyptian_cultures target = this } }
 				}
 			}
 			set_interest_group_name = ig_fellahin
@@ -3834,12 +3788,7 @@ converter_ig_traits_effect = {
 			limit = {
 				has_dlc_feature = voice_of_the_people_content
 				owner = {
-					capital = {
-						OR = {
-							region = sr:region_france
-							region = sr:region_occitania
-						}
-					}
+					capital = { is_in_geographic_region = geographic_region_france }
 					any_primary_culture = {
 						OR = {
 							is_target_in_global_variable_list = { name = global_french_cultures target = this }
