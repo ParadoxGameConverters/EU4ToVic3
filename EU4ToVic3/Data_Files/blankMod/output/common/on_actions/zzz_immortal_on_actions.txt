@@ -1,4 +1,4 @@
-﻿# Root = Character
+# Root = Character
 on_character_death = {
 	on_actions = {
 		converter_dead_immortal_on_actions
@@ -14,7 +14,7 @@ converter_dead_immortal_on_actions = {
 			}
 			save_scope_as = not_so_immortal
 			if = {
-				limit = { is_ruler = yes }
+				limit = { has_role_of_type = ruler }
 				owner = {
 					trigger_event = { id = zzz_cc_politics.2 popup = yes }
 				}
@@ -38,7 +38,7 @@ converter_deposed_immortal_on_actions = {
 	effect = {
 		if = {
 			limit = {
-				is_ruler = yes
+				has_role_of_type = ruler
 				NOT = { has_trait = converter_immortal }
 				owner = {
 					has_variable = converter_has_immortal_ruler
