@@ -1,4 +1,4 @@
-﻿# converter_ig_devout_feminism_matriarchy_effect
+# converter_ig_devout_feminism_matriarchy_effect
 # converter_ig_landowners_feminism_matriarchy_effect
 # converter_rule_63_effect
 
@@ -21,10 +21,10 @@ converter_ig_devout_feminism_matriarchy_effect = {
 			}
 			trigger_if = {
 				limit = { has_variable = zzz_converter_tc_religion_set }
-				NOT = { var:tc_majority_religion = { has_discrimination_trait = tradition_feminist } }
+				NOT = { var:tc_majority_religion = { is_target_in_global_variable_list = { name = global_feminist_religions target = this } } }
 			}
 			trigger_else = {
-				NOT = { religion = { has_discrimination_trait = tradition_feminist } }
+				NOT = { religion = { is_target_in_global_variable_list = { name = global_feminist_religions target = this } } }
 			}
 		}
 		ig:ig_devout = {
@@ -52,10 +52,10 @@ converter_ig_devout_feminism_matriarchy_effect = {
 			is_old_world_trading_company = yes
 			trigger_if = {
 				limit = { has_variable = zzz_converter_tc_religion_set }
-				var:tc_majority_religion = { has_discrimination_trait = tradition_feminist }
+				var:tc_majority_religion = { is_target_in_global_variable_list = { name = global_feminist_religions target = this } }
 			}
 			trigger_else = {
-				religion = { has_discrimination_trait = tradition_feminist }
+				religion = { is_target_in_global_variable_list = { name = global_feminist_religions target = this } }
 			}
 		}
 		ig:ig_devout = {
@@ -81,7 +81,7 @@ converter_ig_devout_feminism_matriarchy_effect = {
 	else_if = {		# Cultural Gender Equality, not TC
 		limit = {
 			any_primary_culture = { has_discrimination_trait = tradition_feminist }
-			NOT = { religion = { has_discrimination_trait = tradition_feminist } }
+			NOT = { religion = { is_target_in_global_variable_list = { name = global_feminist_religions target = this } } }
 		}
 		ig:ig_devout = {
 			if = {
@@ -105,7 +105,7 @@ converter_ig_devout_feminism_matriarchy_effect = {
 	}
 	else_if = {		# Religious Gender Equality, not TC
 		limit = {
-			religion = { has_discrimination_trait = tradition_feminist }
+			religion = { is_target_in_global_variable_list = { name = global_feminist_religions target = this } }
 		}
 		ig:ig_devout = {
 			if = {
@@ -135,10 +135,10 @@ converter_ig_landowners_feminism_matriarchy_effect = {
 			is_old_world_trading_company = yes
 			trigger_if = {
 				limit = { has_variable = zzz_converter_tc_religion_set }
-				var:tc_majority_religion = { has_discrimination_trait = tradition_feminist }
+				var:tc_majority_religion = { is_target_in_global_variable_list = { name = global_feminist_religions target = this } }
 			}
 			trigger_else = {
-				religion = { has_discrimination_trait = tradition_feminist }
+				religion = { is_target_in_global_variable_list = { name = global_feminist_religions target = this } }
 			}
 			NOT = {
 				any_scope_pop = {
@@ -185,7 +185,7 @@ converter_ig_landowners_feminism_matriarchy_effect = {
 	}
 	else_if = {		# Religious Gender Equality, not TC
 		limit = {
-			religion = { has_discrimination_trait = tradition_feminist }
+			religion = { is_target_in_global_variable_list = { name = global_feminist_religions target = this } }
 			NOT = { any_primary_culture = { has_discrimination_trait = tradition_feminist } }
 		}
 		ig:ig_landowners = {
@@ -212,7 +212,7 @@ converter_rule_63_effect = {
 				modifier = {
 					if = {
 						limit = {
-							has_law = law_type:law_no_womens_rights
+							has_law_or_variant = law_type:law_no_womens_rights
 							is_matriarchal_country = yes
 						}
 						add = 60
@@ -222,8 +222,8 @@ converter_rule_63_effect = {
 					if = {
 						limit = {
 							NOR = {
-								has_law = law_type:law_no_womens_rights
-								has_law = law_type:law_womens_suffrage
+								has_law_or_variant = law_type:law_no_womens_rights
+								has_law_or_variant = law_type:law_womens_suffrage
 							}
 							is_matriarchal_country = yes
 						}
@@ -234,8 +234,8 @@ converter_rule_63_effect = {
 					if = {
 						limit = {
 							NOR = {
-								has_law = law_type:law_no_womens_rights
-								has_law = law_type:law_womens_suffrage
+								has_law_or_variant = law_type:law_no_womens_rights
+								has_law_or_variant = law_type:law_womens_suffrage
 							}
 							is_matriarchal_country = no
 						}
@@ -244,7 +244,7 @@ converter_rule_63_effect = {
 				}
 				modifier = {
 					if = {
-						limit = { has_law = law_type:law_womens_suffrage }
+						limit = { has_law_or_variant = law_type:law_womens_suffrage }
 						add = 30
 					}
 				}
@@ -254,7 +254,7 @@ converter_rule_63_effect = {
 				modifier = {
 					if = {
 						limit = {
-							has_law = law_type:law_no_womens_rights
+							has_law_or_variant = law_type:law_no_womens_rights
 							is_matriarchal_country = yes
 						}
 						add = -60
@@ -264,8 +264,8 @@ converter_rule_63_effect = {
 					if = {
 						limit = {
 							NOR = {
-								has_law = law_type:law_no_womens_rights
-								has_law = law_type:law_womens_suffrage
+								has_law_or_variant = law_type:law_no_womens_rights
+								has_law_or_variant = law_type:law_womens_suffrage
 							}
 							is_matriarchal_country = yes
 						}
@@ -276,8 +276,8 @@ converter_rule_63_effect = {
 					if = {
 						limit = {
 							NOR = {
-								has_law = law_type:law_no_womens_rights
-								has_law = law_type:law_womens_suffrage
+								has_law_or_variant = law_type:law_no_womens_rights
+								has_law_or_variant = law_type:law_womens_suffrage
 							}
 							is_matriarchal_country = no
 						}
@@ -286,7 +286,7 @@ converter_rule_63_effect = {
 				}
 				modifier = {
 					if = {
-						limit = { has_law = law_type:law_womens_suffrage }
+						limit = { has_law_or_variant = law_type:law_womens_suffrage }
 						add = -30
 					}
 				}
