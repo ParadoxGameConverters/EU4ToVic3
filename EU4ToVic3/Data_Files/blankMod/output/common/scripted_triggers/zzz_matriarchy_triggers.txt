@@ -1,0 +1,73 @@
+# is_matriarchal_country
+# is_matriarchal_pop
+# is_feminist_country
+# is_feminist_pop
+# is_oppressed_gender
+# should_have_male_characters 
+# should_have_female_characters
+
+is_matriarchal_country = {
+	OR = {
+		any_primary_culture = { has_discrimination_trait = tradition_matriarchal }
+		trigger_if = {
+			limit = { has_law_or_variant = law_type:law_state_atheism }
+			var:ancien_regime_religion ?= { is_target_in_global_variable_list = { name = global_matriarchal_religions target = this } }
+		}
+		trigger_else = {
+			religion = { is_target_in_global_variable_list = { name = global_matriarchal_religions target = this } }
+		}
+	}
+}
+
+is_matriarchal_pop = {
+	OR = {
+		culture = { has_discrimination_trait = tradition_matriarchal }
+		religion = { is_target_in_global_variable_list = { name = global_matriarchal_religions target = this } }
+	}
+}
+
+is_feminist_country = {
+	OR = {
+		any_primary_culture = { has_discrimination_trait = tradition_feminist }
+		trigger_if = {
+			limit = { has_law_or_variant = law_type:law_state_atheism }
+			var:ancien_regime_religion ?= { is_target_in_global_variable_list = { name = global_feminist_religions target = this } }
+		}
+		trigger_else = {
+			religion = { is_target_in_global_variable_list = { name = global_feminist_religions target = this } }
+		}
+	}
+}
+
+is_feminist_pop = {
+	OR = {
+		culture = { has_discrimination_trait = tradition_feminist }
+		religion = { is_target_in_global_variable_list = { name = global_feminist_religions target = this } }
+	}
+}
+
+is_oppressed_gender = {
+	trigger_if = {
+		limit = {
+			owner = { is_matriarchal_country = yes }
+		}
+		is_female = no
+	}
+	trigger_else = { is_female = yes }
+}
+
+should_have_male_characters = {
+	trigger_if = {
+		limit = { is_matriarchal_country = yes }
+		is_feminist_country = yes
+	}
+	trigger_else = { is_matriarchal_country = no }
+}
+
+should_have_female_characters = {
+	trigger_if = {
+		limit = { is_matriarchal_country = no }
+		is_feminist_country = yes
+	}
+	trigger_else = { is_matriarchal_country = yes }
+}

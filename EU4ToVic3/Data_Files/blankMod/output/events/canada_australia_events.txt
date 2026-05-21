@@ -1,0 +1,749 @@
+namespace = can_aus
+
+# Canadian colony absorbs a poorer neighbor
+can_aus.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = can_aus.1.t
+	desc = can_aus.1.d
+	flavor = can_aus.1.f
+
+	event_image = {
+		video = "ep1_transfer_of_authority"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_neighbouring_state = {
+			limit = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+					capital = { is_in_geographic_region = geographic_region_greater_canada }
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+			owner = { save_scope_as = canada_annex_scope }
+		}
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+	}
+
+	option = {
+		name = can_aus.1.a
+		default_option = yes
+		hidden_effect = {
+			every_state_in_canada = {
+				limit = {
+					has_claim_by = scope:canada_annex_scope
+				}
+				state_region = {
+					remove_claim = scope:canada_annex_scope
+					add_claim = ROOT
+				}
+			}
+		}
+		annex_with_incorporation = scope:canada_annex_scope
+	}
+}
+
+# Britain mashes 2 Canadians together
+can_aus.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = can_aus.2.t
+	desc = can_aus.2.d
+	flavor = can_aus.1.f
+
+	event_image = {
+		video = "ep1_power_blocs"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+				capital = { is_in_geographic_region = geographic_region_greater_canada }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_1
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+				capital = { is_in_geographic_region = geographic_region_greater_canada }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+				NOT = {
+					scope:canada_scope_1 = THIS
+				}
+			}
+			save_scope_as = canada_scope_2
+		}
+	}
+
+	option = {
+		name = can_aus.2.a
+		default_option = yes
+		if = {
+			limit = {
+				scope:canada_scope_1.gdp > scope:canada_scope_2.gdp
+			}
+			hidden_effect = {
+				every_state_in_canada = {
+					limit = {
+						has_claim_by = scope:canada_scope_2
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_2
+						add_claim = scope:canada_scope_1
+					}
+				}
+			}
+			scope:canada_scope_1 = {
+				annex_with_incorporation = scope:canada_scope_2
+			}
+		}
+		else = {
+			hidden_effect = {
+				every_state_in_canada = {
+					limit = {
+						has_claim_by = scope:canada_scope_1
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_1
+						add_claim = scope:canada_scope_2
+					}
+				}
+			}
+			scope:canada_scope_2 = {
+				annex_with_incorporation = scope:canada_scope_1
+			}
+		}
+	}
+}
+
+# Australian colony absorbs a poorer neighbor
+can_aus.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = can_aus.1.t
+	desc = can_aus.3.d
+	flavor = can_aus.3.f
+
+	event_image = {
+		video = "ep1_transfer_of_authority"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_neighbouring_state = {
+			limit = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+					capital = { is_in_geographic_region = geographic_region_australasia }
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+			owner = { save_scope_as = canada_annex_scope }
+		}
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+	}
+
+	option = {
+		name = can_aus.1.a
+		default_option = yes
+		annex_with_incorporation = scope:canada_annex_scope
+	}
+}
+
+# Britain mashes 2 Australians together
+can_aus.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = can_aus.2.t
+	desc = can_aus.4.d
+	flavor = can_aus.3.f
+
+	event_image = {
+		video = "ep1_power_blocs"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		ruler = {
+			save_scope_as = australia_overlord_ruler
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+				capital = { is_in_geographic_region = geographic_region_australasia }
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_1
+		}
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+				capital = { is_in_geographic_region = geographic_region_australasia }
+				relations:root >= relations_threshold:amicable
+				NOT = {
+					scope:canada_scope_1 = THIS
+				}
+				is_ai = yes
+			}
+			save_scope_as = canada_scope_2
+		}
+	}
+
+	option = {
+		name = can_aus.2.a
+		default_option = yes
+		if = {
+			limit = {
+				scope:canada_scope_1.gdp > scope:canada_scope_2.gdp
+			}
+			scope:canada_scope_1 = {
+				annex_with_incorporation = scope:canada_scope_2
+			}
+		}
+		else = {
+			scope:canada_scope_2 = {
+				annex_with_incorporation = scope:canada_scope_1
+			}
+		}
+	}
+}
+
+# Canada complete event for Canada
+can_aus.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = can_aus.5.t
+	desc = can_aus.5.d
+	flavor = can_aus.5.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+		}
+		##Converter
+		if = {
+			limit = {
+				has_game_rule = converter_native_incorporation_access_addition
+				any_primary_culture = {
+					has_discrimination_trait_group = heritage_group_indigenous_american
+					is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					has_discrimination_trait_group = heritage_group_indigenous_american
+					is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+			set_global_variable = { name = converter_tag_switch_CAN value = yes days = 100 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_settler_colonial_country = yes
+					has_game_rule = converter_native_incorporation_full
+				}
+			}
+			set_global_variable = { name = converter_tag_switch_CAN value = yes days = 100 }
+		}
+	}
+
+	option = {
+		name = can_aus.5.a
+		add_modifier = {
+			name = can_unified_canada
+			days = normal_modifier_time
+		}
+		##Converter
+		converter_make_dominion = yes
+		if = {
+			limit = {
+				top_overlord = {
+					any_scope_state = { is_in_geographic_region = geographic_region_converter_colonial_canada }
+				}
+			}
+			top_overlord = {
+				every_scope_state = {
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_canada }
+					set_state_owner = root
+				}
+			}
+		}
+		if = {
+			limit = { has_variable = converter_tag_switch_CAN }
+			change_tag = CAN
+		}
+		##Converter
+	}
+
+	after = {
+		if = {		##Converter
+			limit = { c:CAN ?= this }
+			every_primary_culture = {
+				c:CAN = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { is_in_geographic_region = geographic_region_converter_colonial_canada }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+						}
+					}
+					culture = {
+						c:CAN = { add_primary_culture = prev }
+					}
+				}
+			}
+			remove_global_variable = converter_tag_switch_CAN
+		}
+	}
+}
+
+# Canada complete event for Overlord
+can_aus.6 = {
+	type = country_event
+	placement = ROOT
+
+	title = can_aus.5.t
+	desc = can_aus.6.d
+	flavor = can_aus.5.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_canadian_cultures target = this } }		##Converter
+				capital = { is_in_geographic_region = geographic_region_greater_canada }
+				any_scope_state = {
+					OR = {
+						state_region = s:STATE_ONTARIO
+						state_region = s:STATE_NEW_BRUNSWICK
+						state_region = s:STATE_QUEBEC
+						state_region = s:STATE_NEWFOUNDLAND
+						state_region = s:STATE_ALBERTA
+						state_region = s:STATE_BRITISH_COLUMBIA
+						state_region = s:STATE_SASKATCHEWAN
+						state_region = s:STATE_MANITOBA
+						state_region = s:STATE_YUKON_TERRITORY
+						state_region = s:STATE_NORTHWEST_TERRITORIES
+						state_region = s:STATE_NUNAVUT
+					}
+					count >= 9
+				}
+			}
+			save_scope_as = canada_country
+		}
+		##Converter
+		scope:canada_country = {
+			if = {
+				limit = {
+					has_game_rule = converter_native_incorporation_access_addition
+					any_primary_culture = {
+						has_discrimination_trait_group = heritage_group_indigenous_american
+						is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait_group = heritage_group_indigenous_american
+						is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_colonial_primary_cultures
+						target = this
+					}
+				}
+				set_global_variable = { name = converter_tag_switch_CAN value = yes days = 100 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_settler_colonial_country = yes
+						has_game_rule = converter_native_incorporation_full
+					}
+				}
+				set_global_variable = { name = converter_tag_switch_CAN value = yes days = 100 }
+			}
+		}
+	}
+
+	option = {
+		name = can_aus.5.a
+		add_modifier = {
+			name = gbr_unified_canada
+			days = normal_modifier_time
+		}
+		if = {		##Converter
+			limit = { has_global_variable = converter_tag_switch_CAN }
+			scope:canada_country = { change_tag = CAN }
+		}
+	}
+
+	after = {
+		if = {		##Converter
+			limit = { has_global_variable = converter_tag_switch_CAN }
+			c:CAN = {
+				every_primary_culture = {
+					c:CAN = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_canada }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_canadian_cultures target = this }
+							}
+						}
+						culture = {
+							c:CAN = { add_primary_culture = prev }
+						}
+					}
+				}
+			}
+			remove_global_variable = converter_tag_switch_CAN
+		}
+	}
+}
+
+# Australia complete event for Australia
+can_aus.7 = {
+	type = country_event
+	placement = ROOT
+
+	title = can_aus.7.t
+	desc = can_aus.7.d
+	flavor = can_aus.7.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+		##Converter
+		if = {
+			limit = {
+				has_game_rule = converter_native_incorporation_access_addition
+				any_primary_culture = {
+					has_discrimination_trait_group = heritage_group_indigenous_oceanic
+					is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+			}
+			every_primary_culture = {
+				limit = {
+					has_discrimination_trait_group = heritage_group_indigenous_oceanic
+					is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+					NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+				}
+				add_to_global_variable_list = {
+					name = global_colonial_primary_cultures
+					target = this
+				}
+			}
+			set_global_variable = { name = converter_tag_switch_AST value = yes days = 100 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_settler_colonial_country = yes
+					has_game_rule = converter_native_incorporation_full
+				}
+			}
+			set_global_variable = { name = converter_tag_switch_AST value = yes days = 100 }
+		}
+	}
+
+	option = {
+		name = can_aus.7.a
+		add_modifier = {
+			name = aus_unified_australia
+			days = normal_modifier_time
+		}
+		##Converter
+		converter_make_dominion = yes
+		if = {
+			limit = {
+				top_overlord = {
+					any_scope_state = { is_in_geographic_region = geographic_region_converter_colonial_australia }
+				}
+			}
+			top_overlord = {
+				every_scope_state = {
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_australia }
+					set_state_owner = root
+				}
+			}
+		}
+		if = {
+			limit = { has_variable = converter_tag_switch_AST }
+			change_tag = AST
+		}
+		##Converter
+	}
+
+	after = {
+		if = {		##Converter
+			limit = { c:AST ?= this }
+			every_primary_culture = {
+				c:AST = { remove_primary_culture = prev }
+			}
+			every_scope_state = {
+				limit = { is_in_geographic_region = geographic_region_converter_colonial_australia }
+				every_scope_pop = {
+					limit = {
+						culture = {
+							is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+							is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+						}
+					}
+					culture = {
+						c:AST = { add_primary_culture = prev }
+					}
+				}
+			}
+			remove_global_variable = converter_tag_switch_AST
+		}
+	}
+}
+
+# Australia complete event for Overlord
+can_aus.8 = {
+	type = country_event
+	placement = ROOT
+
+	title = can_aus.7.t
+	desc = can_aus.8.d
+	flavor = can_aus.7.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				any_primary_culture = { is_target_in_global_variable_list = { name = global_australian_cultures target = this } }		##Converter
+				capital = { is_in_geographic_region = geographic_region_australasia }
+				any_scope_state = {
+					OR = {
+						state_region = s:STATE_NEW_SOUTH_WALES
+						state_region = s:STATE_VICTORIA
+						state_region = s:STATE_TASMANIA
+						state_region = s:STATE_QUEENSLAND
+						state_region = s:STATE_SOUTH_AUSTRALIA
+						state_region = s:STATE_WESTERN_AUSTRALIA
+						state_region = s:STATE_NORTHERN_TERRITORY
+						state_region = s:STATE_NORTH_ISLAND
+						state_region = s:STATE_SOUTH_ISLAND
+					}
+					count >= 7
+				}
+			}
+			save_scope_as = canada_country
+			ruler = {
+				save_scope_as = canada_country_ruler
+			}
+		}
+		##Converter
+		scope:canada_country = {
+			if = {
+				limit = {
+					has_game_rule = converter_native_incorporation_access_addition
+					any_primary_culture = {
+						has_discrimination_trait_group = heritage_group_indigenous_oceanic
+						is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+				}
+				every_primary_culture = {
+					limit = {
+						has_discrimination_trait_group = heritage_group_indigenous_oceanic
+						is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+						NOT = { is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this } }
+					}
+					add_to_global_variable_list = {
+						name = global_colonial_primary_cultures
+						target = this
+					}
+				}
+				set_global_variable = { name = converter_tag_switch_AST value = yes days = 100 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_settler_colonial_country = yes
+						has_game_rule = converter_native_incorporation_full
+					}
+				}
+				set_global_variable = { name = converter_tag_switch_AST value = yes days = 100 }
+			}
+		}
+	}
+
+	option = {
+		name = can_aus.7.a
+		add_modifier = {
+			name = gbr_unified_australia
+			days = normal_modifier_time
+		}
+		if = {		##Converter
+			limit = { has_global_variable = converter_tag_switch_AST }
+			scope:canada_country = { change_tag = AST }
+		}
+	}
+
+	after = {
+		if = {		##Converter
+			limit = { has_variable = converter_tag_switch_AST }
+			c:AST = {
+				every_primary_culture = {
+					c:AST = { remove_primary_culture = prev }
+				}
+				every_scope_state = {
+					limit = { is_in_geographic_region = geographic_region_converter_colonial_australia }
+					every_scope_pop = {
+						limit = {
+							culture = {
+								is_target_in_global_variable_list = { name = global_colonial_primary_cultures target = this }
+								is_target_in_global_variable_list = { name = global_australian_cultures target = this }
+							}
+						}
+						culture = {
+							c:AST = { add_primary_culture = prev }
+						}
+					}
+				}
+			}
+			remove_global_variable = converter_tag_switch_AST
+		}
+	}
+}
