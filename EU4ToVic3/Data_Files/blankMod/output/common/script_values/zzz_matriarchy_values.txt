@@ -1,4 +1,4 @@
-﻿# ig_female_general_chance
+# ig_female_general_chance
 # ig_female_politician_chance_conversative
 # ig_female_politician_chance_moderate
 # ig_female_politician_chance_liberal
@@ -25,7 +25,7 @@ ig_female_general_chance = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = no
 				is_feminist_country = yes
 			}
@@ -39,8 +39,8 @@ ig_female_general_chance = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = no
 				is_feminist_country = yes
@@ -54,7 +54,7 @@ ig_female_general_chance = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_matriarchal_country = no
 				is_feminist_country = yes
 			}
@@ -67,7 +67,7 @@ ig_female_general_chance = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = yes
 				is_feminist_country = yes
 			}
@@ -81,8 +81,8 @@ ig_female_general_chance = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = yes
 				is_feminist_country = yes
@@ -96,7 +96,7 @@ ig_female_general_chance = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_matriarchal_country = yes
 				is_feminist_country = yes
 			}
@@ -113,7 +113,7 @@ ig_female_politician_chance_conversative = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_matriarchal_country = no
 				is_feminist_country = no
 			}
@@ -126,7 +126,7 @@ ig_female_politician_chance_conversative = {
 	if = {
 		limit = {
 			owner = {
-				NOT = { has_law = law_type:law_womens_suffrage }
+				NOT = { has_law_or_variant = law_type:law_womens_suffrage }
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -139,7 +139,7 @@ ig_female_politician_chance_conversative = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -152,7 +152,7 @@ ig_female_politician_chance_conversative = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = no
 				is_feminist_country = yes
 			}
@@ -165,7 +165,7 @@ ig_female_politician_chance_conversative = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = yes
 				is_feminist_country = yes
 			}
@@ -179,8 +179,8 @@ ig_female_politician_chance_conversative = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = no
 				is_feminist_country = yes
@@ -195,8 +195,8 @@ ig_female_politician_chance_conversative = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = yes
 				is_feminist_country = yes
@@ -210,7 +210,7 @@ ig_female_politician_chance_conversative = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_feminist_country = yes
 			}
 
@@ -226,7 +226,7 @@ ig_female_politician_chance_moderate = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_matriarchal_country = no
 				is_feminist_country = no
 			}
@@ -239,7 +239,7 @@ ig_female_politician_chance_moderate = {
 	if = {
 		limit = {
 			owner = {
-				NOT = { has_law = law_type:law_womens_suffrage }
+				NOT = { has_law_or_variant = law_type:law_womens_suffrage }
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -252,7 +252,7 @@ ig_female_politician_chance_moderate = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -265,7 +265,7 @@ ig_female_politician_chance_moderate = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = no
 				is_feminist_country = yes
 			}
@@ -278,7 +278,7 @@ ig_female_politician_chance_moderate = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = yes
 				is_feminist_country = yes
 			}
@@ -292,8 +292,8 @@ ig_female_politician_chance_moderate = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = no
 				is_feminist_country = yes
@@ -308,8 +308,8 @@ ig_female_politician_chance_moderate = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = yes
 				is_feminist_country = yes
@@ -323,7 +323,7 @@ ig_female_politician_chance_moderate = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_feminist_country = yes
 			}
 
@@ -339,7 +339,7 @@ ig_female_politician_chance_liberal = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_matriarchal_country = no
 				is_feminist_country = no
 			}
@@ -352,7 +352,7 @@ ig_female_politician_chance_liberal = {
 	if = {
 		limit = {
 			owner = {
-				NOT = { has_law = law_type:law_womens_suffrage }
+				NOT = { has_law_or_variant = law_type:law_womens_suffrage }
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -365,7 +365,7 @@ ig_female_politician_chance_liberal = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -378,7 +378,7 @@ ig_female_politician_chance_liberal = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = no
 				is_feminist_country = yes
 			}
@@ -391,7 +391,7 @@ ig_female_politician_chance_liberal = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = yes
 				is_feminist_country = yes
 			}
@@ -405,8 +405,8 @@ ig_female_politician_chance_liberal = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = no
 				is_feminist_country = yes
@@ -421,8 +421,8 @@ ig_female_politician_chance_liberal = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = yes
 				is_feminist_country = yes
@@ -436,7 +436,7 @@ ig_female_politician_chance_liberal = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_feminist_country = yes
 			}
 
@@ -452,7 +452,7 @@ ig_female_politician_chance_leftist = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_matriarchal_country = no
 				is_feminist_country = no
 			}
@@ -465,7 +465,7 @@ ig_female_politician_chance_leftist = {
 	if = {
 		limit = {
 			owner = {
-				NOT = { has_law = law_type:law_womens_suffrage }
+				NOT = { has_law_or_variant = law_type:law_womens_suffrage }
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -478,7 +478,7 @@ ig_female_politician_chance_leftist = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -491,7 +491,7 @@ ig_female_politician_chance_leftist = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = no
 				is_feminist_country = yes
 			}
@@ -504,7 +504,7 @@ ig_female_politician_chance_leftist = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = yes
 				is_feminist_country = yes
 			}
@@ -518,8 +518,8 @@ ig_female_politician_chance_leftist = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = no
 				is_feminist_country = yes
@@ -534,8 +534,8 @@ ig_female_politician_chance_leftist = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = yes
 				is_feminist_country = yes
@@ -549,7 +549,7 @@ ig_female_politician_chance_leftist = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_feminist_country = yes
 			}
 
@@ -565,7 +565,7 @@ ig_female_agitator_chance_conversative = {
 	if = {
 		limit = {
 			owner = {
-				NOT = { has_law = law_type:law_no_womens_rights }
+				NOT = { has_law_or_variant = law_type:law_no_womens_rights }
 				is_matriarchal_country = no
 				is_feminist_country = no
 			}
@@ -578,7 +578,7 @@ ig_female_agitator_chance_conversative = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -591,7 +591,7 @@ ig_female_agitator_chance_conversative = {
 	if = {
 		limit = {
 			owner = {
-				NOT = { has_law = law_type:law_no_womens_rights }
+				NOT = { has_law_or_variant = law_type:law_no_womens_rights }
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -604,7 +604,7 @@ ig_female_agitator_chance_conversative = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = no
 				is_feminist_country = yes
 			}
@@ -617,7 +617,7 @@ ig_female_agitator_chance_conversative = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = yes
 				is_feminist_country = yes
 			}
@@ -631,8 +631,8 @@ ig_female_agitator_chance_conversative = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = no
 				is_feminist_country = yes
@@ -647,8 +647,8 @@ ig_female_agitator_chance_conversative = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = yes
 				is_feminist_country = yes
@@ -662,7 +662,7 @@ ig_female_agitator_chance_conversative = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_feminist_country = yes
 			}
 
@@ -678,7 +678,7 @@ ig_female_agitator_chance_moderate = {
 	if = {
 		limit = {
 			owner = {
-				NOT = { has_law = law_type:law_no_womens_rights }
+				NOT = { has_law_or_variant = law_type:law_no_womens_rights }
 				is_matriarchal_country = no
 				is_feminist_country = no
 			}
@@ -691,7 +691,7 @@ ig_female_agitator_chance_moderate = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -704,7 +704,7 @@ ig_female_agitator_chance_moderate = {
 	if = {
 		limit = {
 			owner = {
-				NOT = { has_law = law_type:law_no_womens_rights }
+				NOT = { has_law_or_variant = law_type:law_no_womens_rights }
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -717,7 +717,7 @@ ig_female_agitator_chance_moderate = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = no
 				is_feminist_country = yes
 			}
@@ -730,7 +730,7 @@ ig_female_agitator_chance_moderate = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = yes
 				is_feminist_country = yes
 			}
@@ -744,8 +744,8 @@ ig_female_agitator_chance_moderate = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = no
 				is_feminist_country = yes
@@ -760,8 +760,8 @@ ig_female_agitator_chance_moderate = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = yes
 				is_feminist_country = yes
@@ -775,7 +775,7 @@ ig_female_agitator_chance_moderate = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_feminist_country = yes
 			}
 
@@ -791,7 +791,7 @@ ig_female_agitator_chance_liberal = {
 	if = {
 		limit = {
 			owner = {
-				NOT = { has_law = law_type:law_no_womens_rights }
+				NOT = { has_law_or_variant = law_type:law_no_womens_rights }
 				is_matriarchal_country = no
 				is_feminist_country = no
 			}
@@ -804,7 +804,7 @@ ig_female_agitator_chance_liberal = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -817,7 +817,7 @@ ig_female_agitator_chance_liberal = {
 	if = {
 		limit = {
 			owner = {
-				NOT = { has_law = law_type:law_no_womens_rights }
+				NOT = { has_law_or_variant = law_type:law_no_womens_rights }
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -830,7 +830,7 @@ ig_female_agitator_chance_liberal = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = no
 				is_feminist_country = yes
 			}
@@ -843,7 +843,7 @@ ig_female_agitator_chance_liberal = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = yes
 				is_feminist_country = yes
 			}
@@ -857,8 +857,8 @@ ig_female_agitator_chance_liberal = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = no
 				is_feminist_country = yes
@@ -873,8 +873,8 @@ ig_female_agitator_chance_liberal = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = yes
 				is_feminist_country = yes
@@ -888,7 +888,7 @@ ig_female_agitator_chance_liberal = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_feminist_country = yes
 			}
 
@@ -904,7 +904,7 @@ ig_female_agitator_chance_leftist = {
 	if = {
 		limit = {
 			owner = {
-				NOT = { has_law = law_type:law_no_womens_rights }
+				NOT = { has_law_or_variant = law_type:law_no_womens_rights }
 				is_matriarchal_country = no
 				is_feminist_country = no
 			}
@@ -917,7 +917,7 @@ ig_female_agitator_chance_leftist = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -930,7 +930,7 @@ ig_female_agitator_chance_leftist = {
 	if = {
 		limit = {
 			owner = {
-				NOT = { has_law = law_type:law_no_womens_rights }
+				NOT = { has_law_or_variant = law_type:law_no_womens_rights }
 				is_matriarchal_country = yes
 				is_feminist_country = no
 			}
@@ -943,7 +943,7 @@ ig_female_agitator_chance_leftist = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = no
 				is_feminist_country = yes
 			}
@@ -956,7 +956,7 @@ ig_female_agitator_chance_leftist = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_no_womens_rights
+				has_law_or_variant = law_type:law_no_womens_rights
 				is_matriarchal_country = yes
 				is_feminist_country = yes
 			}
@@ -970,8 +970,8 @@ ig_female_agitator_chance_leftist = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = no
 				is_feminist_country = yes
@@ -986,8 +986,8 @@ ig_female_agitator_chance_leftist = {
 		limit = {
 			owner = {
 				NOR = {
-					has_law = law_type:law_no_womens_rights
-					has_law = law_type:law_womens_suffrage
+					has_law_or_variant = law_type:law_no_womens_rights
+					has_law_or_variant = law_type:law_womens_suffrage
 				}
 				is_matriarchal_country = yes
 				is_feminist_country = yes
@@ -1001,7 +1001,7 @@ ig_female_agitator_chance_leftist = {
 	if = {
 		limit = {
 			owner = {
-				has_law = law_type:law_womens_suffrage
+				has_law_or_variant = law_type:law_womens_suffrage
 				is_feminist_country = yes
 			}
 
