@@ -1,4 +1,4 @@
-﻿# converter_historical_leader_cultures_effect
+# converter_historical_leader_cultures_effect
 # converter_colonial_confederation_cultures_effect
 # converter_other_starting_cultural_effects
 # converter_cultural_traditions_effect
@@ -2384,11 +2384,7 @@ converter_colonial_confederation_cultures_effect = {
 		if = {
 			limit = {
 				any_scope_state = {
-					region = sr:region_new_england
-					NOR = {
-						state_region = s:STATE_NEW_BRUNSWICK
-						state_region = s:STATE_BERMUDA
-					}
+					converter_is_in_new_england = yes
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2402,11 +2398,7 @@ converter_colonial_confederation_cultures_effect = {
 			}
 			every_scope_state = {
 				limit = {
-					region = sr:region_new_england
-					NOR = {
-						state_region = s:STATE_NEW_BRUNSWICK
-						state_region = s:STATE_BERMUDA
-					}
+					converter_is_in_new_england = yes
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2439,7 +2431,7 @@ converter_colonial_confederation_cultures_effect = {
 		if = {
 			limit = {
 				any_scope_state = {
-					region = sr:region_the_midwest
+					converter_is_in_midwest = yes
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2453,7 +2445,7 @@ converter_colonial_confederation_cultures_effect = {
 			}
 			every_scope_state = {
 				limit = {
-					region = sr:region_the_midwest
+					converter_is_in_midwest = yes
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2486,7 +2478,7 @@ converter_colonial_confederation_cultures_effect = {
 		if = {
 			limit = {
 				any_scope_state = {
-					region = sr:region_dixie
+					converter_is_in_dixie = yes
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -2501,7 +2493,7 @@ converter_colonial_confederation_cultures_effect = {
 			}
 			every_scope_state = {
 				limit = {
-					region = sr:region_dixie
+					converter_is_in_dixie = yes
 					any_scope_pop = {
 						culture = {
 							NOR = {
@@ -3113,7 +3105,7 @@ converter_other_starting_cultural_effects = {
 					}
 					leader = {
 						if = {
-							limit = { is_ruler = no }
+							limit = { is_ruler_of_own_country = no }
 							set_character_as_ruler = yes
 						}
 					}
@@ -3138,7 +3130,7 @@ converter_other_starting_cultural_effects = {
 				activate_law = law_type:law_extraction_economy
 				activate_law = law_type:law_colonial_exploitation
 				if = {
-					limit = { has_law_or_variant = law_type:law_homesteading }
+					limit = { has_law_or_variant = law_type:law_peasant_proprietorship }
 					activate_law = law_type:law_tenant_farmers
 				}
 				if = {
@@ -3186,14 +3178,14 @@ converter_other_starting_cultural_effects = {
 		if = {
 			limit = {
 				any_scope_character = {
-					is_ruler = yes
+					has_role_of_type = ruler
 					has_trait = converter_immortal
 				}
 			}
 			set_local_variable = converter_has_immortal_ruler
 			every_scope_character = {
 				limit = {
-					is_ruler = yes 
+					has_role_of_type = ruler 
 					has_trait = converter_immortal
 				}
 				set_character_immortal = yes
@@ -3488,7 +3480,7 @@ converter_cultural_traditions_effect = {
 			}
 		}
 		if = {
-			limit = { region = sr:region_persia }
+			limit = { region = sr:region_greater_persia }
 			every_scope_pop = {
 				limit = {
 					culture = {
@@ -3510,14 +3502,12 @@ converter_cultural_traditions_effect = {
 				any_overlord_or_above = { c:PER ?= this }
 				capital = {
 					OR = {
-						region = sr:region_anatolia
-						region = sr:region_arabic
-						region = sr:region_persia
+						region = sr:region_near_east
+						region = sr:region_arabia
+						region = sr:region_greater_persia
 						region = sr:region_central_asia
-						region = sr:region_caucasus
-						region = sr:region_punjab
-						region = sr:region_bombay
 						region = sr:region_himalayas
+						region = sr:region_north_india
 					}
 				}
 			}
@@ -3525,14 +3515,12 @@ converter_cultural_traditions_effect = {
 		every_scope_state = {
 			limit = {
 				OR = {
-					region = sr:region_anatolia
-					region = sr:region_arabic
-					region = sr:region_persia
+					region = sr:region_near_east
+					region = sr:region_arabia
+					region = sr:region_greater_persia
 					region = sr:region_central_asia
-					region = sr:region_caucasus
-					region = sr:region_punjab
-					region = sr:region_bombay
 					region = sr:region_himalayas
+					region = sr:region_north_india
 				}
 				religion_percent_state = {
 					target = c:PER.religion
@@ -3554,10 +3542,10 @@ converter_cultural_traditions_effect = {
 		limit = {
 			capital = {
 				OR = {
-					region = sr:region_anatolia
-					region = sr:region_italy
+					region = sr:region_near_east
+					region = sr:region_southern_europe
 					region = sr:region_balkans
-					region = sr:region_danubia
+					region = sr:region_eastern_europe
 				}
 			}
 			religion = { has_discrimination_trait = heritage_islamic }
@@ -3571,10 +3559,10 @@ converter_cultural_traditions_effect = {
 		every_scope_state = {
 			limit = {
 				OR = {
-					region = sr:region_anatolia
-					region = sr:region_italy
+					region = sr:region_near_east
+					region = sr:region_southern_europe
 					region = sr:region_balkans
-					region = sr:region_danubia
+					region = sr:region_eastern_europe
 				}
 				religion_percent_state = {
 					target = scope:temp_ottomans_scope.religion
@@ -3595,10 +3583,10 @@ converter_cultural_traditions_effect = {
 			limit = {
 				capital = {
 					OR = {
-						region = sr:region_anatolia
-						region = sr:region_italy
+						region = sr:region_near_east
+						region = sr:region_southern_europe
 						region = sr:region_balkans
-						region = sr:region_danubia
+						region = sr:region_eastern_europe
 					}
 				}
 				religion = { has_discrimination_trait = heritage_islamic }
@@ -3606,10 +3594,10 @@ converter_cultural_traditions_effect = {
 			every_scope_state = {
 				limit = {
 					OR = {
-						region = sr:region_anatolia
-						region = sr:region_italy
+						region = sr:region_near_east
+						region = sr:region_southern_europe
 						region = sr:region_balkans
-						region = sr:region_danubia
+						region = sr:region_eastern_europe
 					}
 					religion_percent_state = {
 						target = scope:temp_ottomans_scope.religion
@@ -3639,10 +3627,10 @@ converter_cultural_traditions_effect = {
 				capital = {
 					OR = {
 						region = sr:region_russia
-						region = sr:region_dnieper
-						region = sr:region_belarus
-						region = sr:region_arctic_russia
-						region = sr:region_urals
+						region = sr:region_eastern_europe
+						region = sr:region_northern_europe
+						region = sr:region_siberia
+						region = sr:region_central_asia
 					}
 				}
 			}
@@ -3651,10 +3639,10 @@ converter_cultural_traditions_effect = {
 			limit = {
 				OR = {
 					region = sr:region_russia
-					region = sr:region_dnieper
-					region = sr:region_belarus
-					region = sr:region_arctic_russia
-					region = sr:region_urals
+					region = sr:region_eastern_europe
+					region = sr:region_northern_europe
+					region = sr:region_siberia
+					region = sr:region_central_asia
 				}
 			}
 			every_scope_pop = {
@@ -3682,15 +3670,13 @@ converter_cultural_traditions_effect = {
 				}
 				capital = {
 					OR = {
-						region = sr:region_indochina
-						region = sr:region_indonesia
-						region = sr:region_south_china
 						region = sr:region_north_china
-						region = sr:region_manchuria
-						region = sr:region_japan
-						region = sr:region_east_siberia
+						region = sr:region_south_china
+						region = sr:region_northeast_asia
 						region = sr:region_central_asia
 						region = sr:region_himalayas
+						region = sr:region_indochina
+						region = sr:region_indonesia
 					}
 				}
 			}
@@ -3698,15 +3684,13 @@ converter_cultural_traditions_effect = {
 		every_scope_state = {
 			limit = {
 				OR = {
-					region = sr:region_indochina
-					region = sr:region_indonesia
-					region = sr:region_south_china
 					region = sr:region_north_china
-					region = sr:region_manchuria
-					region = sr:region_japan
-					region = sr:region_east_siberia
+					region = sr:region_south_china
+					region = sr:region_northeast_asia
 					region = sr:region_central_asia
 					region = sr:region_himalayas
+					region = sr:region_indochina
+					region = sr:region_indonesia
 				}
 			}
 			every_scope_pop = {
@@ -3727,11 +3711,10 @@ converter_cultural_traditions_effect = {
 		every_scope_state = {
 			limit = {
 				OR = {
-					region = sr:region_anatolia
-					region = sr:region_arabic
-					region = sr:region_persia
+					region = sr:region_near_east
+					region = sr:region_arabia
+					region = sr:region_greater_persia
 					region = sr:region_nile_basin
-					region = sr:region_ethiopia
 				}
 			}
 			every_scope_pop = {
@@ -4172,10 +4155,10 @@ converter_primary_cultures_effect = {
 		every_scope_state = {	#Core HRE territory
 			limit = {
 				OR = {
-					region = sr:region_north_germany
-					region = sr:region_south_germany
-					region = sr:region_rhine
-					region = sr:region_italy
+					is_in_geographic_region = geographic_region_north_germany_old
+					is_in_geographic_region = geographic_region_south_germany_old
+					is_in_geographic_region = geographic_region_rhine_old
+					is_in_geographic_region = geographic_region_italy_old
 				}
 			}
 			every_scope_pop = {
@@ -4197,17 +4180,15 @@ converter_primary_cultures_effect = {
 		every_scope_state = {	#Other European territories
 			limit = {
 				NOR = {
-					region = sr:region_north_germany
-					region = sr:region_south_germany
-					region = sr:region_rhine
-					region = sr:region_italy
+					is_in_geographic_region = geographic_region_north_germany_old
+					is_in_geographic_region = geographic_region_south_germany_old
+					is_in_geographic_region = geographic_region_rhine_old
+					is_in_geographic_region = geographic_region_italy_old
 				}
 				OR = {
 					is_in_geographic_region = geographic_region_europe
-					region = sr:region_arctic_russia
-					region = sr:region_urals
-					region = sr:region_anatolia
-					region = sr:region_caucasus
+					region = sr:region_near_east
+					state_region = s:STATE_GREATER_CAUCASUS
 				}
 			}
 			every_scope_pop = {
