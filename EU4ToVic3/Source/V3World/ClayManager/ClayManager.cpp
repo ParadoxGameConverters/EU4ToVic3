@@ -116,6 +116,7 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 {
 	Log(LogLevel::Info) << "-> Generating Clay Chunks.";
 
+	const auto& allProvinces = provinceManager.getAllProvinces();
 	std::set<int> processedEU4IDs;
 	std::set<std::string> processedV3IDs;
 
@@ -125,18 +126,20 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 		if (processedEU4IDs.contains(spID))
 			continue; // We already grabbed this province earlier in some other mapping. Skip.
 
-		auto v3provinceIDs = provinceMapper.getV3Provinces(spID);
-		if (v3provinceIDs.empty())
+		const auto* v3provinceIDs = provinceMapper.getV3ProvincesPtr(spID);
+		if (!v3provinceIDs || v3provinceIDs->empty())
 			continue; // This province is mapped into nothing. Skip.
 
-		auto eu4ProvinceIDs = provinceMapper.getEU4Provinces(v3provinceIDs.front());
+		const auto* eu4ProvinceIDs = provinceMapper.getEU4ProvincesPtr(v3provinceIDs->front());
+		if (!eu4ProvinceIDs || eu4ProvinceIDs->empty())
+			continue;
 		auto chunk = std::make_shared<Chunk>();
 
 		// sum the total weight of incoming provinces.
 		double totalWeight = 0;
-		for (auto eu4ProvinceID: eu4ProvinceIDs)
-			if (provinceManager.getAllProvinces().contains(eu4ProvinceID))
-				totalWeight += provinceManager.getAllProvinces().at(eu4ProvinceID)->getProvinceWeight();
+		for (const auto eu4ProvinceID: *eu4ProvinceIDs)
+			if (const auto sourceProvince = allProvinces.find(eu4ProvinceID); sourceProvince != allProvinces.end())
+				totalWeight += sourceProvince->second->getProvinceWeight();
 
 		// If all incoming provinces were wastelands, which is ok, sum is 0, and outgoing factors will also be 0,
 		// which is again ok as wastelands don't carry ANY data.
@@ -144,12 +147,12 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 			totalWeight = 1;
 
 		// Mark source provinces for data transfer.
-		for (auto eu4ProvinceID: eu4ProvinceIDs)
+		for (const auto eu4ProvinceID: *eu4ProvinceIDs)
 		{
-			if (provinceManager.getAllProvinces().contains(eu4ProvinceID))
+			if (const auto sourceProvince = allProvinces.find(eu4ProvinceID); sourceProvince != allProvinces.end())
 			{
-				const auto sourceWeight = provinceManager.getAllProvinces().at(eu4ProvinceID)->getProvinceWeight();
-				chunk->addSourceProvinceData(*provinceManager.getAllProvinces().at(eu4ProvinceID), sourceWeight / totalWeight);
+				const auto sourceWeight = sourceProvince->second->getProvinceWeight();
+				chunk->addSourceProvinceData(*sourceProvince->second, sourceWeight / totalWeight);
 			}
 			else if (!provinceManager.isProvinceDiscarded(eu4ProvinceID))
 			{
@@ -164,7 +167,7 @@ void V3::ClayManager::generateChunks(const mappers::ProvinceMapper& provinceMapp
 			continue;
 
 		// Shove all vic3 provinces into the chunk
-		for (const auto& v3provinceID: v3provinceIDs)
+		for (const auto& v3provinceID: *v3provinceIDs)
 		{
 			if (processedV3IDs.contains(v3provinceID))
 				continue; // We already grabbed this province earlier in some other mapping. Skip.

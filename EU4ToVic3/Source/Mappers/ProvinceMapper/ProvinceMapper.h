@@ -15,6 +15,8 @@ class ProvinceMapper: commonItems::parser
 
 	[[nodiscard]] std::vector<int> getEU4Provinces(const std::string& v3Province) const;
 	[[nodiscard]] std::vector<std::string> getV3Provinces(int eu4Province) const;
+	[[nodiscard]] const std::vector<int>* getEU4ProvincesPtr(const std::string& v3Province) const;
+	[[nodiscard]] const std::vector<std::string>* getV3ProvincesPtr(int eu4Province) const;
 	[[nodiscard]] const auto& getMappings() const { return mappings; }
 
   private:
