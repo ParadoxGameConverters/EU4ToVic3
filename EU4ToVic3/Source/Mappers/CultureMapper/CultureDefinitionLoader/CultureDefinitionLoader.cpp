@@ -39,7 +39,22 @@ void mappers::CultureDefinitionLoader::loadDefinitions(std::istream& theStream)
 
 void mappers::CultureDefinitionLoader::registerKeys()
 {
-	registerRegex(commonItems::catchallRegex, [this](const std::string& cultureName, std::istream& theStream) {
+	static const std::vector<std::string> injectReplaceKeywords = {
+		"INJECT:", "REPLACE:", "TRY_INJECT:", "TRY_REPLACE:", "INJECT_OR_CREATE:", "REPLACE_OR_CREATE:"
+	};
+
+	registerRegex(commonItems::catchallRegex, [this](const std::string& cultureNameStr, std::istream& theStream) {
+		// If cultureName starts with any of the inject/replace keywords, strip them.
+		std::string cultureName = cultureNameStr;
+		for (const auto& keyword: injectReplaceKeywords)
+		{
+			if (cultureName.starts_with(keyword))
+			{
+				cultureName = cultureName.substr(keyword.size());
+				break;
+			}
+		}
+
 		auto relDef = CultureDefinitionEntry(theStream, skipProcessing, skipExport).getCultureDef();
 		relDef.name = cultureName;
 
