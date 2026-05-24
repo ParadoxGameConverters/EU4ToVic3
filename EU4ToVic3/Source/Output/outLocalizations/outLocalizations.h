@@ -7,7 +7,7 @@
 
 namespace OUT
 {
-void exportCountryNamesAndAdjectives(const std::filesystem::path& outputName,
+void exportCountryNamesAdjectivesAndFlavor(const std::filesystem::path& outputName,
 	 const std::map<std::string, std::shared_ptr<V3::Country>>& countries,
 	 const V3::LocalizationLoader& knownLocs);
 void exportReligionLocs(const std::filesystem::path& outputName,

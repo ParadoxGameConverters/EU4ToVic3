@@ -25,7 +25,7 @@ void OUT::exportPowerBlocLocs(const std::filesystem::path& outputName, const std
 	}
 }
 
-void OUT::exportCountryNamesAndAdjectives(const std::filesystem::path& outputName,
+void OUT::exportCountryNamesAdjectivesAndFlavor(const std::filesystem::path& outputName,
 	 const std::map<std::string, std::shared_ptr<V3::Country>>& countries,
 	 const V3::LocalizationLoader& knownLocs)
 {
@@ -41,10 +41,13 @@ void OUT::exportCountryNamesAndAdjectives(const std::filesystem::path& outputNam
 		output << commonItems::utf8BOM << "l_" << language << ":\n";
 		for (const auto& country: countries | std::views::values)
 		{
-			if (!knownLocs.getLocMapForKey(country->getTag()))
-				output << " " << country->getTag() << ": \"" << country->getName(language) << "\"\n";
-			if (!knownLocs.getLocMapForKey(country->getTag() + "_ADJ"))
-				output << " " << country->getTag() << "_ADJ: \"" << country->getAdjective(language) << "\"\n";
+			const auto& tag = country->getTag();
+			if (!knownLocs.getLocMapForKey(tag))
+				output << " " << tag << ": \"" << country->getName(language) << "\"\n";
+			if (!knownLocs.getLocMapForKey(tag + "_ADJ"))
+				output << " " << tag << "_ADJ: \"" << country->getAdjective(language) << "\"\n";
+			// Always overwrite flavor to avoid anachronistic loc.
+			output << " " << tag << "_FLAVOR_TEXT: \"$GENERIC_FLAVOR_TEXT$\"\n";
 		}
 		output.close();
 	}
