@@ -3704,31 +3704,6 @@ converter_cultural_traditions_effect = {
 			}
 		}
 	}
-	if = {
-		limit = {
-			any_primary_culture = { has_discrimination_trait = tradition_cuneiform }
-		}
-		every_scope_state = {
-			limit = {
-				OR = {
-					region = sr:region_near_east
-					region = sr:region_arabia
-					region = sr:region_greater_persia
-					region = sr:region_nile_basin
-				}
-			}
-			every_scope_pop = {
-				limit = {
-					has_state_religion = yes
-					culture = {
-						has_homeland = prev.state
-						NOT = { has_discrimination_trait = tradition_cuneiform }
-					}
-				}
-				culture = { add_tradition_trait = tradition_cuneiform }
-			}
-		}
-	}
 }
 
 converter_primary_cultures_effect = {
