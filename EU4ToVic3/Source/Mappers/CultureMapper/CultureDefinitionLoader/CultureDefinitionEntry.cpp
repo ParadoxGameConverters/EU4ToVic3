@@ -32,15 +32,19 @@ void mappers::CultureDefinitionEntry::registerkeys()
 	ethStripper.registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
 
 	registerKeyword("color", [this](std::istream& theStream) {
+		cultureDef.hasColor = true;
 		cultureDef.color = commonItems::Color::Factory().getColor(theStream);
 	});
 	registerKeyword("religion", [this](std::istream& theStream) {
+		cultureDef.hasReligion = true;
 		cultureDef.religion = commonItems::getString(theStream);
 	});
 	registerKeyword("language", [this](std::istream& theStream) {
+		cultureDef.hasLanguage = true;
 		cultureDef.language = commonItems::getString(theStream);
 	});
 	registerKeyword("heritage", [this](std::istream& theStream) {
+		cultureDef.hasHeritage = true;
 		cultureDef.heritage = commonItems::getString(theStream);
 	});
 	registerKeyword("traditions", [this](std::istream& theStream) {
@@ -146,6 +150,7 @@ void mappers::CultureDefinitionEntry::registerkeys()
 		ethStripper.parseStream(theStream);
 	});
 	registerKeyword("graphics", [this](std::istream& theStream) {
+		cultureDef.hasGraphics = true;
 		cultureDef.graphics = commonItems::getString(theStream);
 	});
 	registerRegex(commonItems::catchallRegex, commonItems::ignoreItem);
