@@ -16,6 +16,7 @@ class CultureDefinitionLoader: commonItems::parser
 	[[nodiscard]] const auto& getDefinitions() const { return cultureDefinitions; }
 
   private:
+	void applyDefinition(CultureDef cultureDefinition);
 	void registerKeys();
 
 	std::map<std::string, CultureDef> cultureDefinitions;
