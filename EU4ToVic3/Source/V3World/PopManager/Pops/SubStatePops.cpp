@@ -29,10 +29,7 @@ std::optional<std::string> V3::SubStatePops::getDominantCulture() const
 	{
 		if (pop.getCulture().empty())
 			continue;
-		if (cultureCounts.contains(pop.getCulture()))
-			cultureCounts.at(pop.getCulture()) += pop.getSize();
-		else
-			cultureCounts.emplace(pop.getCulture(), pop.getSize());
+		cultureCounts[pop.getCulture()] += pop.getSize();
 	}
 
 	if (cultureCounts.empty())
@@ -53,10 +50,7 @@ std::optional<std::string> V3::SubStatePops::getDominantReligion() const
 	{
 		if (pop.getReligion().empty())
 			continue;
-		if (religionCounts.contains(pop.getReligion()))
-			religionCounts.at(pop.getReligion()) += pop.getSize();
-		else
-			religionCounts.emplace(pop.getReligion(), pop.getSize());
+		religionCounts[pop.getReligion()] += pop.getSize();
 	}
 
 	if (religionCounts.empty())
