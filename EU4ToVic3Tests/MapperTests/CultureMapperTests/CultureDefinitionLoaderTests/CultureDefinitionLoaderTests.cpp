@@ -12,7 +12,7 @@ void loadDefinition(mappers::CultureDefinitionLoader& loader, const std::string&
 	std::stringstream input(definition);
 	loader.loadDefinitions(input);
 }
-}
+} // namespace
 
 TEST(Mappers_CultureDefinitionLoaderTests, LoaderDefaultsToDry)
 {
