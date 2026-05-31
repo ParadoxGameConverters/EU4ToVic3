@@ -278,8 +278,8 @@ TEST(Mappers_CountryMapperTests, tagGeneratorThrowsAfterExhaustingValidPrefixes)
 	EXPECT_EQ("A99", tag);
 	EXPECT_THROW(
 		 {
-			const auto exhaustedTag = mapper.requestNewV3Tag();
-			static_cast<void>(exhaustedTag);
+			 const auto exhaustedTag = mapper.requestNewV3Tag();
+			 static_cast<void>(exhaustedTag);
 		 },
 		 std::runtime_error);
 }
