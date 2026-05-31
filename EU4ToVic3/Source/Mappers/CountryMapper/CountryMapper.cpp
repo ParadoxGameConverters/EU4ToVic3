@@ -4,6 +4,7 @@
 #include "Log.h"
 #include "ParserHelpers.h"
 #include <iomanip>
+#include <stdexcept>
 
 void mappers::CountryMapper::loadMappingRules(const std::filesystem::path& filePath)
 {
@@ -56,12 +57,11 @@ bool mappers::CountryMapper::tagIsNonCanon(const std::string& tag) const
 
 std::string mappers::CountryMapper::generateNewTag()
 {
-	std::string v3Tag;
-	do
+	while (generatedV3TagPrefix >= 'A')
 	{
 		std::ostringstream generatedV3TagStream;
 		generatedV3TagStream << generatedV3TagPrefix << std::setfill('0') << std::setw(2) << generatedV3TagSuffix;
-		v3Tag = generatedV3TagStream.str();
+		auto v3Tag = generatedV3TagStream.str();
 
 		++generatedV3TagSuffix;
 		if (generatedV3TagSuffix > 99)
@@ -69,9 +69,15 @@ std::string mappers::CountryMapper::generateNewTag()
 			generatedV3TagSuffix = 0;
 			--generatedV3TagPrefix;
 		}
-	} while (tagIsAlreadyAssigned(v3Tag) || knownVanillaV3Tags.contains(v3Tag));
-	dynamicallyGeneratedTags.emplace(v3Tag);
-	return v3Tag;
+
+		if (!tagIsAlreadyAssigned(v3Tag) && !knownVanillaV3Tags.contains(v3Tag))
+		{
+			dynamicallyGeneratedTags.emplace(v3Tag);
+			return v3Tag;
+		}
+	}
+
+	throw std::runtime_error("Ran out of valid generated V3 tags.");
 }
 
 bool mappers::CountryMapper::tagIsAlreadyAssigned(const std::string& v3Tag) const

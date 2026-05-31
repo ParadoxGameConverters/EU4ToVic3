@@ -1,6 +1,7 @@
 #include "CountryManager/EU4Country.h"
 #include "CountryMapper/CountryMapper.h"
 #include "gtest/gtest.h"
+#include <stdexcept>
 
 TEST(Mappers_CountryMapperTests, rulesCanBeLoadedInOrder)
 {
@@ -264,6 +265,23 @@ TEST(Mappers_CountryMapperTests, newTagCanBeRequested)
 	EXPECT_EQ("X01", tag);
 	tag = mapper.requestNewV3Tag();
 	EXPECT_EQ("X02", tag);
+}
+
+TEST(Mappers_CountryMapperTests, tagGeneratorThrowsAfterExhaustingValidPrefixes)
+{
+	mappers::CountryMapper mapper;
+
+	std::string tag;
+	for (auto index = 0; index < ('X' - 'A' + 1) * 100; ++index)
+		tag = mapper.requestNewV3Tag();
+
+	EXPECT_EQ("A99", tag);
+	EXPECT_THROW(
+		 {
+			const auto exhaustedTag = mapper.requestNewV3Tag();
+			static_cast<void>(exhaustedTag);
+		 },
+		 std::runtime_error);
 }
 
 TEST(Mappers_CountryMapperTests, tagGeneratorWillSkipCollisions)
