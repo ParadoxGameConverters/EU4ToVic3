@@ -97,7 +97,7 @@ REPLACE:ideology_vanguardist_valid_trigger = {
 		#Vanguardists have no opinion on religion, for some reason, so commie religions can support them
 		trigger_if = {
 			limit = {
-				owner.religion is_target_in_global_variable_list = { name = global_egalitarian_religions target = this }
+				owner.religion = { is_target_in_global_variable_list = { name = global_egalitarian_religions target = this } }
 			}
 			is_interest_group_type = ig_devout
 		}
@@ -113,7 +113,7 @@ REPLACE:ideology_anarchist_valid_trigger = {
 		#Anarchists have no opinion on religion, so commie religions can support them
 		trigger_if = {
 			limit = {
-				owner.religion is_target_in_global_variable_list = { name = global_egalitarian_religions target = this }
+				owner.religion = { is_target_in_global_variable_list = { name = global_egalitarian_religions target = this } }
 			}
 			is_interest_group_type = ig_devout
 		}
@@ -166,7 +166,7 @@ REPLACE:ideology_humanitarian_valid_trigger = {
 		#Medieval hippies
 		trigger_if = {
 			limit = {
-				owner.religion is_target_in_global_variable_list = { name = global_egalitarian_religions target = this }
+				owner.religion = { is_target_in_global_variable_list = { name = global_egalitarian_religions target = this } }
 			}
 			is_interest_group_type = ig_devout
 		}
@@ -181,7 +181,7 @@ REPLACE:ideology_humanitarian_royalist_valid_trigger = {
 		#Medieval hippies
 		trigger_if = {
 			limit = {
-				owner.religion is_target_in_global_variable_list = { name = global_egalitarian_religions target = this }
+				owner.religion = { is_target_in_global_variable_list = { name = global_egalitarian_religions target = this } }
 			}
 			is_interest_group_type = ig_devout
 		}
