@@ -118,7 +118,13 @@ TO_assign_state_name_region_caribbean = {
 	}
 	if = {
 		limit = {
-			state_region = { s:STATE_CUBA ?= this }
+			state_region = { 
+				OR = {
+					s:STATE_CENTRAL_CUBA ?= this
+					s:STATE_EASTERN_CUBA ?= this
+					s:STATE_WESTERN_CUBA ?= this
+				}
+			}
 		}
 		TO_STATE_CUBA_state_name_assign = yes
 	}

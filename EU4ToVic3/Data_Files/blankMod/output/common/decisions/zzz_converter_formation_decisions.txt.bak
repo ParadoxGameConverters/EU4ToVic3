@@ -2719,7 +2719,11 @@ form_cuba_dec = {
 		is_country_type = colonial
 		NOT = { cu:iroquoian = { shares_heritage_trait_group_with_any_primary_culture = ROOT } }
 		capital = {
-			state_region = s:STATE_CUBA
+			OR = {
+				state_region = s:STATE_CENTRAL_CUBA
+				state_region = s:STATE_EASTERN_CUBA
+				state_region = s:STATE_WESTERN_CUBA
+			}
 		}
 		NOT = { exists = c:CUB }
 		
