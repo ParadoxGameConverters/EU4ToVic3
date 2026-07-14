@@ -673,6 +673,13 @@ fem_fra_general_dorleans = {
 	birth_date = 1822.1.16
 	on_created = {
 		set_variable = house_orleans
+
+		converter_standard_template_effect = { TARGET = cu:french }
+		add_to_global_variable_list = {
+			name = converter_unavailable_unique_characters
+			target = flag:converter_dorleans
+		}
+		fix_variable_error = { variable = converter_dorleans }
 	}
 	traits = {
 		experienced_colonial_administrator
@@ -694,14 +701,6 @@ fem_fra_general_dorleans = {
 		earliest_usage_date = 1847.1.1
 		latest_usage_date = 1886.1.1
 		chance = 50
-	}
-	on_created = {
-		converter_standard_template_effect = { TARGET = cu:french }
-		add_to_global_variable_list = {
-			name = converter_unavailable_unique_characters
-			target = flag:converter_dorleans
-		}
-		fix_variable_error = { variable = converter_dorleans }
 	}
 }
 # Netherlands - NET
@@ -1641,7 +1640,6 @@ fem_sic_general_diaz = {
 
 # Brazil - BRZ
 fem_brz_admiral_inacio = {
-	historical = yes
 	first_name = Joaquima_Pepita
 	last_name = Inacio
 	historical = yes
@@ -1684,7 +1682,6 @@ fem_brz_admiral_inacio = {
 	}
 }
 fem_brz_admiral_tamandare = {
-	historical = yes
 	first_name = Joaquima_Marquita
 	last_name = Lisboa # Marquis of Tamandaré
 	historical = yes
