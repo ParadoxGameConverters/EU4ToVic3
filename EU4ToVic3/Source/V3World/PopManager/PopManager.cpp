@@ -245,7 +245,7 @@ void V3::PopManager::generatePops(const ClayManager& clayManager, const Configur
 			// Unlike Vic2, we're reshuffling the pops within specific superregions. There are 6 superregions in Vic3 and each of the major ones contains approx
 			// same amount of pops. We're just reshuffling them internally.
 			const auto totalStateWeight = state->getTotalSubStateWeight();
-			if (vanillaSuperRegionWeights.contains(superRegion->getName()) && vanillaSuperRegionPopCount.contains(superRegion->getName()))
+			if (vanillaSuperRegionWeights.contains(superRegionName) && vanillaSuperRegionPopCount.contains(superRegionName))
 			{
 				const auto totalSuperRegionWeight = vanillaSuperRegionWeights.at(superRegionName);
 				const auto popModifier = totalStateWeight / totalSuperRegionWeight;
