@@ -215,8 +215,9 @@ void V3::Country::distributeGovAdmins(const double target,
 
 		if (const int throughputMax = getThroughputMax(techMap); scaledLevels > throughputMax)
 		{
-			levels = static_cast<int>(stateTarget / PMGeneration / (throughputMax / 100.0));
-			generation = levels * PMGeneration * (1 + throughputMax / 100.0);
+			double cappedBonus = (1 + 0.01 * throughputMax); // Max 20% (base) scaling bonus from levels.
+			levels = static_cast<int>(stateTarget / (PMGeneration * cappedBonus));
+			generation = levels * PMGeneration * cappedBonus;
 		}
 
 		const auto govAdmin = std::make_shared<Building>(blueprint);
