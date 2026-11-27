@@ -16,7 +16,14 @@ void outCulture(std::ostream& output, const mappers::CultureDef& culture)
 		output << "\tlanguage = \"" << culture.language << "\"\n";
 	if (!culture.heritage.empty())
 		output << "\theritage = \"" << culture.heritage << "\"\n";
-	if (!culture.traditions.empty())
+	if (!culture.obsessions.empty())
+	{
+		output << "\tobsessions = { ";
+		for (const auto& obsession: culture.obsessions)
+			output << obsession << " ";
+		output << "}\n";
+	}
+    if (!culture.traditions.empty())
 	{
 		output << "\ttraditions = { ";
 		for (const auto& tradition: culture.traditions)
